@@ -73,8 +73,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		PlayerCommonData playerCommonData = new PlayerCommonData(IDFactory.getInstance().nextId());
 		playerCommonData.setName(name);
 		// read common data
-		playerCommonData.setExp(readQ());
 		playerCommonData.setPlayerClass(PlayerClass.getPlayerClassById((byte) readD()));
+		playerCommonData.setExp(readQ());
 		playerCommonData.setRace(readD() == 0 ? Race.ELYOS : Race.ASMODIANS);
 		playerCommonData.setGender(readD() == 0 ? Gender.MALE : Gender.FEMALE);
 		playerCommonData.setTitleId(readD());

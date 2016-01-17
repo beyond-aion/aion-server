@@ -8,7 +8,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
 import java.util.List;
@@ -35,8 +34,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
@@ -55,7 +52,6 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 
@@ -283,7 +279,7 @@ public class SpawnsData2 {
 		return assaultSpawns.get(id);
 	}
 
-	public synchronized boolean saveSpawn(Player admin, VisibleObject visibleObject, boolean delete) throws IOException {
+	public synchronized boolean saveSpawn(VisibleObject visibleObject, boolean delete) {
 		SpawnTemplate spawn = visibleObject.getSpawn();
 		Spawn oldGroup = DataManager.SPAWNS_DATA2.getSpawnsForNpc(visibleObject.getWorldId(), spawn.getNpcId());
 
@@ -307,8 +303,7 @@ public class SpawnsData2 {
 				unmarshaller.setSchema(schema);
 				data = (SpawnsData2) unmarshaller.unmarshal(fin);
 			} catch (Exception e) {
-				log.error(e.getMessage());
-				PacketSendUtility.sendMessage(admin, "Could not load old XML file!");
+				log.error("Could not load old XML file!", e);
 				return false;
 			}
 		}
@@ -337,12 +332,10 @@ public class SpawnsData2 {
 		boolean changeZ = visibleObject.getZ() != spawn.getZ();
 		boolean changeH = visibleObject.getHeading() != spawn.getHeading();
 		if (changeH && visibleObject instanceof Npc) {
-			Npc npc = (Npc) visibleObject;
-			if (!npc.isAtSpawnLocation() || !npc.isInState(CreatureState.NPC_IDLE) || changeX || changeY || changeZ) {
-				// if H changed, XSD validation fails, because it may be negative; thus, reset it back
-				visibleObject.setXYZH(null, null, null, spawn.getHeading());
-				changeH = false;
-			}
+			if (visibleObject.getHeading() > 120) // xsd validation fails on negative numbers or if greater than 120 (=360 degrees)
+				visibleObject.getPosition().setH((byte) (visibleObject.getHeading() - 120));
+			else if (visibleObject.getHeading() < 0)
+				visibleObject.getPosition().setH((byte) (visibleObject.getHeading() + 120));
 		}
 
 		SpawnSpotTemplate oldSpot = null;
@@ -391,8 +384,7 @@ public class SpawnsData2 {
 			DataManager.SPAWNS_DATA2.clearTemplates();
 			data.clearTemplates();
 		} catch (Exception e) {
-			log.error(e.getMessage());
-			PacketSendUtility.sendMessage(admin, "Could not save XML file!");
+			log.error("Could not save XML file!", e);
 			return false;
 		}
 		return true;

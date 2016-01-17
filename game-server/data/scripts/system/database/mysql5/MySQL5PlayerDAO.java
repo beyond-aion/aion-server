@@ -264,8 +264,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						success = true;
 						cd.setName(resultSet.getString("name"));
 						cd.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
-						cd.setExpValue(resultSet.getLong("exp"));
-						cd.setLevelValue(DataManager.PLAYER_EXPERIENCE_TABLE.getLevelForExp(cd.getExp()));
+						cd.setExp(resultSet.getLong("exp")); // set class before exp for daeva determination
 						cd.setRecoverableExp(resultSet.getLong("recoverexp"));
 						cd.setRace(Race.valueOf(resultSet.getString("race")));
 						cd.setGender(Gender.valueOf(resultSet.getString("gender")));
@@ -303,7 +302,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 
 		if (success) {
-			cd.updateDaeva();
 			if (CacheConfig.CACHE_COMMONDATA) {
 				playerCommonData.put(playerObjId, cd);
 				playerCommonDataByName.put(cd.getName().toLowerCase(), cd);

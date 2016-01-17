@@ -92,6 +92,7 @@ public class PanesterraTeam {
 					if (player.getPanesterraTeam() != null) {
 						player.setPanesterraTeam(null);
 					}
+					sendPackets(player);
 					if (player.getWorldId() == 400030000) {
 						TeleportService2.moveToBindLocation(player, true);
 						if (player.isInGroup2()) {

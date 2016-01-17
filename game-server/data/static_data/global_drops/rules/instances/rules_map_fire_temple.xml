@@ -252,7 +252,7 @@
 			<gd_item id="113601064" name="Fire Temple Greaves"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="102100770" name="Reaper's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>
@@ -298,7 +298,7 @@
 			<gd_item id="102100770" name="Reaper's Cipher-Blade"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>
@@ -306,22 +306,10 @@
 			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200298" name="Kromede's Dagger"/>
-			<gd_item id="100900197" name="Kromede's Greatsword"/>
-			<gd_item id="101700216" name="Kromede's Longbow"/>
-			<gd_item id="100500204" name="Kromede's Jewel"/>
-			<gd_item id="101300194" name="Kromede's Spear"/>
-			<gd_item id="101500205" name="Kromede's Staff"/>
-			<gd_item id="100000275" name="Kromede's Sword"/>
-			<gd_item id="100600219" name="Kromede's Tome"/>
-			<gd_item id="100100191" name="Kromede's Warhammer"/>
-			<gd_item id="101800872" name="Kromede's Pistol"/>
-			<gd_item id="101900290" name="Kromede's Aethercannon"/>
-			<gd_item id="102000301" name="Kromede's Harp"/>
-			<gd_item id="102100761" name="Kromede's Cipher-Blade"/>
+			<gd_item id="188051396" name="Judge's Fabled Weapon Chest"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>
@@ -329,22 +317,10 @@
 			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200298" name="Kromede's Dagger"/>
-			<gd_item id="100900197" name="Kromede's Greatsword"/>
-			<gd_item id="101700216" name="Kromede's Longbow"/>
-			<gd_item id="100500204" name="Kromede's Jewel"/>
-			<gd_item id="101300194" name="Kromede's Spear"/>
-			<gd_item id="101500205" name="Kromede's Staff"/>
-			<gd_item id="100000275" name="Kromede's Sword"/>
-			<gd_item id="100600219" name="Kromede's Tome"/>
-			<gd_item id="100100191" name="Kromede's Warhammer"/>
-			<gd_item id="101800872" name="Kromede's Pistol"/>
-			<gd_item id="101900290" name="Kromede's Aethercannon"/>
-			<gd_item id="102000301" name="Kromede's Harp"/>
-			<gd_item id="102100761" name="Kromede's Cipher-Blade"/>
+			<gd_item id="188051396" name="Judge's Fabled Weapon Chest"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Stone of Silence" base_chance="100" >
+	<gd_rule rule_name="Stone of Silence" base_chance="50" >
 		<gd_maps>
 			<gd_map map_id="320100000" name="Fire_Temple"/>
 		</gd_maps>

@@ -2805,7 +2805,7 @@
 		<portal_path dialog="10001" loc_id="6001006"/> <!-- Illuminary Obelisk -->
 		<portal_path dialog="10002" loc_id="6001008"/> <!-- Linkgate Foundry -->
 		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
-		<portal_path dialog="10004" loc_id="6000717"/> <!-- Danuar Sanctuary -->
+		<portal_path dialog="10004" loc_id="6000718"/> <!-- Danuar Sanctuary -->
 	</portal_dialog>
 	<!-- END WISPLIGHT ABBEY -->
 	
@@ -2836,7 +2836,7 @@
 		<portal_path dialog="10000" loc_id="6001005"/> <!-- Sauro Supply Base -->
 		<portal_path dialog="10001" loc_id="6001007"/> <!-- Illuminary Obelisk -->
 		<portal_path dialog="10002" loc_id="6001009"/> <!-- Linkgate Foundry -->
-		<portal_path dialog="10003" loc_id="6000718"/> <!-- Ophidan Bridge -->
+		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
 		<portal_path dialog="10004" loc_id="6000718"/> <!-- Danuar Sanctuary -->
 	</portal_dialog>
 	<!-- END FATEBOUND ABBEY -->

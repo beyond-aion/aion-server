@@ -97,6 +97,9 @@ public class SkillLearnService {
 				playerSkillList.addStigmaSkill(player, template.getSkillId(), template.getSkillLevel());
 			else
 				playerSkillList.addSkill(player, template.getSkillId(), template.getSkillLevel());
+
+			if (player.getEffectController() != null) // TODO remove null check when reworked newPlayer / addSkills handling
+				SkillEngine.getInstance().activatePassiveSkill(player, template.getSkillId());
 		}
 	}
 
@@ -123,7 +126,6 @@ public class SkillLearnService {
 	public static void learnSkillBook(Player player, int skillId) {
 		SkillLearnTemplate[] skillTemplates = null;
 		int maxLevel = 0;
-		SkillTemplate passiveSkill = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		for (int i = 1; i <= player.getLevel(); i++) {
 			skillTemplates = DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), i, player.getRace());
 
@@ -134,8 +136,7 @@ public class SkillLearnService {
 				}
 		}
 		player.getSkillList().addSkill(player, skillId, maxLevel);
-		if (passiveSkill.isPassive())
-			player.getController().updatePassiveStats();
+		SkillEngine.getInstance().activatePassiveSkill(player, skillId);
 	}
 
 	public static void removeSkill(Player player, int skillId) {
@@ -196,5 +197,4 @@ public class SkillLearnService {
 
 		return foundTemplate.getMinLevel();
 	}
-
 }

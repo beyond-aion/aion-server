@@ -153,7 +153,7 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract int getCharacterCountOnAccount(final int accountId);
 
 	/**
-	 * Get characters count for a given Race
+	 * Get characters count for a given Race (counts max 1 char per account and race).
 	 *
 	 * @param race
 	 * @return the number of characters for race

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -115,7 +116,8 @@ public class FortressAssault extends Assault<FortressSiege> {
 		for (Spawn spawn : wave.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
 				for (int i = 0; i < influenceMultiplier; i++) {
-					spawnAssaulter(wave.getWorldId(), spawn.getNpcId(), locationId, sst.getX(), sst.getY(), sst.getZ(), (byte) 0, wave.getAssaultType());
+					if (Rnd.get() <= SiegeConfig.SIEGE_HEALTH_MULTIPLIER)
+						spawnAssaulter(wave.getWorldId(), spawn.getNpcId(), locationId, sst.getX(), sst.getY(), sst.getZ(), (byte) 0, wave.getAssaultType());
 				}
 			}
 		}

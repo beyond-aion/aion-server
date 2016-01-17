@@ -7,12 +7,12 @@ import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -20,237 +20,117 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHERABLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author KID
  * @modified Rolandas
+ * @reworked Neon
  */
 public class SpawnUpdate extends AdminCommand {
 
 	public SpawnUpdate() {
-		super("spawnu");
+		super("spawnu", "Updates spawn data.");
+
+		setParamInfo(
+			"<x|y|z|h> [value] - Update X, Y, or Z coordinate or the heading of the selected npc/gatherable (default: takes your current position, optional: the specified value).",
+			"<xyz> - Update X, Y and Z coordinates of the selected npc/gatherable to your own coordinates.",
+			"<w> [walker_id] - Set walker data of the selected npc (default: remove walker data, optional: set walker id to npc).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params[0].equalsIgnoreCase("set")) {
-			Npc npc = null;
-			Gatherable gather = null;
-			SpawnTemplate spawn = null;
-
-			if (admin.getTarget() != null && admin.getTarget() instanceof Npc)
-				npc = (Npc) admin.getTarget();
-
-			if (admin.getTarget() != null && admin.getTarget() instanceof Gatherable) {
-				gather = (Gatherable) admin.getTarget();
-			}
-
-			if (npc == null && gather == null) {
-				PacketSendUtility.sendMessage(admin, "you need to target an Npc or Gatherable type.");
-				return;
-			}
-
-			if (npc != null)
-				spawn = npc.getSpawn();
-			else
-				spawn = gather.getSpawn();
-
-			if (params[1].equalsIgnoreCase("x")) {
-				float x;
-				if (params.length < 3)
-					x = admin.getX();
-				else
-					x = Float.parseFloat(params[2]);
-
-				if (npc != null) {
-					npc.getPosition().setXYZH(x, null, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-					PacketSendUtility.sendMessage(admin, "updated npcs x to " + x + ".");
-				} else {
-					gather.getPosition().setXYZH(x, null, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
-					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-					PacketSendUtility.sendMessage(admin, "updated gatherable x to " + x + ".");
-				}
-
-				try {
-					DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), false);
-				} catch (IOException e) {
-					e.printStackTrace();
-					PacketSendUtility.sendMessage(admin, "Could not save spawn");
-				}
-				return;
-			}
-
-			if (params[1].equalsIgnoreCase("y")) {
-				float y;
-				if (params.length < 3)
-					y = admin.getY();
-				else
-					y = Float.parseFloat(params[2]);
-
-				if (npc != null) {
-					npc.getPosition().setXYZH(null, y, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-					PacketSendUtility.sendMessage(admin, "updated npcs y to " + y + ".");
-				} else {
-					gather.getPosition().setXYZH(null, y, null, null);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
-					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-					PacketSendUtility.sendMessage(admin, "updated gatherable Y to " + y + ".");
-				}
-
-				try {
-					DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), false);
-				} catch (IOException e) {
-					e.printStackTrace();
-					PacketSendUtility.sendMessage(admin, "Could not save spawn");
-				}
-				return;
-			}
-
-			if (params[1].equalsIgnoreCase("z")) {
-				float z;
-				if (params.length < 3)
-					z = admin.getZ();
-				else
-					z = Float.parseFloat(params[2]);
-
-				if (npc != null) {
-					npc.getPosition().setZ(z);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-					PacketSendUtility.sendMessage(admin, "updated npcs z to " + z + ".");
-				} else {
-					gather.getPosition().setZ(z);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
-					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-					PacketSendUtility.sendMessage(admin, "updated gatherable z to " + z + ".");
-				}
-
-				try {
-					DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), false);
-				} catch (IOException e) {
-					e.printStackTrace();
-					PacketSendUtility.sendMessage(admin, "Could not save spawn");
-				}
-				return;
-			}
-
-			if (params[1].equalsIgnoreCase("h")) {
-				byte h;
-				if (params.length < 3) {
-					byte heading = admin.getHeading();
-					if (heading > 60)
-						heading -= 60;
-					else
-						heading += 60;
-					h = heading;
-				} else
-					h = Byte.parseByte(params[2]);
-
-				if (npc != null) {
-					npc.getPosition().setH(h);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-					PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-					PacketSendUtility.sendMessage(admin, "updated npcs heading to " + h + ".");
-				} else {
-					gather.getPosition().setH(h);
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
-					PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-					PacketSendUtility.sendMessage(admin, "updated gatherable h to " + h + ".");
-				}
-
-				try {
-					DataManager.SPAWNS_DATA2.saveSpawn(admin, (npc != null ? npc : gather), false);
-				} catch (IOException e) {
-					e.printStackTrace();
-					PacketSendUtility.sendMessage(admin, "Could not save spawn");
-				}
-				return;
-			}
-
-			if (params[1].equalsIgnoreCase("xyz")) {
-				if (npc != null) {
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-					npc.getPosition().setXYZH(admin.getX(), null, null, null);
-					try {
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
-						PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-						npc.getPosition().setXYZH(null, admin.getY(), null, null);
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
-						PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-						npc.getPosition().setXYZH(null, null, admin.getZ(), null);
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
-						PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-						PacketSendUtility.sendMessage(admin, "updated npcs coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ() + ".");
-					} catch (IOException e) {
-						e.printStackTrace();
-						PacketSendUtility.sendMessage(admin, "Could not save spawn");
-					}
-				} else {
-					PacketSendUtility.sendPacket(admin, new SM_DELETE(gather));
-					gather.getPosition().setXYZH(admin.getX(), null, null, null);
-					try {
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, gather, false);
-						PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-						gather.getPosition().setXYZH(null, admin.getY(), null, null);
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, gather, false);
-						PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-						gather.getPosition().setXYZH(null, null, admin.getZ(), null);
-						DataManager.SPAWNS_DATA2.saveSpawn(admin, gather, false);
-						PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(gather));
-						PacketSendUtility.sendMessage(admin, "updated gaterables coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ()
-							+ ".");
-					} catch (IOException e) {
-						e.printStackTrace();
-						PacketSendUtility.sendMessage(admin, "Could not save spawn");
-					}
-				}
-				return;
-			}
-
-			if (params[1].equalsIgnoreCase("w") && npc != null) {
-				String walkerId = null;
-				if (params.length == 3)
-					walkerId = params[2].toUpperCase();
-				if (walkerId != null) {
-					WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
-					if (template == null) {
-						PacketSendUtility.sendMessage(admin, "No such template exists in npc_walker.xml.");
-						return;
-					}
-					List<SpawnGroup2> allSpawns = DataManager.SPAWNS_DATA2.getSpawnsByWorldId(npc.getWorldId());
-					List<SpawnTemplate> allSpots = flatten(extractIterator(allSpawns, on(SpawnGroup2.class).getSpawnTemplates()));
-					List<SpawnTemplate> sameIds = filter(having(on(SpawnTemplate.class).getWalkerId(), equalTo(walkerId)), allSpots);
-					if (sameIds.size() >= template.getPool()) {
-						PacketSendUtility.sendMessage(admin, "Can not assign, walker pool reached the limit.");
-						return;
-					}
-				}
-				spawn.setWalkerId(walkerId);
-				PacketSendUtility.sendPacket(admin, new SM_DELETE(npc));
-				PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-				if (walkerId == null)
-					PacketSendUtility.sendMessage(admin, "removed npcs walker_id for " + npc.getNpcId() + ".");
-				else
-					PacketSendUtility.sendMessage(admin, "updated npcs walker_id to " + walkerId + ".");
-				try {
-					DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
-				} catch (IOException e) {
-					e.printStackTrace();
-					PacketSendUtility.sendMessage(admin, "Could not save spawn");
-				}
-			}
+		if (params.length == 0) {
+			sendInfo(admin);
+			return;
 		}
+
+		VisibleObject target = admin.getTarget();
+		if (target instanceof Npc && params[0].equalsIgnoreCase("w")) {
+			updateWalker(admin, (Npc) target, params.length == 2 ? params[1].toUpperCase() : null);
+			return;
+		}
+
+		if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			return;
+		}
+
+		Float x = null, y = null, z = null;
+		Byte h = null;
+		if (params[0].equalsIgnoreCase("xyz")) {
+			x = admin.getX();
+			y = admin.getY();
+			z = admin.getZ();
+		} else if (params[0].equalsIgnoreCase("x")) {
+			if (params.length == 1)
+				x = admin.getX();
+			else
+				x = Float.parseFloat(params[1]);
+		} else if (params[0].equalsIgnoreCase("y")) {
+			if (params.length == 1)
+				y = admin.getY();
+			else
+				y = Float.parseFloat(params[1]);
+		} else if (params[0].equalsIgnoreCase("z")) {
+			if (params.length == 1)
+				z = admin.getZ();
+			else
+				z = Float.parseFloat(params[1]);
+		} else if (params[0].equalsIgnoreCase("h")) {
+			if (params.length == 1)
+				h = admin.getHeading();
+			else
+				h = Byte.parseByte(params[1]);
+		}
+
+		WorldPosition tPos = target.getPosition();
+		tPos.setXYZH(x, y, z, h);
+
+		if (target instanceof Gatherable)
+			PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(target));
+		else
+			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO((Npc) target, admin));
+		sendInfo(admin,
+			"Updated " + target.getClass().getSimpleName() + "'s coordinates to\nX:" + tPos.getX() + " Y:" + tPos.getY() + " Z:" + tPos.getZ() + " H:"
+				+ tPos.getHeading() + ".");
+
+		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
+			sendInfo(admin, "Could not save spawn.");
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "<usage //spawnu set (x | y | z | h | w | xyz)");
+	private void updateWalker(Player admin, Npc target, String walkerId) {
+		SpawnTemplate spawn = target.getSpawn();
+		String oldId = spawn.getWalkerId();
+		if (oldId == null && walkerId == null) {
+			sendInfo(admin, "Npc has no walker_id that could be removed.");
+		} else {
+			if (walkerId != null) {
+				WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
+				if (template == null) {
+					sendInfo(admin, "No such template exists in npc_walker.xml.");
+					return;
+				}
+				List<SpawnGroup2> allSpawns = DataManager.SPAWNS_DATA2.getSpawnsByWorldId(target.getWorldId());
+				List<SpawnTemplate> allSpots = flatten(extractIterator(allSpawns, on(SpawnGroup2.class).getSpawnTemplates()));
+				List<SpawnTemplate> sameIds = filter(having(on(SpawnTemplate.class).getWalkerId(), equalTo(walkerId)), allSpots);
+				if (sameIds.size() >= template.getPool()) {
+					sendInfo(admin, "Can not assign, walker pool reached the limit.");
+					return;
+				}
+			}
+			spawn.setWalkerId(walkerId);
+			PacketSendUtility.sendPacket(admin, new SM_DELETE(target));
+			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(target, admin));
+			if (walkerId == null)
+				sendInfo(admin, "Removed npcs walker_id " + oldId + " for " + target.getNpcId() + ".");
+			else
+				sendInfo(admin, "Updated npcs walker_id from " + oldId + " to " + walkerId + ".");
+			if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
+				sendInfo(admin, "Could not save spawn.");
+		}
 	}
 }

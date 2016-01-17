@@ -184,19 +184,35 @@ public class ClassChangeService {
 	}
 
 	public static boolean setClass(Player player, PlayerClass newClass) {
-		PlayerClass oldClass = player.getPlayerClass();
-		if (!oldClass.isStartingClass()) {
-			PacketSendUtility.sendMessage(player, "You already switched class");
-			return false;
+		return setClass(player, newClass, true, false);
+	}
+
+	public static boolean setClass(Player player, PlayerClass newClass, boolean validate, boolean updateDaevaStatus) {
+		if (validate) {
+			PlayerClass oldClass = player.getPlayerClass();
+			if (!oldClass.isStartingClass()) {
+				PacketSendUtility.sendMessage(player, "You already switched class");
+				return false;
+			}
+			int id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
+			if (id > PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
+				PacketSendUtility.sendMessage(player, "Invalid class chosen");
+				return false;
+			}
 		}
-		int id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
-		if (id > PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
-			PacketSendUtility.sendMessage(player, "Invalid class chosen");
-			return false;
-		}
+
 		player.getCommonData().setPlayerClass(newClass);
 		player.getController().upgradePlayer();
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
+
+		if (updateDaevaStatus) {
+			if (!newClass.isStartingClass()) {
+				completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
+				player.getCommonData().updateDaeva();
+			} else {
+				player.getCommonData().setDaeva(false);
+			}
+		}
 		return true;
 	}
 }

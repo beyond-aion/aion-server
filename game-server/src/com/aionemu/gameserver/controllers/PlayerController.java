@@ -42,7 +42,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
@@ -241,8 +240,9 @@ public class PlayerController extends CreatureController<Player> {
 
 		for (Effect ef : getOwner().getEffectController().getAbnormalEffects()) {
 			if (ef.isDeityAvatar()) {
-				// remove abyss transformation if worldtype != abyss && worldtype != balaurea
-				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA || getOwner().isInInstance()) {
+				// remove abyss transformation if worldtype != abyss && worldtype != balaurea && worldType != panesterra
+				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA && getOwner().getWorldType() != WorldType.PANESTERRA
+					|| getOwner().isInInstance()) {
 					ef.endEffect();
 					getOwner().getEffectController().clearEffect(ef);
 				}
@@ -612,16 +612,6 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	public void updatePassiveStats() {
-		Player player = getOwner();
-		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
-			Skill skill = SkillEngine.getInstance().getSkillFor(player, skillEntry.getSkillId(), player.getTarget());
-			if (skill != null && skill.isPassive()) {
-				skill.useSkill();
-			}
-		}
-	}
-
 	@Override
 	public Player getOwner() {
 		return (Player) super.getOwner();
@@ -647,7 +637,6 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void upgradePlayer() {
 		Player player = getOwner();
-		updatePassiveStats();
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getLifeStats().updateCurrentStats();
 		player.getGameStats().updateStatsVisually();

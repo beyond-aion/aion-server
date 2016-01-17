@@ -3815,8 +3815,6 @@
 		<!-- Oozing Clodworm -->
 		<spawn npc_id="211799" respawn_time="295">
 			<spot x="1405.84" y="245.687" z="348.047" h="22"/>
-			<spot x="1418.01" y="237.529" z="348.054" h="119"/>
-			<spot x="1431.03" y="240.371" z="348.058" h="19"/>
 		</spawn>
 		<!-- Fantail Crestlich -->
 		<spawn npc_id="210819" respawn_time="295">
@@ -3850,8 +3848,8 @@
 			<spot x="141.829" y="270.244" z="212.597" h="79"/>
 			<spot x="83.2988" y="243.5246" z="227.0383" h="6"/>
 		</spawn>
-		<!-- Mysterious Crate -->
-		<spawn npc_id="211801" respawn_time="295">
+		<!-- Mysterious Crate [spawns chaos dracus]-->
+		<spawn npc_id="211801" respawn_time="14400">
 			<spot x="1421.28" y="239.618" z="348.054" h="29"/>
 		</spawn>
 		<!-- Watch Guard -->
@@ -3895,10 +3893,6 @@
 		<spawn npc_id="210858" respawn_time="295">
 			<spot x="1304.75" y="1641.48" z="272.84375" h="85" walker_id="F2522270BD8EEA7CE7C959C38E642F63C294DF4A"/>
 			<spot x="1304.75" y="1641.48" z="272.84375" h="85" walker_id="F2522270BD8EEA7CE7C959C38E642F63C294DF4A"/>
-		</spawn>
-		<!-- Chaos Dracus -->
-		<spawn npc_id="211800" respawn_time="14400">
-			<spot x="1421.75" y="241.924" z="348.054" h="5"/>
 		</spawn>
 		<!-- Springwater Spirit -->
 		<spawn npc_id="210827" respawn_time="295">

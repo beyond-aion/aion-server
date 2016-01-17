@@ -447,7 +447,7 @@
 			<gd_item id="100500159" name="Kraterr's Heart"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="80">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
 		</gd_maps>

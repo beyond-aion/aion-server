@@ -60,8 +60,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMaxHp() {
 		Stat2 stat = getStat(StatEnum.MAXHP, owner.getObjectTemplate().getStatsTemplate().getMaxHp());
-		if (owner.getSpawn() instanceof SiegeSpawnTemplate && owner.getRating() == NpcRating.LEGENDARY 
-			&& (owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS || owner.getRace() == Race.GHENCHMAN_LIGHT || owner.getRace() == Race.GHENCHMAN_DARK))
+		if (owner.getSpawn() instanceof SiegeSpawnTemplate
+			&& owner.getRating() == NpcRating.LEGENDARY
+			&& (owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS || owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.GUARD
+				|| owner.getRace() == Race.GHENCHMAN_LIGHT || owner.getRace() == Race.GHENCHMAN_DARK))
 			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 		return stat;
 	}
@@ -232,8 +234,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, getMainHandAccuracy()); //FIXME: Recalculate template values
-		//return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getMainHandAccuracy());
+		return getStat(StatEnum.PHYSICAL_ACCURACY, getMainHandAccuracy()); // FIXME: Recalculate template values
+		// return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getMainHandAccuracy());
 	}
 
 	@Override
@@ -348,7 +350,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
 	}
-	
+
 	public long getLastSkillTime() {
 		return lastSkillTime;
 	}
@@ -373,11 +375,11 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public void setLastSkill(NpcSkillEntry lastSkill) {
 		this.lastSkill = lastSkill;
 	}
-	
+
 	public NpcSkillEntry getLastSkill() {
 		return lastSkill;
 	}
-	
+
 	@Override
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));
@@ -395,42 +397,42 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		this.lastGeoZUpdate = lastGeoZUpdate;
 	}
 
-//TODO: Remove this after transfering into npc_templates
-	private int getMainHandAccuracy() {		
+	// TODO: Remove this after transfering into npc_templates
+	private int getMainHandAccuracy() {
 		return Math.round(owner.getLevel() * 40 * getRatingModifier(Stat.MAIN_HAND_ACCURACY) * getRankModifier(Stat.MAIN_HAND_ACCURACY));
 	}
-	
+
 	private int getParryAmount() {
 		return Math.round(owner.getLevel() * 40 * getRatingModifier(Stat.PARRY) * getRankModifier(Stat.PARRY));
 	}
-	
+
 	private int getMsup() {
 		if (owner.getLevel() < 60)
 			return 0;
-		
+
 		return Math.round(owner.getLevel() * 3 * getRatingModifier(Stat.MSUP) * getRankModifier(Stat.MSUP));
 	}
-	
+
 	private int getStrikeResist() {
 		if (owner.getLevel() < 60)
 			return 0;
-		
+
 		return Math.round(owner.getLevel() * 2.2f * getRatingModifier(Stat.STRIKE_RESIST) * getRankModifier(Stat.STRIKE_RESIST));
 	}
-	
+
 	private float getRankModifier(Stat stat) {
 		switch (owner.getRank()) {
 			case NOVICE:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 					case MAIN_HAND_ACCURACY:
 					case MSUP:
-					case STRIKE_RESIST:		
+					case STRIKE_RESIST:
 						return 1.0f;
 				}
 				break;
 			case DISCIPLINED:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.05f;
 					case MAIN_HAND_ACCURACY:
@@ -441,7 +443,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				}
 				break;
 			case SEASONED:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.1f;
 					case MAIN_HAND_ACCURACY:
@@ -452,7 +454,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				}
 				break;
 			case EXPERT:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.1f;
 					case MAIN_HAND_ACCURACY:
@@ -464,7 +466,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				}
 				break;
 			case VETERAN:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.12f;
 					case MAIN_HAND_ACCURACY:
@@ -476,7 +478,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				}
 				break;
 			case MASTER:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.12f;
 					case MAIN_HAND_ACCURACY:
@@ -487,14 +489,14 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 						return 2.6f;
 				}
 				break;
-		}		
+		}
 		return 0;
 	}
-	
+
 	private float getRatingModifier(Stat stat) {
 		switch (owner.getRating()) {
 			case JUNK:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 					case MAIN_HAND_ACCURACY:
 						return 1.0f;
@@ -504,52 +506,52 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 				}
 				break;
 			case NORMAL:
-				switch(stat) {
+				switch (stat) {
 					case MAIN_HAND_ACCURACY:
 						return 1.025f;
-					case PARRY:					
+					case PARRY:
 					case MSUP:
-					case STRIKE_RESIST:		
+					case STRIKE_RESIST:
 						return 1.0f;
 				}
 				break;
 			case ELITE:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.025f;
 					case MAIN_HAND_ACCURACY:
 						return 1.05f;
 					case MSUP:
 						return 1.5f;
-					case STRIKE_RESIST:	
+					case STRIKE_RESIST:
 						return 1.5f;
 				}
 				break;
 			case HERO:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.08f;
 					case MAIN_HAND_ACCURACY:
 						return 1.075f;
 					case MSUP:
 						return 2.0f;
-					case STRIKE_RESIST:	
+					case STRIKE_RESIST:
 						return 1.75f;
 				}
 				break;
 			case LEGENDARY:
-				switch(stat) {
+				switch (stat) {
 					case PARRY:
 						return 1.1f;
 					case MAIN_HAND_ACCURACY:
 						return 1.1f;
 					case MSUP:
 						return 2.5f;
-					case STRIKE_RESIST:	
+					case STRIKE_RESIST:
 						return 2.1f;
 				}
 				break;
-		}		
+		}
 		return 0;
 	}
 }
