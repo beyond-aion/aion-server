@@ -11,6 +11,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Hellboy aion4Free
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2038ALostDaeva extends QuestHandler {
 
@@ -23,7 +24,6 @@ public class _2038ALostDaeva extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204342, 204053, 700233 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnDie(questId);
 		qe.registerQuestNpc(212879).addOnKillEvent(questId);
@@ -32,13 +32,8 @@ public class _2038ALostDaeva extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -47,9 +42,11 @@ public class _2038ALostDaeva extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
+		
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204342: { // Mirka
@@ -82,11 +79,13 @@ public class _2038ALostDaeva extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}

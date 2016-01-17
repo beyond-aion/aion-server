@@ -1,7 +1,6 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Hellboy aion4Free
+ * @Modified Majka
  */
 public class _2035TheThreeKeys extends QuestHandler {
 
@@ -25,7 +25,6 @@ public class _2035TheThreeKeys extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc_id : npc_ids)
@@ -33,13 +32,8 @@ public class _2035TheThreeKeys extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -63,13 +57,13 @@ public class _2035TheThreeKeys extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204317: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -84,7 +78,7 @@ public class _2035TheThreeKeys extends QuestHandler {
 				}
 					break;
 				case 204408: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 4)
 								return sendQuestDialog(env, 2375);
@@ -109,7 +103,8 @@ public class _2035TheThreeKeys extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 10000);
-								} else
+								}
+								else
 									return sendQuestDialog(env, 10001);
 							}
 
@@ -117,9 +112,10 @@ public class _2035TheThreeKeys extends QuestHandler {
 				}
 					break;
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204407) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

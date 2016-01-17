@@ -2,7 +2,6 @@ package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -17,6 +16,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Mcrizza
+ * @Modified Majka
  */
 public class _2031PetrifyingElim extends QuestHandler {
 
@@ -31,7 +31,6 @@ public class _2031PetrifyingElim extends QuestHandler {
 		qe.registerQuestItem(182204001, questId);
 		qe.registerQuestNpc(204304).addOnTalkEvent(questId); // Vili
 		qe.registerQuestNpc(730038).addOnTalkEvent(questId); // Nabaru
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 	}
 
@@ -45,7 +44,7 @@ public class _2031PetrifyingElim extends QuestHandler {
 		if (id != 182204001 || qs.getStatus() == QuestStatus.COMPLETE)
 			return HandlerResult.UNKNOWN;
 
-		if (!player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q2031")))
+		if (!player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2031_220020000")))
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
@@ -65,22 +64,16 @@ public class _2031PetrifyingElim extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		int targetId = 0;
-
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
@@ -90,24 +83,26 @@ public class _2031PetrifyingElim extends QuestHandler {
 		if (targetId == 204304) // Vili
 		{
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (dialog == DialogAction.SETPRO1) {
 					qs.setQuestVar(1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 730038) // Nabaru
+		}
+		else if (targetId == 730038) // Nabaru
 		{
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialogId() == DialogAction.SELECT_ACTION_1353.id())
+				else if (dialog == DialogAction.SELECT_ACTION_1353)
 					playQuestMovie(env, 71);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				else if (dialog == DialogAction.SETPRO2) {
 					qs.setQuestVar(2);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -117,9 +112,9 @@ public class _2031PetrifyingElim extends QuestHandler {
 			}
 
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog== DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					if (player.getInventory().getItemCountByItemId(182204001) > 0) {
 						qs.setQuestVar(3);
 						updateQuestStatus(env);
@@ -127,25 +122,26 @@ public class _2031PetrifyingElim extends QuestHandler {
 						return true;
 					} else
 						return sendQuestDialog(env, 10001);
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
 
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SETPRO4) {
+				else if (dialog == DialogAction.SETPRO4) {
 					qs.setQuestVar(4);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				} else
 					return sendQuestStartDialog(env);
-			} else if (qs.getStatus() == QuestStatus.REWARD)
+			}
+			else if (qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
 		}
 
 		return false;
-
 	}
 }

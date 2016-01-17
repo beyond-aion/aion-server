@@ -13,6 +13,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Erin
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2032GuardianSpirit extends QuestHandler {
 
@@ -25,7 +26,6 @@ public class _2032GuardianSpirit extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(itemId, questId);
 		qe.registerQuestNpc(204302).addOnTalkEvent(questId);
@@ -33,13 +33,8 @@ public class _2032GuardianSpirit extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -95,7 +90,8 @@ public class _2032GuardianSpirit extends QuestHandler {
 						case SETPRO4: {
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 3, 4, 182204005, 1, 0, 0); // 4
-							} else {
+							}
+							else {
 								return sendQuestSelectionDialog(env);
 							}
 						}
@@ -105,11 +101,13 @@ public class _2032GuardianSpirit extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204329) { // Tofa
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204329) {  // Tofa
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -122,7 +120,7 @@ public class _2032GuardianSpirit extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (item.getItemId() == 182204005 && player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q2032"))) {
+			if (item.getItemId() == 182204005 && player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2032"))) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 4, 4, true, 88)); // reward
 			}
 		}

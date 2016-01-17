@@ -1,7 +1,6 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Hellboy aion4Free
+ * @Modified Majka
  */
 public class _2036ACaptiveFlame extends QuestHandler {
 
@@ -25,7 +25,6 @@ public class _2036ACaptiveFlame extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(212878).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
@@ -33,13 +32,8 @@ public class _2036ACaptiveFlame extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2035);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -50,13 +44,13 @@ public class _2036ACaptiveFlame extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204407: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -75,14 +69,15 @@ public class _2036ACaptiveFlame extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 10000);
-								} else
+								}
+								else
 									return sendQuestDialog(env, 10001);
 							}
 					}
 				}
 					break;
 				case 204408: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -100,18 +95,19 @@ public class _2036ACaptiveFlame extends QuestHandler {
 				}
 					break;
 				case 700236:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case USE_OBJECT:
 							if (player.getInventory().getItemCountByItemId(182204014) == 0) {
-								giveQuestItem(env, 182204014, 1);
+									giveQuestItem(env, 182204014, 1);
 								return false;
 							}
 					}
 					break;
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204317) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -128,9 +124,7 @@ public class _2036ACaptiveFlame extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;

@@ -14,6 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
+ * @Reworked Majka
  */
 public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
@@ -40,12 +41,13 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
-		if (qs == null) {
+		
+		if (qs == null)
 			return false;
-		}
+		
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
@@ -119,7 +121,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 						if (var == 3) {
 							if (player.getInventory().getItemCountByItemId(182215365) > 0) {
 								final Npc npc = (Npc) env.getVisibleObject();
-								QuestService.addNewSpawn(220020000, 1, 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+								QuestService.addNewSpawn(220020000, player.getInstanceId(), 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 								removeQuestItem(env, 182215364, 1);
 								removeQuestItem(env, 182215365, 1);
 								changeQuestStep(env, 3, 4, false); // 4
@@ -174,6 +176,6 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020, true);
+		return defaultOnLvlUpEvent(env, 24020);
 	}
 }

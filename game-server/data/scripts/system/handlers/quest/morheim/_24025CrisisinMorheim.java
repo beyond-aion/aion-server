@@ -1,7 +1,6 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -30,12 +29,12 @@ public class _24025CrisisinMorheim extends QuestHandler {
 
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2039);
+		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020, true);
+		return defaultOnLvlUpEvent(env, 24020);
 	}
 
 	@Override
@@ -46,13 +45,13 @@ public class _24025CrisisinMorheim extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204388: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -68,20 +67,20 @@ public class _24025CrisisinMorheim extends QuestHandler {
 				}
 					break;
 				case 204345: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
 						case SET_SUCCEED:
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 3, true, false);
-
+								
 							}
 					}
 				}
 					break;
 				case 204414: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -96,9 +95,10 @@ public class _24025CrisisinMorheim extends QuestHandler {
 				}
 					break;
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204304) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else {
 					removeQuestItem(env, 182215370, 1);
