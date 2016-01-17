@@ -378,7 +378,7 @@ public class DropService {
 						if (member != null) {
 							if (member.equals(player))
 								continue;
-							if (member.isOnline() && !member.getLifeStats().isAlreadyDead() && MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+							if (member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor() && MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 								entitledPlayers.add(member);
 						}
 					}
