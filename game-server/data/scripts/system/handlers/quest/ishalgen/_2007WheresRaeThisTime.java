@@ -1,7 +1,6 @@
 package quest.ishalgen;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -11,6 +10,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Mr. Poke
+ * @Modified Majka
  */
 public class _2007WheresRaeThisTime extends QuestHandler {
 
@@ -37,14 +37,13 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203516:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -58,7 +57,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 				case 203519:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -72,7 +71,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 				case 203539:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -89,7 +88,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 				case 203552:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
@@ -103,7 +102,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 				case 203554:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 4)
 								return sendQuestDialog(env, 2375);
@@ -149,12 +148,14 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 					}
 					break;
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					playQuestMovie(env, 58);
 					return sendQuestDialog(env, 3057);
-				} else
+				}
+				else
 					return sendQuestEndDialog(env);
 			}
 		}
@@ -170,12 +171,12 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 2100, 2006, 2005, 2004, 2003, 2002, 2001 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		return defaultOnLvlUpEvent(env, quests, false);
 	}
 
 	private void destroy(final int var, final QuestEnv env) {
 		Player player = env.getPlayer();
-		// sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
+		//sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		switch (var) {
 			case 6:

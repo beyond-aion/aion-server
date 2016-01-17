@@ -1,6 +1,5 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -12,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke
+ * @Modified Majka
  */
 public class _2003TreasureOfTheDeceased extends QuestHandler {
 
@@ -36,9 +36,7 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203539) {
 				switch (env.getDialog()) {
@@ -63,12 +61,14 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 5);
-							} else
+							}
+							else
 								return sendQuestDialog(env, 1693);
 						}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203539)
 				return sendQuestEndDialog(env);
 		}
@@ -82,6 +82,6 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }

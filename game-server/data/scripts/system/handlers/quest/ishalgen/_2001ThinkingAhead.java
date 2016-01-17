@@ -9,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author vlog
+ * @Modified Majka
  */
 public class _2001ThinkingAhead extends QuestHandler {
 
@@ -43,7 +44,7 @@ public class _2001ThinkingAhead extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203518) { // Boromer
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						} else if (var == 1) {
@@ -51,7 +52,7 @@ public class _2001ThinkingAhead extends QuestHandler {
 						} else if (var == 2) {
 							return sendQuestDialog(env, 1694);
 						}
-					}
+						break;
 					case SELECT_ACTION_1012: {
 						playQuestMovie(env, 51);
 						return sendQuestDialog(env, 1012);
@@ -69,14 +70,17 @@ public class _2001ThinkingAhead extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			} else if (targetId == 700093) {
+			}
+			else if (targetId == 700093) {
 				return true; // just give quest drop on use
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203518) { // Boromer
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -93,7 +97,8 @@ public class _2001ThinkingAhead extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (var >= 3 && var < 8) {
 			return defaultOnKillEvent(env, mobs, 3, 8); // 3 - 8
-		} else if (var == 8) {
+		}
+		else if (var == 8) {
 			return defaultOnKillEvent(env, mobs, 8, true); // reward
 		}
 		return false;
@@ -106,6 +111,6 @@ public class _2001ThinkingAhead extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }

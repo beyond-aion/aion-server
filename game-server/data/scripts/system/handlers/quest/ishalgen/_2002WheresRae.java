@@ -19,9 +19,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
+
 /**
  * @author Mr. Poke
- * @modified Hellboy, Gigi, Bobobear
+ * @modified Hellboy, Gigi, Bobobear, Majka
  */
 public class _2002WheresRae extends QuestHandler {
 
@@ -51,13 +52,12 @@ public class _2002WheresRae extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203519: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -71,7 +71,7 @@ public class _2002WheresRae extends QuestHandler {
 					}
 				}
 				case 203534: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -88,7 +88,7 @@ public class _2002WheresRae extends QuestHandler {
 					}
 				}
 				case 790002: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -108,7 +108,8 @@ public class _2002WheresRae extends QuestHandler {
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 								return true;
-							} else if (var == 13) {
+							}
+							else if (var == 13) {
 								qs.setQuestVarById(0, 14);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -116,7 +117,7 @@ public class _2002WheresRae extends QuestHandler {
 							}
 							break;
 						case SETPRO5:
-							if (var == 12 || var == 99) {
+							if (var == 12 || var == 99 ) {
 								qs.setQuestVar(99);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
@@ -132,7 +133,8 @@ public class _2002WheresRae extends QuestHandler {
 									qs.setQuestVarById(0, 12);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 2461);
-								} else
+								}
+								else
 									return sendQuestDialog(env, 2376);
 							}
 					}
@@ -151,12 +153,11 @@ public class _2002WheresRae extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 203553, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 						npc.getController().onDie(npc);
-						// playQuestMovie(env, 256);
 						return true;
 					}
 					break;
 				case 203553:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 15)
 								return sendQuestDialog(env, 3057);
@@ -170,15 +171,14 @@ public class _2002WheresRae extends QuestHandler {
 							}
 					}
 				case 205020:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var >= 12) {
 								player.setState(CreatureState.FLIGHT_TELEPORT);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(3001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
+								ThreadPoolManager.getInstance().schedule(new Runnable(){
 									@Override
 									public void run() {
 										TeleportService2.teleportTo(player, 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
@@ -187,17 +187,18 @@ public class _2002WheresRae extends QuestHandler {
 									}
 								}, 40000);
 								return true;
-							}
-							return false;
-						default:
-							return false;
+						}
+						return false;
+					default:
+						return false;
 					}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) {
-				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.USE_OBJECT || dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
-				else if (env.getDialog() == DialogAction.SETPRO8)
+				else if (dialog == DialogAction.SETPRO8)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -239,6 +240,6 @@ public class _2002WheresRae extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }
