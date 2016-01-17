@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1054ThePowerofElim extends QuestHandler {
 
@@ -22,7 +23,6 @@ public class _1054ThePowerofElim extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 730024, 204647, 730008, 730019 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -51,14 +51,17 @@ public class _1054ThePowerofElim extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 				}
-			} else if (targetId == 204647) { // Voice of Arbolu
+			}
+			else if (targetId == 204647) { // Voice of Arbolu
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
-						} else if (var == 4) {
+						}
+						else if (var == 4) {
 							return sendQuestDialog(env, 2375);
-						} else if (var == 5) {
+						}
+						else if (var == 5) {
 							return sendQuestDialog(env, 2716);
 						}
 					}
@@ -66,9 +69,11 @@ public class _1054ThePowerofElim extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2); // 2
 					}
 					case SELECT_ACTION_2376: {
-						if (player.getInventory().getItemCountByItemId(182201606) > 0 && player.getInventory().getItemCountByItemId(182201607) > 0) {
+						if (player.getInventory().getItemCountByItemId(182201606) > 0
+							&& player.getInventory().getItemCountByItemId(182201607) > 0) {
 							return sendQuestDialog(env, 2376);
-						} else {
+						}
+						else {
 							return sendQuestDialog(env, 2461);
 						}
 					}
@@ -87,7 +92,8 @@ public class _1054ThePowerofElim extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			} else if (targetId == 730008) { // Daminu
+			}
+			else if (targetId == 730008) { // Daminu
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 2) {
@@ -98,7 +104,8 @@ public class _1054ThePowerofElim extends QuestHandler {
 						return defaultCloseDialog(env, 2, 3, 182201606, 1, 0, 0); // 3
 					}
 				}
-			} else if (targetId == 730019) { // Lodas
+			}
+			else if (targetId == 730019) { // Lodas
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 3) {
@@ -110,7 +117,8 @@ public class _1054ThePowerofElim extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204647) { // Voice of Arbolu
 				return sendQuestEndDialog(env);
 			}
@@ -119,12 +127,7 @@ public class _1054ThePowerofElim extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1500, true);
+		return defaultOnLvlUpEvent(env, 1500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

@@ -15,6 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1055EternalRest extends QuestHandler {
 
@@ -27,15 +28,9 @@ public class _1055EternalRest extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

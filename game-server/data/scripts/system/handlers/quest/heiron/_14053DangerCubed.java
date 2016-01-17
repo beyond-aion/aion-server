@@ -1,7 +1,7 @@
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,6 +13,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14053DangerCubed extends QuestHandler {
 
@@ -37,7 +38,7 @@ public class _14053DangerCubed extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14050, true);
+		return defaultOnLvlUpEvent(env, 14050);
 	}
 
 	@Override
@@ -48,10 +49,9 @@ public class _14053DangerCubed extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204602)
 				return sendQuestEndDialog(env);
@@ -59,42 +59,46 @@ public class _14053DangerCubed extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204020) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
-				case SELECT_ACTION_1353:
-					playQuestMovie(env, 191);
 					break;
 				case SETPRO2:
 					if (var == 1) {
 						changeQuestStep(env, 1, 2, false); // 2
-						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2011.4f, 1395.23f, 118.13f, (byte)60,
-							TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2010.1975f, 1395.4108f, 118.125f, (byte) 62, TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
 			}
-		} else if (targetId == 204602) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 204602) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					else if (var == 2)
 						return sendQuestDialog(env, 1693);
+					else if (var == 3)
+						return sendQuestDialog(env, 2034);
+					break;
+				case SELECT_ACTION_1694:
+					playQuestMovie(env, 191);
+					break;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					} else
+					}	else
 						return sendQuestDialog(env, 10001);
 				case SETPRO1:
 					if (var == 0) {
 						changeQuestStep(env, 0, 1, false); // 1
-						TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
-							TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120, TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
+					break;
 				case SETPRO3:
 					return defaultCloseDialog(env, 2, 3); // 3
 			}

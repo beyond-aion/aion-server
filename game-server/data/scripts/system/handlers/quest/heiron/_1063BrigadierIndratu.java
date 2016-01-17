@@ -11,6 +11,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 /**
  * @author kale
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1063BrigadierIndratu extends QuestHandler {
 
@@ -23,7 +24,6 @@ public class _1063BrigadierIndratu extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204500, 203700 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(214159).addOnKillEvent(questId);
 		for (int npc : npcs) {
@@ -85,11 +85,6 @@ public class _1063BrigadierIndratu extends QuestHandler {
 			return playQuestMovie(env, 424);
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

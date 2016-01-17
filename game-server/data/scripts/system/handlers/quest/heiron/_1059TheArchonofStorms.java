@@ -18,6 +18,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1059TheArchonofStorms extends QuestHandler {
 
@@ -30,7 +31,6 @@ public class _1059TheArchonofStorms extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnMovieEndQuest(193, questId);
 		qe.registerQuestItem(182201619, questId);
@@ -39,13 +39,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1500, true);
+		return defaultOnLvlUpEvent(env, 1500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -63,7 +58,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204505)
 				return sendQuestEndDialog(env);
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204505) {
@@ -80,7 +76,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 204533) {
+		}
+		else if (targetId == 204533) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -103,7 +100,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 204535) {
+		}
+		else if (targetId == 204535) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -119,7 +117,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 700282 && var == 2) {
+		}
+		else if (targetId == 700282 && var == 2) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return playQuestMovie(env, 193);
 			}
@@ -138,8 +137,8 @@ public class _1059TheArchonofStorms extends QuestHandler {
 		qs.setQuestVar(3);
 		updateQuestStatus(env);
 
-		// apply transformation, TODO figure out how long should effect stay on
-		SkillEngine.getInstance().applyEffectDirectly(1864, player, player, 15000);
+		//apply transformation, TODO figure out how long should effect stay on
+		SkillEngine.getInstance().applyEffectDirectly(268, player, player, 15000);
 
 		return true;
 	}
@@ -152,17 +151,19 @@ public class _1059TheArchonofStorms extends QuestHandler {
 
 		if (id != 182201619)
 			return HandlerResult.UNKNOWN;
-		if (!player.isInsideZone(ZoneName.get("LF3_ITEMUSEAREA_Q1059")))
+		if (!player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1059")))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.COMPLETE)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
+			0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
+					1, 0), true);
 				playQuestMovie(env, 192);
 				removeQuestItem(env, 182201619, 1);
 				qs.setQuestVarById(0, 5);

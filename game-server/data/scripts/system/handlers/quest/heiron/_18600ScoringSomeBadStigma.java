@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _18600ScoringSomeBadStigma extends QuestHandler {
 
 	private final static int _questId = 18600;
-	private final static int[] _npcs = { 204500, 804601, 205228 };
+	private final static int[] _npcs = { 204500, 205228, 804601 };
 
 	public _18600ScoringSomeBadStigma() {
 		super(_questId);
