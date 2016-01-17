@@ -73,7 +73,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STONESPEAR_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
@@ -453,7 +453,7 @@ public final class PlayerEnterWorldService {
 			PetService.getInstance().onPlayerLogin(player);
 
 			// ----------------------------- Retail sequence -----------------------------
-			client.sendPacket(new SM_STONESPEAR_INFO());
+			client.sendPacket(new SM_LEGION_DOMINION_LOC_INFO());
 			MailService.getInstance().onPlayerLogin(player);
 			AtreianPassportService.getInstance().onLogin(player);
 			HousingService.getInstance().onPlayerLogin(player);

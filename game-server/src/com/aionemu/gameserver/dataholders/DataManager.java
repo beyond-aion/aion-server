@@ -109,6 +109,7 @@ public final class DataManager {
 	public static WorldMapsData WORLD_MAPS_DATA;
 	public static XMLQuests XML_QUESTS;
 	public static ZoneData ZONE_DATA;
+	public static LegionDominionData LEGION_DOMINION_DATA;
 
 	/**
 	 * Constructor creating <tt>DataManager</tt> instance.<br>
@@ -216,6 +217,7 @@ public final class DataManager {
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
 		RAID_DATA = data.raidData;
 		KILL_BOUNTY_DATA = data.killBountyData;
+		LEGION_DOMINION_DATA = data.legionDominionData;
 
 		// subsequent data processing and modifications (order is important)
 		ITEM_DATA.cleanup();

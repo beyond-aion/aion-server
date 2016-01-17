@@ -38,9 +38,9 @@ public class SM_LEGION_INFO extends AionServerPacket {
 		writeD(0x00); // unk
 		writeD(0x00); // unk 3.0 //time till delete
 		//TODO
-		writeD(0); //occupied stonespear
-		writeD(0); //stonespear applied last week
-		writeD(0); //stonspear applied this week
+		writeD(legion.getOccupiedLegionDominion()); //occupied legionDominion
+		writeD(legion.getLastLegionDominion()); //legion Dominion applied last week
+		writeD(legion.getCurrentLegionDominion()); //legion Dominion applied this week
 		/** Get Announcements List From DB By Legion **/
 		Map<Timestamp, String> announcementList = legion.getAnnouncementList().descendingMap();
 

@@ -8,9 +8,6 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,6 +110,9 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * This class is for controlling players.
  * 
@@ -214,6 +214,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (!zone.canRide() && player.isInPlayerMode(PlayerMode.RIDE)) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 		}
+		SerialKillerService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
 		if (zone.getAreaTemplate().getZoneName() == null) {
 			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
@@ -226,6 +227,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onLeaveZone(ZoneInstance zone) {
 		Player player = getOwner();
+		SerialKillerService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
 		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
 		if (zoneName == null) {

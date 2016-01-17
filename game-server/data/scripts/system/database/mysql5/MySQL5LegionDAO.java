@@ -38,7 +38,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String SELECT_LEGION_QUERY1 = "SELECT * FROM legions WHERE id=?";
 	private static final String SELECT_LEGION_QUERY2 = "SELECT * FROM legions WHERE name=?";
 	private static final String DELETE_LEGION_QUERY = "DELETE FROM legions WHERE id = ?";
-	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, siege_glory_points=? WHERE id=?";
+	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, siege_glory_points=?, occupied_legion_dominion=?, last_legion_dominion=?, current_legion_dominion=? WHERE id=?";
 	/** Announcement Queries **/
 	private static final String INSERT_ANNOUNCEMENT_QUERY = "INSERT INTO legion_announcement_list(`legion_id`, `announcement`, `date`) VALUES (?, ?, ?)";
 	private static final String SELECT_ANNOUNCEMENTLIST_QUERY = "SELECT * FROM legion_announcement_list WHERE legion_id=? ORDER BY date ASC LIMIT 0,7;";
@@ -112,7 +112,10 @@ public class MySQL5LegionDAO extends LegionDAO {
 				stmt.setInt(7, legion.getVolunteerPermission());
 				stmt.setInt(8, legion.getDisbandTime());
 				stmt.setInt(9, legion.getSiegeGloryPoints());
-				stmt.setInt(10, legion.getLegionId());
+				stmt.setInt(10, legion.getOccupiedLegionDominion());
+				stmt.setInt(11, legion.getLastLegionDominion());
+				stmt.setInt(12, legion.getCurrentLegionDominion());
+				stmt.setInt(13, legion.getLegionId());
 				stmt.execute();
 			}
 		});
@@ -145,6 +148,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
+					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});
@@ -181,6 +187,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
+					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});

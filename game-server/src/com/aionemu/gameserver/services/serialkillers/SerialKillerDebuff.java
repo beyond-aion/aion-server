@@ -2,18 +2,16 @@ package com.aionemu.gameserver.services.serialkillers;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
-import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.model.templates.serial_killer.RankPenaltyAttr;
 import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
-import com.aionemu.gameserver.skillengine.change.Func;
+
+import javolution.util.FastTable;
 
 /**
  * @author Dtem
@@ -26,20 +24,17 @@ public class SerialKillerDebuff implements StatOwner {
 	public void applyEffect(Player player, String type, Race race, int rank) {
 		if (rank == 0)
 			return;
-
 		rankRestriction = DataManager.SERIAL_KILLER_DATA.getRankRestriction(type, race, rank);
-		if (rankRestriction == null)
+		if (rankRestriction == null) {
 			return;
-		if (hasDebuff())
-			endEffect(player);
+		}
+		if (hasDebuff()) {
+			endEffect(player);		}
 
 		for (RankPenaltyAttr rankPenaltyAttr : rankRestriction.getPenaltyAttr()) {
-			if (rankPenaltyAttr.getFunc().equals(Func.PERCENT))
-				functions.add(new StatRateFunction(rankPenaltyAttr.getStat(), rankPenaltyAttr.getValue(), true));
-			else
 				functions.add(new StatAddFunction(rankPenaltyAttr.getStat(), rankPenaltyAttr.getValue(), true));
 		}
-		player.getGameStats().addEffect(this, functions);
+		player.getGameStats().addEffect(SerialKillerDebuff.this, functions);
 	}
 
 	public boolean hasDebuff() {
