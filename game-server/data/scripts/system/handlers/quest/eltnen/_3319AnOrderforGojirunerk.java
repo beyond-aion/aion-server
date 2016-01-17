@@ -42,7 +42,8 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 			if (targetId == 798050) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -81,7 +82,8 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798050) {
 				switch (env.getDialog()) {
 					case SELECT_QUEST_REWARD: {

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Akiro
+ * @Reworked Majka
  */
 public class _2231SiblingRivalry extends QuestHandler {
 
@@ -32,46 +33,50 @@ public class _2231SiblingRivalry extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
+		if (env.getVisibleObject() instanceof Npc) {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		}
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (targetId == 203620) {
-			if (qs == null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+		if (targetId == 203620) { // Lamir
+			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				else
+				} else {
 					return sendQuestStartDialog(env);
+				}
 			}
-		} else if (targetId == 203609) {
+		} else if (targetId == 203609) { // Karl
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
-				} else
+				} else {
 					return sendQuestStartDialog(env);
+				}
 			}
-		} else if (targetId == 203612) {
+		} else if (targetId == 203612) { // Gunmarson
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+					return sendQuestDialog(env, 1693);
+				} else if (env.getDialog() == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2); // 2
-				} else
+				} else {
 					return sendQuestStartDialog(env);
+				}
 			}
-		} else if (targetId == 203610) {
+		} else if (targetId == 203610) { // Kaibech
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
+				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
 					qs.setQuestVar(2);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				} else
+				} else {
 					return sendQuestEndDialog(env);
+				}
 			}
 		}
 		return false;

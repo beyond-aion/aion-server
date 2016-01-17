@@ -17,6 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * 
  * @author Mr. Poke
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2014ScoutitOut extends QuestHandler {
 
@@ -29,7 +30,6 @@ public class _2014ScoutitOut extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 203606, 700136, 203633, 203631 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerGetingItem(182203015, questId);
 		qe.registerQuestNpc(700135).addOnKillEvent(questId);
@@ -55,10 +55,12 @@ public class _2014ScoutitOut extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 2) {
+							}
+							else if (var == 2) {
 								if (player.getInventory().getItemCountByItemId(182203015) == 0) {
 									return sendQuestDialog(env, 1438);
-								} else {
+								}
+								else {
 									return sendQuestDialog(env, 1352);
 								}
 							}
@@ -96,18 +98,20 @@ public class _2014ScoutitOut extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		return defaultOnGetItemEvent(env, 1, 2, false); // 2
@@ -119,12 +123,7 @@ public class _2014ScoutitOut extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2200, true);
+		return defaultOnLvlUpEvent(env, 2200, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

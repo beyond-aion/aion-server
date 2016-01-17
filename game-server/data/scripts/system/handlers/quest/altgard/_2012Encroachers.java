@@ -1,6 +1,5 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -9,11 +8,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Pyro refix by Nephis Aller tuer 4 brutes et retourner voir Meiyer Status locked de toutes les missions de Altgard
+ * @Modified Majka
  */
 public class _2012Encroachers extends QuestHandler {
 
 	private final static int questId = 2012;
-	private final static int[] mob_ids = { 210715 }; // Brute lvl 10
+	private final static int[] mob_ids = { 210714, 210715 }; // Brute lvl 10
 
 	public _2012Encroachers() {
 		super(questId);
@@ -22,20 +22,9 @@ public class _2012Encroachers extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203559).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int mob_id : mob_ids)
 			qe.registerQuestNpc(mob_id).addOnKillEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2011);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2200, true);
 	}
 
 	@Override
@@ -47,9 +36,7 @@ public class _2012Encroachers extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		/** Si on start la quete **/
 		if (qs.getStatus() == QuestStatus.START) {
@@ -62,7 +49,8 @@ public class _2012Encroachers extends QuestHandler {
 						else if (var <= 5) // Rendu de la quete
 						{
 							return sendQuestDialog(env, 1352);
-						} else if (var >= 5) {
+						}
+						else if (var >= 5) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 						}
@@ -76,7 +64,8 @@ public class _2012Encroachers extends QuestHandler {
 				}
 
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203559) {
 				return sendQuestEndDialog(env);
 			}
@@ -93,21 +82,21 @@ public class _2012Encroachers extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
 
 		switch (targetId) {
-			case 210715: // Brute
+			case 210714: // Secret Agent
+			case 210715: // Goon
 				if (var > 0 && var < 4) // En tuer 4
 				{
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;
-				} else if (var == 4) // Au 4eme REWARD
+				}
+				else if (var == 4) // Au 4eme REWARD
 				{
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
@@ -117,6 +106,10 @@ public class _2012Encroachers extends QuestHandler {
 		return false;
 	}
 
+	@Override
+	public boolean onLvlUpEvent(QuestEnv env) {
+		return defaultOnLvlUpEvent(env, 2200, true); // Sets as zone mission to avoid it appears on new player list.
+	}
 }
 
 /** FIN MODIF EVO **/

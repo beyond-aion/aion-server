@@ -3,7 +3,6 @@ package quest.beluslan;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -41,7 +40,6 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182204317, questId);
 		qe.registerOnMovieEndQuest(250, questId);
@@ -49,7 +47,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700349).addOnKillEvent(questId);
 	}
-
+	
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
 		return defaultOnZoneMissionEndEvent(env);
@@ -67,20 +65,19 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204774) { // Tristran
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204774) { // Tristran
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -91,7 +88,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 					}
 				}
 			} else if (targetId == 204809) { // Stua
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
@@ -100,12 +97,12 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 							if (!giveQuestItem(env, 182204317, 1))
 								return false;
 							QuestService.questTimerStart(env, 240);
-							SkillEngine.getInstance().applyEffectDirectly(1865, player, player, (350 * 1000));
+							SkillEngine.getInstance().applyEffectDirectly(267, player, player, (350 * 1000));
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 				}
 			} else if (targetId == 700359 && var == 2) { // Secret Port Entrance
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					QuestService.questTimerEnd(env);
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 2452, 2474, 672.25f, (byte) 28);
 					return playQuestMovie(env, 250);
@@ -122,7 +119,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			player.getEffectController().removeEffect(1865);
+			player.getEffectController().removeEffect(267);
 			changeQuestStep(env, 2, 3, false); // 3
 			return true;
 		}
@@ -139,7 +136,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		Player player = env.getPlayer();
 		if (item.getItemId() != 182204317)
 			return HandlerResult.UNKNOWN;
-		if (player.isInsideZone(ZoneName.get("DF3_ITEMUSEAREA_Q2058"))) {
+		if (player.isInsideItemUseZone(ZoneName.get("DF3_ITEMUSEAREA_Q2058"))) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 4, 4, true, 251)); // reward
 		}
 		return HandlerResult.FAILED;
@@ -172,7 +169,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				player.getEffectController().removeEffect(1865);
+				player.getEffectController().removeEffect(267);
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
 				return true;
@@ -188,7 +185,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				player.getEffectController().removeEffect(1865);
+				player.getEffectController().removeEffect(267);
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
 				return true;
@@ -204,7 +201,7 @@ public class _2058ASpyAmongtheLepharists extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				player.getEffectController().removeEffect(1865);
+				player.getEffectController().removeEffect(267);
 				qs.setQuestVar(1);
 				updateQuestStatus(env);
 			}

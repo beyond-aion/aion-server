@@ -53,7 +53,8 @@ public class _2600HumongousMalek extends QuestHandler {
 			if (targetId == 204734) {
 				return sendQuestEndDialog(env);
 			}
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 798119) {
@@ -73,19 +74,22 @@ public class _2600HumongousMalek extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 700512) {
+		}
+		else if (targetId == 700512) {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 1) {
 						if (player.getInventory().getItemCountByItemId(182204528) == 1) {
 							removeQuestItem(env, 182204528, 1);
-							QuestService.addNewSpawn(220040000, 1, 215383, (float) 1140.78, (float) 432.85, (float) 341.0825, (byte) 0);
+							QuestService.addNewSpawn(220040000, player.getInstanceId(), 215383, (float) 1140.78, (float) 432.85, (float) 341.0825,
+								(byte) 0);
 							return true;
 						}
 					}
 					return false;
 			}
-		} else if (targetId == 204734) {
+		}
+		else if (targetId == 204734) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)

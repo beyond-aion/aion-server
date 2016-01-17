@@ -2,13 +2,10 @@ package quest.ascension;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke, modified bobobear
@@ -51,9 +48,7 @@ public class _29070ADispatchtoAltgard extends QuestHandler {
 							if (var == 0) {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
-								TeleportService2.teleportTo(player, 220030000, player.getInstanceId(), 1748f, 1807f, 255f);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-								return true;
+								return closeDialogWindow(env);
 							}
 					}
 				}

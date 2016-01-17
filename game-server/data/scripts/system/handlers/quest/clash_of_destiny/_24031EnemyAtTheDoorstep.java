@@ -179,17 +179,17 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (player.isInsideZone(ZoneName.get("DF1_ITEMUSEAREA_Q24031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("DF1_ITEMUSEAREA_Q24031"))) {
 				if (var == 3) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));// 3-4
 				}
 			}
-			if (player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q24031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("DF1A_ITEMUSEAREA_Q24031"))) {
 				if (var == 5) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 5, 6, false));// 5-6
 				}
 			}
-			if (player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q24031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q24031"))) {
 				if (var == 7) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 7, 8, false));// 7-8
 				}

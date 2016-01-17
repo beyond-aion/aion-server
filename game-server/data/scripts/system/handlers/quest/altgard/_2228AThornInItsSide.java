@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Dta3000
+ * @Modified Majka
  */
 public class _2228AThornInItsSide extends QuestHandler {
 
@@ -46,6 +47,10 @@ public class _2228AThornInItsSide extends QuestHandler {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
+
+			if (env.getDialog() == DialogAction.QUEST_REFUSE_1) {
+				closeDialogWindow(env);
+			}
 		} else if (targetId == 203619) {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
@@ -57,8 +62,9 @@ public class _2228AThornInItsSide extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				} else
+				} else {
 					return sendQuestEndDialog(env);
+				}
 			}
 		}
 		return false;
@@ -72,15 +78,20 @@ public class _2228AThornInItsSide extends QuestHandler {
 
 		if (id != 182203221)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				sendQuestDialog(env, 4);
-			}
-		}, 3000);
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+				@Override
+				public void run() {
+						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+					sendQuestDialog(env, 4);
+				}
+			}, 3000);
+		}
 		return HandlerResult.SUCCESS;
 	}
 }

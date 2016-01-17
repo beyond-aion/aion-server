@@ -23,7 +23,7 @@ public class _19001ExpertEssencetappingExpert extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(203780).addOnQuestStart(questId);
 		qe.registerQuestNpc(203780).addOnTalkEvent(questId);
-		qe.registerQuestNpc(798600).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203700).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -42,7 +42,8 @@ public class _19001ExpertEssencetappingExpert extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					else
 						return true;
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -52,7 +53,7 @@ public class _19001ExpertEssencetappingExpert extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798600: {
+				case 203700: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							qs.setStatus(QuestStatus.REWARD);
@@ -61,8 +62,9 @@ public class _19001ExpertEssencetappingExpert extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798600) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 203700) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);
 				else {

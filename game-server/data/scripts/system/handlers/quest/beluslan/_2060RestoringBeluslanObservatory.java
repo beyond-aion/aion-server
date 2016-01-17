@@ -23,6 +23,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * 
  * @author kecimis
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2060RestoringBeluslanObservatory extends QuestHandler {
 
@@ -35,7 +36,6 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204701, 204785, 278003, 278088, 700293 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182204318, questId);
 		qe.registerQuestNpc(700290).addOnKillEvent(questId);
@@ -45,13 +45,8 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2500, true);
+		return defaultOnLvlUpEvent(env, 2500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -60,6 +55,7 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
+		
 		int var = qs.getQuestVarById(0);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
@@ -84,10 +80,12 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 4) {
+							}
+							else if (var == 4) {
 								if (QuestService.collectItemCheck(env, false)) {
 									return sendQuestDialog(env, 2375);
-								} else {
+								}
+								else {
 									giveQuestItem(env, 182204318, 1); // give another bottle
 									return sendQuestDialog(env, 2461);
 								}
@@ -141,11 +139,13 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204701) { // Hod
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -160,7 +160,7 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 4) {
-				if (player.isInsideZone(ZoneName.get("AB1_ITEMUSEAREA_Q2060"))) {
+				if (player.isInsideItemUseZone(ZoneName.get("AB1_ITEMUSEAREA_Q2060"))) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 4, 4, false, 182204319, 1, 0)); // 4 + aether bottle
 				}
 			}

@@ -11,6 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1038TheShadowsCommand extends QuestHandler {
 
@@ -23,7 +24,6 @@ public class _1038TheShadowsCommand extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 203933, 700172, 203991, 700162 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnMovieEndQuest(35, questId);
@@ -67,11 +67,14 @@ public class _1038TheShadowsCommand extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 3) {
+							}
+							else if (var == 3) {
 								return sendQuestDialog(env, 1694);
-							} else if (var == 4) {
+							}
+							else if (var == 4) {
 								return sendQuestDialog(env, 2034);
-							} else if (var == 5) {
+							}
+							else if (var == 5) {
 								return sendQuestDialog(env, 2035);
 							}
 						}
@@ -118,7 +121,8 @@ public class _1038TheShadowsCommand extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203991) { // Dionera
 				return sendQuestEndDialog(env);
 			}
@@ -147,21 +151,17 @@ public class _1038TheShadowsCommand extends QuestHandler {
 
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+		Player player = env.getPlayer();
 		if (movieId == 35) {
 			QuestService.questTimerStart(env, 180);
-			QuestService.addNewSpawn(210020000, 1, 204005, (float) 1768.16, (float) 924.47, (float) 422.02, (byte) 0);
+			QuestService.addNewSpawn(210020000, player.getInstanceId(), 204005, (float) 1768.16, (float) 924.47, (float) 422.02, (byte) 0);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
+		return defaultOnLvlUpEvent(env, 1300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

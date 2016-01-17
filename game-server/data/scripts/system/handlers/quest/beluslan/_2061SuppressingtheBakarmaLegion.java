@@ -27,18 +27,11 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerOnEnterZone(ZoneName.get("MALEK_MINE_220040000"), questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(700290).addOnKillEvent(questId);
 		qe.registerQuestNpc(214026).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = { 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060 };
-		return defaultOnZoneMissionEndEvent(env, quests);
 	}
 
 	@Override
@@ -54,7 +47,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
 
-		int targetId = 0;
+		int targetId = env.getTargetId();
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		switch (targetId) {
@@ -82,13 +75,12 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204052) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -98,7 +90,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204702) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -132,7 +124,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 					}
 			}
 		} else if (targetId == 278001) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -147,7 +139,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204807) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
@@ -160,7 +152,7 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 					}
 			}
 		} else if (targetId == 700295 && var >= 4 && var < 8) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+			if (dialog == DialogAction.USE_OBJECT) {
 				if (var == 7) {
 					removeQuestItem(env, 182204320, 1);
 				}

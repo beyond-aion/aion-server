@@ -18,6 +18,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  * 
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1035RefreshingtheSprings extends QuestHandler {
 
@@ -30,7 +31,6 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnMovieEndQuest(31, questId);
@@ -216,11 +216,6 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

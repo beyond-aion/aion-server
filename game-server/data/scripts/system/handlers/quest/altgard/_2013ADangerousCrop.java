@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -25,7 +25,6 @@ public class _2013ADangerousCrop extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203605).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700096).addOnTalkEvent(questId);
@@ -40,14 +39,13 @@ public class _2013ADangerousCrop extends QuestHandler {
 			return false;
 
 		final int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203605: { // Loriniah
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -72,7 +70,7 @@ public class _2013ADangerousCrop extends QuestHandler {
 					break;
 				}
 				case 700096: { // MuMu Cart
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case USE_OBJECT: {
 							if (var >= 3 && var < 5) {
 								return useQuestObject(env, var, var + 1, false, true); // 4, 5
@@ -106,11 +104,6 @@ public class _2013ADangerousCrop extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2012);
 	}
 
 	@Override

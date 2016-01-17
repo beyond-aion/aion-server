@@ -9,11 +9,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Aurelius (203902). Hunt Manduri (6): 210771, 210758, 210763, 210764, 210759, 210770 Report to Aurelius. Talk with Archelaos (203936).
- * Find Paper Glider (700179). Find Melginie (204043). Escort Melginie to Celestine (204030). Talk with Celestine. Report to Aurelius.
+ * Talk with Aurelius (203902). Hunt Manduri (6): 210771, 210758, 210763, 210764, 210759, 210770 Report to Aurelius.
+ * Talk with Archelaos (203936). Find Paper Glider (700179). Find Melginie (204043). Escort Melginie to Celestine
+ * (204030). Talk with Celestine. Report to Aurelius.
  * 
  * @author Xitanium
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1031TheMandurisSecret extends QuestHandler {
 
@@ -27,7 +29,6 @@ public class _1031TheMandurisSecret extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLogOut(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npc_ids)
@@ -39,13 +40,8 @@ public class _1031TheMandurisSecret extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
+		return defaultOnLvlUpEvent(env, 1300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -154,7 +150,7 @@ public class _1031TheMandurisSecret extends QuestHandler {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
