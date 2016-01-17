@@ -770,6 +770,10 @@ public class Skill {
 		}
 		for (Effect effect : effects) {
 			if (effect.getTauntHate() >= 0) {
+				//delayed skills do not add hate if they were not resisted/dodged
+				if (effect.isDelayedDamage() && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)) {
+					continue;
+				}
 				effect.getEffected().getAggroList().addHate(effector, 1);
 				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
 
