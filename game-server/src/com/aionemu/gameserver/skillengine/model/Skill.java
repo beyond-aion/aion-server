@@ -744,7 +744,6 @@ public class Skill {
 			sendCastspellEnd(dashStatus, effects);
 
 		endCondCheck();
-		addHateAndNotifyFriends(effects);
 		
 		if (this.getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
 			AbyssService.rankerSkillAnnounce((Player) effector, this.getSkillTemplate().getNameId());
@@ -764,27 +763,23 @@ public class Skill {
 		}
 	}
 
-	private void addHateAndNotifyFriends(List<Effect> effects) {
+	private void addResistedEffectHateAndNotifyFriends(List<Effect> effects) {
 		if (effects == null || effects.isEmpty()) {
 			return;
 		}
 		for (Effect effect : effects) {
-			if (effect.getTauntHate() >= 0) {
-				//delayed skills do not add hate if they were not resisted/dodged
-				if (effect.isDelayedDamage() && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)) {
-					continue;
-				}
-				effect.getEffected().getAggroList().addHate(effector, 1);
-				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
-
-					@Override
-					public void visit(Npc object) {
-						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected());
-					}
-
-				});
-			}
-		}
+ 			if (effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)) {
+ 				effect.getEffected().getAggroList().addHate(effector, 1);
+ 				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+ 
+ 					@Override
+ 					public void visit(Npc object) {
+ 						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected());
+ 					}
+ 
+ 				});
+ 			}
+ 		}
 	}
 
 	public void applyEffect(List<Effect> effects) {
@@ -794,6 +789,8 @@ public class Skill {
 		for (Effect effect : effects) {
 			effect.applyEffect();
 		}
+		
+		addResistedEffectHateAndNotifyFriends(effects);
 
 		/**
 		 * Use penalty skill (now 100% success)
