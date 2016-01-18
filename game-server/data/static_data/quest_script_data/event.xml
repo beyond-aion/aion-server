@@ -163,6 +163,30 @@
 			80582 [XML] [Event] Second Path to Glory
 			80583 [XML] [Event] Third Flight to Glory
 			80584 [XML] [Event] Third Path to Glory
+			80645 [XML] [Event] Efforts for Honor 1
+			80646 [XML] [Event] Efforts for Honor 2
+			80647 [XML] [Event] Efforts for Honor 3
+			80648 [XML] [Event] Efforts for Honor 4
+			80649 [XML] [Event] Efforts for Honor 1
+			80650 [XML] [Event] Efforts for Honor 2
+			80651 [XML] [Event] Efforts for Honor 3
+			80652 [XML] [Event] Efforts for Honor 4
+			80653 [XML] [Event] Dangerous Efforts for Honor 1
+			80654 [XML] [Event] Dangerous Efforts for Honor 2
+			80655 [XML] [Event] Dangerous Efforts for Honor 3
+			80656 [XML] [Event] Dangerous Efforts for Honor 4
+			80657 [XML] [Event] Challenge for Honor 1
+			80658 [XML] [Event] Challenge for Honor 2
+			80659 [XML] [Event] Challenge for Honor 3
+			80660 [XML] [Event] Challenge for Honor 4
+			80661 [XML] [Event] Tough Challenge for Honor 1
+			80662 [XML] [Event] Tough Challenge for Honor 2
+			80663 [XML] [Event] Tough Challenge for Honor 3
+			80664 [XML] [Event] Tough Challenge for Honor 4
+			80665 [XML] [Event] Dangerous Efforts for Honor 1
+			80666 [XML] [Event] Dangerous Efforts for Honor 2
+			80667 [XML] [Event] Dangerous Efforts for Honor 3
+			80668 [XML] [Event] Dangerous Efforts for Honor 4
 		[END] SUMMARY
 -->
 
@@ -272,7 +296,31 @@
 	<item_collecting id="80581" start_npc_ids="832014"/>
 	<item_collecting id="80582" start_npc_ids="832015"/>
 	<item_collecting id="80583" start_npc_ids="832014"/>
-	<item_collecting id="80584" start_npc_ids="832015"/>	
+	<item_collecting id="80584" start_npc_ids="832015"/>
+	<item_collecting id="80645" start_npc_ids="832913"/>
+	<item_collecting id="80646" start_npc_ids="832913"/>
+	<item_collecting id="80647" start_npc_ids="832913"/>
+	<item_collecting id="80648" start_npc_ids="832913"/>
+	<item_collecting id="80649" start_npc_ids="832913"/>
+	<item_collecting id="80650" start_npc_ids="832913"/>
+	<item_collecting id="80651" start_npc_ids="832913"/>
+	<item_collecting id="80652" start_npc_ids="832913"/>
+	<item_collecting id="80653" start_npc_ids="832913"/>
+	<item_collecting id="80654" start_npc_ids="832913"/>
+	<item_collecting id="80655" start_npc_ids="832913"/>
+	<item_collecting id="80656" start_npc_ids="832913"/>
+	<item_collecting id="80657" start_npc_ids="832913"/>
+	<item_collecting id="80658" start_npc_ids="832913"/>
+	<item_collecting id="80659" start_npc_ids="832913"/>
+	<item_collecting id="80660" start_npc_ids="832913"/>
+	<item_collecting id="80661" start_npc_ids="832913"/>
+	<item_collecting id="80662" start_npc_ids="832913"/>
+	<item_collecting id="80663" start_npc_ids="832913"/>
+	<item_collecting id="80664" start_npc_ids="832913"/>
+	<item_collecting id="80665" start_npc_ids="832913"/>
+	<item_collecting id="80666" start_npc_ids="832913"/>
+	<item_collecting id="80667" start_npc_ids="832913"/>
+	<item_collecting id="80668" start_npc_ids="832913"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028">
 		<monster var="0" end_var="100" npc_ids="211615 212556 212724 212725 212726 212727 212728 212729 212730 212731 212732 212733 212734 212735 212736 212737 212738 212739 212740 212741 212742 212743 212744 212809 212865 212866 212867 212979"/>
