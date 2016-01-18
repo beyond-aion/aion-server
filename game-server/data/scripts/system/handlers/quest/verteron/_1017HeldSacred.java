@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke, Dune11, Rhys2002
+ * @Modified Majka
  */
 public class _1017HeldSacred extends QuestHandler {
 
@@ -23,19 +24,13 @@ public class _1017HeldSacred extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203178).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
+		return defaultOnLvlUpEvent(env, 1130, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -74,11 +69,13 @@ public class _1017HeldSacred extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 5);
-						} else
+						}
+						else
 							return sendQuestDialog(env, 1353);
 					}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203178)
 				return sendQuestEndDialog(env);
 		}

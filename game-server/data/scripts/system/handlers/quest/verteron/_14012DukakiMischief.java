@@ -11,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
+ * @Modified Majka
  */
 public class _14012DukakiMischief extends QuestHandler {
 
@@ -39,7 +40,7 @@ public class _14012DukakiMischief extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14010, true);
+		return defaultOnLvlUpEvent(env, 14010);
 	}
 
 	@Override
@@ -57,7 +58,8 @@ public class _14012DukakiMischief extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098)
 				return sendQuestEndDialog(env);
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 203129) {
@@ -77,7 +79,7 @@ public class _14012DukakiMischief extends QuestHandler {
 					}
 				case SETPRO3:
 					int var1 = qs.getQuestVarById(1);
-					int var2 = qs.getQuestVarById(2);
+	        int var2 = qs.getQuestVarById(2);
 					if (var1 == 5 && var2 == 3) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -98,11 +100,11 @@ public class _14012DukakiMischief extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			int targetId = env.getTargetId();
 			if (var == 1) {
-				int[] mobs = { 210145, 210146 };
-				if (targetId == 210145 || targetId == 210146)
-					return defaultOnKillEvent(env, mobs, 0, 5, 1);
-				else if (targetId == 210157)
-					return defaultOnKillEvent(env, 210157, 0, 3, 2);
+        int[] mobs = { 210145, 210146 };
+        if (targetId == 210145 || targetId == 210146)
+        	return defaultOnKillEvent(env, mobs, 0, 5, 1);
+        else if (targetId == 210157)
+        	return defaultOnKillEvent(env, 210157, 0, 3, 2);
 			}
 		}
 		return false;

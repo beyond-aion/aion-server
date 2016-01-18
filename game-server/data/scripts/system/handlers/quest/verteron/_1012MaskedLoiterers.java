@@ -8,11 +8,12 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Spiros (203111). Scout around Verteron Citadel (210030000) for suspicious strangers. Scouting completed! Report back to Spiros. Collect
- * the Revolutionary Symbol (182200010) (5) and take them to Spiros.
+ * Talk with Spiros (203111). Scout around Verteron Citadel (210030000) for suspicious strangers. Scouting completed!
+ * Report back to Spiros. Collect the Revolutionary Symbol (182200010) (5) and take them to Spiros.
  * 
  * @author MrPoke, Dune11
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1012MaskedLoiterers extends QuestHandler {
 
@@ -25,18 +26,12 @@ public class _1012MaskedLoiterers extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203111).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
+	
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
+		return defaultOnLvlUpEvent(env, 1130, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -70,7 +65,8 @@ public class _1012MaskedLoiterers extends QuestHandler {
 						return checkQuestItems(env, 3, 3, true, 5, 2034);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203111)
 				return sendQuestEndDialog(env);
 		}

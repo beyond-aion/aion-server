@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1015FrillneckHunt extends QuestHandler {
 
@@ -25,20 +26,14 @@ public class _1015FrillneckHunt extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203129).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int mob_id : mob_ids)
 			qe.registerQuestNpc(mob_id).addOnKillEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
+		return defaultOnLvlUpEvent(env, 1130, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -74,7 +69,8 @@ public class _1015FrillneckHunt extends QuestHandler {
 						}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203129) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 1693);

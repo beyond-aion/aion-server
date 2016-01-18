@@ -22,6 +22,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @author Mr. Poke
  * @modified Rice
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1019FlyingReconnaissance extends QuestHandler {
 
@@ -36,7 +37,6 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -45,11 +45,6 @@ public class _1019FlyingReconnaissance extends QuestHandler {
 		for (int mob : mobs)
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		qe.registerQuestNpc(210158).addOnAttackEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

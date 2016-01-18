@@ -11,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1021TrandilasEggs extends QuestHandler {
 
@@ -24,15 +25,9 @@ public class _1021TrandilasEggs extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203129).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int mob_id : mob_ids)
 			qe.registerQuestNpc(mob_id).addOnKillEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1015);
 	}
 
 	@Override
@@ -69,7 +64,8 @@ public class _1021TrandilasEggs extends QuestHandler {
 						}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203129)
 				return sendQuestEndDialog(env);
 		}

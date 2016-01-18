@@ -14,6 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @author Mr. Poke
  * @modified Dune11
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1023ANestofLepharists extends QuestHandler {
 
@@ -28,13 +29,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 		qe.registerQuestNpc(203098).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203183).addOnTalkEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("MYSTERIOUS_SHIPWRECK_210030000"), questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1013);
 	}
 
 	@Override
@@ -130,6 +125,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 
 		if (qs.getQuestVars().getVarById(0) == 2) {
 			playQuestMovie(env, 23);
+			player.getMoveController().abortMove();
 			qs.setQuestVarById(0, 3); // 3
 			updateQuestStatus(env);
 			return true;

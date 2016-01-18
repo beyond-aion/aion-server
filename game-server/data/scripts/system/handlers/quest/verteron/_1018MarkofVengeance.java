@@ -10,6 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Rhys2002, MrPoke
+ * @Modified Majka
  */
 public class _1018MarkofVengeance extends QuestHandler {
 
@@ -21,19 +22,13 @@ public class _1018MarkofVengeance extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203098).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
+		return defaultOnLvlUpEvent(env, 1130, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -58,10 +53,12 @@ public class _1018MarkofVengeance extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					} else
+					}
+					else
 						return sendQuestDialog(env, 1097);
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098)
 				return sendQuestEndDialog(env);
 		}

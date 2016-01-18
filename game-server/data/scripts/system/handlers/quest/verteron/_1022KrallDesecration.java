@@ -11,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke, Dune11
+ * @Modified Majka
  */
 public class _1022KrallDesecration extends QuestHandler {
 
@@ -24,15 +25,9 @@ public class _1022KrallDesecration extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203178).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int mob_id : mob_ids)
 			qe.registerQuestNpc(mob_id).addOnKillEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1017);
 	}
 
 	@Override

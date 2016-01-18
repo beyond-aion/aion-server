@@ -10,6 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14015NotBlindedByVengeance extends QuestHandler {
 
@@ -33,7 +34,7 @@ public class _14015NotBlindedByVengeance extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14010, true);
+		return defaultOnLvlUpEvent(env, 14010);
 	}
 
 	@Override
@@ -58,10 +59,12 @@ public class _14015NotBlindedByVengeance extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					} else
+					}
+					else
 						return sendQuestDialog(env, 1097);
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098)
 				return sendQuestEndDialog(env);
 		}

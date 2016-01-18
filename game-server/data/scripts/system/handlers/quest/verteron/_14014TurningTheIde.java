@@ -9,12 +9,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
  * @rework Ritsu
+ * @Modified Majka
  */
 public class _14014TurningTheIde extends QuestHandler {
 
@@ -53,7 +53,6 @@ public class _14014TurningTheIde extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203146:
-					PacketSendUtility.sendMessage(player, env.getDialog().toString());
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
