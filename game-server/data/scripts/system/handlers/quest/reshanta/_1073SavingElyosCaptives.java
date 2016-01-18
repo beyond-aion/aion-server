@@ -9,11 +9,12 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Sakmis (278502). Talk with Nereus (278517). Talk with Dactyl (278590). Locate the Captured Elyos Prisoner (253623). Escort Captured Elyos
- * Prisoners to the Magic Ward (1273, 1494, 1538). Report back to Nereus.
+ * Talk with Sakmis (278502). Talk with Nereus (278517). Talk with Dactyl (278590). Locate the Captured Elyos Prisoner
+ * (253623). Escort Captured Elyos Prisoners to the Magic Ward (1273, 1494, 1538). Report back to Nereus.
  * 
  * @author MetaWind, kale
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1073SavingElyosCaptives extends QuestHandler {
 
@@ -26,7 +27,6 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -96,7 +96,8 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -108,7 +109,7 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -133,12 +134,7 @@ public class _1073SavingElyosCaptives extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1701, true);
+		return defaultOnLvlUpEvent(env, 1701, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

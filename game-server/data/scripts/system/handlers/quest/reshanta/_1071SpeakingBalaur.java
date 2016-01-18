@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1071SpeakingBalaur extends QuestHandler {
 
@@ -28,18 +29,12 @@ public class _1071SpeakingBalaur extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182202001, questId);
 		qe.registerQuestNpc(278532).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798026).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798025).addOnTalkEvent(questId);
 		qe.registerQuestNpc(279019).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

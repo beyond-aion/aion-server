@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14042ARescueOperation extends QuestHandler {
 
@@ -92,19 +93,17 @@ public class _14042ARescueOperation extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-					return sendQuestDialog(env, 5);
-				else
-					return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -135,6 +134,6 @@ public class _14042ARescueOperation extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14040, true);
+		return defaultOnLvlUpEvent(env, 14040);
 	}
 }

@@ -4,14 +4,17 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14044ShardsOfMemory extends QuestHandler {
 
@@ -66,14 +69,22 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 						case SETPRO3:
 							if (var == 2) {
-								return defaultCloseDialog(env, 2, 3);
+								qs.setQuestVarById(0, var + 1);
+								updateQuestStatus(env);
+								playQuestMovie(env, 271);
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+								return true;
 							}
 					}
 				}
 					break;
 				case 700355:
-					playQuestMovie(env, 271);
-					return useQuestObject(env, 3, 3, true, false);
+					if(var == 3) {
+						if(checkItemExistence(env, 188020000, 1, true))
+							return useQuestObject(env, 3, 3, true, false);
+						PacketSendUtility.sendWhiteMessageOnCenter(player, "You need a Temporal Stone!"); // @ToDo: send corrent message id: 1111203
+					}
+					break;
 				case 790001: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -110,6 +121,6 @@ public class _14044ShardsOfMemory extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14040, true);
+		return defaultOnLvlUpEvent(env, 14040);
 	}
 }

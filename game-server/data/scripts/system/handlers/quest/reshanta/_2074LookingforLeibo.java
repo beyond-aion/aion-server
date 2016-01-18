@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Hellboy aion4Free
  * @modified & reworked Gigi, vlog
+ * @Modified Majka
  */
 public class _2074LookingforLeibo extends QuestHandler {
 
@@ -21,7 +22,6 @@ public class _2074LookingforLeibo extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(278036).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203550).addOnTalkEvent(questId);
@@ -100,7 +100,8 @@ public class _2074LookingforLeibo extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -126,11 +127,13 @@ public class _2074LookingforLeibo extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278036) { // Scoda
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -139,12 +142,7 @@ public class _2074LookingforLeibo extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2701, true);
+		return defaultOnLvlUpEvent(env, 2701, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

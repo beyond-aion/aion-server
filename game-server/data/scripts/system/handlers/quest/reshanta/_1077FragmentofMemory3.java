@@ -14,6 +14,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+/*
+ * @Modified Majka
+ */
+
 public class _1077FragmentofMemory3 extends QuestHandler {
 
 	private final static int questId = 1077;
@@ -25,7 +29,6 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(214598).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
@@ -33,13 +36,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1701, true);
+		return defaultOnLvlUpEvent(env, 1701, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -64,7 +62,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 203704) {
@@ -80,7 +79,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 798154) {
+		}
+		else if (targetId == 798154) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -93,7 +93,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204574) {
+		}
+		else if (targetId == 204574) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -106,7 +107,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204652) {
+		}
+		else if (targetId == 204652) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -135,7 +137,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204653) {
+		}
+		else if (targetId == 204653) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -153,6 +156,9 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 						updateQuestStatus(env);
 					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+					player.setState(CreatureState.FLIGHT_TELEPORT);
+					player.unsetState(CreatureState.ACTIVE);
+					player.setFlightTeleportId(72001);
 					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 72001, 0));
 					return true;
 			}
@@ -165,7 +171,8 @@ public class _1077FragmentofMemory3 extends QuestHandler {
 		if (defaultOnKillEvent(env, 214598, 5, 6)) {
 			playQuestMovie(env, 422);
 			return true;
-		} else
+		}
+		else
 			return false;
 	}
 }

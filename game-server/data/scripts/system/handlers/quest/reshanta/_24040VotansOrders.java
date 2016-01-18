@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24040VotansOrders extends QuestHandler {
 
@@ -25,6 +26,7 @@ public class _24040VotansOrders extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(278001).addOnTalkEvent(questId);
 		qe.registerOnEnterWorld(questId);
+		qe.registerOnEnterZoneMissionEnd(questId);
 	}
 
 	@Override
@@ -40,22 +42,16 @@ public class _24040VotansOrders extends QuestHandler {
 		if (targetId != 278001)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
-				return sendQuestDialog(env, 10002);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			if (env.getDialog() == DialogAction.QUEST_SELECT) {
 				qs.setStatus(QuestStatus.REWARD);
-				qs.setQuestVarById(0, 1);
 				updateQuestStatus(env);
+				return sendQuestDialog(env, 10002);
+			} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-				int[] ids = { 24041, 24042, 24043, 24044, 24045, 24046, 24047 };
-				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-				}
-			}
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
@@ -74,5 +70,13 @@ public class _24040VotansOrders extends QuestHandler {
 			}
 		}
 		return false;
+	}
+		
+	@Override
+	public boolean onZoneMissionEndEvent(QuestEnv env) {
+		int[] ids = { 24041, 24042, 24043, 24044, 24045, 24046, 24047 };
+		for (int id : ids)
+			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+		return true;
 	}
 }

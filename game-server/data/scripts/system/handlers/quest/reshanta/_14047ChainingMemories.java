@@ -19,6 +19,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14047ChainingMemories extends QuestHandler {
 
@@ -45,7 +46,7 @@ public class _14047ChainingMemories extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14040, true);
+		return defaultOnLvlUpEvent(env, 14040);
 	}
 
 	@Override
@@ -148,17 +149,21 @@ public class _14047ChainingMemories extends QuestHandler {
 						return sendQuestDialog(env, 2375);
 					else if (var != 4)
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10010));
+					break;
 				case SELECT_ACTION_2376:
 					if (var == 4) {
 						playQuestMovie(env, 421);
-						break;
 					}
+					break;
 				case SETPRO11:
 					if (var == 4) {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+					player.setState(CreatureState.FLIGHT_TELEPORT);
+					player.unsetState(CreatureState.ACTIVE);
+					player.setFlightTeleportId(71001);
 					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 72001, 0));
 					return true;
 			}

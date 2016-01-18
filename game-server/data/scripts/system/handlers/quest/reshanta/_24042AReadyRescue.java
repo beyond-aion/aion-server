@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24042AReadyRescue extends QuestHandler {
 
@@ -86,13 +87,14 @@ public class _24042AReadyRescue extends QuestHandler {
 							return sendQuestDialog(env, 2035);
 						}
 						case SETPRO4: {
-							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1295.0565f, 1499.0419f, 1571.1864f, 3, 4); // 4
+							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(),  1295.0565f, 1499.0419f, 1571.1864f, 3, 4); // 4
 						}
 					}
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278019) { // Lakadi
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
@@ -102,7 +104,8 @@ public class _24042AReadyRescue extends QuestHandler {
 		}
 		return false;
 	}
-
+	
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -133,6 +136,6 @@ public class _24042AReadyRescue extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040, true);
+		return defaultOnLvlUpEvent(env, 24040);
 	}
 }
