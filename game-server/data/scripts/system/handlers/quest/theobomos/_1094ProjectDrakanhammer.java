@@ -85,22 +85,23 @@ public class _1094ProjectDrakanhammer extends QuestHandler {
 					if (targetId == 700411) { // Research Diary
 						if (dialog == DialogAction.USE_OBJECT) {
 							if (giveQuestItem(env, 182208017, 1)) {
-								closeDialogWindow(env);
 								changeQuestStep(env, 2, 3, false); // 3
-								return true;
+								return closeDialogWindow(env);
 							}
 						}
 					}
 				}
 				case 3: {
 					if (targetId == 730153) { // Assistant's Journal
-						if (dialog == DialogAction.USE_OBJECT) {
-							QuestService.collectItemCheck(env, true);
-							removeQuestItem(env, 182208017, 1);
-							qs.setQuestVar(4); // 4
-							qs.setStatus(QuestStatus.REWARD); // reward
-							updateQuestStatus(env);
-							return true;
+						if(QuestService.collectItemCheck(env, false)) {
+							if (dialog == DialogAction.USE_OBJECT) {
+								removeQuestItem(env, 182208017, 1);
+								QuestService.collectItemCheck(env, true);
+								qs.setQuestVar(4); // 4
+								qs.setStatus(QuestStatus.REWARD); // reward
+								updateQuestStatus(env);
+								return true;
+							}
 						}
 					}
 				}
@@ -109,9 +110,8 @@ public class _1094ProjectDrakanhammer extends QuestHandler {
 			if (targetId == 203834) { // Nestor
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
-					return sendQuestEndDialog(env);
 				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

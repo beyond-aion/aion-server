@@ -81,7 +81,7 @@ public class _1092JosnacksDilemma extends QuestHandler {
 						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
 						case CHECK_USER_HAS_QUEST_ITEM:
-							return checkQuestItems(env, 4, 4, true, 10001, 10008); // reward
+							return checkQuestItems(env, 4, 4, true, 5, 10001); // reward
 					}
 					break;
 				case 798206: // Josnack
@@ -95,41 +95,38 @@ public class _1092JosnacksDilemma extends QuestHandler {
 							playQuestMovie(env, 364);
 							break;
 						case SETPRO2:
-							if (var == 1) {
-								defaultCloseDialog(env, 1, 2); // 2
+							if (var == 1 || var == 2) {
+								if(var == 1)
+									defaultCloseDialog(env, 1, 2); // 2
 								TeleportService2.teleportTo(player, 210060000, 926f, 3035f, 186f, (byte) 30);
 								return true;
 							}
 					}
 					break;
+				case 700388: // Stone on the Statue Platform
 				case 700389: // Stone above the Statue
 					switch (env.getDialog()) {
 						case USE_OBJECT:
-							if (var == 2 && qs.getQuestVarById(1) == 0) {
+							int var1 = qs.getQuestVarById(1);
+							int var2 = qs.getQuestVarById(2);
+							if (var == 2 && var1 == 0 && targetId == 700389) {
 								qs.setQuestVarById(1, 1); // 1: 1
 								updateQuestStatus(env);
-
-								if (qs.getQuestVarById(2) == 1) {
-									qs.setQuestVar(3); // 3
-									updateQuestStatus(env);
-								}
-								return true;
 							}
-					}
-					break;
-				case 700388: // Stone on the Statue Platform
-					switch (env.getDialog()) {
-						case USE_OBJECT:
-							if (var == 2 && qs.getQuestVarById(2) == 0) {
+							
+							if (var == 2 && var2 == 0 && targetId == 700388) {
 								qs.setQuestVarById(2, 1); // 2: 1
-								if (qs.getQuestVarById(1) == 1) {
-									qs.setQuestVar(3); // 3
-									updateQuestStatus(env);
-									return true;
-								}
 								updateQuestStatus(env);
-								return true;
 							}
+							
+							// Checks if step is completed
+							var1 = qs.getQuestVarById(1);
+							var2 = qs.getQuestVarById(2);
+							if (var1 * var2 == 1) {
+								qs.setQuestVar(3); // 3
+								updateQuestStatus(env);
+							}
+							return true;
 					}
 					break;
 			}
@@ -139,8 +136,8 @@ public class _1092JosnacksDilemma extends QuestHandler {
 
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
@@ -148,7 +145,6 @@ public class _1092JosnacksDilemma extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (var == 2) {
 				qs.setQuestVarById(0, 1);
-				qs.setQuestVarById(1, 0);
 				updateQuestStatus(env);
 				return true;
 			}
