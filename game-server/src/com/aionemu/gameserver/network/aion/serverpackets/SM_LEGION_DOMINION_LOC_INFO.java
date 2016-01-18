@@ -8,7 +8,7 @@ import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LegionService;
 
 /**
- * @author Yeats
+ * @author Neon, modified Yeats
  *
  */
 public class SM_LEGION_DOMINION_LOC_INFO extends AionServerPacket {

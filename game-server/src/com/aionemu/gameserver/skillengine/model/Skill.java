@@ -54,6 +54,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -772,6 +773,25 @@ public class Skill {
 		}
 	}
 
+	private void addResistedEffectHateAndNotifyFriends(List<Effect> effects) {
+ 		if (effects == null || effects.isEmpty()) {
+ 			return;
+ 		}
+ 		for (Effect effect : effects) {
+ 			if (effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)) {
+ 				effect.getEffected().getAggroList().addHate(effector, 1);
+ 				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+ 
+ 					@Override
+ 					public void visit(Npc object) {
+ 						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected());
+ 					}
+ 
+ 				});
+ 			}
+ 		}
+ 	}
+	
 	public void applyEffect(List<Effect> effects) {
 		/**
 		 * Apply effects to effected objects
@@ -780,6 +800,7 @@ public class Skill {
 			effect.applyEffect();
 		}
 
+		addResistedEffectHateAndNotifyFriends(effects);
 		/**
 		 * Use penalty skill (now 100% success)
 		 */
