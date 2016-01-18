@@ -156,9 +156,10 @@ public class _14095PreparingForTheFuture extends QuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		int var = qs.getQuestVarById(0);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("IDLDF4A_ITEMUSEAREA_Q14095"))) {
-				if (qs.getQuestVarById(0) == 3) {
+			if (player.isInsideItemUseZone(ZoneName.get("IDLDF4A_ITEMUSEAREA_Q14095"))) {
+				if (var == 3) {
 					TeleportService2.teleportTo(player, 600030000, player.getInstanceId(), 304, 1718, 296, (byte) 48);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));// 3-4
 				}
