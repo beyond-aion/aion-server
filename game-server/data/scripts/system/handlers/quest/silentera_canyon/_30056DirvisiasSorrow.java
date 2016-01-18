@@ -66,7 +66,7 @@ public class _30056DirvisiasSorrow extends QuestHandler {
 				switch (dialog) {
 					case USE_OBJECT:
 						if (var == 0) {
-							QuestService.addNewSpawn(600010000, 1, 799034, 555.8842f, 307.8092f, 310.24997f, (byte) 0);
+							QuestService.addNewSpawn(600010000, player.getInstanceId(), 799034, 555.8842f, 307.8092f, 310.24997f, (byte) 0);
 							return useQuestObject(env, 0, 0, false, 0, 0, 0, 182209223, 1);
 						}
 				}

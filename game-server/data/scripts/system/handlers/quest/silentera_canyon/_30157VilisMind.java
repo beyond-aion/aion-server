@@ -63,7 +63,7 @@ public class _30157VilisMind extends QuestHandler {
 				switch (dialog) {
 					case USE_OBJECT:
 						if (var == 0) {
-							QuestService.addNewSpawn(600010000, 1, 799339, (float) 545.3877, (float) 1232.0298, (float) 304.3357, (byte) 76);
+							QuestService.addNewSpawn(600010000, player.getInstanceId(), 799339, (float) 545.3877, (float) 1232.0298, (float) 304.3357, (byte) 76);
 							return useQuestObject(env, 0, 0, false, 0, 0, 0, 182209254, 1);
 						}
 				}
