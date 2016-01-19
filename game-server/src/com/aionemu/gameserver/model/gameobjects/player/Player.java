@@ -179,7 +179,6 @@ public class Player extends Creature {
 	private boolean cooldownZero = false;
 	private boolean isUnderInvulnerableWing = false;
 	private boolean isWispable = true;
-	private boolean isCommandUsed = false;
 
 	private int abyssRankListUpdateMask = 0;
 
@@ -1967,20 +1966,6 @@ public class Player extends Creature {
 
 	public int floodMsgCount() {
 		return floodMsgCount;
-	}
-
-	/**
-	 * Set Player command Used
-	 */
-	public void setCommandUsed(boolean value) {
-		this.isCommandUsed = value;
-	}
-
-	/**
-	 * @return true if player has used command
-	 */
-	public boolean isCommandInUse() {
-		return this.isCommandUsed;
 	}
 
 	public void setRebirthRevive(boolean result) {
