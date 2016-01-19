@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -9,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.mail.MailMessage;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.MailServicePacket;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
 
 /**
  * @author kosyachok, Source
@@ -127,14 +128,11 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
 				writeMailMessage(mailMessage);
 				break;
 			case 2:
-				Collection<Letter> _letters;
-				if (!letters.isEmpty()) {
-					ListSplitter<Letter> splittedLetters = new ListSplitter<>(letters, 100, false);
-					_letters = splittedLetters.getNext();
-				} else {
-					_letters = letters;
-				}
-				writeLettersList(_letters, isExpress, unreadExpressCount + unreadBlackCloudCount);
+				Stream<Letter> letterStream = letters.stream();
+				if (isExpress)
+					letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread()); // remove all read or normal letters
+				letterStream = letterStream.sorted((thisLetter, nextLetter) -> nextLetter.getTimeStamp().compareTo(thisLetter.getTimeStamp()));
+				writeLettersList(letterStream.collect(Collectors.toList())); // reverse sorted list to display newest letter at the top
 				break;
 			case 3:
 				writeLetterRead(letter, time, totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);
