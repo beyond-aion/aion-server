@@ -231,7 +231,7 @@ public class DropInfo extends AdminCommand {
 					if (rule.getGlobalRuleNpcs() == null) {
 						// EXCLUSIONS:
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-						if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate || currentNpc.getSpawn() instanceof RiftSpawnTemplate
+						if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER || currentNpc.getSpawn() instanceof RiftSpawnTemplate
 							|| currentNpc.getSpawn() instanceof VortexSpawnTemplate || currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
 							continue;
 						}
@@ -241,7 +241,7 @@ public class DropInfo extends AdminCommand {
 							continue;
 						}
 						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-						if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE) || isNpcChest) {
+						if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER) || isNpcChest) {
 							continue;
 						}
 					}

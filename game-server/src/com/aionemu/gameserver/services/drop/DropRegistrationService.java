@@ -313,7 +313,7 @@ public class DropRegistrationService {
 					if (rule.getGlobalRuleNpcs() == null) {
 						// EXCLUSIONS:
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-						if (npc.getSpawn() instanceof SiegeSpawnTemplate)
+						if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 							continue;
 						// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
 						// continue;
@@ -330,7 +330,7 @@ public class DropRegistrationService {
 							continue;
 						}
 						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-						if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE) || isChest) {
+						if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER) || isChest) {
 							continue;
 						}
 					}
