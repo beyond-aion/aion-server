@@ -337,10 +337,6 @@ public class TradeService {
 			boolean validated = false;
 			for (int tradeInItemId : tradeInItemIds) {
 				if (requiredTradeInItem.getId() == tradeInItemId) {
-					if (player.getInventory().getItemCountByItemId(tradeInItemId) < requiredTradeInItem.getPrice()) {
-						AuditLogger.info(player, "TradeIn packet hack. Player does not have enoug item which the client sent to the server.");
-						return false;
-					}
 					validated = true;
 					break;
 				}
