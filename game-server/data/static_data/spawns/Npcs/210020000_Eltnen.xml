@@ -1912,6 +1912,10 @@
 		</spawn>
 		<!-- Hannet -->
 		<spawn npc_id="790004" respawn_time="295">
+			<spot x="1527.1958" y="507.39264" z="357.20093" h="64"/>
+		</spawn>
+		<!-- Aimone -->
+		<spawn npc_id="832829" respawn_time="295">
 			<spot x="1934.69" y="2015.01" z="361.725" h="46"/>
 		</spawn>
 		<!-- Mamaki Bruiser -->
