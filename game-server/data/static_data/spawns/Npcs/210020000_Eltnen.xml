@@ -6056,6 +6056,10 @@
 		<spawn npc_id="204003" respawn_time="295">
 			<spot x="1358.5502" y="2560.4783" z="278.7573" h="63"/>
 		</spawn>
+		<!-- LF2_Jail_Q1036 (Hierni's Cage Door) -->
+		<spawn npc_id="700180" respawn_time="295">
+			<spot x="1358.61" y="2560.47" z="278.14615" h="91" static_id="41"/>
+		</spawn>
 		<!-- Gyabrunerk -->
 		<spawn npc_id="798053" respawn_time="295">
 			<spot x="669.609" y="444.03" z="331.75" h="2"/>
