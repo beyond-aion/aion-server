@@ -151,8 +151,7 @@ public class AtreianPassportService {
 	private void sendPassport(Player player) {
 		Account pa = player.getPlayerAccount();
 		PlayerAccountData pad = pa.getPlayerAccountData(player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), pad.getCreationDate()
-			.toLocalDateTime().getYear(), pad.getCreationDate().toLocalDateTime().getMonthValue()));
+		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), pad.getCreationDate().toLocalDateTime()));
 	}
 
 	private boolean checkOnlineDate(Account pa) {

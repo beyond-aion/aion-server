@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.time.LocalDateTime;
+
 import com.aionemu.gameserver.model.gameobjects.player.passport.Passport;
 import com.aionemu.gameserver.model.gameobjects.player.passport.PassportsList;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -7,34 +9,31 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author ViAl
+ * @modified Neon
  */
 public class SM_ATREIAN_PASSPORT extends AionServerPacket {
 
+	private LocalDateTime accountCreationDate;
 	private PassportsList passports;
 	private int stamps;
-	private int year;
-	private int month;
 
-	public SM_ATREIAN_PASSPORT(PassportsList passports, int stamps, int year, int month) {
+	public SM_ATREIAN_PASSPORT(PassportsList passports, int stamps, LocalDateTime accountCreationDate) {
+		this.accountCreationDate = accountCreationDate;
 		this.passports = passports;
 		this.stamps = stamps;
-		this.month = month;
-		this.year = year;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(year);
-		writeH(month);
-		writeH(0);// unk //can be variable
+		writeH(accountCreationDate.getYear());
+		writeH(accountCreationDate.getMonthValue());
+		writeH(accountCreationDate.getDayOfMonth());
 		writeH(passports.getAllPassports().size());
-
 		for (Passport pp : passports.getAllPassports()) {
 			writeD(pp.getId());
-			writeD(stamps);
-			writeH(pp.getRewardStatus());
-			writeH(0);
-			writeD((int) (pp.getArriveDate().getTime() / 1000));
+			writeD(stamps); // wrong, this is the stamp count when each passport was received (current month sends current count for upcoming rewards)
+			writeD(pp.getRewardStatus()); // wrong: 0 = not yet arrived (upcoming this months rewards), 1 = arrived and not taken, 2 = arrived and taken, not arrived (last months rewards)
+			writeD((int) (pp.getArriveDate().getTime() / 1000)); // for upcoming rewards it's the first login time each day
 		}
 	}
 }
