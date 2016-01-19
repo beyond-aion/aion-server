@@ -204,6 +204,7 @@ public class ClassChangeService {
 		player.getCommonData().setPlayerClass(newClass);
 		player.getController().upgradePlayer();
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
+		SkillLearnService.addNewSkills(player);
 
 		if (updateDaevaStatus) {
 			if (!newClass.isStartingClass()) {
