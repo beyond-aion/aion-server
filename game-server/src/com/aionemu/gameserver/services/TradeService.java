@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javolution.util.FastSet;
 import javolution.util.FastTable;
 
 import org.slf4j.Logger;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.dataholders.TradeListData;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.MathUtil;
-import com.aionemu.gameserver.utils.OverfowException;
+import com.aionemu.gameserver.utils.OverflowException;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.SafeMath;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -284,8 +284,7 @@ public class TradeService {
 		return true;
 	}
 
-	public static boolean performBuyFromTradeInTrade(Player player, int npcObjectId, int itemId, int count, int tradeInListCount,
-		int tradeInItemObjectId1, int tradeInItemObjectId2, int tradeInItemObjectId3) {
+	public static boolean performBuyFromTradeInTrade(Player player, int npcObjectId, int itemId, int count, Set<Integer> tradeInItemObjectIds) {
 		if (!RestrictionsManager.canTrade(player)) {
 			return false;
 		}
@@ -293,12 +292,14 @@ public class TradeService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
 			return false;
 		}
-		VisibleObject visibleObject = player.getKnownList().getObject(npcObjectId);
-		if (visibleObject == null || !(visibleObject instanceof Npc) || MathUtil.getDistance(visibleObject, player) > 10)
+
+		if (!(player.getTarget() instanceof Npc))
 			return false;
-		Npc npc = (Npc) visibleObject;
-		if (!npc.canTradeIn())
+
+		Npc npc = (Npc) player.getTarget();
+		if (!npc.canTradeIn() || npc.getObjectId() != npcObjectId || MathUtil.getDistance(npc, player) > 10)
 			return false;
+
 		TradeListTemplate tradeInList = tradeListData.getTradeInListTemplate(npc.getNpcId());
 		boolean valid = false;
 		for (TradeTab tab : tradeInList.getTradeTablist()) {
@@ -315,52 +316,44 @@ public class TradeService {
 		if (itemTemplate.getMaxStackCount() < count)
 			return false;
 
-		/*** Start Implementing Anti-Cheat System ***/
-		/*
-		 * It has two means: 1. ItemTemplates has not updated yet 2. Client Packet Hack
-		 */
-		if (!(itemTemplate.getTradeinList().getTradeinItem().size() == tradeInListCount)) {
-			AuditLogger.info(player, "Possible Hack. The Tradein list count is difference of Server ItemTemplates.");
+		List<TradeinItem> requiredTradeInItems = itemTemplate.getTradeinList().getTradeinItem();
+
+		Set<Integer> tradeInItemIds = new FastSet<>();
+		for (Integer tradeInItemObjectId : tradeInItemObjectIds) {
+			Item checkItem = player.getInventory().getItemByObjId(tradeInItemObjectId);
+			if (checkItem == null) {
+				AuditLogger.info(player, "TradeIn packet hack. Player does not have the item which the client sent to the server.");
+				return false;
+			}
+			tradeInItemIds.add(checkItem.getItemId());
+		}
+
+		if (tradeInItemIds.size() != requiredTradeInItems.size()) {
+			AuditLogger.info(player, "TradeIn packet hack. The tradein list count differs from the servers templates.");
 			return false;
 		}
-		Item item1, item2, item3;
-		item1 = player.getInventory().getItemByObjId(tradeInItemObjectId1);
-		item2 = player.getInventory().getItemByObjId(tradeInItemObjectId2);
-		item3 = player.getInventory().getItemByObjId(tradeInItemObjectId3);
 
-		for (TradeinItem treadInList : itemTemplate.getTradeinList().getTradeinItem()) {
-			switch (tradeInListCount) {
-				case 1:
-					if (item1 == null)
-						return false;
-					if (item1.getItemId() != treadInList.getId()) {
-						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
-						return false;
-					}
-					continue;
-				case 2:
-					if (item1 == null || item2 == null)
-						return false;
-					if (item1.getItemId() != treadInList.getId() && item2.getItemId() != treadInList.getId()) {
-						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
+		for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
+			boolean validated = false;
+			for (int tradeInItemId : tradeInItemIds) {
+				if (requiredTradeInItem.getId() == tradeInItemId) {
+					if (player.getInventory().getItemCountByItemId(tradeInItemId) < requiredTradeInItem.getPrice()) {
+						AuditLogger.info(player, "TradeIn packet hack. Player does not have enoug item which the client sent to the server.");
 						return false;
 					}
-					continue;
-				case 3:
-					if (item1 == null || item2 == null || item3 == null)
-						return false;
-					if (item1.getItemId() != treadInList.getId() && item2.getItemId() != treadInList.getId() && item3.getItemId() != treadInList.getId()) {
-						AuditLogger.info(player, "Packet Hack. The Tradein items which sent by client are not same as Server.");
-						return false;
-					}
-					continue;
+					validated = true;
+					break;
+				}
+			}
+			if (!validated) {
+				AuditLogger.info(player, "TradeIn packet hack. Did not receive all required tradein items (expected " + requiredTradeInItem.getId() + ").");
+				return false;
 			}
 		}
-		/*** End Implementing Anti-Cheat System ***/
 
 		try {
-			for (TradeinItem treadInList : itemTemplate.getTradeinList().getTradeinItem()) {
-				if (player.getInventory().getItemCountByItemId(treadInList.getId()) < SafeMath.multSafe(treadInList.getPrice(), count))
+			for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
+				if (player.getInventory().getItemCountByItemId(requiredTradeInItem.getId()) < SafeMath.multSafe(requiredTradeInItem.getPrice(), count))
 					return false;
 			}
 
@@ -368,7 +361,7 @@ public class TradeService {
 			if (aquisition != null && (aquisition.getType() == AcquisitionType.ABYSS || aquisition.getType() == AcquisitionType.AP)) {
 				int requiredAp = (int) ((aquisition.getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
 				int diferenceAp = 0;
-				for (TradeinItem treadInList : itemTemplate.getTradeinList().getTradeinItem()) {
+				for (TradeinItem treadInList : requiredTradeInItems) {
 					ItemTemplate itemReq = DataManager.ITEM_DATA.getItemTemplate(treadInList.getId());
 					if (itemReq != null) {
 						diferenceAp += (int) ((itemReq.getAcquisition().getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D) * PricesService
@@ -377,20 +370,19 @@ public class TradeService {
 				}
 				if ((requiredAp - diferenceAp) > 0) {
 					if (player.getAbyssRank().getAp() < (requiredAp - diferenceAp)) {
-						// You do not have enough Abyss Points.
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT);
 						return false;
 					}
 					AbyssPointsService.addAp(player, -(requiredAp - diferenceAp));
 				}
 			}
 
-			for (TradeinItem treadInList : itemTemplate.getTradeinList().getTradeinItem()) {
-				if (!player.getInventory().decreaseByItemId(treadInList.getId(), SafeMath.multSafe(treadInList.getPrice(), count)))
+			for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
+				if (!player.getInventory().decreaseByItemId(requiredTradeInItem.getId(), SafeMath.multSafe(requiredTradeInItem.getPrice(), count)))
 					return false;
 			}
-		} catch (OverfowException e) {
-			AuditLogger.info(player, "OverfowException using tradeInTrade " + e.getMessage());
+		} catch (OverflowException e) {
+			AuditLogger.info(player, "OverflowException using tradeInTrade " + e.getMessage());
 			return false;
 		}
 
