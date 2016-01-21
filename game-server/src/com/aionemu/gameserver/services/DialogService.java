@@ -103,7 +103,8 @@ public class DialogService {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
-						PacketSendUtility.sendMessage(player, "Buy list is missing!!");
+						log.error("Buy list missing for npc " + npc.getNpcId());
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
 						break;
 					}
 					int tradeModifier = tradeListTemplate.getSellPriceRate();
@@ -117,11 +118,10 @@ public class DialogService {
 						break;
 					}
 					if (hasAnythingToSell)
-						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier()
+						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc.getObjectId(), tradeListTemplate, PricesService.getVendorBuyModifier()
 							* tradeModifier / 100));
-					else {
+					else
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
-					}
 					break;
 				}
 				case OPEN_STIGMA_WINDOW: { // stigma

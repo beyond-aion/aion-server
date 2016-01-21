@@ -35,7 +35,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemFactory;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -46,6 +49,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author ATracer, Rama, Wakizashi, xTz
+ * @modified Neon
  */
 public class TradeService {
 
@@ -54,38 +58,12 @@ public class TradeService {
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 
 	private static boolean canBuyLimitItem(Npc npc, Player player, TradeItem tradeItem) {
-		// check if soldOutItem
-		LimitedItem item = null;
-		item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
+		LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
 		if (item != null) {
-			if (item.getBuyLimit() == 0 && item.getDefaultSellLimit() != 0) { // type A
-				item.getBuyCount().putIfAbsent(player.getObjectId(), 0);
-				if (item.getSellLimit() - tradeItem.getCount() < 0)
-					return false;
-				item.setSellLimit(item.getSellLimit() - (int) tradeItem.getCount());
-			} else if (item.getBuyLimit() != 0 && item.getDefaultSellLimit() == 0) { // type B
-				item.getBuyCount().putIfAbsent(player.getObjectId(), 0);
-				if (item.getBuyLimit() - tradeItem.getCount() < 0)
-					return false;
-				if (item.getBuyCount().containsKey(player.getObjectId())) {
-					if (item.getBuyCount().get(player.getObjectId()) < item.getBuyLimit()) {
-						item.getBuyCount().put(player.getObjectId(), item.getBuyCount().get(player.getObjectId()) + (int) tradeItem.getCount());
-					} else
-						return false;
-				}
-			} else if (item.getBuyLimit() != 0 && item.getDefaultSellLimit() != 0) { // type C
-				item.getBuyCount().putIfAbsent(player.getObjectId(), 0);
-				if (item.getBuyLimit() - tradeItem.getCount() < 0 || item.getSellLimit() - tradeItem.getCount() < 0)
-					return false;
-
-				if (item.getBuyCount().containsKey(player.getObjectId())) {
-					if (item.getBuyCount().get(player.getObjectId()) < item.getBuyLimit()) {
-						item.getBuyCount().put(player.getObjectId(), item.getBuyCount().get(player.getObjectId()) + (int) tradeItem.getCount());
-					} else
-						return false;
-				}
-				item.setSellLimit(item.getSellLimit() - (int) tradeItem.getCount());
-			}
+			if (item.getDefaultSellLimit() > 0 && item.getSellLimit() - tradeItem.getCount() < 0)
+				return false;
+			if (item.getBuyLimit() > 0 && item.getBuyCount(player.getObjectId()) + tradeItem.getCount() > item.getBuyLimit())
+				return false;
 		}
 		return true;
 	}
@@ -160,7 +138,7 @@ public class TradeService {
 			return false;
 		}
 
-		// 5. check limits
+		// 5. check sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			if (!canBuyLimitItem(npc, player, tradeItem)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_BUYING_CANT_SELECT_NO_ITEMS);
@@ -185,21 +163,23 @@ public class TradeService {
 			}
 		}
 
-		// 7. finally add items
+		// 7. finally add items and update sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long count = ItemService.addItem(player, tradeItem.getItemTemplate().getTemplateId(), tradeItem.getCount());
-			if (count != 0) {
-				log.warn(String.format("CHECKPOINT: itemservice couldnt add all items on buy: %d %d %d %d", player.getObjectId(), tradeItem.getItemTemplate()
-					.getTemplateId(), tradeItem.getCount(), count));
-				return false;
+			long notAddedCount = ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), new ItemUpdatePredicate(ItemAddType.BUY, ItemUpdateType.INC_ITEM_BUY));
+
+			LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
+			if (item != null) {
+				if (item.getBuyLimit() > 0)
+					item.setBuyCount(player.getObjectId(), item.getBuyCount(player.getObjectId()) + (int) tradeItem.getCount());
+				if (item.getDefaultSellLimit() > 0)
+					item.setSellLimit(item.getSellLimit() - (int) tradeItem.getCount());
 			}
 
-			if (tradeItem.getCount() > 1) // You have purchased %1 %0s.
-				PacketSendUtility.sendPacket(player,
-					new SM_SYSTEM_MESSAGE(1300785, new DescriptionId(tradeItem.getItemTemplate().getNameId()), tradeItem.getCount()));
-			else
-				// You have purchased %0.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300784, new DescriptionId(tradeItem.getItemTemplate().getNameId())));
+			if (notAddedCount != 0) {
+				log.error(String.format("ItemService couldn't add all items (%d/%d) on buy: %d %d", notAddedCount, tradeItem.getCount(),
+					player.getObjectId(), tradeItem.getItemId()));
+				return false;
+			}
 		}
 
 		return true;
