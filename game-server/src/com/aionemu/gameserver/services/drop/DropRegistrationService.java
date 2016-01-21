@@ -169,8 +169,8 @@ public class DropRegistrationService {
 		boostDropRate += genesis.getGameStats().getStat(StatEnum.DR_BOOST, 0).getCurrent() / 100f;
 
 		// Some personal drop boost
-		// EoR 10% Boost drop rate
-		boostDropRate += genesis.getCommonData().getCurrentReposeEnergy() > 0 ? 0.1f : 0;
+		// EoR 5% Boost drop rate
+		boostDropRate += genesis.getCommonData().getCurrentReposeEnergy() > 0 ? 0.05f : 0;
 		// EoS 5% Boost drop rate
 		boostDropRate += genesis.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
