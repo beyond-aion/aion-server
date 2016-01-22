@@ -205,5 +205,12 @@ public class NpcAI2 extends AITemplate {
 	public boolean isMoveSupported() {
 		return getOwner().getGameStats().getMovementSpeedFloat() > 0 && !this.isInSubState(AISubState.FREEZE);
 	}
+	
+	/**
+	 * NCsoft uses different non visible npcs as a sensor to trigger different events
+	 */
+	public void handleCreatureDetected(Creature creature) {
+		
+	}
 
 }

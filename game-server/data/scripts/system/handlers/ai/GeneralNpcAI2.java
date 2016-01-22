@@ -126,6 +126,12 @@ public class GeneralNpcAI2 extends NpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 	}
+	
+	@Override
+	public void handleCreatureDetected(Creature creature) {
+		if (getOwner().getPosition().isInstanceMap())
+			getOwner().getPosition().getWorldMapInstance().getInstanceHandler().onCreatureDetected(getOwner(), creature);
+	}
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
