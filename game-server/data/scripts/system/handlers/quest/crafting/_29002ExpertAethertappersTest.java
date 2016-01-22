@@ -16,6 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _29002ExpertAethertappersTest extends QuestHandler {
 
 	private final static int questId = 29002;
+	private static final int itemId1 = 152003007; 
+	private static final int itemId2 = 152003008;
 
 	public _29002ExpertAethertappersTest() {
 		super(questId);
@@ -67,16 +69,17 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 				case 204257: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
-							long itemCount1 = player.getInventory().getItemCountByItemId(152003007);
-							long itemCount2 = player.getInventory().getItemCountByItemId(152003008);
-							if (itemCount1 > 0 && itemCount2 > 0) {
-								removeQuestItem(env, 152003007, 1);
-								removeQuestItem(env, 152003008, 1);
+							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
+							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
+							if (itemCount1 >= 1 && itemCount2 >= 1) {
+								removeQuestItem(env, itemId1, itemCount1);
+								removeQuestItem(env, itemId2, itemCount2);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
-								return sendQuestDialog(env, 1352);
-							} else
+								return sendQuestDialog(env, 5);
+							} else {
 								return sendQuestDialog(env, 10001);
+							}
 						}
 					}
 				}

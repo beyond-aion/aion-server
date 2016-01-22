@@ -37,14 +37,18 @@ public class _29001ExpertEssencetappingExpert extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204096) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					if (giveQuestItem(env, 182207141, 1))
+				switch(env.getDialog()) {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					else
-						return true;
+					case ASK_QUEST_ACCEPT:
+						return sendQuestDialog(env, 4);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182207141, 1);
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return sendQuestDialog(env, 1004);
 				}
-				else
-					return sendQuestStartDialog(env);
 			}
 		}
 
