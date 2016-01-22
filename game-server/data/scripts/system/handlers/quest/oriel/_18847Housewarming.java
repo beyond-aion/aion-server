@@ -40,6 +40,9 @@ public class _18847Housewarming extends QuestHandler {
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return sendQuestDialog(env, 1004);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
