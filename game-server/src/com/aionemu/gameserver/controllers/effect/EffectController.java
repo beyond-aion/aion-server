@@ -381,6 +381,38 @@ public class EffectController {
 		this.removeByDispelEffect(DispelType.SLOTTYPE, targetSlot.toString(), 255, 100, 100);
 	}
 
+	public boolean removeByEffectId(int effectId, int dispelLevel, int power) {
+		// abnormalEffectMap
+		for (Effect effect : abnormalEffectMap.values()) {
+			if (!effect.containsEffectId(effectId))
+				continue;
+			// check dispel level
+			if (effect.getReqDispelLevel() > dispelLevel)
+				continue;
+
+			if (removePower(effect, power)) {
+				effect.endEffect();
+				abnormalEffectMap.remove(effect.getStack());
+				return true;
+			}
+		}
+		// noshowEffects
+		for (Effect effect : noshowEffects.values()) {
+			if (!effect.containsEffectId(effectId))
+				continue;
+			// check dispel level
+			if (effect.getReqDispelLevel() > dispelLevel)
+				continue;
+
+			if (removePower(effect, power)) {
+				effect.endEffect();
+				noshowEffects.remove(effect.getStack());
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * @param dispelType
 	 * @param value
@@ -393,7 +425,6 @@ public class EffectController {
 		EffectType effectType = null;
 		SkillTargetSlot skillTargetSlot = null;
 		switch (dispelType) {
-			case EFFECTID:
 			case EFFECTIDRANGE:
 				effectId = Integer.parseInt(value);
 				break;
@@ -410,7 +441,6 @@ public class EffectController {
 			if (count == 0)
 				break;
 			switch (dispelType) {
-				case EFFECTID:
 				case EFFECTIDRANGE:
 					if (!effect.containsEffectId(effectId))
 						continue;
@@ -444,7 +474,6 @@ public class EffectController {
 			if (count == 0)
 				break;
 			switch (dispelType) {
-				case EFFECTID:
 				case EFFECTIDRANGE:
 					if (!effect.containsEffectId(effectId))
 						continue;
@@ -970,8 +999,11 @@ public class EffectController {
 		for (Effect effect : mapToUpdate.values()) {
 			if (nextEffect.getDispelCategory() == DispelCategoryType.EXTRA) {
 				if (effect.getDispelCategory() == DispelCategoryType.EXTRA) {
-					effect.endEffect();
-					return true;
+					if (effect.getSkillTemplate().getSkillId() != 21610 && effect.getSkillTemplate().getSkillId() != 21611
+						&& effect.getSkillTemplate().getSkillId() != 21612) {
+						effect.endEffect();
+						return true;
+					}
 				}
 			}
 		}
