@@ -5,13 +5,13 @@ import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRecipesDAO;
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_DELETE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
+ * @modified Neon
  */
 public class RecipeList {
 
@@ -28,26 +28,22 @@ public class RecipeList {
 		return recipeList;
 	}
 
-	public boolean addRecipe(int playerId, int recipeId) {
-		if (!isRecipePresent(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(playerId, recipeId)) {
+	public boolean addRecipe(Player player, int recipeId) {
+		if (!isRecipePresent(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(player.getObjectId(), recipeId)) {
 			recipeList.add(recipeId);
+			PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
 			return true;
 		}
 		return false;
 	}
 
-	public void deleteRecipe(Player player, int recipeId) {
-		if (recipeList.contains(recipeId)) {
-			if (DAOManager.getDAO(PlayerRecipesDAO.class).delRecipe(player.getObjectId(), recipeId)) {
-				recipeList.remove(recipeId);
-				PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
-			}
+	public boolean deleteRecipe(Player player, int recipeId) {
+		if (recipeList.contains(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).delRecipe(player.getObjectId(), recipeId)) {
+			recipeList.remove(recipeId);
+			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
+			return true;
 		}
-	}
-
-	public void autoLearnRecipe(Player player, int skillId, int skillLvl) {
-		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getAutolearnRecipes(player.getRace(), skillId, skillLvl))
-			addRecipe(player.getObjectId(), recipe.getId());
+		return false;
 	}
 
 	public boolean isRecipePresent(int recipeId) {

@@ -300,7 +300,7 @@ public class PlayerService {
 
 		// Starting skills
 		newPlayer.setSkillList(new PlayerSkillList());
-		SkillLearnService.addNewSkills(newPlayer);
+		SkillLearnService.learnNewSkills(newPlayer, 1, newPlayer.getLevel());
 
 		// Starting items
 		PlayerCreationData playerCreationData = playerInitialData.getPlayerCreationData(playerCommonData.getPlayerClass());

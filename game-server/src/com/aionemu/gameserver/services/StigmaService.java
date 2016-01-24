@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +17,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -131,7 +130,9 @@ public class StigmaService {
 
 			if (!player.getInventory().decreaseByItemId(141000001, shardCount))
 				return false;
-			player.getSkillList().addStigmaSkill(player, stigmaInfo.getSkills(), true);
+
+			for (StigmaSkill sSkill : stigmaInfo.getSkills())
+				player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
 		}
 		return true;
 	}
@@ -172,10 +173,7 @@ public class StigmaService {
 			for (StigmaSkill sSkill : stigmaInfo.getSkills()) {
 				int nameId = DataManager.SKILL_DATA.getSkillTemplate(sSkill.getSkillId()).getNameId();
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
-
 				SkillLearnService.removeSkill(player, sSkill.getSkillId());
-				// remove effect
-				player.getEffectController().removeEffect(sSkill.getSkillId());
 			}
 		}
 		return true;
@@ -185,54 +183,55 @@ public class StigmaService {
 	 * @param player
 	 */
 	public static void onPlayerLogin(Player player) {
-		List<Item> equippedItems = player.getEquipment().getEquippedItemsAllStigma();
-		for (Item item : equippedItems) {
-			if (item.getItemTemplate().isStigma()) {
-				Stigma stigmaInfo = item.getItemTemplate().getStigma();
-
-				if (stigmaInfo == null) {
-					log.warn("Stigma info missing for item: " + item.getItemTemplate().getTemplateId());
-					return;
+		if (player.havePermission(MembershipConfig.STIGMA_AUTOLEARN)) {
+			for (int level = 20; level <= player.getLevel(); level++) {
+				for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), level, player.getRace())) {
+					if (template.isStigma())
+						player.getSkillList().addTemporarySkill(player, template.getSkillId(), template.getSkillLevel());
 				}
-				player.getSkillList().addStigmaSkill(player, stigmaInfo.getSkills(), false);
 			}
+			return;
 		}
 
-		for (Item item : equippedItems) {
-			if (item.getItemTemplate().isStigma()) {
-				if (!isPossibleEquippedStigma(player, item)) {
-					AuditLogger.info(player, "Possible client hack stigma count big :O");
-					player.getEquipment().unEquipItem(item.getObjectId(), 0);
-					continue;
-				}
+		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
+			if (!item.getItemTemplate().isStigma()) {
+				log.warn("Stigma info missing for item: " + item.getItemId());
+				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				continue;
+			}
 
-				Stigma stigmaInfo = item.getItemTemplate().getStigma();
+			if (!isPossibleEquippedStigma(player, item)) {
+				AuditLogger.info(player, "Possible client hack stigma count big :O");
+				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				continue;
+			}
 
-				if (stigmaInfo == null) {
-					log.warn("Stigma info missing for item: " + item.getItemTemplate().getTemplateId());
-					player.getEquipment().unEquipItem(item.getObjectId(), 0);
-					continue;
-				}
+			if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
+				AuditLogger.info(player, "Possible client hack not valid for class.");
+				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				continue;
+			}
 
-				int needSkill = stigmaInfo.getRequireSkill().size();
-				for (RequireSkill rs : stigmaInfo.getRequireSkill()) {
-					for (int id : rs.getSkillIds()) {
-						if (player.getSkillList().isSkillPresent(id)) {
-							needSkill--;
-							break;
-						}
+			for (StigmaSkill sSkill : item.getItemTemplate().getStigma().getSkills())
+				player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
+		}
+
+		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
+			Stigma stigmaInfo = item.getItemTemplate().getStigma();
+			int needSkill = stigmaInfo.getRequireSkill().size();
+			for (RequireSkill rs : stigmaInfo.getRequireSkill()) {
+				for (int id : rs.getSkillIds()) {
+					if (player.getSkillList().isSkillPresent(id)) {
+						needSkill--;
+						break;
 					}
 				}
-				if (needSkill != 0) {
-					AuditLogger.info(player, "Possible client hack advenced stigma skill.");
-					player.getEquipment().unEquipItem(item.getObjectId(), 0);
-					continue;
-				}
-				if (item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass()) == false) {
-					AuditLogger.info(player, "Possible client hack not valid for class.");
-					player.getEquipment().unEquipItem(item.getObjectId(), 0);
-					continue;
-				}
+			}
+			if (needSkill != 0) {
+				AuditLogger.info(player, "Possible client hack advenced stigma skill.");
+				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				for (StigmaSkill sSkill : item.getItemTemplate().getStigma().getSkills())
+					SkillLearnService.removeSkill(player, sSkill.getSkillId());
 			}
 		}
 	}

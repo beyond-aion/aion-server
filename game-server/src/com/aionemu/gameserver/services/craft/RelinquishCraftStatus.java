@@ -121,7 +121,7 @@ public class RelinquishCraftStatus {
 		int skillLevel;
 		int maxCraftStatus = isExpert ? CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
 		int countCraftStatus;
-		for (PlayerSkillEntry skill : player.getSkillList().getBasicSkills()) {
+		for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
 			countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player)
 				+ CraftSkillUpdateService.getTotalExpertCraftingSkills(player) : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
 			if (countCraftStatus > maxCraftStatus) {

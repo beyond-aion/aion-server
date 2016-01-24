@@ -87,9 +87,9 @@ public class EnchantService {
 
 		float typeMod = itemTemplate.isWeapon() ? 0.6f : 0.4f;
 		int itemLevel = itemTemplate.getLevel();
-		
+
 		int averageLevel = (int) (itemLevel * 1.4f * (typeMod + qualityMod));
-		
+
 		int finalLevel = Rnd.get(averageLevel - 10, averageLevel + 10);
 
 		int stoneId = 166000191; // Alpha
@@ -330,9 +330,8 @@ public class EnchantService {
 			int buffId = getEquipBuff(targetItem);
 			targetItem.setBuffSkill(buffId);
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
-			if (targetItem.isEquipped()) {
-				SkillLearnService.addSkill(player, buffId);
-			}
+			if (targetItem.isEquipped())
+				player.getSkillList().addSkill(player, buffId, 1);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), addLevel,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}

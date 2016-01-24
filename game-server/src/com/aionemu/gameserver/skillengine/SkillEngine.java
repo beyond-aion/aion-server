@@ -171,12 +171,7 @@ public class SkillEngine {
 
 	public void activatePassiveSkills(Player player) {
 		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills())
-			activatePassiveSkill(player, skillEntry.getSkillId());
-	}
-
-	public void activatePassiveSkill(Player player, int skillId) {
-		Skill skill = getSkillFor(player, skillId, null);
-		if (skill != null && skill.isPassive())
-			skill.useSkill();
+			if (DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).isPassive())
+				applyEffectDirectly(skillEntry.getSkillId(), skillEntry.getSkillLevel(), player, player, 0);
 	}
 }

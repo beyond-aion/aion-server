@@ -179,6 +179,24 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 
 	public abstract void setPlayerLastTransferTime(final int playerId, final long time);
 
+	/**
+	 * Returns the character level of his last session.
+	 * 
+	 * @param playerObjectId
+	 * @return Old level, 0 on first DB initialization if there were already players in the table.
+	 * @see #storeOldCharacterLevel(int, int)
+	 */
+	public abstract int getOldCharacterLevel(int playerObjectId);
+
+	/**
+	 * Saves the last known character level.
+	 * 
+	 * @param playerObjectId
+	 * @param level
+	 * @see #getOldCharacterLevel(int)
+	 */
+	public abstract void storeOldCharacterLevel(int playerObjectId, int level);
+
 	@Override
 	public final String getClassName() {
 		return PlayerDAO.class.getName();

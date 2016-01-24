@@ -48,7 +48,6 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
@@ -278,6 +277,9 @@ public final class PlayerEnterWorldService {
 
 		World.getInstance().storeObject(player);
 
+		// if player skipped some levels offline, learn missing skills and stuff
+		player.getController().onLevelChange(DAOManager.getDAO(PlayerDAO.class).getOldCharacterLevel(player.getObjectId()), player.getLevel());
+
 		/**
 		 * Energy of Repose must be calculated before sending SM_STATS_INFO
 		 */
@@ -313,9 +315,7 @@ public final class PlayerEnterWorldService {
 		// Update player skills first!!!
 		AbyssSkillService.updateSkills(player);
 		// TODO: check the split size
-		client.sendPacket(new SM_SKILL_LIST(player.getSkillList().getBasicSkills()));
-		for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills())
-			client.sendPacket(new SM_SKILL_LIST(stigmaSkill));
+		client.sendPacket(new SM_SKILL_LIST(player.getSkillList().getAllSkills()));
 
 		if (player.getSkillCoolDowns() != null)
 			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));

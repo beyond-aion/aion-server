@@ -4,9 +4,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
@@ -18,16 +15,10 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.BonusPackService;
-import com.aionemu.gameserver.services.FactionPackService;
-import com.aionemu.gameserver.services.HTMLService;
-import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
@@ -344,53 +335,22 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	 * @param exp
 	 */
 	public void setExp(long exp) {
-		Player player = getPlayer();
-
-		if (exp != this.exp || exp == 0 && level == 0) {
+		if (exp != this.exp || level == 0 && exp == 0) {
 			PlayerExperienceTable pxt = DataManager.PLAYER_EXPERIENCE_TABLE;
 			int maxLevel = isDaeva || !online && (updateDaeva() || exp > pxt.getStartExpForLevel(10)) ? pxt.getMaxLevel() : 10;
-			long maxExp = pxt.getStartExpForLevel(maxLevel);
-
-			if (exp >= maxExp)
-				exp = maxExp;
-
-			this.exp = exp;
 			int oldLevel = level;
+
+			this.exp = Math.min(exp, pxt.getStartExpForLevel(maxLevel));
 			// maxLevel is 66 (10 for non daeva) but 65 (9 for non daeva) should be shown with full XP bar
-			int newLevel = Math.min(pxt.getLevelForExp(this.exp), maxLevel - 1);
-			if (player == null || newLevel <= oldLevel) {
-				level = newLevel;
-			} else {
-				while (level < newLevel) { // increment in 1 level steps for skill learning
-					level++;
-					if (HTMLConfig.ENABLE_GUIDES)
-						HTMLService.sendGuideHtml(player);
-					SkillLearnService.addNewSkills(player);
-				}
-			}
+			level = Math.min(pxt.getLevelForExp(this.exp), maxLevel - 1);
 
-			if (player != null && oldLevel != level) {
-				if (GSConfig.ENABLE_RATIO_LIMITATION
-					&& (player.getPlayerAccount().getNumberOf(race) == 1 || player.getPlayerAccount().getMaxPlayerLevel() == level)) {
-					if (oldLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL && level >= GSConfig.RATIO_MIN_REQUIRED_LEVEL)
-						GameServer.updateRatio(getRace(), 1);
-					else if (oldLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && level < GSConfig.RATIO_MIN_REQUIRED_LEVEL)
-						GameServer.updateRatio(getRace(), -1);
-				}
-				updateMaxRepose();
-				resetSalvationPoints();
-				player.getNpcFactions().onLevelUp();
-				player.getController().upgradePlayer();
-				PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
-
-				BonusPackService.getInstance().addPlayerCustomReward(player);
-				FactionPackService.getInstance().addPlayerCustomReward(player);
+			Player player = getPlayer();
+			if (player != null) {
+				player.getController().onLevelChange(oldLevel, level);
+				PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
+					getMaxReposeEnergy()));
 			}
 		}
-
-		if (player != null)
-			PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
-				getMaxReposeEnergy()));
 	}
 
 	public void setNoExp(boolean value) {
@@ -406,10 +366,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	 */
 	public final Race getRace() {
 		return race;
-	}
-
-	public Race getOppositeRace() {
-		return race == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
 	}
 
 	/**
@@ -695,7 +651,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			return false;
 
 		setDaeva(true);
-		CraftSkillUpdateService.getInstance().setMorphRecipe(this, player);
 		return true;
 	}
 }

@@ -71,7 +71,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 					while (rset.next()) {
 						int id = rset.getInt("skill_id");
 						int lv = rset.getInt("skill_level");
-						skills.add(new PlayerSkillEntry(id, false, lv, PersistentState.UPDATED));
+						skills.add(new PlayerSkillEntry(id, lv, false, PersistentState.UPDATED));
 					}
 				}
 			}

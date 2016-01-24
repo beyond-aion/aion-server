@@ -1911,6 +1911,10 @@ public class Player extends Creature {
 		return playerCommonData.getRace();
 	}
 
+	public Race getOppositeRace() {
+		return getRace() == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
+	}
+
 	private PlayerVarsDAO daoVars;
 	private Map<String, Object> vars = new FastMap<>();
 

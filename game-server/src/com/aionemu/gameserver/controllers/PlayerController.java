@@ -14,6 +14,9 @@ import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.GameServer;
+import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -58,6 +61,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHERABLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NEARBY_QUESTS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
@@ -72,12 +76,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.DuelService;
+import com.aionemu.gameserver.services.FactionPackService;
+import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -241,8 +249,8 @@ public class PlayerController extends CreatureController<Player> {
 		for (Effect ef : getOwner().getEffectController().getAbnormalEffects()) {
 			if (ef.isDeityAvatar()) {
 				// remove abyss transformation if worldtype != abyss && worldtype != balaurea && worldType != panesterra
-				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA && getOwner().getWorldType() != WorldType.PANESTERRA
-					|| getOwner().isInInstance()) {
+				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA
+					&& getOwner().getWorldType() != WorldType.PANESTERRA || getOwner().isInInstance()) {
 					ef.endEffect();
 					getOwner().getEffectController().clearEffect(ef);
 				}
@@ -635,19 +643,46 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
+	public void onLevelChange(int oldLevel, int newLevel) {
+		if (oldLevel == newLevel)
+			return;
+
+		Player player = getOwner();
+		int minNewLevel = oldLevel < newLevel ? oldLevel + 1 : oldLevel - 1; // for skill learning and other stuff that only wants the new level(s)
+
+		if (GSConfig.ENABLE_RATIO_LIMITATION
+			&& (player.getPlayerAccount().getNumberOf(player.getRace()) == 1 || player.getPlayerAccount().getMaxPlayerLevel() == newLevel)) {
+			if (oldLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL)
+				GameServer.updateRatio(player.getRace(), 1);
+			else if (oldLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL)
+				GameServer.updateRatio(player.getRace(), -1);
+		}
+
+		player.getCommonData().updateMaxRepose();
+		player.getCommonData().resetSalvationPoints();
+		upgradePlayer();
+		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, newLevel), true);
+
+		player.getNpcFactions().onLevelUp();
+		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
+		updateNearbyQuests();
+		if (HTMLConfig.ENABLE_GUIDES && player.isSpawned())
+			HTMLService.sendGuideHtml(player, minNewLevel, newLevel);
+		SkillLearnService.learnNewSkills(player, minNewLevel, newLevel);
+		BonusPackService.getInstance().addPlayerCustomReward(player);
+		FactionPackService.getInstance().addPlayerCustomReward(player);
+	}
+
 	public void upgradePlayer() {
 		Player player = getOwner();
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getLifeStats().updateCurrentStats();
 		player.getGameStats().updateStatsVisually();
 
-		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
-		updateNearbyQuests();
-
-		if (player.isInTeam())
+		if (player.isInTeam()) // SM_GROUP_MEMBER_INFO / SM_ALLIANCE_MEMBER_INFO task
 			TeamEffectUpdater.getInstance().startTask(player);
 
-		if (player.isLegionMember())
+		if (player.isLegionMember()) // SM_LEGION_UPDATE_MEMBER
 			LegionService.getInstance().updateMemberInfo(player);
 	}
 

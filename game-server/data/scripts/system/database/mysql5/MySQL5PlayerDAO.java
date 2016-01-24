@@ -695,6 +695,30 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		});
 	}
 
+	public int getOldCharacterLevel(int playerObjectId) {
+		int oldLevel = 0;
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
+			stmt.setInt(1, playerObjectId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				oldLevel = rs.getInt("old_level");
+			}
+		} catch (Exception e) {
+			log.error("Error reading old_level for player: " + playerObjectId, e);
+		}
+		return oldLevel;
+	}
+
+	public void storeOldCharacterLevel(int playerObjectId, int level) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET old_level=? WHERE id=?")) {
+			stmt.setInt(1, level);
+			stmt.setInt(2, playerObjectId);
+			stmt.execute();
+		} catch (Exception e) {
+			log.error("Error storing old_level: " + level + " for player: " + playerObjectId, e);
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */

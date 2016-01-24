@@ -62,7 +62,7 @@ public class ItemEquipmentListener {
 		}
 		if (item.getBuffSkill() != 0) {
 			SkillTemplate buffSkill = DataManager.SKILL_DATA.getSkillTemplate(item.getBuffSkill());
-			SkillLearnService.addSkill(owner, item.getBuffSkill());
+			owner.getSkillList().addSkill(owner, item.getBuffSkill(), 1);
 			HashMap<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());

@@ -4,12 +4,12 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author KID
+ * @modified Neon
  */
 public class RecipeService {
 
@@ -61,12 +61,15 @@ public class RecipeService {
 		if (template == null)
 			return false;
 
-		if (player.getRecipeList().addRecipe(player.getObjectId(), recipeId)) {
-			PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
+		if (player.getRecipeList().addRecipe(player, recipeId)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARN(recipeId, player.getName()));
 			return true;
 		}
 		return false;
 	}
 
+	public static void autoLearnRecipes(Player player, int skillId, int skillLvl) {
+		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getAutolearnRecipes(player.getRace(), skillId, skillLvl))
+			player.getRecipeList().addRecipe(player, recipe.getId());
+	}
 }

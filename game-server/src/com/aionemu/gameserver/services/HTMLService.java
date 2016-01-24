@@ -86,9 +86,9 @@ public class HTMLService {
 		}
 	}
 
-	public static void sendGuideHtml(Player player) {
-		if (player.getLevel() > 1) {
-			GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player.getRace(), player.getLevel());
+	public static void sendGuideHtml(Player player, int fromLevel, int toLevel) {
+		for (int level = fromLevel; level <= toLevel; level++) {
+			GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player.getRace(), level);
 
 			for (GuideTemplate template : surveyTemplate) {
 				if (!template.isActivated())
@@ -158,6 +158,7 @@ public class HTMLService {
 				}
 			}
 			DAOManager.getDAO(GuideDAO.class).deleteGuide(guide.getGuideId());
+			IDFactory.getInstance().releaseId(guide.getGuideId());
 			items.clear();
 		}
 	}
