@@ -23,9 +23,9 @@
 		[END] SUMMARY
 	-->
 	<!-- REPORTING QUESTS -->
-	<report_to id="1686" start_npc_ids="204500" end_npc_ids="278501"/>
+	<report_to id="1686" start_npc_ids="832824" end_npc_ids="204500"/>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="1685" start_npc_ids="204833" end_npc_ids="204500"/>
+	<item_collecting id="1685" start_npc_ids="832824"/>
 	<item_collecting id="1688" start_npc_ids="204601"/>
 	<item_collecting id="1690" start_npc_ids="204601"/>
 	<item_collecting id="2631" start_npc_ids="204784"/>
