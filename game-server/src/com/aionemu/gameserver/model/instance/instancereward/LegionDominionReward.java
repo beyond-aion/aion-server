@@ -25,6 +25,10 @@ public class LegionDominionReward  extends InstanceReward<InstancePlayerReward> 
 		super(mapId, instanceId);
 	}
 
+	public void addPoints(int points) {
+		this.points += points;
+	}
+	
 	public int getPoints() {
 		return points;
 	}

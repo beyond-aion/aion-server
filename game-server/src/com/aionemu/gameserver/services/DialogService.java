@@ -463,6 +463,8 @@ public class DialogService {
 				return player.getInventory().getItemCountByItemId(value) == 0;
 			case ABYSSRANK:
 				return player.getAbyssRank().getRank().getId() < value;
+			case TARGET_LEGION_DOMINION:
+				return false; // TODO
 			default:
 				return false;
 		}
