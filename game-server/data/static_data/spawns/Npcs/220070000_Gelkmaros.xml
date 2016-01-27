@@ -263,6 +263,10 @@
 		<spawn npc_id="799243" respawn_time="295">
 			<spot x="1824.85" y="2929.91" z="548.526" h="30"/>
 		</spawn>
+		<!-- Atonoc -->
+		<spawn npc_id="833007" respawn_time="295">
+            <spot x="1813.9" y="2929.6" z="554.7963" h="53"/>
+        </spawn>
 		<!-- Atrum -->
 		<spawn npc_id="799233" respawn_time="295">
 			<spot x="1739.92" y="2907.12" z="555.236" h="80"/>
@@ -2587,6 +2591,10 @@
 		<spawn npc_id="799331" respawn_time="295">
 			<spot x="1760.06" y="2822.12" z="533.01" h="10"/>
 		</spawn>
+		<!-- Kampechi -->
+		<spawn npc_id="833008" respawn_time="295">
+            <spot x="1813.0" y="2927.3" z="554.7982" h="53"/>
+        </spawn>
 		<!-- Kantele -->
 		<spawn npc_id="799255" respawn_time="295">
 			<spot x="122.264" y="2840.49" z="571.186"/>
