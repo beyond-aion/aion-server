@@ -192,11 +192,11 @@ public class WalkManager {
 		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
 		if (walkPause == 0) {
 			npcAI.getOwner().getMoveController().resetMove();
-			npcAI.getOwner().getMoveController().chooseNextStep();
-			npcAI.getOwner().getMoveController().moveToNextPoint();
+			if(npcAI.getOwner().getMoveController().isNextRouteStepChosen())
+				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
 			npcAI.getOwner().getMoveController().abortMove();
-			npcAI.getOwner().getMoveController().chooseNextStep();
+			npcAI.getOwner().getMoveController().isNextRouteStepChosen();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override

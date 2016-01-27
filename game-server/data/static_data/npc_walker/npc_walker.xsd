@@ -24,6 +24,7 @@
 		<xs:attribute name="y" type="xs:float" use="required" />
 		<xs:attribute name="z" type="xs:float" use="required" />
 		<xs:attribute name="rest_time" type="xs:int" use="optional" default="0" />
+		<xs:attribute name="stop" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:simpleType name="formationType">
 		<xs:restriction base="xs:string">

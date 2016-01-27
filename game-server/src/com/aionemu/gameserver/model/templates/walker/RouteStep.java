@@ -28,6 +28,9 @@ public class RouteStep {
 
 	@XmlAttribute(name = "rest_time", required = true)
 	private Integer time = 0;
+	
+	@XmlAttribute(name = "stop")
+	private boolean isStop = false;
 
 	@XmlTransient
 	private RouteStep nextStep;
@@ -86,6 +89,10 @@ public class RouteStep {
 
 	public void setRouteStep(int routeStep) {
 		this.routeStep = routeStep;
+	}
+	
+	public boolean isStop() {
+		return isStop;
 	}
 
 }
