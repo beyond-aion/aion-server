@@ -73,8 +73,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		PlayerCommonData playerCommonData = new PlayerCommonData(IDFactory.getInstance().nextId());
 		playerCommonData.setName(name);
 		// read common data
-		playerCommonData.setExp(readQ());
 		playerCommonData.setPlayerClass(PlayerClass.getPlayerClassById((byte) readD()));
+		playerCommonData.setExp(readQ());
 		playerCommonData.setRace(readD() == 0 ? Race.ELYOS : Race.ASMODIANS);
 		playerCommonData.setGender(readD() == 0 ? Gender.MALE : Gender.FEMALE);
 		playerCommonData.setTitleId(readD());
@@ -216,9 +216,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				int newId = IDFactory.getInstance().nextId();
 				// bonus probably is lost, don't know [RR]
 				// dye expiration is lost
+				// plume Bonus is lost
 				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill);
+					packCount, itemAmplified, buffSkill, 0);
 				if (manastones.size() > 0) {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -305,9 +306,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				int newId = IDFactory.getInstance().nextId();
 				// bonus probably is lost, don't know [RR]
 				// dye expiration is lost
+				// Plume Bonus is lost
 				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill);
+					packCount, itemAmplified, buffSkill, 0);
 				if (manastones.size() > 0) {
 					for (int[] stone : manastones) {
 						ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -473,7 +475,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int recipeId = readD();
 
 			if (PlayerTransferConfig.ALLOW_RECIPES)
-				player.getRecipeList().addRecipe(player.getObjectId(), recipeId);
+				player.getRecipeList().addRecipe(player, recipeId);
 		}
 
 		// read quest data

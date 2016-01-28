@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
@@ -10,10 +10,10 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 
 /**
  * @author kosyachok, Source
+ * @modified Neon
  */
 public abstract class MailServicePacket extends AionServerPacket {
 
-	// private static final Logger log = LoggerFactory.getLogger(MailServicePacket.class);
 	protected Player player;
 
 	/**
@@ -23,25 +23,19 @@ public abstract class MailServicePacket extends AionServerPacket {
 		this.player = player;
 	}
 
-	protected void writeLettersList(Collection<Letter> letters, boolean isPostman, int showCount) {
+	protected void writeLettersList(List<Letter> letters) {
+		int maxDisplayableSlots = 256; // 0 to 255
+		int lettersToDisplay = Math.min(maxDisplayableSlots, letters.size());
 		writeD(player.getObjectId());
 		writeC(0);
-		writeH(isPostman ? -showCount : -letters.size()); // -loop cnt [stupid nc shit!]
-		int counter = 0;
-		for (Letter letter : letters) {
-			if (counter > 99)
-				break;
-			if (isPostman) {
-				if (!letter.isExpress())
-					continue;
-				else if (!letter.isUnread())
-					continue;
-			}
-
+		writeC(maxDisplayableSlots - lettersToDisplay); // freeSlots
+		writeC(maxDisplayableSlots - 1); // last displayable slot number (255)
+		for (int i = 0; i < lettersToDisplay; i++) {
+			Letter letter = letters.get(i);
 			writeD(letter.getObjectId());
 			writeS(letter.getSenderName());
 			writeS(letter.getTitle());
-			writeC(letter.isUnread() ? 0 : 1);
+			writeC(letter.isUnread() ? 0 : 1); // isRead
 			if (letter.getAttachedItem() != null) {
 				writeD(letter.getAttachedItem().getObjectId());
 				writeD(letter.getAttachedItem().getItemTemplate().getTemplateId());
@@ -51,7 +45,6 @@ public abstract class MailServicePacket extends AionServerPacket {
 			}
 			writeQ(letter.getAttachedKinah());
 			writeC(letter.getLetterType().getId());
-			counter++;
 		}
 	}
 

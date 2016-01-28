@@ -34,6 +34,7 @@ public class TemperingEffect implements StatOwner {
 			st = StatEnum.BOOST_MAGICAL_SKILL;
 			value = PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL.getBoostValue() * item.getTempering();
 		}
+		value += item.getRndPlumeBonusValue();
 		functions.add(new StatAddFunction(st, value, true));
 		functions.add(new StatAddFunction(StatEnum.MAXHP, PlumStatEnum.PLUM_HP.getBoostValue() * item.getTempering(), true));
 		player.getGameStats().addEffect(TemperingEffect.this, functions);

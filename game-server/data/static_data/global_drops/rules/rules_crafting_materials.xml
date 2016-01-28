@@ -144,7 +144,8 @@
 	<!-- Enigmatic Ore -->
 	<gd_rule rule_name="Enigmatic Ore" base_chance="2" min_diff="0" max_diff="4">
 		<gd_maps>
-			<gd_map map_id="600070000" name="Idian Depths" />
+			<gd_map map_id="210090000" name="Idian Depths Light"/>
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -547,6 +548,24 @@
 			<gd_item id="152011091" name="Master Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Construction Flux" base_chance="2.5" min_diff="-8" max_diff="32">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<!-- Level 18 -->
+			<gd_item id="152011092" name="Minor Construction Flux" />
+			<!-- Level 21 -->
+			<gd_item id="152011093" name="Lesser Construction Flux" />
+			<!-- Level 25 -->
+			<gd_item id="152011094" name="Construction Flux" />
+			<!-- Level 33 -->
+			<gd_item id="152011095" name="Major Construction Flux" />
+			<!-- Level 42 -->
+			<gd_item id="152011096" name="Finest Construction Flux" />
+		</gd_items>
+	</gd_rule>
 	<!-- Balic Hearts -->
 	<gd_rule rule_name="Balaur Heart" base_chance="5.5" min_diff="-9" max_diff="0">
 		<gd_races>
@@ -586,7 +605,7 @@
 			<gd_item id="152013043" name="Mortal Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -607,7 +626,7 @@
 			<gd_item id="152013015" name="Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-4" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -620,7 +639,7 @@
 			<gd_item id="152013025" name="Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-4" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -646,7 +665,7 @@
 			<gd_item id="152013044" name="Deadly Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -668,7 +687,7 @@
 			<gd_item id="152013018" name="Fatal Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-4" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -681,7 +700,7 @@
 			<gd_item id="152013026" name="Fatal Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-4" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -707,7 +726,7 @@
 			<gd_item id="152013045" name="Malicious Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.5" min_diff="-4" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.5" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -718,6 +737,15 @@
 			<gd_item id="152013021" name="Clouded Execration of Wrath" />
 			<gd_item id="152013024" name="Furious Execration of Terror" />
 			<gd_item id="152013027" name="Inescapable Execration of Pleasure" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.5" min_diff="-2" max_diff="0">
+		<gd_races>
+			<gd_race race="DRAKAN" />
+			<gd_race race="NAGA" />
+			<gd_race race="LIZARDMAN" />
+		</gd_races>
+		<gd_items>
 			<!-- Level 60 -->
 			<gd_item id="152013030" name="Clouded Urge of Wrath" />
 			<gd_item id="152013033" name="Furious Urge of Terror" />
@@ -821,144 +849,712 @@
 			<gd_item id="152014024" name="Gleaming Balaur Blood" />
 		</gd_items>
 	</gd_rule>
-	<!-- Drana -->
-	<gd_rule rule_name="Concentrated Drana" base_chance="25">
+	<!-- Animas -->
+	<!-- TODO: Rest of animas -->
+	<gd_rule rule_name="Vengeful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300040000" name="Dark_Poeta"/>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215280" name="Tahabata Pyrelord"/>
-			<gd_npc npc_id="215281" name="Calindi Flamelord"/>
-		</gd_npcs>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_ALPHA_220100000" />
+			<gd_zone zone="IDE_MINE_ALPHA_1_220100000" />
+			<gd_zone zone="IDE_MINE_ALPHA_2_210090000" />
+			<gd_zone zone="IDE_MINE_ALPHA_3_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
 		<gd_items>
-			<gd_item id="152012805" name="Concentrated Drana"/>
+			<gd_item id="152012569" name="Vengeful Anima" />
 		</gd_items>
 	</gd_rule>
-	<!-- Logs -->
-	<gd_rule rule_name="Betua Log" base_chance="5">
+	<gd_rule rule_name="Hopeless Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="210010000" name="Poeta"/>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
-		<gd_npc_names>
-			<gd_npc_name function="EQUALS" value="Dukaki Woodcutter"/>
-			<gd_npc_name function="EQUALS" value="Dukaki Lumberjack"/>
-		</gd_npc_names>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_BETA_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_1_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_2_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_3_220100000" />
+			<gd_zone zone="IDE_MINE_BETA_4_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_5_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_6_210090000" />
+			<gd_zone zone="IDE_MINE_BETA_7_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
 		<gd_items>
-			<gd_item id="152000501"/>
+			<gd_item id="152012570" name="Hopeless Anima" />
 		</gd_items>
 	</gd_rule>
-	<!-- Ores -->
-	<gd_rule rule_name="Verteron Ore" base_chance="0.75" >
+	<gd_rule rule_name="Zealous Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="210030000" name="Verteron"/>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
-		<gd_npc_names>
-			<gd_npc_name function="EQUALS" value="Dukaki Miner"/>
-			<gd_npc_name function="EQUALS" value="Dukaki Peon"/>
-		</gd_npc_names>
+		<gd_zones>
+			<gd_zone zone="IDE_MINE_GAMMA_220100000" />
+			<gd_zone zone="IDE_MINE_GAMMA_1_220100000" />
+			<gd_zone zone="IDE_MINE_GAMMA_2_210090000" />
+			<gd_zone zone="IDE_MINE_GAMMA_3_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
 		<gd_items>
-			<gd_item id="152000101" name="Silver Ore"/>
-			<gd_item id="152000201" name="Iron Ore"/>
-			<gd_item id="152000301" name="Rose Quartz Ore"/>
-			<gd_item id="152000302" name="Amethyst Ore"/>
-			<gd_item id="152000303" name="Crystal Ore"/>
+			<gd_item id="152012571" name="Zealous Anima" />
 		</gd_items>
 	</gd_rule>
-	<!-- Fragments -->
-	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" >
+	<gd_rule rule_name="Ambitious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="210030000" name="Verteron"/>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
 		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="210343" name="Ancient Elyos Spirit"/>
-		</gd_npcs>
+		<gd_zones>
+			<gd_zone zone="IDIUM_REACTOR_COMPLEX_220100000" />
+			<gd_zone zone="IDIUM_REACTOR_COMPLEX_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
 		<gd_items>
+			<gd_item id="152012572" name="Ambitious Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Remorseful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TOWER_APPROACH_220100000" />
+			<gd_zone zone="TOWER_APPROACH_1_210090000" />
+			<gd_zone zone="DANUAR_PROCESSIONAL_220100000" />
+			<gd_zone zone="DANUAR_PROCESSIONAL_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012573" name="Remorseful Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Avaricious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="GRAND_PASSAGE_220100000" />
+			<gd_zone zone="GRAND_PASSAGE_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012574" name="Avaricious Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Desperate Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="BERITRAS_FIST_GARRISON_220100000" />
+			<gd_zone zone="BERITRAS_FIST_GARRISON_1_210090000" />
+			<gd_zone zone="CLAWED_FIST_GARRISON_220100000" />
+			<gd_zone zone="CLAWED_FIST_GARRISON_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012575" name="Desperate Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Deluded Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="FIRST_CANAL_220100000" />
+			<gd_zone zone="FIRST_CANAL_1_210090000" />
+			<gd_zone zone="SECOND_CANAL_220100000" />
+			<gd_zone zone="SECOND_CANAL_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012576" name="Deluded Anima" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Wrathful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TOWER_ENTRYWAY_220100000" />
+			<gd_zone zone="TOWER_ENTRYWAY_1_210090000" />
+			<gd_zone zone="TOWER_MAUSOLEUM_220100000" />
+			<gd_zone zone="TOWER_MAUSOLEUM_1_210090000" />
+			<gd_zone zone="DANUAR_MAUSOLEUM_220100000" />
+			<gd_zone zone="DANUAR_MAUSOLEUM_1_210090000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012577" name="Wrathful Anima" />
+		</gd_items>
+	</gd_rule>
+	<!-- Elyos Spirit -->
+	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="UNDEADLIGHT_FI"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 17 -->
 			<gd_item id="152012001" name="Ectoplasm Fragment"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="320100000" name="Fire_Temple"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="212808" name="Temple Caryatid"/>
-		</gd_npcs>
+	<!-- Wriggot -->
+	<gd_rule rule_name="Wriggot Scale" base_chance="4" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MILLIPEDE"/>
+		</gd_npc_groups>
 		<gd_items>
-			<gd_item id="152012509" name="Desert Caryatid Fragment"/>
-		</gd_items>
-	</gd_rule>
-	<!-- Scales -->
-	<gd_rule rule_name="Wriggot Scale" base_chance="4" >
-		<gd_maps>
-			<gd_map map_id="210030000" name="Verteron"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="210274" name="Violent Wriggot"/>
-		</gd_npcs>
-		<gd_items>
+			<!-- Level 18 -->
 			<gd_item id="152012002" name="Wriggot Scale"/>
 		</gd_items>
 	</gd_rule>
-	<!-- Stones -->
-	<gd_rule rule_name="Stone of Silence" base_chance="100" >
-		<gd_maps>
-			<gd_map map_id="320100000" name="Fire_Temple"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="212846" name="Kromede the Corrupt"/>
-			<gd_npc npc_id="214621" name="Vile Judge Kromede"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012530" name="Stone of Silence"/>
-		</gd_items>
-	</gd_rule>
-	<!-- Scrap -->
-	<gd_rule rule_name="Earth Scrap" base_chance="33" >
-		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012592" name="Earth Scrap"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Earth Scrap" base_chance="100" >
-		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012592" name="Earth Scrap"/>
-		</gd_items>
-	</gd_rule>
-	<!-- Crystal/Ore -->
-	<gd_rule rule_name="Crystal and Ore" base_chance="13.33" >
-		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012600" name="Patience Crystal"/>
-			<gd_item id="152012602" name="Ore of Patience"/>
-		</gd_items>
-	</gd_rule>
-	<!-- Ceramium Fragment -->
-	<gd_rule rule_name="Ceramium Fragment" base_chance="1.5">
+	<!-- Manduri -->
+	<gd_rule rule_name="Manduri Fur Ball" base_chance="2.5" min_diff="-2" max_diff="2">
 		<gd_worlds>
-			<gd_world wd_type="BALAUREA_HIGH"/>
+			<gd_world wd_type="ELYSEA"/>
 		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MANDURIT"/>
+		</gd_npc_groups>
 		<gd_items>
-			<gd_item id="152012578" name="Ceramium Fragment"/>
+			<!-- Level 22 -->
+			<gd_item id="152012003" name="Manduri Fur Ball"/>
 		</gd_items>
 	</gd_rule>
-	<!-- Calydon Meat -->
-	<gd_rule rule_name="Calydon Meat" base_chance="100" fixed_chance="true">
+	<!-- Monitor -->
+	<gd_rule rule_name="Monitor Back Skin" base_chance="2.5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="VARANUS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 23 -->
+			<gd_item id="152012004" name="Monitor Back Skin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Monitor Meat" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="VARANUS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015504" name="Raw Monitor Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Spiner -->
+	<gd_rule rule_name="Spiner Red Carapace" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="LOBSTER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012005" name="Spiner Red Carapace"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Caryatid -->
+	<gd_rule rule_name="Ancient Caryatid Fragment" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MAIDENGOLEM"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012006" name="Ancient Caryatid Fragment"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="OTHER_INSTANCES"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MAIDENGOLEM"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012509" name="Desert Caryatid Fragment"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Basilisk -->
+	<gd_rule rule_name="Basilisk Backbone" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BASILISK"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 27 -->
+			<gd_item id="152012007" name="Basilisk Backbone"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Basilisk Meat" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BASILISK"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015009" name="Raw Basilisk Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Basilisk Back Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BASILISK"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 26 -->
+			<gd_item id="152012507" name="Basilisk Back Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Wind Spirit -->
+	<gd_rule rule_name="Wind Spirit Mane" base_chance="6" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ELEMENTALAIR1"/>
+			<gd_npc_group group="ELEMENTALAIR2"/>
+			<gd_npc_group group="ELEMENTALAIR3"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152012009" name="Wind Spirit Mane"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Gust Crystal" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ELEMENTALAIR1"/>
+			<gd_npc_group group="ELEMENTALAIR2"/>
+			<gd_npc_group group="ELEMENTALAIR3"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152012042" name="Gust Crystal"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Gargoyle -->
+	<gd_rule rule_name="Eracus Gargoyle Fragment" base_chance="6" min_diff="-2" max_diff="2">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen"/>
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="GARGOYLE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 32 -->
+			<gd_item id="152012010" name="Eracus Gargoyle Fragment"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Temptress -->
+	<gd_rule rule_name="Seduction Blood" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="SUCCUBUS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 32 -->
+			<gd_item id="152012011" name="Seduction Blood"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Virago -->
+	<gd_rule rule_name="Virago Feather" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="HARPY"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012012" name="Virago Feather"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Keraton -->
+	<gd_rule rule_name="Horn of Keraton" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CATOS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012013" name="Horn of Keraton"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Agrint -->
+	<gd_rule rule_name="Agrint Branch" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="AGRINT"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012014" name="Agrint Branch"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Troll -->
+	<gd_rule rule_name="Troll Blood" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="TROLL"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 36 -->
+			<gd_item id="152012015" name="Troll Blood"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Kerubian / Kerubiel -->
+	<gd_rule rule_name="Kerubian Big Horn" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CHERUBIM2"/>
+			<gd_npc_group group="CHERUBIM3"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 36 -->
+			<gd_item id="152012016" name="Kerubian Big Horn"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Frillneck -->
+	<gd_rule rule_name="Huge Frillneck Claw" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FRILLFAIMAM"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152012019" name="Huge Frillneck Claw"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Frillneck Meat" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FRILLFAIMAM"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015007" name="Raw Frillneck Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Spirit -->
+	<gd_rule rule_name="Vengeful Spirit Shard" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="UNDEADLIGHT_FI"/>
+			<gd_npc_group group="UNDEADLIGHT_WI"/>
+			<gd_npc_group group="VAPOR"/>
+			<gd_npc_group group="SPECTRE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 41 -->
+			<gd_item id="152012020" name="Vengeful Spirit Shard"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Krall -->
+	<gd_rule rule_name="Boiling Turquoise Blood" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="KRALLWARRIOR"/>
+			<gd_npc_group group="KRALLSHAMAN"/>
+			<gd_npc_group group="KRALLSCOUT"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 42 -->
+			<gd_item id="152012021" name="Boiling Turquoise Blood"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Windwisp -->
+	<gd_rule rule_name="Hazy Fluid" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="VAPOR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 44 -->
+			<gd_item id="152012022" name="Hazy Fluid"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Griffon -->
+	<gd_rule rule_name="Griffon Plume" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="GRIFFON"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 46 -->
+			<gd_item id="152012036" name="Griffon Plume"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Petrahulk -->
+	<gd_rule rule_name="Stone Fist Petrahulk Fragment" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CYCLOPS"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 49 -->
+			<gd_item id="152012037" name="Stone Fist Petrahulk Fragment"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Gryphu -->
+	<gd_rule rule_name="Gryphu Feather" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CONDOR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 47 -->
+			<gd_item id="152012038" name="Gryphu Feather"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Dionae -->
+	<gd_rule rule_name="Dionae Vine" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="DIONAEA"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 47 -->
+			<gd_item id="152012041" name="Dionae Vine"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Dionae Stem" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="DIONAEA"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 47 -->
+			<gd_item id="152012545" name="Dionae Stem"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Nagolem -->
+	<gd_rule rule_name="Nagolem Core" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="STATUE_M"/>
+			<gd_npc_group group="STATUE_F"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 49 -->
+			<gd_item id="152012043" name="Nagolem Core"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Pluma -->
+	<gd_rule rule_name="Raw Pluma Meat" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="LUPYLLINI"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015001" name="Raw Pluma Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Kurin -->
+	<gd_rule rule_name="Raw Kurin Meat" base_chance="27" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CURES"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015002" name="Raw Kurin Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Crestlich -->
+	<gd_rule rule_name="Crestlich Breast Meat" base_chance="27" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CRESTLICH"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015003" name="Crestlich Breast Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Crestlich Meat" base_chance="27" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CRESTLICH"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015505" name="Raw Crestlich Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Rynoce -->
+	<gd_rule rule_name="Raw Rynoce Meat" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="RHINOCE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015004" name="Raw Rynoce Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Klaw -->
+	<gd_rule rule_name="Raw Klaw Meat" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="NEUTH1"/>
+			<gd_npc_group group="NEUTH2"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015006" name="Raw Klaw Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Gigantic Klaw Carapace" base_chance="2" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="NEUTH1"/>
+			<gd_npc_group group="NEUTH2"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 39 -->
+			<gd_item id="152012018" name="Gigantic Klaw Carapace"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Cellatu -->
+	<gd_rule rule_name="Cellatu Meat" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CELLATU"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015011" name="Cellatu Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Calydon -->
+	<gd_rule rule_name="Calydon Meat" base_chance="100" fixed_chance="true" min_diff="-2" max_diff="2">
 		<gd_npc_groups>
 			<gd_npc_group group="CALYDON_ASSASSIN"/>
 			<gd_npc_group group="CALYDON_FIGHTER"/>
@@ -966,7 +1562,188 @@
 			<gd_npc_group group="CALYDON_PRIEST"/>
 		</gd_npc_groups>
 		<gd_items>
+			<!-- Level 50 -->
 			<gd_item id="152015012" name="Calydon Meat"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Calydon Molar" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CALYDON_ASSASSIN"/>
+			<gd_npc_group group="CALYDON_FIGHTER"/>
+			<gd_npc_group group="CALYDON_MAGE"/>
+			<gd_npc_group group="CALYDON_PRIEST"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 47 -->
+			<gd_item id="152012040" name="Calydon Molar"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Moonflower -->
+	<gd_rule rule_name="Moonflower Fruit" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FELLIAL"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015010" name="Moonflower Fruit"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Specter -->
+	<gd_rule rule_name="Bone with Specter Magic" base_chance="24" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="SPECTRE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 45 -->
+			<gd_item id="152012024" name="Bone with Specter Magic"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Mosbear -->
+	<gd_rule rule_name="Mosbear Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BABYMOSBEAR"/>
+			<gd_npc_group group="MOSBEAR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 16 -->
+			<gd_item id="152012501" name="Mosbear Skin"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mosbear Skin" base_chance="10" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MOSBEAR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 33 -->
+			<gd_item id="152012516" name="Snowy Mosbear Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Drake -->
+	<gd_rule rule_name="Drake Claw" base_chance="10" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="DRAKE_VIOLET"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012517" name="Malek Drake Claw"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Granker -->
+	<gd_rule rule_name="Granker Horn" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BIGHORNDEER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 34 -->
+			<gd_item id="152012518" name="Noble Granker Horn"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Granker Meat" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BIGHORNDEER"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015506" name="Raw Granker Meat"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Frightcorn -->
+	<gd_rule rule_name="Corn's Candy" base_chance="15" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="CORN"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="164000036" name="Frightcorn's Memory"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Rotron -->
+	<gd_rule rule_name="Wild Ginseng" base_chance="20" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ROTTENTREE"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015512" name="Wild Ginseng"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Ettin -->
+	<gd_rule rule_name="Ettin Skin" base_chance="5" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="ETTIN"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 22 -->
+			<gd_item id="152012504" name="Ettin Skin"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Fungy -->
+	<gd_rule rule_name="Fungen Cap" base_chance="40" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FUNGY"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015502" name="Fungen Cap"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Ksellid -->
+	<gd_rule rule_name="Ksellid Meat" base_chance="40" min_diff="-2" max_diff="2">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE"/>
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="SHELLIZARD"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 30 -->
+			<gd_item id="152015503" name="Raw Ksellid Meat"/>
+		</gd_items>
+	</gd_rule>
+	
+	<!-- Ceramium Fragment -->
+	<gd_rule rule_name="Ceramium Fragment" base_chance="1.5">
+		<gd_worlds>
+			<gd_world wd_type="BALAUREA_HIGH"/>
+		</gd_worlds>
+		<gd_items>
+			<gd_item id="152012578" name="Ceramium Fragment"/>
 		</gd_items>
 	</gd_rule>
 </global_rules>

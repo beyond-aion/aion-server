@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -26,6 +27,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastMap;
 
 /**
  * @author Yeats
@@ -69,7 +72,7 @@ public class AhserionInstance {
 				startInstancePreparation();
 			}
 			
-		}, 600000); //10min
+		}, 300000); //5min
 	}
 	
 	private void startInstancePreparation() {
@@ -78,8 +81,8 @@ public class AhserionInstance {
 		}
 		PanesterraMatchmakingService.getInstance().prepareTeams();
 		teams = PanesterraMatchmakingService.getInstance().getRegisteredTeams();
-		PanesterraMatchmakingService.getInstance().onStop();
 		if (teams != null && !teams.isEmpty()) {
+			PanesterraMatchmakingService.getInstance().onStop();
 			startInstance();
 		} else {
 			onStop();
@@ -136,107 +139,61 @@ public class AhserionInstance {
 	}
 	
 	private void instanceStartTimer() {
+		Map<Integer, Integer> messages = new FastMap<>();
+		messages.put(10000, 1402252); //starts soon
+		messages.put(40000, 1402252); //starts soon
+		messages.put(60000, 1402255); //4min till start
+		messages.put(180000, 1402256); //2min till start
+		messages.put(240000, 1402257); //1min till start
+		messages.put(270000, 1402586); //30s till start
+		
+		for (Entry<Integer, Integer> e : messages.entrySet()) {
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+				@Override
+				public void run() {
+					if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START)
+						sendMessage(0, e.getValue());
+				}
+			}, e.getKey());
+		}
+		
+		//spawn mobs 30s before doors are opened
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				sendMessage(0, 1402252);
-				//Send time left till start
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-						if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-							sendMessage(0, 1402253); //8min
-							
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-								@Override
-								public void run() {
-									if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-										sendMessage(0, 1402254); //6min
-								
-										ThreadPoolManager.getInstance().schedule(new Runnable() {
-											@Override
-											public void run() {
-												if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-													sendMessage(0, 1402255); //4min
-											
-													ThreadPoolManager.getInstance().schedule(new Runnable() {
-														@Override
-														public void run() {
-															if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-																sendMessage(0, 1402256); //2min
-														
-																ThreadPoolManager.getInstance().schedule(new Runnable() {
-																	@Override
-																	public void run() {
-																		if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-																			sendMessage(0, 1402257); //1min
-																	
-																			ThreadPoolManager.getInstance().schedule(new Runnable() {
-																				@Override
-																				public void run() {
-																					if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-																						sendMessage(0, 1402586); //30s
-																					}
-																				}
-																			}, 30000);
-																		}
-																	}
-																}, 60000);
-														
-															}
-														}
-													}, 120000);
-											
-												}
-											}
-										}, 120000);
-								
-									}
-								}
-							}, 120000);
-					
-						}
-					}
-				}, 120000);
-		
-				//spawn mobs 30s before doors are opened
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-						if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START)
-							spawnStage(2, PanesterraTeamId.BALAUR);
-					}
-				}, 570000);
-		
-				//Open Doors after 10min
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-						if (!started || status != AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-							return;
-						}
-						synchronized (this) {
-							status = AhserionInstanceStatus.INSTANCE_RUNNING;
-						}
-						for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values()) {
-							door.setOpen(true);
-						}
-						sendMessage(0, 1402587);
-						scheduleCorridorShieldSpawn();
-						scheduleAttack();
-						startInstanceChecker();
-					}
-				}, 601000); //10min 1sec
-		
-				//stop instance 40 minutes after start
-				instanceTimer = ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-					onStop();
-					}
-				}, 3000000); // 50min (-10min preparation time)
+				if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START)
+					spawnStage(2, PanesterraTeamId.BALAUR);
 			}
-		}, 10000);
+		}, 270000);
+		
+		//Open Doors after 5min
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void run() {
+				if (!started || status != AhserionInstanceStatus.PREPARING_INSTANCE_START) {
+					return;
+				}
+				synchronized (this) {
+					status = AhserionInstanceStatus.INSTANCE_RUNNING;
+				}
+				for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values()) {
+					door.setOpen(true);
+				}
+				sendMessage(0, 1402587);
+				scheduleCorridorShieldSpawn();
+				scheduleAttack(1); //12min
+				scheduleAttack(2); //29min
+				startInstanceChecker();
+			}
+		}, 301000); //5min 1sec
+		
+		//stop instance 60 minutes after start
+		instanceTimer = ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void run() {
+			onStop();
+			}
+		}, 3601000); // 60min 1sec (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill ahserion)
 	}
 	
 	private void scheduleCorridorShieldSpawn() {
@@ -255,7 +212,7 @@ public class AhserionInstance {
 		}, 300000); //5min
 	}
 	
-	private void scheduleAttack() {
+	private void scheduleAttack(int x) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
@@ -267,7 +224,7 @@ public class AhserionInstance {
 					}
 				}
 			}
-		}, 720000); //12min
+		}, x * 1020000); //x * 12min after corridor shield spawned
 	}
 	
 	private void startInstanceChecker() {
@@ -287,7 +244,7 @@ public class AhserionInstance {
 					}
 				}
 			}
-		}, 60000, 60000);
+		}, 5000, 60000);
 	}
 	
 	public void onStop() {
@@ -496,12 +453,18 @@ public class AhserionInstance {
 	}
 
 	public void onPlayerLogin(Player player) {
-		if (started && (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING)) {
-			player.setPanesterraTeam(getPlayersTeam(player));
-		} else if (started && status == AhserionInstanceStatus.INSTANCE_FINISHED) {
-			if (winner != null) {
-				if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId())) {
+		if (started){
+			if (status == AhserionInstanceStatus.PREPARING_REGISTRATION) {
+				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player)) {
+					PacketSendUtility.sendWhiteMessageOnCenter(player, "You are currently registered for Ahserions Flight.");
+				}
+			} else if (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING) {
+				player.setPanesterraTeam(getPlayersTeam(player));
+			} else if (status == AhserionInstanceStatus.INSTANCE_FINISHED) {
+				if (winner != null) {
+					if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId())) {
 					player.setPanesterraTeam(winner);
+					}
 				}
 			}
 		}

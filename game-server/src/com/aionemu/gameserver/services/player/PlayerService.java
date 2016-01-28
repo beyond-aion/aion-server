@@ -76,6 +76,7 @@ import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMap;
 import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 import com.aionemu.gameserver.world.World;
@@ -184,7 +185,7 @@ public class PlayerService {
 		player.setSkillList(DAOManager.getDAO(PlayerSkillListDAO.class).loadSkillList(playerObjId));
 		player.setKnownlist(new KnownList(player));
 		player.setFriendList(DAOManager.getDAO(FriendListDAO.class).load(player));
-		player.setBlockList(DAOManager.getDAO(BlockListDAO.class).load(player));
+		player.setBlockList(DAOManager.getDAO(BlockListDAO.class).load(playerObjId));
 		player.setTitleList(DAOManager.getDAO(PlayerTitleListDAO.class).loadTitleList(playerObjId));
 		player.setPlayerSettings(DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(playerObjId));
 		DAOManager.getDAO(AbyssRankDAO.class).loadAbyssRank(player);
@@ -196,7 +197,7 @@ public class PlayerService {
 		player.setFlyController(new FlyController(player));
 		PlayerStatFunctions.addPredefinedStatFunctions(player);
 
-		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(player));
+		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId));
 		player.setRecipeList(DAOManager.getDAO(PlayerRecipesDAO.class).load(player.getObjectId()));
 
 		/**
@@ -254,7 +255,7 @@ public class PlayerService {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player, PunishmentType.GATHER);
 
 		// update passive stats after effect controller, stats and equipment are initialized
-		player.getController().updatePassiveStats();
+		SkillEngine.getInstance().activatePassiveSkills(player);
 		// load saved effects
 		DAOManager.getDAO(PlayerEffectsDAO.class).loadPlayerEffects(player);
 		// load saved player cooldowns
@@ -299,7 +300,7 @@ public class PlayerService {
 
 		// Starting skills
 		newPlayer.setSkillList(new PlayerSkillList());
-		SkillLearnService.addNewSkills(newPlayer);
+		SkillLearnService.learnNewSkills(newPlayer, 1, newPlayer.getLevel());
 
 		// Starting items
 		PlayerCreationData playerCreationData = playerInitialData.getPlayerCreationData(playerCommonData.getPlayerClass());

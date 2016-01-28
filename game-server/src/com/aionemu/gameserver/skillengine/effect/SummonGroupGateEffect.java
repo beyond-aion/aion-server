@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author LokiReborn
+ * @modified Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonGroupGateEffect")
@@ -26,9 +27,9 @@ public class SummonGroupGateEffect extends SummonEffect {
 	public void applyEffect(Effect effect) {
 
 		Creature effector = effect.getEffector();
-		float x = effector.getX();
-		float y = effector.getY();
-		float z = effector.getZ();
+		float x = effect.getX();
+		float y = effect.getY();
+		float z = effect.getZ();
 		byte heading = effector.getHeading();
 		int worldId = effector.getWorldId();
 		int instanceId = effector.getInstanceId();
@@ -40,7 +41,6 @@ public class SummonGroupGateEffect extends SummonEffect {
 
 			@Override
 			public void run() {
-
 				groupgate.getController().onDelete();
 			}
 		}, time * 1000);

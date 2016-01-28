@@ -1,1 +1,0 @@
-ALTER TABLE `players` ADD COLUMN `last_transfer_time` decimal(20) NOT NULL default '0' AFTER `mentor_flag_time`;

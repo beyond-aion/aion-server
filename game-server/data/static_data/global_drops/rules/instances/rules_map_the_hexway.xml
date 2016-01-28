@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219612" name="Laksyaka Infantry"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000130" name="Balaur Warehouse No. 1 Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219613" name="Laksyaka Infantry"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000131" name="Balaur Warehouse No. 2 Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219614" name="Laksyaka Infantry"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000132" name="Balaur Warehouse No. 3 Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219611" name="Laksyaka Bladesworn"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000133" name="Balaur Warehouse No. 4 Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219616" name="Laksyaka Infantry"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000134" name="Balaur Warehouse No. 5 Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300700000" name="The_Hexway"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219610" name="Adjutant Galamat"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000135" name="Balaur Warehouse No. 6 Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

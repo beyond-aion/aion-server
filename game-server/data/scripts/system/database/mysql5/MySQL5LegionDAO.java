@@ -48,7 +48,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String UPDATE_EMBLEM_QUERY = "UPDATE legion_emblems SET emblem_id=?, color_a=?, color_r=?, color_g=?, color_b=?, emblem_type=?, emblem_data=? WHERE legion_id=?";
 	private static final String SELECT_EMBLEM_QUERY = "SELECT * FROM legion_emblems WHERE legion_id=?";
 	/** Storage Queries **/
-	private static final String SELECT_STORAGE_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
+	private static final String SELECT_STORAGE_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
 	/** History Queries **/
 	private static final String INSERT_HISTORY_QUERY = "INSERT INTO legion_history(`legion_id`, `date`, `history_type`, `name`, `tab_id`, `description`) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
@@ -484,10 +484,11 @@ public class MySQL5LegionDAO extends LegionDAO {
 					int packCount = rset.getInt("pack_count");
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
-
+					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
+					
 					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 						false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount,
-						tempering, packCount, isAmplified == 1, buffSkill);
+						tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 					item.setPersistentState(PersistentState.UPDATED);
 					inventory.onLoadHandler(item);
 				}

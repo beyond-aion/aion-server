@@ -1,1 +1,0 @@
-ALTER TABLE `player_pets` ADD PRIMARY KEY (`player_id`, `pet_id`);

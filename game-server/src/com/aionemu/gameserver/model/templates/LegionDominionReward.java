@@ -40,6 +40,4 @@ public class LegionDominionReward {
 	public int getTime() {
 		return time;
 	}
-	
-	
 }

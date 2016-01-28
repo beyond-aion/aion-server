@@ -1,1 +1,0 @@
-delete from `houses` WHERE `address` in (0, 1002, 1003, 1004);

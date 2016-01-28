@@ -8,9 +8,13 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.GameServer;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -41,7 +45,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
@@ -50,7 +53,6 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
@@ -70,13 +72,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_REPEAT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
-import com.aionemu.gameserver.services.ClassChangeService;
+import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.DuelService;
+import com.aionemu.gameserver.services.FactionPackService;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PvpService;
@@ -85,7 +87,6 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -109,9 +110,6 @@ import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * This class is for controlling players.
@@ -174,10 +172,11 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
-		if (getOwner().getPosition().getMapRegion() == null) // Prevents exception when method is called before the char is spawned
+		MapRegion region = getOwner().getPosition().getMapRegion();
+		if (region == null) // usually when player isn't spawned yet
 			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
-		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
+		for (int questId : region.getParent().getQuestIds()) {
 			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			// if (template.isTimeBased())
 			// continue;
@@ -250,8 +249,9 @@ public class PlayerController extends CreatureController<Player> {
 
 		for (Effect ef : getOwner().getEffectController().getAbnormalEffects()) {
 			if (ef.isDeityAvatar()) {
-				// remove abyss transformation if worldtype != abyss && worldtype != balaurea
-				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA || getOwner().isInInstance()) {
+				// remove abyss transformation if worldtype != abyss && worldtype != balaurea && worldType != panesterra
+				if (getOwner().getWorldType() != WorldType.ABYSS && getOwner().getWorldType() != WorldType.BALAUREA
+					&& getOwner().getWorldType() != WorldType.PANESTERRA || getOwner().isInInstance()) {
 					ef.endEffect();
 					getOwner().getEffectController().clearEffect(ef);
 				}
@@ -621,15 +621,6 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	public void updatePassiveStats() {
-		Player player = getOwner();
-		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
-			Skill skill = SkillEngine.getInstance().getSkillFor(player, skillEntry.getSkillId(), player.getTarget());
-			if (skill != null && skill.isPassive())
-				SkillEngine.getInstance().applyEffectDirectly(skill.getSkillId(), player, player, 0);
-		}
-	}
-
 	@Override
 	public Player getOwner() {
 		return (Player) super.getOwner();
@@ -653,44 +644,47 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	public void upgradePlayer() {
+	public void onLevelChange(int oldLevel, int newLevel) {
+		if (oldLevel == newLevel)
+			return;
+
 		Player player = getOwner();
-		byte level = player.getLevel();
+		int minNewLevel = oldLevel < newLevel ? oldLevel + 1 : oldLevel - 1; // for skill learning and other stuff that only wants the new level(s)
 
-		PlayerStatsTemplate statsTemplate = DataManager.PLAYER_STATS_DATA.getTemplate(player);
-		player.setPlayerStatsTemplate(statsTemplate);
+		if (GSConfig.ENABLE_RATIO_LIMITATION
+			&& (player.getPlayerAccount().getNumberOf(player.getRace()) == 1 || player.getPlayerAccount().getMaxPlayerLevel() == newLevel)) {
+			if (oldLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL)
+				GameServer.updateRatio(player.getRace(), 1);
+			else if (oldLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL)
+				GameServer.updateRatio(player.getRace(), -1);
+		}
 
-		player.getLifeStats().synchronizeWithMaxStats();
-		player.getLifeStats().updateCurrentStats();
+		player.getCommonData().updateMaxRepose();
+		player.getCommonData().resetSalvationPoints();
+		upgradePlayer();
+		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, newLevel), true);
 
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
-
-		// Guides Html on level up
-		if (HTMLConfig.ENABLE_GUIDES)
-			HTMLService.sendGuideHtml(player);
-
-		// Temporal
-		ClassChangeService.showClassChangeDialog(player);
-
+		player.getNpcFactions().onLevelUp();
 		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
 		updateNearbyQuests();
+		if (HTMLConfig.ENABLE_GUIDES && player.isSpawned())
+			HTMLService.sendGuideHtml(player, minNewLevel, newLevel);
+		SkillLearnService.learnNewSkills(player, minNewLevel, newLevel);
+		BonusPackService.getInstance().addPlayerCustomReward(player);
+		FactionPackService.getInstance().addPlayerCustomReward(player);
+	}
 
-		// add new skills
-		SkillLearnService.addNewSkills(player);
+	public void upgradePlayer() {
+		Player player = getOwner();
+		player.getLifeStats().synchronizeWithMaxStats();
+		player.getLifeStats().updateCurrentStats();
+		player.getGameStats().updateStatsVisually();
 
-		player.getController().updatePassiveStats();
-
-		// add recipe for morph
-		if (player.getCommonData().isDaeva())
-			CraftSkillUpdateService.getInstance().setMorphRecipe(player);
-
-		if (player.isInTeam()) {
+		if (player.isInTeam()) // SM_GROUP_MEMBER_INFO / SM_ALLIANCE_MEMBER_INFO task
 			TeamEffectUpdater.getInstance().startTask(player);
-		}
-		if (player.isLegionMember())
+
+		if (player.isLegionMember()) // SM_LEGION_UPDATE_MEMBER
 			LegionService.getInstance().updateMemberInfo(player);
-		player.getNpcFactions().onLevelUp();
-		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 	}
 
 	/**

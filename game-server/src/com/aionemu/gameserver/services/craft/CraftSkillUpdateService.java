@@ -10,20 +10,15 @@ import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.dao.PlayerRecipesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RecipeList;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.templates.CraftLearnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -108,45 +103,6 @@ public class CraftSkillUpdateService {
 		log.info("CraftSkillUpdateService: Initialized.");
 	}
 
-	/**
-	 * add recipe for morph for level 10
-	 */
-	public void setMorphRecipe(Player player) {
-		int object = player.getObjectId();
-		Race race = player.getRace();
-		if (player.getCommonData().isDaeva()) {
-			RecipeList recipelist = null;
-			recipelist = DAOManager.getDAO(PlayerRecipesDAO.class).load(object);
-			if (race == Race.ELYOS) {
-				if (!recipelist.isRecipePresent(155000005)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000005);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000005));
-				}
-				if (!recipelist.isRecipePresent(155000002)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000002);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000002));
-				}
-				if (!recipelist.isRecipePresent(155000001)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155000001);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155000001));
-				}
-			} else if (race == Race.ASMODIANS) {
-				if (!recipelist.isRecipePresent(155005005)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005005);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005005));
-				}
-				if (!recipelist.isRecipePresent(155005002)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005002);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005002));
-				}
-				if (!recipelist.isRecipePresent(155005001)) {
-					DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(object, 155005001);
-					PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(155005001));
-				}
-			}
-		}
-	}
-
 	public void learnSkill(Player player, Npc npc) {
 		if (player.getLevel() < 10)
 			return;
@@ -220,8 +176,7 @@ public class CraftSkillUpdateService {
 				if (price < kinah && responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_LEARN)) {
 					PlayerSkillList skillList = responder.getSkillList();
 					skillList.addSkill(responder, skillId, skillLevel + 1);
-					responder.getRecipeList().autoLearnRecipe(responder, skillId, skillLevel + 1);
-					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, null, false, false));
+					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, false));
 				} else {
 					PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1300388));
 				}

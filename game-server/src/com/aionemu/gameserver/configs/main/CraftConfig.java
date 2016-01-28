@@ -4,12 +4,6 @@ import com.aionemu.commons.configuration.Property;
 
 public class CraftConfig {
 
-	/**
-	 * Enable craft skills unrestricted level-up
-	 */
-	@Property(key = "gameserver.craft.skills.unrestricted.levelup.enable", defaultValue = "false")
-	public static boolean UNABLE_CRAFT_SKILLS_UNRESTRICTED_LEVELUP;
-
 	@Property(key = "gameserver.craft.skills.delete.excess.enable", defaultValue = "false")
 	public static boolean DELETE_EXCESS_CRAFT_ENABLE;
 

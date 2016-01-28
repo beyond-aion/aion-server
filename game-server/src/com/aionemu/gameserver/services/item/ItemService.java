@@ -74,10 +74,10 @@ public class ItemService {
 	 * Add new item based on sourceItem values
 	 */
 	public static long addItem(Player player, int itemId, long count, Item sourceItem, ItemUpdatePredicate predicate) {
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		if (count <= 0 || itemTemplate == null) {
+		if (count <= 0)
 			return 0;
-		}
+
+		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 		Preconditions.checkNotNull(itemTemplate, "No item with id " + itemId);
 		Preconditions.checkNotNull(predicate, "Predicate is not supplied");
 

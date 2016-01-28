@@ -715,7 +715,7 @@
 			<gd_item id="166030005" name="Tempering Solution" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="2.5" each_member="true">
+	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="4" each_member="true">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab" />
 			<gd_map map_id="320080000" name="Draupnir_Cave" />

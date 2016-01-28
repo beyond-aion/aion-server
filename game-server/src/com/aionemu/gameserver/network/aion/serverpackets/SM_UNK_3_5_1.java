@@ -11,7 +11,7 @@ public class SM_UNK_3_5_1 extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(0);
+		writeD(1);
 		writeD(0);
 		writeD(con.getActivePlayer().getObjectId());
 		writeD(NetworkConfig.GAMESERVER_ID);

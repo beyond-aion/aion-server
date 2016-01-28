@@ -49,12 +49,13 @@ public class BalaurAssaultService {
 		if (siege instanceof FortressSiege) {
 			if (!calculateFortressAssault(((FortressSiege) siege).getSiegeLocation()))
 				return;
+			newAssault(siege, Rnd.get(60, 900)); // between 1 and 15 minutes
 		} else if (siege instanceof ArtifactSiege) {
 			if (!calculateArtifactAssault(((ArtifactSiege) siege).getSiegeLocation()))
 				return;
+			newAssault(siege, Rnd.get(180, 2880)); // between 3 and 48 hours
 		} else
 			return;
-		newAssault(siege, Rnd.get(1, 10));
 		if (LoggingConfig.LOG_SIEGE)
 			log.info("[SIEGE] Balaur Assault scheduled on Siege ID: " + siege.getSiegeLocationId() + "!");
 	}
@@ -98,12 +99,12 @@ public class BalaurAssaultService {
 		if (count >= (isBalaurea ? 1 : 2))
 			return false;
 
-		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getGlobalAsmodiansInfluence()
-			: Influence.getInstance().getGlobalElyosInfluence();
+		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence.getInstance()
+			.getGlobalElyosInfluence();
 
 		if (Rnd.get() >= influence * SiegeConfig.BALAUR_ASSAULT_RATE)
 			return false;
-		
+
 		return true;
 	}
 

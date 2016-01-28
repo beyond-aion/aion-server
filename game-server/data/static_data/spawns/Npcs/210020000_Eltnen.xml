@@ -1912,6 +1912,10 @@
 		</spawn>
 		<!-- Hannet -->
 		<spawn npc_id="790004" respawn_time="295">
+			<spot x="1527.1958" y="507.39264" z="357.20093" h="64"/>
+		</spawn>
+		<!-- Aimone -->
+		<spawn npc_id="832829" respawn_time="295">
 			<spot x="1934.69" y="2015.01" z="361.725" h="46"/>
 		</spawn>
 		<!-- Mamaki Bruiser -->
@@ -3812,12 +3816,6 @@
 			<spot x="381.22" y="986.276" z="296.736" h="36"/>
 			<spot x="520.128" y="1043.96" z="283.627" h="5"/>
 		</spawn>
-		<!-- Oozing Clodworm -->
-		<spawn npc_id="211799" respawn_time="295">
-			<spot x="1405.84" y="245.687" z="348.047" h="22"/>
-			<spot x="1418.01" y="237.529" z="348.054" h="119"/>
-			<spot x="1431.03" y="240.371" z="348.058" h="19"/>
-		</spawn>
 		<!-- Fantail Crestlich -->
 		<spawn npc_id="210819" respawn_time="295">
 			<spot x="1361.13" y="1751.42" z="289.96375" h="21" random_walk="8"/>
@@ -3850,8 +3848,8 @@
 			<spot x="141.829" y="270.244" z="212.597" h="79"/>
 			<spot x="83.2988" y="243.5246" z="227.0383" h="6"/>
 		</spawn>
-		<!-- Mysterious Crate -->
-		<spawn npc_id="211801" respawn_time="295">
+		<!-- Mysterious Crate [spawns chaos dracus]-->
+		<spawn npc_id="211801" respawn_time="14400">
 			<spot x="1421.28" y="239.618" z="348.054" h="29"/>
 		</spawn>
 		<!-- Watch Guard -->
@@ -3895,10 +3893,6 @@
 		<spawn npc_id="210858" respawn_time="295">
 			<spot x="1304.75" y="1641.48" z="272.84375" h="85" walker_id="F2522270BD8EEA7CE7C959C38E642F63C294DF4A"/>
 			<spot x="1304.75" y="1641.48" z="272.84375" h="85" walker_id="F2522270BD8EEA7CE7C959C38E642F63C294DF4A"/>
-		</spawn>
-		<!-- Chaos Dracus -->
-		<spawn npc_id="211800" respawn_time="14400">
-			<spot x="1421.75" y="241.924" z="348.054" h="5"/>
 		</spawn>
 		<!-- Springwater Spirit -->
 		<spawn npc_id="210827" respawn_time="295">
@@ -6063,6 +6057,10 @@
 		<spawn npc_id="204003" respawn_time="295">
 			<spot x="1358.5502" y="2560.4783" z="278.7573" h="63"/>
 		</spawn>
+		<!-- LF2_Jail_Q1036 (Hierni's Cage Door) -->
+		<spawn npc_id="700180" respawn_time="295">
+			<spot x="1358.61" y="2560.47" z="278.14615" h="91" static_id="41"/>
+		</spawn>
 		<!-- Gyabrunerk -->
 		<spawn npc_id="798053" respawn_time="295">
 			<spot x="669.609" y="444.03" z="331.75" h="2"/>
@@ -6989,23 +6987,23 @@
 		</spawn>
 		<!-- Harumonerk -->
 		<spawn npc_id="798126" respawn_time="295">
-			<temporary_spawn spawn_time="9.*.*" despawn_time="17.*.*"/>
-			<spot x="392.72397" y="1837.5984" z="241.9064" h="14"/>
-		</spawn>
-		<!-- Harumonerk -->
-		<spawn npc_id="798126" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="4.*.*"/>
-			<spot x="752.76135" y="1010.5063" z="285" h="97"/>
-		</spawn>
-		<!-- Chiyorinrinerk -->
-		<spawn npc_id="798127" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
-			<spot x="1522.97" y="1763.98" z="305" h="30"/>
+			<temporary_spawn/>
+			<spot x="392.72397" y="1837.5984" z="241.9064" h="14">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
+			</spot>
+			<spot x="752.76135" y="1010.50630" z="285.00000" h="97">
+				<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Chiyorinrinerk -->
 		<spawn npc_id="798127" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
-			<spot x="1017.14" y="1826.45" z="278" h="70"/>
+			<temporary_spawn/>
+			<spot x="1017.14" y="1826.45" z="278" h="70">
+				<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			</spot>
+			<spot x="1522.97" y="1763.98" z="305" h="30">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Metea -->
 		<spawn npc_id="798112" respawn_time="295">

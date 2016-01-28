@@ -1,1 +1,0 @@
-ALTER TABLE `houses` ADD COLUMN `sign_notice` binary(130) DEFAULT NULL after `sell_started`

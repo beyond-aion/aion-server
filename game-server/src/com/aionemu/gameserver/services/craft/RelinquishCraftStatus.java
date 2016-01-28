@@ -42,7 +42,7 @@ public class RelinquishCraftStatus {
 			return;
 		}
 		skill.setSkillLvl(expertMinValue - 1);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
+		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
 		removeRecipesAbove(player, skillId, expertMinValue);
 		deleteCraftStatusQuests(skillId, player, true);
 	}
@@ -57,8 +57,8 @@ public class RelinquishCraftStatus {
 		if (!successDecreaseKinah(player, masterPrice)) {
 			return;
 		}
-		skill.setSkillLvl(masterMinValue);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
+		skill.setSkillLvl(masterMinValue - 1);
+		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
 		removeRecipesAbove(player, skillId, masterMinValue);
 		deleteCraftStatusQuests(skillId, player, false);
 	}
@@ -121,7 +121,7 @@ public class RelinquishCraftStatus {
 		int skillLevel;
 		int maxCraftStatus = isExpert ? CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
 		int countCraftStatus;
-		for (PlayerSkillEntry skill : player.getSkillList().getBasicSkills()) {
+		for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
 			countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player)
 				+ CraftSkillUpdateService.getTotalExpertCraftingSkills(player) : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
 			if (countCraftStatus > maxCraftStatus) {
@@ -129,7 +129,7 @@ public class RelinquishCraftStatus {
 				skillLevel = skill.getSkillLevel();
 				if (CraftSkillUpdateService.isCraftingSkill(skillId) && skillLevel > minValue && skillLevel <= maxValue) {
 					skill.setSkillLvl(minValue - 1);
-					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, null, false, false));
+					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
 					removeRecipesAbove(player, skillId, minValue);
 					deleteCraftStatusQuests(skillId, player, isExpert);
 				}

@@ -61,7 +61,7 @@ public class ResurrectAI2 extends NpcAI2 {
 			if ((!getRace().equals(Race.NONE) && !getRace().equals(race))
 				|| (race.equals(Race.ASMODIANS) && getTribe().equals(TribeClass.FIELD_OBJECT_LIGHT))
 				|| (race.equals(Race.ELYOS) && getTribe().equals(TribeClass.FIELD_OBJECT_DARK))) {
-				PacketSendUtility.sendPacket(player, STR_MSG_BINDSTONE_CANNOT_FOR_INVALID_RIGHT(player.getCommonData().getOppositeRace().toString()));
+				PacketSendUtility.sendPacket(player, STR_MSG_BINDSTONE_CANNOT_FOR_INVALID_RIGHT(player.getOppositeRace().toString()));
 				return;
 			}
 		}

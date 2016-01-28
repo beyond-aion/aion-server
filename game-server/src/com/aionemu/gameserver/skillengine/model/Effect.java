@@ -628,7 +628,7 @@ public class Effect implements StatOwner {
 		 * broadcast final hate to all visible objects
 		 */
 		// TODO hostile_type?
-		if (effectHate != 0 && tauntHate >= 0) { //dont add hate if taunt hate is < 0! {
+		if (effectHate != 0 && tauntHate >= 0) { //dont add hate if taunt hate is < 0!
 			if (getEffected() instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
 				getEffected().getAggroList().addHate(effector, 1);
 

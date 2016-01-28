@@ -4,6 +4,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
@@ -170,5 +171,11 @@ public class SkillEngine {
 		final Effect ef = new Effect(effector, effected, st, st.getLvl(), 0);
 		ef.initialize();
 		ef.applyEffect();
+	}
+
+	public void activatePassiveSkills(Player player) {
+		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills())
+			if (DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).isPassive())
+				applyEffectDirectly(skillEntry.getSkillId(), skillEntry.getSkillLevel(), player, player, 0);
 	}
 }

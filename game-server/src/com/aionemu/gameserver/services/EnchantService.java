@@ -329,8 +329,7 @@ public class EnchantService {
 			targetItem.setBuffSkill(buffId);
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
 			if (targetItem.isEquipped())
-				SkillLearnService.addSkill(player, buffId);
-
+				player.getSkillList().addSkill(player, buffId, 1);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), addLevel,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}

@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.TaskId;

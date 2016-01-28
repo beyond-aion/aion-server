@@ -2,12 +2,13 @@ package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResultsEx;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.jme3.collision.CollisionResult;
-import com.jme3.scene.Spatial;
+
 
 /**
  * @author Rolandas
@@ -26,7 +27,7 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 	}
 
 	@Override
-	public void onMoved(CollisionResultsEx collisionResults) {
+	public void onMoved(CollisionResults collisionResults) {
 		if (isEnabled && collisionResults.size() != 0) {
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 				Player player = (Player) creature;

@@ -31,8 +31,6 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.PlayerInitialData;
-import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -40,9 +38,7 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 import com.google.common.collect.Maps;
 
 /**
@@ -155,7 +151,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				Mailbox mailBox = player.getMailbox();
 				int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
 				stmt.setInt(23, mails);
-				stmt.setLong(24, pcd.getCurrentReposteEnergy());
+				stmt.setLong(24, pcd.getCurrentReposeEnergy());
 				stmt.setInt(25, pcd.getMentorFlagTime());
 				stmt.setInt(26, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
 				stmt.setInt(27, player.getObjectId());
@@ -266,9 +262,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 					if (resultSet.next()) {
 						success = true;
 						cd.setName(resultSet.getString("name"));
-						// set player class before exp
 						cd.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
-						cd.setExp(resultSet.getLong("exp"));
+						cd.setExp(resultSet.getLong("exp")); // set class before exp for daeva determination
 						cd.setRecoverableExp(resultSet.getLong("recoverexp"));
 						cd.setRace(Race.valueOf(resultSet.getString("race")));
 						cd.setGender(Gender.valueOf(resultSet.getString("gender")));
@@ -282,31 +277,16 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
 						cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));
 						cd.setWhBonusExpands(resultSet.getInt("wh_bonus_expands"));
-						cd.setOnline(resultSet.getBoolean("online"));
 						cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
 						cd.setDp(resultSet.getInt("dp"));
 						cd.setDeathCount(resultSet.getInt("soul_sickness"));
-						cd.setCurrentReposteEnergy(resultSet.getLong("reposte_energy"));
-
+						cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
 						float x = resultSet.getFloat("x");
 						float y = resultSet.getFloat("y");
 						float z = resultSet.getFloat("z");
 						byte heading = resultSet.getByte("heading");
 						int worldId = resultSet.getInt("world_id");
-						PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
-						MapRegion mr = World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().getRegion(x, y, z);
-						if (mr == null && playerInitialData != null) {
-							// unstuck unlucky characters :)
-							LocationData ld = playerInitialData.getSpawnLocation(cd.getRace());
-							x = ld.getX();
-							y = ld.getY();
-							z = ld.getZ();
-							heading = ld.getHeading();
-							worldId = ld.getMapId();
-						}
-
-						WorldPosition position = World.getInstance().createPosition(worldId, x, y, z, heading, 0);
-						cd.setPosition(position);
+						cd.setPosition(World.getInstance().createPosition(worldId, x, y, z, heading, 0));
 						cd.setWorldOwnerId(resultSet.getInt("world_owner"));
 						cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
 						cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
@@ -711,6 +691,30 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.execute();
 			}
 		});
+	}
+
+	public int getOldCharacterLevel(int playerObjectId) {
+		int oldLevel = 0;
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
+			stmt.setInt(1, playerObjectId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				oldLevel = rs.getInt("old_level");
+			}
+		} catch (Exception e) {
+			log.error("Error reading old_level for player: " + playerObjectId, e);
+		}
+		return oldLevel;
+	}
+
+	public void storeOldCharacterLevel(int playerObjectId, int level) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET old_level=? WHERE id=?")) {
+			stmt.setInt(1, level);
+			stmt.setInt(2, playerObjectId);
+			stmt.execute();
+		} catch (Exception e) {
+			log.error("Error storing old_level: " + level + " for player: " + playerObjectId, e);
+		}
 	}
 
 	/**

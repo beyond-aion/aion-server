@@ -44,8 +44,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADELIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADE_IN_LIST;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
@@ -100,7 +98,8 @@ public class DialogService {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
-						PacketSendUtility.sendMessage(player, "Buy list is missing!!");
+						log.error("Buy list missing for npc " + npc.getNpcId());
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
 						break;
 					}
 					int tradeModifier = tradeListTemplate.getSellPriceRate();
@@ -114,11 +113,10 @@ public class DialogService {
 						break;
 					}
 					if (hasAnythingToSell)
-						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier()
+						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc.getObjectId(), tradeListTemplate, PricesService.getVendorBuyModifier()
 							* tradeModifier / 100));
-					else {
+					else
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
-					}
 					break;
 				}
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
@@ -230,41 +228,19 @@ public class DialogService {
 							break;
 					}
 					break;
-				case AIRLINE_SERVICE: // flight and teleport (2.5)
-					if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
-						int level = player.getLevel();
-						if (level < 9)
-							sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
-						else
+				case AIRLINE_SERVICE: { // flight and teleport (2.5)
+					switch (npc.getNpcId()) {
+						case 203679: // ishalgen teleporter
+						case 203194: // poeta teleporter
+							if (!player.getCommonData().isDaeva()) {
+								sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
+								break;
+							}
+						default:
 							TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-					} else {
-						switch (npc.getNpcId()) {
-							case 203194: {
-								if (player.getRace() == Race.ELYOS) {
-									QuestState qs = player.getQuestStateList().getQuestState(1006);
-									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
-									else
-										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-								}
-								break;
-							}
-							case 203679: {
-								if (player.getRace() == Race.ASMODIANS) {
-									QuestState qs = player.getQuestStateList().getQuestState(2008);
-									if (qs == null || qs.getStatus() != QuestStatus.COMPLETE)
-										sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
-									else
-										TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-								}
-								break;
-							}
-							default: {
-								TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
-							}
-						}
 					}
 					break;
+				}
 				case GATHER_SKILL_LEVELUP: // improve extraction (2.5)
 				case COMBINE_SKILL_LEVELUP: // learn tailoring armor smithing etc. (2.5)
 					CraftSkillUpdateService.getInstance().learnSkill(player, npc);
@@ -299,7 +275,7 @@ public class DialogService {
 						}
 					}
 					PacketSendUtility.sendPacket(player, new SM_PLASTIC_SURGERY(player, check_ticket, changesex));
-					player.setEditMode(true);
+					player.getCommonData().setInEditMode(true);
 					break;
 				case MATCH_MAKER: // dredgion
 					if (AutoGroupConfig.AUTO_GROUP_ENABLE && DredgionService2.getInstance().isRegisterAvailable()) {

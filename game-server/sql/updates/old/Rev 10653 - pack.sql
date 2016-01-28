@@ -1,1 +1,0 @@
-ALTER TABLE `inventory` ADD COLUMN `pack_count` smallint(6) NOT NULL DEFAULT '0' AFTER `tempering`;

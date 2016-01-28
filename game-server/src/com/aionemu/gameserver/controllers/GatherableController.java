@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_UPDATE;
@@ -56,7 +57,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		}
 
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			//TODO message to send
+			// TODO message to send
 			return;
 		}
 		if (player.getInventory().isFull()) {
@@ -138,7 +139,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			task.start();
 		} else {
 			// dummy failure, value doesn't matter
-			PacketSendUtility.sendPacket(player, new SM_GATHER_UPDATE(template, curMaterial, 0, 17, 8, 0 ,0));
+			PacketSendUtility.sendPacket(player, new SM_GATHER_UPDATE(template, curMaterial, 0, 17, 8, 0, 0));
 		}
 	}
 
@@ -220,8 +221,13 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			int skillLvl = getOwner().getObjectTemplate().getSkillLevel();
 			int xpReward = (int) ((0.0031 * (skillLvl + 5.3) * (skillLvl + 1592.8) + 60));
 
-			if (player.getSkillList().addSkillXp(player, getOwner().getObjectTemplate().getHarvestSkill(),
-				(int) RewardType.GATHERING.calcReward(player, xpReward), skillLvl)) {
+			int skillId = getOwner().getObjectTemplate().getHarvestSkill();
+			int gainedGatherXp = (int) RewardType.GATHERING.calcReward(player, xpReward);
+			float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
+			if (statRate > 0)
+				gainedGatherXp *= statRate;
+
+			if (player.getSkillList().addSkillXp(player, skillId, gainedGatherXp, skillLvl)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP);
 				player.getCommonData().addExp(xpReward, RewardType.GATHERING);
 			} else

@@ -62,11 +62,11 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	};
 
 	@Override
-	public QuestStateList load(final Player player) {
+	public QuestStateList load(int playerObjId) {
 		QuestStateList questStateList = new QuestStateList();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
+				stmt.setInt(1, playerObjId);
 				try (ResultSet rset = stmt.executeQuery()) {
 					while (rset.next()) {
 						int questId = rset.getInt("quest_id");
@@ -86,7 +86,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore QuestStateList data for player: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore QuestStateList data for player: " + playerObjId + " from DB: " + e.getMessage(), e);
 		}
 		return questStateList;
 	}

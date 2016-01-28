@@ -21,7 +21,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
- * @author Hilgert 
+ * @author Hilgert
  * @modified vlog, Pad
  */
 public class ReportToMany extends QuestHandler {

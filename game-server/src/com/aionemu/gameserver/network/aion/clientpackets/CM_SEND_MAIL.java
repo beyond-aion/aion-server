@@ -19,7 +19,7 @@ public class CM_SEND_MAIL extends AionClientPacket {
 	private String message;
 	private int itemObjId;
 	private int itemCount;
-	private int kinahCount;
+	private long kinahCount;
 	private int idLetterType;
 
 	public CM_SEND_MAIL(int opcode, State state, State... restStates) {
@@ -34,8 +34,7 @@ public class CM_SEND_MAIL extends AionClientPacket {
 		itemObjId = readD();
 		itemCount = readD();
 		readD();
-		kinahCount = readD();
-		readD();
+		kinahCount = readQ();
 		idLetterType = readC();
 	}
 
@@ -49,7 +48,7 @@ public class CM_SEND_MAIL extends AionClientPacket {
 			return;
 		}
 
-		if (!player.isTrading() && kinahCount < 1000000000 && kinahCount > -1 && itemCount > -2) {
+		if (!player.isTrading() && kinahCount < 100000000000L && kinahCount > -1 && itemCount > -2) {
 			MailService.getInstance().sendMail(player, recipientName, title, message, itemObjId, itemCount, kinahCount,
 				LetterType.getLetterTypeById(idLetterType));
 		}
