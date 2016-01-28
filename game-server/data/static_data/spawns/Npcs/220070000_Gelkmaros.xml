@@ -4782,6 +4782,10 @@
 		<spawn npc_id="799324" respawn_time="295">
 			<spot x="1030.71" y="2793.42" z="387.013" h="106"/>
 		</spawn>
+		<!-- Potarunerk -->
+        <spawn npc_id="702748" respawn_time="295">
+            <spot x="2823.1" y="2659.5" z="495.9188" h="51"/>
+        </spawn>
 		<!-- Prowling Sandshark -->
 		<spawn npc_id="216005" respawn_time="105">
 			<spot x="2201.15" y="1089.42" z="201.78314" h="32" walker_id="DE9E7231F9F29208A4EBB8B20AFFDF8A4C16BE81"/>
@@ -5311,6 +5315,10 @@
 			<spot x="2512.86" y="927.914" z="308.38397" random_walk="6"/>
 			<spot x="2556.58" y="865.414" z="308.44162" random_walk="6"/>
 		</spawn>
+		<!-- Ruinrunerk -->
+        <spawn npc_id="702747" respawn_time="295">
+            <spot x="2515.4" y="1009.1" z="285.875" h="33"/>
+        </spawn>
 		<!-- Russonerk -->
 		<spawn npc_id="799424" respawn_time="295">
 			<spot x="1803.25" y="2778.86" z="529.629"/>
@@ -6417,6 +6425,10 @@
 		<spawn npc_id="799317" respawn_time="295">
 			<spot x="2458.75" y="1293.67" z="331.818" h="59"/>
 		</spawn>
+		<!-- Taserunerk -->
+        <spawn npc_id="702726" respawn_time="295">
+            <spot x="1890.9" y="2852.5" z="554.9788" h="70"/>
+        </spawn>
 		<!-- Tataka -->
 		<spawn npc_id="799336" respawn_time="295">
 			<spot x="944.178" y="1674.53" z="364.125" h="73"/>
@@ -7335,6 +7347,10 @@
 		<spawn npc_id="206149" respawn_time="295">
 			<spot x="2260.91" y="1732.59" z="308.212"/>
 		</spawn>
+		<!-- Uzirunerk -->
+        <spawn npc_id="702728" respawn_time="295">
+            <spot x="897.9" y="1014.6" z="312.83362" h="58"/>
+        </spawn>
 		<!-- Valetta -->
 		<spawn npc_id="799226" respawn_time="295">
 			<spot x="1765.58" y="2965.16" z="554.941" h="38"/>
@@ -7792,6 +7808,10 @@
 		<spawn npc_id="217017" respawn_time="295">
 			<spot x="1316.12" y="2275.8" z="326.126"/>
 		</spawn>
+		<!-- Zinarunerk -->
+        <spawn npc_id="702746" respawn_time="295">
+            <spot x="358.6" y="2610.12" z="443.62253" h="62"/>
+        </spawn>
  		<!-- Silentera Eastgate -->
 		<spawn npc_id="730260" respawn_time="295">
 			<spot x="1449.23" y="903.722" z="302.27" h="34" static_id="1254"/>

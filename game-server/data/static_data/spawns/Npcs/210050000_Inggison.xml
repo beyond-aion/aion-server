@@ -47,10 +47,6 @@
 		<spawn npc_id="798988" respawn_time="295">
 			<spot x="379.701" y="950.057" z="460.79" h="117"/>
 		</spawn>
-		<!-- Adrinne -->
-		<spawn npc_id="833005" respawn_time="295">
-            <spot x="1324.2" y="297.4" z="589.8113" h="43"/>
-        </spawn>
 		<!-- Aerolink to Sanctum -->
 		<spawn npc_id="730220" respawn_time="295">
 			<spot x="1375.89" y="367.848" z="589.6" h="73" static_id="1314"/>
@@ -1991,6 +1987,10 @@
 		<spawn npc_id="799824" respawn_time="295">
 			<spot x="1369.69" y="380.598" z="557.556" h="86"/>
 		</spawn>
+		<!-- Chubarunerk -->
+        <spawn npc_id="702744" respawn_time="295">
+            <spot x="2378.5" y="274.3" z="458.75" h="74"/>
+        </spawn>
 		<!-- Cicero -->
 		<spawn npc_id="798971" respawn_time="295">
 			<spot x="2675.15" y="1464.58" z="373.232" h="72"/>
@@ -2287,6 +2287,10 @@
 		<spawn npc_id="205446" respawn_time="295">
 			<spot x="1304.3077" y="229.49538" z="595.63336" h="16"/>
 		</spawn>
+		<!-- Danirunerk -->
+        <spawn npc_id="702745" respawn_time="295">
+            <spot x="690.8" y="1565.1" z="337.54376" h="8"/>
+        </spawn>
 		<!-- Dark Sage Aran -->
 		<spawn npc_id="217074" respawn_time="295">
 			<spot x="1345.31" y="1315.05" z="327.072" h="117"/>
@@ -2906,6 +2910,10 @@
 			<spot x="1425.36" y="1732.36" z="164.41" h="11" random_walk="6"/>
 			<spot x="1446.01" y="1717.88" z="163.632" h="78" random_walk="6"/>
 		</spawn>
+		<!-- Gadarunerk -->
+        <spawn npc_id="702725" respawn_time="295">
+            <spot x="1330.6" y="280.6" z="589.4209" h="106"/>
+        </spawn>
 		<!-- Gate -->
 		<spawn npc_id="730298" respawn_time="295">
 			<spot x="537.948" y="707.773" z="484.049" h="73" static_id="203"/>
@@ -4219,6 +4227,10 @@
 			<spot x="2518.72" y="827.487" z="415.833" h="111"/>
 			<spot x="2523.82" y="834.196" z="412.731" h="36"/>
 		</spawn>
+		<!-- Izerrunerk -->
+        <spawn npc_id="702727" respawn_time="295">
+            <spot x="463.8" y="195.6" z="459.5875" h="1"/>
+        </spawn>
 		<!-- Yannis -->
 		<spawn npc_id="799069" respawn_time="295">
 			<spot x="1350.89" y="331.832" z="588.625" h="3"/>
@@ -4490,10 +4502,6 @@
 			<spot x="1372.17" y="2294.77" z="301.281" h="93"/>
 			<spot x="1802.39" y="2211.55" z="326.457" h="24"/>
 		</spawn>
-		<!-- Lenard -->
-		<spawn npc_id="833006" respawn_time="295">
-            <spot x="1320.8" y="295.7" z="589.7876" h="43"/>
-        </spawn>
 		<!-- Lesarius -->
 		<spawn npc_id="799827" respawn_time="295">
 			<spot x="1314.85" y="323.446" z="589.766" h="110"/>
@@ -8460,6 +8468,10 @@
 		<spawn npc_id="216630" respawn_time="295">
 			<spot x="1527.95" y="1910.4" z="312.482" h="61"/>
 		</spawn>
+		<!-- Zeirunerk -->
+        <spawn npc_id="702743" respawn_time="295">
+            <spot x="2094.8" y="1196.0" z="265.0" h="96"/>
+        </spawn>
 		<!-- Zenobia -->
 		<spawn npc_id="798947" respawn_time="295">
 			<spot x="1417.35" y="337.624" z="558.125" h="26"/>
