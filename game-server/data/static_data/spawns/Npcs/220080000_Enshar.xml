@@ -4813,14 +4813,6 @@
 		<spawn npc_id="804970" respawn_time="295">
 			<spot x="1752.21997" y="2570.05005" z="298.11127" h="97"/>
 		</spawn>
-		<!-- prime benoid i -->
-		<spawn npc_id="219999" respawn_time="295">
-			<spot x="192.86804" y="526.93805" z="196.70528"/>
-		</spawn>
-		<!-- prime eiter i -->
-		<spawn npc_id="220000" respawn_time="295">
-			<spot x="1582.96509" y="1105.84631" z="132.79529" h="75"/>
-		</spawn>
 		<!-- primenk -->
 		<spawn npc_id="804866" respawn_time="295">
 			<spot x="1670.83997" y="566.21002" z="257.97012" h="105"/>
@@ -7176,12 +7168,6 @@
 			<spot x="1426.16248" y="2817.75488" z="236.68890"/>
 			<spot x="1430.86963" y="2722.42944" z="246.54381"/>
 			<spot x="1438.35767" y="2788.04102" z="235.17781"/>
-		</spawn>
-		<!-- warning area -->
-		<spawn npc_id="832819" respawn_time="295">
-			<spot x="193.17999" y="527.06000" z="196.70496"/>
-			<spot x="1582.96997" y="1106.08997" z="132.79529"/>
-			<spot x="2653.62012" y="2719.89990" z="203.12648"/>
 		</spawn>
 		<!-- wasteland caltrops -->
 		<spawn npc_id="220012" respawn_time="295">

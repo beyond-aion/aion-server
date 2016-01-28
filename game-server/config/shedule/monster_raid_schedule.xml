@@ -127,7 +127,7 @@
 		<raidTime>0 30 17 2,17 * ?</raidTime>
 		<raidTime>0 30 20 10,25 * ?</raidTime>
 	</raid>
-	<!-- Katalam -->
+	<!-- Enshar -->
 	<raid id="36">
 		<raidTime>0 30 17 4,19 * ?</raidTime>
 		<raidTime>0 30 20 11,26 * ?</raidTime>
@@ -140,28 +140,16 @@
 		<raidTime>0 30 17 4,19 * ?</raidTime>
 		<raidTime>0 30 20 11,26 * ?</raidTime>
 	</raid>
+	<!-- Cygnea -->
 	<raid id="39">
-		<raidTime>0 30 17 4,19 * ?</raidTime>
-		<raidTime>0 30 20 11,26 * ?</raidTime>
+		<raidTime>0 30 17 5,20 * ?</raidTime>
+		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
-	<!-- Danaria -->
 	<raid id="40">
 		<raidTime>0 30 17 5,20 * ?</raidTime>
 		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
 	<raid id="41">
-		<raidTime>0 30 17 5,20 * ?</raidTime>
-		<raidTime>0 30 20 13,28 * ?</raidTime>
-	</raid>
-	<raid id="42">
-		<raidTime>0 30 17 5,20 * ?</raidTime>
-		<raidTime>0 30 20 13,28 * ?</raidTime>
-	</raid>
-	<raid id="43">
-		<raidTime>0 30 17 5,20 * ?</raidTime>
-		<raidTime>0 30 20 13,28 * ?</raidTime>
-	</raid>
-	<raid id="44">
 		<raidTime>0 30 17 5,20 * ?</raidTime>
 		<raidTime>0 30 20 13,28 * ?</raidTime>
 	</raid>
