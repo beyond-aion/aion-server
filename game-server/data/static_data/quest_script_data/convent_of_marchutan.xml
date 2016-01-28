@@ -2,8 +2,8 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
-			20000 [SCRIPT] Vidar's Call
-			20001 [SCRIPT] Traveling to Gelkmaros
+			20000 [REMOVED] Vidar's Call
+			20001 [REMOVED] Traveling to Gelkmaros
 			29500 [UNUSED] Gaining the Templar's Stigma (level 99)
 			29501 [UNUSED] Gaining the Gladiator's Stigma (level 99)
 			29502 [UNUSED] Gaining the Cleric's Stigma (level 99)

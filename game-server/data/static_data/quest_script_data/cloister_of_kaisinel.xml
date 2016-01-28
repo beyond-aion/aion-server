@@ -2,8 +2,8 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
-			10000 [SCRIPT] Lavirintos's Call
-			10001 [SCRIPT] Bound for Inggison!
+			10000 [REMOVED] Lavirintos's Call
+			10001 [REMOVED] Bound for Inggison!
 			19500 [UNUSED] Gaining the Templar's Stigma (level 99)
 			19501 [UNUSED] Gaining the Gladiator's Stigma (level 99)
 			19502 [UNUSED] Gaining the Cleric's Stigma (level 99)
