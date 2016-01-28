@@ -47,6 +47,10 @@
 		<spawn npc_id="798988" respawn_time="295">
 			<spot x="379.701" y="950.057" z="460.79" h="117"/>
 		</spawn>
+		<!-- Adrinne -->
+		<spawn npc_id="833005" respawn_time="295">
+			<spot x="1324.2" y="297.4" z="589.8113" h="43"/>
+		</spawn>
 		<!-- Aerolink to Sanctum -->
 		<spawn npc_id="730220" respawn_time="295">
 			<spot x="1375.89" y="367.848" z="589.6" h="73" static_id="1314"/>
@@ -4501,6 +4505,10 @@
 			<spot x="1355.99" y="2292.08" z="301.281" h="107"/>
 			<spot x="1372.17" y="2294.77" z="301.281" h="93"/>
 			<spot x="1802.39" y="2211.55" z="326.457" h="24"/>
+		</spawn>
+		<!-- Lenard -->
+		<spawn npc_id="833006" respawn_time="295">
+			<spot x="1320.8" y="295.7" z="589.7876" h="43"/>
 		</spawn>
 		<!-- Lesarius -->
 		<spawn npc_id="799827" respawn_time="295">
