@@ -1,8 +1,8 @@
 package quest.haramel;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author zhkchi
  * @reworked vlog
+ * @Modified Majka
  */
 public class _28510DestroytheHaramelFacilities extends QuestHandler {
 
@@ -21,7 +22,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 203560, 700953 };
+		int[] npcs = {804605, 700953, 203560};
 		qe.registerQuestNpc(804605).addOnQuestStart(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -49,7 +50,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 					return sendQuestStartDialog(env, 182212021, 1);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 700953: { // Processed Odella
@@ -57,7 +58,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 						if (var >= 3 && var < 5) {
 							return useQuestObject(env, var, var + 1, false, true); // 4,5
 						} else if (var == 5) {
-							return useQuestObject(env, 5, 5, true, true); // reward
+							return useQuestObject(env, var, var + 1, true, true); // Reward
 						}
 					}
 				}

@@ -2,7 +2,6 @@ package quest.beluslan;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -16,6 +15,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
+ * @Modified Majka
  */
 public class _24052AFrozenCity extends QuestHandler {
 
@@ -44,7 +44,7 @@ public class _24052AFrozenCity extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24050, true);
+		return defaultOnLvlUpEvent(env, 24050);
 	}
 
 	@Override
@@ -55,24 +55,23 @@ public class _24052AFrozenCity extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204753) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
-					int[] questItems = { 182215378, 182215379, 182215380 };
-					return sendQuestEndDialog(env, questItems);
 				}
+				int[] questItems = { 182215378, 182215379, 182215380 };
+				return sendQuestEndDialog(env, questItems);
 			}
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204753) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -98,11 +97,10 @@ public class _24052AFrozenCity extends QuestHandler {
 		final int itemObjId = item.getObjectId();
 
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!player.isInsideZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
+		if (!player.isInsideItemUseZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
 			return HandlerResult.FAILED;
 
-		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2 || id != 182215380
-			&& qs.getQuestVarById(0) == 3)
+		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2 || id != 182215380 && qs.getQuestVarById(0) == 3)
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
@@ -124,7 +122,8 @@ public class _24052AFrozenCity extends QuestHandler {
 				} else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, id, 1);
 					playQuestMovie(env, 245);
-					changeQuestStep(env, 3, 3, true); // reward
+					qs.setQuestVar(4);
+					changeQuestStep(env, 4, 4, true); // reward
 				}
 			}
 		}, 2000);

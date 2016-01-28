@@ -1,7 +1,6 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _24023ABlazingRescue extends QuestHandler {
 
 	private final static int questId = 24023;
-	private final static int[] npc_ids = { 204317, 204408, 204372 };
+	private final static int[] npc_ids = { 204317, 204372, 204408 };
 
 	public _24023ABlazingRescue() {
 		super(questId);
@@ -39,7 +38,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020, true);
+		return defaultOnLvlUpEvent(env, 24020);
 	}
 
 	@Override
@@ -63,13 +62,13 @@ public class _24023ABlazingRescue extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204317: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -81,7 +80,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 				}
 					break;
 				case 204408: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -116,7 +115,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204372) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

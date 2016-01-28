@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14040OrdersFromReshanta extends QuestHandler {
 
@@ -25,6 +26,7 @@ public class _14040OrdersFromReshanta extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(278501).addOnTalkEvent(questId);
 		qe.registerOnEnterWorld(questId);
+		qe.registerOnEnterZoneMissionEnd(questId);
 	}
 
 	@Override
@@ -44,18 +46,12 @@ public class _14040OrdersFromReshanta extends QuestHandler {
 				return sendQuestDialog(env, 10002);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 				qs.setStatus(QuestStatus.REWARD);
-				qs.setQuestVarById(0, 1);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-				int[] ids = { 14041, 14042, 14043, 14044, 14045, 14046, 14047 };
-				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-				}
-			}
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
@@ -74,5 +70,13 @@ public class _14040OrdersFromReshanta extends QuestHandler {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean onZoneMissionEndEvent(QuestEnv env) {
+		int[] ids = { 14041, 14042, 14043, 14044, 14045, 14046, 14047 };
+		for (int id : ids)
+			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+		return true;
 	}
 }

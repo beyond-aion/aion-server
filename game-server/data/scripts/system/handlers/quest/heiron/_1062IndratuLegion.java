@@ -11,10 +11,13 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1062IndratuLegion extends QuestHandler {
 
@@ -27,17 +30,11 @@ public class _1062IndratuLegion extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(212588).addOnKillEvent(questId);
 		qe.registerQuestNpc(700220).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
@@ -138,6 +135,15 @@ public class _1062IndratuLegion extends QuestHandler {
 				return true;
 			} else if (qs.getQuestVarById(0) == 7) {
 				changeQuestStep(env, 7, 13, false);
+				final Npc npc = (Npc) env.getVisibleObject();
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+				@Override
+				public void run() {
+					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212588, npc.getX(), npc.getY(),
+						npc.getZ(), npc.getHeading());
+					}
+				}, 3000);
 				return true;
 			}
 		}

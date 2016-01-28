@@ -38,7 +38,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String SELECT_LEGION_QUERY1 = "SELECT * FROM legions WHERE id=?";
 	private static final String SELECT_LEGION_QUERY2 = "SELECT * FROM legions WHERE name=?";
 	private static final String DELETE_LEGION_QUERY = "DELETE FROM legions WHERE id = ?";
-	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, siege_glory_points=? WHERE id=?";
+	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, siege_glory_points=?, occupied_legion_dominion=?, last_legion_dominion=?, current_legion_dominion=? WHERE id=?";
 	/** Announcement Queries **/
 	private static final String INSERT_ANNOUNCEMENT_QUERY = "INSERT INTO legion_announcement_list(`legion_id`, `announcement`, `date`) VALUES (?, ?, ?)";
 	private static final String SELECT_ANNOUNCEMENTLIST_QUERY = "SELECT * FROM legion_announcement_list WHERE legion_id=? ORDER BY date ASC LIMIT 0,7;";
@@ -48,7 +48,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String UPDATE_EMBLEM_QUERY = "UPDATE legion_emblems SET emblem_id=?, color_a=?, color_r=?, color_g=?, color_b=?, emblem_type=?, emblem_data=? WHERE legion_id=?";
 	private static final String SELECT_EMBLEM_QUERY = "SELECT * FROM legion_emblems WHERE legion_id=?";
 	/** Storage Queries **/
-	private static final String SELECT_STORAGE_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
+	private static final String SELECT_STORAGE_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
 	/** History Queries **/
 	private static final String INSERT_HISTORY_QUERY = "INSERT INTO legion_history(`legion_id`, `date`, `history_type`, `name`, `tab_id`, `description`) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
@@ -112,7 +112,10 @@ public class MySQL5LegionDAO extends LegionDAO {
 				stmt.setInt(7, legion.getVolunteerPermission());
 				stmt.setInt(8, legion.getDisbandTime());
 				stmt.setInt(9, legion.getSiegeGloryPoints());
-				stmt.setInt(10, legion.getLegionId());
+				stmt.setInt(10, legion.getOccupiedLegionDominion());
+				stmt.setInt(11, legion.getLastLegionDominion());
+				stmt.setInt(12, legion.getCurrentLegionDominion());
+				stmt.setInt(13, legion.getLegionId());
 				stmt.execute();
 			}
 		});
@@ -145,6 +148,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
+					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});
@@ -181,6 +187,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
 					legion.setDisbandTime(resultSet.getInt("disband_time"));
+					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});
@@ -475,10 +484,11 @@ public class MySQL5LegionDAO extends LegionDAO {
 					int packCount = rset.getInt("pack_count");
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
-
+					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
+					
 					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 						false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount,
-						tempering, packCount, isAmplified == 1, buffSkill);
+						tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 					item.setPersistentState(PersistentState.UPDATED);
 					inventory.onLoadHandler(item);
 				}

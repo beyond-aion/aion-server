@@ -41,9 +41,7 @@
 	<item_collecting id="28505" start_npc_ids="804605"/>
 	<item_collecting id="28509" start_npc_ids="799523" end_npc_ids="799524"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18504" start_npc_ids="203166">
-		<monster var="0" end_var="65" npc_ids="216897 216905 216907 216913 216914 216915 216922 216898 216901 216902"/>
-	</monster_hunt>
+	<monster_hunt id="18504" start_npc_ids="203166"/>
 	<monster_hunt id="18507" start_npc_ids="799524" end_npc_ids="203166">
 		<monster var="0" end_var="1" npc_ids="216922"/>
 	</monster_hunt>
@@ -52,9 +50,7 @@
 		<monster var="1" end_var="3" npc_ids="216901"/>
 		<monster var="2" end_var="3" npc_ids="216902"/>
 	</monster_hunt>
-	<monster_hunt id="28504" start_npc_ids="804605">
-		<monster var="0" end_var="65" npc_ids="216897 216905 216907 216913 216914 216915 216922 216898 216901 216902"/>
-	</monster_hunt>
+	<monster_hunt id="28504" start_npc_ids="804605"/>
 	<monster_hunt id="28507" start_npc_ids="799524" end_npc_ids="804605">
 		<monster var="0" end_var="1" npc_ids="216922"/>
 	</monster_hunt>

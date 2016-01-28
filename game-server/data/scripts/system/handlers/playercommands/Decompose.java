@@ -1,6 +1,6 @@
 package playercommands;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
@@ -22,7 +22,7 @@ public class Decompose extends PlayerCommand {
 	public Decompose() {
 		super("decompose", "Opens decomposable items.");
 
-		setParamInfo("<item> - Decomposes the specified item.");
+		setParamInfo("<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).");
 	}
 
 	@Override
@@ -40,6 +40,16 @@ public class Decompose extends PlayerCommand {
 			return;
 		}
 
+		long count = Long.MAX_VALUE;
+		if (params.length > 1) {
+			try {
+				 count = Long.parseLong(params[1]);
+			} catch (NumberFormatException e) {
+				sendInfo(player, "Invalid count.");
+				return;
+			}
+		}
+
 		if (player.getInventory().getItemCountByItemId(itemId) == 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM);
 			return;
@@ -55,13 +65,13 @@ public class Decompose extends PlayerCommand {
 			return;
 		}
 
-		startTask(player, itemId);
+		startTask(player, itemId, count);
 	}
 
-	private void startTask(Player player, int itemId) {
+	private void startTask(Player player, int itemId, long count) {
 		player.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-			long remainingCount = player.getInventory().getItemCountByItemId(itemId);
+			long remainingCount = Math.min(player.getInventory().getItemCountByItemId(itemId), count);
 			long totalCount = 0;
 			DecomposeAction decomposeAction = null;
 			ItemUseObserver observer;
@@ -101,7 +111,7 @@ public class Decompose extends PlayerCommand {
 				}
 
 				Item item = player.getInventory().getFirstItemByItemId(itemId);
-				if (item == null || remainingCount == 0) {
+				if (item == null || remainingCount <= 0) {
 					cancelTask(player, observer, "Decomposing finished: Processed " + totalCount + "x " + ChatUtil.item(itemId) + ".");
 					return;
 				}

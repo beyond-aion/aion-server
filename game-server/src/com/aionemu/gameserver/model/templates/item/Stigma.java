@@ -14,48 +14,36 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "Stigma")
 public class Stigma {
-	
+
 	@XmlAttribute(name = "gain_skill_group1")
 	protected String gainSkillGroup1;
-	
+
 	@XmlAttribute(name = "gain_skill_group2")
 	protected String gainSkillGroup2;
-	
+
 	@XmlAttribute(name = "chargeable")
 	protected boolean chargeable;
-	
-	private List<Integer> chooseSkills() {
-		List<Integer> skills = new FastTable<>();
-		if(gainSkillGroup1 != null) {
-			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(gainSkillGroup1)) {
-				skills.add(st.getSkillId());
-			}
+
+	public List<SkillTemplate> getGroupSkillTemplates(int groupNo) {
+		List<SkillTemplate> skills = new FastTable<>();
+		if ((groupNo == 0 || groupNo == 1) && gainSkillGroup1 != null) {
+			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(gainSkillGroup1))
+				skills.add(st);
 		}
-		if(gainSkillGroup2 != null) {
-			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(gainSkillGroup2)) {
-				skills.add(st.getSkillId());
-			}
+		if ((groupNo == 0 || groupNo == 2) && gainSkillGroup2 != null) {
+			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(gainSkillGroup2))
+				skills.add(st);
 		}
 		return skills;
 	}
 
-	/**
-	 * Pass player data to calculate skill level
-	 * @return list
-	 */
-	public List<StigmaSkill> getSkills(int lvl) {
-		List<StigmaSkill> list = new FastTable<>();
-		// linked stigma skills are not skills  who cannot 
-		// be acquired by equip a stigma, they are skills added
-		// or deleted automatically so isLinked Stigma can be 
-		// set as false here
-		for (Integer skillId : chooseSkills())
-			list.add(new StigmaSkill(lvl, skillId, false));
-		return list;
+	public List<SkillTemplate> getAllSkillTemplates() {
+		return getGroupSkillTemplates(0);
 	}
 
 	public boolean isChargeable() {

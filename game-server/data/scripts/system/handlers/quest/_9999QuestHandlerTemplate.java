@@ -105,7 +105,7 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016"))) { // example zone
+			if (player.isInsideItemUseZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016"))) { // example zone
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));
 			}
 		}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			13830 [XML]	Stigma 101
+			13831 [XML]	The Wounds of Change
+			13832 [XML]	StiGreat
+			13833 [XML]	Stigmore
+			13834 [XML]	StigMajor
+			23830 [XML]	A Bundle to Enjoy
+			23831 [XML]	Stigma Stones May Break Your Bones?
+			23832 [XML]	Better Than Great
+			23833 [XML]	You Aud-a Know
+			23834 [XML]	Major Sixth
+		[END] SUMMARY
+	-->
+	<!-- REPORTING QUESTS -->
+	<report_on_levelup id="13830" end_npc_ids="798380"/>
+	<report_on_levelup id="13831" end_npc_ids="798381"/>
+	<report_on_levelup id="13832" end_npc_ids="203711"/>
+	<report_on_levelup id="13833" end_npc_ids="203711"/>
+	<report_on_levelup id="13834" end_npc_ids="798909"/>
+	<report_on_levelup id="23830" end_npc_ids="798382"/>
+	<report_on_levelup id="23831" end_npc_ids="798383"/>
+	<report_on_levelup id="23832" end_npc_ids="204061"/>
+	<report_on_levelup id="23833" end_npc_ids="204061"/>
+	<report_on_levelup id="23834" end_npc_ids="799208"/>
+	<!-- COLLECTING QUESTS -->
+	<!-- HUNTING QUESTS -->
+</quest_scripts>

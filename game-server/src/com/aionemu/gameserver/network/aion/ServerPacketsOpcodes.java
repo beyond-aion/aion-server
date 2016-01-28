@@ -253,6 +253,8 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ATREIAN_PASSPORT.class, 0x12B, idSet);
 		addPacketOpcode(SM_GAMEGUARD.class, 0x7D, idSet);
 		addPacketOpcode(SM_CUSTOM_PACKET.class, 99999, idSet); // fake packet
+		addPacketOpcode(SM_LEGION_DOMINION_RANK.class, 0x12E, idSet);
+		addPacketOpcode(SM_LEGION_DOMINION_LOC_INFO.class, 0x12F, idSet);
 
 		// Unknow packet
 		addPacketOpcode(SM_AFTER_TIME_CHECK_4_7_5.class, 0x124, idSet);

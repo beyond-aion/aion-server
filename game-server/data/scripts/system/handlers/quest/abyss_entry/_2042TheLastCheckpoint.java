@@ -70,6 +70,8 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
+							} else if (var >= 2 && var <= 7) {
+								return sendQuestDialog(env, 3143);
 							} else if (var == 8) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 9) {
@@ -84,10 +86,10 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 						}
 						case SETPRO2: {
 							if (var == 1) {
-								QuestService.questTimerStart(env, 150);
+								QuestService.questTimerStart(env, 70);
 								return defaultCloseDialog(env, 1, 2); // 2
 							} else if (var == 9) {
-								QuestService.questTimerStart(env, 150);
+								QuestService.questTimerStart(env, 70);
 								return defaultCloseDialog(env, 9, 2); // 2
 							}
 						}
@@ -143,7 +145,8 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 				return true;
 			} else if (rings[5].equals(flyingRing)) {
 				changeQuestStep(env, 7, 8, false); // 8
-				QuestService.questTimerEnd(env);
+				if (qs.getQuestVarById(0) == 8)
+					QuestService.questTimerEnd(env);
 				return true;
 			}
 		}

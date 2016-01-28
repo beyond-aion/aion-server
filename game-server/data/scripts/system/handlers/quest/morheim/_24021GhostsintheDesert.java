@@ -21,7 +21,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 	public _24021GhostsintheDesert() {
 		super(questId);
 	}
-
+	
 	@Override
 	public void register() {
 		qe.registerOnEnterZoneMissionEnd(questId);
@@ -39,7 +39,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020, true);
+		return defaultOnLvlUpEvent(env, 24020);
 	}
 
 	@Override
@@ -48,6 +48,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
+		
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
@@ -91,13 +92,13 @@ public class _24021GhostsintheDesert extends QuestHandler {
 						}
 					}
 				}
-				case 802046: { // Tofynir
+				case 802046: { //Tofynir
 					switch (dialog) {
 						case QUEST_SELECT: {
-							if (var == 2) {
+							if (var == 2){
 								return sendQuestDialog(env, 1693);
 							}
-							if (var == 3) {
+							if (var == 3){
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -107,7 +108,8 @@ public class _24021GhostsintheDesert extends QuestHandler {
 						case SETPRO4: {
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 3, 4, 182215363, 1, 0, 0); // 4
-							} else {
+							}
+							else {
 								return sendQuestSelectionDialog(env);
 							}
 						}
@@ -117,11 +119,13 @@ public class _24021GhostsintheDesert extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204329) { // Tofa
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204329) {  // Tofa
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -134,7 +138,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (item.getItemId() == 182215363 && player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q2032"))) {
+			if (item.getItemId() == 182215363 && player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2032"))) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 4, 4, true, 88)); // reward
 			}
 		}

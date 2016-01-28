@@ -13,14 +13,21 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 
 	private int type;
 	private int debuffLvl;
+	private int cooldown;
 	private Player player;
 	private Collection<Player> players;
+
+	public SM_SERIAL_KILLER(int type, int debuffLvl, int cooldown) {
+		this.type = type;
+		this.debuffLvl = debuffLvl;
+		this.cooldown = cooldown;
+	}
 
 	public SM_SERIAL_KILLER(int type, int debuffLvl) {
 		this.type = type;
 		this.debuffLvl = debuffLvl;
 	}
-
+	
 	public SM_SERIAL_KILLER(int type, Player player) {
 		this.type = type;
 		this.player = player;
@@ -37,12 +44,13 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 		writeD(0x01);
 		writeD(0x01);
 		switch (type) {
-			case 0:
-			case 1:
-			case 7:
+			case 0: //killer + no announcement
+			case 1: //killer + announcement
+			case 7: //guard + cd no announcement
+			case 8: //guard + announcement
 				writeH(0x01);
 				writeD(debuffLvl);
-				writeD(0x00);
+				writeD(cooldown); //cooldown
 				break;
 			case 5:
 				writeH(players.size());
@@ -62,8 +70,8 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 					writeH(7); // unk
 				}
 				break;
-			case 6:
-			case 9:
+			case 6: //killer
+			case 9: //guard
 				writeH(0x01);// unk
 				writeD(player.getSKInfo().getRank());
 				writeD(player.getObjectId());

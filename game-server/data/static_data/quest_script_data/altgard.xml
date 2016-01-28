@@ -55,7 +55,7 @@
 			2234 [XML] An Irritating Problem
 			2235 [XML] Clearing the Path
 			2236 [XML] Rarified Tastes
-			2237 [SCRIPT] A Fertile Field
+			2237 [REMOVED] A Fertile Field
 			2238 [XML] A Matter of Pride
 			2239 [SCRIPT] Malodor Antidote
 			2240 [UNUSED] Leinolz's Whereabouts
@@ -92,7 +92,7 @@
 			2271 [SCRIPT] Aurtri's Letter
 			2272 [XML] The Lost Cube
 			2273 [XML] Emergency Rations
-			2274 [SCRIPT] Black Claw Baton
+			2274 [REMOVED] Black Claw Baton
 			2275 [XML] A Change of Diet
 			2276 [XML] Branching out Further
 			2277 [XML] A Lucrative Endeavor
@@ -120,6 +120,16 @@
 			2299 [XML] Lakutu's Trade
 			9556 [TODO] [Event] Ascension Blessings
 			9557 [TODO] [Event] Yearning for the Sky
+			24010 [SCRIPT] Suthran's Orders
+			24011 [SCRIPT] Funny Floating Fungus
+			24012 [SCRIPT] An Ominous Crop
+			24013 [SCRIPT] Poison In the Waters
+			24014 [SCRIPT] Stomp Out the Plot
+			24015 [SCRIPT] Totem-Plowed
+			24016 [SCRIPT] A Strange New Threat
+			24112 [SCRIPT] No Laissez-faire for Lepharists
+			24230 [XML] A Grave Situation
+			24231 [XML] Take Back, Sword!
 			80005 [XML] [Event] Heart Headband Pursuit
 			80142 [XML] [Event] Lost in Altgard
 			80143 [TODO] [Event] Warped Rift Blocking
@@ -145,7 +155,16 @@
 	<report_to id="2286" start_npc_ids="203557" end_npc_ids="203560"/>
 	<report_to id="2287" start_npc_ids="203557" end_npc_ids="203558"/>
 	<report_to id="2291" start_npc_ids="203639" end_npc_ids="203617"/>
-	<report_to id="2296" start_npc_ids="203656" end_npc_ids="798036"/>
+	
+	<!-- REPORTING TO MANY QUESTS -->
+	<report_to_many id="2274" start_item_id="182203249" end_npc_ids="203560" end_dialog_id="2375">
+		<npc_infos var="0" npc_id="203668" quest_dialog="1353"/>
+		<npc_infos var="1" npc_id="203560" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
+	<report_to_many id="2296" start_item_id="182203263" end_npc_ids="798036" end_dialog_id="2375">
+		<npc_infos var="0" npc_id="203656" quest_dialog="1353"/>
+		<npc_infos var="1" npc_id="798036" quest_dialog="2375" close_dialog="1009"/>
+	</report_to_many>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2144" start_npc_ids="203690"/>
 	<item_collecting id="2145" start_npc_ids="203690"/>
@@ -160,8 +179,9 @@
 	<item_collecting id="2219" start_npc_ids="203604"/>
 	<item_collecting id="2224" start_npc_ids="203620"/>
 	<item_collecting id="2227" start_npc_ids="203639"/>
-	<item_collecting id="2236" start_npc_ids="203615"/>
-	<item_collecting id="2238" start_npc_ids="203616"/>
+	<item_collecting id="2236" start_npc_ids="832822"/>
+	<item_collecting id="2237" start_npc_ids="832822"/>
+	<item_collecting id="2238" start_npc_ids="832821" end_npc_ids="203616"/>
 	<item_collecting id="2241" start_npc_ids="203630"/>
 	<item_collecting id="2246" start_npc_ids="203645"/>
 	<item_collecting id="2249" start_npc_ids="798033"/>
@@ -170,7 +190,6 @@
 	<item_collecting id="2254" start_npc_ids="203651"/>
 	<item_collecting id="2257" start_npc_ids="203673"/>
 	<item_collecting id="2259" start_npc_ids="203649"/>
-	<item_collecting id="2263" start_npc_ids="798036"/>
 	<item_collecting id="2265" start_npc_ids="203665"/>
 	<item_collecting id="2269" start_npc_ids="203655"/>
 	<item_collecting id="2270" start_npc_ids="203655"/>
@@ -179,10 +198,11 @@
 	<item_collecting id="2275" start_npc_ids="203693"/>
 	<item_collecting id="2276" start_npc_ids="203693"/>
 	<item_collecting id="2277" start_npc_ids="203556"/>
-	<item_collecting id="2292" start_npc_ids="203625"/>
+	<item_collecting id="2292" start_npc_ids="832822"/>
 	<item_collecting id="2297" start_npc_ids="798105"/>
 	<item_collecting id="2298" start_npc_ids="203690"/>
 	<item_collecting id="2299" start_npc_ids="203690"/>
+	<item_collecting id="24231" start_npc_ids="832821"/>
 	<item_collecting id="80005" start_npc_ids="799789"/>
 	<item_collecting id="80142" start_npc_ids="830244"/>
 	<!-- HUNTING QUESTS -->
@@ -205,4 +225,5 @@
 	<monster_hunt id="2281" start_npc_ids="203558"/>
 	<monster_hunt id="2282" start_npc_ids="203557"/>
 	<monster_hunt id="2293" start_npc_ids="203659"/>
+	<monster_hunt id="24230" start_npc_ids="832821" end_dialog_id="2375"/>
 </quest_scripts>

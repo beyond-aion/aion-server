@@ -23,7 +23,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(204257).addOnQuestStart(questId);
 		qe.registerQuestNpc(204257).addOnTalkEvent(questId);
-		qe.registerQuestNpc(798800).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204052).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -37,13 +37,18 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204257) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					if (giveQuestItem(env, 182207142, 1))
+				switch(env.getDialog()) {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					else
-						return true;
-				} else
-					return sendQuestStartDialog(env);
+					case ASK_QUEST_ACCEPT:
+						return sendQuestDialog(env, 4);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182207142, 1);
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return sendQuestDialog(env, 1004);
+				}
 			}
 		}
 
@@ -52,7 +57,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798800: {
+				case 204052: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							qs.setStatus(QuestStatus.REWARD);
@@ -61,8 +66,9 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798800) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 204052) {
 				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
 					return sendQuestDialog(env, 5);
 				else {

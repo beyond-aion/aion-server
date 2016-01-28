@@ -6,10 +6,12 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author zhkchi
  * @reworked vlog
+ * @Modified Majka
  */
 public class _18500BigKinah extends QuestHandler {
 
@@ -22,25 +24,12 @@ public class _18500BigKinah extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 203106, 203166, 730304, 730305, 799522, 206150 };
-		qe.registerOnEnterWorld(questId);
 		qe.registerQuestNpc(203106).addOnQuestStart(questId);
+		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q18500_206150_3_210030000"), questId); // Haramel Entrance Zone
+		qe.registerOnMovieEndQuest(175, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-	}
-
-	@Override
-	public boolean onEnterWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (player.getWorldId() == 300200000 && var == 3) {
-				changeQuestStep(env, 3, 3, true); // reward
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -58,7 +47,7 @@ public class _18500BigKinah extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203166: { // Zephyros
@@ -100,7 +89,7 @@ public class _18500BigKinah extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799522) { // Moorilerk
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
@@ -109,6 +98,49 @@ public class _18500BigKinah extends QuestHandler {
 				} else {
 					return sendQuestEndDialog(env);
 				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Investigate Suspicious Relic Site nearby.
+
+		if (zoneName == ZoneName.get("LF1A_SENSORYAREA_Q18500_206150_3_210030000")) {
+
+			Player player = env.getPlayer();
+			if (player == null) {
+				return false;
+			}
+
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs != null && qs.getStatus() == QuestStatus.START) {
+				int var = qs.getQuestVarById(0);
+
+				if (var == 3) {
+					playQuestMovie(env, 175);
+					player.getMoveController().abortMove();
+				}
+			}
+			return true;
+				}
+		return false;
+				}
+
+	@Override
+	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+		Player player = env.getPlayer();
+
+		if (player == null) {
+			return false;
+				}
+
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
+			if (var == 3) {
+				changeQuestStep(env, 3, 3, true); // reward
+				return true;
 			}
 		}
 		return false;

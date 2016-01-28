@@ -139,10 +139,10 @@
 	<item_order id="13520" end_npc_id="800527"/>
 	<item_order id="23520" end_npc_id="800529"/>
 	<!-- KILL WORLD QUESTS -->
-	<kill_in_world id="13516" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="4" start_dialog_id="1011"/>
-	<kill_in_world id="13517" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="44" start_dialog_id="1011"/>
+	<kill_in_world id="13516" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="2" min_rank="15" start_dialog_id="1011"/>
+	<kill_in_world id="13517" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="44" min_rank="10" start_dialog_id="1011"/>
 	<!-- <kill_in_world id="13519" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="1" start_dialog_id="1011"/> -->
-	<kill_in_world id="23516" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="4" start_dialog_id="1011"/>
-	<kill_in_world id="23517" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="44" start_dialog_id="1011"/>
+	<kill_in_world id="23516" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="2" min_rank="15" start_dialog_id="1011"/>
+	<kill_in_world id="23517" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="44" min_rank="10" start_dialog_id="1011"/>
 	<!-- <kill_in_world id="23519" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="1" start_dialog_id="1011"/> -->
 </quest_scripts>

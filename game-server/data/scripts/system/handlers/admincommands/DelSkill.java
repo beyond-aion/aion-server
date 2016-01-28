@@ -90,7 +90,7 @@ public class DelSkill extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
 			return false;
 		}
-		if (player.getSkillList().getSkillEntry(skillId).isStigma()) {
+		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
 			PacketSendUtility.sendMessage(admin, "You can't remove stigma skill.");
 			return false;
 		}
@@ -103,7 +103,7 @@ public class DelSkill extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
 		} else {
 			for (PlayerSkillEntry skillEntry : playerSkillList.getAllSkills()) {
-				if (!skillEntry.isStigma()) {
+				if (!skillEntry.isStigmaSkill()) {
 					SkillLearnService.removeSkill(player, skillEntry.getSkillId());
 				}
 			}

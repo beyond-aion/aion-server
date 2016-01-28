@@ -1,1 +1,0 @@
-UPDATE `inventory` SET `rnd_bonus` = NULL WHERE `rnd_bonus` = '0';

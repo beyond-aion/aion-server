@@ -23,8 +23,9 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 	@Override
 	public void register() {
 		int[] mobs = { 211298, 211305, 211304, 211297 };
-		qe.registerQuestNpc(798082).addOnQuestStart(questId);
-		qe.registerQuestNpc(204378).addOnTalkEvent(questId);
+		qe.registerQuestNpc(798082).addOnQuestStart(questId); // Bicorunerk
+		qe.registerQuestNpc(798082).addOnTalkEvent(questId); // Bicorunerk
+		qe.registerQuestNpc(204378).addOnTalkEvent(questId); // Favyr
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}

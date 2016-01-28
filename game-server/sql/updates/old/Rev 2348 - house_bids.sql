@@ -1,1 +1,0 @@
-ALTER TABLE `house_bids` DROP FOREIGN KEY `player_id_ibfk_1`;

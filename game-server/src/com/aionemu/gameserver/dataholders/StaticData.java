@@ -294,6 +294,9 @@ public class StaticData {
 	
 	@XmlElement(name = "kill_bounties")
 	public KillBountyData killBountyData;
+	
+	@XmlElement(name= "legion_dominion_template") 
+	public LegionDominionData legionDominionData;
 
 	// JAXB callback
 	@SuppressWarnings("unused")
@@ -387,5 +390,6 @@ public class StaticData {
 		log.info("Loaded " + arcadeUpgradeData.size() + " arcade upgrade entries");
 		log.info("Loaded " + atreianPassportData.size() + " atreian passports");
 		log.info("Loaded " + raidData.size() + " raid entries");
+		log.info("Loaded " + legionDominionData.size() + " Legion Dominion Locations");
 	}
 }

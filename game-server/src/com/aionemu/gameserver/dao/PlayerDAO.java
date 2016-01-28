@@ -153,7 +153,7 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract int getCharacterCountOnAccount(final int accountId);
 
 	/**
-	 * Get characters count for a given Race
+	 * Get characters count for a given Race (counts max 1 char per account and race).
 	 *
 	 * @param race
 	 * @return the number of characters for race
@@ -178,6 +178,24 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract Set<Integer> getInactiveAccounts(final int daysOfInactivity);
 
 	public abstract void setPlayerLastTransferTime(final int playerId, final long time);
+
+	/**
+	 * Returns the character level of his last session.
+	 * 
+	 * @param playerObjectId
+	 * @return Old level, 0 on first DB initialization if there were already players in the table.
+	 * @see #storeOldCharacterLevel(int, int)
+	 */
+	public abstract int getOldCharacterLevel(int playerObjectId);
+
+	/**
+	 * Saves the last known character level.
+	 * 
+	 * @param playerObjectId
+	 * @param level
+	 * @see #getOldCharacterLevel(int)
+	 */
+	public abstract void storeOldCharacterLevel(int playerObjectId, int level);
 
 	@Override
 	public final String getClassName() {

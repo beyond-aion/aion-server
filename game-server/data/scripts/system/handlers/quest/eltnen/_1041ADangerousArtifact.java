@@ -7,11 +7,13 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Xitanium
- * @reworked vlog
+ * @reworked vlog, Pad
  */
 public class _1041ADangerousArtifact extends QuestHandler {
 
@@ -24,7 +26,7 @@ public class _1041ADangerousArtifact extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 203901, 204015, 203833, 278500, 204042, 700181 };
-		qe.registerGetingItem(182201011, questId);
+		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnLogOut(questId);
 		qe.registerAddOnReachTargetEvent(questId);
 		qe.registerAddOnLostTargetEvent(questId);
@@ -108,7 +110,9 @@ public class _1041ADangerousArtifact extends QuestHandler {
 							}
 						}
 						case SETPRO5: {
-							return defaultCloseDialog(env, 5, 6); // 6
+							defaultCloseDialog(env, 5, 6); // 6
+							TeleportService2.teleportTo(player, 210020000, 266.5f, 2791.77f, 272.48f, (byte) 46);
+							return true;
 						}
 					}
 					break;
@@ -122,13 +126,18 @@ public class _1041ADangerousArtifact extends QuestHandler {
 								return sendQuestDialog(env, 3398);
 							}
 						}
+						case SELECT_ACTION_3059: {
+							return playQuestMovie(env, 37);
+						}
+						case SELECT_ACTION_3399: {
+							return playQuestMovie(env, 38);
+						}
 						case SETPRO7: {
 							giveQuestItem(env, 182201011, 1);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 7, 8);
 						}
 						case SETPRO8: {
 							changeQuestStep(env, 9, 9, true); // reward
-							playQuestMovie(env, 38);
 							return closeDialogWindow(env);
 						}
 					}
@@ -136,7 +145,8 @@ public class _1041ADangerousArtifact extends QuestHandler {
 				}
 				case 700181: { // Stolen Artifact
 					if (dialog == DialogAction.USE_OBJECT) {
-						return useQuestObject(env, 8, 9, false, 0, 0, 0, 182201011, 1); // 9
+						QuestService.questTimerStart(env, 5);
+						return true;
 					}
 					break;
 				}
@@ -154,15 +164,15 @@ public class _1041ADangerousArtifact extends QuestHandler {
 	}
 
 	@Override
-	public boolean onGetItemEvent(QuestEnv env) {
+	public boolean onQuestTimerEndEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 7) {
-				changeQuestStep(env, 7, 8, false); // 8
-				return playQuestMovie(env, 37);
-			}
+
+		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 8) {
+			Npc artifact = World.getInstance().getWorldMap(210020000).getMainWorldMapInstance().getNpc(700181);
+			if (artifact != null && !artifact.getLifeStats().isAlreadyDead())
+				artifact.getController().onDie(env.getPlayer());
+			return useQuestObject(env, 8, 9, false, 0, 0, 0, 182201011, 1); // 9
 		}
 		return false;
 	}

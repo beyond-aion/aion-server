@@ -13,6 +13,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24043LazyLanguageLessons extends QuestHandler {
 
@@ -90,7 +91,8 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -121,11 +123,13 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278003) { // Hisui
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -142,8 +146,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 			if (var == 2) {
 				final Npc npc = (Npc) env.getVisibleObject();
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
-				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
-					npc.getZ()) <= 15) {
+				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(), npc.getZ()) <= 15) {
 					npc.getController().onDie(player);
 					changeQuestStep(env, 2, 3, false); // 3
 					return true;
@@ -160,6 +163,6 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040, true);
+		return defaultOnLvlUpEvent(env, 24040);
 	}
 }

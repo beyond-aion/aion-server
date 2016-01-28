@@ -22,6 +22,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * 
  * @author Erin
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2033DestroyingtheCurse extends QuestHandler {
 
@@ -34,7 +35,6 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204391, 790020, 204393, 204394, 204395, 204396, 204397, 204398 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182204007, questId);
 		for (int npc : npcs) {
@@ -72,9 +72,11 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 2) {
+							}
+							else if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							} else if (var == 3) {
+							}
+							else if (var == 3) {
 								return sendQuestDialog(env, 10000);
 							}
 						}
@@ -87,7 +89,8 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 						case SETPRO4: {
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 3, 4, 182204007, 1, 0, 0); // 4
-							} else {
+							}
+							else {
 								return defaultCloseDialog(env, 3, 3);
 							}
 						}
@@ -121,7 +124,7 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 				case 204396:
 				case 204397:
 				case 204398: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
@@ -133,11 +136,13 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790020) { // Kellan
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -152,7 +157,7 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 6) {
-				if (player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q2033"))) {
+				if (player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2033"))) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 6, 6, true, 75)); // reward
 				}
 			}
@@ -161,12 +166,7 @@ public class _2033DestroyingtheCurse extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

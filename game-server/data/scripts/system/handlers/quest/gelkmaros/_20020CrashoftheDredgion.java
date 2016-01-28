@@ -143,7 +143,7 @@ public class _20020CrashoftheDredgion extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20020"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("DF4_ITEMUSEAREA_Q20020"))) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 6, 7, false)); // 7
 			}
 		}

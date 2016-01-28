@@ -6,7 +6,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dataholders.DataManager;

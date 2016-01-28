@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _14043DrawlingBalaur extends QuestHandler {
 
@@ -44,7 +45,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14040, true);
+		return defaultOnLvlUpEvent(env, 14040);
 	}
 
 	@Override

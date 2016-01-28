@@ -58,9 +58,6 @@ public class MembershipConfig {
 	@Property(key = "gameserver.quest.limit.disable", defaultValue = "10")
 	public static byte QUEST_LIMIT_DISABLED;
 
-	@Property(key = "gameserver.titles.additional.enable", defaultValue = "10")
-	public static byte TITLES_ADDITIONAL_ENABLE;
-
 	@Property(key = "gameserver.character.additional.enable", defaultValue = "10")
 	public static byte CHARACTER_ADDITIONAL_ENABLE;
 

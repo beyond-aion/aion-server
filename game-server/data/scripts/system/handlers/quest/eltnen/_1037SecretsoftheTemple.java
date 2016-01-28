@@ -11,6 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1037SecretsoftheTemple extends QuestHandler {
 
@@ -22,8 +23,7 @@ public class _1037SecretsoftheTemple extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 203965, 203967, 700151, 700154, 700150, 700153, 700152 };
-		qe.registerOnEnterZoneMissionEnd(questId);
+		int[] npcs = {203965, 203967, 700151, 700154, 700150, 700153, 700152};
 		qe.registerOnLevelUp(questId);
 		qe.registerGetingItem(182201027, questId);
 		for (int npc : npcs) {
@@ -139,12 +139,7 @@ public class _1037SecretsoftheTemple extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
+		return defaultOnLvlUpEvent(env, 1300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

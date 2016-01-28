@@ -6,9 +6,11 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author zhkchi
+ * @Modified Majka
  */
 public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 
@@ -22,24 +24,11 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 	public void register() {
 		int[] npcs = { 203560, 203649, 730306, 730307, 799522 };
 		qe.registerQuestNpc(203560).addOnQuestStart(questId);
+		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q28500_206151_3_220030000"), questId);
+		qe.registerOnMovieEndQuest(217, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnEnterWorld(questId);
-	}
-
-	@Override
-	public boolean onEnterWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (player.getWorldId() == 300200000 && var == 3) {
-				changeQuestStep(env, 3, 3, true); // reward
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -50,17 +39,17 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203560) {
+			if (targetId == 203560) { // Morn
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203649: {
+				case 203649: { // Gulkalla
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0) {
@@ -72,7 +61,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 					}
 					break;
 				}
-				case 730306: {
+				case 730306: { // Discarded Odium Piece
 					switch (dialog) {
 						case USE_OBJECT: {
 							if (var == 1) {
@@ -85,7 +74,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 					}
 					break;
 				}
-				case 730307: {
+				case 730307: { // Discarded Odium Pile
 					switch (dialog) {
 						case USE_OBJECT: {
 							if (var == 2) {
@@ -99,8 +88,8 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799522) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 799522) { // Moorilerk
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
@@ -108,6 +97,49 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 				} else {
 					return sendQuestEndDialog(env);
 				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Investigate the Abandoned Relic Site.
+
+		if (zoneName == ZoneName.get("DF1A_SENSORYAREA_Q28500_206151_3_220030000")) {
+
+			Player player = env.getPlayer();
+			if (player == null) {
+				return false;
+			}
+
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs != null && qs.getStatus() == QuestStatus.START) {
+				int var = qs.getQuestVarById(0);
+
+				if (var == 3) {
+					playQuestMovie(env, 217);
+					player.getMoveController().abortMove();
+				}
+			}
+			return true;
+				}
+		return false;
+				}
+	
+	@Override
+	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+		Player player = env.getPlayer();
+
+		if (player == null) {
+			return false;
+				}
+
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
+			if (var == 3) {
+				changeQuestStep(env, 3, 3, true); // reward
+				return true;
 			}
 		}
 		return false;

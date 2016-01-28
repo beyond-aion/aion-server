@@ -14,6 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24046TheShadowCalls extends QuestHandler {
 
@@ -43,7 +44,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040, true);
+		return defaultOnLvlUpEvent(env, 24040);
 	}
 
 	@Override
@@ -99,7 +100,8 @@ public class _24046TheShadowCalls extends QuestHandler {
 					if (dialog == DialogAction.SETPRO4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
+						TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f,
+							202.97754f);
 						playQuestMovie(env, 423);
 						changeQuestStep(env, 3, 5, false); // 5
 						return closeDialogWindow(env);
@@ -107,11 +109,13 @@ public class _24046TheShadowCalls extends QuestHandler {
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					int[] questItems = { 182205502 };
 					return sendQuestEndDialog(env, questItems);
 				}

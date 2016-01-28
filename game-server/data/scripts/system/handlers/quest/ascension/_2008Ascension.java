@@ -244,7 +244,7 @@ public class _2008Ascension extends QuestHandler {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 99) {
-							SkillEngine.getInstance().applyEffectDirectly(1853, player, player, 0);
+							SkillEngine.getInstance().applyEffectDirectly(257, player, player, 0);
 							player.setState(CreatureState.FLIGHT_TELEPORT);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(3001);
@@ -316,10 +316,7 @@ public class _2008Ascension extends QuestHandler {
 	}
 
 	private boolean setPlayerClass(QuestEnv env, QuestState qs, PlayerClass playerClass) {
-		Player player = env.getPlayer();
-		if (player.getPlayerClass().isStartingClass()) {
-			ClassChangeService.setClass(player, playerClass);
-			player.getController().upgradePlayer();
+		if (ClassChangeService.setClass(env.getPlayer(), playerClass)) {
 			changeQuestStep(env, 6, 6, true); // reward
 			return sendQuestDialog(env, 5);
 		}

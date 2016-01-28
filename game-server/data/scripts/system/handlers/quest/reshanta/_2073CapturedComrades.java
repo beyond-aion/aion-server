@@ -9,12 +9,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Jebal (278002). Talk with Lakadi (278019). Talk with Glati (278088). Locate the Captured Asmodian Prisoner (253626). Escort Captured
- * Asmodian Prisoner to the Magic Ward (1273, 1494, 1538). Report back to Lakadi.
+ * Talk with Jebal (278002). Talk with Lakadi (278019). Talk with Glati (278088). Locate the Captured Asmodian Prisoner
+ * (253626). Escort Captured Asmodian Prisoner to the Magic Ward (1273, 1494, 1538). Report back to Lakadi.
  * 
  * @author MetaWind
  * @modified kale
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2073CapturedComrades extends QuestHandler {
 
@@ -27,7 +28,6 @@ public class _2073CapturedComrades extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -91,13 +91,14 @@ public class _2073CapturedComrades extends QuestHandler {
 							return sendQuestDialog(env, 2035);
 						}
 						case SETPRO4: {
-							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1295.0565f, 1499.0419f, 1571.1864f, 3, 4); // 4
+							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(),  1295.0565f, 1499.0419f, 1571.1864f, 3, 4); // 4
 						}
 					}
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278019) { // Lakadi
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
@@ -107,7 +108,8 @@ public class _2073CapturedComrades extends QuestHandler {
 		}
 		return false;
 	}
-
+	
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -132,12 +134,7 @@ public class _2073CapturedComrades extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2701, true);
+		return defaultOnLvlUpEvent(env, 2701, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

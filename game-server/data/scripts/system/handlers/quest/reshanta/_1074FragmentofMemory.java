@@ -14,6 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MetaWind
+ * @Modified Majka
  */
 public class _1074FragmentofMemory extends QuestHandler {
 
@@ -25,7 +26,6 @@ public class _1074FragmentofMemory extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(279029).addOnTalkEvent(questId);
 		qe.registerQuestNpc(278501).addOnTalkEvent(questId);
@@ -70,13 +70,17 @@ public class _1074FragmentofMemory extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 						case SETPRO3:
 							if (var == 2) {
-								return defaultCloseDialog(env, 2, 3, false, false);
+								qs.setQuestVarById(0, var + 1);
+								updateQuestStatus(env);
+								playQuestMovie(env, 271);
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+								return true;
 							}
 					}
 				}
 					break;
 				case 700355:
-					return useQuestObject(env, 3, 3, true, 0, 271);
+					return useQuestObject(env, 3, 3, true, false);
 				case 790001: {
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -106,11 +110,6 @@ public class _1074FragmentofMemory extends QuestHandler {
 			return false;
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

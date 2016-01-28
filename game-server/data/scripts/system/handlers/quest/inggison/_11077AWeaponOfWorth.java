@@ -39,14 +39,18 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
+					case QUEST_ACCEPT_1:
+						if (giveQuestItem(env, 182214016, 1))
+							return sendQuestStartDialog(env);
+						return true;
 					default: {
-						if (!giveQuestItem(env, 182214016, 1))
-							updateQuestStatus(env);
+						
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799028: // Brontes
 				{
@@ -54,7 +58,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1353);
 						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:{
 							return sendQuestDialog(env, 1353);
 						}
 						case SETPRO1: {
@@ -71,7 +75,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 						case SELECT_ACTION_1694: {
 							return sendQuestDialog(env, 1694);
 						}
-						case SETPRO2: {
+						case SETPRO2:{
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
@@ -88,18 +92,19 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798903) // Drenia
-			{
-				switch (env.getDialogId()) {
-					case 1009: {
-						return sendQuestDialog(env, 5);
+		}
+			else if (qs.getStatus() == QuestStatus.REWARD) {
+				if (targetId == 798903) // Drenia
+				{
+					switch (env.getDialogId()) {
+						case 1009: {
+							return sendQuestDialog(env, 5);
+						}
+						default:
+							return sendQuestEndDialog(env);
 					}
-					default:
-						return sendQuestEndDialog(env);
 				}
 			}
-		}
 		return false;
 	}
 }

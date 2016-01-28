@@ -423,7 +423,7 @@
         </points>
     </zone>
     <zone mapid="220080000" name="LEGIONDOMINIONAREA_01_220080000" area_type="POLYGON" zone_type="DOMINION">
-        <points bottom="500.0" top="500.0">
+        <points bottom="-500.0" top="500.0">
             <point x="2369.6096" y="2050.0286"/>
             <point x="2361.7031" y="1974.3527"/>
             <point x="2337.92" y="1937.4735"/>
@@ -485,7 +485,7 @@
         </points>
     </zone>
     <zone mapid="220080000" name="LEGIONDOMINIONAREA_02_220080000" area_type="POLYGON" zone_type="DOMINION">
-        <points bottom="500.0" top="500.0">
+        <points bottom="-500.0" top="500.0">
             <point x="2070.1548" y="1203.8828"/>
             <point x="2125.3655" y="1119.9215"/>
             <point x="2148.58" y="1101.4021"/>
@@ -580,7 +580,7 @@
         </points>
     </zone>
     <zone mapid="220080000" name="LEGIONDOMINIONAREA_03_220080000" area_type="POLYGON" zone_type="DOMINION">
-        <points bottom="500.0" top="500.0">
+        <points bottom="-500.0" top="500.0">
             <point x="73.09" y="1072.89"/>
             <point x="254.6779" y="939.00366"/>
             <point x="418.78302" y="894.7056"/>

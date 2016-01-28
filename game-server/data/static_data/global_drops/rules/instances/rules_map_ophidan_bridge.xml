@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Instance Item" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231022" name="Guard Post Gunner Captain"/>
+			<gd_npc npc_id="231029" name="Northern Approach Post Magus Captain"/>
+			<gd_npc npc_id="231034" name="Southern Approach Post Cavalry Captain"/>
+			<gd_npc npc_id="231043" name="Defense Post Combatant Captain"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="164000275" name="Mobile Turret Cannonball"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Treasure Crate" base_chance="100" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052612" name="Vera's Treasure Crate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101562" name="Vera Defender Shoes"/>
+			<gd_item id="114301695" name="Vera Defender Boots"/>
+			<gd_item id="114501500" name="Vera Defender Brogans"/>
+			<gd_item id="114501515" name="Vera Defender's Magic Brogans"/>
+			<gd_item id="114601445" name="Vera Defender Sabatons"/>
+			<gd_item id="110101681" name="Vera Defender Tunic"/>
+			<gd_item id="110301689" name="Vera Defender Jerkin"/>
+			<gd_item id="110501518" name="Vera Defender Hauberk"/>
+			<gd_item id="110550930" name="Vera Defender's Magic Hauberk"/>
+			<gd_item id="110601492" name="Vera Defender Breastplate"/>
+			<gd_item id="113101528" name="Vera Defender Leggings"/>
+			<gd_item id="113301658" name="Vera Defender Breeches"/>
+			<gd_item id="113501491" name="Vera Defender Chausses"/>
+			<gd_item id="113501506" name="Vera Defender's Magic Chausses"/>
+			<gd_item id="113601438" name="Vera Defender Greaves"/>
+			<gd_item id="111101513" name="Vera Defender Gloves"/>
+			<gd_item id="111301627" name="Vera Defender Vambrace"/>
+			<gd_item id="111501473" name="Vera Defender Handguards"/>
+			<gd_item id="111501488" name="Vera Defender's Magic Handguards"/>
+			<gd_item id="111601455" name="Vera Defender Gauntlets"/>
+			<gd_item id="112101466" name="Vera Defender Pauldrons"/>
+			<gd_item id="112301566" name="Vera Defender Shoulderguards"/>
+			<gd_item id="112501415" name="Vera Defender Spaulders"/>
+			<gd_item id="112501430" name="Vera Defender's Magic Spaulders"/>
+			<gd_item id="112601436" name="Vera Defender Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Head (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003728" name="Vera Defender Headband"/>
+			<gd_item id="125003732" name="Vera Defender Hat"/>
+			<gd_item id="125003736" name="Vera Defender Chain Hood"/>
+			<gd_item id="125003784" name="Vera Defender's Magic Helm"/>
+			<gd_item id="125003740" name="Vera Defender Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101901018" name="Vera Defender Aethercannon"/>
+			<gd_item id="100201390" name="Vera Defender Dagger"/>
+			<gd_item id="100901232" name="Vera Defender Greatsword"/>
+			<gd_item id="102001092" name="Vera Defender Harp"/>
+			<gd_item id="101701261" name="Vera Defender Longbow"/>
+			<gd_item id="100101220" name="Vera Defender Mace"/>
+			<gd_item id="101801067" name="Vera Defender Pistol"/>
+			<gd_item id="101301158" name="Vera Defender Polearm"/>
+			<gd_item id="100601302" name="Vera Defender Spellbook"/>
+			<gd_item id="101501246" name="Vera Defender Staff"/>
+			<gd_item id="100001582" name="Vera Defender Sword"/>
+			<gd_item id="100601302" name="Vera Defender Spellbook"/>
+			<gd_item id="102100844" name="Vera Defender Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="12">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001625" name="Vera Defender Battle Shield"/>
+			<gd_item id="115001626" name="Vera Defender Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101564" name="Vera Defender Captain's Shoes"/>
+			<gd_item id="114301697" name="Vera Defender Captain's Boots"/>
+			<gd_item id="114501502" name="Vera Defender Captain's Brogans"/>
+			<gd_item id="114501516" name="Vera Defender Captain's Magic Brogans"/>
+			<gd_item id="114601447" name="Vera Defender Captain's Sabatons"/>
+			<gd_item id="110101683" name="Vera Defender Captain's Tunic"/>
+			<gd_item id="110301691" name="Vera Defender Captain's Jerkin"/>
+			<gd_item id="110501520" name="Vera Defender Captain's Hauberk"/>
+			<gd_item id="110550931" name="Vera Defender Captain's Magic Hauberk"/>
+			<gd_item id="110601494" name="Vera Defender Captain's Breastplate"/>
+			<gd_item id="113101530" name="Vera Defender Captain's Leggings"/>
+			<gd_item id="113301660" name="Vera Defender Captain's Breeches"/>
+			<gd_item id="113501493" name="Vera Defender Captain's Chausses"/>
+			<gd_item id="113501507" name="Vera Defender Captain's Magic Chausses"/>
+			<gd_item id="113601440" name="Vera Defender Captain's Greaves"/>
+			<gd_item id="111101515" name="Vera Defender Captain's Gloves"/>
+			<gd_item id="111301629" name="Vera Defender Captain's Vambrace"/>
+			<gd_item id="111501475" name="Vera Defender Captain's Handguards"/>
+			<gd_item id="111501489" name="Vera Defender Captain's Magic Handguards"/>
+			<gd_item id="111601457" name="Vera Defender Captain's Gauntlets"/>
+			<gd_item id="112101468" name="Vera Defender Captain's Pauldrons"/>
+			<gd_item id="112301568" name="Vera Defender Captain's Shoulderguards"/>
+			<gd_item id="112501417" name="Vera Defender Captain's Spaulders"/>
+			<gd_item id="112501431" name="Vera Defender Captain's Magic Spaulders"/>
+			<gd_item id="112601438" name="Vera Defender Captain's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Head (Epic)" base_chance="7">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003730" name="Vera Defender Captain's Headband"/>
+			<gd_item id="125003734" name="Vera Defender Captain's Hat"/>
+			<gd_item id="125003738" name="Vera Defender Captain's Chain Hood"/>
+			<gd_item id="125003785" name="Vera Defender Captain's Magic Helm"/>
+			<gd_item id="125003742" name="Vera Defender Captain's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101901019" name="Vera Defender Captain's Aethercannon"/>
+			<gd_item id="100201391" name="Vera Defender Captain's Dagger"/>
+			<gd_item id="100901233" name="Vera Defender Captain's Greatsword"/>
+			<gd_item id="102001093" name="Vera Defender Captain's Harp"/>
+			<gd_item id="101701262" name="Vera Defender Captain's Longbow"/>
+			<gd_item id="100101221" name="Vera Defender Captain's Mace"/>
+			<gd_item id="101801068" name="Vera Defender Captain's Pistol"/>
+			<gd_item id="101301159" name="Vera Defender Captain's Polearm"/>
+			<gd_item id="101501247" name="Vera Defender Captain's Staff"/>
+			<gd_item id="100501211" name="Vera Defender Captain's Jewel"/>
+			<gd_item id="100601303" name="Vera Defender Captain's Spellbook"/>
+			<gd_item id="100001583" name="Vera Defender Captain's Sword"/>
+			<gd_item id="102100845" name="Vera Defender Captain's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Epic)" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231050" name="Vera"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001627" name="Vera Defender Captain's Battle Shield"/>
+			<gd_item id="115001628" name="Vera Defender Captain's Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Bundle" base_chance="80">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231058" name="Beritran Supply Box"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052579" name="Dragon's Blood Mark Box"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

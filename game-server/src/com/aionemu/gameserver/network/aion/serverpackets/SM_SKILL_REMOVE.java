@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author xTz
- * @modified bobobear
+ * @modified Neon
  */
 public class SM_SKILL_REMOVE extends AionServerPacket {
 
@@ -13,24 +14,16 @@ public class SM_SKILL_REMOVE extends AionServerPacket {
 	private int skillLevel;
 	private int skillType;
 
-	// SkillType == 0 Normal Skills, 1 Stigma Skills, 3 Linked Stigma Skills
-	public SM_SKILL_REMOVE(int skillId, int skillLevel, int skillType) {
-		this.skillId = skillId;
-		this.skillLevel = skillLevel;
-		this.skillType = skillType;
+	public SM_SKILL_REMOVE(PlayerSkillEntry skill) {
+		this.skillId = skill.getSkillId();
+		this.skillLevel = skill.isProfessionSkill() ? skill.getProfessionFlag() : skill.getSkillLevel();
+		this.skillType = skill.getSkillType();
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(skillId);
-		if (skillId >= 30001 && skillId <= 30003 || skillId >= 40001 && skillId <= 40010) {
-			writeC(0);
-			writeC(0);
-		} else if (skillType > 0) {
-			writeC(skillLevel);
-			writeC(skillType); // 1 Stigma, 3 Linked Stigma
-		} else { // remove skills active or passive
-			writeC(skillLevel);
-		}
+		writeC(skillLevel); // for professions, the getProfessionFlag() sent in SM_SKILL_LIST value is relevant, otherwise client won't remove it...
+		writeC(skillType);
 	}
 }

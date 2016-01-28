@@ -32,10 +32,10 @@ import com.google.common.collect.Collections2;
 public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerSkillListDAO.class);
-	public static final String INSERT_QUERY = "REPLACE INTO `player_skills` (`player_id`, `skill_id`, `skill_level`, `skill_type`) VALUES (?, ?,?,?)";
+	public static final String INSERT_QUERY = "REPLACE INTO `player_skills` (`player_id`, `skill_id`, `skill_level`) VALUES (?, ?, ?)";
 	public static final String UPDATE_QUERY = "UPDATE `player_skills` set skill_level=? where player_id=? AND skill_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_skills` WHERE `player_id`=? AND skill_id=?";
-	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_level`, `skill_type` FROM `player_skills` WHERE `player_id`=?";
+	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_level` FROM `player_skills` WHERE `player_id`=?";
 
 	private static final Predicate<PlayerSkillEntry> skillsToInsertPredicate = new Predicate<PlayerSkillEntry>() {
 
@@ -71,8 +71,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 					while (rset.next()) {
 						int id = rset.getInt("skill_id");
 						int lv = rset.getInt("skill_level");
-						int skillType = rset.getInt("skill_type");
-						skills.add(new PlayerSkillEntry(id, lv, skillType, PersistentState.UPDATED));
+						skills.add(new PlayerSkillEntry(id, lv, 0, PersistentState.UPDATED));
 					}
 				}
 			}
@@ -129,7 +128,6 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, skill.getSkillId());
 				ps.setInt(3, skill.getSkillLevel());
-				ps.setInt(4, skill.getSkillType());
 				ps.addBatch();
 			}
 

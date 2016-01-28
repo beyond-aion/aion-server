@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author MrPoke
+ * @Modified Majka
  */
 public class _1005BarringtheGate extends QuestHandler {
 
@@ -143,19 +144,18 @@ public class _1005BarringtheGate extends QuestHandler {
 
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
+		int[] quests = {1100, 1004, 1003, 1002, 1001};
 		return defaultOnZoneMissionEndEvent(env, quests);
 	}
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		int[] quests = {1100, 1004, 1003, 1002, 1001};
+		return defaultOnLvlUpEvent(env, quests, false);
 	}
 
 	private void destroy(final int var, final QuestEnv env) {
 		final Player player = env.getPlayer();
-		// sendEmotion(env, player, EmotionId.STAND, true); //wrong emotion and source of it - rechk on retail
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (var != -1)
 			qs.setQuestVarById(0, var);

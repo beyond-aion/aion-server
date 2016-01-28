@@ -1,7 +1,6 @@
 package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,6 +13,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Hellboy aion4Free
+ * @Modified Majka
  */
 public class _2037TheProtectorofNepra extends QuestHandler {
 
@@ -26,7 +26,6 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(212861).addOnKillEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"), questId);
@@ -35,13 +34,8 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -52,13 +46,13 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204369: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -75,7 +69,7 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 					}
 				}
 				case 204361: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -117,22 +111,23 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 					}
 				}
 				case 278004: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
 						case SETPRO3:
-							if (defaultCloseDialog(env, 2, 3, 182204015, 1, 0, 0)) { // 5
-								TeleportService2.teleportToNpc(player, 204361);
-								return true;
-							}
+						   if (defaultCloseDialog(env, 2, 3, 182204015, 1, 0, 0)) { // 5
+							  TeleportService2.teleportToNpc(player, 204361);
+							  return true;
+						   }
 					}
 				}
 
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204369) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -149,9 +144,7 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
@@ -168,15 +161,22 @@ public class _2037TheProtectorofNepra extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		
+		if (zoneName != ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"))
+			return false;
+		
 		Player player = env.getPlayer();
 		if (player == null)
 			return false;
+		
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (zoneName != ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"))
+		if(qs == null)
 			return false;
-		if (qs != null && qs.getQuestVarById(0) == 4) {
+		
+		int var = qs.getQuestVarById(0);
+		if (var == 4) {
 			env.setQuestId(questId);
-			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+			qs.setQuestVarById(0, var + 1);
 			updateQuestStatus(env);
 			playQuestMovie(env, 81);
 			return true;

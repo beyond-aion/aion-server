@@ -1,6 +1,12 @@
 package quest.eltnen;
 
+import java.util.Collection;
+
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -26,15 +32,10 @@ public class _1036KaidanPrisoner extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
+		qe.registerOnMovieEndQuest(50, questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
@@ -156,5 +157,23 @@ public class _1036KaidanPrisoner extends QuestHandler {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 50) {
+			Player player = env.getPlayer();
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) { // remove hierni and the cage door visually
+				Collection<VisibleObject> npcs = new FastTable<>();
+				for (VisibleObject vo : player.getKnownList().getVisibleObjects().values()) {
+					if (vo instanceof Npc && (vo.getObjectTemplate().getTemplateId() == 204003 || vo.getObjectTemplate().getTemplateId() == 700180))
+						npcs.add(vo);
+				}
+				npcs.forEach(npc -> player.getKnownList().delVisualObject(npc, false));
+				return true;
+			}
+		}
+		return super.onMovieEndEvent(env, movieId);
 	}
 }

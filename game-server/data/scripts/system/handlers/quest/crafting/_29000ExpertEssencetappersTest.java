@@ -14,6 +14,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _29000ExpertEssencetappersTest extends QuestHandler {
 
 	private final static int questId = 29000;
+	private static final int itemId1 = 152003004; 
+	private static final int itemId2 = 152003005; 
+	private static final int itemId3 = 152003006; 
 
 	public _29000ExpertEssencetappersTest() {
 		super(questId);
@@ -66,7 +69,19 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 							}
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
-							return checkQuestItems(env, 1, 1, true, 5, 10001); // reward
+							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
+							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
+							long itemCount3 = player.getInventory().getItemCountByItemId(itemId3);
+							if (itemCount1 >= 1 && itemCount2 >= 1 && itemCount3 >= 1) {
+								removeQuestItem(env, itemId1, itemCount1);
+								removeQuestItem(env, itemId2, itemCount2);
+								removeQuestItem(env, itemId3, itemCount3);
+								qs.setStatus(QuestStatus.REWARD);
+								updateQuestStatus(env);
+								return sendQuestDialog(env, 5);
+							} else {
+								return sendQuestDialog(env, 10001);
+							}
 						}
 						case FINISH_DIALOG: {
 							return defaultCloseDialog(env, 1, 1);

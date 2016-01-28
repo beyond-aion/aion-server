@@ -94,6 +94,14 @@ public class TamperingAction extends AbstractItemAction {
 					double temperingChance = calculateChance(targetItem);
 					if (Rnd.get(1, 100) <= temperingChance) {
 						targetItem.setTempering(targetItem.getTempering() + 1);
+						if (targetItem.getTempering() > 4 && targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
+							//Random chance to get 4-7 ATK/20-32 MBoost 
+							if (targetItem.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL")) {
+								targetItem.setRndPlumeBonusValue(targetItem.getRndPlumeBonusValue() + Rnd.get(0, 3));
+							} else {
+								targetItem.setRndPlumeBonusValue(targetItem.getRndPlumeBonusValue() + Rnd.get(0, 12));
+							}
+						}
 						if (targetItem.isEquipped()) {
 							if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 								targetItem.setTemperingEffect(new TemperingEffect(player, targetItem));

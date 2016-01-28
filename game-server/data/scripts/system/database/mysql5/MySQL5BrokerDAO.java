@@ -104,10 +104,11 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 					int packCount = rset.getInt("pack_count");
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
+					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
 
 					brokerItems.add(new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, false,
 						false, slot, location, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus,
-						rndCount, tempering, packCount, isAmplified == 1, buffSkill));
+						rndCount, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue));
 				}
 			}
 		});

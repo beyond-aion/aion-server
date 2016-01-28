@@ -3,12 +3,12 @@
 <!--
   [BEGIN] SUMMARY
 			30500 [SCRIPT] Desperation
-			30501 [SCRIPT] [Group] Infiltrating Rentus
-			30502 [SCRIPT] [Group] Conquer the Vasharti
+			30501 [REMOVED] [Group] Infiltrating Rentus
+			30502 [REMOVED] [Group] Conquer the Vasharti
 			30503 [SCRIPT] [Group] Rodelion Rescue
-			30504 [SCRIPT] [Group] The Search for Paios
+			30504 [REMOVED] [Group] The Search for Paios
 			30505 [XML] [Group] Journal of a Traitor
-			30506 [SCRIPT] [Group] Tragic Reasons
+			30506 [REMOVED] [Group] Tragic Reasons
 			30507 [XML] [Group] An Old Friend
 			30508 [XML] [Group] Returning the Favor
 			30509 [XML] The Weight of Guilt
@@ -17,12 +17,12 @@
 			30512 [XML] [Group] Pride of the Elyos
 			30513 [XML] [Group] Powerful Rangers
 			30550 [SCRIPT] Moment of Crisis
-			30551 [SCRIPT] [Group] On to Rentus Base
-			30552 [SCRIPT] [Group] Drive Out the Vasharti
+			30551 [REMOVED] [Group] On to Rentus Base
+			30552 [REMOVED] [Group] Drive Out the Vasharti
 			30553 [SCRIPT] [Group] Comrades in Arms
 			30554 [SCRIPT] [Group] Saving Private Paios
 			30555 [XML] [Group] Traitorous Words
-			30556 [SCRIPT] [Group] The Whole Story
+			30556 [REMOVED] [Group] The Whole Story
 			30557 [XML] [Group] Tragedy of the Past
 			30558 [XML] [Group] Shame of the Gergers
 			30559 [XML] [Group] Mark of Pride

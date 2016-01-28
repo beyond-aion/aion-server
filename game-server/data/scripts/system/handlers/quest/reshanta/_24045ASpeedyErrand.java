@@ -15,6 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24045ASpeedyErrand extends QuestHandler {
 
@@ -40,7 +41,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040, true);
+		return defaultOnLvlUpEvent(env, 24040);
 	}
 
 	@Override
@@ -59,13 +60,11 @@ public class _24045ASpeedyErrand extends QuestHandler {
 			if (targetId == 278034) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-					return sendQuestDialog(env, 5);
-				else
-					return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env);
 			}
 			return false;
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278034) {
@@ -81,7 +80,8 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 279004) {
+		}
+		else if (targetId == 279004) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -97,7 +97,8 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 279024) {
+		}
+		else if (targetId == 279024) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -123,7 +124,8 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 279006) {
+		}
+		else if (targetId == 279006) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)

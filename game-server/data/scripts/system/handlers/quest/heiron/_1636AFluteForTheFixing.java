@@ -41,11 +41,13 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 			if (targetId == 204535) { // Maximus
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else {
+				}
+				else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203792: { // Utsida
@@ -53,9 +55,11 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 1) {
+							}
+							else if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 2) {
+							}
+							else if (var == 2) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -74,11 +78,13 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204535) { // Maximus
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -91,7 +97,7 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LF3_ITEMUSEAREA_Q1636"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1636"))) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 3, true));
 			}
 		}

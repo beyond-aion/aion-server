@@ -240,8 +240,12 @@ public final class QuestService {
 		}
 		if (rewards.getTitle() != null)
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
-		if (rewards.getAp() != null)
-			AbyssPointsService.addAp(player, (int) (player.getRates().getQuestApRate() * rewards.getAp()));
+		if (rewards.getAp() != null) {
+			int ap = rewards.getAp();
+			if (questsData.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
+				ap *= player.getRates().getQuestApRate();
+			AbyssPointsService.addAp(player, ap);
+		}
 		if (rewards.getDp() != null)
 			player.getCommonData().addDp(rewards.getDp());
 		if (rewards.getGp() != null)
@@ -281,16 +285,11 @@ public final class QuestService {
 			qs.setNextRepeatTime(countNextRepeatTime(player, template));
 		}
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		if (player.getRace() == Race.ELYOS && id == 1007 || player.getRace() == Race.ASMODIANS && id == 2009) {
-			player.getCommonData().setDaeva(true);
-			player.getController().upgradePlayer();
-			SkillLearnService.addMissingSkills(player);
-		}
+		player.getCommonData().updateDaeva();
 		QuestEngine.getInstance().onEnterZoneMissionEnd(env); // Notifies mission end @ToDo: to rename to onMissionEnd
 		QuestEngine.getInstance().onLvlUp(env);
 		if (template.getNpcFactionId() != 0)
 			player.getNpcFactions().completeQuest(template);
-
 		player.getController().updateNearbyQuests();
 		return true;
 	}
@@ -351,7 +350,7 @@ public final class QuestService {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(env.getQuestId())));
 				return false;
-			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount()) {
+			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255) {
 				if (warn)
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
@@ -418,38 +417,8 @@ public final class QuestService {
 		if (!inventoryItemCheck(env, warn))
 			return false;
 
-		if (template.getCombineSkill() != null) {
-			List<Integer> skills = new FastTable<Integer>(); // skills to check
-			if (template.getCombineSkill() == -1) // any skill
-			{
-				skills.add(30002);
-				skills.add(30003);
-				skills.add(40001);
-				skills.add(40002);
-				skills.add(40003);
-				skills.add(40004);
-				skills.add(40007);
-				skills.add(40008);
-				skills.add(40010);
-			} else {
-				skills.add(template.getCombineSkill());
-			}
-			boolean result = false;
-			for (int skillId : skills) {
-				PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()) {
-					if (template.getCategory().equals(QuestCategory.TASK) && skill.getSkillLevel() - 40 > template.getCombineSkillPoint())
-						continue;
-					result = true;
-					break;
-				}
-			}
-			if (!result) {
-				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TS_RANK(Integer.toString(template.getCombineSkillPoint())));
+		if (!checkCombineSkill(env, warn))
 				return false;
-			}
-		}
 
 		// check if NpcFaction daily quest
 		if (template.getNpcFactionId() != 0) {
@@ -573,12 +542,32 @@ public final class QuestService {
 			return false;
 
 		// Check required skills
+		if (!checkCombineSkill(env, false))
+			return false;
+
+		// Everything is ok
+		return true;
+	}
+
+	/**
+	 * Checks if the crafting/tapping skill point requirements for this quest
+	 * 
+	 * @return True, if the quest skill requirement meets the players skill points. 
+	 */
+	public static boolean checkCombineSkill(QuestEnv env, boolean warn) {
+		Player player = env.getPlayer();
+		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+
+		if (template == null)
+			return false;
+
 		if (template.getCombineSkill() != null) {
 			List<Integer> skills = new FastTable<Integer>(); // skills to check
-			if (template.getCombineSkill() == -1) // any skill
-			{
+			if (template.getCombineSkill() == -1) { // any skill
+				if (template.getNpcFactionId() != 12 && template.getNpcFactionId() != 13) { // exclude essence/aether tapping for crafting dailies
 				skills.add(30002);
 				skills.add(30003);
+				}
 				skills.add(40001);
 				skills.add(40002);
 				skills.add(40003);
@@ -592,17 +581,20 @@ public final class QuestService {
 			boolean result = false;
 			for (int skillId : skills) {
 				PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()
-					&& skill.getSkillLevel() - 40 <= template.getCombineSkillPoint()) {
+				if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()) {
+					if (template.getCategory() == QuestCategory.TASK && skill.getSkillLevel() - 40 > template.getCombineSkillPoint())
+						continue;
 					result = true;
 					break;
 				}
 			}
-			if (!result)
+			if (!result) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TS_RANK(Integer.toString(template.getCombineSkillPoint())));
 				return false;
 		}
+		}
 
-		// Everything is ok
 		return true;
 	}
 

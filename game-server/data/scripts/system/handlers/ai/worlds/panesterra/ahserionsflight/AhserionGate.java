@@ -20,13 +20,13 @@ public class AhserionGate extends NpcAI2 {
 	private void useBuff() {
 		switch (getOwner().getNpcId()) {
 			case 277229:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 40, getOwner(), getOwner(), 0);
+				SkillEngine.getInstance().applyEffectDirectly(21515, 30, getOwner(), getOwner(), 0);
 				break;
 			case 277230:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 50, getOwner(), getOwner(), 0);
+				SkillEngine.getInstance().applyEffectDirectly(21515, 40, getOwner(), getOwner(), 0);
 				break;
 			case 277231:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 60, getOwner(), getOwner(), 0);
+				SkillEngine.getInstance().applyEffectDirectly(21515, 50, getOwner(), getOwner(), 0);
 				break;
 		}
 		getOwner().setTarget(null);

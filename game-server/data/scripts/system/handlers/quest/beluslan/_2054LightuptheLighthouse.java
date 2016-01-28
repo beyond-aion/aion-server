@@ -17,6 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _2054LightuptheLighthouse extends QuestHandler {
 
@@ -30,20 +31,14 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestItem(182204308, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2500, true);
+		return defaultOnLvlUpEvent(env, 2500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -56,25 +51,25 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204768) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204768) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -86,8 +81,9 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204739) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 204739) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -102,22 +98,24 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 730109) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 730109) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
 				case SETPRO4:
 					if (var == 3) {
-						QuestService.addNewSpawn(220040000, 1, 213912, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+						QuestService.addNewSpawn(220040000, player.getInstanceId(), 213912, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 						npc.getController().scheduleRespawn();
 						npc.getController().onDelete();
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 						return true;
 					}
 			}
-		} else if (targetId == 730140) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 730140) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2120);
@@ -133,8 +131,9 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 700287 && qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+		}
+		else if (targetId == 700287 && qs.getStatus() == QuestStatus.START) {
+			if (dialog == DialogAction.USE_OBJECT) {
 				return useQuestObject(env, 4, 4, true, 0, 0, 0, 182204309, 1, 238, false); // movie + reward
 			}
 		}
@@ -153,12 +152,14 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getQuestVarById(0) != 2)
 			return HandlerResult.FAILED;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0,
+			0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
+					1, 0), true);
 				removeQuestItem(env, 182204308, 1);
 				qs.setQuestVarById(0, 3);
 				updateQuestStatus(env);

@@ -28,7 +28,6 @@ import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 import com.aionemu.gameserver.world.exceptions.NotSetPositionException;
-import com.aionemu.gameserver.world.exceptions.WorldMapNotExistException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
@@ -136,7 +135,7 @@ public class World {
 				baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<Npc>());
 			}
 			baseNpc.get(baseId).add((Npc) object);
-		} 
+		}
 
 		if (object instanceof Npc) {
 			allNpcs.put(object.getObjectId(), (Npc) object);
@@ -244,17 +243,10 @@ public class World {
 	 * Return World Map by id
 	 * 
 	 * @param id
-	 *          - id of world map.
-	 * @return World map.
+	 * @return World map, null if it doesn't exist.
 	 */
 	public WorldMap getWorldMap(int id) {
-		WorldMap map = worldMaps.get(id);
-		/**
-		 * Check if world map exist
-		 */
-		if (map == null)
-			throw new WorldMapNotExistException("Map: " + id + " not exist!");
-		return map;
+		return worldMaps.get(id);
 	}
 
 	/**
@@ -396,9 +388,11 @@ public class World {
 	 * @return WorldPosition
 	 */
 	public WorldPosition createPosition(int mapId, float x, float y, float z, byte heading, int instanceId) {
-		WorldPosition position = new WorldPosition(mapId);
-		position.setXYZH(x, y, z, heading);
-		position.setMapRegion(getWorldMap(mapId).getWorldMapInstanceById(instanceId).getRegion(x, y, z));
+		WorldMap map = getWorldMap(mapId);
+		if (map == null)
+			return null;
+		WorldPosition position = new WorldPosition(mapId, x, y, z, heading);
+		position.setMapRegion(map.getWorldMapInstanceById(instanceId).getRegion(x, y, z));
 		return position;
 	}
 

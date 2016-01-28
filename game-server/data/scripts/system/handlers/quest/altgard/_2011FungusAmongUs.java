@@ -1,6 +1,5 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -22,7 +21,6 @@ public class _2011FungusAmongUs extends QuestHandler {
 	public void register() {
 		int[] talkNpcs = { 203558, 203572, 203558 };
 		qe.registerQuestNpc(700092).addOnKillEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int id : talkNpcs)
 			qe.registerQuestNpc(id).addOnTalkEvent(questId);
@@ -36,9 +34,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() != QuestStatus.START)
 			return false;
@@ -63,9 +59,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203558) {
@@ -93,11 +87,6 @@ public class _2011FungusAmongUs extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

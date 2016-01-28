@@ -2,7 +2,6 @@ package quest.beluslan;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _2056ThawingKurngalfberg extends QuestHandler {
 
@@ -33,20 +33,14 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 		qe.registerQuestItem(182204313, questId);
 		qe.registerQuestItem(182204314, questId);
 		qe.registerQuestItem(182204315, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2500, true);
+		return defaultOnLvlUpEvent(env, 2500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -57,24 +51,25 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204753) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					int[] questItems = { 182204313, 182204314, 182204315 };
 					return sendQuestEndDialog(env, questItems);
 				}
 			}
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204753) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -103,8 +98,9 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 790016) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 790016) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 2034);
@@ -114,11 +110,13 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 2035);
 						else
 							return true;
-					} else
+					}
+					else
 						return sendQuestDialog(env, 2120);
 			}
-		} else if (targetId == 730036) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 730036) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -128,11 +126,13 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 1353);
 						else
 							return true;
-					} else
+					}
+					else
 						return sendQuestDialog(env, 1438);
 			}
-		} else if (targetId == 279000) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 279000) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1693);
@@ -142,7 +142,8 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 							return sendQuestDialog(env, 1694);
 						else
 							return true;
-					} else
+					}
+					else
 						return sendQuestDialog(env, 1779);
 			}
 		}
@@ -156,11 +157,10 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 		final int itemObjId = item.getObjectId();
 
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!player.isInsideZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
+		if (!player.isInsideItemUseZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
 			return HandlerResult.FAILED;
 
-		if (id != 182204313 && qs.getQuestVarById(0) == 2 || id != 182204314 && qs.getQuestVarById(0) == 3 || id != 182204315
-			&& qs.getQuestVarById(0) == 4)
+		if (id != 182204313 && qs.getQuestVarById(0) == 2 || id != 182204314 && qs.getQuestVarById(0) == 3 || id != 182204315 && qs.getQuestVarById(0) == 4)
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
@@ -174,12 +174,15 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
 					removeQuestItem(env, id, 1);
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
-				} else if (qs.getQuestVarById(0) == 3) {
+				}
+				else if (qs.getQuestVarById(0) == 3) {
 					playQuestMovie(env, 244);
 					removeQuestItem(env, id, 1);
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
-				} else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
+				}
+				else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE
+					&& qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, id, 1);
 					playQuestMovie(env, 245);
 					qs.setStatus(QuestStatus.REWARD);

@@ -59,7 +59,7 @@
 			1747 [XML] Eliminating the Memory Reaper
 			1748 [XML] Threat of the Thunder Shout Legion
 			1749 [XML] Decimate the East Garrison
-			1750 [UNUSED] Eliminating the Soul Reaper
+			1750 [XML] Eliminating the Soul Reaper
 			1751 [XML] Nemea's Research Sample
 			1752 [XML] Daeva of Flame's Request
 			1753 [XML] The Interfering Embers
@@ -334,7 +334,7 @@
 			2864 [XML] [Group] Krotan Assault
 			2865 [XML] [Group] Kysis Assault
 			2866 [XML] [Group] Miren Assault
-			3205 [XML] For the Black Cloud Traders
+			3205 [SCRIPT] For the Black Cloud Traders
 			3701 [SCRIPT] Teach Them a Lesson
 			3702 [SCRIPT] General Destruction
 			3703 [XML] Cut Off the Head of the Class
@@ -608,6 +608,9 @@
 	<monster_hunt id="1747" start_npc_ids="278594">
 		<monster var="0" end_var="8" npc_ids="252539"/>
 	</monster_hunt>
+	<monster_hunt id="1750" start_npc_ids="278599">
+		<monster var="0" end_var="5" npc_ids="252537 252538"/>
+	</monster_hunt>
 	<monster_hunt id="1752" start_npc_ids="278588">
 		<monster var="0" end_var="3" npc_ids="253711 253712"/>
 		<monster var="1" end_var="7" npc_ids="253728 253729"/>
@@ -870,9 +873,6 @@
 	</monster_hunt>
 	<monster_hunt id="2866" start_npc_ids="278114">
 		<monster var="0" end_var="10" npc_ids="251102 251104 251107 251110 251113 251115 270098 270101 270104 270107 270096 270099 270102 270105 279960 279962 279965 279968 279971 279973"/>
-	</monster_hunt>
-	<monster_hunt id="3205" start_npc_ids="279010">
-		<monster var="0" end_var="15" npc_ids="215049"/>
 	</monster_hunt>
 	<monster_hunt id="3703" start_npc_ids="278517">
 		<monster var="0" end_var="1" npc_ids="290158"/>

@@ -48,7 +48,7 @@
     <raid_location id="35" world="400010000" npc_id="234592" x="3330.80" y="1338.18" z="2676.321" h="32"/>
 	<!-- Enshar -->
 	<raid_location id="36" world="220080000" npc_id="219998" x="2653.62" y="2719.90" z="203.126" h="30"/>
-	<raid_location id="37" world="220080000" npc_id="219999" x="192.87" y="526.94" z="196.705"/>
+	<raid_location id="37" world="220080000" npc_id="219999" x="192.87" y="526.94" z="196.705" h="24"/>
 	<raid_location id="38" world="220080000" npc_id="220000" x="1582.97" y="1105.85" z="132.795" h="75"/>
 	<!-- Cygnea -->
 	<raid_location id="39" world="210070000" npc_id="220001" x="594.89" y="481.64" z="416.422" h="60"/>

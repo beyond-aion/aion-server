@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.world.zone;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,7 @@ public class FlyZoneInstance extends ZoneInstance {
 			creature.unsetInsideZoneType(ZoneType.FLY);
 			if (creature instanceof Player) {
 				Player player = (Player) creature;
-				if (player.isInFlyingState()) {
+				if (player.isInFlyingState() && player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
 					if (player.isInGlidingState()) {
 						player.unsetFlyState(FlyState.FLYING);
 						player.unsetState(CreatureState.FLYING);

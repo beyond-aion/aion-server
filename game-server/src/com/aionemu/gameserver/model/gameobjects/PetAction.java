@@ -15,6 +15,7 @@ public enum PetAction {
 	FOOD(9),
 	RENAME(10),
 	MOOD(12),
+	EXTEND_EXPIRATION(15),
 	UNKNOWN(255);
 
 	private static TIntObjectHashMap<PetAction> petActions;

@@ -15,6 +15,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 
@@ -27,7 +28,6 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 204303, 204332, 700246, 204301 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(204417).addOnKillEvent(questId);
 		qe.registerQuestNpc(212877).addOnKillEvent(questId);
@@ -41,12 +41,13 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
-		if (qs == null) {
+		
+		if (qs == null)
 			return false;
-		}
+
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
@@ -55,7 +56,8 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 5) {
+							}
+							else if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 						}
@@ -73,20 +75,24 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 2) {
+							}
+							else if (var == 2) {
 								if (player.getInventory().getItemCountByItemId(182204008) == 0) {
 									return sendQuestDialog(env, 1694);
-								} else {
+								}
+								else {
 									return sendQuestDialog(env, 1693);
 								}
-							} else if (var == 3) {
+							}
+							else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
 						case SETPRO2: {
 							if (var == 1) {
 								return defaultCloseDialog(env, 1, 2, 182204008, 1, 0, 0); // 2
-							} else if (var == 2) {
+							}
+							else if (var == 2) {
 								return defaultCloseDialog(env, 2, 2, 182204008, 1, 0, 0); // 2
 							}
 						}
@@ -102,7 +108,7 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 						if (var == 2) {
 							if (player.getInventory().getItemCountByItemId(182204019) > 0) {
 								final Npc npc = (Npc) env.getVisibleObject();
-								QuestService.addNewSpawn(220020000, 1, 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+								QuestService.addNewSpawn(220020000, player.getInstanceId(), 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 								removeQuestItem(env, 182204008, 1);
 								removeQuestItem(env, 182204019, 1);
 							}
@@ -110,11 +116,13 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -150,12 +158,7 @@ public class _2034TheHandBehindtheIceClaw extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2300, true);
+		return defaultOnLvlUpEvent(env, 2300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

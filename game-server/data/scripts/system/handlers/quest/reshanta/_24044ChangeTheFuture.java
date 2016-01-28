@@ -6,9 +6,11 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
+ * @Modified Majka
  */
 public class _24044ChangeTheFuture extends QuestHandler {
 
@@ -99,12 +101,13 @@ public class _24044ChangeTheFuture extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
 						case SETPRO5: {
-							return defaultCloseDialog(env, 4, 5, 188020000, 1, 0, 0); // 5
+							return defaultCloseDialog(env, 4, 5); // 5
 						}
 						case SET_SUCCEED: {
 							return defaultCloseDialog(env, 6, 6, true, false); // reward
@@ -119,17 +122,20 @@ public class _24044ChangeTheFuture extends QuestHandler {
 								if (player.getInventory().getItemCountByItemId(188020000) > 0) {
 									return useQuestObject(env, 5, 6, false, 0, 0, 0, 188020000, 1, 291, false); // 6
 								}
+								PacketSendUtility.sendWhiteMessageOnCenter(player, "You need a Temporal Stone!"); // @ToDo: send corrent message id: 1111203
 							}
 						}
 					}
 					break;
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278036) { // Scoda
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -144,6 +150,6 @@ public class _24044ChangeTheFuture extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040, true);
+		return defaultOnLvlUpEvent(env, 24040);
 	}
 }

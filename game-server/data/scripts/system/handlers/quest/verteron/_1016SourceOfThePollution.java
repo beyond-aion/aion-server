@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Rhys2002, Nephis
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1016SourceOfThePollution extends QuestHandler {
 
@@ -24,7 +25,6 @@ public class _1016SourceOfThePollution extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 203149, 203148, 203832, 203705, 203822, 203761, 203098, 203195 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(210318).addOnKillEvent(questId);
 		for (int npc : npcs) {
@@ -61,7 +61,8 @@ public class _1016SourceOfThePollution extends QuestHandler {
 								case 8: {
 									if (player.getInventory().getItemCountByItemId(182200015) < 2) {
 										return sendQuestDialog(env, 3484);
-									} else {
+									}
+									else {
 										return sendQuestDialog(env, 3569);
 									}
 								}
@@ -82,7 +83,8 @@ public class _1016SourceOfThePollution extends QuestHandler {
 								removeQuestItem(env, 182200013, 1);
 								removeQuestItem(env, 182200014, 1);
 								return defaultCloseDialog(env, 7, 8, 182200015, 2, 0, 0); // 8
-							} else if (var == 8) {
+							}
+							else if (var == 8) {
 								return defaultCloseDialog(env, 8, 8, 182200015, 2, 0, 0); // 8
 							}
 						}
@@ -179,12 +181,14 @@ public class _1016SourceOfThePollution extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					removeQuestItem(env, 182200016, 1);
 					return sendQuestDialog(env, 4080);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -202,7 +206,8 @@ public class _1016SourceOfThePollution extends QuestHandler {
 				int targetId = env.getTargetId();
 				if (targetId == 210318) {
 					Npc npc = (Npc) env.getVisibleObject();
-					QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+					QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, npc.getX(), npc.getY(), npc.getZ(),
+						(byte) 0);
 					return defaultOnKillEvent(env, 210318, 8, 9); // 9
 				}
 			}
@@ -211,12 +216,7 @@ public class _1016SourceOfThePollution extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
+		return defaultOnLvlUpEvent(env, 1130, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

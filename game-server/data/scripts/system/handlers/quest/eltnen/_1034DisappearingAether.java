@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _1034DisappearingAether extends QuestHandler {
 
@@ -21,7 +22,6 @@ public class _1034DisappearingAether extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(203903).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204032).addOnTalkEvent(questId);
@@ -43,11 +43,13 @@ public class _1034DisappearingAether extends QuestHandler {
 			if (targetId == 203903) { // Valerius
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203903: { // Valerius
 					switch (dialog) {
@@ -67,9 +69,11 @@ public class _1034DisappearingAether extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
-							} else if (var == 3) {
+							}
+							else if (var == 3) {
 								return sendQuestDialog(env, 1693);
-							} else if (var == 4) {
+							}
+							else if (var == 4) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -101,14 +105,9 @@ public class _1034DisappearingAether extends QuestHandler {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
+	
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
+		return defaultOnLvlUpEvent(env, 1300, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

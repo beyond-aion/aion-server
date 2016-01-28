@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -116,8 +117,8 @@ public class ClassChangeService {
 						break;
 
 				}
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
 				completeQuest(player, 1006);
-				completeQuest(player, 1007);
 
 				// Stigma Quests Elyos
 				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
@@ -159,9 +160,9 @@ public class ClassChangeService {
 						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
 						break;
 				}
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
 				// Optimate @Enomine
 				completeQuest(player, 2008);
-				completeQuest(player, 2009);
 
 				// Stigma Quests Asmodians
 				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
@@ -171,7 +172,7 @@ public class ClassChangeService {
 		}
 	}
 
-	private static void completeQuest(Player player, int questId) {
+	public static void completeQuest(Player player, int questId) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null) {
 			player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
@@ -182,47 +183,36 @@ public class ClassChangeService {
 		}
 	}
 
-	public static void setClass(Player player, PlayerClass playerClass) {
-		if (validateSwitch(player, playerClass)) {
-			player.getCommonData().setPlayerClass(playerClass);
-			player.getController().upgradePlayer();
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
-		}
+	public static boolean setClass(Player player, PlayerClass newClass) {
+		return setClass(player, newClass, true, false);
 	}
 
-	private static boolean validateSwitch(Player player, PlayerClass playerClass) {
-		int level = player.getLevel();
-		PlayerClass oldClass = player.getPlayerClass();
-		if (level != 9) {
-			PacketSendUtility.sendMessage(player, "You can only switch class at level 9");
-			return false;
-		}
-		if (!oldClass.isStartingClass()) {
-			PacketSendUtility.sendMessage(player, "You already switched class");
-			return false;
-		}
-		switch (oldClass) {
-			case WARRIOR:
-				if (playerClass == PlayerClass.GLADIATOR || playerClass == PlayerClass.TEMPLAR)
-					break;
-			case SCOUT:
-				if (playerClass == PlayerClass.ASSASSIN || playerClass == PlayerClass.RANGER)
-					break;
-			case MAGE:
-				if (playerClass == PlayerClass.SORCERER || playerClass == PlayerClass.SPIRIT_MASTER)
-					break;
-			case PRIEST:
-				if (playerClass == PlayerClass.CLERIC || playerClass == PlayerClass.CHANTER)
-					break;
-			case ENGINEER:
-				if (playerClass == PlayerClass.GUNNER || playerClass == PlayerClass.RIDER)
-					break;
-			case ARTIST:
-				if (playerClass == PlayerClass.BARD)
-					break;
-			default:
-				PacketSendUtility.sendMessage(player, "Invalid class switch chosen");
+	public static boolean setClass(Player player, PlayerClass newClass, boolean validate, boolean updateDaevaStatus) {
+		if (validate) {
+			PlayerClass oldClass = player.getPlayerClass();
+			if (!oldClass.isStartingClass()) {
+				PacketSendUtility.sendMessage(player, "You already switched class");
 				return false;
+			}
+			int id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
+			if (id > PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
+				PacketSendUtility.sendMessage(player, "Invalid class chosen");
+				return false;
+			}
+		}
+
+		player.getCommonData().setPlayerClass(newClass);
+		player.getController().upgradePlayer();
+		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
+		SkillLearnService.learnNewSkills(player, 9, player.getLevel());
+
+		if (updateDaevaStatus) {
+			if (!newClass.isStartingClass()) {
+				completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
+				player.getCommonData().updateDaeva();
+			} else {
+				player.getCommonData().setDaeva(false);
+			}
 		}
 		return true;
 	}

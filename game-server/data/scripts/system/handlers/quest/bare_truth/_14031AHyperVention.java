@@ -187,18 +187,18 @@ public class _14031AHyperVention extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int var = qs.getQuestVarById(0);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LF1_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF1_ITEMUSEAREA_Q14031"))) {
 				if (var == 3) {
 					playQuestMovie(env, 21);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));// 3-4
 				}
 			}
-			if (player.isInsideZone(ZoneName.get("LF1A_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF1A_ITEMUSEAREA_Q14031"))) {
 				if (var == 5) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 5, 6, false));// 5-6
 				}
 			}
-			if (player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF2_ITEMUSEAREA_Q14031"))) {
 				if (var == 7) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 7, 8, false));// 7-8
 				}

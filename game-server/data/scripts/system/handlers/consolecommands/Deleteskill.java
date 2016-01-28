@@ -81,7 +81,7 @@ public class Deleteskill extends ConsoleCommand {
 			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
 			return false;
 		}
-		if (player.getSkillList().getSkillEntry(skillId).isStigma()) {
+		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
 			PacketSendUtility.sendMessage(admin, "You can't remove stigma skill.");
 			return false;
 		}

@@ -42,6 +42,7 @@ public class ItemPacketService {
 		DEC_STIGMA_USE(0x17, true),
 		INC_ITEM_COLLECT(0x19, true),
 		INC_KINAH_COLLECT(0x1A, true),
+		INC_ITEM_BUY(0x1C, true), // buying from npc
 		DEC_KINAH_BUY(0x1D, true),
 		INC_KINAH_SELL(0x20, true),
 		INC_KINAH_QUEST(0x32, true),

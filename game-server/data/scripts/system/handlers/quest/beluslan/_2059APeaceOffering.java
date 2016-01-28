@@ -16,6 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Hellboy aion4Free
+ * @Modified Majka
  */
 public class _2059APeaceOffering extends QuestHandler {
 
@@ -31,22 +32,21 @@ public class _2059APeaceOffering extends QuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerAddOnReachTargetEvent(questId);
 		qe.registerAddOnLostTargetEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
-
+	
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 3, 4, false, 253);
+		return defaultFollowEndEvent(env, 3, 4, false, 253); 
 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 3, 2, false);
+		return defaultFollowEndEvent(env, 3, 2, false); 
 	}
-
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -61,14 +61,9 @@ public class _2059APeaceOffering extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2057);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 2500, 2057 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		return defaultOnLvlUpEvent(env, quests, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -79,23 +74,23 @@ public class _2059APeaceOffering extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204702) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204787) {
-			switch (env.getDialog()) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -119,8 +114,9 @@ public class _2059APeaceOffering extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204795) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 204795) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -132,8 +128,9 @@ public class _2059APeaceOffering extends QuestHandler {
 						return true;
 					}
 			}
-		} else if (targetId == 204796) {
-			switch (env.getDialog()) {
+		}
+		else if (targetId == 204796) {
+			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -142,8 +139,7 @@ public class _2059APeaceOffering extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),
-							player.getZ(), (byte) 0);
+						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(), player.getZ(), (byte) 0);
 						survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 						player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
 						return true;

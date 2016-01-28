@@ -1,6 +1,5 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -12,6 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke
+ * @Modified Majka
  */
 public class _2005TeachingaLesson extends QuestHandler {
 
@@ -36,9 +36,7 @@ public class _2005TeachingaLesson extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203540: {
@@ -66,14 +64,16 @@ public class _2005TeachingaLesson extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 5);
-								} else
+								}
+								else
 									return sendQuestDialog(env, 1693);
 							}
 							break;
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203540)
 				return sendQuestEndDialog(env);
 		}
@@ -87,6 +87,6 @@ public class _2005TeachingaLesson extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }

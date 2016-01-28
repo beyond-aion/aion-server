@@ -13,6 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1053TheKlawThreat extends QuestHandler {
 
@@ -25,7 +26,6 @@ public class _1053TheKlawThreat extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(700169).addOnKillEvent(questId);
 		qe.registerQuestNpc(212120).addOnKillEvent(questId);
@@ -34,13 +34,8 @@ public class _1053TheKlawThreat extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1500, true);
+		return defaultOnLvlUpEvent(env, 1500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -56,7 +51,8 @@ public class _1053TheKlawThreat extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204502)
 				return sendQuestEndDialog(env);
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204583) {
@@ -105,14 +101,16 @@ public class _1053TheKlawThreat extends QuestHandler {
 
 		Npc npc = (Npc) env.getVisibleObject();
 		final int targetId = env.getTargetId();
-
+		
 		if (targetId == 700169 || targetId == 700209) {
 			int spawn = Rnd.get(5);
 			if (spawn == 1) {
-				QuestService.addNewSpawn(210040000, 1, 212120, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+				QuestService.addNewSpawn(210040000, player.getInstanceId(), 212120, (float) npc.getX(), (float) npc.getY(), (float) npc.getZ(),
+					(byte) 0);
 				return true;
 			}
-		} else if (targetId == 212120 && qs.getQuestVarById(0) == 3) {
+		}
+		else if (targetId == 212120 && qs.getQuestVarById(0) == 3) {
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
 		}

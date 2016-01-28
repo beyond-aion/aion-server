@@ -41,17 +41,19 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 
 		if (id != 182201326) // Empty Bucket
 			return HandlerResult.UNKNOWN;
-		if (!player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1361")))
+		if (!player.isInsideItemUseZone(ZoneName.get("LF2_ITEMUSEAREA_Q1361")))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
+			0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
+					1, 0), true);
 				player.getInventory().decreaseByObjectId(itemObjId, 1);
 				giveQuestItem(env, 182201327, 1);
 				qs.setQuestVar(1);
@@ -78,10 +80,12 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 						return sendQuestStartDialog(env);
 					else
 						return true;
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
+		}
+		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 		{
 			if (env.getDialog() == DialogAction.QUEST_SELECT)
 				return sendQuestDialog(env, 2375);
@@ -90,7 +94,8 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestEndDialog(env);
-			} else
+			}
+			else
 				return sendQuestEndDialog(env);
 		}
 

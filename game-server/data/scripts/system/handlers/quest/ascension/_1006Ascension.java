@@ -65,8 +65,6 @@ public class _1006Ascension extends QuestHandler {
 		qe.registerQuestItem(182200007, questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
-		qe.registerOnMovieEndQuest(14, questId);
-		qe.registerOnMovieEndQuest(151, questId);
 	}
 
 	@Override
@@ -176,9 +174,19 @@ public class _1006Ascension extends QuestHandler {
 								}
 							}
 						}
-						case SETPRO2: {
+						case SELECT_ACTION_1353: {
 							playQuestMovie(env, 14);
-							return true;
+							return sendQuestDialog(env, 1353);
+						}
+						case SETPRO2: {
+							if (var == 2) {
+									removeQuestItem(env, 182200008, 1);
+									giveQuestItem(env, 182200009, 1);
+									qs.setQuestVar(3);
+									updateQuestStatus(env);
+									TeleportService2.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.FADE_OUT_BEAM);
+									return true;
+							}
 						}
 					}
 					break;
@@ -187,7 +195,7 @@ public class _1006Ascension extends QuestHandler {
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVars().getQuestVars() == 99) {
-								SkillEngine.getInstance().applyEffectDirectly(1910, player, player, 0);
+								SkillEngine.getInstance().applyEffectDirectly(281, player, player, 0);
 								player.setState(CreatureState.FLIGHT_TELEPORT);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
@@ -238,7 +246,7 @@ public class _1006Ascension extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LF1_ITEMUSEAREA_Q1006"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF1_ITEMUSEAREA_Q1006"))) {
 				int var = qs.getQuestVarById(0);
 				if (var == 1) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 182200008, 1, 0)); // 2
@@ -282,10 +290,7 @@ public class _1006Ascension extends QuestHandler {
 	}
 
 	private boolean setPlayerClass(QuestEnv env, QuestState qs, PlayerClass playerClass) {
-		Player player = env.getPlayer();
-		if (player.getPlayerClass().isStartingClass()) {
-			ClassChangeService.setClass(player, playerClass);
-			player.getController().upgradePlayer();
+		if (ClassChangeService.setClass(env.getPlayer(), playerClass)) {
 			changeQuestStep(env, 5, 5, true); // reward
 			return sendQuestDialog(env, 5);
 		}
@@ -332,24 +337,5 @@ public class _1006Ascension extends QuestHandler {
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env);
-	}
-
-	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-
-		if (movieId == 14) {
-			removeQuestItem(env, 182200008, 1);
-			giveQuestItem(env, 182200009, 1);
-			qs.setQuestVar(3);
-			updateQuestStatus(env);
-			TeleportService2.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.FADE_OUT_BEAM);
-			return true;
-		}
-		return false;
 	}
 }

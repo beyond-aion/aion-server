@@ -41,7 +41,8 @@ public class _2209TheScribbler extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		}
+		else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203562: {
 					if (qs.getQuestVarById(0) == 0) {
@@ -81,12 +82,14 @@ public class _2209TheScribbler extends QuestHandler {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestEndDialog(env);
-						} else
+						}
+						else
 							return sendQuestEndDialog(env);
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203555)
 				return sendQuestEndDialog(env);
 		}

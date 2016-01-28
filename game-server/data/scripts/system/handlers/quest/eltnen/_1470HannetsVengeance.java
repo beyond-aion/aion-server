@@ -31,21 +31,20 @@ public class _1470HannetsVengeance extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
+
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
-		if (qs == null || qs.canRepeat()) {
-			if (targetId == 790004) {
+		if (targetId == 790004) {
+			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 790004)
+			else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
+			}
 		}
 		return false;
 	}

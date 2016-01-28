@@ -14,6 +14,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 /**
  * @author Rhys2002
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2071SpeakingBalaur extends QuestHandler {
 
@@ -26,7 +27,6 @@ public class _2071SpeakingBalaur extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 278003, 278086, 278039, 279027, 204210 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(253610).addOnAttackEvent(questId);
 		for (int npc : npcs) {
@@ -90,7 +90,8 @@ public class _2071SpeakingBalaur extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 						}
@@ -121,11 +122,13 @@ public class _2071SpeakingBalaur extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278003) { // Hisui
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -142,8 +145,7 @@ public class _2071SpeakingBalaur extends QuestHandler {
 			if (var == 2) {
 				final Npc npc = (Npc) env.getVisibleObject();
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
-				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
-					npc.getZ()) <= 15) {
+				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(), npc.getZ()) <= 15) {
 					npc.getController().onDie(player);
 					changeQuestStep(env, 2, 3, false); // 3
 					return true;
@@ -154,12 +156,7 @@ public class _2071SpeakingBalaur extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2701, true);
+		return defaultOnLvlUpEvent(env, 2701, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 }

@@ -1,1 +1,0 @@
-ALTER TABLE `inventory` ADD COLUMN `rnd_count` smallint(6) NOT NULL DEFAULT '0' AFTER `rnd_bonus`;

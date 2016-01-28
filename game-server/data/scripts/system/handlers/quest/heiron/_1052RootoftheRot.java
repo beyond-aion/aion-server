@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1052RootoftheRot extends QuestHandler {
 
@@ -24,7 +25,6 @@ public class _1052RootoftheRot extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182201603, questId);
 		qe.registerQuestItem(182201604, questId);
@@ -33,13 +33,8 @@ public class _1052RootoftheRot extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1500, true);
+		return defaultOnLvlUpEvent(env, 1500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -59,7 +54,8 @@ public class _1052RootoftheRot extends QuestHandler {
 				removeQuestItem(env, 182201603, 3);
 			removeQuestItem(env, 182201604, 3);
 			return sendQuestEndDialog(env);
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204549) {
@@ -70,14 +66,12 @@ public class _1052RootoftheRot extends QuestHandler {
 					else if (var == 1)
 						return sendQuestDialog(env, 1352);
 				case CHECK_USER_HAS_QUEST_ITEM:
-					if (QuestService.collectItemCheck(env, false))
-					// if(player.getInventory().getItemCountByItemId(182201603) == 3 &&
-					// player.getInventory().getItemCountByItemId(182201604) == 3)
-					{
+					if (QuestService.collectItemCheck(env, false)) {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000);
-					} else
+					}
+					else
 						return sendQuestDialog(env, 10001);
 				case SETPRO1:
 					if (var == 0) {
@@ -95,7 +89,8 @@ public class _1052RootoftheRot extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 730026) {
+		}
+		else if (targetId == 730026) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)

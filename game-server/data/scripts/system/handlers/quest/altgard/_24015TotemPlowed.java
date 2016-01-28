@@ -7,11 +7,11 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
+ * @Reworked Majka
  */
 public class _24015TotemPlowed extends QuestHandler {
 
@@ -25,72 +25,65 @@ public class _24015TotemPlowed extends QuestHandler {
 	public void register() {
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
-		qe.registerQuestNpc(203669).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("BLACK_CLAW_OUTPOST_220030000"), questId);
-		qe.registerQuestNpc(700099).addOnKillEvent(questId);
-		qe.registerQuestNpc(203557).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203669).addOnTalkEvent(questId); // Taora
+		qe.registerQuestNpc(203557).addOnTalkEvent(questId); // Suthran
+		qe.registerQuestNpc(700099).addOnKillEvent(questId); // Zemurru's Totem
+		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q2021_206013_2_220030000"), questId);
 	}
-
+	
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null)
+		if (qs == null) {
 			return false;
-
+		}
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
-		if (qs.getStatus() != QuestStatus.START)
-			return false;
-		if (targetId == 700099) {
-			if (var >= 2 && var < 4) {
-				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-				updateQuestStatus(env);
-				return true;
-			} else if (var >= 4) {
-				changeQuestStep(env, 4, 5, true); // reward
-				return true;
-			}
+		if (var >= 2 && var < 4) {
+			qs.setQuestVarById(0, var + 1);
+			updateQuestStatus(env);
+			((Npc) env.getVisibleObject()).getController().onDelete();
+			return true;
+		} else if (var == 4) {
+			qs.setStatus(QuestStatus.REWARD);
+			updateQuestStatus(env);
+			((Npc) env.getVisibleObject()).getController().onDelete();
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
-
-		final int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
+		
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203669:
-					switch (env.getDialog()) {
+				case 203669: // Taora
+					switch (dialog) {
 						case QUEST_SELECT:
-							if (var == 0)
 								return sendQuestDialog(env, 1011);
+						case SELECT_ACTION_1013:
+							playQuestMovie(env, 218);
+							qs.setQuestVarById(0, 1);
+							updateQuestStatus(env);
+							return sendQuestDialog(env, 1013);
 						case SETPRO1:
-							if (var == 0) {
-								SkillEngine.getInstance().applyEffectDirectly(1868, player, player, 0);
-								return defaultCloseDialog(env, 0, 1); // 1
-							}
-							break;
+							return closeDialogWindow(env);
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203557) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+			if (targetId == 203557) { // Suthran
+				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
-				else
-					return sendQuestEndDialog(env);
+				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
@@ -98,7 +91,7 @@ public class _24015TotemPlowed extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("BLACK_CLAW_OUTPOST_220030000"))
+		if (zoneName != ZoneName.get("DF1A_SENSORYAREA_Q2021_206013_2_220030000"))
 			return false;
 		final Player player = env.getPlayer();
 		if (player == null)
@@ -121,7 +114,7 @@ public class _24015TotemPlowed extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010, true);
+		return defaultOnLvlUpEvent(env, 24010);
 	}
 
 }

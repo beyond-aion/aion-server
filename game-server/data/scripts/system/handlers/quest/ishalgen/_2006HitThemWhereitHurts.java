@@ -10,6 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Mr. Poke
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2006HitThemWhereitHurts extends QuestHandler {
 
@@ -45,7 +46,8 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 1) {
+							}
+							else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 						}
@@ -67,11 +69,13 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) { // Ulgorn
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -86,6 +90,6 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }

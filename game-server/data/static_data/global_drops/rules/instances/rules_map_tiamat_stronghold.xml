@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Multiple Monster Drops -->
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219352" name="Invincible Shabokan"/>
+			<gd_npc npc_id="219357" name="Adjutant Anuhart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001348" name="Tiamat Guard Captain's Corundum Earrings"/>
+			<gd_item id="120001349" name="Tiamat Guard's Turquoise Earrings"/>
+			<gd_item id="122001503" name="Tiamat Guard Captain's Corundum Ring"/>
+			<gd_item id="122001504" name="Tiamat Guard's Turquoise Ring"/>
+			<gd_item id="121001249" name="Tiamat Guard Captain's Corundum Necklace"/>
+			<gd_item id="121001250" name="Tiamat Guard's Turquoise Necklace"/>
+			<gd_item id="123001307" name="Tiamat Guard Captain's Leather Belt"/>
+			<gd_item id="123001308" name="Tiamat Guard's Sash"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Unique)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219352" name="Invincible Shabokan"/>
+			<gd_npc npc_id="219357" name="Adjutant Anuhart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003218" name="Tiamat Guard's Headband"/>
+			<gd_item id="125003219" name="Tiamat Guard's Hat"/>
+			<gd_item id="125003583" name="Tiamat Guard's Headpiece"/>
+			<gd_item id="125003220" name="Tiamat Guard's Chain Hood"/>
+			<gd_item id="125003832" name="Tiamat Guard's Magic Helm"/>
+			<gd_item id="125003221" name="Tiamat Guard's Helm"/>
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219352" name="Invincible Shabokan"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100601142" name="Shabokan's Spellbook"/>
+			<gd_item id="101701123" name="Shabokan's Bow"/>
+			<gd_item id="102000848" name="Shaborkan's Harp"/>
+			<gd_item id="101900814" name="Shaborkan's Aethercannon"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219353" name="Brigade General Chantra"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100601143" name="Chantra's Spellbook"/>
+			<gd_item id="101501112" name="Chantra's Staff"/>
+			<gd_item id="102000849" name="Chantra's Harp"/>
+			<gd_item id="115001449" name="Chantra's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219354" name="Brigade General Terath"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001398" name="Terath's Sword"/>
+			<gd_item id="100501087" name="Terath's Orb"/>
+			<gd_item id="101301030" name="Terath's Polearm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219355" name="Traitor Kumbanda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100201238" name="Kumbanda's Dagger"/>
+			<gd_item id="101701124" name="Kumbanda's Bow"/>
+			<gd_item id="101800811" name="Kumbanda's Pistol"/>
+			<gd_item id="101900815" name="Kumbanda's Aethercannon"/>
+			<gd_item id="115001450" name="Kumbanda's Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219356" name="Brigade General Laksyaka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100101076" name="Laksyaka's Mace"/>
+			<gd_item id="100901094" name="Laksyaka's Greatsword"/>
+			<gd_item id="101301031" name="Laksyaka's Polearm"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219357" name="Adjutant Anuhart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001399" name="Anuhart's Sword"/>
+			<gd_item id="100201237" name="Anuhart's Dagger"/>
+			<gd_item id="100901093" name="Anuhart's Greatsword"/>
+			<gd_item id="101800810" name="Anuhart's Pistol"/>
+			<gd_item id="102100709" name="Anuhart's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219356" name="Traitor Kumbanda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101501070" name="Tiamat Guard's Cane"/>
+			<gd_item id="100901081" name="Tiamat Guard's Greatsword"/>
+			<gd_item id="101701111" name="Tiamat Guard's Longbow"/>
+			<gd_item id="100201207" name="Tiamat Guard's Stiletto"/>
+			<gd_item id="101301018" name="Tiamat Guard's Spear"/>
+			<gd_item id="100001360" name="Tiamat Guard's Sword"/>
+			<gd_item id="100601106" name="Tiamat Guard's Tome"/>
+			<gd_item id="100101038" name="Tiamat Guard's Warhammer"/>
+			<gd_item id="100501050" name="Tiamat Guard's Jewel"/>
+			<gd_item id="101800859" name="Tiamat Guard's Pistol"/>
+			<gd_item id="101900857" name="Tiamat Guard's Aethercannon"/>
+			<gd_item id="102000891" name="Tiamat Guard's Harp"/>
+			<gd_item id="102100750" name="Tiamat Guard's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219353" name="Brigade General Chantra"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101336" name="Tiamat Guard's Gloves"/>
+			<gd_item id="111301331" name="Tiamat Guard's Vambrace"/>
+			<gd_item id="111301519" name="Tiamat Guard Captain's Magic Vambrace"/>
+			<gd_item id="111501323" name="Tiamat Guard's Handguards"/>
+			<gd_item id="111501560" name="Tiamat Guard's Magic Handguards"/>
+			<gd_item id="111601301" name="Tiamat Guard's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219354" name="Brigade General Terath"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101353" name="Tiamat Guard's Leggings"/>
+			<gd_item id="113301355" name="Tiamat Guard's Breeches"/>
+			<gd_item id="113301547" name="Tiamat Guard Captain's Magic Breeches"/>
+			<gd_item id="113501338" name="Tiamat Guard's Chausses"/>
+			<gd_item id="113501578" name="Tiamat Guard's Magic Chausses"/>
+			<gd_item id="113601290" name="Tiamat Guard's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219355" name="Traitor Kumbanda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101293" name="Tiamat Guard's Pauldrons"/>
+			<gd_item id="112301274" name="Tiamat Guard's Shoulderguards"/>
+			<gd_item id="112301460" name="Tiamat Guard Captain's Magic Shoulderguards"/>
+			<gd_item id="112501263" name="Tiamat Guard's Spaulders"/>
+			<gd_item id="112501502" name="Tiamat Guard's Magic Spaulders"/>
+			<gd_item id="112601281" name="Tiamat Guard's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219353" name="Brigade General Chantra"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101274" name="Tiamat Guard's Pauldrons"/>
+			<gd_item id="112301255" name="Tiamat Guard's Shoulderguards"/>
+			<gd_item id="112301459" name="Tiamat Guard's Magic Shoulderguards"/>
+			<gd_item id="112501244" name="Tiamat Guard's Spaulders"/>
+			<gd_item id="112501542" name="Tiamat Guard's Magic Spaulders"/>
+			<gd_item id="112601262" name="Tiamat Guard's Shoulderplates"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219354" name="Brigade General Terath"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101459" name="Tiamat Guard's Tunic"/>
+			<gd_item id="110301369" name="Tiamat Guard's Jerkin"/>
+			<gd_item id="110301580" name="Tiamat Guard's Magic Jerkin"/>
+			<gd_item id="110501344" name="Tiamat Guard's Hauberk"/>
+			<gd_item id="110551042" name="Tiamat Guard's Magic Hauberk"/>
+			<gd_item id="110601317" name="Tiamat Guard's Breastplate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219355" name="Traitor Kumbanda"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101317" name="Tiamat Guard's Gloves"/>
+			<gd_item id="111301312" name="Tiamat Guard's Vambrace"/>
+			<gd_item id="111301518" name="Tiamat Guard's Magic Vambrace"/>
+			<gd_item id="111501304" name="Tiamat Guard's Handguards"/>
+			<gd_item id="111501600" name="Tiamat Guard's Magic Handguards"/>
+			<gd_item id="111601282" name="Tiamat Guard's Gauntlets"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219356" name="Brigade General Laksyaka"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101334" name="Tiamat Guard's Leggings"/>
+			<gd_item id="113301336" name="Tiamat Guard's Breeches"/>
+			<gd_item id="113301546" name="Tiamat Guard's Magic Breeches"/>
+			<gd_item id="113501319" name="Tiamat Guard's Chausses"/>
+			<gd_item id="113501618" name="Tiamat Guard's Magic Chausses"/>
+			<gd_item id="113601271" name="Tiamat Guard's Greaves"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219357" name="Adjutant Anuhart"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101363" name="Tiamat Guard's Shoes"/>
+			<gd_item id="114301369" name="Tiamat Guard's Boots"/>
+			<gd_item id="114301584" name="Tiamat Guard's Magic Boots"/>
+			<gd_item id="114501325" name="Tiamat Guard's Brogans"/>
+			<gd_item id="114501627" name="Tiamat Guard's Magic Brogans"/>
+			<gd_item id="114601266" name="Tiamat Guard's Sabatons"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219363" name="Laksyaka Colonel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000120" name="Military Ward Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300510000" name="Tiamat_Stronghold"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219364" name="Laksyaka Colonel"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000121" name="Eternal Prison Key"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

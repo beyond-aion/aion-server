@@ -563,13 +563,13 @@
 	<portal_use npc_id="730067">
 		<portal_path loc_id="1200103"/>
 	</portal_use>
-	<!-- Alukina's Palace Asmodians Entrance -->
+	<!-- Alukina's Palace Entrance -->
 	<portal_use npc_id="730137">
-		<portal_path loc_id="2200404" race="ASMODIANS">
+		<portal_path loc_id="2200404">
 			<portal_req min_level="38"/>
 		</portal_path>
 	</portal_use>
-	<!-- Alukina's Palace Asmodians Exit -->
+	<!-- Alukina's Palace Exit -->
 	<portal_use npc_id="730138">
 		<portal_path loc_id="2200405"/>
 	</portal_use>
@@ -2202,7 +2202,7 @@
 		<portal_path dialog="10001" loc_id="6001006"/> <!-- Illuminary Obelisk -->
 		<portal_path dialog="10002" loc_id="6001008"/> <!-- Linkgate Foundry -->
 		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
-		<portal_path dialog="10004" loc_id="6000717"/> <!-- Danuar Sanctuary -->
+		<portal_path dialog="10004" loc_id="6000718"/> <!-- Danuar Sanctuary -->
 	</portal_dialog>
 	<!-- END WISPLIGHT ABBEY -->
 	
@@ -2233,7 +2233,7 @@
 		<portal_path dialog="10000" loc_id="6001005"/> <!-- Sauro Supply Base -->
 		<portal_path dialog="10001" loc_id="6001007"/> <!-- Illuminary Obelisk -->
 		<portal_path dialog="10002" loc_id="6001009"/> <!-- Linkgate Foundry -->
-		<portal_path dialog="10003" loc_id="6000718"/> <!-- Ophidan Bridge -->
+		<portal_path dialog="10003" loc_id="6000717"/> <!-- Ophidan Bridge -->
 		<portal_path dialog="10004" loc_id="6000718"/> <!-- Danuar Sanctuary -->
 	</portal_dialog>
 	<!-- END FATEBOUND ABBEY -->
@@ -2395,16 +2395,25 @@
 		</portal_path>
 	</portal_dialog>
 	<!--Stonespear Siege -->
-	<portal_dialog npc_id="833024">
-		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="false">
-			<portal_req min_level="55">
+	<!-- ELYOS -->
+	<portal_dialog npc_id="833024" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="true">
+			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
-	<portal_dialog npc_id="833043">
-		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="false">
-			<portal_req min_level="55">
+	<portal_dialog npc_id="833043" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="true">
+			<portal_req min_level="65">
+				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
+			</portal_req>
+		</portal_path>
+	</portal_dialog>
+	<!-- ASMODIANS -->
+	<portal_dialog npc_id="833044" teleport_dialog_id="10">
+		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
+			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>

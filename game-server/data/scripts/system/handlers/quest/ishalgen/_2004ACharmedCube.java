@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Mr. Poke
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2004ACharmedCube extends QuestHandler {
 
@@ -52,7 +53,8 @@ public class _2004ACharmedCube extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
-							} else if (var == 1) {
+							}
+							else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 						}
@@ -84,7 +86,8 @@ public class _2004ACharmedCube extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
-							} else if (var == 6) {
+							}
+							else if (var == 6) {
 								return sendQuestDialog(env, 2034);
 							}
 						}
@@ -97,11 +100,13 @@ public class _2004ACharmedCube extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203539) { // Derot
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				} else {
+				}
+				else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -121,6 +126,6 @@ public class _2004ACharmedCube extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100, true);
+		return defaultOnLvlUpEvent(env, 2100);
 	}
 }

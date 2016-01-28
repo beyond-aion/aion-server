@@ -100,8 +100,10 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0);//4.8
 		writeC(0);//4.8
 		writeC(1);//4.8
-		writeC(1);//4.8 Legion Siege Bases 1 = enabled; 0 = disabled
-		writeD(0);//4.8 maybe master server is here now?
+		writeC(1);//4.8 activate stonespearSiege
+		writeC(0); //1 = master Server
+		writeC(0);
+		writeH(0);		
 		writeD(0);//4.8
 		writeD(0);//4.8
 		writeD(0);//4.8

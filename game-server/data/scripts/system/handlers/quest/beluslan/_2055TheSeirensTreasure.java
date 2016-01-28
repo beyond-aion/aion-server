@@ -1,6 +1,6 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -8,12 +8,13 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * Talk with Sleipnir (204768). Talk with Rubelik (204743). Talk with Sleipnir. Find Esnu (204808) and make a deal with her. Remove Aika Deathsong
- * (213741) and bring the key (182204312) to Esnu. Talk again with Esnu and get the key to Golden Trumpet Temple (730135). Report the results to
- * Sleipnir.
+ * Talk with Sleipnir (204768). Talk with Rubelik (204743). Talk with Sleipnir. Find Esnu (204808) and make a deal with
+ * her. Remove Aika Deathsong (213741) and bring the key (182204312) to Esnu. Talk again with Esnu and get the key to
+ * Golden Trumpet Temple (730135). Report the results to Sleipnir.
  * 
  * @author Hellboy aion4Free
  * @reworked vlog
+ * @Modified Majka
  */
 public class _2055TheSeirensTreasure extends QuestHandler {
 
@@ -26,21 +27,15 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 2054);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		int[] quests = { 2500, 2054 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		return defaultOnLvlUpEvent(env, quests, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -51,14 +46,13 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 			return false;
 
 		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204768: // Sleipnir
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -87,7 +81,7 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 					}
 					break;
 				case 204743: // Rubelik
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -96,7 +90,7 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 					}
 					break;
 				case 204808: // Esnu
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
@@ -120,7 +114,8 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 							return defaultCloseDialog(env, 5, 6, false, false, 182204321, 1, 0, 0); // 6
 					}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204768) { // Sleipnir
 				return sendQuestEndDialog(env);
 			}

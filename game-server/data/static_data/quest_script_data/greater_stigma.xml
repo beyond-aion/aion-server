@@ -2,25 +2,25 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 <!--
   [BEGIN] SUMMARY
-			3930 [SCRIPT] The Shattered Stigma
-			3931 [SCRIPT] How to Use Stigma
-			3932 [SCRIPT] Stop the Shulacks!
-			4934 [SCRIPT] The Shulack's Stigma
-			4935 [SCRIPT] A Booklet on Stigma
-			4936 [SCRIPT] Secret of the Greater Stigma
-			11049 [SCRIPT] Taloc's Heart Full of Soul
+			3930 [REMOVED] The Shattered Stigma
+			3931 [REMOVED] How to Use Stigma
+			3932 [REMOVED] Stop the Shulacks!
+			4934 [REMOVED] The Shulack's Stigma
+			4935 [REMOVED] A Booklet on Stigma
+			4936 [REMOVED] Secret of the Greater Stigma
+			11049 [REMOVED] Taloc's Heart Full of Soul
 			11275 [XML] Cracking the Stigma Threshold
-			11276 [SCRIPT] Stigma Enlightenment
+			11276 [REMOVED] Stigma Enlightenment
 			11550 [XML] Stigma Master's Challenge
-			11551 [SCRIPT] Ten to One Odds
-			11552 [SCRIPT] The Siege is On
+			11551 [REMOVED] Ten to One Odds
+			11552 [REMOVED] The Siege is On
 			11553 [XML] The Proof is in the Hunting
-			21049 [SCRIPT] Stigma Expansion
-			21277 [SCRIPT] Out of their Cold, Dead Hands
-			21278 [SCRIPT] Test Subject One
+			21049 [REMOVED] Stigma Expansion
+			21277 [REMOVED] Out of their Cold, Dead Hands
+			21278 [REMOVED] Test Subject One
 			21550 [XML] To Bear a Stigma
-			21551 [SCRIPT] One Versus Ten
-			21552 [SCRIPT] To Be a Siege Master
+			21551 [REMOVED] One Versus Ten
+			21552 [REMOVED] To Be a Siege Master
 			21553 [XML] A Greater Challenge
 			30216 [XML] Stigma Dogma
 			30217 [SCRIPT] Stigmas & Scars

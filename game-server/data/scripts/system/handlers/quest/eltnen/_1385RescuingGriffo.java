@@ -29,7 +29,8 @@ public class _1385RescuingGriffo extends QuestHandler {
 		qe.registerAddOnLostTargetEvent(questId);
 		qe.registerOnLogOut(questId);
 	}
-
+	
+	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -45,12 +46,12 @@ public class _1385RescuingGriffo extends QuestHandler {
 
 	@Override
 	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 2, true, 48);
+		return defaultFollowEndEvent(env, 1, 2, true, 48); 
 	}
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 1, 0, false);
+		return defaultFollowEndEvent(env, 1, 0, false); 
 	}
 
 	@Override
@@ -66,16 +67,19 @@ public class _1385RescuingGriffo extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			}
+			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		} else if (targetId == 204029) {
+		}
+		else if (targetId == 204029) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1923.47f, 2541.46f, 355.61f, 0, 1); // 1
-				} else
+				}
+				else
 					return sendQuestStartDialog(env);
 			}
 		}

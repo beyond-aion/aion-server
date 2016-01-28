@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.recipe.Component;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
@@ -47,7 +48,8 @@ public class CraftService {
 			}
 		}
 
-		int xpReward = (int) ((0.008 * (recipetemplate.getSkillpoint() + 100) * (recipetemplate.getSkillpoint() + 100) + 60));
+		int skillLvl = recipetemplate.getSkillpoint();
+		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
 		xpReward = xpReward + (xpReward * bonus / 100); // bonus
 		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductid();
 
@@ -68,9 +70,13 @@ public class CraftService {
 				+ recipetemplate.getQuantity() + ")" + (critCount > 0 ? " - critical" : ""));
 		}
 
-		int gainedCraftExp = (int) RewardType.CRAFTING.calcReward(player, xpReward);
+		int skillId = recipetemplate.getSkillid();
+		int gainedCraftXp = (int) RewardType.CRAFTING.calcReward(player, xpReward);
+		float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
+		if (statRate > 0)
+			gainedCraftXp *= statRate;
 
-		if (player.getSkillList().addSkillXp(player, recipetemplate.getSkillid(), gainedCraftExp, recipetemplate.getSkillpoint())) {
+		if (player.getSkillList().addSkillXp(player, skillId, gainedCraftXp, skillLvl)) {
 			player.getCommonData().addExp(xpReward, RewardType.CRAFTING);
 		} else {
 			PacketSendUtility.sendPacket(player,

@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -11,6 +11,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Artur
  * @rework Ritsu
+ * @Modified Majka
  */
 public class _24012AnOminousCrop extends QuestHandler {
 
@@ -37,19 +38,21 @@ public class _24012AnOminousCrop extends QuestHandler {
 			return false;
 
 		final int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		int targetId = env.getTargetId();
+		DialogAction dialog = env.getDialog();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203605: { // Loriniah
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							else if (var == 5)
 								return sendQuestDialog(env, 2716);
+						case SELECT_ACTION_1013:
+							playQuestMovie(env, 61);
+							return sendQuestDialog(env, 1013);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 						case CHECK_USER_HAS_QUEST_ITEM:
@@ -58,7 +61,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 					break;
 				}
 				case 700096: { // MuMu Cart
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case USE_OBJECT: {
 							if (var >= 2 && var < 5) {
 								return useQuestObject(env, var, var + 1, false, true); // 4,5
@@ -67,7 +70,8 @@ public class _24012AnOminousCrop extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+		}
+		else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203605) // Loriniah
 				return sendQuestEndDialog(env);
 		}
@@ -85,7 +89,6 @@ public class _24012AnOminousCrop extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				if (var == 1) {
 					changeQuestStep(env, 1, 2, false); // 2
-					playQuestMovie(env, 61);
 					return true;
 				}
 			}
@@ -95,11 +98,11 @@ public class _24012AnOminousCrop extends QuestHandler {
 
 	@Override
 	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 24011);
+		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010, true);
+		return defaultOnLvlUpEvent(env, 24010);
 	}
 }

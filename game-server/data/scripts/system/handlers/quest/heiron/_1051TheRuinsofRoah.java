@@ -13,6 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rhys2002
+ * @Modified Majka
  */
 public class _1051TheRuinsofRoah extends QuestHandler {
 
@@ -25,7 +26,6 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182201602, questId);
 		for (int npc_id : npc_ids)
@@ -33,13 +33,8 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1500, true);
+		return defaultOnLvlUpEvent(env, 1500, true); // Sets as zone mission to avoid it appears on new player list.
 	}
 
 	@Override
@@ -55,15 +50,16 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204501) {
+			if (targetId == 204501){
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
+				else if(env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
 			}
-		} else if (qs.getStatus() != QuestStatus.START) {
+		}
+		else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204501) {
@@ -90,7 +86,8 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 204582) {
+		}
+		else if (targetId == 204582) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -115,7 +112,8 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 203882) {
+		}
+		else if (targetId == 203882) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -129,7 +127,8 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 278503) {
+		}
+		else if (targetId == 278503) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)
@@ -141,7 +140,8 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000);
-					} else
+					}
+					else
 						return sendQuestDialog(env, 10001);
 				case SETPRO7:
 					if (var == 6) {
@@ -159,17 +159,20 @@ public class _1051TheRuinsofRoah extends QuestHandler {
 					}
 					return false;
 			}
-		} else if (targetId == 700217 && qs.getQuestVarById(0) == 2) {
+		}
+		else if (targetId == 700217 && qs.getQuestVarById(0) == 2) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return sendQuestDialog(env, 1693);
-			} else if (env.getDialog() == DialogAction.SETPRO3) {
+			}
+			else if (env.getDialog() == DialogAction.SETPRO3) {
 				if (!giveQuestItem(env, 182201601, 1))
 					return false;
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 				changeQuestStep(env, 2, 3, false);
 				return true;
 			}
-		} else if (targetId == 700303 && qs.getQuestVarById(0) == 7) {
+		}
+		else if (targetId == 700303 && qs.getQuestVarById(0) == 7) {
 			if (env.getDialog() == DialogAction.USE_OBJECT) {
 				return true; // loot
 			}
