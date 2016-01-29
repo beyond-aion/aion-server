@@ -49,7 +49,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
 				writeD(cooldown == null ? 0 : (int) (cooldown.getReuseTime() - System.currentTimeMillis()) / 1000); // will only be shown from client if entriesUsed == maxEntries
 				writeD(cooltime.getMaxCount()); // max entries
 				writeD(cooldown == null ? 0 : -cooldown.getEnterCount()); // entry offset (from max)
-				writeC(cooltime.getRace() == activePlayer.getCommonData().getOppositeRace() ? 0 : 1); // hide flag (1 = show, 0 = hide instance from list)
+				writeC(cooltime.getRace() == activePlayer.getOppositeRace() ? 0 : 1); // hide flag (1 = show, 0 = hide instance from list)
 			}
 			writeS(player.getName());
 		}

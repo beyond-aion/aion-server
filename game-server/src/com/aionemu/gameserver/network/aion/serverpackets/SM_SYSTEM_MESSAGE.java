@@ -22363,7 +22363,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_NO_TARGET_ITEM() {
 		return new SM_SYSTEM_MESSAGE(1402029);
 	}
-	
+
 	/**
 	 * You must tune your equipment before wrapping.
 	 */
@@ -22697,6 +22697,349 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
 		return new SM_SYSTEM_MESSAGE(1402662, targetName, level, skillName);
+	}
+
+	/**
+	 * The Lava Protector and Heatvent Protector are sharing the Fount.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_01() {
+		return new SM_SYSTEM_MESSAGE(1402682);
+	}
+
+	/**
+	 * When both Protectors are defeated at the same time, the Fount is destroyed and the Protectors can no longer resurrect.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_02() {
+		return new SM_SYSTEM_MESSAGE(1402683);
+	}
+
+	/**
+	 * If the Protectors are not defeated in 5 minutes, the Detachment's Rush Squad will sacrifice themselves to destroy the Fount.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_03() {
+		return new SM_SYSTEM_MESSAGE(1402684);
+	}
+
+	/**
+	 * In 1 minute, the Detachment's Rush Squad will resolve to sacrifice themselves and attempt to destroy the Fount.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_04() {
+		return new SM_SYSTEM_MESSAGE(1402685);
+	}
+
+	/**
+	 * In a moment, the Detachment's Rush Squad, armed with the resolve to sacrifice themselves, will attack the Fount.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_05() {
+		return new SM_SYSTEM_MESSAGE(1402686);
+	}
+
+	/**
+	 * Thanks to the sacrifice of the Detachment's Rush Squad, the Protectors' Fount has been destroyed.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_06() {
+		return new SM_SYSTEM_MESSAGE(1402687);
+	}
+
+	/**
+	 * The Protectors' Fount has been destroyed and they will not be resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_07() {
+		return new SM_SYSTEM_MESSAGE(1402688);
+	}
+
+	/**
+	 * Detachment Demolisher has opened the path to the next area.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_08() {
+		return new SM_SYSTEM_MESSAGE(1402689);
+	}
+
+	/**
+	 * The Protector that shares the Fount is still alive.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_RESSURECT_01() {
+		return new SM_SYSTEM_MESSAGE(1402690);
+	}
+
+	/**
+	 * The vanquished Protector will be resurrected by the power of the Fount in 15 seconds.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_RESSURECT_02() {
+		return new SM_SYSTEM_MESSAGE(1402691);
+	}
+
+	/**
+	 * The Protector that shares the Fount has successfully resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_RESSURECT_03() {
+		return new SM_SYSTEM_MESSAGE(1402692);
+	}
+
+	/**
+	 * Orissan begins to Ascend through Ascension Dominance.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_01() {
+		return new SM_SYSTEM_MESSAGE(1402693);
+	}
+
+	/**
+	 * Orissan has Ascended through Ascension Dominance.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_02() {
+		return new SM_SYSTEM_MESSAGE(1402694);
+	}
+
+	/**
+	 * Immortal Orissan cannot be killed. The Ascended state lasts until Orissan becomes exhausted.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_03() {
+		return new SM_SYSTEM_MESSAGE(1402695);
+	}
+
+	/**
+	 * Orissan will soon be exhausted by Ascension Dominance.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_04() {
+		return new SM_SYSTEM_MESSAGE(1402696);
+	}
+
+	/**
+	 * Orissan has become exhausted by Ascension Dominance.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_05() {
+		return new SM_SYSTEM_MESSAGE(1402697);
+	}
+
+	/**
+	 * Slay Orissan before the next Ascension Dominance begins.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_06() {
+		return new SM_SYSTEM_MESSAGE(1402698);
+	}
+
+	/**
+	 * The Detachment's Rush Squad has resolved to sacrifice themselves to undo Orissan's Ascended state.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_07() {
+		return new SM_SYSTEM_MESSAGE(1402699);
+	}
+
+	/**
+	 * If Orissan Ascends again, the Detachment will risk sacrificing themselves to launch an attack.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_08() {
+		return new SM_SYSTEM_MESSAGE(1402700);
+	}
+
+	/**
+	 * Thanks to the sacrifice of the Detachment's Rush Squad, Orissan's Ascension has been blocked.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_09() {
+		return new SM_SYSTEM_MESSAGE(1402701);
+	}
+
+	/**
+	 * Due to the sacrifices, Orissan can no longer Ascend.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_IMMORTAL_10() {
+		return new SM_SYSTEM_MESSAGE(1402702);
+	}
+
+	/**
+	 * The Empyrean Lord's Stormcannon is being charged for the Empyrean Firestorm.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_01() {
+		return new SM_SYSTEM_MESSAGE(1402703);
+	}
+
+	/**
+	 * The Guhena Legion has detected intruders and will begin attacking.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_02() {
+		return new SM_SYSTEM_MESSAGE(1402704);
+	}
+
+	/**
+	 * Defend the Detachment and its siege weapons from the Guhena Legion.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_03() {
+		return new SM_SYSTEM_MESSAGE(1402705);
+	}
+
+	/**
+	 * If the Detachment loses too many soldiers, they will not be able to assist during the battle against Beritra.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_04() {
+		return new SM_SYSTEM_MESSAGE(1402706);
+	}
+
+	/**
+	 * The Guhena Legion's second wave of attack has started. There will be three more attack waves.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_05() {
+		return new SM_SYSTEM_MESSAGE(1402707);
+	}
+
+	/**
+	 * The Guhena Legion's third wave of attack has started. There will be two more attack waves.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_06() {
+		return new SM_SYSTEM_MESSAGE(1402708);
+	}
+
+	/**
+	 * The Guhena Legion's fourth wave of attack has started. There will be one more attack wave.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_07() {
+		return new SM_SYSTEM_MESSAGE(1402709);
+	}
+
+	/**
+	 * The Guhena Legion's Commander Virtsha has appeared. You must defeat every captain and commander.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_08() {
+		return new SM_SYSTEM_MESSAGE(1402710);
+	}
+
+	/**
+	 * The Empyrean Lord's Stormcannon has blown open the Seal of Darkness.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_09() {
+		return new SM_SYSTEM_MESSAGE(1402711);
+	}
+
+	/**
+	 * The Detachment has suffered severe losses and will not be able to assist any further.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_BONUS_01() {
+		return new SM_SYSTEM_MESSAGE(1402712);
+	}
+
+	/**
+	 * The Detachment has suffered heavy losses and can only assist in limited capacity.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_BONUS_02() {
+		return new SM_SYSTEM_MESSAGE(1402713);
+	}
+
+	/**
+	 * The Detachment has suffered some losses, but can assist at almost full capacity.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_BONUS_03() {
+		return new SM_SYSTEM_MESSAGE(1402714);
+	}
+
+	/**
+	 * You have successfully protected the Detachment. They will assist you during the battle against Beritra.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_WAVE_BONUS_04() {
+		return new SM_SYSTEM_MESSAGE(1402715);
+	}
+
+	/**
+	 * Beritra uses his Power.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_HUMAN_01() {
+		return new SM_SYSTEM_MESSAGE(1402716);
+	}
+
+	/**
+	 * Unless his Power is deactivated, Beritra cannot be vanquished.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_HUMAN_02() {
+		return new SM_SYSTEM_MESSAGE(1402717);
+	}
+
+	/**
+	 * Beritra uses Immortal Vitality to recover his health completely.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_HUMAN_03() {
+		return new SM_SYSTEM_MESSAGE(1402718);
+	}
+
+	/**
+	 * The extraction of the Balaur Lord's Relic will soon be complete. Beritra will disappear when the relic is completely extracted.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_HUMAN_04() {
+		return new SM_SYSTEM_MESSAGE(1402719);
+	}
+
+	/**
+	 * The extraction of the Balaur Lord's Relic is complete and Beritra has disappeared.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_HUMAN_05() {
+		return new SM_SYSTEM_MESSAGE(1402720);
+	}
+
+	/**
+	 * Beritra transforms into a dragon.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_01() {
+		return new SM_SYSTEM_MESSAGE(1402721);
+	}
+
+	/**
+	 * Beritra will disappear when the relic is completely extracted in 7 minutes.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_02() {
+		return new SM_SYSTEM_MESSAGE(1402722);
+	}
+
+	/**
+	 * Beritra used Balaur Lord's Authority and became invincible. The Power must be deactivated.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_03() {
+		return new SM_SYSTEM_MESSAGE(1402723);
+	}
+
+	/**
+	 * Beritra will disappear when the relic is completely extracted in 5 minutes.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_04() {
+		return new SM_SYSTEM_MESSAGE(1402724);
+	}
+
+	/**
+	 * Beritra will disappear when the relic is completely extracted in 1 minute.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_05() {
+		return new SM_SYSTEM_MESSAGE(1402725);
+	}
+
+	/**
+	 * Beritra will disappear when the relic is completely extracted in a moment.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_06() {
+		return new SM_SYSTEM_MESSAGE(1402726);
+	}
+
+	/**
+	 * Due to the desperate interference by the Detachment's Rush Squad, the extraction of the Balaur Lord's Relic has been delayed by 30 seconds.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_VRITRA_DRAGON_PCGUARD() {
+		return new SM_SYSTEM_MESSAGE(1402727);
+	}
+
+	/**
+	 * The Seal Protector who watches over the Balaur Lord's Seal has appeared.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_GUARDIAN_01() {
+		return new SM_SYSTEM_MESSAGE(1402728);
+	}
+
+	/**
+	 * Destroying the Protector releases the Seal Protector Stigma, which will explode immediately.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_GUARDIAN_02() {
+		return new SM_SYSTEM_MESSAGE(1402729);
+	}
+
+	/**
+	 * When the Stigma explodes, the Balaur Lord's Power is deactivated.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_GUARDIAN_03() {
+		return new SM_SYSTEM_MESSAGE(1402730);
 	}
 
 	/**

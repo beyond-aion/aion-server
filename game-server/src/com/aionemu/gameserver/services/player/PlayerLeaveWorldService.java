@@ -16,6 +16,8 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
+import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.summons.SummonMode;
@@ -44,8 +46,8 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
@@ -66,11 +68,18 @@ public class PlayerLeaveWorldService {
 		final AionConnection con = player.getClientConnection();
 		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
 
+		if (player.isSpawned() && player.getPosition().getMapRegion() == null) {
+			log.warn("Player " + player.getName() + " had mapRegion null in world " + player.getPosition().getMapId() + " so he was reset to bind point position");
+			BindPointPosition bp = player.getBindPoint();
+			player.setPosition(World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 0));
+		}
+
 		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
 		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
-		player.onLoggedOut();
+		player.getResponseRequester().denyAll();
+		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);
 		ExchangeService.getInstance().cancelExchange(player);
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
@@ -80,7 +89,7 @@ public class PlayerLeaveWorldService {
 		SerialKillerService.getInstance().onLogout(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
-		KiskService.getInstance().onLogout(player);	
+		KiskService.getInstance().onLogout(player);
 		player.getMoveController().abortMove();
 
 		if (player.isLooting())
@@ -108,7 +117,7 @@ public class PlayerLeaveWorldService {
 		player.getLifeStats().cancelAllTasks();
 
 		if (player.getLifeStats().isAlreadyDead()) {
-			if (player.isInInstance())
+			if (player.isInInstance() || player.getPanesterraTeam() != null)
 				PlayerReviveService.instanceRevive(player);
 			else
 				PlayerReviveService.bindRevive(player);
@@ -125,8 +134,6 @@ public class PlayerLeaveWorldService {
 			player.getPostman().getController().onDelete();
 		player.setPostman(null);
 
-		player.setEditMode(false);
-
 		PunishmentService.stopPrisonTask(player, true);
 		PunishmentService.stopGatherableTask(player, true);
 
@@ -141,6 +148,7 @@ public class PlayerLeaveWorldService {
 
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
+		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
 
 		if (GSConfig.ENABLE_CHAT_SERVER)
 			ChatService.onPlayerLogout(player);
@@ -155,24 +163,8 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		con.setActivePlayer(null);
 		player.setClientConnection(null);
-	}
-
-	/**
-	 * @param player
-	 *          the player that left the game
-	 * @param delay
-	 *          the delay in seconds
-	 */
-	public static final void leaveWorldAfterDelay(final Player player, int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				leaveWorld(player);
-			}
-
-		}, delay * 1000);
+		if (con != null)
+			con.setActivePlayer(null);
 	}
 }

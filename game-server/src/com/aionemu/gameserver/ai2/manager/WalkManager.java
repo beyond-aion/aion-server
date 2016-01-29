@@ -10,13 +10,15 @@ import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.jme3.math.Vector3f;
+
+
 
 /**
  * @author ATracer
@@ -192,11 +194,11 @@ public class WalkManager {
 		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
 		if (walkPause == 0) {
 			npcAI.getOwner().getMoveController().resetMove();
-			npcAI.getOwner().getMoveController().chooseNextStep();
-			npcAI.getOwner().getMoveController().moveToNextPoint();
+			if(npcAI.getOwner().getMoveController().isNextRouteStepChosen())
+				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
 			npcAI.getOwner().getMoveController().abortMove();
-			npcAI.getOwner().getMoveController().chooseNextStep();
+			npcAI.getOwner().getMoveController().isNextRouteStepChosen();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override

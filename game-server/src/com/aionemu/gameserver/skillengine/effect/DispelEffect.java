@@ -52,8 +52,12 @@ public class DispelEffect extends EffectTemplate {
 
 		switch (dispeltype) {
 			case EFFECTID:
+				int removedEffects = 0;
 				for (Integer effectId : effectids) {
-					effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, effectId.toString(), this.count, this.dispelLevel, finalPower);
+					if (removedEffects == count)
+						break;
+					if (effect.getEffected().getEffectController().removeByEffectId(effectId, dispelLevel, finalPower))
+						removedEffects++;
 				}
 				break;
 			case EFFECTIDRANGE:

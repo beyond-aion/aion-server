@@ -4,7 +4,7 @@ package com.aionemu.gameserver.model.templates.mail;
  * @author kosyachok
  */
 public enum MailMessage {
-	MAIL_SEND_SECCESS(0),
+	MAIL_SEND_SUCCESS(0),
 	NO_SUCH_CHARACTER_NAME(1),
 	RECIPIENT_MAILBOX_FULL(2),
 	MAIL_IS_ONE_RACE_ONLY(3),

@@ -1,1 +1,0 @@
-ALTER TABLE legions ADD COLUMN `siege_glory_points` INT(11) NOT NULL DEFAULT 0;

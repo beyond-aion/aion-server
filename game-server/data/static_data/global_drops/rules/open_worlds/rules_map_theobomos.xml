@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Map/Zone Drops -->
+	<gd_rule rule_name="Erudite's Armor (Rare)" base_chance="1.5"
+		restriction_race="ELYOS">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="THEOBOMOS_RUINS_210060000" />
+		</gd_zones>
+		<gd_items>
+			<!-- Level 22 -->
+			<gd_item id="114300790" name="Erudite's Boots" />
+			<gd_item id="110600756" name="Erudite's Breastplate" />
+			<gd_item id="113300775" name="Erudite's Breeches" />
+			<gd_item id="114500756" name="Erudite's Brogans" />
+			<gd_item id="113500748" name="Erudite's Chausses" />
+			<gd_item id="111600729" name="Erudite's Gauntlets" />
+			<gd_item id="111100748" name="Erudite's Gloves" />
+			<gd_item id="113600722" name="Erudite's Greaves" />
+			<gd_item id="111500737" name="Erudite's Handguards" />
+			<gd_item id="110500768" name="Erudite's Hauberk" />
+			<gd_item id="110300792" name="Erudite's Jerkin" />
+			<gd_item id="113100758" name="Erudite's Leggings" />
+			<gd_item id="112100709" name="Erudite's Pauldrons" />
+			<gd_item id="114600716" name="Erudite's Sabatons" />
+			<gd_item id="114100777" name="Erudite's Shoes" />
+			<gd_item id="112300709" name="Erudite's Shoulderguards" />
+			<gd_item id="112600705" name="Erudite's Shoulderplates" />
+			<gd_item id="112500697" name="Erudite's Spaulders" />
+			<gd_item id="110100840" name="Erudite's Tunic" />
+			<gd_item id="111300750" name="Erudite's Vambrace" />
+		</gd_items>
+	</gd_rule>
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213900" name="Sinorel the Bitter" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500435" name="Sinorel's Orb" />
+			<gd_item id="100900429" name="Sinorel's Greatsword" />
+			<gd_item id="101300421" name="Sinorel's Spear" />
+			<gd_item id="101500437" name="Sinorel's Staff" />
+			<gd_item id="101700450" name="Sinorel's Longbow" />
+			<gd_item id="101900472" name="Sinorel's Aethercannon" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214560" name="Dark Whisper Shaula" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101800560" name="Shaula's Pistol" />
+			<gd_item id="100200661" name="Shaula's Dagger" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214561" name="Mate Amatas" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900536" name="Amatas' Greatsword" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214563" name="Sentinel Clorint" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101500552" name="Clorint's Staff" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214564" name="Petrified Koar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100600592" name="Koar's Tome" />
+			<gd_item id="102000582" name="Koar's Harp" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214565" name="Flesheater Chooh" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101900549" name="Chooh's Aethercannon" />
+			<gd_item id="101700574" name="Chooh's Longbow" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214566" name="Chieftain Gudomka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100554" name="Gudomka's Warhammer" />
+			<gd_item id="100000706" name="Gudomka's Sword" />
+			<gd_item id="101300528" name="Gudomka's Spear" />
+			<gd_item id="102100512" name="Gudomka's Cipher-Blade" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213903" name="Curator Halbrin" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100439" name="Halbrin's Warhammer" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214562" name="Insightful Panoptes" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500555" name="Panoptes' Jewel" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214567" name="Lost Balor" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900537" name="Balor's Greatsword" />
+			<gd_item id="101700575" name="Balor's Longbow" />
+			<gd_item id="100600593" name="Balor's Tome" />
+			<gd_item id="102000583" name="Balor's Harp" />
+			<gd_item id="101500553" name="Balor's Staff" />
+			<gd_item id="101900550" name="Balor's Aethercannon" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214566" name="Chieftain Gudomka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000815" name="Gudomka's Shield" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213899" name="Bored Ramnodase" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100673" name="Ramnodase's Leggings" />
+			<gd_item id="113300689" name="Ramnodase's Breeches" />
+			<gd_item id="113500662" name="Ramnodase's Chausses" />
+			<gd_item id="113600637" name="Ramnodase's Greaves" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213899" name="Bored Ramnodase" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100673" name="Ramnodase's Leggings" />
+			<gd_item id="113300689" name="Ramnodase's Breeches" />
+			<gd_item id="113500662" name="Ramnodase's Chausses" />
+			<gd_item id="113600637" name="Ramnodase's Greaves" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214560" name="Dark Whisper Shaula" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112500762" name="Shaula's Spaulders" />
+			<gd_item id="114600784" name="Shaula's Sabatons" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214561" name="Mate Amatas" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113300845" name="Amatas' Breeches" />
+			<gd_item id="114500827" name="Amatas' Brogans" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214562" name="Insightful Panoptes" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100827" name="Panoptes' Leggings" />
+			<gd_item id="111600798" name="Panoptes' Gauntlets" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214563" name="Sentinel Clorint" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100777" name="Clorint's Pauldrons" />
+			<gd_item id="113600789" name="Clorint's Greaves" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214564" name="Petrified Koar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112300774" name="Koar's Shoulderguards" />
+			<gd_item id="111500806" name="Koar's Handguards" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214565" name="Flesheater Chooh" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113500816" name="Chooh's Chausses" />
+			<gd_item id="112600773" name="Chooh's Shoulderplates" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214568" name="Wanderer Sirotata" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100855" name="Sirotata's Shoes" />
+			<gd_item id="110100915" name="Sirotata's Tunic" />
+			<gd_item id="111300823" name="Sirotata's Vambrace" />
+			<gd_item id="110500840" name="Sirotata's Hauberk" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214569" name="Queen Octaku" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100819" name="Octaku's Gloves" />
+			<gd_item id="110300870" name="Octaku's Jerkin" />
+			<gd_item id="114300881" name="Octaku's Boots" />
+			<gd_item id="110600825" name="Octaku's Breastplate" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213899" name="Bored Ramnodase" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000730" name="Ramnodase's Topaz Earrings" />
+			<gd_item id="120000729" name="Ramnodase's Zircon Earrings" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214566" name="Chieftain Gudomka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000914" name="Gudomka's Ruby Ring" />
+			<gd_item id="122000915" name="Gudomka's Sapphire Ring" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214563" name="Sentinel Clorint" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000795" name="Clorint's Necklace" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214567" name="Lost Balor" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000868" name="Balor's Ruby Earrings" />
+			<gd_item id="120000869" name="Balor's Sapphire Earrings" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214569" name="Queen Octaku" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000794" name="Octaku's Necklace" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headband (Rare)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213900" name="Sinorel the Bitter" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001546" name="Sinorel's Hairpin" />
+			<gd_item id="125001547" name="Sinorel's Hat" />
+			<gd_item id="125001548" name="Sinorel's Chain Helm" />
+			<gd_item id="125001549" name="Sinorel's Helm" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Belt (Legend)" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210060000" name="Theobomos" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214567" name="Lost Balor" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000903" name="Balor's Leather Belt" />
+			<gd_item id="123000904" name="Balor's Belt" />
+		</gd_items>
+	</gd_rule>
+</global_rules>

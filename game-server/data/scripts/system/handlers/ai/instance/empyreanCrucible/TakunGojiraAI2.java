@@ -2,7 +2,7 @@ package ai.instance.empyreanCrucible;
 
 import ai.AggressiveNpcAI2;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 

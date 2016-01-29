@@ -3721,18 +3721,6 @@
 		<spawn npc_id="805141" respawn_time="295">
 			<spot x="2861.05981" y="808.73065" z="562.27222" h="30"/>
 		</spawn>
-		<!-- prime benoid i -->
-		<spawn npc_id="220002" respawn_time="295">
-			<spot x="2945.27490" y="2274.98022" z="231.42032" h="33"/>
-		</spawn>
-		<!-- prime eiter i -->
-		<spawn npc_id="220003" respawn_time="295">
-			<spot x="1429.93884" y="1949.66943" z="138.60434" h="30"/>
-		</spawn>
-		<!-- prime tarmat i -->
-		<spawn npc_id="220001" respawn_time="295">
-			<spot x="594.88855" y="481.64340" z="416.42203" h="60"/>
-		</spawn>
 		<!-- primeval draconute warrior -->
 		<spawn npc_id="235888" respawn_time="295">
 			<spot x="1767.20435" y="2758.96069" z="328.33020"/>
@@ -5827,12 +5815,6 @@
 		<!-- warner -->
 		<spawn npc_id="805060" respawn_time="295">
 			<spot x="1170.60217" y="1626.18848" z="465.92441" h="90"/>
-		</spawn>
-		<!-- warning area -->
-		<spawn npc_id="832819" respawn_time="295">
-			<spot x="595.00574" y="481.60849" z="416.42203"/>
-			<spot x="1429.90833" y="1949.89380" z="138.61836"/>
-			<spot x="2945.55615" y="2275.08032" z="231.40274"/>
 		</spawn>
 		<!-- watchful jotun guardian -->
 		<spawn npc_id="235863" respawn_time="295">

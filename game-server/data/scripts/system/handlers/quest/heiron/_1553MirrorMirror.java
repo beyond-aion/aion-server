@@ -42,25 +42,22 @@ public class _1553MirrorMirror extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, 182201794, 1);
 			}
 		} else if (targetId == 730051) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
+					return defaultCloseDialog(env, 0, 1, false, false, 182201795, 1, 182201794, 1);
 				} else
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 204500) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+					return sendQuestDialog(env, 1693);
+				else if (env.getDialog() == DialogAction.SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -74,10 +71,7 @@ public class _1553MirrorMirror extends QuestHandler {
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
 					&& qs.getStatus() != QuestStatus.NONE) {
-					qs.setQuestVar(2);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
+					return defaultCloseDialog(env, 2, 2, true, true, 0, 0, 182201795, 1);
 				} else
 					return sendQuestEndDialog(env);
 			}

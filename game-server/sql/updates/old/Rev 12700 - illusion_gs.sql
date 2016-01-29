@@ -1,1 +1,0 @@
-ALTER TABLE `item_stones` ADD COLUMN `proc_count` int(11) NOT NULL DEFAULT '0' AFTER `polishCharge`;

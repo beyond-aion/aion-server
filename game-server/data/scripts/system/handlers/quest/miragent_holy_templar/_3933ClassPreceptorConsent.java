@@ -39,7 +39,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, 182206086, 1);
 			}
 		}
 
@@ -50,7 +50,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Receive the signature of Boreas on the recommendation letter.
+				// 1 - Receive the signature of Boreas on the recommendation letter.
 				case 203704:
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -105,7 +105,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 2716);
 							case SETPRO6:
-								return defaultCloseDialog(env, 5, 6);
+								return defaultCloseDialog(env, 5, 6, 182206087, 1, 182206086, 1);
 						}
 					}
 					// 7 - Report the result to Lavirintos with the Oath Stone
@@ -138,7 +138,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
-					return sendQuestEndDialog(env);
+					return sendQuestEndDialog(env, new int[] { 182206087 });
 				}
 			}
 		}

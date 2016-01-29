@@ -3105,11 +3105,6 @@
 		<spawn npc_id="212312" respawn_time="14400">
 			<spot x="2365.75" y="2615.26" z="157.706" h="108"/>
 		</spawn>
-		<!-- Indratu Bloodbinder -->
-		<spawn npc_id="213990" respawn_time="300">
-			<spot x="2299.36" y="2041.13" z="127.469" h="63" random_walk="10"/>
-			<spot x="2367.64" y="1996.52" z="126.602" h="118"/>
-		</spawn>
 		<!-- Tired Indratu Defender -->
 		<spawn npc_id="219132" respawn_time="295">
 			<spot x="2816.215" y="1980.809" z="144.2739" h="93" />
@@ -3149,6 +3144,11 @@
 			<spot x="2483.521" y="1999.339" z="134.5" h="33" />
 			<spot x="2477.991" y="1998.688" z="134.5" h="60" />
 			<spot x="2262.519" y="1884.459" z="148.9825" h="60" />
+		</spawn>
+		<!-- Indratu Bloodbinder -->
+		<spawn npc_id="213990" respawn_time="300">
+			<spot x="2299.36" y="2041.13" z="127.469" h="63" random_walk="10"/>
+			<spot x="2367.64" y="1996.52" z="126.602" h="118"/>
 		</spawn>
 		<!-- Indratu Bloodbinder -->
 		<spawn npc_id="213991" respawn_time="300">
@@ -3200,7 +3200,6 @@
 			<spot x="2116.828" y="2495.445" z="140.2714" h="3" />
 			<spot x="2166.199" y="2426.479" z="127.7785" h="60" />
 			<spot x="2166.056" y="2413.517" z="127.6794" h="66" />
-			<spot x="1971.827" y="2618.818" z="137.6767" h="13" />
 		</spawn>
 		<!-- Indratu Cleaver -->
 		<spawn npc_id="213965" respawn_time="300">
@@ -3737,7 +3736,7 @@
 		</spawn>
 		<!-- Indratu Priest -->
 		<spawn npc_id="235486" respawn_time="295">
-			<spot x="2259.307" y="2672.707" z="129.706" h="11" />
+			<spot x="2259.307" y="2672.707" z="129.706" h="26" />
 			<spot x="2294.588" y="2675.399" z="133.9998" h="63" />
 		</spawn>
 		<!-- Indratu Priest -->
@@ -3784,8 +3783,17 @@
 		</spawn>
 		<!-- Indratu Serpentguard -->
 		<spawn npc_id="235504" respawn_time="295">
+			<spot x="2131.001" y="2433.094" z="127.8272" h="91" />
+			<spot x="2108.887" y="2390.039" z="126.8931" h="96" />
+			<spot x="2120.594" y="2410.677" z="126.7822" h="3" />
+		</spawn>
+		<!-- Indratu Serpentguard -->
+		<spawn npc_id="235505" respawn_time="295">
 			<spot x="2234.604" y="2657.587" z="123.5749" h="66" />
 			<spot x="2283.944" y="2668.664" z="133.819" h="53" />
+		</spawn>
+		<!-- Indratu Serpentguard -->
+		<spawn npc_id="235506" respawn_time="295">
 			<spot x="2294.49" y="2677.185" z="134.0523" h="60" />
 		</spawn>
 		<!-- Indratu Serpentguard -->
@@ -3801,6 +3809,7 @@
 		<!-- Indratu Serpentguard -->
 		<spawn npc_id="235509" respawn_time="295">
 			<spot x="1953.079" y="2592.601" z="137.8645" h="36" />
+			<spot x="1971.827" y="2618.818" z="137.6767" h="13" />
 		</spawn>
 		<!-- Indratu Serpentkeeper -->
 		<spawn npc_id="235525" respawn_time="295">
@@ -3818,8 +3827,6 @@
 			<spot x="2147.822" y="2436.067" z="126.6056" h="106" />
 			<spot x="2117.588" y="2481.051" z="139.6001" h="13" />
 			<spot x="2108.752" y="2513.247" z="140.6351" h="16" />
-			<spot x="2131.001" y="2433.094" z="127.8272" h="91" />
-			<spot x="2108.887" y="2390.039" z="126.8931" h="96" />
 		</spawn>
 		<!-- Indratu Shaman -->
 		<spawn npc_id="235495" respawn_time="295">
@@ -3959,7 +3966,6 @@
 			<spot x="2242.082" y="2441.274" z="124.3122" h="90" />
 			<spot x="2253.9" y="2431.484" z="127.4785" h="16" />
 			<spot x="2173.632" y="2474.56" z="137.4148" h="24" />
-			<spot x="2120.594" y="2410.677" z="126.7822" h="3" />
 		</spawn>
 		<!-- Indratu Thresher -->
 		<spawn npc_id="213974" respawn_time="300">
@@ -5859,18 +5865,9 @@
 		<spawn npc_id="204608" respawn_time="295">
 			<spot x="981.768" y="701.253" z="136" h="105"/>
 		</spawn>
-		<!-- Protector Kentro -->
-		<spawn npc_id="831840" respawn_time="295">
-			<spot x="2543.2" y="2672.7" z="158.1512" h="46" />
-		</spawn>
 		<!-- Protector Phobos -->
 		<spawn npc_id="204646" respawn_time="295">
 			<spot x="2466.59" y="301.783" z="416.005" h="46"/>
-		</spawn>
-		<!-- Protector Siz -->
-		<spawn npc_id="831837" respawn_time="295">
-			<spot x="2515.5" y="2302.5" z="138.6328" h="17" />
-			<spot x="2529.476" y="2678.42" z="155.8647" h="36" />
 		</spawn>
 		<!-- Quake Spirit -->
 		<spawn npc_id="211194" respawn_time="295">

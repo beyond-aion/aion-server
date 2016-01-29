@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.io.IOException;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -51,12 +49,8 @@ public class SpawnNpc extends AdminCommand {
 		if (visibleObject == null) {
 			PacketSendUtility.sendMessage(admin, "Spawn id " + templateId + " was not found!");
 		} else if (respawnTime > 0) {
-			try {
-				DataManager.SPAWNS_DATA2.saveSpawn(admin, visibleObject, false);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (!DataManager.SPAWNS_DATA2.saveSpawn(visibleObject, false))
 				PacketSendUtility.sendMessage(admin, "Could not save spawn");
-			}
 		}
 
 		String objectName = visibleObject.getObjectTemplate().getName();

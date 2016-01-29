@@ -134,8 +134,8 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(0);// unk 3.0
 		writeH(0); // [unk 3.5]
 		writeH(0); // [unk 3.5]
-		writeQ(pcd.getCurrentReposteEnergy());
-		writeQ(pcd.getMaxReposteEnergy());
+		writeQ(pcd.getCurrentReposeEnergy());
+		writeQ(pcd.getMaxReposeEnergy());
 		writeQ(pcd.getCurrentSalvationPercent());
 
 		writeH(0); // 4.3 NA

@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.world.zone;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,9 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +21,7 @@ import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ZoneData;
-import com.aionemu.gameserver.geoEngine.scene.GeometryEx;
+import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.geometry.CylinderArea;
@@ -47,6 +43,11 @@ import com.aionemu.gameserver.world.zone.handler.MaterialZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
 import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 
 /**
  * @author ATracer modified by antness
@@ -242,67 +243,6 @@ public final class ZoneService implements GameEngine {
 		return null;
 	}
 
-	/**
-	 * Method for single instances of meshes (if specified in material_templates.xml)
-	 * 
-	 * @param geometry
-	 * @param worldId
-	 */
-	public void createMaterialZoneTemplate(GeometryEx geometry, int worldId) {
-		ZoneName zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
-
-		ZoneHandler handler = collidableHandlers.get(zoneName);
-		if (handler == null) {
-			if (geometry.getMaterialId() == 11) {
-				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
-					handler = new SiegeShield(geometry);
-					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
-				} else
-					return;
-			} else {
-				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(geometry.getMaterialId());
-				if (template == null)
-					return;
-				handler = new MaterialZoneHandler(geometry, template);
-			}
-			collidableHandlers.put(zoneName, handler);
-		} else {
-			log.warn("Duplicate material mesh: " + zoneName.toString());
-		}
-
-		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(worldId);
-		if (areas == null) {
-			this.zoneByMapIdMap.put(worldId, new FastTable<ZoneInfo>());
-			areas = this.zoneByMapIdMap.get(worldId);
-		}
-		ZoneInfo zoneInfo = null;
-		for (ZoneInfo area : areas) {
-			if (area.getZoneTemplate().getName().equals(zoneName)) {
-				zoneInfo = area;
-				break;
-			}
-		}
-		if (zoneInfo == null) {
-			MaterialZoneTemplate zoneTemplate = new MaterialZoneTemplate(geometry, worldId);
-			// maybe add to zone data if needed search ?
-			Area zoneInfoArea = null;
-			if (zoneTemplate.getSphere() != null) {
-				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate.getSphere()
-					.getZ(), zoneTemplate.getSphere().getR());
-			} else if (zoneTemplate.getCylinder() != null) {
-				zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(), zoneTemplate
-					.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
-			} else if (zoneTemplate.getSemisphere() != null) {
-				zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(), zoneTemplate
-					.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
-			}
-			if (zoneInfoArea != null) {
-				zoneInfo = new ZoneInfo(zoneInfoArea, zoneTemplate);
-				areas.add(zoneInfo);
-			}
-		}
-	}
-
 	public void saveMaterialZones() {
 		List<ZoneTemplate> templates = new FastTable<ZoneTemplate>();
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
@@ -326,6 +266,90 @@ public final class ZoneService implements GameEngine {
 		ZoneData zoneData = new ZoneData();
 		zoneData.zoneList = templates;
 		zoneData.saveData();
+	}
+
+	/**
+	 * @param node
+	 * @param worldId
+	 * @param materialId
+	 * @param b
+	 */
+	public void createMaterialZoneTemplate(Spatial geometry, int worldId, int materialId, boolean failOnMissing) {
+		ZoneName zoneName = null;
+		if (failOnMissing)
+			zoneName = ZoneName.get(geometry.getName() + "_" + worldId);
+		else
+			zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
+
+		if (zoneName.name().equals(ZoneName.NONE))
+			return;
+
+		ZoneHandler handler = collidableHandlers.get(zoneName);
+		if (handler == null) {
+			if (materialId == 11) {
+				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
+					handler = new SiegeShield(geometry);
+					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
+				}
+				else
+					return;
+			}
+			else {
+				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(materialId);
+				if (template == null)
+					return;
+				handler = new MaterialZoneHandler(geometry, template);
+			}
+			collidableHandlers.put(zoneName, handler);
+		}
+		else {
+			log.warn("Duplicate material mesh: " + zoneName.toString());
+		}
+
+		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(worldId);
+		if (areas == null) {
+			this.zoneByMapIdMap.put(worldId, new ArrayList<ZoneInfo>());
+			areas = this.zoneByMapIdMap.get(worldId);
+		}
+		ZoneInfo zoneInfo = null;
+		for (ZoneInfo area : areas) {
+			if (area.getZoneTemplate().getName().equals(zoneName)) {
+				zoneInfo = area;
+				break;
+			}
+		}
+		if (zoneInfo == null) {
+			MaterialZoneTemplate zoneTemplate = new MaterialZoneTemplate(geometry, worldId);
+			// maybe add to zone data if needed search ?
+			Area zoneInfoArea = null;
+			if (zoneTemplate.getSphere() != null) {
+				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate
+					.getSphere().getZ(), zoneTemplate.getSphere().getR());
+			}
+			else if (zoneTemplate.getCylinder() != null) {
+				zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(),
+					zoneTemplate.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
+			}
+			else if (zoneTemplate.getSemisphere() != null) {
+				zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(),
+					zoneTemplate.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
+			}
+			if (zoneInfoArea != null) {
+				zoneInfo = new ZoneInfo(zoneInfoArea, zoneTemplate);
+				areas.add(zoneInfo);
+			}
+		}
+	}
+
+	/**
+	 * @param node
+	 * @param regionId
+	 * @param worldId
+	 * @param materialId
+	 */
+	public void createMaterialZoneTemplate(Spatial geometry, int regionId, int worldId, byte materialId) {
+		geometry.setName(geometry.getName() + "_" + regionId);
+		createMaterialZoneTemplate(geometry, worldId, materialId, false);
 	}
 
 }

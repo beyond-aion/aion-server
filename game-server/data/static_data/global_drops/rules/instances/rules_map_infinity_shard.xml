@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Named Equipment Box (Epic)" base_chance="100" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300800000" name="Infinity_Shard"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231073" name="Hyperion"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052387" name="Hyperion's Equipment Box"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Supply Box (Unique)" base_chance="100" each_member="true">
+		<gd_maps>
+			<gd_map map_id="300800000" name="Infinity_Shard"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231073" name="Hyperion"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052501" name="Infinity Shard Expedition's Excavation Box"/>
+		</gd_items>
+	</gd_rule>
+</global_rules>

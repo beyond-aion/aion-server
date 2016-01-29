@@ -1,1 +1,0 @@
-ALTER TABLE `player_registered_items` CHANGE `floor` `room` tinyint(4);

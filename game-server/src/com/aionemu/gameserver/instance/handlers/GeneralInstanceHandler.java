@@ -10,10 +10,14 @@ import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -113,6 +117,23 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	protected void sendMsg(int msg) {
 		sendMsg(msg, 0, false, 25);
+	}
+
+	protected void sendMsg(SM_SYSTEM_MESSAGE msg, int delay) {
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				instance.doOnAllPlayers(new Visitor<Player>() {
+
+					@Override
+					public void visit(Player player) {
+						PacketSendUtility.sendPacket(player, msg);
+					}
+
+				});
+			}
+		}, delay);
 	}
 
 	@Override
@@ -223,5 +244,10 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 
+	}
+	
+	@Override
+	public void onCreatureDetected(Npc detector, Creature detected) {
+		
 	}
 }

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author KID
+ * @modified Neon
  */
 public class RecipeService {
 
@@ -60,8 +61,15 @@ public class RecipeService {
 		if (template == null)
 			return false;
 
-		player.getRecipeList().addRecipe(player, template);
-		return true;
+		if (player.getRecipeList().addRecipe(player, recipeId)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARN(recipeId, player.getName()));
+			return true;
+		}
+		return false;
 	}
 
+	public static void autoLearnRecipes(Player player, int skillId, int skillLvl) {
+		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getAutolearnRecipes(player.getRace(), skillId, skillLvl))
+			player.getRecipeList().addRecipe(player, recipe.getId());
+	}
 }

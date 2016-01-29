@@ -35,10 +35,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="792.3545" y="630.4482" z="276.352" h="51"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
-				</spawn>
 				<!-- Tipaon -->
 				<spawn npc_id="802334" handler="MERCHANT" respawn_time="295">
 					<spot x="808.9643" y="635.1075" z="276.375" h="15"/>
@@ -46,6 +42,10 @@
 				<!-- Metophon -->
 				<spawn npc_id="802631" handler="MERCHANT" respawn_time="295">
 					<spot x="808.7373" y="642.1046" z="276.25" h="111"/>
+				</spawn>
+				<!-- Geneg -->
+				<spawn npc_id="805275" handler="MERCHANT" respawn_time="295">
+					<spot x="818.6" y="625.5" z="276.5" h="25"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -122,10 +122,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="792.3545" y="630.4482" z="276.352" h="51"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
-				</spawn>
 				<!-- Vanst -->
 				<spawn npc_id="802342" handler="MERCHANT" respawn_time="295">
 					<spot x="808.9643" y="635.1075" z="276.375" h="15"/>
@@ -133,6 +129,10 @@
 				<!-- Hrafni -->
 				<spawn npc_id="802653" handler="MERCHANT" respawn_time="295">
 					<spot x="808.7373" y="642.1046" z="276.25" h="111"/>
+				</spawn>
+				<!-- Kinste -->
+				<spawn npc_id="805288" handler="MERCHANT" respawn_time="295">
+					<spot x="818.6" y="625.5" z="276.5" h="25"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -257,6 +257,10 @@
 				<spawn npc_id="802564" handler="MERCHANT" respawn_time="295">
 					<spot x="531.7267" y="589.9037" z="265.2552" h="110"/>
 				</spawn>
+				<!-- Shapaus -->
+				<spawn npc_id="805269" handler="MERCHANT" respawn_time="295">
+					<spot x="534.2" y="587.5" z="265.38" h="90"/>
+				</spawn>
 				
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
@@ -336,6 +340,10 @@
 				<!-- Ketide -->
 				<spawn npc_id="802578" handler="SENTINEL" respawn_time="295">
 					<spot x="531.72668" y="589.90375" z="264.86246" h="110"/>
+				</spawn>
+				<!-- Dukke -->
+				<spawn npc_id="805282" handler="MERCHANT" respawn_time="295">
+					<spot x="534.2" y="587.5" z="265.38" h="90"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -445,10 +453,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="396.6095" y="994.9882" z="249.3328" h="110"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
-				</spawn>
 				<!-- Fona -->
 				<spawn npc_id="802331" handler="MERCHANT" respawn_time="295">
 					<spot x="380.78894" y="993.42743" z="248.375" h="75"/>
@@ -464,6 +468,10 @@
 				<!-- Anemone -->
 				<spawn npc_id="802570" handler="MERCHANT" respawn_time="295">
 					<spot x="383.17896" y="986.17712" z="248.375" h="60"/>
+				</spawn>
+				<!-- Panamas -->
+				<spawn npc_id="805271" handler="MERCHANT" respawn_time="295">
+					<spot x="368.1" y="996.5" z="248.54" h="94"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -546,10 +554,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="396.6095" y="994.9882" z="249.3328" h="110"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
-				</spawn>
 				<!-- Apeit -->
 				<spawn npc_id="802339" handler="MERCHANT" respawn_time="295">
 					<spot x="380.78894" y="993.42743" z="248.375" h="75"/>
@@ -565,6 +569,10 @@
 				<!-- Abeorn -->
 				<spawn npc_id="802579" handler="MERCHANT" respawn_time="295">
 					<spot x="360.67563" y="993.1745" z="248.3828"/>
+				</spawn>
+				<!-- Frite -->
+				<spawn npc_id="805284" handler="MERCHANT" respawn_time="295">
+					<spot x="368.1" y="996.5" z="248.54" h="94"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -714,6 +722,10 @@
 				<spawn npc_id="802621" handler="MERCHANT" respawn_time="295">
 					<spot x="478.08047" y="1202.0717" z="276.37500" h="105"/>
 				</spawn>
+				<!-- Clarckia -->
+				<spawn npc_id="805270" handler="MERCHANT" respawn_time="295">
+					<spot x="510.3" y="1189.5" z="276.26" h="57"/>
+				</spawn>
 				
 				<!-- Guardian Elite Warrior -->
 				<spawn npc_id="235191" handler="GUARDIAN" respawn_time="295">
@@ -817,6 +829,10 @@
 				<!-- Vetmimir -->
 				<spawn npc_id="802643" handler="MERCHANT" respawn_time="295">
 					<spot x="478.08047" y="1202.0717" z="276.375" h="105"/>
+				</spawn>
+				<!-- Varte -->
+				<spawn npc_id="805283" handler="MERCHANT" respawn_time="295">
+					<spot x="510.3" y="1189.5" z="276.26" h="57"/>
 				</spawn>
 				
 				<!-- Archon Elite Aggressor -->
@@ -938,10 +954,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="886.8635" y="1885.038" z="230.75" h="45"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
-				</spawn>
 				<!-- Feleus -->
 				<spawn npc_id="802332" handler="MERCHANT" respawn_time="295">
 					<spot x="892.56335" y="1857.2535" z="229.42825" h="105"/>
@@ -953,6 +965,10 @@
 				<!-- Rotos -->
 				<spawn npc_id="802615" handler="MERCHANT" respawn_time="295">
 					<spot x="878.75586" y="1860.849" z="229.23175"/>
+				</spawn>
+				<!-- Logiste -->
+				<spawn npc_id="805274" handler="MERCHANT" respawn_time="295">
+					<spot x="882.6" y="1865.9" z="229.62" h="86"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -1029,10 +1045,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="886.8635" y="1885.038" z="230.75" h="45"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
-				</spawn>
 				<!-- Reheln -->
 				<spawn npc_id="802340" handler="MERCHANT" respawn_time="295">
 					<spot x="892.56335" y="1857.2535" z="229.42825" h="105"/>
@@ -1044,6 +1056,10 @@
 				<!-- Valdmark -->
 				<spawn npc_id="802583" handler="MERCHANT" respawn_time="295">
 					<spot x="892.21436" y="1850.1084" z="229.42825" h="52"/>
+				</spawn>
+				<!-- Dekker -->
+				<spawn npc_id="805287" handler="MERCHANT" respawn_time="295">
+					<spot x="882.6" y="1865.9" z="229.62" h="86"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -1160,10 +1176,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="526.4655" y="1559.047" z="234.7957" h="47"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="551.2578" y="1557.063" z="234.5" h="89"/>
-				</spawn>
 				<!-- Teleport Device -->
 				<spawn npc_id="731456" handler="MERCHANT" respawn_time="295">
 					<spot x="543.4838" y="1548.385" z="235.5931" h="105" static_id="683"/>
@@ -1179,6 +1191,10 @@
 				<!-- Craneia -->
 				<spawn npc_id="802567" handler="MERCHANT" respawn_time="295">
 					<spot x="535.9156" y="1565.105" z="234.4339"/>
+				</spawn>
+				<!-- Paciplo -->
+				<spawn npc_id="805273" handler="MERCHANT" respawn_time="295">
+					<spot x="551.5" y="1556.6" z="234.5" h="37"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -1254,10 +1270,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="526.4655" y="1559.047" z="234.7957" h="51"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="551.2578" y="1557.063" z="234.5" h="45"/>
-				</spawn>
 				<!-- Teleport Device -->
 				<spawn npc_id="731462" handler="MERCHANT" respawn_time="295">
 					<spot x="543.4838" y="1548.385" z="235.5931" h="105" static_id="683"/>
@@ -1273,6 +1285,10 @@
 				<!-- Engor -->
 				<spawn npc_id="802581" handler="MERCHANT" respawn_time="295">
 					<spot x="535.9156" y="1565.105" z="234.4339"/>
+				</spawn>
+				<!-- Soldate -->
+				<spawn npc_id="805286" handler="MERCHANT" respawn_time="295">
+					<spot x="551.5" y="1556.6" z="234.5" h="37"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -1388,10 +1404,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="1900.763" y="832.2151" z="237.8833" h="30"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
-				</spawn>
 				<!-- Rovicos -->
 				<spawn npc_id="802335" handler="MERCHANT" respawn_time="295">
 					<spot x="1901.731" y="807.8081" z="237.875" h="60"/>
@@ -1407,6 +1419,10 @@
 				<!-- Anemone -->
 				<spawn npc_id="802570" handler="MERCHANT" respawn_time="295">
 					<spot x="1894.93" y="822.0237" z="237.8082" h="105"/>
+				</spawn>
+				<!-- Nekado -->
+				<spawn npc_id="805279" handler="MERCHANT" respawn_time="295">
+					<spot x="1901.1" y="820.7" z="237.88" h="71"/>
 				</spawn>
 				
 				<!-- Tomul Brawler FI -->
@@ -1475,10 +1491,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="1900.763" y="832.2151" z="237.8833" h="30"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
-				</spawn>
 				<!-- Rink -->
 				<spawn npc_id="802343" handler="MERCHANT" respawn_time="295">
 					<spot x="1901.731" y="807.8081" z="237.875" h="60"/>
@@ -1494,6 +1506,10 @@
 				<!-- Hljod -->
 				<spawn npc_id="802601" handler="MERCHANT" respawn_time="295">
 					<spot x="1894.93" y="822.0237" z="237.8082" h="105"/>
+				</spawn>
+				<!-- Brette -->
+				<spawn npc_id="805293" handler="MERCHANT" respawn_time="295">
+					<spot x="1901.1" y="820.7" z="237.88" h="71"/>
 				</spawn>
 				
 				<!-- Denku Feralclaw FI -->
@@ -1632,6 +1648,10 @@
 				<spawn npc_id="802627" handler="MERCHANT" respawn_time="295">
 					<spot x="1442.66" y="874.5177" z="258.25" h="66"/>
 				</spawn>
+				<!-- Roide -->
+				<spawn npc_id="805280" handler="MERCHANT" respawn_time="295">
+					<spot x="1411.4" y="838.0" z="258.17" h="117"/>
+				</spawn>
 				
 				<!-- Guardian Elite Warrior -->
 				<spawn npc_id="235191" handler="GUARDIAN" respawn_time="295">
@@ -1738,6 +1758,10 @@
 				<!-- Holta -->
 				<spawn npc_id="802649" handler="MERCHANT" respawn_time="295">
 					<spot x="1442.66" y="874.5177" z="258.25" h="66"/>
+				</spawn>
+				<!-- Raitant -->
+				<spawn npc_id="805292" handler="MERCHANT" respawn_time="295">
+					<spot x="1411.4" y="838.0" z="258.17" h="117"/>
 				</spawn>
 				
 				<!-- Archon Elite Aggressor -->
@@ -1866,6 +1890,10 @@
 				<spawn npc_id="802609" handler="MERCHANT" respawn_time="295">
 					<spot x="1618.363" y="1563.365" z="247.608" h="105"/>
 				</spawn>
+				<!-- Escora -->
+				<spawn npc_id="805278" handler="MERCHANT" respawn_time="295">
+					<spot x="1630.8" y="1556.1" z="247.76" h="81"/>
+				</spawn>
 				
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
@@ -1947,6 +1975,10 @@
 				<!-- Foir -->
 				<spawn npc_id="802595" handler="MERCHANT" respawn_time="295">
 					<spot x="1618.363" y="1563.365" z="247.608" h="105"/>
+				</spawn>
+				<!-- Ansrachie -->
+				<spawn npc_id="805291" handler="MERCHANT" respawn_time="295">
+					<spot x="1630.8" y="1556.1" z="247.76" h="81"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -2054,10 +2086,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="1146.117" y="251.8072" z="239.125" h="111"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="1172.821" y="242.3675" z="239.125" h="75"/>
-				</spawn>
 				<!-- Faris -->
 				<spawn npc_id="802336" handler="MERCHANT" respawn_time="295">
 					<spot x="1165.077" y="253.3601" z="239.125"/>
@@ -2069,6 +2097,10 @@
 				<!-- Melly -->
 				<spawn npc_id="802614" handler="MERCHANT" respawn_time="295">
 					<spot x="1178.191" y="242.5566" z="239.2032" h="45"/>
+				</spawn>
+				<!-- Ondas -->
+				<spawn npc_id="805277" handler="MERCHANT" respawn_time="295">
+					<spot x="1173.1" y="242.2" z="239.13" h="20"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -2144,10 +2176,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="1146.117" y="251.8072" z="239.125" h="51"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="1172.821" y="242.3675" z="239.125" h="33"/>
-				</spawn>
 				<!-- Kestum -->
 				<spawn npc_id="802344" handler="MERCHANT" respawn_time="295">
 					<spot x="1165.077" y="253.3601" z="239.125"/>
@@ -2163,6 +2191,10 @@
 				<!-- Rhein -->
 				<spawn npc_id="802600" handler="MERCHANT" respawn_time="295">
 					<spot x="1178.191" y="242.5566" z="239.2032" h="45"/>
+				</spawn>
+				<!-- Valonte -->
+				<spawn npc_id="805290" handler="MERCHANT" respawn_time="295">
+					<spot x="1173.1" y="242.2" z="239.13" h="20"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -2278,10 +2310,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="1691.307" y="244.4091" z="251.6151" h="15"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="1674.649" y="246.2789" z="251.625" h="85"/>
-				</spawn>
 				<!-- Teleport Device -->
 				<spawn npc_id="731461" handler="MERCHANT" respawn_time="295">
 					<spot x="1679.693" y="239.6637" z="252" h="60" static_id="947"/>
@@ -2297,6 +2325,10 @@
 				<!-- Phoenis -->
 				<spawn npc_id="802612" handler="MERCHANT" respawn_time="295">
 					<spot x="1665.161" y="226.3457" z="251.375" h="30"/>
+				</spawn>
+				<!-- Rezar -->
+				<spawn npc_id="805276" handler="MERCHANT" respawn_time="295">
+					<spot x="1673.9" y="246.2" z="251.63" h="67"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -2372,10 +2404,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="1691.307" y="244.4091" z="251.6151" h="15"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="1674.649" y="246.2789" z="251.625" h="66"/>
-				</spawn>
 				<!-- Teleport Device -->
 				<spawn npc_id="731459" handler="MERCHANT" respawn_time="295">
 					<spot x="1679.693" y="239.6637" z="252" h="60" static_id="947"/>
@@ -2391,6 +2419,10 @@
 				<!-- Vidblainn -->
 				<spawn npc_id="802598" handler="MERCHANT" respawn_time="295">
 					<spot x="1665.1614" y="226.34572" z="251.5" h="30"/>
+				</spawn>
+				<!-- Gauschief -->
+				<spawn npc_id="805289" handler="MERCHANT" respawn_time="295">
+					<spot x="1673.9" y="246.2" z="251.63" h="67"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -2506,10 +2538,6 @@
 				<spawn npc_id="235188" handler="SENTINEL" respawn_time="295">
 					<spot x="1234.362" y="1451.005" z="276.7048" h="45"/>
 				</spawn>
-				<!-- Guardian Priest -->
-				<spawn npc_id="235189" handler="SENTINEL" respawn_time="295">
-					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
-				</spawn>
 				<!-- Penteus -->
 				<spawn npc_id="802338" handler="MERCHANT" respawn_time="295">
 					<spot x="1256.097" y="1445.76" z="275.3487"/>
@@ -2521,6 +2549,10 @@
 				<!-- Pone -->
 				<spawn npc_id="802629" handler="MERCHANT" respawn_time="295">
 					<spot x="1261.136" y="1451.399" z="274.858" h="96"/>
+				</spawn>
+				<!-- Herogio -->
+				<spawn npc_id="805272" handler="MERCHANT" respawn_time="295">
+					<spot x="1263.0" y="1427.0" z="274.75" h="13"/>
 				</spawn>
 				
 				<!-- Guardian Warrior -->
@@ -2599,10 +2631,6 @@
 				<spawn npc_id="235200" handler="SENTINEL" respawn_time="295">
 					<spot x="1234.362" y="1451.005" z="276.7048" h="45"/>
 				</spawn>
-				<!-- Archon Mender -->
-				<spawn npc_id="235201" handler="SENTINEL" respawn_time="295">
-					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
-				</spawn>
 				<!-- Kaymen -->
 				<spawn npc_id="802346" handler="MERCHANT" respawn_time="295">
 					<spot x="1256.0966" y="1445.7599" z="275.2316"/>
@@ -2614,6 +2642,10 @@
 				<!-- Holdor -->
 				<spawn npc_id="802651" handler="MERCHANT" respawn_time="295">
 					<spot x="1261.1362" y="1451.3992" z="274.66406" h="97"/>
+				</spawn>
+				<!-- Krieger -->
+				<spawn npc_id="805285" handler="MERCHANT" respawn_time="295">
+					<spot x="1263.0" y="1427.0" z="274.75" h="13"/>
 				</spawn>
 				
 				<!-- Archon Aggressor -->
@@ -2779,6 +2811,10 @@
 				<spawn npc_id="804563" handler="MERCHANT" respawn_time="295">
 					<spot x="957.64752" y="1034.6707" z="334.24686" h="49"/>
 				</spawn>
+				<!-- Bonecar -->
+				<spawn npc_id="805281" handler="MERCHANT" respawn_time="295">
+					<spot x="953.5" y="1055.9" z="334.94" h="48"/>
+				</spawn>
 				
 				<!-- Tomul Brawler -->
 				<spawn npc_id="235378" handler="OUTRIDER" respawn_time="295">
@@ -2912,6 +2948,10 @@
 				<!-- Sirot -->
 				<spawn npc_id="832841" handler="MERCHANT" respawn_time="295">
 					<spot x="922.0742" y="1056.0228" z="334.24686" h="45"/>
+				</spawn>
+				<!-- Jitetiche -->
+				<spawn npc_id="805294" handler="MERCHANT" respawn_time="295">
+					<spot x="953.5" y="1055.9" z="334.94" h="48"/>
 				</spawn>
 				
 				<!-- Denku Feralclaw -->

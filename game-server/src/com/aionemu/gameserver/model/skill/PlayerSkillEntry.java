@@ -1,23 +1,37 @@
 package com.aionemu.gameserver.model.skill;
 
-import com.aionemu.gameserver.configs.main.CraftConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
+import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
+import com.aionemu.gameserver.skillengine.model.StigmaType;
 
 /**
- * @author ATracer
+ * @author ATracer, Neon
  */
 public class PlayerSkillEntry extends SkillEntry {
 
-	private int skillType;
-
-	/**
-	 * for crafting skills
-	 */
-	private int currentXp;
-
+	private int skillType; // 0 normal skill , 1 stigma skill , 3 linked stigma skill
+	private int currentXp; // for crafting skills
 	private PersistentState persistentState;
+
+	public PlayerSkillEntry(Player player, int skillId, int skillLvl, PersistentState persistentState) {
+		this(skillId, skillLvl, 0, persistentState);
+		SkillLearnTemplate[] learnTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId);
+		if (learnTemplates.length == 0)
+			skillType = DataManager.SKILL_DATA.getSkillTemplate(skillId).getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
+		else {
+			for (SkillLearnTemplate template : learnTemplates) {
+				if (template.isStigma() && template.getRace() != player.getOppositeRace()
+					&& (template.getClassId() == player.getPlayerClass() || template.getClassId() == PlayerClass.ALL)) {
+					skillType = template.isLinkedStigma() ? 3 : 1;
+					break;
+				}
+			}
+		}
+	}
 
 	public PlayerSkillEntry(int skillId, int skillLvl, int skillType, PersistentState persistentState) {
 		super(skillId, skillLvl);
@@ -25,52 +39,94 @@ public class PlayerSkillEntry extends SkillEntry {
 		this.persistentState = persistentState;
 	}
 
+	public boolean isStigmaSkill() {
+		return skillType > 0;
+	}
+
+	public boolean isNormalStigmaSkill() {
+		return isStigmaSkill() && !isLinkedStigmaSkill();
+	}
+
+	public boolean isLinkedStigmaSkill() {
+		return skillType >= 3;
+	}
+
+	public boolean isNormalSkill() {
+		return !isStigmaSkill() && skillId < 30000;
+	}
+
+	public boolean isNormalOrStigmaSkill() {
+		return skillId < 30000;
+	}
+
+	public boolean isTappingSkill() {
+		return skillId >= 30001 && skillId <= 30003;
+	}
+
+	public boolean isCraftingSkill() {
+		return skillId >= 40001 && skillId <= 40010 && !isMorphSkill();
+	}
+
+	public boolean isMorphSkill() {
+		return skillId == 40009;
+	}
+
+	public boolean isProfessionSkill() {
+		return skillId >= 30000 && skillId < 50000; // 50000 or greater are actions etc.
+	}
+
+	/**
+	 * Stupid NC shit: For profession skills, these values are also needed in {@link SM_SKILL_REMOVE} to be able to remove the skill from
+	 * list.
+	 * 
+	 * @param skill
+	 * @return The flag that the client wants for the skill.
+	 */
+	public int getProfessionFlag() {
+		if (isTappingSkill() || isMorphSkill())
+			return 1; // not sure for morph
+		if (isCraftingSkill())
+			return getCurrentXp(); // not implemented in DB
+		return 0;
+	}
+
+	public int getFlag(boolean isNew) {
+		if (isNormalOrStigmaSkill()) {
+			if (isNew)
+				return isStigmaSkill() ? 0 : 1; // highlights the skill in the list
+			else
+				return getDateLearned();
+		}
+		return 0;
+	}
+
+	public int getDateLearned() {
+		return (int) (System.currentTimeMillis() / 1000); // not implemented in DB
+	}
+
 	public int getSkillType() {
-		return this.skillType;
-	}
-
-	public void setSkillType(int type) {
-		this.skillType = type;
-	}
-
-	public boolean isStigma() {
-		return this.skillType > 0 && this.skillType < 3 ;
-	}
-
-	public boolean isLinkedStigma() {
-		return this.skillType >= 3;
+		return skillType;
 	}
 
 	@Override
 	public void setSkillLvl(int skillLevel) {
 		super.setSkillLvl(skillLevel);
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (getPersistentState() != PersistentState.NOACTION)
+			setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
-	 * @return The skill extra lvl
+	 * This number controls the max point number for the professions skill bar. Current values are:<br>
+	 * Tapping: 0 = 99, 1 = 199, 2 = 299, 3 = 399, 4 = 499<br>
+	 * Crafting: 0 = 99, 1 = 199, 2 = 299, 3 = 399, 4 = 449, 5 = 499, 6 = 549
 	 */
-	public int getExtraLvl() {
-		switch (skillId) {
-			case 30002:
-			case 30003:
-				if (skillLevel > 399 && skillLevel < 500)
-					return 4;
-			case 40001:
-			case 40002:
-			case 40003:
-			case 40004:
-			case 40007:
-			case 40008:
-			case 40010:
-				if (skillLevel > 449 && skillLevel < 500)
-					return 5;
-				else if (skillLevel > 499 && skillLevel < 550)
-					return 6;
-				else
-					return skillLevel / 100;
-		}
-		return 0;
+	public int getProfessionSkillBarSize() {
+		if (!isProfessionSkill())
+			return 0;
+		int size = skillLevel / 100;
+		if (isCraftingSkill() && skillLevel >= 450)
+			size += (skillLevel - 350) / 100; // above 400 points, the crafting max points increase by 50 instead of 100
+		return isTappingSkill() ? Math.min(size, 4) : size; // limit tapping bar size to 4 (499) to prevent black bar above 500 points
 	}
 
 	/**
@@ -86,58 +142,6 @@ public class PlayerSkillEntry extends SkillEntry {
 	 */
 	public void setCurrentXp(int currentXp) {
 		this.currentXp = currentXp;
-	}
-
-	/**
-	 * @param player
-	 * @param xp
-	 */
-	public boolean addSkillXp(Player player, int xp) {
-		this.currentXp += xp;
-		int requiredExp = (int) (0.23 * (skillLevel + 17.2) * (skillLevel + 17.2));
-		StatEnum boostStat = StatEnum.getModifier(skillId);
-		if (boostStat != null) {
-			float statRate = player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
-			if (statRate > 0)
-				requiredExp /= statRate;
-		}
-		if (currentXp > requiredExp) {
-			if (CraftConfig.UNABLE_CRAFT_SKILLS_UNRESTRICTED_LEVELUP == true) {
-				float skillUpRatio = (currentXp / (0.23f * (skillLevel + 17.2f) * (skillLevel + 17.2f)));
-				int skillUp = skillLevel + (int) skillUpRatio;
-
-				if (skillLevel > 0 && skillLevel < 99) {
-					if (skillUp > 99)
-						skillUp = 99;
-				} else if (skillLevel > 99 && skillLevel < 199) {
-					if (skillUp > 199)
-						skillUp = 199;
-				} else if (skillLevel > 199 && skillLevel < 299) {
-					if (skillUp > 299)
-						skillUp = 299;
-				} else if (skillLevel > 299 && skillLevel < 399) {
-					if (skillUp > 399)
-						skillUp = 399;
-				} else if (skillLevel > 399 && skillLevel < 449) {
-					if (skillUp > 449)
-						skillUp = 449;
-				} else if (skillLevel > 449 && skillLevel < 499) {
-					if (skillUp > 499)
-						skillUp = 499;
-				} else if (skillLevel > 499 && skillLevel < 549) {
-					if (skillUp > 549)
-						skillUp = 549;
-				}
-
-				setSkillLvl(skillUp);
-				currentXp = 0;
-			} else {
-				setSkillLvl(skillLevel + 1);
-				currentXp = 0;
-			}
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -169,5 +173,4 @@ public class PlayerSkillEntry extends SkillEntry {
 				this.persistentState = persistentState;
 		}
 	}
-
 }

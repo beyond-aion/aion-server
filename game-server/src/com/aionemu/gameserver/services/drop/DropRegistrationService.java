@@ -95,7 +95,8 @@ public class DropRegistrationService {
 		int index = 1;
 		int dropChance = 100;
 		int npcLevel = npc.getLevel();
-		boolean isChest = npc.getAi2().getName().equals("chest");
+		String dropType = npc.getGroupDrop().name().toLowerCase();
+		boolean isChest = npc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - heighestLevel); // reduce chance depending on level
 		}
@@ -168,8 +169,8 @@ public class DropRegistrationService {
 		boostDropRate += genesis.getGameStats().getStat(StatEnum.DR_BOOST, 0).getCurrent() / 100f;
 
 		// Some personal drop boost
-		// EoR 10% Boost drop rate
-		boostDropRate += genesis.getCommonData().getCurrentReposteEnergy() > 0 ? 0.1f : 0;
+		// EoR 5% Boost drop rate
+		boostDropRate += genesis.getCommonData().getCurrentReposeEnergy() > 0 ? 0.05f : 0;
 		// EoS 5% Boost drop rate
 		boostDropRate += genesis.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
@@ -312,7 +313,7 @@ public class DropRegistrationService {
 					if (rule.getGlobalRuleNpcs() == null) {
 						// EXCLUSIONS:
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-						if (npc.getSpawn() instanceof SiegeSpawnTemplate)
+						if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 							continue;
 						// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
 						// continue;
@@ -329,7 +330,7 @@ public class DropRegistrationService {
 							continue;
 						}
 						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-						if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE) || isChest) {
+						if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER) || isChest) {
 							continue;
 						}
 					}

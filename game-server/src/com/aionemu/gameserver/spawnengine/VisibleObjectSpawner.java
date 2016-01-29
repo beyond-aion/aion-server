@@ -14,6 +14,7 @@ import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.NpcData;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -63,7 +64,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.CreatureAwareKnownList;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
-import com.jme3.math.Vector3f;
 
 /**
  * @author ATracer
@@ -434,8 +434,7 @@ public class VisibleObjectSpawner {
 		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
-		skillLevel = SkillLearnService.getSummonSkillLearnLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
-		byte level = (byte) SkillLearnService.getSummonSkillMinLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
+		byte level = (byte) SkillLearnService.getSkillMinLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
 		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
 		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId) : new SummonController(), spawn,
 			npcTemplate, isSiegeWeapon ? npcTemplate.getLevel() : level, time);

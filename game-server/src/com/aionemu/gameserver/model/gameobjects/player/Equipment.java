@@ -271,7 +271,7 @@ public class Equipment {
 			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0, 0), item.getItemId());
 
 			if (item.getItemTemplate().isStigma() && StigmaService.isLinkedStigmaAvailable(owner))
-				StigmaService.addLinkedStigmaSkills(owner, true);
+				StigmaService.addLinkedStigmaSkills(owner);
 
 			return item;
 		}
@@ -338,7 +338,7 @@ public class Equipment {
 				PacketSendUtility.sendPacket(owner, new SM_EMOTION(owner, EmotionType.POWERSHARD_OFF, 0, 0));
 			}
 
-			if (!StigmaService.notifyUnequipAction(owner, itemToUnequip, false))
+			if (!StigmaService.notifyUnequipAction(owner, itemToUnequip))
 				return null;
 
 			unEquip(itemToUnequip.getEquipmentSlot());

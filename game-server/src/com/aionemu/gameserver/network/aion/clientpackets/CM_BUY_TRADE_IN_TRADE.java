@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
+import javolution.util.FastSet;
+
 import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -20,9 +24,7 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 	private int itemId;
 	private int count;
 	private int tradeInListCount;
-	private int tradeInItemObjectId1;
-	private int tradeInItemObjectId2;
-	private int tradeInItemObjectId3;
+	private Set<Integer> tradeInItemObjIds;
 
 	/**
 	 * @param opcode
@@ -33,25 +35,14 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
+		tradeInItemObjIds = new FastSet<>();
 		sellerObjId = readD();
 		mask = readC(); // NEW - TODO find out what this is!
 		itemId = readD();
 		count = readD();
 		tradeInListCount = readH();
-		switch (tradeInListCount) {
-			case 1: // stigma trade
-				tradeInItemObjectId1 = readD();
-				break;
-			case 2: // medal-insignia trade
-				tradeInItemObjectId1 = readD();
-				tradeInItemObjectId2 = readD();
-				break;
-			case 3: // ???
-				tradeInItemObjectId1 = readD();
-				tradeInItemObjectId2 = readD();
-				tradeInItemObjectId3 = readD();
-				break;
-		}
+		for (int i = 0; i < tradeInListCount; i++)
+			tradeInItemObjIds.add(readD());
 	}
 
 	@Override
@@ -66,7 +57,6 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 			return;
 		}
 
-		TradeService.performBuyFromTradeInTrade(player, sellerObjId, itemId, count, tradeInListCount, tradeInItemObjectId1, tradeInItemObjectId2,
-			tradeInItemObjectId3);
+		TradeService.performBuyFromTradeInTrade(player, sellerObjId, itemId, count, tradeInItemObjIds);
 	}
 }

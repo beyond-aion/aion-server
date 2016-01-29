@@ -189,14 +189,14 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Stigmas -->
-	<gd_rule rule_name="Stigmas (Rare)" base_chance="1.75" min_diff="-1" max_diff="1">
+	<gd_rule rule_name="Stigmas (Rare)" base_chance="1.75">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
 			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
-			<!-- TODO: Rare Unlimited Stigmas -->
+			<gd_item id="188053783" name="Stigma Sack"/>
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (blue, dmg) -->
@@ -715,7 +715,7 @@
 			<gd_item id="166030005" name="Tempering Solution" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="2.5" each_member="true">
+	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="4" each_member="true">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab" />
 			<gd_map map_id="320080000" name="Draupnir_Cave" />

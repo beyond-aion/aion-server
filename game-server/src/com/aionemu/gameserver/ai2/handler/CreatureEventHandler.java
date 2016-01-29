@@ -78,6 +78,7 @@ public class CreatureEventHandler {
 		}
 
 		if (!ai.isInState(AIState.FIGHT) && (isInAggroRange || MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
+			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType
 			if (checkAggroRelation(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
 				if (!ai.isInState(AIState.RETURNING))
 					ai.getOwner().getMoveController().storeStep();

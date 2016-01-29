@@ -47,6 +47,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private float pointX;
 	private float pointY;
 	private float pointZ;
+	private boolean isStop;
 
 	private LastUsedCache<Byte, Point3D> lastSteps = null;
 	private byte stepSequenceNr = 0;
@@ -347,6 +348,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			owner.getWalkerGroup().setStep(owner, step.getRouteStep());
 		} else {
 			this.pointZ = step.getZ();
+			this.isStop = step.isStop();
 		}
 		this.currentPoint = step.getRouteStep() - 1;
 		this.pointX = dest == null ? step.getX() : dest.getX();
@@ -363,7 +365,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		return MathUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ) < MOVE_OFFSET;
 	}
 
-	public void chooseNextStep() {
+	public boolean isNextRouteStepChosen() {
+		if (isStop)
+			return false;
 		int oldPoint = currentPoint;
 		if (currentRoute == null) {
 			WalkManager.stopWalking((NpcAI2) owner.getAi2());
@@ -374,7 +378,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			}
 			if (currentRoute == null) {
 				log.warn("Bad Walker Id: " + owner.getNpcId() + " - point: " + oldPoint);
-				return;
+				return false;
 			}
 		}
 		if (currentPoint < (currentRoute.size() - 1)) {
@@ -383,6 +387,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			currentPoint = 0;
 		}
 		setRouteStep(currentRoute.get(currentPoint), currentRoute.get(oldPoint));
+		return true;
 	}
 
 	public int getWalkPause() {
@@ -406,6 +411,10 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	@Override
 	public final float getTargetZ2() {
 		return started.get() ? targetDestZ : owner.getZ();
+	}
+	
+	public boolean isStop() {
+		return isStop;
 	}
 
 	/**

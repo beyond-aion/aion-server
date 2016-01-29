@@ -2,17 +2,16 @@ package quest.levinshor;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Pad 
+ * @author Pad
  */
 public class _13744AgentinNeed extends QuestHandler {
 
@@ -33,16 +32,12 @@ public class _13744AgentinNeed extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		//TODO: implement AgentFight condition
-		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) {
+		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000"))
+			&& SiegeService.getInstance().isSiegeInProgress(8011)) {
 			Player player = env.getPlayer();
-			if (player == null)
-				return false;
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-				QuestService.startQuest(env);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
+				return QuestService.startQuest(env);
 			}
 		}
 		return false;
@@ -51,26 +46,14 @@ public class _13744AgentinNeed extends QuestHandler {
 	@Override
 	public boolean onKillInZoneEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		if (player == null)
-			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
 
 		VisibleObject target = env.getVisibleObject();
-		if (target instanceof Player && player != null
-			&& (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) /*
-																																																																									 * &&
-																																																																									 * AgentsFightService
-																																																																									 * .
-																																																																									 * getInstance
-																																																																									 * (
-																																																																									 * )
-																																																																									 * .
-																																																																									 * isStarted
-																																																																									 * (
-																																																																									 * )
-																																																																									 */) {
+		if (target instanceof Player
+			&& (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000")))
+			&& SiegeService.getInstance().isSiegeInProgress(8011)) {
 			if ((player.getLevel() >= (((Player) target).getLevel() - 5)) && (player.getLevel() <= (((Player) target).getLevel() + 9))) {
 				int var1 = qs.getQuestVarById(1);
 				if (var1 >= 0 && var1 < 11) {

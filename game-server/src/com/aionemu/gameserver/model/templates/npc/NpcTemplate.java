@@ -311,28 +311,20 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return getFuncDialogIds().contains(DialogAction.TRADE_SELL_LIST.id());
 	}
 
-	public final int getMassiveLootCount() {
-		if (massiveLoot == null)
-			return 0;
-		return MassiveLoot.getMLootCount();
+	public int getMassiveLootCount() {
+		return massiveLoot.getMLootCount();
 	}
 
 	public int getMassiveLootItem() {
-		if (massiveLoot == null)
-			return 0;
-		return MassiveLoot.getMLootItem();
+		return massiveLoot.getMLootItem();
 	}
 
 	public int getMassiveLootMinLevel() {
-		if (massiveLoot == null)
-			return 0;
-		return MassiveLoot.getMLootMinLevel();
+		return massiveLoot.getMLootMinLevel();
 	}
 
 	public int getMassiveLootMaxLevel() {
-		if (massiveLoot == null)
-			return 0;
-		return MassiveLoot.getMLootMaxLevel();
+		return massiveLoot.getMLootMaxLevel();
 	}
 
 	/**

@@ -1,1 +1,0 @@
-ALTER TABLE players ADD COLUMN reposte_energy bigint(20) NOT NULL default '0' AFTER `soul_sickness`

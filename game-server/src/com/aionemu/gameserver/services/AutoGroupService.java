@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastTable;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;

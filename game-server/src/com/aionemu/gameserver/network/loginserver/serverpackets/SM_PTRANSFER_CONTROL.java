@@ -103,8 +103,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case CHARACTER_INFORMATION: {
 				writeD(this.taskId);
 				writeS(this.player.getName());
-				writeQ(this.player.getCommonData().getExp());
 				writeD(this.player.getPlayerClass().getClassId());
+				writeQ(this.player.getCommonData().getExp());
 				writeD(this.player.getRace().getRaceId());
 				writeD(this.player.getCommonData().getGender().getGenderId());
 				writeD(this.player.getCommonData().getTitleId());
@@ -353,7 +353,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				// discard stigma skills
 				FastTable<PlayerSkillEntry> skills = new FastTable<>();
 				for (PlayerSkillEntry sk : skillList.getAllSkills()) {
-					if (!sk.isStigma()) {
+					if (!sk.isStigmaSkill()) {
 						skills.add(sk);
 					}
 				}

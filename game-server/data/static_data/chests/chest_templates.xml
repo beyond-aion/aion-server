@@ -282,19 +282,6 @@
 	<chest npcid="700562">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>
-	<!-- Satra Treasure Hoard -->
-	<chest npcid="701460">
-		<keyitem id="1" itemid="0" quantity="1"/>
-	</chest>
-	<chest npcid="701461">
-		<keyitem id="1" itemid="0" quantity="1"/>
-	</chest>
-	<chest npcid="701462">
-		<keyitem id="1" itemid="185000118" quantity="1"/>
-	</chest>
-	<chest npcid="701463">
-		<keyitem id="1" itemid="185000119" quantity="1"/>
-	</chest>
 	<!-- Tiamat StrongHold -->
 	<chest npcid="701501">
 		<keyitem id="1" itemid="0" quantity="1"/>
@@ -302,7 +289,7 @@
 	<chest npcid="701527">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>
-	<!-- The Hexaway -->
+	<!-- The Hexway -->
 	<chest npcid="701662">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>

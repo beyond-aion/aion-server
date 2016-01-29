@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<instance_cooltimes>
+<instance_cooltimes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./instance_cooltimes.xsd">
 	<instance_cooltime race="PC_ALL" worldId="310090000" id="1" sync_id="1">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
@@ -725,6 +725,7 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="900130000" id="89">
+		<type>RELATIVE</type>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>1</enter_min_level_light>
@@ -1051,7 +1052,7 @@
 		<type>WEEKLY</type>
 		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>5</maxcount>
+		<maxcount>3</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -1059,6 +1060,10 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301370000" id="132">
+		<type>WEEKLY</type>
+		<typevalue>Wed</typevalue>
+		<ent_cool_time>900</ent_cool_time>
+		<maxcount>3</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>
 		<enter_min_level_light>65</enter_min_level_light>
@@ -1067,6 +1072,7 @@
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301380000" id="134" sync_id="126">
 		<type>WEEKLY</type>
+		<typevalue>Wed</typevalue>
 		<ent_cool_time>900</ent_cool_time>
 		<maxcount>5</maxcount>
 		<max_member_light>6</max_member_light>

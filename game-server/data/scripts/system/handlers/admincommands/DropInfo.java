@@ -79,7 +79,8 @@ public class DropInfo extends AdminCommand {
 		DropRegistrationService drs = DropRegistrationService.getInstance();
 		int dropChance = 100;
 		int npcLevel = currentNpc.getLevel();
-		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest");
+		String dropType = currentNpc.getGroupDrop().name().toLowerCase();
+		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		FastTable<Integer> noReductionMaps = new FastTable<Integer>();
 		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 			noReductionMaps.add(Integer.parseInt(zone));
@@ -95,8 +96,8 @@ public class DropInfo extends AdminCommand {
 		boostDropRate += player.getGameStats().getStat(StatEnum.DR_BOOST, 0).getCurrent() / 100f;
 
 		// Some personal drop boost
-		// EoR 10% Boost drop rate
-		boostDropRate += player.getCommonData().getCurrentReposteEnergy() > 0 ? 0.1f : 0;
+		// EoR 5% Boost drop rate
+		boostDropRate += player.getCommonData().getCurrentReposeEnergy() > 0 ? 0.05f : 0;
 		// EoS 5% Boost drop rate
 		boostDropRate += player.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
@@ -230,7 +231,7 @@ public class DropInfo extends AdminCommand {
 					if (rule.getGlobalRuleNpcs() == null) {
 						// EXCLUSIONS:
 						// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-						if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate || currentNpc.getSpawn() instanceof RiftSpawnTemplate
+						if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER || currentNpc.getSpawn() instanceof RiftSpawnTemplate
 							|| currentNpc.getSpawn() instanceof VortexSpawnTemplate || currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
 							continue;
 						}
@@ -240,7 +241,7 @@ public class DropInfo extends AdminCommand {
 							continue;
 						}
 						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-						if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE) || isNpcChest) {
+						if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER) || isNpcChest) {
 							continue;
 						}
 					}

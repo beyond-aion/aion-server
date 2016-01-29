@@ -4,6 +4,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
+ * @modified Neon
  */
 public class LimitedItem {
 
@@ -12,11 +13,7 @@ public class LimitedItem {
 	private int buyLimit;
 	private int defaultSellLimit;
 	private String salesTime;
-
 	private TIntObjectHashMap<Integer> buyCounts = new TIntObjectHashMap<Integer>();
-
-	public LimitedItem() {
-	}
 
 	public LimitedItem(int itemId, int sellLimit, int buyLimit, String salesTime) {
 		this.itemId = itemId;
@@ -40,14 +37,11 @@ public class LimitedItem {
 	 *          count.
 	 */
 	public void setBuyCount(int playerObjectId, int count) {
-		buyCounts.putIfAbsent(playerObjectId, count);
+		buyCounts.put(playerObjectId, count);
 	}
 
-	/**
-	 * return playerListByObject.
-	 */
-	public TIntObjectHashMap<Integer> getBuyCount() {
-		return buyCounts;
+	public int getBuyCount(int playerObjectId) {
+		return buyCounts.containsKey(playerObjectId) ? buyCounts.get(playerObjectId) : 0;
 	}
 
 	/**

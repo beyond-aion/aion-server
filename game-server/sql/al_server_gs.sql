@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `account_name` varchar(50) NOT NULL,
   `exp` bigint(20) NOT NULL default '0',
   `recoverexp` bigint(20) NOT NULL default '0',
+  `old_level`  tinyint NOT NULL DEFAULT '0',
   `x` float NOT NULL,
   `y` float NOT NULL,
   `z` float NOT NULL,
@@ -184,7 +185,6 @@ CREATE TABLE IF NOT EXISTS `player_skills` (
   `player_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
   `skill_level` int(3) NOT NULL default '1',
-  `skill_type` int(3) NOT NULL default '0',
   PRIMARY KEY (`player_id`,`skill_id`),
   FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -319,6 +319,9 @@ CREATE TABLE IF NOT EXISTS `legions` (
   `rank_pos` INT(11) NOT NULL DEFAULT '0',
   `old_rank_pos` INT(11) NOT NULL DEFAULT '0',
   `siege_glory_points` INT(11) NOT NULL DEFAULT 0,
+  `occupied_legion_dominion` int(11) NOT NULL DEFAULT 0,
+  `last_legion_dominion` int(11) NOT NULL DEFAULT 0,
+  `current_legion_dominion` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -899,8 +902,7 @@ DROP TABLE IF EXISTS `bonus_packs`;
 CREATE TABLE `bonus_packs` (
   `account_id` int(11) NOT NULL,
   `receiving_player` int(11) NOT NULL,
-  PRIMARY KEY (`account_id`),
-  CONSTRAINT `bonus_packs` FOREIGN KEY (`account_id`) REFERENCES `players` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -910,6 +912,23 @@ DROP TABLE IF EXISTS `faction_packs`;
 CREATE TABLE `faction_packs` (
   `account_id` int(11) NOT NULL,
   `receiving_player` int(11) NOT NULL,
-  PRIMARY KEY (`account_id`),
-  CONSTRAINT `faction_packs` FOREIGN KEY (`account_id`) REFERENCES `players` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `legion_dominion_locations`;
+CREATE TABLE `legion_dominion_locations` (
+	`id` int(11) NOT NULL DEFAULT 0,
+	`legion_id` int(11) NOT NULL DEFAULT 0,
+	`occupied_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `legion_dominion_participants`;
+CREATE TABLE `legion_dominion_participants` (
+	`legion_dominion_id` int(11) NOT NULL DEFAULT 0,
+	`legion_id` int(11) NOT NULL DEFAULT 0,
+	`points` int(11) NOT NULL DEFAULT 0,
+	`survived_time` int(11) NOT NULL DEFAULT 0,
+	`participated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`legion_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -172,7 +172,8 @@ public class CM_EMOTION extends AionClientPacket {
 				player.getController().onFlyTeleportEnd();
 				break;
 			case FLY:
-				player.getFlyController().startFly();
+				if (!player.getFlyController().startFly())
+					return;
 				break;
 			case LAND:
 				player.getFlyController().endFly(false);

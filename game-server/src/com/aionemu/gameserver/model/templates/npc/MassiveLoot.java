@@ -13,42 +13,42 @@ import javax.xml.bind.annotation.XmlType;
 public class MassiveLoot {
 
 	@XmlAttribute(name = "m_loot_count")
-	private static int massiveLootCount;
+	private int massiveLootCount;
 
 	@XmlAttribute(name = "m_loot_item")
-	private static int massiveLootItem;
+	private int massiveLootItem;
 
 	@XmlAttribute(name = "m_loot_min_level")
-	private static int massiveLootMinLevel;
+	private int massiveLootMinLevel;
 
 	@XmlAttribute(name = "m_loot_max_level")
-	private static int massiveLootMaxLevel;
+	private int massiveLootMaxLevel;
 
 	/**
 	 * @return the massiveLootCount
 	 */
-	public static int getMLootCount() {
+	public int getMLootCount() {
 		return massiveLootCount;
 	}
 
 	/**
 	 * @return the massiveLootItem
 	 */
-	public static int getMLootItem() {
+	public int getMLootItem() {
 		return massiveLootItem;
 	}
 
 	/**
 	 * @return the massiveLootMinLevel
 	 */
-	public static int getMLootMinLevel() {
+	public int getMLootMinLevel() {
 		return massiveLootMinLevel;
 	}
 
 	/**
 	 * @return the massiveLootMaxLevel
 	 */
-	public static int getMLootMaxLevel() {
+	public int getMLootMaxLevel() {
 		return massiveLootMaxLevel;
 	}
 }
