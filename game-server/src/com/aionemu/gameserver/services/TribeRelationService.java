@@ -15,6 +15,18 @@ import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 public class TribeRelationService {
 
 	public static boolean isAggressive(Creature creature1, Creature creature2) {
+		switch (creature1.getTribe()) {
+			case AGGRESSIVESINGLEMONSTER:
+				switch (creature2.getTribe()) {
+					case YUN_GUARD:
+						return true;
+					default:
+						break;
+				}
+				break;
+				default:
+					break;
+		}
 		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69_AGGRESSIVE:
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
