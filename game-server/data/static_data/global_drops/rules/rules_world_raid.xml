@@ -102,6 +102,12 @@
 			<gd_npc npc_id="234609" name="Prime Raedon I"/>
 			<gd_npc npc_id="234610" name="Prime Tarmat I"/>
 			<gd_npc npc_id="234613" name="Prime Benoid I"/>
+			<gd_npc npc_id="219998" name="Prime Tarmat I"/>
+			<gd_npc npc_id="219999" name="Prime Benoid I"/>
+			<gd_npc npc_id="220000" name="Prime Eiter I"/>
+			<gd_npc npc_id="220001" name="Prime Tarmat I"/>
+			<gd_npc npc_id="220002" name="Prime Benoid I"/>
+			<gd_npc npc_id="220003" name="Prime Eiter I"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053131" name="Level 1 Invader Reward Box"/>
