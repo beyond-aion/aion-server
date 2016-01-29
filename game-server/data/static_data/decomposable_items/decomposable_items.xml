@@ -31489,308 +31489,2452 @@
 	<decomposable item_id="188053685" decomposable_name="Sand Wanderers Trader's Bundle"/>
 	<decomposable item_id="188053686" decomposable_name="Sand Wanderers Trader's Treasure Box"/>
     <decomposable item_id="188053687" decomposable_name="Test Item"/>
-	<decomposable item_id="188053688" decomposable_name="Inggison Lesser Conqueror's Mark Box"/>
-	<decomposable item_id="188053689" decomposable_name="Inggison Conqueror's Mark Box"/>
-	<decomposable item_id="188053690" decomposable_name="Inggison Greater Conqueror's Mark Box"/>
-	<decomposable item_id="188053691" decomposable_name="Gelkmaros Lesser Conqueror's Mark Box"/>
-	<decomposable item_id="188053692" decomposable_name="Gelkmaros Conqueror's Mark Box"/>
-	<decomposable item_id="188053693" decomposable_name="Gelkmaros Greater Conqueror's Mark Box"/>
-	<decomposable item_id="188053694" decomposable_name="Ride Box of Conquest"/>
-	<decomposable item_id="188053695" decomposable_name="High Grade Crafting Material Box of Conquest"/>
-	<decomposable item_id="188053696" decomposable_name="Alluring Wing Feather Box"/>
-	<decomposable item_id="188053697" decomposable_name="Bundle of Honor and Conquest"/>
-	<decomposable item_id="188053698" decomposable_name="Honorable Weapon Box of Conquest"/>
-	<decomposable item_id="188053699" decomposable_name="Honorable Armor Box of Conquest"/>
-	<decomposable item_id="188053700" decomposable_name="Honorable Accessory Box of Conquest"/>
-	<decomposable item_id="188053701" decomposable_name="Conquest Bundle"/>
-	<decomposable item_id="188053702" decomposable_name="Vasharti's Equipment Box"/>
-	<decomposable item_id="188053703" decomposable_name="Vasharti Legionnaire's Weapon Box"/>
-	<decomposable item_id="188053704" decomposable_name="Vasharti Brigade General's Weapon Box"/>
-	<decomposable item_id="188053705" decomposable_name="Vasharti Brigade General's Armor Box"/>
-	<decomposable item_id="188053706" decomposable_name="Rentus Base Supplies"/>
-	<decomposable item_id="188053707" decomposable_name="Glimmering Treasure Chest of Balaur Lord Tiamat"/>
-	<decomposable item_id="188053708" decomposable_name="Stolen Shelter Consumables Bundle"/>
-	<decomposable item_id="188053709" decomposable_name="Stolen Shelter Ancient Coin Bundle"/>
-	<decomposable item_id="188053710" decomposable_name="Captured Shelter Relics Bundle"/>
-	<decomposable item_id="188053711" decomposable_name="Blood Mark Bundle"/>
-	<decomposable item_id="188053712" decomposable_name="Blood Mark Bundle"/>
-	<decomposable item_id="188053713" decomposable_name="Blood Mark Bundle"/>
-	<decomposable item_id="188053714" decomposable_name="Captured Shelter Idian Bundle"/>
-	<decomposable item_id="188053715" decomposable_name="Baraja's Necklace Box"/>
-	<decomposable item_id="188053716" decomposable_name="Volatile Rift Loot Bundle"/>
-	<decomposable item_id="188053717" decomposable_name="Volatile Rift Victory Loot Bundle"/>
-	<decomposable item_id="188053718" decomposable_name="Protectors Composite Manastone Bundle"/>
-	<decomposable item_id="188053719" decomposable_name="Protectors Ancient Manastone Bundle"/>
-	<decomposable item_id="188053720" decomposable_name="Operations Medal Box"/>
-	<decomposable item_id="188053721" decomposable_name="Illusion Godstone Bundle of Fortuneers Legion"/>
-	<decomposable item_id="188053722" decomposable_name="Special Enchantment Stone Bundle of Fortuneers Legion"/>
-	<decomposable item_id="188053723" decomposable_name="Guardian Composite Manastone Bundle"/>
-	<decomposable item_id="188053724" decomposable_name="Guardian Ancient Manastone Bundle"/>
-	<decomposable item_id="188053725" decomposable_name="Headquarters Medal Box"/>
-	<decomposable item_id="188053726" decomposable_name="Illusion Godstone Bundle of Charlirunerk Inquiry Agency"/>
-	<decomposable item_id="188053727" decomposable_name="Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency"/>
-	<decomposable item_id="188053728" decomposable_name="Beritra's Equipment Box"/>
+	<decomposable item_id="188053688" decomposable_name="Inggison Lesser Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark"/>
+			<item id="186000236" name="Blood Mark" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053689" decomposable_name="Inggison Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark" count="2"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark" count="2"/>
+			<item id="186000236" name="Blood Mark" count="2" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053690" decomposable_name="Inggison Greater Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark" count="3"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark" count="3"/>
+			<item id="186000236" name="Blood Mark" count="3" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053691" decomposable_name="Gelkmaros Lesser Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark"/>
+			<item id="186000236" name="Blood Mark" race="ELYOS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053692" decomposable_name="Gelkmaros Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark" count="2"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark" count="2"/>
+			<item id="186000236" name="Blood Mark" count="2" race="ELYOS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053693" decomposable_name="Gelkmaros Greater Conqueror's Mark Box">
+		<items chance="95.0">
+			<item id="186000238" name="Conqueror's Mark" count="3"/>
+		</items>
+		<items chance="5.0">
+			<item id="186000238" name="Conqueror's Mark" count="3"/>
+			<item id="186000236" name="Blood Mark" count="3" race="ELYOS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053694" decomposable_name="Ride Box of Conquest">
+		<items>
+			<item id="190100154" name="Quick Crestlich"/>
+		</items>
+		<items>
+			<item id="190100155" name="Fast Flight Bykion"/>
+		</items>
+		<items>
+			<item id="190100156" name="Quick Frillneck"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053695" decomposable_name="High Grade Crafting Material Box of Conquest">
+		<items>
+			<item id="152012580" name="Fire Mote"/>
+		</items>
+		<items>
+			<item id="152012581" name="Fire Breath"/>
+		</items>
+		<items>
+			<item id="152012582" name="Fire Fragment"/>
+		</items>
+		<items>
+			<item id="152012583" name="Fire Source"/>
+		</items>
+		<items>
+			<item id="152012584" name="Water Source"/>
+		</items>
+		<items>
+			<item id="152012585" name="Wind Mote"/>
+		</items>
+		<items>
+			<item id="152012586" name="Wind Breath"/>
+		</items>
+		<items>
+			<item id="152012587" name="Wind Eternity"/>
+		</items>
+		<items>
+			<item id="152012588" name="Wind Fragment"/>
+		</items>
+		<items>
+			<item id="152012589" name="Wind Source"/>
+		</items>
+		<items>
+			<item id="152012590" name="Wind Origin"/>
+		</items>
+		<items>
+			<item id="152012591" name="Water Fragment"/>
+		</items>
+		<items>
+			<item id="152012593" name="Valor's Heart"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053696" decomposable_name="Alluring Wing Feather Box">
+		<items>
+			<item id="187000149" name="Wing Feather of Allure"/>
+		</items>
+		<items>
+			<item id="187000150" name="Golden Wing Feather of Allure"/>
+		</items>
+		<items>
+			<item id="187000151" name="Bright Wing Feather of Allure"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053697" decomposable_name="Bundle of Honor and Conquest">
+		<items>
+			<item id="186000238" name="Conqueror's Mark" rnd_min="20" rnd_max="100"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053698" decomposable_name="Honorable Weapon Box of Conquest">
+		<items>
+			<item id="100001794" name="Conqueror's Honorable Sword"/>
+		</items>
+		<items>
+			<item id="100101384" name="Conqueror's Honorable Mace"/>
+		</items>
+		<items>
+			<item id="100201559" name="Conqueror's Honorable Dagger"/>
+		</items>
+		<items>
+			<item id="100501352" name="Conqueror's Honorable Orb"/>
+		</items>
+		<items>
+			<item id="100601469" name="Conqueror's Honorable Spellbook"/>
+		</items>
+		<items>
+			<item id="100901421" name="Conqueror's Honorable Greatsword"/>
+		</items>
+		<items>
+			<item id="101301310" name="Conqueror's Honorable Polearm"/>
+		</items>
+		<items>
+			<item id="101501399" name="Conqueror's Honorable Staff"/>
+		</items>
+		<items>
+			<item id="101701405" name="Conqueror's Honorable Bow"/>
+		</items>
+		<items>
+			<item id="101801263" name="Conqueror's Honorable Pistol"/>
+		</items>
+		<items>
+			<item id="101901170" name="Conqueror's Honorable Aethercannon"/>
+		</items>
+		<items>
+			<item id="102001289" name="Conqueror's Honorable Harp"/>
+		</items>
+		<items>
+			<item id="102101106" name="Conqueror's Honorable Cipher-Blade"/>
+		</items>
+		<items>
+			<item id="115001823" name="Conqueror's Honorable Protective Shield"/>
+		</items>
+		<items>
+			<item id="115001824" name="Conqueror's Honorable Magic Shield"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053699" decomposable_name="Honorable Armor Box of Conquest">
+		<items>
+			<item id="110101875" name="Conqueror's Honorable Magic Jacket" player_class="SORCERER"/>
+			<item id="110101875" name="Conqueror's Honorable Magic Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="110101876" name="Conqueror's Honorable Pure Jacket" player_class="BARD"/>
+			<item id="110301867" name="Conqueror's Honorable Flash Jerkin" player_class="ASSASSIN"/>
+			<item id="110301867" name="Conqueror's Honorable Flash Jerkin" player_class="RANGER"/>
+			<item id="110301868" name="Conqueror's Honorable Bright Jerkin" player_class="GUNNER"/>
+			<item id="110551196" name="Conqueror's Honorable Boon Hauberk" player_class="CHANTER"/>
+			<item id="110551197" name="Conqueror's Honorable Holy Hauberk" player_class="CLERIC"/>
+			<item id="110551197" name="Conqueror's Honorable Hauberk" player_class="RIDER"/>
+			<item id="110601662" name="Conqueror's Honorable Solid Breastplate" player_class="TEMPLAR"/>
+			<item id="110601663" name="Conqueror's Honorable Iron Breastplate" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="111101690" name="Conqueror's Honorable Magic Gloves" player_class="SORCERER"/>
+			<item id="111101690" name="Conqueror's Honorable Magic Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101691" name="Conqueror's Honorable Pure Gloves" player_class="BARD"/>
+			<item id="111301805" name="Conqueror's Honorable Flash Vambraces" player_class="ASSASSIN"/>
+			<item id="111301805" name="Conqueror's Honorable Flash Vambraces" player_class="RANGER"/>
+			<item id="111301806" name="Conqueror's Honorable Vambraces" player_class="GUNNER"/>
+			<item id="111501755" name="Conqueror's Honorable Bright Boon Handguards" player_class="CHANTER"/>
+			<item id="111501756" name="Conqueror's Honorable Holy Handguards" player_class="CLERIC"/>
+			<item id="111501756" name="Conqueror's Honorable Holy Handguards" player_class="RIDER"/>
+			<item id="111601625" name="Conqueror's Honorable Solid Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601626" name="Conqueror's Honorable Iron Gauntlets" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="112101639" name="Conqueror's Honorable Magic Pauldrons" player_class="SORCERER"/>
+			<item id="112101639" name="Conqueror's Honorable Magic Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101640" name="Conqueror's Honorable Pure Pauldrons" player_class="BARD"/>
+			<item id="112301744" name="Conqueror's Honorable Flash Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301744" name="Conqueror's Honorable Flash Shoulderguards" player_class="RANGER"/>
+			<item id="112301745" name="Conqueror's Honorable Bright Shoulderguards" player_class="GUNNER"/>
+			<item id="112501694" name="Conqueror's Honorable Boon Spaulders" player_class="CHANTER"/>
+			<item id="112501695" name="Conqueror's Honorable Holy Spaulders" player_class="CLERIC"/>
+			<item id="112501695" name="Conqueror's Honorable Holy Spaulders" player_class="RIDER"/>
+			<item id="112601607" name="Conqueror's Honorable Solid Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601608" name="Conqueror's Honorable Iron Shoulderplates" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="113101701" name="Conqueror's Honorable Magic Leggings" player_class="SORCERER"/>
+			<item id="113101701" name="Conqueror's Honorable Magic Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101702" name="Conqueror's Honorable Pure Leggings" player_class="BARD"/>
+			<item id="113301836" name="Conqueror's Honorable Flash Legguards" player_class="ASSASSIN"/>
+			<item id="113301836" name="Conqueror's Honorable Flash Legguards" player_class="RANGER"/>
+			<item id="113301837" name="Conqueror's Honorable Bright Legguards" player_class="GUNNER"/>
+			<item id="113501773" name="Conqueror's Honorable Boon Chausses" player_class="CHANTER"/>
+			<item id="113501774" name="Conqueror's Honorable Holy Chausses" player_class="CLERIC"/>
+			<item id="113501774" name="Conqueror's Honorable Holy Chausses" player_class="RIDER"/>
+			<item id="113601608" name="Conqueror's Honorable Solid Greaves" player_class="TEMPLAR"/>
+			<item id="113601609" name="Conqueror's Honorable Iron Greaves" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="114101735" name="Conqueror's Honorable Magic Shoes" player_class="SORCERER"/>
+			<item id="114101735" name="Conqueror's Honorable Magic Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101736" name="Conqueror's Honorable Pure Shoes" player_class="BARD"/>
+			<item id="114301873" name="Conqueror's Honorable Flash Boots" player_class="ASSASSIN"/>
+			<item id="114301873" name="Conqueror's Honorable Flash Boots" player_class="RANGER"/>
+			<item id="114301874" name="Conqueror's Honorable Bright Boots" player_class="GUNNER"/>
+			<item id="114501783" name="Conqueror's Honorable Boon Brogans" player_class="CHANTER"/>
+			<item id="114501784" name="Conqueror's Honorable Holy Brogans" player_class="CLERIC"/>
+			<item id="114501784" name="Conqueror's Honorable Holy Brogans" player_class="RIDER"/>
+			<item id="114601615" name="Conqueror's Honorable Solid Sabatons" player_class="TEMPLAR"/>
+			<item id="114601616" name="Conqueror's Honorable Iron Sabatons" player_class="GLADIATOR"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053700" decomposable_name="Honorable Accessory Box of Conquest">
+		<items>
+			<item id="125004265" name="Conqueror's Honorable Magic Bandana" player_class="SORCERER"/>
+			<item id="125004265" name="Conqueror's Honorable Magic Bandana" player_class="SPIRIT_MASTER"/>
+			<item id="125004266" name="Conqueror's Honorable Pure Bandana" player_class="BARD"/>
+			<item id="125004263" name="Conqueror's Honorable Flash Hat" player_class="ASSASSIN"/>
+			<item id="125004263" name="Conqueror's Honorable Flash Hat" player_class="RANGER"/>
+			<item id="125004264" name="Conqueror's Honorable Bright Hat" player_class="GUNNER"/>
+			<item id="125004261" name="Conqueror's Honorable Boon Chain Helm" player_class="CHANTER"/>
+			<item id="125004262" name="Conqueror's Honorable Holy Chain Helm" player_class="CLERIC"/>
+			<item id="125004262" name="Conqueror's Honorable Holy Chain Helm" player_class="RIDER"/>
+			<item id="125004259" name="Conqueror's Honorable Solid Helm" player_class="TEMPLAR"/>
+			<item id="125004260" name="Conqueror's Honorable Iron Helm" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="SORCERER"/>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="SPIRIT_MASTER"/>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="BARD"/>
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_class="ASSASSIN"/>
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_class="RANGER"/>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="GUNNER"/>
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_class="CHANTER"/>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="CLERIC"/>
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_class="RIDER"/>
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_class="TEMPLAR"/>
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="SORCERER"/>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="SPIRIT_MASTER"/>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="BARD"/>
+			<item id="121001430" name="Honorable Flame Necklace Ring of Conquest" player_class="ASSASSIN"/>
+			<item id="121001430" name="Honorable Flame Necklace Ring of Conquest" player_class="RANGER"/>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="GUNNER"/>
+			<item id="121001430" name="Honorable Flame Necklace Ring of Conquest" player_class="CHANTER"/>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="CLERIC"/>
+			<item id="121001431" name="Honorable Freezing Necklace Ring of Conquest" player_class="RIDER"/>
+			<item id="121001430" name="Honorable Flame Necklace Ring of Conquest" player_class="TEMPLAR"/>
+			<item id="121001430" name="Honorable Flame Necklace Ring of Conquest" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="SORCERER"/>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="SPIRIT_MASTER"/>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="BARD"/>
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_class="ASSASSIN"/>
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_class="RANGER"/>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="GUNNER"/>
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_class="CHANTER"/>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="CLERIC"/>
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_class="RIDER"/>
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_class="TEMPLAR"/>
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_class="GLADIATOR"/>
+		</items>
+		<items>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="SORCERER"/>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="SPIRIT_MASTER"/>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="BARD"/>
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_class="ASSASSIN"/>
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_class="RANGER"/>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="GUNNER"/>
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_class="CHANTER"/>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="CLERIC"/>
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_class="RIDER"/>
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_class="TEMPLAR"/>
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_class="GLADIATOR"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053701" decomposable_name="Conquest Bundle">
+		<items chance="20.0">
+			<item id="162000006" name="Major Life Potion" count="10"/>
+		</items>
+		<items chance="20.0">
+			<item id="162000011" name="Major Mana Potion" count="10"/>
+		</items>
+		<items chance="19.5">
+			<item id="164000076" name="Greater Running Scroll" count="5"/>
+		</items>
+		<items chance="19.5">
+			<item id="164000073" name="Greater Courage Scroll" count="5"/>
+		</items>
+		<items chance="19.5">
+			<item id="164000134" name="Greater Awakening Scroll" count="5"/>
+		</items>
+		<items chance="0.5">
+			<item id="188053903" name="Honorable Equipment of Conquest Box"/>
+		</items>
+		<items chance="0.5">
+			<item id="188053694" name="Ride Box of Conquest"/>
+		</items>
+		<items chance="0.5">
+			<item id="188053696" name="Alluring Wing Feather Box"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053702" decomposable_name="Vasharti's Equipment Box">
+		<items>
+			<item id="188053703" name="Vasharti Legionnaire's Weapon Box"/>
+		</items>
+		<items>
+			<item id="188053704" name="Vasharti Brigade General's Weapon Box"/>
+		</items>
+		<items>
+			<item id="188053705" name="Vasharti Brigade General's Armor Box"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053703" decomposable_name="Vasharti Legionnaire's Weapon Box" selectable="true">
+		<items>
+			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="TEMPLAR"/>
+			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="TEMPLAR"/>
+			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_class="TEMPLAR"/>
+			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="TEMPLAR"/>
+			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="GLADIATOR"/>
+			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="GLADIATOR"/>
+			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_class="GLADIATOR"/>
+			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_class="GLADIATOR"/>
+			<item id="101301311" name="Vasharti Legionnaire's Polearm" player_class="GLADIATOR"/>
+			<item id="101701406" name="Vasharti Legionnaire's Bow" player_class="GLADIATOR"/>
+			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="GLADIATOR"/>
+			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="ASSASSIN"/>
+			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_class="ASSASSIN"/>
+			<item id="101701406" name="Vasharti Legionnaire's Bow" player_class="ASSASSIN"/>
+			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="RANGER"/>
+			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_class="RANGER"/>
+			<item id="101701406" name="Vasharti Legionnaire's Bow" player_class="RANGER"/>
+			<item id="101801264" name="Vasharti Legionnaire's Pistol" player_class="GUNNER"/>
+			<item id="101901171" name="Vasharti Legionnaire's Aethercannon" player_class="GUNNER"/>
+			<item id="100101385" name="Vasharti Legionnaire's Mace" player_class="CHANTER"/>
+			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="CHANTER"/>
+			<item id="101501400" name="Vasharti Legionnaire's Staff" player_class="CHANTER"/>
+			<item id="101501401" name="Vasharti Legionnaire's Cane" player_class="CHANTER"/>
+			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="CHANTER"/>
+			<item id="115001827" name="Vasharti Legionnaire's Scale Shield" player_class="CHANTER"/>
+			<item id="100101385" name="Vasharti Legionnaire's Mace" player_class="CLERIC"/>
+			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="CLERIC"/>
+			<item id="101501400" name="Vasharti Legionnaire's Staff" player_class="CLERIC"/>
+			<item id="101501401" name="Vasharti Legionnaire's Cane" player_class="CLERIC"/>
+			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="CLERIC"/>
+			<item id="115001827" name="Vasharti Legionnaire's Scale Shield" player_class="CLERIC"/>
+			<item id="102101107" name="Vasharti Legionnaire's Cipher-Blade" player_class="RIDER"/>
+			<item id="100501353" name="Vasharti Legionnaire's Orb" player_class="SORCERER"/>
+			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_class="SORCERER"/>
+			<item id="100501353" name="Vasharti Legionnaire's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="102001290" name="Vasharti Legionnaire's Harp" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053704" decomposable_name="Vasharti Brigade General's Weapon Box" selectable="true">
+		<items>
+			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="TEMPLAR"/>
+			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="TEMPLAR"/>
+			<item id="100901423" name="Vasharti Brigade General's Greatsword" player_class="TEMPLAR"/>
+			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="TEMPLAR"/>
+			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="GLADIATOR"/>
+			<item id="100101386" name="Vasharti Brigade General's War Hammer" player_class="GLADIATOR"/>
+			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="GLADIATOR"/>
+			<item id="100901423" name="Vasharti Brigade General's Greatsword" player_class="GLADIATOR"/>
+			<item id="101301312" name="Vasharti Brigade General's Polearm" player_class="GLADIATOR"/>
+			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="GLADIATOR"/>
+			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="GLADIATOR"/>
+			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="ASSASSIN"/>
+			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="ASSASSIN"/>
+			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="ASSASSIN"/>
+			<item id="100001795" name="Vasharti Brigade General's Sword" player_class="RANGER"/>
+			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="RANGER"/>
+			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="RANGER"/>
+			<item id="101801265" name="Vasharti Brigade General's Pistol" player_class="GUNNER"/>
+			<item id="101901172" name="Vasharti Brigade General's Aethercannon" player_class="GUNNER"/>
+			<item id="100101387" name="Vasharti Brigade General's Mace" player_class="CHANTER"/>
+			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="CHANTER"/>
+			<item id="101501402" name="Vasharti Brigade General's Staff" player_class="CHANTER"/>
+			<item id="101501403" name="Vasharti Brigade General's Cane" player_class="CHANTER"/>
+			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="CHANTER"/>
+			<item id="115001827" name="Vasharti Brigade General's Scale Shield" player_class="CHANTER"/>
+			<item id="100101387" name="Vasharti Brigade General's Mace" player_class="CLERIC"/>
+			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="CLERIC"/>
+			<item id="101501402" name="Vasharti Brigade General's Staff" player_class="CLERIC"/>
+			<item id="101501403" name="Vasharti Brigade General's Cane" player_class="CLERIC"/>
+			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="CLERIC"/>
+			<item id="115001827" name="Vasharti Brigade General's Scale Shield" player_class="CLERIC"/>
+			<item id="102101108" name="Vasharti Brigade General's Cipher-Blade" player_class="RIDER"/>
+			<item id="100501354" name="Vasharti Brigade General's Orb" player_class="SORCERER"/>
+			<item id="100601471" name="Vasharti Brigade General's Spellbook" player_class="SORCERER"/>
+			<item id="100501354" name="Vasharti Brigade General's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601471" name="Vasharti Brigade General's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="102001291" name="Vasharti Brigade General's Harp" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053705" decomposable_name="Vasharti Brigade General's Armor Box" selectable="true">
+		<items>
+			<item id="110601665" name="Vasharti Brigade General's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="113601611" name="Vasharti Brigade General's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="111601628" name="Vasharti Brigade General's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="114601618" name="Vasharti Brigade General's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="112601610" name="Vasharti Brigade General's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="125004273" name="Vasharti Brigade General's Templar Plate Helmet" player_class="TEMPLAR"/>
+			<item id="110601666" name="Vasharti Brigade General's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="113601612" name="Vasharti Brigade General's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="111601629" name="Vasharti Brigade General's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="114601619" name="Vasharti Brigade General's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="112601611" name="Vasharti Brigade General's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="125004274" name="Vasharti Brigade General's Gladiator Plate Helmet" player_class="GLADIATOR"/>
+			<item id="110301871" name="Vasharti Brigade General's Jerkin" player_class="ASSASSIN"/>
+			<item id="113301840" name="Vasharti Brigade General's Legguards" player_class="ASSASSIN"/>
+			<item id="111301809" name="Vasharti Brigade General's Vambraces" player_class="ASSASSIN"/>
+			<item id="114301877" name="Vasharti Brigade General's Boots" player_class="ASSASSIN"/>
+			<item id="112301748" name="Vasharti Brigade General's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="125004278" name="Vasharti Brigade General's Hat" player_class="ASSASSIN"/>
+			<item id="110301871" name="Vasharti Brigade General's Jerkin" player_class="RANGER"/>
+			<item id="113301840" name="Vasharti Brigade General's Legguards" player_class="RANGER"/>
+			<item id="111301809" name="Vasharti Brigade General's Vambraces" player_class="RANGER"/>
+			<item id="114301877" name="Vasharti Brigade General's Boots" player_class="RANGER"/>
+			<item id="112301748" name="Vasharti Brigade General's Shoulderguards" player_class="RANGER"/>
+			<item id="125004278" name="Vasharti Brigade General's Hat" player_class="RANGER"/>
+			<item id="110301872" name="Vasharti Brigade General's Gunslinger Leather Breastplate" player_class="GUNNER"/>
+			<item id="113301841" name="Vasharti Brigade General's Gunslinger Leather Gaiters" player_class="GUNNER"/>
+			<item id="111301810" name="Vasharti Brigade General's Gunslinger Leather Protective Gloves" player_class="GUNNER"/>
+			<item id="114301878" name="Vasharti Brigade General's Gunslinger Leather Combar Boots" player_class="GUNNER"/>
+			<item id="112301749" name="Vasharti Brigade General's Gunslinger Leather Pauldrons" player_class="GUNNER"/>
+			<item id="125004279" name="Vasharti Brigade General's Gunslinger Leather Helmet" player_class="GUNNER"/>
+			<item id="110551200" name="Vasharti Brigade General's Chanter Hauberk" player_class="CHANTER"/>
+			<item id="113501777" name="Vasharti Brigade General's Chanter Chausses" player_class="CHANTER"/>
+			<item id="111501759" name="Vasharti Brigade General's Chanter Handguards" player_class="CHANTER"/>
+			<item id="114501787" name="Vasharti Brigade General's Chanter Brogans" player_class="CHANTER"/>
+			<item id="112501698" name="Vasharti Brigade General's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="125004275" name="Vasharti Brigade General's Chanter Chain Helm" player_class="CHANTER"/>
+			<item id="110551201" name="Vasharti Brigade General's Cleric Hauberk" player_class="CLERIC"/>
+			<item id="113501778" name="Vasharti Brigade General's Cleric Chausses" player_class="CLERIC"/>
+			<item id="111501760" name="Vasharti Brigade General's Cleric Handguards" player_class="CLERIC"/>
+			<item id="114501788" name="Vasharti Brigade General's Cleric Brogans" player_class="CLERIC"/>
+			<item id="112501699" name="Vasharti Brigade General's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="125004276" name="Vasharti Brigade General's Cleric Chain Helm" player_class="CLERIC"/>
+			<item id="110551202" name="Vasharti Brigade General's Aethertech Chain Breastplate" player_class="RIDER"/>
+			<item id="113501779" name="Vasharti Brigade General's Aethertech Chain Gaiters" player_class="RIDER"/>
+			<item id="111501761" name="Vasharti Brigade General's Aethertech Chain Combat Gloves" player_class="RIDER"/>
+			<item id="114501789" name="Vasharti Brigade General's Aethertech Chain Combat Boots" player_class="RIDER"/>
+			<item id="112501700" name="Vasharti Brigade General's Aethertech Chain Spaulders" player_class="RIDER"/>
+			<item id="125004277" name="Vasharti Brigade General's Aethertech Chain Combat Helmet" player_class="RIDER"/>
+			<item id="110101878" name="Vasharti Brigade General's Jacket" player_class="SORCERER"/>
+			<item id="113101704" name="Vasharti Brigade General's Leggings" player_class="SORCERER"/>
+			<item id="111101693" name="Vasharti Brigade General's Gloves" player_class="SORCERER"/>
+			<item id="114101738" name="Vasharti Brigade General's Shoes" player_class="SORCERER"/>
+			<item id="112101642" name="Vasharti Brigade General's Pauldrons" player_class="SORCERER"/>
+			<item id="125004280" name="Vasharti Brigade General's Cloth Hat" player_class="SORCERER"/>
+			<item id="110101878" name="Vasharti Brigade General's Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="113101704" name="Vasharti Brigade General's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="111101693" name="Vasharti Brigade General's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="114101738" name="Vasharti Brigade General's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="112101642" name="Vasharti Brigade General's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="125004280" name="Vasharti Brigade General's Cloth Hat" player_class="SPIRIT_MASTER"/>
+			<item id="110101879" name="Vasharti Brigade General's Songweaver Jacket" player_class="BARD"/>
+			<item id="113101705" name="Vasharti Brigade General's Songweaver Leggings" player_class="BARD"/>
+			<item id="111101694" name="Vasharti Brigade General's Songweaver Gloves" player_class="BARD"/>
+			<item id="114101739" name="Vasharti Brigade General's Songweaver Shoes" player_class="BARD"/>
+			<item id="112101643" name="Vasharti Brigade General's Songweaver Pauldrons" player_class="BARD"/>
+			<item id="125004281" name="Vasharti Brigade General's Songweaver Bandana" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053706" decomposable_name="Rentus Base Supplies">
+		<items>
+			<item id="152012601" name="Conviction Crystal"/>
+		</items>
+		<items>
+			<item id="152012603" name="Ore of Conviction"/>
+		</items>
+		<items>
+			<item id="152012598" name="Heart of Destruction"/>
+		</items>
+		<items>
+			<item id="152012599" name="Heart of Protection"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053707" decomposable_name="Glimmering Treasure Chest of Balaur Lord Tiamat">
+		<items chance="16.7">
+			<item id="152012580" name="Fire Mote"/>
+		</items>
+		<items chance="16.7">
+			<item id="152012582" name="Fire Fragment"/>
+		</items>
+		<items chance="16.6">
+			<item id="152012584" name="Water Source"/>
+		</items>
+		<items chance="25.0">
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+		<items chance="25.0">
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053708" decomposable_name="Stolen Shelter Consumables Bundle">
+		<items chance="6.7">
+			<item id="152012585" name="Wind Mote"/>
+		</items>
+		<items chance="6.7">
+			<item id="152012588" name="Wind Fragment"/>
+		</items>
+		<items chance="6.6">
+			<item id="152012591" name="Water Fragment"/>
+		</items>
+		<items chance="6.7">
+			<item id="152012617" name="Pure Crystal"/>
+		</items>
+		<items chance="6.7">
+			<item id="152012619" name="Pure Ore"/>
+		</items>
+		<items chance="6.6">
+			<item id="152012621" name="Pure Gemstone"/>
+		</items>
+		<items chance="20.0">
+			<item id="169405252" name="Fury Powder"/>
+		</items>
+		<items chance="20.0">
+			<item id="169405268" name="Lightning Vitality"/>
+		</items>
+		<items chance="20.0">
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+		<items chance="10.0">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items chance="10.0">
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053709" decomposable_name="Stolen Shelter Ancient Coin Bundle">
+		<items>
+			<item id="186000237" name="Ancient Coin" rnd_min="10" rnd_max="30"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053710" decomposable_name="Captured Shelter Relics Bundle">
+		<items>
+			<random_item type="ANCIENTITEMS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053711" decomposable_name="Blood Mark Bundle">
+		<items>
+			<item id="186000236" name="Blood Mark"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053712" decomposable_name="Blood Mark Bundle">
+		<items>
+			<item id="186000236" name="Blood Mark" count="3"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053713" decomposable_name="Blood Mark Bundle">
+		<items>
+			<item id="186000236" name="Blood Mark" count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053714" decomposable_name="Captured Shelter Idian Bundle">
+		<items>
+			<item id="166050039" name="Glossy Esoteric Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050040" name="Glossy Esoteric Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050041" name="Glossy Esoteric Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050042" name="Glossy Esoteric Idian: Magical Defense"/>
+		</items>
+		<items>
+			<item id="166050043" name="Glossy Esoteric Idian: Assistance"/>
+		</items>
+		<items>
+			<item id="166050044" name="Glossy Esoteric Idian: Resistance"/>
+		</items>
+		<items>
+			<item id="166050045" name="Glossy Esoteric Idian: Physical/Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050046" name="Glossy Esoteric Idian: Physical/Magical Defense"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053715" decomposable_name="Baraja's Necklace Box">
+		<items>
+			<item id="121001426" name="Baraja's Red Beryl Necklace" player_class="TEMPLAR"/>
+			<item id="121001426" name="Baraja's Red Beryl Necklace" player_class="GLADIATOR"/>
+			<item id="121001426" name="Baraja's Red Beryl Necklace" player_class="ASSASSIN"/>
+			<item id="121001426" name="Baraja's Red Beryl Necklace" player_class="RANGER"/>
+			<item id="121001426" name="Baraja's Red Beryl Necklace" player_class="CHANTER"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="CLERIC"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="GUNNER"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="RIDER"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="SORCERER"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="SPIRIT_MASTER"/>
+			<item id="121001427" name="Baraja's Turquoise Necklace" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053716" decomposable_name="Volatile Rift Loot Bundle">
+		<items chance="8.4">
+			<item id="186000236" name="Blood Mark" count="3"/>
+		</items>
+		<items chance="8.3">
+			<item id="186000237" name="Ancient Coin" count="10"/>
+		</items>
+		<items chance="8.3">
+			<item id="186000243" name="Fragmented Ceramium" rnd_min="2" rnd_max="5"/>
+		</items>
+		<items chance="12.5">
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
+		</items>
+		<items chance="12.5">
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items chance="12.5">
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+		<items chance="12.5">
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="6.25">
+			<item id="169405338" name="Pallasite Ore"/>
+		</items>
+		<items chance="6.25">
+			<item id="169405339" name="Pallasite Crystal"/>
+		</items>
+		<items chance="6.25">
+			<item id="169405340" name="Pallasite Powder"/>
+		</items>
+		<items chance="6.25">
+			<item id="169405341" name="Pallasite Refined Water"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053717" decomposable_name="Volatile Rift Victory Loot Bundle">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+			<item id="166020000" name="Omega Enchantment Stone"/>
+			<item id="182215750" name="Asmodian Guardian General's Token" race="ELYOS"/>
+			<item id="182215751" name="Elyos Guardian General Token" race="ASMODIANS"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053718" decomposable_name="Protectors Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053719" decomposable_name="Protectors Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053720" decomposable_name="Operations Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+		<items>
+			<item id="186000243" name="Fragmented Ceramium"/>
+		</items>
+		<items>
+			<item id="186000147" name="Mithril Medal"/>
+		</items>
+		<items>
+			<item id="186000096" name="Platinum Medal"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053721" decomposable_name="Illusion Godstone Bundle of Fortuneers Legion">
+		<items>
+			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000164" name="Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000165" name="Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000174" name="Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000175" name="Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000176" name="Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+		<items>
+			<item id="168000163" name="Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053722" decomposable_name="Special Enchantment Stone Bundle of Fortuneers Legion">
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053723" decomposable_name="Guardian Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053724" decomposable_name="Guardian Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053725" decomposable_name="Headquarters Medal Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+		<items>
+			<item id="186000243" name="Fragmented Ceramium"/>
+		</items>
+		<items>
+			<item id="186000147" name="Mithril Medal"/>
+		</items>
+		<items>
+			<item id="186000096" name="Platinum Medal"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053726" decomposable_name="Illusion Godstone Bundle of Charlirunerk Inquiry Agency">
+		<items>
+			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000164" name="Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000165" name="Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000174" name="Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000175" name="Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000176" name="Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+		<items>
+			<item id="168000163" name="Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053727" decomposable_name="Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency">
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053728" decomposable_name="Beritra's Equipment Box">
+		<items chance="5.0">
+			<item id="100001800" name="Dragonblood Sword" player_class="TEMPLAR"/>
+			<item id="101301316" name="Dragonblood Polearm" player_class="GLADIATOR"/>
+			<item id="100201565" name="Dragonblood Dagger" player_class="ASSASSIN"/>
+			<item id="101701409" name="Dragonblood Bow" player_class="RANGER"/>
+			<item id="101801267" name="Dragonblood Pistol" player_class="GUNNER"/>
+			<item id="101501407" name="Dragonblood Staff" player_class="CHANTER"/>
+			<item id="100101392" name="Dragonblood Mace" player_class="CLERIC"/>
+			<item id="102101110" name="Dragonblood Cipher-Blade" player_class="RIDER"/>
+			<item id="100501356" name="Dragonblood Orb" player_class="SORCERER"/>
+			<item id="100601473" name="Dragonblood Tome" player_class="SPIRIT_MASTER"/>
+			<item id="102001293" name="Dragonblood Harp" player_class="BARD"/>
+		</items>
+		<items chance="5.0">
+			<item id="110601669" name="Balaur Lord's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="110601670" name="Balaur Lord's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="110301875" name="Balaur Lord's Assassin Jerkin" player_class="ASSASSIN"/>
+			<item id="110301876" name="Balaur Lord's Ranger Jerkin" player_class="RANGER"/>
+			<item id="110301877" name="Balaur Lord's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+			<item id="110551206" name="Balaur Lord's Chanter Hauberk" player_class="CHANTER"/>
+			<item id="110551207" name="Balaur Lord's Cleric Hauberk" player_class="CLERIC"/>
+			<item id="110551208" name="Balaur Lord's Aethertech Magic Hauberk" player_class="RIDER"/>
+			<item id="110101882" name="Balaur Lord's Sorcerer Jacket" player_class="SORCERER"/>
+			<item id="110101883" name="Balaur Lord's Spiritmaster Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="110101884" name="Balaur Lord's Songweaver Jacket" player_class="BARD"/>
+		</items>
+		<items chance="5.0">
+			<item id="111601632" name="Balaur Lord's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601633" name="Balaur Lord's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301813" name="Balaur Lord's Assassin Vambraces" player_class="ASSASSIN"/>
+			<item id="111301814" name="Balaur Lord's Ranger Vambraces" player_class="RANGER"/>
+			<item id="111301815" name="Balaur Lord's Gunslinger Magic Vambraces" player_class="GUNNER"/>
+			<item id="111501765" name="Balaur Lord's Chanter Handguards" player_class="CHANTER"/>
+			<item id="111501766" name="Balaur Lord's Cleric Handguards" player_class="CLERIC"/>
+			<item id="111501767" name="Balaur Lord's Aethertech Magic Handguards" player_class="RIDER"/>
+			<item id="111101697" name="Balaur Lord's Sorcerer Gloves" player_class="SORCERER"/>
+			<item id="111101698" name="Balaur Lord's Spiritmaster Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101699" name="Balaur Lord's Songweaver Gloves" player_class="BARD"/>
+		</items> 
+		<items chance="5.0">
+			<item id="112601614" name="Balaur Lord's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601615" name="Balaur Lord's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301752" name="Balaur Lord's Assassin Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301753" name="Balaur Lord's Ranger Shoulderguards" player_class="RANGER"/>
+			<item id="112301754" name="Balaur Lord's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+			<item id="112501704" name="Balaur Lord's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="112501705" name="Balaur Lord's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="112501706" name="Balaur Lord's Aethertech Magic Spaulders" player_class="RIDER"/>
+			<item id="112101646" name="Balaur Lord's Sorcerer Pauldrons" player_class="SORCERER"/>
+			<item id="112101647" name="Balaur Lord's Spiritmaster Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101648" name="Balaur Lord's Songweaver Pauldrons" player_class="BARD"/>
+		</items>
+		<items chance="5.0">
+			<item id="113601615" name="Balaur Lord's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="113601616" name="Balaur Lord's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="113301844" name="Balaur Lord's Assassin Legguards" player_class="ASSASSIN"/>
+			<item id="113301845" name="Balaur Lord's Ranger Legguards" player_class="RANGER"/>
+			<item id="113301846" name="Balaur Lord's Gunslinger Magic Legguards" player_class="GUNNER"/>
+			<item id="113501783" name="Balaur Lord's Chanter Chausses" player_class="CHANTER"/>
+			<item id="113501784" name="Balaur Lord's Cleric Chausses" player_class="CLERIC"/>
+			<item id="113501785" name="Balaur Lord's Aethertech Magic Chausses" player_class="RIDER"/>
+			<item id="113101708" name="Balaur Lord's Sorcerer Leggings" player_class="SORCERER"/>
+			<item id="113101709" name="Balaur Lord's Spiritmaster Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101710" name="Balaur Lord's Songweaver Leggings" player_class="BARD"/>
+		</items>
+		<items chance="5.0">
+			<item id="114601622" name="Balaur Lord's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="114601623" name="Balaur Lord's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="114301881" name="Balaur Lord's Assassin Boots" player_class="ASSASSIN"/>
+			<item id="114301882" name="Balaur Lord's Ranger Boots" player_class="RANGER"/>
+			<item id="114301883" name="Balaur Lord's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="114501793" name="Balaur Lord's Chanter Brogans" player_class="CHANTER"/>
+			<item id="114501794" name="Balaur Lord's Cleric Brogans" player_class="CLERIC"/>
+			<item id="114501795" name="Balaur Lord's Aethertech Magic Brogans" player_class="RIDER"/>
+			<item id="114101742" name="Balaur Lord's Sorcerer Shoes" player_class="SORCERER"/>
+			<item id="114101743" name="Balaur Lord's Spiritmaster Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101744" name="Balaur Lord's Songweaver Shoes" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="100001801" name="Dark Lord's Wrath" player_class="TEMPLAR"/>
+			<item id="100001802" name="Dark Lord's Lunacy" player_class="GLADIATOR"/>
+			<item id="100201566" name="Dark Lord's Murderous Intent" player_class="ASSASSIN"/>
+			<item id="101701410" name="Dark Lord's Jealousy" player_class="RANGER"/>
+			<item id="101801268" name="Dark Lord's Fighting Spirit" player_class="GUNNER"/>
+			<item id="101501408" name="Dark Lord's Pride" player_class="CHANTER"/>
+			<item id="100101393" name="Dark Lord's Delight" player_class="CLERIC"/>
+			<item id="102101111" name="Dark Lord's Craving" player_class="RIDER"/>
+			<item id="100501357" name="Dark Lord's Arrogance" player_class="SORCERER"/>
+			<item id="100601474" name="Dark Lord's Distrust" player_class="SPIRIT_MASTER"/>
+			<item id="102001294" name="Dark Lord's Shudder" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="100901427" name="Darken Lord's Hatred" player_class="TEMPLAR"/>
+			<item id="101301317" name="Darken Lord's Greed" player_class="GLADIATOR"/>
+			<item id="100001803" name="Darken Lord's Wrath" player_class="ASSASSIN"/>
+			<item id="101701411" name="Darken Lord's Jealousy" player_class="RANGER"/>
+			<item id="101901174" name="Darken Lord's Courage" player_class="GUNNER"/>
+			<item id="100101394" name="Darken Lord's Delight" player_class="CHANTER"/>
+			<item id="101501409" name="Darken Lord's Pride" player_class="CLERIC"/>
+			<item id="102101112" name="Darken Lord's Craving" player_class="RIDER"/>
+			<item id="100601475" name="Darken Lord's Distrust" player_class="SORCERER"/>
+			<item id="100501358" name="Darken Lord's Arrogance" player_class="SPIRIT_MASTER"/>
+			<item id="102001295" name="Darken Lord's Shudder" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="110601671" name="Dark Lord's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="110601673" name="Dark Lord's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="110301878" name="Dark Lord's Assassin Jerkin" player_class="ASSASSIN"/>
+			<item id="110301880" name="Dark Lord's Ranger Jerkin" player_class="RANGER"/>
+			<item id="110301882" name="Dark Lord's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+			<item id="110551209" name="Dark Lord's Chanter Hauberk" player_class="CHANTER"/>
+			<item id="110551211" name="Dark Lord's Cleric Hauberk" player_class="CLERIC"/>
+			<item id="110551213" name="Dark Lord's Aethertech Magic Hauberk" player_class="RIDER"/>
+			<item id="110101885" name="Dark Lord's Sorcerer Jacket" player_class="SORCERER"/>
+			<item id="110101887" name="Dark Lord's Spiritmaster Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="110101899" name="Dark Lord's Songweaver Jacket" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="111601634" name="Dark Lord's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601636" name="Dark Lord's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301816" name="Dark Lord's Assassin Vambraces" player_class="ASSASSIN"/>
+			<item id="111301818" name="Dark Lord's Ranger Vambraces" player_class="RANGER"/>
+			<item id="111301820" name="Dark Lord's Gunslinger Magic Vambraces" player_class="GUNNER"/>
+			<item id="111501768" name="Dark Lord's Chanter Handguards" player_class="CHANTER"/>
+			<item id="111501770" name="Dark Lord's Cleric Handguards" player_class="CLERIC"/>
+			<item id="111501772" name="Dark Lord's Aethertech Magic Handguards" player_class="RIDER"/>
+			<item id="111101700" name="Dark Lord's Sorcerer Gloves" player_class="SORCERER"/>
+			<item id="111101702" name="Dark Lord's Spiritmaster Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101704" name="Dark Lord's Songweaver Gloves" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="112601616" name="Dark Lord's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601618" name="Dark Lord's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301755" name="Dark Lord's Assassin Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301757" name="Dark Lord's Ranger Shoulderguards" player_class="RANGER"/>
+			<item id="112301759" name="Dark Lord's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+			<item id="112501707" name="Dark Lord's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="112501709" name="Dark Lord's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="112501711" name="Dark Lord's Aethertech Magic Spaulders" player_class="RIDER"/>
+			<item id="112101649" name="Dark Lord's Sorcerer Pauldrons" player_class="SORCERER"/>
+			<item id="112101651" name="Dark Lord's Spiritmaster Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101653" name="Dark Lord's Songweaver Pauldrons" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="113601617" name="Dark Lord's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="113601619" name="Dark Lord's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="113301847" name="Dark Lord's Assassin Legguards" player_class="ASSASSIN"/>
+			<item id="113301849" name="Dark Lord's Ranger Legguards" player_class="RANGER"/>
+			<item id="113301851" name="Dark Lord's Gunslinger Magic Legguards" player_class="GUNNER"/>
+			<item id="113501786" name="Dark Lord's Chanter Chausses" player_class="CHANTER"/>
+			<item id="113501788" name="Dark Lord's Cleric Chausses" player_class="CLERIC"/>
+			<item id="113501790" name="Dark Lord's Aethertech Magic Chausses" player_class="RIDER"/>
+			<item id="113101711" name="Dark Lord's Sorcerer Leggings" player_class="SORCERER"/>
+			<item id="113101713" name="Dark Lord's Spiritmaster Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101715" name="Dark Lord's Songweaver Leggings" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="114601624" name="Dark Lord's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="114601626" name="Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="114301884" name="Dark Lord's Assassin Boots" player_class="ASSASSIN"/>
+			<item id="114301886" name="Dark Lord's Ranger Boots" player_class="RANGER"/>
+			<item id="114301888" name="Dark Lord's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="114501796" name="Dark Lord's Chanter Brogans" player_class="CHANTER"/>
+			<item id="114501798" name="Dark Lord's Cleric Brogans" player_class="CLERIC"/>
+			<item id="114501800" name="Dark Lord's Aethertech Magic Brogans" player_class="RIDER"/>
+			<item id="114101745" name="Dark Lord's Sorcerer Shoes" player_class="SORCERER"/>
+			<item id="114101747" name="Dark Lord's Spiritmaster Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101749" name="Dark Lord's Songweaver Shoes" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="110601672" name="Darken Lord's Templar Breastplate" player_class="TEMPLAR"/>
+			<item id="110601674" name="Darken Lord's Gladiator Breastplate" player_class="GLADIATOR"/>
+			<item id="110301879" name="Darken Lord's Assassin Jerkin" player_class="ASSASSIN"/>
+			<item id="110301881" name="Darken Lord's Ranger Jerkin" player_class="RANGER"/>
+			<item id="110301883" name="Darken Lord's Gunslinger Magic Jerkin" player_class="GUNNER"/>
+			<item id="110551210" name="Darken Lord's Chanter Hauberk" player_class="CHANTER"/>
+			<item id="110551212" name="Darken Lord's Cleric Hauberk" player_class="CLERIC"/>
+			<item id="110551214" name="Darken Lord's Aethertech Magic Hauberk" player_class="RIDER"/>
+			<item id="110101886" name="Darken Lord's Sorcerer Jacket" player_class="SORCERER"/>
+			<item id="110101888" name="Darken Lord's Spiritmaster Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="110101890" name="Darken Lord's Songweaver Jacket" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="111601635" name="Darken Lord's Templar Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601637" name="Darken Lord's Gladiator Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301817" name="Darken Lord's Assassin Vambraces" player_class="ASSASSIN"/>
+			<item id="111301819" name="Darken Lord's Ranger Vambraces" player_class="RANGER"/>
+			<item id="111301821" name="Darken Lord's Gunslinger Magic Vambraces" player_class="GUNNER"/>
+			<item id="111501769" name="Darken Lord's Chanter Handguards" player_class="CHANTER"/>
+			<item id="111501771" name="Darken Lord's Cleric Handguards" player_class="CLERIC"/>
+			<item id="111501773" name="Darken Lord's Aethertech Magic Handguards" player_class="RIDER"/>
+			<item id="111101701" name="Darken Lord's Sorcerer Gloves" player_class="SORCERER"/>
+			<item id="111101703" name="Darken Lord's Spiritmaster Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101705" name="Darken Lord's Songweaver Gloves" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="112601617" name="Darken Lord's Templar Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601619" name="Darken Lord's Gladiator Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301756" name="Darken Lord's Assassin Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301758" name="Darken Lord's Ranger Shoulderguards" player_class="RANGER"/>
+			<item id="112301760" name="Darken Lord's Gunslinger Magic Shoulderguards" player_class="GUNNER"/>
+			<item id="112501708" name="Darken Lord's Chanter Spaulders" player_class="CHANTER"/>
+			<item id="112501710" name="Darken Lord's Cleric Spaulders" player_class="CLERIC"/>
+			<item id="112501712" name="Darken Lord's Aethertech Magic Spaulders" player_class="RIDER"/>
+			<item id="112101650" name="Darken Lord's Sorcerer Pauldrons" player_class="SORCERER"/>
+			<item id="112101652" name="Darken Lord's Spiritmaster Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101654" name="Darken Lord's Songweaver Pauldrons" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="113601618" name="Darken Lord's Templar Greaves" player_class="TEMPLAR"/>
+			<item id="113601620" name="Darken Lord's Gladiator Greaves" player_class="GLADIATOR"/>
+			<item id="113301848" name="Darken Lord's Assassin Legguards" player_class="ASSASSIN"/>
+			<item id="113301850" name="Darken Lord's Ranger Legguards" player_class="RANGER"/>
+			<item id="113301852" name="Darken Lord's Gunslinger Magic Legguards" player_class="GUNNER"/>
+			<item id="113501787" name="Darken Lord's Chanter Chausses" player_class="CHANTER"/>
+			<item id="113501789" name="Darken Lord's Cleric Chausses" player_class="CLERIC"/>
+			<item id="113501791" name="Darken Lord's Aethertech Magic Chausses" player_class="RIDER"/>
+			<item id="113101712" name="Darken Lord's Sorcerer Leggings" player_class="SORCERER"/>
+			<item id="113101714" name="Darken Lord's Spiritmaster Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101716" name="Darken Lord's Songweaver Leggings" player_class="BARD"/>
+		</items>
+		<items chance="5.8">
+			<item id="114601625" name="Darken Lord's Templar Sabatons" player_class="TEMPLAR"/>
+			<item id="114601627" name="Darken Lord's Gladiator Sabatons" player_class="GLADIATOR"/>
+			<item id="114301885" name="Darken Lord's Assassin Boots" player_class="ASSASSIN"/>
+			<item id="114301887" name="Darken Lord's Ranger Boots" player_class="RANGER"/>
+			<item id="114301889" name="Darken Lord's Gunslinger Magic Boots" player_class="GUNNER"/>
+			<item id="114501797" name="Darken Lord's Chanter Brogans" player_class="CHANTER"/>
+			<item id="114501799" name="Darken Lord's Cleric Brogans" player_class="CLERIC"/>
+			<item id="114501801" name="Darken Lord's Aethertech Magic Brogans" player_class="RIDER"/>
+			<item id="114101746" name="Darken Lord's Sorcerer Shoes" player_class="SORCERER"/>
+			<item id="114101748" name="Darken Lord's Spiritmaster Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101750" name="Darken Lord's Songweaver Shoes" player_class="BARD"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053729" decomposable_name="Equipment Box of Black Flame"/>
-	<decomposable item_id="188053730" decomposable_name="Steel Narki's Egg Bundle"/>
-	<decomposable item_id="188053731" decomposable_name="Woodkeeper Ailu Egg Bundle"/>
-	<decomposable item_id="188053732" decomposable_name="[Title] Hope of Katalam Bundle"/>
-	<decomposable item_id="188053733" decomposable_name="[Title] Light of Katalam Bundle"/>
-	<decomposable item_id="188053734" decomposable_name="[Title] Blue Forest Watchman Bundle"/>
-	<decomposable item_id="188053735" decomposable_name="[Title] Nature's Friend Bundle"/>
-	<decomposable item_id="188053736" decomposable_name="Steel Narki's Egg Bundle"/>
-	<decomposable item_id="188053737" decomposable_name="Woodkeeper Derion's Egg Bundle"/>
-	<decomposable item_id="188053738" decomposable_name="[Title] Hope of Katalam Bundle"/>
-	<decomposable item_id="188053739" decomposable_name="[Title] Light of Katalam Bundle"/>
-	<decomposable item_id="188053740" decomposable_name="[Title] Blue Forest Watchman Bundle"/>
-	<decomposable item_id="188053741" decomposable_name="[Title] Nature's Friend Bundle"/>
-	<decomposable item_id="188053742" decomposable_name="Faded Middle Grade Manastone Bundle"/>
-	<decomposable item_id="188053743" decomposable_name="Faded High Grade Manastone Bundle"/>
-	<decomposable item_id="188053744" decomposable_name="Elegant Middle Grade Composite Manastone Bundle"/>
-	<decomposable item_id="188053745" decomposable_name="Elegant High Grade Composite Manastone Bundle"/>
-	<decomposable item_id="188053746" decomposable_name="Faded Middle Grade Idian Bundle"/>
-	<decomposable item_id="188053747" decomposable_name="Faded High Grade Idian Bundle"/>
-	<decomposable item_id="188053748" decomposable_name="Elegant High Grade Idian Bundle"/>
-	<decomposable item_id="188053749" decomposable_name="Heavy Enchantment Stone Bundle"/>
-	<decomposable item_id="188053750" decomposable_name="Gladiator Stigma Bundle"/>
-	<decomposable item_id="188053751" decomposable_name="Templar Stigma Bundle"/>
-	<decomposable item_id="188053752" decomposable_name="Assassin Stigma Bundle"/>
-	<decomposable item_id="188053753" decomposable_name="Ranger Stigma Bundle"/>
-	<decomposable item_id="188053754" decomposable_name="Sorcerer Stigma Bundle"/>
-	<decomposable item_id="188053755" decomposable_name="Spiritmaster Stigma Bundle"/>
-	<decomposable item_id="188053756" decomposable_name="Cleric Stigma Bundle"/>
-	<decomposable item_id="188053757" decomposable_name="Chanter Stigma Bundle"/>
-	<decomposable item_id="188053758" decomposable_name="Gunslinger Stigma Bundle"/>
-	<decomposable item_id="188053759" decomposable_name="Aethertech Stigma Bundle"/>
-	<decomposable item_id="188053760" decomposable_name="Songweaver Stigma Bundle"/>
-	<decomposable item_id="188053761" decomposable_name="Gladiator Greater Stigma Bundle"/>
-	<decomposable item_id="188053762" decomposable_name="Templar Greater Stigma Bundle"/>
-	<decomposable item_id="188053763" decomposable_name="Assassin Greater Stigma Bundle"/>
-	<decomposable item_id="188053764" decomposable_name="Ranger Greater Stigma Bundle"/>
-	<decomposable item_id="188053765" decomposable_name="Sorcerer Greater Stigma Bundle"/>
-	<decomposable item_id="188053766" decomposable_name="Spiritmaster Greater Stigma Bundle"/>
-	<decomposable item_id="188053767" decomposable_name="Cleric Greater Stigma Bundle"/>
-	<decomposable item_id="188053768" decomposable_name="Chanter Greater Stigma Bundle"/>
-	<decomposable item_id="188053769" decomposable_name="Gunslinger Greater Stigma Bundle"/>
-	<decomposable item_id="188053770" decomposable_name="Aethertech Greater Stigma Bundle"/>
-	<decomposable item_id="188053771" decomposable_name="Songweaver Greater Stigma Bundle"/>
-	<decomposable item_id="188053772" decomposable_name="Gladiator Major Stigma Bundle"/>
-	<decomposable item_id="188053773" decomposable_name="Templar Major Stigma Bundle"/>
-	<decomposable item_id="188053774" decomposable_name="Assassin Major Stigma Bundle"/>
-	<decomposable item_id="188053775" decomposable_name="Ranger Major Stigma Bundle"/>
-	<decomposable item_id="188053776" decomposable_name="Sorcerer Major Stigma Bundle"/>
-	<decomposable item_id="188053777" decomposable_name="Spiritmaster Major Stigma Bundle"/>
-	<decomposable item_id="188053778" decomposable_name="Cleric Major Stigma Bundle"/>
-	<decomposable item_id="188053779" decomposable_name="Chanter Major Stigma Bundle"/>
-	<decomposable item_id="188053780" decomposable_name="Gunslinger Major Stigma Bundle"/>
-	<decomposable item_id="188053781" decomposable_name="Aethertech Major Stigma Bundle"/>
-	<decomposable item_id="188053782" decomposable_name="Songweaver Major Stigma Bundle"/>
-	<decomposable item_id="188053783" decomposable_name="Stigma Sack"/>
-	<decomposable item_id="188053784" decomposable_name="Stigma Bundle" selectable="true">
-		<items minlevel="20">
-			<item id="140001304" name="Crippling Cut (Inert)" player_class="GLADIATOR"/>
-			<item id="140001305" name="Draining Blow (Inert)" player_class="GLADIATOR"/>
-			<item id="140001306" name="Earthquake Wave (Inert)" player_class="GLADIATOR"/>
-			<item id="140001307" name="Magical Defense (Inert)" player_class="GLADIATOR"/>
-			<item id="140001308" name="Ankle Snare (Inert)" player_class="GLADIATOR"/>
-			<item id="140001309" name="Siegebreaker (Inert)" player_class="GLADIATOR"/>
-			<item id="140001310" name="Lockdown (Inert)" player_class="GLADIATOR"/>
-			<item id="140001311" name="Dauntless Spirit (Inert)" player_class="GLADIATOR"/>
-			<item id="140001312" name="Howl (Inert)" player_class="GLADIATOR"/>
-			<item id="140001321" name="Barricade of Steel (Inert)" player_class="TEMPLAR"/>
-			<item id="140001322" name="Incite Rage (Inert)" player_class="TEMPLAR"/>
-			<item id="140001323" name="Divine Fury (Inert)" player_class="TEMPLAR"/>
-			<item id="140001324" name="Holy Shield (Inert)" player_class="TEMPLAR"/>
-			<item id="140001325" name="Punishing Thrust (Inert)" player_class="TEMPLAR"/>
-			<item id="140001326" name="Punishment (Inert)" player_class="TEMPLAR"/>
-			<item id="140001327" name="Aether Armor (Inert)" player_class="TEMPLAR"/>
-			<item id="140001328" name="Inquisitor's Blow (Inert)" player_class="TEMPLAR"/>
-			<item id="140001337" name="Deadly Abandon (Inert)" player_class="ASSASSIN"/>
-			<item id="140001338" name="Oath of Accuracy (Inert)" player_class="ASSASSIN"/>
-			<item id="140001339" name="Shadow Walk (Inert)" player_class="ASSASSIN"/>
-			<item id="140001340" name="Shadowfall (Inert)" player_class="ASSASSIN"/>
-			<item id="140001341" name="Sigil Strike (Inert)" player_class="ASSASSIN"/>
-			<item id="140001342" name="Venomous Strike (Inert)" player_class="ASSASSIN"/>
-			<item id="140001343" name="Eye of Wrath (Inert)" player_class="ASSASSIN"/>
-			<item id="140001344" name="Rune Knife (Inert)" player_class="ASSASSIN"/>
-			<item id="140001345" name="Searching Strike (Inert)" player_class="ASSASSIN"/>
-			<item id="140001354" name="Focused Shots (Inert)" player_class="RANGER"/>
-			<item id="140001355" name="Trap of Slowing (Inert)" race="ELYOS" player_class="RANGER"/>
-			<item id="140001356" name="Trap of Slowing (Inert)" race="ASMODIANS" player_class="RANGER"/>
-			<item id="140001357" name="Dilation Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001358" name="Skybound Trap (Inert)" race="ELYOS" player_class="RANGER"/>
-			<item id="140001359" name="Skybound Trap (Inert)" race="ASMODIANS" player_class="RANGER"/>
-			<item id="140001360" name="Blazing Trap (Inert)" race="ELYOS" player_class="RANGER"/>
-			<item id="140001361" name="Blazing Trap (Inert)" race="ASMODIANS" player_class="RANGER"/>
-			<item id="140001362" name="Nature's Resolve (Inert)" player_class="RANGER"/>
-			<item id="140001363" name="Bow of Blessing (Inert)" player_class="RANGER"/>
-			<item id="140001364" name="Trap of Clairvoyance (Inert)" race="ELYOS" player_class="RANGER"/>
-			<item id="140001365" name="Trap of Clairvoyance (Inert)" race="ASMODIANS" player_class="RANGER"/>
-			<item id="140001366" name="Arrow Deluge (Inert)" player_class="RANGER"/>
-			<item id="140001370" name="Arcane Thunderbolt (Inert)" player_class="SORCERER"/>
-			<item id="140001374" name="Elemental Ward (Inert)" player_class="SORCERER"/>
-			<item id="140001375" name="Storm Strike (Inert)" player_class="SORCERER"/>
-			<item id="140001377" name="Ice Sheet (Inert)" race="ELYOS" player_class="SORCERER"/>
-			<item id="140001378" name="Ice Sheet (Inert)" race="ASMODIANS" player_class="SORCERER"/>
-			<item id="140001381" name="Boon of Quickness (Inert)" player_class="SORCERER"/>
-			<item id="140001382" name="Absolute Zero (Inert)" player_class="SORCERER"/>
-			<item id="140001383" name="Curse of Weakness (Inert)" player_class="SORCERER"/>
-			<item id="140001384" name="Ice Harpoon (Inert)" player_class="SORCERER"/>
-			<item id="140001385" name="Exchange Vitality (Inert)" player_class="SORCERER"/>
-			<item id="140001395" name="Earthen Call (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001396" name="Magic's Freedom (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001397" name="Stone Scour (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001398" name="Spirit Burn-to-Ashes (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001399" name="Cyclone of Wrath (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001400" name="Withering Gloom (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001401" name="Spirit Wall of Protection (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001402" name="Cloaking Word (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001403" name="Enmity Swap (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001412" name="Word of Inspiration (Inert)" player_class="CHANTER"/>
-			<item id="140001413" name="Annihilation (Inert)" player_class="CHANTER"/>
-			<item id="140001414" name="Word of Life (Inert)" player_class="CHANTER"/>
-			<item id="140001415" name="Soul Lock (Inert)" player_class="CHANTER"/>
-			<item id="140001416" name="Splash Swing (Inert)" player_class="CHANTER"/>
-			<item id="140001417" name="Acceleration Cheer (Inert)" player_class="CHANTER"/>
-			<item id="140001418" name="Leaping Flash (Inert)" player_class="CHANTER"/>
-			<item id="140001419" name="Healing Conduit (Inert)" player_class="CHANTER"/>
-			<item id="140001420" name="Rise (Inert)" player_class="CHANTER"/>
-			<item id="140001431" name="Saving Grace (Inert)" player_class="CLERIC"/>
-			<item id="140001432" name="Sacrificial Power (Inert)" player_class="CLERIC"/>
-			<item id="140001433" name="Sympathetic Heal (Inert)" player_class="CLERIC"/>
-			<item id="140001434" name="Blinding Light (Inert)" player_class="CLERIC"/>
-			<item id="140001435" name="Retribution Lightning (Inert)" player_class="CLERIC"/>
-			<item id="140001436" name="Power Sprint (Inert)" player_class="CLERIC"/>
-			<item id="140001437" name="Reverse Condition (Inert)" player_class="CLERIC"/>
-			<item id="140001438" name="Festering Wound (Inert)" player_class="CLERIC"/>
-			<item id="140001439" name="Noble Grace (Inert)" player_class="CLERIC"/>
-			<item id="140001448" name="Steady Fire (Inert)" player_class="RIDER"/>
-			<item id="140001448" name="Steady Fire (Inert)" player_class="GUNNER"/>
-			<item id="140001449" name="Nature's Favor (Inert)" player_class="GUNNER"/>
-			<item id="140001450" name="Frozen Blitz (Inert)" player_class="GUNNER"/>
-			<item id="140001451" name="Sighting (Inert)" player_class="GUNNER"/>
-			<item id="140001452" name="Power Grab (Inert)" player_class="GUNNER"/>
-			<item id="140001453" name="Fiery Blast (Inert)" player_class="GUNNER"/>
-			<item id="140001454" name="Shock and Awe (Inert)" player_class="GUNNER"/>
-			<item id="140001455" name="Missile Guide (Inert)" player_class="GUNNER"/>
-			<item id="140001456" name="Blazing Bombardment (Inert)" player_class="GUNNER"/>
-			<item id="140001465" name="Particle Whip (Inert)" player_class="RIDER"/>
-			<item id="140001466" name="Drillbore (Inert)" player_class="RIDER"/>
-			<item id="140001467" name="Riplash (Inert)" player_class="RIDER"/>
-			<item id="140001468" name="Steel Storm (Inert)" player_class="RIDER"/>
-			<item id="140001469" name="Leeching Steel (Inert)" player_class="RIDER"/>
-			<item id="140001470" name="Ravager Cannon (Inert)" player_class="RIDER"/>
-			<item id="140001471" name="Life Support Trigger (Inert)" player_class="RIDER"/>
-			<item id="140001472" name="Aimbot Assist (Inert)" player_class="RIDER"/>
-			<item id="140001473" name="Aether Recharge (Inert)" player_class="RIDER"/>
-			<item id="140001482" name="Mvt. 2: Summer (Inert)" player_class="BARD"/>
-			<item id="140001483" name="Stinging Note (Inert)" player_class="BARD"/>
-			<item id="140001484" name="Hymn of Rejuvenation (Inert)" player_class="BARD"/>
-			<item id="140001485" name="Freestyle (Inert)" player_class="BARD"/>
-			<item id="140001486" name="Half-Stop (Inert)" player_class="BARD"/>
-			<item id="140001487" name="Inspiration (Inert)" player_class="BARD"/>
-			<item id="140001488" name="Mvt. 3: Autumn (Inert)" player_class="BARD"/>
-			<item id="140001489" name="Resonant Hymn (Inert)" player_class="BARD"/>
-			<item id="140001490" name="Combustible Cacophony (Inert)" player_class="BARD"/>
+	<decomposable item_id="188053730" decomposable_name="Steel Narki's Egg Bundle">
+		<items>
+			<item id="190000077" name="Steel Narki Egg"/>
 		</items>
 	</decomposable>
-	<decomposable item_id="188053785" decomposable_name="Greater Stigma Bundle" selectable="true">
-		<items minlevel="45">
-			<item id="140001298" name="Sure Strike (Inert)" player_class="GLADIATOR"/>
-			<item id="140001299" name="Spite Strike (Inert)" player_class="GLADIATOR"/>
-			<item id="140001300" name="Sharp Strike (Inert)" player_class="GLADIATOR"/>
-			<item id="140001301" name="Tendon Slice (Inert)" player_class="GLADIATOR"/>
-			<item id="140001302" name="Exhausting Wave (Inert)" player_class="GLADIATOR"/>
-			<item id="140001303" name="Severe Precision Cut (Inert)" player_class="GLADIATOR"/>
-			<item id="140001315" name="Prayer of Resilience (Inert)" player_class="TEMPLAR"/>
-			<item id="140001316" name="Magic Smash (Inert)" player_class="TEMPLAR"/>
-			<item id="140001317" name="Prayer of Victory (Inert)" player_class="TEMPLAR"/>
-			<item id="140001318" name="Divine Justice (Inert)" player_class="TEMPLAR"/>
-			<item id="140001319" name="Punishing Wave (Inert)" player_class="TEMPLAR"/>
-			<item id="140001320" name="Shield of Faith (Inert)" player_class="TEMPLAR"/>
-			<item id="140001331" name="Apply Lethal Venom (Inert)" player_class="ASSASSIN"/>
-			<item id="140001332" name="Agony Rune (Inert)" player_class="ASSASSIN"/>
-			<item id="140001333" name="Sensory Boost (Inert)" player_class="ASSASSIN"/>
-			<item id="140001334" name="Break Away (Inert)" player_class="ASSASSIN"/>
-			<item id="140001335" name="Dash and Slash (Inert)" player_class="ASSASSIN"/>
-			<item id="140001336" name="Lightning Slash (Inert)" player_class="ASSASSIN"/>
-			<item id="140001348" name="Lethal Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001349" name="Heart Shot (Inert)" player_class="RANGER"/>
-			<item id="140001350" name="Hunter's Might (Inert)" player_class="RANGER"/>
-			<item id="140001351" name="Gale Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001352" name="Explosive Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001353" name="Sharpen Arrows (Inert)" player_class="RANGER"/>
-			<item id="140001369" name="Sleeping Storm (Inert)" player_class="SORCERER"/>
-			<item id="140001371" name="Summon Rock (Inert)" player_class="SORCERER"/>
-			<item id="140001372" name="Flame Spray (Inert)" player_class="SORCERER"/>
-			<item id="140001373" name="Illusion Storm (Inert)" player_class="SORCERER"/>
-			<item id="140001376" name="Wind Cut Down (Inert)" player_class="SORCERER"/>
-			<item id="140001379" name="Summon Whirlwind (Inert)" race="ELYOS" player_class="SORCERER"/>
-			<item id="140001380" name="Summon Whirlwind (Inert)" race="ASMODIANS" player_class="SORCERER"/>
-			<item id="140001388" name="Shackle of Vulnerability (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001389" name="Magic Implosion (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001390" name="Infernal Pain (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001391" name="Spirit Ruinous Offensive (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001392" name="Summon Cyclone Servant (Inert)" race="ELYOS" player_class="SPIRIT_MASTER"/>
-			<item id="140001393" name="Summon Cyclone Servant (Inert)" race="ASMODIANS" player_class="SPIRIT_MASTER"/>
-			<item id="140001394" name="Healing Spirit (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001406" name="Blessing of Stone (Inert)" player_class="CHANTER"/>
-			<item id="140001407" name="Healing Burst (Inert)" player_class="CHANTER"/>
-			<item id="140001408" name="Word of Protection (Inert)" player_class="CHANTER"/>
-			<item id="140001409" name="Blessing of Wind (Inert)" player_class="CHANTER"/>
-			<item id="140001410" name="Disorienting Blow (Inert)" player_class="CHANTER"/>
-			<item id="140001411" name="Mountain Crash (Inert)" player_class="CHANTER"/>
-			<item id="140001423" name="Enfeebling Burst (Inert)" player_class="CLERIC"/>
-			<item id="140001424" name="Chain of Suffering (Inert)" player_class="CLERIC"/>
-			<item id="140001425" name="Summon Noble Energy (Inert)" race="ELYOS" player_class="CLERIC"/>
-			<item id="140001426" name="Summon Noble Energy (Inert)" race="ASMODIANS" player_class="CLERIC"/>
-			<item id="140001427" name="Splendor of Rebirth (Inert)" player_class="CLERIC"/>
-			<item id="140001428" name="Ripple of Purification (Inert)" player_class="CLERIC"/>
-			<item id="140001429" name="Summon Healing Servant (Inert)" race="ELYOS" player_class="CLERIC"/>
-			<item id="140001430" name="Summon Healing Servant (Inert)" race="ASMODIANS" player_class="CLERIC"/>
-			<item id="140001442" name="Hemorrhage Shot (Inert)" player_class="GUNNER"/>
-			<item id="140001443" name="Pressurized Chamber (Inert)" player_class="GUNNER"/>
-			<item id="140001444" name="Autoload (Inert)" player_class="GUNNER"/>
-			<item id="140001445" name="Juggernaut Cannon (Inert)" player_class="GUNNER"/>
-			<item id="140001446" name="Paralysis Cannon (Inert)" player_class="GUNNER"/>
-			<item id="140001447" name="Stopping Power (Inert)" player_class="GUNNER"/>
-			<item id="140001459" name="Aethercharged Steel (Inert)" player_class="RIDER"/>
-			<item id="140001460" name="Rain of Knuckles (Inert)" player_class="RIDER"/>
-			<item id="140001461" name="Debilitating Blade (Inert)" player_class="RIDER"/>
-			<item id="140001462" name="Mobility Thrusters (Inert)" player_class="RIDER"/>
-			<item id="140001463" name="Trauma Plate Trigger (Inert)" player_class="RIDER"/>
-			<item id="140001464" name="Convulsion Beam (Inert)" player_class="RIDER"/>
-			<item id="140001476" name="Staggered Rest (Inert)" player_class="BARD"/>
-			<item id="140001477" name="Paean of Pain (Inert)" player_class="BARD"/>
-			<item id="140001478" name="Exultation (Inert)" player_class="BARD"/>
-			<item id="140001479" name="Impassion (Inert)" player_class="BARD"/>
-			<item id="140001480" name="Soothing Hymn (Inert)" player_class="BARD"/>
-			<item id="140001481" name="Joyous Carol (Inert)" player_class="BARD"/>
+	<decomposable item_id="188053731" decomposable_name="Woodkeeper Ailu Egg Bundle">
+		<items>
+			<item id="190000078" name="Woodkeeper Ailu Egg"/>
 		</items>
 	</decomposable>
-	<decomposable item_id="188053786" decomposable_name="Major Stigma Bundle" selectable="true">
-		<items minlevel="55">
-			<item id="140001313" name="Righteous Punishment (Inert)" player_class="GLADIATOR"/>
-			<item id="140001314" name="Whirling Strike (Inert)" player_class="GLADIATOR"/>
-			<item id="140001329" name="Empyrean Providence (Inert)" player_class="TEMPLAR"/>
-			<item id="140001330" name="Shieldburst (Inert)" player_class="TEMPLAR"/>
-			<item id="140001346" name="Quickening Doom (Inert)" player_class="ASSASSIN"/>
-			<item id="140001347" name="Scoundrel's Bond (Inert)" player_class="ASSASSIN"/>
-			<item id="140001367" name="Agonizing Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001368" name="Lightning Arrow (Inert)" player_class="RANGER"/>
-			<item id="140001386" name="Wintry Armor (Inert)" player_class="SORCERER"/>
-			<item id="140001387" name="Glacial Shard (Inert)" player_class="SORCERER"/>
-			<item id="140001404" name="Infernal Blight (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001405" name="Armor Spirit (Inert)" player_class="SPIRIT_MASTER"/>
-			<item id="140001421" name="Elemental Screen (Inert)" player_class="CHANTER"/>
-			<item id="140001422" name="Numbing Blow (Inert)" player_class="CHANTER"/>
-			<item id="140001440" name="Call Lightning (Inert)" player_class="CLERIC"/>
-			<item id="140001441" name="Benevolence (Inert)" player_class="CLERIC"/>
-			<item id="140001457" name="Dazzling Fire (Inert)" player_class="GUNNER"/>
-			<item id="140001458" name="Shellshock (Inert)" player_class="GUNNER"/>
-			<item id="140001474" name="Meteor Strike (Inert)" player_class="RIDER"/>
-			<item id="140001475" name="Kinetic Bulwark (Inert)" player_class="RIDER"/>
-			<item id="140001491" name="Treble Cleave (Inert)" player_class="BARD"/>
-			<item id="140001492" name="Chorus of Blessing (Inert)" player_class="BARD"/>
+	<decomposable item_id="188053732" decomposable_name="[Title] Hope of Katalam Bundle">
+		<items>
+			<item id="169610337" name="[Title] Katalam's Hope"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053733" decomposable_name="[Title] Light of Katalam Bundle">
+		<items>
+			<item id="169610338" name="[Title] Katalam's Light"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053734" decomposable_name="[Title] Blue Forest Watchman Bundle">
+		<items>
+			<item id="169610339" name="[Title] Watcher of the Forest"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053735" decomposable_name="[Title] Nature's Friend Bundle">
+		<items>
+			<item id="169610340" name="[Title] Nature's Friend"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053736" decomposable_name="Steel Narki's Egg Bundle">
+		<items>
+			<item id="190000077" name="Steel Narki Egg"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053737" decomposable_name="Woodkeeper Derion's Egg Bundle">
+		<items>
+			<item id="190000078" name="Woodkeeper Ailu Egg"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053738" decomposable_name="[Title] Hope of Katalam Bundle">
+		<items>
+			<item id="169610337" name="[Title] Katalam's Hope"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053739" decomposable_name="[Title] Light of Katalam Bundle">
+		<items>
+			<item id="169610338" name="[Title] Katalam's Light"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053740" decomposable_name="[Title] Blue Forest Watchman Bundle">
+		<items>
+			<item id="169610339" name="[Title] Watcher of the Forest"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053741" decomposable_name="[Title] Nature's Friend Bundle">
+		<items>
+			<item id="169610340" name="[Title] Nature's Friend"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053742" decomposable_name="Faded Middle Grade Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053743" decomposable_name="Faded High Grade Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053744" decomposable_name="Elegant Middle Grade Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053745" decomposable_name="Elegant High Grade Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_70"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053746" decomposable_name="Faded Middle Grade Idian Bundle">
+		<items>
+			<item id="166050059" name="Sparkling Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050060" name="Sparkling Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050061" name="Sparkling Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050062" name="Sparkling Idian: Magical Defense"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053747" decomposable_name="Faded High Grade Idian Bundle">
+		<items>
+			<item id="166050031" name="Esoteric Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050032" name="Esoteric Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050033" name="Esoteric Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050034" name="Esoteric Idian: Magical Defense"/>
+		</items>
+		<items>
+			<item id="166050035" name="Esoteric Idian: Assitance"/>
+		</items>
+		<items>
+			<item id="166050036" name="Esoteric Idian: Resistance"/>
+		</items>
+		<items>
+			<item id="166050037" name="Esoteric Idian: Physical/Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050038" name="Esoteric Idian: Physical/Magical Defense"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053748" decomposable_name="Elegant High Grade Idian Bundle">
+		<items>
+			<item id="166050039" name="Glossy Esoteric Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050040" name="Glossy Esoteric Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050041" name="Glossy Esoteric Idian: Physical Defense"/>
+		</items>
+		<items>
+			<item id="166050042" name="Glossy Esoteric Idian: Magical Defense"/>
+		</items>
+		<items>
+			<item id="166050043" name="Glossy Esoteric Idian: Assistance"/>
+		</items>
+		<items>
+			<item id="166050044" name="Glossy Esoteric Idian: Resistance"/>
+		</items>
+		<items>
+			<item id="166050045" name="Glossy Esoteric Idian: Physical/Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050046" name="Glossy Esoteric Idian: Physical/Magical Defense"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053749" decomposable_name="Heavy Enchantment Stone Bundle">
+		<items>
+			<item id="166000194" name="Delta Enchantment Stone" count="3"/>
+		</items>
+		<items>
+			<item id="166000195" name="Epsilon Enchantment Stone" count="3"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053750" decomposable_name="Gladiator Stigma Bundle">
+		<items>
+			<item id="140001109" name="Crippling Cut"/>
+		</items>
+		<items>
+			<item id="140001110" name="Draining Blow"/>
+		</items>
+		<items>
+			<item id="140001111" name="Earthquake Wave"/>
+		</items>
+		<items>
+			<item id="140001112" name="Magical Defense"/>
+		</items>
+		<items>
+			<item id="140001113" name="Ankle Snare"/>
+		</items>
+		<items>
+			<item id="140001114" name="Siegebreaker"/>
+		</items>
+		<items>
+			<item id="140001115" name="Lockdown"/>
+		</items>
+		<items>
+			<item id="140001116" name="Dauntless Spirit"/>
+		</items>
+		<items>
+			<item id="140001117" name="Howl"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053751" decomposable_name="Templar Stigma Bundle">
+		<items>
+			<item id="140001126" name="Barricade of Steel"/>
+		</items>
+		<items>
+			<item id="140001127" name="Incite Rage"/>
+		</items>
+		<items>
+			<item id="140001128" name="Divine Fury"/>
+		</items>
+		<items>
+			<item id="140001129" name="Holy Shield"/>
+		</items>
+		<items>
+			<item id="140001130" name="Punishing Thrust"/>
+		</items>
+		<items>
+			<item id="140001131" name="Punishment"/>
+		</items>
+		<items>
+			<item id="140001132" name="Aether Armor"/>
+		</items>
+		<items>
+			<item id="140001133" name="Inquisitor's Blow"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053752" decomposable_name="Assassin Stigma Bundle">
+		<items>
+			<item id="140001142" name="Deadly Abandon"/>
+		</items>
+		<items>
+			<item id="140001143" name="Oath of Accuracy"/>
+		</items>
+		<items>
+			<item id="140001144" name="Shadow Walk"/>
+		</items>
+		<items>
+			<item id="140001145" name="Shadowfall"/>
+		</items>
+		<items>
+			<item id="140001146" name="Sigil Strike"/>
+		</items>
+		<items>
+			<item id="140001147" name="Venomous Strike"/>
+		</items>
+		<items>
+			<item id="140001148" name="Eye of Wrath"/>
+		</items>
+		<items>
+			<item id="140001149" name="Rune Knife"/>
+		</items>
+		<items>
+			<item id="140001150" name="Seaching Strike"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053753" decomposable_name="Ranger Stigma Bundle">
+		<items>
+			<item id="140001159" name="Focused Shots"/>
+		</items>
+		<items>
+			<item id="140001160" name="Trap of Slowing" race="ELYOS"/>
+			<item id="140001161" name="Trap of Slowing" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001162" name="Dilation Arrow"/>
+		</items>
+		<items>
+			<item id="140001163" name="Skybound Trap" race="ELYOS"/>
+			<item id="140001164" name="Skybound Trap" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001165" name="Blazing Trap" race="ELYOS"/>
+			<item id="140001166" name="Blazing Trap" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001167" name="Nature's Resolve"/>
+		</items>
+		<items>
+			<item id="140001168" name="Bow of Blessing"/>
+		</items>
+		<items>
+			<item id="140001169" name="Trap of Clairvoyance" race="ELYOS"/>
+			<item id="140001170" name="Trap of Clairvoyance" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001171" name="Arrow Deluge"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053754" decomposable_name="Sorcerer Stigma Bundle">
+		<items>
+			<item id="140001175" name="Arcane Thunderbolt"/>
+		</items>
+		<items>
+			<item id="140001179" name="Elemental Ward"/>
+		</items>
+		<items>
+			<item id="140001180" name="Storm Strike"/>
+		</items>
+		<items>
+			<item id="140001182" name="Ice Sheet" race="ELYOS"/>
+			<item id="140001183" name="Ice Sheet" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001186" name="Boon of Quickness"/>
+		</items>
+		<items>
+			<item id="140001187" name="Freeze"/>
+		</items>
+		<items>
+			<item id="140001188" name="Curse of Weakness"/>
+		</items>
+		<items>
+			<item id="140001189" name="Ice Harpoon"/>
+		</items>
+		<items>
+			<item id="140001190" name="Exchange Vitality"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053755" decomposable_name="Spiritmaster Stigma Bundle">
+		<items>
+			<item id="140001200" name="Earthen Call"/>
+		</items>
+		<items>
+			<item id="140001201" name="Magic's Freedom"/>
+		</items>
+		<items>
+			<item id="140001202" name="Stone Scour"/>
+		</items>
+		<items>
+			<item id="140001203" name="Spirit Burn-to-Ashes"/>
+		</items>
+		<items>
+			<item id="140001204" name="Cyclone of Wrath"/>
+		</items>
+		<items>
+			<item id="140001205" name="Withering Gloom"/>
+		</items>
+		<items>
+			<item id="140001206" name="Spirit Wall of Protection"/>
+		</items>
+		<items>
+			<item id="140001207" name="Cloaking Word"/>
+		</items>
+		<items>
+			<item id="140001208" name="Enmity Swap"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053756" decomposable_name="Cleric Stigma Bundle">
+		<items>
+			<item id="140001236" name="Saving Grace"/>
+		</items>
+		<items>
+			<item id="140001237" name="Sacrifical Power"/>
+		</items>
+		<items>
+			<item id="140001238" name="Sympathetic Heal"/>
+		</items>
+		<items>
+			<item id="140001239" name="Blinding Light"/>
+		</items>
+		<items>
+			<item id="140001240" name="Retribution Lightning"/>
+		</items>
+		<items>
+			<item id="140001241" name="Power Sprint"/>
+		</items>
+		<items>
+			<item id="140001242" name="Reverse Condition"/>
+		</items>
+		<items>
+			<item id="140001243" name="Festering Wound"/>
+		</items>
+		<items>
+			<item id="140001244" name="Noble Grace"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053757" decomposable_name="Chanter Stigma Bundle">
+		<items>
+			<item id="140001217" name="Word of Inspiration"/>
+		</items>
+		<items>
+			<item id="140001218" name="Annihilation"/>
+		</items>
+		<items>
+			<item id="140001219" name="Word of Life"/>
+		</items>
+		<items>
+			<item id="140001220" name="Soul Lock"/>
+		</items>
+		<items>
+			<item id="140001221" name="Splash Swing"/>
+		</items>
+		<items>
+			<item id="140001222" name="Acceleration Cheer"/>
+		</items>
+		<items>
+			<item id="140001223" name="Leaping Flash"/>
+		</items>
+		<items>
+			<item id="140001224" name="Healing Conduit"/>
+		</items>
+		<items>
+			<item id="140001225" name="Rise"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053758" decomposable_name="Gunslinger Stigma Bundle">
+		<items>
+			<item id="140001253" name="Steady Fire"/>
+		</items>
+		<items>
+			<item id="140001254" name="Nature's Favor"/>
+		</items>
+		<items>
+			<item id="140001255" name="Frozen Blitz"/>
+		</items>
+		<items>
+			<item id="140001256" name="Sighting"/>
+		</items>
+		<items>
+			<item id="140001257" name="Power Grab"/>
+		</items>
+		<items>
+			<item id="140001258" name="Fiery Blast"/>
+		</items>
+		<items>
+			<item id="140001259" name="Shock and Awe"/>
+		</items>
+		<items>
+			<item id="140001260" name="Missle Guide"/>
+		</items>
+		<items>
+			<item id="140001261" name="Blazing Bombardment"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053759" decomposable_name="Aethertech Stigma Bundle">
+		<items>
+			<item id="140001270" name="Particle Whip"/>
+		</items>
+		<items>
+			<item id="140001271" name="Drillbore"/>
+		</items>
+		<items>
+			<item id="140001272" name="Rip Slash"/>
+		</items>
+		<items>
+			<item id="140001273" name="Steel Storm"/>
+		</items>
+		<items>
+			<item id="140001274" name="Leeching Steel"/>
+		</items>
+		<items>
+			<item id="140001275" name="Ravager Cannon"/>
+		</items>
+		<items>
+			<item id="140001276" name="Life Support Trigger"/>
+		</items>
+		<items>
+			<item id="140001277" name="Aimbot Assist"/>
+		</items>
+		<items>
+			<item id="140001278" name="Aether Recharge"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053760" decomposable_name="Songweaver Stigma Bundle">
+		<items>
+			<item id="140001287" name="Mvt. 2: Summer"/>
+		</items>
+		<items>
+			<item id="140001288" name="Stingin Note"/>
+		</items>
+		<items>
+			<item id="140001289" name="Hymn of Rejuvenation"/>
+		</items>
+		<items>
+			<item id="140001290" name="Freestyle"/>
+		</items>
+		<items>
+			<item id="140001291" name="Half-Stop"/>
+		</items>
+		<items>
+			<item id="140001292" name="Inspiration"/>
+		</items>
+		<items>
+			<item id="140001293" name="Mvt. 3: Autumn"/>
+		</items>
+		<items>
+			<item id="140001294" name="Resonant Hymn"/>
+		</items>
+		<items>
+			<item id="1400012905" name="Combustible Cacophnoy"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053761" decomposable_name="Gladiator Greater Stigma Bundle">
+		<items>
+			<item id="140001103" name="Sure Strike"/>
+		</items>
+		<items>
+			<item id="140001104" name="Spite Strike"/>
+		</items>
+		<items>
+			<item id="140001105" name="Sharp Strike"/>
+		</items>
+		<items>
+			<item id="140001106" name="Tendon Slice"/>
+		</items>
+		<items>
+			<item id="140001107" name="Exhausting Wave"/>
+		</items>
+		<items>
+			<item id="140001108" name="Severe Precision Cut"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053762" decomposable_name="Templar Greater Stigma Bundle">
+		<items>
+			<item id="140001120" name="Prayer of Resilience"/>
+		</items>
+		<items>
+			<item id="140001121" name="Magic Smash"/>
+		</items>
+		<items>
+			<item id="140001122" name="Prayer of Victory"/>
+		</items>
+		<items>
+			<item id="140001123" name="Divine Justice"/>
+		</items>
+		<items>
+			<item id="140001124" name="Punishing Wave"/>
+		</items>
+		<items>
+			<item id="140001125" name="Shield of Faith"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053763" decomposable_name="Assassin Greater Stigma Bundle">
+		<items>
+			<item id="140001136" name="Apply Lethal Venom"/>
+		</items>
+		<items>
+			<item id="140001137" name="Agony Rune"/>
+		</items>
+		<items>
+			<item id="140001138" name="Sensory Boost"/>
+		</items>
+		<items>
+			<item id="140001139" name="Break Away"/>
+		</items>
+		<items>
+			<item id="140001140" name="Dash and Slash"/>
+		</items>
+		<items>
+			<item id="140001141" name="Lightning Slash"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053764" decomposable_name="Ranger Greater Stigma Bundle">
+		<items>
+			<item id="140001153" name="Lethal Arrow"/>
+		</items>
+		<items>
+			<item id="140001154" name="Heart Shot"/>
+		</items>
+		<items>
+			<item id="140001155" name="Hunter's Might"/>
+		</items>
+		<items>
+			<item id="140001156" name="Gale Arrow"/>
+		</items>
+		<items>
+			<item id="140001157" name="Explosive Arrow"/>
+		</items>
+		<items>
+			<item id="140001158" name="Sharpen Arrows"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053765" decomposable_name="Sorcerer Greater Stigma Bundle">
+		<items>
+			<item id="140001174" name="Sleeping Storm"/>
+		</items>
+		<items>
+			<item id="140001176" name="Summon Rock"/>
+		</items>
+		<items>
+			<item id="140001177" name="Flame Spray"/>
+		</items>
+		<items>
+			<item id="140001178" name="Illusion Storm"/>
+		</items>
+		<items>
+			<item id="140001181" name="Wind Cut Down"/>
+		</items>
+		<items>
+			<item id="140001184" name="Summon Whirlwind" race="ELYOS"/>
+			<item id="140001184" name="Summon Whirlwind" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053766" decomposable_name="Spiritmaster Greater Stigma Bundle">
+		<items>
+			<item id="140001193" name="Shackle of Vulnerability"/>
+		</items>
+		<items>
+			<item id="140001194" name="Magic Implosion"/>
+		</items>
+		<items>
+			<item id="140001195" name="Infernal Pain"/>
+		</items>
+		<items>
+			<item id="140001196" name="Spirit Ruinous Offensive"/>
+		</items>
+		<items>
+			<item id="140001197" name="Summon Cyclon Servant" race="ELYOS"/>
+			<item id="140001198" name="Summon Cyclon Servant" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001199" name="Healing Spirit"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053767" decomposable_name="Cleric Greater Stigma Bundle">
+		<items>
+			<item id="140001228" name="Enfeebling Burst"/>
+		</items>
+		<items>
+			<item id="140001229" name="Chain of Suffering"/>
+		</items>
+		<items>
+			<item id="140001230" name="Summon Noble Energy" race="ELYOS"/>
+			<item id="140001231" name="Summon Noble Energy" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001232" name="Splendor of Rebirth"/>
+		</items>
+		<items>
+			<item id="140001233" name="Ripple of Purification"/>
+		</items>
+		<items>
+			<item id="140001234" name="Summon Healing Energy" race="ELYOS"/>
+			<item id="140001235" name="Summon Healing Energy" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053768" decomposable_name="Chanter Greater Stigma Bundle">
+		<items>
+			<item id="140001211" name="Blessing of Stone"/>
+		</items>
+		<items>
+			<item id="140001212" name="Healing Burst"/>
+		</items>
+		<items>
+			<item id="140001213" name="Word of Protection"/>
+		</items>
+		<items>
+			<item id="140001214" name="Blessing of Wind"/>
+		</items>
+		<items>
+			<item id="140001215" name="Disorienting Blow"/>
+		</items>
+		<items>
+			<item id="140001216" name="Mountain Crash"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053769" decomposable_name="Gunslinger Greater Stigma Bundle">
+		<items>
+			<item id="140001247" name="Hemorrhage Shot"/>
+		</items>
+		<items>
+			<item id="140001248" name="Pressurized Chamber"/>
+		</items>
+		<items>
+			<item id="140001249" name="Autoload"/>
+		</items>
+		<items>
+			<item id="140001250" name="Juggernaut Cannon"/>
+		</items>
+		<items>
+			<item id="140001251" name="Paralysis Cannon"/>
+		</items>
+		<items>
+			<item id="140001252" name="Stopping Power"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053770" decomposable_name="Aethertech Greater Stigma Bundle">
+		<items>
+			<item id="140001264" name="Aethercharged Steel"/>
+		</items>
+		<items>
+			<item id="140001265" name="Rain of Knuckles"/>
+		</items>
+		<items>
+			<item id="140001266" name="Debilating Blade"/>
+		</items>
+		<items>
+			<item id="140001267" name="Mobility Thrusters"/>
+		</items>
+		<items>
+			<item id="140001268" name="Trauma Plate Trigger"/>
+		</items>
+		<items>
+			<item id="140001269" name="Convulsion Beam"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053771" decomposable_name="Songweaver Greater Stigma Bundle">
+		<items>
+			<item id="140001281" name="Staggered Rest"/>
+		</items>
+		<items>
+			<item id="140001282" name="Paean of Pain"/>
+		</items>
+		<items>
+			<item id="140001283" name="Exultation"/>
+		</items>
+		<items>
+			<item id="140001284" name="Impassion"/>
+		</items>
+		<items>
+			<item id="140001285" name="Soothing Hymn"/>
+		</items>
+		<items>
+			<item id="140001286" name="Joyous Carol"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053772" decomposable_name="Gladiator Major Stigma Bundle">
+		<items>
+			<item id="140001118" name="Righteous Punishment"/>
+		</items>
+		<items>
+			<item id="140001119" name="Whirling Strike"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053773" decomposable_name="Templar Major Stigma Bundle">
+		<items>
+			<item id="140001134" name="Empyrean Providence"/>
+		</items>
+		<items>
+			<item id="140001135" name="Shieldburst"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053774" decomposable_name="Assassin Major Stigma Bundle">
+		<items>
+			<item id="140001151" name="Quickening Doom"/>
+		</items>
+		<items>
+			<item id="140001152" name="Scoundrel's Bond"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053775" decomposable_name="Ranger Major Stigma Bundle">
+		<items>
+			<item id="140001172" name="Agonizing Arrow"/>
+		</items>
+		<items>
+			<item id="140001173" name="Lightning Arrow"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053776" decomposable_name="Sorcerer Major Stigma Bundle">
+		<items>
+			<item id="140001191" name="Wintry Armor"/>
+		</items>
+		<items>
+			<item id="140001192" name="Glacial Shard"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053777" decomposable_name="Spiritmaster Major Stigma Bundle">
+		<items>
+			<item id="140001209" name="Infernal Blight"/>
+		</items>
+		<items>
+			<item id="140001210" name="Armor Spirit"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053778" decomposable_name="Cleric Major Stigma Bundle">
+		<items>
+			<item id="140001245" name="Call Lightning"/>
+		</items>
+		<items>
+			<item id="140001246" name="Benevolence"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053779" decomposable_name="Chanter Major Stigma Bundle">
+		<items>
+			<item id="140001226" name="Elemental Screen"/>
+		</items>
+		<items>
+			<item id="140001227" name="Numbling Blow"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053780" decomposable_name="Gunslinger Major Stigma Bundle">
+		<items>
+			<item id="140001262" name="Dazzling Fire"/>
+		</items>
+		<items>
+			<item id="140001263" name="Shellshock"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053781" decomposable_name="Aethertech Major Stigma Bundle">
+		<items>
+			<item id="140001279" name="Meteor Strike"/>
+		</items>
+		<items>
+			<item id="140001280" name="Kinetic Bulwark"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053782" decomposable_name="Songweaver Major Stigma Bundle">
+		<items>
+			<item id="140001296" name="Treble Cleave"/>
+		</items>
+		<items>
+			<item id="140001297" name="Chorus of Blessing"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053783" decomposable_name="Stigma Sack">
+		<items>
+			<item id="188053784" name="Stigma Bundle"/>
+		</items>
+		<items>
+			<item id="188053785" name="Greater Stigma Bundle"/>
+		</items>
+		<items>
+			<item id="188053786" name="Major Stigma Bundle"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053784" decomposable_name="Stigma Bundle">
+		<items>
+			<item id="140001109" name="Crippling Cut"/>
+		</items>
+		<items>
+			<item id="140001110" name="Draining Blow"/>
+		</items>
+		<items>
+			<item id="140001111" name="Earthquake Wave"/>
+		</items>
+		<items>
+			<item id="140001112" name="Magical Defense"/>
+		</items>
+		<items>
+			<item id="140001113" name="Ankle Snare"/>
+		</items>
+		<items>
+			<item id="140001114" name="Siegebreaker"/>
+		</items>
+		<items>
+			<item id="140001115" name="Lockdown"/>
+		</items>
+		<items>
+			<item id="140001116" name="Dauntless Spirit"/>
+		</items>
+		<items>
+			<item id="140001117" name="Howl"/>
+		</items>
+		<items>
+			<item id="140001126" name="Barricade of Steel"/>
+		</items>
+		<items>
+			<item id="140001127" name="Incite Rage"/>
+		</items>
+		<items>
+			<item id="140001128" name="Divine Fury"/>
+		</items>
+		<items>
+			<item id="140001129" name="Holy Shield"/>
+		</items>
+		<items>
+			<item id="140001130" name="Punishing Thrust"/>
+		</items>
+		<items>
+			<item id="140001131" name="Punishment"/>
+		</items>
+		<items>
+			<item id="140001132" name="Aether Armor"/>
+		</items>
+		<items>
+			<item id="140001133" name="Inquisitor's Blow"/>
+		</items>
+		<items>
+			<item id="140001142" name="Deadly Abandon"/>
+		</items>
+		<items>
+			<item id="140001143" name="Oath of Accuracy"/>
+		</items>
+		<items>
+			<item id="140001144" name="Shadow Walk"/>
+		</items>
+		<items>
+			<item id="140001145" name="Shadowfall"/>
+		</items>
+		<items>
+			<item id="140001146" name="Sigil Strike"/>
+		</items>
+		<items>
+			<item id="140001147" name="Venomous Strike"/>
+		</items>
+		<items>
+			<item id="140001148" name="Eye of Wrath"/>
+		</items>
+		<items>
+			<item id="140001149" name="Rune Knife"/>
+		</items>
+		<items>
+			<item id="140001150" name="Seaching Strike"/>
+		</items>
+		<items>
+			<item id="140001159" name="Focused Shots"/>
+		</items>
+		<items>
+			<item id="140001160" name="Trap of Slowing" race="ELYOS"/>
+			<item id="140001161" name="Trap of Slowing" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001162" name="Dilation Arrow"/>
+		</items>
+		<items>
+			<item id="140001163" name="Skybound Trap" race="ELYOS"/>
+			<item id="140001164" name="Skybound Trap" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001165" name="Blazing Trap" race="ELYOS"/>
+			<item id="140001166" name="Blazing Trap" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001167" name="Nature's Resolve"/>
+		</items>
+		<items>
+			<item id="140001168" name="Bow of Blessing"/>
+		</items>
+		<items>
+			<item id="140001169" name="Trap of Clairvoyance" race="ELYOS"/>
+			<item id="140001170" name="Trap of Clairvoyance" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001171" name="Arrow Deluge"/>
+		</items>
+		<items>
+			<item id="140001175" name="Arcane Thunderbolt"/>
+		</items>
+		<items>
+			<item id="140001179" name="Elemental Ward"/>
+		</items>
+		<items>
+			<item id="140001180" name="Storm Strike"/>
+		</items>
+		<items>
+			<item id="140001182" name="Ice Sheet" race="ELYOS"/>
+			<item id="140001183" name="Ice Sheet" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001186" name="Boon of Quickness"/>
+		</items>
+		<items>
+			<item id="140001187" name="Freeze"/>
+		</items>
+		<items>
+			<item id="140001188" name="Curse of Weakness"/>
+		</items>
+		<items>
+			<item id="140001189" name="Ice Harpoon"/>
+		</items>
+		<items>
+			<item id="140001190" name="Exchange Vitality"/>
+		</items>
+		<items>
+			<item id="140001200" name="Earthen Call"/>
+		</items>
+		<items>
+			<item id="140001201" name="Magic's Freedom"/>
+		</items>
+		<items>
+			<item id="140001202" name="Stone Scour"/>
+		</items>
+		<items>
+			<item id="140001203" name="Spirit Burn-to-Ashes"/>
+		</items>
+		<items>
+			<item id="140001204" name="Cyclone of Wrath"/>
+		</items>
+		<items>
+			<item id="140001205" name="Withering Gloom"/>
+		</items>
+		<items>
+			<item id="140001206" name="Spirit Wall of Protection"/>
+		</items>
+		<items>
+			<item id="140001207" name="Cloaking Word"/>
+		</items>
+		<items>
+			<item id="140001208" name="Enmity Swap"/>
+		</items>
+		<items>
+			<item id="140001236" name="Saving Grace"/>
+		</items>
+		<items>
+			<item id="140001237" name="Sacrifical Power"/>
+		</items>
+		<items>
+			<item id="140001238" name="Sympathetic Heal"/>
+		</items>
+		<items>
+			<item id="140001239" name="Blinding Light"/>
+		</items>
+		<items>
+			<item id="140001240" name="Retribution Lightning"/>
+		</items>
+		<items>
+			<item id="140001241" name="Power Sprint"/>
+		</items>
+		<items>
+			<item id="140001242" name="Reverse Condition"/>
+		</items>
+		<items>
+			<item id="140001243" name="Festering Wound"/>
+		</items>
+		<items>
+			<item id="140001244" name="Noble Grace"/>
+		</items>
+		<items>
+			<item id="140001217" name="Word of Inspiration"/>
+		</items>
+		<items>
+			<item id="140001218" name="Annihilation"/>
+		</items>
+		<items>
+			<item id="140001219" name="Word of Life"/>
+		</items>
+		<items>
+			<item id="140001220" name="Soul Lock"/>
+		</items>
+		<items>
+			<item id="140001221" name="Splash Swing"/>
+		</items>
+		<items>
+			<item id="140001222" name="Acceleration Cheer"/>
+		</items>
+		<items>
+			<item id="140001223" name="Leaping Flash"/>
+		</items>
+		<items>
+			<item id="140001224" name="Healing Conduit"/>
+		</items>
+		<items>
+			<item id="140001225" name="Rise"/>
+		</items>
+		<items>
+			<item id="140001253" name="Steady Fire"/>
+		</items>
+		<items>
+			<item id="140001254" name="Nature's Favor"/>
+		</items>
+		<items>
+			<item id="140001255" name="Frozen Blitz"/>
+		</items>
+		<items>
+			<item id="140001256" name="Sighting"/>
+		</items>
+		<items>
+			<item id="140001257" name="Power Grab"/>
+		</items>
+		<items>
+			<item id="140001258" name="Fiery Blast"/>
+		</items>
+		<items>
+			<item id="140001259" name="Shock and Awe"/>
+		</items>
+		<items>
+			<item id="140001260" name="Missle Guide"/>
+		</items>
+		<items>
+			<item id="140001261" name="Blazing Bombardment"/>
+		</items>
+		<items>
+			<item id="140001270" name="Particle Whip"/>
+		</items>
+		<items>
+			<item id="140001271" name="Drillbore"/>
+		</items>
+		<items>
+			<item id="140001272" name="Rip Slash"/>
+		</items>
+		<items>
+			<item id="140001273" name="Steel Storm"/>
+		</items>
+		<items>
+			<item id="140001274" name="Leeching Steel"/>
+		</items>
+		<items>
+			<item id="140001275" name="Ravager Cannon"/>
+		</items>
+		<items>
+			<item id="140001276" name="Life Support Trigger"/>
+		</items>
+		<items>
+			<item id="140001277" name="Aimbot Assist"/>
+		</items>
+		<items>
+			<item id="140001278" name="Aether Recharge"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053760" decomposable_name="Songweaver Stigma Bundle">
+		<items>
+			<item id="140001287" name="Mvt. 2: Summer"/>
+		</items>
+		<items>
+			<item id="140001288" name="Stingin Note"/>
+		</items>
+		<items>
+			<item id="140001289" name="Hymn of Rejuvenation"/>
+		</items>
+		<items>
+			<item id="140001290" name="Freestyle"/>
+		</items>
+		<items>
+			<item id="140001291" name="Half-Stop"/>
+		</items>
+		<items>
+			<item id="140001292" name="Inspiration"/>
+		</items>
+		<items>
+			<item id="140001293" name="Mvt. 3: Autumn"/>
+		</items>
+		<items>
+			<item id="140001294" name="Resonant Hymn"/>
+		</items>
+		<items>
+			<item id="1400012905" name="Combustible Cacophnoy"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053785" decomposable_name="Greater Stigma Bundle">
+		<items>
+			<item id="140001103" name="Sure Strike"/>
+		</items>
+		<items>
+			<item id="140001104" name="Spite Strike"/>
+		</items>
+		<items>
+			<item id="140001105" name="Sharp Strike"/>
+		</items>
+		<items>
+			<item id="140001106" name="Tendon Slice"/>
+		</items>
+		<items>
+			<item id="140001107" name="Exhausting Wave"/>
+		</items>
+		<items>
+			<item id="140001108" name="Severe Precision Cut"/>
+		</items>
+		<items>
+			<item id="140001120" name="Prayer of Resilience"/>
+		</items>
+		<items>
+			<item id="140001121" name="Magic Smash"/>
+		</items>
+		<items>
+			<item id="140001122" name="Prayer of Victory"/>
+		</items>
+		<items>
+			<item id="140001123" name="Divine Justice"/>
+		</items>
+		<items>
+			<item id="140001124" name="Punishing Wave"/>
+		</items>
+		<items>
+			<item id="140001125" name="Shield of Faith"/>
+		</items>
+		<items>
+			<item id="140001136" name="Apply Lethal Venom"/>
+		</items>
+		<items>
+			<item id="140001137" name="Agony Rune"/>
+		</items>
+		<items>
+			<item id="140001138" name="Sensory Boost"/>
+		</items>
+		<items>
+			<item id="140001139" name="Break Away"/>
+		</items>
+		<items>
+			<item id="140001140" name="Dash and Slash"/>
+		</items>
+		<items>
+			<item id="140001141" name="Lightning Slash"/>
+		</items>
+		<items>
+			<item id="140001153" name="Lethal Arrow"/>
+		</items>
+		<items>
+			<item id="140001154" name="Heart Shot"/>
+		</items>
+		<items>
+			<item id="140001155" name="Hunter's Might"/>
+		</items>
+		<items>
+			<item id="140001156" name="Gale Arrow"/>
+		</items>
+		<items>
+			<item id="140001157" name="Explosive Arrow"/>
+		</items>
+		<items>
+			<item id="140001158" name="Sharpen Arrows"/>
+		</items>
+		<items>
+			<item id="140001174" name="Sleeping Storm"/>
+		</items>
+		<items>
+			<item id="140001176" name="Summon Rock"/>
+		</items>
+		<items>
+			<item id="140001177" name="Flame Spray"/>
+		</items>
+		<items>
+			<item id="140001178" name="Illusion Storm"/>
+		</items>
+		<items>
+			<item id="140001181" name="Wind Cut Down"/>
+		</items>
+		<items>
+			<item id="140001184" name="Summon Whirlwind" race="ELYOS"/>
+			<item id="140001184" name="Summon Whirlwind" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001193" name="Shackle of Vulnerability"/>
+		</items>
+		<items>
+			<item id="140001194" name="Magic Implosion"/>
+		</items>
+		<items>
+			<item id="140001195" name="Infernal Pain"/>
+		</items>
+		<items>
+			<item id="140001196" name="Spirit Ruinous Offensive"/>
+		</items>
+		<items>
+			<item id="140001197" name="Summon Cyclon Servant" race="ELYOS"/>
+			<item id="140001198" name="Summon Cyclon Servant" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001199" name="Healing Spirit"/>
+		</items>
+		<items>
+			<item id="140001228" name="Enfeebling Burst"/>
+		</items>
+		<items>
+			<item id="140001229" name="Chain of Suffering"/>
+		</items>
+		<items>
+			<item id="140001230" name="Summon Noble Energy" race="ELYOS"/>
+			<item id="140001231" name="Summon Noble Energy" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001232" name="Splendor of Rebirth"/>
+		</items>
+		<items>
+			<item id="140001233" name="Ripple of Purification"/>
+		</items>
+		<items>
+			<item id="140001234" name="Summon Healing Energy" race="ELYOS"/>
+			<item id="140001235" name="Summon Healing Energy" race="ASMODIANS"/>
+		</items>
+		<items>
+			<item id="140001211" name="Blessing of Stone"/>
+		</items>
+		<items>
+			<item id="140001212" name="Healing Burst"/>
+		</items>
+		<items>
+			<item id="140001213" name="Word of Protection"/>
+		</items>
+		<items>
+			<item id="140001214" name="Blessing of Wind"/>
+		</items>
+		<items>
+			<item id="140001215" name="Disorienting Blow"/>
+		</items>
+		<items>
+			<item id="140001216" name="Mountain Crash"/>
+		</items>
+		<items>
+			<item id="140001247" name="Hemorrhage Shot"/>
+		</items>
+		<items>
+			<item id="140001248" name="Pressurized Chamber"/>
+		</items>
+		<items>
+			<item id="140001249" name="Autoload"/>
+		</items>
+		<items>
+			<item id="140001250" name="Juggernaut Cannon"/>
+		</items>
+		<items>
+			<item id="140001251" name="Paralysis Cannon"/>
+		</items>
+		<items>
+			<item id="140001252" name="Stopping Power"/>
+		</items>
+		<items>
+			<item id="140001264" name="Aethercharged Steel"/>
+		</items>
+		<items>
+			<item id="140001265" name="Rain of Knuckles"/>
+		</items>
+		<items>
+			<item id="140001266" name="Debilating Blade"/>
+		</items>
+		<items>
+			<item id="140001267" name="Mobility Thrusters"/>
+		</items>
+		<items>
+			<item id="140001268" name="Trauma Plate Trigger"/>
+		</items>
+		<items>
+			<item id="140001269" name="Convulsion Beam"/>
+		</items>
+		<items>
+			<item id="140001281" name="Staggered Rest"/>
+		</items>
+		<items>
+			<item id="140001282" name="Paean of Pain"/>
+		</items>
+		<items>
+			<item id="140001283" name="Exultation"/>
+		</items>
+		<items>
+			<item id="140001284" name="Impassion"/>
+		</items>
+		<items>
+			<item id="140001285" name="Soothing Hymn"/>
+		</items>
+		<items>
+			<item id="140001286" name="Joyous Carol"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053786" decomposable_name="Major Stigma Bundle">
+		<items>
+			<item id="140001118" name="Righteous Punishment"/>
+		</items>
+		<items>
+			<item id="140001119" name="Whirling Strike"/>
+		</items>
+		<items>
+			<item id="140001134" name="Empyrean Providence"/>
+		</items>
+		<items>
+			<item id="140001135" name="Shieldburst"/>
+		</items>
+		<items>
+			<item id="140001151" name="Quickening Doom"/>
+		</items>
+		<items>
+			<item id="140001152" name="Scoundrel's Bond"/>
+		</items>
+		<items>
+			<item id="140001172" name="Agonizing Arrow"/>
+		</items>
+		<items>
+			<item id="140001173" name="Lightning Arrow"/>
+		</items>
+		<items>
+			<item id="140001191" name="Wintry Armor"/>
+		</items>
+		<items>
+			<item id="140001192" name="Glacial Shard"/>
+		</items>
+		<items>
+			<item id="140001209" name="Infernal Blight"/>
+		</items>
+		<items>
+			<item id="140001210" name="Armor Spirit"/>
+		</items>
+		<items>
+			<item id="140001245" name="Call Lightning"/>
+		</items>
+		<items>
+			<item id="140001246" name="Benevolence"/>
+		</items>
+		<items>
+			<item id="140001226" name="Elemental Screen"/>
+		</items>
+		<items>
+			<item id="140001227" name="Numbling Blow"/>
+		</items>
+		<items>
+			<item id="140001262" name="Dazzling Fire"/>
+		</items>
+		<items>
+			<item id="140001263" name="Shellshock"/>
+		</items>
+		<items>
+			<item id="140001279" name="Meteor Strike"/>
+		</items>
+		<items>
+			<item id="140001280" name="Kinetic Bulwark"/>
+		</items>
+		<items>
+			<item id="140001296" name="Treble Cleave"/>
+		</items>
+		<items>
+			<item id="140001297" name="Chorus of Blessing"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053787" decomposable_name="Stigma Support Bundle" selectable="true">
@@ -32003,13 +34147,92 @@
 	</decomposable>
 	<decomposable item_id="188053790" decomposable_name="Drakenspire Depths Idian Bundle"/>
 	<decomposable item_id="188053791" decomposable_name="Drakenspire Depths Detachment's Supplies"/>
-	<decomposable item_id="188053792" decomposable_name="Illusion Godstone of Aetheric Field Bundle"/>
-	<decomposable item_id="188053793" decomposable_name="Rare Manastone of Aetheric Field Bundle"/>
-	<decomposable item_id="188053794" decomposable_name="Kahrun's Ancient Coin Bundle"/>
-	<decomposable item_id="188053795" decomposable_name="Kahrun's Ancient Coin Box"/>
-	<decomposable item_id="188053796" decomposable_name="Kahrun's Quality Ancient Coin Box"/>
-	<decomposable item_id="188053797" decomposable_name="Shining Ancient Manastone Bundle"/>
-	<decomposable item_id="188053798" decomposable_name="Shining Enchantment Stone Bundle"/>
+	<decomposable item_id="188053792" decomposable_name="Illusion Godstone of Aetheric Field Bundle">
+		<items>
+			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000164" name="Illusion Godstone: Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000165" name="Illusion Godstone: Fregion's Trick"/>
+		</items>
+		<items>
+			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack"/>
+		</items>
+		<items>
+			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality"/>
+		</items>
+		<items>
+			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity"/>
+		</items>
+		<items>
+			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness"/>
+		</items>
+		<items>
+			<item id="168000174" name="Illusion Godstone: Tiamat's Fury"/>
+		</items>
+		<items>
+			<item id="168000175" name="Illusion Godstone: Triniel's Rationality"/>
+		</items>
+		<items>
+			<item id="168000176" name="Illusion Godstone: Vaizel's Vow"/>
+		</items>
+		<items>
+			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret"/>
+		</items>
+		<items>
+			<item id="168000163" name="Illusion Godstone: Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention"/>
+		</items>
+		<items>
+			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy"/>
+		</items>
+		<items>
+			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance"/>
+		</items>
+		<items>
+			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053793" decomposable_name="Rare Manastone of Aetheric Field Bundle">
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053794" decomposable_name="Kahrun's Ancient Coin Bundle">
+		<items>
+			<item id="186000237" name="Ancient Coin"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053795" decomposable_name="Kahrun's Ancient Coin Box">
+		<items>
+			<item id="186000237" name="Ancient Coin" count="10"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053796" decomposable_name="Kahrun's Quality Ancient Coin Box">
+		<items>
+			<item id="186000237" name="Ancient Coin" count="100"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053797" decomposable_name="Shining Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053798" decomposable_name="Shining Enchantment Stone Bundle">
+		<items>
+			<item id="166000194" name="Delta Enchantment Stone" count="3"/>
+		</items>
+		<items>
+			<item id="166000195" name="Epsilon Enchantment Stone" count="3"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053799" decomposable_name="Stonespear Siege Reward Chest"/>
 	<decomposable item_id="188053800" decomposable_name="Stonespear Siege Runner-Up Reward Chest"/>
 	<decomposable item_id="188053801" decomposable_name="Stonespear Siege Champion Reward Chest"/>
@@ -32017,30 +34240,126 @@
 	<decomposable item_id="188053803" decomposable_name="Stonespear Siege Runner-Up Relic Chest"/>
 	<decomposable item_id="188053804" decomposable_name="Stonespear Siege Champion Relic Chest"/>
 	<decomposable item_id="188053805" decomposable_name="Stonespear Key Box"/>
-	<decomposable item_id="188053806" decomposable_name="Alabastor Order Mark Bundle"/>
-	<decomposable item_id="188053807" decomposable_name="Radiant Token Bundle"/>
-	<decomposable item_id="188053808" decomposable_name="Fortuneers Token Bundle"/>
-	<decomposable item_id="188053809" decomposable_name="Alabaster Order Mark Bundle"/>
-	<decomposable item_id="188053810" decomposable_name="Radiant Token Bundle"/>
-	<decomposable item_id="188053811" decomposable_name="Fortuneers Token Bundle"/>
-	<decomposable item_id="188053812" decomposable_name="Alabaster Order Mark Bundle"/>
-	<decomposable item_id="188053813" decomposable_name="Radiant Token Bundle"/>
-	<decomposable item_id="188053814" decomposable_name="Fortuneers Token Bundle"/>
-	<decomposable item_id="188053815" decomposable_name="Alabaster Order Mark Bundle"/>
-	<decomposable item_id="188053816" decomposable_name="Radiant Token Bundle"/>
-	<decomposable item_id="188053817" decomposable_name="Fortuneers Token Bundle"/>
-	<decomposable item_id="188053818" decomposable_name="Aetheric Field Token Bundle"/>
-	<decomposable item_id="188053819" decomposable_name="Crusader Token Bundle"/>
-	<decomposable item_id="188053820" decomposable_name="Daemon Token Bundle"/>
-	<decomposable item_id="188053821" decomposable_name="Aetheric Field Token Bundle"/>
-	<decomposable item_id="188053822" decomposable_name="Crusader Token Bundle"/>
-	<decomposable item_id="188053823" decomposable_name="Daemon Token Bundle"/>
-	<decomposable item_id="188053824" decomposable_name="Aetheric Field Token Bundle"/>
-	<decomposable item_id="188053825" decomposable_name="Crusader Token Bundle"/>
-	<decomposable item_id="188053826" decomposable_name="Daemon Token Bundle"/>
-	<decomposable item_id="188053827" decomposable_name="Aetheric Field Token Bundle"/>
-	<decomposable item_id="188053828" decomposable_name="Crusader Token Bundle"/>
-	<decomposable item_id="188053829" decomposable_name="Daemon Token Bundle"/>
+	<decomposable item_id="188053806" decomposable_name="Alabastor Order Mark Bundle">
+		<items>
+			<item id="186000100" name="Progress Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053807" decomposable_name="Radiant Token Bundle">
+		<items>
+			<item id="186000101" name="Radiant Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053808" decomposable_name="Fortuneers Token Bundle">
+		<items>
+			<item id="186000102" name="Fortuneers Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053809" decomposable_name="Alabaster Order Mark Bundle">
+		<items>
+			<item id="186000100" name="Progress Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053810" decomposable_name="Radiant Token Bundle">
+		<items>
+			<item id="186000101" name="Radiant Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053811" decomposable_name="Fortuneers Token Bundle">
+		<items>
+			<item id="186000102" name="Fortuneers Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053812" decomposable_name="Alabaster Order Mark Bundle">
+		<items>
+			<item id="186000100" name="Progress Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053813" decomposable_name="Radiant Token Bundle">
+		<items>
+			<item id="186000101" name="Radiant Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053814" decomposable_name="Fortuneers Token Bundle">
+		<items>
+			<item id="186000102" name="Fortuneers Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053815" decomposable_name="Alabaster Order Mark Bundle">
+		<items>
+			<item id="186000100" name="Progress Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053816" decomposable_name="Radiant Token Bundle">
+		<items>
+			<item id="186000101" name="Radiant Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053817" decomposable_name="Fortuneers Token Bundle">
+		<items>
+			<item id="186000102" name="Fortuneers Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053818" decomposable_name="Aetheric Field Token Bundle">
+		<items>
+			<item id="186000103" name="Ward Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053819" decomposable_name="Crusader Token Bundle">
+		<items>
+			<item id="186000104" name="Crusader Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053820" decomposable_name="Daemon Token Bundle">
+		<items>
+			<item id="186000105" name="Daemon Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053821" decomposable_name="Aetheric Field Token Bundle">
+		<items>
+			<item id="186000103" name="Ward Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053822" decomposable_name="Crusader Token Bundle">
+		<items>
+			<item id="186000104" name="Crusader Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053823" decomposable_name="Daemon Token Bundle">
+		<items>
+			<item id="186000105" name="Daemon Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053824" decomposable_name="Aetheric Field Token Bundle">
+		<items>
+			<item id="186000103" name="Ward Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053825" decomposable_name="Crusader Token Bundle">
+		<items>
+			<item id="186000104" name="Crusader Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053826" decomposable_name="Daemon Token Bundle">
+		<items>
+			<item id="186000105" name="Daemon Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053827" decomposable_name="Aetheric Field Token Bundle">
+		<items>
+			<item id="186000103" name="Ward Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053828" decomposable_name="Crusader Token Bundle">
+		<items>
+			<item id="186000104" name="Crusader Token"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053829" decomposable_name="Daemon Token Bundle">
+		<items>
+			<item id="186000105" name="Daemon Token"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053830" decomposable_name="Ultimate Gold Penguin Transformation Candy Box"/>
 	<decomposable item_id="188053831" decomposable_name="Ultimate Green Penguin Transformation Candy Box"/>
 	<decomposable item_id="188053832" decomposable_name="Ultimate Red Penguin Transformation Candy Box"/>
@@ -32158,8 +34477,16 @@
 	<decomposable item_id="188053901" decomposable_name="Protectorate Crate Bundle"/>
     <decomposable item_id="188053902" decomposable_name="Protectorate Chest Bundle"/>
 	<decomposable item_id="188053903" decomposable_name="Honorable Equipment of Conquest Box"/>
-	<decomposable item_id="188053904" decomposable_name="Faded Middle Grade Composite Manastone Bundle"/>
-	<decomposable item_id="188053905" decomposable_name="Faded High Grade Composite Manastone Bundle"/>
+	<decomposable item_id="188053904" decomposable_name="Faded Middle Grade Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053905" decomposable_name="Faded High Grade Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053906" decomposable_name="Kind Shugo Transformation Candy Box"/>
 	<decomposable item_id="188053909" decomposable_name="Large Ascension Water Box"/>
 	<decomposable item_id="188053910" decomposable_name="Multiple Option Tuning Scroll Box for Mythic Class - Weapon"/>
