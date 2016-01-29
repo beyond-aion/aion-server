@@ -61,7 +61,10 @@
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
 		<gd_npc_groups>
+			<gd_npc_group group="AGRINT_GHOSTELIM" />
+			<gd_npc_group group="AGRINT_GUARDIAN" />
 			<gd_npc_group group="AGRINT" />
+			<gd_npc_group group="FAKETREE" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
