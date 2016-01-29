@@ -10329,4 +10329,47 @@
 			<gd_item id="123001124" name="Solitaire Sash" />
 		</gd_items>
 	</gd_rule>
+	<!-- Accessory (Lepharist Headgear) -->
+	<gd_rule rule_name="Accessory (Rare)" base_chance="0.5" min_diff="-4" max_diff="5">
+		<gd_npc_groups>
+			<gd_npc_group group="LEPHAR"/>
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 10 -->
+			<gd_item id="125001806" name="Novice Lepharist White Headband" />
+			<gd_item id="125001811" name="Novice Lepharist Red Headband" />
+			<gd_item id="125001816" name="Novice Lepharist Hood" />
+			<gd_item id="125001821" name="Novice Lepharist Laurel" />
+			<gd_item id="125001826" name="Novice Lepharist Mask" />
+			<gd_item id="125001831" name="Novice Lepharist Veil" />
+			<!-- Level 20 -->
+			<gd_item id="125001807" name="Experienced Lepharist White Headband" />
+			<gd_item id="125001812" name="Experienced Lepharist Red Headband" />
+			<gd_item id="125001817" name="Experienced Lepharist Hood" />
+			<gd_item id="125001822" name="Experienced Lepharist Laurel" />
+			<gd_item id="125001827" name="Experienced Lepharist Mask" />
+			<gd_item id="125001832" name="Experienced Lepharist Veil" />
+			<!-- Level 30 -->
+			<gd_item id="125001808" name="Veteran Lepharist White Headband" />
+			<gd_item id="125001813" name="Veteran Lepharist Red Headband" />
+			<gd_item id="125001818" name="Veteran Lepharist Hood" />
+			<gd_item id="125001823" name="Veteran Lepharist Laurel" />
+			<gd_item id="125001828" name="Veteran Lepharist Mask" />
+			<gd_item id="125001833" name="Veteran Lepharist Veil" />
+			<!-- Level 40 -->
+			<gd_item id="125001809" name="Advanced Lepharist White Headband" />
+			<gd_item id="125001814" name="Advanced Lepharist Red Headband" />
+			<gd_item id="125001819" name="Advanced Lepharist Hood" />
+			<gd_item id="125001824" name="Advanced Lepharist Laurel" />
+			<gd_item id="125001829" name="Advanced Lepharist Mask" />
+			<gd_item id="125001834" name="Advanced Lepharist Veil" />
+			<!-- Level 50 -->
+			<gd_item id="125001810" name="Lepharist Executive's White Headband" />
+			<gd_item id="125001815" name="Lepharist Executive's Red Headband" />
+			<gd_item id="125001820" name="Lepharist Executive's Hood" />
+			<gd_item id="125001825" name="Lepharist Executive's Laurel" />
+			<gd_item id="125001830" name="Lepharist Executive's Mask" />
+			<gd_item id="125001835" name="Lepharist Executive's Veil" />
+		</gd_items>
+	</gd_rule>
 </global_rules>

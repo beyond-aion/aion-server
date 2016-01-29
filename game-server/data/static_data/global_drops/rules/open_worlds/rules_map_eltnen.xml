@@ -17,25 +17,6 @@
 			<gd_item id="100000125" name="Fire Sword"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Advanced Lepharist Mask" base_chance="12.5" min_diff="-4" max_diff="4">
-		<gd_worlds>
-			<gd_world wd_type="ELYSEA"/>
-		</gd_worlds>
-		<gd_npc_groups>
-			<gd_npc_group group="LEPHAR"/>
-		</gd_npc_groups>
-		<gd_items>
-			<gd_item id="125001808" name="Veteran Lepharist White Headband"/>
-			<gd_item id="125001818" name="Veteran Lepharist Hood"/>
-			<gd_item id="125001819" name="Advanced Lepharist Hood"/>
-			<gd_item id="125001827" name="Experienced Lepharist Mask"/>
-			<gd_item id="125001828" name="Veteran Lepharist Mask"/>
-			<gd_item id="125001829" name="Advanced Lepharist Mask"/>
-			<gd_item id="125001832" name="Experienced Lepharist Veil"/>
-			<gd_item id="125001833" name="Veteran Lepharist Veil"/>
-			<gd_item id="125001834" name="Advanced Lepharist Veil"/>
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Krall Molar" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" name="Eltnen"/>
@@ -1225,17 +1206,6 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125000951" name="Kaidan Headband"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="1">
-		<gd_maps>
-			<gd_map map_id="210020000" name="Eltnen"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="211667" name="Bastion Worker"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125001813" name="Veteran Lepharist Red Headband"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headband (Rare)" base_chance="33">
