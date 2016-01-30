@@ -53,14 +53,6 @@
 		<spawn npc_id="236300">
 			<spot x="188.17" y="414.06" z="262" h="87"/>
 		</spawn>
-		<!-- Captain Xasta -->
-		<spawn npc_id="236271">
-			<spot x="521.32953" y="499.49142" z="181.94623" h="27"/>
-		</spawn>
-		<!-- Captain Xasta -->
-		<spawn npc_id="236296">
-			<spot x="354.52878" y="596.26172" z="148.29788" h="100"/>
-		</spawn>
 		<!-- Collapsed Stone Wall -->
 		<spawn npc_id="701097">
 			<spot x="243.4088" y="717.4462" z="164.4402" static_id="34" />

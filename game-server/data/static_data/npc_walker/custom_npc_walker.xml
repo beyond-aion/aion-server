@@ -4561,4 +4561,18 @@
 		<routestep step="2" x="652.27" y="898.42" z="1600.77"/>
 		<routestep step="3" x="641.06" y="889.55" z="1600.63" stop="true"/>
 	</walker_template>
+	<walker_template route_id="300620000_Xasta_Path" pool="1">
+		<routestep step="1" x="520.72" y="499.37" z="179.80"/>
+		<routestep step="2" x="509.81" y="484.69" z="179.95"/>
+		<routestep step="3" x="488.13" y="462.96" z="174.35"/>
+		<routestep step="4" x="473.25" y="454.97" z="173.48"/>
+		<routestep step="5" x="455.36" y="446.50" z="170.65"/>
+		<routestep step="6" x="440.31" y="449.88" z="169.93"/>
+		<routestep step="7" x="430.72" y="468.22" z="169.03"/>
+		<routestep step="8" x="416.22" y="491.31" z="166.99"/>
+		<routestep step="9" x="400.31" y="516.80" z="166.54"/>
+		<routestep step="10" x="381.39" y="543.90" z="164.83"/>
+		<routestep step="11" x="365.32" y="574.07" z="152.73"/>
+		<routestep step="12" x="353.35" y="596.23" z="144.57" stop="true"/>
+	</walker_template>
 </npc_walker>
