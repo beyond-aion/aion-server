@@ -1,4 +1,5 @@
-# Aion 4.7.5 Server Emulator
+![Aion 4.8 Banner](https://github.com/beyond-aion/aion-server/assets/1169307/494205be-399a-4e2e-8435-1f0774d92262)
+# Aion 4.8 Server Emulator
 
 > [!NOTE]  
 > **The history of this repository has been rewritten to meet GitHub's file size requirements.**  

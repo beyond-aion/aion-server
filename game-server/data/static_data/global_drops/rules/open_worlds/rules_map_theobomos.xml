@@ -372,17 +372,6 @@
 			<gd_item id="125001549" name="Sinorel's Helm" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="210060000" name="Theobomos" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="213928" name="Fork Ear Rokes" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125001832" name="Experienced Lepharist Veil" />
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Belt (Legend)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210060000" name="Theobomos" />

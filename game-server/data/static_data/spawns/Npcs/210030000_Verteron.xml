@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="210030000">
 		<!-- Abandoned Cargo -->
 		<spawn npc_id="210085" respawn_time="295">
@@ -91,7 +91,7 @@
 			<spot x="1339.78" y="2204.05" z="142.734" h="100"/>
 		</spawn>
 		<!-- Aishi -->
-		<spawn npc_id="210313" respawn_time="180">
+		<spawn npc_id="210313" respawn_time="295" pool="1">
 			<spot x="2143.8447" y="1974.9736" z="132.692" h="113"/>
 			<spot x="2166.8689" y="1756.0006" z="132.692" h="100"/>
 			<spot x="2203.04" y="1986.35" z="132.692" h="67"/>
@@ -208,7 +208,7 @@
 			<spot x="1328.56" y="2183.68" z="143.5" h="120" walker_id="4D45E6CDB963CCEDF052BA1A4ED9466CB50ECBA1"/>
 		</spawn>
 		<!-- Blindeye -->
-		<spawn npc_id="210310" respawn_time="180">
+		<spawn npc_id="210310" respawn_time="295">
 			<spot x="2021.42" y="1024.34" z="140.25" h="16"/>
 		</spawn>
 		<!-- Broken Rock Kalgolem -->
@@ -315,7 +315,7 @@
 			<spot x="2116.24" y="634.439" z="100.129" h="74"/>
 		</spawn>
 		<!-- Cavil -->
-		<spawn npc_id="210316" respawn_time="180">
+		<spawn npc_id="210316" respawn_time="295">
 			<spot x="1145.77" y="1861.34" z="105.5" h="60"/>
 		</spawn>
 		<!-- Cerios -->
@@ -968,7 +968,7 @@
 			<spot x="1977.17" y="2632.55" z="301.336" h="5"/>
 		</spawn>
 		<!-- Eninte -->
-		<spawn npc_id="210743" respawn_time="180">
+		<spawn npc_id="210743" respawn_time="295">
 			<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
 			<spot x="1977.17" y="2632.55" z="301.336" h="18"/>
 		</spawn>
@@ -1201,7 +1201,7 @@
 			<spot x="1581.31" y="1025.92" z="98.9141" h="41"/>
 		</spawn>
 		<!-- Hakka the Bigmouth -->
-		<spawn npc_id="210308" respawn_time="180">
+		<spawn npc_id="210308" respawn_time="295">
 			<spot x="1926.23" y="1058.85" z="135.125" h="86"/>
 		</spawn>
 		<!-- Hanontus -->
@@ -1357,7 +1357,7 @@
 			<spot x="1244.48" y="2208.92" z="149.125" h="15"/>
 		</spawn>
 		<!-- Kumbacha the Shaman -->
-		<spawn npc_id="210312" respawn_time="180">
+		<spawn npc_id="210312" respawn_time="295">
 			<spot x="2071.07" y="1114.8" z="129.128" h="117"/>
 		</spawn>
 		<!-- Laborer -->
@@ -1927,7 +1927,7 @@
 			<spot x="1245.01" y="2165.66" z="151.671" h="15"/>
 		</spawn>
 		<!-- Scout Takata -->
-		<spawn npc_id="210314" respawn_time="180">
+		<spawn npc_id="210314" respawn_time="295">
 			<spot x="2214.84" y="1301.32" z="173.5" h="15"/>
 		</spawn>
 		<!-- Scrapper Kuntura -->
@@ -1935,7 +1935,7 @@
 			<spot x="2140.56" y="939.847" z="139.5" h="103"/>
 		</spawn>
 		<!-- Scrapper Tunkara -->
-		<spawn npc_id="210309" respawn_time="180">
+		<spawn npc_id="210309" respawn_time="295">
 			<spot x="1855.6108" y="757.2479" z="143.8275" h="26"/>
 		</spawn>
 		<!-- Sea Starturtle -->
@@ -2026,7 +2026,7 @@
 			<spot x="1201.0054" y="1761.4692" z="104.2182" h="23"/>
 		</spawn>
 		<!-- Shaman Chankaki -->
-		<spawn npc_id="210296" respawn_time="295">
+		<spawn npc_id="210296" respawn_time="295" pool="1">
 			<spot x="645.19" y="2653.58" z="240.875" h="60"/>
 			<spot x="658.31" y="2560.33" z="226.75" h="77"/>
 			<spot x="726.62" y="2587.04" z="222.375" h="96"/>
@@ -2189,7 +2189,7 @@
 			<spot x="2582.47" y="1647.07" z="132.212" h="42"/>
 		</spawn>
 		<!-- Smackstopper Tambaku -->
-		<spawn npc_id="210315" respawn_time="180">
+		<spawn npc_id="210315" respawn_time="295">
 			<spot x="2418.79" y="1176.97" z="182.289" h="7"/>
 		</spawn>
 		<!-- Small Frillneck Egg -->
@@ -2724,7 +2724,7 @@
 			<spot x="2281.7383" y="1247.0417" z="158.2500" h="93"/>
 		</spawn>
 		<!-- Tursin Smackstopper Chief -->
-		<spawn npc_id="210352" respawn_time="180">
+		<spawn npc_id="210352" respawn_time="295">
 			<spot x="2608.9" y="1116.44" z="196.21" h="22"/>
 		</spawn>
 		<!-- Tursin Senior Command Soldier -->
@@ -2789,7 +2789,7 @@
 			<spot x="2483.22" y="1547.31" z="138.799" h="21"/>
 		</spawn>
 		<!-- Tursin Wallarm Shaman -->
-		<spawn npc_id="210353" respawn_time="180">
+		<spawn npc_id="210353" respawn_time="295">
 			<spot x="2609.78" y="1122.8" z="194.837" h="115"/>
 		</spawn>
 		<!-- Une -->
@@ -3256,7 +3256,7 @@
 			<spot x="1708.94" y="1490.35" z="121.668" h="60"/>
 		</spawn>
 		<!-- Wind Spirit Shalph -->
-		<spawn npc_id="210298" respawn_time="180">
+		<spawn npc_id="210298" respawn_time="295">
 			<spot x="2204.75" y="1666.94" z="122.547" h="18"/>
 		</spawn>
 		<!-- Zephyros -->
@@ -3264,7 +3264,7 @@
 			<spot x="2369.89" y="851.68" z="102.125" h="45"/>
 		</spawn>
 		<!-- Ziloota the Seer -->
-		<spawn npc_id="210697" respawn_time="180">
+		<spawn npc_id="210697" respawn_time="295">
 			<spot x="2303.4" y="1187.8" z="167.875" h="70"/>
 		</spawn>
 		<!-- Harean -->

@@ -1688,7 +1688,7 @@
 			<spot x="2747.15" y="1656.56" z="251.787" h="63" random_walk="10"/>
 		</spawn>
 		<!-- High Spellshifter Abija -->
-		<spawn npc_id="210751" respawn_time="180">
+		<spawn npc_id="210751" respawn_time="295">
 			<spot x="1931.98" y="2389.17" z="301.07062" h="64" walker_id="FE38ACC711A7982946C6F70AA6A52E092EDC803C"/>
 		</spawn>
 		<!-- Hunmir -->

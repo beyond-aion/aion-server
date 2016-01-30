@@ -13,15 +13,12 @@ import com.aionemu.gameserver.services.siegeservice.Siege;
 public class SiegeProtectorNpcAI2 extends SiegeNpcAI2 {
 
 	@Override
-  public void handleBackHome() {
-	  super.handleBackHome();
-	  if (getOwner().getAbyssNpcType() != AbyssNpcType.BOSS)
-	  	return;
-	  SiegeNpc owner = getOwner() instanceof SiegeNpc ? (SiegeNpc) getOwner() : null;
-	  if (owner == null)
-	  	return;
-	  Siege<?> siege = SiegeService.getInstance().getSiege(owner.getSiegeId());
-	  if (siege != null)
-		 siege.getSiegeCounter().clearDamageCounters();
-  }
+	public void handleBackHome() {
+		super.handleBackHome();
+		if (getOwner().getAbyssNpcType() != AbyssNpcType.BOSS)
+			return;
+		Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
+		if (siege != null)
+			siege.getSiegeCounter().clearDamageCounters();
+	}
 }
