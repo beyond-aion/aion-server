@@ -115,24 +115,20 @@ public class PvpService {
 			int kills = winner.getAbyssRank().getAllKill();
 			if (kills % 1000 == 0)
 				sendBountyReward(winner, BountyType.PER_X_KILLS, 1000);
-			else if (kills % 500 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 500);
-			else if (kills % 250 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 250);
-			else if (kills % 100 == 0)
+			if (kills % 100 == 0)
 				sendBountyReward(winner, BountyType.PER_X_KILLS, 100);
-			else if (kills % 50 == 0)
+			if (kills % 50 == 0)
 				sendBountyReward(winner, BountyType.PER_X_KILLS, 50);
-			else if (kills % 20 == 0)
+			if (kills % 20 == 0)
 				sendBountyReward(winner, BountyType.PER_X_KILLS, 20);
-			// Check Weekly Kills for Bounty Reward
+			/*// Check Weekly Kills for Bounty Reward
 			kills = winner.getAbyssRank().getWeeklyKill();
 			if (kills % 100 == 0)
 				sendBountyReward(winner, BountyType.WEEKLY_KILLS, 100);
 			// Check Daily Kills for Bounty Reward
 			kills = winner.getAbyssRank().getDailyKill();
 			if (kills % 100 == 0)
-				sendBountyReward(winner, BountyType.DAILY_KILLS, 100);
+				sendBountyReward(winner, BountyType.DAILY_KILLS, 100); */
 		}
 
 		// Announce that player has died.
