@@ -10,9 +10,13 @@ import java.util.TreeMap;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.LegionDominionLocationTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
+import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastSortedMap;
 import javolution.util.FastTable;
 
 /**
@@ -30,7 +34,6 @@ public class LegionDominionLocation {
 	private String zoneName;
 	private Map<Integer, LegionDominionParticipantInfo> participantInfo = new TreeMap<>();
 	private List<Integer> legionsSortedByrank = new FastTable<>();
-	private FastSortedMap<Integer, Integer> info;
 	
 	public LegionDominionLocation(LegionDominionLocationTemplate temp) {
 		this.id = temp.getId();
@@ -38,13 +41,6 @@ public class LegionDominionLocation {
 		this.race = temp.getRace();
 		this.zoneName = temp.getZone() + "_" + temp.getWorldId();
 		this.nameId = temp.getNameId();
-	}
-
-	private synchronized void updateRank() {
-		legionsSortedByrank.clear();
-		for (LegionDominionParticipantInfo info : participantInfo.values()) {
-			
-		}
 	}
 	
 	public int getLegionId() {
@@ -100,17 +96,9 @@ public class LegionDominionLocation {
 	
 	public void setParticipantInfo(Map<Integer, LegionDominionParticipantInfo> info) {
 		participantInfo = info;
-		updateRank();
+		//updateRank();
 	}
 	
-	public void setRank() {
-		
-	}
-
-	/**
-	 * @param legionId2
-	 * @return
-	 */
 	public boolean join(int legionId) {
 		if (participantInfo.containsKey(legionId)) {
 			return false;
@@ -151,5 +139,23 @@ public class LegionDominionLocation {
 			}
 		}
 		return info;
+	}
+
+	public LegionDominionParticipantInfo getParticipantInfo(int legionId) {
+		if (!participantInfo.isEmpty() && participantInfo.containsKey(legionId)) {
+			return participantInfo.get(legionId);
+		}
+		return null;
+	}
+
+	public void updateRanking() {
+		for (LegionDominionParticipantInfo info : participantInfo.values()) {
+			Legion legion = LegionService.getInstance().getLegion(info.getLegionId());
+			if (legion != null) {
+				for (Player p : legion.getOnlineLegionMembers()) {
+					PacketSendUtility.sendPacket(p, new SM_LEGION_DOMINION_RANK(id));
+				}
+			}
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class SM_LEGION_DOMINION_RANK extends AionServerPacket {
 		if (loc != null) {
 			writeD(id);
 			Legion legion = con.getActivePlayer().getLegion();
-			if (legion != null && loc.getParticipantInfo().containsKey(legion.getLegionId())) {
+			if (legion != null && loc.getParticipantInfo().containsKey(legion.getLegionId()) && loc.getParticipantInfo().get(legion.getLegionId()).getPoints() > 0) {
 				LegionDominionParticipantInfo curLegion = loc.getParticipantInfo().get(legion.getLegionId());
 				List<LegionDominionParticipantInfo> pInfo = loc.getSortedTop25Participants(curLegion);
 				writeC(pInfo.indexOf(curLegion) + 1);
