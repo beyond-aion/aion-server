@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kill_bounties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="kill_bounties.xsd">
+	<kill_bounty type="PER_X_KILLS" kill_count="1000">
+		<bounty item_id="168310018" count="1"/> <!-- Major Blessed Augment -->
+	</kill_bounty>
+	<kill_bounty type="PER_X_KILLS" kill_count="100">
+		<bounty item_id="188053609" count="3"/> <!-- Lv60 Composit Manastone Bundle -->
+		<bounty item_id="188054366" count="2"/> <!-- Epic Ancient Manastone Bundle -->
+		<bounty item_id="166030005" count="5"/> <!-- Tempering Solution -->
+		<bounty item_id="166500002" count="5"/> <!-- Amplification Stone -->
+	</kill_bounty>
+	<kill_bounty type="PER_X_KILLS" kill_count="50">
+		<bounty item_id="186000242" count="3"/> <!-- Ceramium Medal -->
+		<bounty item_id="186000236" count="15"/> <!-- Blood Mark -->
+		<bounty item_id="166020000" count="3"/> <!-- Omega Enchantment Stone -->
+		<bounty item_id="188052481" count="5"/> <!-- Balaur Serum Bundle -->
+	</kill_bounty>
 	<kill_bounty type="PER_X_KILLS" kill_count="20">
-		<bounty item_id="186000147" count="1"/>
-		<bounty item_id="168310018" count="1"/>
-		<bounty item_id="188053609" count="1"/>
-	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="10">
-		<bounty item_id="168310018" count="1"/>
-		<bounty item_id="188053609" count="1"/>
-	</kill_bounty>
-	<kill_bounty type="DAILY_KILLS" kill_count="10">
-		<bounty item_id="166030005" count="3"/>
-		<bounty item_id="166500002" count="3"/>
+		<bounty item_id="186000247" count="1"/> <!-- Major Danuar Relic -->
+		<bounty item_id="186000147" count="1"/> <!-- Mithril Medal -->
+		<bounty item_id="162000137" count="5"/> <!-- Divine Life Serum -->
+		<bounty item_id="162000139" count="5"/> <!-- Divine Mana Serum -->
+		<bounty item_id="162000141" count="5"/> <!-- Divine Flight Serum -->
 	</kill_bounty>
 </kill_bounties>

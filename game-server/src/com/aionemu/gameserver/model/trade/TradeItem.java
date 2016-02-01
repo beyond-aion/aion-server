@@ -1,57 +1,31 @@
 package com.aionemu.gameserver.model.trade;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class TradeItem {
 
-	private int itemId;
-	private long count;
-	private ItemTemplate itemTemplate;
+	private final int itemId;
+	protected long count;
 
 	public TradeItem(int itemId, long count) {
-		super();
 		this.itemId = itemId;
 		this.count = count;
 	}
 
-	/**
-	 * @return the itemTemplate
-	 */
 	public ItemTemplate getItemTemplate() {
-		return itemTemplate;
+		return DataManager.ITEM_DATA.getItemTemplate(itemId);
 	}
 
-	/**
-	 * @param itemTemplate
-	 *          the itemTemplate to set
-	 */
-	public void setItemTemplate(ItemTemplate itemTemplate) {
-		this.itemTemplate = itemTemplate;
-	}
-
-	/**
-	 * @return the itemId
-	 */
 	public int getItemId() {
 		return itemId;
 	}
 
-	/**
-	 * @return the count
-	 */
 	public long getCount() {
 		return count;
-	}
-
-	/**
-	 * This method will decrease the current count
-	 */
-	public void decreaseCount(long decreaseCount) {
-		// TODO probably <= count ?
-		if (decreaseCount < count)
-			this.count = count - decreaseCount;
 	}
 }

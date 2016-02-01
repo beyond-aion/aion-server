@@ -74,17 +74,15 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			switch (tradeActionId) {
 				case 0:// private store
 				case 1:// sell to shop
-				case 17:// sell to pet
-					tradeList.addSellItem(itemId, count);
-					break;
-				case 2:// repurchase
-					repurchaseList.addRepurchaseItem(player, itemId, count);
-					break;
 				case 13:// buy from shop
 				case 14:// buy from abyss shop
 				case 15:// buy from reward shop
 				case 16:// buy from general shop
-					tradeList.addBuyItem(itemId, count);
+				case 17:// sell to pet
+					tradeList.addItem(itemId, count);
+					break;
+				case 2:// repurchase
+					repurchaseList.addRepurchaseItem(player, itemId, count);
 					break;
 			}
 		}

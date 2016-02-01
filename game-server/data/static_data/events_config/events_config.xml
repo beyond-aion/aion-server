@@ -3701,7 +3701,7 @@
 		</event>
 		<event name="Frozen Magic Event" start="2014-12-24T00:00:00+00:00" end="2015-01-14T00:00:00+00:00">
 			<quests>
-				<maintainable>80575;80576;80577;80578;80579;80580</maintainable>
+				<maintainable>80576;80579</maintainable>
 			</quests>
 			<spawns>
 				<!-- Sanctum -->
@@ -3743,6 +3743,71 @@
 					</spawn>
 				</spawn_map>
 			</spawns>
+			<event_drops>
+				<gd_rule rule_name="Snowball (Single)" base_chance="1" fixed_chance="true">
+					<gd_items>
+						<gd_item id="188052986" name="+1 Snowball" />
+					</gd_items>
+					<gd_maps>
+						<gd_map map_id="210070000" name="Cygnea" />
+						<gd_map map_id="220080000" name="Enshar" />
+						<gd_map map_id="600090000" name="Kaldor" />
+						<gd_map map_id="600100000" name="Levinshor" />
+					</gd_maps>
+					<gd_ratings>
+						<gd_rating rating="NORMAL" />
+						<gd_rating rating="ELITE" />
+						<gd_rating rating="HERO" />
+					</gd_ratings>
+				</gd_rule>
+				<gd_rule rule_name="Snowball (Shared)" base_chance="100" each_member="true">
+					<gd_items>
+						<gd_item id="188052986" name="+1 Snowball" />
+					</gd_items>
+					<gd_maps>
+						<gd_map map_id="300240000" name="Aturam_Sky_Fortress" />
+						<gd_map map_id="300280000" name="Rentus_Base" />
+						<gd_map map_id="300510000" name="Tiamat_Stronghold" />
+						<gd_map map_id="300520000" name="Dragon_Lords_Refuge" />
+						<gd_map map_id="300590000" name="Ophidan_Bridge" />
+						<gd_map map_id="300610000" name="Raksang_Ruins" />
+						<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+						<!-- <gd_map map_id="300630000" name="Anguished_Dragon_Lords_Refuge" /> -->
+						<gd_map map_id="300800000" name="Infinity_Shard" />
+						<gd_map map_id="301110000" name="Danuar_Reliquary" />
+						<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+						<!-- <gd_map map_id="301140000" name="Seized_Danuar_Sanctuary" /> -->
+						<gd_map map_id="301230000" name="Illuminary_Obelisk" />
+						<gd_map map_id="301270000" name="Linkgate_Foundry" />
+						<!-- <gd_map map_id="301360000" name="Infernal_Danuar_Reliquary" /> -->
+						<gd_map map_id="301370000" name="Infernal_Illuminary_Obelisk" />
+						<gd_map map_id="301380000" name="Danuar_Sanctuary" />
+						<!-- <gd_map map_id="301390000" name="Drakenspire_Depths" /> -->
+					</gd_maps>
+					<gd_npcs>
+						<gd_npc npc_id="217376" name="Ahunatal Shadowslip" />
+						<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+						<gd_npc npc_id="701541" name="Tahabata's Treasure Chest" />
+						<gd_npc npc_id="701542" name="Tiamat's Huge Treasure Crate (Dragon Lord's Refuge)" />
+						<gd_npc npc_id="231050" name="Vera" />
+						<gd_npc npc_id="236306" name="Reviver Nasto" />
+						<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+						<!-- Tiamat Lv65 236277 -->
+						<gd_npc npc_id="231073" name="Hyperion" />
+						<gd_npc npc_id="701795" name="Treasure Box (Danuar Reliquary)" />
+						<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
+						<!-- -->
+						<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
+						<gd_npc npc_id="234990" name="Wounded Belsagos" />
+						<gd_npc npc_id="234542" name="Volatile Belsagos" />
+						<gd_npc npc_id="234991" name="Furious Belsagos" />
+						<!-- Lunatic Queen Modor -->
+						<gd_npc npc_id="284858" name="Boss" />
+						<gd_npc npc_id="233383" name="Chief Medic Tagnu" />
+						<!-- Beritra -->
+					</gd_npcs>
+				</gd_rule>
+			</event_drops>
 		</event>
 		<event name="Joker's Wild Event" start="2015-01-07T00:00:00+00:00" end="2015-01-21T00:00:00+00:00">
 			<quests>

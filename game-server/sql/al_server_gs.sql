@@ -220,6 +220,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `pack_count` smallint(6) NOT NULL DEFAULT '0',
   `is_amplified` tinyint(1) NOT NULL DEFAULT '0',
   `buff_skill` int(11) NOT NULL DEFAULT '0',
+  `rnd_plume_bonus` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_unique_id`),
   INDEX `item_location` USING HASH (`item_location`),
   INDEX `index3` (`item_owner`, `item_location`, `is_equiped`)

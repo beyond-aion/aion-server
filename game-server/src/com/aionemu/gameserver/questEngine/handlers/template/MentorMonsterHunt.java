@@ -32,8 +32,8 @@ public class MentorMonsterHunt extends MonsterHunt {
 	 * @param monsters
 	 */
 	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters,
-		int menteMinLevel, int menteMaxLevel) {
-		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, 0);
+		int menteMinLevel, int menteMaxLevel, boolean rewardNextStep) {
+		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, 0, rewardNextStep);
 		this.menteMinLevel = menteMinLevel;
 		this.menteMaxLevel = menteMaxLevel;
 		this.qt = DataManager.QUEST_DATA.getQuestById(questId);
