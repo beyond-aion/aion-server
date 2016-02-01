@@ -1,20 +1,23 @@
 package instance;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -22,18 +25,17 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Tibald
+ * @modified Estrayl
  */
 @InstanceID(300620000)
 public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private boolean isInstanceDestroyed;
+	private AtomicBoolean isRaceKnown = new AtomicBoolean(false);
+	private AtomicBoolean isXastaEventStarted = new AtomicBoolean(false);
 
 	@Override
 	public void onDie(final Npc npc) {
-		if (isInstanceDestroyed)
-			return;
-
 		switch (npc.getNpcId()) {
 			case 236299:
 				if (isDeadNpc(236301)) {
@@ -49,6 +51,8 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 236298: // Kuhara
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
+				doors.get(150).setOpen(true);
+				npc.getController().onDelete();
 				break;
 			case 236302: // Archmagus Upadi
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
@@ -81,37 +85,10 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				despawnNpc(npc);
 				break;
 			case 217299:
-				final float x = npc.getX();
-				final float y = npc.getY();
-				final float z = npc.getZ();
-				final byte h = npc.getHeading();
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (!isInstanceDestroyed) {
-							if (x > 0 && y > 0 && z > 0) {
-								spawn(217300, x, y, z, h);
-							}
-						}
-					}
-
-				}, 4000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpc(npc);
-					}
-
-				}, 2000);
+				spawn(217300, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+				despawnNpc(npc);
 				break;
 		}
-	}
-
-	private void stopWalk(Npc npc) {
-		npc.getSpawn().setWalkerId(null);
-		WalkManager.stopWalking((NpcAI2) npc.getAi2());
 	}
 
 	private void spawnEndEvent(int npcId, String walkern, int time) {
@@ -126,17 +103,13 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
-		removeEffects(player);
+		player.getEffectController().removeEffect(player.getRace() == Race.ELYOS ? 21805 : 21806);
+		player.getInventory().decreaseByItemId(185000229, 1);
 	}
 
 	@Override
 	public void onPlayerLogOut(Player player) {
-		removeEffects(player);
-	}
-
-	private void removeEffects(Player player) {
-		PlayerEffectController effectController = player.getEffectController();
-		effectController.removeEffect(21806);
+		player.getEffectController().removeEffect(player.getRace() == Race.ELYOS ? 21805 : 21806);
 	}
 
 	@Override
@@ -148,7 +121,18 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 702680:
 			case 702681:
 			case 702682:
+				TeleportService2.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				SkillEngine.getInstance().getSkill(npc, 21806, 60, player).useNoAnimationSkill();
+				despawnNpc(npc);
+				break;
+			case 702683:
+			case 702684:
+			case 702685:
+			case 702686:
+			case 702687:
+			case 702688:
+				TeleportService2.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+				SkillEngine.getInstance().getSkill(npc, 21805, 60, player).useNoAnimationSkill();
 				despawnNpc(npc);
 				break;
 			case 701151:
@@ -170,46 +154,18 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 	}
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkern) {
+		final Npc npc = (Npc) spawn(npcId, x, y, z, h);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if (!isInstanceDestroyed) {
-					Npc npc = (Npc) spawn(npcId, x, y, z, h);
-					npc.getSpawn().setWalkerId(walkern);
-					startEndWalker(npc);
-					unSetEndWalker(npc);
-				}
+				npc.getSpawn().setWalkerId(walkern);
+				WalkManager.startWalking((NpcAI2) npc.getAi2());
+				npc.setState(CreatureState.WALKING.getId());
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}
 
 		}, time);
-	}
-
-	private void startEndWalker(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
-					npc.setState(1);
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-				}
-			}
-
-		}, 3000);
-	}
-
-	private void unSetEndWalker(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed)
-					stopWalk(npc);
-			}
-
-		}, 8000);
 	}
 
 	private void despawnNpc(Npc npc) {
@@ -233,5 +189,41 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
+	}
+
+	@Override
+	public void onCreatureDetected(Npc detector, Creature detected) {
+		if (detected instanceof Player) {
+			if (detector.getNpcId() == 856056 && isXastaEventStarted.compareAndSet(false, true)) {
+				sp(236271, 521.33f, 499.49f, 179.946f, (byte) 27, 2000, "300620000_Xasta_Path");
+				despawnNpc(detector);
+			}
+		}
+	}
+
+	@Override
+	public void onSpecialEvent(Npc npc) {
+		if (npc.getNpcId() == 236271) {
+			if (npc.getLifeStats().getHpPercentage() <= 50)
+				spawn(236297, 354.53f, 596.26f, 148.298f, (byte) 100);
+			else
+				spawn(236296, 354.53f, 596.26f, 148.298f, (byte) 100);
+			getNpc(856015).getController().onAttack(npc, 2000000, false);
+			despawnNpc(npc);
+			
+		}
+	}
+
+	@Override
+	public void onEnterInstance(Player player) {
+		if (isRaceKnown.compareAndSet(false, true)) {
+			if (player.getRace() == Race.ELYOS) {
+				for (int npcId = 702677; npcId <= 702682; npcId++) {
+					Npc npc = getNpc(npcId);
+					spawn(npcId + 6, npc.getX(), npc.getY(), 151.785f, npc.getHeading()).getSpawn().setStaticId(npc.getSpawn().getStaticId());
+					npc.getController().onDelete();
+				}
+			}
+		}
 	}
 }

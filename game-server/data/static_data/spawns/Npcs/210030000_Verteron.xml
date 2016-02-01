@@ -2352,7 +2352,7 @@
 			<spot x="1661.52" y="1543.75" z="127.823" h="90"/>
 		</spawn>
 		<!-- Suspicious Box -->
-		<spawn npc_id="211823" respawn_time="900">
+		<spawn npc_id="211823" respawn_time="1800">
 			<spot x="1738.9" y="2538" z="155.974" h="44"/>
 		</spawn>
 		<!-- Suspicious Document -->

@@ -2,14 +2,18 @@ package ai.worlds.brusthonin;
 
 import ai.AggressiveNpcAI2;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author Cheatkiller
+ * @modified Neon
  */
-
 @AIName("unfaithfulntuamu")
 public class UnfaithfulNtuamuAI2 extends AggressiveNpcAI2 {
 
@@ -21,8 +25,20 @@ public class UnfaithfulNtuamuAI2 extends AggressiveNpcAI2 {
 
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 50) {
-			spawn(214583, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
-			AI2Actions.deleteOwner(this);
+			Npc ntuamu = getOwner();
+			Npc vampireQueen = (Npc) spawn(214583, ntuamu.getX(), ntuamu.getY(), ntuamu.getZ(), ntuamu.getHeading());
+			vampireQueen.getLifeStats().setCurrentHpPercent(50);
+			vampireQueen.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
+
+				NpcController ntuamuController = ntuamu.getController();
+
+				@Override
+				public void died(Creature creature) {
+					ntuamuController.addTask(TaskId.RESPAWN, ntuamuController.scheduleRespawn());
+				}
+
+			});
+			ntuamu.getController().onDelete();
 		}
 	}
 }

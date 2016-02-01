@@ -204,7 +204,7 @@ public class PrivateStoreService {
 			int i = 0;
 			for (int itemObjId : store.getSoldItems().keySet()) {
 				if (i == tradeItem.getItemId())
-					newTradeList.addPSItem(itemObjId, tradeItem.getCount());
+					newTradeList.addItem(itemObjId, tradeItem.getCount());
 				i++;
 			}
 		}

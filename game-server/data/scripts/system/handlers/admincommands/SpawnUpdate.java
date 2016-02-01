@@ -99,7 +99,7 @@ public class SpawnUpdate extends AdminCommand {
 				+ tPos.getHeading() + ".");
 
 		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
-			sendInfo(admin, "Could not save spawn.");
+			sendInfo(admin, "Could not save spawn. Maybe it's a special or temporary spawn (siege, base, invasion, ...) which cannot be altered.");
 	}
 
 	private void updateWalker(Player admin, Npc target, String walkerId) {

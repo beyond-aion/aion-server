@@ -3,40 +3,40 @@
 	<xs:element name="custom_drop">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="npc_drop" type="NpcDrop" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="npc_drop" type="NpcDrop" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="NpcDrop">
 		<xs:sequence>
-			<xs:element name="drop_group" type="DropGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="drop_group" type="DropGroup" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
-		<xs:attribute name="npc_id" type="xs:int"/>
-		<xs:attribute name="replace_type" type="ReplaceType"/>
+		<xs:attribute name="npc_id" type="xs:int" />
+		<xs:attribute name="replace_type" type="ReplaceType" />
 	</xs:complexType>
 	<xs:complexType name="DropGroup">
 		<xs:sequence>
-			<xs:element name="drop" type="Drop" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="drop" type="Drop" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
-		<xs:attribute name="race" type="xs:string"/>
-		<xs:attribute name="use_category" type="xs:boolean"/>
-		<xs:attribute name="name" type="xs:string"/>
-		<xs:attribute name="max_items" type="xs:int"/>
+		<xs:attribute name="race" type="xs:string" />
+		<xs:attribute name="use_category" type="xs:boolean" />
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="max_items" type="xs:int" />
 	</xs:complexType>
 	<xs:complexType name="Drop">
-		<xs:attribute name="item_id" type="xs:int"/>
-		<xs:attribute name="name" type="xs:string"/>
-		<xs:attribute name="min_amount" type="xs:int"/>
-		<xs:attribute name="max_amount" type="xs:int"/>
-		<xs:attribute name="chance" type="xs:float"/>
-		<xs:attribute name="no_reduce" type="xs:boolean"/>
-		<xs:attribute name="each_member" type="xs:boolean"/>
+		<xs:attribute name="item_id" type="xs:int" />
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="min_amount" type="xs:int" use="optional" default="1" />
+		<xs:attribute name="max_amount" type="xs:int" use="optional" default="1" />
+		<xs:attribute name="chance" type="xs:float" />
+		<xs:attribute name="no_reduce" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="each_member" type="xs:boolean" use="optional" default="false" />
 	</xs:complexType>
 	<xs:simpleType name="ReplaceType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="NONE"/>
-			<xs:enumeration value="FULL"/>
-			<xs:enumeration value="PARTIAL"/>
+			<xs:enumeration value="NONE" />
+			<xs:enumeration value="FULL" />
+			<xs:enumeration value="PARTIAL" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

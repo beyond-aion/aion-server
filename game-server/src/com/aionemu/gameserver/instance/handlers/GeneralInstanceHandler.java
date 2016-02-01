@@ -250,4 +250,9 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	public void onCreatureDetected(Npc detector, Creature detected) {
 		
 	}
+	
+	@Override
+	public void onSpecialEvent(Npc npc) {
+		
+	}
 }

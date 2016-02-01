@@ -29,10 +29,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
- * @reworked vlog, Bobobear, Pad
- * @Modified Majka (2015.07.13) - Removed getDialog() cases: QUEST_REFUSE_1,
- *           FINISH_DIALOG on onDialogEvent method; already managed on
- *           sendQuestStartDialog method.
+ * @reworked vlog, Bobobear
+ * @modified Pad, Majka
  */
 public class MonsterHunt extends QuestHandler {
 
@@ -47,10 +45,11 @@ public class MonsterHunt extends QuestHandler {
 	private final int invasionWorldId;
 	private QuestItems workItem;
 	private final int startDistanceNpc;
+	private final boolean rewardNextStep;
 	private final boolean dataDriven;
 
 	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
-		int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc) {
+		int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc, boolean rewardNextStep) {
 		super(questId);
 		this.startNpcs.addAll(startNpcIds);
 		this.startNpcs.remove(0);
@@ -69,6 +68,7 @@ public class MonsterHunt extends QuestHandler {
 		}
 		this.invasionWorldId = invasionWorld;
 		this.startDistanceNpc = startDistanceNpc;
+		this.rewardNextStep = rewardNextStep;
 		this.dataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
@@ -112,7 +112,8 @@ public class MonsterHunt extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
+			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
+				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, startDialog != 0 ? startDialog : 1011);
 				} else {
@@ -223,6 +224,8 @@ public class MonsterHunt extends QuestHandler {
 							updateQuestStatus(env);
 							if (!dataDriven) { // Old quest style
 								if (total <= m.getEndVar() && m.getRewardVar()) {
+									if (rewardNextStep)
+										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 								}

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.trade;
 
 /**
  * @author Simple
+ * @modified Neon
  */
 public class TradePSItem extends TradeItem {
 
@@ -48,4 +49,11 @@ public class TradePSItem extends TradeItem {
 		return itemObjId;
 	}
 
+	/**
+	 * Decreases the count only if it would really decrease and wouldn't become negative
+	 */
+	public void decreaseCount(long decreaseCount) {
+		if (decreaseCount > 0)
+			this.count -= Math.min(decreaseCount, count);
+	}
 }

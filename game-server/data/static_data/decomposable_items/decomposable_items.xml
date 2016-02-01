@@ -26698,111 +26698,208 @@
         </items>
     </decomposable>
     <decomposable item_id="188052986" decomposable_name="+1 Snowball">
-        <items chance="75.0">
+        <items chance="90.0">
             <item id="188052987" name="+2 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052988" name="+3 Snowball"/>
         </items>
-        <items chance="10.0">
+		<items chance="1.0">
+			<item id="188052989" name="+4 Snowball"/>
+		</items>
+        <items chance="0.8">
+			<item id="162002030" name="[Event] Premium Restoration Serum"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="0.8">
+			<item id="169230020" name="[Event] Dye: True Black"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="0.8">
+			<item id="169230014" name="[Event] Dye: True White"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="0.8">
+			<item id="186000237" name="Ancient Coin"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="0.8">
+			<item id="166000195" name="Epsilon Enchantment Stone"/>
             <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052987" decomposable_name="+2 Snowball">
-        <items chance="75.0">
+        <items chance="83.0">
             <item id="188052988" name="+3 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052989" name="+4 Snowball"/>
         </items>
-        <items chance="10.0">
+		<items chance="1.0">
+			<item id="188052990" name="+5 Snowball"/>
+		</items>
+        <items chance="2.2">
+			<item id="162002030" name="[Event] Premium Restoration Serum"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="2.2">
+			<item id="169230020" name="[Event] Dye: True Black"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="2.2">
+			<item id="169230014" name="[Event] Dye: True White"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="2.2">
+			<item id="186000237" name="Ancient Coin"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="2.2">
+			<item id="166000195" name="Epsilon Enchantment Stone"/>
             <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052988" decomposable_name="+3 Snowball">
-        <items chance="75.0">
+        <items chance="76.0">
             <item id="188052989" name="+4 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052990" name="+5 Snowball"/>
         </items>
-        <items chance="10.0">
+		<items chance="1.0">
+			<item id="188052991" name="+6 Snowball"/>
+		</items>
+        <items chance="3.6">
+			<item id="162002030" name="[Event] Premium Restoration Serum"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="3.6">
+			<item id="169230020" name="[Event] Dye: True Black"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="3.6">
+			<item id="169230014" name="[Event] Dye: True White"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="3.6">
+			<item id="186000237" name="Ancient Coin"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="3.6">
+			<item id="166000195" name="Epsilon Enchantment Stone"/>
             <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052989" decomposable_name="+4 Snowball">
-        <items chance="75.0">
+        <items chance="69.0">
             <item id="188052990" name="+5 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052991" name="+6 Snowball"/>
         </items>
-        <items chance="10.0">
+		<items chance="1.0">
+			<item id="188052992" name="+7 Snowball"/>
+		</items>
+        <items chance="5.0">
+			<item id="162002030" name="[Event] Premium Restoration Serum"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="5.0">
+			<item id="169230020" name="[Event] Dye: True Black"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="5.0">
+			<item id="169230014" name="[Event] Dye: True White"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="5.0">
+			<item id="186000237" name="Ancient Coin"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="5.0">
+			<item id="166000195" name="Epsilon Enchantment Stone"/>
             <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052990" decomposable_name="+5 Snowball">
-        <items chance="75.0">
+        <items chance="62.0">
             <item id="188052991" name="+6 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052992" name="+7 Snowball"/>
         </items>
-        <items chance="10.0">
+		<items chance="1.0">
+			<item id="188052993" name="+8 Snowball"/>
+		</items>
+        <items chance="6.4">
+			<item id="162002030" name="[Event] Premium Restoration Serum"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="6.4">
+			<item id="169230020" name="[Event] Dye: True Black"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="6.4">
+			<item id="169230014" name="[Event] Dye: True White"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="6.4">
+			<item id="186000237" name="Ancient Coin"/>
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
+        </items>
+		<items chance="6.4">
+			<item id="166000195" name="Epsilon Enchantment Stone"/>
             <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052991" decomposable_name="+6 Snowball">
-        <items chance="30.0">
+        <items chance="55.0">
             <item id="188052992" name="+7 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052993" name="+8 Snowball"/>
         </items>
-        <items chance="60.0">
+		<items chance="1.0">
+			<item id="188052994" name="+9 Snowball"/>
+		</items>
+        <items chance="19.5">
             <item id="188052996" name="[Event] Broken Snow Bundle"/>
         </items>
-        <items chance="5.0">
-            <item id="188052997" name="[Event] Crushed Snow Bundle"/>
+        <items chance="19.5">
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052992" decomposable_name="+7 Snowball">
-        <items chance="25.0">
+        <items chance="48.0">
             <item id="188052993" name="+8 Snowball"/>
         </items>
         <items chance="5.0">
             <item id="188052994" name="+9 Snowball"/>
         </items>
-        <items chance="60.0">
+		<items chance="1.0">
+			<item id="188052994" name="+10 Brilliant Snowball"/>
+		</items>
+        <items chance="23.0">
             <item id="188052996" name="[Event] Broken Snow Bundle"/>
         </items>
-        <items chance="10.0">
-            <item id="188052997" name="[Event] Crushed Snow Bundle"/>
+        <items chance="23.0">
+            <item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052993" decomposable_name="+8 Snowball">
-        <items chance="10.0">
+        <items chance="39.0">
             <item id="188052994" name="+9 Snowball"/>
         </items>
-        <items chance="5.0">
+        <items chance="1.0">
             <item id="188052995" name="+10 Brilliant Snowball"/>
         </items>
         <items chance="60.0">
-            <item id="188052996" name="[Event] Broken Snow Bundle"/>
-        </items>
-        <items chance="20.0">
             <item id="188052997" name="[Event] Crushed Snow Bundle"/>
-        </items>
-        <items chance="5.0">
-            <item id="188052998" name="[Event] Noble Melted Bundle"/>
         </items>
     </decomposable>
     <decomposable item_id="188052994" decomposable_name="+9 Snowball">
-        <items chance="15.0">
+        <items chance="30.0">
             <item id="188052995" name="+10 Brilliant Snowball"/>
-        </items>
-        <items chance="70.0">
-            <item id="188052997" name="[Event] Crushed Snow Bundle"/>
         </items>
         <items chance="15.0">
             <item id="188052998" name="[Event] Noble Melted Bundle"/>
@@ -26810,84 +26907,58 @@
     </decomposable>
     <decomposable item_id="188052995" decomposable_name="+10 Brilliant Snowball">
         <items>
-            <item id="188100149" name="[Event] Icy Shard"/>
+            <item id="188052822" name="[Event] Icy Shard"/>
             <item id="188100148" name="[Event] Brilliant Fragment"/>
         </items>
     </decomposable>
     <decomposable item_id="188052996" decomposable_name="[Event] Broken Snow Bundle">
         <items>
-            <item id="186000237" name="Ancient Coin" count="1"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+            <item id="188052822" name="Noble Ancient Manastone Chest" count="2"/>
+		</items>
         <items>
-            <item id="186000237" name="Ancient Coin" count="3"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
+            <item id="188052637" name="[Event] Greater Composite Manastone Bundle" count="2"/>
+		</items>
+        <items>
+			<item id="166020000" name="Omega Enchantment Stone" count="3"/>
+		</items>
+        <items>
+			<item id="166100008" name="Greater Supplements (Eternal)" count="250"/>
+		</items>
+        <items>
+			<item id="166100011" name="Greater Supplements (Eternal)" count="350"/>
         </items>
     </decomposable>
     <decomposable item_id="188052997" decomposable_name="[Event] Crushed Snow Bundle">
         <items>
-            <item id="186000237" name="Ancient Coin" count="5"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+            <item id="188052638" name="[Event] Fabled Godstone Bundle"/>
+		</items>
         <items>
-            <item id="186000237" name="Ancient Coin" count="10"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+            <item id="166500002" name="Amplification Stone" count="3"/>
+		</items>
         <items>
-            <item id="188052071" name="[Event] Protectorate's Heroic Key Box"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+			<item id="188053083" name="Tempering Solution Chest" count="3"/>
+		</items>
     </decomposable>
     <decomposable item_id="188052998" decomposable_name="[Event] Noble Melted Bundle">
         <items>
-            <item id="186000237" name="Ancient Coin" count="30"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+            <item id="188053702" name="Vasharti Equipment Box"/>
+		</items>
         <items>
-            <item id="186000237" name="Ancient Coin" count="40"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+            <item id="188052388" name="Modor's Equipment Box"/>
+		</items>
         <items>
-            <item id="188052072" name="[Event] Protectorate's Fabled Key Box"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
-        <items>
-            <item id="166200009" name="Mythic Weapon Tuning Scroll"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
-        <items>
-            <item id="188053001" name="[Event] Fabled Godstone Bundle"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
-        <items>
-            <item id="188053000" name="[Event] Assured Greater Felicitous Socketing Box"/>
-            <item id="182007148" name="[Event] Snowflake Crystal"/>
-        </items>
+			<item id="188052827" name="Dynatoum's Equipment Chest"/>
+		</items>
     </decomposable>
     <decomposable item_id="188052999" decomposable_name="[Event] Brilliant Ice Prism">
-        <items chance="20.0">
-            <item id="188053002" name="[Event] Noble Composite Manastone Bundle"/>
+        <items>
+            <item id="187000058" name="Ancient Spirit's Wings"/>
         </items>
-        <items chance="15.0">
-            <item id="188053001" name="[Event] Fabled Godstone Bundle"/>
+        <items>
+            <item id="190100146" name="Immortal Knight's War Steed"/>
         </items>
-        <items chance="15.0">
-            <item id="188053321" name="[Event] Empyrean Plume Chest"/>
-        </items>
-        <items chance="10.0">
-            <item id="190020205" name="Royal Kitter Egg"/>
-        </items>
-        <items chance="10.0">
-            <item id="188053004" name="[Event] Dragon Lord's Weapon Chest"/>
-        </items>
-        <items chance="10.0">
-            <item id="188053005" name="[Event] Hyperion's Wing Chest"/>
-        </items>
-        <items chance="10.0">
-            <item id="188053006" name="[Event] Hyperion's Mythic Armor Chest"/>
-        </items>
-        <items chance="10.0">
-            <item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest"/>
+        <items>
+            <item id="190020020" name="Shugo Lad Egg"/>
         </items>
     </decomposable>
     <decomposable item_id="188053000" decomposable_name="[Event] Assured Greater Felicitous Socketing Box">
@@ -31093,11 +31164,31 @@
     <decomposable item_id="188053603" decomposable_name="Gold Coin Chest"/>
     <decomposable item_id="188053604" decomposable_name="Platinum Coin Chest"/>
     <decomposable item_id="188053605" decomposable_name="Mithril Coin Chest"/>
-    <decomposable item_id="188053606" decomposable_name="[Event] Level 30 Composite Manastone Bundle"/>
-    <decomposable item_id="188053607" decomposable_name="[Event] Level 40 Composite Manastone Bundle"/>
-    <decomposable item_id="188053608" decomposable_name="[Event] Level 50 Composite Manastone Bundle"/>
-    <decomposable item_id="188053609" decomposable_name="[Event] Level 60 Composite Manastone Bundle"/>
-    <decomposable item_id="188053610" decomposable_name="[Event] Level 70 Composite Manastone Bundle"/>
+    <decomposable item_id="188053606" decomposable_name="[Event] Level 30 Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_30"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053607" decomposable_name="[Event] Level 40 Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_40"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053608" decomposable_name="[Event] Level 50 Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053609" decomposable_name="[Event] Level 60 Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053610" decomposable_name="[Event] Level 70 Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_70"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053611" decomposable_name="[Event] Wing Box"/>
     <decomposable item_id="188053612" decomposable_name="[Event] Small School Uniform Box"/>
     <decomposable item_id="188053613" decomposable_name="[Event] Critical Hit Boost Bundle"/>
@@ -31479,13 +31570,159 @@
 	<decomposable item_id="188053675" decomposable_name="Blood Mark Box"/>
 	<decomposable item_id="188053676" decomposable_name="Shining Blood Mark Box"/>
     <decomposable item_id="188053677" decomposable_name="[Event] Presto's Friendship Box"/>
-	<decomposable item_id="188053678" decomposable_name="Nasto's Unique Weapon Box"/>
-	<decomposable item_id="188053679" decomposable_name="Nasto's Unique Jacket Box"/>
-	<decomposable item_id="188053680" decomposable_name="Nasto's Unique Pants Box"/>
-	<decomposable item_id="188053681" decomposable_name="Nasto's Unique Pauldrons Box"/>
-	<decomposable item_id="188053682" decomposable_name="Nasto's Unique Gloves Box"/>
-	<decomposable item_id="188053683" decomposable_name="Nasto's Unique Shoes Chest"/>
-	<decomposable item_id="188053684" decomposable_name="Nasto's Hero Accessory Box"/>
+	<decomposable item_id="188053678" decomposable_name="Nasto's Unique Weapon Box" selectable="true">
+		<items>
+			<item id="100001783" name="Nasto's Azure Scale Sword" player_class="TEMPLAR"/>
+			<item id="100901408" name="Nasto's Two-handed Sword" player_class="TEMPLAR"/>
+			<item id="115001810" name="Nasto's Shield" player_class="TEMPLAR"/>
+			<item id="100001781" name="Nasto's Sword" player_class="GLADIATOR"/>
+			<item id="100001782" name="Nasto's Scale Sword" player_class="GLADIATOR"/>
+			<item id="100201543" name="Nasto's Stiletto" player_class="GLADIATOR"/>
+			<item id="100201544" name="Nasto's Dirk" player_class="GLADIATOR"/>
+			<item id="101701395" name="Nasto's Long Bow" player_class="GLADIATOR"/>
+			<item id="100901408" name="Nasto's Two-handed Sword" player_class="GLADIATOR"/>
+			<item id="101301299" name="Nasto's Spear" player_class="GLADIATOR"/>
+			<item id="100001781" name="Nasto's Sword" player_class="ASSASSIN"/>
+			<item id="100001782" name="Nasto's Scale Sword" player_class="ASSASSIN"/>
+			<item id="100201543" name="Nasto's Stiletto" player_class="ASSASSIN"/>
+			<item id="100201544" name="Nasto's Dirk" player_class="ASSASSIN"/>
+			<item id="101701395" name="Nasto's Long Bow" player_class="ASSASSIN"/>
+			<item id="100001781" name="Nasto's Sword" player_class="RANGER"/>
+			<item id="100001782" name="Nasto's Scale Sword" player_class="RANGER"/>
+			<item id="100201543" name="Nasto's Stiletto" player_class="RANGER"/>
+			<item id="100201544" name="Nasto's Dirk" player_class="RANGER"/>
+			<item id="101701395" name="Nasto's Long Bow" player_class="RANGER"/>
+			<item id="101801251" name="Nasto's Magical Gun" player_class="GUNNER"/>
+			<item id="101801252" name="Nasto's Pistol" player_class="GUNNER"/>
+			<item id="101901160" name="Nasto's Aethercannon" player_class="GUNNER"/>
+			<item id="100101372" name="Nasto's War Hammer" player_class="CHANTER"/>
+			<item id="101501386" name="Nasto's Cane" player_class="CHANTER"/>
+			<item id="115001811" name="Nasto's Scale Shield" player_class="CHANTER"/>
+			<item id="100101372" name="Nasto's War Hammer" player_class="CLERIC"/>
+			<item id="101501386" name="Nasto's Cane" player_class="CLERIC"/>
+			<item id="115001811" name="Nasto's Scale Shield" player_class="CLERIC"/>
+			<item id="101801251" name="Nasto's Magical Gun" player_class="RIDER"/>
+			<item id="101801252" name="Nasto's Pistol" player_class="RIDER"/>
+			<item id="102101095" name="Nasto's Cipher-Blade" player_class="RIDER"/>
+			<item id="100501341" name="Nasto's Orb" player_class="SORCERER"/>
+			<item id="100601459" name="Nasto's Magic Book" player_class="SORCERER"/>
+			<item id="100501341" name="Nasto's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601459" name="Nasto's Magic Book" player_class="SPIRIT_MASTER"/>
+			<item id="102001278" name="Nasto's Harp" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053679" decomposable_name="Nasto's Unique Jacket Box">
+		<items>
+			<item id="110601653" name="Nasto Legionnaire's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601653" name="Nasto Legionnaire's Breastplate" player_class="GLADIATOR"/>
+			<item id="110301856" name="Nasto Legionnaire's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301856" name="Nasto Legionnaire's Jerkin" player_class="RANGER"/>
+			<item id="110301859" name="Nasto Legionnaire's Leather Breastplate" player_class="GUNNER"/>
+			<item id="110551183" name="Nasto Legionnaire's Hauberk" player_class="CHANTER"/>
+			<item id="110551183" name="Nasto Legionnaire's Hauberk" player_class="CLERIC"/>
+			<item id="110551186" name="Nasto Legionnaire's Chain Breastplate" player_class="RIDER"/>
+			<item id="110101866" name="Nasto Legionnaire's Jacket" player_class="SORCERER"/>
+			<item id="110101866" name="Nasto Legionnaire's Jacket" player_class="SPIRIT_MASTER"/>
+			<item id="110101866" name="Nasto Legionnaire's Jacket" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053680" decomposable_name="Nasto's Unique Pants Box">
+		<items>
+			<item id="113601599" name="Nasto Legionnaire's Greaves" player_class="TEMPLAR"/>
+			<item id="113601599" name="Nasto Legionnaire's Greaves" player_class="GLADIATOR"/>
+			<item id="113301825" name="Nasto Legionnaire's Legguards" player_class="ASSASSIN"/>
+			<item id="113301825" name="Nasto Legionnaire's Legguards" player_class="RANGER"/>
+			<item id="113301828" name="Nasto Legionnaire's Leather Gaiters" player_class="GUNNER"/>
+			<item id="113501760" name="Nasto Legionnaire's Chausses" player_class="CHANTER"/>
+			<item id="113501760" name="Nasto Legionnaire's Chausses" player_class="CLERIC"/>
+			<item id="113501763" name="Nasto Legionnaire's Chain Gaiters" player_class="RIDER"/>
+			<item id="113101692" name="Nasto Legionnaire's Leggings" player_class="SORCERER"/>
+			<item id="113101692" name="Nasto Legionnaire's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101692" name="Nasto Legionnaire's Leggings" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053681" decomposable_name="Nasto's Unique Pauldrons Box">
+		<items>
+			<item id="112601598" name="Nasto Legionnaire's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601598" name="Nasto Legionnaire's Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301733" name="Legionnaire's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301733" name="Legionnaire's Shoulderguards" player_class="RANGER"/>
+			<item id="112301736" name="Nasto Legionnaire's Leather Pauldrons" player_class="GUNNER"/>
+			<item id="112501681" name="Nasto Legionnaire's Spaulders" player_class="CHANTER"/>
+			<item id="112501681" name="Nasto Legionnaire's Spaulders" player_class="CLERIC"/>
+			<item id="112501684" name="Nasto Legionnaire's Chain Spaulders" player_class="RIDER"/>
+			<item id="112101630" name="Nasto Legionnaire's Cloth Shoulder Guards" player_class="SORCERER"/>
+			<item id="112101630" name="Nasto Legionnaire's Cloth Shoulder Guards" player_class="SPIRIT_MASTER"/>
+			<item id="112101630" name="Nasto Legionnaire's Cloth Shoulder Guards" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053682" decomposable_name="Nasto's Unique Gloves Box">
+		<items>
+			<item id="111601616" name="Nasto Legionnaire's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601616" name="Nasto Legionnaire's Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301794" name="Nasto Legionnaire's Vambraces" player_class="ASSASSIN"/>
+			<item id="111301794" name="Nasto Legionnaire's Vambraces" player_class="RANGER"/>
+			<item id="111301797" name="Nasto Legionnaire's Leather Protective Gloves" player_class="GUNNER"/>
+			<item id="111501742" name="Nasto Legionnaire's Handguards" player_class="CHANTER"/>
+			<item id="111501742" name="Nasto Legionnaire's Handguards" player_class="CLERIC"/>
+			<item id="111501745" name="Nasto Legionnaire's Chain Combat Gloves" player_class="RIDER"/>
+			<item id="111101681" name="Nasto Legionnaire's Gloves" player_class="SORCERER"/>
+			<item id="111101681" name="Nasto Legionnaire's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101681" name="Nasto Legionnaire's Gloves" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053683" decomposable_name="Nasto's Unique Shoes Chest">
+		<items>
+			<item id="114601606" name="Nasto Legionnaire's Plate Boots" player_class="TEMPLAR"/>
+			<item id="114601606" name="Nasto Legionnaire's Plate Boots" player_class="GLADIATOR"/>
+			<item id="114301862" name="Nasto Legionnaire's Boots" player_class="ASSASSIN"/>
+			<item id="114301862" name="Nasto Legionnaire's Boots" player_class="RANGER"/>
+			<item id="114301865" name="Nasto Legionnaire's Leather Combat Boots" player_class="GUNNER"/>
+			<item id="114501770" name="Nasto Legionnaire's Brogans" player_class="CHANTER"/>
+			<item id="114501770" name="Nasto Legionnaire's Brogans" player_class="CLERIC"/>
+			<item id="114501773" name="Nasto Legionnaire's Chain Combat Boots" player_class="RIDER"/>
+			<item id="114101726" name="Nasto Legionnaire's Shoes" player_class="SORCERER"/>
+			<item id="114101726" name="Nasto Legionnaire's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101726" name="Nasto Legionnaire's Shoes" player_class="BARD"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053684" decomposable_name="Nasto's Hero Accessory Box" selectable="true">
+		<items>
+			<item id="120001556" name="Nasto Red Beryl Earrings" player_class="TEMPLAR"/>
+			<item id="121001428" name="Nasto Red Beryl Necklace" player_class="TEMPLAR"/>
+			<item id="122001702" name="Nasto Red Beryl Ring" player_class="TEMPLAR"/>
+			<item id="120001556" name="Nasto Red Beryl Earrings" player_class="GLADIATOR"/>
+			<item id="121001428" name="Nasto Red Beryl Necklace" player_class="GLADIATOR"/>
+			<item id="122001702" name="Nasto Red Beryl Ring" player_class="GLADIATOR"/>
+			<item id="120001556" name="Nasto Red Beryl Earrings" player_class="ASSASSIN"/>
+			<item id="121001428" name="Nasto Red Beryl Necklace" player_class="ASSASSIN"/>
+			<item id="122001702" name="Nasto Red Beryl Ring" player_class="ASSASSIN"/>
+			<item id="120001556" name="Nasto Red Beryl Earrings" player_class="RANGER"/>
+			<item id="121001428" name="Nasto Red Beryl Necklace" player_class="RANGER"/>
+			<item id="122001702" name="Nasto Red Beryl Ring" player_class="RANGER"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="GUNNER"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="GUNNER"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="GUNNER"/>
+			<item id="120001556" name="Nasto Red Beryl Earrings" player_class="CHANTER"/>
+			<item id="121001428" name="Nasto Red Beryl Necklace" player_class="CHANTER"/>
+			<item id="122001702" name="Nasto Red Beryl Ring" player_class="CHANTER"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="CLERIC"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="CLERIC"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="CLERIC"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="RIDER"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="RIDER"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="RIDER"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="SORCERER"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="SORCERER"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="SORCERER"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="SPIRIT_MASTER"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="SPIRIT_MASTER"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="SPIRIT_MASTER"/>
+			<item id="120001557" name="Nasto Turquoise Earrings" player_class="BARD"/>
+			<item id="121001429" name="Nasto Turquoise Necklace" player_class="BARD"/>
+			<item id="122001703" name="Nasto Turquoise Ring" player_class="BARD"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053685" decomposable_name="Sand Wanderers Trader's Bundle"/>
 	<decomposable item_id="188053686" decomposable_name="Sand Wanderers Trader's Treasure Box"/>
     <decomposable item_id="188053687" decomposable_name="Test Item"/>

@@ -1352,7 +1352,7 @@
 			<spot x="2351.07" y="889.481" z="324.875" h="12"/>
 		</spawn>
 		<!-- Gigantic Box -->
-		<spawn npc_id="210582" respawn_time="295">
+		<spawn npc_id="210582" respawn_time="1800">
 			<spot x="1743.52" y="508.56" z="247.375" h="91"/>
 		</spawn>
 		<!-- Gilungk -->
@@ -3155,10 +3155,6 @@
 			<spot x="1739.18" y="834.443" z="248.204" h="81"/>
 			<spot x="1758.86" y="829.729" z="248.143" h="40"/>
 			<spot x="1770.54" y="820.312" z="248.538" h="16"/>
-		</spawn>
-		<!-- Suspicious Box -->
-		<spawn npc_id="211823" respawn_time="900">
-			<spot x="1605.5" y="1286.51" z="275.968" h="39"/>
 		</spawn>
 		<!-- Suspicious Clothing -->
 		<spawn npc_id="700211" respawn_time="295">

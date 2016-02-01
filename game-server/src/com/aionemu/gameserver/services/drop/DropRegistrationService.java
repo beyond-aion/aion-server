@@ -643,13 +643,13 @@ public class DropRegistrationService {
 			case DISCIPLINED:
 				return 1f;
 			case SEASONED:
-				return 1.1f;
+				return 1.05f;
 			case EXPERT:
-				return 1.2f;
+				return 1.1f;
 			case VETERAN:
-				return 1.3f;
+				return 1.15f;
 			case MASTER:
-				return 1.4f;
+				return 1.2f;
 		}
 		return 1f;
 	}
@@ -661,7 +661,7 @@ public class DropRegistrationService {
 			case NORMAL:
 				return 1f;
 			case ELITE:
-				return 1.4f;
+				return 1.3f;
 			case HERO:
 				return 1.8f;
 			case LEGENDARY:
