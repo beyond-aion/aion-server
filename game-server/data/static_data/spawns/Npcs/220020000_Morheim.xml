@@ -1952,6 +1952,7 @@
 		</spawn>
 		<!-- Chicorerk -->
 		<spawn npc_id="798106" respawn_time="295">
+			<temporary_spawn spawn_time="0.*.*" despawn_time="4.*.*"/>
 			<spot x="2672" y="2501" z="142.859" h="45"/>
 		</spawn>
 		<!-- Chieftain Chaikata -->
@@ -1991,6 +1992,7 @@
 		</spawn>
 		<!-- Choirinererk -->
 		<spawn npc_id="798110" respawn_time="295">
+			<temporary_spawn spawn_time="21.*.*" despawn_time="5.*.*"/>
 			<spot x="1778.9197" y="1671.5417" z="197.6250" h="80"/>
 		</spawn>
 		<!-- Citadel Acolyte -->
