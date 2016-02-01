@@ -10,11 +10,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Yeats
  *
  */
-public class CM_STONESPEAR_RANKING extends AionClientPacket {
+public class CM_LEGION_DOMINION_REQUEST_RANKING extends AionClientPacket {
 
 	int stonespearId;
 	
-	public CM_STONESPEAR_RANKING(int opcode, State state, State... restStates) {
+	public CM_LEGION_DOMINION_REQUEST_RANKING(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 

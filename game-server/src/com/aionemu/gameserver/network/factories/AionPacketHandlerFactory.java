@@ -203,7 +203,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_VERSION_CHECK(0x0C3, State.CONNECTED));
 		addPacket(new CM_VIEW_PLAYER_DETAILS(0x107, State.IN_GAME));
 		addPacket(new CM_WINDSTREAM(0x2E9, State.IN_GAME));
-		addPacket(new CM_STONESPEAR_RANKING(0x0E0, State.IN_GAME));
+		addPacket(new CM_LEGION_DOMINION_REQUEST_RANKING(0x0E0, State.IN_GAME));
 		
 		//addPacket(new CM_UNK(0x0A9, State.IN_GAME));
 		//addPacket(new CM_VIRTUAL_AUTH(0x14E, State.IN_GAME));

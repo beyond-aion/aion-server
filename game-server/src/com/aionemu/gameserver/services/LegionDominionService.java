@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Map;
 
@@ -8,7 +9,8 @@ import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo;
+import com.aionemu.gameserver.model.team.legion.Legion;
 
 /**
  * @author Yeats
@@ -65,5 +67,21 @@ public class LegionDominionService {
 			}
 		}
 		return null;
+	}
+	
+	public void onFinishInstance(Legion legion, int points, long time) {
+		if (legion != null) {
+			LegionDominionLocation loc = getLegionDominionLoc(legion.getCurrentLegionDominion());
+			if (loc != null) {
+				LegionDominionParticipantInfo info = loc.getParticipantInfo(legion.getLegionId());
+				if (info != null && info.getPoints() < points) {
+					info.setDate(new Timestamp(System.currentTimeMillis()));
+					info.setPoints(points);
+					info.setTime((int) (time/1000));
+					DAOManager.getDAO(LegionDominionDAO.class).updateInfo(info);
+					loc.updateRanking();
+				}
+			}
+		}
 	}
 }

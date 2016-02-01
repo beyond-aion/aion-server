@@ -163,9 +163,10 @@ public class CM_LEGION extends AionClientPacket {
 						break;
 					/** Select Legion Dominion to participate **/
 					case 0x10:
+						/* deactivated till instance is done	
 						if (activePlayer.getLegionMember().isBrigadeGeneral() || activePlayer.getLegionMember().getRank() == LegionRank.DEPUTY) {
 							LegionService.getInstance().joinLegionDominion(activePlayer, legion, legionDominionId);
-						}
+						} */
 						break;
 					/** Misc. **/
 					default:
