@@ -156,15 +156,6 @@ public abstract class WorldMapInstance {
 	public abstract int getOwnerId();
 
 	/**
-	 * Returs {@link World} instance to which belongs this WorldMapInstance
-	 * 
-	 * @return World
-	 */
-	public World getWorld() {
-		return getParent().getWorld();
-	}
-
-	/**
 	 * @param object
 	 */
 	public void addObject(VisibleObject object) {

@@ -102,7 +102,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 		PacketSendUtility.sendPacket(player, message);
 		ownerHouse.getRegistry().removeObject(getObjectId());
-		Player owner = ownerHouse.getPosition().getWorld().findPlayer(ownerHouse.getOwnerId());
+		Player owner = World.getInstance().findPlayer(ownerHouse.getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
 			ownerHouse.getRegistry().save();
@@ -251,7 +251,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	public void incrementVisitorUsedCount() {
 		this.visitorUsedCount++;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		Player owner = ownerHouse.getPosition().getWorld().findPlayer(ownerHouse.getOwnerId());
+		Player owner = World.getInstance().findPlayer(ownerHouse.getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
 			ownerHouse.getRegistry().save();

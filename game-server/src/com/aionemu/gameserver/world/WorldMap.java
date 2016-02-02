@@ -17,19 +17,11 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
 public class WorldMap {
 
 	private WorldMapTemplate worldMapTemplate;
-
 	private AtomicInteger nextInstanceId = new AtomicInteger(0);
-	/**
-	 * List of instances.
-	 */
 	private Map<Integer, WorldMapInstance> instances = new ConcurrentHashMap<>();
-
-	/** World to which belongs this WorldMap */
-	private World world;
 	private int worldOptions;
 
-	public WorldMap(WorldMapTemplate worldMapTemplate, World world) {
-		this.world = world;
+	public WorldMap(WorldMapTemplate worldMapTemplate) {
 		this.worldMapTemplate = worldMapTemplate;
 		this.worldOptions = worldMapTemplate.getFlags();
 
@@ -198,13 +190,6 @@ public class WorldMap {
 		if (instanceId == 0)
 			instanceId = 1;
 		instances.put(instanceId, instance);
-	}
-
-	/**
-	 * Returns the World containing this WorldMap.
-	 */
-	public World getWorld() {
-		return world;
 	}
 
 	public final WorldMapTemplate getTemplate() {
