@@ -285,6 +285,8 @@ public class SpawnsData2 {
 			return false;
 		if (spawn.getRespawnTime() <= 0) // do not save single time spawns (monster raid, handler spawn, ...) as world spawns
 			return false;
+		if (spawn.isTemporarySpawn()) // spawn start and end times of temporary world spawns (shugos, agrints, ...) would get lost
+			return false;
 		Spawn oldGroup = DataManager.SPAWNS_DATA2.getSpawnsForNpc(visibleObject.getWorldId(), spawn.getNpcId());
 
 		File xml = new File("./data/static_data/spawns/" + getRelativePath(visibleObject));
