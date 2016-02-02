@@ -153,7 +153,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	 */
 	protected final void sendInfo(Player player, String... message) {
 		StringBuilder sb = new StringBuilder();
-		if (message != null && message.length >= 1) {
+		if (message.length > 1 || message.length == 1 && message[0] != null) {
 			for (int i = 0; i < message.length; i++) {
 				sb.append((i > 0 ? "\n" : "") + message[i]);
 			}
