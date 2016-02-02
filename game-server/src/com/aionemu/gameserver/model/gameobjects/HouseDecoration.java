@@ -69,13 +69,6 @@ public class HouseDecoration extends AionObject {
 	public boolean equals(Object object) {
 		if (!(object instanceof HouseDecoration))
 			return false;
-		else
-			return ((HouseDecoration) object).getObjectId().equals(this.getObjectId());
+		return super.equals(object);
 	}
-
-	@Override
-	public int hashCode() {
-		return this.getObjectId();
-	}
-
 }

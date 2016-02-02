@@ -10,6 +10,7 @@ import com.google.common.base.Function;
  * Each AionObject is uniquely identified by objectId.
  * 
  * @author -Nemesiss-, SoulKeeper
+ * @modified Neon
  */
 public abstract class AionObject {
 
@@ -37,6 +38,27 @@ public abstract class AionObject {
 	 */
 	public Integer getObjectId() {
 		return objectId;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof AionObject))
+			return false;
+
+		AionObject aionObj = (AionObject) obj;
+
+		if (getObjectId() == null)
+			return aionObj.getObjectId() == null && super.equals(obj);
+
+		return getObjectId().equals(aionObj.getObjectId());
 	}
 
 	/**
