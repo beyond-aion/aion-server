@@ -10,7 +10,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_CHECK_PAK extends AionClientPacket {
 
-	// private int unk;
+	@SuppressWarnings("unused")
+	private int unk;
 	private String pakStatus;
 
 	public CM_CHECK_PAK(int opcode, State state, State... restStates) {
@@ -19,14 +20,14 @@ public class CM_CHECK_PAK extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		// unk = readC();
+		unk = readC(); // 2
 		pakStatus = readS();
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (pakStatus.indexOf("1:OK") < 5)
+		if (!pakStatus.endsWith("[1:OK]") && !pakStatus.contains("File not found"))
 			AuditLogger.info(player, "Player using modified data pak: " + pakStatus);
 	}
 }
