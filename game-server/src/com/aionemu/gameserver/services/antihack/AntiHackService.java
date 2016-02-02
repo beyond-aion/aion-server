@@ -165,7 +165,7 @@ public class AntiHackService {
 	}
 
 	public static void checkAionBin(int size, Player player) {
-		int legitSize = 212; // NA+GF
+		int legitSize = 212; // 212 after login, exactly 30 minutes later: 224, right after that: 1128 o.O
 		if (SecurityConfig.AION_BIN_CHECK) {
 			if (size != legitSize) {
 				AuditLogger.info(player, "Detected modified aion.bin");
