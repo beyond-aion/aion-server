@@ -1345,7 +1345,7 @@ public class Player extends Creature {
 	/**
 	 * @return isAdminTeleportation
 	 */
-	public boolean getAdminTeleportation() {
+	public boolean isAdminTeleportation() {
 		return isAdminTeleportation;
 	}
 

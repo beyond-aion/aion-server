@@ -86,14 +86,6 @@ public class CM_MOVE extends AionClientPacket {
 		PlayerMoveController m = player.getMoveController();
 		m.movementMask = type;
 
-		// Admin Teleportation
-		if (player.getAdminTeleportation() && ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE)
-			&& ((type & MovementMask.MOUSE) == MovementMask.MOUSE)) {
-			m.setNewDirection(x2, y2, z2);
-			World.getInstance().updatePosition(player, x2, y2, z2, heading);
-			PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
-		}
-
 		float speed = player.getGameStats().getMovementSpeedFloat();
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 			m.glideFlag = glideFlag;
@@ -108,16 +100,22 @@ public class CM_MOVE extends AionClientPacket {
 				m.vectorX = vectorX;
 				m.vectorY = vectorY;
 				m.vectorZ = vectorZ;
-				player.getMoveController().setNewDirection(x, y, z, heading);
+				m.setNewDirection(x, y, z, heading);
 			} else {
-				player.getMoveController().setNewDirection(x2, y2, z2, heading);
+				m.setNewDirection(x2, y2, z2, heading);
+				if (player.isAdminTeleportation()) {
+					World.getInstance().updatePosition(player, x2, y2, z2, heading);
+					m.updateLastMove();
+					PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
+					return;
+				}
 			}
 			player.getController().onStartMove();
 		} else {
 			player.getController().onMove();
 			if ((type & MovementMask.MOUSE) == 0) {
 				speed = player.getGameStats().getMovementSpeedFloat();
-				player.getMoveController().setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f, z + m.vectorZ * speed * 1.5f, heading);
+				m.setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f, z + m.vectorZ * speed * 1.5f, heading);
 			}
 		}
 
