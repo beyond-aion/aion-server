@@ -1,51 +1,66 @@
 package admincommands;
 
-import java.util.Iterator;
+import org.apache.commons.lang3.ArrayUtils;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Ben, Ritsu Smart Matching Enabled //announce anon This will work. as well as //announce a This will work. Both will match the "a" or "anon"
- *         to the "anonymous" flag.
+ * @author Neon
  */
 public class Announce extends AdminCommand {
 
 	public Announce() {
-		super("announce");
+		super("announce", "Sends a server-wide notice.");
+
+		setParamInfo(
+			"<n|a> <message> - Sends the message either with your <n>ame or <a>nonymously.",
+			"<ely|asmo> <message> - Sends an anonymous message to <ely>os or <asmo>dian players."
+		);
 	}
 
 	@Override
-	public void execute(Player player, String... params) {
-		String message;
-
-		if (("anonymous").startsWith(params[0].toLowerCase())) {
-			message = "Announce: ";
-		} else if (("name").startsWith(params[0].toLowerCase())) {
-			message = player.getName() + ": ";
-		} else {
-			PacketSendUtility.sendMessage(player, "Syntax: //announce <anonymous|name> <message>");
+	public void execute(Player admin, String... params) {
+		if (params.length <= 1) {
+			sendInfo(admin);
 			return;
 		}
 
-		// Add with space
-		for (int i = 1; i < params.length - 1; i++)
-			message += params[i] + " ";
-
-		// Add the last without the end space
-		message += params[params.length - 1];
-
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-
-		while (iter.hasNext()) {
-			PacketSendUtility.sendBrightYellowMessageOnCenter(iter.next(), message);
+		String flag = params[0].toLowerCase();
+		String[] flags = { "n", "a", "ely", "asmo" };
+		if (!ArrayUtils.contains(flags, flag)) {
+			sendInfo(admin);
+			return;
 		}
-	}
 
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //announce <anonymous|name> <message>");
+		StringBuilder sb = new StringBuilder();
+		Race allowedRace = null;
+		switch (flag) {
+			case "n":
+				sb.append(ChatUtil.name(admin) + ":");
+				break;
+			case "a":
+				sb.append("Announce:");
+				break;
+			case "ely":
+				sb.append("Elyos:");
+				allowedRace = Race.ELYOS;
+				break;
+			case "asmo":
+				sb.append("Asmodians:");
+				allowedRace = Race.ASMODIANS;
+				break;
+		}
+
+		for (int i = 1; i < params.length; i++)
+			sb.append(" ").append(params[i]);
+
+		for (Player player : World.getInstance().getAllPlayers())
+			if (allowedRace == null || player.getRace() == allowedRace || validateAccess(player))
+				PacketSendUtility.sendBrightYellowMessageOnCenter(player, sb.toString());
 	}
 }
