@@ -2,51 +2,49 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 <!--
   [BEGIN] SUMMARY
-			17000 [XML] [Group] Guardian Deity General of the Nochsana Training Camp
-			17001 [XML] [Group] Anuhart Attack
-			17002 [XML] [Group] Raksha's Arrogance
-			17003 [XML] [Group] Run Off with Kromede
-			17004 [XML] [Group] Temple of the Ferocious Ruler
-			17005 [XML] [Alliance] Zadra's Darkness
-			17006 [XML] [Group] Surrender of the Adma Stronghold
-			17007 [XML] [Group] Underground Great Blacksmith
-			17008 [XML] [Alliance] Sand Lord's Oppression
-			17009 [XML] [Group] Bakarma's Bad Reputation
-			17010 [XML] [Group] Demise of the Sealed Temple
-			17011 [XML] [Group] Brigade General of the Rentus Base
-			17012 [XML] [Daily] Fierce Fight in the Abyss
-			17013 [XML] [Daily] Fierce Fight in Balaurea
-			17014 [XML] [Daily] Duel with the Asmodians
-			17015 [XML] [League] Fierce Fight in the Base of the Abyss
-			17016 [XML] [League] Fierce Fight in the Top of the Abyss
-			17017 [XML] [League] Guardian Deity General of the Core of the Abyss
-			17018 [XML] [League] Inggison Fortress Operation
-			17019 [XML] [League] Duel with the Alter Ego
-			27000 [XML] [Group] Guardian Deity General of the Nochsana Training Camp
-			27001 [XML] [Group] Esras' Fate
-			27002 [XML] [Group] Raksha's Arrogance
-			27003 [XML] [Group] Run Off with Kromede
-			27004 [XML] [Group] Temple of the Ferocious Ruler
-			27005 [XML] [Alliance] Zadra's Darkness
-			27006 [XML] [Group] Surrender of the Adma Stronghold
-			27007 [XML] [Group] Underground Great Blacksmith
-			27008 [XML] [Alliance] Sand Lord's Oppression
-			27009 [XML] [Group] Bakarma's Bad Reputation
-			27010 [XML] [Group] Demise of the Sealed Temple
-			27011 [XML] [Group] Brigade General of the Rentus Base
-			27012 [XML] [Daily] Fierce Fight in the Abyss
-			27013 [XML] [Daily] Fierce Fight in Balaurea
-			27014 [XML] [Daily] Duel with the Asmodians
-			27015 [XML] [League] Fierce Fight in the Base of the Abyss
-			27016 [XML] [League] Fierce Fight in the Top of the Abyss
-			27017 [XML] [League] Guardian Deity General of the Core of the Abyss
-			27018 [XML] [League] Inggison Fortress Operation
-			27019 [XML] [League] Duel with the Alter Ego
+			17000 [XML] [Group] Generally Nochsana
+			17001 [XML] [Group] Bakarma Attack
+			17002 [XML] [Group] Anuhart Rage
+			17003 [XML] [Group] Killing Kromede
+			17004 [XML] [Group] Unstable Triroan Knockout
+			17005 [XML] [Alliance] Dragon Lord Assault
+			17006 [XML] [Group] Attacking Tiamat Stronghold
+			17007 [XML] [Group] Defeat Sheba
+			17008 [XML] [Alliance] Perish the Petralith
+			17009 [XML] [Group] Blasting Modor
+			17010 [XML] [Group] Striking Pashid
+			17011 [XML] [Group] Victory Over Beritra
+			17012 [XML] [Daily] Fighting in the Abyss
+			17013 [XML] [Daily] Fighting in Balaurea
+			17014 [XML] [Daily] Dueling the Asmodians
+			17015 [XML] [League] Lower Abyss Guardian
+			17016 [XML] [League] Upper Abyss Guardian
+			17017 [XML] [League] Core Abyss Guardian
+			17018 [XML] [League] Inggison Fortress Guardian
+			17019 [XML] [League] Attack the Guardian Deity General
+			27000 [XML] [Group] Nochsana's Fate
+			27001 [XML] [Group] Bakarma's Fate
+			27002 [XML] [Group] Anuhart's Fate
+			27003 [XML] [Group] Kromede's Fate
+			27004 [XML] [Group] Lannok's Fate
+			27005 [XML] [Alliance] Tiamat's Fate
+			27006 [XML] [Group] Tahabata's Fate
+			27007 [XML] [Group] Sheba's Fate
+			27008 [XML] [Alliance] Hyperion's Fate
+			27009 [XML] [Group] Modor's Fate
+			27010 [XML] [Group] Pashid's Fate
+			27011 [XML] [Group] Beritra's Fate
+			27012 [XML] [Daily] The Abyss Cull
+			27013 [XML] [Daily] Balaurean Cull
+			27014 [XML] [Daily] The Elyos Cull
+			27015 [XML] [League] Base Dominion
+			27016 [XML] [League] Top Dominion
+			27017 [XML] [League] Core Dominion
+			27018 [XML] [League] The Gelkmaros General
+			27019 [XML] [League] Guardian Deity General Destruction
 		[END] SUMMARY
 -->
 	<!-- HUNTING QUESTS -->
-	
-	<!-- must be tested -->
 	<monster_hunt id="17000" start_npc_ids="0" end_npc_ids="800447"/>
 	<monster_hunt id="17001" start_npc_ids="0" end_npc_ids="800447"/>
 	<monster_hunt id="17002" start_npc_ids="0" end_npc_ids="800447"/>
@@ -87,5 +85,4 @@
 	<kill_in_world id="27012" start_npc_ids="0" end_npc_ids="800451" worlds="400010000" amount="5"/>
 	<kill_in_world id="27013" start_npc_ids="0" end_npc_ids="800450" worlds="220070000 210050000" amount="5"/>
 	<kill_in_world id="27014" start_npc_ids="0" end_npc_ids="800452" worlds="0" amount="5"/>
-	<!-- SAME QUEST AS ELEMENTIS_FOREST DO NOT REWRITE -->
 </quest_scripts>
