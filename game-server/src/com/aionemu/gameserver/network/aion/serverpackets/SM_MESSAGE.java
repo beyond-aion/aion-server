@@ -105,7 +105,8 @@ public class SM_MESSAGE extends AionServerPacket {
 	 * @param senderObjectId
 	 *          can be 0 for system message (like announcements)
 	 * @param senderName
-	 *          used for shout ATM, can be null in other cases
+	 *          if the client knows the senderObjectId, it will automatically display the objects name, otherwise this senderName will be shown (system
+	 *          chats never show any sender name though)
 	 * @param message
 	 *          actual message
 	 * @param chatType
@@ -145,47 +146,12 @@ public class SM_MESSAGE extends AionServerPacket {
 		writeC(chatType.toInteger());
 		writeC((senderRace > 0 && con.getActivePlayer() != null && con.getActivePlayer().getAccessLevel() > 0) ? 0 : senderRace);
 		writeD(senderObjectId);
-
-		switch (chatType) {
-			case NORMAL:
-			case GOLDEN_YELLOW:
-			case WHITE:
-			case YELLOW:
-			case BRIGHT_YELLOW:
-			case WHITE_CENTER:
-			case YELLOW_CENTER:
-			case BRIGHT_YELLOW_CENTER:
-				writeH(0x00); // unknown
-				writeS(message);
-				break;
-			case SHOUT:
-				writeS(senderName);
-				writeS(message);
-				writeF(x);
-				writeF(y);
-				writeF(z);
-				break;
-			case ALLIANCE:
-			case GROUP:
-			case GROUP_LEADER:
-			case LEGION:
-			case WHISPER:
-			case LEAGUE:
-			case LEAGUE_ALERT:
-			case CH1:
-			case CH2:
-			case CH3:
-			case CH4:
-			case CH5:
-			case CH6:
-			case CH7:
-			case CH8:
-			case CH9:
-			case CH10:
-			case COMMAND:
-				writeS(senderName);
-				writeS(message);
-				break;
+		writeS(senderName);
+		writeS(message);
+		if (chatType == ChatType.SHOUT) {
+			writeF(x);
+			writeF(y);
+			writeF(z);
 		}
 	}
 }
