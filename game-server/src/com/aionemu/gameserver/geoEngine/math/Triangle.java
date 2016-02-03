@@ -33,7 +33,6 @@
 package com.aionemu.gameserver.geoEngine.math;
 
 
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 
 /**
  * <code>Triangle</code> defines a object for containing triangle information.
@@ -44,14 +43,6 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
  * @author Joshua Slack
  */
 public class Triangle extends AbstractTriangle /* implements Reusable*/ {
-
-	//@SuppressWarnings("rawtypes")
-	//private static final ObjectFactory FACTORY = new ObjectFactory() {
-
-    public Object create() {
-        return new Triangle();
-    }
-//};
 
     private Vector3f pointa = new Vector3f();
     private Vector3f pointb = new Vector3f();
@@ -277,46 +268,5 @@ public class Triangle extends AbstractTriangle /* implements Reusable*/ {
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
-    }
-
-		/* (non-Javadoc)
-		 * @see javolution.lang.Reusable#reset()
-		 *//*
-		@Override
-		public void reset() {
-			pointa.reset();
-			pointb.reset();
-			pointc.reset();
-			center = null;
-			normal = null;
-			projection = 0;
-			index = 0;
-		} */
-		
-    /**
-     * Returns a new, preallocated or {@link #recycle recycled} text builder
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}).
-     *
-     * @return a new, preallocated or recycled text builder instance.
-     */
-    public static Triangle newInstance() {
-    	/*if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
-    		return (Triangle) FACTORY.object();
-    	else */
-    		return new Triangle();
-    }
-
-    /**
-     * Recycles a text builder {@link #newInstance() instance} immediately
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}). 
-     */
-    @SuppressWarnings("unchecked")
-		public static void recycle(Triangle instance) {
-    	/*if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)  
-    		FACTORY.recycle(instance);
-    	else */
-    		instance = null;
     }
 }

@@ -10,9 +10,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javolution.util.FastTable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -70,13 +67,13 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301390000)
 public class DrakenspireDepths extends GeneralInstanceHandler {
 
-	private AtomicBoolean isRaceSet = new AtomicBoolean(false);
-	private AtomicBoolean isTwinFightStarted = new AtomicBoolean(false);
-	private AtomicBoolean isOrissanFightStarted = new AtomicBoolean(false);
-	private AtomicBoolean isOrissanFailed = new AtomicBoolean(false);
-	private AtomicBoolean isWaveEventStarted = new AtomicBoolean(false);
-	private AtomicBoolean isBeritraFightStarted = new AtomicBoolean(false);
-	private AtomicBoolean isBeritraTransformed = new AtomicBoolean(false);
+	private AtomicBoolean isRaceSet = new AtomicBoolean();
+	private AtomicBoolean isTwinFightStarted = new AtomicBoolean();
+	private AtomicBoolean isOrissanFightStarted = new AtomicBoolean();
+	private AtomicBoolean isOrissanFailed = new AtomicBoolean();
+	private AtomicBoolean isWaveEventStarted = new AtomicBoolean();
+	private AtomicBoolean isBeritraFightStarted = new AtomicBoolean();
+	private AtomicBoolean isBeritraTransformed = new AtomicBoolean();
 	private AtomicInteger killedCommanderCount = new AtomicInteger();
 	private AtomicInteger fallenWaveDefender = new AtomicInteger();
 	private AtomicInteger dispelledBuffs = new AtomicInteger();
@@ -84,7 +81,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	private List<Future<?>> waveAssaultTasks = new FastTable<>();
 	private Future<?> twinFailTask;
 	private Future<?> orissanSwitchTask;
-	private Future<?> beritraDespawnTask;
+	// private Future<?> beritraDespawnTask;
 	private Race race = Race.ASMODIANS;
 	private boolean isHardmode = true;
 	private byte twinProgressCount = 0;
@@ -232,7 +229,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			}
 		}, 70000);
 	}
-	
+
 	private void handleWaveAttacks() {
 		if (!isHardmode && waveCount >= 3 || waveCount >= 5)
 			return;
@@ -341,16 +338,16 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			}
 		}, 20000);
 	}
-	
+
 	private void scheduleBeritrasDespawn() {
-		beritraDespawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
+		/*beritraDespawnTask = */ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				beritraProgressCount++;
 				switch (beritraProgressCount) {
-					// TODO:
-					
+				// TODO:
+
 				}
 			}
 		}, 10000, 10000);
@@ -465,7 +462,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 236246: // Lv3mode Human Beritra
 				if (isBeritraFightStarted.compareAndSet(false, true))
 					// onBeritraFightStart();
-				break;
+					break;
 			case 236247: // Dragon Beritra
 				if (isBeritraTransformed.compareAndSet(false, true))
 					scheduleBeritrasDespawn();
@@ -563,7 +560,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 		switch (skillId) {
@@ -571,8 +568,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 21611:
 			case 21612:
 				if (dispelledBuffs.incrementAndGet() == 3)
-					//onBeritraTransform();
-				break;
+					// onBeritraTransform();
+					break;
 		}
 	}
 
