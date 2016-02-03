@@ -65,6 +65,43 @@
 			<drop item_id="102100245" name="Head Priest's Cipher-Blade" chance="7.5"/>
 		</drop_group>
 	</npc_drop>
+	<!-- Morheim -->
+	<npc_drop npc_id="212928" replace_type="FULL"><!-- Treasure Box -->
+		<drop_group race="PC_ALL" use_category="true" name="Kinah">
+			<!-- Level 1 -->
+			<drop item_id="182400001" name="Kinah" min_amount="10" max_amount="25" chance="100" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Other">
+			<!-- Level 20 -->
+			<drop item_id="169000005" name="Power Shard" min_amount="100" max_amount="100" chance="60" />
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="212945" replace_type="FULL"><!-- Treasure Box -->
+		<drop_group race="PC_ALL" use_category="true" name="Named Accessory (Unique)">
+			<!-- Level 30 -->
+			<drop item_id="125001101" name="Sirocco Mask" chance="40" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Armor (Rare)">
+			<!-- Level 30 -->
+			<drop item_id="111100404" name="Ice Claw Gloves" chance="50" />
+			<drop item_id="111500443" name="Ice Claw Handguards" chance="50" />
+			<drop item_id="111300406" name="Ice Claw Vambrace" chance="50" />
+			<drop item_id="111600431" name="Ice Claw Gauntlets" chance="50" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Kinah">
+			<!-- Level 1 -->
+			<drop item_id="182400001" name="Kinah" min_amount="25" max_amount="35" chance="100" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Potion">
+			<!-- Level 30 -->
+			<drop item_id="162000004" name="Life Potion" min_amount="20" max_amount="20" chance="50" />
+			<drop item_id="162000009" name="Mana Potion" min_amount="20" max_amount="20" chance="50" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Power Shard">
+			<!-- Level 30 -->
+			<drop item_id="169000007" name="Greater Power Shard" min_amount="200" max_amount="200" chance="60" />
+		</drop_group>
+	</npc_drop>
 	<!-- Eltnen -->
 	<npc_drop npc_id="211857" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Headband (Rare)">
