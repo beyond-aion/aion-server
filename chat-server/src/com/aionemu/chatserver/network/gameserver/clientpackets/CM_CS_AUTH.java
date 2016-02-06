@@ -55,6 +55,7 @@ public class CM_CS_AUTH extends GsClientPacket {
 				log.info("Gameserver #" + gameServerId + " is now online.");
 				break;
 			case NOT_AUTHED:
+				log.warn("Gameserver #" + gameServerId + " has invalid password.");
 				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				break;
 			case ALREADY_REGISTERED:
