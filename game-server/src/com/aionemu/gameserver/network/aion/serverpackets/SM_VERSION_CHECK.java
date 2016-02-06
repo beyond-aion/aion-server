@@ -80,16 +80,13 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeH(2); // unk
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
 		writeC(EventService.getInstance().getEventType().getId()); // city decoration
-		writeC(0);// unk
-		writeC(0);// unk
-		writeD(0 * 65536); // negative server time offset (timeInSeconds * 2^16, accepts only positive numbers)
-		writeC(0x00);// unk (server time related)
-		writeC(0x00);// unk (server time related)
+		writeD(0); // unk
+		writeD(-(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).getRawOffset() / 1000)); // server time zone offset relative to UTC in seconds
 		writeC(0x04);// unk
 		writeC(120);// unk
 		writeH(25233);// unk
 		writeC(2);// 4.0
-		writeC(0x01);// unk
+		writeC(1);// unk
 		writeD(0);// 4.0
 		writeD(0);// 4.5
 		writeD(68536);// 4.5
@@ -103,9 +100,9 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(1);//4.8 activate stonespearSiege
 		writeC(0); //1 = master Server
 		writeC(0);
-		writeH(0);		
-		writeD(0);//4.8
-		writeD(0);//4.8
+		writeH(0);
+		writeD(0); // 4.8
+		writeD(0); // 4.8
 		writeD(0);//4.8
 		writeD(1000);//4.8
 		writeD(1000);//4.8
