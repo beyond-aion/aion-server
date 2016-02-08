@@ -24,25 +24,18 @@ public abstract class MailServicePacket extends AionServerPacket {
 	}
 
 	protected void writeLettersList(List<Letter> letters) {
-		int maxDisplayableSlots = 256; // 0 to 255
-		int lettersToDisplay = Math.min(maxDisplayableSlots, letters.size());
+		int lettersToDisplay = Math.min(120, letters.size()); // cap at 120 to limit packet size
 		writeD(player.getObjectId());
 		writeC(0);
-		writeC(maxDisplayableSlots - lettersToDisplay); // freeSlots
-		writeC(maxDisplayableSlots - 1); // last displayable slot number (255)
-		for (int i = 0; i < lettersToDisplay; i++) {
+		writeH(-lettersToDisplay);
+		for (int i = 0; i < lettersToDisplay; i++) { // mail #101+ will be hidden on client side until you delete some 
 			Letter letter = letters.get(i);
 			writeD(letter.getObjectId());
 			writeS(letter.getSenderName());
 			writeS(letter.getTitle());
 			writeC(letter.isUnread() ? 0 : 1); // isRead
-			if (letter.getAttachedItem() != null) {
-				writeD(letter.getAttachedItem().getObjectId());
-				writeD(letter.getAttachedItem().getItemTemplate().getTemplateId());
-			} else {
-				writeD(0);
-				writeD(0);
-			}
+			writeD(letter.getAttachedItem() == null ? 0 : letter.getAttachedItem().getObjectId());
+			writeD(letter.getAttachedItem() == null ? 0 :letter.getAttachedItem().getItemTemplate().getTemplateId());
 			writeQ(letter.getAttachedKinah());
 			writeC(letter.getLetterType().getId());
 		}
