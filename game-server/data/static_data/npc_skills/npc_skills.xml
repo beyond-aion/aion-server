@@ -5043,6 +5043,7 @@
         <npcskill skillid="16748" skilllevel="31" probability="25"/>
     </npcskills>
     <npcskills npcid="211040">
+        <npcskill skillid="16415" skilllevel="31" probability="25"/>
         <npcskill skillid="16609" skilllevel="31" probability="25"/>
         <npcskill skillid="16855" skilllevel="31" probability="25"/>
         <npcskill skillid="16860" skilllevel="31" probability="25"/>
