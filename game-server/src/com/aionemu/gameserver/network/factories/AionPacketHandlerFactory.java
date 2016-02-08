@@ -94,7 +94,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_FRIEND_SET_MEMO(0x1B2, State.IN_GAME));
 		addPacket(new CM_FRIEND_STATUS(0x14D, State.IN_GAME));
 		addPacket(new CM_FUSION_WEAPONS(0x191, State.IN_GAME));
-		addPacket(new CM_GAMEGUARD(0x10B, State.IN_GAME));
+		addPacket(new CM_GAMEGUARD(0x10B, State.IN_GAME, State.AUTHED));
 		addPacket(new CM_GATHER(0x0F6, State.IN_GAME));
 		addPacket(new CM_GET_HOUSE_BIDS(0x1BD, State.IN_GAME));
 		addPacket(new CM_GET_MAIL_ATTACHMENT(0x12B, State.IN_GAME));

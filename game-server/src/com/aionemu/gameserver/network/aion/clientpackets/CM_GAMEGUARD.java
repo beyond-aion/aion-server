@@ -21,6 +21,6 @@ public class CM_GAMEGUARD extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		AntiHackService.checkAionBin(size, getConnection().getActivePlayer());
+		AntiHackService.checkAionBin(size, getConnection());
 	}
 }
