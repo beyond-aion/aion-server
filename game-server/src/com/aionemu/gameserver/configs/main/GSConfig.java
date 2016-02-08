@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.configs.main;
 
-import java.time.ZoneId;
+import java.util.TimeZone;
 
 import com.aionemu.commons.configuration.Property;
 
@@ -26,9 +26,9 @@ public class GSConfig {
 	@Property(key = "gameserver.players.max.level", defaultValue = "65")
 	public static int PLAYER_MAX_LEVEL;
 
-	/* Time Zone name (used for events & timed spawns) */
-	@Property(key = "gameserver.timezone", defaultValue = "")
-	public static String TIME_ZONE_ID = ZoneId.systemDefault().getId();
+	/* Time Zone (used for events & timed spawns) */
+	@Property(key = "gameserver.timezone")
+	public static TimeZone TIME_ZONE;
 
 	/* Enable connection with CS (ChatServer) */
 	@Property(key = "gameserver.chatserver.enable", defaultValue = "false")

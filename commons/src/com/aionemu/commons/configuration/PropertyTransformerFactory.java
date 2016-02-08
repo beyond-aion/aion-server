@@ -2,6 +2,7 @@ package com.aionemu.commons.configuration;
 
 import java.io.File;
 import java.net.InetSocketAddress;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import com.aionemu.commons.configuration.transformers.BooleanTransformer;
@@ -18,6 +19,7 @@ import com.aionemu.commons.configuration.transformers.LongTransformer;
 import com.aionemu.commons.configuration.transformers.PatternTransformer;
 import com.aionemu.commons.configuration.transformers.ShortTransformer;
 import com.aionemu.commons.configuration.transformers.StringTransformer;
+import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 import com.aionemu.commons.utils.ClassUtils;
 
 /**
@@ -88,6 +90,8 @@ public class PropertyTransformerFactory {
 			return PatternTransformer.SHARED_INSTANCE;
 		} else if (clazzToTransform == Class.class) {
 			return ClassTransformer.SHARED_INSTANCE;
+		} else if (ClassUtils.isSubclass(clazzToTransform, TimeZone.class)) {
+			return TimeZoneTransformer.SHARED_INSTANCE;
 		} else {
 			throw new TransformationException("Transformer not found for class " + clazzToTransform.getName());
 		}

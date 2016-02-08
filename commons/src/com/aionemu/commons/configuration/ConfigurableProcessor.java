@@ -94,10 +94,8 @@ public class ConfigurableProcessor {
 
 			if (f.isAnnotationPresent(Property.class)) {
 				// Final fields should not be processed
-				if (Modifier.isFinal(f.getModifiers())) {
-					log.error("Attempt to proceed final field " + f.getName() + " of class " + clazz.getName());
-					throw new RuntimeException();
-				}
+				if (Modifier.isFinal(f.getModifiers()))
+					throw new RuntimeException("Attempt to proceed final field " + f.getName() + " of class " + clazz.getName());
 				processField(f, obj, props);
 			}
 		}
@@ -124,12 +122,10 @@ public class ConfigurableProcessor {
 			Property property = f.getAnnotation(Property.class);
 			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || isKeyPresent(property.key(), props)) {
 				f.set(obj, getFieldValue(f, props));
-			} else if (log.isDebugEnabled()) {
+			} else
 				log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
-			}
 		} catch (Exception e) {
-			log.error("Can't transform field " + f.getName() + " of class " + f.getDeclaringClass());
-			throw new RuntimeException();
+			throw new RuntimeException("Can't transform field " + f.getName() + " of class " + f.getDeclaringClass(), e);
 		}
 		f.setAccessible(oldAccessible);
 	}
@@ -161,9 +157,7 @@ public class ConfigurableProcessor {
 
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
-			if (log.isDebugEnabled()) {
-				log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
-			}
+			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
 		}
 
 		PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(), property.propertyTransformer());

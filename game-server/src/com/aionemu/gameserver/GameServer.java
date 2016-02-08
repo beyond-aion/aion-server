@@ -95,7 +95,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.ThreadUncaughtExceptionHandler;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
-import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
 import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.utils.javaagent.JavaAgentUtils;
@@ -121,7 +120,7 @@ public class GameServer {
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
-	
+
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
 	private static int ASMOS_COUNT = 0;
@@ -258,13 +257,8 @@ public class GameServer {
 
 		ConsoleUtil.printSection("Limits");
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
-			lock.lock();
-			try {
-				ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
-				ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
-			} finally {
-				lock.unlock();
-			}
+			ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
+			ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
 			updateRatio(null, 0);
 		}
 		LimitedItemTradeService.getInstance().start();
@@ -385,8 +379,6 @@ public class GameServer {
 		// init config
 		ConsoleUtil.printSection("Configuration");
 		Config.load();
-		// DateTime zone override from configs
-		DateTimeUtil.init();
 		// Second should be database factory
 		ConsoleUtil.printSection("Database");
 		DatabaseFactory.init();
@@ -451,8 +443,7 @@ public class GameServer {
 			lock.unlock();
 		}
 
-		log.info("FACTIONS RATIO UPDATED: E " + String.format("%.1f", ELYOS_RATIO) + " % / A "
-			+ String.format("%.1f", ASMOS_RATIO) + " %");
+		log.info("FACTIONS RATIO UPDATED: E " + String.format("%.1f", ELYOS_RATIO) + " % / A " + String.format("%.1f", ASMOS_RATIO) + " %");
 	}
 
 	public static float getRatiosFor(Race race) {

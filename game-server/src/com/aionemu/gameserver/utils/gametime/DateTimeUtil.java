@@ -13,17 +13,9 @@ import com.aionemu.gameserver.configs.main.GSConfig;
  */
 public final class DateTimeUtil {
 
-	public static void init() {
-		try {
-			DateTimeZone.forID(GSConfig.TIME_ZONE_ID);
-		} catch (IllegalArgumentException e) {
-			throw new Error("Invalid or not supported timezone specified!\nAdd a valid value for GSConfig.TIME_ZONE_ID", e);
-		}
-	}
-
 	@Deprecated
 	public static DateTime getDateTime(GregorianCalendar calendar) {
 		// TODO rework all time based stuff to java 8 standards
-		return new DateTime(calendar).withZoneRetainFields(DateTimeZone.forID(GSConfig.TIME_ZONE_ID));
+		return new DateTime(calendar).withZoneRetainFields(DateTimeZone.forTimeZone(GSConfig.TIME_ZONE));
 	}
 }

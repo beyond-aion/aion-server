@@ -130,7 +130,8 @@ public class StigmaService {
 			return;
 		}
 
-		mainLoop: for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
+		mainLoop:
+		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
 				player.getEquipment().unEquipItem(item.getObjectId(), 0);
 				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
@@ -576,7 +577,7 @@ public class StigmaService {
 	private static void addStigmaSkills(Player player, Stigma stigma, int stigmaLevel) {
 		for (SkillTemplate st : stigma.getAllSkillTemplates())
 			for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, false))
-			player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
+				player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
 	}
 
 	private static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
