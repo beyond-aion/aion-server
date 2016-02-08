@@ -5,14 +5,13 @@ import java.util.concurrent.Future;
 import org.joda.time.DateTime;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CAPTCHA;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.chatserver.ChatServer;
+import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -79,27 +78,19 @@ public class PunishmentService {
 			if (delayInMinutes > 0) {
 				prisonTimer = delayInMinutes * 60000L;
 				schedulePrisonTask(player, prisonTimer);
+				ChatBanService.banPlayer(player, delayInMinutes);
+				player.setStartPrison(System.currentTimeMillis());
+				TeleportService2.teleportToPrison(player);
+				DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
 			}
-
-			if (GSConfig.ENABLE_CHAT_SERVER)
-				ChatServer.getInstance().sendPlayerLogout(player);
-
-			player.setStartPrison(System.currentTimeMillis());
-			TeleportService2.teleportToPrison(player);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
 		} else {
-			PacketSendUtility.sendMessage(player, "You come out of prison.");
-
-			if (GSConfig.ENABLE_CHAT_SERVER)
-				PacketSendUtility.sendMessage(player, "To use global chats again relog!");
-
 			player.setPrisonTimer(0);
-
+			ChatBanService.unbanPlayer(player);
 			TeleportService2.moveToBindLocation(player, true);
-
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
+			PacketSendUtility.sendMessage(player, "You come out of prison.");
 		}
 	}
 
@@ -136,6 +127,7 @@ public class PunishmentService {
 				if (timeInPrison <= 0)
 					timeInPrison = 1;
 
+				ChatBanService.banPlayer(player, timeInPrison);
 				PacketSendUtility.sendMessage(player, "You are still in prison for " + timeInPrison + " minute" + (timeInPrison > 1 ? "s" : "") + ".");
 
 				player.setStartPrison(System.currentTimeMillis());

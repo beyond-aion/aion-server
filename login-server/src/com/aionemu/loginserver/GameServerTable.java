@@ -2,14 +2,12 @@ package com.aionemu.loginserver;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.network.IPRange;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.dao.GameServersDAO;
 import com.aionemu.loginserver.model.Account;
@@ -58,10 +56,8 @@ public class GameServerTable {
 	 *          Connection object
 	 * @param requestedId
 	 *          id of server that was requested
-	 * @param defaultAddress
+	 * @param ip
 	 *          default network address from server, usually internet address
-	 * @param ipRanges
-	 *          mapping of various ip ranges, usually used for local area networks
 	 * @param port
 	 *          port that is used by server
 	 * @param maxPlayers
@@ -70,7 +66,7 @@ public class GameServerTable {
 	 *          server password that is specified configs, used to check if gs can auth on ls
 	 * @return GsAuthResponse
 	 */
-	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] defaultAddress, List<IPRange> ipRanges,
+	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] ip,
 		int port, int maxPlayers, String password) {
 		GameServerInfo gsi = gameservers.get(requestedId);
 
@@ -78,7 +74,7 @@ public class GameServerTable {
 		 * This id is not Registered at LoginServer.
 		 */
 		if (gsi == null) {
-			log.info(gsConnection + " requestedID=" + requestedId + " not aviable!");
+			log.warn(gsConnection + " requestedID: " + requestedId + " is not registered in LS database!");
 			return GsAuthResponse.NOT_AUTHED;
 		}
 
@@ -91,15 +87,12 @@ public class GameServerTable {
 		/**
 		 * Check if password and ip are ok.
 		 */
-		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIp(), gsConnection.getIP())) {
-
-			log.info(gsi.getPassword() + " " + password);
-			log.info(gsConnection + " wrong ip or password!");
+		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
+			log.warn(gsConnection + " requested ID: " + requestedId + " has wrong IP or password!");
 			return GsAuthResponse.NOT_AUTHED;
 		}
 
-		gsi.setDefaultAddress(defaultAddress);
-		gsi.setIpRanges(ipRanges);
+		gsi.setIp(ip);
 		gsi.setPort(port);
 		gsi.setMaxPlayers(maxPlayers);
 		gsi.setConnection(gsConnection);

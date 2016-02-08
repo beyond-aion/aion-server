@@ -9,9 +9,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author -Nemesiss-
@@ -55,18 +53,9 @@ public class CM_QUIT extends AionClientPacket {
 			PlayerLeaveWorldService.leaveWorld(player);
 		}
 
-		sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
-
-		if (!stayConnected) {
-			// delay to avoid client disconnect error
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					LoginServer.getInstance().aionClientDisconnected(con.getAccount().getId());
-					con.close();
-				}
-			}, 50);
-		}
+		if (stayConnected)
+			sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
+		else
+			con.close(new SM_QUIT_RESPONSE(charEditScreen)); // makes sure this packet will be sent before closing connection
 	}
 }

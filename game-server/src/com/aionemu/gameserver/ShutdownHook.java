@@ -15,6 +15,7 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager.SortBy;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
@@ -94,8 +95,8 @@ public class ShutdownHook extends Thread {
 			}
 		}
 
-		// Disconnect login server from game.
-		LoginServer.getInstance().gameServerDisconnected();
+		ChatServer.getInstance().disconnect();
+		LoginServer.getInstance().disconnect();
 
 		// Save all players.
 		for (Player activePlayer : World.getInstance().getAllPlayers()) {

@@ -144,8 +144,7 @@ public class PlayerLeaveWorldService {
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
 		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
 
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatService.onPlayerLogout(player);
+		ChatServer.getInstance().sendPlayerLogout(player);
 
 		PlayerService.storePlayer(player);
 

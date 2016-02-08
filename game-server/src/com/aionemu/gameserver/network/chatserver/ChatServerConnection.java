@@ -11,11 +11,13 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.network.chatserver.serverpackets.SM_CS_AUTH;
+import com.aionemu.gameserver.network.factories.CsPacketHandlerFactory;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author ATracer
+ * @author ATracer, Neon
  */
 public class ChatServerConnection extends AConnection {
 
@@ -44,27 +46,18 @@ public class ChatServerConnection extends AConnection {
 	 * Current state of this connection
 	 */
 	private State state;
-	private ChatServer chatServer;
 	private CsPacketHandler csPacketHandler;
 
-	/**
-	 * @param sc
-	 * @param d
-	 * @throws IOException
-	 */
-
-	public ChatServerConnection(SocketChannel sc, Dispatcher d, CsPacketHandler csPacketHandler) throws IOException {
+	public ChatServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 2, 8192 * 2);
-		this.chatServer = ChatServer.getInstance();
-		this.csPacketHandler = csPacketHandler;
-
-		state = State.CONNECTED;
-		log.info("Connected to ChatServer!");
+		this.state = State.CONNECTED;
+		this.csPacketHandler = new CsPacketHandlerFactory().getPacketHandler();
 	}
 
 	@Override
 	protected void initialized() {
-		this.sendPacket(new SM_CS_AUTH());
+		log.info("Connected to ChatServer!");
+		sendPacket(new SM_CS_AUTH());
 	}
 
 	@Override
@@ -94,7 +87,10 @@ public class ChatServerConnection extends AConnection {
 
 	@Override
 	protected final void onDisconnect() {
-		chatServer.chatServerDown();
+		if (GameServer.isShuttingDown())
+			return;
+		log.warn("Lost connection with ChatServer");
+		ChatServer.getInstance().reconnect();
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.network.factories.LsPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_GS_AUTH;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -18,13 +19,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * Object representing connection between LoginServer and GameServer.
  * 
- * @author -Nemesiss-
+ * @author -Nemesiss-, Neon
  */
 public class LoginServerConnection extends AConnection {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(LoginServerConnection.class);
 
 	/**
@@ -52,29 +50,16 @@ public class LoginServerConnection extends AConnection {
 	private State state;
 	private LsPacketHandler lsPacketHandler;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param sc
-	 * @param d
-	 * @throws IOException
-	 */
-
 	public LoginServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
-		LsPacketHandlerFactory lsPacketHandlerFactory = LsPacketHandlerFactory.getInstance();
-		this.lsPacketHandler = lsPacketHandlerFactory.getPacketHandler();
-
-		state = State.CONNECTED;
-		log.info("Connected to LoginServer!");
+		this.state = State.CONNECTED;
+		this.lsPacketHandler = LsPacketHandlerFactory.getInstance().getPacketHandler();
 	}
 
 	@Override
 	protected void initialized() {
-		/**
-		 * send first packet - authentication.
-		 */
-		this.sendPacket(new SM_GS_AUTH());
+		log.info("Connected to LoginServer!");
+		sendPacket(new SM_GS_AUTH());
 	}
 
 	/**
@@ -86,7 +71,7 @@ public class LoginServerConnection extends AConnection {
 	@Override
 	public boolean processData(ByteBuffer data) {
 		LsClientPacket pck = lsPacketHandler.handle(data, this);
-		log.debug("recived packet: " + pck);
+		log.debug("received packet: " + pck);
 
 		/**
 		 * Execute packet only if packet exist (!= null) and read was ok.
@@ -115,12 +100,12 @@ public class LoginServerConnection extends AConnection {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onDisconnect() {
-		LoginServer.getInstance().loginServerDown();
+		if (GameServer.isShuttingDown())
+			return;
+		log.warn("Lost connection with LoginServer");
+		LoginServer.getInstance().reconnect();
 	}
 
 	/**

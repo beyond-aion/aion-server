@@ -330,33 +330,24 @@ public class GameServer {
 		ConsoleUtil.printSection("System Info");
 		VersionInfoUtil.printAllInfo(GameServer.class);
 		SystemInfoUtil.printAllInfo();
-		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
-		startServers();
-
+		NioServer nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
+		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+		
+		LoginServer.getInstance().connect(nioServer);
+		if (GSConfig.ENABLE_CHAT_SERVER)
+			ChatServer.getInstance().connect(nioServer);
 	}
 
 	/**
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
-	private static void startServers() {
-		ConsoleUtil.printSection("Starting Network");
-		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS, NetworkConfig.GAME_PORT,
-			"Game Connections", new GameConnectionFactoryImpl()));
-
-		// Nio must go first
+	private static NioServer initNioServer() {
+		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
+			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion Connections", new GameConnectionFactoryImpl()));
 		nioServer.connect();
-
-		LoginServer ls = LoginServer.getInstance();
-		ls.setNioServer(nioServer);
-		ls.connect();
-
-		if (GSConfig.ENABLE_CHAT_SERVER) {
-			ChatServer cs = ChatServer.getInstance();
-			cs.setNioServer(nioServer);
-			cs.connect();
-		}
+		return nioServer;
 	}
 
 	/**

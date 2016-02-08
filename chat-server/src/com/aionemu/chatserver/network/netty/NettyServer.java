@@ -1,6 +1,5 @@
 package com.aionemu.chatserver.network.netty;
 
-import java.net.InetSocketAddress;
 import java.nio.ByteOrder;
 import java.util.concurrent.Executors;
 
@@ -8,12 +7,9 @@ import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.buffer.HeapChannelBufferFactory;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
-import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.group.ChannelGroup;
-import org.jboss.netty.channel.group.ChannelGroupFuture;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
@@ -25,45 +21,32 @@ import com.aionemu.commons.network.ServerCfg;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class NettyServer {
 
-	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
-	private final ChannelGroup channelGroup = new DefaultChannelGroup(NettyServer.class.getName());
-	private final LoginToClientPipeLineFactory loginToClientPipeLineFactory;
-	private ChannelFactory loginToClientChannelFactory;
-	private NioServer nioServer;
 	private static NettyServer instance = new NettyServer();
+	private ChannelFactory aionClientChannelFactory;
+	private ChannelGroup aionClientChannelGroup;
+	private NioServer nioServer;
 
 	public static NettyServer getInstance() {
 		return instance;
 	}
 
-	public NettyServer() {
-		this.loginToClientPipeLineFactory = new LoginToClientPipeLineFactory(new ClientPacketHandler());
-		initialize();
-	}
+	private NettyServer() {
+		aionClientChannelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
+			Config.NIO_READ_WRITE_THREADS + 1);
+		aionClientChannelGroup = new DefaultChannelGroup(NettyServer.class.getName());
+		aionClientChannelGroup.add(initChannel()); // why not handle aion client packets via NioServer?
+		LoggerFactory.getLogger(this.getClass()).info("Server listening on "
+			+ (Config.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
+				: "IP: " + Config.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress())
+			+ " Port: " + Config.CLIENT_SOCKET_ADDRESS.getPort() + " for Aion Connections");
 
-	/**
-	 * Initialize listening on login port
-	 */
-	public void initialize() {
-		loginToClientChannelFactory = initChannelFactory();
-		Channel loginToClientChannel = initChannel(loginToClientChannelFactory, Config.CHAT_ADDRESS, loginToClientPipeLineFactory);
-		channelGroup.add(loginToClientChannel);
-		ServerCfg gs = new ServerCfg(Config.GAME_ADDRESS.getAddress().getHostAddress(), Config.GAME_ADDRESS.getPort(), "Gs Connections",
-			new GsConnectionFactoryImpl());
-		nioServer = new NioServer(5, gs);
+		nioServer = new NioServer(Config.NIO_READ_WRITE_THREADS,
+			new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
 		nioServer.connect();
-	}
-
-	/**
-	 * @return NioServerSocketChannelFactory
-	 */
-	private NioServerSocketChannelFactory initChannelFactory() {
-		return new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(), Runtime.getRuntime()
-			.availableProcessors() * 2 + 1);
 	}
 
 	/**
@@ -73,25 +56,24 @@ public class NettyServer {
 	 * @param channelPipelineFactory
 	 * @return Channel
 	 */
-	private Channel initChannel(ChannelFactory channelFactory, InetSocketAddress address, ChannelPipelineFactory channelPipelineFactory) {
-		ServerBootstrap bootstrap = new ServerBootstrap(channelFactory);
-		bootstrap.setPipelineFactory(channelPipelineFactory);
+	private Channel initChannel() {
+		ServerBootstrap bootstrap = new ServerBootstrap(aionClientChannelFactory);
+		bootstrap.setPipelineFactory(new LoginToClientPipeLineFactory(new ClientPacketHandler()));
 		bootstrap.setOption("child.bufferFactory", HeapChannelBufferFactory.getInstance(ByteOrder.LITTLE_ENDIAN));
 		bootstrap.setOption("child.tcpNoDelay", true);
 		bootstrap.setOption("child.keepAlive", true);
 		bootstrap.setOption("child.reuseAddress", true);
 		bootstrap.setOption("child.connectTimeoutMillis", 100);
 		bootstrap.setOption("readWriteFair", true);
-		return bootstrap.bind(address);
+		return bootstrap.bind(Config.CLIENT_SOCKET_ADDRESS);
 	}
 
 	/**
 	 * Shutdown server
 	 */
 	public void shutdownAll() {
-		ChannelGroupFuture future = channelGroup.close();
-		future.awaitUninterruptibly();
-		loginToClientChannelFactory.releaseExternalResources();
+		aionClientChannelGroup.close().awaitUninterruptibly();
+		aionClientChannelFactory.releaseExternalResources();
 		nioServer.shutdown();
 	}
 }

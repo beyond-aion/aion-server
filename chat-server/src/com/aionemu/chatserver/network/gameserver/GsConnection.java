@@ -93,6 +93,6 @@ public class GsConnection extends AConnection {
 	@Override
 	protected void initialized() {
 		state = State.CONNECTED;
-		log.info("Gameserver connection attemp from: " + getIP());
+		log.info("Gameserver connection attempt from: " + getIP());
 	}
 }

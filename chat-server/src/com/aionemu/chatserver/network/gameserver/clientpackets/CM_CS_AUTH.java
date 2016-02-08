@@ -28,11 +28,6 @@ public class CM_CS_AUTH extends GsClientPacket {
 	 */
 	private byte gameServerId;
 
-	/**
-	 * Default address for server
-	 */
-	private byte[] defaultAddress;
-
 	public CM_CS_AUTH(ByteBuffer buf, GsConnection connection) {
 		super(buf, connection, 0x00);
 	}
@@ -40,26 +35,25 @@ public class CM_CS_AUTH extends GsClientPacket {
 	@Override
 	protected void readImpl() {
 		gameServerId = (byte) readC();
-		defaultAddress = readB(readC());
 		password = readS();
 	}
 
 	@Override
 	protected void runImpl() {
-		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, defaultAddress, password);
+		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, password);
 
 		switch (resp) {
 			case AUTHED:
 				getConnection().setState(State.AUTHED);
 				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
-				log.info("Gameserver #" + gameServerId + " is now online.");
+				log.info("Gameserver #" + gameServerId + " is now online");
 				break;
 			case NOT_AUTHED:
-				log.warn("Gameserver #" + gameServerId + " has invalid password.");
+				log.warn("Gameserver #" + gameServerId + " (IP: " + getConnection().getIP() + ") tried to register with invalid password");
 				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				break;
 			case ALREADY_REGISTERED:
-				log.info("Gameserver #" + gameServerId + " is already registered!");
+				log.info("Gameserver #" + gameServerId + " is already registered");
 				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				break;
 		}

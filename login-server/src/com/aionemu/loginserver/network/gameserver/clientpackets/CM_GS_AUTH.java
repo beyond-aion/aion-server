@@ -1,13 +1,8 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import java.util.List;
-
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.IPRange;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.network.gameserver.GsAuthResponse;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
@@ -49,12 +44,7 @@ public class CM_GS_AUTH extends GsClientPacket {
 	/**
 	 * Default address for server
 	 */
-	private byte[] defaultAddress;
-
-	/**
-	 * List of IPRanges for this gameServer
-	 */
-	private List<IPRange> ipRanges;
+	private byte[] ip;
 
 	/**
 	 * {@inheritDoc}
@@ -62,15 +52,8 @@ public class CM_GS_AUTH extends GsClientPacket {
 	@Override
 	protected void readImpl() {
 		gameServerId = (byte) readC();
-
 		byte len1 = (byte) readC();
-		defaultAddress = readB(len1);
-		int size = readD();
-		ipRanges = new FastTable<IPRange>();
-		for (int i = 0; i < size; i++) {
-			ipRanges.add(new IPRange(readB(readC()), readB(readC()), readB(readC())));
-		}
-
+		ip = readB(len1);
 		port = readH();
 		maxPlayers = readD();
 		password = readS();
@@ -83,10 +66,10 @@ public class CM_GS_AUTH extends GsClientPacket {
 	protected void runImpl() {
 		final GsConnection client = this.getConnection();
 
-		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, defaultAddress, ipRanges, port, maxPlayers, password);
+		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, ip, port, maxPlayers, password);
 		switch (resp) {
 			case AUTHED:
-				log.info("Gameserver #" + gameServerId + " is now online.");
+				log.info("Gameserver #" + gameServerId + " is now online");
 				client.setState(State.AUTHED);
 				client.sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				ThreadPoolManager.getInstance().schedule(new Runnable() {

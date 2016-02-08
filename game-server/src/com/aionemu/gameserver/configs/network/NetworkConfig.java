@@ -7,16 +7,16 @@ import com.aionemu.commons.configuration.Property;
 public class NetworkConfig {
 
 	/**
-	 * Game Server port
+	 * Address where Aion clients will attempt to connect to (host/domain name or IP)
 	 */
-	@Property(key = "gameserver.network.client.port", defaultValue = "7777")
-	public static int GAME_PORT;
+	@Property(key = "gameserver.network.client.connect_address", defaultValue = "127.0.0.1:7777")
+	public static InetSocketAddress CLIENT_CONNECT_ADDRESS;
 
 	/**
-	 * Game Server bind ip
+	 * Local address where GS will listen for Aion client connections (* = bind any local IP)
 	 */
-	@Property(key = "gameserver.network.client.host", defaultValue = "*")
-	public static String GAME_BIND_ADDRESS;
+	@Property(key = "gameserver.network.client.socket_address", defaultValue = "*:7777")
+	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**
 	 * Max allowed online players
@@ -25,13 +25,13 @@ public class NetworkConfig {
 	public static int MAX_ONLINE_PLAYERS;
 
 	/**
-	 * LoginServer address
+	 * Address (host/domain name or IP) of the login server
 	 */
 	@Property(key = "gameserver.network.login.address", defaultValue = "localhost:9014")
 	public static InetSocketAddress LOGIN_ADDRESS;
 
 	/**
-	 * ChatServer address
+	 * Address (host/domain name or IP) of the chat server
 	 */
 	@Property(key = "gameserver.network.chat.address", defaultValue = "localhost:9021")
 	public static InetSocketAddress CHAT_ADDRESS;

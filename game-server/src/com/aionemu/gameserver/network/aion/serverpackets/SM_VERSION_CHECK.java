@@ -7,10 +7,10 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.network.NetworkController;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.services.ChatService;
+import com.aionemu.gameserver.network.chatserver.ChatServer;
+import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.EventService;
 
 /**
@@ -68,7 +68,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0x00); // unk
 		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code;
 		writeC(0x00); // unk
-		writeC((characterLimitCount * NetworkController.getInstance().getServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
+		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
 		writeD((int) LocalDateTime.now().atZone(GSConfig.TIME_ZONE.toZoneId()).toEpochSecond()); // server time
 		writeH(350); // unk
 		writeH(2561); // unk
@@ -119,13 +119,11 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0); // 4.8
 		writeC(64); // 4.8
 		writeC(64); // 4.8
-		writeH(0x01);// its loop size
-		// for... chat servers?
-		{
-			writeC(0x00);// spacer
-			// if the correct ip is not sent it will not work
-			writeB(ChatService.getIp());
-			writeH(ChatService.getPort());
+		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0);
+		if (ChatServer.getInstance().getPublicIP().length > 0) {
+			writeC(0); // spacer or maybe id
+			writeB(ChatServer.getInstance().getPublicIP());
+			writeH(ChatServer.getInstance().getPublicPort());
 		}
 	}
 }

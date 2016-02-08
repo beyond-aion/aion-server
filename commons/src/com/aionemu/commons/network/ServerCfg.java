@@ -1,51 +1,54 @@
 package com.aionemu.commons.network;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
 /**
  * This class represents ServerCfg for configuring NioServer
  * 
- * @author -Nemesiss-
- * @see com.aionemu.commons.network.ConnectionFactory
- * @see com.aionemu.commons.network.AConnection
+ * @author -Nemesiss-, Neon
  */
 public class ServerCfg {
 
-	/**
-	 * Host Name on wich we will listen for connections.
-	 */
-	public final String hostName;
-	/**
-	 * Port number on wich we will listen for connections.
-	 */
-	public final int port;
-	/**
-	 * Connection Name only for logging purposes.
-	 */
-	public final String connectionName;
-	/**
-	 * <code>ConnectionFactory</code> that will create <code>AConection</code> object<br>
-	 * representing new socket connection.
-	 * 
-	 * @see com.aionemu.commons.network.ConnectionFactory
-	 * @see com.aionemu.commons.network.AConnection
-	 */
-	public final ConnectionFactory factory;
+	private InetSocketAddress address;
+	private String connectionName;
+	private final ConnectionFactory factory;
 
 	/**
-	 * Constructor
-	 * 
-	 * @param hostName
-	 *          - Host Name on witch we will listen for connections.
-	 * @param port
-	 *          - Port number on witch we will listen for connections.
+	 * @param address
+	 *          - host name/IP and port on which we will listen for connections.
 	 * @param connectionName
 	 *          - only for logging purposes.
 	 * @param factory
-	 *          <code>ConnectionFactory</code> that will create <code>AConection</code> object
+	 *          - {@link ConnectionFactory} that will create {@link AConection} object, representing new socket connection.
 	 */
-	public ServerCfg(String hostName, int port, String connectionName, ConnectionFactory factory) {
-		this.hostName = hostName;
-		this.port = port;
+	public ServerCfg(InetSocketAddress address, String connectionName, ConnectionFactory factory) {
+		this.address = address;
 		this.connectionName = connectionName;
 		this.factory = factory;
+	}
+
+	public InetSocketAddress getSocketAddress() {
+		return address;
+	}
+
+	public InetAddress getInetAddress() {
+		return address.getAddress();
+	}
+
+	public String getIP() {
+		return address.getAddress().getHostAddress();
+	}
+
+	public int getPort() {
+		return address.getPort();
+	}
+
+	public String getConnectionName() {
+		return connectionName;
+	}
+
+	public ConnectionFactory getConnectionFactory() {
+		return factory;
 	}
 }

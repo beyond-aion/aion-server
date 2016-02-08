@@ -1,17 +1,17 @@
 package com.aionemu.gameserver.network.chatserver.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_CHAT_INIT;
+import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.chatserver.CsClientPacket;
-import com.aionemu.gameserver.services.ChatService;
+import com.aionemu.gameserver.services.ban.ChatBanService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
  */
 public class CM_CS_PLAYER_AUTH_RESPONSE extends CsClientPacket {
-
-	protected static final Logger log = LoggerFactory.getLogger(CM_CS_PLAYER_AUTH_RESPONSE.class);
 
 	/**
 	 * Player for which authentication was performed
@@ -38,6 +38,13 @@ public class CM_CS_PLAYER_AUTH_RESPONSE extends CsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		ChatService.playerAuthed(playerId, token);
+		if (ChatServer.getInstance().isUp()) {
+			Player player = World.getInstance().findPlayer(playerId);
+			if (player != null) {
+				PacketSendUtility.sendPacket(player, new SM_CHAT_INIT(token));
+				if (ChatBanService.isBanned(player))
+					ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), ChatBanService.getBanMinutes(player) * 60000L);
+			}
+		}
 	}
 }
