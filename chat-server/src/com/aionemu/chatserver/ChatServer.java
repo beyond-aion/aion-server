@@ -14,20 +14,21 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.network.netty.NettyServer;
-import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.chatserver.service.RestartService;
 import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
+import com.aionemu.commons.utils.info.VersionInfoUtil;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * @author ATracer, KID, nrg
@@ -95,13 +96,15 @@ public class ChatServer {
 		DAOManager.init();
 		IdFactory.getInstance();
 		GameServerService.getInstance();
-		BroadcastService.getInstance();
 		ChatService.getInstance();
-		NettyServer.getInstance();
 		RestartService.getInstance();
-		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 
+		ConsoleUtil.printSection("System Info");
+		VersionInfoUtil.printAllInfo(ChatServer.class);
 		SystemInfoUtil.printAllInfo();
-		log.info("AL Chat Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+
+		NettyServer.getInstance();
+		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
+		log.info("Chat Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}
 }

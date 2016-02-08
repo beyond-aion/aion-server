@@ -8,8 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author PenguinJoe ServerCommandProcessor implements a background thread to process commands from the console - either OS shell or a java-based
- *         launcher
+ * ServerCommandProcessor implements a background thread to process commands from the console - either OS shell or a java-based launcher
+ * 
+ * @author PenguinJoe, Neon
  */
 public class ServerCommandProcessor extends Thread {
 
@@ -29,6 +30,10 @@ public class ServerCommandProcessor extends Thread {
 				 */
 				if (command.equalsIgnoreCase("shutdown") || command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit"))
 					System.exit(0); // this will run finalizers and shutdown hooks for a clean shutdown.
+				else if (command.equalsIgnoreCase("restart")) {
+					ShutdownHook.setRestartOnly(true);
+					ShutdownHook.getInstance().start();
+				}
 			}
 		} catch (IOException e) {
 			// an IOException here indicates the console (or other launcher) is closing. The server needs to shut down too.
