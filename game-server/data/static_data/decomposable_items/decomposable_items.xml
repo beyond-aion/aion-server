@@ -26953,7 +26953,7 @@
         <items chance="30.0">
             <item id="188052995" name="+10 Brilliant Snowball"/>
         </items>
-        <items chance="15.0">
+        <items chance="70.0">
             <item id="188052998" name="[Event] Noble Melted Bundle"/>
         </items>
     </decomposable>
