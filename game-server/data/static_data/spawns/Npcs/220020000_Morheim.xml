@@ -1282,7 +1282,6 @@
 		<spawn npc_id="212734" respawn_time="300">
 			<spot x="1913.53" y="499.708" z="295.618" h="60"/>
 			<spot x="1950.67" y="341.612" z="279.75" h="112"/>
-			<spot x="1956.3" y="447.33" z="295.938" h="109"/>
 			<spot x="1957.02" y="346.63" z="279.75" h="61" walker_id="D3F98BD1BAB5194B9E381D880AAFAF27260ECFF3"/>
 			<spot x="2024.7" y="346.158" z="282.603" h="62"/>
 			<spot x="2061.28" y="402.706" z="273.044" h="37"/>
@@ -4400,6 +4399,7 @@
 		<!-- Kikananta -->
 		<spawn npc_id="204414" respawn_time="295">
 			<spot x="2582.39" y="400.71" z="214.21" h="120"/>
+			<spot x="2006.9" y="499.5" z="272.48" h="7"/>
 		</spawn>
 		<!-- Nobern -->
 		<spawn npc_id="206320" respawn_time="295">
@@ -5491,6 +5491,7 @@
 		<!-- Numutata -->
 		<spawn npc_id="217136" respawn_time="295">
 			<spot x="2111.5652" y="733.6982" z="244.7186" h="53"/>
+			<spot x="1956.3" y="447.3" z="295.7" h="51"/>
 		</spawn>
 		<!-- Nunu Brave -->
 		<spawn npc_id="211581" respawn_time="295">
