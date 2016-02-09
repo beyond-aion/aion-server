@@ -32371,7 +32371,7 @@
 			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="TEMPLAR"/>
 			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="TEMPLAR"/>
 			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_class="TEMPLAR"/>
-			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="TEMPLAR"/>
+			<item id="115001825" name="Vasharti Legionnaire's Shield" player_class="TEMPLAR"/>
 			<item id="100001795" name="Vasharti Legionnaire's Sword" player_class="GLADIATOR"/>
 			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="GLADIATOR"/>
 			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_class="GLADIATOR"/>
@@ -32391,14 +32391,14 @@
 			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="CHANTER"/>
 			<item id="101501400" name="Vasharti Legionnaire's Staff" player_class="CHANTER"/>
 			<item id="101501401" name="Vasharti Legionnaire's Cane" player_class="CHANTER"/>
-			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="CHANTER"/>
-			<item id="115001827" name="Vasharti Legionnaire's Scale Shield" player_class="CHANTER"/>
+			<item id="115001825" name="Vasharti Legionnaire's Shield" player_class="CHANTER"/>
+			<item id="115001826" name="Vasharti Legionnaire's Scale Shield" player_class="CHANTER"/>
 			<item id="100101385" name="Vasharti Legionnaire's Mace" player_class="CLERIC"/>
 			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_class="CLERIC"/>
 			<item id="101501400" name="Vasharti Legionnaire's Staff" player_class="CLERIC"/>
 			<item id="101501401" name="Vasharti Legionnaire's Cane" player_class="CLERIC"/>
-			<item id="115001826" name="Vasharti Legionnaire's Shield" player_class="CLERIC"/>
-			<item id="115001827" name="Vasharti Legionnaire's Scale Shield" player_class="CLERIC"/>
+			<item id="115001825" name="Vasharti Legionnaire's Shield" player_class="CLERIC"/>
+			<item id="115001826" name="Vasharti Legionnaire's Scale Shield" player_class="CLERIC"/>
 			<item id="102101107" name="Vasharti Legionnaire's Cipher-Blade" player_class="RIDER"/>
 			<item id="100501353" name="Vasharti Legionnaire's Orb" player_class="SORCERER"/>
 			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_class="SORCERER"/>
@@ -32412,7 +32412,7 @@
 			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="TEMPLAR"/>
 			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="TEMPLAR"/>
 			<item id="100901423" name="Vasharti Brigade General's Greatsword" player_class="TEMPLAR"/>
-			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="TEMPLAR"/>
+			<item id="115001827" name="Vasharti Brigade General's Shield" player_class="TEMPLAR"/>
 			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="GLADIATOR"/>
 			<item id="100101386" name="Vasharti Brigade General's War Hammer" player_class="GLADIATOR"/>
 			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="GLADIATOR"/>
@@ -32432,14 +32432,14 @@
 			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="CHANTER"/>
 			<item id="101501402" name="Vasharti Brigade General's Staff" player_class="CHANTER"/>
 			<item id="101501403" name="Vasharti Brigade General's Cane" player_class="CHANTER"/>
-			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="CHANTER"/>
-			<item id="115001827" name="Vasharti Brigade General's Scale Shield" player_class="CHANTER"/>
+			<item id="115001827" name="Vasharti Brigade General's Shield" player_class="CHANTER"/>
+			<item id="115001828" name="Vasharti Brigade General's Scale Shield" player_class="CHANTER"/>
 			<item id="100101387" name="Vasharti Brigade General's Mace" player_class="CLERIC"/>
 			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="CLERIC"/>
 			<item id="101501402" name="Vasharti Brigade General's Staff" player_class="CLERIC"/>
 			<item id="101501403" name="Vasharti Brigade General's Cane" player_class="CLERIC"/>
-			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="CLERIC"/>
-			<item id="115001827" name="Vasharti Brigade General's Scale Shield" player_class="CLERIC"/>
+			<item id="115001827" name="Vasharti Brigade General's Shield" player_class="CLERIC"/>
+			<item id="115001828" name="Vasharti Brigade General's Scale Shield" player_class="CLERIC"/>
 			<item id="102101108" name="Vasharti Brigade General's Cipher-Blade" player_class="RIDER"/>
 			<item id="100501354" name="Vasharti Brigade General's Orb" player_class="SORCERER"/>
 			<item id="100601471" name="Vasharti Brigade General's Spellbook" player_class="SORCERER"/>
