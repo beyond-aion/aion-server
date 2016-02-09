@@ -73,7 +73,7 @@ public class PanesterraMatchmakingService {
 					}
 				}
 			}
-		}, 270000); //4,5min
+		}, 570000); //9,5min
 	}
 	
 	private void cancelNotifier() {
