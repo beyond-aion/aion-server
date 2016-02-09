@@ -63,9 +63,9 @@ public enum ItemSlot {
 	STIGMA3(1L << 32),
 
 	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask, true),
-	ADV_STIGMA1(1L << 47),
-	ADV_STIGMA2(1L << 48),
-	ADV_STIGMA3(1L << 49),
+	ADV_STIGMA1(1L << 33),
+	ADV_STIGMA2(1L << 34),
+	ADV_STIGMA3(1L << 35),
 
 	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask, true),
 	
