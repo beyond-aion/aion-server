@@ -7443,7 +7443,7 @@
 		</spawn>
 		<!-- Unfaithful Ntuamu -->
 		<spawn npc_id="214603" respawn_time="14400">
-			<spot x="1834.07" y="887.164" z="58.8535" h="24"/>
+			<spot x="1834.07" y="887.164" z="58.8535" h="64"/>
 		</spawn>
 		<!-- Unfest Grave Keeper -->
 		<spawn npc_id="214384" respawn_time="295">

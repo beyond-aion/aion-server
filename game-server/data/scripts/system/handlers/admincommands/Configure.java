@@ -33,7 +33,6 @@ import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
-import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -55,7 +54,7 @@ public class Configure extends AdminCommand {
 		.put("membership", MembershipConfig.class).put("name", NameConfig.class).put("periodicsave", PeriodicSaveConfig.class)
 		.put("prices", PricesConfig.class).put("punishment", PunishmentConfig.class).put("ranking", RankingConfig.class).put("rates", RateConfig.class)
 		.put("security", SecurityConfig.class).put("shutdown", ShutdownConfig.class).put("siege", SiegeConfig.class).put("thread", ThreadConfig.class)
-		.put("world", WorldConfig.class).put("ipconfig", IPConfig.class).put("network", NetworkConfig.class).build();
+		.put("world", WorldConfig.class).put("network", NetworkConfig.class).build();
 
 	public Configure() {
 		super("configure");

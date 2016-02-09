@@ -6,17 +6,16 @@ import java.util.Map;
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.Acquisition;
 import com.aionemu.gameserver.model.templates.item.AcquisitionType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer modified by Wakizashi
+ * @author ATracer
+ * @modified Wakizashi, Neon
  */
 public class TradeList {
 
@@ -42,31 +41,11 @@ public class TradeList {
 	 * @param itemId
 	 * @param count
 	 */
-	public void addBuyItem(int itemId, long count) {
-
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		if (itemTemplate != null) {
-			TradeItem tradeItem = new TradeItem(itemId, count);
-			tradeItem.setItemTemplate(itemTemplate);
-			tradeItems.add(tradeItem);
-		}
+	public void addItem(int itemId, long count) {
+		addTradeItem(new TradeItem(itemId, count));
 	}
 
-	/**
-	 * @param itemId
-	 * @param count
-	 */
-	public void addPSItem(int itemId, long count) {
-		TradeItem tradeItem = new TradeItem(itemId, count);
-		tradeItems.add(tradeItem);
-	}
-
-	/**
-	 * @param itemObjId
-	 * @param count
-	 */
-	public void addSellItem(int itemObjId, long count) {
-		TradeItem tradeItem = new TradeItem(itemObjId, count);
+	public void addTradeItem(TradeItem tradeItem) {
 		tradeItems.add(tradeItem);
 	}
 

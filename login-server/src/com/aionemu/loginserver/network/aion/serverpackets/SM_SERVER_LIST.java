@@ -11,7 +11,7 @@ import com.aionemu.loginserver.network.aion.LoginConnection;
 
 /**
  * @author -Nemesiss-
- * @modified cura
+ * @modified cura, Neon
  */
 public class SM_SERVER_LIST extends AionServerPacket {
 
@@ -36,7 +36,7 @@ public class SM_SERVER_LIST extends AionServerPacket {
 				maxId = gsi.getId();
 
 			writeC(gsi.getId());// server id
-			writeB(gsi.getIPAddressForPlayer(con.getIP())); // server IP
+			writeB(gsi.getIp()); // server IP
 			writeD(gsi.getPort());// port
 			writeC(0x00); // age limit
 			writeC(0x01);// pvp=1

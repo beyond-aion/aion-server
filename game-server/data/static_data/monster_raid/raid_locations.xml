@@ -33,13 +33,13 @@
     <raid_location id="23" world="220040000" npc_id="234580" x="782.26" y="1239.65" z="241.452" h="26"/>
     <raid_location id="24" world="220040000" npc_id="234581" x="467.31" y="1786.30" z="216.008" h="26"/>
     <!-- Inggison -->
-    <raid_location id="25" world="210050000" npc_id="234582" x="2729.83" y="1874.37" z="218.769" h="27"/>
-    <raid_location id="26" world="210050000" npc_id="234583" x="1904.77" y="1951.70" z="314.773" h="27"/>
+    <raid_location id="25" world="210050000" npc_id="234582" x="2729.83" y="1874.37" z="189.625" h="27"/>
+    <raid_location id="26" world="210050000" npc_id="234583" x="1904.77" y="1951.70" z="288.659" h="27"/>
     <raid_location id="27" world="210050000" npc_id="234584" x="2757.93" y="826.57" z="392.919" h="27"/>
     <!-- Gelkmaros -->
-    <raid_location id="28" world="220070000" npc_id="234585" x="598.19" y="1342.64" z="296.935" h="27"/>
+    <raid_location id="28" world="220070000" npc_id="234585" x="598.19" y="1342.64" z="276.875" h="27"/>
     <raid_location id="29" world="220070000" npc_id="234586" x="2180.12" y="934.13" z="195.471" h="27"/>
-    <raid_location id="30" world="220070000" npc_id="234587" x="1492.03" y="1254.61" z="322.331" h="27"/>
+    <raid_location id="30" world="220070000" npc_id="234587" x="1492.03" y="1254.61" z="298.22678" h="27"/>
     <!-- Reshanta -->
     <raid_location id="31" world="400010000" npc_id="234588" x="808.98" y="848.80" z="1678.128" h="32"/>
     <raid_location id="32" world="400010000" npc_id="234589" x="2020.89" y="2833.78" z="2851.830" h="32"/>

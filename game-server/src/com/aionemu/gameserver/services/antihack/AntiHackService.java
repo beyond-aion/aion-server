@@ -1,12 +1,15 @@
 package com.aionemu.gameserver.services.antihack;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_GAMEGUARD;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -19,6 +22,8 @@ import com.aionemu.gameserver.world.World;
  * @author Source
  */
 public class AntiHackService {
+
+	private static Logger log = LoggerFactory.getLogger(AntiHackService.class);
 
 	public static boolean canMove(Player player, float x, float y, float z, float speed, byte type) {
 		if (player.getPrevPos() == null)
@@ -54,8 +59,8 @@ public class AntiHackService {
 							player.speedHackCounter--;
 
 						if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-							return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " S:"
-								+ speed + " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
+							return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " S:" + speed
+								+ " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
 						}
 					}
 				} else if ((type & MovementMask.MOUSE) == MovementMask.MOUSE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
@@ -84,12 +89,7 @@ public class AntiHackService {
 						player.speedHackCounter--;
 
 					if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-						return punish(
-							player,
-							x,
-							y,
-							type,
-							forcedMove,
+						return punish(player, x, y, type, forcedMove,
 							"Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " SMS:"
 								+ Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0 + " TDF:" + timeDiff + " VTD:"
 								+ Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
@@ -126,8 +126,8 @@ public class AntiHackService {
 			double delta = MathUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				World.getInstance().updatePosition(player, player.getX(), player.getY(), player.getZ(), player.getHeading());
-				return punish(player, x, y, type, normalMove, "Detected illegal action (Teleportation)" + " S:" + speed + " D:" + Math.rint(1000.0 * delta)
-					/ 1000.0 + " type:" + type);
+				return punish(player, x, y, type, normalMove,
+					"Detected illegal action (Teleportation)" + " S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
 			}
 		}
 
@@ -164,14 +164,14 @@ public class AntiHackService {
 			player.prevMoveType = type;
 	}
 
-	public static void checkAionBin(int size, Player player) {
-		int legitSize = 212; // NA+GF
+	public static void checkAionBin(int size, AionConnection con) {
+		int legitSize = 212; // 212 after login, exactly 30 minutes later: 224, right after that: 1128 o.O
 		if (SecurityConfig.AION_BIN_CHECK) {
 			if (size != legitSize) {
-				AuditLogger.info(player, "Detected modified aion.bin");
-				player.getClientConnection().close(new SM_QUIT_RESPONSE());
+				log.warn("Detected modified aion.bin for account ID " + con.getAccount().getId());
+				con.close(new SM_QUIT_RESPONSE());
 			}
 		}
-		PacketSendUtility.sendPacket(player, new SM_GAMEGUARD(size));
+		// con.sendPacket(new SM_GAMEGUARD(size)); // not sent on GF servers currently
 	}
 }

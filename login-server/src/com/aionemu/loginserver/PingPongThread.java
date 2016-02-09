@@ -30,7 +30,7 @@ public class PingPongThread implements Runnable {
 
 	@Override
 	public void run() {
-		log.info("PingPong for gameserver #" + this.connection.getGameServerInfo().getId() + " has started.");
+		log.info("PingPong for Gameserver #" + connection.getGameServerInfo().getId() + " has started.");
 		while (uptime) {
 			try {
 				Thread.sleep(Config.PINGPONG_DELAY);

@@ -7,12 +7,12 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Luno, modified Bobobear
+ * @author Luno
+ * @modified Bobobear, Neon
  */
 public class Delete extends AdminCommand {
 
@@ -33,8 +33,9 @@ public class Delete extends AdminCommand {
 			sendInfo(admin, "Can't delete pooled spawn template");
 			return;
 		}
-		if (spawn instanceof SiegeSpawnTemplate) {
-			sendInfo(admin, "Can't delete siege spawn template");
+
+		if (!spawn.getClass().equals(SpawnTemplate.class)) {
+			sendInfo(admin, "Can't delete special spawns (spawn type: " + spawn.getClass().getSimpleName().replace("Template", "") + ")");
 			return;
 		}
 
@@ -47,7 +48,7 @@ public class Delete extends AdminCommand {
 		sendInfo(admin, "Spawn removed.");
 
 		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, true)) {
-			sendInfo(admin, "Could not save deleted spawn.");
+			sendInfo(admin, "Could not save deleted spawn. Maybe it's a special or temporary spawn (siege, base, invasion, ...) which cannot be altered.");
 			return;
 		}
 	}

@@ -47,6 +47,9 @@
 	<logger name="com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN" level="debug" additivity="false"> <!-- server logins -->
 		<appender-ref ref="app_login_audit" />
 	</logger>
+	<logger name="org.quartz">
+		<level value="WARN" /> <!-- disable info messages from quartz lib (cron service) -->
+	</logger>
 	<root level="INFO">
 		<appender-ref ref="out_console" />
 		<appender-ref ref="app_console" />

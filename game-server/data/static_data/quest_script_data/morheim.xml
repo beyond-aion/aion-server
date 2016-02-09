@@ -403,7 +403,7 @@
 	<monster_hunt id="2366" start_npc_ids="204363"/>
 	<monster_hunt id="2368" start_npc_ids="204338"/>
 	<monster_hunt id="2370" start_npc_ids="798080"/>
-	<monster_hunt id="2374" start_npc_ids="204408"/>
+	<monster_hunt id="2374" start_npc_ids="804606"/>
 	<monster_hunt id="2375" start_npc_ids="798079" end_npc_ids="798080"/>
 	<monster_hunt id="2376" start_npc_ids="798080" end_npc_ids="798079"/>
 	<monster_hunt id="2377" start_npc_ids="798079" end_npc_ids="798080"/>

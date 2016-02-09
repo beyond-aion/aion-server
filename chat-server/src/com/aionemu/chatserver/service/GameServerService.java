@@ -8,6 +8,7 @@ import com.aionemu.chatserver.network.gameserver.GsAuthResponse;
 
 /**
  * @author ATracer, KID
+ * @modified Neon
  */
 public class GameServerService {
 
@@ -23,27 +24,17 @@ public class GameServerService {
 	/**
 	 * @param gameChannelHandler
 	 * @param gameServerId
-	 * @param defaultAddress
 	 * @param password
 	 * @return
 	 */
-	public GsAuthResponse registerGameServer(byte gameServerId, byte[] defaultAddress, String password) {
-		GAMESERVER_ID = gameServerId;
+	public GsAuthResponse registerGameServer(byte gameServerId, String password) {
 		if (isOnline)
 			return GsAuthResponse.ALREADY_REGISTERED;
-		return passwordConfigAuth(password);
-	}
-
-	/**
-	 * @return
-	 */
-	private GsAuthResponse passwordConfigAuth(String password) {
-		if (password.equals(Config.GAME_SERVER_PASSWORD)) {
-			isOnline = true;
-			return GsAuthResponse.AUTHED;
-		}
-		log.warn("Gameserver #" + GAMESERVER_ID + " has invalid password.");
-		return GsAuthResponse.NOT_AUTHED;
+		if (!password.equals(Config.GAMESERVER_PASSWORD))
+			return GsAuthResponse.NOT_AUTHED;
+		isOnline = true;
+		GAMESERVER_ID = gameServerId;
+		return GsAuthResponse.AUTHED;
 	}
 
 	public void setOffline() {

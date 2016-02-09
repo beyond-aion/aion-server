@@ -37,7 +37,7 @@ public class SpawnUpdate extends AdminCommand {
 
 		setParamInfo(
 			"<x|y|z|h> [value] - Update X, Y, or Z coordinate or the heading of the selected npc/gatherable (default: takes your current position, optional: the specified value).",
-			"<xyz> - Update X, Y and Z coordinates of the selected npc/gatherable to your own coordinates.",
+			"<xyz|xyzh> - Update position or position and heading of the selected npc/gatherable to your own one.",
 			"<w> [walker_id] - Set walker data of the selected npc (default: remove walker data, optional: set walker id to npc).");
 	}
 
@@ -65,6 +65,11 @@ public class SpawnUpdate extends AdminCommand {
 			x = admin.getX();
 			y = admin.getY();
 			z = admin.getZ();
+		} else if (params[0].equalsIgnoreCase("xyzh")) {
+			x = admin.getX();
+			y = admin.getY();
+			z = admin.getZ();
+			h = admin.getHeading();
 		} else if (params[0].equalsIgnoreCase("x")) {
 			if (params.length == 1)
 				x = admin.getX();
@@ -85,6 +90,9 @@ public class SpawnUpdate extends AdminCommand {
 				h = admin.getHeading();
 			else
 				h = Byte.parseByte(params[1]);
+		} else {
+			sendInfo(admin);
+			return;
 		}
 
 		WorldPosition tPos = target.getPosition();
@@ -99,7 +107,7 @@ public class SpawnUpdate extends AdminCommand {
 				+ tPos.getHeading() + ".");
 
 		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
-			sendInfo(admin, "Could not save spawn.");
+			sendInfo(admin, "Could not save spawn. Maybe it's a special or temporary spawn (siege, base, invasion, ...) which cannot be altered.");
 	}
 
 	private void updateWalker(Player admin, Npc target, String walkerId) {

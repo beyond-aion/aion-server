@@ -12,30 +12,18 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
  */
 public class CM_RECONNECT_AUTH extends AionClientPacket {
 
-	/**
-	 * Constructs new instance of <tt>CM_RECONNECT_AUTH </tt> packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_RECONNECT_AUTH(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		// empty
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();
 		// TODO! check if may reconnect
-		LoginServer.getInstance().requestAuthReconnection(client);
+		LoginServer.getInstance().requestAuthReconnection(client.getAccount().getId(), client);
 	}
 }

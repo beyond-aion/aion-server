@@ -14,15 +14,13 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
+import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
+import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.controller.PremiumController;
@@ -35,6 +33,10 @@ import com.aionemu.loginserver.taskmanager.TaskFromDBManager;
 import com.aionemu.loginserver.utils.DeadLockDetector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 import com.aionemu.loginserver.utils.cron.ThreadPoolManagerRunnableRunner;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * @author -Nemesiss-
@@ -122,15 +124,16 @@ public class LoginServer {
 		DAOManager.getDAO(BannedMacDAO.class).cleanExpiredBans();
 		DAOManager.getDAO(BannedHddDAO.class).cleanExpiredBans();
 
-		NetConnector.getInstance().connect();
 		PlayerTransferService.getInstance();
 		TaskFromDBManager.getInstance();
-
-		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
-
+		PremiumController.getController();
+		
+		ConsoleUtil.printSection("System Info");
+		VersionInfoUtil.printAllInfo(LoginServer.class);
 		SystemInfoUtil.printAllInfo();
 
-		PremiumController.getController();
-		log.info("AL Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+		NetConnector.getInstance().connect();
+		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
+		log.info("Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}
 }

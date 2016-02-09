@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
  * GameServer packet that sends list of logged in accounts
  * 
  * @author SoulKeeper
+ * @modified Neon
  */
 public class SM_ACCOUNT_LIST extends LsServerPacket {
 
@@ -29,8 +30,7 @@ public class SM_ACCOUNT_LIST extends LsServerPacket {
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accounts.size());
-		for (AionConnection ac : accounts.values()) {
-			writeS(ac.getAccount().getName());
-		}
+		for (AionConnection ac : accounts.values())
+			writeD(ac.getAccount().getId());
 	}
 }

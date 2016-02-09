@@ -38,7 +38,7 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 		FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<Monster, Set<Integer>>();
 		for (Monster m : monster)
 			monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
-		MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel);
+		MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, rewardNextStep);
 		questEngine.addQuestHandler(template);
 	}
 }

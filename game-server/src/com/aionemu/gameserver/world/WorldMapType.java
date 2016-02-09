@@ -258,11 +258,18 @@ public enum WorldMapType {
 	 * @return WorldMapType
 	 */
 	public static WorldMapType getWorld(int id) {
-		for (WorldMapType type : WorldMapType.values()) {
-			if (type.getId() == id) {
+		for (WorldMapType type : values()) {
+			if (type.getId() == id)
 				return type;
-			}
 		}
 		return null;
+	}
+
+	public static int getMapId(String worldName) {
+		worldName = worldName.toLowerCase().replace(" ", "_");
+		for (WorldMapType type : values())
+			if (type.name().toLowerCase().equals(worldName))
+				return type.getId();
+		return 0;
 	}
 }

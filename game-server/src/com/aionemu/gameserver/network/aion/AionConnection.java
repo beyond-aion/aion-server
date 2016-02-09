@@ -240,11 +240,16 @@ public class AionConnection extends AConnection {
 	@Override
 	protected final void onDisconnect() {
 		pingChecker.stop();
-		if (getAccount() != null)
-			LoginServer.getInstance().aionClientDisconnected(getAccount().getId());
+		String msg = "";
+		if (getAccount() != null) {
+			int id = getAccount().getId();
+			msg += " [Account ID: " + id + " Name: " + getAccount().getName() + "]";
+			LoginServer.getInstance().aionClientDisconnected(id);
+		}
 
 		Player player = getActivePlayer();
 		if (player != null) {
+			msg += " [Player: " + player.getName() + "]";
 			// force stop movement of player
 			player.getMoveController().abortMove();
 			player.getController().stopMoving();
@@ -257,6 +262,9 @@ public class AionConnection extends AConnection {
 				}
 			}, 10 * 1000); // prevent ctrl+alt+del / close window exploit
 		}
+
+		if (!msg.isEmpty())
+			log.info("Client disconnected" + msg);
 	}
 
 	/**

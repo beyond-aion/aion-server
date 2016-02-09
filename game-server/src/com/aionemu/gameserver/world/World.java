@@ -82,9 +82,9 @@ public class World {
 		allNpcs = new ConcurrentHashMap<>();
 		worldMaps = new TIntObjectHashMap<>();
 
-		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
-			worldMaps.put(template.getMapId(), new WorldMap(template, this));
-		}
+		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA)
+			worldMaps.put(template.getMapId(), new WorldMap(template));
+
 		log.info("World: " + worldMaps.size() + " world maps created.");
 	}
 

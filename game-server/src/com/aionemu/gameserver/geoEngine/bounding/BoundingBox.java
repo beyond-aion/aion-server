@@ -152,7 +152,7 @@ public class BoundingBox extends BoundingVolume {
 		}
 		Vector3f vect1 = Vector3f.newInstance();
 		Vector3f vect2 = Vector3f.newInstance();
-		Triangle triangle = Triangle.newInstance();
+		Triangle triangle = new Triangle();
 
 		Vector3f min = vect1.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
 		Vector3f max = vect2.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
@@ -176,7 +176,7 @@ public class BoundingBox extends BoundingVolume {
 		zExtent = max.z - center.z;
 		Vector3f.recycle(vect1);
 		Vector3f.recycle(vect2);
-		Triangle.recycle(triangle);
+		triangle = null;
 	}
 
 	public static final void checkMinMax(Vector3f min, Vector3f max, Vector3f point) {

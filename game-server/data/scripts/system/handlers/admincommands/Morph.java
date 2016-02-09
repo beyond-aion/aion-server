@@ -2,7 +2,6 @@ package admincommands;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -63,7 +62,7 @@ public class Morph extends AdminCommand {
 			String name = template != null ? ChatUtil.path(StringUtils.capitalize(template.getName()) + " | " + npcId, npcId) : "unknown ID " + npcId;
 			sendInfo(admin, "You morphed" + (target.equals(admin) ? "" : " " + target.getName()) + " into " + name + ".");
 			if (!target.equals(admin))
-				sendInfo(target, ChatUtil.name(admin.getName(AdminConfig.CUSTOMTAG_ENABLE)) + " morphed you into an npc form.");
+				sendInfo(target, ChatUtil.name(admin) + " morphed you into an npc form.");
 		}
 	}
 }

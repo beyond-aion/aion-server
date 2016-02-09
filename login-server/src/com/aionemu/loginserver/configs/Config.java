@@ -1,5 +1,6 @@
 package com.aionemu.loginserver.configs;
 
+import java.net.InetSocketAddress;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.utils.PropertiesUtils;
 
 /**
- * @author -Nemesiss-, SoulKeeper
+ * @author -Nemesiss-, SoulKeeper, Neon
  */
 public class Config {
 
@@ -22,28 +23,16 @@ public class Config {
 	protected static final Logger log = LoggerFactory.getLogger(Config.class);
 
 	/**
-	 * Login Server port
+	 * Local address where LS will listen for Aion client connections (* = bind any local IP)
 	 */
-	@Property(key = "loginserver.network.client.port", defaultValue = "2106")
-	public static int LOGIN_PORT;
+	@Property(key = "loginserver.network.client.socket_address", defaultValue = "*:2106")
+	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**
-	 * Login Server bind IP
+	 * Local address where LS will listen for GS connections (* = bind any local IP)
 	 */
-	@Property(key = "loginserver.network.client.host", defaultValue = "localhost")
-	public static String LOGIN_BIND_ADDRESS;
-
-	/**
-	 * Game Server port
-	 */
-	@Property(key = "loginserver.network.gameserver.port", defaultValue = "9014")
-	public static int GAME_PORT;
-
-	/**
-	 * Game Server host
-	 */
-	@Property(key = "loginserver.network.gameserver.host", defaultValue = "*")
-	public static String GAME_BIND_ADDRESS;
+	@Property(key = "loginserver.network.gameserver.socket_address", defaultValue = "*:9014")
+	public static InetSocketAddress GAMESERVER_SOCKET_ADDRESS;
 
 	/**
 	 * Number of login tries before ban

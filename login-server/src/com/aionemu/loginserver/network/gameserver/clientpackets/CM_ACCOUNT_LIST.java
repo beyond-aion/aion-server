@@ -7,37 +7,30 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 
 /**
- * Reads the list of accoutn id's that are logged to game server
+ * Reads the list of account id's that are logged to game server
  * 
- * @author SoulKeeper
+ * @author SoulKeeper, Neon
  */
 public class CM_ACCOUNT_LIST extends GsClientPacket {
 
 	/**
 	 * Array with accounts that are logged in
 	 */
-	private String[] accountNames;
+	private int[] accountIds;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		accountNames = new String[readD()];
-		for (int i = 0; i < accountNames.length; i++) {
-			accountNames[i] = readS();
-		}
+		accountIds = new int[readD()];
+		for (int i = 0; i < accountIds.length; i++)
+			accountIds[i] = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
-		for (String s : accountNames) {
-			Account a = AccountController.loadAccount(s);
+		for (int id : accountIds) {
+			Account a = AccountController.loadAccount(id);
 			if (GameServerTable.isAccountOnAnyGameServer(a)) {
-				this.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(a.getId()));
+				getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(id));
 				continue;
 			}
 			getConnection().getGameServerInfo().addAccountToGameServer(a);

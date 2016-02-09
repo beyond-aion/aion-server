@@ -2,15 +2,14 @@ package com.aionemu.gameserver.services.ban;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
-
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastMap;
 
 /**
  * @author ViAl
@@ -31,16 +30,14 @@ public class ChatBanService {
 	 *          Ban time in milliseconds.
 	 */
 	public static void banPlayer(Player player, long duration) {
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), duration);
+		ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), duration);
 		chatBans.put(player.getObjectId(), System.currentTimeMillis() + duration);
 		registerUnban(player, duration);
 	}
 
 	public static void unbanPlayer(Player player) {
 		player.getController().cancelTask(TaskId.GAG);
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), 0);
+		ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), 0);
 		if (chatBans.remove(player.getObjectId()) != null && player.isOnline())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_CHAT_NOW);
 	}

@@ -1,19 +1,18 @@
 package com.aionemu.commons.network;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.util.List;
 import java.util.concurrent.Executor;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
+
+import javolution.util.FastTable;
 
 /**
  * NioServer instance that handle connections on specified addresses.
@@ -95,20 +94,15 @@ public class NioServer {
 				serverChannel.configureBlocking(false);
 
 				/** Bind the server socket to the specified address and port */
-				InetSocketAddress isa;
-				if ("*".equals(cfg.hostName)) {
-					isa = new InetSocketAddress(cfg.port);
-					log.info("Server listening on all available IPs on Port " + cfg.port + " for " + cfg.connectionName);
-				} else {
-					isa = new InetSocketAddress(cfg.hostName, cfg.port);
-					log.info("Server listening on IP: " + cfg.hostName + " Port " + cfg.port + " for " + cfg.connectionName);
-				}
-				serverChannel.socket().bind(isa);
+				serverChannel.socket().bind(cfg.getSocketAddress());
+				log.info("Server listening on " + (cfg.getInetAddress().isAnyLocalAddress() ? "all interfaces," : "IP: " + cfg.getIP()) + " Port: "
+					+ cfg.getPort() + " for " + cfg.getConnectionName());
 
 				/**
 				 * Register the server socket channel, indicating an interest in accepting new connections
 				 */
-				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.factory, this));
+				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT,
+					new Acceptor(cfg.getConnectionFactory(), this));
 				serverChannelKeys.add(acceptKey);
 			}
 		} catch (Exception e) {

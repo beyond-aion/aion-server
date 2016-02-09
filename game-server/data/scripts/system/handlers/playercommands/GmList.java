@@ -1,6 +1,5 @@
 package playercommands;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -25,7 +24,7 @@ public class GmList extends PlayerCommand {
 		for (Player gm : GMService.getInstance().getGms()) {
 			FriendList.Status status = gm.getFriendList().getStatus();
 			if (gm.isWispable() && !gm.isProtectionActive() && !status.equals(FriendList.Status.OFFLINE)) {
-				sb.append("\n\t" + ChatUtil.name(gm.getName(AdminConfig.CUSTOMTAG_ENABLE)) + " (" + status.name().toLowerCase() + ")");
+				sb.append("\n\t" + ChatUtil.name(gm) + " (" + status.name().toLowerCase() + ")");
 				count++;
 			}
 		}

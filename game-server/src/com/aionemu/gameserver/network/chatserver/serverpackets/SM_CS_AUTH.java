@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.network.chatserver.serverpackets;
 
-import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection;
 import com.aionemu.gameserver.network.chatserver.CsServerPacket;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class SM_CS_AUTH extends CsServerPacket {
 
@@ -17,8 +17,6 @@ public class SM_CS_AUTH extends CsServerPacket {
 	@Override
 	protected void writeImpl(ChatServerConnection con) {
 		writeC(NetworkConfig.GAMESERVER_ID);
-		writeC(IPConfig.getDefaultAddress().length);
-		writeB(IPConfig.getDefaultAddress());
 		writeS(NetworkConfig.CHAT_PASSWORD);
 	}
 }

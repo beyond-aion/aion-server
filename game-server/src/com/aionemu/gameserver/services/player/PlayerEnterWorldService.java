@@ -411,11 +411,8 @@ public final class PlayerEnterWorldService {
 		// Alliance Packet after SetBindPoint
 		PlayerAllianceService.onPlayerLogin(player);
 
-		if (player.isInPrison())
-			PunishmentService.updatePrisonStatus(player);
-
-		if (player.isNotGatherable())
-			PunishmentService.updateGatherableStatus(player);
+		PunishmentService.updatePrisonStatus(player);
+		PunishmentService.updateGatherableStatus(player);
 
 		PlayerGroupService.onPlayerLogin(player);
 		PetService.getInstance().onPlayerLogin(player);

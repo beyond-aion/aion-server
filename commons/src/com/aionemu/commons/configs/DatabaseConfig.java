@@ -14,7 +14,7 @@ public class DatabaseConfig {
 	/**
 	 * Default database url.
 	 */
-	@Property(key = "database.url", defaultValue = "jdbc:mysql://localhost:3306/aion_uni")
+	@Property(key = "database.url", defaultValue = "jdbc:mysql://localhost:3306/aion_server?useUnicode=true&characterEncoding=UTF-8")
 	public static String DATABASE_URL;
 
 	/**

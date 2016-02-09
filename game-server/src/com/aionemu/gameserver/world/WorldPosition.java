@@ -142,15 +142,6 @@ public class WorldPosition {
 	}
 
 	/**
-	 * Returns the {@link World} instance in which this position is located. :D
-	 * 
-	 * @return World
-	 */
-	public World getWorld() {
-		return mapRegion.getWorld();
-	}
-
-	/**
 	 * @return worldMapInstance
 	 */
 	public WorldMapInstance getWorldMapInstance() {

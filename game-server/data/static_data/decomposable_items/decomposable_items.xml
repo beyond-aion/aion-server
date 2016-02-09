@@ -29490,7 +29490,14 @@
     <decomposable item_id="188053197" decomposable_name="Festive Coin Chest"/>
     <decomposable item_id="188053198" decomposable_name="Brimming Festive Gift Box"/>
     <decomposable item_id="188053199" decomposable_name="Tristran's Armor Box"/>
-    <decomposable item_id="188053200" decomposable_name="Mani's Armor Box"/>
+    <decomposable item_id="188053200" decomposable_name="Mani's Armor Box" selectable="true">
+    	<items>
+    		<item id="114100800" name="Mani's Shoes"/>
+    		<item id="114300810" name="Mani's Boots"/>
+    		<item id="114500772" name="Mani's Brogans"/>
+    		<item id="114600731" name="Mani's Sabatons"/>
+    	</items>
+    </decomposable>
     <decomposable item_id="188053201" decomposable_name="[Event] Kahrun's Box"/>
     <decomposable item_id="188053202" decomposable_name="Festive Gift Box"/>
     <decomposable item_id="188053203" decomposable_name="[Event] New Year's Lucky Bundle"/>

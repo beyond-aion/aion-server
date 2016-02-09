@@ -44,7 +44,9 @@ public class MonsterHuntData extends XMLQuest {
 	protected int invasionWorld;
 	@XmlAttribute(name = "start_dist_npc_id")
 	protected int startDistanceNpc;
-	
+	@XmlAttribute(name = "end_reward_next_step")
+	protected boolean rewardNextStep;
+
 	@Override
 	public void register(QuestEngine questEngine) {
 		Map<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
@@ -74,8 +76,6 @@ public class MonsterHuntData extends XMLQuest {
 								mn.setEndVar(m.getEndVar());
 							if (m.getRewardVar())
 								mn.setRewardVar(m.getRewardVar());
-							if (m.getRewardNextStep())
-								mn.setRewardNextStep(m.getRewardNextStep());
 							if (m.getNpcIds() != null)
 								mn.addNpcIds(m.getNpcIds());
 							if (m.getNpcSequence() != null)
@@ -106,7 +106,8 @@ public class MonsterHuntData extends XMLQuest {
 		 * monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } } else { monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } }
 		 **/
 
-		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld, startDistanceNpc);
+		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld,
+			startDistanceNpc, rewardNextStep);
 		questEngine.addQuestHandler(template);
 	}
 

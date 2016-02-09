@@ -29,15 +29,12 @@ public class Monster {
 	@XmlAttribute(name = "end_var_reward")
 	protected boolean rewardVar = false;
 
-	@XmlAttribute(name = "end_reward_next_step")
-	protected boolean rewardNextStep = false;
-	
 	@XmlAttribute(name = "npc_ids")
 	protected List<Integer> npcIds;
 
 	@XmlAttribute(name = "npc_seq")
 	private Integer npcSequence;
-	
+
 	@XmlAttribute(name = "step")
 	private Integer step = 0;
 
@@ -88,7 +85,7 @@ public class Monster {
 	public void setNpcSequence(Integer value) {
 		this.npcSequence = value;
 	}
-	
+
 	public Integer getStep() {
 		return step;
 	}
@@ -108,16 +105,9 @@ public class Monster {
 	public boolean getRewardVar() {
 		return rewardVar;
 	}
-	
-	public boolean getRewardNextStep() {
-		return rewardNextStep;
-	}
 
 	public void setRewardVar(boolean value) {
 		this.rewardVar = value;
 	}
-	
-	public void setRewardNextStep(boolean value) {
-		this.rewardNextStep = value;
-	}
+
 }

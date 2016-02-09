@@ -74,16 +74,16 @@
 	<report_to id="29629" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="801947" end_dialog_id="10002"/>
 	<report_to id="29630" start_npc_ids="804666" start_dialog_id="4762" end_npc_ids="804599" end_dialog_id="10002"/>
 	<!-- MONSTER HUNT QUESTS -->
-	<monster_hunt id="29603" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205150">	
-		<monster var="1" npc_ids="214497 214498 214493 214494" end_var="10" end_reward_next_step="true"/>
+	<monster_hunt id="29603" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205150" end_reward_next_step="true">	
+		<monster var="1" npc_ids="214497 214498 214493 214494" end_var="10"/>
 	</monster_hunt>
-	<monster_hunt id="29609" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="799225">	
-		<monster var="1" npc_ids="215989 215931" end_var="10" end_reward_next_step="true"/>
+	<monster_hunt id="29609" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="799225" end_reward_next_step="true">	
+		<monster var="1" npc_ids="215989 215931" end_var="10"/>
 	</monster_hunt>
-	<monster_hunt id="29614" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205579">	
-		<monster var="1" npc_ids="217872 217873 217878 217879" end_var="10" end_reward_next_step="true"/>
+	<monster_hunt id="29614" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="205579" end_reward_next_step="true">	
+		<monster var="1" npc_ids="217872 217873 217878 217879" end_var="10"/>
 	</monster_hunt>
-	<monster_hunt id="29625" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="800529">	
-		<monster var="1" npc_ids="230162 230161" end_var="10" end_reward_next_step="true"/>
+	<monster_hunt id="29625" start_npc_ids="804662" start_dialog_id="4762" end_npc_ids="800529" end_reward_next_step="true">	
+		<monster var="1" npc_ids="230162 230161" end_var="10"/>
 	</monster_hunt>
 </quest_scripts>

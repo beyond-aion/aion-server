@@ -342,7 +342,7 @@ public class LoginConnection extends AConnection {
 	 */
 	@Override
 	public String toString() {
-		return (account != null) ? account + " " + getIP() : "not loged " + getIP();
+		return (account != null) ? account + " " + getIP() : "not logged " + getIP();
 	}
 
 	/**
@@ -357,9 +357,8 @@ public class LoginConnection extends AConnection {
 
 	@Override
 	protected void initialized() {
-		// TODO Auto-generated method stub
 		state = State.CONNECTED;
-		log.info("Connection attemp from: " + getIP());
+		log.info("Connection attempt from: " + getIP());
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="210020000">
 		<!-- Bastion Plodder -->
 		<spawn npc_id="211666" respawn_time="295">
@@ -3629,10 +3629,6 @@
 			<spot x="1343.79" y="1488.05" z="282.77313" h="18" random_walk="8"/>
 			<spot x="1252.18" y="1382.95" z="301.043" h="97"/>
 		</spawn>
-		<!-- Harpback -->
-		<spawn npc_id="211812" respawn_time="1800">
-			<spot x="261.895" y="279.851" z="16.5" h="27"/>
-		</spawn>
 		<!-- Mamaki Tracker -->
 		<spawn npc_id="210864" respawn_time="295">
 			<spot x="1386.6479" y="2577.8682" z="298.5626" h="61"/>
@@ -5960,6 +5956,7 @@
 		</spawn>
 		<!-- Ramorunerk -->
 		<spawn npc_id="798047" respawn_time="295">
+			<temporary_spawn spawn_time="19.*.*" despawn_time="6.*.*"/>
 			<spot x="441.87" y="435.553" z="274.351" h="112"/>
 		</spawn>
 		<!-- Esaias -->
@@ -6028,7 +6025,8 @@
 			<spot x="751.321" y="996.417" z="282.802" h="52"/>
 		</spawn>
 		<!-- Chicorinerk -->
-		<spawn npc_id="798048" respawn_time="295">
+		<spawn npc_id="798048" respawn_time="295" pool="1">
+			<temporary_spawn spawn_time="0.*.*" despawn_time="4.*.*"/>
 			<spot x="2494" y="2236" z="289.4536" h="11"/>
 			<spot x="1887" y="2688" z="280.44" h="105"/>
 		</spawn>
@@ -6988,21 +6986,21 @@
 		<!-- Harumonerk -->
 		<spawn npc_id="798126" respawn_time="295">
 			<temporary_spawn/>
-			<spot x="392.72397" y="1837.5984" z="241.9064" h="14">
-				<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
+			<spot x="409.1484" y="1838.5546" z="243.17337" h="42">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="20.*.*"/>
 			</spot>
-			<spot x="752.76135" y="1010.50630" z="285.00000" h="97">
-				<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			<spot x="752.76135" y="1010.50630" z="285" h="97">
+				<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
 			</spot>
 		</spawn>
 		<!-- Chiyorinrinerk -->
 		<spawn npc_id="798127" respawn_time="295">
 			<temporary_spawn/>
 			<spot x="1017.14" y="1826.45" z="278" h="70">
-				<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+				<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
 			</spot>
 			<spot x="1522.97" y="1763.98" z="305" h="30">
-				<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
+				<temporary_spawn spawn_time="5.*.*" despawn_time="20.*.*"/>
 			</spot>
 		</spawn>
 		<!-- Metea -->

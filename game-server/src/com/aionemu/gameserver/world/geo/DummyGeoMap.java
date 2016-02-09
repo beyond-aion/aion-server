@@ -14,6 +14,11 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
+	public final float getZ(float x, float y) {
+		return 0;
+	}
+
+	@Override
 	public final float getZ(float x, float y, float z, int instanceId) {
 		return z;
 	}

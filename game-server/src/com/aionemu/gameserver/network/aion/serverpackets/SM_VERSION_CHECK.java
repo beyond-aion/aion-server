@@ -1,17 +1,16 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.time.LocalDateTime;
-import java.util.TimeZone;
 
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.network.NetworkController;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.services.ChatService;
+import com.aionemu.gameserver.network.chatserver.ChatServer;
+import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.EventService;
 
 /**
@@ -33,7 +32,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		int characterLimitCount = GSConfig.CHARACTER_LIMIT_COUNT;
 		int limitFactionMode = GSConfig.CHARACTER_FACTION_LIMITATION_MODE;
-		
+
 		if (MembershipConfig.CHARACTER_ADDITIONAL_COUNT > characterLimitCount && MembershipConfig.CHARACTER_ADDITIONAL_ENABLE != 10)
 			characterLimitCount = MembershipConfig.CHARACTER_ADDITIONAL_COUNT;
 
@@ -61,75 +60,70 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		}
 		writeC(0x00); // version ok
 		writeC(NetworkConfig.GAMESERVER_ID);
-		writeD(150602);// start year month day
-		writeD(150326);// start year month day
-		writeD(0x00);// spacing
-		writeD(150317);// year month day
-		writeD(GameServer.START_TIME_SECONDS);// start server time in seconds
-		writeC(0x00);// unk
-		writeC(GSConfig.SERVER_COUNTRY_CODE);// country code;
-		writeC(0x00);// unk
-		writeC((characterLimitCount * NetworkController.getInstance().getServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
-		writeD((int) LocalDateTime.now().atZone(TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID).toZoneId()).toEpochSecond()); // server time
-		writeH(350);// unk
-		writeH(2561);// unk
-		writeH(2561);// unk
+		writeD(150602); // start year month day
+		writeD(150326); // start year month day
+		writeD(0x00); // spacing
+		writeD(150317); // year month day
+		writeD(GameServer.START_TIME_SECONDS); // start server time in seconds
+		writeC(0x00); // unk
+		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code;
+		writeC(0x00); // unk
+		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
+		writeD((int) LocalDateTime.now().atZone(GSConfig.TIME_ZONE.toZoneId()).toEpochSecond()); // server time
+		writeH(350); // unk
+		writeH(2561); // unk
+		writeH(2561); // unk
 		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // min level to write in channel chats
 		writeC(20); // some other restriction
-		writeH(276);// unk
+		writeH(276); // unk
 		writeH(2); // unk
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
 		writeC(EventService.getInstance().getEventType().getId()); // city decoration
-		writeC(0);// unk
-		writeC(0);// unk
-		writeD(0 * 65536); // negative server time offset (timeInSeconds * 2^16, accepts only positive numbers)
-		writeC(0x00);// unk (server time related)
-		writeC(0x00);// unk (server time related)
-		writeC(0x04);// unk
-		writeC(120);// unk
-		writeH(25233);// unk
-		writeC(2);// 4.0
-		writeC(0x01);// unk
-		writeD(0);// 4.0
-		writeD(0);// 4.5
-		writeD(68536);// 4.5
-		writeC(0);// 4.7
-		writeC(1);// 4.7
-		writeC(0);//4.8
-		writeC(0);//4.8
-		writeC(0);//4.8
-		writeC(0);//4.8
-		writeC(1);//4.8
-		writeC(1);//4.8 activate stonespearSiege
-		writeC(0); //1 = master Server
+		writeD(0); // unk
+		writeD(-(GSConfig.TIME_ZONE.getRawOffset() / 1000)); // server time zone offset relative to UTC in seconds
+		writeC(0x04); // unk
+		writeC(120); // unk
+		writeH(25233); // unk
+		writeC(2); // 4.0
+		writeC(1); // unk
+		writeD(0); // 4.0
+		writeD(0); // 4.5
+		writeD(68536); // 4.5
+		writeC(0); // 4.7
+		writeC(1); // 4.7
+		writeC(0); // 4.8
+		writeC(0); // 4.8
+		writeC(0); // 4.8
+		writeC(0); // 4.8
+		writeC(1); // 4.8
+		writeC(1); // 4.8 activate stonespearSiege
+		writeC(0); // 1 = master Server
 		writeC(0);
-		writeH(0);		
-		writeD(0);//4.8
-		writeD(0);//4.8
-		writeD(0);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeD(1000);//4.8
-		writeC(0);//4.8
-		writeC(0);//4.8
-		writeC(0);//4.8
-		writeC(0x40);//4.8
-		writeC(0x40);//4.8
-		writeH(0x01);// its loop size
-		// for... chat servers?
-		{
-			writeC(0x00);// spacer
-			// if the correct ip is not sent it will not work
-			writeB(ChatService.getIp());
-			writeH(ChatService.getPort());
+		writeH(0);
+		writeD(0); // 4.8
+		writeD(0); // 4.8
+		writeD(0); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeD(1000); // 4.8
+		writeC(0); // 4.8
+		writeC(0); // 4.8
+		writeC(0); // 4.8
+		writeC(64); // 4.8
+		writeC(64); // 4.8
+		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0);
+		if (ChatServer.getInstance().getPublicIP().length > 0) {
+			writeC(0); // spacer or maybe id
+			writeB(ChatServer.getInstance().getPublicIP());
+			writeH(ChatServer.getInstance().getPublicPort());
 		}
 	}
 }

@@ -45,6 +45,7 @@ public @interface Property {
 	 * <li>{@link java.io.File} by {@link com.aionemu.commons.configuration.transformers.FileTransformer}</li>
 	 * <li>{@link java.net.InetSocketAddress} by {@link com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer}</li>
 	 * <li>{@link java.util.regex.Pattern} by {@link com.aionemu.commons.configuration.transformers.PatternTransformer}
+	 * <li>{@link java.util.TimeZone} by {@link com.aionemu.commons.configuration.transformers.TimeZoneTransformer}</li>
 	 * </ul>
 	 * <p/>
 	 * If your value is one of this types - just leave this field empty

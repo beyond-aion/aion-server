@@ -6,12 +6,20 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author antness, Neon
@@ -60,6 +68,13 @@ public class ChatUtil {
 	}
 
 	/**
+	 * @see #name(String)
+	 */
+	public static String name(Player player) {
+		return name(player.getName(AdminConfig.CUSTOMTAG_ENABLE));
+	}
+
+	/**
 	 * This creates a click-able character name.<br>
 	 * Does not work in public chats.
 	 */
@@ -72,6 +87,14 @@ public class ChatUtil {
 	 */
 	public static String path(Npc npc) {
 		return path(StringUtils.capitalize(npc.getName()), npc.getObjectTemplate().getTemplateId());
+	}
+
+	/**
+	 * @see #path(String, int)
+	 */
+	public static String path(int npcId) {
+		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		return path(template == null ? "Npc" : StringUtils.capitalize(template.getName()), npcId);
 	}
 
 	/**
@@ -105,6 +128,63 @@ public class ChatUtil {
 				subId = 1; // lower
 		}
 		return String.format("[pos:%s;%d %s %s %s %d]", label, worldId, DF.format(x), DF.format(y), DF.format(z), subId);
+	}
+
+	/**
+	 * @param posStr
+	 *          can be a string array of {mapId, x, y[, z[, layer]]} or Aion link like "{@code [pos:Teleporter;0 400010000 2128.8 1924.3 0.0 2]}"
+	 * @return The {@link WorldPosition} or null if input was invalid.
+	 */
+	public static WorldPosition getPosition(String... posStr) {
+		if (posStr == null || posStr.length == 0)
+			return null;
+
+		if (posStr[0].startsWith("[pos:")) {
+			int startIndex = posStr[0].indexOf(";");
+			int endIndex = posStr[0].indexOf("]");
+			if (endIndex <= 0 || startIndex < 0 || startIndex > endIndex)
+				return null;
+			posStr = posStr[0].substring(startIndex, endIndex).trim().split("\\h+");
+			if (NumberUtils.toInt(posStr[0]) <= 1) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)
+				posStr = ArrayUtils.subarray(posStr, 1, posStr.length);
+		}
+
+		if (posStr == null || posStr.length < 3)
+			return null;
+
+		int mapId = NumberUtils.toInt(posStr[0]);
+		float x = NumberUtils.toFloat(posStr[1]);
+		float y = NumberUtils.toFloat(posStr[2]);
+		float z = posStr.length > 3 ? NumberUtils.toFloat(posStr[3]) : 0;
+		int layer = posStr.length > 4 ? NumberUtils.toInt(posStr[4]) : 0;
+
+		if (mapId == 0)
+			mapId = WorldMapType.getMapId(posStr[0]);
+
+		if (WorldMapType.getWorld(mapId) == null)
+			return null;
+
+		if (layer > 0 && z <= 0 && mapId == 400010000) { // abyss
+			switch (layer) {
+				case 1: // lower
+					z = 1700;
+					break;
+				case 2: // core
+					z = 2350;
+					break;
+				case 3: // upper
+					if (!GeoDataConfig.GEO_ENABLE) // only with deactivated geo, since z collisions are checked from top to bottom anyways
+						z = 2900;
+					break;
+			}
+		}
+
+		if (z > 0)
+			z = GeoService.getInstance().getZ(mapId, x, y, z, 0, 0); // search relative to input z (max diff = z +2/-100)
+		else
+			z = GeoService.getInstance().getZ(mapId, x, y);
+
+		return World.getInstance().createPosition(mapId, x, y, z, (byte) 0, 0);
 	}
 
 	public static String item(int itemId) {

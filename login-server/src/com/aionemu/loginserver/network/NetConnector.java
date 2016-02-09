@@ -8,6 +8,7 @@ import com.aionemu.loginserver.network.gameserver.GsConnectionFactoryImpl;
 
 /**
  * @author KID
+ * @modified Neon
  */
 public class NetConnector {
 
@@ -17,10 +18,8 @@ public class NetConnector {
 	private final static NioServer instance;
 
 	static {
-		ServerCfg aion = new ServerCfg(Config.LOGIN_BIND_ADDRESS, Config.LOGIN_PORT, "Aion Connections", new AionConnectionFactoryImpl());
-
-		ServerCfg gs = new ServerCfg(Config.GAME_BIND_ADDRESS, Config.GAME_PORT, "Gs Connections", new GsConnectionFactoryImpl());
-
+		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion Connections", new AionConnectionFactoryImpl());
+		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl());
 		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, gs, aion);
 	}
 

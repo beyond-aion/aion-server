@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
 import com.aionemu.gameserver.dao.ItemCooldownsDAO;
@@ -26,12 +25,11 @@ import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_QUIT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
+import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BrokerService;
-import com.aionemu.gameserver.services.ChatService;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.KiskService;
@@ -45,7 +43,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.world.World;
 
@@ -65,11 +62,9 @@ public class PlayerLeaveWorldService {
 	 * anywhere else</b>
 	 */
 	public static final void leaveWorld(Player player) {
-		final AionConnection con = player.getClientConnection();
-		log.info("Player logged out: " + player.getName() + " Account: " + (con != null ? con.getAccount().getName() : "[disconnected]"));
-
 		if (player.isSpawned() && player.getPosition().getMapRegion() == null) {
-			log.warn("Player " + player.getName() + " had mapRegion null in world " + player.getPosition().getMapId() + " so he was reset to bind point position");
+			log.warn(
+				"Player " + player.getName() + " had mapRegion null in world " + player.getPosition().getMapId() + " so he was reset to bind point position");
 			BindPointPosition bp = player.getBindPoint();
 			player.setPosition(World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 0));
 		}
@@ -77,7 +72,6 @@ public class PlayerLeaveWorldService {
 		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
-		PacketSendUtility.broadcastPacket(player, new SM_DELETE(player));
 		player.getResponseRequester().denyAll();
 		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);
@@ -150,8 +144,7 @@ public class PlayerLeaveWorldService {
 		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
 		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
 
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatService.onPlayerLogout(player);
+		ChatServer.getInstance().sendPlayerLogout(player);
 
 		PlayerService.storePlayer(player);
 
@@ -163,8 +156,10 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
 
-		player.setClientConnection(null);
-		if (con != null)
+		AionConnection con = player.getClientConnection();
+		if (con != null) {
+			player.setClientConnection(null);
 			con.setActivePlayer(null);
+		}
 	}
 }

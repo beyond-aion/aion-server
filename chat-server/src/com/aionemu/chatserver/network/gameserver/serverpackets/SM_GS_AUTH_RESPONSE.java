@@ -20,7 +20,11 @@ public class SM_GS_AUTH_RESPONSE extends GsServerPacket {
 	protected void writeImpl(GsConnection con) {
 		writeC(0);
 		writeC(response.getResponseId());
-		writeB(Config.CHAT_ADDRESS.getAddress().getAddress());
-		writeH(Config.CHAT_ADDRESS.getPort());
+		if (response == GsAuthResponse.AUTHED) {
+			byte[] csIp = Config.CLIENT_CONNECT_ADDRESS.getAddress().getAddress();
+			writeC(csIp.length);
+			writeB(csIp);
+			writeH(Config.CLIENT_CONNECT_ADDRESS.getPort());
+		}
 	}
 }

@@ -1,10 +1,8 @@
 package com.aionemu.loginserver;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.aionemu.commons.network.IPRange;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
@@ -24,7 +22,7 @@ public class GameServerInfo {
 	/**
 	 * Allowed IP for this GameServer if gs will connect from another ip wont be registered.
 	 */
-	private final String ip;
+	private final String ipMask;
 
 	/**
 	 * Password
@@ -34,12 +32,7 @@ public class GameServerInfo {
 	/**
 	 * Default server address, usually internet address
 	 */
-	private byte[] defaultAddress;
-
-	/**
-	 * Mapping of ip ranges, usually used for local area connections
-	 */
-	private List<IPRange> ipRanges;
+	private byte[] ip;
 
 	/**
 	 * Port on with this GameServer is accepting clients.
@@ -68,9 +61,9 @@ public class GameServerInfo {
 	 * @param ip
 	 * @param password
 	 */
-	public GameServerInfo(byte id, String ip, String password) {
+	public GameServerInfo(byte id, String ipMask, String password) {
 		this.id = id;
-		this.ip = ip;
+		this.ipMask = ipMask;
 		this.password = password;
 	}
 
@@ -97,8 +90,8 @@ public class GameServerInfo {
 	 * 
 	 * @return String ip
 	 */
-	public String getIp() {
-		return ip;
+	public String getIpMask() {
+		return ipMask;
 	}
 
 	/**
@@ -120,41 +113,22 @@ public class GameServerInfo {
 	}
 
 	/**
-	 * Retunrs default server address, usually used as internet address
+	 * Returns default server address, usually used as Internet address
 	 * 
 	 * @return default server address
 	 */
-	public byte[] getDefaultAddress() {
-		return defaultAddress;
+	public byte[] getIp() {
+		return ip;
 	}
 
 	/**
 	 * Sets default server address
 	 * 
-	 * @param defaultAddress
+	 * @param ip
 	 *          default server address
 	 */
-	public void setDefaultAddress(byte[] defaultAddress) {
-		this.defaultAddress = defaultAddress;
-	}
-
-	/**
-	 * Returns IP range mappings
-	 * 
-	 * @return IPRange mappings
-	 */
-	public List<IPRange> getIpRanges() {
-		return ipRanges;
-	}
-
-	/**
-	 * Sets IPRange mappings
-	 * 
-	 * @param ipRanges
-	 *          ipRangeMappings
-	 */
-	public void setIpRanges(List<IPRange> ipRanges) {
-		this.ipRanges = ipRanges;
+	public void setIp(byte[] ip) {
+		this.ip = ip;
 	}
 
 	/**
@@ -264,28 +238,5 @@ public class GameServerInfo {
 	 */
 	public boolean isFull() {
 		return getCurrentPlayers() >= getMaxPlayers();
-	}
-
-	/**
-	 * Returns ip address that will be used as server ip for specific player.<br>
-	 * The problem is that players can access server from various subnetworks so we need to send different ip adresses.<br>
-	 * If gameserver is not online - it returns 127.0.0.1 as server address.
-	 * 
-	 * @param playerIp
-	 *          Player address
-	 * @return ip address that is valid for player
-	 */
-	public byte[] getIPAddressForPlayer(String playerIp) {
-		if (!isOnline()) {
-			return new byte[] { 127, 0, 0, 1 };
-		}
-
-		for (IPRange ipr : ipRanges) {
-			if (ipr.isInRange(playerIp)) {
-				return ipr.getAddress();
-			}
-		}
-
-		return defaultAddress;
 	}
 }

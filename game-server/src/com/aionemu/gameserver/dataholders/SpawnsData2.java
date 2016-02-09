@@ -75,7 +75,7 @@ public class SpawnsData2 {
 	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<MercenarySpawn>();
 	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<AssaultSpawn>();
 	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<Spawn>();
-	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>(); //ahserions flight
+	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>(); // ahserions flight
 
 	/**
 	 * @param u
@@ -205,32 +205,32 @@ public class SpawnsData2 {
 						awave.setSiegeId(assaultSpawn.getSiegeId());
 					}
 				}
-				
+
 				for (AhserionsFlightSpawn ahserionSpawn : spawnMap.getAhserionSpawns()) {
 					int teamId = ahserionSpawn.getTeam().getId();
 					if (!ahserionSpawnMaps.containsKey(teamId)) {
 						ahserionSpawnMaps.put(teamId, new FastTable<SpawnGroup2>());
 					}
-					
+
 					for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
 						if (stageTemplate == null || stageTemplate.getSpawns() == null) {
 							continue;
 						}
-						
+
 						for (Spawn spawn : stageTemplate.getSpawns()) {
-							if (spawn.isCustom())  {
+							if (spawn.isCustom()) {
 								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
 									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
 								customs.put(spawn.getNpcId(), spawn);
 							} else if (customs.contains(spawn.getNpcId())) {
-								continue;	
+								continue;
 							}
 							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, stageTemplate.getStage(), ahserionSpawn.getTeam());
 							ahserionSpawnMaps.get(teamId).add(spawnGroup);
 						}
 					}
 				}
-				
+
 				customs.clear();
 			}
 		}
@@ -281,6 +281,12 @@ public class SpawnsData2 {
 
 	public synchronized boolean saveSpawn(VisibleObject visibleObject, boolean delete) {
 		SpawnTemplate spawn = visibleObject.getSpawn();
+		if (!spawn.getClass().equals(SpawnTemplate.class)) // do not save special/temporary spawns (siege, base, rift spawn, ...) as world spawns
+			return false;
+		if (spawn.getRespawnTime() <= 0) // do not save single time spawns (monster raid, handler spawn, ...) as world spawns
+			return false;
+		if (spawn.isTemporarySpawn()) // spawn start and end times of temporary world spawns (shugos, agrints, ...) would get lost
+			return false;
 		Spawn oldGroup = DataManager.SPAWNS_DATA2.getSpawnsForNpc(visibleObject.getWorldId(), spawn.getNpcId());
 
 		File xml = new File("./data/static_data/spawns/" + getRelativePath(visibleObject));

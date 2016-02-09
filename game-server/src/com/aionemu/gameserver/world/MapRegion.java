@@ -92,13 +92,6 @@ public class MapRegion {
 	}
 
 	/**
-	 * Return an instance of {@link World}, which keeps map, to which belongs this region
-	 */
-	public World getWorld() {
-		return getParent().getWorld();
-	}
-
-	/**
 	 * Returns region id of this map region. [NOT WORLD ID!]
 	 * 
 	 * @return region id.

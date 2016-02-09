@@ -208,14 +208,10 @@ public class GsConnection extends AConnection {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("GameServer [ID:");
-		if (gameServerInfo != null) {
-			sb.append(gameServerInfo.getId());
-		} else {
-			sb.append("null");
-		}
-		sb.append("] ").append(getIP());
+		StringBuilder sb = new StringBuilder("Gameserver");
+		if (gameServerInfo != null)
+			sb.append(" #").append(gameServerInfo.getId());
+		sb.append(" ").append(getIP());
 		return sb.toString();
 	}
 
@@ -226,13 +222,12 @@ public class GsConnection extends AConnection {
 
 	@Override
 	protected void initialized() {
-		// TODO Auto-generated method stub
 		state = State.CONNECTED;
 		String ip = getIP();
 
 		if (Config.ENABLE_PINGPONG)
 			pingThread = new PingPongThread(this);
 
-		log.info("Gameserver connection attemp from: " + ip);
+		log.info("Gameserver connection attempt from: " + ip);
 	}
 }

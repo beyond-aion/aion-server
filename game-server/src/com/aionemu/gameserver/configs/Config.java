@@ -43,7 +43,6 @@ import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
-import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 
 /**
@@ -196,11 +195,8 @@ public class Config {
 			ConfigurableProcessor.process(NetworkConfig.class, networkProps);
 
 		} catch (Exception e) {
-			log.error("Can't load gameserver configuration: ", e);
-			throw new Error("Can't load gameserver configuration: ", e);
+			throw new Error("Can't load gameserver configuration:", e);
 		}
-
-		IPConfig.load();
 	}
 
 	/**
@@ -331,7 +327,6 @@ public class Config {
 			log.info("Loading: " + main + "/antihack.properties");
 
 		} catch (Exception e) {
-			log.error("Can't reload configuration: ", e);
 			throw new Error("Can't reload configuration: ", e);
 		}
 	}
