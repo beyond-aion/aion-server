@@ -476,12 +476,11 @@ public class StigmaService {
 				if (stigmaCount == 1) {
 					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask())
 						return true;
-					else if (stigmaCount == 2)
-						if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask())
-							return true;
-						else if (stigmaCount == 3)
-							return true;
-				}
+				} else if (stigmaCount == 2) {
+					if (itemSlotToEquip == ItemSlot.STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.STIGMA2.getSlotIdMask())
+						return true;
+				} else if (stigmaCount == 3)
+					return true;
 			}
 		}
 		// Advanced Stigma
@@ -491,12 +490,11 @@ public class StigmaService {
 				if (advStigmaCount == 1) {
 					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask())
 						return true;
-					else if (advStigmaCount == 2)
-						if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask())
-							return true;
-						else if (advStigmaCount == 3)
-							return true;
-				}
+				} else if (advStigmaCount == 2) {
+					if (itemSlotToEquip == ItemSlot.ADV_STIGMA1.getSlotIdMask() || itemSlotToEquip == ItemSlot.ADV_STIGMA2.getSlotIdMask())
+						return true;
+				} else if (advStigmaCount == 3)
+					return true;
 			}
 		}
 		return false;
