@@ -72,7 +72,7 @@ public class AhserionInstance {
 				startInstancePreparation();
 			}
 			
-		}, 300000); //5min
+		}, 600000); //10min
 	}
 	
 	private void startInstancePreparation() {
