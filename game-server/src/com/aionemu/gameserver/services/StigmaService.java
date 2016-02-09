@@ -134,18 +134,21 @@ public class StigmaService {
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
 				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				notifyUnequipAction(player, item);
 				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
 				continue;
 			}
 
 			if (!isPossibleEquippedStigma(player, item)) {
 				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (stigma count big)");
 				continue;
 			}
 
 			if (!item.getItemTemplate().isClassSpecific(player.getPlayerClass())) {
 				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (not valid for class)");
 				continue;
 			}
@@ -579,15 +582,14 @@ public class StigmaService {
 	}
 
 	private static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
+		int nameId = 0;
 		for (SkillTemplate st : stigma.getAllSkillTemplates()) {
-			int nameId = DataManager.SKILL_DATA.getSkillTemplate(st.getSkillId()).getNameId();
-			if (onUnequip)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
-		}
-		for (SkillTemplate st : stigma.getAllSkillTemplates()) {
+			nameId = DataManager.SKILL_DATA.getSkillTemplate(st.getSkillId()).getNameId();
 			for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, true))
 				SkillLearnService.removeSkill(player, sSkill.getSkillId());
 		}
+		if (nameId != 0)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 		removeLinkedStigmaSkills(player);
 	}
 }
