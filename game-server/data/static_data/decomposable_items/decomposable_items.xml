@@ -27754,7 +27754,20 @@
     <decomposable item_id="188053087" decomposable_name="Abyss of Triniel"/>
     <decomposable item_id="188053088" decomposable_name="Dark Abyss of Triniel"/>
     <decomposable item_id="188053089" decomposable_name="Idgel Dome Champion's Bundle"/>
-    <decomposable item_id="188053090" decomposable_name="Ahserion's Flight Champion's Bundle"/>
+    <decomposable item_id="188053090" decomposable_name="Ahserion's Flight Champion's Bundle">
+		<items>
+			<item id="166050127" name="Blazing Warlord's Idian: Physical Attack"/>
+		</items>
+		<items>
+			<item id="166050128" name="Blazing Warlord's Idian: Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050129" name="Blazing Warlord's Idian: Physical/Magical Attack"/>
+		</items>
+		<items>
+			<item id="166050130" name="Blazing Warlord's Idian: Physical/Magical Defense"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053091" decomposable_name="Modor's Curiosity Box"/>
     <decomposable item_id="188053092" decomposable_name="Danuar Reliquary Expedition's Artifacts"/>
     <decomposable item_id="188053093" decomposable_name="Dynatoum's Curiosity Box">
@@ -27892,18 +27905,241 @@
     <decomposable item_id="188053103" decomposable_name="Equipment Purification Material Bundle"/>
     <decomposable item_id="188053104" decomposable_name="Talisman Recipe Bundle"/>
     <decomposable item_id="188053105" decomposable_name="Equipment Purification Material Bundle"/>
-    <decomposable item_id="188053106" decomposable_name="Ahserion's Weapon Box"/>
-    <decomposable item_id="188053107" decomposable_name="Ahserion's Armor Box"/>
-    <decomposable item_id="188053108" decomposable_name="Ahserion's Accessory Box"/>
-    <decomposable item_id="188053109" decomposable_name="Ahserion's Equipment Box"/>
-    <decomposable item_id="188053110" decomposable_name="Ahserion's Flight Battlefield Material Bundle"/>
+    <decomposable item_id="188053106" decomposable_name="Ahserion's Weapon Box" selectable="true">
+		<items>
+			<item id="100001684" name="Awakened Ahserion's Sword" player_class="TEMPLAR"/>
+			<item id="100901312" name="Awakened Ahserion's Greatsword" player_class="TEMPLAR"/>
+			<item id="115001704" name="Awakened Ahserion's Shield" player_class="TEMPLAR"/>
+			<item id="100001684" name="Awakened Ahserion's Sword" player_class="GLADIATOR"/>
+			<item id="100201457" name="Awakened Ahserion's Dagger" player_class="GLADIATOR"/>
+			<item id="100901312" name="Awakened Ahserion's Greatsword" player_class="GLADIATOR"/>
+			<item id="101301217" name="Awakened Ahserion's Polearm" player_class="GLADIATOR"/>
+			<item id="101701321" name="Awakened Ahserion's Bow" player_class="GLADIATOR"/>
+			<item id="115001704" name="Awakened Ahserion's Shield" player_class="GLADIATOR"/>
+			<item id="100001684" name="Awakened Ahserion's Sword" player_class="ASSASSIN"/>
+			<item id="100201457" name="Awakened Ahserion's Dagger" player_class="ASSASSIN"/>
+			<item id="101701321" name="Awakened Ahserion's Bow" player_class="ASSASSIN"/>
+			<item id="100001684" name="Awakened Ahserion's Sword" player_class="RANGER"/>
+			<item id="100201457" name="Awakened Ahserion's Dagger" player_class="RANGER"/>
+			<item id="101701321" name="Awakened Ahserion's Bow" player_class="RANGER"/>
+			<item id="101801172" name="Awakened Ahserion's Pistol" player_class="GUNNER"/>
+			<item id="101901083" name="Awakened Ahserion's Aethercannon" player_class="GUNNER"/>
+			<item id="100101283" name="Awakened Ahserion's Mace" player_class="CHANTER"/>
+			<item id="101501306" name="Awakened Ahserion's Staff" player_class="CHANTER"/>
+			<item id="115001704" name="Awakened Ahserion's Shield" player_class="CHANTER"/>
+			<item id="100101283" name="Awakened Ahserion's Mace" player_class="CLERIC"/>
+			<item id="101501306" name="Awakened Ahserion's Staff" player_class="CLERIC"/>
+			<item id="115001704" name="Awakened Ahserion's Shield" player_class="CLERIC"/>
+			<item id="101801172" name="Awakened Ahserion's Pistol" player_class="RIDER"/>
+			<item id="102101005" name="Awakened Ahserion's Cipher-Blade" player_class="RIDER"/>
+			<item id="100501270" name="Awakened Ahserion's Orb" player_class="SORCERER"/>
+			<item id="100601380" name="Awakened Ahserion's Spellbook" player_class="SORCERER"/>
+			<item id="100501270" name="Awakened Ahserion's Orb" player_class="SPIRIT_MASTER"/>
+			<item id="100601380" name="Awakened Ahserion's Spellbook" player_class="SPIRIT_MASTER"/>
+			<item id="102001199" name="Awakened Ahserion's Harp" player_class="BARD"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053107" decomposable_name="Ahserion's Armor Box">
+		<items>
+			<item id="110601562" name="Awakened Ahserion's Breastplate" player_class="TEMPLAR"/>
+			<item id="110601562" name="Awakened Ahserion's Breastplate" player_class="GLADIATOR"/>
+			<item id="110301757" name="Awakened Ahserion's Jerkin" player_class="ASSASSIN"/>
+			<item id="110301757" name="Awakened Ahserion's Jerkin" player_class="RANGER"/>
+			<item id="110301757" name="Awakened Ahserion's Jerkin" player_class="GUNNER"/>
+			<item id="110551090" name="Awakened Ahserion's Hauberk" player_class="CHANTER"/>
+			<item id="110551090" name="Awakened Ahserion's Hauberk" player_class="CLERIC"/>
+			<item id="110551090" name="Awakened Ahserion's Hauberk" player_class="RIDER"/>
+			<item id="110101772" name="Awakened Ahserion's Tunic" player_class="SORCERER"/>
+			<item id="110101772" name="Awakened Ahserion's Tunic" player_class="SPIRIT_MASTER"/>
+			<item id="110101772" name="Awakened Ahserion's Tunic" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="111601525" name="Awakened Ahserion's Gauntlets" player_class="TEMPLAR"/>
+			<item id="111601525" name="Awakened Ahserion's Gauntlets" player_class="GLADIATOR"/>
+			<item id="111301695" name="Awakened Ahserion's Vambrace" player_class="ASSASSIN"/>
+			<item id="111301695" name="Awakened Ahserion's Vambrace" player_class="RANGER"/>
+			<item id="111301695" name="Awakened Ahserion's Vambrace" player_class="GUNNER"/>
+			<item id="111501649" name="Awakened Ahserion's Handguards" player_class="CHANTER"/>
+			<item id="111501649" name="Awakened Ahserion's Handguards" player_class="CLERIC"/>
+			<item id="111501649" name="Awakened Ahserion's Handguards" player_class="RIDER"/>
+			<item id="111101592" name="Awakened Ahserion's Gloves" player_class="SORCERER"/>
+			<item id="111101592" name="Awakened Ahserion's Gloves" player_class="SPIRIT_MASTER"/>
+			<item id="111101592" name="Awakened Ahserion's Gloves" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="112601507" name="Awakened Ahserion's Shoulderplates" player_class="TEMPLAR"/>
+			<item id="112601507" name="Awakened Ahserion's Shoulderplates" player_class="GLADIATOR"/>
+			<item id="112301634" name="Awakened Ahserion's Shoulderguards" player_class="ASSASSIN"/>
+			<item id="112301634" name="Awakened Ahserion's Shoulderguards" player_class="RANGER"/>
+			<item id="112301634" name="Awakened Ahserion's Shoulderguards" player_class="GUNNER"/>
+			<item id="112501588" name="Awakened Ahserion's Spaulders" player_class="CHANTER"/>
+			<item id="112501588" name="Awakened Ahserion's Spaulders" player_class="CLERIC"/>
+			<item id="112501588" name="Awakened Ahserion's Spaulders" player_class="RIDER"/>
+			<item id="112101542" name="Awakened Ahserion's Pauldrons" player_class="SORCERER"/>
+			<item id="112101542" name="Awakened Ahserion's Pauldrons" player_class="SPIRIT_MASTER"/>
+			<item id="112101542" name="Awakened Ahserion's Pauldrons" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="113601508" name="Awakened Ahserion's Greaves" player_class="TEMPLAR"/>
+			<item id="113601508" name="Awakened Ahserion's Greaves" player_class="GLADIATOR"/>
+			<item id="113301726" name="Awakened Ahserion's Breeches" player_class="ASSASSIN"/>
+			<item id="113301726" name="Awakened Ahserion's Breeches" player_class="RANGER"/>
+			<item id="113301726" name="Awakened Ahserion's Breeches" player_class="GUNNER"/>
+			<item id="113501667" name="Awakened Ahserion's Chausses" player_class="CHANTER"/>
+			<item id="113501667" name="Awakened Ahserion's Chausses" player_class="CLERIC"/>
+			<item id="113501667" name="Awakened Ahserion's Chausses" player_class="RIDER"/>
+			<item id="113101604" name="Awakened Ahserion's Leggings" player_class="SORCERER"/>
+			<item id="113101604" name="Awakened Ahserion's Leggings" player_class="SPIRIT_MASTER"/>
+			<item id="113101604" name="Awakened Ahserion's Leggings" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="114601515" name="Awakened Ahserion's Sabatons" player_class="TEMPLAR"/>
+			<item id="114601515" name="Awakened Ahserion's Sabatons" player_class="GLADIATOR"/>
+			<item id="114301763" name="Awakened Ahserion's Boots" player_class="ASSASSIN"/>
+			<item id="114301763" name="Awakened Ahserion's Boots" player_class="RANGER"/>
+			<item id="114301763" name="Awakened Ahserion's Boots" player_class="GUNNER"/>
+			<item id="114501677" name="Awakened Ahserion's Brogans" player_class="CHANTER"/>
+			<item id="114501677" name="Awakened Ahserion's Brogans" player_class="CLERIC"/>
+			<item id="114501677" name="Awakened Ahserion's Brogans" player_class="RIDER"/>
+			<item id="114101638" name="Awakened Ahserion's Shoes" player_class="SORCERER"/>
+			<item id="114101638" name="Awakened Ahserion's Shoes" player_class="SPIRIT_MASTER"/>
+			<item id="114101638" name="Awakened Ahserion's Shoes" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="125004009" name="Awakened Ahserion's Helm" player_class="TEMPLAR"/>
+			<item id="125004009" name="Awakened Ahserion's Helm" player_class="GLADIATOR"/>
+			<item id="125004011" name="Awakened Ahserion's Hat" player_class="ASSASSIN"/>
+			<item id="125004011" name="Awakened Ahserion's Hat" player_class="RANGER"/>
+			<item id="125004011" name="Awakened Ahserion's Hat" player_class="GUNNER"/>
+			<item id="125004010" name="Awakened Ahserion's Chain Helm" player_class="CHANTER"/>
+			<item id="125004010" name="Awakened Ahserion's Chain Helm" player_class="CLERIC"/>
+			<item id="125004010" name="Awakened Ahserion's Chain Helm" player_class="RIDER"/>
+			<item id="125004012" name="Awakened Ahserion's Headband" player_class="SORCERER"/>
+			<item id="125004012" name="Awakened Ahserion's Headband" player_class="SPIRIT_MASTER"/>
+			<item id="125004012" name="Awakened Ahserion's Headband" player_class="BARD"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053108" decomposable_name="Ahserion's Accessory Box">
+		<items>
+			<item id="120001503" name="Awakened Ahserion's Opal Earrings" player_class="TEMPLAR"/>
+			<item id="120001503" name="Awakened Ahserion's Opal Earrings" player_class="GLADIATOR"/>
+			<item id="120001503" name="Awakened Ahserion's Opal Earrings" player_class="ASSASSIN"/>
+			<item id="120001503" name="Awakened Ahserion's Opal Earrings" player_class="RANGER"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="GUNNER"/>
+			<item id="120001503" name="Awakened Ahserion's Opal Earrings" player_class="CHANTER"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="CLERIC"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="RIDER"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="SORCERER"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="SPIRIT_MASTER"/>
+			<item id="120001504" name="Awakened Ahserion's Nolan Earrings" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="121001375" name="Awakened Ahserion's Opal Necklace" player_class="TEMPLAR"/>
+			<item id="121001375" name="Awakened Ahserion's Opal Necklace" player_class="GLADIATOR"/>
+			<item id="121001375" name="Awakened Ahserion's Opal Necklace" player_class="ASSASSIN"/>
+			<item id="121001375" name="Awakened Ahserion's Opal Necklace" player_class="RANGER"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="GUNNER"/>
+			<item id="121001375" name="Awakened Ahserion's Opal Necklace" player_class="CHANTER"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="CLERIC"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="RIDER"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="SORCERER"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="SPIRIT_MASTER"/>
+			<item id="121001376" name="Awakened Ahserion's Nolan Necklace" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="122001644" name="Awakened Ahserion's Opal Ring" player_class="TEMPLAR"/>
+			<item id="122001644" name="Awakened Ahserion's Opal Ring" player_class="GLADIATOR"/>
+			<item id="122001644" name="Awakened Ahserion's Opal Ring" player_class="ASSASSIN"/>
+			<item id="122001644" name="Awakened Ahserion's Opal Ring" player_class="RANGER"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="GUNNER"/>
+			<item id="122001644" name="Awakened Ahserion's Opal Ring" player_class="CHANTER"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="CLERIC"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="RIDER"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="SORCERER"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="SPIRIT_MASTER"/>
+			<item id="122001645" name="Awakened Ahserion's Nolan Ring" player_class="BARD"/>
+		</items>
+		<items>
+			<item id="123001421" name="Awakened Ahserion's Leather Belt" player_class="TEMPLAR"/>
+			<item id="123001421" name="Awakened Ahserion's Leather Belt" player_class="GLADIATOR"/>
+			<item id="123001421" name="Awakened Ahserion's Leather Belt" player_class="ASSASSIN"/>
+			<item id="123001421" name="Awakened Ahserion's Leather Belt" player_class="RANGER"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="GUNNER"/>
+			<item id="123001421" name="Awakened Ahserion's Leather Belt" player_class="CHANTER"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="CLERIC"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="RIDER"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="SORCERER"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="SPIRIT_MASTER"/>
+			<item id="123001422" name="Awakened Ahserion's Sash" player_class="BARD"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053109" decomposable_name="Ahserion's Equipment Box">
+		<items>
+			<item id="188053106" name="Ahserion's Weapon Box"/>
+		</items>
+		<items>
+			<item id="188053107" name="Ahserion's Armor Box"/>
+		</items>
+		<items>
+			<item id="188053108" name="Ahserion's Accessory Box"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053110" decomposable_name="Ahserion's Flight Battlefield Material Bundle">
+		<items>
+			<item id="152012598" name="Heart of Destruction" count="2"/>
+			<item id="152012599" name="Heart of Protection" count="2"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053111" decomposable_name="Ahserion's Flight Manastone Material Bundle"/>
-    <decomposable item_id="188053112" decomposable_name="Ahserion's Flight Composite Manastone Bundle"/>
-    <decomposable item_id="188053113" decomposable_name="Ahserion's Flight Ancient Manastone Bundle"/>
+    <decomposable item_id="188053112" decomposable_name="Ahserion's Flight Composite Manastone Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60" rnd_min="1" rnd_max="3"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053113" decomposable_name="Ahserion's Flight Ancient Manastone Bundle">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053114" decomposable_name="Test Ahserion's Flight Manastone Bundle"/>
-    <decomposable item_id="188053115" decomposable_name="Ahserion's Flight Godstone Bundle"/>
-    <decomposable item_id="188053116" decomposable_name="Ahserion's Flight Recharger Bundle"/>
-    <decomposable item_id="188053117" decomposable_name="Ahserion's Glory Reward Box"/>
+    <decomposable item_id="188053115" decomposable_name="Ahserion's Flight Godstone Bundle">
+		<items>
+			<item id="168000161" name="Meslamtaeda's Greed"/>
+		</items>
+		<items>
+			<item id="168000162" name="Ereshkigal's Honor"/>
+		</items>
+		<items>
+			<item id="168000163" name="Nezekan's Advance"/>
+		</items>
+		<items>
+			<item id="168000164" name="Beritra's Plot"/>
+		</items>
+		<items>
+			<item id="168000165" name="Fregion's Trick"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053116" decomposable_name="Ahserion's Flight Recharger Bundle">
+		<items>
+			<item id="168310016" name="Major Deep Conditioning: Level 2"/>
+		</items>
+		<items>
+			<item id="168310018" name="Major Blessed Augment: Level 2"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053117" decomposable_name="Ahserion's Glory Reward Box">
+		<items>
+			<item id="188053109" name="Ahserion's Equipment Box"/>
+			<item id="188053110" name="Ahserion's Flight Battlefield Material Bundle"/>
+			<item id="188053112" name="Ahserion's Flight Composite Manastone Bundle"/>
+			<item id="188053113" name="Ahserion's Flight Godstone Bundle"/>
+			<item id="188053115" name="Ahserion's Flight Recharger Bundle"/>
+			<item id="188053116" name="Ahserion's Flight Ancient Manastone Bundle"/>
+			<item id="188053090" name="Ahserion's Flight Champion's Bundle"/>
+			<item id="186000242" name="Ceramium Medal" count="4"/>
+			<item id="169610148" name="[Title] Ahserion Conqueror (3 days)"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053118" decomposable_name="Lesser Betrayer's Equipment Box">
 		<items>
 			<item id="100901326" name="Lesser Betrayer's Greatsword" player_class="TEMPLAR"/>
