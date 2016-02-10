@@ -3701,7 +3701,7 @@
 		</event>
 		<event name="Frozen Magic Event" start="2014-12-24T00:00:00+00:00" end="2015-01-14T00:00:00+00:00">
 			<quests>
-				<maintainable>80576;80579</maintainable>
+				<maintainable>80575;80576;80577;80578;80579;80580</maintainable>
 			</quests>
 			<spawns>
 				<!-- Sanctum -->
@@ -3718,7 +3718,7 @@
 					<spawn npc_id="832042" respawn_time="295">
 						<spot x="1518.4" y="1512.2" z="565.9181" h="57" />
 					</spawn>
-					<!-- -->
+					<!-- World_FOBJ_Winter_Snow -->
 					<spawn npc_id="832039" respawn_time="295">
 						<spot x="1534" y="1514" z="565.8892" h="68" />
 					</spawn>
@@ -3737,7 +3737,7 @@
 					<spawn npc_id="832042" respawn_time="295">
 						<spot x="1213" y="1400" z="208.125" h="3" />
 					</spawn>
-					<!-- -->
+					<!-- World_FOBJ_Winter_Snow -->
 					<spawn npc_id="832039" respawn_time="295">
 						<spot x="1199" y="1394" z="208.125" h="18" />
 					</spawn>
