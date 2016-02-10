@@ -20,8 +20,6 @@ public class SkillLearnTemplate {
 	private PlayerClass classId = PlayerClass.ALL;
 	@XmlAttribute(name = "skillId", required = true)
 	private int skillId;
-	@XmlAttribute(name = "skillLevels", required = false)
-	private Integer skillLevels;
 	@XmlAttribute(name = "skillLearn", required = false)
 	private Integer skillLearn;
 	@XmlAttribute(name = "name", required = true)
@@ -103,16 +101,5 @@ public class SkillLearnTemplate {
 	 */
 	public Integer getLearnSkill() {
 		return skillLearn;
-	}
-
-	/**
-	 * The max skill level that the skill could reach.
-	 * For the highest player level skill, the value used is constant for the skill group.
-	 * Exception from the rule are passive skills, which have the value 10 at the highest player level (hardcoded)
-	 * Null values - unknown, probably have to be hardcoded.
-	 * @return skillLevels
-	 */
-	public Integer getSkillLevels() {
-		return skillLevels;
 	}
 }
