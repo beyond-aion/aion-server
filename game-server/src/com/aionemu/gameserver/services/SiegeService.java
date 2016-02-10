@@ -51,6 +51,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
 import com.aionemu.gameserver.services.siegeservice.AgentSiege;
 import com.aionemu.gameserver.services.siegeservice.ArtifactSiege;
 import com.aionemu.gameserver.services.siegeservice.FortressSiege;
@@ -201,6 +202,17 @@ public class SiegeService {
 				log.debug("Scheduled agentfight based on cron expression: " + siegeTime);
 			}
 		}
+		// FIXME: Export to SiegeSchedule and possible implement it as a siege
+		CronService.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				if (!AhserionInstance.getInstance().isStarted()) {
+					AhserionInstance.getInstance().start();
+					log.info("Started Ahserion's Flight!");
+				}
+			}
+		}, "0 50 17 ? * SUN");
 
 		// Abyss Moltenus start...
 		CronService.getInstance().schedule(new Runnable() {
