@@ -122,19 +122,19 @@ public class StigmaService {
 		mainLoop:
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
-				player.getEquipment().unEquipItem(item.getObjectId());
+				player.getEquipment().unEquipItem(item.getObjectId(), false);
 				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
 				continue;
 			}
 
 			if (!isPossibleEquippedStigma(player, item)) {
-				player.getEquipment().unEquipItem(item.getObjectId());
+				player.getEquipment().unEquipItem(item.getObjectId(), false);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (stigma count big)");
 				continue;
 			}
 
 			if (!item.getItemTemplate().isClassSpecific(player.getPlayerClass())) {
-				player.getEquipment().unEquipItem(item.getObjectId());
+				player.getEquipment().unEquipItem(item.getObjectId(), false);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (not valid for class)");
 				continue;
 			}
