@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Manu72
+ * @modified Pad
  */
 public class _2098ButWhatweMake extends QuestHandler {
 
@@ -44,7 +45,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2097);
+		return defaultOnLvlUpEvent(env, 2097, true);
 	}
 
 	@Override
@@ -54,21 +55,23 @@ public class _2098ButWhatweMake extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null)
+			return false;
+
 		if (targetId == 203550) // Munin
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.START) {
+			if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialog() == DialogAction.SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					if (giveQuestItem(env, 182207089, 1))
-						;
+					giveQuestItem(env, 182207089, 1);
 					return true;
 				} else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
+			} else if (qs.getStatus() == QuestStatus.REWARD) // Reward
 			{
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
@@ -83,7 +86,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 		} else if (targetId == 204361) // Hreidmar
 		{
 
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO2) {
@@ -97,7 +100,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 
 		} else if (targetId == 204408) // Bulagan
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO3) {
@@ -110,7 +113,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 205198) // Cayron
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialog() == DialogAction.SETPRO4) {
@@ -123,7 +126,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204805) // Vanargand
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SETPRO5.id()) {
@@ -136,7 +139,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204808) // Esnu
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialogId() == DialogAction.SETPRO6.id()) {
@@ -152,7 +155,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 203546) // Skuld
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3057);
 				else if (env.getDialogId() == DialogAction.SETPRO7.id()) {
@@ -165,7 +168,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204387) // Ananta
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
 				else if (env.getDialogId() == DialogAction.SETPRO8.id()) {
@@ -178,7 +181,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 205190) // Seznec
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 8) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 8) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3739);
 				else if (env.getDialogId() == DialogAction.SETPRO9.id()) {
@@ -191,7 +194,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204207) // Kasir
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 9) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 9) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4080);
 				else if (env.getDialogId() == DialogAction.SETPRO10.id()) {
@@ -207,7 +210,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204301) // Aegir
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 10) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 10) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1608);
 				else if (env.getDialogId() == DialogAction.SETPRO11.id()) {
@@ -220,7 +223,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 205155) // Heintz
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 11) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 11) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1949);
 				else if (env.getDialogId() == DialogAction.SETPRO12.id()) {
@@ -233,7 +236,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204784) // Delris
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 12) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 12) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2290);
 				else if (env.getDialogId() == DialogAction.SETPRO13.id()) {
@@ -246,7 +249,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 278001) // Votan
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 13) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 13) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2631);
 				else if (env.getDialogId() == DialogAction.SETPRO14.id()) {
@@ -259,7 +262,7 @@ public class _2098ButWhatweMake extends QuestHandler {
 			}
 		} else if (targetId == 204053) // Kvasir
 		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 14) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 14) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2972);
 				else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {

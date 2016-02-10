@@ -17,6 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * 
  * @author Manu72
  * @reworked vlog
+ * @modified Pad
  */
 public class _1098PearlofProtection extends QuestHandler {
 
@@ -38,7 +39,7 @@ public class _1098PearlofProtection extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1097);
+		return defaultOnLvlUpEvent(env, 1097, true);
 	}
 
 	@Override
