@@ -3,6 +3,12 @@
 	<kill_bounty type="PER_X_KILLS" kill_count="1000">
 		<bounty item_id="168310018" count="1"/> <!-- Major Blessed Augment -->
 	</kill_bounty>
+	<kill_bounty type="PER_X_KILLS" kill_count="400">
+		<bounty item_id="169610140" count="1"/> <!-- [Title Card] Aion's Chosen (30 days) -->
+	</kill_bounty>
+	<kill_bounty type="PER_X_KILLS" kill_count="200">
+		<bounty item_id="169610054" count="1"/> <!-- [Title Card] Brawny – 15-day pass -->
+	</kill_bounty>
 	<kill_bounty type="PER_X_KILLS" kill_count="100">
 		<bounty item_id="188053609" count="3"/> <!-- Lv60 Composit Manastone Bundle -->
 		<bounty item_id="188054366" count="2"/> <!-- Epic Ancient Manastone Bundle -->

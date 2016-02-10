@@ -113,14 +113,11 @@ public class PvpService {
 		// Pvp Kill Reward.
 		if (CustomConfig.ENABLE_KILL_REWARD) {
 			int kills = winner.getAbyssRank().getAllKill();
-			if (kills % 1000 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 1000);
-			if (kills % 100 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 100);
-			if (kills % 50 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 50);
-			if (kills % 20 == 0)
-				sendBountyReward(winner, BountyType.PER_X_KILLS, 20);
+			for (KillBountyTemplate template : killBounties) {
+				int killStep = template.getKillCount();
+				if (kills % killStep == 0)
+					sendBountyReward(winner, BountyType.PER_X_KILLS, killStep);
+			}
 			/*// Check Weekly Kills for Bounty Reward
 			kills = winner.getAbyssRank().getWeeklyKill();
 			if (kills % 100 == 0)
