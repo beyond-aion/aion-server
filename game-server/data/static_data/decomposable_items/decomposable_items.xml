@@ -26723,30 +26723,39 @@
 		</items>
         <items chance="0.33">
 			<item id="162002030" name="[Event] Premium Restoration Serum" count="30"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231085" name="Dye: Bright Aqua" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231086" name="Dye: Bright Green" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231087" name="Dye: Bright Sky Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231088" name="Dye: Bright Magenta" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231089" name="Dye: Bright Red" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="169231090" name="Dye: Bright Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="186000237" name="Ancient Coin" count="15"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.33">
 			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052987" decomposable_name="+2 Snowball">
@@ -26764,30 +26773,39 @@
 		</items>
         <items chance="0.92">
 			<item id="162002030" name="[Event] Premium Restoration Serum" count="30"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231085" name="Dye: Bright Aqua" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231086" name="Dye: Bright Green" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231087" name="Dye: Bright Sky Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231088" name="Dye: Bright Magenta" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231089" name="Dye: Bright Red" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="169231090" name="Dye: Bright Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="186000237" name="Ancient Coin" count="15"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="0.91">
 			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052988" decomposable_name="+3 Snowball">
@@ -26805,27 +26823,35 @@
 		</items>
         <items chance="1.5">
 			<item id="162002030" name="[Event] Premium Restoration Serum" count="30"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231085" name="Dye: Bright Aqua" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231086" name="Dye: Bright Green" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231087" name="Dye: Bright Sky Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231088" name="Dye: Bright Magenta" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231089" name="Dye: Bright Red" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="169231090" name="Dye: Bright Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.5">
 			<item id="186000237" name="Ancient Coin" count="15"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="1.53">
 			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
@@ -26846,30 +26872,39 @@
 		</items>
         <items chance="2.08">
 			<item id="162002030" name="[Event] Premium Restoration Serum" count="30"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231085" name="Dye: Bright Aqua" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231086" name="Dye: Bright Green" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231087" name="Dye: Bright Sky Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231088" name="Dye: Bright Magenta" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231089" name="Dye: Bright Red" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="169231090" name="Dye: Bright Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="186000237" name="Ancient Coin" count="15"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.08">
 			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052990" decomposable_name="+5 Snowball">
@@ -26887,30 +26922,39 @@
 		</items>
         <items chance="2.67">
 			<item id="162002030" name="[Event] Premium Restoration Serum" count="30"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231085" name="Dye: Bright Aqua" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231086" name="Dye: Bright Green" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231087" name="Dye: Bright Sky Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231088" name="Dye: Bright Magenta" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231089" name="Dye: Bright Red" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="169231090" name="Dye: Bright Blue" count="2"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="186000237" name="Ancient Coin" count="15"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
 		<items chance="2.66">
 			<item id="166000195" name="Epsilon Enchantment Stone" count="5"/>
+			<item id="182007148" name="[Event] Snowflake Crystal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052991" decomposable_name="+6 Snowball">
