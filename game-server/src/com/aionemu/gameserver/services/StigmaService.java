@@ -42,7 +42,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class StigmaService {
 
 	private static final Logger log = LoggerFactory.getLogger(StigmaService.class);
-	private static final int MAX_STIGMA_ENCHANT_LVL = 8;
+	private static final int MAX_STIGMA_ENCHANT_LVL = 255;
 
 	private static String clearName(String itemName) {
 		String[] splits = itemName.split(" ");
@@ -376,6 +376,12 @@ public class StigmaService {
 		return 0;
 	}
 
+	/**
+	 * Determines the level for the linked stigma skill on the basis of all other stigma
+	 * enchantment levels. This cannot exceed 255.
+	 * @return
+	 * 			the lowest enchantment level of all stigmas
+	 */
 	private static int getLinkedStigmaSkillLevel(Player player) {
 		int stigmaLevel = MAX_STIGMA_ENCHANT_LVL;
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
