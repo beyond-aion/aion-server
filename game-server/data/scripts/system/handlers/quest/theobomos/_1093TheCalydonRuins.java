@@ -15,7 +15,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Hellboy Aion4Free
+ * @author Hellboy, Aion4Free
+ * @modified Pad
  */
 public class _1093TheCalydonRuins extends QuestHandler {
 
@@ -28,16 +29,10 @@ public class _1093TheCalydonRuins extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182208013, questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

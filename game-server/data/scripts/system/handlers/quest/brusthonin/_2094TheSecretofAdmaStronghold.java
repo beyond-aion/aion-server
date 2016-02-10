@@ -13,6 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Dune11
+ * @modified Pad
  */
 public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 
@@ -25,17 +26,10 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(214700).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = { 2092, 2093, 2054 };
-		return defaultOnZoneMissionEndEvent(env, quests);
 	}
 
 	@Override

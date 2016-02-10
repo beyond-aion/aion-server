@@ -12,8 +12,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Hellboy Aion4Free
- * @modified Gigi
+ * @author Hellboy, Aion4Free
+ * @modified Gigi, Pad
  */
 public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 
@@ -26,17 +26,11 @@ public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(214402).addOnKillEvent(questId);
 		qe.registerQuestNpc(214403).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
