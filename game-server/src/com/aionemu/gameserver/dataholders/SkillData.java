@@ -72,10 +72,7 @@ public class SkillData {
 	}
 
 	public List<SkillTemplate> getSkillTemplate(String skillGroup) {
-		List<SkillTemplate> skills = skillTemplatesByGroups.get(skillGroup);
-		if (skills != null)
-			return skills;
-		return new FastTable<>();
+		return skillTemplatesByGroups.get(skillGroup);
 	}
 
 	/**

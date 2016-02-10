@@ -270,7 +270,7 @@ public class Equipment {
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0, 0), item.getItemId());
 
-			if (item.getItemTemplate().isStigma() && StigmaService.isLinkedStigmaAvailable(owner))
+			if (item.getItemTemplate().isStigma())
 				StigmaService.addLinkedStigmaSkills(owner);
 
 			return item;
@@ -333,13 +333,13 @@ public class Equipment {
 			}
 
 			// if unequip power shard
-			if (itemToUnequip.getItemTemplate().isArmor() && itemToUnequip.getItemTemplate().getItemGroup() == ItemGroup.POWER_SHARDS) {
+			if (itemToUnequip.getItemTemplate().getItemGroup() == ItemGroup.POWER_SHARDS) {
 				owner.unsetState(CreatureState.POWERSHARD);
 				PacketSendUtility.sendPacket(owner, new SM_EMOTION(owner, EmotionType.POWERSHARD_OFF, 0, 0));
 			}
 
-			if (!StigmaService.notifyUnequipAction(owner, itemToUnequip))
-				return null;
+			if (itemToUnequip.getItemTemplate().isStigma())
+				StigmaService.removeStigmaSkills(owner, itemToUnequip.getItemTemplate().getStigma(), itemToUnequip.getEnchantLevel(), true);
 
 			unEquip(itemToUnequip.getEquipmentSlot());
 

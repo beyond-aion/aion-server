@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +32,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -69,7 +69,7 @@ public class StigmaService {
 				if (i.getEquipmentSlot() == slot) {
 					if (!clearName(i.getItemName()).equals(rsultItemName))
 						return false;
-					removeStigmaSkills(player, resultItem.getItemTemplate().getStigma(), resultItem.getEnchantLevel(), true);
+					removeStigmaSkills(player, i.getItemTemplate().getStigma(), i.getEnchantLevel(), i.getEnchantLevel() > resultItem.getEnchantLevel());
 					replace = true;
 					break;
 				}
@@ -107,17 +107,6 @@ public class StigmaService {
 
 	/**
 	 * @param player
-	 * @param resultItem
-	 * @return
-	 */
-	public static boolean notifyUnequipAction(Player player, Item resultItem) {
-		if (resultItem.getItemTemplate().isStigma())
-			removeStigmaSkills(player, resultItem.getItemTemplate().getStigma(), resultItem.getEnchantLevel(), true);
-		return true;
-	}
-
-	/**
-	 * @param player
 	 */
 	public static void onPlayerLogin(Player player) {
 		if (player.havePermission(MembershipConfig.STIGMA_AUTOLEARN)) {
@@ -134,21 +123,18 @@ public class StigmaService {
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
 				player.getEquipment().unEquipItem(item.getObjectId());
-				notifyUnequipAction(player, item);
 				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
 				continue;
 			}
 
 			if (!isPossibleEquippedStigma(player, item)) {
 				player.getEquipment().unEquipItem(item.getObjectId());
-				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (stigma count big)");
 				continue;
 			}
 
 			if (!item.getItemTemplate().isClassSpecific(player.getPlayerClass())) {
 				player.getEquipment().unEquipItem(item.getObjectId());
-				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (not valid for class)");
 				continue;
 			}
@@ -162,54 +148,21 @@ public class StigmaService {
 				}
 			}
 
-			for (SkillTemplate st : item.getItemTemplate().getStigma().getAllSkillTemplates())
-				player.getSkillList().addTemporarySkill(player, st.getSkillId(), item.getEnchantLevel());
+			addStigmaSkills(player, item.getItemTemplate().getStigma(), item.getEnchantLevel());
 		}
 
-		if (isLinkedStigmaAvailable(player))
-			addLinkedStigmaSkills(player);
+		addLinkedStigmaSkills(player);
 	}
 
 	private static List<StigmaSkill> getStigmaLearnSkillsById(int stigmaSkillId, int stigmaLevel, Player player, boolean remove) {
 		List<StigmaSkill> sSkills = new FastTable<>();
 		if (stigmaSkillId > 0) {
-			SkillLearnTemplate[] templates = DataManager.SKILL_TREE_DATA.getStigmaSkillsForSkill(stigmaSkillId, player.getPlayerClass(), (remove ? 65
-				: player.getLevel()), player.getRace());
-			if (templates.length > 0) {
-				for (SkillLearnTemplate template : templates)
-					sSkills.add(new StigmaSkill(stigmaLevel + 1, template.getSkillId(), template.isLinkedStigma()));
-			}
+			SkillLearnTemplate[] templates = DataManager.SKILL_TREE_DATA.getStigmaSkillsForSkill(stigmaSkillId, player.getPlayerClass(),
+				(remove ? 65 : player.getLevel()), player.getRace());
+			for (SkillLearnTemplate template : templates)
+				sSkills.add(new StigmaSkill(stigmaLevel + 1, template.getSkillId(), template.isLinkedStigma()));
 		}
 		return sSkills;
-	}
-
-	public static List<StigmaSkill> getMissingStigmaSkills(Player player) {
-		List<StigmaSkill> missingStigmaSkills = new FastTable<>();
-		if (player != null && player.getEquipment() != null) {
-			for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
-				if (item.getItemTemplate().isStigma()) {
-					Stigma stigmaInfo = item.getItemTemplate().getStigma();
-					int stigmaLevel = item.getEnchantLevel();
-					for (SkillTemplate st : stigmaInfo.getAllSkillTemplates()) {
-						for (StigmaSkill sk : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, false)) {
-							if (!player.getSkillList().isSkillPresent(sk.getSkillId()))
-								missingStigmaSkills.add(sk);
-						}
-					}
-				}
-			}
-		}
-		return missingStigmaSkills;
-	}
-
-	public static boolean isLinkedStigmaAvailable(Player player) {
-		if (player.getEquipment().getEquippedItemsAllStigma().size() < 6)
-			return false;
-		for (Item stigma : player.getEquipment().getEquippedItemsAllStigma()) {
-			if (!stigma.isStigmaChargeable())
-				return false;
-		}
-		return true;
 	}
 
 	public static void removeLinkedStigmaSkills(Player player) {
@@ -237,6 +190,14 @@ public class StigmaService {
 	}
 
 	public static void addLinkedStigmaSkills(Player player) {
+		if (player.getEquipment().getEquippedItemsAllStigma().size() < 6)
+			return;
+
+		for (Item stigma : player.getEquipment().getEquippedItemsAllStigma()) {
+			if (!stigma.isStigmaChargeable())
+				return;
+		}
+
 		for (StigmaSkill sSkill : getStigmaLearnSkillsById(getLinkedStigmaLearnSkill(player), getLinkedStigmaSkillLevel(player), player, false))
 			player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
 	}
@@ -398,8 +359,6 @@ public class StigmaService {
 	 * @return
 	 */
 	private static int getPossibleStigmaCount(Player player) {
-		if (player == null)
-			return 0;
 		if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
 		int playerLevel = player.getLevel();
@@ -442,8 +401,6 @@ public class StigmaService {
 	 * @return
 	 */
 	private static int getPossibleAdvancedStigmaCount(Player player) {
-		if (player == null)
-			return 0;
 		if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
 		int playerLevel = player.getLevel();
@@ -525,8 +482,8 @@ public class StigmaService {
 		final int parentItemId = stigma.getItemId();
 		final int parntObjectId = stigma.getObjectId();
 		final int parentNameId = stigma.getNameId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(),
-			parentItemId, 5000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(), parentItemId, 5000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -534,8 +491,8 @@ public class StigmaService {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(stigma.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(),
-					parentItemId, 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(), parentItemId, 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -545,8 +502,8 @@ public class StigmaService {
 			@Override
 			public void run() {
 				player.getObserveController().removeObserver(observer);
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0,
-					isSuccess ? 1 : 2, 1), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, isSuccess ? 1 : 2, 1), true);
 				if (!player.getInventory().decreaseByObjectId(chargeStone.getObjectId(), 1, ItemPacketService.ItemUpdateType.DEC_STIGMA_USE))
 					return;
 				if (!isSuccess) {
@@ -576,20 +533,24 @@ public class StigmaService {
 	}
 
 	private static void addStigmaSkills(Player player, Stigma stigma, int stigmaLevel) {
-		for (SkillTemplate st : stigma.getAllSkillTemplates())
-			for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, false))
-				player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
+		for (String skillGroup : stigma.getGainSkillGroups())
+			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(skillGroup))
+				for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, false))
+					player.getSkillList().addTemporarySkill(player, sSkill.getSkillId(), sSkill.getSkillLvl());
 	}
 
-	private static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
-		int nameId = 0;
-		for (SkillTemplate st : stigma.getAllSkillTemplates()) {
-			nameId = DataManager.SKILL_DATA.getSkillTemplate(st.getSkillId()).getNameId();
-			for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, true))
-				SkillLearnService.removeSkill(player, sSkill.getSkillId());
+	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
+		for (String skillGroup : stigma.getGainSkillGroups()) {
+			int nameId = 0;
+			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplate(skillGroup)) {
+				if (onUnequip)
+					nameId = st.getNameId();
+				for (StigmaSkill sSkill : getStigmaLearnSkillsById(st.getSkillId(), stigmaLevel, player, true))
+					SkillLearnService.removeSkill(player, sSkill.getSkillId());
+			}
+			if (nameId != 0)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 		}
-		if (nameId != 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 		removeLinkedStigmaSkills(player);
 	}
 }
