@@ -301,7 +301,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	private void removeStigma(QuestEnv env) {
 		Player player = env.getPlayer();
 		for (Item item : player.getEquipment().getEquippedItemsByItemId(getStoneId(player))) {
-			player.getEquipment().unEquipItem(item.getObjectId(), 0);
+			player.getEquipment().unEquipItem(item.getObjectId());
 		}
 		removeQuestItem(env, getStoneId(player), 1);
 	}

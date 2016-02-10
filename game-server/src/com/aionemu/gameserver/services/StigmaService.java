@@ -133,21 +133,21 @@ public class StigmaService {
 		mainLoop:
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
-				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				player.getEquipment().unEquipItem(item.getObjectId());
 				notifyUnequipAction(player, item);
 				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
 				continue;
 			}
 
 			if (!isPossibleEquippedStigma(player, item)) {
-				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				player.getEquipment().unEquipItem(item.getObjectId());
 				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (stigma count big)");
 				continue;
 			}
 
 			if (!item.getItemTemplate().isClassSpecific(player.getPlayerClass())) {
-				player.getEquipment().unEquipItem(item.getObjectId(), 0);
+				player.getEquipment().unEquipItem(item.getObjectId());
 				notifyUnequipAction(player, item);
 				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (not valid for class)");
 				continue;
@@ -156,7 +156,7 @@ public class StigmaService {
 			// check for double stigmas equipped into the same slot
 			for (Item checkStigma : player.getEquipment().getEquippedItemsAllStigma()) {
 				if (checkStigma.getEquipmentSlot() == item.getEquipmentSlot() && checkStigma.getItemId() != item.getItemId()) {
-					player.getEquipment().unEquipItem(item.getObjectId(), item.getEquipmentSlot(), false);
+					player.getEquipment().unEquipItem(item.getObjectId(), false);
 					AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", double stigma in the same slot");
 					continue mainLoop;
 				}
@@ -551,7 +551,7 @@ public class StigmaService {
 					return;
 				if (!isSuccess) {
 					if (stigma.isEquipped())
-						player.getEquipment().unEquipItem(stigma.getObjectId(), 0);
+						player.getEquipment().unEquipItem(stigma.getObjectId());
 					player.getInventory().decreaseByObjectId(stigma.getObjectId(), 1, ItemPacketService.ItemUpdateType.DEC_STIGMA_USE);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_ENCHANT_FAIL(stigma.getNameId()));
 				} else {

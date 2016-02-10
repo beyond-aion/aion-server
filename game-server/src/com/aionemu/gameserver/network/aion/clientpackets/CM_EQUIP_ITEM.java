@@ -16,9 +16,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_EQUIP_ITEM extends AionClientPacket {
 
-	public long slotRead;
-	public int itemUniqueId;
-	public int action;
+	private long slotRead;
+	private int itemObjId;
+	private int action;
 
 	public CM_EQUIP_ITEM(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -28,7 +28,7 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 	protected void readImpl() {
 		action = readC(); // 0/1 = equip/unequip
 		slotRead = readQ();
-		itemUniqueId = readD();
+		itemObjId = readD();
 	}
 
 	@Override
@@ -45,10 +45,10 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 
 		switch (action) {
 			case 0:
-				resultItem = equipment.equipItem(itemUniqueId, slotRead);
+				resultItem = equipment.equipItem(itemObjId, slotRead);
 				break;
 			case 1:
-				resultItem = equipment.unEquipItem(itemUniqueId, slotRead);
+				resultItem = equipment.unEquipItem(itemObjId);
 				break;
 			case 2:
 				if (activePlayer.getController().hasTask(TaskId.ITEM_USE) && !activePlayer.getController().getTask(TaskId.ITEM_USE).isDone()) {

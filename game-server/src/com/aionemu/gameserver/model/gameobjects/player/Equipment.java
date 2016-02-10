@@ -299,11 +299,11 @@ public class Equipment {
 	/**
 	 * Called when CM_EQUIP_ITEM packet arrives with action 1
 	 * 
-	 * @param itemUniqueId
+	 * @param itemObjId
 	 * @param slot
 	 * @return item or null in case of failure
 	 */
-	public Item unEquipItem(int itemUniqueId, long slot, boolean checkFullInventory) {
+	public Item unEquipItem(int itemObjId, boolean checkFullInventory) {
 		// if inventory is full unequip action is disabled
 		if (checkFullInventory && owner.getInventory().isFull())
 			return null;
@@ -312,7 +312,7 @@ public class Equipment {
 			Item itemToUnequip = null;
 
 			for (Item item : equipment.values()) {
-				if (item.getObjectId() == itemUniqueId) {
+				if (item.getObjectId() == itemObjId) {
 					itemToUnequip = item;
 					break;
 				}
@@ -347,8 +347,8 @@ public class Equipment {
 		}
 	}
 
-	public Item unEquipItem(int itemUniqueId, long slot) {
-		return unEquipItem(itemUniqueId, slot, true);
+	public Item unEquipItem(int itemObjId) {
+		return unEquipItem(itemObjId, true);
 	}
 
 	/**
@@ -1191,7 +1191,7 @@ public class Equipment {
 	public void checkRankLimitItems() {
 		for (Item item : getEquippedItems()) {
 			if (!verifyRankLimits(item)) {
-				unEquipItem(item.getObjectId(), item.getEquipmentSlot(), false);
+				unEquipItem(item.getObjectId(), false);
 				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getNameId()));
 				// TODO: Check retail what happens with full inv and the task msgs.
 			}
