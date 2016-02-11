@@ -47,7 +47,7 @@ public class Stigma {
 
 	public List<SkillTemplate> getGainSkillsByGroup(int groupNo) {
 		if (groupNo > 0 && groupNo <= gainSkillGroups.length)
-			return DataManager.SKILL_DATA.getSkillTemplate(gainSkillGroups[groupNo - 1]);
+			return DataManager.SKILL_DATA.getSkillTemplatesByGroup(gainSkillGroups[groupNo - 1]);
 		else
 			return null;
 	}

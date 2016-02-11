@@ -35,7 +35,10 @@ public class SkillData {
 	private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
 
 	@XmlTransient
-	private Map<String, List<SkillTemplate>> skillTemplatesByGroups = new FastMap<>();
+	private Map<String, List<SkillTemplate>> skillTemplatesByGroup = new FastMap<>();
+
+	@XmlTransient
+	private Map<String, List<SkillTemplate>> skillTemplatesByStack = new FastMap<>();
 
 	/**
 	 * Map that contains cooldownId - skillId List
@@ -45,7 +48,8 @@ public class SkillData {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillData.clear();
-		skillTemplatesByGroups.clear();
+		skillTemplatesByGroup.clear();
+		skillTemplatesByStack.clear();
 		cooldownGroups.clear();
 		for (SkillTemplate skillTemplate : skillTemplates) {
 			int skillId = skillTemplate.getSkillId();
@@ -56,9 +60,14 @@ public class SkillData {
 			cooldownGroups.get(cooldownId).add(skillId);
 
 			if (skillTemplate.getGroup() != null) {
-				if (!skillTemplatesByGroups.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByGroups.put(skillTemplate.getGroup(), new FastTable<>());
-				skillTemplatesByGroups.get(skillTemplate.getGroup()).add(skillTemplate);
+				if (!skillTemplatesByGroup.containsKey(skillTemplate.getGroup()))
+					skillTemplatesByGroup.put(skillTemplate.getGroup(), new FastTable<>());
+				skillTemplatesByGroup.get(skillTemplate.getGroup()).add(skillTemplate);
+			}
+			if (skillTemplate.getStack() != null) {
+				if (!skillTemplatesByStack.containsKey(skillTemplate.getGroup()))
+					skillTemplatesByStack.put(skillTemplate.getGroup(), new FastTable<>());
+				skillTemplatesByStack.get(skillTemplate.getGroup()).add(skillTemplate);
 			}
 		}
 	}
@@ -71,8 +80,22 @@ public class SkillData {
 		return skillData.get(skillId);
 	}
 
-	public List<SkillTemplate> getSkillTemplate(String skillGroup) {
-		return skillTemplatesByGroups.get(skillGroup);
+	/**
+	 * @param skillGroup
+	 * @return All skill templates of this group. A group is less precise and may be null.
+	 */
+	public List<SkillTemplate> getSkillTemplatesByGroup(String skillGroup) {
+		return skillTemplatesByGroup.get(skillGroup);
+	}
+
+	/**
+	 * @param skillStack
+	 * @return All skill templates of this stack. A stack is more precise than a group.
+	 *         For example: Charge skills have their own stack per charging level. Also, skills that are similar for both factions have the same group,
+	 *         but different stacks.
+	 */
+	public List<SkillTemplate> getSkillTemplatesByStack(String skillStack) {
+		return skillTemplatesByStack.get(skillStack);
 	}
 
 	/**
