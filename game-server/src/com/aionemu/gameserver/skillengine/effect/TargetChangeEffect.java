@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_UPDATE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -28,6 +29,7 @@ public class TargetChangeEffect extends EffectTemplate {
 					Player player = (Player) effected;
 					player.setTarget(null);
 					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(player));
+					PacketSendUtility.broadcastPacket(player, new SM_TARGET_UPDATE(player));
 				}
 				break;
 		}
