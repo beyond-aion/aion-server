@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Name Box" base_chance="100" fixed_chance="true" each_member="true">
+		<gd_maps>
+			<gd_map map_id="400030000" name="Transidium_Annex" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="277224" name="Ahserion" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053117" name="Ahserion's Glory Reward Box" />
+		</gd_items>
+	</gd_rule>
+</global_rules>
