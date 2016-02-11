@@ -25,6 +25,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * Lephar (205118) (spawn). Report the result to Vidar (204052).
  * 
  * @author Bobobear
+ * @modified Pad
  */
 public class _2099ToFaceTheFuture extends QuestHandler {
 
@@ -189,6 +190,6 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2098);
+		return defaultOnLvlUpEvent(env, 2098, true);
 	}
 }

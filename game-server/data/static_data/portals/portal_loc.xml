@@ -124,7 +124,7 @@
 	<portal_loc world_id="220050000" loc_id="2200500" x="1538.9861" y="388.8925" z="231.18079"/> <!-- Theobomos Lab Exit -->
 	<portal_loc world_id="220050000" loc_id="2200501" x="1540.0343" y="389.20572" z="231.20036" h="18"/> <!-- Atreia Defense Portal (Asmo) -->
 	<portal_loc world_id="220050000" loc_id="2200502" x="1538.5579" y="374.49298" z="231.125" h="113"/> <!-- Atreia Defense Portal (Asmo) -->
-	<portal_loc world_id="220050000" loc_id="2200503" x="2339.747" y="160.00119" z="246.44734"/> <!-- Adma Stronghold Exit -->
+	<portal_loc world_id="220050000" loc_id="2200503" x="1539.62" y="373.9" z="231.13" h="50"/> <!-- Adma Stronghold Exit -->
 	<portal_loc world_id="220050000" loc_id="2200504" x="1411.0" y="2013.0" z="51.564507"/> <!-- Orb of Return to Baltasar Hill Village -->
 	<!-- Gelkmaros -->
 	<portal_loc world_id="220070000" loc_id="2200700" x="1888.2524" y="2847.2727" z="554.9964" h="98"/> <!-- Before Aerolink Gelkmaros -->
