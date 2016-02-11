@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javolution.util.FastTable;
+
 import com.aionemu.commons.services.CronService;
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.shedule.RiftSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -120,6 +123,83 @@ public class RiftService {
 			}
 		}
 		return false;
+	}
+
+	public void scheduleSpecialRifts() {
+		CronService.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				openVolatileRift(true);
+			}
+		}, "0 0 19 ? * MON,WED,SAT");
+		CronService.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				openVolatileRift(true);
+			}
+		}, "0 0 15 ? * SUN");
+		CronService.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				openVolatileRift(false);
+			}
+		}, "0 0 19 ? * TUE,THU,SUN");
+		CronService.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				openVolatileRift(false);
+			}
+		}, "0 0 15 ? * SAT");
+	}
+
+	private void openVolatileRift(boolean isElyos) {
+	}
+
+	/**
+	 * Just a work-around, this stuff needs refactoring
+	 * 
+	 * @param id
+	 *          better use map IDs
+	 */
+	public void prepareRiftOpening(int id, boolean guards) {
+		if (id != 210070000 || id != 220080000) {
+			if (!guards && Rnd.get(1, 100) > 50)
+				return;
+		}
+		List<RiftLocation> possibleLocs = new FastTable<>();
+		for (RiftLocation loc : locations.values()) {
+			if (loc.getWorldId() == id) {
+				if (guards) {
+					if (loc.hasSpawns())
+						possibleLocs.add(loc);
+					continue;
+				}
+				if (!loc.hasSpawns())
+					possibleLocs.add(loc);
+			}
+		}
+		
+		int maxCount = 1;
+		if (!guards) {
+			switch (id) {
+				case 210050000:
+				case 220070000:
+					maxCount = 3;
+				default:
+					maxCount = 4;
+			}
+		}
+		
+		int count = Rnd.get(1, maxCount);
+		while (possibleLocs.size() > count)
+			possibleLocs.remove(Rnd.get(0, possibleLocs.size() - 1));
+		
+		for (RiftLocation loc : possibleLocs)
+			openRifts(loc, guards);
 	}
 
 	public void openRifts(RiftLocation location, boolean guards) {

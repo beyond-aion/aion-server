@@ -32702,38 +32702,20 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053716" decomposable_name="Volatile Rift Loot Bundle">
-		<items chance="8.4">
-			<item id="186000236" name="Blood Mark" count="3"/>
-		</items>
-		<items chance="8.3">
-			<item id="186000237" name="Ancient Coin" count="10"/>
-		</items>
-		<items chance="8.3">
-			<item id="186000243" name="Fragmented Ceramium" rnd_min="2" rnd_max="5"/>
-		</items>
-		<items chance="12.5">
-			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE"/>
-		</items>
-		<items chance="12.5">
+		<items>
+			<item id="186000236" name="Blood Mark" rnd_min="5" rnd_max="10"/>
+			<item id="188053628" name="Pallasite Bundle"/>
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
 		</items>
-		<items chance="12.5">
+		<items>
+			<item id="186000243" name="Fragmented Ceramium" rnd_min="5" rnd_max="10"/>
+			<item id="188053628" name="Pallasite Bundle"/>
 			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
 		</items>
-		<items chance="12.5">
+		<items>
+			<item id="186000237" name="Ancient Coin" rnd_min="15" rnd_max="30"/>
+			<item id="188053628" name="Pallasite Bundle"/>
 			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
-		</items>
-		<items chance="6.25">
-			<item id="169405338" name="Pallasite Ore"/>
-		</items>
-		<items chance="6.25">
-			<item id="169405339" name="Pallasite Crystal"/>
-		</items>
-		<items chance="6.25">
-			<item id="169405340" name="Pallasite Powder"/>
-		</items>
-		<items chance="6.25">
-			<item id="169405341" name="Pallasite Refined Water"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053717" decomposable_name="Volatile Rift Victory Loot Bundle">
@@ -32742,7 +32724,7 @@
 			<item id="166020000" name="Omega Enchantment Stone"/>
 			<item id="182215750" name="Asmodian Guardian General's Token" race="ELYOS"/>
 			<item id="182215751" name="Elyos Guardian General Token" race="ASMODIANS"/>
-			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60" rnd_min="1" rnd_max="3"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053718" decomposable_name="Protectors Composite Manastone Bundle">

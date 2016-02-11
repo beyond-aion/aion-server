@@ -16,19 +16,19 @@ public class RiftTemplate {
 	protected int id;
 	@XmlAttribute(name = "world")
 	protected int world;
+	@XmlAttribute(name = "has_spawns")
+	protected boolean hasSpawns;
 
-	/**
-	 * @return the location id
-	 */
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
-	/**
-	 * @return the world id
-	 */
 	public int getWorldId() {
-		return this.world;
+		return world;
+	}
+
+	public boolean hasSpawns() {
+		return hasSpawns;
 	}
 
 }

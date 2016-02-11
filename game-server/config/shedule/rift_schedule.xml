@@ -2,75 +2,43 @@
 <rift_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rift_schedule.xsd">
 	<!-- Eltnen -->
 	<rift id="210020000">
-		<open schedule="0 0 12 ? * WED,SAT" spawn="true"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * SUN"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * MON"/>
-		<open schedule="0 0 0,4,8,16,20 ? * WED"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * THU"/>
-		<open schedule="0 0 0,4,8,16,20 ? * SAT"/>
+		<open schedule="0 0 * ? * *"/>
 	</rift>
 	<!-- Heiron -->
 	<rift id="210040000">
-		<open schedule="0 0 12 ? * THU,SUN" spawn="true"/>
-		<open schedule="0 0 0,4,8,16,20 ? * SUN"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * TUE"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * WED"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * FRI"/>
+		<open schedule="0 0 * ? * *"/>
 	</rift>
 	<!-- Inggison -->
 	<rift id="210050000">
+		<open schedule="0 0 * ? * *"/>
 		<open schedule="0 0 17 ? * FRI,MON" spawn="true"/>
 		<open schedule="0 0 0 ? * THU,SUN" spawn="true"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * SUN"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * MON"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * TUE"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * WED"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * THU"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * FRI"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * SAT"/>
 	</rift>
 	<!-- Cygnea -->
 	<rift id="210070000">
-		<open schedule="0 0 15 ? * SUN"/>
-		<open schedule="0 0 19 ? * MON"/>
-		<open schedule="0 0 19 ? * WED"/>
-		<open schedule="0 0 19 ? * SAT"/>
+		<open schedule="0 0 * ? * *"/>
+		<open schedule="0 0 19 ? * MON,WED,SAT" spawn="true"/>
+		<open schedule="0 0 15 ? * SUN" spawn="true"/>
 	</rift>
 	
 	<!-- Morheim -->
 	<rift id="220020000">
-		<open schedule="0 0 12 ? * WED,SAT" spawn="true"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * SUN"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * TUE"/>
-		<open schedule="0 0 0,4,8,16,20 ? * WED"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * FRI"/>
+		<open schedule="0 0 * ? * *"/>
 	</rift>
 	<!-- Beluslan -->
 	<rift id="220040000">
-		<open schedule="0 0 12 ? * THU,SUN" spawn="true"/>
-		<open schedule="0 0 0,4,8,16,20 ? * SUN"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * MON"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * WED"/>
-		<open schedule="0 0 0,4,8,16,20 ? * THU"/>
-		<open schedule="0 0 0,4,8,12,16,20 ? * SAT"/>
+		<open schedule="0 0 * ? * *"/>
 	</rift>
 	<!-- Gelkmaros -->
 	<rift id="220070000">
+		<open schedule="0 0 * ? * *"/>
 		<open schedule="0 0 17 ? * SUN,THU" spawn="true"/>
 		<open schedule="0 0 0 ? * WED,SAT" spawn="true"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * SUN"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * MON"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * TUE"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * WED"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * THU"/>
-		<open schedule="0 0 3,6,9,12,15,21 ? * FRI"/>
-		<open schedule="0 0 2,5,8,11,14,20 ? * SAT"/>
 	</rift>
 	<!-- Enshar -->
 	<rift id="220080000">
-		<open schedule="0 0 19 ? * SUN"/>
-		<open schedule="0 0 19 ? * TUE"/>
-		<open schedule="0 0 19 ? * THU"/>
-		<open schedule="0 0 15 ? * SAT"/>
+		<open schedule="0 0 * ? * *"/>
+		<open schedule="0 0 19 ? * TUE,THU,SUN" spawn="true"/>
+		<open schedule="0 0 15 ? * SAT" spawn="true"/>
 	</rift>
 </rift_schedule>

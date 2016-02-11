@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.services.rift;
 
-import java.util.Map;
-
-import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -21,12 +18,7 @@ public class RiftOpenRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		Map<Integer, RiftLocation> locations = RiftService.getInstance().getRiftLocations();
-		for (RiftLocation loc : locations.values()) {
-			if (loc.getWorldId() == worldId) {
-				RiftService.getInstance().openRifts(loc, guards);
-			}
-		}
+		RiftService.getInstance().prepareRiftOpening(worldId, guards);
 
 		// Scheduled rifts close
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -40,5 +32,4 @@ public class RiftOpenRunnable implements Runnable {
 		// Broadcast rift spawn on map
 		RiftInformer.sendRiftsInfo(worldId);
 	}
-
 }

@@ -131,4 +131,23 @@
 			<gd_item id="186000147" name="Mithril Medal"/>
 		</gd_items>
 	</gd_rule>
+	
+	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" each_member="true">
+		<gd_npcs>
+			<gd_npc npc_id="235832" name="Aggressive Coral Corask "/>
+			<gd_npc npc_id="235918" name="Frostshard Kirrin"/>
+			<gd_npc npc_id="235916" name="Freezing Petrahulk"/>
+			<gd_npc npc_id="235912" name="Stygian Mist Warrior"/>
+			<gd_npc npc_id="235914" name="Stygian Mist Protector"/>
+			<gd_npc npc_id="219699" name="Flameskin Cellatu"/>
+			<gd_npc npc_id="219700" name="Frenzied Skyray"/>
+			<gd_npc npc_id="219776" name="Awoken Jotun Worker"/>
+			<gd_npc npc_id="219777" name="Awoken Jotun Craftsman"/>
+			<gd_npc npc_id="219787" name="Frenzied Darksea Spiner"/>
+			<gd_npc npc_id="219788" name="Primeval Sea Giant"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053716" name="Volatile Rift Loot Bundle"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

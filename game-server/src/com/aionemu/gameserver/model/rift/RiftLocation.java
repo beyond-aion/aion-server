@@ -14,7 +14,7 @@ public class RiftLocation {
 
 	private boolean opened;
 	protected RiftTemplate template;
-	private List<VisibleObject> spawned = new FastTable<VisibleObject>();
+	private List<VisibleObject> spawned = new FastTable<>();
 
 	public RiftLocation() {
 	}
@@ -29,6 +29,10 @@ public class RiftLocation {
 
 	public int getWorldId() {
 		return template.getWorldId();
+	}
+
+	public boolean hasSpawns() {
+		return template.hasSpawns();
 	}
 
 	public boolean isOpened() {

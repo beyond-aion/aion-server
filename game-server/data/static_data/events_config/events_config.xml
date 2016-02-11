@@ -3699,7 +3699,7 @@
 				</spawn_map>
 			</spawns>
 		</event>
-		<event name="Frozen Magic Event" start="2014-12-24T00:00:00+00:00" end="2015-01-14T00:00:00+00:00">
+		<event name="Frozen Magic Event" start="2016-02-01T00:00:00+00:00" end="2016-03-14T00:00:00+00:00">
 			<quests>
 				<maintainable>80576;80579</maintainable>
 			</quests>
@@ -3744,7 +3744,7 @@
 				</spawn_map>
 			</spawns>
 			<event_drops>
-				<gd_rule rule_name="Snowball (Single)" base_chance="1" fixed_chance="true">
+				<gd_rule rule_name="Snowball (Single)" base_chance="10" fixed_chance="true">
 					<gd_items>
 						<gd_item id="188052986" name="+1 Snowball" />
 					</gd_items>
