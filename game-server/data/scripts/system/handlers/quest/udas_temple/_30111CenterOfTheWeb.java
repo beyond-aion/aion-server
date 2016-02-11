@@ -6,6 +6,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
@@ -22,7 +23,7 @@ public class _30111CenterOfTheWeb extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(799335).addOnQuestStart(questId);
 		qe.registerQuestNpc(799335).addOnTalkEvent(questId);
-		qe.registerQuestNpc(206105).addOnAtDistanceEvent(questId);
+		qe.registerOnEnterZone(ZoneName.get("IDTEMPLE_SENSORYAREA_Q30011_206105_1_300160000"), questId);
 		qe.registerQuestNpc(215792).addOnKillEvent(questId);
 	}
 
@@ -61,11 +62,11 @@ public class _30111CenterOfTheWeb extends QuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		return defaultOnKillEvent(env, 215792, 1, 2);
+		return defaultOnKillEvent(env, 215792, 1, true);
 	}
 
 	@Override
-	public boolean onAtDistanceEvent(QuestEnv env) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {

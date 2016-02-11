@@ -10,6 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author vlog
+ * @modified Pad
  */
 public class _1094ProjectDrakanhammer extends QuestHandler {
 
@@ -22,16 +23,10 @@ public class _1094ProjectDrakanhammer extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npc_ids = { 203834, 798155, 700411, 730153 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids) {
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		}
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 1093);
 	}
 
 	@Override

@@ -12,7 +12,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Hellboy, aion4Free, modified by bobobear
+ * @author Hellboy, aion4Free
+ * @modified bobobear, Pad
  */
 public class _1097SwordofTranscendence extends QuestHandler {
 
@@ -116,6 +117,6 @@ public class _1097SwordofTranscendence extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1096);
+		return defaultOnLvlUpEvent(env, 1096, true);
 	}
 }

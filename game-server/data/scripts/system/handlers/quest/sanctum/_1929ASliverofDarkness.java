@@ -282,22 +282,30 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	}
 
 	private int getStoneId(Player player) {
+		//TODO: find out the correct stigma ids on official servers
 		switch (player.getCommonData().getPlayerClass()) {
-			case CHANTER: // (CHECK)
-			case CLERIC: // (CHECK)
-				return 140000001; // Healight Light II				
-			case GLADIATOR: // (CHECK)
-			case RIDER: // (CORRECT)
-			case TEMPLAR: // (CHECK)
-				return 140000002; // Flame Cage I
-			case ASSASSIN: // (CHECK)
-			case GUNNER: // (CHECK)
-			case RANGER: // (CHECK) 
-				return 140000003; // Ferocious Strike III
-			case SORCERER: // (CHECK)
-			case SPIRIT_MASTER: // (CHECK)
-			case BARD: // (CHECK)
-				return 140000004; // Hydro Eruption II
+			case CHANTER:
+				return 140001412; // Word of Inspiration (Inert)
+			case CLERIC:
+				return 140001431; // Saving Grace (Inert)
+			case GLADIATOR:
+				return 140001304; // Crippling Cut (Inert)
+			case RIDER:
+				return 140001465; // Particle Whip (Inert)
+			case TEMPLAR:
+				return 140001321; // Barricade of Steel (Inert)
+			case ASSASSIN:
+				return 140001337; // Deadly Abandon (Inert)
+			case GUNNER:
+				return 140001448; // Steady Fire (Inert)
+			case RANGER:
+				return 140001354; // Focused Shots (Inert)
+			case SORCERER:
+				return 140001370; // Arcane Thunderbolt (Inert)
+			case SPIRIT_MASTER:
+				return 140001395; // Earthen Call (Inert)
+			case BARD:
+				return 140001482; // Mvt. 2: Summer (Inert)
 			default:
 				return 0;
 		}
@@ -316,7 +324,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	private void removeStigma(QuestEnv env) {
 		Player player = env.getPlayer();
 		for (Item item : player.getEquipment().getEquippedItemsByItemId(getStoneId(player))) {
-			player.getEquipment().unEquipItem(item.getObjectId(), 0);
+			player.getEquipment().unEquipItem(item.getObjectId());
 		}
 		removeQuestItem(env, getStoneId(player), 1);
 	}

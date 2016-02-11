@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.skill;
 
+import java.util.List;
+
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
@@ -19,13 +20,12 @@ public class PlayerSkillEntry extends SkillEntry {
 
 	public PlayerSkillEntry(Player player, int skillId, int skillLvl, PersistentState persistentState) {
 		this(skillId, skillLvl, 0, persistentState);
-		SkillLearnTemplate[] learnTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId);
-		if (learnTemplates.length == 0)
+		List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId, player.getPlayerClass(), player.getRace());
+		if (learnTemplates.size() == 0)
 			skillType = DataManager.SKILL_DATA.getSkillTemplate(skillId).getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
 		else {
 			for (SkillLearnTemplate template : learnTemplates) {
-				if (template.isStigma() && template.getRace() != player.getOppositeRace()
-					&& (template.getClassId() == player.getPlayerClass() || template.getClassId() == PlayerClass.ALL)) {
+				if (template.isStigma()) {
 					skillType = template.isLinkedStigma() ? 3 : 1;
 					break;
 				}

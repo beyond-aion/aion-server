@@ -17,7 +17,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  * Zombies (214552). Take them to Atropos. Receive a reward from Atropos.
  * 
  * @author Dune11
- * @reworked vlog
+ * @reworked vlog7
+ * @modified Pad
  */
 public class _1092JosnacksDilemma extends QuestHandler {
 
@@ -30,18 +31,12 @@ public class _1092JosnacksDilemma extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(700390).addOnKillEvent(questId);
 		qe.addHandlerSideQuestDrop(questId, 214552, 182208033, 1, 100);
 		qe.registerOnDie(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override

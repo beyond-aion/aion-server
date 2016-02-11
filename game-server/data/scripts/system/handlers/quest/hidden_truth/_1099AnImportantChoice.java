@@ -25,7 +25,9 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * 205022). Defeat Orissan (215400) (spawn 310120000, 182, 294, 296, 90) (1). Activate the Artifact of Memory (700552). Talk with Lephar (205118)
  * (spawn). Report the result to Fasimedes (203700) (110010000, 1867, 2068, 517).
  * 
- * @author vlog Reworked Bobobear
+ * @author vlog
+ * @reworked Bobobear
+ * @modified Pad
  */
 public class _1099AnImportantChoice extends QuestHandler {
 
@@ -194,6 +196,6 @@ public class _1099AnImportantChoice extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1098);
+		return defaultOnLvlUpEvent(env, 1098, true);
 	}
 }

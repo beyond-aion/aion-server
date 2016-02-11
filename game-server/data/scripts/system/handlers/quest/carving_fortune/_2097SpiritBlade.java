@@ -12,6 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke, dune11
+ * @modified Pad
  */
 public class _2097SpiritBlade extends QuestHandler {
 
@@ -103,7 +104,7 @@ public class _2097SpiritBlade extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+		return defaultOnLvlUpEvent(env, 2096, true);
 	}
 
 }

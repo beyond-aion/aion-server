@@ -261,7 +261,7 @@
 	<teleloc_template loc_id="406" mapid="210070000" name="Aequis Outpost" name_id="404574" posX="2146.48" posY="2933.867" posZ="329.8584" heading="90"/>
 	<teleloc_template loc_id="407" mapid="210070000" name="Henor Village" name_id="404575" posX="1389.884" posY="606.8857" posZ="581.25" heading="45"/>
 	<teleloc_template loc_id="408" mapid="210070000" name="Aedra Village" name_id="404576" posX="1161.092" posY="1580.393" posZ="465.75" heading="20"/>
-	<teleloc_template loc_id="409" mapid="210070000" name="Erivale Village" name_id="404577" posX="1135.6416" posY="2916.933" posZ="291.375" heading="72"/>
+	<teleloc_template loc_id="409" mapid="210070000" name="Erivale Village" name_id="404577" posX="2396.3" posY="1500.59" posZ="437.625" heading="64"/>
 	<teleloc_template loc_id="410" mapid="210070000" name="Aequis Detachment Post" name_id="404578" posX="2146.48" posY="2933.867" posZ="329.8584" heading="90"/>
 	<teleloc_template loc_id="415" mapid="220080000" name="Enshar" name_id="404617" posX="454.0906" posY="2261.957" posZ="220.0486" heading="85"/>
 	<teleloc_template loc_id="416" mapid="220080000" name="Habrok" name_id="404619"/>

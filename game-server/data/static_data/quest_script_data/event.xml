@@ -153,12 +153,12 @@
 			80572 [XML] [Event] Seek out the Abyss
 			80573 [XML] [Event] A Daeva for a Daeva
 			80574 [XML] [Event] A Lover of Letters
-			80575 [XML] [Event] Snowy Wonderland
+			80575 [CUSTOM_REMOVED] [Event] Snowy Wonderland
 			80576 [XML] [Event] Another Chance
-			80577 [XML] [Event] Happy Presents
-			80578 [XML] [Event] A Winter Wonderland
+			80577 [CUSTOM_REMOVED] [Event] Happy Presents
+			80578 [CUSTOM_REMOVED] [Event] A Winter Wonderland
 			80579 [XML] [Event] A Generous Mood
-			80580 [XML] [Event] Joy Begets Presents
+			80580 [CUSTOM_REMOVED] [Event] Joy Begets Presents
 			80581 [XML] [Event] Second Flight to Glory
 			80582 [XML] [Event] Second Path to Glory
 			80583 [XML] [Event] Third Flight to Glory
@@ -247,10 +247,10 @@
 	<report_to id="80384" start_npc_ids="831836" end_npc_ids="831851"/>
 	<report_to id="80385" start_npc_ids="831836" end_npc_ids="831848"/>
 	<report_to id="80386" start_npc_ids="831836" end_npc_ids="831852"/>
-	<report_to id="80575" start_npc_ids="832041" end_npc_ids="832041"/>
-	<report_to id="80577" start_npc_ids="832040" end_npc_ids="832040"/>
-	<report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/>
-	<report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/>
+	<!-- report_to id="80575" start_npc_ids="832041" end_npc_ids="832041"/-->
+	<!-- report_to id="80577" start_npc_ids="832040" end_npc_ids="832040"/-->
+	<!-- report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
+	<!-- report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="50035" start_npc_ids="832749"/>
 	<item_collecting id="50036" start_npc_ids="832749"/>

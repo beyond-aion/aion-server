@@ -22,11 +22,11 @@ public class StigmaInfoBlobEntry extends ItemBlobEntry {
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
 		Stigma stigma = ownerItem.getItemTemplate().getStigma();
-		List<SkillTemplate> group1 = stigma.getGroupSkillTemplates(1);
-		List<SkillTemplate> group2 = stigma.getGroupSkillTemplates(2);
+		List<SkillTemplate> firstGroupSkills = stigma.getGainSkillsByGroup(1);
+		List<SkillTemplate> secondGroupSkills = stigma.getGainSkillsByGroup(2);
 
-		writeD(buf, group1.get(0).getSkillId()); // skill id 1
-		writeD(buf, group2.size() > 0 ? group2.get(0).getSkillId() : 0); // skill id 2
+		writeD(buf, firstGroupSkills == null ? 0 : firstGroupSkills.get(0).getSkillId()); // group 1 skill id
+		writeD(buf, secondGroupSkills == null ? 0 : secondGroupSkills.get(0).getSkillId()); // group 2 skill id
 		writeD(buf, 0); // Shard count in 4.7
 
 		skip(buf, 192);

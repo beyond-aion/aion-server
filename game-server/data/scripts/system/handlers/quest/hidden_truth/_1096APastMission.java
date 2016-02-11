@@ -13,6 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Hellboy, aion4Free
+ * @modified Pad
  */
 public class _1096APastMission extends QuestHandler {
 
@@ -89,6 +90,6 @@ public class _1096APastMission extends QuestHandler {
 
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+		return defaultOnLvlUpEvent(env, 1929, true);
 	}
 }

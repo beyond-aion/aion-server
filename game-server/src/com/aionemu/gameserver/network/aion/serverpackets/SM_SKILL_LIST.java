@@ -37,7 +37,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 		this.skillList = FastTable.of(skill);
 		this.messageId = messageId;
 		this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getNameId();
-		this.skillLvl = String.valueOf(skill.isStigmaSkill() ? skill.getSkillTemplate().getLvl() : skill.getSkillLevel());
+		this.skillLvl = String.valueOf(skill.getSkillLevel());
 		this.isNew = isNew;
 	}
 
@@ -47,7 +47,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 		writeC(isNew ? 0 : 1); // 1 all learned skills, 0 newly updated skills
 		for (PlayerSkillEntry entry : skillList) {
 			writeH(entry.getSkillId());// id
-			writeH(entry.getSkillLevel());// lvl
+			writeH(entry.isNormalSkill() ? 1 : entry.getSkillLevel()); // don't ask me, it's retail like...
 			writeC(0x00);
 			writeC(entry.getProfessionSkillBarSize());
 			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag(isNew));

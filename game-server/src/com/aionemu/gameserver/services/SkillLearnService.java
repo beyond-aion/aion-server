@@ -33,7 +33,8 @@ public class SkillLearnService {
 		if (skill.isProfessionSkill())
 			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, isNew ? 1330061 : 1330005, false));
 		else if (isNew)
-			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skill.isStigmaSkill() ? skill.isLinkedStigmaSkill() ? 1402891 : 1300401 : 1300050, true));
+			PacketSendUtility.sendPacket(player,
+				new SM_SKILL_LIST(skill, skill.isStigmaSkill() ? skill.isLinkedStigmaSkill() ? 1402891 : 1300401 : 1300050, true));
 		else
 			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, 0, false));
 	}
@@ -82,13 +83,9 @@ public class SkillLearnService {
 	}
 
 	public static void learnSkillBook(Player player, int skillId) {
-		for (int i = player.getLevel(); i > 0; i--) {
-			for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), i, player.getRace()))
-				if (skillId == skill.getSkillId()) {
-					player.getSkillList().addSkill(player, skillId, skill.getSkillLevel());
-					break;
-				}
-		}
+		for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(),
+			player.getLevel()))
+			player.getSkillList().addSkill(player, skillId, skill.getSkillLevel());
 	}
 
 	public static boolean removeSkill(Player player, int skillId) {
@@ -102,12 +99,13 @@ public class SkillLearnService {
 		return false;
 	}
 
-	public static int getSkillMinLevel(int skillId, int playerLevel, int wantedSkillLevel) {
+	public static int getSkillMinLevel(Player player, int skillId, int wantedSkillLevel) {
 		int nearestMinLevel = 0;
-		for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId)) {
-			if (template.getMinLevel() <= playerLevel && template.getSkillLevel() <= wantedSkillLevel)
+		for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(),
+			player.getLevel())) {
+			if (template.getSkillLevel() <= wantedSkillLevel)
 				nearestMinLevel = Math.max(template.getMinLevel(), nearestMinLevel);
 		}
-		return nearestMinLevel > 0 ? nearestMinLevel : playerLevel;
+		return nearestMinLevel == 0 ? player.getLevel() : nearestMinLevel;
 	}
 }

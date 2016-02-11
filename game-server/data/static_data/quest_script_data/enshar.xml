@@ -120,6 +120,7 @@
 	<report_to_many id="25000" start_npc_ids="804718" start_dialog_id="4762" end_npc_ids="804718">
 		<npc_infos var="0" npc_id="804753" quest_dialog="1011"/>
 		<npc_infos var="1" npc_id="804990" quest_dialog="1352"/>
-		<npc_infos var="2" npc_id="805000" quest_dialog="1693" close_dialog="10255"/>
+		<npc_infos var="2" npc_id="805000" quest_dialog="1693"/>
+		<npc_infos var="3" npc_id="804718" quest_dialog="10002"/>
 	</report_to_many>
 </quest_scripts>

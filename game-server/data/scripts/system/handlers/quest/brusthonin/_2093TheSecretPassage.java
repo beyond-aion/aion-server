@@ -19,8 +19,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * Go to Old Nahor Castle and find the key to the secret passage (182209012 need to add) in Old Wooden Box (700395).<br>
  * Report back to Surt.
  * 
- * @author Hellboy Aion4Free
+ * @author Hellboy, Aion4Free
  * @reworked vlog
+ * @modified Pad
  */
 public class _2093TheSecretPassage extends QuestHandler {
 
@@ -33,7 +34,6 @@ public class _2093TheSecretPassage extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 205150, 205159, 205164, 205197, 205198, 730174, 700395 };
-		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
 		qe.addHandlerSideQuestDrop(questId, 730174, 182209011, 1, 100);
 		qe.addHandlerSideQuestDrop(questId, 700395, 182209012, 1, 100);
@@ -182,11 +182,6 @@ public class _2093TheSecretPassage extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
 	}
 
 	@Override
