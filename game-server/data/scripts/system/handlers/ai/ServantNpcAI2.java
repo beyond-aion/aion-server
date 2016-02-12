@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -53,6 +54,31 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
 			skillLevel = npcSkill.getSkillLevel();
 		}
 		int duration = getOwner().getNpcObjectType() == NpcObjectType.TOTEM ? 3000 : 5000;
+		int startDelay = 1000;
+		switch (getOwner().getNpcId()) {
+			//Taunting Spirit
+			case 833403:
+			case 833404:
+			case 833478:
+			case 833479:
+			case 833480:
+			case 833481:
+				duration = 5000;
+				startDelay = 1000;
+				break;
+			//Battle Banner
+			case 833077:
+			case 833078:
+			case 833452:
+			case 833453:
+			case 833454:
+			case 833455:
+				duration = 3000;
+				startDelay = 100;
+				break;
+				default:
+					break;
+		}
 		final Creature target = (Creature) getOwner().getTarget();
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -61,10 +87,12 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
 				if (target == null || target.getLifeStats().isAlreadyDead()) {
 					AI2Actions.deleteOwner(ServantNpcAI2.this);
 					cancelTask();
-				} else
-					getOwner().getController().useSkill(skillId, skillLevel);
+				} else {
+					SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner().getTarget()).useSkill();
+					//getOwner().getController().useSkill(skillId, skillLevel);
+				}
 			}
-		}, 1000, duration);
+		}, startDelay, duration);
 		getOwner().getController().addTask(TaskId.SKILL_USE, skillTask);
 	}
 

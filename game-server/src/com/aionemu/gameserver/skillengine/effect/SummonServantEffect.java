@@ -55,7 +55,8 @@ public class SummonServantEffect extends SummonEffect {
 
 		SkillTemplate template = effect.getSkillTemplate();
 
-		if (template.getProperties().getFirstTarget() != FirstTargetAttribute.ME && target == null) {
+		if (template.getProperties().getFirstTarget() != FirstTargetAttribute.POINT && 
+			template.getProperties().getFirstTarget() != FirstTargetAttribute.ME && target == null) {
 			log.warn("Servant trying to attack null target!!");
 			return null;
 		}

@@ -65380,18 +65380,27 @@
     <npcskills npcid="833439">
         <npcskill skillid="21948" skilllevel="1" probability="100"/>
     </npcskills>
+    <!-- Taunting Spirit (1) --> 
     <npcskills npcid="833403">
         <npcskill skillid="21930" skilllevel="1" probability="100"/>
     </npcskills>
     <npcskills npcid="833404">
         <npcskill skillid="21930" skilllevel="1" probability="100"/>
     </npcskills>
+	<!-- Taunting Spirit (2) --> 
     <npcskills npcid="833478">
         <npcskill skillid="22665" skilllevel="1" probability="100"/>
     </npcskills>
     <npcskills npcid="833479">
         <npcskill skillid="22665" skilllevel="1" probability="100"/>
     </npcskills>
+	<!-- Taunting Spirit (3) --> 
+	<npcskills npcid="833480">
+		<npcskill skillid="22666" skilllevel="1" probability="100"/>
+	</npcskills>
+	<npcskills npcid="833481">
+		<npcskill skillid="22666" skilllevel="1" probability="100"/>
+	</npcskills>
     <npcskills npcid="833419">
         <npcskill skillid="21938" skilllevel="1" probability="100"/>
     </npcskills>

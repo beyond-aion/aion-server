@@ -368,10 +368,12 @@ public class VisibleObjectSpawner {
 		servant.setCreator(creator);
 		servant.setNpcObjectType(objectType);
 		SpawnEngine.bringIntoWorld(servant, spawn, instanceIndex);
-		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(servant.getSkillList().getRandomSkill().getSkillId());
-		if (st.getStartconditions() != null && st.getHpCondition() != null) {
-			int hp = (st.getHpCondition().getHpValue() * 3);
-			servant.getLifeStats().setCurrentHp(hp);
+		if (servant.getSkillList() != null && !servant.getSkillList().getNpcSkills().isEmpty()) {
+			SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(servant.getSkillList().getRandomSkill().getSkillId());
+			if (st.getStartconditions() != null && st.getHpCondition() != null) {
+				int hp = (st.getHpCondition().getHpValue() * 3);
+				servant.getLifeStats().setCurrentHp(hp);
+			}
 		}
 		return servant;
 	}
