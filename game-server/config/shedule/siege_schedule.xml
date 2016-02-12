@@ -6,19 +6,19 @@
 	</fortress>
 	<!-- Siel's Western Fortress -->
 	<fortress id="1131">
-		<siegeTime>0 0 16 ? * TUE,THU</siegeTime>
+		<siegeTime>0 0 16 ? * TUE,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Siel's Eastern Fortress -->
 	<fortress id="1132">
-		<siegeTime>0 0 16 ? * TUE,THU</siegeTime>
+		<siegeTime>0 0 16 ? * TUE,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Sulfur Fortress -->
 	<fortress id="1141">
-		<siegeTime>0 0 16 ? * TUE,THU</siegeTime>
+		<siegeTime>0 0 16 ? * TUE,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Roah Fortress -->
 	<fortress id="1211">
-		<siegeTime>0 0 16 ? * TUE,THU</siegeTime>
+		<siegeTime>0 0 16 ? * TUE,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
@@ -34,30 +34,34 @@
 	</fortress>
 	<!-- Asteria Fortress -->
 	<fortress id="1251">
-		<siegeTime>0 0 16 ? * TUE,THU</siegeTime>
+		<siegeTime>0 0 16 ? * TUE,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Temple of Scales -->
 	<fortress id="2011">
 		<siegeTime>0 0 18 ? * MON,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * WED</siegeTime>
 	</fortress>
 	<!-- Altar of Avarice -->
 	<fortress id="2021">
 		<siegeTime>0 0 18 ? * MON,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * WED</siegeTime>
 	</fortress>
 	<!-- Vorgaltem Citadel -->
 	<fortress id="3011">
-		<siegeTime>0 0 18 ? * WED,SAT</siegeTime>
+		<siegeTime>0 0 18 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * WED</siegeTime>
 	</fortress>
 	<!-- Crimson Temple -->
 	<fortress id="3021">
-		<siegeTime>0 0 18 ? * WED,SAT</siegeTime>
+		<siegeTime>0 0 18 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 20 ? * WED</siegeTime>
 	</fortress>
 	<!-- Wealhtheow Keep -->
 	<fortress id="7011">
 		<siegeTime>0 0 20 ? * SUN</siegeTime>
 	</fortress>
 	<agent_fight id="8011">
-		<siegeTime>0 50 19 ? * WED</siegeTime>
+		<siegeTime>0 50 19 ? * TUE</siegeTime>
 	</agent_fight>
 	<!--
 	<fortress id="10111">
