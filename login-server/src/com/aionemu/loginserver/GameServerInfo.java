@@ -32,7 +32,7 @@ public class GameServerInfo {
 	/**
 	 * Default server address, usually internet address
 	 */
-	private byte[] ip;
+	private byte[] ip = {0, 0, 0, 0};
 
 	/**
 	 * Port on with this GameServer is accepting clients.
