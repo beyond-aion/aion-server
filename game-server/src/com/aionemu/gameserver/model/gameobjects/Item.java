@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -165,13 +164,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 				this.fusionedItemTemplate = null;
 				this.optionalFusionSocket = 0;
 			}
-		}
-		// Migration. Items dropped before implementation of enchantbonus
-		if (!this.isAmplified && this.enchantLevel > itemTemplate.getMaxEnchantLevel() + this.enchantBonus) {
-			if (this.enchantBonus == 0 && itemTemplate.getMaxEnchantBonus() > 0)
-				this.enchantBonus = Rnd.get(0, itemTemplate.getMaxEnchantBonus());
-			this.enchantLevel = Math.min(itemTemplate.getMaxEnchantLevel() + this.enchantBonus, this.enchantLevel);
-			this.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}
 		updateChargeInfo(charge);
 	}
