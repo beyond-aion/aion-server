@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+	[BEGIN] SUMMARY
+		18742 [SCRIPT] 	[Daily/Coin] Import the Report
+		18743 [XML] 	Not So Fast, Nasto
+		28742 [SCRIPT] 	[Daily/Coin] A Flurry of Activity
+		28743 [XML] 	Take out the Mastermind
+	[END] SUMMARY
+	-->
+	
+	<!-- MONSTER HUNT QUESTS -->
+	<!-- start_npc needs to be fixed -->
+	<monster_hunt id="18743" start_npc_ids="206379" start_dialog_id="4762" end_npc_ids="804707"/>
+	<monster_hunt id="28743" start_npc_ids="206396" start_dialog_id="4762" end_npc_ids="804732"/>
+</quest_scripts>
