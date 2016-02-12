@@ -1,24 +1,23 @@
 @ECHO off
-TITLE Aion-Lightning - Chat Server Console
+TITLE Aion Emu - Chat Server Console
 
 :START
 CLS
-JAVA -Xms32m -Xmx32m -server -cp ./libs/*;AL-Chat.jar com.aionemu.chatserver.ChatServer
-SET CLASSPATH=%OLDCLASSPATH%
+JAVA -Xms128m -Xmx128m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.chatserver.ChatServer
 IF ERRORLEVEL 2 GOTO START
 IF ERRORLEVEL 1 GOTO ERROR
 IF ERRORLEVEL 0 GOTO END
 
 :ERROR
 ECHO.
-ECHO Aion-Lightning - Chat Server has terminated abnormaly!
+ECHO Chat Server has terminated abnormally!
 ECHO.
-PAUSE
+PAUSE >nul
 EXIT
 
 :END
 ECHO.
-ECHO Aion-Lightning - Chat Server is terminated!
+ECHO Chat Server has shut down
 ECHO.
-PAUSE
+PAUSE >nul
 EXIT

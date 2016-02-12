@@ -1,25 +1,23 @@
 @ECHO off
-TITLE Aion Lightning - Login Server Console
+TITLE Aion Emu - Login Server Console
+
 :START
 CLS
-IF "%MODE%" == "" (
-CALL PanelLS.bat
-)
-ECHO Starting Aion Lightning Login Server in %MODE% mode.
-JAVA %JAVA_OPTS% -cp ./libs/*;AL-Login.jar com.aionemu.loginserver.LoginServer
-SET CLASSPATH=%OLDCLASSPATH%
+JAVA -Xms32m -Xmx32m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer
 IF ERRORLEVEL 2 GOTO START
 IF ERRORLEVEL 1 GOTO ERROR
 IF ERRORLEVEL 0 GOTO END
+
 :ERROR
 ECHO.
-ECHO Login Server has terminated abnormaly!
+ECHO Login Server has terminated abnormally!
 ECHO.
-PAUSE
+PAUSE >nul
 EXIT
+
 :END
 ECHO.
-ECHO Login Server is terminated!
+ECHO Login Server has shut down
 ECHO.
-PAUSE
+PAUSE >nul
 EXIT

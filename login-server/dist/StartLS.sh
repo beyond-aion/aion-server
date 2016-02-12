@@ -19,7 +19,7 @@ run_ls() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java -Xms32m -Xmx32m -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
+  java -Xms32m -Xmx32m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
   echo $! > loginserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+
