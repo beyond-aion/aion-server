@@ -35042,9 +35042,21 @@
 	<decomposable item_id="188053896" decomposable_name="Legion Victory Reward Box"/>
 	<decomposable item_id="188053897" decomposable_name="Legion Victory Reward Box"/>
 	<decomposable item_id="188053898" decomposable_name="Sacred Beast of Balaur Lord Beritra"/>
-	<decomposable item_id="188053900" decomposable_name="Protectorate Box Bundle"/>
-	<decomposable item_id="188053901" decomposable_name="Protectorate Crate Bundle"/>
-    <decomposable item_id="188053902" decomposable_name="Protectorate Chest Bundle"/>
+	<decomposable item_id="188053900" decomposable_name="Protectorate Box Bundle">
+		<items>
+			<item id="186000059" name="Major Ancient Seal"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053901" decomposable_name="Protectorate Crate Bundle">
+		<items>
+			<item id="186000055" name="Major Ancient Goblet" count="3"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053902" decomposable_name="Protectorate Chest Bundle">
+		<items>
+			<item id="186000051" name="Major Ancient Crown" count="3"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053903" decomposable_name="Honorable Equipment of Conquest Box"/>
 	<decomposable item_id="188053904" decomposable_name="Faded Middle Grade Composite Manastone Bundle">
 		<items>
