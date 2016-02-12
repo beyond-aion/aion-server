@@ -63,12 +63,12 @@ public enum ItemSlot {
 	STIGMA3(1L << 32),
 
 	REGULAR_STIGMAS(STIGMA1.slotIdMask | STIGMA2.slotIdMask | STIGMA3.slotIdMask, true),
-	ADV_STIGMA1(1L << 47),
-	ADV_STIGMA2(1L << 48),
-	ADV_STIGMA3(1L << 49),
+	ADV_STIGMA1(1L << 33),
+	ADV_STIGMA2(1L << 34),
+	ADV_STIGMA3(1L << 35),
 
 	ADVANCED_STIGMAS(ADV_STIGMA1.slotIdMask | ADV_STIGMA2.slotIdMask | ADV_STIGMA3.slotIdMask, true),
-	
+
 	ALL_STIGMA(REGULAR_STIGMAS.slotIdMask | ADVANCED_STIGMAS.slotIdMask, true);
 
 	private long slotIdMask;
@@ -79,6 +79,8 @@ public enum ItemSlot {
 	}
 
 	private ItemSlot(long mask, boolean combo) {
+		if (mask == 0)
+			throw new InstantiationError("ItemSlot mask cannot be 0");
 		this.slotIdMask = mask;
 		this.combo = combo;
 	}
@@ -125,22 +127,20 @@ public enum ItemSlot {
 		return 2; // secondary (left-hand) slot
 	}
 
-	public static ItemSlot[] getSlotsFor(long slot) {
+	public static ItemSlot[] getSlotsFor(long slotIdMask) {
+		if (slotIdMask == 0)
+			throw new IllegalArgumentException("slotIdMask cannot be 0");
 		List<ItemSlot> slots = new FastTable<ItemSlot>();
 		for (ItemSlot itemSlot : values()) {
-			if (slot != 0 && itemSlot.slotIdMask != 0 && !itemSlot.isCombo() && (slot & itemSlot.slotIdMask) == itemSlot.slotIdMask) {
+			if (!itemSlot.isCombo() && (slotIdMask & itemSlot.slotIdMask) == itemSlot.slotIdMask)
 				slots.add(itemSlot);
-			}
 		}
+		if (slots.size() == 0)
+			throw new IllegalArgumentException("Invalid provided slotIdMask " + slotIdMask);
 		return slots.toArray(new ItemSlot[slots.size()]);
 	}
 
 	public static ItemSlot getSlotFor(long slot) {
-		ItemSlot[] slots = getSlotsFor(slot);
-		if (slots != null && slots.length > 0) {
-			return slots[0];
-		}
-		throw new IllegalArgumentException("Invalid provided slotIdMask " + slot);
+		return getSlotsFor(slot)[0];
 	}
-
 }

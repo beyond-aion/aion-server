@@ -2,7 +2,6 @@ package quest.theobomos;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Dune11
+ * @modified Pad
  */
 public class _1091ARequestFromAtropos extends QuestHandler {
 
@@ -21,7 +21,6 @@ public class _1091ARequestFromAtropos extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(798155).addOnTalkEvent(questId);
 	}
 
@@ -46,19 +45,9 @@ public class _1091ARequestFromAtropos extends QuestHandler {
 			}
 			return false;
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-				int[] ids = { 1092, 1093, 1094 };
-				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-				}
-			}
 			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
 
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
-	}
 }

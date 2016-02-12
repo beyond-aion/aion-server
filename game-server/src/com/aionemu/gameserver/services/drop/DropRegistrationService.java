@@ -40,9 +40,7 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
@@ -217,9 +215,17 @@ public class DropRegistrationService {
 						if (rule.getGlobalRuleNpcs() == null) {
 							// EXCLUSIONS:
 							// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-							if (npc.getSpawn() instanceof SiegeSpawnTemplate || npc.getSpawn() instanceof RiftSpawnTemplate
-								|| npc.getSpawn() instanceof VortexSpawnTemplate || npc.getSpawn() instanceof BaseSpawnTemplate)
+							if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 								continue;
+							// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
+							// continue;
+
+							// exclude Inner Base Npcs
+							if (npc.getSpawn() instanceof BaseSpawnTemplate) {
+								if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+									&& npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+									continue;
+							}
 							// if npc level ==1 means missing stats, so better exclude it from drops
 							if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId()
 								&& npc.getWorldId() != WorldMapType.ISHALGEN.getId()) {

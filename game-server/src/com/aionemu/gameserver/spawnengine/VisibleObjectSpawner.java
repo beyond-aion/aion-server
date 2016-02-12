@@ -436,7 +436,7 @@ public class VisibleObjectSpawner {
 		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
-		byte level = (byte) SkillLearnService.getSkillMinLevel(skillId, creator.getCommonData().getLevel(), skillLevel);
+		byte level = (byte) SkillLearnService.getSkillMinLevel(creator, skillId, skillLevel);
 		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
 		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId) : new SummonController(), spawn,
 			npcTemplate, isSiegeWeapon ? npcTemplate.getLevel() : level, time);

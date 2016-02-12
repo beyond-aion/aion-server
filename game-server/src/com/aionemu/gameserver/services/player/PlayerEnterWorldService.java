@@ -472,7 +472,7 @@ public final class PlayerEnterWorldService {
 				if (item.getItemTemplate().isArmor()) {
 					int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
 					if (!player.getEquipment().checkAvailableEquipSkills(requiredSkills))
-						player.getEquipment().unEquipItem(item.getItemId(), item.getEquipmentSlot());
+						player.getEquipment().unEquipItem(item.getItemId());
 				}
 			}
 		player.getEquipment().checkRankLimitItems(); // Remove items after offline changed rank

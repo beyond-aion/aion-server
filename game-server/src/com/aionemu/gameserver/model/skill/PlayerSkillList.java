@@ -7,9 +7,11 @@ import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SkillLearnService;
+import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 
 /**
  * @author IceReaper, orfeo087, Avol, AEJTester
@@ -62,14 +64,21 @@ public final class PlayerSkillList implements SkillList<Player> {
 
 	private synchronized boolean addSkill(Player player, int skillId, int skillLevel, boolean isTemporary) {
 		PlayerSkillEntry existingSkill = skills.get(skillId);
-		boolean isNew = false;
+		boolean isNew = true;
 		if (existingSkill != null) {
 			if (skillLevel <= existingSkill.getSkillLevel())
 				return false;
 			existingSkill.setSkillLvl(skillLevel);
+			isNew = false;
 		} else {
 			skills.put(skillId, new PlayerSkillEntry(player, skillId, skillLevel, isTemporary ? PersistentState.NOACTION : PersistentState.NEW));
-			isNew = true;
+			List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(), player.getLevel());
+			for (SkillLearnTemplate learnTemplate : learnTemplates) {
+				if (learnTemplate.getLearnSkill() != null && skills.get(learnTemplate.getLearnSkill()) != null) {
+					isNew = false;
+					break;
+				}
+			}
 		}
 		SkillLearnService.onLearnSkill(player, skillId, skillLevel, isNew);
 		return true;

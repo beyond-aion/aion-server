@@ -115,7 +115,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				spawn(216183, 558.306f, 1369.02f, 224.795f, (byte) 70);
 				// gate
 				sendMsg(1400480);
-				spawn(730275, 1611.1266f, 1604.6935f, 311.00503f, (byte) 17);
+				spawn(730275, 1611.1266f, 1604.6935f, 310.39972f, (byte) 17);
 				break;
 			case 216250: // Dorakiki the Bold
 			case 216169:

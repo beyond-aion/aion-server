@@ -6,6 +6,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -404,6 +405,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_ABNORMAL_STATE);
+			return false;
+		}
+		if (player.getController().hasTask(TaskId.ITEM_USE) && !player.getController().getTask(TaskId.ITEM_USE).isDone()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_EQUIP_ITEM_IN_ACTION);
 			return false;
 		}
 		return true;

@@ -807,12 +807,11 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	@Override
 	public void expireEnd(Player player) {
-		if (player == null) {
+		if (player == null)
 			return;
-		}
-		if (isEquipped()) {
-			player.getEquipment().unEquipItem(getObjectId(), getEquipmentSlot());
-		}
+
+		if (isEquipped())
+			player.getEquipment().unEquipItem(getObjectId());
 
 		for (StorageType i : StorageType.values()) {
 			if (i == StorageType.LEGION_WAREHOUSE)
