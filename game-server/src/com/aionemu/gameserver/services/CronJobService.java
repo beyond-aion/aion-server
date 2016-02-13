@@ -93,7 +93,7 @@ public class CronJobService {
 						elyosSpawn = SpawnEngine.addNewSingleTimeSpawn(600100000, 731631, 721.39f, 268.67f, 291.636f, (byte) 60);
 						break;
 					case 2: // Levinshor
-						elyosSpawn = SpawnEngine.addNewSingleTimeSpawn(600100000, 731631, 302.55f, 1972.07f, 225.875f, (byte) 110);
+						elyosSpawn = SpawnEngine.addNewSingleTimeSpawn(600100000, 731631, 332.40f, 1903.37f, 232.000f, (byte) 110);
 						break;
 					case 3: // Kaldor
 						elyosSpawn = SpawnEngine.addNewSingleTimeSpawn(600090000, 731631, 1179.58f, 687.52f, 190.625f, (byte) 0);
