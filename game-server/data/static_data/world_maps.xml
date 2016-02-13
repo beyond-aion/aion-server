@@ -77,7 +77,7 @@
 	<map id="300590000" name="Ophidan_Bridge" cName="IDLDF5_Under_01" instance="true" water_level="0" death_level="0" world_size="1024" drop_type="BALAUREA_HIGH_INSTANCE" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="300600000" name="Unstable_Abyssal_Splinter" cName="IDAbRe_Core_02" instance="true" water_level="70" death_level="0" world_type="ABYSS" world_size="1024" drop_type="ABYSS_INSTANCE" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="300610000" name="Raksang_Ruins" cName="IDRaksha_solo" instance="true" water_level="16" death_level="0" world_size="1536" drop_type="BALAUREA_HIGH_INSTANCE" flags="GLIDE FLY PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
-	<map id="300620000" name="Occupied_Rentus_Base" cName="IDYun_Hard" instance="true" water_level="3" death_level="0" world_size="1024" drop_type="NONE" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
+	<map id="300620000" name="Occupied_Rentus_Base" cName="IDYun_Hard" instance="true" water_level="3" death_level="0" world_size="1024" drop_type="BALAUREA_HIGH_INSTANCE" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="300630000" name="Anguished_Dragon_Lords_Refuge" cName="IDTiamat_2_Hard" instance="true" water_level="16" death_level="0" world_size="1024" drop_type="BALAUREA_HIGH_INSTANCE" flags="FLY PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="300700000" name="The_Hexway" cName="IDUnderpassRe" instance="true" water_level="70" death_level="0" world_size="1024" drop_type="BALAUREA_INSTANCE" flags="RECALL PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="300800000" name="Infinity_Shard" cName="IDRuneweapon" instance="true" water_level="16" death_level="0" world_size="256" drop_type="BALAUREA_HIGH_INSTANCE" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
