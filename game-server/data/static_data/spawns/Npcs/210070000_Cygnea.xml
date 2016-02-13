@@ -2937,10 +2937,6 @@
 			<spot x="1432.36572" y="380.46674" z="558.37500"/>
 			<spot x="1446.10217" y="323.09692" z="565.78766"/>
 		</spawn>
-		<!-- idian depths corridor -->
-		<spawn npc_id="731631" respawn_time="295">
-			<spot x="777.01428" y="1479.86072" z="457.37500" h="30"/>
-		</spawn>
 		<!-- invasion corridor installation area -->
 		<spawn npc_id="206365" respawn_time="295">
 			<spot x="1889.19641" y="2450.64380" z="336.87500"/>

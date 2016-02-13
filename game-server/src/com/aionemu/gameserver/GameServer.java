@@ -19,8 +19,15 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ch.lambdaj.Lambda;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
@@ -57,6 +64,7 @@ import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.ChallengeTaskService;
 import com.aionemu.gameserver.services.CommandsAccessService;
+import com.aionemu.gameserver.services.CronJobService;
 import com.aionemu.gameserver.services.CuringZoneService;
 import com.aionemu.gameserver.services.DatabaseCleaningService;
 import com.aionemu.gameserver.services.DebugService;
@@ -101,12 +109,6 @@ import com.aionemu.gameserver.utils.javaagent.JavaAgentUtils;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
-
-import ch.lambdaj.Lambda;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-import javolution.util.FastTable;
 
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
@@ -294,6 +296,7 @@ public class GameServer {
 		PeriodicSaveService.getInstance();
 		AtreianPassportService.getInstance();
 		WebshopService.getInstance();
+		CronJobService.getInstance();
 
 		if (AIConfig.SHOUTS_ENABLE)
 			NpcShoutsService.getInstance();
