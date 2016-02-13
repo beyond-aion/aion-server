@@ -570,7 +570,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Hearts -->
-	<gd_rule rule_name="Balaur Heart" base_chance="5.5" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Heart" base_chance="8" min_diff="-9" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -583,7 +583,7 @@
 			<gd_item id="186000097" name="Burning Balaur Heart" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Heart" base_chance="5" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Heart" base_chance="8" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
