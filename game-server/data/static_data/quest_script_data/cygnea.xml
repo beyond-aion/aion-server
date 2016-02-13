@@ -167,9 +167,9 @@
 	<item_collecting id="15215" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
 	<item_collecting id="15216" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
 	<item_collecting id="15217" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15230" start_npc_ids="805222"/>
-	<item_collecting id="15231" start_npc_ids="805222"/>
-	<item_collecting id="15232" start_npc_ids="805222"/>
+	<item_collecting id="15230" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15231" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15232" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
 	
 	<!-- FOUNTAIN REWARD -->
 	<fountain_rewards id="15205" start_npc_ids="804788"/>
