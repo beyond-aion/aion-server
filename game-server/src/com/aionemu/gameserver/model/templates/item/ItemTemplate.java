@@ -449,7 +449,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	/**
-	 * Null if no id, can be values 0, 1, 2
+	 * -1 if no id, can be values 0, 1, 2
 	 */
 	public int getExtraInventoryId() {
 		if (extraInventory == null) {
