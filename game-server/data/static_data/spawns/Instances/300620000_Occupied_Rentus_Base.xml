@@ -104,27 +104,27 @@
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702677">
-			<spot x="451.3334" y="463.7458" z="153.9288" h="68" static_id="188"/>
+			<spot x="451.3334" y="463.7458" z="151.785" h="68" static_id="188"/>
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702678">
-			<spot x="447.2882" y="473.6216" z="153.1959" h="68" static_id="184"/>
+			<spot x="447.2882" y="473.6216" z="151.785" h="68" static_id="184"/>
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702679">
-			<spot x="444.0451" y="483.2938" z="153.8771" h="68" static_id="183"/>
+			<spot x="444.0451" y="483.2938" z="151.785" h="68" static_id="183"/>
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702680">
-			<spot x="423.869" y="442.7866" z="152.5469" h="10" static_id="199"/>
+			<spot x="423.869" y="442.7866" z="149.9113" h="10" static_id="199"/>
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702681">
-			<spot x="418.736" y="451.7169" z="152.5469" h="10" static_id="202"/>
+			<spot x="418.736" y="451.7169" z="149.9113" h="10" static_id="202"/>
 		</spawn>
 		<!-- Siege Cannon -->
 		<spawn npc_id="702682">
-			<spot x="418.736" y="451.7169" z="152.5469" h="10" static_id="204"/>
+			<spot x="413.001" y="459.471" z="149.9113" h="10" static_id="204"/>
 		</spawn>
 		<!-- Fallen Reian -->
 		<spawn npc_id="799661">

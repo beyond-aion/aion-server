@@ -207,7 +207,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				spawn(236297, 354.53f, 596.26f, 148.298f, (byte) 100);
 			else
 				spawn(236296, 354.53f, 596.26f, 148.298f, (byte) 100);
-			getNpc(856015).getController().onAttack(npc, 2000000, false);
+			getNpc(856015).getController().onDie(npc);
 			despawnNpc(npc);
 			
 		}
