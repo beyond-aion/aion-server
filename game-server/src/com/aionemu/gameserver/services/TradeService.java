@@ -295,11 +295,6 @@ public class TradeService {
 			if (item == null)
 				return false;
 
-			if (!item.isSellable()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(item.getNameId()));
-				return false;
-			}
-
 			int itemId = item.getItemId();
 			boolean valid = false;
 			for (TradeTab tab : purchaseTemplate.getTradeTablist()) {
