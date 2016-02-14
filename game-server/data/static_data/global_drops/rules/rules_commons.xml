@@ -200,7 +200,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (blue, dmg) -->
-	<gd_rule rule_name="Godstones (Legend)" base_chance="0.02" fixed_chance="true">
+	<gd_rule rule_name="Godstones (Legend)" base_chance="0.03" fixed_chance="true">
 		<gd_items>
 			<gd_item id="168000028" name="Godstone: Magical Fire Strike" />
 			<gd_item id="168000029" name="Godstone: Magical Fire Smash" />
@@ -219,7 +219,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (blue, effects) -->
-	<gd_rule rule_name="Godstones (Legend)" base_chance="0.01" fixed_chance="true">
+	<gd_rule rule_name="Godstones (Legend)" base_chance="0.015" fixed_chance="true">
 		<gd_items>
 			<gd_item id="168000034" name="Godstone: Fasimedes' Majesty" />
 			<gd_item id="168000035" name="Godstone: Vidar's Dignity" />
@@ -233,7 +233,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (gold) -->
-	<gd_rule rule_name="Godstones (Unique)" base_chance="0.005" fixed_chance="true">
+	<gd_rule rule_name="Godstones (Unique)" base_chance="0.0075" fixed_chance="true">
 		<gd_items>
 			<gd_item id="168000117" name="Godstone: Meslamtaeda's Greed" />
 			<gd_item id="168000118" name="Godstone: Ereshkigal's Honor" />
