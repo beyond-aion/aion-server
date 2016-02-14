@@ -55,7 +55,6 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				npc.getController().onDelete();
 				break;
 			case 236302: // Archmagus Upadi
-				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
 				doors.get(70).setOpen(true);
 				break;
 			case 236300: // Brigade General Vasharti
