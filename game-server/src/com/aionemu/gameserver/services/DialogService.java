@@ -396,17 +396,12 @@ public class DialogService {
 	}
 
 	private static void sendDialogWindow(int dialogId, final Player player, Npc npc) {
-		if (checkFuncDialog(dialogId, npc)) {
+		if (dialogId == DialogPage.NO_RIGHT.id())
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+		else if (checkFuncDialog(dialogId, npc)) {
 			DialogPage showPage = DialogPage.getPageByAction(dialogId);
-
-			if (showPage != null) {
+			if (showPage != null)
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), showPage.id()));
-			} else {
-				if (dialogId == DialogPage.NO_RIGHT.id()) {
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
-
-				}
-			}
 		}
 	}
 
