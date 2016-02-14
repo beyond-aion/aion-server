@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.PricesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
@@ -316,16 +315,9 @@ public class DialogService {
 					break;
 				}
 				case SELL:
-				case TRADE_SELL_LIST: {
-					int tradeModifier = PricesConfig.VENDOR_SELL_MODIFIER;
-					TradeListTemplate tradeListTemplate = null;
-					if (DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId()) != null) {
-						tradeListTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
-						tradeModifier = tradeListTemplate.getBuyPriceRate();
-					}
-					PacketSendUtility.sendPacket(player, new SM_SELL_ITEM(targetObjectId, tradeListTemplate, tradeModifier));
+				case TRADE_SELL_LIST:
+					PacketSendUtility.sendPacket(player, new SM_SELL_ITEM(npc));
 					break;
-				}
 				case GIVEUP_CRAFT_EXPERT: // relinquish Expert Status
 					RelinquishCraftStatus.relinquishExpertStatus(player, npc);
 					break;
@@ -396,17 +388,12 @@ public class DialogService {
 	}
 
 	private static void sendDialogWindow(int dialogId, final Player player, Npc npc) {
-		if (checkFuncDialog(dialogId, npc)) {
+		if (dialogId == DialogPage.NO_RIGHT.id())
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+		else if (checkFuncDialog(dialogId, npc)) {
 			DialogPage showPage = DialogPage.getPageByAction(dialogId);
-
-			if (showPage != null) {
+			if (showPage != null)
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), showPage.id()));
-			} else {
-				if (dialogId == DialogPage.NO_RIGHT.id()) {
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
-
-				}
-			}
 		}
 	}
 

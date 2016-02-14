@@ -86,7 +86,7 @@ public class PvpService {
 				continue;
 			List<BountyTemplate> bounties = new FastTable<>();
 			if (type == BountyType.PER_X_KILLS) {
-				bounties.add(template.getBounties().get(Rnd.get(0, template.getBounties().size() - 1)));
+				bounties.add(template.getBounties().get(Rnd.get(template.getBounties().size())));
 			} else {
 				for (BountyTemplate bounty : template.getBounties())
 					bounties.add(bounty);

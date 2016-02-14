@@ -1,47 +1,50 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.List;
+
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
+import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.trade.PricesService;
+
+import javolution.util.FastTable;
 
 /**
- * @author orz, Sarynth, modified by Artur
+ * @author orz, Sarynth
+ * @modified Artur, Neon
  */
 public class SM_SELL_ITEM extends AionServerPacket {
 
 	private int targetObjectId;
-	private TradeListTemplate plist;
-	private int sellPercentage;
+	private TradeNpcType tradeNpcType;
+	private int buyPriceRate;
+	private boolean showBuyTab;
+	private boolean showSellTab;
+	private List<TradeTab> tradeTabs;
 
-	public SM_SELL_ITEM(int targetObjectId, TradeListTemplate plist, int sellPercentage) {
-
-		this.targetObjectId = targetObjectId;
-		this.plist = plist;
-		this.sellPercentage = sellPercentage;
-
+	public SM_SELL_ITEM(Npc npc) {
+		TradeListTemplate tradeList = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
+		this.targetObjectId = npc.getObjectId();
+		this.tradeNpcType = tradeList != null ? tradeList.getTradeNpcType() : TradeNpcType.NORMAL;
+		this.buyPriceRate = tradeList != null ? tradeList.getBuyPriceRate() : PricesService.getVendorSellModifier();
+		this.showBuyTab = npc.canBuyFrom();
+		this.showSellTab = npc.canSellTo() || npc.canPurchase();
+		this.tradeTabs = tradeList != null ? tradeList.getTradeTablist() : new FastTable<>();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		if ((plist != null) && (plist.getNpcId() != 0) && (plist.getCount() != 0)) {
-			writeD(targetObjectId);
-			writeC(plist.getTradeNpcType().index());
-			writeD(sellPercentage);// Buy Price * (sellPercentage / 100) = Display price.
-			writeH(257); // tab type
-			writeH(plist.getCount());
-			for (TradeTab tradeTabl : plist.getTradeTablist()) {
-				writeD(tradeTabl.getId());
-			}
-		} else {
-			writeD(targetObjectId);
-			writeC(1);
-			writeD(sellPercentage); // Buy Price * (sellPercentage / 100) = Display price.
-			writeH(257); // tab type
-			writeH(0);
-		}
+		writeD(targetObjectId);
+		writeC(tradeNpcType.index());
+		writeD(buyPriceRate); // price * (buyPriceRate / 100) = display price
+		writeC(showBuyTab ? 1 : 0); // npc sells
+		writeC(showSellTab ? 1 : 0); // npc buys
+		writeH(tradeTabs.size());
+		for (TradeTab tradeTab : tradeTabs)
+			writeD(tradeTab.getId());
 	}
 }

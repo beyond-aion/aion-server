@@ -18,7 +18,6 @@ public class _10035SoartotheCorridor extends QuestHandler {
 	// Laokon											ID: 799025
 	// Veille											ID: 798958
 	// Laetia											ID: 798996
-	// Angrief Gate								ID: 206363
 	// Corridor Entry Controller	ID: 702663
 	// Outremus										ID: 798926
 	private final static int[] npcs = { 798928, 799025, 798958, 798996, 206363, 702663, 798926 };
@@ -32,7 +31,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 	public void register() {
 		qe.registerOnLevelUp(questId);
 		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnEnterZone(ZoneName.get("LF4_SENSORYAREA_Q10035A_206363_13_210050000"), questId);
+		qe.registerOnEnterZone(ZoneName.get("ANGRIEF_GATE_210050000"), questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -160,7 +159,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (zoneName.equals(ZoneName.get("LF4_SENSORYAREA_Q10035A_206363_13_210050000"))) {
+			if (zoneName.equals(ZoneName.get("ANGRIEF_GATE_210050000"))) {
 				if (var == 4) {
 					changeQuestStep(env, 4, 5, false);
 					return true;

@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.joda.time.DateTime;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -22,7 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rolandas
@@ -30,7 +28,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class UseableItemObject extends HouseObject<HousingUseableItem> {
 
 	private volatile boolean mustGiveLastReward = false;
-	private AtomicReference<Player> usingPlayer = new AtomicReference<Player>();
+	private AtomicInteger usingPlayer = new AtomicInteger();
 	private UseDataWriter entryWriter = null;
 
 	public UseableItemObject(House owner, int objId, int templateId) {
@@ -51,50 +49,57 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 
 		@Override
 		protected void writeMe(ByteBuffer buffer) {
-			if (obj.getObjectTemplate().getUseCount() != null)
-				writeD(buffer, obj.getOwnerUsedCount() + obj.getVisitorUsedCount());
-			else
-				writeD(buffer, 0);
-			int checkType = 0;
+			writeD(buffer, obj.getObjectTemplate().getUseCount() == null ? 0 : obj.getOwnerUsedCount() + obj.getVisitorUsedCount());
 			UseItemAction action = obj.getObjectTemplate().getAction();
-			if (action != null && action.getCheckType() != null)
-				checkType = action.getCheckType();
-			writeC(buffer, checkType);
+			writeC(buffer, action == null || action.getCheckType() == null ? 0 : action.getCheckType());
 		}
 	}
 
 	@Override
 	public void onUse(final Player player) {
-		if (!usingPlayer.compareAndSet(null, player)) {
-			// The same player is using, return. It might be double-click
-			if (usingPlayer.compareAndSet(player, player))
-				return;
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER);
+		UseItemAction action = getObjectTemplate().getAction();
+		if (action == null) { // Some objects do not have actions; they are test items now
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE);
 			return;
 		}
 
 		boolean isOwner = getOwnerHouse().getOwnerId() == player.getObjectId();
-		if (getObjectTemplate().isOwnerOnly() && !isOwner) {
-			warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID);
+		if (!isOwner && getObjectTemplate().isOwnerOnly()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID);
 			return;
 		}
 
-		boolean cdExpired = player.getHouseObjectCooldownList().isCanUseObject(getObjectId());
-		if (!cdExpired) {
-			if (getObjectTemplate().getCd() != null && getObjectTemplate().getCd() != 0) {
-				warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME);
-				return;
-			}
-			if (getObjectTemplate().isOwnerOnly() && isOwner) {
-				warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY);
-				return;
+		if (!player.getHouseObjectCooldownList().isCanUseObject(getObjectId())) {
+			if (getObjectTemplate().getCd() != null && getObjectTemplate().getCd() > 0)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME);
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY);
+			return;
+		}
+
+		final Integer useCount = getObjectTemplate().getUseCount();
+		int currentUseCount = 0;
+		if (useCount != null) {
+			// Counter is for both, but could be made custom from configs
+			currentUseCount = getOwnerUsedCount() + getVisitorUsedCount();
+			if (currentUseCount >= useCount && !isOwner || currentUseCount > useCount && isOwner) {
+				// if expiration is set then final reward has to be given for owner only due to inventory full. If inventory was not full, the object had to
+				// be despawned, so we wouldn't reach this check.
+				if (!mustGiveLastReward || !isOwner) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
+					return;
+				}
 			}
 		}
 
-		final UseItemAction action = getObjectTemplate().getAction();
-		if (action == null) {
-			// Some objects do not have actions; they are test items now
-			warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE);
+		if (mustGiveLastReward && !isOwner) { // expired, wait for owner
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getNameId()));
+			return;
+		}
+
+		if (!usingPlayer.compareAndSet(0, player.getObjectId())) {
+			if (usingPlayer.get() != player.getObjectId()) // if it's the same player using, don't send the message (might be double-click)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER);
 			return;
 		}
 
@@ -102,41 +107,15 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 			// Check if player already has an item
 			if (player.getInventory().getItemCountByItemId(action.getRewardId()) > 0) {
 				int nameId = DataManager.ITEM_DATA.getItemTemplate(action.getRewardId()).getNameId();
-				SM_SYSTEM_MESSAGE msg = SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(nameId, getObjectTemplate().getNameId());
-				warnAndRelease(player, msg);
+				warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(nameId, getObjectTemplate().getNameId()));
 				return;
 			}
 		}
 
-		final Integer useCount = getObjectTemplate().getUseCount();
-		int currentUseCount = 0;
-
-		if (useCount != null) {
-			// Counter is for both, but could be made custom from configs
-			currentUseCount = getOwnerUsedCount() + getVisitorUsedCount();
-			if (currentUseCount >= useCount && !isOwner || currentUseCount > useCount && isOwner) {
-				// if expiration is set then final reward has to be given for owner only
-				// due to inventory full. If inventory was not full, the object had to be despawned, so
-				// we wouldn't reach this check.
-				if (!mustGiveLastReward || !isOwner) {
-					warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
-					return;
-				}
-			}
-		}
-
 		final Integer requiredItem = getObjectTemplate().getRequiredItem();
-
-		if (mustGiveLastReward && !isOwner) {
-			// Expired, waiting owner
-			int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
-			warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(descId));
-			return;
-		} else if (requiredItem != null) {
-			int checkType = action.getCheckType();
-			if (checkType == 1) { // equip item needed
-				List<Item> items = player.getEquipment().getEquippedItemsByItemId(requiredItem);
-				if (items.size() == 0) {
+		if (requiredItem != null) {
+			if (action.getCheckType() == 1) { // equip item needed
+				if (player.getEquipment().getEquippedItemsByItemId(requiredItem).size() == 0) {
 					int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
 					warnAndRelease(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(new DescriptionId(descId)));
 					return;
@@ -180,14 +159,11 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 			public void run() {
 				try {
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 9));
-					if (action.getRemoveCount() != null && action.getRemoveCount() != 0) {
-						if (!player.getInventory().decreaseByItemId(requiredItem, action.getRemoveCount())) {
-							AuditLogger.info(player, "Player try use useble object without required item");
+					if (action.getRemoveCount() != null && action.getRemoveCount() > 0) {
+						if (!player.getInventory().decreaseByItemId(requiredItem, action.getRemoveCount()))
 							return;
-						}
 					}
 
-					UseableItemObject myself = UseableItemObject.this;
 					int rewardId = 0;
 					boolean delete = false;
 
@@ -195,43 +171,41 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 						if (action.getFinalRewardId() != null && useCount + 1 == usedCount) {
 							// visitors do not get final rewards
 							rewardId = action.getFinalRewardId();
-							ItemService.addItem(player, rewardId, 1);
 							delete = true;
 						} else if (action.getRewardId() != null) {
 							rewardId = action.getRewardId();
-							ItemService.addItem(player, rewardId, 1);
 							if (useCount == usedCount) {
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(myself.getObjectTemplate().getNameId()));
+								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(getObjectTemplate().getNameId()));
 								if (action.getFinalRewardId() == null) {
 									delete = true;
 								} else {
-									myself.setMustGiveLastReward(true);
-									myself.setExpireTime((int) (System.currentTimeMillis() / 1000));
-									myself.setPersistentState(PersistentState.UPDATE_REQUIRED);
+									setMustGiveLastReward(true);
+									setExpireTime((int) (System.currentTimeMillis() / 1000));
+									setPersistentState(PersistentState.UPDATE_REQUIRED);
 								}
 							}
 						}
 					} else if (action.getRewardId() != null) {
 						rewardId = action.getRewardId();
-						ItemService.addItem(player, rewardId, 1);
 					}
 					if (usedCount > 0) {
 						if (!delete)
 							if (player.getObjectId() == ownerId)
-								myself.incrementOwnerUsedCount();
+								incrementOwnerUsedCount();
 							else
-								myself.incrementVisitorUsedCount();
-						PacketSendUtility.broadcastPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), ownerId, usedCount, myself), true);
+								incrementVisitorUsedCount();
+						PacketSendUtility.broadcastPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), ownerId, usedCount, UseableItemObject.this), true);
 					}
 					if (rewardId > 0) {
+						ItemService.addItem(player, rewardId, 1);
 						int rewardNameId = DataManager.ITEM_DATA.getItemTemplate(rewardId).getNameId();
 						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(myself.getObjectTemplate().getNameId(), rewardNameId));
+							SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getNameId(), rewardNameId));
 					}
 					if (delete)
 						selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getNameId()));
 					else {
-						Integer cd = myself.getObjectTemplate().getCd();
+						Integer cd = getObjectTemplate().getCd();
 						DateTime repeatDate;
 						if (cd == null || cd == 0) {
 							// use once per day
@@ -239,7 +213,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 							repeatDate = new DateTime(tomorrow.getYear(), tomorrow.getMonthOfYear(), tomorrow.getDayOfMonth(), 0, 0, 0);
 							cd = (int) (repeatDate.getMillis() - DateTime.now().getMillis()) / 1000;
 						}
-						player.getHouseObjectCooldownList().addHouseObjectCooldown(myself.getObjectId(), cd);
+						player.getHouseObjectCooldownList().addHouseObjectCooldown(getObjectId(), cd);
 					}
 				} finally {
 					player.getObserveController().removeObserver(observer);
@@ -252,7 +226,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 	private void warnAndRelease(Player player, SM_SYSTEM_MESSAGE systemMessage) {
 		if (systemMessage != null)
 			PacketSendUtility.sendPacket(player, systemMessage);
-		usingPlayer.set(null);
+		usingPlayer.set(0);
 	}
 
 	public void setMustGiveLastReward(boolean mustGiveLastReward) {
@@ -261,9 +235,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
 
 	@Override
 	public boolean canExpireNow() {
-		if (mustGiveLastReward)
-			return false;
-		return usingPlayer.get() == null;
+		return !mustGiveLastReward && usingPlayer.get() == 0;
 	}
 
 	public void writeUsageData(ByteBuffer buffer) {

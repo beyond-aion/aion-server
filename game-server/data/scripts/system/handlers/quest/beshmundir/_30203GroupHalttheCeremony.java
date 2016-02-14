@@ -27,6 +27,7 @@ public class _30203GroupHalttheCeremony extends QuestHandler {
 		qe.registerQuestNpc(216177).addOnKillEvent(questId);
 		qe.registerQuestNpc(216179).addOnKillEvent(questId);
 		qe.registerQuestNpc(216181).addOnKillEvent(questId);
+		qe.registerQuestNpc(216182).addOnKillEvent(questId);
 		qe.registerQuestNpc(216263).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
@@ -110,6 +111,7 @@ public class _30203GroupHalttheCeremony extends QuestHandler {
 					updateQuestStatus(env);
 				}
 				break;
+			case 216182:
 			case 216263:
 				if (var == 1 && var1 == 1 && var2 == 1 && var3 == 1) {
 					qs.setStatus(QuestStatus.REWARD);

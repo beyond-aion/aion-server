@@ -121,14 +121,12 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			}
 			switch (tradeActionId) {
 				case 1:// sell to shop
-					if (npc.canPurchase()) {
+					if (npc.canPurchase() || npc.canSellTo()) {
 						tradeTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
-						if (tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
+						if (tradeTemplate != null && tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
 							TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
 						else
-							TradeService.performSellToPurchaseShop(player, tradeList, tradeTemplate);
-					} else if (npc.canSellTo()) {
-						TradeService.performSellToShop(player, tradeList);
+							TradeService.performSellToShop(player, tradeList, tradeTemplate);
 					}
 					break;
 				case 2:// repurchase

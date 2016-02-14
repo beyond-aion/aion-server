@@ -11,29 +11,41 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Source
+ * @modified Neon
  */
 public class PlayerLimitService {
 
 	private static ConcurrentHashMap<Integer, Long> sellLimit = new ConcurrentHashMap<>();
 
-	public static boolean updateSellLimit(Player player, long reward) {
-		if (!CustomConfig.LIMITS_ENABLED)
-			return true;
+	/**
+	 * @return The number of items that were subtracted from the sell limit or 0 if limit is reached and did not change.
+	 */
+	public static long updateSellLimit(Player player, final long itemPrice, final long itemCount) {
+		if (!CustomConfig.LIMITS_ENABLED || itemPrice == 0)
+			return itemCount;
 
-		int accoutnId = player.getPlayerAccount().getId();
-		Long limit = sellLimit.get(accoutnId);
+		int accountId = player.getPlayerAccount().getId();
+		Long limit = sellLimit.get(accountId);
 		if (limit == null) {
 			limit = (long) (SellLimit.getSellLimit(player.getPlayerAccount().getMaxPlayerLevel()) * player.getRates().getSellLimitRate());
-			sellLimit.put(accoutnId, limit);
+			sellLimit.put(accountId, limit);
 		}
 
-		if (limit < reward) {
+		if (itemPrice < 0 || itemCount <= 0)
+			return 0;
+
+		long possibleCount = Math.max(0, (long) (limit / itemPrice));
+		if (CustomConfig.LIMITS_ENABLE_DYNAMIC_CAP && possibleCount < itemCount)
+			possibleCount += 1;
+
+		if (possibleCount == 0 || limit == 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DAY_CANNOT_SELL_NPC(limit));
-			return false;
+			return 0;
 		} else {
-			limit -= reward;
-			sellLimit.put(accoutnId, limit);
-			return true;
+			long useCount = Math.min(possibleCount, itemCount);
+			limit -= Math.min(limit, itemPrice * useCount);
+			sellLimit.put(accountId, limit);
+			return useCount;
 		}
 	}
 
