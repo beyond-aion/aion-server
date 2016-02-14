@@ -508,19 +508,18 @@ public class Equipment {
 	 * @return
 	 */
 	public boolean checkAvailableEquipSkills(int[] requiredSkills) {
-		boolean isSkillPresent = false;
+		if (!owner.getCommonData().isOnline() && owner.getSkillList().size() <= 10) // exclusion for 4.8 skill update
+			return true;
 
-		// if no skills required - validate as true
-		if (requiredSkills.length == 0)
+		if (requiredSkills.length == 0) // if no skills required - validate as true
 			return true;
 
 		for (int skill : requiredSkills) {
-			if (owner.getSkillList().isSkillPresent(skill)) {
-				isSkillPresent = true;
-				break;
-			}
+			if (owner.getSkillList().isSkillPresent(skill))
+				return true;
 		}
-		return isSkillPresent;
+
+		return false;
 	}
 
 	/**

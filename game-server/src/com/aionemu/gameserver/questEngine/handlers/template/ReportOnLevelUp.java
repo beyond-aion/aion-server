@@ -4,9 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -20,8 +17,6 @@ import com.aionemu.gameserver.services.QuestService;
  */
 
 public class ReportOnLevelUp extends QuestHandler {
-
-	private static final Logger log = LoggerFactory.getLogger(ReportOnLevelUp.class);
 
 	private final Set<Integer> endNpcs = new HashSet<>();
 	@SuppressWarnings("unused")
@@ -45,7 +40,7 @@ public class ReportOnLevelUp extends QuestHandler {
 	public void register() {
 		for (Integer endNpc : endNpcs)
 			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
-		
+
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnLevelUp(questId);
 	}
@@ -85,10 +80,8 @@ public class ReportOnLevelUp extends QuestHandler {
 		if (qs == null && player.getLevel() >= DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getMinlevelPermitted()) {
 			env.setQuestId(questId);
 			env.setPlayer(player);
-			if (QuestService.startQuest(env, QuestStatus.REWARD)) {
-				log.warn("Q{} (ReportTo) level up event.", questId);
+			if (QuestService.startQuest(env, QuestStatus.REWARD))
 				return true;
-			}
 		}
 		return false;
 	}
@@ -100,10 +93,8 @@ public class ReportOnLevelUp extends QuestHandler {
 		if (qs == null && player.getLevel() >= DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getMinlevelPermitted()) {
 			env.setQuestId(questId);
 			env.setPlayer(player);
-			if (QuestService.startQuest(env, QuestStatus.REWARD)) {
-				log.warn("Q{} (ReportTo) level up event.", questId);
+			if (QuestService.startQuest(env, QuestStatus.REWARD))
 				return true;
-			}
 		}
 		return false;
 	}

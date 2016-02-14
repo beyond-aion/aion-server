@@ -29,8 +29,6 @@ public class SM_EMOTION_LIST extends AionServerPacket {
 				writeD(64 + i);
 				writeH(0x00);
 			}
-		} else if (emotions == null || emotions.isEmpty()) {
-			writeH(0);
 		} else {
 			writeH(emotions.size());
 			for (Emotion emotion : emotions) {

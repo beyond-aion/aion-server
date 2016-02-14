@@ -97,20 +97,25 @@ public class Config {
 	 */
 	public static void load() {
 		try {
+			Properties myProps = null;
+			try {
+				log.info("Loading: ./config/mycs.properties");
+				myProps = PropertiesUtils.load("./config/mycs.properties");
+			} catch (Exception e) {
+				log.info("No override properties found");
+			}
+
 			String network = "./config/network";
+			log.info("Loading: " + network + "/*");
 			Properties[] props = PropertiesUtils.loadAllFromDirectory(network);
+			PropertiesUtils.overrideProperties(props, myProps);
 
-			log.info("Loading: " + network + "/network.properties");
 			ConfigurableProcessor.process(Config.class, props);
-
-			log.info("Loading: " + network + "/commons.properties");
 			ConfigurableProcessor.process(CommonsConfig.class, props);
-
-			log.info("Loading: " + network + "/database.properties");
 			ConfigurableProcessor.process(DatabaseConfig.class, props);
+
 		} catch (Exception e) {
-			log.error("Can't load chatserver configuration", e);
-			throw new Error("Can't load chatserver configuration", e);
+			throw new Error("Can't load chatserver configuration:", e);
 		}
 	}
 }
