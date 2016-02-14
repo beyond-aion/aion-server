@@ -250,6 +250,9 @@ public class CustomConfig {
 	@Property(key = "gameserver.limits.enable", defaultValue = "true")
 	public static boolean LIMITS_ENABLED;
 
+	@Property(key = "gameserver.limits.enable_dynamic_cap", defaultValue = "false")
+	public static boolean LIMITS_ENABLE_DYNAMIC_CAP;
+
 	@Property(key = "gameserver.limits.update", defaultValue = "0 0 0 * * ?")
 	public static String LIMITS_UPDATE;
 
