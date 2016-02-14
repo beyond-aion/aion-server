@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Ancient Coins -->
-	<gd_rule rule_name="Ancient Coins" min_count="1" max_count="3" base_chance="3" min_diff="-5" max_diff="5" fixed_chance="true">
+	<gd_rule rule_name="Ancient Coins" min_count="1" max_count="10" base_chance="3" min_diff="-5" max_diff="5" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -118,6 +118,37 @@
 			<gd_item id="167020063" name="Ancient Manastone: Attack +7" />
 			<gd_item id="167020064" name="Ancient Manastone: Magical Accuracy +20" />
 			<gd_item id="167020065" name="Ancient Manastone: Magic Boost +32" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Enchantment Stone" base_chance="1">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Glittering Shell" base_chance="0.04">
+		<gd_maps>
+			<gd_map map_id="210090000" name="Idian Depths Light" />
+			<gd_map map_id="220100000" name="Idian Depths Dark" />
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000402" name="Glittering Shell" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
