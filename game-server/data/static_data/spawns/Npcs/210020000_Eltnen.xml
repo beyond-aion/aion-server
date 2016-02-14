@@ -4485,7 +4485,6 @@
 		</spawn>
 		<!-- Kaidan Combatant -->
 		<spawn npc_id="232133" respawn_time="295">
-			<spot x="1952.8087" y="1188.5137" z="429" h="96"/>
 			<spot x="2079.8728" y="1016.0278" z="410.6088" h="75"/>
 			<spot x="2107.1169" y="995.2050" z="414.397" h="86"/>
 			<spot x="2343.2815" y="929.0944" z="445.0393" h="60"/>
@@ -7019,7 +7018,7 @@
 		</spawn>
 		<!-- Shaman Kalabar -->
 		<spawn npc_id="217090" respawn_time="295">
-			<spot x="1849.47" y="1094.52" z="435.32697" h="79" walker_id="C5B1DD443B60668BFD10A15FB2EDF5769656A3DE"/>
+			<spot x="1952.8087" y="1188.5137" z="429" h="96"/>
 		</spawn>
 		<!-- Secret Exit -->
 		<spawn npc_id="206040" respawn_time="295">
