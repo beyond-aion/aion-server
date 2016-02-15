@@ -479,7 +479,7 @@ public class BrokerService {
 			return;
 		}
 
-		if (price <= 0)
+		if (price <= 0 || count <= 0)
 			return;
 
 		// check max price for 1 item in stack
