@@ -41,7 +41,6 @@ import javolution.util.FastTable;
 public class StigmaService {
 
 	private static final Logger log = LoggerFactory.getLogger(StigmaService.class);
-	private static final int MAX_STIGMA_ENCHANT_LVL = 255;
 
 	private static String clearName(String itemName) {
 		String[] splits = itemName.split(" ");
@@ -150,7 +149,7 @@ public class StigmaService {
 			addStigmaSkills(player, item.getItemTemplate().getStigma(), item.getEnchantLevel());
 		}
 
-			addLinkedStigmaSkills(player);
+		addLinkedStigmaSkills(player);
 	}
 
 	public static void removeLinkedStigmaSkills(Player player) {
@@ -185,7 +184,7 @@ public class StigmaService {
 		for (Item stigma : stigmas) {
 			if (!stigma.isStigmaChargeable())
 				return;
-	}
+		}
 
 		int skillId = getLinkedStigmaLearnSkill(player);
 		if (skillId > 0) {
@@ -199,134 +198,73 @@ public class StigmaService {
 
 	private static int getLinkedStigmaLearnSkill(Player player) {
 		// references: http://aion.mouseclic.com/beta/stigma.php
+		boolean isEly = player.getRace() == Race.ELYOS;
 		switch (player.getPlayerClass()) {
 			case GLADIATOR:
-				if (isEquipped(player, 140001119))
-					if ((isEquipped(player, 140001106) && isEquipped(player, 140001108)) || (isEquipped(player, 140001106) && isEquipped(player, 140001107))
-						|| (isEquipped(player, 140001108) && isEquipped(player, 140001107)))
-						return 643; // Unraveling Assault
-				if (isEquipped(player, 140001118))
-					if ((isEquipped(player, 140001104) && isEquipped(player, 140001103)) || (isEquipped(player, 140001104) && isEquipped(player, 140001105))
-						|| (isEquipped(player, 140001103) && isEquipped(player, 140001105)))
-						return 731; // Wind Lance
-
-				if (player.getRace().equals(Race.ASMODIANS))
-					return 661; // Battle Banner
-				else
-					return 662; // Battle Banner
+				if (isEquipped(player, 140001118) && isEquipped(player, 2, 140001103, 140001104, 140001105))
+					return 731; // Wind Lance
+				if (isEquipped(player, 140001119) && isEquipped(player, 2, 140001106, 140001107, 140001108))
+					return 643; // Unraveling Assault
+				return !isEly ? 661 : 662; // Battle Banner
 			case TEMPLAR:
-				if (isEquipped(player, 140001134))
-					if ((isEquipped(player, 140001122) && isEquipped(player, 140001120)) || (isEquipped(player, 140001122) && isEquipped(player, 140001125))
-						|| (isEquipped(player, 140001120) && isEquipped(player, 140001125)))
-						return 2921; // Invigorating Strike
-				if (isEquipped(player, 140001135))
-					if ((isEquipped(player, 140001123) && isEquipped(player, 140001124)) || (isEquipped(player, 140001123) && isEquipped(player, 140001121))
-						|| (isEquipped(player, 140001124) && isEquipped(player, 140001121)))
-						return 2918; // Shield of Vengeance
-
+				if (isEquipped(player, 140001134) && isEquipped(player, 2, 140001120, 140001122, 140001125))
+					return 2921; // Invigorating Strike
+				if (isEquipped(player, 140001135) && isEquipped(player, 2, 140001121, 140001123, 140001124))
+					return 2918; // Shield of Vengeance
 				return 2917; // Eternal Denial
 			case ASSASSIN:
-				if (isEquipped(player, 140001152))
-					if ((isEquipped(player, 140001138) && isEquipped(player, 140001139)) || (isEquipped(player, 140001138) && isEquipped(player, 140001141))
-						|| (isEquipped(player, 140001139) && isEquipped(player, 140001141)))
-						return 3238; // Shimmerbomb
-				if (isEquipped(player, 140001151))
-					if ((isEquipped(player, 140001136) && isEquipped(player, 140001140)) || (isEquipped(player, 140001136) && isEquipped(player, 140001137))
-						|| (isEquipped(player, 140001140) && isEquipped(player, 140001137)))
-						return 3241; // Fangdrop Stab
-
+				if (isEquipped(player, 140001151) && isEquipped(player, 2, 140001136, 140001137, 140001140))
+					return 3241; // Fangdrop Stab
+				if (isEquipped(player, 140001152) && isEquipped(player, 2, 140001138, 140001139, 140001141))
+					return 3238; // Shimmerbomb
 				return 3244; // Explosive Rebranding
 			case RANGER:
-				if (isEquipped(player, 140001172))
-					if ((isEquipped(player, 140001155) && isEquipped(player, 140001157)) || (isEquipped(player, 140001155) && isEquipped(player, 140001153))
-						|| (isEquipped(player, 140001157) && isEquipped(player, 140001153)))
-						return 1008; // Ripthread Shot
-				if (isEquipped(player, 140001173))
-					if ((isEquipped(player, 140001154) && isEquipped(player, 140001158)) || (isEquipped(player, 140001154) && isEquipped(player, 140001156))
-						|| (isEquipped(player, 140001158) && isEquipped(player, 140001156)))
-						return 938; // Night Haze
-
+				if (isEquipped(player, 140001172) && isEquipped(player, 2, 140001153, 140001155, 140001157))
+					return 1008; // Ripthread Shot
+				if (isEquipped(player, 140001173) && isEquipped(player, 2, 140001154, 140001156, 140001158))
+					return 938; // Night Haze
 				return 1064; // Staggering Trap
 			case SORCERER:
-				if (isEquipped(player, 140001191))
-					if ((isEquipped(player, 140001174) && isEquipped(player, 140001181)) || (isEquipped(player, 140001174) && isEquipped(player, 140001178))
-						|| (isEquipped(player, 140001181) && isEquipped(player, 140001178)))
-						return 1342; // Slumberswept Wind
-				if (isEquipped(player, 140001192))
-					if ((isEquipped(player, 140001176) && isEquipped(player, 140001177)) || (isEquipped(player, 140001176) && isEquipped(player, 140001184))
-						|| (isEquipped(player, 140001176) && isEquipped(player, 140001185)) || (isEquipped(player, 140001177) && isEquipped(player, 140001184))
-						|| (isEquipped(player, 140001177) && isEquipped(player, 140001185)))
-						return 1542; // Aetherblaze
-
+				if (isEquipped(player, 140001191) && isEquipped(player, 2, 140001174, 140001178, 140001181))
+					return 1342; // Slumberswept Wind
+				if (isEquipped(player, 140001192) && isEquipped(player, 2, 140001176, 140001177, isEly ? 140001184 : 140001185))
+					return 1542; // Aetherblaze
 				return 1420; // Repulsion Field
 			case SPIRIT_MASTER:
-				if (isEquipped(player, 140001209))
-					if ((isEquipped(player, 140001195) && isEquipped(player, 140001193)) || (isEquipped(player, 140001195) && isEquipped(player, 140001194))
-						|| (isEquipped(player, 140001193) && isEquipped(player, 140001194)))
-						return 3543; // Spirit's Empowerment
-				if (isEquipped(player, 140001210))
-					if ((isEquipped(player, 140001199) && isEquipped(player, 140001196)) || (isEquipped(player, 140001199) && isEquipped(player, 140001197))
-						|| (isEquipped(player, 140001199) && isEquipped(player, 140001198)) || (isEquipped(player, 140001196) && isEquipped(player, 140001197))
-						|| (isEquipped(player, 140001196) && isEquipped(player, 140001198)))
-						return 3549; // Command: Absorb Wounds
-
+				if (isEquipped(player, 140001209) && isEquipped(player, 2, 140001193, 140001194, 140001195))
+					return 3543; // Spirit's Empowerment
+				if (isEquipped(player, 140001210) && isEquipped(player, 2, 140001196, isEly ? 140001197 : 140001198, 140001199))
+					return 3549; // Command: Absorb Wounds
 				return 3851; // Blood Funnel
 			case CLERIC:
-				if (isEquipped(player, 140001246))
-					if ((isEquipped(player, 140001234) && isEquipped(player, 140001232)) || (isEquipped(player, 140001234) && isEquipped(player, 140001233))
-						|| (isEquipped(player, 140001235) && isEquipped(player, 140001232)) || (isEquipped(player, 140001235) && isEquipped(player, 140001233))
-						|| (isEquipped(player, 140001232) && isEquipped(player, 140001233)))
-						return 3934; // Restoration Relief
-				if (isEquipped(player, 140001245))
-					if ((isEquipped(player, 140001229) && isEquipped(player, 140001228)) || (isEquipped(player, 140001229) && isEquipped(player, 140001230))
-						|| (isEquipped(player, 140001229) && isEquipped(player, 140001231)) || (isEquipped(player, 140001230) && isEquipped(player, 140001228))
-						|| (isEquipped(player, 140001231) && isEquipped(player, 140001228)))
-						return 4169; // Judge's Edict
-
+				if (isEquipped(player, 140001245) && isEquipped(player, 2, 140001228, 140001229, isEly ? 140001230 : 140001231))
+					return 4169; // Judge's Edict
+				if (isEquipped(player, 140001246) && isEquipped(player, 2, 140001232, 140001233, isEly ? 140001234 : 140001235))
+					return 3934; // Restoration Relief
 				return 3911; // Summon Vexing Energy
 			case CHANTER:
-				if (isEquipped(player, 140001226))
-					if ((isEquipped(player, 140001212) && isEquipped(player, 140001213)) || (isEquipped(player, 140001212) && isEquipped(player, 140001211))
-						|| (isEquipped(player, 140001213) && isEquipped(player, 140001211)))
-						return 1909; // Word of Instigation
-				if (isEquipped(player, 140001227))
-					if ((isEquipped(player, 140001214) && isEquipped(player, 140001216)) || (isEquipped(player, 140001214) && isEquipped(player, 140001215))
-						|| (isEquipped(player, 140001216) && isEquipped(player, 140001215)))
-						return 1903; // Resonant Strike
-
+				if (isEquipped(player, 140001226) && isEquipped(player, 2, 140001211, 140001212, 140001213))
+					return 1909; // Word of Instigation
+				if (isEquipped(player, 140001227) && isEquipped(player, 2, 140001214, 140001215, 140001216))
+					return 1903; // Resonant Strike
 				return 1906; // Debilitating Incantation
 			case RIDER:
-				if (isEquipped(player, 140001279))
-					if ((isEquipped(player, 140001264) && isEquipped(player, 140001269)) || (isEquipped(player, 140001264) && isEquipped(player, 140001265))
-						|| (isEquipped(player, 140001269) && isEquipped(player, 140001265)))
-						return 2858; // Explosive Exhaust
-				if (isEquipped(player, 140001280))
-					if ((isEquipped(player, 140001266) && isEquipped(player, 140001268)) || (isEquipped(player, 140001266) && isEquipped(player, 140001267))
-						|| (isEquipped(player, 140001268) && isEquipped(player, 140001267)))
-						return 2863; // Powerspike Trigger
-
+				if (isEquipped(player, 140001279) && isEquipped(player, 2, 140001264, 140001265, 140001269))
+					return 2858; // Explosive Exhaust
+				if (isEquipped(player, 140001280) && isEquipped(player, 2, 140001266, 140001267, 140001268))
+					return 2863; // Powerspike Trigger
 				return 2851; // Nerve Pulse
 			case GUNNER:
-				if (isEquipped(player, 140001262))
-					if ((isEquipped(player, 140001249) && isEquipped(player, 140001247)) || (isEquipped(player, 140001249) && isEquipped(player, 140001248))
-						|| (isEquipped(player, 140001247) && isEquipped(player, 140001248)))
-						return 2370; // Pursuit Stance
-				if (isEquipped(player, 140001263))
-					if ((isEquipped(player, 140001251) && isEquipped(player, 140001252)) || (isEquipped(player, 140001251) && isEquipped(player, 140001250))
-						|| (isEquipped(player, 140001252) && isEquipped(player, 140001250)))
-						return 2377; // Sequential Fire
-
+				if (isEquipped(player, 140001262) && isEquipped(player, 2, 140001247, 140001248, 140001249))
+					return 2370; // Pursuit Stance
+				if (isEquipped(player, 140001263) && isEquipped(player, 2, 140001250, 140001251, 140001252))
+					return 2377; // Sequential Fire
 				return 2382; // Pulverizer Cannon
 			case BARD:
-				if (isEquipped(player, 140001297))
-					if ((isEquipped(player, 140001285) && isEquipped(player, 140001283)) || (isEquipped(player, 140001285) && isEquipped(player, 140001286))
-						|| (isEquipped(player, 140001283) && isEquipped(player, 140001286)))
-						return 4483; // Purging Paean
-				if (isEquipped(player, 140001296))
-					if ((isEquipped(player, 140001281) && isEquipped(player, 140001284)) || (isEquipped(player, 140001281) && isEquipped(player, 140001282))
-						|| (isEquipped(player, 140001284) && isEquipped(player, 140001282)))
-						return 4480; // Blazing Requiem
-
+				if (isEquipped(player, 140001296) && isEquipped(player, 2, 140001281, 140001282, 140001284))
+					return 4480; // Blazing Requiem
+				if (isEquipped(player, 140001297) && isEquipped(player, 2, 140001283, 140001285, 140001286))
+					return 4483; // Purging Paean
 				return 4566; // Delusional Dirge
 		}
 		return 0;
@@ -336,6 +274,14 @@ public class StigmaService {
 		if (player.getEquipment().getEquippedItemsByItemId(itemId) != null)
 			return player.getEquipment().getEquippedItemsByItemId(itemId).size() > 0;
 		return false;
+	}
+
+	public static boolean isEquipped(Player player, int neededCount, int... itemIds) {
+		int equippedCount = 0;
+		for (int itemId : itemIds)
+			if (isEquipped(player, itemId))
+				equippedCount += 1;
+		return equippedCount == neededCount;
 	}
 
 	/**
@@ -452,24 +398,16 @@ public class StigmaService {
 			return;
 		if (!stigma.isStigmaChargeable())
 			return;
-		if (stigma.getEnchantLevel() >= MAX_STIGMA_ENCHANT_LVL) {
-			PacketSendUtility.sendMessage(player, "Max stigma enchant level reached. Can't enchant more.");
-			return;
-		}
 
-		float success = 100.0f;
-
-		if (stigma.getEnchantLevel() < 10)
-			success -= stigma.getEnchantLevel() * 10.0f;
-		else
-			success = 10.0f;
+		float success = 100f;
+		success -= Math.min(9, stigma.getEnchantLevel()) * 10f; // reduce by 10% per enchant level, cap at 10% end rate
 		final boolean isSuccess = Rnd.get() * 100 < success;
 
 		final int parentItemId = stigma.getItemId();
-		final int parntObjectId = stigma.getObjectId();
+		final int parentObjectId = stigma.getObjectId();
 		final int parentNameId = stigma.getNameId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(), parentItemId, 5000, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -478,7 +416,7 @@ public class StigmaService {
 				player.removeItemCoolDown(stigma.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, chargeStone.getObjectId(), parentItemId, 0, 2, 0), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -489,7 +427,7 @@ public class StigmaService {
 			public void run() {
 				player.getObserveController().removeObserver(observer);
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, isSuccess ? 1 : 2, 1), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, isSuccess ? 1 : 2, 1), true);
 				if (!player.getInventory().decreaseByObjectId(chargeStone.getObjectId(), 1, ItemPacketService.ItemUpdateType.DEC_STIGMA_USE))
 					return;
 				if (!isSuccess) {
@@ -528,15 +466,15 @@ public class StigmaService {
 
 	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
 		for (String skillGroup : stigma.getGainSkillGroups()) {
-		int nameId = 0;
+			int nameId = 0;
 			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplatesByGroup(skillGroup)) {
 				if (onUnequip)
 					nameId = st.getNameId();
 				for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getTemplatesForSkill(st.getSkillId(), player.getPlayerClass(), player.getRace()))
 					SkillLearnService.removeSkill(player, skill.getSkillId());
-		}
-		if (nameId != 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
+			}
+			if (nameId != 0)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 		}
 		removeLinkedStigmaSkills(player);
 	}
