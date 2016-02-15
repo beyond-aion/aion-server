@@ -222,11 +222,32 @@ public class World {
 	 * Finds VisibleObject by objectId.
 	 * 
 	 * @param objectId
-	 *          - objectId of AionOabject
-	 * @return AionObject
+	 *          - objectId of AionObject or null if not in world
+	 * @return VisibleObject
 	 */
 	public VisibleObject findVisibleObject(int objectId) {
 		return allObjects.get(objectId);
+	}
+
+	/**
+	 * Finds Npc by objectId.
+	 * 
+	 * @param objectId
+	 *          - objectId of Npc
+	 * @return Npc or null if not in world or object ID belongs to other AionObject type in world.
+	 */
+	public Npc findNpc(int objectId) {
+		return findVisibleObject(objectId) instanceof Npc ? (Npc) findVisibleObject(objectId) : null;
+	}
+
+	/**
+	 * Check whether object is in world
+	 * 
+	 * @param objectId
+	 * @return
+	 */
+	public boolean isInWorld(int objectId) {
+		return allObjects.containsKey(objectId);
 	}
 
 	/**
@@ -236,7 +257,7 @@ public class World {
 	 * @return
 	 */
 	public boolean isInWorld(VisibleObject object) {
-		return allObjects.containsKey(object.getObjectId());
+		return isInWorld(object.getObjectId());
 	}
 
 	/**
