@@ -79,7 +79,7 @@ public class RelinquishCraft extends AdminCommand {
 		int maxValue = isExpert ? RelinquishCraftStatus.getExpertMaxValue() : RelinquishCraftStatus.getMasterMaxValue();
 		int skillMessageId = RelinquishCraftStatus.getSkillMessageId();
 
-		if (!CraftSkillUpdateService.isCraftingSkill(skillId)) {
+		if (!CraftSkillUpdateService.getInstance().isCraftingSkill(skillId)) {
 			PacketSendUtility.sendMessage(admin, "It's not skillId.");
 			return;
 		}

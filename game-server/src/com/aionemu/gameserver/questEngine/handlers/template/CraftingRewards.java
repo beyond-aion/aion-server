@@ -15,6 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Bobobear
+ * @modified Pad
  */
 public class CraftingRewards extends QuestHandler {
 
@@ -59,11 +60,12 @@ public class CraftingRewards extends QuestHandler {
 
 		if (skill != null) {
 			int playerSkillLevel = skill.getSkillLevel();
-			if (!canLearn(player) && playerSkillLevel != levelReward) {
-				return false;
+			if (dialog == DialogAction.QUEST_SELECT) {
+				if (playerSkillLevel != levelReward && !canLearn(player)) {
+					return sendQuestSelectionDialog(env);
+				}
 			}
 		}
-
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == startNpcId) {
 				switch (dialog) {
@@ -110,8 +112,8 @@ public class CraftingRewards extends QuestHandler {
 	}
 
 	private boolean canLearn(Player player) {
-		return levelReward == 400 ? CraftSkillUpdateService.canLearnMoreExpertCraftingSkill(player) : levelReward == 500 ? CraftSkillUpdateService
-			.canLearnMoreMasterCraftingSkill(player) : true;
+		return levelReward == 400 ? CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player)
+			: levelReward == 500 ? CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player) : true;
 	}
 
 	@Override
