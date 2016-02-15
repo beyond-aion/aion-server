@@ -94,6 +94,9 @@
 	<portal_loc world_id="210070000" loc_id="2100707" x="2099.2441" y="2280.8606" z="294.625" h="83"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100708" x="77.14092" y="2757.5469" z="229.31216" h="51"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100709" x="2668.6453" y="1470.2168" z="431.9289" h="40"/> <!-- Raksang Ruins Entrance/Exit -->
+	<!-- Idian Depths Light -->
+	<portal_loc world_id="210090000" loc_id="2100900" x="670.5392" y="643.403" z="514.8737" h="0"/> <!-- Starting Point -->
+	<portal_loc world_id="210090000" loc_id="2100901" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Clawed Fist Garrison -->
 	<!-- Morheim -->
 	<portal_loc world_id="220020000" loc_id="2200200" x="270.9" y="2339.6" z="443.74"/> <!-- Scroll -->
 	<portal_loc world_id="220020000" loc_id="2200201" x="1592.178" y="977.2572" z="140.75"/> <!-- Fire Temple Exit -->
@@ -157,6 +160,9 @@
 	<portal_loc world_id="220080000" loc_id="2200806" x="1672.2477" y="561.77155" z="257.77853" h="55"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200807" x="2991.0142" y="375.1645" z="309.1385" h="107"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200808" x="411.4971" y="1452.091" z="274.5" h="30"/> <!-- Raksang Ruins Entrance/Exit -->
+	<!-- Idian Depths Dark -->
+	<portal_loc world_id="220100000" loc_id="2201000" x="688.5966" y="831.2409" z="514.8277" h="0"/> <!-- Starting Point -->
+	<portal_loc world_id="210090000" loc_id="2201001" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Beritra's Fist Garrison -->
 	<!-- Nochsana Training Camp -->
 	<portal_loc world_id="300030000" loc_id="3000300" x="513" y="668" z="331"/>
 	<portal_loc world_id="400010000" loc_id="3000301" x="2890" y="754" z="1498.5786"/>
@@ -392,27 +398,6 @@
 	<portal_loc world_id="301110000" loc_id="3011100" x="255.7398" y="243.60954" z="241.90897"/>
 	<!-- Infernal Danuar Reliquary -->
 	<portal_loc world_id="301360000" loc_id="3013600" x="255.7398" y="243.60954" z="241.90897"/>
-	<!-- Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000700" x="675.349" y="649.47455" z="514.835"/> Scroll Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000701" x="486.610" y="291.468" z="571.150" h="34"/> Katalan - Pride's Legacy to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000702" x="969.769" y="497.556" z="561.835" h="0"/> Danaria - Danana Gate to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000703" x="889.0" y="1119.0" z="547.0023" h="0"/> Katalan - Quarantine Area to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000704" x="408.0" y="1056.0" z="556.5335" h="0"/> Danaria - Kaliden Swamp to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000705" x="841.18475" y="1285.5872" z="529.7342" h="55"/> Soaring Archways Rampart to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000706" x="601.14325" y="1360.5736" z="508.58463" h="92"/> Primeval Ruins to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000707" x="702.0294" y="132.97989" z="523.207" h="29"/> Beritian Foothold to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000708" x="145.08942" y="467.86444" z="579.511117" h="28"/> Broken Cliff Camp to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000709" x="484.1138" y="1039.0806" z="564.54535" h="90"/> Danuar Mysticarium to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000710" x="894.32666" y="229.78812" z="531.1408" h="62"/> Stonewatch Rampart to Idian Depths -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000711" x="1058.6796" y="967.2394" z="567.07086" h="29"/> Ophidian Bridge to Idian Depth -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000712" x="197.90512" y="767.8955" z="540.81323"/>  Danuar Reliquary exit -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000713" x="1037.7622" y="1348.0486" z="574.5944" h="92"/>Void Cube exit -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000714" x="1160.8765" y="566.2549" z="561.56683" h="63"/> Idgel Research Center exit -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000715" x="1288.7612" y="769.0617" z="564.20056" h="65"/> Infinity Shard exit -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000716" x="359.5474" y="516.2621" z="571.15283" h="5"/> Danuar Sanctuary exit -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000717" x="1058.48" y="965.37" z="566.13" h="30"/> Balaurea Frontier Portal (Elyos) -->
-	<!-- <portal_loc world_id="600070000" loc_id="6000718" x="361.79" y="517.31" z="571.16" h="65"/> Balaurea Frontier Portal (Asmodians) -->
-	<!-- <portal_loc world_id="600070000" loc_id="3011901" x="494.96967" y="1040.3678" z="564.59106"/> Danuar Mysticarium Legion exit -->
 	<!-- 4.3 Nightmare Circus (Rukibuki Circus Troupe) -->
 	<portal_loc world_id="301160000" loc_id="3011600" x="467.64584" y="568.34076" z="201.6762" h="117"/>
 	<portal_loc world_id="120010000" loc_id="3011602" x="1611.5364" y="1403.6775" z="193.12807"/>
@@ -495,10 +480,6 @@
 	<portal_loc world_id="301390000" loc_id="3013900" x="322.00455" y="183.17819" z="1687.2552" h="1"/>
 	<!-- Stonespear Siege -->
 	<portal_loc world_id="301500000" loc_id="3015000" x="231.14" y="264.399" z="98"/>
-	<!-- Idian Depths Light (Elyos)-->
-	<portal_loc world_id="210090000" loc_id="2100900" x="670.5392" y="643.403" z="514.8737" h="0"/>
-	<!-- Idian Depths Dark (Asmo) -->
-	<portal_loc world_id="220100000" loc_id="2201000" x="688.5966" y="831.2409" z="514.8277" h="0"/>
 	<!-- Occupied Rentus Base -->
 	<portal_loc world_id="300620000" loc_id="3006200" x="557.1892" y="594.9243" z="154.074" h="72"/>
 	<!-- Raksang Ruins -->

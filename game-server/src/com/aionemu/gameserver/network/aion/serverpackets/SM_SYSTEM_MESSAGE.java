@@ -9501,8 +9501,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an item that can be sold.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300344, value0);
+	public static SM_SYSTEM_MESSAGE STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(int value0) {
+		return new SM_SYSTEM_MESSAGE(1300344, new DescriptionId(value0));
 	}
 
 	/**

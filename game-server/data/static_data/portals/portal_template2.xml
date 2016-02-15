@@ -2,6 +2,34 @@
 <portal_templates2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="portal_template2.xsd">
 	<!-- ***************** PORTAL USE ***************** -->
 	
+	<!-- 4.8 Idian Depths -->
+	<!-- Idian Depths Entrances -->
+	<portal_use npc_id="731631">
+		<portal_path loc_id="2100900">
+			<portal_req min_level="65"/>
+		</portal_path>
+	</portal_use>
+	<portal_use npc_id="731632">
+		<portal_path loc_id="2201000">
+			<portal_req min_level="65"/>
+		</portal_path>
+	</portal_use>
+	<!-- Idian Depths Exits -->
+	<portal_use npc_id="731633">
+		<portal_path loc_id="1100102"/>
+	</portal_use>
+	<portal_use npc_id="731634">
+		<portal_path loc_id="2201000"/>
+	</portal_use>
+	<!-- Clawed Fist Garrison Corridor -->
+	<portal_use npc_id="731635">
+		<portal_path loc_id="2100901"/>
+	</portal_use>
+	<!-- Beritra's Fist Garrison Corridor -->
+	<portal_use npc_id="731636">
+		<portal_path loc_id="2201001"/>
+	</portal_use>
+	
 	<!-- Live Party Concert Hall -->
 	<portal_use npc_id="831668">
 		<portal_path loc_id="1100100" race="ELYOS"/>
@@ -1744,103 +1772,7 @@
         </portal_path>
     </portal_dialog>
 	<!-- END 4.0 INSTANCES -->
-	
-	<!-- 4.3 Idian Depths Portals
-	<portal_dialog npc_id="801812">
-		<portal_path dialog="104" loc_id="6000604">
-			<portal_req kinah_req="64650" min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801814">
-		<portal_path dialog="104" loc_id="6000701">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801817">
-		<portal_path dialog="104" loc_id="6000702">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801815">
-		<portal_path dialog="104" loc_id="6000703">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801816">
-		<portal_path dialog="104" loc_id="6000704">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>	
-	<portal_dialog npc_id="730856">
-		<portal_path dialog="104" loc_id="6000502">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="730857">
-		<portal_path dialog="104" loc_id="6000503">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>	
-	<portal_dialog npc_id="730858">
-		<portal_path dialog="104" loc_id="6000602">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="730859">
-		<portal_path dialog="104" loc_id="6000603">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801791">
-		<portal_path dialog="104" loc_id="6000707">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801792">
-		<portal_path dialog="104" loc_id="6000707">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801793">
-		<portal_path dialog="104" loc_id="6000706">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801794">
-		<portal_path dialog="104" loc_id="6000706">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801795">
-		<portal_path dialog="104" loc_id="6000708">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801796">
-		<portal_path dialog="104" loc_id="6000708">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801797">
-		<portal_path dialog="104" loc_id="6000705">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801798">
-		<portal_path dialog="104" loc_id="6000705">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801799">
-		<portal_path dialog="104" loc_id="6000709">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<portal_dialog npc_id="801800">
-		<portal_path dialog="104" loc_id="6000709">
-			<portal_req min_level="65" err_level="27"/>
-		</portal_path>
-	</portal_dialog> -->
+
 	<!-- Krotan Chamber Elyos Entrance -->
 	<portal_dialog npc_id="730899">
 		<portal_path dialog="10000" loc_id="3001400" race="ELYOS" player_count="6" instance="true" siege_id="1221">
@@ -2312,19 +2244,19 @@
 		</portal_path>	
 	</portal_dialog>
 	<!-- End Nightmare Circus (Rukibuki Circus Troupe) Event Teleports -->
-	<!-- Drakenshpire Depths -->
-	<!-- TELEPORTS ELYOS -->
+	<!-- Drakenspire Depths -->
+	<!-- TELEPORTS ELYOS
 	<portal_dialog npc_id="731546">
 		<portal_path dialog="10000" loc_id="3013900" player_count="12" instance="true">
 			<portal_req min_level="65"/>
 		</portal_path>
-	</portal_dialog>
-	<!-- TELEPORTS ASMODIAN -->
+	</portal_dialog> -->
+	<!-- TELEPORTS ASMODIAN
 	<portal_dialog npc_id="731547">
 		<portal_path dialog="10000" loc_id="3013900" player_count="12" instance="true">
 			<portal_req min_level="65"/>
 		</portal_path>
-	</portal_dialog>
+	</portal_dialog> -->
 	<!-- Drakenshpire Depths END -->
 
 	<!-- Raksang Ruin Entrances -->

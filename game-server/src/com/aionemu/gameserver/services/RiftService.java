@@ -125,40 +125,6 @@ public class RiftService {
 		return false;
 	}
 
-	public void scheduleSpecialRifts() {
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				openVolatileRift(true);
-			}
-		}, "0 0 19 ? * MON,WED,SAT");
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				openVolatileRift(true);
-			}
-		}, "0 0 15 ? * SUN");
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				openVolatileRift(false);
-			}
-		}, "0 0 19 ? * TUE,THU,SUN");
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				openVolatileRift(false);
-			}
-		}, "0 0 15 ? * SAT");
-	}
-
-	private void openVolatileRift(boolean isElyos) {
-	}
-
 	/**
 	 * Just a work-around, this stuff needs refactoring
 	 * 
@@ -166,7 +132,7 @@ public class RiftService {
 	 *          better use map IDs
 	 */
 	public void prepareRiftOpening(int id, boolean guards) {
-		if (id != 210070000 || id != 220080000) {
+		if (id != 210070000 && id != 220080000) {
 			if (!guards && Rnd.get(1, 100) > 50)
 				return;
 		}

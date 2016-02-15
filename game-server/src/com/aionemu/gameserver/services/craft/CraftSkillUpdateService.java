@@ -27,14 +27,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke, sphinx
- * @modified Imaginary
+ * @modified Imaginary, Pad
  */
 
 public class CraftSkillUpdateService {
 
 	private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);
 
-	protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new FastMap<>();
+	private static final Map<Integer, CraftLearnTemplate> npcBySkill = new FastMap<>();
 	private static final Map<Integer, Integer> cost = new FastMap<>();
 	private static final List<Integer> craftingSkillIds = new FastTable<>();
 
@@ -63,6 +63,7 @@ public class CraftSkillUpdateService {
 		npcBySkill.put(830140, new CraftLearnTemplate(40008, true, "Handicrafting"));
 		npcBySkill.put(798452, new CraftLearnTemplate(40010, true, "Menusier"));
 		npcBySkill.put(798456, new CraftLearnTemplate(40010, true, "Menusier"));
+
 		// Elyos
 		npcBySkill.put(203780, new CraftLearnTemplate(30002, false, "Extract Vitality"));
 		npcBySkill.put(830066, new CraftLearnTemplate(30002, false, "Extract Vitality"));
@@ -84,6 +85,7 @@ public class CraftSkillUpdateService {
 		npcBySkill.put(798450, new CraftLearnTemplate(40010, true, "Menusier"));
 		npcBySkill.put(798454, new CraftLearnTemplate(40010, true, "Menusier"));
 
+		
 		cost.put(0, 3500);
 		cost.put(99, 17000);
 		cost.put(199, 115000);
@@ -92,6 +94,7 @@ public class CraftSkillUpdateService {
 		cost.put(449, 6004900);
 		cost.put(499, 12000000);
 
+		
 		craftingSkillIds.add(40001);
 		craftingSkillIds.add(40002);
 		craftingSkillIds.add(40003);
@@ -103,6 +106,22 @@ public class CraftSkillUpdateService {
 		log.info("CraftSkillUpdateService: Initialized.");
 	}
 
+	/**
+	 * returns the respective CraftingLearnTemplate for a specific Npc
+	 * 
+	 * @param npc
+	 * @return the corresponding CraftingLearnTemplate
+	 */
+	public CraftLearnTemplate getCLTemplateByNpc(Npc npc) {
+		return npcBySkill.get(npc.getNpcId());
+	}
+
+	/**
+	 * handles the crafting skill learning
+	 * 
+	 * @param player
+	 * @param npc
+	 */
 	public void learnSkill(Player player, Npc npc) {
 		if (player.getLevel() < 10)
 			return;
@@ -124,14 +143,12 @@ public class CraftSkillUpdateService {
 		}
 
 		// Retail : Max 2 expert crafting skill
-		if (isCraftingSkill(skillId) && (!canLearnMoreExpertCraftingSkill(player) && skillLvl == 399)) {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " Expert crafting skills.");
+		if (isCraftingSkill(skillId) && skillLvl == 399 && !canLearnMoreExpertCraftingSkill(player)) {
 			return;
 		}
 
 		// Retail : Max 1 master crafting skill
-		if (isCraftingSkill(skillId) && (!canLearnMoreMasterCraftingSkill(player) && skillLvl == 499)) {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " Master crafting skill.");
+		if (isCraftingSkill(skillId) && skillLvl == 499 && !canLearnMoreMasterCraftingSkill(player)) {
 			return;
 		}
 
@@ -148,14 +165,13 @@ public class CraftSkillUpdateService {
 		}
 
 		// You must do quest before being able to buy master update (499 to 500)
-		if (skillLvl == 499
-			&& ((skillId == 40001 && (!player.isCompleteQuest(29039) || !player.isCompleteQuest(19039)))
-				|| (skillId == 40002 && (!player.isCompleteQuest(29009) || !player.isCompleteQuest(19009)))
-				|| (skillId == 40003 && (!player.isCompleteQuest(29015) || !player.isCompleteQuest(19015)))
-				|| (skillId == 40004 && (!player.isCompleteQuest(29021) || !player.isCompleteQuest(19021)))
-				|| (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
-				|| (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027))) || (skillId == 40010 && (!player
-				.isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
+		if (skillLvl == 499 && ((skillId == 40001 && (!player.isCompleteQuest(29039) || !player.isCompleteQuest(19039)))
+			|| (skillId == 40002 && (!player.isCompleteQuest(29009) || !player.isCompleteQuest(19009)))
+			|| (skillId == 40003 && (!player.isCompleteQuest(29015) || !player.isCompleteQuest(19015)))
+			|| (skillId == 40004 && (!player.isCompleteQuest(29021) || !player.isCompleteQuest(19021)))
+			|| (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
+			|| (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027)))
+			|| (skillId == 40010 && (!player.isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER);
 			return;
 		}
@@ -190,8 +206,8 @@ public class CraftSkillUpdateService {
 
 		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler);
 		if (result) {
-			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0, new DescriptionId(
-				DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()), String.valueOf(price)));
+			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0,
+				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()), String.valueOf(price)));
 		}
 	}
 
@@ -201,7 +217,7 @@ public class CraftSkillUpdateService {
 	 * @param skillId
 	 * @return true or false
 	 */
-	public static boolean isCraftingSkill(int skillId) {
+	public boolean isCraftingSkill(int skillId) {
 		Iterator<Integer> it = craftingSkillIds.iterator();
 		while (it.hasNext()) {
 			if (it.next() == skillId)
@@ -213,9 +229,10 @@ public class CraftSkillUpdateService {
 	/**
 	 * Get total experted crafting skills
 	 * 
+	 * @param Player
 	 * @return total number of experted crafting skills
 	 */
-	static int getTotalExpertCraftingSkills(Player player) {
+	public int getTotalExpertCraftingSkills(Player player) {
 		int mastered = 0;
 
 		Iterator<Integer> it = craftingSkillIds.iterator();
@@ -234,9 +251,10 @@ public class CraftSkillUpdateService {
 	/**
 	 * Get total mastered crafting skills
 	 * 
+	 * @param Player
 	 * @return total number of mastered crafting skills
 	 */
-	static int getTotalMasterCraftingSkills(Player player) {
+	public int getTotalMasterCraftingSkills(Player player) {
 		int mastered = 0;
 
 		Iterator<Integer> it = craftingSkillIds.iterator();
@@ -256,30 +274,36 @@ public class CraftSkillUpdateService {
 	/**
 	 * Check if player can learn more expert crafting skill or not (max is 2)
 	 * 
+	 * @param Player
 	 * @return true or false
 	 */
-	public static boolean canLearnMoreExpertCraftingSkill(Player player) {
-		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS)
+	public boolean canLearnMoreExpertCraftingSkill(Player player) {
+		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS) {
 			return true;
-		else
+		} else {
+			PacketSendUtility.sendYellowMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " Expert crafting skills.");
 			return false;
+		}
 	}
 
 	/**
 	 * Check if player can learn more master crafting skill or not (max is 1)
 	 * 
+	 * @param Player
 	 * @return true or false
 	 */
-	public static boolean canLearnMoreMasterCraftingSkill(Player player) {
-		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS)
+	public boolean canLearnMoreMasterCraftingSkill(Player player) {
+		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS) {
 			return true;
-		else
+		} else {
+			PacketSendUtility.sendYellowMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " Master crafting skill.");
 			return false;
+		}
 	}
 
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
-		protected static final CraftSkillUpdateService instance = new CraftSkillUpdateService();
+		private static final CraftSkillUpdateService instance = new CraftSkillUpdateService();
 	}
 }

@@ -3536,10 +3536,6 @@
 			<spot x="1535.98096" y="2758.81738" z="221.54565"/>
 			<spot x="1541.67175" y="2300.49609" z="309.39603"/>
 		</spawn>
-		<!-- idian depths corridor -->
-		<spawn npc_id="731632" respawn_time="295">
-			<spot x="233.39000" y="1137.03003" z="225.87500" h="105"/>
-		</spawn>
 		<!-- infernomane vortile -->
 		<spawn npc_id="219930" respawn_time="295">
 			<spot x="2528.88696" y="161.71771" z="259.73376" h="113"/>

@@ -297,7 +297,8 @@ public final class PlayerEnterWorldService {
 				House house = player.getActiveHouse();
 				if (house != null) {
 					HouseAddress hPos = house.getAddress();
-					if (player.getWorldId() == hPos.getMapId() && MathUtil.isIn3dRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
+					if (player.getWorldId() == hPos.getMapId()
+						&& MathUtil.isIn3dRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
 						addReposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
 				}
 				pcd.addReposeEnergy(addReposeEnergy);
@@ -468,13 +469,6 @@ public final class PlayerEnterWorldService {
 			if (item.getExpireTime() > 0)
 				ExpireTimerTask.getInstance().addTask(item, player);
 
-			for (Item item : player.getEquipment().getEquippedItems()) {
-				if (item.getItemTemplate().isArmor()) {
-					int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
-					if (!player.getEquipment().checkAvailableEquipSkills(requiredSkills))
-						player.getEquipment().unEquipItem(item.getItemId());
-				}
-			}
 		player.getEquipment().checkRankLimitItems(); // Remove items after offline changed rank
 
 		for (Motion motion : player.getMotions().getMotions().values()) {
@@ -504,14 +498,10 @@ public final class PlayerEnterWorldService {
 			}
 		}
 		// scheduler periodic update
-		player.getController().addTask(
-			TaskId.PLAYER_UPDATE,
-			ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000,
-				PeriodicSaveConfig.PLAYER_GENERAL * 1000));
-		player.getController().addTask(
-			TaskId.INVENTORY_UPDATE,
-			ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000,
-				PeriodicSaveConfig.PLAYER_ITEMS * 1000));
+		player.getController().addTask(TaskId.PLAYER_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(
+			new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000, PeriodicSaveConfig.PLAYER_GENERAL * 1000));
+		player.getController().addTask(TaskId.INVENTORY_UPDATE, ThreadPoolManager.getInstance()
+			.scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000, PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
 		SurveyService.getInstance().showAvailable(player);
 		EventService.getInstance().onPlayerLogin(player);

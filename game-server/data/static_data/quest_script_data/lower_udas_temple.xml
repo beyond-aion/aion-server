@@ -5,7 +5,7 @@
 			30007 [XML] Drakan Document
 			30008 [XML] Legendary Jotun
 			30009 [XML] Pieces of You
-			30011 [XML] Arachnophobia
+			30011 [SCRIPT] Arachnophobia
 			30013 [XML] Axe Another Favor
 			30014 [XML] A Reian in the Sun
 			30033 [XML] A New Spin on Death
@@ -25,9 +25,6 @@
 	<item_order talk_npc_id1="799030" end_npc_id="799029" id="30007"/>
 	<item_order talk_npc_id1="799030" end_npc_id="799029" id="30107"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30011" start_npc_ids="799031">
-		<monster var="0" end_var="1" npc_ids="215792"/>
-	</monster_hunt>
 	<monster_hunt id="30033" start_npc_ids="799031">
 		<monster var="0" end_var="10" npc_ids="215848 215849"/>
 	</monster_hunt>

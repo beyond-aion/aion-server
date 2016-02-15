@@ -134,7 +134,7 @@ public class NpcFactions {
 			boolean canEnter = false;
 			if (npcFactionTemplate.getCategory() == FactionCategory.COMBINESKILL) {
 				for (PlayerSkillEntry skill : owner.getSkillList().getAllSkills()) {
-					if (CraftSkillUpdateService.isCraftingSkill(skill.getSkillId()) && skill.getSkillLevel() >= skillPoints) {
+					if (CraftSkillUpdateService.getInstance().isCraftingSkill(skill.getSkillId()) && skill.getSkillLevel() >= skillPoints) {
 						canEnter = true;
 						break;
 					}

@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.shedule.SiegeSchedule;
 import com.aionemu.gameserver.dao.SiegeDAO;
@@ -51,7 +50,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
 import com.aionemu.gameserver.services.siegeservice.AgentSiege;
 import com.aionemu.gameserver.services.siegeservice.ArtifactSiege;
 import com.aionemu.gameserver.services.siegeservice.FortressSiege;
@@ -85,10 +83,6 @@ public class SiegeService {
 	 */
 	private static final String RACE_PROTECTOR_SPAWN_SCHEDULE = SiegeConfig.RACE_PROTECTOR_SPAWN_SCHEDULE;
 	/**
-	 * Balaurea race protector spawn schedule.
-	 */
-	private static final String MOLTENUS_SPAWN_SCHEDULE = SiegeConfig.MOLTENUS_SPAWN_SCHEDULE;
-	/**
 	 * We should broadcast fortress status every hour Actually only influence packet must be sent, but that doesn't matter
 	 */
 	private static final String SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = "0 0 * ? * *";
@@ -105,8 +99,6 @@ public class SiegeService {
 	 * And maybe other useful information (in future).
 	 */
 	private SiegeSchedule siegeSchedule;
-
-	private Npc moltenus;
 
 	// Player list on RVR Event.
 	private List<Player> rvrPlayersOnEvent = new FastTable<>();
@@ -202,73 +194,6 @@ public class SiegeService {
 				log.debug("Scheduled agentfight based on cron expression: " + siegeTime);
 			}
 		}
-		// FIXME: Export to SiegeSchedule and possible implement it as a siege
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!AhserionInstance.getInstance().isStarted()) {
-					AhserionInstance.getInstance().start();
-					log.info("Started Ahserion's Flight!");
-				}
-			}
-		}, "0 50 17 ? * SUN");
-
-		// Abyss Moltenus start...
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (moltenus != null && moltenus.isSpawned())
-					log.warn("Moltenus was already spawned...");
-				else {
-					int randomPos = Rnd.get(1, 3);
-					switch (randomPos) {
-						case 1:
-							moltenus = (Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 2464.9199f, 1689f, 2882.221f, (byte) 0),
-								1);
-							break;
-						case 2:
-							moltenus = (Npc) SpawnEngine.spawnObject(
-								SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 2263.4812f, 2587.1633f, 2879.5447f, (byte) 0), 1);
-							break;
-						case 3:
-							moltenus = (Npc) SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(400010000, 251045, 1692.96f, 1809.04f, 2886.027f, (byte) 0),
-								1);
-							break;
-					}
-					log.info("Moltenus spawned in the Abyss");
-					World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-						@Override
-						public void visit(Player player) {
-							PacketSendUtility.sendBrightYellowMessage(player, "Menotios: Fragment of the anger has been sighted in the Abyss");
-						}
-
-					});
-					// Moltenus despawned after 1 hr if not killed
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (moltenus != null && !moltenus.getLifeStats().isAlreadyDead()) {
-								moltenus.getController().onDelete();
-								moltenus = null;
-							}
-							log.info("Moltenus dissapeared");
-							World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-								@Override
-								public void visit(Player player) {
-									PacketSendUtility.sendBrightYellowMessage(player, "Menotios: Fragment of anger gone");
-								}
-
-							});
-						}
-					}, 3600 * 1000);
-				}
-			}
-		}, MOLTENUS_SPAWN_SCHEDULE);
 
 		// Outpost siege start...
 		CronService.getInstance().schedule(new Runnable() {

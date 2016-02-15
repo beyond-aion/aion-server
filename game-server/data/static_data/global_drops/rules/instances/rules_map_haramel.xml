@@ -70,4 +70,26 @@
 			<gd_item id="123001095" name="Kobold's Big Belt"/>
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Quest-Item" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300200000" name="Haramel"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217025" name="Keymaster Mumu Dang"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000103" name="Rusty Key"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Quest-Item" base_chance="100" no_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300200000" name="Haramel"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217108" name="Mumu Mechanic"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000107" name="Lubricating Oil"/>
+		</gd_items>
+	</gd_rule>
 </global_rules>

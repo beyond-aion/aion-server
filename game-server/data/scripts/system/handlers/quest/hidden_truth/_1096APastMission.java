@@ -26,7 +26,7 @@ public class _1096APastMission extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+	//	qe.registerOnLevelUp(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
@@ -88,8 +88,10 @@ public class _1096APastMission extends QuestHandler {
 		return false;
 	}
 
+	/*
 	@Override
 	public boolean onLvlUpEvent(QuestEnv env) {
 		return defaultOnLvlUpEvent(env, 1929, true);
 	}
+	*/
 }

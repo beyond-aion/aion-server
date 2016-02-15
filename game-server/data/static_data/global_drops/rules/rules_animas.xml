@@ -2,7 +2,7 @@
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Animas -->
 	<!-- Kaldor -->
-	<gd_rule rule_name="Grassy Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Grassy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -18,7 +18,7 @@
 			<gd_item id="152012559" name="Grassy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tainted Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Tainted Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -35,7 +35,7 @@
 			<gd_item id="152012560" name="Tainted Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Frozen Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Frozen Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -52,7 +52,7 @@
 			<gd_item id="152012561" name="Frozen Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Windy Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Windy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -68,7 +68,7 @@
 			<gd_item id="152012562" name="Windy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Sylvan Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Sylvan Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -85,7 +85,7 @@
 			<gd_item id="152012563" name="Sylvan Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mysterious Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Mysterious Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -102,7 +102,7 @@
 			<gd_item id="152012564" name="Mysterious Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Snowy Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Snowy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -119,7 +119,7 @@
 			<gd_item id="152012565" name="Snowy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Devasted Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Devasted Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -136,7 +136,7 @@
 			<gd_item id="152012566" name="Devasted Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mossy Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Mossy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -152,7 +152,7 @@
 			<gd_item id="152012567" name="Mossy Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Waterlogged Anima" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Waterlogged Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="600090000" name="Kaldor"/>
 		</gd_maps>
@@ -169,7 +169,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Levinshor & Idian Depths -->
-	<gd_rule rule_name="Vengeful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Vengeful Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -191,7 +191,7 @@
 			<gd_item id="152012569" name="Vengeful Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Hopeless Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Hopeless Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -217,7 +217,7 @@
 			<gd_item id="152012570" name="Hopeless Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Zealous Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Zealous Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -239,7 +239,7 @@
 			<gd_item id="152012571" name="Zealous Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Ambitious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Ambitious Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -260,7 +260,7 @@
 			<gd_item id="152012572" name="Ambitious Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Remorseful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Remorseful Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -284,7 +284,7 @@
 			<gd_item id="152012573" name="Remorseful Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Avaricious Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Avaricious Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -306,7 +306,7 @@
 			<gd_item id="152012574" name="Avaricious Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Desperate Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Desperate Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -330,7 +330,7 @@
 			<gd_item id="152012575" name="Desperate Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Deluded Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Deluded Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
@@ -354,7 +354,7 @@
 			<gd_item id="152012576" name="Deluded Anima" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Wrathful Anima" base_chance="5" min_diff="-5" max_diff="10" fixed_chance="true">
+	<gd_rule rule_name="Wrathful Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />

@@ -1045,6 +1045,10 @@
 			<spot x="221.167" y="1689.46" z="342.963" h="11"/>
 			<spot x="242.13" y="1848.17" z="322.239" h="101"/>
 		</spawn>
+		<!-- Basrasa Cursetongue -->
+		<spawn npc_id="220022" respawn_time="295">
+			<spot x="1400.67" y="2118.65" z="318.47" h="95"/>
+		</spawn>
 		<!-- Basrasa Deathwalker -->
 		<spawn npc_id="216472" respawn_time="295">
 			<spot x="1299.51" y="977.357" z="451.875" h="113"/>
@@ -1200,6 +1204,10 @@
 		<spawn npc_id="216729" respawn_time="295">
 			<spot x="1571.35" y="1226.24" z="382.875" h="58"/>
 			<spot x="1606.56" y="1223.91" z="400.558" h="5"/>
+		</spawn>
+		<!-- Basrasa Ironbearer -->
+		<spawn npc_id="220021" respawn_time="295">
+			<spot x="1381.75" y="2115.25" z="318.47" h="93"/>
 		</spawn>
 		<!-- Basrasa Laborer -->
 		<spawn npc_id="215505" respawn_time="295">
@@ -1401,6 +1409,17 @@
 		<!-- Basrasa Supervisor -->
 		<spawn npc_id="215752" respawn_time="295">
 			<spot x="308.531" y="1803.03" z="300.861" h="33"/>
+		</spawn>
+		<!-- Basrasa Trapper -->
+		<spawn npc_id="216775" respawn_time="295">
+			<spot x="1367.56" y="2224.64" z="301.72" h="93"/>
+			<spot x="1368.77" y="2238.41" z="297.1" h="93"/>
+			<spot x="1371.41" y="2200.97" z="309.98" h="93"/>
+			<spot x="1375.28" y="2176.72" z="318.66" h="93"/>
+			<spot x="1375.54" y="2239.4" z="297.14" h="93"/>
+			<spot x="1380.9" y="2226.82" z="301.71" h="93"/>
+			<spot x="1384.78" y="2203.04" z="310.0" h="93"/>
+			<spot x="1388.63" y="2178.66" z="318.66" h="93"/>
 		</spawn>
 		<!-- Basrasa Triaris -->
 		<spawn npc_id="215755" respawn_time="295">
@@ -2097,6 +2116,10 @@
 		<!-- Corocota -->
 		<spawn npc_id="798989" respawn_time="295">
 			<spot x="381.768" y="984.051" z="460.375" h="117"/>
+		</spawn>
+		<!-- Corridor Entry Controller -->
+		<spawn npc_id="702663" respawn_time="295">
+			<spot x="1376.3" y="2297.67" z="296.67" h="92"/>
 		</spawn>
 		<!-- Crackled Crestlich -->
 		<spawn npc_id="215591" respawn_time="295">

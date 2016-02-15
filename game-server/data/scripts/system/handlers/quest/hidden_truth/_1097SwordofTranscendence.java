@@ -9,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -51,9 +52,8 @@ public class _1097SwordofTranscendence extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 						case SETPRO1:
 							if (var == 0) {
-								qs.setQuestVarById(0, var + 1);
-								updateQuestStatus(env);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+								defaultCloseDialog(env, 0, 1);
+								TeleportService2.teleportTo(player, 110010000, 1845.26f, 1559.53f, 590.11f, (byte) 90);
 								return true;
 							}
 					}
@@ -79,11 +79,6 @@ public class _1097SwordofTranscendence extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
-						case SETPRO3:
-							if (var == 2) {
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								return true;
-							}
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 2) {
 								if (QuestService.collectItemCheck(env, true)) {
