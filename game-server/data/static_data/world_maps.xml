@@ -144,7 +144,7 @@
 	<map id="400060000" name="Disillon" cName="Gab1_04" water_level="1" death_level="0" world_type="PANESTERRA" world_size="2048" drop_type="PANESTERRA" flags="GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="510010000" name="LF_Prison" cName="LF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="BIND PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="520010000" name="DF_Prison" cName="DF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
-	<map id="600010000" name="Silentera_Canyon" cName="Underpass" water_level="16" death_level="0" world_type="BALAUREA" world_size="1536" drop_type="BALAUREA" flags="GLIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
+	<map id="600010000" name="Silentera_Canyon" cName="Underpass" water_level="16" death_level="0" world_type="BALAUREA" world_size="1536" drop_type="BALAUREA" flags="GLIDE RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="600080000" name="Live_Party_Concert_Hall" cName="IDIU" water_level="16" death_level="0" world_size="3072" drop_type="NONE" flags="RECALL GLIDE FLY RIDE DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="600090000" name="Kaldor" cName="LDF5_Fortress" water_level="1" death_level="0" world_type="BALAUREA" world_size="1536" drop_type="BALAUREA_HIGH" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="600100000" name="Levinshor" cName="LDF4_Advance" max_user="200" water_level="225" death_level="0" world_type="BALAUREA" world_size="2048" drop_type="BALAUREA_HIGH" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE"/>
