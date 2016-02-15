@@ -32,7 +32,7 @@ public class RelinquishCraftStatus {
 	private static final int skillMessageId = 1401127;
 
 	public static void relinquishExpertStatus(Player player, Npc npc) {
-		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.npcBySkill.get(npc.getNpcId());
+		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.getInstance().getCLTemplateByNpc(npc);
 		final int skillId = craftLearnTemplate.getSkillId();
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 		if (!canRelinquishCraftStatus(player, skill, craftLearnTemplate, expertMinValue, expertMaxValue)) {
@@ -48,7 +48,7 @@ public class RelinquishCraftStatus {
 	}
 
 	public static void relinquishMasterStatus(Player player, Npc npc) {
-		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.npcBySkill.get(npc.getNpcId());
+		CraftLearnTemplate craftLearnTemplate = CraftSkillUpdateService.getInstance().getCLTemplateByNpc(npc);
 		final int skillId = craftLearnTemplate.getSkillId();
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 		if (!canRelinquishCraftStatus(player, skill, craftLearnTemplate, masterMinValue, masterMaxValue)) {
@@ -122,12 +122,14 @@ public class RelinquishCraftStatus {
 		int maxCraftStatus = isExpert ? CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
 		int countCraftStatus;
 		for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
-			countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player)
-				+ CraftSkillUpdateService.getTotalExpertCraftingSkills(player) : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
+			countCraftStatus = isExpert
+				? CraftSkillUpdateService.getInstance().getTotalMasterCraftingSkills(player)
+					+ CraftSkillUpdateService.getInstance().getTotalExpertCraftingSkills(player)
+				: CraftSkillUpdateService.getInstance().getTotalMasterCraftingSkills(player);
 			if (countCraftStatus > maxCraftStatus) {
 				skillId = skill.getSkillId();
 				skillLevel = skill.getSkillLevel();
-				if (CraftSkillUpdateService.isCraftingSkill(skillId) && skillLevel > minValue && skillLevel <= maxValue) {
+				if (CraftSkillUpdateService.getInstance().isCraftingSkill(skillId) && skillLevel > minValue && skillLevel <= maxValue) {
 					skill.setSkillLvl(minValue - 1);
 					PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
 					removeRecipesAbove(player, skillId, minValue);

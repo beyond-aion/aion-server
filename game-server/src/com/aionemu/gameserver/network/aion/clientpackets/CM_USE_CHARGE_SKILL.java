@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.skillengine.model.ChargedSkill;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
@@ -19,16 +18,15 @@ public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		Skill chargeCastingSkill = player.getCastingSkill();
-		if (chargeCastingSkill == null) {
+		if (chargeCastingSkill == null || chargeCastingSkill.getChargeTimes() == null) {
 			return;
 		}
 		long time = System.currentTimeMillis() - chargeCastingSkill.getCastStartTime();
 		int i = 0;
-		for (; i < chargeCastingSkill.getChargeSkillList().size(); i++) {
-			ChargedSkill skill = chargeCastingSkill.getChargeSkillList().get(i);
-			if (time <= skill.getTime())
+		for(; i < chargeCastingSkill.getChargeTimes().length; i++) {
+			if (time < chargeCastingSkill.getChargeTimes()[i])
 				break;
-			time -= skill.getTime();
+			time -= chargeCastingSkill.getChargeTimes()[i];
 		}
 		player.getController().useChargeSkill(chargeCastingSkill.getChargeSkillList().get(i).getId(), chargeCastingSkill.getSkillLevel(),
 			chargeCastingSkill.getHitTime(), chargeCastingSkill.getFirstTarget());

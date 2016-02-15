@@ -112,6 +112,7 @@ public class Skill {
 	private String chainCategory = null;
 	private volatile boolean isMultiCast = false;
 	private List<ChargedSkill> chargeSkillList = new FastTable<>();
+	private float[] chargeTimes;
 	private boolean isPenaltySkill;
 
 	public enum SkillMethod {
@@ -255,7 +256,6 @@ public class Skill {
 		if (checkproperties && !canUseSkill(CastState.CAST_START))
 			return false;
 
-		if (skillMethod != SkillMethod.CHARGE)
 			calculateSkillDuration();
 
 		if (SecurityConfig.MOTION_TIME) {
@@ -318,13 +318,21 @@ public class Skill {
 
 	protected void calculateSkillDuration() {
 		// Skills that are not affected by boost casting time
-		duration = 0;
+		if (skillMethod != SkillMethod.CHARGE) {
+			duration = 0;
+		}
 		int boostValue = 0;
+		int oldDuration = duration;
 
 		boolean noBaseDurationCap = false;
-		if (skillTemplate.getType() == SkillType.MAGICAL) {
-			duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, skillTemplate.getDuration());
-			boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, skillTemplate.getDuration());
+		if (skillTemplate.getType() == SkillType.MAGICAL || skillMethod == SkillMethod.CHARGE) {
+			if (skillMethod != SkillMethod.CHARGE) {
+				duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, skillTemplate.getDuration());
+				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, skillTemplate.getDuration());
+			} else {
+				duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, duration);
+				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, oldDuration);
+			}
 			switch (skillTemplate.getSubType()) {
 				case SUMMON:
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
@@ -352,7 +360,11 @@ public class Skill {
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
 					break;
 			}
-			duration -= skillTemplate.getDuration() - boostValue;
+			if (skillMethod != SkillMethod.CHARGE) {
+				duration -= skillTemplate.getDuration() - boostValue;
+			} else {
+				duration -= oldDuration - boostValue;
+			}
 		} else
 			duration = skillTemplate.getDuration();
 
@@ -360,6 +372,9 @@ public class Skill {
 		// No cast speed cap for skill Summoning Alacrity I(skillId: 1778) and Nimble Fingers I(skillId: 2386)
 		if (!noBaseDurationCap) {
 			int baseDurationCap = Math.round(skillTemplate.getDuration() * 0.3f);
+			if (skillMethod == SkillMethod.CHARGE) {
+				baseDurationCap = Math.round(oldDuration * 0.3f);
+			}
 			if (duration < baseDurationCap) {
 				duration = baseDurationCap;
 			}
@@ -522,10 +537,28 @@ public class Skill {
 	protected void startCast() {
 		int targetObjId = firstTarget != null ? firstTarget.getObjectId() : 0;
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
-		float castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration() : effector.getGameStats()
-			.getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
-		if (skillMethod == SkillMethod.CHARGE)
-			castSpeed = 1.0f;
+		float castSpeed = 1.0f;
+		if (skillMethod == SkillMethod.CHARGE) {
+			castSpeed = (effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f); 
+			int time = 0;
+			if (skillTemplate.getSkillChargeCondition() != null) {
+				ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(skillTemplate.getSkillChargeCondition().getValue());
+				if (skillCharge != null) {
+					for (ChargedSkill skill : skillCharge.getSkills()) {
+						time += skill.getTime();
+					}
+				}
+				if (time != 0) {
+					castSpeed = (float) duration / time;
+				}
+			}
+			for (int i = 0; i < chargeTimes.length; i++) {
+				chargeTimes[i] = (chargeTimes[i] * castSpeed);
+			}
+		} else {
+			castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration() : effector.getGameStats()
+				.getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
+		}
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
@@ -1133,7 +1166,7 @@ public class Skill {
 	 *         TODO: maybe another implementation? At the moment this doesnt seem to be handled on client infos, so it's hard coded
 	 */
 	private boolean isCastTimeFixed() {
-		if (skillMethod != SkillMethod.CAST) // only casted skills are affected
+		if (skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE) // only casted skills are affected
 			return true;
 
 		switch (this.getSkillId()) {
@@ -1226,6 +1259,14 @@ public class Skill {
 
 	public List<ChargedSkill> getChargeSkillList() {
 		return chargeSkillList;
+	}
+	
+	public void setChargeTimes(float[] chargeTimes) {
+		this.chargeTimes = chargeTimes;
+	}
+	
+	public float[] getChargeTimes() {
+		return chargeTimes;
 	}
 
 	/**
