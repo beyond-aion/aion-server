@@ -32465,16 +32465,16 @@
 			<item id="100901423" name="Vasharti Brigade General's Greatsword" player_class="TEMPLAR"/>
 			<item id="115001827" name="Vasharti Brigade General's Shield" player_class="TEMPLAR"/>
 			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="GLADIATOR"/>
-			<item id="100101386" name="Vasharti Brigade General's War Hammer" player_class="GLADIATOR"/>
+			<item id="100101388" name="Vasharti Brigade General's War Hammer" player_class="GLADIATOR"/>
 			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="GLADIATOR"/>
 			<item id="100901423" name="Vasharti Brigade General's Greatsword" player_class="GLADIATOR"/>
 			<item id="101301312" name="Vasharti Brigade General's Polearm" player_class="GLADIATOR"/>
 			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="GLADIATOR"/>
-			<item id="115001826" name="Vasharti Brigade General's Shield" player_class="GLADIATOR"/>
+			<item id="115001827" name="Vasharti Brigade General's Shield" player_class="GLADIATOR"/>
 			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="ASSASSIN"/>
 			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="ASSASSIN"/>
 			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="ASSASSIN"/>
-			<item id="100001795" name="Vasharti Brigade General's Sword" player_class="RANGER"/>
+			<item id="100001796" name="Vasharti Brigade General's Sword" player_class="RANGER"/>
 			<item id="100201561" name="Vasharti Brigade General's Dagger" player_class="RANGER"/>
 			<item id="101701407" name="Vasharti Brigade General's Bow" player_class="RANGER"/>
 			<item id="101801265" name="Vasharti Brigade General's Pistol" player_class="GUNNER"/>
