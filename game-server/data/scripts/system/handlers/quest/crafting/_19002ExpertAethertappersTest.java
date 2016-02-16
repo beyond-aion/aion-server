@@ -1,7 +1,6 @@
 package quest.crafting;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -12,11 +11,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Gigi
+ * @modified Pad
  */
 public class _19002ExpertAethertappersTest extends QuestHandler {
 
 	private final static int questId = 19002;
-	private static final int itemId1 = 152003007; 
+	private static final int itemId1 = 152003007;
 	private static final int itemId2 = 152003008;
 
 	public _19002ExpertAethertappersTest() {
@@ -34,27 +34,20 @@ public class _19002ExpertAethertappersTest extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203782) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203783: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -67,7 +60,7 @@ public class _19002ExpertAethertappersTest extends QuestHandler {
 					}
 				}
 				case 203782: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
 							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
@@ -86,7 +79,7 @@ public class _19002ExpertAethertappersTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203782) {
-				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
+				if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

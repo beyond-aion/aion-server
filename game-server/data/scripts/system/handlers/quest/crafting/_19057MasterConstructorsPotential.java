@@ -1,7 +1,6 @@
 package quest.crafting;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -9,10 +8,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
+ * @modified Pad
  */
 public class _19057MasterConstructorsPotential extends QuestHandler {
 
@@ -36,24 +37,20 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
+			return sendQuestSelectionDialog(env);
+		}
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798450) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798451:
@@ -92,7 +89,7 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 								return sendQuestDialog(env, 4400);
 					}
 				case 798450:
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
