@@ -14,9 +14,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _19000ExpertEssencetappersTest extends QuestHandler {
 
 	private static final int questId = 19000;
-	private static final int itemId1 = 152003004; 
-	private static final int itemId2 = 152003005; 
-	private static final int itemId3 = 152003006; 
+	private static final int itemId1 = 152003004;
+	private static final int itemId2 = 152003005;
+	private static final int itemId3 = 152003006;
 
 	public _19000ExpertEssencetappersTest() {
 		super(questId);
