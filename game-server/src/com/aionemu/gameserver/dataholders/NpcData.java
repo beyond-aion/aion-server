@@ -66,6 +66,8 @@ public class NpcData extends ReloadableData {
 			NpcRating rating = npc.getRating();
 			NpcRank rank = npc.getRank();
 			int level = npc.getLevel();
+			if (npc.getStatsTemplate().getMaxHp() >= 0)
+				npc.getStatsTemplate().setMaxXp(NpcStatCalculation.calculateExp(rating, rank, npc.getStatsTemplate().getMaxHp()));
 			if (npc.getStatsTemplate().getAttack() == 0)
 				npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
 			if (npc.getStatsTemplate().getAccuracy() == 0)

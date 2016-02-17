@@ -16,6 +16,32 @@ public class NpcStatCalculation {
 		return Math.round(value * level * ratingMod * rankMod);
 	}
 
+	public static int calculateExp(NpcRating rating, NpcRank rank, int maxHp) {
+		float multiplier;
+		switch (rating) {
+			case NORMAL:
+				multiplier = 1.8f;
+				break;
+			case ELITE:
+				multiplier = 3.8f;
+				break;
+			case HERO:
+				multiplier = 3.2f;
+				break;
+			case LEGENDARY:
+				multiplier = 6.4f;
+				break;
+			default:
+				multiplier = 1.0f;
+				break;
+		}
+		for (NpcRank ra : NpcRank.values()) {
+			if (ra.ordinal() <= rank.ordinal())
+				multiplier += 0.2f;
+		}
+		return Math.round(maxHp * multiplier);
+	}
+
 	private static float getBaseValue(StatEnum stat) {
 		switch (stat) {
 			case PHYSICAL_ATTACK:
