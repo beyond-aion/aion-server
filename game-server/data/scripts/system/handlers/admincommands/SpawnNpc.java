@@ -20,15 +20,20 @@ public class SpawnNpc extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			PacketSendUtility.sendMessage(admin, "syntax //spawn <template_id> <respawn_time> (0 for temp)");
+			PacketSendUtility.sendMessage(admin, "syntax //spawn <template_id> <static_id> <respawn_time> (0 for temp)");
 			return;
 		}
 
-		int respawnTime = 295;
+		int respawnTime = 0;
+		int staticId = 0;
 
-		if (params.length >= 2) {
-			respawnTime = Integer.valueOf(params[1]);
+		if (params.length >= 3) {
+			staticId = Integer.parseInt(params[1]);
+			respawnTime = Integer.parseInt(params[2]);
+		} else if (params.length >= 2) {
+			staticId = Integer.parseInt(params[1]);
 		}
+
 
 		int templateId = Integer.parseInt(params[0]);
 		float x = admin.getX();
@@ -44,6 +49,7 @@ public class SpawnNpc extends AdminCommand {
 			return;
 		}
 
+		spawn.setStaticId(staticId);
 		VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
 
 		if (visibleObject == null) {
@@ -59,6 +65,6 @@ public class SpawnNpc extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //spawn <template_id> <respawn_time> (0 for temp)");
+		PacketSendUtility.sendMessage(player, "syntax //spawn <template_id> <static_id> <respawn_time> (0 for temp)");
 	}
 }
