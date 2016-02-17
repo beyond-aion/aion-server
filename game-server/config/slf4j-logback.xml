@@ -103,6 +103,7 @@
 		<file>${logFolder}/item.log</file>
 		<encoder>
 			<Pattern>%date %message%n</Pattern>
+			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_item2" class="ch.qos.logback.core.FileAppender">
