@@ -384,6 +384,8 @@ public class World {
 	 * @param heading
 	 */
 	public void setPosition(VisibleObject object, int mapId, int instance, float x, float y, float z, byte heading) {
+		if (object == null)
+			return;
 		if (object.isSpawned())
 			despawn(object);
 		WorldMapInstance instanceMap = getWorldMap(mapId).getWorldMapInstanceById(instance);
@@ -433,6 +435,8 @@ public class World {
 	 *           when object is already spawned.
 	 */
 	public void spawn(VisibleObject object) {
+		if (object == null)
+			return;
 		if (object.getPosition().isSpawned())
 			throw new AlreadySpawnedException();
 
