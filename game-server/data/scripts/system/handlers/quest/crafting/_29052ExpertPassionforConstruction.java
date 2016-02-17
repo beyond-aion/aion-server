@@ -1,16 +1,17 @@
 package quest.crafting;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
  * @author Ritsu
+ * @modified Pad
  */
 public class _29052ExpertPassionforConstruction extends QuestHandler {
 
@@ -29,26 +30,25 @@ public class _29052ExpertPassionforConstruction extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
+		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player)) {
+			return sendQuestSelectionDialog(env);
+		}
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798452) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798452: {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
