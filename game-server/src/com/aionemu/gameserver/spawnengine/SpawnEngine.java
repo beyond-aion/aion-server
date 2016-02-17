@@ -50,9 +50,9 @@ public class SpawnEngine {
 	}
 
 	private static VisibleObject getSpawnedObject(SpawnTemplate spawn, int instanceIndex) {
-		int objectId = spawn.getNpcId();
+		int npcId = spawn.getNpcId();
 
-		if (objectId > 400000 && objectId < 499999) {
+		if (npcId > 400000 && npcId < 499999) {
 			return VisibleObjectSpawner.spawnGatherable(spawn, instanceIndex);
 		} else if (spawn instanceof BaseSpawnTemplate) {
 			return VisibleObjectSpawner.spawnBaseNpc((BaseSpawnTemplate) spawn, instanceIndex);

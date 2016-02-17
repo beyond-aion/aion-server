@@ -1,70 +1,55 @@
 package admincommands;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Luno
+ * @modified Neon
  */
 public class SpawnNpc extends AdminCommand {
 
 	public SpawnNpc() {
-		super("spawn");
+		super("spawn", "Spawns npcs and gatherables.");
+
+		setParamInfo(
+			"<id> - Spawns a temporary object with the specified ID.",
+			"<id> <static id> [respawn time] - Spawns an object with the specified ID and static ID (default: temporary spawn, optional: respawn time in seconds)."
+		);
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			PacketSendUtility.sendMessage(admin, "syntax //spawn <template_id> <static_id> <respawn_time> (0 for temp)");
+			sendInfo(admin);
 			return;
 		}
 
-		int respawnTime = 0;
-		int staticId = 0;
+		int npcId = NumberUtils.toInt(params[0]);
+		int staticId = params.length < 2 ? 0 : NumberUtils.toInt(params[1]);
+		int respawnTime = params.length < 3 ? 0 : NumberUtils.toInt(params[2]);
 
-		if (params.length >= 3) {
-			staticId = Integer.parseInt(params[1]);
-			respawnTime = Integer.parseInt(params[2]);
-		} else if (params.length >= 2) {
-			staticId = Integer.parseInt(params[1]);
-		}
-
-
-		int templateId = Integer.parseInt(params[0]);
-		float x = admin.getX();
-		float y = admin.getY();
-		float z = admin.getZ();
-		byte heading = admin.getHeading();
-		int worldId = admin.getWorldId();
-
-		SpawnTemplate spawn = SpawnEngine.addNewSpawn(worldId, templateId, x, y, z, heading, respawnTime);
-
-		if (spawn == null) {
-			PacketSendUtility.sendMessage(admin, "There is no template with id " + templateId);
+		if (npcId == 0) {
+			sendInfo(admin, "Invalid npc id.");
+			return;
+		} else if (DataManager.NPC_DATA.getNpcTemplate(npcId) == null) {
+			sendInfo(admin, "Template for npc id " + npcId + " was not found.");
 			return;
 		}
 
-		spawn.setStaticId(staticId);
-		VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
-
-		if (visibleObject == null) {
-			PacketSendUtility.sendMessage(admin, "Spawn id " + templateId + " was not found!");
-		} else if (respawnTime > 0) {
-			if (!DataManager.SPAWNS_DATA2.saveSpawn(visibleObject, false))
-				PacketSendUtility.sendMessage(admin, "Could not save spawn");
-		}
-
+		SpawnTemplate st = SpawnEngine.addNewSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), respawnTime);
+		st.setStaticId(staticId);
+		VisibleObject visibleObject = SpawnEngine.spawnObject(st, admin.getInstanceId());
 		String objectName = visibleObject.getObjectTemplate().getName();
-		PacketSendUtility.sendMessage(admin, objectName + " spawned");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //spawn <template_id> <static_id> <respawn_time> (0 for temp)");
+		sendInfo(admin, StringUtils.capitalize(objectName) + " spawned with static id: " + staticId + " and respawn time: " + respawnTime);
+		if (respawnTime > 0 && !DataManager.SPAWNS_DATA2.saveSpawn(visibleObject, false))
+			sendInfo(admin, "Could not save spawn. Npc will vanish after server restart.");
 	}
 }
