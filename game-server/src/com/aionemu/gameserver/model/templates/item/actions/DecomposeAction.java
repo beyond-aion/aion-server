@@ -181,7 +181,7 @@ public class DecomposeAction extends AbstractItemAction {
 					if (selectedCollection.getItems().size() > 0) {
 						for (ResultedItem resultItem : selectedCollection.getItems()) {
 							if (canAcquire(player, resultItem)) {
-								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), false, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}
@@ -420,7 +420,7 @@ public class DecomposeAction extends AbstractItemAction {
 									}
 								}
 								if (randomId != 0 && randomId != 167000524)
-									ItemService.addItem(player, randomId, randomItem.getResultCount(), new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+									ItemService.addItem(player, randomId, randomItem.getResultCount(), false, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}

@@ -158,7 +158,7 @@ public class PrivateStoreService {
 					if (item.getPackCount() > 0) {
 						item.setPackCount(item.getPackCount() * -1);
 					}
-					ItemService.addItem(buyer, item.getItemId(), tradeItem.getCount(), item);
+					ItemService.addItem(buyer, item);
 					if (storeItem.getCount() == tradeItem.getCount())
 						store.removeItem(storeItem.getItemObjId());
 

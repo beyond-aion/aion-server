@@ -14328,22 +14328,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are too far from %0 to craft.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330040, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330040, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330041, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330041, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot start crafting as you have not learned the %0 skill.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330042, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330042, new DescriptionId(value0));
 	}
 
 	/**
@@ -14354,8 +14354,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your %0 skill is not good enough yet.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330044, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330044, new DescriptionId(value0));
 	}
 
 	/**
@@ -14366,15 +14366,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330046, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330046, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot craft as you do not have %num1 %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1330047, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, int value0) {
+		return new SM_SYSTEM_MESSAGE(1330047, num1, new DescriptionId(value0));
 	}
 
 	/**
