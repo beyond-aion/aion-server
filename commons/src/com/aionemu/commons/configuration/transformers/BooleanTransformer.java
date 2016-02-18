@@ -1,12 +1,13 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * This class implements basic boolean transfromer.
+ * This class implements basic boolean transformer.
  * <p/>
  * Boolean can be represented by "true/false" (case doen't matter) or "1/0". In other cases
  * {@link com.aionemu.commons.configuration.TransformationException} is thrown
@@ -32,10 +33,9 @@ public class BooleanTransformer implements PropertyTransformer<Boolean> {
 	 *           if something goes wrong
 	 */
 	@Override
-	public Boolean transform(String value, Field field) throws TransformationException {
+	public Boolean transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		// We should have error here if value is not correct, default
-		// "Boolean.parseBoolean" returns false if string
-		// is not "true" ignoring case
+		// "Boolean.parseBoolean" returns false if string is not "true" ignoring case
 		if ("true".equalsIgnoreCase(value) || "1".equals(value)) {
 			return true;
 		} else if ("false".equalsIgnoreCase(value) || "0".equals(value)) {

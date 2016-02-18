@@ -22,7 +22,7 @@ public class ClassUtils {
 
 	/**
 	 * Return true if class a is either equivalent to class b, or if class a is a subclass of class b, i.e. if a either "extends" or "implements" b.
-	 * Note tht either or both "Class" objects may represent interfaces.
+	 * Note that either or both "Class" objects may represent interfaces.
 	 *
 	 * @param a
 	 *          class
@@ -32,7 +32,7 @@ public class ClassUtils {
 	 */
 	public static boolean isSubclass(Class<?> a, Class<?> b) {
 		// We rely on the fact that for any given java class or
-		// primtitive type there is a unqiue Class object, so
+		// primitive type there is a unique Class object, so
 		// we can use object equivalence in the comparisons.
 		if (a == b) {
 			return true;

@@ -2,6 +2,8 @@ package com.aionemu.commons.configuration;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -160,8 +162,12 @@ public class ConfigurableProcessor {
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
 		}
 
-		PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(), property.propertyTransformer());
-		return pt.transform(value, field);
+		Class<?> cls = field.getType();
+		Type[] genericTypeArgs = {};
+		if (field.getGenericType() instanceof ParameterizedType)
+			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(cls);
+		return pt.transform(value, field, genericTypeArgs);
 	}
 
 	/**
