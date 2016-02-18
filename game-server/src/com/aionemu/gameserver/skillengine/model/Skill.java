@@ -523,21 +523,8 @@ public class Skill {
 			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector, 0);
 			if (effector instanceof Player) {
 				int count = 1;
-				if (((Player) effector).isInAlliance2()) {
-					for (Player p : ((Player) effector).getPlayerAlliance2().getMembers()) {
-						if (count >= _penaltyTemplate.getProperties().getTargetMaxCount()) {
-							break;
-						}
-						if (p == null || !p.isOnline() || effector.equals(p) || p.getLifeStats().isAlreadyDead()) {
-							continue;
-						}
-						if (MathUtil.isIn3dRange(effector, p, _penaltyTemplate.getProperties().getEffectiveRange())) {
-							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p, 0);
-							count++;
-						}
-					}
-				} else if (((Player) effector).isInGroup2()) {
-					for (Player p : ((Player) effector).getPlayerGroup2().getMembers()) {
+				if (((Player) effector).isInTeam()) {
+					for (Player p : ((Player) effector).getCurrentTeam().getMembers()) {
 						if (count >= _penaltyTemplate.getProperties().getTargetMaxCount()) {
 							break;
 						}
@@ -622,7 +609,6 @@ public class Skill {
 	/**
 	 * Apply effects and perform actions specified in skill template
 	 */
-	@SuppressWarnings("ConstantConditions")
 	protected void endCast() {
 		if (!effector.isCasting() || isCancelled)
 			return;
