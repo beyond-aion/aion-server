@@ -29,12 +29,14 @@ import javolution.util.FastTable;
 public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5LegionDominionDAO.class);
-		
+
+	public static final String UPDATE_LOC = "UPDATE legion_dominion_locations SET legion_id=?, occupied_date=? WHERE id=?";
 	public static final String LOAD1 = "SELECT * FROM `legion_dominion_locations`";
 	public static final String LOAD2 = "SELECT * FROM `legion_dominion_participants` WHERE `legion_dominion_id`=? " ;
 	public static final String INSERT_NEW = "INSERT INTO legion_dominion_participants(`legion_dominion_id`, `legion_id`) VALUES (?, ?)";
 	public static final String UPDATE_PARTICIPANT = "UPDATE legion_dominion_participants SET points=?, survived_time=?, participated_date=? WHERE legion_id=?";
-	
+	private static final String DELETE_INFO = "DELETE FROM legion_dominion_participants WHERE legion_id=?";
+
 	@Override
 	public boolean loadLegionDominionLocations(Map<Integer, LegionDominionLocation> locations) {
 		boolean success = true;
@@ -59,8 +61,18 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 	}
 
 	@Override
-	public boolean updateLegionDominionLocation(LegionDominionLocation loc) {
-		return false;
+	public void updateLegionDominionLocation(LegionDominionLocation loc) {
+		DB.insertUpdate(UPDATE_LOC, new IUStH() {
+
+			@Override
+			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+				stmt.setInt(1, loc.getLegionId());
+				stmt.setTimestamp(2, loc.getOccupiedDate());
+				stmt.setInt(3, loc.getLegionId());
+				stmt.execute();
+			}
+
+		});
 	}
 
 	@Override
@@ -127,5 +139,16 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 		}
 			
 		});
+	}
+
+	@Override
+	public void delete(LegionDominionParticipantInfo info) {
+		PreparedStatement statement = DB.prepareStatement(DELETE_INFO);
+		try {
+			statement.setInt(1, info.getLegionId());
+		} catch (SQLException e) {
+			log.error("Deleting ParticipantInfo", e);
+		}
+		DB.executeUpdateAndClose(statement);
 	}
 }
