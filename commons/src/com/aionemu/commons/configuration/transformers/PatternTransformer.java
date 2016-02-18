@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.regex.Pattern;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
@@ -30,7 +31,7 @@ public class PatternTransformer implements PropertyTransformer<Pattern> {
 	 *           if pattern is not valid
 	 */
 	@Override
-	public Pattern transform(String value, Field field) throws TransformationException {
+	public Pattern transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			return Pattern.compile(value);
 		} catch (Exception e) {

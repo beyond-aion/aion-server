@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
+	<!--
+		[BEGIN] SUMMARY
+			17160 [XML]	Mutant Monster Mash
+			17161 [XML] Frenzied Monsters in the Fray
+			17162 [XML] Asmo Rift Tiff
+			27160 [XML] Mutant Monster Mutilation
+			27161 [XML] Free from Frenzied Mutants
+			27162 [XML] Legion Region Tasks
+		[END] SUMMARY
+	-->
+	<!-- MONSTER HUNT -->
+	<monster_hunt id="17160" start_npc_ids="0" end_npc_ids="804699"/>
+	<monster_hunt id="17161" start_npc_ids="0" end_npc_ids="804699"/>
+	<monster_hunt id="27160" start_npc_ids="0" end_npc_ids="804719"/>
+	<monster_hunt id="27161" start_npc_ids="0" end_npc_ids="804719"/>
+	
+	<!-- KILL IN WORLD -->
+	<kill_in_world id="17162" start_npc_ids="0" worlds="210070000 220080000" amount="6" end_npc_ids="804699" level_diff="5"/>
+	<kill_in_world id="27162" start_npc_ids="0" worlds="210070000 220080000" amount="6" end_npc_ids="804719" level_diff="5"/>
+</quest_scripts>

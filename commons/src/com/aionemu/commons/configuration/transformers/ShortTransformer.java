@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -29,7 +30,7 @@ public class ShortTransformer implements PropertyTransformer<Short> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Short transform(String value, Field field) throws TransformationException {
+	public Short transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			return Short.decode(value);
 		} catch (Exception e) {

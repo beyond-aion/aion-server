@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -29,7 +30,7 @@ public class FloatTransformer implements PropertyTransformer<Float> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Float transform(String value, Field field) throws TransformationException {
+	public Float transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			return Float.parseFloat(value);
 		} catch (Exception e) {

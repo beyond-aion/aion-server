@@ -1,9 +1,10 @@
 package com.aionemu.commons.configuration;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
- * This insterface represents property transformer, each transformer should implement it.
+ * This interface represents property transformer, each transformer must implement it.
  * 
  * @author SoulKeeper
  * @param <T>
@@ -22,5 +23,5 @@ public interface PropertyTransformer<T> {
 	 * @throws TransformationException
 	 *           if something went wrong
 	 */
-	public T transform(String value, Field field) throws TransformationException;
+	public T transform(String value, Field field, Type... genericTypeArgs) throws TransformationException;
 }

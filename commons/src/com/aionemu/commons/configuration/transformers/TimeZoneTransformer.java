@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.time.DateTimeException;
 import java.time.ZoneId;
 import java.util.TimeZone;
@@ -31,7 +32,7 @@ public class TimeZoneTransformer implements PropertyTransformer<TimeZone> {
 	 *           if input string was invalid
 	 */
 	@Override
-	public TimeZone transform(String value, Field field) throws TransformationException {
+	public TimeZone transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			ZoneId zoneId = value.isEmpty() || value.equals(Property.DEFAULT_VALUE) ? ZoneId.systemDefault() : ZoneId.of(value);
 			return TimeZone.getTimeZone(zoneId);
