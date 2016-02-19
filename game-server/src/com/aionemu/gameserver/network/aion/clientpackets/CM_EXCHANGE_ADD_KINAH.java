@@ -13,25 +13,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_EXCHANGE_ADD_KINAH extends AionClientPacket {
 
-	public int unk;
-	public int itemCount;
+	private long kinahCount;
 
 	public CM_EXCHANGE_ADD_KINAH(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		itemCount = readD();
-		unk = readD();
+		kinahCount = readQ();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final Player activePlayer = getConnection().getActivePlayer();
@@ -42,7 +34,7 @@ public class CM_EXCHANGE_ADD_KINAH extends AionClientPacket {
 				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
-
-		ExchangeService.getInstance().addKinah(activePlayer, itemCount);
+		
+		ExchangeService.getInstance().addKinah(activePlayer, kinahCount);
 	}
 }
