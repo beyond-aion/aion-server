@@ -22213,53 +22213,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE = new SM_SYSTEM_MESSAGE(1401969);
 
 	/**
-	 * According to your current rank, you will lose a certain amount of Glory Points each day.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON = new SM_SYSTEM_MESSAGE(1402082);
-
-	/**
-	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_PERSONAL(String playerName, int gpLoss) {
-		return new SM_SYSTEM_MESSAGE(1402209, playerName, gpLoss);
-	}
-
-	/**
-	 * %num0 Glory Points have been deducted from you.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
-		return new SM_SYSTEM_MESSAGE(1402219, num0);
-	}
-
-	/**
-	 * The %1 on %0 has been destroyed.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402237, new DescriptionId(weapon), new DescriptionId(godstone));
-	}
-
-	/**
-	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402536, new DescriptionId(weapon), new DescriptionId(godstone));
-	}
-
-	/**
-	 * The %1 equipped in %0 will be destroyed in %2 minutes.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(int weapon, int godstone, int minutes) {
-		return new SM_SYSTEM_MESSAGE(1402537, new DescriptionId(weapon), new DescriptionId(godstone), minutes);
-	}
-
-	/**
-	 * The %1 equipped in %0 will be destroyed in %2 seconds.2
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(int weapon, int godstone, int seconds) {
-		return new SM_SYSTEM_MESSAGE(1402538, new DescriptionId(weapon), new DescriptionId(godstone), seconds);
-	}
-
-	/**
 	 * You cannot wrap %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(DescriptionId itemName) {
@@ -22335,6 +22288,37 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
 		return new SM_SYSTEM_MESSAGE(1402031, itemName1);
 	}
+
+	/**
+	 * According to your current rank, you will lose a certain amount of Glory Points each day.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON = new SM_SYSTEM_MESSAGE(1402082);
+
+	/**
+	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_PERSONAL(String playerName, int gpLoss) {
+		return new SM_SYSTEM_MESSAGE(1402209, playerName, gpLoss);
+	}
+
+	/**
+	 * %num0 Glory Points have been deducted from you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1402219, num0);
+	}
+
+	/**
+	 * The %1 on %0 has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {
+		return new SM_SYSTEM_MESSAGE(1402237, new DescriptionId(weapon), new DescriptionId(godstone));
+	}
+
+	/**
+	 * Unable to receive due to lack of free space in inventory.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MAIL_TAKE_ALL_CANCEL = new SM_SYSTEM_MESSAGE(1402251);
 
 	/**
 	 * The Beritra Legion's Invasion Corridor has appeared.
@@ -22593,6 +22577,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
+	}
+
+	/**
+	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(int weapon, int godstone) {
+		return new SM_SYSTEM_MESSAGE(1402536, new DescriptionId(weapon), new DescriptionId(godstone));
+	}
+
+	/**
+	 * The %1 equipped in %0 will be destroyed in %2 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(int weapon, int godstone, int minutes) {
+		return new SM_SYSTEM_MESSAGE(1402537, new DescriptionId(weapon), new DescriptionId(godstone), minutes);
+	}
+
+	/**
+	 * The %1 equipped in %0 will be destroyed in %2 seconds.2
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(int weapon, int godstone, int seconds) {
+		return new SM_SYSTEM_MESSAGE(1402538, new DescriptionId(weapon), new DescriptionId(godstone), seconds);
 	}
 
 	/**
