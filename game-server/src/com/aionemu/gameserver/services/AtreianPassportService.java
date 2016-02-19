@@ -87,7 +87,7 @@ public class AtreianPassportService {
 			}
 
 			AtreianPassport atp = DATA.getAtreianPassportId(passId);
-			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
+			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
 				ItemUpdateType.INC_PASSPORT_ADD));
 			passport.setRewarded(true);
 			passport.setState(PersistentState.DELETED);

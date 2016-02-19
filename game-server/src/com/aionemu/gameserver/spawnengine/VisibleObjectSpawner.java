@@ -78,10 +78,10 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	protected static VisibleObject spawnNpc(SpawnTemplate spawn, int instanceIndex) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		int npcId = spawn.getNpcId();
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(objectId));
+			log.error("No template for NPC " + String.valueOf(npcId));
 			return null;
 		}
 		IDFactory iDFactory = IDFactory.getInstance();
@@ -116,11 +116,11 @@ public class VisibleObjectSpawner {
 	}
 
 	protected static VisibleObject spawnBaseNpc(BaseSpawnTemplate spawn, int instanceIndex) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		int npcId = spawn.getNpcId();
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
 		if (npcTemplate == null) {
-			log.error("No template for Base NPC " + String.valueOf(objectId));
+			log.error("No template for Base NPC " + String.valueOf(npcId));
 			return null;
 		}
 
@@ -150,10 +150,10 @@ public class VisibleObjectSpawner {
 			return null;
 		}
 
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		int npcId = spawn.getNpcId();
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(objectId));
+			log.error("No template for NPC " + String.valueOf(npcId));
 			return null;
 		}
 		IDFactory iDFactory = IDFactory.getInstance();
@@ -181,10 +181,10 @@ public class VisibleObjectSpawner {
 		if (!SiegeConfig.SIEGE_ENABLED)
 			return null;
 
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		int npcId = spawn.getNpcId();
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(objectId));
+			log.error("No template for NPC " + String.valueOf(npcId));
 			return null;
 		}
 		IDFactory iDFactory = IDFactory.getInstance();
@@ -213,10 +213,10 @@ public class VisibleObjectSpawner {
 			return null;
 		}
 
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		int npcId = spawn.getNpcId();
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(objectId));
+			log.error("No template for NPC " + String.valueOf(npcId));
 			return null;
 		}
 		IDFactory iDFactory = IDFactory.getInstance();
@@ -244,8 +244,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	protected static VisibleObject spawnGatherable(SpawnTemplate spawn, int instanceIndex) {
-		int objectId = spawn.getNpcId();
-		VisibleObjectTemplate template = DataManager.GATHERABLE_DATA.getGatherableTemplate(objectId);
+		VisibleObjectTemplate template = DataManager.GATHERABLE_DATA.getGatherableTemplate(spawn.getNpcId());
 		Gatherable gatherable = new Gatherable(spawn, template, IDFactory.getInstance().nextId(), new GatherableController());
 		gatherable.setKnownlist(new PlayerAwareKnownList(gatherable));
 		SpawnEngine.bringIntoWorld(gatherable, spawn, instanceIndex);
@@ -259,8 +258,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Trap spawnTrap(SpawnTemplate spawn, int instanceIndex, Creature creator) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		Trap trap = new Trap(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		trap.setKnownlist(new NpcKnownList(trap));
 		trap.setEffectController(new EffectController(trap));
@@ -279,8 +277,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static GroupGate spawnGroupGate(SpawnTemplate spawn, int instanceIndex, Creature creator) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		GroupGate groupgate = new GroupGate(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		groupgate.setKnownlist(new PlayerAwareKnownList(groupgate));
 		groupgate.setEffectController(new EffectController(groupgate));
@@ -296,8 +293,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Kisk spawnKisk(SpawnTemplate spawn, int instanceIndex, Player creator) {
-		int npcId = spawn.getNpcId();
-		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		Kisk kisk = new Kisk(IDFactory.getInstance().nextId(), new NpcController(), spawn, template, creator);
 		kisk.setKnownlist(new PlayerAwareKnownList(kisk));
 		kisk.setCreator(creator);
@@ -359,8 +355,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Servant spawnServant(SpawnTemplate spawn, int instanceIndex, Creature creator, int level, NpcObjectType objectType) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		byte servantLevel = creator.getLevel();
 		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLevel);
 		servant.setKnownlist(new NpcKnownList(servant));
@@ -387,8 +382,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Servant spawnEnemyServant(SpawnTemplate spawn, int instanceIndex, Creature creator, byte servantLvl) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLvl);
 		servant.setKnownlist(new NpcKnownList(servant));
 		servant.setEffectController(new EffectController(servant));
@@ -406,8 +400,7 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Homing spawnHoming(SpawnTemplate spawn, int instanceIndex, Creature creator, int attackCount, int skillId) {
-		int objectId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		int creatureLevel = creator.getLevel();
 		Homing homing = new Homing(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, (byte) creatureLevel, skillId);
 		homing.setState(CreatureState.WEAPON_EQUIPPED);

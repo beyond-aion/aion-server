@@ -10,13 +10,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Gigi
  * @reworked vlog
+ * @modified Pad
  */
 public class _29000ExpertEssencetappersTest extends QuestHandler {
 
 	private final static int questId = 29000;
-	private static final int itemId1 = 152003004; 
-	private static final int itemId2 = 152003005; 
-	private static final int itemId3 = 152003006; 
+	private static final int itemId1 = 152003004;
+	private static final int itemId2 = 152003005;
+	private static final int itemId3 = 152003006;
 
 	public _29000ExpertEssencetappersTest() {
 		super(questId);
@@ -33,11 +34,12 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204096) { // Latatusk
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -47,7 +49,7 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204097: { // Relir
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -62,7 +64,7 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 					break;
 				}
 				case 204096: { // Latatusk
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);

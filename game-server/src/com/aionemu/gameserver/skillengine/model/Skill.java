@@ -54,7 +54,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -63,24 +62,22 @@ import javolution.util.FastTable;
  */
 public class Skill {
 
-	protected SkillMethod skillMethod = SkillMethod.CAST;
+	private SkillMethod skillMethod = SkillMethod.CAST;
 
-	private List<Creature> effectedList;
+	private final List<Creature> effectedList;
 
 	private Creature firstTarget;
 
-	protected Creature effector;
-	private int skillLevel;
+	protected final Creature effector;
+	private final int skillLevel;
 
-	private int skillStackLvl;
+	protected final StartMovingListener conditionChangeListener;
 
-	protected StartMovingListener conditionChangeListener;
-
-	private SkillTemplate skillTemplate;
+	private final SkillTemplate skillTemplate;
 
 	private boolean firstTargetRangeCheck = true;
 
-	private ItemTemplate itemTemplate;
+	private final ItemTemplate itemTemplate;
 	private int itemObjectId = 0;
 
 	private int targetType;
@@ -95,7 +92,7 @@ public class Skill {
 	private float z;
 	private byte h;
 
-	protected int boostSkillCost;
+	private int boostSkillCost;
 
 	private FirstTargetAttribute firstTargetAttribute;
 	private TargetRangeAttribute targetRangeAttribute;
@@ -111,26 +108,26 @@ public class Skill {
 
 	private String chainCategory = null;
 	private volatile boolean isMultiCast = false;
-	private List<ChargedSkill> chargeSkillList = new FastTable<>();
+	private final List<ChargedSkill> chargeSkillList = new FastTable<>();
 	private float[] chargeTimes;
-	private boolean isPenaltySkill;
+	private final boolean isPenaltySkill;
 
 	public enum SkillMethod {
 		CAST,
 		ITEM,
 		PASSIVE,
 		PROVOKED,
-		CHARGE;
+		CHARGE
 	}
 
-	private Logger log = LoggerFactory.getLogger(Skill.class);
+	private final Logger log = LoggerFactory.getLogger(Skill.class);
 
 	/**
 	 * Each skill is a separate object upon invocation Skill level will be populated from player SkillList
 	 * 
 	 * @param skillTemplate
 	 * @param effector
-	 * @param world
+	 * @param firstTarget
 	 */
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget) {
 		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null, false);
@@ -151,7 +148,6 @@ public class Skill {
 		this.conditionChangeListener = new StartMovingListener();
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
-		this.skillStackLvl = skillTemplate.getLvl();
 		this.skillTemplate = skillTemplate;
 		this.effector = effector;
 		this.duration = skillTemplate.getDuration();
@@ -203,7 +199,7 @@ public class Skill {
 		return validateEffectedList();
 	}
 
-	protected boolean validateEffectedList() {
+	private boolean validateEffectedList() {
 		Iterator<Creature> effectedIter = effectedList.iterator();
 		while (effectedIter.hasNext()) {
 			Creature effected = effectedIter.next();
@@ -285,7 +281,7 @@ public class Skill {
 			if (!isPenaltySkill)
 				startCast();
 			if (effector instanceof Npc)
-				((NpcAI2) ((Npc) effector).getAi2()).setSubStateIfNot(AISubState.CAST);
+				((NpcAI2) effector.getAi2()).setSubStateIfNot(AISubState.CAST);
 		}
 
 		effector.getObserveController().attach(conditionChangeListener);
@@ -321,7 +317,7 @@ public class Skill {
 		if (skillMethod != SkillMethod.CHARGE) {
 			duration = 0;
 		}
-		int boostValue = 0;
+		int boostValue;
 		int oldDuration = duration;
 
 		boolean noBaseDurationCap = false;
@@ -523,21 +519,37 @@ public class Skill {
 
 		SkillTemplate _penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
 		String stack = _penaltyTemplate.getStack();
-		if (stack != null && (stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT")))
-			SkillEngine.getInstance().getSkill(effector, penaltySkill, 1, effector, true).useNoAnimationSkill();
-		else
+		if (stack != null && ((stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT")))) {
+			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector, 0);
+			if (effector instanceof Player) {
+				int count = 1;
+				if (((Player) effector).isInTeam()) {
+					for (Player p : ((Player) effector).getCurrentTeam().getMembers()) {
+						if (count >= _penaltyTemplate.getProperties().getTargetMaxCount()) {
+							break;
+						}
+						if (p == null || !p.isOnline() || effector.equals(p) || p.getLifeStats().isAlreadyDead()) {
+							continue;
+						}
+						if (MathUtil.isIn3dRange(effector, p, _penaltyTemplate.getProperties().getEffectiveRange())) {
+							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p, 0);
+							count++;
+						}
+					}
+				}
+			}
+		} else {
 			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector, 0);
-
-		SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector, 0);
+		}
 	}
 
 	/**
 	 * Start casting of skill
 	 */
-	protected void startCast() {
+	private void startCast() {
 		int targetObjId = firstTarget != null ? firstTarget.getObjectId() : 0;
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
-		float castSpeed = 1.0f;
+		float castSpeed;
 		if (skillMethod == SkillMethod.CHARGE) {
 			castSpeed = (effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f); 
 			int time = 0;
@@ -667,7 +679,7 @@ public class Skill {
 		int resistCount = 0;
 		boolean blockedChain = false;
 		boolean blockedStance = false;
-		final List<Effect> effects = new FastTable<Effect>();
+		final List<Effect> effects = new FastTable<>();
 		if (skillTemplate.getEffects() != null) {
 			boolean blockAOESpread = false;
 			for (Creature effected : effectedList) {
@@ -774,17 +786,12 @@ public class Skill {
 		if (instantSkill)
 			applyEffect(effects);
 		else {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					applyEffect(effects);
-				}
-			}, hitTime);
+			ThreadPoolManager.getInstance().schedule((Runnable) () -> applyEffect(effects), hitTime);
 		}
-		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
+		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
 			if (!isPenaltySkill)
 				sendCastspellEnd(dashStatus, effects);
+		}
 
 		endCondCheck();
 
@@ -797,7 +804,7 @@ public class Skill {
 			if (npc.getGameStats().getLastSkill() != null) {
 				npc.getGameStats().getLastSkill().fireAfterUseSkillEvents(npc);
 			}
-			SkillAttackManager.afterUseSkill((NpcAI2) ((Npc) effector).getAi2());
+			SkillAttackManager.afterUseSkill((NpcAI2) effector.getAi2());
 		}
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
@@ -810,28 +817,17 @@ public class Skill {
 		if (effects == null || effects.isEmpty()) {
 			return;
 		}
-		for (Effect effect : effects) {
-			if (effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)) {
-				effect.getEffected().getAggroList().addHate(effector, 1);
-				effect.getEffected().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
-
-					@Override
-					public void visit(Npc object) {
-						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected());
-					}
-
-				});
-			}
-		}
+		effects.stream().filter(effect -> effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)).forEach(effect -> {
+			effect.getEffected().getAggroList().addHate(effector, 1);
+			effect.getEffected().getKnownList().doOnAllNpcs(object -> object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
+		});
 	}
 
-	public void applyEffect(List<Effect> effects) {
+	private void applyEffect(List<Effect> effects) {
 		/**
 		 * Apply effects to effected objects
 		 */
-		for (Effect effect : effects) {
-			effect.applyEffect();
-		}
+		effects.forEach(Effect::applyEffect);
 
 		addResistedEffectHateAndNotifyFriends(effects);
 
@@ -843,7 +839,7 @@ public class Skill {
 	}
 
 	/**
-	 * @param spellStatus
+	 * @param dashStatus
 	 * @param effects
 	 */
 	private void sendCastspellEnd(int dashStatus, List<Effect> effects) {
@@ -884,27 +880,23 @@ public class Skill {
 	 * Schedule actions/effects of skill (channeled skills)
 	 */
 	private void schedule(int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
-					cancelCast();
-					effector.setCasting(null);
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_SKILL_CANCEL(effector, skillTemplate.getSkillId()));
-					return;
-				}
-				endCast();
+		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
+				cancelCast();
+				effector.setCasting(null);
+				PacketSendUtility.broadcastPacketAndReceive(effector, new SM_SKILL_CANCEL(effector, skillTemplate.getSkillId()));
+				return;
 			}
+			endCast();
 		}, delay);
 	}
 
 	/**
 	 * Check all conditions before starting cast
 	 */
-	protected boolean preCastCheck() {
+	private boolean preCastCheck() {
 		Conditions skillConditions = skillTemplate.getStartconditions();
-		return skillConditions != null ? skillConditions.validate(this) : true;
+		return skillConditions == null || skillConditions.validate(this);
 	}
 
 	/**
@@ -912,7 +904,7 @@ public class Skill {
 	 */
 	private boolean preUsageCheck() {
 		Conditions skillConditions = skillTemplate.getUseconditions();
-		return skillConditions != null ? skillConditions.validate(this) : true;
+		return skillConditions == null || skillConditions.validate(this);
 	}
 
 	/**
@@ -920,7 +912,7 @@ public class Skill {
 	 */
 	private boolean endCondCheck() {
 		Conditions skillConditions = skillTemplate.getEndConditions();
-		return skillConditions != null ? skillConditions.validate(this) : true;
+		return skillConditions == null || skillConditions.validate(this);
 	}
 
 	
@@ -968,12 +960,14 @@ public class Skill {
 		return skillTemplate.getSkillId();
 	}
 
-	/**
-	 * @return the skillStackLvl
-	 */
-	public int getSkillStackLvl() {
-		return skillStackLvl;
-	}
+// --Commented out by Inspection START (17.02.2016 00:21):
+//	/**
+//	 * @return the skillStackLvl
+//	 */
+//	public int getSkillStackLvl() {
+//		return skillStackLvl;
+//	}
+// --Commented out by Inspection STOP (17.02.2016 00:21)
 
 	/**
 	 * @return the conditionChangeListener
@@ -1004,12 +998,14 @@ public class Skill {
 		this.firstTarget = firstTarget;
 	}
 
-	/**
-	 * @return true or false
-	 */
-	public boolean isPassive() {
-		return skillTemplate.getActivationAttribute() == ActivationAttribute.PASSIVE;
-	}
+// --Commented out by Inspection START (17.02.2016 00:21):
+//	/**
+//	 * @return true or false
+//	 */
+//	public boolean isPassive() {
+//		return skillTemplate.getActivationAttribute() == ActivationAttribute.PASSIVE;
+//	}
+// --Commented out by Inspection STOP (17.02.2016 00:21)
 
 	/**
 	 * @return the firstTargetRangeCheck
@@ -1019,7 +1015,7 @@ public class Skill {
 	}
 
 	/**
-	 * @param FirstTargetAttribute
+	 * @param firstTargetAttribute
 	 *          the firstTargetAttribute to set
 	 */
 	public void setFirstTargetAttribute(FirstTargetAttribute firstTargetAttribute) {
@@ -1036,7 +1032,7 @@ public class Skill {
 	/**
 	 * @return true if the present skill is a targeted AOE skill
 	 */
-	public boolean isTargetAOE() {
+	private boolean isTargetAOE() {
 		return (firstTargetAttribute == FirstTargetAttribute.TARGET && targetRangeAttribute == TargetRangeAttribute.AREA);
 	}
 
@@ -1070,13 +1066,15 @@ public class Skill {
 		this.firstTargetRangeCheck = firstTargetRangeCheck;
 	}
 
-	/**
-	 * @param itemTemplate
-	 *          the itemTemplate to set
-	 */
-	public void setItemTemplate(ItemTemplate itemTemplate) {
-		this.itemTemplate = itemTemplate;
-	}
+// --Commented out by Inspection START (17.02.2016 00:21):
+//	/**
+//	 * @param itemTemplate
+//	 *          the itemTemplate to set
+//	 */
+//	public void setItemTemplate(ItemTemplate itemTemplate) {
+//		this.itemTemplate = itemTemplate;
+//	}
+// --Commented out by Inspection STOP (17.02.2016 00:21)
 
 	public ItemTemplate getItemTemplate() {
 		return this.itemTemplate;
@@ -1213,7 +1211,7 @@ public class Skill {
 		return false;
 	}
 
-	public boolean isGroundSkill() {
+	private boolean isGroundSkill() {
 		return skillTemplate.isGroundSkill();
 	}
 
@@ -1237,15 +1235,13 @@ public class Skill {
 		return this.skillMethod;
 	}
 
-	public boolean isPointPointSkill() {
-		if (this.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.POINT
-			&& this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT)
-			return true;
+	private boolean isPointPointSkill() {
+		return this.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.POINT
+				&& this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT;
 
-		return false;
 	}
 
-	public boolean isMulticast() {
+	private boolean isMulticast() {
 		return this.isMultiCast;
 	}
 

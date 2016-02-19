@@ -349,7 +349,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player == null || !player.isOnline())
 			return false;
 
-		if (player.getLifeStats().isAboutToDie())
+		if (player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
 			return false;
 
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
@@ -460,13 +460,34 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canPrivateStore(Player player) {
-		if (player.isFlying())
-			return false;
-		if (player.getLifeStats().isAlreadyDead())
-			return false;
-		if (player.isInState(CreatureState.RESTING)) {
+		if (player.isFlying()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE);
 			return false;
 		}
+		if (player.getMoveController().isInMove()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_MOVING_OBJECT);
+			return false;
+		}
+		if (player.isAttackMode()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_COMBAT_MODE);
+			return false;
+		}
+		if (player.isTrading()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING); // name "crafting" is NC fail, msg is correct
+			return false;
+		}
+		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE);
+			return false;
+		}
+		if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE);
+			return false;
+		}
+		if (player.getLifeStats().isAlreadyDead())
+			return false;
+		if (player.isInState(CreatureState.RESTING))
+			return false;
 
 		return true;
 	}

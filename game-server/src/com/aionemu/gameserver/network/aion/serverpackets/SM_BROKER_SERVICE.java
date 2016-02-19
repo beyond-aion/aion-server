@@ -161,11 +161,13 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeC(type.getId());
 		writeC(message);
 		if (message == 0) {
-			writeC(itemsCount + 1);
+			writeC(itemsCount + 1); // item pos in list
 			BrokerItem itemForRegistration = brokerItems[0];
 			writeRegisteredItemInfo(itemForRegistration);
 		} else {
-			writeB(new byte[107]);
+			writeB(new byte[174]);
+			writeH(255); // right after creatorName string
+			writeB(new byte[7]);
 		}
 	}
 

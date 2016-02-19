@@ -8,9 +8,10 @@ public class Rnd {
 	private static final MTRandom rnd = new MTRandom();
 
 	/**
-	 * @return rnd
+	 * @return Random number from 0.0f (inclusive) to 1.0f (exclusive)
+	 * @see java.util.Random#nextFloat()
 	 */
-	public static float get() // get random number from 0 to 1
+	public static float get()
 	{
 		return rnd.nextFloat();
 	}

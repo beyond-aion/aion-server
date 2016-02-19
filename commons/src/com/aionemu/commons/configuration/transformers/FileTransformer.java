@@ -2,6 +2,7 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -28,7 +29,7 @@ public class FileTransformer implements PropertyTransformer<File> {
 	 * @return File object that represents string
 	 */
 	@Override
-	public File transform(String value, Field field) throws TransformationException {
+	public File transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		return new File(value);
 	}
 }

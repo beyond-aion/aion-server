@@ -6,10 +6,31 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.aionemu.commons.configuration.transformers.*;
+
 /**
- * This annotation is used to mark field that should be processed by {@link com.aionemu.commons.configuration.ConfigurableProcessor}<br>
- * <br>
- * This annotation is Documented, all definitions with it will appear in javadoc
+ * This annotation is used to mark fields that should be processed by {@link com.aionemu.commons.configuration.ConfigurableProcessor}
+ * <p/>
+ * List of supported types:<br>
+ * <ul>
+ * <li>{@link Boolean} and boolean by {@link BooleanTransformer}</li>
+ * <li>{@link Byte} and byte by {@link ByteTransformer}</li>
+ * <li>{@link Character} and char by {@link CharTransformer}</li>
+ * <li>{@link Short} and short by {@link ShortTransformer}</li>
+ * <li>{@link Integer} and int by {@link IntegerTransformer}</li>
+ * <li>{@link Float} and float by {@link FloatTransformer}</li>
+ * <li>{@link Long} and long by {@link LongTransformer}</li>
+ * <li>{@link Double} and double by {@link DoubleTransformer}</li>
+ * <li>{@link String} by {@link StringTransformer}</li>
+ * <li>{@link Class} by {@link ClassTransformer}</li>
+ * <li>{@link Enum} and enum by {@link EnumTransformer}</li>
+ * <li>{@link java.util.Collection} types by {@link CollectionTransformer} (supports entries of the types in this list, except nested Collections)</li>
+ * <li>{@code Object Arrays} by {@link ArrayTransformer} (supports entries of the types in this list, but no multi-dimensional arrays)</li>
+ * <li>{@link java.io.File} by {@link FileTransformer}</li>
+ * <li>{@link java.net.InetSocketAddress} by {@link InetSocketAddressTransformer}</li>
+ * <li>{@link java.util.regex.Pattern} by {@link PatternTransformer}
+ * <li>{@link java.util.TimeZone} by {@link TimeZoneTransformer}</li>
+ * </ul>
  */
 @Documented
 @Target(ElementType.FIELD)
@@ -27,33 +48,6 @@ public @interface Property {
 	 * @return name of the property that will be used
 	 */
 	public String key();
-
-	/**
-	 * PropertyTransformer to use.<br>
-	 * List of automaticly transformed types:<br>
-	 * <ul>
-	 * <li>{@link Boolean} and boolean by {@link com.aionemu.commons.configuration.transformers.BooleanTransformer}</li>
-	 * <li>{@link Byte} and byte by {@link com.aionemu.commons.configuration.transformers.ByteTransformer}</li>
-	 * <li>{@link Character} and char by {@link com.aionemu.commons.configuration.transformers.CharTransformer}</li>
-	 * <li>{@link Short} and short by {@link com.aionemu.commons.configuration.transformers.ShortTransformer}</li>
-	 * <li>{@link Integer} and int by {@link com.aionemu.commons.configuration.transformers.IntegerTransformer}</li>
-	 * <li>{@link Float} and float by {@link com.aionemu.commons.configuration.transformers.FloatTransformer}</li>
-	 * <li>{@link Long} and long by {@link com.aionemu.commons.configuration.transformers.LongTransformer}</li>
-	 * <li>{@link Double} and double by {@link com.aionemu.commons.configuration.transformers.DoubleTransformer}</li>
-	 * <li>{@link String} by {@link com.aionemu.commons.configuration.transformers.StringTransformer}</li>
-	 * <li>{@link Enum} and enum by {@link com.aionemu.commons.configuration.transformers.EnumTransformer}</li>
-	 * <li>{@link java.io.File} by {@link com.aionemu.commons.configuration.transformers.FileTransformer}</li>
-	 * <li>{@link java.net.InetSocketAddress} by {@link com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer}</li>
-	 * <li>{@link java.util.regex.Pattern} by {@link com.aionemu.commons.configuration.transformers.PatternTransformer}
-	 * <li>{@link java.util.TimeZone} by {@link com.aionemu.commons.configuration.transformers.TimeZoneTransformer}</li>
-	 * </ul>
-	 * <p/>
-	 * If your value is one of this types - just leave this field empty
-	 * 
-	 * @return returns class that will be used to transform value
-	 */
-	@SuppressWarnings("rawtypes")
-	public Class<? extends PropertyTransformer> propertyTransformer() default PropertyTransformer.class;
 
 	/**
 	 * Represents default value that will be parsed if key not found. If this key equals(default) {@link #DEFAULT_VALUE} init value of the object won't

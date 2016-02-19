@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -30,7 +31,7 @@ public class ByteTransformer implements PropertyTransformer<Byte> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Byte transform(String value, Field field) throws TransformationException {
+	public Byte transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			return Byte.decode(value);
 		} catch (Exception e) {

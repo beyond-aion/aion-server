@@ -56,8 +56,8 @@ public class Pet extends AdminCommand {
 				petId = Integer.parseInt(params[1]);
 				if (DataManager.PET_DATA.getPetTemplate(petId) == null)
 					throw new InvalidParameterException();
-			} catch (NumberFormatException | InvalidParameterException e) {
-				sendInfo(admin, "Pet ID is invalid.");
+			} catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidParameterException e) {
+				sendInfo(admin, e instanceof ArrayIndexOutOfBoundsException ? "You must specify the pet ID." : "Pet ID is invalid.");
 				return;
 			}
 

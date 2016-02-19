@@ -20,6 +20,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CRAFT_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
@@ -53,16 +55,18 @@ public class CraftService {
 		xpReward = xpReward + (xpReward * bonus / 100); // bonus
 		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductid();
 
-		ItemService.addItem(player, productItemId, recipetemplate.getQuantity(), new ItemUpdatePredicate() {
+		ItemService.addItem(player, productItemId, recipetemplate.getQuantity(), true,
+			new ItemUpdatePredicate(ItemAddType.CRAFTED_ITEM, ItemUpdateType.INC_ITEM_COLLECT) {
 
-			@Override
-			public boolean changeItem(Item item) {
-				if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isArmor()) {
-					item.setItemCreator(player.getName());
+				@Override
+				public boolean changeItem(Item item) {
+					if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isArmor()) {
+						item.setItemCreator(player.getName());
+						return true;
+					}
+					return false;
 				}
-				return true;
-			}
-		});
+			});
 
 		if (LoggingConfig.LOG_CRAFT) {
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
@@ -147,9 +151,14 @@ public class CraftService {
 		}
 
 		// morphing dont need static object/npc to use
-		if ((skillId != 40009) && (target == null || !(target instanceof StaticObject))) {
-			AuditLogger.info(player, " tried to craft incorrect target.");
-			return false;
+		if ((skillId != 40009)) {
+			if (target == null || !(target instanceof StaticObject)) {
+				AuditLogger.info(player, "Tried to craft with incorrect target.");
+				return false;
+			} else if (player.getDistanceToTarget() > 5) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_TOO_FAR_FROM_TOOL(target.getObjectTemplate().getNameId()));
+				return false;
+			}
 		}
 
 		if (recipeTemplate.getDp() != null && (player.getCommonData().getDp() < recipeTemplate.getDp())) {
@@ -158,10 +167,10 @@ public class CraftService {
 		}
 
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			//TODO message to send
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_COMBINE_WHILE_IN_CURRENT_STANCE);
 			return false;
 		}
-		
+
 		if (player.getInventory().isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_INVENTORY_IS_FULL);
 			return false;
@@ -172,29 +181,41 @@ public class CraftService {
 			return false;
 		}
 
-		if (recipeTemplate.getCraftDelayId() != null) {
-			if (!player.getCraftCooldownList().isCanCraft(recipeTemplate.getCraftDelayId())) {
-				AuditLogger.info(player, " try craft item before cooldown expire.");
-				return false;
-			}
+		if (recipeTemplate.getCraftDelayId() != null && !player.getCraftCooldownList().isCanCraft(recipeTemplate.getCraftDelayId())) {
+			AuditLogger.info(player, "Tried to craft before cooldown expired.");
+			return false;
 		}
 
-		if (!player.getSkillList().isSkillPresent(skillId) || player.getSkillList().getSkillLevel(skillId) < recipeTemplate.getSkillpoint()) {
-			AuditLogger.info(player, " tried craft without required skill.");
+		if (!player.getSkillList().isSkillPresent(skillId)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_CANT_USE(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()));
+			return false;
+		}
+
+		if (player.getSkillList().getSkillLevel(skillId) < recipeTemplate.getSkillpoint()) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_COMBINE_OUT_OF_SKILL_POINT(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()));
 			return false;
 		}
 
 		if (craftType == 1 && !player.getInventory().decreaseByItemId(getBonusReqItem(skillId), 1)) {
-			AuditLogger.info(player, " tried craft without 169401079.");
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(skillId)).getNameId()));
 			return false;
 		}
 
 		for (Component component : recipeTemplate.getComponent()) {
-			if (!player.getInventory().decreaseByItemId(component.getItemid(), component.getQuantity())) {
-				AuditLogger.info(player, " tried craft without required items.");
+			if (player.getInventory().getItemCountByItemId(component.getItemid()) < component.getQuantity()) {
+				int nameId = DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(component.getItemid())).getNameId();
+				if (component.getQuantity() == 1)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(nameId));
+				else
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), nameId));
 				return false;
 			}
 		}
+
+		for (Component component : recipeTemplate.getComponent())
+			player.getInventory().decreaseByItemId(component.getItemid(), component.getQuantity());
 
 		return true;
 	}

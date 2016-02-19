@@ -25,6 +25,7 @@ public class CronJobService {
 		scheduleMoltenus();
 		scheduleAhserionsFlight();
 		scheduleIdianDepthPortalSpawns();
+		//scheduleLegionDominionCalculation(); deactivated till instance is done
 	}
 
 	public static CronJobService getInstance() {
@@ -136,5 +137,9 @@ public class CronJobService {
 				}, 3600 * 1000);
 			}
 		}, "0 0 15,21 ? * MON,WED,FRI,SUN");
+	}
+
+	private void scheduleLegionDominionCalculation() {
+		CronService.getInstance().schedule(() -> LegionDominionService.getInstance().startWeeklyCalculation(), "0 0 9 ? * WED *");
 	}
 }

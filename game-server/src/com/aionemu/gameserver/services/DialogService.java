@@ -438,7 +438,19 @@ public class DialogService {
 			case ABYSSRANK:
 				return player.getAbyssRank().getRank().getId() < value;
 			case TARGET_LEGION_DOMINION:
-				return false; // TODO
+				if (player.getLegion() != null) {
+					if (player.getLegion().getCurrentLegionDominion() == value) {
+						return false;
+					}
+				}
+				return true;
+			case LEGION_DOMINION_NPC:
+				if (player.getLegion() != null) {
+					if (player.getLegion().getOccupiedLegionDominion() == value) {
+						return false;
+					}
+				}
+				return true;
 			default:
 				return false;
 		}

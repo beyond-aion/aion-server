@@ -27,11 +27,11 @@ public class LegionDominionLocation {
 	
 	private int id;
 	private int worldId;
-	private int legionId;
 	private int nameId;
-	private Timestamp occupiedDate;
 	private Race race;
 	private String zoneName;
+	private int legionId;
+	private Timestamp occupiedDate;
 	private Map<Integer, LegionDominionParticipantInfo> participantInfo = new TreeMap<>();
 	private List<Integer> legionsSortedByrank = new FastTable<>();
 	
@@ -113,16 +113,9 @@ public class LegionDominionLocation {
 	private void store(LegionDominionParticipantInfo info, boolean isNew) {
 		if (isNew) {
 			DAOManager.getDAO(LegionDominionDAO.class).storeNewInfo(id, info);
-		} else { 
+		} else {
 			DAOManager.getDAO(LegionDominionDAO.class).updateInfo(info);
 		}
-	}
-	
-	public List<LegionDominionParticipantInfo> getSortedParticipants() {
-		List<LegionDominionParticipantInfo> info = new LinkedList<>();
-		info.addAll(participantInfo.values());
-		Collections.sort(info);
-		return info;
 	}
 	
 	public List<LegionDominionParticipantInfo> getSortedTop25Participants(LegionDominionParticipantInfo curLegion) {
@@ -141,6 +134,18 @@ public class LegionDominionLocation {
 		return info;
 	}
 
+	public LegionDominionParticipantInfo getWinner() {
+		List<LegionDominionParticipantInfo> info = new LinkedList<>();
+		info.addAll(participantInfo.values());
+		if (!info.isEmpty()) {
+			Collections.sort(info);
+			if (info.get(0) != null) {
+				return info.get(0);
+			}
+		}
+		return null;
+	}
+
 	public LegionDominionParticipantInfo getParticipantInfo(int legionId) {
 		if (!participantInfo.isEmpty() && participantInfo.containsKey(legionId)) {
 			return participantInfo.get(legionId);
@@ -157,5 +162,10 @@ public class LegionDominionLocation {
 				}
 			}
 		}
+	}
+
+	public synchronized void reset() {
+		participantInfo = new TreeMap<>();
+		legionsSortedByrank = new FastTable<>();
 	}
 }
