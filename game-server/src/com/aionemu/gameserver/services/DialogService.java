@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.services;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -438,6 +441,10 @@ public class DialogService {
 			case ABYSSRANK:
 				return player.getAbyssRank().getRank().getId() < value;
 			case TARGET_LEGION_DOMINION:
+				if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.WEDNESDAY
+						&& LocalDateTime.now().getHour() >= 8 && LocalDateTime.now().getHour() <= 10) {
+					return true;
+				}
 				if (player.getLegion() != null) {
 					if (player.getLegion().getCurrentLegionDominion() == value) {
 						return false;
