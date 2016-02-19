@@ -162,7 +162,7 @@
 	<portal_loc world_id="220080000" loc_id="2200808" x="411.4971" y="1452.091" z="274.5" h="30"/> <!-- Raksang Ruins Entrance/Exit -->
 	<!-- Idian Depths Dark -->
 	<portal_loc world_id="220100000" loc_id="2201000" x="688.5966" y="831.2409" z="514.8277" h="0"/> <!-- Starting Point -->
-	<portal_loc world_id="210090000" loc_id="2201001" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Beritra's Fist Garrison -->
+	<portal_loc world_id="220100000" loc_id="2201001" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Beritra's Fist Garrison -->
 	<!-- Nochsana Training Camp -->
 	<portal_loc world_id="300030000" loc_id="3000300" x="513" y="668" z="331"/>
 	<portal_loc world_id="400010000" loc_id="3000301" x="2890" y="754" z="1498.5786"/>
