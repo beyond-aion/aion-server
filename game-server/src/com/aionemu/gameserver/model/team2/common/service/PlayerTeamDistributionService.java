@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.team2.common.service;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -11,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
-import com.aionemu.gameserver.model.gameobjects.player.XPCape;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -20,6 +17,8 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.google.common.base.Predicate;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, nrg
@@ -74,14 +73,6 @@ public class PlayerTeamDistributionService {
 				rewardXp = 0;
 				rewardDp = 0;
 			}
-			if (member.getWorldId() == 301160000)
-				rewardXp = 0;
-			else if (filteredStats.mentorCount > 0) {
-				int cape = XPCape.values()[member.getLevel()].value();
-				if (cape < rewardXp) {
-					rewardXp = cape;
-				}
-			}
 
 			// Dmg percent correction
 			rewardXp *= damagePercent;
@@ -89,11 +80,7 @@ public class PlayerTeamDistributionService {
 			rewardAp *= damagePercent;
 
 			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
-
-			// DP reward
 			member.getCommonData().addDp(rewardDp);
-
-			// AP reward
 			if (owner.isRewardAP() && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
 				int ap = (int) rewardAp / filteredStats.players.size();

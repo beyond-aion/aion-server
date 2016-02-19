@@ -155,7 +155,7 @@ public class LegionService {
 			legionMemberEx.setNickname(player.getLegionMember().getNickname());
 			legionMemberEx.setSelfIntro(player.getLegionMember().getSelfIntro());
 			legionMemberEx.setPlayerClass(player.getPlayerClass());
-			legionMemberEx.setExp(player.getCommonData().getExp());
+			legionMemberEx.setLevelByExp(player.getCommonData().getExp());
 			legionMemberEx.setLastOnline(player.getCommonData().getLastOnline());
 			legionMemberEx.setWorldId(player.getPosition().getMapId());
 			legionMemberEx.setOnline(false);
