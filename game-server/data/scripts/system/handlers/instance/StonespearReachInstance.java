@@ -1,15 +1,12 @@
 package instance;
 
-import java.util.List;
-import java.util.concurrent.Future;
-
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,21 +22,23 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import javolution.util.FastTable;
+
+import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * @author Yeats
  */
 @InstanceID(301500000)
-public class StonespearRanchInstance extends GeneralInstanceHandler {
+public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private LegionDominionReward reward;
 	private Long startTime;
@@ -56,7 +55,7 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		reward = new LegionDominionReward(mapId, instanceId);
 		reward.setInstanceScoreType(InstanceScoreType.PREPARING);
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mapId, 855765, 231.14f, 264.399f, 96.23f, (byte) 1); // TODO change npcId
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mapId, 833284, 231.14f, 264.399f, 96.23f, (byte) 1);
 		temp.setStaticId(14);
 		SpawnEngine.spawnObject(temp, instanceId);
 		addWorldPoints();
@@ -74,8 +73,9 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!allowedPlayers.contains(player.getObjectId()))
+		if (!allowedPlayers.contains(player.getObjectId())) {
 			allowedPlayers.add(player.getObjectId());
+		}
 		if (!reward.isRewarded()) {
 			sendPacket(0, 0);
 		}
@@ -176,7 +176,8 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 			case 855786:
 			case 856466:
 			case 856467:
-			case 856468:	
+			case 856468:
+				checkRank(reward.getPoints(), false);
 				break;
 				default:
 					break;
@@ -232,9 +233,9 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 
 	private void reward() {
 		instance.doOnAllPlayers(player -> {
-			ItemService.addItem(player, reward.getRewardItem1(), reward.getRewardItem1Count());
-			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count());
-			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count());
+			ItemService.addItem(player, reward.getRewardItem1(), reward.getRewardItem1Count(), true);
+			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count(), true);
+			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count(), true);
 		});
 	}
 	
@@ -712,6 +713,32 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 		return null;
 	}
 
+	private void spawnGuardianStone(int stage) {
+		if (instanceRace == Race.ELYOS) {
+			switch (stage) {
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (stage) {
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
 	private boolean isValidPoint(float x, float y) {
 		return (MathUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (MathUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5)
 				&& (MathUtil.getDistance(x, y, 251.3068f, 264.307f) >= 2.5) && (MathUtil.getDistance(x, y, 231.2034f, 243.8273f) >= 2.5);
@@ -755,8 +782,7 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 		}
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-
-		// TODO teleport to waiting area
+		TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
 		return true;
 	}
 
@@ -788,6 +814,7 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 		}
 	}
 
+	@Override
 	public synchronized boolean canEnter(Player p) {
 		if (reward.getInstanceScoreType() == InstanceScoreType.END_PROGRESS) {
 			PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402947));
@@ -795,7 +822,7 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 		}
 		if (p.getLegion() != null) {
 			if (p.getLegion().getCurrentLegionDominion() > 0) {
-				if (getInstanceReward().getInstanceScoreType() == InstanceScoreType.PREPARING) {
+				if (reward.getInstanceScoreType() == InstanceScoreType.PREPARING) {
 					if (p.getLegion().getLegionId() == instanceLegion.getLegionId()) {
 						if (allowedPlayers.size() < 12) {
 							return true;
@@ -815,5 +842,36 @@ public class StonespearRanchInstance extends GeneralInstanceHandler {
 			PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402906));
 		}
 		return false;
+	}
+
+	@Override
+	public void onExitInstance(Player player) {
+		if (instanceLegion != null) {
+			switch (instanceLegion.getCurrentLegionDominion()) {
+				case 1:
+					TeleportService2.teleportTo(player, 220080000, 1770, 2667, 300);
+					break;
+				case 2:
+					TeleportService2.teleportTo(player, 220080000, 1474, 1748, 330);
+					break;
+				case 3:
+					TeleportService2.teleportTo(player, 220080000, 765, 1278, 255);
+					break;
+				case 4:
+					TeleportService2.teleportTo(player, 210070000, 1356, 622, 584);
+					break;
+				case 5:
+					TeleportService2.teleportTo(player, 210070000, 1195, 1607, 469);
+					break;
+				case 6:
+					TeleportService2.teleportTo(player, 210070000, 2361, 1557, 440);
+					break;
+					default:
+						TeleportService2.moveToBindLocation(player, true);
+						break;
+			}
+		} else {
+			TeleportService2.moveToBindLocation(player, true);
+		}
 	}
 }
