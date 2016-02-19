@@ -463,10 +463,10 @@ public class World {
 
 	public void despawn(VisibleObject object, boolean clearKnownlist) {
 		MapRegion oldMapRegion = object.getActiveRegion();
-		if (object.getActiveRegion() != null) { // can be null if an instance gets deleted?
-			if (object.getActiveRegion().getParent() != null)
-				object.getActiveRegion().getParent().removeObject(object);
-			object.getActiveRegion().remove(object);
+		if (oldMapRegion != null) { // can be null if an instance gets deleted?
+			if (oldMapRegion.getParent() != null)
+				oldMapRegion.getParent().removeObject(object);
+			oldMapRegion.remove(object);
 		}
 		object.getPosition().setIsSpawned(false);
 		if (oldMapRegion != null && object instanceof Creature) {
