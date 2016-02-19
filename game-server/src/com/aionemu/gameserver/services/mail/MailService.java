@@ -283,7 +283,7 @@ public class MailService {
 				if (attachedItem == null)
 					return;
 				if (player.getInventory().isFull()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL);
 					return;
 				}
 				player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL);
