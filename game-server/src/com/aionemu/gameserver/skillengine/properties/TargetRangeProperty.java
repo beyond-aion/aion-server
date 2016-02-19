@@ -125,10 +125,6 @@ public class TargetRangeProperty {
 
 				break;
 			case PARTY:
-				// fix for Restoration Relief(3934)
-				if (maxcount == 0) {
-					maxcount = 6;
-				}
 				// fix for Bodyguard(417)
 				if (maxcount == 1) {
 					break;
