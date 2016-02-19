@@ -31,23 +31,14 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.google.common.base.Preconditions;
 
 /**
- * @author ATracer
- * @author alexa026
+ * Calculations are based on the following research:<br>
+ * original: <a href="http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html">Link</a><br>
+ * backup: <a href="http://web.archive.org/web/20120111184941/http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/">Link</a><br>
+ * @author ATracer, alexa026
  */
 public class StatFunctions {
 
 	private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
-
-	/**
-	 * Temp method until the maxXp will be corrected in npc_template
-	 * 
-	 * @param maxXp
-	 * @param maxHp
-	 * @return Base XP value for reward
-	 */
-	private static int getBaseXp(int maxXp, int maxHp) {
-		return maxXp > maxHp * 2 ? maxXp : maxHp * 2;
-	}
 
 	/**
 	 * @param player
@@ -57,9 +48,7 @@ public class StatFunctions {
 	public static long calculateSoloExperienceReward(Player player, Creature target) {
 		int playerLevel = player.getCommonData().getLevel();
 		int targetLevel = target.getLevel();
-		// int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
-		int baseXP = getBaseXp(((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp(), ((Npc) target).getObjectTemplate().getStatsTemplate()
-			.getMaxHp());
+		int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
 		long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
 		return rewardXP;
@@ -72,22 +61,17 @@ public class StatFunctions {
 	 */
 	public static long calculateGroupExperienceReward(int maxLevelInRange, Creature target) {
 		int targetLevel = target.getLevel();
-		// int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
-		int baseXP = getBaseXp(((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp(), ((Npc) target).getObjectTemplate().getStatsTemplate()
-			.getMaxHp());
+		int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - maxLevelInRange);
 		long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
 		return rewardXP;
 	}
 
 	/**
-	 * ref: http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009- a.html
-	 * 
 	 * @param player
 	 * @param target
 	 * @return DP reward from target
 	 */
-
 	public static int calculateSoloDPReward(Player player, Creature target) {
 		int playerLevel = player.getCommonData().getLevel();
 		int targetLevel = target.getLevel();
@@ -403,7 +387,8 @@ public class StatFunctions {
 					Item secondShard = null;
 					if (isMainHand || isSkill) {
 						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
+						if (weapon.getItemTemplate().isTwoHandWeapon()
+							|| isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
 							secondShard = equipment.getOffHandPowerShard();
 					} else
 						firstShard = equipment.getOffHandPowerShard();
@@ -453,7 +438,7 @@ public class StatFunctions {
 		Stat2 mAttack;
 		if (isMainHand)
 			mAttack = attacker.getGameStats().getMainHandMAttack();
-		else 
+		else
 			mAttack = ((Player) attacker).getGameStats().getOffHandMAttack();
 		float resultDamage = mAttack.getCurrent();
 		if (attacker instanceof Player) {
@@ -461,9 +446,9 @@ public class StatFunctions {
 			Item weapon;
 			if (isMainHand)
 				weapon = equipment.getMainHandWeapon();
-			else 
+			else
 				weapon = equipment.getOffHandWeapon();
-			
+
 			if (weapon != null) {
 				WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
 				if (weaponStat == null)
@@ -478,11 +463,11 @@ public class StatFunctions {
 				}
 				float knowledge = attacker.getGameStats().getKnowledge().getCurrent() * 0.01f;
 				int diff = Math.round((totalMax - totalMin) * knowledge / 2);
-				
+
 				int negativeDiff = diff;
 				if (!isMainHand)
 					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
-				
+
 				resultDamage = mAttack.getBonus() + mAttack.getBase();
 				resultDamage += Rnd.get(-negativeDiff, diff);
 
@@ -496,7 +481,7 @@ public class StatFunctions {
 					} else {
 						firstShard = equipment.getOffHandPowerShard();
 					}
-					
+
 					if (firstShard != null) {
 						equipment.usePowerShard(firstShard, 1);
 						resultDamage += firstShard.getItemTemplate().getWeaponBoost();
@@ -936,8 +921,8 @@ public class StatFunctions {
 		if (distance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE || !stoped) {
 			player.getController().onStopMove();
 			player.getFlyController().onStopGliding();
-			player.getLifeStats()
-				.reduceHp(SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, player.getLifeStats().getMaxHp() + 1, 0, SM_ATTACK_STATUS.LOG.REGULAR, player);
+			player.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, player.getLifeStats().getMaxHp() + 1, 0, SM_ATTACK_STATUS.LOG.REGULAR,
+				player);
 			return true;
 		} else if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
 			float dmgPerMeter = player.getLifeStats().getMaxHp() * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f;
