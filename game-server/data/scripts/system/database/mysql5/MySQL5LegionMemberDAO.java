@@ -152,8 +152,8 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 				try {
 					resultSet.next();
 					legionMemberEx.setName(resultSet.getString("players.name"));
-					legionMemberEx.setExp(resultSet.getLong("players.exp"));
 					legionMemberEx.setPlayerClass(PlayerClass.valueOf(resultSet.getString("players.player_class")));
+					legionMemberEx.setLevelByExp(resultSet.getLong("players.exp"));
 					legionMemberEx.setLastOnline(resultSet.getTimestamp("players.last_online"));
 					legionMemberEx.setWorldId(resultSet.getInt("players.world_id"));
 
@@ -194,8 +194,8 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 				try {
 					resultSet.next();
 					legionMember.setObjectId(resultSet.getInt("id"));
-					legionMember.setExp(resultSet.getLong("exp"));
 					legionMember.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
+					legionMember.setLevelByExp(resultSet.getLong("exp"));
 					legionMember.setLastOnline(resultSet.getTimestamp("last_online"));
 					legionMember.setWorldId(resultSet.getInt("world_id"));
 
