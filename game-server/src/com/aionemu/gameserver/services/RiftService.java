@@ -198,7 +198,8 @@ public class RiftService {
 			spawned.setDespawnDelayed(true);
 			if (spawned.getAggroList().getList().isEmpty()) {
 				spawned.getController().cancelTask(TaskId.RESPAWN);
-				obj.getController().onDelete();
+				if (!spawned.getLifeStats().isAlreadyDead())
+					obj.getController().onDelete();
 			}
 		}
 

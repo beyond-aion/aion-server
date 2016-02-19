@@ -9,7 +9,6 @@ import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -17,7 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Yeats

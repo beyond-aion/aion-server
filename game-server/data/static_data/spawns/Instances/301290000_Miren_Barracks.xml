@@ -2,25 +2,25 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="301290000">
 		<!-- Huge Abyss Statue -->
-		<spawn npc_id="235538" respawn_time="295">
+		<spawn npc_id="235538">
 			<spot x="546" y="365" z="180.7989" h="90" />
 			<spot x="618" y="459" z="197.6905" h="90" />
 		</spawn>
 		<!-- Solid Abyss Statue -->
-		<spawn npc_id="235537" respawn_time="295">
+		<spawn npc_id="235537">
 			<spot x="425" y="277" z="191.7279" h="90" />
 			<spot x="431" y="458" z="197.7089" h="90" />
 			<spot x="396" y="594" z="191.1671" h="90" />
 		</spawn>
 		<!-- Small Abyss Statue -->
-		<spawn npc_id="235536" respawn_time="295">
+		<spawn npc_id="235536">
 			<spot x="518" y="565" z="177.2951" h="90" />
 			<spot x="626" y="599" z="191.1154" h="90" />
 			<spot x="546" y="436" z="180.9079" h="90" />
 			<spot x="649" y="277" z="191.7237" h="90" />
 		</spawn>
 		<!-- 1241_Temporary Door -->
-		<spawn npc_id="700547" respawn_time="295">
+		<spawn npc_id="700547">
 			<spot x="410.6266" y="289.4476" z="190.4958" static_id="11" />
 			<spot x="412.3857" y="489.1418" z="193.3766" static_id="8" />
 			<spot x="413.2979" y="607.0612" z="189.7931" static_id="82" />
@@ -36,39 +36,39 @@
 			<spot x="636.7372" y="488.0935" z="193.3766" static_id="7" />
 		</spawn>
 		<!-- Baranath Tribunus -->
-		<spawn npc_id="233710" respawn_time="295">
+		<spawn npc_id="233710">
 			<spot x="658.1569" y="581.4169" z="191.1616" h="60" />
 		</spawn>
 		<!-- Baranath Sniper Captain -->
-		<spawn npc_id="233687" respawn_time="295">
+		<spawn npc_id="233687">
 			<spot x="657.9627" y="259.1755" z="191.7911" h="60" />
 		</spawn>
 		<!-- Baranath Protector -->
-		<spawn npc_id="233698" respawn_time="295">
+		<spawn npc_id="233698">
 			<spot x="658.6522" y="458.7315" z="197.6905" h="75" />
 		</spawn>
 		<!-- Baranath Medic Captain -->
-		<spawn npc_id="233688" respawn_time="295">
+		<spawn npc_id="233688">
 			<spot x="431.8071" y="279.6655" z="191.7845" h="73" />
 		</spawn>
 		<!-- Baranath High Shaman -->
-		<spawn npc_id="233699" respawn_time="295">
+		<spawn npc_id="233699">
 			<spot x="543.9845" y="448.3961" z="180.9124" h="73" />
 		</spawn>
 		<!-- Baranath Doctor -->
-		<spawn npc_id="233841" respawn_time="295">
+		<spawn npc_id="233841">
 			<spot x="511.7796" y="446.6935" z="180.8928" h="110" />
 		</spawn>
 		<!-- Baranath Chief Doctor -->
-		<spawn npc_id="233700" respawn_time="295">
+		<spawn npc_id="233700">
 			<spot x="433.9381" y="458.1055" z="197.7089" h="110" />
 		</spawn>
 		<!-- Baranath Blade Captain -->
-		<spawn npc_id="233685" respawn_time="295">
+		<spawn npc_id="233685">
 			<spot x="551.1037" y="358.4648" z="180.325" h="73" />
 		</spawn>
 		<!-- Baranath Chief Medic -->
-		<spawn npc_id="233712" respawn_time="295">
+		<spawn npc_id="233712">
 			<spot x="434.0948" y="581.3936" z="191.1661" h="60" />
 		</spawn>
 		<!-- Enraged Miren Prince -->

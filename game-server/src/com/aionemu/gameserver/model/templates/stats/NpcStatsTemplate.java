@@ -33,9 +33,6 @@ public class NpcStatsTemplate extends StatsTemplate {
 		return speeds == null ? 0 : speeds.getGroupRunSpeedFight();
 	}
 
-	/**
-	 * @return the power
-	 */
 	public int getMagicalAttack() {
 		return matk;
 	}
@@ -44,11 +41,12 @@ public class NpcStatsTemplate extends StatsTemplate {
 		this.matk = matk;
 	}
 
-	/**
-	 * @return the maxXp
-	 */
 	public int getMaxXp() {
 		return maxXp;
+	}
+	
+	public void setMaxXp(int maxXp) {
+		this.maxXp = maxXp;
 	}
 
 }

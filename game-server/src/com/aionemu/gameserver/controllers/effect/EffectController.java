@@ -11,7 +11,6 @@ import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -143,13 +142,7 @@ public class EffectController {
 			// max 3 aura effects or 1 toggle skill in noshoweffects
 			if (nextEffect.isToggle() && nextEffect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW) {
 				int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
-				Collection<Effect> filteredMap = (nextEffect.getSkillSubType() == SkillSubType.CHANT ? this.getAuraEffects() : this.getNoShowToggleEffects());
-				// for ranger 2 toggle
-				if (nextEffect.getEffector() instanceof Player) {
-					Player player = (Player) nextEffect.getEffector();
-					if (player.getPlayerClass() == PlayerClass.RANGER)
-						mts = 2;
-				}
+				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffects();
 				if (filteredMap.size() >= mts) {
 					Iterator<Effect> iter = filteredMap.iterator();
 					iter.next().endEffect();
@@ -932,61 +925,54 @@ public class EffectController {
 	}
 
 	public void checkEffectCooldownId(Effect effect) {
-		Collection<Effect> effects = this.getAbnormalEffectsToShow();
-		int delayId = effect.getSkillTemplate().getCooldownId();
-		int rDelay = 0;
+		Collection<Effect> effects = getAbnormalEffectsToShow();
+		int cdId = effect.getSkillTemplate().getCooldownId();
+		int copiedId = 0;
 		int size = 0;
-		if (delayId == 1)
+		if (cdId == 1)
 			return;
-		switch (delayId) {
-			case 273:
-			case 353:
+		switch (cdId) {
+			case 273: // Erosion & Flamecage
+			case 353: // Lockdown & Dazing Severe Blow
 				size = 2;
 				break;
 			case 6:
 				size = 10;
 				break;
 		}
-		rDelay = delayId;
-
+		copiedId = cdId;
 		if (effects.size() >= size) {
 			int i = 0;
 			Effect toRemove = null;
-			Iterator<Effect> iter2 = effects.iterator();
-			while (iter2.hasNext()) {
-				Effect nextEffect = iter2.next();
-				if (nextEffect.getSkillTemplate().getCooldownId() == rDelay && nextEffect.getTargetSlot() == effect.getTargetSlot()) {
+			for (Effect eff : effects) {
+				if (eff.getSkillTemplate().getCooldownId() == copiedId && eff.getTargetSlot() == effect.getTargetSlot()) {
 					i++;
 					if (toRemove == null)
-						toRemove = nextEffect;
+						toRemove = eff;
 				}
 			}
 			if (i >= size && toRemove != null)
 				toRemove.endEffect();
 		}
 		// archer buffs
-		Iterator<Effect> iter2 = effects.iterator();
 		int count = 0;
 		Effect toRemove = null;
-		while (iter2.hasNext()) {
-			Effect nextEffect = iter2.next();
-			switch (nextEffect.getSkillTemplate().getCooldownId()) {
-				case 2005:// Dodging I
-				case 2020:// Dodging
-				case 2022:// Focused Shots
-				case 2024:// Aiming
-				case 2026:// Bestial Fury
-				case 2028:// Hunter's Eye
-				case 2030:// Strong Shots
+		for (Effect eff : effects) {
+			switch (eff.getSkillTemplate().getCooldownId()) {
+				case 2020: // Dodging
+				case 2022: // Focused Shots
+				case 2024: // Aiming
+				case 2026: // Bestial Fury
+				case 2028: // Hunter's Eye
+				case 2030: // Strong Shots
 					count++;
 					if (toRemove == null) {
-						toRemove = nextEffect;
+						toRemove = eff;
 						continue;
 					}
-					if (count >= 2) {
+					if (count >= 2 && cdId >= 2020 && cdId <= 2030)
 						toRemove.endEffect();
-						break;
-					}
+					break;
 			}
 		}
 	}
