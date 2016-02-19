@@ -115,8 +115,10 @@ public class PrivateStoreService {
 		if (boughtItems == null || boughtItems.isEmpty())
 			return; // Invalid items found or store was empty
 
-		if (buyer.getInventory().getFreeSlots() < boughtItems.size())
-			return; // TODO message
+		if (buyer.getInventory().getFreeSlots() < boughtItems.size()) {
+			PacketSendUtility.sendPacket(buyer, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+			return;
+		}
 
 		long price = 0;
 		for (TradePSItem boughtItem : boughtItems)
@@ -128,7 +130,7 @@ public class PrivateStoreService {
 		}
 
 		if (price > buyer.getInventory().getKinah())
-			return; // TODO message
+			return;
 
 		for (TradePSItem boughtItem : boughtItems) {
 			Item item = seller.getInventory().getItemByObjId(boughtItem.getItemObjId());
@@ -146,6 +148,10 @@ public class PrivateStoreService {
 
 				ItemService.addItem(buyer, item, boughtItem.getCount());
 
+				if (boughtItem.getCount() == 1)
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getNameId()));
+				else
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(boughtItem.getCount(), item.getNameId()));
 				log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + boughtItem.getCount()
 					+ "] to [Buyer: " + buyer.getName() + "] for [Price: " + boughtItem.getPrice() * boughtItem.getCount() + "]");
 			}
