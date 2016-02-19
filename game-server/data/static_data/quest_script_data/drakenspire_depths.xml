@@ -24,7 +24,7 @@
 	<item_collecting id="18953" start_npc_ids="209678" start_dialog_id="4762" end_npc_ids="804711" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
 	<item_collecting id="28953" start_npc_ids="209743" start_dialog_id="4762" end_npc_ids="804738" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
 	
-	<!-- MONSTER HUND -->
+	<!-- MONSTER HUNT -->
 	<monster_hunt id="18951" start_npc_ids="209678" start_dialog_id="4762" end_npc_ids="804711"/>
 	<monster_hunt id="18952" start_npc_ids="209678" start_dialog_id="4762" end_npc_ids="804711"/>
 	<monster_hunt id="28951" start_npc_ids="209743" start_dialog_id="4762" end_npc_ids="804738"/>
