@@ -16559,15 +16559,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have sold %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400134, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(int value0) {
+		return new SM_SYSTEM_MESSAGE(1400134, new DescriptionId(value0));
 	}
 
 	/**
 	 * You have sold %num1 %0s.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(int num1, String value0s) {
-		return new SM_SYSTEM_MESSAGE(1400135, num1, value0s);
+	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(long num1, int value0) {
+		return new SM_SYSTEM_MESSAGE(1400135, new DescriptionId(value0), num1);
 	}
 
 	/**
