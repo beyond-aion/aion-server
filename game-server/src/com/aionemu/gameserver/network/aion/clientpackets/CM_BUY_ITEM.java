@@ -72,7 +72,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			}
 
 			switch (tradeActionId) {
-				case 0:// private store
+				case 0:// private store (in this case its not itemId/objId, but item index in sellers list...)
 				case 1:// sell to shop
 				case 13:// buy from shop
 				case 14:// buy from abyss shop
@@ -88,9 +88,6 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
@@ -116,7 +113,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			Npc npc = (Npc) target;
 			TradeListTemplate tradeTemplate = null;
 			if (DialogService.isSubDialogRestricted(0, player, npc)) {
-				AuditLogger.info(player, "Player " + player.getName() + " try buy item no right ");
+				AuditLogger.info(player, "Tried to buy item without right.");
 				return;
 			}
 			switch (tradeActionId) {

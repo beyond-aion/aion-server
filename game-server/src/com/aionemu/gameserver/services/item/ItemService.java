@@ -60,8 +60,18 @@ public class ItemService {
 		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, false, DEFAULT_UPDATE_PREDICATE);
 	}
 
-	public static long addItem(Player player, Item sourceItem, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, allowInventoryOverflow, predicate);
+	/**
+	 * Add new item based on all sourceItem values, but with different count
+	 */
+	public static long addItem(Player player, Item sourceItem, long count) {
+		return addItem(player, sourceItem.getItemId(), count, sourceItem, false, DEFAULT_UPDATE_PREDICATE);
+	}
+
+	/**
+	 * Add new item based on all sourceItem values, but with different count
+	 */
+	public static long addItem(Player player, Item sourceItem, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
+		return addItem(player, sourceItem.getItemId(), count, sourceItem, allowInventoryOverflow, predicate);
 	}
 
 	/**
