@@ -105,4 +105,6 @@ public interface InstanceHandler {
 	
 	void onSpecialEvent(Npc npc);
 
+	boolean canEnter(Player player);
+
 }

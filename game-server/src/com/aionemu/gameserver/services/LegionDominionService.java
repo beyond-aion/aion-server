@@ -5,12 +5,17 @@ import java.util.Collection;
 import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Yeats
@@ -31,7 +36,6 @@ public class LegionDominionService {
 		DAOManager.getDAO(LegionDominionDAO.class).loadLegionDominionLocations(legionDominionLocations);
 		for (LegionDominionLocation loc : legionDominionLocations.values()) {
 			loc.setParticipantInfo(DAOManager.getDAO(LegionDominionDAO.class).loadParticipants(loc));
-			System.out.println("Loaded participant info for: " + loc.getLocationId());
 		}
 	}
 	
@@ -44,7 +48,7 @@ public class LegionDominionService {
 	}
 
 	/**
-	 * @param legion
+	 * @param legionId
 	 * @param locId
 	 * @return
 	 */
@@ -83,5 +87,44 @@ public class LegionDominionService {
 				}
 			}
 		}
+	}
+
+	public void startWeeklyCalculation() {
+		for (LegionDominionLocation loc : legionDominionLocations.values()) {
+			//find winner and change locations legionId to winners Id
+			LegionDominionParticipantInfo winner = loc.getWinner();
+			if (winner != null) {
+				Legion winningLegion = LegionService.getInstance().getLegion(winner.getLegionId());
+				if (winningLegion != null && !winningLegion.isDisbanding()) {
+					winningLegion.setOccupiedLegionDominion(loc.getLocationId());
+					loc.setLegionId(winningLegion.getLegionId());
+				} else {
+					loc.setLegionId(0);
+				}
+			} else {
+				loc.setLegionId(0);
+			}
+			loc.setOccupiedDate(new Timestamp(System.currentTimeMillis()));
+
+			//reset all participated legions & store them to db
+			for (LegionDominionParticipantInfo info : loc.getParticipantInfo().values()) {
+				Legion legion = LegionService.getInstance().getLegion(info.getLegionId());
+				if (legion != null) {
+					if (winner != null && info.getLegionId() != winner.getLegionId()) {
+						legion.setOccupiedLegionDominion(0);
+					}
+					legion.setLastLegionDominion(loc.getLocationId());
+					legion.setCurrentLegionDominion(0);
+					DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+					DAOManager.getDAO(LegionDominionDAO.class).delete(info);
+					PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_DOMINION_RANK(loc.getLocationId()));
+				}
+			}
+			//reset locations participant info and update this location
+			loc.reset();
+			DAOManager.getDAO(LegionDominionDAO.class).updateLegionDominionLocation(loc);
+		}
+
+		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_LEGION_DOMINION_LOC_INFO()));
 	}
 }

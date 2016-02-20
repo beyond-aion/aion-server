@@ -42,15 +42,6 @@ public class StigmaService {
 
 	private static final Logger log = LoggerFactory.getLogger(StigmaService.class);
 
-	private static String clearName(String itemName) {
-		String[] splits = itemName.split(" ");
-		String newName = "";
-		for (int i = 0; i < (splits.length - 1); i++) {
-			newName += splits[i];
-		}
-		return newName;
-	}
-
 	/**
 	 * @param player
 	 * @param resultItem
@@ -61,11 +52,11 @@ public class StigmaService {
 		if (resultItem.getItemTemplate().isStigma()) {
 			Stigma stigmaInfo = resultItem.getItemTemplate().getStigma();
 			int stigmaLevel = resultItem.getEnchantLevel();
-			String rsultItemName = clearName(resultItem.getItemName());
+			String stigmaName = resultItem.getItemName().replace(" ", "").toUpperCase();
 			boolean replace = false;
 			for (Item i : player.getEquipment().getEquippedItemsAllStigma()) {
 				if (i.getEquipmentSlot() == slot) {
-					if (!clearName(i.getItemName()).equals(rsultItemName))
+					if (!stigmaName.equals(i.getItemName().replace(" ", "").toUpperCase()))
 						return false;
 					removeStigmaSkills(player, i.getItemTemplate().getStigma(), i.getEnchantLevel(), i.getEnchantLevel() > resultItem.getEnchantLevel());
 					replace = true;
@@ -78,7 +69,7 @@ public class StigmaService {
 					AuditLogger.info(player, "Possible client hack stigma count big :O");
 					return false;
 				} else if (ItemSlot.isAdvancedStigma(slot)
-					&& getPossibleAdvancedStigmaCount(player) <= player.getEquipment().getEquippedItemsAdvencedStigma().size()) {
+					&& getPossibleAdvancedStigmaCount(player) <= player.getEquipment().getEquippedItemsAdvancedStigma().size()) {
 					AuditLogger.info(player, "Possible client hack advanced stigma count big :O");
 					return false;
 				}

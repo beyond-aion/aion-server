@@ -38,7 +38,7 @@ public enum RewardType {
 			if (player.isLegionMember() && player.getLegion().hasBonus()) {
 				legionOnlineBonus = 1.1f;
 			}
-			return (long) (reward * player.getRates().getXpRate() * statRate * legionOnlineBonus);
+			return (long) Math.min(reward * player.getRates().getXpRate() * statRate * legionOnlineBonus, player.getCommonData().getExpNeed() * 0.2f);
 		}
 	},
 	GROUP_HUNTING {
@@ -50,7 +50,7 @@ public enum RewardType {
 			if (player.isLegionMember() && player.getLegion().hasBonus()) {
 				legionOnlineBonus = 1.1f;
 			}
-			return (long) (reward * player.getRates().getGroupXpRate() * statRate * legionOnlineBonus);
+			return (long) Math.min(reward * player.getRates().getGroupXpRate() * statRate * legionOnlineBonus, player.getCommonData().getExpNeed() * 0.2f);
 		}
 	},
 	PVP_KILL {

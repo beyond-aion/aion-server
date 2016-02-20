@@ -100,13 +100,10 @@ public class PrisonRestrictions extends AbstractRestrictions {
 		return player.isInPrison() || player.getWorldId() == WorldMapType.DE_PRISON.getId() || player.getWorldId() == WorldMapType.DF_PRISON.getId();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.restrictions.Restrictions#canPrivateStore(com.aionemu.gameserver.model.gameobjects.player.Player)
-	 */
 	@Override
 	public boolean canPrivateStore(Player player) {
 		if (isInPrison(player)) {
+			PacketSendUtility.sendMessage(player, "You cannot open a private store in prison!");
 			return false;
 		}
 

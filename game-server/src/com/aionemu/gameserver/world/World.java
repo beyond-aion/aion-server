@@ -222,11 +222,32 @@ public class World {
 	 * Finds VisibleObject by objectId.
 	 * 
 	 * @param objectId
-	 *          - objectId of AionOabject
-	 * @return AionObject
+	 *          - objectId of AionObject or null if not in world
+	 * @return VisibleObject
 	 */
 	public VisibleObject findVisibleObject(int objectId) {
 		return allObjects.get(objectId);
+	}
+
+	/**
+	 * Finds Npc by objectId.
+	 * 
+	 * @param objectId
+	 *          - objectId of Npc
+	 * @return Npc or null if not in world or object ID belongs to other AionObject type in world.
+	 */
+	public Npc findNpc(int objectId) {
+		return findVisibleObject(objectId) instanceof Npc ? (Npc) findVisibleObject(objectId) : null;
+	}
+
+	/**
+	 * Check whether object is in world
+	 * 
+	 * @param objectId
+	 * @return
+	 */
+	public boolean isInWorld(int objectId) {
+		return allObjects.containsKey(objectId);
 	}
 
 	/**
@@ -236,7 +257,7 @@ public class World {
 	 * @return
 	 */
 	public boolean isInWorld(VisibleObject object) {
-		return allObjects.containsKey(object.getObjectId());
+		return isInWorld(object.getObjectId());
 	}
 
 	/**
@@ -363,6 +384,8 @@ public class World {
 	 * @param heading
 	 */
 	public void setPosition(VisibleObject object, int mapId, int instance, float x, float y, float z, byte heading) {
+		if (object == null)
+			return;
 		if (object.isSpawned())
 			despawn(object);
 		WorldMapInstance instanceMap = getWorldMap(mapId).getWorldMapInstanceById(instance);
@@ -412,6 +435,8 @@ public class World {
 	 *           when object is already spawned.
 	 */
 	public void spawn(VisibleObject object) {
+		if (object == null)
+			return;
 		if (object.getPosition().isSpawned())
 			throw new AlreadySpawnedException();
 
@@ -438,10 +463,10 @@ public class World {
 
 	public void despawn(VisibleObject object, boolean clearKnownlist) {
 		MapRegion oldMapRegion = object.getActiveRegion();
-		if (object.getActiveRegion() != null) { // can be null if an instance gets deleted?
-			if (object.getActiveRegion().getParent() != null)
-				object.getActiveRegion().getParent().removeObject(object);
-			object.getActiveRegion().remove(object);
+		if (oldMapRegion != null) { // can be null if an instance gets deleted?
+			if (oldMapRegion.getParent() != null)
+				oldMapRegion.getParent().removeObject(object);
+			oldMapRegion.remove(object);
 		}
 		object.getPosition().setIsSpawned(false);
 		if (oldMapRegion != null && object instanceof Creature) {

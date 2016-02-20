@@ -14328,22 +14328,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are too far from %0 to craft.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330040, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330040, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330041, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330041, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot start crafting as you have not learned the %0 skill.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330042, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330042, new DescriptionId(value0));
 	}
 
 	/**
@@ -14354,8 +14354,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your %0 skill is not good enough yet.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330044, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330044, new DescriptionId(value0));
 	}
 
 	/**
@@ -14366,15 +14366,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1330046, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(int value0) {
+		return new SM_SYSTEM_MESSAGE(1330046, new DescriptionId(value0));
 	}
 
 	/**
 	 * You cannot craft as you do not have %num1 %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1330047, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, int value0) {
+		return new SM_SYSTEM_MESSAGE(1330047, num1, new DescriptionId(value0));
 	}
 
 	/**
@@ -16559,15 +16559,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have sold %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400134, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(int value0) {
+		return new SM_SYSTEM_MESSAGE(1400134, new DescriptionId(value0));
 	}
 
 	/**
 	 * You have sold %num1 %0s.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(int num1, String value0s) {
-		return new SM_SYSTEM_MESSAGE(1400135, num1, value0s);
+	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(long num1, int value0) {
+		return new SM_SYSTEM_MESSAGE(1400135, new DescriptionId(value0), num1);
 	}
 
 	/**
@@ -21799,7 +21799,26 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * Stop Gomju from perpetrating a senseless massacre!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_CHAT_IDArena_Solo_S4_System5 = new SM_SYSTEM_MESSAGE(1401086);
-
+	/**
+	 * You cannot attack while on board.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ATTACK_RESTRICTION_RIDE = new SM_SYSTEM_MESSAGE(1401093);
+	/**
+	 * You cannot use this item while on board.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_RESTRICTION_RIDE = new SM_SYSTEM_MESSAGE(1401094);
+	/**
+	 * You cannot open a private store while on board.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE = new SM_SYSTEM_MESSAGE(1401095);
+	/**
+	 * You cannot gather while on board.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GATHER_RESTRICTION_RIDE = new SM_SYSTEM_MESSAGE(1401096);
+	/**
+	 * You cannot craft while on board.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_COMBINE_RESTRICTION_RIDE = new SM_SYSTEM_MESSAGE(1401097);
 	/**
 	 * You cannot use the commands /RecruitGroupMember or /RecruitAllianceMember right now.
 	 */
@@ -21814,72 +21833,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * A Master cannot take Work Orders.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_DONT_GET_COMBINETASK_MASTER = new SM_SYSTEM_MESSAGE(1401182);
-
-	/**
-	 * UI Zone messages
-	 */
-	/**
-	 * You have already learned this title.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_TOOLTIP_LEARNED_TITLE = new SM_SYSTEM_MESSAGE(901714);
-
-	/**
-	 * You do not have enough %0.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_INGAMESHOP_NOT_ENOUGH_CASH(String value0) {
-		return new SM_SYSTEM_MESSAGE(901706, value0);
-	}
-
-	/**
-	 * You have already learned this emote.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_TOOLTIP_LEARNED_EMOTION = new SM_SYSTEM_MESSAGE(901713);
-
-	/**
-	 * You can only use this when you have a Plastic Surgery Ticket.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_EDIT_CHAR_ALL_CANT_NO_ITEM = new SM_SYSTEM_MESSAGE(901752);
-
-	/**
-	 * You can only use this when you have a Gender Switch Ticket.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_EDIT_CHAR_GENDER_CANT_NO_ITEM = new SM_SYSTEM_MESSAGE(901754);
-
-	/**
-	 * Coordinates of current location: %WORLDNAME0 Region, X=%1 Y=%2 Z=%3
-	 */
-	public static SM_SYSTEM_MESSAGE STR_CMD_LOCATION_DESC(int worldId, float x, float y, float z) {
-		return new SM_SYSTEM_MESSAGE(230038, worldId, x, y, z);
-	}
-
-	/**
-	 * Busy in game
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_BUDDYLIST_BUSY = new SM_SYSTEM_MESSAGE(900847);
-
-	/**
-	 * You don't have enough Kinah. It costs %num0 Kinah.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_NOT_ENOUGH_KINA(long num0) {
-		return new SM_SYSTEM_MESSAGE(901285, num0);
-	}
-
-	/**
-	 * You cannot use it because you belong to a different race.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MOVE_PORTAL_ERROR_INVALID_RACE = new SM_SYSTEM_MESSAGE(901354);
-
-	/**
-	 * You are not authorized to examine the corpse.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_LOOT_NO_RIGHT = new SM_SYSTEM_MESSAGE(901338);
-
-	/**
-	 * The Legion was leveled up to %0.
-	 */
-	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_LEVELUP(int newLevel) {
-		return new SM_SYSTEM_MESSAGE(900700, newLevel);
-	}
 
 	/**
 	 * %0 disappears in 10 minutes because your Abyss Rank changed.
@@ -22253,53 +22206,11 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * The script is too long to apply here.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SCRIPT_OVERFLOW = new SM_SYSTEM_MESSAGE(1401399);
-
+	
 	/**
-	 * According to your current rank, you will lose a certain amount of Glory Points each day.
+	 * You can't open any private shops as long as you remain hidden.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON = new SM_SYSTEM_MESSAGE(1402082);
-
-	/**
-	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_PERSONAL(String playerName, int gpLoss) {
-		return new SM_SYSTEM_MESSAGE(1402209, playerName, gpLoss);
-	}
-
-	/**
-	 * %num0 Glory Points have been deducted from you.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
-		return new SM_SYSTEM_MESSAGE(1402219, num0);
-	}
-
-	/**
-	 * The %1 on %0 has been destroyed.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402237, new DescriptionId(weapon), new DescriptionId(godstone));
-	}
-
-	/**
-	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402536, new DescriptionId(weapon), new DescriptionId(godstone));
-	}
-
-	/**
-	 * The %1 equipped in %0 will be destroyed in %2 minutes.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(int weapon, int godstone, int minutes) {
-		return new SM_SYSTEM_MESSAGE(1402537, new DescriptionId(weapon), new DescriptionId(godstone), minutes);
-	}
-
-	/**
-	 * The %1 equipped in %0 will be destroyed in %2 seconds.2
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(int weapon, int godstone, int seconds) {
-		return new SM_SYSTEM_MESSAGE(1402538, new DescriptionId(weapon), new DescriptionId(godstone), seconds);
-	}
+	public static final SM_SYSTEM_MESSAGE STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE = new SM_SYSTEM_MESSAGE(1401969);
 
 	/**
 	 * You cannot wrap %0.
@@ -22377,6 +22288,37 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
 		return new SM_SYSTEM_MESSAGE(1402031, itemName1);
 	}
+
+	/**
+	 * According to your current rank, you will lose a certain amount of Glory Points each day.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON = new SM_SYSTEM_MESSAGE(1402082);
+
+	/**
+	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_PERSONAL(String playerName, int gpLoss) {
+		return new SM_SYSTEM_MESSAGE(1402209, playerName, gpLoss);
+	}
+
+	/**
+	 * %num0 Glory Points have been deducted from you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1402219, num0);
+	}
+
+	/**
+	 * The %1 on %0 has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {
+		return new SM_SYSTEM_MESSAGE(1402237, new DescriptionId(weapon), new DescriptionId(godstone));
+	}
+
+	/**
+	 * Unable to receive due to lack of free space in inventory.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MAIL_TAKE_ALL_CANCEL = new SM_SYSTEM_MESSAGE(1402251);
 
 	/**
 	 * The Beritra Legion's Invasion Corridor has appeared.
@@ -22691,6 +22633,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN_ITEM() {
 		return new SM_SYSTEM_MESSAGE(1402541);
+	}
+
+	/**
+	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(int weapon, int godstone) {
+		return new SM_SYSTEM_MESSAGE(1402536, new DescriptionId(weapon), new DescriptionId(godstone));
+	}
+
+	/**
+	 * The %1 equipped in %0 will be destroyed in %2 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(int weapon, int godstone, int minutes) {
+		return new SM_SYSTEM_MESSAGE(1402537, new DescriptionId(weapon), new DescriptionId(godstone), minutes);
+	}
+
+	/**
+	 * The %1 equipped in %0 will be destroyed in %2 seconds.2
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(int weapon, int godstone, int seconds) {
+		return new SM_SYSTEM_MESSAGE(1402538, new DescriptionId(weapon), new DescriptionId(godstone), seconds);
 	}
 
 	/**
@@ -23125,6 +23088,69 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_FAIL(int value0) {
 		return new SM_SYSTEM_MESSAGE(1402931, new DescriptionId(value0));
 	}
+
+	/**
+	 * Coordinates of current location: %WORLDNAME0 Region, X=%1 Y=%2 Z=%3
+	 */
+	public static SM_SYSTEM_MESSAGE STR_CMD_LOCATION_DESC(int worldId, float x, float y, float z) {
+		return new SM_SYSTEM_MESSAGE(230038, worldId, x, y, z);
+	}
+
+	/**
+	 * The Legion was leveled up to %0.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_LEVELUP(int newLevel) {
+		return new SM_SYSTEM_MESSAGE(900700, newLevel);
+	}
+
+	/**
+	 * Busy in game
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_BUDDYLIST_BUSY = new SM_SYSTEM_MESSAGE(900847);
+
+	/**
+	 * You don't have enough Kinah. It costs %num0 Kinah.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_NOT_ENOUGH_KINA(long num0) {
+		return new SM_SYSTEM_MESSAGE(901285, num0);
+	}
+
+	/**
+	 * You are not authorized to examine the corpse.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_LOOT_NO_RIGHT = new SM_SYSTEM_MESSAGE(901338);
+
+	/**
+	 * You do not have enough %0.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_INGAMESHOP_NOT_ENOUGH_CASH(String value0) {
+		return new SM_SYSTEM_MESSAGE(901706, value0);
+	}
+
+	/**
+	 * You have already learned this emote.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_TOOLTIP_LEARNED_EMOTION = new SM_SYSTEM_MESSAGE(901713);
+
+	/**
+	 * You have already learned this title.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_TOOLTIP_LEARNED_TITLE = new SM_SYSTEM_MESSAGE(901714);
+
+	/**
+	 * You can only use this when you have a Plastic Surgery Ticket.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_EDIT_CHAR_ALL_CANT_NO_ITEM = new SM_SYSTEM_MESSAGE(901752);
+
+	/**
+	 * You can only use this when you have a Gender Switch Ticket.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_EDIT_CHAR_GENDER_CANT_NO_ITEM = new SM_SYSTEM_MESSAGE(901754);
+
+	/**
+	 * You cannot use it because you belong to a different race.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MOVE_PORTAL_ERROR_INVALID_RACE = new SM_SYSTEM_MESSAGE(901354);
 
 	private final int code;
 	private final Object[] params;

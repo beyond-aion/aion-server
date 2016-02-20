@@ -57,7 +57,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		}
 
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			// TODO message to send
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_RESTRICTION_RIDE);
 			return;
 		}
 		if (player.getInventory().isFull()) {

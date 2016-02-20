@@ -37,6 +37,7 @@ public class MoveTo extends AdminCommand {
 		if (params.length == 1 || params.length >= 3 && NumberUtils.isParsable(params[1])) {
 			WorldPosition pos = ChatUtil.getPosition(params);
 			if (pos != null && pos.getZ() != 0) {
+				pos.setH(admin.getHeading());
 				moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:"
 					+ pos.getZ());
 				return;
@@ -67,7 +68,6 @@ public class MoveTo extends AdminCommand {
 	}
 
 	private void moveTo(Player admin, WorldPosition pos, String message) {
-		pos.setH(admin.getHeading());
 		sendInfo(admin, message); // msg before teleport, otherwise client could ignore it
 		TeleportService2.teleportTo(admin, pos);
 	}

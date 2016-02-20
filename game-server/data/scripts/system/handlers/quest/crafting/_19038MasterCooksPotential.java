@@ -6,10 +6,12 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
  * @author Thuatan
  * @reworked vlog
+ * @modified Pad
  */
 public class _19038MasterCooksPotential extends QuestHandler {
 
@@ -37,6 +39,10 @@ public class _19038MasterCooksPotential extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
+		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
+			return sendQuestSelectionDialog(env);
+		}
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203784) { // Hestia
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -45,7 +51,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203785: { // Luelas

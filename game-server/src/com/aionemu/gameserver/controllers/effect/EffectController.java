@@ -671,10 +671,7 @@ public class EffectController {
 	private boolean removePower(Effect effect, int power) {
 		int effectPower = effect.removePower(power);
 
-		if (effectPower <= 0)
-			return true;
-		else
-			return false;
+		return effectPower <= 0;
 	}
 
 	/**

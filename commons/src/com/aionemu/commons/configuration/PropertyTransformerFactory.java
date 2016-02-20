@@ -2,13 +2,16 @@ package com.aionemu.commons.configuration;
 
 import java.io.File;
 import java.net.InetSocketAddress;
+import java.util.Collection;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import com.aionemu.commons.configuration.transformers.ArrayTransformer;
 import com.aionemu.commons.configuration.transformers.BooleanTransformer;
 import com.aionemu.commons.configuration.transformers.ByteTransformer;
 import com.aionemu.commons.configuration.transformers.CharTransformer;
 import com.aionemu.commons.configuration.transformers.ClassTransformer;
+import com.aionemu.commons.configuration.transformers.CollectionTransformer;
 import com.aionemu.commons.configuration.transformers.DoubleTransformer;
 import com.aionemu.commons.configuration.transformers.EnumTransformer;
 import com.aionemu.commons.configuration.transformers.FileTransformer;
@@ -23,77 +26,60 @@ import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 import com.aionemu.commons.utils.ClassUtils;
 
 /**
- * This class is responsible for creating property transformers. Each time it creates new instance of custom property transformer, but for build-in it
- * uses shared instances to avoid overhead
+ * This class is responsible for creating property transformers. Uses shared instances to avoid overhead.
  * 
  * @author SoulKeeper
+ * @modified Neon
  */
 public class PropertyTransformerFactory {
 
 	/**
-	 * Returns property transformer or throws {@link com.aionemu.commons.configuration.TransformationException} if can't create new one.
-	 * 
 	 * @param clazzToTransform
-	 *          Class that will is going to be transformed
+	 *          Class that is going to be transformed
 	 * @param tc
-	 *          {@link com.aionemu.commons.configuration.PropertyTransformer} class that will be instantiated
-	 * @return instance of PropertyTransformer
+	 *          {@link PropertyTransformer} class that will be instantiated
+	 * @return A shared instance of the {@link PropertyTransformer}
 	 * @throws TransformationException
-	 *           if can't instantiate {@link com.aionemu.commons.configuration.PropertyTransformer}
+	 *           If can't instantiate {@link PropertyTransformer} (most likely due to not supported class)
 	 */
 	@SuppressWarnings("rawtypes")
-	public static PropertyTransformer newTransformer(Class clazzToTransform, Class<? extends PropertyTransformer> tc) throws TransformationException {
+	public static PropertyTransformer getTransformer(Class<?> clazzToTransform) throws TransformationException {
 
-		// Just a hack, we can't set null to annotation value
-		if (tc == PropertyTransformer.class) {
-			tc = null;
-		}
-
-		if (tc != null) {
-			try {
-				return tc.newInstance();
-			} catch (Exception e) {
-				throw new TransformationException("Can't instantiate property transfromer", e);
-			}
-		}
-		if (clazzToTransform == Boolean.class || clazzToTransform == Boolean.TYPE) {
+		if (clazzToTransform == Boolean.class || clazzToTransform == Boolean.TYPE)
 			return BooleanTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Byte.class || clazzToTransform == Byte.TYPE) {
+		else if (clazzToTransform == Byte.class || clazzToTransform == Byte.TYPE)
 			return ByteTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Character.class || clazzToTransform == Character.TYPE) {
+		else if (clazzToTransform == Character.class || clazzToTransform == Character.TYPE)
 			return CharTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Double.class || clazzToTransform == Double.TYPE) {
+		else if (clazzToTransform == Double.class || clazzToTransform == Double.TYPE)
 			return DoubleTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Float.class || clazzToTransform == Float.TYPE) {
+		else if (clazzToTransform == Float.class || clazzToTransform == Float.TYPE)
 			return FloatTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Integer.class || clazzToTransform == Integer.TYPE) {
+		else if (clazzToTransform == Integer.class || clazzToTransform == Integer.TYPE)
 			return IntegerTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Long.class || clazzToTransform == Long.TYPE) {
+		else if (clazzToTransform == Long.class || clazzToTransform == Long.TYPE)
 			return LongTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Short.class || clazzToTransform == Short.TYPE) {
+		else if (clazzToTransform == Short.class || clazzToTransform == Short.TYPE)
 			return ShortTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == String.class) {
+		else if (clazzToTransform == String.class)
 			return StringTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform.isEnum()) {
+		else if (clazzToTransform.isEnum())
 			return EnumTransformer.SHARED_INSTANCE;
-			// TODO: Implement
-			// } else if (ClassUtils.isSubclass(clazzToTransform,
-			// Collection.class)) {
-			// return new CollectionTransformer();
-			// } else if (clazzToTransform.isArray()) {
-			// return new ArrayTransformer();
-		} else if (clazzToTransform == File.class) {
+		else if (ClassUtils.isSubclass(clazzToTransform, Collection.class))
+			return CollectionTransformer.SHARED_INSTANCE;
+		else if (clazzToTransform.isArray())
+			return ArrayTransformer.SHARED_INSTANCE;
+		else if (clazzToTransform == File.class)
 			return FileTransformer.SHARED_INSTANCE;
-		} else if (ClassUtils.isSubclass(clazzToTransform, InetSocketAddress.class)) {
+		else if (ClassUtils.isSubclass(clazzToTransform, InetSocketAddress.class))
 			return InetSocketAddressTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Pattern.class) {
+		else if (clazzToTransform == Pattern.class)
 			return PatternTransformer.SHARED_INSTANCE;
-		} else if (clazzToTransform == Class.class) {
+		else if (clazzToTransform == Class.class)
 			return ClassTransformer.SHARED_INSTANCE;
-		} else if (ClassUtils.isSubclass(clazzToTransform, TimeZone.class)) {
+		else if (ClassUtils.isSubclass(clazzToTransform, TimeZone.class))
 			return TimeZoneTransformer.SHARED_INSTANCE;
-		} else {
+		else
 			throw new TransformationException("Transformer not found for class " + clazzToTransform.getName());
-		}
 	}
 }

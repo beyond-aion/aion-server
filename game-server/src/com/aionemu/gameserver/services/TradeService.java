@@ -164,7 +164,7 @@ public class TradeService {
 
 		// 7. finally add items and update sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long notAddedCount = ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(),
+			long notAddedCount = ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), false,
 				new ItemUpdatePredicate(ItemAddType.BUY, ItemUpdateType.INC_ITEM_BUY));
 
 			LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());

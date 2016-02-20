@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -48,13 +47,6 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 
 		if (activePlayer.getLifeStats().isAlreadyDead() || targetPlayer.getLifeStats().isAlreadyDead()) {
 			log.warn("CM_EXCHANGE_REQUEST dead players target from {} to {}", activePlayer.getObjectId(), targetObjectId);
-			return;
-		}
-
-		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EXCHANGE) {
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer,
-				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
 

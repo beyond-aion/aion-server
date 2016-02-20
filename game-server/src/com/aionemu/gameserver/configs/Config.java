@@ -12,7 +12,6 @@ import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.AIConfig;
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
@@ -112,7 +111,6 @@ public class Config {
 			ConfigurableProcessor.process(SiegeConfig.class, mainProps);
 			ConfigurableProcessor.process(ThreadConfig.class, mainProps);
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
-			ConfigurableProcessor.process(AntiHackConfig.class, mainProps);
 
 			// Network
 			String network = "./config/network";
@@ -187,7 +185,6 @@ public class Config {
 			ConfigurableProcessor.process(SiegeConfig.class, mainProps);
 			ConfigurableProcessor.process(ThreadConfig.class, mainProps);
 			ConfigurableProcessor.process(WorldConfig.class, mainProps);
-			ConfigurableProcessor.process(AntiHackConfig.class, mainProps);
 
 		} catch (Exception e) {
 			throw new Error("Can't reload configuration: ", e);

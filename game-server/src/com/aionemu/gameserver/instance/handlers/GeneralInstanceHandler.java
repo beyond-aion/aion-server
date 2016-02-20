@@ -255,4 +255,9 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	public void onSpecialEvent(Npc npc) {
 		
 	}
+
+	@Override
+	public boolean canEnter(Player player) {
+		return true;
+	}
 }

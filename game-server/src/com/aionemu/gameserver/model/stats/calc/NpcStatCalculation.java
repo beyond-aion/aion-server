@@ -20,13 +20,13 @@ public class NpcStatCalculation {
 		float multiplier;
 		switch (rating) {
 			case NORMAL:
-				multiplier = 1.8f;
+				multiplier = 2.2f;
 				break;
 			case ELITE:
-				multiplier = 3.8f;
+				multiplier = 4f;
 				break;
 			case HERO:
-				multiplier = 3.2f;
+				multiplier = 5.4f;
 				break;
 			case LEGENDARY:
 				multiplier = 6.4f;
@@ -35,10 +35,7 @@ public class NpcStatCalculation {
 				multiplier = 1.0f;
 				break;
 		}
-		for (NpcRank ra : NpcRank.values()) {
-			if (ra.ordinal() <= rank.ordinal())
-				multiplier += 0.2f;
-		}
+		multiplier += rank.ordinal() * 0.2f;
 		return Math.round(maxHp * multiplier);
 	}
 

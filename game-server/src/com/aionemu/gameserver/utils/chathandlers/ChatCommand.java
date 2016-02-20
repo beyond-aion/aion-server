@@ -104,6 +104,8 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 				else
 					sb.append("\n" + info);
 			}
+			if (sb.toString().contains("["))
+				sb.append("\nNote: Parameters enclosed in square brackets are optional.");
 		} else {
 			sb.append("\n\tNo syntax info available.");
 		}

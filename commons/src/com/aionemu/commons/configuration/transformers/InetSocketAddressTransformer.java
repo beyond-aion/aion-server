@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
@@ -35,7 +36,7 @@ public class InetSocketAddressTransformer implements PropertyTransformer<InetSoc
 	 *           if somehting went wrong
 	 */
 	@Override
-	public InetSocketAddress transform(String value, Field field) throws TransformationException {
+	public InetSocketAddress transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		String[] parts = value.split(":");
 
 		if (parts.length != 2) {

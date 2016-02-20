@@ -12,7 +12,6 @@ import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemId;
@@ -27,7 +26,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.world.World;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 
@@ -47,33 +45,43 @@ public class ItemService {
 		}
 	}
 
-	public static long addItem(Player player, int itemId, long count) {
-		return addItem(player, itemId, count, DEFAULT_UPDATE_PREDICATE);
+	public static long addItem(Player player, int itemId, long count, boolean allowInvetoryOverflow) {
+		return addItem(player, itemId, count, null, allowInvetoryOverflow, DEFAULT_UPDATE_PREDICATE);
 	}
 
-	public static long addItem(Player player, int itemId, long count, ItemUpdatePredicate predicate) {
-		return addItem(player, itemId, count, null, predicate);
+	public static long addItem(Player player, int itemId, long count) {
+		return addItem(player, itemId, count, null, false, DEFAULT_UPDATE_PREDICATE);
+	}
+	
+	public static long addItem(Player player, int itemId, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
+		return addItem(player, itemId, count, null, allowInventoryOverflow, predicate);
 	}
 
 	/**
 	 * Add new item based on all sourceItem values
 	 */
 	public static long addItem(Player player, Item sourceItem) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, DEFAULT_UPDATE_PREDICATE);
+		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, false, DEFAULT_UPDATE_PREDICATE);
 	}
 
-	public static long addItem(Player player, Item sourceItem, ItemUpdatePredicate predicate) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, predicate);
+	/**
+	 * Add new item based on all sourceItem values, but with different count
+	 */
+	public static long addItem(Player player, Item sourceItem, long count) {
+		return addItem(player, sourceItem.getItemId(), count, sourceItem, false, DEFAULT_UPDATE_PREDICATE);
 	}
 
-	public static long addItem(Player player, int itemId, long count, Item sourceItem) {
-		return addItem(player, itemId, count, sourceItem, DEFAULT_UPDATE_PREDICATE);
+	/**
+	 * Add new item based on all sourceItem values, but with different count
+	 */
+	public static long addItem(Player player, Item sourceItem, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
+		return addItem(player, sourceItem.getItemId(), count, sourceItem, allowInventoryOverflow, predicate);
 	}
 
 	/**
 	 * Add new item based on sourceItem values
 	 */
-	public static long addItem(Player player, int itemId, long count, Item sourceItem, ItemUpdatePredicate predicate) {
+	private static long addItem(Player player, int itemId, long count, Item sourceItem, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
 		if (count <= 0)
 			return 0;
 
@@ -92,9 +100,9 @@ public class ItemService {
 		}
 
 		if (itemTemplate.isStackable()) {
-			count = addStackableItem(player, itemTemplate, count, predicate);
+			count = addStackableItem(player, itemTemplate, count, allowInventoryOverflow, predicate);
 		} else {
-			count = addNonStackableItem(player, itemTemplate, count, sourceItem, predicate);
+			count = addNonStackableItem(player, itemTemplate, count, sourceItem, allowInventoryOverflow, predicate);
 		}
 
 		if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
@@ -106,9 +114,9 @@ public class ItemService {
 	/**
 	 * Add non-stackable item to inventory
 	 */
-	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, ItemUpdatePredicate predicate) {
+	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
 		Storage inventory = player.getInventory();
-		while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
 
 			if (newItem.getExpireTime() != 0) {
@@ -155,7 +163,7 @@ public class ItemService {
 	/**
 	 * Add stackable item to inventory
 	 */
-	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, ItemUpdatePredicate predicate) {
+	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
 		Collection<Item> items;
 		// dirty & hacky check for arrows and shards...
 		if (itemTemplate.getItemGroup() == ItemGroup.POWER_SHARDS) {
@@ -178,7 +186,7 @@ public class ItemService {
 			count = inventory.increaseItemCount(item, count, predicate.getUpdateType(item, true));
 		}
 
-		while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId(), count);
 			count -= newItem.getItemCount();
 			inventory.add(newItem, predicate.getAddType());
@@ -217,7 +225,7 @@ public class ItemService {
 			return false;
 		}
 		for (QuestItems qi : questItems) {
-			addItem(player, qi.getItemId(), qi.getCount(), predicate);
+			addItem(player, qi.getItemId(), qi.getCount(), false, predicate);
 		}
 		return true;
 	}
@@ -258,31 +266,6 @@ public class ItemService {
 		public boolean changeItem(Item item) {
 			return true;
 		}
-	}
-
-	public static boolean dropItemToInventory(int playerObjectId, int itemId) {
-		return dropItemToInventory(World.getInstance().findPlayer(playerObjectId), itemId);
-	}
-
-	public static boolean dropItemToInventory(Player player, int itemId) {
-		if (player == null || !player.isOnline())
-			return false;
-
-		Storage storage = player.getInventory();
-		if (storage.getFreeSlots() < 1) {
-			List<Item> items = storage.getItemsByItemId(itemId);
-			boolean hasFreeStack = false;
-			for (Item item : items) {
-				if (item.getPersistentState() == PersistentState.DELETED || item.getItemCount() < item.getItemTemplate().getMaxStackCount()) {
-					hasFreeStack = true;
-					break;
-				}
-			}
-			if (!hasFreeStack)
-				return false;
-		}
-		// TODO: check the exact type in retail
-		return addItem(player, itemId, 1, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM)) == 0;
 	}
 
 	public static boolean checkRandomTemplate(int randomItemId) {

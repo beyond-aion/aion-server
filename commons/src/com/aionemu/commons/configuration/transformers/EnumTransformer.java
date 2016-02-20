@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -39,7 +40,7 @@ public class EnumTransformer implements PropertyTransformer<Enum<?>> {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Enum<?> transform(String value, Field field) throws TransformationException {
+	public Enum<?> transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		@SuppressWarnings("rawtypes")
 		Class<? extends Enum> clazz = (Class<? extends Enum>) field.getType();
 

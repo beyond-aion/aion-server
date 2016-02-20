@@ -49,12 +49,4 @@ public class HDDBanService {
 		else
 			return false;
 	}
-
-	public boolean isAllowed(String allowedSerial, String currentSerial) {
-		if (allowedSerial.isEmpty())
-			return true;
-		else
-			return allowedSerial.equalsIgnoreCase(currentSerial);
-	}
-
 }

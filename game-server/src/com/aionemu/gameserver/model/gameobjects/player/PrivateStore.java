@@ -87,6 +87,6 @@ public class PrivateStore {
 	 * @return the storeMessage
 	 */
 	public String getStoreMessage() {
-		return storeMessage;
+		return storeMessage == null ? "" : storeMessage;
 	}
 }

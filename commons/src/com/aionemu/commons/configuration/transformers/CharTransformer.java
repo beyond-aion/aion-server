@@ -1,6 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -27,7 +28,7 @@ public class CharTransformer implements PropertyTransformer<Character> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Character transform(String value, Field field) throws TransformationException {
+	public Character transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
 		try {
 			char[] chars = value.toCharArray();
 			if (chars.length > 1) {

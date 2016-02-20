@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import javolution.util.FastTable;
-
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +27,17 @@ import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -167,8 +170,9 @@ public class EventTemplate {
 
 						@Override
 						public void visit(Player player) {
-							if (player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
-								ItemService.dropItemToInventory(player, inventoryDrop.getDropItem());
+							if (player.isOnline() && player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
+								// TODO: check the exact type in retail
+								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, false, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
 						}
 					});
 				}

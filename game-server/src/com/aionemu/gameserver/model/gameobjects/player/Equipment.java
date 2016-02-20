@@ -673,7 +673,7 @@ public class Equipment {
 	/**
 	 * @return List<Item>
 	 */
-	public List<Item> getEquippedItemsAdvencedStigma() {
+	public List<Item> getEquippedItemsAdvancedStigma() {
 		List<Item> equippedItems = new FastTable<Item>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {

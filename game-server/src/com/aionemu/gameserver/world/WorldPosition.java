@@ -108,7 +108,7 @@ public class WorldPosition {
 	 * @return
 	 */
 	public int getInstanceId() {
-		return mapRegion.getParent().getInstanceId();
+		return mapRegion == null ? 1 : mapRegion.getParent().getInstanceId();
 	}
 
 	/**
