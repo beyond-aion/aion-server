@@ -36,7 +36,7 @@ public class ArrayTransformer implements PropertyTransformer<Object[]> {
 
 			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer((Class<?>) type);
 			List<Object> list = new FastTable<>();
-			for (String val : value.split(",[ ]*"))
+			for (String val : value.split("[ ]*,[ ]*"))
 				list.add(pt.transform(val, field, new Type[] {}));
 
 			return list.toArray();

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -37,13 +36,6 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 			return;
 
 		Player player = getConnection().getActivePlayer();
-
-		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_HOUSE) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-			return;
-		}
-
 		House house = player.getActiveHouse();
 		if (house == null || house.getHouseType() == HouseType.STUDIO)
 			return; // should not happen

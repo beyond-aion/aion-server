@@ -1,10 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.CharacterPasskey.ConnectType;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -12,7 +10,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHARACTER_SELECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_CHARACTER;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerService;
 
@@ -69,11 +66,6 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 					client.sendPacket(new SM_CHARACTER_SELECT(0));
 				else
 					client.sendPacket(new SM_CHARACTER_SELECT(1));
-			} else if (getConnection().getAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_CHARACTERS) {
-				client.sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-				client.sendPacket(new SM_MESSAGE(0, null,
-					"Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
-				return;
 			} else {
 				PlayerService.deletePlayer(playerAccData);
 				client.sendPacket(new SM_DELETE_CHARACTER(chaOid, playerAccData.getDeletionTimeInSeconds()));

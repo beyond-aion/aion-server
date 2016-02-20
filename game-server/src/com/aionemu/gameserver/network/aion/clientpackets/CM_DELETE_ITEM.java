@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -33,12 +32,6 @@ public class CM_DELETE_ITEM extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Storage inventory = player.getInventory();
 		Item item = inventory.getItemByObjId(itemObjectId);
-
-		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_DELETE_ITEMS) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-			return;
-		}
 
 		if (item != null) {
 			if (!item.getItemTemplate().isBreakable()) {

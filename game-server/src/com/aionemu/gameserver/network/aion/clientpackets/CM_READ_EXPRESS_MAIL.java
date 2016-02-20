@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -35,12 +34,6 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 		final Player player = getConnection().getActivePlayer();
 		boolean haveUnreadExpress = player.getMailbox().haveUnreadByType(LetterType.EXPRESS);
 		boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
-
-		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MAIL) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-			return;
-		}
 
 		switch (this.action) {
 			case 0:

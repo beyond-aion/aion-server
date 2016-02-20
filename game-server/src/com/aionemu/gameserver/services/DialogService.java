@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;

@@ -4,11 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -22,8 +20,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CREATE_CHARACTER;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AccountService;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -163,13 +159,6 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 
 		if (characterName.equals("B")) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_OPEN_CREATION_WINDOW));
-			return;
-		}
-
-		if (account.isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_CREATE_CHARACTERS) {
-			client.sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			client.sendPacket(new SM_MESSAGE(0, null,
-				"Account hacking attempt detected. You can't use this function. Please, contact your server support.", ChatType.GOLDEN_YELLOW));
 			return;
 		}
 

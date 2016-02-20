@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.Gender;
@@ -53,12 +52,6 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		}
 		Player player = PlayerService.getPlayer(objectId, account);
 		if (player == null) {
-			return;
-		}
-
-		if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_EDIT_CHARACTERS) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
 			return;
 		}
 
