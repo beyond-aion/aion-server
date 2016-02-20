@@ -10,47 +10,40 @@ import ai.AggressiveNpcAI2;
 
 /**
  * @author Yeats
- *
  */
 @AIName("LDF4_Advance_Ancient_Monster")
 public class AncientMonsterAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> despawnTask;
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		despawn();
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		if (getOwner().getDistanceToSpawnLocation() > 15) {
+		if (getOwner().getDistanceToSpawnLocation() > 15)
 			TargetEventHandler.onTargetGiveup(this);
-		}
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		cancelTask();
 	}
-	
+
 	private void despawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (getOwner() != null && !isAlreadyDead()) {
-					getOwner().getController().onDelete();
-				}
-			}
+		despawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			if (getOwner() != null && !isAlreadyDead())
+				getOwner().getController().onDelete();
 		}, 1000 * 60 * 60);
 	}
-	
+
 	private void cancelTask() {
-		if (despawnTask != null && !despawnTask.isCancelled()) {
+		if (despawnTask != null && !despawnTask.isCancelled())
 			despawnTask.cancel(true);
-		}
 	}
 }
