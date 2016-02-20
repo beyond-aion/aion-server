@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Bronze Coin" base_chance="5" restriction_race="ASMODIANS">
+		<gd_maps>
+			<gd_map map_id="210020000" name="Eltnen" />
+		</gd_maps>
+		<gd_items>
+			<gd_item id="186000007" name="Bronze Coin" />
+		</gd_items>
+	</gd_rule>
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Quest-Start Item" base_chance="3">
 		<gd_maps>
