@@ -22636,6 +22636,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
+	
+	/**
+	 * You need Ancestor's Relics to activate the Vocalith.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_FAIL() {
+		return new SM_SYSTEM_MESSAGE(1402539);
+	}
+	
+	/**
+	 * An Ancient Monster has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402540);
+	}
+	
+	/**
+	 * You used 1 Ancestor's Relic.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN_ITEM() {
+		return new SM_SYSTEM_MESSAGE(1402541);
+	}
 
 	/**
 	 * The Agent battle will start in 10 minutes.
