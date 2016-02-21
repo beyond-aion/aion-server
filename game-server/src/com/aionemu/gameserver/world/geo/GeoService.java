@@ -100,6 +100,12 @@ public class GeoService {
 		if (limit <= 0)
 			return true;
 
+		//a great fix (Copyright (c) (R) Yeats (TM) 2015-2016) @NA Dev Yeats
+		if (object.getWorldId() == 301500000) {
+			return (MathUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f &&
+					MathUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
+		}
+
 		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),
 			object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() * 0.95f, target.getX(), target.getY(),
 			target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() * 0.75f, limit, object.getInstanceId());
