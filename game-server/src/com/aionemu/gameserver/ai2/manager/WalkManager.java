@@ -148,7 +148,7 @@ public class WalkManager {
 	 * @return
 	 */
 	public static boolean isWalking(NpcAI2 npcAI) {
-		return npcAI.isMoveSupported() && (hasWalkRoutes(npcAI) || npcAI.getOwner().isAttackableNpc());
+		return npcAI.isMoveSupported() && hasWalkRoutes(npcAI);
 	}
 
 	/**

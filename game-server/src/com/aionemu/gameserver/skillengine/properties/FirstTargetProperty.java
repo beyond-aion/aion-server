@@ -33,11 +33,6 @@ public class FirstTargetProperty {
 				boolean changeTargetToMe = false;
 				if (skill.getFirstTarget() == null) {
 					skill.setFirstTarget(skill.getEffector());
-				} else if (skill.getFirstTarget().isAttackableNpc()) {
-					Player playerEffector = (Player) skill.getEffector();
-					if (skill.getFirstTarget().isEnemy(playerEffector)) {
-						changeTargetToMe = true;
-					}
 				} else if ((skill.getFirstTarget() instanceof Player) && (skill.getEffector() instanceof Player)) {
 					Player playerEffected = (Player) skill.getFirstTarget();
 					Player playerEffector = (Player) skill.getEffector();
