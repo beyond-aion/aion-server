@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
@@ -43,11 +42,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		final Player activePlayer = getConnection().getActivePlayer();
 		final Player targetPlayer = World.getInstance().findPlayer(Util.convertName(targetName));
 		
-		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_FRIENDS) {
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer,
-				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-		}	else if (targetPlayer == null || !targetPlayer.getCommonData().isOnline()) {
+		if (targetPlayer == null || !targetPlayer.getCommonData().isOnline()) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_OFFLINE);
 		}	else if (activePlayer.getObjectId().equals(targetPlayer.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY);

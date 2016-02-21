@@ -64,7 +64,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_CHAT_MESSAGE_WHISPER(0x0FF, State.IN_GAME));
 		addPacket(new CM_CHAT_PLAYER_INFO(0x0CA, State.IN_GAME));
 		addPacket(new CM_CHECK_MAIL_LIST(0x128, State.IN_GAME));
-		addPacket(new CM_CHECK_MAIL_UNK(0x1B8, State.IN_GAME)); //TODO
+		addPacket(new CM_CHECK_MAIL_UNK(0x1B8, State.IN_GAME)); // TODO
 		addPacket(new CM_CHECK_PAK(0x101, State.IN_GAME));
 		addPacket(new CM_CLIENT_COMMAND_ROLL(0x10E, State.IN_GAME));
 		addPacket(new CM_CLOSE_DIALOG(0x118, State.IN_GAME));
@@ -204,58 +204,55 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_VIEW_PLAYER_DETAILS(0x107, State.IN_GAME));
 		addPacket(new CM_WINDSTREAM(0x2E9, State.IN_GAME));
 		addPacket(new CM_LEGION_DOMINION_REQUEST_RANKING(0x0E0, State.IN_GAME));
-		
-		//addPacket(new CM_UNK(0x0A9, State.IN_GAME));
-		//addPacket(new CM_VIRTUAL_AUTH(0x14E, State.IN_GAME));
-		//addPacket(new CM_LOGIN_OUT(0x0A5, State.IN_GAME));
-		//addPacket(new CM_UNK(0x181, State.IN_GAME));
-		//addPacket(new CM_UNK(0x175, State.IN_GAME));
-		//addPacket(new CM_UNK(0x166, State.IN_GAME));
-		//addPacket(new CM_UNK(0x19E, State.IN_GAME));
-		//addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BB, State.IN_GAME));
-		//addPacket(new CM_REQUEST_RETURN_SERVER(0x1BC, State.IN_GAME));
-		//addPacket(new CM_DIRECT_ENTER_WORLD(0x1BA, State.IN_GAME));
-		//addPacket(new CM_UNK(0x0F4, State.IN_GAME));
-		//addPacket(new CM_UNK(0x176, State.IN_GAME));
-		//addPacket(new CM_UNK(0x120, State.IN_GAME));
-		//addPacket(new CM_UNK(0x121, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1B1, State.IN_GAME));
-		//addPacket(new CM_UNK(0x151, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1D8, State.IN_GAME));
-		//addPacket(new CM_UNK(0x165, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1B4, State.IN_GAME));
-		//addPacket(new CM_UNK(0x13A, State.IN_GAME));
-		//addPacket(new CM_GM_COMMAND_ACTION(0x199, State.IN_GAME));
-		//addPacket(new CM_UNK(0x18A, State.IN_GAME));
-		//addPacket(new CM_UNK(0x14C, State.IN_GAME));
-		//addPacket(new CM_UNK(0x197, State.IN_GAME));
-		//addPacket(new CM_UNK(0x0FD, State.IN_GAME));
-		//addPacket(new CM_UNK(0x188, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1B9, State.IN_GAME));
-		//addPacket(new CM_UNK(0x16F, State.IN_GAME));
-		//addPacket(new CM_UNK(0x186, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1DC, State.IN_GAME));
-		//addPacket(new CM_UNK(0x1AF, State.IN_GAME));
 
-		/*
-		 * //////////////////////// Not Added ///////////////////// addPacket(new CM_VIRTUAL_AUTH(0x14D, State.AUTHED)); addPacket(new CM_LOGIN_OUT(0xA4,
-		 * State.AUTHED, State.IN_GAME)); addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BA, State.IN_GAME)); addPacket(new CM_REQUEST_RETURN_SERVER(0x1BB,
-		 * State.IN_GAME)); addPacket(new CM_DIRECT_ENTER_WORLD(0x1B9, State.AUTHED));
+		// addPacket(new CM_UNK(0x0A9, State.IN_GAME));
+		// addPacket(new CM_UNK(0x181, State.IN_GAME));
+		// addPacket(new CM_UNK(0x175, State.IN_GAME));
+		// addPacket(new CM_UNK(0x166, State.IN_GAME));
+		// addPacket(new CM_UNK(0x19E, State.IN_GAME));
+		// addPacket(new CM_UNK(0x0F4, State.IN_GAME));
+		// addPacket(new CM_UNK(0x176, State.IN_GAME));
+		// addPacket(new CM_UNK(0x120, State.IN_GAME));
+		// addPacket(new CM_UNK(0x121, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1B1, State.IN_GAME));
+		// addPacket(new CM_UNK(0x151, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1D8, State.IN_GAME));
+		// addPacket(new CM_UNK(0x165, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1B4, State.IN_GAME));
+		// addPacket(new CM_UNK(0x13A, State.IN_GAME));
+		// addPacket(new CM_GM_COMMAND_ACTION(0x199, State.IN_GAME));
+		// addPacket(new CM_UNK(0x18A, State.IN_GAME));
+		// addPacket(new CM_UNK(0x14C, State.IN_GAME));
+		// addPacket(new CM_UNK(0x197, State.IN_GAME));
+		// addPacket(new CM_UNK(0x0FD, State.IN_GAME));
+		// addPacket(new CM_UNK(0x188, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1B9, State.IN_GAME));
+		// addPacket(new CM_UNK(0x16F, State.IN_GAME));
+		// addPacket(new CM_UNK(0x186, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1DC, State.IN_GAME));
+		// addPacket(new CM_UNK(0x1AF, State.IN_GAME));
+
+		/* ////////////////////// Not Added //////////////////////
+		 * addPacket(new CM_VIRTUAL_AUTH(0x14E, State.AUTHED, State.IN_GAME));
+		 * addPacket(new CM_LOGIN_OUT(0xA5, State.AUTHED, State.IN_GAME));
+		 * addPacket(new CM_DIRECT_ENTER_WORLD(0x1BA, State.IN_GAME));
+		 * addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BB, State.IN_GAME));
+		 * addPacket(new CM_REQUEST_RETURN_SERVER(0x1BC, State.IN_GAME));
 		 */
 
-		// ////////////////////// 4.7.0.5 REMOVED????? ///////////////////////
-		/*
-		 * addPacket(new CM_GODSTONE_SOCKET(0x13A, State.IN_GAME)); addPacket(new CM_IN_GAME_SHOP_INFO(0x184, State.IN_GAME)); addPacket(new
-		 * CM_SECURITY_TOKEN_REQUEST(0x1B6, State.IN_GAME)); addPacket(new CM_TIME_CHECK_QUIT(0x2A9, State.IN_GAME));
+		/* ////////////////////// 4.7.0.5 REMOVED(?) //////////////////////
+		 * addPacket(new CM_GODSTONE_SOCKET(0x13A, State.IN_GAME)); // happens via CM_MANASTONE now, since no npc is required anymore
+		 * addPacket(new CM_IN_GAME_SHOP_INFO(0x184, State.IN_GAME));
+		 * addPacket(new CM_SECURITY_TOKEN_REQUEST(0x1B6, State.IN_GAME));
+		 * addPacket(new CM_TIME_CHECK_QUIT(0x2A9, State.IN_GAME));
 		 */
 
-		// ////////////////////// TODO ///////////////////////
-		/*
-		 * addPacket(new CM_ADMIN_PANEL(0x149, State.IN_GAME)); addPacket(new CM_UNK_4_5(0x133, State.IN_GAME));
+		/* ////////////////////// TODO //////////////////////
+		 * addPacket(new CM_ADMIN_PANEL(0x149, State.IN_GAME));
+		 * addPacket(new CM_UNK_4_5(0x133, State.IN_GAME));
 		 */
 
-		// ////////////////////// 3.0 ///////////////////////
-		/*
+		/* ////////////////////// 3.0 //////////////////////
 		 * addPacket(new CM_UNK(0x136, State.IN_GAME));
 		 */
 	}

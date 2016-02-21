@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
 import com.aionemu.gameserver.configs.main.InGameShopConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
@@ -9,7 +8,6 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_IN_GAME_SHOP_CATEGORY_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_IN_GAME_SHOP_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_IN_GAME_SHOP_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TOLL_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -41,12 +39,6 @@ public class CM_IN_GAME_SHOP_INFO extends AionClientPacket {
 	protected void runImpl() {
 		if (InGameShopConfig.ENABLE_IN_GAME_SHOP) {
 			Player player = getConnection().getActivePlayer();
-
-			if (player.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_INGAMESHOP) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-				PacketSendUtility.sendMessage(player, "Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-				return;
-			}
 
 			switch (actionId) {
 				case 0x01: // item info

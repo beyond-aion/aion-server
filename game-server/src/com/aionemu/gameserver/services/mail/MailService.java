@@ -63,7 +63,7 @@ public class MailService {
 	 * @param attachedKinahCount
 	 * @param express
 	 */
-	public void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, int attachedItemCount,
+	public void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
 		long attachedKinahCount, LetterType letterType) {
 
 		if (letterType == LetterType.BLACKCLOUD || recipientName.length() > 16)

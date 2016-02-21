@@ -30,6 +30,8 @@ import javolution.util.FastTable;
  * Normal classes will be invoked via the reflective #newInstance() method.
  * Trying to use not implemented interfaces/abstract classes will throw an Exception.
  * 
+ * If the input is empty, an empty collection will be returned. Output is never null.
+ * 
  * @author Neon
  */
 public class CollectionTransformer implements PropertyTransformer<Collection<?>> {
@@ -81,7 +83,7 @@ public class CollectionTransformer implements PropertyTransformer<Collection<?>>
 			if (pt instanceof CollectionTransformer)
 				throw new UnsupportedDataTypeException("Nested collections are not implemented."); // needs class argument in transform()
 
-			for (String val : value.split(",[ ]*"))
+			for (String val : value.split("[ ]*,[ ]*"))
 				collection.add(pt.transform(val, field, innerGenericType));
 
 			return collection;

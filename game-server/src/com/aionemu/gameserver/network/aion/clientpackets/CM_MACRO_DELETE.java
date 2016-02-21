@@ -1,16 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.configs.main.AntiHackConfig;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_RESULT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Packet that is responsible for macro deletion.<br>
@@ -23,11 +16,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author SoulKeeper
  */
 public class CM_MACRO_DELETE extends AionClientPacket {
-
-	/**
-	 * Logger
-	 */
-	private static final Logger log = LoggerFactory.getLogger(CM_MACRO_DELETE.class);
 
 	/**
 	 * Macro id that has to be deleted
@@ -51,24 +39,9 @@ public class CM_MACRO_DELETE extends AionClientPacket {
 		macroPosition = readC();
 	}
 
-	/**
-	 * Logging
-	 */
 	@Override
 	protected void runImpl() {
-		log.debug("Request to delete macro #" + macroPosition);
-
-		Player activePlayer = getConnection().getActivePlayer();
-
-		if (activePlayer.getPlayerAccount().isHacked() && !AntiHackConfig.HDD_SERIAL_HACKED_ACCOUNTS_ALLOW_MANAGE_MACROSSES) {
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN);
-			PacketSendUtility.sendMessage(activePlayer,
-				"Account hacking attempt detected. You can't use this function. Please, contact your server support.");
-			return;
-		}
-
 		PlayerService.removeMacro(getConnection().getActivePlayer(), macroPosition);
-
 		sendPacket(SM_MACRO_RESULT.SM_MACRO_DELETED);
 	}
 }

@@ -22396,6 +22396,41 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
 		return new SM_SYSTEM_MESSAGE(1402397, nameId);
 	}
+	
+	/**
+	 * Release Berserk Anoha
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402483);
+	}
+	
+	/**
+	 * The Anoha Sealing Stone was used to release Anoha.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_ITEM() {
+		return new SM_SYSTEM_MESSAGE(1402484);
+	}
+	
+	/**
+	 * Summon Berserk Anoha
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ANOHA_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402503);
+	}
+	
+	/**
+	 * Berserk Anoha has been defeated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ANOHA_DIE() {
+		return new SM_SYSTEM_MESSAGE(1402504);
+	}
+	
+	/**
+	 * Berserk Anoha has disappeared
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ANOHA_DESPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402505);
+	}
 
 	/**
 	 * A battle is raging in the West Picket.
@@ -22578,6 +22613,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
+	
+	/**
+	 * You need Ancestor's Relics to activate the Vocalith.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_FAIL() {
+		return new SM_SYSTEM_MESSAGE(1402539);
+	}
+	
+	/**
+	 * An Ancient Monster has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402540);
+	}
+	
+	/**
+	 * You used 1 Ancestor's Relic.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN_ITEM() {
+		return new SM_SYSTEM_MESSAGE(1402541);
+	}
 
 	/**
 	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
@@ -22630,6 +22686,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 
 	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
 		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
+	}
+	
+	/**
+	 * Berserk Anoha will return to Kaldor in 30 minutes.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM() {
+		return new SM_SYSTEM_MESSAGE(1402584);
 	}
 
 	/**
