@@ -68,7 +68,7 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
 				stmt.setInt(1, loc.getLegionId());
 				stmt.setTimestamp(2, loc.getOccupiedDate());
-				stmt.setInt(3, loc.getLegionId());
+				stmt.setInt(3, loc.getLocationId());
 				stmt.execute();
 			}
 
