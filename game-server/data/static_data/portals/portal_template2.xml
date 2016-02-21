@@ -2013,6 +2013,43 @@
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
+	<!-- Cygnea -->
+	<portal_dialog npc_id="805170">
+		<portal_path dialog="104" loc_id="21007062"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805172">
+		<portal_path dialog="104" loc_id="21007062"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805173">
+		<portal_path dialog="104" loc_id="21007061"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805171">
+		<portal_path dialog="104" loc_id="21007061"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805166">
+		<portal_path dialog="104" loc_id="21007052"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805168">
+		<portal_path dialog="104" loc_id="21007052"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805169">
+		<portal_path dialog="104" loc_id="21007051"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805167">
+		<portal_path dialog="104" loc_id="21007051"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805162">
+		<portal_path dialog="104" loc_id="21007042"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805164">
+		<portal_path dialog="104" loc_id="21007042"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805163">
+		<portal_path dialog="104" loc_id="21007041"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805165">
+		<portal_path dialog="104" loc_id="21007041"/>
+	</portal_dialog>
 	<!-- Cygnea to Abyss -->
 	<portal_dialog npc_id="805260">
 		<portal_path dialog="104" loc_id="4000117" race="ELYOS">
@@ -2020,6 +2057,43 @@
 				<quest_req quest_id="1044" err_quest="27"/>
 			</portal_req>
 		</portal_path>
+	</portal_dialog>
+	<!-- Enshar -->
+	<portal_dialog npc_id="805184">
+		<portal_path dialog="104" loc_id="21007032"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805182">
+		<portal_path dialog="104" loc_id="21007032"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805185">
+		<portal_path dialog="104" loc_id="21007031"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805183">
+		<portal_path dialog="104" loc_id="21007031"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805180">
+		<portal_path dialog="104" loc_id="21007022"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805178">
+		<portal_path dialog="104" loc_id="21007022"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805179">
+		<portal_path dialog="104" loc_id="21007021"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805181">
+		<portal_path dialog="104" loc_id="21007021"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805176">
+		<portal_path dialog="104" loc_id="21007012"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805174">
+		<portal_path dialog="104" loc_id="21007012"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805175">
+		<portal_path dialog="104" loc_id="21007011"/>
+	</portal_dialog>
+	<portal_dialog npc_id="805177">
+		<portal_path dialog="104" loc_id="21007011"/>
 	</portal_dialog>
 	<!-- Enshar to Abyss -->
 	<portal_dialog npc_id="805259">
@@ -2344,21 +2418,21 @@
 	</portal_dialog>
 	<!--Stonespear Siege -->
 	<!-- ELYOS -->
-	<portal_dialog npc_id="833024"> <!--teleport_dialog_id="10" were not allowing entry till instance is done. -->
+	<portal_dialog npc_id="833024" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
-	<portal_dialog npc_id="833043">
+	<portal_dialog npc_id="833043" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
-	<portal_dialog npc_id="833045">
+	<portal_dialog npc_id="833045" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ELYOS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
@@ -2366,21 +2440,21 @@
 		</portal_path>
 	</portal_dialog>
 	<!-- ASMODIANS -->
-	<portal_dialog npc_id="833025">
+	<portal_dialog npc_id="833025" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
-	<portal_dialog npc_id="833044">
+	<portal_dialog npc_id="833044" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
-	<portal_dialog npc_id="833046">
+	<portal_dialog npc_id="833046" teleport_dialog_id="10">
 		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
 			<portal_req min_level="65">
 				 <item_req item_id="185000230" item_count="1"/> <!-- Requires Stonespear Key -->

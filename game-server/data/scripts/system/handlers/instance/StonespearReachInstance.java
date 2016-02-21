@@ -20,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionDominionService;
+import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -47,6 +48,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private Future<?> timer, failTask;
 	private Race instanceRace;
 	private Legion instanceLegion;
+    private int aethericKills = 0;
 	private final List<Integer> allowedPlayers = new FastTable<>();
 	private final List<Integer> deadPlayers = new FastTable<>();
 
@@ -74,9 +76,13 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		if (!allowedPlayers.contains(player.getObjectId())) {
-			allowedPlayers.add(player.getObjectId());
+            if (allowedPlayers.size() >= 12) {
+                TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+            } else {
+                allowedPlayers.add(player.getObjectId());
+            }
 		}
-		if (!reward.isRewarded()) {
+		if (reward != null && !reward.isRewarded()) {
 			sendPacket(0, 0);
 		}
 		if (instanceLegion == null) {
@@ -137,16 +143,22 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 				break;
 			//aetherfield
 			case 855764:
+                aethericKills++;
 				addPoints(npc, 500);
 				break;
 			case 855787:
+                aethericKills++;
 				addPoints(npc, 1000);
 				break;
 			case 856303: //kebbit
+                addPoints(npc, 1500);
+                break;
 			case 855810:
+                aethericKills++;
 				addPoints(npc, 1500);
 				break;
 			case 855833:
+                aethericKills++;
 				addPoints(npc, 2000);
 				break;
 			// bosses
@@ -171,12 +183,16 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 				checkRank(reward.getPoints(), true);
 				break;
 			//guardian stone
+            //elyos
 			case 855763:
-			case 855832:
 			case 855786:
+			case 855809:
+			case 855832:
+            //asmodian
 			case 856466:
 			case 856467:
 			case 856468:
+			case 856469:
 				checkRank(reward.getPoints(), false);
 				break;
 				default:
@@ -189,7 +205,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private synchronized void checkRank(int points, boolean bossKilled) {
 		cancelAllTasks();
 		int rank = 8;
-		if (points > 200000 && bossKilled) { //S-Rank
+		if (points > 67000 && bossKilled) { //S-Rank
 			reward.setFinalGP(120);
 			reward.setRewardItem1(186000242); //C-Med
 			reward.setRewardItem1Count(1);
@@ -240,10 +256,15 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 	
 	private void startInstance() {
+		Npc npc = instance.getNpc(833284);
+		if (npc != null) {
+			npc.getController().onDelete();
+		}
 		startStage1_1();
 	}
 
 	private void startStage1_1() { //minute 0 - 1
+		spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 1);
 		int npcId = 855765 + Rnd.get(0, 8);
 		spawnAtPointsTask(50, npcId, -1); 
 		spawnAtPointsTask(8000, 856305, 0);
@@ -280,6 +301,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855764, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855764, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855764, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+            startAethericFieldTask(1);
 
 			rndSpawnTask(500, npcId, 5, 8, 12);
 			rndSpawnTask(2500, npcId, 5, 7, 11);
@@ -296,7 +318,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void startStage1_4() { //minute 3 - 5
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			//12k points + 3k points
-			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855776, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // kaliga 855764
+			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855776, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // kaliga 855776
 			rndSpawnTask(35000, 856303, 2, 22, 23);
 			startStage2_1();
 		}, 60000));
@@ -304,6 +326,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	
 	private void startStage2_1() { //minute 5 - 6
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 2);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			//2k + 800 = 2,8k
@@ -351,6 +374,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855787, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855787, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855787, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+            startAethericFieldTask(2);
 
 			//2,6k + 1,2k = 3,8k
 			rndSpawnTask(500, npcId, 10, 11, 21);
@@ -377,6 +401,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage3_1() { //minute 10 - 11
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 3);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			int npcId3 = 855811 + Rnd.get(0, 8);
@@ -425,6 +450,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855810, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855810, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855810, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+            startAethericFieldTask(3);
 
 			//2,5k points
 			rndSpawnTask(500, npcId, 25, 7, 14);
@@ -464,6 +490,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage4_1() { // minute 16 - 17
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 4);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			int npcId3 = 855811 + Rnd.get(0, 8);
@@ -586,6 +613,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855833, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855833, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
 			SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, 855833, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+            startAethericFieldTask(4);
 
 			//2k + 2k + 3,2k = 7,2k
 			rndSpawnTask(500, npcId, 20, 9, 20);
@@ -653,6 +681,9 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawn(int npcId, int index) {
+		if (!reward.isStartProgress()) {
+			return;
+		}
 		if (index >= 0) {
 			WorldPosition point = points.get(index);
 			if (point != null) {
@@ -713,31 +744,24 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		return null;
 	}
 
-	private void spawnGuardianStone(int stage) {
-		if (instanceRace == Race.ELYOS) {
-			switch (stage) {
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (stage) {
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				default:
-					break;
-			}
+	private void spawnGuardianStone(boolean isElyos, int stage) {
+        sendMsg(1402924);
+		switch (stage) {
+			case 1:
+				SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, (isElyos ? 855763 : 856466), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				break;
+			case 2:
+				SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, (isElyos ? 855786 : 856467), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				break;
+			case 3:
+				SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, (isElyos ? 855809 : 856468), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				break;
+			case 4:
+				SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, (isElyos ? 855832 : 856469), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				break;
+			default:
+				break;
 		}
-
 	}
 	private boolean isValidPoint(float x, float y) {
 		return (MathUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (MathUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5)
@@ -783,33 +807,34 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+		sendMsg(1402911);
+		checkInstance();
 		return true;
 	}
 
 	@Override
 	public void onInstanceDestroy() {
+		cancelAllTasks();
 		reward.clear();
 		deadPlayers.clear();
 		allowedPlayers.clear();
 		instanceLegion = null;
 		instanceRace = null;
 		points.clear();
-		cancelAllTasks();
 		despawnAll();
 	}
 
 	private boolean allPlayersAreDead(){
 		for (Player p : instance.getPlayersInside()) {
 			if (!p.getLifeStats().isAlreadyDead()) {
-				return true;
+				return false;
 			}
 		}
-
-		return false;
+		return true;
 	}
 
 	private void checkInstance() {
-		if (deadPlayers.size() >= 12 || allPlayersAreDead()) {
+		if (deadPlayers.size() >= allowedPlayers.size() || allPlayersAreDead()) {
 			checkRank(reward.getPoints(), false);
 		}
 	}
@@ -820,26 +845,28 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402947));
 			return false;
 		}
-		if (p.getLegion() != null) {
-			if (p.getLegion().getCurrentLegionDominion() > 0) {
-				if (reward.getInstanceScoreType() == InstanceScoreType.PREPARING) {
-					if (p.getLegion().getLegionId() == instanceLegion.getLegionId()) {
-						if (allowedPlayers.size() < 12) {
-							return true;
+		if (instanceLegion != null) {
+			if (p.getLegion() != null) {
+				if (p.getLegion().getCurrentLegionDominion() > 0) {
+					if (reward.getInstanceScoreType() == InstanceScoreType.PREPARING) {
+						if (p.getLegion().getLegionId() == instanceLegion.getLegionId()) {
+							if (allowedPlayers.size() < 12 || allowedPlayers.contains(p.getObjectId())) {
+								return true;
+							} else {
+								PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400180, 12, new DescriptionId(mapId)));
+							}
 						} else {
-							PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400180, 12, new DescriptionId(mapId)));
+							PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402907));
 						}
 					} else {
-						PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402907));
+						PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400235));
 					}
 				} else {
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400235));
+					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402937));
 				}
 			} else {
-				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402937));
+				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402906));
 			}
-		} else {
-			PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402906));
 		}
 		return false;
 	}
@@ -849,7 +876,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		if (instanceLegion != null) {
 			switch (instanceLegion.getCurrentLegionDominion()) {
 				case 1:
-					TeleportService2.teleportTo(player, 220080000, 1770, 2667, 300);
+					TeleportService2.teleportTo(player, 220080000, 1770, 2556, 300);
 					break;
 				case 2:
 					TeleportService2.teleportTo(player, 220080000, 1474, 1748, 330);
@@ -864,7 +891,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 					TeleportService2.teleportTo(player, 210070000, 1195, 1607, 469);
 					break;
 				case 6:
-					TeleportService2.teleportTo(player, 210070000, 2361, 1557, 440);
+					TeleportService2.teleportTo(player, 210070000, 2361, 1515, 440);
 					break;
 					default:
 						TeleportService2.moveToBindLocation(player, true);
@@ -874,4 +901,19 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			TeleportService2.moveToBindLocation(player, true);
 		}
 	}
+
+    private void startAethericFieldTask(final int stage) {
+        sendMsg(1402874);
+        tasks.add(ThreadPoolManager.getInstance().schedule(new Runnable() {
+            @Override
+            public void run() {
+                if (reward.isStartProgress()) {
+                    if (aethericKills < stage * 4) {
+                        sendMsg(1402914);
+                        checkRank(reward.getPoints(), false);
+                    }
+                }
+            }
+        }, 120000));
+    }
 }

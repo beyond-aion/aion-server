@@ -123,7 +123,7 @@ public class LegionDominionLocation {
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
 			Collections.sort(info);
-			info = info.subList(0, 25 > (info.size()-1) ? (info.size()-1) : 25); // = 25 entries
+			info = info.subList(0, 25 > (info.size()) ? (info.size()) : 25); // = 25 entries
 			if (info.contains(curLegion)) {
 				return info;
 			} else {

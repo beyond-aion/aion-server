@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -118,6 +119,7 @@ public class LegionDominionService {
 					DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
 					DAOManager.getDAO(LegionDominionDAO.class).delete(info);
 					PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_DOMINION_RANK(loc.getLocationId()));
+					PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
 				}
 			}
 			//reset locations participant info and update this location

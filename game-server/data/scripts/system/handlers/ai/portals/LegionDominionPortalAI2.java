@@ -72,7 +72,6 @@ public class LegionDominionPortalAI2 extends PortalDialogAI2 {
 				if (hasCd(player)) {
 					return true;
 				}
-
 				InstanceHandler handler = instance.getInstanceHandler();
 
 				if (handler != null && handler.canEnter(player)) {
@@ -82,7 +81,14 @@ public class LegionDominionPortalAI2 extends PortalDialogAI2 {
 					return true;
 				}
 			} else if (instance.isRegistered(player.getObjectId())) {
-				PortalService.port(portalPath, player, getObjectId());
+				InstanceHandler handler = instance.getInstanceHandler();
+
+				if (handler != null && handler.canEnter(player)) {
+					PortalService.port(portalPath, player, getObjectId());
+				} else {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
+					return true;
+				}
 				return true;
 			} else {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400185));

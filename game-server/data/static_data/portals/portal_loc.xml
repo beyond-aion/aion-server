@@ -94,6 +94,12 @@
 	<portal_loc world_id="210070000" loc_id="2100707" x="2099.2441" y="2280.8606" z="294.625" h="83"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100708" x="77.14092" y="2757.5469" z="229.31216" h="51"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100709" x="2668.6453" y="1470.2168" z="431.9289" h="40"/> <!-- Raksang Ruins Entrance/Exit -->
+	<portal_loc world_id="210070000" loc_id="21007061" x="2361" y="1515" z="440.9289" h="95"/>
+	<portal_loc world_id="210070000" loc_id="21007062" x="2355.9" y="1536.87" z="442.9289" h="35"/>
+	<portal_loc world_id="210070000" loc_id="21007051" x="1195" y="1607" z="469" h="55"/>
+	<portal_loc world_id="210070000" loc_id="21007052" x="1216.25" y="1604.65" z="472" h="115"/>
+	<portal_loc world_id="210070000" loc_id="21007041" x="1356" y="622" z="584" h="95"/>
+	<portal_loc world_id="210070000" loc_id="21007042" x="1353.58" y="641.89" z="587" h="35"/>
 	<!-- Idian Depths Light -->
 	<portal_loc world_id="210090000" loc_id="2100900" x="670.5392" y="643.403" z="514.8737" h="0"/> <!-- Starting Point -->
 	<portal_loc world_id="210090000" loc_id="2100901" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Clawed Fist Garrison -->
@@ -160,6 +166,12 @@
 	<portal_loc world_id="220080000" loc_id="2200806" x="1672.2477" y="561.77155" z="257.77853" h="55"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200807" x="2991.0142" y="375.1645" z="309.1385" h="107"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200808" x="411.4971" y="1452.091" z="274.5" h="30"/> <!-- Raksang Ruins Entrance/Exit -->
+	<portal_loc world_id="220080000" loc_id="22008031" x="765" y="1278" z="255" h="75"/>
+	<portal_loc world_id="220080000" loc_id="22008032" x="781.5" y="1280.4" z="257" h="10"/>
+	<portal_loc world_id="220080000" loc_id="22008021" x="1474" y="1748" z="330" h="110"/>
+	<portal_loc world_id="220080000" loc_id="22008022" x="1456.2" y="1760.4" z="335" h="50"/>
+	<portal_loc world_id="220080000" loc_id="22008011" x="1770" y="2556" z="300" h="75"/>
+	<portal_loc world_id="220080000" loc_id="22008012" x="1785.3" y="2573.3" z="305" h="15"/>
 	<!-- Idian Depths Dark -->
 	<portal_loc world_id="220100000" loc_id="2201000" x="688.5966" y="831.2409" z="514.8277" h="0"/> <!-- Starting Point -->
 	<portal_loc world_id="210090000" loc_id="2201001" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Beritra's Fist Garrison -->

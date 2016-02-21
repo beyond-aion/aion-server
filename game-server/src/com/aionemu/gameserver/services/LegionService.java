@@ -2015,7 +2015,7 @@ public class LegionService {
 		if (LegionDominionService.getInstance().join(legion.getLegionId(), locId)) {
 			legion.setCurrentLegionDominion(locId);
 			storeLegion(legion);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); //applied for stonespear
+			PacketSendUtility.broadcastPacketToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); //applied for stonespear
 			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
 		}
 	}

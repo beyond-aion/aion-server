@@ -155,7 +155,7 @@ public class SerialKillerService {
 		if (!CustomConfig.SERIALKILLER_ENABLED)
 			return;
 		if (zone.isDominionZone()) {
-			if (player.getLegion() != null && player.getLegion().getCurrentLegionDominion() > 0) {
+			if (player.getLegion() != null && player.getLegion().getOccupiedLegionDominion() > 0) {
 				LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionByZone(zone.getAreaTemplate().getZoneName().name());
 				if (loc != null && loc.getLegionId() == player.getLegion().getLegionId()) {
 					if (!ldPlayers.contains(player.getObjectId())) {

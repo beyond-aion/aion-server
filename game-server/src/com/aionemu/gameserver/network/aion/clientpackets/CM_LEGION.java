@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.model.team.legion.LegionRank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,7 @@ public class CM_LEGION extends AionClientPacket {
 	private short legionarPermission;
 	private short volunteerPermission;
 	private int rank;
-	// private int legionDominionId;
+	private int legionDominionId;
 	private String legionName;
 	private String charName;
 	private String newNickname;
@@ -117,7 +118,7 @@ public class CM_LEGION extends AionClientPacket {
 				newNickname = readS();
 				break;
 			case 0x10: // selected legion dominion
-				/*legionDominionId = */readD();
+				legionDominionId = readD();
 				break;
 			default:
 				log.info("Unknown Legion exOpcode? 0x" + Integer.toHexString(exOpcode).toUpperCase());
@@ -161,12 +162,9 @@ public class CM_LEGION extends AionClientPacket {
 						break;
 					/** Select Legion Dominion to participate **/
 					case 0x10:
-						/*
-						 * deactivated till instance is done
-						 * if (activePlayer.getLegionMember().isBrigadeGeneral() || activePlayer.getLegionMember().getRank() == LegionRank.DEPUTY) {
-						 * LegionService.getInstance().joinLegionDominion(activePlayer, legion, legionDominionId);
-						 * }
-						 */
+						  if (activePlayer.getLegionMember().isBrigadeGeneral() || activePlayer.getLegionMember().getRank() == LegionRank.DEPUTY) {
+						  LegionService.getInstance().joinLegionDominion(activePlayer, legion, legionDominionId);
+						  }
 						break;
 					/** Misc. **/
 					default:

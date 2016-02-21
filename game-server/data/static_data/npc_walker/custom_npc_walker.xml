@@ -4575,4 +4575,29 @@
 		<routestep step="11" x="365.32" y="574.07" z="152.73"/>
 		<routestep step="12" x="353.35" y="596.23" z="144.57" stop="true"/>
 	</walker_template>
+	<walker_template route_id="301500000_clown_path" pool="1">
+		<routestep step="1" x="231.18" y="240.62" z="96.13"/>
+		<routestep step="2" x="238.05" y="241.72" z="96.36"/>
+		<routestep step="3" x="243.72" y="243.6" z="96.17"/>
+		<routestep step="4" x="248.5" y="247.64" z="96.05"/>
+		<routestep step="5" x="251.62" y="252.73" z="96.18"/>
+		<routestep step="6" x="253.84" y="258.6" z="96.25"/>
+		<routestep step="7" x="254.56" y="264.52" z="96.16"/>
+		<routestep step="8" x="252.4" y="272.55" z="96.18"/>
+		<routestep step="9" x="249.68" y="277.55" z="96.28"/>
+		<routestep step="10" x="245.67" y="281.57" z="96.38"/>
+		<routestep step="11" x="249.44" y="285.42" z="96.32"/>
+		<routestep step="12" x="235.08" y="287.65" z="96.3"/>
+		<routestep step="13" x="230.08" y="288.29" z="96.52"/>
+		<routestep step="14" x="223.29" y="286.61" z="96.3"/>
+		<routestep step="15" x="216.6" y="283.75" z="96.24"/>
+		<routestep step="16" x="212.38" y="279.7" z="96.24"/>
+		<routestep step="17" x="208.84" y="273.78" z="96.18"/>
+		<routestep step="18" x="207.9" y="269.26" z="96.3"/>
+		<routestep step="19" x="208.67" y="262.9" z="96.3"/>
+		<routestep step="20" x="209.62" y="255.35" z="96.3"/>
+		<routestep step="21" x="213.3" y="248.8" z="96.3"/>
+		<routestep step="22" x="217.67" y="245.07" z="96.2"/>
+		<routestep step="23" x="223.18" y="242.23" z="96.08"/>
+	</walker_template>
 </npc_walker>

@@ -66684,4 +66684,57 @@
 		<npcskill skillid="20515" skilllevel="65" probability="70" cooldown="20000"/>
 		<npcskill skillid="17366" skilllevel="65" probability="70" cooldown="15000" priority="1"/>
 	</npcskills>
+	<!-- Stonespear Reach Instance -->
+	<!-- Vision of Kaliga -->
+	<npcskills npcid="855776">
+		<npcskill skillid="21701" skilllevel="65" probability="70" priority="1" cooldown="20000" nextSkillTime="4000"/>
+		<npcskill skillid="21702" skilllevel="65" probability="60" cooldown="20000" nextSkillTime="4000"/>
+		<npcskill skillid="22663" skilllevel="1" probability="60" cooldown="40000" target="ME" nextSkillTime="7000" minhp="0" maxhp="90"/>
+		<npcskill skillid="21708" skilllevel="65" probability="60" cooldown="108000000" target="ME" nextSkillTime="6000" minhp="0" maxhp="50">
+			<cond condType="SPAWN_NPC" npc_id="856131" delay="2000" random_direction="true" min_distance="1" max_distance="3"/>
+		</npcskill>
+		<npcskill skillid="21708" skilllevel="65" probability="60" cooldown="108000000" target="ME" nextSkillTime="6000" minhp="0" maxhp="50">
+			<cond condType="SPAWN_NPC" npc_id="856132" delay="2000" random_direction="true" min_distance="1" max_distance="3"/>
+		</npcskill>
+		<npcskill skillid="21765" skilllevel="65" probability="50" cooldown="50000" target="ME" nextSkillTime="6000" minhp="0" maxhp="90">
+			<cond condType="SPAWN_NPC" npc_id="856129" delay="2000" random_direction="true" min_distance="1" max_distance="3" min_amount="3" max_amount="5"/>
+		</npcskill>
+		<npcskill skillid="21765" skilllevel="65" probability="50" cooldown="50000" target="ME" nextSkillTime="6000" minhp="0" maxhp="90">
+			<cond condType="SPAWN_NPC" npc_id="856130" delay="2000" random_direction="true" min_distance="1" max_distance="3" min_amount="3" max_amount="5"/>
+		</npcskill>
+	</npcskills>
+	<!-- Apparition of Lanmark-->
+	<npcskills npcid="855799">
+		<npcskill skillid="17179" skilllevel="65" probability="60" cooldown="15000" nextChainId="1" nextSkillTime="0" target="RANDOM"/>
+		<npcskill skillid="17182" skilllevel="65" probability="100" cooldown="5000" chainId="1" nextSkillTime="5000">
+			<cond condType="TARGET_IS_AETHERS_HOLD"/>
+		</npcskill>
+	</npcskills>
+	<!-- Vision of Rudra -->
+	<npcskills npcid="855822">
+		<npcskill skillid="18613" skilllevel="15" probability="60" cooldown="30000" nextChainId="1" nextSkillTime="5000"/>
+		<npcskill skillid="18614" skilllevel="15" probability="60" cooldown="10000" chainId="2" nextSkillTime="6000"/>
+		<npcskill skillid="18615" skilllevel="15" probability="60" cooldown="30000" nextSkillTime="5000"/>
+		<npcskill skillid="18616" skilllevel="25" probability="60" cooldown="10000" chainId="1" nextChainId="2" nextSkillTime="5000"/>
+	</npcskills>
+	<!-- Vision of Guardian General -->
+	<npcskills npcid="855843">
+		<npcskill skillid="21750" skilllevel="65" probability="60" cooldown="25000"/>
+		<npcskill skillid="21751" skilllevel="65" probability="60" cooldown="35000"/>
+		<npcskill skillid="21752" skilllevel="65" probability="60" cooldown="55000"/>
+		<npcskill skillid="21753" skilllevel="65" probability="60" nextChainId="2" nextSkillTime="9000" cooldown="35000"/>
+		<npcskill skillid="21754" skilllevel="65" probability="100" chainId="2" nextChainId="3" nextSkillTime="9000" cooldown="20000"/>
+		<npcskill skillid="21753" skilllevel="65" probability="100" chainId="3" nextChainId="4" nextSkillTime="9000" cooldown="20000" minhp="0" maxhp="75"/>
+		<npcskill skillid="21754" skilllevel="65" probability="100" chainId="4" nextSkillTime="9000" cooldown="20000" minhp="0" maxhp="50"/>
+		<npcskill skillid="21758" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="21756" skilllevel="65" probability="60" nextChainId="1" nextSkillTime="0" minhp="0" maxhp="25" cooldown="30000" target="RANDOM_EXCEPT_MOST_HATED"/>
+		<npcskill skillid="21757" skilllevel="65" probability="100" chainId="1" nextSkillTime="8000" target="NONE">
+			<cond condType="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21756" range="50"/>
+		</npcskill>
+		<npcskill skillid="21759" skilllevel="65" probability="60" cooldown="20000" minhp="0" maxhp="35"/>
+		<!-- this skill spawns 855262, who use 21760 and despawn. -->
+		<npcskill skillid="21755" skilllevel="65" probability="70" cooldown="30000" minhp="0" maxhp="70">
+			<cond condType="SPAWN_NPC" npc_id="855262" min_distance="5" max_distance="20" random_direction="true" max_amount="3"/>
+		</npcskill>
+	</npcskills>
 </npc_skill_templates>
