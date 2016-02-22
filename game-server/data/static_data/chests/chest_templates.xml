@@ -556,4 +556,11 @@
 	<chest npcid="833048">
 		<keyitem id="1" itemid="185000229" quantity="1"/>
 	</chest>
+	<!-- Sealed Danuar Mysticarium -->
+	<chest npcid="702700">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
+	<chest npcid="702701">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
 </chest_templates>
