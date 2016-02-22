@@ -6,7 +6,8 @@
 		</gd_maps>
 		<gd_items>
 			<gd_item id="185000223" name="Aetheric Field Fragment" />
-		</gd_items
+		</gd_items>
+	</gd_rule>
 	<!-- Sunayaka -->
 	<gd_rule rule_name="Named Hairpin" base_chance="100" fixed_chance="true">
 		<gd_maps>
