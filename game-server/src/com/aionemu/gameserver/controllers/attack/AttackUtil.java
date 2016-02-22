@@ -1,10 +1,5 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import java.util.Collections;
-import java.util.List;
-
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -16,13 +11,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
-import com.aionemu.gameserver.skillengine.effect.DamageEffect;
-import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.DispelBuffCounterAtkEffect;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.ProcAtkInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.SkillAttackInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
@@ -31,6 +20,10 @@ import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+import javolution.util.FastTable;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author ATracer
@@ -320,8 +313,12 @@ public class AttackUtil {
 					case MAGICAL:
 						ht = HitType.MAHIT;
 						baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
-						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL) // dirty fix for staffs and maces -.-
+						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL) { // dirty fix for staffs and maces -.-
 							baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+							if (element == SkillElement.NONE) { // fix for magical skills which actually inflict physical damage
+								damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
+							}
+						}
 						break;
 					default:
 						baseAttack = effector.getGameStats().getMainHandPAttack().getBase();

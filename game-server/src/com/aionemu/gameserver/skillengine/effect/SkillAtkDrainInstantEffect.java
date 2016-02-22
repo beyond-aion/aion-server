@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
+import com.aionemu.gameserver.skillengine.model.Effect;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author ATracer
@@ -23,7 +23,9 @@ public class SkillAtkDrainInstantEffect extends DamageEffect {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		super.applyEffect(effect);
+		if (!effect.getStack().equalsIgnoreCase("AS_BACKPROCATK_PROC")) {
+			super.applyEffect(effect);
+		}
 		if (hp_percent != 0) {
 			effect
 				.getEffector()
