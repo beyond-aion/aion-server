@@ -21,7 +21,6 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 
-
 /**
  * @author xavier
  * @modified Rolandas
@@ -74,12 +73,7 @@ public class ShieldService {
 	}
 
 	public ActionObserver createShieldObserver(SiegeShield geoShield, Creature observed) {
-		ActionObserver observer = null;
-		if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
-			observer = new CollisionDieActor(observed, geoShield.getGeometry());
-			((CollisionDieActor) observer).setEnabled(true);
-		}
-		return observer;
+		return GeoDataConfig.GEO_SHIELDS_ENABLE ? new CollisionDieActor(observed, geoShield.getGeometry()) : null;
 	}
 
 	/**

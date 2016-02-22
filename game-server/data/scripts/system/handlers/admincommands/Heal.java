@@ -39,8 +39,8 @@ public class Heal extends AdminCommand {
 		Creature creature = (Creature) target;
 
 		if (params == null || params.length < 1) {
-			creature.getLifeStats().increaseHp(TYPE.HP, creature.getLifeStats().getMaxHp() + 1, 0, LOG.REGULAR);
-			creature.getLifeStats().increaseMp(TYPE.MP, creature.getLifeStats().getMaxMp() + 1, 0, LOG.REGULAR);
+			creature.getLifeStats().increaseHp(TYPE.HP, creature.getLifeStats().getMaxHp(), 0, LOG.REGULAR);
+			creature.getLifeStats().increaseMp(TYPE.HEAL_MP, creature.getLifeStats().getMaxMp(), 0, LOG.MPHEAL);
 			creature.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
 			PacketSendUtility.sendMessage(player, creature.getName() + " has been refreshed !");
 		} else if (params[0].equals("dp") && creature instanceof Player) {

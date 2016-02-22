@@ -488,7 +488,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 
-		if (getOwner().isInvul() || getOwner().isProtectionActive())
+		if (getOwner().isProtectionActive())
 			damage = 0;
 
 		cancelUseItem();
@@ -677,7 +677,6 @@ public class PlayerController extends CreatureController<Player> {
 	public void upgradePlayer() {
 		Player player = getOwner();
 		player.getLifeStats().synchronizeWithMaxStats();
-		player.getLifeStats().updateCurrentStats();
 		player.getGameStats().updateStatsVisually();
 
 		if (player.isInTeam()) // SM_GROUP_MEMBER_INFO / SM_ALLIANCE_MEMBER_INFO task

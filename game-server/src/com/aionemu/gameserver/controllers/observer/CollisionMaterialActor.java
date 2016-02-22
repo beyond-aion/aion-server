@@ -165,7 +165,5 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 
 	@Override
 	public void setEnabled(boolean enable) {
-		// TODO Auto-generated method stub
 	};
-
 }

@@ -2,7 +2,8 @@ package com.aionemu.gameserver.world.zone;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -28,53 +29,27 @@ public class ZoneLevelService {
 			return;
 		}
 
-		// TODO need fix character height
-		float playerheight = player.getPlayerAppearance().getHeight() * 1.6f;
-		if (z < world.getWorldMap(player.getWorldId()).getWaterLevel() - playerheight)
+		float noseHeight = player.getPlayerAppearance().getBoundHeight() - 0.1f;
+		if (z + noseHeight < world.getWorldMap(player.getWorldId()).getWaterLevel()) 
 			startDrowning(player);
 		else
 			stopDrowning(player);
 	}
 
-	/**
-	 * @param player
-	 */
-	private static void startDrowning(Player player) {
-		if (!isDrowning(player))
-			scheduleDrowningTask(player);
-	}
-
-	/**
-	 * @param player
-	 */
 	private static void stopDrowning(Player player) {
-		if (isDrowning(player))
+		if (player.getController().hasTask(TaskId.DROWN))
 			player.getController().cancelTask(TaskId.DROWN);
-
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
-	private static boolean isDrowning(Player player) {
-		return player.getController().getTask(TaskId.DROWN) == null ? false : true;
-	}
-
-	/**
-	 * @param player
-	 */
-	private static void scheduleDrowningTask(final Player player) {
+	private static void startDrowning(Player player) {
+		if (player.getController().hasTask(TaskId.DROWN))
+			return;
 		player.getController().addTask(TaskId.DROWN, ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				int value = Math.round(player.getLifeStats().getMaxHp() / 10);
-				if (!player.getLifeStats().isAlreadyDead()) {
-					if (!player.isInvul()) {
-						player.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.DROWNING, value, 0, SM_ATTACK_STATUS.LOG.REGULAR, player);
-					}
-				} else
+				if (player.getLifeStats().reduceHp(TYPE.DROWNING, value, 0, LOG.REGULAR, player) == 0)
 					stopDrowning(player);
 			}
 		}, 0, DROWN_PERIOD));

@@ -57,10 +57,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return maxHp of creature according to stats
 	 */
 	public int getMaxHp() {
-		int maxHp = this.getOwner().getGameStats().getMaxHp().getCurrent();
+		int maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
 		if (maxHp == 0) {
 			maxHp = 1;
-			
+
 			log.warn("CHECKPOINT: maxhp is 0 :" + this.getOwner().getSpawn().getNpcId());
 		}
 		return maxHp;
@@ -70,7 +70,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return maxMp of creature according to stats
 	 */
 	public int getMaxMp() {
-		return this.getOwner().getGameStats().getMaxMp().getCurrent();
+		return getOwner().getGameStats().getMaxMp().getCurrent();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	public boolean isAboutToDie() {
-		return this.isAboutToDie;
+		return isAboutToDie;
 	}
 
 	/**
@@ -109,85 +109,93 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * This method is called whenever caller wants to absorb creatures's HP
+	 * This method is called whenever caller wants to absorb creatures' HP
 	 * 
+	 * @param type
+	 *          - attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
 	 * @param value
+	 *          - hp to subtract
+	 * @param skillId
+	 *          - skillId (0 if none)
+	 * @param log
+	 *          - log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
 	 * @param attacker
-	 *          attacking creature or self
-	 * @return currentHp
+	 *          - attacking creature or self
+	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
-	public int reduceHp(int value, @Nonnull Creature attacker) {
-		// this method doesnt send sm_attack_status packet
-		return reduceHp(null, value, 0, null, attacker);
-	}
-
-	public int reduceHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log, @Nonnull Creature attacker) {
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, @Nonnull Creature attacker) {
 		Objects.requireNonNull(attacker, "attacker");
 
-		boolean isDied = false;
+		if (getOwner().isInvulnerable())
+			return currentHp;
+
+		int hpReduced = 0;
 		hpLock.lock();
 		try {
-			if (!alreadyDead) {
-				int newHp = this.currentHp - value;
+			if (alreadyDead)
+				return 0;
 
-				if (newHp <= 0) {
-					newHp = 0;
-					this.currentMp = 0;
+			int newHp = Math.max(currentHp - value, 0);
+			if (newHp < currentHp) {
+				hpReduced = currentHp - newHp;
+				currentHp = newHp;
+				if (currentHp == 0) {
+					currentMp = 0;
 					alreadyDead = true;
-					this.unsetIsAboutToDie();
-					isDied = true;
-					value = this.currentHp;
+					unsetIsAboutToDie();
 				}
-				this.currentHp = newHp;
 			}
 		} finally {
 			hpLock.unlock();
 		}
-		if (value != 0) {
-			onReduceHp(type, value, skillId, log);
+
+		if (hpReduced > 0 || skillId != 0)
+			onReduceHp(type, hpReduced, skillId, log);
+		if (hpReduced > 0) {
+			if (alreadyDead)
+				getOwner().getController().onDie(attacker);
+			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		}
-		if (isDied) {
-			getOwner().getController().onDie(attacker);
-		}
-		getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		return currentHp;
 	}
 
 	/**
-	 * This method is called whenever caller wants to absorb creatures's HP
+	 * This method is called whenever caller wants to absorb creatures's MP
 	 * 
+	 * @param type
+	 *          - attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
 	 * @param value
-	 * @return currentMp
+	 *          - hp to subtract
+	 * @param skillId
+	 *          - skillId (0 if none)
+	 * @param log
+	 *          - log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
+	 * @return The MP that this creature has left.
 	 */
-	public int reduceMp(int value) {
-		// this method doesnt send sm_attack_status packet
-		return reduceMp(null, value, 0, null);
-	}
-
-	public int reduceMp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log) {
+	public int reduceMp(TYPE type, int value, int skillId, LOG log) {
+		int mpReduced = 0;
 		mpLock.lock();
 		try {
-			int newMp = this.currentMp - value;
+			if (alreadyDead)
+				return 0;
 
-			if (newMp < 0) {
-				newMp = 0;
-				value = this.currentMp;
+			int newMp = Math.max(currentMp - value, 0);
+			if (newMp < currentMp) {
+				mpReduced = currentMp - newMp;
+				currentMp = newMp;
 			}
-
-			this.currentMp = newMp;
 		} finally {
 			mpLock.unlock();
 		}
-		if (value != 0) {
-			onReduceMp(type, value, skillId, log);
-		}
+
+		if (mpReduced > 0 || skillId != 0)
+			onReduceMp(type, mpReduced, skillId, log);
 		return currentMp;
 	}
 
 	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log) {
-		if (owner == null || type == null)
-			return;
-		PacketSendUtility.broadcastPacketAndReceive(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log));
+		if (type != null)
+			PacketSendUtility.broadcastPacketAndReceive(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log));
 	}
 
 	/**
@@ -197,43 +205,36 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return currentHp
 	 */
 	public int increaseHp(int value) {
-		return this.increaseHp(null, value, 0, null);
+		return increaseHp(TYPE.REGULAR, value, 0, LOG.REGULAR);
 	}
 
-	public int increaseHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log) {
-		boolean hpIncreased = false;
-
-		if (this.getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
+	public int increaseHp(TYPE type, int value, int skillId, LOG log) {
+		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
 			return currentHp;
 
+		int hpIncreased = 0;
 		hpLock.lock();
 		try {
-			if (isAlreadyDead()) {
+			if (alreadyDead)
 				return 0;
-			}
-			int newHp = this.currentHp + value;
-			if (newHp > getMaxHp()) {
-				newHp = getMaxHp();
-				value = getMaxHp() - this.currentHp;
-			}
-			if (currentHp != newHp) {
-				this.currentHp = newHp;
-				hpIncreased = true;
+
+			int newHp = Math.min(currentHp + value, getMaxHp());
+			if (newHp > currentHp) {
+				hpIncreased = newHp - currentHp;
+				currentHp = newHp;
 			}
 		} finally {
 			hpLock.unlock();
 		}
 
-		if (hpIncreased) {
-			if (type == null)// just update packet
-				onIncreaseHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
-			else
-				onIncreaseHp(type, value, skillId, log);
+		if (hpIncreased > 0 || skillId != 0)
+			onIncreaseHp(type, hpIncreased, skillId, log);
 
-			if (this.killingBlow != 0 && this.currentHp > this.killingBlow)
-				this.unsetIsAboutToDie();
+		if (hpIncreased > 0) {
+			if (killingBlow != 0 && currentHp > killingBlow)
+				unsetIsAboutToDie();
+			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		}
-		getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		return currentHp;
 	}
 
@@ -244,32 +245,27 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return currentMp
 	 */
 	public int increaseMp(int value) {
-		return this.increaseMp(null, value, 0, null);
+		return increaseMp(null, value, 0, null);
 	}
 
-	public int increaseMp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log) {
-		boolean mpIncreased = false;
+	public int increaseMp(TYPE type, int value, int skillId, LOG log) {
+		int mpIncreased = 0;
 		mpLock.lock();
 		try {
-			if (isAlreadyDead()) {
+			if (alreadyDead)
 				return 0;
-			}
-			int newMp = this.currentMp + value;
-			if (newMp > getMaxMp()) {
-				newMp = getMaxMp();
-				value = getMaxMp() - this.currentMp;
-			}
-			if (currentMp != newMp) {
-				this.currentMp = newMp;
-				mpIncreased = true;
+
+			int newMp = Math.min(currentMp + value, getMaxMp());
+			if (newMp > currentMp) {
+				mpIncreased = newMp - currentMp;
+				currentMp = newMp;
 			}
 		} finally {
 			mpLock.unlock();
 		}
 
-		if (mpIncreased) {
-			onIncreaseMp(type, value, skillId, log);
-		}
+		if (mpIncreased > 0 || skillId != 0)
+			onIncreaseMp(type, mpIncreased, skillId, log);
 		return currentMp;
 	}
 
@@ -375,21 +371,18 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return (int) (100f * currentMp / getMaxMp());
 	}
 
-	protected abstract void onIncreaseMp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log);
+	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log);
+	}
 
-	protected abstract void onReduceMp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log);
+	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log);
+	}
 
-	protected abstract void onIncreaseHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log);
+	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
+	}
 
-	protected abstract void onReduceHp(TYPE type, int value, int skillId, SM_ATTACK_STATUS.LOG log);
-
-	/**
-	 * @param type
-	 * @param value
-	 * @return
-	 */
-	public int increaseFp(int value) {
-		return 0;
+	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
 	}
 
 	public int getMaxFp() {
@@ -418,14 +411,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public void setCurrentHpPercent(int hpPercent) {
 		hpLock.lock();
 		try {
-			this.currentHp = (int) (hpPercent / 100f * getMaxHp());
+			currentHp = (int) (hpPercent / 100f * getMaxHp());
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-
-			if (this.currentHp > 0) {
-				this.alreadyDead = false;
-				// just to be sure
-				this.unsetIsAboutToDie();
-			}
+			if (currentHp > 0)
+				alreadyDead = false;
 		} finally {
 			hpLock.unlock();
 		}
@@ -438,21 +427,18 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		boolean hpNotAtMaxValue = false;
 		hpLock.lock();
 		try {
-			this.currentHp = hp;
+			currentHp = hp;
 
-			if (this.currentHp > 0) {
-				this.alreadyDead = false;
-				// just to be sure
-				this.unsetIsAboutToDie();
-			}
+			if (currentHp > 0)
+				alreadyDead = false;
 
-			if (this.currentHp < getMaxHp())
+			if (currentHp < getMaxHp())
 				hpNotAtMaxValue = true;
 		} finally {
 			hpLock.unlock();
 		}
 		if (hpNotAtMaxValue) {
-			onReduceHp(SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.REGULAR);
+			onReduceHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
 		}
 	}
 
@@ -468,7 +454,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		} finally {
 			mpLock.unlock();
 		}
-		onReduceMp(SM_ATTACK_STATUS.TYPE.MP, 0, 0, SM_ATTACK_STATUS.LOG.REGULAR);
+		onReduceMp(TYPE.MP, 0, 0, LOG.REGULAR);
 		return currentMp;
 	}
 

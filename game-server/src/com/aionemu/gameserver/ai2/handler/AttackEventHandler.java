@@ -85,7 +85,7 @@ public class AttackEventHandler {
 		}
 		Npc npc = npcAI.getOwner();
 		EmoteManager.emoteStopAttacking(npc);
-		npc.getLifeStats().startResting();
+		npc.getLifeStats().triggerRestoreTask();
 		npc.getAggroList().clear();
 		if (npcAI.poll(AIQuestion.CAN_SHOUT))
 			ShoutEventHandler.onAttackEnd(npcAI);

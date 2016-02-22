@@ -25,6 +25,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
@@ -139,49 +140,24 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param lastAttacker
 	 */
 	public void onDie(Creature lastAttacker) {
-		this.getOwner().getMoveController().abortMove();
-		this.getOwner().setCasting(null);
-		this.getOwner().getEffectController().removeAllEffects();
-		// exception for player
-		if (getOwner() instanceof Player) {
-			if (((Player) getOwner()).getIsFlyingBeforeDeath()) {
-				getOwner().unsetState(CreatureState.ACTIVE);
-				getOwner().setState(CreatureState.FLOATING_CORPSE);
-			} else
-				this.getOwner().setState(CreatureState.DEAD);
-		} else {
-			// Not clear when to set it; maybe only under water ?
-			/*
-			 * if (getOwner() instanceof Npc) { if (((Npc)getOwner()).getObjectTemplate().isFloatCorpse()) {
-			 * getOwner().setState(CreatureState.FLOATING_CORPSE); } }
-			 */
-			this.getOwner().setState(CreatureState.DEAD);
-		}
-		this.getOwner().getObserveController().notifyDeathObservers(lastAttacker);
+		onDieSilence();
+		getOwner().getObserveController().notifyDeathObservers(lastAttacker);
 	}
 
 	/**
 	 * Perform tasks on Creature death with out emotion effect(need for some quests).
 	 */
 	public void onDieSilence() {
-		this.getOwner().getMoveController().abortMove();
-		this.getOwner().setCasting(null);
-		this.getOwner().getEffectController().removeAllEffects();
-		// exception for player
-		if (getOwner() instanceof Player) {
-			if (((Player) getOwner()).getIsFlyingBeforeDeath()) {
-				getOwner().unsetState(CreatureState.ACTIVE);
-				getOwner().setState(CreatureState.FLOATING_CORPSE);
-			} else
-				this.getOwner().setState(CreatureState.DEAD);
-		} else {
-			if (getOwner() instanceof Npc) {
-				if (((Npc) getOwner()).getObjectTemplate().isFloatCorpse()) {
-					getOwner().setState(CreatureState.FLOATING_CORPSE);
-				}
-			}
-			this.getOwner().setState(CreatureState.DEAD);
-		}
+		getOwner().getMoveController().abortMove();
+		getOwner().setCasting(null);
+		getOwner().getEffectController().removeAllEffects();
+		if (getOwner() instanceof Player && ((Player) getOwner()).getIsFlyingBeforeDeath()) {
+			getOwner().unsetState(CreatureState.ACTIVE);
+			getOwner().setState(CreatureState.FLOATING_CORPSE);
+		} else if (getOwner() instanceof Npc && ((Npc) getOwner()).getObjectTemplate().isFloatCorpse())
+			getOwner().setState(CreatureState.FLOATING_CORPSE); // not clear when to set it or if this is right at all
+		else
+			getOwner().setState(CreatureState.DEAD);
 	}
 
 	/**
@@ -369,8 +345,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.get(0).getAttackStatus());
 
-		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time,
-			attackType, attackResult), AIEventType.CREATURE_NEEDS_HELP);
+		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
+			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackType, attackResult),
+			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();
 		if (addAttackObservers)
@@ -400,7 +377,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param questId
 	 */
 	public void onDialogSelect(int dialogId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -472,8 +448,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * Die by reducing HP to 0
 	 */
-	public void die() {
-		getOwner().getLifeStats().reduceHp(getOwner().getLifeStats().getCurrentHp() + 1, getOwner());
+	public boolean die() {
+		return die(null, null);
+	}
+
+	public boolean die(TYPE type, LOG log) {
+		CreatureLifeStats<?> lifeStats = getOwner().getLifeStats();
+		return lifeStats.reduceHp(type, lifeStats.getCurrentHp(), 0, log, getOwner()) == 0;
 	}
 
 	/**
@@ -567,7 +548,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel use Item
 	 */
 	public void cancelUseItem() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

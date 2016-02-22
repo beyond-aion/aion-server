@@ -9,26 +9,18 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Rolandas
  */
 public class CollisionDieActor extends AbstractCollisionObserver implements IActor {
-
-	private boolean isEnabled = true;
 
 	public CollisionDieActor(Creature creature, Spatial geometry) {
 		super(creature, geometry, CollisionIntention.MATERIAL.getId());
 	}
 
 	@Override
-	public void setEnabled(boolean enable) {
-		isEnabled = enable;
-	}
-
-	@Override
 	public void onMoved(CollisionResults collisionResults) {
-		if (isEnabled && collisionResults.size() != 0) {
+		if (collisionResults.size() != 0) {
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 				Player player = (Player) creature;
 				if (player.isGM()) {
@@ -42,13 +34,14 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 
 	@Override
 	public void act() {
-		if (isEnabled && !((Player) creature).isGM())
-			creature.getController().die();
+		creature.getController().die();
 	}
 
 	@Override
 	public void abort() {
-		// Nothing to do
 	}
 
+	@Override
+	public void setEnabled(boolean enable) {
+	}
 }

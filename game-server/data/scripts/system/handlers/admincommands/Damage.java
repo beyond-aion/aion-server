@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -78,12 +80,12 @@ public class Damage extends AdminCommand {
 					case "mp":
 						if (isPercent)
 							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxMp());
-						creature.getLifeStats().reduceMp(dmg);
+						creature.getLifeStats().reduceMp(TYPE.DAMAGE_MP, dmg, 0, LOG.MPATTACK);
 						break;
 					case "fp":
 						if (isPercent)
-							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxFp());
-						((Player) creature).getLifeStats().reduceFp(dmg);
+							dmg = (int) (dmg / 100f * ((Player) creature).getLifeStats().getMaxFp());
+						((Player) creature).getLifeStats().reduceFp(TYPE.FP_DAMAGE, dmg, 0, LOG.FPATTACK);
 						break;
 					case "dp":
 						if (isPercent)

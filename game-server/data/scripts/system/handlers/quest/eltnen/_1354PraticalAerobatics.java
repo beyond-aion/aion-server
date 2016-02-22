@@ -3,6 +3,8 @@ package quest.eltnen;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -122,7 +124,7 @@ public class _1354PraticalAerobatics extends QuestHandler {
 	
 	private void applyFlightRingEffect(QuestEnv env) {
 		Player player = env.getPlayer();
-		player.getLifeStats().increaseFp(7);
+		player.getLifeStats().increaseFp(TYPE.FP_RINGS, 7, 0, LOG.REGULAR);
 		SkillEngine.getInstance().applyEffectDirectly(1856, player, player, 0);
 	}
 

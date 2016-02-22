@@ -78,8 +78,8 @@ public class FixPath extends AdminCommand {
 
 			@Override
 			public void run() {
-				boolean wasInvul = admin.isInvul();
-				admin.setInvul(true);
+				boolean wasInvul = admin.isInvulnerable();
+				admin.setInvulnerable(true);
 
 				float zDelta = 0;
 				HashMap<Integer, Float> corrections = new HashMap<Integer, Float>();
@@ -137,7 +137,7 @@ public class FixPath extends AdminCommand {
 					isRunning = false;
 					canceled = false;
 					if (!wasInvul)
-						admin.setInvul(false);
+						admin.setInvulnerable(false);
 				}
 			}
 		}, 5000);

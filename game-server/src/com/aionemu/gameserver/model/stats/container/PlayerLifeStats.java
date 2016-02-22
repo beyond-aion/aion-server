@@ -31,40 +31,42 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
+	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
+		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
+			owner.getAggroList().clear();
+		super.onIncreaseHp(type, value, skillId, log);
+		if (value > 0) {
+			sendHpPacketUpdate();
+			sendGroupPacketUpdate();
+		}
+	}
+
+	@Override
 	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
+		super.onReduceHp(type, value, skillId, log);
+		if (value > 0) {
+			sendHpPacketUpdate();
+			sendGroupPacketUpdate();
+			triggerRestoreTask();
+		}
+	}
+
+	@Override
+	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
 		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		sendHpPacketUpdate();
-		triggerRestoreTask();
-		sendGroupPacketUpdate();
+		if (value > 0) {
+			sendMpPacketUpdate();
+			sendGroupPacketUpdate();
+		}
 	}
 
 	@Override
 	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
 		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		sendMpPacketUpdate();
-		triggerRestoreTask();
-		sendGroupPacketUpdate();
-	}
-
-	@Override
-	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
 		if (value > 0) {
 			sendMpPacketUpdate();
-			sendAttackStatusPacketUpdate(type, value, skillId, log);
 			sendGroupPacketUpdate();
-		}
-	}
-
-	@Override
-	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
-		if (this.isFullyRestoredHp()) {
-			// FIXME: Temp Fix: Reset aggro list when hp is full.
-			this.owner.getAggroList().clear();
-		}
-		if (value > 0 || type == TYPE.REGULAR) {
-			sendHpPacketUpdate();
-			sendAttackStatusPacketUpdate(type, value, skillId, log);
-			sendGroupPacketUpdate();
+			triggerRestoreTask();
 		}
 	}
 
@@ -80,9 +82,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			return;
 
 		super.synchronizeWithMaxStats();
-		int maxFp = getMaxFp();
-		if (currentFp != maxFp)
-			currentFp = maxFp;
+		currentFp = getMaxFp();
+
+		if (owner.isSpawned()) {
+			sendHpPacketUpdate();
+			sendMpPacketUpdate();
+			sendFpPacketUpdate();
+		}
 	}
 
 	@Override
@@ -128,16 +134,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	/**
-	 * This method is called whenever caller wants to restore creatures's FP
+	 * This method is called whenever caller wants to restore creatures' FP
 	 * 
 	 * @param value
 	 * @return
 	 */
-	@Override
-	public int increaseFp(int value) {
-		return this.increaseFp(null, value, 0, null);
-	}
-
 	public int increaseFp(TYPE type, int value, int skillId, LOG log) {
 		fpLock.lock();
 
@@ -163,15 +164,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	/**
-	 * This method is called whenever caller wants to reduce creatures's MP
+	 * This method is called whenever caller wants to reduce creatures' FP
 	 * 
 	 * @param value
 	 * @return
 	 */
-	public int reduceFp(int value) {
-		return reduceFp(null, value, 0, null);
-	}
-
 	public int reduceFp(TYPE type, int value, int skillId, LOG log) {
 		fpLock.lock();
 		try {

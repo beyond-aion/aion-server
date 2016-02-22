@@ -5,12 +5,6 @@ import com.aionemu.commons.configuration.Property;
 public class FallDamageConfig {
 
 	/**
-	 * Fall damage enable
-	 */
-	@Property(key = "gameserver.falldamage.enable", defaultValue = "true")
-	public static boolean ACTIVE_FALL_DAMAGE;
-
-	/**
 	 * Percentage of damage per meter.
 	 */
 	@Property(key = "gameserver.falldamage.percentage", defaultValue = "1.0")
