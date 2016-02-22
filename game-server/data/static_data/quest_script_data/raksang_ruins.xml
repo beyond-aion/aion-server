@@ -2,15 +2,47 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 	[BEGIN] SUMMARY
-		18742 [SCRIPT] 	[Daily/Coin] Import the Report
-		18743 [XML] 	Not So Fast, Nasto
-		28742 [SCRIPT] 	[Daily/Coin] A Flurry of Activity
-		28743 [XML] 	Take out the Mastermind
+		18737 [XML]	Where did Abiso Go?
+		18738 [TODO_SCRIPT]	Test Bomb, Test Bomb
+		18739 [XML]	Urgent Deed: Get the Seed
+		18740 [XML]	It's Alive?
+		18741 [TODO_XML]	A Versed Order
+		18742 [XML]	[Daily/Coin] Import the Report
+		18743 [XML]	Not So Fast, Nasto
+		18744 [REMOVED]	Info from Abiso
+		19649 [XML]	To Raksang Ruins
+		
+		28737 [RECHECK]	Suspicious Minds
+		28738 [TODO_SCRIPT]	Bombs for Everyone!
+		28739 [RECHECK]	Important Research
+		28740 [RECHECK]	It's a Dirty Job
+		28741 [TODO_XML]	Securing the Route
+		28742 [RECHECK] [Daily/Coin] A Flurry of Activity
+		28743 [RECHECK] Take out the Mastermind
+		28744 [REMOVED]	Proqura's Information
+		29649 [RECHECK]	Raksang Ruins Roundup
 	[END] SUMMARY
 	-->
+	<!-- Abiso and counter-part need to be fixed -->
+	<!-- REPORT TO -->
+	<report_to id="18737" start_npc_ids="804707" start_dialog_id="4762" end_npc_ids="206380" end_dialog_id="10002"/>
+	<report_to id="19649" start_npc_ids="804654" start_dialog_id="4762" end_npc_ids="804707" end_dialog_id="10002"/>
+	<report_to id="28737" start_npc_ids="804732" start_dialog_id="4762" end_npc_ids="804717" end_dialog_id="10002"/>
+	<report_to id="29649" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="804732" end_dialog_id="10002"/>
 	
+	<!-- ITEM COLLECTING -->
+	<item_collecting id="18739" start_npc_ids="206380" start_dialog_id="4762" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="18740" start_npc_ids="206380" start_dialog_id="4762" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="18742" start_npc_ids="206380" start_dialog_id="4762" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="28739" start_npc_ids="804717" start_dialog_id="4762" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="28740" start_npc_ids="804717" start_dialog_id="4762" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="28742" start_npc_ids="804717" start_dialog_id="4762" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+
 	<!-- MONSTER HUNT QUESTS -->
-	<!-- start_npc needs to be fixed -->
-	<monster_hunt id="18743" start_npc_ids="206379" start_dialog_id="4762" end_npc_ids="804707"/>
-	<monster_hunt id="28743" start_npc_ids="206396" start_dialog_id="4762" end_npc_ids="804732"/>
+	<!-- needs to be changed to start_zone later on -->
+	<monster_hunt id="18741" start_npc_ids="804707"/>
+	<monster_hunt id="18743" start_npc_ids="206380" start_dialog_id="4762" end_npc_ids="804707"/>
+	<!-- needs to be changed to start_zone later on -->
+	<monster_hunt id="28741" start_npc_ids="804732"/>
+	<monster_hunt id="28743" start_npc_ids="804717" start_dialog_id="4762" end_npc_ids="804732"/>
 </quest_scripts>

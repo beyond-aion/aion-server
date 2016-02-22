@@ -143,7 +143,7 @@ public class Player extends Creature {
 	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
 
-	private com.aionemu.gameserver.model.team2.group.PlayerGroup playerGroup2;
+	private PlayerGroup playerGroup2;
 	private PlayerAllianceGroup playerAllianceGroup;
 
 	private AbyssRank abyssRank;
@@ -157,7 +157,7 @@ public class Player extends Creature {
 	private boolean isTrading;
 	private long prisonTimer = 0;
 	private long startPrison;
-	private boolean invul;
+	private boolean isInvulnerable;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
 	private int flightTeleportId;
@@ -258,7 +258,7 @@ public class Player extends Creature {
 		this.toyPetList = new PetList(this);
 		controller.setOwner(this);
 		moveController = new PlayerMoveController(this);
-		plCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, getPlayerAppearance().getHeight()));
+		plCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, getPlayerAppearance().getBoundHeight()));
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
@@ -753,11 +753,11 @@ public class Player extends Creature {
 		titleList.setOwner(this);
 	}
 
-	public com.aionemu.gameserver.model.team2.group.PlayerGroup getPlayerGroup2() {
+	public PlayerGroup getPlayerGroup2() {
 		return playerGroup2;
 	}
 
-	public void setPlayerGroup2(com.aionemu.gameserver.model.team2.group.PlayerGroup playerGroup) {
+	public void setPlayerGroup2(PlayerGroup playerGroup) {
 		this.playerGroup2 = playerGroup;
 	}
 
@@ -1031,23 +1031,13 @@ public class Player extends Creature {
 		return isInVisualState(CreatureVisualState.BLINKING);
 	}
 
-	/**
-	 * Check is player is invul
-	 * 
-	 * @return boolean
-	 **/
-	public boolean isInvul() {
-		return invul;
+	@Override
+	public boolean isInvulnerable() {
+		return isInvulnerable;
 	}
 
-	/**
-	 * Sets invul on player
-	 * 
-	 * @param invul
-	 *          - boolean
-	 **/
-	public void setInvul(boolean invul) {
-		this.invul = invul;
+	public void setInvulnerable(boolean isInvulnerable) {
+		this.isInvulnerable = isInvulnerable;
 	}
 
 	public void setMailbox(Mailbox mailbox) {

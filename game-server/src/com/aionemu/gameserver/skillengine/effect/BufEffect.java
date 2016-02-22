@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +16,11 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.model.Effect;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -63,10 +61,8 @@ public abstract class BufEffect extends EffectTemplate {
 		if (modifiers.size() > 0)
 			cgs.addEffect(effect, modifiers);
 
-		if (maxstat) {
-			effected.getLifeStats().increaseHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
-			effected.getLifeStats().increaseMp(TYPE.MP, effected.getGameStats().getMaxMp().getCurrent(), 0, LOG.REGULAR);
-		}
+		if (maxstat)
+			effected.getLifeStats().synchronizeWithMaxStats();
 	}
 
 	/**
@@ -104,10 +100,5 @@ public abstract class BufEffect extends EffectTemplate {
 			}
 		}
 		return modifiers;
-	}
-
-	@Override
-	public void onPeriodicAction(Effect effect) {
-		// TODO Auto-generated method stub
 	}
 }

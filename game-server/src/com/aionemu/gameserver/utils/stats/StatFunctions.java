@@ -27,13 +27,16 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.google.common.base.Preconditions;
 
 /**
  * Calculations are based on the following research:<br>
- * original: <a href="http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html">Link</a><br>
- * backup: <a href="http://web.archive.org/web/20120111184941/http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/">Link</a><br>
+ * original: <a href="http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html">Link</a>
+ * <br>
+ * backup:
+ * <a href="http://web.archive.org/web/20120111184941/http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/">Link
+ * </a><br>
+ * 
  * @author ATracer, alexa026
  */
 public class StatFunctions {
@@ -906,32 +909,13 @@ public class StatFunctions {
 		return resistRate;
 	}
 
-	/**
-	 * Calculates the fall damage
-	 * 
-	 * @param player
-	 * @param distance
-	 * @return True if the player is forced to his bind location.
-	 */
-	public static boolean calculateFallDamage(Player player, float distance, boolean stoped) {
-		if (player.isInvul()) {
-			return false;
-		}
-
-		if (distance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE || !stoped) {
-			player.getController().onStopMove();
-			player.getFlyController().onStopGliding();
-			player.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, player.getLifeStats().getMaxHp() + 1, 0, SM_ATTACK_STATUS.LOG.REGULAR,
-				player);
-			return true;
-		} else if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
+	public static int calculateFallDamage(Player player, float distance) {
+		int fallDamage = 0;
+		if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
 			float dmgPerMeter = player.getLifeStats().getMaxHp() * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f;
-			int damage = (int) (distance * dmgPerMeter);
-			player.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, damage, 0, SM_ATTACK_STATUS.LOG.REGULAR, player);
-			player.getObserveController().notifyAttackedObservers(player); // TODO: attacker null or self?
+			fallDamage = (int) (distance * dmgPerMeter);
 		}
-
-		return false;
+		return fallDamage;
 	}
 
 	public static float getMovementModifier(Creature creature, StatEnum stat, float value) {

@@ -15,21 +15,20 @@ import javolution.util.FastTable;
 
 /**
  * @author Yeats
- *
  */
 @AIName("aggressive_stonespear")
 public class StonespearAggressiveNpcAI2 extends AggressiveNpcAI2 {
 
 	private List<Integer> guardIds = new FastTable<>();
-	
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
 		findGuardianStone();
 	}
-	
+
 	private void findGuardianStone() {
-		Collections.addAll(guardIds, new Integer[] {855763, 855832, 855786, 856466, 856467, 856468});
+		Collections.addAll(guardIds, new Integer[] { 855763, 855832, 855786, 856466, 856467, 856468 });
 		Creature target = null;
 		for (Integer npcId : guardIds) {
 			target = getOwner().getPosition().getWorldMapInstance().getNpc(npcId.intValue());
@@ -41,15 +40,15 @@ public class StonespearAggressiveNpcAI2 extends AggressiveNpcAI2 {
 			getOwner().getAggroList().addHate(target, 3000);
 			setStateIfNot(AIState.FIGHT);
 			think();
-		}		
+		}
 	}
-	
+
 	@Override
 	public void handleDied() {
 		super.handleDied();
 		getOwner().getController().onDelete();
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {

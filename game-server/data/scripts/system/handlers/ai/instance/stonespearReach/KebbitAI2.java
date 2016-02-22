@@ -52,7 +52,7 @@ public class KebbitAI2 extends GeneralNpcAI2 {
 			despawnTask.cancel(false);
 		}
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
@@ -70,9 +70,9 @@ public class KebbitAI2 extends GeneralNpcAI2 {
 				return null;
 		}
 	}
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
-		//do nothing
+		// do nothing
 	}
 }

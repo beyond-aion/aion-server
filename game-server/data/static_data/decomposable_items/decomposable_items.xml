@@ -30125,8 +30125,34 @@
 			<item id="186000243" name="Fragmented Ceramium" rnd_min="3" rnd_max="10"/>
 		</items>
 	</decomposable>
-    <decomposable item_id="188053305" decomposable_name="Ancient Goblet Bundle"/>
-    <decomposable item_id="188053306" decomposable_name="Ancient Crown Bundle"/>
+    <decomposable item_id="188053305" decomposable_name="Ancient Goblet Bundle">
+		<items>
+			<item id="186000055" name="Major Ancient Goblet"/>
+		</items>
+		<items>
+			<item id="186000056" name="Greater Ancient Goblet"/>
+		</items>
+		<items>
+			<item id="186000057" name="Ancient Goblet"/>
+		</items>
+		<items>
+			<item id="186000058" name="Lesser Ancient Goblet"/>
+		</items>
+	</decomposable>
+    <decomposable item_id="188053306" decomposable_name="Ancient Crown Bundle">
+		<items>
+			<item id="186000051" name="Major Ancient Crown"/>
+		</items>
+		<items>
+			<item id="186000052" name="Greater Ancient Crown"/>
+		</items>
+		<items>
+			<item id="186000053" name="Ancient Crown"/>
+		</items>
+		<items>
+			<item id="186000054" name="Lesser Ancient Crown"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053307" decomposable_name="Legion's Honorable Reward Box"/>
     <decomposable item_id="188053308" decomposable_name="Legion's Illusion Godstone Bundle"/>
     <decomposable item_id="188053309" decomposable_name="Legion's Ceramium Medal Box">
@@ -34800,13 +34826,44 @@
 			<item id="166000195" name="Epsilon Enchantment Stone" count="3"/>
 		</items>
 	</decomposable>
-	<decomposable item_id="188053799" decomposable_name="Stonespear Siege Reward Chest"/>
-	<decomposable item_id="188053800" decomposable_name="Stonespear Siege Runner-Up Reward Chest"/>
-	<decomposable item_id="188053801" decomposable_name="Stonespear Siege Champion Reward Chest"/>
+	<decomposable item_id="188053799" decomposable_name="Stonespear Siege Reward Chest">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053800" decomposable_name="Stonespear Siege Runner-Up Reward Chest">
+		<items>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053801" decomposable_name="Stonespear Siege Champion Reward Chest">
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone"/>
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone"/>
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE"/>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053802" decomposable_name="Stonespear Siege Relic Chest"/>
 	<decomposable item_id="188053803" decomposable_name="Stonespear Siege Runner-Up Relic Chest"/>
 	<decomposable item_id="188053804" decomposable_name="Stonespear Siege Champion Relic Chest"/>
-	<decomposable item_id="188053805" decomposable_name="Stonespear Key Box"/>
+	<decomposable item_id="188053805" decomposable_name="Stonespear Key Box">
+		<items>
+			<item id="185000230" name="Stonespear Key"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053806" decomposable_name="Alabastor Order Mark Bundle">
 		<items>
 			<item id="186000100" name="Progress Token"/>
@@ -35035,10 +35092,23 @@
     <decomposable item_id="188053891" decomposable_name="[Event] Bootleg Commander's Divine Weapon Box"/>
     <decomposable item_id="188053892" decomposable_name="[Event] Bootleg Modor's Weapon Box"/>
 	<decomposable item_id="188053893" decomposable_name="Equipment Box of Black Flame"/>
-	<decomposable item_id="188053894" decomposable_name="Territory Battle Contribution Bundle"/>
+	<decomposable item_id="188053894" decomposable_name="Territory Battle Contribution Bundle">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053895" decomposable_name="Lucky Box"/>
-	<decomposable item_id="188053896" decomposable_name="Legion Victory Reward Box"/>
-	<decomposable item_id="188053897" decomposable_name="Legion Victory Reward Box"/>
+	<decomposable item_id="188053896" decomposable_name="Legion Victory Reward Box">
+		<items>
+			<item id="188053894" name="Territory battle Contribution Bundle" count="20"/>
+			<item id="168310018" name="Major Blessed Augment: Level 2"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053897" decomposable_name="Legion Victory Reward Box">
+		<items>
+			<item id="188053894" name="Territory battle Contribution Bundle" count="20"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053898" decomposable_name="Sacred Beast of Balaur Lord Beritra"/>
 	<decomposable item_id="188053900" decomposable_name="Protectorate Box Bundle">
 		<items>

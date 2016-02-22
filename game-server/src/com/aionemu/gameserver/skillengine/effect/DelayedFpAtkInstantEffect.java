@@ -48,7 +48,7 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 		if (percent)
 			newValue = (maxFP * valueWithDelta) / 100;
 
-		player.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.REGULAR);
+		player.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.FPATTACK);
 	}
 
 }

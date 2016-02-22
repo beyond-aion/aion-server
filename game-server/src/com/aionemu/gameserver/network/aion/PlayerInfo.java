@@ -102,8 +102,8 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(playerAppearance.getShoulders());
 		writeC(playerAppearance.getFaceShape());
 		writeC(0x00); // always 0 may be acessLevel
-		writeC(0x00); // always 0 - unk
-		writeC(0x00);
+		writeC(0x00); // sometimes 0xC7 (199) for all chars, else 0
+		writeC(0x00); // sometimes 0x04 (4) for all chars, else 0
 		writeF(playerAppearance.getHeight());
 		int raceSex = 100000 + raceId * 2 + genderId;
 		writeD(raceSex);

@@ -680,6 +680,13 @@ public abstract class Creature extends VisibleObject {
 		return getObjectTemplate().getBoundRadius().getCollision();
 	}
 
+	/**
+	 * @return True if this creature can not receive any damage.
+	 */
+	public boolean isInvulnerable() {
+		return false;
+	}
+
 	public ItemAttackType getAttackType() {
 		return ItemAttackType.PHYSICAL;
 	}

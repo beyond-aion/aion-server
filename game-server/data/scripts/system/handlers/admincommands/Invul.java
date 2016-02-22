@@ -11,22 +11,17 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Invul extends AdminCommand {
 
 	public Invul() {
-		super("invul");
+		super("invul", "Enables/disables invulnerability.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (player.isInvul()) {
-			player.setInvul(false);
+		if (player.isInvulnerable()) {
+			player.setInvulnerable(false);
 			PacketSendUtility.sendMessage(player, "You are now mortal.");
 		} else {
-			player.setInvul(true);
+			player.setInvulnerable(true);
 			PacketSendUtility.sendMessage(player, "You are now immortal.");
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		// TODO Auto-generated method stub
 	}
 }

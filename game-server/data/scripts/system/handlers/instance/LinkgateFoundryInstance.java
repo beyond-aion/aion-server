@@ -112,7 +112,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("IDLDF4RE_01_ITEMUSEAREA_BOSS")) {
+		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("IDLDF4RE_01_ITEMUSEAREA_BOSS_301270000")) {
 			if (timeCheckTask != null && !timeCheckTask.isDone()) {
 				timeCheckTask.cancel(true);
 			}

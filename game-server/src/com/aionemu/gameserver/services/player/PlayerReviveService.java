@@ -110,24 +110,24 @@ public class PlayerReviveService {
 
 	public static final void bindRevive(Player player, int skillId) {
 		revive(player, 25, 25, true, skillId);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
-		// TODO: It is not always necessary.
-		// sendPacket(new SM_QUEST_LIST(activePlayer));
+		if (skillId > 0)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
 			TeleportService2.teleportToPrison(player);
 		} else {
-			boolean isInviadeActiveVortex = false;
+			WorldPosition resPos = null;
 			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
-				isInviadeActiveVortex = loc.isInsideActiveVotrex(player) && player.getRace().equals(loc.getInvadersRace());
-				if (isInviadeActiveVortex) {
-					TeleportService2.teleportTo(player, loc.getResurrectionPoint());
+				if (loc.isInsideActiveVotrex(player) && player.getRace().equals(loc.getInvadersRace())) {
+					resPos = loc.getResurrectionPoint();
+					break;
 				}
 			}
 
-			if (!isInviadeActiveVortex) {
+			if (resPos != null)
+				TeleportService2.teleportTo(player, resPos);
+			else
 				TeleportService2.moveToBindLocation(player, true);
-			}
 		}
 		player.unsetResPosState();
 	}
@@ -166,10 +166,10 @@ public class PlayerReviveService {
 	public static final void instanceRevive(Player player, int skillId) {
 		// Revive in Instances
 		if (player.getPanesterraTeam() != null) {
-  			if (AhserionInstance.getInstance().revivePlayer(player, skillId)) {
-  				return;
-  			}
-  		}
+			if (AhserionInstance.getInstance().revivePlayer(player, skillId)) {
+				return;
+			}
+		}
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player)) {
 			return;
 		}
@@ -204,7 +204,6 @@ public class PlayerReviveService {
 			}
 		});
 		boolean isNoResurrectPenalty = player.getController().isNoResurrectPenaltyInEffect();
-		player.getMoveController().stopFalling(player.getZ());
 		player.setPlayerResActivate(false);
 		player.getLifeStats().setCurrentHpPercent(isNoResurrectPenalty ? 100 : hpPercent);
 		player.getLifeStats().setCurrentMpPercent(isNoResurrectPenalty ? 100 : mpPercent);
@@ -237,8 +236,8 @@ public class PlayerReviveService {
 		int useDelay = useLimits.getDelayTime();
 		player.addItemCoolDown(useLimits.getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 		player.getController().cancelUseItem();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate()
-			.getTemplateId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
 		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
 			cancelRes(player);
 			return;

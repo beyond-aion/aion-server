@@ -20,27 +20,10 @@ public class SummonLifeStats extends CreatureLifeStats<Summon> {
 
 	@Override
 	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
+		super.onIncreaseHp(type, value, skillId, log);
 		Creature master = getOwner().getMaster();
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-
-		if (master instanceof Player) {
+		if (master instanceof Player)
 			PacketSendUtility.sendPacket((Player) master, new SM_SUMMON_UPDATE(getOwner()));
-		}
-	}
-
-	@Override
-	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-	}
-
-	@Override
-	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

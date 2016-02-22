@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,9 +15,6 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class FlyController {
 
-	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(FlyController.class);
-
 	private static final long FLY_REUSE_TIME = 10000;
 	private Player player;
 
@@ -28,18 +22,11 @@ public class FlyController {
 		this.player = player;
 	}
 
-	/**
-	 * 
-	 */
 	public void onStopGliding() {
 		if (player.isInGlidingState()) {
-			if (player.isInFlyState(FlyState.FLYING)) {
-				player.unsetFlyState(FlyState.GLIDING);
-				player.unsetState(CreatureState.GLIDING);
-				// PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE, 0, 0), true);
-			} else {
-				player.unsetFlyState(FlyState.GLIDING);
-				player.unsetState(CreatureState.GLIDING);
+			player.unsetFlyState(FlyState.GLIDING);
+			player.unsetState(CreatureState.GLIDING);
+			if (!player.isInFlyState(FlyState.FLYING)) {
 				player.getLifeStats().triggerFpRestore();
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE, 0, 0), true);
 			}

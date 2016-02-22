@@ -1043,7 +1043,14 @@ public class PlayerAppearance implements Cloneable {
 	 * @return height
 	 */
 	public float getHeight() {
-		return height;
+		return height; // character height is odd, but client needs it ¯\_(ツ)_/¯
+	}
+
+	/**
+	 * @return The approximate real height of the character.
+	 */
+	public float getBoundHeight() {
+		return height * 1.75f;
 	}
 
 	/**

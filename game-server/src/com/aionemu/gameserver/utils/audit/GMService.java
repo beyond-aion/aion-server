@@ -52,7 +52,7 @@ public class GMService {
 			String delimiter = "=============================";
 			StringBuilder sb = new StringBuilder(delimiter);
 			if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
-				player.setInvul(true);
+				player.setInvulnerable(true);
 				sb.append("\n>> Connection in Invulnerable mode <<");
 			}
 			if (AdminConfig.INVISIBLE_GM_CONNECTION) {

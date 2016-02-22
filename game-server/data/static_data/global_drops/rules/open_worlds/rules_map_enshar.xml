@@ -8,4 +8,389 @@
 			<gd_item id="185000223" name="Aetheric Field Fragment" />
 		</gd_items>
 	</gd_rule>
+	<!-- Sunayaka -->
+	<gd_rule rule_name="Named Hairpin" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220020" name="Berserker Sunayaka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003135" name="Sunayaka's Hairpin" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon Chest" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220020" name="Berserker Sunayaka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051824" name="Sunayaka's Sword Box"/>
+			<gd_item id="188051825" name="Sunayaka's Warhammer Box" />
+			<gd_item id="188051826" name="Sunayaka's Dagger Box" />
+			<gd_item id="188051827" name="Sunayaka's Jewel Box" />
+			<gd_item id="188051828" name="Sunayaka's Tome Box" />
+			<gd_item id="188051829" name="Sunayaka's Greatsword Box" />
+			<gd_item id="188051830" name="Sunayaka's Spear Box" />
+			<gd_item id="188051831" name="Sunayaka's Staff Box" />
+			<gd_item id="188051832" name="Sunayaka's Longbow Box" />
+			<gd_item id="101800856" name="Sunayaka's Pistol" />
+			<gd_item id="101900854" name="Sunayaka's Cannon" />
+			<gd_item id="102000888" name="Sunayaka's Harp" />
+			<gd_item id="102100748" name="Sunayaka's Cipher-Blade" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220020" name="Berserker Sunayaka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+		</gd_items>
+	</gd_rule>
+	<!-- Tatar -->
+	<gd_rule rule_name="Named Helm" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220019" name="Tatar's Blaze" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003130" name="Tatar's Headband" />
+			<gd_item id="125003131" name="Tatar's Hat" />
+			<gd_item id="125003132" name="Tatar's Chain Helm" />
+			<gd_item id="125003133" name="Tatar's Helm" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" base_chance="40" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220019" name="" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170490017" name="[Souvenir] Golden Tatar Statue" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220019" name="Tatar's Blaze" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001297" name="Tatar's Sword" />
+			<gd_item id="100100988" name="Tatar's Warhammer" />
+			<gd_item id="100201146" name="Tatar's Dagger" />
+			<gd_item id="100501004" name="Tatar's Jewel" />
+			<gd_item id="100601058" name="Tatar's Tome" />
+			<gd_item id="100900991" name="Tatar's Greatsword" />
+			<gd_item id="101300949" name="Tatar's Spear" />
+			<gd_item id="101501016" name="Tatar's Staff" />
+			<gd_item id="101701030" name="Tatar's Longbow" />
+			<gd_item id="101800792" name="Tatar's Pistol" />
+			<gd_item id="101900796" name="Tatar's Aethercannon" />
+			<gd_item id="102000830" name="Tatar's Harp" />
+			<gd_item id="188051833" name="Tatar's Cipher-Blade" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Weapon" base_chance="50" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220019" name="Tatar's Blaze" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188051815" name="Tatar's Sword Box" />
+			<gd_item id="188051816" name="Tatar's Warhammer Box" />
+			<gd_item id="188051817" name="Tatar's Dagger Box" />
+			<gd_item id="188051818" name="Tatar's Jewel Box" />
+			<gd_item id="188051819" name="Tatar's Tome Box" />
+			<gd_item id="188051820" name="Tatar's Greatsword Box" />
+			<gd_item id="188051821" name="Tatar's Spear Box" />
+			<gd_item id="188051822" name="Tatar's Staff Box" />
+			<gd_item id="188051823" name="Tatar's Longbow Box" />
+			<gd_item id="188052657" name="Tatar's Pistol Box" />
+			<gd_item id="188052658" name="Tatar's Aethercannon Box" />
+			<gd_item id="188052659" name="Tatar's Harp Box" />
+			<gd_item id="188051833" name="Tatar's Cipher-Blade Box" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Shield" base_chance="40" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="220019" name="Tatar's Blaze" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001406" name="Tatar's Flawless Shield" />
+			<gd_item id="115001407" name="Tatar's Flawless Scale Shield" />
+		</gd_items>
+	</gd_rule>
+	<!-- Others -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001790" name="Sealed Earth Sword" />
+			<gd_item id="100101380" name="Sealed Earth Mace" />
+			<gd_item id="100201555" name="Sealed Earth Dagger" />
+			<gd_item id="100501348" name="Sealed Earth Orb" />
+			<gd_item id="100601465" name="Sealed Earch Spellbook" />
+			<gd_item id="100901417" name="Sealed Earth Greatsword" />
+			<gd_item id="101301306" name="Sealed Earth Polearm" />
+			<gd_item id="101501395" name="Sealed Earth Staff" />
+			<gd_item id="101701401" name="Sealed Earth Bow" />
+			<gd_item id="101801259" name="Sealed Earth Pistol" />
+			<gd_item id="101901166" name="Sealed Earch Aethercannon" />
+			<gd_item id="102001285" name="Sealed Earth Harp" />
+			<gd_item id="102101102" name="Sealed Earth Cipher-Blade" />
+			<gd_item id="115001859" name="Shield of Sealed Earth" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Power Shards" base_chance="100" min_count="500" max_count="500" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="169000009" name="Premium Power Shard" />
+			<gd_item id="169000010" name="Superior Power Shard" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053746" name="Faded Middle Grade Idian Bundle" />
+			<gd_item id="188053747" name="Faded High Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053747" name="Faded Middle Grade Idian Bundle" />
+			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" min_count="1" max_count="3" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="80" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053742" name="Faded Middle Grade Manastone Bundle" />
+			<gd_item id="188053743" name="Faded High Grade Manastone Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Pouch" base_chance="80" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053743" name="Faded High Grade Manastone Bundle" />
+			<gd_item id="188053744" name="Elegant Middle Grade Composite Manastone Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" min_count="1" max_count="3" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053744" name="Elegant High Grade Composite Manastone Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Enchantment Stone Bundle" base_chance="60" min_count="1" max_count="3">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053749" name="Heavy Enchantment Stone Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Hairpin" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125004237" name="Wave Song Plate Helmet" />
+			<gd_item id="125004238" name="Wave Song Chain Helm" />
+			<gd_item id="125004239" name="Wave Song Leather Hat" />
+			<gd_item id="125004240" name="Wave Song Cloth Bandana" />
+			<gd_item id="125004300" name="Deep Sea Feast Hairpin" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Mythic Weapon" base_chance="60" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001807" name="Sea Feast Sword" />
+			<gd_item id="100101396" name="Sea Feast Mace" />
+			<gd_item id="100201568" name="Sea Feast Dagger" />
+			<gd_item id="100501360" name="Sea Feast Orb" />
+			<gd_item id="100601477" name="Sea Feast Spellbook" />
+			<gd_item id="100901429" name="Sea Feast Greatsword" />
+			<gd_item id="101301319" name="Sea Feast Polearm" />
+			<gd_item id="101501412" name="Sea Feast Staff" />
+			<gd_item id="101701413" name="Sea Feast Bow" />
+			<gd_item id="101801270" name="Sea Feast Pistol" />
+			<gd_item id="101901176" name="Sea Feast Aethercannon" />
+			<gd_item id="102001297" name="Sea Feast Harp" />
+			<gd_item id="102101114" name="Sea Feast Cipher-Blade" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Armor" base_chance="60" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101891" name="Sea Feast Jacket" />
+			<gd_item id="110301884" name="Sea Feast Jerkin" />
+			<gd_item id="110551215" name="Sea Feast Hauberk" />
+			<gd_item id="110601675" name="Sea Feast Breastplate" />
+			<gd_item id="111101706" name="Sea Feast Gloves" />
+			<gd_item id="111301822" name="Sea Feast Vambraces" />
+			<gd_item id="111501774" name="Sea Feast Handguards" />
+			<gd_item id="111601638" name="Sea Feast Gauntlets" />
+			<gd_item id="112101655" name="Sea Feast Pauldrons" />
+			<gd_item id="112301761" name="Sea Feast Shoulderguards" />
+			<gd_item id="112501713" name="Sea Feast Spaulders" />
+			<gd_item id="112601620" name="Sea Feast Shoulderplates" />
+			<gd_item id="113101717" name="Sea Feast Leggings" />
+			<gd_item id="113301853" name="Sea Feast Legguards" />
+			<gd_item id="113501792" name="Sea Feast Chausses" />
+			<gd_item id="113601621" name="Sea Feast Greaves" />
+			<gd_item id="114101751" name="Sea Feast Shoes" />
+			<gd_item id="114301890" name="Sea Feast Boots" />
+			<gd_item id="114501802" name="Sea Feast Brogans" />
+			<gd_item id="114601628" name="Sea Feast Plate Boots" />
+		</gd_items>
+	</gd_rule>
 </global_rules>

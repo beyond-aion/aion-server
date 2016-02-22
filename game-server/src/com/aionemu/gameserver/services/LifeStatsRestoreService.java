@@ -133,7 +133,7 @@ public class LifeStatsRestoreService {
 					reduceFp = costFp.intValue();
 				}
 
-				lifeStats.reduceFp(reduceFp);
+				lifeStats.reduceFp(null, reduceFp, 0, null);
 				lifeStats.specialrestoreFp();
 			}
 		}

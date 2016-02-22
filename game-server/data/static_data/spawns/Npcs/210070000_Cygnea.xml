@@ -371,7 +371,7 @@
 			<spot x="1481.14636" y="2841.00439" z="309.20605" random_walk="1"/>
 		</spawn>
 		<!-- azurethresh vortile -->
-		<spawn npc_id="235951" respawn_time="1795">
+		<spawn npc_id="235951" respawn_time="895">
 			<spot x="2000.39209" y="369.72574" z="579.65192" random_walk="1"/>
 			<spot x="2103.01270" y="468.58160" z="564.39874" random_walk="1"/>
 			<spot x="2221.06934" y="424.79852" z="570.03296" random_walk="1"/>
@@ -959,7 +959,7 @@
 			<spot x="226.37508" y="277.10968" z="436.30563"/>
 		</spawn>
 		<!-- bladewind fury -->
-		<spawn npc_id="235953" respawn_time="1795">
+		<spawn npc_id="235953" respawn_time="895">
 			<spot x="1029.23254" y="614.38538" z="567.89886" random_walk="1"/>
 			<spot x="1074.87195" y="753.37183" z="548.82697" random_walk="1"/>
 			<spot x="1148.49963" y="698.10022" z="556.23120" random_walk="1"/>
@@ -1361,7 +1361,7 @@
 			<spot x="1906.47534" y="315.93207" z="576.34570" random_walk="1"/>
 		</spawn>
 		<!-- coralhorn trico -->
-		<spawn npc_id="235950" respawn_time="1795">
+		<spawn npc_id="235950" respawn_time="895">
 			<spot x="1678.56787" y="484.42947" z="541.26819" h="105"/>
 			<spot x="1862.28650" y="508.13489" z="538.25842" h="60"/>
 			<spot x="1875.35535" y="382.62665" z="573.07605" h="117"/>
@@ -1517,7 +1517,7 @@
 			<spot x="1521.12976" y="2828.40845" z="317.50690" random_walk="4"/>
 		</spawn>
 		<!-- duneshriek sandshark ripper -->
-		<spawn npc_id="235961" respawn_time="1795">
+		<spawn npc_id="235961" respawn_time="895">
 			<spot x="682.53607" y="3004.43115" z="294.17163" random_walk="1"/>
 			<spot x="789.12018" y="2999.62183" z="273.67178" random_walk="1"/>
 			<spot x="980.69312" y="2850.39648" z="297.42328" random_walk="1"/>
@@ -1612,7 +1612,7 @@
 			<spot x="2039.39270" y="2878.04932" z="322.74359"/>
 		</spawn>
 		<!-- enraged primeval ettin -->
-		<spawn npc_id="235960" respawn_time="1795">
+		<spawn npc_id="235960" respawn_time="895">
 			<spot x="1950.39221" y="2649.06177" z="318.48511" random_walk="1"/>
 			<spot x="2002.75891" y="2523.59741" z="310.77805" random_walk="1"/>
 			<spot x="2144.71484" y="2496.03320" z="305.03149" random_walk="1"/>
@@ -2417,7 +2417,7 @@
 			<spot x="724.77216" y="1813.87390" z="457.42325" random_walk="3"/>
 		</spawn>
 		<!-- garden sentry captain brohum -->
-		<spawn npc_id="235954" respawn_time="295">
+		<spawn npc_id="235954" respawn_time="895">
 			<spot x="285.29529" y="1293.06128" z="462.30103" random_walk="3"/>
 			<spot x="303.08423" y="1568.67712" z="460.15045" random_walk="3"/>
 			<spot x="683.75586" y="1858.05286" z="462.25000" random_walk="3"/>
@@ -2444,7 +2444,7 @@
 			<spot x="1139.61633" y="804.61816" z="562.75000" h="75"/>
 		</spawn>
 		<!-- gatekeeper flox -->
-		<spawn npc_id="235975" respawn_time="295">
+		<spawn npc_id="235975" respawn_time="28795">
 			<spot x="232.37521" y="2698.42798" z="210.62500"/>
 		</spawn>
 		<!-- gatorback skilex -->
@@ -2711,7 +2711,7 @@
 			<spot x="1192.46582" y="1629.20081" z="466.04996" h="90"/>
 		</spawn>
 		<!-- grotesque twilight gnarl -->
-		<spawn npc_id="235958" respawn_time="295">
+		<spawn npc_id="235958" respawn_time="895">
 			<spot x="2042.57947" y="1333.86084" z="427.62500" h="105"/>
 			<spot x="2100.99609" y="1166.09790" z="429.33063" h="45"/>
 			<spot x="2124.41309" y="1471.04102" z="432.13525" h="75"/>
@@ -3098,7 +3098,7 @@
 			<spot x="2994.48804" y="819.40894" z="572.14197" h="60"/>
 		</spawn>
 		<!-- machine spirit tottal -->
-		<spawn npc_id="235971" respawn_time="295">
+		<spawn npc_id="235971" respawn_time="14395">
 			<spot x="1188.01025" y="1999.26453" z="167.50063" h="10"/>
 		</spawn>
 		<!-- magmapit protector -->
@@ -4417,7 +4417,7 @@
 			<spot x="503.73071" y="1974.33655" z="467.23221" h="95"/>
 		</spawn>
 		<!-- serrated sandthorn arachna -->
-		<spawn npc_id="235962" respawn_time="295">
+		<spawn npc_id="235962" respawn_time="895">
 			<spot x="328.17273" y="2950.20093" z="264.22839" h="117" random_walk="1"/>
 			<spot x="428.37512" y="3023.02881" z="263.14844" h="90" random_walk="1"/>
 			<spot x="585.67126" y="3001.99854" z="274.79102" h="90" random_walk="1"/>
@@ -4478,7 +4478,7 @@
 			<spot x="2566.20825" y="2928.60425" z="299.17450" h="117"/>
 		</spawn>
 		<!-- shatterroar kirrin -->
-		<spawn npc_id="235965" respawn_time="295">
+		<spawn npc_id="235965" respawn_time="14395">
 			<spot x="1251.49084" y="296.65216" z="566.94757" h="30"/>
 		</spawn>
 		<!-- shellhorn lobnite -->
@@ -4534,13 +4534,13 @@
 			<spot x="2384.47510" y="1549.73950" z="440.83572" h="45"/>
 		</spawn>
 		<!-- shining stone -->
-		<spawn npc_id="235955" respawn_time="1795">
+		<spawn npc_id="235955" respawn_time="895">
 			<spot x="1469.06165" y="1305.93042" z="467.04996" h="100"/>
 			<spot x="1508.96106" y="1240.83813" z="466.05396" h="60"/>
 			<spot x="1568.31775" y="1176.17944" z="452.62500" h="67"/>
 		</spawn>
 		<!-- silent drakan -->
-		<spawn npc_id="235957" respawn_time="1795">
+		<spawn npc_id="235957" respawn_time="895">
 			<spot x="1745.71179" y="1286.58203" z="442.00000" h="105"/>
 			<spot x="1931.81335" y="1087.47070" z="439.84192" h="40"/>
 			<spot x="2037.90112" y="1131.84229" z="439.86264" h="60"/>
@@ -5129,7 +5129,7 @@
 			<spot x="2973.80933" y="891.65961" z="574.03369" h="60"/>
 		</spawn>
 		<!-- the sunlight claw -->
-		<spawn npc_id="235956" respawn_time="1795">
+		<spawn npc_id="235956" respawn_time="895">
 			<spot x="1229.79089" y="1241.09656" z="479.6756" random_walk="1"/>
 			<spot x="1403.77368" y="1388.99316" z="479.50000" random_walk="1"/>
 			<spot x="1441.67236" y="1342.93958" z="479.50000" random_walk="1"/>
@@ -5556,7 +5556,7 @@
 			<spot x="2823.46484" y="1648.24609" z="401.47583"/>
 		</spawn>
 		<!-- twistspine overlord -->
-		<spawn npc_id="235952" respawn_time="1795">
+		<spawn npc_id="235952" respawn_time="895">
 			<spot x="1225.93054" y="574.93781" z="563.75000" random_walk="1"/>
 			<spot x="1251.09570" y="638.06757" z="553.43506"  random_walk="1"/>
 			<spot x="1279.90540" y="555.48413" z="564.08026" random_walk="1"/>

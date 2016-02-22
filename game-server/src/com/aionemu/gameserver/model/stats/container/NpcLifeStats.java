@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.services.LifeStatsRestoreService;
 
 /**
@@ -18,26 +16,6 @@ public class NpcLifeStats extends CreatureLifeStats<Npc> {
 	}
 
 	@Override
-	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-	}
-
-	@Override
-	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
-		// nothing todo
-	}
-
-	@Override
-	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-	}
-
-	@Override
-	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		// nothing todo
-	}
-
-	@Override
 	public void triggerRestoreTask() {
 		restoreLock.lock();
 		try {
@@ -47,9 +25,5 @@ public class NpcLifeStats extends CreatureLifeStats<Npc> {
 		} finally {
 			restoreLock.unlock();
 		}
-	}
-
-	public void startResting() {
-		triggerRestoreTask();
 	}
 }

@@ -64,7 +64,6 @@ public class NochsanaEvent extends GameEvent {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		CustomBase base = teleportToBase.get(npc);
 		if (player.getRace() != base.getOwner()) {
-			player.getLifeStats().reduceHp((player.getLifeStats().getCurrentHp() / 100) * 50, npc);
 			BattleService.sendBattleNotice(player, "This Portal is owned by another faction!");
 			return;
 		}
