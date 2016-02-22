@@ -336,12 +336,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * to game or player level up
 	 */
 	public void synchronizeWithMaxStats() {
-		int maxHp = getMaxHp();
-		if (currentHp != maxHp)
-			currentHp = maxHp;
-		int maxMp = getMaxMp();
-		if (currentMp != maxMp)
-			currentMp = maxMp;
+		currentHp = getMaxHp();
+		currentMp = getMaxMp();
 	}
 
 	/**

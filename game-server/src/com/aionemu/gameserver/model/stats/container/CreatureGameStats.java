@@ -41,7 +41,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	private int attackCounter = 0;
 	protected T owner = null;
 
-	private int cachedHP, cachedMP;
+	private int cachedMaxHp, cachedMaxMp;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
@@ -334,32 +334,22 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	private void checkHPStats() {
 		synchronized (this) {
-			int oldHP = cachedHP;
-			cachedHP = 0;
-			int newHP = this.getMaxHp().getCurrent();
-			cachedHP = newHP;
-			if (oldHP == 0) {
-				oldHP = this.getMaxHp().getBase();
-			}
-			if (oldHP != newHP) {
-				float percent = 1f * newHP / oldHP;
-				owner.getLifeStats().setCurrentHp(Math.round(owner.getLifeStats().getCurrentHp() * percent));
+			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getMaxHp().getBase();
+			int currentMaxHp = cachedMaxHp = getMaxHp().getCurrent();
+			if (oldMaxHp != currentMaxHp) {
+				float percent = 1f * currentMaxHp / oldMaxHp;
+				owner.getLifeStats().setCurrentHp(Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp));
 			}
 		}
 	}
 
 	private void checkMPStats() {
 		synchronized (this) {
-			int oldMP = cachedMP;
-			cachedMP = 0;
-			int newMP = this.getMaxMp().getCurrent();
-			cachedMP = newMP;
-			if (oldMP == 0) {
-				oldMP = this.getMaxMp().getBase();
-			}
-			if (oldMP != newMP) {
-				float percent = 1f * newMP / oldMP;
-				owner.getLifeStats().setCurrentMp(Math.round(owner.getLifeStats().getCurrentMp() * percent));
+			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getMaxMp().getBase();
+			int currentMaxMp = cachedMaxMp = getMaxMp().getCurrent();
+			if (oldMaxMp != currentMaxMp) {
+				float percent = 1f * currentMaxMp / oldMaxMp;
+				owner.getLifeStats().setCurrentMp(Math.min(Math.round(owner.getLifeStats().getCurrentMp() * percent), currentMaxMp));
 			}
 		}
 	}
