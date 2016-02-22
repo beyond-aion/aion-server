@@ -3717,6 +3717,24 @@
 			<drop item_id="188052724" name="Beritran Hoard" chance="100"/>
 		</drop_group>
 	</npc_drop>
+	<!-- START: Sealed Danuar Mysticarium -->
+	<npc_drop npc_id="702700" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Key">
+			<drop item_id="185000224" name="Solid Prison Key" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Ancient Relic">
+			<drop item_id="186000064" name="Greater Ancient Icon" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702701" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Key">
+			<drop item_id="185000226" name="Hidden Prison Key" chance="20"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Ancient Relic">
+			<drop item_id="186000064" name="Greater Ancient Icon" chance="5"/>
+		</drop_group>
+	</npc_drop>
+	<!-- END: Sealed Danuar Mysticarium -->
 	<!-- Events -->
 	<!-- Celebrate Solorius Chest -->
 	<npc_drop npc_id="701457" replace_type="FULL">

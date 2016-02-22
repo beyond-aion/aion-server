@@ -1,11 +1,9 @@
 package instance;
 
-import java.util.Map;
-import java.util.concurrent.Future;
-
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -16,6 +14,11 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import javolution.util.FastTable;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * After activating the start device one of three game events will be chosen.
@@ -36,13 +39,14 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * the commander wave. Maybe he drops the missing ap relics or rare
  * manastone bundles. (written by Estrayl)
  * 
- * @author Cheatkiller, Tibald
+ * @author Yeats
+ * TODO: Mini Game 2 & 3
  */
 @InstanceID(300480000)
 public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private Future<?> collectingPhaseEndTask;
+	private List<Future<?>> tasks;
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -52,63 +56,80 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onOpenDoor(int door) {
-		switch (door) {
-			case 3:
-			case 101:
-				spawn(230058, 213.9430f, 508.9750f, 153.2284f, (byte) 110);
-				break;
-			case 6:
-				spawn(230057, 226.7380f, 529.7029f, 153.03912f, (byte) 100);
-				break;
-			case 7:
-				spawn(230051, 242.3215f, 540.8343f, 152.59f, (byte) 93);
-				break;
-			case 8:
-				spawn(230052, 262.3589f, 544.4155f, 150.5014f, (byte) 83);
-				break;
-			case 10:
-				spawn(230053, 296.3592f, 547.9075f, 148.7211f, (byte) 83);
-				break;
-			case 11:
-				spawn(230054, 317.7392f, 544.2635f, 148.7996f, (byte) 80);
-				break;
-			case 12:
-				spawn(230056, 337.1739f, 531.7154f, 148.4716f, (byte) 73);
-				break;
-			case 13:
-				spawn(230055, 346.2431f, 511.4081f, 148.1805f, (byte) 66);
-				break;
+		if (doors.containsKey(door)) {
+			doors.remove(door);
+			switch (door) {
+				case 101:
+					spawn(219963, 212.068f, 510.02f, 153.23f, (byte) 115);
+					break;
+				case 7:
+					spawn(219963, 241.602f, 541.79f, 152.591f, (byte) 95);
+					break;
+				case 11:
+					spawn(219963, 317.654f, 545.801f, 148.8f, (byte) 80);
+					break;
+				case 6:
+					spawn(219964, 225.53f, 529.7f, 153.04f, (byte) 100);
+					break;
+				case 10:
+					spawn(219964, 295.04f, 547.48f, 148.73f, (byte) 90);
+					break;
+				case 8:
+					spawn(219965, 262.17f, 545.68f, 150.51f, (byte) 85);
+					break;
+				case 12:
+					spawn(219965, 336.94f, 532.89f, 148.472f, (byte) 75);
+					break;
+				case 13:
+					spawn(219969, 348.14f, 512.56f, 148.19f, (byte) 65);
+					break;
+			}
 		}
 	}
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
-			case 831146:
-				// Find Start pyramid
-				scheduleCollectingEnd();
-				// Open door
-				// teleport player
+			case 731583:
+				startTasks();
+				doors.get(3).setOpen(true);
+				sendMsg(1402801);
+				TeleportService2.teleportTo(player, mapId, instanceId, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().onDelete();
 				break;
+			case 702715:
+				TeleportService2.teleportTo(player, mapId, instanceId, 236.1f, 488.86f, 152f, (byte) 25, TeleportAnimation.FADE_OUT_BEAM);
+				break;
+			case 702717:
+				TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+				break;
+		}
+	}
+
+	private void startTasks() {
+		tasks = new FastTable<>();
+		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402802), 125000));
+		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402803), 155000));
+		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402804), 175000));
+		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			instance.getNpcs().stream().filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 ||
+					npc.getNpcId() == 702700 || npc.getNpcId() == 702701)).forEach(npc -> npc.getController().onDelete());
+			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);
+			sendMsg(1402805);
+			sendMsg(1402806);
+		}, 185000)); //3min 5sec
+	}
+
+	private void cancelTasks() {
+		if (tasks != null) {
+			tasks.stream().filter(future -> future != null && !future.isCancelled()).forEach(future -> future.cancel(true));
 		}
 	}
 
 	@Override
 	public void onInstanceDestroy() {
-		if (collectingPhaseEndTask != null && !collectingPhaseEndTask.isCancelled())
-			collectingPhaseEndTask.cancel(true);
+		cancelTasks();
 		doors.clear();
-	}
-
-	private void scheduleCollectingEnd() {
-		collectingPhaseEndTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				// Spawn Portal to prisoners and despawn mobs + chests
-			}
-		}, 1800000); // Find messages and duration
 	}
 
 	@Override

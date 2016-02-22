@@ -157,9 +157,10 @@
 	<!-- 4.8 Danuar Sanctuary -->
 	<instance_exit instance_id="301140000" exit_world="210070000" race="ELYOS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
 	<instance_exit instance_id="301140000" exit_world="220080000" race="ASMODIANS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
-	 <!-- 4.3 Danuar Mysticarium
-	<instance_exit instance_id="300480000" exit_world="600050000" race="PC_ALL" x="1981.4227" y="1926.7712" z="334.80017" h="105"/>
-	 -->
+	 <!-- 4.8 Sealed Danuar Mysticarium -->
+	<instance_exit instance_id="300480000" exit_world="210070000" race="ELYOS" x="2905" y="803" z="569.53" h="22"/>
+	<instance_exit instance_id="300480000" exit_world="220080000" race="ASMODIANS" x="454" y="2262" z="220.1" h="22"/>
+	
 	<!-- 4.8 Ophidian Bridge -->
 	<instance_exit instance_id="300590000" exit_world="210070000" race="ELYOS" x="2783.5369" y="3003.8613" z="274.875" h="24"/>
 	<instance_exit instance_id="300590000" exit_world="220080000" race="ASMODIANS" x="490.745" y="93.0318" z="199.121" h="99"/>

@@ -158,6 +158,9 @@ public class PortalDialogAI2 extends PortalAI2 {
 				case 804625:
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762, 0));
 					break;
+				case 731583:
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+					break;
 				default:
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId, 0));
 					break;

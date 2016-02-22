@@ -6257,8 +6257,8 @@
 		</spawn>
 		<!-- sealed danuar mysticarium entrance -->
 		<spawn npc_id="730721" respawn_time="295">
-			<spot x="2314.51880" y="1531.84875" z="439.00842"/>
-			<spot x="1311.92236" y="637.60736" z="582.99652"/>
+			<spot x="2314.51880" y="1531.84875" z="439.00842" static_id="1178"/>
+			<spot x="1311.92236" y="637.60736" z="582.99652" static_id="523"/>
 			<spot x="1231.37646" y="1643.19055" z="468.52835" static_id="1484"/>
 		</spawn>
 		<!-- collapsed ruins -->

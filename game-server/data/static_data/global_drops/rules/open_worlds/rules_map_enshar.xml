@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Aetheric Field Fragment" base_chance="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_items>
+			<gd_item id="185000223" name="Aetheric Field Fragment" />
+		</gd_items>
+	</gd_rule>
+</global_rules>

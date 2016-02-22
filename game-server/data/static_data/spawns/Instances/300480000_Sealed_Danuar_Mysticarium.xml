@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<spawn_map map_id="300480000">
+		<!-- Internal Teleport Device -->
+		<spawn npc_id="731583">
+			<spot x="168.134" y="122.782" z="231.665" h="60"/>
+		</spawn>
+		<!-- Captured Test Subject Spiritstrike -->
+		<spawn npc_id="219958">
+			<spot x="189.567" y="172.076" z="239.71" random_walk="3"/>
+			<spot x="188.43" y="246.276" z="240.15" random_walk="3"/>
+			<spot x="168.688" y="244.724" z="189.566" random_walk="3"/>
+			<spot x="226.724" y="161.904" z="213.9" random_walk="2"/>
+			<spot x="249.706" y="208.9" z="188.7" h="60"/>
+		</spawn>
+		<!-- Captured Test Subject Ghostmage -->
+		<spawn npc_id="219959">
+			<spot x="130.368" y="209.38" z="188.7" h="115"/>
+			<spot x="151.08" y="247.071" z="213.98" h="105"/>
+			<spot x="227.16" y="247.42" z="214.4" h="75"/>
+			<spot x="152.61" y="160.495" z="213.82" random_walk="2"/>
+			<spot x="193.173" y="207.774" z="239.04" h="120"/>
+		</spawn>
+		<!-- Sealed Danuar Mysticarium Exit -->
+		<spawn npc_id="702717">
+			<spot x="329.93" y="495.9" z="147.18" h="105"/>
+		</spawn>
+		<!-- sturdy boulder -->
+		<spawn npc_id="236272">
+			<spot x="229.11491" y="475.88202" z="150.01753" static_id="267"/>
+			<spot x="335.93961" y="494.84433" z="146.76489" static_id="268"/>
+			<spot x="189.00188" y="257.82077" z="240.16586" static_id="269"/>
+		</spawn>
+		<!-- Ancient Box -->
+		<spawn npc_id="702700">
+			<spot x="152.72" y="189.62" z="239.387" h="7"/>
+			<spot x="198.63" y="185.57" z="187.975" h="97"/>
+			<spot x="239.95" y="189.83" z="188.7" h="8"/>
+			<spot x="239.51" y="228.03" z="188.7" h="51"/>
+			<spot x="188.07" y="230.13" z="188.02" h="60"/>
+			<spot x="149.27" y="220.37" z="187.86" h="63"/>
+			<spot x="155.46" y="185.73" z="187.86" h="120"/>
+			<spot x="212.75" y="242.75" z="187.86" h="105"/>
+			<spot x="177.41" y="250.06" z="207.85" h="50"/>
+			<spot x="122.25" y="209.29" z="214.18" h="60"/>
+			<spot x="148.9" y="205.5" z="213.74" h="106"/>
+			<spot x="202.04" y="169.65" z="213.76" h="120"/>
+			<spot x="255.16" y="210.19" z="214.5" h="0"/>
+			<spot x="217.67" y="237.03" z="239.56" h="65"/>
+		</spawn>
+		<!-- Ancient Box -->
+		<spawn npc_id="702701">
+			<spot x="195.47" y="168.23" z="239.70" h="105"/>
+			<spot x="188.7" y="208.69" z="238.8" h="115"/>
+			<spot x="184.27" y="248.47" z="240.15" h="105"/>
+			<spot x="125.14" y="209.7" z="188.7" h="60"/>
+			<spot x="174.01" y="246.64" z="189.57" h="5"/>
+			<spot x="254.09" y="208.77" z="188.7" h="0"/>
+			<spot x="147.63" y="251.13" z="213.98" h="105"/>
+			<spot x="160.97" y="159.65" z="213.82" h="7"/>
+			<spot x="216.28" y="159.53" z="213.9" h="60"/>
+			<spot x="232.13" y="252.1" z="214.4" h="20"/>
+		</spawn>
+	</spawn_map>
+</spawns>
