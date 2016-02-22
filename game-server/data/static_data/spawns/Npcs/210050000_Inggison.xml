@@ -6799,6 +6799,10 @@
 			<spot x="953.641" y="1789.88" z="331.913" h="118"/>
 			<spot x="960.061" y="1845.13" z="328.992" h="89"/>
 		</spawn>
+		<!-- Southern Obelisk Support -->
+		<spawn npc_id="702662" respawn_time="295">
+			<spot x="2192.7" y="368.6" z="431.125"/>
+		</spawn>
 		<!-- Southern Petrified Mass -->
 		<spawn npc_id="730228" respawn_time="295">
 			<spot x="2938.32" y="1211.81" z="356.422" static_id="611"/>
