@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <skill_tree>
+	<skill skillId="1" name="Transformation: White Tiger" minLevel="10" race="ELYOS" classId="RANGER" />
+	<skill skillId="2" name="Transformation: White Tiger" minLevel="22" skillLearn="1" race="ELYOS" classId="RANGER" />
+	<skill skillId="3" name="Transformation: White Tiger" minLevel="34" skillLearn="2" race="ELYOS" classId="RANGER" />
+	<skill skillId="4" name="Transformation: White Tiger" minLevel="45" skillLearn="3" race="ELYOS" classId="RANGER" />
+	<skill skillId="5" name="Transformation: White Tiger" minLevel="10" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="6" name="Transformation: White Tiger" minLevel="22" skillLearn="5" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="7" name="Transformation: White Tiger" minLevel="34" skillLearn="6" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="8" name="Transformation: White Tiger" minLevel="45" skillLearn="7" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="9" name="Transformation: Krall" minLevel="10" race="ELYOS" classId="RANGER" />
+	<skill skillId="10" name="Transformation: Krall" minLevel="22" skillLearn="9" race="ELYOS" classId="RANGER" />
+	<skill skillId="11" name="Transformation: Krall" minLevel="34" skillLearn="10" race="ELYOS" classId="RANGER" />
+	<skill skillId="12" name="Transformation: Krall" minLevel="45" skillLearn="11" race="ELYOS" classId="RANGER" />
+	<skill skillId="13" name="Transformation: Krall" minLevel="10" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="14" name="Transformation: Krall" minLevel="22" skillLearn="13" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="15" name="Transformation: Krall" minLevel="34" skillLearn="14" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="16" name="Transformation: Krall" minLevel="45" skillLearn="15" race="ASMODIANS" classId="RANGER" />
+	<skill skillId="17" name="Sleep: Scarecrow" minLevel="10" race="PC_ALL" classId="SORCERER" />
+	<skill skillId="18" name="Sleep: Frightcorn" minLevel="10" race="PC_ALL" classId="SORCERER" />
+	<skill skillId="19" name="Fear: Poppy" minLevel="28" race="PC_ALL" classId="SPIRIT_MASTER" />
+	<skill skillId="20" name="Fear: Ginseng" minLevel="28" race="PC_ALL" classId="SPIRIT_MASTER" />
+	<skill skillId="21" name="Summon Divine Mirror" minLevel="16"  race="ELYOS" classId="CLERIC" />
+	<skill skillId="22" name="Summon Divine Mirror" minLevel="28" skillLearn="21" race="ELYOS" classId="CLERIC" />
+	<skill skillId="23" name="Summon Divine Mirror" minLevel="40" skillLearn="22" race="ELYOS" classId="CLERIC" />
+	<skill skillId="24" name="Summon Divine Mirror" minLevel="51" skillLearn="23" race="ELYOS" classId="CLERIC" />
+	<skill skillId="25" name="Summon Divine Mirror" minLevel="16" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="26" name="Summon Divine Mirror" minLevel="28" skillLearn="25" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="27" name="Summon Divine Mirror" minLevel="40" skillLearn="26" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="28" name="Summon Divine Mirror" minLevel="51" skillLearn="27" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="29" name="Summon Divine Crystal" minLevel="16" race="ELYOS" classId="CLERIC" />
+	<skill skillId="30" name="Summon Divine Crystal" minLevel="28" skillLearn="29" race="ELYOS" classId="CLERIC" />
+	<skill skillId="31" name="Summon Divine Crystal" minLevel="40" skillLearn="30" race="ELYOS" classId="CLERIC" />
+	<skill skillId="32" name="Summon Divine Crystal" minLevel="51" skillLearn="31" race="ELYOS" classId="CLERIC" />
+	<skill skillId="33" name="Summon Divine Crystal" minLevel="16" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="34" name="Summon Divine Crystal" minLevel="28" skillLearn="33" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="35" name="Summon Divine Crystal" minLevel="40" skillLearn="34" race="ASMODIANS" classId="CLERIC" />
+	<skill skillId="36" name="Summon Divine Crystal" minLevel="51" skillLearn="35" race="ASMODIANS" classId="CLERIC" />
 	<skill skillId="1216" name="Absolute Zero" minLevel="20" race="PC_ALL" classId="SORCERER" stigma="1"/>
 	<skill skillId="769" name="Absorbing Fury" minLevel="10" autolearn="true" race="PC_ALL" classId="GLADIATOR"/>
 	<skill skillId="770" name="Absorbing Fury" minLevel="15" autolearn="true" skillLearn="769" race="PC_ALL" classId="GLADIATOR"/>

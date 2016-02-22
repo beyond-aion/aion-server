@@ -13,7 +13,7 @@
 		<bounty item_id="188053609" count="3"/> <!-- Lv60 Composit Manastone Bundle -->
 		<bounty item_id="188054366" count="2"/> <!-- Epic Ancient Manastone Bundle -->
 		<bounty item_id="166030005" count="5"/> <!-- Tempering Solution -->
-		<bounty item_id="166500002" count="5"/> <!-- Amplification Stone -->
+		<bounty item_id="166500002" count="2"/> <!-- Amplification Stone -->
 	</kill_bounty>
 	<kill_bounty type="PER_X_KILLS" kill_count="50">
 		<bounty item_id="186000242" count="3"/> <!-- Ceramium Medal -->

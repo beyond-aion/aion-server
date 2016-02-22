@@ -305,7 +305,8 @@ public abstract class Creature extends VisibleObject {
 	 * @return
 	 */
 	public boolean canAttack() {
-		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING) && !isInState(CreatureState.PRIVATE_SHOP));
+		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING)
+			&& !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
 	/**
@@ -677,13 +678,6 @@ public abstract class Creature extends VisibleObject {
 
 	public float getCollision() {
 		return getObjectTemplate().getBoundRadius().getCollision();
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isAttackableNpc() {
-		return false;
 	}
 
 	public ItemAttackType getAttackType() {

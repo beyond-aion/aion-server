@@ -61,9 +61,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void notSee(VisibleObject object, boolean inRange) {
 		super.notSee(object, inRange);
-		if (object == getOwner().getTarget()) {
+		if (object.equals(getOwner().getTarget()))
 			getOwner().setTarget(null);
-		}
 	}
 
 	/**
