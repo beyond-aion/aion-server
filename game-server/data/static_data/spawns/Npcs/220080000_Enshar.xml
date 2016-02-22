@@ -1912,7 +1912,7 @@
 			<spot x="1434.96997" y="1761.97998" z="332.88699" h="10"/>
 		</spawn>
 		<!-- causticgasp seagric -->
-		<spawn npc_id="219863" respawn_time="295">
+		<spawn npc_id="219863" respawn_time="895">
 			<spot x="2573.41992" y="629.83002" z="264.57251"/>
 			<spot x="2642.19995" y="906.72998" z="254.78313" h="23"/>
 			<spot x="2779.13989" y="797.70001" z="226.00130"/>
@@ -2034,7 +2034,7 @@
 			<spot x="1038.92004" y="356.32999" z="227.30750" h="75"/>
 		</spawn>
 		<!-- chromascale dreadclaw -->
-		<spawn npc_id="219927" respawn_time="295">
+		<spawn npc_id="219927" respawn_time="14395">
 			<spot x="2029.59619" y="2299.20654" z="306.17459" h="75"/>
 		</spawn>
 		<!-- clarok -->
@@ -2293,7 +2293,7 @@
 			<spot x="1248.93555" y="2708.56152" z="254.66742" random_walk="1"/>
 		</spawn>
 		<!-- coralscale nagarant -->
-		<spawn npc_id="219860" respawn_time="295">
+		<spawn npc_id="219860" respawn_time="895">
 			<spot x="168.48000" y="1712.95996" z="300.99500"/>
 			<spot x="183.81000" y="1569.87000" z="293.31000"/>
 			<spot x="229.82001" y="1837.10999" z="309.41125"/>
@@ -2851,7 +2851,7 @@
 			<spot x="752.84003" y="1294.62000" z="251.37500" h="100"/>
 		</spawn>
 		<!-- deputy brigade general amar -->
-		<spawn npc_id="219932" respawn_time="295">
+		<spawn npc_id="219932" respawn_time="14395">
 			<spot x="1208.62402" y="1261.41821" z="204.44479" h="113"/>
 		</spawn>
 		<!-- desert king durianne -->
@@ -3005,7 +3005,7 @@
 			<spot x="2725.02002" y="1412.31006" z="341.51077" h="113"/>
 		</spawn>
 		<!-- erratic highland spirit -->
-		<spawn npc_id="219856" respawn_time="295">
+		<spawn npc_id="219856" respawn_time="895">
 			<spot x="1881.18994" y="1906.72998" z="378.72311"/>
 			<spot x="2056.56006" y="2126.76001" z="320.43500"/>
 			<spot x="2255.08008" y="2088.72998" z="323.97626"/>
@@ -3536,7 +3536,7 @@
 			<spot x="1541.67175" y="2300.49609" z="309.39603" random_walk="1"/>
 		</spawn>
 		<!-- infernomane vortile -->
-		<spawn npc_id="219930" respawn_time="295">
+		<spawn npc_id="219930" respawn_time="14395">
 			<spot x="2528.88696" y="161.71771" z="259.73376" h="113"/>
 		</spawn>
 		<!-- ingfiacen -->
@@ -3758,7 +3758,7 @@
 			<spot x="2640.66992" y="1343.93994" z="335.12405" h="22"/>
 		</spawn>
 		<!-- large seasprite -->
-		<spawn npc_id="219854" respawn_time="295">
+		<spawn npc_id="219854" respawn_time="895">
 			<spot x="1125.57996" y="2902.11011" z="262.60004" h="60"/>
 			<spot x="1474.46997" y="2825.65991" z="230.03439" h="60"/>
 			<spot x="1521.55005" y="2892.10010" z="209.25626" h="60"/>
@@ -3904,7 +3904,7 @@
 			<spot x="1588.54199" y="1773.41003" z="328.35852" random_walk="1"/>
 		</spawn>
 		<!-- lunarhulk sheluk -->
-		<spawn npc_id="219859" respawn_time="295">
+		<spawn npc_id="219859" respawn_time="895">
 			<spot x="1820.18994" y="1472.09998" z="357.14313"/>
 			<spot x="1965.52002" y="1713.50000" z="360.68625"/>
 			<spot x="2010.21997" y="1371.57996" z="361.51373"/>
@@ -4300,7 +4300,7 @@
 			<spot x="434.45999" y="2379.62988" z="216.18144" h="105"/>
 		</spawn>
 		<!-- monstrous klaw -->
-		<spawn npc_id="219857" respawn_time="295">
+		<spawn npc_id="219857" respawn_time="895">
 			<spot x="2290.58008" y="1612.17004" z="348.75000"/>
 			<spot x="2360.50000" y="1495.43005" z="356.40689" h="75"/>
 			<spot x="2459.37012" y="1594.96997" z="353.50220"/>
@@ -4944,11 +4944,11 @@
 			<spot x="472.59000" y="2505.45996" z="186.55437"/>
 		</spawn>
 		<!-- rootrage rotron -->
-		<spawn npc_id="219926" respawn_time="295">
+		<spawn npc_id="219926" respawn_time="14395">
 			<spot x="1437.41296" y="2358.78955" z="270.75000" h="45"/>
 		</spawn>
 		<!-- rotmane dreadclaw -->
-		<spawn npc_id="219864" respawn_time="295">
+		<spawn npc_id="219864" respawn_time="895">
 			<spot x="2187.83008" y="331.78000" z="241.75000"/>
 			<spot x="2340.43994" y="195.21001" z="243.02063"/>
 			<spot x="2401.82007" y="304.89999" z="245.50125"/>
@@ -5383,7 +5383,7 @@
 			<spot x="730.44360" y="175.46899" z="222.24635" random_walk="1"/>
 		</spawn>
 		<!-- seabrine jotun -->
-		<spawn npc_id="219928" respawn_time="295">
+		<spawn npc_id="219928" respawn_time="14395">
 			<spot x="1949.11743" y="1438.91895" z="360.04449" h="15"/>
 		</spawn>
 		<!-- seagric pummeler -->
@@ -5841,7 +5841,7 @@
 			<spot x="1613.45996" y="101.68000" z="187.73625" h="45"/>
 		</spawn>
 		<!-- spotted vortile -->
-		<spawn npc_id="219861" respawn_time="295">
+		<spawn npc_id="219861" respawn_time="895">
 			<spot x="663.08002" y="1168.67004" z="240.22438"/>
 			<spot x="838.34998" y="891.04999" z="229.93437"/>
 			<spot x="1052.57996" y="895.66998" z="249.37500"/>
@@ -5925,7 +5925,7 @@
 			<spot x="1772.23999" y="2575.16992" z="298.75000" h="75"/>
 		</spawn>
 		<!-- swollen yellowthorn spinefish -->
-		<spawn npc_id="219855" respawn_time="295">
+		<spawn npc_id="219855" respawn_time="895">
 			<spot x="1678.29004" y="2660.54004" z="290.91376"/>
 			<spot x="1686.07996" y="2351.16992" z="287.33878"/>
 			<spot x="1875.07996" y="2402.78003" z="307.94250"/>
@@ -5941,7 +5941,7 @@
 			<spot x="2670.67993" y="1466.43005" z="330.69141" h="75"/>
 		</spawn>
 		<!-- tatar's blaze -->
-		<spawn npc_id="220019" respawn_time="21600">
+		<spawn npc_id="220019" respawn_time="22795">
 			<spot x="2378.08472" y="2406.66797" z="168.11108"/>
 		</spawn>
 		<!-- tejhi aquapath -->
@@ -6372,7 +6372,7 @@
 			<spot x="830.86884" y="2723.70312" z="249.03654" random_walk="1"/>
 		</spawn>
 		<!-- tidalsail spirit -->
-		<spawn npc_id="219929" respawn_time="295">
+		<spawn npc_id="219929" respawn_time="14395">
 			<spot x="381.48328" y="1880.98413" z="285.25000" h="105"/>
 		</spawn>
 		<!-- tinid -->
@@ -6536,7 +6536,7 @@
 			<spot x="474.34000" y="2315.39990" z="216.45724" h="15"/>
 		</spawn>
 		<!-- usurper demaluk -->
-		<spawn npc_id="219931" respawn_time="295">
+		<spawn npc_id="219931" respawn_time="14395">
 			<spot x="2824.68872" y="2509.80884" z="189.98712" h="73"/>
 		</spawn>
 		<!-- valley fungie -->
@@ -6973,7 +6973,7 @@
 			<spot x="1782.13000" y="2532.38989" z="297.72565" h="53"/>
 		</spawn>
 		<!-- wandering lunashin ettin -->
-		<spawn npc_id="219858" respawn_time="295">
+		<spawn npc_id="219858" respawn_time="895">
 			<spot x="772.58002" y="1912.67004" z="314.66687"/>
 			<spot x="1299.41003" y="2037.33997" z="337.49875"/>
 			<spot x="1322.09998" y="1750.52002" z="299.94125"/>
@@ -7214,7 +7214,7 @@
 			<spot x="2052.44995" y="1455.46997" z="352.75000" random_walk="1"/>
 		</spawn>
 		<!-- wayfarsand ksellid -->
-		<spawn npc_id="219862" respawn_time="295">
+		<spawn npc_id="219862" respawn_time="895">
 			<spot x="847.08002" y="134.67000" z="216.97438"/>
 			<spot x="1103.57996" y="447.67001" z="224.06750"/>
 			<spot x="1799.07996" y="433.67001" z="206.27063"/>

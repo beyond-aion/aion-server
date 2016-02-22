@@ -193,7 +193,7 @@
 			<gd_npc npc_id="235958" name="Grotesque Twilight Gnarl" />
 			<gd_npc npc_id="235960" name="Enraged Primeval Ettin" />
 			<gd_npc npc_id="235961" name="Duneshriek Sandshark Ripper" />
-			<gd_npc npc_id="235961" name="Serrated Sandthorn Arachna" />
+			<gd_npc npc_id="235962" name="Serrated Sandthorn Arachna" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="169000009" name="Premium Power Shard" />
@@ -216,7 +216,7 @@
 			<gd_npc npc_id="235958" name="Grotesque Twilight Gnarl" />
 			<gd_npc npc_id="235960" name="Enraged Primeval Ettin" />
 			<gd_npc npc_id="235961" name="Duneshriek Sandshark Ripper" />
-			<gd_npc npc_id="235961" name="Serrated Sandthorn Arachna" />
+			<gd_npc npc_id="235962" name="Serrated Sandthorn Arachna" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053746" name="Faded Middle Grade Idian Bundle" />
@@ -269,7 +269,7 @@
 			<gd_npc npc_id="235958" name="Grotesque Twilight Gnarl" />
 			<gd_npc npc_id="235960" name="Enraged Primeval Ettin" />
 			<gd_npc npc_id="235961" name="Duneshriek Sandshark Ripper" />
-			<gd_npc npc_id="235961" name="Serrated Sandthorn Arachna" />
+			<gd_npc npc_id="235962" name="Serrated Sandthorn Arachna" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053742" name="Faded Middle Grade Manastone Bundle" />
