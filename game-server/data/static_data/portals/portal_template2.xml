@@ -434,7 +434,7 @@
 	<!-- Rentus Base Exit -->
 	<portal_use npc_id="730401">
 		<portal_path loc_id="2100706" race="ELYOS"/>
-		<portal_path loc_id="2200805" race="ELYOS"/>
+		<portal_path loc_id="2200805" race="ASMODIANS"/>
 	</portal_use>
 	<!-- Rippling Abyss Gate-->
 	<portal_use npc_id="730496">
