@@ -57,8 +57,8 @@ public class FirstTargetRangeProperty {
 		}
 
 		// TODO check for all targets too
-		// Summon Group Member exception
-		if (skill.getSkillTemplate().getSkillId() != 1606 && effector.getTransformModel().getModelId() != 284867) {
+		// Cannon exception
+		if (effector.getTransformModel().getModelId() != 284867) {
 			if (!GeoService.getInstance().canSee(effector, firstTarget)) {
 				if (effector instanceof Player) {
 					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE);
