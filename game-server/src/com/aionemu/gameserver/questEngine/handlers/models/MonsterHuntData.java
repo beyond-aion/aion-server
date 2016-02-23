@@ -21,7 +21,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
 
 /**
- * @author MrPoke, @modified Bobobear, Pad
+ * @author MrPoke
+ * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MonsterHuntData", propOrder = { "monster" })
@@ -30,20 +31,31 @@ public class MonsterHuntData extends XMLQuest {
 
 	@XmlElement(name = "monster")
 	protected List<Monster> monster;
+
 	@XmlAttribute(name = "start_npc_ids", required = true)
 	protected List<Integer> startNpcIds;
+
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
+
 	@XmlAttribute(name = "start_dialog_id")
 	protected int startDialog;
+
 	@XmlAttribute(name = "end_dialog_id")
 	protected int endDialog;
+
 	@XmlAttribute(name = "aggro_start_npcs")
 	protected List<Integer> aggroNpcs;
+
 	@XmlAttribute(name = "invasion_world")
 	protected int invasionWorld;
+
+	@XmlAttribute(name = "start_zone")
+	protected String startZone;
+
 	@XmlAttribute(name = "start_dist_npc_id")
 	protected int startDistanceNpc;
+
 	@XmlAttribute(name = "end_reward_next_step")
 	protected boolean rewardNextStep;
 
@@ -106,7 +118,7 @@ public class MonsterHuntData extends XMLQuest {
 		 * monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } } else { monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } }
 		 **/
 
-		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld,
+		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld, startZone,
 			startDistanceNpc, rewardNextStep);
 		questEngine.addQuestHandler(template);
 	}

@@ -311,6 +311,7 @@
 				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
 				<xs:attribute name="aggro_start_npcs" type="IntListType" default="0"/>
 				<xs:attribute name="invasion_world" type="xs:int" default="0"/>
+				<xs:attribute name="start_zone" type="xs:string" default="NONE"/>
 				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
 				<xs:attribute name="end_reward_next_step" type="xs:boolean" default="false"/>
 			</xs:extension>
