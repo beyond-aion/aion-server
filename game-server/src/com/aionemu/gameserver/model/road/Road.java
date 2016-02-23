@@ -10,6 +10,9 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.SphereKnownList;
 
 /**
+ * This class handles roads (teleport ways) between maps (e.g. road from verteron to eltnen)
+ * Each road represents is a one-way portal, so for a map-connection in both directions you need two roads.
+ * 
  * @author SheppeR
  */
 public class Road extends VisibleObject {
