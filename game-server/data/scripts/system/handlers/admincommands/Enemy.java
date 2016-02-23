@@ -65,7 +65,7 @@ public class Enemy extends AdminCommand {
 		PacketSendUtility.sendMessage(player, output);
 
 		player.clearKnownlist();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		player.updateKnownlist();
 	}

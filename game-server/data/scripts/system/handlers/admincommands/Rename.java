@@ -60,7 +60,7 @@ public class Rename extends AdminCommand {
 			recipientCommonData.setName(rename);
 			DAOManager.getDAO(PlayerDAO.class).storePlayerName(recipientCommonData);
 			if (recipientCommonData.isOnline()) {
-				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
+				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 				PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				sendPacket(admin, player, rename, recipient);
 			} else
@@ -83,7 +83,7 @@ public class Rename extends AdminCommand {
 				if (!CustomConfig.OLD_NAMES_COMMAND_DISABLED)
 					DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), player.getName(), rename);
 				player.getCommonData().setName(rename);
-				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
+				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 				DAOManager.getDAO(PlayerDAO.class).storePlayerName(player.getCommonData());
 			} else
 				PacketSendUtility.sendMessage(admin, "The command can be applied only on the player.");
@@ -115,7 +115,7 @@ public class Rename extends AdminCommand {
 		while (knownFriends.hasNext()) {
 			Friend nextObject = knownFriends.next();
 			if (nextObject.getPlayer() != null && nextObject.getPlayer().isOnline()) {
-				PacketSendUtility.sendPacket(nextObject.getPlayer(), new SM_PLAYER_INFO(player, false));
+				PacketSendUtility.sendPacket(nextObject.getPlayer(), new SM_PLAYER_INFO(player));
 			}
 		}
 

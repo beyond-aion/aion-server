@@ -27,8 +27,6 @@ public abstract class PlayerInfo extends AionServerPacket {
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();
-		int raceId = pcd.getRace().getRaceId();
-		int genderId = pcd.getGender().getGenderId();
 		PlayerAppearance playerAppearance = accPlData.getAppearance();
 		CharacterBanInfo cbi = accPlData.getCharBanInfo();
 		boolean isBanned = (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000);
@@ -43,8 +41,8 @@ public abstract class PlayerInfo extends AionServerPacket {
 
 		writeD(playerId);
 		writeS(pcd.getName(), 52);
-		writeD(genderId);
-		writeD(raceId);
+		writeD(pcd.getGender().getGenderId());
+		writeD(pcd.getRace().getRaceId());
 		writeD(pcd.getPlayerClass().getClassId());
 		writeD(playerAppearance.getVoice());
 		writeD(playerAppearance.getSkinRGB());
@@ -105,8 +103,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(0x00); // sometimes 0xC7 (199) for all chars, else 0
 		writeC(0x00); // sometimes 0x04 (4) for all chars, else 0
 		writeF(playerAppearance.getHeight());
-		int raceSex = 100000 + raceId * 2 + genderId;
-		writeD(raceSex);
+		writeD(pcd.getTemplateId());
 		writeD(pcd.getPosition().getMapId());// mapid for preloading map
 		writeF(pcd.getPosition().getX());
 		writeF(pcd.getPosition().getY());

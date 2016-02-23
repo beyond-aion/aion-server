@@ -37,17 +37,17 @@ public class TransformModel {
 	public TransformModel(Creature creature) {
 		if (creature instanceof Player) {
 			this.originalType = TransformType.PC;
+			this.originalModelId = 0;
 		} else {
 			this.originalType = TransformType.NONE;
+			this.originalModelId = creature.getObjectTemplate().getTemplateId();
 		}
-		this.originalModelId = creature.getObjectTemplate().getTemplateId();
 		this.transformType = TransformType.NONE;
-
 		this.owner = creature;
 	}
 
 	public void apply(int modelId) {
-		this.apply(modelId, originalType, 0, 0, 0, 0, 0, 0, 0, 0);
+		apply(modelId, originalType, 0, 0, 0, 0, 0, 0, 0, 0);
 	}
 
 	/**
