@@ -91,7 +91,7 @@ public enum StatEnum {
 	DEFORM_RESISTANCE(64), // Deform Resist
 	FEAR_RESISTANCE(52), // Fear Resist
 	NOFLY_RESISTANCE(66), // Nofly Resist
-	OPENAREIAL_RESISTANCE(59), // Aether's Hold Resist
+	OPENAERIAL_RESISTANCE(59), // Aether's Hold Resist
 	PARALYZE_RESISTANCE(45), // Paralysis Resistance
 	PERIFICATION_RESISTANCE(56), // Petrification Resist //TODO: type
 	POISON_RESISTANCE(43), // Poison Resist

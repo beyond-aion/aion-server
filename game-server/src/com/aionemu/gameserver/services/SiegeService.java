@@ -484,7 +484,7 @@ public class SiegeService {
 		if (siege == null || siege.isFinished() || !siege.isStarted())
 			return 0;
 
-		long endTime = siege.getStartTime().toInstant().plusSeconds(siege.getSiegeLocation().getSiegeDuration()).getEpochSecond();
+		long endTime = siege.getStartTime() / 1000 + siege.getSiegeLocation().getSiegeDuration();
 		int secondsLeft = (int) (endTime - System.currentTimeMillis() / 1000);
 
 		return secondsLeft > 0 ? secondsLeft : 0;
@@ -754,9 +754,13 @@ public class SiegeService {
 	}
 
 	public boolean validateLoginZone(Player player) {
+		long currentTime = System.currentTimeMillis();
 		for (FortressLocation fortress : getFortresses().values()) {
-			if (fortress.isInActiveSiegeZone(player) && fortress.isEnemy(player))
-				return false;
+			if (fortress.isVulnerable() && fortress.isEnemy(player) && fortress.isInsideLocation(player)) {
+				if ((currentTime - getSiege(fortress.getLocationId()).getStartTime()) / 1000 < 421
+					|| (currentTime - player.getCommonData().getLastOnline().getTime()) / 1000 > 420)
+					return false;
+			}
 		}
 		return true;
 	}

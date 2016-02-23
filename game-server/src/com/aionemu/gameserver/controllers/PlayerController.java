@@ -291,20 +291,8 @@ public class PlayerController extends CreatureController<Player> {
 			z = start.getZ();
 			h = start.getHeading();
 		}
-		if (!SiegeService.getInstance().validateLoginZone(getOwner())) {
+		if (!SiegeService.getInstance().validateLoginZone(getOwner()))
 			moveToBind = true;
-		} else if (getOwner().getCommonData().getLastOnline() != null) {
-			long lastOnline = getOwner().getCommonData().getLastOnline().getTime();
-			long secondsOffline = (System.currentTimeMillis() / 1000) - lastOnline / 1000;
-			if (secondsOffline > 10 * 60) { // Logout in no-recall zone sends you to bindpoint after 10 (??) minutes
-				for (ZoneInstance zone : getOwner().getPosition().getMapRegion().getZones(getOwner())) {
-					if (!zone.canRecall()) {
-						// moveToBind = true; //Temporary fix untill zones will be reparsed with right Rcall perameter
-						break;
-					}
-				}
-			}
-		}
 
 		if (moveToBind)
 			World.getInstance().setPosition(getOwner(), mapId, x, y, z, h);

@@ -634,7 +634,8 @@ public abstract class EffectTemplate {
 				}
 			}
 			if (effected.getTransformModel().getType() == TransformType.AVATAR) {
-				if (statEnum == StatEnum.SLOW_RESISTANCE)
+				if (statEnum == StatEnum.SLOW_RESISTANCE || statEnum == StatEnum.OPENAERIAL_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE
+					|| statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.PULLED_RESISTANCE)
 					return true;
 			}
 		}

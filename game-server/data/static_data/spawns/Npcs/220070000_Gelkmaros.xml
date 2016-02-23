@@ -1936,7 +1936,6 @@
 		<!-- Gelkmaros Guard -->
 		<spawn npc_id="216685" respawn_time="295">
 			<spot x="1603.87" y="2633.2" z="484.88" h="7"/>
-			<spot x="1621.28" y="2606.16" z="481.442" h="76"/>
 		</spawn>
 		<!-- Gelkmaros Silver Crystal -->
 		<spawn npc_id="700781" respawn_time="295" pool="1">
