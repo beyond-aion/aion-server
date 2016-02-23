@@ -60,10 +60,17 @@ public class TrapGameStats extends NpcGameStats {
 			case "poisoning trap":
 			case "trap of slowing":
 			case "blazing trap":
+			case "glue trap": //spike trap
+			case "trap of dust": //sandstorm
+			case "shock trap":
+			case "trap of sleep":
+			case "trap of burst":
+			case "collision trap":
 				value = 2361;
 				break;
 			case "storm mine":
 			case "skybound trap":
+			case "trap of vengeful spirit": //skybound trap
 				value = 2406;
 				break;
 			case "trap of clairvoyance":
