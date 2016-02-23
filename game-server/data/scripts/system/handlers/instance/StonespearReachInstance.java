@@ -22,6 +22,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionDominionService;
+import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -204,10 +206,15 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private synchronized void checkRank(int points, boolean bossKilled) {
 		cancelAllTasks();
 		int rank = 8;
-		if (points > 67000 && bossKilled) { // S-Rank
+		if (points > 67000) { // S-Rank
+			if (bossKilled) {
+				reward.setRewardItem1Count(2);
+				reward.setFinalAP((points/10));
+			} else {
+				reward.setRewardItem1Count(1);
+			}
 			reward.setFinalGP(120);
 			reward.setRewardItem1(186000242); // C-Med
-			reward.setRewardItem1Count(1);
 			reward.setRewardItem2(188053801); // Stonespear Siege Champion Reward Chest
 			reward.setRewardItem2Count(1);
 			reward.setRewardItem3(188053804); // Stonespear Siege Champion Relic Chest
@@ -249,6 +256,13 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			ItemService.addItem(player, reward.getRewardItem1(), reward.getRewardItem1Count(), true);
 			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count(), true);
 			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count(), true);
+			if (reward.getFinalGP() > 0) {
+				GloryPointsService.addGp(player, reward.getFinalGP());
+			}
+			if (reward.getFinalAp() > 0) {
+				AbyssPointsService.addAp(player, reward.getFinalAp());
+			}
+
 		});
 	}
 

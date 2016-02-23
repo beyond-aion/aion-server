@@ -123,6 +123,7 @@ public class TribeRelationService {
 						return true;
 
 				}
+				break;
 			case FIELD_OBJECT_DARK:
 				switch (creature2.getBaseTribe()) {
 					case PC_DARK:

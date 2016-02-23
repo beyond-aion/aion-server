@@ -25,7 +25,7 @@ public class CronJobService {
 		scheduleMoltenus();
 		scheduleAhserionsFlight();
 		scheduleIdianDepthPortalSpawns();
-		//scheduleLegionDominionCalculation(); deactivated till instance is done
+		scheduleLegionDominionCalculation();
 	}
 
 	public static CronJobService getInstance() {

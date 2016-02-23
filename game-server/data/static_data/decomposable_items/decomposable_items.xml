@@ -34856,9 +34856,21 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
 		</items>
 	</decomposable>
-	<decomposable item_id="188053802" decomposable_name="Stonespear Siege Relic Chest"/>
-	<decomposable item_id="188053803" decomposable_name="Stonespear Siege Runner-Up Relic Chest"/>
-	<decomposable item_id="188053804" decomposable_name="Stonespear Siege Champion Relic Chest"/>
+	<decomposable item_id="188053802" decomposable_name="Stonespear Siege Relic Chest">
+		<items>
+			<item id="186000247" name="Major Danuar Relic"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053803" decomposable_name="Stonespear Siege Runner-Up Relic Chest">
+		<items>
+			<item id="186000247" name="Major Danuar Relic" count="2"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053804" decomposable_name="Stonespear Siege Champion Relic Chest">
+		<items>
+			<item id="186000247" name="Major Danuar Relic" count="3"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053805" decomposable_name="Stonespear Key Box">
 		<items>
 			<item id="185000230" name="Stonespear Key"/>
