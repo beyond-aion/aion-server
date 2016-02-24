@@ -33733,7 +33733,7 @@
 		</items>
 		<items>
 			<item id="140001184" name="Summon Whirlwind" race="ELYOS"/>
-			<item id="140001184" name="Summon Whirlwind" race="ASMODIANS"/>
+			<item id="140001185" name="Summon Whirlwind" race="ASMODIANS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053766" decomposable_name="Spiritmaster Greater Stigma Bundle">
@@ -34349,7 +34349,7 @@
 		</items>
 		<items>
 			<item id="140001184" name="Summon Whirlwind" race="ELYOS"/>
-			<item id="140001184" name="Summon Whirlwind" race="ASMODIANS"/>
+			<item id="140001185" name="Summon Whirlwind" race="ASMODIANS"/>
 		</items>
 		<items>
 			<item id="140001193" name="Shackle of Vulnerability"/>
