@@ -257,6 +257,7 @@
 				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
 				<xs:attribute name="next_npc_id" type="xs:int" default="0"/>
 				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
+				<xs:attribute name="start_zone" type="xs:string" default="NONE"/>
 				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
 				<xs:attribute name="start_dialog_id2" type="xs:int" default="0"/>
 				<xs:attribute name="check_ok_dialog_id" type="xs:int" default="0"/>
