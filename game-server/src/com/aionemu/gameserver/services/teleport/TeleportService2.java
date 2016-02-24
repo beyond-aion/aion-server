@@ -439,7 +439,7 @@ public class TeleportService2 {
 	public static void moveToBindLocation(Player player, boolean useTeleport) {
 		float x, y, z;
 		int worldId;
-		byte h = 0;
+		byte h;
 
 		if (player.getBindPoint() != null) {
 			BindPointPosition bplist = player.getBindPoint();
@@ -454,6 +454,7 @@ public class TeleportService2 {
 			x = locationData.getX();
 			y = locationData.getY();
 			z = locationData.getZ();
+			h = locationData.getHeading();
 		}
 
 		InstanceService.onLeaveInstance(player);

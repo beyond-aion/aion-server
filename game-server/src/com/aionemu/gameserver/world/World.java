@@ -25,7 +25,6 @@ import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.exceptions.NotSetPositionException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -358,37 +357,30 @@ public class World {
 	/**
 	 * Set position of VisibleObject without spawning [object will be invisible]. If object is spawned it will be despawned first.
 	 * 
-	 * @param object
-	 * @param mapId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
-	 * @throws NotSetPositionException
-	 *           when object has not set position before.
+	 * @return True, if position was set correctly.
 	 */
-	public void setPosition(VisibleObject object, int mapId, float x, float y, float z, byte heading) {
+	public boolean setPosition(VisibleObject object, int mapId, float x, float y, float z, byte heading) {
 		int instanceId = 1;
-		if (object.getWorldId() == mapId)
+		if (object.getPosition() != null && object.getPosition().getMapId() == mapId)
 			instanceId = object.getInstanceId();
-		this.setPosition(object, mapId, instanceId, x, y, z, heading);
+		return setPosition(object, mapId, instanceId, x, y, z, heading);
 	}
 
 	/**
-	 * @param object
-	 * @param mapId
-	 * @param instance
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
+	 * Set position of VisibleObject without spawning [object will be invisible]. If object is spawned it will be despawned first.
+	 * 
+	 * @return True, if position was set correctly.
 	 */
-	public void setPosition(VisibleObject object, int mapId, int instance, float x, float y, float z, byte heading) {
+	public boolean setPosition(VisibleObject object, int mapId, int instance, float x, float y, float z, byte heading) {
 		if (object == null)
-			return;
+			return false;
+		WorldPosition pos = createPosition(mapId, x, y, z, heading, instance);
+		if (pos == null)
+			return false;
 		if (object.isSpawned())
 			despawn(object);
-		object.setPosition(createPosition(mapId, x, y, z, heading, instance));
+		object.setPosition(pos);
+		return true;
 	}
 
 	/**

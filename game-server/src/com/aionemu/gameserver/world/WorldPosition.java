@@ -220,6 +220,6 @@ public class WorldPosition {
 
 	@Override
 	public String toString() {
-		return "WorldPosition [heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + ", x=" + x + ", y=" + y + ", z=" + z + "]";
+		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + "]";
 	}
 }

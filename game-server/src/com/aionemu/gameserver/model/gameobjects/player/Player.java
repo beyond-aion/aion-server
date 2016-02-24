@@ -238,7 +238,7 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
-	
+
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
@@ -1258,7 +1258,8 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param new kisk to bind to (null if unbinding)
+	 * @param newKisk
+	 *          kisk to bind to (null if unbinding)
 	 */
 	public void setKisk(Kisk newKisk) {
 		this.kisk = newKisk;
@@ -2153,5 +2154,10 @@ public class Player extends Creature {
 
 	public PanesterraTeam getPanesterraTeam() {
 		return panesterraTeam;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
 	}
 }
