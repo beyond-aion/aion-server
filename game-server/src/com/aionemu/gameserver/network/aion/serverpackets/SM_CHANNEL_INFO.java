@@ -14,32 +14,26 @@ public class SM_CHANNEL_INFO extends AionServerPacket {
 	int instanceCount = 0;
 	int currentChannel = 0;
 
-	/**
-	 * @param position
-	 */
 	public SM_CHANNEL_INFO(WorldPosition position) {
-		if (!position.isSpawned()) {
+		if (position == null || !position.isSpawned()) {
 			instanceCount = 1;
 			currentChannel = 1;
-			return;
-		}
-		WorldMapTemplate template = position.getWorldMapInstance().getTemplate();
-		if (position.getWorldMapInstance().isBeginnerInstance()) {
-			this.instanceCount = template.getBeginnerTwinCount();
-			if (WorldConfig.WORLD_EMULATE_FASTTRACK)
-				this.instanceCount += template.getTwinCount();
-			this.currentChannel = position.getInstanceId() - 1;
 		} else {
-			this.instanceCount = template.getTwinCount();
-			if (WorldConfig.WORLD_EMULATE_FASTTRACK)
-				this.instanceCount += template.getBeginnerTwinCount();
-			this.currentChannel = position.getInstanceId() - 1;
+			WorldMapTemplate template = position.getWorldMapInstance().getTemplate();
+			if (position.getWorldMapInstance().isBeginnerInstance()) {
+				instanceCount = template.getBeginnerTwinCount();
+				if (WorldConfig.WORLD_EMULATE_FASTTRACK)
+					instanceCount += template.getTwinCount();
+				currentChannel = position.getInstanceId() - 1;
+			} else {
+				instanceCount = template.getTwinCount();
+				if (WorldConfig.WORLD_EMULATE_FASTTRACK)
+					instanceCount += template.getBeginnerTwinCount();
+				currentChannel = position.getInstanceId() - 1;
+			}
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(currentChannel);
