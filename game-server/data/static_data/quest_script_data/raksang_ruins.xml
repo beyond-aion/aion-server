@@ -3,7 +3,7 @@
 	<!--
 	[BEGIN] SUMMARY
 		18737 [XML]	Where did Abiso Go?
-		18738 [TODO_SCRIPT]	Test Bomb, Test Bomb
+		18738 [SCRIPT]	Test Bomb, Test Bomb
 		18739 [XML]	Urgent Deed: Get the Seed
 		18740 [XML]	It's Alive?
 		18741 [XML]	A Versed Order
@@ -13,7 +13,7 @@
 		19649 [XML]	To Raksang Ruins
 		
 		28737 [XML]	Suspicious Minds
-		28738 [TODO_SCRIPT]	Bombs for Everyone!
+		28738 [SCRIPT]	Bombs for Everyone!
 		28739 [XML]	Important Research
 		28740 [XML]	It's a Dirty Job
 		28741 [XML]	Securing the Route
@@ -23,7 +23,6 @@
 		29649 [XML]	Raksang Ruins Roundup
 	[END] SUMMARY
 	-->
-	<!-- Abiso/Proqura need to be fixed -->
 	<!-- REPORT TO -->
 	<report_to id="18737" start_npc_ids="804707" start_dialog_id="4762" end_npc_ids="206378 206379 206380" end_dialog_id="10002"/>
 	<report_to id="19649" start_npc_ids="804654" start_dialog_id="4762" end_npc_ids="804707" end_dialog_id="10002"/>
