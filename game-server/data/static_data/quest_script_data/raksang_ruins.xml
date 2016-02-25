@@ -23,7 +23,6 @@
 		29649 [XML]	Raksang Ruins Roundup
 	[END] SUMMARY
 	-->
-	<!-- Abiso/Proqura need to be fixed -->
 	<!-- REPORT TO -->
 	<report_to id="18737" start_npc_ids="804707" start_dialog_id="4762" end_npc_ids="206378 206379 206380" end_dialog_id="10002"/>
 	<report_to id="19649" start_npc_ids="804654" start_dialog_id="4762" end_npc_ids="804707" end_dialog_id="10002"/>
