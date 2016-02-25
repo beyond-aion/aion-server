@@ -72,7 +72,7 @@ public class PanesterraTeam {
 			return;
 		}
 		synchronized (this) {
-			if (!members.contains(newMember)) {
+			if (!members.contains(newMember.getObjectId())) {
 				members.add(newMember.getObjectId());
 				newMember.setPanesterraTeam(this);
 			}
