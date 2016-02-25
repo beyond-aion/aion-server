@@ -58,7 +58,7 @@ public class Morph extends AdminCommand {
 		if (npcId == 0) {
 			sendInfo(admin, "Cancelled" + (target.equals(admin) ? "" : " " + target.getName() + "'s") + " morph.");
 		} else {
-			NpcTemplate template = npcId > 0 ? DataManager.NPC_DATA.getNpcTemplate(npcId) : null;
+			NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 			String name = template != null ? ChatUtil.path(StringUtils.capitalize(template.getName()) + " | " + npcId, npcId) : "unknown ID " + npcId;
 			sendInfo(admin, "You morphed" + (target.equals(admin) ? "" : " " + target.getName()) + " into " + name + ".");
 			if (!target.equals(admin))

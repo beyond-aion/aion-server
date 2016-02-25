@@ -155,6 +155,7 @@ public class RiftService {
 				case 210050000:
 				case 220070000:
 					maxCount = 3;
+					break;
 				default:
 					maxCount = 4;
 			}

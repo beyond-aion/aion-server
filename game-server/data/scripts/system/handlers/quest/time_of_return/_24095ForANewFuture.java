@@ -147,7 +147,7 @@ public class _24095ForANewFuture extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int var = qs.getQuestVarById(0);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		if (qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideItemUseZone(ZoneName.get("IDLDF4A_ITEMUSEAREA_Q14095"))) {
 				if (var == 3) {
 					TeleportService2.teleportTo(player, 600030000, player.getInstanceId(), 304, 1718, 296, (byte) 48);

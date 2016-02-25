@@ -358,7 +358,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			if (defenceSuccessful) {
 				if (legionBGeneral != 0) {
 					List<Integer> deputies = LegionService.getInstance().getMembersByRank(winnerLegionId, LegionRank.DEPUTY);
-					int gpReward = Math.round(500 / (1 + deputies.size()));
+					int gpReward = Math.round(500 / (float) (1 + deputies.size()));
 					GloryPointsService.increaseGp(legionBGeneral, gpReward);
 					for (int playerObjId : deputies) {
 						GloryPointsService.increaseGp(playerObjId, gpReward);

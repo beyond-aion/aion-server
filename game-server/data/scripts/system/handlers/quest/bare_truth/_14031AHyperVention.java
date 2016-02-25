@@ -186,7 +186,7 @@ public class _14031AHyperVention extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int var = qs.getQuestVarById(0);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		if (qs.getStatus() == QuestStatus.START) {
 			if (player.isInsideItemUseZone(ZoneName.get("LF1_ITEMUSEAREA_Q14031"))) {
 				if (var == 3) {
 					playQuestMovie(env, 21);

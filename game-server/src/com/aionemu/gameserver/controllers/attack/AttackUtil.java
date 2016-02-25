@@ -356,13 +356,14 @@ public class AttackUtil {
 			switch (element) {
 				case NONE:
 					damage += bonus;
-					damage = (int) StatFunctions.adjustDamages(effect.getEffector(), effect.getEffected(), damage, effect.getPvpDamage(), true, element, false);
+					damage = Math.round(StatFunctions.adjustDamages(effect.getEffector(), effect.getEffected(), damage, effect.getPvpDamage(), true, element,
+						false));
 					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
 					damage = Math.round(damage * damageMultiplier);
 					break;
 				default:
-					damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), damage, bonus, element,
-						useMagicBoost, useKnowledge, noReduce, effect.getSkillTemplate().getPvpDamage()));
+					damage = StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), damage, bonus, element, useMagicBoost,
+						useKnowledge, noReduce, effect.getSkillTemplate().getPvpDamage());
 					damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 					damage = Math.round(damage * damageMultiplier);
 					break;

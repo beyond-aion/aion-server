@@ -24,14 +24,11 @@ public class ChatCommandsLoader implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 			Class<?> tmp = c;
-			if (tmp != null)
-				try {
-					processor.registerCommand((ChatCommand) tmp.newInstance());
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+			try {
+				processor.registerCommand((ChatCommand) tmp.newInstance());
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 		processor.onCompileDone();
 	}

@@ -147,19 +147,19 @@ public class LegionMemberContainer {
 		if (!legionMemberById.containsKey(player)) {
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(player.getObjectId());
 			if (legionMember != null) {
-				legionMemberById.put(legionMember.getObjectId(), legionMember);
+				legionMemberById.putIfAbsent(legionMember.getObjectId(), legionMember);
 			}
 		}
 		if (!legionMemberExById.containsKey(player)) {
 			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
 			if (legionMember != null) {
-				legionMemberExById.put(legionMember.getObjectId(), legionMember);
+				legionMemberExById.putIfAbsent(legionMember.getObjectId(), legionMember);
 			}
 		}
 		if (!legionMemberExByName.containsKey(player.getName())) {
 			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
 			if (legionMember != null) {
-				legionMemberExByName.put(legionMember.getName(), legionMember);
+				legionMemberExByName.putIfAbsent(legionMember.getName(), legionMember);
 			}
 		}
 	}

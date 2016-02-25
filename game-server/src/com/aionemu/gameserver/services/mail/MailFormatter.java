@@ -80,7 +80,7 @@ public final class MailFormatter {
 	public static void sendHouseAuctionMail(final House ownedHouse, final PlayerCommonData playerData, final AuctionResult result, final long time,
 		long returnKinah) {
 		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$HS_AUCTION_MAIL", "", playerData.getRace());
-		if (ownedHouse == null || playerData == null || result == null)
+		if (ownedHouse == null || result == null)
 			return;
 
 		MailPart formatter = new MailPart() {

@@ -7,9 +7,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.mysql.jdbc.StringUtils;
@@ -18,10 +18,10 @@ import com.mysql.jdbc.StringUtils;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "parts" })
 @XmlRootElement(name = "building")
 public class Building {
 
+	@XmlElement(name = "parts")
 	private Parts parts;
 
 	@XmlAttribute(name = "default")
@@ -44,7 +44,7 @@ public class Building {
 	}
 
 	@XmlTransient
-	Map<PartType, Integer> partsByType = new HashMap<PartType, Integer>();
+	Map<PartType, Integer> partsByType = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (parts == null)

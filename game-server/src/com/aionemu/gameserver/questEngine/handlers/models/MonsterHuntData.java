@@ -81,7 +81,7 @@ public class MonsterHuntData extends XMLQuest {
 				if (monster != null) {
 					for (Monster m : monster) {
 						// if monster with the same var and step is present, the values from quest template will be overrided (excluding npcs who will be merged)
-						if (m.getVar() == mn.getVar() && m.getStep() == mn.getStep()) {
+						if (m.getVar() == mn.getVar() && m.getStep().equals(mn.getStep())) {
 							if (m.getStartVar() != null)
 								mn.setStartVar(m.getStartVar());
 							if (m.getEndVar() > 0)

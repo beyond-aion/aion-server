@@ -322,17 +322,12 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		pointZ = 0;
 	}
 
-	/**
-	 * Walker
-	 * 
-	 * @param currentRoute
-	 */
 	public void setCurrentRoute(List<RouteStep> currentRoute) {
-		if (currentRoute == null) {
-			AI2Logger.info(owner.getAi2(), String.format("MC: setCurrentRoute is setting route to null (NPC id: {})!!!", owner.getNpcId()));
-		} else {
+		if (currentRoute == null)
+			AI2Logger.info(owner.getAi2(), "No specific route found for npc: " + owner.getNpcId() + ".");
+		else
 			this.currentRoute = currentRoute;
-		}
+
 		this.currentPoint = 0;
 	}
 
@@ -412,7 +407,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	public final float getTargetZ2() {
 		return started.get() ? targetDestZ : owner.getZ();
 	}
-	
+
 	public boolean isStop() {
 		return isStop;
 	}

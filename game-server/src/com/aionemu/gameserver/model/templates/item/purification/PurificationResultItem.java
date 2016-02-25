@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.templates.item.purification;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,9 +18,12 @@ public class PurificationResultItem {
 	private int item_id;
 	@XmlAttribute(name = "check_enchant_count")
 	private int check_enchant_count;
+	@XmlElement(name = "required_materials")
 	private RequiredMaterials required_materials;
-	private NeedAbyssPoint abyss_point_needed;
+	@XmlElement(name = "kinah_needed")
 	private NeedKinah kinah_needed;
+	@XmlElement(name = "abyss_point_needed")
+	private NeedAbyssPoint abyss_point_needed;
 
 	/**
 	 * @return the check_enchant_count

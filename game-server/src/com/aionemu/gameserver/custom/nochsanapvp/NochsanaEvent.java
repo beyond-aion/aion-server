@@ -127,7 +127,6 @@ public class NochsanaEvent extends GameEvent {
 		return false;
 	}
 
-	@SuppressWarnings("unused")
 	protected void handleGameStart() {
 		bases.add(new CustomBase(10, this, false, defender, 12115));
 		bases.add(new CustomBase(11, this, false, defender, 12116));
@@ -136,8 +135,8 @@ public class NochsanaEvent extends GameEvent {
 		defenderBases.addAll(bases);
 		Collections.sort(defenderBases);
 		// Spawn Teleporter
-		CustomBase base1 = new CustomBase(21, this, false, defender, 0);
-		CustomBase base2 = new CustomBase(22, this, false, defender, 0);
+		//CustomBase base1 = new CustomBase(21, this, false, defender, 0);
+		//CustomBase base2 = new CustomBase(22, this, false, defender, 0);
 		
 		for(Player player : participants) {
 			this.applyBuffs(player);

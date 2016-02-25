@@ -51,7 +51,6 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	private Map<Integer, StaticDoor> doors;
 	private long instanceTime;
 	private Future<?> instanceTask;
-	private Future<?> timeCheckTask;
 	private boolean isInstanceDestroyed = false;
 	private static List<WorldPosition> generalsPos = new FastTable<>();
 	private static List<WorldPosition> garnonPos = new FastTable<>();
@@ -113,15 +112,10 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	}
 
 	public void stopInstance() {
-		if (instanceTask != null && !instanceTask.isDone()) {
+		if (instanceTask != null && !instanceTask.isDone())
 			instanceTask.cancel(true);
-		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
-		if (ironWallFrontReward.isRewarded()) {
+		if (ironWallFrontReward.isRewarded())
 			return;
-		}
 		ironWallFrontReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = ironWallFrontReward.getWinningRace();
 		instance.doOnAllPlayers(new Visitor<Player>() {
@@ -177,12 +171,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-		if (instanceTask != null && !instanceTask.isDone()) {
+		if (instanceTask != null && !instanceTask.isDone())
 			instanceTask.cancel(true);
-		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
 	}
 
 	public void updatePoints(int points, Race race, boolean check, int nameId, Player player) {

@@ -424,11 +424,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			case ELYOS:
 				posBind = PlayerTransferConfig.BIND_ELYOS.split(" ");
 				break;
-			case ASMODIANS:
-				posBind = PlayerTransferConfig.BIND_ASMO.split(" ");
-				break;
-
 			default:
+				posBind = PlayerTransferConfig.BIND_ASMO.split(" ");
 				break;
 		}
 

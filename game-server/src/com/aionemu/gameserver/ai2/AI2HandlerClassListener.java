@@ -25,12 +25,8 @@ public class AI2HandlerClassListener implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 
-			if (ClassUtils.isSubclass(c, AbstractAI.class)) {
-				Class<? extends AbstractAI> tmp = (Class<? extends AbstractAI>) c;
-				if (tmp != null) {
-					AI2Engine.getInstance().registerAI(tmp);
-				}
-			}
+			if (ClassUtils.isSubclass(c, AbstractAI.class))
+				AI2Engine.getInstance().registerAI((Class<? extends AbstractAI>) c);
 		}
 	}
 

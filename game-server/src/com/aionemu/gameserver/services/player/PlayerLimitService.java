@@ -28,7 +28,7 @@ public class PlayerLimitService {
 		Long limit = sellLimit.get(accountId);
 		if (limit == null) {
 			limit = (long) (SellLimit.getSellLimit(player.getPlayerAccount().getMaxPlayerLevel()) * player.getRates().getSellLimitRate());
-			sellLimit.put(accountId, limit);
+			sellLimit.putIfAbsent(accountId, limit);
 		}
 
 		if (itemPrice < 0 || itemCount <= 0)

@@ -7,9 +7,9 @@ import java.util.Map;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
@@ -18,25 +18,23 @@ import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
  * @author ViAl
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "task" })
 @XmlRootElement(name = "challenge_tasks")
 public class ChallengeData {
 
+	@XmlElement(name = "task")
 	protected List<ChallengeTaskTemplate> task;
 
 	@XmlTransient
-	protected Map<Integer, ChallengeTaskTemplate> tasksById = new HashMap<Integer, ChallengeTaskTemplate>();
+	protected Map<Integer, ChallengeTaskTemplate> tasksById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (ChallengeTaskTemplate t : task) {
 			tasksById.put(t.getId(), t);
 		}
-		task.clear();
-		task = null;
 	}
 
 	public Map<Integer, ChallengeTaskTemplate> getTasks() {
-		return this.tasksById;
+		return tasksById;
 	}
 
 	public ChallengeTaskTemplate getTaskByTaskId(int taskId) {
@@ -62,6 +60,6 @@ public class ChallengeData {
 	}
 
 	public int size() {
-		return this.tasksById.size();
+		return tasksById.size();
 	}
 }
