@@ -134,6 +134,7 @@
 	
 	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" each_member="true">
 		<gd_npcs>
+			<gd_npc npc_id="235830" name="Mutated Gatorback Skilex"/>
 			<gd_npc npc_id="235832" name="Aggressive Coral Corask "/>
 			<gd_npc npc_id="235918" name="Frostshard Kirrin"/>
 			<gd_npc npc_id="235916" name="Freezing Petrahulk"/>
