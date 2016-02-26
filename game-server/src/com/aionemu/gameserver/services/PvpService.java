@@ -178,7 +178,7 @@ public class PvpService {
 		int maxLevel = 0;
 
 		for (Player member : teamMember) {
-			if (!member.isOnline() || !MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE) || member.getLifeStats().isAlreadyDead())
+			if (!member.isOnline() || member.getLifeStats().isAlreadyDead() || !MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
 				continue;
 			players.add(member);
 			if (member.getLevel() > maxLevel)
