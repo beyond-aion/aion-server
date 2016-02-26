@@ -54,7 +54,7 @@ public class AhserionInstance {
 	}
 
 	private void startInstancePreparation() {
-		synchronized (this) {
+		synchronized (status) {
 			status = AhserionInstanceStatus.PREPARING_INSTANCE_START;
 		}
 		PanesterraMatchmakingService.getInstance().prepareTeams();
@@ -130,6 +130,9 @@ public class AhserionInstance {
 					spawnStage(2, PanesterraTeamId.BALAUR); // spawn mobs 30s before doors are opened
 					break;
 				case 30:
+					synchronized (status) {
+						status = AhserionInstanceStatus.INSTANCE_RUNNING;
+					}
 					for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 						door.setOpen(true);
 					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
@@ -170,7 +173,7 @@ public class AhserionInstance {
 	}
 
 	public void onStop() {
-		synchronized (this) {
+		synchronized (status) {
 			status = AhserionInstanceStatus.OFF;
 		}
 		isStarted.set(false);
@@ -227,7 +230,7 @@ public class AhserionInstance {
 	public void bossKilled(Npc owner, PanesterraTeamId winnerTeam) {
 		if (winnerTeam == null || winnerTeam == PanesterraTeamId.BALAUR || !teams.containsKey(winnerTeam)
 			|| (teams.containsKey(winnerTeam) && teams.get(winnerTeam).isEliminated())) {
-			synchronized (this) {
+			synchronized (status) {
 				status = AhserionInstanceStatus.OFF;
 			}
 			// something went wrong, remove all players from the map
@@ -256,7 +259,7 @@ public class AhserionInstance {
 			return;
 		}
 		cancelTask(progressTask);
-		synchronized (this) {
+		synchronized (status) {
 			status = AhserionInstanceStatus.INSTANCE_FINISHED;
 		}
 		winner = (AhserionTeam) teams.get(winnerTeam);
