@@ -5,7 +5,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -74,8 +74,8 @@ public class CronJobService {
 
 			@Override
 			public void run() {
-				if (!AhserionInstance.getInstance().isStarted())
-					AhserionInstance.getInstance().start();
+				if (!AhserionRaid.getInstance().isStarted())
+					AhserionRaid.getInstance().start();
 			}
 		}, "0 50 17 ? * SUN");
 	}

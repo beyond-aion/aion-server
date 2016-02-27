@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraMatchmakingService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -29,7 +29,7 @@ public class AhserionRegistrationCorridor extends GeneralNpcAI2 {
 
 		@Override
 		public void acceptRequest(Creature requester, Player responder, int requestId) {
-			if (AhserionInstance.getInstance().isStarted()) {
+			if (AhserionRaid.getInstance().isStarted()) {
 				if (PanesterraMatchmakingService.getInstance().registerPlayer(player)) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS);
 					return;

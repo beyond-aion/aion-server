@@ -3,7 +3,7 @@ package ai.worlds.panesterra.ahserionsflight;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -28,9 +28,9 @@ public class AhserionBalaurTroopersAI2 extends NpcAI2 {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 				@Override
 				public void run() {
-					if (AhserionInstance.getInstance().isStarted() 
-						&& AhserionInstance.getInstance().isTeamNotEliminated(((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam())) {
-							AhserionInstance.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam());
+					if (AhserionRaid.getInstance().isStarted() 
+						&& AhserionRaid.getInstance().isTeamNotEliminated(((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam())) {
+							AhserionRaid.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam());
 						}
 				}
 			}, 6500);

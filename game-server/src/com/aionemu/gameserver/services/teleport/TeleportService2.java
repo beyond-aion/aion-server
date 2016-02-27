@@ -321,8 +321,6 @@ public class TeleportService2 {
 				World.getInstance().spawn(pet);
 			player.setPortAnimation(ArrivalAnimation.NONE);
 		} else {
-			if (player.getPanesterraTeam() != null && worldId != player.getPanesterraTeam().getStartPosition().getMapId())
-				player.getPanesterraTeam().onLeave(player);
 			// teleport with full map reloading
 			PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));

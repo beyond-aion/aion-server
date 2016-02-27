@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -101,7 +101,7 @@ public class AhserionConstructAI extends NpcAI2 {
 	private void scheduleAttack() {
 		if (getOwner().getSpawn().getStaticId() == 0 
 			|| !(getOwner().getSpawn() instanceof AhserionsFlightSpawnTemplate)
-			|| !AhserionInstance.getInstance().isStarted() 
+			|| !AhserionRaid.getInstance().isStarted() 
 			|| getOwner().getTribe() == TribeClass.GAB1_SUB_NONAGGRESSIVE_DRAKAN) {
 			return;
 		}
@@ -110,16 +110,16 @@ public class AhserionConstructAI extends NpcAI2 {
 			public void run() {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
-						AhserionInstance.getInstance().spawnStage(3, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(3, PanesterraTeamId.BALAUR);
 						break;
 					case 181:
-						AhserionInstance.getInstance().spawnStage(4, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(4, PanesterraTeamId.BALAUR);
 						break;
 					case 182:
-						AhserionInstance.getInstance().spawnStage(5, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(5, PanesterraTeamId.BALAUR);
 						break;
 					case 183:
-						AhserionInstance.getInstance().spawnStage(6, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(6, PanesterraTeamId.BALAUR);
 							break;
 							default:
 								break;
@@ -270,28 +270,28 @@ public class AhserionConstructAI extends NpcAI2 {
 		PanesterraTeamId winner = PanesterraTeamId.BALAUR;
 		int maxDmg = 0;
 		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69) 
-			&& AhserionInstance.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_69)) {
+			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_69)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_69;
 			}
 		}
 		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_70) 
-			&& AhserionInstance.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_70)) {
+			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_70)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_70;
 			}
 		}
 		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_71) 
-			&& AhserionInstance.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_71)) {
+			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_71)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_71;
 			}
 		}
 		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_72) 
-			&& AhserionInstance.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_72)) {
+			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_72)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_72;

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -7,58 +9,31 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Yeats
- *
+ * @modified Estrayl
  */
 public class AhserionTeam extends PanesterraTeam {
-
-	private int usedChariots = 0;
-	private int usedIgnusEngines = 0;
+	
+	private AtomicInteger usedChariots = new AtomicInteger();
+	private AtomicInteger usedIgnusEngines = new AtomicInteger();
 
 	public AhserionTeam(PanesterraTeamId id) {
 		super(id);
 	}
 	
 	public int getUsedChariots() {
-		return this.usedChariots;
+		return usedChariots.get();
 	}
 	
 	public int getUsedIgnusEngines() {
-		return this.usedIgnusEngines;
+		return usedIgnusEngines.get();
 	}
 	
 	public boolean canUseChariot() {
-		return !isEliminated.get() && usedChariots < 8;
-	}
-
-	public boolean updateUsedChariots() {
-		boolean cap = false;
-		synchronized (this) {
-			usedChariots++;
-			if (usedChariots > 8) {
-				cap = true;
-			}
-		}
-		if (cap || isEliminated.get())
-			return false;
-		return true;
+		return !isEliminated.get() || usedChariots.incrementAndGet() <= 8;
 	}
 	
 	public boolean canUseIgnusEngine() {
-		return !isEliminated.get() && usedIgnusEngines < 8;
-	}
-	
-	public boolean updateUsedIgnusEngines() {
-		boolean cap = false;
-		synchronized (this) {
-			usedIgnusEngines++;
-			if (usedIgnusEngines > 8) {
-				cap = true;
-			}
-		}
-		if (cap || isEliminated.get())
-			return false;
-		return true;
-		
+		return !isEliminated.get() || usedIgnusEngines.incrementAndGet() <= 8;
 	}
 
 	@Override
@@ -76,42 +51,6 @@ public class AhserionTeam extends PanesterraTeam {
 			case GAB1_SUB_DEST_72:
 				startPosition = new WorldPosition(400030000, 734.0557f, 291.067f, 681f, (byte) 45);
 				break;
-		}
-	}
-
-	/**
-	 * @return
-	 */
-	public int getTeamColor() {
-		switch (teamId) {
-			case GAB1_SUB_DEST_69:
-				return -1962786561;
-			case GAB1_SUB_DEST_70:
-				return 6260223;
-			case GAB1_SUB_DEST_71:
-				return 1084100351;
-			case GAB1_SUB_DEST_72:
-				return -1135668993;
-				default: 
-					return 0;
-		}
-	}
-
-	/**
-	 * @return
-	 */
-	public String getTeamName() {
-		switch (teamId) {
-			case GAB1_SUB_DEST_69:
-				return "BELUS";
-			case GAB1_SUB_DEST_70:
-				return "ASPIDA";
-			case GAB1_SUB_DEST_71:
-				return "ATHANOS";
-			case GAB1_SUB_DEST_72:
-				return "DEYLON";
-				default:
-					return "";
 		}
 	}
 	

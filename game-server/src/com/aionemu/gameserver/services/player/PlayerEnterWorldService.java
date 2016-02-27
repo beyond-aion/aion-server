@@ -109,7 +109,7 @@ import com.aionemu.gameserver.services.abyss.AbyssSkillService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.toypet.PetService;
@@ -360,7 +360,7 @@ public final class PlayerEnterWorldService {
 		player.getController().validateLoginZone();
 		VortexService.getInstance().validateLoginZone(player);
 
-		AhserionInstance.getInstance().onPlayerLogin(player);
+		AhserionRaid.getInstance().onPlayerLogin(player);
 
 		// ----------------------------- Retail sequence -----------------------------
 		client.sendPacket(new SM_PLAYER_SPAWN(player));

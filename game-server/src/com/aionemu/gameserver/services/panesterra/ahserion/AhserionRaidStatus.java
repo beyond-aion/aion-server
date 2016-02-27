@@ -5,7 +5,7 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
  * @author Yeats
  *
  */
-public enum AhserionInstanceStatus {
+public enum AhserionRaidStatus {
 
 	PREPARING_REGISTRATION,
 	PREPARING_INSTANCE_START,

@@ -22319,42 +22319,42 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * Unable to receive due to lack of free space in inventory.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MAIL_TAKE_ALL_CANCEL = new SM_SYSTEM_MESSAGE(1402251);
-	
+
 	/**
 	 * Loading the Advance Corridor Shield... Please wait.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_01() {
 		return new SM_SYSTEM_MESSAGE(1402252);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 8 minute.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_02() {
 		return new SM_SYSTEM_MESSAGE(1402253);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 6 minute.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_03() {
 		return new SM_SYSTEM_MESSAGE(1402254);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 4 minute.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_04() {
 		return new SM_SYSTEM_MESSAGE(1402255);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 2 minute.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_05() {
 		return new SM_SYSTEM_MESSAGE(1402256);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 1 minute.
 	 */
@@ -22437,6 +22437,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
 		return new SM_SYSTEM_MESSAGE(1402397, nameId);
+	}
+
+	/**
+	 * &lt;p&gt;You have moved through the Advance Corridor.&lt;/p&gt;
+	 * &lt;p&gt;If the Advance Corridor Generator is destroyed,&lt;/p&gt;
+	 * &lt;p&gt;you will be returned to your previous location.&lt;/p&gt;
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_SVS_DIRECT_PORTAL_OPEN_NOTICE() {
+		return new SM_SYSTEM_MESSAGE(1402418);
 	}
 
 	/**
@@ -22736,14 +22745,14 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM() {
 		return new SM_SYSTEM_MESSAGE(1402584);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex will open in 30 seconds.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_07() {
 		return new SM_SYSTEM_MESSAGE(1402586);
 	}
-	
+
 	/**
 	 * The entrance to the Transidium Annex has opened.
 	 */

@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -17,8 +19,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -107,7 +107,7 @@ public class PanesterraMatchmakingService {
 	}
 	
 	public synchronized boolean registerPlayer(Player player) {
-		if (player == null || !started.get() || isFinished.get() || AhserionInstance.getInstance().getStatus() != AhserionInstanceStatus.PREPARING_REGISTRATION) {
+		if (player == null || !started.get() || isFinished.get() || AhserionRaid.getInstance().getStatus() != AhserionRaidStatus.PREPARING_REGISTRATION) {
 			return false;
 		}
 		switch (player.getRace()) {
@@ -465,8 +465,8 @@ public class PanesterraMatchmakingService {
 		}
 		if (teams != null && !teams.isEmpty()) {
 			for (PanesterraTeam team : teams.values()) {
-				if (team != null && team.getTeamMembers() != null && !team.getTeamMembers().isEmpty()) {
-					for (Integer id : team.getTeamMembers()) {
+				if (team != null && team.getMembers() != null && !team.getMembers().isEmpty()) {
+					for (Integer id : team.getMembers()) {
 						Player p = World.getInstance().findPlayer(id);
 						if (p != null) {
 							PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");

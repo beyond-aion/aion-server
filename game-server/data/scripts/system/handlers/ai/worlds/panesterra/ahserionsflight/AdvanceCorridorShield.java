@@ -10,8 +10,8 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstance;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionInstanceStatus;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
+import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaidStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -78,7 +78,7 @@ public class AdvanceCorridorShield extends NpcAI2 {
 	@Override
 	public void handleDied() {
 		if (getOwner().getWorldId() == 400030000) {
-			if (AhserionInstance.getInstance().isStarted() && AhserionInstance.getInstance().getStatus() == AhserionInstanceStatus.INSTANCE_RUNNING) {
+			if (AhserionRaid.getInstance().isStarted() && AhserionRaid.getInstance().getStatus() == AhserionRaidStatus.INSTANCE_RUNNING) {
 				switch (getOwner().getNpcId()) {
 					case 297306:
 						sendPacket(1402270);
@@ -93,7 +93,7 @@ public class AdvanceCorridorShield extends NpcAI2 {
 						sendPacket(1402273);
 							break;
 				}
-				AhserionInstance.getInstance().corridorShieldDestroyed(getOwner().getNpcId());
+				AhserionRaid.getInstance().corridorShieldDestroyed(getOwner().getNpcId());
 			}
 		}
 		super.handleDied();

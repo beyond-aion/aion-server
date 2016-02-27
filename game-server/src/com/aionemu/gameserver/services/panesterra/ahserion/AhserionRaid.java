@@ -32,22 +32,22 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  * @author Yeats
  * @modified Estrayl
  */
-public class AhserionInstance {
+public class AhserionRaid {
 
-	private AhserionInstanceStatus status = AhserionInstanceStatus.OFF;
+	private AhserionRaidStatus status = AhserionRaidStatus.OFF;
 	private Map<PanesterraTeamId, PanesterraTeam> teams = null;
 	private AtomicBoolean isStarted = new AtomicBoolean();
 	private AhserionTeam winner = null;
 	private Future<?> observeTask, progressTask;
 	private short progress;
 
-	public static AhserionInstance getInstance() {
+	public static AhserionRaid getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	public void start() {
 		if (isStarted.compareAndSet(false, true)) {
-			status = AhserionInstanceStatus.PREPARING_REGISTRATION;
+			status = AhserionRaidStatus.PREPARING_REGISTRATION;
 			PanesterraMatchmakingService.getInstance().onStart();
 			ThreadPoolManager.getInstance().schedule((Runnable) () -> startInstancePreparation(), 600 * 1000);
 		}
@@ -55,7 +55,7 @@ public class AhserionInstance {
 
 	private void startInstancePreparation() {
 		synchronized (status) {
-			status = AhserionInstanceStatus.PREPARING_INSTANCE_START;
+			status = AhserionRaidStatus.PREPARING_INSTANCE_START;
 		}
 		PanesterraMatchmakingService.getInstance().prepareTeams();
 		teams = PanesterraMatchmakingService.getInstance().getRegisteredTeams();
@@ -106,7 +106,7 @@ public class AhserionInstance {
 
 	private void teleportPlayers() {
 		for (PanesterraTeam team : teams.values())
-			if (!team.getTeamMembers().isEmpty())
+			if (!team.getMembers().isEmpty())
 				team.teleportToStartPosition();
 	}
 
@@ -131,7 +131,7 @@ public class AhserionInstance {
 					break;
 				case 30:
 					synchronized (status) {
-						status = AhserionInstanceStatus.INSTANCE_RUNNING;
+						status = AhserionRaidStatus.INSTANCE_RUNNING;
 					}
 					for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 						door.setOpen(true);
@@ -174,7 +174,7 @@ public class AhserionInstance {
 
 	public void onStop() {
 		synchronized (status) {
-			status = AhserionInstanceStatus.OFF;
+			status = AhserionRaidStatus.OFF;
 		}
 		isStarted.set(false);
 		PanesterraMatchmakingService.getInstance().onStop();
@@ -193,7 +193,7 @@ public class AhserionInstance {
 
 	public void spawnStage(int stage, PanesterraTeamId team) {
 		if (team != PanesterraTeamId.BALAUR && stage >= 180 && stage <= 183)
-			if (teams.get(team) == null || teams.get(team).getTeamMembers().isEmpty())
+			if (teams.get(team) == null || teams.get(team).getMembers().isEmpty())
 				return;
 
 		List<SpawnGroup2> ahserionSpawns = DataManager.SPAWNS_DATA2.getAhserionSpawnByTeamId(team.getId());
@@ -210,7 +210,7 @@ public class AhserionInstance {
 	}
 
 	public boolean revivePlayer(Player player, int skillId) {
-		if (!isStarted.get() || status == AhserionInstanceStatus.OFF || player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated())
+		if (!isStarted.get() || status == AhserionRaidStatus.OFF || player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated())
 			return false;
 
 		PlayerReviveService.revive(player, 25, 25, false, skillId);
@@ -231,7 +231,7 @@ public class AhserionInstance {
 		if (winnerTeam == null || winnerTeam == PanesterraTeamId.BALAUR || !teams.containsKey(winnerTeam)
 			|| (teams.containsKey(winnerTeam) && teams.get(winnerTeam).isEliminated())) {
 			synchronized (status) {
-				status = AhserionInstanceStatus.OFF;
+				status = AhserionRaidStatus.OFF;
 			}
 			// something went wrong, remove all players from the map
 			owner.getController().onDelete();
@@ -260,7 +260,7 @@ public class AhserionInstance {
 		}
 		cancelTask(progressTask);
 		synchronized (status) {
-			status = AhserionInstanceStatus.INSTANCE_FINISHED;
+			status = AhserionRaidStatus.INSTANCE_FINISHED;
 		}
 		winner = (AhserionTeam) teams.get(winnerTeam);
 		for (PanesterraTeamId teamId : teams.keySet()) {
@@ -277,7 +277,7 @@ public class AhserionInstance {
 	}
 
 	public void corridorShieldDestroyed(int npcId) {
-		if (!isStarted.get() || status != AhserionInstanceStatus.INSTANCE_RUNNING)
+		if (!isStarted.get() || status != AhserionRaidStatus.INSTANCE_RUNNING)
 			return;
 
 		PanesterraTeamId eliminated = null;
@@ -334,14 +334,14 @@ public class AhserionInstance {
 
 	public void onPlayerLogin(Player player) {
 		if (isStarted.get()) {
-			if (status == AhserionInstanceStatus.PREPARING_REGISTRATION) {
+			if (status == AhserionRaidStatus.PREPARING_REGISTRATION) {
 				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player))
 					PacketSendUtility.sendWhiteMessageOnCenter(player, "You are currently registered for Ahserions Flight.");
-			} else if (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING) {
+			} else if (status == AhserionRaidStatus.PREPARING_INSTANCE_START || status == AhserionRaidStatus.INSTANCE_RUNNING) {
 				player.setPanesterraTeam(getPlayersTeam(player));
-			} else if (status == AhserionInstanceStatus.INSTANCE_FINISHED) {
+			} else if (status == AhserionRaidStatus.INSTANCE_FINISHED) {
 				if (winner != null) {
-					if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId()))
+					if (winner.getMembers() != null && winner.getMembers().contains(player.getObjectId()))
 						player.setPanesterraTeam(winner);
 				}
 			}
@@ -383,7 +383,7 @@ public class AhserionInstance {
 					break;
 			}
 			if (tempTeam != null && !tempTeam.isEliminated())
-				if (tempTeam.getTeamMembers() != null && tempTeam.getTeamMembers().contains(player.getObjectId()))
+				if (tempTeam.getMembers() != null && tempTeam.getMembers().contains(player.getObjectId()))
 					return tempTeam;
 		}
 		return null;
@@ -424,7 +424,7 @@ public class AhserionInstance {
 		return teams.get(team) != null && !teams.get(team).isEliminated();
 	}
 
-	public AhserionInstanceStatus getStatus() {
+	public AhserionRaidStatus getStatus() {
 		return status;
 	}
 
@@ -434,6 +434,6 @@ public class AhserionInstance {
 
 	private static class SingletonHolder {
 
-		protected static final AhserionInstance instance = new AhserionInstance();
+		protected static final AhserionRaid instance = new AhserionRaid();
 	}
 }
