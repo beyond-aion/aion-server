@@ -129,12 +129,14 @@ public class _10504ConfiscatetheSlate extends QuestHandler {
 					updateQuestStatus(env);
 					return true;
 				}
+				break;
 			case 236255:
 				if (var == 2) {
 					qs.setQuestVar(var+1);
 					updateQuestStatus(env);
 					return true;
 				}
+				break;
 		}
 		return false;
 	}
