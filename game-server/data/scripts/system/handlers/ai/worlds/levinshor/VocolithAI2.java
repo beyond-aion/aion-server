@@ -5,16 +5,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -94,19 +88,7 @@ public class VocolithAI2 extends GeneralNpcAI2 {
 		ThreadPoolManager.getInstance().schedule((Runnable) () -> { // schedule boss spawn
 			int npcId = 235217 + Rnd.get(0, 3);
 			Npc boss = (Npc) spawn(npcId, vocolith.getX(), vocolith.getY(), vocolith.getZ(), vocolith.getHeading());
-			boss.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) { // enable vocolith respawn after boss is killed
-
-				@Override
-				public void died(Creature creature) {
-					vocolithController.addTask(TaskId.RESPAWN, vocolithController.scheduleRespawn());
-				}
-			});
 			boss.getPosition().getWorldMapInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN()));
 		} , 5000);
-	}
-
-	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		return question == AIQuestion.SHOULD_RESPAWN ? AIAnswers.NEGATIVE : super.pollInstance(question);
 	}
 }
