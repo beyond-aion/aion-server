@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="600100000">
 		<!-- Alpine Snuffler -->
 		<spawn npc_id="233949" respawn_time="295">
@@ -1268,17 +1268,6 @@
         <spawn npc_id="804626" respawn_time="295">
             <spot x="88.43972" y="104.7799" z="347.45126" h="3"/>
         </spawn>
-		<!-- Ruthless Tyrannica Vocolithspawns
-        <spawn npc_id="235220" respawn_time="295">
-            <spot x="155.17705" y="895.9707" z="241.9881"/>
-            <spot x="238.69331" y="1581.232" z="227.77995"/>
-            <spot x="605.75024" y="1462.4778" z="276.86615" h="105"/>
-            <spot x="894.93835" y="838.9557" z="313.66245" h="22"/>
-            <spot x="1106.3552" y="1231.351" z="308.5724" h="75"/>
-            <spot x="1211.338" y="584.32965" z="277.96094" h="105"/>
-            <spot x="1491.6709" y="313.16815" z="253.56389" h="67"/>
-            <spot x="1663.9791" y="612.9501" z="227.10474" h="75"/>
-        </spawn> -->
 		<!-- Sacred Image of Kaisinel -->
         <spawn npc_id="258313" respawn_time="295">
             <spot x="266.2289" y="185.0694" z="350.35593" h="15"/>
@@ -1721,35 +1710,35 @@
         </spawn>
 		<!-- Vocolith -->
 		<spawn npc_id="804573" respawn_time="21600">
-			<spot x="155.1449" y="896.0185" z="241.9881"/>
+			<spot x="155.23886" y="896.09412" z="241.9881" static_id="13"/>
 		</spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804574" respawn_time="21600">
-            <spot x="238.737" y="1581.18" z="227.77995"/>
+            <spot x="238.54105" y="1581.0961" z="227.77995" static_id="20"/>
         </spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804575" respawn_time="21600">
-            <spot x="606.0103" y="1462.345" z="276.86615" h="105"/>
+            <spot x="605.8056" y="1462.2771" z="276.86615" h="105" static_id="23"/>
         </spawn>
 		<!-- Vocolith -->
 		<spawn npc_id="804579" respawn_time="21600">
-			<spot x="1106.418" y="1231.34" z="308.5724" h="75"/>
+			<spot x="1106.4246" y="1231.3024" z="308.5724" h="75" static_id="60"/>
 		</spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804580" respawn_time="21600">
-            <spot x="1663.793" y="612.8768" z="227.10474" h="75"/>
+            <spot x="1663.5723" y="612.97003" z="227.10474" h="75" static_id="24"/>
         </spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804581" respawn_time="21600">
-            <spot x="1491.795" y="313.1538" z="253.56389" h="66"/>
+            <spot x="1491.7522" y="312.94736" z="253.56389" h="66" static_id="47"/>
         </spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804582" respawn_time="21600">
-            <spot x="1211.967" y="584.015" z="277.96094" h="105"/>
+            <spot x="1211.6776" y="583.93884" z="277.96094" h="105" static_id="48"/>
         </spawn>
 		<!-- Vocolith -->
         <spawn npc_id="804583" respawn_time="21600">
-            <spot x="894.8337" y="838.7992" z="313.66245" h="21"/>
+            <spot x="894.83118" y="838.97162" z="313.66245" h="21" static_id="53"/>
         </spawn>
 		<!-- Waterlogged Gnarl -->
         <spawn npc_id="233904" respawn_time="295">
