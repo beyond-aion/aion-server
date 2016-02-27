@@ -1,11 +1,20 @@
 package ai.worlds.kaldor;
 
+import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.ai2.poll.AIAnswer;
+import com.aionemu.gameserver.ai2.poll.AIAnswers;
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -19,6 +28,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author Ritsu
  * @reworked Estrayl
+ * @modified Neon
  */
 @AIName("anohas_sword")
 public class AnohasSwordAI2 extends NpcAI2 {
@@ -43,26 +53,33 @@ public class AnohasSwordAI2 extends NpcAI2 {
 			return false;
 		}
 
-		spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 0); // Flag
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2375));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_ITEM());
 		World.getInstance().doOnAllPlayers(receiver -> {
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN());
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM());
 		});
-		// TODO: Area Animation
+		Race raceSummoned = player.getRace();
+		Npc sword = getOwner();
+		NpcController swordController = sword.getController();
+		AI2Actions.die(this); // kill sword (starts animation)
+		swordController.cancelTask(TaskId.DECAY); // disable despawn to show animation until anoha spawns
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.RESURRECT));
+			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.DIE));
+		}, 10 * 1000, 10 * 1000); // repeat animation
+		spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // Flag (map icon)
 		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
-			spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 0); // Berserk Anoha
+			spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
 			World.getInstance().doOnAllPlayers(receiver -> {
 				PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
-				getOwner().getController().onDelete();
-				Race race = player.getRace();
-				if (receiver.getRace() == race)
-					startQuest(receiver, race == Race.ELYOS ? 13817 : 23817);
+				swordController.onDelete(); // despawn sword
+				if (receiver.getRace() == raceSummoned)
+					startQuest(receiver, raceSummoned == Race.ELYOS ? 13817 : 23817);
 				else
-					startQuest(receiver, race == Race.ELYOS ? 13818 : 23818);
+					startQuest(receiver, raceSummoned == Race.ELYOS ? 13818 : 23818);
 			});
-		}, 30 * 60000);
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2375));
+		} , 30 * 60000);
 		return true;
 	}
 
@@ -71,5 +88,10 @@ public class AnohasSwordAI2 extends NpcAI2 {
 		QuestEnv env = new QuestEnv(null, player, questId, 0);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE)
 			QuestService.startQuest(env, QuestStatus.START);
+	}
+
+	@Override
+	protected AIAnswer pollInstance(AIQuestion question) {
+		return question == AIQuestion.SHOULD_RESPAWN ? AIAnswers.NEGATIVE : super.pollInstance(question);
 	}
 }
