@@ -14,6 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 
 /**
  * @author Artur
@@ -81,7 +82,11 @@ public class _14043DrawlingBalaur extends QuestHandler {
 				case SETPRO1:
 					if (var == 0) {
 						changeQuestStep(env, 0, 1, false);
-						TeleportService2.teleportTo(player, 110010000, 1655.79f, 1446.95f, 549.4f, (byte)119, TeleportAnimation.FADE_OUT_BEAM);
+						int currentHour = GameTimeManager.getGameTime().getHour();
+						if (currentHour < 8 || currentHour >= 20)
+							TeleportService2.teleportTo(player, 110010000, 1819.51f, 2189.24f, 528.52f, (byte)36, TeleportAnimation.FADE_OUT_BEAM);
+						else
+							TeleportService2.teleportTo(player, 110010000, 1964.69f, 1767.63f, 576.76f, (byte)2, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;
