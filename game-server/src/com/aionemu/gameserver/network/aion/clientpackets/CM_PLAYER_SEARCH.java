@@ -38,15 +38,9 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		name = readS(52);
-		if (name != null) {
-			name = Util.convertName(name);
-		}
+		name = Util.convertName(readS(52));
 		region = readD();
 		classMask = readD();
 		minLevel = readC();
@@ -55,30 +49,29 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 		readC(); // 0x00 in search pane 0x30 in /who?
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
 		Iterator<Player> it = World.getInstance().getPlayersIterator();
-
 		List<Player> matches = new FastTable<Player>();
 
 		if (activePlayer.getLevel() < CustomConfig.LEVEL_TO_SEARCH) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_SEARCH)));
+			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(CustomConfig.LEVEL_TO_SEARCH));
 			return;
 		}
+
 		while (it.hasNext() && matches.size() < MAX_RESULTS) {
 			Player player = it.next();
-			if (!player.isSpawned())
+			if (player.getRace() != activePlayer.getRace() && !CustomConfig.FACTIONS_SEARCH_MODE)
 				continue;
-			else if (player.getFriendList().getStatus() == Status.OFFLINE)
+			else if (!player.getCommonData().isOnline() || player.getFriendList().getStatus() == Status.OFFLINE)
 				continue;
-			else if (player.isGM() && !CustomConfig.SEARCH_GM_LIST) {
+			else if (!player.isSpawned())
 				continue;
-			} else if (lfgOnly == 1 && !player.isLookingForGroup())
+			else if (player.isGM() && !CustomConfig.SEARCH_GM_LIST)
+				continue;
+			else if (lfgOnly == 1 && !player.isLookingForGroup())
 				continue;
 			else if (!name.isEmpty() && !player.getName().toLowerCase().contains(name.toLowerCase()))
 				continue;
@@ -90,13 +83,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			else if (region > 0 && player.getActiveRegion().getMapId() != region)
 				continue;
-			else if ((player.getRace() != activePlayer.getRace()) && (CustomConfig.FACTIONS_SEARCH_MODE == false))
-				continue;
-			else
-			// This player matches criteria
-			{
-				matches.add(player);
-			}
+			matches.add(player);
 		}
 
 		sendPacket(new SM_PLAYER_SEARCH(matches, region));

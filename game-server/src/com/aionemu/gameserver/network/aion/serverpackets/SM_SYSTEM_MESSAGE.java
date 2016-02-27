@@ -17793,7 +17793,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Characters under level %0 cannot use the search function.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CANT_WHO_LEVEL(String value0) {
+	public static SM_SYSTEM_MESSAGE STR_CANT_WHO_LEVEL(int value0) {
 		return new SM_SYSTEM_MESSAGE(1400341, value0);
 	}
 
