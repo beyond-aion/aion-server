@@ -436,7 +436,8 @@ public class SpawnsData2 {
 			if (spawns == null)
 				return null;
 		}
-		return new SpawnSearchResult(worldId, spawns.getSpawnSpotTemplates().get(0));
+		List <SpawnSpotTemplate> spawnSpots = spawns.getSpawnSpotTemplates();
+		return spawnSpots.isEmpty() ? null : new SpawnSearchResult(worldId, spawnSpots.get(0));
 	}
 
 	/**
