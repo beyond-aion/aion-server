@@ -271,7 +271,12 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * @return aggroInfo
 	 */
 	public AggroInfo getAggroInfo(Creature creature) {
-		return aggroList.putIfAbsent(creature.getObjectId(), new AggroInfo(creature));
+		AggroInfo ai = aggroList.get(creature.getObjectId());
+		if (ai == null) {
+			ai = new AggroInfo(creature);
+			aggroList.put(creature.getObjectId(), ai);
+		}
+		return ai;
 	}
 
 	/**
