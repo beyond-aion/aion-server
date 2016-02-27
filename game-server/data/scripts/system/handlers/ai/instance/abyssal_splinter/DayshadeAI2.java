@@ -20,7 +20,7 @@ public class DayshadeAI2 extends AggressiveNpcAI2 {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
-			AI2Actions.dieSilently(this, creature);
+			AI2Actions.die(this, creature);
 			spawn(216949, 455.5502f, 702.09485f, 433.13727f, (byte) 108); // ebonsoul
 			spawn(216948, 447.1937f, 683.72217f, 433.1805f, (byte) 108); // rukril
 			AI2Actions.deleteOwner(DayshadeAI2.this);

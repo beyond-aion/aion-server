@@ -3,10 +3,8 @@ package zone.pvpZones;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_MY_DEATH_TO_B;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE;
 
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -31,15 +29,11 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 
 	@Override
 	public boolean onDie(final Creature lastAttacker, Creature target, final ZoneInstance zone) {
-		if (!(target instanceof Player)) {
+		if (!(target instanceof Player))
 			return false;
-		}
 
-		final Player player = (Player) target;
-
-		PacketSendUtility.broadcastPacket(player,
-			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 		if (zone instanceof SiegeZoneInstance) {
+			Player player = (Player) target;
 			((SiegeZoneInstance) zone).doOnAllPlayers(new Visitor<Player>() {
 
 				@Override

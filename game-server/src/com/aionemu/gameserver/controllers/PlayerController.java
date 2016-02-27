@@ -298,11 +298,10 @@ public class PlayerController extends CreatureController<Player> {
 			World.getInstance().setPosition(getOwner(), mapId, x, y, z, h);
 	}
 
-	public void onDie(@Nonnull Creature lastAttacker, boolean showPacket) {
+	public void onDie(@Nonnull Creature lastAttacker) {
 		Player player = this.getOwner();
 		player.getController().cancelCurrentSkill();
 		player.setRebirthRevive(getOwner().haveSelfRezEffect());
-		showPacket = player.hasResurrectBase() ? false : showPacket;
 		Creature master = lastAttacker.getMaster();
 
 		// High ranked kill announce
@@ -332,57 +331,43 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		// setIsFlyingBeforeDead for PlayerReviveService
-		if (player.isInState(CreatureState.FLYING)) {
+		if (player.isInState(CreatureState.FLYING))
 			player.setIsFlyingBeforeDeath(true);
-		}
 
 		// ride
 		player.setPlayerMode(PlayerMode.RIDE, null);
 		player.unsetState(CreatureState.RESTING);
 		player.unsetState(CreatureState.FLOATING_CORPSE);
 
-		// unsetflying
+		// unset flying
 		player.unsetState(CreatureState.FLYING);
 		player.unsetState(CreatureState.GLIDING);
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
 
-		if (player.isInInstance()) {
-			if (player.getPosition().getWorldMapInstance().getInstanceHandler().onDie(player, lastAttacker)) {
-				super.onDie(lastAttacker);
-				return;
-			}
-		}
+		// Effects removed with super.onDie()
+		super.onDie(lastAttacker);
+
+		if (player.isInInstance() && player.getPosition().getWorldMapInstance().getInstanceHandler().onDie(player, lastAttacker))
+			return;
 
 		MapRegion mapRegion = player.getPosition().getMapRegion();
-		if (mapRegion != null && mapRegion.onDie(lastAttacker, getOwner())) {
+		if (mapRegion != null && mapRegion.onDie(lastAttacker, getOwner()))
 			return;
-		}
 
-		this.doReward();
+		doReward();
 
-		if (master instanceof Npc || master == player) {
+		if (master instanceof Npc || master.equals(player)) {
 			if (player.getLevel() > 4 && !isNoDeathPenaltyInEffect())
 				player.getCommonData().calculateExpLoss();
 		}
 
-		// Effects removed with super.onDie()
-		super.onDie(lastAttacker);
-
-		// send sm_emotion with DIE
-		// have to be send after state is updated!
-		sendDieFromCreature(lastAttacker, showPacket);
+		sendDieFromCreature(lastAttacker, player.hasResurrectBase());
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
 
-		if (player.isInGroup2()) {
+		if (player.isInGroup2())
 			player.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
-		}
-	}
-
-	@Override
-	public void onDie(@Nonnull Creature lastAttacker) {
-		this.onDie(lastAttacker, true);
 	}
 
 	public void sendDie() {
@@ -390,11 +375,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	private void sendDieFromCreature(@Nonnull Creature lastAttacker, boolean showPacket) {
-		Player player = this.getOwner();
-
-		PacketSendUtility.broadcastPacket(player,
-			new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
-
+		Player player = getOwner();
 		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
 			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));
 		} else if (showPacket) {

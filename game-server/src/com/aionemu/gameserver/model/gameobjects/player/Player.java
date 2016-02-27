@@ -1377,7 +1377,7 @@ public class Player extends Creature {
 		return isFlyingBeforeDeath;
 	}
 
-	public com.aionemu.gameserver.model.team2.alliance.PlayerAlliance getPlayerAlliance2() {
+	public PlayerAlliance getPlayerAlliance2() {
 		return playerAllianceGroup != null ? playerAllianceGroup.getAlliance() : null;
 	}
 

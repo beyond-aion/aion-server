@@ -1,10 +1,9 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.Objects;
+import javax.annotation.Nonnull;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -14,7 +13,6 @@ import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -117,13 +115,11 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void onDie(final Creature lastAttacker) {
-		Objects.requireNonNull(lastAttacker, "lastAttacker");
+	public void onDie(@Nonnull Creature lastAttacker) {
 		super.onDie(lastAttacker);
-		SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED, isAttacked);
 		Summon owner = getOwner();
-		final Player master = getOwner().getMaster();
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0, lastAttacker.equals(owner) ? 0 : lastAttacker.getObjectId()));
+		Player master = getOwner().getMaster();
+		SummonsService.release(owner, UnsummonType.UNSPECIFIED, isAttacked);
 
 		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.getLifeStats().isAlreadyDead()
 			&& !lastAttacker.getLifeStats().isAlreadyDead()) {

@@ -12,7 +12,7 @@ public class SM_DIE extends AionServerPacket {
 	private boolean hasRebirth;
 	private boolean hasItem;
 	private int remainingKiskTime;
-	private int type = 0;
+	private int type;
 	private boolean invasion;
 
 	public SM_DIE(boolean hasRebirth, boolean hasItem, int remainingKiskTime, int type) {
@@ -29,10 +29,10 @@ public class SM_DIE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC((hasRebirth ? 1 : 0)); // skillRevive
-		writeC((hasItem ? 1 : 0)); // itemRevive
+		writeC(hasRebirth ? 1 : 0); // skillRevive
+		writeC(hasItem ? 1 : 0); // itemRevive
 		writeD(remainingKiskTime);
-		writeC(type);
+		writeC(type); // 8 = instance
 		writeC(invasion ? 0x80 : 0x00);
 	}
 

@@ -80,7 +80,7 @@ public class NightmareCrateAI2 extends ActionItemNpcAI2 {
 			players.add(player);
 		}
 		DropRegistrationService.getInstance().registerDrop(getOwner(), player, maxFrom(players).getLevel(), players);
-		AI2Actions.dieSilently(this, player);
+		AI2Actions.die(this, player);
 		DropService.getInstance().requestDropList(player, getObjectId());
 		super.handleUseItemFinish(player);
 	}

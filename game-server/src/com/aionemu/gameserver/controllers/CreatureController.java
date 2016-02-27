@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
+import javax.annotation.Nonnull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,7 @@ import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Homing;
@@ -30,6 +33,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
@@ -139,32 +143,24 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * 
 	 * @param lastAttacker
 	 */
-	public void onDie(Creature lastAttacker) {
-		onDieSilence();
-		getOwner().getObserveController().notifyDeathObservers(lastAttacker);
-	}
-
-	/**
-	 * Perform tasks on Creature death with out emotion effect(need for some quests).
-	 */
-	public void onDieSilence() {
+	public void onDie(@Nonnull Creature lastAttacker) {
 		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
 		if (getOwner() instanceof Player && ((Player) getOwner()).getIsFlyingBeforeDeath()) {
 			getOwner().unsetState(CreatureState.ACTIVE);
 			getOwner().setState(CreatureState.FLOATING_CORPSE);
-		} else if (getOwner() instanceof Npc && ((Npc) getOwner()).getObjectTemplate().isFloatCorpse())
-			getOwner().setState(CreatureState.FLOATING_CORPSE); // not clear when to set it or if this is right at all
-		else
+		} else
 			getOwner().setState(CreatureState.DEAD);
+		getOwner().getObserveController().notifyDeathObservers(lastAttacker);
+		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
+			new SM_EMOTION(getOwner(), EmotionType.DIE, 0, getOwner().equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
 	}
 
 	/**
 	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
 	 */
 	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
-
 		// avoid killing players after duel
 		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && getOwner() != attacker)
 			return;

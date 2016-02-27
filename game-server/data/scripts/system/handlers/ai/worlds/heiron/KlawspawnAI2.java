@@ -26,7 +26,7 @@ public class KlawspawnAI2 extends GeneralNpcAI2 {
 		if (npc == null) {
 			if (Rnd.get(0, 100) < 10) {
 				spawn(212120, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
-				AI2Actions.dieSilently(this, creature);
+				AI2Actions.die(this, creature);
 			}
 		}
 	}

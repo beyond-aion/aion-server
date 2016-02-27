@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.Future;
 
+import javax.annotation.Nonnull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +15,6 @@ import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -29,7 +30,6 @@ import com.aionemu.gameserver.model.team2.common.service.PlayerTeamDistributionS
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -120,12 +120,10 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker) {
+	public void onDie(@Nonnull Creature lastAttacker) {
 		Npc owner = getOwner();
-		if (owner.getSpawn().hasPool()) {
+		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
-		}
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0, owner.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
 
 		boolean shouldReward = false;
 		boolean deleteImmediately = false;
@@ -133,13 +131,13 @@ public class NpcController extends CreatureController<Npc> {
 		try {
 			deleteImmediately = !owner.getAi2().poll(AIQuestion.SHOULD_DECAY);
 			shouldRespawn = owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN);
-			if ((shouldReward = owner.getAi2().poll(AIQuestion.SHOULD_REWARD)))
-				this.doReward();
+			if (shouldReward = owner.getAi2().poll(AIQuestion.SHOULD_REWARD))
+				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi2().onGeneralEvent(AIEventType.DIED);
 		} catch (Exception e) {
-			log.warn("LOOT DEBUG: EXCEPTION:" + e.getMessage());
-		} finally { // always make sure npc is schedulled to respawn
+			log.warn("Npc onDie() Exception:", e);
+		} finally { // always make sure npc is scheduled to respawn
 			if (!deleteImmediately) {
 				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
 			} else if (shouldReward && owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
@@ -148,9 +146,8 @@ public class NpcController extends CreatureController<Npc> {
 			// TODO: refactor this: used for rift AI, better to use getDecayTime for AI
 			if (shouldRespawn && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
 				Future<?> task = scheduleRespawn();
-				if (task != null) {
+				if (task != null)
 					addTask(TaskId.RESPAWN, task);
-				}
 			}
 		}
 		super.onDie(lastAttacker);
@@ -162,50 +159,17 @@ public class NpcController extends CreatureController<Npc> {
 				&& player.getPet().getCommonData().isLooting()) {
 				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 				Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-				if (drops != null && drops.size() != 0) {
-					DropItem[] dropItems = drops.toArray(new DropItem[0]);
-					for (int i = 0; i < dropItems.length; i++) {
-						DropService.getInstance().requestDropItem(player, npcObjId, dropItems[i].getIndex(), true);
-					}
+				if (drops != null) {
+					for (DropItem dropItem : drops)
+						DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
 				}
 				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
-				if ((drops == null || drops.size() == 0) && !deleteImmediately) {
-					// without drop it's 2 seconds, re-schedule it
+				if ((drops == null || drops.size() == 0) && !deleteImmediately) // without drop it's 2 seconds, re-schedule it
 					addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY));
-				}
 			}
 		}
-		if (deleteImmediately) {
+		if (deleteImmediately)
 			onDelete();
-		}
-	}
-
-	@Override
-	public void onDieSilence() {
-		Npc owner = getOwner();
-		if (owner.getSpawn().hasPool()) {
-			owner.getSpawn().setUse(owner.getInstanceId(), false);
-		}
-
-		try {
-			if (owner.getAi2().poll(AIQuestion.SHOULD_REWARD))
-				this.doReward();
-			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
-			owner.getAi2().onGeneralEvent(AIEventType.DIED);
-		} finally { // always make sure npc is schedulled to respawn
-			if (owner.getAi2().poll(AIQuestion.SHOULD_DECAY)) {
-				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
-			}
-			if (owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN) && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
-				Future<?> task = scheduleRespawn();
-				if (task != null) {
-					addTask(TaskId.RESPAWN, task);
-				}
-			} else if (!hasScheduledTask(TaskId.DECAY)) {
-				onDelete();
-			}
-		}
-		super.onDieSilence();
 	}
 
 	@Override
@@ -232,10 +196,8 @@ public class NpcController extends CreatureController<Npc> {
 		for (AggroInfo info : finalList) {
 			AionObject attacker = info.getAttacker();
 
-			// We are not reward Npc's
-			if (attacker instanceof Npc) {
+			if (!(attacker instanceof Player)) // don't reward npcs or summons
 				continue;
-			}
 
 			float percentage = info.getDamage() / totalDmg;
 			if (percentage > 1) {

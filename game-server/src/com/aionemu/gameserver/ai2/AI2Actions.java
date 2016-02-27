@@ -32,14 +32,21 @@ public class AI2Actions {
 	/**
 	 * Target will die with all notifications using ai's owner as the last attacker
 	 */
-	public static void killSilently(AbstractAI ai2, Creature target) {
+	public static void kill(AbstractAI ai2, Creature target) {
 		target.getController().onDie(ai2.getOwner());
+	}
+
+	/**
+	 * AI's owner will die
+	 */
+	public static void die(AbstractAI ai2) {
+		ai2.getOwner().getController().onDie(ai2.getOwner());
 	}
 
 	/**
 	 * AI's owner will die from specified attacker
 	 */
-	public static void dieSilently(AbstractAI ai2, Creature attacker) {
+	public static void die(AbstractAI ai2, Creature attacker) {
 		ai2.getOwner().getController().onDie(attacker);
 	}
 

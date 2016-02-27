@@ -47,7 +47,7 @@ public class CentralDeckMobileCannonAI2 extends ActionItemNpcAI2 {
 
 	private void killNpc(List<Npc> npcs) {
 		for (Npc npc : npcs) {
-			AI2Actions.killSilently(this, npc);
+			AI2Actions.kill(this, npc);
 		}
 	}
 

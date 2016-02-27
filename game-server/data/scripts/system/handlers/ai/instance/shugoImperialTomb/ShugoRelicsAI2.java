@@ -53,7 +53,7 @@ public class ShugoRelicsAI2 extends ActionItemNpcAI2 {
 			return;
 		}
 
-		AI2Actions.dieSilently(this, player);
+		AI2Actions.die(this, player);
 		Collection<Player> players = new HashSet<Player>();
 		if (player.isInGroup2()) {
 			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {

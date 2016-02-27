@@ -14,11 +14,9 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -45,11 +43,7 @@ public class KiskAI2 extends NpcAI2 {
 
 	@Override
 	protected void handleDied() {
-		if (isAlreadyDead()) {
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.DIE, 0, 0));
-			getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED);
-		}
-
+		getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED);
 		super.handleDied();
 	}
 
