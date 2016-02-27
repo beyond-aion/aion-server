@@ -42,10 +42,8 @@ public class _30504TheSearchforPaios extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcIds[1]) {
-				if (dialog == DialogAction.USE_OBJECT) {
-					changeQuestStep(env, 0, 1, false);
-					return closeDialogWindow(env);
-				}
+				if (dialog == DialogAction.USE_OBJECT)
+					return useQuestObject(env, 0, 1, false, false);
 			} else if (targetId == npcIds[2]) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);

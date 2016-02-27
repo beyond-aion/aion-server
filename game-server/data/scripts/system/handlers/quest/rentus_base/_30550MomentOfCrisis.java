@@ -22,8 +22,9 @@ public class _30550MomentOfCrisis extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(205864).addOnQuestStart(questId); // Skafir
 		qe.registerQuestNpc(205864).addOnTalkEvent(questId);
-		qe.registerQuestNpc(799549).addOnTalkEvent(questId); // Maios
-		qe.registerQuestNpc(799544).addOnTalkEvent(questId); // Oreitia
+		qe.registerQuestNpc(805156).addOnTalkEvent(questId); // Ekios
+		qe.registerQuestNpc(799592).addOnTalkEvent(questId); // Ariana
+		qe.registerQuestNpc(799666).addOnTalkEvent(questId); // Ariana
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 
-				case 799549: {
+				case 805156: {
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -54,7 +55,8 @@ public class _30550MomentOfCrisis extends QuestHandler {
 						}
 					}
 				}
-				case 799544: {
+				case 799592:
+				case 799666: {
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
@@ -71,7 +73,8 @@ public class _30550MomentOfCrisis extends QuestHandler {
 
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
-				case 799544: {
+				case 799592:
+				case 799666: {
 					return sendQuestEndDialog(env);
 				}
 			}

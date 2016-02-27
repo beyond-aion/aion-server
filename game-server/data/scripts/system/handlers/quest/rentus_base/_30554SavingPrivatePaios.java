@@ -8,11 +8,12 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Ritsu
+ * @author Pad
  */
 public class _30554SavingPrivatePaios extends QuestHandler {
 
-	private final static int questId = 30554;
+	private static final int questId = 30554;
+	private static final int[] npcIds = { 205438, 701098, 799536 };
 
 	public _30554SavingPrivatePaios() {
 		super(questId);
@@ -20,11 +21,9 @@ public class _30554SavingPrivatePaios extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(205438).addOnQuestStart(questId); // Lition
-		qe.registerQuestNpc(205438).addOnTalkEvent(questId);
-		qe.registerQuestNpc(799536).addOnTalkEvent(questId); // Paios
-		qe.registerQuestNpc(701098).addOnTalkEvent(questId);
-
+		qe.registerQuestNpc(npcIds[0]).addOnQuestStart(questId);
+		for (int npcId : npcIds)
+			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -33,51 +32,33 @@ public class _30554SavingPrivatePaios extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			switch (targetId) {
-				case 205438: {
-					switch (dialog) {
-						case QUEST_SELECT:
-							return sendQuestDialog(env, 4762);
-
-						default:
-							return sendQuestStartDialog(env);
-					}
-				}
+			if (targetId == npcIds[0]) {
+				if (dialog == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 4762);
+				else
+					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
-
-			switch (targetId) {
-				case 799536: {
-					switch (dialog) {
-						case QUEST_SELECT:
-							return sendQuestDialog(env, 1352);
-						case SET_SUCCEED: {
-							return defaultCloseDialog(env, 1, 2, true, false);// reward
-
-						}
-					}
-				}
-				case 701098: {
-					switch (dialog) {
-						case USE_OBJECT:
-							return useQuestObject(env, 0, 1, false, true);
-					}
-				}
-				case 205438: {
-					switch (dialog) {
-						case SELECT_QUEST_REWARD:
-							return defaultCloseDialog(env, 2, 2, true, false);
-					}
-				}
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == npcIds[1]) {
+				if (dialog == DialogAction.USE_OBJECT)
+					return useQuestObject(env, 0, 1, false, false);
+			} else if (targetId == npcIds[2]) {
+				if (dialog == DialogAction.QUEST_SELECT)
+					return sendQuestDialog(env, 1352);
+				else if (dialog == DialogAction.SET_SUCCEED)
+					return defaultCloseDialog(env, 1, 1, true, false);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch (targetId) {
-				case 205438: {
+			if (targetId == npcIds[0]) {
+				if (dialog == DialogAction.USE_OBJECT)
+					return sendQuestDialog(env, 5);
+				else
 					return sendQuestEndDialog(env);
-				}
 			}
 		}
 		return false;
 	}
+
 }
