@@ -15,9 +15,7 @@ public class LegionDominionScoreInfo extends InstanceScoreInfo {
 	public LegionDominionScoreInfo(LegionDominionReward ldr) {
 		this.ldr = ldr;
 	}
-	
-	////fsc 0x79 ddddddddddddddd 301500000 1800000 3145728 900000 0 0 1 10 10 164002239 1 164002239 1 0 0
-	//3145728 900000 0 0 0 20 10 164002239 1 164002239 2 0 0
+
 	@Override
 	public void writeMe(ByteBuffer buf) {
 		writeD(buf, ldr.getPoints());

@@ -55,7 +55,7 @@ public class TrapNpcAI2 extends NpcAI2 {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		if (getObjectTemplate().getName().toLowerCase().equals("propelling trap")) {
+		if (getObjectTemplate().getName().toLowerCase().equals("shock trap")) {
 			explode(getOwner());
 		}
 	}

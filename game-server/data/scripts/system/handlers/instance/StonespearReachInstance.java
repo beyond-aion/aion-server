@@ -83,6 +83,11 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 				allowedPlayers.add(player.getObjectId());
 			}
 		}
+
+		if (deadPlayers.contains(player.getObjectId())) {
+			TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+		}
+
 		if (reward != null && !reward.isRewarded()) {
 			sendPacket(0, 0);
 		}

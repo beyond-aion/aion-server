@@ -21,8 +21,9 @@ public class _30500Desperation extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(205842).addOnQuestStart(questId);
-		qe.registerQuestNpc(799549).addOnTalkEvent(questId);
-		qe.registerQuestNpc(799544).addOnTalkEvent(questId);
+		qe.registerQuestNpc(205842).addOnTalkEvent(questId);
+		qe.registerQuestNpc(804879).addOnTalkEvent(questId);
+		qe.registerQuestNpc(799670).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -43,29 +44,21 @@ public class _30500Desperation extends QuestHandler {
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 799549) {
+			if (targetId == 804879) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1352);
 					}
 					case SETPRO1: {
-						changeQuestStep(env, 0, 1, false);
-						return closeDialogWindow(env);
-					}
-				}
-			} else if (targetId == 799544) {
-				switch (dialog) {
-					case QUEST_SELECT: {
-						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
-						changeQuestStep(env, 1, 1, true);
+						qs.setQuestVarById(0, 1);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
 						return closeDialogWindow(env);
 					}
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799544) {
+			if (targetId == 799670) {
 				return sendQuestEndDialog(env);
 			}
 		}

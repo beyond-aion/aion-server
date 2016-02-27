@@ -10,13 +10,16 @@
 			45507 [XML] [Spy/Weekly] Elysea Infiltration
 			45508 [XML] Elyos Extermination Operation
 			45509 [XML] Slaughter the Elyos
+			45510 [XML] [Daily] Elimating the Elyos
+			45511 [XML] [Spy/Daily] Cygnea Infiltration Operation
+			45512 [XML] [Daily] Go Guerrilla on the Elyos
+			45513 [XML] [Spy/Daily] Cygnea Invasion Operation
 			48001 [SCRIPT] Call of the Crusade
 			48004 [XML] Message from the Blood Crusade
 		[END] SUMMARY
 	-->
 	<!-- REPORTING QUESTS -->
-	<report_to start_npc_ids="204191" end_npc_ids="799868" id="48004"/>
-	<!-- COLLECTING QUESTS -->
+	<report_to id="48004" start_npc_ids="204191" end_npc_ids="799868"/>
 	<!-- HUNTING QUESTS -->
 	<kill_in_world id="45502" end_npc_ids="799870" worlds="400010000" amount="3"/>
 	<kill_in_world id="45503" start_npc_ids="799865 799866" end_npc_ids="799865 799866" worlds="600010000" amount="5"/>
@@ -26,4 +29,8 @@
 	<kill_in_world id="45507" start_npc_ids="799870" end_npc_ids="799870" worlds="210020000 210040000" amount="1"/>
 	<kill_in_world id="45508" end_npc_ids="799870" worlds="0" amount="5"/>
 	<kill_in_world id="45509" end_npc_ids="799865 799866" worlds="0" amount="5"/>
+	<kill_in_world id="45510" end_npc_ids="804962" worlds="0" amount="5"/>
+	<kill_in_world id="45511" end_npc_ids="804962" worlds="210070000" amount="5"/>
+	<kill_in_world id="45512" end_npc_ids="804962" worlds="0" amount="5"/>
+	<kill_in_world id="45513" end_npc_ids="804962" worlds="210070000" amount="5"/>
 </quest_scripts>
