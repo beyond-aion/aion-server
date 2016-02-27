@@ -52,7 +52,7 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 			}
 		}
 
-		// These bytes come from uncleaned byte buffer of pervious house owners info
+		// These bytes come from uncleaned byte buffer of previous house owners info
 		// we fix NC shit here
 		for (int i = 0; i < dataSize; i++)
 			writeC(0);

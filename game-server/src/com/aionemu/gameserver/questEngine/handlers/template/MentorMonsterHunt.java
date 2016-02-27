@@ -17,7 +17,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.MathUtil;
 
 /**
- * @author MrPoke reworked Bobobear
+ * @author MrPoke
+ * @reworked Bobobear
+ * @modified Pad
  */
 public class MentorMonsterHunt extends MonsterHunt {
 
@@ -33,7 +35,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 	 */
 	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters,
 		int menteMinLevel, int menteMaxLevel, boolean rewardNextStep) {
-		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, 0, rewardNextStep);
+		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, "NONE", 0, rewardNextStep);
 		this.menteMinLevel = menteMinLevel;
 		this.menteMaxLevel = menteMaxLevel;
 		this.qt = DataManager.QUEST_DATA.getQuestById(questId);

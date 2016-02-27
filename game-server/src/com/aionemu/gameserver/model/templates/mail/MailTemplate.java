@@ -42,7 +42,6 @@ public class MailTemplate {
 			mailPartsMap.put(((IMailFormatter) part).getType(), part);
 		}
 		mailParts.clear();
-		mailParts = null;
 	}
 
 	public MailPart getSender() {

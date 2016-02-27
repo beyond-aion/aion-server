@@ -25,11 +25,12 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.reward.BonusService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author MrPoke
  * @reworked vlog, Rolandas
- * @Modified Majka (2015.07.13) - Added management of the new properties checkOkDialogId, checkFailDialogId
+ * @modified Majka, Pad
  */
 public class ItemCollecting extends QuestHandler {
 
@@ -43,13 +44,16 @@ public class ItemCollecting extends QuestHandler {
 	private final int startDialogId2;
 	private final int checkOkDialogId;
 	private final int checkFailDialogId;
+	private final String startZone;
 	private QuestItems workItem;
 
-	public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> endNpcIds, int questMovie, int startDialogId,
-		int startDialogId2, int checkOkDialogId, int checkFailDialogId) {
+	public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> endNpcIds, String startZone, int questMovie,
+		int startDialogId, int startDialogId2, int checkOkDialogId, int checkFailDialogId) {
 		super(questId);
-		startNpcs.addAll(startNpcIds);
-		startNpcs.remove(0);
+		if (startNpcIds != null) {
+			startNpcs.addAll(startNpcIds);
+			startNpcs.remove(0);
+		}
 		this.nextNpcId = nextNpcId;
 		if (endNpcIds == null) {
 			endNpcs.addAll(startNpcs);
@@ -57,6 +61,7 @@ public class ItemCollecting extends QuestHandler {
 			endNpcs.addAll(endNpcIds);
 			endNpcs.remove(0);
 		}
+		this.startZone = startZone;
 		this.questMovie = questMovie;
 		this.startDialogId = startDialogId;
 		this.startDialogId2 = startDialogId2;
@@ -99,6 +104,9 @@ public class ItemCollecting extends QuestHandler {
 			int endNpc = iterator.next();
 			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
 		}
+
+		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
+			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
 	}
 
 	@Override
@@ -109,7 +117,8 @@ public class ItemCollecting extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId) || DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
+			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
+				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : 1011);
@@ -203,6 +212,19 @@ public class ItemCollecting extends QuestHandler {
 						removeQuestItem(env, workItem.getItemId(), currentCount, QuestStatus.COMPLETE);
 				}
 				return sendQuestEndDialog(env);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		if (zoneName.name().equalsIgnoreCase(startZone)) {
+			Player player = env.getPlayer();
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+				QuestService.startQuest(env);
+				return true;
 			}
 		}
 		return false;

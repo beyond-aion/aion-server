@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,9 +15,10 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestVar", propOrder = { "npc" })
+@XmlType(name = "QuestVar")
 public class QuestVar {
 
+	@XmlElement(name = "npc")
 	protected List<QuestNpc> npc;
 	@XmlAttribute(required = true)
 	protected int value;

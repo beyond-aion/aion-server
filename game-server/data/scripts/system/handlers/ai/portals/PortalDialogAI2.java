@@ -135,10 +135,10 @@ public class PortalDialogAI2 extends PortalAI2 {
 			boolean isRewardStep = false;
 			for (int questId : relatedQuests) {
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
-				if (qs != null && qs.getStatus() == QuestStatus.REWARD) { // reward dialog
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), rewardDialogId, questId));
-					isRewardStep = true;
-					break;
+				if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+					isRewardStep = QuestEngine.getInstance().onDialog(new QuestEnv(getOwner(), player, questId, 0));
+					if (isRewardStep)
+						break;
 				}
 			}
 			if (!isRewardStep) // normal dialog

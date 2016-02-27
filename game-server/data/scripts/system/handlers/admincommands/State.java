@@ -92,7 +92,7 @@ public class State extends AdminCommand {
 			creature.setState(newState);
 
 			if (target.equals(admin))
-				PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin, false));
+				PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin));
 
 			admin.clearKnownlist();
 			admin.updateKnownlist();

@@ -195,7 +195,7 @@ public class DecomposeAction extends AbstractItemAction {
 								switch (randomItem.getType()) {
 									case ENCHANTMENT: {
 										do {
-											randomId = 166000191 + Math.round(itemLvl / 100) + Rnd.get(4);
+											randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.get(4);
 											i++;
 											if (i > 50) {
 												randomId = 0;

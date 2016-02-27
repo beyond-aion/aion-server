@@ -14,6 +14,8 @@ import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
@@ -45,6 +47,7 @@ import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author ATracer
@@ -62,11 +65,17 @@ public class PlayerLeaveWorldService {
 	 * anywhere else</b>
 	 */
 	public static final void leaveWorld(Player player) {
-		if (player.isSpawned() && player.getPosition().getMapRegion() == null) {
-			log.warn(
-				"Player " + player.getName() + " had mapRegion null in world " + player.getPosition().getMapId() + " so he was reset to bind point position");
+		WorldPosition pos = player.getPosition();
+		if (pos == null || pos.isSpawned() && pos.getMapRegion() == null) { // ensure safe logout
+			log.error(player + " had position: " + pos + " so he was reset to bind point");
 			BindPointPosition bp = player.getBindPoint();
-			player.setPosition(World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 0));
+			if (bp != null)
+				pos = World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 1);
+			if (pos == null) {
+				LocationData ld = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
+				pos = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(), ld.getHeading(), 1);
+			}
+			player.setPosition(pos);
 		}
 
 		BattleService.getInstance().onPlayerLogout(player);
@@ -77,9 +86,8 @@ public class PlayerLeaveWorldService {
 		BrokerService.getInstance().removePlayerCache(player);
 		ExchangeService.getInstance().cancelExchange(player);
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
+		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogOut(player);
-		}
 		SerialKillerService.getInstance().onLogout(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);

@@ -65,7 +65,7 @@ public class Neutral extends AdminCommand {
 		PacketSendUtility.sendMessage(admin, output);
 
 		admin.clearKnownlist();
-		PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin, false));
+		PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin));
 		PacketSendUtility.sendPacket(admin, new SM_MOTION(admin.getObjectId(), admin.getMotions().getActiveMotions()));
 		admin.updateKnownlist();
 	}

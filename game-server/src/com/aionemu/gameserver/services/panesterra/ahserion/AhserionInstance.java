@@ -3,8 +3,8 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -28,53 +28,31 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import javolution.util.FastMap;
-
 /**
  * @author Yeats
- *
+ * @modified Estrayl
  */
 public class AhserionInstance {
 
-	private static final AhserionInstance instance = new AhserionInstance();
 	private AhserionInstanceStatus status = AhserionInstanceStatus.OFF;
 	private Map<PanesterraTeamId, PanesterraTeam> teams = null;
+	private AtomicBoolean isStarted = new AtomicBoolean();
 	private AhserionTeam winner = null;
-	private Future<?> registrationTimer, instanceChecker, instanceTimer;
-	private boolean started = false;
-	
+	private Future<?> observeTask, progressTask;
+	private short progress;
+
 	public static AhserionInstance getInstance() {
-		return instance;
+		return SingletonHolder.instance;
 	}
-	
+
 	public void start() {
-		boolean doubleStart = false;
-		synchronized (this) {
-			if (started) {
-				doubleStart = true;
-			} else {
-				started = true;
-			}
+		if (isStarted.compareAndSet(false, true)) {
+			status = AhserionInstanceStatus.PREPARING_REGISTRATION;
+			PanesterraMatchmakingService.getInstance().onStart();
+			ThreadPoolManager.getInstance().schedule((Runnable) () -> startInstancePreparation(), 600 * 1000);
 		}
-		if (doubleStart) {
-			return;
-		}
-		status = AhserionInstanceStatus.PREPARING_REGISTRATION;
-		PanesterraMatchmakingService.getInstance().onStart();
-		startRegistrationTimer();
 	}
-	
-	private void startRegistrationTimer() {
-		registrationTimer = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
-				startInstancePreparation();
-			}
-			
-		}, 600000); //10min
-	}
-	
+
 	private void startInstancePreparation() {
 		synchronized (this) {
 			status = AhserionInstanceStatus.PREPARING_INSTANCE_START;
@@ -83,35 +61,31 @@ public class AhserionInstance {
 		teams = PanesterraMatchmakingService.getInstance().getRegisteredTeams();
 		if (teams != null && !teams.isEmpty()) {
 			PanesterraMatchmakingService.getInstance().onStop();
-			startInstance();
+			// move players to the instance and start instance timer
+			spawnInstance();
+			teleportPlayers();
+			instanceStartTimer();
 		} else {
 			onStop();
 		}
 	}
-	
-	private void startInstance() {
-		//move players to the instance and start instance timer
-		spawnInstance();
-		teleportPlayers();
-		instanceStartTimer();
-	}
-	
+
 	private void spawnInstance() {
-		//spawn Barricades & Tank Fleets
+		// spawn Barricades & Tank Fleets
 		spawnStage(0, PanesterraTeamId.BALAUR);
 		spawnStage(180, PanesterraTeamId.BALAUR);
 		spawnStage(181, PanesterraTeamId.BALAUR);
 		spawnStage(182, PanesterraTeamId.BALAUR);
 		spawnStage(183, PanesterraTeamId.BALAUR);
-		
-		//spawn flags & cannons for all registered teams
+
+		// spawn flags & cannons for all registered teams
 		for (PanesterraTeamId teamId : teams.keySet()) {
-			if (teamId != null )
-			spawnStage(0, teamId);
+			if (teamId != null)
+				spawnStage(0, teamId);
 			spawnStage(1, teamId);
 		}
-			
-		//spawn white flags for not existing teams
+
+		// spawn white flags for not existing teams
 		if (!teams.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69)) {
 			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
@@ -129,200 +103,134 @@ public class AhserionInstance {
 			SpawnEngine.spawnObject(template, 1);
 		}
 	}
-	
+
 	private void teleportPlayers() {
-		for (PanesterraTeam team : teams.values()) {
-			if (teams != null && !team.getTeamMembers().isEmpty()) {
+		for (PanesterraTeam team : teams.values())
+			if (!team.getTeamMembers().isEmpty())
 				team.teleportToStartPosition();
-			}
-		}
 	}
-	
+
 	private void instanceStartTimer() {
-		Map<Integer, Integer> messages = new FastMap<>();
-		messages.put(10000, 1402252); //starts soon
-		messages.put(40000, 1402252); //starts soon
-		messages.put(60000, 1402255); //4min till start
-		messages.put(180000, 1402256); //2min till start
-		messages.put(240000, 1402257); //1min till start
-		messages.put(270000, 1402586); //30s till start
-		
-		for (Entry<Integer, Integer> e : messages.entrySet()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				@Override
-				public void run() {
-					if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START)
-						sendMessage(0, e.getValue());
-				}
-			}, e.getKey());
-		}
-		
-		//spawn mobs 30s before doors are opened
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (started && status == AhserionInstanceStatus.PREPARING_INSTANCE_START)
-					spawnStage(2, PanesterraTeamId.BALAUR);
-			}
-		}, 270000);
-		
-		//Open Doors after 5min
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (!started || status != AhserionInstanceStatus.PREPARING_INSTANCE_START) {
-					return;
-				}
-				synchronized (this) {
-					status = AhserionInstanceStatus.INSTANCE_RUNNING;
-				}
-				for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values()) {
-					door.setOpen(true);
-				}
-				sendMessage(0, 1402587);
-				scheduleCorridorShieldSpawn();
-				scheduleAttack(1); //12min
-				scheduleAttack(2); //29min
-				startInstanceChecker();
-			}
-		}, 301000); //5min 1sec
-		
-		//stop instance 60 minutes after start
-		instanceTimer = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-			onStop();
-			}
-		}, 3601000); // 60min 1sec (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill ahserion)
-	}
-	
-	private void scheduleCorridorShieldSpawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (started && status == AhserionInstanceStatus.INSTANCE_RUNNING) {
-					sendMessage(0, 1402637);
-					for (PanesterraTeamId teamId : teams.keySet()) {
-						if (teamId != null) {
-							spawnStage(3, teamId);
-						}
-					}
-				}
-			}
-		}, 300000); //5min
-	}
-	
-	private void scheduleAttack(int x) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (started && status == AhserionInstanceStatus.INSTANCE_RUNNING) {
-					for (PanesterraTeamId teamId: teams.keySet()) {
-						if (teamId != null && !teams.get(teamId).isEliminated()) {
+		progressTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+			switch (progress++) {
+				case 1:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_01());
+					break;
+				case 6:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_04());
+					break;
+				case 18:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_05());
+					break;
+				case 24:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_06());
+					break;
+				case 27:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
+					spawnStage(2, PanesterraTeamId.BALAUR); // spawn mobs 30s before doors are opened
+					break;
+				case 30:
+					for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
+						door.setOpen(true);
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
+					scheduleObservation();
+					break;
+				case 60:
+					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_09());
+					for (PanesterraTeamId teamId : teams.keySet())
+						spawnStage(3, teamId);
+					break;
+				case 102:
+				case 204:
+					for (PanesterraTeamId teamId : teams.keySet())
+						if (teamId != null && !teams.get(teamId).isEliminated())
 							spawnStage(4, teamId);
-						}
-					}
-				}
+					break;
+				case 360:
+					onStop(); // stop after 60min (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill Ahserion)
+					break;
 			}
-		}, x * 1020000); //x * 12min after corridor shield spawned
+		}, 10000, 10000);
 	}
-	
-	private void startInstanceChecker() {
-		instanceChecker = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
-			@Override
-			public void run() {
-				Iterator<Player> iter = World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().playerIterator();
-				while (iter.hasNext()) {
-					Player player = iter.next();
-					if (player != null && !player.isGM()) {
-						if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
-							player.setPanesterraTeam(null);
-							leaveTeam(player);
-							TeleportService2.moveToBindLocation(player, true);
-						}
+
+	private void scheduleObservation() {
+		observeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+			Iterator<Player> iter = World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().playerIterator();
+			while (iter.hasNext()) {
+				Player player = iter.next();
+				if (!player.isGM()) {
+					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
+						player.setPanesterraTeam(null);
+						leaveTeam(player);
+						TeleportService2.moveToBindLocation(player, true);
 					}
 				}
 			}
 		}, 5000, 60000);
 	}
-	
+
 	public void onStop() {
 		synchronized (this) {
-				started = false;
-				status = AhserionInstanceStatus.OFF;
+			status = AhserionInstanceStatus.OFF;
 		}
-
+		isStarted.set(false);
 		PanesterraMatchmakingService.getInstance().onStop();
 		winner = null;
-		if (instanceChecker != null && !instanceChecker.isCancelled()) {
-			instanceChecker.cancel(true);
-		}
-		if (registrationTimer != null && !registrationTimer.isCancelled()) {
-			registrationTimer.cancel(true);
-		}
+		cancelTask(observeTask);
+		cancelTask(progressTask);
 		for (PanesterraTeam team : teams.values()) {
 			team.setIsEliminated(true);
 			team.moveToBindPoint();
 		}
 		teams.clear();
 		despawnAll();
-		for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values()) {
+		for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 			door.setOpen(false);
-		}
 	}
-	
+
 	public void spawnStage(int stage, PanesterraTeamId team) {
-		if (team != PanesterraTeamId.BALAUR && stage >= 180 && stage <= 183) {
-			if (teams.get(team) == null || teams.get(team).getTeamMembers().isEmpty()) {
+		if (team != PanesterraTeamId.BALAUR && stage >= 180 && stage <= 183)
+			if (teams.get(team) == null || teams.get(team).getTeamMembers().isEmpty())
 				return;
-			}
-		}
+
 		List<SpawnGroup2> ahserionSpawns = DataManager.SPAWNS_DATA2.getAhserionSpawnByTeamId(team.getId());
-		if (ahserionSpawns == null) {
+		if (ahserionSpawns == null)
 			return;
-		}
-		
+
 		for (SpawnGroup2 grp : ahserionSpawns) {
 			for (SpawnTemplate template : grp.getSpawnTemplates()) {
 				AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
-				if (ahserionTemplate.getStage() == stage) {
+				if (ahserionTemplate.getStage() == stage)
 					SpawnEngine.spawnObject(ahserionTemplate, 1);
-				}
 			}
 		}
 	}
 
 	public boolean revivePlayer(Player player, int skillId) {
-		if (!started || status == AhserionInstanceStatus.OFF ||
-			player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
+		if (!isStarted.get() || status == AhserionInstanceStatus.OFF || player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated())
 			return false;
-		}
+
 		PlayerReviveService.revive(player, 25, 25, false, skillId);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		WorldPosition pos = player.getPanesterraTeam().getStartPosition();
-		if (pos != null) {
+		if (pos != null)
 			TeleportService2.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
-		} else {
+		else
 			TeleportService2.moveToBindLocation(player, true);
-		}
 		player.unsetResPosState();
 		return true;
 	}
 
-	/**
-	 * @param owner
-	 * @param winner
-	 */
 	public void bossKilled(Npc owner, PanesterraTeamId winnerTeam) {
-		if (winnerTeam == null || winnerTeam == PanesterraTeamId.BALAUR || !teams.containsKey(winnerTeam) || (teams.containsKey(winnerTeam) && teams.get(winnerTeam).isEliminated())) {
+		if (winnerTeam == null || winnerTeam == PanesterraTeamId.BALAUR || !teams.containsKey(winnerTeam)
+			|| (teams.containsKey(winnerTeam) && teams.get(winnerTeam).isEliminated())) {
 			synchronized (this) {
 				status = AhserionInstanceStatus.OFF;
 			}
-			//something went wrong, remove all players from the map
+			// something went wrong, remove all players from the map
 			owner.getController().onDelete();
 			for (PanesterraTeam team : teams.values()) {
 				if (team != null) {
@@ -347,20 +255,11 @@ public class AhserionInstance {
 			onStop();
 			return;
 		}
-		if (instanceTimer != null) {
-			if (instanceTimer.isDone() || instanceTimer.isCancelled()) {
-				return;
-			} 
-			if (!instanceTimer.cancel(false)) {
-				return;
-			}
-		} else {
-			return;	
-		}
+		cancelTask(progressTask);
 		synchronized (this) {
-				status = AhserionInstanceStatus.INSTANCE_FINISHED;
-				this.winner = (AhserionTeam) teams.get(winnerTeam);
+			status = AhserionInstanceStatus.INSTANCE_FINISHED;
 		}
+		winner = (AhserionTeam) teams.get(winnerTeam);
 		for (PanesterraTeamId teamId : teams.keySet()) {
 			if (teamId != null && teamId != winnerTeam) {
 				teams.get(teamId).setIsEliminated(true);
@@ -368,114 +267,90 @@ public class AhserionInstance {
 			}
 		}
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc != null && npc.getNpcId() != owner.getNpcId()) {
+			if (npc != null && npc.getNpcId() != owner.getNpcId())
 				npc.getController().onDelete();
-			}
 		}
 		scheduleStop();
 	}
-	
+
 	public void corridorShieldDestroyed(int npcId) {
-		if (!started || status != AhserionInstanceStatus.INSTANCE_RUNNING) {
+		if (!isStarted.get() || status != AhserionInstanceStatus.INSTANCE_RUNNING)
 			return;
+
+		PanesterraTeamId eliminated = null;
+		SpawnTemplate template = null;
+
+		switch (npcId) {
+			case 297306:
+				eliminated = PanesterraTeamId.GAB1_SUB_DEST_69;
+				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
+				break;
+			case 297307:
+				eliminated = PanesterraTeamId.GAB1_SUB_DEST_70;
+				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
+				break;
+			case 297308:
+				eliminated = PanesterraTeamId.GAB1_SUB_DEST_71;
+				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
+				break;
+			case 297309:
+				eliminated = PanesterraTeamId.GAB1_SUB_DEST_72;
+				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
+				break;
 		}
-		if (npcId == 297306) {
-			PanesterraTeam eliminatedTeam = teams.get(PanesterraTeamId.GAB1_SUB_DEST_69);
-			if (eliminatedTeam != null) {
-				synchronized (this) {
-					teams.remove(PanesterraTeamId.GAB1_SUB_DEST_69);
-				}
-				eliminatedTeam.setIsEliminated(true);
-				eliminatedTeam.moveToBindPoint();
-				deleteNpcsByTeamId(PanesterraTeamId.GAB1_SUB_DEST_69);
-				//spawn white flag
-				SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
-				SpawnEngine.spawnObject(template, 1);
-			}
-		} else if (npcId == 297307) {
-			PanesterraTeam eliminatedTeam = teams.get(PanesterraTeamId.GAB1_SUB_DEST_70);
-			if (eliminatedTeam != null) {
-				synchronized (this) {
-					teams.remove(PanesterraTeamId.GAB1_SUB_DEST_70);
-				}
-				eliminatedTeam.setIsEliminated(true);
-				eliminatedTeam.moveToBindPoint();
-				deleteNpcsByTeamId(PanesterraTeamId.GAB1_SUB_DEST_70);
-				SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
-				SpawnEngine.spawnObject(template, 1);
-			}
-		} else if (npcId == 297308) {
-			PanesterraTeam eliminatedTeam = teams.get(PanesterraTeamId.GAB1_SUB_DEST_71);
-			if (eliminatedTeam != null) {
-				synchronized (this) {
-					teams.remove(PanesterraTeamId.GAB1_SUB_DEST_71);
-				}
-				eliminatedTeam.setIsEliminated(true);
-				eliminatedTeam.moveToBindPoint();
-				deleteNpcsByTeamId(PanesterraTeamId.GAB1_SUB_DEST_71);
-				SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
-				SpawnEngine.spawnObject(template, 1);
-			}
-		} else if (npcId == 297309) {
-			PanesterraTeam eliminatedTeam = teams.get(PanesterraTeamId.GAB1_SUB_DEST_72);
-			if (eliminatedTeam != null) {
-				synchronized (this) {
-					teams.remove(PanesterraTeamId.GAB1_SUB_DEST_72);
-				}
-				eliminatedTeam.setIsEliminated(true);
-				eliminatedTeam.moveToBindPoint();
-				deleteNpcsByTeamId(PanesterraTeamId.GAB1_SUB_DEST_72);
-				SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
-				SpawnEngine.spawnObject(template, 1);
-			}
+		PanesterraTeam eliminatedTeam = null;
+		synchronized (this) {
+			eliminatedTeam = teams.remove(eliminated);
 		}
+		if (eliminatedTeam == null)
+			return;
+		eliminatedTeam.setIsEliminated(true);
+		eliminatedTeam.moveToBindPoint();
+		deleteNpcsByTeamId(eliminated);
+		SpawnEngine.spawnObject(template, 1);
 	}
-	
+
 	public void despawnAll() {
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc != null)
+			if (npc != null && !npc.getLifeStats().isAlreadyDead())
 				npc.getController().onDelete();
 		}
 	}
-	
+
 	private void deleteNpcsByTeamId(PanesterraTeamId id) {
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc.getSpawn().getStaticId() >= 180 && npc.getSpawn().getStaticId() <= 183 || npc.isFlag()) {
+			if (npc.getSpawn().getStaticId() >= 180 && npc.getSpawn().getStaticId() <= 183 || npc.isFlag())
 				continue;
-			}
-			if (npc!= null && !npc.getLifeStats().isAlreadyDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
+			if (!npc.getLifeStats().isAlreadyDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
 				AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
-				if (template.getTeam() == id) {
+				if (template.getTeam() == id)
 					npc.getController().onDelete();
-				}
 			}
 		}
 	}
 
 	public void onPlayerLogin(Player player) {
-		if (started){
+		if (isStarted.get()) {
 			if (status == AhserionInstanceStatus.PREPARING_REGISTRATION) {
-				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player)) {
+				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player))
 					PacketSendUtility.sendWhiteMessageOnCenter(player, "You are currently registered for Ahserions Flight.");
-				}
 			} else if (status == AhserionInstanceStatus.PREPARING_INSTANCE_START || status == AhserionInstanceStatus.INSTANCE_RUNNING) {
 				player.setPanesterraTeam(getPlayersTeam(player));
 			} else if (status == AhserionInstanceStatus.INSTANCE_FINISHED) {
 				if (winner != null) {
-					if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId())) {
-					player.setPanesterraTeam(winner);
-					}
+					if (winner.getTeamMembers() != null && winner.getTeamMembers().contains(player.getObjectId()))
+						player.setPanesterraTeam(winner);
 				}
 			}
 		}
 		validatePlayer(player);
 	}
-	
+
 	private void validatePlayer(Player player) {
-		if (player.isGM()) {
+		if (player.isGM())
 			return;
-		}
-		if ((player.getPanesterraTeam() == null || (player.getPanesterraTeam() != null && player.getPanesterraTeam().isEliminated())) && player.getPosition().getMapId() == 400030000) {
+		if ((player.getPanesterraTeam() == null || (player.getPanesterraTeam() != null && player.getPanesterraTeam().isEliminated()))
+			&& player.getPosition().getMapId() == 400030000) {
 			TeleportService2.moveToBindLocation(player, false);
 		} else if (player.getPanesterraTeam() != null && !player.getPanesterraTeam().isEliminated() && player.getPosition().getMapId() != 400030000) {
 			WorldPosition pos = player.getPanesterraTeam().getStartPosition();
@@ -483,12 +358,12 @@ public class AhserionInstance {
 				World.getInstance().setPosition(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		}
 	}
-	
+
 	public PanesterraTeam getPlayersTeam(Player player) {
-		if (teams == null || teams.isEmpty() || player == null) {
+		if (teams == null || teams.isEmpty() || player == null)
 			return null;
-		}
-		for (int i=0; i < 4; i++) {
+
+		for (int i = 0; i < 4; i++) {
 			PanesterraTeam tempTeam = null;
 			switch (i) {
 				case 0:
@@ -504,56 +379,58 @@ public class AhserionInstance {
 					tempTeam = teams.get(PanesterraTeamId.GAB1_SUB_DEST_72);
 					break;
 			}
-			if (tempTeam != null && !tempTeam.isEliminated()) {
-				if (tempTeam.getTeamMembers() != null && tempTeam.getTeamMembers().contains(player.getObjectId())) {
+			if (tempTeam != null && !tempTeam.isEliminated())
+				if (tempTeam.getTeamMembers() != null && tempTeam.getTeamMembers().contains(player.getObjectId()))
 					return tempTeam;
-				} 
-			}
-		} 
+		}
 		return null;
 	}
-	
-	private void sendMessage(int teamId, int msgId) {
+
+	private void sendMessage(int teamId, SM_SYSTEM_MESSAGE msg) {
 		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
 			@Override
 			public void visit(Player player) {
 				if (player != null) {
-					if (teamId == 0) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msgId));
-					} else if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() == teamId) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msgId));
-					}
+					if (teamId == 0)
+						PacketSendUtility.sendPacket(player, msg);
+					else if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() == teamId)
+						PacketSendUtility.sendPacket(player, msg);
 				}
 			}
 		});
 	}
-	
+
 	private void leaveTeam(Player player) {
-		if (player.isInAlliance2()) {
+		if (player.isInAlliance2())
 			PlayerAllianceService.removePlayer(player);
-		} else if (player.isInGroup2()) {
+		else if (player.isInGroup2())
 			PlayerGroupService.removePlayer(player);
-		}
 	}
-	
+
 	private void scheduleStop() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				onStop();
-			}
-		}, 900000); //15min
+		ThreadPoolManager.getInstance().schedule((Runnable) () -> onStop(), 900000); // 15min
 	}
-	
+
+	private void cancelTask(Future<?> task) {
+		if (task != null && !task.isCancelled())
+			task.cancel(true);
+	}
+
 	public boolean isTeamNotEliminated(PanesterraTeamId team) {
-		return (teams.get(team) != null && !teams.get(team).isEliminated());
+		return teams.get(team) != null && !teams.get(team).isEliminated();
 	}
-	
+
 	public AhserionInstanceStatus getStatus() {
 		return status;
 	}
-	
+
 	public boolean isStarted() {
-		return started;
+		return isStarted.get();
+	}
+
+	private static class SingletonHolder {
+
+		protected static final AhserionInstance instance = new AhserionInstance();
 	}
 }

@@ -179,7 +179,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		if (!isInDungeon)
 			TeleportService2.teleportTo(player, player.getWorldId(), 248, 244, 189);

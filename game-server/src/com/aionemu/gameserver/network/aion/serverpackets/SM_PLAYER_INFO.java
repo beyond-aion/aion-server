@@ -36,40 +36,32 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 	 *          actual player.
 	 * @param enemy
 	 */
+	public SM_PLAYER_INFO(Player player) {
+		this(player, false);
+	}
+
 	public SM_PLAYER_INFO(Player player, boolean enemy) {
 		this.player = player;
 		this.enemy = enemy;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player activePlayer = con.getActivePlayer();
-		if (activePlayer == null || player == null) {
+		if (activePlayer == null || player == null)
 			return;
-		}
-		PlayerCommonData pcd = player.getCommonData();
-		final int raceId;
-		if (player.getAdminNeutral() > 1 || activePlayer.getAdminNeutral() > 1) {
-			raceId = activePlayer.getRace().getRaceId();
-		} else if (activePlayer.isEnemy(player)) {
-			raceId = (activePlayer.getRace().getRaceId() == 0 ? 1 : 0);
-		} else
-			raceId = player.getRace().getRaceId();
 
-		final int genderId = pcd.getGender().getGenderId();
-		final PlayerAppearance playerAppearance = player.getPlayerAppearance();
+		PlayerCommonData pcd = player.getCommonData();
+		PlayerAppearance playerAppearance = player.getPlayerAppearance();
+		int raceId = activePlayer.isEnemy(player) ? activePlayer.getOppositeRace().getRaceId() : player.getRace().getRaceId();
+		if (player.getAdminNeutral() > 1 || activePlayer.getAdminNeutral() > 1)
+			raceId = activePlayer.getRace().getRaceId();
 
 		writeF(player.getX());// x
 		writeF(player.getY());// y
 		writeF(player.getZ());// z
 		writeD(player.getObjectId());
-		/**
-		 * A3 female asmodian A2 male asmodian A1 female elyos A0 male elyos
-		 */
-		writeD(pcd.getTemplateId());
+		writeD(pcd.getTemplateId()); // 0xA3 female asmodian, 0xA2 male asmodian, 0xA1 female elyos, 0xA0 male elyos
 		writeD(player.getRobotId());// RobotId
 		/**
 		 * Transformed state - send transformed model id Regular state - send player model id (from common data)
@@ -82,7 +74,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 
 		writeC(raceId); // race
 		writeC(pcd.getPlayerClass().getClassId());
-		writeC(genderId); // sex
+		writeC(pcd.getGender().getGenderId()); // sex
 		writeH(player.getState());
 
 		writeD(0);
@@ -253,7 +245,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		else
 			writeD(0x01);
 		writeD(0x01); // unk 4.7
-		writeC(raceId == 0 ? 3 : 5); // Game language Asmo 3 Ely 5
+		writeC(3); // can be 3 or 5 on elyos side (3 is more common), not sure what it's for (TODO: check asmo side)
 
 		boolean isEnemyWorld = SerialKillerService.getInstance().isEnemyWorld(player);
 		writeC(isEnemyWorld ? player.getSKInfo().getRank() : 0); // Conqueror rank

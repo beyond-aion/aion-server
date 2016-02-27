@@ -369,6 +369,13 @@ public class MathUtil {
 	}
 
 	/**
+	 * Returns true if the given value is between lowerCap(inclusive) and upperCap(inclusive)
+	 */
+	public static boolean isBetween(final int lowerCap, final int upperCap, final int value) {
+		return lowerCap <= value && value <= upperCap; 
+	}
+
+	/**
 	 * Get an angle between the line defined by two points and the horizontal axis
 	 */
 	public final static float calculateAngleFrom(float obj1X, float obj1Y, float obj2X, float obj2Y) {

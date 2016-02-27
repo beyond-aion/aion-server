@@ -238,7 +238,7 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
-	
+
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
@@ -1138,7 +1138,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		return creature.isEnemyFrom(this) || this.isEnemyFrom(creature);
+		return creature.isEnemyFrom(this) || isEnemyFrom(creature);
 	}
 
 	@Override
@@ -1162,12 +1162,10 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
-		if (this.getObjectId().equals(enemy.getObjectId()))
-			return false;
-		else if ((this.getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1))
+		if (equals(enemy))
 			return false;
 		else
-			return canPvP(enemy) || this.getController().isDueling(enemy);
+			return canPvP(enemy) || getController().isDueling(enemy) || getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1;
 	}
 
 	public boolean isAggroIconTo(Player player) {
@@ -1260,7 +1258,8 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param new kisk to bind to (null if unbinding)
+	 * @param newKisk
+	 *          kisk to bind to (null if unbinding)
 	 */
 	public void setKisk(Kisk newKisk) {
 		this.kisk = newKisk;
@@ -2155,5 +2154,10 @@ public class Player extends Creature {
 
 	public PanesterraTeam getPanesterraTeam() {
 		return panesterraTeam;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
 	}
 }

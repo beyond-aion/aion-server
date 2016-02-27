@@ -48,7 +48,7 @@ public class ZoneLevelService {
 
 			@Override
 			public void run() {
-				int value = Math.round(player.getLifeStats().getMaxHp() / 10);
+				int value = Math.round(player.getLifeStats().getMaxHp() / 10f);
 				if (player.getLifeStats().reduceHp(TYPE.DROWNING, value, 0, LOG.REGULAR, player) == 0)
 					stopDrowning(player);
 			}

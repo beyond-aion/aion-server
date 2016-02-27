@@ -62,7 +62,7 @@ public class TrapGameStats extends NpcGameStats {
 			case "blazing trap":
 			case "glue trap": //spike trap
 			case "trap of dust": //sandstorm
-			case "shock trap":
+			case "shock trap": //propelling trap
 			case "trap of sleep":
 			case "trap of burst":
 			case "collision trap":

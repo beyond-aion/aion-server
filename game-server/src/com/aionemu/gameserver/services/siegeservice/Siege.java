@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.siegeservice;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 	private final SL siegeLocation;
 	private boolean bossKilled;
 	private SiegeNpc boss;
-	private Date startTime;
+	private long startTime;
 	private boolean started;
 
 	public Siege(SL siegeLocation) {
@@ -51,7 +50,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 			if (started) {
 				doubleStart = true;
 			} else {
-				startTime = new Date();
+				startTime = System.currentTimeMillis();
 				started = true;
 			}
 		}
@@ -140,7 +139,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		return finished.get();
 	}
 
-	public Date getStartTime() {
+	public long getStartTime() {
 		return startTime;
 	}
 

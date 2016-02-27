@@ -130,19 +130,12 @@ public class PanesterraMatchmakingService {
 			return false;
 		switch (player.getRace()) {
 			case ELYOS:
-				if (elyos.contains(player)) {
-					return true;
-				} else {
-					return false;
-				}
+				return elyos.contains(player.getObjectId());
 			case ASMODIANS:
-				if (asmodians.contains(player)) {
-					return true;
-				} else {
-					return false;
-				}
+				return asmodians.contains(player.getObjectId());
+			default:
+				return false;
 		}
-		return false;
 	}
 	
 	public void prepareTeams() {
@@ -287,13 +280,13 @@ public class PanesterraMatchmakingService {
 					return;
 				} else if (registeredClasses.isEmpty()) {
 					Player ely1 = findPlayer(elyos, 0);
-					elyos.remove(ely1);
+					elyos.remove(ely1.getObjectId());
 					Player asmo1 = findPlayer(asmodians, 0);
-					asmodians.remove(asmo1);
+					asmodians.remove(asmo1.getObjectId());
 					Player ely2 = findPlayer(elyos, 0);
-					elyos.remove(ely2);
+					elyos.remove(ely2.getObjectId());
 					Player asmo2 = findPlayer(asmodians, 0);
-					asmodians.remove(asmo2);
+					asmodians.remove(asmo2.getObjectId());
 					
 					teams.get(random == 0 ? team1 : team4).addMember(ely1);
 					teams.get(random == 0 ? team3 : team2).addMember(ely2);
@@ -348,12 +341,12 @@ public class PanesterraMatchmakingService {
 				
 						if (ely1 != null && ely2 != null && asmo1 != null && asmo2 != null) {
 							if (currentPlayerNumber < maxPlayers) {
-								elyos.remove(ely1);
-								elyos.remove(ely2);
+								elyos.remove(ely1.getObjectId());
+								elyos.remove(ely2.getObjectId());
 								teams.get(random == 0 ? team1 : team4).addMember(ely1);
 								teams.get(random == 0 ? team3 : team2).addMember(ely2);
-								asmodians.remove(asmo1);
-								asmodians.remove(asmo2);
+								asmodians.remove(asmo1.getObjectId());
+								asmodians.remove(asmo2.getObjectId());
 								teams.get(random == 0 ? team2 : team3).addMember(asmo1);
 								teams.get(random == 0 ? team4 : team1).addMember(asmo2);
 								currentPlayerNumber++;
@@ -380,8 +373,8 @@ public class PanesterraMatchmakingService {
 						onStop();
 						return;
 					}
-					elyos.remove(ely);
-					asmodians.remove(asmo);
+					elyos.remove(ely.getObjectId());
+					asmodians.remove(asmo.getObjectId());
 					teams.get(random == 0 ? team1 : team2).addMember(ely);
 					teams.get(random == 0 ? team2 : team1).addMember(asmo);
 					currentPlayerNumber++;
@@ -421,9 +414,9 @@ public class PanesterraMatchmakingService {
 				
 						if (ely != null && asmo != null) {
 							if (currentPlayerNumber < maxPlayers) {
-								elyos.remove(ely);
+								elyos.remove(ely.getObjectId());
 								teams.get(random == 0 ? team1 : team2).addMember(ely);
-								asmodians.remove(asmo);
+								asmodians.remove(asmo.getObjectId());
 								teams.get(random == 0 ? team2 : team1).addMember(asmo);
 								currentPlayerNumber++;
 							} else {

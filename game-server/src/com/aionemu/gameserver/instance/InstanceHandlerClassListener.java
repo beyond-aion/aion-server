@@ -26,12 +26,8 @@ public class InstanceHandlerClassListener implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 
-			if (ClassUtils.isSubclass(c, InstanceHandler.class)) {
-				Class<? extends InstanceHandler> tmp = (Class<? extends InstanceHandler>) c;
-				if (tmp != null) {
-					InstanceEngine.getInstance().addInstanceHandlerClass(tmp);
-				}
-			}
+			if (ClassUtils.isSubclass(c, InstanceHandler.class))
+				InstanceEngine.getInstance().addInstanceHandlerClass((Class<? extends InstanceHandler>) c);
 		}
 	}
 

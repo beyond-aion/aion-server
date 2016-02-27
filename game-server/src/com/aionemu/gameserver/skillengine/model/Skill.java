@@ -960,15 +960,6 @@ public class Skill {
 		return skillTemplate.getSkillId();
 	}
 
-// --Commented out by Inspection START (17.02.2016 00:21):
-//	/**
-//	 * @return the skillStackLvl
-//	 */
-//	public int getSkillStackLvl() {
-//		return skillStackLvl;
-//	}
-// --Commented out by Inspection STOP (17.02.2016 00:21)
-
 	/**
 	 * @return the conditionChangeListener
 	 */
@@ -998,14 +989,12 @@ public class Skill {
 		this.firstTarget = firstTarget;
 	}
 
-// --Commented out by Inspection START (17.02.2016 00:21):
-//	/**
-//	 * @return true or false
-//	 */
-//	public boolean isPassive() {
-//		return skillTemplate.getActivationAttribute() == ActivationAttribute.PASSIVE;
-//	}
-// --Commented out by Inspection STOP (17.02.2016 00:21)
+	/**
+	 * @return true or false
+	 */
+	public boolean isPassive() {
+		return skillTemplate.getActivationAttribute() == ActivationAttribute.PASSIVE;
+	}
 
 	/**
 	 * @return the firstTargetRangeCheck
@@ -1065,16 +1054,6 @@ public class Skill {
 	public void setFirstTargetRangeCheck(boolean firstTargetRangeCheck) {
 		this.firstTargetRangeCheck = firstTargetRangeCheck;
 	}
-
-// --Commented out by Inspection START (17.02.2016 00:21):
-//	/**
-//	 * @param itemTemplate
-//	 *          the itemTemplate to set
-//	 */
-//	public void setItemTemplate(ItemTemplate itemTemplate) {
-//		this.itemTemplate = itemTemplate;
-//	}
-// --Commented out by Inspection STOP (17.02.2016 00:21)
 
 	public ItemTemplate getItemTemplate() {
 		return this.itemTemplate;

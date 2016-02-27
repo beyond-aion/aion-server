@@ -22206,7 +22206,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * The script is too long to apply here.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SCRIPT_OVERFLOW = new SM_SYSTEM_MESSAGE(1401399);
-	
+
 	/**
 	 * You can't open any private shops as long as you remain hidden.
 	 */
@@ -22319,6 +22319,48 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * Unable to receive due to lack of free space in inventory.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MAIL_TAKE_ALL_CANCEL = new SM_SYSTEM_MESSAGE(1402251);
+	
+	/**
+	 * Loading the Advance Corridor Shield... Please wait.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_01() {
+		return new SM_SYSTEM_MESSAGE(1402252);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 8 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_02() {
+		return new SM_SYSTEM_MESSAGE(1402253);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 6 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_03() {
+		return new SM_SYSTEM_MESSAGE(1402254);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 4 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_04() {
+		return new SM_SYSTEM_MESSAGE(1402255);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 2 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_05() {
+		return new SM_SYSTEM_MESSAGE(1402256);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 1 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_06() {
+		return new SM_SYSTEM_MESSAGE(1402257);
+	}
 
 	/**
 	 * The Beritra Legion's Invasion Corridor has appeared.
@@ -22396,35 +22438,35 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
 		return new SM_SYSTEM_MESSAGE(1402397, nameId);
 	}
-	
+
 	/**
 	 * Release Berserk Anoha
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN() {
 		return new SM_SYSTEM_MESSAGE(1402483);
 	}
-	
+
 	/**
 	 * The Anoha Sealing Stone was used to release Anoha.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_ITEM() {
 		return new SM_SYSTEM_MESSAGE(1402484);
 	}
-	
+
 	/**
 	 * Summon Berserk Anoha
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ANOHA_SPAWN() {
 		return new SM_SYSTEM_MESSAGE(1402503);
 	}
-	
+
 	/**
 	 * Berserk Anoha has been defeated.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ANOHA_DIE() {
 		return new SM_SYSTEM_MESSAGE(1402504);
 	}
-	
+
 	/**
 	 * Berserk Anoha has disappeared
 	 */
@@ -22613,21 +22655,21 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_KILLER_V13() {
 		return new SM_SYSTEM_MESSAGE(1402531);
 	}
-	
+
 	/**
 	 * You need Ancestor's Relics to activate the Vocalith.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_FAIL() {
 		return new SM_SYSTEM_MESSAGE(1402539);
 	}
-	
+
 	/**
 	 * An Ancient Monster has appeared.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN() {
 		return new SM_SYSTEM_MESSAGE(1402540);
 	}
-	
+
 	/**
 	 * You used 1 Ancestor's Relic.
 	 */
@@ -22687,18 +22729,130 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
 		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
 	}
-	
+
 	/**
 	 * Berserk Anoha will return to Kaldor in 30 minutes.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM() {
 		return new SM_SYSTEM_MESSAGE(1402584);
 	}
+	
+	/**
+	 * The entrance to the Transidium Annex will open in 30 seconds.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_07() {
+		return new SM_SYSTEM_MESSAGE(1402586);
+	}
+	
+	/**
+	 * The entrance to the Transidium Annex has opened.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_08() {
+		return new SM_SYSTEM_MESSAGE(1402587);
+	}
 
 	/**
 	 * Atreian Passport
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE = new SM_SYSTEM_MESSAGE(1402601);
+
+	/**
+	 * The Advance Corridor Shield has been activated.
+	 * If the protection device is destroyed, the corridor will disappear and you will return to the fortress.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_09() {
+		return new SM_SYSTEM_MESSAGE(1402637);
+	}
+
+	/**
+	 * The effect of the Transidium Annex has weakened the Hangar Barricade.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_10() {
+		return new SM_SYSTEM_MESSAGE(1402638);
+	}
+
+	/**
+	 * The effect of the Transidium Annex has weakened the Ahserion's Flight Barrier.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_11() {
+		return new SM_SYSTEM_MESSAGE(1402639);
+	}
+
+	/**
+	 * The effect of the Transidium Annex has weakened the Bulwark Shield.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_12() {
+		return new SM_SYSTEM_MESSAGE(1402640);
+	}
+
+	/**
+	 * The Advance Corridor Shield will disappear soon.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_13() {
+		return new SM_SYSTEM_MESSAGE(1402641);
+	}
+
+	/**
+	 * You will return to the fortress soon.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_14() {
+		return new SM_SYSTEM_MESSAGE(1402642);
+	}
+
+	/**
+	 * One Fortress Soul Anchor has been destroyed.
+	 * If one more Fortress Soul Anchor is destroyed, then you can no longer resurrect inside the fortress.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_DE_01() {
+		return new SM_SYSTEM_MESSAGE(1402643);
+	}
+
+	/**
+	 * All of the Fortress Soul Anchors have been destroyed.
+	 * Players defending the fortress will return to where they entered Panesterra when resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_DE_02() {
+		return new SM_SYSTEM_MESSAGE(1402644);
+	}
+
+	/**
+	 * The Northwest Quarter Soul Anchor has been destroyed.
+	 * Those players bound to the destroyed Sanctum Soul Anchor will return to the place where they came from when resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_ATT_01() {
+		return new SM_SYSTEM_MESSAGE(1402645);
+	}
+
+	/**
+	 * The Northeast Quarter Soul Anchor has been destroyed.
+	 * Those players bound to the destroyed Sanctum Soul Anchor will return to the place where they came from when resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_ATT_02() {
+		return new SM_SYSTEM_MESSAGE(1402646);
+	}
+
+	/**
+	 * The Southeast Quarter Soul Anchor has been destroyed.
+	 * Those players bound to the destroyed Sanctum Soul Anchor will return to the place where they came from when resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_ATT_03() {
+		return new SM_SYSTEM_MESSAGE(1402647);
+	}
+
+	/**
+	 * The Southwest Quarter Soul Anchor has been destroyed.
+	 * Those players bound to the destroyed Sanctum Soul Anchor will return to the place where they came from when resurrected.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAB1_REBIRTHMA_ATT_04() {
+		return new SM_SYSTEM_MESSAGE(1402648);
+	}
+
+	/**
+	 * The Fortress Soul Anchor Barrier is under attack.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_GAV1_REBIRTHDOOR_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402649);
+	}
 
 	/**
 	 * Amplification System

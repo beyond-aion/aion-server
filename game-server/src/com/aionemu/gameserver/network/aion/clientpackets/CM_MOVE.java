@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.taskmanager.tasks.TeamMoveUpdater;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
@@ -33,12 +34,6 @@ public class CM_MOVE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		Player player = getConnection().getActivePlayer();
-
-		if (player == null || !player.isSpawned()) {
-			return;
-		}
-
 		x = readF();
 		y = readF();
 		z = readF();
@@ -75,13 +70,15 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		final Player player = getConnection().getActivePlayer();
-		// packet was not read correctly
+		if (player == null)
+			return;
+		WorldPosition pos = player.getPosition();
+		if (pos == null || !pos.isSpawned())
+			return;
 		if (player.getLifeStats().isAlreadyDead())
 			return;
-
-		if (player.getEffectController().isUnderFear()) {
+		if (player.getEffectController().isUnderFear())
 			return;
-		}
 
 		PlayerMoveController m = player.getMoveController();
 		m.movementMask = type;

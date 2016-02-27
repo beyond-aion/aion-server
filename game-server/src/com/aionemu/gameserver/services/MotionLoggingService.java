@@ -500,7 +500,7 @@ public class MotionLoggingService {
 
 		public boolean addSkillTime(WeaponTypeWrapper weapon, SkillTime skillTime) {
 			if (motionsForWeapons.containsKey(weapon)) {
-				if (!motionsForWeapons.containsValue(skillTime)) {
+				if (!motionsForWeapons.get(weapon).contains(skillTime)) {
 					motionsForWeapons.get(weapon).add(skillTime);
 					return true;
 				}

@@ -228,13 +228,6 @@ public class SiegeLocation implements ZoneHandler {
 		return false;
 	}
 
-	public boolean isInActiveSiegeZone(Player player) {
-		if (isVulnerable() && isInsideLocation(player))
-			return true;
-
-		return false;
-	}
-
 	public void clearLocation() {
 	}
 

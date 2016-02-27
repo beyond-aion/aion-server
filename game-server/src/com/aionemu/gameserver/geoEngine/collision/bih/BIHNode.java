@@ -133,7 +133,8 @@ public final class BIHNode {
 		Triangle t = new Triangle();
 		int cols = 0;
 
-		stackloop: while (stack.size() > 0) {
+		stackloop:
+		while (stack.size() > 0) {
 			BIHNode node = stack.remove(stack.size() - 1).node;
 
 			while (node.axis != 3) {
@@ -151,11 +152,9 @@ public final class BIHNode {
 
 				if (maxExt < node.rightPlane) {
 					node = node.left;
-				}
-				else if (minExt > node.leftPlane) {
+				} else if (minExt > node.leftPlane) {
 					node = node.right;
-				}
-				else {
+				} else {
 					stack.add(new BIHStackData(node.right, 0, 0));
 					node = node.left;
 				}
@@ -169,12 +168,13 @@ public final class BIHNode {
 					worldMatrix.mult(t.get3(), t.get3());
 				}
 
-				/* Original code had this
-				int added = col.collideWith(t, results, 1);
-				if (added > 0) {
-					cols += added;
-				}
-				*/
+				/*
+				 * Original code had this
+				 * int added = col.collideWith(t, results, 1);
+				 * if (added > 0) {
+				 * cols += added;
+				 * }
+				 */
 			}
 		}
 		stack.clear();
@@ -256,7 +256,8 @@ public final class BIHNode {
 		int cols = 0;
 
 		stack.add(new BIHStackData(this, sceneMin, sceneMax));
-		stackloop: while (stack.size() > 0) {
+		stackloop:
+		while (stack.size() > 0) {
 
 			BIHStackData data = stack.remove(stack.size() - 1);
 			BIHNode node = data.node;
@@ -297,12 +298,10 @@ public final class BIHNode {
 				if (tMin > tNearSplit) {
 					tMin = max(tMin, tFarSplit);
 					node = farNode;
-				}
-				else if (tMax < tFarSplit) {
+				} else if (tMax < tFarSplit) {
 					tMax = min(tMax, tNearSplit);
 					node = nearNode;
-				}
-				else {
+				} else {
 					stack.add(new BIHStackData(farNode, max(tMin, tFarSplit), tMax));
 					tMax = min(tMax, tNearSplit);
 					node = nearNode;
@@ -315,13 +314,11 @@ public final class BIHNode {
 
 				float t = r.intersects(v1, v2, v3);
 				if (!Float.isInfinite(t)) {
-					if (worldMatrix != null) {
-						worldMatrix.mult(v1, v1);
-						worldMatrix.mult(v2, v2);
-						worldMatrix.mult(v3, v3);
-						float t_world = new Ray(o, d).intersects(v1, v2, v3);
-						t = t_world;
-					}
+					worldMatrix.mult(v1, v1);
+					worldMatrix.mult(v2, v2);
+					worldMatrix.mult(v3, v3);
+					float t_world = new Ray(o, d).intersects(v1, v2, v3);
+					t = t_world;
 
 					Vector3f contactNormal = Triangle.computeTriangleNormal(v1, v2, v3, null);
 					Vector3f contactPoint = new Vector3f(d).multLocal(t).addLocal(o);

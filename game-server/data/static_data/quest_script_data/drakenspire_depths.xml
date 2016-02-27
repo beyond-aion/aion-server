@@ -16,9 +16,9 @@
 	-->
 	<!-- REPORT TO -->
 	<report_to id="18950" start_npc_ids="804711" start_dialog_id="4762" end_npc_ids="209678" end_dialog_id="10002"/>
-	<!-- report_to id="18954" start_npc_ids="833015" start_dialog_id="4762" end_npc_ids="804711"/-->
+	<report_to id="18954" start_npc_ids="0" end_npc_ids="804711"/>
 	<report_to id="28950" start_npc_ids="804738" start_dialog_id="4762" end_npc_ids="209743" end_dialog_id="10002"/>
-	<!-- report_to id="28954" start_npc_ids="833015" start_dialog_id="4762" end_npc_ids="804738"/-->
+	<report_to id="28954" start_npc_ids="0" end_npc_ids="804738"/>
 	
 	<!-- ITEM COLLECTING -->
 	<item_collecting id="18953" start_npc_ids="209678" start_dialog_id="4762" end_npc_ids="804711" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>

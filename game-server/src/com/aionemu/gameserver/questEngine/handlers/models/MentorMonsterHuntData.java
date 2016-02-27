@@ -14,7 +14,9 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MentorMonsterHunt;
 
 /**
- * @author MrPoke reworked Bobobear
+ * @author MrPoke
+ * @reworked Bobobear
+ * @modified Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MentorMonsterHuntData")

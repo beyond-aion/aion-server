@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -15,9 +16,10 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestNpc", propOrder = { "dialog" })
+@XmlType(name = "QuestNpc")
 public class QuestNpc {
 
+	@XmlElement(name = "dialog")
 	protected List<QuestDialog> dialog;
 	@XmlAttribute(required = true)
 	protected int id;

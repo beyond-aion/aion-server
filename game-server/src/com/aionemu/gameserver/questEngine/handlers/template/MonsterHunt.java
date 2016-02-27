@@ -26,6 +26,7 @@ import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author MrPoke
@@ -44,15 +45,18 @@ public class MonsterHunt extends QuestHandler {
 	private final Set<Integer> aggroNpcs = new HashSet<>();
 	private final int invasionWorldId;
 	private QuestItems workItem;
+	private final String startZone;
 	private final int startDistanceNpc;
 	private final boolean rewardNextStep;
 	private final boolean dataDriven;
 
 	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
-		int endDialog, List<Integer> aggroNpcs, int invasionWorld, int startDistanceNpc, boolean rewardNextStep) {
+		int endDialog, List<Integer> aggroNpcs, int invasionWorld, String startZone, int startDistanceNpc, boolean rewardNextStep) {
 		super(questId);
-		this.startNpcs.addAll(startNpcIds);
-		this.startNpcs.remove(0);
+		if (startNpcIds != null) {
+			this.startNpcs.addAll(startNpcIds);
+			this.startNpcs.remove(0);
+		}
 		if (endNpcIds == null) {
 			this.endNpcs.addAll(startNpcs);
 		} else {
@@ -67,6 +71,7 @@ public class MonsterHunt extends QuestHandler {
 			this.aggroNpcs.remove(0);
 		}
 		this.invasionWorldId = invasionWorld;
+		this.startZone = startZone;
 		this.startDistanceNpc = startDistanceNpc;
 		this.rewardNextStep = rewardNextStep;
 		this.dataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
@@ -101,6 +106,9 @@ public class MonsterHunt extends QuestHandler {
 
 		if (invasionWorldId != 0)
 			qe.registerOnEnterWorld(questId);
+
+		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
+			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
 
 		if (startDistanceNpc != 0)
 			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
@@ -254,13 +262,7 @@ public class MonsterHunt extends QuestHandler {
 
 	@Override
 	public boolean onAddAggroListEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			QuestService.startQuest(env);
-			return true;
-		}
-		return false;
+		return startQuest(env);
 	}
 
 	@Override
@@ -287,7 +289,18 @@ public class MonsterHunt extends QuestHandler {
 	}
 
 	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		if (zoneName.name().equalsIgnoreCase(startZone))
+			return startQuest(env);
+		return false;
+	}
+
+	@Override
 	public boolean onAtDistanceEvent(QuestEnv env) {
+		return startQuest(env);
+	}
+
+	public boolean startQuest(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
