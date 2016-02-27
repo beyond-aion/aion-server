@@ -205,7 +205,12 @@ public class _1035RefreshingtheSprings extends QuestHandler {
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId == 31) {
-			int var = env.getPlayer().getQuestStateList().getQuestState(questId).getQuestVarById(0);
+			QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
+
+			if (qs == null || qs.getStatus() != QuestStatus.START)
+				return false;
+
+			int var = qs.getQuestVarById(0);
 			if (var == 7) {
 				changeQuestStep(env, 7, 8, false); // 8
 			} else if (var == 6) { // If timer stopped before movie ends
