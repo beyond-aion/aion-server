@@ -7,11 +7,15 @@ import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -67,9 +71,16 @@ public class AnohasSwordAI2 extends NpcAI2 {
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.RESURRECT));
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.DIE));
 		}, 10 * 1000, 10 * 1000)); // disable despawn, repeat special die animation instead until anoha spawns
-		spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // Flag (map icon)
+		VisibleObject flag = spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // map icon
 		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
-			spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
+			Npc berserkAnoha = (Npc) spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
+			berserkAnoha.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
+
+				@Override
+				public void died(Creature creature) {
+					flag.getController().onDelete();
+				}
+			});
 			World.getInstance().doOnAllPlayers(receiver -> {
 				PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
 				swordController.onDelete(); // despawn sword

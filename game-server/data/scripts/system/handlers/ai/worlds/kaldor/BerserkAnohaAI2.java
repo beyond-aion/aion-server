@@ -1,16 +1,14 @@
 package ai.worlds.kaldor;
 
-import java.util.concurrent.Future;
-
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -21,6 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
+import ai.AggressiveNpcAI2;
+
 /**
  * @author Ritsu
  * @modified Estrayl
@@ -29,7 +29,6 @@ import com.aionemu.gameserver.world.World;
 public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 
 	private final String STR_MAIL_ANOHA = "To your Legion, for the successful vanquish of Berserk Anoha. Please take this reward in recognition of your service.\n- Commander Anoha";
-	private Future<?> despawnTask;
 
 	@Override
 	protected void handleSpawned() {
@@ -38,21 +37,27 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void scheduleDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			if (!isAlreadyDead()) {
 				getOwner().getController().onDelete();
 				broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
 			}
-		}, 60 * 60000); // 1hour
+		} , 60 * 60000)); // 1hour
 	}
 
 	@Override
+	protected void handleDespawned() {
+		Npc flag = getOwner().getPosition().getWorldMapInstance().getNpc(702618); // see AnohasSword AI
+		if (flag != null)
+			flag.getController().onDelete();
+		super.handleDespawned();
+	};
+
+	@Override
 	protected void handleDied() {
-		if (despawnTask != null && !despawnTask.isCancelled())
-			despawnTask.cancel(true);
+		getOwner().getController().cancelTask(TaskId.DESPAWN);
 		broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DIE());
 		checkForFactionReward();
-		getOwner().getKnownList().getKnownObjects().get(702618).getController().onDelete();
 		super.handleDied();
 	}
 
@@ -92,15 +97,10 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_RESPAWN:
-				return AIAnswers.NEGATIVE;
-			case SHOULD_REWARD:
-				return AIAnswers.POSITIVE;
 			case SHOULD_LOOT:
 				return AIAnswers.NEGATIVE;
-			default:
-				return null;
 		}
+		return super.pollInstance(question);
 	}
 }
