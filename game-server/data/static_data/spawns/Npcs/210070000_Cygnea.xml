@@ -6043,12 +6043,6 @@
 		<spawn npc_id="805078" respawn_time="295">
 			<spot x="2338.31616" y="1504.26807" z="437.75000" h="8"/>
 		</spawn>
-		<!-- wave start -->
-		<spawn npc_id="731581" respawn_time="295">
-			<spot x="2314.65576" y="1533.46838" z="439.00842" static_id="1178"/>
-			<spot x="1311.38000" y="639.29657" z="582.99652" static_id="523"/>
-			<spot x="1231.98901" y="1642.35181" z="468.52835" static_id="1484"/>
-		</spawn>
 		<!-- mailbox -->
 		<spawn npc_id="700000" respawn_time="295">
 			<spot x="2342.81738" y="1500.41699" z="437.75000" static_id="1319"/>

@@ -7797,10 +7797,6 @@
 		<spawn npc_id="805007" respawn_time="295">
 			<spot x="492.73999" y="2201.36011" z="219.69051" h="10"/>
 		</spawn>
-		<!-- wave start -->
-		<spawn npc_id="731581" respawn_time="295">
-			<spot x="1762.25317" y="2606.36841" z="300.05017" static_id="975"/>
-		</spawn>
 		<!-- sealed danuar mysticarium entrance -->
 		<spawn npc_id="730722" respawn_time="295">
 			<spot x="1761.456" y="2604.73" z="300.0502" h="75" static_id="975" />
