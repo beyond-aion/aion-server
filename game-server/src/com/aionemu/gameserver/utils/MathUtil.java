@@ -1,20 +1,20 @@
 package com.aionemu.gameserver.utils;
 
-import java.awt.Point;
+import com.aionemu.gameserver.controllers.movement.NpcMoveController;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.templates.zone.Point2D;
+import com.aionemu.gameserver.skillengine.properties.AreaDirections;
+import javolution.util.FastTable;
+
+import java.awt.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
-
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.controllers.movement.NpcMoveController;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.skillengine.properties.AreaDirections;
 
 /**
  * Class with basic math.<br>
@@ -441,9 +441,9 @@ public class MathUtil {
 		}
 		float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
 		if (object1.getMoveController().isInMove())
-			offset = +3f;
+			offset += 3f;
 		if (object2.getMoveController().isInMove())
-			offset = +3f;
+			offset += 3f;
 		return ((getDistance(object1, object2) - offset) <= range);
 	}
 
