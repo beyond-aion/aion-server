@@ -38,7 +38,6 @@
 			30566 [XML] [Spy/Group] Recapture Rentus Base
 		[END] SUMMARY
 -->
-	<!-- TODO: RECHECK REPEATABLE QUESTS -->
 	<!-- REPORTING QUESTS -->
 	<report_to id="30507" start_npc_ids="799543" end_npc_ids="790001"/>
 	<report_to id="30508" start_npc_ids="790001" end_npc_ids="799543"/>
