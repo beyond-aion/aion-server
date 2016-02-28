@@ -66813,4 +66813,48 @@
 			<cond condType="SPAWN_NPC" npc_id="855262" min_distance="5" max_distance="20" random_direction="true" max_amount="3"/>
 		</npcskill>
 	</npcskills>
+	<!-- Prectaz -->
+	<npcskills npcid="219934">
+		<npcskill skillid="21913" skilllevel="65" probability="60" cooldown="50000"/>
+		<npcskill skillid="21845" skilllevel="65" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21846" skilllevel="65" probability="60" cooldown="35000" target="ME"/>
+		<npcskill skillid="21847" skilllevel="65" probability="60" cooldown="30000" target="ME"/>
+		<npcskill skillid="19780" skilllevel="65" probability="60" cooldown="20000" target="ME"/>
+	</npcskills>
+	<!-- Gatekeeper Fox -->
+	<npcskills npcid="235975">
+		<npcskill skillid="21824" skilllevel="3" probability="60" cooldown="25000" nextChainId="1" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21824" skilllevel="3" probability="100" cooldown="10000" chainId="1" nextSkillTime="6000" target="ME"/>
+		<npcskill skillid="21825" skilllevel="10" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21300" skilllevel="65" probability="60" cooldown="20000"/>
+		<npcskill skillid="21301" skilllevel="65" probability="60" cooldown="25000" minhp="0" maxhp="50"/>
+	</npcskills>
+	<!-- Arcticore Aizenka -->
+	<npcskills npcid="219933">
+		<npcskill skillid="21848" skilllevel="65" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21849" skilllevel="65" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21850" skilllevel="65" probability="60" cooldown="30000" nextChainId="1" nextSkillTime="7000" target="ME"/>
+		<npcskill skillid="21850" skilllevel="65" probability="50" cooldown="10000" chainId="1" target="ME"/>
+		<npcskill skillid="21851" skilllevel="65" probability="60" cooldown="35000" target="RANDOM" minhp="0" maxhp="55"/>
+		<npcskill skillid="21852" skilllevel="65" probability="60" cooldown="40000" target="ME" minhp="0" maxhp="40">
+			<cond condType="SPAWN_NPC" npc_id="855913" min_distance="5" max_distance="20" random_direction="true" min_amount="3" max_amount="6"/>
+		</npcskill>
+	</npcskills>
+	<!-- Frost Bomb -->
+	<npcskills npcid="855913">
+		<npcskill skillid="21853" skilllevel="65" probability="100" cooldown="10000" target="ME">
+			<cond delay="5000" despawn_time="5000"/>
+		</npcskill>
+	</npcskills>
+	<!-- Machine Spirit Tottal -->
+	<npcskills npcid="235971">
+		<npcskill skillid="21848" skilllevel="65" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21849" skilllevel="65" probability="60" cooldown="25000" target="ME"/>
+		<npcskill skillid="21850" skilllevel="65" probability="60" cooldown="30000" nextChainId="1" nextSkillTime="7000" target="ME"/>
+		<npcskill skillid="21850" skilllevel="65" probability="50" cooldown="10000" chainId="1" target="ME"/>
+		<npcskill skillid="21851" skilllevel="65" probability="60" cooldown="35000" target="RANDOM" minhp="0" maxhp="55"/>
+		<npcskill skillid="21852" skilllevel="65" probability="60" cooldown="40000" target="ME" minhp="0" maxhp="40">
+			<cond condType="SPAWN_NPC" npc_id="855913" min_distance="5" max_distance="20" random_direction="true" min_amount="3" max_amount="6"/>
+		</npcskill>
+	</npcskills>
 </npc_skill_templates>
