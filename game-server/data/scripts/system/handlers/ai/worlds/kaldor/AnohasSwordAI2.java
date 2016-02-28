@@ -63,11 +63,10 @@ public class AnohasSwordAI2 extends NpcAI2 {
 		Npc sword = getOwner();
 		NpcController swordController = sword.getController();
 		AI2Actions.die(this); // kill sword (starts animation)
-		swordController.cancelTask(TaskId.DECAY); // disable despawn to show animation until anoha spawns
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+		swordController.addTask(TaskId.DECAY, ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.RESURRECT));
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.DIE));
-		}, 10 * 1000, 10 * 1000); // repeat animation
+		}, 10 * 1000, 10 * 1000)); // disable despawn, repeat special die animation instead until anoha spawns
 		spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // Flag (map icon)
 		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
