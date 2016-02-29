@@ -23,6 +23,6 @@ public class DelayedSkillEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
 		if (effect.isEndedByTime() && !effect.getEffected().getLifeStats().isAlreadyDead())
-			SkillEngine.getInstance().getSkill(effect.getEffector(), skillId, 1, effect.getEffected()).useSkill();
+			SkillEngine.getInstance().applyEffectDirectly(skillId, effect.getEffector(), effect.getEffected(), 0);
 	}
 }
