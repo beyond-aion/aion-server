@@ -487,7 +487,8 @@ public class AttackUtil {
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())
 			damage /= effect.getSkill().getEffectedList().size();
 
-		if (template instanceof ProcAtkInstantEffect && !effect.getStack().startsWith("ITEM_SKILL_PROC")) // FIXME: I'm not very amused, what I've seen!
+		if (template instanceof ProcAtkInstantEffect && !effect.getStack().startsWith("ITEM_SKILL_PROC") &&
+				!effect.getStack().startsWith("BA_N_")) // FIXME: I'm not very amused, what I've seen!
 			damage = skillDamage;
 
 		if (damage < 0)
