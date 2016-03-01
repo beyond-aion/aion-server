@@ -289,7 +289,8 @@ public class TeleportService2 {
 		if (player.hasStore()) {
 			PrivateStoreService.closePrivateStore(player);
 		}
-		player.getController().cancelCurrentSkill();
+		player.getController().cancelCurrentSkill(null);
+		player.setTarget(null);
 		if (player.getWorldId() != worldId || player.getInstanceId() != instanceId) {
 			player.getController().onLeaveWorld();
 		}
@@ -483,7 +484,8 @@ public class TeleportService2 {
 	}
 
 	public static void moveToInstanceExit(Player player, int worldId, Race race) {
-		player.getController().cancelCurrentSkill();
+		player.getController().cancelCurrentSkill(null);
+		player.setTarget(null);
 		InstanceExit instanceExit = getInstanceExit(worldId, race);
 		if (instanceExit == null) {
 			log.warn("No instance exit found for race: " + race + " " + worldId);

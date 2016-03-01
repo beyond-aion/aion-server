@@ -22,7 +22,7 @@ public class ChargeSkill extends Skill {
 	@Override
 	public boolean useSkill() {
 		if (!canUseSkill(CastState.CAST_END)) {
-			effector.getController().cancelCurrentSkill();
+			effector.getController().cancelCurrentSkill(null);
 			return false;
 		}
 		effector.getObserveController().notifyStartSkillCastObservers(this);

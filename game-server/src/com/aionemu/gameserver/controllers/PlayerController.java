@@ -300,7 +300,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void onDie(@Nonnull Creature lastAttacker) {
 		Player player = this.getOwner();
-		player.getController().cancelCurrentSkill();
+		player.getController().cancelCurrentSkill(null);
 		player.setRebirthRevive(getOwner().haveSelfRezEffect());
 		Creature master = lastAttacker.getMaster();
 
@@ -362,13 +362,18 @@ public class PlayerController extends CreatureController<Player> {
 				player.getCommonData().calculateExpLoss();
 		}
 
-		sendDieFromCreature(lastAttacker, player.hasResurrectBase());
+		sendDieFromCreature(lastAttacker, !player.hasResurrectBase());
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
 
-		if (player.isInGroup2())
+		if (player.isInGroup2()) {
 			player.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
+		} else if (player.isInAlliance2()) {
+			player.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
+		}
 	}
+
+
 
 	public void sendDie() {
 		sendDieFromCreature(getOwner(), true);
@@ -533,7 +538,7 @@ public class PlayerController extends CreatureController<Player> {
 		PlayerMoveTaskManager.getInstance().removePlayer(getOwner());
 		getOwner().getObserveController().notifyMoveObservers();
 		getOwner().getMoveController().setInMove(false);
-		cancelCurrentSkill();
+		cancelCurrentSkill(null);
 		updateZone();
 		super.onStopMove();
 	}
@@ -543,12 +548,12 @@ public class PlayerController extends CreatureController<Player> {
 		getOwner().getMoveController().setInMove(true);
 		PlayerMoveTaskManager.getInstance().addPlayer(getOwner());
 		cancelUseItem();
-		cancelCurrentSkill();
+		cancelCurrentSkill(null);
 		super.onStartMove();
 	}
 
 	@Override
-	public void cancelCurrentSkill() {
+	public void cancelCurrentSkill(Creature lastAttacker) {
 		if (getOwner().getCastingSkill() == null) {
 			return;
 		}
@@ -567,6 +572,10 @@ public class PlayerController extends CreatureController<Player> {
 			player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
 				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+		}
+
+		if (lastAttacker != null && lastAttacker instanceof Player && !lastAttacker.equals(getOwner())) {
+			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED);
 		}
 	}
 
@@ -801,7 +810,6 @@ public class PlayerController extends CreatureController<Player> {
 	/**
 	 * Check if NoDeathPenalty is active
 	 * 
-	 * @param player
 	 * @return boolean
 	 */
 	public boolean isNoDeathPenaltyInEffect() {
@@ -818,7 +826,6 @@ public class PlayerController extends CreatureController<Player> {
 	/**
 	 * Check if NoResurrectPenalty is active
 	 * 
-	 * @param player
 	 * @return boolean
 	 */
 	public boolean isNoResurrectPenaltyInEffect() {
@@ -835,7 +842,6 @@ public class PlayerController extends CreatureController<Player> {
 	/**
 	 * Check if HiPass is active
 	 * 
-	 * @param player
 	 * @return boolean
 	 */
 	public boolean isHiPassInEffect() {

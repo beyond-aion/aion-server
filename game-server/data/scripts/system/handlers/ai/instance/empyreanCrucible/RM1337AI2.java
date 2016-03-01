@@ -118,7 +118,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelTask();
 				} else {
-					getOwner().getController().cancelCurrentSkill();
+					getOwner().getController().cancelCurrentSkill(null);
 					NpcShoutsService.getInstance().sendMsg(getOwner(), 1500230, getObjectId(), 0, 0);
 					SkillEngine.getInstance().getSkill(getOwner(), 19551, 10, getTarget()).useNoAnimationSkill();
 					spawnSparks();

@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,12 +33,8 @@ import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -116,7 +113,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * Zone update mask management
 	 * 
-	 * @param mode
 	 */
 	public final void updateZone() {
 		ZoneUpdateService.getInstance().add(getOwner());
@@ -169,18 +165,18 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null && notifyAttack) {
 				if (skill.getSkillMethod() == SkillMethod.ITEM)
-					cancelCurrentSkill();
+					cancelCurrentSkill(attacker);
 				else {
 					int cancelRate = skill.getSkillTemplate().getCancelRate();
 					if (cancelRate == 100000)
-						cancelCurrentSkill();
+						cancelCurrentSkill(attacker);
 					else if (cancelRate > 0) {
 						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
 
 						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
 						if (Rnd.get(1, 100) <= cancel)
-							cancelCurrentSkill();
+							cancelCurrentSkill(attacker);
 					}
 				}
 			}
@@ -518,7 +514,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * Cancel current skill and remove cooldown
 	 */
-	public void cancelCurrentSkill() {
+	public void cancelCurrentSkill(Creature lastAttacker) {
 		if (getOwner().getCastingSkill() == null) {
 			return;
 		}
@@ -537,6 +533,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			if (creature.getSkillNumber() > 0)
 				creature.setSkillNumber(creature.getSkillNumber() - 1);
+		}
+		if (lastAttacker != null && lastAttacker instanceof Player) {
+			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED);
 		}
 	}
 

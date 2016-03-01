@@ -177,7 +177,7 @@ public class DuelService {
 			 * all debuffs are removed from winner, but buffs will remain Stop casting or skill use
 			 */
 			opponent.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
-			opponent.getController().cancelCurrentSkill();
+			opponent.getController().cancelCurrentSkill(null);
 			// opponent.getAggroList().clear();
 
 			/**
@@ -200,14 +200,14 @@ public class DuelService {
 			 * cancel attacking winner by summoned object
 			 */
 			if (player.getSummonedObj() != null) {
-				player.getSummonedObj().getController().cancelCurrentSkill();
+				player.getSummonedObj().getController().cancelCurrentSkill(null);
 			}
 
 			/**
 			 * cancel attacking loser by summoned object
 			 */
 			if (opponent.getSummonedObj() != null) {
-				opponent.getSummonedObj().getController().cancelCurrentSkill();
+				opponent.getSummonedObj().getController().cancelCurrentSkill(null);
 			}
 
 			PacketSendUtility.sendPacket(opponent, SM_DUEL.SM_DUEL_RESULT(DuelResult.DUEL_WON, player.getName()));
@@ -227,7 +227,7 @@ public class DuelService {
 		 * all debuffs are removed from loser Stop casting or skill use
 		 */
 		player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
-		player.getController().cancelCurrentSkill();
+		player.getController().cancelCurrentSkill(null);
 
 		int opponnentId = duels.get(player.getObjectId());
 		Player opponent = World.getInstance().findPlayer(opponnentId);
@@ -237,7 +237,7 @@ public class DuelService {
 			 * all debuffs are removed from winner, but buffs will remain Stop casting or skill use
 			 */
 			opponent.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
-			opponent.getController().cancelCurrentSkill();
+			opponent.getController().cancelCurrentSkill(null);
 		} else {
 			log.warn("CHECKPOINT : duel opponent is already out of world");
 		}

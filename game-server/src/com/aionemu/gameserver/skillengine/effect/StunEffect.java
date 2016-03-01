@@ -31,7 +31,7 @@ public class StunEffect extends EffectTemplate {
 	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
-		effected.getController().cancelCurrentSkill();
+		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN.getId());

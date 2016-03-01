@@ -738,7 +738,7 @@ public class AttackUtil {
 	private static void cancelCast(Creature creature, Creature target) {
 		if (target != null && creature.getCastingSkill() != null)
 			if (creature.getCastingSkill().getFirstTarget().equals(target))
-				creature.getController().cancelCurrentSkill();
+				creature.getController().cancelCurrentSkill(null);
 	}
 
 	/**

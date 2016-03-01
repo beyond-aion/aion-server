@@ -84,7 +84,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 		}
 
 		if (spellid == 0) {
-			player.getController().cancelCurrentSkill();
+			player.getController().cancelCurrentSkill(null);
 			return;
 		}
 

@@ -125,7 +125,7 @@ public class CM_EMOTION extends AionClientPacket {
 
 		player.getController().cancelUseItem();
 		if (emotionType != EmotionType.SELECT_TARGET)
-			player.getController().cancelCurrentSkill();
+			player.getController().cancelCurrentSkill(null);
 
 		// check for stance
 		if (player.getController().isUnderStance()) {

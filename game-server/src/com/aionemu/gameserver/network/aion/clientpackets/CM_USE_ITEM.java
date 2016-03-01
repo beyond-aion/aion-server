@@ -85,7 +85,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (player.isCasting()) {
 			// PacketSendUtility.sendMessage(this.getOwner(),
 			// "You must wait until cast time finished to use skill again.");
-			player.getController().cancelCurrentSkill();
+			player.getController().cancelCurrentSkill(null);
 			// On retail the item is cancelling the current skill and then procs normally
 			// return;
 		}

@@ -32,7 +32,7 @@ public class BindEffect extends EffectTemplate {
 		effect.setAbnormal(AbnormalState.BIND.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.BIND.getId());
 		if (effected.getCastingSkill() != null && effected.getCastingSkill().getSkillTemplate().getType() == SkillType.PHYSICAL)
-			effected.getController().cancelCurrentSkill();
+			effected.getController().cancelCurrentSkill(effect.getEffector());
 	}
 
 	@Override

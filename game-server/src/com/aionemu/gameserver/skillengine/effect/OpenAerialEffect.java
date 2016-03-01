@@ -38,7 +38,7 @@ public class OpenAerialEffect extends EffectTemplate {
 	@Override
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
-		effected.getController().cancelCurrentSkill();
+		effected.getController().cancelCurrentSkill(effect.getEffector());
 		effect.getEffected().getEffectController().removeParalyzeEffects();
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();

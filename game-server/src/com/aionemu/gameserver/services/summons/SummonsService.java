@@ -48,7 +48,7 @@ public class SummonsService {
 	public static final void release(final Summon summon, final UnsummonType unsummonType, final boolean isAttacked) {
 		if (summon.getMode() == SummonMode.RELEASE)
 			return;
-		summon.getController().cancelCurrentSkill();
+		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.RELEASE);
 		final Player master = summon.getMaster();
 		switch (unsummonType) {
@@ -130,7 +130,7 @@ public class SummonsService {
 	 * Change to rest mode
 	 */
 	public static final void restMode(final Summon summon) {
-		summon.getController().cancelCurrentSkill();
+		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.REST);
 		Player master = summon.getMaster();
 		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_REST_MODE(summon.getNameId()));
@@ -148,7 +148,7 @@ public class SummonsService {
 	 * Change to guard mode
 	 */
 	public static final void guardMode(final Summon summon) {
-		summon.getController().cancelCurrentSkill();
+		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.GUARD);
 		Player master = summon.getMaster();
 		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_GUARD_MODE(summon.getNameId()));

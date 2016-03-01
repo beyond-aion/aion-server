@@ -48,7 +48,7 @@ public class CM_COMPOSITE_STONES extends AionClientPacket {
 		}
 
 		if (player.isCasting()) {
-			player.getController().cancelCurrentSkill();
+			player.getController().cancelCurrentSkill(null);
 		}
 
 		Item tools = player.getInventory().getItemByObjId(compinationToolItemObjectId);

@@ -30,7 +30,7 @@ public class PetrificationEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getController().stopMoving();
-		effected.getController().cancelCurrentSkill();
+		effected.getController().cancelCurrentSkill(effect.getEffector());
 		// removes glide
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();

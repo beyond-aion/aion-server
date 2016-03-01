@@ -620,12 +620,12 @@ public class Skill {
 		// Check if target is out of skill range
 		Properties properties = skillTemplate.getProperties();
 		if (properties != null && !properties.endCastValidate(this)) {
-			effector.getController().cancelCurrentSkill();
+			effector.getController().cancelCurrentSkill(null);
 			return;
 		}
 
 		if (!validateEffectedList()) {
-			effector.getController().cancelCurrentSkill();
+			effector.getController().cancelCurrentSkill(null);
 			return;
 		}
 
