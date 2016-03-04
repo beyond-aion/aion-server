@@ -1,11 +1,5 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -17,6 +11,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.observer.DieObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -28,12 +23,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL_RESULT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -54,8 +44,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
-
 import javolution.util.FastTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author ATracer Modified by Wakzashi
@@ -72,6 +66,7 @@ public class Skill {
 	private final int skillLevel;
 
 	protected final StartMovingListener conditionChangeListener;
+	private final DieObserver dieObserver;
 
 	private final SkillTemplate skillTemplate;
 
@@ -146,6 +141,7 @@ public class Skill {
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate, boolean isPenaltySkill) {
 		this.effectedList = new FastTable<>();
 		this.conditionChangeListener = new StartMovingListener();
+		this.dieObserver = new DieObserver(this);
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
 		this.skillTemplate = skillTemplate;
@@ -597,6 +593,13 @@ public class Skill {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
 				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), this.duration, 0, 0));
 		}
+
+		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (duration > 0)
+				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
+				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
+			firstTarget.getObserveController().attach(dieObserver);
+		}
+
 	}
 
 	/**
@@ -610,11 +613,10 @@ public class Skill {
 	 * Apply effects and perform actions specified in skill template
 	 */
 	protected void endCast() {
-		if (!effector.isCasting() || isCancelled)
-			return;
-
-		// if target out of range
-		if (skillTemplate == null)
+		if (firstTarget != null) {
+			firstTarget.getObserveController().removeObserver(dieObserver);
+		}
+		if (!effector.isCasting() || isCancelled || skillTemplate == null)
 			return;
 
 		// Check if target is out of skill range
@@ -884,6 +886,8 @@ public class Skill {
 			if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
 				cancelCast();
 				effector.setCasting(null);
+				if (firstTarget != null)
+					firstTarget.getObserveController().removeObserver(dieObserver);
 				PacketSendUtility.broadcastPacketAndReceive(effector, new SM_SKILL_CANCEL(effector, skillTemplate.getSkillId()));
 				return;
 			}

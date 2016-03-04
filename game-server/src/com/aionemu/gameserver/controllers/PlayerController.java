@@ -418,7 +418,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void attackTarget(Creature target, int time) {
+	public void attackTarget(Creature target, int time, boolean skipChecks) {
 
 		PlayerGameStats gameStats = getOwner().getGameStats();
 
@@ -427,7 +427,6 @@ public class PlayerController extends CreatureController<Player> {
 
 		// Normal attack is already limited client side (ex. Press C and attacker approaches target)
 		// but need a check server side too also for Z axis issue
-
 		if (!MathUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1))
 			return;
 
@@ -453,7 +452,7 @@ public class PlayerController extends CreatureController<Player> {
 		/**
 		 * notify attack observers
 		 */
-		super.attackTarget(target, time);
+		super.attackTarget(target, time, true);
 
 	}
 
@@ -529,14 +528,12 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void onMove() {
-		getOwner().getObserveController().notifyMoveObservers();
 		super.onMove();
 	}
 
 	@Override
 	public void onStopMove() {
 		PlayerMoveTaskManager.getInstance().removePlayer(getOwner());
-		getOwner().getObserveController().notifyMoveObservers();
 		getOwner().getMoveController().setInMove(false);
 		cancelCurrentSkill(null);
 		updateZone();
@@ -554,6 +551,10 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
+		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED);
+	}
+
+	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
 		if (getOwner().getCastingSkill() == null) {
 			return;
 		}
@@ -566,7 +567,8 @@ public class PlayerController extends CreatureController<Player> {
 		player.setNextSkillUse(0);
 		if (castingSkill.getSkillMethod() == SkillMethod.CAST || castingSkill.getSkillMethod() == SkillMethod.CHARGE) {
 			PacketSendUtility.broadcastPacket(player, new SM_SKILL_CANCEL(player, castingSkill.getSkillTemplate().getSkillId()), true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED);
+			if (message != null)
+				PacketSendUtility.sendPacket(player, message);
 		} else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(castingSkill.getItemTemplate().getNameId())));
 			player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());

@@ -56,7 +56,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	/**
-	 * @param atcount
+	 * @param attackCounter
 	 *          the atcount to set
 	 */
 	protected void setAttackCounter(int attackCounter) {

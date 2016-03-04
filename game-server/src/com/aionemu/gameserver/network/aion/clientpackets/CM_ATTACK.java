@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author alexa026, Avol, ATracer, KID
@@ -50,7 +49,7 @@ public class CM_ATTACK extends AionClientPacket {
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
 		if (obj != null && obj instanceof Creature) {
-			player.getController().attackTarget((Creature) obj, time);
+			player.getController().attackTarget((Creature) obj, time, false);
 		} else {
 			if (obj != null) {
 				log.warn("Attacking unsupported target" + obj + " id " + obj.getObjectTemplate().getTemplateId());

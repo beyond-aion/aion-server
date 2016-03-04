@@ -79,6 +79,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks on Creature move in progress
 	 */
 	public void onMove() {
+		getOwner().getObserveController().notifyMoveObservers();
 		notifyAIOnMove();
 		updateZone();
 	}
@@ -87,6 +88,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks on Creature stop move
 	 */
 	public void onStopMove() {
+		getOwner().getObserveController().notifyMoveObservers();
 		notifyAIOnMove();
 	}
 
@@ -302,12 +304,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param target
 	 * @param time
 	 */
-	public void attackTarget(final Creature target, int time) {
+	public void attackTarget(final Creature target, int time, boolean skipChecks) {
 		boolean addAttackObservers = true;
 		/**
 		 * Check all prerequisites
 		 */
-		if (target == null || !getOwner().canAttack() || getOwner().getLifeStats().isAlreadyDead() || !getOwner().isSpawned()) {
+		if (!skipChecks && (target == null || getOwner().getLifeStats().isAlreadyDead() ||
+				getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 
@@ -510,7 +513,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (creature.getSkillNumber() > 0)
 			creature.setSkillNumber(creature.getSkillNumber() - 1);
 	}
-
 	/**
 	 * Cancel current skill and remove cooldown
 	 */

@@ -95,7 +95,7 @@ public class SimpleAttackManager {
 				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 			} else {
 				npc.getPosition().setH(MathUtil.getHeadingTowards(npc, target));
-				npc.getController().attackTarget(target, 0);
+				npc.getController().attackTarget(target, 0, false);
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			}
 		} else {

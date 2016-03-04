@@ -41,7 +41,7 @@ public enum AbnormalState {
 	/**
 	 * Compound abnormal states
 	 */
-	CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id),
+	CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id | CONFUSE.id),
 	STANCE_OFF(SPIN.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id),
 	CANT_MOVE_STATE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | SANCTUARY.id),
 	DISMOUT_RIDE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | FEAR.id | SNARE.id),

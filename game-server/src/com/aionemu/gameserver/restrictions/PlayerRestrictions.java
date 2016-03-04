@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.restrictions;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER;
-
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -107,17 +105,19 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		VisibleObject target = player.getTarget();
 		SkillTemplate template = skill.getSkillTemplate();
 
-		if (!checkFly(player, target)) {
+		//TODO check if its ok
+		if  (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead()) {
 			return false;
 		}
-
 		// check if is casting to avoid multicast exploit
 		// TODO cancel skill if other is used
 		if (player.isCasting())
 			return false;
 
-		if ((!player.canAttack()) && !template.hasEvadeEffect())
+		if ((!player.canAttack()) && !template.hasEvadeEffect()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE);
 			return false;
+		}
 
 		// in 3.0 players can use remove shock even when silenced
 		if (template.getType() == SkillType.MAGICAL && player.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && !template.hasEvadeEffect()) {
@@ -277,20 +277,26 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canAttack(Player player, VisibleObject target) {
-		if (target == null)
+		if (!player.isSpawned() || target == null || !checkFly(player, target) ||
+				player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
 			return false;
 
-		if (!checkFly(player, target)) {
+		if (!player.canAttack()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE);
 			return false;
 		}
 
-		if (!(target instanceof Creature))
+		if (!(target instanceof Creature)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
 			return false;
+		}
 
 		Creature creature = (Creature) target;
 
-		if (creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie())
+		if (creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
 			return false;
+		}
 
 		// cannot attack while transformed
 		if (player.getTransformModel().getRes3() == 1) {
@@ -370,7 +376,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_GENDER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER);
 			return false;
 		}
 
