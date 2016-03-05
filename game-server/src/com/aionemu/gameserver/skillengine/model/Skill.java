@@ -597,6 +597,10 @@ public class Skill {
 		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (duration > 0)
 				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
 				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
+			if ((effector instanceof Npc && ((Npc) effector).isBoss()) ||
+					(skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
+				return;
+			}
 			firstTarget.getObserveController().attach(dieObserver);
 		}
 

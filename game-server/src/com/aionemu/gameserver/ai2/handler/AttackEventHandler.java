@@ -11,6 +11,12 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
+import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer
@@ -49,6 +55,9 @@ public class AttackEventHandler {
 			}
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.getOwner().setTarget(creature);
+			//TODO: find a way without SM_MOVE. But for now its ok.
+			npcAI.getOwner().getPosition().setH(MathUtil.getHeadingTowards(npcAI.getOwner(), creature));
+			PacketSendUtility.broadcastPacket(npcAI.getOwner(), new SM_MOVE(npcAI.getOwner()));
 			AttackManager.startAttacking(npcAI);
 			if (npcAI.poll(AIQuestion.CAN_SHOUT))
 				ShoutEventHandler.onAttackBegin(npcAI, (Creature) npcAI.getOwner().getTarget());

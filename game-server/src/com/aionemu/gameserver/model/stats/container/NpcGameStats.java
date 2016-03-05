@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -15,6 +16,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -298,7 +300,13 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.info(owner.getAi2(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
 		}
-		int nextAttack = 0;
+		int nextAttack = 1000;
+		if (this instanceof TrapGameStats || this instanceof SummonedObjectGameStats) {
+			nextAttack = 0;
+		} else if (lastAttackTime == 0 && owner.getTarget() != null && owner.getTarget() instanceof Creature
+				&& !MathUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
+			nextAttack = 0;
+		}
 		if (attackDelay < attackSpeed) {
 			nextAttack = (int) (attackSpeed - attackDelay);
 		}
@@ -376,4 +384,5 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public void setLastGeoZUpdate(long lastGeoZUpdate) {
 		this.lastGeoZUpdate = lastGeoZUpdate;
 	}
+
 }
