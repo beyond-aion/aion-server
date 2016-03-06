@@ -143,19 +143,9 @@ public class DialogService {
 				case HOUSING_DESTRUCT: // housing destruct
 				case CHARGE_ITEM_SINGLE: // condition an individual item
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
-					sendDialogWindow(dialogId, player, npc);
-					break;
 				case TOWN_CHALLENGE: // town improvement
-					if (player.getActiveHouse() == null)
-						break;
-					
-					List<ZoneInstance> houseZones = player.getActiveHouse().getPosition().getMapRegion().getZones(player.getActiveHouse().getButler());
-					for (ZoneInstance zone : houseZones) {
-						if (zone.getAreaTemplate().getZoneName().name().contains("VILLAGE") && zone.isInsideCreature(player)) {
-							sendDialogWindow(dialogId, player, npc);
-							break;
-						}
-					}
+					// Custom Feature: Quests can be done in any village
+					sendDialogWindow(dialogId, player, npc);
 					break;
 				case DISPERSE_LEGION: // disband legion
 					LegionService.getInstance().requestDisbandLegion(npc, player);
