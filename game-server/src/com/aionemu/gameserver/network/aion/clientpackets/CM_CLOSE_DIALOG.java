@@ -1,17 +1,17 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
-import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @modified Neon
@@ -45,7 +45,6 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 		if (target == null)
 			return;
 
-		AionConnection client = getConnection();
 		Mailbox mailbox = player.getMailbox();
 
 		if (target instanceof Npc) {
@@ -57,7 +56,7 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 				@Override
 				public void run() {
-					client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, target.getHeading()));
+					PacketSendUtility.sendPacket(player, new SM_HEADING_UPDATE(target));
 				}
 			}, 1200);
 

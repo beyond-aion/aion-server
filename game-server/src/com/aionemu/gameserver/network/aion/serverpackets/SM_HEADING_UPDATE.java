@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -8,12 +9,12 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_HEADING_UPDATE extends AionServerPacket {
 
-	private final int objectId;
-	private final byte heading;
+	private int objectId;
+	private byte heading;
 
-	public SM_HEADING_UPDATE(int objectId, byte heading) {
-		this.objectId = objectId;
-		this.heading = heading;
+	public SM_HEADING_UPDATE(VisibleObject target) {
+		this.objectId = target.getObjectId();
+		this.heading = target.getHeading();
 	}
 
 	@Override
