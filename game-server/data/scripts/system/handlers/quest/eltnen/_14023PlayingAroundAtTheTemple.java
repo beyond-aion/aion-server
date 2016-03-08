@@ -10,7 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka, Pad
  */
 public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 
@@ -22,13 +22,10 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = { 203965, 203967, 700151, 700154, 700150, 700153, 700152 };
 		qe.registerOnEnterZoneMissionEnd(questId);
 		qe.registerOnLevelUp(questId);
-		qe.registerGetingItem(182201027, questId);
-		for (int npc : npcs) {
-			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
-		}
+		qe.registerQuestNpc(203965).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203967).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -47,99 +44,47 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 				case 203965: { // Castor
 					switch (dialog) {
 						case QUEST_SELECT: {
-							if (var == 0) {
+							if (var == 0)
 								return sendQuestDialog(env, 1011);
-							}
 						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
 				}
 				case 203967: { // Axelion
 					switch (dialog) {
 						case QUEST_SELECT: {
-							if (var == 1) {
+							if (var == 1)
 								return sendQuestDialog(env, 1352);
-							}
-							else if (var == 2) {
+							else if (var == 2)
 								return sendQuestDialog(env, 1693);
-							}
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							if (var == 2 && QuestService.collectItemCheck(env, true)) {
-								changeQuestStep(env, 2, 3, true);
-								giveQuestItem(env, 182201027, 1);
-								return super.closeDialogWindow(env);
-							}
-							else {
+								changeQuestStep(env, 2, 2, true);
+								return sendQuestDialog(env, 10000);
+							} else {
 								return sendQuestDialog(env, 10001);
 							}
 						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
-						case SETPRO3: {
-							return sendQuestSelectionDialog(env);
-						}
-					}
-					break;
-				}
-				case 700151: { // Flower Wall
-					if (dialog == DialogAction.USE_OBJECT) {
-						changeQuestStep(env, 3, 4, false); // 4
-						return true;
-					}
-					break;
-				}
-				case 700154: { // Lightning Wall
-					if (dialog == DialogAction.USE_OBJECT) {
-						changeQuestStep(env, 4, 5, false); // 5
-						return true;
-					}
-					break;
-				}
-				case 700150: { // Wave Wall
-					if (dialog == DialogAction.USE_OBJECT) {
-						changeQuestStep(env, 5, 6, false); // 6
-						return true;
-					}
-					break;
-				}
-				case 700153: { // Wind Wall
-					if (dialog == DialogAction.USE_OBJECT) {
-						changeQuestStep(env, 6, 7, false); // 7
-						return true;
-					}
-					break;
-				}
-				case 700152: { // Fire Wall
-					if (dialog == DialogAction.USE_OBJECT) {
-						changeQuestStep(env, 7, 7, true); // reward
-						removeQuestItem(env, 182201027, 1);
-						return true;
 					}
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203965) { // Castor
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				else if (dialog == DialogAction.SET_SUCCEED)
+					return sendQuestDialog(env, 5);
+				else
 					return sendQuestEndDialog(env);
-				}
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onGetItemEvent(QuestEnv env) {
-		return defaultOnGetItemEvent(env, 2, 3, false); // 3
 	}
 
 	@Override
