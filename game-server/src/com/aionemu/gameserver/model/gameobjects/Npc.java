@@ -283,8 +283,8 @@ public class Npc extends Creature {
 			super.setTarget(creature);
 			super.clearAttackedCount();
 			getGameStats().renewLastChangeTargetTime();
-			if (!this.equals(creature) && !getLifeStats().isAlreadyDead()) {
-				if (creature != null)
+			if (!getLifeStats().isAlreadyDead()) {
+				if (creature != null && !this.equals(creature))
 					getPosition().setH(MathUtil.getHeadingTowards(this, creature));
 				PacketSendUtility.broadcastPacket(this, new SM_LOOKATOBJECT(this));
 			}
