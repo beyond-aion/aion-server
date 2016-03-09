@@ -134,12 +134,9 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	public synchronized boolean setStateIfNot(AIState newState) {
-		if (this.currentState == newState) {
-			if (this.isLogging()) {
-				AI2Logger.info(this, "Can't change state to " + newState + " from " + currentState);
-			}
+		if (this.currentState == newState)
 			return false;
-		}
+
 		if (this.isLogging()) {
 			AI2Logger.info(this, "Setting AI state to " + newState);
 			if (this.currentState == AIState.DIED && newState == AIState.FIGHT) {

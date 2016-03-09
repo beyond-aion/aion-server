@@ -15,18 +15,10 @@ public class SM_LOOKATOBJECT extends AionServerPacket {
 
 	public SM_LOOKATOBJECT(VisibleObject visibleObject) {
 		this.visibleObject = visibleObject;
-		if (visibleObject.getTarget() != null) {
-			this.targetObjectId = visibleObject.getTarget().getObjectId();
-			this.heading = Math.abs(128 - visibleObject.getTarget().getHeading());
-		} else {
-			this.targetObjectId = 0;
-			this.heading = visibleObject.getHeading();
-		}
+		this.targetObjectId = visibleObject.getTarget() == null ? 0 : visibleObject.getTarget().getObjectId();
+		this.heading = visibleObject.getHeading();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(visibleObject.getObjectId());

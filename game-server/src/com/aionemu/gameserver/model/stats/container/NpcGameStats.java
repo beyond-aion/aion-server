@@ -300,10 +300,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.info(owner.getAi2(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
 		}
-		int nextAttack = 1000;
+		int nextAttack = 750;
 		if (this instanceof TrapGameStats || this instanceof SummonedObjectGameStats) {
 			nextAttack = 0;
-		} else if (lastAttackTime == 0 && owner.getTarget() != null && owner.getTarget() instanceof Creature
+		} else if (lastAttackTime == 0 && owner.getTarget() instanceof Creature
 				&& !MathUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
 			nextAttack = 0;
 		}
