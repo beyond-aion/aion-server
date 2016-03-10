@@ -1,20 +1,20 @@
 package com.aionemu.gameserver.utils;
 
-import com.aionemu.gameserver.controllers.movement.NpcMoveController;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.skillengine.properties.AreaDirections;
-import javolution.util.FastTable;
-
-import java.awt.*;
+import java.awt.Point;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
+
+import com.aionemu.gameserver.controllers.movement.NpcMoveController;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.templates.zone.Point2D;
+import com.aionemu.gameserver.skillengine.properties.AreaDirections;
+
+import javolution.util.FastTable;
 
 /**
  * Class with basic math.<br>
@@ -83,15 +83,6 @@ import java.util.List;
  * 		System.out.println(System.currentTimeMillis() - time);
  * 	}
  * }
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  * </pre>
  * 
  * @author Disturbing
