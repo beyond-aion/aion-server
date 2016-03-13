@@ -299,9 +299,7 @@ public abstract class VisibleObject extends AionObject {
 
 	@Override
 	public String toString() {
-		if (objectTemplate == null)
-			return super.toString();
-		return objectTemplate.getName() + " (" + objectTemplate.getTemplateId() + ")";
+		return getClass().getSimpleName() + " [" + (objectTemplate != null ? "templateId=" + objectTemplate.getTemplateId() + ", " : "") + "objectId="
+			+ getObjectId() + ", name=" + getName() + ", position=" + position + "]";
 	}
-
 }
