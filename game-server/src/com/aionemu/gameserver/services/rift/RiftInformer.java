@@ -2,9 +2,7 @@ package com.aionemu.gameserver.services.rift;
 
 import java.util.List;
 import java.util.Map;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import java.util.TreeMap;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -112,12 +112,33 @@ public class RiftInformer {
 	}
 
 	private static Map<Integer, Integer> getAnnounceData(int worldId) {
-		Map<Integer, Integer> localRifts = new FastMap<>();
+		Map<Integer, Integer> localRifts = new TreeMap<>();
 
-		// init empty list
-		for (int i = 0; i < 8; i++) {
+		/**
+		 * init empty list
+		 * 12 different announces
+		 * we have to send them all otherwise the client announces them even if they are not spawned
+		 * index - announce
+		 *  \\ probably for asmodians //
+		 * 0 - normal rift to elysea
+		 * 1 - rift opened in theobomos
+		 * 2 - rift to concert hall
+		 * 3 - rift to pangaea/ahserion
+		 * 4 - volatile rift to elysea
+		 * 5 - infiltration rift to elysea
+		 *
+		 *  \\ probably for elyos //
+		 * 6 - normal rift to asmodae
+		 * 7 - rift opened in brusthonin
+		 * 8 - rift to concert hall
+		 * 9 - rift to pangaea/ahserion
+		 * 10 - volatile rift to asmodae
+		 * 11 - infiltration rift to asmodae
+		 */
+		for (int i = 0; i < 12; i++) {
 			localRifts.put(i, 0);
 		}
+
 
 		for (Npc rift : getSpawned(worldId)) {
 			RVController rc = (RVController) rift.getController();
@@ -129,6 +150,89 @@ public class RiftInformer {
 
 	private static Map<Integer, Integer> calcRiftsData(RVController rift, Map<Integer, Integer> local) {
 		if (rift.isMaster()) {
+			switch (rift.getRiftTemplate()) {
+				// ELYOS
+				case KAISINEL_AM:
+					local.put(7, local.get(7) + 1); //rift opened in brusthonin
+					break;
+				case ELTNEN_AM:
+				case ELTNEN_BM:
+				case ELTNEN_CM:
+				case ELTNEN_DM:
+				case ELTNEN_EM:
+				case ELTNEN_FM:
+				case ELTNEN_GM:
+				case HEIRON_AM:
+				case HEIRON_BM:
+				case HEIRON_CM:
+				case HEIRON_DM:
+				case HEIRON_EM:
+				case HEIRON_FM:
+				case HEIRON_GM:
+				case INGGISON_AM:
+				case INGGISON_BM:
+				case INGGISON_CM:
+				case INGGISON_DM:
+				case CYGNEA_AM:
+				case CYGNEA_BM:
+				case CYGNEA_CM:
+				case CYGNEA_DM:
+				case CYGNEA_EM:
+				case CYGNEA_FM:
+					local.put(6, local.get(6) + 1); //rift to asmodae
+					break;
+				case CYGNEA_GM:
+				case CYGNEA_HM:
+				case CYGNEA_IM:
+					if (rift.isVolatile()) {
+						local.put(10, local.get(10) + 1);
+					} else {
+						local.put(6, local.get(6) + 1); //rift to asmodae
+					}
+					break;
+				// ASMOADIANS
+				case MARCHUTAN_AM:
+					local.put(1, local.get(1) + 1); //rift opened in theo
+					break;
+				case MORHEIM_AM:
+				case MORHEIM_BM:
+				case MORHEIM_CM:
+				case MORHEIM_DM:
+				case MORHEIM_EM:
+				case MORHEIM_FM:
+				case MORHEIM_GM:
+				case BELUSLAN_AM:
+				case BELUSLAN_BM:
+				case BELUSLAN_CM:
+				case BELUSLAN_DM:
+				case BELUSLAN_EM:
+				case BELUSLAN_FM:
+				case BELUSLAN_GM:
+				case GELKMAROS_AM:
+				case GELKMAROS_BM:
+				case GELKMAROS_CM:
+				case GELKMAROS_DM:
+				case ENSHAR_AM:
+				case ENSHAR_BM:
+				case ENSHAR_CM:
+				case ENSHAR_DM:
+				case ENSHAR_EM:
+				case ENSHAR_FM:
+					local.put(0, local.get(0) + 1);
+					break;
+				case ENSHAR_GM:
+				case ENSHAR_HM:
+				case ENSHAR_IM:
+					if (rift.isVolatile()) {
+						local.put(4, local.get(4) + 1);
+					} else {
+						local.put(0, local.get(0) + 1);
+					}
+					break;
+
+			}
+		}
+		/*
 			local.put(0, local.get(0) + 1);
 			if (rift.isVortex())
 				local.put(1, local.get(1) + 1);
@@ -140,7 +244,7 @@ public class RiftInformer {
 			local.put(6, local.get(6) + 1);// rift battle
 			if (rift.isVortex())
 				local.put(7, local.get(7) + 1);
-		}
+		} */
 		return local;
 	}
 
