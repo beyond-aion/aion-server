@@ -229,7 +229,7 @@ public class DialogService {
 								break;
 							}
 						default:
-							TeleportService2.showMap(player, targetObjectId, npc.getNpcId());
+							TeleportService2.showMap(player, npc);
 					}
 					break;
 				}

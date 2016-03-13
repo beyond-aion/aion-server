@@ -53,7 +53,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 			}
 			TeleporterTemplate teleport = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npcId);
 			if (teleport != null) {
-				TeleportService2.teleport(teleport, locId, player, npc, TeleportAnimation.JUMP_IN_STATUE);
+				TeleportService2.teleport(teleport, locId, player, npc, npc.getName().toLowerCase().contains("statue") ? TeleportAnimation.JUMP_IN_STATUE : TeleportAnimation.JUMP_IN);
 			} else
 				LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).warn("teleportation id " + locId + " was not found on npc " + npcId);
 		} else

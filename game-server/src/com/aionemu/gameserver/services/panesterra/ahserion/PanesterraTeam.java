@@ -56,7 +56,7 @@ public abstract class PanesterraTeam {
 					player.setPanesterraTeam(null);
 				if (player.getWorldId() == 400030000) {
 					ungroupPlayer(player);
-					TeleportService2.moveToBindLocation(player, true);
+					TeleportService2.moveToBindLocation(player);
 					sendPackets(player);
 				}
 			}

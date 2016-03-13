@@ -17,7 +17,7 @@ public class ReturnEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		TeleportService2.moveToBindLocation((Player) effect.getEffector(), true);
+		TeleportService2.moveToBindLocation((Player) effect.getEffector());
 	}
 
 	@Override

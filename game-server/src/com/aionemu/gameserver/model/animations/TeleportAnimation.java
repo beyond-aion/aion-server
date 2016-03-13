@@ -21,21 +21,27 @@ public enum TeleportAnimation {
 	 * 8 - 01000 - jump in
 	 */
 
-	NONE(0),
-	FADE_OUT_BEAM(1),
-	FADE_OUT(2),
-	JUMP_IN(3),
-	JUMP_IN_STATUE(4),
-	JUMP_IN_GATE(8);
+	NONE(0, 0),
+	FADE_OUT_BEAM(1, 3000),
+	FADE_OUT(2, 1500),
+	JUMP_IN(3, 2200),
+	JUMP_IN_STATUE(4, 2200),
+	JUMP_IN_GATE(8, 2200);
 
 	private final byte animationId;
+	private final int duration;
 
-	TeleportAnimation(int animationId) {
+	TeleportAnimation(int animationId, int duration) {
 		this.animationId = (byte) animationId;
+		this.duration = duration;
 	}
 
 	public byte getId() {
 		return animationId;
+	}
+
+	public int getDuration() {
+		return duration;
 	}
 
 	public ArrivalAnimation getDefaultArrivalAnimation() {

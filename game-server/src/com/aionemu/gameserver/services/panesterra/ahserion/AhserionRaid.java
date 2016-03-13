@@ -10,6 +10,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
@@ -165,7 +166,7 @@ public class AhserionRaid {
 					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
 						player.setPanesterraTeam(null);
 						leaveTeam(player);
-						TeleportService2.moveToBindLocation(player, true);
+						TeleportService2.moveToBindLocation(player);
 					}
 				}
 			}
@@ -222,7 +223,7 @@ public class AhserionRaid {
 		if (pos != null)
 			TeleportService2.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
 		else
-			TeleportService2.moveToBindLocation(player, true);
+			TeleportService2.moveToBindLocation(player);
 		player.unsetResPosState();
 		return true;
 	}
@@ -251,7 +252,7 @@ public class AhserionRaid {
 					if (player != null && !player.isGM()) {
 						player.setPanesterraTeam(null);
 						leaveTeam(player);
-						TeleportService2.moveToBindLocation(player, true);
+						TeleportService2.moveToBindLocation(player);
 					}
 				}
 			}
@@ -354,7 +355,8 @@ public class AhserionRaid {
 			return;
 		if ((player.getPanesterraTeam() == null || (player.getPanesterraTeam() != null && player.getPanesterraTeam().isEliminated()))
 			&& player.getPosition().getMapId() == 400030000) {
-			TeleportService2.moveToBindLocation(player, false);
+			BindPointPosition bp = player.getBindPoint();
+			World.getInstance().setPosition(player, bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading());
 		} else if (player.getPanesterraTeam() != null && !player.getPanesterraTeam().isEliminated() && player.getPosition().getMapId() != 400030000) {
 			WorldPosition pos = player.getPanesterraTeam().getStartPosition();
 			if (pos != null)

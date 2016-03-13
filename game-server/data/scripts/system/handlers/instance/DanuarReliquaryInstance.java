@@ -164,7 +164,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	public void onPlayerLogOut(Player player) {
 		super.onPlayerLogOut(player);
 		if (player.getLifeStats().isAlreadyDead()) {
-			TeleportService2.moveToBindLocation(player, true);
+			TeleportService2.moveToBindLocation(player);
 		}
 	}
 

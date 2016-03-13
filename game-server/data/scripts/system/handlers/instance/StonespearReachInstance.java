@@ -911,11 +911,11 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 					TeleportService2.teleportTo(player, 210070000, 2361, 1515, 440);
 					break;
 				default:
-					TeleportService2.moveToBindLocation(player, true);
+					TeleportService2.moveToBindLocation(player);
 					break;
 			}
 		} else {
-			TeleportService2.moveToBindLocation(player, true);
+			TeleportService2.moveToBindLocation(player);
 		}
 	}
 

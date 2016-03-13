@@ -94,7 +94,7 @@ public class FortressLocation extends SiegeLocation {
 
 		for (Player player : getPlayers().values())
 			if (isEnemy(player))
-				TeleportService2.moveToBindLocation(player, true);
+				TeleportService2.moveToBindLocation(player);
 	}
 
 	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {

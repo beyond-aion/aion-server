@@ -127,7 +127,7 @@ public class PlayerReviveService {
 			if (resPos != null)
 				TeleportService2.teleportTo(player, resPos);
 			else
-				TeleportService2.moveToBindLocation(player, true);
+				TeleportService2.moveToBindLocation(player);
 		}
 		player.unsetResPosState();
 	}
@@ -149,13 +149,12 @@ public class PlayerReviveService {
 
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
-			WorldPosition bind = kisk.getPosition();
 			kisk.resurrectionUsed();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
 			revive(player, 25, 25, false, skillId);
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
-			TeleportService2.moveToKiskLocation(player, bind);
+			TeleportService2.teleportTo(player, kisk.getPosition());
 		}
 	}
 

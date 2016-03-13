@@ -88,7 +88,7 @@ public class PunishmentService {
 		} else {
 			player.setPrisonTimer(0);
 			ChatBanService.unbanPlayer(player);
-			TeleportService2.moveToBindLocation(player, true);
+			TeleportService2.moveToBindLocation(player);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
 			PacketSendUtility.sendMessage(player, "You come out of prison.");
 		}
