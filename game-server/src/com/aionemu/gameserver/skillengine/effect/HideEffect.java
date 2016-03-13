@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -16,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
-import com.aionemu.gameserver.services.player.PlayerVisualStateService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
@@ -48,20 +46,13 @@ public class HideEffect extends BufEffect {
 		super.endEffect(effect);
 
 		final Creature effected = effect.getEffected();
-		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE.getId());
-
-		effected.unsetVisualState(state);
-
 		if (effected instanceof Player) {
-			ActionObserver observer = effect.getActionObserver(position);
-			effect.getEffected().getObserveController().removeObserver(observer);
+			effect.getEffected().getObserveController().removeObserver(effect.getActionObserver(position));
+			((Player) effected).getController().onHideEnd(); // must go before updating visual state
 		}
-
-		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
-
-		// anti-cheat
-		if (SecurityConfig.INVIS && effected instanceof Player)
-			PlayerVisualStateService.hideValidate((Player) effected);
+		effected.unsetVisualState(state);
+		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE.getId());
+		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected)); // update visibility
 	}
 
 	@Override
@@ -94,9 +85,7 @@ public class HideEffect extends BufEffect {
 		 * for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking
 		 */
 		if (effected instanceof Player) {
-
-			if (SecurityConfig.INVIS)
-				PlayerVisualStateService.hideValidate((Player) effected);
+			((Player) effected).getController().onHide();
 
 			// Remove Hide when use skill / item skill
 			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {

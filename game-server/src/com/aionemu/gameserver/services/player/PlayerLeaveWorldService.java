@@ -130,7 +130,7 @@ public class PlayerLeaveWorldService {
 		if (summon != null) {
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
 		}
-		PetSpawnService.dismissPet(player, true);
+		PetSpawnService.dismissPet(player);
 
 		if (player.getPostman() != null)
 			player.getPostman().getController().onDelete();

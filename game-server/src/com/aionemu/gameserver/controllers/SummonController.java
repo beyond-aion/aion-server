@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -32,8 +33,8 @@ public class SummonController extends CreatureController<Summon> {
 	private boolean isAttacked = false;
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
-		super.notSee(object, inRange);
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
+		super.notSee(object, animation);
 		if (getOwner().getMaster() == null)
 			return;
 
@@ -83,7 +84,7 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void attackTarget(Creature target, int time, boolean skipChekcs) {
+	public void attackTarget(Creature target, int time, boolean skipChecks) {
 		Player master = getOwner().getMaster();
 
 		if (!RestrictionsManager.canAttack(master, target))

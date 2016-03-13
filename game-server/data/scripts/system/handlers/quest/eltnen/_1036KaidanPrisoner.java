@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javolution.util.FastTable;
 
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -170,7 +171,7 @@ public class _1036KaidanPrisoner extends QuestHandler {
 					if (vo instanceof Npc && (vo.getObjectTemplate().getTemplateId() == 204003 || vo.getObjectTemplate().getTemplateId() == 700180))
 						npcs.add(vo);
 				}
-				npcs.forEach(npc -> player.getKnownList().delVisualObject(npc, false));
+				npcs.forEach(npc -> player.getKnownList().delVisualObject(npc, ObjectDeleteAnimation.NONE));
 				return true;
 			}
 		}

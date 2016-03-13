@@ -6,6 +6,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
  * @author ATracer
  */
 public enum PetAction {
+	LOAD_PETS(0),
 	ADOPT(1),
 	SURRENDER(2),
 	SPAWN(3),
@@ -15,7 +16,10 @@ public enum PetAction {
 	FOOD(9),
 	RENAME(10),
 	MOOD(12),
+	SPECIAL_FUNCTION(13),
 	EXTEND_EXPIRATION(15),
+	H_ADOPT(16),
+	H_ABANDON(17),
 	UNKNOWN(255);
 
 	private static TIntObjectHashMap<PetAction> petActions;

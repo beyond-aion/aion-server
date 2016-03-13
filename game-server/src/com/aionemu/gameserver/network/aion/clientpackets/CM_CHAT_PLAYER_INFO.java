@@ -32,7 +32,7 @@ public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 			return;
 		}
-		if (!getConnection().getActivePlayer().getKnownList().knowns(target))
+		if (!getConnection().getActivePlayer().getKnownList().knows(target))
 			sendPacket(new SM_CHAT_WINDOW(target, false));
 	}
 }

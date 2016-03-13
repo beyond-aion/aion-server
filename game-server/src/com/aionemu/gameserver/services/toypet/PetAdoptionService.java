@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -55,7 +56,7 @@ public class PetAdoptionService {
 	public static void addPet(Player player, int petId, String name, int decorationId, int expireTime) {
 		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
 		if (petCommonData != null) {
-			PacketSendUtility.sendPacket(player, new SM_PET(1, petCommonData));
+			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.ADOPT, petCommonData));
 			if (expireTime > 0)
 				ExpireTimerTask.getInstance().addTask(petCommonData, player);
 		}
@@ -88,10 +89,10 @@ public class PetAdoptionService {
 		if (player.getPet() != null && player.getPet().getPetId() == petCommonData.getPetId()) {
 			if (petCommonData.getFeedProgress() != null)
 				petCommonData.setCancelFeed(true);
-			PetSpawnService.dismissPet(player, false);
+			PetSpawnService.dismissPet(player);
 		}
 		player.getPetList().deletePet(petCommonData.getPetId());
-		PacketSendUtility.sendPacket(player, new SM_PET(2, petCommonData));
+		PacketSendUtility.sendPacket(player, new SM_PET(PetAction.SURRENDER, petCommonData));
 	}
 
 }

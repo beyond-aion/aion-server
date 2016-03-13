@@ -181,9 +181,9 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcasts packet to all visible players matching a filter
+	 * Broadcasts packet to all known players matching a filter
 	 *
-	 * @param player
+	 * @param object
 	 * @param packet
 	 *          ServerPacket to be broadcast
 	 * @param toSelf
@@ -191,19 +191,13 @@ public class PacketSendUtility {
 	 * @param filter
 	 *          filter determining who should be messaged
 	 */
-	public static void broadcastPacket(Player player, final AionServerPacket packet, boolean toSelf, final ObjectFilter<Player> filter) {
-		if (toSelf) {
-			sendPacket(player, packet);
-		}
+	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, ObjectFilter<Player> filter) {
+		if (toSelf && object instanceof Player)
+			sendPacket((Player) object, packet);
 
-		player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player object) {
-				if (filter.acceptObject(object))
-					sendPacket(object, packet);
-			}
-
+		object.getKnownList().doOnAllPlayers(player -> {
+			if (filter.acceptObject(player))
+				sendPacket(player, packet);
 		});
 	}
 
@@ -279,25 +273,18 @@ public class PacketSendUtility {
 
 		});
 	}
-	
+
 	/**
-	 * Broadcast filtered Packet to all Players from knownlist of the given VisibleObject
-	 * 
-	 * @param visibleObject
-	 * @param packet
-	 * @param filter
+	 * Broadcasts a packet to all players who can see the specified object.
 	 */
-	public static void broadcastFilteredPacket(VisibleObject visibleObject, final AionServerPacket packet,final ObjectFilter<Player> filter ) {
-		visibleObject.getKnownList().doOnAllPlayers(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player player) {
-				if (player.isOnline() && filter.acceptObject(player)) {
-					sendPacket(player, packet);
-				}
-			}
-
-		});
+	public static void broadcastToSightedPlayers(VisibleObject object, AionServerPacket packet) {
+		broadcastToSightedPlayers(object, packet, false);
 	}
 
+	/**
+	 * Broadcasts a packet to all players who can see the specified object.
+	 */
+	public static void broadcastToSightedPlayers(VisibleObject object, AionServerPacket packet, boolean toSelf) {
+		broadcastPacket(object, packet, toSelf, other -> other.getKnownList().sees(object));
+	}
 }

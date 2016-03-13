@@ -79,7 +79,7 @@ public class DropService {
 						// fix for elyos/asmodians being able to loot elyos/asmodian npcs
 						// TODO there might be more npcs who are friendly towards players and should not be loot able by them
 						if (npc instanceof Npc && (Race.ASMODIANS == ((Npc) npc).getRace() || Race.ELYOS == ((Npc) npc).getRace())) {
-							PacketSendUtility.broadcastFilteredPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), new ObjectFilter<Player>() {
+							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), false, new ObjectFilter<Player>() {
 
 								@Override
 								public boolean acceptObject(Player object) {

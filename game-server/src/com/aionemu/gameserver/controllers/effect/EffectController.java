@@ -257,16 +257,6 @@ public class EffectController {
 	}
 
 	/**
-	 * Used when player see new player
-	 * 
-	 * @param player
-	 */
-	public void sendEffectIconsTo(Player player) {
-		List<Effect> effects = getAbnormalEffects();
-		PacketSendUtility.sendPacket(player, new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, SkillTargetSlot.FULLSLOTS));
-	}
-
-	/**
 	 * @param effect
 	 */
 	public void clearEffect(Effect effect, boolean broadCastEffects) {

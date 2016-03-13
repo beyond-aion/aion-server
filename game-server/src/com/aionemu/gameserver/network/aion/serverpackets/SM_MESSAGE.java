@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 
 /**
  * Message [chat, etc]
@@ -82,7 +83,7 @@ public class SM_MESSAGE extends AionServerPacket {
 	 *          what chat type should be used
 	 */
 	public SM_MESSAGE(Player sender, String message, ChatType chatType) {
-		this(sender, sender.getObjectId(), sender.getName(AdminConfig.CUSTOMTAG_ENABLE), message, chatType);
+		this(sender, sender.getEffectController().isAbnormalSet(AbnormalState.HIDE) ? 0 : sender.getObjectId(), sender.getName(AdminConfig.CUSTOMTAG_ENABLE), message, chatType);
 	}
 
 	/**

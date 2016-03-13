@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -289,10 +290,10 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_REPURCHASE(player, npc.getObjectId()));
 					break;
 				case PET_ADOPT: // adopt pet (2.5)
-					PacketSendUtility.sendPacket(player, new SM_PET(6));
+					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MERCHANT));
 					break;
 				case PET_ABANDON: // surrender pet (2.5)
-					PacketSendUtility.sendPacket(player, new SM_PET(7));
+					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MINDER));
 					break;
 				case CHARGE_ITEM_MULTI: // condition all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 1);
@@ -327,10 +328,10 @@ public class DialogService {
 					sendDialogWindow(dialogId, player, npc);
 					break;
 				case FUNC_PET_H_ADOPT:
-					PacketSendUtility.sendPacket(player, new SM_PET(16));
+					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ADOPT));
 					break;
 				case FUNC_PET_H_ABANDON:
-					PacketSendUtility.sendPacket(player, new SM_PET(17));
+					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ABANDON));
 					break;
 				case CHARGE_ITEM_MULTI2: // augmenting all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 2);

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -26,42 +25,39 @@ import com.google.common.base.Predicate;
 public class PlayerInfo extends AdminCommand {
 
 	public PlayerInfo() {
-		super("playerinfo");
+		super("playerinfo", "Shows information about a player.");
+		setParamInfo("<player name> <loc|item|group|skills|legion|ap|chars|knownlist|visuallist>");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(admin,
-				"syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
 		Player target = World.getInstance().findPlayer(Util.convertName(params[0]));
-
 		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "Selected player is not online!");
+			sendInfo(admin, "Selected player is not online!");
 			return;
 		}
 
-		PacketSendUtility.sendMessage(admin, "\n[Info about " + target.getName() + "]\n-common: lv" + target.getLevel() + "("
-			+ target.getCommonData().getExpShown() + " xp), " + target.getRace() + ", " + target.getPlayerClass() + "\n-ip: "
-			+ target.getClientConnection().getIP() + "\n" + "-account name: " + target.getClientConnection().getAccount().getName() + "\n");
+		sendInfo(admin,
+			"\n[Info about " + target.getName() + "]\n-common: lv" + target.getLevel() + "(" + target.getCommonData().getExpShown() + " xp), "
+				+ target.getRace() + ", " + target.getPlayerClass() + "\n-ip: " + target.getClientConnection().getIP() + "\n" + "-account name: "
+				+ target.getClientConnection().getAccount().getName() + "\n");
 
 		if (params.length < 2)
 			return;
 
 		if (params[1].equals("item")) {
 			StringBuilder strbld = new StringBuilder("-items in inventory:\n");
-
 			List<Item> items = target.getInventory().getItemsWithKinah();
 			Iterator<Item> it = items.iterator();
-
 			if (items.isEmpty())
 				strbld.append("none\n");
 			else
 				while (it.hasNext()) {
-
 					Item act = it.next();
 					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
 				}
@@ -76,8 +72,6 @@ public class PlayerInfo extends AdminCommand {
 					Item act = it.next();
 					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
 				}
-
-			// items.clear();
 			items = target.getWarehouse().getItemsWithKinah();
 			it = items.iterator();
 			strbld.append("-items in warehouse:\n");
@@ -86,135 +80,75 @@ public class PlayerInfo extends AdminCommand {
 			else
 				while (it.hasNext()) {
 					Item act = it.next();
-					strbld.append("\t" + act.getItemCount() + "x "  + ChatUtil.item(act.getItemId()) + "\n");
+					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
 				}
-			showAllLines(admin, strbld.toString());
+			sendInfo(admin, strbld.toString());
 		} else if (params[1].equals("group")) {
-			final StringBuilder strbld = new StringBuilder("-group info:\n  Leader: ");
+			final StringBuilder strbld = new StringBuilder("-group info:\n\tLeader: ");
 
 			PlayerGroup group = target.getPlayerGroup2();
 			if (group == null)
-				PacketSendUtility.sendMessage(admin, "-group info: no group");
+				sendInfo(admin, "-group info: no group");
 			else {
-				strbld.append(group.getLeader().getName() + "\n  Members:\n");
+				strbld.append(group.getLeader().getName() + "\n\tMembers:\n");
 				group.applyOnMembers(new Predicate<Player>() {
 
 					@Override
 					public boolean apply(Player player) {
-						strbld.append("    " + player.getName() + "\n");
+						strbld.append("\t\t" + player.getName() + "\n");
 						return true;
 					}
-
 				});
-				PacketSendUtility.sendMessage(admin, strbld.toString());
+				sendInfo(admin, strbld.toString());
 			}
-
-		} else if (params[1].equals("skill")) {
+		} else if (params[1].equals("skills")) {
 			StringBuilder strbld = new StringBuilder("-list of skills:\n");
-
 			for (PlayerSkillEntry skill : target.getSkillList().getAllSkills())
-				strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillName() + "\n");
-			showAllLines(admin, strbld.toString());
+				strbld.append("\tlevel " + skill.getSkillLevel() + " of " + skill.getSkillName() + "\n");
+			sendInfo(admin, strbld.toString());
 		} else if (params[1].equals("loc")) {
 			String chatLink = ChatUtil.position(target.getName(), target.getPosition());
-			PacketSendUtility.sendMessage(admin, "- " + chatLink + "'s location:\n\tMap ID: " + target.getWorldId() + "\n  X: " + target.getX() + " Y: "
-				+ target.getY() + " Z: " + target.getZ() + " Heading: " + target.getHeading());
+			sendInfo(admin, "- " + chatLink + "'s location:\n\t" + target.getPosition());
 		} else if (params[1].equals("legion")) {
-			StringBuilder strbld = new StringBuilder();
-
 			Legion legion = target.getLegion();
 			if (legion == null)
-				PacketSendUtility.sendMessage(admin, "-legion info: no legion");
+				sendInfo(admin, "-legion info: no legion");
 			else {
+				StringBuilder strbld = new StringBuilder();
 				List<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
 				Iterator<LegionMemberEx> it = legionmemblist.iterator();
-
-				strbld.append("-legion info:\n  name: " + legion.getLegionName() + ", level: " + legion.getLegionLevel() + "\n  members(online):\n");
+				strbld.append("-legion info:\n\tname: " + legion.getLegionName() + ", level: " + legion.getLegionLevel() + "\n\tmembers(online):\n");
 				while (it.hasNext()) {
 					LegionMemberEx act = it.next();
-					strbld.append("    " + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
+					strbld.append("\t\t" + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
 				}
+				sendInfo(admin, strbld.toString());
 			}
-			showAllLines(admin, strbld.toString());
 		} else if (params[1].equals("ap")) {
-			PacketSendUtility.sendMessage(admin, "AP info about " + target.getName());
-			PacketSendUtility.sendMessage(admin, "Total AP = " + target.getAbyssRank().getAp());
-			PacketSendUtility.sendMessage(admin, "Total Kills = " + target.getAbyssRank().getAllKill());
-			PacketSendUtility.sendMessage(admin, "Today Kills = " + target.getAbyssRank().getDailyKill());
-			PacketSendUtility.sendMessage(admin, "Today AP = " + target.getAbyssRank().getDailyAP());
+			sendInfo(admin, "AP info about " + target.getName());
+			sendInfo(admin, "Total AP = " + target.getAbyssRank().getAp());
+			sendInfo(admin, "Total Kills = " + target.getAbyssRank().getAllKill());
+			sendInfo(admin, "Today Kills = " + target.getAbyssRank().getDailyKill());
+			sendInfo(admin, "Today AP = " + target.getAbyssRank().getDailyAP());
 		} else if (params[1].equals("chars")) {
-			PacketSendUtility.sendMessage(admin, "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size()
-				+ ") :");
-
+			sendInfo(admin, "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size() + ") :");
 			Iterator<PlayerAccountData> data = target.getClientConnection().getAccount().iterator();
 			while (data.hasNext()) {
 				PlayerAccountData d = data.next();
 				if (d != null && d.getPlayerCommonData() != null) {
-					PacketSendUtility.sendMessage(admin, d.getPlayerCommonData().getName());
+					sendInfo(admin, d.getPlayerCommonData().getName());
 				}
 			}
 		} else if (params[1].equals("knownlist")) {
-			if (params[2].equals("info")) {
-				PacketSendUtility.sendMessage(admin, "KnownList of " + target.getName());
-
-				for (VisibleObject obj : target.getKnownList().getKnownObjects().values())
-					PacketSendUtility.sendMessage(admin, obj.getName() + " objectId:" + obj.getObjectId());
-			} else if (params[2].equals("add")) {
-				int objId = Integer.parseInt(params[3]);
-				VisibleObject obj = World.getInstance().findVisibleObject(objId);
-				if (obj != null && !target.getKnownList().getKnownObjects().containsKey(objId))
-					target.getKnownList().getKnownObjects().put(objId, obj);
-			} else if (params[2].equals("remove")) {
-				int objId = Integer.parseInt(params[3]);
-				VisibleObject obj = World.getInstance().findVisibleObject(objId);
-				if (obj != null && target.getKnownList().getKnownObjects().containsKey(objId))
-					target.getKnownList().getKnownObjects().remove(objId);
-			}
-		} else if (params[1].equals("visual")) {
-			if (params[2].equals("info")) {
-				PacketSendUtility.sendMessage(admin, "VisualList of " + target.getName());
-
-				for (VisibleObject obj : target.getKnownList().getVisibleObjects().values())
-					PacketSendUtility.sendMessage(admin, obj.getName() + " objectId:" + obj.getObjectId());
-			} else if (params[2].equals("see")) {
-				int objId = Integer.parseInt(params[3]);
-				Player player = World.getInstance().findPlayer(objId);
-				target.getController().see(player);
-			} else if (params[2].equals("notsee")) {
-				int objId = Integer.parseInt(params[3]);
-				Player player = World.getInstance().findPlayer(objId);
-				target.getController().notSee(player, true);
-			}
+			sendInfo(admin, "KnownList of " + target.getName());
+			for (VisibleObject obj : target.getKnownList().getKnownObjects().values())
+				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
+		} else if (params[1].equals("visuallist")) {
+			sendInfo(admin, "VisualList of " + target.getName());
+			for (VisibleObject obj : target.getKnownList().getVisibleObjects().values())
+				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
 		} else {
-			PacketSendUtility.sendMessage(admin, "bad switch!");
-			PacketSendUtility.sendMessage(admin,
-				"syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
+			sendInfo(admin);
 		}
 	}
-
-	private void showAllLines(Player admin, String str) {
-		int index = 0;
-		String[] strarray = str.split("\n");
-
-		while (index < strarray.length - 20) {
-			StringBuilder strbld = new StringBuilder();
-			for (int i = 0; i < 20; i++, index++) {
-				strbld.append(strarray[index]);
-				if (i < 20 - 1)
-					strbld.append("\n");
-			}
-			PacketSendUtility.sendMessage(admin, strbld.toString());
-		}
-		int odd = strarray.length - index;
-		StringBuilder strbld = new StringBuilder();
-		for (int i = 0; i < odd; i++, index++)
-			strbld.append(strarray[index] + "\n");
-		PacketSendUtility.sendMessage(admin, strbld.toString());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars> ");
-	}
-
 }

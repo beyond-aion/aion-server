@@ -23,6 +23,7 @@ import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Homing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -61,8 +62,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	private ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
-		super.notSee(object, inRange);
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
+		super.notSee(object, animation);
 		if (object.equals(getOwner().getTarget()))
 			getOwner().setTarget(null);
 	}

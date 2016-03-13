@@ -1,12 +1,14 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 
 /**
  * @author ATracer
@@ -14,19 +16,21 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 
 	private Creature effected;
-	private int effectType = 1;// 1: creature 2: effected is player
+	private int effectType;
 	private int abnormals;
 	private Collection<Effect> filtered;
-	private int slot;
+	private int slots;
 
-	public SM_ABNORMAL_EFFECT(Creature effected, int abnormals, Collection<Effect> effects, int slot) {
-		this.abnormals = abnormals;
+	public SM_ABNORMAL_EFFECT(Creature effected) {
+		this(effected, effected.getEffectController().getAbnormals(), effected.getEffectController().getAbnormalEffects(), SkillTargetSlot.FULLSLOTS);
+	}
+
+	public SM_ABNORMAL_EFFECT(Creature effected, int abnormals, Collection<Effect> effects, int slots) {
 		this.effected = effected;
-		this.filtered = effects;
-		this.slot = slot;
-
-		if (effected instanceof Player)
-			effectType = 2;
+		this.abnormals = abnormals;
+		this.filtered = slots == SkillTargetSlot.FULLSLOTS ? effects : effects.stream().filter(e -> (slots & e.getTargetSlotEnum().getId()) != 0).collect(Collectors.toList());
+		this.slots = slots;
+		this.effectType = effected instanceof Player ? 2 : 1;
 	}
 
 	@Override
@@ -36,9 +40,8 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 		writeD(0); // TODO time
 		writeD(abnormals); // unk
 		writeD(0); // unk
-		writeC(slot); // 4.5
+		writeC(slots); // 4.5
 		writeH(filtered.size()); // effects size
-
 		for (Effect effect : filtered) {
 			switch (effectType) {
 				case 2:

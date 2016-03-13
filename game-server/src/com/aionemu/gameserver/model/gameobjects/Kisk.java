@@ -223,7 +223,7 @@ public class Kisk extends SummonedObject<Player> {
 	private void broadcastKiskUpdate() {
 		// on all members, but not the ones in knownlist, they will receive the update in the next step
 		for (Player member : this.getCurrentMemberList()) {
-			if (!this.getKnownList().knowns(member))
+			if (!this.getKnownList().knows(member))
 				PacketSendUtility.sendPacket(member, new SM_KISK_UPDATE(this));
 		}
 

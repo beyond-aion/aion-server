@@ -1,10 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
@@ -13,7 +11,6 @@ import com.aionemu.gameserver.taskmanager.tasks.TeamMoveUpdater;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * Packet about player movement.
@@ -103,7 +100,7 @@ public class CM_MOVE extends AionClientPacket {
 				if (player.isAdminTeleportation()) {
 					World.getInstance().updatePosition(player, x2, y2, z2, heading);
 					m.updateLastMove();
-					PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
+					PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player), true);
 					return;
 				}
 			}
@@ -130,26 +127,11 @@ public class CM_MOVE extends AionClientPacket {
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.updateLastMove();
 
-		if (player.isInGroup2() || player.isInAlliance2()) {
+		if (player.isInTeam())
 			TeamMoveUpdater.getInstance().startTask(player);
-		}
 
-		if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE || type == 0) {
-			player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player observer) {
-					if (observer.isOnline()) {
-						if (SecurityConfig.INVIS && (!observer.canSee(player) || player.isInVisualState(CreatureVisualState.BLINKING))) {
-							return;
-						}
-
-						PacketSendUtility.sendPacket(observer, new SM_MOVE(player));
-					}
-				}
-
-			});
-		}
+		if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE || type == 0)
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
 			player.getFlyController().onStopGliding();
@@ -165,5 +147,4 @@ public class CM_MOVE extends AionClientPacket {
 			+ ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ + ", vectorX=" + vectorX + ", vectorY=" + vectorY
 			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
 	}
-
 }

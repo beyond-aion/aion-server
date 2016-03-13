@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.PetController;
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.controllers.movement.MoveController;
-import com.aionemu.gameserver.controllers.movement.PetMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
@@ -28,7 +28,7 @@ public class Pet extends VisibleObject {
 		controller.setOwner(this);
 		this.master = master;
 		this.petTemplate = petTemplate;
-		this.moveController = new PetMoveController();
+		this.moveController = new CreatureMoveController<Pet>(this) {};
 	}
 
 	public Player getMaster() {

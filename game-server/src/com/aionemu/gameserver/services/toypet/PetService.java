@@ -12,6 +12,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.common.legacy.LootRuleType;
@@ -54,17 +55,17 @@ public class PetService {
 		if (pet != null) {
 			pet.getCommonData().setName(name);
 			DAOManager.getDAO(PlayerPetsDAO.class).updatePetName(pet.getCommonData());
-			PacketSendUtility.broadcastPacket(player, new SM_PET(10, pet), true);
+			PacketSendUtility.broadcastPacket(player, new SM_PET(PetAction.RENAME, pet), true);
 		}
 	}
 
 	public void onPlayerLogin(Player player) {
 		Collection<PetCommonData> playerPets = player.getPetList().getPets();
 		if (playerPets != null && playerPets.size() > 0)
-			PacketSendUtility.sendPacket(player, new SM_PET(0, playerPets));
+			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.LOAD_PETS, playerPets));
 	}
 
-	public void removeObject(int objectId, int count, int action, Player player) {
+	public void removeObject(int objectId, int count, PetAction action, Player player) {
 		Item item = player.getInventory().getItemByObjId(objectId);
 		if (item == null || player.getPet() == null || count > item.getItemCount())
 			return;
@@ -77,7 +78,7 @@ public class PetService {
 		schedule(pet, player, item, count, action);
 	}
 
-	private void schedule(final Pet pet, final Player player, final Item item, final int count, final int action) {
+	private void schedule(final Pet pet, final Player player, final Item item, final int count, PetAction action) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -88,7 +89,7 @@ public class PetService {
 		}, 2500);
 	}
 
-	private void checkFeeding(Pet pet, Player player, Item item, int count, int action) {
+	private void checkFeeding(Pet pet, Player player, Item item, int count, PetAction action) {
 		PetCommonData commonData = pet.getCommonData();
 		PetFeedProgress progress = commonData.getFeedProgress();
 

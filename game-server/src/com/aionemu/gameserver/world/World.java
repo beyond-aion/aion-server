@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -442,10 +443,10 @@ public class World {
 	 *           if object is already despawned
 	 */
 	public void despawn(VisibleObject object) {
-		despawn(object, true);
+		despawn(object, ObjectDeleteAnimation.FADE_OUT);
 	}
 
-	public void despawn(VisibleObject object, boolean clearKnownlist) {
+	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
 		MapRegion oldMapRegion = object.getActiveRegion();
 		if (oldMapRegion != null) { // can be null if an instance gets deleted?
 			if (oldMapRegion.getParent() != null)
@@ -456,8 +457,7 @@ public class World {
 		if (oldMapRegion != null && object instanceof Creature) {
 			oldMapRegion.revalidateZones((Creature) object);
 		}
-		if (clearKnownlist)
-			object.clearKnownlist();
+		object.clearKnownlist(animation);
 	}
 
 	/**

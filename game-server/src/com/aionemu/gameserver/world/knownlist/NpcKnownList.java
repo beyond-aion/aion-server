@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.world.knownlist;
 
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.world.MapRegion;
 
@@ -18,6 +19,6 @@ public class NpcKnownList extends CreatureAwareKnownList {
 		if (activeRegion != null && activeRegion.isMapRegionActive())
 			super.doUpdate();
 		else
-			clear();
+			clear(ObjectDeleteAnimation.FADE_OUT);
 	}
 }

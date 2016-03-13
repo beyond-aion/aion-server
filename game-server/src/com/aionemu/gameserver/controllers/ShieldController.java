@@ -3,6 +3,7 @@ package com.aionemu.gameserver.controllers;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.shield.Shield;
@@ -24,31 +25,24 @@ public class ShieldController extends VisibleObjectController<Shield> {
 		FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
 		Player player = (Player) object;
 
-		if (loc.isUnderShield())
-			if (loc.getRace() != SiegeRace.getByRace(player.getRace())) {
-				ActionObserver observer = ShieldService.getInstance().createShieldObserver(loc.getLocationId(), player);
-				if (observer != null) {
-					player.getObserveController().addObserver(observer);
-					observed.put(player.getObjectId(), observer);
-				}
+		if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
+			ActionObserver observer = ShieldService.getInstance().createShieldObserver(loc.getLocationId(), player);
+			if (observer != null) {
+				player.getObserveController().addObserver(observer);
+				observed.put(player.getObjectId(), observer);
 			}
+		}
 	}
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
 		Player player = (Player) object;
 
-		if (loc.isUnderShield())
-			if (loc.getRace() != SiegeRace.getByRace(player.getRace())) {
-				ActionObserver observer = observed.remove(player.getObjectId());
-				if (observer != null) {
-					if (!inRange)
-						observer.moved();
-
-					player.getObserveController().removeObserver(observer);
-				}
-			}
+		if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
+			ActionObserver observer = observed.remove(player.getObjectId());
+			player.getObserveController().removeObserver(observer);
+		}
 	}
 
 	public void disable() {
@@ -59,5 +53,4 @@ public class ShieldController extends VisibleObjectController<Shield> {
 				player.getObserveController().removeObserver(observer);
 		}
 	}
-
 }

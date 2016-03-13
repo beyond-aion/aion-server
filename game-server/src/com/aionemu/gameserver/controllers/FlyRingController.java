@@ -3,6 +3,7 @@ package com.aionemu.gameserver.controllers;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.controllers.observer.FlyRingObserver;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,11 +24,9 @@ public class FlyRingController extends VisibleObjectController<FlyRing> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		Player p = (Player) object;
 		FlyRingObserver observer = observed.remove(p.getObjectId());
-		if (!inRange)
-			observer.moved();
 		p.getObserveController().removeObserver(observer);
 	}
 }

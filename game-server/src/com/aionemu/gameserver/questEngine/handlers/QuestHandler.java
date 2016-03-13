@@ -686,7 +686,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (!(env.getVisibleObject() instanceof Npc)) {
 			return false;
 		}
-		PacketSendUtility.sendPacket(player, new SM_NPC_INFO(follower, player));
+		PacketSendUtility.sendPacket(player, new SM_NPC_INFO(follower));
 		follower.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 		player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, follower, x, y, z));
 		if (step == 0 && nextStep == 0) {

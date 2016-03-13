@@ -318,7 +318,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			Creature creature = ((Creature) ai.getAttacker()).getMaster();
 
 			// Don't include damage from creatures outside the known list.
-			if (creature == null || !owner.getKnownList().knowns(creature)) {
+			if (creature == null || !owner.getKnownList().knows(creature)) {
 				continue;
 			}
 

@@ -9,10 +9,10 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.MapRegion;
  * KnownList.
  * 
  * @author -Nemesiss-
- * @modified kosyachok
+ * @modified kosyachok, Neon
  */
 public class KnownList {
 
@@ -34,22 +34,22 @@ public class KnownList {
 	protected final VisibleObject owner;
 
 	/**
-	 * List of objects that this KnownList owner known
+	 * List of objects that this KnownList owner knows
 	 */
 	protected final Map<Integer, VisibleObject> knownObjects = new ConcurrentHashMap<>();
 
 	/**
-	 * List of player that this KnownList owner known
+	 * List of player that this KnownList owner knows
 	 */
 	protected volatile Map<Integer, Player> knownPlayers;
 
 	/**
-	 * List of objects that this KnownList owner known
+	 * List of objects that this KnownList owner sees
 	 */
 	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
 
 	/**
-	 * List of player that this KnownList owner known
+	 * List of players that this KnownList owner sees
 	 */
 	protected volatile Map<Integer, Player> visualPlayers;
 
@@ -77,10 +77,13 @@ public class KnownList {
 
 	/**
 	 * Clear known list. Used when object is despawned.
+	 * 
+	 * @param animation
+	 *          - the animation others will see on despawn
 	 */
-	public void clear() {
+	public void clear(ObjectDeleteAnimation animation) {
 		for (VisibleObject object : knownObjects.values())
-			object.getKnownList().del(owner, true);
+			object.getKnownList().del(owner, animation);
 
 		knownObjects.clear();
 		if (knownPlayers != null) {
@@ -93,13 +96,17 @@ public class KnownList {
 	}
 
 	/**
-	 * Check if object is known
-	 * 
-	 * @param object
-	 * @return true if object is known
+	 * Checks if owner knows the object.
 	 */
-	public boolean knowns(AionObject object) {
+	public boolean knows(VisibleObject object) {
 		return knownObjects.containsKey(object.getObjectId());
+	}
+
+	/**
+	 * Checks if owner sees the object.
+	 */
+	public boolean sees(VisibleObject object) {
+		return visualObjects.containsKey(object.getObjectId());
 	}
 
 	/**
@@ -117,6 +124,11 @@ public class KnownList {
 				knownPlayers.put(object.getObjectId(), (Player) object);
 			}
 
+			if (object instanceof Player && !owner.canSee((Player) object))
+				return true;
+			if (object instanceof Pet && !sees(((Pet) object).getMaster()) && !owner.equals(((Pet) object).getMaster()))
+				return true; // pet won't display if client doesn't already see the master (spawn order is important, so playercontroller must handle it)
+
 			addVisualObject(object);
 			return true;
 		}
@@ -125,49 +137,42 @@ public class KnownList {
 	}
 
 	public void addVisualObject(VisibleObject object) {
-		if (object instanceof Creature) {
-			if (SecurityConfig.INVIS && object instanceof Player) {
-				if (!owner.canSee((Player) object)) {
-					return;
-				}
+		if (visualObjects.put(object.getObjectId(), object) == null) {
+			if (object instanceof Player) {
+				checkVisiblePlayersInitialized();
+				visualPlayers.put(object.getObjectId(), (Player) object);
 			}
-
-			if (visualObjects.put(object.getObjectId(), object) == null) {
-				if (object instanceof Player) {
-					Player player = (Player) object;
-					if (!player.getCommonData().isOnline())
-						return;
-					checkVisiblePlayersInitialized();
-					visualPlayers.put(player.getObjectId(), player);
-				}
-				owner.getController().see(object);
-			}
-		} else if (visualObjects.put(object.getObjectId(), object) == null) {
 			owner.getController().see(object);
 		}
 	}
 
 	/**
-	 * Delete VisibleObject from this KnownList.
+	 * Removes VisibleObject from this KnownList and deletes it.
 	 * 
 	 * @param object
+	 * @param animation
+	 *          - the disappear animation others will see
 	 */
-	private void del(VisibleObject object, boolean inRange) {
-		/**
-		 * object was known.
-		 */
+	private void del(VisibleObject object, ObjectDeleteAnimation animation) {
 		if (knownObjects.remove(object.getObjectId()) != null) {
 			if (knownPlayers != null)
 				knownPlayers.remove(object.getObjectId());
-			delVisualObject(object, inRange);
+			delVisualObject(object, animation);
 		}
 	}
 
-	public void delVisualObject(VisibleObject object, boolean inRange) {
+	/**
+	 * Deletes VisibleObject.
+	 * 
+	 * @param object
+	 * @param animation
+	 *          - the disappear animation others will see
+	 */
+	public void delVisualObject(VisibleObject object, ObjectDeleteAnimation animation) {
 		if (visualObjects.remove(object.getObjectId()) != null) {
 			if (visualPlayers != null)
 				visualPlayers.remove(object.getObjectId());
-			owner.getController().notSee(object, inRange);
+			owner.getController().notSee(object, animation);
 		}
 	}
 
@@ -177,8 +182,8 @@ public class KnownList {
 	private void forgetObjects() {
 		for (VisibleObject object : knownObjects.values()) {
 			if (!checkObjectInRange(object) && !object.getKnownList().checkReversedObjectInRange(owner)) {
-				del(object, false);
-				object.getKnownList().del(owner, false);
+				del(object, ObjectDeleteAnimation.NONE);
+				object.getKnownList().del(owner, ObjectDeleteAnimation.NONE);
 			}
 		}
 	}
@@ -202,8 +207,7 @@ public class KnownList {
 					}
 				});
 			}
-		}
-		if (owner instanceof Player) {
+		} else if (owner instanceof Player) {
 			for (Npc npc : owner.getPosition().getWorldMapInstance().getNpcs()) {
 				if (npc.isFlag()) {
 					if (add(npc)) {
@@ -218,12 +222,12 @@ public class KnownList {
 			Map<Integer, VisibleObject> objects = r.getObjects();
 			for (Entry<Integer, VisibleObject> e : objects.entrySet()) {
 				VisibleObject newObject = e.getValue();
-				if (newObject == owner || newObject == null)
+				if (newObject == null || owner.equals(newObject))
 					continue;
 
-				if (!isAwareOf(newObject)) {
+				if (!isAwareOf(newObject))
 					continue;
-				}
+
 				if (knownObjects.containsKey(newObject.getObjectId()))
 					continue;
 
@@ -376,6 +380,29 @@ public class KnownList {
 	}
 
 	public VisibleObject getObject(int targetObjectId) {
-		return this.knownObjects.get(targetObjectId);
+		return knownObjects.get(targetObjectId);
+	}
+
+	/**
+	 * Updates visibility of all known players, depending on the current see state of the owner of this {@link KnownList}.
+	 */
+	public void updateVisiblePlayers() {
+		if (!(owner instanceof Player))
+			return;
+
+		doOnAllPlayers(other -> {
+			boolean canSee = owner.canSee(other);
+			boolean isSee = sees(other);
+
+			if (canSee && !isSee) {
+				addVisualObject(other);
+				if (other.getPet() != null)
+					addVisualObject(other.getPet());
+			} else if (!canSee && isSee) {
+				delVisualObject(other, ObjectDeleteAnimation.FADE_OUT);
+				if (other.getPet() != null)
+					delVisualObject(other.getPet(), ObjectDeleteAnimation.FADE_OUT);
+			}
+		});
 	}
 }

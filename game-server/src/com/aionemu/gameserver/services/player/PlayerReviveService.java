@@ -181,7 +181,7 @@ public class PlayerReviveService {
 		revive(player, 25, 25, true, skillId);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		if (map.isInstanceType() && player.getPosition().getWorldMapInstance().getStartPos() != null) {
 			float[] coords = player.getPosition().getWorldMapInstance().getStartPos();

@@ -66,7 +66,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 							npc.getController().onDelete();
 							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(),
 								player.getZ(), (byte) 0);
-							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor, player));
+							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor));
 							survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 							player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204828));
 							return defaultCloseDialog(env, 0, 1); // 1

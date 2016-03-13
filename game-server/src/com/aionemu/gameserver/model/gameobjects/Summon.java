@@ -12,6 +12,7 @@ import com.aionemu.gameserver.controllers.attack.PlayerAggroList;
 import com.aionemu.gameserver.controllers.movement.SiegeWeaponMoveController;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -144,17 +145,17 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		return master != null ? master.isEnemy(creature) : false;
+		return master != null && master.isEnemy(creature);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Npc npc) {
-		return master != null ? master.isEnemyFrom(npc) : false;
+		return master != null && master.isEnemyFrom(npc);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return master != null ? master.isEnemyFrom(player) : false;
+		return master != null && master.isEnemyFrom(player);
 	}
 
 	@Override
@@ -162,6 +163,12 @@ public class Summon extends Creature {
 		if (master == null)
 			return ((NpcTemplate) objectTemplate).getTribe();
 		return master.getTribe();
+	}
+
+	@Override
+	public int getType(Creature creature) {
+		boolean friend = master == null || master.getRace().equals(creature.getRace()) && !creature.isEnemy(master);
+		return friend ? CreatureType.SUPPORT.getId() : CreatureType.ATTACKABLE.getId();
 	}
 
 	@Override

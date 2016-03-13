@@ -4,16 +4,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE_OBJECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OBJECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Rolandas
@@ -28,30 +26,18 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 		ActionObserver observer = new ActionObserver(ObserverType.MOVE);
 		p.getObserveController().addObserver(observer);
 		observed.put(p.getObjectId(), observer);
-		PacketSendUtility.sendPacket(p, new SM_HOUSE_OBJECT(getOwner()));
 	}
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		Player p = (Player) object;
 		ActionObserver observer = observed.remove(p.getObjectId());
-		if (!inRange) {
-			observer.moved();
-			PacketSendUtility.sendPacket(p, new SM_DELETE_HOUSE_OBJECT(getOwner().getObjectId()));
-		}
 		p.getObserveController().removeObserver(observer);
 	}
 
 	@Override
 	public void onDespawn() {
 		getOwner().onDespawn();
-	}
-
-	@Override
-	public void delete() {
-		if (getOwner().isSpawned())
-			World.getInstance().despawn(getOwner(), false);
-		World.getInstance().removeObject(getOwner());
 	}
 
 	public void onDialogRequest(Player player) {

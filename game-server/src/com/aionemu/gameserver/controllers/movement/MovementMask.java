@@ -9,7 +9,7 @@ public class MovementMask {
 
 	public static final byte GLIDE = (byte) 0xC4;
 	public static final byte FALL = (byte) 0x08;
-	public static final byte VEHICLE = (byte) 0x10;
+	public static final byte VEHICLE = (byte) 0x10; // e.g. elevator
 	public static final byte MOUSE = (byte) 0x20;
 	public static final byte STARTMOVE = (byte) 0xC0;
 

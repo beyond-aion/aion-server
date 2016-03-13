@@ -253,9 +253,8 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 	@Override
 	public void onDespawn() {
 		Gatherable owner = getOwner();
-		if (!getOwner().isInInstance()) {
+		if (!owner.isInInstance())
 			RespawnService.scheduleRespawnTask(owner);
-		}
 		World.getInstance().despawn(owner);
 	}
 

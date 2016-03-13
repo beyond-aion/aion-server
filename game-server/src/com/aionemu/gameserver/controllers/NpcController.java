@@ -16,6 +16,7 @@ import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -57,8 +58,8 @@ public class NpcController extends CreatureController<Npc> {
 	private static final Logger log = LoggerFactory.getLogger(NpcController.class);
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
-		super.notSee(object, inRange);
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
+		super.notSee(object, animation);
 		if (object instanceof Creature) {
 			getOwner().getAi2().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, (Creature) object);
 			getOwner().getAggroList().remove((Creature) object);

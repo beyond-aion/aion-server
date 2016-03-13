@@ -21,7 +21,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_PET extends AionClientPacket {
 
-	private int actionId;
 	private PetAction action;
 	private int petId;
 	private String petName;
@@ -47,8 +46,7 @@ public class CM_PET extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		actionId = readH();
-		action = PetAction.getActionById(actionId);
+		action = PetAction.getActionById(readH());
 		switch (action) {
 			case ADOPT:
 				eggObjId = readD();
@@ -114,15 +112,14 @@ public class CM_PET extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null) {
+		if (player == null)
 			return;
-		}
+
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
-				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName)) {
+				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME);
-				}
 				else
 					PetAdoptionService.adoptPet(player, eggObjId, petId, petName, decorationId);
 				break;
@@ -133,10 +130,10 @@ public class CM_PET extends AionClientPacket {
 				PetAdoptionService.surrenderPet(player, petId);
 				break;
 			case SPAWN:
-				PetSpawnService.summonPet(player, petId, true);
+				PetSpawnService.summonPet(player, petId);
 				break;
 			case DISMISS:
-				PetSpawnService.dismissPet(player, true);
+				PetSpawnService.dismissPet(player);
 				break;
 			case FOOD:
 				if (actionType == 2) {
@@ -151,12 +148,12 @@ public class CM_PET extends AionClientPacket {
 				} else if (pet != null) {
 					if (objectId == 0) {
 						pet.getCommonData().setCancelFeed(true);
-						PacketSendUtility.sendPacket(player, new SM_PET(4, actionId, 0, 0, player.getPet()));
+						PacketSendUtility.sendPacket(player, new SM_PET(4, action, 0, 0, player.getPet()));
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 					} else if (!pet.getCommonData().isFeedingTime()) {
-						PacketSendUtility.sendPacket(player, new SM_PET(8, actionId, objectId, count, player.getPet()));
+						PacketSendUtility.sendPacket(player, new SM_PET(8, action, objectId, count, player.getPet()));
 					} else
-						PetService.getInstance().removeObject(objectId, count, actionId, player);
+						PetService.getInstance().removeObject(objectId, count, action, player);
 				}
 				break;
 			case RENAME:
@@ -170,7 +167,6 @@ public class CM_PET extends AionClientPacket {
 					&& (subType == 0 && pet.getCommonData().getMoodRemainingTime() == 0 || (subType == 3 && pet.getCommonData().getGiftRemainingTime() == 0) || emotionId != 0)) {
 					PetMoodService.checkMood(pet, subType, emotionId);
 				}
-			default:
 				break;
 		}
 	}

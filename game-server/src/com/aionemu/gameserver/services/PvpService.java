@@ -1,6 +1,12 @@
 package com.aionemu.gameserver.services;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -29,14 +35,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
 import javolution.util.FastMap;
 import javolution.util.FastTable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Sarynth
@@ -172,20 +173,8 @@ public class PvpService {
 		} else {
 			PacketSendUtility.sendPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_ME(victim.getName()));
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH_TO_B(winner.getName()));
-
-			PacketSendUtility.broadcastFilteredPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()), new ObjectFilter<Player>() {
-				@Override
-				public boolean acceptObject(Player object) {
-					return (!object.equals(victim) && !object.isEnemy(victim));
-				}
-			});
-
-			PacketSendUtility.broadcastFilteredPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), new ObjectFilter<Player>() {
-				@Override
-				public boolean acceptObject(Player object) {
-					return (!object.equals(winner) && object.isEnemy(victim));
-				}
-			});
+			PacketSendUtility.broadcastPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()), false, player -> !player.isEnemy(victim));
+			PacketSendUtility.broadcastPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), false, player -> player.isEnemy(victim));
 		}
 
 	}

@@ -500,14 +500,6 @@ public abstract class Creature extends VisibleObject {
 		return creature.getVisualState() <= getSeeState();
 	}
 
-	public boolean isSeeObject(VisibleObject object) {
-		return getKnownList().getVisibleObjects().containsKey(object.getObjectId());
-	}
-
-	public boolean isSeePlayer(Player player) {
-		return getKnownList().getVisiblePlayers().containsKey(player.getObjectId());
-	}
-
 	/**
 	 * @return NpcObjectType.NORMAL
 	 */

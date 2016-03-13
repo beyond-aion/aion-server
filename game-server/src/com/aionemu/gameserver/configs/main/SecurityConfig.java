@@ -13,9 +13,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.gmaudit.message.broadcast", defaultValue = "false")
 	public static boolean GM_AUDIT_MESSAGE_BROADCAST;
 
-	@Property(key = "gameserver.security.antihack.invis", defaultValue = "false")
-	public static boolean INVIS;
-
 	@Property(key = "gameserver.security.antihack.teleportation", defaultValue = "false")
 	public static boolean TELEPORTATION;
 

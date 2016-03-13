@@ -1,10 +1,8 @@
 package admincommands;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
-import com.aionemu.gameserver.services.player.PlayerVisualStateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -14,31 +12,19 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class See extends AdminCommand {
 
 	public See() {
-		super("see");
+		super("see", "Let's you see hidden npcs and players.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (admin.getSeeState() < 2) {
 			admin.setSeeState(CreatureSeeState.SEARCH10);
-			PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);
-			PacketSendUtility.sendMessage(admin, "You got vision.");
-			if (SecurityConfig.INVIS) {
-				PlayerVisualStateService.seeValidate(admin);
-			}
+			sendInfo(admin, "You got vision.");
 		} else {
 			admin.unsetSeeState(CreatureSeeState.SEARCH10);
-			PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);
-			PacketSendUtility.sendMessage(admin, "You lost vision.");
-			if (SecurityConfig.INVIS) {
-				PlayerVisualStateService.seeValidate(admin);
-			}
+			sendInfo(admin, "You lost vision.");
 		}
+		PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);
+		admin.getKnownList().updateVisiblePlayers();
 	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //see");
-	}
-
 }

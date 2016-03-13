@@ -4,6 +4,7 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -54,7 +55,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
 		}
-		sendPacket(new SM_PLAYER_INFO(activePlayer, false));
+		sendPacket(new SM_PLAYER_INFO(activePlayer));
 		activePlayer.getController().startProtectionActiveTask();
 		sendPacket(new SM_ACCOUNT_PROPERTIES());
 		sendPacket(new SM_MOTION(activePlayer.getObjectId(), activePlayer.getMotions().getActiveMotions()));
@@ -74,7 +75,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		 */
 		// If already spawned, despawn before spawning into the world
 		if (activePlayer.isSpawned())
-			World.getInstance().despawn(activePlayer);
+			World.getInstance().despawn(activePlayer, ObjectDeleteAnimation.NONE);
 		World.getInstance().spawn(activePlayer);
 
 		activePlayer.getController().refreshZoneImpl();

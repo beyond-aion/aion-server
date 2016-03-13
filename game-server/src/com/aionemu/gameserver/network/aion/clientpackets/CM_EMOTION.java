@@ -230,7 +230,7 @@ public class CM_EMOTION extends AionClientPacket {
 		}
 
 		if (player.getEmotions().canUse(emotion)) {
-			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, emotionType, emotion, x, y, z, heading, getTargetObjectId(player)), true);
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, emotionType, emotion, x, y, z, heading, getTargetObjectId(player)), true);
 		}
 
 		if (player.isProtectionActive() && emotionType != EmotionType.SELECT_TARGET) {

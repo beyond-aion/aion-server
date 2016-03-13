@@ -4,7 +4,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -13,15 +12,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author ATracer
  */
 public class PetController extends VisibleObjectController<Pet> {
-
-	@Override
-	public void see(VisibleObject object) {
-
-	}
-
-	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
-	}
 
 	public static class PetUpdateTask implements Runnable {
 
@@ -38,6 +28,9 @@ public class PetController extends VisibleObjectController<Pet> {
 				startTime = System.currentTimeMillis();
 
 			try {
+				if (!player.isSpawned())
+					return;
+
 				Pet pet = player.getPet();
 				if (pet == null)
 					throw new IllegalStateException("Pet is null");

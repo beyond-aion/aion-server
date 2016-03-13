@@ -31,7 +31,9 @@ public class PeriodicSaveConfig {
 	@Property(key = "gameserver.periodicsave.broker", defaultValue = "1500")
 	public static int BROKER;
 
-	@Property(key = "gameserver.periodicsave.player.pets", defaultValue = "5")
+	/**
+	 * Time in seconds for updating and saving pet mood data
+	 */
+	@Property(key = "gameserver.periodicsave.player.pets", defaultValue = "10")
 	public static int PLAYER_PETS;
-
 }

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.Collection;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
@@ -17,7 +18,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_PET extends AionServerPacket {
 
-	private int actionId;
+	private PetAction action;
 	private Pet pet;
 	private PetCommonData commonData;
 	private int itemObjectId;
@@ -29,37 +30,60 @@ public class SM_PET extends AionServerPacket {
 	private int lootNpcObjId;
 	private int dopeAction;
 	private int dopeSlot;
+	private byte animationId;
 
-	public SM_PET(int subType, int actionId, int objectId, int count, Pet pet) {
+	public SM_PET(int subType, PetAction action, int itemObjectId, int count, Pet pet) {
 		this.subType = subType;
-		this.actionId = actionId;
+		this.action = action;
 		this.count = count;
-		this.itemObjectId = objectId;
+		this.itemObjectId = itemObjectId;
 		this.pet = pet;
 		this.commonData = pet.getCommonData();
 	}
 
-	public SM_PET(int actionId) {
-		this.actionId = actionId;
+	public SM_PET(PetAction action) {
+		this.action = action;
 	}
 
-	public SM_PET(int actionId, Pet pet) {
-		this(0, actionId, 0, 0, pet);
+	public SM_PET(PetAction action, Pet pet) {
+		this(0, action, 0, 0, pet);
+	}
+
+	/**
+	 * For adopt only
+	 * 
+	 * @param actionId
+	 * @param commonData
+	 */
+	public SM_PET(PetAction action, PetCommonData commonData) {
+		this.action = action;
+		this.commonData = commonData;
+	}
+
+	/**
+	 * For listing all pets on this character
+	 * 
+	 * @param actionId
+	 * @param pets
+	 */
+	public SM_PET(PetAction action, Collection<PetCommonData> pets) {
+		this.action = action;
+		this.pets = pets;
 	}
 
 	public SM_PET(boolean isLooting) {
-		this.actionId = 13;
-		this.isActing = isLooting;
-		this.subType = 3;
+		this(isLooting, 0);
 	}
 
 	public SM_PET(boolean isLooting, int npcObjId) {
-		this(isLooting);
+		this.action = PetAction.SPECIAL_FUNCTION;
+		this.isActing = isLooting;
+		this.subType = 3;
 		this.lootNpcObjId = npcObjId;
 	}
 
 	public SM_PET(int dopeAction, boolean isBuffing) {
-		this.actionId = 13;
+		this.action = PetAction.SPECIAL_FUNCTION;
 		this.dopeAction = dopeAction;
 		this.isActing = isBuffing;
 		this.subType = 2;
@@ -79,40 +103,26 @@ public class SM_PET extends AionServerPacket {
 	 * @param shuggleEmotion
 	 */
 	public SM_PET(Pet pet, int subType, int shuggleEmotion) {
-		this(0, PetAction.MOOD.getActionId(), 0, 0, pet);
+		this(0, PetAction.MOOD, 0, 0, pet);
 		this.shuggleEmotion = shuggleEmotion;
 		this.subType = subType;
 	}
 
 	/**
-	 * For adopt only
-	 * 
-	 * @param actionId
-	 * @param commonData
+	 * For deleting pet visually.
 	 */
-	public SM_PET(int actionId, PetCommonData commonData) {
-		this.actionId = actionId;
-		this.commonData = commonData;
-	}
-
-	/**
-	 * For listing all pets on this character
-	 * 
-	 * @param actionId
-	 * @param pets
-	 */
-	public SM_PET(int actionId, Collection<PetCommonData> pets) {
-		this.actionId = actionId;
-		this.pets = pets;
+	public SM_PET(Pet pet, ObjectDeleteAnimation animation) {
+		this.pet = pet;
+		this.action = PetAction.DISMISS;
+		this.animationId = animation.getId();
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		PetTemplate petTemplate = null;
-		writeH(actionId);
-		switch (actionId) {
-			case 0:
-				// load list on login
+		writeH(action.getActionId());
+		switch (action) {
+			case LOAD_PETS: // load list on login
 				writeC(0); // unk
 				writeH(pets.size());
 				for (PetCommonData petCommonData : pets) {
@@ -184,8 +194,7 @@ public class SM_PET extends AionServerPacket {
 					writeD(0); // unk
 				}
 				break;
-			case 1:
-				// adopt
+			case ADOPT:
 				writeS(commonData.getName());
 				writeD(commonData.getPetId());
 				writeD(commonData.getObjectId());
@@ -236,40 +245,26 @@ public class SM_PET extends AionServerPacket {
 				writeD(0); // unk
 				writeD(0); // unk
 				break;
-			case 2:
-				// surrender
+			case SURRENDER:
 				writeD(commonData.getPetId());
 				writeD(commonData.getObjectId());
 				writeD(0); // unk
 				writeD(0); // unk
 				break;
-			case 3:
-				// spawn
+			case SPAWN:
 				writeS(pet.getName());
 				writeD(pet.getPetId());
 				writeD(pet.getObjectId());
 
-				if (pet.getPosition().getX() == 0 && pet.getPosition().getY() == 0 && pet.getPosition().getZ() == 0) {
-					writeF(pet.getMaster().getX());
-					writeF(pet.getMaster().getY());
-					writeF(pet.getMaster().getZ());
+				writeF(pet.getPosition().getX());
+				writeF(pet.getPosition().getY());
+				writeF(pet.getPosition().getZ());
+				writeF(pet.getMoveController().getTargetX2());
+				writeF(pet.getMoveController().getTargetY2());
+				writeF(pet.getMoveController().getTargetZ2());
+				writeC(pet.getHeading());
 
-					writeF(pet.getMaster().getX());
-					writeF(pet.getMaster().getY());
-					writeF(pet.getMaster().getZ());
-
-					writeC(pet.getMaster().getHeading());
-				} else {
-					writeF(pet.getPosition().getX());
-					writeF(pet.getPosition().getY());
-					writeF(pet.getPosition().getZ());
-					writeF(pet.getMoveController().getTargetX2());
-					writeF(pet.getMoveController().getTargetY2());
-					writeF(pet.getMoveController().getTargetZ2());
-					writeC(pet.getHeading());
-				}
-
-				writeD(pet.getMaster().getObjectId()); // unk
+				writeD(pet.getMaster().getObjectId());
 
 				writeC(1); // unk
 				writeD(0); // accompanying time ??
@@ -277,12 +272,11 @@ public class SM_PET extends AionServerPacket {
 				writeD(0); // wings ID if customize_attach = 1
 				writeD(0); // unk
 				break;
-			case 4:
-				// dismiss
+			case DISMISS:
 				writeD(pet.getObjectId());
-				writeC(0x01);
+				writeC(animationId);
 				break;
-			case 9:
+			case FOOD:
 				writeH(1);
 				writeC(1);
 				writeC(subType);
@@ -326,12 +320,11 @@ public class SM_PET extends AionServerPacket {
 						break;
 				}
 				break;
-			case 10:
-				// rename
+			case RENAME:
 				writeD(pet.getObjectId());
 				writeS(pet.getName());
 				break;
-			case 12:
+			case MOOD:
 				switch (subType) {
 					case 0: // check pet status
 						writeC(subType);
@@ -365,7 +358,7 @@ public class SM_PET extends AionServerPacket {
 						break;
 				}
 				break;
-			case 13:
+			case SPECIAL_FUNCTION:
 				writeC(subType);
 				if (subType == 2) {
 					writeC(dopeAction);
@@ -394,8 +387,6 @@ public class SM_PET extends AionServerPacket {
 						writeC(isActing ? 1 : 0);
 					}
 				}
-				break;
-			default:
 				break;
 		}
 	}

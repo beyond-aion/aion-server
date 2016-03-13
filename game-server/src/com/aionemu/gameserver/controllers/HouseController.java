@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,8 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_RENDER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -38,25 +37,13 @@ public class HouseController extends VisibleObjectController<House> {
 		ActionObserver observer = new ActionObserver(ObserverType.MOVE);
 		p.getObserveController().addObserver(observer);
 		observed.put(p.getObjectId(), observer);
-		AionServerPacket packet;
-		if (getOwner().isInInstance())
-			packet = new SM_HOUSE_UPDATE(getOwner());
-		else
-			packet = new SM_HOUSE_RENDER(getOwner());
-		PacketSendUtility.sendPacket(p, packet);
-
 		spawnObjects();
 	}
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		Player p = (Player) object;
 		ActionObserver observer = observed.remove(p.getObjectId());
-		if (!inRange) {
-			observer.moved();
-			if (!getOwner().isInInstance())
-				PacketSendUtility.sendPacket(p, new SM_DELETE_HOUSE(getOwner().getAddress().getId()));
-		}
 		p.getObserveController().removeObserver(observer);
 	}
 

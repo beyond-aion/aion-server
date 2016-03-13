@@ -34,7 +34,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 		boolean isInactive = house.getStatus() == HouseStatus.INACTIVE;
 		int playerObjectId = isInactive ? 0 : house.getOwnerId();
 		writeD(playerObjectId);
-		writeD(BuildingType.PERSONAL_FIELD.getId());
+		writeD(house.getBuilding().getType().getId());
 		writeC(1); // unk
 
 		writeD(house.getBuilding().getId());
@@ -52,7 +52,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 			}
 		}
 
-		// These bytes come from uncleaned byte buffer of pervious house owners info
+		// These bytes come from uncleaned byte buffer of previous house owners info
 		// we fix NC shit here
 		for (int i = 0; i < dataSize; i++)
 			writeC(0);

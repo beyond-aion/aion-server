@@ -101,7 +101,7 @@ public class SpawnUpdate extends AdminCommand {
 		if (target instanceof Gatherable)
 			PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(target));
 		else
-			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO((Npc) target, admin));
+			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO((Npc) target));
 		sendInfo(admin,
 			"Updated " + target.getClass().getSimpleName() + "'s coordinates to\nX:" + tPos.getX() + " Y:" + tPos.getY() + " Z:" + tPos.getZ() + " H:"
 				+ tPos.getHeading() + ".");
@@ -132,7 +132,7 @@ public class SpawnUpdate extends AdminCommand {
 			}
 			spawn.setWalkerId(walkerId);
 			PacketSendUtility.sendPacket(admin, new SM_DELETE(target));
-			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(target, admin));
+			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(target));
 			if (walkerId == null)
 				sendInfo(admin, "Removed npcs walker_id " + oldId + " for " + target.getNpcId() + ".");
 			else

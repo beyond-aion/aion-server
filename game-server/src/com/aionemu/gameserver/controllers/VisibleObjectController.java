@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers;
 
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.world.World;
 
@@ -46,7 +47,7 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * @param object
 	 * @param deleteType
 	 */
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 
 	}
 
@@ -54,15 +55,11 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * Removes controlled object from the world.
 	 */
 	public void delete() {
-		/**
-		 * despawn object from world.
-		 */
+		// despawn object from world
 		if (getOwner().isSpawned())
 			World.getInstance().despawn(getOwner());
-		/**
-		 * Delete object from World.
-		 */
 
+		// delete object from world
 		World.getInstance().removeObject(getOwner());
 	}
 

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.VisibleObjectController;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -166,7 +167,11 @@ public abstract class VisibleObject extends AionObject {
 	}
 
 	public void clearKnownlist() {
-		getKnownList().clear();
+		clearKnownlist(ObjectDeleteAnimation.FADE_OUT);
+	}
+
+	public void clearKnownlist(ObjectDeleteAnimation animation) {
+		getKnownList().clear(animation);
 	}
 
 	public void updateKnownlist() {
@@ -215,12 +220,11 @@ public abstract class VisibleObject extends AionObject {
 	 * @return distance to target or 0 if no target
 	 */
 	public float getDistanceToTarget() {
-		VisibleObject currTarget = target;
-		if (currTarget == null) {
+		if (target == null) {
 			return 0;
 		}
-		return (float) MathUtil.getDistance(getX(), getY(), getZ(), currTarget.getX(), currTarget.getY(), currTarget.getZ())
-			- this.getObjectTemplate().getBoundRadius().getCollision() - currTarget.getObjectTemplate().getBoundRadius().getCollision();
+		return (float) MathUtil.getDistance(getX(), getY(), getZ(), target.getX(), target.getY(), target.getZ())
+			- getObjectTemplate().getBoundRadius().getCollision() - target.getObjectTemplate().getBoundRadius().getCollision();
 	}
 
 	/**

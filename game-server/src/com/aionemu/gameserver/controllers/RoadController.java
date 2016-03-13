@@ -3,6 +3,7 @@ package com.aionemu.gameserver.controllers;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.controllers.observer.RoadObserver;
+import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.road.Road;
@@ -23,12 +24,9 @@ public class RoadController extends VisibleObjectController<Road> {
 	}
 
 	@Override
-	public void notSee(VisibleObject object, boolean inRange) {
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		Player p = (Player) object;
 		RoadObserver observer = observed.remove(p.getObjectId());
-		if (!inRange)
-			observer.moved();
-
 		p.getObserveController().removeObserver(observer);
 	}
 }

@@ -2,19 +2,15 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.aionemu.gameserver.model.CreatureType;
+import com.aionemu.gameserver.controllers.movement.MoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
-import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.TownService;
@@ -26,78 +22,51 @@ import com.aionemu.gameserver.services.TownService;
  */
 public class SM_NPC_INFO extends AionServerPacket {
 
-	/**
-	 * Visible npc
-	 */
-	private final Creature _npc;
-	private final NpcTemplate npcTemplate;
-	private final int npcId;
+	private Creature npc;
 	private int creatorId;
-	private String masterName = StringUtils.EMPTY;
-	@SuppressWarnings("unused")
-	private float speed = 0.3f;
-	private int npcTypeId;
+	private String masterName;
 
-	/**
-	 * Constructs new <tt>SM_NPC_INFO </tt> packet
-	 *
-	 * @param player
-	 * @param kisk
-	 *          - the visible npc.
-	 */
-	public SM_NPC_INFO(Npc npc, Player player) {
-		this._npc = npc;
-		npcTemplate = npc.getObjectTemplate();
-		npcTypeId = npc.getType(player);
-		npcId = npc.getNpcId();
+	public SM_NPC_INFO(Npc npc) {
+		this.npc = npc;
 		creatorId = npc.getCreatorId();
 		masterName = npc.getMasterName();
 	}
 
-	/**
-	 * @param summon
-	 * @param player
-	 */
-	public SM_NPC_INFO(Summon summon, Player player) {
-		this._npc = summon;
-		npcTemplate = summon.getObjectTemplate();
-		npcId = summon.getNpcId();
+	public SM_NPC_INFO(Summon summon) {
+		this.npc = summon;
 		Player owner = summon.getMaster();
 		if (owner != null) {
-			boolean enemy = !player.getRace().equals(owner.getRace()) || player.isEnemy(owner);
-			npcTypeId = enemy ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
 			creatorId = owner.getObjectId();
 			masterName = owner.getName();
-			speed = owner.getGameStats().getMovementSpeedFloat();
 		} else {
 			masterName = "LOST";
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeF(_npc.getX());// x
-		writeF(_npc.getY());// y
-		writeF(_npc.getZ());// z
-		writeD(_npc.getObjectId());
-		writeD(npcId);
-		writeD(npcId);
+		NpcTemplate npcTemplate = (NpcTemplate) npc.getObjectTemplate();
+		MoveController mc = npc.getMoveController();
 
-		writeC(npcTypeId);
+		writeF(npc.getX());
+		writeF(npc.getY());
+		writeF(npc.getZ());
+		writeD(npc.getObjectId());
+		writeD(npcTemplate.getTemplateId()); // npc id
+		writeD(npcTemplate.getTemplateId());
+		writeC(npc.getType(con.getActivePlayer()));
 
-		writeH(_npc.getState());// unk 65=normal,0x47 (71)= [dead npc ?]no drop,0x21(33)=fight state,0x07=[dead
-		// monster?]
-		// no drop
-		// 3,19 - wings spread (NPCs)
-		// 5,6,11,21 - sitting (NPC)
-		// 7,23 - dead (no drop)
-		// 8,24 - [dead][NPC only] - looks like some orb of light (no normal mesh)
-		// 32,33 - fight mode
+		/*
+		 * 3,19 - wings spread
+		 * 5,6,11,21 - sitting
+		 * 7,23,71 - dead, no drop
+		 * 8,24 - dead, looks like some orb of light (no normal mesh)
+		 * 32,33 - fight mode
+		 * 65 - normal
+		 */
+		writeH(npc.getState());
 
-		writeC(_npc.getHeading());
+		writeC(npc.getHeading());
 		writeD(npcTemplate.getNameId());
 		writeD(npcTemplate.getTitleId());// TODO: implement fortress titles
 
@@ -111,26 +80,21 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(creatorId);// creatorId - playerObjectId or House address
 		writeS(masterName);// masterName
 
-		int maxHp = _npc.getLifeStats().getMaxHp();
-		int currHp = _npc.getLifeStats().getCurrentHp();
-
-		writeC((int) (100f * currHp / maxHp));// %hp
-		writeD(_npc.getGameStats().getMaxHp().getCurrent());
-		writeC(_npc.getLevel());// lvl
+		writeC((int) (100f * npc.getLifeStats().getCurrentHp() / npc.getLifeStats().getMaxHp()));// %hp
+		writeD(npc.getGameStats().getMaxHp().getCurrent());
+		writeC(npc.getLevel());
 
 		NpcEquippedGear gear = npcTemplate.getEquipment();
-		boolean hasWeapon = false;
-		BoundRadius boundRadius = npcTemplate.getBoundRadius();
-
 		if (gear == null) {
 			writeD(0x00);
-			writeF(boundRadius.getFront());
+			writeF(npcTemplate.getBoundRadius().getFront());
 		} else {
 			writeD(gear.getItemsMask());
-			for (Entry<ItemSlot, ItemTemplate> item : gear) // getting it from template ( later if we make sure that npcs
-			// actually use items, we'll make Item from it )
-			{
-				hasWeapon = item.getValue().isWeapon();
+			boolean hasWeapon = false;
+			 // getting it from template (later if we make sure that npcs actually use items, we'll make Item from it)
+			for (Entry<ItemSlot, ItemTemplate> item : gear) {
+				if (!hasWeapon)
+					hasWeapon = item.getValue().isWeapon();
 				writeD(item.getValue().getTemplateId());
 				writeD(0x00);
 				writeD(0x00);
@@ -138,30 +102,18 @@ public class SM_NPC_INFO extends AionServerPacket {
 				writeH(0x00); // 4.7
 			}
 			// we don't know weapon dimensions, just add 0.1
-			writeF(boundRadius.getFront() + 0.125f + (hasWeapon ? 0.1f : 0f));
+			writeF(npcTemplate.getBoundRadius().getFront() + 0.125f + (hasWeapon ? 0.1f : 0f));
 		}
-
 		writeF(npcTemplate.getHeight());
-		writeF(_npc.getGameStats().getMovementSpeedFloat());// speed
-
+		writeF(npc.getGameStats().getMovementSpeedFloat());// speed
 		writeH(npcTemplate.getAttackDelay());
 		writeH(npcTemplate.getAttackDelay());
-
-		writeC(_npc.isFlag() ? 0x13 : _npc.isNewSpawn() ? 0x01 : 0x00);
-
-		/**
-		 * Movement
-		 */
-		writeF(_npc.getMoveController().getTargetX2());// x
-		writeF(_npc.getMoveController().getTargetY2());// y
-		writeF(_npc.getMoveController().getTargetZ2());// z
-		writeC(_npc.getMoveController().getMovementMask()); // move type
-
-		SpawnTemplate spawn = _npc.getSpawn();
-		if (spawn == null)
-			writeH(0);
-		else
-			writeH(spawn.getStaticId());
+		writeC(npc.isFlag() ? 0x13 : npc.isNewSpawn() ? 0x01 : 0x00);
+		writeF(mc.getTargetX2());
+		writeF(mc.getTargetY2());
+		writeF(mc.getTargetZ2());
+		writeC(mc.getMovementMask()); // move type
+		writeH(npc.getSpawn() == null ? 0 : npc.getSpawn().getStaticId());
 		writeC(0);
 		writeC(0); // all unknown
 		writeC(0);
@@ -170,16 +122,11 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeC(0);
 		writeC(0);
 		writeC(0);
-		writeC(_npc.getVisualState()); // visualState
-
-		/**
-		 * 1 : normal (kisk too) 2 : summon 32 : trap 64 : skill area 1024 : holy servant, noble energy
-		 */
-		writeH(_npc.getNpcObjectType().getId());
+		writeC(npc.getVisualState()); // visualState
+		writeH(npc.getNpcObjectType().getId());
 		writeC(0x00); // unk
-		writeD(_npc.getTarget() == null ? 0 : _npc.getTarget().getObjectId());
-		writeD(TownService.getInstance().getTownIdByPosition(_npc));
+		writeD(npc.getTarget() == null ? 0 : npc.getTarget().getObjectId());
+		writeD(TownService.getInstance().getTownIdByPosition(npc));
 		writeD(0);// unk 4.7.5
 	}
-
 }
