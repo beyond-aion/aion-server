@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -26,6 +24,8 @@ import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -174,6 +174,7 @@ public class RiftService {
 
 		// Spawn NPC guards
 		if (guards) {
+			location.setWithGuards(true);
 			List<SpawnGroup2> locSpawns = DataManager.SPAWNS_DATA2.getRiftSpawnsByLocId(location.getId());
 			for (SpawnGroup2 group : locSpawns) {
 				for (SpawnTemplate st : group.getSpawnTemplates()) {

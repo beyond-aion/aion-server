@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,6 +21,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
+import javolution.util.FastMap;
+
 /**
  * @author ATracer, Source
  */
@@ -30,6 +30,7 @@ public class RVController extends NpcController {
 
 	private boolean isMaster = false;
 	private boolean isVortex = false;
+	private boolean isVolatile = false;
 	protected FastMap<Integer, Player> passedPlayers = new FastMap<Integer, Player>();
 	private SpawnTemplate slaveSpawnTemplate;
 	private Npc slave;
@@ -43,8 +44,6 @@ public class RVController extends NpcController {
 
 	/**
 	 * Used to create master rifts or slave rifts (slave == null)
-	 *
-	 * @param slaveSpawnTemplate
 	 */
 	public RVController(Npc slave, RiftEnum riftTemplate) {
 		this.riftTemplate = riftTemplate;
@@ -61,6 +60,25 @@ public class RVController extends NpcController {
 			this.slaveSpawnTemplate = slave.getSpawn();
 			isMaster = true;
 			isAccepting = true;
+		}
+	}
+
+	public RVController(Npc slave, RiftEnum riftTemplate, boolean isVolatile) {
+		this.riftTemplate = riftTemplate;
+		this.isVortex = riftTemplate.isVortex();
+		this.maxEntries = riftTemplate.getEntries();
+		this.minLevel = riftTemplate.getMinLevel();
+		this.maxLevel = riftTemplate.getMaxLevel();
+		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
+				+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
+
+		if (slave != null)// master rift should be created
+		{
+			this.slave = slave;
+			this.slaveSpawnTemplate = slave.getSpawn();
+			isMaster = true;
+			isAccepting = true;
+			this.isVolatile = isVolatile;
 		}
 	}
 
@@ -248,6 +266,10 @@ public class RVController extends NpcController {
 			return new int[] { first, controller.slaveSpawnTemplate.getWorldId() };
 		}
 		return new int[] { first };
+	}
+
+	public boolean isVolatile() {
+		return isVolatile;
 	}
 
 }

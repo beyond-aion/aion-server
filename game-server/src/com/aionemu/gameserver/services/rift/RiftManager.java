@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +19,8 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -68,7 +68,7 @@ public class RiftManager {
 				slaveTemplate = slaveTemplate.changeTemplate(i);
 			}
 			Npc slave = spawnInstance(i, slaveTemplate, new RVController(null, rift));
-			Npc master = spawnInstance(i, masterTemplate, new RVController(slave, rift));
+			Npc master = spawnInstance(i, masterTemplate, new RVController(slave, rift, isVolatileRift(rl)));
 
 			if (rift.isVortex()) {
 				vl.setVortexController((RVController) master.getController());
@@ -112,6 +112,24 @@ public class RiftManager {
 	private static class RiftManagerHolder {
 
 		private static final RiftManager INSTANCE = new RiftManager();
+	}
+
+	private boolean isVolatileRift(RiftLocation loc) {
+		if (loc.isWithGuards()) {
+			switch (loc.getId()) {
+				case 2286:
+				case 2287:
+				case 2288:
+				case 2176:
+				case 2177:
+				case 2178:
+					return true;
+				default:
+					break;
+
+			}
+		}
+		return false;
 	}
 
 }

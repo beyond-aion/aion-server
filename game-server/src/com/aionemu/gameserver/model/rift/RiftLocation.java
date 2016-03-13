@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.rift;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
 public class RiftLocation {
 
 	private boolean opened;
+	private boolean withGuards = false;
 	protected RiftTemplate template;
 	private List<VisibleObject> spawned = new FastTable<>();
 
@@ -47,4 +48,11 @@ public class RiftLocation {
 		return spawned;
 	}
 
+	public void setWithGuards(boolean withGuards) {
+		this.withGuards = withGuards;
+	}
+
+	public boolean isWithGuards() {
+		return withGuards;
+	}
 }
