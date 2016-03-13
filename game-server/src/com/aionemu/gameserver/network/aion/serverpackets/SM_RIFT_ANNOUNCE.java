@@ -56,19 +56,19 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		switch (actionId) {
 			case 0: // announce
-				writeH(0x31); // following byte length
+				writeH(1 + (rifts.values().size() * 4)); // following byte length
 				writeC(actionId);
 				for (int value : rifts.values())
 					writeD(value);
 				break;
 			case 1: // silentera
-				writeH(0x09); // following byte length
+				writeH(9); // following byte length
 				writeC(actionId);
 				writeD(gelkmaros);
 				writeD(inggison);
 				break;
 			case 2:
-				writeH(0x35); // following byte length
+				writeH(35); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getMaxEntries());
@@ -82,12 +82,12 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeC(rift.isMaster() ? 1 : 0); // display | hide
 				break;
 			case 3:
-				writeH(0x15); // following byte length
+				writeH(15); // following byte length
 				writeC(actionId);
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getUsedEntries());
 				writeD(rift.getRemainTime());
-				writeC(rift.isVortex() ? 1 : (rift.isVolatile() ? 4 : 0)); // 1 vortex, 2, concert hall, 3 pangaea, 4 chaos rift, 5 infiltration rift
+				writeC(rift.isVortex() ? 1 : (rift.isVolatile() ? 4 : 0)); // 1 vortex, 2, concert hall, 3 pangaea, 4 chaos rift, 5 infiltration
 				writeC(0); // unk
 				break;
 			case 4: // rift despawn
