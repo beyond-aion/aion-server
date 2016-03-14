@@ -99,8 +99,10 @@ public class PvpService {
 
 		int totalDamage = victim.getAggroList().getTotalDamage();
 
-		if (totalDamage == 0 || winner == null)
+		if (totalDamage == 0 || winner == null) {
+			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH);
 			return;
+		}
 
 		// Add Player Kill to record.
 		winner.getAbyssRank().setAllKill();

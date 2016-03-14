@@ -437,8 +437,6 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(player,
 				new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
 		}
-
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH);
 	}
 
 	private boolean isInvader(Player player) {
