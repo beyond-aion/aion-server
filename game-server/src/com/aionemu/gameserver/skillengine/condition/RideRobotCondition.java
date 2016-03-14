@@ -16,6 +16,10 @@ public class RideRobotCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill skill) {
-		return ((Player) skill.getEffector()).isInRobotMode();
+		if (skill.getEffector() instanceof Player) {
+			return ((Player) skill.getEffector()).isInRobotMode();
+		} else {
+			return true;
+		}
 	}
 }
