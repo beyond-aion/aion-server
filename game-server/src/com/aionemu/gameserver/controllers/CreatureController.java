@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
-import com.aionemu.gameserver.network.aion.serverpackets.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,8 +33,13 @@ import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -164,22 +168,28 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && getOwner() != attacker)
 			return;
 
-		if (damage != 0 && !((getOwner() instanceof Npc) && ((Npc) getOwner()).isBoss())) {
+		if (damage != 0) {
 			Skill skill = getOwner().getCastingSkill();
-			if (skill != null && notifyAttack) {
-				if (skill.getSkillMethod() == SkillMethod.ITEM)
-					cancelCurrentSkill(attacker);
-				else {
-					int cancelRate = skill.getSkillTemplate().getCancelRate();
-					if (cancelRate == 100000)
+			if (skill != null) {
+				if ((getOwner() instanceof Npc) && ((Npc) getOwner()).isBoss()) {
+					if (skill.getSkillTemplate().getCancelRate() >= 99999) {
 						cancelCurrentSkill(attacker);
-					else if (cancelRate > 0) {
-						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
-						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
-
-						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
-						if (Rnd.get(1, 100) <= cancel)
+					}
+				} else if (notifyAttack) {
+					if (skill.getSkillMethod() == SkillMethod.ITEM)
+						cancelCurrentSkill(attacker);
+					else {
+						int cancelRate = skill.getSkillTemplate().getCancelRate();
+						if (cancelRate >= 99999)
 							cancelCurrentSkill(attacker);
+						else if (cancelRate > 0) {
+							int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
+							float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
+
+							int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
+							if (Rnd.get(1, 100) <= cancel)
+								cancelCurrentSkill(attacker);
+						}
 					}
 				}
 			}
