@@ -22716,11 +22716,15 @@
     </decomposable>
     <decomposable item_id="188052581" decomposable_name="Sanctuary Ancient Coin Bundle">
         <items>
-            <item id="186000237" name="Ancient Coin" count="15"/>
+            <item id="186000237" name="Ancient Coin" rnd_min="8" rnd_max="15"/>
         </items>
     </decomposable>
     <decomposable item_id="188052582" decomposable_name="Dragon's Conquerer Mark Box"/>
-    <decomposable item_id="188052583" decomposable_name="Sanctuary Conquerer Mark Bundle"/>
+    <decomposable item_id="188052583" decomposable_name="Sanctuary Conquerer Mark Bundle">
+		<items>
+			<item id="186000238" name="Conqueror's Mark"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188052584" decomposable_name="Dragon's Crafting Box"/>
     <decomposable item_id="188052585" decomposable_name="Dragon's Medal Box">
         <items>
@@ -23591,39 +23595,18 @@
     <decomposable item_id="188052613" decomposable_name="Sanctuary Treasure Crate">
         <items>
             <item id="152012588" name="Wind Fragment"/>
-            <item id="186000242" name="Ceramium Medal"/>
         </items>
         <items>
             <item id="152012591" name="Water Fragment"/>
-            <item id="186000242" name="Ceramium Medal"/>
         </items>
         <items>
             <item id="169405254" name="Earth Trace"/>
-            <item id="186000242" name="Ceramium Medal"/>
         </items>
         <items>
             <item id="152012585" name="Wind Mote"/>
-            <item id="186000242" name="Ceramium Medal"/>
         </items>
         <items>
             <item id="169405252" name="Fury Powder"/>
-            <item id="186000242" name="Ceramium Medal"/>
-        </items>
-        <items>
-            <item id="186000238" name="Conqueror's Mark"/>
-            <item id="186000242" name="Ceramium Medal"/>
-        </items>
-        <items>
-            <item id="186000239" name="Sillus Crest"/>
-            <item id="186000242" name="Ceramium Medal"/>
-        </items>
-        <items>
-            <item id="186000240" name="Silona Crest"/>
-            <item id="186000242" name="Ceramium Medal"/>
-        </items>
-        <items>
-            <item id="186000241" name="Pradeth Crest"/>
-            <item id="186000242" name="Ceramium Medal"/>
         </items>
     </decomposable>
     <decomposable item_id="188052614" decomposable_name="Defender's Augment Bundle">
@@ -32663,7 +32646,7 @@
 	</decomposable>
 	<decomposable item_id="188053709" decomposable_name="Stolen Shelter Ancient Coin Bundle">
 		<items>
-			<item id="186000237" name="Ancient Coin" rnd_min="10" rnd_max="30"/>
+			<item id="186000237" name="Ancient Coin" rnd_min="15" rnd_max="30"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053710" decomposable_name="Captured Shelter Relics Bundle">

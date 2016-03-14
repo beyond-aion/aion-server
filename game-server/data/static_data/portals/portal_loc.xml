@@ -419,8 +419,10 @@
 	<portal_loc world_id="300590000" loc_id="3005900" x="755.41864" y="560.617" z="572.9637" h="90"/>
 	<!-- Live Party Concert Hall -->
 	<portal_loc world_id="600080000" loc_id="6000800" x="1532.48" y="1511.5601" z="568.98" h="118"/>
-	<!-- Seized Danuar Sanctuary -->
-	<portal_loc world_id="301140000" loc_id="3011400" x="388.74646" y="1184.6154" z="55.30134" h="90"/>
+	<!-- 4.8 Danuar Sanctuary -->
+	<portal_loc world_id="301380000" loc_id="3013800" x="388.74646" y="1184.6154" z="55.80134" h="90"/>
+	<!-- 4.8 Seized Danuar Sanctuary -->
+	<portal_loc world_id="301140000" loc_id="3011400" x="388.74646" y="1184.6154" z="55.80134" h="90"/>
 	<!-- 4.3 Infinity Shard -->
 	<portal_loc world_id="300800000" loc_id="3008000" x="108.20024" y="129.45913" z="124.34349" h="112"/>
 	<!-- Krotan Battle Fortress_L -->

@@ -24,6 +24,14 @@ public class TribeRelationService {
 						break;
 				}
 				break;
+			case IDF5U2_SHULACK:
+				switch (creature2.getTribe()) {
+					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
+						return false;
+					default:
+						break;
+				}
+				break;
 				default:
 					break;
 		}
@@ -84,6 +92,15 @@ public class TribeRelationService {
 	public static boolean isFriend(Creature creature1, Creature creature2) {
 		if (creature1.getTribe() == creature2.getTribe()) // OR BASE ????
 			return true;
+		switch (creature1.getTribe()) {
+			case IDF5U2_SHULACK:
+				switch (creature2.getTribe()) {
+					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
+						return true;
+					default:
+						break;
+				}
+		}
 		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69:
 			case GAB1_SUB_DEST_70:
@@ -208,6 +225,18 @@ public class TribeRelationService {
 	public static boolean isHostile(Creature creature1, Creature creature2) {
 		if (creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)) {
 			return true;
+		}
+		switch (creature1.getTribe()) {
+			case IDF5U2_SHULACK:
+				switch (creature2.getTribe()) {
+					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
+						return false;
+					default:
+						break;
+				}
+				break;
+			default:
+				break;
 		}
 		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69:

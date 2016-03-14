@@ -1734,21 +1734,31 @@
 			<portal_req min_level="65"/>
 		</portal_path>
 	</portal_dialog>
-	<!-- DANUAR SANCTUARY -->
-	<!-- Danuar Sanctuary Entrance -->
+	<!-- (SEIZED) DANUAR SANCTUARY -->
+	<!-- (Seized) Danuar Sanctuary Entrance -->
 	<!-- Elyos -->
 	<portal_dialog npc_id="731570">
-		<portal_path dialog="10000" loc_id="3011400" player_count="6" instance="true" err_group="27">
+		<!-- danuar sanctuary -->
+		<portal_path dialog="10000" loc_id="3013800" player_count="6" instance="true" err_group="27">
 			<portal_req min_level="63" err_level="27"/>
+		</portal_path>
+		<!-- seized danuar sanctuary -->
+		<portal_path dialog="10001" loc_id="3011400" player_count="6" instance="true" err_group="27">
+			<portal_req min_level="65" err_level="27"/>
 		</portal_path>
 	</portal_dialog>
 	<!-- Asmodians -->
 	<portal_dialog npc_id="731549">
-		<portal_path dialog="10000" loc_id="3011400" player_count="6" instance="true" err_group="27">
+		<!-- danuar sanctuary -->
+		<portal_path dialog="10000" loc_id="3013800" player_count="6" instance="true" err_group="27">
 			<portal_req min_level="63" err_level="27"/>
 		</portal_path>
+		<!-- seized danuar sanctuary -->
+		<portal_path dialog="10001" loc_id="3011400" player_count="6" instance="true" err_group="27">
+			<portal_req min_level="65" err_level="27"/>
+		</portal_path>
 	</portal_dialog>
-	<!-- END DANUAR SANCTUARY -->
+	<!-- (SEIZED) DANUAR SANCTUARY -->
 	<!-- Illuminary Obelisk Teleporter -->
 	<portal_dialog npc_id="730883">
 		<portal_path dialog="10000" loc_id="3012300" player_count="6" instance="true">

@@ -36179,9 +36179,6 @@
         <npcskill skillid="16822" skilllevel="56" probability="8" maxhp="100"/>
         <npcskill skillid="17332" skilllevel="56" probability="8"/>
     </npcskills>
-    <npcskills npcid="233142">
-        <npcskill skillid="20549" skilllevel="56" probability="25" minhp="94" maxhp="100"/>
-    </npcskills>
     <npcskills npcid="233162">
         <npcskill skillid="21342" skilllevel="1" probability="11"/>
     </npcskills>
@@ -66857,4 +66854,420 @@
 			<cond condType="SPAWN_NPC" npc_id="855913" min_distance="5" max_distance="20" random_direction="true" min_amount="3" max_amount="6"/>
 		</npcskill>
 	</npcskills>
+	<!-- Seized Danuar Sanctuary -->
+	<!-- Warmage Suyaroka -->
+	<npcskills npcid="235619">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17335" skilllevel="65" probability="70" cooldown="25000" target="RANDOM"/>
+		<npcskill skillid="17722" skilllevel="65" probability="60" cooldown="35000"/>
+		<npcskill skillid="21421" skilllevel="65" probability="100" cooldown="26000" target="ME" minhp="45" maxhp="70" priority="1" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="21288" skilllevel="65" probability="100" cooldown="30000" minhp="0" maxhp="70" chainId="1"/>
+		<npcskill skillid="20179" skilllevel="65" probability="40" cooldown="50000" minhp="0" maxhp="65"/>
+		<npcskill skillid="21799" skilllevel="65" probability="100" cooldown="40000" minhp="0" maxhp="40" nextSkillTime="0" nextChainId="2" priority="2" target="ME"/>
+		<npcskill skillid="21798" skilllevel="65" probability="100" cooldown="5000" target="ME" chainId="2"/>
+	</npcskills>
+	<!-- Chief Medic Tagnu -->
+	<npcskills npcid="235620">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17121" skilllevel="65" probability="60" cooldown="12000" nextChainId="3" nextSkillTime="4000"/>
+		<npcskill skillid="17121" skilllevel="65" probability="50" cooldown="5000" chainId="3" nextChainId="4" nextSkillTime="3000" minhp="0" maxhp="60"/>
+		<npcskill skillid="17700" skilllevel="65" probability="50" cooldown="10000" chainId="3" minhp="0" maxhp="40" target="RANDOM"/>
+		<npcskill skillid="17700" skilllevel="65" probability="50" cooldown="10000" chainId="4" minhp="0" maxhp="40" target="RANDOM"/>
+		<npcskill skillid="21189" skilllevel="65" probability="100" cooldown="30000" minhp="0" maxhp="75" priority="1" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="235622" min_distance="3" max_distance="5" random_direction="true" min_amount="1" max_amount="1"/>
+		</npcskill>
+		<npcskill skillid="17700" skilllevel="65" probability="70" cooldown="30000" minhp="0" maxhp="70" target="RANDOM"/>
+		<npcskill skillid="21799" skilllevel="65" probability="100" cooldown="35000" minhp="0" maxhp="30" priority="2" nextChainId="1" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21184" skilllevel="65" probability="100" cooldown="5000" chainId="1" nextChainId="2" nextSkillTime="0">
+			<cond condType="SPAWN_NPC" npc_id="235623" min_distance="3" max_distance="5" random_direction="true" min_amount="3" max_amount="3"/>
+		</npcskill>
+		<npcskill skillid="21778" skilllevel="65" probability="100" cooldown="5000" chainId="2" target="ME"/>
+	</npcskills>
+	<!-- Tagnu's Slashblade -->
+	<npcskills npcid="235622">
+		<npcskill skillid="17294" skilllevel="65" probability="60" cooldown="20000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="60" cooldown="20000"/>
+	</npcskills>
+	<!-- Tagnu's Assassine -->
+	<npcskills npcid="235623">
+		<npcskill skillid="21289" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17320" skilllevel="65" probability="50" cooldown="30000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Virulent Ukahim -->
+	<npcskills npcid="235621">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17332" skilllevel="65" probability="70" cooldown="25000" nextChainId="1" nextSkillTime="3000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="100" cooldown="5000" chainId="1" nextChainId="2" nextSkillTime="3000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="50" cooldown="5000" chainId="2" nextChainId="3" nextSkillTime="3000"/>
+		<npcskill skillid="21291" skilllevel="65" probability="50" cooldown="5000" chainId="2" target="ME"/>
+		<npcskill skillid="21291" skilllevel="65" probability="100" cooldown="5000" chainId="3" target="ME"/>
+		<npcskill skillid="20705" skilllevel="65" probability="60" cooldown="30000" nextChainId="4" nextSkillTime="0" target="ME" minhp="0" maxhp="60"/>
+		<npcskill skillid="20706" skilllevel="65" probability="100" cooldown="5000" target="ME" chainId="4"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="30000" target="RANDOM"/>
+		<npcskill skillid="21290" skilllevel="65" probability="60" cooldown="30000" minhp="0" maxhp="50"/>
+		<npcskill skillid="21800" skilllevel="65" probability="60" cooldown="30000" target="RANDOM" priority="1" minhp="0" maxhp="25" nextChainId="5" nextSkillTime="0"/>
+		<npcskill skillid="21801" skilllevel="65" probability="100" cooldown="35000" target="ME" chainId="5"/>
+	</npcskills>
+	<!-- Research Team Veteran Outrider -->
+	<npcskills npcid="235577">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- research team elite assassin -->
+	<npcskills npcid="235581">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- research team elite sorcerer -->
+	<npcskills npcid="235576">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- research team veteran watchman -->
+	<npcskills npcid="235583">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- research team elite mage -->
+	<npcskills npcid="235582">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="20179" skilllevel="65" probability="70" cooldown="20000" target="RANDOM"/>
+		<npcskill skillid="17722" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- shulack mercenary veteran assaulter -->
+	<npcskills npcid="235569">
+		<npcskill skillid="16532" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- shulack mercenary elite outrider -->
+	<npcskills npcid="235568">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18159" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- shulack mercenary elite sorcerer -->
+	<npcskills npcid="235567">
+		<npcskill skillid="18157" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16987" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- shulack mercenary veteran medic -->
+	<npcskills npcid="235566">
+		<npcskill skillid="18814" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18751" skilllevel="65" probability="80" cooldown="30000" minhp="0" maxhp="40"/>
+		<npcskill skillid="18779" skilllevel="65" probability="80" cooldown="30000" minhp="50" maxhp="90"/>
+	</npcskills>
+	<!-- shulack mercenary watcher -->
+	<npcskills npcid="235565">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18159" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- shulack mercenary elite scout -->
+	<npcskills npcid="235570">
+		<npcskill skillid="16543" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16674" skilllevel="65" probability="60" cooldown="15000"/>
+		<npcskill skillid="18248" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- shulack mercenary elite medic -->
+	<npcskills npcid="235571">
+		<npcskill skillid="18814" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18751" skilllevel="65" probability="80" cooldown="30000" minhp="0" maxhp="40"/>
+		<npcskill skillid="18779" skilllevel="65" probability="80" cooldown="30000" minhp="50" maxhp="90"/>
+	</npcskills>
+	<!-- shulack mercenary cannon chief -->
+	<npcskills npcid="235574">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16525" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Bodyguard Girakin -->
+	<npcskills npcid="235656">
+		<npcskill skillid="17006" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="13000"/>
+		<npcskill skillid="16678" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Unscrupulous Sachirunerk -->
+	<npcskills npcid="235654">
+		<npcskill skillid="16696" skilllevel="65" probability="100" cooldown="30000"/>
+		<npcskill skillid="16570" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18157" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16987" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- Bodyguard Yatakin -->
+	<npcskills npcid="235655">
+		<npcskill skillid="21212" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21213" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21214" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21215" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- dukaki peon -->
+	<npcskills npcid="235589">
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Seized Danuar Sanctuary Miner -->
+	<npcskills npcid="235588">
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- ruins babel -->
+	<npcskills npcid="235585">
+		<npcskill skillid="17968" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- ruins clodworm swarm -->
+	<npcskills npcid="235586">
+		<npcskill skillid="17558" skilllevel="65" probability="60" cooldown="25000" minhp="0" maxhp="80"/>
+	</npcskills> 
+	<!-- guardian angolem -->
+	<npcskills npcid="235590">
+		<npcskill skillid="16472" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Archon Veteran Combatant -->
+	<npcskills npcid="233129">
+		<npcskill skillid="17077" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17078" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17079" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17081" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17082" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17083" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17084" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Guardian Veteran Combatant -->
+	<npcskills npcid="233126">
+		<npcskill skillid="17077" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17078" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17079" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17081" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17082" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17083" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17084" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Archon Veteran Healer -->
+	<npcskills npcid="233131">
+		<npcskill skillid="17121" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17134" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17135" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17136" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17127" skilllevel="65" probability="70" cooldown="20000" minhp="0" maxhp="80" target="ME"/>
+	</npcskills>
+	<!-- Guardian Veteran Healer -->
+	<npcskills npcid="233128">
+		<npcskill skillid="17121" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17134" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17135" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17136" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17127" skilllevel="65" probability="70" cooldown="20000" minhp="0" maxhp="80" target="ME"/>
+	</npcskills>
+	<!-- Archon Veteran Spellcaster -->
+	<npcskills npcid="233130">
+		<npcskill skillid="17107" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17108" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17109" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17110" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17111" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17112" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17113" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17114" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17115" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17117" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17118" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17119" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17120" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Guardian Veteran Spellcaster -->
+	<npcskills npcid="233127">
+		<npcskill skillid="17107" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17108" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17109" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17110" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17111" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17112" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17113" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17114" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17115" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17117" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17118" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17119" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17120" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- END Seized Danuar Sanctuary -->
+	<!-- Danuar Sanctuary -->
+	<!-- Warmage Suyaroka -->
+	<npcskills npcid="235624">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17335" skilllevel="65" probability="70" cooldown="25000" target="RANDOM"/>
+		<npcskill skillid="17722" skilllevel="65" probability="60" cooldown="35000"/>
+		<npcskill skillid="21421" skilllevel="65" probability="100" cooldown="26000" target="ME" minhp="45" maxhp="70" priority="1" nextChainId="1" nextSkillTime="2000"/>
+		<npcskill skillid="21288" skilllevel="65" probability="100" cooldown="30000" minhp="0" maxhp="70" chainId="1"/>
+		<npcskill skillid="20179" skilllevel="65" probability="40" cooldown="50000" minhp="0" maxhp="65"/>
+		<npcskill skillid="21799" skilllevel="65" probability="100" cooldown="40000" minhp="0" maxhp="40" nextSkillTime="0" nextChainId="2" priority="2" target="ME"/>
+		<npcskill skillid="21798" skilllevel="65" probability="100" cooldown="5000" target="ME" chainId="2"/>
+	</npcskills>
+	<!-- Chief Medic Tagnu -->
+	<npcskills npcid="235625">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17121" skilllevel="65" probability="60" cooldown="12000" nextChainId="3" nextSkillTime="4000"/>
+		<npcskill skillid="17121" skilllevel="65" probability="50" cooldown="5000" chainId="3" nextChainId="4" nextSkillTime="3000" minhp="0" maxhp="60"/>
+		<npcskill skillid="17700" skilllevel="65" probability="50" cooldown="10000" chainId="3" minhp="0" maxhp="40" target="RANDOM"/>
+		<npcskill skillid="17700" skilllevel="65" probability="50" cooldown="10000" chainId="4" minhp="0" maxhp="40" target="RANDOM"/>
+		<npcskill skillid="21189" skilllevel="65" probability="100" cooldown="30000" minhp="0" maxhp="75" priority="1" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="235627" min_distance="3" max_distance="5" random_direction="true" min_amount="1" max_amount="1"/>
+		</npcskill>
+		<npcskill skillid="17700" skilllevel="65" probability="70" cooldown="30000" minhp="0" maxhp="70" target="RANDOM"/>
+		<npcskill skillid="21799" skilllevel="65" probability="100" cooldown="35000" minhp="0" maxhp="30" priority="2" nextChainId="1" nextSkillTime="0" target="ME"/>
+		<npcskill skillid="21184" skilllevel="65" probability="100" cooldown="5000" chainId="1" nextChainId="2" nextSkillTime="0">
+			<cond condType="SPAWN_NPC" npc_id="235628" min_distance="3" max_distance="5" random_direction="true" min_amount="3" max_amount="3"/>
+		</npcskill>
+		<npcskill skillid="21778" skilllevel="65" probability="100" cooldown="5000" chainId="2" target="ME"/>
+	</npcskills>
+	<!-- Tagnu's Slashblade -->
+	<npcskills npcid="235627">
+		<npcskill skillid="17294" skilllevel="65" probability="60" cooldown="20000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="60" cooldown="20000"/>
+	</npcskills>
+	<!-- Tagnu's Assassine -->
+	<npcskills npcid="235628">
+		<npcskill skillid="21289" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17320" skilllevel="65" probability="50" cooldown="30000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Virulent Ukahim -->
+	<npcskills npcid="235626">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17332" skilllevel="65" probability="70" cooldown="25000" nextChainId="1" nextSkillTime="3000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="100" cooldown="5000" chainId="1" nextChainId="2" nextSkillTime="3000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="50" cooldown="5000" chainId="2" nextChainId="3" nextSkillTime="3000"/>
+		<npcskill skillid="21291" skilllevel="65" probability="50" cooldown="5000" chainId="2" target="ME"/>
+		<npcskill skillid="21291" skilllevel="65" probability="100" cooldown="5000" chainId="3" target="ME"/>
+		<npcskill skillid="20705" skilllevel="65" probability="60" cooldown="30000" nextChainId="4" nextSkillTime="0" target="ME" minhp="0" maxhp="60"/>
+		<npcskill skillid="20706" skilllevel="65" probability="100" cooldown="5000" target="ME" chainId="4"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="30000" target="RANDOM"/>
+		<npcskill skillid="21290" skilllevel="65" probability="60" cooldown="30000" minhp="0" maxhp="50"/>
+		<npcskill skillid="21800" skilllevel="65" probability="60" cooldown="30000" target="RANDOM" priority="1" minhp="0" maxhp="25" nextChainId="5" nextSkillTime="0"/>
+		<npcskill skillid="21801" skilllevel="65" probability="100" cooldown="35000" target="ME" chainId="5"/>
+	</npcskills>
+	<!-- Research Team Scaleraider -->
+	<npcskills npcid="235603">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Research Team Swiftclaw -->
+	<npcskills npcid="235607">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Research Team Drakencaster -->
+	<npcskills npcid="235602">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- Research Team Scalebalde -->
+	<npcskills npcid="235609">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Research Team Veteran Scalemage -->
+	<npcskills npcid="235608">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="20179" skilllevel="65" probability="70" cooldown="20000" target="RANDOM"/>
+		<npcskill skillid="17722" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- Shulack Mercenary Assaulter -->
+	<npcskills npcid="235595">
+		<npcskill skillid="16532" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Shulack Mercenary Watcher -->
+	<npcskills npcid="235591">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18159" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Shulack Mercenary Sorcerer -->
+	<npcskills npcid="235593">
+		<npcskill skillid="18157" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16987" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Shulack Mercenary Healer -->
+	<npcskills npcid="235597">
+		<npcskill skillid="18814" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18751" skilllevel="65" probability="80" cooldown="30000" minhp="0" maxhp="40"/>
+		<npcskill skillid="18779" skilllevel="65" probability="80" cooldown="30000" minhp="50" maxhp="90"/>
+	</npcskills>
+	<!-- Shulack Mercenary Outrider -->
+	<npcskills npcid="235594">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18159" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Shulack Mercenary Scout -->
+	<npcskills npcid="235596"> 
+		<npcskill skillid="16543" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16674" skilllevel="65" probability="60" cooldown="15000"/>
+		<npcskill skillid="18248" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- Shulack Mercenary Medic -->
+	<npcskills npcid="235592">
+		<npcskill skillid="18814" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18751" skilllevel="65" probability="80" cooldown="30000" minhp="0" maxhp="40"/>
+		<npcskill skillid="18779" skilllevel="65" probability="80" cooldown="30000" minhp="50" maxhp="90"/>
+	</npcskills>
+	<!-- shulack mercenary cannon chief -->
+	<npcskills npcid="235600">
+		<npcskill skillid="16794" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16525" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Bodyguard Girakin -->
+	<npcskills npcid="235659">
+		<npcskill skillid="17006" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="13000"/>
+		<npcskill skillid="16678" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Unscrupulous Sachirunerk -->
+	<npcskills npcid="235657">
+		<npcskill skillid="16696" skilllevel="65" probability="100" cooldown="30000"/>
+		<npcskill skillid="16570" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="18157" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16987" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- Bodyguard Yatakin -->
+	<npcskills npcid="235658">
+		<npcskill skillid="21212" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21213" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21214" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21215" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- dukaki peon -->
+	<npcskills npcid="235615">
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Danuar Sanctuary Worker -->
+	<npcskills npcid="235614">
+		<npcskill skillid="19780" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Ancient Bloodwing -->
+	<npcskills npcid="235611">
+		<npcskill skillid="17968" skilllevel="65" probability="60" cooldown="15000"/>
+	</npcskills>
+	<!-- Ancient Clodworm -->
+	<npcskills npcid="235612">
+		<npcskill skillid="17558" skilllevel="65" probability="60" cooldown="25000" minhp="0" maxhp="80"/>
+	</npcskills>
+	<!-- Sanctioner Angolem -->
+	<npcskills npcid="235616">
+		<npcskill skillid="16472" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- END Danuar Sanctuary -->
 </npc_skill_templates>

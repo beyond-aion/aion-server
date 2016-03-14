@@ -2,34 +2,45 @@ package ai.instance.danuarSanctuary;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.AISubState;
-import com.aionemu.gameserver.ai2.manager.EmoteManager;
+import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author xTz
  */
 @AIName("siege_drill")
-public class SiegeDrill extends GeneralNpcAI2 {
+public class SiegeDrill extends NpcAI2 {
+
 
 	protected int startBarAnimation = 1;
 	protected int cancelBarAnimation = 2;
 	private AtomicBoolean isUsed = new AtomicBoolean(false);
+
+	@Override
+	public int modifyDamage(Creature creature, int damage) {
+		return 0;
+	}
+
+	@Override
+	public int modifyDamage(Skill skill, Creature creature, int damage) {
+		return 0;
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {
@@ -37,6 +48,17 @@ public class SiegeDrill extends GeneralNpcAI2 {
 			return;
 		}
 		handleUseItemStart(player);
+	}
+
+	@Override
+	protected void handleMoveArrived() {
+		super.handleMoveArrived();
+		MoveEventHandler.onMoveArrived(this);
+	}
+
+	@Override
+	protected void handleAttack(Creature creature) {
+		//do nothing
 	}
 
 	protected void handleUseItemStart(final Player player) {
@@ -57,16 +79,11 @@ public class SiegeDrill extends GeneralNpcAI2 {
 			player.getObserveController().attach(observer);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), startBarAnimation));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
-			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), cancelBarAnimation));
-					player.getObserveController().removeObserver(observer);
-					handleUseItemFinish(player);
-				}
-
+			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
+				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), cancelBarAnimation));
+				player.getObserveController().removeObserver(observer);
+				handleUseItemFinish(player);
 			}, delay));
 		} else {
 			handleUseItemFinish(player);
@@ -83,32 +100,17 @@ public class SiegeDrill extends GeneralNpcAI2 {
 			WalkManager.startWalking(this);
 			getOwner().setState(1);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
+			ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+				Npc npc = getPosition().getWorldMapInstance().getNpc(233189);
+				if (npc != null) {
+					getOwner().getSpawn().setWalkerId(null);
+					WalkManager.stopWalking(this);
+					getOwner().setTarget(npc);
 
-				@Override
-				public void run() {
-					Npc npc = getPosition().getWorldMapInstance().getNpc(233189);
-					if (npc != null) {
-						getOwner().setTarget(npc);
-
-						getOwner().getController().useSkill(20778);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								getOwner().getSpawn().setWalkerId(null);
-								getMoveController().abortMove();
-								setStateIfNot(AIState.IDLE);
-								setSubStateIfNot(AISubState.NONE);
-								EmoteManager.emoteStopWalking(getOwner());
-								AI2Actions.deleteOwner(SiegeDrill.this);
-							}
-
-						}, 3500);
-					}
+					SkillEngine.getInstance().getSkill(getOwner(), 20778, 65, npc).useSkill();
+					ThreadPoolManager.getInstance().schedule((Runnable) () -> AI2Actions.deleteOwner(SiegeDrill.this), 5000);
 				}
-
-			}, 1500);
+			}, 4800);
 		}
 	}
 

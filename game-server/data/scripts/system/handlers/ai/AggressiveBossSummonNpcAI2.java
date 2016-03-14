@@ -17,9 +17,14 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
     @Override
     public void handleAttackComplete() {
         super.handleAttackComplete();
-        if (searched && (spawner == null || spawner.getLifeStats().isAlreadyDead())) {
+        if (searched && (spawner == null || spawner.getLifeStats().isAlreadyDead() || spawner.getAggroList().getMostHated() == null)) {
             getOwner().getController().onDelete();
         }
+    }
+
+    @Override
+    public void handleFinishAttack() {
+        getOwner().getController().onDelete();
     }
 
     @Override
@@ -36,9 +41,12 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
             @Override
             public void run() {
+                if (getOwner() == null || getOwner().getLifeStats().isAlreadyDead() || getOwner().getLifeStats().isAboutToDie()) {
+                    return;
+                }
                 for (VisibleObject obj : getOwner().getKnownList().getKnownObjects().values()) {
                     if (obj != null && obj instanceof Creature) {
-                        if (obj.getObjectId() == getOwner().getCreatorId()) {
+                        if (obj.getObjectId() == getOwner().getCreatorId() && !((Creature) obj).getLifeStats().isAlreadyDead()) {
                             spawner = (Creature) obj;
                             break;
                         }

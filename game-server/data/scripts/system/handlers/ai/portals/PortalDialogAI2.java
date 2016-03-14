@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
@@ -160,6 +161,20 @@ public class PortalDialogAI2 extends PortalAI2 {
 					break;
 				case 731583:
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+					break;
+				case 731570:
+					if (player.getRace() == Race.ASMODIANS) {
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352, 0)); // seized danuar sanctuary
+					} else {
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011, 0)); // danuar sanctuary
+					}
+					break;
+				case 731549:
+					if (player.getRace() == Race.ELYOS) {
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011, 0)); // seized danuar sanctuary
+					} else {
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352, 0)); // danuar sanctuary
+					}
 					break;
 				default:
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId, 0));

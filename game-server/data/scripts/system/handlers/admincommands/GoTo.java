@@ -354,7 +354,10 @@ public class GoTo extends AdminCommand {
 						|| destination.equalsIgnoreCase("Ruhnadium"))
 			goTo(player, 301110000, 256.60f, 257.99f, 241.78f);
 		else if (destination.equalsIgnoreCase("Danuar Sanctuary") || destination.equalsIgnoreCase("DS")
-						|| destination.equalsIgnoreCase("Verlorene Zukunft"))
+						|| destination.equalsIgnoreCase("Zuflucht der Ruhn") || destination.equalsIgnoreCase("ZDR"))
+			goTo(player, 301380000, 388.66f, 1185.07f, 55.31f);
+		else if (destination.equalsIgnoreCase("Seized Danuar Sanctuary") || destination.equalsIgnoreCase("SDS")
+						|| destination.equalsIgnoreCase("Verlorene Zukunft") || destination.equalsIgnoreCase("VZ"))
 			goTo(player, 301140000, 388.66f, 1185.07f, 55.31f);
 		else if (destination.equalsIgnoreCase("Nightmare Circus") || destination.equalsIgnoreCase("NC")
 						|| destination.equalsIgnoreCase("Rukibuki Zirkus"))
