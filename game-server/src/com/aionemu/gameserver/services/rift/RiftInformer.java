@@ -153,7 +153,7 @@ public class RiftInformer {
 			switch (rift.getRiftTemplate()) {
 				// ELYOS
 				case KAISINEL_AM:
-					local.put(7, local.get(7) + 1); //rift opened in brusthonin
+					local.put(7, local.get(7) + 1); // rift opened in brusthonin
 					break;
 				case ELTNEN_AM:
 				case ELTNEN_BM:
@@ -179,20 +179,20 @@ public class RiftInformer {
 				case CYGNEA_DM:
 				case CYGNEA_EM:
 				case CYGNEA_FM:
-					local.put(6, local.get(6) + 1); //rift to asmodae
+					local.put(6, local.get(6) + 1); // rift to asmodae
 					break;
 				case CYGNEA_GM:
 				case CYGNEA_HM:
 				case CYGNEA_IM:
 					if (rift.isVolatile()) {
-						local.put(10, local.get(10) + 1);
+						local.put(10, local.get(10) + 1); // chaos rift to asmodae
 					} else {
-						local.put(6, local.get(6) + 1); //rift to asmodae
+						local.put(6, local.get(6) + 1); // rift to asmodae
 					}
 					break;
 				// ASMOADIANS
 				case MARCHUTAN_AM:
-					local.put(1, local.get(1) + 1); //rift opened in theo
+					local.put(1, local.get(1) + 1); // rift opened in theo
 					break;
 				case MORHEIM_AM:
 				case MORHEIM_BM:
@@ -218,33 +218,20 @@ public class RiftInformer {
 				case ENSHAR_DM:
 				case ENSHAR_EM:
 				case ENSHAR_FM:
-					local.put(0, local.get(0) + 1);
+					local.put(0, local.get(0) + 1); // rift to elysea
 					break;
 				case ENSHAR_GM:
 				case ENSHAR_HM:
 				case ENSHAR_IM:
 					if (rift.isVolatile()) {
-						local.put(4, local.get(4) + 1);
+						local.put(4, local.get(4) + 1); // chaos rift to elysea
 					} else {
-						local.put(0, local.get(0) + 1);
+						local.put(0, local.get(0) + 1); // rift to elysea
 					}
 					break;
 
 			}
 		}
-		/*
-			local.put(0, local.get(0) + 1);
-			if (rift.isVortex())
-				local.put(1, local.get(1) + 1);
-			local.put(2, local.get(2) + 1);// live party
-			local.put(3, local.get(3) + 1);// shugo emperor vault
-			local.put(4, local.get(4) + 1);// rift battle
-		} else {
-			local.put(5, local.get(5) + 1);// rift battle
-			local.put(6, local.get(6) + 1);// rift battle
-			if (rift.isVortex())
-				local.put(7, local.get(7) + 1);
-		} */
 		return local;
 	}
 
