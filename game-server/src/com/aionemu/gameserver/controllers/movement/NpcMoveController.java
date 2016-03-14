@@ -314,6 +314,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}
 		started.set(false);
+		destination = Destination.TARGET_OBJECT;
 		targetDestX = 0;
 		targetDestY = 0;
 		targetDestZ = 0;
