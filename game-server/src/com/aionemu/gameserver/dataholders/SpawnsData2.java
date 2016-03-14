@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import static ch.lambdaj.Lambda.extractIterator;
-import static ch.lambdaj.Lambda.flatten;
-import static ch.lambdaj.Lambda.on;
-import gnu.trove.map.hash.TIntObjectHashMap;
+import static ch.lambdaj.Lambda.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,16 +21,15 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
@@ -52,8 +48,15 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
+import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
+import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.WorldType;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -412,6 +415,86 @@ public class SpawnsData2 {
 
 	public int size() {
 		return allSpawnMaps.size();
+	}
+
+	/**
+	 * first search: current map
+	 * second search: all maps of players race
+	 * third search: all other maps
+	 * @param player
+	 * @param npcId
+	 * @param worldId
+	 * @return
+	 */
+	public SpawnSearchResult getNearestSpawnByNpcId(Player player, int npcId, int worldId) {
+		Spawn spawns = getSpawnsForNpc(worldId, npcId);
+		if (spawns == null) { //-> there are no spawns for this npcId on the current map
+			//search all maps of players race
+			for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
+				if (template.getMapId() == worldId)
+					continue;
+				if ((template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS) ||
+						(template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
+					spawns = getSpawnsForNpc(template.getMapId(), npcId);
+					if (spawns != null) {
+						worldId = template.getMapId();
+						break;
+					}
+				}
+			}
+
+			//-> there are no spawns for this npcId on all maps of players race
+			//search all other maps
+			if (spawns == null) {
+				for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
+					if ((template.getMapId() == worldId) || (template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS) ||
+							(template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
+						continue;
+					}
+					spawns = getSpawnsForNpc(template.getMapId(), npcId);
+					if (spawns != null) {
+						worldId = template.getMapId();
+						break;
+					}
+				}
+			}
+
+			if (spawns == null) {
+				return null;
+			}
+		}
+
+		return getNearestSpawn((player != null ? player.getPosition() : null), spawns.getSpawnSpotTemplates(), worldId);
+	}
+
+	private SpawnSearchResult getNearestSpawn(WorldPosition position, List<SpawnSpotTemplate> spawnSpots, int worldId) {
+		if (spawnSpots.isEmpty() || position == null) {
+			return null;
+		}
+		if (worldId != position.getMapId()) {
+			return new SpawnSearchResult(worldId, spawnSpots.get(0));
+		}
+
+		SpawnSpotTemplate temp = null;
+		float distance = 0;
+		for (SpawnSpotTemplate template : spawnSpots) {
+			if (temp == null) {
+				temp = template;
+				distance = (float) MathUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				if (distance <= 1f)
+					break;
+			} else {
+				float dist = (float) MathUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				if (dist < distance) {
+					distance = dist;
+					temp = template;
+					if (distance <= 1f)
+						break;
+				}
+			}
+
+		}
+		return temp == null ? null : new SpawnSearchResult(worldId, temp);
 	}
 
 	/**
