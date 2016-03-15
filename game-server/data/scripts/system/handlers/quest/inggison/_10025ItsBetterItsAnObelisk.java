@@ -1,8 +1,11 @@
 package quest.inggison;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -30,8 +33,6 @@ public class _10025ItsBetterItsAnObelisk extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(182206623, questId);
 		qe.registerQuestItem(182206624, questId);
 		qe.registerQuestItem(182206626, questId);
@@ -40,16 +41,18 @@ public class _10025ItsBetterItsAnObelisk extends QuestHandler {
 		for (int npc_id : npc_ids) {
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		}
+		qe.registerOnLogOut(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10024, true);
+	public boolean onLogOutEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() != QuestStatus.COMPLETE) {
+			qs.setPersistentState(PersistentState.DELETED);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
