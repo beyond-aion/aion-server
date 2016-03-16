@@ -10,7 +10,7 @@
 			13705 [XML] Coastal Bypass Operation
 			13706 [XML] North Relay Relay
 			13707 [UNUSED] Unused Quest
-			13708 [XML] Proximity Protect
+			13708 [SCRIPT] Proximity Protect
 			13709 [UNUSED] Unused Quest
 			13710 [UNUSED] Unused Quest
 			13711 [UNUSED] Unused Quest
@@ -59,7 +59,7 @@
 			23705 [XML] We Don't Need No Stinking Road
 			23706 [XML] Don't Eat the Messenger
 			23707 [UNUSED] Unused Quest
-			23708 [XML] Sound the Alarm
+			23708 [SCRIPT] Sound the Alarm
 			23709 [UNUSED] Unused Quest
 			23711 [UNUSED] Unused Quest
 			23712 [XML] Abeorn Makes Medals
@@ -121,10 +121,8 @@
 	<!-- REPORTING QUESTS -->
 	<report_to id="13700" start_npc_ids="800527" end_npc_ids="802350"/>
 	<report_to id="13701" start_npc_ids="798926" end_npc_ids="802350"/>
-	<report_to id="13708" start_npc_ids="802344" end_npc_ids="802344"/>
 	<report_to id="23700" start_npc_ids="800529" end_npc_ids="802353"/>
 	<report_to id="23701" start_npc_ids="800529" end_npc_ids="802353"/>
-	<report_to id="23708" start_npc_ids="802344" end_npc_ids="802344"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375">
 		<monster var="0" npc_ids="235346 235347 235348 235349" end_var="4"/>
