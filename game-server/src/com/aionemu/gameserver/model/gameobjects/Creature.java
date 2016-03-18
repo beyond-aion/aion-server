@@ -699,7 +699,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isPvpTarget(Creature creature) {
-		return getActingCreature() instanceof Player && creature.getActingCreature() instanceof Player;
+		return getActingCreature() instanceof Player && (creature.getActingCreature() instanceof Player || creature.getActingCreature().getMaster() instanceof Player);
 	}
 
 	public void revalidateZones() {
