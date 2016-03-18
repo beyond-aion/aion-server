@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.gameobjects;
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
+import com.aionemu.gameserver.model.stats.container.ServantGameStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 
@@ -25,6 +27,12 @@ public class Servant extends SummonedObject<Creature> {
 	}
 
 	@Override
+	protected void setupStatContainers() {
+		setGameStats(new ServantGameStats(this));
+		setLifeStats(new NpcLifeStats(this));
+	}
+
+	@Override
 	public NpcObjectType getNpcObjectType() {
 		return objectType;
 	}
@@ -36,6 +44,10 @@ public class Servant extends SummonedObject<Creature> {
 	@Override
 	public String getMasterName() {
 		return StringUtils.EMPTY;
+	}
+
+	public void setUpStats() {
+		((ServantGameStats) getGameStats()).setUpStats();
 	}
 
 }

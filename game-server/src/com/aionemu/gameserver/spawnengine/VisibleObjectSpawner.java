@@ -362,6 +362,7 @@ public class VisibleObjectSpawner {
 		servant.setEffectController(new EffectController(servant));
 		servant.setCreator(creator);
 		servant.setNpcObjectType(objectType);
+		servant.setUpStats();
 		SpawnEngine.bringIntoWorld(servant, spawn, instanceIndex);
 		if (servant.getSkillList() != null && !servant.getSkillList().getNpcSkills().isEmpty()) {
 			SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(servant.getSkillList().getRandomSkill().getSkillId());
@@ -419,8 +420,9 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Summon spawnSummon(Player creator, int npcId, int skillId, int skillLevel, int time) {
-		float x = creator.getX();
-		float y = creator.getY();
+		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(creator.getHeading()));
+		float x = creator.getX() + (float) (Math.cos(radian) * 2);
+		float y = creator.getY() + (float) (Math.sin(radian) * 2);
 		float z = creator.getZ();
 		byte heading = creator.getHeading();
 		int worldId = creator.getWorldId();

@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -303,7 +304,7 @@ public class AttackUtil {
 		HitType ht = HitType.PHHIT;
 		float damageMultiplier = 0;
 		if (!noReduce) {
-			if (effector instanceof Npc) {
+			if (effector instanceof Npc && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
 				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 				// should we calculate damage always? usually only if ht == PHHIT
