@@ -32089,55 +32089,67 @@
 	<decomposable item_id="188053688" decomposable_name="Inggison Lesser Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" race="ASMODIANS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark"/>
 			<item id="186000236" name="Blood Mark" race="ASMODIANS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" race="ASMODIANS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053689" decomposable_name="Inggison Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark" count="2"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="2" race="ASMODIANS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark" count="2"/>
 			<item id="186000236" name="Blood Mark" count="2" race="ASMODIANS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="2" race="ASMODIANS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053690" decomposable_name="Inggison Greater Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark" count="3"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="3" race="ASMODIANS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark" count="3"/>
 			<item id="186000236" name="Blood Mark" count="3" race="ASMODIANS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="3" race="ASMODIANS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053691" decomposable_name="Gelkmaros Lesser Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" race="ELYOS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark"/>
 			<item id="186000236" name="Blood Mark" race="ELYOS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" race="ELYOS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053692" decomposable_name="Gelkmaros Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark" count="2"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="2" race="ELYOS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark" count="2"/>
 			<item id="186000236" name="Blood Mark" count="2" race="ELYOS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="2" race="ELYOS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053693" decomposable_name="Gelkmaros Greater Conqueror's Mark Box">
 		<items chance="95.0">
 			<item id="186000238" name="Conqueror's Mark" count="3"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="3" race="ELYOS"/>
 		</items>
 		<items chance="5.0">
 			<item id="186000238" name="Conqueror's Mark" count="3"/>
 			<item id="186000236" name="Blood Mark" count="3" race="ELYOS"/>
+			<item id="186000399" name="Honorable Conqueror's Mark" count="3" race="ELYOS"/>
 		</items>
 	</decomposable>
 	<decomposable item_id="188053694" decomposable_name="Ride Box of Conquest">

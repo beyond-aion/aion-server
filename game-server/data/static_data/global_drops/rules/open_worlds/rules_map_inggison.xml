@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Inggison Conqueror's Mark Box (Normal)" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" name="Inggison" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236307" name="Inggison Dionae" />
+			<gd_npc npc_id="236308" name="Inggison Excura" />
+			<gd_npc npc_id="236309" name="Inggison Rotron" />
+			<gd_npc npc_id="236310" name="Inggison Kirrin" />
+			<gd_npc npc_id="236311" name="Inggison Puca" />
+			<gd_npc npc_id="236312" name="Inggison Rynoce" />
+			<gd_npc npc_id="236313" name="Inggison Gnarl" />
+			<gd_npc npc_id="236314" name="Inggison Baku" />
+			<gd_npc npc_id="236315" name="Inggison Crettin" />
+			<gd_npc npc_id="236316" name="Inggison Serrator" />
+			<gd_npc npc_id="236317" name="Inggison Obscura" />
+			<gd_npc npc_id="236318" name="Inggison Ashulagen" />
+			<gd_npc npc_id="236319" name="Inggison Ksellid" />
+			<gd_npc npc_id="236320" name="Inggison Vortile" />
+			<gd_npc npc_id="236321" name="Inggison Luciferin" />
+			<gd_npc npc_id="236322" name="Inggison Wraithling" />
+			<gd_npc npc_id="236323" name="Inggison Gryphu" />
+			<gd_npc npc_id="236324" name="Inggison Barghest" />
+			<gd_npc npc_id="236325" name="Inggison Dragrint" />
+			<gd_npc npc_id="236326" name="Inggison Murmur" />
+			<gd_npc npc_id="236327" name="Inggison Spaller" />
+			<gd_npc npc_id="236328" name="Inggison Petrahulk" />
+			<gd_npc npc_id="236329" name="Inggison Ksellid" />
+			<gd_npc npc_id="236330" name="Inggison Drake" />
+			<gd_npc npc_id="236331" name="Inggison Shulack Shaman" />
+			<gd_npc npc_id="236332" name="Inggison Shulack Lookout" />
+			<gd_npc npc_id="236333" name="Inggison Shulack Assailant" />
+			<gd_npc npc_id="236334" name="Inggison Shulack Hunter" />
+		</gd_npcs>
+		<gd_items>
+			<!-- 70% Lesser, 20% Normal, 10% Greater -->
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
+			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Inggison Conqueror's Mark Box (Vulgar)" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" name="Inggison" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236335" name="Vulgar Inggison Dionae" />
+			<gd_npc npc_id="236336" name="Vulgar Inggison Excura" />
+			<gd_npc npc_id="236337" name="Vulgar Inggison Rotron" />
+			<gd_npc npc_id="236338" name="Vulgar Inggison Kirrin" />
+			<gd_npc npc_id="236339" name="Vulgar Inggison Puca" />
+			<gd_npc npc_id="236340" name="Vulgar Inggison Rynoce" />
+			<gd_npc npc_id="236341" name="Vulgar Inggison Gnarl" />
+			<gd_npc npc_id="236342" name="Vulgar Inggison Baku" />
+			<gd_npc npc_id="236343" name="Vulgar Inggison Crettin" />
+			<gd_npc npc_id="236344" name="Vulgar Inggison Serrator" />
+			<gd_npc npc_id="236345" name="Vulgar Inggison Obscura" />
+			<gd_npc npc_id="236346" name="Vulgar Inggison Ashulagen" />
+			<gd_npc npc_id="236347" name="Vulgar Inggison Ksellid" />
+			<gd_npc npc_id="236348" name="Vulgar Inggison Vortile" />
+			<gd_npc npc_id="236349" name="Vulgar Inggison Luciferin" />
+			<gd_npc npc_id="236350" name="Vulgar Inggison Wraithling" />
+			<gd_npc npc_id="236351" name="Vulgar Inggison Gryphu" />
+			<gd_npc npc_id="236352" name="Vulgar Inggison Barghest" />
+			<gd_npc npc_id="236353" name="Vulgar Inggison Dragrint" />
+			<gd_npc npc_id="236354" name="Vulgar Inggison Murmur" />
+			<gd_npc npc_id="236355" name="Vulgar Inggison Spaller" />
+			<gd_npc npc_id="236356" name="Vulgar Inggison Petrahulk" />
+			<gd_npc npc_id="236357" name="Vulgar Inggison Ksellid" />
+			<gd_npc npc_id="236358" name="Vulgar Inggison Drake" />
+			<gd_npc npc_id="236359" name="Vulgar Inggison Shulack Shaman" />
+			<gd_npc npc_id="236360" name="Vulgar Inggison Shulack Lookout" />
+			<gd_npc npc_id="236361" name="Vulgar Inggison Shulack Assailant" />
+			<gd_npc npc_id="236362" name="Vulgar Inggison Shulack Hunter" />
+		</gd_npcs>
+		<gd_items>
+			<!-- 60% Lesser, 25% Normal, 15% Greater -->
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053688" name="Inggison Lesser Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053689" name="Inggison Conqueror's Mark Box" />
+			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
+			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
+			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
+		</gd_items>
+	</gd_rule>
+</global_rules>

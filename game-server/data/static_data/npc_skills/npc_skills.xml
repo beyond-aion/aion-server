@@ -67270,4 +67270,345 @@
 		<npcskill skillid="16472" skilllevel="65" probability="70" cooldown="15000"/>
 	</npcskills>
 	<!-- END Danuar Sanctuary -->
+	<!-- Conquest Offering Npcs -->
+	<!-- Inggison -->
+	<npcskills npcid="236307">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236308">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236309">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236310">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236311">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236312">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236313">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236314">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236315">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236316">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236317">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236318">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236319">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236320">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236321">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236322">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236323">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236324">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236325">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236326">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236327">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236328">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236329">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236330">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236331">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236332">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236333">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236334">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<!-- vulgar versions of the same npcs-->
+	<npcskills npcid="236335">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236336">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236337">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236338">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236339">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236340">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236341">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236342">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236343">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236344">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236345">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236346">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236347">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236348">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236349">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236350">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236351">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236352">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236353">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236354">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236355">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236356">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236357">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236358">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236359">
+		<npcskill skillid="21923" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236360">
+		<npcskill skillid="21922" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236361">
+		<npcskill skillid="21923" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236362">
+		<npcskill skillid="21922" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<!-- Gelkmaros -->
+	<npcskills npcid="236363">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236364">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236365">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236366">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236367">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236368">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236369">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236370">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236371">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236372">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236373">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236374">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236375">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236376">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236377">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236378">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236379">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236380">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236381">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236382">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236383">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236384">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236385">
+		<npcskill skillid="21922" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236386">
+		<npcskill skillid="21923" skilllevel="1" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236387">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236388">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236389">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236390">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<!-- vulgar versions of the same npcs -->
+	<npcskills npcid="236391">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236392">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236393">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236394">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236395">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236396">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236397">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236398">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236399">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236400">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236401">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236402">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236403">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236404">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236405">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236406">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236407">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236408">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236409">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236410">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236411">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236412">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236413">
+		<npcskill skillid="21922" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236414">
+		<npcskill skillid="21923" skilllevel="2" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236415">
+		<npcskill skillid="21923" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236416">
+		<npcskill skillid="21922" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236417">
+		<npcskill skillid="21922" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
+	<npcskills npcid="236418">
+		<npcskill skillid="21923" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
+	</npcskills>
 </npc_skill_templates>
