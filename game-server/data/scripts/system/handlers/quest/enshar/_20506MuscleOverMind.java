@@ -2,7 +2,6 @@ package quest.enshar;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,8 +11,9 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @Author Majka
- * @Description:
+ * @author Majka
+ * @modified Pad
+ * @description:
  * Talk with Sefrim.
  * Talk with Julia.
  * Investigate the Mindboggle Waste.
@@ -143,7 +143,7 @@ public class _20506MuscleOverMind extends QuestHandler {
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 						@Override
 						public void run() {
-							RestoreQuestStep(env);
+							restoreQuestStep(env);
 						}
 					}, 600000);
 				}
@@ -168,10 +168,7 @@ public class _20506MuscleOverMind extends QuestHandler {
 				if (var == 3) { // Step 3: Eliminate the Enigmatic Drakan who appears.
 					qs.setQuestVar(var+1);
 					updateQuestStatus(env);
-					
-					Npc npc = (Npc) env.getVisibleObject();
-					if (npc != null)
-						QuestService.addNewSpawn(220080000, player.getInstanceId(), 219957, npc.getPosition().getX(), npc.getPosition().getY(), npc.getPosition().getZ(), npc.getPosition().getHeading(), 5);
+					QuestService.addNewSpawn(220080000, player.getInstanceId(), 219957, 1938.0f, 83.9f, 235.0f, (byte) 90, 8);
 					return true;
 				}
 				break;
@@ -179,10 +176,9 @@ public class _20506MuscleOverMind extends QuestHandler {
 				if (var == 4) { // Step 4: Defeat the Interhypno Ego.
 					qs.setQuestVar(var+1);
 					updateQuestStatus(env);
-					
-					Npc npc = (Npc) env.getVisibleObject();
-					if (npc != null && !qe.getQuestNpc(804743).isWasSpawned())
-						QuestService.addNewSpawn(220080000, player.getInstanceId(), 804743, npc.getPosition().getX(), npc.getPosition().getY(), npc.getPosition().getZ(), npc.getPosition().getHeading(), 5); // Jadun
+
+					if (player.getPosition().getWorldMapInstance().getNpc(804743) == null)
+						QuestService.addNewSpawn(220080000, player.getInstanceId(), 804743, 1938.0f, 83.9f, 235.0f, (byte) 90, 6); // Jadun
 					return true;
 				}
 				break;
@@ -192,7 +188,7 @@ public class _20506MuscleOverMind extends QuestHandler {
 	
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
-		return RestoreQuestStep(env);
+		return restoreQuestStep(env);
 	}
 	
 	@Override
@@ -205,7 +201,7 @@ public class _20506MuscleOverMind extends QuestHandler {
 		return defaultOnLvlUpEvent(env, 20500);
 	}
 	
-	private boolean RestoreQuestStep(QuestEnv env) {
+	private boolean restoreQuestStep(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		

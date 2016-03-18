@@ -22,7 +22,8 @@ import com.aionemu.gameserver.services.RecipeService;
 import com.aionemu.gameserver.services.item.ItemService;
 
 /**
- * @author Mr. Poke reworked Bobobear
+ * @author Mr. Poke
+ * @reworked Bobobear
  */
 public class WorkOrders extends QuestHandler {
 
@@ -49,11 +50,12 @@ public class WorkOrders extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(workOrdersData.getId());
+		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 		if (workOrdersData.getStartNpcIds().contains(targetId)) {
-			QuestState qs = player.getQuestStateList().getQuestState(workOrdersData.getId());
 			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id());
 					}
@@ -74,7 +76,7 @@ public class WorkOrders extends QuestHandler {
 					}
 				}
 			} else if (qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (dialog == DialogAction.QUEST_SELECT) {
 					int var = qs.getQuestVarById(0);
 					if (QuestService.collectItemCheck(env, false)) {
 						changeQuestStep(env, var, var, true); // reward
@@ -104,7 +106,7 @@ public class WorkOrders extends QuestHandler {
 						player.getInventory().decreaseByItemId(collectItem.getItemId(), count);
 				}
 				player.getRecipeList().deleteRecipe(player, workOrdersData.getRecipeId());
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					QuestService.finishQuest(env, 0);
 					env.setQuestId(workOrdersData.getId());
 					return sendQuestDialog(env, 1008);

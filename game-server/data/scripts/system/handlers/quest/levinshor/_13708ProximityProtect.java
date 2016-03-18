@@ -1,4 +1,4 @@
-package quest.drakenspire_depths;
+package quest.levinshor;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -8,25 +8,26 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Pad
  */
-public class _28954HandItOver extends QuestHandler {
+public class _13708ProximityProtect extends QuestHandler {
 
-	private static final int questId = 28954;
-	private static final int itemId = 182215755;
-	private static final int npcId = 804738;
+	private static final int questId = 13708;
+	private static final int npcId = 802332; // Feleus
+	private static final int itemId = 182215529;
 
-	public _28954HandItOver() {
+	public _13708ProximityProtect() {
 		super(questId);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestItem(itemId, questId);
+		qe.registerQuestNpc(npcId).addOnQuestStart(questId);
 		qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
+		qe.registerQuestItem(itemId, questId);
 	}
 
 	@Override
@@ -36,27 +37,31 @@ public class _28954HandItOver extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (dialog == DialogAction.QUEST_ACCEPT_1) {
-				QuestService.startQuest(env);
-				return closeDialogWindow(env);
-			} else if (dialog == DialogAction.QUEST_REFUSE_1)
-				return closeDialogWindow(env);
-		} else if (qs.getStatus() == QuestStatus.START) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 2375);
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
-					return defaultCloseDialog(env, 0, 0, true, true);
+				if (dialog == DialogAction.QUEST_SELECT) {
+					return sendQuestDialog(env, 1011);
+				} else {
+					return sendQuestStartDialog(env, itemId, 1);
+				}
+			}
+		} else if (qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
+			if (targetId == npcId) {
+				switch (dialog) {
+					case QUEST_SELECT: {
+						if (var == 1) {
+							return sendQuestDialog(env, 2375);
+						}
+					}
+					case SELECT_QUEST_REWARD: {
+						return defaultCloseDialog(env, 1, 1, true, true);
+					}
+				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.USE_OBJECT) {
-					return sendQuestDialog(env, 5);
-				} else {
-					removeQuestItem(env, itemId, 1);
-					return sendQuestEndDialog(env);
-				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
@@ -66,13 +71,12 @@ public class _28954HandItOver extends QuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (item.getItemId() != itemId)
-			return HandlerResult.FAILED;
-
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (player.isInsideZone(ZoneName.get("LDF4_ADVANCE_ITEMUSEAREA_Q13708_600100000"))) {
+				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false));
+			}
 		}
 		return HandlerResult.FAILED;
 	}
+	
 }

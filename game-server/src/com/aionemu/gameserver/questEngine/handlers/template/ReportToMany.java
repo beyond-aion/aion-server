@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javolution.util.FastMap;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -34,6 +35,7 @@ public class ReportToMany extends QuestHandler {
 	private final int maxVar;
 	private final FastMap<Integer, NpcInfos> npcInfos;
 	private boolean mission;
+	private boolean isDataDriven;
 	private QuestItems workItem;
 
 	/**
@@ -61,6 +63,7 @@ public class ReportToMany extends QuestHandler {
 		this.endDialog = endDialog;
 		this.maxVar = maxVar;
 		this.mission = mission;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -126,10 +129,7 @@ public class ReportToMany extends QuestHandler {
 			}
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					if (startDialog != 0)
-						return sendQuestDialog(env, startDialog);
-					else
-						return sendQuestDialog(env, 1011);
+					return sendQuestDialog(env, startDialog != 0 ? startDialog : isDataDriven ? 4762 : 1011);
 				} else if (dialog == DialogAction.QUEST_ACCEPT || dialog == DialogAction.QUEST_ACCEPT_1 || dialog == DialogAction.QUEST_ACCEPT_SIMPLE) {
 					if (workItem != null) {
 						// some quest work items come from other quests, so we don't add them again

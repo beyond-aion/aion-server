@@ -72,7 +72,7 @@ public class _23704LoudNoises extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LDF4_ADVANCE_ITEMUSEAREA_Q23704"))) {
+			if (player.isInsideZone(ZoneName.get("LDF4_ADVANCE_ITEMUSEAREA_Q23704_600100000"))) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false));
 			}
 		}

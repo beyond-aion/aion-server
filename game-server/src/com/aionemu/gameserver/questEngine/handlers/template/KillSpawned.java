@@ -22,12 +22,14 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author vlog
+ * @modified Pad
  */
 public class KillSpawned extends QuestHandler {
 
 	private final Set<Integer> startNpcs = new HashSet<Integer>();
 	private final Set<Integer> endNpcs = new HashSet<Integer>();
 	private final FastMap<List<Integer>, Monster> spawnedMonsters;
+	private final boolean isDataDriven;
 	private TIntArrayList spawnerObjects;
 
 	public KillSpawned(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<List<Integer>, Monster> spawnedMonsters) {
@@ -45,6 +47,7 @@ public class KillSpawned extends QuestHandler {
 		for (Monster m : spawnedMonsters.values()) {
 			spawnerObjects.add(m.getSpawnerObject());
 		}
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -84,19 +87,20 @@ public class KillSpawned extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1011);
+				if (dialog == DialogAction.QUEST_SELECT) {
+					return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (spawnerObjects.contains(targetId)) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					int monsterId = 0;
 					for (Monster m : spawnedMonsters.values()) {
 						if (m.getSpawnerObject() == targetId) {
@@ -118,9 +122,9 @@ public class KillSpawned extends QuestHandler {
 				}
 
 				if (endNpcs.contains(targetId)) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT) {
+					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 10002);
-					} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 						return sendQuestDialog(env, 5);
 					}
 				}

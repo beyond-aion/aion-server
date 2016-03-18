@@ -15,7 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author vlog, modified Bobobear
+ * @author vlog
+ * @modified Bobobear
  */
 public class SkillUse extends QuestHandler {
 

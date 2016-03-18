@@ -21,6 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Altaress, Bobobear
+ * @modified Pad
  */
 public class ItemOrders extends QuestHandler {
 
@@ -70,8 +71,10 @@ public class ItemOrders extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+			switch (dialog) {
+				case QUEST_ACCEPT:
+				case QUEST_ACCEPT_1:
+				case QUEST_ACCEPT_SIMPLE: {
 					if (player.getInventory().getItemCountByItemId(startItemId) > 0) {
 						QuestService.startQuest(env);
 					} else {
@@ -80,8 +83,13 @@ public class ItemOrders extends QuestHandler {
 					}
 					return closeDialogWindow(env);
 				}
+				case QUEST_REFUSE:
+				case QUEST_REFUSE_1:
+				case QUEST_REFUSE_SIMPLE: {
+					return closeDialogWindow(env);
+				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if ((targetId == talkNpc1 && talkNpc1 != 0) || (targetId == talkNpc2 && talkNpc2 != 0)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
@@ -95,7 +103,7 @@ public class ItemOrders extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
 					case USE_OBJECT: {

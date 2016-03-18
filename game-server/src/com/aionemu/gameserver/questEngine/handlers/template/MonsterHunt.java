@@ -48,7 +48,7 @@ public class MonsterHunt extends QuestHandler {
 	private final String startZone;
 	private final int startDistanceNpc;
 	private final boolean rewardNextStep;
-	private final boolean dataDriven;
+	private final boolean isDataDriven;
 
 	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
 		int endDialog, List<Integer> aggroNpcs, int invasionWorld, String startZone, int startDistanceNpc, boolean rewardNextStep) {
@@ -74,7 +74,7 @@ public class MonsterHunt extends QuestHandler {
 		this.startZone = startZone;
 		this.startDistanceNpc = startDistanceNpc;
 		this.rewardNextStep = rewardNextStep;
-		this.dataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -117,15 +117,16 @@ public class MonsterHunt extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, startDialog != 0 ? startDialog : 1011);
+				if (dialog == DialogAction.QUEST_SELECT) {
+					return sendQuestDialog(env, startDialog != 0 ? startDialog : isDataDriven ? 4762 : 1011);
 				} else {
-					switch (env.getDialog()) {
+					switch (dialog) {
 						case QUEST_ACCEPT:
 						case QUEST_ACCEPT_1:
 						case QUEST_ACCEPT_SIMPLE:
@@ -144,9 +145,9 @@ public class MonsterHunt extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (endNpcs.contains(targetId)) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, endDialog != 0 ? endDialog : 1352);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					for (Monster mi : monsters.keySet()) {
 						int endVar = mi.getEndVar();
 						int varId = mi.getVar();
@@ -171,8 +172,8 @@ public class MonsterHunt extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
-				if (!aggroNpcs.isEmpty() || dataDriven) {
-					switch (env.getDialog()) {
+				if (!aggroNpcs.isEmpty() || isDataDriven) {
+					switch (dialog) {
 						case QUEST_SELECT:
 						case USE_OBJECT:
 							return sendQuestDialog(env, 10002);
@@ -205,7 +206,7 @@ public class MonsterHunt extends QuestHandler {
 
 			for (Monster m : monsters.keySet()) {
 				lastStep = Math.max(lastStep, m.getStep());
-				if (dataDriven && m.getStep() != curStep) // Check only for current step for new style quests
+				if (isDataDriven && m.getStep() != curStep) // Check only for current step for new style quests
 					continue;
 				if (m.getNpcIds().contains(env.getTargetId())) {
 					int endVar = m.getEndVar();
@@ -230,7 +231,7 @@ public class MonsterHunt extends QuestHandler {
 								qs.setQuestVarById(varsUsed, value);
 							}
 							updateQuestStatus(env);
-							if (!dataDriven) { // Old quest style
+							if (!isDataDriven) { // Old quest style
 								if (total <= m.getEndVar() && m.getRewardVar()) {
 									if (rewardNextStep)
 										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -248,7 +249,7 @@ public class MonsterHunt extends QuestHandler {
 			}
 
 			// Checks if step is completed
-			if (currentTotalVar >= totalEndVar && dataDriven) { // New quest style
+			if (currentTotalVar >= totalEndVar && isDataDriven) { // New quest style
 				qs.setQuestVar(curStep + 1);
 				if (curStep >= lastStep) {
 					qs.setStatus(QuestStatus.REWARD);

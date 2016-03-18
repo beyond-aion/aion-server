@@ -18,7 +18,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- * @Modified Majka
+ * @modified Majka, Pad
  */
 public class KillInZone extends QuestHandler {
 
@@ -31,7 +31,7 @@ public class KillInZone extends QuestHandler {
 	private final int levelDiff;
 	private final int startDistanceNpc;
 	private final Set<String> zones = new HashSet<>();
-	private final boolean isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+	private final boolean isDataDriven;
 
 	public KillInZone(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<String> zones, int killAmount, int minRank, int levelDiff,
 		int startDistanceNpc) {
@@ -51,6 +51,7 @@ public class KillInZone extends QuestHandler {
 		this.minRank = minRank;
 		this.levelDiff = levelDiff;
 		this.startDistanceNpc = startDistanceNpc;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -85,7 +86,7 @@ public class KillInZone extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, 4762);
+						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					}
 					case QUEST_ACCEPT_1: {
 						return sendQuestStartDialog(env);

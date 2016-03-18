@@ -8,6 +8,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
@@ -18,7 +19,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
- * @author MrPoke Like: Sleeping on the Job quest.
+ * @author MrPoke
  * @modified Rolandas, Pad
  */
 public class ReportTo extends QuestHandler {
@@ -29,6 +30,7 @@ public class ReportTo extends QuestHandler {
 	private final Set<Integer> endNpcs = new HashSet<>();
 	private final int startDialogId;
 	private final int endDialogId;
+	private final boolean isDataDriven;
 	private QuestItems workItem;
 
 	/**
@@ -47,6 +49,7 @@ public class ReportTo extends QuestHandler {
 		}
 		this.startDialogId = startDialogId;
 		this.endDialogId = endDialogId;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -86,7 +89,7 @@ public class ReportTo extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, startDialogId == 0 ? 1011 : startDialogId);
+						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					}
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
@@ -116,7 +119,7 @@ public class ReportTo extends QuestHandler {
 			} else if (endNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, endDialogId == 0 ? 2375 : endDialogId);
+						return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
 					}
 					case SELECT_QUEST_REWARD: {
 						if (workItem != null) {

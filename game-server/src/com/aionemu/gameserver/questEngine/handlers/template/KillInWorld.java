@@ -24,7 +24,9 @@ import com.aionemu.gameserver.services.VortexService;
 /**
  * Standard xml-based handling for the DAILY quests with onKillInZone events
  * 
- * @author vlog, reworked bobobear
+ * @author vlog
+ * @reworked bobobear
+ * @modified Pad
  */
 public class KillInWorld extends QuestHandler {
 
@@ -39,7 +41,7 @@ public class KillInWorld extends QuestHandler {
 	private final int invasionWorldId;
 	private final int startDialog;
 	private final int startDistanceNpc;
-	private final boolean isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+	private final boolean isDataDriven;
 
 	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int minRank,
 		int levelDiff, int invasionWorld, int startDialog, int startDistanceNpc) {
@@ -62,6 +64,7 @@ public class KillInWorld extends QuestHandler {
 		this.invasionWorldId = invasionWorld;
 		this.startDialog = startDialog;
 		this.startDistanceNpc = startDistanceNpc;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -109,7 +112,7 @@ public class KillInWorld extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, startDialog != 0 ? startDialog : 4762);
+						return sendQuestDialog(env, startDialog != 0 ? startDialog : isDataDriven ? 4762 : 1011);
 					}
 					case QUEST_ACCEPT_1: {
 						return sendQuestStartDialog(env);
