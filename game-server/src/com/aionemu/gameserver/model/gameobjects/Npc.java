@@ -345,8 +345,28 @@ public class Npc extends Creature {
 			return true;
 		} else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP).isPositive()) {
 			return true;
+		} else if (shouldRewardAp()) {
+			return true;
 		} else if (this.getWorldType() == WorldType.BALAUREA) {
 			return getRace() == Race.DRAKAN || getRace() == Race.LIZARDMAN;
+		}
+
+		return false;
+	}
+
+	// TODO: a better way to handle this. Maybe as an option in npc_templates?
+	private boolean shouldRewardAp() {
+		switch (this.getWorldId()) {
+			case 301380000: // Danuar Sanctuary
+			case 301140000: // Seized Danuar Sanctuary
+				if (this.getNpcId() != 233187 && this.getNpcId() != 233447 && this.getNpcId() != 233448)
+					return true;
+				break;
+			default:
+				break;
+		}
+		if (this.getNpcId() >= 236307 && this.getNpcId() <= 236418) { // Conquest Offering Npcs
+			return true;
 		}
 
 		return false;
