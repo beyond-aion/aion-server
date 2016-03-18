@@ -11,6 +11,7 @@ import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -77,7 +78,7 @@ public class EffectController {
 	}
 
 	/**
-	 * @param effect
+	 * @param nextEffect
 	 */
 	public void addEffect(Effect nextEffect) {
 		Map<String, Effect> mapToUpdate = getMapForEffect(nextEffect);
@@ -142,6 +143,10 @@ public class EffectController {
 			// max 3 aura effects or 1 toggle skill in noshoweffects
 			if (nextEffect.isToggle() && nextEffect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW) {
 				int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
+				//Rangers are allowed to use 2 Toggle skills. There might be a pattern.
+				if (nextEffect.getEffector() instanceof Player && ((Player)nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER) {
+					mts = 2;
+				}
 				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffects();
 				if (filteredMap.size() >= mts) {
 					Iterator<Effect> iter = filteredMap.iterator();
@@ -194,7 +199,7 @@ public class EffectController {
 
 	/**
 	 * @param mapToUpdate
-	 * @param effect
+	 * @param newEffect
 	 * @return
 	 */
 	private final Effect findConflictedEffect(Map<String, Effect> mapToUpdate, Effect newEffect) {
