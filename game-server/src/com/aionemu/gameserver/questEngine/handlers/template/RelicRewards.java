@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,10 +18,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Bobobear, Rolandas
+ * @modified Pad
  */
 public class RelicRewards extends QuestHandler {
 
 	private final Set<Integer> startNpcs = new HashSet<Integer>();
+	private boolean isDataDriven;
 
 	/**
 	 * @param questId
@@ -30,6 +33,7 @@ public class RelicRewards extends QuestHandler {
 		super(questId);
 		this.startNpcs.addAll(startNpcIds);
 		this.startNpcs.remove(0);
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -45,19 +49,18 @@ public class RelicRewards extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
+		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (startNpcs.contains(targetId)) {
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case EXCHANGE_COIN: {
 						if (player.getCommonData().getLevel() >= 30) {
 							int rewardId = QuestService.getCollectItemsReward(env, false, false);
 							if (rewardId != -1)
-								return sendQuestDialog(env, 1011);
+								return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 							else
 								return sendQuestDialog(env, 3398);
 						} else
@@ -68,9 +71,9 @@ public class RelicRewards extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (startNpcs.contains(targetId)) {
 				int rewardId = -1;
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case USE_OBJECT:
-						return sendQuestDialog(env, 1011);
+						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					case SELECT_ACTION_1011:
 						rewardId = QuestService.checkCollectItemsReward(env, false, true, 0);
 						break;
@@ -96,7 +99,7 @@ public class RelicRewards extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (startNpcs.contains(targetId)) {
 				int var = qs.getQuestVarById(0);
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case USE_OBJECT:
 						if (var == 1)
 							return sendQuestDialog(env, 5);

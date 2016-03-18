@@ -2,6 +2,7 @@ package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.Iterator;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,15 +15,18 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke, modified Bobobear
+ * @author Mr.Poke
+ * @modified Bobobear, Pad
  */
 public class XmlQuest extends QuestHandler {
 
 	private final XmlQuestData xmlQuestData;
+	private final boolean isDataDriven;
 
 	public XmlQuest(XmlQuestData xmlQuestData) {
 		super(xmlQuestData.getId());
 		this.xmlQuestData = xmlQuestData;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class XmlQuest extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 			if (targetId == xmlQuestData.getStartNpcId()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1011);
+					return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 				else
 					return sendQuestStartDialog(env);
 			}

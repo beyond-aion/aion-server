@@ -44,6 +44,7 @@ public class ItemCollecting extends QuestHandler {
 	private final int startDialogId2;
 	private final int checkOkDialogId;
 	private final int checkFailDialogId;
+	private final boolean isDataDriven;
 	private final String startZone;
 	private QuestItems workItem;
 
@@ -67,6 +68,7 @@ public class ItemCollecting extends QuestHandler {
 		this.startDialogId2 = startDialogId2;
 		this.checkOkDialogId = checkOkDialogId;
 		this.checkFailDialogId = checkFailDialogId;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -121,7 +123,7 @@ public class ItemCollecting extends QuestHandler {
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : 1011);
+						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					}
 					case SETPRO1: {
 						QuestService.startQuest(env);
@@ -162,11 +164,11 @@ public class ItemCollecting extends QuestHandler {
 			} else if (endNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : 2375);
+						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : isDataDriven ? 1011 : 2375);
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
-						int okDialogId = checkOkDialogId != 0 ? checkOkDialogId : 5;
-						int failDialogId = checkFailDialogId != 0 ? checkFailDialogId : 2716;
+						int okDialogId = checkOkDialogId != 0 ? checkOkDialogId : isDataDriven ? 10000 : 5;
+						int failDialogId = checkFailDialogId != 0 ? checkFailDialogId : isDataDriven ? 10001 : 2716;
 						return checkQuestItems(env, var, var, true, okDialogId, failDialogId); // reward
 					}
 					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {

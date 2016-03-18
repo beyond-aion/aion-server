@@ -2,6 +2,7 @@ package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -24,6 +25,7 @@ public class CraftingRewards extends QuestHandler {
 	private final int levelReward;
 	private final int questMovie;
 	private final int endNpcId;
+	private final boolean isDataDriven;
 
 	public CraftingRewards(int questId, int startNpcId, int skillId, int levelReward, int endNpcId, int questMovie) {
 		super(questId);
@@ -36,6 +38,7 @@ public class CraftingRewards extends QuestHandler {
 			this.endNpcId = startNpcId;
 		}
 		this.questMovie = questMovie;
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
 	}
 
 	@Override
@@ -70,7 +73,7 @@ public class CraftingRewards extends QuestHandler {
 			if (targetId == startNpcId) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, 1011);
+						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					}
 					default: {
 						return sendQuestStartDialog(env);
@@ -81,7 +84,7 @@ public class CraftingRewards extends QuestHandler {
 			if (targetId == endNpcId) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, 2375);
+						return sendQuestDialog(env, isDataDriven ? 1011 : 2375);
 					}
 					case SELECT_QUEST_REWARD: {
 						qs.setQuestVar(0);
