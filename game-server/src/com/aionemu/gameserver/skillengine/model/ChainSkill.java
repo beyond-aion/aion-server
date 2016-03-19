@@ -2,71 +2,65 @@ package com.aionemu.gameserver.skillengine.model;
 
 /**
  * @author kecimis
+ * @modified Neon
  */
 public class ChainSkill {
 
 	private String category;
-	private int chainCount = 0;
-	private long useTime;
+	private int useCount;
+	private long lastUseTime;
+	private long expireTime;
 
-	public ChainSkill(String category, int chainCount, long useTime) {
+	public ChainSkill(String category, int useCount, long expireTime) {
 		this.category = category;
-		this.chainCount = chainCount;
-		this.useTime = useTime;
+		this.useCount = useCount;
+		this.lastUseTime = useCount == 0 ? 0 : System.currentTimeMillis();
+		this.expireTime = expireTime;
 	}
 
-	public void updateChainSkill(String category) {
-		this.category = category;
-		this.chainCount = 0;
-		this.useTime = System.currentTimeMillis();
+	public void clear() {
+		this.category = "";
+		this.useCount = 0;
+		this.lastUseTime = 0;
+		this.expireTime = 0;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getCategory() {
 		return category;
 	}
 
-	/**
-	 * @param name
-	 *          the name to set
-	 */
 	public void setCategory(String name) {
 		this.category = name;
 	}
 
-	/**
-	 * @return the chainCount
-	 */
-	public int getChainCount() {
-		return chainCount;
+	public int getUseCount() {
+		return useCount;
+	}
+
+	public void increaseUseCount() {
+		this.useCount++;
+		this.lastUseTime = System.currentTimeMillis();
 	}
 
 	/**
-	 * @param chainCount
-	 *          the chainCount to set
+	 * @return The time when this chain skill was last activated, 0 if never.
 	 */
-	public void setChainCount(int chainCount) {
-		this.chainCount = chainCount;
-	}
-
-	public void increaseChainCount() {
-		this.chainCount++;
+	public long getLastUseTime() {
+		return lastUseTime;
 	}
 
 	/**
-	 * @return the useTime
+	 * @return The time when this chain skill can not be activated anymore, 0 if none is set.
 	 */
-	public long getUseTime() {
-		return useTime;
+	public long getExpireTime() {
+		return expireTime;
 	}
 
 	/**
-	 * @param useTime
-	 *          the useTime to set
+	 * @param expireTime
+	 *          - the time when this chain skill can not be activated anymore (0 means no expiration).
 	 */
-	public void setUseTime(long useTime) {
-		this.useTime = useTime;
+	public void setExpireTime(long expireTime) {
+		this.expireTime = expireTime;
 	}
 }

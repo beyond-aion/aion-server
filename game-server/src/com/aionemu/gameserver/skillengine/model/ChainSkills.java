@@ -1,88 +1,53 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.Collection;
-import java.util.Map;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-
 /**
  * @author kecimis
+ * @modified Neon
  */
 public class ChainSkills {
 
-	private Map<String, ChainSkill> multiSkills = new FastMap<String, ChainSkill>();
+	private ChainSkill previousChainSkill = new ChainSkill("", 0, 0);
 	private ChainSkill chainSkill = new ChainSkill("", 0, 0);
 
-	// private Logger log = LoggerFactory.getLogger(ChainSkills.class);
-	public int getChainCount(Player player, SkillTemplate template, String category) {
-		if (category == null) {
-			return 0;
-		}
-		long nullTime = player.getSkillCoolDown(template.getCooldownId());
-		if (this.multiSkills.get(category) != null) {
-			if (System.currentTimeMillis() >= nullTime && this.multiSkills.get(category).getUseTime() <= nullTime) {
-				this.multiSkills.get(category).setChainCount(0);
-			}
-
-			return this.multiSkills.get(category).getChainCount();
-		}
-
-		return 0;
-	}
-
-	public long getLastChainUseTime(String category) {
-		if (this.multiSkills.get(category) != null) {
-			return this.multiSkills.get(category).getUseTime();
-		} else if (chainSkill.getCategory().equals(category))
-			return this.chainSkill.getUseTime();
-		else
-			return 0;
+	/**
+	 * @return The chain skill used before the current one.
+	 */
+	public ChainSkill getPreviousChainSkill() {
+		return previousChainSkill;
 	}
 
 	/**
-	 * returns true if next chain skill can still be casted, or time is over
-	 *
-	 * @param category
-	 * @param time
-	 * @return
+	 * @return The last used chain skill.
 	 */
-	public boolean chainSkillEnabled(String category, int time) {
-		long useTime = 0;
-		if (time == 0) {
-			return true;
+	public ChainSkill getCurrentChainSkill() {
+		return chainSkill;
+	}
+
+	/**
+	 * @return Number of activations for the current chain skill. 0 if chain skill category doesn't match the current one, or no chain is active.
+	 */
+	public int getCurrentChainCount(String category) {
+		return chainSkill.getCategory().equals(category) ? chainSkill.getUseCount() : 0;
+	}
+
+	public void updateChain(String category, int duration) {
+		if (chainSkill.getCategory().equals("")) {
+			chainSkill.setCategory(category);
+			chainSkill.setExpireTime(duration == 0 ? 0 : System.currentTimeMillis() + duration);
 		}
 
-		if (this.multiSkills.get(category) != null) {
-			useTime = this.multiSkills.get(category).getUseTime();
-		} else if (chainSkill.getCategory().equals(category)) {
-			useTime = chainSkill.getUseTime();
+		if (chainSkill.getCategory().equals(category)) {
+			chainSkill.increaseUseCount();
+		} else {
+			previousChainSkill = chainSkill;
+			chainSkill = new ChainSkill(category, 1, duration == 0 ? 0 : System.currentTimeMillis() + duration);
 		}
-
-		return useTime + time >= System.currentTimeMillis();
 	}
 
-	public void addChainSkill(String category, boolean multiCast) {
-		if (multiCast) {
-			if (this.multiSkills.get(category) != null) {
-				if (multiCast) {
-					this.multiSkills.get(category).increaseChainCount();
-				}
-				this.multiSkills.get(category).setUseTime(System.currentTimeMillis());
-			} else
-				this.multiSkills.put(category, new ChainSkill(category, (multiCast ? 1 : 0), System.currentTimeMillis()));
-		} else
-			chainSkill.updateChainSkill(category);
+	public void resetChain() {
+		if (chainSkill.getUseCount() > 0) {
+			previousChainSkill.clear();
+			chainSkill.clear();
+		}
 	}
-
-	public Collection<ChainSkill> getChainSkills() {
-		Collection<ChainSkill> collection = new FastTable<ChainSkill>();
-		collection.add(this.chainSkill);
-		collection.addAll(this.multiSkills.values());
-
-		return collection;
-	}
-
 }

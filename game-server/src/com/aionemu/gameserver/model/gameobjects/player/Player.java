@@ -1487,21 +1487,15 @@ public class Player extends Creature {
 	}
 
 	public void setLastCounterSkill(AttackStatus status) {
-		long time = System.currentTimeMillis();
 		AttackStatus result = AttackStatus.getBaseStatus(status);
 
 		switch (result) {
 			case DODGE:
-				this.lastCounterSkill.put(AttackStatus.DODGE, time);
-				break;
 			case PARRY:
-				this.lastCounterSkill.put(AttackStatus.PARRY, time);
-				break;
 			case BLOCK:
-				this.lastCounterSkill.put(AttackStatus.BLOCK, time);
-				break;
 			case RESIST:
-				this.lastCounterSkill.put(AttackStatus.RESIST, time);
+				this.lastCounterSkill.put(result, System.currentTimeMillis());
+				break;
 		}
 	}
 
@@ -1993,11 +1987,10 @@ public class Player extends Creature {
 	@Override
 	public boolean isSkillDisabled(SkillTemplate template) {
 		ChainCondition cond = template.getChainCondition();
-		if (cond != null && cond.getSelfCount() > 0) {// exception for multicast
-			int chainCount = this.getChainSkills().getChainCount(this, template, cond.getCategory());
-			if (chainCount > 0 && chainCount < cond.getSelfCount() && this.getChainSkills().chainSkillEnabled(cond.getCategory(), cond.getTime())) {
+		if (cond != null && cond.getAllowedActivations() > 1) { // exception for multicast
+			int chainCount = getChainSkills().getCurrentChainCount(cond.getCategory());
+			if (chainCount > 0 && chainCount < cond.getAllowedActivations())
 				return false;
-			}
 		}
 		return super.isSkillDisabled(template);
 	}
