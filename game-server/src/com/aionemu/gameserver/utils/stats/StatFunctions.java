@@ -58,7 +58,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
+	 * @param maxLevelInRange
 	 * @param target
 	 * @return
 	 */
@@ -152,7 +152,8 @@ public class StatFunctions {
 
 	/**
 	 * @param defeated
-	 * @param winner
+	 * @param maxRank
+	 * @param maxLevel
 	 * @return Points Gained in PvP Kill
 	 */
 	public static int calculatePvpApGained(Player defeated, int maxRank, int maxLevel) {
@@ -198,7 +199,8 @@ public class StatFunctions {
 
 	/**
 	 * @param defeated
-	 * @param winner
+	 * @param maxRank
+	 * @param maxLevel
 	 * @return XP Points Gained in PvP Kill TODO: Find the correct formula.
 	 */
 	public static int calculatePvpXpGained(Player defeated, int maxRank, int maxLevel) {
@@ -306,7 +308,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
+	 * @param attacker
 	 * @param target
 	 * @param isMainHand
 	 * @param element
@@ -340,10 +342,11 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
+	 *
+ 	 * @param attacker
 	 * @param target
-	 * @param effectTemplate
-	 * @param skillDamages
+	 * @param isMainHand
+	 * @param isSkill
 	 * @return Damage made to target (-hp value)
 	 */
 	public static int calculatePhysicalAttackDamage(Creature attacker, Creature target, boolean isMainHand, boolean isSkill) {
@@ -522,7 +525,6 @@ public class StatFunctions {
 		CreatureGameStats<?> tgs = target.getGameStats();
 
 		int magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-
 		magicBoost -= speller instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
 
 		if (magicBoost < 0) {
@@ -530,16 +532,12 @@ public class StatFunctions {
 		} else if (magicBoost > 2900) {
 			magicBoost = 2901;
 		}
-
-		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
-
-		float damages = baseDamages * (knowledge / 100f + magicBoost / 1000f);
+		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
+		float damages = baseDamages * (1 + (magicBoost / (knowledge * 10f)));
 
 		damages = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damages).getCurrent();
-
 		// add bonus damage
 		damages += bonus;
-
 		/*
 		 * element resist: fire, wind, water, eath 10 elemental resist ~ 1% reduce of magical baseDamages
 		 */
@@ -548,6 +546,7 @@ public class StatFunctions {
 			damages = Math.round(damages * (1 - (elementalDef / 1250f)));
 		}
 
+		// useKnowledge? This boolean is later used to determine whether movement boni are applied or not. Therefore this might not be correct.
 		damages = adjustDamages(speller, target, damages, pvpDamage, useKnowledge, element, noReduce);
 
 		// magical defense
@@ -570,7 +569,7 @@ public class StatFunctions {
 	 * Calculates MAGICAL CRITICAL chance
 	 * 
 	 * @param attacker
-	 * @param attacke
+	 * @param attacker
 	 * @return boolean
 	 */
 	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb) {
@@ -592,7 +591,7 @@ public class StatFunctions {
 		else
 			criticalRate = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
 
-		return Rnd.nextInt(100) < criticalRate;
+		return Rnd.get(1, 100) <= criticalRate;
 	}
 
 	/**
@@ -624,8 +623,8 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param ApNpcRating
-	 * @return
+	 * @param npcRating
+	 * @return Ap Rating
 	 */
 	public static int ApNpcRating(NpcRating npcRating) {
 		int multipler;
@@ -653,8 +652,8 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param GpNpcRating
-	 * @return
+	 * @param npcRating
+	 * @return GP Rating
 	 */
 	public static int GpNpcRating(NpcRating npcRating) {
 		int multipler;
@@ -682,15 +681,16 @@ public class StatFunctions {
 	}
 
 	/**
-	 * adjust baseDamages according to their level || is PVP?
-	 * 
-	 * @ref:
+	 *
 	 * @param attacker
-	 *          lvl
 	 * @param target
-	 *          lvl
-	 * @param baseDamages
-	 **/
+	 * @param damages
+	 * @param pvpDamage
+	 * @param useMovement
+	 * @param element
+	 * @param noReduce
+	 * @return adjusted baseDamage according to their level || is PVP?
+	 */
 	public static float adjustDamages(Creature attacker, Creature target, float damages, int pvpDamage, boolean useMovement, SkillElement element,
 		boolean noReduce) {
 
@@ -700,13 +700,12 @@ public class StatFunctions {
 		if (attacker.isPvpTarget(target)) {
 			if (pvpDamage > 0)
 				damages *= pvpDamage * 0.01;
-
 			if (!noReduce)
-				damages = Math.round(damages * 0.38f);// 0.5 => 0.38
+				damages = Math.round(damages * 0.42f);// 0.42 checked on NA 4.9 19.03.2016
+
 
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
-
 			switch (element) {
 				case NONE:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
@@ -717,15 +716,15 @@ public class StatFunctions {
 					defenceBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
 					break;
 			}
-
 			damages = Math.round(damages + (damages * attackBonus) - (damages * defenceBonus));
-
 			if (attacker.getRace() != target.getRace() && !attacker.isInInstance()) {
 				damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
 			}
 		} else {
+			damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF 19.03.2016
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+
 			int levelDiff = target.getLevel() - attacker.getLevel();
 			damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
 			switch (element) {
