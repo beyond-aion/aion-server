@@ -1,6 +1,12 @@
 package com.aionemu.gameserver.controllers.attack;
 
+import java.util.Collections;
+import java.util.List;
+
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -8,11 +14,20 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
-import com.aionemu.gameserver.skillengine.effect.*;
+import com.aionemu.gameserver.skillengine.effect.DamageEffect;
+import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.DispelBuffCounterAtkEffect;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.ProcAtkInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.SkillAttackInstantEffect;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
@@ -21,10 +36,6 @@ import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import javolution.util.FastTable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author ATracer
@@ -64,7 +75,7 @@ public class AttackUtil {
 					if (mainHandWeapon != null)
 						mainHandHits = Rnd.get(1, mainHandWeapon.getItemTemplate().getWeaponStats().getHitCount());
 				}
-				splitPhysicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, mainHandWeapon);
+				splitPhysicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, elem, true);
 				break;
 			default: {
 				if (mainHandStatus == null)
@@ -74,7 +85,7 @@ public class AttackUtil {
 					if (mainHandWeapon != null)
 						mainHandHits = Rnd.get(1, mainHandWeapon.getItemTemplate().getWeaponStats().getHitCount());
 				}
-				splitMagicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, mainHandWeapon);
+				splitMagicalDamage(attacker, attacked, mainHandHits, damage, mainHandStatus, attackList, elem, true);
 				break;
 			}
 		}
@@ -92,10 +103,10 @@ public class AttackUtil {
 		int offHandHits = Rnd.get(1, offHandWeapon.getItemTemplate().getWeaponStats().getHitCount());
 		switch (element) {
 			case NONE:
-				splitPhysicalDamage(attacker, attacked, offHandHits, offHandDamage, offHandStatus, attackList, offHandWeapon);
+				splitPhysicalDamage(attacker, attacked, offHandHits, offHandDamage, offHandStatus, attackList, element, false);
 				break;
 			default:
-				splitMagicalDamage(attacker, attacked, offHandHits, offHandDamage, offHandStatus, attackList, offHandWeapon);
+				splitMagicalDamage(attacker, attacked, offHandHits, offHandDamage, offHandStatus, attackList, element, false);
 				break;
 		}
 	}
@@ -104,7 +115,7 @@ public class AttackUtil {
 	 * Generate attack results based on weapon hit count
 	 */
 	private static final List<AttackResult> splitPhysicalDamage(final Creature attacker, final Creature attacked, int hitCount, int damage,
-		AttackStatus status, List<AttackResult> attackList, Item weapon) {
+		AttackStatus status, List<AttackResult> attackList, SkillElement element, boolean isMain) {
 
 		switch (AttackStatus.getBaseStatus(status)) {
 			case BLOCK:
@@ -132,9 +143,9 @@ public class AttackUtil {
 
 		if (status.isCritical()) {
 			if (attacker instanceof Player)
-				damage = (int) calculateWeaponCritical(attacked, damage, weapon, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
+				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, isMain);
 			else
-				damage = (int) calculateWeaponCritical(attacked, damage, null, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
+				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, isMain);
 		}
 
 		if (damage < 1)
@@ -150,7 +161,7 @@ public class AttackUtil {
 	}
 
 	private static final List<AttackResult> splitMagicalDamage(final Creature attacker, final Creature attacked, int hitCount, int damage,
-		AttackStatus status, List<AttackResult> attackList, Item weapon) {
+		AttackStatus status, List<AttackResult> attackList, SkillElement element, boolean isMain) {
 
 		switch (AttackStatus.getBaseStatus(status)) {
 			case RESIST:
@@ -162,9 +173,9 @@ public class AttackUtil {
 
 		if (status.isCritical()) {
 			if (attacker instanceof Player) {
-				damage = (int) calculateWeaponCritical(attacked, damage, weapon, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
+				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, isMain);
 			} else
-				damage = (int) calculateWeaponCritical(attacked, damage, null, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
+				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, isMain);
 		}
 
 		if (attacked instanceof Npc) {
@@ -184,73 +195,77 @@ public class AttackUtil {
 	}
 
 	/**
+	 *
+	 * @param element
+	 * @param attacked
 	 * @param damages
-	 * @param weaponType
-	 * @return
+	 * @param group
+	 * @param stat
+	 * @param isMain
+	 * @return critical damage
 	 */
-	private static float calculateWeaponCritical(Creature attacked, float damages, Item weapon, StatEnum stat) {
-		return calculateWeaponCritical(attacked, damages, weapon, 0, stat);
+	private static float calculateWeaponCritical(SkillElement element, Creature attacked, float damages, ItemGroup group, StatEnum stat, boolean isMain) {
+		return calculateWeaponCritical(element, attacked, damages, group, 0, stat, isMain);
 	}
 
-	private static float calculateWeaponCritical(Creature attacked, float damages, Item weapon, int critAddDmg, StatEnum stat) {
-		float coeficient = 2f;
-
-		if (weapon == null) {
-			return damages;
+	/**
+	 *
+	 * @param element
+	 * @param attacked
+	 * @param damages
+	 * @param group
+	 * @param critAddDmg
+	 * @param stat
+	 * @param isMain
+	 * @return critical damage
+	 */
+	private static float calculateWeaponCritical(SkillElement element, Creature attacked, float damages, ItemGroup group, int critAddDmg, StatEnum stat, boolean isMain) {
+		float coeficient = 1.5f;
+		if (element == SkillElement.NONE && group != null) {
+			coeficient = getWeaponMultiplier(group);
 		}
 
-		if (weapon.getItemTemplate().getItemGroup() != null) {
-			switch (weapon.getItemTemplate().getItemGroup()) {
-				case DAGGER:
-					coeficient = 2.3f;
-					break;
-				case SWORD:
-					coeficient = 2.2f;
-					break;
-				case MACE:
-					coeficient = 2f;
-					break;
-				case GREATSWORD:
-				case POLEARM:
-					coeficient = 1.8f;
-					break;
-				case STAFF:
-				case BOW:
-					coeficient = 1.7f;
-					break;
-				default:
-					coeficient = 1.5f;
-					break;
-			}
-
-			if (stat != null) {
-				if (stat.equals(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE)) {
-					coeficient = 1.5f; // Magical skill with physical weapon TODO: confirm this
-				}
-				if (attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
-					Player player = (Player) attacked;
-					int fortitude = 0;
-					switch (stat) {
-						case PHYSICAL_CRITICAL_DAMAGE_REDUCE:
-						case MAGICAL_CRITICAL_DAMAGE_REDUCE:
-							fortitude = player.getGameStats().getStat(stat, 0).getCurrent();
-							coeficient = weapon.getEquipmentSlot() == ItemSlot.MAIN_HAND.getSlotIdMask() || weapon.getItemTemplate().isTwoHandWeapon() ? coeficient
-								- fortitude / 1000f : coeficient + fortitude / 1000f;
-							break;
-					}
+		if (stat != null) {
+			if (attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
+				Player player = (Player) attacked;
+				int fortitude = 0;
+				switch (stat) {
+					case PHYSICAL_CRITICAL_DAMAGE_REDUCE:
+					case MAGICAL_CRITICAL_DAMAGE_REDUCE:
+						fortitude = player.getGameStats().getStat(stat, 0).getCurrent();
+						coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
+						break;
 				}
 			}
 		}
 
 		// add critical add dmg
 		coeficient += critAddDmg / 100f;
-
 		damages = Math.round(damages * coeficient);
-
 		return damages;
 	}
 
-	/**
+	private static float getWeaponMultiplier(ItemGroup group) {
+		switch (group) {
+			case DAGGER:
+				return  2.3f;
+			case SWORD:
+				return  2.2f;
+			case MACE:
+				return  2f;
+			case GREATSWORD:
+			case POLEARM:
+				return 1.8f;
+			case STAFF:
+			case BOW:
+				return 1.7f;
+			default:
+				return  1.5f;
+		}
+	}
+
+
+	/*
 	 * @param effect
 	 * @param skillDamage
 	 * @param bonus
@@ -264,6 +279,13 @@ public class AttackUtil {
 	 * public static void calculateSkillResult(Effect effect, int skillDamage, ActionModifier modifier, Func func, int randomDamage, int accMod, int
 	 * criticalProb, int critAddDmg, boolean cannotMiss, boolean shared, boolean ignoreShield, SkillElement element, boolean useMagicBoost, boolean
 	 * useKnowledge, boolean noReduce)
+	 */
+	/**
+	 *
+	 * @param effect
+	 * @param skillDamage
+	 * @param template
+	 * @param ignoreShield
 	 */
 	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
 		Creature effector = effect.getEffector();
@@ -307,6 +329,7 @@ public class AttackUtil {
 			if (effector instanceof Npc && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
 				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
+
 				// should we calculate damage always? usually only if ht == PHHIT
 				damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true, true);
 			} else {
@@ -455,23 +478,14 @@ public class AttackUtil {
 			case NONE:
 				switch (AttackStatus.getBaseStatus(status)) {
 					case CRITICAL:
-						if (effector instanceof Player)
-							damage = (int) calculateWeaponCritical(effected, damage, ((Player) effector).getEquipment().getMainHandWeapon(), critAddDmg,
-								StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
-						else
-							damage = (int) calculateWeaponCritical(effected, damage, null, critAddDmg, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE);
+						damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, true);
 						break;
 				}
 				break;
 			default:
 				switch (status) {
 					case CRITICAL:
-						if (effector instanceof Player) {
-							damage = (int) calculateWeaponCritical(effected, damage, ((Player) effector).getEquipment().getMainHandWeapon(), critAddDmg,
-								StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
-						} else {
-							damage = (int) calculateWeaponCritical(effected, damage, null, critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
-						}
+						damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
 						break;
 				}
 				break;
@@ -588,12 +602,7 @@ public class AttackUtil {
 			status = calculateMagicalStatus(effector, effected, criticalProb, true);
 		switch (status) {
 			case CRITICAL:
-				if (effector instanceof Player) {
-					damage = (int) calculateWeaponCritical(effected, damage, ((Player) effector).getEquipment().getMainHandWeapon(), critAddDmg,
-						StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
-				} else {
-					damage = (int) calculateWeaponCritical(effected, damage, null, critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
-				}
+				damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
 				break;
 			default:
 				break;
@@ -770,5 +779,21 @@ public class AttackUtil {
 			}
 
 		});
+	}
+
+	private static ItemGroup getWeaponGroup(Creature effector, boolean mainHand) {
+		if (effector instanceof Player) {
+			Item weapon = mainHand ? ((Player) effector).getEquipment().getMainHandWeapon() : ((Player) effector).getEquipment().getOffHandWeapon();
+			if (weapon != null) {
+				return weapon.getItemTemplate().getItemGroup();
+			}
+		} else if (effector instanceof Npc) {
+			NpcTemplate temp = DataManager.NPC_DATA.getNpcTemplate(((Npc) effector).getNpcId());
+			NpcEquippedGear npcGear = temp.getEquipment();
+			if (npcGear != null && npcGear.getItem(mainHand ? ItemSlot.MAIN_HAND : ItemSlot.MAIN_OFF_HAND) != null) {
+				return npcGear.getItem(mainHand ? ItemSlot.MAIN_HAND : ItemSlot.MAIN_OFF_HAND).getItemGroup();
+			}
+		}
+		return null;
 	}
 }
