@@ -378,7 +378,6 @@ public class StatFunctions {
 				}
 				float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
 				int diff = Math.round((totalMax - totalMin) * power / 2);
-
 				// adjust with value from WeaponDualEffect
 				// it makes lower cap of damage lower, so damage is more random on offhand
 				int negativeDiff = diff;
@@ -386,7 +385,6 @@ public class StatFunctions {
 					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
 
 				resultDamage += Rnd.get(-negativeDiff, diff);
-
 				// add powerShard damage
 				if (attacker.isInState(CreatureState.POWERSHARD)) {
 					Item firstShard;
@@ -430,11 +428,6 @@ public class StatFunctions {
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
-
-		/**
-		 * TODO just regrowth under official values
-		 */
-		resultDamage *= 1.2f;
 
 		return Math.round(resultDamage);
 	}
@@ -512,9 +505,9 @@ public class StatFunctions {
 			resultDamage = 1;
 
 		/**
-		 * TODO just regrowth under official values
+		 * 15% seems to be correct
 		 */
-		resultDamage *= 1.4f;
+		resultDamage *= 1.15f;
 
 		return Math.round(resultDamage);
 	}
@@ -701,7 +694,7 @@ public class StatFunctions {
 			if (pvpDamage > 0)
 				damages *= pvpDamage * 0.01;
 			if (!noReduce)
-				damages = Math.round(damages * 0.42f);// 0.42 checked on NA 4.9 19.03.2016
+				damages = Math.round(damages * 0.42f);// 0.42 checked on NA (4.9) 19.03.2016
 
 
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
@@ -721,7 +714,7 @@ public class StatFunctions {
 				damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
 			}
 		} else {
-			damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF 19.03.2016
+			damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF (4.9) 19.03.2016
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
 
