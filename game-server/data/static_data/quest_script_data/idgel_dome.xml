@@ -12,10 +12,6 @@
 	<report_to id="18940" start_npc_ids="802431" end_npc_ids="802383"/>
 	<report_to id="28940" start_npc_ids="802433" end_npc_ids="802384"/>
 	<!-- MONSTER HUNT QUESTS -->
-	<monster_hunt id="18941" start_npc_ids="802383">	
-		<monster var="0" npc_ids="234190" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="28941" start_npc_ids="802384">	
-		<monster var="0" npc_ids="234190" end_var="1"/>
-	</monster_hunt>
+	<monster_hunt id="18941" start_npc_ids="802383"/>
+	<monster_hunt id="28941" start_npc_ids="802384"/>
 </quest_scripts>

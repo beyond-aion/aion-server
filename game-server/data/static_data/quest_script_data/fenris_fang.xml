@@ -16,6 +16,4 @@
 	-->
 	<!-- REPORTING QUESTS -->
 	<report_to id="29065" start_npc_ids="204075" end_npc_ids="204053"/>
-	<!-- COLLECTING QUESTS -->
-	<!-- HUNTING QUESTS -->
 </quest_scripts>

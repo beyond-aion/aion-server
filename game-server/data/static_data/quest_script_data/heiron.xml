@@ -435,7 +435,7 @@
 	<item_collecting id="80004" start_npc_ids="799776"/>
 	<item_collecting id="80138" start_npc_ids="830243"/>
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order talk_npc_id1="204582" talk_npc_id2="204505" end_npc_id="203831" id="1514"/>
+	<item_order id="1514" talk_npc_id1="204582" talk_npc_id2="204505" end_npc_id="203831"/>
 	<item_order id="16904" end_npc_id="801189"/>
 	<item_order id="26904" end_npc_id="801193"/>
 	<!-- HUNTING QUESTS -->
@@ -477,7 +477,6 @@
 	<monster_hunt id="1631" start_npc_ids="204531"/>
 	<monster_hunt id="1637" start_npc_ids="204548"/>
 	<monster_hunt id="1651" start_npc_ids="204578"/>
-	<!-- [Group] It's for Your Own Good -->
 	<monster_hunt id="1652" start_npc_ids="204533"/>
 	<monster_hunt id="1654" start_npc_ids="800413"/>
 	<monster_hunt id="1662" start_npc_ids="204602"/>
@@ -516,12 +515,6 @@
 	<monster_hunt id="18605" start_npc_ids="205230"/>
 	<monster_hunt id="18606" start_npc_ids="205231"/>
 	<monster_hunt id="18617" start_npc_ids="205230"/>
-	<monster_hunt id="80215" start_npc_ids="831024">
-		<monster var="0" end_var="3" npc_ids="213776"/>
-		<monster var="1" end_var="3" npc_ids="213778"/>
-		<monster var="2" end_var="3" npc_ids="213802"/>
-		<monster var="3" end_var="3" npc_ids="213779"/>
-		<monster var="4" end_var="1" npc_ids="213780"/>
-	</monster_hunt>
+	<monster_hunt id="80215" start_npc_ids="831024"/>
 	<kill_in_world id="39021" end_npc_ids="204500" worlds="210040000" amount="5" invasion_world="210040000"/>
 </quest_scripts>

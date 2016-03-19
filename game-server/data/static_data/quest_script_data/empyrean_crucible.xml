@@ -57,60 +57,33 @@
 	<!-- REPORTING QUESTS -->
 	<report_to id="18200" start_npc_ids="798604" end_npc_ids="799088"/>
 	<report_to id="18207" start_npc_ids="205309" end_npc_ids="205316"/>
-	<report_to_many id="18210" start_npc_ids="205315" end_npc_ids="205985" start_dialog_id="1011">
-		<npc_infos npc_id="205985" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="18210" start_npc_ids="205315" end_npc_ids="205985">
+		<npc_infos var="0" npc_id="205985" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
-	<report_to_many id="18215" start_npc_ids="205315" end_npc_ids="205315" start_dialog_id="1011">
-		<npc_infos npc_id="205315" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="18215" start_npc_ids="205315" end_npc_ids="205315">
+		<npc_infos var="0" npc_id="205315" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<report_to id="28200" start_npc_ids="798804" end_npc_ids="799428"/>
 	<report_to id="28207" start_npc_ids="205321" end_npc_ids="205320"/>
-	<report_to_many id="28210" start_npc_ids="205323" end_npc_ids="205986" start_dialog_id="1011">
+	<report_to_many id="28210" start_npc_ids="205323" end_npc_ids="205986">
 		<npc_infos var="0" npc_id="205986" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
-	<report_to_many id="28215" start_npc_ids="205323" end_npc_ids="205323" start_dialog_id="1011">
-		<npc_infos npc_id="205323" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="28215" start_npc_ids="205323" end_npc_ids="205323">
+		<npc_infos var="0" npc_id="205323" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
-	<!-- COLLECTING QUESTS -->
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18201" start_npc_ids="205309">
-		<monster var="0" end_var="1" npc_ids="217527"/>
-		<monster var="1" end_var="1" npc_ids="217528"/>
-	</monster_hunt>
-	<monster_hunt id="18202" start_npc_ids="205309">
-		<monster var="0" end_var="1" npc_ids="217556 217544"/>
-	</monster_hunt>
-	<monster_hunt id="18203" start_npc_ids="205309">
-		<monster var="0" end_var="1" npc_ids="217586"/>
-	</monster_hunt>
-	<monster_hunt id="18204" start_npc_ids="205309">
-		<monster var="0" end_var="1" npc_ids="217599"/>
-	</monster_hunt>
-	<monster_hunt id="18205" start_npc_ids="205309" end_npc_ids="799088">
-		<monster var="0" end_var="1" npc_ids="277068"/>
-	</monster_hunt>
-	<monster_hunt id="18206" start_npc_ids="205309">
-		<monster var="0" end_var="1" npc_ids="217819"/>
-	</monster_hunt>
-	<monster_hunt id="28201" start_npc_ids="205321">
-		<monster var="0" end_var="1" npc_ids="217527"/>
-		<monster var="1" end_var="1" npc_ids="217528"/>
-	</monster_hunt>
-	<monster_hunt id="28202" start_npc_ids="205321">
-		<monster var="0" end_var="1" npc_ids="217556 217544"/>
-	</monster_hunt>
-	<monster_hunt id="28203" start_npc_ids="205321">
-		<monster var="0" end_var="1" npc_ids="217586"/>
-	</monster_hunt>
-	<monster_hunt id="28204" start_npc_ids="205321">
-		<monster var="0" end_var="1" npc_ids="217599"/>
-	</monster_hunt>
-	<monster_hunt id="28205" start_npc_ids="205321" end_npc_ids="799428">
-		<monster var="0" end_var="1" npc_ids="277068"/>
-	</monster_hunt>
-	<monster_hunt id="28206" start_npc_ids="205321">
-		<monster var="0" end_var="1" npc_ids="217819"/>
-	</monster_hunt>
+	<monster_hunt id="18201" start_npc_ids="205309"/>
+	<monster_hunt id="18202" start_npc_ids="205309"/>
+	<monster_hunt id="18203" start_npc_ids="205309"/>
+	<monster_hunt id="18204" start_npc_ids="205309"/>
+	<monster_hunt id="18205" start_npc_ids="205309" end_npc_ids="799088"/>
+	<monster_hunt id="18206" start_npc_ids="205309"/>
+	<monster_hunt id="28201" start_npc_ids="205321"/>
+	<monster_hunt id="28202" start_npc_ids="205321"/>
+	<monster_hunt id="28203" start_npc_ids="205321"/>
+	<monster_hunt id="28204" start_npc_ids="205321"/>
+	<monster_hunt id="28205" start_npc_ids="205321" end_npc_ids="799428"/>
+	<monster_hunt id="28206" start_npc_ids="205321"/>
 	<!-- KILL IN WORLD QUESTS -->
 	<kill_in_world id="18214" start_npc_ids="205985" end_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
 	<kill_in_world id="18218" start_npc_ids="205985" end_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
