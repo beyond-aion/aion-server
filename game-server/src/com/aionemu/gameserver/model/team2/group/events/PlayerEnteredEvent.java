@@ -45,7 +45,7 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 
 	@Override
 	public boolean apply(Player player) {
-		if (!player.getObjectId().equals(enteredPlayer.getObjectId())) {
+		if (!player.equals(enteredPlayer)) {
 			// TODO probably here JOIN event
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.ENTER));
 			if (player.getKnownList().getKnownPlayers().containsKey(enteredPlayer.getObjectId())) {

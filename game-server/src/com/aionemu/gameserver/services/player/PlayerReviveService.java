@@ -4,7 +4,6 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
@@ -195,8 +194,7 @@ public class PlayerReviveService {
 
 			@Override
 			public void visit(Player visitor) {
-				VisibleObject target = visitor.getTarget();
-				if (target != null && target.getObjectId().equals(player.getObjectId())) {
+				if (player.equals(visitor.getTarget())) {
 					visitor.setTarget(null);
 					PacketSendUtility.sendPacket(visitor, new SM_TARGET_SELECTED(null));
 				}

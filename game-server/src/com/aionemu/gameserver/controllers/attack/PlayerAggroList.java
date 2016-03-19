@@ -16,6 +16,6 @@ public class PlayerAggroList extends AggroList {
 
 	@Override
 	protected boolean isAware(Creature creature) {
-		return creature != null && !creature.getObjectId().equals(owner.getObjectId());
+		return creature != null && !creature.equals(owner);
 	}
 }

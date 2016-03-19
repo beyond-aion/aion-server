@@ -1188,9 +1188,9 @@ public class Player extends Creature {
 		if (isInGroup2() && player.isInGroup2()) {
 			return getPlayerGroup2().getTeamId().equals(player.getPlayerGroup2().getTeamId());
 		} else if (isInAlliance2() && player.isInAlliance2()) {
-			return getPlayerAlliance2().getObjectId().equals(player.getPlayerAlliance2().getObjectId());
+			return getPlayerAlliance2().equals(player.getPlayerAlliance2());
 		} else if (isInLeague() && player.isInLeague()) {
-			return getPlayerAllianceGroup2().getObjectId().equals(player.getPlayerAllianceGroup2().getObjectId());
+			return getPlayerAllianceGroup2().equals(player.getPlayerAllianceGroup2());
 		}
 		return false;
 	}
@@ -1203,7 +1203,7 @@ public class Player extends Creature {
 		if (creature instanceof Player && isInSameTeam((Player) creature))
 			return true;
 
-		if (creature instanceof Trap && ((Trap) creature).getCreator().getObjectId().equals(this.getObjectId()))
+		if (creature instanceof Trap && ((Trap) creature).getCreator().equals(this))
 			return true;
 
 		return creature.getVisualState() <= getSeeState();

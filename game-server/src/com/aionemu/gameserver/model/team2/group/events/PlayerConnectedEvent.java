@@ -43,11 +43,10 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 
 	@Override
 	public boolean apply(Player member) {
-		if (!player.getObjectId().equals(member.getObjectId())) {
+		if (!player.equals(member)) {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
 		}
 		return true;
 	}
-
 }

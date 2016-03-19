@@ -154,7 +154,7 @@ public class Kisk extends SummonedObject<Player> {
 	 * @return
 	 */
 	public boolean canBind(Player player) {
-		if (!player.getObjectId().equals(getCreatorId())) {
+		if (!player.equals(getCreator())) {
 			// Check if they fit the usemask
 			switch (this.getUseMask()) {
 				case 0:

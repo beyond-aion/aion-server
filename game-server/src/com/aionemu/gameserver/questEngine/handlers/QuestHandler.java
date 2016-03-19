@@ -775,9 +775,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			}
 			if (dieObject) {
 				Npc npc = (Npc) player.getTarget();
-				if (npc == null || !env.getVisibleObject().getObjectId().equals(npc.getObjectId())) {
+				if (!env.getVisibleObject().equals(npc))
 					return false;
-				}
 				npc.getController().onDie(player);
 			}
 			changeQuestStep(env, step, nextStep, reward, varNum);

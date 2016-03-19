@@ -112,7 +112,7 @@ public class GMService {
 
 				@Override
 				public boolean acceptObject(Player player) {
-					return !player.getObjectId().equals(gm.getObjectId());
+					return !player.equals(gm);
 				}
 			});
 		} else {
@@ -120,7 +120,7 @@ public class GMService {
 
 				@Override
 				public boolean acceptObject(Player player) {
-					return player.isGM() && !player.getObjectId().equals(gm.getObjectId());
+					return player.isGM() && !player.equals(gm);
 				}
 			});
 		}

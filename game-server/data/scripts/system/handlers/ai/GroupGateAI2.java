@@ -25,11 +25,10 @@ public class GroupGateAI2 extends NpcAI2 {
 	protected void handleDialogStart(Player player) {
 
 		boolean isMember = false;
-		int creatorId = getCreatorId();
-		if (player.getObjectId().equals(creatorId)) {
+		if (player.equals(getCreator())) {
 			isMember = true;
 		} else if (player.isInGroup2()) {
-			isMember = player.getPlayerGroup2().hasMember(creatorId);
+			isMember = player.getPlayerGroup2().hasMember(getCreatorId());
 		}
 
 		if (isMember && player.getLevel() >= 10) {

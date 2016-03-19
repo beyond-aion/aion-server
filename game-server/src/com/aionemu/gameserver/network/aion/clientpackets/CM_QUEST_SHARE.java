@@ -57,7 +57,7 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 		}
 
 		for (Player member : player.isInGroup2() ? player.getPlayerGroup2().getOnlineMembers() : player.getPlayerAllianceGroup2().getOnlineMembers()) {
-			if (player.getObjectId().equals(member.getObjectId()) || !MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+			if (player.equals(member) || !MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 				continue;
 
 			if (member.getQuestStateList().getQuestState(questId) != null) {

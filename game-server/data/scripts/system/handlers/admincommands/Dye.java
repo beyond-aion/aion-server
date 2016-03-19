@@ -88,7 +88,7 @@ public class Dye extends AdminCommand {
 		else
 			sendInfo(player, "Dyed " + target.getName() + " (color: " + colorText + ")");
 
-		if (!target.getObjectId().equals(player.getObjectId()))
+		if (!target.equals(player))
 			sendInfo(target, player.getName() + " has changed the color of your visible equipment to: " + colorText);
 	}
 }

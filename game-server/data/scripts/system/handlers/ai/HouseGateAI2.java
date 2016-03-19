@@ -29,7 +29,7 @@ public class HouseGateAI2 extends NpcAI2 {
 	protected void handleDialogStart(Player player) {
 		final int creatorId = getCreatorId();
 		// Only group member and creator may use gate
-		if (!player.getObjectId().equals(creatorId)) {
+		if (!player.equals(getCreator())) {
 			if (player.getCurrentGroup() == null || !player.getCurrentGroup().hasMember(creatorId))
 				return;
 		}
