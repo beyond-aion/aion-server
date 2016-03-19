@@ -80,7 +80,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(creatorId);// creatorId - playerObjectId or House address
 		writeS(masterName);// masterName
 
-		writeC((int) (100f * npc.getLifeStats().getCurrentHp() / npc.getLifeStats().getMaxHp()));// %hp
+		writeC((byte) (100f * npc.getLifeStats().getCurrentHp() / npc.getLifeStats().getMaxHp()));// %hp
 		writeD(npc.getGameStats().getMaxHp().getCurrent());
 		writeC(npc.getLevel());
 
