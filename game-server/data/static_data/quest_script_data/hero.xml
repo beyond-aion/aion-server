@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			13500 [TODO] [Achievement] Examine the Katalam Base
@@ -69,80 +69,26 @@
 	<item_collecting id="23528" start_npc_ids="801545" end_npc_ids="801544"/>
 	<item_collecting id="23529" start_npc_ids="801545" end_npc_ids="801544"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="13511" start_npc_ids="801058" end_npc_ids="801027">
-		<monster var="0" end_var="1" npc_ids="801239"/>
-		<monster var="1" end_var="1" npc_ids="801240"/>
-		<monster var="2" end_var="1" npc_ids="801241"/>
-		<monster var="3" end_var="1" npc_ids="801242"/>
-	</monster_hunt>
-	<monster_hunt id="13512" start_npc_ids="801059" end_npc_ids="801026">
-		<monster var="0" end_var="1" npc_ids="801243"/>
-		<monster var="1" end_var="1" npc_ids="801244"/>
-		<monster var="2" end_var="1" npc_ids="801245"/>
-		<monster var="3" end_var="1" npc_ids="801246"/>
-		<monster var="4" end_var="1" npc_ids="801247"/>
-	</monster_hunt>
-	<monster_hunt id="13513" start_npc_ids="801058">
-		<monster var="0" end_var="1" npc_ids="801046"/>
-		<monster var="1" end_var="1" npc_ids="801047"/>
-		<monster var="2" end_var="1" npc_ids="801048"/>
-		<monster var="3" end_var="1" npc_ids="801049"/>
-		<monster var="4" end_var="1" npc_ids="801050"/>
-	</monster_hunt>
-	<monster_hunt id="13514" start_npc_ids="801059">
-		<monster var="0" end_var="1" npc_ids="801051"/>
-		<monster var="1" end_var="1" npc_ids="801052"/>
-		<monster var="2" end_var="1" npc_ids="801053"/>
-		<monster var="3" end_var="1" npc_ids="801054"/>
-		<monster var="4" end_var="1" npc_ids="801055"/>
-	</monster_hunt>
-	<monster_hunt id="13518" start_npc_ids="800527">
-		<monster var="0" end_var="1" npc_ids="272291 272292 272293 272294 272295 272791 272792 272793 272794 272795 273339 273340 273341 273342 273343"/>
-	</monster_hunt>
-	<monster_hunt id="13522" start_npc_ids="801057" end_npc_ids="800527">
-		<monster var="0" end_var="1" npc_ids="231490"/>
-	</monster_hunt>
-	<monster_hunt id="23511" start_npc_ids="801001">
-		<monster var="0" end_var="1" npc_ids="801230"/>
-		<monster var="1" end_var="1" npc_ids="801231"/>
-		<monster var="2" end_var="1" npc_ids="801232"/>
-		<monster var="3" end_var="1" npc_ids="801233"/>
-	</monster_hunt>
-	<monster_hunt id="23512" start_npc_ids="801063" end_npc_ids="801007">
-		<monster var="0" end_var="1" npc_ids="801234"/>
-		<monster var="1" end_var="1" npc_ids="801235"/>
-		<monster var="2" end_var="1" npc_ids="801236"/>
-		<monster var="3" end_var="1" npc_ids="801237"/>
-		<monster var="4" end_var="1" npc_ids="801238"/>
-	</monster_hunt>
-	<monster_hunt id="23513" start_npc_ids="801062">
-		<monster var="0" end_var="1" npc_ids="801036"/>
-		<monster var="1" end_var="1" npc_ids="801037"/>
-		<monster var="2" end_var="1" npc_ids="801038"/>
-		<monster var="3" end_var="1" npc_ids="801039"/>
-		<monster var="4" end_var="1" npc_ids="801040"/>
-	</monster_hunt>
-	<monster_hunt id="23514" start_npc_ids="801063">
-		<monster var="0" end_var="1" npc_ids="801041"/>
-		<monster var="1" end_var="1" npc_ids="801042"/>
-		<monster var="2" end_var="1" npc_ids="801043"/>
-		<monster var="3" end_var="1" npc_ids="801044"/>
-		<monster var="4" end_var="1" npc_ids="801045"/>
-	</monster_hunt>
-	<monster_hunt id="23518" start_npc_ids="800529">
-		<monster var="0" end_var="1" npc_ids="272291 272292 272293 272294 272295 272791 272792 272793 272794 272795 273339 273340 273341 273342 273343"/>
-	</monster_hunt>
-	<monster_hunt id="23522" start_npc_ids="801061" end_npc_ids="800529">
-		<monster var="0" end_var="1" npc_ids="231490"/>
-	</monster_hunt>
+	<monster_hunt id="13511" start_npc_ids="801058" end_npc_ids="801027"/>
+	<monster_hunt id="13512" start_npc_ids="801059" end_npc_ids="801026"/>
+	<monster_hunt id="13513" start_npc_ids="801058"/>
+	<monster_hunt id="13514" start_npc_ids="801059"/>
+	<monster_hunt id="13518" start_npc_ids="800527"/>
+	<monster_hunt id="13522" start_npc_ids="801057" end_npc_ids="800527"/>
+	<monster_hunt id="23511" start_npc_ids="801001"/>
+	<monster_hunt id="23512" start_npc_ids="801063" end_npc_ids="801007"/>
+	<monster_hunt id="23513" start_npc_ids="801062"/>
+	<monster_hunt id="23514" start_npc_ids="801063"/>
+	<monster_hunt id="23518" start_npc_ids="800529"/>
+	<monster_hunt id="23522" start_npc_ids="801061" end_npc_ids="800529"/>
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="13520" end_npc_id="800527"/>
 	<item_order id="23520" end_npc_id="800529"/>
 	<!-- KILL WORLD QUESTS -->
-	<kill_in_world id="13516" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="2" min_rank="15" start_dialog_id="1011"/>
-	<kill_in_world id="13517" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="44" min_rank="10" start_dialog_id="1011"/>
-	<!-- <kill_in_world id="13519" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="1" start_dialog_id="1011"/> -->
-	<kill_in_world id="23516" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="2" min_rank="15" start_dialog_id="1011"/>
-	<kill_in_world id="23517" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="44" min_rank="10" start_dialog_id="1011"/>
-	<!-- <kill_in_world id="23519" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="1" start_dialog_id="1011"/> -->
+	<kill_in_world id="13516" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="2" min_rank="15"/>
+	<kill_in_world id="13517" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="44" min_rank="10"/>
+	<!-- <kill_in_world id="13519" start_npc_ids="800527" end_npc_ids="800527" worlds="600050000" amount="1"/> -->
+	<kill_in_world id="23516" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="2" min_rank="15"/>
+	<kill_in_world id="23517" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="44" min_rank="10"/>
+	<!-- <kill_in_world id="23519" start_npc_ids="800529" end_npc_ids="800529" worlds="600050000" amount="1"/> -->
 </quest_scripts>

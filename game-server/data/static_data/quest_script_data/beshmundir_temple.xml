@@ -124,41 +124,15 @@
 	<item_collecting id="30331" start_npc_ids="799321"/>
 	<item_collecting id="30333" start_npc_ids="799321"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30224" start_npc_ids="799051">
-		<monster var="0" end_var="1" npc_ids="216169"/>
-	</monster_hunt>
-	<monster_hunt id="30232" start_npc_ids="798934">
-		<monster var="0" end_var="1" npc_ids="216168"/>
-	</monster_hunt>
-	<monster_hunt id="30234" start_npc_ids="798979">
-		<monster var="0" end_var="1" npc_ids="216167"/>
-	</monster_hunt>
-	<monster_hunt id="30244" start_npc_ids="798926">
-		<monster var="0" end_var="20" npc_ids="216184 216185 216186 216187 216188"/>
-		<monster var="1" end_var="10" npc_ids="216214 216215 216216 216217"/>
-		<monster var="2" end_var="40" npc_ids="216233 216234 216235 216236 216237"/>
-	</monster_hunt>
-	<monster_hunt id="30245" start_npc_ids="798926">
-		<monster var="0" end_var="12" npc_ids="216228 216229 216230 216231 216232 216309 216310 216312 216313"/>
-	</monster_hunt>
-	<monster_hunt id="30322" start_npc_ids="799278">
-		<monster var="0" end_var="1" npc_ids="216158"/>
-	</monster_hunt>
-	<monster_hunt id="30324" start_npc_ids="799262">
-		<monster var="0" end_var="1" npc_ids="216169"/>
-	</monster_hunt>
-	<monster_hunt id="30332" start_npc_ids="799321">
-		<monster var="0" end_var="1" npc_ids="216168"/>
-	</monster_hunt>
-	<monster_hunt id="30334" start_npc_ids="799278">
-		<monster var="0" end_var="1" npc_ids="216167"/>
-	</monster_hunt>
-	<monster_hunt id="30344" start_npc_ids="799225">
-		<monster var="0" end_var="20" npc_ids="216184 216185 216186 216187 216188"/>
-		<monster var="1" end_var="10" npc_ids="216214 216215 216216 216217"/>
-		<monster var="2" end_var="40" npc_ids="216233 216234 216235 216236 216237"/>
-	</monster_hunt>
-	<monster_hunt id="30345" start_npc_ids="799225">
-		<monster var="0" end_var="12" npc_ids="216228 216229 216230 216231 216232 216309 216310 216312 216313"/>
-	</monster_hunt>
+	<monster_hunt id="30224" start_npc_ids="799051"/>
+	<monster_hunt id="30232" start_npc_ids="798934"/>
+	<monster_hunt id="30234" start_npc_ids="798979"/>
+	<monster_hunt id="30244" start_npc_ids="798926"/>
+	<monster_hunt id="30245" start_npc_ids="798926"/>
+	<monster_hunt id="30322" start_npc_ids="799278"/>
+	<monster_hunt id="30324" start_npc_ids="799262"/>
+	<monster_hunt id="30332" start_npc_ids="799321"/>
+	<monster_hunt id="30334" start_npc_ids="799278"/>
+	<monster_hunt id="30344" start_npc_ids="799225"/>
+	<monster_hunt id="30345" start_npc_ids="799225"/>
 </quest_scripts>

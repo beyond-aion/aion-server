@@ -34,7 +34,6 @@
 			28414 [UNUSED] Gambling NPC's Secret
 		[END] SUMMARY
 -->
-	<!-- REPORTING QUESTS -->
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18403" start_npc_ids="799586"/>
 	<item_collecting id="18404" start_npc_ids="799586"/>
@@ -45,10 +44,6 @@
 	<item_collecting id="28408" start_npc_ids="799558"/>
 	<item_collecting id="28411" start_npc_ids="799589"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18401" start_npc_ids="799553">
-		<monster var="0" end_var="20" npc_ids="217202 217200 217228 217203 217201"/>
-	</monster_hunt>
-	<monster_hunt id="28401" start_npc_ids="799558">
-		<monster var="0" end_var="20" npc_ids="217202 217200 217228 217203 217201"/>
-	</monster_hunt>
+	<monster_hunt id="18401" start_npc_ids="799553"/>
+	<monster_hunt id="28401" start_npc_ids="799558"/>
 </quest_scripts>

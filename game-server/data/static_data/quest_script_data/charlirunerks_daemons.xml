@@ -36,7 +36,7 @@
 		[END] SUMMARY
 -->
 	<!-- REPORTING QUESTS -->
-	<report_to start_npc_ids="204191" end_npc_ids="799886" id="48005"/>
+	<report_to id="48005" start_npc_ids="204191" end_npc_ids="799886"/>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="46015" start_npc_ids="0" end_npc_ids="799882 799883"/>
 	<item_collecting id="46016" start_npc_ids="0" end_npc_ids="799882 799883"/>
@@ -69,21 +69,11 @@
 	<monster_hunt id="46514" start_npc_ids="0" end_npc_ids="799882 799883">
 		<monster end_var="1" end_var_reward="true" var="0" npc_ids="216638"/>
 	</monster_hunt>
-	<monster_hunt id="46518" start_npc_ids="799882 799883" end_npc_ids="799882 799883">
-		<monster var="0" end_var="1" npc_ids="216630"/>
-	</monster_hunt>
-	<monster_hunt id="46520" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster var="0" end_var="1" npc_ids="217016"/>
-	</monster_hunt>
-	<monster_hunt id="46522" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster var="0" end_var="1" npc_ids="217018"/>
-	</monster_hunt>
-	<monster_hunt id="46523" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster var="0" end_var="1" npc_ids="217019"/>
-	</monster_hunt>
-	<monster_hunt id="46527" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster var="0" end_var="1" npc_ids="217023"/>
-	</monster_hunt>
+	<monster_hunt id="46518" start_npc_ids="799882 799883" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46520" start_npc_ids="0" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46522" start_npc_ids="0" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46523" start_npc_ids="0" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46527" start_npc_ids="0" end_npc_ids="799882 799883"/>
 	<!-- KILL SPAWN QUESTS -->
 	<kill_spawned id="46504" start_npc_ids="0" end_npc_ids="799882 799883">
 		<monster end_var="1" var="0" spawner_object="700772" npc_ids="216640"/>

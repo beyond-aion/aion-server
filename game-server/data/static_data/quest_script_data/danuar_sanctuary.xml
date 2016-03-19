@@ -25,9 +25,9 @@
 	-->
 	<!-- MONSTER HUNT -->
 	<!--  
-	<monster_hunt id="16986" start_npc_ids="804862" start_dialog_id="4762" end_npc_ids="804864"/>
-	<monster_hunt id="16988" start_npc_ids="804862" start_dialog_id="4762" end_npc_ids="804865"/>
-	<monster_hunt id="26986" start_npc_ids="804863" start_dialog_id="4762" end_npc_ids="804866"/>
-	<monster_hunt id="26988" start_npc_ids="804863" start_dialog_id="4762" end_npc_ids="804867"/>
+	<monster_hunt id="16986" start_npc_ids="804862" end_npc_ids="804864"/>
+	<monster_hunt id="16988" start_npc_ids="804862" end_npc_ids="804865"/>
+	<monster_hunt id="26986" start_npc_ids="804863" end_npc_ids="804866"/>
+	<monster_hunt id="26988" start_npc_ids="804863" end_npc_ids="804867"/>
 	-->
 </quest_scripts>

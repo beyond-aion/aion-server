@@ -43,34 +43,14 @@
 	<item_collecting id="11550" start_npc_ids="205531"/>
 	<item_collecting id="21550" start_npc_ids="205613"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="11553" start_npc_ids="205531">
-		<monster var="0" end_var="30" npc_ids="218599 218600 218601 218602"/>
-	</monster_hunt>
-	<monster_hunt id="21553" start_npc_ids="205613">
-		<monster var="0" end_var="30" npc_ids="218599 218600 218601 218602"/>
-	</monster_hunt>
-	<monster_hunt id="30218" start_npc_ids="799504">
-		<monster var="0" end_var="25" npc_ids="216195 216196 216197 216198"/>
-	</monster_hunt>
-	<monster_hunt id="30219" start_npc_ids="799504">
-		<monster var="0" end_var="1" npc_ids="216160"/>
-	</monster_hunt>
-	<monster_hunt id="30220" start_npc_ids="799505">
-		<monster var="0" end_var="25" npc_ids="216199 216200 216201 216202 216203"/>
-	</monster_hunt>
-	<monster_hunt id="30221" start_npc_ids="799505">
-		<monster var="0" end_var="1" npc_ids="216162 216243 216161 216242"/>
-	</monster_hunt>
-	<monster_hunt id="30318" start_npc_ids="799504">
-		<monster var="0" end_var="25" npc_ids="216195 216196 216197 216198"/>
-	</monster_hunt>
-	<monster_hunt id="30319" start_npc_ids="799504">
-		<monster var="0" end_var="1" npc_ids="216160"/>
-	</monster_hunt>
-	<monster_hunt id="30320" start_npc_ids="799505">
-		<monster var="0" end_var="25" npc_ids="216199 216200 216201 216202 216203"/>
-	</monster_hunt>
-	<monster_hunt id="30321" start_npc_ids="799505">
-		<monster var="0" end_var="1" npc_ids="216162 216161"/>
-	</monster_hunt>
+	<monster_hunt id="11553" start_npc_ids="205531"/>
+	<monster_hunt id="21553" start_npc_ids="205613"/>
+	<monster_hunt id="30218" start_npc_ids="799504"/>
+	<monster_hunt id="30219" start_npc_ids="799504"/>
+	<monster_hunt id="30220" start_npc_ids="799505"/>
+	<monster_hunt id="30221" start_npc_ids="799505"/>
+	<monster_hunt id="30318" start_npc_ids="799504"/>
+	<monster_hunt id="30319" start_npc_ids="799504"/>
+	<monster_hunt id="30320" start_npc_ids="799505"/>
+	<monster_hunt id="30321" start_npc_ids="799505"/>
 </quest_scripts>

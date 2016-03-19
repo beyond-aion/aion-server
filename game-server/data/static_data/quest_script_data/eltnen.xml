@@ -226,7 +226,7 @@
 			3313 [XML] Reel Time
 			3314 [XML] Eco-Shock
 			3315 [XML] Mystic Manduri
-			3316 [UNUSED] Tuning Horn
+			3316 [REMOVED] Tuning Horn
 			3317 [XML] The Power of Stew
 			3318 [XML] Pilgrims' Progress
 			3319 [SCRIPT] An Order for Gojirunerk
@@ -379,7 +379,6 @@
 	<item_collecting id="3306" start_npc_ids="204042"/>
 	<item_collecting id="3310" start_npc_ids="203983"/>
 	<item_collecting id="3313" start_npc_ids="203328"/>
-	<!-- <item_collecting id="3316" start_npc_ids="203998"/> -->
 	<item_collecting id="3317" start_npc_ids="204010"/>
 	<item_collecting id="3318" start_npc_ids="204040"/>
 	<item_collecting id="3320" start_npc_ids="203925"/>
@@ -393,10 +392,10 @@
 	<item_collecting id="80136" start_npc_ids="830243"/>
 	<item_collecting id="80213" start_npc_ids="831030"/>
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order talk_npc_id1="203932" end_npc_id="203830" id="1309"/>
-	<item_order talk_npc_id1="730019" end_npc_id="203939" id="1323"/>
-	<item_order end_npc_id="203933" id="1355"/>
-	<item_order end_npc_id="204500" id="1391"/>
+	<item_order id="1309" talk_npc_id1="203932" end_npc_id="203830"/>
+	<item_order id="1323" talk_npc_id1="730019" end_npc_id="203939"/>
+	<item_order id="1355" end_npc_id="203933" />
+	<item_order id="1391" end_npc_id="204500"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1304" start_npc_ids="203917"/>
 	<monster_hunt id="1305" start_npc_ids="203935"/>
@@ -468,8 +467,6 @@
 	<monster_hunt id="16905" start_npc_ids="203901"/>
 	<monster_hunt id="16906" start_npc_ids="203901"/>
 	<monster_hunt id="14125" start_npc_ids="798053"/>
-	<monster_hunt id="80214" start_npc_ids="831030">
-		<monster var="0" end_var="100" npc_ids="204024 211014 211016 211017 211018 211019 211020 211033 211034 211035 211036 211037 211711 211775 211776 211777 211778 211779 211816 211817 211818 211819 211862 211863 211864 212019 212020 212021 212022 212023 212024 212025 212026 212027 212028 212029 212031 212032 212033 212034 212035 212036 212037 212038 212039 212040 212041 212042 212043 212044 212045 212046 212047 212048 212049 212050 212051 212052 212053 212054 212351 212998"/>
-	</monster_hunt>
+	<monster_hunt id="80214" start_npc_ids="831030"/>
 	<kill_in_world id="39020" end_npc_ids="203901" worlds="210020000" amount="5" invasion_world="210020000"/>
 </quest_scripts>

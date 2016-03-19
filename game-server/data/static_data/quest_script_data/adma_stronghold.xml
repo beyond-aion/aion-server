@@ -18,10 +18,6 @@
 	<item_collecting id="3117" start_npc_ids="800420"/>
 	<item_collecting id="3119" start_npc_ids="800420"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="3118" start_npc_ids="800420">
-    	<monster var="0" end_var="1" npc_ids="214696"/>
-	</monster_hunt>
-	<monster_hunt id="3120" start_npc_ids="800420">
-    	<monster var="0" end_var="1" npc_ids="214698"/>
-	</monster_hunt>
+	<monster_hunt id="3118" start_npc_ids="800420"/>
+	<monster_hunt id="3120" start_npc_ids="800420"/>
 </quest_scripts>

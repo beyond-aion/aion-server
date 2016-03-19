@@ -144,32 +144,32 @@
 	-->
 		
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="15002" start_npc_ids="804698" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15010" start_npc_ids="804700" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15011" start_npc_ids="804875" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15012" start_npc_ids="804875" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15021" start_npc_ids="804877" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15022" start_npc_ids="804878" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15043" start_npc_ids="804886" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15044" start_npc_ids="804887" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15052" start_npc_ids="804888" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15053" start_npc_ids="804888" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15066" start_npc_ids="804889" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15070" start_npc_ids="804891" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15071" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15072" start_npc_ids="804890" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15102" start_npc_ids="804895" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15103" start_npc_ids="804896" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15002" start_npc_ids="804698"/>
+	<item_collecting id="15010" start_npc_ids="804700"/>
+	<item_collecting id="15011" start_npc_ids="804875"/>
+	<item_collecting id="15012" start_npc_ids="804875"/>
+	<item_collecting id="15021" start_npc_ids="804877"/>
+	<item_collecting id="15022" start_npc_ids="804878"/>
+	<item_collecting id="15043" start_npc_ids="804886"/>
+	<item_collecting id="15044" start_npc_ids="804887"/>
+	<item_collecting id="15052" start_npc_ids="804888"/>
+	<item_collecting id="15053" start_npc_ids="804888"/>
+	<item_collecting id="15066" start_npc_ids="804889"/>
+	<item_collecting id="15070" start_npc_ids="804891"/>
+	<item_collecting id="15071" start_npc_ids="804709"/>
+	<item_collecting id="15072" start_npc_ids="804890"/>
+	<item_collecting id="15102" start_npc_ids="804895"/>
+	<item_collecting id="15103" start_npc_ids="804896"/>
 	<item_collecting id="15210" start_npc_ids="805133"/>
 	<item_collecting id="15211" start_npc_ids="805134"/>
 	<item_collecting id="15212" start_npc_ids="805135"/>
 	<item_collecting id="15213" start_npc_ids="805261"/>
-	<item_collecting id="15215" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15216" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15217" start_npc_ids="804709" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15230" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15231" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="15232" start_npc_ids="805222" start_dialog_id="4762" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="15215" start_npc_ids="804709"/>
+	<item_collecting id="15216" start_npc_ids="804709"/>
+	<item_collecting id="15217" start_npc_ids="804709"/>
+	<item_collecting id="15230" start_npc_ids="805222"/>
+	<item_collecting id="15231" start_npc_ids="805222"/>
+	<item_collecting id="15232" start_npc_ids="805222"/>
 	
 	<!-- FOUNTAIN REWARD -->
 	<fountain_rewards id="15205" start_npc_ids="804788"/>
@@ -186,22 +186,22 @@
 	<kill_in_world id="15204" start_npc_ids="804704" worlds="210070000" amount="5" end_npc_ids="804704" level_diff="5"/>
 		
 	<!-- MONSTER HUNT QUESTS -->
-	<monster_hunt id="15001" start_npc_ids="804698" start_dialog_id="4762"/>
-	<monster_hunt id="15020" start_npc_ids="804876" start_dialog_id="4762"/>
-	<monster_hunt id="15041" start_npc_ids="804704" start_dialog_id="4762"/>
-	<monster_hunt id="15050" start_npc_ids="804706" start_dialog_id="4762"/>
-	<monster_hunt id="15060" start_npc_ids="804707" start_dialog_id="4762"/>
-	<monster_hunt id="15062" start_npc_ids="804707" start_dialog_id="4762"/>
-	<monster_hunt id="15065" start_npc_ids="804707" start_dialog_id="4762"/>
-	<monster_hunt id="15073" start_npc_ids="804709" start_dialog_id="4762"/>
-	<monster_hunt id="15074" start_npc_ids="804709" start_dialog_id="4762"/>
-	<monster_hunt id="15100" start_npc_ids="804711" start_dialog_id="4762"/>
-	<monster_hunt id="15104" start_npc_ids="804711" start_dialog_id="4762"/>
-	<monster_hunt id="15201" start_npc_ids="804704" start_dialog_id="4762"/>
-	<monster_hunt id="15202" start_npc_ids="804704" start_dialog_id="4762"/>
-	<monster_hunt id="15203" start_npc_ids="804704" start_dialog_id="4762"/>
-	<monster_hunt id="18971" start_npc_ids="804865" start_dialog_id="4762" end_npc_ids="805213 805214 805215"/>
+	<monster_hunt id="15001" start_npc_ids="804698"/>
+	<monster_hunt id="15020" start_npc_ids="804876"/>
+	<monster_hunt id="15041" start_npc_ids="804704"/>
+	<monster_hunt id="15050" start_npc_ids="804706"/>
+	<monster_hunt id="15060" start_npc_ids="804707"/>
+	<monster_hunt id="15062" start_npc_ids="804707"/>
+	<monster_hunt id="15065" start_npc_ids="804707"/>
+	<monster_hunt id="15073" start_npc_ids="804709"/>
+	<monster_hunt id="15074" start_npc_ids="804709"/>
+	<monster_hunt id="15100" start_npc_ids="804711"/>
+	<monster_hunt id="15104" start_npc_ids="804711"/>
+	<monster_hunt id="15201" start_npc_ids="804704"/>
+	<monster_hunt id="15202" start_npc_ids="804704"/>
+	<monster_hunt id="15203" start_npc_ids="804704"/>
+	<monster_hunt id="18971" start_npc_ids="804865" end_npc_ids="805213 805214 805215"/>
 	
 	<!-- REPORTING QUESTS -->
-	<report_to id="18970" start_npc_ids="804709" start_dialog_id="4762" end_npc_ids="805213 805214 805215" end_dialog_id="10002"/>
+	<report_to id="18970" start_npc_ids="804709" end_npc_ids="805213 805214 805215"/>
 </quest_scripts>

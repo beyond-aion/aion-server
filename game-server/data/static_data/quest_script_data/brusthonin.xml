@@ -215,15 +215,9 @@
 	<monster_hunt id="39001" start_npc_ids="800500"/>
 	<monster_hunt id="39002" start_npc_ids="800500"/>
 	<monster_hunt id="39004" start_npc_ids="800504" end_npc_ids="800500"/>
-	<monster_hunt id="39005" start_npc_ids="0" end_npc_ids="800500" invasion_world="220050000">
-		<monster var="0" end_var="2" npc_ids="209470"/>
-	</monster_hunt>
-	<monster_hunt id="49007" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000">
-		<monster var="0" end_var="15" npc_ids="209440 209441 209442 209443 209444"/>
-	</monster_hunt>
-	<monster_hunt id="49009" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000">
-		<monster var="0" end_var="1" npc_ids="800504"/>
-	</monster_hunt>
+	<monster_hunt id="39005" start_npc_ids="0" end_npc_ids="800500" invasion_world="220050000"/>
+	<monster_hunt id="49007" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000"/>
+	<monster_hunt id="49009" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000"/>
 	<kill_in_world id="39006" end_npc_ids="800500" worlds="220050000" amount="5" invasion_world="220050000"/>
 	<kill_in_world id="49008" end_npc_ids="800502" worlds="220050000" amount="5" invasion_world="220050000"/>
 </quest_scripts>

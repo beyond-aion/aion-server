@@ -54,7 +54,7 @@
 			11046 [SCRIPT] That Pretty Box
 			11047 [XML] What's up, Brohum?
 			11048 [UNUSED] Taloc Rebirth Operation
-			11050 [XML] Inggison Coin Fountain level 99 (disabled)
+			11050 [REMOVED] Inggison Coin Fountain level 99 (disabled)
 			11056 [SCRIPT] Elimination Order
 			11057 [SCRIPT] Stanis's Secret Order
 			11058 [SCRIPT] Temenos's Secret Order
@@ -293,7 +293,6 @@
 	<report_to id="30036" start_npc_ids="798903" end_npc_ids="799032"/>
 	<report_to id="30038" start_npc_ids="798903" end_npc_ids="799032"/>
 	<!-- COLLECTING QUESTS -->
-	<!-- <fountain_rewards id="11050" start_npc_ids="730241"/> -->
 	<item_collecting id="11004" start_npc_ids="798933"/>
 	<item_collecting id="11011" start_npc_ids="799071"/>
 	<item_collecting id="11015" start_npc_ids="798910"/>
@@ -400,195 +399,57 @@
 	<relic_rewards id="11285" start_npc_ids="799955 205541"/>
 	<relic_rewards id="11286" start_npc_ids="799956 205542"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="11002" start_npc_ids="798939">
-		<monster var="0" end_var="3" npc_ids="215780 215781"/>
-		<monster var="1" end_var="7" npc_ids="215496 215497"/>
-	</monster_hunt>
-	<monster_hunt id="11023" start_npc_ids="798951">
-		<monster var="0" end_var="3" npc_ids="215498 215499"/>
-		<monster var="1" end_var="7" npc_ids="215490 215491"/>
-	</monster_hunt>
-	<monster_hunt id="11027" start_npc_ids="798951">
-		<monster var="0" end_var="4" npc_ids="215519"/>
-		<monster var="1" end_var="6" npc_ids="215518"/>
-	</monster_hunt>
-	<monster_hunt id="11029" start_npc_ids="798960">
-		<monster var="0" end_var="10" npc_ids="216693 216694"/>
-	</monster_hunt>
-	<monster_hunt id="11030" start_npc_ids="798960">
-		<monster var="0" end_var="1" npc_ids="216486"/>
-	</monster_hunt>
-	<monster_hunt id="11034" start_npc_ids="798957">
-		<monster var="0" end_var="6" npc_ids="215576 215577"/>
-		<monster var="1" end_var="4" npc_ids="215528 215529"/>
-	</monster_hunt>
-	<monster_hunt id="11035" start_npc_ids="798955">
-		<monster var="0" end_var="9" npc_ids="215530 215531"/>
-		<monster var="1" end_var="1" npc_ids="216487"/>
-	</monster_hunt>
-	<monster_hunt id="11038" start_npc_ids="799035">
-		<monster var="0" end_var="6" npc_ids="216466 216706 216707 216467 216709 216710"/>
-		<monster var="1" end_var="4" npc_ids="216468 215563 215564 216469 215566 216718"/>
-	</monster_hunt>
-	<monster_hunt id="11045" start_npc_ids="798952">
-		<monster var="0" end_var="10" npc_ids="215525 216465 216479"/>
-	</monster_hunt>
-	<monster_hunt id="11071" start_npc_ids="798943">
-		<monster var="0" end_var="10" npc_ids="215532 215533"/>
-	</monster_hunt>
-	<monster_hunt id="11073" start_npc_ids="798936">
-		<monster var="0" end_var="4" npc_ids="215534 215535"/>
-		<monster var="1" end_var="6" npc_ids="215528 215529"/>
-	</monster_hunt>
-	<monster_hunt id="11100" start_npc_ids="798983">
-		<monster var="0" end_var="10" npc_ids="215593 215594"/>
-	</monster_hunt>
-	<monster_hunt id="11102" start_npc_ids="798981">
-		<monster var="0" end_var="1" npc_ids="216489"/>
-		<monster var="1" end_var="1" npc_ids="216490"/>
-		<monster var="2" end_var="1" npc_ids="216491"/>
-	</monster_hunt>
-	<monster_hunt id="11119" start_npc_ids="798989">
-		<monster var="0" end_var="6" npc_ids="215658 215659"/>
-		<monster var="1" end_var="4" npc_ids="215652 215653"/>
-	</monster_hunt>
-	<monster_hunt id="11120" start_npc_ids="798991">
-		<monster var="0" end_var="3" npc_ids="215642 215643"/>
-		<monster var="1" end_var="3" npc_ids="215644 215645"/>
-		<monster var="2" end_var="3" npc_ids="215648 215649"/>
-	</monster_hunt>
-	<monster_hunt id="11122" start_npc_ids="798990">
-		<monster var="0" end_var="1" npc_ids="216495"/>
-		<monster var="1" end_var="1" npc_ids="216496"/>
-	</monster_hunt>
-	<monster_hunt id="11124" start_npc_ids="798999">
-		<monster var="0" end_var="6" npc_ids="215716 215717"/>
-		<monster var="1" end_var="4" npc_ids="215718 215719"/>
-	</monster_hunt>
-	<monster_hunt id="11126" start_npc_ids="798998">
-		<monster var="0" end_var="6" npc_ids="216429 215695"/>
-		<monster var="1" end_var="4" npc_ids="215696 215697"/>
-	</monster_hunt>
-	<monster_hunt id="11138" start_npc_ids="798981">
-		<monster var="0" end_var="10" npc_ids="215597 215598"/>
-	</monster_hunt>
-	<monster_hunt id="11140" start_npc_ids="799076">
-		<monster var="0" end_var="10" npc_ids="215599 215600"/>
-	</monster_hunt>
-	<monster_hunt id="11141" start_npc_ids="798985">
-		<monster var="0" end_var="10" npc_ids="215636 215637 215638 215639 215640 215641"/>
-	</monster_hunt>
-	<monster_hunt id="11144" start_npc_ids="799030">
-		<monster var="0" end_var="7" npc_ids="215656 215657"/>
-		<monster var="1" end_var="3" npc_ids="215654 215655"/>
-	</monster_hunt>
-	<monster_hunt id="11145" start_npc_ids="799030">
-		<monster var="0" end_var="5" npc_ids="215660 215661 215662 215663"/>
-		<monster var="1" end_var="5" npc_ids="215668 215669 215670 215671"/>
-	</monster_hunt>
-	<monster_hunt id="11200" start_npc_ids="799007" end_npc_ids="799005">
-		<monster var="0" end_var="10" npc_ids="257358 257359 257343 257344 257320 257325"/>
-	</monster_hunt>
-	<monster_hunt id="11201" start_npc_ids="799007" end_npc_ids="799005">
-		<monster var="0" end_var="1" npc_ids="257305 257310"/>
-	</monster_hunt>
-	<monster_hunt id="11202" start_npc_ids="799009">
-		<monster var="0" end_var="4" npc_ids="215730"/>
-		<monster var="1" end_var="6" npc_ids="216732"/>
-	</monster_hunt>
-	<monster_hunt id="11210" start_npc_ids="799010">
-		<monster var="0" end_var="7" npc_ids="215746"/>
-		<monster var="1" end_var="3" npc_ids="215752"/>
-	</monster_hunt>
-	<monster_hunt id="11213" start_npc_ids="799019">
-		<monster var="0" end_var="6" npc_ids="215758"/>
-		<monster var="1" end_var="4" npc_ids="215870"/>
-	</monster_hunt>
-	<monster_hunt id="11214" start_npc_ids="799018" end_npc_ids="799015">
-		<monster var="0" end_var="10" npc_ids="257058 257059 257043 257044 257020 257025"/>
-	</monster_hunt>
-	<monster_hunt id="11215" start_npc_ids="799018" end_npc_ids="799015">
-		<monster var="0" end_var="1" npc_ids="257005 257010"/>
-	</monster_hunt>
-	<monster_hunt id="11217" start_npc_ids="799017">
-		<monster var="0" end_var="6" npc_ids="217043"/>
-		<monster var="1" end_var="4" npc_ids="217053"/>
-	</monster_hunt>
-	<monster_hunt id="11222" start_npc_ids="257225">
-		<monster var="0" end_var="4" npc_ids="215872"/>
-		<monster var="1" end_var="6" npc_ids="215873"/>
-	</monster_hunt>
-	<monster_hunt id="11224" start_npc_ids="799019">
-		<monster var="0" end_var="5" npc_ids="216593"/>
-		<monster var="1" end_var="5" npc_ids="216594"/>
-	</monster_hunt>
-	<monster_hunt id="11225" start_npc_ids="799006">
-		<monster var="0" end_var="10" npc_ids="215871"/>
-	</monster_hunt>
-	<monster_hunt id="11250" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11252" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11254" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11256" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11258" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11260" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11262" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11264" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11266" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11292" start_npc_ids="799092">
-		<monster var="0" end_var="1" npc_ids="218756"/>
-	</monster_hunt>
-	<monster_hunt id="11293" start_npc_ids="799092">
-		<monster var="0" end_var="1" npc_ids="218670 218671 218673 218674"/>
-	</monster_hunt>
-	<monster_hunt id="11296" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11298" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11300" start_npc_ids="799038" start_dialog_id="4762">
-		<monster var="0" end_var="1" npc_ids="257605"/>
-		<monster var="1" end_var="1" npc_ids="257905"/>
-	</monster_hunt>
-	<monster_hunt id="11456" start_npc_ids="798954">
-		<monster var="0" end_var="100" npc_ids="215454 215455 215456 215457 215458 215459 215460 215461 215462 215463 215464 215465 215466 215467 215482 216133 216134 216135 216136 216137 216138 216139 216140 216141 216142 216143 216144 216145 216146 216459 216460"/>
-	</monster_hunt>
-	<monster_hunt id="11459" start_npc_ids="798952">
-		<monster var="0" end_var="40" npc_ids="215468 215469 215470 215471 215472 215473 215474 215475 215476 215477 215478 215479 215480"/>
-	</monster_hunt>
-	<monster_hunt id="11302" start_npc_ids="799038">
-		<monster var="0" end_var="1" npc_ids="257605 257610"/>
-		<monster var="1" end_var="1" npc_ids="257905 257910"/>
-	</monster_hunt>
+	<monster_hunt id="11002" start_npc_ids="798939"/>
+	<monster_hunt id="11023" start_npc_ids="798951"/>
+	<monster_hunt id="11027" start_npc_ids="798951"/>
+	<monster_hunt id="11029" start_npc_ids="798960"/>
+	<monster_hunt id="11030" start_npc_ids="798960"/>
+	<monster_hunt id="11034" start_npc_ids="798957"/>
+	<monster_hunt id="11035" start_npc_ids="798955"/>
+	<monster_hunt id="11038" start_npc_ids="799035"/>
+	<monster_hunt id="11045" start_npc_ids="798952"/>
+	<monster_hunt id="11071" start_npc_ids="798943"/>
+	<monster_hunt id="11073" start_npc_ids="798936"/>
+	<monster_hunt id="11100" start_npc_ids="798983"/>
+	<monster_hunt id="11102" start_npc_ids="798981"/>
+	<monster_hunt id="11119" start_npc_ids="798989"/>
+	<monster_hunt id="11120" start_npc_ids="798991"/>
+	<monster_hunt id="11122" start_npc_ids="798990"/>
+	<monster_hunt id="11124" start_npc_ids="798999"/>
+	<monster_hunt id="11126" start_npc_ids="798998"/>
+	<monster_hunt id="11138" start_npc_ids="798981"/>
+	<monster_hunt id="11140" start_npc_ids="799076"/>
+	<monster_hunt id="11141" start_npc_ids="798985"/>
+	<monster_hunt id="11144" start_npc_ids="799030"/>
+	<monster_hunt id="11145" start_npc_ids="799030"/>
+	<monster_hunt id="11200" start_npc_ids="799007" end_npc_ids="799005"/>
+	<monster_hunt id="11201" start_npc_ids="799007" end_npc_ids="799005"/>
+	<monster_hunt id="11202" start_npc_ids="799009"/>
+	<monster_hunt id="11210" start_npc_ids="799010"/>
+	<monster_hunt id="11213" start_npc_ids="799019"/>
+	<monster_hunt id="11214" start_npc_ids="799018" end_npc_ids="799015"/>
+	<monster_hunt id="11215" start_npc_ids="799018" end_npc_ids="799015"/>
+	<monster_hunt id="11217" start_npc_ids="799017"/>
+	<monster_hunt id="11222" start_npc_ids="257225"/>
+	<monster_hunt id="11224" start_npc_ids="799019"/>
+	<monster_hunt id="11225" start_npc_ids="799006"/>
+	<monster_hunt id="11250" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11252" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11254" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11256" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11258" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11260" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11262" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11264" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11266" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11292" start_npc_ids="799092"/>
+	<monster_hunt id="11293" start_npc_ids="799092"/>
+	<monster_hunt id="11296" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11298" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11300" start_npc_ids="799038" start_dialog_id="4762"/>
+	<monster_hunt id="11456" start_npc_ids="798954"/>
+	<monster_hunt id="11459" start_npc_ids="798952"/>
+	<monster_hunt id="11302" start_npc_ids="799038"/>
 	<monster_hunt id="11311" start_npc_ids="799024"/>
 	<monster_hunt id="11312" start_npc_ids="799024"/>
 	<monster_hunt id="11313" start_npc_ids="799023"/>

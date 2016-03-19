@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
   		[BEGIN] SUMMARY
 			1685 [XML] The Draupnir Weapons
@@ -34,11 +34,6 @@
 	<item_collecting id="2678" start_npc_ids="204817"/>
 	<item_collecting id="2679" start_npc_ids="204817"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="2632" start_npc_ids="204799">
-		<monster var="0" end_var="4" npc_ids="213563"/>
-		<monster var="1" end_var="6" npc_ids="213564"/>
-	</monster_hunt>
-	<monster_hunt id="3532" start_npc_ids="832824">
-		<monster var="0" end_var="1" npc_ids="213780"/>
-	</monster_hunt>
+	<monster_hunt id="2632" start_npc_ids="204799"/>
+	<monster_hunt id="3532" start_npc_ids="832824"/>
 </quest_scripts>
