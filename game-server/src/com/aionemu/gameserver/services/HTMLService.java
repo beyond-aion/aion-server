@@ -66,7 +66,7 @@ public class HTMLService {
 
 	public static void sendData(Player player, int messageId, String html) {
 		byte packet_count;
-		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
+		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8d) + 1);
 		if (ceil > Byte.MAX_VALUE)
 			return;
 

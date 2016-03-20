@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.concurrent.CountedCompleter;
 import java.util.concurrent.ForkJoinTask;
 
+import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,8 +56,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	final Predicate<E> operation;
 	final int lo, hi;
 
-	@SafeVarargs
-	private ForEach(CountedCompleter<E> rootTask, Predicate<E> operation, int lo, int hi, E... list) {
+	private ForEach(@Nullable CountedCompleter<E> rootTask, Predicate<E> operation, int lo, int hi, E[] list) {
 		super(rootTask);
 		this.list = list;
 		this.operation = operation;
