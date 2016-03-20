@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.questEngine;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.procedure.TIntProcedure;
-
 import java.io.File;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -14,9 +10,6 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.annotation.Nonnull;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +19,6 @@ import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.QuestsData;
-import com.aionemu.gameserver.dataholders.XMLQuests;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
@@ -64,6 +55,12 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.procedure.TIntProcedure;
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author MrPoke, Hilgert
  * @modified vlog
@@ -71,43 +68,147 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class QuestEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestEngine.class);
-	private static final FastMap<Integer, QuestHandler> questHandlers = new FastMap<>();
-	private static ScriptManager scriptManager = new ScriptManager();
+	private ScriptManager scriptManager = new ScriptManager();
+	private Map<Integer, QuestHandler> questHandlers = new FastMap<>();
 	private TIntObjectHashMap<QuestNpc> questNpcs = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questItemRelated = new TIntObjectHashMap<>();
 	private TIntArrayList questHouseItems = new TIntArrayList();
 	private TIntObjectHashMap<TIntArrayList> questItems = new TIntObjectHashMap<>();
 	private TIntArrayList questOnEnterZoneMissionEnd = new TIntArrayList();
-	private FastMap<Race, TIntArrayList> questOnLevelUp = new FastMap<>();
+	private Map<Race, TIntArrayList> questOnLevelUp = new FastMap<>();
 	private TIntArrayList questOnDie = new TIntArrayList();
 	private TIntArrayList questOnLogOut = new TIntArrayList();
 	private TIntArrayList questOnEnterWorld = new TIntArrayList();
-	private FastMap<ZoneName, TIntArrayList> questOnEnterZone = new FastMap<>();
-	private FastMap<ZoneName, TIntArrayList> questOnLeaveZone = new FastMap<>();
-	private FastMap<String, TIntArrayList> questOnPassFlyingRings = new FastMap<>();
+	private Map<ZoneName, TIntArrayList> questOnEnterZone = new FastMap<>();
+	private Map<ZoneName, TIntArrayList> questOnLeaveZone = new FastMap<>();
+	private Map<String, TIntArrayList> questOnPassFlyingRings = new FastMap<>();
 	private TIntObjectHashMap<TIntArrayList> questOnMovieEnd = new TIntObjectHashMap<>();
 	private List<Integer> questOnTimerEnd = new FastTable<>();
 	private List<Integer> onInvisibleTimerEnd = new FastTable<>();
-	private FastMap<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<>();
-	private FastMap<Integer, TIntArrayList> questOnKillInWorld = new FastMap<>();
+	private Map<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<>();
+	private Map<Integer, TIntArrayList> questOnKillInWorld = new FastMap<>();
 	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<>();
-	private FastMap<Integer, DialogAction> dialogMap = new FastMap<>();
+	private Map<Integer, DialogAction> dialogMap = new FastMap<>();
 	private Map<Integer, Integer> questOnFailCraft = new FastMap<>();
 	private Map<Integer, Set<Integer>> questOnEquipItem = new FastMap<>();
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<>();
-	private List<Integer> questOnDredgionReward = new FastTable<Integer>();
-	private FastMap<BonusType, TIntArrayList> questOnBonusApply = new FastMap<>();
+	private List<Integer> questOnDredgionReward = new FastTable<>();
+	private Map<BonusType, TIntArrayList> questOnBonusApply = new FastMap<>();
 	private TIntArrayList reachTarget = new TIntArrayList();
 	private TIntArrayList lostTarget = new TIntArrayList();
 	private TIntArrayList questOnEnterWindStream = new TIntArrayList();
 	private TIntArrayList questRideAction = new TIntArrayList();
-	private FastMap<String, TIntArrayList> questOnKillInZone = new FastMap<>();
+	private Map<String, TIntArrayList> questOnKillInZone = new FastMap<>();
 
 	private QuestEngine() {
 	}
 
-	public static final QuestEngine getInstance() {
-		return SingletonHolder.instance;
+	@Override
+	public void load(CountDownLatch progressLatch) {
+		log.info("Quest engine load started");
+
+		for (QuestTemplate data : DataManager.QUEST_DATA.getQuestsData()) {
+			for (QuestDrop drop : data.getQuestDrop()) {
+				drop.setQuestId(data.getId());
+				QuestService.addQuestDrop(drop.getNpcId(), drop);
+			}
+			if (data.getInventoryItems() != null) {
+				for (InventoryItem inventoryItem : data.getInventoryItems().getInventoryItem()) {
+					ItemTemplate item = DataManager.ITEM_DATA.getItemTemplate(inventoryItem.getItemId());
+					item.setQuestUpdateItem(true);
+				}
+			}
+		}
+
+		AggregatedClassListener acl = new AggregatedClassListener();
+		acl.addClassListener(new OnClassLoadUnloadListener());
+		acl.addClassListener(new ScheduledTaskClassListener());
+		acl.addClassListener(new QuestHandlerLoader());
+		scriptManager.setGlobalClassListener(acl);
+
+		try {
+			scriptManager.load(new File("./data/scripts/system/quest_handlers.xml"));
+			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest())
+				xmlQuest.register(this);
+			log.info("Loaded " + questHandlers.size() + " quest handlers.");
+		} catch (Exception e) {
+			throw new GameServerError("Can't initialize quest handlers.", e);
+		} finally {
+			if (progressLatch != null)
+				progressLatch.countDown();
+		}
+
+		addMessageSendingTask();
+		for (DialogAction d : DialogAction.values()) {
+			dialogMap.put(d.id(), d);
+		}
+	}
+
+	public void reload(CountDownLatch progressLatch) {
+		log.info("Quest engine reload started");
+
+		AggregatedClassListener acl = new AggregatedClassListener();
+		acl.addClassListener(new OnClassLoadUnloadListener());
+		acl.addClassListener(new ScheduledTaskClassListener());
+		acl.addClassListener(new QuestHandlerLoader());
+		scriptManager.setGlobalClassListener(acl);
+
+		try {
+			scriptManager.load(new File("./data/scripts/system/quest_handlers.xml"));
+			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest())
+				xmlQuest.register(this);
+			log.info("Loaded " + questHandlers.size() + " quest handlers.");
+		} catch (Exception e) {
+			throw new GameServerError("Can't initialize quest handlers.", e);
+		} finally {
+			if (progressLatch != null)
+				progressLatch.countDown();
+		}
+
+		addMessageSendingTask();
+		for (DialogAction d : DialogAction.values()) {
+			dialogMap.put(d.id(), d);
+		}
+	}
+
+	@Override
+	public void shutdown() {
+		log.info("Quest engine shutdown started");
+		scriptManager.shutdown();
+		clear();
+		log.info("Quest engine shutdown complete");
+	}
+
+	public void clear() {
+		questNpcs.clear();
+		questItemRelated.clear();
+		questItems.clear();
+		questHouseItems.clear();
+		questOnLevelUp.clear();
+		questOnEnterZoneMissionEnd.clear();
+		questOnEnterWorld.clear();
+		questOnDie.clear();
+		questOnLogOut.clear();
+		questOnEnterZone.clear();
+		questOnLeaveZone.clear();
+		questOnMovieEnd.clear();
+		questOnTimerEnd.clear();
+		onInvisibleTimerEnd.clear();
+		questOnPassFlyingRings.clear();
+		questOnKillRanked.clear();
+		questOnKillInWorld.clear();
+		questOnKillInZone.clear();
+		questOnUseSkill.clear();
+		questOnFailCraft.clear();
+		questOnEquipItem.clear();
+		questCanAct.clear();
+		questOnDredgionReward.clear();
+		questOnBonusApply.clear();
+		reachTarget.clear();
+		lostTarget.clear();
+		questOnEnterWindStream.clear();
+		questRideAction.clear();
+		questHandlers.clear();
 	}
 
 	public boolean onDialog(QuestEnv env) {
@@ -1089,84 +1190,6 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	// Loading the QE on start up
-	@Override
-	public void load(CountDownLatch progressLatch) {
-		log.info("Quest engine load started");
-
-		QuestsData questData = DataManager.QUEST_DATA;
-		for (QuestTemplate data : questData.getQuestsData()) {
-			for (QuestDrop drop : data.getQuestDrop()) {
-				drop.setQuestId(data.getId());
-				QuestService.addQuestDrop(drop.getNpcId(), drop);
-			}
-			if (data.getInventoryItems() != null) {
-				for (InventoryItem inventoryItem : data.getInventoryItems().getInventoryItem()) {
-					ItemTemplate item = DataManager.ITEM_DATA.getItemTemplate(inventoryItem.getItemId());
-					item.setQuestUpdateItem(true);
-				}
-			}
-		}
-		scriptManager = new ScriptManager();
-
-		AggregatedClassListener acl = new AggregatedClassListener();
-		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
-		acl.addClassListener(new QuestHandlerLoader());
-		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			final File questDescription = new File("./data/scripts/system/quest_handlers.xml");
-			scriptManager.load(questDescription);
-			XMLQuests xmlQuests = DataManager.XML_QUESTS;
-			for (XMLQuest xmlQuest : xmlQuests.getQuest())
-				xmlQuest.register(this);
-			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize quest handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
-		}
-
-		addMessageSendingTask();
-		for (DialogAction d : DialogAction.values()) {
-			dialogMap.put(d.id(), d);
-		}
-	}
-
-	// reloading the QE by request
-	public void reload(CountDownLatch progressLatch) {
-		log.info("Quest engine reload started");
-
-		scriptManager = new ScriptManager();
-
-		AggregatedClassListener acl = new AggregatedClassListener();
-		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
-		acl.addClassListener(new QuestHandlerLoader());
-		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			final File questDescription = new File("./data/scripts/system/quest_handlers.xml");
-			scriptManager.load(questDescription);
-			XMLQuests xmlQuests = DataManager.XML_QUESTS;
-			for (XMLQuest xmlQuest : xmlQuests.getQuest())
-				xmlQuest.register(this);
-			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize quest handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
-		}
-
-		addMessageSendingTask();
-		for (DialogAction d : DialogAction.values()) {
-			dialogMap.put(d.id(), d);
-		}
-	}
-
 	private void addMessageSendingTask() {
 		Calendar sendingDate = Calendar.getInstance();
 		sendingDate.set(Calendar.AM_PM, Calendar.AM);
@@ -1201,45 +1224,8 @@ public class QuestEngine implements GameEngine {
 		}, sendingDate.getTimeInMillis() - System.currentTimeMillis(), 1000 * 60 * 60 * 24);
 	}
 
-	// Clearing the QE on reload admin command
-	@Override
-	public void shutdown() {
-		scriptManager.shutdown();
-		clear();
-		scriptManager = null;
-		log.info("Quests are shutdown...");
-	}
-
-	public void clear() {
-		questNpcs.clear();
-		questItemRelated.clear();
-		questItems.clear();
-		questHouseItems.clear();
-		questOnLevelUp.clear();
-		questOnEnterZoneMissionEnd.clear();
-		questOnEnterWorld.clear();
-		questOnDie.clear();
-		questOnLogOut.clear();
-		questOnEnterZone.clear();
-		questOnLeaveZone.clear();
-		questOnMovieEnd.clear();
-		questOnTimerEnd.clear();
-		onInvisibleTimerEnd.clear();
-		questOnPassFlyingRings.clear();
-		questOnKillRanked.clear();
-		questOnKillInWorld.clear();
-		questOnKillInZone.clear();
-		questOnUseSkill.clear();
-		questOnFailCraft.clear();
-		questOnEquipItem.clear();
-		questCanAct.clear();
-		questOnDredgionReward.clear();
-		questOnBonusApply.clear();
-		reachTarget.clear();
-		lostTarget.clear();
-		questOnEnterWindStream.clear();
-		questRideAction.clear();
-		questHandlers.clear();
+	public static final QuestEngine getInstance() {
+		return SingletonHolder.instance;
 	}
 
 	@SuppressWarnings("synthetic-access")
@@ -1247,5 +1233,4 @@ public class QuestEngine implements GameEngine {
 
 		protected static final QuestEngine instance = new QuestEngine();
 	}
-
 }

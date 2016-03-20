@@ -30,12 +30,10 @@ public class ChatCommandsLoader implements ClassListener {
 				e.printStackTrace();
 			}
 		}
-		processor.onCompileDone();
 	}
 
 	@Override
 	public void preUnload(Class<?>[] classes) {
-
 	}
 
 	public boolean isValidClass(Class<?> clazz) {

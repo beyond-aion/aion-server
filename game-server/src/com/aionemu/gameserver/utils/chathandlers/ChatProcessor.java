@@ -3,11 +3,9 @@ package com.aionemu.gameserver.utils.chathandlers;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
-
-import javolution.util.FastMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -23,6 +21,9 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author KID
  * @modified Rolandas, Neon
@@ -30,81 +31,96 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ChatProcessor implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatProcessor.class);
-	private static int commandsBefore;
-	private static ChatProcessor instance = new ChatProcessor();
-	private Map<String, ChatCommand> commands = new FastMap<String, ChatCommand>();
-	private Map<String, Byte> accessLevel = new FastMap<String, Byte>();
-	private ScriptManager sm = new ScriptManager();
-	private Exception loadException = null;
+	private ScriptManager scriptManager = new ScriptManager();
+	private Map<String, ChatCommand> commandHandlers = new FastMap<>();
+	private Map<String, Byte> accessLevel = new FastMap<>();
 
-	public static ChatProcessor getInstance() {
-		return instance;
+	private ChatProcessor() {
 	}
 
 	@Override
 	public void load(CountDownLatch progressLatch) {
+		log.info("Chat processor load started");
+
 		try {
-			log.info("Chat processor load started");
-			init(sm, this);
+			try {
+				Properties props = PropertiesUtils.load("config/administration/commands.properties");
+
+				for (Object key : props.keySet()) {
+					String str = (String) key;
+					accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
+				}
+			} catch (IOException e) {
+				log.error("Can't read commands.properties", e);
+			}
+
+			AggregatedClassListener acl = new AggregatedClassListener();
+			acl.addClassListener(new OnClassLoadUnloadListener());
+			acl.addClassListener(new ScheduledTaskClassListener());
+			acl.addClassListener(new ChatCommandsLoader(this));
+			scriptManager.setGlobalClassListener(acl);
+
+			File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
+				new File("./data/scripts/system/consolehandlers.xml") };
+			CountDownLatch loadLatch = new CountDownLatch(files.length);
+			Throwable[] throwable = new Throwable[1];
+
+			for (File file : files) {
+				ThreadPoolManager.getInstance().execute(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							scriptManager.load(file);
+						} catch (Throwable t) {
+							throwable[0] = t;
+						} finally {
+							loadLatch.countDown();
+						}
+					}
+				});
+			}
+
+			try {
+				loadLatch.await();
+			} catch (InterruptedException e1) {
+			}
+
+			if (throwable[0] != null)
+				throw new GameServerError("Can't initialize chat handlers.", throwable[0]);
+
+			log.info("Loaded " + commandHandlers.size() + " commands.");
 		} finally {
 			if (progressLatch != null)
 				progressLatch.countDown();
 		}
 	}
 
-	@Override
-	public void shutdown() {
-	}
-
-	private ChatProcessor() {
-	}
-
-	private ChatProcessor(ScriptManager scriptManager) {
-		init(scriptManager, this);
-	}
-
-	private void init(final ScriptManager scriptManager, ChatProcessor processor) {
-		commandsBefore = commands.size();
-		loadLevels();
-
-		AggregatedClassListener acl = new AggregatedClassListener();
-		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
-		acl.addClassListener(new ChatCommandsLoader(processor));
-		scriptManager.setGlobalClassListener(acl);
-
-		final File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
-			new File("./data/scripts/system/consolehandlers.xml") };
-		final CountDownLatch loadLatch = new CountDownLatch(files.length);
-
-		for (int i = 0; i < files.length; i++) {
-			final int index = i;
-			ThreadPoolManager.getInstance().execute(new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						scriptManager.load(files[index]);
-					} catch (Exception e) {
-						loadException = e;
-					} finally {
-						loadLatch.countDown();
-					}
-				}
-			});
-		}
+	public void reload() {
+		Map<String, Byte> backupAccessLevels = FastMap.of(accessLevel);
+		Map<String, ChatCommand> backupCommands = FastMap.of(commandHandlers);
+		shutdown();
 
 		try {
-			loadLatch.await();
-		} catch (InterruptedException e1) {
+			load(null);
+		} catch (Throwable e) {
+			accessLevel = backupAccessLevels;
+			commandHandlers = backupCommands;
+			log.warn("Can't reload chat handlers, restored previously loaded commands.", e);
 		}
-		if (loadException != null) {
-			throw new GameServerError("Can't initialize chat handlers.", loadException);
-		}
+	}
+
+	@Override
+	public void shutdown() {
+		log.info("Chat processor shutdown started");
+		scriptManager.shutdown();
+		accessLevel.clear();
+		commandHandlers.clear();
+		log.info("Chat processor shutdown complete");
 	}
 
 	public void registerCommand(ChatCommand cmd) {
-		if (commands.containsKey(cmd.getAlias())) {
+		if (commandHandlers.containsKey(cmd.getAlias())) {
 			log.warn("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
 			return;
 		}
@@ -115,46 +131,7 @@ public class ChatProcessor implements GameEngine {
 		}
 
 		cmd.setAccessLevel(accessLevel.get(cmd.getAlias()));
-		commands.put(cmd.getAlias(), cmd);
-	}
-
-	public void reload() {
-		ScriptManager tmpSM;
-		final ChatProcessor adminCP;
-		Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>();
-		backupCommands.putAll(commands);
-		commands.clear();
-		loadException = null;
-
-		try {
-			tmpSM = new ScriptManager();
-			adminCP = new ChatProcessor(tmpSM);
-		} catch (Throwable e) {
-			commands = backupCommands;
-			throw new GameServerError("Can't reload chat handlers.", e);
-		}
-
-		if (tmpSM != null && adminCP != null) {
-			backupCommands.clear();
-			sm.shutdown();
-			sm = null;
-			sm = tmpSM;
-			instance = adminCP;
-		}
-	}
-
-	private void loadLevels() {
-		accessLevel.clear();
-		try {
-			java.util.Properties props = PropertiesUtils.load("config/administration/commands.properties");
-
-			for (Object key : props.keySet()) {
-				String str = (String) key;
-				accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
-			}
-		} catch (IOException e) {
-			log.error("Can't read commands.properties", e);
-		}
+		commandHandlers.put(cmd.getAlias(), cmd);
 	}
 
 	public boolean handleChatCommand(Player player, String text) {
@@ -166,7 +143,7 @@ public class ChatProcessor implements GameEngine {
 
 		String cmdName = text.split(" ")[0];
 		String cmdParams = text.substring(cmdName.length());
-		for (ChatCommand cmd : getCommandList()) {
+		for (ChatCommand cmd : commandHandlers.values()) {
 			if (!(cmd instanceof ConsoleCommand) && cmdName.equals(cmd.getAliasWithPrefix()))
 				return cmd.process(player, getParamsFromString(cmdParams));
 		}
@@ -196,18 +173,18 @@ public class ChatProcessor implements GameEngine {
 
 	private String[] getParamsFromString(String params) {
 		if (params == null || params.trim().isEmpty())
-			return new String[] {};
+			return new String[0];
 
 		// advanced split to keep item links etc. in one piece (splitting on spaces, but only outside of square brackets)
 		return params.trim().split(" +(?=[^\\]]*(\\[|$))");
 	}
 
 	private ChatCommand getCommand(String alias) {
-		return this.commands.get(alias);
+		return commandHandlers.get(alias);
 	}
 
 	public Collection<ChatCommand> getCommandList() {
-		return Collections.unmodifiableCollection(this.commands.values());
+		return FastTable.of(commandHandlers.values());
 	}
 
 	public boolean isCommandAllowed(Player executor, String alias) {
@@ -219,11 +196,15 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public boolean isCommandExists(String alias) {
-		return this.commands.containsKey(alias);
+		return commandHandlers.containsKey(alias);
 	}
 
-	public void onCompileDone() {
-		log.info("Loaded " + (commands.size() - commandsBefore) + " commands.");
-		commandsBefore = commands.size();
+	public static final ChatProcessor getInstance() {
+		return SingletonHolder.instance;
+	}
+
+	private static class SingletonHolder {
+
+		protected static final ChatProcessor instance = new ChatProcessor();
 	}
 }
