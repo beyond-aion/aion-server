@@ -66,14 +66,8 @@ public class NpcStatCalculation {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 						return 0.8f;
-					case MAGICAL_ATTACK:
-					case MAGICAL_ACCURACY:
-					case MAGICAL_RESIST:
-					case PHYSICAL_DEFENSE:
-					case PHYSICAL_ACCURACY:
-					case PARRY:
-						return 1f;
 				}
+				return 1f;
 			case NORMAL:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -83,12 +77,8 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 					case MAGICAL_ACCURACY:
 						return 1.025f;
-					case MAGICAL_RESIST:
-					case PARRY:
-					case PHYSICAL_CRITICAL_RESIST:
-					case PHYSICAL_DEFENSE:
-						return 1f;
 				}
+				return 1f;
 			case ELITE:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -106,6 +96,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.5f;
 				}
+				return 1f;
 			case HERO:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -124,6 +115,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.75f;
 				}
+				return 1f;
 			case LEGENDARY:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -140,6 +132,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2.1f;
 				}
+				return 1f;
 			default:
 				return 0;
 		}
@@ -151,15 +144,8 @@ public class NpcStatCalculation {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 						return 0.585f;
-					case MAGICAL_ACCURACY:
-					case PHYSICAL_DEFENSE:
-					case MAGICAL_RESIST:
-					case MAGICAL_ATTACK:
-					case PARRY:
-					case PHYSICAL_ACCURACY:
-					case PHYSICAL_CRITICAL_RESIST:
-						return 1f;
 				}
+				return 1f;
 			case DISCIPLINED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -178,6 +164,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.5f;
 				}
+				return 1f;
 			case SEASONED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -196,6 +183,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2f;
 				}
+				return 1f;
 			case EXPERT:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -214,6 +202,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2.4f;
 				}
+				return 1f;
 			case VETERAN:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -231,6 +220,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2.5f;
 				}
+				return 1f;
 			case MASTER:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -248,6 +238,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2.6f;
 				}
+				return 1f;
 			default:
 				return 0;
 		}

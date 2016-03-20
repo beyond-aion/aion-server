@@ -530,7 +530,6 @@ public abstract class EffectTemplate {
 				case SKILLLV:
 					int skillLvl = effect.getSkillLevel();
 					currentHate += hopB + hopA * skillLvl; // Agro-value of the effect
-				default:
 					break;
 			}
 		}
