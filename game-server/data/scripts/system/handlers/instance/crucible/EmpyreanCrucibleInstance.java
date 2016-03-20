@@ -747,9 +747,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				}
 				break;
 			case 217570:
-				for (int i = 0; i < 5; i++) {
+				for (int i = 0; i < 5; i++)
 					sp(211984, npc.getX() + Rnd.get(-2, 2), npc.getY() + Rnd.get(-2, 2), npc.getZ(), npc.getHeading());
-				}
+				break;
 			case 217569:
 				sp(205414, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				despawnNpc(npc);
@@ -768,7 +768,6 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217573:
 				despawnNpc(npc);
 				sendEventPacket(StageType.PASS_GROUP_STAGE_6, 0);
-				// sendMsg(1400977);
 				// sendMsg(1400977);
 				// TODO: 2 boxes ready room!
 				sp(217750, 1624.1908f, 155.16148f, 126f, (byte) 0, 8000);
@@ -1453,9 +1452,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 							itemId = 101500895;
 							break;
 					}
-					break;
 				}
-			case 205341: // skillbooks
+				break;
+			case 217753: // skillbooks
 				if (Rnd.get(1, 100) < 51) {
 					Race race = instance.getRegisteredGroup().getRace();
 					switch (Rnd.get(1, 4)) {
@@ -1472,8 +1471,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 							itemId = race.equals(Race.ELYOS) ? 169500927 : 169500931;
 							break;
 					}
-					break;
 				}
+				break;
 		}
 		if (itemId != 0)
 			dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, itemId, 1));
