@@ -134,211 +134,211 @@
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="31">
-		<stats_template maxHp="2392" maxMp="2314" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="501" block="461" parry="461" attack="18" accuracy="438" pcrit="2" macc="441">
+		<stats_template maxHp="2392" maxMp="2314" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="461" block="461" parry="461" attack="18" accuracy="438" pcrit="2" macc="441">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="32">
-		<stats_template maxHp="2496" maxMp="2385" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="514" block="474" parry="474" attack="18" accuracy="446" pcrit="2" macc="456">
+		<stats_template maxHp="2496" maxMp="2385" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="474" block="474" parry="474" attack="18" accuracy="446" pcrit="2" macc="456">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="33">
-		<stats_template maxHp="2602" maxMp="2455" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="526" block="486" parry="486" attack="18" accuracy="454" pcrit="2" macc="470">
+		<stats_template maxHp="2602" maxMp="2455" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="486" block="486" parry="486" attack="18" accuracy="454" pcrit="2" macc="470">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="34">
-		<stats_template maxHp="2710" maxMp="2525" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="539" block="499" parry="499" attack="18" accuracy="462" pcrit="2" macc="484">
+		<stats_template maxHp="2710" maxMp="2525" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="499" block="499" parry="499" attack="18" accuracy="462" pcrit="2" macc="484">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="35">
-		<stats_template maxHp="2820" maxMp="2596" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="551" block="511" parry="511" attack="18" accuracy="470" pcrit="2" macc="498">
+		<stats_template maxHp="2820" maxMp="2596" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="511" block="511" parry="511" attack="18" accuracy="470" pcrit="2" macc="498">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="36">
-		<stats_template maxHp="2932" maxMp="2666" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="563" block="523" parry="523" attack="18" accuracy="478" pcrit="2" macc="513">
+		<stats_template maxHp="2932" maxMp="2666" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="523" block="523" parry="523" attack="18" accuracy="478" pcrit="2" macc="513">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="37">
-		<stats_template maxHp="3046" maxMp="2736" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="576" block="536" parry="536" attack="18" accuracy="486" pcrit="2" macc="527">
+		<stats_template maxHp="3046" maxMp="2736" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="536" block="536" parry="536" attack="18" accuracy="486" pcrit="2" macc="527">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="38">
-		<stats_template maxHp="3163" maxMp="2807" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="588" block="548" parry="548" attack="18" accuracy="494" pcrit="2" macc="541">
+		<stats_template maxHp="3163" maxMp="2807" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="548" block="548" parry="548" attack="18" accuracy="494" pcrit="2" macc="541">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="39">
-		<stats_template maxHp="3281" maxMp="2877" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="601" block="561" parry="561" attack="18" accuracy="502" pcrit="2" macc="555">
+		<stats_template maxHp="3281" maxMp="2877" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="561" block="561" parry="561" attack="18" accuracy="502" pcrit="2" macc="555">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="40">
-		<stats_template maxHp="3402" maxMp="2948" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="613" block="573" parry="573" attack="18" accuracy="510" pcrit="2" macc="570">
+		<stats_template maxHp="3402" maxMp="2948" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="573" block="573" parry="573" attack="18" accuracy="510" pcrit="2" macc="570">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="41">
-		<stats_template maxHp="3524" maxMp="3018" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="645" block="585" parry="585" attack="18" accuracy="518" pcrit="2" macc="584">
+		<stats_template maxHp="3524" maxMp="3018" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="585" block="585" parry="585" attack="18" accuracy="518" pcrit="2" macc="584">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="42">
-		<stats_template maxHp="3649" maxMp="3088" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="658" block="598" parry="598" attack="18" accuracy="526" pcrit="2" macc="598">
+		<stats_template maxHp="3649" maxMp="3088" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="598" block="598" parry="598" attack="18" accuracy="526" pcrit="2" macc="598">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="43">
-		<stats_template maxHp="3775" maxMp="3159" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="670" block="610" parry="610" attack="18" accuracy="534" pcrit="2" macc="612">
+		<stats_template maxHp="3775" maxMp="3159" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="610" block="610" parry="610" attack="18" accuracy="534" pcrit="2" macc="612">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="44">
-		<stats_template maxHp="3904" maxMp="3229" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="683" block="623" parry="623" attack="18" accuracy="542" pcrit="2" macc="627">
+		<stats_template maxHp="3904" maxMp="3229" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="623" block="623" parry="623" attack="18" accuracy="542" pcrit="2" macc="627">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="45">
-		<stats_template maxHp="4035" maxMp="3300" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="695" block="635" parry="635" attack="18" accuracy="550" pcrit="2" macc="641">
+		<stats_template maxHp="4035" maxMp="3300" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="635" block="635" parry="635" attack="18" accuracy="550" pcrit="2" macc="641">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="46">
-		<stats_template maxHp="4168" maxMp="3370" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="707" block="647" parry="647" attack="18" accuracy="558" pcrit="2" macc="655">
+		<stats_template maxHp="4168" maxMp="3370" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="647" block="647" parry="647" attack="18" accuracy="558" pcrit="2" macc="655">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="47">
-		<stats_template maxHp="4303" maxMp="3441" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="720" block="660" parry="660" attack="18" accuracy="566" pcrit="2" macc="669">
+		<stats_template maxHp="4303" maxMp="3441" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="660" block="660" parry="660" attack="18" accuracy="566" pcrit="2" macc="669">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="48">
-		<stats_template maxHp="4440" maxMp="3511" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="732" block="672" parry="672" attack="18" accuracy="574" pcrit="2" macc="684">
+		<stats_template maxHp="4440" maxMp="3511" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="672" block="672" parry="672" attack="18" accuracy="574" pcrit="2" macc="684">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="49">
-		<stats_template maxHp="4579" maxMp="3582" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="745" block="685" parry="685" attack="18" accuracy="582" pcrit="2" macc="698">
+		<stats_template maxHp="4579" maxMp="3582" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="685" block="685" parry="685" attack="18" accuracy="582" pcrit="2" macc="698">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="50">
-		<stats_template maxHp="4720" maxMp="3652" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="757" block="697" parry="697" attack="18" accuracy="590" pcrit="2" macc="712">
+		<stats_template maxHp="4720" maxMp="3652" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="697" block="697" parry="697" attack="18" accuracy="590" pcrit="2" macc="712">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="51">
-		<stats_template maxHp="4863" maxMp="3723" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="769" block="709" parry="709" attack="18" accuracy="598" pcrit="2" macc="726">
+		<stats_template maxHp="4863" maxMp="3723" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="709" block="709" parry="709" attack="18" accuracy="598" pcrit="2" macc="726">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="52">
-		<stats_template maxHp="5009" maxMp="3793" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="782" block="722" parry="722" attack="18" accuracy="606" pcrit="2" macc="741">
+		<stats_template maxHp="5009" maxMp="3793" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="722" block="722" parry="722" attack="18" accuracy="606" pcrit="2" macc="741">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="53">
-		<stats_template maxHp="5156" maxMp="3864" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="794" block="734" parry="734" attack="18" accuracy="614" pcrit="2" macc="755">
+		<stats_template maxHp="5156" maxMp="3864" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="734" block="734" parry="734" attack="18" accuracy="614" pcrit="2" macc="755">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="54">
-		<stats_template maxHp="5305" maxMp="3934" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="807" block="747" parry="747" attack="18" accuracy="622" pcrit="2" macc="769">
+		<stats_template maxHp="5305" maxMp="3934" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="747" block="747" parry="747" attack="18" accuracy="622" pcrit="2" macc="769">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="55">
-		<stats_template maxHp="5457" maxMp="4005" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="819" block="759" parry="759" attack="18" accuracy="630" pcrit="2" macc="783">
+		<stats_template maxHp="5457" maxMp="4005" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="759" block="759" parry="759" attack="18" accuracy="630" pcrit="2" macc="783">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="56">
-		<stats_template maxHp="5610" maxMp="4075" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="831" block="771" parry="771" attack="18" accuracy="638" pcrit="2" macc="798">
+		<stats_template maxHp="5610" maxMp="4075" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="771" block="771" parry="771" attack="18" accuracy="638" pcrit="2" macc="798">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="57">
-		<stats_template maxHp="5766" maxMp="4146" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="844" block="784" parry="784" attack="18" accuracy="646" pcrit="2" macc="812">
+		<stats_template maxHp="5766" maxMp="4146" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="784" block="784" parry="784" attack="18" accuracy="646" pcrit="2" macc="812">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="58">
-		<stats_template maxHp="5924" maxMp="4216" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="856" block="796" parry="796" attack="18" accuracy="654" pcrit="2" macc="826">
+		<stats_template maxHp="5924" maxMp="4216" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="796" block="796" parry="796" attack="18" accuracy="654" pcrit="2" macc="826">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="59">
-		<stats_template maxHp="6084" maxMp="4287" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="869" block="809" parry="809" attack="18" accuracy="662" pcrit="2" macc="840">
+		<stats_template maxHp="6084" maxMp="4287" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="809" block="809" parry="809" attack="18" accuracy="662" pcrit="2" macc="840">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="60">
-		<stats_template maxHp="6246" maxMp="4358" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="881" block="821" parry="821" attack="18" accuracy="670" pcrit="2" macc="855">
+		<stats_template maxHp="6246" maxMp="4358" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="821" block="821" parry="821" attack="18" accuracy="670" pcrit="2" macc="855">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="61">
-		<stats_template maxHp="6409" maxMp="4428" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="893" block="833" parry="833" attack="18" accuracy="678" pcrit="2" macc="869">
+		<stats_template maxHp="6409" maxMp="4428" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="833" block="833" parry="833" attack="18" accuracy="678" pcrit="2" macc="869">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="62">
-		<stats_template maxHp="6575" maxMp="4499" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="906" block="846" parry="846" attack="18" accuracy="686" pcrit="2" macc="883">
+		<stats_template maxHp="6575" maxMp="4499" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="846" block="846" parry="846" attack="18" accuracy="686" pcrit="2" macc="883">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="63">
-		<stats_template maxHp="6744" maxMp="4569" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="918" block="858" parry="858" attack="18" accuracy="694" pcrit="2" macc="897">
+		<stats_template maxHp="6744" maxMp="4569" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="858" block="858" parry="858" attack="18" accuracy="694" pcrit="2" macc="897">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="64">
-		<stats_template maxHp="6914" maxMp="4640" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="931" block="871" parry="871" attack="18" accuracy="702" pcrit="2" macc="912">
+		<stats_template maxHp="6914" maxMp="4640" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="871" block="871" parry="871" attack="18" accuracy="702" pcrit="2" macc="912">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="GUNNER" level="65">
-		<stats_template maxHp="7086" maxMp="4711" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="943" block="883" parry="883" attack="18" accuracy="710" pcrit="2" macc="926">
+		<stats_template maxHp="7086" maxMp="4711" power="100" health="105" agility="105" base_accuracy="100" knowledge="100" will="100" evasion="883" block="883" parry="883" attack="18" accuracy="710" pcrit="2" macc="926">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>

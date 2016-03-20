@@ -44,301 +44,301 @@
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="16">
-		<stats_template maxHp="1359" maxMp="1281" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="260" block="360" parry="260" attack="20" accuracy="318" pcrit="2" macc="228">
+		<stats_template maxHp="1359" maxMp="1281" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="260" block="260" parry="260" attack="20" accuracy="318" pcrit="2" macc="228">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="17">
-		<stats_template maxHp="1452" maxMp="1351" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="272" block="372" parry="272" attack="20" accuracy="326" pcrit="2" macc="242">
+		<stats_template maxHp="1452" maxMp="1351" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="272" block="272" parry="272" attack="20" accuracy="326" pcrit="2" macc="242">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="18">
-		<stats_template maxHp="1548" maxMp="1421" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="285" block="385" parry="285" attack="20" accuracy="334" pcrit="2" macc="256">
+		<stats_template maxHp="1548" maxMp="1421" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="285" block="285" parry="285" attack="20" accuracy="334" pcrit="2" macc="256">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="19">
-		<stats_template maxHp="1646" maxMp="1491" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="297" block="397" parry="297" attack="20" accuracy="342" pcrit="2" macc="270">
+		<stats_template maxHp="1646" maxMp="1491" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="297" block="297" parry="297" attack="20" accuracy="342" pcrit="2" macc="270">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="20">
-		<stats_template maxHp="1748" maxMp="1562" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="310" block="410" parry="310" attack="20" accuracy="350" pcrit="2" macc="285">
+		<stats_template maxHp="1748" maxMp="1562" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="310" block="310" parry="310" attack="20" accuracy="350" pcrit="2" macc="285">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="21">
-		<stats_template maxHp="1851" maxMp="1632" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="322" block="422" parry="322" attack="20" accuracy="358" pcrit="2" macc="299">
+		<stats_template maxHp="1851" maxMp="1632" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="322" block="322" parry="322" attack="20" accuracy="358" pcrit="2" macc="299">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="22">
-		<stats_template maxHp="1957" maxMp="1702" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="334" block="434" parry="334" attack="20" accuracy="366" pcrit="2" macc="313">
+		<stats_template maxHp="1957" maxMp="1702" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="334" block="334" parry="334" attack="20" accuracy="366" pcrit="2" macc="313">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="23">
-		<stats_template maxHp="2066" maxMp="1772" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="347" block="447" parry="347" attack="20" accuracy="374" pcrit="2" macc="327">
+		<stats_template maxHp="2066" maxMp="1772" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="347" block="347" parry="347" attack="20" accuracy="374" pcrit="2" macc="327">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="24">
-		<stats_template maxHp="2178" maxMp="1842" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="359" block="459" parry="359" attack="20" accuracy="382" pcrit="2" macc="342">
+		<stats_template maxHp="2178" maxMp="1842" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="359" block="359" parry="359" attack="20" accuracy="382" pcrit="2" macc="342">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="25">
-		<stats_template maxHp="2292" maxMp="1913" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="372" block="472" parry="372" attack="34" accuracy="390" pcrit="2" macc="356">
+		<stats_template maxHp="2292" maxMp="1913" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="372" block="372" parry="372" attack="20" accuracy="390" pcrit="2" macc="356">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="26">
-		<stats_template maxHp="2409" maxMp="1983" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="384" block="484" parry="384" attack="34" accuracy="398" pcrit="2" macc="370">
+		<stats_template maxHp="2409" maxMp="1983" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="384" block="384" parry="384" attack="20" accuracy="398" pcrit="2" macc="370">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="27">
-		<stats_template maxHp="2529" maxMp="2053" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="396" block="496" parry="396" attack="34" accuracy="406" pcrit="2" macc="384">
+		<stats_template maxHp="2529" maxMp="2053" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="396" block="396" parry="396" attack="20" accuracy="406" pcrit="2" macc="384">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="28">
-		<stats_template maxHp="2651" maxMp="2123" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="409" block="559" parry="409" attack="34" accuracy="414" pcrit="2" macc="399">
+		<stats_template maxHp="2651" maxMp="2123" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="409" block="409" parry="409" attack="20" accuracy="414" pcrit="2" macc="399">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="29">
-		<stats_template maxHp="2776" maxMp="2194" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="421" block="571" parry="421" attack="34" accuracy="422" pcrit="2" macc="413">
+		<stats_template maxHp="2776" maxMp="2194" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="421" block="421" parry="421" attack="20" accuracy="422" pcrit="2" macc="413">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="30">
-		<stats_template maxHp="2903" maxMp="2264" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="434" block="584" parry="434" attack="34" accuracy="430" pcrit="2" macc="427">
+		<stats_template maxHp="2903" maxMp="2264" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="434" block="434" parry="434" attack="20" accuracy="430" pcrit="2" macc="427">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="31">
-		<stats_template maxHp="3033" maxMp="2334" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="446" block="596" parry="446" attack="34" accuracy="438" pcrit="2" macc="441">
+		<stats_template maxHp="3033" maxMp="2334" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="446" block="446" parry="446" attack="20" accuracy="438" pcrit="2" macc="441">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="32">
-		<stats_template maxHp="3166" maxMp="2405" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="458" block="608" parry="458" attack="34" accuracy="446" pcrit="2" macc="456">
+		<stats_template maxHp="3166" maxMp="2405" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="458" block="458" parry="458" attack="20" accuracy="446" pcrit="2" macc="456">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="33">
-		<stats_template maxHp="3302" maxMp="2475" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="471" block="621" parry="471" attack="34" accuracy="454" pcrit="2" macc="470">
+		<stats_template maxHp="3302" maxMp="2475" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="471" block="471" parry="471" attack="20" accuracy="454" pcrit="2" macc="470">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="34">
-		<stats_template maxHp="3440" maxMp="2545" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="483" block="633" parry="483" attack="34" accuracy="462" pcrit="2" macc="484">
+		<stats_template maxHp="3440" maxMp="2545" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="483" block="483" parry="483" attack="20" accuracy="462" pcrit="2" macc="484">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="35">
-		<stats_template maxHp="3580" maxMp="2616" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="496" block="646" parry="496" attack="34" accuracy="470" pcrit="2" macc="498">
+		<stats_template maxHp="3580" maxMp="2616" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="496" block="496" parry="496" attack="20" accuracy="470" pcrit="2" macc="498">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="36">
-		<stats_template maxHp="3724" maxMp="2686" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="508" block="658" parry="508" attack="34" accuracy="478" pcrit="2" macc="513">
+		<stats_template maxHp="3724" maxMp="2686" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="508" block="508" parry="508" attack="20" accuracy="478" pcrit="2" macc="513">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="37">
-		<stats_template maxHp="3870" maxMp="2756" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="520" block="670" parry="520" attack="34" accuracy="486" pcrit="2" macc="527">
+		<stats_template maxHp="3870" maxMp="2756" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="520" block="520" parry="520" attack="20" accuracy="486" pcrit="2" macc="527">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="38">
-		<stats_template maxHp="4018" maxMp="2827" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="533" block="683" parry="533" attack="34" accuracy="494" pcrit="2" macc="541">
+		<stats_template maxHp="4018" maxMp="2827" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="533" block="533" parry="533" attack="20" accuracy="494" pcrit="2" macc="541">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="39">
-		<stats_template maxHp="4170" maxMp="2897" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="545" block="695" parry="545" attack="34" accuracy="502" pcrit="2" macc="555">
+		<stats_template maxHp="4170" maxMp="2897" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="545" block="545" parry="545" attack="20" accuracy="502" pcrit="2" macc="555">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="40">
-		<stats_template maxHp="4324" maxMp="2968" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="558" block="708" parry="558" attack="34" accuracy="530" pcrit="2" macc="570">
+		<stats_template maxHp="4324" maxMp="2968" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="558" block="558" parry="558" attack="20" accuracy="530" pcrit="2" macc="570">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="41">
-		<stats_template maxHp="4480" maxMp="3038" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="570" block="720" parry="570" attack="41" accuracy="538" pcrit="2" macc="584">
+		<stats_template maxHp="4480" maxMp="3038" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="570" block="570" parry="570" attack="20" accuracy="538" pcrit="2" macc="584">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="42">
-		<stats_template maxHp="4639" maxMp="3108" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="582" block="732" parry="582" attack="41" accuracy="546" pcrit="2" macc="598">
+		<stats_template maxHp="4639" maxMp="3108" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="582" block="582" parry="582" attack="20" accuracy="546" pcrit="2" macc="598">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="43">
-		<stats_template maxHp="4801" maxMp="3179" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="595" block="745" parry="595" attack="41" accuracy="554" pcrit="2" macc="612">
+		<stats_template maxHp="4801" maxMp="3179" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="595" block="595" parry="595" attack="20" accuracy="554" pcrit="2" macc="612">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="44">
-		<stats_template maxHp="4966" maxMp="3249" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="607" block="757" parry="607" attack="41" accuracy="562" pcrit="2" macc="627">
+		<stats_template maxHp="4966" maxMp="3249" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="607" block="607" parry="607" attack="20" accuracy="562" pcrit="2" macc="627">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="45">
-		<stats_template maxHp="5133" maxMp="3320" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="620" block="770" parry="620" attack="41" accuracy="570" pcrit="2" macc="641">
+		<stats_template maxHp="5133" maxMp="3320" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="620" block="620" parry="620" attack="20" accuracy="570" pcrit="2" macc="641">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="46">
-		<stats_template maxHp="5303" maxMp="3390" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="632" block="782" parry="632" attack="41" accuracy="578" pcrit="2" macc="655">
+		<stats_template maxHp="5303" maxMp="3390" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="632" block="632" parry="632" attack="20" accuracy="578" pcrit="2" macc="655">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="47">
-		<stats_template maxHp="5475" maxMp="3461" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="644" block="794" parry="644" attack="41" accuracy="586" pcrit="2" macc="669">
+		<stats_template maxHp="5475" maxMp="3461" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="644" block="644" parry="644" attack="20" accuracy="586" pcrit="2" macc="669">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="48">
-		<stats_template maxHp="5650" maxMp="3531" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="657" block="807" parry="657" attack="41" accuracy="594" pcrit="2" macc="684">
+		<stats_template maxHp="5650" maxMp="3531" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="657" block="657" parry="657" attack="20" accuracy="594" pcrit="2" macc="684">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="49">
-		<stats_template maxHp="5828" maxMp="3602" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="669" block="819" parry="669" attack="41" accuracy="602" pcrit="2" macc="698">
+		<stats_template maxHp="5828" maxMp="3602" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="669" block="669" parry="669" attack="20" accuracy="602" pcrit="2" macc="698">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="50">
-		<stats_template maxHp="6008" maxMp="3672" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="682" block="832" parry="682" attack="41" accuracy="610" pcrit="2" macc="712">
+		<stats_template maxHp="6008" maxMp="3672" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="682" block="682" parry="682" attack="20" accuracy="610" pcrit="2" macc="712">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="51">
-		<stats_template maxHp="6191" maxMp="3743" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="694" block="844" parry="694" attack="48" accuracy="638" pcrit="2" macc="726">
+		<stats_template maxHp="6191" maxMp="3743" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="694" block="694" parry="694" attack="20" accuracy="638" pcrit="2" macc="726">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="52">
-		<stats_template maxHp="6377" maxMp="3813" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="706" block="856" parry="706" attack="48" accuracy="646" pcrit="2" macc="741">
+		<stats_template maxHp="6377" maxMp="3813" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="706" block="706" parry="706" attack="20" accuracy="646" pcrit="2" macc="741">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="53">
-		<stats_template maxHp="6565" maxMp="3884" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="719" block="869" parry="719" attack="48" accuracy="654" pcrit="2" macc="755">
+		<stats_template maxHp="6565" maxMp="3884" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="719" block="719" parry="719" attack="20" accuracy="654" pcrit="2" macc="755">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="54">
-		<stats_template maxHp="6756" maxMp="3954" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="731" block="881" parry="731" attack="48" accuracy="662" pcrit="2" macc="769">
+		<stats_template maxHp="6756" maxMp="3954" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="731" block="731" parry="731" attack="20" accuracy="662" pcrit="2" macc="769">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="55">
-		<stats_template maxHp="6950" maxMp="4025" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="744" block="894" parry="744" attack="48" accuracy="690" pcrit="2" macc="783">
+		<stats_template maxHp="6950" maxMp="4025" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="744" block="744" parry="744" attack="20" accuracy="690" pcrit="2" macc="783">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="56">
-		<stats_template maxHp="7146" maxMp="4095" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="756" block="906" parry="756" attack="55" accuracy="698" pcrit="2" macc="798">
+		<stats_template maxHp="7146" maxMp="4095" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="756" block="756" parry="756" attack="20" accuracy="698" pcrit="2" macc="798">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="57">
-		<stats_template maxHp="7345" maxMp="4166" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="768" block="918" parry="768" attack="55" accuracy="706" pcrit="2" macc="812">
+		<stats_template maxHp="7345" maxMp="4166" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="768" block="768" parry="768" attack="20" accuracy="706" pcrit="2" macc="812">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="58">
-		<stats_template maxHp="7546" maxMp="4236" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="781" block="931" parry="781" attack="55" accuracy="714" pcrit="2" macc="826">
+		<stats_template maxHp="7546" maxMp="4236" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="781" block="781" parry="781" attack="20" accuracy="714" pcrit="2" macc="826">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="59">
-		<stats_template maxHp="7751" maxMp="4307" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="793" block="943" parry="793" attack="55" accuracy="722" pcrit="2" macc="840">
+		<stats_template maxHp="7751" maxMp="4307" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="793" block="793" parry="793" attack="20" accuracy="722" pcrit="2" macc="840">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="60">
-		<stats_template maxHp="7958" maxMp="4378" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="806" block="956" parry="806" attack="55" accuracy="730" pcrit="2" macc="855">
+		<stats_template maxHp="7958" maxMp="4378" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="806" block="806" parry="806" attack="20" accuracy="730" pcrit="2" macc="855">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="61">
-		<stats_template maxHp="8167" maxMp="4448" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="818" block="968" parry="818" attack="55" accuracy="738" pcrit="2" macc="869">
+		<stats_template maxHp="8167" maxMp="4448" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="818" block="818" parry="818" attack="20" accuracy="738" pcrit="2" macc="869">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="62">
-		<stats_template maxHp="8379" maxMp="4519" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="830" block="980" parry="830" attack="55" accuracy="746" pcrit="2" macc="883">
+		<stats_template maxHp="8379" maxMp="4519" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="830" block="830" parry="830" attack="20" accuracy="746" pcrit="2" macc="883">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="63">
-		<stats_template maxHp="8594" maxMp="4589" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="843" block="993" parry="843" attack="55" accuracy="754" pcrit="2" macc="897">
+		<stats_template maxHp="8594" maxMp="4589" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="843" block="843" parry="843" attack="20" accuracy="754" pcrit="2" macc="897">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="64">
-		<stats_template maxHp="8811" maxMp="4660" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="855" block="1005" parry="855" attack="55" accuracy="762" pcrit="2" macc="912">
+		<stats_template maxHp="8811" maxMp="4660" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="855" block="855" parry="855" attack="20" accuracy="762" pcrit="2" macc="912">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="TEMPLAR" level="65">
-		<stats_template maxHp="9031" maxMp="4731" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="868" block="1018" parry="868" attack="55" accuracy="770" pcrit="2" macc="926">
+		<stats_template maxHp="9031" maxMp="4731" power="115" health="100" agility="100" base_accuracy="100" knowledge="90" will="105" evasion="868" block="868" parry="868" attack="20" accuracy="770" pcrit="2" macc="926">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
