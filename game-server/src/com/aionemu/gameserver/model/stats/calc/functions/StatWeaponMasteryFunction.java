@@ -24,17 +24,28 @@ public class StatWeaponMasteryFunction extends StatRateFunction {
 		ItemGroup offHandWeapon = player.getEquipment().getOffHandWeaponType();
 		switch (this.stat) {
 			case MAIN_HAND_POWER:
-				if (mainWeapon != null && mainWeapon.equals(itemGroup))
-					super.apply(stat);
+				if (mainWeapon != null && mainWeapon.equals(itemGroup)) {
+					applyTo(stat, false);
+				}
 				break;
 			case OFF_HAND_POWER:
 				if (offHandWeapon != null && offHandWeapon.equals(itemGroup))
-					super.apply(stat);
+					applyTo(stat, true);
 				break;
 			default:
 				if (mainWeapon != null && mainWeapon.equals(itemGroup))
-					super.apply(stat);
+					applyTo(stat, false);
 		}
 	}
 
+
+	private void applyTo(Stat2 stat, boolean isOffHand) {
+		if (isBonus()) {
+			int bonus = Math.round(stat.getBaseWithoutBaseRate() * getValue() / 100f);
+
+			stat.addToBonus(bonus);
+		} else {
+			stat.setBase(Math.round(stat.getBaseWithoutBaseRate() * stat.calculatePercent(getValue())));
+		}
+	}
 }

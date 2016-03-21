@@ -18,9 +18,9 @@ public class StatRateFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat) {
 		if (isBonus()) {
-			stat.addToBonus((int) (stat.getBase() * getValue() / 100f));
+			stat.addToBonus((int) (stat.getBaseWithoutBaseRate() * getValue() / 100f));
 		} else {
-			stat.setBase((int) (stat.getBase() * stat.calculatePercent(getValue())));
+			stat.setBase((int) (stat.getBaseWithoutBaseRate() * stat.calculatePercent(getValue())));
 		}
 	}
 

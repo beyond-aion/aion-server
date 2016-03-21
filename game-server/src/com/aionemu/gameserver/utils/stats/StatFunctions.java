@@ -413,7 +413,8 @@ public class StatFunctions {
 
 				float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
 				int diff = Math.round((totalMax - totalMin) * power / 2);
-				resultDamage = pAttack.getBonus() + pAttack.getBase();
+				int bonusDmg = isMainHand ? pAttack.getBonus() : Math.round(pAttack.getBonus() * 0.98f);
+				resultDamage = bonusDmg + pAttack.getBase();
 				resultDamage += Rnd.get(-diff, diff);
 			}
 		} else {
@@ -467,7 +468,8 @@ public class StatFunctions {
 				if (!isMainHand)
 					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
 
-				resultDamage = mAttack.getBonus() + mAttack.getBase();
+				int bonusDmg = isMainHand ? mAttack.getBonus() : Math.round(mAttack.getBonus() * 0.82f);
+				resultDamage = bonusDmg  + mAttack.getBase();
 				resultDamage += Rnd.get(-negativeDiff, diff);
 
 				if (attacker.isInState(CreatureState.POWERSHARD)) {

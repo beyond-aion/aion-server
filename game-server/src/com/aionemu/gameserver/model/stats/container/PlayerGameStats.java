@@ -234,7 +234,8 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	@Override
 	public Stat2 getMainHandPAttack() {
-		int base = 18;
+		PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
+		int base = pst.getAttack();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
@@ -254,8 +255,8 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			offHandWeapon = null;
 		if (offHandWeapon != null && offHandWeapon.getItemTemplate().isWeapon()) {
 			int base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			base *= 0.98;
 			Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base);
+			stat.setBaseRate(stat.getBaseRate() * 0.98f);
 			return getStat(StatEnum.OFF_HAND_POWER, stat);
 		}
 		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
@@ -283,8 +284,8 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			offHandWeapon = null;
 		if (offHandWeapon != null && offHandWeapon.getItemTemplate().isWeapon()) {
 			int base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			base *= 0.98;
 			Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base);
+			stat.setBaseRate(stat.getBaseRate() * 0.82f);
 			return getStat(StatEnum.OFF_HAND_POWER, stat);
 		}
 		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
@@ -297,19 +298,21 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null && !mainHandWeapon.getItemTemplate().getAttackType().isMagical()) {
-			base = mainHandWeapon.getItemTemplate().getWeaponStats().getCritical();
+			base = base + mainHandWeapon.getItemTemplate().getWeaponStats().getCritical();
 		}
 		return getStat(StatEnum.PHYSICAL_CRITICAL, base);
 	}
 
 	public Stat2 getOffHandPCritical() {
+		PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
+		int base = pst.getPcrit();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (mainHandWeapon == offHandWeapon)
 			offHandWeapon = null;
 		if (offHandWeapon != null && offHandWeapon.getItemTemplate().isWeapon() && !offHandWeapon.getItemTemplate().getAttackType().isMagical()) {
-			int base = offHandWeapon.getItemTemplate().getWeaponStats().getCritical();
+			base = base + offHandWeapon.getItemTemplate().getWeaponStats().getCritical();
 			return getStat(StatEnum.PHYSICAL_CRITICAL, base);
 		}
 		return new AdditionStat(StatEnum.OFF_HAND_CRITICAL, 0, owner);

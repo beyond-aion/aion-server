@@ -4,23 +4,23 @@ package com.aionemu.gameserver.utils.stats.enums;
  * @author ATracer
  */
 public enum MAIN_HAND_ATTACK {
-	WARRIOR(19),
-	GLADIATOR(19),
-	TEMPLAR(19),
+	WARRIOR(21),
+	GLADIATOR(21),
+	TEMPLAR(21),
 	SCOUT(18),
-	ASSASSIN(19),
+	ASSASSIN(20),
 	RANGER(18),
-	MAGE(16),
-	SORCERER(16),
-	SPIRIT_MASTER(16),
-	PRIEST(17),
-	CLERIC(19),
-	CHANTER(19),
-	ENGINEER(19),
-	GUNNER(19),
-	RIDER(19),
-	ARTIST(19),
-	BARD(19);
+	MAGE(14),
+	SORCERER(14),
+	SPIRIT_MASTER(14),
+	PRIEST(18),
+	CLERIC(18),
+	CHANTER(20),
+	ENGINEER(18),
+	GUNNER(18),
+	RIDER(20),
+	ARTIST(14),
+	BARD(14);
 
 	private int value;
 

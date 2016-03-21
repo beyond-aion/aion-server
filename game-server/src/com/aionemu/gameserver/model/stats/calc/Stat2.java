@@ -34,6 +34,10 @@ public abstract class Stat2 {
 		return (int) (base * this.getBaseRate());
 	}
 
+	public final int getBaseWithoutBaseRate() {
+		return base;
+	}
+
 	public final void setBase(int base) {
 		this.base = base;
 	}

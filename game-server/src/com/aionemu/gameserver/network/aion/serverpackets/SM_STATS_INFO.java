@@ -86,13 +86,13 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeC(player.getMoveController().getMovementMask());// [movementMask]
 
 		writeH(pgs.getMainHandPAttack().getCurrent());// [current main hand attack]
-		writeH(pgs.getOffHandPAttack().getCurrent());// [off hand attack]
+		writeH(pgs.getOffHandPAttack().getBase() + Math.round(pgs.getOffHandPAttack().getBonus() * 0.98f));// [off hand attack]
 
 		writeH(0);// unk 3.0
 
 		writeD(pgs.getPDef().getCurrent());// [current pdef]
 		writeH(pgs.getMainHandMAttack().getCurrent());// [current magic attack]
-		writeH(pgs.getOffHandMAttack().getCurrent());
+		writeH(pgs.getOffHandMAttack().getBase() + Math.round(pgs.getOffHandMAttack().getBonus() * 0.82f));
 		writeD(pgs.getMDef().getCurrent()); // [Current magic def]
 		writeH(pgs.getMResist().getCurrent());// [current mres]
 		writeH(0);// unk 3.0
