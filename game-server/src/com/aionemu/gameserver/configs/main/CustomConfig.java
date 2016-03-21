@@ -67,8 +67,8 @@ public class CustomConfig {
 	/**
 	 * Disable chain trigger rate (chain skill with 100% success)
 	 */
-	@Property(key = "gameserver.skill.chain.triggerrate", defaultValue = "true")
-	public static boolean SKILL_CHAIN_TRIGGERRATE;
+	@Property(key = "gameserver.skill.chain.disable_triggerrate", defaultValue = "false")
+	public static boolean SKILL_CHAIN_DISABLE_TRIGGERRATE;
 
 	/**
 	 * Base Fly Time

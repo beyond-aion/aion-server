@@ -764,7 +764,7 @@ public class Skill {
 				if (blockedChain)
 					chainSuccess = false;
 				else
-					chainSuccess = Rnd.get(1, 100) <= skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_TRIGGERRATE;
+					chainSuccess = Rnd.get(1, 100) <= skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_DISABLE_TRIGGERRATE;
 
 				if (chainSuccess)
 					((Player) effector).getChainSkills().updateChain(chainCategory, chainUsageDuration);
