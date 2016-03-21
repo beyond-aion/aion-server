@@ -210,7 +210,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 			return;
 		}
 		if (GSConfig.CHARACTER_CREATION_MODE == 0) {
-			for (PlayerAccountData data : account.getSortedAccountsList()) {
+			for (PlayerAccountData data : account.getPlayerAccDataList()) {
 				if (data.getPlayerCommonData().getRace() != playerCommonData.getRace()) {
 					client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_OTHER_RACE));
 					IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());

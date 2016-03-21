@@ -31,7 +31,7 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 
 		writeD(playOk2);
 		writeC(account.size()); // character count
-		for (PlayerAccountData playerData : account.getSortedAccountsList()) {
+		for (PlayerAccountData playerData : account.getPlayerAccDataList()) {
 			writePlayerInfo(playerData);
 		}
 	}

@@ -46,7 +46,7 @@ public class CM_QUIT extends AionClientPacket {
 			if (stayConnected) { // update char selection info
 				Account account = con.getAccount();
 				account.getPlayerAccountData(player.getObjectId()).setEquipment(player.getEquipment().getEquippedForAppearence());
-				for (PlayerAccountData plAccData : account.getSortedAccountsList())
+				for (PlayerAccountData plAccData : account.getPlayerAccDataList())
 					plAccData.setCharBanInfo(DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
 			charEditScreen = player.getCommonData().isInEditMode();
