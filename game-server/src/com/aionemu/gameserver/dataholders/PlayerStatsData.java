@@ -39,11 +39,6 @@ public class PlayerStatsData {
 			// TODO move to DP
 			template.setMaxMp(Math.round(template.getMaxMp() * 100f / template.getWill()));
 			template.setMaxHp(Math.round(template.getMaxHp() * 100f / template.getHealth()));
-			int agility = template.getAgility();
-			agility = (agility - 100);
-			template.setEvasion(Math.round(template.getEvasion() - template.getEvasion() * agility * 0.003f));
-			template.setBlock(Math.round(template.getBlock() - template.getBlock() * agility * 0.0025f));
-			template.setParry(Math.round(template.getParry() - template.getParry() * agility * 0.0025f));
 			playerTemplates.put(code, pt.getTemplate());
 		}
 

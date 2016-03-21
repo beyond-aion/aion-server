@@ -8,11 +8,13 @@ import java.util.List;
 
 import javolution.util.FastTable;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 
 /**
  * @author ATracer
@@ -30,10 +32,6 @@ public class PlayerStatFunctions {
 		FUNCTIONS.add(new PDefFunction());
 		FUNCTIONS.add(new MaxHpFunction());
 		FUNCTIONS.add(new MaxMpFunction());
-
-		FUNCTIONS.add(new AgilityModifierFunction(StatEnum.BLOCK, 0.25f));
-		FUNCTIONS.add(new AgilityModifierFunction(StatEnum.PARRY, 0.25f));
-		FUNCTIONS.add(new AgilityModifierFunction(StatEnum.EVASION, 0.3f));
 	}
 
 	public static final List<IStatFunction> getFunctions() {
@@ -53,29 +51,13 @@ class PhysicalAttackFunction extends StatFunction {
 
 	@Override
 	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player) {
+			PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(((Player) stat.getOwner()).getPlayerClass(), ((Player) stat.getOwner()).getLevel());
+			if (stat.getBase() == pst.getAttack())
+				return;
+		}
 		float power = stat.getOwner().getGameStats().getPower().getCurrent();
 		stat.setBaseRate(power * 0.01f);
-	}
-
-	@Override
-	public int getPriority() {
-		return 30;
-	}
-}
-
-class AgilityModifierFunction extends StatFunction {
-
-	private float modifier;
-
-	AgilityModifierFunction(StatEnum stat, float modifier) {
-		this.stat = stat;
-		this.modifier = modifier;
-	}
-
-	@Override
-	public void apply(Stat2 stat) {
-		float agility = stat.getOwner().getGameStats().getAgility().getCurrent();
-		stat.setBase(Math.round(stat.getBase() + stat.getBase() * (agility - 100) * modifier / 100f));
 	}
 
 	@Override
