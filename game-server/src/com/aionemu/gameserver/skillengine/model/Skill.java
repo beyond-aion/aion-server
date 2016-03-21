@@ -179,7 +179,7 @@ public class Skill {
 		// check for counter skill
 		if (effector instanceof Player) {
 			Player player = (Player) effector;
-			if (chainCategory == null) // category gets set in preCastCheck()
+			if (skillMethod == SkillMethod.CAST && chainCategory == null) // category gets set in preCastCheck()
 				player.getChainSkills().resetChain();
 
 			if (this.skillTemplate.getCounterSkill() != null) {
