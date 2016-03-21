@@ -81,14 +81,13 @@ public class Mailbox {
 	 */
 	public List<Letter> getNewSystemLetters(String substring) {
 		List<Letter> letters = new FastTable<Letter>();
-		for (Letter letter : mails.values()) {
-			if (letter.getSenderName() == null || !letter.isUnread())
-				continue;
-			if (owner.getCommonData().getLastOnline().getTime() > letter.getTimeStamp().getTime())
-				continue;
-			if (letter.getSenderName().startsWith("%") || letter.getSenderName().startsWith("$$")) {
-				if (letter.getSenderName().startsWith(substring))
-					letters.add(letter);
+		if (substring.startsWith("%") || substring.startsWith("$$")) {
+			for (Letter letter : mails.values()) {
+				if (!letter.isUnread() || letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))
+					continue;
+				if (owner.getCommonData().getLastOnline().getTime() > letter.getTimeStamp().getTime())
+					continue;
+				letters.add(letter);
 			}
 		}
 		return letters;

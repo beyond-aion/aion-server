@@ -1,15 +1,11 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -98,6 +94,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * This class is representing Player object, it contains all needed data.
@@ -1061,14 +1060,6 @@ public class Player extends Creature {
 	 */
 	public void setFlyController(FlyController flyController) {
 		this.flyController = flyController;
-	}
-
-	public int getLastOnline() {
-		Timestamp lastOnline = playerCommonData.getLastOnline();
-		if (lastOnline == null || isOnline())
-			return 0;
-
-		return (int) (lastOnline.getTime() / 1000);
 	}
 
 	/**

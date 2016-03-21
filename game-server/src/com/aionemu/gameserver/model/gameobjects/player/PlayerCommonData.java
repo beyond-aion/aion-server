@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
@@ -41,7 +40,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private long exp = 0;
 	private long expRecoverable = 0;
 	private Gender gender;
-	private Timestamp lastOnline = new Timestamp(Calendar.getInstance().getTime().getTime() - 20);
+	private Timestamp lastOnline;
 	private boolean online;
 	private String note;
 	private WorldPosition position;
