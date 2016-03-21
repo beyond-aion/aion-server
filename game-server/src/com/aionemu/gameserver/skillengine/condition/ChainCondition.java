@@ -50,9 +50,7 @@ public class ChainCondition extends Condition {
 					return false;
 				expireTime = currentSkill.getExpireTime();
 			} else {
-				expireTime = currentSkill.getLastUseTime();
-				if (expireTime != 0)
-					expireTime += time;
+				expireTime = currentSkill.getLastUseTime() == 0 || time == 0 ? 0 : currentSkill.getLastUseTime() + time;
 			}
 			if (expireTime != 0 && now > expireTime) // check max allowed use time
 				return false;

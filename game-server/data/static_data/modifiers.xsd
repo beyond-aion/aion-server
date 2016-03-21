@@ -427,7 +427,7 @@
 			<xs:extension base="Condition">
 				<xs:attribute name="selfcount" type="xs:int" default="1"/>
 				<xs:attribute name="precount" type="xs:int" default="1"/>
-				<xs:attribute name="time" type="xs:int"/>
+				<xs:attribute name="time" type="xs:int" default="5000"/>
 				<xs:attribute name="precategory" type="xs:string"/>
 				<xs:attribute name="category" type="xs:string" use="required"/>
 			</xs:extension>
