@@ -51,6 +51,7 @@ public class _1063BrigadierIndratu extends QuestHandler {
 						} else if (var == 2) {
 							return sendQuestDialog(env, 1693);
 						}
+						break;
 					}
 					case SETPRO1: {
 						TeleportService2.teleportTo(player, 210040000, 1881.2819f, 2589.232f, 139.9159f, (byte) 67);

@@ -57,7 +57,7 @@ public class Util {
 	private static void toText(ByteBuffer data, StringBuilder result, int cnt) {
 		int charPos = data.position() - cnt;
 		for (int a = 0; a < cnt; a++) {
-			int c = data.get(charPos++);
+			int c = data.get(charPos++) & 0xFF; // unsigned byte
 			if (c > 0x1f && c < 0x80)
 				result.append((char) c);
 			else

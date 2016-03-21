@@ -356,12 +356,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	}
 
 	public String getEventName() {
-		String result = gameEventType.name();
-		result.replace("_", " ");
-		result.toLowerCase();
-
-		return result;
-
+		return gameEventType.name().replace("_", " ").toLowerCase();
 	}
 
 	public void onBaseCapture(Player player) {

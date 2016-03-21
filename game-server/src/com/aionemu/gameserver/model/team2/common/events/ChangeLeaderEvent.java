@@ -28,7 +28,7 @@ public abstract class ChangeLeaderEvent<T extends TemporaryPlayerTeam<?>> extend
 
 	@Override
 	public boolean apply(Player player) {
-		if (!player.getObjectId().equals(team.getLeader().getObjectId()) && player.isOnline()) {
+		if (!player.equals(team.getLeader().getObject()) && player.isOnline()) {
 			changeLeaderTo(player);
 			return false;
 		}

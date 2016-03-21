@@ -719,7 +719,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 * @author vlog
 	 */
 	public boolean isSameItem(Item i) {
-		return this.getObjectId().equals(i.getObjectId()) && this.getItemId() == i.getItemId();
+		return this.equals(i) && this.getItemId() == i.getItemId();
 	}
 
 	public boolean isStorableinWarehouse(Player player) {

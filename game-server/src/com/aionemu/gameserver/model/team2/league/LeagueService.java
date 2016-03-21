@@ -83,7 +83,7 @@ public class LeagueService {
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_ADD_NEW_MEMBER);
 			return false;
 		} else if (inviter.getPlayerAlliance2().isInLeague() && invited.getPlayerAlliance2().isInLeague()
-			&& inviter.getPlayerAlliance2().getLeague().getObjectId().equals(invited.getPlayerAlliance2().getLeague().getObjectId())) {
+			&& inviter.getPlayerAlliance2().getLeague().equals(invited.getPlayerAlliance2().getLeague())) {
 			// %0 is already a member of another Alliance League.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_ALREADY_OTHER_UNION(invited.getName()));
 			return false;

@@ -148,7 +148,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	public final boolean isLeader(M member) {
-		return leader.getObject().getObjectId().equals(member.getObjectId());
+		return leader.getObject().equals(member);
 	}
 
 	public final void changeLeader(TM member) {

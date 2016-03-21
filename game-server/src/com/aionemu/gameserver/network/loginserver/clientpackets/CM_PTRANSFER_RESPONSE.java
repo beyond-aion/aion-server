@@ -29,8 +29,8 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 				PlayerTransfer transfer = new PlayerTransfer(taskId, targetAccount, account, name);
 				transfer.setCommonData(db);
 				PlayerTransferService.getInstance().putTransfer(taskId, transfer);
-				//
 			}
+				break;
 			case 24: // send items
 			{
 				int taskId = readD();
@@ -57,6 +57,7 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 				PlayerTransfer transfer = PlayerTransferService.getInstance().getTransfer(taskId);
 				transfer.setSkillData(db);
 			}
+				break;
 			case 27: // send recipe
 			{
 				int taskId = readD();

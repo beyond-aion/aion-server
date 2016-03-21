@@ -159,9 +159,8 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 			@Override
 			public int compare(Integer o1, Integer o2) {
-				return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);
+				return o2.compareTo(o1);
 			}
-
 		});
 	}
 

@@ -125,11 +125,11 @@ public class LegionMemberContainer {
 		if (player == null) {
 			return;
 		}
-		if (legionMemberById.containsKey(player)) {
-			legionMemberById.remove(player);
+		if (legionMemberById.containsKey(player.getObjectId())) {
+			legionMemberById.remove(player.getObjectId());
 		}
-		if (legionMemberExById.containsKey(player)) {
-			legionMemberExById.remove(player);
+		if (legionMemberExById.containsKey(player.getObjectId())) {
+			legionMemberExById.remove(player.getObjectId());
 		}
 		if (legionMemberExByName.containsKey(player.getName())) {
 			legionMemberExByName.remove(player.getName());
@@ -144,13 +144,13 @@ public class LegionMemberContainer {
 		if (player == null) {
 			return;
 		}
-		if (!legionMemberById.containsKey(player)) {
+		if (!legionMemberById.containsKey(player.getObjectId())) {
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(player.getObjectId());
 			if (legionMember != null) {
 				legionMemberById.putIfAbsent(legionMember.getObjectId(), legionMember);
 			}
 		}
-		if (!legionMemberExById.containsKey(player)) {
+		if (!legionMemberExById.containsKey(player.getObjectId())) {
 			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
 			if (legionMember != null) {
 				legionMemberExById.putIfAbsent(legionMember.getObjectId(), legionMember);

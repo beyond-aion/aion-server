@@ -353,7 +353,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	}
 
 	protected boolean isAware(Creature creature) {
-		return creature != null && !creature.getObjectId().equals(owner.getObjectId())
+		return creature != null && !creature.equals(owner)
 			&& !owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY)
 			&& (creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
 	}

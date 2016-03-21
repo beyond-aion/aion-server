@@ -80,7 +80,7 @@ public class TargetRelationProperty {
 
 							if (sourcePlayer.isInAlliance2() && targetPlayer.isInAlliance2()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerAlliance2().getObjectId().equals(targetPlayer.getPlayerAlliance2().getObjectId())) {
+									&& sourcePlayer.getPlayerAlliance2().equals(targetPlayer.getPlayerAlliance2())) {
 									continue;
 								}
 							} else if (sourcePlayer.isInGroup2() && targetPlayer.isInGroup2()) {

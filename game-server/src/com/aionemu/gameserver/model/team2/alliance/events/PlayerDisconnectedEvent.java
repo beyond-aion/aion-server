@@ -58,7 +58,7 @@ public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllia
 	@Override
 	public boolean apply(PlayerAllianceMember member) {
 		Player player = member.getObject();
-		if (!disconnected.getObjectId().equals(player.getObjectId())) {
+		if (!disconnected.equals(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_BECOME_OFFLINE(disconnected.getName()));
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember, PlayerAllianceEvent.DISCONNECTED));
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(alliance));

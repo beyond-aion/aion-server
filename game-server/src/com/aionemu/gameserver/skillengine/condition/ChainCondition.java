@@ -6,11 +6,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.skillengine.model.ChainSkill;
+import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
  * @author ATracer
- * @edited kecimis
+ * @modified kecimis
+ * @reworked Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChainCondition")
@@ -23,57 +26,57 @@ public class ChainCondition extends Condition {
 	@XmlAttribute(name = "category")
 	private String category;
 	@XmlAttribute(name = "precategory")
-	private String precategory;
+	private String preCategory;
 	@XmlAttribute(name = "time")
 	private int time;
 
 	@Override
 	public boolean validate(Skill env) {
-
-		if (env.getEffector() instanceof Player && (precategory != null || selfCount > 0)) {
-			Player pl = (Player) env.getEffector();
-
-			if (selfCount > 0) {// multicast
-				boolean canUse = false;
-
-				if (precategory != null && pl.getChainSkills().chainSkillEnabled(precategory, time)) {
-					canUse = true;
+		if (env.getEffector() instanceof Player) {
+			long expireTime;
+			long now = System.currentTimeMillis();
+			ChainSkills chain = ((Player) env.getEffector()).getChainSkills();
+			ChainSkill currentSkill = chain.getCurrentChainSkill();
+			if (preCategory == null && category.contains("_1TH")) { // first skill of a chain
+				if (currentSkill.getLastUseTime() > 0
+					&& (now >= currentSkill.getLastUseTime() + env.getCooldown() || !currentSkill.getCategory().equals(category))) {
+					chain.resetChain(); // resets previous and current skill
+					currentSkill = chain.getCurrentChainSkill();
 				}
+			}
 
-				if (pl.getChainSkills().chainSkillEnabled(category, time)) {
-					canUse = true;
-				} else if (precategory == null) {
-					canUse = true;
-				}
-
-				if (!canUse)
+			if (currentSkill.getCategory().equals(category)) { // multicast
+				if (currentSkill.getUseCount() >= selfCount) // max activation count
 					return false;
+				expireTime = currentSkill.getExpireTime();
+			} else {
+				expireTime = currentSkill.getLastUseTime();
+				if (expireTime != 0)
+					expireTime += time;
+			}
+			if (expireTime != 0 && now > expireTime) // check max allowed use time
+				return false;
 
-				if (selfCount <= pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), category)) {
-					return false;
-				} else {
-					env.setIsMultiCast(true);
-				}
-			} else if (preCount > 0 && selfCount > 0) {
-				if (!pl.getChainSkills().chainSkillEnabled(precategory, time)
-					|| preCount != pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), precategory)) {
-					return false;
-				}
-			} else {// basic chain skill
-				if (!pl.getChainSkills().chainSkillEnabled(precategory, time)) {
+			if (preCategory != null) {
+				if (currentSkill.getCategory().equals(preCategory)) {
+					if (currentSkill.getUseCount() < preCount) // preCategory skill must have been activated x times
+						return false;
+				} else if (!chain.getPreviousChainSkill().getCategory().equals(preCategory)) { // previously activated skill must match
 					return false;
 				}
 			}
 		}
 
 		env.setChainCategory(category);
+		env.setChainUsageDuration(time);
+		env.setIsMultiCast(selfCount > 1);
 		return true;
 	}
 
 	/**
-	 * @return the selfCount
+	 * @return Number of allowed skill activations of this chain skill.
 	 */
-	public int getSelfCount() {
+	public int getAllowedActivations() {
 		return selfCount;
 	}
 
@@ -90,5 +93,4 @@ public class ChainCondition extends Condition {
 	public int getTime() {
 		return time;
 	}
-
 }

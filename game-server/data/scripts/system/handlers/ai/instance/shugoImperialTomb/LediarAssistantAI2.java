@@ -32,9 +32,7 @@ public class LediarAssistantAI2 extends AggressiveNpcAI2 {
 			if (tower != null && !tower.getLifeStats().isAlreadyDead()) {
 				switch (npc_id) {
 					case 831305:
-						getOwner().getAggroList().addHate(tower, 10000);
 					case 831250:
-						getOwner().getAggroList().addHate(tower, 10000);
 					case 831251:
 						getOwner().getAggroList().addHate(tower, 10000);
 						break;

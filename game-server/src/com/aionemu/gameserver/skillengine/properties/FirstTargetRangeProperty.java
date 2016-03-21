@@ -30,12 +30,11 @@ public class FirstTargetRangeProperty {
 		if (firstTarget == null)
 			return false;
 
-		if (firstTarget.getObjectId().equals(effector.getObjectId())) {
+		if (firstTarget.equals(effector)) {
 			return true;
 		}
 
-		if (!castState.isCastStart() && !(effector instanceof Player)) { // NPCs don't cancel skills after once started, could be abused -> no range or
-																																			// geo to check
+		if (!castState.isCastStart() && !(effector instanceof Player)) { // NPCs don't cancel skills once started, could be abused -> no range or geo to check
 			return true;
 		}
 

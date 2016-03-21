@@ -32,15 +32,15 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 public class AI2Engine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(AI2Engine.class);
-	private static ScriptManager scriptManager = new ScriptManager();
-	public static final File INSTANCE_DESCRIPTOR_FILE = new File("./data/scripts/system/aihandlers.xml");
+	private ScriptManager scriptManager = new ScriptManager();
+	private Map<String, Class<? extends AbstractAI>> aiHandlers = new HashMap<>();
 
-	private final Map<String, Class<? extends AbstractAI>> aiMap = new HashMap<String, Class<? extends AbstractAI>>();
+	private AI2Engine() {
+	}
 
 	@Override
 	public void load(CountDownLatch progressLatch) {
 		log.info("AI2 engine load started");
-		scriptManager = new ScriptManager();
 
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
@@ -49,8 +49,8 @@ public class AI2Engine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
-			log.info("Loaded " + aiMap.size() + " ai handlers.");
+			scriptManager.load(new File("./data/scripts/system/aihandlers.xml"));
+			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
 			validateScripts();
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize ai handlers.", e);
@@ -61,51 +61,29 @@ public class AI2Engine implements GameEngine {
 	}
 
 	public void reload() {
-		log.info("AI2 engine reload started");
-		ScriptManager scriptManager;
-		try {
-			scriptManager = new ScriptManager();
-			AggregatedClassListener acl = new AggregatedClassListener();
-			acl.addClassListener(new OnClassLoadUnloadListener());
-			acl.addClassListener(new ScheduledTaskClassListener());
-			acl.addClassListener(new AI2HandlerClassListener());
-			scriptManager.setGlobalClassListener(acl);
-			try {
-				scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
-				log.info("Loaded " + aiMap.size() + " ai handlers.");
-				validateScripts();
-			} catch (Exception e) {
-				throw new GameServerError("Can't initialize AI2 handlers.", e);
-			}
-		} catch (Exception e1) {
-			throw new GameServerError("Can't reload AI2 engine.", e1);
-		}
-		if (scriptManager != null) {
-			shutdown();
-			load(null);
-		}
+		shutdown();
+		load(null);
 	}
 
 	@Override
 	public void shutdown() {
 		log.info("AI2 engine shutdown started");
 		scriptManager.shutdown();
-		scriptManager = null;
-		aiMap.clear();
+		aiHandlers.clear();
 		log.info("AI2 engine shutdown complete");
 	}
 
 	public void registerAI(Class<? extends AbstractAI> class1) {
 		AIName nameAnnotation = class1.getAnnotation(AIName.class);
 		if (nameAnnotation != null) {
-			aiMap.put(nameAnnotation.value(), class1);
+			aiHandlers.put(nameAnnotation.value(), class1);
 		}
 	}
 
 	public final AI2 setupAI(String name, Creature owner) {
 		AbstractAI aiInstance = null;
 		try {
-			aiInstance = aiMap.get(name).newInstance();
+			aiInstance = aiHandlers.get(name).newInstance();
 			aiInstance.setOwner(owner);
 			owner.setAi2(aiInstance);
 			if (AIConfig.ONCREATE_DEBUG) {
@@ -129,12 +107,12 @@ public class AI2Engine implements GameEngine {
 		Collection<String> npcAINames = selectDistinct(with(DataManager.NPC_DATA.getNpcData().valueCollection()).extract(on(NpcTemplate.class).getAi()));
 		for (String name : npcAINames) {
 			try {
-				aiMap.get(name).newInstance();
+				aiHandlers.get(name).newInstance();
 			} catch (Exception e) {
 				log.error("[AI2] AI factory error: " + name, e);
 			}
 		}
-		npcAINames.removeAll(aiMap.keySet());
+		npcAINames.removeAll(aiHandlers.keySet());
 		if (npcAINames.size() > 0) {
 			log.warn("Bad AI names: " + join(npcAINames));
 		}

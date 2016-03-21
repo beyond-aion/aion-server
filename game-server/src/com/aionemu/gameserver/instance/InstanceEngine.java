@@ -25,16 +25,12 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class InstanceEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceEngine.class);
-	private static ScriptManager scriptManager = new ScriptManager();
-	public static final File INSTANCE_DESCRIPTOR_FILE = new File("./data/scripts/system/instancehandlers.xml");
-	public static final InstanceHandler DUMMY_INSTANCE_HANDLER = new GeneralInstanceHandler();
-
-	private Map<Integer, Class<? extends InstanceHandler>> handlers = new HashMap<Integer, Class<? extends InstanceHandler>>();
+	private ScriptManager scriptManager = new ScriptManager();
+	private Map<Integer, Class<? extends InstanceHandler>> instanceHandlers = new HashMap<>();
 
 	@Override
 	public void load(CountDownLatch progressLatch) {
 		log.info("Instance engine load started");
-		scriptManager = new ScriptManager();
 
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
@@ -43,8 +39,8 @@ public class InstanceEngine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(INSTANCE_DESCRIPTOR_FILE);
-			log.info("Loaded " + handlers.size() + " instance handlers.");
+			scriptManager.load(new File("./data/scripts/system/instancehandlers.xml"));
+			log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
 		} finally {
@@ -57,13 +53,12 @@ public class InstanceEngine implements GameEngine {
 	public void shutdown() {
 		log.info("Instance engine shutdown started");
 		scriptManager.shutdown();
-		scriptManager = null;
-		handlers.clear();
+		instanceHandlers.clear();
 		log.info("Instance engine shutdown complete");
 	}
 
 	public InstanceHandler getNewInstanceHandler(int worldId) {
-		Class<? extends InstanceHandler> instanceClass = handlers.get(worldId);
+		Class<? extends InstanceHandler> instanceClass = instanceHandlers.get(worldId);
 		InstanceHandler instanceHandler = null;
 		if (instanceClass != null) {
 			try {
@@ -72,10 +67,8 @@ public class InstanceEngine implements GameEngine {
 				log.warn("Can't instantiate instance handler " + worldId, ex);
 			}
 		}
-		if (instanceHandler == null) {
-			instanceHandler = DUMMY_INSTANCE_HANDLER;
-		}
-		return instanceHandler;
+
+		return instanceHandler != null ? instanceHandler : new GeneralInstanceHandler();
 	}
 
 	/**
@@ -84,7 +77,7 @@ public class InstanceEngine implements GameEngine {
 	final void addInstanceHandlerClass(Class<? extends InstanceHandler> handler) {
 		InstanceID idAnnotation = handler.getAnnotation(InstanceID.class);
 		if (idAnnotation != null) {
-			handlers.put(idAnnotation.value(), handler);
+			instanceHandlers.put(idAnnotation.value(), handler);
 		}
 	}
 

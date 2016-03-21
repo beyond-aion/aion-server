@@ -48,82 +48,24 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 
-
 /**
- * @author ATracer modified by antness
+ * @author ATracer
+ * @modified antness
  */
 public final class ZoneService implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ZoneService.class);
-	private TIntObjectHashMap<List<ZoneInfo>> zoneByMapIdMap;
-	private final Map<ZoneName, Class<? extends ZoneHandler>> handlers = new HashMap<ZoneName, Class<? extends ZoneHandler>>();
-	private final FastMap<ZoneName, ZoneHandler> collidableHandlers = new FastMap<ZoneName, ZoneHandler>();
-	public static final ZoneHandler DUMMY_ZONE_HANDLER = new GeneralZoneHandler();
-	private static ScriptManager scriptManager = new ScriptManager();
-	public static final File ZONE_DESCRIPTOR_FILE = new File("./data/scripts/system/zonehandlers.xml");
+	private ScriptManager scriptManager = new ScriptManager();
+	private Map<ZoneName, Class<? extends ZoneHandler>> zoneHandlers = new HashMap<>();
+	private Map<ZoneName, ZoneHandler> collidableHandlers = new FastMap<>();
+	private TIntObjectHashMap<List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
 
 	private ZoneService() {
-		this.zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
-	}
-
-	public static ZoneService getInstance() {
-		return SingletonHolder.instance;
-	}
-
-	@SuppressWarnings("synthetic-access")
-	private static class SingletonHolder {
-
-		protected static final ZoneService instance = new ZoneService();
-	}
-
-	public ZoneHandler getNewZoneHandler(ZoneName zoneName) {
-		ZoneHandler zoneHandler = collidableHandlers.get(zoneName);
-		if (zoneHandler != null)
-			return zoneHandler;
-		Class<? extends ZoneHandler> zoneClass = handlers.get(zoneName);
-		if (zoneClass != null) {
-			try {
-				zoneHandler = zoneClass.newInstance();
-			} catch (IllegalAccessException ex) {
-				log.warn("Can't instantiate zone handler " + zoneName, ex);
-			} catch (Exception ex) {
-				log.warn("Can't instantiate zone handler " + zoneName, ex);
-			}
-		}
-		if (zoneHandler == null) {
-			zoneHandler = DUMMY_ZONE_HANDLER;
-		}
-		return zoneHandler;
-	}
-
-	/**
-	 * @param handler
-	 */
-	public final void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
-		ZoneNameAnnotation idAnnotation = handler.getAnnotation(ZoneNameAnnotation.class);
-		if (idAnnotation != null) {
-			String[] zoneNames = idAnnotation.value().split(" ");
-			for (String zoneNameString : zoneNames) {
-				try {
-					ZoneName zoneName = ZoneName.get(zoneNameString.trim());
-					if (zoneName == ZoneName.get("NONE"))
-						throw new RuntimeException();
-					handlers.put(zoneName, handler);
-				} catch (Exception e) {
-					log.warn("Missing ZoneName: " + idAnnotation.value());
-				}
-			}
-		}
-	}
-
-	public final void addZoneHandlerClass(ZoneName zoneName, Class<? extends ZoneHandler> handler) {
-		handlers.put(zoneName, handler);
 	}
 
 	@Override
 	public void load(CountDownLatch progressLatch) {
 		log.info("Zone engine load started");
-		scriptManager = new ScriptManager();
 
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
@@ -132,8 +74,8 @@ public final class ZoneService implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(ZONE_DESCRIPTOR_FILE);
-			log.info("Loaded " + handlers.size() + " zone handlers.");
+			scriptManager.load(new File("./data/scripts/system/zonehandlers.xml"));
+			log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
 		} catch (IllegalStateException e) {
 			log.warn("Can't initialize instance handlers.", e.getMessage());
 		} catch (Exception e) {
@@ -149,9 +91,50 @@ public final class ZoneService implements GameEngine {
 	public void shutdown() {
 		log.info("Zone engine shutdown started");
 		scriptManager.shutdown();
-		scriptManager = null;
-		handlers.clear();
+		zoneHandlers.clear();
 		log.info("Zone engine shutdown complete");
+	}
+
+	public ZoneHandler getNewZoneHandler(ZoneName zoneName) {
+		ZoneHandler zoneHandler = collidableHandlers.get(zoneName);
+		if (zoneHandler != null)
+			return zoneHandler;
+		Class<? extends ZoneHandler> zoneClass = zoneHandlers.get(zoneName);
+		if (zoneClass != null) {
+			try {
+				zoneHandler = zoneClass.newInstance();
+			} catch (IllegalAccessException ex) {
+				log.warn("Can't instantiate zone handler " + zoneName, ex);
+			} catch (Exception ex) {
+				log.warn("Can't instantiate zone handler " + zoneName, ex);
+			}
+		}
+
+		return zoneHandler != null ? zoneHandler : new GeneralZoneHandler();
+	}
+
+	/**
+	 * @param handler
+	 */
+	public final void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
+		ZoneNameAnnotation idAnnotation = handler.getAnnotation(ZoneNameAnnotation.class);
+		if (idAnnotation != null) {
+			String[] zoneNames = idAnnotation.value().split(" ");
+			for (String zoneNameString : zoneNames) {
+				try {
+					ZoneName zoneName = ZoneName.get(zoneNameString.trim());
+					if (zoneName == ZoneName.get("NONE"))
+						throw new RuntimeException();
+					zoneHandlers.put(zoneName, handler);
+				} catch (Exception e) {
+					log.warn("Missing ZoneName: " + idAnnotation.value());
+				}
+			}
+		}
+	}
+
+	public final void addZoneHandlerClass(ZoneName zoneName, Class<? extends ZoneHandler> handler) {
+		zoneHandlers.put(zoneName, handler);
 	}
 
 	/**
@@ -290,19 +273,16 @@ public final class ZoneService implements GameEngine {
 				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
 					handler = new SiegeShield(geometry);
 					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
-				}
-				else
+				} else
 					return;
-			}
-			else {
+			} else {
 				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(materialId);
 				if (template == null)
 					return;
 				handler = new MaterialZoneHandler(geometry, template);
 			}
 			collidableHandlers.put(zoneName, handler);
-		}
-		else {
+		} else {
 			log.warn("Duplicate material mesh: " + zoneName.toString());
 		}
 
@@ -323,14 +303,12 @@ public final class ZoneService implements GameEngine {
 			// maybe add to zone data if needed search ?
 			Area zoneInfoArea = null;
 			if (zoneTemplate.getSphere() != null) {
-				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate
-					.getSphere().getZ(), zoneTemplate.getSphere().getR());
-			}
-			else if (zoneTemplate.getCylinder() != null) {
+				zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(),
+					zoneTemplate.getSphere().getZ(), zoneTemplate.getSphere().getR());
+			} else if (zoneTemplate.getCylinder() != null) {
 				zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(),
 					zoneTemplate.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
-			}
-			else if (zoneTemplate.getSemisphere() != null) {
+			} else if (zoneTemplate.getSemisphere() != null) {
 				zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(),
 					zoneTemplate.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
 			}
@@ -352,4 +330,13 @@ public final class ZoneService implements GameEngine {
 		createMaterialZoneTemplate(geometry, worldId, materialId, false);
 	}
 
+	public static ZoneService getInstance() {
+		return SingletonHolder.instance;
+	}
+
+	@SuppressWarnings("synthetic-access")
+	private static class SingletonHolder {
+
+		protected static final ZoneService instance = new ZoneService();
+	}
 }

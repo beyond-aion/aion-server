@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team2.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -207,9 +206,7 @@ public class NpcController extends CreatureController<Npc> {
 					+ info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName() + " player was skiped");
 				continue;
 			}
-			if (attacker instanceof TemporaryPlayerTeam<?>) {
-				PlayerTeamDistributionService.doReward((TemporaryPlayerTeam<?>) attacker, percentage, getOwner(), winner);
-			} else if (attacker instanceof Player && ((Player) attacker).isInGroup2()) {
+			if (attacker instanceof Player && ((Player) attacker).isInGroup2()) {
 				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup2(), percentage, getOwner(), winner);
 			} else if (attacker instanceof Player) {
 				Player player = (Player) attacker;

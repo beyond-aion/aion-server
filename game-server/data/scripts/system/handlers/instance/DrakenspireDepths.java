@@ -461,8 +461,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				break;
 			case 236246: // Lv3mode Human Beritra
 				if (isBeritraFightStarted.compareAndSet(false, true))
-					// onBeritraFightStart();
-					break;
+					/*onBeritraFightStart()*/;
+				break;
 			case 236247: // Dragon Beritra
 				if (isBeritraTransformed.compareAndSet(false, true))
 					scheduleBeritrasDespawn();

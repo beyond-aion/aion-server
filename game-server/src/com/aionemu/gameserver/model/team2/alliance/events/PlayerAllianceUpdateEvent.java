@@ -49,10 +49,8 @@ public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent implements Pr
 
 	@Override
 	public boolean apply(PlayerAllianceMember member) {
-		if (!member.getObjectId().equals(player.getObjectId())) {
+		if (!member.getObject().equals(player))
 			PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(updateMember, allianceEvent, slot));
-		}
 		return true;
 	}
-
 }

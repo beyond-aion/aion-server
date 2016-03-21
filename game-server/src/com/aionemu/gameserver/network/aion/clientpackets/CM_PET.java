@@ -104,7 +104,6 @@ public class CM_PET extends AionClientPacket {
 			case EXTEND_EXPIRATION: //extend expiration date
 				eggObjId = readD(); //itemObjId
 				petId = readD(); //petObjId
-			default:
 				break;
 		}
 	}

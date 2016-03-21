@@ -184,7 +184,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (group != null && group.isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER);
 			return false;
-		} else if (group != null && !player.getObjectId().equals(group.getLeader().getObjectId())) {
+		} else if (group != null && !player.equals(group.getLeader().getObject())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ONLY_LEADER_CAN_INVITE);
 			return false;
 		} else if (target == null) {

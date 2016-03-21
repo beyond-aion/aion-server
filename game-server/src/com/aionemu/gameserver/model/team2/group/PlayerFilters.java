@@ -69,8 +69,7 @@ public class PlayerFilters {
 
 		@Override
 		public boolean apply(Player member) {
-			return !player.getObjectId().equals(member.getObjectId());
+			return !player.equals(member);
 		}
-
 	}
 }

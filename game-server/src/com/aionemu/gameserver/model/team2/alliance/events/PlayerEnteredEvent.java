@@ -58,7 +58,7 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 	@Override
 	public boolean apply(PlayerAllianceMember member) {
 		Player player = member.getObject();
-		if (!invited.getObjectId().equals(player.getObjectId())) {
+		if (!invited.equals(player)) {
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
 			if (player.getKnownList().getKnownPlayers().containsKey(invited.getObjectId())) {
 				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, invited));

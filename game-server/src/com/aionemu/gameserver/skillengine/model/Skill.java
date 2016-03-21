@@ -102,6 +102,7 @@ public class Skill {
 	private boolean instantSkill = false;
 
 	private String chainCategory = null;
+	private int chainUsageDuration = 0;
 	private volatile boolean isMultiCast = false;
 	private final List<ChargedSkill> chargeSkillList = new FastTable<>();
 	private float[] chargeTimes;
@@ -178,6 +179,9 @@ public class Skill {
 		// check for counter skill
 		if (effector instanceof Player) {
 			Player player = (Player) effector;
+			if (chainCategory == null) // category gets set in preCastCheck()
+				player.getChainSkills().resetChain();
+
 			if (this.skillTemplate.getCounterSkill() != null) {
 				long time = player.getLastCounterSkill(skillTemplate.getCounterSkill());
 				if ((time + 5000) < System.currentTimeMillis()) {
@@ -248,7 +252,7 @@ public class Skill {
 		if (checkproperties && !canUseSkill(CastState.CAST_START))
 			return false;
 
-			calculateSkillDuration();
+		calculateSkillDuration();
 
 		if (SecurityConfig.MOTION_TIME) {
 			// must be after calculateskillduration
@@ -373,10 +377,8 @@ public class Skill {
 		}
 
 		if (effector instanceof Player) {
-			if (this.isMulticast()
-				&& ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
+			if (isMulticast() && ((Player) effector).getChainSkills().getCurrentChainCount(chainCategory) > 0)
 				duration = 0;
-			}
 		}
 		if (isCastTimeFixed())
 			duration = skillTemplate.getDuration();
@@ -486,8 +488,8 @@ public class Skill {
 		} else {
 			if (clientTime < finalTime) {
 				// check for no animation Hacks
-				AuditLogger.info(player, "Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/"
-					+ finalTime + ")");
+				AuditLogger.info(player,
+					"Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
 				if (SecurityConfig.NO_ANIMATION) {
 					// check if values are too low and disable skill usage / kick player
 					if (clientTime < 0 || (clientTime / serverTime) < SecurityConfig.NO_ANIMATION_VALUE) {
@@ -547,7 +549,7 @@ public class Skill {
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
 		float castSpeed;
 		if (skillMethod == SkillMethod.CHARGE) {
-			castSpeed = (effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f); 
+			castSpeed = (effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f);
 			int time = 0;
 			if (skillTemplate.getSkillChargeCondition() != null) {
 				ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(skillTemplate.getSkillChargeCondition().getValue());
@@ -564,14 +566,14 @@ public class Skill {
 				chargeTimes[i] = (chargeTimes[i] * castSpeed);
 			}
 		} else {
-			castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration() : effector.getGameStats()
-				.getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
+			castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration()
+				: effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
 		}
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType,
-						targetObjId, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector,
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
 					if (effector instanceof Npc && firstTarget instanceof Player) {
 						NpcAI2 ai = (NpcAI2) effector.getAi2();
 						if (ai.poll(AIQuestion.CAN_SHOUT))
@@ -580,13 +582,13 @@ public class Skill {
 					break;
 
 				case 3: // Target not in sight?
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType,
-						targetObjId, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector,
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
 					break;
 
 				case 1: // XYZ as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y,
-						z, this.duration, castSpeed));
+					PacketSendUtility.broadcastPacketAndReceive(effector,
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, this.duration, castSpeed));
 					break;
 			}
 		} else if (skillMethod == SkillMethod.ITEM && duration > 0) {
@@ -595,10 +597,10 @@ public class Skill {
 		}
 
 		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (duration > 0)
-				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
-				&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
-			if ((effector instanceof Npc && ((Npc) effector).isBoss()) ||
-					(skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
+			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
+			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
+			if ((effector instanceof Npc && ((Npc) effector).isBoss())
+				|| (skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
 				return;
 			}
 			firstTarget.getObserveController().attach(dieObserver);
@@ -754,36 +756,23 @@ public class Skill {
 
 		boolean setCooldowns = true;
 		if (effector instanceof Player) {
-			if (this.isMulticast()
-				&& ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
+			if (isMulticast() && ((Player) effector).getChainSkills().getCurrentChainCount(chainCategory) > 0)
 				setCooldowns = false;
+
+			// Check Chain Skill Trigger Rate, only for chain skills and only for player
+			if (chainCategory != null) {
+				if (blockedChain)
+					chainSuccess = false;
+				else
+					chainSuccess = Rnd.get(1, 100) <= skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_TRIGGERRATE;
+
+				if (chainSuccess)
+					((Player) effector).getChainSkills().updateChain(chainCategory, chainUsageDuration);
+				else
+					((Player) effector).getChainSkills().resetChain();
 			}
-		}
 
-		// Check Chain Skill Trigger Rate, only for chain skills and only for player
-		if (effector instanceof Player && this.chainCategory != null) {
-			if (blockedChain)
-				this.chainSuccess = false;
-			else {
-				int chainProb = skillTemplate.getChainSkillProb();
-				if (!CustomConfig.SKILL_CHAIN_TRIGGERRATE)
-					chainProb = 100;
-
-				if (chainProb < 100)
-					this.chainSuccess = Rnd.get(90) < chainProb;
-			}
-		}
-
-		/**
-		 * set variables for chaincondition check
-		 */
-		if (effector instanceof Player && this.chainSuccess && this.chainCategory != null) {
-			((Player) effector).getChainSkills().addChainSkill(this.chainCategory, this.isMulticast());
-		}
-
-		if (effector instanceof Player) {
-			QuestEnv env = new QuestEnv(effector.getTarget(), (Player) effector, 0, 0);
-			QuestEngine.getInstance().onUseSkill(env, skillTemplate.getSkillId());
+			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0, 0), skillTemplate.getSkillId());
 		}
 
 		if (setCooldowns && !isPenaltySkill)
@@ -865,8 +854,8 @@ public class Skill {
 					break;
 
 				case 1: // XYZ as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus,
-						targetType), et);
+					PacketSendUtility.broadcastPacketAndReceive(effector,
+						new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus, targetType), et);
 					break;
 			}
 			if (skillMethod == SkillMethod.ITEM && effector instanceof Player) {
@@ -923,8 +912,6 @@ public class Skill {
 		return skillConditions == null || skillConditions.validate(this);
 	}
 
-	
-	
 	/**
 	 * @param value
 	 *          is the changeMpConsumptionValue to set
@@ -1218,13 +1205,17 @@ public class Skill {
 		this.chainCategory = chainCategory;
 	}
 
+	public void setChainUsageDuration(int duration) {
+		this.chainUsageDuration = duration;
+	}
+
 	public SkillMethod getSkillMethod() {
 		return this.skillMethod;
 	}
 
 	private boolean isPointPointSkill() {
 		return this.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.POINT
-				&& this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT;
+			&& this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT;
 
 	}
 
@@ -1243,11 +1234,11 @@ public class Skill {
 	public List<ChargedSkill> getChargeSkillList() {
 		return chargeSkillList;
 	}
-	
+
 	public void setChargeTimes(float[] chargeTimes) {
 		this.chargeTimes = chargeTimes;
 	}
-	
+
 	public float[] getChargeTimes() {
 		return chargeTimes;
 	}

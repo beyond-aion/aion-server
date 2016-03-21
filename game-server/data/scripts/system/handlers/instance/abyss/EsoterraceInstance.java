@@ -86,6 +86,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				spawn(701025, 1038.63f, 987.74f, 328.356f, (byte) 0, 725);
 				NpcShoutsService.getInstance().sendMsg(keeningSirokin, 342359, keeningSirokin.getObjectId(), 0, 0);
 				keeningSirokin.getController().onDelete();
+				break;
 			case 217284:
 			case 217283:
 			case 217282:

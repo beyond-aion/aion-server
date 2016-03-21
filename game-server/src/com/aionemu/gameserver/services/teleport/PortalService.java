@@ -188,14 +188,7 @@ public class PortalService {
 			case 3:
 			case 6:
 				if (group != null || !instanceGroupReq) {
-					// If there is a group (whatever group requirement exists or not)...
-					if (group != null) {
-						instance = InstanceService.getRegisteredInstance(mapId, group.getTeamId());
-					}
-					// But if there is no group (and solo is enabled, of course)
-					else {
-						instance = InstanceService.getRegisteredInstance(mapId, player.getObjectId());
-					}
+					instance = InstanceService.getRegisteredInstance(mapId, group != null ? group.getTeamId() : player.getObjectId());
 
 					// No instance (for group), group on and default requirement off
 					if (instance == null && group != null && !instanceGroupReq) {
@@ -222,7 +215,7 @@ public class PortalService {
 					else if (instance == null && !instanceGroupReq && group == null) {
 						instance = InstanceService.getNextAvailableInstance(mapId, difficult);
 					}
-					if (instance.getPlayersInside().size() < playerSize) {
+					if (instance != null && instance.getPlayersInside().size() < playerSize) {
 						transfer(player, loc, instance, reenter);
 					}
 				}
@@ -278,7 +271,7 @@ public class PortalService {
 					} else if (instance == null && !instanceGroupReq && allianceGroup == null) {
 						instance = InstanceService.getNextAvailableInstance(mapId, difficult);
 					}
-					if (instance.getPlayersInside().size() < playerSize) {
+					if (instance != null && instance.getPlayersInside().size() < playerSize) {
 						transfer(player, loc, instance, reenter);
 					}
 				}
