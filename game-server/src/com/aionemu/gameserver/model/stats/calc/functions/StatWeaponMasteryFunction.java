@@ -25,24 +25,23 @@ public class StatWeaponMasteryFunction extends StatRateFunction {
 		switch (this.stat) {
 			case MAIN_HAND_POWER:
 				if (mainWeapon != null && mainWeapon.equals(itemGroup)) {
-					applyTo(stat, false);
+					applyTo(stat);
 				}
 				break;
 			case OFF_HAND_POWER:
 				if (offHandWeapon != null && offHandWeapon.equals(itemGroup))
-					applyTo(stat, true);
+					applyTo(stat);
 				break;
 			default:
 				if (mainWeapon != null && mainWeapon.equals(itemGroup))
-					applyTo(stat, false);
+					applyTo(stat);
 		}
 	}
 
 
-	private void applyTo(Stat2 stat, boolean isOffHand) {
+	private void applyTo(Stat2 stat) {
 		if (isBonus()) {
 			int bonus = Math.round(stat.getBaseWithoutBaseRate() * getValue() / 100f);
-
 			stat.addToBonus(bonus);
 		} else {
 			stat.setBase(Math.round(stat.getBaseWithoutBaseRate() * stat.calculatePercent(getValue())));

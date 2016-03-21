@@ -58,9 +58,11 @@ public class Info extends AdminCommand {
 					+ player.getGameStats().getAttackSpeed().getCurrent() * 0.001f + "\nMovement Speed: " + player.getGameStats().getMovementSpeedFloat()
 					+ "\n----------Main Hand------------\nAttack: " + player.getGameStats().getMainHandPAttack().getCurrent() + "\nAccuracy: "
 					+ player.getGameStats().getMainHandPAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getMainHandPCritical().getCurrent()
-					+ "\n------------Off Hand------------\nAttack: " + player.getGameStats().getOffHandPAttack().getCurrent() + "\nAccuracy: "
+					+ "\n------------Off Hand------------\nFinal-Attack: "+ (player.getGameStats().getOffHandPAttack().getBase() + Math.round(player.getGameStats().getOffHandPAttack().getBonus() * 0.98f))
+					+ "\n[Current]Attack: " + player.getGameStats().getOffHandPAttack().getCurrent() + "\nAccuracy: "
 					+ player.getGameStats().getOffHandPAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getOffHandPCritical().getCurrent()
-					+ "\n-------------Magical-------------\nAttack: " + player.getGameStats().getMainHandMAttack().getCurrent() + "\nAccuracy: "
+					+ "\n-------------Magical-------------\nFinal-Attack: "+ (player.getGameStats().getOffHandMAttack().getBase() + Math.round(player.getGameStats().getOffHandMAttack().getBonus() * 0.82f))
+					+ "\n[Current]Attack: " + player.getGameStats().getMainHandMAttack().getCurrent() + "\nAccuracy: "
 					+ player.getGameStats().getMAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getMCritical().getCurrent() + "\nBoost: "
 					+ player.getGameStats().getMBoost().getCurrent() + "\n-------------Protect--------------\nPhysical Defence: "
 					+ player.getGameStats().getPDef().getCurrent() + "\nBlock: " + player.getGameStats().getBlock().getCurrent() + "\nParry: "
