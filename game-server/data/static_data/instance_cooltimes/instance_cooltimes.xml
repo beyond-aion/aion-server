@@ -1105,7 +1105,7 @@
 	<instance_cooltime race="PC_ALL" worldId="300610000" id="137" sync_id="129">
 		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
-		<maxcount>5</maxcount>
+		<maxcount>3</maxcount>
 		<max_member_light>1</max_member_light>
 		<max_member_dark>1</max_member_dark>
 		<enter_min_level_light>60</enter_min_level_light>
