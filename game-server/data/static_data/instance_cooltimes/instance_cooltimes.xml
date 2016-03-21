@@ -1103,8 +1103,7 @@
 		<can_enter_mentor>false</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="300610000" id="137" sync_id="129">
-		<type>WEEKLY</type>
-		<typevalue>Wed</typevalue>
+		<type>DAILY</type>
 		<ent_cool_time>900</ent_cool_time>
 		<maxcount>5</maxcount>
 		<max_member_light>1</max_member_light>
