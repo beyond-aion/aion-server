@@ -4,28 +4,24 @@ import javolution.util.FastMap;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class HouseObjectCooldownList {
 
 	private FastMap<Integer, Long> houseObjectCooldowns;
 
-	HouseObjectCooldownList(Player owner) {
+	public HouseObjectCooldownList() {
 	}
 
 	public boolean isCanUseObject(int objectId) {
-		if (houseObjectCooldowns == null || !houseObjectCooldowns.containsKey(objectId))
-			return true;
+		long coolDown = getHouseObjectCooldown(objectId);
+		if (coolDown > System.currentTimeMillis())
+			return false;
 
-		Long coolDown = houseObjectCooldowns.get(objectId);
-		if (coolDown == null)
-			return true;
-
-		if (coolDown < System.currentTimeMillis()) {
+		if (coolDown != 0)
 			houseObjectCooldowns.remove(objectId);
-			return true;
-		}
 
-		return false;
+		return true;
 	}
 
 	public long getHouseObjectCooldown(int objectId) {
@@ -39,17 +35,14 @@ public class HouseObjectCooldownList {
 		return houseObjectCooldowns;
 	}
 
-	public void setHouseObjectCooldowns(FastMap<Integer, Long> houseObjectCooldowns) {
-		this.houseObjectCooldowns = houseObjectCooldowns;
-	}
+	public void setHouseObjectCooldown(int objectId, long reuseTime) {
+		if (houseObjectCooldowns == null)
+			houseObjectCooldowns = new FastMap<>();
 
-	public void addHouseObjectCooldown(int objectId, int delay) {
-		if (houseObjectCooldowns == null) {
-			houseObjectCooldowns = new FastMap<Integer, Long>();
-		}
-
-		long nextUseTime = System.currentTimeMillis() + (delay * 1000);
-		houseObjectCooldowns.put(objectId, nextUseTime);
+		if (reuseTime > 0)
+			houseObjectCooldowns.put(objectId, reuseTime);
+		else
+			houseObjectCooldowns.remove(objectId);
 	}
 
 	public int getReuseDelay(int objectId) {

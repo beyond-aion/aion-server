@@ -253,7 +253,7 @@ public class Player extends Creature {
 		this.titleList = new TitleList();
 		this.portalCooldownList = new PortalCooldownList(this);
 		this.craftCooldownList = new CraftCooldownList(this);
-		this.houseObjectCooldownList = new HouseObjectCooldownList(this);
+		this.houseObjectCooldownList = new HouseObjectCooldownList();
 		this.toyPetList = new PetList(this);
 		controller.setOwner(this);
 		moveController = new PlayerMoveController(this);

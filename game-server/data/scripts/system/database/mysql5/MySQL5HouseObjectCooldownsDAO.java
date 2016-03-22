@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(MySQL5CraftCooldownsDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(MySQL5HouseObjectCooldownsDAO.class);
 
 	public static final String INSERT_QUERY = "INSERT INTO `house_object_cooldowns` (`player_id`, `object_id`, `reuse_time`) VALUES (?,?,?)";
 	public static final String DELETE_QUERY = "DELETE FROM `house_object_cooldowns` WHERE `player_id`=?";
@@ -29,7 +27,6 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 
 	@Override
 	public void loadHouseObjectCooldowns(final Player player) {
-		FastMap<Integer, Long> houseObjectCoolDowns = new FastMap<Integer, Long>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, player.getObjectId());
@@ -37,13 +34,8 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 					while (rset.next()) {
 						int objectId = rset.getInt("object_id");
 						long reuseTime = rset.getLong("reuse_time");
-						int delay = (int) ((reuseTime - System.currentTimeMillis()) / 1000);
-
-						if (delay > 0) {
-							houseObjectCoolDowns.put(objectId, reuseTime);
-						}
+						player.getHouseObjectCooldownList().setHouseObjectCooldown(objectId, reuseTime);
 					}
-					player.getHouseObjectCooldownList().setHouseObjectCooldowns(houseObjectCoolDowns);
 				}
 			}
 		} catch (SQLException e) {
