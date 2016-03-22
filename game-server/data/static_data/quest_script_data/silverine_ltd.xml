@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			39600 [XML] Silvers Cross Your Palm
@@ -46,52 +46,27 @@
 	<report_to id="39600" start_npc_ids="800921" end_npc_ids="800939"/>
 	<report_to id="49600" start_npc_ids="800924" end_npc_ids="800942"/>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="39601" start_npc_ids="800922 800923" />
-	<item_collecting id="39603" start_npc_ids="800922 800923" />
-	<item_collecting id="39605" start_npc_ids="800922 800923" />
-	<item_collecting id="39608" start_npc_ids="800922 800923" />
-	<item_collecting id="39610" start_npc_ids="800927 800928 800929" />
-	<item_collecting id="49601" start_npc_ids="800925 800926" />
-	<item_collecting id="49603" start_npc_ids="800925 800926" />
-	<item_collecting id="49605" start_npc_ids="800925 800926" />
-	<item_collecting id="49608" start_npc_ids="800925 800926" />
-	<item_collecting id="49610" start_npc_ids="800927 800928 800929" />
+	<item_collecting id="39601" start_npc_ids="800922 800923"/>
+	<item_collecting id="39603" start_npc_ids="800922 800923"/>
+	<item_collecting id="39605" start_npc_ids="800922 800923"/>
+	<item_collecting id="39608" start_npc_ids="800922 800923"/>
+	<item_collecting id="39610" start_npc_ids="800927 800928 800929"/>
+	<item_collecting id="49601" start_npc_ids="800925 800926"/>
+	<item_collecting id="49603" start_npc_ids="800925 800926"/>
+	<item_collecting id="49605" start_npc_ids="800925 800926"/>
+	<item_collecting id="49608" start_npc_ids="800925 800926"/>
+	<item_collecting id="49610" start_npc_ids="800927 800928 800929"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="39604" start_npc_ids="800922 800923">
-		<monster var="0" end_var="10" npc_ids="230350 230351 230352" />
-	</monster_hunt>
-	<monster_hunt id="39607" start_npc_ids="800922 800923">
-		<monster var="0" end_var="10" npc_ids="230324 230325" />
-	</monster_hunt>
-	<monster_hunt id="39609" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230452 230453 230476 230477" />
-	</monster_hunt>
-	<monster_hunt id="39612" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230593" />
-	</monster_hunt>
-	<monster_hunt id="39613" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230559 230560" />
-	</monster_hunt>
-	<monster_hunt id="39615" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
-	</monster_hunt>
-	<monster_hunt id="49604" start_npc_ids="800925 800926">
-		<monster var="0" end_var="10" npc_ids="230360 230361 230362" />
-	</monster_hunt>
-	<monster_hunt id="49607" start_npc_ids="800925 800926">
-		<monster var="0" end_var="10" npc_ids="230275 230276" />
-	</monster_hunt>
-	<monster_hunt id="49609" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230452 230453 230476 230477" />
-	</monster_hunt>
-	<monster_hunt id="49612" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230593" />
-	</monster_hunt>
-	<monster_hunt id="49613" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="230559 230560" />
-	</monster_hunt>
-	<monster_hunt id="49615" start_npc_ids="800927 800928 800929">
-		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
-	</monster_hunt>
-	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="39604" start_npc_ids="800922 800923"/>
+	<monster_hunt id="39607" start_npc_ids="800922 800923"/>
+	<monster_hunt id="39609" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="39612" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="39613" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="39615" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="49604" start_npc_ids="800925 800926"/>
+	<monster_hunt id="49607" start_npc_ids="800925 800926"/>
+	<monster_hunt id="49609" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="49612" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="49613" start_npc_ids="800927 800928 800929"/>
+	<monster_hunt id="49615" start_npc_ids="800927 800928 800929"/>
 </quest_scripts>

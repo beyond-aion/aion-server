@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!-- 
 		[BEGIN] SUMMARY
 			18910 [SCRIPT] The Sauro Supply Base
@@ -18,7 +18,6 @@
 			28916 [XML] [Group] Precious Seal
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS -->
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18913" start_npc_ids="801945"/>
 	<item_collecting id="18914" start_npc_ids="801945"/>
@@ -27,33 +26,10 @@
 	<item_collecting id="28914" start_npc_ids="801947"/>
 	<item_collecting id="28916" start_npc_ids="801947"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18911" start_npc_ids="801945" end_npc_ids="801945">
-		<monster var="0" npc_ids="230849" end_var="1"/>
-		<monster var="1" npc_ids="230851" end_var="1"/>
-		<monster var="2" npc_ids="230850" end_var="1"/>
-		<monster var="3" npc_ids="233316" end_var="1"/>
-		<monster var="4" npc_ids="230853" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="18912" start_npc_ids="801945" end_npc_ids="801945">
-		<monster var="0" npc_ids="230847" end_var="2"/>
-		<monster var="1" npc_ids="230858" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="18915" start_npc_ids="801945">
-		<monster var="0" end_var="20" npc_ids="230787 230811 230799 230793 230815 230805 230821"/>
-	</monster_hunt>
-	<monster_hunt id="28911" start_npc_ids="801947" end_npc_ids="801947">
-		<monster var="0" npc_ids="230849" end_var="1"/>
-		<monster var="1" npc_ids="230851" end_var="1"/>
-		<monster var="2" npc_ids="230850" end_var="1"/>
-		<monster var="3" npc_ids="233316" end_var="1"/>
-		<monster var="4" npc_ids="230853" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="28912" start_npc_ids="801947" end_npc_ids="801947">
-		<monster var="0" npc_ids="230847" end_var="2"/>
-		<monster var="1" npc_ids="230858" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="28915" start_npc_ids="801947">
-		<monster var="0" end_var="20" npc_ids="230787 230811 230799 230793 230815 230805 230821"/>
-	</monster_hunt>
-	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="18911" start_npc_ids="801945" end_npc_ids="801945"/>
+	<monster_hunt id="18912" start_npc_ids="801945" end_npc_ids="801945"/>
+	<monster_hunt id="18915" start_npc_ids="801945"/>
+	<monster_hunt id="28911" start_npc_ids="801947" end_npc_ids="801947"/>
+	<monster_hunt id="28912" start_npc_ids="801947" end_npc_ids="801947"/>
+	<monster_hunt id="28915" start_npc_ids="801947"/>
 </quest_scripts>

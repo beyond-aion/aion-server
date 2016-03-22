@@ -50,10 +50,10 @@
 		[END] SUMMARY
 -->
 	<!-- REPORTING QUESTS -->
-	<report_to start_npc_ids="203049" end_npc_ids="203057" id="1101"/>
-	<report_to start_npc_ids="203057" end_npc_ids="203059" id="1104"/>
-	<report_to start_npc_ids="203050" end_npc_ids="203061" id="1106"/>
-	<report_to start_npc_ids="203065" end_npc_ids="203075" id="1110"/>
+	<report_to id="1101" start_npc_ids="203049" end_npc_ids="203057"/>
+	<report_to id="1104" start_npc_ids="203057" end_npc_ids="203059"/>
+	<report_to id="1106" start_npc_ids="203050" end_npc_ids="203061"/>
+	<report_to id="1110" start_npc_ids="203065" end_npc_ids="203075"/>
 	<report_to_many id="1115" start_npc_ids="203075" end_npc_ids="203058">
 		<npc_infos var="0" npc_id="203072" quest_dialog="1352"/>
 		<npc_infos var="1" npc_id="203058" quest_dialog="2375" close_dialog="1009"/>
@@ -62,10 +62,10 @@
 		<npc_infos var="0" npc_id="203070" quest_dialog="1352"/>
 		<npc_infos var="1" npc_id="203079" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
-	<report_to start_npc_ids="203075" end_npc_ids="203080" id="1119"/>
-	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1230"/>
-	<report_to start_npc_ids="801032" end_npc_ids="801033" id="1231"/>
-	<xml_quest start_npc_id="798008" end_npc_id="798008" id="1127">
+	<report_to id="1119" start_npc_ids="203075" end_npc_ids="203080"/>
+	<report_to id="1230" start_npc_ids="801032" end_npc_ids="801033"/>
+	<report_to id="1231" start_npc_ids="801032" end_npc_ids="801033"/>
+	<xml_quest id="1127" start_npc_id="798008" end_npc_id="798008">
 		<on_talk_event ids="700001">
 			<conditions operate="AND">
 				<quest_status value="START" op="EQUAL"/>
@@ -109,19 +109,19 @@
 		</on_talk_event>
 	</xml_quest>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting start_npc_ids="203057" id="1103"/>
-	<item_collecting start_npc_ids="203050" id="1105"/>
-	<item_collecting start_npc_ids="203061" end_npc_ids="203072" id="1108"/>
-	<item_collecting start_npc_ids="798007" id="1109"/>
-	<item_collecting start_npc_ids="203060" id="1116"/>
-	<item_collecting start_npc_ids="203074" id="1117"/>
-	<item_collecting start_npc_ids="203081" id="1121"/>
-	<item_collecting start_npc_ids="790001" id="1124"/>
-	<item_collecting start_npc_ids="203085" end_npc_ids="203067" id="1125"/>
-	<item_collecting start_npc_ids="203079" id="1126"/>
-	<item_collecting start_npc_ids="203085" end_npc_ids="203067" id="1129"/>
-	<item_collecting start_npc_ids="203059" id="1206"/>
-	<item_collecting start_npc_ids="203082" end_npc_ids="203085" id="1207"/>
+	<item_collecting id="1103" start_npc_ids="203057"/>
+	<item_collecting id="1105" start_npc_ids="203050"/>
+	<item_collecting id="1108" start_npc_ids="203061" end_npc_ids="203072"/>
+	<item_collecting id="1109" start_npc_ids="798007"/>
+	<item_collecting id="1116" start_npc_ids="203060"/>
+	<item_collecting id="1117" start_npc_ids="203074"/>
+	<item_collecting id="1121" start_npc_ids="203081"/>
+	<item_collecting id="1124" start_npc_ids="790001"/>
+	<item_collecting id="1125" start_npc_ids="203085" end_npc_ids="203067"/>
+	<item_collecting id="1126" start_npc_ids="203079"/>
+	<item_collecting id="1129" start_npc_ids="203085" end_npc_ids="203067"/>
+	<item_collecting id="1206" start_npc_ids="203059"/>
+	<item_collecting id="1207" start_npc_ids="203082" end_npc_ids="203085"/>
 	<item_collecting id="80158" start_npc_ids="830533"/>
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1102" start_npc_ids="203057"/>

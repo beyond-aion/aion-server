@@ -18,14 +18,6 @@
 		<npc_infos var="1" npc_id="799383" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30062" start_npc_ids="799382">
-		<monster var="0" end_var="10" npc_ids="219600 219601 219602 219603 219604 219634 219635 219636 219637 219638"/>
-		<monster var="1" end_var="10" npc_ids="219605 219606 219607 219608 219611 219612 219613 219614 219616"/>
-		<monster var="2" end_var="1" npc_ids="219610"/>
-	</monster_hunt>
-	<monster_hunt id="30162" start_npc_ids="799384">
-		<monster var="0" end_var="10" npc_ids="219600 219601 219602 219603 219604 219634 219635 219636 219637 219638"/>
-		<monster var="1" end_var="10" npc_ids="219605 219606 219607 219608 219611 219612 219613 219614 219616"/>
-		<monster var="2" end_var="1" npc_ids="219610"/>
-	</monster_hunt>
+	<monster_hunt id="30062" start_npc_ids="799382"/>
+	<monster_hunt id="30162" start_npc_ids="799384"/>
 </quest_scripts>

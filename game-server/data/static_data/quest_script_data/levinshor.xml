@@ -124,56 +124,38 @@
 	<report_to id="23700" start_npc_ids="800529" end_npc_ids="802353"/>
 	<report_to id="23701" start_npc_ids="800529" end_npc_ids="802353"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375">
-		<monster var="0" npc_ids="235346 235347 235348 235349" end_var="4"/>
-	</monster_hunt>
-	<monster_hunt id="13703" start_npc_ids="802350" end_npc_ids="802350" end_dialog_id="2375">	
-		<monster var="0" npc_ids="235145 235171" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="13705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375">	
-		<monster var="0" npc_ids="233919" end_var="3"/>
-		<monster var="1" npc_ids="233920" end_var="3"/>
-	</monster_hunt>
-	<monster_hunt id="13758" start_npc_ids="805269 805270 805271" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13759" start_npc_ids="805269 805270 805271" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13760" start_npc_ids="805269 805270 805271" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13761" start_npc_ids="805275 805276 805277" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13762" start_npc_ids="805275 805276 805277" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13763" start_npc_ids="805275 805276 805277" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13764" start_npc_ids="805272 805273 805274" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13765" start_npc_ids="805272 805273 805274" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13766" start_npc_ids="805272 805273 805274" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13767" start_npc_ids="805278 805279 805280" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13768" start_npc_ids="805278 805279 805280" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13769" start_npc_ids="805278 805279 805280" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="13770" start_npc_ids="805281" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="16931" start_npc_ids="804626">	
-		<monster var="0" npc_ids="234967" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="23702" start_npc_ids="802353" end_npc_ids="802354" end_dialog_id="2375">
-		<monster var="0" npc_ids="235366 235367 235368 235369" end_var="4"/>
-	</monster_hunt>
-	<monster_hunt id="23703" start_npc_ids="802353" end_npc_ids="802353" end_dialog_id="2375">	
-		<monster var="0" npc_ids="235145 235158" end_var="1"/>
-	</monster_hunt>
-	<monster_hunt id="23705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375">	
-		<monster var="0" npc_ids="233937" end_var="3"/>
-		<monster var="1" npc_ids="233938" end_var="3"/>
-	</monster_hunt>
-	<monster_hunt id="23758" start_npc_ids="805291 805292 805293" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23759" start_npc_ids="805291 805292 805293" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23760" start_npc_ids="805291 805292 805293" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23761" start_npc_ids="805285 805286 805287" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23762" start_npc_ids="805285 805286 805287" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23763" start_npc_ids="805285 805286 805287" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23764" start_npc_ids="805288 805289 805290" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23765" start_npc_ids="805288 805289 805290" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23766" start_npc_ids="805288 805289 805290" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23767" start_npc_ids="805282 805283 805284" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23768" start_npc_ids="805282 805283 805284" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23769" start_npc_ids="805282 805283 805284" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="23770" start_npc_ids="805294" start_dialog_id="4762" end_reward_next_step="true"/>
-	<monster_hunt id="26931" start_npc_ids="804627">	
-		<monster var="0" npc_ids="234967" end_var="1"/>
-	</monster_hunt>
+	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375"/>
+	<monster_hunt id="13703" start_npc_ids="802350" end_npc_ids="802350" end_dialog_id="2375"/>
+	<monster_hunt id="13705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375"/>
+	<monster_hunt id="13758" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
+	<monster_hunt id="13759" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
+	<monster_hunt id="13760" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
+	<monster_hunt id="13761" start_npc_ids="805275 805276 805277" end_reward_next_step="true"/>
+	<monster_hunt id="13762" start_npc_ids="805275 805276 805277" end_reward_next_step="true"/>
+	<monster_hunt id="13763" start_npc_ids="805275 805276 805277" end_reward_next_step="true"/>
+	<monster_hunt id="13764" start_npc_ids="805272 805273 805274" end_reward_next_step="true"/>
+	<monster_hunt id="13765" start_npc_ids="805272 805273 805274" end_reward_next_step="true"/>
+	<monster_hunt id="13766" start_npc_ids="805272 805273 805274" end_reward_next_step="true"/>
+	<monster_hunt id="13767" start_npc_ids="805278 805279 805280" end_reward_next_step="true"/>
+	<monster_hunt id="13768" start_npc_ids="805278 805279 805280" end_reward_next_step="true"/>
+	<monster_hunt id="13769" start_npc_ids="805278 805279 805280" end_reward_next_step="true"/>
+	<monster_hunt id="13770" start_npc_ids="805281" end_reward_next_step="true"/>
+	<monster_hunt id="16931" start_npc_ids="804626"/>
+	<monster_hunt id="23702" start_npc_ids="802353" end_npc_ids="802354" end_dialog_id="2375"/>
+	<monster_hunt id="23703" start_npc_ids="802353" end_npc_ids="802353" end_dialog_id="2375"/>
+	<monster_hunt id="23705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375"/>
+	<monster_hunt id="23758" start_npc_ids="805291 805292 805293" end_reward_next_step="true"/>
+	<monster_hunt id="23759" start_npc_ids="805291 805292 805293" end_reward_next_step="true"/>
+	<monster_hunt id="23760" start_npc_ids="805291 805292 805293" end_reward_next_step="true"/>
+	<monster_hunt id="23761" start_npc_ids="805285 805286 805287" end_reward_next_step="true"/>
+	<monster_hunt id="23762" start_npc_ids="805285 805286 805287" end_reward_next_step="true"/>
+	<monster_hunt id="23763" start_npc_ids="805285 805286 805287" end_reward_next_step="true"/>
+	<monster_hunt id="23764" start_npc_ids="805288 805289 805290" end_reward_next_step="true"/>
+	<monster_hunt id="23765" start_npc_ids="805288 805289 805290" end_reward_next_step="true"/>
+	<monster_hunt id="23766" start_npc_ids="805288 805289 805290" end_reward_next_step="true"/>
+	<monster_hunt id="23767" start_npc_ids="805282 805283 805284" end_reward_next_step="true"/>
+	<monster_hunt id="23768" start_npc_ids="805282 805283 805284" end_reward_next_step="true"/>
+	<monster_hunt id="23769" start_npc_ids="805282 805283 805284" end_reward_next_step="true"/>
+	<monster_hunt id="23770" start_npc_ids="805294" end_reward_next_step="true"/>
+	<monster_hunt id="26931" start_npc_ids="804627"/>
 </quest_scripts>

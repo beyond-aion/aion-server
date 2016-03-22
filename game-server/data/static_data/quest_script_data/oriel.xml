@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			18800 [XML] [Housing] The Living Is Easy
@@ -131,5 +131,4 @@
 	<item_order end_npc_id="830655" id="18833"/>
 	<item_order end_npc_id="830655" id="18835"/>
 	<item_order end_npc_id="830655" id="18837"/>
-	<!-- HUNTING QUESTS -->
 </quest_scripts>

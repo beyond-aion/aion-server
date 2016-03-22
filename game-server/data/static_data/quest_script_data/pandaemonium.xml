@@ -522,30 +522,17 @@
 	<crafting_rewards id="29021" start_npc_id="204110" end_npc_id="798800" movie="145" skill_id="40004" level_reward="500"/>
 	<crafting_rewards id="29058" start_npc_id="798452" end_npc_id="798800" movie="147" skill_id="40010" level_reward="500"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="4213" start_npc_ids="204202">
-		<monster var="0" end_var="4" npc_ids="215032 215408"/>
-		<monster var="1" end_var="4" npc_ids="215410"/>
-	</monster_hunt>
-	<monster_hunt id="4977" start_npc_ids="203385">
-		<monster var="0" end_var="8" npc_ids="214849 214850 214851 214880 215388 215389 286787 214895 214896 214897"/>
-	</monster_hunt>
-	<monster_hunt id="4978" start_npc_ids="204286">
-		<monster var="0" end_var="1" npc_ids="219033"/>
-	</monster_hunt>
-	<monster_hunt id="4979" start_npc_ids="204283">
-		<monster var="0" end_var="1" npc_ids="215081"/>
-	</monster_hunt>
-	<monster_hunt id="80013" start_npc_ids="799788">
-		<monster var="0" end_var="15" npc_ids="217161"/>
-	</monster_hunt>
-	<monster_hunt id="80014" start_npc_ids="799788">
-		<monster var="0" end_var="12" npc_ids="217161"/>
-	</monster_hunt>
+	<monster_hunt id="4213" start_npc_ids="204202"/>
+	<monster_hunt id="4977" start_npc_ids="203385"/>
+	<monster_hunt id="4978" start_npc_ids="204286"/>
+	<monster_hunt id="4979" start_npc_ids="204283"/>
+	<monster_hunt id="80013" start_npc_ids="799788"/>
+	<monster_hunt id="80014" start_npc_ids="799788"/>
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order end_npc_id="278055" id="2966"/>
-	<item_order end_npc_id="278055" id="2967"/>
-	<item_order end_npc_id="278055" id="2968"/>
-	<item_order end_npc_id="278056" id="2969"/>
-	<item_order end_npc_id="278056" id="2970"/>
-	<item_order end_npc_id="278056" id="2971"/>
+	<item_order id="2966" end_npc_id="278055"/>
+	<item_order id="2967" end_npc_id="278055"/>
+	<item_order id="2968" end_npc_id="278055"/>
+	<item_order id="2969" end_npc_id="278056"/>
+	<item_order id="2970" end_npc_id="278056"/>
+	<item_order id="2971" end_npc_id="278056"/>
 </quest_scripts>

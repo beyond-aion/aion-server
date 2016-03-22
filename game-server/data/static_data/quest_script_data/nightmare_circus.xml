@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!-- 
 		[BEGIN] SUMMARY
 			80332 [TODO] [Event] From the Fairy…
@@ -16,15 +16,7 @@
 			80343 [XML] [Event] Ariatte Rescue Operation
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS -->
-	<!-- COLLECTING QUESTS -->
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709">
-		<monster var="0" end_var="1" npc_ids="831740"/>
-		<monster var="1" end_var="1" npc_ids="233467"/>
-	</monster_hunt>
-	<monster_hunt id="80342" start_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709">
-		<monster var="0" end_var="10" npc_ids="233459 233453 233467"/>
-	</monster_hunt>
-	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="80342" start_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709"/>
+	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709"/>
 </quest_scripts>

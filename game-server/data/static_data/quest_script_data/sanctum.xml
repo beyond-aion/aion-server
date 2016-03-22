@@ -638,32 +638,18 @@
 	<crafting_rewards id="19033" start_npc_id="203786" end_npc_id="798600" movie="113" skill_id="40007" level_reward="500"/>
 	<crafting_rewards id="19058" start_npc_id="798450" end_npc_id="798600" movie="116" skill_id="40010" level_reward="500"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="1939" start_npc_ids="203703">
-		<monster var="0" end_var="3" npc_ids="700265"/>
-	</monster_hunt>
-	<monster_hunt id="3213" start_npc_ids="203735">
-		<monster var="0" end_var="20" npc_ids="214977 214978 214979 214980 214981 214982 214983 214984"/>
-	</monster_hunt>
-	<monster_hunt id="3977" start_npc_ids="203384">
-		<monster var="0" end_var="8" npc_ids="214849 214850 214851 214880 215388 215389 286787 214895 214896 214897"/>
-	</monster_hunt>
-	<monster_hunt id="3978" start_npc_ids="798319">
-		<monster var="0" end_var="1" npc_ids="219033"/>
-	</monster_hunt>
-	<monster_hunt id="3979" start_npc_ids="798322">
-		<monster var="0" end_var="1" npc_ids="215081"/>
-	</monster_hunt>
-	<monster_hunt id="80010" start_npc_ids="799767">
-		<monster var="0" end_var="15" npc_ids="217161"/>
-	</monster_hunt>
-	<monster_hunt id="80011" start_npc_ids="799767">
-		<monster var="0" end_var="12" npc_ids="217161"/>
-	</monster_hunt>
+	<monster_hunt id="1939" start_npc_ids="203703"/>
+	<monster_hunt id="3213" start_npc_ids="203735"/>
+	<monster_hunt id="3977" start_npc_ids="203384"/>
+	<monster_hunt id="3978" start_npc_ids="798319"/>
+	<monster_hunt id="3979" start_npc_ids="798322"/>
+	<monster_hunt id="80010" start_npc_ids="799767"/>
+	<monster_hunt id="80011" start_npc_ids="799767"/>
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order end_npc_id="278555" id="1965"/>
-	<item_order end_npc_id="278555" id="1966"/>
-	<item_order end_npc_id="278555" id="1967"/>
-	<item_order end_npc_id="278556" id="1968"/>
-	<item_order end_npc_id="278556" id="1969"/>
-	<item_order end_npc_id="278556" id="1970"/>
+	<item_order id="1965" end_npc_id="278555"/>
+	<item_order id="1966" end_npc_id="278555"/>
+	<item_order id="1967" end_npc_id="278555"/>
+	<item_order id="1968" end_npc_id="278556"/>
+	<item_order id="1969" end_npc_id="278556"/>
+	<item_order id="1970" end_npc_id="278556"/>
 </quest_scripts>
