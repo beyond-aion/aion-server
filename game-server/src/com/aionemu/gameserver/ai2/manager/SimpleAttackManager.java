@@ -92,7 +92,12 @@ public class SimpleAttackManager {
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			} else if (!GeoService.getInstance().canSee(npc, target)) { //delete geo check when we've implemented a pathfinding system
 				npc.getController().cancelCurrentSkill(null);
-				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
+				if (((System.currentTimeMillis() - npc.getMoveController().getLastMoveUpdate()) > 15000)
+						&& npc.getGameStats().getLastAttackedTimeDelta() > 15) {
+					npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
+				} else {
+					npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
+				}
 			} else {
 				npc.getPosition().setH(MathUtil.getHeadingTowards(npc, target));
 				npc.getController().attackTarget(target, 0, false);
