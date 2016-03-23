@@ -52,7 +52,7 @@ public class Wish extends ConsoleCommand {
 		if (params.length == 1) { // spawn npc
 			String npcName = params[0];
 			try {
-				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
+				JAXBContext jc = JAXBContext.newInstance(NpcData.class);
 				Unmarshaller un = jc.createUnmarshaller();
 				NpcData data = (NpcData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
 
@@ -101,7 +101,7 @@ public class Wish extends ConsoleCommand {
 			}
 
 			try {
-				JAXBContext jc = JAXBContext.newInstance(StaticData.class);
+				JAXBContext jc = JAXBContext.newInstance(ItemData.class);
 				Unmarshaller un = jc.createUnmarshaller();
 				ItemData data = (ItemData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/items.xml"));
 				ItemTemplate itemTemplate = data.getItemTemplate(itemName);
@@ -190,17 +190,6 @@ public class Wish extends ConsoleCommand {
 		protected List<ItemTemplate> getData() {
 			return its;
 		}
-	}
-
-	@XmlRootElement(name = "ae_static_data")
-	@XmlAccessorType(XmlAccessType.NONE)
-	private static class StaticData {
-
-		@XmlElement(name = "items")
-		public ItemData itemData;
-
-		@XmlElement(name = "npcs")
-		public NpcData npcData;
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)
