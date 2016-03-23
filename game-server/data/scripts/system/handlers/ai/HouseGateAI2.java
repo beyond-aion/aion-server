@@ -100,9 +100,10 @@ public class HouseGateAI2 extends NpcAI2 {
 					x = house.getAddress().getX();
 					y = house.getAddress().getY();
 					z = house.getAddress().getZ();
-					if (exitMapId == 710010000) {
+					if (exitMapId == 710010000) // pernon apartment
 						heading = 36;
-					}
+					else if (exitMapId == 720010000) // oriel apartment
+						heading = 63;
 				}
 				boolean canReturnToBattle = true;
 				for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
@@ -117,7 +118,7 @@ public class HouseGateAI2 extends NpcAI2 {
 					PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));
 					responder.setBattleReturnCoords(responder.getWorldId(), new float[] { responder.getX(), responder.getY(), responder.getZ() });
 				}
-				TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z + 1.5f, heading, TeleportAnimation.JUMP_IN_GATE);
+				TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.JUMP_IN_GATE);
 				decided = true;
 			}
 
