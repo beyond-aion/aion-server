@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.drop;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
@@ -97,18 +96,14 @@ public class DropService {
 	}
 
 	/**
-	 * After NPC respawns - drop should be unregistered //TODO more correct - on despawn
+	 * After NPC despawns
 	 *
 	 * @param npc
 	 */
 	public void unregisterDrop(Npc npc) {
 		Integer npcObjId = npc.getObjectId();
-		Map<Integer, DropNpc> dropRegmap = DropRegistrationService.getInstance().getDropRegistrationMap();
 		DropRegistrationService.getInstance().getCurrentDropMap().remove(npcObjId);
-
-		if (dropRegmap.containsKey(npcObjId)) {
-			dropRegmap.remove(npcObjId);
-		}
+		DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
 	}
 
 	/**

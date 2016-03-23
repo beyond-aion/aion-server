@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -51,6 +49,8 @@ import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import javolution.util.FastTable;
+
 /**
  * @author xTz, Aioncool, Bobobear
  * @modified Neon
@@ -59,29 +59,21 @@ public class DropRegistrationService {
 
 	private Map<Integer, Set<DropItem>> currentDropMap = new ConcurrentHashMap<>();
 	private Map<Integer, DropNpc> dropRegistrationMap = new ConcurrentHashMap<>();
-	private FastTable<Integer> noReductionMaps;
+	private List<Integer> noReductionMaps = new FastTable<>();
+
+	private DropRegistrationService() {
+		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(","))
+			noReductionMaps.add(Integer.parseInt(zone));
+	}
 
 	public void registerDrop(Npc npc, Player player, Collection<Player> groupMembers) {
 		registerDrop(npc, player, player.getLevel(), groupMembers);
-	}
-
-	private DropRegistrationService() {
-		init();
-		noReductionMaps = new FastTable<Integer>();
-		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
-			noReductionMaps.add(Integer.parseInt(zone));
-		}
-	}
-
-	public final void init() {
-
 	}
 
 	/**
 	 * After NPC dies, it can register arbitrary drop
 	 */
 	public void registerDrop(Npc npc, Player player, int heighestLevel, Collection<Player> groupMembers) {
-
 		if (player == null) {
 			return;
 		}
