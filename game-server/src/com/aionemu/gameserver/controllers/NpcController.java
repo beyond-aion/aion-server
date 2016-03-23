@@ -162,7 +162,7 @@ public class NpcController extends CreatureController<Npc> {
 				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 				Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 				if (drops != null) {
-					for (DropItem dropItem : drops)
+					for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
 						DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
 				}
 				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
