@@ -15,52 +15,45 @@
 		<import file="some_file.xml"/>
 		Merger will just include content of the some_file.xml (omitting attributes of root node)
 		Instead of some_file.xml we can type name of directory, then all xml files in that
-		directory ( and deeper - recursively ) will be loaded.
+		directory (by default recursively) will be loaded.
 
-		We can add optional attribute "skipRoot":
-		<import file="some_file.xml" skipRoot="true"/>
-		This way xml will be included, but without root node.
-		It'll be used to split for example npc_data.xml into few files.
+		We can add the optional attribute "singleRootTag":
+		<import file="some_folder" singleRootTag="true" />
+		This way xml's will be included inside a single root node.
+		It'll be used to split xml data of the same type into multiple files.
+
 		How this would look like:
 
-		We've got ( for example ) 2 xml files with npc_data definitions:
+		We've got (for example) 2 xml files with npc_data definitions in a folder called npc_data:
 
-		npc_data_f1.xml:
+		npc_data/npc_data_f1.xml:
 		<?xml version="1.0" encoding="UTF-8"?>
 		<npc_data xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="static_data.xsd">
-		<npc id="1" name="Npc_N1"/>
+			<npc id="1" name="Npc_N1"/>
 		</npc_data>
 
-		npc_data_f2.xml:
+		npc_data/npc_data_f2.xml:
 		<?xml version="1.0" encoding="UTF-8"?>
 		<npc_data xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="static_data.xsd">
-		<npc id="2" name="Npc_N2"/>
+			<npc id="2" name="Npc_N2"/>
 		</npc_data>
 
 		In static_data.xml we would have to put:
-
-		<npc_data>
-		<import file="npc_data_f1.xml" skipRoot="true"/>
-		<import file="npc_data_f2.xml" skipRoot="true"/>
-		</npc_data>
+		<import file="npc_data" singleRootTag="true"/>
 
 		In the merged file we'll have:
 		<npc_data>
-		<npc id="1" name="Npc_N1"/>
-		<npc id="2" name="Npc_N2"/>
+			<npc id="1" name="Npc_N1"/>
+			<npc id="2" name="Npc_N2"/>
 		</npc_data>
 
-		So, not important things (like schema declarations) were removed and
-		root nodes were also removed - because of it we had to put <import> tags
-		within <npc_data/> tag.
+		So, not important things (like schema declarations) were removed and root tags in between were also removed and
 
 		static_data.xsd schema file must be valid for use both:
-		* by merged xml file ( because it'll be used for validation when loading)
-		* by every single xml file ( IDE will use it to validate xml files, when editing)
+		* by merged xml file (because it'll be used for validation when loading)
+		* by every single xml file (IDE will use it to validate xml files, when editing)
 	-->
-	<ai_templates>
-		<import file="ai" skipRoot="true" />
-	</ai_templates>
+	<import file="ai" singleRootTag="true" />
 	<import file="assembled_npcs/assembled_npcs.xml" />
 	<import file="auto_group/auto_group.xml" />
 	<import file="base/base_locations.xml" />
@@ -81,9 +74,7 @@
 	<import file="flypath_template.xml" />
 	<import file="gatherables/gatherable_templates.xml" />
 	<import file="global_drops/global_npc_exclusions.xml" />
-	<global_rules>
-		<import file="global_drops/rules" skipRoot="true" />
-	</global_rules>
+	<import file="global_drops/rules" singleRootTag="true" />
 	<import file="goodslists/goodslists.xml" />
 	<import file="guides/guide.xml" />
 	<import file="hotspot_template.xml" />
@@ -112,15 +103,9 @@
 	<import file="npc_skills/npc_skills.xml" />
 	<import file="npc_teleporter.xml" />
 	<import file="npc_trade_list.xml" />
-	<npc_walker>
-		<import file="npc_walker" skipRoot="true" />
-	</npc_walker>
-	<npc_templates>
-		<import file="npcs" skipRoot="true" />
-	</npc_templates>
-	<pet_skill_templates>
-		<import file="pet_skills" skipRoot="true" />
-	</pet_skill_templates>
+	<import file="npc_walker" singleRootTag="true" />
+	<import file="npcs" singleRootTag="true" />
+	<import file="pet_skills" singleRootTag="true" />
 	<import file="pets/pet_buffs.xml" />
 	<import file="pets/pet_doping.xml" />
 	<import file="pets/pet_feed.xml" />
@@ -133,9 +118,7 @@
 	<import file="portals/portal_template2.xml" />
 	<import file="quest_data/challenge_tasks.xml" />
 	<import file="quest_data/quest_data.xml" />
-	<quest_scripts>
-		<import file="quest_script_data" skipRoot="true" />
-	</quest_scripts>
+	<import file="quest_script_data" singleRootTag="true" />
 	<import file="recipe/recipe_templates.xml" />
 	<import file="ride/ride.xml" />
 	<import file="rift/rift_locations.xml" />
@@ -146,24 +129,14 @@
 	<import file="skills/motion_times.xml" />
 	<import file="skills/skill_charge.xml" />
 	<import file="skills/skill_templates.xml" />
-	<skill_tree>
-		<import file="skill_tree" skipRoot="true" />
-	</skill_tree>
-	<spawns>
-		<import file="spawns" skipRoot="true" />
-	</spawns>
+	<import file="skill_tree" singleRootTag="true" />
+	<import file="spawns" singleRootTag="true" />
 	<import file="staticdoors/staticdoor_templates.xml" />
 	<import file="stats/absolute_stats.xml" />
-	<player_stats_templates>
-		<import file="stats/player" skipRoot="true" />
-	</player_stats_templates>
-	<summon_stats_templates>
-		<import file="stats/summon" skipRoot="true" />
-	</summon_stats_templates>
+	<import file="stats/player" singleRootTag="true" />
+	<import file="stats/summon" singleRootTag="true" />
 	<import file="teleport_location.xml" />
-	<town_spawns_data>
-		<import file="town_spawns" skipRoot="true" />
-	</town_spawns_data>
+	<import file="town_spawns" singleRootTag="true" />
 	<import file="tribe/tribe_relations.xml" />
 	<import file="vortex/dimensional_vortex.xml" />
 	<import file="walker_versions.xml" />
@@ -171,7 +144,5 @@
 	<import file="weather_table.xml" />
 	<import file="windstreams/windstreams.xml" />
 	<import file="world_maps.xml" />
-	<zones>
-		<import file="zones" skipRoot="true" />
-	</zones>
+	<import file="zones" singleRootTag="true" />
 </static_data>

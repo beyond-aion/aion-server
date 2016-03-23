@@ -5,14 +5,18 @@
 			<xs:documentation>Used to import one or multiple xml's into the target xml.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<!-- ATTENTION: Changing default values of this schema does not affect the default values when merging static data. -->
+			<!-- To change them, you need to edit com.aionemu.gameserver.dataholders.loadingutils.XmlMerger#processImportElement. -->
 			<xs:attribute type="xs:string" name="file" use="required">
 				<xs:annotation>
 					<xs:documentation>Path to the file or directory to import.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute type="xs:boolean" name="skipRoot" use="optional" default="false">
+			<xs:attribute type="xs:boolean" name="singleRootTag" use="optional" default="false">
 				<xs:annotation>
-					<xs:documentation>If enabled, root tags of imported files are removed.</xs:documentation>
+					<xs:documentation>If enabled and file is a directory, the first file's found root tag will enclose all found files (which will then be
+						written without their root tags).
+					</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute type="xs:boolean" name="recursiveImport" use="optional" default="true">

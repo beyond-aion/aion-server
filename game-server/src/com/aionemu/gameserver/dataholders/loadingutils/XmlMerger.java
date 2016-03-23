@@ -2,8 +2,6 @@ package com.aionemu.gameserver.dataholders.loadingutils;
 
 import static org.apache.commons.io.filefilter.FileFilterUtils.and;
 import static org.apache.commons.io.filefilter.FileFilterUtils.makeSVNAware;
-import static org.apache.commons.io.filefilter.FileFilterUtils.notFileFilter;
-import static org.apache.commons.io.filefilter.FileFilterUtils.prefixFileFilter;
 import static org.apache.commons.io.filefilter.FileFilterUtils.suffixFileFilter;
 
 import java.io.BufferedWriter;
@@ -13,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Properties;
 
 import javax.xml.namespace.QName;
@@ -27,6 +26,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.Comment;
+import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -76,7 +76,6 @@ import org.xml.sax.helpers.DefaultHandler;
  * &lt;/xs:complexType&gt;
  * &lt;/xs:element&gt;
  * </pre>
- * 
  * </p>
  * <p/>
  * Created on: 23.07.2009 12:55:14
@@ -88,10 +87,8 @@ public class XmlMerger {
 	private static final Logger logger = LoggerFactory.getLogger(XmlMerger.class);
 
 	private final File baseDir;
-
 	private final File sourceFile;
 	private final File destFile;
-
 	private final File metaDataFile;
 
 	private XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -271,7 +268,11 @@ public class XmlMerger {
 	}
 
 	private static final QName qNameFile = new QName("file");
-	private static final QName qNameSkipRoot = new QName("skipRoot");
+
+	/**
+	 * If this option is enabled, the first found root tag will enclose all found files (which will then be written without their root tags).
+	 */
+	private static final QName qNameSingleRootTag = new QName("singleRootTag");
 
 	/**
 	 * If this option is enabled you import the directory, and all its subdirectories. Default is 'true'.
@@ -287,31 +288,33 @@ public class XmlMerger {
 	 *           of imported file was not found.
 	 */
 	private void processImportElement(StartElement element, XMLEventWriter writer, Properties metadata) throws XMLStreamException, IOException {
-		File file = new File(baseDir, getAttributeValue(element, qNameFile, null, "Attribute 'file' is missing or empty."));
+		File file = new File(baseDir, getAttributeValue(element, qNameFile, null));
 
 		if (!file.exists())
 			throw new FileNotFoundException("Missing file to import:" + file.getPath());
 
-		boolean skipRoot = Boolean.valueOf(getAttributeValue(element, qNameSkipRoot, "false", null));
-		boolean recImport = Boolean.valueOf(getAttributeValue(element, qNameRecursiveImport, "true", null));
-
+		EndElement endElement = null;
 		if (file.isFile()) {
-			importFile(file, skipRoot, writer, metadata);
+			importFile(file, false, false, writer, metadata);
 		} else {
+			boolean singleRootTag = Boolean.valueOf(getAttributeValue(element, qNameSingleRootTag, "false"));
+			boolean recImport = Boolean.valueOf(getAttributeValue(element, qNameRecursiveImport, "true"));
 			logger.debug("Processing dir " + file);
-
-			Collection<File> files = listFiles(file, recImport);
-
-			for (File childFile : files) {
-				importFile(childFile, skipRoot, writer, metadata);
+			for (Iterator<File> it = listFiles(file, recImport).iterator(); it.hasNext();) {
+				boolean skipRootStartElement = singleRootTag && endElement != null;
+				StartElement startElement = importFile(it.next(), skipRootStartElement, singleRootTag, writer, metadata);
+				if (endElement == null)
+					endElement = eventFactory.createEndElement(startElement.getName(), null);
 			}
+			if (endElement != null)
+				writer.add(endElement);
 		}
 	}
 
 	private static Collection<File> listFiles(File root, boolean recursive) {
 		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
 
-		return FileUtils.listFiles(root, and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
+		return FileUtils.listFiles(root, and(suffixFileFilter(".xml"), HiddenFileFilter.VISIBLE), dirFilter);
 	}
 
 	/**
@@ -329,12 +332,12 @@ public class XmlMerger {
 	 * @throws XMLStreamException
 	 *           if attribute is missing and there is no default value set.
 	 */
-	private String getAttributeValue(StartElement element, QName name, String def, String onErrorMessage) throws XMLStreamException {
+	private String getAttributeValue(StartElement element, QName name, String def) throws XMLStreamException {
 		Attribute attribute = element.getAttributeByName(name);
 
 		if (attribute == null) {
 			if (def == null)
-				throw new XMLStreamException(onErrorMessage, element.getLocation());
+				throw new XMLStreamException("Attribute '" + name.getLocalPart() + "' is missing or empty.", element.getLocation());
 
 			return def;
 		}
@@ -347,16 +350,21 @@ public class XmlMerger {
 	 * 
 	 * @param file
 	 *          File to import
-	 * @param skipRoot
-	 *          Skip-root flag
+	 * @param skipStartElement
+	 *          If true, the start root tag will not be imported.
+	 * @param skipEndElement
+	 *          If true, the end root tag will not be imported.
 	 * @param writer
-	 *          Destenation writer
+	 *          Destination writer
+	 * @param metadata
+	 * @return The StartElement.
 	 * @throws XMLStreamException
 	 *           On event reading/writing error.
-	 * @throws FileNotFoundException
-	 *           if the reading file does not exist, is a directory rather than a regular file, or for some other reason cannot be opened for reading.
+	 * @throws IOException
+	 *           If the reading file does not exist, is a directory rather than a regular file, or for some other reason cannot be opened for reading.
 	 */
-	private void importFile(File file, boolean skipRoot, XMLEventWriter writer, Properties metadata) throws XMLStreamException, IOException {
+	private StartElement importFile(File file, boolean skipStartElement, boolean skipEndElement, XMLEventWriter writer, Properties metadata)
+		throws XMLStreamException, IOException {
 		logger.debug("Appending file " + file);
 		metadata.setProperty(file.getPath(), makeHash(file));
 
@@ -365,7 +373,7 @@ public class XmlMerger {
 		try {
 			reader = inputFactory.createXMLEventReader(new FileReader(file));
 
-			QName firstTagQName = null;
+			StartElement startElement = null;
 
 			while (reader.hasNext()) {
 				XMLEvent event = reader.nextEvent();
@@ -382,26 +390,23 @@ public class XmlMerger {
 						continue;
 				}
 
-				// modify root-tag of imported file.
-				if (firstTagQName == null && event.isStartElement()) {
-					firstTagQName = event.asStartElement().getName();
+				// modify root-tag of imported file.zzy
+				if (startElement == null && event.isStartElement()) {
+					startElement = event.asStartElement();
 
-					if (skipRoot) {
+					if (skipStartElement)
 						continue;
-					} else {
-						StartElement old = event.asStartElement();
-
-						event = eventFactory.createStartElement(old.getName(), old.getAttributes(), null);
-					}
+					else
+						event = eventFactory.createStartElement(startElement.getName(), startElement.getAttributes(), null);
 				}
 
-				// if root was skipped - skip root end too.
-				if (event.isEndElement() && skipRoot && event.asEndElement().getName().equals(firstTagQName))
+				if (skipEndElement && event.isEndElement() && event.asEndElement().getName().equals(startElement.getName()))
 					continue;
 
 				// finally - write tag
 				writer.add(event);
 			}
+			return startElement;
 		} finally {
 			if (reader != null)
 				try {
@@ -479,8 +484,8 @@ public class XmlMerger {
 				if (!data.equals(hash))// file|dir was changed.
 					return true;
 			} catch (IOException e) {
-				logger
-					.warn("File varification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(), e);
+				logger.warn("File varification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(),
+					e);
 				return true;// was modified.
 			}
 
