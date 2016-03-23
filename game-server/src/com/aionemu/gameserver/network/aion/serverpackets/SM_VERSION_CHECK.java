@@ -71,12 +71,15 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
 		writeD((int) LocalDateTime.now().atZone(GSConfig.TIME_ZONE.toZoneId()).toEpochSecond()); // server time
 		writeH(350); // unk
-		writeH(2561); // unk
-		writeH(2561); // unk
+		writeC(1); // unk (always 1)
+		writeC(10); // time or level restriction (now 5 on official)
+		writeC(1); // time or level restriction (now 15 on official)
+		writeC(10); // time or level restriction
 		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // min level to write in channel chats
-		writeC(20); // some other restriction
-		writeH(276); // unk
-		writeH(2); // unk
+		writeC(20); // time or level restriction (now 1 on official)
+		writeC(20); // level restriction (before 30, now 66 on official)
+		writeC(1); // unk (always 1)
+		writeH(2); // unk (always 2)
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
 		writeC(EventService.getInstance().getEventType().getId()); // city decoration
 		writeD(0); // unk
@@ -88,15 +91,13 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(1); // unk
 		writeD(0); // 4.0
 		writeD(0); // 4.5
-		writeD(68536); // 4.5
+		writeH(3000); // 4.5
+		writeH(1); // 4.5
 		writeC(0); // 4.7
 		writeC(1); // 4.7
-		writeC(0); // 4.8
-		writeC(0); // 4.8
-		writeC(0); // 4.8
-		writeC(0); // 4.8
+		writeD(0); // 0 or -3600 (4.8, some time offset in seconds, not sure which display this affects)
 		writeC(1); // 4.8
-		writeC(1); // 4.8 activate stonespearSiege
+		writeC(1); // 1 = activate stonespear siege
 		writeC(0); // 1 = master Server
 		writeC(0);
 		writeH(0);
