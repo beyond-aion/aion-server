@@ -193,7 +193,7 @@ public class StaticData {
 	@XmlElement(name = "auto_groups")
 	public AutoGroupData autoGroupData;
 
-	@XmlElement(name = "events_config")
+	@XmlElement(name = "timed_events")
 	public EventData eventData;
 
 	@XmlElement(name = "spawns")

@@ -14,9 +14,9 @@
 	<xs:include schemaLocation="decomposable_items/decomposable_items.xsd" />
 	<xs:include schemaLocation="enchants/enchant_templates.xsd" />
 	<xs:include schemaLocation="enchants/tempering_templates.xsd" />
-	<xs:include schemaLocation="events_config/arcadelist.xsd" />
-	<xs:include schemaLocation="events_config/events_config.xsd" />
-	<xs:include schemaLocation="events_config/login_events.xsd" />
+	<xs:include schemaLocation="events/arcadelist.xsd" />
+	<xs:include schemaLocation="events/timed_events/timed_events.xsd" />
+	<xs:include schemaLocation="events/login_events.xsd" />
 	<xs:include schemaLocation="fly_rings/fly_rings.xsd" />
 	<xs:include schemaLocation="flypath_template.xsd" />
 	<xs:include schemaLocation="gatherables/gatherable_templates.xsd" />
@@ -116,7 +116,7 @@
 					<xs:element ref="dimensional_vortex" minOccurs="0" />
 					<xs:element ref="dopings" minOccurs="0" />
 					<xs:element ref="enchant_templates" minOccurs="0" />
-					<xs:element ref="events_config" minOccurs="0" />
+					<xs:element ref="timed_events" minOccurs="0" />
 					<xs:element ref="fly_rings" minOccurs="0" />
 					<xs:element ref="flypath_template" minOccurs="0" />
 					<xs:element ref="gatherable_templates" minOccurs="0" />

@@ -67,9 +67,9 @@
 	<import file="decomposable_items/decomposable_items.xml" />
 	<import file="enchants/enchant_templates.xml" />
 	<import file="enchants/tempering_templates.xml" />
-	<import file="events_config/arcadelist.xml" />
-	<import file="events_config/events_config.xml" />
-	<import file="events_config/login_events.xml" />
+	<import file="events/arcadelist.xml" />
+	<import file="events/login_events.xml" />
+	<import file="events/timed_events" singleRootTag="true" />
 	<import file="fly_rings/fly_rings.xml" />
 	<import file="flypath_template.xml" />
 	<import file="gatherables/gatherable_templates.xml" />
