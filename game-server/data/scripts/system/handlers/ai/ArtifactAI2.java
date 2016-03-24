@@ -101,14 +101,14 @@ public class ArtifactAI2 extends NpcAI2 {
 		}
 
 		if (loc.getCoolDown() > 0 || !loc.getStatus().equals(ArtifactStatus.IDLE)) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ARTIFACT_OUT_OF_ORDER);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ARTIFACT_OUT_OF_ORDER());
 			return;
 		}
 
 		if (loc.getLegionId() != 0)
 			if (!player.isLegionMember() || player.getLegion().getLegionId() != loc.getLegionId()
 				|| !player.getLegionMember().hasRights(LegionPermissionsMask.ARTIFACT)) {
-				PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ARTIFACT_HAVE_NO_AUTHORITY);
+				PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ARTIFACT_HAVE_NO_AUTHORITY());
 				return;
 			}
 

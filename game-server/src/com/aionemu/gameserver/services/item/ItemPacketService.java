@@ -38,6 +38,7 @@ public class ItemPacketService {
 		INC_KINAH_MERGE(0x05, true),
 		DEC_ITEM_SPLIT(0x06, true),
 		DEC_ITEM_SPLIT_MOVE(0x0A, true), // move to other storage with split
+		PUT(0x13, true), // from other storage
 		DEC_ITEM_USE(0x16, true),
 		DEC_STIGMA_USE(0x17, true),
 		INC_ITEM_COLLECT(0x19, true),
@@ -45,6 +46,8 @@ public class ItemPacketService {
 		INC_ITEM_BUY(0x1C, true), // buying from npc
 		DEC_KINAH_BUY(0x1D, true),
 		INC_KINAH_SELL(0x20, true),
+		INC_PLAYER_EXCHANGE_GET_BACK(0x23, true),
+		PUT_TO_EXCHANGE(0x25, true),
 		INC_KINAH_QUEST(0x32, true),
 		DEC_KINAH_LEARN(0x49, true), // craft skill learn
 		DEC_KINAH_FLY(0x4B, true), // teleport or fly
@@ -52,10 +55,7 @@ public class ItemPacketService {
 		INC_ITEM_REPURCHASE(0x51, true),
 		DEC_KINAH_CUBE(0x5A, true), // expand cube
 		DEC_PET_FOOD(0x5E, true),
-		INC_PASSPORT_ADD(0x8A, true),
-		PUT(0x13, true), // from other storage
-		GET_BACK_FROM_EXCHANGE(0x23, true),
-		PUT_TO_EXCHANGE(0x25, true);
+		INC_PASSPORT_ADD(0x8A, true);
 
 		private final int mask;
 		private final boolean sendable;
@@ -90,25 +90,24 @@ public class ItemPacketService {
 	}
 
 	public static enum ItemAddType {
+		SERVER_GENERATED(0x00), // Banquest Table, Extract Enchanment stones, Remodel, Armfusion
 		PARTIAL_WITH_SLOT(0x07), // partial content of slot
 		ALL_SLOT(0x13), // All warehouses/pets
-		BUY(0x1C),
 		ITEM_COLLECT(0x19), // Drop, Gather
-		QUEST_WORK_ITEM(0x35),
-		QUESTIONNAIRE(0x40),
+		BUY(0x1C),
+		PLAYER_EXCHANGE_GET(0x21),
+		PLAYER_EXCHANGE_GET_BACK(0x23),
+		PLAYER_STORE(0x2B),
+		CRAFTED_ITEM(0x2D),
 		BROKER_BUY(0x2E),
 		BROKER_RETURN(0x2F),
+		QUEST_REWARD_ITEM(0x30),
+		QUEST_WORK_ITEM(0x35),
+		QUEST_WORK_ITEM2(0x36),
 		MAIL(0x36),
-		REPURCHASE(0x51),
-		SERVER_GENERATED(0x00), // Banquest Table, Extract Enchanment stones, Remodel, Armfusion
-		PLAYER_STORE(0x2B),
 		SURVEY(0x40),
 		DECOMPOSABLE(0x50), // also Guestbloom
-		PLAYER_EXCHANGE(0x21),
-		PLAYER_EXCHANGE_ITEMS_RETURN(0x23),
-		QUEST_WORK_ITEM2(0x36),
-		QUEST_REWARD_ITEM(0x30),
-		CRAFTED_ITEM(0x2D);
+		REPURCHASE(0x51);
 
 		private final int mask;
 

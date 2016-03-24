@@ -51,11 +51,11 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		if (player.isFlying()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_BINDSTONE_ITEM_WHILE_FLYING);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_BINDSTONE_ITEM_WHILE_FLYING());
 			return false;
 		}
 		if (player.isInInstance()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_FAR_FROM_NPC);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_FAR_FROM_NPC());
 			return false;
 		}
 		if (KiskService.getInstance().haveKisk(player.getObjectId()) && CustomConfig.ENABLE_KISK_RESTRICTION) {
@@ -63,7 +63,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			return false;
 		}
 		if (!isPutKiskZone(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION());
 			return false;
 		}
 		return true;

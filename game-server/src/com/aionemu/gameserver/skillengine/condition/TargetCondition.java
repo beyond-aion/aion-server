@@ -55,7 +55,7 @@ public class TargetCondition extends Condition {
 		}
 
 		if (!result && skill.getEffector() instanceof Player)
-			PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+			PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 
 		return result;
 	}

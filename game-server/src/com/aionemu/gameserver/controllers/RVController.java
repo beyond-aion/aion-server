@@ -89,7 +89,7 @@ public class RVController extends NpcController {
 		}
 
 		if (SerialKillerService.getInstance().isRestrictPortal(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER());
 			return;
 		}
 

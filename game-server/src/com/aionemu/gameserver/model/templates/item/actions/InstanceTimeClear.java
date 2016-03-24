@@ -39,7 +39,7 @@ public class InstanceTimeClear extends AbstractItemAction {
 			int mapid = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
 			if (player.getPortalCooldownList().getPortalCooldownTime(mapid) == 0) {
 				// Notify that not able to reset, already don't have CD
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_COOL_TIME_INIT);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_COOL_TIME_INIT());
 				if (syncIds.size() == 1) {
 					return false;
 				}

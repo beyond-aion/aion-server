@@ -98,7 +98,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 
 		long currentTime = System.currentTimeMillis();
 		if (player.getNextSkillUse() > currentTime) {
-			PacketSendUtility.sendPacket(player, STR_SKILL_NOT_READY);
+			PacketSendUtility.sendPacket(player, STR_SKILL_NOT_READY());
 			return;
 		}
 

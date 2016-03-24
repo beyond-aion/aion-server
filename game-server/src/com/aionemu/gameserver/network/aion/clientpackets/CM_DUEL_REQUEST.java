@@ -57,7 +57,7 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 			Player targetPlayer = (Player) target;
 
 			if (duelService.isDueling(activePlayer.getObjectId())) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_YOU_ARE_IN_DUEL_ALREADY);
+				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_YOU_ARE_IN_DUEL_ALREADY());
 				return;
 			}
 			if (duelService.isDueling(targetPlayer.getObjectId())) {

@@ -478,7 +478,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 
 		if (!GeoService.getInstance().canSee(getOwner(), target)) {
-			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_OBSTACLE_EXIST);
+			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_OBSTACLE_EXIST());
 			return;
 		}
 
@@ -598,7 +598,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
-		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED);
+		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
@@ -624,7 +624,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		if (lastAttacker != null && lastAttacker instanceof Player && !lastAttacker.equals(getOwner())) {
-			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED);
+			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
 		}
 	}
 

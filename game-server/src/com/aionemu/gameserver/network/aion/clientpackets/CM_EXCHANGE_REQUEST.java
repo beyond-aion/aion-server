@@ -41,7 +41,7 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 		final Player targetPlayer = World.getInstance().findPlayer(targetObjectId);
 
 		if (targetPlayer == null || activePlayer.equals(targetPlayer)) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_NO_ONE_TO_EXCHANGE);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_NO_ONE_TO_EXCHANGE());
 			return;
 		}
 
@@ -51,17 +51,17 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 		}
 
 		if (!MathUtil.isIn3dRange(activePlayer, targetPlayer, 5)) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_TOO_FAR_TO_EXCHANGE);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_TOO_FAR_TO_EXCHANGE());
 			return;
 		}
 
 		if (activePlayer.getVisualState() > 0 && activePlayer.getVisualState() != CreatureVisualState.BLINKING.getId()) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WHILE_INVISIBLE);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WHILE_INVISIBLE());
 			return;
 		}
 
 		if (targetPlayer.getVisualState() > 0 && targetPlayer.getVisualState() != CreatureVisualState.BLINKING.getId()) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WITH_INVISIBLE_USER);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WITH_INVISIBLE_USER());
 			return;
 		}
 

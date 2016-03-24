@@ -84,7 +84,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		TeleportService2.teleportTo(player, mapId, instanceId, 388.6437f, 1184.639f, 55.30134f);
 		return true;

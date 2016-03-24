@@ -172,7 +172,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			return true;
 		}
 		PlayerReviveService.revive(player, 25, 25, true, 0);
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));

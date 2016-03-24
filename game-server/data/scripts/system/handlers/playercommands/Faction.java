@@ -45,7 +45,7 @@ public class Faction extends PlayerCommand {
 
 		if (CustomConfig.FACTION_USE_PRICE > 0) {
 			if (CustomConfig.FACTION_USE_PRICE > player.getInventory().getKinah()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 				return;
 			}
 			player.getInventory().decreaseKinah(CustomConfig.FACTION_USE_PRICE);

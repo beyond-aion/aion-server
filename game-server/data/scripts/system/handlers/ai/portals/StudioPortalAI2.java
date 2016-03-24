@@ -31,7 +31,7 @@ public class StudioPortalAI2 extends ActionItemNpcAI2 {
 		House studio = HousingService.getInstance().getPlayerStudio(player.getObjectId());
 		if (studio == null && ownerId == 0) // Doesn't own studio and not in studio
 		{
-			PacketSendUtility.sendPacket(player, STR_HOUSING_ENTER_NEED_HOUSE);
+			PacketSendUtility.sendPacket(player, STR_HOUSING_ENTER_NEED_HOUSE());
 			return;
 		}
 

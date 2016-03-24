@@ -252,7 +252,7 @@ public class NpcController extends CreatureController<Npc> {
 	public void onDialogRequest(Player player) {
 		// notify npc dialog request observer
 		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 			AuditLogger.info(player, "Player " + player.getName() + " try to talk NPC in wrong distance ");
 			return;
 		}

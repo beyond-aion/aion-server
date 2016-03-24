@@ -35,7 +35,7 @@ public class HpUseAction extends Action {
 			valueWithDelta = (int) (valueWithDelta / 100f * skill.getEffector().getLifeStats().getMaxHp());
 		if (effector instanceof Player) {
 			if (currentHp <= 0 || currentHp < valueWithDelta) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP);
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP());
 				return false;
 			}
 		}

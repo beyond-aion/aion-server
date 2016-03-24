@@ -32,7 +32,7 @@ public class CM_BLOCK_SET_REASON extends AionClientPacket {
 		BlockedPlayer target = activePlayer.getBlockList().getBlockedPlayer(targetName);
 
 		if (target == null)
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_NOT_IN_LIST);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_NOT_IN_LIST());
 		else {
 			SocialService.setBlockedReason(activePlayer, target, reason);
 		}

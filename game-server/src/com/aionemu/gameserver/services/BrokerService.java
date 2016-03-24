@@ -357,7 +357,7 @@ public class BrokerService {
 		}
 
 		if (buyingItem.getSellerId() == player.getObjectId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_BUY_MY_REGISTER_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_BUY_MY_REGISTER_ITEM());
 			return;
 		}
 		synchronized (this) {
@@ -369,7 +369,7 @@ public class BrokerService {
 			Item item = buyingItem.getItem();
 			long price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 				return;
 			}
 
@@ -615,7 +615,7 @@ public class BrokerService {
 				return;
 			}
 			if (player.getInventory().isFull(brokerItem.getItem().getItemTemplate().getExtraInventoryId())) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_FULL_INVENTORY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_FULL_INVENTORY());
 				return;
 			}
 			synchronized (this) {

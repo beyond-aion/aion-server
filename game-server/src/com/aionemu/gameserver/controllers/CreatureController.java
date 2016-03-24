@@ -548,7 +548,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				creature.setSkillNumber(creature.getSkillNumber() - 1);
 		}
 		if (lastAttacker instanceof Player) {
-			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED);
+			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
 		}
 	}
 

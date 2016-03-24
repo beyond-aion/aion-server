@@ -119,7 +119,7 @@ public class DecomposeAction extends AbstractItemAction {
 			return false;
 		}
 		if (player.getInventory().isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
 			return false;
 		}
 		return true;
@@ -451,18 +451,18 @@ public class DecomposeAction extends AbstractItemAction {
 				int slotReq = calcMaxCountOfSlots(selectedCollection, player, false);
 				int specialSlotreq = calcMaxCountOfSlots(selectedCollection, player, true);
 				if (slotReq > 0 && inventory.getFreeSlots() < slotReq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
 					return false;
 				}
 				if (specialSlotreq > 0 && inventory.getSpecialCubeFreeSlots() < specialSlotreq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
 					return false;
 				}
 				if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
 					return false;
 				}
 				if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
 					return false;
 				}
 				if (selectedCollection.getItems().isEmpty() && selectedCollection.getRandomItems().isEmpty()) {

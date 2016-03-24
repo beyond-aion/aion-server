@@ -58,7 +58,7 @@ public class Quest extends AdminCommand {
 			target = World.getInstance().findPlayer(Util.convertName(params[index]));
 
 			if (target == null || !target.isOnline()) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF);
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF());
 				return;
 			}
 
@@ -70,7 +70,7 @@ public class Quest extends AdminCommand {
 			questId = ChatUtil.getQuestId(params[index]);
 		} else {
 			if (!(admin.getTarget() instanceof Player)) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 

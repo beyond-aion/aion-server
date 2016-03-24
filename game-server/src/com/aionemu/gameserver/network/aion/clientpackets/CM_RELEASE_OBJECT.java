@@ -40,7 +40,7 @@ public class CM_RELEASE_OBJECT extends AionClientPacket {
 			if (task != null && !task.isDone() || object instanceof PostboxObject) { // post box always sends the message
 				if (object instanceof UseableItemObject) // reset visual use progress bar
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), object.getObjectId(), 0, 9));
-				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANCEL_USE);
+				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANCEL_USE());
 			}
 			player.getController().cancelTask(TaskId.HOUSE_OBJECT_USE);
 		}

@@ -291,11 +291,9 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 		writeD(code);
 
 		for (Object param : params) {
-			if (param instanceof DescriptionId) {
-				writeH(0x24);
-				writeD(((DescriptionId) param).getValue());
-				writeH(0x00); // unk
-			} else if (param instanceof ArtifactLocation)
+			if (param instanceof DescriptionId)
+				writeNameId(((DescriptionId) param).getValue());
+			else if (param instanceof ArtifactLocation)
 				this.artifact = (ArtifactLocation) param;
 			else
 				writeS(String.valueOf(param));

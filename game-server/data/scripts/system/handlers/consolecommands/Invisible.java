@@ -26,6 +26,6 @@ public class Invisible extends ConsoleCommand {
 			player.getController().onHide();
 			PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 		}
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_BEGIN);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_BEGIN());
 	}
 }

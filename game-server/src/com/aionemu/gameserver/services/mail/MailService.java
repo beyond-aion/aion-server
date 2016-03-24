@@ -118,12 +118,12 @@ public class MailService {
 			senderItem = senderInventory.getItemByObjId(attachedItemObjId);
 
 			if (senderItem == null || senderItem.getItemCount() < attachedItemCount) {
-				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_USED_ITEM);
+				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_USED_ITEM());
 				return;
 			}
 
 			if (senderItem.isEquipped()) {
-				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_CAN_NOT_SEND_EQUIPPED_ITEM);
+				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_CAN_NOT_SEND_EQUIPPED_ITEM());
 				return;
 			}
 
@@ -158,7 +158,7 @@ public class MailService {
 		long finalMailKinah = PricesService.getPriceForService(baseCost + kinahMailCommission + itemMailCommission, sender.getRace()) + attachedKinahCount;
 
 		if (senderInventory.getKinah() < finalMailKinah) {
-			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 
@@ -230,7 +230,7 @@ public class MailService {
 			}
 
 			if (letterType == LetterType.EXPRESS)
-				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY);
+				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY());
 		}
 
 		if (attachedItem != null) {
@@ -283,7 +283,7 @@ public class MailService {
 				if (attachedItem == null)
 					return;
 				if (player.getInventory().isFull()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL());
 					return;
 				}
 				player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL);

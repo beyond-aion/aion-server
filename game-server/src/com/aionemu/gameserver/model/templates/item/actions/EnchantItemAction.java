@@ -49,7 +49,7 @@ public class EnchantItemAction extends AbstractItemAction {
 		if (isSupplementAction())
 			return false;
 		if (targetItem == null) { // no item selected.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
 		}
 		if (parentItem == null) {
@@ -232,7 +232,7 @@ public class EnchantItemAction extends AbstractItemAction {
 			if (minEnchantLevel <= targetItemTemplate.getLevel() && maxEnchantLevel >= targetItemTemplate.getLevel())
 				return true;
 
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_ENCHANT_ASSISTANT_NO_RIGHT_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_ENCHANT_ASSISTANT_NO_RIGHT_ITEM());
 			return false;
 		}
 		return true;

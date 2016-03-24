@@ -34,7 +34,7 @@ public class QuestStartAction extends AbstractItemAction {
 			return true;
 
 		else if (qs.getStatus() != QuestStatus.COMPLETE)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
 
 		else if (!qs.canRepeat())
 			PacketSendUtility.sendPacket(player,

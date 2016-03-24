@@ -26,6 +26,6 @@ public class Visible extends ConsoleCommand {
 			player.unsetVisualState(CreatureVisualState.HIDE20);
 			PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 		}
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_END);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_END());
 	}
 }

@@ -47,7 +47,7 @@ public class CubeExpandService {
 			 * Check if player is allowed to expand by buying
 			 */
 			if (player.getNpcExpands() >= CustomConfig.NPC_CUBE_EXPANDS_SIZE_LIMIT) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
 				return;
 			}
 			/**
@@ -60,7 +60,7 @@ public class CubeExpandService {
 				@Override
 				public void acceptRequest(Creature requester, Player responder) {
 					if (price > player.getInventory().getKinah()) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
 						return;
 					}
 					npcExpand(responder);

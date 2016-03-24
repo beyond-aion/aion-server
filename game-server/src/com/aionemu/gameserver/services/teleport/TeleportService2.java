@@ -82,7 +82,7 @@ public class TeleportService2 {
 
 		if (template.getTeleLocIdData() == null) {
 			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
 			return;
@@ -91,7 +91,7 @@ public class TeleportService2 {
 		TeleportLocation location = template.getTeleLocIdData().getTeleportLocation(locId);
 		if (location == null) {
 			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
 			return;
@@ -100,7 +100,7 @@ public class TeleportService2 {
 		TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(locId);
 		if (locationTemplate == null) {
 			log.info(String.format("Missing info at teleport_location.xml with locId: %d", locId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing info at teleport_location.xml with locId: " + locId);
 			return;
@@ -109,7 +109,7 @@ public class TeleportService2 {
 		// TODO: remove teleportation route if it's enemy fortress (1221, 1231, 1241)
 		int id = SiegeService.getInstance().getSiegeIdByLocId(locId);
 		if (id > 0 && !SiegeService.getInstance().getSiegeLocation(id).isCanTeleport(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
 
@@ -121,21 +121,21 @@ public class TeleportService2 {
 				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate((short) location.getLocId());
 				if (flypath == null) {
 					AuditLogger.info(player, "Try to use null flyPath #" + location.getLocId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
 
 				double dist = MathUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
 				if (dist > 7) {
 					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " but hes too far " + dist);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
 
 				if (player.getWorldId() != flypath.getStartWorldId()) {
 					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " from not native start world " + player.getWorldId()
 						+ ". expected " + flypath.getStartWorldId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
 
@@ -318,9 +318,9 @@ public class TeleportService2 {
 		if (template == null)
 			log.warn("No teleport id found for " + npc);
 		else if (player.isInFlyingState())
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_AIRPORT_WHEN_FLYING);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_AIRPORT_WHEN_FLYING());
 		else if (player.isEnemyFrom(npc))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
 		else
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_MAP(npc.getObjectId(), template.getTeleportId()));
 	}

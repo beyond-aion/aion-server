@@ -105,7 +105,7 @@ public class Equipment {
 		ItemTemplate itemTemplate = item.getItemTemplate();
 
 		if (!item.getItemTemplate().isClassSpecific(owner.getPlayerClass())) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_CLASS);
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_CLASS());
 			return null;
 		}
 		// don't allow to wear items of not allowed level
@@ -123,13 +123,13 @@ public class Equipment {
 
 		if (owner.getAccessLevel() < AdminConfig.GM_LEVEL) {
 			if (itemTemplate.getRace() != Race.PC_ALL && itemTemplate.getRace() != owner.getRace()) {
-				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RACE);
+				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RACE());
 				return null;
 			}
 
 			ItemUseLimits limits = itemTemplate.getUseLimits();
 			if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != owner.getGender()) {
-				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_GENDER);
+				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_GENDER());
 				return null;
 			}
 
@@ -889,7 +889,7 @@ public class Equipment {
 			if (powerShardStacks.size() != 0) {
 				equipItem(powerShardStacks.get(0).getObjectId(), powerShardItem.getEquipmentSlot());
 			} else {
-				PacketSendUtility.sendPacket(owner, STR_MSG_WEAPON_BOOST_MODE_BURN_OUT);
+				PacketSendUtility.sendPacket(owner, STR_MSG_WEAPON_BOOST_MODE_BURN_OUT());
 				owner.unsetState(CreatureState.POWERSHARD);
 			}
 		}
@@ -1173,7 +1173,7 @@ public class Equipment {
 			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0,
 				new DescriptionId(item.getNameId())));
 		} else {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_CLOSE_OTHER_MSG_BOX_AND_RETRY);
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_CLOSE_OTHER_MSG_BOX_AND_RETRY());
 		}
 		return false;
 	}

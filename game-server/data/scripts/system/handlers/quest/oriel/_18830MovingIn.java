@@ -87,7 +87,7 @@ public class _18830MovingIn extends QuestHandler {
 			}
 			else if (targetId == 830645) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
 					return closeDialogWindow(env);
 				}
 			}

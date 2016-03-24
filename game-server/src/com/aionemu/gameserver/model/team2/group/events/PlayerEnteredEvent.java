@@ -37,7 +37,7 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 	public void handleEvent() {
 		PlayerGroupService.addPlayerToGroup(group, enteredPlayer);
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_INFO(group));
-		PacketSendUtility.sendPacket(enteredPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_ENTERED_PARTY);
+		PacketSendUtility.sendPacket(enteredPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_ENTERED_PARTY());
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.JOIN));
 		PacketSendUtility.broadcastPacketTeam(enteredPlayer, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer), true, false);
 		group.applyOnMembers(this);

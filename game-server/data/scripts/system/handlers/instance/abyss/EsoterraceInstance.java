@@ -105,7 +105,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		TeleportService2.teleportTo(player, mapId, instanceId, 384.57535f, 535.4073f, 321.6642f, (byte) 17);
 		return true;
 	}

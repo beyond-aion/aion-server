@@ -30,7 +30,7 @@ public class CM_FRIEND_SET_MEMO extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 		Friend friend = activePlayer.getFriendList().getFriend(targetName);
 		if (friend == null) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST());
 		} else {
 			SocialService.setFriendMemo(activePlayer, friend, memo);
 		}

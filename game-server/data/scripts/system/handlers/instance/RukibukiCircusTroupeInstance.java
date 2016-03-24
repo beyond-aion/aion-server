@@ -433,7 +433,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService2.teleportTo(player, mapId, instanceId, 473.54022f, 567.6342f, 201.83635f, (byte) 118);
 		return true;
 	}

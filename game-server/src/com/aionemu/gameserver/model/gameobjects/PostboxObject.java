@@ -22,7 +22,7 @@ public class PostboxObject extends UseableHouseObject<HousingPostbox> {
 	@Override
 	public void onUse(final Player player) {
 		if (!setOccupant(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER());
 			return;
 		}
 

@@ -262,9 +262,9 @@ public class ExchangeService {
 					return;
 				}
 				if (realItem.getItemCount() == exItem.getItemCount()) {
-					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(FastTable.of(realItem), player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_ITEMS_RETURN));
+					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(FastTable.of(realItem), player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET_BACK));
 				} else {
-					PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, realItem, ItemPacketService.ItemUpdateType.GET_BACK_FROM_EXCHANGE));
+					PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, realItem, ItemPacketService.ItemUpdateType.INC_PLAYER_EXCHANGE_GET_BACK));
 				}
 			}
 			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(StorageType.CUBE, player));
@@ -303,9 +303,9 @@ public class ExchangeService {
 
 		if (!validateExchange(activePlayer, currentPartner)) {
 			if (!validateInventorySize(currentPartner, exchange1))
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM);
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM());
 			else
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE);
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE());
 			cleanUpExchanges(true, activePlayer, currentPartner);
 			return;
 		}
@@ -396,11 +396,11 @@ public class ExchangeService {
 		boolean activePlayerCheck = validateInventorySize(activePlayer, exchange2);
 		boolean currentPartnerCheck = validateInventorySize(currentPartner, exchange1);
 		if(!activePlayerCheck) {
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM);
-			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE);
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM());
+			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE());
 		}	else if(!currentPartnerCheck) {
-			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM);
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE);
+			PacketSendUtility.sendPacket(currentPartner, SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_HEAVY_TO_ADD_EXCHANGE_ITEM());
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE());
 		}
 		return activePlayerCheck && currentPartnerCheck;
 	}
@@ -416,7 +416,7 @@ public class ExchangeService {
 			itemToPut.setEquipmentSlot(0);
 			if (itemToPut.getPackCount() > 0) // unpack
 				itemToPut.setPackCount(itemToPut.getPackCount() * -1);
-			partner.getInventory().add(itemToPut, ItemPacketService.ItemAddType.PLAYER_EXCHANGE);
+			partner.getInventory().add(itemToPut, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET);
 			exchange2.addItemToUpdate(itemToPut);
 			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
 				log.info("Player " + giver.getName() + " exchanged item " + itemToPut.getItemId() + " [" + itemToPut.getItemName() + "] (count: "

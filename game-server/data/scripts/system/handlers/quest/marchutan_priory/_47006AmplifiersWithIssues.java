@@ -66,7 +66,7 @@ public class _47006AmplifiersWithIssues extends QuestHandler {
 							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 217175, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 							return true;
 						} else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor());
 					}
 				}
 			}

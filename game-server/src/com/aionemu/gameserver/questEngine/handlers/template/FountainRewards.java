@@ -64,7 +64,7 @@ public class FountainRewards extends QuestHandler {
 									return sendQuestDialog(env, 5);
 								}
 							} else {
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
+								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 								return sendQuestSelectionDialog(env);
 							}
 						} else {

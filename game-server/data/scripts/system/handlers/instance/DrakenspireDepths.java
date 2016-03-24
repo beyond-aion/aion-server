@@ -609,7 +609,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		TeleportService2.teleportTo(player, mapId, instanceId, 361.706f, 182.503f, 1684.290f, (byte) 0);
 		return true;
 	}

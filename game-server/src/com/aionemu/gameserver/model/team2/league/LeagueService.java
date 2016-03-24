@@ -60,11 +60,11 @@ public class LeagueService {
 	public static final boolean canInvite(Player inviter, Player invited) {
 		if (inviter.getLifeStats().isAlreadyDead()) {
 			// You cannot use the Alliance League invitation function while you are dead.
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_DEAD);
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_DEAD());
 			return false;
 		} else if (!invited.isOnline()) {
 			// The player you invited to the Alliance League is currently offline.
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_OFFLINE_MEMBER);
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_OFFLINE_MEMBER());
 			return false;
 		} else if (invited.getPlayerAlliance2() == null) {
 			// Currently, %0 cannot accept your invitation to join the alliance.
@@ -72,15 +72,15 @@ public class LeagueService {
 			return false;
 		} else if (inviter.getPlayerAlliance2().hasMember(invited.getObjectId())) {
 			// You cannot invite your own alliance.
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_SELF);
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_SELF());
 			return false;
 		} else if (invited.getPlayerAlliance2().isInLeague()) {
 			// The selected target is already a member of another force league.
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_ALREADY_MY_UNION);
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_ALREADY_MY_UNION());
 			return false;
 		} else if (inviter.getPlayerAlliance2().isInLeague() && inviter.getPlayerAlliance2().getLeague().isFull()) {
 			// You cannot invite anymore as the Alliance League is full.
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_ADD_NEW_MEMBER);
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_ADD_NEW_MEMBER());
 			return false;
 		} else if (inviter.getPlayerAlliance2().isInLeague() && invited.getPlayerAlliance2().isInLeague()
 			&& inviter.getPlayerAlliance2().getLeague().equals(invited.getPlayerAlliance2().getLeague())) {

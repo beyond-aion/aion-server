@@ -41,24 +41,24 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 			return; // should not happen
 
 		if (house.getStatus() == HouseStatus.SELL_WAIT) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED());
 			return;
 		}
 
 		if (!HousingBidService.getInstance().isRegisteringAllowed()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT());
 			return;
 		}
 
 		if (!house.isFeePaid() && HousingConfig.ENABLE_HOUSE_PAY) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_OVERDUE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_OVERDUE());
 			return;
 		}
 
 		long fee = (long) (bidKinah * 0.3f);
 
 		if (player.getInventory().getKinah() < fee) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 		player.getInventory().decreaseKinah(fee);

@@ -160,9 +160,9 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		Player player = client.getActivePlayer();
 		if (!check_ticket) {
 			if (!gender_change)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_ALL_CANT_NO_ITEM);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_ALL_CANT_NO_ITEM());
 			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM());
 		} else {
 			// Remove ticket and save appearance
 			if (!gender_change) {

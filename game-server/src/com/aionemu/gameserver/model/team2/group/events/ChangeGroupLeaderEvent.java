@@ -43,7 +43,7 @@ public class ChangeGroupLeaderEvent extends ChangeLeaderEvent<PlayerGroup> {
 				if (!player.equals(member)) {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_NEW_LEADER(player.getName()));
 				} else {
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_YOU_BECOME_NEW_LEADER);
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_YOU_BECOME_NEW_LEADER());
 				}
 				return true;
 			}

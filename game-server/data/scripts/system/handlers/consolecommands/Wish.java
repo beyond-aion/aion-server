@@ -81,7 +81,7 @@ public class Wish extends ConsoleCommand {
 			}
 		} else { // add item
 			if (!(admin.getTarget() instanceof Player)) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 

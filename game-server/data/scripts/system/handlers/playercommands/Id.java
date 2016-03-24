@@ -39,7 +39,7 @@ public class Id extends PlayerCommand {
 			}
 
 			if (!(target instanceof Npc)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 

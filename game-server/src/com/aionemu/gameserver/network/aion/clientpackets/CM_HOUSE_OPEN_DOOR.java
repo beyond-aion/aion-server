@@ -84,7 +84,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 				}
 				if (!allowed) {
 					if (player.getAccessLevel() < HousingConfig.ENTER_HOUSE_ACCESSLEVEL) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
 						return;
 					}
 				}

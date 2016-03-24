@@ -35,7 +35,7 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		if (!HousingConfig.ENABLE_HOUSE_PAY) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_F2P_CASH_HOUSE_FEE_FREE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_F2P_CASH_HOUSE_FEE_FREE());
 			return;
 		}
 
@@ -45,7 +45,7 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 			return;
 		}
 		if (player.getInventory().getKinah() < toPay) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 

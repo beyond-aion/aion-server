@@ -31,7 +31,7 @@ public class LeftHandCondition extends Condition {
 						|| player.getEquipment().getMainHandWeapon().getItemTemplate().isTwoHandWeapon())
 						return true;
 					else {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_DUAL_WEAPON);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_DUAL_WEAPON());
 						return false;
 					}
 				}
@@ -39,7 +39,7 @@ public class LeftHandCondition extends Condition {
 					if (player.getEquipment().isShieldEquipped())
 						return true;
 					else {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_SHIELD);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_SHIELD());
 						return false;
 					}
 				}

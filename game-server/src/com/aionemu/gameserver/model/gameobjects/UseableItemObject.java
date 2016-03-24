@@ -57,22 +57,22 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 	public void onUse(final Player player) {
 		UseItemAction action = getObjectTemplate().getAction();
 		if (action == null) { // Some objects do not have actions; they are test items now
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE());
 			return;
 		}
 
 		int ownerId = getOwnerHouse().getOwnerId();
 		boolean isOwner = ownerId == player.getObjectId();
 		if (!isOwner && getObjectTemplate().isOwnerOnly()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID());
 			return;
 		}
 
 		if (!player.getHouseObjectCooldownList().isCanUseObject(getObjectId())) {
 			if (getObjectTemplate().getCd() != null && getObjectTemplate().getCd() > 0)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME());
 			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY());
 			return;
 		}
 
@@ -85,7 +85,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 				// if expiration is set then final reward has to be given for owner only due to inventory full. If inventory was not full, the object had to
 				// be despawned, so we wouldn't reach this check.
 				if (!mustGiveLastReward || !isOwner) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT());
 					return;
 				}
 			}
@@ -121,12 +121,12 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 		}
 
 		if (player.getInventory().isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_MANY_ITEMS_INVENTORY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_MANY_ITEMS_INVENTORY());
 			return;
 		}
 
 		if (!setOccupant(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER());
 			return;
 		}
 

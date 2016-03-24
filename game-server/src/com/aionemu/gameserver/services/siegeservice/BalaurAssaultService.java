@@ -151,7 +151,7 @@ public class BalaurAssaultService {
 		while (iter.hasNext()) {
 			findedPlayer = iter.next();
 			PacketSendUtility.sendPacket(findedPlayer, new SM_NPC_ASSEMBLER(npc));
-			PacketSendUtility.sendPacket(findedPlayer, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN);
+			PacketSendUtility.sendPacket(findedPlayer, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN());
 		}
 	}
 }

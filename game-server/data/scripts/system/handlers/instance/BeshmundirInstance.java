@@ -159,7 +159,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	public void onPlayMovieEnd(Player player, int movieId) {
 		switch (movieId) {
 			case 443:
-				PacketSendUtility.sendPacket(player, STR_MSG_IDCatacombs_BigOrb_Spawn);
+				PacketSendUtility.sendPacket(player, STR_MSG_IDCatacombs_BigOrb_Spawn());
 				break;
 		}
 	}

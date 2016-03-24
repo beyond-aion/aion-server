@@ -61,7 +61,7 @@ public class Givetitle extends ConsoleCommand {
 	private void setTitle(Player player, int value) {
 
 		if (player.getTitleList().contains(value)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());
 			return;
 		}
 		player.getTitleList().addTitle(value, false, 0);

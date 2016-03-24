@@ -21,19 +21,19 @@ public class RecipeService {
 
 		RecipeTemplate template = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
 		if (template == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_RECIPEITEM_CANT_USE_NO_RECIPE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_RECIPEITEM_CANT_USE_NO_RECIPE());
 			return null;
 		}
 
 		if (template.getRace() != Race.PC_ALL) {
 			if (template.getRace() != player.getRace()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFTRECIPE_RACE_CHECK);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFTRECIPE_RACE_CHECK());
 				return null;
 			}
 		}
 
 		if (player.getRecipeList().isRecipePresent(recipeId)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARNED_ALREADY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_LEARNED_ALREADY());
 			return null;
 		}
 
@@ -44,7 +44,7 @@ public class RecipeService {
 		}
 
 		if (template.getSkillpoint() > player.getSkillList().getSkillLevel(template.getSkillid())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILLPOINT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILLPOINT());
 			return null;
 		}
 

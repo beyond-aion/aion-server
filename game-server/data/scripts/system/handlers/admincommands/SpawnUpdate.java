@@ -55,7 +55,7 @@ public class SpawnUpdate extends AdminCommand {
 		}
 
 		if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 

@@ -86,7 +86,7 @@ public class StigmaService {
 				kinahcount = 100000;
 
 			if (!player.getInventory().tryDecreaseKinah(PricesService.getPriceForService(kinahcount, player.getRace()))) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_NOT_ENOUGH_MONEY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_NOT_ENOUGH_MONEY());
 				return false;
 			}
 			addStigmaSkills(player, stigmaInfo, stigmaLevel);

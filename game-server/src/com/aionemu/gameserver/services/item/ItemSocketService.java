@@ -177,7 +177,7 @@ public class ItemSocketService {
 		}
 
 		if (item == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_TARGET_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_TARGET_ITEM());
 			return;
 		}
 
@@ -220,7 +220,7 @@ public class ItemSocketService {
 		}
 
 		if (item == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_TARGET_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_TARGET_ITEM());
 			return;
 		}
 
@@ -330,7 +330,7 @@ public class ItemSocketService {
 		GodstoneInfo godstoneInfo = itemTemplate.getGodstoneInfo();
 
 		if (godstoneInfo == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
 			return;
 		}
 

@@ -107,7 +107,7 @@ public final class QuestService {
 			return false;
 		}
 		if (player.getInventory().getFreeSlots(0) == 0 || player.getInventory().getFreeSlots(1) == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 			return false;
 		}
 		QuestTemplate template = questsData.getQuestById(id);
@@ -344,7 +344,7 @@ public final class QuestService {
 		if (qs != null && qs.getStatus() != QuestStatus.NONE) {
 			if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD) {
 				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
 				return false;
 			} else if (!qs.canRepeat()) {
 				if (warn)
@@ -363,7 +363,7 @@ public final class QuestService {
 
 		if (template.getRacePermitted() != null && template.getRacePermitted() != player.getRace() && template.getRacePermitted() != Race.PC_ALL) {
 			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE());
 			return false;
 		}
 		// min level - 2 so that the gray quest arrow shows when quest is almost available
@@ -386,13 +386,13 @@ public final class QuestService {
 
 		if (!template.getClassPermitted().isEmpty() && !template.getClassPermitted().contains(player.getPlayerClass())) {
 			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS());
 			return false;
 		}
 
 		if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender()) {
 			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER());
 			return false;
 		}
 
@@ -459,7 +459,7 @@ public final class QuestService {
 		}
 
 		if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.havePermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_NORMAL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_NORMAL());
 			return false;
 		}
 

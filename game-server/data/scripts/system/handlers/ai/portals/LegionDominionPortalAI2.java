@@ -59,7 +59,7 @@ public class LegionDominionPortalAI2 extends PortalDialogAI2 {
 						PortalService.port(portalPath, player, getObjectId());
 						return true;
 					} else {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
 						return true;
 					}
@@ -106,7 +106,7 @@ public class LegionDominionPortalAI2 extends PortalDialogAI2 {
 	private boolean hasCd(Player player) {
 		if (player.getPortalCooldownList().isPortalUseDisabled(301500000)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 			return true;
 		}
 		return false;

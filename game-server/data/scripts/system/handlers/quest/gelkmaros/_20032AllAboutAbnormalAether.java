@@ -93,7 +93,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {
-							PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
+							PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY());
 							return sendQuestSelectionDialog(env);
 						}
 				}

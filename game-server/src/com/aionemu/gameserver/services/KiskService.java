@@ -61,7 +61,7 @@ public class KiskService {
 		TeleportService2.sendSetBindPoint(player);
 
 		// Send System Message
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_REGISTER);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_REGISTER());
 
 		// Send Animated Bind Flash
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 2, player.getCommonData().getLevel()), true);

@@ -51,7 +51,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 					return false;
 			} else if (tPlayer.getController().isDueling(player)) {
 				if (skill.getSkillTemplate().getProperties().getTargetRelation() != TargetRelationAttribute.ENEMY) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					return false;
 				}
 			}
@@ -64,7 +64,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 
 		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.checkNonTargetAOE()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 			return false;
 		}
 
@@ -87,7 +87,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	private boolean checkFly(Player player, VisibleObject target) {
 		if (player.isUsingFlyTeleport() || player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_RESTRICTION_NO_FLY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_RESTRICTION_NO_FLY());
 			return false;
 		}
 
@@ -115,18 +115,18 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 
 		if ((!player.canAttack()) && !template.hasEvadeEffect()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}
 
 		// in 3.0 players can use remove shock even when silenced
 		if (template.getType() == SkillType.MAGICAL && player.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && !template.hasEvadeEffect()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_MAGIC_SKILL_WHILE_SILENCED);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_MAGIC_SKILL_WHILE_SILENCED());
 			return false;
 		}
 
 		if (template.getType() == SkillType.PHYSICAL && player.getEffectController().isAbnormalSet(AbnormalState.BIND)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_PHYSICAL_SKILL_IN_FEAR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_PHYSICAL_SKILL_IN_FEAR());
 			return false;
 		}
 
@@ -136,7 +136,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		// cannot use skills while transformed
 		if (player.getTransformModel().isActive()) {
 			if (player.getTransformModel().getBanUseSkills() == 1) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE());
 				return false;
 			}
 			// can use only panel skills in FORM1
@@ -164,12 +164,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (template.hasResurrectEffect()) {
 			if (!(target instanceof Player)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
 			Player targetPlayer = (Player) target;
 			if (!targetPlayer.getLifeStats().isAlreadyDead()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
 		}
@@ -182,25 +182,25 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		final com.aionemu.gameserver.model.team2.group.PlayerGroup group = player.getPlayerGroup2();
 
 		if (group != null && group.isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER());
 			return false;
 		} else if (group != null && !player.equals(group.getLeader().getObject())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ONLY_LEADER_CAN_INVITE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ONLY_LEADER_CAN_INVITE());
 			return false;
 		} else if (target == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_NO_USER_TO_INVITE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_NO_USER_TO_INVITE());
 			return false;
 		} else if (target.getRace() != player.getRace() && !GroupConfig.GROUP_INVITEOTHERFACTION) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
 			return false;
 		} else if (target.sameObjectId(player.getObjectId())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CAN_NOT_INVITE_SELF);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CAN_NOT_INVITE_SELF());
 			return false;
 		} else if (target.getLifeStats().isAlreadyDead()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD());
 			return false;
 		} else if (player.getLifeStats().isAlreadyDead()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD());
 			return false;
 		} else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId().equals(target.getPlayerGroup2().getTeamId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
@@ -218,12 +218,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canInviteToAlliance(Player player, Player target) {
 		if (target == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_NO_USER_TO_INVITE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_NO_USER_TO_INVITE());
 			return false;
 		}
 
 		if (target.getRace() != player.getRace() && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
 			return false;
 		}
 
@@ -240,34 +240,34 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 
 		if (alliance != null && alliance.isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_ADD_NEW_MEMBER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_ADD_NEW_MEMBER());
 			return false;
 		}
 
 		if (alliance != null && !alliance.isSomeCaptain(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_ONLY_PARTY_LEADER_CAN_LEAVE_ALLIANCE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_ONLY_PARTY_LEADER_CAN_LEAVE_ALLIANCE());
 			return false;
 		}
 
 		if (target.sameObjectId(player.getObjectId())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CAN_NOT_INVITE_SELF);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CAN_NOT_INVITE_SELF());
 			return false;
 		}
 
 		if (target.getLifeStats().isAlreadyDead()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD());
 			return false;
 		}
 
 		if (player.getLifeStats().isAlreadyDead()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_INVITE_WHEN_DEAD);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_INVITE_WHEN_DEAD());
 			return false;
 		}
 
 		if (target.isInGroup2()) {
 			PlayerGroup targetGroup = target.getPlayerGroup2();
 			if (alliance != null && (targetGroup.size() + alliance.size() >= 24)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_FAILED_NOT_ENOUGH_SLOT);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_FAILED_NOT_ENOUGH_SLOT());
 				return false;
 			}
 		}
@@ -282,19 +282,19 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 
 		if (!player.canAttack()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}
 
 		if (!(target instanceof Creature)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return false;
 		}
 
 		Creature creature = (Creature) target;
 
 		if (creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return false;
 		}
 
@@ -324,7 +324,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 
 		if (player.isTrading()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_PARTNER_IS_EXCHANGING_WITH_OTHER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_PARTNER_IS_EXCHANGING_WITH_OTHER());
 			return false;
 		}
 
@@ -343,7 +343,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (PlayerChatService.isFlooding(player)) {
 			ChatBanService.banPlayer(player, 2 * 60 * 1000);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLOODING);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLOODING());
 			return false;
 		}
 
@@ -359,7 +359,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}
 
@@ -370,13 +370,13 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 
 		if (player.getStore() != null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 			return false;
 		}
 
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
 			return false;
 		}
 
@@ -406,15 +406,15 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canChangeEquip(Player player) {
 		if (player.getController().isUnderStance()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_CURRENT_STANCE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_CURRENT_STANCE());
 			return false;
 		}
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}
 		if (player.getController().hasTask(TaskId.ITEM_USE) && !player.getController().getTask(TaskId.ITEM_USE).isDone()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_EQUIP_ITEM_IN_ACTION);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_EQUIP_ITEM_IN_ACTION());
 			return false;
 		}
 		return true;
@@ -423,23 +423,23 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canFly(Player player) {
 		if (!player.getCommonData().isDaeva()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
 		if (player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
 			if (!player.isInsideZoneType(ZoneType.FLY)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 				return false;
 			}
 		}
 		// If player is under NoFly Effect, show the retail message for it and return
 		if (player.isUnderNoFly()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
 			return false;
 		}
 		// cannot fly in transform
 		if (player.getTransformModel().getRes6() == 1) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS());
 			return false;
 		}
 		// cannot fly while private store is active
@@ -452,12 +452,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canGlide(Player player) {
 		if (!player.getCommonData().isDaeva()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
 		// cannot glide in transform
 		if (player.getTransformModel().getRes6() == 1) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS());
 			return false;
 		}
 
@@ -467,27 +467,27 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canPrivateStore(Player player) {
 		if (player.isFlying()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE());
 			return false;
 		}
 		if (player.getMoveController().isInMove()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_MOVING_OBJECT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_MOVING_OBJECT());
 			return false;
 		}
 		if (player.isAttackMode()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_COMBAT_MODE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_COMBAT_MODE());
 			return false;
 		}
 		if (player.isTrading()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING); // name "crafting" is NC fail, msg is correct
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING()); // name "crafting" is NC fail, msg is correct
 			return false;
 		}
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE());
 			return false;
 		}
 		if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE());
 			return false;
 		}
 		if (player.getLifeStats().isAlreadyDead())

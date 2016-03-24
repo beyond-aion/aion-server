@@ -69,7 +69,7 @@ public class GroupGateAI2 extends NpcAI2 {
 				});
 
 		} else {
-			PacketSendUtility.sendPacket(player, STR_SKILL_CAN_NOT_USE_GROUPGATE_NO_RIGHT);
+			PacketSendUtility.sendPacket(player, STR_SKILL_CAN_NOT_USE_GROUPGATE_NO_RIGHT());
 		}
 	}
 }

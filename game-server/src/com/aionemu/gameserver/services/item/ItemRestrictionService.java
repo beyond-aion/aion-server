@@ -57,13 +57,13 @@ public class ItemRestrictionService {
 			case LEGION_WAREHOUSE:
 				if (!item.isStorableinLegWarehouse(player) || !LegionConfig.LEGION_WAREHOUSE) {
 					// You cannot store this item in the Legion warehouse.
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WAREHOUSE_CANT_LEGION_DEPOSIT);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WAREHOUSE_CANT_LEGION_DEPOSIT());
 					return true;
 				} else if (!player.isLegionMember()
 					|| (!player.getLegionMember().hasRights(LegionPermissionsMask.WH_DEPOSIT) && !player.getLegionMember().hasRights(
 						LegionPermissionsMask.WH_WITHDRAWAL))) {
 					// You do not have the authority to use the Legion warehouse.
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 					return true;
 				}
 				break;

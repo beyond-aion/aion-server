@@ -119,12 +119,12 @@ public class DropService {
 		}
 
 		if (!dropNpc.containsKey(player.getObjectId()) && !dropNpc.isFreeForAll()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT());
 			return;
 		}
 
 		if (dropNpc.isBeingLooted()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
 			return;
 		}
 
@@ -446,10 +446,10 @@ public class DropService {
 		// handles distribution of item to correct player and messages accordingly
 		if (requestedItem.isDistributeItem()) {
 			if (player != requestedItem.getWinningPlayer() && requestedItem.isItemWonNotCollected()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM());
 				return;
 			} else if (requestedItem.getWinningPlayer().getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
-				PacketSendUtility.sendPacket(requestedItem.getWinningPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+				PacketSendUtility.sendPacket(requestedItem.getWinningPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
 				requestedItem.isItemWonNotCollected(true);
 				return;
 			}

@@ -106,7 +106,7 @@ public class ItemService {
 		}
 
 		if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
 		}
 		return count;
 	}
@@ -217,11 +217,11 @@ public class ItemService {
 		}
 		Storage inventory = player.getInventory();
 		if (slotReq > 0 && inventory.getFreeSlots() < slotReq) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
 			return false;
 		}
 		if (specialSlot > 0 && inventory.getSpecialCubeFreeSlots() < specialSlot) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
 			return false;
 		}
 		for (QuestItems qi : questItems) {

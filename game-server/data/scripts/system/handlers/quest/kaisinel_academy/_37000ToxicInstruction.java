@@ -56,7 +56,7 @@ public class _37000ToxicInstruction extends QuestHandler {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
 							return true;
 						else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor());
 					}
 				}
 			}

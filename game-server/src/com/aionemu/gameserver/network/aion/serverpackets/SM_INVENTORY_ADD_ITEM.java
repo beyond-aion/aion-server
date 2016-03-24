@@ -17,19 +17,12 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 
 	private final List<Item> items;
-	private final int size;
 	private Player player;
 	private ItemAddType addType;
 
-	public SM_INVENTORY_ADD_ITEM(List<Item> items, Player player) {
+	public SM_INVENTORY_ADD_ITEM(List<Item> items, Player player, ItemAddType addType) {
 		this.player = player;
 		this.items = items;
-		this.size = items.size();
-		this.addType = ItemAddType.ITEM_COLLECT;
-	}
-
-	public SM_INVENTORY_ADD_ITEM(List<Item> items, Player player, ItemAddType addType) {
-		this(items, player);
 		this.addType = addType;
 	}
 
@@ -39,11 +32,11 @@ public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 		int mask = addType.getMask();
 		if (addType == ItemAddType.ITEM_COLLECT) {
 			// TODO: if size != 1, then it's buy item, should not specify any slot in other places then !!!
-			if (size == 1 && items.get(0).getEquipmentSlot() != ItemStorage.FIRST_AVAILABLE_SLOT)
+			if (items.size() == 1 && items.get(0).getEquipmentSlot() != ItemStorage.FIRST_AVAILABLE_SLOT)
 				mask = ItemAddType.PARTIAL_WITH_SLOT.getMask();
 		}
 		writeH(mask); //
-		writeH(size); // number of entries
+		writeH(items.size()); // number of entries
 		for (Item item : items)
 			writeItemInfo(item);
 	}
@@ -55,8 +48,7 @@ public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 		writeD(itemTemplate.getTemplateId());
 		writeNameId(itemTemplate.getNameId());
 
-		ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
-		itemInfoBlob.writeMe(getBuf());
+		ItemInfoBlob.getFullBlob(player, item).writeMe(getBuf());
 
 		writeH(-1);
 		writeC(item.getItemTemplate().isCloth() ? 1 : 0);

@@ -31,7 +31,7 @@ public class CM_BLOCK_DEL extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 		BlockedPlayer target = activePlayer.getBlockList().getBlockedPlayer(targetName);
 		if (target == null) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NOT_IN_LIST());
 		} else {
 			SocialService.deleteBlockedUser(activePlayer, target);
 		}

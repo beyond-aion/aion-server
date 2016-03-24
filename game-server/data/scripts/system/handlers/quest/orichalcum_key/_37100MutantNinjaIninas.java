@@ -55,7 +55,7 @@ public class _37100MutantNinjaIninas extends QuestHandler {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
 							return true;
 						else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee());
 					}
 				}
 			}

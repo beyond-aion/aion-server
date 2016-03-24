@@ -259,11 +259,11 @@ public class PetService {
 			if (player.isInTeam()) {
 				LootRuleType lootType = player.getLootGroupRules().getLootRule();
 				if (lootType == LootRuleType.FREEFORALL) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
 					return;
 				}
 			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}
 		player.getPet().getCommonData().setIsLooting(activate);
 		PacketSendUtility.sendPacket(player, new SM_PET(activate));

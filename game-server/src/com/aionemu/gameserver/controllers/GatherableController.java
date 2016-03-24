@@ -57,11 +57,11 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		}
 
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_RESTRICTION_RIDE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_RESTRICTION_RIDE());
 			return;
 		}
 		if (player.getInventory().isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INVENTORY_IS_FULL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INVENTORY_IS_FULL());
 			return;
 		}
 		if (MathUtil.getDistance(getOwner(), player) > 6)
@@ -154,7 +154,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		int harvestSkillId = template.getHarvestSkill();
 		if (!player.getSkillList().isSkillPresent(harvestSkillId)) {
 			if (harvestSkillId == 30001) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INCORRECT_SKILL);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INCORRECT_SKILL());
 			} else {
 				PacketSendUtility.sendPacket(player,
 					SM_SYSTEM_MESSAGE.STR_GATHER_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getNameId()));
@@ -228,7 +228,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				gainedGatherXp *= statRate;
 
 			if (player.getSkillList().addSkillXp(player, skillId, gainedGatherXp, skillLvl)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP());
 				player.getCommonData().addExp(xpReward, RewardType.GATHERING);
 			} else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(

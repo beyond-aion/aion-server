@@ -147,7 +147,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		TeleportService2.teleportTo(player, this.mapId, this.instanceId, respawn.getX(), respawn.getY(), respawn.getZ(), new Byte("55"));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 
 		return true;
 	}

@@ -52,7 +52,7 @@ public class ResurrectAI2 extends NpcAI2 {
 			&& player.getBindPoint().getMapId() == getPosition().getMapId()
 			&& MathUtil.getDistance(player.getBindPoint().getX(), player.getBindPoint().getY(), player.getBindPoint().getZ(), getPosition().getX(),
 				getPosition().getY(), getPosition().getZ()) < 20) {
-			PacketSendUtility.sendPacket(player, STR_ALREADY_REGISTER_THIS_RESURRECT_POINT);
+			PacketSendUtility.sendPacket(player, STR_ALREADY_REGISTER_THIS_RESURRECT_POINT());
 			return;
 		}
 
@@ -66,7 +66,7 @@ public class ResurrectAI2 extends NpcAI2 {
 			}
 		}
 		if (worldType == WorldType.PRISON) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_RESURRECT_POINT_FAR_FROM_NPC);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_RESURRECT_POINT_FAR_FROM_NPC());
 			return;
 		}
 		bindHere(player, bindPointTemplate);
@@ -83,10 +83,10 @@ public class ResurrectAI2 extends NpcAI2 {
 				if (responder.getWorldId() == requester.getWorldId()) {
 					// check enough kinah
 					if (responder.getInventory().getKinah() < bindPointTemplate.getPrice()) {
-						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_NOT_ENOUGH_FEE);
+						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_NOT_ENOUGH_FEE());
 						return;
 					} else if (MathUtil.getDistance(requester, responder) > 5) {
-						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_FAR_FROM_NPC);
+						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_FAR_FROM_NPC());
 						return;
 					}
 

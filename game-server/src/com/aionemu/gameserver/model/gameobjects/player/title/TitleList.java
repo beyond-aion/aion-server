@@ -66,7 +66,7 @@ public class TitleList {
 					ExpireTimerTask.getInstance().addTask(entry, owner);
 				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(owner, entry);
 			} else {
-				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE);
+				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());
 				return false;
 			}
 			if (questReward)

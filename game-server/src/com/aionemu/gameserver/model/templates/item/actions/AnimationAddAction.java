@@ -35,7 +35,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		if (parentItem == null) { // no item selected.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
 		}
 

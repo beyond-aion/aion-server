@@ -65,7 +65,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 
 				@Override
 				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
 				}
 			});
 		}
@@ -147,14 +147,14 @@ public class FortressAssault extends Assault<FortressSiege> {
 			public void visit(Player player) {
 				switch (aType) {
 					case TELEPORT:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON());
 						break;
 					case FIRST_WAVE:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FIELDABYSS_CARRIER_DROP_DRAGON);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FIELDABYSS_CARRIER_DROP_DRAGON());
 						break;
 					case SECOND_WAVE:
 					case COMMANDER:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON());
 						break;
 				}
 			}

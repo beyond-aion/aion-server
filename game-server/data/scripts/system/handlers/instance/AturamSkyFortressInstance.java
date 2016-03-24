@@ -232,7 +232,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("SKY_FORTRESS_WAREHOUSE_ZONE_300240000")) {
 			// wtf is that? Notify only one player ?
 			if (msgIsSent.compareAndSet(false, true)) {
-				PacketSendUtility.sendPacket(player, STR_MSG_IDStation_Doping_01_AD);
+				PacketSendUtility.sendPacket(player, STR_MSG_IDStation_Doping_01_AD());
 			}
 		}
 	}

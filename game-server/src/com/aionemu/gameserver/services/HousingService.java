@@ -239,7 +239,7 @@ public class HousingService {
 		HousingLand land = DataManager.HOUSE_DATA.getLand(329001);
 		final long fee = land.getSaleOptions().getGoldPrice();
 		if (player.getInventory().getKinah() < fee) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 		createStudio(player);
@@ -264,7 +264,7 @@ public class HousingService {
 		studio.setPersistentState(PersistentState.NEW);
 		player.setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), studio.getAddress().getId(), true));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_OWN_SUCCESS);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_OWN_SUCCESS());
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
 	}
 

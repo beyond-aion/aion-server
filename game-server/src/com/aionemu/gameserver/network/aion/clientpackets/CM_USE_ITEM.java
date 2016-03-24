@@ -77,7 +77,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 			targetHouseObject = player.getHouseRegistry().getObjectByObjId(targetItemId);
 
 		if (item.getItemTemplate().getTemplateId() == 165000001 && targetItem.getItemTemplate().canExtract()) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_COLOR_ERROR);
+			PacketSendUtility.sendPacket(player, STR_ITEM_COLOR_ERROR());
 			return;
 		}
 
@@ -94,12 +94,12 @@ public class CM_USE_ITEM extends AionClientPacket {
 			return;
 
 		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_RACE);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_RACE());
 			return;
 		}
 
 		if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_CLASS);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_CLASS());
 			return;
 		}
 
@@ -118,12 +118,12 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (item.getItemTemplate().getActivationRace() != null) {
 			// TODO: check retail messages
 			if (!(player.getTarget() instanceof Npc)) {
-				PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
+				PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 				return;
 			}
 			Npc targetNpc = (Npc) player.getTarget();
 			if (targetNpc.getRace() != item.getItemTemplate().getActivationRace()) {
-				PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST_TO_CURRENT_TARGET);
+				PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST_TO_CURRENT_TARGET());
 				return;
 			}
 		}
@@ -135,7 +135,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
 
 		if (itemActions == null) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
+			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 			return;
 		}
 		// for multi-return scrolls
@@ -152,14 +152,14 @@ public class CM_USE_ITEM extends AionClientPacket {
 		}
 
 		if (actions.size() == 0) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
+			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 			return;
 		}
 
 		// Store Item CD in server Player variable.
 		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
 		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME);
+			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
 			return;
 		}
 

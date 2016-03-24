@@ -82,7 +82,7 @@ public class AtreianPassportService {
 			}
 
 			if (player.getInventory().isFull()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 				break;
 			}
 
@@ -143,7 +143,7 @@ public class AtreianPassportService {
 			pa.setLastStamp(new Timestamp(System.currentTimeMillis()));
 			checkPassportLimit(player);
 			DAOManager.getDAO(AccountPassportsDAO.class).storePassport(pa); // save account
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NEW_PASSPORT_AVAIBLE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NEW_PASSPORT_AVAIBLE());
 		}
 		sendPassport(player);
 	}

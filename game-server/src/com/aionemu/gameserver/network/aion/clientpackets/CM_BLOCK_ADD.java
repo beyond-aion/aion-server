@@ -44,9 +44,9 @@ public class CM_BLOCK_ADD extends AionClientPacket {
 		else if (target == null)
 			sendPacket(new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.TARGET_NOT_FOUND, targetName));
 		else if (player.getFriendList().getFriend(target.getObjectId()) != null)
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_NO_BUDDY);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_NO_BUDDY());
 		else if (player.getBlockList().contains(target.getObjectId()))
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_ALREADY_BLOCKED);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BLOCKLIST_ALREADY_BLOCKED());
 		else if (!SocialService.addBlockedUser(player, target, reason))
 			log.error("Failed to add " + target.getName() + " to the block list for " + player.getName() + " - check database setup.");
 	}
