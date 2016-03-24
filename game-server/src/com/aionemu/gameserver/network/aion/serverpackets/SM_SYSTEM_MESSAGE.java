@@ -12313,6 +12313,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Current users: %0
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_LIST_USER(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300641, value0);
+	}
+
+	/**
 	 * The server is due to shut down in %0 seconds. Please quit the game.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_SERVER_SHUTDOWN(int num0) {
@@ -25099,36 +25106,42 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_CHAT_IDArena_Solo_S4_System5() {
 		return new SM_SYSTEM_MESSAGE(1401086);
 	}
+
 	/**
 	 * You cannot attack while on board.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ATTACK_RESTRICTION_RIDE() {
 		return new SM_SYSTEM_MESSAGE(1401093);
 	}
+
 	/**
 	 * You cannot use this item while on board.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_RESTRICTION_RIDE() {
 		return new SM_SYSTEM_MESSAGE(1401094);
 	}
+
 	/**
 	 * You cannot open a private store while on board.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE() {
 		return new SM_SYSTEM_MESSAGE(1401095);
 	}
+
 	/**
 	 * You cannot gather while on board.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GATHER_RESTRICTION_RIDE() {
 		return new SM_SYSTEM_MESSAGE(1401096);
 	}
+
 	/**
 	 * You cannot craft while on board.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_COMBINE_RESTRICTION_RIDE() {
 		return new SM_SYSTEM_MESSAGE(1401097);
 	}
+
 	/**
 	 * You cannot use the commands /RecruitGroupMember or /RecruitAllianceMember right now.
 	 */
@@ -25175,6 +25188,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_INS_OWN_SUCCESS() {
 		return new SM_SYSTEM_MESSAGE(1401275);
 	}
+
 	/**
 	 * You are not authorized to enter.
 	 */

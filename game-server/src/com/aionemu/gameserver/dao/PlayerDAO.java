@@ -161,14 +161,6 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract int getCharacterCountForRace(Race race);
 
 	/**
-	 * Return online characters count
-	 *
-	 * @param none
-	 * @return
-	 */
-	public abstract int getOnlinePlayerCount();
-
-	/**
 	 * Returns a Set of objectId of accounts that are inactive for more than dayOfInactivity days
 	 *
 	 * @param daysOfInactivity

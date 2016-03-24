@@ -614,24 +614,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return count;
 	}
 
-	@Override
-	public int getOnlinePlayerCount() {
-		int count = 0;
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) AS `count` FROM `players` WHERE `online` = ?")) {
-				stmt.setBoolean(1, true);
-				try (ResultSet rs = stmt.executeQuery()) {
-					rs.next();
-					count = rs.getInt("count");
-				}
-			}
-		} catch (Exception e) {
-			return 0;
-		}
-		return count;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
