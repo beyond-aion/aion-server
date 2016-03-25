@@ -1980,7 +1980,7 @@ public class Player extends Creature {
 		ChainCondition cond = template.getChainCondition();
 		if (cond != null && cond.getAllowedActivations() > 1) { // exception for multicast
 			int chainCount = getChainSkills().getCurrentChainCount(cond.getCategory());
-			if (chainCount > 0 && chainCount < cond.getAllowedActivations())
+			if (chainCount > 0 && chainCount < cond.getAllowedActivations() && !getChainSkills().isChainExpired())
 				return false;
 		}
 		return super.isSkillDisabled(template);
