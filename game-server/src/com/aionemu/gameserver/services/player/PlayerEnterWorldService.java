@@ -459,7 +459,7 @@ public final class PlayerEnterWorldService {
 				continue;
 			IStorage storage = player.getStorage(st.getId());
 			if (storage != null) {
-				for (Item item : storage.getItemsWithKinah())
+				for (Item item : storage.getItems())
 					if (item.getExpireTime() > 0)
 						ExpireTimerTask.getInstance().addTask(item, player);
 			}
