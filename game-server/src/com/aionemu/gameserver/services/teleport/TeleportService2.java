@@ -81,7 +81,7 @@ public class TeleportService2 {
 		}
 
 		if (template.getTeleLocIdData() == null) {
-			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
+			log.warn(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
@@ -90,7 +90,7 @@ public class TeleportService2 {
 
 		TeleportLocation location = template.getTeleLocIdData().getTeleportLocation(locId);
 		if (location == null) {
-			log.info(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
+			log.warn(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
@@ -99,7 +99,7 @@ public class TeleportService2 {
 
 		TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(locId);
 		if (locationTemplate == null) {
-			log.info(String.format("Missing info at teleport_location.xml with locId: %d", locId));
+			log.warn(String.format("Missing info at teleport_location.xml with locId: %d", locId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			if (player.isGM())
 				PacketSendUtility.sendMessage(player, "Missing info at teleport_location.xml with locId: " + locId);
