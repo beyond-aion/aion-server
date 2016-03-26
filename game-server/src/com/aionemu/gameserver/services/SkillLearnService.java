@@ -30,9 +30,12 @@ public class SkillLearnService {
 	}
 
 	private static void sendPacket(Player player, PlayerSkillEntry skill, boolean isNew) {
-		if (skill.isProfessionSkill())
-			PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, isNew ? 1330061 : 1330005, false));
-		else if (isNew)
+		if (skill.isProfessionSkill()) {
+			if (skill.isTappingSkill())
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, isNew ? 1330004 : 1330005, false));
+			else
+				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, isNew ? 1330061 : 1330064, false));
+		} else if (isNew)
 			PacketSendUtility.sendPacket(player,
 				new SM_SKILL_LIST(skill, skill.isStigmaSkill() ? skill.isLinkedStigmaSkill() ? 1402891 : 1300401 : 1300050, true));
 		else

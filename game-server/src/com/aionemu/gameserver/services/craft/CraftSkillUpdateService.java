@@ -4,9 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +17,12 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.templates.CraftLearnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke, sphinx
@@ -138,7 +137,7 @@ public class CraftSkillUpdateService {
 			skillLvl = skillList.getSkillLevel(skillId);
 
 		if (!cost.containsKey(skillLvl)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390233));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
 			return;
 		}
 
@@ -154,13 +153,13 @@ public class CraftSkillUpdateService {
 
 		// Prevents player from buying expert craft upgrade (399 to 400)
 		if (skillLvl == 399) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300834));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_MONEY());
 			return;
 		}
 
 		// There is no upgrade payment for Essence and Aether tapping at 449, skip.
 		if (skillLvl == 449 && (skillId == 30002 || skillId == 30003)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390233));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
 			return;
 		}
 
@@ -192,9 +191,8 @@ public class CraftSkillUpdateService {
 				if (price < kinah && responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_LEARN)) {
 					PlayerSkillList skillList = responder.getSkillList();
 					skillList.addSkill(responder, skillId, skillLevel + 1);
-					PacketSendUtility.sendPacket(responder, new SM_SKILL_LIST(skillList.getSkillEntry(skillId), 1330004, false));
 				} else {
-					PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1300388));
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 				}
 			}
 
