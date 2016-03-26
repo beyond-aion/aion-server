@@ -5053,7 +5053,7 @@
 		</spawn>
 		<!-- Mahelnu -->
 		<spawn npc_id="798365" respawn_time="295">
-			<spot x="2361.46" y="720.849" z="351.899" h="69"/>
+			<spot x="2326.638" y="694.2101" z="351.02917" h="2"/>
 		</spawn>
 		<!-- Mailbox -->
 		<spawn npc_id="700000" respawn_time="295">
