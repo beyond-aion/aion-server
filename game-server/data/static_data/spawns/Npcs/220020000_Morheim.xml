@@ -5120,6 +5120,10 @@
 			<spot x="2173.42" y="1127.53" z="169.086" h="102"/>
 			<spot x="2186.61" y="1161.46" z="164.207" h="33"/>
 		</spawn>
+		<!-- Mist Mane Teleport Statue -->
+		<spawn npc_id="730739" respawn_time="295">
+			<spot x="2795.2087" y="1083.8572" z="172.36076" h="22" static_id="2443"/>
+		</spawn>
 		<!-- Mistress Harfuia -->
 		<spawn npc_id="212663" respawn_time="1800">
 			<spot x="2778" y="1980" z="113.75" h="49"/>
