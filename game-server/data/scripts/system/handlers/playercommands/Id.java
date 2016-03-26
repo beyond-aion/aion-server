@@ -1,8 +1,7 @@
 package playercommands;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,14 +37,14 @@ public class Id extends PlayerCommand {
 				return;
 			}
 
-			if (!(target instanceof Npc)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 
 			VisibleObjectTemplate template = target.getObjectTemplate();
 			sendInfo(player, target.getClass().getSimpleName() + ": "
-				+ ChatUtil.path(StringUtils.capitalize(template.getName()) + " | " + template.getTemplateId(), template.getTemplateId()));
+				+ ChatUtil.path(ChatUtil.nameId(template.getNameId() * 2 + 1) + " | " + template.getTemplateId(), template.getTemplateId()));
 			return;
 		} else {
 			int id = ChatUtil.getItemId(params[0]);
@@ -55,7 +54,7 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid item.");
 					return;
 				}
-				sendInfo(player, "Item name: " + template.getName() + "\nID: " + id);
+				sendInfo(player, "Item: " + ChatUtil.nameId(template.getNameId()) + "\nID: " + id);
 				return;
 			}
 
@@ -66,7 +65,7 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid quest.");
 					return;
 				}
-				sendInfo(player, "Quest name: " + template.getName() + "\nID: " + id);
+				sendInfo(player, "Quest: " + ChatUtil.nameId(template.getNameId() * 2 + 1) + "\nID: " + id);
 				return;
 			}
 		}

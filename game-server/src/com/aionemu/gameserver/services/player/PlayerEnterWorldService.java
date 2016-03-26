@@ -435,7 +435,7 @@ public final class PlayerEnterWorldService {
 		GMService.getInstance().onPlayerLogin(player);
 
 		if (player.getAbyssRank().getRank().getId() >= AbyssRankEnum.STAR1_OFFICER.getId()) {
-			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON);
+			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON());
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), player.getAbyssRank().getRank().getGpLossPerDay()));
 		}
 
@@ -459,7 +459,7 @@ public final class PlayerEnterWorldService {
 				continue;
 			IStorage storage = player.getStorage(st.getId());
 			if (storage != null) {
-				for (Item item : storage.getItemsWithKinah())
+				for (Item item : storage.getItems())
 					if (item.getExpireTime() > 0)
 						ExpireTimerTask.getInstance().addTask(item, player);
 			}

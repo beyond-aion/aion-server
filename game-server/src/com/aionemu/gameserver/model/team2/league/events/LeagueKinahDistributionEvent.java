@@ -28,7 +28,7 @@ public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent implements
 	@Override
 	public void handleEvent() {
 		if (eventPlayer.getInventory().getKinah() < amount) {
-			PacketSendUtility.sendPacket(eventPlayer, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(eventPlayer, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 

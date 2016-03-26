@@ -2,28 +2,29 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="import">
 		<xs:annotation>
-			<xs:documentation>
-				<![CDATA[
-				Attributes:
-				'file' :
-					Required attribute.
-					Specified path to imported file or directory.
-				'skipRoot' :
-					Optional attribute.
-					Default value: 'false'
-					If enabled, then root tags of imported files are ignored.
-				'recirsiveImport':
-					Optional attribute.
-					Default value: 'true'
-					If enabled and attribute 'file' points to the directory, then all xml files in that
-					directory ( and deeper - recursively ) will be imported, otherwise only files inside that directory (without it subdirectories)
-				]]>
-			</xs:documentation>
+			<xs:documentation>Used to import one or multiple xml's into the target xml.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute type="xs:string" name="file" use="required"/>
-			<xs:attribute type="xs:boolean" name="skipRoot" use="optional" default="false"/>
-			<xs:attribute type="xs:boolean" name="recursiveImport" use="optional" default="true"/>
+			<!-- ATTENTION: Changing default values of this schema does not affect the default values when merging static data. -->
+			<!-- To change them, you need to edit com.aionemu.gameserver.dataholders.loadingutils.XmlMerger#processImportElement. -->
+			<xs:attribute type="xs:string" name="file" use="required">
+				<xs:annotation>
+					<xs:documentation>Path to the file or directory to import.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute type="xs:boolean" name="singleRootTag" use="optional" default="false">
+				<xs:annotation>
+					<xs:documentation>If enabled and file is a directory, the first file's found root tag will enclose all found files (which will then be
+						written without their root tags).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute type="xs:boolean" name="recursiveImport" use="optional" default="true">
+				<xs:annotation>
+					<xs:documentation>If enabled and attribute 'file' points to a directory, then also xml files in all subdirectories will be imported.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

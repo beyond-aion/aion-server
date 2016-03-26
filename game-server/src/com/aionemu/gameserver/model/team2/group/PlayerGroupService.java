@@ -63,13 +63,13 @@ public class PlayerGroupService {
 	public static final boolean canInvite(Player inviter, Player invited) {
 		if (inviter.isInInstance()) {
 			if (AutoGroupService.getInstance().isAutoInstance(inviter.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND);
+				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
 				return false;
 			}
 		}
 		if (invited.isInInstance()) {
 			if (AutoGroupService.getInstance().isAutoInstance(invited.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND);
+				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
 				return false;
 			}
 		}

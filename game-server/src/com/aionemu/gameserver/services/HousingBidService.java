@@ -599,7 +599,7 @@ public class HousingBidService extends AbstractCronTask {
 		}
 		int minutesLeft = getMinutesTillAuction();
 		if (minutesLeft == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT());
 			return;
 		}
 
@@ -608,21 +608,21 @@ public class HousingBidService extends AbstractCronTask {
 			return;
 
 		if (player.getInventory().getKinah() < bidOffer) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 
 		// Server side check for own house. Client side exists, but to be sure
 		House bidHouse = HousingService.getInstance().getHouseByAddress(entry.getAddress());
 		if (player.getObjectId() == bidHouse.getOwnerId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_MY_HOUSE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_MY_HOUSE());
 			return;
 		}
 
 		int playerAddress = HousingService.getInstance().getPlayerAddress(player.getObjectId());
 		House playerHouse = HousingService.getInstance().getHouseByAddress(playerAddress);
 		if (playerHouse != null && playerHouse.isInGracePeriod()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE());
 			return;
 		}
 
@@ -633,24 +633,24 @@ public class HousingBidService extends AbstractCronTask {
 		}
 
 		if (playerHouse != null && !playerHouse.isFeePaid() && HousingConfig.ENABLE_HOUSE_PAY) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OVERDUE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OVERDUE());
 			return;
 		}
 
 		if (bidOffer - entry.getBidPrice() >= entry.getBidPrice() * HousingConfig.HOUSE_AUCTION_BID_LIMIT / 100f) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT());
 			return;
 		}
 
 		HouseBidEntry currentBid = playerBids.get(player.getObjectId());
 		if (currentBid != null) {
 			if (entry.getLastBiddingPlayer() == player.getObjectId()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_SUCC_BID_HOUSE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_SUCC_BID_HOUSE());
 				return;
 			}
 			HouseBidEntry houseBid = getBidByEntryIndex(currentBid.getEntryIndex());
 			if (houseBid.getBidPrice() == currentBid.getBidPrice()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE());
 				return;
 			}
 		}
@@ -666,7 +666,7 @@ public class HousingBidService extends AbstractCronTask {
 				}
 			});
 		} else if (!isBiddingAllowed()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT());
 			return;
 		}
 
@@ -682,7 +682,7 @@ public class HousingBidService extends AbstractCronTask {
 			if (previousPlayer > 0) {
 				PlayerCommonData prevPcd = getPlayerData(previousPlayer);
 				if (prevPcd.isOnline())
-					PacketSendUtility.sendPacket(prevPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_CANCEL);
+					PacketSendUtility.sendPacket(prevPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_CANCEL());
 				MailFormatter.sendHouseAuctionMail(bidHouse, prevPcd, AuctionResult.FAILED_BID, time.getTime(), entry.getBidPrice());
 			}
 
@@ -717,7 +717,7 @@ public class HousingBidService extends AbstractCronTask {
 			AuctionResult result = AuctionResult.getResultFromId(Integer.parseInt(titleParts[0]));
 			if (result == AuctionResult.FAILED_BID) {
 				needsRefresh = true;
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_CANCEL);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_CANCEL());
 			} else if (result == AuctionResult.WIN_BID || result == AuctionResult.GRACE_START) {
 				needsRefresh = true;
 				int address = Integer.parseInt(bodyParts[1]);
@@ -739,9 +739,9 @@ public class HousingBidService extends AbstractCronTask {
 		letters = player.getMailbox().getNewSystemLetters("$$HS_OVERDUE_");
 		for (Letter letter : letters) {
 			if (letter.getSenderName().endsWith("FINAL") || letter.getSenderName().endsWith("3RD"))
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE());
 			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE());
 		}
 	}
 

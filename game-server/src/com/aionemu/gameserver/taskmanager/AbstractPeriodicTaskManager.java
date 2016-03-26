@@ -15,7 +15,8 @@ public abstract class AbstractPeriodicTaskManager extends AbstractLockManager im
 	protected static final Logger log = LoggerFactory.getLogger(AbstractPeriodicTaskManager.class);
 
 	public AbstractPeriodicTaskManager(int period) {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(this, 1000 + Rnd.get(period), Rnd.get(period - 5, period + 5));
+		int delay = Math.max(0, Rnd.get(period - 5, period + 5));
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(this, delay, delay);
 		log.info(getClass().getSimpleName() + " initialized.");
 	}
 }

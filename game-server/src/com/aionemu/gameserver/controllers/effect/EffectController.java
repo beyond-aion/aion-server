@@ -589,13 +589,13 @@ public class EffectController {
 					effect.endEffect();
 					abnormalEffectMap.remove(effect.getStack());
 				} else if (owner instanceof Player) {
-					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT);
+					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT());
 					count++;
 					power += 10;
 				}
 				count--;
 			} else if (owner instanceof Player)
-				PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL);
+				PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL());
 		}
 	}
 
@@ -626,10 +626,10 @@ public class EffectController {
 						effect.endEffect();
 						abnormalEffectMap.remove(effect.getStack());
 					} else if (owner instanceof Player)
-						PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT);
+						PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT());
 					count--;
 				} else if (owner instanceof Player)
-					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL);
+					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL());
 			}
 		}
 		return count;

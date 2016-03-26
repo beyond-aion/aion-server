@@ -76,11 +76,11 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 	private void tryChangeCharacterName(Player player, String newName, int itemObjId) {
 		if (player.getName().equals(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_SAME_YOUR_NAME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_SAME_YOUR_NAME());
 		else if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbidden(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT());
 		else if (!PlayerService.isFreeName(newName) || !CustomConfig.OLD_NAMES_COUPON_DISABLED && PlayerService.isOldName(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
 			AuditLogger.info(player, "Tried to rename himself without coupon.");
@@ -113,13 +113,13 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 	private void tryChangeLegionName(Player player, String newName, int itemObjId) {
 		if (!player.isLegionMember() || !player.getLegionMember().isBrigadeGeneral())
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME());
 		else if (player.getLegion().getLegionName().equals(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME());
 		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbidden(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT());
 		else if (DAOManager.getDAO(LegionDAO.class).isNameUsed(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
 			AuditLogger.info(player, "Tried to rename legion without coupon.");

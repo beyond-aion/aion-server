@@ -14,7 +14,6 @@
 			30110 [XML] Swimming in Poison
 		[END] SUMMARY
 -->
-	<!-- REPORTING QUESTS -->
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="30002" start_npc_ids="799029"/>
 	<item_collecting id="30008" start_npc_ids="799029"/>
@@ -26,13 +25,7 @@
 	<item_collecting id="30108" start_npc_ids="799333"/>
 	<item_collecting id="30110" start_npc_ids="799335"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30004" start_npc_ids="799030">
-		<monster var="0" end_var="1" npc_ids="215783"/>
-	</monster_hunt>
-	<monster_hunt id="30104" start_npc_ids="799334">
-		<monster var="0" end_var="1" npc_ids="215783"/>
-	</monster_hunt>
-	<monster_hunt id="30105" start_npc_ids="799333">
-		<monster var="0" end_var="25" npc_ids="215858 215809 216336 216344 216328 215857 215808 216343 215814 216327"/>
-	</monster_hunt>
+	<monster_hunt id="30004" start_npc_ids="799030"/>
+	<monster_hunt id="30104" start_npc_ids="799334"/>
+	<monster_hunt id="30105" start_npc_ids="799333"/>
 </quest_scripts>

@@ -32,7 +32,7 @@ public class PlayerStartMentoringEvent extends AlwaysTrueTeamEvent implements Pr
 			return;
 		}
 		player.setMentor(true);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_MENTOR_START);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_MENTOR_START());
 		group.applyOnMembers(this);
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ABYSS_RANK_UPDATE(2, player));
 	}

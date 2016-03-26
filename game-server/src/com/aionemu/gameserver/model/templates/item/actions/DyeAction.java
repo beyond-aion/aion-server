@@ -33,7 +33,7 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		if (targetItem == null) { // no item selected.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
 		}
 
@@ -80,16 +80,16 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 	@Override
 	public boolean canAct(Player player, Item parentItem, HouseObject<?> targetHouseObject) {
 		if (targetHouseObject == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
 		}
 		if (color.equals("no") && targetHouseObject.getColor() == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_ERROR_CANNOTREMOVE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_ERROR_CANNOTREMOVE());
 			return false;
 		}
 		boolean canPaint = targetHouseObject.getObjectTemplate().getCanDye();
 		if (!canPaint)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_ERROR_CANNOTPAINT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_ERROR_CANNOTPAINT());
 		return canPaint;
 	}
 

@@ -26,7 +26,7 @@ public class DpUseAction extends Action {
 		int currentDp = effector.getCommonData().getDp();
 
 		if (currentDp <= 0 || currentDp < value) {
-			PacketSendUtility.sendPacket(effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_DP);
+			PacketSendUtility.sendPacket(effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_DP());
 			return false;
 		}
 		effector.getCommonData().setDp(currentDp - value);

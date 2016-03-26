@@ -220,7 +220,7 @@ public class Skill {
 			&& targetRangeAttribute != TargetRangeAttribute.AREA) {
 			log.debug("targettype failed");
 			if (effector instanceof Player) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 			}
 			return false;
 		}

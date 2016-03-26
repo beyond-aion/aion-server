@@ -44,7 +44,7 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 
 		PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_INFO(alliance));
 		PacketSendUtility.sendPacket(invited, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
-		PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE);
+		PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE());
 		PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
 		PacketSendUtility.broadcastPacketTeam(invited, new SM_ABYSS_RANK_UPDATE(1, invited), true, false);
 

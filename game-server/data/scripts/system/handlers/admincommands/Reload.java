@@ -2,8 +2,6 @@ package admincommands;
 
 import static org.apache.commons.io.filefilter.FileFilterUtils.and;
 import static org.apache.commons.io.filefilter.FileFilterUtils.makeSVNAware;
-import static org.apache.commons.io.filefilter.FileFilterUtils.notFileFilter;
-import static org.apache.commons.io.filefilter.FileFilterUtils.prefixFileFilter;
 import static org.apache.commons.io.filefilter.FileFilterUtils.suffixFileFilter;
 
 import java.io.File;
@@ -15,8 +13,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import javolution.util.FastTable;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
@@ -39,13 +35,15 @@ import com.aionemu.gameserver.dataholders.XMLQuests;
 import com.aionemu.gameserver.dataholders.loadingutils.XmlValidationHandler;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
+import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
+
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -62,7 +60,7 @@ public class Reload extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length != 1) {
-			PacketSendUtility.sendMessage(admin, SYNTAX);
+			sendInfo(admin, SYNTAX);
 			return;
 		}
 		if (params[0].equals("quest")) {
@@ -86,10 +84,10 @@ public class Reload extends AdminCommand {
 				}
 				QuestEngine.getInstance().reload(null);
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Quest reload failed!");
+				sendInfo(admin, "Quest reload failed!");
 				log.error("quest reload fail", e);
 			} finally {
-				PacketSendUtility.sendMessage(admin, "Quest reload Success!");
+				sendInfo(admin, "Quest reload Success!");
 			}
 		} else if (params[0].equals("skill")) {
 			File dir = new File("./data/static_data/skills");
@@ -105,10 +103,10 @@ public class Reload extends AdminCommand {
 				}
 				DataManager.SKILL_DATA.setSkillTemplates(newTemplates);
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Skill reload failed!");
+				sendInfo(admin, "Skill reload failed!");
 				log.error("Skill reload failed!", e);
 			} finally {
-				PacketSendUtility.sendMessage(admin, "Skill reload Success!");
+				sendInfo(admin, "Skill reload Success!");
 			}
 		} else if (params[0].equalsIgnoreCase("npcskill")) {
 			File dir = new File("./data/static_data/npc_skills");
@@ -125,9 +123,9 @@ public class Reload extends AdminCommand {
 				}
 				DataManager.NPC_SKILL_DATA.setNpcSkillTemplates(newTemplates);
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Npc_Skill reload failed!");
+				sendInfo(admin, "Npc_Skill reload failed!");
 			} finally {
-				PacketSendUtility.sendMessage(admin, "Npc_Skill reload Success!");
+				sendInfo(admin, "Npc_Skill reload Success!");
 			}
 		} else if (params[0].equals("npc")) {
 			DataManager.NPC_DATA.reload(admin);
@@ -135,7 +133,7 @@ public class Reload extends AdminCommand {
 			DataManager.ITEM_DATA.reload(admin);
 		} else if (params[0].equals("ai")) {
 			AI2Engine.getInstance().reload();
-			PacketSendUtility.sendMessage(admin, "Ai reload Success!");
+			sendInfo(admin, "Ai reload Success!");
 		}
 
 		else if (params[0].equals("portal")) {
@@ -152,17 +150,17 @@ public class Reload extends AdminCommand {
 				// }
 				// DataManager.PORTAL_DATA.setPortals(newTemplates);
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Portal reload failed!");
+				sendInfo(admin, "Portal reload failed!");
 				log.error("Portal reload failed!", e);
 			} finally {
-				PacketSendUtility.sendMessage(admin, "Portal reload Success!");
+				sendInfo(admin, "Portal reload Success!");
 			}
 		} else if (params[0].equals("commands")) {
 			ChatProcessor.getInstance().reload();
-			PacketSendUtility.sendMessage(admin, "Admin commands successfully reloaded!");
+			sendInfo(admin, "Admin commands successfully reloaded!");
 		} else if (params[0].equals("config")) {
 			Config.reload();
-			PacketSendUtility.sendMessage(admin, "Configs successfully reloaded!");
+			sendInfo(admin, "Configs successfully reloaded!");
 		} else if (params[0].equals("drop")) {
 			File xml = new File("./data/static_data/custom_drop/custom_drop.xml");
 			CustomDrop data = null;
@@ -173,39 +171,44 @@ public class Reload extends AdminCommand {
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
 				data = (CustomDrop) un.unmarshal(xml);
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "CustomDrop reload failed! Keeping the last version ...");
+				sendInfo(admin, "CustomDrop reload failed! Keeping the last version ...");
 				log.error("CustomDrop reload failed!", e);
 				return;
 			}
 			if (data != null)
 				DataManager.CUSTOM_NPC_DROP = data;
 			NpcDropData.reload();
-			PacketSendUtility.sendMessage(admin, "NpcDrops successfully reloaded!");
+			sendInfo(admin, "NpcDrops successfully reloaded!");
 		} else if (params[0].equals("gameshop")) {
 			InGameShopEn.getInstance().reload();
-			PacketSendUtility.sendMessage(admin, "Gameshop successfully reloaded!");
+			sendInfo(admin, "Gameshop successfully reloaded!");
 		} else if (params[0].equals("events")) {
-			File eventXml = new File("./data/static_data/events_config/events_config.xml");
-			EventData data = null;
+			File dir = new File("./data/static_data/events/timed_events");
+			List<EventTemplate> newTemplates = new FastTable<>();
 			try {
 				JAXBContext jc = JAXBContext.newInstance(EventData.class);
 				Unmarshaller un = jc.createUnmarshaller();
-				un.setEventHandler(new XmlValidationHandler());
 				un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-				data = (EventData) un.unmarshal(eventXml);
+				for (File file : listFiles(dir, true)) {
+					EventData data = (EventData) un.unmarshal(file);
+					if (data != null)
+						newTemplates.addAll(data.getEvents());
+				}
 			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Event reload failed! Keeping the last version ...");
+				sendInfo(admin, "Event reload failed! Keeping the last version ...");
 				log.error("Event reload failed!", e);
-				return;
+				newTemplates.clear();
+			} finally {
+				sendInfo(admin, "Event reload Success!");
 			}
-			if (data != null) {
+			if (newTemplates.isEmpty()) {
 				EventService.getInstance().stop();
-				DataManager.EVENT_DATA.setEvents(data.getEvents());
+				DataManager.EVENT_DATA.setEvents(newTemplates);;
 				EventService.getInstance().start();
 			}
-			PacketSendUtility.sendMessage(admin, DataManager.EVENT_DATA.size() + " Events reloaded (" + EventService.getInstance().getEnabledEvents().size() + " active).");
+			sendInfo(admin, DataManager.EVENT_DATA.size() + " Events reloaded (" + EventService.getInstance().getEnabledEvents().size() + " active).");
 		} else
-			PacketSendUtility.sendMessage(admin, SYNTAX);
+			sendInfo(admin, SYNTAX);
 
 	}
 
@@ -225,11 +228,6 @@ public class Reload extends AdminCommand {
 	private Collection<File> listFiles(File root, boolean recursive) {
 		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
 
-		return FileUtils.listFiles(root, and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, SYNTAX);
+		return FileUtils.listFiles(root, and(suffixFileFilter(".xml"), HiddenFileFilter.VISIBLE), dirFilter);
 	}
 }

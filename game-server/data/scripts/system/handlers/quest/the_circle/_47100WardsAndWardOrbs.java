@@ -56,7 +56,7 @@ public class _47100WardsAndWardOrbs extends QuestHandler {
 						if (player.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
 							return true;
 						else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee());
 					}
 				}
 			}

@@ -52,7 +52,7 @@ public class Addcskill extends ConsoleCommand {
 
 		try {
 
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
+			JAXBContext jc = JAXBContext.newInstance(SkillData.class);
 			Unmarshaller un = jc.createUnmarshaller();
 			SkillData data = (SkillData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/skills.xml"));
 
@@ -76,14 +76,6 @@ public class Addcskill extends ConsoleCommand {
 	@Override
 	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
-	}
-
-	@XmlRootElement(name = "ae_static_data")
-	@XmlAccessorType(XmlAccessType.NONE)
-	private static class StaticData {
-
-		@XmlElement(name = "skills")
-		public SkillData skillData;
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

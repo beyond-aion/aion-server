@@ -39,7 +39,7 @@ public class ChatBanService {
 		player.getController().cancelTask(TaskId.GAG);
 		ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), 0);
 		if (chatBans.remove(player.getObjectId()) != null && player.isOnline())
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_CHAT_NOW);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_CHAT_NOW());
 	}
 
 	private static void registerUnban(Player player, long delay) {

@@ -43,7 +43,7 @@ public class MpUseAction extends Action {
 
 		if (effector instanceof Player) {
 			if (currentMp <= 0 || currentMp < valueWithDelta) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP);
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
 				return false;
 			}
 		}

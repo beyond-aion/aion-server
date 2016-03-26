@@ -18,7 +18,8 @@ import javolution.util.FastTable;
 
 /**
  * Class with basic math.<br>
- * Thanks to: <li>
+ * Thanks to:
+ * <li>
  * <ul>
  * http://geom-java.sourceforge.net/
  * </ul>
@@ -288,12 +289,29 @@ public class MathUtil {
 	 * @return true if objects are in range, false otherwise
 	 */
 	public static boolean isInRange(VisibleObject object1, VisibleObject object2, float range) {
+		return isInRange(object1, object2, range, true);
+	}
+
+	/**
+	 * @param object1
+	 * @param object2
+	 * @param range
+	 * @param centerToCenter
+	 * @return True if objects are in the given range. If centerToCenter is false, the dimensions of both objects are considered (distance between
+	 *         both objects bound radius instead of the center).
+	 */
+	public static boolean isInRange(VisibleObject object1, VisibleObject object2, float range, boolean centerToCenter) {
 		if (object1.getWorldId() != object2.getWorldId() || object1.getInstanceId() != object2.getInstanceId())
 			return false;
 
 		float dx = (object2.getX() - object1.getX());
 		float dy = (object2.getY() - object1.getY());
-		return dx * dx + dy * dy < range * range;
+		float distSquared = dx * dx + dy * dy;
+		if (!centerToCenter) {
+			float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
+			distSquared -= offset * offset;
+		}
+		return distSquared < range * range;
 	}
 
 	/**
@@ -363,7 +381,7 @@ public class MathUtil {
 	 * Returns true if the given value is between lowerCap(inclusive) and upperCap(inclusive)
 	 */
 	public static boolean isBetween(final int lowerCap, final int upperCap, final int value) {
-		return lowerCap <= value && value <= upperCap; 
+		return lowerCap <= value && value <= upperCap;
 	}
 
 	/**
@@ -388,8 +406,7 @@ public class MathUtil {
 	 * @return float
 	 */
 	public final static float convertHeadingToDegree(byte clientHeading) {
-		float degree = clientHeading * 3;
-		return degree;
+		return clientHeading * 3;
 	}
 
 	/**
@@ -398,6 +415,20 @@ public class MathUtil {
 	 */
 	public final static byte convertDegreeToHeading(float angle) {
 		return (byte) (angle / 3);
+	}
+
+	/**
+	 * @return The heading for obj1 to look towards the specified x and y coordinates.
+	 */
+	public static byte getHeadingTowards(VisibleObject obj1, float x, float y) {
+		return convertDegreeToHeading(calculateAngleFrom(obj1.getX(), obj1.getY(), x, y));
+	}
+
+	/**
+	 * @return The heading for obj1 to look towards obj2.
+	 */
+	public static byte getHeadingTowards(VisibleObject obj1, VisibleObject obj2) {
+		return getHeadingTowards(obj1, obj2.getX(), obj2.getY());
 	}
 
 	/**
@@ -559,19 +590,5 @@ public class MathUtil {
 		}
 
 		return x; // return sqrt(squarD) with precision of rootMC
-	}
-	
-	/**
-	 * @return The heading for obj1 to look towards the specified x and y coordinates.
-	 */
-	public static byte getHeadingTowards(VisibleObject obj1, float x, float y) {
-		return convertDegreeToHeading(calculateAngleFrom(obj1.getX(), obj1.getY(), x, y));
-	}
-
-	/**
-	 * @return The heading for obj1 to look towards obj2.
-	 */
-	public static byte getHeadingTowards(VisibleObject obj1, VisibleObject obj2) {
-		return getHeadingTowards(obj1, obj2.getX(), obj2.getY());
 	}
 }

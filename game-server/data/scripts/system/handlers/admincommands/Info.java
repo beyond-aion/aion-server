@@ -41,11 +41,9 @@ public class Info extends AdminCommand {
 			Player player = (Player) target;
 			Pet pet = player.getPet();
 			sendInfo(admin,
-				"[Info about " + player.getName() + "]" + "\nPlayer Id: " + player.getObjectId() + "\nMap ID: " + player.getWorldId() + "\nX: "
-					+ player.getPosition().getX() + " / Y: " + player.getPosition().getY() + " / Z: " + player.getPosition().getZ() + " / Heading: "
-					+ player.getPosition().getHeading() + (pet != null ? "\nPet Id: " + pet.getPetId() + " / ObjectId: " + pet.getObjectId() : "")
-					+ "\n Town ID: " + TownService.getInstance().getTownResidence(player) + "\n Tribe: " + player.getTribe() + "\n TribeBase: "
-					+ player.getBaseTribe());
+				"[Info about " + player.getName() + "]" + "\nPlayer Id: " + player.getObjectId() + "\n" + player.getPosition().toCoordString()
+					+ (pet != null ? "\nPet Id: " + pet.getPetId() + " / ObjectId: " + pet.getObjectId() : "") + "\n Town ID: "
+					+ TownService.getInstance().getTownResidence(player) + "\n Tribe: " + player.getTribe() + "\n TribeBase: " + player.getBaseTribe());
 
 			sendInfo(admin,
 				"[Stats]" + "\nPvP attack: " + player.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%" + "\nPvP p. attack: "
@@ -111,8 +109,7 @@ public class Info extends AdminCommand {
 			Npc npc = (Npc) admin.getTarget();
 			sendInfo(admin,
 				"[Info about target]" + "\nName: " + npc.getName() + "\nId: " + npc.getNpcId() + " / ObjectId: " + admin.getTarget().getObjectId()
-					+ " / StaticId: " + npc.getSpawn().getStaticId() + "\nMap ID: " + admin.getTarget().getWorldId() + "\nX: " + admin.getTarget().getX()
-					+ " / Y: " + admin.getTarget().getY() + " / Z: " + admin.getTarget().getZ() + " / Heading: " + admin.getTarget().getHeading() + " / Angle: "
+					+ " / StaticId: " + npc.getSpawn().getStaticId() + "\n" + admin.getTarget().getPosition().toCoordString() + ", Angle: "
 					+ PositionUtil.getAngleToTarget(admin, admin.getTarget()) + " \n Town ID:"
 					+ TownService.getInstance().getTownIdByPosition((Creature) target));
 			if (npc instanceof SiegeNpc) {
@@ -172,10 +169,8 @@ public class Info extends AdminCommand {
 				}
 			}
 		} else {
-			sendInfo(admin,
-				"[Info about " + target.getClass().getSimpleName() + "]\n" + "Name: " + target.getName() + "\nId: "
-					+ target.getObjectTemplate().getTemplateId() + " / ObjectId: " + target.getObjectId() + "\nMap ID: " + target.getWorldId() + "\nX: "
-					+ target.getX() + " / Y: " + target.getY() + " / Z: " + target.getZ() + " / Heading: " + target.getHeading());
+			sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\n" + "Name: " + target.getName() + "\nId: "
+				+ target.getObjectTemplate().getTemplateId() + " / ObjectId: " + target.getObjectId() + "\n" + target.getPosition().toCoordString());
 		}
 	}
 }

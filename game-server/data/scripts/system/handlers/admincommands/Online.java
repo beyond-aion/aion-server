@@ -1,53 +1,35 @@
 package admincommands;
 
-import java.util.Iterator;
-
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
  * @author VladimirZ
+ * @modified Neon
  */
 public class Online extends AdminCommand {
 
 	public Online() {
-		super("online");
+		super("online", "Shows the number of online players.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-
-		int playerCount = DAOManager.getDAO(PlayerDAO.class).getOnlinePlayerCount();
-
 		int elyosCount = 0;
 		int asmoCount = 0;
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
 
-		while (iter.hasNext()) {
-			Player player = iter.next();
-			if (player.getRace() == Race.ELYOS) {
+		for (Player player : World.getInstance().getAllPlayers()) {
+			if (player.getRace() == Race.ELYOS)
 				elyosCount++;
-			} else if (player.getRace() == Race.ASMODIANS) {
+			else
 				asmoCount++;
-			}
 		}
 
-		if (playerCount == 1) {
-			PacketSendUtility.sendMessage(admin, "There is " + (playerCount) + " player online !");
-		} else {
-			PacketSendUtility.sendMessage(admin, "There are " + (playerCount) + " players online !");
-			PacketSendUtility.sendMessage(admin, "There are " + (elyosCount) + " elyos players online !");
-			PacketSendUtility.sendMessage(admin, "There are " + (asmoCount) + " asmo players online !");
-		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //online");
+		String countInfo = (elyosCount + asmoCount) + " (" + elyosCount + " Elyos / " + asmoCount + " Asmo" + (asmoCount == 1 ? ")" : "s)");
+		PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_LIST_USER(countInfo));
 	}
 }

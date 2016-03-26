@@ -28,7 +28,7 @@ public class Leveldown extends ConsoleCommand {
 
 		final VisibleObject target = admin.getTarget();
 		if (!(target instanceof Player)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 

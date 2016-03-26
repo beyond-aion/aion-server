@@ -169,7 +169,7 @@ public class DialogService {
 						public void acceptRequest(Creature requester, Player responder) {
 							if (player.getInventory().getKinah() >= price) {
 								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(expLost));
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SUCCESS_RECOVER_EXPERIENCE);
+								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SUCCESS_RECOVER_EXPERIENCE());
 								player.getCommonData().resetRecoverableExp();
 								player.getInventory().decreaseKinah(price, ItemUpdateType.STATS_CHANGE);
 								player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
@@ -191,7 +191,7 @@ public class DialogService {
 								.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
 						}
 					} else {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE());
 					}
 					break;
 				case ENTER_PVP: // (2.5)

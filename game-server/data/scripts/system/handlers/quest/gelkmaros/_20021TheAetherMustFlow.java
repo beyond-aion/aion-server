@@ -115,7 +115,7 @@ public class _20021TheAetherMustFlow extends QuestHandler {
 								changeQuestStep(env, 5, 6, false); // 6
 								return closeDialogWindow(env);
 							} else {
-								PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
+								PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY());
 								return sendQuestSelectionDialog(env);
 							}
 						}

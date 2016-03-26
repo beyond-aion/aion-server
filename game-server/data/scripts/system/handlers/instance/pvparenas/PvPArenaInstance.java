@@ -358,7 +358,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (!isInstanceDestroyed) {

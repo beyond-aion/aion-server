@@ -33,26 +33,13 @@ public class ChainCondition extends Condition {
 	@Override
 	public boolean validate(Skill env) {
 		if (env.getEffector() instanceof Player) {
-			long expireTime;
-			long now = System.currentTimeMillis();
 			ChainSkills chain = ((Player) env.getEffector()).getChainSkills();
 			ChainSkill currentSkill = chain.getCurrentChainSkill();
-			if (preCategory == null && category.contains("_1TH")) { // first skill of a chain
-				if (currentSkill.getLastUseTime() > 0
-					&& (now >= currentSkill.getLastUseTime() + env.getCooldown() || !currentSkill.getCategory().equals(category))) {
-					chain.resetChain(); // resets previous and current skill
-					currentSkill = chain.getCurrentChainSkill();
-				}
-			}
 
-			if (currentSkill.getCategory().equals(category)) { // multicast
-				if (currentSkill.getUseCount() >= selfCount) // max activation count
-					return false;
-				expireTime = currentSkill.getExpireTime();
-			} else {
-				expireTime = currentSkill.getLastUseTime() == 0 || time == 0 ? 0 : currentSkill.getLastUseTime() + time;
-			}
-			if (expireTime != 0 && now > expireTime) // check max allowed use time
+			if (shouldReset(chain, env))
+				chain.resetChain();
+
+			if (currentSkill.getCategory().equals(category) && currentSkill.getUseCount() >= selfCount) // multicast max activation count
 				return false;
 
 			if (preCategory != null) {
@@ -69,6 +56,26 @@ public class ChainCondition extends Condition {
 		env.setChainUsageDuration(time);
 		env.setIsMultiCast(selfCount > 1);
 		return true;
+	}
+
+	private boolean shouldReset(ChainSkills chain, Skill env) {
+		ChainSkill currentSkill = chain.getCurrentChainSkill();
+		if (!currentSkill.getCategory().isEmpty()) {
+			if (chain.isChainExpired()) // check max allowed use time
+				return true;
+
+			if (preCategory == null && category.contains("_1TH")) { // first skill of a chain
+				if (!currentSkill.getCategory().equals(category)) // other skill
+					return true;
+				if (currentSkill.getUseCount() == selfCount) // same skill
+					return true;
+				int maxActiveDuration = time > 0 ? time : env.getCooldown() * 100; // template cooldown is seconds * 10...
+				if (System.currentTimeMillis() > currentSkill.getLastUseTime() + maxActiveDuration)
+					return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

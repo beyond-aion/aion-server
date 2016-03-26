@@ -27,7 +27,7 @@ public class ExecuteWrapper implements Executor {
 		try {
 			runnable.run();
 		} catch (Throwable t) {
-			log.warn("Exception in a Runnable execution:", t);
+			log.error("Exception in a Runnable execution:", t);
 		} finally {
 			long runtimeInNanosec = System.nanoTime() - begin;
 			Class<? extends Runnable> clazz = runnable.getClass();

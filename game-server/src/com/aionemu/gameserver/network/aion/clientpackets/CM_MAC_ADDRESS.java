@@ -90,7 +90,7 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 					}
 				} else if (!account.getAllowedHddSerial().equalsIgnoreCase(hddSerial)) {
 					if (SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_KICK) {
-						getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_SYSTEM_ERROR);
+						getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_SYSTEM_ERROR());
 						getConnection().close();
 						log.info("[MAC_AUDIT] " + account + ",  HDD Serial " + hddSerial + " (" + getConnection().getIP()
 							+ ") was kicked due to allowed hdd serial mismatch");

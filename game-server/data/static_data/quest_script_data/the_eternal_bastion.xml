@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			13305 [XML] Meet Stifas the Stiff
@@ -27,42 +27,12 @@
 	<item_collecting id="18034" start_npc_ids="801037"/>
 	<item_collecting id="28034" start_npc_ids="801047"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18030" start_npc_ids="801037">
-		<monster var="0" end_var="3" npc_ids="231168 231169 231170"/>
-		<monster var="1" end_var="3" npc_ids="231171 231172 231173"/>
-		<monster var="2" end_var="3" npc_ids="231174 231175 231176"/>
-		<monster var="3" end_var="5" npc_ids="231143 231152 231153 231154 231155"/>
-		<monster var="4" end_var="1" npc_ids="231130"/>
-	</monster_hunt>
-	<monster_hunt id="18031" start_npc_ids="801037">
-		<monster var="0" end_var="1" npc_ids="231178"/>
-		<monster var="1" end_var="1" npc_ids="231179"/>
-	</monster_hunt>
-	<monster_hunt id="18032" start_npc_ids="801037">
-		<monster var="0" end_var="40" npc_ids="231117 231118 231119 231120 231122 231123 231125 231126 231127 231128"/>
-	</monster_hunt>
-	<monster_hunt id="18033" start_npc_ids="701625" end_npc_ids="801037">
-		<monster var="0" end_var="1" npc_ids="230744"/>
-		<monster var="1" end_var="1" npc_ids="230745"/>
-		<monster var="2" end_var="1" npc_ids="230749"/>
-	</monster_hunt>
-	<monster_hunt id="28030" start_npc_ids="801047">
-		<monster var="0" end_var="3" npc_ids="231168 231169 231170"/>
-		<monster var="1" end_var="3" npc_ids="231171 231172 231173"/>
-		<monster var="2" end_var="3" npc_ids="231174 231175 231176"/>
-		<monster var="3" end_var="5" npc_ids="231143 231152 231153 231154 231155"/>
-		<monster var="4" end_var="1" npc_ids="231130"/>
-	</monster_hunt>
-	<monster_hunt id="28031" start_npc_ids="801047">
-		<monster var="0" end_var="1" npc_ids="231178"/>
-		<monster var="1" end_var="1" npc_ids="231179"/>
-	</monster_hunt>
-	<monster_hunt id="28032" start_npc_ids="801047">
-		<monster var="0" end_var="40" npc_ids="231117 231118 231119 231120 231122 231123 231125 231126 231127 231128"/>
-	</monster_hunt>
-	<monster_hunt id="28033" start_npc_ids="701922" end_npc_ids="801047">
-		<monster var="0" end_var="1" npc_ids="230744"/>
-		<monster var="1" end_var="1" npc_ids="230745"/>
-		<monster var="2" end_var="1" npc_ids="230749"/>
-	</monster_hunt>	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="18030" start_npc_ids="801037"/>
+	<monster_hunt id="18031" start_npc_ids="801037"/>
+	<monster_hunt id="18032" start_npc_ids="801037"/>
+	<monster_hunt id="18033" start_npc_ids="701625" end_npc_ids="801037"/>
+	<monster_hunt id="28030" start_npc_ids="801047"/>
+	<monster_hunt id="28031" start_npc_ids="801047"/>
+	<monster_hunt id="28032" start_npc_ids="801047"/>
+	<monster_hunt id="28033" start_npc_ids="701922" end_npc_ids="801047"/>
 </quest_scripts>

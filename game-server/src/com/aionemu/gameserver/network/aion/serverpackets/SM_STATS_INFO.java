@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
+import com.aionemu.gameserver.services.GameTimeService;
 
 /**
  * In this packet Server is sending User Info?
@@ -41,7 +41,7 @@ public class SM_STATS_INFO extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(player.getObjectId());// Player ObjectId
-		writeD(GameTimeManager.getGameTime().getTime());// Minutes since 1/1/00 00:00:00
+		writeD(GameTimeService.getInstance().getGameTime().getTime());// Minutes since 1/1/00 00:00:00
 
 		writeH(pgs.getPower().getCurrent());// [current power]
 		writeH(pgs.getHealth().getCurrent());// [current health]

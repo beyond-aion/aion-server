@@ -46,7 +46,7 @@ public class PetMoodService {
 		}
 
 		if (pet.getMaster().getInventory().isFull()) {
-			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY);
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 			return;
 		}
 

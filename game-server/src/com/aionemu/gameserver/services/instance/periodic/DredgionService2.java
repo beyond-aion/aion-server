@@ -42,15 +42,15 @@ public class DredgionService2 extends PeriodicInstance {
 		switch (maskId) {
 			case maskLvlGradeC:
 				if (getInstanceMaskId(player) == maskId)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDAB1_DREADGION);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDAB1_DREADGION());
 				break;
 			case maskLvlGradeB:
 				if (getInstanceMaskId(player) == maskId)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDDREADGION_02);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDDREADGION_02());
 				break;
 			case maskLvlGradeA:
 				if (getInstanceMaskId(player) == maskId)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDDREADGION_03);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDDREADGION_03());
 				break;
 		}
 	}

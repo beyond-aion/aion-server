@@ -40,7 +40,7 @@ public class AssignViceCaptainEvent extends AbstractTeamPlayerEvent<PlayerAllian
 				break;
 			case PROMOTE:
 				if (team.getViceCaptainIds().size() == 4) {
-					PacketSendUtility.sendPacket(team.getLeaderObject(), SM_SYSTEM_MESSAGE.STR_FORCE_CANNOT_PROMOTE_MANAGER);
+					PacketSendUtility.sendPacket(team.getLeaderObject(), SM_SYSTEM_MESSAGE.STR_FORCE_CANNOT_PROMOTE_MANAGER());
 					return;
 				}
 				team.getViceCaptainIds().add(eventPlayer.getObjectId());

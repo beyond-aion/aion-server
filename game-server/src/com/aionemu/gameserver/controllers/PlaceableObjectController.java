@@ -42,7 +42,7 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 
 	public void onDialogRequest(Player player) {
 		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkingDistance() + 2)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_TOO_FAR_TO_USE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_TOO_FAR_TO_USE());
 			return;
 		}
 		getOwner().onDialogRequest(player);

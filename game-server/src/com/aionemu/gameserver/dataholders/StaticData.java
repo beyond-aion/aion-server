@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.templates.mail.Mails;
  *
  * @author Luno, orz Modified by Wakizashi
  */
-@XmlRootElement(name = "ae_static_data")
+@XmlRootElement(name = "static_data")
 @XmlAccessorType(XmlAccessType.NONE)
 public class StaticData {
 
@@ -193,7 +193,7 @@ public class StaticData {
 	@XmlElement(name = "auto_groups")
 	public AutoGroupData autoGroupData;
 
-	@XmlElement(name = "events_config")
+	@XmlElement(name = "timed_events")
 	public EventData eventData;
 
 	@XmlElement(name = "spawns")

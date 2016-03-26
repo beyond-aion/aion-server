@@ -64,19 +64,19 @@ public class PrivateStoreService {
 			return false;
 		}
 		if (store.getSoldItems().size() == 10) {
-			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_FULL_BASKET);
+			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_FULL_BASKET());
 			return false;
 		}
 		if (item.getPackCount() <= 0 && !item.isTradeable(store.getOwner())) {
-			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_CANNOT_BE_EXCHANGED);
+			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_CANNOT_BE_EXCHANGED());
 			return false;
 		}
 		if (item.isEquipped()) {
-			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_CAN_NOT_SELL_EQUIPED_ITEM);
+			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_CAN_NOT_SELL_EQUIPED_ITEM());
 			return false;
 		}
 		if (store.getTradeItemByObjId(psItem.getItemObjId()) != null) {
-			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_ALREAY_REGIST_ITEM);
+			PacketSendUtility.sendPacket(store.getOwner(), SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_ALREAY_REGIST_ITEM());
 			return false;
 		}
 		return true;
@@ -116,7 +116,7 @@ public class PrivateStoreService {
 			return; // Invalid items found or store was empty
 
 		if (buyer.getInventory().getFreeSlots() < boughtItems.size()) {
-			PacketSendUtility.sendPacket(buyer, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+			PacketSendUtility.sendPacket(buyer, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
 			return;
 		}
 

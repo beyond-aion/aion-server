@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.drop;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
@@ -97,18 +96,14 @@ public class DropService {
 	}
 
 	/**
-	 * After NPC respawns - drop should be unregistered //TODO more correct - on despawn
+	 * After NPC despawns
 	 *
 	 * @param npc
 	 */
 	public void unregisterDrop(Npc npc) {
 		Integer npcObjId = npc.getObjectId();
-		Map<Integer, DropNpc> dropRegmap = DropRegistrationService.getInstance().getDropRegistrationMap();
 		DropRegistrationService.getInstance().getCurrentDropMap().remove(npcObjId);
-
-		if (dropRegmap.containsKey(npcObjId)) {
-			dropRegmap.remove(npcObjId);
-		}
+		DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
 	}
 
 	/**
@@ -124,12 +119,12 @@ public class DropService {
 		}
 
 		if (!dropNpc.containsKey(player.getObjectId()) && !dropNpc.isFreeForAll()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT());
 			return;
 		}
 
 		if (dropNpc.isBeingLooted()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
 			return;
 		}
 
@@ -451,10 +446,10 @@ public class DropService {
 		// handles distribution of item to correct player and messages accordingly
 		if (requestedItem.isDistributeItem()) {
 			if (player != requestedItem.getWinningPlayer() && requestedItem.isItemWonNotCollected()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM());
 				return;
 			} else if (requestedItem.getWinningPlayer().getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
-				PacketSendUtility.sendPacket(requestedItem.getWinningPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+				PacketSendUtility.sendPacket(requestedItem.getWinningPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
 				requestedItem.isItemWonNotCollected(true);
 				return;
 			}

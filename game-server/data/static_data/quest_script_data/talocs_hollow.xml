@@ -16,10 +16,8 @@
 			21468 [SCRIPT] The Struggle Within
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS -->
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="11464" start_npc_ids="799526" end_npc_ids="799503"/>
 	<item_collecting id="21461" start_npc_ids="799502" end_npc_ids="799256"/>
 	<item_collecting id="21464" start_npc_ids="799526" end_npc_ids="799503"/>
-	<!-- HUNTING QUESTS -->
 </quest_scripts>

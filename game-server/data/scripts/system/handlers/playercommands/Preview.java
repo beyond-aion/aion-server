@@ -42,7 +42,7 @@ public class Preview extends PlayerCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (player.getLevel() < 10) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT());
 			return;
 		}
 
@@ -67,15 +67,15 @@ public class Preview extends PlayerCommand {
 			sendInfo(player, "Unknown item.");
 			return;
 		} else if (itemTemplate.getEquipmentType().equals(EquipType.NONE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CHANGE_ITEM_SKIN_PREVIEW_INVALID_COSMETIC);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CHANGE_ITEM_SKIN_PREVIEW_INVALID_COSMETIC());
 			return;
 		} else if (!itemTemplate.getRace().equals(Race.PC_ALL) && !itemTemplate.getRace().equals(player.getRace())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_RACE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_RACE());
 			return;
 		} else {
 			Gender itemGender = itemTemplate.getUseLimits().getGenderPermitted();
 			if (itemGender != null && !itemGender.equals(player.getGender())) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_GENDER);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_GENDER());
 				return;
 			}
 		}

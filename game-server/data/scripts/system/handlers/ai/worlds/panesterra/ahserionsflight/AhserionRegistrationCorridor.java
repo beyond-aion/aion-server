@@ -31,11 +31,11 @@ public class AhserionRegistrationCorridor extends GeneralNpcAI2 {
 		public void acceptRequest(Creature requester, Player responder, int requestId) {
 			if (AhserionRaid.getInstance().isStarted()) {
 				if (PanesterraMatchmakingService.getInstance().registerPlayer(player)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
 					return;
 				}
 			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_NOTICE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_NOTICE());
 		}
 		});
 	}

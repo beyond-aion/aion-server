@@ -84,7 +84,7 @@ public class StaticDoorService {
 		}
 
 		if (!player.getInventory().decreaseByItemId(keyId, 1)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_OPEN_DOOR_NEED_KEY_ITEM);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_OPEN_DOOR_NEED_KEY_ITEM());
 			return false;
 		}
 

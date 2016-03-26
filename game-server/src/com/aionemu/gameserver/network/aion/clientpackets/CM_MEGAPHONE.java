@@ -56,12 +56,12 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		}
 
 		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_RACE);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_RACE());
 			return;
 		}
 
 		if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_CLASS);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_INVALID_CLASS());
 			return;
 		}
 
@@ -80,7 +80,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		ItemActions itemActions = item.getItemTemplate().getActions();
 
 		if (itemActions == null) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
+			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 			return;
 		}
 
@@ -92,14 +92,14 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		}
 
 		if (actions.size() == 0) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE);
+			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 			return;
 		}
 
 		// Store Item CD in server Player variable.
 		// Prevents potion spamming, and relogging to use.
 		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME);
+			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
 			return;
 		}
 

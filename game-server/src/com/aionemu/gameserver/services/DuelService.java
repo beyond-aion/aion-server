@@ -63,7 +63,7 @@ public class DuelService {
 		for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
 			if (!zone.isOtherRaceDuelsAllowed() && !responder.getRace().equals(requester.getRace())
 				|| (!zone.isSameRaceDuelsAllowed() && responder.getRace().equals(requester.getRace()))) {
-				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE);
+				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
 				return;
 			}
 		}

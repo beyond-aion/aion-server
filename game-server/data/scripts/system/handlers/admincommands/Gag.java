@@ -36,7 +36,7 @@ public class Gag extends AdminCommand {
 
 		Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
 		if (player == null || !player.isOnline()) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF);
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF());
 			return;
 		}
 

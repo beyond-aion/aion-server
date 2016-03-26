@@ -15,6 +15,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -31,6 +32,7 @@ import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.trade.PricesService;
+import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -118,12 +120,12 @@ public class MailService {
 			senderItem = senderInventory.getItemByObjId(attachedItemObjId);
 
 			if (senderItem == null || senderItem.getItemCount() < attachedItemCount) {
-				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_USED_ITEM);
+				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_USED_ITEM());
 				return;
 			}
 
 			if (senderItem.isEquipped()) {
-				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_CAN_NOT_SEND_EQUIPPED_ITEM);
+				PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_CAN_NOT_SEND_EQUIPPED_ITEM());
 				return;
 			}
 
@@ -158,7 +160,7 @@ public class MailService {
 		long finalMailKinah = PricesService.getPriceForService(baseCost + kinahMailCommission + itemMailCommission, sender.getRace()) + attachedKinahCount;
 
 		if (senderInventory.getKinah() < finalMailKinah) {
-			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 
@@ -230,7 +232,7 @@ public class MailService {
 			}
 
 			if (letterType == LetterType.EXPRESS)
-				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY);
+				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY());
 		}
 
 		if (attachedItem != null) {
@@ -283,13 +285,18 @@ public class MailService {
 				if (attachedItem == null)
 					return;
 				if (player.getInventory().isFull()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL());
 					return;
 				}
-				player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL);
-				if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, player.getObjectId()))
-					return;
-
+				if (attachedItem.getExpireTime() != 0 && attachedItem.getExpireTime() <= System.currentTimeMillis() / 1000) {
+					attachedItem.setPersistentState(PersistentState.DELETED);
+					DAOManager.getDAO(InventoryDAO.class).store(attachedItem, player);
+				} else {
+					if (player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL) == null)
+						return;
+					if (attachedItem.getExpireTime() != 0)
+						ExpireTimerTask.getInstance().addTask(attachedItem, player);
+				}
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(letterId, attachmentType));
 				letter.removeAttachedItem();
 				break;

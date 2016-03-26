@@ -32,14 +32,6 @@
 	<item_collecting id="48504" start_npc_ids="799426"/>
 	<item_collecting id="48507" start_npc_ids="799426"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30053" start_npc_ids="799031">
-		<monster var="0" end_var="5" npc_ids="216364"/>
-		<monster var="1" end_var="5" npc_ids="216365"/>
-		<monster var="2" end_var="5" npc_ids="216366"/>
-	</monster_hunt>
-	<monster_hunt id="30153" start_npc_ids="799335">
-		<monster var="0" end_var="5" npc_ids="216364"/>
-		<monster var="1" end_var="5" npc_ids="216365"/>
-		<monster var="2" end_var="5" npc_ids="216366"/>
-	</monster_hunt>
+	<monster_hunt id="30053" start_npc_ids="799031"/>
+	<monster_hunt id="30153" start_npc_ids="799335"/>
 </quest_scripts>

@@ -205,7 +205,21 @@ public class WorldPosition {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + heading;
+		result = prime * result + mapId;
+		result = prime * result + Float.floatToIntBits(x);
+		result = prime * result + Float.floatToIntBits(y);
+		result = prime * result + Float.floatToIntBits(z);
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
 		if (!(obj instanceof WorldPosition))
 			return false;
 		WorldPosition other = (WorldPosition) obj;
@@ -213,13 +227,12 @@ public class WorldPosition {
 	}
 
 	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+	public String toString() {
+		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned
+			+ ", mapRegion=" + mapRegion + "]";
 	}
 
-	@Override
-	public String toString() {
-		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + "]";
+	public String toCoordString() {
+		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + "\nX: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
 	}
 }

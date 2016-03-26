@@ -89,7 +89,7 @@ public class BeshmundirsWalkAI2 extends ActionItemNpcAI2 {
 				}
 			}
 		} else {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON());
 		}
 		return false;
 	}

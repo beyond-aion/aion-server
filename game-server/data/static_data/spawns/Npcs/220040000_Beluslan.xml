@@ -158,7 +158,6 @@
 		<spawn npc_id="213338" respawn_time="295">
 			<spot x="2784.55" y="2447.23" z="618.077" h="81"/>
 			<spot x="2814.5" y="2501.09" z="633.71564" h="10"/>
-			<spot x="2814.5" y="2501.09" z="633.71564" h="10"/>
 			<spot x="2849.98" y="2524.17" z="637.804" h="65"/>
 			<spot x="2912.89" y="2655.1" z="677.736" h="25"/>
 			<spot x="2912.9" y="2659.63" z="677.896" h="66"/>
@@ -896,7 +895,6 @@
 			<spot x="1715.31" y="2177.05" z="585.379" h="18"/>
 			<spot x="1740.2" y="2156.84" z="586.343" h="61"/>
 			<spot x="1806.58" y="1999.63" z="587.615" h="52"/>
-			<spot x="1811.66" y="1922.64" z="578.4575" h="58" walker_id="F39FA74EEE6E85EE22E84A8A75444C76FBFFA998"/>
 			<spot x="1811.66" y="1922.64" z="578.4575" h="58" walker_id="F39FA74EEE6E85EE22E84A8A75444C76FBFFA998"/>
 			<spot x="1836.56" y="2049.16" z="586.821" h="97"/>
 			<spot x="1840.83" y="2015.36" z="585.284" h="14"/>
@@ -2199,7 +2197,6 @@
 			<spot x="1001.49" y="1763.87" z="237.328" h="56"/>
 			<spot x="1002.82" y="1755.3" z="235.875" h="92"/>
 			<spot x="1014.19" y="1710.49" z="224.6126" h="37" walker_id="F1681B2DCBC7054F1D88BF89C1244DDCCAC7CED7"/>
-			<spot x="1014.19" y="1710.49" z="224.6126" h="37" walker_id="F1681B2DCBC7054F1D88BF89C1244DDCCAC7CED7"/>
 			<spot x="1022.82" y="1613.74" z="225.75" h="55"/>
 			<spot x="1032.28" y="1609.52" z="226.435" h="92"/>
 			<spot x="1037.13" y="1607.94" z="226.636" h="21"/>
@@ -2214,7 +2211,6 @@
 		</spawn>
 		<!-- Chubby Porgus -->
 		<spawn npc_id="213149" respawn_time="295">
-			<spot x="1014.19" y="1710.49" z="224.6126" h="37" walker_id="F1681B2DCBC7054F1D88BF89C1244DDCCAC7CED7"/>
 			<spot x="1014.19" y="1710.49" z="224.6126" h="37" walker_id="F1681B2DCBC7054F1D88BF89C1244DDCCAC7CED7"/>
 			<spot x="1037.71" y="1661.38" z="226.46375" h="37" walker_id="BBC14AE437C349B277C87151C8FA3860843F492E"/>
 		</spawn>
@@ -2245,7 +2241,6 @@
 		<spawn npc_id="213159" respawn_time="295">
 			<spot x="390.69" y="2364.48" z="218.271" h="57"/>
 			<spot x="406.945" y="2367.28" z="216.007" h="35"/>
-			<spot x="439.67" y="2392.4" z="241.04298" h="37" walker_id="45C21E4046D2D76F410B7EE970D984894FC95B87"/>
 			<spot x="439.67" y="2392.4" z="241.04298" h="37" walker_id="45C21E4046D2D76F410B7EE970D984894FC95B87"/>
 			<spot x="470.775" y="2468.51" z="269.858" h="10"/>
 			<spot x="482.062" y="1937.6" z="283.563" h="82"/>
@@ -4853,7 +4848,6 @@
 			<spot x="2238.64" y="1291.88" z="476.145" h="116"/>
 			<spot x="2323.11" y="1125.3" z="472.363" h="108"/>
 			<spot x="2382.93" y="1268.32" z="467.0581" h="71" walker_id="BCFE86DD97D4BF9FC08E5DD7F9DD6486069C089E"/>
-			<spot x="2382.93" y="1268.32" z="467.0581" h="71" walker_id="BCFE86DD97D4BF9FC08E5DD7F9DD6486069C089E"/>
 			<spot x="2386.75" y="1342.58" z="484.223" h="23"/>
 		</spawn>
 		<!-- Mean Daru -->
@@ -5689,7 +5683,6 @@
 			<spot x="1014.19" y="1710.49" z="224.6126" h="37" walker_id="F1681B2DCBC7054F1D88BF89C1244DDCCAC7CED7" walker_index="1"/>
 			<spot x="1037.71" y="1661.38" z="226.46375" h="37" walker_id="BBC14AE437C349B277C87151C8FA3860843F492E"/>
 			<spot x="1073.15" y="1744.31" z="236.43314" h="37" walker_id="E4F09622DCF56363FDEC6B143FFFE899EA8648D5"/>
-			<spot x="1073.15" y="1744.31" z="236.43314" h="37" walker_id="E4F09622DCF56363FDEC6B143FFFE899EA8648D5"/>
 		</spawn>
 		<!-- Pale Worg -->
 		<spawn npc_id="213082" respawn_time="295">
@@ -6467,7 +6460,6 @@
 		<spawn npc_id="213571" respawn_time="295">
 			<spot x="616.65" y="2775.13" z="126.872" h="88"/>
 			<spot x="624.17" y="2668.53" z="127.656876" h="108" walker_id="55BE80CEF1B12D4C4BA27FBC03A43B13695C9766"/>
-			<spot x="624.17" y="2668.53" z="127.656876" h="108" walker_id="55BE80CEF1B12D4C4BA27FBC03A43B13695C9766"/>
 			<spot x="625.97" y="2718.09" z="127.485" h="5"/>
 			<spot x="650.006" y="2735.86" z="137.758" h="59"/>
 			<spot x="655" y="2658" z="126.375" h="75"/>
@@ -6484,7 +6476,6 @@
 		<!-- Seafoam Rayal -->
 		<spawn npc_id="213572" respawn_time="295">
 			<spot x="655.05" y="2658.26" z="126.3425" h="75" walker_id="4BF23FBBF9EE3A3C5E7163A023D8F1498E068D9A"/>
-			<spot x="664.33" y="2929.36" z="154.72186" h="63" walker_id="A9CA9810C4E3C98DB71304AB32F8023722FE4A66"/>
 			<spot x="664.33" y="2929.36" z="154.72186" h="63" walker_id="A9CA9810C4E3C98DB71304AB32F8023722FE4A66"/>
 		</spawn>
 		<!-- Seafoam Spirit -->
@@ -6578,7 +6569,6 @@
 		<!-- Seiren Coastguard -->
 		<spawn npc_id="213574" respawn_time="300">
 			<spot x="621.12" y="2821.96" z="347.1" h="75" walker_id="B06209AACA37AC5ED953D504FCF5CDEB2055884F"/>
-			<spot x="797.45" y="2845.81" z="400.82" h="57" walker_id="AEAA0869525CD5FE2EE3D2E641BBDB8C28C32A06"/>
 			<spot x="797.45" y="2845.81" z="400.82" h="57" walker_id="AEAA0869525CD5FE2EE3D2E641BBDB8C28C32A06"/>
 		</spawn>
 		<!-- Seiren Fishtamer -->
@@ -7003,34 +6993,15 @@
 			<spot x="1870.87" y="702.55" z="364.23" h="68"/>
 			<spot x="1871.94" y="702.03" z="364.131" h="32"/>
 			<spot x="1882.94" y="815.38" z="355.5975" h="22" walker_id="97F7E7065FD623D40971CCD6B0547B198A757FED" walker_index="1"/>
-			<spot x="1882.94" y="815.38" z="355.5975" h="22" walker_id="97F7E7065FD623D40971CCD6B0547B198A757FED" walker_index="1"/>
-			<spot x="1882.94" y="815.38" z="355.5975" h="22" walker_id="97F7E7065FD623D40971CCD6B0547B198A757FED" walker_index="1"/>
-			<spot x="1882.94" y="815.38" z="355.5975" h="22" walker_id="97F7E7065FD623D40971CCD6B0547B198A757FED" walker_index="1"/>
-			<spot x="1909.79" y="702.51" z="355.82437" h="62" walker_id="F8C313A2ADF46D43408A2449D577BCB3E88D9AC2"/>
-			<spot x="1909.79" y="702.51" z="355.82437" h="62" walker_id="F8C313A2ADF46D43408A2449D577BCB3E88D9AC2"/>
 			<spot x="1909.79" y="702.51" z="355.82437" h="62" walker_id="F8C313A2ADF46D43408A2449D577BCB3E88D9AC2"/>
 			<spot x="1921.43" y="948.67" z="346.92877" h="35" walker_id="CFA32ED1D29C6BB5D755F325019A44B737C33A5D"/>
-			<spot x="1921.43" y="948.67" z="346.92877" h="35" walker_id="CFA32ED1D29C6BB5D755F325019A44B737C33A5D"/>
-			<spot x="1921.43" y="948.67" z="346.92877" h="35" walker_id="CFA32ED1D29C6BB5D755F325019A44B737C33A5D"/>
-			<spot x="1928.06" y="820.1" z="353.5025" h="26" walker_id="C1D6AA1D47088E12AAC45546ACFFAF3CB4F7C38C"/>
-			<spot x="1928.06" y="820.1" z="353.5025" h="26" walker_id="C1D6AA1D47088E12AAC45546ACFFAF3CB4F7C38C"/>
 			<spot x="1928.06" y="820.1" z="353.5025" h="26" walker_id="C1D6AA1D47088E12AAC45546ACFFAF3CB4F7C38C"/>
 			<spot x="1936" y="1026.44" z="343.125" h="109"/>
 			<spot x="1944.35" y="1057.12" z="343.1775" h="99" walker_id="A904B3997E74B9B55A53067CF44C5C14C5B6CFE5"/>
-			<spot x="1944.35" y="1057.12" z="343.1775" h="99" walker_id="A904B3997E74B9B55A53067CF44C5C14C5B6CFE5"/>
-			<spot x="1944.35" y="1057.12" z="343.1775" h="99" walker_id="A904B3997E74B9B55A53067CF44C5C14C5B6CFE5"/>
-			<spot x="1952.08" y="916.18" z="343.77" h="78" walker_id="AE8E2A822B73F8D404BE247A97FC706909CD7BFC" walker_index="1"/>
-			<spot x="1952.08" y="916.18" z="343.77" h="78" walker_id="AE8E2A822B73F8D404BE247A97FC706909CD7BFC" walker_index="1"/>
 			<spot x="1952.08" y="916.18" z="343.77" h="78" walker_id="AE8E2A822B73F8D404BE247A97FC706909CD7BFC" walker_index="1"/>
 			<spot x="1959.27" y="1086.96" z="344.61063" h="87" walker_id="40D907A055258657A11F55B38A218CA275747A9A" walker_index="1"/>
-			<spot x="1959.27" y="1086.96" z="344.61063" h="87" walker_id="40D907A055258657A11F55B38A218CA275747A9A" walker_index="1"/>
-			<spot x="1959.27" y="1086.96" z="344.61063" h="87" walker_id="40D907A055258657A11F55B38A218CA275747A9A" walker_index="1"/>
-			<spot x="1963.83" y="651.94" z="358.57187" h="45" walker_id="F088E21A7521D729EEFDC2046F50FCA0EC01D0F4"/>
-			<spot x="1963.83" y="651.94" z="358.57187" h="45" walker_id="F088E21A7521D729EEFDC2046F50FCA0EC01D0F4"/>
-			<spot x="1963.83" y="651.94" z="358.57187" h="45" walker_id="F088E21A7521D729EEFDC2046F50FCA0EC01D0F4"/>
 			<spot x="1963.83" y="651.94" z="358.57187" h="45" walker_id="F088E21A7521D729EEFDC2046F50FCA0EC01D0F4"/>
 			<spot x="1968.75" y="1141.86" z="353.38" h="72"/>
-			<spot x="1974.19" y="1210.36" z="364.44373" h="23" walker_id="D1B09C8C59664046D35EFBF2BCE0122C4504A6AF"/>
 			<spot x="1974.19" y="1210.36" z="364.44373" h="23" walker_id="D1B09C8C59664046D35EFBF2BCE0122C4504A6AF"/>
 			<spot x="1981.55" y="1038.34" z="343.611" h="74"/>
 			<spot x="1985" y="1036.69" z="343.817" h="114"/>
@@ -7053,25 +7024,11 @@
 		<spawn npc_id="213091" respawn_time="295">
 			<spot x="1974.19" y="1210.36" z="364.44373" h="23" walker_id="D1B09C8C59664046D35EFBF2BCE0122C4504A6AF"/>
 			<spot x="2039.69" y="1173.11" z="374.1475" h="18" walker_id="847A21022C3EA10E539D2FACB3DD46C9713D32F3"/>
-			<spot x="2039.69" y="1173.11" z="374.1475" h="18" walker_id="847A21022C3EA10E539D2FACB3DD46C9713D32F3"/>
-			<spot x="2045.91" y="1093.76" z="397.48877" h="29" walker_id="C3F1FF5AE750ADEBA53C91A14747B9D9D227339C"/>
-			<spot x="2045.91" y="1093.76" z="397.48877" h="29" walker_id="C3F1FF5AE750ADEBA53C91A14747B9D9D227339C"/>
 			<spot x="2045.91" y="1093.76" z="397.48877" h="29" walker_id="C3F1FF5AE750ADEBA53C91A14747B9D9D227339C"/>
 			<spot x="2068.74" y="992.92" z="392.125" h="15" walker_id="59ECCD8EF4DD0DB9EDD27C7061B9BAB457818E6A" walker_index="1"/>
-			<spot x="2068.74" y="992.92" z="392.125" h="15" walker_id="59ECCD8EF4DD0DB9EDD27C7061B9BAB457818E6A" walker_index="1"/>
-			<spot x="2068.74" y="992.92" z="392.125" h="15" walker_id="59ECCD8EF4DD0DB9EDD27C7061B9BAB457818E6A" walker_index="1"/>
-			<spot x="2071.21" y="1069.83" z="399.4225" h="112" walker_id="4FEA5D0939C9275A67AF3ACC0744238401C09F6F" walker_index="1"/>
-			<spot x="2071.21" y="1069.83" z="399.4225" h="112" walker_id="4FEA5D0939C9275A67AF3ACC0744238401C09F6F" walker_index="1"/>
-			<spot x="2071.21" y="1069.83" z="399.4225" h="112" walker_id="4FEA5D0939C9275A67AF3ACC0744238401C09F6F" walker_index="1"/>
 			<spot x="2071.21" y="1069.83" z="399.4225" h="112" walker_id="4FEA5D0939C9275A67AF3ACC0744238401C09F6F" walker_index="1"/>
 			<spot x="2088.46" y="1004.62" z="394.92374" h="112" walker_id="365108C7A1464FF7554B433FE6220F03622C060F"/>
-			<spot x="2088.46" y="1004.62" z="394.92374" h="112" walker_id="365108C7A1464FF7554B433FE6220F03622C060F"/>
-			<spot x="2088.46" y="1004.62" z="394.92374" h="112" walker_id="365108C7A1464FF7554B433FE6220F03622C060F"/>
 			<spot x="2095.41" y="1134.53" z="400.54065" h="62" walker_id="876FCD6DB117993AA53ECF333EFD10EF4F6C4D3A"/>
-			<spot x="2095.41" y="1134.53" z="400.54065" h="62" walker_id="876FCD6DB117993AA53ECF333EFD10EF4F6C4D3A"/>
-			<spot x="2095.41" y="1134.53" z="400.54065" h="62" walker_id="876FCD6DB117993AA53ECF333EFD10EF4F6C4D3A"/>
-			<spot x="2137.94" y="927.16" z="384.25873" h="87" walker_id="8FBCA4D6925BC000269CF87C7C26F144A44CA299"/>
-			<spot x="2137.94" y="927.16" z="384.25873" h="87" walker_id="8FBCA4D6925BC000269CF87C7C26F144A44CA299"/>
 			<spot x="2137.94" y="927.16" z="384.25873" h="87" walker_id="8FBCA4D6925BC000269CF87C7C26F144A44CA299"/>
 		</spawn>
 		<!-- Snow Storm Spirit -->
@@ -7106,7 +7063,6 @@
 			<spot x="1671.22" y="613.01" z="345.73688" h="103" walker_id="4AEC9FB320F7316794E76711554FC832FEF54A7A"/>
 			<spot x="1688.65" y="650.96" z="349.5631" h="93" walker_id="7E579141CF7DD39C0F68D2D7D4CBAC491CDAC430"/>
 			<spot x="1727.53" y="465.69" z="344.52936" h="62" walker_id="777054869612350B44FD567C208A5784229B3ED4"/>
-			<spot x="1727.53" y="465.69" z="344.52936" h="62" walker_id="777054869612350B44FD567C208A5784229B3ED4"/>
 		</spawn>
 		<!-- Snowy Brax -->
 		<spawn npc_id="213079" respawn_time="295">
@@ -7119,24 +7075,16 @@
 		<!-- Snowy Braxie -->
 		<spawn npc_id="213241" respawn_time="295">
 			<spot x="1643.91" y="627.5" z="352.31747" h="23" walker_id="AA08D38D7F4AA45F08F0BEF0CA821ED6C26C41BC"/>
-			<spot x="1643.91" y="627.5" z="352.31747" h="23" walker_id="AA08D38D7F4AA45F08F0BEF0CA821ED6C26C41BC"/>
 			<spot x="1649.76" y="565.69" z="347.91998" h="87" walker_id="23DB4AE7602854C1B136B43D2195AF6376FF544A"/>
-			<spot x="1649.76" y="565.69" z="347.91998" h="87" walker_id="23DB4AE7602854C1B136B43D2195AF6376FF544A"/>
-			<spot x="1669.88" y="411.19" z="354.55875" h="75" walker_id="9C2812B05F960B43DD4BC5F86A72DCFD14E3F1AC"/>
 			<spot x="1669.88" y="411.19" z="354.55875" h="75" walker_id="9C2812B05F960B43DD4BC5F86A72DCFD14E3F1AC"/>
 			<spot x="1671.22" y="613.01" z="345.73688" h="103" walker_id="4AEC9FB320F7316794E76711554FC832FEF54A7A"/>
-			<spot x="1688.65" y="650.96" z="349.5631" h="93" walker_id="7E579141CF7DD39C0F68D2D7D4CBAC491CDAC430"/>
 			<spot x="1688.65" y="650.96" z="349.5631" h="93" walker_id="7E579141CF7DD39C0F68D2D7D4CBAC491CDAC430"/>
 		</spawn>
 		<!-- Snowy Braxie -->
 		<spawn npc_id="213242" respawn_time="295">
 			<spot x="1685.69" y="566.33" z="341.73062" h="112" walker_id="CD01E55C64C1626E892061CFF14C30364BE73A5D"/>
-			<spot x="1685.69" y="566.33" z="341.73062" h="112" walker_id="CD01E55C64C1626E892061CFF14C30364BE73A5D"/>
-			<spot x="1700.55" y="563.44" z="343.40936" h="31" walker_id="6872C59B1B6935DFB31299F801FF1CC9AE5CAED9"/>
 			<spot x="1700.55" y="563.44" z="343.40936" h="31" walker_id="6872C59B1B6935DFB31299F801FF1CC9AE5CAED9"/>
 			<spot x="1752.85" y="558.42" z="351.875" h="46" walker_id="54487647D32CB3C98050AD031D135D3508CE1A5F"/>
-			<spot x="1752.85" y="558.42" z="351.875" h="46" walker_id="54487647D32CB3C98050AD031D135D3508CE1A5F"/>
-			<spot x="1783.55" y="305.84" z="336.08688" h="119" walker_id="AE0E417D097FC91BFDAA359705392C0E90E67098"/>
 			<spot x="1783.55" y="305.84" z="336.08688" h="119" walker_id="AE0E417D097FC91BFDAA359705392C0E90E67098"/>
 		</spawn>
 		<!-- Snowy Ettin -->
@@ -7490,7 +7438,6 @@
 			<spot x="365.013" y="1158.57" z="254.132" h="40"/>
 			<spot x="365.677" y="1299.1" z="257.125" h="91"/>
 			<spot x="365.93" y="1136.6" z="253.8" h="78" walker_id="2C84DCCD19C279369087C135178AAB5E91348787"/>
-			<spot x="365.93" y="1136.6" z="253.8" h="78" walker_id="2C84DCCD19C279369087C135178AAB5E91348787"/>
 			<spot x="367.579" y="1184.57" z="256.592" h="8"/>
 			<spot x="367.777" y="1361.89" z="261.549" h="76" random_walk="9"/>
 			<spot x="378.452" y="1287.14" z="257.184" h="118"/>
@@ -7583,7 +7530,6 @@
 		<spawn npc_id="213113" respawn_time="295">
 			<spot x="2235.86" y="1041.15" z="375.376" h="36"/>
 			<spot x="2242.36" y="1029.62" z="373.024" h="35"/>
-			<spot x="2248.28" y="1067.83" z="376.72876" h="70" walker_id="657614D31EA191FE49AB8F8791CF57B5FD6F673A"/>
 			<spot x="2248.28" y="1067.83" z="376.72876" h="70" walker_id="657614D31EA191FE49AB8F8791CF57B5FD6F673A"/>
 			<spot x="2257.69" y="1023.56" z="372.125" h="99"/>
 			<spot x="2258.72" y="1035.14" z="372.366" h="30" random_walk="8"/>
@@ -7720,7 +7666,6 @@
 			<spot x="2442.99" y="2074.4" z="579.8844" h="30" walker_id="6F5184C6AA0C47172E298344DD39F4844ECE464F"/>
 			<spot x="2449.22" y="2115.75" z="573" h="30"/>
 			<spot x="2451.76" y="2039" z="591" h="98"/>
-			<spot x="2462.51" y="2085.48" z="575.875" h="45" walker_id="CBAA34337D1EC7F6AC38EC4603218D41B6CEF49C"/>
 			<spot x="2462.51" y="2085.48" z="575.875" h="45" walker_id="CBAA34337D1EC7F6AC38EC4603218D41B6CEF49C"/>
 		</spawn>
 		<!-- Suteken -->
@@ -7973,7 +7918,6 @@
 		<!-- Trollkin Worker -->
 		<spawn npc_id="213214" respawn_time="295">
 			<spot x="1888.37" y="1564.03" z="551.375" h="83" walker_id="AC97F05E4929EBA9F2C5AD91836BA61CC34062DA"/>
-			<spot x="2177.87" y="1916.02" z="571.255" h="30" walker_id="69CDDC3C7138E04D4E0B666D219EF7E3E1BC061A" walker_index="1"/>
 			<spot x="2177.87" y="1916.02" z="571.255" h="30" walker_id="69CDDC3C7138E04D4E0B666D219EF7E3E1BC061A" walker_index="1"/>
 			<spot x="2291.17" y="1705.29" z="526.7919" h="59" walker_id="C0ED3B443EE2593FC4B76306179DB088E82A10CE"/>
 		</spawn>

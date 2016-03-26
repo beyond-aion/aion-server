@@ -54,7 +54,7 @@ public class RemoveCd extends AdminCommand {
 						HouseObject<?> obj = iter.next();
 						if (obj instanceof UseableItemObject) {
 							if (!player.getHouseObjectCooldownList().isCanUseObject(obj.getObjectId()))
-								player.getHouseObjectCooldownList().addHouseObjectCooldown(obj.getObjectId(), 0);
+								player.getHouseObjectCooldownList().setHouseObjectCooldown(obj.getObjectId(), 0);
 						}
 					}
 				}

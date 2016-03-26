@@ -88,7 +88,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 				}
 			}
 			if (relationIds.size() == 0) {
-				PacketSendUtility.sendPacket(player1, SM_SYSTEM_MESSAGE.STR_MSG_NO_RELATIONSHIP_RECENTLY);
+				PacketSendUtility.sendPacket(player1, SM_SYSTEM_MESSAGE.STR_MSG_NO_RELATIONSHIP_RECENTLY());
 				return;
 			}
 			playerId2 = relationIds.get(Rnd.get(relationIds.size()));

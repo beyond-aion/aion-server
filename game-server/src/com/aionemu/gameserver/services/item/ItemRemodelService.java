@@ -35,7 +35,7 @@ public class ItemRemodelService {
 
 		// Check Player Level
 		if (player.getLevel() < 10) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT());
 			return;
 		}
 

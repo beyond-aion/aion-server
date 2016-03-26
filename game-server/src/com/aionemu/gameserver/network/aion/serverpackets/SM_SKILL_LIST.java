@@ -55,9 +55,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 		}
 		writeD(messageId);
 		if (messageId != 0) {
-			writeH(0x24); // unk
-			writeD(skillNameId);
-			writeH(0x00);
+			writeNameId(skillNameId);
 			writeS(skillLvl);
 			writeH(0x00);
 		}

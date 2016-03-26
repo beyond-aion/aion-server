@@ -6,8 +6,9 @@ package com.aionemu.gameserver.skillengine.model;
  */
 public class ChainSkills {
 
-	private ChainSkill previousChainSkill = new ChainSkill("", 0, 0);
-	private ChainSkill chainSkill = new ChainSkill("", 0, 0);
+	private ChainSkill previousChainSkill = new ChainSkill("");
+	private ChainSkill chainSkill = new ChainSkill("");
+	private long expireTime = 0;
 
 	/**
 	 * @return The chain skill used before the current one.
@@ -31,23 +32,32 @@ public class ChainSkills {
 	}
 
 	public void updateChain(String category, int duration) {
-		if (chainSkill.getCategory().equals("")) {
+		if (chainSkill.getCategory().isEmpty())
 			chainSkill.setCategory(category);
-			chainSkill.setExpireTime(duration == 0 ? 0 : System.currentTimeMillis() + duration);
+		else if (!chainSkill.getCategory().equals(category)) {
+			previousChainSkill = chainSkill;
+			chainSkill = new ChainSkill(category);
 		}
 
-		if (chainSkill.getCategory().equals(category)) {
-			chainSkill.increaseUseCount();
-		} else {
-			previousChainSkill = chainSkill;
-			chainSkill = new ChainSkill(category, 1, duration == 0 ? 0 : System.currentTimeMillis() + duration);
-		}
+		chainSkill.increaseUseCount();
+		expireTime = duration == 0 ? 0 : System.currentTimeMillis() + duration;
 	}
 
+	/**
+	 * Resets the complete chain (clears all info).
+	 */
 	public void resetChain() {
-		if (chainSkill.getUseCount() > 0) {
+		if (!chainSkill.getCategory().isEmpty()) {
+			expireTime = 0;
 			previousChainSkill.clear();
 			chainSkill.clear();
 		}
+	}
+
+	/**
+	 * @return True if this chain is expired. It must be reset to make it usable again.
+	 */
+	public boolean isChainExpired() {
+		return expireTime > 0 && System.currentTimeMillis() > expireTime;
 	}
 }

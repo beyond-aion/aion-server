@@ -288,27 +288,23 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	}
 
 	public boolean hasBuyList() {
-		if (getFuncDialogIds() == null)
-			return false;
-		return getFuncDialogIds().contains(DialogAction.BUY.id());
+		List<Integer> dialogIds = getFuncDialogIds();
+		return dialogIds != null && dialogIds.contains(DialogAction.BUY.id());
 	}
 
 	public boolean hasSellList() {
-		if (getFuncDialogIds() == null)
-			return false;
-		return getFuncDialogIds().contains(DialogAction.SELL.id()) || getFuncDialogIds().contains(DialogAction.BUY.id());
+		List<Integer> dialogIds = getFuncDialogIds();
+		return dialogIds != null && (dialogIds.contains(DialogAction.SELL.id()) || dialogIds.contains(DialogAction.BUY.id()));
 	}
 
 	public boolean hasTradeInList() {
-		if (getFuncDialogIds() == null)
-			return false;
-		return getFuncDialogIds().contains(DialogAction.TRADE_IN.id());
+		List<Integer> dialogIds = getFuncDialogIds();
+		return dialogIds != null && dialogIds.contains(DialogAction.TRADE_IN.id());
 	}
 
 	public boolean hasPurchaseList() {
-		if (getFuncDialogIds() == null)
-			return false;
-		return getFuncDialogIds().contains(DialogAction.TRADE_SELL_LIST.id());
+		List<Integer> dialogIds = getFuncDialogIds();
+		return dialogIds != null && dialogIds.contains(DialogAction.TRADE_SELL_LIST.id());
 	}
 
 	public int getMassiveLootCount() {
@@ -353,9 +349,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	 * @return the hasDialog
 	 */
 	public boolean isDialogNpc() {
-		if (talkInfo == null)
-			return false;
-		return talkInfo.isDialogNpc();
+		return talkInfo != null && talkInfo.isDialogNpc();
 	}
 
 	public TalkInfo getTalkInfo() {

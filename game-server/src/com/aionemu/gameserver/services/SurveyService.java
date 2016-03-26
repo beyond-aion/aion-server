@@ -66,7 +66,7 @@ public class SurveyService {
 			return;
 		}
 		if (player.getInventory().isFull(template.getExtraInventoryId())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 			log.warn("[SurveyController] player " + player.getName() + " tried to receive item with full inventory.");
 			return;
 		}

@@ -82,7 +82,7 @@ public class ArmsfusionService {
 
 		// Fusioned weapons must have same type
 		if (firstItem.getItemTemplate().getItemGroup() != secondItem.getItemTemplate().getItemGroup()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_DIFFERENT_TYPE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_DIFFERENT_TYPE());
 			return;
 		}
 
@@ -90,14 +90,14 @@ public class ArmsfusionService {
 		 * Second weapon must have inferior or equal lvl. in relation to first weapon
 		 */
 		if (secondItem.getItemTemplate().getLevel() > firstItem.getItemTemplate().getLevel()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_MAIN_REQUIRE_HIGHER_LEVEL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_MAIN_REQUIRE_HIGHER_LEVEL());
 			return;
 		}
 
 		// You can not combine Conditioning and Augmenting
 		if (firstItem.getImprovement() != null && secondItem.getImprovement() != null) {
 			if (firstItem.getImprovement().getChargeWay() != secondItem.getImprovement().getChargeWay()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_COMPARABLE_ITEM);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_COMPARABLE_ITEM());
 				return;
 			}
 		}

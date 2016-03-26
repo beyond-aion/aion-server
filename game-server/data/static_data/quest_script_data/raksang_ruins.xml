@@ -11,7 +11,6 @@
 		18743 [XML]	Not So Fast, Nasto
 		18744 [REMOVED]	Info from Abiso
 		19649 [XML]	To Raksang Ruins
-		
 		28737 [XML]	Suspicious Minds
 		28738 [SCRIPT]	Bombs for Everyone!
 		28739 [XML]	Important Research
@@ -24,22 +23,22 @@
 	[END] SUMMARY
 	-->
 	<!-- REPORT TO -->
-	<report_to id="18737" start_npc_ids="804707" start_dialog_id="4762" end_npc_ids="206378 206379 206380" end_dialog_id="10002"/>
-	<report_to id="19649" start_npc_ids="804654" start_dialog_id="4762" end_npc_ids="804707" end_dialog_id="10002"/>
-	<report_to id="28737" start_npc_ids="804732" start_dialog_id="4762" end_npc_ids="206395 206396 206397" end_dialog_id="10002"/>
-	<report_to id="29649" start_npc_ids="804665" start_dialog_id="4762" end_npc_ids="804732" end_dialog_id="10002"/>
+	<report_to id="18737" start_npc_ids="804707" end_npc_ids="206378 206379 206380"/>
+	<report_to id="19649" start_npc_ids="804654" end_npc_ids="804707"/>
+	<report_to id="28737" start_npc_ids="804732" end_npc_ids="206395 206396 206397"/>
+	<report_to id="29649" start_npc_ids="804665" end_npc_ids="804732"/>
 	
 	<!-- ITEM COLLECTING -->
-	<item_collecting id="18739" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="18740" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="18742" start_npc_ids="206378 206379 206380" start_dialog_id="4762" end_npc_ids="804707" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="28739" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="28740" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
-	<item_collecting id="28742" start_npc_ids="206395 206396 206397" start_dialog_id="4762" end_npc_ids="804732" start_dialog_id2="1011" check_ok_dialog_id="10000" check_fail_dialog_id="10001"/>
+	<item_collecting id="18739" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804707"/>
+	<item_collecting id="18740" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804707"/>
+	<item_collecting id="18742" start_npc_ids="206378 206379 206380" end_npc_ids="804707"/>
+	<item_collecting id="28739" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804732"/>
+	<item_collecting id="28740" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804732"/>
+	<item_collecting id="28742" start_npc_ids="206395 206396 206397" end_npc_ids="804732"/>
 
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="18741" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804707"/>
-	<monster_hunt id="18743" start_npc_ids="206378 206379 206380" start_dialog_id="4762" end_npc_ids="804707"/>
+	<monster_hunt id="18743" start_npc_ids="206378 206379 206380" end_npc_ids="804707"/>
 	<monster_hunt id="28741" start_zone="IDRAKSHA_SOLO_STARTCHIOCE_NPC_206390_7_300610000" end_npc_ids="804732"/>
-	<monster_hunt id="28743" start_npc_ids="206395 206396 206397" start_dialog_id="4762" end_npc_ids="804732"/>
+	<monster_hunt id="28743" start_npc_ids="206395 206396 206397" end_npc_ids="804732"/>
 </quest_scripts>

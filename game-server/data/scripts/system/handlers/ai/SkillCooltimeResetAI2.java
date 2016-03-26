@@ -37,11 +37,11 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 	@Override
 	protected void handleDialogStart(Player player) {
 		if (player.getController().isInCombat()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
 		} else if (player.getSkillCoolDowns().isEmpty()) {
 			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner().getObjectId(), getOwner().getName(), "Daeva has no skill cooldowns to reset, yang." , ChatType.NORMAL));
 		} else if (player.isTransformed() && player.getTransformModel().getType() == TransformType.AVATAR) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
 		} else {
 			if (Rnd.get(101) <= 10) {
 				PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner().getObjectId(), getOwner().getName(), "I can reset your skill cooldowns for 50.000 Kinah, yang yang." , ChatType.NORMAL));
@@ -59,9 +59,9 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 					if (responder.getInventory().getKinah() < price) {
 						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
 					} else if (MathUtil.getDistance(requester, responder) > 5) {
-						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC);
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 					} else if (responder.isTransformed() && responder.getTransformModel().getType() == TransformType.AVATAR) {
-						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE);
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
 					} else {
 				
 						HashMap<Integer, Long> resetSkillCoolDowns = new HashMap<>();
@@ -107,7 +107,7 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 						}
 					}
 				} else {
-					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC);
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 				}	
 			}
 		}, price);

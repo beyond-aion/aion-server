@@ -25,6 +25,4 @@
 	<report_on_levelup id="23832" end_npc_ids="204061"/>
 	<report_on_levelup id="23833" end_npc_ids="204061"/>
 	<report_on_levelup id="23834" end_npc_ids="799208"/>
-	<!-- COLLECTING QUESTS -->
-	<!-- HUNTING QUESTS -->
 </quest_scripts>

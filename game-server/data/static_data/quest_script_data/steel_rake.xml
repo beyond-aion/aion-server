@@ -16,23 +16,9 @@
 			80225 [XML] [Growth] Stop the Steel Rake
 	[END] SUMMARY
 -->
-	<!-- REPORTING QUESTS -->
-	<!-- COLLECTING QUESTS -->
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="3211" start_npc_ids="798331" end_npc_ids="798322">
-		<monster var="1" end_var="1" npc_ids="215069"/>
-		<monster var="2" end_var="1" npc_ids="215070"/>
-		<monster var="3" end_var="1" npc_ids="215081"/>
-	</monster_hunt>
-	<monster_hunt id="4211" start_npc_ids="798331">
-		<monster var="1" end_var="1" npc_ids="215069"/>
-		<monster var="2" end_var="1" npc_ids="215070"/>
-		<monster var="3" end_var="1" npc_ids="215081"/>
-	</monster_hunt>
-	<monster_hunt id="80216" start_npc_ids="831024">
-		<monster var="0" end_var="5" npc_ids="215081"/>
-	</monster_hunt>
-	<monster_hunt id="80225" start_npc_ids="831027">
-		<monster var="0" end_var="5" npc_ids="215081"/>
-	</monster_hunt>
+	<monster_hunt id="3211" start_npc_ids="798331" end_npc_ids="798322"/>
+	<monster_hunt id="4211" start_npc_ids="798331"/>
+	<monster_hunt id="80216" start_npc_ids="831024"/>
+	<monster_hunt id="80225" start_npc_ids="831027"/>
 </quest_scripts>

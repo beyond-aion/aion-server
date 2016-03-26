@@ -50,7 +50,7 @@ public class PlayerReviveService {
 			player.setState(CreatureState.FLYING);
 		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
 			player.getFlyController().startFly();
@@ -87,7 +87,7 @@ public class PlayerReviveService {
 			player.setState(CreatureState.FLYING);
 		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		if (player.getIsFlyingBeforeDeath()) {
 			player.getFlyController().startFly();
 		}
@@ -110,7 +110,7 @@ public class PlayerReviveService {
 	public static final void bindRevive(Player player, int skillId) {
 		revive(player, 25, 25, true, skillId);
 		if (skillId > 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
 			TeleportService2.teleportToPrison(player);
@@ -149,7 +149,7 @@ public class PlayerReviveService {
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
 			kisk.resurrectionUsed();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			revive(player, 25, 25, false, skillId);
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
@@ -177,7 +177,7 @@ public class PlayerReviveService {
 			return;
 		}
 		revive(player, 25, 25, true, skillId);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
@@ -246,7 +246,7 @@ public class PlayerReviveService {
 			player.setState(CreatureState.FLYING);
 		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		if (player.getIsFlyingBeforeDeath()) {
 			player.getFlyController().startFly();
 		}

@@ -127,7 +127,7 @@ public class InstanceService {
 			VisibleObject obj = it.next();
 			if (obj instanceof Player) {
 				Player player = (Player) obj;
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
 				moveToExitPoint((Player) obj);
 			} else {
 				obj.getController().onDelete();

@@ -20,7 +20,7 @@
 	-->
 	<!-- REPORTING QUESTS -->
 	<report_to id="38004" start_npc_ids="203726" end_npc_ids="799828"/>
-	<!-- HUNTING QUESTS -->
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="35502" end_npc_ids="799831" worlds="400010000" amount="3"/>
 	<kill_in_world id="35503" start_npc_ids="799825 799826" end_npc_ids="799825 799826" worlds="600010000" amount="5"/>
 	<kill_in_world id="35504" end_npc_ids="799825 799826" worlds="210050000" amount="5"/>

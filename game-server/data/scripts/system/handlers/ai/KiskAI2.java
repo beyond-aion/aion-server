@@ -38,12 +38,12 @@ public class KiskAI2 extends NpcAI2 {
 	protected void handleAttack(Creature creature) {
 		if (getLifeStats().isFullyRestoredHp())
 			for (Player member : getOwner().getCurrentMemberList())
-				PacketSendUtility.sendPacket(member, STR_BINDSTONE_IS_ATTACKED);
+				PacketSendUtility.sendPacket(member, STR_BINDSTONE_IS_ATTACKED());
 	}
 
 	@Override
 	protected void handleDied() {
-		getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED);
+		getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED());
 		super.handleDied();
 	}
 
@@ -51,7 +51,7 @@ public class KiskAI2 extends NpcAI2 {
 	protected void handleDespawned() {
 		KiskService.getInstance().removeKisk(getOwner());
 		if (!isAlreadyDead())
-			getOwner().broadcastPacket(STR_BINDSTONE_IS_REMOVED);
+			getOwner().broadcastPacket(STR_BINDSTONE_IS_REMOVED());
 
 		super.handleDespawned();
 	}
@@ -59,7 +59,7 @@ public class KiskAI2 extends NpcAI2 {
 	@Override
 	protected void handleDialogStart(Player player) {
 		if (player.getKisk() == getOwner()) {
-			PacketSendUtility.sendPacket(player, STR_BINDSTONE_ALREADY_REGISTERED);
+			PacketSendUtility.sendPacket(player, STR_BINDSTONE_ALREADY_REGISTERED());
 			return;
 		}
 
@@ -74,7 +74,7 @@ public class KiskAI2 extends NpcAI2 {
 						if (!decisionTaken) {
 							// Check again if it's full (If they waited to press OK)
 							if (!getOwner().canBind(responder)) {
-								PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY);
+								PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY());
 								return;
 							}
 							KiskService.getInstance().onBind(getOwner(), responder);
@@ -88,9 +88,9 @@ public class KiskAI2 extends NpcAI2 {
 				});
 
 		} else if (getOwner().getCurrentMemberCount() >= getOwner().getMaxMembers())
-			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_FULL);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_FULL());
 		else
-			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY);
+			PacketSendUtility.sendPacket(player, STR_CANNOT_REGISTER_BINDSTONE_HAVE_NO_AUTHORITY());
 	}
 
 	@Override

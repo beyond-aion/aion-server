@@ -119,7 +119,7 @@ public class _10021FriendsForLife extends QuestHandler {
 										changeQuestStep(env, 4, 5, false); // 5
 										return closeDialogWindow(env);
 									} else {
-										PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY);
+										PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY());
 										return sendQuestSelectionDialog(env);
 									}
 								}

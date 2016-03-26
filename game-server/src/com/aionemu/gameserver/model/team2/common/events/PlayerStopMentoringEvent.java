@@ -25,7 +25,7 @@ public abstract class PlayerStopMentoringEvent<T extends TemporaryPlayerTeam<? e
 	@Override
 	public void handleEvent() {
 		player.setMentor(false);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_MENTOR_END);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_MENTOR_END());
 		team.applyOnMembers(this);
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ABYSS_RANK_UPDATE(2, player));
 	}

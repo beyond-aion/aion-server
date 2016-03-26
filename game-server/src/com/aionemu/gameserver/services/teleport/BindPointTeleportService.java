@@ -37,7 +37,7 @@ public class BindPointTeleportService {
 		HotspotTemplate hotspot = DataManager.HOTSPOT_DATA.getHotspotTemplateById(locId);
 		if (hotspot == null) {
 			AuditLogger.info(player, "Try to use null Hotspot #" + locId);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
 		final long price = computePrice(player, hotspot, kinah);
@@ -52,7 +52,7 @@ public class BindPointTeleportService {
 			@Override
 			public void run() {
 				if (!player.getInventory().tryDecreaseKinah(price, ItemPacketService.ItemUpdateType.DEC_KINAH_FLY)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NOT_ENOUGH_FEE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NOT_ENOUGH_FEE());
 					return;
 				}
 				addCooldown(player, locId);
@@ -84,7 +84,7 @@ public class BindPointTeleportService {
 		if (player.getWorldId() != hotspot.getWorldId()) {
 			AuditLogger.info(player, "Try to use Hotspot #" + hotspot.getId() + " from not native start world " + player.getWorldId() + ". expected "
 				+ hotspot.getWorldId());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return false;
 		}
 		if (!(player.getRace() == Race.PC_ALL) && player.getRace() != hotspot.getRace()) {
@@ -92,12 +92,12 @@ public class BindPointTeleportService {
 			return false;
 		}
 		if (player.getInventory().getKinah() < price) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NOT_ENOUGH_FEE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NOT_ENOUGH_FEE());
 			return false;
 		}
 		Cooldown cooldown = getCooldown(player);
 		if (cooldown != null && cooldown.getTimeLeft() > 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
 			return false;
 		}
 

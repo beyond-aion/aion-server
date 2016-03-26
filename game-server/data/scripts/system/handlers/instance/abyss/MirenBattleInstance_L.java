@@ -47,7 +47,7 @@ public class MirenBattleInstance_L extends GeneralInstanceHandler {
 		if (flyingRing.equals("MIREN_02")) {
 			if (isStartTimer.compareAndSet(false, true)) {
 				for (Player p : instance.getPlayersInside()) {
-					PacketSendUtility.sendPacket(p, STR_MSG_INSTANCE_START_IDABRE);
+					PacketSendUtility.sendPacket(p, STR_MSG_INSTANCE_START_IDABRE());
 					PacketSendUtility.sendPacket(p, new SM_QUEST_ACTION(0, 600));
 				}
 				startFail();

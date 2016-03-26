@@ -71,7 +71,7 @@ public class PortalService {
 		}
 
 		if (instanceRaceReq && !checkRace(player, portalPath.getRace())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE());
 			return;
 		}
 		if (instanceGroupReq && !checkPlayerSize(player, portalPath, npcObjectId)) {
@@ -80,7 +80,7 @@ public class PortalService {
 		int siegeId = portalPath.getSiegeId();
 		if (instanceRaceReq && siegeId != 0) {
 			if (!checkSiegeId(player, siegeId)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE());
 				return;
 			}
 		}
@@ -110,7 +110,7 @@ public class PortalService {
 
 		if (instance == null || !instance.isRegistered(player.getObjectId())) {
 			if (player.getPortalCooldownList().isPortalUseDisabled(mapId)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 				return;
 			} else {
 				log.debug(player.getName() + "doesn't have cd of this instance, can enter and will be registed to this intance");
@@ -140,7 +140,7 @@ public class PortalService {
 					return;
 				}
 				if (SecurityConfig.INSTANCE_KEYCHECK && !checkItemReq(player, portalReq.getItemReq())) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
 					return;
 				}
 			}
@@ -304,7 +304,7 @@ public class PortalService {
 			if (errDialog != 0) {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
 			} else {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
 			}
 			return false;
 		}
@@ -319,13 +319,13 @@ public class PortalService {
 				if (errDialog != 0) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
 				} else {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON());
 				}
 				return false;
 			}
 		} else if (playerSize > 6 && playerSize <= 24) { // alliance
 			if (!player.isInAlliance2()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
 				return false;
 			}
 		} else if (playerSize > 24) { // league

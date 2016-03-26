@@ -56,14 +56,14 @@ public class ItemPurificationService {
 
 		if (resultItem.getNeed_abyss_point() != null) {
 			if (player.getAbyssRank().getAp() < resultItem.getNeed_abyss_point().getCount()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP());
 				return false;
 			}
 		}
 
 		if (resultItem.getNeed_kinah() != null) {
 			if (player.getInventory().getKinah() < resultItem.getNeed_kinah().getCount()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA());
 				return false;
 			}
 		}

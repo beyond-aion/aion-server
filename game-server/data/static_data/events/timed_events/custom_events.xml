@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
+	<event name="Beyond Easter" start="2016-03-24T00:00:00+01:00" end="2016-03-28T23:59:59+01:00">
+		<event_drops>
+			<gd_rule rule_name="Easter Event Drop" base_chance="10" each_member="true">
+				<gd_ratings>
+					<gd_rating rating="NORMAL"/>
+					<gd_rating rating="ELITE"/>
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="186000175" name="[Event] Mottled Egg" />
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+	</event>
+</timed_events>

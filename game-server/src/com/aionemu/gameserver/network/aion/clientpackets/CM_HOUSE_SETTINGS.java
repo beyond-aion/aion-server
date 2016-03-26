@@ -57,13 +57,13 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		// TODO: save signNotice
 
 		if (doorPermission == HousePermissions.DOOR_OPENED_ALL)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OPEN_DOOR);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OPEN_DOOR());
 		else if (doorPermission == HousePermissions.DOOR_OPENED_FRIENDS) {
 			house.getController().kickVisitors(player, false, true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_WITHOUT_FRIENDS);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_WITHOUT_FRIENDS());
 		} else if (doorPermission == HousePermissions.DOOR_CLOSED) {
 			house.getController().kickVisitors(player, true, true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_ALL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_ALL());
 		}
 	}
 

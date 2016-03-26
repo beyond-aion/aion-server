@@ -59,7 +59,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 				writeSystemMsgInfo(0);
 				break;
 			case 5: // canceled
-				writeSystemMsgInfo(STR_EXTRACT_GATHER_CANCEL_1_BASIC.getId());
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_CANCEL_1_BASIC().getId());
 				break;
 			case 6: // success
 				writeSystemMsgInfo(STR_EXTRACT_GATHER_SUCCESS_1_BASIC(null).getId());
@@ -68,7 +68,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 				writeSystemMsgInfo(STR_EXTRACT_GATHER_FAIL_1_BASIC(null).getId());
 				break;
 			case 8: // occupied by another player
-				writeSystemMsgInfo(STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER.getId());
+				writeSystemMsgInfo(STR_EXTRACT_GATHER_OCCUPIED_BY_OTHER().getId());
 				break;
 		}
 	}
@@ -81,8 +81,6 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 	 */
 	private void writeSystemMsgInfo(int msgId) {
 		writeD(msgId); // msgId
-		writeH(0x24); // decoding or smth
-		writeD(nameId); // nameId
-		writeH(0); // decoding/symbol or smth
+		writeNameId(nameId); // nameId
 	}
 }

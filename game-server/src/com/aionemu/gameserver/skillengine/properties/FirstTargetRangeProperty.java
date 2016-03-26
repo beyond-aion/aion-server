@@ -50,7 +50,7 @@ public class FirstTargetRangeProperty {
 		if (!MathUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2)
 			&& !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {
 			if (effector instanceof Player) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET);
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());
 			}
 			return false;
 		}
@@ -60,7 +60,7 @@ public class FirstTargetRangeProperty {
 		if (effector.getTransformModel().getModelId() != 284867) {
 			if (!GeoService.getInstance().canSee(effector, firstTarget)) {
 				if (effector instanceof Player) {
-					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE);
+					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE());
 				}
 				return false;
 			}

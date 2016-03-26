@@ -57,7 +57,7 @@ public class SummonsService {
 				PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 				break;
 			case DISTANCE:
-				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE);
+				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
 				PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 				break;
 			case UNSPECIFIED:

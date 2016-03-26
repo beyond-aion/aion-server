@@ -39,7 +39,7 @@ public class Teleport_to_named extends ConsoleCommand {
 
 		try {
 
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
+			JAXBContext jc = JAXBContext.newInstance(NpcData.class);
 			Unmarshaller un = jc.createUnmarshaller();
 			NpcData data = (NpcData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
 
@@ -65,14 +65,6 @@ public class Teleport_to_named extends ConsoleCommand {
 	@Override
 	public void info(Player admin, String message) {
 		PacketSendUtility.sendMessage(admin, "syntax ///teleport_to_named <named name>");
-	}
-
-	@XmlRootElement(name = "ae_static_data")
-	@XmlAccessorType(XmlAccessType.NONE)
-	private static class StaticData {
-
-		@XmlElement(name = "npcs")
-		public NpcData npcData;
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

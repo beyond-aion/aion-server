@@ -57,9 +57,6 @@
 	<monster_hunt id="17009" start_npc_ids="0" end_npc_ids="800447"/>
 	<monster_hunt id="17010" start_npc_ids="0" end_npc_ids="800447"/>
 	<monster_hunt id="17011" start_npc_ids="0" end_npc_ids="800447"/>
-	<kill_in_world id="17012" start_npc_ids="0" end_npc_ids="800446" worlds="400010000" amount="5"/>
-	<kill_in_world id="17013" start_npc_ids="0" end_npc_ids="800445" worlds="220070000 210050000" amount="5"/>
-	<kill_in_world id="17014" start_npc_ids="0" end_npc_ids="800447" worlds="0" amount="5"/>
 	<monster_hunt id="17015" start_npc_ids="0" end_npc_ids="800446"/>
 	<monster_hunt id="17016" start_npc_ids="0" end_npc_ids="800446"/>
 	<monster_hunt id="17017" start_npc_ids="0" end_npc_ids="800446"/>
@@ -82,6 +79,11 @@
 	<monster_hunt id="27017" start_npc_ids="0" end_npc_ids="800451"/>
 	<monster_hunt id="27018" start_npc_ids="0" end_npc_ids="800450"/>
 	<monster_hunt id="27019" start_npc_ids="0" end_npc_ids="800450"/>
+	
+	<!-- KILL IN WORLD -->
+	<kill_in_world id="17012" start_npc_ids="0" end_npc_ids="800446" worlds="400010000" amount="5"/>
+	<kill_in_world id="17013" start_npc_ids="0" end_npc_ids="800445" worlds="220070000 210050000" amount="5"/>
+	<kill_in_world id="17014" start_npc_ids="0" end_npc_ids="800447" worlds="0" amount="5"/>
 	<kill_in_world id="27012" start_npc_ids="0" end_npc_ids="800451" worlds="400010000" amount="5"/>
 	<kill_in_world id="27013" start_npc_ids="0" end_npc_ids="800450" worlds="220070000 210050000" amount="5"/>
 	<kill_in_world id="27014" start_npc_ids="0" end_npc_ids="800452" worlds="0" amount="5"/>

@@ -46,14 +46,14 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 			case 1:
 				// click on icon
 				if (player.getPostman() != null) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED());
 				} else if (player.isFlying()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_FLIGHT);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_FLIGHT());
 				} else if (haveUnreadBlackcloud) {
 					VisibleObjectSpawner.spawnPostman(player);
 				} else if (haveUnreadExpress) {
 					if (player.getController().hasScheduledTask(TaskId.EXPRESS_MAIL_USE)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_COOLTIME);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_COOLTIME());
 						return;
 					}
 

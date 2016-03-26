@@ -45,7 +45,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		if (targetPlayer == null || !targetPlayer.getCommonData().isOnline()) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_OFFLINE);
 		}	else if (activePlayer.equals(targetPlayer)) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY());
 		} else if (CustomConfig.FRIENDLIST_GM_RESTRICT && ((targetPlayer.isGM() && !activePlayer.isGM()) || (activePlayer.isGM() && !targetPlayer.isGM()))) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDY_CANT_ADD_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName(AdminConfig.CUSTOMTAG_ENABLE)));
 		} else if (activePlayer.getFriendList().getFriend(targetPlayer.getObjectId()) != null) {
@@ -53,7 +53,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		} else if (activePlayer.getRace() != targetPlayer.getRace()) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_NOT_FOUND);
 		} else if (activePlayer.getBlockList().contains(targetPlayer.getObjectId())) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NO_BLOCKED_CHARACTER);
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NO_BLOCKED_CHARACTER());
 		} else if (targetPlayer.getBlockList().contains(activePlayer.getObjectId())) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_BLOCKED_YOU);
 		} else if (activePlayer.getFriendList().isFull()) {
@@ -82,7 +82,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 			boolean requested = targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_BUDDYLIST_ADD_BUDDY_REQUEST, responseHandler);
 			// If the player is busy and could not be asked
 			if (!requested) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY);
+				sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY());
 				return;
 			}
 

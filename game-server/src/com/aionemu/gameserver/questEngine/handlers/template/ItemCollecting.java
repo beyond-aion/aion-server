@@ -204,7 +204,7 @@ public class ItemCollecting extends QuestHandler {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 			List<QuestBonuses> bonuses = template.getBonus();
 			if (!bonuses.isEmpty() && bonuses.get(0).getType() == BonusType.MEDAL && !BonusService.getInstance().checkInventory(player, template)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
 				return closeDialogWindow(env);
 			}
 			if (endNpcs.contains(targetId)) {

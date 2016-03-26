@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -80,6 +81,14 @@ public class ChatUtil {
 	 */
 	public static String name(String name) {
 		return String.format("[charname:%s;1 1 1]", name); // the 3 parameters are color values, but client doesn't render them anyways
+	}
+
+	/**
+	 * This displays the name of the given name ID in chat.<br>
+	 * Keep in mind that some nameIds need to be calculated beforehand, e.g. for npcs (nameId * 2 + 1).
+	 */
+	public static String nameId(int nameId) {
+		return "$" + new String(Util.intToReversedByteArray(nameId), Charset.forName("UTF-16LE"));
 	}
 
 	/**

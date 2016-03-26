@@ -186,7 +186,7 @@ public class Kisk extends SummonedObject<Player> {
 		}
 
 		if (SerialKillerService.getInstance().isRestrictDynamicBindstone(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_NOT_BINDSTONE);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_NOT_BINDSTONE());
 			return false;
 		}
 

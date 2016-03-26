@@ -272,6 +272,7 @@
 	<report_to id="4300" start_npc_ids="204323" end_npc_ids="205126"/>
 	<report_to id="4329" start_npc_ids="204344" end_npc_ids="204341"/>
 	<report_to id="4330" start_npc_ids="204344" end_npc_ids="204342"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2301" start_npc_ids="204399"/>	
 	<item_collecting id="2302" start_npc_ids="204324"/>
@@ -448,5 +449,7 @@
 	<monster_hunt id="26901" start_npc_ids="204301"/>
 	<monster_hunt id="26905" start_npc_ids="204301" end_npc_ids="204372" end_dialog_id="2375"/>
 	<monster_hunt id="26906" start_npc_ids="204301" end_npc_ids="204369" end_dialog_id="2375"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="49020" end_npc_ids="204301" worlds="220020000" amount="5" invasion_world="220020000"/>
 </quest_scripts>

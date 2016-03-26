@@ -30,7 +30,7 @@ public class Say extends AdminCommand {
 		}
 
 		if (!(admin.getTarget() instanceof Npc)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET);
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 

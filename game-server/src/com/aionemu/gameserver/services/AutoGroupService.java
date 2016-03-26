@@ -404,7 +404,7 @@ public class AutoGroupService {
 		int mapId = agt.getInstanceMapId();
 		int instanceMaskId = agt.getInstanceMaskId();
 		if (!agt.hasLevelPermit(player.getLevel())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
 			return false;
 		}
 		if (agt.isIronWarFront() && !IronWallFrontService.getInstance().isRegisterAvailable()) {
@@ -421,7 +421,7 @@ public class AutoGroupService {
 			&& !PvPArenaService.isPvPArenaAvailable(player, agt)) {
 			return false;
 		} else if (hasCoolDown(player, mapId)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 			return false;
 		}
 		switch (ert) {
@@ -441,7 +441,7 @@ public class AutoGroupService {
 				}
 				PlayerGroup group = player.getPlayerGroup2();
 				if (group == null || !group.isLeader(player)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
 					return false;
 				}
 				if (agt.isHarmonyArena() || agt.isTrainigHarmonyArena()) {
@@ -484,7 +484,7 @@ public class AutoGroupService {
 						return false;
 					}
 					if (!agt.hasLevelPermit(member.getLevel())) {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL);
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
 					}

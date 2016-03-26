@@ -94,7 +94,7 @@ public class CM_MANASTONE extends AionClientPacket {
 			case 4: // add godstone
 				Item weaponItem = player.getInventory().getItemByObjId(targetItemUniqueId);
 				if (weaponItem == null) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM());
 					return;
 				}
 				ItemSocketService.socketGodstone(player, weaponItem, stoneUniqueId);

@@ -34,6 +34,7 @@
 			41565 [XML] The Ballad of Fortitude
 		[END] SUMMARY
 	-->
+	<!-- REPORT TO -->
 	<report_to_many id="12400" start_npc_ids="205892" end_npc_ids="205892">
 		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
 		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
@@ -154,6 +155,7 @@
 		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
 		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
 	</report_to_many>
+	<!-- ITEM COLLECTING -->
 	<item_collecting id="41560" start_npc_ids="205575"/>
 	<item_collecting id="41561" start_npc_ids="205575"/>
 	<item_collecting id="41562" start_npc_ids="205575"/>

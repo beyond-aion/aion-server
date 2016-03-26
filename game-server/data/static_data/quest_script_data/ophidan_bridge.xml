@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!-- 
 		[BEGIN] SUMMARY
 			16970 [XML] The Ophidan Bridge
@@ -19,19 +19,9 @@
 	<report_to id="16979" start_npc_ids="801762" end_npc_ids="801763"/>
 	<report_to id="26970" start_npc_ids="801764" end_npc_ids="801765"/>
 	<report_to id="26979" start_npc_ids="802026" end_npc_ids="801764"/>
-	<!-- COLLECTING QUESTS -->
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="16971" start_npc_ids="801763" end_npc_ids="801762">
-		<monster var="0" end_var="1" npc_ids="230413 230414 230415 230416"/>
-	</monster_hunt>
-	<monster_hunt id="16972" start_npc_ids="801762">
-		<monster var="0" end_var="1" npc_ids="231050"/>
-	</monster_hunt>
-	<monster_hunt id="26971" start_npc_ids="801765" end_npc_ids="801764">
-		<monster var="0" end_var="1" npc_ids="230413 230414 230415 230416"/>
-	</monster_hunt>
-	<monster_hunt id="26972" start_npc_ids="801764">
-		<monster var="0" end_var="1" npc_ids="231050"/>
-	</monster_hunt>
-	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="16971" start_npc_ids="801763" end_npc_ids="801762"/>
+	<monster_hunt id="16972" start_npc_ids="801762"/>
+	<monster_hunt id="26971" start_npc_ids="801765" end_npc_ids="801764"/>
+	<monster_hunt id="26972" start_npc_ids="801764"/>
 </quest_scripts>

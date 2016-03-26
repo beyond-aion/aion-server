@@ -53,7 +53,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 				return;
 			}
 			if (isForbidden()) {
-				getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID);
+				getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
 				return;
 			}
 			runImpl();

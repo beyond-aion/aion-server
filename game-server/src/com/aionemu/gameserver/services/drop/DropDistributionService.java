@@ -38,7 +38,7 @@ public class DropDistributionService {
 		int luck = 0;
 		if (player.isInGroup2() || player.isInAlliance2()) {
 			if (roll == 0) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
 			} else {
 				maxRoll = player.isInGroup2() ? 100 : 1000;
 				luck = Rnd.get(1, maxRoll);
@@ -82,9 +82,9 @@ public class DropDistributionService {
 			}
 
 			if (bid > 0) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME());
 			} else {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
 			}
 
 			for (Player member : dropNpc.getInRangePlayers()) {
@@ -148,7 +148,7 @@ public class DropDistributionService {
 					continue;
 				}
 				if (requestedItem.getWinningPlayer() == null) {
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ALL_GIVEUP);
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ALL_GIVEUP());
 				}
 				int teamId = member.getCurrentTeamId();
 				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer()

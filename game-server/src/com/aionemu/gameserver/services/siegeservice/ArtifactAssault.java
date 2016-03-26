@@ -45,7 +45,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 
 				@Override
 				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
 				}
 			});
 		}

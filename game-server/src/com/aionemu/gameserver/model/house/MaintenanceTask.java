@@ -167,9 +167,9 @@ public class MaintenanceTask extends AbstractCronTask {
 
 			if (pcd.isOnline()) {
 				if (warnCount == 3)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE());
 				else
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE());
 			}
 			MailFormatter.sendHouseMaintenanceMail(house, warnCount, impoundTime);
 		}

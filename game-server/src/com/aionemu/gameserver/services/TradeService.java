@@ -111,7 +111,7 @@ public class TradeService {
 
 		// 1. If useKinah, check for required Kinah
 		if (useKinah && !tradeList.calculateBuyListPrice(player, sellModifier)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_MONEY());
 			return false;
 		}
 
@@ -140,7 +140,7 @@ public class TradeService {
 		// 5. check sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			if (!canBuyLimitItem(npc, player, tradeItem)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_BUYING_CANT_SELECT_NO_ITEMS);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_BUYING_CANT_SELECT_NO_ITEMS());
 				return false;
 			}
 		}
@@ -320,7 +320,7 @@ public class TradeService {
 			return false;
 		}
 		if (player.getInventory().isFull()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 			return false;
 		}
 
@@ -398,7 +398,7 @@ public class TradeService {
 				}
 				if ((requiredAp - diferenceAp) > 0) {
 					if (player.getAbyssRank().getAp() < (requiredAp - diferenceAp)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 						return false;
 					}
 					AbyssPointsService.addAp(player, -(requiredAp - diferenceAp));

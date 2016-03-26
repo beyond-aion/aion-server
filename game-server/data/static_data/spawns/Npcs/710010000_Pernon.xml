@@ -26,8 +26,6 @@
 			<spot x="1613.0619" y="311.92545" z="79.44548" random_walk="8"/>
 			<spot x="2196.8706" y="2036.8414" z="238.625" random_walk="8"/>
 			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
-			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
-			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
 			<spot x="2728.8018" y="281.5719" z="76.5" random_walk="8"/>
 		</spawn>
 		<!-- Agiella -->
@@ -239,7 +237,6 @@
 			<spot x="2355.623" y="341.58997" z="69.25"/>
 			<spot x="2357.9456" y="379.52628" z="69.1116"/>
 			<spot x="2361.9" y="326.77" z="69.5" walker_id="5BC2F17B9D80D882E17648BC798F834B0E3139C9"/>
-			<spot x="2361.9" y="326.77" z="69.5" walker_id="5BC2F17B9D80D882E17648BC798F834B0E3139C9"/>
 			<spot x="2364.9236" y="338.4797" z="69.625"/>
 			<spot x="2366.7512" y="344.74567" z="69.625"/>
 			<spot x="2367.121" y="386.2642" z="68.47738"/>
@@ -316,7 +313,7 @@
 		</spawn>
 		<!-- Alendrel -->
 		<spawn npc_id="830497" respawn_time="295">
-			<spot x="2590.7786" y="2627.884" z="356.36972" h="40"/>
+			<spot x="2590.7786" y="2627.884" z="350.0901" h="40"/>
 		</spawn>
 		<!-- Alnin -->
 		<spawn npc_id="830102" respawn_time="295">
@@ -524,7 +521,6 @@
 		</spawn>
 		<!-- Baby Brax -->
 		<spawn npc_id="219164" respawn_time="295">
-			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
 			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
 		</spawn>
 		<!-- Barbeta -->
@@ -2225,7 +2221,7 @@
 		</spawn>
 		<!-- Neirenda -->
 		<spawn npc_id="830498" respawn_time="295">
-			<spot x="2602.6101" y="2627.0872" z="356.36972" h="40"/>
+			<spot x="2602.6101" y="2627.0872" z="351.72305" h="40"/>
 		</spawn>
 		<!-- Nelriana -->
 		<spawn npc_id="830976" respawn_time="295">
@@ -2302,13 +2298,7 @@
 		<!-- Nojolf Kit -->
 		<spawn npc_id="219162" respawn_time="295">
 			<spot x="493.99" y="1498.32" z="154.81564" h="48" walker_id="2C8BF97497B779D961206105F22BD9364496E0A1"/>
-			<spot x="493.99" y="1498.32" z="154.81564" h="48" walker_id="2C8BF97497B779D961206105F22BD9364496E0A1"/>
 			<spot x="614.18" y="1807.29" z="158.24188" h="101" walker_id="2FF253B1BAAE3D33CE387EF489966C07C61B7D57"/>
-			<spot x="614.18" y="1807.29" z="158.24188" h="101" walker_id="2FF253B1BAAE3D33CE387EF489966C07C61B7D57"/>
-			<spot x="614.18" y="1807.29" z="158.24188" h="101" walker_id="2FF253B1BAAE3D33CE387EF489966C07C61B7D57"/>
-			<spot x="614.18" y="1807.29" z="158.24188" h="101" walker_id="2FF253B1BAAE3D33CE387EF489966C07C61B7D57"/>
-			<spot x="614.18" y="1807.29" z="158.24188" h="101" walker_id="2FF253B1BAAE3D33CE387EF489966C07C61B7D57"/>
-			<spot x="615.83" y="2584.96" z="220.29938" h="107" walker_id="695230E02E52B53039A891D3F511DA6DA46552A0"/>
 			<spot x="615.83" y="2584.96" z="220.29938" h="107" walker_id="695230E02E52B53039A891D3F511DA6DA46552A0"/>
 			<spot x="643.81836" y="1131.6274" z="153.3534"/>
 			<spot x="676.5456" y="1164.5521" z="156.7333"/>
@@ -2316,28 +2306,17 @@
 			<spot x="700.01733" y="1103.9082" z="141.00038" random_walk="8"/>
 			<spot x="704.56" y="1127.71" z="145.93124" walker_id="0E96125D78758497FAD3F0E8F51C60B683B4B0BB"/>
 			<spot x="759.72" y="1570.53" z="122.86374" h="22" walker_id="F927E23F00E18227F3D1C04CD3D16DF011B6F5A0"/>
-			<spot x="759.72" y="1570.53" z="122.86374" h="22" walker_id="F927E23F00E18227F3D1C04CD3D16DF011B6F5A0"/>
-			<spot x="759.72" y="1570.53" z="122.86374" h="22" walker_id="F927E23F00E18227F3D1C04CD3D16DF011B6F5A0"/>
-			<spot x="759.72" y="1570.53" z="122.86374" h="22" walker_id="F927E23F00E18227F3D1C04CD3D16DF011B6F5A0"/>
-			<spot x="759.72" y="1570.53" z="122.86374" h="22" walker_id="F927E23F00E18227F3D1C04CD3D16DF011B6F5A0"/>
 			<spot x="892.98" y="470.94" z="110.380005" walker_id="82E57A4402E0F1914908B78DDAF9491444D44DFE"/>
 			<spot x="922.7346" y="473.67267" z="109.292984"/>
 			<spot x="927.96796" y="511.33997" z="108.091" random_walk="8"/>
 			<spot x="950.33" y="516.53" z="108.90314" walker_id="897B6ACFBC4CBC17E46C82163EB0657CD55092AB"/>
 			<spot x="962.664" y="519.2434" z="109.64964" random_walk="8"/>
 			<spot x="963.7" y="2529.0" z="227.31876" h="118" walker_id="C7FBCFCF6753F4779A2B2FD2444B459ACC9C3842"/>
-			<spot x="963.7" y="2529.0" z="227.31876" h="118" walker_id="C7FBCFCF6753F4779A2B2FD2444B459ACC9C3842"/>
-			<spot x="1136.94" y="2528.27" z="236.71811" h="50" walker_id="5EA1E6075A07D8C8149A5820C8F13CE991C99BFF"/>
 			<spot x="1136.94" y="2528.27" z="236.71811" h="50" walker_id="5EA1E6075A07D8C8149A5820C8F13CE991C99BFF"/>
 			<spot x="1209.97" y="1443.91" z="99.50187" h="92" walker_id="AEF62F868A6209E7F9BC547C0EDEA288BFE5B37E"/>
-			<spot x="1209.97" y="1443.91" z="99.50187" h="92" walker_id="AEF62F868A6209E7F9BC547C0EDEA288BFE5B37E"/>
-			<spot x="1441.15" y="2314.12" z="235.39752" h="10" walker_id="17940630CC13C061F5CFB0C658483CF7E704F691"/>
 			<spot x="1441.15" y="2314.12" z="235.39752" h="10" walker_id="17940630CC13C061F5CFB0C658483CF7E704F691"/>
 			<spot x="1473.15" y="2349.67" z="237.96062" h="41" walker_id="3197E70AB09BB9A2B5EEB0FBFF198DA8466F0B88"/>
-			<spot x="1473.15" y="2349.67" z="237.96062" h="41" walker_id="3197E70AB09BB9A2B5EEB0FBFF198DA8466F0B88"/>
 			<spot x="2077.92" y="2248.36" z="240.82256" h="6" walker_id="2594FD23F4CF900259FB1D54FE2B375339EA9CA6"/>
-			<spot x="2077.92" y="2248.36" z="240.82256" h="6" walker_id="2594FD23F4CF900259FB1D54FE2B375339EA9CA6"/>
-			<spot x="2560.88" y="2643.6" z="346.74295" h="60" walker_id="0E63E44D0359A9934B6A5AE11209CD8D4356F4C1"/>
 			<spot x="2560.88" y="2643.6" z="346.74295" h="60" walker_id="0E63E44D0359A9934B6A5AE11209CD8D4356F4C1"/>
 		</spawn>
 		<!-- Nora -->
@@ -2366,7 +2345,7 @@
 		</spawn>
 		<!-- Oliva -->
 		<spawn npc_id="830820" respawn_time="295">
-			<spot x="1985.8607" y="1564.9672" z="72.715698" h="47"/>
+			<spot x="1985.1749" y="1565.2118" z="70.24309" h="55"/>
 		</spawn>
 		<!-- Omaris -->
 		<spawn npc_id="830921" respawn_time="295">

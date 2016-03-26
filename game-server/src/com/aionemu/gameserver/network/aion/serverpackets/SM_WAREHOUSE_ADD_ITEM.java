@@ -22,15 +22,10 @@ public class SM_WAREHOUSE_ADD_ITEM extends AionServerPacket {
 	private Player player;
 	private ItemAddType addType;
 
-	public SM_WAREHOUSE_ADD_ITEM(Item item, int warehouseType, Player player) {
+	public SM_WAREHOUSE_ADD_ITEM(Item item, int warehouseType, Player player, ItemAddType addType) {
 		this.player = player;
 		this.warehouseType = warehouseType;
 		this.items = Collections.singletonList(item);
-		this.addType = ItemAddType.ALL_SLOT;
-	}
-
-	public SM_WAREHOUSE_ADD_ITEM(Item item, int warehouseType, Player player, ItemAddType addType) {
-		this(item, warehouseType, player);
 		this.addType = addType;
 	}
 
@@ -52,8 +47,7 @@ public class SM_WAREHOUSE_ADD_ITEM extends AionServerPacket {
 		writeC(0); // some item info (4 - weapon, 7 - armor, 8 - rings, 17 - bottles)
 		writeNameId(itemTemplate.getNameId());
 
-		ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
-		itemInfoBlob.writeMe(getBuf());
+		ItemInfoBlob.getFullBlob(player, item).writeMe(getBuf());
 
 		writeH((int) (item.getEquipmentSlot() & 0xFFFF));
 	}

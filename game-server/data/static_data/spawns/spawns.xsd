@@ -135,7 +135,7 @@
 			<xs:element name="temporary_spawn" type="TemporarySpawn" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="spot" type="SpawnSpotTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="npc_id" type="xs:int"/>
+		<xs:attribute name="npc_id" type="xs:int" use="required"/>
 		<xs:attribute name="pool" type="xs:int" use="optional"/>
 		<xs:attribute name="respawn_time" type="xs:int"/>
 		<xs:attribute name="handler" type="SpawnHandlerType"/>

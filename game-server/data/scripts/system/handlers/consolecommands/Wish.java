@@ -17,157 +17,126 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
  * @author ginho1
+ * @modified Neon
  */
 public class Wish extends ConsoleCommand {
 
 	public Wish() {
-		super("wish");
+		super("wish", "Spawns npcs and adds items.");
+
+		setParamInfo(
+			"<npc name> - Spawns the specified npc on your targets position.",
+			"<count> <item name> - Adds the specified item to your target.",
+			"<item name> <enchant> - Adds the specified item with the enchant level to your target."
+		);
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1) {
-			info(admin, null);
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
+		if (params.length == 1) { // spawn npc
+			String npcName = params[0];
+			try {
+				JAXBContext jc = JAXBContext.newInstance(NpcData.class);
+				Unmarshaller un = jc.createUnmarshaller();
+				NpcData data = (NpcData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
 
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
+				NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-		final Player player = (Player) target;
+				if (npcTemplate != null) {
+					int npcId = npcTemplate.getTemplateId();
+					SpawnTemplate spawn = SpawnEngine.addNewSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
+					if (spawn == null) {
+						sendInfo(admin, "There is no template with id " + npcId);
+						return;
+					}
 
-		String objName = params[0];
-		long objCount = 1;
-		int objId = 0;
-		int enchant = 0;
+					VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
+					if (visibleObject == null) {
+						sendInfo(admin, "Spawn id " + npcId + " was not found!");
+						return;
+					}
 
-		try {
-			objCount = Integer.parseInt(params[0]);
-			if (objCount > 10)
-				objCount = 10;
-			objName = params[1];
-		} catch (NumberFormatException e) {
-		}
-
-		try {
-			enchant = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-		}
-
-		try {
-
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			ItemData data = (ItemData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/items.xml"));
-
-			ItemTemplate itemTemplate = data.getItemTemplate(objName);
-
-			if (itemTemplate != null) {
-				objId = itemTemplate.getTemplateId();
-			}
-
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Item templates reload failed!");
-			System.out.println(e);
-		}
-
-		if (objId > 0) {
-
-			if (!AdminService.getInstance().canOperate(admin, player, objId, "command ///wish"))
-				return;
-
-			long count = 1;
-
-			if (enchant > 0) {
-				Item newItem = ItemFactory.newItem(objId);
-
-				if (newItem == null) {
-					return;
+					String objectName = visibleObject.getObjectTemplate().getName();
+					sendInfo(admin, objectName + " spawned");
 				}
-				newItem.setEnchantLevel(enchant);
-				count = ItemService.addItem(player, newItem);
-			} else {
-				count = ItemService.addItem(player, objId, objCount);
+			} catch (Exception e) {
+				sendInfo(admin, "Npc templates reload failed!");
+				System.out.println(e);
 			}
-
-			if (count == 0) {
-				if (admin != player) {
-					PacketSendUtility.sendMessage(admin, "You successfully gave " + objCount + " x [item:" + objId + "] to " + player.getName() + ".");
-					PacketSendUtility.sendMessage(player, "You successfully received " + objCount + " x [item:" + objId + "] from " + admin.getName() + ".");
-				} else
-					PacketSendUtility.sendMessage(admin, "You successfully received " + objCount + " x [item:" + objId + "]");
-			} else {
-				PacketSendUtility.sendMessage(admin, "Item couldn't be added");
-			}
-			return;
-		}
-
-		try {
-
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			NpcData data = (NpcData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
-
-			NpcTemplate npcTemplate = data.getNpcTemplate(objName);
-
-			if (npcTemplate != null) {
-
-				System.out.println(npcTemplate.getName());
-				objId = npcTemplate.getTemplateId();
-			}
-
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!");
-			System.out.println(e);
-		}
-
-		if (objId > 0) {
-
-			float x = admin.getX();
-			float y = admin.getY();
-			float z = admin.getZ();
-			byte heading = admin.getHeading();
-			int worldId = admin.getWorldId();
-
-			SpawnTemplate spawn = SpawnEngine.addNewSpawn(worldId, objId, x, y, z, heading, 0);
-
-			if (spawn == null) {
-				PacketSendUtility.sendMessage(admin, "There is no template with id " + objId);
+		} else { // add item
+			if (!(admin.getTarget() instanceof Player)) {
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 
-			VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
-
-			if (visibleObject == null) {
-				PacketSendUtility.sendMessage(admin, "Spawn id " + objId + " was not found!");
-				return;
+			Player target = (Player) admin.getTarget();
+			String itemName = params[0];
+			long addCount = 1;
+			int itemId = 0;
+			int enchant = 0;
+			try {
+				addCount = Integer.parseInt(params[0]);
+				itemName = params[1];
+			} catch (NumberFormatException e) {
+				try {
+					enchant = Integer.parseInt(params[1]);
+				} catch (NumberFormatException e2) {
+				}
 			}
 
-			String objectName = visibleObject.getObjectTemplate().getName();
-			PacketSendUtility.sendMessage(admin, objectName + " spawned");
-		}
-	}
+			try {
+				JAXBContext jc = JAXBContext.newInstance(ItemData.class);
+				Unmarshaller un = jc.createUnmarshaller();
+				ItemData data = (ItemData) un.unmarshal(new FileInputStream("./data/scripts/system/handlers/consolecommands/data/items.xml"));
+				ItemTemplate itemTemplate = data.getItemTemplate(itemName);
 
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///wish <item Id | link> <quantity>");
+				if (itemTemplate != null) {
+					itemId = itemTemplate.getTemplateId();
+					if (!AdminService.getInstance().canOperate(admin, target, itemId, "command ///wish"))
+						return;
+
+					long addedCount = 0;
+					if (enchant > 0) {
+						Item newItem = ItemFactory.newItem(itemId);
+
+						if (newItem == null)
+							return;
+						newItem.setEnchantLevel(enchant);
+						addedCount = addCount - ItemService.addItem(target, newItem);
+					} else {
+						addedCount = addCount - ItemService.addItem(target, itemId, addCount);
+					}
+
+					if (addedCount <= 0) {
+						sendInfo(admin, "Item couldn't be added");
+					} else {
+						if (!admin.equals(target)) {
+							sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + target.getName() + ".");
+							sendInfo(target, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
+						}
+					}
+				}
+			} catch (Exception e) {
+				sendInfo(admin, "Item templates reload failed!");
+				System.out.println(e);
+			}
+		}
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)
@@ -221,17 +190,6 @@ public class Wish extends ConsoleCommand {
 		protected List<ItemTemplate> getData() {
 			return its;
 		}
-	}
-
-	@XmlRootElement(name = "ae_static_data")
-	@XmlAccessorType(XmlAccessType.NONE)
-	private static class StaticData {
-
-		@XmlElement(name = "items")
-		public ItemData itemData;
-
-		@XmlElement(name = "npcs")
-		public NpcData npcData;
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

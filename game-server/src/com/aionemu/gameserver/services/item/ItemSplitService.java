@@ -32,8 +32,7 @@ public class ItemSplitService {
 			return;
 		}
 		if (player.isTrading()) {
-			// You cannot split items in the inventory during a trade.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300713));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INVENTORY_SPLIT_DURING_TRADE());
 			return;
 		}
 

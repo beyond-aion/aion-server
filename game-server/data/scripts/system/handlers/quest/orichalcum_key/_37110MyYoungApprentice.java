@@ -66,7 +66,7 @@ public class _37110MyYoungApprentice extends QuestHandler {
 							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 217170, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 							return true;
 						} else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee);
+							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee());
 					}
 				}
 			}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			39700 [XML] Introducing The Merry and Green
@@ -46,57 +46,26 @@
 	<report_to id="39700" start_npc_ids="800930" end_npc_ids="800945"/>
 	<report_to id="49700" start_npc_ids="800933" end_npc_ids="800948"/>
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="39701" start_npc_ids="800931 800932" />
-	<item_collecting id="39708" start_npc_ids="800931 800932" />
-	<item_collecting id="39709" start_npc_ids="800936 800937 800938" />
-	<item_collecting id="49701" start_npc_ids="800934 800935" />
-	<item_collecting id="49708" start_npc_ids="800934 800935" />
-	<item_collecting id="49709" start_npc_ids="800936 800937 800938" />
+	<item_collecting id="39701" start_npc_ids="800931 800932"/>
+	<item_collecting id="39708" start_npc_ids="800931 800932"/>
+	<item_collecting id="39709" start_npc_ids="800936 800937 800938"/>
+	<item_collecting id="49701" start_npc_ids="800934 800935"/>
+	<item_collecting id="49708" start_npc_ids="800934 800935"/>
+	<item_collecting id="49709" start_npc_ids="800936 800937 800938"/>
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="39702" start_npc_ids="800931 800932">
-		<monster var="0" end_var="6" npc_ids="701568" />
-	</monster_hunt>
-	<monster_hunt id="39703" start_npc_ids="800931 800932">
-		<monster var="0" end_var="7" npc_ids="801675" />
-	</monster_hunt>
-	<monster_hunt id="39706" start_npc_ids="800931 800932">
-		<monster var="0" end_var="10" npc_ids="230349 233011" />
-	</monster_hunt>
-	<monster_hunt id="39707" start_npc_ids="800931 800932">
-		<monster var="0" end_var="10" npc_ids="230318" />
-	</monster_hunt>
-	<monster_hunt id="39710" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="230510" />
-	</monster_hunt>
-	<monster_hunt id="39711" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="231271 231272" />
-	</monster_hunt>
-	<monster_hunt id="39712" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="6" npc_ids="701676" />
-	</monster_hunt>
-	<monster_hunt id="39715" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
-	</monster_hunt>
-	<monster_hunt id="49702" start_npc_ids="800934 800935">
-		<monster var="0" end_var="6" npc_ids="701568" />
-	</monster_hunt>
-	<monster_hunt id="49706" start_npc_ids="800934 800935">
-		<monster var="0" end_var="10" npc_ids="230359 233010" />
-	</monster_hunt>
-	<monster_hunt id="49707" start_npc_ids="800934 800935">
-		<monster var="0" end_var="10" npc_ids="230269" />
-	</monster_hunt>
-	<monster_hunt id="49710" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="230510" />
-	</monster_hunt>
-	<monster_hunt id="49711" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="231271 231272" />
-	</monster_hunt>
-	<monster_hunt id="49712" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="6" npc_ids="701676" />
-	</monster_hunt>
-	<monster_hunt id="49715" start_npc_ids="800936 800937 800938">
-		<monster var="0" end_var="10" npc_ids="231284 231285 231286 231287 231288 231289" />
-	</monster_hunt>
-	<!-- ITEM ORDERS QUESTS -->
+	<monster_hunt id="39702" start_npc_ids="800931 800932"/>
+	<monster_hunt id="39703" start_npc_ids="800931 800932"/>
+	<monster_hunt id="39706" start_npc_ids="800931 800932"/>
+	<monster_hunt id="39707" start_npc_ids="800931 800932"/>
+	<monster_hunt id="39710" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="39711" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="39712" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="39715" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="49702" start_npc_ids="800934 800935"/>
+	<monster_hunt id="49706" start_npc_ids="800934 800935"/>
+	<monster_hunt id="49707" start_npc_ids="800934 800935"/>
+	<monster_hunt id="49710" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="49711" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="49712" start_npc_ids="800936 800937 800938"/>
+	<monster_hunt id="49715" start_npc_ids="800936 800937 800938"/>
 </quest_scripts>

@@ -44,7 +44,7 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("RIGHT_WING_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
-				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE);
+				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 

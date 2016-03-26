@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 <!--
   [BEGIN] SUMMARY
 			30600 [SCRIPT] [Group] Fight of the Navigators
@@ -15,32 +15,12 @@
 		[END] SUMMARY
 -->
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="30601" start_npc_ids="800324">
-		<monster var="0" end_var="5" npc_ids="219240 219242 219243 219244 219241"/>
-	</monster_hunt>
-	<monster_hunt id="30603" start_npc_ids="800325">
-		<monster var="0" end_var="9" npc_ids="219256 219259 219267 219261 219271"/>
-		<monster var="1" end_var="9" npc_ids="219257 219258 219268 219260 219262"/>
-		<monster var="2" end_var="1" npc_ids="219255"/>
-		<monster var="3" end_var="1" npc_ids="219286"/>
-	</monster_hunt>
-	<monster_hunt id="30604" start_npc_ids="800325" end_npc_ids="205842" start_dialog_id="4762">
-		<monster var="0" end_var="6" npc_ids="219240 219242 219343 219244 219241"/>
-		<monster var="1" end_var="15" npc_ids="219245"/>
-	</monster_hunt>
-	<monster_hunt id="30611" start_npc_ids="800326">
-		<monster var="0" end_var="5" npc_ids="219240 219242 219243 219244 219241"/>
-	</monster_hunt>
-	<monster_hunt id="30613" start_npc_ids="800327">
-		<monster var="0" end_var="9" npc_ids="219256 219259 219267 219261 219271"/>
-		<monster var="1" end_var="9" npc_ids="219257 219258 219268 219260 219262"/>
-		<monster var="2" end_var="1" npc_ids="219255"/>
-		<monster var="3" end_var="1" npc_ids="219286"/>
-	</monster_hunt>
-	<monster_hunt id="30614" start_npc_ids="800327" end_npc_ids="205864" start_dialog_id="4762">
-		<monster var="0" end_var="6" npc_ids="219240 219242 219343 219244 219241"/>
-		<monster var="1" end_var="15" npc_ids="219245"/>
-	</monster_hunt>
+	<monster_hunt id="30601" start_npc_ids="800324"/>
+	<monster_hunt id="30603" start_npc_ids="800325"/>
+	<monster_hunt id="30604" start_npc_ids="800325" end_npc_ids="205842" start_dialog_id="4762"/>
+	<monster_hunt id="30611" start_npc_ids="800326"/>
+	<monster_hunt id="30613" start_npc_ids="800327"/>
+	<monster_hunt id="30614" start_npc_ids="800327" end_npc_ids="205864" start_dialog_id="4762"/>
 	<!-- COLLECTING QUESTS -->
     <item_collecting id="30602" start_npc_ids="800324"/>
     <item_collecting id="30612" start_npc_ids="800326"/>

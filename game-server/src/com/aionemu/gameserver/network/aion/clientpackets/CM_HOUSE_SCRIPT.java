@@ -46,7 +46,7 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		if (compressedSize > MAX_COMPRESSED_SIZE) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW());
 			return;
 		}
 

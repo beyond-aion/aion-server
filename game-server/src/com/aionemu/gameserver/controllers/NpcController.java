@@ -44,7 +44,6 @@ import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -116,7 +115,7 @@ public class NpcController extends CreatureController<Npc> {
 	public void onDespawn() {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
-		DropService.getInstance().unregisterDrop(getOwner());
+		DropService.getInstance().unregisterDrop(owner);
 		owner.getAi2().onGeneralEvent(AIEventType.DESPAWNED);
 		super.onDespawn();
 	}
@@ -162,7 +161,7 @@ public class NpcController extends CreatureController<Npc> {
 				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 				Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 				if (drops != null) {
-					for (DropItem dropItem : drops)
+					for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
 						DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
 				}
 				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
@@ -251,13 +250,15 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onDialogRequest(Player player) {
 		// notify npc dialog request observer
-		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC);
-			AuditLogger.info(player, "Player " + player.getName() + " try to talk NPC in wrong distance ");
-			return;
-		}
 		if (!getOwner().getObjectTemplate().canInteract())
 			return;
+		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false)) {
+			if (getOwner().getObjectTemplate().isDialogNpc())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DIALOG_TOO_FAR_TO_TALK());
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
+			return;
+		}
 		player.getObserveController().notifyRequestDialogObservers(getOwner());
 
 		getOwner().getAi2().onCreatureEvent(AIEventType.DIALOG_START, player);

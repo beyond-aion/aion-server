@@ -58,7 +58,7 @@ public class FirstTargetProperty {
 				}
 				if (changeTargetToMe) {
 					if (skill.getEffector() instanceof Player)
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY);
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY());
 					skill.setFirstTarget(skill.getEffector());
 				}
 				break;
@@ -80,7 +80,7 @@ public class FirstTargetProperty {
 						TargetRangeAttribute type = skill.getSkillTemplate().getProperties().getTargetType();
 						if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY && skill.getSkillId() != 2768)
 							|| type == TargetRangeAttribute.PARTY || skill.getSkillId() == 2353) { // TODO: Remove ID, find logic!
-							PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+							PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 							return false;
 						}
 					}
@@ -102,7 +102,7 @@ public class FirstTargetProperty {
 						}
 					}
 					if (!myParty) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 						return false;
 					}
 
@@ -111,7 +111,7 @@ public class FirstTargetProperty {
 
 				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill)) {
 					if (skill.getEffector() instanceof Player) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					}
 					return false;
 				}
@@ -127,7 +127,7 @@ public class FirstTargetProperty {
 						return false;
 
 					if (!isTargetAllowed(skill)) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 						return false;
 					}
 				} else {

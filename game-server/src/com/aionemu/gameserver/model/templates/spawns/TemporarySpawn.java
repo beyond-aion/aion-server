@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.utils.gametime.GameTime;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 
 /**
  * @author xTz
@@ -64,16 +64,14 @@ public class TemporarySpawn {
 	}
 
 	private boolean isTime(Integer hour, Integer day, Integer month) {
-		GameTime gameTime = GameTimeManager.getGameTime();
-		if (hour != null && hour == gameTime.getHour()) {
-			if (day == null) {
-				return true;
-			}
-			if (day == gameTime.getDay()) {
-				return month == null || month == gameTime.getMonth();
-			}
-		}
-		return false;
+		GameTime gameTime = GameTimeService.getInstance().getGameTime();
+		if (hour != null && hour != gameTime.getHour())
+			return false;
+		if (day != null && day != gameTime.getDay())
+			return false;
+		if (month != null && month != gameTime.getMonth())
+			return false;
+		return true;
 	}
 
 	public boolean canSpawn() {
@@ -85,7 +83,7 @@ public class TemporarySpawn {
 	}
 
 	public boolean isInSpawnTime() {
-		GameTime gameTime = GameTimeManager.getGameTime();
+		GameTime gameTime = GameTimeService.getInstance().getGameTime();
 		Integer spawnHour = geSpawnHour();
 		Integer spawnDay = geSpawnDay();
 		Integer spawnMonth = getSpawnMonth();

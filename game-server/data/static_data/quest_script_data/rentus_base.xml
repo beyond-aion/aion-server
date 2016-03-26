@@ -41,10 +41,10 @@
 	<!-- REPORTING QUESTS -->
 	<report_to id="30507" start_npc_ids="799543" end_npc_ids="790001"/>
 	<report_to id="30508" start_npc_ids="790001" end_npc_ids="799543"/>
-	<report_to id="30515" start_npc_ids="804879" start_dialog_id="4762" end_npc_ids="805156" end_dialog_id="10002"/>
+	<report_to id="30515" start_npc_ids="804879" end_npc_ids="805156"/>
 	<report_to id="30557" start_npc_ids="799543" end_npc_ids="203643"/>
 	<report_to id="30558" start_npc_ids="203643" end_npc_ids="799543"/>
-	<report_to id="30565" start_npc_ids="805156" start_dialog_id="4762" end_npc_ids="804879" end_dialog_id="10002"/>
+	<report_to id="30565" start_npc_ids="805156" end_npc_ids="804879"/>
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="30511" start_npc_ids="205947" end_npc_ids="804879"/>
@@ -54,9 +54,9 @@
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30512" start_npc_ids="804879"/>
-	<monster_hunt id="30514" start_npc_ids="799592 799666" start_dialog_id="4762" end_npc_ids="799670"/>
-	<monster_hunt id="30516" start_npc_ids="805156" start_dialog_id="4762" end_npc_ids="799670"/>
-	<monster_hunt id="30562" start_npc_ids="805156" start_dialog_id="4762"/>
-	<monster_hunt id="30564" start_npc_ids="799592 799666" start_dialog_id="4762" end_npc_ids="799670"/>
-	<monster_hunt id="30566" start_npc_ids="804879" start_dialog_id="4762" end_npc_ids="799670"/>
+	<monster_hunt id="30514" start_npc_ids="799592 799666" end_npc_ids="799670"/>
+	<monster_hunt id="30516" start_npc_ids="805156" end_npc_ids="799670"/>
+	<monster_hunt id="30562" start_npc_ids="805156"/>
+	<monster_hunt id="30564" start_npc_ids="799592 799666" end_npc_ids="799670"/>
+	<monster_hunt id="30566" start_npc_ids="804879" end_npc_ids="799670"/>
 </quest_scripts>

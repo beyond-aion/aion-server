@@ -48,7 +48,7 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 			case 1:
 				resultItem = equipment.unEquipItem(itemObjId);
 				if (resultItem == null)
-					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_UI_INVENTORY_FULL);
+					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_UI_INVENTORY_FULL());
 				break;
 			case 2:
 				equipment.switchHands();
