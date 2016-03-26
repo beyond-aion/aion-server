@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
@@ -17,13 +15,15 @@ import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
+import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import ch.qos.logback.classic.LoggerContext;
 
 /**
  * @author lord_rex
@@ -112,7 +112,7 @@ public class ShutdownHook extends Thread {
 		PeriodicSaveService.getInstance().onShutdown();
 
 		// Save game time.
-		GameTimeManager.saveTime();
+		GameTimeService.getInstance().saveGameTime();
 		// Shutdown of cron service
 		CronService.getInstance().shutdown();
 		// ThreadPoolManager shutdown

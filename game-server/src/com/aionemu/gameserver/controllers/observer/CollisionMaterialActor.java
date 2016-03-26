@@ -19,13 +19,12 @@ import com.aionemu.gameserver.model.templates.materials.MaterialActTime;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
+import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.gametime.DayTime;
-import com.aionemu.gameserver.utils.gametime.GameTime;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 
@@ -89,11 +88,10 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 		if (foundSkill.getTime() == null)
 			return foundSkill;
 
-		GameTime gameTime = (GameTime) GameTimeManager.getGameTime().clone();
 		if (foundSkill.getTime() == MaterialActTime.DAY && weatherCode == 0)
 			return foundSkill; // Sunny day, according to client data
 
-		if (gameTime.getDayTime() == DayTime.NIGHT) {
+		if (GameTimeService.getInstance().getGameTime().getDayTime() == DayTime.NIGHT) {
 			if (foundSkill.getTime() == MaterialActTime.NIGHT)
 				return foundSkill;
 		} else

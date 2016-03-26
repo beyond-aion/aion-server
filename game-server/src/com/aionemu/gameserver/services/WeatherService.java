@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,8 +18,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.gametime.DayTime;
 import com.aionemu.gameserver.utils.gametime.GameTime;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -38,7 +37,7 @@ public class WeatherService {
 
 	private WeatherService() {
 		worldZoneWeathers = new HashMap<WeatherKey, WeatherEntry[]>();
-		GameTime gameTime = (GameTime) GameTimeManager.getGameTime().clone();
+		GameTime gameTime = (GameTime) GameTimeService.getInstance().getGameTime().clone();
 		for (Iterator<WorldMapTemplate> mapIterator = DataManager.WORLD_MAPS_DATA.iterator(); mapIterator.hasNext();) {
 			int mapId = mapIterator.next().getMapId();
 			WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(mapId);
@@ -105,7 +104,7 @@ public class WeatherService {
 	private synchronized void setNextWeather(WeatherKey key) {
 		WeatherEntry[] weatherEntries = getWeatherEntries(key.getMapId());
 		WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(key.getMapId());
-		key.created = (GameTime) GameTimeManager.getGameTime().clone();
+		key.created = (GameTime) GameTimeService.getInstance().getGameTime().clone();
 		for (int zoneIndex = 0; zoneIndex < weatherEntries.length; zoneIndex++) {
 			WeatherEntry oldEntry = weatherEntries[zoneIndex];
 			WeatherEntry newEntry = null;

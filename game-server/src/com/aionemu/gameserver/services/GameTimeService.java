@@ -1,53 +1,79 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
+import com.aionemu.gameserver.utils.gametime.GameTime;
 import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class GameTimeService {
 
-	private static Logger log = LoggerFactory.getLogger(GameTimeService.class);
-
-	public static final GameTimeService getInstance() {
-		return SingletonHolder.instance;
-	}
-
-	private final static int GAMETIME_UPDATE = 3 * 60000;
+	private static final Logger log = LoggerFactory.getLogger(GameTimeService.class);
+	private GameTime gameTime = new GameTime(DAOManager.getDAO(ServerVariablesDAO.class).load("time"));
+	private AtomicBoolean isStarted = new AtomicBoolean();
 
 	private GameTimeService() {
-		/**
-		 * Update players with current game time
-		 */
+		log.info("Initialized GameTime");
+	}
+
+	/**
+	 * @return The current {@link GameTime}.
+	 */
+	public GameTime getGameTime() {
+		return gameTime;
+	}
+
+	/**
+	 * Saves the current time to the database
+	 * 
+	 * @return True on success.
+	 */
+	public boolean saveGameTime() {
+		return DAOManager.getDAO(ServerVariablesDAO.class).store("time", gameTime.getTime());
+	}
+
+	public void startClock() {
+		if (!isStarted.compareAndSet(false, true))
+			throw new GameServerError("Tried to start game time twice.");
+
+		int updateInterval = 3 * 60000; // every 3 minutes
+
+		// task to increase the game time every 5 seconds by a minute
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> gameTime.addMinutes(1), 5000, 5000);
+
+		// task to save the game time and update all clients
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
 				log.info("Sending current game time to all players");
-				Iterator<Player> iterator = World.getInstance().getPlayersIterator();
-				while (iterator.hasNext()) {
-					Player next = iterator.next();
-					PacketSendUtility.sendPacket(next, new SM_GAME_TIME());
-				}
-				// Save game time.
-				GameTimeManager.saveTime();
+				World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
+				if (saveGameTime())
+					log.info("Game time saved...");
+				else
+					log.warn("Error saving game time");
 			}
-		}, GAMETIME_UPDATE, GAMETIME_UPDATE);
+		}, updateInterval, updateInterval);
 
-		log.info("GameTimeService started. Update interval:" + GAMETIME_UPDATE);
+		log.info("GameTime started. Update interval: " + updateInterval / 1000 + "s");
 	}
 
-	@SuppressWarnings("synthetic-access")
+	public static final GameTimeService getInstance() {
+		return SingletonHolder.instance;
+	}
+
 	private static class SingletonHolder {
 
 		protected static final GameTimeService instance = new GameTimeService();

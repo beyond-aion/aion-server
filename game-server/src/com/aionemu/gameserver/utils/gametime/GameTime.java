@@ -8,18 +8,19 @@ import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 /**
  * Represents the internal clock for the time in aion world
  * 
- * @author Ben, reworked by vlog
+ * @author Ben
+ * @reworked vlog
+ * @modified Neon
  */
 public class GameTime implements Cloneable {
 
 	private static final int MINUTES_IN_HOUR = 60;
 	private static final int MINUTES_IN_DAY = MINUTES_IN_HOUR * 24;
 	private static final int MINUTES_IN_YEAR = (31 * 12) * MINUTES_IN_DAY;
-	private int gameTime = 0;
-
+	private int gameTime;
 	private DayTime dayTime;
 
-	private enum Monthes {
+	private enum Month {
 		JANUARY(31),
 		FEBRUARY(31),
 		MARCH(31),
@@ -33,14 +34,14 @@ public class GameTime implements Cloneable {
 		NOVEMBER(31),
 		DECEMBER(31);
 
-		private int _days;
+		private int days;
 
-		Monthes(int days) {
-			_days = days;
+		Month(int days) {
+			this.days = days;
 		}
 
 		public int getDays() {
-			return _days;
+			return days;
 		}
 	};
 
@@ -54,23 +55,13 @@ public class GameTime implements Cloneable {
 		if (time < 0)
 			throw new InvalidParameterException("Time must be >= 0");
 		gameTime = time;
-		calculateDayTime();
-	}
-
-	/**
-	 * Get the proper amount of minutes in this month
-	 * 
-	 * @param m
-	 * @return time in minutes in this month
-	 */
-	public int getProperMinutesInMonth(Monthes m) {
-		return m.getDays() * MINUTES_IN_DAY;
+		dayTime = calculateDayTime();
 	}
 
 	/**
 	 * Gets the ingame time in minutes
 	 * 
-	 * @return The number of minutes since 01.01.0000 00:00:00
+	 * @return The number of minutes since 01.01.0000 00:00
 	 */
 	public int getTime() {
 		return gameTime;
@@ -79,49 +70,23 @@ public class GameTime implements Cloneable {
 	/**
 	 * Increases game time by a minute
 	 */
-	public void increase() {
-		gameTime++;
-		if (getMinute() == 0) {
-			checkDayTimeChange();
-		}
+	public void addMinutes(int minutes) {
+		gameTime += minutes;
+		onTimeChange();
 	}
 
 	/**
-	 * Calculate new day time and send events on change
+	 * @return the dayTime
 	 */
-	public void checkDayTimeChange() {
-		DayTime oldDayTime = this.dayTime;
-		calculateDayTime();
-		onHourChange();
-		if (oldDayTime != this.dayTime) {
-			onDayTimeChange();
-		}
+	public DayTime getDayTime() {
+		return dayTime;
 	}
 
-	/**
-	 * Calculate the day time
-	 */
-	public void calculateDayTime() {
-		int hour = getHour();
-		if (hour > 21 || hour < 4)
-			dayTime = DayTime.NIGHT;
-		else if (hour > 16)
-			dayTime = DayTime.EVENING;
-		else if (hour > 8)
-			dayTime = DayTime.AFTERNOON;
-		else
-			dayTime = DayTime.MORNING;
-	}
-
-	private void onHourChange() {
-		TemporarySpawnEngine.onHourChange();
-	}
-
-	/**
-	 * Perform actions upon day time change
-	 */
-	private void onDayTimeChange() {
-		WeatherService.getInstance().checkWeathersTime();
+	public boolean setDayTime(DayTime dayTime) {
+		if (this.dayTime == dayTime)
+			return false;
+		this.dayTime = dayTime;
+		return true;
 	}
 
 	/**
@@ -141,7 +106,7 @@ public class GameTime implements Cloneable {
 	public int getMonth() {
 		int answer = 1;
 		int minutesInYear = gameTime % MINUTES_IN_YEAR;
-		for (Monthes m : Monthes.values()) {
+		for (Month m : Month.values()) {
 			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
 				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
 				answer = answer + 1;
@@ -156,14 +121,24 @@ public class GameTime implements Cloneable {
 	}
 
 	/**
-	 * Gets the day in the game, 1 - Monthes.getDays()
+	 * Get the proper amount of minutes in this month
 	 * 
-	 * @return Day 1 - Monthes.getDays()
+	 * @param m
+	 * @return time in minutes in this month
+	 */
+	public int getProperMinutesInMonth(Month m) {
+		return m.getDays() * MINUTES_IN_DAY;
+	}
+
+	/**
+	 * Gets the day in the game, 1 - Month.getDays()
+	 * 
+	 * @return Day 1 - Month.getDays()
 	 */
 	public int getDay() {
 		int answer = 1;
 		int minutesInYear = gameTime % MINUTES_IN_YEAR;
-		for (Monthes m : Monthes.values()) {
+		for (Month m : Month.values()) {
 			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
 				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
 			} else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
@@ -182,7 +157,7 @@ public class GameTime implements Cloneable {
 	 * @return Hour 0-23
 	 */
 	public int getHour() {
-		return (gameTime % MINUTES_IN_DAY) / (MINUTES_IN_HOUR);
+		return (gameTime % MINUTES_IN_DAY) / MINUTES_IN_HOUR;
 	}
 
 	/**
@@ -191,14 +166,40 @@ public class GameTime implements Cloneable {
 	 * @return Minute 0-59
 	 */
 	public int getMinute() {
-		return (gameTime % MINUTES_IN_HOUR);
+		return gameTime % MINUTES_IN_HOUR;
 	}
 
 	/**
-	 * @return the dayTime
+	 * Perform actions upon time change
 	 */
-	public DayTime getDayTime() {
-		return dayTime;
+	public void onTimeChange() {
+		if (getMinute() == 0)
+			onHourChange();
+		if (setDayTime(calculateDayTime()))
+			onDayTimeChange();
+	}
+
+	private void onHourChange() {
+		TemporarySpawnEngine.onHourChange();
+	}
+
+	private void onDayTimeChange() {
+		WeatherService.getInstance().checkWeathersTime();
+	}
+
+	/**
+	 * @return The calculated day time based on the current game hour.
+	 */
+	public DayTime calculateDayTime() {
+		int hour = getHour();
+		if (hour > 21 || hour < 4)
+			return DayTime.NIGHT;
+		else if (hour > 16)
+			return DayTime.EVENING;
+		else if (hour > 8)
+			return DayTime.AFTERNOON;
+		else
+			return DayTime.MORNING;
 	}
 
 	/**
@@ -252,30 +253,25 @@ public class GameTime implements Cloneable {
 		return this.getTime() < gt.getTime();
 	}
 
-	/**
-	 * Compare two game times
-	 * 
-	 * @param GameTime
-	 *          object
-	 * @return true or false
-	 * @author vlog
-	 */
 	@Override
-	public boolean equals(Object o) {
-		if (o == null)
-			return false;
-		return this.getTime() == ((GameTime) o).getTime();
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + gameTime;
+		return result;
 	}
 
 	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+	public boolean equals(Object obj) {
+		if (this != obj)
+			return true;
+		if (!(obj instanceof GameTime))
+			return false;
+		return gameTime == ((GameTime) obj).gameTime;
 	}
 
 	@Override
 	public Object clone() {
 		return new GameTime(gameTime);
 	}
-
 }

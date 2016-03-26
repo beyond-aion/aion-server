@@ -1,13 +1,14 @@
 package admincommands;
 
+import java.security.InvalidParameterException;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
-import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
+import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.utils.gametime.GameTimeManager;
+import com.aionemu.gameserver.utils.gametime.GameTime;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Pan
@@ -15,73 +16,47 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class Time extends AdminCommand {
 
 	public Time() {
-		super("time");
+		super("time", "Changes the game time.");
+
+		setParamInfo(
+			"<dawn|day|dusk|night> - Sets the specified day time.",
+			"<0-23> - Sets the specified hour."
+		);
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params == null || params.length < 1) {
-			info(admin, null);
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		// Getting current hour and minutes
-		int time = GameTimeManager.getGameTime().getHour();
-		int min = GameTimeManager.getGameTime().getMinute();
 		int hour;
-
-		// If the given param is one of these four, get the correct hour...
-		if (params[0].equals("night")) {
+		if (params[0].equalsIgnoreCase("night")) {
 			hour = 22;
-		} else if (params[0].equals("dusk")) {
+		} else if (params[0].equalsIgnoreCase("dusk")) {
 			hour = 18;
-		} else if (params[0].equals("day")) {
+		} else if (params[0].equalsIgnoreCase("day")) {
 			hour = 9;
-		} else if (params[0].equals("dawn")) {
+		} else if (params[0].equalsIgnoreCase("dawn")) {
 			hour = 4;
 		} else {
-			// If not, check if the param is a number (hour)...
 			try {
 				hour = Integer.parseInt(params[0]);
-			} catch (NumberFormatException e) {
-				info(admin, null);
-				return;
-			}
-
-			// A day have only 24 hours!
-			if (hour < 0 || hour > 23) {
-				info(admin, null);
-				PacketSendUtility.sendMessage(admin, "A day have only 24 hours!\n" + "Min value : 0 - Max value : 23");
+				if (hour < 0 || hour > 23)
+					throw new InvalidParameterException("A day has only 24 hours!\nMin value: 0 - Max value: 23");
+			} catch (NumberFormatException | InvalidParameterException e) {
+				sendInfo(admin, e instanceof InvalidParameterException ? e.getMessage() : null);
 				return;
 			}
 		}
 
-		// Calculating new time in minutes...
-		time = hour - time;
-		time = GameTimeManager.getGameTime().getTime() + (60 * time) - min;
+		GameTime gameTime = GameTimeService.getInstance().getGameTime();
+		int hourOffset = hour - GameTimeService.getInstance().getGameTime().getHour(); // hour offset inside the same day
+		gameTime.addMinutes((60 * hourOffset) - gameTime.getMinute());
 
-		// Reloading the time, restarting the clock...
-		GameTimeManager.reloadTime(time);
+		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
 
-		// Checking the new daytime
-		GameTimeManager.getGameTime().calculateDayTime();
-
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_GAME_TIME());
-			}
-		});
-		TemporarySpawnEngine.spawnAll();
-
-		PacketSendUtility.sendMessage(admin, "You changed the time to " + params[0].toString() + ".");
+		sendInfo(admin, "You changed the time to " + gameTime.getHour() + ":" + gameTime.getMinute() + ".");
 	}
-
-	@Override
-	public void info(Player player, String message) {
-		String syntax = "Syntax: //time < dawn | day | dusk | night | desired hour (number) >";
-		PacketSendUtility.sendMessage(player, syntax);
-	}
-
 }
