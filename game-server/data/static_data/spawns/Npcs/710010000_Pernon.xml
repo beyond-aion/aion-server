@@ -313,7 +313,7 @@
 		</spawn>
 		<!-- Alendrel -->
 		<spawn npc_id="830497" respawn_time="295">
-			<spot x="2590.7786" y="2627.884" z="356.36972" h="40"/>
+			<spot x="2590.7786" y="2627.884" z="350.0901" h="40"/>
 		</spawn>
 		<!-- Alnin -->
 		<spawn npc_id="830102" respawn_time="295">
@@ -2221,7 +2221,7 @@
 		</spawn>
 		<!-- Neirenda -->
 		<spawn npc_id="830498" respawn_time="295">
-			<spot x="2602.6101" y="2627.0872" z="356.36972" h="40"/>
+			<spot x="2602.6101" y="2627.0872" z="351.72305" h="40"/>
 		</spawn>
 		<!-- Nelriana -->
 		<spawn npc_id="830976" respawn_time="295">
@@ -2345,7 +2345,7 @@
 		</spawn>
 		<!-- Oliva -->
 		<spawn npc_id="830820" respawn_time="295">
-			<spot x="1985.8607" y="1564.9672" z="72.715698" h="47"/>
+			<spot x="1985.1749" y="1565.2118" z="70.24309" h="55"/>
 		</spawn>
 		<!-- Omaris -->
 		<spawn npc_id="830921" respawn_time="295">
