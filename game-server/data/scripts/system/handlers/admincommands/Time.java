@@ -57,6 +57,6 @@ public class Time extends AdminCommand {
 
 		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
 
-		sendInfo(admin, "You changed the time to " + gameTime.getHour() + ":" + gameTime.getMinute() + ".");
+		sendInfo(admin, "You changed the time to " + gameTime.getHour() + ":" + String.format("%02d", gameTime.getMinute()) + ".");
 	}
 }
