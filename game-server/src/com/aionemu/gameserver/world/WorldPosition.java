@@ -228,6 +228,11 @@ public class WorldPosition {
 
 	@Override
 	public String toString() {
-		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned + "]";
+		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned
+			+ ", mapRegion=" + mapRegion + "]";
+	}
+
+	public String toCoordString() {
+		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + "\nX: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
 	}
 }

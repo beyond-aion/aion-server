@@ -108,7 +108,7 @@ public class PlayerInfo extends AdminCommand {
 			sendInfo(admin, strbld.toString());
 		} else if (params[1].equals("loc")) {
 			String chatLink = ChatUtil.position(target.getName(), target.getPosition());
-			sendInfo(admin, "- " + chatLink + "'s location:\n\t" + target.getPosition());
+			sendInfo(admin, "- " + chatLink + "'s location:\n\t" + target.getPosition().toCoordString());
 		} else if (params[1].equals("legion")) {
 			Legion legion = target.getLegion();
 			if (legion == null)

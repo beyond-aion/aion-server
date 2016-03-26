@@ -1,5 +1,7 @@
 package admincommands;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -16,6 +18,6 @@ public class Coords extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		VisibleObject target = admin.getTarget() == null ? admin : admin.getTarget();
-		sendInfo(admin, target.getPosition().toString());
+		sendInfo(admin, StringUtils.capitalize(target.getName()) + "'s position:\n" + target.getPosition().toCoordString());
 	}
 }
