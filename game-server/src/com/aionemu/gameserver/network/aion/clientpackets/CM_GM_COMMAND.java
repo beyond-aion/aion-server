@@ -11,36 +11,23 @@ import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
  */
 public class CM_GM_COMMAND extends AionClientPacket {
 
-	public String Command;
+	public String command;
 
-	/**
-	 * @param opcode
-	 * @param state
-	 * @param restStates
-	 */
 	public CM_GM_COMMAND(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl() {
-		Command = readS();
+		command = readS();
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl() {
 		Player admin = getConnection().getActivePlayer();
 		if (admin.getAccessLevel() < AdminConfig.GM_PANEL)
 			return;
-		ChatProcessor.getInstance().handleConsoleCommand(admin, Command);
+		ChatProcessor.getInstance().handleConsoleCommand(admin, command);
 	}
 }

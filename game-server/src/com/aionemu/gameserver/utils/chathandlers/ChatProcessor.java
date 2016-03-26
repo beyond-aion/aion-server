@@ -19,6 +19,7 @@ import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import javolution.util.FastMap;
@@ -167,7 +168,9 @@ public class ChatProcessor implements GameEngine {
 
 		ChatCommand cmd = getCommand(cmdName.substring(ConsoleCommand.PREFIX.length()));
 
-		if (cmd instanceof ConsoleCommand)
+		if (cmd == null)
+			PacketSendUtility.sendMessage(player, "The command " + cmdName + " is not implemented.");
+		else if (cmd instanceof ConsoleCommand)
 			cmd.process(player, getParamsFromString(cmdParams));
 	}
 
