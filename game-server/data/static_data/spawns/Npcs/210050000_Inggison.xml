@@ -2179,7 +2179,7 @@
 		</spawn>
 		<!-- Cretos -->
 		<spawn npc_id="799080" respawn_time="295">
-			<spot x="1780.39" y="1754.56" z="286" h="87"/>
+			<spot x="1780.39" y="1754.56" z="283.74432" h="87"/>
 		</spawn>
 		<!-- Crystal Caltrops -->
 		<spawn npc_id="216154" respawn_time="295">
@@ -8490,7 +8490,7 @@
 		</spawn>
 		<!-- Zaniah -->
 		<spawn npc_id="799077" respawn_time="295">
-			<spot x="1781.23" y="1744.65" z="286" h="67"/>
+			<spot x="1781.23" y="1744.65" z="283.15027" h="67"/>
 		</spawn>
 		<!-- Zausis -->
 		<spawn npc_id="216630" respawn_time="295">
