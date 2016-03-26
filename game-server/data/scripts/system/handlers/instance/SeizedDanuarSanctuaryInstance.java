@@ -134,6 +134,7 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH);
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
 		return true;
 	}

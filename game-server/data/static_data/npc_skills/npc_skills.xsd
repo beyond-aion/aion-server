@@ -83,6 +83,7 @@
         		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
 				<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
 				<xs:enumeration value="SPAWN_NPC"/>
+				<xs:enumeration value="NPC_IS_ALIVE"/>
         	</xs:restriction>
         </xs:simpleType>
 		<xs:simpleType name="NpcSkillTargetAttribute">

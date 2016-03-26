@@ -1,30 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Instance Item" base_chance="100" no_reduction="true">
-		<gd_maps>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231022" name="Guard Post Gunner Captain"/>
-			<gd_npc npc_id="231029" name="Northern Approach Post Magus Captain"/>
-			<gd_npc npc_id="231034" name="Southern Approach Post Cavalry Captain"/>
-			<gd_npc npc_id="231043" name="Defense Post Combatant Captain"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="164000275" name="Mobile Turret Cannonball"/>
-		</gd_items>
-	</gd_rule>
+
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Treasure Crate" base_chance="100" each_member="true">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235768" name="Spirited Velkur"/>
+			<gd_npc npc_id="235769" name="Velkur Aethercaster"/>
+			<gd_npc npc_id="235770" name="Velkur Aetherpriest"/>
+			<gd_npc npc_id="235771" name="Velkur Aetherknife"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188052612" name="Vera's Treasure Crate"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Epic)" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235768" name="Spirited Velkur"/>
+			<gd_npc npc_id="235769" name="Velkur Aethercaster"/>
+			<gd_npc npc_id="235770" name="Velkur Aetherpriest"/>
+			<gd_npc npc_id="235771" name="Velkur Aetherknife"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001627" name="Vera Defender Captain's Battle Shield"/>
+			<gd_item id="115001628" name="Vera Defender Captain's Scale Shield"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235768" name="Spirited Velkur"/>
+			<gd_npc npc_id="235769" name="Velkur Aethercaster"/>
+			<gd_npc npc_id="235770" name="Velkur Aetherpriest"/>
+			<gd_npc npc_id="235771" name="Velkur Aetherknife"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101901019" name="Vera Defender Captain's Aethercannon"/>
+			<gd_item id="100201391" name="Vera Defender Captain's Dagger"/>
+			<gd_item id="100901233" name="Vera Defender Captain's Greatsword"/>
+			<gd_item id="102001093" name="Vera Defender Captain's Harp"/>
+			<gd_item id="101701262" name="Vera Defender Captain's Longbow"/>
+			<gd_item id="100101221" name="Vera Defender Captain's Mace"/>
+			<gd_item id="101801068" name="Vera Defender Captain's Pistol"/>
+			<gd_item id="101301159" name="Vera Defender Captain's Polearm"/>
+			<gd_item id="101501247" name="Vera Defender Captain's Staff"/>
+			<gd_item id="100501211" name="Vera Defender Captain's Jewel"/>
+			<gd_item id="100601303" name="Vera Defender Captain's Spellbook"/>
+			<gd_item id="100001583" name="Vera Defender Captain's Sword"/>
+			<gd_item id="102100845" name="Vera Defender Captain's Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235768" name="Spirited Velkur"/>
+			<gd_npc npc_id="235769" name="Velkur Aethercaster"/>
+			<gd_npc npc_id="235770" name="Velkur Aetherpriest"/>
+			<gd_npc npc_id="235771" name="Velkur Aetherknife"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101901018" name="Vera Defender Aethercannon"/>
+			<gd_item id="100201390" name="Vera Defender Dagger"/>
+			<gd_item id="100901232" name="Vera Defender Greatsword"/>
+			<gd_item id="102001092" name="Vera Defender Harp"/>
+			<gd_item id="101701261" name="Vera Defender Longbow"/>
+			<gd_item id="100101220" name="Vera Defender Mace"/>
+			<gd_item id="101801067" name="Vera Defender Pistol"/>
+			<gd_item id="101301158" name="Vera Defender Polearm"/>
+			<gd_item id="100601302" name="Vera Defender Spellbook"/>
+			<gd_item id="101501246" name="Vera Defender Staff"/>
+			<gd_item id="100001582" name="Vera Defender Sword"/>
+			<gd_item id="100601302" name="Vera Defender Spellbook"/>
+			<gd_item id="102100844" name="Vera Defender Cipher-Blade"/>
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="12">
+		<gd_maps>
+			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235768" name="Spirited Velkur"/>
+			<gd_npc npc_id="235769" name="Velkur Aethercaster"/>
+			<gd_npc npc_id="235770" name="Velkur Aetherpriest"/>
+			<gd_npc npc_id="235771" name="Velkur Aetherknife"/>
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001625" name="Vera Defender Battle Shield"/>
+			<gd_item id="115001626" name="Vera Defender Scale Shield"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
@@ -32,7 +103,9 @@
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114101562" name="Vera Defender Shoes"/>
@@ -67,7 +140,9 @@
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125003728" name="Vera Defender Headband"/>
@@ -77,47 +152,14 @@
 			<gd_item id="125003740" name="Vera Defender Helm"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="101901018" name="Vera Defender Aethercannon"/>
-			<gd_item id="100201390" name="Vera Defender Dagger"/>
-			<gd_item id="100901232" name="Vera Defender Greatsword"/>
-			<gd_item id="102001092" name="Vera Defender Harp"/>
-			<gd_item id="101701261" name="Vera Defender Longbow"/>
-			<gd_item id="100101220" name="Vera Defender Mace"/>
-			<gd_item id="101801067" name="Vera Defender Pistol"/>
-			<gd_item id="101301158" name="Vera Defender Polearm"/>
-			<gd_item id="100601302" name="Vera Defender Spellbook"/>
-			<gd_item id="101501246" name="Vera Defender Staff"/>
-			<gd_item id="100001582" name="Vera Defender Sword"/>
-			<gd_item id="100601302" name="Vera Defender Spellbook"/>
-			<gd_item id="102100844" name="Vera Defender Cipher-Blade"/>
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="12">
-		<gd_maps>
-			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001625" name="Vera Defender Battle Shield"/>
-			<gd_item id="115001626" name="Vera Defender Scale Shield"/>
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114101564" name="Vera Defender Captain's Shoes"/>
@@ -152,7 +194,9 @@
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125003730" name="Vera Defender Captain's Headband"/>
@@ -162,47 +206,41 @@
 			<gd_item id="125003742" name="Vera Defender Captain's Helm"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="3">
+	<gd_rule rule_name="Bundle A" base_chance="100" each_member="true">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101901019" name="Vera Defender Captain's Aethercannon"/>
-			<gd_item id="100201391" name="Vera Defender Captain's Dagger"/>
-			<gd_item id="100901233" name="Vera Defender Captain's Greatsword"/>
-			<gd_item id="102001093" name="Vera Defender Captain's Harp"/>
-			<gd_item id="101701262" name="Vera Defender Captain's Longbow"/>
-			<gd_item id="100101221" name="Vera Defender Captain's Mace"/>
-			<gd_item id="101801068" name="Vera Defender Captain's Pistol"/>
-			<gd_item id="101301159" name="Vera Defender Captain's Polearm"/>
-			<gd_item id="101501247" name="Vera Defender Captain's Staff"/>
-			<gd_item id="100501211" name="Vera Defender Captain's Jewel"/>
-			<gd_item id="100601303" name="Vera Defender Captain's Spellbook"/>
-			<gd_item id="100001583" name="Vera Defender Captain's Sword"/>
-			<gd_item id="102100845" name="Vera Defender Captain's Cipher-Blade"/>
+			<gd_item id="188053685" name="Sand Wanderers Trader's Bundle"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="4">
+	<gd_rule rule_name="Bundle B" base_chance="100" each_member="true">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231050" name="Vera"/>
+			<gd_npc npc_id="235759" name="Fugitive Mazikin Leader"/>
+			<gd_npc npc_id="235763" name="Runaway Hirakiki Leader"/>
+			<gd_npc npc_id="235767" name="Escapee Asachin Leader"/>
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001627" name="Vera Defender Captain's Battle Shield"/>
-			<gd_item id="115001628" name="Vera Defender Captain's Scale Shield"/>
+			<gd_item id="188053686" name="Sand Wanderers Trader's Treasure Box"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Bundle" base_chance="80">
+	<gd_rule rule_name="Named Bundle" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge"/>
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="231058" name="Beritran Supply Box"/>
+			<gd_npc npc_id="235772" name="Hakara"/>
+			<gd_npc npc_id="235773" name="Zubala"/>
+			<gd_npc npc_id="235774" name="Visha"/>
+			<gd_npc npc_id="235775" name="Bahapa"/>
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188052579" name="Dragon's Blood Mark Box"/>

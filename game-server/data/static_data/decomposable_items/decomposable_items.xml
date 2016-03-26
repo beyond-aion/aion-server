@@ -22706,7 +22706,7 @@
     <decomposable item_id="188052578" decomposable_name="Looted Sauro Supplies"/>
     <decomposable item_id="188052579" decomposable_name="Dragon's Blood Mark Box">
         <items>
-            <item id="186000236" name="Blood Mark" rnd_min="1" rnd_max="2"/>
+            <item id="186000236" name="Blood Mark" rnd_min="3" rnd_max="8"/>
         </items>
     </decomposable>
     <decomposable item_id="188052580" decomposable_name="Sanctuary Ancient Coin Bundle">
@@ -23567,29 +23567,142 @@
     </decomposable>
     <decomposable item_id="188052611" decomposable_name="Minor Relic Box"/>
     <decomposable item_id="188052612" decomposable_name="Vera's Treasure Crate">
+		<!-- Wind Fragment & extra -->
         <items>
-            <item id="186000236" name="Blood Mark"/>
-            <item id="186000238" name="Conqueror's Mark" count="4"/>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
             <item id="186000242" name="Ceramium Medal"/>
             <item id="152012588" name="Wind Fragment"/>
+			<item id="152012621" name="Pure Gemstone"/>
         </items>
-        <items>
-            <item id="186000236" name="Blood Mark"/>
-            <item id="186000238" name="Conqueror's Mark" count="4"/>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012588" name="Wind Fragment"/>
+			<item id="152012619" name="Pure Ore"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012588" name="Wind Fragment"/>
+			<item id="152012617" name="Pure Crystal"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012588" name="Wind Fragment"/>
+			<item id="169405252" name="Fury Powder"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012588" name="Wind Fragment"/>
+			<item id="169405268" name="Lightning Vitality"/>
+        </items>
+		<!-- Fury Powder & extra -->
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
             <item id="186000242" name="Ceramium Medal"/>
             <item id="169405252" name="Fury Powder"/>
+			<item id="152012621" name="Pure Gemstone"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="169405252" name="Fury Powder"/>
+			<item id="152012619" name="Pure Ore"/>
         </items>
         <items>
-            <item id="186000236" name="Blood Mark"/>
-            <item id="186000238" name="Conqueror's Mark" count="4"/>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="169405252" name="Fury Powder"/>
+			<item id="152012617" name="Pure Crystal"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="169405252" name="Fury Powder"/>
+			<item id="169405268" name="Lightning Vitality"/>
+        </items>
+		<!-- Water Fragment & extra -->
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
             <item id="186000242" name="Ceramium Medal"/>
             <item id="152012591" name="Water Fragment"/>
+			<item id="152012621" name="Pure Gemstone"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012591" name="Water Fragment"/>
+			<item id="152012619" name="Pure Ore"/>
         </items>
         <items>
-            <item id="186000236" name="Blood Mark"/>
-            <item id="186000238" name="Conqueror's Mark" count="4"/>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012591" name="Water Fragment"/>
+			<item id="152012617" name="Pure Crystal"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012591" name="Water Fragment"/>
+			<item id="169405252" name="Fury Powder"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012591" name="Water Fragment"/>
+			<item id="169405268" name="Lightning Vitality"/>
+        </items>
+		<!-- Wind Mote & extra -->
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
             <item id="186000242" name="Ceramium Medal"/>
             <item id="152012585" name="Wind Mote"/>
+			<item id="152012621" name="Pure Gemstone"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012585" name="Wind Mote"/>
+			<item id="152012619" name="Pure Ore"/>
+        </items>
+        <items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012585" name="Wind Mote"/>
+			<item id="152012617" name="Pure Crystal"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012585" name="Wind Mote"/>
+			<item id="169405252" name="Fury Powder"/>
+        </items>
+		<items>
+            <item id="186000236" name="Blood Mark" rnd_min="4" rnd_max="12"/>
+            <item id="186000238" name="Conqueror's Mark" rnd_min="1" rnd_max="5"/>
+            <item id="186000242" name="Ceramium Medal"/>
+            <item id="152012585" name="Wind Mote"/>
+			<item id="169405268" name="Lightning Vitality"/>
         </items>
     </decomposable>
     <decomposable item_id="188052613" decomposable_name="Sanctuary Treasure Crate">
@@ -32083,8 +32196,22 @@
 			<item id="122001703" name="Nasto Turquoise Ring" player_class="BARD"/>
 		</items>
 	</decomposable>
-	<decomposable item_id="188053685" decomposable_name="Sand Wanderers Trader's Bundle"/>
-	<decomposable item_id="188053686" decomposable_name="Sand Wanderers Trader's Treasure Box"/>
+	<decomposable item_id="188053685" decomposable_name="Sand Wanderers Trader's Bundle">
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_40"/>
+		</items>
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_50"/>
+		</items>
+		<items>
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053686" decomposable_name="Sand Wanderers Trader's Treasure Box">
+		<items>
+			<item id="186000242" name="Ceramium Medal"/>
+		</items>
+	</decomposable>
     <decomposable item_id="188053687" decomposable_name="Test Item"/>
 	<decomposable item_id="188053688" decomposable_name="Inggison Lesser Conqueror's Mark Box">
 		<items chance="95.0">

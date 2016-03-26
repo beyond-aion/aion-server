@@ -67611,4 +67611,253 @@
 	<npcskills npcid="236418">
 		<npcskill skillid="21923" skilllevel="4" probability="0" cooldown="0" useinspawned="true"/>
 	</npcskills>
+	<!-- Ophidan Bridge -->
+	<!-- Spirited Velkur -->
+	<npcskills npcid="235768">
+		<npcskill skillid="17335" skilllevel="65" probability="60" cooldown="40000" nextChainId="1" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000" target="RANDOM"/>
+		<npcskill skillid="21175" skilllevel="65" probability="100" cooldown="10000" chainId="2" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17900" skilllevel="65" probability="100" cooldown="10000" chainId="3" nextSkillTime="7000"/>
+		<npcskill skillid="21759" skilllevel="1" probability="60" cooldown="35000" minhp="0" maxhp="25"/>
+	</npcskills>
+	<!-- Velkur Aethercaster -->
+	<npcskills npcid="235769">
+		<npcskill skillid="17335" skilllevel="65" probability="60" cooldown="50000" nextChainId="1" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000" target="RANDOM"/>
+		<npcskill skillid="21175" skilllevel="65" probability="100" cooldown="10000" chainId="2" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17900" skilllevel="65" probability="100" cooldown="10000" chainId="3" nextSkillTime="7000"/>
+		<npcskill skillid="21759" skilllevel="1" probability="60" cooldown="40000" minhp="0" maxhp="25"/>
+		<npcskill skillid="21758" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="18114" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="20682" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="19053" skilllevel="15" probability="70" cooldown="30000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+	</npcskills>
+	<!-- Velkur Aetherpriest -->
+	<npcskills npcid="235770">
+		<npcskill skillid="17335" skilllevel="65" probability="60" cooldown="50000" nextChainId="1" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000" target="RANDOM"/>
+		<npcskill skillid="21175" skilllevel="65" probability="100" cooldown="10000" chainId="2" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17900" skilllevel="65" probability="100" cooldown="10000" chainId="3" nextSkillTime="7000"/>
+		<npcskill skillid="21759" skilllevel="1" probability="60" cooldown="40000" minhp="0" maxhp="25"/>
+		<npcskill skillid="21758" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="18114" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="20682" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="19053" skilllevel="15" probability="70" cooldown="30000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+	</npcskills>
+	<!-- Velkur Aetherknife-->
+	<npcskills npcid="235771">
+		<npcskill skillid="17335" skilllevel="65" probability="60" cooldown="50000" nextChainId="1" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17722" skilllevel="65" probability="100" cooldown="100000" chainId="1" nextChainId="2" nextSkillTime="6000" target="RANDOM"/>
+		<npcskill skillid="21175" skilllevel="65" probability="100" cooldown="10000" chainId="2" nextChainId="3" nextSkillTime="6000"/>
+		<npcskill skillid="17900" skilllevel="65" probability="100" cooldown="10000" chainId="3" nextSkillTime="7000"/>
+		<npcskill skillid="21759" skilllevel="1" probability="60" cooldown="40000" minhp="0" maxhp="25"/>
+		<npcskill skillid="21758" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="18114" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="20682" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="19053" skilllevel="15" probability="70" cooldown="30000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+	</npcskills>
+	<!-- Hakara -->
+	<npcskills npcid="235772">
+	    <npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17255" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17005" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="80" cooldown="40000"/>
+		<npcskill skillid="17900" skilllevel="65" probability="70" cooldown="40000"/>
+	</npcskills>
+	<!-- Zubala -->
+	<npcskills npcid="235773">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17255" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17005" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="80" cooldown="40000"/>
+		<npcskill skillid="18176" skilllevel="65" probability="70" cooldown="40000"/>
+		<npcskill skillid="20575" skilllevel="65" probability="70" cooldown="40000"/>
+	</npcskills>
+	<!-- Visha -->
+	<npcskills npcid="235774">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17255" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17005" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="80" cooldown="40000"/>
+		<npcskill skillid="20085" skilllevel="65" probability="70" cooldown="40000"/>
+		<npcskill skillid="21145" skilllevel="65" probability="70" cooldown="40000"/>
+	</npcskills>
+	<!-- Bahapa -->
+	<npcskills npcid="235775">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17255" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="21286" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17005" skilllevel="65" probability="60" cooldown="40000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="80" cooldown="40000"/>
+		<npcskill skillid="16923" skilllevel="65" probability="70" cooldown="40000"/>
+		<npcskill skillid="17250" skilllevel="65" probability="70" cooldown="40000"/>
+	</npcskills>
+	<!-- Fugitive Mazikin Leader -->
+	<npcskills npcid="235759">
+		<npcskill skillid="17174" skilllevel="65" probability="70" cooldown="35000" target="RANDOM"/>
+		<npcskill skillid="21134" skilllevel="65" probability="100" cooldown="25000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+		<npcskill skillid="18025" skilllevel="65" probability="100" cooldown="40000"/>
+		<npcskill skillid="17860" skilllevel="65" probability="70" cooldown="30000" target="RANDOM"/>
+		<npcskill skillid="21288" skilllevel="65" probability="70" cooldown="30000"/>
+		<npcskill skillid="16696" skilllevel="65" probability="70" cooldown="40000"/>
+	</npcskills>
+	<!-- Runaway Hirakiki Leader -->
+	<npcskills npcid="235763">
+		<npcskill skillid="17340" skilllevel="65" probability="70" cooldown="25000"/>
+		<npcskill skillid="17365" skilllevel="65" probability="70" cooldown="40000"/> 
+		<npcskill skillid="17860" skilllevel="65" probability="70" cooldown="25000" target="RANDOM"/>
+		<npcskill skillid="19075" skilllevel="65" probability="100" cooldown="25000"/>
+		<npcskill skillid="21799" skilllevel="65" probability="70" cooldown="35000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+	</npcskills>
+	<!-- Escapee Asachin Leader -->
+	<npcskills npcid="235767">
+		<npcskill skillid="20078" skilllevel="65" probability="70" cooldown="25000"/>
+		<npcskill skillid="17124" skilllevel="65" probability="70" cooldown="25000"/>
+		<npcskill skillid="21290" skilllevel="65" probability="70" cooldown="25000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="70" cooldown="25000"/>
+		<npcskill skillid="18032" skilllevel="65" probability="70" cooldown="100000" target="RANDOM"/>
+		<npcskill skillid="21801" skilllevel="65" probability="70" cooldown="50000" priority="1">
+			<cond condType="NPC_IS_ALIVE" npc_id="856059"/>
+		</npcskill>
+	</npcskills>
+	<!-- Escapee Asachin -->
+	<npcskills npcid="235764">
+		<npcskill skillid="20078" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17124" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="17332" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Defense Spelltongue -->
+	<npcskills npcid="235726">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17722" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- Post Defense Spelltongue -->
+	<npcskills npcid="235747">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17722" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills> 
+	<!-- South Defense Spelltongue -->
+	<npcskills npcid="235740">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17722" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="16909" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- North Defense Drakenclaw -->
+	<npcskills npcid="235728">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- South Defense Drakenclaw -->
+	<npcskills npcid="235735">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Post Defense Drakenclaw -->
+	<npcskills npcid="235721">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Post Defense Drakenclaw -->
+	<npcskills npcid="235742">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Barricade Sentinel -->
+	<npcskills npcid="235749">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17294" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="21284" skilllevel="65" probability="70" cooldown="15000"/>
+	</npcskills>
+	<!-- Barricade Sentinel -->
+	<npcskills npcid="235755">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Defense Swiftrunner -->
+	<npcskills npcid="235727">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- Post Defense Swiftrunner -->
+	<npcskills npcid="235748">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17320" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17321" skilllevel="65" probability="70" cooldown="15000"/>
+		<npcskill skillid="17322" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
+	<!-- North Defense Ironscale -->
+	<npcskills npcid="235730">
+        <npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="21297" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21296" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="21294" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20648" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="20704" skilllevel="65" probability="70" cooldown="20000"/>
+    </npcskills>
+	<!-- South Defense Ironscale -->
+	<npcskills npcid="235737">
+        <npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="21297" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="21296" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="21294" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20648" skilllevel="65" probability="70" cooldown="20000"/>
+		<npcskill skillid="20704" skilllevel="65" probability="70" cooldown="20000"/>
+    </npcskills>
+	<!-- South Defense Bard -->
+	<npcskills npcid="235736">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="20715" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20960" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20959" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20714" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<!-- Post Defense Bard -->
+	<npcskills npcid="235743">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="20715" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20960" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20959" skilllevel="65" probability="70" cooldown="20000"/>
+        <npcskill skillid="20714" skilllevel="65" probability="70" cooldown="20000"/>
+	</npcskills>
+	<npcskills npcid="235746">
+		<npcskill skillid="20700" skilllevel="65" probability="0" cooldown="10000" useinspawned="true"/>
+		<npcskill skillid="17314" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17315" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17316" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17317" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17318" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17319" skilllevel="65" probability="60" cooldown="30000"/>
+		<npcskill skillid="17393" skilllevel="65" probability="60" cooldown="30000"/>
+	</npcskills>
 </npc_skill_templates>

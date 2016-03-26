@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
+import java.util.Iterator;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -210,6 +212,17 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 3);
 			case TARGET_HAS_CARVED_SIGNET_LEVEL_V:
 				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
+			case NPC_IS_ALIVE:
+				Iterator<VisibleObject> iter = creature.getKnownList().getKnownObjects().values().iterator();
+				while (iter.hasNext()) {
+					VisibleObject next = iter.next();
+					if (next instanceof Npc){
+						if (((Npc) next).getNpcId() == condTemp.getNpcId()) {
+							return !((Npc) next).getLifeStats().isAlreadyDead();
+						}
+					}
+				}
+				return false;
 			default:
 				return true;
 		}

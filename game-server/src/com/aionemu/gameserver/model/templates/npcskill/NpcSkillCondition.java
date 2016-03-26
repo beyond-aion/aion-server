@@ -32,7 +32,8 @@ public enum NpcSkillCondition {
 	TARGET_HAS_CARVED_SIGNET_LEVEL_III,
 	TARGET_HAS_CARVED_SIGNET_LEVEL_IV,
 	TARGET_HAS_CARVED_SIGNET_LEVEL_V, 
-	SPAWN_NPC;
+	SPAWN_NPC,
+	NPC_IS_ALIVE;
 	
 	public String value() {
 		return name();
