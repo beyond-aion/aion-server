@@ -196,7 +196,7 @@
 			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
-			<gd_item id="188053783" name="Stigma Sack"/>
+			<gd_item id="188053783" name="Stigma Sack" />
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones (blue, dmg) -->
@@ -658,7 +658,7 @@
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 		</gd_worlds>
 		<gd_items>

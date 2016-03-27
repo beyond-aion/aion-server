@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:include schemaLocation="../global_types.xsd"/>
-    <xs:include schemaLocation="../npcs/npcs.xsd"/>
-  <xs:element name="global_npc_exclusions">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" name="global_exclusion" type="GlobalExclusion"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:complexType name="GlobalExclusion">
+	<xs:include schemaLocation="../global_types.xsd" />
+	<xs:include schemaLocation="../npcs/npcs.xsd" />
+	<xs:element name="global_npc_exclusions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" name="global_exclusion" type="GlobalExclusion" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GlobalExclusion">
 		<xs:attribute type="IntListType" name="npc_ids" use="optional" />
 		<xs:attribute type="StringListType" name="npc_names" use="optional" />
 		<xs:attribute type="ListNpcTemplateType" name="npc_types" use="optional" />
 		<xs:attribute type="ListTribeClass" name="npc_tribes" use="optional" />
 		<xs:attribute type="ListAbyssType" name="npc_abyss_types" use="optional" />
-  </xs:complexType>
+	</xs:complexType>
 	<xs:simpleType name="ListNpcTemplateType">
-		<xs:list itemType="NpcTemplateType"/>
+		<xs:list itemType="NpcTemplateType" />
 	</xs:simpleType>
 	<xs:simpleType name="ListTribeClass">
-		<xs:list itemType="TribeClass"/>
+		<xs:list itemType="TribeClass" />
 	</xs:simpleType>
 	<xs:simpleType name="ListAbyssType">
-		<xs:list itemType="AbyssType"/>
+		<xs:list itemType="AbyssType" />
 	</xs:simpleType>
 </xs:schema>

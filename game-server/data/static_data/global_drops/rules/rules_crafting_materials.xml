@@ -1118,7 +1118,7 @@
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
 		<gd_npc_groups>
-			<gd_npc_group group="MAMMOTH"/>
+			<gd_npc_group group="MAMMOTH" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 37 -->

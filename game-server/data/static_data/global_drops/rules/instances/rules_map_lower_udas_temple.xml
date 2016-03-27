@@ -3,333 +3,333 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="5" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215794" name="Anvilface"/>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
-			<gd_npc npc_id="215797" name="Bergrisar"/>
-			<gd_npc npc_id="215838" name="Jotun Artisan"/>
-			<gd_npc npc_id="215839" name="Jotun Creator"/>
-			<gd_npc npc_id="215840" name="Jotun Artisan"/>
-			<gd_npc npc_id="216320" name="Gradarim the Collector"/>
+			<gd_npc npc_id="215794" name="Anvilface" />
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
+			<gd_npc npc_id="215797" name="Bergrisar" />
+			<gd_npc npc_id="215838" name="Jotun Artisan" />
+			<gd_npc npc_id="215839" name="Jotun Creator" />
+			<gd_npc npc_id="215840" name="Jotun Artisan" />
+			<gd_npc npc_id="216320" name="Gradarim the Collector" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000087" name="Jotun Vault Key"/>
+			<gd_item id="185000087" name="Jotun Vault Key" />
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100000890" name="Master Blacksmith's Sword"/>
-			<gd_item id="101700720" name="Debilkarim's Longbow"/>
-			<gd_item id="101700855" name="Debilkarim's Longbow"/>
-			<gd_item id="100500696" name="Debilkarim's Jewel"/>
-			<gd_item id="100500833" name="Debilkarim's Jewel"/>
-			<gd_item id="101500696" name="Debilkarim's Staff"/>
-			<gd_item id="101500839" name="Debilkarim's Staff"/>
-			<gd_item id="101300653" name="Debilkarim's Spear"/>
-			<gd_item id="101300782" name="Debilkarim's Spear"/>
-			<gd_item id="100900682" name="Debilkarim's Greatsword"/>
-			<gd_item id="100900813" name="Debilkarim's Greatsword"/>
-			<gd_item id="100600753" name="Debilkarim's Tome"/>
-			<gd_item id="100600888" name="Debilkarim's Tome"/>
-			<gd_item id="100200805" name="Debilkarim's Dagger"/>
-			<gd_item id="100100674" name="Debilkarim's Hammer"/>
-			<gd_item id="100000891" name="Debilkarim's Sword"/>
-			<gd_item id="101800865" name="Debilkarim's Pistol"/>
-			<gd_item id="101900625" name="Debilkarim's Aethercannon"/>
-			<gd_item id="101900712" name="Debilkarim's Magical Cannon"/>
-			<gd_item id="102000660" name="Debilkarim's Harp"/>
-			<gd_item id="102000746" name="Debilkarim's Musical Instrument"/>
-			<gd_item id="102100753" name="Debilkarim's Cipher-Blade"/>
+			<gd_item id="100000890" name="Master Blacksmith's Sword" />
+			<gd_item id="101700720" name="Debilkarim's Longbow" />
+			<gd_item id="101700855" name="Debilkarim's Longbow" />
+			<gd_item id="100500696" name="Debilkarim's Jewel" />
+			<gd_item id="100500833" name="Debilkarim's Jewel" />
+			<gd_item id="101500696" name="Debilkarim's Staff" />
+			<gd_item id="101500839" name="Debilkarim's Staff" />
+			<gd_item id="101300653" name="Debilkarim's Spear" />
+			<gd_item id="101300782" name="Debilkarim's Spear" />
+			<gd_item id="100900682" name="Debilkarim's Greatsword" />
+			<gd_item id="100900813" name="Debilkarim's Greatsword" />
+			<gd_item id="100600753" name="Debilkarim's Tome" />
+			<gd_item id="100600888" name="Debilkarim's Tome" />
+			<gd_item id="100200805" name="Debilkarim's Dagger" />
+			<gd_item id="100100674" name="Debilkarim's Hammer" />
+			<gd_item id="100000891" name="Debilkarim's Sword" />
+			<gd_item id="101800865" name="Debilkarim's Pistol" />
+			<gd_item id="101900625" name="Debilkarim's Aethercannon" />
+			<gd_item id="101900712" name="Debilkarim's Magical Cannon" />
+			<gd_item id="102000660" name="Debilkarim's Harp" />
+			<gd_item id="102000746" name="Debilkarim's Musical Instrument" />
+			<gd_item id="102100753" name="Debilkarim's Cipher-Blade" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215794" name="Anvilface"/>
+			<gd_npc npc_id="215794" name="Anvilface" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000960" name="Anvilface's Drenium Shield"/>
-			<gd_item id="115000961" name="Anvilface's Malevite Shield"/>
+			<gd_item id="115000960" name="Anvilface's Drenium Shield" />
+			<gd_item id="115000961" name="Anvilface's Malevite Shield" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215792" name="Kingspin" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000962" name="Kingspin's Drenium Shield"/>
-			<gd_item id="115000963" name="Kingspin's Malevite Shield"/>
+			<gd_item id="115000962" name="Kingspin's Drenium Shield" />
+			<gd_item id="115000963" name="Kingspin's Malevite Shield" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215784" name="Chura Twinblade"/>
+			<gd_npc npc_id="215784" name="Chura Twinblade" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111500949" name="Deserter's Handguards"/>
-			<gd_item id="111300963" name="Deserter's Vambrace"/>
+			<gd_item id="111500949" name="Deserter's Handguards" />
+			<gd_item id="111300963" name="Deserter's Vambrace" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215792" name="Kingspin" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100958" name="Deserter's Gloves"/>
-			<gd_item id="111600941" name="Deserter's Gauntlets"/>
+			<gd_item id="111100958" name="Deserter's Gloves" />
+			<gd_item id="111600941" name="Deserter's Gauntlets" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215794" name="Anvilface"/>
+			<gd_npc npc_id="215794" name="Anvilface" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100997" name="Deserter's Shoes"/>
-			<gd_item id="114600920" name="Deserter's Sabatons"/>
+			<gd_item id="114100997" name="Deserter's Shoes" />
+			<gd_item id="114600920" name="Deserter's Sabatons" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100971" name="Deserter's Leggings"/>
-			<gd_item id="113300984" name="Deserter's Breeches"/>
-			<gd_item id="113500954" name="Deserter's Chausses"/>
-			<gd_item id="113600925" name="Deserter's Greaves"/>
+			<gd_item id="113100971" name="Deserter's Leggings" />
+			<gd_item id="113300984" name="Deserter's Breeches" />
+			<gd_item id="113500954" name="Deserter's Chausses" />
+			<gd_item id="113600925" name="Deserter's Greaves" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215797" name="Bergrisar"/>
+			<gd_npc npc_id="215797" name="Bergrisar" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114301018" name="Deserter's Boots"/>
-			<gd_item id="114500961" name="Deserter's Brogans"/>
+			<gd_item id="114301018" name="Deserter's Boots" />
+			<gd_item id="114500961" name="Deserter's Brogans" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215784" name="Chura Twinblade"/>
+			<gd_npc npc_id="215784" name="Chura Twinblade" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100998" name="Forsaken Temple Shoes"/>
-			<gd_item id="114600921" name="Forsaken Temple Sabatons"/>
-			<gd_item id="114101149" name="Shoes of the Destroyed Temple"/>
-			<gd_item id="114601061" name="Sabatons of the Destroyed Temple"/>
+			<gd_item id="114100998" name="Forsaken Temple Shoes" />
+			<gd_item id="114600921" name="Forsaken Temple Sabatons" />
+			<gd_item id="114101149" name="Shoes of the Destroyed Temple" />
+			<gd_item id="114601061" name="Sabatons of the Destroyed Temple" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215792" name="Kingspin" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114301019" name="Forsaken Temple Boots"/>
-			<gd_item id="114500962" name="Forsaken Temple Brogans"/>
-			<gd_item id="114301157" name="Boots of the Destroyed Temple"/>
-			<gd_item id="114501107" name="Brogans of the Destroyed Temple"/>
+			<gd_item id="114301019" name="Forsaken Temple Boots" />
+			<gd_item id="114500962" name="Forsaken Temple Brogans" />
+			<gd_item id="114301157" name="Boots of the Destroyed Temple" />
+			<gd_item id="114501107" name="Brogans of the Destroyed Temple" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215794" name="Anvilface"/>
+			<gd_npc npc_id="215794" name="Anvilface" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112300915" name="Forsaken Temple Shoulderguards"/>
-			<gd_item id="112500902" name="Forsaken Temple Spaulders"/>
-			<gd_item id="112301052" name="Shoulderguards of the Destroyed Temple"/>
-			<gd_item id="112501042" name="Spaulders of the Destroyed Temple"/>
+			<gd_item id="112300915" name="Forsaken Temple Shoulderguards" />
+			<gd_item id="112500902" name="Forsaken Temple Spaulders" />
+			<gd_item id="112301052" name="Shoulderguards of the Destroyed Temple" />
+			<gd_item id="112501042" name="Spaulders of the Destroyed Temple" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101066" name="Forsaken Temple Tunic"/>
-			<gd_item id="110301015" name="Forsaken Temple Jerkin"/>
-			<gd_item id="110500983" name="Forsaken Temple Hauberk"/>
-			<gd_item id="110600963" name="Forsaken Temple Breastplate"/>
-			<gd_item id="110101218" name="Tunic of the Destroyed Temple"/>
-			<gd_item id="110301151" name="Jerkin of the Destroyed Temple"/>
-			<gd_item id="110501123" name="Hauberk of the Destroyed Temple"/>
-			<gd_item id="110601105" name="Breastplate of the Destroyed Temple"/>
+			<gd_item id="110101066" name="Forsaken Temple Tunic" />
+			<gd_item id="110301015" name="Forsaken Temple Jerkin" />
+			<gd_item id="110500983" name="Forsaken Temple Hauberk" />
+			<gd_item id="110600963" name="Forsaken Temple Breastplate" />
+			<gd_item id="110101218" name="Tunic of the Destroyed Temple" />
+			<gd_item id="110301151" name="Jerkin of the Destroyed Temple" />
+			<gd_item id="110501123" name="Hauberk of the Destroyed Temple" />
+			<gd_item id="110601105" name="Breastplate of the Destroyed Temple" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215797" name="Bergrisar"/>
+			<gd_npc npc_id="215797" name="Bergrisar" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100917" name="Forsaken Temple Pauldrons"/>
-			<gd_item id="112600917" name="Forsaken Temple Shoulderplates"/>
-			<gd_item id="112101066" name="Pauldrons of the Destroyed Temple"/>
-			<gd_item id="112601056" name="Shoulderplates of the Destroyed Temple"/>
+			<gd_item id="112100917" name="Forsaken Temple Pauldrons" />
+			<gd_item id="112600917" name="Forsaken Temple Shoulderplates" />
+			<gd_item id="112101066" name="Pauldrons of the Destroyed Temple" />
+			<gd_item id="112601056" name="Shoulderplates of the Destroyed Temple" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215784" name="Chura Twinblade"/>
+			<gd_npc npc_id="215784" name="Chura Twinblade" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100999" name="Malika's Shoes"/>
-			<gd_item id="114301020" name="Malika's Boots"/>
-			<gd_item id="114500963" name="Malika's Brogans"/>
-			<gd_item id="114600922" name="Malika's Sabatons"/>
+			<gd_item id="114100999" name="Malika's Shoes" />
+			<gd_item id="114301020" name="Malika's Boots" />
+			<gd_item id="114500963" name="Malika's Brogans" />
+			<gd_item id="114600922" name="Malika's Sabatons" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215794" name="Anvilface"/>
+			<gd_npc npc_id="215794" name="Anvilface" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101067" name="Jotun's Tunic"/>
-			<gd_item id="110301016" name="Jotun's Jerkin"/>
-			<gd_item id="110500984" name="Jotun's Hauberk"/>
-			<gd_item id="110600964" name="Jotun's Breastplate"/>
+			<gd_item id="110101067" name="Jotun's Tunic" />
+			<gd_item id="110301016" name="Jotun's Jerkin" />
+			<gd_item id="110500984" name="Jotun's Hauberk" />
+			<gd_item id="110600964" name="Jotun's Breastplate" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215797" name="Bergrisar"/>
+			<gd_npc npc_id="215797" name="Bergrisar" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100973" name="Jotun's Leggings"/>
-			<gd_item id="113300986" name="Jotun's Breeches"/>
-			<gd_item id="113500956" name="Jotun's Chausses"/>
-			<gd_item id="113600927" name="Jotun's Greaves"/>
+			<gd_item id="113100973" name="Jotun's Leggings" />
+			<gd_item id="113300986" name="Jotun's Breeches" />
+			<gd_item id="113500956" name="Jotun's Chausses" />
+			<gd_item id="113600927" name="Jotun's Greaves" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215784" name="Chura Twinblade"/>
+			<gd_npc npc_id="215784" name="Chura Twinblade" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001161" name="Chura Twinblade's Ring"/>
+			<gd_item id="122001161" name="Chura Twinblade's Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000940" name="Debilkarim's Necklace"/>
+			<gd_item id="121000940" name="Debilkarim's Necklace" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215797" name="Bergrisar"/>
+			<gd_npc npc_id="215797" name="Bergrisar" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001022" name="Bergrisar's Earrings"/>
+			<gd_item id="120001022" name="Bergrisar's Earrings" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215792" name="Kingspin" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001280" name="Kingspin's Corundum Ring"/>
-			<gd_item id="122001281" name="Kingspin's Turquoise Ring"/>
+			<gd_item id="122001280" name="Kingspin's Corundum Ring" />
+			<gd_item id="122001281" name="Kingspin's Turquoise Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Epic)" base_chance="2">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215795" name="Debilkarim the Maker"/>
+			<gd_npc npc_id="215795" name="Debilkarim the Maker" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001031" name="Debilkarim's Corundum Earrings"/>
-			<gd_item id="120001032" name="Debilkarim's Turquoise Earrings"/>
+			<gd_item id="120001031" name="Debilkarim's Corundum Earrings" />
+			<gd_item id="120001032" name="Debilkarim's Turquoise Earrings" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Head (Legend)" base_chance="60">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215792" name="Kingspin"/>
+			<gd_npc npc_id="215792" name="Kingspin" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002262" name="Kingspin's Hairpin"/>
+			<gd_item id="125002262" name="Kingspin's Hairpin" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300160000" name="Lower_Udas_Temple"/>
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215786" name="Garha the Punisher"/>
+			<gd_npc npc_id="215786" name="Garha the Punisher" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000086" name="Shadowy Prison Key"/>
+			<gd_item id="185000086" name="Shadowy Prison Key" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

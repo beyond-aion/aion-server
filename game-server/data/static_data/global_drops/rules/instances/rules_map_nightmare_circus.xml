@@ -3,37 +3,37 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Event Key Bundle" base_chance="100" no_reduction="true" each_member="true">
 		<gd_maps>
-			<gd_map map_id="301160000" name="Nightmare_Circus"/>
+			<gd_map map_id="301160000" name="Nightmare_Circus" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="233453" name="Harlequin Lord Reshka"/>
-			<gd_npc npc_id="233459" name="Mistress Viloa"/>
+			<gd_npc npc_id="233453" name="Harlequin Lord Reshka" />
+			<gd_npc npc_id="233459" name="Mistress Viloa" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188052686" name="[Event] Nightmare Key Bundle"/>
+			<gd_item id="188052686" name="[Event] Nightmare Key Bundle" />
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Event Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301160000" name="Nightmare_Circus"/>
+			<gd_map map_id="301160000" name="Nightmare_Circus" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="233467" name="Nightmare Lord Heiramune"/>
+			<gd_npc npc_id="233467" name="Nightmare Lord Heiramune" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000184" name="[Event] Nightmare Key"/>
+			<gd_item id="185000184" name="[Event] Nightmare Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Event Supply Bundle" base_chance="100" no_reduction="true" each_member="true">
 		<gd_maps>
-			<gd_map map_id="301160000" name="Nightmare_Circus"/>
+			<gd_map map_id="301160000" name="Nightmare_Circus" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="233467" name="Nightmare Lord Heiramune"/>
+			<gd_npc npc_id="233467" name="Nightmare Lord Heiramune" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188052561" name="[Event] Consumables Bundle"/>
+			<gd_item id="188052561" name="[Event] Consumables Bundle" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

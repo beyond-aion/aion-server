@@ -2,115 +2,115 @@
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<gd_rule rule_name="LV_7_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234558" name="Eiter III"/>
-			<gd_npc npc_id="234559" name="Tumon III"/>
-			<gd_npc npc_id="234560" name="Benoid III"/>
-			<gd_npc npc_id="234561" name="Benoid III"/>
-			<gd_npc npc_id="234562" name="Eiter III"/>
-			<gd_npc npc_id="234563" name="Tumon III"/>
+			<gd_npc npc_id="234558" name="Eiter III" />
+			<gd_npc npc_id="234559" name="Tumon III" />
+			<gd_npc npc_id="234560" name="Benoid III" />
+			<gd_npc npc_id="234561" name="Benoid III" />
+			<gd_npc npc_id="234562" name="Eiter III" />
+			<gd_npc npc_id="234563" name="Tumon III" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053125" name="Level 7 Invader Reward Box (Level 45 or lower)"/>
+			<gd_item id="188053125" name="Level 7 Invader Reward Box (Level 45 or lower)" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_6_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234564" name="Tarmat II"/>
-			<gd_npc npc_id="234565" name="Tarmat III"/>
-			<gd_npc npc_id="234566" name="Eiter III"/>
-			<gd_npc npc_id="234567" name="Tarmat II"/>
-			<gd_npc npc_id="234568" name="Eiter III"/>
-			<gd_npc npc_id="234569" name="Tarmat II"/>
+			<gd_npc npc_id="234564" name="Tarmat II" />
+			<gd_npc npc_id="234565" name="Tarmat III" />
+			<gd_npc npc_id="234566" name="Eiter III" />
+			<gd_npc npc_id="234567" name="Tarmat II" />
+			<gd_npc npc_id="234568" name="Eiter III" />
+			<gd_npc npc_id="234569" name="Tarmat II" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053126" name="Level 6 Invader Reward Box (Level 45 or lower)"/>
+			<gd_item id="188053126" name="Level 6 Invader Reward Box (Level 45 or lower)" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_5_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234570" name="Magnorion II"/>
-			<gd_npc npc_id="234571" name="Eiter III"/>
-			<gd_npc npc_id="234572" name="Benoid III"/>
-			<gd_npc npc_id="234573" name="Magnorion II"/>
-			<gd_npc npc_id="234574" name="Eiter III"/>
-			<gd_npc npc_id="234575" name="Benoid III"/>
-			<gd_npc npc_id="234576" name="Benoid III"/>
-			<gd_npc npc_id="234577" name="Magnorion II"/>
-			<gd_npc npc_id="234578" name="Eiter III"/>
-			<gd_npc npc_id="234579" name="Benoid III"/>
-			<gd_npc npc_id="234580" name="Eiter II"/>
-			<gd_npc npc_id="234581" name="Magnorion III"/>
+			<gd_npc npc_id="234570" name="Magnorion II" />
+			<gd_npc npc_id="234571" name="Eiter III" />
+			<gd_npc npc_id="234572" name="Benoid III" />
+			<gd_npc npc_id="234573" name="Magnorion II" />
+			<gd_npc npc_id="234574" name="Eiter III" />
+			<gd_npc npc_id="234575" name="Benoid III" />
+			<gd_npc npc_id="234576" name="Benoid III" />
+			<gd_npc npc_id="234577" name="Magnorion II" />
+			<gd_npc npc_id="234578" name="Eiter III" />
+			<gd_npc npc_id="234579" name="Benoid III" />
+			<gd_npc npc_id="234580" name="Eiter II" />
+			<gd_npc npc_id="234581" name="Magnorion III" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053127" name="Level 5 Invader Reward Box (Level 60 or lower)"/>
+			<gd_item id="188053127" name="Level 5 Invader Reward Box (Level 60 or lower)" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_4_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234582" name="Elite Benoid III"/>
-			<gd_npc npc_id="234583" name="Elite Eiter III"/>
-			<gd_npc npc_id="234584" name="Elite Magnorion II"/>
-			<gd_npc npc_id="234585" name="Elite Benoid II"/>
-			<gd_npc npc_id="234586" name="Elite Eiter III"/>
-			<gd_npc npc_id="234587" name="Elite Magnorion II"/>
+			<gd_npc npc_id="234582" name="Elite Benoid III" />
+			<gd_npc npc_id="234583" name="Elite Eiter III" />
+			<gd_npc npc_id="234584" name="Elite Magnorion II" />
+			<gd_npc npc_id="234585" name="Elite Benoid II" />
+			<gd_npc npc_id="234586" name="Elite Eiter III" />
+			<gd_npc npc_id="234587" name="Elite Magnorion II" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053128" name="Level 4 Invader Reward Box (Level 60 or lower)"/>
+			<gd_item id="188053128" name="Level 4 Invader Reward Box (Level 60 or lower)" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_3_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234589" name="Prime Raedon III"/>
-			<gd_npc npc_id="234590" name="Prime Raedon III"/>
-			<gd_npc npc_id="234594" name="Prime Raedon III"/>
-			<gd_npc npc_id="234597" name="Prime Raedon III"/>
+			<gd_npc npc_id="234589" name="Prime Raedon III" />
+			<gd_npc npc_id="234590" name="Prime Raedon III" />
+			<gd_npc npc_id="234594" name="Prime Raedon III" />
+			<gd_npc npc_id="234597" name="Prime Raedon III" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053129" name="Level 3 Invader Reward Box"/>
+			<gd_item id="188053129" name="Level 3 Invader Reward Box" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_2_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234588" name="Prime Benoid II"/>
-			<gd_npc npc_id="234595" name="Prime Benoid II"/>
-			<gd_npc npc_id="234596" name="Prime Eiter II"/>
-			<gd_npc npc_id="234598" name="Prime Benoid II"/>
-			<gd_npc npc_id="234599" name="Prime Magnorion II"/>
-			<gd_npc npc_id="234602" name="Prime Eiter II"/>
-			<gd_npc npc_id="234603" name="Prime Tumon II"/>
-			<gd_npc npc_id="234605" name="Prime Tumon II"/>
-			<gd_npc npc_id="234606" name="Prime Benoid II"/>
-			<gd_npc npc_id="234607" name="Prime Tumon II"/>
-			<gd_npc npc_id="234608" name="Prime Raedon II"/>
-			<gd_npc npc_id="234611" name="Elite Magnorion II"/>
-			<gd_npc npc_id="234612" name="Prime Benoid II"/>
-			<gd_npc npc_id="234614" name="Prime Eiter II"/>
-			<gd_npc npc_id="234615" name="Prime Tumon II"/>
+			<gd_npc npc_id="234588" name="Prime Benoid II" />
+			<gd_npc npc_id="234595" name="Prime Benoid II" />
+			<gd_npc npc_id="234596" name="Prime Eiter II" />
+			<gd_npc npc_id="234598" name="Prime Benoid II" />
+			<gd_npc npc_id="234599" name="Prime Magnorion II" />
+			<gd_npc npc_id="234602" name="Prime Eiter II" />
+			<gd_npc npc_id="234603" name="Prime Tumon II" />
+			<gd_npc npc_id="234605" name="Prime Tumon II" />
+			<gd_npc npc_id="234606" name="Prime Benoid II" />
+			<gd_npc npc_id="234607" name="Prime Tumon II" />
+			<gd_npc npc_id="234608" name="Prime Raedon II" />
+			<gd_npc npc_id="234611" name="Elite Magnorion II" />
+			<gd_npc npc_id="234612" name="Prime Benoid II" />
+			<gd_npc npc_id="234614" name="Prime Eiter II" />
+			<gd_npc npc_id="234615" name="Prime Tumon II" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053130" name="Level 2 Invader Reward Box"/>
+			<gd_item id="188053130" name="Level 2 Invader Reward Box" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="LV_1_WORLDRAID_BOX" min_count="1" base_chance="100" each_member="true">
 		<gd_npcs>
-			<gd_npc npc_id="234591" name="Prime Tumon I"/>
-			<gd_npc npc_id="234592" name="Prime Tumon I"/>
-			<gd_npc npc_id="234593" name="Prime Eiter I"/>
-			<gd_npc npc_id="234600" name="Prime Eiter I"/>
-			<gd_npc npc_id="234601" name="Prime Raedon I"/>
-			<gd_npc npc_id="234604" name="Prime Tarmat I"/>
-			<gd_npc npc_id="234609" name="Prime Raedon I"/>
-			<gd_npc npc_id="234610" name="Prime Tarmat I"/>
-			<gd_npc npc_id="234613" name="Prime Benoid I"/>
-			<gd_npc npc_id="219998" name="Prime Tarmat I"/>
-			<gd_npc npc_id="219999" name="Prime Benoid I"/>
-			<gd_npc npc_id="220000" name="Prime Eiter I"/>
-			<gd_npc npc_id="220001" name="Prime Tarmat I"/>
-			<gd_npc npc_id="220002" name="Prime Benoid I"/>
-			<gd_npc npc_id="220003" name="Prime Eiter I"/>
+			<gd_npc npc_id="234591" name="Prime Tumon I" />
+			<gd_npc npc_id="234592" name="Prime Tumon I" />
+			<gd_npc npc_id="234593" name="Prime Eiter I" />
+			<gd_npc npc_id="234600" name="Prime Eiter I" />
+			<gd_npc npc_id="234601" name="Prime Raedon I" />
+			<gd_npc npc_id="234604" name="Prime Tarmat I" />
+			<gd_npc npc_id="234609" name="Prime Raedon I" />
+			<gd_npc npc_id="234610" name="Prime Tarmat I" />
+			<gd_npc npc_id="234613" name="Prime Benoid I" />
+			<gd_npc npc_id="219998" name="Prime Tarmat I" />
+			<gd_npc npc_id="219999" name="Prime Benoid I" />
+			<gd_npc npc_id="220000" name="Prime Eiter I" />
+			<gd_npc npc_id="220001" name="Prime Tarmat I" />
+			<gd_npc npc_id="220002" name="Prime Benoid I" />
+			<gd_npc npc_id="220003" name="Prime Eiter I" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053131" name="Level 1 Invader Reward Box"/>
+			<gd_item id="188053131" name="Level 1 Invader Reward Box" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
