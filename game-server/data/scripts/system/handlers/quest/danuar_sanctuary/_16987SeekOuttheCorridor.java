@@ -1,4 +1,3 @@
-/*
 package quest.danuar_sanctuary;
 
 import com.aionemu.gameserver.model.DialogAction;
@@ -8,13 +7,11 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
-*/
 
 /**
  * @author Pad
  */
 
-/*
 public class _16987SeekOuttheCorridor extends QuestHandler {
 
 	private static final int questId = 16987;
@@ -28,7 +25,7 @@ public class _16987SeekOuttheCorridor extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(npcId).addOnQuestStart(questId);
 		qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("DF5_SensoryArea_Q16987"), questId);
+		qe.registerOnEnterZone(ZoneName.get("DANUAR_SANCTUARY_INVESTIGATION_AREA_220080000"), questId);
 	}
 
 	@Override
@@ -45,13 +42,6 @@ public class _16987SeekOuttheCorridor extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 10002);
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
-					return defaultCloseDialog(env, 1, 1, true, true);
-			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId)
 				return sendQuestEndDialog(env);
@@ -61,7 +51,10 @@ public class _16987SeekOuttheCorridor extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		changeQuestStep(env, 0, 1, false);
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
+		qs.setQuestVarById(0, 1);
+		qs.setStatus(QuestStatus.REWARD);
+		updateQuestStatus(env);
 		return true;
 	}
-} */
+}

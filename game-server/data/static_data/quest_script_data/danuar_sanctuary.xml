@@ -7,27 +7,25 @@
 			16982 [REMOVED] Unexpected Gain
 			16983 [REMOVED] Special Unlocking Device
 			16984 [UNUSED] Danuar Sanctuary
-			16985 [SCRIPT_R] Chir Treasure Robbers
-			16986 [XML_R] No Sanctuary for the Commanders
-			16987 [SCRIPT_R] [Spy] Seek Out the Corridor
-			16988 [XML_R] [Spy] Asmo Squad Wipeout
+			16985 [SCRIPT] Chir Treasure Robbers
+			16986 [XML] No Sanctuary for the Commanders
+			16987 [SCRIPT] [Spy] Seek Out the Corridor
+			16988 [XML] [Spy] Asmo Squad Wipeout
 			16989 [UNUSED] Kamar Battlefield
 			26980 [REMOVED] Buried with Their Treasure
 			26981 [REMOVED] Complicate Their Research
 			26982 [REMOVED] A Record of Idgel Uses
 			26983 [REMOVED] Spooky Action at a Distance
 			26984 [UNUSED] Danuar Sanctuary
-			26985 [SCRIPT_R] Graveyard Treasure
-			26986 [XML_R] Ruin the Research Team's Scheme
-			26987 [SCRIPT_R] [Spy] Explore the Elyos Corridor
-			26988 [XML_R] [Spy] Expunge the Expeditionary Squad
+			26985 [SCRIPT] Graveyard Treasure
+			26986 [XML] Ruin the Research Team's Scheme
+			26987 [SCRIPT] [Spy] Explore the Elyos Corridor
+			26988 [XML] [Spy] Expunge the Expeditionary Squad
 		[END] SUMMARY
 	-->
 	<!-- MONSTER HUNT -->
-	<!--  
 	<monster_hunt id="16986" start_npc_ids="804862" end_npc_ids="804864"/>
-	<monster_hunt id="16988" start_npc_ids="804862" end_npc_ids="804865"/>
+	<monster_hunt id="16988" start_npc_ids="801953" end_npc_ids="804865"/>
 	<monster_hunt id="26986" start_npc_ids="804863" end_npc_ids="804866"/>
-	<monster_hunt id="26988" start_npc_ids="804863" end_npc_ids="804867"/>
-	-->
+	<monster_hunt id="26988" start_npc_ids="801954" end_npc_ids="804867"/>
 </quest_scripts>
