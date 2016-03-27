@@ -463,9 +463,9 @@ public class MathUtil {
 		}
 		float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
 		if (object1.getMoveController().isInMove())
-			offset += 3f;
+			offset += 2.5f;
 		if (object2.getMoveController().isInMove())
-			offset += 3f;
+			offset += 2.5f;
 		return ((getDistance(object1, object2) - offset) <= range);
 	}
 
