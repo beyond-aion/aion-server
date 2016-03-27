@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -69,7 +70,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code;
 		writeC(0x00); // unk
 		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
-		writeD((int) LocalDateTime.now().atZone(GSConfig.TIME_ZONE.toZoneId()).toEpochSecond()); // server time
+		writeD((int) ZonedDateTime.now(ZoneOffset.UTC).toEpochSecond()); // current UTC time
 		writeH(350); // unk
 		writeC(1); // unk (always 1)
 		writeC(10); // time or level restriction (now 5 on official)
@@ -95,7 +96,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeH(1); // 4.5
 		writeC(0); // 4.7
 		writeC(1); // 4.7
-		writeD(0); // 0 or -3600 (4.8, some time offset in seconds, not sure which display this affects)
+		writeD(-(GSConfig.TIME_ZONE.getDSTSavings() / 1000)); // servers current daylight saving time offset in seconds
 		writeC(1); // 4.8
 		writeC(1); // 1 = activate stonespear siege
 		writeC(0); // 1 = master Server
