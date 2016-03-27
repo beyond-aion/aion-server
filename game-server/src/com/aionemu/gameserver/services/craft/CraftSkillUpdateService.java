@@ -44,7 +44,7 @@ public class CraftSkillUpdateService {
 	private CraftSkillUpdateService() {
 		// Asmodian
 		npcBySkill.put(204096, new CraftLearnTemplate(30002, false, "Extract Vitality"));
-		npcBySkill.put(830158, new CraftLearnTemplate(30002, false, "Extract Vitality"));
+		npcBySkill.put(830150, new CraftLearnTemplate(30002, false, "Extract Vitality"));
 		npcBySkill.put(204257, new CraftLearnTemplate(30003, false, "Extract Aether"));
 		npcBySkill.put(830148, new CraftLearnTemplate(30003, false, "Extract Aether"));
 
