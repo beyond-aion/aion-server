@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.item;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
@@ -9,21 +10,21 @@ import com.aionemu.commons.utils.Rnd;
 
 /**
  * @author vlog
+ * @modified Neon
  */
 @XmlType(name = "RandomItem")
 public class RandomItem {
 
 	@XmlAttribute(name = "type")
 	protected RandomType type;
-	@XmlAttribute(name = "count")
-	protected int count;
-	@XmlAttribute(name = "rnd_min")
-	public int rndMin;
-	@XmlAttribute(name = "rnd_max")
-	public int rndMax;
+	@XmlAttribute(name = "min_count")
+	public int minCount = 1;
+	@XmlAttribute(name = "max_count")
+	public int maxCount;
 
-	public int getCount() {
-		return count;
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (maxCount > 0 && maxCount < minCount)
+			LoggerFactory.getLogger(ResultedItem.class).warn("Wrong count for decomposable random item:{}, min:{} max:{}", type, minCount, maxCount);
 	}
 
 	public RandomType getType() {
@@ -31,25 +32,14 @@ public class RandomItem {
 	}
 
 	public int getRndMin() {
-		return rndMin;
+		return minCount;
 	}
 
 	public int getRndMax() {
-		return rndMax;
+		return maxCount;
 	}
 
 	public final int getResultCount() {
-		if (count == 0 && rndMin == 0 && rndMax == 0) {
-			return 1;
-		} else if (rndMin > 0 || rndMax > 0) {
-			if (rndMax < rndMin) {
-				LoggerFactory.getLogger(RandomItem.class).warn("Wrong rnd result item definition {} {}", rndMin, rndMax);
-				return 1;
-			} else {
-				return Rnd.get(rndMin, rndMax);
-			}
-		} else {
-			return count;
-		}
+		return maxCount == 0 ? minCount : Rnd.get(minCount, maxCount);
 	}
 }

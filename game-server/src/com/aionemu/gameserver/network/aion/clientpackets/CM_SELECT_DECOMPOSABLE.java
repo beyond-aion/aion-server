@@ -6,8 +6,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ResultedItem;
@@ -51,21 +49,11 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 				if (selectableItems == null) {
 					return;
 				}
-				// filter By Class
 				Iterator<ResultedItem> iter = selectableItems.iterator();
 				while (iter.hasNext()) {
 					ResultedItem i = iter.next();
-					if (!i.getPlayerClass().equals(PlayerClass.ALL)) {
-						if (!i.getPlayerClass().equals(player.getPlayerClass())) {
-							iter.remove();
-							continue;
-						}
-					}
-					if (!i.getRace().equals(Race.PC_ALL)) {
-						if (!i.getRace().equals(player.getRace())) {
-							iter.remove();
-						}
-					}
+					if (!i.isObtainableFor(player))
+						iter.remove();
 				}
 				if (index + 1 > selectableItems.size()) {
 					return;
