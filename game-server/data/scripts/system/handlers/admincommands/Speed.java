@@ -1,90 +1,80 @@
 package admincommands;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class Speed extends AdminCommand implements StatOwner {
 
 	public Speed() {
-		super("speed");
+		super("speed", "Sets your speed.");
+
+		setParamInfo("<0-100> - Set your speed to the specified value (0 to reset).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(admin, "Syntax //speed <percent>");
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		int parameter = 0;
+		float parameter = 0;
 		try {
-			parameter = Integer.parseInt(params[0]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Parameter should number");
-			return;
-		}
-
-		if (parameter < 0 || parameter > 1000) {
-			PacketSendUtility.sendMessage(admin, "Valid values are in 0-1000 range");
+			parameter = Float.parseFloat(params[0]);
+			if (parameter < 0 || parameter > 100) {
+				throw new InvalidParameterException("Speed must be between 0 and 100.");
+			}
+		} catch (NumberFormatException | InvalidParameterException e) {
+			sendInfo(admin, e instanceof InvalidParameterException ? e.getMessage() : null);
 			return;
 		}
 
 		admin.getGameStats().endEffect(this);
+		if (parameter == 0) {
+			sendInfo(admin, "Your standard speed has been recovered.");
+			return;
+		}
+
 		List<IStatFunction> functions = new FastTable<IStatFunction>();
 		functions.add(new SpeedFunction(StatEnum.SPEED, parameter));
 		functions.add(new SpeedFunction(StatEnum.FLY_SPEED, parameter));
 		admin.getGameStats().addEffect(this, functions);
-
-		PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax //speed <percent>");
+		sendInfo(admin, "Your speed is now fixed at " + parameter);
 	}
 
 	class SpeedFunction extends StatFunction {
 
-		static final int speed = 6000;
-		static final int flyspeed = 9000;
-		int modifier = 1;
+		private int speed;
 
-		SpeedFunction(StatEnum stat, int modifier) {
+		SpeedFunction(StatEnum stat, float speed) {
 			this.stat = stat;
-			this.modifier = modifier;
+			this.speed = (int) (speed * 1000);
 		}
 
 		@Override
 		public void apply(Stat2 otherStat) {
-			switch (this.stat) {
-				case SPEED:
-					otherStat.setBase(speed + (speed * modifier) / 100);
-					break;
-				case FLY_SPEED:
-					otherStat.setBase(flyspeed + (flyspeed * modifier) / 100);
-					break;
-			}
+			otherStat.setBase(speed);
+			otherStat.setBaseRate(1);
+			otherStat.setBonus(0);
 		}
 
 		@Override
 		public int getPriority() {
-			return 60;
+			return 120;
 		}
 	}
-
 }
