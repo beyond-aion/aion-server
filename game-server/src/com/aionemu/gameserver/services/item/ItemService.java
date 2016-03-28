@@ -61,7 +61,7 @@ public class ItemService {
 	 * Add new item based on all sourceItem values
 	 */
 	public static long addItem(Player player, Item sourceItem) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, false, DEFAULT_UPDATE_PREDICATE);
+		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, true, DEFAULT_UPDATE_PREDICATE);
 	}
 
 	/**

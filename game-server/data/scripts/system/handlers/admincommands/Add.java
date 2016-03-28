@@ -104,7 +104,7 @@ public class Add extends AdminCommand {
 		if (!AdminService.getInstance().canOperate(player, receiver, itemId, "command //add"))
 			return;
 
-		long count = ItemService.addItem(receiver, itemId, itemCount);
+		long count = ItemService.addItem(receiver, itemId, itemCount, true);
 
 		if (count == 0) {
 			if (player != receiver) {

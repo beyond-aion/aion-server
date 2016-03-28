@@ -32,7 +32,7 @@ public class SM_SELL_ITEM extends AionServerPacket {
 		this.tradeNpcType = tradeList != null ? tradeList.getTradeNpcType() : TradeNpcType.NORMAL;
 		this.buyPriceRate = tradeList != null ? tradeList.getBuyPriceRate() : PricesService.getVendorSellModifier();
 		this.showBuyTab = npc.canBuyFrom();
-		this.showSellTab = npc.canSellTo() || npc.canPurchase();
+		this.showSellTab = npc.canSell() || npc.canPurchase();
 		this.tradeTabs = tradeList != null ? tradeList.getTradeTablist() : new FastTable<>();
 	}
 
