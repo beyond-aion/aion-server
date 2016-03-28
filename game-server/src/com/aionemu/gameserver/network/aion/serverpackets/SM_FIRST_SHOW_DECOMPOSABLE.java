@@ -28,7 +28,7 @@ public class SM_FIRST_SHOW_DECOMPOSABLE extends AionServerPacket {
 		for (ResultedItem item : itemsCollections) {
 			writeC(index);
 			writeD(item.getItemId());
-			writeD(item.getCount());
+			writeD(item.getMinCount());
 			writeC(0);
 			writeC(0);
 			writeC(0);

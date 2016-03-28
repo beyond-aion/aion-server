@@ -3,7 +3,7 @@
 	<!--
 		TODO:
 		Dragonbound
-		
+
 		<gd_item id="101900660" name="Dragonbound Aethercannon" />
 		<gd_item id="101700768" name="Dragonbound Bow" />
 		<gd_item id="102100589" name="Dragonbound Cipher-Blade" />
@@ -18,7 +18,7 @@
 		<gd_item id="101500747" name="Dragonbound Staff" />
 		<gd_item id="100000953" name="Dragonbound Sword" />
 		<gd_item id="115001007" name="Dragonbound Shield" />
-		
+
 		<gd_item id="110101079" name="Dragonbound Tunic" />
 		<gd_item id="110101086" name="Dragonbound Tunic" />
 		<gd_item id="110301028" name="Dragonbound Jerkin" />
@@ -59,7 +59,7 @@
 		<gd_item id="114500985" name="Dragonbound Brogans" />
 		<gd_item id="114600936" name="Dragonbound Sabatons" />
 		<gd_item id="114600944" name="Dragonbound Sabatons" />
-	 -->
+	-->
 	<!-- Weapons (white, 1-50, Asmodae) -->
 	<gd_rule rule_name="Weapons (Common)" base_chance="1.3" min_diff="-1" max_diff="3">
 		<gd_worlds>
@@ -881,7 +881,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -2145,7 +2145,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -3124,7 +3124,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -3680,7 +3680,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -3733,7 +3733,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -5015,7 +5015,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -6774,7 +6774,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -8321,7 +8321,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -9195,7 +9195,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -9260,7 +9260,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -9555,7 +9555,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -9904,7 +9904,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -10205,7 +10205,7 @@
 			<gd_world wd_type="ABYSS_INSTANCE" />
 			<gd_world wd_type="BALAUREA" />
 			<gd_world wd_type="BALAUREA_HIGH" />
-			<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 			<gd_world wd_type="BALAUREA_INSTANCE" />
 			<gd_world wd_type="PANESTERRA" />
 			<gd_world wd_type="DREDGION_INSTANCE" />
@@ -10332,7 +10332,7 @@
 	<!-- Accessory (Lepharist Headgear) -->
 	<gd_rule rule_name="Accessory (Rare)" base_chance="0.5" min_diff="-4" max_diff="5">
 		<gd_npc_groups>
-			<gd_npc_group group="LEPHAR"/>
+			<gd_npc_group group="LEPHAR" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 10 -->

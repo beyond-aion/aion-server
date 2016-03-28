@@ -3,74 +3,74 @@
 	<!-- Vasharti -->
 	<gd_rule rule_name="Named Equipment Box" base_chance="100" each_member="true">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053702" name="Vasharti's Equipment Box"/>
+			<gd_item id="188053702" name="Vasharti's Equipment Box" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Supply Box" base_chance="100" each_member="true">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053706" name="Rentus Base Supplies"/>
+			<gd_item id="188053706" name="Rentus Base Supplies" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Stigma Bundle" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053783" name="Stigma Sack"/>
+			<gd_item id="188053783" name="Stigma Sack" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Wings" base_chance="2.5">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti"/>
+			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000155" name="Brigade General Vasharti's Wings"/>
+			<gd_item id="187000155" name="Brigade General Vasharti's Wings" />
 		</gd_items>
 	</gd_rule>
 	<!-- Common -->
 	<gd_rule rule_name="Named Blood Mark Bundle" base_chance="80" each_member="true">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236302" name="Archmagus Upadi"/>
-			<gd_npc npc_id="236301" name="Ambusher Kiriana"/>
-			<gd_npc npc_id="236299" name="Umatha the Crazed"/>
-			<gd_npc npc_id="236296" name="Captain Xasta"/>
-			<gd_npc npc_id="236297" name="Captain Xasta"/>
+			<gd_npc npc_id="236302" name="Archmagus Upadi" />
+			<gd_npc npc_id="236301" name="Ambusher Kiriana" />
+			<gd_npc npc_id="236299" name="Umatha the Crazed" />
+			<gd_npc npc_id="236296" name="Captain Xasta" />
+			<gd_npc npc_id="236297" name="Captain Xasta" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053712" name="Blood Mark Bundle"/>
-			<gd_item id="188053713" name="Blood Mark Bundle"/>
+			<gd_item id="188053712" name="Blood Mark Bundle" />
+			<gd_item id="188053713" name="Blood Mark Bundle" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base"/>
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236297" name="Captain Xasta"/>
+			<gd_npc npc_id="236297" name="Captain Xasta" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000229" name="Rentus Supplies Storage Box Key"/>
+			<gd_item id="185000229" name="Rentus Supplies Storage Box Key" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

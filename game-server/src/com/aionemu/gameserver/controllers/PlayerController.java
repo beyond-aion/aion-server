@@ -108,6 +108,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TeamEffectUpdater;
+import com.aionemu.gameserver.taskmanager.tasks.TeamMoveUpdater;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -576,6 +577,8 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onMove() {
 		super.onMove();
+		if (getOwner().isInTeam())
+			TeamMoveUpdater.getInstance().startTask(getOwner());
 	}
 
 	@Override

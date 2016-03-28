@@ -3,108 +3,141 @@
 	<!-- Map Drops -->
 	<gd_rule rule_name="Named Scroll" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_items>
-			<gd_item id="164000291" name="Slumber Trick Scroll"/>
-			<gd_item id="164000292" name="Research Luminary Cloaking Scroll"/>
-			<gd_item id="164000293" name="Secret Lab Entry Summoning Scroll"/>
+			<gd_item id="164000291" name="Slumber Trick Scroll" />
+			<gd_item id="164000292" name="Research Luminary Cloaking Scroll" />
+			<gd_item id="164000293" name="Secret Lab Entry Summoning Scroll" />
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Coin" base_chance="100" min_count="15" max_count="45" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
-			<gd_npc npc_id="234990" name="Wounded Belsagos"/>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="234990" name="Wounded Belsagos" />
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin"/>
+			<gd_item id="186000237" name="Ancient Coin" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Supplements" base_chance="100" min_count="20" max_count="50" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166100008" name="Greater Supplements (Eternal)"/>
-			<gd_item id="166100011" name="Greater Supplements (Mythic)"/>
+			<gd_item id="166100008" name="Greater Supplements (Eternal)" />
+			<gd_item id="166100011" name="Greater Supplements (Mythic)" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Earth Scrap" base_chance="45">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
-			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
+			<gd_npc npc_id="234542" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="152012592" name="Earth Scrap"/>
+			<gd_item id="152012592" name="Earth Scrap" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crystal and Ore" base_chance="13.33" >
+	<gd_rule rule_name="Crystal and Ore" base_chance="13.33">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="152012600" name="Patience Crystal"/>
-			<gd_item id="152012602" name="Ore of Patience"/>
+			<gd_item id="152012600" name="Patience Crystal" />
+			<gd_item id="152012602" name="Ore of Patience" />
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="233887" name="Dimensional Physicist"/>
+			<gd_npc npc_id="233887" name="Dimensional Physicist" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000196" name="Abyss Gap Sealing Key"/>
+			<gd_item id="185000196" name="Abyss Gap Sealing Key" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="4" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234990" name="Wounded Belsagos" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000236" name="Blood Mark" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="8" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000236" name="Blood Mark" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="12" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000236" name="Blood Mark" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos"/>
+			<gd_npc npc_id="234542" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053332" name="Linkgate Foundry Heavy Ancient Manastone Bundle"/>
+			<gd_item id="188053332" name="Linkgate Foundry Heavy Ancient Manastone Bundle" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234990" name="Wounded Belsagos"/>
+			<gd_npc npc_id="234990" name="Wounded Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053331" name="Linkgate Foundry Small Ancient Manastone Bundle"/>
+			<gd_item id="188053331" name="Linkgate Foundry Small Ancient Manastone Bundle" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301270000" name="Linkgate_Foundry"/>
+			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234991" name="Furious Belsagos"/>
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053333" name="Linkgate Foundry Noble Ancient Manastone Bundle"/>
+			<gd_item id="188053333" name="Linkgate Foundry Noble Ancient Manastone Bundle" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

@@ -18,52 +18,49 @@ public class SM_MOVE extends AionServerPacket {
 	 * Object that is moving.
 	 */
 	private Creature creature;
+	private byte movementMask;
 
 	public SM_MOVE(Creature creature) {
+		this(creature, creature.getMoveController().getMovementMask());
+	}
+
+	public SM_MOVE(Creature creature, byte movementMask) {
 		this.creature = creature;
+		this.movementMask = movementMask;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection client) {
-		MoveController moveData = creature.getMoveController();
+		MoveController mc =  creature.getMoveController();
+		PlayableMoveController<?> pmc = mc instanceof PlayableMoveController ? (PlayableMoveController<?>) mc : null;
 		writeD(creature.getObjectId());
 		writeF(creature.getX());
 		writeF(creature.getY());
 		writeF(creature.getZ());
 		writeC(creature.getHeading());
 
-		writeC(moveData.getMovementMask());
+		writeC(movementMask);
 
-		if (moveData instanceof PlayableMoveController) {
-			PlayableMoveController<?> playermoveData = (PlayableMoveController<?>) moveData;
-			if ((moveData.getMovementMask() & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
-				if ((moveData.getMovementMask() & MovementMask.MOUSE) == 0) {
-					writeF(playermoveData.vectorX);
-					writeF(playermoveData.vectorY);
-					writeF(playermoveData.vectorZ);
-				} else {
-					writeF(moveData.getTargetX2());
-					writeF(moveData.getTargetY2());
-					writeF(moveData.getTargetZ2());
-				}
-			}
-			if ((moveData.getMovementMask() & MovementMask.GLIDE) == MovementMask.GLIDE) {
-				writeC(playermoveData.glideFlag);
-			}
-			if ((moveData.getMovementMask() & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-				writeD(playermoveData.unk1);
-				writeD(playermoveData.unk2);
-				writeF(playermoveData.vectorX);
-				writeF(playermoveData.vectorY);
-				writeF(playermoveData.vectorZ);
-			}
-		} else {
-			if ((moveData.getMovementMask() & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
-				writeF(moveData.getTargetX2());
-				writeF(moveData.getTargetY2());
-				writeF(moveData.getTargetZ2());
+		if ((movementMask & MovementMask.POSITION) == MovementMask.POSITION && (movementMask & MovementMask.MANUAL) == MovementMask.MANUAL) {
+			if (pmc != null && (movementMask & MovementMask.ABSOLUTE) == 0) {
+				writeF(pmc.vectorX);
+				writeF(pmc.vectorY);
+				writeF(pmc.vectorZ);
+			} else {
+				writeF(mc.getTargetX2());
+				writeF(mc.getTargetY2());
+				writeF(mc.getTargetZ2());
 			}
 		}
+		if ((movementMask & MovementMask.GLIDE) == MovementMask.GLIDE) {
+			writeC(pmc == null ? 0 : pmc.glideFlag);
+		}
+		if (pmc != null && (movementMask & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
+			writeD(pmc.unk1);
+			writeD(pmc.unk2);
+			writeF(pmc.vectorX);
+			writeF(pmc.vectorY);
+			writeF(pmc.vectorZ);
+		}
 	}
-
 }

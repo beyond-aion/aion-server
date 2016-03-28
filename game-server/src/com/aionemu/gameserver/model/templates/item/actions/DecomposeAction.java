@@ -16,15 +16,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -46,6 +43,8 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastTable;
 
 /**
  * @author oslo(a00441234)
@@ -133,17 +132,8 @@ public class DecomposeAction extends AbstractItemAction {
 			Iterator<ResultedItem> iter = selectable.iterator();
 			while (iter.hasNext()) {
 				ResultedItem item = iter.next();
-				if (!item.getPlayerClass().equals(PlayerClass.ALL)) {
-					if (!item.getPlayerClass().equals(player.getPlayerClass())) {
-						iter.remove();
-						continue;
-					}
-				}
-				if (!item.getRace().equals(Race.PC_ALL)) {
-					if (!item.getRace().equals(player.getRace())) {
-						iter.remove();
-					}
-				}
+				if (!item.isObtainableFor(player))
+					iter.remove();
 			}
 			PacketSendUtility.sendPacket(player, new SM_FIRST_SHOW_DECOMPOSABLE(parentItem.getObjectId(), selectable));
 			return;
@@ -180,8 +170,9 @@ public class DecomposeAction extends AbstractItemAction {
 				if (validAction) {
 					if (selectedCollection.getItems().size() > 0) {
 						for (ResultedItem resultItem : selectedCollection.getItems()) {
-							if (canAcquire(player, resultItem)) {
-								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), false, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+							if (resultItem.isObtainableFor(player)) {
+								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), false,
+									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}
@@ -430,19 +421,6 @@ public class DecomposeAction extends AbstractItemAction {
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
 			}
 
-			private boolean canAcquire(Player player, ResultedItem resultItem) {
-				Race race = resultItem.getRace();
-				if (race != Race.PC_ALL && !race.equals(player.getRace())) {
-					return false;
-				}
-				PlayerClass playerClass = resultItem.getPlayerClass();
-
-				if (!playerClass.equals(PlayerClass.ALL) && !playerClass.equals(player.getPlayerClass())) {
-					return false;
-				}
-				return true;
-			}
-
 			boolean postValidate(Player player, Item parentItem) {
 				if (!canAct(player, parentItem, targetItem)) {
 					return false;
@@ -520,14 +498,12 @@ public class DecomposeAction extends AbstractItemAction {
 	private int calcMaxCountOfSlots(ExtractedItemsCollection itemsCollections, Player player, boolean special) {
 		int maxCount = 0;
 		for (ResultedItem item : itemsCollections.getItems()) {
-			if (item.getRace().equals(Race.PC_ALL) || player.getRace().equals(item.getRace())) {
-				if (item.getPlayerClass().equals(PlayerClass.ALL) || player.getPlayerClass().equals(item.getPlayerClass())) {
-					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
-					if (special && template.getExtraInventoryId() > 0) {
-						maxCount++;
-					} else if (template.getExtraInventoryId() < 1) {
-						maxCount++;
-					}
+			if (item.isObtainableFor(player)) {
+				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
+				if (special && template.getExtraInventoryId() > 0) {
+					maxCount++;
+				} else if (template.getExtraInventoryId() < 1) {
+					maxCount++;
 				}
 			}
 		}

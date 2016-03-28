@@ -43,8 +43,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		heading = (byte) readC();
 		type = (byte) readC();
 
-		if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
-			if ((type & MovementMask.MOUSE) == 0) {
+		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
+			if ((type & MovementMask.ABSOLUTE) == 0) {
 				/*
 				 * [xTz] in packet is missed this for type 0xC0 vectorX = readF(); vectorY = readF(); vectorZ = readF();
 				 */
@@ -84,10 +84,10 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 			m.glideFlag = glideFlag;
 		}
 
-		if (type == 0) {
+		if (type == MovementMask.IMMEDIATE) {
 			summon.getController().onStopMove();
-		} else if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
-			if ((type & MovementMask.MOUSE) == 0) {
+		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
+			if ((type & MovementMask.ABSOLUTE) == 0) {
 				m.vectorX = vectorX;
 				m.vectorY = vectorY;
 				m.vectorZ = vectorZ;
@@ -106,7 +106,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		}
 		World.getInstance().updatePosition(summon, x, y, z, heading);
 
-		if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE || type == 0)
+		if ((type & MovementMask.POSITION) == MovementMask.POSITION || type == MovementMask.IMMEDIATE)
 			PacketSendUtility.broadcastPacket(summon, new SM_MOVE(summon));
 	}
 }

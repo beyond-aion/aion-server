@@ -4,15 +4,15 @@
 	<!-- Kaldor -->
 	<gd_rule rule_name="Grassy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="EMBERPINE_PASS_600090000"/>
+			<gd_zone zone="EMBERPINE_PASS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012559" name="Grassy Anima" />
@@ -20,16 +20,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Tainted Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="PATH_OF_REVERANCE_600090000"/>
-			<gd_zone zone="FELSPIRE_TIMBERLAND_600090000"/>
+			<gd_zone zone="PATH_OF_REVERANCE_600090000" />
+			<gd_zone zone="FELSPIRE_TIMBERLAND_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012560" name="Tainted Anima" />
@@ -37,16 +37,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Frozen Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="PATH_OF_REVERANCE_600090000"/>
-			<gd_zone zone="FELSPIRE_TIMBERLAND_600090000"/>
+			<gd_zone zone="PATH_OF_REVERANCE_600090000" />
+			<gd_zone zone="FELSPIRE_TIMBERLAND_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012561" name="Frozen Anima" />
@@ -54,15 +54,15 @@
 	</gd_rule>
 	<gd_rule rule_name="Windy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="HEROS_FALL_600090000"/>
+			<gd_zone zone="HEROS_FALL_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012562" name="Windy Anima" />
@@ -70,16 +70,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Sylvan Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="VALIANTS_WATCH_600090000"/>
-			<gd_zone zone="STONEGRAVE_RUINS_600090000"/>
+			<gd_zone zone="VALIANTS_WATCH_600090000" />
+			<gd_zone zone="STONEGRAVE_RUINS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012563" name="Sylvan Anima" />
@@ -87,16 +87,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Mysterious Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="VALIANTS_WATCH_600090000"/>
-			<gd_zone zone="STONEGRAVE_RUINS_600090000"/>
+			<gd_zone zone="VALIANTS_WATCH_600090000" />
+			<gd_zone zone="STONEGRAVE_RUINS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012564" name="Mysterious Anima" />
@@ -104,16 +104,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Snowy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="SMOLDERING_CRAG_600090000"/>
-			<gd_zone zone="MOLTEN_CLIFFS_600090000"/>
+			<gd_zone zone="SMOLDERING_CRAG_600090000" />
+			<gd_zone zone="MOLTEN_CLIFFS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012565" name="Snowy Anima" />
@@ -121,16 +121,16 @@
 	</gd_rule>
 	<gd_rule rule_name="Devasted Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="SMOLDERING_CRAG_600090000"/>
-			<gd_zone zone="MOLTEN_CLIFFS_600090000"/>
+			<gd_zone zone="SMOLDERING_CRAG_600090000" />
+			<gd_zone zone="MOLTEN_CLIFFS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012566" name="Devasted Anima" />
@@ -138,15 +138,15 @@
 	</gd_rule>
 	<gd_rule rule_name="Mossy Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="EMBERPINE_PASS_600090000"/>
+			<gd_zone zone="EMBERPINE_PASS_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012567" name="Mossy Anima" />
@@ -154,15 +154,15 @@
 	</gd_rule>
 	<gd_rule rule_name="Waterlogged Anima" base_chance="10" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="600090000" name="Kaldor"/>
+			<gd_map map_id="600090000" name="Kaldor" />
 		</gd_maps>
 		<gd_zones>
-			<gd_zone zone="HEROS_FALL_600090000"/>
+			<gd_zone zone="HEROS_FALL_600090000" />
 		</gd_zones>
 		<gd_ratings>
-			<gd_rating rating="NORMAL"/>
-			<gd_rating rating="ELITE"/>
-			<gd_rating rating="HERO"/>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012568" name="Waterlogged Anima" />
@@ -343,7 +343,7 @@
 			<gd_zone zone="SECOND_CANAL_1_210090000" />
 			<gd_zone zone="LAWBRINGERS_CUT_600100000" />
 			<gd_zone zone="WHISPERLEAF_FOREST_600100000" />
-			<gd_zone zone="VALPURA_HEIGHTS_600100000"/>
+			<gd_zone zone="VALPURA_HEIGHTS_600100000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />

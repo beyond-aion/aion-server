@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
-import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -88,7 +87,7 @@ public class ChatUtil {
 	 * Keep in mind that some nameIds need to be calculated beforehand, e.g. for npcs (nameId * 2 + 1).
 	 */
 	public static String nameId(int nameId) {
-		return "$" + new String(Util.intToReversedByteArray(nameId), Charset.forName("UTF-16LE"));
+		return "$" + new String(new char[] { (char) (nameId & 0xFFFF), (char) ((nameId >>> 16) & 0xFFFF) });
 	}
 
 	/**

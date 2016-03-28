@@ -30,7 +30,6 @@ public class AntiHackService {
 			return true;
 
 		AionServerPacket forcedMove = new SM_FORCED_MOVE(player, player.getObjectId(), x, y, z);
-		AionServerPacket normalMove = new SM_MOVE(player);
 
 		if (SecurityConfig.ABNORMAL) {
 			if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.PULLED)
@@ -46,12 +45,12 @@ public class AntiHackService {
 
 		if (SecurityConfig.SPEEDHACK) {
 			if (type != 0) {
-				if (type == -64 || type == -128) {
+				if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
 					PlayerMoveController m = player.getMoveController();
 					double vector2D = MathUtil.getDistance(x, y, m.getTargetX2(), m.getTargetY2());
 
 					if (vector2D != 0) {
-						if (type == -64 && vector2D > 5 && vector2D > speed + 0.001)
+						if ((type & MovementMask.MANUAL) == MovementMask.MANUAL && vector2D > 5 && vector2D > speed + 0.001)
 							player.speedHackCounter++;
 						else if (vector2D > 37.5 && vector2D > 1.5 * speed * speed + 0.001)
 							player.speedHackCounter++;
@@ -63,11 +62,11 @@ public class AntiHackService {
 								+ " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
 						}
 					}
-				} else if ((type & MovementMask.MOUSE) == MovementMask.MOUSE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
+				} else if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 					double vector = MathUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
 					long timeDiff = System.currentTimeMillis() - player.prevPosUT;
 
-					if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
+					if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
 						boolean isMoveToTarget = false;
 						if (player.getTarget() != null && player.getTarget() != player) {
 							PlayerMoveController m = player.getMoveController();
@@ -126,8 +125,8 @@ public class AntiHackService {
 			double delta = MathUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				World.getInstance().updatePosition(player, player.getX(), player.getY(), player.getZ(), player.getHeading());
-				return punish(player, x, y, type, normalMove,
-					"Detected illegal action (Teleportation)" + " S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
+				return punish(player, x, y, type, new SM_MOVE(player),
+					"Detected illegal action (Teleportation) S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
 			}
 		}
 

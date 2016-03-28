@@ -1,173 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:include schemaLocation="../import.xsd"/>
-	<xs:include schemaLocation="../npcs/npcs.xsd"/>
-	<xs:include schemaLocation="../world_maps.xsd"/>
-	<xs:include schemaLocation="../global_types.xsd"/>
+	<xs:include schemaLocation="../import.xsd" />
+	<xs:include schemaLocation="../npcs/npcs.xsd" />
+	<xs:include schemaLocation="../world_maps.xsd" />
+	<xs:include schemaLocation="../global_types.xsd" />
 
 	<xs:element name="global_rules">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rule" type="GlobalRule"/>
+				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rule" type="GlobalRule" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 
 	<xs:complexType name="GlobalRule">
 		<xs:all>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_items" type="GlobalDropItems"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_worlds" type="GlobalDropWorlds"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_races" type="GlobalDropRaces"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_ratings" type="GlobalDropRatings"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_maps" type="GlobalDropMaps"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_tribes" type="GlobalDropTribes"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_npcs" type="GlobalDropNpcs"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_npc_names" type="GlobalDropNpcNames"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_npc_groups" type="GlobalDropNpcGroups"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_excluded_npcs" type="GlobalDropExcludedNpcs"/>
-			<xs:element minOccurs="0" maxOccurs="1" name="gd_zones" type="GlobalDropZones"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_items" type="GlobalDropItems" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_worlds" type="GlobalDropWorlds" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_races" type="GlobalDropRaces" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_ratings" type="GlobalDropRatings" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_maps" type="GlobalDropMaps" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_tribes" type="GlobalDropTribes" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_npcs" type="GlobalDropNpcs" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_npc_names" type="GlobalDropNpcNames" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_npc_groups" type="GlobalDropNpcGroups" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_excluded_npcs" type="GlobalDropExcludedNpcs" />
+			<xs:element minOccurs="0" maxOccurs="1" name="gd_zones" type="GlobalDropZones" />
 		</xs:all>
-		<xs:attribute name="rule_name" type="xs:string" use="required"/>
-		<xs:attribute name="min_count" type="xs:long" use="optional" default="1"/>
-		<xs:attribute name="max_count" type="xs:long" use="optional" default="1"/>
-		<xs:attribute name="base_chance" type="xs:float" use="required"/>
-		<xs:attribute name="min_diff" type="xs:int" use="optional" default="-99"/>
-		<xs:attribute name="max_diff" type="xs:int" use="optional" default="99"/>
-		<xs:attribute name="restriction_race" type="RestrictionRace"/>
-		<xs:attribute name="no_reduction" type="xs:boolean" use="optional" default="false"/>
-		<xs:attribute name="each_member" type="xs:boolean" use="optional" default="false"/>
-		<xs:attribute name="max_drop_rule" type="xs:int" use="optional" default="1"/>
-		<xs:attribute name="fixed_chance" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="rule_name" type="xs:string" use="required" />
+		<xs:attribute name="min_count" type="xs:long" use="optional" default="1" />
+		<xs:attribute name="max_count" type="xs:long" use="optional" default="1" />
+		<xs:attribute name="base_chance" type="xs:float" use="required" />
+		<xs:attribute name="min_diff" type="xs:int" use="optional" default="-99" />
+		<xs:attribute name="max_diff" type="xs:int" use="optional" default="99" />
+		<xs:attribute name="restriction_race" type="RestrictionRace" />
+		<xs:attribute name="no_reduction" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="each_member" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="max_drop_rule" type="xs:int" use="optional" default="1" />
+		<xs:attribute name="fixed_chance" type="xs:boolean" use="optional" default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropItems">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_item" type="GlobalDropItem"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_item" type="GlobalDropItem" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropItem">
-        <xs:attribute type="xs:int" name="id" use="required"/>
-        <xs:attribute type="xs:string" name="name" use="optional"/>
+		<xs:attribute type="xs:int" name="id" use="required" />
+		<xs:attribute type="xs:string" name="name" use="optional" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropWorlds">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_world" type="GlobalDropWorld"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_world" type="GlobalDropWorld" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropWorld">
-		<xs:attribute type="worldDropType" name="wd_type" use="required"/>
+		<xs:attribute type="worldDropType" name="wd_type" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropRaces">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_race" type="GlobalDropRace"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_race" type="GlobalDropRace" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropRace">
-		<xs:attribute type="Race" name="race" use="required"/>
+		<xs:attribute type="Race" name="race" use="required" />
 	</xs:complexType>
-	
+
 	<xs:complexType name="GlobalDropRatings">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rating" type="GlobalDropRating"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rating" type="GlobalDropRating" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropRating">
-		<xs:attribute type="NpcRating" name="rating" use="required"/>
+		<xs:attribute type="NpcRating" name="rating" use="required" />
 	</xs:complexType>
-	
+
 	<xs:complexType name="GlobalDropMaps">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_map" type="GlobalDropMap"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_map" type="GlobalDropMap" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropMap">
-        <xs:attribute type="xs:int" name="map_id" use="required"/>
-        <xs:attribute type="xs:string" name="name" use="required"/>
+		<xs:attribute type="xs:int" name="map_id" use="required" />
+		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
-	
+
 	<xs:complexType name="GlobalDropTribes">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_tribe" type="GlobalDropTribe"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_tribe" type="GlobalDropTribe" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropTribe">
-        <xs:attribute type="TribeClass" name="tribe" use="required"/>
+		<xs:attribute type="TribeClass" name="tribe" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropNpcs">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc" type="GlobalDropNpc"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc" type="GlobalDropNpc" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropNpc">
-        <xs:attribute type="xs:int" name="npc_id" use="required"/>
-        <xs:attribute type="xs:string" name="name" use="required"/>
+		<xs:attribute type="xs:int" name="npc_id" use="required" />
+		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
-	
+
 	<xs:complexType name="GlobalDropNpcNames">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc_name" type="GlobalDropNpcName"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc_name" type="GlobalDropNpcName" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropNpcName">
-        <xs:attribute type="xs:string" name="value" use="required"/>
-        <xs:attribute type="StringFunction" name="function" use="required"/>
+		<xs:attribute type="xs:string" name="value" use="required" />
+		<xs:attribute type="StringFunction" name="function" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropExcludedNpcs">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_excluded_npc" type="GlobalDropExcludedNpc"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_excluded_npc" type="GlobalDropExcludedNpc" />
 		</xs:sequence>
 	</xs:complexType>
-	
+
 	<xs:complexType name="GlobalDropNpcGroup">
-		<xs:attribute type="GroupDropType" name="group" use="required"/>
+		<xs:attribute type="GroupDropType" name="group" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropNpcGroups">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc_group" type="GlobalDropNpcGroup"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_npc_group" type="GlobalDropNpcGroup" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropExcludedNpc">
-        <xs:attribute type="xs:int" name="npc_id" use="required"/>
-        <xs:attribute type="xs:string" name="name" use="required"/>
+		<xs:attribute type="xs:int" name="npc_id" use="required" />
+		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropZones">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_zone" type="GlobalDropZone"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_zone" type="GlobalDropZone" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropZone">
-        <xs:attribute type="xs:string" name="zone" use="required"/>
+		<xs:attribute type="xs:string" name="zone" use="required" />
 	</xs:complexType>
 
 	<xs:simpleType name="StringFunction">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="CONTAINS"/>
-			<xs:enumeration value="END_WITH"/>
-			<xs:enumeration value="START_WITH"/>
-			<xs:enumeration value="EQUALS"/>
+			<xs:enumeration value="CONTAINS" />
+			<xs:enumeration value="END_WITH" />
+			<xs:enumeration value="START_WITH" />
+			<xs:enumeration value="EQUALS" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RestrictionRace">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="ASMODIANS"/>
-			<xs:enumeration value="ELYOS"/>
+			<xs:enumeration value="ASMODIANS" />
+			<xs:enumeration value="ELYOS" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

@@ -3,201 +3,201 @@
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216967" name="Petrahulk Gatekeeper"/>
+			<gd_npc npc_id="216967" name="Petrahulk Gatekeeper" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000098" name="Temple Vault Door Key"/>
+			<gd_item id="185000098" name="Temple Vault Door Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216968" name="Divine Hisen"/>
+			<gd_npc npc_id="216968" name="Divine Hisen" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000109" name="Relic Key"/>
+			<gd_item id="185000109" name="Relic Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216980" name="Warden Baal"/>
+			<gd_npc npc_id="216980" name="Warden Baal" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000099" name="Dungeon Grate Key"/>
+			<gd_item id="185000099" name="Dungeon Grate Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216981" name="Manor Guard Captain"/>
+			<gd_npc npc_id="216981" name="Manor Guard Captain" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000100" name="Dungeon Door Key"/>
+			<gd_item id="185000100" name="Dungeon Door Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216999" name="Jeeves"/>
+			<gd_npc npc_id="216999" name="Jeeves" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000101" name="Secret Safe Key"/>
+			<gd_item id="185000101" name="Secret Safe Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217001" name="Distraught Lady Angerr"/>
+			<gd_npc npc_id="217001" name="Distraught Lady Angerr" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001119" name="Corrupt Judge's Topaz Earrings"/>
-			<gd_item id="120001120" name="Corrupt Judge's Aquamarine Earrings"/>
+			<gd_item id="120001119" name="Corrupt Judge's Topaz Earrings" />
+			<gd_item id="120001120" name="Corrupt Judge's Aquamarine Earrings" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217001" name="Distraught Lady Angerr"/>
+			<gd_npc npc_id="217001" name="Distraught Lady Angerr" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101099" name="Corrupt Judge's Gloves"/>
-			<gd_item id="111301098" name="Corrupt Judge's Vambrace"/>
-			<gd_item id="111301529" name="Corrupt Judge's Magic Vambrace"/>
-			<gd_item id="111501084" name="Corrupt Judge's Handguards"/>
-			<gd_item id="111501571" name="Corrupt Judge's Magic Handguards"/>
-			<gd_item id="111601074" name="Corrupt Judge's Gauntlets"/>
+			<gd_item id="111101099" name="Corrupt Judge's Gloves" />
+			<gd_item id="111301098" name="Corrupt Judge's Vambrace" />
+			<gd_item id="111301529" name="Corrupt Judge's Magic Vambrace" />
+			<gd_item id="111501084" name="Corrupt Judge's Handguards" />
+			<gd_item id="111501571" name="Corrupt Judge's Magic Handguards" />
+			<gd_item id="111601074" name="Corrupt Judge's Gauntlets" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217003" name="Injured Justicetaker Wyr"/>
+			<gd_npc npc_id="217003" name="Injured Justicetaker Wyr" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121001033" name="Corrupt Judge's Topaz Necklace"/>
-			<gd_item id="121001034" name="Corrupt Judge's Aquamarine Necklace"/>
+			<gd_item id="121001033" name="Corrupt Judge's Topaz Necklace" />
+			<gd_item id="121001034" name="Corrupt Judge's Aquamarine Necklace" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217003" name="Injured Justicetaker Wyr"/>
+			<gd_npc npc_id="217003" name="Injured Justicetaker Wyr" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101140" name="Corrupt Judge's Shoes"/>
-			<gd_item id="114301150" name="Corrupt Judge's Boots"/>
-			<gd_item id="114301595" name="Corrupt Judge's Magic Boots"/>
-			<gd_item id="114501100" name="Corrupt Judge's Brogans"/>
-			<gd_item id="114501598" name="Corrupt Judge's Magic Brogans"/>
-			<gd_item id="114601054" name="Corrupt Judge's Sabatons"/>
+			<gd_item id="114101140" name="Corrupt Judge's Shoes" />
+			<gd_item id="114301150" name="Corrupt Judge's Boots" />
+			<gd_item id="114301595" name="Corrupt Judge's Magic Boots" />
+			<gd_item id="114501100" name="Corrupt Judge's Brogans" />
+			<gd_item id="114501598" name="Corrupt Judge's Magic Brogans" />
+			<gd_item id="114601054" name="Corrupt Judge's Sabatons" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217004" name="Wounded Hamam"/>
+			<gd_npc npc_id="217004" name="Wounded Hamam" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001268" name="Corrupt Judge's Topaz Ring"/>
-			<gd_item id="122001269" name="Corrupt Judge's Aquamarine Ring"/>
+			<gd_item id="122001268" name="Corrupt Judge's Topaz Ring" />
+			<gd_item id="122001269" name="Corrupt Judge's Aquamarine Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217004" name="Wounded Hamam"/>
+			<gd_npc npc_id="217004" name="Wounded Hamam" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112101059" name="Corrupt Judge's Pauldrons"/>
-			<gd_item id="112301045" name="Corrupt Judge's Shoulderguards"/>
-			<gd_item id="112301470" name="Corrupt Judge's Magic Shoulderguards"/>
-			<gd_item id="112501035" name="Corrupt Judge's Spaulders"/>
-			<gd_item id="112501513" name="Corrupt Judge's Magic Spaulders"/>
-			<gd_item id="112601049" name="Corrupt Judge's Shoulderplates"/>
+			<gd_item id="112101059" name="Corrupt Judge's Pauldrons" />
+			<gd_item id="112301045" name="Corrupt Judge's Shoulderguards" />
+			<gd_item id="112301470" name="Corrupt Judge's Magic Shoulderguards" />
+			<gd_item id="112501035" name="Corrupt Judge's Spaulders" />
+			<gd_item id="112501513" name="Corrupt Judge's Magic Spaulders" />
+			<gd_item id="112601049" name="Corrupt Judge's Shoulderplates" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217005" name="Shadow Judge Kaliga"/>
+			<gd_npc npc_id="217005" name="Shadow Judge Kaliga" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101209" name="Corrupt Judge's Tunic"/>
-			<gd_item id="110301144" name="Corrupt Judge's Jerkin"/>
-			<gd_item id="110301591" name="Corrupt Judge's Magic Jerkin"/>
-			<gd_item id="110501115" name="Corrupt Judge's Hauberk"/>
-			<gd_item id="110551013" name="Corrupt Judge's Magic Hauberk"/>
-			<gd_item id="110601097" name="Corrupt Judge's Breastplate"/>
-			<gd_item id="113101113" name="Corrupt Judge's Leggings"/>
-			<gd_item id="113301116" name="Corrupt Judge's Breeches"/>
-			<gd_item id="113301557" name="Corrupt Judge's Magic Breeches"/>
-			<gd_item id="113501093" name="Corrupt Judge's Chausses"/>
-			<gd_item id="113501589" name="Corrupt Judge's Magic Chausses"/>
-			<gd_item id="113601058" name="Corrupt Judge's Greaves"/>
+			<gd_item id="110101209" name="Corrupt Judge's Tunic" />
+			<gd_item id="110301144" name="Corrupt Judge's Jerkin" />
+			<gd_item id="110301591" name="Corrupt Judge's Magic Jerkin" />
+			<gd_item id="110501115" name="Corrupt Judge's Hauberk" />
+			<gd_item id="110551013" name="Corrupt Judge's Magic Hauberk" />
+			<gd_item id="110601097" name="Corrupt Judge's Breastplate" />
+			<gd_item id="113101113" name="Corrupt Judge's Leggings" />
+			<gd_item id="113301116" name="Corrupt Judge's Breeches" />
+			<gd_item id="113301557" name="Corrupt Judge's Magic Breeches" />
+			<gd_item id="113501093" name="Corrupt Judge's Chausses" />
+			<gd_item id="113501589" name="Corrupt Judge's Magic Chausses" />
+			<gd_item id="113601058" name="Corrupt Judge's Greaves" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217005" name="Shadow Judge Kaliga"/>
+			<gd_npc npc_id="217005" name="Shadow Judge Kaliga" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002429" name="Corrupt Judge's Headband"/>
-			<gd_item id="125002430" name="Corrupt Judge's Hat"/>
-			<gd_item id="125002431" name="Corrupt Judge's Chain Hood"/>
-			<gd_item id="125002432" name="Corrupt Judge's Helm"/>
+			<gd_item id="125002429" name="Corrupt Judge's Headband" />
+			<gd_item id="125002430" name="Corrupt Judge's Hat" />
+			<gd_item id="125002431" name="Corrupt Judge's Chain Hood" />
+			<gd_item id="125002432" name="Corrupt Judge's Helm" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217006" name="Kaliga the Unjust"/>
+			<gd_npc npc_id="217006" name="Kaliga the Unjust" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123001099" name="Corrupt Judge's Belt"/>
-			<gd_item id="123001098" name="Corrupt Judge's Leather Belt"/>
-			<gd_item id="123001334" name="Corrupt Judge's Belt"/>
+			<gd_item id="123001099" name="Corrupt Judge's Belt" />
+			<gd_item id="123001098" name="Corrupt Judge's Leather Belt" />
+			<gd_item id="123001334" name="Corrupt Judge's Belt" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300230000" name="Kromedes_Trial"/>
+			<gd_map map_id="300230000" name="Kromedes_Trial" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217006" name="Kaliga the Unjust"/>
+			<gd_npc npc_id="217006" name="Kaliga the Unjust" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000102" name="Kaliga's Key"/>
+			<gd_item id="185000102" name="Kaliga's Key" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

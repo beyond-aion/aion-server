@@ -3,35 +3,35 @@
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="50" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300050000" name="Asteria_Chamber"/>
+			<gd_map map_id="300050000" name="Asteria_Chamber" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214762" name="Dakaer Chanter"/>
+			<gd_npc npc_id="214762" name="Dakaer Chanter" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000033" name="Golden Abyss Key"/>
+			<gd_item id="185000033" name="Golden Abyss Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="50" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300050000" name="Asteria_Chamber"/>
+			<gd_map map_id="300050000" name="Asteria_Chamber" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214766" name="Dakaer Tactician"/>
+			<gd_npc npc_id="214766" name="Dakaer Tactician" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000034" name="Jeweled Abyss Key"/>
+			<gd_item id="185000034" name="Jeweled Abyss Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="50" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300050000" name="Asteria_Chamber"/>
+			<gd_map map_id="300050000" name="Asteria_Chamber" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215444" name="Ebonlord Kiriel"/>
+			<gd_npc npc_id="215444" name="Ebonlord Kiriel" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000035" name="Magic Abyss Key"/>
+			<gd_item id="185000035" name="Magic Abyss Key" />
 		</gd_items>
 	</gd_rule>
 </global_rules>

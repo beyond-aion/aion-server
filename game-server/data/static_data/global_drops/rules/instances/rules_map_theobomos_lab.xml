@@ -3,373 +3,373 @@
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100000727" name="Triroan's Sword"/>
-			<gd_item id="100200677" name="Triroan's Dagger"/>
-			<gd_item id="100100572" name="Triroan's Warhammer"/>
-			<gd_item id="100900570" name="Triroan's Greatsword"/>
-			<gd_item id="101300542" name="Triroan's Spear"/>
-			<gd_item id="101500570" name="Triroan's Staff"/>
-			<gd_item id="101700598" name="Triroan's Longbow"/>
-			<gd_item id="100500632" name="Triroan's Orb"/>
-			<gd_item id="100600689" name="Triroan's Spellbook"/>
-			<gd_item id="100500576" name="Triroan's Jewel"/>
-			<gd_item id="100600613" name="Triroan's Tome"/>
-			<gd_item id="101800913" name="Triroan's Pistol"/>
-			<gd_item id="101900564" name="Triroan's Aethercannon"/>
-			<gd_item id="102000594" name="Triroan's Harp"/>
-			<gd_item id="102000626" name="Triroan's Harp"/>
-			<gd_item id="102100768" name="Triroan's Cipher-Blade"/>
+			<gd_item id="100000727" name="Triroan's Sword" />
+			<gd_item id="100200677" name="Triroan's Dagger" />
+			<gd_item id="100100572" name="Triroan's Warhammer" />
+			<gd_item id="100900570" name="Triroan's Greatsword" />
+			<gd_item id="101300542" name="Triroan's Spear" />
+			<gd_item id="101500570" name="Triroan's Staff" />
+			<gd_item id="101700598" name="Triroan's Longbow" />
+			<gd_item id="100500632" name="Triroan's Orb" />
+			<gd_item id="100600689" name="Triroan's Spellbook" />
+			<gd_item id="100500576" name="Triroan's Jewel" />
+			<gd_item id="100600613" name="Triroan's Tome" />
+			<gd_item id="101800913" name="Triroan's Pistol" />
+			<gd_item id="101900564" name="Triroan's Aethercannon" />
+			<gd_item id="102000594" name="Triroan's Harp" />
+			<gd_item id="102000626" name="Triroan's Harp" />
+			<gd_item id="102100768" name="Triroan's Cipher-Blade" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214663" name="Torch Spirit Iprita"/>
+			<gd_npc npc_id="214663" name="Torch Spirit Iprita" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000832" name="Iprita's Shield"/>
+			<gd_item id="115000832" name="Iprita's Shield" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214663" name="Torch Spirit Iprita"/>
+			<gd_npc npc_id="214663" name="Torch Spirit Iprita" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113500829" name="Clandestine Chausses"/>
-			<gd_item id="113100846" name="Clandestine Leggings"/>
+			<gd_item id="113500829" name="Clandestine Chausses" />
+			<gd_item id="113100846" name="Clandestine Leggings" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214664" name="Wistful Syripne"/>
+			<gd_npc npc_id="214664" name="Wistful Syripne" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100793" name="Clandestine Pauldrons"/>
-			<gd_item id="112300787" name="Clandestine Shoulderguards"/>
-			<gd_item id="114500839" name="Clandestine Brogans"/>
-			<gd_item id="114600798" name="Clandestine Sabatons"/>
+			<gd_item id="112100793" name="Clandestine Pauldrons" />
+			<gd_item id="112300787" name="Clandestine Shoulderguards" />
+			<gd_item id="114500839" name="Clandestine Brogans" />
+			<gd_item id="114600798" name="Clandestine Sabatons" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214665" name="Soul Spirit Nomura"/>
+			<gd_npc npc_id="214665" name="Soul Spirit Nomura" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100871" name="Clandestine Shoes"/>
-			<gd_item id="114300896" name="Clandestine Boots"/>
-			<gd_item id="111500827" name="Clandestine Handguards"/>
-			<gd_item id="111600815" name="Clandestine Gauntlets"/>
+			<gd_item id="114100871" name="Clandestine Shoes" />
+			<gd_item id="114300896" name="Clandestine Boots" />
+			<gd_item id="111500827" name="Clandestine Handguards" />
+			<gd_item id="111600815" name="Clandestine Gauntlets" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214666" name="Water Spirit Undine"/>
+			<gd_npc npc_id="214666" name="Water Spirit Undine" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100836" name="Clandestine Gloves"/>
-			<gd_item id="111300837" name="Clandestine Vambrace"/>
-			<gd_item id="112500778" name="Clandestine Spaulders"/>
-			<gd_item id="112600789" name="Clandestine Shoulderplates"/>
+			<gd_item id="111100836" name="Clandestine Gloves" />
+			<gd_item id="111300837" name="Clandestine Vambrace" />
+			<gd_item id="112500778" name="Clandestine Spaulders" />
+			<gd_item id="112600789" name="Clandestine Shoulderplates" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113300863" name="Clandestine Breeches"/>
-			<gd_item id="113600804" name="Clandestine Greaves"/>
+			<gd_item id="113300863" name="Clandestine Breeches" />
+			<gd_item id="113600804" name="Clandestine Greaves" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100938" name="Clandestine Tunic"/>
-			<gd_item id="110300886" name="Clandestine Jerkin"/>
-			<gd_item id="110500853" name="Clandestine Hauberk"/>
-			<gd_item id="110600838" name="Clandestine Breastplate"/>
+			<gd_item id="110100938" name="Clandestine Tunic" />
+			<gd_item id="110300886" name="Clandestine Jerkin" />
+			<gd_item id="110500853" name="Clandestine Hauberk" />
+			<gd_item id="110600838" name="Clandestine Breastplate" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214664" name="Wistful Syripne"/>
+			<gd_npc npc_id="214664" name="Wistful Syripne" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100879" name="Berserk Spirit's Shoes"/>
-			<gd_item id="114300904" name="Berserk Spirit's Boots"/>
-			<gd_item id="114500847" name="Berserk Spirit's Brogans"/>
-			<gd_item id="114600806" name="Berserk Spirit's Sabatons"/>
+			<gd_item id="114100879" name="Berserk Spirit's Shoes" />
+			<gd_item id="114300904" name="Berserk Spirit's Boots" />
+			<gd_item id="114500847" name="Berserk Spirit's Brogans" />
+			<gd_item id="114600806" name="Berserk Spirit's Sabatons" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214665" name="Soul Spirit Nomura"/>
+			<gd_npc npc_id="214665" name="Soul Spirit Nomura" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100844" name="Berserk Spirit's Gloves"/>
-			<gd_item id="111300845" name="Berserk Spirit's Vambrace"/>
-			<gd_item id="111500835" name="Berserk Spirit's Handguards"/>
-			<gd_item id="111600823" name="Berserk Spirit's Gauntlets"/>
+			<gd_item id="111100844" name="Berserk Spirit's Gloves" />
+			<gd_item id="111300845" name="Berserk Spirit's Vambrace" />
+			<gd_item id="111500835" name="Berserk Spirit's Handguards" />
+			<gd_item id="111600823" name="Berserk Spirit's Gauntlets" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214666" name="Water Spirit Undine"/>
+			<gd_npc npc_id="214666" name="Water Spirit Undine" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100801" name="Berserk Spirit's Pauldrons"/>
-			<gd_item id="112300795" name="Berserk Spirit's Shoulderguards"/>
-			<gd_item id="112500786" name="Berserk Spirit's Spaulders"/>
-			<gd_item id="112600797" name="Berserk Spirit's Shoulderplates"/>
+			<gd_item id="112100801" name="Berserk Spirit's Pauldrons" />
+			<gd_item id="112300795" name="Berserk Spirit's Shoulderguards" />
+			<gd_item id="112500786" name="Berserk Spirit's Spaulders" />
+			<gd_item id="112600797" name="Berserk Spirit's Shoulderplates" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100854" name="Berserk Spirit's Leggings"/>
-			<gd_item id="113300871" name="Berserk Spirit's Breeches"/>
-			<gd_item id="113500837" name="Berserk Spirit's Chausses"/>
-			<gd_item id="113600812" name="Berserk Spirit's Greaves"/>
+			<gd_item id="113100854" name="Berserk Spirit's Leggings" />
+			<gd_item id="113300871" name="Berserk Spirit's Breeches" />
+			<gd_item id="113500837" name="Berserk Spirit's Chausses" />
+			<gd_item id="113600812" name="Berserk Spirit's Greaves" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100946" name="Berserk Spirit's Tunic"/>
-			<gd_item id="110300894" name="Berserk Spirit's Jerkin"/>
-			<gd_item id="110500861" name="Berserk Spirit's Hauberk"/>
-			<gd_item id="110600846" name="Berserk Spirit's Breastplate"/>
+			<gd_item id="110100946" name="Berserk Spirit's Tunic" />
+			<gd_item id="110300894" name="Berserk Spirit's Jerkin" />
+			<gd_item id="110500861" name="Berserk Spirit's Hauberk" />
+			<gd_item id="110600846" name="Berserk Spirit's Breastplate" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214664" name="Wistful Syripne"/>
+			<gd_npc npc_id="214664" name="Wistful Syripne" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000898" name="Ancient Spirit's Diamond Earrings"/>
-			<gd_item id="122001034" name="Ancient Spirit's Sapphire Ring"/>
+			<gd_item id="120000898" name="Ancient Spirit's Diamond Earrings" />
+			<gd_item id="122001034" name="Ancient Spirit's Sapphire Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214665" name="Soul Spirit Nomura"/>
+			<gd_npc npc_id="214665" name="Soul Spirit Nomura" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000897" name="Ancient Spirit's Sapphire Earrings"/>
-			<gd_item id="122001033" name="Ancient Spirit's Ruby Ring"/>
+			<gd_item id="120000897" name="Ancient Spirit's Sapphire Earrings" />
+			<gd_item id="122001033" name="Ancient Spirit's Ruby Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214666" name="Water Spirit Undine"/>
+			<gd_npc npc_id="214666" name="Water Spirit Undine" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000896" name="Ancient Spirit's Ruby Earrings"/>
-			<gd_item id="122001035" name="Ancient Spirit's Diamond Ring"/>
+			<gd_item id="120000896" name="Ancient Spirit's Ruby Earrings" />
+			<gd_item id="122001035" name="Ancient Spirit's Diamond Ring" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000810" name="Ancient Spirit's Ruby Necklace"/>
-			<gd_item id="121000811" name="Ancient Spirit's Sapphire Necklace"/>
-			<gd_item id="121000812" name="Ancient Spirit's Diamond Necklace"/>
+			<gd_item id="121000810" name="Ancient Spirit's Ruby Necklace" />
+			<gd_item id="121000811" name="Ancient Spirit's Sapphire Necklace" />
+			<gd_item id="121000812" name="Ancient Spirit's Diamond Necklace" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Belt (Unique)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123000926" name="Silikor's Band"/>
-			<gd_item id="123000925" name="Silikor's Leather Belt"/>
+			<gd_item id="123000926" name="Silikor's Band" />
+			<gd_item id="123000925" name="Silikor's Leather Belt" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170490008" name="[Souvenir] Secret Laboratory Elemental Core"/>
+			<gd_item id="170490008" name="[Souvenir] Secret Laboratory Elemental Core" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214669" name="Unstable Triroan"/>
+			<gd_npc npc_id="214669" name="Unstable Triroan" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170490006" name="[Souvenir] Dorhan Statue"/>
+			<gd_item id="170490006" name="[Souvenir] Dorhan Statue" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214659" name="Queen Arachne"/>
+			<gd_npc npc_id="214659" name="Queen Arachne" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000015" name="Laboratory Chest Key"/>
+			<gd_item id="185000015" name="Laboratory Chest Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214660" name="Frozen Harint"/>
+			<gd_npc npc_id="214660" name="Frozen Harint" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000016" name="Fire Key"/>
+			<gd_item id="185000016" name="Fire Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214661" name="Cracked Nuhas"/>
+			<gd_npc npc_id="214661" name="Cracked Nuhas" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000018" name="Water Key"/>
-			<gd_item id="185000019" name="Earth Key"/>
-			<gd_item id="185000020" name="Wind Key"/>
+			<gd_item id="185000018" name="Water Key" />
+			<gd_item id="185000019" name="Earth Key" />
+			<gd_item id="185000020" name="Wind Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214662" name="Naughty Pocaching"/>
+			<gd_npc npc_id="214662" name="Naughty Pocaching" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000025" name="Laboratory Key"/>
+			<gd_item id="185000025" name="Laboratory Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214663" name="Torch Spirit Iprita"/>
+			<gd_npc npc_id="214663" name="Torch Spirit Iprita" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000017" name="Research Center Key"/>
+			<gd_item id="185000017" name="Research Center Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214664" name="Wistful Syripne"/>
+			<gd_npc npc_id="214664" name="Wistful Syripne" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000023" name="Syripne's Key"/>
+			<gd_item id="185000023" name="Syripne's Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214665" name="Soul Spirit Nomura"/>
+			<gd_npc npc_id="214665" name="Soul Spirit Nomura" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000022" name="Nomura's Key"/>
+			<gd_item id="185000022" name="Nomura's Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214666" name="Water Spirit Undine"/>
+			<gd_npc npc_id="214666" name="Water Spirit Undine" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000021" name="Undine's Key"/>
+			<gd_item id="185000021" name="Undine's Key" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" name="Theobomos_Lab"/>
+			<gd_map map_id="310110000" name="Theobomos_Lab" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214668" name="Silikor of Memory"/>
+			<gd_npc npc_id="214668" name="Silikor of Memory" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000024" name="Silikor's Key"/>
+			<gd_item id="185000024" name="Silikor's Key" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
