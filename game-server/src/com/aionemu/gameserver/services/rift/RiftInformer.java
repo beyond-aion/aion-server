@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,8 +14,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-
-import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -118,22 +118,22 @@ public class RiftInformer {
 		 * init empty list
 		 * 12 different announces
 		 * we have to send them all otherwise the client announces them even if they are not spawned
+		 * looks like it depends on which map you are. But its always: first 6 indexes are from [current map] to [other map].
+		 * whereas the last 6 indexes are from [other map] to [current map].
 		 * index - announce
-		 *  \\ probably for asmodians //
-		 * 0 - normal rift to elysea
-		 * 1 - rift opened in theobomos
+		 * 0 - normal rift
+		 * 1 - vortex rift opened
 		 * 2 - rift to concert hall
 		 * 3 - rift to pangaea/ahserion
-		 * 4 - volatile rift to elysea
-		 * 5 - infiltration rift to elysea
+		 * 4 - volatile rift
+		 * 5 - infiltration rift
 		 *
-		 *  \\ probably for elyos //
-		 * 6 - normal rift to asmodae
-		 * 7 - rift opened in brusthonin
+		 * 6 - normal rift
+		 * 7 - vortex rift opened
 		 * 8 - rift to concert hall
 		 * 9 - rift to pangaea/ahserion
-		 * 10 - volatile rift to asmodae
-		 * 11 - infiltration rift to asmodae
+		 * 10 - volatile rift
+		 * 11 - infiltration rift
 		 */
 		for (int i = 0; i < 12; i++) {
 			localRifts.put(i, 0);
@@ -151,48 +151,9 @@ public class RiftInformer {
 	private static Map<Integer, Integer> calcRiftsData(RVController rift, Map<Integer, Integer> local) {
 		if (rift.isMaster()) {
 			switch (rift.getRiftTemplate()) {
-				// ELYOS
-				case KAISINEL_AM:
-					local.put(7, local.get(7) + 1); // rift opened in brusthonin
-					break;
-				case ELTNEN_AM:
-				case ELTNEN_BM:
-				case ELTNEN_CM:
-				case ELTNEN_DM:
-				case ELTNEN_EM:
-				case ELTNEN_FM:
-				case ELTNEN_GM:
-				case HEIRON_AM:
-				case HEIRON_BM:
-				case HEIRON_CM:
-				case HEIRON_DM:
-				case HEIRON_EM:
-				case HEIRON_FM:
-				case HEIRON_GM:
-				case INGGISON_AM:
-				case INGGISON_BM:
-				case INGGISON_CM:
-				case INGGISON_DM:
-				case CYGNEA_AM:
-				case CYGNEA_BM:
-				case CYGNEA_CM:
-				case CYGNEA_DM:
-				case CYGNEA_EM:
-				case CYGNEA_FM:
-					local.put(6, local.get(6) + 1); // rift to asmodae
-					break;
-				case CYGNEA_GM:
-				case CYGNEA_HM:
-				case CYGNEA_IM:
-					if (rift.isVolatile()) {
-						local.put(10, local.get(10) + 1); // chaos rift to asmodae
-					} else {
-						local.put(6, local.get(6) + 1); // rift to asmodae
-					}
-					break;
-				// ASMOADIANS
 				case MARCHUTAN_AM:
-					local.put(1, local.get(1) + 1); // rift opened in theo
+				case KAISINEL_AM:
+					local.put(1, local.get(1) + 1); // vortex rift
 					break;
 				case MORHEIM_AM:
 				case MORHEIM_BM:
@@ -218,15 +179,42 @@ public class RiftInformer {
 				case ENSHAR_DM:
 				case ENSHAR_EM:
 				case ENSHAR_FM:
-					local.put(0, local.get(0) + 1); // rift to elysea
+				case ELTNEN_AM:
+				case ELTNEN_BM:
+				case ELTNEN_CM:
+				case ELTNEN_DM:
+				case ELTNEN_EM:
+				case ELTNEN_FM:
+				case ELTNEN_GM:
+				case HEIRON_AM:
+				case HEIRON_BM:
+				case HEIRON_CM:
+				case HEIRON_DM:
+				case HEIRON_EM:
+				case HEIRON_FM:
+				case HEIRON_GM:
+				case INGGISON_AM:
+				case INGGISON_BM:
+				case INGGISON_CM:
+				case INGGISON_DM:
+				case CYGNEA_AM:
+				case CYGNEA_BM:
+				case CYGNEA_CM:
+				case CYGNEA_DM:
+				case CYGNEA_EM:
+				case CYGNEA_FM:
+					local.put(0, local.get(0) + 1); // normal rift
 					break;
 				case ENSHAR_GM:
 				case ENSHAR_HM:
 				case ENSHAR_IM:
+				case CYGNEA_GM:
+				case CYGNEA_HM:
+				case CYGNEA_IM:
 					if (rift.isVolatile()) {
-						local.put(4, local.get(4) + 1); // chaos rift to elysea
+						local.put(4, local.get(4) + 1); // chaos rift
 					} else {
-						local.put(0, local.get(0) + 1); // rift to elysea
+						local.put(0, local.get(0) + 1); // normal rift
 					}
 					break;
 
