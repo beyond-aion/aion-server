@@ -1,4 +1,3 @@
-/*
 package quest.danuar_sanctuary;
 
 import com.aionemu.gameserver.model.DialogAction;
@@ -7,13 +6,11 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-*/
 
 /**
  * @author Pad
  */
 
-/*
 public class _16985ChirTreasureRobbers extends QuestHandler {
 
 	private static final int questId = 16985;
@@ -63,4 +60,4 @@ public class _16985ChirTreasureRobbers extends QuestHandler {
 		return false;
 	}
 
-} */
+}

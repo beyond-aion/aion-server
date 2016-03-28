@@ -1,4 +1,3 @@
-/*
 package quest.danuar_sanctuary;
 
 import com.aionemu.gameserver.model.DialogAction;
@@ -8,17 +7,15 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
-*/
 
 /**
  * @author Pad
  */
 
-/*
 public class _26987ExploretheElyosCorridor extends QuestHandler {
 
 	private static final int questId = 26987;
-	private static final int[] npcIds = { 804866, 804867 };
+	private static final int npcId = 804867;
 
 	public _26987ExploretheElyosCorridor() {
 		super(questId);
@@ -26,10 +23,9 @@ public class _26987ExploretheElyosCorridor extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(npcIds[0]).addOnQuestStart(questId);
-		for (int npcId : npcIds)
-			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("LF5_SensoryArea_Q26987"), questId);
+		qe.registerQuestNpc(npcId).addOnQuestStart(questId);
+		qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
+		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q26987_206410_1_210070000"), questId);
 	}
 
 	@Override
@@ -40,21 +36,14 @@ public class _26987ExploretheElyosCorridor extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == npcIds[0]) {
+			if (targetId == npcId) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == npcIds[1]) {
-				if (dialog == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 10002);
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
-					return defaultCloseDialog(env, 1, 1, true, true);
-			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == npcIds[1])
+			if (targetId == npcId)
 				return sendQuestEndDialog(env);
 		}
 		return false;
@@ -62,7 +51,10 @@ public class _26987ExploretheElyosCorridor extends QuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		changeQuestStep(env, 0, 1, false);
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
+		qs.setQuestVarById(0, 1);
+		qs.setStatus(QuestStatus.REWARD);
+		updateQuestStatus(env);
 		return true;
 	}
-} */
+}
