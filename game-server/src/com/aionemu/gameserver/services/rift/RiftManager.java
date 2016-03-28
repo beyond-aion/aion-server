@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +21,6 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
-
-import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -115,7 +115,7 @@ public class RiftManager {
 	}
 
 	private boolean isVolatileRift(RiftLocation loc) {
-		if (loc.isWithGuards()) {
+		if (loc != null && loc.isWithGuards()) {
 			switch (loc.getId()) {
 				case 2286:
 				case 2287:
