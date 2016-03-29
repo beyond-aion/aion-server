@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team2.alliance;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -189,7 +190,7 @@ public class PlayerAllianceService {
 	 * Add player to alliance
 	 */
 	public static final void addPlayer(PlayerAlliance alliance, Player player) {
-		Preconditions.checkNotNull(alliance, "Alliance should not be null");
+		Objects.requireNonNull(alliance, "Alliance should not be null");
 		alliance.onEvent(new PlayerEnteredEvent(alliance, player));
 	}
 
@@ -210,8 +211,8 @@ public class PlayerAllianceService {
 	 * Remove player from alliance (ban)
 	 */
 	public static final void banPlayer(Player bannedPlayer, Player banGiver) {
-		Preconditions.checkNotNull(bannedPlayer, "Banned player should not be null");
-		Preconditions.checkNotNull(banGiver, "Bangiver player should not be null");
+		Objects.requireNonNull(bannedPlayer, "Banned player should not be null");
+		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerAlliance alliance = banGiver.getPlayerAlliance2();
 		if (alliance != null) {
 			if (!alliance.isLeader(banGiver)) {
@@ -271,7 +272,7 @@ public class PlayerAllianceService {
 	 */
 	public static void changeMemberGroup(Player player, int firstPlayer, int secondPlayer, int allianceGroupId) {
 		PlayerAlliance alliance = player.getPlayerAlliance2();
-		Preconditions.checkNotNull(alliance, "Alliance should not be null for group change");
+		Objects.requireNonNull(alliance, "Alliance should not be null for group change");
 		if (alliance.isLeader(player) || alliance.isViceCaptain(player)) {
 			alliance.onEvent(new ChangeMemberGroupEvent(alliance, firstPlayer, secondPlayer, allianceGroupId));
 		} else {

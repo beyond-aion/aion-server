@@ -4,10 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import javolution.util.FastMap;
 
 import com.aionemu.gameserver.ai2.event.AIEventLog;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -33,7 +32,8 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.google.common.base.Preconditions;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -175,7 +175,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	@Override
 	public final void onCreatureEvent(AIEventType event, Creature creature) {
-		Preconditions.checkNotNull(creature, "Creature must not be null");
+		Objects.requireNonNull(creature, "Creature must not be null");
 		if (canHandleEvent(event)) {
 			if (this.isLogging()) {
 				AI2Logger.info(this, "Creature event " + event + ": " + creature.getObjectTemplate().getTemplateId());

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.team2.alliance.events;
 
+import java.util.Objects;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.TeamEvent;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
@@ -11,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
 /**
@@ -39,7 +40,7 @@ public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllia
 
 	@Override
 	public void handleEvent() {
-		Preconditions.checkNotNull(disconnectedMember, "Disconnected member should not be null");
+		Objects.requireNonNull(disconnectedMember, "Disconnected member should not be null");
 		Player leader = alliance.getLeaderObject();
 
 		if (disconnected.equals(leader)) {

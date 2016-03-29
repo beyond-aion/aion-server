@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.item;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 
 /**
@@ -86,8 +86,8 @@ public class ItemService {
 			return 0;
 
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		Preconditions.checkNotNull(itemTemplate, "No item with id " + itemId);
-		Preconditions.checkNotNull(predicate, "Predicate is not supplied");
+		Objects.requireNonNull(itemTemplate, "No item with id " + itemId);
+		Objects.requireNonNull(predicate, "Predicate is not supplied");
 
 		if (LoggingConfig.LOG_ITEM)
 			log.info("Item: " +  itemTemplate.getTemplateId() + " [" + itemTemplate.getName()+ "] added to player " + player.getName() + " (count: " + count + ") (type: " + predicate.getAddType() + ")");

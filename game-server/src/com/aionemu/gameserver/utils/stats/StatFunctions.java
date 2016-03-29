@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.utils.stats;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +29,6 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.google.common.base.Preconditions;
 
 /**
  * Calculations are based on the following research:<br>
@@ -434,7 +435,7 @@ public class StatFunctions {
 	}
 
 	public static int calculateMagicalAttackDamage(Creature attacker, Creature target, SkillElement element, boolean isMainHand) {
-		Preconditions.checkNotNull(element, "Skill element should be NONE instead of null");
+		Objects.requireNonNull(element, "Skill element should be NONE instead of null");
 		Stat2 mAttack;
 		if (isMainHand)
 			mAttack = attacker.getGameStats().getMainHandMAttack();

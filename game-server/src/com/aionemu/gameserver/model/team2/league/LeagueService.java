@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.team2.league;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
@@ -93,7 +94,7 @@ public class LeagueService {
 
 	public static final League createLeague(Player leader) {
 		PlayerAlliance alliance = leader.getPlayerAlliance2();
-		Preconditions.checkNotNull(alliance, "Alliance can not be null");
+		Objects.requireNonNull(alliance, "Alliance can not be null");
 		LeagueMember mainAlliance = new LeagueMember(alliance, 0);
 		League league = new League(mainAlliance);
 		league.setLootGroupRules(new LootGroupRules(LootRuleType.FREEFORALL, 0, 0, 2, 2, 2, 2, 2));
@@ -107,7 +108,7 @@ public class LeagueService {
 	 * Add alliance to league
 	 */
 	public static final void addAlliance(League league, PlayerAlliance alliance) {
-		Preconditions.checkNotNull(league, "League should not be null");
+		Objects.requireNonNull(league, "League should not be null");
 		league.onEvent(new LeagueJoinEvent(league, alliance));
 	}
 
@@ -117,7 +118,7 @@ public class LeagueService {
 	public static final void removeAlliance(PlayerAlliance alliance) {
 		if (alliance != null) {
 			League league = alliance.getLeague();
-			Preconditions.checkNotNull(league, "League should not be null");
+			Objects.requireNonNull(league, "League should not be null");
 			league.onEvent(new LeagueLeftEvent(league, alliance, LeaveReson.LEAVE));
 		}
 	}
@@ -126,8 +127,8 @@ public class LeagueService {
 	 * Remove alliance from league (expel)
 	 */
 	public static final void expelAlliance(Player expelledPlayer, Player expelGiver) {
-		Preconditions.checkNotNull(expelledPlayer, "Expelled player should not be null");
-		Preconditions.checkNotNull(expelGiver, "ExpelGiver player should not be null");
+		Objects.requireNonNull(expelledPlayer, "Expelled player should not be null");
+		Objects.requireNonNull(expelGiver, "ExpelGiver player should not be null");
 		Preconditions.checkArgument(expelGiver.isInLeague(), "Expelled player should be in league");
 		Preconditions.checkArgument(expelledPlayer.isInLeague(), "ExpelGiver should be in league");
 		Preconditions.checkArgument(expelGiver.getPlayerAlliance2().getLeague().isLeader(expelGiver.getPlayerAlliance2()),

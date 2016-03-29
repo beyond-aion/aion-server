@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team2.group;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -152,7 +153,7 @@ public class PlayerGroupService {
 	 * Add player to group
 	 */
 	public static final void addPlayer(PlayerGroup group, Player player) {
-		Preconditions.checkNotNull(group, "Group should not be null");
+		Objects.requireNonNull(group, "Group should not be null");
 		group.onEvent(new PlayerEnteredEvent(group, player));
 	}
 
@@ -170,8 +171,8 @@ public class PlayerGroupService {
 	 * Remove player from group (ban)
 	 */
 	public static final void banPlayer(Player bannedPlayer, Player banGiver) {
-		Preconditions.checkNotNull(bannedPlayer, "Banned player should not be null");
-		Preconditions.checkNotNull(banGiver, "Bangiver player should not be null");
+		Objects.requireNonNull(bannedPlayer, "Banned player should not be null");
+		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerGroup group = banGiver.getPlayerGroup2();
 		if (group != null) {
 			if (group.hasMember(bannedPlayer.getObjectId())) {

@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.team2.common.events;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import java.util.Objects;
 
-import com.google.common.base.Preconditions;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -52,7 +52,7 @@ public enum TeamCommand {
 
 	public static final TeamCommand getCommand(int commandCode) {
 		TeamCommand command = teamCommands.get(commandCode);
-		Preconditions.checkNotNull(command, "Invalid team command code " + commandCode);
+		Objects.requireNonNull(command, "Invalid team command code " + commandCode);
 		return command;
 	}
 

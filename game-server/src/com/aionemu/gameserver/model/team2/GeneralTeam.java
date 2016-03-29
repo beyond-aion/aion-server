@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team2;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -58,14 +59,14 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	@Override
 	public void addMember(TM member) {
-		Preconditions.checkNotNull(member, "Team member should be not null");
+		Objects.requireNonNull(member, "Team member should be not null");
 		Preconditions.checkState(members.get(member.getObjectId()) == null, "Team member is already added");
 		members.put(member.getObjectId(), member);
 	}
 
 	@Override
 	public void removeMember(TM member) {
-		Preconditions.checkNotNull(member, "Team member should be not null");
+		Objects.requireNonNull(member, "Team member should be not null");
 		Preconditions.checkState(members.get(member.getObjectId()) != null, "Team member is already removed");
 		members.remove(member.getObjectId());
 	}
@@ -152,14 +153,14 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	public final void changeLeader(TM member) {
-		Preconditions.checkNotNull(leader, "Leader should already be set");
-		Preconditions.checkNotNull(member, "New leader should not be null");
+		Objects.requireNonNull(leader, "Leader should already be set");
+		Objects.requireNonNull(member, "New leader should not be null");
 		this.leader = member;
 	}
 
 	protected final void setLeader(TM member) {
 		Preconditions.checkState(leader == null, "Leader should be not initialized");
-		Preconditions.checkNotNull(member, "Leader should not be null");
+		Objects.requireNonNull(member, "Leader should not be null");
 		this.leader = member;
 	}
 
