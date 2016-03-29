@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -11,9 +12,9 @@ public class SM_RIDE_ROBOT extends AionServerPacket {
 	private int robotId;
 	private int objectId;
 
-	public SM_RIDE_ROBOT(int objectId, int robotId) {
-		this.objectId = objectId;
-		this.robotId = robotId;
+	public SM_RIDE_ROBOT(Player player) {
+		this.objectId = player.getObjectId();
+		this.robotId = player.getRobotId();
 	}
 
 	@Override

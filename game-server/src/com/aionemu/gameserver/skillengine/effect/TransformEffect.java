@@ -62,9 +62,7 @@ public abstract class TransformEffect extends EffectTemplate {
 		TransformEffect temp = null;
 		for (Effect tmp : effected.getEffectController().getAbnormalEffects()) {
 			for (EffectTemplate template : tmp.getEffectTemplates()) {
-				if (template instanceof TransformEffect) {
-					if (((TransformEffect) template).getTransformId() == model)
-						continue;
+				if (template instanceof TransformEffect && ((TransformEffect) template).getTransformId() != model) {
 					temp = (TransformEffect) template;
 					break;
 				}
@@ -74,7 +72,7 @@ public abstract class TransformEffect extends EffectTemplate {
 			effected.getTransformModel().apply(temp.getTransformId(), temp.getTransformType(), temp.getPanelId(), temp.getBanUseSkills(),
 				temp.getBanMovement(), temp.getRes1(), temp.getRes2(), temp.getRes3(), temp.getRes5(), temp.getRes6());
 		else
-			effected.setTransformed(false);
+			effected.endTransformation();
 	}
 
 	@Override

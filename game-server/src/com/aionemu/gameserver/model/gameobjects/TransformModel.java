@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.gameobjects;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RIDE_ROBOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -65,8 +66,7 @@ public class TransformModel {
 	 * @param res6
 	 */
 	public void apply(int modelId, TransformType type, int panelId, int banUseSkills, int banMovement, int res1, int res2, int res3, int res5, int res6) {
-		// reset
-		if (modelId == 0 || modelId == originalModelId) {
+		if (modelId == 0 || modelId == originalModelId) { // reset
 			this.modelId = originalModelId;
 			this.transformType = originalType;
 			this.panelId = 0;
@@ -78,9 +78,7 @@ public class TransformModel {
 			this.res5 = 0;
 			this.res6 = 0;
 			this.isActive = false;
-		}
-		// set new
-		else {
+		} else { // set new
 			this.modelId = modelId;
 			this.transformType = type;
 			this.panelId = panelId;
@@ -99,6 +97,8 @@ public class TransformModel {
 
 	private void updateVisually() {
 		PacketSendUtility.broadcastPacketAndReceive(owner, new SM_TRANSFORM(owner));
+		if (modelId == 0 && owner instanceof Player && ((Player) owner).isInRobotMode())
+			PacketSendUtility.broadcastPacketAndReceive((Player) owner, new SM_RIDE_ROBOT((Player) owner));
 	}
 
 	private void updateTribeVisually() {
