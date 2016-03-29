@@ -120,7 +120,7 @@ public class Wish extends ConsoleCommand {
 						newItem.setEnchantLevel(enchant);
 						addedCount = addCount - ItemService.addItem(target, newItem);
 					} else {
-						addedCount = addCount - ItemService.addItem(target, itemId, addCount);
+						addedCount = addCount - ItemService.addItem(target, itemId, addCount, true);
 					}
 
 					if (addedCount <= 0) {

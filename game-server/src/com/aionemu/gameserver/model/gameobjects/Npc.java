@@ -376,7 +376,7 @@ public class Npc extends Creature {
 		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasBuyList();
 	}
 
-	public boolean canSellTo() {
+	public boolean canSell() {
 		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasSellList();
 	}
 

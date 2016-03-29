@@ -8,8 +8,10 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.trade.RepurchaseList;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -64,6 +66,10 @@ public class RepurchaseService {
 		}
 		Storage inventory = player.getInventory();
 		for (Item repurchaseItem : repurchaseList.getRepurchaseItems()) {
+			if (player.getInventory().isFull()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
+				break;
+			}
 			Collection<Item> items = repurchaseItems.get(player.getObjectId());
 			if (items.contains(repurchaseItem)) {
 				if (inventory.tryDecreaseKinah(repurchaseItem.getRepurchasePrice())) {

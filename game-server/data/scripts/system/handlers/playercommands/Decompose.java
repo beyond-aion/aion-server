@@ -56,7 +56,7 @@ public class Decompose extends PlayerCommand {
 		}
 
 		if (template.getActions() == null || template.getActions().getItemActions() == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(ChatUtil.item(itemId)));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(template.getNameId()));
 			return;
 		}
 

@@ -10925,8 +10925,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an extractable item.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300446, value0);
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300446, new DescriptionId(num0));
 	}
 
 	/**
@@ -20833,8 +20833,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have opened the %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(DescriptionId value0) {
-		return new SM_SYSTEM_MESSAGE(1400452, value0);
+	public static final SM_SYSTEM_MESSAGE STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(int num0) {
+		return new SM_SYSTEM_MESSAGE(1400452, new DescriptionId(num0));
 	}
 
 	/**

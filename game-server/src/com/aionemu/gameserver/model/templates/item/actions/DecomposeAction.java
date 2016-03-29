@@ -40,7 +40,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -106,15 +105,10 @@ public class DecomposeAction extends AbstractItemAction {
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		List<ExtractedItemsCollection> itemsCollections = null;
 		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
-		if (itemsCollections == null) {
-			if (DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId()) == null) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(ChatUtil.item(parentItem.getItemId())));
-				return false;
-			}
-			return true;
-		}
-		if (itemsCollections.isEmpty()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVALID_STANCE(parentItem.getNameId()));
+		if (itemsCollections == null || itemsCollections.isEmpty()) {
+			if (DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId()) != null) // selectable decomposable
+				return true;
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getNameId()));
 			return false;
 		}
 		if (player.getInventory().isFull()) {
@@ -138,10 +132,14 @@ public class DecomposeAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, new SM_FIRST_SHOW_DECOMPOSABLE(parentItem.getObjectId(), selectable));
 			return;
 		}
-		List<ExtractedItemsCollection> itemsCollections = null;
-		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
+		List<ExtractedItemsCollection> itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
 		final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
+		if (selectedCollection.getItems().isEmpty() && selectedCollection.getRandomItems().isEmpty()) {
+			log.warn("Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getNameId()));
+			return;
+		}
 
 		PacketSendUtility.broadcastPacketAndReceive(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0));
@@ -168,10 +166,11 @@ public class DecomposeAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(observer);
 				boolean validAction = postValidate(player, parentItem);
 				if (validAction) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getNameId()));
 					if (selectedCollection.getItems().size() > 0) {
 						for (ResultedItem resultItem : selectedCollection.getItems()) {
 							if (resultItem.isObtainableFor(player)) {
-								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), false,
+								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), true,
 									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
@@ -221,10 +220,14 @@ public class DecomposeAction extends AbstractItemAction {
 										if (manastones == null) {
 											manastones = DataManager.ITEM_DATA.getManastones();
 										}
-										List<ItemTemplate> stones = manastones.get(randomType.equals(RandomType.MANASTONE) ? itemLvl : randomType.getLevel());
+										if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level) 
+											itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
+										else
+											itemLvl = randomType.getLevel();
+										List<ItemTemplate> stones = manastones.get(itemLvl);
 										if (stones == null) {
 											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
-											return;
+											break;
 										}
 										if (!randomType.equals(RandomType.MANASTONE)) {
 											ItemQuality itemQuality = ItemQuality.COMMON;
@@ -256,7 +259,7 @@ public class DecomposeAction extends AbstractItemAction {
 										List<ItemTemplate> ancientStones = specialManastones.get(randomType.getLevel());
 										if (ancientStones == null) {
 											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
-											return;
+											break;
 										}
 										ItemQuality itemQuality = ItemQuality.COMMON;
 										if (randomType.name().contains("RARE"))
@@ -411,11 +414,10 @@ public class DecomposeAction extends AbstractItemAction {
 									}
 								}
 								if (randomId != 0 && randomId != 167000524)
-									ItemService.addItem(player, randomId, randomItem.getResultCount(), false, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+									ItemService.addItem(player, randomId, randomItem.getResultCount(), true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 							}
 						}
 					}
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getNameId()));
 				}
 				PacketSendUtility.broadcastPacketAndReceive(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
