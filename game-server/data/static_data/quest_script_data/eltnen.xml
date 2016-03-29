@@ -462,7 +462,7 @@
 	<monster_hunt id="3333" start_npc_ids="203994"/>
 	<monster_hunt id="3334" start_npc_ids="204041"/>
 	<monster_hunt id="3335" start_npc_ids="204042"/>
-	<monster_hunt id="16900" start_npc_ids="203965"/>
+	<monster_hunt id="16900" start_npc_ids="203901" end_npc_ids="203965" end_dialog_id="2375"/>
 	<monster_hunt id="16901" start_npc_ids="203989"/>
 	<monster_hunt id="16905" start_npc_ids="203901"/>
 	<monster_hunt id="16906" start_npc_ids="203901"/>
