@@ -113,6 +113,7 @@
 	<portal_loc world_id="220020000" loc_id="2200206" x="1668.0662" y="1146.7683" z="200.3536"/> <!-- Water Room Exit -->
 	<portal_loc world_id="220020000" loc_id="2200207" x="1690.505" y="1139.1676" z="200.3536"/> <!-- Fire Room Exit -->
 	<portal_loc world_id="220020000" loc_id="2200208" x="2157.6121" y="2095.8579" z="598.1250" h="80"/> <!-- Teleport Stone Statue -->
+	<portal_loc world_id="220020000" loc_id="2200209" x="1979.7205" y="853.2568" z="248.5204" h="115"/> <!-- Mist Mane Teleport Statue -->
 	<!-- Altgard -->
 	<portal_loc world_id="220030000" loc_id="2200300" x="1661.2" y="1816.3" z="253.712"/> <!-- Scroll -->
 	<portal_loc world_id="220030000" loc_id="2200301" x="2907.624" y="1464.1887" z="252.59264" h="36"/> <!-- Haramel Exit -->
