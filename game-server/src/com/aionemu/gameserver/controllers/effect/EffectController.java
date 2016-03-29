@@ -953,7 +953,8 @@ public class EffectController {
 		// archer buffs
 		int count = 0;
 		Effect toRemove = null;
-		for (Effect eff : effects) {
+		for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+			Effect eff = iter.next();
 			switch (eff.getSkillTemplate().getCooldownId()) {
 				case 2020: // Dodging
 				case 2022: // Focused Shots
