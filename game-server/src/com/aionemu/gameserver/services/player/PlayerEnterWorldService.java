@@ -48,6 +48,7 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
@@ -315,8 +316,10 @@ public final class PlayerEnterWorldService {
 		InstanceService.onPlayerLogin(player);
 		// Update player skills first!!!
 		AbyssSkillService.updateSkills(player);
-		// TODO: check the split size
-		client.sendPacket(new SM_SKILL_LIST(player.getSkillList().getAllSkills()));
+		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked, 745 crashed)
+		while (splitter.hasMore()) {
+			client.sendPacket(new SM_SKILL_LIST(splitter.getNext()));
+		}
 
 		if (player.getSkillCoolDowns() != null)
 			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
