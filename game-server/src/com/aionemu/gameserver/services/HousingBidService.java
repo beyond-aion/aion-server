@@ -29,7 +29,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseBidEntry;
 import com.aionemu.gameserver.model.house.HouseStatus;
@@ -499,7 +499,7 @@ public class HousingBidService extends AbstractCronTask {
 			winner.getPlayer().resetHouses();
 			if (result == AuctionResult.WIN_BID) {
 				winner.getPlayer().setHouseRegistry(obtainedHouse.getRegistry());
-				winner.getPlayer().setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
+				winner.getPlayer().setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
 				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_ACQUIRE(winner.getPlayerObjId(), obtainedHouse.getAddress().getId(), true));
 				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_OWNER_INFO(winner.getPlayer()));
 			}
@@ -592,7 +592,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	public synchronized void placeBid(Player player, int entryIndex, long bidOffer) {
 		// prevent this earlier (problem are house signs which allow bidding)
-		if ((player.getBuildingOwnerStates() & PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId()) == 0) {
+		if (!player.hasHouseOwnerState(HouseOwnerState.BIDDING_ALLOWED)) {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(player.getRace() == Race.ELYOS ? 18802 : 28802));
 			return;

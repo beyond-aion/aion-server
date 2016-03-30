@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
-import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.team.legion.LegionEmblem;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
@@ -10,7 +9,6 @@ import com.aionemu.gameserver.model.templates.housing.PartType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LegionService;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * @author Rolandas
@@ -39,23 +37,10 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 		writeC(1); // unk
 
 		writeD(house.getBuilding().getId());
-		writeC(house.getHouseOwnerInfoFlags());
-
+		writeC(house.getHouseOwnerStates());
 		writeC(house.getDoorState().getPacketValue());
 
-		int dataSize = 52;
-		if (house.getButler() != null) {
-			SummonedHouseNpc butler = (SummonedHouseNpc) house.getButler();
-			if (!StringUtils.isNullOrEmpty(butler.getMasterName())) {
-				dataSize -= (butler.getMasterName().length() + 1) * 2;
-				writeS(butler.getMasterName()); // owner name
-			}
-		}
-
-		// These bytes come from uncleaned byte buffer of previous house owners info
-		// we fix NC shit here
-		for (int i = 0; i < dataSize; i++)
-			writeC(0);
+		writeS(house.getButler() == null ? null : house.getButler().getMasterName(), 52); // owner name
 
 		LegionMember member = LegionService.getInstance().getLegionMember(playerObjectId);
 		writeD(member == null ? 0 : member.getLegion().getLegionId());
@@ -91,9 +76,7 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 
 		// Emblem and color
 		if (member == null || member.getLegion().getLegionEmblem() == null) {
-			writeC(0);
-			writeC(0);
-			writeD(0);
+			writeB(new byte[6]);
 		} else {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
@@ -106,12 +89,11 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 	}
 
 	private void writePartData(House house, PartType partType, int room, boolean skipPersonal) {
-		boolean isPersonal = house.getBuilding().getType() == BuildingType.PERSONAL_INS;
-		HouseDecoration deco = house.getRenderPart(partType, room);
-		if (skipPersonal && isPersonal)
+		if (skipPersonal && house.getBuilding().getType() == BuildingType.PERSONAL_INS)
 			writeD(0);
-		else
+		else {
+			HouseDecoration deco = house.getRenderPart(partType, room);
 			writeD(deco != null ? deco.getTemplate().getId() : 0);
+		}
 	}
-
 }

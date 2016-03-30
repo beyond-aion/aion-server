@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import org.joda.time.DateTime;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.house.MaintenanceTask;
@@ -44,12 +44,12 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		if (activeHouse == null) {
 			writeD(0);
-			writeD(player.isBuildingInState(PlayerHouseOwnerFlags.BUY_STUDIO_ALLOWED) ? 355000 : 0); // studio building id
+			writeD(player.hasHouseOwnerState(HouseOwnerState.BUY_STUDIO_ALLOWED) ? 355000 : 0); // studio building id
 		} else {
 			writeD(activeHouse.getAddress().getId());
 			writeD(activeHouse.getBuilding().getId());
 		}
-		writeC(player.getBuildingOwnerStates());
+		writeC(player.getHouseOwnerStates());
 		int townLevel = 1;
 		if (activeHouse != null && activeHouse.getAddress().getTownId() != 0) {
 			Town town = TownService.getInstance().getTownById(activeHouse.getAddress().getTownId());

@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.Building;
@@ -262,7 +262,7 @@ public class HousingService {
 		studio.setFeePaid(true);
 		studio.setNextPay(null);
 		studio.setPersistentState(PersistentState.NEW);
-		player.setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
+		player.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), studio.getAddress().getId(), true));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_OWN_SUCCESS());
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
@@ -302,7 +302,7 @@ public class HousingService {
 
 	public void onPlayerLogin(Player player) {
 		House activeHouse = null;
-		byte buildingState = PlayerHouseOwnerFlags.BUY_STUDIO_ALLOWED.getId();
+		byte buildingState = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 		for (House house : player.getHouses()) {
 			if (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT) {
 				activeHouse = house;
@@ -312,15 +312,15 @@ public class HousingService {
 			QuestState qs;
 			qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ELYOS ? 18802 : 28802);
 			if (qs != null && qs.getStatus().equals(QuestStatus.COMPLETE)) {
-				buildingState |= PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId();
+				buildingState |= HouseOwnerState.BIDDING_ALLOWED.getId();
 			}
 		} else {
 			if (activeHouse.getStatus() == HouseStatus.SELL_WAIT)
-				buildingState = PlayerHouseOwnerFlags.SELLING_HOUSE.getId();
+				buildingState = HouseOwnerState.SELLING_HOUSE.getId();
 			else
-				buildingState = PlayerHouseOwnerFlags.HOUSE_OWNER.getId();
+				buildingState = HouseOwnerState.HOUSE_OWNER.getId();
 		}
-		player.setBuildingOwnerState(buildingState);
+		player.setHouseOwnerState(buildingState);
 
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
 		if (!player.getFriendList().getIsFriendListSent())

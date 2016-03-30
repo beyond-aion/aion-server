@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
-import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HousePermissions;
 import com.aionemu.gameserver.model.house.HouseStatus;
@@ -12,7 +11,6 @@ import com.aionemu.gameserver.model.templates.housing.PartType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LegionService;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * @author Rolandas
@@ -32,32 +30,18 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 		writeD(house.getAddress().getId());
 
 		boolean isInactive = house.getStatus() == HouseStatus.INACTIVE;
-		int playerObjectId = isInactive ? 0 : house.getOwnerId();
-		writeD(playerObjectId);
+		writeD(isInactive ? 0 : house.getOwnerId());
 		writeD(house.getBuilding().getType().getId());
 		writeC(1); // unk
 
 		writeD(house.getBuilding().getId());
 		// TODO: 0x4 is wrong in the enum
-		writeC(isInactive ? 4 : house.getHouseOwnerInfoFlags()); // unk 2 or 3 without owner, 5 or 3 with owner
-
+		writeC(isInactive ? 4 : house.getHouseOwnerStates()); // unk 2 or 3 without owner, 5 or 3 with owner
 		writeC(isInactive ? HousePermissions.DOOR_CLOSED.getPacketValue() : house.getDoorState().getPacketValue());
 
-		int dataSize = 52;
-		if (!isInactive && house.getButler() != null) {
-			SummonedHouseNpc butler = (SummonedHouseNpc) house.getButler();
-			if (!StringUtils.isNullOrEmpty(butler.getMasterName())) {
-				dataSize -= (butler.getMasterName().length() + 1) * 2;
-				writeS(butler.getMasterName()); // owner name
-			}
-		}
+		writeS(isInactive || house.getButler() == null ? null : house.getButler().getMasterName(), 52); // owner name
 
-		// These bytes come from uncleaned byte buffer of previous house owners info
-		// we fix NC shit here
-		for (int i = 0; i < dataSize; i++)
-			writeC(0);
-
-		LegionMember member = LegionService.getInstance().getLegionMember(playerObjectId);
+		LegionMember member = isInactive ? null : LegionService.getInstance().getLegionMember(house.getOwnerId());
 		writeD(member == null ? 0 : member.getLegion().getLegionId());
 
 		// show/hide owner name; even for inactive house NC still puts that value
@@ -91,9 +75,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 
 		// Emblem and color
 		if (member == null || member.getLegion().getLegionEmblem() == null) {
-			writeC(0);
-			writeC(0);
-			writeD(0);
+			writeB(new byte[6]);
 		} else {
 			LegionEmblem emblem = member.getLegion().getLegionEmblem();
 			writeC(emblem.getEmblemId());
@@ -106,12 +88,11 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 	}
 
 	private void writePartData(House house, PartType partType, int room, boolean skipPersonal) {
-		boolean isPersonal = house.getBuilding().getType() == BuildingType.PERSONAL_INS;
-		HouseDecoration deco = house.getRenderPart(partType, room);
-		if (skipPersonal && isPersonal)
+		if (skipPersonal && house.getBuilding().getType() == BuildingType.PERSONAL_INS)
 			writeD(0);
-		else
+		else {
+			HouseDecoration deco = house.getRenderPart(partType, room);
 			writeD(deco != null ? deco.getTemplate().getId() : 0);
+		}
 	}
-
 }

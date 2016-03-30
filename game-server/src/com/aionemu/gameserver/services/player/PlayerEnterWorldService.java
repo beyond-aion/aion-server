@@ -422,10 +422,10 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_LEGION_DOMINION_LOC_INFO());
 		MailService.getInstance().onPlayerLogin(player);
 		AtreianPassportService.getInstance().onLogin(player);
-		HousingService.getInstance().onPlayerLogin(player);
 		sendMacroList(client, player);
 		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
 		BrokerService.getInstance().onPlayerLogin(player);
+		HousingService.getInstance().onPlayerLogin(player);
 		// ----------------------------- Retail sequence -----------------------------
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 			AutoGroupService.getInstance().onPlayerLogin(player);

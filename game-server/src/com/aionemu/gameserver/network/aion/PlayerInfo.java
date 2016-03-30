@@ -133,17 +133,16 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeD(accPlData.getDeletionTimeInSeconds());
 		writeH(DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(playerId).getDisplay()); // display helmet 0 show, 5 dont show , possible bit operation
 		writeH(0);
-		writeD(0);
-		writeD(DAOManager.getDAO(MailDAO.class).haveUnread(playerId) ? 1 : 0); // mail
-		writeD(0); // unk
-		writeD(0); // unk
+		writeD(0); // total mail count
+		writeD(DAOManager.getDAO(MailDAO.class).haveUnread(playerId) ? 1 : 0); // unread mail count
+		writeD(0); // express mail count
+		writeD(0); // blackcloud mail count
 		writeQ(BrokerService.getInstance().getCollectedMoney(pcd)); // collected money from broker
 		writeD(0);
 		writeD(0);
 		writeD(0);
 		writeD(0);
 		writeD(0);
-		// client wants int so let's hope we do not reach long limit with timestamp while this server is used :P
 		writeD(isBanned ? (int) cbi.getStart() : 0); // startPunishDate
 		writeD(isBanned ? (int) cbi.getEnd() : 0); // endPunishDate
 		writeS(isBanned ? cbi.getReason() : "");

@@ -31,7 +31,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
@@ -74,7 +74,7 @@ public class House extends VisibleObject {
 	private Timestamp sellStarted;
 	private Map<SpawnType, Npc> spawns = new HashMap<SpawnType, Npc>(3);
 	private HouseRegistry houseRegistry;
-	private byte houseOwnerInfoFlags = PlayerHouseOwnerFlags.SINGLE_HOUSE.getId();
+	private byte houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 	private PlayerScripts playerScripts;
 	private PersistentState persistentState;
 
@@ -481,24 +481,20 @@ public class House extends VisibleObject {
 		this.persistentState = persistentState;
 	}
 
-	public byte getHouseOwnerInfoFlags() {
-		return houseOwnerInfoFlags;
-	}
-
-	public boolean isInHousingStatus(PlayerHouseOwnerFlags status) {
-		return (houseOwnerInfoFlags & status.getId()) != 0;
+	public byte getHouseOwnerStates() {
+		return houseOwnerStates;
 	}
 
 	public void fixBuildingStates() {
-		houseOwnerInfoFlags = PlayerHouseOwnerFlags.SINGLE_HOUSE.getId();
+		houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 		if (playerObjectId != 0) {
-			houseOwnerInfoFlags |= PlayerHouseOwnerFlags.HAS_OWNER.getId();
+			houseOwnerStates |= HouseOwnerState.HAS_OWNER.getId();
 			if (status == HouseStatus.ACTIVE) {
-				houseOwnerInfoFlags |= PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId();
-				houseOwnerInfoFlags &= ~PlayerHouseOwnerFlags.SINGLE_HOUSE.getId();
+				houseOwnerStates |= HouseOwnerState.BIDDING_ALLOWED.getId();
+				houseOwnerStates &= ~HouseOwnerState.SINGLE_HOUSE.getId();
 			}
 		} else if (status == HouseStatus.SELL_WAIT) {
-			houseOwnerInfoFlags = PlayerHouseOwnerFlags.SELLING_HOUSE.getId();
+			houseOwnerStates = HouseOwnerState.SELLING_HOUSE.getId();
 		}
 	}
 
