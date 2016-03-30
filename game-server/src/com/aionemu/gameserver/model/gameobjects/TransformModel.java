@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_RIDE_ROBOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -17,7 +16,6 @@ public class TransformModel {
 	private Creature owner;
 
 	private int modelId;
-	private int originalModelId;
 	private int eventModelId;
 	private TransformType originalType;
 	private TransformType transformType;
@@ -36,13 +34,7 @@ public class TransformModel {
 	protected int res6;
 
 	public TransformModel(Creature creature) {
-		if (creature instanceof Player) {
-			this.originalType = TransformType.PC;
-			this.originalModelId = 0;
-		} else {
-			this.originalType = TransformType.NONE;
-			this.originalModelId = creature.getObjectTemplate().getTemplateId();
-		}
+		this.originalType = creature instanceof Player ? TransformType.PC : TransformType.NONE;
 		this.transformType = TransformType.NONE;
 		this.owner = creature;
 	}
@@ -66,6 +58,7 @@ public class TransformModel {
 	 * @param res6
 	 */
 	public void apply(int modelId, TransformType type, int panelId, int banUseSkills, int banMovement, int res1, int res2, int res3, int res5, int res6) {
+		int originalModelId = owner.getObjectTemplate().getTemplateId();
 		if (modelId == 0 || modelId == originalModelId) { // reset
 			this.modelId = originalModelId;
 			this.transformType = originalType;
@@ -97,8 +90,6 @@ public class TransformModel {
 
 	private void updateVisually() {
 		PacketSendUtility.broadcastPacketAndReceive(owner, new SM_TRANSFORM(owner));
-		if (modelId == 0 && owner instanceof Player && ((Player) owner).isInRobotMode())
-			PacketSendUtility.broadcastPacketAndReceive((Player) owner, new SM_RIDE_ROBOT((Player) owner));
 	}
 
 	private void updateTribeVisually() {
@@ -130,7 +121,7 @@ public class TransformModel {
 		if (eventModelId > 0)
 			return eventModelId;
 		else
-			return originalModelId;
+			return owner.getObjectTemplate().getTemplateId();
 	}
 
 	/**
