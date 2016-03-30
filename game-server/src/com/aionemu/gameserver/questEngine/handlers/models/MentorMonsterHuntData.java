@@ -42,7 +42,7 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 			for (Monster m : monster)
 				monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
 		}
-		MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, rewardNextStep);
+		MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, reward, rewardNextStep);
 		questEngine.addQuestHandler(template);
 	}
 }

@@ -314,6 +314,7 @@
 				<xs:attribute name="invasion_world" type="xs:int" default="0"/>
 				<xs:attribute name="start_zone" type="xs:string" default="NONE"/>
 				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
+				<xs:attribute name="end_reward" type="xs:boolean" default="false"/>
 				<xs:attribute name="end_reward_next_step" type="xs:boolean" default="false"/>
 			</xs:extension>
 		</xs:complexContent>
@@ -371,7 +372,6 @@
 		<xs:attribute name="npc_ids" type="IntListType"/>
 		<xs:attribute name="npc_seq" type="xs:int"/>
 		<xs:attribute name="step" type="xs:int" default="0"/>
-		<xs:attribute name="end_var_reward" type="xs:boolean" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="KillInWorldData">
 		<xs:complexContent>
