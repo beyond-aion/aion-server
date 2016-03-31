@@ -120,7 +120,7 @@ public class CM_MOVE extends AionClientPacket {
 			} else {
 				player.getController().onMove();
 				if ((type & MovementMask.ABSOLUTE) == 0)
-					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, z + m.vectorZ * speed, heading);
+					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, player.isFlying() ? z + m.vectorZ * speed : z + m.vectorZ, heading);
 			}
 
 			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
@@ -138,7 +138,7 @@ public class CM_MOVE extends AionClientPacket {
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.updateLastMove();
 
-		if ((type & MovementMask.POSITION) == MovementMask.POSITION || type == MovementMask.IMMEDIATE)
+		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL || type == MovementMask.IMMEDIATE)
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
