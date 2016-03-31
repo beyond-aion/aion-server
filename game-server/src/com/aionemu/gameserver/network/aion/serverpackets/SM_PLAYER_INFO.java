@@ -63,11 +63,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeD(player.getObjectId());
 		writeD(pcd.getTemplateId()); // 0xA3 female asmodian, 0xA2 male asmodian, 0xA1 female elyos, 0xA0 male elyos
 		writeD(player.getRobotId());// RobotId
-		/**
-		 * Transformed state - send transformed model id Regular state - send player model id (from common data)
-		 */
-		int model = player.getTransformModel().getModelId();
-		writeD(model != 0 ? model : pcd.getTemplateId());
+		writeD(player.getTransformModel().getModelId()); // Transformed state: transformed model id, Regular state: player model id
 		writeC(0x00); // new 2.0 Packet --- probably pet info?
 		writeD(player.getTransformModel().getType().getId());
 		writeC(enemy ? 0x00 : 0x26);
