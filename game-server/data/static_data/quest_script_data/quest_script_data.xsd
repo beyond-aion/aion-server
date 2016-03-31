@@ -303,9 +303,6 @@
 	<xs:complexType name="MonsterHuntData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:sequence>
-					<xs:element name="monster" type="Monster" minOccurs="0" maxOccurs="unbounded"/>
-				</xs:sequence>
 				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
 				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
 				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
@@ -329,7 +326,11 @@
 	</xs:complexType>
 	<xs:complexType name="KillSpawnedData">
 		<xs:complexContent>
-			<xs:extension base="MonsterHuntData"/>
+			<xs:extension base="MonsterHuntData">
+				<xs:sequence>
+					<xs:element name="monster" type="Monster" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ReportToManyData">

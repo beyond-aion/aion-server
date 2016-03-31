@@ -12,7 +12,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillSpawned;
 
 /**
- * @author vlog, modified Bobobear
+ * @author vlog
+ * @modified Bobobear
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KillSpawnedData")
