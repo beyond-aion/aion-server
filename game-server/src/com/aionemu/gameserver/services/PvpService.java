@@ -203,10 +203,10 @@ public class PvpService {
 		int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
 		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
 		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
-		int groupDamagePercentage = Math.round(info.getDamage() / (float) totalDamage);
-		int apRewardPerMember = baseApReward * Math.round(groupDamagePercentage / (float) players.size());
-		int xpRewardPerMember = baseXpReward * Math.round(groupDamagePercentage / (float) players.size());
-		int dpRewardPerMember = baseDpReward * Math.round(groupDamagePercentage / (float) players.size());
+		float groupDamagePercentage = (float) info.getDamage() / totalDamage;
+		int apRewardPerMember = Math.round(baseApReward * groupDamagePercentage / players.size());
+		int xpRewardPerMember = Math.round(baseXpReward * groupDamagePercentage / players.size());
+		int dpRewardPerMember = Math.round(baseDpReward * groupDamagePercentage / players.size());
 
 		for (Player member : players) {
 			int memberApGain = 1;

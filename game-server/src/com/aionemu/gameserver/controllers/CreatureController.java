@@ -524,10 +524,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (creature.getSkillNumber() > 0)
 			creature.setSkillNumber(creature.getSkillNumber() - 1);
 	}
+
+	public void cancelCurrentSkill(Creature lastAttacker) {
+		cancelCurrentSkill(lastAttacker, null);
+	}
+
 	/**
 	 * Cancel current skill and remove cooldown
 	 */
-	public void cancelCurrentSkill(Creature lastAttacker) {
+	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE msg) {
 		if (getOwner().getCastingSkill() == null) {
 			return;
 		}
