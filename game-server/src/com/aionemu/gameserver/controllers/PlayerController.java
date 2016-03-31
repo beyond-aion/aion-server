@@ -8,6 +8,9 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,9 +58,9 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE_OBJECT;
@@ -120,9 +123,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * This class is for controlling players.
@@ -604,6 +604,7 @@ public class PlayerController extends CreatureController<Player> {
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
+	@Override
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
 		if (getOwner().getCastingSkill() == null) {
 			return;
