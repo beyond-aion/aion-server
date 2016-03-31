@@ -42,7 +42,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 	private String characterName;
 
 	/**
-	 * Constructs new instance of <tt>CM_CREATE_CHARACTER </tt> packet
+	 * Constructs new instance of <tt>CM_CREATE_CHARACTER</tt> packet
 	 * 
 	 * @param opcode
 	 */
@@ -50,13 +50,10 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		readD(); // ignored for now
-		readS(); // something + accointId
+		readD(); // account id
+		readS(); // account name
 
 		characterName = Util.convertName(readS(52));
 
