@@ -38,11 +38,13 @@ public class _18213TheChillingTruth extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 205985) {
-				if (dialog == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1011);
-				} else {
-					giveQuestItem(env, 182212219, 1);
-					return sendQuestStartDialog(env);
+				switch (dialog) {
+					case QUEST_SELECT:
+						return sendQuestDialog(env, 1011);
+					case ASK_QUEST_ACCEPT:
+						return sendQuestDialog(env, 4);
+					case QUEST_ACCEPT_1:
+						return sendQuestStartDialog(env, 182212219, 1);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
