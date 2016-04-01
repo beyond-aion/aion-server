@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.time.LocalDate;
-
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 
 /**
@@ -16,7 +14,6 @@ public class PlayerSettings {
 	private byte[] houseBuddies;
 	private int deny = 0;
 	private int display = 0;
-	private boolean isAprilFools = LocalDate.now().equals(LocalDate.of(LocalDate.now().getYear(), 4, 1));;
 
 	public PlayerSettings() {
 	}
@@ -96,7 +93,7 @@ public class PlayerSettings {
 	 * @return the display
 	 */
 	public int getDisplay() {
-		return isAprilFools ? display & ~4 : display;
+		return display;
 	}
 
 	/**

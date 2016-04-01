@@ -13,9 +13,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_CANCELED;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_SUCCEED;
 
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +28,6 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -76,7 +73,6 @@ public class Equipment {
 
 	private SortedMap<Long, Item> equipment = new TreeMap<>();
 	private Player owner;
-	private Item aprilFoolsItem = null;
 
 	private Set<Long> markedFreeSlots = new HashSet<>();
 	private PersistentState persistentState = PersistentState.UPDATED;
@@ -91,13 +87,6 @@ public class Equipment {
 
 	public Equipment(Player player) {
 		this.owner = player;
-		LocalDate today = LocalDate.now();
-		boolean isAprilFools = today.equals(LocalDate.of(today.getYear(), 4, 1));
-		if (isAprilFools) {
-			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(125040059); // jester hat
-			aprilFoolsItem = new Item(0, itemTemplate);
-			aprilFoolsItem.setEquipmentSlot(itemTemplate.getItemSlot());
-		}
 	}
 
 	/**
@@ -649,15 +638,7 @@ public class Equipment {
 		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
-				if (aprilFoolsItem != null && (item.getEquipmentSlot() & aprilFoolsItem.getEquipmentSlot()) == aprilFoolsItem.getEquipmentSlot())
-					equippedItems.add(aprilFoolsItem);
-				else
-					equippedItems.add(item);
-		}
-
-		if (aprilFoolsItem != null && !equippedItems.contains(aprilFoolsItem)) {
-			equippedItems.add(aprilFoolsItem);
-			Collections.sort(equippedItems, (item1, item2) -> (int) (item1.getEquipmentSlot() - item2.getEquipmentSlot())); // sort by slotId
+				equippedItems.add(item);
 		}
 
 		return equippedItems;
