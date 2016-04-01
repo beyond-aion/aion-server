@@ -47,11 +47,12 @@ public class MonsterHunt extends QuestHandler {
 	private QuestItems workItem;
 	private final String startZone;
 	private final int startDistanceNpc;
+	private final boolean reward;
 	private final boolean rewardNextStep;
 	private final boolean isDataDriven;
 
 	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
-		int endDialog, List<Integer> aggroNpcs, int invasionWorld, String startZone, int startDistanceNpc, boolean rewardNextStep) {
+		int endDialog, List<Integer> aggroNpcs, int invasionWorld, String startZone, int startDistanceNpc, boolean reward, boolean rewardNextStep) {
 		super(questId);
 		if (startNpcIds != null) {
 			this.startNpcs.addAll(startNpcIds);
@@ -73,6 +74,7 @@ public class MonsterHunt extends QuestHandler {
 		this.invasionWorldId = invasionWorld;
 		this.startZone = startZone;
 		this.startDistanceNpc = startDistanceNpc;
+		this.reward = reward;
 		this.rewardNextStep = rewardNextStep;
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
@@ -232,7 +234,7 @@ public class MonsterHunt extends QuestHandler {
 							}
 							updateQuestStatus(env);
 							if (!isDataDriven) { // Old quest style
-								if (total <= m.getEndVar() && m.getRewardVar()) {
+								if (total <= m.getEndVar() && (reward || rewardNextStep)) {
 									if (rewardNextStep)
 										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 									qs.setStatus(QuestStatus.REWARD);

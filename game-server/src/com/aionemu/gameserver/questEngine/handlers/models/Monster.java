@@ -26,9 +26,6 @@ public class Monster {
 	@XmlAttribute(name = "end_var", required = true)
 	protected int endVar;
 
-	@XmlAttribute(name = "end_var_reward")
-	protected boolean rewardVar = false;
-
 	@XmlAttribute(name = "npc_ids")
 	protected List<Integer> npcIds;
 
@@ -100,14 +97,6 @@ public class Monster {
 
 	public void setSpawnerObject(Integer value) {
 		this.spawnerObject = value;
-	}
-
-	public boolean getRewardVar() {
-		return rewardVar;
-	}
-
-	public void setRewardVar(boolean value) {
-		this.rewardVar = value;
 	}
 
 }

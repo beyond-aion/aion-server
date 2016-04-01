@@ -18,17 +18,8 @@
 	<item_collecting id="47002" start_npc_ids="0" end_npc_ids="799864"/>
 	<item_collecting id="47005" start_npc_ids="0" end_npc_ids="799872"/>
 	<!-- HUNTING QUESTS -->
-	<!-- TODO: remove after mentor_monster_hunt-update -->
-	<mentor_monster_hunt id="47001" start_npc_ids="0" end_npc_ids="799864">
-		<monster var="0" end_var="5" npc_ids="210540 210541 211282 210538 210539 210533 210534 210560 210561 211281"/>
-	</mentor_monster_hunt>
-	<mentor_monster_hunt id="47004" start_npc_ids="0" end_npc_ids="799872">
-		<monster var="0" end_var="1" npc_ids="212833"/>
-	</mentor_monster_hunt>
-	<mentor_monster_hunt id="47007" start_npc_ids="0" end_npc_ids="799872">
-		<monster var="0" end_var="5" npc_ids="212726 211612 212727 212736 212737 212741 212742 212731 212729 211574 211599"/>
-	</mentor_monster_hunt>
-	<mentor_monster_hunt id="47008" start_npc_ids="0" end_npc_ids="799872">
-		<monster var="0" end_var="1" npc_ids="212879"/>
-	</mentor_monster_hunt>
+	<mentor_monster_hunt id="47001" start_npc_ids="0" end_npc_ids="799864"/>
+	<mentor_monster_hunt id="47004" start_npc_ids="0" end_npc_ids="799872"/>
+	<mentor_monster_hunt id="47007" start_npc_ids="0" end_npc_ids="799872"/>
+	<mentor_monster_hunt id="47008" start_npc_ids="0" end_npc_ids="799872"/>
 </quest_scripts>

@@ -710,18 +710,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		return newMask;
 	}
 
-	/**
-	 * Compares two items on their object and item ids
-	 *
-	 * @param Item
-	 *          object
-	 * @return true, if this item is equal to the object item
-	 * @author vlog
-	 */
-	public boolean isSameItem(Item i) {
-		return this.equals(i) && this.getItemId() == i.getItemId();
-	}
-
 	public boolean isStorableinWarehouse(Player player) {
 		return (getItemMask(player) & ItemMask.STORABLE_IN_WH) == ItemMask.STORABLE_IN_WH;
 	}

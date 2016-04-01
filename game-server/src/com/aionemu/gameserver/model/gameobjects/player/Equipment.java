@@ -13,14 +13,14 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_CANCELED;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SOUL_BOUND_ITEM_SUCCEED;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -63,6 +64,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
+import javolution.util.FastTable;
+
 /**
  * @author Avol, ATracer, kosyachok
  * @modified cura
@@ -73,22 +76,28 @@ public class Equipment {
 
 	private SortedMap<Long, Item> equipment = new TreeMap<>();
 	private Player owner;
+	private Item aprilFoolsItem = null;
 
 	private Set<Long> markedFreeSlots = new HashSet<>();
 	private PersistentState persistentState = PersistentState.UPDATED;
 
-	//@formatter:off
-	private static final long[] ARMOR_SLOTS = new long[] { 
+	private static final long[] ARMOR_SLOTS = new long[] { // @formatter:off
 		ItemSlot.BOOTS.getSlotIdMask(), 
 		ItemSlot.GLOVES.getSlotIdMask(),
 		ItemSlot.PANTS.getSlotIdMask(), 
 		ItemSlot.SHOULDER.getSlotIdMask(), 
 		ItemSlot.TORSO.getSlotIdMask()
-	};
-	//@formatter:on
+	}; // @formatter:on
 
 	public Equipment(Player player) {
 		this.owner = player;
+		LocalDate today = LocalDate.now();
+		boolean isAprilFools = today.equals(LocalDate.of(today.getYear(), 4, 1));
+		if (isAprilFools) {
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(125040059); // jester hat
+			aprilFoolsItem = new Item(0, itemTemplate);
+			aprilFoolsItem.setEquipmentSlot(itemTemplate.getItemSlot());
+		}
 	}
 
 	/**
@@ -640,8 +649,17 @@ public class Equipment {
 		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
-				equippedItems.add(item);
+				if (aprilFoolsItem != null && (item.getEquipmentSlot() & aprilFoolsItem.getEquipmentSlot()) == aprilFoolsItem.getEquipmentSlot())
+					equippedItems.add(aprilFoolsItem);
+				else
+					equippedItems.add(item);
 		}
+
+		if (aprilFoolsItem != null && !equippedItems.contains(aprilFoolsItem)) {
+			equippedItems.add(aprilFoolsItem);
+			Collections.sort(equippedItems, (item1, item2) -> (int) (item1.getEquipmentSlot() - item2.getEquipmentSlot())); // sort by slotId
+		}
+
 		return equippedItems;
 	}
 
