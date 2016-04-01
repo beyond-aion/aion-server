@@ -2,7 +2,8 @@
 <spawns>
     <spawn_map map_id="210070000">
         <!-- Rift -->
-        <spawn npc_id="700138" handler="RIFT">
+        <spawn npc_id="700137" handler="RIFT">
+		<!-- Entry -->
             <spot x="2669.0242" y="438.01553" z="576.44300" anchor="CYGNEA_AM"/> <!-- id 2170 -->
             <spot x="1695.2113" y="118.30494" z="541.34860" anchor="CYGNEA_BM"/> <!-- id 2171 -->
             <spot x="780.76843" y="1797.6338" z="457.70422" anchor="CYGNEA_CM"/> <!-- id 2172 -->
@@ -12,7 +13,9 @@
             <spot x="423.68884" y="861.77814" z="415.61945" anchor="CYGNEA_GM"/> <!-- id 2176 -->
             <spot x="2911.7507" y="2899.1367" z="270.23444" anchor="CYGNEA_HM"/> <!-- id 2177 -->
             <spot x="1990.0380" y="1688.9974" z="195.12500" anchor="CYGNEA_IM"/> <!-- id 2178 -->
-			<!-- Entry -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
+		<!-- Exit -->
             <spot x="2674.3784" y="592.28790" z="555.33340" anchor="CYGNEA_AS"/> <!-- id 2280 -->
             <spot x="1814.7332" y="306.04382" z="556.33890" anchor="CYGNEA_BS"/> <!-- id 2281 -->
             <spot x="347.00986" y="1513.1348" z="458.63156" anchor="CYGNEA_CS"/> <!-- id 2282 -->
