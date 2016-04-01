@@ -3968,8 +3968,7 @@
 		</spawn>
 		<!-- Hot Crater -->
 		<spawn npc_id="700913" respawn_time="295">
-			<!-- old/buggy static id: 2392 -->
-			<spot x="893.3" y="1774.1" z="326.25"/>
+			<spot x="892.07727" y="1775.3905" z="326.5816" static_id="3719"/>
 		</spawn>
 		<!-- Huge Egg -->
 		<spawn npc_id="217095" respawn_time="550">
