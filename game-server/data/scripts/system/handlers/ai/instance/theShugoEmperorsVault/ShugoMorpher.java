@@ -2,13 +2,10 @@ package ai.instance.theShugoEmperorsVault;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.ai2.poll.NpcAIPolls;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -21,22 +18,21 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
+import ai.GeneralNpcAI2;
 
 /**
  * @author Yeats
- *
  */
 @AIName("emperorsVaultMorphNPC")
 public class ShugoMorpher extends GeneralNpcAI2 {
-	
+
 	private AtomicBoolean started = new AtomicBoolean(false);
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		//do nothing
+		// do nothing
 	}
-	
+
 	protected void handleDialogStart(Player player) {
 		if (started.compareAndSet(false, true)) {
 			final int delay = 1000;
@@ -48,15 +44,16 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 					player.getObserveController().removeObserver(this);
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0 , 2));
+					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
 				}
-			
+
 			};
-		
+
 			player.getObserveController().attach(obs);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
@@ -66,13 +63,13 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 				}
 
 			}, delay));
-		} 
+		}
 	}
-	
+
 	private void handleUseItemFinish(Player player) {
 		Race race = player.getRace();
 		boolean morphed = false;
-		switch(getOwner().getNpcId()) {
+		switch (getOwner().getNpcId()) {
 			case 833491:
 			case 833494:
 			case 832935:
@@ -100,10 +97,10 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21834, 1, player).useSkill();
 				}
 				break;
-				default:
-					break;
+			default:
+				break;
 		}
-		
+
 		if (morphed) {
 			getOwner().getController().delete();
 		} else {
@@ -115,24 +112,16 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 	public int modifyDamage(Creature creature, int damage) {
 		return 0;
 	}
-	
+
 	@Override
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
 			case CAN_ATTACK_PLAYER:
-				return AIAnswers.NEGATIVE;
-			case SHOULD_DECAY:
-				return NpcAIPolls.shouldDecay(this);
-			case SHOULD_RESPAWN:
-				return NpcAIPolls.shouldRespawn(this);
 			case SHOULD_REWARD:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_LOOT:
 				return AIAnswers.NEGATIVE;
-			case CAN_SHOUT:
-				return isMayShout() ? AIAnswers.POSITIVE : AIAnswers.NEGATIVE;
 			default:
-				return null;
+				return super.pollInstance(question);
 		}
 	}
 }

@@ -25,7 +25,7 @@
             <spot x="1841.7975" y="239.72798" z="225.66537" anchor="ENSHAR_ES"/> <!-- id 2174 -->
             <spot x="2726.1506" y="642.21643" z="237.00119" anchor="ENSHAR_FS"/> <!-- id 2175 -->
 		</spawn>
-		<spawn npc_id="702724" hanlder="RIFT">
+		<spawn npc_id="702724" handler="RIFT">
             <spot x="2605.2295" y="2582.7222" z="185.35855" anchor="ENSHAR_GS"/> <!-- id 2176 -->
             <spot x="381.94467" y="366.77304" z="191.89494" anchor="ENSHAR_HS"/> <!-- id 2177 -->
             <spot x="1657.1338" y="995.59230" z="192.25000" anchor="ENSHAR_IS"/> <!-- id 2178 -->

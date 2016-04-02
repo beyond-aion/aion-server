@@ -386,6 +386,7 @@
 				<xs:attribute name="invasion_world" type="xs:int" default="0"/>
 				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
 				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
+				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

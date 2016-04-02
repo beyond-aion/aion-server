@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
-//import gnu.trove.list.array.TIntArrayList;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +14,9 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillInWorld;
 
 /**
- * @author vlog, reworked Bobobear
+ * @author vlog
+ * @reworked Bobobear
+ * @modified Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KillInWorldData")
@@ -37,9 +37,11 @@ public class KillInWorldData extends XMLQuest {
 	@XmlAttribute(name = "invasion_world")
 	protected int invasionWorld;
 	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialog;
+	protected int startDialogId;
 	@XmlAttribute(name = "start_dist_npc_id")
 	protected int startDistanceNpc;
+	@XmlAttribute(name = "end_dialog_id")
+	protected int endDialogId;
 
 	@Override
 	public void register(QuestEngine questEngine) {
@@ -51,8 +53,8 @@ public class KillInWorldData extends XMLQuest {
 				worldIds.add(template.getMapId());
 			}
 		}
-		KillInWorld template = new KillInWorld(id, endNpcIds, startNpcIds, worldIds, amount, minRank, levelDiff, invasionWorld, startDialog,
-			startDistanceNpc);
+		KillInWorld template = new KillInWorld(id, endNpcIds, startNpcIds, worldIds, amount, minRank, levelDiff, invasionWorld, startDialogId,
+			startDistanceNpc, endDialogId);
 		questEngine.addQuestHandler(template);
 	}
 }

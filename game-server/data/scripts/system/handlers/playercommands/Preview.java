@@ -5,12 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Gender;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
@@ -23,6 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
+
+import javolution.util.FastMap;
 
 /**
  * @author Neon
@@ -66,15 +64,15 @@ public class Preview extends PlayerCommand {
 		if (itemTemplate == null) {
 			sendInfo(player, "Unknown item.");
 			return;
-		} else if (itemTemplate.getEquipmentType().equals(EquipType.NONE)) {
+		} else if (itemTemplate.getEquipmentType() == EquipType.NONE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CHANGE_ITEM_SKIN_PREVIEW_INVALID_COSMETIC());
 			return;
-		} else if (!itemTemplate.getRace().equals(Race.PC_ALL) && !itemTemplate.getRace().equals(player.getRace())) {
+		} else if (itemTemplate.getRace() == player.getOppositeRace()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_RACE());
 			return;
 		} else {
 			Gender itemGender = itemTemplate.getUseLimits().getGenderPermitted();
-			if (itemGender != null && !itemGender.equals(player.getGender())) {
+			if (itemGender != null && itemGender != player.getGender()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_GENDER());
 				return;
 			}
@@ -136,7 +134,7 @@ public class Preview extends PlayerCommand {
 
 	private static List<Item> getPreviewItems(Player player, Item previewItem) {
 		long previewSlot = previewItem.getEquipmentSlot();
-		List<Item> previewItems = FastTable.of(player.getEquipment().getEquippedForAppearence());
+		List<Item> previewItems = player.getEquipment().getEquippedForAppearence();
 
 		if (ItemSlot.isTwoHandedWeapon(previewSlot))
 			// remove shield or sub hand weapons if previewing TwoHanded
