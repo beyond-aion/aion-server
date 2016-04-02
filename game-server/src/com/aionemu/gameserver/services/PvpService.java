@@ -18,9 +18,11 @@ import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.KillList;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team2.group.PlayerFilters;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
 import com.aionemu.gameserver.model.templates.bounty.BountyType;
@@ -29,6 +31,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -101,8 +104,15 @@ public class PvpService {
 
 		if (totalDamage == 0 || winner == null) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
+			if (victim.isInGroup2()) {
+				victim.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()), new PlayerFilters.ExcludePlayerFilter(victim));
+			} else if (victim.isInAlliance2()) {
+				victim.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()), new PlayerFilters.ExcludePlayerFilter(victim));
+			}
+			announceDeath(victim);
 			return;
 		}
+
 
 		// Add Player Kill to record.
 		winner.getAbyssRank().setAllKill();
@@ -178,8 +188,17 @@ public class PvpService {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH_TO_B(winner.getName()));
 			PacketSendUtility.broadcastPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()), false, player -> !player.isEnemy(victim));
 			PacketSendUtility.broadcastPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), false, player -> player.isEnemy(victim));
+			announceDeath(victim);
 		}
+	}
 
+	// High ranked kill announce
+	private void announceDeath(Player player) {
+		AbyssRank ar = player.getAbyssRank();
+		if (AbyssService.isOnPvpMap(player) && ar != null) {
+			if (ar.getRank().getId() >= 9)
+				AbyssService.rankedKillAnnounce(player);
+		}
 	}
 
 	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int totalDamage, AggroInfo info) {
