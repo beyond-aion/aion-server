@@ -98,7 +98,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onPlayerLogOut(Player player) {
-		player.setTransformed(false);
+		player.endTransformation();
 	}
 
 	@Override

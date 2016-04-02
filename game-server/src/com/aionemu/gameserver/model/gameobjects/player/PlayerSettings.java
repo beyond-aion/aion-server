@@ -16,7 +16,6 @@ public class PlayerSettings {
 	private int display = 0;
 
 	public PlayerSettings() {
-
 	}
 
 	public PlayerSettings(byte[] uiSettings, byte[] shortcuts, byte[] houseBuddies, int deny, int display) {

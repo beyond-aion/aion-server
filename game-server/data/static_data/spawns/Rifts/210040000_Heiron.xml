@@ -8,9 +8,11 @@
 			<spot x="1103.57" y="656.18" z="132.959" anchor="HEIRON_CM"/>	<!-- id 2142 -->
 			<spot x="649.655" y="1821.23" z="105.332" anchor="HEIRON_DM"/>	<!-- id 2143 -->
 			<spot x="722.995" y="2524.74" z="126.14" anchor="HEIRON_EM"/>	<!-- id 2144 -->
-			<spot x="503.393" y="555.31" z="128.5" anchor="HEIRON_FM"/>		<!-- id 2145 -->
+			<spot x="503.393" y="555.31" z="128.5" anchor="HEIRON_FM"/>	<!-- id 2145 -->
 			<spot x="2742.7" y="2078.44" z="142.533" anchor="HEIRON_GM"/>	<!-- id 2146 -->
-			<spot x="2132.44" y="434.266" z="228" anchor="HEIRON_AS"/>		<!-- id 2240 -->
+			<spot x="2132.44" y="434.266" z="228" anchor="HEIRON_AS"/>	<!-- id 2240 -->
+		</spawn>
+		<spawn npc_id="700137" handler="RIFT">
 			<spot x="1955.41" y="1833.32" z="124.302" anchor="HEIRON_BS"/>	<!-- id 2241 -->
 			<spot x="881.969" y="903.924" z="119.97" anchor="HEIRON_CS"/>	<!-- id 2242 -->
 			<spot x="861.482" y="2194.45" z="124.491" anchor="HEIRON_DS"/>	<!-- id 2243 -->

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.team2.alliance.events;
 
+import java.util.Objects;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceMember;
@@ -15,7 +17,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
@@ -37,7 +38,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 	@Override
 	public void handleEvent() {
 		Player leader = team.getLeaderObject();
-		Preconditions.checkNotNull(leader, "Alliance leader should not be null");
+		Objects.requireNonNull(leader, "Alliance leader should not be null");
 
 		if (!reason.equals(PlayerLeavedEvent.LeaveReson.DISBAND)) {
 			// here we already must have a leader of the team

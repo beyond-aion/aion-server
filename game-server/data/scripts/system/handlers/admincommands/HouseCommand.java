@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
@@ -106,7 +106,7 @@ public class HouseCommand extends AdminCommand {
 			house.save();
 			target.getHouses().add(house);
 			target.setHouseRegistry(house.getRegistry());
-			target.setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
+			target.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
 			PacketSendUtility.sendMessage(admin, "House " + house.getName() + " acquired");
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
@@ -135,7 +135,7 @@ public class HouseCommand extends AdminCommand {
 			if (target.getHouses().size() != 0)
 				oldHouse = target.getHouses().get(0);
 			else
-				target.setBuildingOwnerState(PlayerHouseOwnerFlags.BUY_STUDIO_ALLOWED.getId());
+				target.setHouseOwnerState(HouseOwnerState.BUY_STUDIO_ALLOWED.getId());
 			target.setHouseRegistry(oldHouse == null ? null : oldHouse.getRegistry());
 			PacketSendUtility.sendMessage(admin, "House " + revokedHouse.getName() + " revoked");
 			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));

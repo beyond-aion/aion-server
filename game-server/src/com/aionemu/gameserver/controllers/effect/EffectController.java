@@ -143,8 +143,9 @@ public class EffectController {
 			// max 3 aura effects or 1 toggle skill in noshoweffects
 			if (nextEffect.isToggle() && nextEffect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW) {
 				int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
-				//Rangers are allowed to use 2 Toggle skills. There might be a pattern.
-				if (nextEffect.getEffector() instanceof Player && ((Player)nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER) {
+				//Rangers & Riders are allowed to use 2 Toggle skills. There might be a pattern.
+				if (nextEffect.getEffector() instanceof Player && (((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER ||
+						((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RIDER)) {
 					mts = 2;
 				}
 				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffects();
@@ -952,7 +953,8 @@ public class EffectController {
 		// archer buffs
 		int count = 0;
 		Effect toRemove = null;
-		for (Effect eff : effects) {
+		for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+			Effect eff = iter.next();
 			switch (eff.getSkillTemplate().getCooldownId()) {
 				case 2020: // Dodging
 				case 2022: // Focused Shots

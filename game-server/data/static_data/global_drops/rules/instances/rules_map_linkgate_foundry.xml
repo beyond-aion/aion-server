@@ -106,6 +106,7 @@
 		<gd_items>
 			<gd_item id="186000236" name="Blood Mark" />
 		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />

@@ -70,13 +70,6 @@ public class Util {
 	}
 
 	/**
-	 * based on: <a href="http://stackoverflow.com/questions/2183240/java-integer-to-byte-array">Link</a>
-	 */
-	public static byte[] intToReversedByteArray(int value) {
-		return new byte[] { (byte) value, (byte) (value >>> 8), (byte) (value >>> 16), (byte) (value >>> 24) };
-	}
-
-	/**
 	 * Converts name to valid pattern For example : "atracer" -> "Atracer"
 	 * 
 	 * @param name

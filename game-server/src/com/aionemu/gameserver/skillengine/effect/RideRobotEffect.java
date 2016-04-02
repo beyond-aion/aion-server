@@ -5,7 +5,6 @@ import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RIDE_ROBOT;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -24,10 +23,9 @@ public class RideRobotEffect extends EffectTemplate {
 	@Override
 	public void startEffect(final Effect effect) {
 		Player player = (Player) effect.getEffected();
-		final Item key = player.getEquipment().getMainHandWeapon();
-		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(key.getItemSkinTemplate().getTemplateId());
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player.getObjectId(), template.getRobotId()));
-		player.setRobotId(template.getRobotId());
+		Item key = player.getEquipment().getMainHandWeapon();
+		player.setRobotId(DataManager.ITEM_DATA.getItemTemplate(key.getItemSkinTemplate().getTemplateId()).getRobotId());
+		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player));
 
 		ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
 
@@ -46,7 +44,7 @@ public class RideRobotEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		Player player = (Player) effect.getEffected();
 		player.setRobotId(0);
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player.getObjectId(), player.getRobotId()));
+		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player));
 		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
 			if (ef.getSkillTemplate().getRideRobotCondition() != null)
 				ef.endEffect();

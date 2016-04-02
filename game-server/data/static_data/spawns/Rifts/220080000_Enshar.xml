@@ -3,22 +3,29 @@
     <spawn_map map_id="220080000">
         <!-- Rift -->
         <spawn npc_id="700137" handler="RIFT">
+		<!-- Entry -->
             <spot x="152.02060" y="2572.3533" z="134.02466" anchor="ENSHAR_AM"/> <!-- id 2280 -->
             <spot x="1305.3157" y="2422.7840" z="279.51456" anchor="ENSHAR_BM"/> <!-- id 2281 -->
             <spot x="2307.4660" y="1204.8960" z="325.00000" anchor="ENSHAR_CM"/> <!-- id 2282 -->
             <spot x="172.35520" y="1450.8087" z="306.80670" anchor="ENSHAR_DM"/> <!-- id 2283 -->
             <spot x="1076.3921" y="620.23596" z="218.67900" anchor="ENSHAR_EM"/> <!-- id 2284 -->
             <spot x="2370.0980" y="193.97507" z="242.38257" anchor="ENSHAR_FM"/> <!-- id 2285 -->
+		</spawn>
+		<spawn npc_id="702723" handler="RIFT">
             <spot x="2849.7524" y="2445.2960" z="176.62500" anchor="ENSHAR_GM"/> <!-- id 2286 -->
             <spot x="104.40256" y="156.43721" z="165.69632" anchor="ENSHAR_HM"/> <!-- id 2287 -->
             <spot x="1742.1217" y="1212.8824" z="211.69537" anchor="ENSHAR_IM"/> <!-- id 2288 -->
-			<!-- Entry -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
+		<!-- Exit -->
             <spot x="587.75305" y="2667.7040" z="182.33176" anchor="ENSHAR_AS"/> <!-- id 2170 -->
             <spot x="1427.6782" y="2369.2650" z="270.75000" anchor="ENSHAR_BS"/> <!-- id 2171 -->
             <spot x="2356.9678" y="1377.9133" z="335.74457" anchor="ENSHAR_CS"/> <!-- id 2172 -->
             <spot x="882.30670" y="1786.6001" z="299.61420" anchor="ENSHAR_DS"/> <!-- id 2173 -->
             <spot x="1841.7975" y="239.72798" z="225.66537" anchor="ENSHAR_ES"/> <!-- id 2174 -->
             <spot x="2726.1506" y="642.21643" z="237.00119" anchor="ENSHAR_FS"/> <!-- id 2175 -->
+		</spawn>
+		<spawn npc_id="702724" handler="RIFT">
             <spot x="2605.2295" y="2582.7222" z="185.35855" anchor="ENSHAR_GS"/> <!-- id 2176 -->
             <spot x="381.94467" y="366.77304" z="191.89494" anchor="ENSHAR_HS"/> <!-- id 2177 -->
             <spot x="1657.1338" y="995.59230" z="192.25000" anchor="ENSHAR_IS"/> <!-- id 2178 -->

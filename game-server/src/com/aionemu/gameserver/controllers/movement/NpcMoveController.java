@@ -314,7 +314,11 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}
 		started.set(false);
-		destination = Destination.TARGET_OBJECT;
+		// temp fix otherwise npcs start moving around to unknown positions TODO: final fix
+		if (owner.getAi2().getState() != AIState.WALKING && owner.getAi2().getState() != AIState.RETURNING
+				&& owner.getAi2().getState() != AIState.FEAR) {
+			destination = Destination.TARGET_OBJECT;
+		}
 		targetDestX = 0;
 		targetDestY = 0;
 		targetDestZ = 0;

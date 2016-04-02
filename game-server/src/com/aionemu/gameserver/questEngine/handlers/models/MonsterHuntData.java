@@ -25,7 +25,7 @@ import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
  * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MonsterHuntData", propOrder = { "monster" })
+@XmlType(name = "MonsterHuntData")
 @XmlSeeAlso({ KillSpawnedData.class, MentorMonsterHuntData.class })
 public class MonsterHuntData extends XMLQuest {
 
@@ -56,6 +56,9 @@ public class MonsterHuntData extends XMLQuest {
 	@XmlAttribute(name = "start_dist_npc_id")
 	protected int startDistanceNpc;
 
+	@XmlAttribute(name = "end_reward")
+	protected boolean reward;
+	
 	@XmlAttribute(name = "end_reward_next_step")
 	protected boolean rewardNextStep;
 
@@ -66,60 +69,23 @@ public class MonsterHuntData extends XMLQuest {
 
 		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
 			for (QuestKill qk : questTemplate.getQuestKill()) {
-				Monster mn = new Monster();
+				Monster m = new Monster();
 				if (qk.getKillCount() > 0)
-					mn.setEndVar(qk.getKillCount());
+					m.setEndVar(qk.getKillCount());
 				if (qk.getNpcIds() != null)
-					mn.addNpcIds(qk.getNpcIds());
+					m.addNpcIds(qk.getNpcIds());
 				if (qk.getVar() >= 0)
-					mn.setVar(qk.getVar());
+					m.setVar(qk.getVar());
 				if (qk.getQuestStep() >= 0)
-					mn.setStep(qk.getQuestStep()); // Quest step
+					m.setStep(qk.getQuestStep());
 				if (qk.getSequenceNumber() >= 0)
-					mn.setVar(qk.getSequenceNumber());
-				// if monster != null then try to add into mn all values
-				if (monster != null) {
-					for (Monster m : monster) {
-						// if monster with the same var and step is present, the values from quest template will be overrided (excluding npcs who will be merged)
-						if (m.getVar() == mn.getVar() && m.getStep().equals(mn.getStep())) {
-							if (m.getStartVar() != null)
-								mn.setStartVar(m.getStartVar());
-							if (m.getEndVar() > 0)
-								mn.setEndVar(m.getEndVar());
-							if (m.getRewardVar())
-								mn.setRewardVar(m.getRewardVar());
-							if (m.getNpcIds() != null)
-								mn.addNpcIds(m.getNpcIds());
-							if (m.getNpcSequence() != null)
-								mn.setNpcSequence(m.getNpcSequence());
-							if (m.getSpawnerObject() > 0)
-								mn.setSpawnerObject(m.getSpawnerObject());
-						}
-					}
-				}
-				monsterNpcs.put(mn, new HashSet<>(mn.getNpcIds()));
-			}
-		} else if (monster != null) {
-			for (Monster m : monster) {
+					m.setVar(qk.getSequenceNumber());
 				monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
 			}
 		}
 
-		/**
-		 * for (Monster m : monster) { if (CustomConfig.QUESTDATA_MONSTER_KILLS) { // if sequence numbers specified use it if (m.getNpcSequence() != null
-		 * && questTemplate.getQuestKill() != null) { QuestKill killNpcs = null; for (int index = 0; index < questTemplate.getQuestKill().size(); index++)
-		 * { if (questTemplate.getQuestKill().get(index).getSequenceNumber() == m.getNpcSequence()) { killNpcs = questTemplate.getQuestKill().get(index);
-		 * break; } } if (killNpcs != null) monsterNpcs.put(m, killNpcs.getNpcIds()); } // if no sequence was specified, check all npc ids to match quest
-		 * data else if (m.getNpcSequence() == null && questTemplate.getQuestKill() != null) { Set<Integer> npcSet = new HashSet<Integer>(m.getNpcIds());
-		 * QuestKill matchedKillNpcs = null; int maxMatchCount = 0; for (int index = 0; index < questTemplate.getQuestKill().size(); index++) { QuestKill
-		 * killNpcs = questTemplate.getQuestKill().get(index); int matchCount = 0; for (int npcId : killNpcs.getNpcIds()) { if (!npcSet.contains(npcId))
-		 * continue; matchCount++; } if (matchCount > maxMatchCount) { maxMatchCount = matchCount; matchedKillNpcs = killNpcs; } } if (matchedKillNpcs !=
-		 * null) { // add npcs not present in quest data (weird!) npcSet.addAll(matchedKillNpcs.getNpcIds()); monsterNpcs.put(m, npcSet); } } else {
-		 * monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } } else { monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds())); } }
-		 **/
-
 		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld, startZone,
-			startDistanceNpc, rewardNextStep);
+			startDistanceNpc, reward, rewardNextStep);
 		questEngine.addQuestHandler(template);
 	}
 

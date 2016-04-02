@@ -7,6 +7,8 @@
 			<spot x="839.3349" y="1210.7465" z="280.3825" h="83" anchor="GELKMAROS_BM"/>	<!-- id 2271 -->
 			<spot x="2230.0229" y="1744.9548" z="407.0672" h="113" anchor="GELKMAROS_CM"/>	<!-- id 2272 -->
 			<spot x="492.0994" y="1897.7318" z="388.9559" h="73" anchor="GELKMAROS_DM"/>	<!-- id 2273 -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="162.2118" y="1491.9402" z="368.6624" h="30" anchor="GELKMAROS_AS"/>	<!-- id 2150 -->
 			<spot x="2070.5920" y="1728.8322" z="390.4826" h="60" anchor="GELKMAROS_BS"/>	<!-- id 2151 -->
 			<spot x="581.8158" y="1559.0963" z="282.3767" h="60" anchor="GELKMAROS_CS"/>	<!-- id 2152 -->

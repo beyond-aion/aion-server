@@ -20,8 +20,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +61,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
+import javolution.util.FastTable;
+
 /**
  * @author Avol, ATracer, kosyachok
  * @modified cura
@@ -77,15 +77,13 @@ public class Equipment {
 	private Set<Long> markedFreeSlots = new HashSet<>();
 	private PersistentState persistentState = PersistentState.UPDATED;
 
-	//@formatter:off
-	private static final long[] ARMOR_SLOTS = new long[] { 
+	private static final long[] ARMOR_SLOTS = new long[] { // @formatter:off
 		ItemSlot.BOOTS.getSlotIdMask(), 
 		ItemSlot.GLOVES.getSlotIdMask(),
 		ItemSlot.PANTS.getSlotIdMask(), 
 		ItemSlot.SHOULDER.getSlotIdMask(), 
 		ItemSlot.TORSO.getSlotIdMask()
-	};
-	//@formatter:on
+	}; // @formatter:on
 
 	public Equipment(Player player) {
 		this.owner = player;
@@ -642,6 +640,7 @@ public class Equipment {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
 				equippedItems.add(item);
 		}
+
 		return equippedItems;
 	}
 

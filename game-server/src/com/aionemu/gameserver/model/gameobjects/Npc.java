@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.ai2.AITemplate;
@@ -39,7 +40,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
-import com.google.common.base.Preconditions;
 
 /**
  * This class is a base class for all in-game NPCs, what includes: monsters and npcs that player can talk to (aka Citizens)
@@ -61,7 +61,7 @@ public class Npc extends Creature {
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
-		Preconditions.checkNotNull(objectTemplate, "Npcs should be based on template");
+		Objects.requireNonNull(objectTemplate, "Npcs should be based on template");
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
 		skillList = new NpcSkillList(this);
@@ -376,7 +376,7 @@ public class Npc extends Creature {
 		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasBuyList();
 	}
 
-	public boolean canSellTo() {
+	public boolean canSell() {
 		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasSellList();
 	}
 

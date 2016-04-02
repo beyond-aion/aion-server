@@ -2,14 +2,16 @@
 <spawns>
 	<spawn_map map_id="210050000">
 		<!-- Rift -->
-		<spawn npc_id="700138" handler="RIFT">
+		<spawn npc_id="700137" handler="RIFT">
 			<spot x="2269.9521" y="1440.8226" z="202.2073" h="30" anchor="INGGISON_AM"/>	<!-- id 2150 -->
-			<spot x="854.4329" y="1286.3925" z="428.9761" h="60" anchor="INGGISON_BM"/>		<!-- id 2151 -->
+			<spot x="854.4329" y="1286.3925" z="428.9761" h="60" anchor="INGGISON_BM"/>	<!-- id 2151 -->
 			<spot x="2025.0779" y="2086.3252" z="298.7062" h="30" anchor="INGGISON_CM"/>	<!-- id 2152 -->
 			<spot x="561.6146" y="1867.4319" z="334.2267" h="103" anchor="INGGISON_DM"/>	<!-- id 2153 -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="1141.3752" y="2131.6394" z="344.7710" h="66" anchor="INGGISON_AS"/>	<!-- id 2270 -->
 			<spot x="2820.2305" y="1994.9586" z="191.8326" h="60" anchor="INGGISON_BS"/>	<!-- id 2271 -->
-			<spot x="558.4757" y="846.5166" z="456.7668" h="30" anchor="INGGISON_CS"/>		<!-- id 2272 -->
+			<spot x="558.4757" y="846.5166" z="456.7668" h="30" anchor="INGGISON_CS"/>	<!-- id 2272 -->
 			<spot x="2865.1550" y="1328.9463" z="359.1948" h="110" anchor="INGGISON_DS"/>	<!-- id 2273 -->
 		</spawn>
 		<!-- INGGISON_AM -->

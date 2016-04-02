@@ -106,12 +106,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 						return sendQuestDialog(env, 1352);
 					}
 				}
-				int reward = 0;
-				if(player.getPlayerClass() != PlayerClass.RIDER) { // Reward for other classes
-					reward = 1;
-				}
-				
-				return sendQuestEndDialog(env, reward);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

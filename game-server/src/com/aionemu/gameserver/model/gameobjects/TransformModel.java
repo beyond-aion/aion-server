@@ -16,7 +16,6 @@ public class TransformModel {
 	private Creature owner;
 
 	private int modelId;
-	private int originalModelId;
 	private int eventModelId;
 	private TransformType originalType;
 	private TransformType transformType;
@@ -35,13 +34,7 @@ public class TransformModel {
 	protected int res6;
 
 	public TransformModel(Creature creature) {
-		if (creature instanceof Player) {
-			this.originalType = TransformType.PC;
-			this.originalModelId = 0;
-		} else {
-			this.originalType = TransformType.NONE;
-			this.originalModelId = creature.getObjectTemplate().getTemplateId();
-		}
+		this.originalType = creature instanceof Player ? TransformType.PC : TransformType.NONE;
 		this.transformType = TransformType.NONE;
 		this.owner = creature;
 	}
@@ -65,8 +58,8 @@ public class TransformModel {
 	 * @param res6
 	 */
 	public void apply(int modelId, TransformType type, int panelId, int banUseSkills, int banMovement, int res1, int res2, int res3, int res5, int res6) {
-		// reset
-		if (modelId == 0 || modelId == originalModelId) {
+		int originalModelId = owner.getObjectTemplate().getTemplateId();
+		if (modelId == 0 || modelId == originalModelId) { // reset
 			this.modelId = originalModelId;
 			this.transformType = originalType;
 			this.panelId = 0;
@@ -78,9 +71,7 @@ public class TransformModel {
 			this.res5 = 0;
 			this.res6 = 0;
 			this.isActive = false;
-		}
-		// set new
-		else {
+		} else { // set new
 			this.modelId = modelId;
 			this.transformType = type;
 			this.panelId = panelId;
@@ -130,7 +121,7 @@ public class TransformModel {
 		if (eventModelId > 0)
 			return eventModelId;
 		else
-			return originalModelId;
+			return owner.getObjectTemplate().getTemplateId();
 	}
 
 	/**

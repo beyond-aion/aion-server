@@ -39,12 +39,13 @@ public class KillInWorld extends QuestHandler {
 	private final int minRank;
 	private final int levelDiff;
 	private final int invasionWorldId;
-	private final int startDialog;
+	private final int startDialogId;
 	private final int startDistanceNpc;
+	private final int endDialogId;
 	private final boolean isDataDriven;
 
 	public KillInWorld(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<Integer> worldIds, int killAmount, int minRank,
-		int levelDiff, int invasionWorld, int startDialog, int startDistanceNpc) {
+		int levelDiff, int invasionWorld, int startDialogId, int startDistanceNpc, int endDialogId) {
 		super(questId);
 		if (startNpcIds != null) {
 			this.startNpcs.addAll(startNpcIds);
@@ -62,8 +63,9 @@ public class KillInWorld extends QuestHandler {
 		this.minRank = minRank;
 		this.levelDiff = levelDiff;
 		this.invasionWorldId = invasionWorld;
-		this.startDialog = startDialog;
+		this.startDialogId = startDialogId;
 		this.startDistanceNpc = startDistanceNpc;
+		this.endDialogId = endDialogId;
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
@@ -112,7 +114,7 @@ public class KillInWorld extends QuestHandler {
 			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
-						return sendQuestDialog(env, startDialog != 0 ? startDialog : isDataDriven ? 4762 : 1011);
+						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					}
 					case QUEST_ACCEPT_1: {
 						return sendQuestStartDialog(env);
@@ -124,8 +126,9 @@ public class KillInWorld extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcs.contains(targetId)) {
-				if (isDataDriven && dialog == DialogAction.USE_OBJECT)
-					return sendQuestDialog(env, 10002);
+				if (dialog == DialogAction.QUEST_SELECT) {
+					return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
+				}
 				return sendQuestEndDialog(env);
 			}
 		}

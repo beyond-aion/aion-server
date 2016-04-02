@@ -3,13 +3,15 @@
 	<spawn_map map_id="220020000">
 		<!-- Rift -->
 		<spawn npc_id="700137" handler="RIFT">
-			<spot x="450" y="2350" z="439" anchor="MORHEIM_AM"/>				<!-- id 2220 -->
-			<spot x="750" y="920" z="329.25" anchor="MORHEIM_BM"/>				<!-- id 2221 -->
-			<spot x="250" y="500" z="436.25" anchor="MORHEIM_CM"/>				<!-- id 2222 -->
-			<spot x="1650" y="1400" z="124" anchor="MORHEIM_DM"/>				<!-- id 2223 -->
+			<spot x="450" y="2350" z="439" anchor="MORHEIM_AM"/>			<!-- id 2220 -->
+			<spot x="750" y="920" z="329.25" anchor="MORHEIM_BM"/>			<!-- id 2221 -->
+			<spot x="250" y="500" z="436.25" anchor="MORHEIM_CM"/>			<!-- id 2222 -->
+			<spot x="1650" y="1400" z="124" anchor="MORHEIM_DM"/>			<!-- id 2223 -->
 			<spot x="1624.59" y="1119.29" z="187.13" anchor="MORHEIM_EM"/>		<!-- id 2224 -->
-			<spot x="2400" y="2300" z="108" anchor="MORHEIM_FM"/>				<!-- id 2225 -->
+			<spot x="2400" y="2300" z="108" anchor="MORHEIM_FM"/>			<!-- id 2225 -->
 			<spot x="3020.912" y="883.3438" z="362.875" anchor="MORHEIM_GM"/>	<!-- id 2226 -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="745.42" y="1872.32" z="364.746" anchor="MORHEIM_AS"/>		<!-- id 2120 -->
 			<spot x="1364.66" y="1334.97" z="238.177" anchor="MORHEIM_BS"/>		<!-- id 2121 -->
 			<spot x="617.477" y="209.07" z="518.337" anchor="MORHEIM_CS"/>		<!-- id 2122 -->

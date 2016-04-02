@@ -132,15 +132,20 @@ public class CM_USE_ITEM extends AionClientPacket {
 			return; // don't remove item
 
 		ItemActions itemActions = item.getItemTemplate().getActions();
-		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
-
-		if (itemActions == null) {
+		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
 			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
 			return;
 		}
+		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
+		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
+			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
+			return;
+		}
+
 		// for multi-return scrolls
 		item.setIndexReturn(indexReturn);
 
+		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
 			// check if the item can be used before placing it on the cooldown list.
 			if (targetHouseObject != null && itemAction instanceof IHouseObjectDyeAction) {
@@ -151,18 +156,10 @@ public class CM_USE_ITEM extends AionClientPacket {
 				actions.add(itemAction);
 		}
 
-		if (actions.size() == 0) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_IS_NOT_USABLE());
-			return;
-		}
+		if (actions.isEmpty())
+			return; // notification should be handled in canAct
 
 		// Store Item CD in server Player variable.
-		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
-		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
-			return;
-		}
-
 		int useDelay = player.getItemCooldown(item.getItemTemplate());
 		if (useDelay > 0) {
 			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);

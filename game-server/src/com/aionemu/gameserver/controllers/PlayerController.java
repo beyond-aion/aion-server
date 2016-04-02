@@ -8,6 +8,9 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +43,6 @@ import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -50,14 +52,13 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
-import com.aionemu.gameserver.model.team2.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_HOUSE_OBJECT;
@@ -94,7 +95,6 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -120,9 +120,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * This class is for controlling players.
@@ -354,19 +351,18 @@ public class PlayerController extends CreatureController<Player> {
 		player.setRebirthRevive(getOwner().haveSelfRezEffect());
 		Creature master = lastAttacker.getMaster();
 
-		// High ranked kill announce
-		AbyssRank ar = player.getAbyssRank();
-		if (AbyssService.isOnPvpMap(player) && ar != null) {
-			if (ar.getRank().getId() >= 9)
-				AbyssService.rankedKillAnnounce(player);
-		}
-
 		if (DuelService.getInstance().isDueling(player.getObjectId())) {
 			if (master != null && DuelService.getInstance().isDueling(player.getObjectId(), master.getObjectId())) {
 				DuelService.getInstance().loseDuel(player);
 				player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
-				player.getLifeStats().setCurrentHpPercent(33);
-				player.getLifeStats().setCurrentMpPercent(33);
+				if (player.getLifeStats().getHpPercentage() < 33)
+					player.getLifeStats().setCurrentHpPercent(33);
+				if (player.getLifeStats().getMpPercentage() < 33)
+					player.getLifeStats().setCurrentMpPercent(33);
+				if (master.getLifeStats().getHpPercentage() < 33)
+					master.getLifeStats().setCurrentHpPercent(33);
+				if (master.getLifeStats().getMpPercentage() < 33)
+					master.getLifeStats().setCurrentMpPercent(33);
 				return;
 			}
 			DuelService.getInstance().loseDuel(player);
@@ -415,12 +411,6 @@ public class PlayerController extends CreatureController<Player> {
 		sendDieFromCreature(lastAttacker, !player.hasResurrectBase());
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
-
-		if (player.isInGroup2()) {
-			player.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
-		} else if (player.isInAlliance2()) {
-			player.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(player.getName()), new ExcludePlayerFilter(player));
-		}
 	}
 
 	public void sendDie() {
@@ -604,6 +594,7 @@ public class PlayerController extends CreatureController<Player> {
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
+	@Override
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
 		if (getOwner().getCastingSkill() == null) {
 			return;

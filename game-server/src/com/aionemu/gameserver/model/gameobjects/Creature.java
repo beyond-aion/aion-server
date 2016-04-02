@@ -416,7 +416,7 @@ public abstract class Creature extends VisibleObject {
 		this.transformModel = model;
 	}
 
-	public void setTransformed(boolean value) {
+	public void endTransformation() {
 		this.getTransformModel().apply(0);
 	}
 

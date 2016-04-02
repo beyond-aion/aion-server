@@ -2,7 +2,7 @@
 <spawns>
 	<spawn_map map_id="210020000">
 		<!-- Rift -->
-		<spawn npc_id="700138" handler="RIFT">
+		<spawn npc_id="700137" handler="RIFT">
 			<spot x="224.042" y="2934.95" z="155.5" anchor="ELTNEN_AM"/>	<!-- id 2120 -->
 			<spot x="777.936" y="1947.14" z="290.717" anchor="ELTNEN_BM"/>	<!-- id 2121 -->
 			<spot x="1629.42" y="1762.11" z="345.332" anchor="ELTNEN_CM"/>	<!-- id 2122 -->
@@ -10,6 +10,8 @@
 			<spot x="1532.21" y="491.778" z="361.095" anchor="ELTNEN_EM"/>	<!-- id 2124 -->
 			<spot x="2213.28" y="2604.72" z="270.42" anchor="ELTNEN_FM"/>	<!-- id 2125 -->
 			<spot x="2177.84" y="556.885" z="434.354" anchor="ELTNEN_GM"/>	<!-- id 2126 -->
+		</spawn>
+		<spawn npc_id="700138" handler="RIFT">
 			<spot x="719.325" y="2777.03" z="259.084" anchor="ELTNEN_AS"/>	<!-- id 2220 -->
 			<spot x="445.553" y="1292.31" z="283.047" anchor="ELTNEN_BS"/>	<!-- id 2221 -->
 			<spot x="1470.21" y="2446.05" z="288.589" anchor="ELTNEN_CS"/>	<!-- id 2222 -->

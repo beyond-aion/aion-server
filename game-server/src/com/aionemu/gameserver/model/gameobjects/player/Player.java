@@ -233,7 +233,7 @@ public class Player extends Creature {
 	private List<ActionObserver> rideObservers;
 	private SerialKiller skList;
 
-	byte buildingOwnerStates = PlayerHouseOwnerFlags.BUY_STUDIO_ALLOWED.getId();
+	byte houseOwnerStates = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
@@ -2031,16 +2031,16 @@ public class Player extends Creature {
 		this.houseRegistry = houseRegistry;
 	}
 
-	public byte getBuildingOwnerStates() {
-		return buildingOwnerStates;
+	public byte getHouseOwnerStates() {
+		return houseOwnerStates;
 	}
 
-	public boolean isBuildingInState(PlayerHouseOwnerFlags state) {
-		return (buildingOwnerStates & state.getId()) != 0;
+	public boolean hasHouseOwnerState(HouseOwnerState state) {
+		return (houseOwnerStates & state.getId()) == state.getId();
 	}
 
-	public void setBuildingOwnerState(byte state) {
-		buildingOwnerStates |= state;
+	public void setHouseOwnerState(byte state) {
+		houseOwnerStates |= state;
 		House house = getActiveHouse();
 		if (house != null) {
 			house.fixBuildingStates();
@@ -2048,7 +2048,7 @@ public class Player extends Creature {
 	}
 
 	public void unsetBuildingOwnerState(byte state) {
-		buildingOwnerStates &= ~state;
+		houseOwnerStates &= ~state;
 		House house = getActiveHouse();
 		if (house != null) {
 			house.fixBuildingStates();

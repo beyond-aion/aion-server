@@ -19,7 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
+import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -318,7 +318,7 @@ public class DialogService {
 					RelinquishCraftStatus.relinquishMasterStatus(player, npc);
 					break;
 				case HOUSING_PERSONAL_AUCTION: // housing auction
-					if ((player.getBuildingOwnerStates() & PlayerHouseOwnerFlags.BIDDING_ALLOWED.getId()) == 0) {
+					if (!player.hasHouseOwnerState(HouseOwnerState.BIDDING_ALLOWED)) {
 						if (player.getRace() == Race.ELYOS)
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(18802));
 						else

@@ -57,7 +57,7 @@ public class Wishid extends ConsoleCommand {
 		if (!AdminService.getInstance().canOperate(admin, player, itemId, "command ///wishid"))
 			return;
 
-		long count = ItemService.addItem(player, itemId, itemCount);
+		long count = ItemService.addItem(player, itemId, itemCount, true);
 
 		if (count == 0) {
 			if (admin != player) {
