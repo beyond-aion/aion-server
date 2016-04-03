@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
@@ -61,8 +62,7 @@ public class _47006AmplifiersWithIssues extends QuestHandler {
 					for (Player member : group.getMembers()) {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
 							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().scheduleRespawn();
-							npc.getController().onDelete();
+							NpcActions.delete(npc, true);
 							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 217175, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 							return true;
 						} else

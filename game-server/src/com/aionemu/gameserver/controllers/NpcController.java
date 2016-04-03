@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import java.util.Collection;
 import java.util.Set;
-import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -140,16 +138,13 @@ public class NpcController extends CreatureController<Npc> {
 			log.warn("Npc onDie() Exception:", e);
 		} finally { // always make sure npc is scheduled to respawn
 			if (!deleteImmediately) {
-				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
+				RespawnService.scheduleDecayTask(owner);
 			} else if (shouldReward && owner.getAi2().ask(AIQuestion.SHOULD_LOOT)) {
 				log.warn("AI " + owner.getAi2().getName() + " has SHOULD_REWARD && SHOULD_LOOT but not SHOULD_DECAY, rewards will be lost!");
 			}
 			// TODO: refactor this: used for rift AI, better to use getDecayTime for AI
-			if (shouldRespawn && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
-				Future<?> task = scheduleRespawn();
-				if (task != null)
-					addTask(TaskId.RESPAWN, task);
-			}
+			if (shouldRespawn && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner))
+				RespawnService.scheduleRespawnTask(getOwner());
 		}
 		super.onDie(lastAttacker);
 
@@ -166,7 +161,7 @@ public class NpcController extends CreatureController<Npc> {
 				}
 				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
 				if ((drops == null || drops.size() == 0) && !deleteImmediately) // without drop it's 2 seconds, re-schedule it
-					addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY));
+					RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY);
 			}
 		}
 		if (deleteImmediately)
@@ -321,16 +316,6 @@ public class NpcController extends CreatureController<Npc> {
 		if (zoneInstance.getAreaTemplate().getZoneName() == null) {
 			log.error("No name found for a Zone in the map " + zoneInstance.getAreaTemplate().getWorldId());
 		}
-	}
-
-	/**
-	 * Schedule respawn of npc In instances - no npc respawn
-	 */
-	public Future<?> scheduleRespawn() {
-		if (!getOwner().getSpawn().isNoRespawn()) {
-			return RespawnService.scheduleRespawnTask(getOwner());
-		}
-		return null;
 	}
 
 	public final float getAttackDistanceToTarget() {

@@ -1,6 +1,7 @@
 package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -249,8 +250,7 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 		final Integer object = player.getObjectId();
 		final HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(object);
 		if (npc != null && npc.isSpawned()) {
-			npc.getController().scheduleRespawn();
-			npc.getController().onDelete();
+			NpcActions.delete(npc, true);
 			if (group == null) {
 				return;
 			}

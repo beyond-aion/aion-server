@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.ai2.handler;
 
+import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -61,8 +62,8 @@ public class FollowEventHandler {
 		if (npcAI.setStateIfNot(AIState.IDLE)) {
 			npcAI.getOwner().setTarget(null);
 			npcAI.getOwner().getMoveController().abortMove();
-			npcAI.getOwner().getController().scheduleRespawn();
-			npcAI.getOwner().getController().onDelete();
+			AI2Actions.scheduleRespawn(npcAI);
+			AI2Actions.deleteOwner(npcAI);
 		}
 	}
 }

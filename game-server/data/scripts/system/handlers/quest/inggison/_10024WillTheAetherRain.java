@@ -1,6 +1,7 @@
 package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -149,8 +150,7 @@ public class _10024WillTheAetherRain extends QuestHandler {
 						}
 						case SETPRO10: {
 							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().scheduleRespawn();
-							npc.getController().onDelete();
+							NpcActions.delete(npc, true);
 							return defaultCloseDialog(env, 9, 10);
 						}
 					}

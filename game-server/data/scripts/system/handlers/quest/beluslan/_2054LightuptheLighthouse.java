@@ -1,6 +1,7 @@
 package quest.beluslan;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -107,8 +108,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 				case SETPRO4:
 					if (var == 3) {
 						QuestService.addNewSpawn(220040000, player.getInstanceId(), 213912, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-						npc.getController().scheduleRespawn();
-						npc.getController().onDelete();
+						NpcActions.delete(npc, true);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 						return true;
 					}
@@ -125,8 +125,7 @@ public class _2054LightuptheLighthouse extends QuestHandler {
 							return true;
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
-						npc.getController().scheduleRespawn();
-						npc.getController().onDelete();
+						NpcActions.delete(npc, true);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 					}

@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -183,8 +182,7 @@ public class DropService {
 				return;
 			}
 
-			Future<?> decayTask = RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
-			npc.getController().addTask(TaskId.DECAY, decayTask);
+			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
 			if (lootGrouRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getPlayersObjectId().size() == 1) {
