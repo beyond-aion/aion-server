@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.ai2;
 
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
@@ -16,6 +17,11 @@ public abstract class AITemplate extends AbstractAI {
 	@Override
 	public boolean canThink() {
 		return true;
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return false;
 	}
 
 	@Override
@@ -85,11 +91,11 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
+	protected void handleBeforeSpawned() {
 	}
 
 	@Override
-	protected void handleRespawned() {
+	protected void handleSpawned() {
 	}
 
 	@Override
@@ -134,11 +140,6 @@ public abstract class AITemplate extends AbstractAI {
 
 	@Override
 	protected void handleDropRegistered() {
-	}
-
-	@Override
-	public boolean isMayShout() {
-		return false;
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -326,14 +327,14 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			case 218611:
 				if (canUseTank()) {
 					SkillEngine.getInstance().getSkill(npc, 20027, 60, player).useNoAnimationSkill();
-					NpcActions.scheduleRespawn(npc);
+					RespawnService.scheduleRespawnTask(npc);
 				}
 				despawnNpc(npc);
 				break;
 			case 218610:
 				if (canUseTank()) {
 					SkillEngine.getInstance().getSkill(npc, 19350, 60, player).useNoAnimationSkill();
-					NpcActions.scheduleRespawn(npc);
+					RespawnService.scheduleRespawnTask(npc);
 				}
 				despawnNpc(npc);
 				break;

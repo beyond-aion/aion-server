@@ -28,7 +28,7 @@ public class DiedEventHandler {
 			AI2Logger.info(npcAI, "onSimpleDie");
 		}
 
-		if (npcAI.poll(AIQuestion.CAN_SHOUT))
+		if (npcAI.ask(AIQuestion.CAN_SHOUT))
 			ShoutEventHandler.onDied(npcAI);
 
 		npcAI.setStateIfNot(AIState.DIED);

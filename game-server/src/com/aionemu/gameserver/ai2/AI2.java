@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.ai2;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -34,9 +33,13 @@ public interface AI2 {
 
 	String getName();
 
-	boolean poll(AIQuestion question);
-
-	AIAnswer ask(AIQuestion question);
+	/**
+	 * Ask AI instance for the answer to the specified question.
+	 * 
+	 * @param question
+	 * @return The answer, true or false.
+	 */
+	boolean ask(AIQuestion question);
 
 	boolean isLogging();
 

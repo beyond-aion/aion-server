@@ -63,7 +63,7 @@ public class NpcShoutsService {
 					if (npcObj != null && npcObj instanceof Npc) {
 						Npc npc2 = (Npc) npcObj;
 						// check if AI overrides
-						if (!npc2.getAi2().poll(AIQuestion.CAN_SHOUT))
+						if (!npc2.getAi2().ask(AIQuestion.CAN_SHOUT))
 							return;
 						int randomShout = Rnd.get(shouts.size());
 						NpcShout shout = shouts.get(randomShout);

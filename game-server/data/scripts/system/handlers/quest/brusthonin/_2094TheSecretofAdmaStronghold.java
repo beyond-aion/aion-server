@@ -1,5 +1,6 @@
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -121,8 +122,7 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 				case USE_OBJECT:
 					if (var == 6) {
 						QuestService.addNewSpawn(220050000, player.getInstanceId(), 205191, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-						npc.getController().scheduleRespawn();
-						npc.getController().onDelete();
+						NpcActions.delete(npc, true);
 						return true;
 					}
 			}

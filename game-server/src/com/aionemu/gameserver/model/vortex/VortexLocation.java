@@ -165,10 +165,6 @@ public class VortexLocation implements ZoneHandler {
 		} else if (creature instanceof Player) {
 			Player player = (Player) creature;
 
-			// if (player.isGM()) {
-			// return;
-			// }
-
 			if (!players.containsKey(player.getObjectId())) {
 				players.put(player.getObjectId(), player);
 
@@ -193,11 +189,7 @@ public class VortexLocation implements ZoneHandler {
 				kisks.remove(creature.getObjectId());
 			}
 			if (creature instanceof Player) {
-				final Player player = (Player) creature;
-
-				// if (player.isGM()) {
-				// return;
-				// }
+				Player player = (Player) creature;
 
 				players.remove(player.getObjectId());
 

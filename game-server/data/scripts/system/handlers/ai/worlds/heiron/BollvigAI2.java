@@ -38,15 +38,6 @@ public class BollvigAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected void handleRespawned() {
-		addPercent();
-		super.handleRespawned();
-		Npc npc = getPosition().getWorldMapInstance().getNpc(204655);
-		if (npc != null)
-			npc.getController().onDelete();
-	}
-
-	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());

@@ -88,7 +88,7 @@ public class PlayerLeaveWorldService {
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogOut(player);
-		SerialKillerService.getInstance().onLogout(player);
+		SerialKillerService.getInstance().onLeaveMap(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
