@@ -244,11 +244,11 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@AIListenable(enabled = false, type = AIEventType.DEACTIVATE)
 	protected abstract void handleDeactivate();
 
+	@AIListenable(enabled = false, type = AIEventType.BEFORE_SPAWNED)
+	protected abstract void handleBeforeSpawned();
+
 	@AIListenable(enabled = false, type = AIEventType.SPAWNED)
 	protected abstract void handleSpawned();
-
-	@AIListenable(enabled = false, type = AIEventType.RESPAWNED)
-	protected abstract void handleRespawned();
 
 	@AIListenable(enabled = false, type = AIEventType.DESPAWNED)
 	protected abstract void handleDespawned();
@@ -389,8 +389,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 			case SPAWNED:
 				handleSpawned();
 				break;
-			case RESPAWNED:
-				handleRespawned();
+			case BEFORE_SPAWNED:
+				handleBeforeSpawned();
 				break;
 			case DESPAWNED:
 				handleDespawned();
@@ -520,9 +520,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 			case DESTINATION_REACHED:
 				return isDestinationReached();
 			case CAN_SPAWN_ON_DAYTIME_CHANGE:
-				return isCanSpawnOnDaytimeChange();
-			case CAN_SHOUT:
-				return isMayShout();
+				return currentState == AIState.DESPAWNED || currentState == AIState.CREATED;
 		}
 		return false;
 	}
@@ -547,8 +545,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		AIState state = currentState;
 		switch (state) {
 			case FEAR:
-				return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(), owner
-					.getMoveController().getTargetZ2(), 1);
+				return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(),
+					owner.getMoveController().getTargetZ2(), 1);
 			case FIGHT:
 				return SimpleAttackManager.isTargetInAttackRange((Npc) owner);
 			case RETURNING:
@@ -561,12 +559,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		}
 		return true;
 	}
-
-	protected boolean isCanSpawnOnDaytimeChange() {
-		return currentState == AIState.DESPAWNED || currentState == AIState.CREATED;
-	}
-
-	public abstract boolean isMayShout();
 
 	public abstract AttackIntention chooseAttackIntention();
 

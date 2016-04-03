@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +27,8 @@ import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.account.Account;
@@ -39,6 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
+import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.Emotion;
@@ -67,6 +68,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_COOLDOWN;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
@@ -78,7 +80,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
@@ -125,6 +126,8 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -278,6 +281,9 @@ public final class PlayerEnterWorldService {
 
 		World.getInstance().storeObject(player);
 
+		// change players position if he isn't allowed to spawn in the current zone
+		validateLoginZone(player);
+
 		// if player skipped some levels offline, learn missing skills and stuff
 		player.getController().onLevelChange(DAOManager.getDAO(PlayerDAO.class).getOldCharacterLevel(player.getObjectId()), player.getLevel());
 
@@ -357,11 +363,6 @@ public final class PlayerEnterWorldService {
 
 		KiskService.getInstance().onLogin(player);
 		TeleportService2.sendSetBindPoint(player);
-
-		// Without player spawn initialization can't access to his mapRegion for chk below
-		World.getInstance().preSpawn(player);
-		player.getController().validateLoginZone();
-		VortexService.getInstance().validateLoginZone(player);
 
 		AhserionRaid.getInstance().onPlayerLogin(player);
 
@@ -517,6 +518,25 @@ public final class PlayerEnterWorldService {
 		// try to send bonus pack (if mailbox was full on lvlup)
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
+	}
+
+	private static void validateLoginZone(Player player) {
+		World.getInstance().spawn(player, false); // player spawn initialization is needed to access his mapRegion for zone validation
+
+		if (!SiegeService.getInstance().validateLoginZone(player)) {
+			BindPointPosition bind = player.getBindPoint();
+			if (bind != null) {
+				World.getInstance().setPosition(player, bind.getMapId(), bind.getX(), bind.getY(), bind.getZ(), bind.getHeading());
+			} else {
+				PlayerInitialData.LocationData start = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
+				World.getInstance().setPosition(player, start.getMapId(), start.getX(), start.getY(), start.getZ(), start.getHeading());
+			}
+		} else {
+			VortexService.getInstance().validateLoginZone(player);
+		}
+
+		if (player.isSpawned()) // only true if position wasn't changed by zone validation
+			World.getInstance().despawn(player);
 	}
 
 	/**

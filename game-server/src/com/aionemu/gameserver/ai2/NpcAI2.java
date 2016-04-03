@@ -11,7 +11,6 @@ import com.aionemu.gameserver.ai2.handler.SpawnEventHandler;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.ai2.poll.NpcAIPolls;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.effect.EffectController;
@@ -112,9 +111,9 @@ public class NpcAI2 extends AITemplate {
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.SPAWNED)
-	protected void handleSpawned() {
-		SpawnEventHandler.onSpawn(this);
+	@AIListenable(type = AIEventType.BEFORE_SPAWNED)
+	protected void handleBeforeSpawned() {
+		SpawnEventHandler.onRespawn(this);
 		if (getSkillList().getUseInSpawnedSkill() != null) {
 			int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
 			int skillLevel = getSkillList().getSkillLevel(skillId);
@@ -124,9 +123,9 @@ public class NpcAI2 extends AITemplate {
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.RESPAWNED)
-	protected void handleRespawned() {
-		SpawnEventHandler.onRespawn(this);
+	@AIListenable(type = AIEventType.SPAWNED)
+	protected void handleSpawned() {
+		SpawnEventHandler.onSpawn(this);
 		if (getSkillList().getUseInSpawnedSkill() != null) {
 			int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
 			int skillLevel = getSkillList().getSkillLevel(skillId);
@@ -170,26 +169,15 @@ public class NpcAI2 extends AITemplate {
 	protected AIAnswer pollInstance(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
-				return NpcAIPolls.shouldDecay(this);
 			case SHOULD_RESPAWN:
-				return NpcAIPolls.shouldRespawn(this);
 			case SHOULD_REWARD:
-				return AIAnswers.POSITIVE;
 			case SHOULD_LOOT:
 				return AIAnswers.POSITIVE;
 			case CAN_SHOUT:
-				return isMayShout() ? AIAnswers.POSITIVE : AIAnswers.NEGATIVE;
+				return AIConfig.SHOUTS_ENABLE && getOwner().mayShout(0) ? AIAnswers.POSITIVE : AIAnswers.NEGATIVE;
 			default:
 				return null;
 		}
-	}
-
-	@Override
-	public boolean isMayShout() {
-		// temp fix, we shouldn't rely on it because of inheritance
-		if (AIConfig.SHOUTS_ENABLE)
-			return getOwner().mayShout(0);
-		return false;
 	}
 
 	@Override

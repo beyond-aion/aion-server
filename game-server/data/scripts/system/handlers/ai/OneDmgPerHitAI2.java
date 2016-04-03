@@ -18,12 +18,6 @@ public class OneDmgPerHitAI2 extends NoActionAI2 {
 	}
 
 	@Override
-	protected void handleRespawned() {
-		super.handleRespawned();
-		disableMissingHits();
-	}
-
-	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return 1;
 	}

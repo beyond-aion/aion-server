@@ -14,6 +14,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
  * @author xTz
+ * @modified Neon
  */
 @AIName("defensive_cannon")
 public class DefensiveCannonAI2 extends ActionItemNpcAI2 {
@@ -22,23 +23,14 @@ public class DefensiveCannonAI2 extends ActionItemNpcAI2 {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-
 		if (canUse.compareAndSet(true, false)) {
-			int morphSkill = getMorphSkill();
-			SkillEngine.getInstance().getSkill(getOwner(), morphSkill >> 8, morphSkill & 0xFF, player).useNoAnimationSkill();
+			switch (getNpcId()) {
+				case 831338:
+				case 831339:
+						SkillEngine.getInstance().getSkill(getOwner(), 20364, 60, player).useNoAnimationSkill(); // Board Artillery Morph
+			}
 			AI2Actions.deleteOwner(this);
 		}
-	}
-
-	private int getMorphSkill() {
-		switch (getNpcId()) {
-			case 831339:
-				return 0x4F8D3C;
-			case 831338:
-				return 0x4F8C3C;
-
-		}
-		return 0;
 	}
 
 	@Override

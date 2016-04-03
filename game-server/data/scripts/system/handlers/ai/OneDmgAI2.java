@@ -18,12 +18,6 @@ public class OneDmgAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected void handleRespawned() {
-		super.handleRespawned();
-		disableMissingHits();
-	}
-
-	@Override
 	public int modifyDamage(Creature creature, int damage) {
 		return 1;
 	}

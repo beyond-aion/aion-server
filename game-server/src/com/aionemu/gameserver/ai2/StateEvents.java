@@ -10,7 +10,7 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
  */
 public enum StateEvents {
 	CREATED_EVENTS(AIEventType.SPAWNED),
-	DESPAWN_EVENTS(AIEventType.RESPAWNED, AIEventType.SPAWNED),
+	DESPAWN_EVENTS(AIEventType.BEFORE_SPAWNED, AIEventType.SPAWNED),
 	DEAD_EVENTS(AIEventType.DESPAWNED, AIEventType.DROP_REGISTERED);
 
 	private EnumSet<AIEventType> events;

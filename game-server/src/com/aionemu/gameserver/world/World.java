@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.world.container.PlayerContainer;
@@ -399,27 +398,30 @@ public class World {
 		WorldMap map = getWorldMap(mapId);
 		if (map == null || map.getWorldMapInstanceById(instanceId) == null)
 			return null;
-		WorldPosition position = new WorldPosition(mapId, x, y, z, heading);
-		position.setMapRegion(map.getWorldMapInstanceById(instanceId).getRegion(x, y, z));
-		return position;
-	}
-
-	public void preSpawn(VisibleObject object) {
-		((Player) object).setState(CreatureState.ACTIVE);
-		object.getPosition().setIsSpawned(true);
-		object.getActiveRegion().getParent().addObject(object);
-		object.getActiveRegion().add(object);
-		object.getController().onAfterSpawn();
+		return new WorldPosition(mapId, x, y, z, heading, map.getWorldMapInstanceById(instanceId).getRegion(x, y, z));
 	}
 
 	/**
-	 * Spawn VisibleObject at current position [use setPosition ]. Object will be visible by others and will see other objects.
+	 * Spawns the object at the current position (use setPosition). Object will be visible by others and will see other objects.
 	 * 
 	 * @param object
 	 * @throws AlreadySpawnedException
 	 *           when object is already spawned.
 	 */
 	public void spawn(VisibleObject object) {
+		spawn(object, true);
+	}
+
+	/**
+	 * Spawns the object at the current position (use setPosition). Object will be visible by others and will see other objects, if updateKnownlist is
+	 * set to true.
+	 * 
+	 * @param object
+	 * @param updateKnownlist
+	 * @throws AlreadySpawnedException
+	 *           when object is already spawned.
+	 */
+	public void spawn(VisibleObject object, boolean updateKnownlist) {
 		if (object == null)
 			return;
 		if (object.getPosition().isSpawned())
@@ -432,7 +434,8 @@ public class World {
 		object.getActiveRegion().add(object);
 		object.getController().onAfterSpawn();
 
-		object.updateKnownlist();
+		if (updateKnownlist)
+			object.updateKnownlist();
 	}
 
 	/**

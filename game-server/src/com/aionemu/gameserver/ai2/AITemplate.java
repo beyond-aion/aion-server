@@ -85,11 +85,11 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
+	protected void handleBeforeSpawned() {
 	}
 
 	@Override
-	protected void handleRespawned() {
+	protected void handleSpawned() {
 	}
 
 	@Override
@@ -134,11 +134,6 @@ public abstract class AITemplate extends AbstractAI {
 
 	@Override
 	protected void handleDropRegistered() {
-	}
-
-	@Override
-	public boolean isMayShout() {
-		return false;
 	}
 
 	@Override
