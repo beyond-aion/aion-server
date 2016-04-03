@@ -210,7 +210,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		if (getOwner() instanceof Npc) {
 			AI2 ai = getOwner().getAi2();
-			if (ai.poll(AIQuestion.CAN_SHOUT)) {
+			if (ai.ask(AIQuestion.CAN_SHOUT)) {
 				if (attacker instanceof Player)
 					ShoutEventHandler.onHelp((NpcAI2) ai, attacker);
 				else
@@ -218,7 +218,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			}
 		} else if (getOwner() instanceof Player && attacker instanceof Npc) {
 			AI2 ai = attacker.getAi2();
-			if (ai.poll(AIQuestion.CAN_SHOUT))
+			if (ai.ask(AIQuestion.CAN_SHOUT))
 				ShoutEventHandler.onAttack((NpcAI2) ai, getOwner());
 		}
 		getOwner().incrementAttackedCount();

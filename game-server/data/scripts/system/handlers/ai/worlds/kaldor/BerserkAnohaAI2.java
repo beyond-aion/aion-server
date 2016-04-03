@@ -2,8 +2,6 @@ package ai.worlds.kaldor;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.TaskId;
@@ -94,13 +92,13 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
 			case SHOULD_RESPAWN:
 			case SHOULD_LOOT:
-				return AIAnswers.NEGATIVE;
+				return false;
 		}
-		return super.pollInstance(question);
+		return super.ask(question);
 	}
 }

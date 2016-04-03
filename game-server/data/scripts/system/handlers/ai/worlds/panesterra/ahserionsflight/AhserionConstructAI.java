@@ -8,8 +8,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -331,18 +329,14 @@ public class AhserionConstructAI extends NpcAI2 {
 	}
 	
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_RESPAWN:
-				return AIAnswers.NEGATIVE;
-			case SHOULD_REWARD:
-				return AIAnswers.POSITIVE;
 			case SHOULD_LOOT:
-				return AIAnswers.NEGATIVE;
+				return false;
 			default:
-				return null;
+				return super.ask(question);
 		}
 	}
 }

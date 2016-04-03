@@ -5,11 +5,12 @@ import com.aionemu.gameserver.ai2.event.AIListenable;
 import com.aionemu.gameserver.ai2.handler.ActivateEventHandler;
 import com.aionemu.gameserver.ai2.handler.CreatureEventHandler;
 import com.aionemu.gameserver.ai2.handler.DiedEventHandler;
+import com.aionemu.gameserver.ai2.handler.FollowEventHandler;
 import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
 import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
 import com.aionemu.gameserver.ai2.handler.SpawnEventHandler;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
+import com.aionemu.gameserver.ai2.manager.SimpleAttackManager;
+import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
@@ -137,7 +138,7 @@ public class NpcAI2 extends AITemplate {
 	@Override
 	@AIListenable(type = AIEventType.DESPAWNED)
 	protected void handleDespawned() {
-		if (poll(AIQuestion.CAN_SHOUT))
+		if (ask(AIQuestion.CAN_SHOUT))
 			ShoutEventHandler.onBeforeDespawn(this);
 		SpawnEventHandler.onDespawn(this);
 	}
@@ -151,7 +152,7 @@ public class NpcAI2 extends AITemplate {
 	@Override
 	@AIListenable(type = AIEventType.MOVE_ARRIVED)
 	protected void handleMoveArrived() {
-		if (!poll(AIQuestion.CAN_SHOUT) || getSpawnTemplate().getWalkerId() == null)
+		if (!ask(AIQuestion.CAN_SHOUT) || getSpawnTemplate().getWalkerId() == null)
 			return;
 		ShoutEventHandler.onReachedWalkPoint(this);
 	}
@@ -160,24 +161,45 @@ public class NpcAI2 extends AITemplate {
 	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
 		super.handleMoveArrived();
-		if (!poll(AIQuestion.CAN_SHOUT))
+		if (!ask(AIQuestion.CAN_SHOUT))
 			return;
 		ShoutEventHandler.onSwitchedTarget(this, creature);
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
+			case DESTINATION_REACHED:
+				return isDestinationReached();
+			case CAN_SHOUT:
+				return AIConfig.SHOUTS_ENABLE && getOwner().mayShout(0);
 			case SHOULD_DECAY:
 			case SHOULD_RESPAWN:
 			case SHOULD_REWARD:
 			case SHOULD_LOOT:
-				return AIAnswers.POSITIVE;
-			case CAN_SHOUT:
-				return AIConfig.SHOUTS_ENABLE && getOwner().mayShout(0) ? AIAnswers.POSITIVE : AIAnswers.NEGATIVE;
+				return true;
 			default:
-				return null;
+				return false;
 		}
+	}
+
+	protected boolean isDestinationReached() {
+		AIState state = getState();
+		switch (state) {
+			case FEAR:
+				return MathUtil.isNearCoordinates(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
+					getOwner().getMoveController().getTargetZ2(), 1);
+			case FIGHT:
+				return SimpleAttackManager.isTargetInAttackRange(getOwner());
+			case RETURNING:
+				SpawnTemplate spawn = getOwner().getSpawn();
+				return MathUtil.isNearCoordinates(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
+			case FOLLOWING:
+				return FollowEventHandler.isInRange(this, getOwner().getTarget());
+			case WALKING:
+				return getSubState() == AISubState.TALK || WalkManager.isArrivedAtPoint(this);
+		}
+		return true;
 	}
 
 	@Override
@@ -200,5 +222,4 @@ public class NpcAI2 extends AITemplate {
 	public void handleCreatureDetected(Creature creature) {
 		
 	}
-
 }

@@ -6,8 +6,6 @@ import ai.ActionItemNpcAI2;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -34,12 +32,12 @@ public class DefensiveCannonAI2 extends ActionItemNpcAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_REWARD:
-				return AIAnswers.NEGATIVE;
+				return false;
 			default:
-				return super.pollInstance(question);
+				return super.ask(question);
 		}
 	}
 }

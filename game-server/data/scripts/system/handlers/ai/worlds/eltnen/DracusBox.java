@@ -59,7 +59,12 @@ public class DracusBox extends OneDmgPerHitAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		return question == AIQuestion.SHOULD_RESPAWN ? AIAnswers.NEGATIVE : super.pollInstance(question);
+	public boolean ask(AIQuestion question) {
+		switch (question) {
+			case SHOULD_RESPAWN:
+				return false;
+			default:
+				return super.ask(question);
+		}
 	}
 }

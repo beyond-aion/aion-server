@@ -30,7 +30,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 		@Override
 		public boolean apply(Creature creature) {
 			creature.getMoveController().moveToDestination();
-			if (creature.getAi2().poll(AIQuestion.DESTINATION_REACHED)) {
+			if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
 				movingCreatures.remove(creature.getObjectId());
 				creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
 				ZoneUpdateService.getInstance().add(creature);

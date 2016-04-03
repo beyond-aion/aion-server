@@ -6,8 +6,6 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -72,17 +70,14 @@ public class TrappedTermaAI2 extends NpcAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_RESPAWN:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_REWARD:
-				return AIAnswers.NEGATIVE;
+				return false;
 			default:
-				return null;
+				return super.ask(question);
 		}
 	}
-
 }

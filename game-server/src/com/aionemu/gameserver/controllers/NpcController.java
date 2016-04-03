@@ -130,9 +130,9 @@ public class NpcController extends CreatureController<Npc> {
 		boolean deleteImmediately = false;
 		boolean shouldRespawn = true;
 		try {
-			deleteImmediately = !owner.getAi2().poll(AIQuestion.SHOULD_DECAY);
-			shouldRespawn = owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN);
-			if (shouldReward = owner.getAi2().poll(AIQuestion.SHOULD_REWARD))
+			deleteImmediately = !owner.getAi2().ask(AIQuestion.SHOULD_DECAY);
+			shouldRespawn = owner.getAi2().ask(AIQuestion.SHOULD_RESPAWN);
+			if (shouldReward = owner.getAi2().ask(AIQuestion.SHOULD_REWARD))
 				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi2().onGeneralEvent(AIEventType.DIED);
@@ -141,7 +141,7 @@ public class NpcController extends CreatureController<Npc> {
 		} finally { // always make sure npc is scheduled to respawn
 			if (!deleteImmediately) {
 				addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
-			} else if (shouldReward && owner.getAi2().poll(AIQuestion.SHOULD_LOOT)) {
+			} else if (shouldReward && owner.getAi2().ask(AIQuestion.SHOULD_LOOT)) {
 				log.warn("AI " + owner.getAi2().getName() + " has SHOULD_REWARD && SHOULD_LOOT but not SHOULD_DECAY, rewards will be lost!");
 			}
 			// TODO: refactor this: used for rift AI, better to use getDecayTime for AI
@@ -234,7 +234,7 @@ public class NpcController extends CreatureController<Npc> {
 						}
 					}
 
-					if (getOwner().getAi2().poll(AIQuestion.SHOULD_LOOT) && attacker.equals(winner)) {
+					if (getOwner().getAi2().ask(AIQuestion.SHOULD_LOOT) && attacker.equals(winner)) {
 						DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 					}
 				}

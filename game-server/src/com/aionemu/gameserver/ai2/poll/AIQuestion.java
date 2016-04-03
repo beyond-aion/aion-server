@@ -6,7 +6,6 @@ package com.aionemu.gameserver.ai2.poll;
 public enum AIQuestion {
 
 	DESTINATION_REACHED,
-	CAN_SPAWN_ON_DAYTIME_CHANGE,
 	SHOULD_DECAY,
 	SHOULD_LOOT,
 	SHOULD_RESPAWN,

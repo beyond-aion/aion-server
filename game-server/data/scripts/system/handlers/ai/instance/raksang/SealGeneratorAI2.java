@@ -5,8 +5,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import ai.AggressiveNpcAI2;
 
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,12 +37,12 @@ public class SealGeneratorAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public AIAnswer ask(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case CAN_RESIST_ABNORMAL:
-				return AIAnswers.POSITIVE;
+				return true;
 			default:
-				return AIAnswers.NEGATIVE;
+				return super.ask(question);
 		}
 	}
 
@@ -52,5 +50,4 @@ public class SealGeneratorAI2 extends AggressiveNpcAI2 {
 	public int modifyDamage(Creature creature, int damage) {
 		return 1;
 	}
-
 }
