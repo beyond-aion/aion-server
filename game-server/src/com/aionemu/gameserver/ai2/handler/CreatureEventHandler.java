@@ -68,7 +68,7 @@ public class CreatureEventHandler {
 
 		boolean isInAggroRange = false;
 
-		if (ai.poll(AIQuestion.CAN_SHOUT)) {
+		if (ai.ask(AIQuestion.CAN_SHOUT)) {
 			int shoutRange = owner.getObjectTemplate().getMinimumShoutRange();
 			double distance = MathUtil.getDistance(owner, creature);
 			if (distance <= shoutRange) {

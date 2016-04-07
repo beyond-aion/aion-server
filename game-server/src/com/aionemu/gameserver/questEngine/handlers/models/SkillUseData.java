@@ -14,16 +14,19 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.SkillUse;
 
 /**
- * @author vlog, modified Bobobear
+ * @author vlog
+ * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SkillUseData")
 public class SkillUseData extends XMLQuest {
 
-	@XmlAttribute(name = "start_npc_id")
-	protected int startNpc;
-	@XmlAttribute(name = "end_npc_id")
-	protected int endNpc;
+	@XmlAttribute(name = "start_npc_ids")
+	protected List<Integer> startNpcIds;
+	
+	@XmlAttribute(name = "end_npc_ids")
+	protected List<Integer> endNpcIds;
+	
 	@XmlElement(name = "skill", required = true)
 	protected List<QuestSkillData> skills;
 
@@ -33,7 +36,7 @@ public class SkillUseData extends XMLQuest {
 		for (QuestSkillData qsd : skills) {
 			questSkills.put(qsd.getSkillIds(), qsd);
 		}
-		SkillUse questTemplate = new SkillUse(id, startNpc, endNpc, questSkills);
+		SkillUse questTemplate = new SkillUse(id, startNpcIds, endNpcIds, questSkills);
 		questEngine.addQuestHandler(questTemplate);
 	}
 }

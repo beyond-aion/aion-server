@@ -1,6 +1,7 @@
 package quest.theobomos;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,8 +45,7 @@ public class _3049BloodMarkstheSpot extends QuestHandler {
 				}
 			} else if (targetId == 730149) {
 				Npc npc = (Npc) env.getVisibleObject();
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 				return giveQuestItem(env, 182208034, 1);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

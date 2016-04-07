@@ -10,52 +10,49 @@ import org.slf4j.LoggerFactory;
  */
 public class WorldPosition {
 
-	public WorldPosition(int mapId) {
-		this.mapId = mapId;
-	}
-
-	public WorldPosition(int mapId, float x, float y, float z, byte h) {
-		this.mapId = mapId;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.heading = h;
-	}
-
-	/**
-	 * Logger
-	 */
 	private static final Logger log = LoggerFactory.getLogger(WorldPosition.class);
 
 	/**
 	 * Map id.
 	 */
 	private final int mapId;
+
 	/**
 	 * Map Region.
 	 */
 	private MapRegion mapRegion;
+
 	/**
-	 * World position x
+	 * World position coordinate
 	 */
-	private float x;
-	/**
-	 * World position y
-	 */
-	private float y;
-	/**
-	 * World position z
-	 */
-	private float z;
+	private float x, y, z;
 
 	/**
 	 * Value from 0 to 120 (120==0 actually)
 	 */
 	private byte heading;
+
 	/**
 	 * indicating if object is spawned or not.
 	 */
 	private boolean isSpawned = false;
+
+	public WorldPosition(int mapId) {
+		this.mapId = mapId;
+	}
+
+	public WorldPosition(int mapId, float x, float y, float z, byte h) {
+		this(mapId, x, y, z, h, null);
+	}
+
+	public WorldPosition(int mapId, float x, float y, float z, byte h, MapRegion mapRegion) {
+		this.mapId = mapId;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.heading = h;
+		this.mapRegion = mapRegion;
+	}
 
 	/**
 	 * Return World map id.

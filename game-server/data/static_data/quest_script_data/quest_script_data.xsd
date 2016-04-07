@@ -425,8 +425,8 @@
 				<xs:sequence>
 					<xs:element name="skill" type="QuestSkillData" minOccurs="1" maxOccurs="unbounded"/>
 				</xs:sequence>
-				<xs:attribute name="start_npc_id" type="xs:int" use="required"/>
-				<xs:attribute name="end_npc_id" type="xs:int" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
+				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

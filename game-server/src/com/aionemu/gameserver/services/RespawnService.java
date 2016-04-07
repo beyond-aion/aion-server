@@ -3,8 +3,10 @@ package com.aionemu.gameserver.services;
 import java.util.Set;
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.DropItem;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -16,6 +18,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer, Source, xTz
+ * @modified Neon
  */
 public class RespawnService {
 
@@ -24,8 +27,8 @@ public class RespawnService {
 	public static final int WITH_DROP_DECAY = 5 * 60 * 1000;
 
 	/**
-	 * @param npc
-	 * @return Future<?>
+	 * Schedules decay (despawn) of the npc with the default delay time. If there is already a decay task, it will be replaced with this one. The task
+	 * can then be accessed via {@link NpcController#getTask(TaskId.DECAY)}
 	 */
 	public static Future<?> scheduleDecayTask(Npc npc) {
 		int decayInterval;
@@ -41,20 +44,38 @@ public class RespawnService {
 		return scheduleDecayTask(npc, decayInterval);
 	}
 
-	public static Future<?> scheduleDecayTask(Npc npc, long decayInterval) {
-		if (decayInterval == 0)
-			decayInterval = IMMEDIATE_DECAY; // always delay, to show death animation
-		return ThreadPoolManager.getInstance().schedule(new DecayTask(npc.getObjectId()), decayInterval);
+	/**
+	 * Schedules decay (despawn) of the object with the specified delay. If the object is a creature type and there is already a decay task registered,
+	 * it will be replaced with this one.
+	 */
+	public static Future<?> scheduleDecayTask(VisibleObject visibleObject, long delay) {
+		if (delay == 0)
+			delay = IMMEDIATE_DECAY; // always delay, to show death animation
+		Future<?> task = ThreadPoolManager.getInstance().schedule(new DecayTask(visibleObject.getObjectId()), delay);
+		if (visibleObject instanceof Creature)
+			((Creature) visibleObject).getController().addTask(TaskId.DECAY, task);
+		return task;
 	}
 
 	/**
+	 * Schedules respawn of the object. Objects without respawn time (like in instances) or without spawn templates will not respawn. If the object is a
+	 * creature type and there is already a respawn task registered, it will be replaced with this one.
+	 * 
 	 * @param visibleObject
+	 * @return The task, if the respawn task was initiated, else null.
 	 */
-	public static final Future<?> scheduleRespawnTask(VisibleObject visibleObject) {
-		final int interval = visibleObject.getSpawn().getRespawnTime();
+	public static Future<?> scheduleRespawnTask(VisibleObject visibleObject) {
 		SpawnTemplate spawnTemplate = visibleObject.getSpawn();
+		if (spawnTemplate == null)
+			return null;
+		int respawnTime = spawnTemplate.getRespawnTime();
+		if (respawnTime == 0)
+			return null;
 		int instanceId = visibleObject.getInstanceId();
-		return ThreadPoolManager.getInstance().schedule(new RespawnTask(spawnTemplate, instanceId), interval * 1000);
+		Future<?> task = ThreadPoolManager.getInstance().schedule(new RespawnTask(spawnTemplate, instanceId), respawnTime * 1000);
+		if (visibleObject instanceof Creature)
+			((Creature) visibleObject).getController().addTask(TaskId.RESPAWN, task);
+		return task;
 	}
 
 	/**
@@ -79,15 +100,15 @@ public class RespawnService {
 
 	private static class DecayTask implements Runnable {
 
-		private final int npcId;
+		private final int objectId;
 
-		DecayTask(int npcId) {
-			this.npcId = npcId;
+		DecayTask(int objectId) {
+			this.objectId = objectId;
 		}
 
 		@Override
 		public void run() {
-			VisibleObject visibleObject = World.getInstance().findVisibleObject(npcId);
+			VisibleObject visibleObject = World.getInstance().findVisibleObject(objectId);
 			if (visibleObject != null) {
 				visibleObject.getController().onDelete();
 			}
@@ -108,8 +129,8 @@ public class RespawnService {
 		@Override
 		public void run() {
 			VisibleObject visibleObject = spawn.getVisibleObject();
-			if (visibleObject != null && visibleObject instanceof Npc) {
-				((Npc) visibleObject).getController().cancelTask(TaskId.RESPAWN);
+			if (visibleObject instanceof Creature) {
+				((Creature) visibleObject).getController().cancelTask(TaskId.RESPAWN);
 			}
 			respawn(spawn, instanceId);
 		}

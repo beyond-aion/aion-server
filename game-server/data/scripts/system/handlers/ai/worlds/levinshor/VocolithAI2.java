@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -82,10 +81,9 @@ public class VocolithAI2 extends GeneralNpcAI2 {
 
 	private void spawnRandomBoss() {
 		Npc vocolith = getOwner();
-		NpcController vocolithController = vocolith.getController();
 		AI2Actions.die(this); // kill vocolith
-		vocolithController.addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(vocolith, 7500)); // schedule late despawn to show full death animation
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> { // schedule boss spawn
+		RespawnService.scheduleDecayTask(vocolith, 7500); // schedule late despawn to show full death animation
+		ThreadPoolManager.getInstance().schedule(() -> { // schedule boss spawn
 			int npcId = 235217 + Rnd.get(0, 3);
 			Npc boss = (Npc) spawn(npcId, vocolith.getX(), vocolith.getY(), vocolith.getZ(), vocolith.getHeading());
 			boss.getPosition().getWorldMapInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN()));

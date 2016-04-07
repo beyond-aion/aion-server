@@ -625,7 +625,7 @@ public abstract class EffectTemplate {
 		if (effected != effect.getEffector()) {
 			if (effected instanceof Npc) {
 				Npc npc = (Npc) effected;
-				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi2().ask(AIQuestion.CAN_RESIST_ABNORMAL).isPositive())
+				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi2().ask(AIQuestion.CAN_RESIST_ABNORMAL))
 					return true;
 				if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
 					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)

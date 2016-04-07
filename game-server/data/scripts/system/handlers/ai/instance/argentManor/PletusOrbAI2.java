@@ -4,8 +4,6 @@ import ai.GeneralNpcAI2;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -57,12 +55,12 @@ public class PletusOrbAI2 extends GeneralNpcAI2 {
 	}
 
 	@Override
-	public AIAnswer ask(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case CAN_RESIST_ABNORMAL:
-				return AIAnswers.POSITIVE;
+				return true;
 			default:
-				return AIAnswers.NEGATIVE;
+				return super.ask(question);
 		}
 	}
 }

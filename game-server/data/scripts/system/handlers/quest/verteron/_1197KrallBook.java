@@ -1,6 +1,7 @@
 package quest.verteron;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -54,10 +55,8 @@ public class _1197KrallBook extends QuestHandler {
 				if (player.getInventory().getItemCountByItemId(182200558) == 0) {
 					if (giveQuestItem(env, 182200558, 1)) {
 						VisibleObject target = player.getTarget();
-						if (target != null && target instanceof Npc) {
-							((Npc) target).getController().scheduleRespawn();
-							target.getController().onDelete();
-						}
+						if (target instanceof Npc)
+							NpcActions.delete((Npc) target, true);
 					}
 				}
 			}

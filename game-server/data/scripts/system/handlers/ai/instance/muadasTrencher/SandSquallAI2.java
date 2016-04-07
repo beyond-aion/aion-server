@@ -7,8 +7,6 @@ import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -95,28 +93,17 @@ public class SandSquallAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public AIAnswer ask(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case CAN_ATTACK_PLAYER:
-				return AIAnswers.POSITIVE;
 			case CAN_RESIST_ABNORMAL:
-				return AIAnswers.POSITIVE;
-			default:
-				return AIAnswers.NEGATIVE;
-		}
-	}
-
-	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		switch (question) {
+				return true;
 			case SHOULD_DECAY:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_RESPAWN:
-				return AIAnswers.NEGATIVE;
 			case SHOULD_REWARD:
-				return AIAnswers.NEGATIVE;
+				return false;
 			default:
-				return null;
+				return super.ask(question);
 		}
 	}
 }

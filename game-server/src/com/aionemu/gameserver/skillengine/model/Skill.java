@@ -576,7 +576,7 @@ public class Skill {
 						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
 					if (effector instanceof Npc && firstTarget instanceof Player) {
 						NpcAI2 ai = (NpcAI2) effector.getAi2();
-						if (ai.poll(AIQuestion.CAN_SHOUT))
+						if (ai.ask(AIQuestion.CAN_SHOUT))
 							ShoutEventHandler.onCast(ai, firstTarget);
 					}
 					break;

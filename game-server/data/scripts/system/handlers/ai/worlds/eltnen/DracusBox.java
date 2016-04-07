@@ -1,18 +1,15 @@
 package ai.worlds.eltnen;
 
-import ai.OneDmgPerHitAI2;
-
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ai.OneDmgPerHitAI2;
 
 /**
  * Spawns Chaos Dracus after the Mysterious Crate dies, and schedules Crate respawn after Dracus dies.
@@ -41,25 +38,27 @@ public class DracusBox extends OneDmgPerHitAI2 {
 
 		Npc mysteriousCrate = getOwner();
 		Npc spawn = (Npc) spawn(spawnId, mysteriousCrate.getX(), mysteriousCrate.getY(), mysteriousCrate.getZ(), mysteriousCrate.getHeading());
-		NpcController controller = mysteriousCrate.getController();
-		controller.onDelete(); // delete the huge box instantly so we can see the spawned mob
+		AI2Actions.deleteOwner(this); // delete the huge box instantly so we can see the spawned mob
 		if (spawn.getNpcId() == dracusId) {
-			spawn.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-				NpcController mysteriousCrateController = controller;
+			spawn.getObserveController().attach(new ActionObserver(ObserverType.DEATH) {
 
 				@Override
 				public void died(Creature creature) {
-					mysteriousCrateController.addTask(TaskId.RESPAWN, mysteriousCrateController.scheduleRespawn());
+					AI2Actions.scheduleRespawn(DracusBox.this);
 				}
 			});
 		} else {
-			controller.addTask(TaskId.RESPAWN, controller.scheduleRespawn());
+			AI2Actions.scheduleRespawn(this);
 		}
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		return question == AIQuestion.SHOULD_RESPAWN ? AIAnswers.NEGATIVE : super.pollInstance(question);
+	public boolean ask(AIQuestion question) {
+		switch (question) {
+			case SHOULD_RESPAWN:
+				return false;
+			default:
+				return super.ask(question);
+		}
 	}
 }

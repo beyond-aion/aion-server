@@ -1,6 +1,7 @@
 package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -46,8 +47,7 @@ public class _11036UncommonRecipe extends QuestHandler {
 			} else if (targetId == 700610) {
 				Npc npc = (Npc) env.getVisibleObject();
 				giveQuestItem(env, 182206731, 1);
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 				return true;
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

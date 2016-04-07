@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -48,8 +49,7 @@ public class _21249TheInvincibleStarket extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 				} else if (dialog == DialogAction.SETPRO1) {
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().scheduleRespawn();
-					npc.getController().onDelete();
+					NpcActions.delete(npc, true);
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799529, player.getX(), player.getY(), player.getZ(), (byte) 0);
 					return defaultCloseDialog(env, 0, 1);
 				}

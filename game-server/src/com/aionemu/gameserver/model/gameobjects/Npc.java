@@ -343,7 +343,7 @@ public class Npc extends Creature {
 			return true;
 		} else if (this.getWorldType() == WorldType.ABYSS) {
 			return true;
-		} else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP).isPositive()) {
+		} else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP)) {
 			return true;
 		} else if (shouldRewardAp()) {
 			return true;

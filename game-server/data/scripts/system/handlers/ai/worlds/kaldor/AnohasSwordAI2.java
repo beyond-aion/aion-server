@@ -3,8 +3,6 @@ package ai.worlds.kaldor;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -101,7 +99,7 @@ public class AnohasSwordAI2 extends NpcAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		return question == AIQuestion.SHOULD_RESPAWN ? AIAnswers.NEGATIVE : super.pollInstance(question);
+	public boolean ask(AIQuestion question) {
+		return question == AIQuestion.SHOULD_RESPAWN ? false : super.ask(question);
 	}
 }

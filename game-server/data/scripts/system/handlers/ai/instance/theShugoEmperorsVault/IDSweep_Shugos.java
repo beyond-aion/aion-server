@@ -1,8 +1,6 @@
 package ai.instance.theShugoEmperorsVault;
 
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
@@ -32,13 +30,13 @@ public class IDSweep_Shugos extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
+	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_REWARD:
 			case SHOULD_LOOT:
-				return AIAnswers.NEGATIVE;
+				return false;
 			default:
-				return super.pollInstance(question);
+				return super.ask(question);
 		}
 	}
 }

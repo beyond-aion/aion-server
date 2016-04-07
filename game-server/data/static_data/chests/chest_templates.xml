@@ -272,6 +272,10 @@
 	<chest npcid="701372">
 		<keyitem id="1" itemid="185000113" quantity="1"/>
 	</chest>
+	<!-- Raksang Ruins -->
+	<chest npcid="702694">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
 	<!-- Steel Rake Cabin -->
 	<chest npcid="700553">
 		<keyitem id="1" itemid="0" quantity="1"/>

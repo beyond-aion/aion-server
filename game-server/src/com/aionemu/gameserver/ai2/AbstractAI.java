@@ -11,17 +11,10 @@ import java.util.concurrent.locks.ReentrantLock;
 import com.aionemu.gameserver.ai2.event.AIEventLog;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.event.AIListenable;
-import com.aionemu.gameserver.ai2.handler.FollowEventHandler;
 import com.aionemu.gameserver.ai2.handler.FreezeEventHandler;
-import com.aionemu.gameserver.ai2.manager.SimpleAttackManager;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.ai2.poll.AIAnswer;
-import com.aionemu.gameserver.ai2.poll.AIAnswers;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.events.AbstractEventSource;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -29,7 +22,6 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -244,11 +236,11 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@AIListenable(enabled = false, type = AIEventType.DEACTIVATE)
 	protected abstract void handleDeactivate();
 
+	@AIListenable(enabled = false, type = AIEventType.BEFORE_SPAWNED)
+	protected abstract void handleBeforeSpawned();
+
 	@AIListenable(enabled = false, type = AIEventType.SPAWNED)
 	protected abstract void handleSpawned();
-
-	@AIListenable(enabled = false, type = AIEventType.RESPAWNED)
-	protected abstract void handleRespawned();
 
 	@AIListenable(enabled = false, type = AIEventType.DESPAWNED)
 	protected abstract void handleDespawned();
@@ -389,8 +381,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 			case SPAWNED:
 				handleSpawned();
 				break;
-			case RESPAWNED:
-				handleRespawned();
+			case BEFORE_SPAWNED:
+				handleBeforeSpawned();
 				break;
 			case DESPAWNED:
 				handleDespawned();
@@ -509,64 +501,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 				break;
 		}
 	}
-
-	@Override
-	public boolean poll(AIQuestion question) {
-		AIAnswer instanceAnswer = pollInstance(question);
-		if (instanceAnswer != null) {
-			return instanceAnswer.isPositive();
-		}
-		switch (question) {
-			case DESTINATION_REACHED:
-				return isDestinationReached();
-			case CAN_SPAWN_ON_DAYTIME_CHANGE:
-				return isCanSpawnOnDaytimeChange();
-			case CAN_SHOUT:
-				return isMayShout();
-		}
-		return false;
-	}
-
-	/**
-	 * Poll concrete AI instance for the answer.
-	 * 
-	 * @param question
-	 * @return null if there is no specific answer
-	 */
-	protected AIAnswer pollInstance(AIQuestion question) {
-		return null;
-	}
-
-	@Override
-	public AIAnswer ask(AIQuestion question) {
-		return AIAnswers.NEGATIVE;
-	}
-
-	// TODO move to NPC ai
-	protected boolean isDestinationReached() {
-		AIState state = currentState;
-		switch (state) {
-			case FEAR:
-				return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(), owner
-					.getMoveController().getTargetZ2(), 1);
-			case FIGHT:
-				return SimpleAttackManager.isTargetInAttackRange((Npc) owner);
-			case RETURNING:
-				SpawnTemplate spawn = getOwner().getSpawn();
-				return MathUtil.isNearCoordinates(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
-			case FOLLOWING:
-				return FollowEventHandler.isInRange(this, getOwner().getTarget());
-			case WALKING:
-				return currentSubState == AISubState.TALK || WalkManager.isArrivedAtPoint((NpcAI2) this);
-		}
-		return true;
-	}
-
-	protected boolean isCanSpawnOnDaytimeChange() {
-		return currentState == AIState.DESPAWNED || currentState == AIState.CREATED;
-	}
-
-	public abstract boolean isMayShout();
 
 	public abstract AttackIntention chooseAttackIntention();
 

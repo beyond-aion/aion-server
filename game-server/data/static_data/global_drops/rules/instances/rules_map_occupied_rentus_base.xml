@@ -56,6 +56,7 @@
 			<gd_npc npc_id="236299" name="Umatha the Crazed" />
 			<gd_npc npc_id="236296" name="Captain Xasta" />
 			<gd_npc npc_id="236297" name="Captain Xasta" />
+			<gd_npc npc_id="236705" name="Kuhara's Treasure Box" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053712" name="Blood Mark Bundle" />

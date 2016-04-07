@@ -1,6 +1,7 @@
 package quest.brusthonin;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -45,8 +46,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			}
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			updateQuestStatus(env);
-			npc.getController().scheduleRespawn();
-			npc.getController().onDelete();
+			NpcActions.delete(npc, true);
 			return true;
 		}
 
@@ -57,8 +57,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			}
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
-			npc.getController().scheduleRespawn();
-			npc.getController().onDelete();
+			NpcActions.delete(npc, true);
 			return true;
 		}
 

@@ -355,46 +355,46 @@
 	    <npc_infos npc_id="205321" var="0" quest_dialog="1352"/>
 		<npc_infos npc_id="205323" var="1" quest_dialog="2375" close_dialog="1009"/>
 	</report_to_many>
-	<skill_use id="4922" start_npc_id="204056">
+	<skill_use id="4922" start_npc_ids="204056">
 		<skill end_var="10" ids="599"/>
 	</skill_use>
-	<skill_use id="4923" start_npc_id="204056">
+	<skill_use id="4923" start_npc_ids="204056">
 		<skill end_var="10" ids="3161"/>
 	</skill_use>
-	<skill_use id="4924" start_npc_id="204057">
+	<skill_use id="4924" start_npc_ids="204057">
 		<skill end_var="10" ids="18260"/>
 	</skill_use>
-	<skill_use id="4925" start_npc_id="204057">
+	<skill_use id="4925" start_npc_ids="204057">
 		<skill end_var="10" ids="3491"/>
 	</skill_use>
-	<skill_use id="4926" start_npc_id="204058">
+	<skill_use id="4926" start_npc_ids="204058">
 		<skill end_var="10" ids="1338"/>
 	</skill_use>
-	<skill_use id="4927" start_npc_id="204058">
+	<skill_use id="4927" start_npc_ids="204058">
 		<skill end_var="10" ids="3781"/>
 	</skill_use>
-	<skill_use id="4928" start_npc_id="204059">
+	<skill_use id="4928" start_npc_ids="204059">
 		<skill end_var="10" ids="4220"/>
 	</skill_use>
-	<skill_use id="4929" start_npc_id="204059">
+	<skill_use id="4929" start_npc_ids="204059">
 		<skill end_var="10" ids="1810"/>
 	</skill_use>
-	<skill_use id="4930" start_npc_id="204083" end_npc_id="204059">
+	<skill_use id="4930" start_npc_ids="204083" end_npc_ids="204059">
 		<skill end_var="10" ids="9912"/>
 	</skill_use>
-	<skill_use id="4931" start_npc_id="204059">
+	<skill_use id="4931" start_npc_ids="204059">
 		<skill end_var="100" ids="9912"/>
 	</skill_use>
-	<skill_use id="4932" start_npc_id="204083" end_npc_id="204059">
+	<skill_use id="4932" start_npc_ids="204083" end_npc_ids="204059">
 		<skill end_var="10" ids="972 973 974 990 1057 1128 1051 2139"/>
 	</skill_use>
-	<skill_use id="4933" start_npc_id="204059">
+	<skill_use id="4933" start_npc_ids="204059">
 		<skill end_var="20" ids="972 973 974 990 1057 1128 1051 2139"/>
 	</skill_use>
-	<skill_use id="29074" start_npc_id="801222">
+	<skill_use id="29074" start_npc_ids="801222">
 		<skill end_var="10" ids="2007"/>
 	</skill_use>
-	<skill_use id="29075" start_npc_id="801223">
+	<skill_use id="29075" start_npc_ids="801223">
 		<skill end_var="10" ids="4469"/>
 	</skill_use>
 	<!-- COLLECTING QUESTS -->

@@ -131,14 +131,6 @@ public class SerialKillerService {
 		}
 	}
 
-	public void onLogout(Player player) {
-		if (!CustomConfig.SERIALKILLER_ENABLED) {
-			return;
-		}
-
-		onLeaveMap(player);
-	}
-
 	public void onEnterMap(final Player player) {
 
 	}

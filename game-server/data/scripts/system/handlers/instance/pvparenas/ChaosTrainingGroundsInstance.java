@@ -2,6 +2,7 @@ package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -70,16 +71,14 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		if (flyingRing.equals("PVP_ARENA_1")) {
 			npc = getNpc(674.841f, 1793.065f, 150.964f);
 			if (npc != null && npc.isSpawned()) {
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 				sendSystemMsg(player, npc, 250);
 				sendPacket();
 			}
 		} else if (flyingRing.equals("PVP_ARENA_2")) {
 			npc = getNpc(688.410f, 1769.611f, 150.964f);
 			if (npc != null && npc.isSpawned()) {
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 				playerReward.addPoints(250);
 				sendSystemMsg(player, npc, 250);
 				sendPacket();
@@ -87,8 +86,7 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		} else if (flyingRing.equals("PVP_ARENA_3")) {
 			npc = getNpc(664.160f, 1761.933f, 171.504f);
 			if (npc != null && npc.isSpawned()) {
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 				playerReward.addPoints(250);
 				sendSystemMsg(player, npc, 250);
 				sendPacket();
@@ -97,22 +95,19 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 			npc = getNpc(693.061f, 1752.479f, 186.750f);
 			if (npc != null && npc.isSpawned()) {
 				useSkill(npc, player, 20059, 1);
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 			}
 		} else if (flyingRing.equals("PVP_ARENA_VOID_2")) {
 			npc = getNpc(688.061f, 1798.229f, 198.500f);
 			if (npc != null && npc.isSpawned()) {
 				useSkill(npc, player, 20059, 1);
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 			}
 		} else if (flyingRing.equals("PVP_ARENA_VOID_3")) {
 			npc = getNpc(659.311f, 1768.979f, 201.500f);
 			if (npc != null && npc.isSpawned()) {
 				useSkill(npc, player, 20059, 1);
-				npc.getController().scheduleRespawn();
-				npc.getController().onDelete();
+				NpcActions.delete(npc, true);
 			}
 		}
 		return false;

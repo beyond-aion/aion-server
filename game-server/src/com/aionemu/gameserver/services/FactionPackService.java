@@ -21,7 +21,7 @@ public class FactionPackService {
 	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2015, Month.DECEMBER, 7, 5, 0, 0);
 	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2016, Month.JANUARY, 3, 4, 0, 0);
 	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2016, Month.JANUARY, 17, 2, 0, 0);
-	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2016, Month.MARCH, 15, 3, 0, 0);
+	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2099, Month.DECEMBER, 31, 23, 59, 59);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final HashMap<Integer, Integer> rewards = new HashMap<>();
 
@@ -63,12 +63,10 @@ public class FactionPackService {
 		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-			SystemMailService.getInstance().sendMail(
-				"Beyond Aion",
-				player.getName(),
-				"Faction Pack",
-				"Greetings Daeva!\n\n" + "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n"
-					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
+			SystemMailService.getInstance().sendMail("Beyond Aion",
+				player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
+					+ "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
+				e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
 		}
 	}
 
@@ -84,12 +82,9 @@ public class FactionPackService {
 		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-			SystemMailService.getInstance().sendMail(
-				"Beyond Aion",
-				player.getName(),
-				"Faction Pack",
-				"Greetings Daeva!\n\n" + "In gratitude for your decision to join the Asmodian faction we prepared an additional item pack.\n\n"
-					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
+			SystemMailService.getInstance().sendMail("Beyond Aion", player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
+				+ "In gratitude for your decision to join the Asmodian faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
+				e.getKey(), e.getValue(), 0, LetterType.EXPRESS);
 		}
 	}
 }

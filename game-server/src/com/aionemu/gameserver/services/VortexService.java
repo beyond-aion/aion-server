@@ -24,6 +24,7 @@ import com.aionemu.gameserver.services.vortexservice.Invasion;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Source
@@ -200,9 +201,9 @@ public class VortexService {
 	}
 
 	public VortexLocation getLocationByWorld(int worldId) {
-		if (worldId == 210060000) {
+		if (worldId == WorldMapType.THEOBOMOS.getId()) {
 			return getVortexLocation(0);
-		} else if (worldId == 220050000) {
+		} else if (worldId == WorldMapType.BRUSTHONIN.getId()) {
 			return getVortexLocation(1);
 		} else {
 			return null;
@@ -217,12 +218,16 @@ public class VortexService {
 		return vortex;
 	}
 
+	/**
+	 * Checks if the player is allowed to be in the current vortex zone. He will be sent to the locations home point if not.
+	 * 
+	 * @param player
+	 */
 	public void validateLoginZone(Player player) {
 		VortexLocation loc = getLocationByWorld(player.getWorldId());
 		if (loc != null && player.getRace().equals(loc.getInvadersRace())) {
-			if (loc.isInsideLocation(player) && loc.isActive() && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId())) {
+			if (loc.isInsideLocation(player) && loc.isActive() && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId()))
 				return;
-			}
 
 			int mapId = loc.getHomeWorldId();
 			float x = loc.getHomePoint().getX();

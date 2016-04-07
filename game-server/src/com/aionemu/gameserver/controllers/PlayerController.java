@@ -8,9 +8,6 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +21,6 @@ import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -43,7 +39,6 @@ import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -93,7 +88,6 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -120,6 +114,9 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * This class is for controlling players.
@@ -309,42 +306,6 @@ public class PlayerController extends CreatureController<Player> {
 				getOwner().getEffectController().clearEffect(ef);
 			}
 		}
-	}
-
-	// TODO [AT] move
-	public void onLeaveWorld() {
-		SerialKillerService.getInstance().onLeaveMap(getOwner());
-		InstanceService.onLeaveInstance(getOwner());
-	}
-
-	public void validateLoginZone() {
-		int mapId;
-		float x, y, z;
-		byte h;
-		boolean moveToBind = false;
-
-		BindPointPosition bind = getOwner().getBindPoint();
-
-		if (bind != null) {
-			mapId = bind.getMapId();
-			x = bind.getX();
-			y = bind.getY();
-			z = bind.getZ();
-			h = bind.getHeading();
-		} else {
-			PlayerInitialData.LocationData start = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(getOwner().getRace());
-
-			mapId = start.getMapId();
-			x = start.getX();
-			y = start.getY();
-			z = start.getZ();
-			h = start.getHeading();
-		}
-		if (!SiegeService.getInstance().validateLoginZone(getOwner()))
-			moveToBind = true;
-
-		if (moveToBind)
-			World.getInstance().setPosition(getOwner(), mapId, x, y, z, h);
 	}
 
 	public void onDie(@Nonnull Creature lastAttacker) {
