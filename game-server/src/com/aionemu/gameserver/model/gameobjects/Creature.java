@@ -409,7 +409,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * @param transformModel
+	 * @param model
 	 *          the transformedModel to set
 	 */
 	public final void setTransformModel(TransformModel model) {
@@ -531,7 +531,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * @param cooldownId
+	 * @param template
 	 * @return
 	 */
 	public boolean isSkillDisabled(SkillTemplate template) {

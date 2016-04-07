@@ -35,8 +35,8 @@ public enum ObjectDeleteAnimation {
 	NONE(0),
 	FADE_OUT(1),
 	FADE_OUT_BEAM(2),
-	JUMP_IN(11), // player only
-	DELAYED(19);
+	JUMP_IN(11), // players and humanoids(needs more tests but works with asmo/ely npcs) only
+	DELAYED(19); // deletes also flags from map
 
 	private final byte animationId;
 

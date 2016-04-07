@@ -311,7 +311,7 @@ public class TeleportService2 {
 
 	/**
 	 * @param player
-	 * @param targetObjectId
+	 * @param npc
 	 */
 	public static void showMap(Player player, Npc npc) {
 		TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
@@ -396,7 +396,6 @@ public class TeleportService2 {
 	 * This method will move a player to their bind location
 	 *
 	 * @param player
-	 * @param useTeleport
 	 */
 	public static void moveToBindLocation(Player player) {
 		float x, y, z;

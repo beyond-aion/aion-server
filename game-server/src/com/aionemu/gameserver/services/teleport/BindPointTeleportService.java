@@ -69,8 +69,10 @@ public class BindPointTeleportService {
 	}
 
 	public static void cancelTeleport(Player player, int locId) {
-		player.getController().cancelTask(TaskId.SKILL_USE);
-		PacketSendUtility.broadcastPacket(player, new SM_BIND_POINT_TELEPORT(2, player.getObjectId(), locId, 0), true);
+		if (player.getController().hasTask(TaskId.SKILL_USE)) {
+			player.getController().cancelTask(TaskId.SKILL_USE);
+			PacketSendUtility.broadcastPacket(player, new SM_BIND_POINT_TELEPORT(2, player.getObjectId(), locId, 0), true);
+		}
 	}
 
 	private static long computePrice(Player player, HotspotTemplate hotspot, long kinah) {

@@ -188,6 +188,8 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(((House) object).getAddress().getId()));
 		} else if (object instanceof HouseObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE_OBJECT(object.getObjectId()));
+		} else if (object instanceof Npc && ((Npc) object).isFlag()) {
+			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, ObjectDeleteAnimation.DELAYED));
 		} else {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, animation));
 		}
@@ -848,6 +850,18 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public boolean isInCombat() {
 		return (((System.currentTimeMillis() - lastAttackedMillis) <= 10000) || ((System.currentTimeMillis() - lastAttackMillis) <= 10000));
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public long getLastCombatTime() {
+		if (lastAttackedMillis < lastAttackMillis) {
+			return lastAttackMillis;
+		} else {
+			return lastAttackedMillis;
+		}
 	}
 
 	/**

@@ -1506,28 +1506,51 @@
 			<drop item_id="169000010" name="Superior Power Shard" chance="65" min_amount="25" max_amount="25" />
 		</drop_group>
 	</npc_drop>
+	<!-- Custom PvP-Map Chest -->
 	<npc_drop npc_id="233192" replace_type="FULL">
-		<drop_group race="PC_ALL" use_category="true" name="Named Ancient Manastone (Legend)">
-			<drop item_id="167020024" name="Ancient Manastone: HP +105" chance="80" />
-			<drop item_id="167020025" name="Ancient Manastone: MP +120" chance="80" />
-			<drop item_id="167020026" name="Ancient Manastone: Accuracy +31" chance="80" />
-			<drop item_id="167020027" name="Ancient Manastone: Evasion +21" chance="80" />
-			<drop item_id="167020028" name="Ancient Manastone: Parry +31" chance="80" />
-			<drop item_id="167020029" name="Ancient Manastone: Block +31" chance="80" />
-			<drop item_id="167020030" name="Ancient Manastone: Crit Strike +20" chance="80" />
-			<drop item_id="167020031" name="Ancient Manastone: Strike Resist +21" chance="80" />
-			<drop item_id="167020032" name="Ancient Manastone: Crit Spell +7" chance="80" />
-			<drop item_id="167020033" name="Ancient Manastone: Magical Critical Resistance +8" chance="80" />
-			<drop item_id="167020034" name="Ancient Manastone: Physical Defense +70" chance="80" />
-			<drop item_id="167020035" name="Ancient Manastone: Resist Magic +19" chance="80" />
-			<drop item_id="167020036" name="Ancient Manastone: Attack +6" chance="80" />
-			<drop item_id="167020037" name="Ancient Manastone: Magical Accuracy +18" chance="80" />
-			<drop item_id="167020038" name="Ancient Manastone: Magic Boost +30" chance="80" />
-			<drop item_id="167020039" name="Ancient Manastone: Magic Suppression +40" chance="80" />
-			<drop item_id="167020040" name="Ancient Manastone: Healing Boost +5" chance="80" />
+		<drop_group race="PC_ALL" use_category="true" name="Ancient Manastone">
+			<drop item_id="167020024" name="Ancient Manastone: HP +105" chance="15"/>
+			<drop item_id="167020025" name="Ancient Manastone: MP +120" chance="15"/>
+			<drop item_id="167020026" name="Ancient Manastone: Accuracy +31" chance="15"/>
+			<drop item_id="167020027" name="Ancient Manastone: Evasion +21" chance="15"/>
+			<drop item_id="167020028" name="Ancient Manastone: Parry +31" chance="15"/>
+			<drop item_id="167020029" name="Ancient Manastone: Block +31" chance="15"/>
+			<drop item_id="167020030" name="Ancient Manastone: Crit Strike +20" chance="15"/>
+			<drop item_id="167020031" name="Ancient Manastone: Strike Resist +21" chance="15"/>
+			<drop item_id="167020032" name="Ancient Manastone: Crit Spell +7" chance="15"/>
+			<drop item_id="167020033" name="Ancient Manastone: Magical Critical Resistance +8" chance="15"/>
+			<drop item_id="167020034" name="Ancient Manastone: Physical Defense +70" chance="15"/>
+			<drop item_id="167020035" name="Ancient Manastone: Resist Magic +19" chance="15"/>
+			<drop item_id="167020036" name="Ancient Manastone: Attack +6" chance="15"/>
+			<drop item_id="167020037" name="Ancient Manastone: Magical Accuracy +18" chance="15"/>
+			<drop item_id="167020038" name="Ancient Manastone: Magic Boost +30" chance="15"/>
+			<drop item_id="167020039" name="Ancient Manastone: Magic Suppression +40" chance="15"/>
+			<drop item_id="167020040" name="Ancient Manastone: Healing Boost +5" chance="15"/>
 		</drop_group>
-		<drop_group race="PC_ALL" use_category="true" name="Named Bundle">
-			<drop item_id="188052581" name="Sanctuary Ancient Coin Bundle" chance="15" />
+		<drop_group race="PC_ALL" use_category="true" name="Random Special Reward">
+			<drop item_id="186000242" name="Ceramium Medal" chance="1"/>
+			<drop item_id="166020000" name="Omega Enchantment Stone" chance="1"/>
+			<drop item_id="166500002" name="Amplification Stone" chance="1"/>
+			<drop item_id="166030005" name="Tempering Solution" chance="1"/>
+			<drop item_id="188053783" name="Stigma Sack" chance="1"/>
+			<drop item_id="188053618" name="Honorable Elim's Idian Bundle" chance="1"/>
+			<drop item_id="188053905" name="Faded High Grade Composite Manastone Bundle" chance="1"/>
+			<drop item_id="186000236" name="Blood Mark" chance="20" min_amount="2" max_amount="7"/>
+			<drop item_id="186000237" name="Ancient Coin" chance="20" min_amount="8" max_amount="17"/>
+			<drop item_id="186000243" name="Fragmented Ceramium" chance="20" min_amount="2" max_amount="7"/>
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Supplies">
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="40" min_amount="10" max_amount="20"/>
+			<drop item_id="164000076" name="Greater Running Scroll" chance="35" min_amount="5" max_amount="15"/>
+			<drop item_id="164000073" name="Greater Courage Scroll" chance="35" min_amount="5" max_amount="15"/>
+			<drop item_id="164000134" name="Greater Awakening Scroll" chance="35" min_amount="5" max_amount="15"/>
+			<drop item_id="164000079" name="Greater Raging Wind Scroll" chance="35" min_amount="5" max_amount="15"/>
+		</drop_group>
+		<drop_group race="PC_ALL" name="Kinah">
+			<drop item_id="182400001" name="Kinah" chance="75" min_amount="3542" max_amount="8920" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Conquerors Mark">
+			<drop item_id="186000238" name="Conqueror's Mark" chance="100"/>
 		</drop_group>
 	</npc_drop>
 	<!-- Dragon Lords Refuge -->

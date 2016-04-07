@@ -26,7 +26,9 @@ public enum TeleportAnimation {
 	FADE_OUT(2, 1500),
 	JUMP_IN(3, 2200),
 	JUMP_IN_STATUE(4, 2200),
-	JUMP_IN_GATE(8, 2200);
+	JUMP_IN_GATE(8, 2200),
+	/* for custom battlegrounds/pvp-maps only */
+	BATTLEGROUND(0, 0);
 
 	private final byte animationId;
 	private final int duration;
@@ -53,6 +55,8 @@ public enum TeleportAnimation {
 			case JUMP_IN:
 			case JUMP_IN_GATE:
 				return ArrivalAnimation.JUMP_OUT_CAMERA_BEHIND;
+			case BATTLEGROUND:
+				return ArrivalAnimation.LANDING_GLOW;
 			default:
 				return ArrivalAnimation.LANDING;
 		}
@@ -61,6 +65,7 @@ public enum TeleportAnimation {
 	public ObjectDeleteAnimation getDefaultObjectDeleteAnimation() {
 		switch (this) {
 			case NONE:
+			case BATTLEGROUND:
 				return ObjectDeleteAnimation.NONE;
 			case FADE_OUT:
 				return ObjectDeleteAnimation.FADE_OUT;

@@ -97,6 +97,10 @@ public class PvpService {
 	}
 
 	public void doReward(Player victim) {
+		doReward(victim, 1);
+	}
+
+	public void doReward(Player victim, float apWinMulti) {
 		// winner is the player that receives the kill count
 		final Player winner = victim.getAggroList().getMostPlayerDamage();
 
@@ -161,7 +165,7 @@ public class PvpService {
 				teamMembers = ((PlayerAlliance) attacker).getMembers();
 
 			// Add damage last, so we don't include damage from same race. (Duels, Arena)
-			if (rewardPlayerTeam(teamMembers, victim, totalDamage, aggro))
+			if (rewardPlayerTeam(teamMembers, victim, totalDamage, aggro, apWinMulti))
 				playerDamage += aggro.getDamage();
 		}
 
@@ -180,7 +184,7 @@ public class PvpService {
 			AbyssPointsService.addAp(victim, -apActuallyLost);
 
 		// Announce that player has died.
-		if (victim.isInInstance()) {
+		if (victim.isInInstance() && victim.getWorldId() != 301220000) {
 			PacketSendUtility.broadcastPacketAndReceive(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()));
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
 		} else {
@@ -201,7 +205,7 @@ public class PvpService {
 		}
 	}
 
-	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int totalDamage, AggroInfo info) {
+	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int totalDamage, AggroInfo info, float apWinMulti) {
 		List<Player> players = new FastTable<>();
 		int maxRank = 1;
 		int maxLevel = 0;
@@ -219,7 +223,7 @@ public class PvpService {
 		if (players.isEmpty())
 			return false;
 
-		int baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel);
+		float baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel) * apWinMulti;
 		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
 		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
 		float groupDamagePercentage = (float) info.getDamage() / totalDamage;
