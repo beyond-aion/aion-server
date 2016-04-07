@@ -279,10 +279,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
-		instance.doOnAllPlayers(p -> {
-			if (p != player)
-				PacketSendUtility.sendBrightYellowMessageOnCenter(p, "A new player has joined!");
-		});
+		if (player.getAccessLevel() < 1) {
+			instance.doOnAllPlayers(p -> {
+				if (p != player)
+					PacketSendUtility.sendBrightYellowMessageOnCenter(p, "A new player has joined!");
+			});
+		}
 	}
 
 	@Override
