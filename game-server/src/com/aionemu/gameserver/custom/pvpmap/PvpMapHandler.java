@@ -86,7 +86,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private void checkLastFightTime(Player p) {
 		if (!p.getController().isInCombat()) {
 			long joinOrLeaveTime = this.joinOrLeaveTime.get(p.getObjectId());
-			if ((System.currentTimeMillis() - joinOrLeaveTime) > 300000) {
+			if ((System.currentTimeMillis() - joinOrLeaveTime) > 400000) {
 				long lastFightTime = p.getController().getLastCombatTime();
 				if (lastFightTime == 0 || (System.currentTimeMillis() - lastFightTime) > 600000) {
 					PacketSendUtility.sendMessage(p, "You have been inactive for too long. Therefore you will be removed from the PvP-Map.");
