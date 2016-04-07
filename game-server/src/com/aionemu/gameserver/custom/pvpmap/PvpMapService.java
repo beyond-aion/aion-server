@@ -20,7 +20,7 @@ public class PvpMapService {
 	private AtomicBoolean isActive = new AtomicBoolean(true);
 	private PvpMapHandler handler = null;
 
-	public static final PvpMapService getInstance() {
+	public static PvpMapService getInstance() {
 		return instance;
 	}
 

@@ -43,7 +43,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -77,17 +76,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void startObservationTask() {
-		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				if (canJoin.get()) {
-					instance.doOnAllPlayers(new Visitor<Player>() {
-						@Override
-						public void visit(Player object) {
-							checkLastFightTime(object);
-						}
-					});
-				}
+		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+			if (canJoin.get()) {
+				instance.doOnAllPlayers(this::checkLastFightTime);
 			}
 		}, 300000, 300000);
 	}
@@ -164,7 +155,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private ActionObserver getAllObserver(final Player p) {
-		ActionObserver observer = new ActionObserver(ObserverType.ALL) {
+		return new ActionObserver(ObserverType.ALL) {
 
 			@Override
 			public void attack(Creature creature) {
@@ -226,32 +217,17 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				BindPointTeleportService.cancelTeleport(p, 1);
 			}
 		};
-
-		return observer;
 	}
 
 	private boolean canJoin(Player p) {
-		if (canJoin.get() && !isInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
-			if (joinOrLeaveTime.containsKey(p.getObjectId())) {
-				if ((System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return true;
-			}
-		}
-		return false;
+		return canJoin.get() && isNotInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE) && (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
 	}
 
-	private boolean isInAnyNotAllowedState(Player p) {
-		if (p.getController().isInCombat() ||p.getLifeStats().isAboutToDie() || p.getLifeStats().isAlreadyDead() || p.isLooting()
-				|| p.isInGlidingState() || p.isFlying() || p.isUsingFlyTeleport() || p.isInPlayerMode(PlayerMode.WINDSTREAM)
-				|| p.isInPlayerMode(PlayerMode.RIDE) || p.hasStore() || p.getCastingSkill() != null || p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
-				|| p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT))
-			return true;
-		return false;
+	private boolean isNotInAnyNotAllowedState(Player p) {
+		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead() && !p.isLooting()
+				&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
+				&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+				&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}
 
 	private synchronized void updateOrigin(Player p) {
@@ -395,7 +371,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public boolean leave(Player p) {
-		if (!isInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
+		if (isNotInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
 			startTeleportation(p, true);
 			return true;
 		}
@@ -468,9 +444,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			return 0;
 		} else {
 			for (ZoneInstance zone : zones) {
-				if (zone.getAreaTemplate().getZoneName().name().equalsIgnoreCase("301220000")) {
-					continue;
-				} else {
+				if (!zone.getAreaTemplate().getZoneName().name().equalsIgnoreCase("301220000")) {
 					return getZoneNameIdByZoneName(zone.getAreaTemplate().getZoneName().name());
 				}
 			}
