@@ -11,17 +11,14 @@ import javolution.util.FastTable;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -35,8 +32,6 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.StaticDoorSpawnManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -54,7 +49,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private final Map<Integer, Long> joinOrLeaveTime = new FastMap<>();
 	private final List<WorldPosition> respawnLocations = new FastTable<>();
 	private final List<WorldPosition> supplyPositions = new FastTable<>();
-	private final AtomicBoolean canJoin = new AtomicBoolean(false);
+	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private Future<?> supplyTask, despawnTask, observationTask;
 
 	public PvpMapHandler() {
@@ -76,7 +71,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void startObservationTask() {
-		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			if (canJoin.get()) {
 				instance.doOnAllPlayers(this::checkLastFightTime);
 			}
@@ -98,7 +93,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	// spawns a supply chest every ~6min if there are enough players on the map
 	private void startSupplyTask() {
-		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) this::scheduleSupplySpawn, 120000, 400000);
+		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::scheduleSupplySpawn, 120000, 400000);
 	}
 
 	private void scheduleSupplySpawn() {
@@ -118,7 +113,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void scheduleDespawns() {
-		despawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
 	}
 
 	public void join(Player p) {
@@ -134,9 +129,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(1, p.getObjectId(), 1, 0), true);
 		p.getObserveController().attach(observer);
 
-		p.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		p.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(3, p.getObjectId(), 1, 0), true);
-			ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			ThreadPoolManager.getInstance().schedule(() -> {
 				p.getObserveController().removeObserver(observer);
 				p.getController().cancelTask(TaskId.SKILL_USE);
 				if (!p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead()) {
@@ -155,75 +150,19 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private ActionObserver getAllObserver(final Player p) {
-		return new ActionObserver(ObserverType.ALL) {
-
+		return new ItemUseObserver() {
 			@Override
-			public void attack(Creature creature) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void attacked(Creature creature) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void dotattacked(Creature creature, Effect dotEffect) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void moved() {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void abnormalsetted(AbnormalState state) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void startSkillCast(Skill skill) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void died(Creature creature) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void equip(Item item, Player owner) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void sit() {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void unequip(Item item, Player owner) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void itemused(Item item) {
-				BindPointTeleportService.cancelTeleport(p, 1);
-			}
-
-			@Override
-			public void npcdialogrequested(Npc npc) {
+			public void abort() {
 				BindPointTeleportService.cancelTeleport(p, 1);
 			}
 		};
 	}
 
 	private boolean canJoin(Player p) {
-		return canJoin.get() && isNotInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE) && (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
+		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE) && (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
 	}
 
-	private boolean isNotInAnyNotAllowedState(Player p) {
+	private boolean checkState(Player p) {
 		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead() && !p.isLooting()
 				&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
 				&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
@@ -244,22 +183,24 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			PvpService.getInstance().doReward(player, CustomConfig.PVP_MAP_AP_MULTIPLIER);
 			announceDeath(player);
 		}
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
-			if (!player.getLifeStats().isAlreadyDead()) { // was resurrected e.g.
-				return;
-			} else if (!canJoin.get() || respawnLocations.isEmpty()) {
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-				PlayerReviveService.revive(player, 100, 100, false, 0);
-				removePlayer(player);
-				return;
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (player.getLifeStats().isAlreadyDead()) {
+				if (!canJoin.get() || respawnLocations.isEmpty()) {
+					if (instance.getPlayer(player.getObjectId()) != null) {
+						PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
+						PlayerReviveService.revive(player, 100, 100, false, 0);
+						removePlayer(player);
+					}
+				} else {
+					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
+					PlayerReviveService.revive(player, 100, 100, false, 0);
+					player.unsetResPosState();
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+					player.getGameStats().updateStatsAndSpeedVisually();
+					WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
+					TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
+				}
 			}
-			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-			PlayerReviveService.revive(player, 100, 100, false, 0);
-			player.unsetResPosState();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-			player.getGameStats().updateStatsAndSpeedVisually();
-			WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size()-1));
-			TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
 		}, 12000);
 		return true;
 	}
@@ -269,9 +210,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		if (ar != null) {
 			int zoneNameId = getZoneNameId(player);
 			if (zoneNameId > 0) {
-				instance.doOnAllPlayers(object -> PacketSendUtility.sendPacket(object, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), new DescriptionId(zoneNameId * 2 + 1))));
+				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId)));
 			} else {
-				instance.doOnAllPlayers(object -> PacketSendUtility.sendPacket(object, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
+				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
 			}
 		}
 
@@ -279,9 +220,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
-		if (player.getAccessLevel() < 1) {
+		if (!player.isGM()) {
 			instance.doOnAllPlayers(p -> {
-				if (p != player)
+				if (!p.equals(player))
 					PacketSendUtility.sendBrightYellowMessageOnCenter(p, "A new player has joined!");
 			});
 		}
@@ -308,10 +249,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		PvpMapService.getInstance().closeMap(instanceId);
 		canJoin.set(false);
 		cancelTasks();
-		joinOrLeaveTime.clear();
-		respawnLocations.clear();
-		supplyPositions.clear();
-		origins.clear();
+		clearLists();
 	}
 
 	private void cancelTasks() {
@@ -356,6 +294,10 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		canJoin.set(false);
 		cancelTasks();
 		instance.doOnAllPlayers(this::removePlayer);
+		clearLists();
+	}
+
+	private void clearLists() {
 		joinOrLeaveTime.clear();
 		respawnLocations.clear();
 		supplyPositions.clear();
@@ -373,7 +315,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public boolean leave(Player p) {
-		if (isNotInAnyNotAllowedState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
+		if (checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
 			startTeleportation(p, true);
 			return true;
 		}

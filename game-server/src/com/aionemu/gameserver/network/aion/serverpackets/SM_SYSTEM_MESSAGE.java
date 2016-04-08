@@ -17813,8 +17813,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 %1 %2 has died in %3.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, DescriptionId rankDescId, DescriptionId zoneNameDescId) {
-		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(), zoneNameDescId);
+	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, DescriptionId rankDescId, int zoneNameId) {
+		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(), new DescriptionId(zoneNameId * 2 + 1));
 	}
 
 	/**
@@ -26766,6 +26766,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(901354);
 	}
 
+	/**
+	 * Supplies have been delivered to some of the sentry posts.
+	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
 		return new SM_SYSTEM_MESSAGE(1401965);
 	}

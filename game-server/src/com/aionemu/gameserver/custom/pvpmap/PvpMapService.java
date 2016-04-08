@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.custom.pvpmap;
 
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -8,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Yeats 06.04.2016.
@@ -85,14 +83,6 @@ public class PvpMapService {
 			}
 			handler = mapHandler;
 			return mapHandler;
-		}
-	}
-
-	public void announce(String message) {
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-
-		while (iter.hasNext()) {
-			PacketSendUtility.sendBrightYellowMessageOnCenter(iter.next(), message);
 		}
 	}
 
