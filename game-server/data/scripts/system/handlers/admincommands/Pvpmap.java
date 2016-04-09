@@ -14,7 +14,7 @@ public class Pvpmap extends AdminCommand {
 
 	public Pvpmap() {
 		super("pvpmap", "(De-)Activates the PvP-Map.");
-		setParamInfo("//pvpmap <activate | deactivate> (de-)activate the PvP-Map.\nDeactivating the PvP-Map will remove all players from the current map.");
+		setParamInfo("<activate | deactivate> (de-)activate the PvP-Map.\nDeactivating the PvP-Map will remove all players from the current map.");
 	}
 
 	@Override
