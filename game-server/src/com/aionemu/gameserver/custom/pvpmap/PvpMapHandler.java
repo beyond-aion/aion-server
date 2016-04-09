@@ -27,6 +27,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.PvpService;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
@@ -138,11 +139,15 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 					if (isLeaving) {
 						removePlayer(p);
 					} else {
-						updateOrigin(p);
-						updateJoinOrLeaveTime(p);
-						InstanceService.registerPlayerWithInstance(instance, p);
-						WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size()-1));
-						TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
+						if (!SiegeService.getInstance().isNearVulnerableFortress(p)) {
+							updateOrigin(p);
+							updateJoinOrLeaveTime(p);
+							InstanceService.registerPlayerWithInstance(instance, p);
+							WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
+							TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
+						} else {
+							PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while near a vulnerable fortress.");
+						}
 					}
 				}
 			}, 1000);
@@ -306,7 +311,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private synchronized void removePlayer(Player p) {
 		updateJoinOrLeaveTime(p);
-		if (origins.containsKey(p.getObjectId())) {
+		if (!SiegeService.getInstance().isNearVulnerableFortress(p) && origins.containsKey(p.getObjectId())) {
 			TeleportService2.teleportTo(p, origins.get(p.getObjectId()));
 			origins.remove(p.getObjectId());
 		} else {
