@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.services.base;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -12,7 +13,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
@@ -23,41 +23,44 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Source
  * @reworked Estrayl
  */
 public abstract class Base<T extends BaseLocation> {
+
 	private final BaseBossDeathListener bossDeathListener = new BaseBossDeathListener(this);
-	private final List<SpawnGroup2> spawns;	
+	private final List<SpawnGroup2> spawns;
 	private final T bLoc;
 	private final int id;
-	private List<Npc> assaulter = new ArrayList<>();
-	private Future<?> assaultTask, assaultDespawnTask, bossSpawnTask, outriderSpawnTask;
+	private List<Npc> assaulter = new FastTable<>();
+	private Future<?> assaultTask, assaultDespawnTask, bossSpawnTask, enhancedSpawnTask, outriderSpawnTask;
 	private AtomicBoolean isStarted = new AtomicBoolean(false);
 	private AtomicBoolean isFinished = new AtomicBoolean(false);
 	private Npc boss, flag;
 
 	protected abstract int getAssaultDelay();
+
 	protected abstract int getAssaultDespawnDelay();
+
 	protected abstract int getBossSpawnDelay();
+
 	protected abstract int getNpcSpawnDelay();
-	
+
 	Base(T bLoc) {
 		this.bLoc = bLoc;
 		this.id = bLoc.getId();
 		spawns = initSpawns();
 	}
-	
+
 	public final void start() throws BaseException {
 		if (isStarted.compareAndSet(false, true))
 			handleStart();
 		else
 			throw new BaseException("Attempt to start Base twice! ID:" + id);
 	}
-	
+
 	public final void stop() throws BaseException {
 		if (isFinished.compareAndSet(false, true))
 			handleStop();
@@ -65,7 +68,7 @@ public abstract class Base<T extends BaseLocation> {
 			throw new BaseException("Attempt to stop Base twice! ID:" + id);
 	}
 
-	protected void handleStart() {		
+	protected void handleStart() {
 		spawnBySpawnHandler(SpawnHandlerType.FLAG, getRace());
 		spawnBySpawnHandler(SpawnHandlerType.MERCHANT, getRace());
 		spawnBySpawnHandler(SpawnHandlerType.SENTINEL, getRace());
@@ -74,14 +77,11 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	protected void handleStop() {
-		cancelAssaultTask();
-		cancelAssaultDespawnTask();
-		cancelBossSpawnTask();
-		cancelOutriderSpawnTask();
+		cancelTask(assaultTask, assaultDespawnTask, bossSpawnTask, enhancedSpawnTask, outriderSpawnTask);
 		unregDeathListener();
 		despawnAllNpcs();
 	}
-	
+
 	private void despawnAllNpcs() {
 		List<Npc> spawned = World.getInstance().getBaseSpawns(id);
 		if (spawned != null) {
@@ -91,81 +91,74 @@ public abstract class Base<T extends BaseLocation> {
 			}
 		}
 	}
-	
+
 	protected void scheduleOutriderSpawn() {
-		outriderSpawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (isFinished.get() || getNpcSpawnDelay() == 0)
-					return;
-				spawnBySpawnHandler(SpawnHandlerType.OUTRIDER, getRace());
-				if (bLoc instanceof StainedBaseLocation) {
-					if (((StainedBaseLocation) bLoc).isEnhanced()) {
-						spawnBySpawnHandler(SpawnHandlerType.GUARDIAN, getRace());
-						spawnBySpawnHandler(SpawnHandlerType.OUTRIDER_ENHANCED, getRace());
-					}
+		outriderSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isFinished.get() || getNpcSpawnDelay() == 0)
+				return;
+			spawnBySpawnHandler(SpawnHandlerType.OUTRIDER, getRace());
+			if (bLoc instanceof StainedBaseLocation) {
+				if (((StainedBaseLocation) bLoc).isEnhanced()) {
+					spawnBySpawnHandler(SpawnHandlerType.GUARDIAN, getRace());
+					spawnBySpawnHandler(SpawnHandlerType.OUTRIDER_ENHANCED, getRace());
 				}
 			}
 		}, getNpcSpawnDelay());
 	}
-	
+
 	protected void scheduleBossSpawn() {
-		bossSpawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (isFinished.get())
-					return;
-				spawnBySpawnHandler(SpawnHandlerType.BOSS, getRace());
-				broadcastMessage(getBossSpawnMsg());
-				scheduleAssault();
-			}
+		bossSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isFinished.get())
+				return;
+			spawnBySpawnHandler(SpawnHandlerType.BOSS, getRace());
+			broadcastMessage(getBossSpawnMsg());
+			scheduleAssault();
 		}, getBossSpawnDelay());
 	}
-	
+
 	private void scheduleAssault() {
-		assaultTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (isFinished.get())
-					return;
-				if (flag.getPosition().getMapRegion().isMapRegionActive()) {
-					spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
-					broadcastMessage(getAssaultMsg());
-					scheduleAssaultDespawn();
-				} else {
-					if (Rnd.get(1, 100) <= 25)
-						BaseService.getInstance().capture(id, chooseAssaultRace());
-					scheduleAssault();
-				}
+		assaultTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isFinished.get())
+				return;
+			if (flag.getPosition().getMapRegion().isMapRegionActive()) {
+				spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
+				broadcastMessage(getAssaultMsg());
+				scheduleAssaultDespawn();
+			} else {
+				if (Rnd.get(1, 100) <= 20)
+					BaseService.getInstance().capture(id, chooseAssaultRace());
+				scheduleAssault();
 			}
 		}, getAssaultDelay());
 	}
-	
+
+	public void scheduleEnhancedSpawns() {
+		enhancedSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isFinished.get())
+				return;
+			spawnBySpawnHandler(SpawnHandlerType.GUARDIAN, getRace());
+			spawnBySpawnHandler(SpawnHandlerType.OUTRIDER_ENHANCED, getRace());
+		}, 295 * 1000);
+	}
+
 	private Race chooseAssaultRace() {
-		List<Race> coll = new ArrayList<>();
+		List<Race> coll = new FastTable<>();
 		coll.add(Race.ASMODIANS);
 		coll.add(Race.ELYOS);
 		coll.add(Race.NPC);
 		coll.remove(getRace());
 		return coll.get(Rnd.get(0, 1));
 	}
-	
+
 	private void scheduleAssaultDespawn() {
-		assaultDespawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (isFinished.get())
-					return;
-				despawnAssaulter();
-				scheduleAssault();
-			}
+		assaultDespawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isFinished.get())
+				return;
+			despawnAssaulter();
+			scheduleAssault();
 		}, getAssaultDespawnDelay());
 	}
-	
+
 	private void despawnAssaulter() {
 		for (Npc npc : assaulter) {
 			if (npc != null && !npc.getLifeStats().isAlreadyDead())
@@ -173,7 +166,7 @@ public abstract class Base<T extends BaseLocation> {
 		}
 		assaulter.clear();
 	}
-	
+
 	public void spawnBySpawnHandler(SpawnHandlerType type, Race targetRace) {
 		for (SpawnGroup2 group : spawns) {
 			for (SpawnTemplate temp : group.getSpawnTemplates()) {
@@ -198,7 +191,7 @@ public abstract class Base<T extends BaseLocation> {
 			}
 		}
 	}
-	
+
 	private void initBoss(Npc npc) throws BaseException, NullPointerException {
 		if (npc == null)
 			throw new NullPointerException("No boss found for base! ID:" + id);
@@ -213,7 +206,7 @@ public abstract class Base<T extends BaseLocation> {
 			throw new BaseException("Tried to initialize non-boss npc as boss for base ID:" + id);
 		}
 	}
-	
+
 	private void initFlag(Npc npc) throws BaseException, NullPointerException {
 		if (npc == null)
 			throw new NullPointerException("No flag found for base! ID:" + id);
@@ -226,15 +219,15 @@ public abstract class Base<T extends BaseLocation> {
 			throw new BaseException("Tried to initialize non-flag npc as flag for base ID:" + id);
 		}
 	}
-	
+
 	private List<SpawnGroup2> initSpawns() throws NullPointerException {
-		List<SpawnGroup2> temp = DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id);			
+		List<SpawnGroup2> temp = DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id);
 		if (temp != null)
 			return temp;
 		else
-		 throw new NullPointerException("No spawns found for base ID:" + id);
-}
-	
+			throw new NullPointerException("No spawns found for base ID:" + id);
+	}
+
 	private SM_SYSTEM_MESSAGE getBossSpawnMsg() {
 		switch (id) {
 			case 6101:
@@ -262,12 +255,12 @@ public abstract class Base<T extends BaseLocation> {
 			case 6112:
 				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_CHIEF_V12();
 			case 6113:
-				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_CHIEF_V13();	
+				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_CHIEF_V13();
 			default:
 				return null;
 		}
 	}
-	
+
 	private SM_SYSTEM_MESSAGE getAssaultMsg() {
 		switch (id) {
 			case 6101:
@@ -295,93 +288,74 @@ public abstract class Base<T extends BaseLocation> {
 			case 6112:
 				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_KILLER_V12();
 			case 6113:
-				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_KILLER_V13();	
+				return SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_KILLER_V13();
 			default:
 				return null;
 		}
 	}
-	
+
 	private void broadcastMessage(SM_SYSTEM_MESSAGE msg) {
-		if (msg != null) {
-			World.getInstance().getWorldMap(getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
-				@Override
-				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, msg);
-				}
-			});
-		}
+		if (msg != null)
+			World.getInstance().getWorldMap(getWorldId()).getMainWorldMapInstance().doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, msg));
 	}
-	
+
 	private void regDeathListener() {
 		if (boss == null)
 			throw new BaseException("Tried to register DeathListener for null boss! BaseID:" + id);
 		AbstractAI ai = (AbstractAI) getBoss().getAi2();
 		ai.addEventListener(bossDeathListener);
 	}
-	
+
 	protected void unregDeathListener() {
 		if (boss == null)
 			return;
 		AbstractAI ai = (AbstractAI) getBoss().getAi2();
 		ai.removeEventListener(bossDeathListener);
 	}
-	
-	protected void cancelAssaultTask() {
-		if (assaultTask != null && assaultTask.isCancelled())
-			assaultTask.cancel(true);
+
+	protected void cancelTask(Future<?>... tasks) {
+		for (Future<?> task : tasks) {
+			if (task != null && task.isCancelled())
+				task.cancel(true);
+		}
 	}
-	
-	protected void cancelAssaultDespawnTask() {
-		if (assaultDespawnTask != null && assaultDespawnTask.isCancelled())
-			assaultDespawnTask.cancel(true);
-	}
-	
-	protected void cancelBossSpawnTask() {
-		if (bossSpawnTask != null && bossSpawnTask.isCancelled())
-			bossSpawnTask.cancel(true);
-	}
-	
-	public void cancelOutriderSpawnTask() {
-		if (outriderSpawnTask != null && outriderSpawnTask.isCancelled())
-			outriderSpawnTask.cancel(true);
-	}
-	
+
 	public Npc getBoss() {
 		return boss;
 	}
-	
+
 	public Npc getFlag() {
 		return flag;
 	}
-	
+
 	public T getLocation() {
 		return bLoc;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public int getWorldId() {
 		return bLoc.getWorldId();
 	}
-	
+
 	public Race getRace() {
 		return bLoc.getRace();
 	}
-	
+
 	public void setLocRace(Race race) {
 		bLoc.setRace(race);
 	}
-	
+
 	public boolean isStarted() {
 		return isStarted.get();
 	}
-	
+
 	public boolean isFinished() {
 		return isFinished.get();
 	}
-	
+
 	public boolean isUnderAssault() {
 		return !assaulter.isEmpty();
 	}

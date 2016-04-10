@@ -32,7 +32,7 @@ public class StainedBase extends Base<StainedBaseLocation> {
 
 	@Override
 	protected int getNpcSpawnDelay() {
-		return 295;
+		return 295 * 1000;
 	}
 	
 	public BaseColorType getColor() {

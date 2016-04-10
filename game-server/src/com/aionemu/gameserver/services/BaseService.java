@@ -28,6 +28,7 @@ import com.aionemu.gameserver.world.World;
  * @reworked Estrayl
  */
 public class BaseService {
+
 	private final static Logger log = LoggerFactory.getLogger(BaseService.class);
 	private final static BaseService instance = new BaseService();
 	private final Map<Integer, Base<?>> activeBases = new ConcurrentHashMap<>();
@@ -35,7 +36,7 @@ public class BaseService {
 	private Map<Integer, BaseLocation> casualBases;
 	private Map<Integer, SiegeBaseLocation> siegeBases;
 	private Map<Integer, StainedBaseLocation> stainedBases;
-	
+
 	/**
 	 * Initializes all base locations
 	 */
@@ -43,10 +44,10 @@ public class BaseService {
 		log.info("Initializing bases...");
 		casualBases = DataManager.BASE_DATA.getCasualBaseLocations();
 		siegeBases = DataManager.BASE_DATA.getSiegeBaseLocations();
-		stainedBases = DataManager.BASE_DATA.getStainedBaseLocations();		
+		stainedBases = DataManager.BASE_DATA.getStainedBaseLocations();
 		allBases = DataManager.BASE_DATA.getAllBaseLocations();
 	}
-	
+
 	/**
 	 * Executes start of all casual and stained bases.
 	 */
@@ -65,9 +66,9 @@ public class BaseService {
 	 * @param id
 	 */
 	public final void start(int id) {
-		final Base<?> base;	
-		
-		synchronized(this) {
+		final Base<?> base;
+
+		synchronized (this) {
 			if (activeBases.containsKey(id))
 				return;
 			base = newBase(id);
@@ -79,7 +80,7 @@ public class BaseService {
 			log.error("Base could not be started! ID:" + id, e);
 		}
 	}
-	
+
 	/**
 	 * returns a type-specific base object for given id
 	 * if a base location is given for the specific id.
@@ -109,37 +110,38 @@ public class BaseService {
 	public final void capture(int id, Race race) {
 		if (!isActive(id))
 			return;
-		
+
 		Base<?> base = getActiveBase(id);
-		if (base instanceof StainedBase)
-			handleStainedFeatures((StainedBase) base);
 		if (race != null)
 			base.setLocRace(race);
 		stop(id);
 		start(id);
+		if (base instanceof StainedBase)
+			handleStainedFeatures((StainedBase) base);
 	}
-	
+
 	private final void handleStainedFeatures(StainedBase target) {
 		List<StainedBase> spec = new FastTable<>();
 		for (Base<?> possibleSBase : activeBases.values()) {
 			if (possibleSBase instanceof StainedBase) {
 				StainedBase sb = (StainedBase) possibleSBase;
 				if (!sb.equals(target)) {
-					if (sb.getColor().equals(target.getColor())) 
+					if (sb.getColor().equals(target.getColor()))
 						spec.add(sb);
 				}
 			}
 		}
-		boolean isSgEnhanced = target.isEnhanced();
-		if (isSgEnhanced) { //handles de-activation of enhanced mode
+		if (target.isEnhanced()) { // handles de-activation of enhanced mode
 			target.setEnhanced(false);
 			for (StainedBase sBase : spec) {
 				despawnByHandlerType(SpawnHandlerType.OUTRIDER_ENHANCED, sBase.getId());
 				despawnByHandlerType(SpawnHandlerType.GUARDIAN, sBase.getId());
 				sBase.setEnhanced(false);
 			}
-		} else { //handles activation of enhanced mode
+		} else { // handles activation of enhanced mode
 			Race race = target.getRace();
+			if (race == Race.NPC) // no enhanced spawns for Balaur | Lepharists etc.
+				return;
 			byte unequalBases = 0;
 			for (StainedBase sBase : spec) {
 				if (!sBase.getRace().equals(race))
@@ -148,19 +150,13 @@ public class BaseService {
 			if (unequalBases == 0) {
 				target.setEnhanced(true);
 				for (StainedBase sBase : spec) {
-					sBase.cancelOutriderSpawnTask();
-					despawnByHandlerType(SpawnHandlerType.OUTRIDER, sBase.getId());
-					despawnByHandlerType(SpawnHandlerType.SENTINEL, sBase.getId());
-					sBase.spawnBySpawnHandler(SpawnHandlerType.OUTRIDER, race);
-					sBase.spawnBySpawnHandler(SpawnHandlerType.OUTRIDER_ENHANCED, race);
-					sBase.spawnBySpawnHandler(SpawnHandlerType.SENTINEL, race);
-					sBase.spawnBySpawnHandler(SpawnHandlerType.GUARDIAN, race);
 					sBase.setEnhanced(true);
+					sBase.scheduleEnhancedSpawns();
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Removes base with given id from activeBases
 	 * and stops it.
@@ -183,12 +179,13 @@ public class BaseService {
 			log.error("Base could not be stopped! ID:" + id, e);
 		}
 	}
-	
+
 	/**
 	 * Gets npcs for base id and despawns all which have the
 	 * parameterized SpawnHandlerType
 	 * 
-	 * @param SpawnHandlerType type
+	 * @param SpawnHandlerType
+	 *          type
 	 * @param id
 	 */
 	private static void despawnByHandlerType(SpawnHandlerType type, int id) {
@@ -201,35 +198,35 @@ public class BaseService {
 			}
 		}
 	}
-	
+
 	public Map<Integer, BaseLocation> getBaseLocations() {
 		return allBases;
 	}
-	
+
 	public BaseLocation getBaseLocation(int id) {
 		return allBases.get(id);
 	}
-	
+
 	public BaseLocation getCasualBaseLocation(int id) {
 		return casualBases.get(id);
 	}
-	
+
 	public SiegeBaseLocation getSiegeBaseLocation(int id) {
 		return siegeBases.get(id);
 	}
-	
+
 	public StainedBaseLocation getStainedBaseLocation(int id) {
 		return stainedBases.get(id);
 	}
-	
+
 	public Base<?> getActiveBase(int id) {
 		return activeBases.get(id);
 	}
-	
+
 	public boolean isActive(int id) {
 		return activeBases.containsKey(id);
 	}
-	
+
 	public static BaseService getInstance() {
 		return instance;
 	}
