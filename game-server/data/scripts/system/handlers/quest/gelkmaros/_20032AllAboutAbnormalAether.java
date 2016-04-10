@@ -191,12 +191,13 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 				removeQuestItem(env, 182215593, 1);
 				
 				int var = qs.getQuestVarById(0);
-				if (var > 2 && var < 7) {
-					qs.setQuestVar(2);
-					updateQuestStatus(env);
+				if (var >= 3 && var < 7) {
+					restoreStep(env);
 					return true;
 				}
 				else if (var == 7) { // Final boss killed
+					removeQuestItem(env, 182215618, 1);
+					removeQuestItem(env, 182215619, 1);
 					qs.setQuestVar(8); // Reward
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
@@ -232,9 +233,9 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (var >= 4 && var < 6) {
-				removeQuestItem(env, 182215592, 1);
-				removeQuestItem(env, 182215593, 1);
+			if (var >= 3 && var <= 7) {
+				removeQuestItem(env, 182215618, 1);
+				removeQuestItem(env, 182215619, 1);
 				qs.setQuestVar(2);
 				updateQuestStatus(env);
 				return true;
