@@ -9,14 +9,18 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Tiger edited by Wakizashi, fixed Rolandas
+ * @author Tiger
+ * @modified Wakizashi, Rolandas, Pad
  */
 public class _1994ANewChoice extends QuestHandler {
 
 	private final static int questId = 1994;
-	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1183, 1204, 1225, 1246 };
-	private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572, 115000826,
-		101800569, 101900562, 102000592 };
+	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1204, 1225, 1246, 5105, 1183 };
+	private final static int items[][] = {
+		{ 100000723, 100000724 }, { 100900554, 100900555 }, { 101300538, 101300539 }, { 100200673, 100200674 }, { 101700594, 101700595 }, 	// physical
+		{ 100100568, 100100569 }, { 101500566, 101500567 }, { 100600608, 100600609 }, { 100500572, 100500573 }, { 101800569, 101800570 }, 	// magical
+		{ 101900562, 101900563 }, { 102000592, 102000593 }, { 102100517, 102100518}, 
+		{ 115000826, 115000828 }};																																																					// shield
 
 	public _1994ANewChoice() {
 		super(questId);
@@ -46,28 +50,32 @@ public class _1994ANewChoice extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203754) { // Aithra
 				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 					return sendQuestDialog(env, 1011);
 				}
 				for (; dialogIndex < dialogs.length; dialogIndex++) {
-					if (dialogs[dialogIndex] == env.getDialogId()) {
+					if (dialogs[dialogIndex] == dialogId) {
 						itemSelected = true;
 						break;
 					}
 				}
 				if (itemSelected) {
-					long itemCount = player.getInventory().getItemCountByItemId(items[dialogIndex]);
+					long itemCount = 0;
+					for (int itemId : items[dialogIndex]) {
+						itemCount = player.getInventory().getItemCountByItemId(itemId);
+						if (itemCount > 0)
+							break;
+					}
 					if (itemCount > 0) {
-						qs.setReward(dialogIndex << 4);
+						qs.setReward(dialogIndex);
 						return sendQuestDialog(env, 1013);
 					} else {
 						return sendQuestDialog(env, 1352);
 					}
 				} else {
-					int savedData = qs.getReward();
-					switch (env.getDialogId()) {
+					switch (dialogId) {
 						case 1012:
 						case 1097:
 						case 1182:
@@ -76,29 +84,43 @@ public class _1994ANewChoice extends QuestHandler {
 						case 10000:
 						case 10001:
 						case 10002:
-						case 10003: {
-							if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
-								return sendQuestDialog(env, 1009);
-							changeQuestStep(env, 0, 0, true);
-							qs.setReward(savedData | (dialogId - 10000));
-							return sendQuestDialog(env, dialogId - 10000 + 5);
-						}
+						case 10003:
 						case 10004:
 						case 10005: {
 							if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
 								return sendQuestDialog(env, 1009);
+							int savedData = qs.getReward();
+							int itemIdToRemove = 0;
+							for (int itemId : items[savedData]) {
+								if (player.getInventory().getItemCountByItemId(itemId) > 0)
+									itemIdToRemove = itemId;
+							}
+							if (itemIdToRemove == 0)
+								return sendQuestDialog(env, 1352);
 							changeQuestStep(env, 0, 0, true);
-							qs.setReward(savedData | (dialogId - 10000));
-							return sendQuestDialog(env, dialogId - 10000 + 41);
+							removeQuestItem(env, 186000041, 1);
+							removeQuestItem(env, itemIdToRemove, 1);
+							qs.setReward(dialogId - 10000);
+							if (dialogId >= 10004)
+								return sendQuestDialog(env, dialogId - 10000 + 41);
+							else
+								return sendQuestDialog(env, dialogId - 10000 + 5);
 						}
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203754) { // Aithray
 				int savedData = qs.getReward();
-				if (removeQuestItem(env, items[savedData >> 4], 1) && removeQuestItem(env, 186000041, 1)) {
-					return sendQuestEndDialog(env, savedData & 0x7);
+				if (savedData >= 4) {
+					if (dialogId == DialogAction.USE_OBJECT.id())
+						return sendQuestDialog(env, savedData + 41);
+					else if (dialogId >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_REWARD5.id()) {
+						QuestService.finishQuest(env, savedData);
+						return closeDialogWindow(env);
+					}
+				} else {
+					return sendQuestEndDialog(env, savedData);
 				}
 			}
 		}
