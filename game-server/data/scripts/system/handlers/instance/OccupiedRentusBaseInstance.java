@@ -31,8 +31,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private AtomicBoolean isRaceKnown = new AtomicBoolean(false);
-	private AtomicBoolean isXastaEventStarted = new AtomicBoolean(false);
+	private AtomicBoolean isRaceKnown = new AtomicBoolean();
+	private AtomicBoolean isXastaEventStarted = new AtomicBoolean();
 
 	@Override
 	public void onDie(final Npc npc) {
@@ -51,6 +51,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 236298: // Kuhara
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
+				doors.get(43).setOpen(false);
 				doors.get(150).setOpen(true);
 				npc.getController().onDelete();
 				break;
@@ -59,6 +60,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 236300: // Brigade General Vasharti
 				deleteNpc(799669);
+				doors.get(70).setOpen(true);
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86);
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
@@ -87,6 +89,19 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				spawn(217300, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				despawnNpc(npc);
 				break;
+		}
+	}
+	
+	@Override
+	public void onAggro(Npc npc) {
+		switch (npc.getNpcId()) {
+		case 236298: // Kuhara
+			doors.get(43).setOpen(true);
+			NpcShoutsService.getInstance().sendMsg(npc, 1500393, npc.getObjectId(), 0, 0);
+			break;
+		case 236300: // Vasharti
+			doors.get(70).setOpen(false);
+			break;
 		}
 	}
 
