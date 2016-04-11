@@ -765,6 +765,15 @@ public class SiegeService {
 		return true;
 	}
 
+	public boolean isNearVulnerableFortress(Player player) {
+		for (FortressLocation fortress : getFortresses().values()) {
+			if (fortress.isVulnerable() && fortress.isInsideLocation(player)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void onPlayerLogin(final Player player) {
 		// not on login
 		// PacketSendUtility.sendPacket(player, new SM_ABYSS_ARTIFACT_INFO(getSiegeLocations().values()));

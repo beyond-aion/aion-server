@@ -52,9 +52,12 @@ public class _16987SeekOuttheCorridor extends QuestHandler {
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
-		qs.setQuestVarById(0, 1);
-		qs.setStatus(QuestStatus.REWARD);
-		updateQuestStatus(env);
-		return true;
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			qs.setQuestVarById(0, 1);
+			qs.setStatus(QuestStatus.REWARD);
+			updateQuestStatus(env);
+			return true;
+		}
+		return false;
 	}
 }

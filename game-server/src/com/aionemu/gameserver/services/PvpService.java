@@ -16,6 +16,7 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.KillList;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
@@ -184,7 +185,7 @@ public class PvpService {
 			AbyssPointsService.addAp(victim, -apActuallyLost);
 
 		// Announce that player has died.
-		if (victim.isInInstance() && victim.getWorldId() != 301220000) {
+		if (victim.isInInstance() && !PvpMapService.getInstance().isOnPvPMap(victim)) {
 			PacketSendUtility.broadcastPacketAndReceive(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()));
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
 		} else {

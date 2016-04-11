@@ -1,14 +1,13 @@
 package com.aionemu.gameserver.custom.pvpmap;
 
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Yeats 06.04.2016.
@@ -27,10 +26,12 @@ public class PvpMapService {
 	private void join(Player p) {
 		if (p.getLevel() < 60) {
 			PacketSendUtility.sendMessage(p, "The PvP-Map is for players level 60 and above.");
-		} else if (p.isInInstance()) {
+		} else if (p.isInInstance() || p.getPanesterraTeam() != null) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in an instance.");
 		} else if (p.getController().isInCombat()) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in combat.");
+		} else if (SiegeService.getInstance().isNearVulnerableFortress(p)) {
+			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while you are near a vulnerable fortress.");
 		} else if (isActive.get()) {
 			PvpMapHandler handler = getOrCreateNewHandler();
 			if (handler != null) {
@@ -55,6 +56,13 @@ public class PvpMapService {
 		} else {
 			join(p);
 		}
+	}
+
+	public boolean isOnPvPMap(Player p) {
+		if (handler != null) {
+			return handler.isOnMap(p);
+		}
+		return false;
 	}
 
 	public synchronized void closeMap(int instanceId) {
@@ -85,14 +93,6 @@ public class PvpMapService {
 			}
 			handler = mapHandler;
 			return mapHandler;
-		}
-	}
-
-	public void announce(String message) {
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-
-		while (iter.hasNext()) {
-			PacketSendUtility.sendBrightYellowMessageOnCenter(iter.next(), message);
 		}
 	}
 
