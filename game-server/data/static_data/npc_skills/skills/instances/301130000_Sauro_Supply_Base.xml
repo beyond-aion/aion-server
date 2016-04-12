@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../npc_skills.xsd">
+	<!-- FIGHTER -->
+	<npcskills npcid="230786 230787 230791">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+		<npcskill skillid="17714" skilllevel="56" probability="3"/>
+        <npcskill skillid="17294" skilllevel="56" probability="61"/>
+        <npcskill skillid="21284" skilllevel="56" probability="36"/>
+    </npcskills>
+	<!-- ASSASSIN -->
+	<npcskills npcid="230792 230793 233277 230797">
+		<npcskill skillid="19915" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20700" skilllevel="1" probability="100" cooldown="100000"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+        <npcskill skillid="17332" skilllevel="56" probability="25"/>
+		<npcskill skillid="17446" skilllevel="56" probability="20"/>
+		<npcskill skillid="18159" skilllevel="1" probability="40"/>
+        <npcskill skillid="21286" skilllevel="1" probability="25"/>
+		<npcskill skillid="21291" skilllevel="56" probability="25"/>
+		<npcskill skillid="21411" skilllevel="1" probability="20"/>
+    </npcskills>
+	<!-- WITCH -->
+	<npcskills npcid="230798">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+        <npcskill skillid="17335" skilllevel="56" probability="75" minhp="63" maxhp="100"/>
+        <npcskill skillid="21288" skilllevel="56" probability="25" minhp="85" maxhp="90"/>
+    </npcskills>
+	<!-- PRIEST -->
+	<npcskills npcid="230804">
+		<npcskill skillid="19915" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+		<npcskill skillid="16566" skilllevel="56" probability="13" cooldown="20000">
+			<cond condType="HELP_FRIEND" hpBelow="90" range="15"/>
+		</npcskill>
+        <npcskill skillid="17359" skilllevel="56" probability="38"/>
+		<npcskill skillid="17360" skilllevel="56" probability="25"/>
+        <npcskill skillid="17361" skilllevel="56" probability="20" cooldown="30000">
+			<cond condType="HELP_SELF" hpBelow="85" range="15"/>
+		</npcskill>
+		<npcskill skillid="17366" skilllevel="56" probability="13" cooldown="30000">
+			<cond condType="HELP_FRIEND" hpBelow="30" range="20"/>
+		</npcskill>
+		<npcskill skillid="21278" skilllevel="1" probability="13"/>
+    </npcskills>
+	<!-- RIDER -->
+	<npcskills npcid="230810">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+        <npcskill skillid="20648" skilllevel="1" probability="6"/>
+        <npcskill skillid="21294" skilllevel="56" probability="25"/>
+		<npcskill skillid="21295" skilllevel="56" probability="25"/>
+		<npcskill skillid="21296" skilllevel="56" probability="25" cooldown="15000"/>
+		<npcskill skillid="21297" skilllevel="56" probability="29" cooldown="15000"/>
+    </npcskills>
+	<!-- GUNNER -->
+	<npcskills npcid="230814">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+		<npcskill skillid="20858" skilllevel="56" probability="30" cooldown="30000"/>
+        <npcskill skillid="21292" skilllevel="56" probability="57"/>
+		<npcskill skillid="21293" skilllevel="56" probability="57"/>
+		<npcskill skillid="21299" skilllevel="1" probability="20" cooldown="15000"/>
+    </npcskills>
+	<!-- MUSICIAN -->
+	<npcskills npcid="230820">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="20701" skilllevel="1" probability="100" maxhp="50" cooldown="180000" target="ME"/>
+		<npcskill skillid="20714" skilllevel="56" probability="25"/>
+        <npcskill skillid="20715" skilllevel="56" probability="25"/>
+		<npcskill skillid="20959" skilllevel="1" probability="25"/>
+        <npcskill skillid="20960" skilllevel="56" probability="25"/>
+    </npcskills>
+	<!-- Sheban Legion Bodyguard -->
+	<npcskills npcid="230826">
+        <npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="16602" skilllevel="56" probability="25"/>
+		<npcskill skillid="16602" skilllevel="56" probability="30" cooldown="20000"/>
+    </npcskills>
+	<!-- Sheban Legion Scout -->
+	<npcskills npcid="230830">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+        <npcskill skillid="19430" skilllevel="56" probability="69"/>
+        <npcskill skillid="16813" skilllevel="56" probability="31"/>
+    </npcskills>
+	<!-- Debilitation Turret -->
+	<npcskills npcid="230836">
+        <npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="17243" skilllevel="56" probability="50"/>
+    </npcskills>
+	<!-- Tamed Spaller Gatherer -->
+	<npcskills npcid="230837">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+        <npcskill skillid="17047" skilllevel="43" probability="25"/>
+    </npcskills>
+	<!-- Sauro Supply Base Drone -->
+	<npcskills npcid="230843">
+		<npcskill skillid="19498" skilllevel="1" probability="100" cooldown="600000">
+			<cond condType="SPAWN_NPC" npc_id="230786" min_distance="2" max_distance="4" random_direction="true" min_amount="2" max_amount="2"/>
+		</npcskill>
+	</npcskills>
+	<!-- Golem Loadbearer -->
+	<npcskills npcid="230844">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+        <npcskill skillid="16516" skilllevel="56" probability="43"/>
+        <npcskill skillid="16519" skilllevel="1" probability="14"/>
+    </npcskills>
+	<!-- Sauro Base Grave Robber -->
+	<npcskills npcid="230846">
+        <npcskill skillid="17446" skilllevel="56" probability="33"/>
+    </npcskills>
+	<!-- Guard Captain Rohuka -->
+    <npcskills npcid="230849">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="17332" skilllevel="56" probability="40"/>
+		<npcskill skillid="17446" skilllevel="56" probability="40" cooldown="7000"/>
+		<npcskill skillid="17447" skilllevel="56" probability="70" cooldown="15000"/>
+		<npcskill skillid="18158" skilllevel="56" probability="70" maxhp="50" cooldown="30000"/>
+        <npcskill skillid="18159" skilllevel="56" probability="40" cooldown="20000"/>
+		<npcskill skillid="18160" skilllevel="56" probability="70" maxhp="40" cooldown="30000"/>
+    </npcskills>
+	<!-- Researcher Teselik -->
+	<npcskills npcid="230850">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+        <npcskill skillid="17335" skilllevel="56" probability="33"/>
+		<npcskill skillid="20657" skilllevel="1" probability="100" cooldown="30000" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="284455" min_distance="5" max_distance="8" random_direction="true" min_amount="2" max_amount="2"/>
+		</npcskill>
+		<npcskill skillid="20701" skilllevel="1" probability="100" cooldown="60000" target="ME"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+        <npcskill skillid="21288" skilllevel="56" probability="23"/>
+		<!-- These two skills are used to control the summoned hands to deal big damage. Actual we have no real handling for NPC summon control
+		<npcskill skillid="20707" skilllevel="56" probability="6"/>
+        <npcskill skillid="20708" skilllevel="56" probability="6"/> -->
+    </npcskills>
+	<!-- Chief Gunner Kurmata -->
+	<npcskills npcid="230851">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="20858" skilllevel="56" probability="33" cooldown="20000"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="21219" skilllevel="56" probability="33" cooldown="20000"/>
+        <npcskill skillid="21292" skilllevel="56" probability="33" cooldown="5000"/>
+    </npcskills>
+	<!-- Commander Ranodim -->
+	<npcskills npcid="230852">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="17294" skilllevel="1" probability="30"/>
+        <npcskill skillid="18166" skilllevel="1" probability="20"/>
+        <npcskill skillid="20702" skilllevel="1" probability="20" cooldown="20000"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+        <npcskill skillid="21417" skilllevel="1" probability="100" maxhp="50" cooldown="60000"/>
+		<npcskill skillid="21285" skilllevel="1" probability="20"/>
+    </npcskills>
+	<!-- Chief of Staff Moriata -->
+	<npcskills npcid="230853">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+        <npcskill skillid="18156" skilllevel="56" probability="20" cooldown="20000"/>
+		<npcskill skillid="21207" skilllevel="56" probability="20"/>
+        <npcskill skillid="21208" skilllevel="56" probability="20" cooldown="15000"/>
+		<npcskill skillid="21209" skilllevel="56" probability="20" cooldown="15000"/>
+		<npcskill skillid="21210" skilllevel="56" probability="20" cooldown="20000"/>
+		<npcskill skillid="21417" skilllevel="56" probability="100" cooldown="40000"/>
+		<npcskill skillid="21418" skilllevel="56" probability="15"/>
+        <npcskill skillid="21419" skilllevel="56" probability="18" cooldown="17000"/>
+    </npcskills>
+	<!-- Guard Captain Ahuradim -->
+	<npcskills npcid="230857">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+        <npcskill skillid="21190" skilllevel="1" probability="8"/>
+        <!-- <npcskill skillid="21191" skilllevel="1" probability="5"/> used by generators -->
+        <npcskill skillid="21192" skilllevel="1" probability="20" cooldown="30000"/>
+        <npcskill skillid="21193" skilllevel="1" probability="23" cooldown="30000"/>
+        <npcskill skillid="21194" skilllevel="1" probability="20" cooldown="30000"/>
+        <!-- <npcskill skillid="21195" skilllevel="1" probability="10"/> -->
+		<npcskill skillid="21426" skilllevel="1" probability="25" nextChainId="1" nextSkillTime="0" cooldown="30000"/>
+        <npcskill skillid="21427" skilllevel="1" probability="100" chainId="1"  nextSkillTime="10000"/>
+        <npcskill skillid="21428" skilllevel="1" probability="5" cooldown="20000"/>
+        <npcskill skillid="21429" skilllevel="1" probability="5" cooldown="30000"/>
+    </npcskills>
+	<!-- Brigade General Sheba -->
+	<npcskills npcid="230858">
+        <npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21184" skilllevel="1" probability="100" maxhp="25" cooldown="600000" target="ME"/>
+		<npcskill skillid="21184" skilllevel="1" probability="100" maxhp="10" cooldown="600000" target="ME"/>
+		<npcskill skillid="21189" skilllevel="1" probability="100" maxhp="66" cooldown="600000" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="4" max_amount="4"/>
+		</npcskill>
+		<npcskill skillid="21189" skilllevel="1" probability="100" maxhp="20" cooldown="600000" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="2" max_amount="2"/>
+		</npcskill>
+		<npcskill skillid="21189" skilllevel="1" probability="100" maxhp="15" cooldown="600000" target="ME">
+			<cond condType="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="2" max_amount="2"/>
+		</npcskill>	
+		<npcskill skillid="21183" skilllevel="1" probability="40" maxhp="75" cooldown="60000" target="RANDOM"/>
+        <npcskill skillid="21187" skilllevel="1" probability="40" cooldown="30000"/>
+		<npcskill skillid="21188" skilllevel="1" probability="40" maxhp="90" cooldown="60000"/>
+        <npcskill skillid="21410" skilllevel="1" probability="20"/>
+        <npcskill skillid="21425" skilllevel="1" probability="20" cooldown="20000"/>
+        <npcskill skillid="21450" skilllevel="1" probability="5" maxhp="50" cooldown="30000"/>
+    </npcskills>
+	<!-- Gatekeeper Stranir -->
+	<npcskills npcid="233255">
+        <npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="20648" skilllevel="1" probability="10"/>
+        <npcskill skillid="21294" skilllevel="56" probability="25"/>
+		<npcskill skillid="21295" skilllevel="56" probability="25"/>
+		<npcskill skillid="21296" skilllevel="56" probability="25" cooldown="15000"/>
+		<npcskill skillid="21297" skilllevel="56" probability="29" cooldown="15000"/>
+    </npcskills>
+	<!-- Darkblade Ovanuka -->
+    <npcskills npcid="233256">
+        <npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="17332" skilllevel="56" probability="25"/>
+		<npcskill skillid="17446" skilllevel="56" probability="20"/>
+		<npcskill skillid="18159" skilllevel="1" probability="40"/>
+        <npcskill skillid="21286" skilllevel="1" probability="25"/>
+		<npcskill skillid="21291" skilllevel="56" probability="25"/>
+		<npcskill skillid="21411" skilllevel="1" probability="20"/>
+    </npcskills>
+	<!-- Archmagus Sayahum -->
+    <npcskills npcid="233257">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="17335" skilllevel="56" probability="75"/>
+		<npcskill skillid="17722" skilllevel="56" probability="50" cooldown="25000" target="RANDOM"/>
+        <npcskill skillid="21288" skilllevel="56" probability="25"/>
+        <npcskill skillid="21451" skilllevel="56" probability="25" cooldown="25000"/>
+        <npcskill skillid="20712" skilllevel="56" probability="25" cooldown="30000"/>
+    </npcskills>
+	<!-- Derakanak The Reaver -->
+	<npcskills npcid="233258">
+		<npcskill skillid="20700" skilllevel="1" probability="100" useinspawned="true"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+		<npcskill skillid="16574" skilllevel="56" probability="33" cooldown="10000"/>
+		<npcskill skillid="16702" skilllevel="56" probability="20" cooldown="50000"/>
+		<npcskill skillid="16918" skilllevel="56" probability="100" maxhp="75" cooldown="30000"/>
+		<npcskill skillid="16919" skilllevel="56" probability="100" maxhp="75" cooldown="30000"/>
+		<npcskill skillid="16987" skilllevel="56" probability="25" cooldown="20000"/>
+		<npcskill skillid="17888" skilllevel="56" probability="100" maxhp="60" cooldown="45000"/>
+        <npcskill skillid="20779" skilllevel="56" probability="25" cooldown="30000"/>
+		<npcskill skillid="20780" skilllevel="56" probability="25" cooldown="30000"/>
+        <npcskill skillid="20782" skilllevel="56" probability="25" cooldown="30000"/>
+		<npcskill skillid="21135" skilllevel="1" probability="100" maxhp="60" cooldown="60000"/>
+    </npcskills>
+	<!-- Enslaved Danuar -->
+	<npcskills npcid="284435">
+		<npcskill skillid="21185" skilllevel="16" probability="100">
+			<cond delay="5000" despawn_time="5000"/>
+		</npcskill>
+	</npcskills>
+</npc_skill_templates>
