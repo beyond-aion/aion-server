@@ -237,11 +237,13 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
+	private int enemyState;
 
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
-	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance, @Nonnull Account account) {
+	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance,
+		@Nonnull Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
 		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;
@@ -1153,16 +1155,34 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
+		// if (equals(enemy))
+		// return false;
+		// else
+		// return canPvP(enemy) || getController().isDueling(enemy) || getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1;
 		if (equals(enemy))
 			return false;
+		else if ((this.getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1))
+			return false;
+		else if (canPvP(enemy) || this.getController().isDueling(enemy))
+			return true;
 		else
-			return canPvP(enemy) || getController().isDueling(enemy) || getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1;
+			return (getEnemyState() == 2 || enemy.getEnemyState() == 2 || (!isInSameTeam(enemy) && (getEnemyState() == 1 || enemy.getEnemyState() == 1)));
 	}
 
 	public boolean isAggroIconTo(Player player) {
 		if (getAdminEnmity() > 1 || player.getAdminEnmity() > 1)
 			return true;
+		if (getEnemyState() == 2 || player.getEnemyState() == 2 || (!isInSameTeam(player) && (getEnemyState() == 1 || player.getEnemyState() == 1)))
+			return true;
 		return !player.getRace().equals(getRace());
+	}
+
+	public void setEnemyState(int value) {
+		this.enemyState = value;
+	}
+
+	public int getEnemyState() {
+		return enemyState;
 	}
 
 	private boolean canPvP(Player enemy) {

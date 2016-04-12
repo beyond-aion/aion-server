@@ -80,6 +80,7 @@ public abstract class Creature extends VisibleObject {
 	private long spawnTime = System.currentTimeMillis();
 	protected int type = CreatureType.NULL.getId();
 	private TribeClass tribe = TribeClass.GENERAL;
+	private boolean isEvent = false;
 
 	/**
 	 * @param objId
@@ -305,8 +306,7 @@ public abstract class Creature extends VisibleObject {
 	 * @return
 	 */
 	public boolean canAttack() {
-		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING)
-			&& !isInState(CreatureState.PRIVATE_SHOP));
+		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING) && !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
 	/**
@@ -796,14 +796,19 @@ public abstract class Creature extends VisibleObject {
 		return System.currentTimeMillis() - spawnTime < 1500;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean isRaidMonster() {
 		return false;
 	}
 
 	public boolean isWorldRaidMonster() {
 		return getTribe() == TribeClass.WORLDRAID_MONSTER || getTribe() == TribeClass.WORLDRAID_MONSTER_SANDWORMSUM && isRaidMonster();
+	}
+
+	public boolean isInEvent() {
+		return isEvent;
+	}
+
+	public void setIsInEvent(boolean isEvent) {
+		this.isEvent = isEvent;
 	}
 }

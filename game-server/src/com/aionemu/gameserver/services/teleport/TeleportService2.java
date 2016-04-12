@@ -65,6 +65,8 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class TeleportService2 {
 
 	private static final Logger log = LoggerFactory.getLogger(TeleportService2.class);
+	private static double[] eventPosAsmodians;
+	private static double[] eventPosElyos;
 
 	/**
 	 * Performs flight teleportation
@@ -455,9 +457,6 @@ public class TeleportService2 {
 		}
 	}
 
-	/**
-	 * @param portalName
-	 */
 	public static void useTeleportScroll(Player player, String portalName, int worldId) {
 		PortalScroll template = DataManager.PORTAL2_DATA.getPortalScroll(portalName);
 		if (template == null) {
@@ -479,14 +478,37 @@ public class TeleportService2 {
 		teleportTo(player, worldId, loc.getX(), loc.getY(), loc.getZ());
 	}
 
-	/**
-	 * @param channel
-	 */
 	public static void changeChannel(Player player, int channel) {
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel));
+	}
+
+	public static void setEventPos(WorldPosition pos, Race race) {
+		if (race == Race.ELYOS) {
+			eventPosElyos = new double[] { pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading() };
+			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: "
+				+ eventPosElyos[3] + ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
+		} else if (race == Race.ASMODIANS) {
+			eventPosAsmodians = new double[] { pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
+				pos.getHeading() };
+			log.info("asmo: mapId: " + (int) pos.getMapId() + ", instanceId: " + (int) eventPosAsmodians[1] + ", X: " + eventPosAsmodians[2] + ", Y: "
+				+ eventPosAsmodians[3] + ", Z: " + eventPosAsmodians[4] + ", H: " + (byte) eventPosAsmodians[5]);
+		}
+	}
+
+	public static void teleportToEvent(Player player) {
+		double[] pos = null;
+		if (player.getRace() == Race.ELYOS)
+			pos = eventPosElyos;
+		else if (player.getRace() == Race.ASMODIANS)
+			pos = eventPosAsmodians;
+
+		if (pos == null)
+			moveToBindLocation(player);
+		else
+			teleportTo(player, (int) pos[0], (int) pos[1], (float) pos[2], (float) pos[3], (float) pos[4], (byte) pos[5], TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

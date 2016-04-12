@@ -13,6 +13,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -51,6 +52,11 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 
 		if (invited.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_INVITE_PARTY(invited.getName(AdminConfig.CUSTOMTAG_ENABLE)));
+			return;
+		}
+
+		if (invited.getEnemyState() == 2 || inviter.getEnemyState() == 2) {
+			PacketSendUtility.sendMessage(inviter, "You can't invite players in FFA mode");
 			return;
 		}
 
