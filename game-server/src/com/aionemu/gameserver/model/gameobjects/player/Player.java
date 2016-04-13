@@ -238,6 +238,7 @@ public class Player extends Creature {
 	private float[] battleReturnCoords;
 	private int robotId;
 	private int enemyState;
+	private boolean isEvent = false;
 
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
@@ -1155,15 +1156,9 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
-		// if (equals(enemy))
-		// return false;
-		// else
-		// return canPvP(enemy) || getController().isDueling(enemy) || getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1;
 		if (equals(enemy))
 			return false;
-		else if ((this.getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1))
-			return false;
-		else if (canPvP(enemy) || this.getController().isDueling(enemy))
+		else if (getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1 || canPvP(enemy) || getController().isDueling(enemy))
 			return true;
 		else
 			return (getEnemyState() == 2 || enemy.getEnemyState() == 2 || (!isInSameTeam(enemy) && (getEnemyState() == 1 || enemy.getEnemyState() == 1)));
@@ -2163,5 +2158,13 @@ public class Player extends Creature {
 	@Override
 	public String toString() {
 		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
+	}
+	
+	public boolean isInEvent() {
+		return isEvent;
+	}
+
+	public void setIsInEvent(boolean isEvent) {
+		this.isEvent = isEvent;
 	}
 }

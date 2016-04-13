@@ -80,15 +80,7 @@ public abstract class Creature extends VisibleObject {
 	private long spawnTime = System.currentTimeMillis();
 	protected int type = CreatureType.NULL.getId();
 	private TribeClass tribe = TribeClass.GENERAL;
-	private boolean isEvent = false;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 * @param position
-	 */
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
 		WorldPosition position) {
 		super(objId, controller, spawnTemplate, objectTemplate, position);
@@ -802,13 +794,5 @@ public abstract class Creature extends VisibleObject {
 
 	public boolean isWorldRaidMonster() {
 		return getTribe() == TribeClass.WORLDRAID_MONSTER || getTribe() == TribeClass.WORLDRAID_MONSTER_SANDWORMSUM && isRaidMonster();
-	}
-
-	public boolean isInEvent() {
-		return isEvent;
-	}
-
-	public void setIsInEvent(boolean isEvent) {
-		this.isEvent = isEvent;
 	}
 }
