@@ -246,10 +246,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					case POLEARM:
 					case STAFF:
 					case GREATSWORD:
-						skillId = 8218;
+						skillId = 8218; // stumble
 						break;
 					case BOW:
-						skillId = 8217;
+						skillId = 8217; // stun
 				}
 			}
 
@@ -260,7 +260,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				return;
 			// On retail this effect apply on each crit with 10% of base chance
 			// plus bonus effect penetration calculated above
-			if (Rnd.get(100) > 10)
+			if (Rnd.get(1, 100) > 10)
 				return;
 
 			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
