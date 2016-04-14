@@ -232,7 +232,7 @@ public class StigmaService {
 					return 4169; // Judge's Edict
 				if (isEquipped(player, 140001246) && isEquipped(player, 2, 140001232, 140001233, isEly ? 140001234 : 140001235))
 					return 3934; // Restoration Relief
-				return 3911; // Summon Vexing Energy
+				return isEly ? 3906 : 3911; // Summon Vexing Energy
 			case CHANTER:
 				if (isEquipped(player, 140001226) && isEquipped(player, 2, 140001211, 140001212, 140001213))
 					return 1909; // Word of Instigation
