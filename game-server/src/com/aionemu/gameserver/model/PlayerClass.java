@@ -9,23 +9,23 @@ import javax.xml.bind.annotation.XmlEnum;
  */
 @XmlEnum
 public enum PlayerClass {
-	WARRIOR(0, true),
-	GLADIATOR(1), // fighter
-	TEMPLAR(2), // knight
-	SCOUT(3, true),
-	ASSASSIN(4),
-	RANGER(5),
-	MAGE(6, true),
-	SORCERER(7), // wizard
-	SPIRIT_MASTER(8), // elementalist
-	PRIEST(9, true),
-	CLERIC(10),
-	CHANTER(11),
-	ENGINEER(12, true),
-	RIDER(13),
-	GUNNER(14),
-	ARTIST(15, true),
-	BARD(16),
+	WARRIOR(0, 240000, true),
+	GLADIATOR(1, 240001), // fighter
+	TEMPLAR(2, 240002), // knight
+	SCOUT(3, 240003, true),
+	ASSASSIN(4, 240004),
+	RANGER(5, 240005),
+	MAGE(6, 240006, true),
+	SORCERER(7, 240007), // wizard
+	SPIRIT_MASTER(8, 240008), // elementalist
+	PRIEST(9, 240009, true),
+	CLERIC(10, 240010),
+	CHANTER(11, 240011),
+	ENGINEER(12, 904314, true),
+	RIDER(13, 904315),
+	GUNNER(14, 904316),
+	ARTIST(15, 904317, true),
+	BARD(16, 904318),
 	ALL(17),
 	
 	PHYSICAL_CLASS(WARRIOR.getClassId() | GLADIATOR.getClassId() | TEMPLAR.getClassId() |
@@ -37,6 +37,8 @@ public enum PlayerClass {
 	/** This id is used on client side */
 	private byte classId;
 
+	private int nameId;
+
 	/** This is the mask for this class id, used with bitwise AND in arguments that contain more than one possible class */
 	private int idMask;
 
@@ -44,11 +46,16 @@ public enum PlayerClass {
 	private boolean startingClass;
 
 	private PlayerClass(int classId) {
-		this(classId, false);
+		this(classId, 0, false);
 	}
 
-	private PlayerClass(int classId, boolean startingClass) {
+	private PlayerClass(int classId, int nameId) {
+		this(classId, nameId, false);
+	}
+
+	private PlayerClass(int classId, int nameId, boolean startingClass) {
 		this.classId = (byte) classId;
+		this.nameId = nameId;
 		this.startingClass = startingClass;
 		this.idMask = (int) Math.pow(2, classId);
 	}
@@ -77,6 +84,10 @@ public enum PlayerClass {
 		}
 
 		throw new IllegalArgumentException("There is no player class with id " + classId);
+	}
+
+	public int getNameId() {
+		return nameId;
 	}
 
 	/**

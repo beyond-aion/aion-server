@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -199,8 +198,8 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 					if (npc.getNpcId() == 800336) {
 						spawn(800338, 1104, 1069f, 497, (byte) 61);
 						Npc kahrun = getNpc(800338);
-						NpcShoutsService.getInstance().sendMsg(kahrun, 1500599, kahrun.getObjectId(), 0, 1000);
-						NpcShoutsService.getInstance().sendMsg(kahrun, 1500600, kahrun.getObjectId(), 0, 5000);
+						PacketSendUtility.broadcastMessage(kahrun, 1500599, 1000);
+						PacketSendUtility.broadcastMessage(kahrun, 1500600, 5000);
 					}
 					npc.getController().onDelete();
 				}

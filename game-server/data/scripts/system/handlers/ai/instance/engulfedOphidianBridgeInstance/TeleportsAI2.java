@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -35,7 +34,7 @@ public class TeleportsAI2 extends ActionItemNpcAI2 {
 				player.getInventory().decreaseByItemId(164000279, 1);
 			}
 		} else {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1402004);
+			PacketSendUtility.broadcastToMap(getOwner(), 1402004);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		return true;

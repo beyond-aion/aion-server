@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -25,14 +26,12 @@ public class Event extends AdminCommand {
 	public Event() {
 		super("event");
 
-		setParamInfo(
-			"//event setStatus [name] - disables ap gain/loss for the given player and sets him to event state", 
+		setParamInfo("//event setStatus [name] - disables ap gain/loss for the given player and sets him to event state",
 			"//event setGroupStatus [name] - gets and sets the group of the given player to event state and disables ap gain/loss for them",
 			"//event setEnemy <0|1|2> [name] {0:normal|1:group|2:ffa} - sets the specific state",
 			"//event pvpspawn [asmo|elyos] - sets a ressurrection point for the given race",
 			"//event clearInstance - clears the whole instance you have created",
-			"//event announce <text> - sends a yellow message for all players in event state",
-			"//event list - lists all players in event state",
+			"//event announce <text> - sends a yellow message for all players in event state", "//event list - lists all players in event state",
 			"//event removeAll - removes all players from event state");
 	}
 
@@ -67,12 +66,13 @@ public class Event extends AdminCommand {
 			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 			player.updateKnownlist();
 			PacketSendUtility.sendMessage(admin, "Player '" + player.getName() + "' removed from event state.");
-			PacketSendUtility.sendBrightYellowMessageOnCenter(player, "You were removed from event state!");
+			PacketSendUtility.sendMessage(player, "You were removed from event state!", ChatType.BRIGHT_YELLOW_CENTER);
 		} else if (!onlyRemove) {
 			player.setIsInEvent(true);
 			PacketSendUtility.sendMessage(admin, "Player '" + player.getName() + "' set to event state!");
-			PacketSendUtility.sendBrightYellowMessageOnCenter(player,
-				"You are in event state now. Please notice that you are not allowed to leave the event without removal of this state!");
+			PacketSendUtility.sendMessage(player,
+				"You are in event state now. Please notice that you are not allowed to leave the event without removal of this state!",
+				ChatType.BRIGHT_YELLOW_CENTER);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class Event extends AdminCommand {
 
 			World.getInstance().doOnAllPlayers(p -> {
 				if (p.isInEvent() || p == admin)
-					PacketSendUtility.sendBrightYellowMessageOnCenter(p, sb.toString());
+					PacketSendUtility.sendMessage(p, sb.toString(), ChatType.BRIGHT_YELLOW_CENTER);
 			});
 		} else if (params[0].equalsIgnoreCase("list")) {
 			PacketSendUtility.sendMessage(admin, "-----------------------------------");
@@ -182,7 +182,7 @@ public class Event extends AdminCommand {
 			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 			player.updateKnownlist();
 			PacketSendUtility.sendMessage(admin, "Player '" + player.getName() + "' is in enemy state " + state + " now.");
-			PacketSendUtility.sendBrightYellowMessageOnCenter(player, "You are in FFA state " + state + " now.");
+			PacketSendUtility.sendMessage(player, "You are in FFA state " + state + " now.", ChatType.BRIGHT_YELLOW_CENTER);
 			if (state == 2) {
 				if (player.isInGroup2())
 					PlayerGroupService.removePlayer(player);

@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -15,10 +12,12 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -37,7 +36,7 @@ public class UnfinishedPletusAI2 extends GeneralNpcAI2 {
 		if (isHome.compareAndSet(true, false)) {
 			getPosition().getWorldMapInstance().getDoors().get(26).setOpen(false);
 			startPhaseTask();
-			sendMsg(1500466);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500466);
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
@@ -78,14 +77,14 @@ public class UnfinishedPletusAI2 extends GeneralNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
 				} else {
-					sendMsg(1500467);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500467);
 					SkillEngine.getInstance().getSkill(getOwner(), 19304, 60, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
 						public void run() {
 							if (!isAlreadyDead()) {
-								sendMsg(1500469);
+								PacketSendUtility.broadcastMessage(getOwner(), 1500469);
 								SkillEngine.getInstance().getSkill(getOwner(), 19300, 60, getOwner()).useNoAnimationSkill();
 								starSkillEvent();
 							}
@@ -104,7 +103,7 @@ public class UnfinishedPletusAI2 extends GeneralNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					sendMsg(1500468);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500468);
 					SkillEngine.getInstance().getSkill(getOwner(), 19303, 60, getOwner()).useNoAnimationSkill();
 				}
 			}
@@ -128,13 +127,9 @@ public class UnfinishedPletusAI2 extends GeneralNpcAI2 {
 		}
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
-	}
-
 	@Override
 	protected void handleDied() {
-		sendMsg(1500470);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500470);
 		cancelSkillTask();
 		cancelPhaseTask();
 		WorldMapInstance instance = getPosition().getWorldMapInstance();

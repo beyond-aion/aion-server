@@ -33,7 +33,6 @@ import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
-import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
@@ -70,7 +69,6 @@ import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
 import com.aionemu.gameserver.services.MonsterRaidService;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.RoadService;
@@ -295,8 +293,6 @@ public class GameServer {
 		WebshopService.getInstance();
 		CronJobService.getInstance();
 
-		if (AIConfig.SHOUTS_ENABLE)
-			NpcShoutsService.getInstance();
 		InstanceService.load();
 
 		if (!GeoDataConfig.GEO_MATERIALS_ENABLE)

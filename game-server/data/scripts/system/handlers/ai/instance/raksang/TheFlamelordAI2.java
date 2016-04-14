@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -54,7 +53,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 
 	private void startPhaseEvent(final int percent) {
 		cancelPhaseTask();
-		sendMsg(1401120);
+		PacketSendUtility.broadcastMessage(getOwner(), 1401120);
 		SkillEngine.getInstance().getSkill(getOwner(), 19980, 46, getOwner()).useNoAnimationSkill();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -137,7 +136,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 					cancelPhaseTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19925, 44, getOwner()).useNoAnimationSkill();
-					sendMsg(1401119);
+					PacketSendUtility.broadcastMessage(getOwner(), 1401119);
 				}
 			}
 
@@ -155,7 +154,7 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 		percents.clear();
 		cancelPhaseTask();
 		getPosition().getWorldMapInstance().getDoors().get(118).setOpen(true);
-		sendMsg(1401121);
+		PacketSendUtility.broadcastMessage(getOwner(), 1401121);
 		super.handleDied();
 	}
 
@@ -166,14 +165,10 @@ public class TheFlamelordAI2 extends AggressiveNpcAI2 {
 		super.handleDespawned();
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), Rnd.get(0, 1) == 1 ? true : false, 0, 0);
-	}
-
 	@Override
 	protected void handleAttack(Creature creature) {
 		if (isAggred.compareAndSet(false, true)) {
-			sendMsg(1401118);
+			PacketSendUtility.broadcastMessage(getOwner(), 1401118);
 		}
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());

@@ -7,8 +7,8 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -57,16 +57,16 @@ public class IdeResonatorAI2 extends NpcAI2 {
 				}
 				int secondBuff = 0;
 				if (!hyperion.getEffectController().hasAbnormalEffect(21258)) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401791);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401791);
 					secondBuff = 21258;
 				} else if (!hyperion.getEffectController().hasAbnormalEffect(21382)) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401792);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401792);
 					secondBuff = 21382;
 				} else if (!hyperion.getEffectController().hasAbnormalEffect(21384)) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401793);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401793);
 					secondBuff = 21384;
 				} else if (!hyperion.getEffectController().hasAbnormalEffect(21416)) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401794);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401794);
 					secondBuff = 21416;
 				}
 				if (secondBuff != 0) {

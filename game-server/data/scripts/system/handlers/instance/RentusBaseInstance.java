@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -57,7 +56,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			case 282543:
 				if (umahtasEchoKilled.incrementAndGet() == 2) {
 					spawn(217315, 759.46f, 636.45f, 157f, (byte) 7);
-					sendMsg(1500424, instance.getNpc(799671).getObjectId(), false, 0);
+					PacketSendUtility.broadcastMessage(instance.getNpc(799671), 1500424);
 					despawnNpcs(instance.getNpcs(282546));
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -75,7 +74,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 				if (karianasEchoKilled.incrementAndGet() == 2) {
 					spawn(217316, 258.09f, 671.51f, 170f, (byte) 17);
 					spawn(282465, 258.09f, 671.51f, 170f, (byte) 0);
-					sendMsg(1500430, instance.getNpc(799672).getObjectId(), false, 0);
+					PacketSendUtility.broadcastMessage(instance.getNpc(799672), 1500430);
 					despawnNpcs(instance.getNpcs(282547));
 					Npc merops = instance.getNpc(799672);
 					merops.getSpawn().setWalkerId("3002800002");
@@ -93,7 +92,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 				doors.get(82).setOpen(true);
 				Npc merops = instance.getNpc(799671);
 				despawnMerops(merops);
-				sendMsg(1500420, merops.getObjectId(), false, 0);
+				PacketSendUtility.broadcastMessage(merops, 1500420);
 				final Npc ariana1 = instance.getNpc(799668);
 				if (ariana1 != null) {
 					SkillEngine.getInstance().getSkill(ariana1, 19921, 60, ariana1).useNoAnimationSkill();
@@ -114,9 +113,9 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			case 217313:
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86);
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500417, ariana.getObjectId(), 0, 5000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500418, ariana.getObjectId(), 0, 8000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500419, ariana.getObjectId(), 0, 11000);
+				PacketSendUtility.broadcastMessage(ariana, 1500417, 5000);
+				PacketSendUtility.broadcastMessage(ariana, 1500418, 8000);
+				PacketSendUtility.broadcastMessage(ariana, 1500419, 11000);
 				spawnEndEvent(800227, "3002800003", 2000);
 				spawnEndEvent(800227, "3002800004", 2000);
 				spawnEndEvent(800228, "3002800007", 4000);
@@ -248,7 +247,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 							SkillEngine.getInstance().getSkill(merops, 19358, 60, merops).useNoAnimationSkill();
 							if (merops.getNpcId() == 799671) {
 								despawnNpc(instance.getNpc(701155));
-								sendMsg(1500425, merops.getObjectId(), false, 0);
+								PacketSendUtility.broadcastMessage(merops, 1500425);
 								spawn(282465, 744.2147f, 634.5343f, 155.69595f, (byte) 0);
 								despawnNpc(instance.getNpc(282626));
 							}

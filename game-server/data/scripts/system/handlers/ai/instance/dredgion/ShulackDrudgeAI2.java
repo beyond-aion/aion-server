@@ -35,12 +35,12 @@ public class ShulackDrudgeAI2 extends GeneralNpcAI2 {
 		Item dredgionSupplies = player.getInventory().getFirstItemByItemId(itemId);
 		if (dredgionSupplies == null) {
 			ItemService.addItem(player, itemId, 1);
-			getOwner().setNpcType(CreatureType.PEACE.getId());
+			getOwner().setNpcType(CreatureType.PEACE);
 			getKnownList().doOnAllPlayers(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, getOwner().getType(player), 0));
+					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, getOwner().getType(player).getId(), 0));
 				}
 			});
 		}

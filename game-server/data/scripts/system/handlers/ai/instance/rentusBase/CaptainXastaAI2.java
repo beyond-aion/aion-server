@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -19,10 +16,12 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -44,7 +43,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
 			if (getNpcId() == 217309) {
-				sendMsg(1500388);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500388);
 				startPhaseTask(this);
 			} else {
 				startPhase2Task();
@@ -96,7 +95,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 					cancelPhaseTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19729, 60, getOwner()).useNoAnimationSkill();
-					sendMsg(1500392);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500392);
 				}
 			}
 		}, 30000, 30000);
@@ -144,7 +143,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					sendMsg(1500389);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500389);
 					SkillEngine.getInstance().getSkill(getOwner(), 19968, 60, getOwner()).useNoAnimationSkill();
 					Npc npc1 = (Npc) spawn(282604, 263f, 537f, 203f, (byte) 0);
 					Npc npc2 = (Npc) spawn(282604, 186f, 555f, 203f, (byte) 0);
@@ -175,20 +174,16 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
-	}
-
 	@Override
 	protected void handleDied() {
 		cancelPhaseTask();
 		if (getNpcId() == 217309) {
-			sendMsg(1500390);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500390);
 			spawn(217310, 238.160f, 598.624f, 178.480f, (byte) 0);
 			deleteHelpers();
 			AI2Actions.deleteOwner(this);
 		} else {
-			sendMsg(1500391);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500391);
 			final WorldMapInstance instance = getPosition().getWorldMapInstance();
 			if (instance != null) {
 				final Npc ariana = instance.getNpc(799668);
@@ -203,8 +198,8 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 						}
 
 					}, 1000);
-					NpcShoutsService.getInstance().sendMsg(ariana, 1500415, ariana.getObjectId(), 0, 4000);
-					NpcShoutsService.getInstance().sendMsg(ariana, 1500416, ariana.getObjectId(), 0, 13000);
+					PacketSendUtility.broadcastMessage(ariana, 1500415, 4000);
+					PacketSendUtility.broadcastMessage(ariana, 1500416, 13000);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override

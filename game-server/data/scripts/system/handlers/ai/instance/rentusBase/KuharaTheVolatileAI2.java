@@ -12,8 +12,8 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -76,7 +76,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 	private void startBombEvent() {
 		bombEventTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isAlreadyDead()) {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500394, getObjectId(), 0, 0);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500394);
 				canThink = false;
 				EmoteManager.emoteStopAttacking(getOwner());
 				setStateIfNot(AIState.WALKING);
@@ -144,7 +144,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 
 	private void startActiveEvent() {
 		activeEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1500395, getObjectId(), 0, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500395);
 			ThreadPoolManager.getInstance().schedule(() -> {
 				if (!isAlreadyDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19704, 60, getOwner()).useNoAnimationSkill();

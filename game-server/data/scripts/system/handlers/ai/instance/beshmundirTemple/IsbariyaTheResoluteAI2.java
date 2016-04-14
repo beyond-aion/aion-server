@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -16,10 +12,15 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -37,7 +38,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isStart.compareAndSet(false, true)) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 342051, getObjectId(), 0, 1000);
+			PacketSendUtility.broadcastMessage(getOwner(), 342051, 1000);
 			getPosition().getWorldMapInstance().getDoors().get(535).setOpen(false);
 			startBasicSkillTask();
 		}
@@ -58,7 +59,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 342055, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 342055);
 		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
 		cancelSkillTask();
 		if (shedule != null && !shedule.isCancelled()) {
@@ -77,7 +78,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	protected void handleBackHome() {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 342056, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 342056);
 		super.handleBackHome();
 		isStart.set(false);
 		cancelSkillTask();
@@ -88,11 +89,11 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75 && stage < 1) {
 			stage = 1;
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1400460);
+			PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_3phase());
 			launchSpecial();
 		}
 		if (hpPercentage <= 50 && stage < 2) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1400459);
+			PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_2phase());
 			stage = 2;
 		}
 		if (hpPercentage <= 25 && stage < 3) {

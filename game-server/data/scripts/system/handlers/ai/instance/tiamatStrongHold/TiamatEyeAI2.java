@@ -1,10 +1,10 @@
 package ai.instance.tiamatStrongHold;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Cheatkiller
@@ -18,16 +18,16 @@ public class TiamatEyeAI2 extends NpcAI2 {
 		int owner = getOwner().getNpcId();
 		switch (owner) {
 			case 283913:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500679, getOwner().getObjectId(), 0, 2000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500679, 2000);
 				break;
 			case 283914:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500680, getOwner().getObjectId(), 0, 2000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500680, 2000);
 				break;
 			case 283915:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500681, getOwner().getObjectId(), 0, 2000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500681, 2000);
 				break;
 			case 283916:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500682, getOwner().getObjectId(), 0, 2000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500682, 2000);
 				break;
 		}
 		despawn();

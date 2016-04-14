@@ -2,6 +2,7 @@ package admincommands;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -61,6 +62,6 @@ public class Announce extends AdminCommand {
 
 		for (Player player : World.getInstance().getAllPlayers())
 			if (allowedRace == null || player.getRace() == allowedRace || validateAccess(player))
-				PacketSendUtility.sendBrightYellowMessageOnCenter(player, sb.toString());
+				PacketSendUtility.sendMessage(player, sb.toString(), ChatType.BRIGHT_YELLOW_CENTER);
 	}
 }

@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -34,13 +33,7 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 
 		if (zone instanceof SiegeZoneInstance) {
 			Player player = (Player) target;
-			((SiegeZoneInstance) zone).doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player p) {
-					PacketSendUtility.sendPacket(p, STR_PvPZONE_OUT_MESSAGE(player.getName()));
-				}
-			});
+			PacketSendUtility.broadcastToZone((SiegeZoneInstance) zone, STR_PvPZONE_OUT_MESSAGE(player.getName()));
 
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 

@@ -4,17 +4,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -95,7 +95,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead()) {
 					EmoteManager.emoteStopAttacking(getOwner());
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1400259);
+					PacketSendUtility.broadcastToMap(getOwner(), 1400259);
 					SkillEngine.getInstance().getSkill(getOwner(), 19679, 50, getTarget()).useSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -103,7 +103,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 						public void run() {
 							if (!isAlreadyDead()) {
 								getOwner().getController().onDelete();
-								NpcShoutsService.getInstance().sendMsg(getOwner(), 1400260);
+								PacketSendUtility.broadcastToMap(getOwner(), 1400260);
 							}
 						}
 					}, 2000);

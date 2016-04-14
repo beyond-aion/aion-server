@@ -1,12 +1,12 @@
 package ai.instance.empyreanCrucible;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Luzien
@@ -27,7 +27,7 @@ public class StrangeCreatureAI2 extends GeneralNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 341444, getObjectId(), 0, 0);
+					PacketSendUtility.broadcastMessage(getOwner(), 341444);
 					SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimationSkill();
 				}
 			}

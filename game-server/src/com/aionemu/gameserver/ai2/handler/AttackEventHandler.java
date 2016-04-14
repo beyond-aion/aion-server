@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.manager.AttackManager;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -48,8 +47,7 @@ public class AttackEventHandler {
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.getOwner().setTarget(creature);
 			AttackManager.startAttacking(npcAI);
-			if (npcAI.ask(AIQuestion.CAN_SHOUT))
-				ShoutEventHandler.onAttackBegin(npcAI, (Creature) npcAI.getOwner().getTarget());
+			ShoutEventHandler.onAttackBegin(npcAI);
 		}
 	}
 
@@ -85,8 +83,7 @@ public class AttackEventHandler {
 		EmoteManager.emoteStopAttacking(npc);
 		npc.getLifeStats().triggerRestoreTask();
 		npc.getAggroList().clear();
-		if (npcAI.ask(AIQuestion.CAN_SHOUT))
-			ShoutEventHandler.onAttackEnd(npcAI);
+		ShoutEventHandler.onAttackEnd(npcAI);
 		npc.setTarget(null);
 		npc.setSkillNumber(0);
 	}

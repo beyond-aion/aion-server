@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -24912,6 +24913,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Tuali is overloaded.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDElemental1_GolemPrime_Forest_Overclock() {
+		return new SM_SYSTEM_MESSAGE(1401041);
+	}
+
+	/**
 	 * You cannot fight a duel here.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_DUEL_CANT_IN_THIS_ZONE() {
@@ -25164,6 +25172,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You can only whisper to your own faction.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_WHISPER_OTHER_RACE() {
+		return new SM_SYSTEM_MESSAGE(1401174);
+	}
+
+	/**
 	 * A Master cannot take Work Orders.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_DONT_GET_COMBINETASK_MASTER() {
@@ -25372,6 +25387,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Right-click Tuali's Minion to remove the Sap Damage.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDElemental1_Prime_Debuff_Dispel() {
+		return new SM_SYSTEM_MESSAGE(1401378);
+	}
+
+	/**
 	 * Changed House Settings.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_ORDER_OPEN_DOOR() {
@@ -25449,10 +25471,31 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You haven't had any interactions recently.
+	 * A Spring Agrint has appeared.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_NO_RELATIONSHIP_RECENTLY() {
-		return new SM_SYSTEM_MESSAGE(1401504);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SpringAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401246);
+	}
+
+	/**
+	 * A Summer Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SummerAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401247);
+	}
+
+	/**
+	 * A Autumn Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_FallAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401248);
+	}
+
+	/**
+	 * A Winter Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_WinterAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401249);
 	}
 
 	/**
@@ -25542,20 +25585,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You cannot place this bid because the amount exceeds the bid limit.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT() {
-		return new SM_SYSTEM_MESSAGE(1401497);
-	}
-
-	/**
-	 * The home you have made an offer for has a new high bid of %num0 Kinah.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_PRICE_CHANGE(long kinah) {
-		return new SM_SYSTEM_MESSAGE(1401324, kinah);
-	}
-
-	/**
 	 * You cannot make a bid for your own house.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_MY_HOUSE() {
@@ -25605,10 +25634,38 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You need to pay the maintenance fee to list it.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_OVERDUE() {
+		return new SM_SYSTEM_MESSAGE(1401317);
+	}
+
+	/**
+	 * The home you have made an offer for has a new high bid of %num0 Kinah.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_PRICE_CHANGE(long kinah) {
+		return new SM_SYSTEM_MESSAGE(1401324, kinah);
+	}
+
+	/**
 	 * You cannot bid until you pay the maintenance fees on your house.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_OVERDUE() {
 		return new SM_SYSTEM_MESSAGE(1401349);
+	}
+
+	/**
+	 * Some areas of the Ammunition Depot are locked.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_Station_DoorCtrl_Evileye() {
+		return new SM_SYSTEM_MESSAGE(1401350);
+	}
+
+	/**
+	 * The script is too long to apply here.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SCRIPT_OVERFLOW() {
+		return new SM_SYSTEM_MESSAGE(1401399);
 	}
 
 	/**
@@ -25619,17 +25676,59 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You need to pay the maintenance fee to list it.
+	 * You cannot place this bid because the amount exceeds the bid limit.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_OVERDUE() {
-		return new SM_SYSTEM_MESSAGE(1401317);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT() {
+		return new SM_SYSTEM_MESSAGE(1401497);
 	}
 
 	/**
-	 * The script is too long to apply here.
+	 * You haven't had any interactions recently.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SCRIPT_OVERFLOW() {
-		return new SM_SYSTEM_MESSAGE(1401399);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_NO_RELATIONSHIP_RECENTLY() {
+		return new SM_SYSTEM_MESSAGE(1401504);
+	}
+
+	/**
+	 * Lord Kaisinel attacks with all his force.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_KAISINEL_2PHASE_DEADLYATK() {
+		return new SM_SYSTEM_MESSAGE(1401538);
+	}
+
+	/**
+	 * The Empyrian Lord Marchutan attacks with all his power.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_MARCHUTAN_2PHASE_DEADLYATK() {
+		return new SM_SYSTEM_MESSAGE(1401539);
+	}
+
+	/**
+	 * The Empyrian Lord has very few HP left!
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_GOD_HP_LOWER_THAN_50p() {
+		return new SM_SYSTEM_MESSAGE(1401548);
+	}
+
+	/**
+	 * The Empyrian Lord has very few HP left! If the Empyrian Lord dies, you can no longer take on the Dragon Lord!
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_GOD_HP_LOWER_THAN_15p() {
+		return new SM_SYSTEM_MESSAGE(1401549);
+	}
+
+	/**
+	 * If you kill the Balaur Soul Healer, the Empyrian Lord will receive positive reinforcements.
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_DRAKAN_BUFF_MSG() {
+		return new SM_SYSTEM_MESSAGE(1401550);
+	}
+
+	/**
+	 * Supplies have been delivered to some of the sentry posts.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
+		return new SM_SYSTEM_MESSAGE(1401965);
 	}
 
 	/**
@@ -26766,72 +26865,65 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(901354);
 	}
 
-	/**
-	 * Supplies have been delivered to some of the sentry posts.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
-		return new SM_SYSTEM_MESSAGE(1401965);
+	private int msgId;
+	private byte chatType;
+	private int senderObjId;
+	private Object[] params;
+	private String[] specialParams;
+
+	public SM_SYSTEM_MESSAGE(int msgId, Object... params) {
+		this(ChatType.GOLDEN_YELLOW, null, msgId, params, new String[0]);
 	}
 
-	private final int code;
-	private final Object[] params;
-	private boolean npcShout = false;
-	private int npcObjId = 0;
-	private int textColorId = 0x19;
+	public SM_SYSTEM_MESSAGE(ChatType chatType, VisibleObject sender, int msgId, Object... params) {
+		this(chatType, sender, msgId, params, new String[0]);
+	}
 
 	/**
-	 * Constructs new <tt>SM_SYSTEM_MESSAGE</tt> packet
-	 * 
-	 * @param code
-	 *          operation code, take it from SM_SYSTEM_MESSAGE public static values
+	 * @param chatType
+	 *          - The chat channel the message will be displayed in.
+	 * @param sender
+	 *          - Object that sends the message, can be null (will display a speech bubble above his head, if the chat type is not a SysMsg chat type)
+	 * @param msgId
+	 *          - The ID of the client message to send.
 	 * @param params
+	 *          - Parameters for this client message, like names, level values, etc., can be null
+	 * @param specialParams
+	 *          - Special parameters, currently only known to work with client messages that want a [%target] parameter
 	 */
-	public SM_SYSTEM_MESSAGE(int code, Object... params) {
-		this.code = code;
-		this.params = params;
-	}
-
-	public SM_SYSTEM_MESSAGE(boolean npcShout, int code, int npcObjId, int textColorId, Object... params) {
-		this.npcShout = npcShout;
-		this.code = code;
-		this.npcObjId = npcObjId;
-		this.textColorId = textColorId;
-		this.params = params;
-	}
-
-	public SM_SYSTEM_MESSAGE(int code, Creature creature, Object... params) {
-		this.code = code;
-		this.npcObjId = creature.getObjectId();
-		this.params = params;
+	public SM_SYSTEM_MESSAGE(ChatType chatType, VisibleObject sender, int msgId, Object[] params, String... specialParams) {
+		this.chatType = chatType.getId();
+		this.senderObjId = sender == null ? 0 : sender.getObjectId();
+		this.msgId = msgId;
+		this.params = params == null ? new Object[0] : params;
+		this.specialParams = specialParams;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(textColorId);
+		writeC(chatType);
 		writeC(0x00); // to do for shoots text encoding (unk dialect)
-		writeD(npcObjId);
-
-		writeD(code); // msg id
-		writeC(params.length); // count
-
+		writeD(senderObjId);
+		writeD(msgId);
+		writeC(params.length);
 		for (Object param : params) {
-			if (param instanceof DescriptionId) {
+			if (param instanceof DescriptionId)
 				writeNameId(((DescriptionId) param).getValue());
-			} else
+			else
 				writeS(String.valueOf(param));
 		}
 
-		if (npcShout)
-			writeC(0x01);
-		else
-			writeC(0x00);
+		writeC(specialParams.length);
+		for (String param : specialParams) {
+			writeS(param);
+		}
 	}
 
 	/**
 	 * @return the stringId
 	 */
 	public int getId() {
-		return code;
+		return msgId;
 	}
 
 	private static DescriptionId calculateNameId(int id) {

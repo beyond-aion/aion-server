@@ -83,8 +83,8 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	}
 
 	@Override
-	public int getType(Creature creature) {
-		return creature.isEnemy(getMaster()) ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
+	public CreatureType getType(Creature creature) {
+		return creature.isEnemy(getMaster()) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
 	}
 
 	@Override

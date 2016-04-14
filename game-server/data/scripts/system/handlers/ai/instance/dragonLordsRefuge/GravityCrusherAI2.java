@@ -12,7 +12,6 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -57,7 +56,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
 
 						@Override
 						public void run() {
-							NpcShoutsService.getInstance().sendMsg(getOwner(), 1401554);
+							PacketSendUtility.broadcastToMap(getOwner(), 1401554);
 							spawn(283140, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 							AI2Actions.deleteOwner(GravityCrusherAI2.this);
 						}

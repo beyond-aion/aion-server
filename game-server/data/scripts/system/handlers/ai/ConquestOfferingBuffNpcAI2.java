@@ -6,8 +6,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -63,11 +63,11 @@ public class ConquestOfferingBuffNpcAI2 extends ActionItemNpcAI2 {
 
 	private void sendWakeUpMsg() {
 		int msg = (1501279 + (Rnd.get(0, 2) * 2));
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getOwner().getObjectId(), true, 2, 1500);
+		PacketSendUtility.broadcastMessage(getOwner(), msg, 1500);
 	}
 
 	private void sendTalkedMsg() {
 		int msg = (1501280 + (Rnd.get(0, 2) * 2));
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getOwner().getObjectId(), true, 2, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), msg);
 	}
 }

@@ -2,14 +2,14 @@ package ai.instance.raksang;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -30,7 +30,7 @@ public class SealGeneratorAI2 extends AggressiveNpcAI2 {
 			final Player player = (Player) creature;
 			if (MathUtil.getDistance(getOwner(), player) <= 30) {
 				if (startedEvent.compareAndSet(false, true)) {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401156);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401156);
 				}
 			}
 		}

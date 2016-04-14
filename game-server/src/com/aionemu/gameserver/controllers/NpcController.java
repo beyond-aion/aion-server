@@ -8,7 +8,9 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
@@ -271,24 +273,23 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
+	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 		final Creature actingCreature;
 
 		// summon should gain its own aggro
-		if (creature instanceof Summon)
-			actingCreature = creature;
+		if (attacker instanceof Summon)
+			actingCreature = attacker;
 		else
-			actingCreature = creature.getActingCreature();
+			actingCreature = attacker.getActingCreature();
 
 		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus);
 
 		Npc npc = getOwner();
-
-		if (actingCreature instanceof Player) {
+		ShoutEventHandler.onEnemyAttack((NpcAI2) npc.getAi2(), attacker);
+		if (actingCreature instanceof Player)
 			QuestEngine.getInstance().onAttack(new QuestEnv(npc, (Player) actingCreature, 0, 0));
-		}
 	}
 
 	@Override

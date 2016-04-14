@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author M.O.G. Dision
@@ -67,12 +67,8 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void shout(int msgId) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msgId);
-	}
-
 	protected void removeBossEntry() {
-		shout(1402212);
+		PacketSendUtility.broadcastToMap(getOwner(), 1402212);
 		Npc portal = getPosition().getWorldMapInstance().getNpc(702216);
 		if (portal != null)
 			portal.getController().onDelete();
@@ -86,16 +82,16 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 				if (!isAlreadyDead()) {
 					switch (progress) {
 						case 0:
-							shout(1402143);
+							PacketSendUtility.broadcastToMap(getOwner(), 1402143);
 							break;
 						case 1:
-							shout(1402144);
+							PacketSendUtility.broadcastToMap(getOwner(), 1402144);
 							break;
 						case 4:
-							shout(1402145);
+							PacketSendUtility.broadcastToMap(getOwner(), 1402145);
 							break;
 						case 5:
-							shout(1402146);
+							PacketSendUtility.broadcastToMap(getOwner(), 1402146);
 							onDespawn();
 							break;
 					}
@@ -169,7 +165,7 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 	protected void handleBackHome() {
 		cancelDespawnTask();
 		deleteAdds();
-		shout(1402146);
+		PacketSendUtility.broadcastToMap(getOwner(), 1402146);
 		super.handleBackHome();
 		getOwner().getController().onDelete(); // No Full Reset needed.
 	}

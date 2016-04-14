@@ -2,14 +2,13 @@ package ai.instance.drakenspire;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Estrayl
@@ -23,13 +22,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 	public void handleSpawned() {
 		super.handleSpawned();
 		removeTrap();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 1501309, getOwner().getObjectId(), 1));
-			}
-		}, 2500);
+		PacketSendUtility.broadcastMessage(getOwner(), 1501309, 2500);
 	}
 
 	@Override
@@ -37,7 +30,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 		super.handleMoveArrived();
 		if (getOwner().getMoveController().isStop()) {
 			if (isGateReached.compareAndSet(false, true)) {
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 1501310, getOwner().getObjectId(), 1));
+				PacketSendUtility.broadcastMessage(getOwner(), 1501310, 0);
 				scheduleGateAttack();
 			}
 		}
@@ -65,7 +58,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 					if (npc.getNpcId() == 731580 && isInRange(npc, 10))
 						SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
 				}
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 1501311, getOwner().getObjectId(), 1));
+				PacketSendUtility.broadcastMessage(getOwner(), 1501311, 0);
 			}
 		}, 3500);
 	}

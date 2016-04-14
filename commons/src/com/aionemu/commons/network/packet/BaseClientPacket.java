@@ -132,7 +132,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	/**
 	 * Read signed byte from this packet buffer.
 	 * 
-	 * @return int
+	 * @return byte
 	 */
 	protected final byte readSC() {
 		try {
@@ -146,7 +146,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	/**
 	 * Read signed short from this packet buffer.
 	 * 
-	 * @return int
+	 * @return short
 	 */
 	protected final short readSH() {
 		try {

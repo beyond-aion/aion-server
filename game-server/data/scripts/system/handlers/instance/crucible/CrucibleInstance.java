@@ -62,10 +62,6 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 		return player.isInsideZone(zone);
 	}
 
-	protected void sendMsg(int msg, int Obj, int color) {
-		sendMsg(msg, Obj, false, color);
-	}
-
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));

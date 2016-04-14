@@ -10,12 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AI2;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -208,19 +205,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getAggroList().addDamage(attacker, damage);
 		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
 
-		if (getOwner() instanceof Npc) {
-			AI2 ai = getOwner().getAi2();
-			if (ai.ask(AIQuestion.CAN_SHOUT)) {
-				if (attacker instanceof Player)
-					ShoutEventHandler.onHelp((NpcAI2) ai, attacker);
-				else
-					ShoutEventHandler.onEnemyAttack((NpcAI2) ai, attacker);
-			}
-		} else if (getOwner() instanceof Player && attacker instanceof Npc) {
-			AI2 ai = attacker.getAi2();
-			if (ai.ask(AIQuestion.CAN_SHOUT))
-				ShoutEventHandler.onAttack((NpcAI2) ai, getOwner());
-		}
 		getOwner().incrementAttackedCount();
 
 		if (attacker instanceof Player)

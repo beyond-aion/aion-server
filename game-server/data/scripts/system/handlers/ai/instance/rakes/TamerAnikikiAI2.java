@@ -2,9 +2,6 @@ package ai.instance.rakes;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -13,9 +10,11 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -45,8 +44,7 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
 				spawn(700553, 626, 540, 936, (byte) 1);
 				spawn(700553, 645, 534, 936, (byte) 75);
 				PacketSendUtility.sendPacket((Player) creature, new SM_QUEST_ACTION(0, 180));
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1400262);
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1400262, getObjectId(), 0, 0);
+				PacketSendUtility.broadcastToMap(getOwner(), 1400262);
 			}
 		}
 	}

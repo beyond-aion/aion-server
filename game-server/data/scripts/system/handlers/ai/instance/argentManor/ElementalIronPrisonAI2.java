@@ -3,9 +3,6 @@ package ai.instance.argentManor;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.NpcActions;
@@ -13,10 +10,13 @@ import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -42,8 +42,8 @@ public class ElementalIronPrisonAI2 extends GeneralNpcAI2 {
 				if (isStartEvent.compareAndSet(false, true)) {
 					Npc npc = getPosition().getWorldMapInstance().getNpc(205498);
 					if (npc != null) {
-						NpcShoutsService.getInstance().sendMsg(npc, 1500465, npc.getObjectId(), 0, 0);
-						NpcShoutsService.getInstance().sendMsg(npc, 1500464, npc.getObjectId(), 0, 10000);
+						PacketSendUtility.broadcastMessage(npc, 1500465);
+						PacketSendUtility.broadcastMessage(npc, 1500464, 10000);
 					}
 				}
 			}

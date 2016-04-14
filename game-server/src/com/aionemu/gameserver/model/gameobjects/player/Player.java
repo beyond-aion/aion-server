@@ -20,7 +20,6 @@ import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.dao.PlayerVarsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -1137,7 +1136,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Npc enemy) {
-		switch (CreatureType.getCreatureType(enemy.getType(this))) {
+		switch (enemy.getType(this)) {
 			case AGGRESSIVE:
 			case ATTACKABLE:
 				return true;

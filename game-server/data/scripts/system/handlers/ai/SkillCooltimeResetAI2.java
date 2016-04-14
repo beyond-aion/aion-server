@@ -39,12 +39,12 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 		if (player.getController().isInCombat()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
 		} else if (player.getSkillCoolDowns().isEmpty()) {
-			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner().getObjectId(), getOwner().getName(), "Daeva has no skill cooldowns to reset, yang." , ChatType.NORMAL));
+			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "Daeva has no skill cooldowns to reset, yang." , ChatType.NPC));
 		} else if (player.isTransformed() && player.getTransformModel().getType() == TransformType.AVATAR) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
 		} else {
-			if (Rnd.get(101) <= 10) {
-				PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner().getObjectId(), getOwner().getName(), "I can reset your skill cooldowns for 50.000 Kinah, yang yang." , ChatType.NORMAL));
+			if (Rnd.get(1, 100) <= 10) {
+				PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "I can reset your skill cooldowns for 50.000 Kinah, yang yang." , ChatType.NPC));
 			}
 			sendRequest(player);
 		}

@@ -3,14 +3,14 @@ package ai.instance.RukibukiCircusTroupe;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Ritsu
@@ -41,7 +41,7 @@ public class YumeAI2 extends GeneralNpcAI2 {
 					@Override
 					public void run() {
 						if (p.getLifeStats().getHpPercentage() < 100) {
-							NpcShoutsService.getInstance().sendMsg(getOwner(), 1501126, getObjectId(), 0, 0);
+							PacketSendUtility.broadcastMessage(getOwner(), 1501126);
 							AI2Actions.useSkill(YumeAI2.this, 21467);
 						}
 					}

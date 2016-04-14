@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -39,15 +39,11 @@ public class RakshaAI2 extends AggressiveNpcAI2 {
 		super.handleDied();
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), false, 0, 0);
-	}
-
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isAggred.compareAndSet(false, true)) {
-			sendMsg(1401152);
+			PacketSendUtility.broadcastMessage(getOwner(), 1401152);
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
@@ -55,7 +51,7 @@ public class RakshaAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75) {
 			if (isStartedEvent.compareAndSet(false, true)) {
-				sendMsg(1401154);
+				PacketSendUtility.broadcastMessage(getOwner(), 1401154);
 				startPhaseTask();
 			}
 		}

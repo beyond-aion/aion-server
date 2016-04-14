@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Ritsu, Luzien
@@ -33,7 +33,7 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 	protected void handleSpawned() {
 		addPercent();
 		top = true;
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1400732);
+		PacketSendUtility.broadcastToMap(getOwner(), 1400732);
 		super.handleSpawned();
 	}
 
@@ -78,7 +78,7 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 							spawn(219586, boss.getX() - 10, boss.getY() + 10, boss.getZ(), (byte) 0);
 							spawn(219586, boss.getX() + 10, boss.getY() + 10, boss.getZ(), (byte) 0);
 							boss.clearAttackedCount();
-							NpcShoutsService.getInstance().sendMsg(getOwner(), 1400729);
+							PacketSendUtility.broadcastToMap(getOwner(), 1400729);
 						}
 					}, 3000);
 				}
@@ -92,13 +92,13 @@ public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 		Npc portalC = getPosition().getWorldMapInstance().getNpc(219580);
 		if (portalA == null && portalB == null && portalC == null) {
 			if (!top) {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1400637);
+				PacketSendUtility.broadcastToMap(getOwner(), 1400637);
 				spawn(219567, 288.10f, 741.95f, 216.81f, (byte) 3);
 				spawn(219579, 375.05f, 750.67f, 216.82f, (byte) 59);
 				spawn(219580, 341.33f, 699.38f, 216.86f, (byte) 59);
 				top = true;
 			} else {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1400637);
+				PacketSendUtility.broadcastToMap(getOwner(), 1400637);
 				spawn(219567, 303.69f, 736.35f, 198.7f, (byte) 0);
 				spawn(219579, 335.19f, 708.92f, 198.9f, (byte) 35);
 				spawn(219580, 360.23f, 741.07f, 198.7f, (byte) 0);

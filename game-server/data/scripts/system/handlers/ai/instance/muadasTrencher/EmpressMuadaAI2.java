@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -18,12 +15,15 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -97,7 +97,7 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 				if (!isAlreadyDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19893, 2, getOwner()).useNoAnimationSkill();
 					spawn(282533, 523.1f, 541.1f, 106.7f, (byte) 0);
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1401300);
+					PacketSendUtility.broadcastToMap(getOwner(), 1401300);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -183,13 +183,13 @@ public class EmpressMuadaAI2 extends AggressiveNpcAI2 {
 					cancelAddSpawn();
 				} else {
 					for (int i = 0; i < 3; i++) {
-						NpcShoutsService.getInstance().sendMsg(getOwner(), 1401299);
+						PacketSendUtility.broadcastToMap(getOwner(), 1401299);
 						Point3D p = getRndPos();
 						spawn(282556, p.getX(), p.getY(), p.getZ(), (byte) 0);
 						Npc npc1 = (Npc) spawn(282535, p.getX(), p.getY(), p.getZ(), (byte) 0);
 						Npc npc2 = (Npc) spawn(282535, p.getX(), p.getY(), p.getZ(), (byte) 0);
-						NpcShoutsService.getInstance().sendMsg(npc1, 1500307, npc1.getObjectId(), 0, 1000);
-						NpcShoutsService.getInstance().sendMsg(npc2, 1500307, npc2.getObjectId(), 0, 1000);
+						PacketSendUtility.broadcastMessage(npc1, 1500307, 1000);
+						PacketSendUtility.broadcastMessage(npc2, 1500307, 1000);
 					}
 				}
 			}

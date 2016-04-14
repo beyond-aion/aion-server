@@ -344,13 +344,13 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				despawnNpc(npc);
 				dieCount++;
 				if (dieCount == 5) {
-					sendMsg(1401068, 0, 25);
+					sendMsg(1401068);
 				}
 				if (bonusTimer.isCancelled() && getNpcs(217803).isEmpty()) {
 					passStage2();
 					Npc poppy = getNpc(217802);
 					if (poppy != null) {
-						sendMsg(1401072, 0, 25);
+						sendMsg(1401072);
 						sp(218571, poppy.getX(), poppy.getY(), poppy.getZ(), (byte) 0, 0);
 						poppy.getController().onDelete();
 					}
@@ -376,7 +376,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				despawnNpc(getNpc(218190));
 				despawnNpc(getNpc(218191));
 				sp(730460, 1759.2914f, 1786.37f, 389.11713f, (byte) 96, 0);
-				sendMsg(342495, npc.getObjectId(), true, 5);
+				PacketSendUtility.broadcastMessage(npc, 342495);
 				break;
 		}
 	}
@@ -432,7 +432,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
-					sendMsg(1401067, 0, 25);
+					sendMsg(1401067);
 					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
 					template.setWalkerId("3003200001");
 					SpawnEngine.spawnObject(template, instanceId);
@@ -620,12 +620,12 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case START_STAGE_3_ROUND_1:
 				switch (Rnd.get(1, 2)) {
 					case 1:
-						sendMsg(1401085, 0, 25);
+						sendMsg(1401085);
 						npcId = 217844;
 						barrelId = 218560;
 						break;
 					case 2:
-						sendMsg(1401084, 0, 25);
+						sendMsg(1401084);
 						npcId = 217842;
 						barrelId = 217840;
 						break;

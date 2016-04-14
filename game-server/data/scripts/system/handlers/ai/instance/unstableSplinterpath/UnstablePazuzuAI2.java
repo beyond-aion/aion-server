@@ -3,13 +3,13 @@ package ai.instance.unstableSplinterpath;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -25,7 +25,7 @@ public class UnstablePazuzuAI2 extends AggressiveNpcAI2 {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 342219, getObjectId(), 0, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 342219);
 			startTask();
 		}
 	}
@@ -41,7 +41,7 @@ public class UnstablePazuzuAI2 extends AggressiveNpcAI2 {
 	protected void handleDied() {
 		super.handleDied();
 		cancelTask();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500003, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500003);
 	}
 
 	private void startTask() {

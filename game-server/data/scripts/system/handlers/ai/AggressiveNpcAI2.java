@@ -17,15 +17,9 @@ public class AggressiveNpcAI2 extends GeneralNpcAI2 {
 	}
 
 	@Override
-	protected void handleCreatureMoved(Creature creature) {
-		CreatureEventHandler.onCreatureMoved(this, creature);
-	}
-
-	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		if (canThink())
 			AggroEventHandler.onAggro(this, creature);
-
 	}
 
 	@Override

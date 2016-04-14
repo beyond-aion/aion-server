@@ -23,7 +23,7 @@ public class NeutralGuardAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	public void creatureNeedsHelp(Creature attacker) {
-		if (MathUtil.isIn3dRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE.getId()
+		if (MathUtil.isIn3dRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE
 			&& attacker.getTarget() instanceof Player) {
 			changeType(CreatureType.AGGRESSIVE);
 			getOwner().getAggroList().addHate(attacker, 1000);
@@ -31,7 +31,7 @@ public class NeutralGuardAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void changeType(final CreatureType type) {
-		getOwner().setNpcType(type.getId());
+		getOwner().setNpcType(type);
 		getKnownList().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override

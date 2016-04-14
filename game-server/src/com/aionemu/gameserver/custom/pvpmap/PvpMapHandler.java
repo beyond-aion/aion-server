@@ -5,14 +5,12 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -25,6 +23,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -40,6 +39,9 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author Yeats 06.04.2016.
@@ -225,12 +227,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
-		if (!player.isGM()) {
-			instance.doOnAllPlayers(p -> {
-				if (!p.equals(player))
-					PacketSendUtility.sendBrightYellowMessageOnCenter(p, "A new player has joined!");
-			});
-		}
+		if (!player.isGM())
+			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER), 0);
 	}
 
 	@Override

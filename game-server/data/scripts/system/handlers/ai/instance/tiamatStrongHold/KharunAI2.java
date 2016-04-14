@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -43,8 +42,8 @@ public class KharunAI2 extends NpcAI2 {
 				Npc Kharun = (Npc) spawn(800335, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 60);
 				Kharun.setTarget(aethericField);
 				SkillEngine.getInstance().getSkill(Kharun, 20943, 60, aethericField).useNoAnimationSkill();
-				NpcShoutsService.getInstance().sendMsg(Kharun, 1500597, Kharun.getObjectId(), 0, 1000);
-				NpcShoutsService.getInstance().sendMsg(Kharun, 1500598, Kharun.getObjectId(), 0, 5000);
+				PacketSendUtility.broadcastMessage(Kharun, 1500597, 1000);
+				PacketSendUtility.broadcastMessage(Kharun, 1500598, 5000);
 				strongholdDoor.getController().die();
 				aethericField.getController().onDelete();
 			}

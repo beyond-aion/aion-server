@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,17 +12,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutGroup;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
 
-/**
- * @author Rolandas
- */
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * <p>
@@ -41,6 +38,8 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "shoutGroups" })
@@ -95,52 +94,33 @@ public class NpcShoutData {
 	}
 
 	/**
-	 * Get global npc shouts plus world specific shouts. Make sure to clean it after the use.
+	 * Get global npc shouts plus world specific shouts.
 	 * 
 	 * @return null if not found
 	 */
 	public List<NpcShout> getNpcShouts(int worldId, int npcId) {
-		List<NpcShout> npcShouts = new FastTable<NpcShout>();
-		FastMap<Integer, List<NpcShout>> worldShouts;
+		Map<Integer, List<NpcShout>> globalShouts = shoutsByWorldNpcs.get(0);
+		Map<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(worldId);
+		List<NpcShout> globalNpcShouts = globalShouts == null ? null : globalShouts.get(npcId);
+		List<NpcShout> worldNpcShouts = worldShouts == null ? null : worldShouts.get(npcId);
 
-		worldShouts = shoutsByWorldNpcs.get(0);
-		if (worldShouts != null && worldShouts.get(npcId) != null)
-			npcShouts.addAll(worldShouts.get(npcId));
+		if (globalShouts == null && worldShouts == null)
+			return null;
 
-		worldShouts = shoutsByWorldNpcs.get(worldId);
-		if (worldShouts != null && worldShouts.get(npcId) != null)
-			npcShouts.addAll(worldShouts.get(npcId));
-
-		return npcShouts.size() > 0 ? npcShouts : null;
+		List<NpcShout> npcShouts = new FastTable<>();
+		if (globalNpcShouts != null)
+			npcShouts.addAll(globalNpcShouts);
+		if (worldNpcShouts != null)
+			npcShouts.addAll(worldNpcShouts);
+		return npcShouts;
 	}
 
-	/**
-	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId)}
-	 */
-	public boolean hasAnyShout(int worldId, int npcId) {
-		FastMap<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(0);
-
-		if (worldShouts == null || worldShouts.get(npcId) == null) {
-			worldShouts = shoutsByWorldNpcs.get(worldId);
-			if (worldShouts == null || worldShouts.get(npcId) == null)
-				return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Lightweight check for shouts, doesn't use memory as {@link #getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo)}
-	 */
-	public boolean hasAnyShout(int worldId, int npcId, ShoutEventType type) {
+	public List<NpcShout> getNpcShouts(int worldId, int npcId, ShoutEventType type) {
 		List<NpcShout> shouts = getNpcShouts(worldId, npcId);
-		if (shouts == null)
-			return false;
+		if (shouts == null || type == null)
+			return shouts;
 
-		for (NpcShout s : shouts) {
-			if (s.getWhen() == type)
-				return true;
-		}
-		return false;
+		return shouts.stream().filter(shout -> shout.getWhen() == type).collect(Collectors.toCollection(FastTable::new));
 	}
 
 	/**
@@ -158,22 +138,11 @@ public class NpcShoutData {
 	 *          - specific skill number; if 0, returns all
 	 */
 	public List<NpcShout> getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo) {
-		List<NpcShout> shouts = getNpcShouts(worldId, npcId);
+		List<NpcShout> shouts = getNpcShouts(worldId, npcId, type);
 		if (shouts == null)
-			return null;
+			return shouts;
 
-		List<NpcShout> result = new FastTable<NpcShout>();
-		for (NpcShout s : shouts) {
-			if (s.getWhen() == type) {
-				if (pattern != null && !pattern.equals(s.getPattern()))
-					continue;
-				if (skillNo != 0 && skillNo != s.getSkillNo())
-					continue;
-				result.add(s);
-			}
-		}
-		shouts.clear();
-		return result.size() > 0 ? result : null;
+		shouts.removeIf(shout -> pattern != null && !pattern.equals(shout.getPattern()) || skillNo != 0 && skillNo != shout.getSkillNo());
+		return shouts;
 	}
-
 }

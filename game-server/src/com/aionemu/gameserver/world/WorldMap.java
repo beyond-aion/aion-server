@@ -133,7 +133,7 @@ public class WorldMap {
 	 */
 	public WorldMapInstance getMainWorldMapInstance() {
 		// TODO Balance players into instances.
-		return getWorldMapInstance(1);
+		return instances.get(1);
 	}
 
 	/**
@@ -151,19 +151,6 @@ public class WorldMap {
 				throw new IllegalArgumentException("WorldMapInstance " + getMapId() + " has lower instances count than " + instanceId);
 			}
 		}
-		return getWorldMapInstance(instanceId);
-	}
-
-	/**
-	 * Returns WorldMapInstance by instanceId.
-	 * 
-	 * @param instanceId
-	 * @return WorldMapInstance/
-	 */
-	private WorldMapInstance getWorldMapInstance(int instanceId) {
-		// instanceId is a count, some code still uses 0 for the default instance
-		if (instanceId == 0)
-			instanceId = 1;
 		return instances.get(instanceId);
 	}
 

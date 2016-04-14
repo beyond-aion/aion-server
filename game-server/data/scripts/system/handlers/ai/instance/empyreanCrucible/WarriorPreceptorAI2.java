@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -35,7 +35,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
 	@Override
 	public void handleDied() {
 		cancelTask();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500208, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500208);
 		super.handleDied();
 	}
 
@@ -77,7 +77,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void startSkillEvent() {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500207, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500207);
 		SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getTargetPlayer()).useNoAnimationSkill();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 

@@ -2,6 +2,7 @@ package admincommands;
 
 import java.util.Iterator;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -34,7 +35,7 @@ public class Notice extends AdminCommand {
 		Iterator<Player> iter = World.getInstance().getPlayersIterator();
 
 		while (iter.hasNext()) {
-			PacketSendUtility.sendBrightYellowMessageOnCenter(iter.next(), "Information: " + message);
+			PacketSendUtility.sendMessage(iter.next(), "Information: " + message, ChatType.BRIGHT_YELLOW_CENTER);
 		}
 	}
 

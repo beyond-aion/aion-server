@@ -7,6 +7,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -337,7 +338,7 @@ public class AhserionRaid {
 		if (isStarted.get()) {
 			if (status == AhserionRaidStatus.PREPARING_REGISTRATION) {
 				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player))
-					PacketSendUtility.sendWhiteMessageOnCenter(player, "You are currently registered for Ahserions Flight.");
+					PacketSendUtility.sendMessage(player, "You are currently registered for Ahserions Flight.", ChatType.WHITE_CENTER);
 			} else if (status == AhserionRaidStatus.PREPARING_INSTANCE_START || status == AhserionRaidStatus.INSTANCE_RUNNING) {
 				player.setPanesterraTeam(getPlayersTeam(player));
 			} else if (status == AhserionRaidStatus.INSTANCE_FINISHED) {

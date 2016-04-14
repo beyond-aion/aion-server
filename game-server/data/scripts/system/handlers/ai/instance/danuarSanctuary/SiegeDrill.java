@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -92,7 +91,7 @@ public class SiegeDrill extends NpcAI2 {
 
 	protected void handleUseItemFinish(Player player) {
 		if (!player.getInventory().decreaseByItemId(185000174, 1)) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401932);
+			PacketSendUtility.broadcastToMap(getOwner(), 1401932);
 			return;
 		}
 		if (isUsed.compareAndSet(false, true)) {

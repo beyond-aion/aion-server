@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -64,9 +63,9 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86);
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500417, ariana.getObjectId(), 0, 5000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500418, ariana.getObjectId(), 0, 8000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500419, ariana.getObjectId(), 0, 11000);
+				PacketSendUtility.broadcastMessage(ariana, 1500417, 5000);
+				PacketSendUtility.broadcastMessage(ariana, 1500418, 8000);
+				PacketSendUtility.broadcastMessage(ariana, 1500419, 11000);
 				spawnEndEvent(800227, "3002800003", 2000);
 				spawnEndEvent(800227, "3002800004", 2000);
 				spawnEndEvent(800228, "3002800007", 4000);
@@ -97,7 +96,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 		case 236298: // Kuhara
 			doors.get(43).setOpen(true);
-			NpcShoutsService.getInstance().sendMsg(npc, 1500393, npc.getObjectId(), 0, 0);
+			PacketSendUtility.broadcastMessage(npc, 1500393);
 			break;
 		case 236300: // Vasharti
 			doors.get(70).setOpen(false);

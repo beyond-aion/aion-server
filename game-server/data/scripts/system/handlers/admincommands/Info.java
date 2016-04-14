@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -118,7 +117,7 @@ public class Info extends AdminCommand {
 			}
 			sendInfo(admin,
 				"Tribe: " + npc.getTribe() + "\n TribeBase: " + npc.getBaseTribe() + "\nRace: " + npc.getObjectTemplate().getRace() + "\nNpcType: "
-					+ CreatureType.getCreatureType(npc.getType(admin)) + "\nTemplateType: " + npc.getObjectTemplate().getNpcTemplateType().name()
+					+ npc.getType(admin) + "\nTemplateType: " + npc.getObjectTemplate().getNpcTemplateType().name()
 					+ "\nAbyssType: " + npc.getObjectTemplate().getAbyssNpcType().name() + "\nAI: " + npc.getAi2().getName() + "\n NpcRating: "
 					+ npc.getObjectTemplate().getRating().name());
 			sendInfo(admin, "[Relations to target]" + "\nisEnemy: " + admin.isEnemy(npc) + "\ncanAttack: " + RestrictionsManager.canAttack(admin, target)

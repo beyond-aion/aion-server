@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -21,10 +17,13 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -337,7 +336,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	protected void handleSpawned() {
 		addPercent();
 		super.handleSpawned();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500405, getObjectId(), 0, 2000);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500405, 2000);
 		blueFlameSmashs.add(new Point3D(176.184f, 415.782f, 260.572f));
 		blueFlameSmashs.add(new Point3D(159.480f, 412.495f, 260.555f));
 		blueFlameSmashs.add(new Point3D(183.784f, 413.475f, 260.755f));
@@ -396,7 +395,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 		cancelFlameSmashTask();
 		cancelAirEvent();
 		getPosition().getWorldMapInstance().getDoors().get(70).setOpen(true);
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500410, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500410);
 		super.handleDied();
 	}
 

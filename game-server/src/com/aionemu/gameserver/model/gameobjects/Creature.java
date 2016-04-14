@@ -78,7 +78,7 @@ public abstract class Creature extends VisibleObject {
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
-	protected int type = CreatureType.NULL.getId();
+	protected CreatureType type = CreatureType.NULL;
 	private TribeClass tribe = TribeClass.GENERAL;
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
@@ -772,7 +772,7 @@ public abstract class Creature extends VisibleObject {
 		return Race.NONE;
 	}
 
-	public int getType(Creature creature) {
+	public CreatureType getType(Creature creature) {
 		return type;
 	}
 

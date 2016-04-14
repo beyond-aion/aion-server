@@ -166,9 +166,9 @@ public class Summon extends Creature {
 	}
 
 	@Override
-	public int getType(Creature creature) {
+	public CreatureType getType(Creature creature) {
 		boolean friend = master == null || master.getRace().equals(creature.getRace()) && !creature.isEnemy(master);
-		return friend ? CreatureType.SUPPORT.getId() : CreatureType.ATTACKABLE.getId();
+		return friend ? CreatureType.SUPPORT : CreatureType.ATTACKABLE;
 	}
 
 	@Override
