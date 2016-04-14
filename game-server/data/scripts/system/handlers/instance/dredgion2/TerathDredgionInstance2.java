@@ -24,27 +24,27 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 			sp(730559, 572.038f, 185.252f, 433.940f, (byte) 0, 10, 720000);
 			sendMsgByRace(1401424, Race.PC_ALL, 720000);
 			if (Rnd.get(1, 100) < 21) {
-				sp(219265, 476.63f, 312.16f, 402.89807f, (byte) 97, 720000, "5540A84BAD08498B96C315281F6418D0BD825175");
+				sp(233372, 476.63f, 312.16f, 402.89807f, (byte) 97, 720000, "5540A84BAD08498B96C315281F6418D0BD825175");
 			}
 			if (Rnd.get(1, 100) < 21) {
-				sp(219266, 485.403f, 596.602f, 390.944f, (byte) 90, 720000);
+				sp(233373, 485.403f, 596.602f, 390.944f, (byte) 90, 720000);
 			}
 			if (Rnd.get(1, 100) < 21) {
-				sp(219333, 486.26382f, 906.011f, 405.24463f, (byte) 90, 720000);
+				sp(233379, 486.26382f, 906.011f, 405.24463f, (byte) 90, 720000);
 			}
 			if (Rnd.get(1, 100) < 51) {
-				switch (Rnd.get(2)) {
+				switch (Rnd.get(2)) { // Supervisor Chitan
 					case 0:
-						spawn(219255, 421.89111f, 285.20471f, 409.7311f, (byte) 80);
+						spawn(233362, 421.89111f, 285.20471f, 409.7311f, (byte) 80);
 						break;
 					default:
-						spawn(219255, 551.407f, 289.058f, 409.7311f, (byte) 80);
+						spawn(233362, 551.407f, 289.058f, 409.7311f, (byte) 80);
 						break;
 				}
 			}
 			int spawnTime = Rnd.get(10, 15) * 60 * 1000 + 120000;
 			sendMsgByRace(1401417, Race.PC_ALL, spawnTime);
-			sp(219270, 484.664f, 314.207f, 403.715f, (byte) 30, spawnTime);
+			sp(233377, 484.664f, 314.207f, 403.715f, (byte) 30, spawnTime); // Enforcer Udara
 			startInstanceTask();
 		}
 		super.onEnterInstance(player);
@@ -58,7 +58,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
 		}
 		if (++surkanKills == 5) {
-			spawn(219264, 485.423f, 808.826f, 416.868f, (byte) 30);
+			spawn(233371, 485.423f, 808.826f, 416.868f, (byte) 30);
 			sendMsgByRace(1401416, Race.PC_ALL, 0);
 		}
 		getPlayerReward(mostPlayerDamage).captureZone();
@@ -116,7 +116,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				sendMsgByRace(1401418, race, 0);
 				spawn(730561, 554.64f, 173.535f, 433.940f, (byte) 0, 9);
 				break;
-			case 219271:
+			case 233378: // Master at Arms Vandukar
 				sendMsgByRace(1401419, Race.PC_ALL, 0);
 				if (race.equals(Race.ASMODIANS)) {
 					spawn(730563, 496.178f, 761.770f, 390.805f, (byte) 0, 186);
@@ -124,10 +124,17 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 					spawn(730562, 473.759f, 761.864f, 390.805f, (byte) 0, 33);
 				}
 				return;
-			case 219270:
+			case 233377: // Enforcer Udara
 				updateScore(mostPlayerDamage, npc, 1000, false);
+				if (Rnd.get(1, 100) <= 50) {
+					spawn(701455, 484.500f, 495.700f, 397.425f, (byte) 33);
+					sendMsgByRace(1401421, Race.PC_ALL, 0);
+				}
 				return;
-			case 219264:
+			case 233370:
+				updateScore(mostPlayerDamage, npc, 500, false);
+				return;
+			case 233371: // Captain Anusa
 				if (!dredgionReward.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
 					Race winningRace = dredgionReward.getWinningRaceByScore();

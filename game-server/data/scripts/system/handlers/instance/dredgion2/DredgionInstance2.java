@@ -130,7 +130,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	public void doReward() {
 		for (Player player : instance.getPlayersInside()) {
 			InstancePlayerReward playerReward = getPlayerReward(player);
-			float abyssPoint = playerReward.getPoints() * RateConfig.DREDGION_REWARD_RATE; // to do finde on what depend this modifier
+			float abyssPoint = playerReward.getPoints(); // to do finde on what depend this modifier
 			if (player.getRace().equals(dredgionReward.getWinningRace())) {
 				abyssPoint += dredgionReward.getWinnerPoints();
 				ItemService.addItem(player, 186000242, 1); // Ceramium Medal
@@ -138,28 +138,22 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 				abyssPoint += dredgionReward.getLooserPoints();
 				ItemService.addItem(player, 186000147, 1); // Mithril Medal
 			}
-			AbyssPointsService.addAp(player, (int) abyssPoint);
+			AbyssPointsService.addAp(player, (int) (abyssPoint * RateConfig.DREDGION_REWARD_RATE));
 			QuestEnv env = new QuestEnv(null, player, 0, 0);
 			QuestEngine.getInstance().onDredgionReward(env);
 		}
-		for (Npc npc : instance.getNpcs()) {
+		for (Npc npc : instance.getNpcs())
 			npc.getController().onDelete();
-		}
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					for (Player player : instance.getPlayersInside()) {
-						if (PlayerActions.isAlreadyDead(player)) {
-							PlayerReviveService.duelRevive(player);
-						}
-						onExitInstance(player);
-					}
-					AutoGroupService.getInstance().unRegisterInstance(instanceId);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				for (Player player : instance.getPlayersInside()) {
+					if (PlayerActions.isAlreadyDead(player))
+						PlayerReviveService.duelRevive(player);
+					onExitInstance(player);
 				}
+				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
-
 		}, 10000);
 	}
 
@@ -180,11 +174,10 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			if (lastAttacker.getRace() != player.getRace()) {
 				InstancePlayerReward playerReward = getPlayerReward(player);
 
-				if (getPointsByRace(lastAttacker.getRace()).compareTo(getPointsByRace(player.getRace())) < 0) {
+				if (getPointsByRace(lastAttacker.getRace()).compareTo(getPointsByRace(player.getRace())) < 0)
 					points *= loosingGroupMultiplier;
-				} else if (loosingGroupMultiplier == 10 || playerReward.getPoints() == 0) {
+				else if (loosingGroupMultiplier == 10 || playerReward.getPoints() == 0)
 					points = 0;
-				}
 
 				updateScore((Player) lastAttacker, player, points, true);
 			}

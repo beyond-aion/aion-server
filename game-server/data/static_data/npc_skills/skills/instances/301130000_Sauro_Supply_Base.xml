@@ -180,7 +180,7 @@
         <npcskill skillid="21194" skilllevel="1" probability="20" cooldown="30000"/>
         <!-- <npcskill skillid="21195" skilllevel="1" probability="10"/> -->
 		<npcskill skillid="21426" skilllevel="1" probability="25" nextChainId="1" nextSkillTime="0" cooldown="30000"/>
-        <npcskill skillid="21427" skilllevel="1" probability="100" chainId="1"  nextSkillTime="10000"/>
+        <npcskill skillid="21427" skilllevel="1" probability="100" chainId="1" nextSkillTime="10000"/>
         <npcskill skillid="21428" skilllevel="1" probability="5" cooldown="20000"/>
         <npcskill skillid="21429" skilllevel="1" probability="5" cooldown="30000"/>
     </npcskills>
