@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NpcSkillData {
 
-	@XmlElement(name = "npcskills")
+	@XmlElement(name = "npc_skills")
 	private List<NpcSkillTemplates> npcSkills;
 
 	/** A map containing all npc skill templates */

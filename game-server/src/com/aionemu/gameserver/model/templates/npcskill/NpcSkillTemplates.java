@@ -13,13 +13,13 @@ import javax.xml.bind.annotation.XmlType;
  * @author AionChs Master
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "npcskills")
+@XmlType(name = "npc_skills")
 public class NpcSkillTemplates {
 
 	@XmlList
-	@XmlAttribute(name = "npcid")
+	@XmlAttribute(name = "npc_ids")
 	protected List<Integer> npcIds;
-	@XmlElement(name = "npcskill")
+	@XmlElement(name = "npc_skill")
 	protected List<NpcSkillTemplate> npcSkills;
 
 	public List<Integer> getNpcIds() {

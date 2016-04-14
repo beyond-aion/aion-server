@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author nrg
  */
-
 @XmlType(name = "ConjunctionType")
 @XmlEnum
 public enum ConjunctionType {

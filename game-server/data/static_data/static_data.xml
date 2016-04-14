@@ -100,7 +100,7 @@
 	<import file="monster_raid/raid_locations.xml" />
 	<import file="npc_factions/npc_factions.xml" />
 	<import file="npc_shouts/npc_shouts.xml" />
-	<import file="npc_skills/skills" singleRootTag="true" />
+	<import file="npc_skills" singleRootTag="true" />
 	<import file="npc_teleporter.xml" />
 	<import file="npc_trade_list.xml" />
 	<import file="npc_walker" singleRootTag="true" />

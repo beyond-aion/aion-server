@@ -14,100 +14,70 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
  * @reworked Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "npcskill")
+@XmlType(name = "npc_skill")
 public class NpcSkillTemplate {
 
 	@XmlAttribute(name = "id")
 	protected int id;
-	@XmlAttribute(name = "skillid")
-	protected int skillid;
-	@XmlAttribute(name = "skilllevel")
-	protected int skilllevel;
-	@XmlAttribute(name = "probability")
-	protected int probability;
-	@XmlAttribute(name = "minhp")
-	protected int minhp = 0;
-	@XmlAttribute(name = "maxhp")
-	protected int maxhp = 0;
-	@XmlAttribute(name = "maxtime")
-	protected int maxtime = 0;
-	@XmlAttribute(name = "mintime")
-	protected int mintime = 0;
+	@XmlAttribute(name = "lv")
+	protected int lv;
+	@XmlAttribute(name = "prob")
+	protected int prob;
+	@XmlAttribute(name = "min_hp")
+	protected int minHp = 0;
+	@XmlAttribute(name = "max_hp")
+	protected int maxHp = 0;
+	@XmlAttribute(name = "max_time")
+	protected int maxTime = 0;
+	@XmlAttribute(name = "min_time")
+	protected int minTime = 0;
 	@XmlAttribute(name = "conjunction")
 	protected ConjunctionType conjunction = ConjunctionType.AND;
-	@XmlAttribute(name = "cooldown")
-	protected int cooldown = 0;
-	@XmlAttribute(name = "useinspawned")
-	protected boolean useinspawned = false;
-	@XmlAttribute(name = "priority")
-	protected int priority = 0;
-	@XmlAttribute(name = "nextSkillTime")
-	protected int nextSkillTime = -1; //-1 = random time between 3s and 9s
+	@XmlAttribute(name = "cd")
+	protected int cd = 0;
+	@XmlAttribute(name = "use_after_spawn")
+	protected boolean use_after_spawn = false;
+	@XmlAttribute(name = "prio")
+	protected int prio = 0;
+	@XmlAttribute(name = "next_skill_time")
+	protected int nextSkillTime = -1; // -1 = random time between 3s and 9s
 	@XmlElement(name = "cond")
 	protected NpcSkillConditionTemplate conditionTemplate = null;
-	@XmlAttribute(name = "nextChainId")
+	@XmlAttribute(name = "next_chain_id")
 	protected int nextChainId = 0;
-	@XmlAttribute(name = "chainId")
+	@XmlAttribute(name = "chain_id")
 	protected int chainId = 0;
-	@XmlAttribute(name = "maxChainTime")
+	@XmlAttribute(name = "max_chain_time")
 	protected int maxChainTime = 15000;
 	@XmlAttribute(name = "target")
 	protected NpcSkillTargetAttribute target = NpcSkillTargetAttribute.MOST_HATED;
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
+	public int getSkillId() {
 		return id;
 	}
 
-	/**
-	 * @return the skillid
-	 */
-	public int getSkillid() {
-		return skillid;
-	}
-
-	/**
-	 * @return the skilllevel
-	 */
 	public int getSkillLevel() {
-		return skilllevel;
+		return lv;
 	}
 
-	/**
-	 * @return the probability
-	 */
 	public int getProbability() {
-		return probability;
+		return prob;
 	}
 
-	/**
-	 * @return the minhp
-	 */
 	public int getMinhp() {
-		return minhp;
+		return minHp;
 	}
 
-	/**
-	 * @return the maxhp
-	 */
 	public int getMaxhp() {
-		return maxhp;
+		return maxHp;
 	}
 
-	/**
-	 * @return the mintime
-	 */
 	public int getMinTime() {
-		return mintime;
+		return minTime;
 	}
 
-	/**
-	 * @return the maxtime
-	 */
 	public int getMaxTime() {
-		return maxtime;
+		return maxTime;
 	}
 
 	/**
@@ -119,77 +89,45 @@ public class NpcSkillTemplate {
 		return conjunction;
 	}
 
-	/**
-	 * @return the cooldown
-	 */
 	public int getCooldown() {
-		return cooldown;
+		return cd;
 	}
 
-	/**
-	 * @return the useinspawned
-	 */
-	public boolean getUseInSpawned() {
-		return useinspawned;
+	public boolean isPostSpawn() {
+		return use_after_spawn;
 	}
-	
-	/**
-	 * @return priority
-	 */
+
 	public int getPriority() {
-		return priority;
+		return prio;
 	}
 
-	/**
-	 * @return the conditionTemplate
-	 */
 	public NpcSkillConditionTemplate getConditionTemplate() {
 		return conditionTemplate;
 	}
-	
-	/**
-	 * @return SkillTemplate
-	 */
+
 	public SkillTemplate getSkillTemplate() {
-		if (skillid <= 0) {
+		if (id <= 0) {
 			return null;
 		}
-		return DataManager.SKILL_DATA.getSkillTemplate(skillid);
+		return DataManager.SKILL_DATA.getSkillTemplate(id);
 	}
 
-	/**
-	 * @return nextSkillTime
-	 */
 	public int getNextSkillTime() {
 		return nextSkillTime;
 	}
-	
-	/**
-	 * 
-	 * @return nextChainId
-	 */
+
 	public int getNextChainId() {
 		return nextChainId;
 	}
-	
-	/**
-	 * 
-	 * @return chainId
-	 */
+
 	public int getChainId() {
 		return chainId;
 	}
 
-	/**
-	 * @return maxChainTime
-	 */
 	public int getMaxChainTime() {
 		return maxChainTime;
 	}
 
-	/**
-	 * @return target to select
-	 */
 	public NpcSkillTargetAttribute getTarget() {
 		return target;
 	}

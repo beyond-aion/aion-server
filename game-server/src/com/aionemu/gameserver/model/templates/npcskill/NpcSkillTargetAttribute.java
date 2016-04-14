@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Yeats
- *
  */
 @XmlType(name = "NpcSkillTargetAttribute")
 @XmlEnum
@@ -16,5 +15,5 @@ public enum NpcSkillTargetAttribute {
 	RANDOM,
 	RANDOM_EXCEPT_MOST_HATED,
 	NONE;
-	
+
 }

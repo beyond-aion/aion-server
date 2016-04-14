@@ -38,7 +38,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	private final NpcSkillTemplate template;
 
 	public NpcSkillTemplateEntry(NpcSkillTemplate template) {
-		super(template.getSkillid(), template.getSkillLevel());
+		super(template.getSkillId(), template.getSkillLevel());
 		this.template = template;
 	}
 
@@ -91,7 +91,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean UseInSpawned() {
-		return template.getUseInSpawned();
+		return template.isPostSpawn();
 	}
 
 	@Override

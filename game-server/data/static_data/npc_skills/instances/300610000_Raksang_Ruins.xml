@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Draconute Scout -->
+	<npc_skills npc_ids="236005">
+		<npc_skill id="21135" lv="1" prob="100" is_post_spawn="true"/>
+		<npc_skill id="19430" lv="56" prob="75"/>
+		<npc_skill id="17243" lv="1" prob="33"/>
+	</npc_skills>
+	<!-- Draconute Combatant -->
+	<npc_skills npc_ids="236006">
+		<npc_skill id="21135" lv="1" prob="100" is_post_spawn="true"/>
+		<npc_skill id="16516" lv="1" prob="75"/>
+	</npc_skills>
+	<!-- Drill Camp Assasin -->
+	<npc_skills npc_ids="236007">
+		<npc_skill id="21135" lv="1" prob="100" is_post_spawn="true"/>
+		<npc_skill id="17322" lv="1" prob="50"/>
+	</npc_skills>
+	<!-- Drill Camp Guard | Classified Drill Camp Instructor -->
+	<npc_skills npc_ids="236008 236084">
+		<npc_skill id="21135" lv="1" prob="100" is_post_spawn="true"/>
+		<npc_skill id="17294" lv="1" prob="80"/>
+	</npc_skills>
+	<!-- Trained Vespine -->
+	<npc_skills npc_ids="236009">
+		<npc_skill id="20945" lv="1" prob="25"/>
+	</npc_skills>
+	<!-- Trained Porgus | Trained Worg | Crumbling Skelesword | Trained Fierce Lapilima | Trained Drakie -->
+	<npc_skills npc_ids="236010 236011 236012 236018 236021 236097">
+		<npc_skill id="21300" lv="1" prob="40"/>
+	</npc_skills>
+	<!-- Withering Husk -->
+	<npc_skills npc_ids="236013">
+		<npc_skill id="16825" lv="1" prob="33"/>
+	</npc_skills>
+	<!-- Ragelich Adept -->
+	<npc_skills npc_ids="236014">
+		<npc_skill id="19052" lv="1" prob="14"/>
+		<npc_skill id="20944" lv="36" prob="45"/>
+		<npc_skill id="16830" lv="1" prob="100" max_hp="10"/>
+	</npc_skills>
+	<!-- Trained Clodworm -->
+	<npc_skills npc_ids="236020 236096 236098">
+		<npc_skill id="17558" lv="1" prob="67"/>
+	</npc_skills>
+	<!-- Drill Instructor Diplito -->
+	<npc_skills npc_ids="236303">
+		<npc_skill id="21287" lv="1" prob="100" max_hp="50" cd="30000"/>
+		<npc_skill id="17335" lv="1" prob="75"/>
+	</npc_skills>
+	<!-- Drill Instructor Pratica -->
+	<npc_skills npc_ids="236304">
+		<npc_skill id="16405" lv="1" prob="100" cd="20000"/>
+		<npc_skill id="21285" lv="1" prob="40"/>
+		<npc_skill id="22658" lv="20" prob="33"/>
+	</npc_skills>
+	<!-- Drill Instructor Exico -->
+	<npc_skills npc_ids="236305">
+		<npc_skill id="17048" lv="1" prob="50"/>
+		<!-- <npc_skill id="21432" lv="1" prob="100" max_hp="48" cd="60000"/> -->
+	</npc_skills>
+	<!-- Reviver Nasto -->
+	<npc_skills npc_ids="236306">
+		<npc_skill id="16570" lv="1" prob="66" cd="12000"/>
+		<npc_skill id="22106" lv="1" prob="100" max_hp="66" cd="300000"/>
+		<npc_skill id="22106" lv="1" prob="100" max_hp="33" cd="300000"/>
+	</npc_skills>
+	<!-- Improved Thermitron -->
+	<npc_skills npc_ids="855852">
+		<npc_skill id="21534" lv="1" prob="100"/>
+	</npc_skills>
+	<!-- Skeleton Guard -->
+	<npc_skills npc_ids="855908">
+		<npc_skill id="16556" lv="1" prob="25"/>
+	</npc_skills>
+</npc_skill_templates>

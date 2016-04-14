@@ -54,7 +54,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236013: // Withering Husk
 			case 236014: // Ragelich Adept
 				if (++waveKills >= 31) {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
 						isDoorAccessible = true;
 				}
 				break;
@@ -63,11 +63,11 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236076:
 				switch (++waveKills) {
 					case 15:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
 						doors.get(457).setOpen(true);
 						break;
 					case 30:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
 						doors.get(64).setOpen(true);
 						break;
 				}
@@ -80,7 +80,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 					case 28:
 						spawns = 0;
 						doors.get(107).setOpen(true);
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
 						break;
 					case 56:
 						spawn(236305, 331.107f, 787.326f, 147.798f, (byte) 47);
@@ -95,15 +95,15 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				break;
 			case 236303:
 				doors.get(294).setOpen(true);
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
 				break;
 			case 236304:
 				doors.get(118).setOpen(true);
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
 				break;
 			case 236305:
 				doors.get(324).setOpen(true);
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
 				break;
 			case 236306:
 				spawn(730445, 620.65f, 663.44f, 522.049f, (byte) 27); // Exit
@@ -122,7 +122,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 702690:
 			case 702691:
 			case 702692:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
 				delaySpawn(player, 236074 + Rnd.get(3), 2000);
 				delaySpawn(player, 236074 + Rnd.get(3), 2000);
 				delaySpawn(player, 236074 + Rnd.get(3), 8000);
@@ -134,7 +134,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				if (isDoorAccessible)
 					TeleportService2.teleportTo(player, mapId, instanceId, 711.10895f, 312.82013f, 910.6781f);
 				else
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_DOOR_CONDITION(), 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_DOOR_CONDITION());
 				break;
 		}
 	}
@@ -309,21 +309,21 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				case 206197:
 					if (isEventStarted.compareAndSet(false, true)) {
 						detector.getController().onDelete();
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
 						delaySpawn((byte) 3, 20000);
 					}
 					break;
 				case 206198:
 					if (isEventStarted.compareAndSet(false, true)) {
 						detector.getController().onDelete();
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 1, 10000);
 					}
 					break;
 				case 206199:
 					if (isEventStarted.compareAndSet(true, false)) {
 						detector.getController().onDelete();
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 2, 10000);
 					}
 					break;

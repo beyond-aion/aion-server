@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Terath Warmonger -->
+    <npc_skills npc_ids="233347">
+        <npc_skill id="18166" lv="46" prob="25"/>
+        <npc_skill id="20505" lv="46" prob="25" cd="15000"/>
+		<npc_skill id="20504" lv="46" prob="50"/>
+    </npc_skills>
+	<!-- Terath Executioner -->
+    <npc_skills npc_ids="233348">
+        <npc_skill id="16540" lv="46" prob="40"/>
+		<npc_skill id="16541" lv="46" prob="100" max_hp="50" cd="30000"/>
+		<npc_skill id="16542" lv="46" prob="50" cd="18000"/>
+    </npc_skills>
+	<!-- Terath Sentinel -->
+    <npc_skills npc_ids="233349">
+        <npc_skill id="18173" lv="46" prob="20"/>
+        <npc_skill id="16812" lv="46" prob="25" next_chain_id="1" next_skill_time="0"/>
+		<npc_skill id="16813" lv="46" prob="100" chain_id="1" next_skill_time="10000"/>
+        <npc_skill id="16815" lv="46" prob="25" next_chain_id="2" next_skill_time="0"/>
+		<npc_skill id="16816" lv="46" prob="100" chain_id="2" next_skill_time="10000"/>
+        <npc_skill id="17003" lv="46" prob="25"/>
+        <npc_skill id="16543" lv="46" prob="10"/>
+    </npc_skills>
+	<!-- Terath Magician -->
+    <npc_skills npc_ids="233350">
+        <npc_skill id="18174" lv="46" prob="25" cd="30000"/>
+        <npc_skill id="16775" lv="46" prob="25"/>
+		<npc_skill id="16829" lv="46" prob="33" cd="25000"/>
+        <npc_skill id="17039" lv="46" prob="25"/>
+    </npc_skills>
+	<!-- Terath Fleshmender -->
+    <npc_skills npc_ids="233351">
+        <npc_skill id="17008" lv="46" prob="25"/>
+        <npc_skill id="16566" lv="46" prob="25" min_hp="37" max_hp="100"/>
+        <npc_skill id="16638" lv="46" prob="25" min_hp="39" max_hp="44"/>
+    </npc_skills>
+	<!-- Terath Vanquisher -->
+    <npc_skills npc_ids="233352">
+        <npc_skill id="20241" lv="60" prob="100" max_hp="50" cd="60000"/>
+        <npc_skill id="20504" lv="60" prob="17"/>
+        <npc_skill id="20505" lv="60" prob="17" cd="15000"/>
+        <npc_skill id="20506" lv="60" prob="30" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20507" lv="60" prob="100" chain_id="1" next_skill_time="10000"/>
+    </npc_skills>
+	<!-- Terath Prowler -->
+    <npc_skills npc_ids="233353">
+        <npc_skill id="19721" lv="60" prob="23"/>
+        <npc_skill id="19722" lv="60" prob="18"/>
+        <npc_skill id="19723" lv="60" prob="14"/>
+        <npc_skill id="19724" lv="60" prob="14"/>
+        <npc_skill id="19725" lv="60" prob="9"/>
+        <npc_skill id="19726" lv="60" prob="9"/>
+        <npc_skill id="19727" lv="60" prob="5"/>
+        <npc_skill id="19728" lv="60" prob="5"/>
+        <npc_skill id="19730" lv="60" prob="5"/>
+    </npc_skills>
+	<!-- Terath Thaumaturge -->
+    <npc_skills npc_ids="233354">
+        <npc_skill id="20512" lv="60" prob="24" min_hp="0"/>
+        <npc_skill id="20511" lv="60" prob="43"/>
+        <npc_skill id="20508" lv="60" prob="33"/>
+    </npc_skills>
+	<!-- Terath Physician -->
+    <npc_skills npc_ids="233355">
+        <npc_skill id="20517" lv="60" prob="29"/>
+        <npc_skill id="20518" lv="60" prob="24"/>
+        <npc_skill id="20519" lv="60" prob="29"/>
+        <npc_skill id="20514" lv="60" prob="19"/>
+    </npc_skills>
+	<!-- Terath Bloodletter -->
+    <npc_skills npc_ids="233356">
+        <npc_skill id="20241" lv="60" prob="25"/>
+        <npc_skill id="20504" lv="60" prob="25"/>
+        <npc_skill id="20505" lv="60" prob="10"/>
+        <npc_skill id="20506" lv="60" prob="10"/>
+        <npc_skill id="20507" lv="60" prob="20"/>
+        <npc_skill id="20247" lv="60" prob="15"/>
+        <npc_skill id="20504" lv="60" prob="20"/>
+    </npc_skills>
+	<!-- Terath Stalker -->
+    <npc_skills npc_ids="233357">
+        <npc_skill id="20415" lv="60" prob="12"/>
+        <npc_skill id="20416" lv="60" prob="12"/>
+        <npc_skill id="20522" lv="60" prob="25" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20523" lv="60" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0"/>
+        <npc_skill id="20524" lv="60" prob="100" chain_id="2" next_skill_time="10000"/>
+        <npc_skill id="20525" lv="60" prob="25" next_chain_id="3" next_skill_time="0"/>
+        <npc_skill id="20526" lv="60" prob="100" chain_id="3" next_skill_time="10000"/>
+        <npc_skill id="20527" lv="60" prob="4"/>
+    </npc_skills>
+	<!-- Terath Worldwarper -->
+    <npc_skills npc_ids="233358">
+        <npc_skill id="20512" lv="60" prob="75" min_hp="0"/>
+        <npc_skill id="20511" lv="60" prob="13"/>
+        <npc_skill id="20508" lv="60" prob="13"/>
+    </npc_skills>
+	<!-- Terath Medic -->
+    <npc_skills npc_ids="233359">
+        <npc_skill id="20514" lv="60" prob="20"/>
+        <npc_skill id="20517" lv="60" prob="30"/>
+        <npc_skill id="20518" lv="60" prob="30"/>
+        <npc_skill id="20519" lv="60" prob="20"/>
+    </npc_skills>
+	<!-- Terath Archer -->
+    <npc_skills npc_ids="233360">
+        <npc_skill id="18173" lv="46" prob="25"/>
+    </npc_skills>
+	<!-- Supervisor Chitan -->
+	<npc_skills npc_ids="233362">
+		<npc_skill id="20241" lv="60" prob="100" max_hp="50" cd="60000"/>
+        <npc_skill id="20504" lv="60" prob="17"/>
+        <npc_skill id="20505" lv="60" prob="17" cd="15000"/>
+        <npc_skill id="20506" lv="60" prob="30" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20507" lv="60" prob="100" chain_id="1" next_skill_time="10000"/>
+	</npc_skills>
+	<!-- Chief Navigator Adhari -->
+    <npc_skills npc_ids="233363">
+        <npc_skill id="20241" lv="60" prob="12"/>
+        <npc_skill id="20504" lv="60" prob="27"/>
+        <npc_skill id="20505" lv="60" prob="15"/>
+        <npc_skill id="20506" lv="60" prob="12"/>
+        <npc_skill id="20507" lv="60" prob="23"/>
+        <npc_skill id="20247" lv="60" prob="12"/>
+    </npc_skills>
+	<!-- Assistant Navigator Kurta -->
+    <npc_skills npc_ids="233364">
+        <npc_skill id="20241" lv="60" prob="100" max_hp="50" cd="60000"/>
+        <npc_skill id="20504" lv="60" prob="17"/>
+        <npc_skill id="20505" lv="60" prob="17" cd="15000"/>
+        <npc_skill id="20506" lv="60" prob="30" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20507" lv="60" prob="100" chain_id="1" next_skill_time="10000"/>
+    </npc_skills>
+	<!-- Vice Gun Captain Faniran -->
+	<npc_skills npc_ids="233365">
+        <npc_skill id="20415" lv="60" prob="12"/>
+        <npc_skill id="20416" lv="60" prob="12"/>
+        <npc_skill id="20522" lv="60" prob="25" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20523" lv="60" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0"/>
+        <npc_skill id="20524" lv="60" prob="100" chain_id="2" next_skill_time="10000"/>
+        <npc_skill id="20525" lv="60" prob="25" next_chain_id="3" next_skill_time="0"/>
+        <npc_skill id="20526" lv="60" prob="100" chain_id="3" next_skill_time="10000"/>
+        <npc_skill id="20527" lv="60" prob="4"/>
+    </npc_skills>
+	<!-- Gun Captain Pahala -->
+	<npc_skills npc_ids="233366">
+		<npc_skill id="20415" lv="60" prob="12"/>
+        <npc_skill id="20416" lv="60" prob="12"/>
+        <npc_skill id="20522" lv="60" prob="25" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20523" lv="60" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0"/>
+        <npc_skill id="20524" lv="60" prob="100" chain_id="2" next_skill_time="10000"/>
+        <npc_skill id="20525" lv="60" prob="25" next_chain_id="3" next_skill_time="0"/>
+        <npc_skill id="20526" lv="60" prob="100" chain_id="3" next_skill_time="10000"/>
+        <npc_skill id="20527" lv="60" prob="4"/>
+    </npc_skills>
+	<!-- Vice Air Captain Lukar -->
+	<npc_skills npc_ids="233367">
+        <npc_skill id="20517" lv="60" prob="36"/>
+        <npc_skill id="20518" lv="60" prob="27"/>
+        <npc_skill id="20514" lv="60" prob="18"/>
+        <npc_skill id="20519" lv="60" prob="18"/>
+    </npc_skills>
+	<!-- Air Captain Misalus -->
+    <npc_skills npc_ids="233368">
+        <npc_skill id="20517" lv="60" prob="36"/>
+        <npc_skill id="20518" lv="60" prob="27"/>
+        <npc_skill id="20514" lv="60" prob="18"/>
+        <npc_skill id="20519" lv="60" prob="18"/>
+    </npc_skills>
+	<!-- Engineer Tapisha -->
+    <npc_skills npc_ids="233369">
+        <npc_skill id="20517" lv="60" prob="36"/>
+        <npc_skill id="20518" lv="60" prob="27"/>
+        <npc_skill id="20514" lv="60" prob="18"/>
+        <npc_skill id="20519" lv="60" prob="18"/>
+    </npc_skills>
+	<!-- First Mate Kamital -->
+	<npc_skills npc_ids="233370">
+        <npc_skill id="20517" lv="60" prob="36"/>
+        <npc_skill id="20518" lv="60" prob="27"/>
+        <npc_skill id="20514" lv="60" prob="18"/>
+        <npc_skill id="20519" lv="60" prob="18"/>
+    </npc_skills>
+	<!-- Captain Anusa -->
+    <npc_skills npc_ids="233371">
+        <npc_skill id="20511" lv="60" prob="25"/>
+        <npc_skill id="20508" lv="60" prob="25"/>
+        <npc_skill id="20512" lv="60" prob="25"/>
+    </npc_skills>
+	<!-- Bosun Kuchuran -->
+	<npc_skills npc_ids="233372">
+		<npc_skill id="16540" lv="46" prob="40"/>
+		<npc_skill id="16541" lv="46" prob="100" max_hp="50" cd="30000"/>
+		<npc_skill id="16542" lv="46" prob="50" cd="18000"/>
+	</npc_skills>
+	<!-- Archivist Davorkar -->
+	<npc_skills npc_ids="233373">
+        <npc_skill id="20511" lv="60" prob="41"/>
+        <npc_skill id="20508" lv="60" prob="29"/>
+        <npc_skill id="20512" lv="60" prob="29"/>
+    </npc_skills>
+	<!-- Supply Captain Marahane -->
+    <npc_skills npc_ids="233374">
+        <npc_skill id="20241" lv="60" prob="100" max_hp="50" cd="60000"/>
+        <npc_skill id="20504" lv="60" prob="17"/>
+        <npc_skill id="20505" lv="60" prob="17" cd="15000"/>
+        <npc_skill id="20506" lv="60" prob="30" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20507" lv="60" prob="100" chain_id="1" next_skill_time="10000"/>
+    </npc_skills>
+	<!-- Quartermaster Gashar -->
+	<npc_skills npc_ids="233375">
+		<npc_skill id="20241" lv="60" prob="100" max_hp="50" cd="60000"/>
+        <npc_skill id="20504" lv="60" prob="17"/>
+        <npc_skill id="20505" lv="60" prob="17" cd="15000"/>
+        <npc_skill id="20506" lv="60" prob="30" next_chain_id="1" next_skill_time="0"/>
+        <npc_skill id="20507" lv="60" prob="100" chain_id="1" next_skill_time="10000"/>
+    </npc_skills>
+	<!-- Gatekeeper Payad -->
+    <npc_skills npc_ids="233376">
+		<npc_skill id="20543" lv="60" prob="100" max_hp="25" cd="60000"/>
+		<npc_skill id="20544" lv="60" prob="9"/>
+        <npc_skill id="20545" lv="60" prob="25"/>
+        <npc_skill id="20546" lv="60" prob="25"/>
+        <npc_skill id="20547" lv="60" prob="25"/>
+    </npc_skills>
+	<!-- Enforcer Udara -->
+	<npc_skills npc_ids="233377">
+        <npc_skill id="20543" lv="60" prob="100" max_hp="25" cd="60000"/>
+		<npc_skill id="20544" lv="60" prob="9"/>
+        <npc_skill id="20545" lv="60" prob="25"/>
+        <npc_skill id="20546" lv="60" prob="25"/>
+        <npc_skill id="20547" lv="60" prob="25"/>
+    </npc_skills>
+	<!-- Master at Arms Vandukar -->
+    <npc_skills npc_ids="233378">
+        <npc_skill id="20543" lv="60" prob="100" max_hp="25" cd="60000"/>
+		<npc_skill id="20544" lv="60" prob="9"/>
+        <npc_skill id="20545" lv="60" prob="25"/>
+        <npc_skill id="20546" lv="60" prob="25"/>
+        <npc_skill id="20547" lv="60" prob="25"/>
+    </npc_skills>
+	<!-- Auditor Zhantri -->
+	<npc_skills npc_ids="233379">
+        <npc_skill id="20543" lv="60" prob="100" max_hp="25" cd="60000"/>
+		<npc_skill id="20544" lv="60" prob="9"/>
+        <npc_skill id="20545" lv="60" prob="25"/>
+        <npc_skill id="20546" lv="60" prob="25"/>
+        <npc_skill id="20547" lv="60" prob="25"/>
+    </npc_skills>
+</npc_skill_templates>

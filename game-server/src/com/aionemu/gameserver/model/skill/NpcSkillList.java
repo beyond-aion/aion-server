@@ -36,8 +36,8 @@ public class NpcSkillList implements SkillList<Npc> {
 			initSkills();
 			for (int index = npcSkillList.getNpcSkills().size() - 1; index >= 0; index--) {
 				NpcSkillTemplate template = npcSkillList.getNpcSkills().get(index);
-				if (DataManager.SKILL_DATA.getSkillTemplate(template.getSkillid()) == null) {
-					log.warn("Missing skill " + template.getSkillid() + " for npc " + npcId);
+				if (DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()) == null) {
+					log.warn("Missing skill " + template.getSkillId() + " for npc " + npcId);
 					npcSkillList.getNpcSkills().remove(index);
 					continue;
 				}
