@@ -1,24 +1,19 @@
 package instance;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.flyring.FlyRing;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.StaticDoorService;
-import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -26,430 +21,313 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Kill3r
+ * @author Estrayl 14.04.2016
+ * @since AION 4.8
  */
 @InstanceID(300610000)
 public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
-	/*
-	 * 700141 asmo gate need to be opened when last boss is dead
-	 * 700143 elyos gate at last
-	 * Level 1 = Right Side part
-	 * Level 2 = Left Side Part
-	 * Level 3(Hell) = Bottom part - only visible when going there.
-	 * case 236013: // Withering Husk (Waves)
-	 * case 236011: // Trained Worg (Waves)
-	 * case 236010: // Trained Porgus (Waves)
-	 */
-
-	protected boolean isInstanceDestroyed = false;
-	private boolean wave1_done = false; // of Level2
-	private boolean wave2_done = false; // of level2
-	private boolean wave3_done = false; // of level2
-	private int stageNum = 0;
-	private int porgusCnt;
-	private int worgCnt;
-	private int huskCnt;
-	private boolean level2_wavesCalled = false;
 	private Map<Integer, StaticDoor> doors;
+	private AtomicBoolean isEventStarted = new AtomicBoolean();
+	private Future<?> spawnTask;
+	private boolean isDoorAccessible = false;
+	private byte way, waveKills, spawns;
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		doors = instance.getDoors();
-		// Elyos Npc's
-		// 206378 lvl1
-		// 206379 lvl2
-		// 206380 lvl3
-		// Asmo Npc's
-		// 206395 lvl1
-		// 206396 lvl2
-		// 206397 lvl3
-		stageNum = Rnd.get(1, 3);
-		super.onInstanceCreate(instance);
-		spawnRings();
-	}
-
-	public boolean isInstanceDestroyed() {
-		return isInstanceDestroyed;
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		player.getInventory().decreaseByItemId(164000342, 20);
-		super.onLeaveInstance(player);
-	}
-
-	@Override
-	public void onDie(Npc npc) {
-		Player p = npc.getAggroList().getMostPlayerDamage();
-		switch (npc.getNpcId()) {
-			case 236016:
-			case 236078:
-			case 236079:
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				if ((getNpcs(236016).isEmpty() && getNpcs(236078).isEmpty() && getNpcs(236079).isEmpty())) {
-					if (checkTombStones(1))
-						openDoor(p, 457, true);
-				}
-				break;
-			case 236304: // Drill Instructor Pratica
-				openDoor(p, 118, true);
-				break;
-			// End of Level 1
-			case 236013: // Withering Husk (Waves)
-				if (npc.getNpcId() == 236013)
-					huskCnt++;
-			case 236011: // Trained Worg (Waves)
-				if (npc.getNpcId() == 236011)
-					worgCnt++;
-			case 236010: // Trained Porgus (Waves)
-				if (npc.getNpcId() == 236010)
-					porgusCnt++;
-				if (porgusCnt == 5 && worgCnt == 0) { // Wave 2 (wave1 handled on passFlyRing)
-					if (!wave1_done) {
-						wave1_done = true;
-						PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402832)); // Prepare for Combat! More enemies swarming in!
-						callWaves2();
-					}
-				}
-				if (porgusCnt == 8 && worgCnt == 2) { // wave 3
-					if (wave1_done && !wave2_done) {
-						wave2_done = true;
-						callWaves3();
-					}
-				}
-				if (worgCnt == 9 && huskCnt == 1) { // wave 4
-					if (wave1_done && wave2_done && !wave3_done) {
-						wave3_done = true;
-						PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402834)); // Only a few enemies left!
-						callWaves4();
-					}
-				}
-				break;
-			case 236084: // Classified Drill Camp Instructor
-				openDoor(p, 307, true);
-				break;
-			case 236303: // Drill Instructor Diplito
-				openDoor(p, 294, true);
-				break;
-			case 236306: // Reviver Nasto (Boss-Middle) (Level 1 Boss || Level 2 Boss)
-				spawn(730445, 619.643f, 685.1399f, 522.0487f, (byte) 85); // Rift (out)
-				spawn(730445, 1062.2809f, 889.9004f, 141.67015f, (byte) 85); // Rift (out)
-				break;
-		}
+	public void onInstanceCreate(WorldMapInstance wmi) {
+		super.onInstanceCreate(wmi);
+		doors = wmi.getDoors();
+		way = (byte) Rnd.get(3);
 	}
 
 	@Override
 	public void onEnterInstance(Player player) {
-		// Elyos Npc's
-		// 206378 lvl1
-		// 206379 lvl2
-		// 206380 lvl3
-		// Asmo Npc's
-		// 206395 lvl1
-		// 206396 lvl2
-		// 206397 lvl3
-		switch (player.getRace()) {
-			case ASMODIANS:
-				switch (stageNum) {
-					case 1:
-						spawn(206395, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-					case 2:
-						spawn(206396, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-					case 3:
-						spawn(206397, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-				}
-				break;
-			case ELYOS:
-				switch (stageNum) {
-					case 1:
-						spawn(206378, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-					case 2:
-						spawn(206379, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-					case 3:
-						spawn(206380, 818.103f, 931.0215f, 1207.4312f, (byte) 13);
-						break;
-				}
-				break;
-		}
-	}
-
-	public void spawnRings() { // Ring for wave at level2
-		FlyRing waveStarter = new FlyRing(new FlyRingTemplate("waves_level2", mapId, new Point3D(566.06354f, 245.26855f, 928.0467f), new Point3D(
-			568.7914f, 246.79665f, 928.0467f), new Point3D(564.0763, 242.45244f, 928.0466f), 5), instanceId);
-
-		waveStarter.spawn();
+		spawn(206378 + way + (player.getRace() == Race.ASMODIANS ? 17 : 0), 818.103f, 931.0215f, 1207.4312f, (byte) 13);
 	}
 
 	@Override
-	public boolean onPassFlyingRing(Player player, String flyingRing) {
-		if (flyingRing.equals("waves_level2") && !level2_wavesCalled) {
-			level2_wavesCalled = true;
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402780)); // Prepare for Combat! Enemies approaching!
-			callWaves1();
+	public void onDie(Npc npc) {
+		switch (npc.getNpcId()) {
+			case 236010: // Trained Porgus
+			case 236011: // Trained Worg
+			case 236012: // Crumbling Skelesword
+			case 236013: // Withering Husk
+			case 236014: // Ragelich Adept
+				if (++waveKills >= 31) {
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END(), 0);
+						isDoorAccessible = true;
+				}
+				break;
+			case 236074:
+			case 236075:
+			case 236076:
+				switch (++waveKills) {
+					case 15:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+						doors.get(457).setOpen(true);
+						break;
+					case 30:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+						doors.get(64).setOpen(true);
+						break;
+				}
+				break;
+			case 236020:
+			case 236021:
+			case 236096:
+			case 236097:
+				switch (++waveKills) {
+					case 28:
+						spawns = 0;
+						doors.get(107).setOpen(true);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END(), 0);
+						break;
+					case 56:
+						spawn(236305, 331.107f, 787.326f, 147.798f, (byte) 47);
+						break;
+				}
+				break;
+			case 236084:
+				doors.get(307).setOpen(true);
+				break;
+			case 217469:
+				doors.get(107).setOpen(true);
+				break;
+			case 236303:
+				doors.get(294).setOpen(true);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END(), 0);
+				break;
+			case 236304:
+				doors.get(118).setOpen(true);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END(), 0);
+				break;
+			case 236305:
+				doors.get(324).setOpen(true);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END(), 0);
+				break;
+			case 236306:
+				spawn(730445, 620.65f, 663.44f, 522.049f, (byte) 27); // Exit
+				break;
+			case 0:
+				spawn(730438, 628.132f, 187.505f, 924.86f, (byte) 0);
 		}
-		return false;
-	}
-
-	public void callWaves4() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 800); // 1sec(about)
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236013, 623.9586f, 195.92781f, 924.93005f, (byte) 39); // Withering Husk
-			}
-		}, 4000); // 4sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 7000); // 7sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236075, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Crumbling Skelesword
-				spawn(236075, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Crumbling Skelesword
-			}
-		}, 11000); // 11sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236014, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Ragelich Adept
-			}
-		}, 16000); // 16sec
-	}
-
-	public void callWaves3() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 800); // 1sec(about)
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236011, 619.6694f, 200.17451f, 924.5908f, (byte) 44); // Trained Worg
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 6000); // 6sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236013, 623.9586f, 195.92781f, 924.93005f, (byte) 39); // Withering Husk
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 16000); // 16sec
-	}
-
-	public void callWaves2() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236010, 619.6694f, 200.17451f, 924.5908f, (byte) 44); // Trained Porgus
-			}
-		}, 1000); // 1sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236010, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Porgus
-				spawn(236010, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Porgus
-			}
-		}, 5000); // 5sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236011, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Worg
-				spawn(236011, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Worg
-			}
-		}, 10000); // 10sec
-	}
-
-	public void callWaves1() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236010, 619.6694f, 200.17451f, 924.5908f, (byte) 44); // Trained Porgus
-			}
-		}, 1000); // 1sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236010, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Porgus
-				spawn(236010, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Porgus
-			}
-		}, 5000); // 5sec
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(236010, 619.39197f, 196.22458f, 925.2501f, (byte) 37); // Trained Porgus
-				spawn(236010, 625.27203f, 201.7753f, 924.5915f, (byte) 43); // Trained Porgus
-			}
-		}, 10000); // 10sec
 	}
 
 	@Override
-	public void handleUseItemFinish(Player player, Npc npc) { // Handles the wave on Level 1
-		switch (npc.getNpcId()) { // Can use Switches in any order (depends on what the player use)
-			case 702673: // Switch 1
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 1
-
-						@Override
-						public void run() {
-							spawn(236077, 945.9489f, 773.0383f, 734.05475f, (byte) 7); // Crumbling Skeleton
-							spawn(236077, 942.5316f, 781.50635f, 734.0187f, (byte) 7); // Crumbling Skeleton
-						}
-					}, 2000); // 2 Sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 2
-
-						@Override
-						public void run() {
-							spawn(236075, 947.35596f, 769.2971f, 734.05475f, (byte) 6); // Crumbling Skelesword
-							spawn(236075, 943.47876f, 779.94714f, 734.0187f, (byte) 6); // Crumbling Skelesword
-						}
-					}, 10000); // 10 Sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 3
-
-						@Override
-						public void run() {
-							spawn(236076, 941.248f, 777.2723f, 734.0187f, (byte) 6); // Aetherflesh Husk
-						}
-					}, 10000); // 18 Sec
+	public void handleUseItemFinish(Player player, Npc npc) {
+		switch (npc.getNpcId()) {
+			case 702673: // Torment's Forge
+			case 702674:
+			case 702675:
+			case 702690:
+			case 702691:
+			case 702692:
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START(), 0);
+				delaySpawn(player, 236074 + Rnd.get(3), 2000);
+				delaySpawn(player, 236074 + Rnd.get(3), 2000);
+				delaySpawn(player, 236074 + Rnd.get(3), 8000);
+				delaySpawn(player, 236074 + Rnd.get(3), 8000);
+				delaySpawn(player, 236074 + Rnd.get(3), 12000);
+				npc.getController().onDelete();
 				break;
-			case 702674: // Switch 2
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 1
-
-						@Override
-						public void run() {
-							spawn(236075, 969.46814f, 777.41296f, 734.05475f, (byte) 66); // Crumbling Skelesword
-							spawn(236075, 968.4426f, 780.47174f, 734.05475f, (byte) 66); // Crumbling Skelesword
-						}
-					}, 5000); // 5 Sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 2
-
-						@Override
-						public void run() {
-							spawn(236075, 951.9105f, 770.3287f, 734.05475f, (byte) 6); // Crumbling Skelesword
-							spawn(236075, 950.66437f, 773.2599f, 733.9997f, (byte) 6); // Crumbling Skelesword
-						}
-					}, 10000); // 10 Sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 3
-
-						@Override
-						public void run() {
-							spawn(236075, 964.9466f, 771.17566f, 734.05475f, (byte) 38); // Crumbling Skelesword
-						}
-					}, 18000); // 18 Sec
-				break;
-			case 702675: // Switch 3
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 1
-
-						@Override
-						public void run() {
-							spawn(236077, 966.03644f, 788.0274f, 734.0461f, (byte) 65); // Crumbling Skeleton
-							spawn(236077, 963.9405f, 794.1113f, 734.2379f, (byte) 66); // Crumbling Skeleton
-						}
-					}, 2000); // 2 Sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 2
-
-						@Override
-						public void run() {
-							spawn(236077, 962.9926f, 788.976f, 734.0461f, (byte) 66); // Crumbling Skeleton
-							spawn(236077, 960.68884f, 795.6427f, 734.2963f, (byte) 66); // Crumbling Skeleton
-						}
-					}, 10000); // 10sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() { // wave 3
-
-						@Override
-						public void run() {
-							spawn(236077, 960.7599f, 790.6686f, 734.0461f, (byte) 66); // Crumbling Skeleton
-						}
-					}, 20000); // 20sec
-				break;
-
-			case 702690: // Switch 4
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				// Summon Wave 4
-				break;
-			case 702691: // Switch 5
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				// Summon Wave 5
-				break;
-			case 702692: // Switch 6
-				deleteNpc(npc.getNpcId(), npc.getObjectId());
-				// Summon Wave 6
+			case 730438: // Terror' Vault
+				if (isDoorAccessible)
+					TeleportService2.teleportTo(player, mapId, instanceId, 711.10895f, 312.82013f, 910.6781f);
+				else
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_DOOR_CONDITION(), 0);
 				break;
 		}
 	}
 
 	/**
-	 * When TombStones are Dead, first Door opens
-	 * 457 = First Door in Tormet > 118 after second Boss
-	 * 64 = Second Door in Terror
-	 *
-	 * @param level
-	 * @return if tombStones are all dead
+	 * Used for way A (Terror's Vault & Cuttling Grounds).
 	 */
-	private boolean checkTombStones(int level) {
-		switch (level) {
-			case 1: // Right Part (Torment's Forge)
-				if (getNpcs(702673).isEmpty() && getNpcs(702674).isEmpty() && getNpcs(702675).isEmpty())
-					return true;
-				break;
-			case 3: // Bottom Part (Hidden - Hell)
-				break;
-		}
-		return false;
+	private void delaySpawn(int npcId, int delay) {
+		ThreadPoolManager.getInstance().schedule(() -> spawn(npcId, 621.50f, 198.54f, 924.838f, (byte) 42), delay);
+	}
+
+	private void delaySpawn(byte step , int delay) {
+		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (++spawns >= 8)
+				spawnTask.cancel(true);
+			switch (step) {
+				case 1:
+					switch (spawns) {
+						case 1:
+						case 3:
+						case 5:
+						case 7:
+							spawn(236020, 344.016f, 630.834f, 146.514f, (byte) 0);
+							spawn(236020, 325.803f, 645.552f, 146.514f, (byte) 0);
+							spawn(236020, 307.303f, 614.676f, 146.514f, (byte) 0);
+							spawn(236020, 329.768f, 608.466f, 146.514f, (byte) 0);
+							break;
+						case 2:
+						case 4:
+						case 6:
+						case 8:
+							spawn(236021, 312.577f, 605.469f, 146.514f, (byte) 0);
+							spawn(236021, 307.422f, 630.051f, 146.514f, (byte) 0);
+							spawn(236021, 337.200f, 639.658f, 146.514f, (byte) 0);
+							break;
+					}
+					break;
+				case 2:
+					switch (spawns) {
+						case 1:
+						case 3:
+						case 5:
+						case 7:
+							spawn(236096, 303.755f, 772.090f, 148.988f, (byte) 0);
+							spawn(236096, 350.070f, 801.111f, 145.082f, (byte) 0);
+							spawn(236096, 332.003f, 767.004f, 147.394f, (byte) 0);
+							spawn(236096, 325.803f, 810.720f, 144.885f, (byte) 0);
+							break;
+						case 2:
+						case 4:
+						case 6:
+						case 8:
+							spawn(236097, 344.371f, 781.986f, 147.159f, (byte) 0);
+							spawn(236097, 339.273f, 813.446f, 145.390f, (byte) 0);
+							spawn(236097, 317.126f, 766.019f, 148.844f, (byte) 0);
+							break;
+					}
+					break;
+				case 3:
+					switch (spawns) {
+						case 1:
+							delaySpawn(236010, 1000);
+							delaySpawn(236010, 4000);
+							delaySpawn(236010, 7000);
+							delaySpawn(236010, 10000);
+							delaySpawn(236010, 13000);
+							break;
+						case 2:
+							delaySpawn(236010, 1000);
+							delaySpawn(236010, 3000);
+							delaySpawn(236010, 6000);
+							delaySpawn(236011, 9000);
+							delaySpawn(236011, 9500);
+							break;
+						case 3:
+							delaySpawn(236011, 1000);
+							delaySpawn(236011, 1500);
+							delaySpawn(236011, 6000);
+							delaySpawn(236011, 6500);
+							delaySpawn(236011, 7000);
+							break;
+						case 4:
+							delaySpawn(236011, 1000);
+							delaySpawn(236011, 1500);
+							delaySpawn(236013, 2000);
+							break;
+						case 5:
+							delaySpawn(236010, 2000);
+							delaySpawn(236010, 5000);
+							delaySpawn(236010, 7000);
+							delaySpawn(236011, 11000);
+							delaySpawn(236011, 11500);
+							break;
+						case 6:
+							delaySpawn(236011, 1000);
+							delaySpawn(236011, 1500);
+							delaySpawn(236013, 2000);
+							delaySpawn(236011, 6000);
+							delaySpawn(236011, 6500);
+							break;
+						case 7:
+							delaySpawn(236012, 7000);
+							delaySpawn(236012, 7500);
+							delaySpawn(236014, 8000);
+							break;
+					}
+					break;
+			}
+			switch (spawns) {
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+					switch (step) {
+						case 1:
+							spawn(236020, 344.016f, 630.834f, 146.514f, (byte) 0);
+							spawn(236020, 325.803f, 645.552f, 146.514f, (byte) 0);
+							spawn(236020, 307.303f, 614.676f, 146.514f, (byte) 0);
+							spawn(236020, 329.768f, 608.466f, 146.514f, (byte) 0);
+							break;
+						case 2:
+							spawn(236096, 303.755f, 772.090f, 148.988f, (byte) 0);
+							spawn(236096, 350.070f, 801.111f, 145.082f, (byte) 0);
+							spawn(236096, 332.003f, 767.004f, 147.394f, (byte) 0);
+							spawn(236096, 325.803f, 810.720f, 144.885f, (byte) 0);
+							break;
+					}
+					break;
+				case 2:
+				case 4:
+				case 6:
+				case 8:
+					switch (step) {
+						case 1:
+							spawn(236021, 312.577f, 605.469f, 146.514f, (byte) 0);
+							spawn(236021, 307.422f, 630.051f, 146.514f, (byte) 0);
+							spawn(236021, 337.200f, 639.658f, 146.514f, (byte) 0);
+							break;
+						case 2:
+							spawn(236097, 344.371f, 781.986f, 147.159f, (byte) 0);
+							spawn(236097, 339.273f, 813.446f, 145.390f, (byte) 0);
+							spawn(236097, 317.126f, 766.019f, 148.844f, (byte) 0);
+							break;
+					}
+					break;
+			}
+		}, 0, delay);
+	}
+
+	/**
+	 * Used for way C (Torment's Forge).
+	 */
+	private void delaySpawn(Player p, int npcId, int delay) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			float[] pos = getRndPos(5);
+			spawn(npcId, p.getX() + pos[0], p.getY() + pos[1], p.getZ(), (byte) 0);
+		}, delay);
+	}
+
+	private float[] getRndPos(int distance) {
+		float direction = Rnd.get(0, 199) / 100f;
+		float[] array = { 0, 0 };
+		array[0] = (float) (Math.cos(Math.PI * direction) * distance);
+		array[1] = (float) (Math.sin(Math.PI * direction) * distance);
+		return array;
 	}
 
 	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		stageNum = 0;
-		doors.clear();
-	}
-
-	@Override
-	public void onDropRegistered(Npc npc) {
-		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npc.getObjectId());
-		int npcId = npc.getNpcId();
-		switch (npcId) {
-			case 702694:
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 164000342, 20));
-				break;
+	public void onCreatureDetected(Npc detector, Creature detected) {
+		if (detected instanceof Player) {
+			switch (detector.getNpcId()) {
+				case 206197:
+					if (isEventStarted.compareAndSet(false, true)) {
+						detector.getController().onDelete();
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START(), 0);
+						delaySpawn((byte) 3, 20000);
+					}
+					break;
+				case 206198:
+					if (isEventStarted.compareAndSet(false, true)) {
+						detector.getController().onDelete();
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START(), 0);
+						delaySpawn((byte) 1, 10000);
+					}
+					break;
+				case 206199:
+					if (isEventStarted.compareAndSet(true, false)) {
+						detector.getController().onDelete();
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START(), 0);
+						delaySpawn((byte) 2, 10000);
+					}
+					break;
+			}
 		}
 	}
 
@@ -459,50 +337,15 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 		return true;
 	}
 
-	private void deleteNpc(int npcId, int objId) {
-		if (this.getNpc(npcId, objId) != null)
-			this.getNpc(npcId, objId).getController().onDelete();
-	}
-
-	protected void despawnNpc(Npc npc) {
-		if (npc != null)
-			npc.getController().onDelete();
-	}
-
-	protected void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs)
-			npc.getController().onDelete();
-	}
-
-	protected Npc getNpc(int npcId, int npcObjId) {
-		if (!isInstanceDestroyed) {
-			for (Npc npc : instance.getNpcs()) {
-				if (npc.getNpcId() == npcId && npc.getObjectId() == npcObjId)
-					return npc;
-			}
-		}
-		return null;
-	}
-
-	protected List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed)
-			return instance.getNpcs(npcId);
-		return null;
-	}
-
-	protected void openDoor(Player player, int doorId, boolean autoopen) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null) {
-			if (autoopen)
-				StaticDoorService.getInstance().openStaticDoor(player, doorId);
-			else
-				door.setOpen(true);
-		}
-	}
-
 	@Override
 	public void onPlayerLogOut(Player player) {
 		player.getInventory().decreaseByItemId(164000342, 20);
 		TeleportService2.moveToInstanceExit(player, WorldMapType.RAKSANG_RUINS.getId(), player.getRace());
+	}
+
+	@Override
+	public void onLeaveInstance(Player player) {
+		player.getInventory().decreaseByItemId(164000342, 20);
+		super.onLeaveInstance(player);
 	}
 }

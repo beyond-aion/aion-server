@@ -26766,6 +26766,83 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_GUARDIAN_03() {
 		return new SM_SYSTEM_MESSAGE(1402730);
 	}
+	
+	/**
+	 * Prepare for combat! Enemies approaching!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_START() {
+		return new SM_SYSTEM_MESSAGE(1402780);
+	}
+	
+	/**
+	 * Use the open entrance to move to the next area.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_END() {
+		return new SM_SYSTEM_MESSAGE(1402781);
+	}
+	
+	/**
+	 * The switch is now operational.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_START() {
+		return new SM_SYSTEM_MESSAGE(1402782);
+	}
+	
+	/**
+	 * Prepare for combat! Enemies approaching!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_ING() {
+		return new SM_SYSTEM_MESSAGE(1402783);
+	}
+	
+	/**
+	 * Use the open entrance to move to the next area.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_END() {
+		return new SM_SYSTEM_MESSAGE(1402784);
+	}
+	
+	/**
+	 * Prepare for combat! Enemies approaching!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_C_START() {
+		return new SM_SYSTEM_MESSAGE(1402785);
+	}
+	
+	/**
+	 * Use the open entrance to move to the next area.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_C_END() {
+		return new SM_SYSTEM_MESSAGE(1402786);
+	}
+	
+	/**
+	 * The door cannot be opened yet.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_DOOR_CONDITION() {
+		return new SM_SYSTEM_MESSAGE(1402831);
+	}
+	
+	/**
+	 * Prepare for combat! More enemies swarming in!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRAKSHA_SOLO_WAVEMID() {
+		return new SM_SYSTEM_MESSAGE(1402832);
+	}
+	
+	/**
+	 * Hold a little longer and you will survive.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRAKSHA_SOLO_WAVELAST() {
+		return new SM_SYSTEM_MESSAGE(1402833);
+	}
+	
+	/**
+	 * Only a few enemies left!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRAKSHA_SOLO_WAVELAST01() {
+		return new SM_SYSTEM_MESSAGE(1402834);
+	}
 
 	/**
 	 * You can no longer use the %2 %0 skill (Level %1) because your Linked Stigma combination has changed

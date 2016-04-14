@@ -23,6 +23,21 @@
 			<gd_item id="188053678" name="Nasto's Unique Weapon Box" />
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor Box" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="300610000" name="Raksang_Ruins" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236303" name="Drill Instructor Diplito" />
+			<gd_npc npc_id="236304" name="Drill Instructor Pratica" />
+			<gd_npc npc_id="236305" name="Drill Instructor Exico" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053681" name="Nasto's Unique Pauldrons Box" />
+			<gd_item id="188053682" name="Nasto's Unique Gloves Box" />
+			<gd_item id="188053683" name="Nasto's Unique Shoes Box" />
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Armor Box" base_chance="70" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="300610000" name="Raksang_Ruins" />
@@ -33,9 +48,6 @@
 		<gd_items>
 			<gd_item id="188053679" name="Nasto's Unique Jacket Box" />
 			<gd_item id="188053680" name="Nasto's Unique Pants Box" />
-			<gd_item id="188053681" name="Nasto's Unique Pauldrons Box" />
-			<gd_item id="188053682" name="Nasto's Unique Gloves Box" />
-			<gd_item id="188053683" name="Nasto's Unique Shoes Box" />
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory Box" base_chance="40" fixed_chance="true">

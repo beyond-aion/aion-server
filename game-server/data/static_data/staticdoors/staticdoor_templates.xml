@@ -1936,7 +1936,7 @@
 		</staticdoor>
 	</world>
 	<world world="300610000">
-		<staticdoor doorid="64" x="981.903931" y="895.059631" z="762.557739" mesh="idraksha_3fprison_door.cga" state="0x0">
+		<staticdoor doorid="64" keyid="1" x="981.903931" y="895.059631" z="762.557739" mesh="idraksha_3fprison_door.cga" state="0x0">
 			<box x1="979.026245" y1="891.7433" z1="762.3657" x2="984.747253" y2="898.3336" z2="770.967957" />
 		</staticdoor>
 		<staticdoor doorid="87" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
@@ -1951,13 +1951,13 @@
 		<staticdoor doorid="105" x="1068.5" y="967.31" z="161.6" mesh="idraksha_rockroom01.cga" state="0x0">
 			<box x1="1040.54529" y1="937.211243" z1="137.806915" x2="1096.45471" y2="997.4088" z2="185.393082" />
 		</staticdoor>
-		<staticdoor doorid="107" x="304.633423" y="631.726563" z="147.030991" mesh="stone_gate_jail_5.cga" state="0x0">
+		<staticdoor doorid="107" keyid="1" x="304.633423" y="631.726563" z="147.030991" mesh="stone_gate_jail_5.cga" state="0x0">
 			<box x1="299.673645" y1="623.2903" z1="145.879959" x2="309.5932" y2="640.162842" z2="162.4111" />
 		</staticdoor>
 		<staticdoor doorid="114" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
 			<box x1="624.4269" y1="696.3557" z1="1185.947" x2="640.459656" y2="712.7737" z2="1209.46619" />
 		</staticdoor>
-		<staticdoor doorid="118" x="778.24115" y="953.443054" z="792.573364" mesh="idraksha_3fbosszone_door.cga" state="0x0">
+		<staticdoor doorid="118" keyid="1" x="778.24115" y="953.443054" z="792.573364" mesh="idraksha_3fbosszone_door.cga" state="0x0">
 			<box x1="777.186951" y1="951.264038" z1="792.475464" x2="779.3529" y2="955.491333" z2="797.020752" />
 		</staticdoor>
 		<staticdoor doorid="165" x="633.1917" y="704.2054" z="1186.045" mesh="bu_idraksha_gate.cga" state="0x0">
@@ -1981,19 +1981,19 @@
 		<staticdoor doorid="219" x="322.549652" y="572.7561" z="127.404411" mesh="idraksha5f_eventbridge01a.cga" state="0x0">
 			<box x1="235.448425" y1="544.749268" z1="115.121071" x2="339.5744" y2="649.1134" z2="320.337036" />
 		</staticdoor>
-		<staticdoor doorid="294" x="751.62" y="310.34" z="910.630554" mesh="stone_gate_jail.cga" state="0x0">
+		<staticdoor doorid="294" keyid="1" x="751.62" y="310.34" z="910.630554" mesh="stone_gate_jail.cga" state="0x0">
 			<box x1="751.1267" y1="306.841553" z1="910.5917" x2="752.1133" y2="313.83847" z2="918.416443" />
 		</staticdoor>
 		<staticdoor doorid="295" x="749.5" y="270.969482" z="910.642" mesh="stone_gate_jail.cga" state="0x0">
 			<box x1="749.0067" y1="267.471039" z1="910.603149" x2="749.9933" y2="274.467957" z2="918.4279" />
 		</staticdoor>
-		<staticdoor doorid="307" x="552.1979" y="255.455322" z="929.0113" mesh="idraksha_3fprison_door.cga" state="0x0">
+		<staticdoor doorid="307" keyid="1" x="552.1979" y="255.455322" z="929.0113" mesh="idraksha_3fprison_door.cga" state="0x0">
 			<box x1="548.962036" y1="252.4819" z1="928.8193" x2="555.3938" y2="258.3916" z2="937.4215" />
 		</staticdoor>
-		<staticdoor doorid="324" x="346.47052" y="778.269348" z="147.17157" mesh="stone_gate_jail_5.cga" state="0x0">
+		<staticdoor doorid="324" keyid="1" x="346.47052" y="778.269348" z="147.17157" mesh="stone_gate_jail_5.cga" state="0x0">
 			<box x1="340.751221" y1="770.211" z1="146.020538" x2="352.189819" y2="786.3277" z2="162.551666" />
 		</staticdoor>
-		<staticdoor doorid="457" x="973.9459" y="767.0186" z="734.2712" mesh="idraksha_3fprison_door.cga" state="0x0">
+		<staticdoor doorid="457" keyid="1" x="973.9459" y="767.0186" z="734.2712" mesh="idraksha_3fprison_door.cga" state="0x0">
 			<box x1="970.066467" y1="765.262634" z1="734.079163" x2="977.774536" y2="768.755066" z2="742.6814" />
 		</staticdoor>
 	</world>
