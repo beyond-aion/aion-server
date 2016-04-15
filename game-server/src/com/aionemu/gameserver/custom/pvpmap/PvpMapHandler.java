@@ -116,7 +116,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void scheduleDespawns() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
+		despawnTask = ThreadPoolManager.getInstance().schedule(
+			() -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
 	}
 
 	public void join(Player p) {
@@ -132,32 +133,38 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(1, p.getObjectId(), 1, 0), true);
 		p.getObserveController().attach(observer);
 
-		p.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().schedule(() -> {
-			PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(3, p.getObjectId(), 1, 0), true);
-			ThreadPoolManager.getInstance().schedule(() -> {
-				p.getObserveController().removeObserver(observer);
-				p.getController().cancelTask(TaskId.SKILL_USE);
-				if (!p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead()) {
-					if (isLeaving) {
-						removePlayer(p);
-					} else {
-						if (!SiegeService.getInstance().isNearVulnerableFortress(p)) {
-							updateOrigin(p);
-							updateJoinOrLeaveTime(p);
-							InstanceService.registerPlayerWithInstance(instance, p);
-							WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-							TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
-						} else {
-							PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while near a vulnerable fortress.");
-						}
-					}
-				}
-			}, 1000);
-		}, 10000));
+		p.getController().addTask(
+			TaskId.SKILL_USE,
+			ThreadPoolManager.getInstance().schedule(
+				() -> {
+					PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(3, p.getObjectId(), 1, 0), true);
+					ThreadPoolManager.getInstance().schedule(
+						() -> {
+							p.getObserveController().removeObserver(observer);
+							p.getController().cancelTask(TaskId.SKILL_USE);
+							if (!p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead()) {
+								if (isLeaving) {
+									removePlayer(p);
+								} else {
+									if (!SiegeService.getInstance().isNearVulnerableFortress(p)) {
+										updateOrigin(p);
+										updateJoinOrLeaveTime(p);
+										InstanceService.registerPlayerWithInstance(instance, p);
+										WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
+										TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+											TeleportAnimation.BATTLEGROUND);
+									} else {
+										PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while near a vulnerable fortress.");
+									}
+								}
+							}
+						}, 1000);
+				}, 10000));
 	}
 
 	private ActionObserver getAllObserver(final Player p) {
 		return new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				BindPointTeleportService.cancelTeleport(p, 1);
@@ -166,14 +173,16 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE) && (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
+		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)
+			&& (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
 	}
 
 	private boolean checkState(Player p) {
 		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead() && !p.isLooting()
-				&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
-				&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
-				&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
+			&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
+			&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null
+			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}
 
 	private synchronized void updateOrigin(Player p) {
@@ -190,25 +199,27 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			PvpService.getInstance().doReward(player, CustomConfig.PVP_MAP_AP_MULTIPLIER);
 			announceDeath(player);
 		}
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (player.getLifeStats().isAlreadyDead()) {
-				if (!canJoin.get() || respawnLocations.isEmpty()) {
-					if (instance.getPlayer(player.getObjectId()) != null) {
+		ThreadPoolManager.getInstance().schedule(
+			() -> {
+				if (player.getLifeStats().isAlreadyDead()) {
+					if (!canJoin.get() || respawnLocations.isEmpty()) {
+						if (instance.getPlayer(player.getObjectId()) != null) {
+							PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
+							PlayerReviveService.revive(player, 100, 100, false, 0);
+							removePlayer(player);
+						}
+					} else {
 						PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 						PlayerReviveService.revive(player, 100, 100, false, 0);
-						removePlayer(player);
+						player.unsetResPosState();
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+						player.getGameStats().updateStatsAndSpeedVisually();
+						WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
+						TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+							TeleportAnimation.BATTLEGROUND);
 					}
-				} else {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
-					PlayerReviveService.revive(player, 100, 100, false, 0);
-					player.unsetResPosState();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-					player.getGameStats().updateStatsAndSpeedVisually();
-					WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-					TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
 				}
-			}
-		}, 12000);
+			}, 12000);
 		return true;
 	}
 
@@ -216,14 +227,15 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		AbyssRank ar = player.getAbyssRank();
 		if (ar != null) {
 			int zoneNameId = getZoneNameId(player);
-			if (zoneNameId > 0) {
-				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId)));
-			} else {
-				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
-			}
+			if (zoneNameId > 0)
+				PacketSendUtility.broadcastToMap(instance,
+					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId), 0);
+			else
+				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)),
+					0);
 		}
-
 	}
+
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
