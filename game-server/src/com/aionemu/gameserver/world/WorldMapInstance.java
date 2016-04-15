@@ -432,7 +432,7 @@ public abstract class WorldMapInstance {
 					visitor.visit(player);
 				}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players" + ex);
+			log.error("Exception when running visitor on all players", ex);
 		}
 	}
 

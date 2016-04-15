@@ -58,7 +58,7 @@ public class InvasionZoneInstance extends ZoneInstance {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players" + ex);
+			log.error("Exception when running visitor on all players", ex);
 		}
 	}
 
