@@ -111,7 +111,9 @@ public abstract class Base<T extends BaseLocation> {
 			if (isFinished.get())
 				return;
 			spawnBySpawnHandler(SpawnHandlerType.BOSS, getRace());
-			PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), getBossSpawnMsg());
+			SM_SYSTEM_MESSAGE bossSpawnMsg = getBossSpawnMsg();
+			if (bossSpawnMsg != null)
+			PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), bossSpawnMsg);
 			scheduleAssault();
 		}, getBossSpawnDelay());
 	}
@@ -122,7 +124,9 @@ public abstract class Base<T extends BaseLocation> {
 				return;
 			if (flag.getPosition().getMapRegion().isMapRegionActive()) {
 				spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
-				PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), getAssaultMsg());
+				SM_SYSTEM_MESSAGE assaultMsg = getAssaultMsg();
+				if (assaultMsg != null)
+					PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), assaultMsg);
 				scheduleAssaultDespawn();
 			} else {
 				if (Rnd.get(1, 100) <= 20)
