@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -54,7 +53,7 @@ public class EmpyreanRecordKeeperAI2 extends NpcAI2 {
 				msg = 1111469;
 		}
 		if (msg != 0) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 25, 1000);
+			PacketSendUtility.broadcastMessage(getOwner(), msg, 1000);
 		}
 	}
 

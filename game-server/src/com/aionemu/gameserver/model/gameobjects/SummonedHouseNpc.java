@@ -30,8 +30,8 @@ public class SummonedHouseNpc extends SummonedObject<House> {
 	}
 
 	@Override
-	public int getType(Creature creature) {
-		return CreatureType.FRIEND.getId();
+	public CreatureType getType(Creature creature) {
+		return CreatureType.FRIEND;
 	}
 
 	@Override

@@ -78,16 +78,9 @@ public abstract class Creature extends VisibleObject {
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
-	protected int type = CreatureType.NULL.getId();
+	protected CreatureType type = CreatureType.NULL;
 	private TribeClass tribe = TribeClass.GENERAL;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 * @param position
-	 */
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
 		WorldPosition position) {
 		super(objId, controller, spawnTemplate, objectTemplate, position);
@@ -305,8 +298,7 @@ public abstract class Creature extends VisibleObject {
 	 * @return
 	 */
 	public boolean canAttack() {
-		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING)
-			&& !isInState(CreatureState.PRIVATE_SHOP));
+		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING) && !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
 	/**
@@ -780,7 +772,7 @@ public abstract class Creature extends VisibleObject {
 		return Race.NONE;
 	}
 
-	public int getType(Creature creature) {
+	public CreatureType getType(Creature creature) {
 		return type;
 	}
 
@@ -796,9 +788,6 @@ public abstract class Creature extends VisibleObject {
 		return System.currentTimeMillis() - spawnTime < 1500;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean isRaidMonster() {
 		return false;
 	}

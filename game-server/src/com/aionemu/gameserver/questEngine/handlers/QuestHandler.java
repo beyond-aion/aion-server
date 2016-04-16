@@ -663,12 +663,12 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (!(env.getVisibleObject() instanceof Npc)) {
 			return false;
 		}
-		follower.setNpcType(CreatureType.PEACE.getId());
+		follower.setNpcType(CreatureType.PEACE);
 		follower.getKnownList().doOnAllPlayers(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(follower.getObjectId(), 0, follower.getType(player), 0));
+				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(follower.getObjectId(), 0, follower.getType(player).getId(), 0));
 			}
 		});
 		follower.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);

@@ -5,42 +5,41 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="npcskills" type="NpcSkillList" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="npc_skills" type="NpcSkillList" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="NpcSkillList">
 		<xs:sequence>
-			<xs:element name="npcskill" type="NpcSkillTemplate" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="npc_skill" type="NpcSkillTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="npcid" type="xs:int"/>
+		<xs:attribute name="npc_ids" type="IntListType"/>
 	</xs:complexType>
 	<xs:complexType name="NpcSkillTemplate">
 		<xs:sequence>
 			<xs:element name="cond" type="NpcSkillConditionTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int"/>
-		<xs:attribute name="skillid" type="xs:int"/>
-		<xs:attribute name="skilllevel" type="xs:int"/>
-		<xs:attribute name="probability" type="xs:int"/>
-		<xs:attribute name="maxhp" type="xs:int"/>
-		<xs:attribute name="minhp" type="xs:int"/>
-        <xs:attribute name="maxtime" type="xs:int"/>
-		<xs:attribute name="mintime" type="xs:int"/>
+		<xs:attribute name="lv" type="xs:int"/>
+		<xs:attribute name="prob" type="xs:int"/>
+		<xs:attribute name="max_hp" type="xs:int"/>
+		<xs:attribute name="min_hp" type="xs:int"/>
+        <xs:attribute name="max_time" type="xs:int"/>
+		<xs:attribute name="min_time" type="xs:int"/>
         <xs:attribute name="conjunction" type="ConjunctionType"/>
-        <xs:attribute name="cooldown" type="xs:int"/>
-		<xs:attribute name="useinspawned" type="xs:boolean"/>
-		<xs:attribute name="priority" type="xs:int"/>
-		<xs:attribute name="nextSkillTime" type="xs:int"/>
-		<xs:attribute name="nextChainId" type="xs:int"/>
-		<xs:attribute name="chainId" type="xs:int"/>
-		<xs:attribute name="maxChainTime" type="xs:int"/>
+        <xs:attribute name="cd" type="xs:int"/>
+		<xs:attribute name="is_post_spawn" type="xs:boolean"/>
+		<xs:attribute name="prio" type="xs:int"/>
+		<xs:attribute name="next_skill_time" type="xs:int"/>
+		<xs:attribute name="next_chain_id" type="xs:int"/>
+		<xs:attribute name="chain_id" type="xs:int"/>
+		<xs:attribute name="max_chain_time" type="xs:int"/>
 		<xs:attribute name="target" type="NpcSkillTargetAttribute"/>
 		</xs:complexType>
 	<xs:complexType name="NpcSkillConditionTemplate">
-		<xs:attribute name="condType" type="ConditionType"/>
+		<xs:attribute name="cond_type" type="ConditionType"/>
 		<xs:attribute name="range" type="xs:int"/>
-		<xs:attribute name="hpBelow" type="xs:int"/>
+		<xs:attribute name="hp_below" type="xs:int"/>
 		<xs:attribute name="skill_id" type="xs:int"/>
 		<xs:attribute name="npc_id" type="xs:int"/>
 		<xs:attribute name="delay" type="xs:int"/>
@@ -51,48 +50,49 @@
 		<xs:attribute name="max_amount" type="xs:int"/>
 		<xs:attribute name="despawn_time" type="xs:int"/>
 		<xs:attribute name="random_direction" type="xs:boolean"/>
-		<xs:attribute name="canDie" type="xs:boolean"/>
+		<xs:attribute name="can_die" type="xs:boolean"/>
 	</xs:complexType>
-        <xs:simpleType name="ConjunctionType">
-            <xs:restriction base="xs:string">
-                <xs:enumeration value="AND"/>
-                <xs:enumeration value="OR"/>
-                <xs:enumeration value="XOR"/>
-            </xs:restriction>
-        </xs:simpleType>
-        <xs:simpleType name="ConditionType">
-        	<xs:restriction base="xs:string">
-        		<xs:enumeration value="NONE"/>
-        		<xs:enumeration value="HELP_FRIEND"/>
-        		<xs:enumeration value="HELP_SELF"/>
-        		<xs:enumeration value="TARGET_IS_IN_ANY_STUN"/>
-        		<xs:enumeration value="TARGET_IS_IN_STUMBLE"/>
-        		<xs:enumeration value="TARGET_IS_STUNNED"/>
-        		<xs:enumeration value="TARGET_IS_SLEEPING"/>
-        		<xs:enumeration value="TARGET_IS_AETHERS_HOLD"/>
-        		<xs:enumeration value="TARGET_IS_POISONED"/>
-        		<xs:enumeration value="TARGET_IS_BLEEDING"/>
-        		<xs:enumeration value="TARGET_IS_GATE"/>
-        		<xs:enumeration value="TARGET_IS_PLAYER"/>
-        		<xs:enumeration value="TARGET_IS_PHYSICAL_CLASS"/>
-        		<xs:enumeration value="TARGET_IS_MAGICAL_CLASS"/>
-        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET"/>
-        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_II"/>
-        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_III"/>
-        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV"/>
-        		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
-				<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
-				<xs:enumeration value="SPAWN_NPC"/>
-				<xs:enumeration value="NPC_IS_ALIVE"/>
-        	</xs:restriction>
-        </xs:simpleType>
-		<xs:simpleType name="NpcSkillTargetAttribute">
-			<xs:restriction base="xs:string">
-				<xs:enumeration value="ME"/>
-        		<xs:enumeration value="MOST_HATED"/>
-        		<xs:enumeration value="RANDOM"/>
-        		<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED"/>
-				<xs:enumeration value="NONE"/>
-			</xs:restriction>
-		</xs:simpleType>
+	
+    <xs:simpleType name="ConjunctionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AND"/>
+            <xs:enumeration value="OR"/>
+            <xs:enumeration value="XOR"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ConditionType">
+     	<xs:restriction base="xs:string">
+      		<xs:enumeration value="NONE"/>
+       		<xs:enumeration value="HELP_FRIEND"/>
+       		<xs:enumeration value="HELP_SELF"/>
+       		<xs:enumeration value="TARGET_IS_IN_ANY_STUN"/>
+       		<xs:enumeration value="TARGET_IS_IN_STUMBLE"/>
+       		<xs:enumeration value="TARGET_IS_STUNNED"/>
+       		<xs:enumeration value="TARGET_IS_SLEEPING"/>
+       		<xs:enumeration value="TARGET_IS_AETHERS_HOLD"/>
+       		<xs:enumeration value="TARGET_IS_POISONED"/>
+       		<xs:enumeration value="TARGET_IS_BLEEDING"/>
+       		<xs:enumeration value="TARGET_IS_GATE"/>
+       		<xs:enumeration value="TARGET_IS_PLAYER"/>
+      		<xs:enumeration value="TARGET_IS_PHYSICAL_CLASS"/>
+       		<xs:enumeration value="TARGET_IS_MAGICAL_CLASS"/>
+       		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET"/>
+       		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_II"/>
+       		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_III"/>
+       		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV"/>
+       		<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V"/>
+			<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL"/>
+			<xs:enumeration value="SPAWN_NPC"/>
+			<xs:enumeration value="NPC_IS_ALIVE"/>
+       	</xs:restriction>
+    </xs:simpleType>
+	<xs:simpleType name="NpcSkillTargetAttribute">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ME"/>
+       		<xs:enumeration value="MOST_HATED"/>
+       		<xs:enumeration value="RANDOM"/>
+       		<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED"/>
+			<xs:enumeration value="NONE"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

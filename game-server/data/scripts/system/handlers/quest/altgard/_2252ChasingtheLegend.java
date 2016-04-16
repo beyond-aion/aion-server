@@ -1,7 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -9,8 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.services.NpcShoutsService;
 
 /**
  * @author Ritsu
@@ -92,7 +92,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 							int spawnTime = 3; // 3 min of spawn
 							int questSpawnedNpcId = (Rnd.get(1, 100) <= chance ? questKillNpc1Id : questKillNpc2Id);
 							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
-							NpcShoutsService.getInstance().sendMsg(questMob, 1100630, questMob.getObjectId(), 0, 0);
+							PacketSendUtility.broadcastMessage(questMob, 1100630);
 
 							// @ToDo: setting not usable icon while mob is spawned
 							ThreadPoolManager.getInstance().schedule(new Runnable() {

@@ -20,16 +20,16 @@
 			<shout string_id="341794" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799611 799612">
-			<shout string_id="390495" when="IDLE" type="SAY"/>
+			<shout string_id="390495" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799609">
-			<shout string_id="390492" when="IDLE" type="SAY"/>
+			<shout string_id="390492" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799602">
-			<shout string_id="390494" when="IDLE" type="SAY"/>
+			<shout string_id="390494" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799610">
-			<shout string_id="390493" when="IDLE" type="SAY"/>
+			<shout string_id="390493" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="233449 233450 233451 233452 233453 233454 233455 233456 233457 233458 233459 233460 233461 233462 233463 233464 233465 233466 233467 233468 233469" restrict_world="301200000">
 			<shout string_id="1501151" when="IDLE" pattern="1"/>
@@ -110,48 +110,48 @@
 	</shout_group>
 	<shout_group client_ai="AD2_Bss0BT15st1H50ss2">
 		<shout_npcs npc_ids="216995" restrict_world="300230000">
-			<shout string_id="342215" when="IDLE" type="SAY"/>
+			<shout string_id="342215" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="AD2_Bst0BT15p50st1st2H50st3st4">
 		<shout_npcs npc_ids="281973" restrict_world="300230000">
-			<shout string_id="342259" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342261" when="DIED" type="SAY"/>
+			<shout string_id="342259" when="ATTACK_BEGIN"/>
+			<shout string_id="342261" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216981" restrict_world="300230000">
-			<shout string_id="1500148" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="1500148" when="ATTACK_BEGIN"/>
 			<shout string_id="1500149" when="CAST_K" skill_no="4"/>
-			<shout string_id="1500150" when="DIED" type="SAY"/>
+			<shout string_id="1500150" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="AD2_Bst0BT15st1">
 		<shout_npcs npc_ids="216975" restrict_world="300230000">
-			<shout string_id="342204" when="IDLE" type="SAY"/>
-			<shout string_id="342205" when="IDLE" type="SAY"/>
+			<shout string_id="342204" when="IDLE"/>
+			<shout string_id="342205" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216994" restrict_world="300230000">
-			<shout string_id="342214" when="IDLE" type="SAY"/>
+			<shout string_id="342214" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="AD2_Bst0BT15st1H50ss2">
 		<shout_npcs npc_ids="281972" restrict_world="300230000">
-			<shout string_id="342257" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342258" when="DIED" type="SAY"/>
+			<shout string_id="342257" when="ATTACK_BEGIN"/>
+			<shout string_id="342258" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216980" restrict_world="300230000">
-			<shout string_id="1500146" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="1500147" when="DIED" type="SAY"/>
+			<shout string_id="1500146" when="ATTACK_BEGIN"/>
+			<shout string_id="1500147" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217030" restrict_world="300230000">
-			<shout string_id="342208" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342208" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216989" restrict_world="300230000">
-			<shout string_id="342317" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342318" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342317" when="ATTACK_BEGIN"/>
+			<shout string_id="342318" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217035" restrict_world="300230000">
-			<shout string_id="342319" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342320" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342319" when="ATTACK_BEGIN"/>
+			<shout string_id="342320" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="AD2_NeutEgg">
@@ -208,7 +208,7 @@
 			<shout string_id="340627" when="ATTACK_END"/>
 			<shout string_id="340628" when="ATTACK_END"/>
 			<shout string_id="340629" when="DIED"/>
-			<shout string_id="340630" when="DIED" param="username"/>
+			<shout string_id="340630" when="DIED"/>
 			<shout string_id="340631" when="DIED"/>
 			<shout string_id="340632" when="ATTACK_K" skill_no="1"/>
 			<shout string_id="340633" when="ATTACK_K" skill_no="2"/>
@@ -226,12 +226,12 @@
 			<shout string_id="340645" when="ATTACK_K" skill_no="2"/>
 			<shout string_id="340646" when="ATTACK_K" skill_no="3"/>
 			<shout string_id="340647" when="ATTACK_K" skill_no="4"/>
-			<shout string_id="390486" when="IDLE" type="SAY"/>
-			<shout string_id="390487" when="IDLE" type="SAY"/>
-			<shout string_id="390488" when="ATTACKED" type="SAY"/>
-			<shout string_id="390489" when="IDLE" type="SAY"/>
-			<shout string_id="390490" when="IDLE" type="SAY"/>
-			<shout string_id="390491" when="ATTACKED" type="SAY"/>
+			<shout string_id="390486" when="IDLE"/>
+			<shout string_id="390487" when="IDLE"/>
+			<shout string_id="390488" when="ATTACKED"/>
+			<shout string_id="390489" when="IDLE"/>
+			<shout string_id="390490" when="IDLE"/>
+			<shout string_id="390491" when="ATTACKED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="bidf5_r2_Sync1_A">
@@ -289,7 +289,7 @@
 	</shout_group>
 	<shout_group client_ai="Bionic_EhA">
 		<shout_npcs npc_ids="286787">
-			<shout string_id="341687" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="341687" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="BLehpar_FhA">
@@ -321,7 +321,7 @@
 	</shout_group>
 	<shout_group client_ai="Brownie_FnR">
 		<shout_npcs npc_ids="285104" restrict_world="210030000">
-			<shout string_id="340264" when="ATTACK_K" type="SAY" skill_no="1"/>
+			<shout string_id="340264" when="ATTACK_K" skill_no="1"/>
 			<shout string_id="340265" when="HELPCALL"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210148 210149 210153 210154 210701 210702 210703 210704 280140 285104">
@@ -397,7 +397,7 @@
 	</shout_group>
 	<shout_group client_ai="Cromede_Gardenerdi">
 		<shout_npcs npc_ids="216991" restrict_world="300230000">
-			<shout string_id="342316" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342316" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="cromede_Hierarch">
@@ -464,20 +464,20 @@
 	</shout_group>
 	<shout_group client_ai="Cromede_Relic3_Noshow">
 		<shout_npcs npc_ids="281991" restrict_world="300230000">
-			<shout string_id="342265" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342266" when="DIED" type="SAY"/>
+			<shout string_id="342265" when="ATTACK_BEGIN"/>
+			<shout string_id="342266" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216999" restrict_world="300230000">
-			<shout string_id="1500154" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="1500155" when="DIED" type="SAY"/>
+			<shout string_id="1500154" when="ATTACK_BEGIN"/>
+			<shout string_id="1500155" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Cromede_Servant">
 		<shout_npcs npc_ids="216977" restrict_world="300230000">
-			<shout string_id="342313" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342313" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216985" restrict_world="300230000">
-			<shout string_id="342315" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342315" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="cromede_Torture">
@@ -490,7 +490,7 @@
 			<shout string_id="1500153" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216982" restrict_world="300230000">
-			<shout string_id="342209" when="IDLE" type="SAY"/>
+			<shout string_id="342209" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="cromede_Wife">
@@ -505,8 +505,8 @@
 	</shout_group>
 	<shout_group client_ai="D1_A">
 		<shout_npcs npc_ids="210336" restrict_world="210030000">
-			<shout string_id="340042" when="DIED" type="SAY" />
-			<shout string_id="340043" when="DIED" type="SAY" />
+			<shout string_id="340042" when="DIED" />
+			<shout string_id="340043" when="DIED" />
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="D1_B">
@@ -548,14 +548,14 @@
 			<shout string_id="341244" when="ATTACK_K" skill_no="1"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210332 210333 210410">
-			<shout string_id="340045" when="IDLE" type="SAY"/>
-			<shout string_id="340046" when="IDLE" type="SAY"/>
-			<shout string_id="340047" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340048" when="ATTACK_K" type="SAY"/>
-			<shout string_id="340049" when="DIED" type="SAY"/>
+			<shout string_id="340045" when="IDLE"/>
+			<shout string_id="340046" when="IDLE"/>
+			<shout string_id="340047" when="ATTACK_BEGIN"/>
+			<shout string_id="340048" when="ATTACK_K"/>
+			<shout string_id="340049" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210658 211834 211835 211836 211837 212360 212363 212997 214634 214635 214640 214714 280521" restrict_world="210010000">
-			<shout string_id="390309" when="ENEMY_DIED" type="SAY"/>
+			<shout string_id="390309" when="ENEMY_DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203051 203052 203053 203054 203055 203056 285350" restrict_world="210010000">
 			<shout string_id="390270" when="ATTACKED"/>
@@ -566,70 +566,70 @@
 			<shout string_id="390312" when="ATTACKED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210195 210196 210270 211869 211870 212084 212085" restrict_world="210030000">
-			<shout string_id="340044" when="IDLE" type="SAY"/>
+			<shout string_id="340044" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216965" restrict_world="300230000">
-			<shout string_id="342309" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342309" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216963" restrict_world="300230000">
-			<shout string_id="342308" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342308" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216966" restrict_world="300230000">
-			<shout string_id="342310" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342310" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217131" restrict_world="300230000">
-			<shout string_id="342311" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342312" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342311" when="ATTACK_BEGIN"/>
+			<shout string_id="342312" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217026" restrict_world="300230000">
-			<shout string_id="342200" when="IDLE" type="SAY"/>
-			<shout string_id="342329" when="IDLE" type="SAY"/>
+			<shout string_id="342200" when="IDLE"/>
+			<shout string_id="342329" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217113" restrict_world="300230000">
-			<shout string_id="342202" when="IDLE" type="SAY"/>
+			<shout string_id="342202" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217027" restrict_world="300230000">
-			<shout string_id="342201" when="IDLE" type="SAY"/>
-			<shout string_id="342330" when="IDLE" type="SAY"/>
+			<shout string_id="342201" when="IDLE"/>
+			<shout string_id="342330" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217114" restrict_world="300230000">
-			<shout string_id="342203" when="IDLE" type="SAY"/>
+			<shout string_id="342203" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216976" restrict_world="300230000">
-			<shout string_id="342206" when="IDLE" type="SAY"/>
-			<shout string_id="342207" when="IDLE" type="SAY"/>
+			<shout string_id="342206" when="IDLE"/>
+			<shout string_id="342207" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216978" restrict_world="300230000">
-			<shout string_id="342314" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342314" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217117" restrict_world="300230000">
-			<shout string_id="342210" when="IDLE" type="SAY"/>
-			<shout string_id="342211" when="IDLE" type="SAY"/>
+			<shout string_id="342210" when="IDLE"/>
+			<shout string_id="342211" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216990" restrict_world="300230000">
-			<shout string_id="342321" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342322" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342321" when="ATTACK_BEGIN"/>
+			<shout string_id="342322" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217036" restrict_world="300230000">
-			<shout string_id="342323" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342324" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342323" when="ATTACK_BEGIN"/>
+			<shout string_id="342324" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217118" restrict_world="300230000">
-			<shout string_id="342212" when="IDLE" type="SAY"/>
-			<shout string_id="342213" when="IDLE" type="SAY"/>
+			<shout string_id="342212" when="IDLE"/>
+			<shout string_id="342213" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217003" restrict_world="300230000">
-			<shout string_id="342274" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342274" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217004" restrict_world="300230000">
-			<shout string_id="342275" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342275" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217001" restrict_world="300230000">
-			<shout string_id="342273" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342273" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204410">
-			<shout string_id="390423" when="ATTACKED" pattern="quest" param="2036" type="SAY"/>
-			<shout string_id="390424" when="ATTACKED" pattern="quest" param="2036" type="SAY"/>
+			<shout string_id="390423" when="ATTACKED" pattern="quest"/>
+			<shout string_id="390424" when="ATTACKED" pattern="quest"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="211271" restrict_world="300040000">
 			<shout string_id="341808" when="DIED"/>
@@ -682,13 +682,13 @@
 	</shout_group>
 	<shout_group client_ai="D2_WnK">
 		<shout_npcs npc_ids="210347" restrict_world="210030000">
-			<shout string_id="340261" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="340261" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210520" restrict_world="220030000">
-			<shout string_id="340262" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="340262" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="210521" restrict_world="220030000">
-			<shout string_id="340263" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="340263" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="DF2A_DirectPortal_Prisoner">
@@ -715,64 +715,64 @@
 	</shout_group>
 	<shout_group client_ai="Dmerchant">
 		<shout_npcs npc_ids="204193">
-			<shout string_id="390378" when="IDLE" type="SAY"/>
-			<shout string_id="390379" when="IDLE" type="SAY"/>
-			<shout string_id="390380" when="IDLE" type="SAY"/>
+			<shout string_id="390378" when="IDLE"/>
+			<shout string_id="390379" when="IDLE"/>
+			<shout string_id="390380" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204151">
-			<shout string_id="390403" when="IDLE" type="SAY"/>
-			<shout string_id="390404" when="IDLE" type="SAY"/>
-			<shout string_id="390405" when="IDLE" type="SAY"/>
+			<shout string_id="390403" when="IDLE"/>
+			<shout string_id="390404" when="IDLE"/>
+			<shout string_id="390405" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204192">
-			<shout string_id="390369" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390370" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390371" when="IDLE" type="SAY"/>
+			<shout string_id="390369" when="IDLE"/>
+			<shout string_id="390370" when="IDLE"/>
+			<shout string_id="390371" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204217">
-			<shout string_id="390409" when="IDLE" type="SAY"/>
-			<shout string_id="390410" when="IDLE" type="SAY"/>
-			<shout string_id="390411" when="IDLE" type="SAY"/>
+			<shout string_id="390409" when="IDLE"/>
+			<shout string_id="390410" when="IDLE"/>
+			<shout string_id="390411" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204119">
-			<shout string_id="390388" when="IDLE" type="SAY"/>
-			<shout string_id="390389" when="IDLE" type="SAY"/>
-			<shout string_id="390390" when="IDLE" param="username" type="SAY"/>
+			<shout string_id="390388" when="IDLE"/>
+			<shout string_id="390389" when="IDLE"/>
+			<shout string_id="390390" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204165">
-			<shout string_id="390397" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390398" when="IDLE" type="SAY"/>
-			<shout string_id="390399" when="IDLE" type="SAY"/>
+			<shout string_id="390397" when="IDLE"/>
+			<shout string_id="390398" when="IDLE"/>
+			<shout string_id="390399" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204197">
-			<shout string_id="390372" when="IDLE" type="SAY"/>
-			<shout string_id="390373" when="IDLE" type="SAY"/>
-			<shout string_id="390374" when="IDLE" type="SAY"/>
+			<shout string_id="390372" when="IDLE"/>
+			<shout string_id="390373" when="IDLE"/>
+			<shout string_id="390374" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204199">
-			<shout string_id="390375" when="IDLE" type="SAY"/>
-			<shout string_id="390376" when="IDLE" type="SAY"/>
-			<shout string_id="390377" when="IDLE" type="SAY"/>
+			<shout string_id="390375" when="IDLE"/>
+			<shout string_id="390376" when="IDLE"/>
+			<shout string_id="390377" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204221">
-			<shout string_id="390412" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390413" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390414" when="IDLE" param="username" type="SAY"/>
+			<shout string_id="390412" when="IDLE"/>
+			<shout string_id="390413" when="IDLE"/>
+			<shout string_id="390414" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204190" restrict_world="120010000">
-			<shout string_id="390329" when="IDLE" pattern="quest" param="2258"/>
-			<shout string_id="390381" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390382" when="IDLE" type="SAY"/>
-			<shout string_id="390383" when="IDLE" type="SAY"/>
-			<shout string_id="390384" when="IDLE" type="SAY"/>
-			<shout string_id="390385" when="IDLE" type="SAY"/>
-			<shout string_id="390386" when="IDLE" type="SAY"/>
-			<shout string_id="390387" when="IDLE" type="SAY"/>
+			<shout string_id="390329" when="IDLE" pattern="quest"/>
+			<shout string_id="390381" when="IDLE"/>
+			<shout string_id="390382" when="IDLE"/>
+			<shout string_id="390383" when="IDLE"/>
+			<shout string_id="390384" when="IDLE"/>
+			<shout string_id="390385" when="IDLE"/>
+			<shout string_id="390386" when="IDLE"/>
+			<shout string_id="390387" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204216">
-			<shout string_id="390406" when="IDLE" type="SAY"/>
-			<shout string_id="390407" when="IDLE" type="SAY"/>
-			<shout string_id="390408" when="IDLE" type="SAY"/>
+			<shout string_id="390406" when="IDLE"/>
+			<shout string_id="390407" when="IDLE"/>
+			<shout string_id="390408" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203658" restrict_world="220030000">
 			<shout string_id="390415" when="IDLE" poll_delay="5000"/>
@@ -791,14 +791,14 @@
 			<shout string_id="390436" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204071">
-			<shout string_id="390394" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390395" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390396" when="IDLE" type="SAY"/>
+			<shout string_id="390394" when="IDLE"/>
+			<shout string_id="390395" when="IDLE"/>
+			<shout string_id="390396" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204113">
-			<shout string_id="390391" when="IDLE" type="SAY"/>
-			<shout string_id="390392" when="IDLE" type="SAY"/>
-			<shout string_id="390393" when="IDLE" type="SAY"/>
+			<shout string_id="390391" when="IDLE"/>
+			<shout string_id="390392" when="IDLE"/>
+			<shout string_id="390393" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Dragon_G1">
@@ -874,15 +874,15 @@
 	</shout_group>
 	<shout_group client_ai="Dread_XDrakanFeA">
 		<shout_npcs npc_ids="215391" restrict_world="300110000">
-			<shout string_id="341821" when="IDLE" type="HEAR"/>
+			<shout string_id="341821" when="IDLE"/>
 			<shout string_id="341822" when="ATTACK_BEGIN"/>
 			<shout string_id="341823" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Dread_XDrakanReA">
 		<shout_npcs npc_ids="215390" restrict_world="300110000">
-			<shout string_id="341818" when="IDLE" type="HEAR"/>
-			<shout string_id="341819" when="IDLE" type="HEAR"/>
+			<shout string_id="341818" when="IDLE"/>
+			<shout string_id="341819" when="IDLE"/>
 			<shout string_id="341820" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
@@ -1069,7 +1069,7 @@
 	</shout_group>
 	<shout_group client_ai="DrGuard_AeB">
 		<shout_npcs npc_ids="256685 256686" restrict_world="300030000">
-			<shout string_id="341676" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="341676" when="ATTACK_BEGIN"/>
 			<shout string_id="341677" when="ATTACK_K" skill_no="1"/>
 		</shout_npcs>
 	</shout_group>
@@ -1089,12 +1089,12 @@
 	</shout_group>
 	<shout_group client_ai="DrGuard_PeB">
 		<shout_npcs npc_ids="256687 256688" restrict_world="300030000">
-			<shout string_id="341678" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="341678" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="DrGuard_ReB">
 		<shout_npcs npc_ids="256683 256684" restrict_world="300030000">
-			<shout string_id="341674" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="341674" when="ATTACK_BEGIN"/>
 			<shout string_id="341675" when="ATTACK_K" skill_no="1"/>
 		</shout_npcs>
 	</shout_group>
@@ -1109,7 +1109,7 @@
 			<shout string_id="390496" when="SEE"/>
 			<shout string_id="390497" when="IDLE" pattern="wounded"/>
 			<shout string_id="390498" when="DIED"/>
-			<shout string_id="390499" when="WIN" param="userclass"/>
+			<shout string_id="390499" when="WIN"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Elim_MercenaryFe">
@@ -1128,8 +1128,8 @@
 	</shout_group>
 	<shout_group client_ai="Event_Santa_D">
 		<shout_npcs npc_ids="217280">
-			<shout string_id="342357" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342358" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342357" when="ATTACK_BEGIN"/>
+			<shout string_id="342358" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="214533 217280">
 			<shout string_id="341527" when="IDLE" pattern="1"/>
@@ -1138,12 +1138,12 @@
 	</shout_group>
 	<shout_group client_ai="Event_Santa_L">
 		<shout_npcs npc_ids="217161">
-			<shout string_id="342353" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342354" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342353" when="ATTACK_BEGIN"/>
+			<shout string_id="342354" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217279">
-			<shout string_id="342355" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="342356" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="342355" when="ATTACK_BEGIN"/>
+			<shout string_id="342356" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="214532 217161 217279">
 			<shout string_id="341529" when="IDLE" pattern="1"/>
@@ -1292,9 +1292,9 @@
 	</shout_group>
 	<shout_group client_ai="IDAB1_Dreadgion_prisoner">
 		<shout_npcs npc_ids="798323 798324 798325 798326 798327 798328 798329 798330" restrict_world="300110000">
-			<shout string_id="341815" when="IDLE" pattern="quest" type="SAY" skill_no="1"/>
-			<shout string_id="341816" when="IDLE" pattern="quest" type="SAY" skill_no="2"/>
-			<shout string_id="341817" when="IDLE" pattern="quest" type="SAY" skill_no="3"/>
+			<shout string_id="341815" when="IDLE" pattern="quest" skill_no="1"/>
+			<shout string_id="341816" when="IDLE" pattern="quest" skill_no="2"/>
+			<shout string_id="341817" when="IDLE" pattern="quest" skill_no="3"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idabre_core_NamedA*">
@@ -1395,7 +1395,7 @@
 	</shout_group>
 	<shout_group client_ai="IDArena_Solo_B1_Arminos_1">
 		<shout_npcs npc_ids="217820" restrict_world="300320000">
-			<shout string_id="342414" when="START" param="username"/>
+			<shout string_id="342414" when="START"/>
 			<shout string_id="342415" when="START" pattern="s0"/>
 		</shout_npcs>
 	</shout_group>
@@ -1413,8 +1413,8 @@
 	</shout_group>
 	<shout_group client_ai="IDArena_Solo_B1_ArminosF">
 		<shout_npcs npc_ids="217823" restrict_world="300320000">
-			<shout string_id="342420" when="START" pattern="s1" param="username"/>
-			<shout string_id="342421" when="START" pattern="s2" param="username"/>
+			<shout string_id="342420" when="START" pattern="s1"/>
+			<shout string_id="342421" when="START" pattern="s2"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDArena_Solo_H1_DrakanAs_noble">
@@ -1426,7 +1426,7 @@
 	<shout_group client_ai="idarena_solo_H1_Temple*">
 		<shout_npcs npc_ids="218188 218189 218190 218191" restrict_world="300320000">
 			<shout string_id="342496" when="START"/>
-			<shout string_id="342497" when="START" param="username"/>
+			<shout string_id="342497" when="START"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDArena_Solo_S1_Agrint">
@@ -1607,13 +1607,13 @@
 	</shout_group>
 	<shout_group client_ai="IDAsteria_IU_1Stage_A">
 		<shout_npcs npc_ids="233143 233144 233145 233146 233147 233148 233149 233150 233151 233152 233153 233154 233155 233156 233157 233158 233159 233160 233161 233162 233251 233449 233450 233451 233452 233453 233454 233455 233456 233457 233458 233459 233460 233461 233462 233463 233464 233465 233466 233467 233468 233469 831347 831348 831349 831541 831542 831543 831544 831545 831546 831547 831548 831549 831550 831551 831552 831553 831554 831555 831556 831557 831558 831559 831560 831561 831562 831563 831564 831565 831566 831567 831568 831569 831570 831571 831572 831573 831574 831575 831576 831577 831578 831579 831580 831581 831597 831598 831599 831600 831601 831602 831603 831604 831605 831606 831607 831608 831609 831610 831611 831612 831613 831614 831615 831616 831627 831630 831631 831632 831657 831658 831659 831660 831661 831662 831709 831710 831711 831712 831713 831714 831715 831716 831717 831718 831719 831720 831721 831722 831723 831724 831725 831726 831727 831728 831729 831730 831731 831732 831733 831734 831735 831736 831737 831738 831739 831740 831741 831742 831743 831744 831745 831746 831747 831748 831749 831750 831751 831752 831753 831754 831755 831756 831757 831758 831759 831760 831761 831762 831763 831764 831765 831766 831767 831768 831769 831770 831771 831772 831773 831774 831775 831776 831777 831778 831779 831780 831781 831782 831796">
-			<shout string_id="1500961" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="1500962" when="IDLE" pattern="2" param="username"/>
-			<shout string_id="1500963" when="IDLE" pattern="3" param="username"/>
-			<shout string_id="1500964" when="IDLE" pattern="4" param="username"/>
+			<shout string_id="1500961" when="IDLE" pattern="1"/>
+			<shout string_id="1500962" when="IDLE" pattern="2"/>
+			<shout string_id="1500963" when="IDLE" pattern="3"/>
+			<shout string_id="1500964" when="IDLE" pattern="4"/>
 			<shout string_id="1500965" when="IDLE" pattern="5"/>
 			<shout string_id="1500966" when="IDLE" pattern="6"/>
-			<shout string_id="1500967" when="IDLE" pattern="7" param="username"/>
+			<shout string_id="1500967" when="IDLE" pattern="7"/>
 			<shout string_id="1500968" when="IDLE" pattern="8"/>
 			<shout string_id="1500969" when="IDLE" pattern="9"/>
 			<shout string_id="1500970" when="IDLE" pattern="10"/>
@@ -1633,19 +1633,19 @@
 	</shout_group>
 	<shout_group client_ai="IDAsteria_IU_world_*Stage_A">
 		<shout_npcs npc_ids="233449 233450 233451 233452 233454 233455 233456 233458 233460 233461 233462 233463 233464 233465 831781 831782" restrict_world="301200000">
-			<shout string_id="1501109" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="1501110" when="IDLE" pattern="2" param="username"/>
-			<shout string_id="1501111" when="IDLE" pattern="3" param="username"/>
-			<shout string_id="1501112" when="IDLE" pattern="4" param="username"/>
+			<shout string_id="1501109" when="IDLE" pattern="1"/>
+			<shout string_id="1501110" when="IDLE" pattern="2"/>
+			<shout string_id="1501111" when="IDLE" pattern="3"/>
+			<shout string_id="1501112" when="IDLE" pattern="4"/>
 			<shout string_id="1501113" when="IDLE" pattern="5"/>
 			<shout string_id="1501114" when="IDLE" pattern="6"/>
-			<shout string_id="1501115" when="IDLE" pattern="7" param="username"/>
+			<shout string_id="1501115" when="IDLE" pattern="7"/>
 			<shout string_id="1501116" when="IDLE" pattern="8"/>
 			<shout string_id="1501117" when="IDLE" pattern="9"/>
 			<shout string_id="1501118" when="IDLE" pattern="10"/>
 			<shout string_id="1501119" when="IDLE" pattern="11"/>
 			<shout string_id="1501120" when="IDLE" pattern="12"/>
-			<shout string_id="1501121" when="IDLE" pattern="13" param="username"/>
+			<shout string_id="1501121" when="IDLE" pattern="13"/>
 			<shout string_id="1501122" when="IDLE" pattern="14"/>
 		</shout_npcs>
 	</shout_group>
@@ -1666,12 +1666,12 @@
 	</shout_group>
 	<shout_group client_ai="IDCromede_PrisonerMan">
 		<shout_npcs npc_ids="700946" restrict_world="300230000">
-			<shout string_id="390502" when="IDLE" type="SAY"/>
+			<shout string_id="390502" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDCromede_PrisonerWoman">
 		<shout_npcs npc_ids="700947" restrict_world="300230000">
-			<shout string_id="390503" when="IDLE" type="SAY"/>
+			<shout string_id="390503" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idct_Boss_ArchPriest">
@@ -1922,8 +1922,8 @@
 	</shout_group>
 	<shout_group client_ai="IDDreadgion_02_ShulackWorker">
 		<shout_npcs npc_ids="799525">
-			<shout string_id="390504" when="IDLE" type="SAY"/>
-			<shout string_id="390505" when="IDLE" type="SAY"/>
+			<shout string_id="390504" when="IDLE"/>
+			<shout string_id="390505" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idf4re_drana_Drakan_Worker*">
@@ -2275,7 +2275,7 @@
 			<shout string_id="1500094" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216897" restrict_world="300200000">
-			<shout string_id="342173" when="DIED" type="SAY"/>
+			<shout string_id="342173" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDNovice_BrownieB">
@@ -2284,7 +2284,7 @@
 			<shout string_id="1500098" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216915" restrict_world="300200000">
-			<shout string_id="342175" when="DIED" type="SAY"/>
+			<shout string_id="342175" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDNovice_Hameroon">
@@ -2303,7 +2303,7 @@
 			<shout string_id="1500096" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216907" restrict_world="300200000">
-			<shout string_id="342174" when="DIED" type="SAY"/>
+			<shout string_id="342174" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDRaksha_0F_Envoy_Nmd">
@@ -2555,9 +2555,9 @@
 	</shout_group>
 	<shout_group client_ai="IDTiamat_Kahrun6">
 		<shout_npcs npc_ids="800340">
-			<shout string_id="390717" when="IDLE" type="SAY"/>
-			<shout string_id="390718" when="IDLE" type="SAY"/>
-			<shout string_id="390719" when="IDLE" type="SAY"/>
+			<shout string_id="390717" when="IDLE"/>
+			<shout string_id="390718" when="IDLE"/>
+			<shout string_id="390719" when="IDLE"/>
 			<shout string_id="390866" when="IDLE" pattern="1"/>
 			<shout string_id="390870" when="IDLE" pattern="2"/>
 		</shout_npcs>
@@ -2640,7 +2640,7 @@
 	</shout_group>
 	<shout_group client_ai="IDTiamat_murugan2">
 		<shout_npcs npc_ids="800436">
-			<shout string_id="390835" when="IDLE" type="SAY"/>
+			<shout string_id="390835" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDTiamat_murugan3">
@@ -2687,7 +2687,7 @@
 	</shout_group>
 	<shout_group client_ai="IDTiamat_Surama1">
 		<shout_npcs npc_ids="800369">
-			<shout string_id="390834" when="IDLE" type="SAY"/>
+			<shout string_id="390834" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDTiamat_Surama2">
@@ -2776,9 +2776,9 @@
 	</shout_group>
 	<shout_group client_ai="IDTP_Fanatic_Boss_EL">
 		<shout_npcs npc_ids="215782 215783 215784 215785 215786 215787 215788 215789 215790 215791 215799 215800 215801 215802 215803 215804 215805 215806 215807 215808 215809 215810 215811 215812 215813 215814 215815 215816 215817 215818 215819 215820 215821 215822 215823 215824 215854 215855 215856 215857 215858 215859 215860 216156 216321 216322 216323 216324 216325 216326 216327 216328 216329 216330 216331 216332 216333 216334 216335 216336 216337 216338 216339 216340 216341 216342 216343 216344 216345 216346 216347 216348 216349 216350 216351 216352" restrict_world="300150000">
-			<shout string_id="390459" when="IDLE" type="SAY"/>
-			<shout string_id="390460" when="IDLE" type="SAY"/>
-			<shout string_id="390461" when="IDLE" type="SAY"/>
+			<shout string_id="390459" when="IDLE"/>
+			<shout string_id="390460" when="IDLE"/>
+			<shout string_id="390461" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="215782" restrict_world="300150000">
 			<shout string_id="1500022" when="START" skill_no="1"/>
@@ -2800,7 +2800,7 @@
 	</shout_group>
 	<shout_group client_ai="IDTP_Fanatic_CeB">
 		<shout_npcs npc_ids="215804 216339 216396 216797 281371" restrict_world="300160000">
-			<shout string_id="342093" when="IDLE" type="SAY"/>
+			<shout string_id="342093" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idtp_FANATIC_CeC">
@@ -2821,7 +2821,7 @@
 	</shout_group>
 	<shout_group client_ai="IDTP_Fanatic_KeA">
 		<shout_npcs npc_ids="215799 216329 216354 216386 281360" restrict_world="300160000">
-			<shout string_id="342094" when="IDLE" type="SAY"/>
+			<shout string_id="342094" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idtp_FANATIC_KeB">
@@ -2836,12 +2836,12 @@
 	</shout_group>
 	<shout_group client_ai="IDTP_Fanatic_MeB">
 		<shout_npcs npc_ids="215812 216325 216349 216382 281377" restrict_world="300160000">
-			<shout string_id="342096" when="IDLE" type="SAY"/>
+			<shout string_id="342096" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDTP_Fanatic_PeA">
 		<shout_npcs npc_ids="215808 215857 216335 216343 216360 216392 216400 216566 281366" restrict_world="300160000">
-			<shout string_id="342095" when="IDLE" type="SAY"/>
+			<shout string_id="342095" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="idtp_FANATIC_ReB">
@@ -2898,9 +2898,9 @@
 	</shout_group>
 	<shout_group client_ai="IDTP_NepTe1">
 		<shout_npcs npc_ids="217120" restrict_world="600010000">
-			<shout string_id="342197" when="IDLE" type="SAY"/>
-			<shout string_id="342198" when="IDLE" type="SAY"/>
-			<shout string_id="342199" when="IDLE" type="SAY"/>
+			<shout string_id="342197" when="IDLE"/>
+			<shout string_id="342198" when="IDLE"/>
+			<shout string_id="342199" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDTP_OctaNm">
@@ -3363,10 +3363,10 @@
 	</shout_group>
 	<shout_group client_ai="LDF4b_Tiamat_Temp53">
 		<shout_npcs npc_ids="800175" restrict_world="510010000">
-			<shout string_id="390573" when="ATTACKED" type="SAY"/>
-			<shout string_id="390574" when="ATTACKED" type="SAY"/>
-			<shout string_id="390575" when="ATTACKED" type="SAY"/>
-			<shout string_id="390576" when="ATTACKED" type="SAY"/>
+			<shout string_id="390573" when="ATTACKED"/>
+			<shout string_id="390574" when="ATTACKED"/>
+			<shout string_id="390575" when="ATTACKED"/>
+			<shout string_id="390576" when="ATTACKED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="LDF5_D2_LowRate_SelfATK">
@@ -3410,9 +3410,9 @@
 	<shout_group client_ai="Lehpar_AnD_F1">
 		<shout_npcs npc_ids="210073 210074 210075 210076 210077 210316 210327 210361 210428 210429 210430 210431 210504 210505 210506 210507 210510 210528 210529 210530 210531 210532 210553 210688 210698 210699 210700 210706 210714 210715 210720 210721 210735 210736 210737 210738 210788 210789 210796 210797 210828 210829 210858 210859 210860 210946 210947 210968 210969 210970 211012 211013 211021 211022 211023 211024 211025 211027 211028 211029 211030 211031 211032 211054 211064 211065 211095 211096 211106 211107 211108 211109 211189 211190 211191 211208 211209 211210 211221 211222 211223 211224 211296 211358 211359 211381 211382 211383 211415 211416 211446 211447 211511 211512 211523 211524 211525 211539 211540 211554 211555 211583 211584 211585 211605 211606 211607 211616 211617 211618 211619 211620 211660 211665 211666 211667 211694 211702 211703 211704 211705 211708 211709 211718 211719 211720 211721 211722 211723 211724 211725 211726 211727 211909 211910 211911 211912 211913 212348 212420 212496 212497 212498 212499 212500 212501 212511 212512 212615 212636 212637 212638 212639 212664 212848 212849 212850 212851 212852 212853 212854 212855 212856 212858 212859 212879 213003 213004 213338 213339 213340 213341 213342 213343 213344 213345 213544 213545 213546 213714 213715 213716 213717 213718 213719 213720 213721 213722 213757 213758 213759 213760 213761 213762 213763 213764 214029 219482">
 			<shout string_id="340124" when="HELPCALL"/>
-			<shout string_id="340271" when="ATTACK_K" type="SAY" skill_no="1"/>
+			<shout string_id="340271" when="ATTACK_K" skill_no="1"/>
 			<shout string_id="340272" when="ATTACK_K" skill_no="1"/>
-			<shout string_id="340273" when="ATTACK_K" type="SAY" skill_no="2"/>
+			<shout string_id="340273" when="ATTACK_K" skill_no="2"/>
 			<shout string_id="340274" when="ATTACK_K" skill_no="2"/>
 			<shout string_id="340275" when="ATTACK_K" skill_no="2"/>
 		</shout_npcs>
@@ -3746,7 +3746,7 @@
 			<shout string_id="340715" when="ATTACK_K" skill_no="6"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="256679 256680 256681 256682" restrict_world="300030000">
-			<shout string_id="341672" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="341672" when="ATTACK_BEGIN"/>
 			<shout string_id="341673" when="ATTACK_K" skill_no="1"/>
 		</shout_npcs>
 	</shout_group>
@@ -4020,32 +4020,32 @@
 	</shout_group>
 	<shout_group client_ai="Lmerchant">
 		<shout_npcs npc_ids="203795" restrict_world="110010000">
-			<shout string_id="390316" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390317" when="IDLE" type="SAY"/>
-			<shout string_id="390318" when="IDLE" param="username" type="SAY"/>
+			<shout string_id="390316" when="IDLE"/>
+			<shout string_id="390317" when="IDLE"/>
+			<shout string_id="390318" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203739" restrict_world="110010000">
-			<shout string_id="390313" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390314" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390315" when="IDLE" param="username" type="SAY"/>
+			<shout string_id="390313" when="IDLE"/>
+			<shout string_id="390314" when="IDLE"/>
+			<shout string_id="390315" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203127" restrict_world="210030000">
 			<shout string_id="390300" when="WALK_WAYPOINT" pattern="1"/>
 			<shout string_id="390228" when="WALK_WAYPOINT" pattern="2"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203851" restrict_world="110010000">
-			<shout string_id="390319" when="IDLE" type="SAY"/>
-			<shout string_id="390320" when="IDLE" type="SAY"/>
-			<shout string_id="390321" when="IDLE" type="SAY"/>
+			<shout string_id="390319" when="IDLE"/>
+			<shout string_id="390320" when="IDLE"/>
+			<shout string_id="390321" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798027" restrict_world="110010000">
-			<shout string_id="390322" when="IDLE" type="SAY"/>
-			<shout string_id="390323" when="IDLE" type="SAY"/>
-			<shout string_id="390324" when="IDLE" type="SAY"/>
+			<shout string_id="390322" when="IDLE"/>
+			<shout string_id="390323" when="IDLE"/>
+			<shout string_id="390324" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798007" restrict_world="210010000">
-			<shout string_id="390275" when="IDLE" type="SAY"/>
-			<shout string_id="390276" when="IDLE" type="SAY"/>
+			<shout string_id="390275" when="IDLE"/>
+			<shout string_id="390276" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203737" restrict_world="110010000">
 			<shout string_id="390340" when="IDLE" poll_delay="5000"/>
@@ -4486,18 +4486,18 @@
 	</shout_group>
 	<shout_group client_ai="ND2_Bst_5">
 		<shout_npcs npc_ids="216591" restrict_world="300150000">
-			<shout string_id="342118" when="IDLE" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342119" when="IDLE" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342120" when="ATTACK_BEGIN" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342121" when="ATTACKED" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342122" when="DIED" pattern="quest" param="20023" type="SAY"/>
+			<shout string_id="342118" when="IDLE" pattern="quest"/>
+			<shout string_id="342119" when="IDLE" pattern="quest"/>
+			<shout string_id="342120" when="ATTACK_BEGIN" pattern="quest"/>
+			<shout string_id="342121" when="ATTACKED" pattern="quest"/>
+			<shout string_id="342122" when="DIED" pattern="quest"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216592" restrict_world="300150000">
-			<shout string_id="342123" when="IDLE" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342124" when="IDLE" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342125" when="ATTACK_BEGIN" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342126" when="ATTACKED" pattern="quest" param="20023" type="SAY"/>
-			<shout string_id="342127" when="DIED" pattern="quest" param="20023" type="SAY"/>
+			<shout string_id="342123" when="IDLE" pattern="quest"/>
+			<shout string_id="342124" when="IDLE" pattern="quest"/>
+			<shout string_id="342125" when="ATTACK_BEGIN" pattern="quest"/>
+			<shout string_id="342126" when="ATTACKED" pattern="quest"/>
+			<shout string_id="342127" when="DIED" pattern="quest"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="ND2_Bst_9">
@@ -4674,26 +4674,26 @@
 	</shout_group>
 	<shout_group client_ai="ND2_FeL1">
 		<shout_npcs npc_ids="281101" restrict_world="300040000">
-			<shout string_id="341800" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="341801" when="ATTACK_K" type="SAY"/>
-			<shout string_id="341802" when="DIED" type="SAY"/>
+			<shout string_id="341800" when="ATTACK_BEGIN"/>
+			<shout string_id="341801" when="ATTACK_K"/>
+			<shout string_id="341802" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="ND2_FeL2">
 		<shout_npcs npc_ids="281100" restrict_world="300040000">
-			<shout string_id="341797" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="341798" when="ATTACK_K" type="SAY"/>
-			<shout string_id="341799" when="DIED" type="SAY"/>
+			<shout string_id="341797" when="ATTACK_BEGIN"/>
+			<shout string_id="341798" when="ATTACK_K"/>
+			<shout string_id="341799" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="ND2_FhI">
 		<shout_npcs npc_ids="280057" restrict_world="210010000">
 			<shout string_id="340034" when="ATTACK_K" skill_no="1"/>
 			<shout string_id="340035" when="PLAYER_CAST"/>
-			<shout string_id="340036" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340037" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340038" when="DIED" type="SAY"/>
-			<shout string_id="340039" when="DIED" type="SAY"/>
+			<shout string_id="340036" when="ATTACK_BEGIN"/>
+			<shout string_id="340037" when="ATTACK_BEGIN"/>
+			<shout string_id="340038" when="DIED"/>
+			<shout string_id="340039" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="280057">
 			<shout string_id="340672" when="ATTACK_K" skill_no="2"/>
@@ -4861,8 +4861,8 @@
 			<shout string_id="342253" when="IDLE" pattern="2"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204417" restrict_world="220020000">
-			<shout string_id="390421" when="ATTACKED" pattern="quest" param="2034" type="SAY"/>
-			<shout string_id="390422" when="ATTACKED" pattern="quest" param="2034" type="SAY"/>
+			<shout string_id="390421" when="ATTACKED" pattern="quest"/>
+			<shout string_id="390422" when="ATTACKED" pattern="quest"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="ND2_Ksum1">
@@ -5134,19 +5134,19 @@
 	</shout_group>
 	<shout_group client_ai="ND2_Wss_1">
 		<shout_npcs npc_ids="216901" restrict_world="300200000">
-			<shout string_id="342192" when="IDLE" type="SAY"/>
+			<shout string_id="342192" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216904" restrict_world="300200000">
-			<shout string_id="342193" when="IDLE" type="SAY"/>
+			<shout string_id="342193" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="217025" restrict_world="300200000">
-			<shout string_id="342196" when="IDLE" type="SAY"/>
+			<shout string_id="342196" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216912" restrict_world="300200000">
-			<shout string_id="342194" when="IDLE" type="SAY"/>
+			<shout string_id="342194" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="216919" restrict_world="300200000">
-			<shout string_id="342195" when="IDLE" type="SAY"/>
+			<shout string_id="342195" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="NDrakan_ChSlave1">
@@ -5240,12 +5240,12 @@
 	<shout_group client_ai="NKrall_FeC">
 		<shout_npcs npc_ids="211696 212212 212213 212229 212235 212247 212261 212614 219050 219051 219066 219095" restrict_world="210010000">
 			<shout string_id="340021" when="PLAYER_CAST"/>
-			<shout string_id="340022" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340023" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340024" when="DIED" type="SAY"/>
-			<shout string_id="340025" when="DIED" type="SAY"/>
-			<shout string_id="340040" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340041" when="DIED" type="SAY"/>
+			<shout string_id="340022" when="ATTACK_BEGIN"/>
+			<shout string_id="340023" when="ATTACK_BEGIN"/>
+			<shout string_id="340024" when="DIED"/>
+			<shout string_id="340025" when="DIED"/>
+			<shout string_id="340040" when="ATTACK_BEGIN"/>
+			<shout string_id="340041" when="DIED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="211696 212011 212023 212024 212025 212058 212059 212229 212561 212562 219066 280221 280222">
 			<shout string_id="340464" when="ATTACK_K" skill_no="1"/>
@@ -5268,13 +5268,13 @@
 	<shout_group client_ai="NKrall_KeB">
 		<shout_npcs npc_ids="212214 212215 212216 212228 219052 219053 219054 219065" restrict_world="210010000">
 			<shout string_id="340017" when="HELPCALL"/>
-			<shout string_id="340018" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340019" when="DIED" type="SAY"/>
-			<shout string_id="340020" when="DIED" type="SAY"/>
+			<shout string_id="340018" when="ATTACK_BEGIN"/>
+			<shout string_id="340019" when="DIED"/>
+			<shout string_id="340020" when="DIED"/>
 			<shout string_id="340030" when="PLAYER_CAST"/>
-			<shout string_id="340031" when="DIED" type="SAY"/>
-			<shout string_id="340032" when="DIED" type="SAY"/>
-			<shout string_id="340033" when="ATTACK_BEGIN" type="SAY"/>
+			<shout string_id="340031" when="DIED"/>
+			<shout string_id="340032" when="DIED"/>
+			<shout string_id="340033" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="211862 211863 211864 211865 212026 212027 212028 212029 212062 212063 212214 212215 212216 212228 212233 213579 219065 219069 280224 280225">
 			<shout string_id="340469" when="ATTACK_K" skill_no="2"/>
@@ -5695,32 +5695,32 @@
 	</shout_group>
 	<shout_group client_ai="NoAction">
 		<shout_npcs npc_ids="210092 210093 210094 210095 210096 210097 210098 210099 210100 210101 210677 210678 210679 210680 210686 210687 214876 214886 280138" restrict_world="210010000">
-			<shout string_id="340000" when="ATTACKED" type="SAY"/>
-			<shout string_id="340001" when="IDLE" type="SAY"/>
-			<shout string_id="340002" when="IDLE" type="SAY"/>
-			<shout string_id="340003" when="DIED" type="SAY"/>
-			<shout string_id="340004" when="DIED" type="SAY"/>
+			<shout string_id="340000" when="ATTACKED"/>
+			<shout string_id="340001" when="IDLE"/>
+			<shout string_id="340002" when="IDLE"/>
+			<shout string_id="340003" when="DIED"/>
+			<shout string_id="340004" when="DIED"/>
 			<shout string_id="340005" when="HELP"/>
-			<shout string_id="340006" when="ATTACKED" type="SAY"/>
-			<shout string_id="340007" when="DIED" type="SAY"/>
-			<shout string_id="340008" when="DIED" type="SAY"/>
-			<shout string_id="340009" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340010" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340011" when="DIED" type="SAY"/>
-			<shout string_id="340012" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340013" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340014" when="DIED" type="SAY"/>
-			<shout string_id="340015" when="DIED" type="SAY"/>
-			<shout string_id="340016" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340026" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="340027" when="IDLE" type="SAY"/>
-			<shout string_id="340028" when="DIED" type="SAY"/>
-			<shout string_id="340029" when="DIED" type="SAY"/>
+			<shout string_id="340006" when="ATTACKED"/>
+			<shout string_id="340007" when="DIED"/>
+			<shout string_id="340008" when="DIED"/>
+			<shout string_id="340009" when="ATTACK_BEGIN"/>
+			<shout string_id="340010" when="ATTACK_BEGIN"/>
+			<shout string_id="340011" when="DIED"/>
+			<shout string_id="340012" when="ATTACK_BEGIN"/>
+			<shout string_id="340013" when="ATTACK_BEGIN"/>
+			<shout string_id="340014" when="DIED"/>
+			<shout string_id="340015" when="DIED"/>
+			<shout string_id="340016" when="ATTACK_BEGIN"/>
+			<shout string_id="340026" when="ATTACK_BEGIN"/>
+			<shout string_id="340027" when="IDLE"/>
+			<shout string_id="340028" when="DIED"/>
+			<shout string_id="340029" when="DIED"/>
 			<shout string_id="340266" when="ATTACK_K" pattern="Coward" skill_no="1"/>
 			<shout string_id="340267" when="ATTACK_K" pattern="Coward" skill_no="1"/>
-			<shout string_id="340268" when="IDLE" pattern="Fanatic" type="SAY"/>
-			<shout string_id="340269" when="IDLE" pattern="Fanatic" type="SAY"/>
-			<shout string_id="340270" when="IDLE" pattern="Fanatic" type="SAY"/>
+			<shout string_id="340268" when="IDLE" pattern="Fanatic"/>
+			<shout string_id="340269" when="IDLE" pattern="Fanatic"/>
+			<shout string_id="340270" when="IDLE" pattern="Fanatic"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="700273 700274 700275 700276 700277 700278">
 			<shout string_id="341516" when="ATTACK_BEGIN"/>
@@ -5734,16 +5734,16 @@
 			<shout string_id="341524" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="700906 700907" restrict_world="300240000">
-			<shout string_id="390548" when="IDLE" type="SAY"/>
-			<shout string_id="390549" when="IDLE" type="SAY"/>
-			<shout string_id="390550" when="IDLE" type="SAY"/>
+			<shout string_id="390548" when="IDLE"/>
+			<shout string_id="390549" when="IDLE"/>
+			<shout string_id="390550" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="206234 206235 219152 219153 219154 219155 219156 219157 219158 219159 219160 219161 219162 219163 219164 219174 219501 701325 701326 701327 701328 701329 701330 701331 701332 701333 701334 701335 701336 701337 701338 701339 701340 701341 701342 701392 701393 701394 701395 701396 701397 701398 701399 701400 701401 701402 701403 701404 701405 701406 701407 701408 701409 701429 701430 701519 701520 701521 730517 730518 730522 730523 730524 730525 730526 730534 730556 730557 749246 749247 810004 810005 810006 810007 810008 810011 810012 810013 810014 810015 810016 810027 810028 810029 810030 810032 810033 810034 810035 810036 810037 810038 810039 810040 810041 810042 810043 810044 830576 830577 831036 831037 831038 831039">
-			<shout string_id="390654" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="390655" when="IDLE" pattern="2" param="username"/>
-			<shout string_id="390656" when="IDLE" pattern="3" param="username"/>
-			<shout string_id="390657" when="IDLE" pattern="4" param="username"/>
-			<shout string_id="390658" when="IDLE" pattern="5" param="username"/>
+			<shout string_id="390654" when="IDLE" pattern="1"/>
+			<shout string_id="390655" when="IDLE" pattern="2"/>
+			<shout string_id="390656" when="IDLE" pattern="3"/>
+			<shout string_id="390657" when="IDLE" pattern="4"/>
+			<shout string_id="390658" when="IDLE" pattern="5"/>
 			<shout string_id="390659" when="IDLE" pattern="1"/>
 			<shout string_id="390660" when="IDLE" pattern="2"/>
 			<shout string_id="390661" when="IDLE" pattern="3"/>
@@ -5774,18 +5774,18 @@
 			<shout string_id="390615" when="IDLE"/>
 			<shout string_id="390616" when="IDLE"/>
 			<shout string_id="390617" when="IDLE"/>
-			<shout string_id="390618" when="IDLE" param="username"/>
-			<shout string_id="390619" when="IDLE" param="username"/>
+			<shout string_id="390618" when="IDLE"/>
+			<shout string_id="390619" when="IDLE"/>
 			<shout string_id="390620" when="IDLE"/>
-			<shout string_id="390622" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="390646" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="390647" when="IDLE" pattern="2" param="username"/>
-			<shout string_id="390648" when="IDLE" pattern="3" param="username"/>
-			<shout string_id="390649" when="IDLE" pattern="4" param="username"/>
-			<shout string_id="390650" when="IDLE" pattern="5" param="username"/>
-			<shout string_id="390651" when="IDLE" pattern="6" param="username"/>
-			<shout string_id="390652" when="IDLE" pattern="7" param="username"/>
-			<shout string_id="390653" when="IDLE" pattern="8" param="username"/>
+			<shout string_id="390622" when="IDLE" pattern="1"/>
+			<shout string_id="390646" when="IDLE" pattern="1"/>
+			<shout string_id="390647" when="IDLE" pattern="2"/>
+			<shout string_id="390648" when="IDLE" pattern="3"/>
+			<shout string_id="390649" when="IDLE" pattern="4"/>
+			<shout string_id="390650" when="IDLE" pattern="5"/>
+			<shout string_id="390651" when="IDLE" pattern="6"/>
+			<shout string_id="390652" when="IDLE" pattern="7"/>
+			<shout string_id="390653" when="IDLE" pattern="8"/>
 			<shout string_id="390698" when="IDLE" pattern="1"/>
 			<shout string_id="390699" when="IDLE" pattern="2"/>
 			<shout string_id="390700" when="IDLE" pattern="3"/>
@@ -5793,7 +5793,7 @@
 			<shout string_id="390702" when="IDLE" pattern="5"/>
 			<shout string_id="390703" when="IDLE" pattern="6"/>
 			<shout string_id="390704" when="IDLE" pattern="7"/>
-			<shout string_id="390705" when="IDLE" pattern="8" param="username"/>
+			<shout string_id="390705" when="IDLE" pattern="8"/>
 			<shout string_id="390706" when="IDLE" pattern="9"/>
 			<shout string_id="390707" when="IDLE" pattern="10"/>
 			<shout string_id="390708" when="IDLE" pattern="11"/>
@@ -5807,7 +5807,7 @@
 			<shout string_id="390580" when="IDLE"/>
 			<shout string_id="390581" when="IDLE"/>
 			<shout string_id="390582" when="IDLE"/>
-			<shout string_id="390583" when="IDLE" param="username"/>
+			<shout string_id="390583" when="IDLE"/>
 			<shout string_id="390584" when="IDLE"/>
 			<shout string_id="390585" when="IDLE"/>
 			<shout string_id="390586" when="IDLE"/>
@@ -5824,7 +5824,7 @@
 			<shout string_id="390597" when="IDLE"/>
 			<shout string_id="390598" when="IDLE"/>
 			<shout string_id="390599" when="IDLE"/>
-			<shout string_id="390600" when="IDLE" param="username"/>
+			<shout string_id="390600" when="IDLE"/>
 			<shout string_id="390601" when="IDLE"/>
 			<shout string_id="390602" when="IDLE"/>
 			<shout string_id="390603" when="IDLE"/>
@@ -5836,15 +5836,15 @@
 			<shout string_id="390609" when="IDLE"/>
 			<shout string_id="390610" when="IDLE"/>
 			<shout string_id="390611" when="IDLE"/>
-			<shout string_id="390621" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="390638" when="IDLE" pattern="1" param="username"/>
-			<shout string_id="390639" when="IDLE" pattern="2" param="username"/>
-			<shout string_id="390640" when="IDLE" pattern="3" param="username"/>
-			<shout string_id="390641" when="IDLE" pattern="4" param="username"/>
-			<shout string_id="390642" when="IDLE" pattern="5" param="username"/>
-			<shout string_id="390643" when="IDLE" pattern="6" param="username"/>
-			<shout string_id="390644" when="IDLE" pattern="7" param="username"/>
-			<shout string_id="390645" when="IDLE" pattern="8" param="username"/>
+			<shout string_id="390621" when="IDLE" pattern="1"/>
+			<shout string_id="390638" when="IDLE" pattern="1"/>
+			<shout string_id="390639" when="IDLE" pattern="2"/>
+			<shout string_id="390640" when="IDLE" pattern="3"/>
+			<shout string_id="390641" when="IDLE" pattern="4"/>
+			<shout string_id="390642" when="IDLE" pattern="5"/>
+			<shout string_id="390643" when="IDLE" pattern="6"/>
+			<shout string_id="390644" when="IDLE" pattern="7"/>
+			<shout string_id="390645" when="IDLE" pattern="8"/>
 			<shout string_id="390685" when="IDLE" pattern="1"/>
 			<shout string_id="390686" when="IDLE" pattern="2"/>
 			<shout string_id="390687" when="IDLE" pattern="3"/>
@@ -5852,7 +5852,7 @@
 			<shout string_id="390689" when="IDLE" pattern="5"/>
 			<shout string_id="390690" when="IDLE" pattern="6"/>
 			<shout string_id="390691" when="IDLE" pattern="7"/>
-			<shout string_id="390692" when="IDLE" pattern="8" param="username"/>
+			<shout string_id="390692" when="IDLE" pattern="8"/>
 			<shout string_id="390693" when="IDLE" pattern="9"/>
 			<shout string_id="390694" when="IDLE" pattern="10"/>
 			<shout string_id="390695" when="IDLE" pattern="11"/>
@@ -5910,24 +5910,24 @@
 			<shout string_id="1501147" when="IDLE" pattern="23"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="801769 801770" restrict_world="301120000">
-			<shout string_id="390881" when="IDLE" type="SAY"/>
-			<shout string_id="390882" when="IDLE" type="SAY"/>
-			<shout string_id="390883" when="IDLE" type="SAY"/>
-			<shout string_id="390884" when="IDLE" type="SAY"/>
-			<shout string_id="390885" when="IDLE" type="SAY"/>
+			<shout string_id="390881" when="IDLE"/>
+			<shout string_id="390882" when="IDLE"/>
+			<shout string_id="390883" when="IDLE"/>
+			<shout string_id="390884" when="IDLE"/>
+			<shout string_id="390885" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="206098 206099 206100 206103 214905 214906 214907 214908 214909 214910 214911 214912 214913 214914 214915 214916 214917 214918 214919 214920 214921 214922 214923 214924 214925 214926 214927 214928 214929 214930 214931 214932 214933 214934 214935 214936 214937 214938 214939 214940 214941 214942 214943 214944 214945 214946 214947 214948 214949 214950 214951 214952 214953 214954 214955 214956 214957 214958 214959 214960 214961 214962 214963 214964 214965 214966 214967 214968 214969 214970 214971 214972 214973 214974 214975 214976 214977 214978 214979 214980 214981 214982 214983 214984 214985 214986 214987 214988 214989 214990 214991 214992 214993 214994 214995 214996 214997 214998 214999 215000 215001 215002 215003 215004 215005 215006 215007 215008 215009 215010 215011 215012 215013 215014 215015 215016 215017 215018 215019 215020 215021 215022 215023 215024 215025 215026 215027 215028 215029 215030 215031 215032 215033 215034 215035 215036 215037 215038 215039 215040 215041 215042 215043 215044 215045 215046 215047 215048 215049 215050 215051 215052 215053 215054 215055 215056 215057 215058 215059 215060 215061 215062 215063 215064 215065 215066 215067 215068 215069 215070 215071 215072 215073 215074 215075 215076 215077 215078 215079 215080 215081 215401 215402 215403 215404 215405 215406 215407 215408 215409 215410 215411 215412 215416 215417 215418 215419 215420 215421 215422 215423 215425 215426 215435 215436 215437 215438 215489 218964 218965 218966 218967 218968 218969 218970 218971 218972 218973 218974 218975 218976 218977 218978 218979 218980 218981 218982 218983 218984 218985 218986 218987 218988 218989 218990 218991 218992 218993 218994 218995 218996 218997 218998 218999 219000 219001 219002 219003 219004 219005 219006 219007 219008 219009 219010 219011 219012 219013 219014 219015 219016 219017 219018 219019 219020 219021 219022 219023 219024 219025 219026 219027 219028 219029 219030 219031 219032 219033 219034 219035 219036 219037 219038 219039 219040 219041 219042 230001 230002 230003 230004 230005 230006 230007 230008 230009 230010 230011 230012 230013 230014 230015 230016 230017 230018 230019 230020 230021 230022 230023 230024 230025 230026 230027 230028 230029 230030 230031 230032 230033 230034 230035 230036 230037 230038 230039 230040 230041 230042 230043 230044 230045 230046 230047 230048 700548 700549 700550 730198 730199 730200 730201 730202 730203 730204 730205 730206 730207 730209 730210 730216">
 			<shout string_id="341825" when="ATTACK_BEGIN"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800158" restrict_world="600030000">
-			<shout string_id="390624" when="IDLE" type="SAY"/>
-			<shout string_id="390625" when="IDLE" type="SAY"/>
-			<shout string_id="390626" when="IDLE" type="SAY"/>
-			<shout string_id="390627" when="IDLE" type="SAY"/>
-			<shout string_id="390628" when="IDLE" type="SAY"/>
-			<shout string_id="390629" when="IDLE" type="SAY"/>
-			<shout string_id="390630" when="IDLE" type="SAY"/>
-			<shout string_id="390631" when="IDLE" type="SAY"/>
+			<shout string_id="390624" when="IDLE"/>
+			<shout string_id="390625" when="IDLE"/>
+			<shout string_id="390626" when="IDLE"/>
+			<shout string_id="390627" when="IDLE"/>
+			<shout string_id="390628" when="IDLE"/>
+			<shout string_id="390629" when="IDLE"/>
+			<shout string_id="390630" when="IDLE"/>
+			<shout string_id="390631" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="801676" restrict_world="600060000">
 			<shout string_id="1500858" when="IDLE" pattern="1"/>
@@ -5939,74 +5939,74 @@
 	</shout_group>
 	<shout_group client_ai="NPC">
 		<shout_npcs npc_ids="205000 205020">
-			<shout string_id="390239" when="SEE" param="username" type="SAY"/>
+			<shout string_id="390239" when="SEE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205001 205002 205016 205017 205018 205019">
-			<shout string_id="390233" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390234" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390235" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390236" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390237" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390238" when="SEE" param="username" type="SAY"/>
+			<shout string_id="390233" when="SEE"/>
+			<shout string_id="390234" when="SEE"/>
+			<shout string_id="390235" when="SEE"/>
+			<shout string_id="390236" when="SEE"/>
+			<shout string_id="390237" when="SEE"/>
+			<shout string_id="390238" when="SEE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205003 205004 205005 205006 205007 205008 205009 205010 205011 205012 205013 205014 205015">
-			<shout string_id="390240" when="ATTACKED" type="SAY"/>
-			<shout string_id="390241" when="ATTACKED" type="SAY"/>
-			<shout string_id="390242" when="ATTACKED" type="SAY"/>
-			<shout string_id="390243" when="IDLE" type="SAY"/>
-			<shout string_id="390244" when="ATTACKED" type="SAY"/>
-			<shout string_id="390245" when="ATTACKED" type="SAY"/>
-			<shout string_id="390246" when="ATTACKED" type="SAY"/>
-			<shout string_id="390251" when="ATTACKED" type="SAY"/>
-			<shout string_id="390252" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390253" when="IDLE" type="SAY"/>
-			<shout string_id="390254" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390258" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390259" when="ATTACKED" type="SAY"/>
-			<shout string_id="390260" when="ATTACKED" type="SAY"/>
-			<shout string_id="390261" when="ATTACKED" type="SAY"/>
-			<shout string_id="390262" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390263" when="ATTACKED" type="SAY"/>
-			<shout string_id="390264" when="DIED" type="SAY"/>
-			<shout string_id="390454" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390455" when="ATTACKED" type="SAY"/>
+			<shout string_id="390240" when="ATTACKED"/>
+			<shout string_id="390241" when="ATTACKED"/>
+			<shout string_id="390242" when="ATTACKED"/>
+			<shout string_id="390243" when="IDLE"/>
+			<shout string_id="390244" when="ATTACKED"/>
+			<shout string_id="390245" when="ATTACKED"/>
+			<shout string_id="390246" when="ATTACKED"/>
+			<shout string_id="390251" when="ATTACKED"/>
+			<shout string_id="390252" when="IDLE"/>
+			<shout string_id="390253" when="IDLE"/>
+			<shout string_id="390254" when="IDLE"/>
+			<shout string_id="390258" when="ATTACK_BEGIN"/>
+			<shout string_id="390259" when="ATTACKED"/>
+			<shout string_id="390260" when="ATTACKED"/>
+			<shout string_id="390261" when="ATTACKED"/>
+			<shout string_id="390262" when="ATTACK_BEGIN"/>
+			<shout string_id="390263" when="ATTACKED"/>
+			<shout string_id="390264" when="DIED"/>
+			<shout string_id="390454" when="ATTACK_BEGIN"/>
+			<shout string_id="390455" when="ATTACKED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205021 205022 205029 205030 205031 205032 205033 205034 205037 205038 205039 205040 205041">
-			<shout string_id="390240" when="ATTACKED" type="SAY"/>
-			<shout string_id="390241" when="ATTACKED" type="SAY"/>
-			<shout string_id="390242" when="ATTACKED" type="SAY"/>
-			<shout string_id="390243" when="IDLE" type="SAY"/>
-			<shout string_id="390244" when="ATTACKED" type="SAY"/>
-			<shout string_id="390245" when="ATTACKED" type="SAY"/>
-			<shout string_id="390246" when="ATTACKED" type="SAY"/>
-			<shout string_id="390247" when="ATTACKED" type="SAY"/>
-			<shout string_id="390248" when="ATTACKED" type="SAY"/>
-			<shout string_id="390249" when="ATTACKED" type="SAY"/>
-			<shout string_id="390250" when="ATTACKED" type="SAY"/>
-			<shout string_id="390251" when="ATTACKED" type="SAY"/>
-			<shout string_id="390252" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390253" when="IDLE" type="SAY"/>
-			<shout string_id="390254" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390255" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390256" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390257" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390258" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390259" when="ATTACKED" type="SAY"/>
-			<shout string_id="390260" when="ATTACKED" type="SAY"/>
-			<shout string_id="390261" when="ATTACKED" type="SAY"/>
-			<shout string_id="390262" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390263" when="ATTACKED" type="SAY"/>
-			<shout string_id="390264" when="DIED" type="SAY"/>
-			<shout string_id="390265" when="DIED" type="SAY"/>
-			<shout string_id="390454" when="ATTACK_BEGIN" type="SAY"/>
-			<shout string_id="390455" when="ATTACKED" type="SAY"/>
+			<shout string_id="390240" when="ATTACKED"/>
+			<shout string_id="390241" when="ATTACKED"/>
+			<shout string_id="390242" when="ATTACKED"/>
+			<shout string_id="390243" when="IDLE"/>
+			<shout string_id="390244" when="ATTACKED"/>
+			<shout string_id="390245" when="ATTACKED"/>
+			<shout string_id="390246" when="ATTACKED"/>
+			<shout string_id="390247" when="ATTACKED"/>
+			<shout string_id="390248" when="ATTACKED"/>
+			<shout string_id="390249" when="ATTACKED"/>
+			<shout string_id="390250" when="ATTACKED"/>
+			<shout string_id="390251" when="ATTACKED"/>
+			<shout string_id="390252" when="IDLE"/>
+			<shout string_id="390253" when="IDLE"/>
+			<shout string_id="390254" when="IDLE"/>
+			<shout string_id="390255" when="ATTACK_BEGIN"/>
+			<shout string_id="390256" when="ATTACK_BEGIN"/>
+			<shout string_id="390257" when="ATTACK_BEGIN"/>
+			<shout string_id="390258" when="ATTACK_BEGIN"/>
+			<shout string_id="390259" when="ATTACKED"/>
+			<shout string_id="390260" when="ATTACKED"/>
+			<shout string_id="390261" when="ATTACKED"/>
+			<shout string_id="390262" when="ATTACK_BEGIN"/>
+			<shout string_id="390263" when="ATTACKED"/>
+			<shout string_id="390264" when="DIED"/>
+			<shout string_id="390265" when="DIED"/>
+			<shout string_id="390454" when="ATTACK_BEGIN"/>
+			<shout string_id="390455" when="ATTACKED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205020 205021 205022 205023 205024 205025 205026 205027 205028 205029 205030 205031 205032 205033 205034 205035 205036 205037 205038 205039 205040 205041">
-			<shout string_id="390354" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390355" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390356" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390357" when="SEE" param="username" type="SAY"/>
-			<shout string_id="390358" when="SEE" param="username" type="SAY"/>
+			<shout string_id="390354" when="SEE"/>
+			<shout string_id="390355" when="SEE"/>
+			<shout string_id="390356" when="SEE"/>
+			<shout string_id="390357" when="SEE"/>
+			<shout string_id="390358" when="SEE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205573" restrict_world="600020000">
 			<shout string_id="1500366" when="IDLE" pattern="1"/>
@@ -6017,32 +6017,32 @@
 			<shout string_id="1500371" when="IDLE" pattern="2"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798391">
-			<shout string_id="390462" when="IDLE" type="SAY"/>
-			<shout string_id="390463" when="IDLE" param="username" type="SAY"/>
+			<shout string_id="390462" when="IDLE"/>
+			<shout string_id="390463" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203068" restrict_world="210010000">
-			<shout string_id="390277" when="IDLE" type="SAY"/>
-			<shout string_id="390278" when="IDLE" type="SAY"/>
-			<shout string_id="390281" when="IDLE" type="SAY"/>
-			<shout string_id="390283" when="IDLE" type="SAY"/>
-			<shout string_id="390284" when="IDLE" type="SAY"/>
-			<shout string_id="390285" when="IDLE" type="SAY"/>
-			<shout string_id="390286" when="IDLE" type="SAY"/>
-			<shout string_id="390287" when="IDLE" type="SAY"/>
+			<shout string_id="390277" when="IDLE"/>
+			<shout string_id="390278" when="IDLE"/>
+			<shout string_id="390281" when="IDLE"/>
+			<shout string_id="390283" when="IDLE"/>
+			<shout string_id="390284" when="IDLE"/>
+			<shout string_id="390285" when="IDLE"/>
+			<shout string_id="390286" when="IDLE"/>
+			<shout string_id="390287" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203593 203594 203595 203596 203597 203598 203684 203685" restrict_world="220030000">
-			<shout string_id="390330" when="IDLE" type="SAY"/>
-			<shout string_id="390331" when="IDLE" type="SAY"/>
-			<shout string_id="390332" when="IDLE" type="SAY"/>
-			<shout string_id="390333" when="IDLE" type="SAY"/>
+			<shout string_id="390330" when="IDLE"/>
+			<shout string_id="390331" when="IDLE"/>
+			<shout string_id="390332" when="IDLE"/>
+			<shout string_id="390333" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203601 203602" restrict_world="220010000">
-			<shout string_id="390366" when="IDLE" type="SAY"/>
-			<shout string_id="390367" when="IDLE" type="SAY"/>
-			<shout string_id="390368" when="IDLE" type="SAY"/>
+			<shout string_id="390366" when="IDLE"/>
+			<shout string_id="390367" when="IDLE"/>
+			<shout string_id="390368" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205140 205141" restrict_world="220050000">
-			<shout string_id="390452" when="IDLE" param="username"/>
+			<shout string_id="390452" when="IDLE"/>
 			<shout string_id="390453" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800186" restrict_world="600020000">
@@ -6064,30 +6064,30 @@
 			<shout string_id="462734" when="IDLE" pattern="5"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203072" restrict_world="210010000">
-			<shout string_id="390282" when="IDLE" type="SAY"/>
+			<shout string_id="390282" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="730196" restrict_world="300110000">
-			<shout string_id="390456" when="IDLE" type="SAY"/>
-			<shout string_id="390457" when="IDLE" type="SAY"/>
-			<shout string_id="390458" when="IDLE" type="SAY"/>
+			<shout string_id="390456" when="IDLE"/>
+			<shout string_id="390457" when="IDLE"/>
+			<shout string_id="390458" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="204829 700362">
-			<shout string_id="390447" when="IDLE" type="SAY"/>
-			<shout string_id="390448" when="IDLE" type="SAY"/>
-			<shout string_id="390449" when="IDLE" type="SAY"/>
+			<shout string_id="390447" when="IDLE"/>
+			<shout string_id="390448" when="IDLE"/>
+			<shout string_id="390449" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="831708" restrict_world="600080000">
 			<shout string_id="1501013" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800337">
-			<shout string_id="390711" when="IDLE" type="SAY"/>
-			<shout string_id="390712" when="IDLE" type="SAY"/>
-			<shout string_id="390713" when="IDLE" type="SAY"/>
+			<shout string_id="390711" when="IDLE"/>
+			<shout string_id="390712" when="IDLE"/>
+			<shout string_id="390713" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800338">
-			<shout string_id="390714" when="IDLE" type="SAY"/>
-			<shout string_id="390715" when="IDLE" type="SAY"/>
-			<shout string_id="390716" when="IDLE" type="SAY"/>
+			<shout string_id="390714" when="IDLE"/>
+			<shout string_id="390715" when="IDLE"/>
+			<shout string_id="390716" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800367">
 			<shout string_id="1500613" when="IDLE" pattern="1"/>
@@ -6134,29 +6134,29 @@
 			<shout string_id="1500678" when="IDLE" pattern="3"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203086" restrict_world="210010000">
-			<shout string_id="390000" when="IDLE" type="SAY"/>
-			<shout string_id="390001" when="IDLE" type="SAY"/>
-			<shout string_id="390002" when="IDLE" type="SAY"/>
+			<shout string_id="390000" when="IDLE"/>
+			<shout string_id="390001" when="IDLE"/>
+			<shout string_id="390002" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203642" restrict_world="220030000">
-			<shout string_id="390325" when="IDLE" pattern="quest" param="2240"/>
-			<shout string_id="390326" when="IDLE" pattern="quest" param="2240"/>
-			<shout string_id="390327" when="IDLE" pattern="quest" param="2240"/>
-			<shout string_id="390328" when="IDLE" pattern="quest" param="2240"/>
-			<shout string_id="390337" when="ATTACKED" type="SAY"/>
-			<shout string_id="390338" when="ATTACKED" type="SAY"/>
-			<shout string_id="390339" when="ATTACKED" type="SAY"/>
+			<shout string_id="390325" when="IDLE" pattern="quest"/>
+			<shout string_id="390326" when="IDLE" pattern="quest"/>
+			<shout string_id="390327" when="IDLE" pattern="quest"/>
+			<shout string_id="390328" when="IDLE" pattern="quest"/>
+			<shout string_id="390337" when="ATTACKED"/>
+			<shout string_id="390338" when="ATTACKED"/>
+			<shout string_id="390339" when="ATTACKED"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800204" restrict_world="300410000">
 			<shout string_id="1500368" when="IDLE" pattern="1"/>
 			<shout string_id="1500369" when="IDLE" pattern="2"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800203" restrict_world="600030000">
-			<shout string_id="390632" when="IDLE" type="SAY"/>
-			<shout string_id="390633" when="IDLE" type="SAY"/>
-			<shout string_id="390634" when="IDLE" type="SAY"/>
-			<shout string_id="390635" when="IDLE" type="SAY"/>
-			<shout string_id="390636" when="IDLE" type="SAY"/>
+			<shout string_id="390632" when="IDLE"/>
+			<shout string_id="390633" when="IDLE"/>
+			<shout string_id="390634" when="IDLE"/>
+			<shout string_id="390635" when="IDLE"/>
+			<shout string_id="390636" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="801148 801149" restrict_world="600060000">
 			<shout string_id="1500947" when="IDLE"/>
@@ -6178,7 +6178,7 @@
 			<shout string_id="1500946" when="IDLE" pattern="0"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="209597" restrict_world="600060000">
-			<shout string_id="1500923" when="SEE" pattern="0" param="username"/>
+			<shout string_id="1500923" when="SEE" pattern="0"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="209615" restrict_world="600060000">
 			<shout string_id="1500941" when="IDLE" pattern="0"/>
@@ -6218,7 +6218,7 @@
 			<shout string_id="1500935" when="IDLE" pattern="0"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798221 798222" restrict_world="210060000">
-			<shout string_id="390450" when="IDLE" param="username"/>
+			<shout string_id="390450" when="IDLE"/>
 			<shout string_id="390451" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203590 203591 203694 203695 799931">
@@ -6237,29 +6237,29 @@
 			<shout string_id="390227" when="WALK_WAYPOINT"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203065" restrict_world="210010000">
-			<shout string_id="390273" when="ATTACKED" type="SAY"/>
-			<shout string_id="390274" when="ATTACKED" type="SAY"/>
-			<shout string_id="390279" when="IDLE" type="SAY"/>
-			<shout string_id="390280" when="IDLE" type="SAY"/>
+			<shout string_id="390273" when="ATTACKED"/>
+			<shout string_id="390274" when="ATTACKED"/>
+			<shout string_id="390279" when="IDLE"/>
+			<shout string_id="390280" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798392">
-			<shout string_id="390466" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390467" when="IDLE" type="SAY"/>
+			<shout string_id="390466" when="IDLE"/>
+			<shout string_id="390467" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203192" restrict_world="210010000">
-			<shout string_id="390003" when="IDLE" type="SAY"/>
-			<shout string_id="390004" when="IDLE" type="SAY"/>
-			<shout string_id="390005" when="IDLE" type="SAY"/>
+			<shout string_id="390003" when="IDLE"/>
+			<shout string_id="390004" when="IDLE"/>
+			<shout string_id="390005" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203890" restrict_world="110010000">
-			<shout string_id="390229" when="IDLE" type="SAY"/>
-			<shout string_id="390230" when="IDLE" type="SAY"/>
-			<shout string_id="390231" when="IDLE" type="SAY"/>
-			<shout string_id="390232" when="IDLE" type="SAY"/>
+			<shout string_id="390229" when="IDLE"/>
+			<shout string_id="390230" when="IDLE"/>
+			<shout string_id="390231" when="IDLE"/>
+			<shout string_id="390232" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798390">
-			<shout string_id="390464" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390465" when="IDLE" type="SAY"/>
+			<shout string_id="390464" when="IDLE"/>
+			<shout string_id="390465" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="800189" restrict_world="600020000">
 			<shout string_id="1500512" when="IDLE" pattern="1"/>
@@ -6274,10 +6274,10 @@
 			<shout string_id="1500515" when="IDLE" pattern="2"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203686" restrict_world="220030000">
-			<shout string_id="390362" when="IDLE" type="SAY"/>
-			<shout string_id="390363" when="IDLE" type="SAY"/>
-			<shout string_id="390364" when="IDLE" type="SAY"/>
-			<shout string_id="390365" when="IDLE" type="SAY"/>
+			<shout string_id="390362" when="IDLE"/>
+			<shout string_id="390363" when="IDLE"/>
+			<shout string_id="390364" when="IDLE"/>
+			<shout string_id="390365" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="203647 203648 204282 204283 204284 204285 204286 205181 205218 205219 205223 205224 205233 205240 205241 205242 205243 205244 205245 205246 205247 205562 205563 205564 205628 205629 205630 205631 205632 205633 205643 205644 205645 205830 205831 205852 205853 205875 205876 205877 205884 205885 205905 205906 205907 205908 205966 205967 205968 205974 205975 278148 278149 278150 278151 278153 278648 278649 278650 278651 278653 278654 279001 279002 279003 279004 279005 279006 279007 279008 279009 279010 279011 279012 279013 279014 279015 279016 279017 279018 279019 279020 279022 279023 279024 279025 279026 279027 279028 279033 279034 279035 279036 279037 279038 279058 279059 279060 279061 798006 798009 798010 798011 798012 798013 798014 798015 798016 798017 798018 798019 798020 798021 798022 798023 798024 798025 798026 798027 798028 798029 798030 798031 798032 798033 798034 798035 798036 798037 798038 798039 798040 798041 798042 798043 798045 798046 798047 798048 798049 798050 798051 798052 798053 798054 798055 798056 798057 798058 798059 798060 798061 798062 798063 798064 798065 798066 798067 798068 798069 798070 798071 798072 798073 798074 798075 798076 798077 798078 798079 798080 798081 798082 798083 798084 798085 798086 798087 798088 798089 798090 798091 798092 798093 798094 798095 798096 798097 798102 798103 798104 798105 798106 798107 798108 798109 798110 798114 798115 798116 798117 798118 798119 798120 798123 798125 798126 798127 798131 798132 798133 798134 798135 798136 798137 798138 798139 798151 798152 798153 798167 798168 798169 798185 798186 798193 798200 798201 798202 798203 798204 798205 798217 798218 798223 798311 798314 798315 798318 798319 798320 798321 798322 798331 798332 798333 798337 798357 798358 798375 798376 798378 798379 798418 798419 798420 798421 798422 798423 798430 798431 798432 798433 798434 798435 798462 798463 798912 798913 798948 798980 798984 799054 799055 799056 799063 799076 799085 799086 799087 799093 799211 799212 799367 799368 799369 799376 799424 799425 799426 799507 799508 799509 799510 799511 799512 799522 799523 799524 799539 799546 799547 799602 799609 799610 799611 799612 799882 799883 799884 799885 799886 799887 799888 799889 799890 799891 799892 799893 800178 800299 800300 800305 800306 800309 800310 800317 800318 800388 800410 800411 800506 801030 801031 830057 830076 830077 830078 830079 830080 830081 830082 830083 830141 830160 830161 830162 830163 830164 830165 830166 830167 830168 830169 830212 830213 830214 830215 830520 830521 830522 830523 830524 830525 830526 830527 830540 830541 830542 830543 830544 830545 830546 830547 830548 830549 830550 830551 830552 830553 830554 830555 830584 830585 830660 830661 830662 830663" restrict_world="600030000">
 			<shout string_id="390681" when="IDLE" pattern="1"/>
@@ -6290,8 +6290,8 @@
 			<shout string_id="342360" when="IDLE" pattern="quest"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799605 799606">
-			<shout string_id="390484" when="IDLE" type="SAY"/>
-			<shout string_id="390485" when="IDLE" type="SAY"/>
+			<shout string_id="390484" when="IDLE"/>
+			<shout string_id="390485" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="205495" restrict_world="300260000">
 			<shout string_id="1500441" when="IDLE" pattern="1"/>
@@ -6300,36 +6300,36 @@
 			<shout string_id="1500444" when="WAKEUP"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="798393">
-			<shout string_id="390468" when="IDLE" param="username" type="SAY"/>
-			<shout string_id="390469" when="IDLE" param="mainslotitem" type="SAY"/>
+			<shout string_id="390468" when="IDLE"/>
+			<shout string_id="390469" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="730030" restrict_world="210040000">
-			<shout string_id="390348" when="IDLE" type="SAY"/>
-			<shout string_id="390349" when="IDLE" type="SAY"/>
-			<shout string_id="390350" when="IDLE" type="SAY"/>
+			<shout string_id="390348" when="IDLE"/>
+			<shout string_id="390349" when="IDLE"/>
+			<shout string_id="390350" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="730031" restrict_world="210040000">
-			<shout string_id="390351" when="IDLE" type="SAY"/>
-			<shout string_id="390352" when="IDLE" type="SAY"/>
-			<shout string_id="390353" when="IDLE" type="SAY"/>
+			<shout string_id="390351" when="IDLE"/>
+			<shout string_id="390352" when="IDLE"/>
+			<shout string_id="390353" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="799021 799604">
-			<shout string_id="390482" when="IDLE" type="SAY"/>
-			<shout string_id="390483" when="IDLE" type="SAY"/>
+			<shout string_id="390482" when="IDLE"/>
+			<shout string_id="390483" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="NPC_AI_DevanionQuest">
 		<shout_npcs npc_ids="204146">
-			<shout string_id="390400" when="IDLE" type="SAY"/>
-			<shout string_id="390401" when="IDLE" type="SAY"/>
-			<shout string_id="390402" when="IDLE" type="SAY"/>
+			<shout string_id="390400" when="IDLE"/>
+			<shout string_id="390401" when="IDLE"/>
+			<shout string_id="390402" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="NPC_Flee">
 		<shout_npcs npc_ids="799377 799378" restrict_world="220070000">
 			<shout string_id="390476" when="IDLE" poll_delay="5000"/>
 			<shout string_id="390477" when="IDLE"/>
-			<shout string_id="390478" when="IDLE" param="userclass"/>
+			<shout string_id="390478" when="IDLE"/>
 			<shout string_id="390442" when="IDLE" pattern="1"/> <!-- Dredgion ship warning -->
 			<shout string_id="390443" when="IDLE" pattern="2"/> <!-- Siege battles in locs 1142-1145 -->
 			<shout string_id="390444" when="IDLE" pattern="3"/> <!-- Siege battles in locs 1132, 1251 by elyos -->
@@ -6343,7 +6343,7 @@
 		<shout_npcs npc_ids="799064 799065" restrict_world="210050000">
 			<shout string_id="390471" when="IDLE" poll_delay="5000"/>
 			<shout string_id="390472" when="IDLE"/>
-			<shout string_id="390470" when="IDLE" param="userclass"/>
+			<shout string_id="390470" when="IDLE"/>
 			<shout string_id="390437" when="IDLE" pattern="1"/> <!-- Dredgion ship warning -->
 			<shout string_id="390438" when="IDLE" pattern="2"/> <!-- Siege battles in locs 1142-1145 -->
 			<shout string_id="390439" when="IDLE" pattern="3"/> <!-- Siege battles in locs 1141, 1211 by asmos -->
@@ -6545,9 +6545,9 @@
 	</shout_group>
 	<shout_group client_ai="PrisonerLight">
 		<shout_npcs npc_ids="798323 798324 798325 798326 798327 798328 798329 798330" restrict_world="300110000">
-			<shout string_id="341812" when="DIED" type="SAY"/>
-			<shout string_id="341813" when="DIED" type="SAY"/>
-			<shout string_id="341814" when="DIED" type="SAY"/>
+			<shout string_id="341812" when="DIED"/>
+			<shout string_id="341813" when="DIED"/>
+			<shout string_id="341814" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Raksha_Dragon_NNmd">
@@ -6699,18 +6699,18 @@
 	</shout_group>
 	<shout_group client_ai="Rune_FrostNmd_PazeCheck_NoShow_Sum4">
 		<shout_npcs npc_ids="801766 801767 801818 801819" restrict_world="301120000">
-			<shout string_id="390871" when="IDLE" type="SAY"/>
-			<shout string_id="390872" when="IDLE" type="SAY"/>
-			<shout string_id="390873" when="IDLE" type="SAY"/>
-			<shout string_id="390874" when="IDLE" type="SAY"/>
-			<shout string_id="390875" when="IDLE" type="SAY"/>
+			<shout string_id="390871" when="IDLE"/>
+			<shout string_id="390872" when="IDLE"/>
+			<shout string_id="390873" when="IDLE"/>
+			<shout string_id="390874" when="IDLE"/>
+			<shout string_id="390875" when="IDLE"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="801768 801820 801821" restrict_world="301120000">
-			<shout string_id="390876" when="IDLE" type="SAY"/>
-			<shout string_id="390877" when="IDLE" type="SAY"/>
-			<shout string_id="390878" when="IDLE" type="SAY"/>
-			<shout string_id="390879" when="IDLE" type="SAY"/>
-			<shout string_id="390880" when="IDLE" type="SAY"/>
+			<shout string_id="390876" when="IDLE"/>
+			<shout string_id="390877" when="IDLE"/>
+			<shout string_id="390878" when="IDLE"/>
+			<shout string_id="390879" when="IDLE"/>
+			<shout string_id="390880" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Rune_FrostNmd_RealImitaion">
@@ -6764,7 +6764,7 @@
 	</shout_group>
 	<shout_group client_ai="Shulack_FeA">
 		<shout_npcs npc_ids="214967">
-			<shout string_id="341975" when="IDLE" type="SAY"/>
+			<shout string_id="341975" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="Shulack_PeA">
@@ -6806,7 +6806,7 @@
 			<shout string_id="340987" when="ATTACK_K" skill_no="3"/>
 		</shout_npcs>
 		<shout_npcs npc_ids="213551">
-			<shout string_id="341118" when="IDLE" type="SAY"/>
+			<shout string_id="341118" when="IDLE"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="SleepLiz_FeA">

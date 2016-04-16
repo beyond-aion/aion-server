@@ -1,8 +1,5 @@
 package ai.instance.tiamatStrongHold;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -15,10 +12,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -32,7 +31,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (getOwner().getNpcId() == 800438) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 390852, getOwner().getObjectId(), 0, 1000);
+			PacketSendUtility.broadcastMessage(getOwner(), 390852, 1000);
 		}
 	}
 
@@ -62,8 +61,8 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 			return;
 		switch (owner) {
 			case 800435:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 390837, getOwner().getObjectId(), 0, 0);
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 390838, getOwner().getObjectId(), 0, 4000);
+				PacketSendUtility.broadcastMessage(getOwner(), 390837);
+				PacketSendUtility.broadcastMessage(getOwner(), 390838, 4000);
 				killGuardCaptain();
 				break;
 		}
@@ -83,7 +82,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 
 	private void openSuramaDoor() {
 		if (getOwner().getNpcId() == 800436) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 390835, getOwner().getObjectId(), 0, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 390835);
 			getPosition().getWorldMapInstance().getDoors().get(56).setOpen(true);
 			AI2Actions.deleteOwner(this);
 		}

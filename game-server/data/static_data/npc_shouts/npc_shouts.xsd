@@ -25,19 +25,11 @@
     <xs:attribute name="when" type="ShoutEventType" use="required"/>
     <xs:attribute name="pattern" type="xs:string" use="optional"/>
     <xs:attribute name="param" type="xs:string" use="optional"/>
-    <xs:attribute name="type" type="ShoutType" use="optional" default="BROADCAST"/>
     <xs:attribute name="skill_no" type="xs:int" use="optional" default="0"/>
     <xs:attribute name="poll_delay" type="xs:int" use="optional" default="0"/>
   </xs:complexType>
   <xs:simpleType name="NpcList">
     <xs:list itemType="xs:int"/>
-  </xs:simpleType>
-  <xs:simpleType name="ShoutType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="BROADCAST"/>
-      <xs:enumeration value="SAY"/>
-      <xs:enumeration value="HEAR"/>
-    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="ShoutEventType">
     <xs:restriction base="xs:string">

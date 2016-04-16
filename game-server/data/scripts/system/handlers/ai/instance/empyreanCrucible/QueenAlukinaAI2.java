@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -61,7 +61,7 @@ public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
 		switch (percent) {
 			case 75:
 				scheduleSkill(17900, 4500);
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 340487, getObjectId(), 0, 10000);
+				PacketSendUtility.broadcastMessage(getOwner(), 340487, 10000);
 				scheduleSkill(17899, 14000);
 				scheduleSkill(17900, 18000);
 				break;

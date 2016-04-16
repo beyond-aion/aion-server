@@ -34,7 +34,6 @@ public class DredgionScoreInfo extends InstanceScoreInfo {
 		writeD(buf, instanceScoreType.isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
 		writeD(buf, elyosScore);
 		writeD(buf, asmosScore);
-		writeH(buf, 0); // [3.5]
 		for (DredgionReward.DredgionRooms dredgionRoom : dredgionReward.getDredgionRooms()) {
 			writeC(buf, dredgionRoom.getState());
 		}

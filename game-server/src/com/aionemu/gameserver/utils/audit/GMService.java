@@ -10,6 +10,7 @@ import javolution.util.FastSet;
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -99,7 +100,7 @@ public class GMService {
 
 	public void broadcastMessageToGMs(String message) {
 		for (Player gm : getGms()) {
-			PacketSendUtility.sendYellowMessage(gm, message);
+			PacketSendUtility.sendMessage(gm, message, ChatType.YELLOW);
 		}
 	}
 

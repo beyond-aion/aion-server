@@ -37,7 +37,7 @@ public class NpcSkill extends AdminCommand {
 		List<NpcSkillTemplate> list = DataManager.NPC_SKILL_DATA.getNpcSkillList(target.getNpcId()).getNpcSkills();
 
 		for (NpcSkillTemplate skill : list)
-			strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillid() + ".\n");
+			strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillId() + ".\n");
 		showAllLines(admin, strbld.toString());
 	}
 

@@ -82,7 +82,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 					if(var == 3) {
 						if(checkItemExistence(env, 188020000, 1, true))
 							return useQuestObject(env, 3, 3, true, false);
-						PacketSendUtility.sendWhiteMessageOnCenter(player, "You need a Temporal Stone!"); // @ToDo: send corrent message id: 1111203
+						PacketSendUtility.sendMonologue(player, 1111203); // I need an Artifact Activation Stone!
 					}
 					break;
 				case 790001: {

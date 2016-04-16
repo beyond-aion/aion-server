@@ -3,16 +3,15 @@ package ai.instance.danuarReliquary;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -31,7 +30,7 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 
 				@Override
 				public void run() {
-					sendMsg(1500743);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500743);
 					onSpawnSkills();
 				}
 
@@ -44,7 +43,7 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 			return;
 		switch (stage) {
 			case 1:
-				sendMsg(1500750);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500750);
 				rendSpace(true);
 				spawn(284659, 256.57727f, 278.18225f, 241.54623f, (byte) 90);
 				spawn(284660, 246.65663f, 275.51996f, 241.54623f, (byte) 96);
@@ -260,10 +259,6 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 			}
 
 		}, 12000, 20000);
-	}
-
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 	}
 
 	private void cancelSkillTask() {

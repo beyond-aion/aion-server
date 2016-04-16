@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -17,10 +13,13 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -48,7 +47,7 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 			spawn(282348, 988.57f, 1064.3f, 70f, (byte) 38);
 			spawn(282349, 959.04f, 1072.83f, 70f, (byte) 13);
 			startPhaseTask();
-			sendMsg(1500460);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500460);
 		}
 	}
 
@@ -82,7 +81,7 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
 		setStateIfNot(AIState.WALKING);
-		sendMsg(1500461);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500461);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -168,10 +167,6 @@ public class CadellaAI2 extends AggressiveNpcAI2 {
 				npc.getController().onDelete();
 			}
 		}
-	}
-
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 	}
 
 	@Override

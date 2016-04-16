@@ -4,18 +4,19 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien, xTz
@@ -33,7 +34,7 @@ public class TualiAI2 extends AggressiveNpcAI2 {
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isStart.compareAndSet(false, true)) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1500454, getObjectId(), true, 0, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500454);
 			scheduleSkills();
 
 			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
@@ -50,7 +51,7 @@ public class TualiAI2 extends AggressiveNpcAI2 {
 							size++;
 							rndSpawn(282307);
 						}
-						NpcShoutsService.getInstance().sendMsg(getOwner(), 1401378, 6000);
+						PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDElemental1_Prime_Debuff_Dispel(), 6000);
 					}
 				}
 
@@ -79,8 +80,8 @@ public class TualiAI2 extends AggressiveNpcAI2 {
 
 	private void buff() {
 		SkillEngine.getInstance().getSkill(getOwner(), 19511, 60, getOwner()).useNoAnimationSkill();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500456, getObjectId(), true, 0, 0);
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1401041, 3500);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500456);
+		PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDElemental1_GolemPrime_Forest_Overclock(), 3500);
 	}
 
 	private void rndSpawn(int npcId) {
@@ -96,7 +97,7 @@ public class TualiAI2 extends AggressiveNpcAI2 {
 	public void handleDied() {
 		cancelTask();
 		super.handleDied();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1500457, getObjectId(), true, 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500457);
 	}
 
 	private void cancelTask() {

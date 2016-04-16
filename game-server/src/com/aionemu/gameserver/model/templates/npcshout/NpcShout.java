@@ -49,9 +49,6 @@ public class NpcShout {
 	@XmlAttribute(name = "param")
 	protected String param;
 
-	@XmlAttribute(name = "type")
-	protected ShoutType type;
-
 	@XmlAttribute(name = "skill_no")
 	protected Integer skillNo;
 
@@ -90,17 +87,6 @@ public class NpcShout {
 	 */
 	public String getParam() {
 		return param;
-	}
-
-	/**
-	 * Gets the value of the type property.
-	 * 
-	 * @return possible object is {@link ShoutType }
-	 */
-	public ShoutType getShoutType() {
-		if (type == null)
-			return ShoutType.BROADCAST;
-		return type;
 	}
 
 	/**

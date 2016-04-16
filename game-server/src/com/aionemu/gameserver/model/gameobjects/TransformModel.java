@@ -98,7 +98,7 @@ public class TransformModel {
 
 				@Override
 				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(owner.getObjectId(), 0, owner.getType(player), 0));
+					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(owner.getObjectId(), 0, owner.getType(player).getId(), 0));
 				}
 			});
 		} else if (owner instanceof Player) {
@@ -106,7 +106,7 @@ public class TransformModel {
 
 				@Override
 				public void visit(Npc npc) {
-					PacketSendUtility.sendPacket((Player) owner, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(owner), 0));
+					PacketSendUtility.sendPacket((Player) owner, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(owner).getId(), 0));
 				}
 			});
 		}

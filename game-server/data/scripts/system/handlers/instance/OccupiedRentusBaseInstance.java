@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,8 +30,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private AtomicBoolean isRaceKnown = new AtomicBoolean(false);
-	private AtomicBoolean isXastaEventStarted = new AtomicBoolean(false);
+	private AtomicBoolean isRaceKnown = new AtomicBoolean();
+	private AtomicBoolean isXastaEventStarted = new AtomicBoolean();
 
 	@Override
 	public void onDie(final Npc npc) {
@@ -51,6 +50,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 236298: // Kuhara
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
+				doors.get(43).setOpen(false);
 				doors.get(150).setOpen(true);
 				npc.getController().onDelete();
 				break;
@@ -59,12 +59,13 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 236300: // Brigade General Vasharti
 				deleteNpc(799669);
+				doors.get(70).setOpen(true);
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86);
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500417, ariana.getObjectId(), 0, 5000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500418, ariana.getObjectId(), 0, 8000);
-				NpcShoutsService.getInstance().sendMsg(ariana, 1500419, ariana.getObjectId(), 0, 11000);
+				PacketSendUtility.broadcastMessage(ariana, 1500417, 5000);
+				PacketSendUtility.broadcastMessage(ariana, 1500418, 8000);
+				PacketSendUtility.broadcastMessage(ariana, 1500419, 11000);
 				spawnEndEvent(800227, "3002800003", 2000);
 				spawnEndEvent(800227, "3002800004", 2000);
 				spawnEndEvent(800228, "3002800007", 4000);
@@ -87,6 +88,19 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				spawn(217300, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				despawnNpc(npc);
 				break;
+		}
+	}
+	
+	@Override
+	public void onAggro(Npc npc) {
+		switch (npc.getNpcId()) {
+		case 236298: // Kuhara
+			doors.get(43).setOpen(true);
+			PacketSendUtility.broadcastMessage(npc, 1500393);
+			break;
+		case 236300: // Vasharti
+			doors.get(70).setOpen(false);
+			break;
 		}
 	}
 

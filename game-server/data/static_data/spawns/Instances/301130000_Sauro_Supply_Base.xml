@@ -1,61 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="301130000">
-		<!-- Afflicted Combatant -->
-		<spawn npc_id="284440">
-			<spot x="291.52863" y="890.2809" z="411.45676" h="60"/>
-			<spot x="293.87274" y="892.06396" z="411.37183" h="30"/>
-			<spot x="294.0236" y="888.3518" z="411.45676"/>
-			<spot x="306.23566" y="904.3292" z="411.45676" h="90"/>
-			<spot x="308.57977" y="906.1123" z="411.45676" h="30"/>
-			<spot x="308.73062" y="902.40015" z="411.45676"/>
-			<spot x="311.61057" y="877.1111" z="411.33" h="60"/>
-			<spot x="313.90564" y="878.8968" z="411.33" h="45"/>
-			<spot x="314.10553" y="875.182" z="411.33" h="105"/>
-		</spawn>
 		<!-- Archmagus Sayahum -->
 		<spawn npc_id="233257">
 			<spot x="263.4655" y="456.98572" z="156.70569" h="90"/>
-		</spawn>
-		<!-- BIDVritra_Base_Boss_StartNPC -->
-		<spawn npc_id="284668">
-			<spot x="109.77601" y="889.8691" z="411.53635" h="60"/>
-			<spot x="307.9712" y="889.81006" z="411.5354" h="60"/>
-			<spot x="503.84528" y="889.6713" z="411.537" h="60"/>
-			<spot x="703.90173" y="889.7079" z="411.53632" h="60"/>
-			<spot x="899.8686" y="889.7701" z="411.537" h="60"/>
-		</spawn>
-		<!-- IDVritra_Base_GameStart -->
-		<spawn npc_id="284701">
-			<spot x="639.6475" y="211.23352" z="190.875"/>
-		</spawn>
-		<!-- BIDVritra_Base_Temp01 -->
-		<spawn npc_id="284670">
-			<spot x="888.235" y="877.911" z="411.45676" h="60"/>
-			<spot x="899.64044" y="874.6363" z="411.45676" h="60"/>
-			<spot x="910.5698" y="877.9197" z="411.45676" h="60"/>
-		</spawn>
-		<!-- BIDVritra_Base_Temp02 -->
-		<spawn npc_id="284671">
-			<spot x="888.2383" y="901.4633" z="411.45676" h="60"/>
-			<spot x="899.5732" y="905.0094" z="411.45676" h="60"/>
-			<spot x="910.32526" y="900.78186" z="411.45676" h="60"/>
-		</spawn>
-		<!-- BIDVritra_Base_Temp03 -->
-		<spawn npc_id="284672">
-			<spot x="899.8189" y="889.72455" z="411.5368" h="60"/>
-		</spawn>
-		<!-- Brainwashed Combatant -->
-		<spawn npc_id="284438">
-			<spot x="489.19495" y="887.62885" z="411.44113"/>
-			<spot x="506.9828" y="875.74725" z="411.33" h="33"/>
-			<spot x="510.444" y="902.2241" z="411.33" h="75"/>
-		</spawn>
-		<!-- Brainwashed Spellcaster -->
-		<spawn npc_id="284439">
-			<spot x="489.41266" y="892.1056" z="411.33"/>
-			<spot x="506.71103" y="904.02" z="411.33" h="87"/>
-			<spot x="510.34674" y="878.0253" z="411.33" h="45"/>
 		</spawn>
 		<!-- Brigade General Sheba -->
 		<spawn npc_id="230858">
@@ -70,7 +18,7 @@
 			<spot x="146.14592" y="429.8655" z="150.77364"/>
 		</spawn>
 		<!-- Commander Ranodim -->
-		<spawn npc_id="233316">
+		<spawn npc_id="230852">
 			<spot x="289.8795" y="343.75858" z="159.34445" h="90"/>
 		</spawn>
 		<!-- Contaminated Bloodwing -->
@@ -100,10 +48,6 @@
 		<spawn npc_id="233258">
 			<spot x="495.6287" y="533.7886" z="181.74464" h="90"/>
 		</spawn>
-		<!-- Gatekeeper Stranir - invisible system npc 
-		<spawn npc_id="284673">
-			<spot x="379.81992" y="292.5214" z="158.96407" h="90"/>
-		</spawn> -->
 		<!-- Gatekeeper Stranir -->
 		<spawn npc_id="233255">
 			<spot x="382.61844" y="292.23105" z="159.26079"/>
@@ -120,14 +64,6 @@
 		<!-- Guard Captain Rohuka -->
 		<spawn npc_id="230849">
 			<spot x="600.34686" y="354.4385" z="202.91283"/>
-		</spawn>
-		<!-- Inquisitor Jardaraka -->
-		<spawn npc_id="230856">
-			<spot x="503.60672" y="889.65906" z="411.53677" h="60"/>
-		</spawn>
-		<!-- Medical Officer Surkihan -->
-		<spawn npc_id="230855">
-			<spot x="307.83704" y="889.7726" z="411.5358" h="60"/>
 		</spawn>
 		<!-- Military Supply Base Flame Cannon -->
 		<spawn npc_id="284453">
@@ -175,8 +111,8 @@
 		<!-- Sheban Legion Ambusher -->
 		<spawn npc_id="230792">
 			<spot x="218.39" y="429.29" z="158.79059" h="90" walker_id="81A571ECA5C22C6BCC7E3F40B881DAF1B6C9983B"/>
-			<spot x="293.87756" y="337.73004" z="159.36792" h="90"/>
-			<spot x="293.87756" y="337.73004" z="159.39603" h="90"/>
+			<spot x="293.88" y="337.73" z="159.37" h="90"/>
+			<spot x="286.09" y="337.79" z="159.37" h="90"/>
 			<spot x="659.46" y="245.96" z="190.875" h="90" walker_id="65CDB06A7A9CA1D6938F1A91238AA969FB2A214C"/>
 		</spawn>
 		<!-- Sheban Legion Ambusher -->
@@ -192,7 +128,7 @@
 		</spawn> -->
 		<!-- Sheban Legion Ambusher -->
 		<spawn npc_id="233277">
-			<spot x="289.75497" y="433.411" z="158.95453"/>
+			<spot x="289.88" y="429.61" z="158.954"/>
 			<spot x="479.37" y="429.74" z="182.1956" h="60" walker_id="8414C1A26D8F01E857D420CFEEA8927A47200FFF"/>
 			<spot x="480.07785" y="435.25272" z="184.16982" h="30"/>
 		</spawn>
@@ -229,7 +165,7 @@
 			<spot x="571.49176" y="487.63068" z="191.98903"/>
 		</spawn>
 		<!-- Sheban Legion Bodyguard -->
-		<spawn npc_id="230826" respawn_time="295">
+		<spawn npc_id="230826">
 			<spot x="442.99243" y="448.43665" z="182.09772" h="30"/>
 			<spot x="443.38834" y="450.95374" z="182.37857" h="82"/>
 			<spot x="453.11" y="464.24" z="182.0713" h="82" walker_id="6297C57FA88B164B4AE6100CD27350BE82C36D5A"/>
@@ -261,16 +197,12 @@
 			<spot x="670.4695" y="354.25208" z="203.68098" h="75"/>
 		</spawn>
 		<!-- Sheban Legion Scout -->
-		<spawn npc_id="230830" respawn_time="295">
+		<spawn npc_id="230830">
 			<spot x="444.86887" y="449.78113" z="182.0" h="48"/>
 			<spot x="497.23819" y="515.54028" z="181.84648" h="48"/>
 			<spot x="606.79773" y="461.35864" z="191.71703" h="40"/>
 			<spot x="617.37805" y="215.2439" z="192.46178"/>
 			<spot x="657.66956" y="215.9304" z="192.37367" h="60"/>
-		</spawn>
-		<!-- Sly Uterunerk -->
-		<spawn npc_id="230854">
-			<spot x="109.83206" y="889.8425" z="411.5362" h="60"/>
 		</spawn>
 		<!-- Tamed Spaller Fighter -->
 		<spawn npc_id="230838">

@@ -1,17 +1,16 @@
 package ai.instance.danuarReliquary;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -30,7 +29,7 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					sendMsg(1500740);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500740);
 				}
 			}
 
@@ -46,10 +45,6 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 			}
 
 		}, 3000);
-	}
-
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 	}
 
 	@Override
@@ -97,7 +92,7 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75 && stage == 0) {
 			stage = 1;
-			sendMsg(1500743);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500743);
 			SkillEngine.getInstance().getSkill(getOwner(), 21165, 1, getOwner()).useSkill();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 

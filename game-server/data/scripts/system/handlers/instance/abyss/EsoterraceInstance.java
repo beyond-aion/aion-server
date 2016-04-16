@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -84,7 +83,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				// keening sirokin treasure chest
 				Npc keeningSirokin = getNpc(799580);
 				spawn(701025, 1038.63f, 987.74f, 328.356f, (byte) 0, 725);
-				NpcShoutsService.getInstance().sendMsg(keeningSirokin, 342359, keeningSirokin.getObjectId(), 0, 0);
+				PacketSendUtility.broadcastMessage(keeningSirokin, 342359);
 				keeningSirokin.getController().onDelete();
 				break;
 			case 217284:

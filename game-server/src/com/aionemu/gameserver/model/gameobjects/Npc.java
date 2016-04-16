@@ -1,10 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 import com.aionemu.gameserver.ai2.AI2Engine;
-import com.aionemu.gameserver.ai2.AITemplate;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.NpcController;
@@ -26,18 +24,13 @@ import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
-import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
-import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
-import com.aionemu.gameserver.model.templates.npcshout.ShoutType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
 
@@ -52,7 +45,6 @@ public class Npc extends Creature {
 	private boolean isQuestBusy = false;
 	private NpcSkillList skillList;
 	private WalkerGroupShift walkerGroupShift;
-	private long lastShoutedSeconds;
 	private String masterName = "";
 	private int creatorId = 0;
 	private int townId;
@@ -77,8 +69,6 @@ public class Npc extends Creature {
 
 		if (!aiOverride)
 			AI2Engine.getInstance().setupAI(objectTemplate.getAi(), this);
-
-		lastShoutedSeconds = System.currentTimeMillis() / 1000;
 	}
 
 	@Override
@@ -202,23 +192,22 @@ public class Npc extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return player.isEnemyFrom(this) || type == CreatureType.AGGRESSIVE.getId() || type == CreatureType.ATTACKABLE.getId();
+		return player.isEnemyFrom(this) || type == CreatureType.AGGRESSIVE || type == CreatureType.ATTACKABLE;
 	}
 
 	@Override
-	public int getType(Creature creature) {
-		int typeForPlayer = -1;
+	public CreatureType getType(Creature creature) {
 		if (TribeRelationService.isNone(this, creature))
-			typeForPlayer = CreatureType.PEACE.getId();
+			return CreatureType.PEACE;
 		else if (TribeRelationService.isAggressive(this, creature))
-			typeForPlayer = CreatureType.AGGRESSIVE.getId();
+			return CreatureType.AGGRESSIVE;
 		else if (TribeRelationService.isHostile(this, creature))
-			typeForPlayer = CreatureType.ATTACKABLE.getId();
+			return CreatureType.ATTACKABLE;
 		else if (TribeRelationService.isFriend(this, creature) || TribeRelationService.isNeutral(this, creature))
-			typeForPlayer = CreatureType.FRIEND.getId();
+			return CreatureType.FRIEND;
 		else if (TribeRelationService.isSupport(this, creature))
-			typeForPlayer = CreatureType.SUPPORT.getId();
-		return typeForPlayer;
+			return CreatureType.SUPPORT;
+		return CreatureType.NULL;
 	}
 
 	/**
@@ -334,7 +323,7 @@ public class Npc extends Creature {
 		return getObjectTemplate().getNpcDrop();
 	}
 
-	public void setNpcType(int newType) {
+	public void setNpcType(CreatureType newType) {
 		type = newType;
 	}
 
@@ -388,55 +377,7 @@ public class Npc extends Creature {
 		return DataManager.TRADE_LIST_DATA.getPurchaseTemplate(this.getNpcId()) != null && getObjectTemplate().hasPurchaseList();
 	}
 
-	public boolean mayShout(int delaySeconds) {
-		if (!DataManager.NPC_SHOUT_DATA.hasAnyShout(getPosition().getMapId(), getNpcId()))
-			return false;
-		return (System.currentTimeMillis() - lastShoutedSeconds) / 1000 >= delaySeconds;
-	}
-
 	public GroupDropType getGroupDrop() {
 		return getObjectTemplate().getGroupDrop();
 	}
-
-	public void shout(final NpcShout shout, final Creature target, final Object param, int delaySeconds) {
-		if (shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN && getLifeStats().isAlreadyDead()
-			|| !mayShout(delaySeconds))
-			return;
-
-		if (shout.getPattern() != null && !((AITemplate) getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
-			return;
-
-		final int shoutRange = getObjectTemplate().getMinimumShoutRange();
-		if (shout.getShoutType() == ShoutType.SAY && !(target instanceof Player) || target != null && !MathUtil.isIn3dRange(target, this, shoutRange))
-			return;
-
-		final Npc thisNpc = this;
-		final SM_SYSTEM_MESSAGE message = new SM_SYSTEM_MESSAGE(true, shout.getStringId(), getObjectId(), 1, param);
-		lastShoutedSeconds = System.currentTimeMillis() / 1000;
-
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (thisNpc.getLifeStats().isAlreadyDead() && shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN)
-					return;
-
-				// message for the specific player (when IDLE we are already broadcasting!!!)
-				if (shout.getShoutType() == ShoutType.SAY || shout.getWhen() == ShoutEventType.IDLE) {
-					// [RR] Should we have lastShoutedSeconds separated from broadcasts (??)
-					PacketSendUtility.sendPacket((Player) target, message);
-				} else {
-					Iterator<Player> iter = thisNpc.getKnownList().getKnownPlayers().values().iterator();
-					while (iter.hasNext()) {
-						Player kObj = iter.next();
-						if (kObj.getLifeStats().isAlreadyDead() || !kObj.isOnline())
-							continue;
-						if (MathUtil.isIn3dRange(kObj, thisNpc, shoutRange))
-							PacketSendUtility.sendPacket(kObj, message);
-					}
-				}
-			}
-		}, delaySeconds * 1000);
-	}
-
 }

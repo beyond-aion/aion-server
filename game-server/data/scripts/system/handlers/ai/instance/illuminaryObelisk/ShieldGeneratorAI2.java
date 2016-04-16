@@ -21,7 +21,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -64,7 +63,7 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 	}
 
 	protected void shout(int msgId) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msgId);
+		PacketSendUtility.broadcastToMap(getOwner(), msgId);
 	}
 
 	@Override

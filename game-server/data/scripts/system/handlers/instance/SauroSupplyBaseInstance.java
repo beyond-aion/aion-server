@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.WorldPosition;
  * @author Cheatkiller
  */
 @InstanceID(301130000)
-public class SauroBaseInstance extends GeneralInstanceHandler {
+public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
 	private static List<WorldPosition> chestPoints = new FastTable<>();
@@ -94,29 +94,29 @@ public class SauroBaseInstance extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
-			case 230849:
-				sendMsg(1401914);
-				doors.get(383).setOpen(true);
-				break;
-			case 230830:
-				sendMsg(1401915);
-				doors.get(59).setOpen(true);
-				break;
 			case 230837:
 				sendMsg(1401916);
 				doors.get(372).setOpen(true);
+				break;
+			case 230849:
+				sendMsg(1401914);
+				doors.get(383).setOpen(true);
 				break;
 			case 230850:
 				sendMsg(1401917);
 				doors.get(375).setOpen(true);
 				break;
+			case 230851:
+				sendMsg(1401915);
+				doors.get(59).setOpen(true);
+				break;
+			case 230852: // Ranodim
+				sendMsg(1401919);
+				doors.get(388).setOpen(true);
+				break;
 			case 233255:
 				sendMsg(1401918);
 				doors.get(378).setOpen(true);
-				break;
-			case 233316:
-				sendMsg(1401919);
-				doors.get(388).setOpen(true);
 				break;
 			case 230838:
 				sendMsg(1401920);

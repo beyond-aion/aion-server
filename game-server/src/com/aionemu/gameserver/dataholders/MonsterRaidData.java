@@ -25,16 +25,11 @@ public class MonsterRaidData {
 	@XmlElement(name = "raid_location")
 	private List<MonsterRaidTemplate> monsterRaidTemplates;
 	@XmlTransient
-	private FastMap<Integer, MonsterRaidLocation> monsterRaid = new FastMap<Integer, MonsterRaidLocation>();
+	private FastMap<Integer, MonsterRaidLocation> monsterRaid = new FastMap<>();
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (MonsterRaidTemplate template : monsterRaidTemplates) {
+		for (MonsterRaidTemplate template : monsterRaidTemplates)
 			monsterRaid.put(template.getLocationId(), new MonsterRaidLocation(template));
-		}
 	}
 
 	public int size() {

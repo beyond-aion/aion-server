@@ -3,15 +3,15 @@ package ai.instance.danuarReliquary;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -30,7 +30,7 @@ public class ModorsCloneAI2 extends AggressiveNpcAI2 {
 
 				@Override
 				public void run() {
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 343532, getObjectId(), 0, 0);
+					PacketSendUtility.broadcastMessage(getOwner(), 343532);
 				}
 			}, Rnd.get(5000, 10000));
 		}

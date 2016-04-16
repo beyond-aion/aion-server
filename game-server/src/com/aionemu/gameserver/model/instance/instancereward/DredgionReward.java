@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import java.util.List;
+
 import javolution.util.FastTable;
 
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -19,11 +21,11 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 	private int winnerPoints;
 	private int looserPoints;
 	@SuppressWarnings("unused")
-	private int drawPoins;
-	private MutableInt asmodiansPoints = new MutableInt(0);
-	private MutableInt elyosPoins = new MutableInt(0);
+	private int drawPoints;
+	private MutableInt asmodiansPoints = new MutableInt();
+	private MutableInt elyosPoints = new MutableInt();
 	private Race race;
-	private FastTable<DredgionRooms> dredgionRooms = new FastTable<DredgionRooms>();
+	private List<DredgionRooms> dredgionRooms = new FastTable<>();
 	private Point3D asmodiansStartPosition;
 	private Point3D elyosStartPosition;
 
@@ -31,7 +33,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		super(mapId, instanceId);
 		winnerPoints = mapId == 300110000 ? 3000 : 4500;
 		looserPoints = mapId == 300110000 ? 1500 : 2500;
-		drawPoins = mapId == 300110000 ? 2250 : 3750;
+		drawPoints = mapId == 300110000 ? 2250 : 3750;
 		setStartPositions();
 		for (int i = 1; i < 15; i++) {
 			dredgionRooms.add(new DredgionRooms(i));
@@ -86,7 +88,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		}
 	}
 
-	public FastTable<DredgionRooms> getDredgionRooms() {
+	public List<DredgionRooms> getDredgionRooms() {
 		return dredgionRooms;
 	}
 
@@ -102,7 +104,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 	public MutableInt getPointsByRace(Race race) {
 		switch (race) {
 			case ELYOS:
-				return elyosPoins;
+				return elyosPoints;
 			case ASMODIANS:
 				return asmodiansPoints;
 		}
@@ -134,7 +136,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 	}
 
 	public Race getWinningRaceByScore() {
-		return asmodiansPoints.compareTo(elyosPoins) > 0 ? Race.ASMODIANS : Race.ELYOS;
+		return asmodiansPoints.compareTo(elyosPoints) > 0 ? Race.ASMODIANS : Race.ELYOS;
 	}
 
 	@Override

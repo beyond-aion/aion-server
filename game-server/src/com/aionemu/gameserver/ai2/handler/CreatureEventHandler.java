@@ -3,7 +3,6 @@ package com.aionemu.gameserver.ai2.handler;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -66,34 +65,23 @@ public class CreatureEventHandler {
 		if (!owner.getActiveRegion().isMapRegionActive())
 			return;
 
-		boolean isInAggroRange = false;
-
-		if (ai.ask(AIQuestion.CAN_SHOUT)) {
-			int shoutRange = owner.getObjectTemplate().getMinimumShoutRange();
-			double distance = MathUtil.getDistance(owner, creature);
-			if (distance <= shoutRange) {
+		if (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange())) {
+			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
+			if (TribeRelationService.isAggressive(owner, creature) && owner.isEnemyFrom(creature)) { // aggressive mob
+				if (validateAggro(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
+					ShoutEventHandler.onSee(ai, creature);
+					if (!ai.isInState(AIState.RETURNING))
+						owner.getMoveController().storeStep();
+					if (ai.canThink())
+						ai.onCreatureEvent(AIEventType.CREATURE_AGGRO, creature);
+				}
+			} else { // non aggressive (should we consider also using geo canSee checks here?)
 				ShoutEventHandler.onSee(ai, creature);
-				isInAggroRange = shoutRange <= owner.getAggroRange();
-			}
-		}
-
-		if (!ai.isInState(AIState.FIGHT) && (isInAggroRange || MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
-			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType
-			if (checkAggroRelation(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
-				if (!ai.isInState(AIState.RETURNING))
-					ai.getOwner().getMoveController().storeStep();
-				if (ai.canThink())
-					ai.onCreatureEvent(AIEventType.CREATURE_AGGRO, creature);
 			}
 		}
 	}
 
-	private static boolean checkAggroRelation(Npc owner, Creature creature) {
-		if (TribeRelationService.isAggressive(owner, creature) && owner.isEnemy(creature)) {
-			if (creature.getLevel() - owner.getLevel() < 10 || owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.ABYSS_GUARD) {
-				return true;
-			}
-		}
-		return false;
+	private static boolean validateAggro(Npc owner, Creature creature) {
+		return creature.getLevel() - owner.getLevel() < 10 || owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.ABYSS_GUARD;
 	}
 }

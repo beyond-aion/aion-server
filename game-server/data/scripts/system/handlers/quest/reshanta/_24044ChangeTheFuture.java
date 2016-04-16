@@ -122,7 +122,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 								if (player.getInventory().getItemCountByItemId(188020000) > 0) {
 									return useQuestObject(env, 5, 6, false, 0, 0, 0, 188020000, 1, 291, false); // 6
 								}
-								PacketSendUtility.sendWhiteMessageOnCenter(player, "You need a Temporal Stone!"); // @ToDo: send corrent message id: 1111203
+								PacketSendUtility.sendMonologue(player, 1111203); // I need an Artifact Activation Stone!
 							}
 						}
 					}

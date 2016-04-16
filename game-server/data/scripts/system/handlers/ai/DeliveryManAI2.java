@@ -7,9 +7,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.handler.FollowEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -34,7 +32,7 @@ public class DeliveryManAI2 extends FollowingNpcAI2 {
 
 	@Override
 	protected void handleDespawned() {
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 390267, getObjectId(), 1, new NpcShout().getParam()));
+		PacketSendUtility.broadcastMessage(getOwner(), 390267, 0);
 		owner.setPostman(null);
 		super.handleDespawned();
 	}
@@ -83,11 +81,9 @@ public class DeliveryManAI2 extends FollowingNpcAI2 {
 
 		@Override
 		public void run() {
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 390266, getObjectId(), 1, new NpcShout().getParam()));
+			PacketSendUtility.broadcastMessage(getOwner(), 390266, 0);
 			handleFollowMe(owner);
 			handleCreatureMoved(owner);
 		}
-
 	}
-
 }

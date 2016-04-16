@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -23,10 +19,13 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -54,8 +53,8 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		super.handleCreatureMoved(creature);
 		if (getNpcId() == 217240 && creature instanceof Player) {
 			if (startedEvent.compareAndSet(false, true)) {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500479, getObjectId(), 0, 5000);
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1500478, getObjectId(), 0, 8000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500479, 5000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500478, 8000);
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
@@ -85,7 +84,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
 				} else {
-					sendMsg(1500482);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500482);
 					useToTargetSkill(19717);
 					if (getLifeStats().getHpPercentage() <= 90) {
 						startSkillTask();
@@ -112,7 +111,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					sendMsg(1500484);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500484);
 					useToTargetSkill(19824);
 				}
 			}
@@ -158,7 +157,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 			if (getNpcId() == 217241) {
 				getPosition().getWorldMapInstance().getDoors().get(10).setOpen(false);
 			} else if (getNpcId() == 217242) {
-				sendMsg(1500480);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500480);
 				startPhaseTask();
 			}
 		}
@@ -172,7 +171,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 			addPercent();
 			resetHelpers();
 		} else if (getNpcId() == 217242) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1500481, getObjectId(), 0, 4000);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500481, 4000);
 		} else {
 			canThink = false;
 		}
@@ -192,7 +191,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 							getMoveController().abortMove();
 							SkillEngine.getInstance().getSkill(npc, 19432, 60, getOwner()).useNoAnimationSkill();
 							SkillEngine.getInstance().getSkill(npc, 19709, 60, getOwner()).useNoAnimationSkill();
-							NpcShoutsService.getInstance().sendMsg(getOwner(), 1401042);
+							PacketSendUtility.broadcastToMap(getOwner(), 1401042);
 							int skill = 0;
 							switch (curentPercent) {
 								case 80:
@@ -255,7 +254,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 							moveToSurkana((Npc) spawn(282209, 992.511f, 1269.610f, 95.95f, (byte) 0));
 							break;
 						case 40:
-							sendMsg(1500477);
+							PacketSendUtility.broadcastMessage(getOwner(), 1500477);
 							SkillEngine.getInstance().getSkill(getOwner(), 19385, 60, getOwner()).useNoAnimationSkill();
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -289,7 +288,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		} else if (getNpcId() == 217242) {
 			if (hpPercentage <= 75 && hpPercentage > 35) {
 				if (isSpawnedWings.compareAndSet(false, true)) {
-					sendMsg(1500483);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500483);
 					spawn(282246, 879.4466f, 1217.424f, 194.9459f, (byte) 0);
 					spawn(282246, 878.6958f, 1216.5687f, 194.9459f, (byte) 0);
 				}
@@ -316,7 +315,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		cancelSkillTask();
 		cancelPhaseTask();
 		EmoteManager.emoteStopAttacking(getOwner());
-		sendMsg(1500485);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500485);
 		getSpawnTemplate().setWalkerId("3001500003");
 		WalkManager.startWalking(this);
 		getOwner().setState(1);
@@ -410,10 +409,6 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
-	}
-
 	@Override
 	protected void handleDied() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
@@ -433,7 +428,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 				deleteNpcs(instance.getNpcs(282189));
 				deleteNpcs(instance.getNpcs(282246));
 				deleteNpcs(instance.getNpcs(282269));
-				sendMsg(1500486);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500486);
 			}
 		}
 		super.handleDied();

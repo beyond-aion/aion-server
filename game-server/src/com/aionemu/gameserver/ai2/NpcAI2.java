@@ -25,6 +25,7 @@ import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.knownlist.KnownList;
@@ -133,13 +134,13 @@ public class NpcAI2 extends AITemplate {
 			AI2Actions.targetSelf(this);
 			SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useNoAnimationSkill();
 		}
+		ShoutEventHandler.onSpawn(this);
 	}
 
 	@Override
 	@AIListenable(type = AIEventType.DESPAWNED)
 	protected void handleDespawned() {
-		if (ask(AIQuestion.CAN_SHOUT))
-			ShoutEventHandler.onBeforeDespawn(this);
+		ShoutEventHandler.onBeforeDespawn(this);
 		SpawnEventHandler.onDespawn(this);
 	}
 
@@ -152,17 +153,12 @@ public class NpcAI2 extends AITemplate {
 	@Override
 	@AIListenable(type = AIEventType.MOVE_ARRIVED)
 	protected void handleMoveArrived() {
-		if (!ask(AIQuestion.CAN_SHOUT) || getSpawnTemplate().getWalkerId() == null)
-			return;
 		ShoutEventHandler.onReachedWalkPoint(this);
 	}
 
 	@Override
 	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
-		super.handleMoveArrived();
-		if (!ask(AIQuestion.CAN_SHOUT))
-			return;
 		ShoutEventHandler.onSwitchedTarget(this, creature);
 	}
 
@@ -172,7 +168,7 @@ public class NpcAI2 extends AITemplate {
 			case DESTINATION_REACHED:
 				return isDestinationReached();
 			case CAN_SHOUT:
-				return AIConfig.SHOUTS_ENABLE && getOwner().mayShout(0);
+				return AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
 			case SHOULD_DECAY:
 			case SHOULD_RESPAWN:
 			case SHOULD_REWARD:
@@ -215,11 +211,11 @@ public class NpcAI2 extends AITemplate {
 	public boolean isMoveSupported() {
 		return getOwner().getGameStats().getMovementSpeedFloat() > 0 && !this.isInSubState(AISubState.FREEZE);
 	}
-	
+
 	/**
 	 * NCsoft uses different non visible npcs as a sensor to trigger different events
 	 */
 	public void handleCreatureDetected(Creature creature) {
-		
+
 	}
 }

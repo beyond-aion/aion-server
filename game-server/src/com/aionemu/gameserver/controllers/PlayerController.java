@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServer;
+import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -458,7 +460,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
+	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 
@@ -467,10 +469,11 @@ public class PlayerController extends CreatureController<Player> {
 
 		cancelUseItem();
 		cancelGathering();
-		super.onAttack(creature, skillId, type, damage, notifyAttack, logId, attackStatus);
+		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus);
 
-		if (creature instanceof Npc) {
-			QuestEngine.getInstance().onAttack(new QuestEnv(creature, getOwner(), 0, 0));
+		if (attacker instanceof Npc) {
+			ShoutEventHandler.onAttack((NpcAI2) attacker.getAi2(), getOwner());
+			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0, 0));
 		}
 
 		lastAttackedMillis = System.currentTimeMillis();

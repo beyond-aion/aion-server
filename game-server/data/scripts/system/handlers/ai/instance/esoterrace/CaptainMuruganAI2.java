@@ -3,15 +3,15 @@ package ai.instance.esoterrace;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -43,7 +43,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelTask();
 				} else {
-					sendMsg(1500194);
+					PacketSendUtility.broadcastMessage(getOwner(), 1500194);
 					SkillEngine.getInstance().getSkill(getOwner(), 19325, 5, getOwner()).useNoAnimationSkill();
 					if (getLifeStats().getHpPercentage() < 50) {
 						specialSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -51,7 +51,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 							@Override
 							public void run() {
 								if (!isAlreadyDead()) {
-									sendMsg(1500193);
+									PacketSendUtility.broadcastMessage(getOwner(), 1500193);
 									VisibleObject target = getTarget();
 									if (target != null && target instanceof Player) {
 										SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
@@ -111,15 +111,11 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 		isAggred.set(false);
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
-	}
-
 	@Override
 	protected void handleDied() {
 		cancelTask();
 		cancelSpecialSkillTask();
-		sendMsg(1500195);
+		PacketSendUtility.broadcastMessage(getOwner(), 1500195);
 		super.handleDied();
 		isAggred.set(false);
 	}

@@ -3,15 +3,12 @@ package com.aionemu.gameserver.services.instance;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.custom.GameEvent;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -38,6 +35,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer

@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -47,7 +47,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 			final Player player = (Player) creature;
 			if (MathUtil.getDistance(getOwner(), player) <= 30) {
 				if (startedEvent.compareAndSet(false, true)) {
-					sendMsg(1401112);
+					PacketSendUtility.broadcastMessage(getOwner(), 1401112);
 				}
 			}
 		}
@@ -63,7 +63,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 		percent = hpPercentage;
 		if (hpPercentage <= 80) {
 			if (started80PercentEvent.compareAndSet(false, true)) {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401136);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401136);
 				if (position == 1) {
 					spawn(730446, 738.766f, 317.482f, 911.897f, (byte) 0, 5);
 				} else {
@@ -82,7 +82,7 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 				if (isAlreadyDead()) {
 					cancelPhaseTask();
 				} else {
-					sendMsg(1401114);
+					PacketSendUtility.broadcastMessage(getOwner(), 1401114);
 					SkillEngine.getInstance().getSkill(getOwner(), 19981, 46, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -118,16 +118,12 @@ public class IllusionMasterSharikAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), false, 0, 0);
-	}
-
 	@Override
 	protected void handleBackHome() {
 		despawnMirrors();
 		cancelPhaseTask();
 		super.handleBackHome();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1401137);
+		PacketSendUtility.broadcastToMap(getOwner(), 1401137);
 		if (position == 1) {
 			spawn(217425, 736.21704f, 270.8546f, 910.678f, (byte) 53);
 		} else {

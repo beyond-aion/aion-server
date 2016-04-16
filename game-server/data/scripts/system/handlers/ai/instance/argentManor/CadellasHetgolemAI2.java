@@ -2,15 +2,15 @@ package ai.instance.argentManor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -46,7 +46,7 @@ public class CadellasHetgolemAI2 extends GeneralNpcAI2 {
 		super.handleMoveArrived();
 		getMoveController().abortMove();
 		if (isDestroyed.compareAndSet(false, true)) {
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1500462, getObjectId(), 0, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500462);
 			SkillEngine.getInstance().getSkill(getOwner(), getHealSkill(), 60, getOwner()).useNoAnimationSkill();
 			startDespawnTask();
 		}

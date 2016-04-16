@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -73,7 +72,7 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 				int var2 = qs.getQuestVarById(2);
 				if (var == 1 && var2 == 0) {
 					changeQuestStep(env, 0, 1, false, 2);
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(true, 1111007, player.getObjectId(), 0));
+					PacketSendUtility.sendMonologue(player, 1111007);
 					changeStep(qs, env);
 					return true;
 				}
@@ -116,7 +115,7 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 			int var1 = qs.getQuestVarById(1);
 			if (var == 1 && var1 == 0) {
 				changeQuestStep(env, 0, 1, false, 1);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(true, 1111006, player.getObjectId(), 0));
+				PacketSendUtility.sendMonologue(player, 1111006);
 				changeStep(qs, env);
 				return true;
 			}

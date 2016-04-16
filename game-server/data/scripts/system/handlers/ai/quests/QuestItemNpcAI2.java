@@ -88,10 +88,4 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 	protected void handleCreatureSee(Creature creature) {
 		CreatureEventHandler.onCreatureSee(this, creature);
 	}
-
-	@Override
-	protected void handleCreatureMoved(Creature creature) {
-		CreatureEventHandler.onCreatureMoved(this, creature);
-	}
-
 }

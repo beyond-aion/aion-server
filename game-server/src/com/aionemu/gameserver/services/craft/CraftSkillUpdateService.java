@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.craft;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -137,7 +138,10 @@ public class CraftSkillUpdateService {
 			skillLvl = skillList.getSkillLevel(skillId);
 
 		if (!cost.containsKey(skillLvl)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
+			if (skillLvl < cost.keySet().stream().max(Comparator.naturalOrder()).get())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBINE_CBT_CAP());
 			return;
 		}
 
@@ -177,7 +181,7 @@ public class CraftSkillUpdateService {
 
 		// There is no Master upgrade for Aether and Essence tapping yet.
 		if (skillLvl >= 499 && (skillId == 30002 || skillId == 30003)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_CBT_CAP());
 			return;
 		}
 
@@ -279,7 +283,7 @@ public class CraftSkillUpdateService {
 		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendYellowMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " Expert crafting skills.");
+			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " Expert crafting skills.");
 			return false;
 		}
 	}
@@ -294,7 +298,7 @@ public class CraftSkillUpdateService {
 		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendYellowMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " Master crafting skill.");
+			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " Master crafting skill.");
 			return false;
 		}
 	}

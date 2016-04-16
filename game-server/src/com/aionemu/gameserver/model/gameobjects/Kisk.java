@@ -73,9 +73,9 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	@Override
-	public int getType(Creature creature) {
+	public CreatureType getType(Creature creature) {
 		if (creature instanceof Player)
-			return isEnemyFrom((Player) creature) ? CreatureType.ATTACKABLE.getId() : CreatureType.SUPPORT.getId();
+			return isEnemyFrom((Player) creature) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
 		return super.getType(creature);
 	}
 

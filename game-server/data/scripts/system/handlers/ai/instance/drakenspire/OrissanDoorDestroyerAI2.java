@@ -1,13 +1,12 @@
 package ai.instance.drakenspire;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Estrayl
@@ -22,22 +21,16 @@ public class OrissanDoorDestroyerAI2 extends GeneralNpcAI2 {
 	}
 
 	private void scheduleGateDestruction() {
+		PacketSendUtility.broadcastMessage(getOwner(), 1501313, 7000);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(true, 1501313, getOwner().getObjectId(), 1));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs()) {
-							if (npc.getNpcId() == 731580 && isInRange(npc, 15))
-								SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
-						}
-					}
-				}, 7000);
+				for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs()) {
+					if (npc.getNpcId() == 731580 && isInRange(npc, 15))
+						SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
+				}
 			}
-		}, 7000);
+		}, 14000);
 	}
 }

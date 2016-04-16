@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -30,7 +29,7 @@ public class SuramaTheTraitorAI2 extends GeneralNpcAI2 {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 390845, getOwner().getObjectId(), 0, 2000);
+		PacketSendUtility.broadcastMessage(getOwner(), 390845, 2000);
 	}
 
 	private void moveToRaksha() {
@@ -49,24 +48,24 @@ public class SuramaTheTraitorAI2 extends GeneralNpcAI2 {
 
 	private void startDialog() {
 		final Npc raksha = getPosition().getWorldMapInstance().getNpc(219356);
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 390841, getOwner().getObjectId(), 0, 0);
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 390842, getOwner().getObjectId(), 0, 3000);
-		NpcShoutsService.getInstance().sendMsg(raksha, 390843, raksha.getObjectId(), 0, 6000);
+		PacketSendUtility.broadcastMessage(getOwner(), 390841);
+		PacketSendUtility.broadcastMessage(getOwner(), 390842, 3000);
+		PacketSendUtility.broadcastMessage(raksha, 390843, 6000);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
 				raksha.setTarget(getOwner());
 				SkillEngine.getInstance().getSkill(raksha, 20952, 60, getOwner()).useNoAnimationSkill();
-				changeNpcType(raksha, CreatureType.ATTACKABLE.getId());
+				changeNpcType(raksha, CreatureType.ATTACKABLE);
 			}
 		}, 8000);
 	}
 
-	private void changeNpcType(Npc npc, final int newType) {
+	private void changeNpcType(Npc npc, CreatureType newType) {
 		npc.setNpcType(newType);
-		for (final Player player : npc.getKnownList().getKnownPlayers().values()) {
-			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, newType, 0));
+		for (Player player : npc.getKnownList().getKnownPlayers().values()) {
+			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, newType.getId(), 0));
 		}
 	}
 }

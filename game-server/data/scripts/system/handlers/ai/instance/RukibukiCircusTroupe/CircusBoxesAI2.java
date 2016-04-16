@@ -5,7 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -31,7 +31,7 @@ public class CircusBoxesAI2 extends NpcAI2 {
 
 	@Override
 	protected void handleDied() {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), 1501144, getObjectId(), 0, 0);
+		PacketSendUtility.broadcastMessage(getOwner(), 1501144);
 		cancelspawnJesterTask();
 		super.handleDied();
 	}

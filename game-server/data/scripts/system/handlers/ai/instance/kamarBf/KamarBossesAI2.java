@@ -1,11 +1,11 @@
 package ai.instance.kamarBf;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -20,13 +20,13 @@ public class KamarBossesAI2 extends AggressiveNpcAI2 {
 		super.handleAttack(creature);
 		switch (getOwner().getNpcId()) {
 			case 232853:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401845);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401845);
 				break;
 			case 232857:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401848);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401848);
 				break;
 			case 232858:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401850);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401850);
 				break;
 
 		}
@@ -63,13 +63,13 @@ public class KamarBossesAI2 extends AggressiveNpcAI2 {
 		super.handleDied();
 		switch (getOwner().getNpcId()) {
 			case 232853:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401846);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401846);
 				break;
 			case 232857:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401849);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401849);
 				break;
 			case 232858:
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401851);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401851);
 				break;
 
 		}

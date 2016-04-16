@@ -1,7 +1,5 @@
 package ai.instance.linkgateFoundry;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
@@ -10,9 +8,10 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -68,7 +67,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 			getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().onDelete();
 			TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
+			PacketSendUtility.broadcastToMap(getOwner(), msg);
 			AI2Actions.deleteOwner(this);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));

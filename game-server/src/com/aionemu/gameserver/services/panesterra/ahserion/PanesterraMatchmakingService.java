@@ -11,6 +11,7 @@ import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -63,13 +64,13 @@ public class PanesterraMatchmakingService {
 				for (Integer id : elyos) {
 					Player p = World.getInstance().findPlayer(id);
 					if (p != null) {
-						PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight starts in 30 seconds.");
+						PacketSendUtility.sendMessage(p, "Ahserions Flight starts in 30 seconds.", ChatType.WHITE_CENTER);
 					}
 				}
 				for (Integer id : asmodians) {
 					Player p = World.getInstance().findPlayer(id);
 					if (p != null) {
-						PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight starts in 30 seconds.");
+						PacketSendUtility.sendMessage(p, "Ahserions Flight starts in 30 seconds.", ChatType.WHITE_CENTER);
 					}
 				}
 			}
@@ -454,13 +455,13 @@ public class PanesterraMatchmakingService {
 		for (Integer id : elyos) {
 			Player p = World.getInstance().findPlayer(id);
 			if (p != null) {
-				PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+				PacketSendUtility.sendMessage(p, "Ahserions Flight could not start because some requirements were not met.", ChatType.WHITE_CENTER);
 			}
 		}
 		for (Integer id : asmodians) {
 			Player p = World.getInstance().findPlayer(id);
 			if (p != null) {
-				PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+				PacketSendUtility.sendMessage(p, "Ahserions Flight could not start because some requirements were not met.", ChatType.WHITE_CENTER);
 			}
 		}
 		if (teams != null && !teams.isEmpty()) {
@@ -469,7 +470,7 @@ public class PanesterraMatchmakingService {
 					for (Integer id : team.getMembers()) {
 						Player p = World.getInstance().findPlayer(id);
 						if (p != null) {
-							PacketSendUtility.sendWhiteMessageOnCenter(p, "Ahserions Flight could not start because some requirements were not met.");
+							PacketSendUtility.sendMessage(p, "Ahserions Flight could not start because some requirements were not met.", ChatType.WHITE_CENTER);
 						}
 					}
 				}

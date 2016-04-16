@@ -54,7 +54,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(npc.getObjectId());
 		writeD(npcTemplate.getTemplateId()); // npc id
 		writeD(npcTemplate.getTemplateId());
-		writeC(npc.getType(con.getActivePlayer()));
+		writeC(npc.getType(con.getActivePlayer()).getId());
 
 		/*
 		 * 3,19 - wings spread

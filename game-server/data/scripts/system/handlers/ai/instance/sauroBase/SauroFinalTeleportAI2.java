@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -42,11 +41,11 @@ public class SauroFinalTeleportAI2 extends NpcAI2 {
 		Item keys = player.getInventory().getFirstItemByItemId(185000179);
 		int portal = (int) (730875 + keyCount);
 		if (keys != null && keys.getItemCount() >= keyCount) {
-			spawn(portal, 127.5f, 432.8f, 151, (byte) 2);
+			spawn(portal, 127.5f, 432.8f, 151, (byte) 119);
 			player.getInventory().decreaseByItemId(185000179, keys.getItemCount());
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			AI2Actions.deleteOwner(this);
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401922, getObjectId(), 0, 0);
+			PacketSendUtility.broadcastToMap(getOwner(), 1401922);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352));
 		}

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.instance.handlers;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -11,13 +12,10 @@ import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -107,33 +105,32 @@ public class GeneralInstanceHandler implements InstanceHandler {
 		return instance.getNpc(npcId);
 	}
 
-	protected void sendMsg(int msg, int Obj, boolean isShout, int color) {
-		sendMsg(msg, Obj, isShout, color, 0);
-	}
-
-	protected void sendMsg(int msg, int Obj, boolean isShout, int color, int time) {
-		NpcShoutsService.getInstance().sendMsg(instance, msg, Obj, isShout, color, time);
-	}
-
+	/**
+	 * Sends a message to all players in this instance.
+	 */
 	protected void sendMsg(int msg) {
-		sendMsg(msg, 0, false, 25);
+		sendMsg(new SM_SYSTEM_MESSAGE(ChatType.GOLDEN_YELLOW, null, msg));
 	}
 
+	/**
+	 * Sends a message to all players in this instance.
+	 */
+	protected void sendMsg(int msg, int delay) {
+		sendMsg(new SM_SYSTEM_MESSAGE(ChatType.GOLDEN_YELLOW, null, msg), delay);
+	}
+
+	/**
+	 * Sends a message to all players in this instance.
+	 */
+	protected void sendMsg(SM_SYSTEM_MESSAGE msg) {
+		sendMsg(msg, 0);
+	}
+
+	/**
+	 * Sends a message to all players in this instance, after the specified delay (in milliseconds).
+	 */
 	protected void sendMsg(SM_SYSTEM_MESSAGE msg, int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				instance.doOnAllPlayers(new Visitor<Player>() {
-
-					@Override
-					public void visit(Player player) {
-						PacketSendUtility.sendPacket(player, msg);
-					}
-
-				});
-			}
-		}, delay);
+		PacketSendUtility.broadcastToMap(instance, msg, delay);
 	}
 
 	@Override
@@ -245,15 +242,15 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 
 	}
-	
+
 	@Override
 	public void onCreatureDetected(Npc detector, Creature detected) {
-		
+
 	}
-	
+
 	@Override
 	public void onSpecialEvent(Npc npc) {
-		
+
 	}
 
 	@Override

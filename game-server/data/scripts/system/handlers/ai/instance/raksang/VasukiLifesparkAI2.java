@@ -2,18 +2,18 @@ package ai.instance.raksang;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -80,7 +80,7 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 							break;
 					}
 					if (shoutId != 0) {
-						sendMsg(shoutId);
+						PacketSendUtility.broadcastMessage(getOwner(), shoutId);
 					}
 					SkillEngine.getInstance().getSkill(getOwner(), skill, level, getOwner()).useNoAnimationSkill();
 					if (getNpcId() != 217764) {
@@ -116,10 +116,6 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 		}
 	}
 
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), false, 0, 0);
-	}
-
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
@@ -133,7 +129,7 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleDied() {
 		if (getNpcId() == 217764) {
-			sendMsg(1401111);
+			PacketSendUtility.broadcastMessage(getOwner(), 1401111);
 			Npc soul = getPosition().getWorldMapInstance().getNpc(217471);
 			Npc sapping = getPosition().getWorldMapInstance().getNpc(217472);
 			if (soul != null) {
@@ -142,7 +138,7 @@ public class VasukiLifesparkAI2 extends AggressiveNpcAI2 {
 			if (sapping != null) {
 				sapping.getEffectController().removeEffect(19126);
 			}
-			NpcShoutsService.getInstance().sendMsg(getOwner(), 1401140);
+			PacketSendUtility.broadcastToMap(getOwner(), 1401140);
 		}
 		super.handleDied();
 	}

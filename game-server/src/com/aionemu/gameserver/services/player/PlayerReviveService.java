@@ -108,12 +108,17 @@ public class PlayerReviveService {
 	}
 
 	public static final void bindRevive(Player player, int skillId) {
-		revive(player, 25, 25, true, skillId);
+		if (player.isInEvent())
+			revive(player, 100, 100, false, skillId);
+		else
+			revive(player, 25, 25, true, skillId);
 		if (skillId > 0)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
 			TeleportService2.teleportToPrison(player);
+		} else if (player.isInEvent()) {
+			TeleportService2.teleportToEvent(player);
 		} else {
 			WorldPosition resPos = null;
 			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
@@ -139,6 +144,8 @@ public class PlayerReviveService {
 
 		if (player.isInPrison())
 			TeleportService2.teleportToPrison(player);
+		else if (player.isInEvent())
+			TeleportService2.teleportToEvent(player);
 
 		// TODO: find right place for this
 		if (player.getSKInfo().getRank() > 1) {
@@ -162,15 +169,18 @@ public class PlayerReviveService {
 	}
 
 	public static final void instanceRevive(Player player, int skillId) {
-		// Revive in Instances
-		if (player.getPanesterraTeam() != null) {
-			if (AhserionRaid.getInstance().revivePlayer(player, skillId)) {
-				return;
-			}
-		}
-		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player)) {
+		if (player.isInEvent()) {
+			revive(player, 100, 100, false, skillId);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+			player.getGameStats().updateStatsAndSpeedVisually();
+			TeleportService2.teleportToEvent(player);
 			return;
 		}
+		if (player.getPanesterraTeam() != null)
+			if (AhserionRaid.getInstance().revivePlayer(player, skillId))
+				return;
+		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player))
+			return;
 		WorldMap map = World.getInstance().getWorldMap(player.getWorldId());
 		if (map == null) {
 			bindRevive(player);
@@ -233,8 +243,8 @@ public class PlayerReviveService {
 		int useDelay = useLimits.getDelayTime();
 		player.addItemCoolDown(useLimits.getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 		player.getController().cancelUseItem();
-		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate()
+			.getTemplateId()), true);
 		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
 			cancelRes(player);
 			return;

@@ -20,7 +20,6 @@ import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.dao.PlayerVarsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -237,11 +236,14 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
+	private int enemyState;
+	private boolean isEvent = false;
 
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
-	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance, @Nonnull Account account) {
+	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance,
+		@Nonnull Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
 		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;
@@ -1134,7 +1136,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Npc enemy) {
-		switch (CreatureType.getCreatureType(enemy.getType(this))) {
+		switch (enemy.getType(this)) {
 			case AGGRESSIVE:
 			case ATTACKABLE:
 				return true;
@@ -1155,14 +1157,26 @@ public class Player extends Creature {
 	public boolean isEnemyFrom(Player enemy) {
 		if (equals(enemy))
 			return false;
+		else if (getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1 || canPvP(enemy) || getController().isDueling(enemy))
+			return true;
 		else
-			return canPvP(enemy) || getController().isDueling(enemy) || getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1;
+			return (getEnemyState() == 2 || enemy.getEnemyState() == 2 || (!isInSameTeam(enemy) && (getEnemyState() == 1 || enemy.getEnemyState() == 1)));
 	}
 
 	public boolean isAggroIconTo(Player player) {
 		if (getAdminEnmity() > 1 || player.getAdminEnmity() > 1)
 			return true;
+		if (getEnemyState() == 2 || player.getEnemyState() == 2 || (!isInSameTeam(player) && (getEnemyState() == 1 || player.getEnemyState() == 1)))
+			return true;
 		return !player.getRace().equals(getRace());
+	}
+
+	public void setEnemyState(int value) {
+		this.enemyState = value;
+	}
+
+	public int getEnemyState() {
+		return enemyState;
 	}
 
 	private boolean canPvP(Player enemy) {
@@ -2143,5 +2157,13 @@ public class Player extends Creature {
 	@Override
 	public String toString() {
 		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
+	}
+	
+	public boolean isInEvent() {
+		return isEvent;
+	}
+
+	public void setIsInEvent(boolean isEvent) {
+		this.isEvent = isEvent;
 	}
 }

@@ -170,9 +170,8 @@ public class _10032HelpintheHollow extends QuestHandler {
 				return true;
 			} else {
 				int var = qs.getQuestVarById(0);
-				if (var > 2 && var < 6) {
-					qs.setQuestVar(2);
-					updateQuestStatus(env);
+				if (var >= 3 && var < 7) {
+					restoreStep(env);
 					return true;
 				}
 				else if (var == 7) { // Final boss killed
@@ -190,7 +189,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 	
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
-	return restoreStep(env);
+		return restoreStep(env);
 	}
 	
 	@Override
@@ -213,7 +212,9 @@ public class _10032HelpintheHollow extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (var >= 4 && var < 6) {
+			if (var >= 3 && var <= 7) {
+				removeQuestItem(env, 182215618, 1);
+				removeQuestItem(env, 182215619, 1);
 				qs.setQuestVar(2);
 				updateQuestStatus(env);
 				return true;

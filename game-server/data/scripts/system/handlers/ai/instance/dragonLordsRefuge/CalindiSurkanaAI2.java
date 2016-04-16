@@ -6,8 +6,8 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -31,7 +31,7 @@ public class CalindiSurkanaAI2 extends NpcAI2 {
 
 			@Override
 			public void run() {
-				NpcShoutsService.getInstance().sendMsg(getOwner(), 1401543);
+				PacketSendUtility.broadcastToMap(getOwner(), 1401543);
 				SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi, 0);
 			}
 		}, 3000, 10000);

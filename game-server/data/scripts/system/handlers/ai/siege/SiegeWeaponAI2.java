@@ -29,7 +29,7 @@ public class SiegeWeaponAI2 extends AISummon {
 		this.setStateIfNot(AIState.IDLE);
 		SummonsService.doMode(SummonMode.GUARD, getOwner());
 		NpcSkillTemplate skillTemplate = getNpcSkillTemplates().getNpcSkills().get(0);
-		skill = skillTemplate.getSkillid();
+		skill = skillTemplate.getSkillId();
 		skillLvl = skillTemplate.getSkillLevel();
 		duration = DataManager.SKILL_DATA.getSkillTemplate(this.skill).getDuration();
 	}

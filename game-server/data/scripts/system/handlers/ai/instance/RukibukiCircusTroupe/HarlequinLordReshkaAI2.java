@@ -2,12 +2,12 @@ package ai.instance.RukibukiCircusTroupe;
 
 import java.util.concurrent.Future;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -87,7 +87,7 @@ public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead()) {
 					AI2Actions.useSkill(HarlequinLordReshkaAI2.this, 21477);
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1501146, getObjectId(), 0, 0);
+					PacketSendUtility.broadcastMessage(getOwner(), 1501146);
 				}
 			}
 
@@ -98,7 +98,7 @@ public class HarlequinLordReshkaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				if (!isAlreadyDead()) {
 					AI2Actions.useSkill(HarlequinLordReshkaAI2.this, 21477);
-					NpcShoutsService.getInstance().sendMsg(getOwner(), 1501147, getObjectId(), 0, 0);
+					PacketSendUtility.broadcastMessage(getOwner(), 1501147);
 				}
 			}
 

@@ -2,17 +2,19 @@ package ai.worlds;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
+ * @modified Neon
  */
 @AIName("agrint")
 public class AgrintAI2 extends AggressiveNpcAI2 {
@@ -22,26 +24,24 @@ public class AgrintAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		int msg = 0;
 		switch (getNpcId()) {
 			case 218862:
 			case 218850:
-				msg = 1401246;
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_HF_SpringAgrintAppear());
 				break;
 			case 218863:
 			case 218851:
-				msg = 1401247;
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_HF_SummerAgrintAppear());
 				break;
 			case 218864:
 			case 218852:
-				msg = 1401248;
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_HF_FallAgrintAppear());
 				break;
 			case 218865:
 			case 218853:
-				msg = 1401249;
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_HF_WinterAgrintAppear());
 				break;
 		}
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, 2000);
 	}
 
 	@Override

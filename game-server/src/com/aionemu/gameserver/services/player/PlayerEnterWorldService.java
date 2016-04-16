@@ -394,10 +394,10 @@ public final class PlayerEnterWorldService {
 
 		// Intro message
 		if (welcomeInfo != null && !welcomeInfo.isEmpty())
-			PacketSendUtility.sendWhiteMessage(player, welcomeInfo);
+			PacketSendUtility.sendMessage(player, welcomeInfo, ChatType.WHITE);
 
 		if (GSConfig.SERVER_MOTD_DISPLAY_REV && versionInfo != null && !versionInfo.isEmpty())
-			PacketSendUtility.sendWhiteMessage(player, versionInfo);
+			PacketSendUtility.sendMessage(player, versionInfo, ChatType.WHITE);
 
 		player.setRates(Rates.getRatesFor(account.getMembership()));
 		if (CustomConfig.PREMIUM_NOTIFY && account.getMembership() > 0) {

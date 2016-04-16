@@ -2,8 +2,6 @@ package ai.instance.rentusBase;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -14,9 +12,10 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -59,10 +58,10 @@ public class ImprisonedReianAI2 extends GeneralNpcAI2 {
 					if (isAsked.compareAndSet(false, true)) {
 						switch (Rnd.get(1, 10)) {
 							case 1:
-								sendMsg(390563);
+								PacketSendUtility.broadcastMessage(getOwner(), 390563);
 								break;
 							case 2:
-								sendMsg(390567);
+								PacketSendUtility.broadcastMessage(getOwner(), 390567);
 								break;
 						}
 					}
@@ -75,19 +74,15 @@ public class ImprisonedReianAI2 extends GeneralNpcAI2 {
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 						switch (Rnd.get(1, 10)) {
 							case 1:
-								sendMsg(342410);
+								PacketSendUtility.broadcastMessage(getOwner(), 342410);
 								break;
 							case 2:
-								sendMsg(342411);
+								PacketSendUtility.broadcastMessage(getOwner(), 342411);
 								break;
 						}
 					}
 				}
 			}
 		}
-	}
-
-	private void sendMsg(int msg) {
-		NpcShoutsService.getInstance().sendMsg(getOwner(), msg, getObjectId(), 0, 0);
 	}
 }

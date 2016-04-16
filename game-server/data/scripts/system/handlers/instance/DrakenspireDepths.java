@@ -103,7 +103,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				twinProgressCount++;
 				switch (twinProgressCount) {
 					case 8:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_04(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_04());
 						break;
 					case 9:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_05(), 5000);
@@ -176,7 +176,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				orissanImmortalityCount++;
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_01(), 0); // Begins the Ascension
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_01()); // Begins the Ascension
 				SkillEngine.getInstance().getSkill((Creature) npc, 21635, 1, npc).useSkill();
 				orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -187,7 +187,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 
 						scheduleOrissansExhaustedPhase(spawn(236233, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()));
 						npc.getController().onDelete();
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_02(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_02());
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_03(), 2000);
 					}
 				}, 12000);
@@ -201,12 +201,12 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_04(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_04());
 				orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
 					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_05(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_05());
 						switch (orissanImmortalityCount) {
 							case 2:
 								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_06(), 2000);
@@ -244,7 +244,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				scheduleWaveSpawns(236204);
 				break;
 			case 2:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_05(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_05());
 				break;
 			case 3:
 				doors.get(7).setOpen(true);
@@ -252,20 +252,20 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				spawn(731581, 707.34f, 876.80f, 1603.69f, (byte) 0).getSpawn().setStaticId(398);
 				spawn(731581, 570.70f, 877.51f, 1599.80f, (byte) 0).getSpawn().setStaticId(401);
 				if (isHardmode)
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_06(), 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_06());
 				else
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_08(), 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_08());
 				scheduleWaveSpawns(236205);
 				break;
 			case 4:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_07(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_07());
 				break;
 			case 5:
 				doors.get(210).setOpen(true);
 				doors.get(312).setOpen(true);
 				spawn(731581, 694.01f, 935.97f, 1618.09f, (byte) 0).getSpawn().setStaticId(399);
 				spawn(731581, 572.94f, 940.04f, 1620.04f, (byte) 0).getSpawn().setStaticId(407);
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_08(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_08());
 				scheduleWaveSpawns(236206);
 				break;
 		}
@@ -406,20 +406,20 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		SkillEngine.getInstance().getSkill(getNpc(race == Race.ELYOS ? 702719 : 702720), 20838, 1, getNpc(731580)).useSkill();
 		switch (fallenWaveDefender.get()) {
 			case 0:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_04(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_04());
 				break;
 			case 1:
 			case 2:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_03(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_03());
 				break;
 			case 3:
 			case 4:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_02(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_02());
 				break;
 			case 5:
 			case 6:
 			case 7:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_01(), 0);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_01());
 				break;
 		}
 	}
@@ -449,7 +449,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 236227:
 			case 236228:
 				if (isTwinFightStarted.compareAndSet(false, true)) {
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_01(), 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_01());
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_02(), 2000);
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_03(), 4000);
 					onTwinFightStart();
@@ -485,13 +485,13 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 236228:
 				if (getNpc(npcId == 236227 ? 236228 : 236227) == null) {
 					cancelTask(twinFailTask);
-					sendMsg(isHardmode ? SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_07() : SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_06(), 0);
+					sendMsg(isHardmode ? SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_07() : SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_06());
 					deleteNpcById(855708);
 					deleteNpcById(855709);
 					onTwinsComplete();
 				} else {
 					spawn(npcId == 236227 ? 855708 : 855709, npc.getX(), npc.getY(), npc.getZ(), (byte) 0); // Sphere
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_02(), 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_02());
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -507,7 +507,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 								}
 								deleteNpcById(855708);
 								deleteNpcById(855709);
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_03(), 0);
+								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_03());
 							}
 						}
 
@@ -551,11 +551,11 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 731580:
 				switch (npc.getSpawn().getStaticId()) {
 					case 332:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_09(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_09());
 						break;
 					case 522:
 					case 603:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_08(), 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_08());
 				}
 				break;
 		}
