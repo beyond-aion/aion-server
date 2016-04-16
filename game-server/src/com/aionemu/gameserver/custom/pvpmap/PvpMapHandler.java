@@ -80,9 +80,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void checkLastFightTime(Player p) {
-		if (!p.getController().isInCombat()) {
+		if (!p.isGM() && !p.getController().isInCombat()) {
 			long joinOrLeaveTime = this.joinOrLeaveTime.get(p.getObjectId());
-			if ((System.currentTimeMillis() - joinOrLeaveTime) > 400000) {
+			if ((System.currentTimeMillis() - joinOrLeaveTime) > 600000) {
 				long lastFightTime = p.getController().getLastCombatTime();
 				if (lastFightTime == 0 || (System.currentTimeMillis() - lastFightTime) > 600000) {
 					PacketSendUtility.sendMessage(p, "You have been inactive for too long. Therefore you will be removed from the PvP-Map.");
@@ -211,17 +211,19 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void announceDeath(final Player player) {
-		AbyssRank ar = player.getAbyssRank();
-		if (ar != null) {
-			int zoneNameId = getZoneNameId(player);
-			if (zoneNameId > 0) {
-				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId)));
-			} else {
-				instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
+		if (!player.isGM()) {
+			AbyssRank ar = player.getAbyssRank();
+			if (ar != null) {
+				int zoneNameId = getZoneNameId(player);
+				if (zoneNameId > 0) {
+					instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId)));
+				} else {
+					instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
+				}
 			}
 		}
-
 	}
+
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
@@ -288,7 +290,13 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public int getParticipantsSize() {
-		return instance.getPlayersInside().size();
+		int playerCount = 0;
+		for (Player p : instance.getPlayersInside()) {
+			if (!p.isGM()) {
+				playerCount++;
+			}
+		}
+		return playerCount;
 	}
 
 	public int getInstanceId() {

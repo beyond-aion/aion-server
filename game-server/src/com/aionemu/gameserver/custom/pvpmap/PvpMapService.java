@@ -44,13 +44,9 @@ public class PvpMapService {
 		}
 	}
 
-	public void joinOrLeave(Player p) {
+	public void joinMap(Player p) {
 		if (handler != null) {
-			if (handler.isOnMap(p)) {
-				if (!handler.leave(p)) {
-					PacketSendUtility.sendMessage(p, "You cannot leave the PvP-Map in your current state.");
-				}
-			} else {
+			if (!handler.isOnMap(p)) {
 				join(p);
 			}
 		} else {
@@ -58,11 +54,17 @@ public class PvpMapService {
 		}
 	}
 
-	public boolean isOnPvPMap(Player p) {
-		if (handler != null) {
-			return handler.isOnMap(p);
+	public void leaveMap(Player p) {
+		if (handler != null && handler.isOnMap(p)) {
+			if (!handler.leave(p)) {
+				PacketSendUtility.sendMessage(p, "You cannot leave the PvP-Map in your current state.");
+			}
+
 		}
-		return false;
+	}
+
+	public boolean isOnPvPMap(Player p) {
+		return handler != null && handler.isOnMap(p);
 	}
 
 	public synchronized void closeMap(int instanceId) {
@@ -80,7 +82,7 @@ public class PvpMapService {
 		}
 	}
 
-	public synchronized PvpMapHandler getOrCreateNewHandler() {
+	private synchronized PvpMapHandler getOrCreateNewHandler() {
 		if (handler != null) {
 			return handler;
 		} else {
