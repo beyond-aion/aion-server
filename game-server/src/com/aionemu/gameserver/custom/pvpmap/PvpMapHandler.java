@@ -224,16 +224,15 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void announceDeath(final Player player) {
 		if (!player.isGM()) {
-		AbyssRank ar = player.getAbyssRank();
-		if (ar != null) {
-			int zoneNameId = getZoneNameId(player);
-			if (zoneNameId > 0)
-				PacketSendUtility.broadcastToMap(instance,
-					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId), 0);
-			else
-				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)),
-					0);
-				}
+			AbyssRank ar = player.getAbyssRank();
+			if (ar != null) {
+				int zoneNameId = getZoneNameId(player);
+				if (zoneNameId > 0)
+					PacketSendUtility.broadcastToMap(instance,
+						SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId), 0);
+				else
+					PacketSendUtility.broadcastToMap(instance,
+						SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)), 0);
 			}
 		}
 	}
@@ -246,8 +245,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				if (p != player)
 					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(0, null, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER));
 			});
-			PacketSendUtility.broadcastFilteredPacket(new SM_SYSTEM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER), p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
-	}
+			PacketSendUtility.broadcastFilteredPacket(new SM_SYSTEM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER),
+				p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
+		}
 	}
 
 	@Override
@@ -309,7 +309,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		for (Player p : instance.getPlayersInside()) {
 			if (!p.isGM()) {
 				playerCount++;
-	}
+			}
 		}
 		return playerCount;
 	}
