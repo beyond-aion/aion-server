@@ -113,7 +113,7 @@ public abstract class Base<T extends BaseLocation> {
 			spawnBySpawnHandler(SpawnHandlerType.BOSS, getRace());
 			SM_SYSTEM_MESSAGE bossSpawnMsg = getBossSpawnMsg();
 			if (bossSpawnMsg != null)
-			PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), bossSpawnMsg);
+				PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(getWorldId()), bossSpawnMsg);
 			scheduleAssault();
 		}, getBossSpawnDelay());
 	}

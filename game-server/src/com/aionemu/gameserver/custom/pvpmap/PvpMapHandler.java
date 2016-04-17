@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -23,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -39,9 +41,6 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author Yeats 06.04.2016.
@@ -82,9 +81,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void checkLastFightTime(Player p) {
-		if (!p.getController().isInCombat()) {
+		if (!p.isGM() && !p.getController().isInCombat()) {
 			long joinOrLeaveTime = this.joinOrLeaveTime.get(p.getObjectId());
-			if ((System.currentTimeMillis() - joinOrLeaveTime) > 400000) {
+			if ((System.currentTimeMillis() - joinOrLeaveTime) > 600000) {
 				long lastFightTime = p.getController().getLastCombatTime();
 				if (lastFightTime == 0 || (System.currentTimeMillis() - lastFightTime) > 600000) {
 					PacketSendUtility.sendMessage(p, "You have been inactive for too long. Therefore you will be removed from the PvP-Map.");
@@ -224,6 +223,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void announceDeath(final Player player) {
+		if (!player.isGM()) {
 		AbyssRank ar = player.getAbyssRank();
 		if (ar != null) {
 			int zoneNameId = getZoneNameId(player);
@@ -233,14 +233,21 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			else
 				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)),
 					0);
+				}
+			}
 		}
 	}
 
 	@Override
 	public void onEnterInstance(Player player) {
 		updateJoinOrLeaveTime(player);
-		if (!player.isGM())
-			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER), 0);
+		if (!player.isGM()) {
+			instance.doOnAllPlayers(p -> {
+				if (p != player)
+					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(0, null, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER));
+			});
+			PacketSendUtility.broadcastFilteredPacket(new SM_SYSTEM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER), p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
+	}
 	}
 
 	@Override
@@ -298,7 +305,13 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public int getParticipantsSize() {
-		return instance.getPlayersInside().size();
+		int playerCount = 0;
+		for (Player p : instance.getPlayersInside()) {
+			if (!p.isGM()) {
+				playerCount++;
+	}
+		}
+		return playerCount;
 	}
 
 	public int getInstanceId() {
