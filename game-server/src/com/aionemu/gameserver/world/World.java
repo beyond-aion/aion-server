@@ -398,7 +398,11 @@ public class World {
 		WorldMap map = getWorldMap(mapId);
 		if (map == null || map.getWorldMapInstanceById(instanceId) == null)
 			return null;
-		return new WorldPosition(mapId, x, y, z, heading, map.getWorldMapInstanceById(instanceId).getRegion(x, y, z));
+		MapRegion mr = map.getWorldMapInstanceById(instanceId).getRegion(x, y, z);
+		if (mr == null)
+			log.warn("MapRegion is should not be null (mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", instanceId=" + instanceId + ")",
+				new NullPointerException()); // don't actually throw the exception (we only want to print the stack trace)
+		return new WorldPosition(mapId, x, y, z, heading, mr);
 	}
 
 	/**
