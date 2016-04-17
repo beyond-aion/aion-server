@@ -214,7 +214,7 @@ public class StigmaService {
 					return 1008; // Ripthread Shot
 				if (isEquipped(player, 140001173) && isEquipped(player, 2, 140001154, 140001156, 140001158))
 					return 938; // Night Haze
-				return 1064; // Staggering Trap
+				return isEly ? 1065 : 1064; // Staggering Trap
 			case SORCERER:
 				if (isEquipped(player, 140001191) && isEquipped(player, 2, 140001174, 140001178, 140001181))
 					return 1342; // Slumberswept Wind
