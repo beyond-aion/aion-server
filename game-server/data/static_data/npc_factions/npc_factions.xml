@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_factions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_factions.xsd">
 	<npc_faction id="1" name="The Jeridises" npcid="0" nameId="1300527" category="MENTOR" minlevel="5" race="ELYOS"/>
-	<npc_faction id="2" name="Alabaster Order" npcid="799803" nameId="2258001" category="DAILY" minlevel="30" race="ELYOS"/>
-	<npc_faction id="3" name="Radiant Ops" npcid="799828" nameId="2258003" category="DAILY" minlevel="40" race="ELYOS"/>
-	<npc_faction id="4" name="Fortuneers" npcid="799840" nameId="2258005" category="DAILY" minlevel="50" race="ELYOS"/>
-	<npc_faction id="5" name="Field Wardens" npcid="799845" nameId="2258007" category="DAILY" minlevel="30" race="ASMODIANS"/>
-	<npc_faction id="6" name="Blood Crusade" npcid="799868" nameId="2258009" category="DAILY" minlevel="40" race="ASMODIANS"/>
-	<npc_faction id="7" name="Charlirunerk's Daemons" npcid="799886" nameId="2258011" category="DAILY" minlevel="50" race="ASMODIANS"/>
+	<npc_faction id="2" name="Alabaster Order" npcid="805145" nameId="2258001" category="DAILY" minlevel="30" race="ELYOS"/>
+	<npc_faction id="3" name="Radiant Ops" npcid="805146" nameId="2258003" category="DAILY" minlevel="40" race="ELYOS"/>
+	<npc_faction id="4" name="Fortuneers" npcid="805147" nameId="2258005" category="DAILY" minlevel="50" race="ELYOS"/>
+	<npc_faction id="5" name="Field Wardens" npcid="805157" nameId="2258007" category="DAILY" minlevel="30" race="ASMODIANS"/>
+	<npc_faction id="6" name="Blood Crusade" npcid="805158" nameId="2258009" category="DAILY" minlevel="40" race="ASMODIANS"/>
+	<npc_faction id="7" name="Charlirunerk's Daemons" npcid="805159" nameId="2258011" category="DAILY" minlevel="50" race="ASMODIANS"/>
 	<npc_faction id="8" name="Kaisinel Academy" npcid="799813" nameId="2258013" category="MENTOR" minlevel="10" maxlevel="39" race="ELYOS"/>
 	<npc_faction id="9" name="Orichalcum Key" npcid="799895" nameId="2258015" category="MENTOR" minlevel="40" race="ELYOS"/>
 	<npc_faction id="10" name="Marchutan Priory" npcid="799847" nameId="2258017" category="MENTOR" minlevel="10" maxlevel="39" race="ASMODIANS"/>

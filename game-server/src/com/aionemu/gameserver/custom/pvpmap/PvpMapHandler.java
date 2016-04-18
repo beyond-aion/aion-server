@@ -5,9 +5,6 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -21,7 +18,6 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
@@ -42,8 +38,13 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
- * @author Yeats 06.04.2016.
+ * Created on 06.04.2016.
+ * 
+ * @author Yeats
  */
 public class PvpMapHandler extends GeneralInstanceHandler {
 
@@ -115,7 +116,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void scheduleDespawns() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
+		despawnTask = ThreadPoolManager.getInstance().schedule(
+			() -> instance.getNpcs().stream().filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().onDelete()), 120000);
 	}
 
 	public void join(Player p) {
@@ -145,18 +147,20 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 							updateJoinOrLeaveTime(p);
 							InstanceService.registerPlayerWithInstance(instance, p);
 							WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-							TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
+							TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+								TeleportAnimation.BATTLEGROUND);
 						} else {
 							PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while near a vulnerable fortress.");
 						}
 					}
 				}
-			}, 1000);
+			} , 1000);
 		}, 10000));
 	}
 
 	private ActionObserver getAllObserver(final Player p) {
 		return new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				BindPointTeleportService.cancelTeleport(p, 1);
@@ -165,14 +169,16 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE) && (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
+		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)
+			&& (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
 	}
 
 	private boolean checkState(Player p) {
 		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead() && !p.isLooting()
-				&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
-				&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
-				&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
+			&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
+			&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null
+			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}
 
 	private synchronized void updateOrigin(Player p) {
@@ -203,8 +209,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 					player.unsetResPosState();
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 					player.getGameStats().updateStatsAndSpeedVisually();
-					WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-					TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
+					WorldPosition pos = respawnLocations.get(Rnd.get(respawnLocations.size()));
+					TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+						TeleportAnimation.BATTLEGROUND);
 				}
 			}
 		}, 12000);
@@ -212,16 +219,14 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void announceDeath(final Player player) {
-		if (!player.isGM()) {
-			AbyssRank ar = player.getAbyssRank();
-			if (ar != null) {
-				int zoneNameId = getZoneNameId(player);
-				if (zoneNameId > 0) {
-					instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId)));
-				} else {
-					instance.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player))));
-				}
-			}
+		if (!player.isGM() && player.getAbyssRank() != null) {
+			int zoneNameId = getZoneNameId(player);
+			if (zoneNameId > 0)
+				PacketSendUtility.broadcastToMap(instance,
+					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId), 0);
+			else
+				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)),
+					0);
 		}
 	}
 
@@ -230,10 +235,11 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		updateJoinOrLeaveTime(player);
 		if (!player.isGM()) {
 			instance.doOnAllPlayers(p -> {
-				if (p != player)
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(0, null, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER));
+				if (!p.equals(player))
+					PacketSendUtility.sendMessage(p, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER);
 			});
-			PacketSendUtility.broadcastFilteredPacket(new SM_SYSTEM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER), p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
+			PacketSendUtility.broadcastFilteredPacket(new SM_SYSTEM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER),
+				p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
 		}
 	}
 

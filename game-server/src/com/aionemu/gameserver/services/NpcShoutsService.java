@@ -35,11 +35,10 @@ public class NpcShoutsService {
 	}
 
 	public void registerShoutTask(Npc npc) {
-		int npcId = npc.getNpcId();
 		int worldId = npc.getSpawn().getWorldId();
 		int objectId = npc.getObjectId();
 
-		List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(worldId, npcId, ShoutEventType.IDLE);
+		List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(worldId, npc.getNpcId(), ShoutEventType.IDLE);
 		if (shouts == null || shouts.isEmpty())
 			return;
 

@@ -68,7 +68,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 				int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
 				if (damage > 0) {
 					owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, damage, 0, LOG.REGULAR, owner);
-					owner.getObserveController().notifyAttackedObservers(owner);
+					owner.getObserveController().notifyAttackedObservers(owner, 0);
 				}
 			}
 		}

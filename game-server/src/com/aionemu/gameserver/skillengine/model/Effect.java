@@ -1058,7 +1058,7 @@ public class Effect implements StatOwner {
 			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACKED) {
 
 				@Override
-				public void attacked(Creature creature) {
+				public void attacked(Creature creature, int skillId) {
 					effected.getEffectController().removeEffect(getSkillId());
 				}
 			});
