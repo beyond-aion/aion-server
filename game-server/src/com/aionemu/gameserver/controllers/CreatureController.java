@@ -43,6 +43,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -144,7 +145,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param lastAttacker
 	 */
 	public void onDie(@Nonnull Creature lastAttacker) {
-		getOwner().getMoveController().abortMove();
+		getOwner().getMoveController().abortMove(false);
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
 		if (getOwner() instanceof Player && ((Player) getOwner()).getIsFlyingBeforeDeath()) {
@@ -208,7 +209,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().incrementAttackedCount();
 
 		if (attacker instanceof Player)
-			applyEffectOnCritical((Player) attacker, getOwner(), status);
+			applyEffectOnCritical((Player) attacker, getOwner(), status, skillId);
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
@@ -221,23 +222,23 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		});
 	}
 
-	private void applyEffectOnCritical(Player attacker, Creature attacked, AttackStatus status) {
+	private void applyEffectOnCritical(Player attacker, Creature attacked, AttackStatus status, int skillId) {
 		if (status == AttackStatus.CRITICAL) {
-			int skillId = 0;
+			int id = 0;
 			ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
 			if (mainHandWeaponType != null) {
 				switch (mainHandWeaponType) {
 					case POLEARM:
 					case STAFF:
 					case GREATSWORD:
-						skillId = 8218; // stumble
+						id = 8218; // stumble
 						break;
 					case BOW:
-						skillId = 8217; // stun
+						id = 8217; // stun
 				}
 			}
 
-			if (skillId == 0)
+			if (id == 0)
 				return;
 
 			if (attacked.getEffectController().isUnderShield())
@@ -247,8 +248,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (Rnd.get(1, 100) > 10)
 				return;
 
-			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-			if (template == null)
+			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);
+			// magical skills do not stun
+			if (template == null || (skillId != 0 && DataManager.SKILL_DATA.getSkillTemplate(skillId).getType() == SkillType.MAGICAL))
 				return;
 			Effect e = new Effect(attacker, attacked, template, template.getLvl(), 0);
 			e.initialize();

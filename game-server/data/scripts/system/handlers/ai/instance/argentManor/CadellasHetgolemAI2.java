@@ -44,7 +44,7 @@ public class CadellasHetgolemAI2 extends GeneralNpcAI2 {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		getMoveController().abortMove();
+		getMoveController().abortMove(false);
 		if (isDestroyed.compareAndSet(false, true)) {
 			PacketSendUtility.broadcastMessage(getOwner(), 1500462);
 			SkillEngine.getInstance().getSkill(getOwner(), getHealSkill(), 60, getOwner()).useNoAnimationSkill();

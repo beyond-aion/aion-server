@@ -573,6 +573,7 @@ public abstract class EffectTemplate {
 	 * @return true = no resist, false = resisted
 	 */
 	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
+		System.out.println("------------------------------");
 		if (effect.getEffected() == null || effect.getEffected().getGameStats() == null || effect.getEffector() == null
 			|| effect.getEffector().getGameStats() == null)
 			return false;
@@ -580,8 +581,10 @@ public abstract class EffectTemplate {
 		Creature effected = effect.getEffected();
 		Creature effector = effect.getEffector();
 
-		if (statEnum == null)
+		if (statEnum == null) {
+			System.out.println("statEnum == null!");
 			return true;
+		}
 
 		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equals("WA_AVENGINGCRASH")) {
 			return true;
@@ -590,10 +593,12 @@ public abstract class EffectTemplate {
 		int effectPower = 1000;
 
 		if (isAlteredState(statEnum)) {
+			System.out.println("AbnormalResist all: " + effect.getEffected().getGameStats().getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, 0).getCurrent() + "\nTest: " + effect.getEffected().getGameStats().getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, 0).toString() );
 			effectPower -= effect.getEffected().getGameStats().getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, 0).getCurrent();
 		}
 
 		// effect resistance
+		System.out.println(statEnum.toString() + " _ " + effect.getEffected().getGameStats().getStat(statEnum, 0).getCurrent());
 		effectPower -= effect.getEffected().getGameStats().getStat(statEnum, 0).getCurrent();
 
 		// penetration
@@ -601,6 +606,7 @@ public abstract class EffectTemplate {
 		if (penetrationStat != null)
 			effectPower += effector.getGameStats().getStat(penetrationStat, 0).getCurrent();
 
+		System.out.println("effectPower: " + effectPower);
 		// resist mod pvp
 		if (effector.isPvpTarget(effect.getEffected())) {
 			int differ = (effected.getLevel() - effector.getLevel());
@@ -609,14 +615,15 @@ public abstract class EffectTemplate {
 			else if (differ >= 8)
 				effectPower *= 0.1f;
 		}
-
+		System.out.println("effectPower: " + effectPower);
 		// resist mod PvE
 		if (effect.getEffected() instanceof Npc) {
 			Npc effectrd = (Npc) effect.getEffected();
 			int hpGaugeMod = effectrd.getObjectTemplate().getRank().ordinal() - 1;
 			effectPower -= hpGaugeMod * 100;
 		}
-
+		System.out.println("effectPower: " + effectPower);
+		System.out.println("------------------------------");
 		return Rnd.get(1, 1000) <= effectPower;
 	}
 
@@ -642,7 +649,7 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @param statEnum
+	 * @param stat
 	 * @return true = it's an altered state effect, false = it is Poison/Bleed dot (normal Dots have statEnum null here)
 	 */
 	private boolean isAlteredState(StatEnum stat) {

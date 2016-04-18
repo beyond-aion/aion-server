@@ -123,7 +123,7 @@ public class _20503AncientEvilPlans extends QuestHandler {
 					qs.setQuestVar(var+1);
 					updateQuestStatus(env);
 					playQuestMovie(env, 862);
-					player.getMoveController().abortMove();
+					player.getMoveController().abortMove(false);
 				}
 			}
 			return true;

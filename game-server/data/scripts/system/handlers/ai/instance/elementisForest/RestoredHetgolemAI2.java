@@ -41,7 +41,7 @@ public class RestoredHetgolemAI2 extends AggressiveNpcAI2 {
 			@Override
 			public void run() {
 				if (!isAlreadyDead()) {
-					getMoveController().abortMove();
+					getMoveController().abortMove(false);
 					setSubStateIfNot(AISubState.WALK_RANDOM);
 					setStateIfNot(AIState.WALKING);
 					float direction = Rnd.get(0, 199) / 100f;

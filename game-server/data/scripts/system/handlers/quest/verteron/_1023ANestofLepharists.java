@@ -125,7 +125,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 
 		if (qs.getQuestVars().getVarById(0) == 2) {
 			playQuestMovie(env, 23);
-			player.getMoveController().abortMove();
+			player.getMoveController().abortMove(false);
 			qs.setQuestVarById(0, 3); // 3
 			updateQuestStatus(env);
 			return true;

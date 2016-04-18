@@ -160,7 +160,7 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 			setStateIfNot(AIState.FIGHT);
 			think();
 		} else {
-			getMoveController().abortMove();
+			getMoveController().abortMove(false);
 			getOwner().setTarget(creature);
 			getOwner().getGameStats().renewLastAttackTime();
 			getOwner().getGameStats().renewLastAttackedTime();

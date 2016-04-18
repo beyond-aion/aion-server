@@ -30,7 +30,7 @@ public class SpawnEventHandler {
 	 * @param npcAI
 	 */
 	public static void onRespawn(NpcAI2 npcAI) {
-		npcAI.getOwner().getMoveController().resetMove();
+		npcAI.getOwner().getMoveController().resetMove(false);
 	}
 
 }

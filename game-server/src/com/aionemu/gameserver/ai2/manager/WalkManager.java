@@ -181,7 +181,7 @@ public class WalkManager {
 					chooseNextRandomPoint(npcAI);
 					break;
 				case TALK:
-					npcAI.getOwner().getMoveController().abortMove();
+					npcAI.getOwner().getMoveController().abortMove(false);
 					break;
 			}
 		}
@@ -193,11 +193,11 @@ public class WalkManager {
 	protected static void chooseNextRouteStep(final NpcAI2 npcAI) {
 		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
 		if (walkPause == 0) {
-			npcAI.getOwner().getMoveController().resetMove();
+			npcAI.getOwner().getMoveController().resetMove(false);
 			if(npcAI.getOwner().getMoveController().isNextRouteStepChosen())
 				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
-			npcAI.getOwner().getMoveController().abortMove();
+			npcAI.getOwner().getMoveController().abortMove(false);
 			npcAI.getOwner().getMoveController().isNextRouteStepChosen();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -216,7 +216,7 @@ public class WalkManager {
 	 */
 	private static void chooseNextRandomPoint(final NpcAI2 npcAI) {
 		final Npc owner = npcAI.getOwner();
-		owner.getMoveController().abortMove();
+		owner.getMoveController().abortMove(false);
 		int randomWalkNr = owner.getSpawn().getRandomWalk();
 		final int walkRange = Math.max(randomWalkNr, WALK_RANDOM_RANGE);
 
@@ -247,18 +247,21 @@ public class WalkManager {
 
 	}
 
+	public static void stopWalking(NpcAI2 npcAI) {
+		stopWalking(npcAI, false);
+	}
 	/**
 	 * @param npcAI
 	 */
-	public static void stopWalking(NpcAI2 npcAI) {
-		npcAI.getOwner().getMoveController().abortMove();
+	public static void stopWalking(NpcAI2 npcAI, boolean isFight) {
+		npcAI.getOwner().getMoveController().abortMove(isFight);
 		npcAI.setStateIfNot(AIState.IDLE);
 		npcAI.setSubStateIfNot(AISubState.NONE);
 		EmoteManager.emoteStopWalking(npcAI.getOwner());
 	}
 
 	/**
-	 * @param owner
+	 * @param npcAI
 	 * @return
 	 */
 	public static boolean isArrivedAtPoint(NpcAI2 npcAI) {

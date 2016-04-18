@@ -41,7 +41,7 @@ public class ClusteredNpc {
 	}
 
 	public void despawn() {
-		npc.getMoveController().abortMove();
+		npc.getMoveController().abortMove(false);
 		npc.getController().cancelTask(TaskId.RESPAWN);
 		npc.getController().onDelete();
 	}

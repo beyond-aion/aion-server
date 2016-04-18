@@ -33,8 +33,8 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	@Override
-	public void abortMove() {
-		super.abortMove();
+	public void abortMove(boolean isFight) {
+		super.abortMove(isFight);
 		stopFalling(owner.getZ());
 	}
 

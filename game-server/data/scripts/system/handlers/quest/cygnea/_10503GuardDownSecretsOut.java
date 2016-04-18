@@ -157,7 +157,7 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					playQuestMovie(env, 991);
-					player.getMoveController().abortMove();
+					player.getMoveController().abortMove(false);
 				}
 			}
 			return true;

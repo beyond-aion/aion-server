@@ -251,7 +251,7 @@ public class AionConnection extends AConnection {
 		if (player != null) {
 			msg += " [Player: " + player.getName() + "]";
 			// force stop movement of player
-			player.getMoveController().abortMove();
+			player.getMoveController().abortMove(false);
 			player.getController().stopMoving();
 
 			ThreadPoolManager.getInstance().schedule(new Runnable() {

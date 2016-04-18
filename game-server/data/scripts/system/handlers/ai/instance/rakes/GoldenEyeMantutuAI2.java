@@ -39,7 +39,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 	protected void handleCustomEvent(int eventId, Object... args) {
 		if (eventId == 1 && args != null) {
 			canThink = false;
-			getMoveController().abortMove();
+			getMoveController().abortMove(false);
 			EmoteManager.emoteStopAttacking(getOwner());
 			Npc npc = (Npc) args[0];
 			getOwner().setTarget(npc);
@@ -55,7 +55,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 		super.handleMoveArrived();
 		if (!canThink) {
 			VisibleObject target = getTarget();
-			getMoveController().abortMove();
+			getMoveController().abortMove(false);
 			if (target != null && target.isSpawned() && target instanceof Npc) {
 				Npc npc = (Npc) target;
 				int npcId = npc.getNpcId();

@@ -215,7 +215,7 @@ public class WalkerGroup {
 			for (int i = 0; i < members.size(); i++) {
 				ClusteredNpc snpc = members.get(i);
 				if ((memberSteps[i] == groupStep) && !allArrived) {
-					npcAI.getOwner().getMoveController().abortMove();
+					npcAI.getOwner().getMoveController().abortMove(false);
 					npcAI.setStateIfNot(AIState.WALKING);
 					npcAI.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
 					continue;

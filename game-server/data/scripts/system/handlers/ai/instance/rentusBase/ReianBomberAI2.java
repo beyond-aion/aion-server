@@ -49,7 +49,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 	}
 
 	private void startHelpEvent() {
-		getMoveController().abortMove();
+		getMoveController().abortMove(false);
 		setStateIfNot(AIState.IDLE);
 		setSubStateIfNot(AISubState.NONE);
 		SkillEngine.getInstance().getSkill(getOwner(), 19374, 60, getOwner()).useNoAnimationSkill();

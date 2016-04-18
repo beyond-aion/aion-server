@@ -117,7 +117,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			AI2Logger.moveinfo(owner, "moveToDestination destination: " + destination);
 		}
 		if (NpcActions.isAlreadyDead(owner)) {
-			abortMove();
+			abortMove(false);
 			return;
 		}
 		if (!owner.canPerformMove()) {
@@ -299,24 +299,23 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	@Override
-	public void abortMove() {
+	public void abortMove(boolean isFight) {
 		if (!started.get())
 			return;
-		resetMove();
+		resetMove(isFight);
 		setAndSendStopMove(owner);
 	}
 
 	/**
 	 * Initialize values to default ones
 	 */
-	public void resetMove() {
+	public void resetMove(boolean isFight) {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}
 		started.set(false);
 		// temp fix otherwise npcs start moving around to unknown positions TODO: final fix
-		if (owner.getAi2().getState() != AIState.WALKING && owner.getAi2().getState() != AIState.RETURNING
-				&& owner.getAi2().getState() != AIState.FEAR) {
+		if (isFight) {
 			destination = Destination.TARGET_OBJECT;
 		}
 		targetDestX = 0;

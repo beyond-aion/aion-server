@@ -26,13 +26,13 @@ public class TargetEventHandler {
 		AIState currentState = npcAI.getState();
 		switch (currentState) {
 			case FIGHT:
-				npcAI.getOwner().getMoveController().abortMove();
+				npcAI.getOwner().getMoveController().abortMove(false);
 				AttackManager.scheduleNextAttack(npcAI);
 				if (npcAI.getOwner().getMoveController().isFollowingTarget())
 					npcAI.getOwner().getMoveController().storeStep();
 				break;
 			case RETURNING:
-				npcAI.getOwner().getMoveController().abortMove();
+				npcAI.getOwner().getMoveController().abortMove(false);
 				npcAI.getOwner().getMoveController().recallPreviousStep();
 				if (npcAI.getOwner().isAtSpawnLocation())
 					npcAI.onGeneralEvent(AIEventType.BACK_HOME);
@@ -40,11 +40,11 @@ public class TargetEventHandler {
 					npcAI.onGeneralEvent(AIEventType.NOT_AT_HOME);
 				break;
 			case FOLLOWING:
-				npcAI.getOwner().getMoveController().abortMove();
+				npcAI.getOwner().getMoveController().abortMove(false);
 				npcAI.getOwner().getMoveController().storeStep();
 				break;
 			case FEAR:
-				npcAI.getOwner().getMoveController().abortMove();
+				npcAI.getOwner().getMoveController().abortMove(false);
 				npcAI.getOwner().getMoveController().storeStep();
 				break;
 			case WALKING:
@@ -89,7 +89,7 @@ public class TargetEventHandler {
 			npcAI.getOwner().getAggroList().stopHating(target);
 		}
 		if (npcAI.isMoveSupported()) {
-			npcAI.getOwner().getMoveController().abortMove();
+			npcAI.getOwner().getMoveController().abortMove(false);
 		}
 		if (!npcAI.isAlreadyDead())
 			npcAI.think();

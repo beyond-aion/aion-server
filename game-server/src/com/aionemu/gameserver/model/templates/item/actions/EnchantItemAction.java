@@ -99,7 +99,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(this);
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(stoneType ? 1300457 : 1300464, new DescriptionId(targetItem.getNameId())));
 				if (player.getMoveController().isInMove()) {
-					player.getMoveController().abortMove();
+					player.getMoveController().abortMove(false);
 					player.getController().cancelUseItem();
 				}
 			}

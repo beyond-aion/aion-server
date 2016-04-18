@@ -61,7 +61,7 @@ public class FollowEventHandler {
 	public static void stopFollow(NpcAI2 npcAI, Creature creature) {
 		if (npcAI.setStateIfNot(AIState.IDLE)) {
 			npcAI.getOwner().setTarget(null);
-			npcAI.getOwner().getMoveController().abortMove();
+			npcAI.getOwner().getMoveController().abortMove(false);
 			AI2Actions.scheduleRespawn(npcAI);
 			AI2Actions.deleteOwner(npcAI);
 		}

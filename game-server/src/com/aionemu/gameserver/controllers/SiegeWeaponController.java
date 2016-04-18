@@ -24,7 +24,7 @@ public class SiegeWeaponController extends SummonController {
 	@Override
 	public void release(final UnsummonType unsummonType) {
 		getMaster().getController().cancelTask(TaskId.SUMMON_FOLLOW);
-		getOwner().getMoveController().abortMove();
+		getOwner().getMoveController().abortMove(false);
 		super.release(unsummonType);
 	}
 

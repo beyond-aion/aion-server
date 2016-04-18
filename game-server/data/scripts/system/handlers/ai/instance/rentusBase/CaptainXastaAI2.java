@@ -112,11 +112,11 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						getMoveController().recallPreviousStep();
-						getMoveController().abortMove();
+						getMoveController().abortMove(false);
 						onGeneralEvent(AIEventType.ATTACK_FINISH);
 						onGeneralEvent(AIEventType.BACK_HOME);
 					} else {
-						getMoveController().abortMove();
+						getMoveController().abortMove(false);
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();

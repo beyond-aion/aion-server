@@ -188,7 +188,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 					if (obj != null && obj instanceof Npc) {
 						Npc npc = (Npc) obj;
 						if (npc.getNpcId() == 282209) {
-							getMoveController().abortMove();
+							getMoveController().abortMove(false);
 							SkillEngine.getInstance().getSkill(npc, 19432, 60, getOwner()).useNoAnimationSkill();
 							SkillEngine.getInstance().getSkill(npc, 19709, 60, getOwner()).useNoAnimationSkill();
 							PacketSendUtility.broadcastToMap(getOwner(), 1401042);
@@ -339,7 +339,7 @@ public class ZadraSpellweaverAI2 extends AggressiveNpcAI2 {
 					setStateIfNot(AIState.FIGHT);
 					think();
 				} else {
-					getMoveController().abortMove();
+					getMoveController().abortMove(false);
 					getOwner().setTarget(creature);
 					getOwner().getGameStats().renewLastAttackTime();
 					getOwner().getGameStats().renewLastAttackedTime();

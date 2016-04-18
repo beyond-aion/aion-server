@@ -98,7 +98,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	}
 
 	@Override
-	public void abortMove() {
+	public void abortMove(boolean isFight) {
 		started.set(false);
 		PlayerMoveTaskManager.getInstance().removePlayer(owner);
 		targetDestX = 0;
