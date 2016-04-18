@@ -1,0 +1,1 @@
+DELETE FROM `player_npc_factions` WHERE `faction_id` in(8, 9, 10, 11, 12, 13, 15, 16, 17, 18);
