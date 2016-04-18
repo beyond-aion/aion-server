@@ -193,7 +193,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		if (damage != 0 && notifyAttack) {
-			getOwner().getObserveController().notifyAttackedObservers(attacker);
+			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
 		// Reduce the damage to exactly what is required to ensure death.

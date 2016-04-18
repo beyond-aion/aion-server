@@ -80,7 +80,7 @@ public class FearEffect extends EffectTemplate {
 			ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 
 				@Override
-				public void attacked(Creature creature) {
+				public void attacked(Creature creature, int skillId) {
 					if (Rnd.get(0, 100) > resistchance)
 						effected.getEffectController().removeEffect(effect.getSkillId());
 				}

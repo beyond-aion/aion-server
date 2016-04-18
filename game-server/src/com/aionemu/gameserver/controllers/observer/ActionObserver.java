@@ -50,9 +50,10 @@ public class ActionObserver {
 	};
 
 	/**
-	 * @param creature
+	 * @param creature who effected
+	 * @param the effector skill id, which called this method
 	 */
-	public void attacked(Creature creature) {
+	public void attacked(Creature creature, int skillId) {
 	};
 
 	/**

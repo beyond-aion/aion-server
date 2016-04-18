@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ProvokeTarget;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -40,9 +41,9 @@ public class ProvokerEffect extends ShieldEffect {
 	public void startEffect(Effect effect) {
 		ActionObserver observer = null;
 		final Creature effector = effect.getEffector();
-		final int prob2 = this.hitTypeProb;
+		final int prob2 = hitTypeProb;
 		final int radius = this.radius;
-		switch (this.hitType) {
+		switch (hitType) {
 			case NMLATK:// ATTACK
 				observer = new ActionObserver(ObserverType.ATTACK) {
 
@@ -56,11 +57,47 @@ public class ProvokerEffect extends ShieldEffect {
 
 				};
 				break;
+			case PHHIT:
+				observer = new ActionObserver(ObserverType.ATTACKED) {
+
+					@Override
+					public void attacked(Creature creature, int id) {
+						if (radius > 0) {
+							if (!MathUtil.isIn3dRange(effector, creature, radius))
+								return;
+						}
+						if (Rnd.get(0, 99) <= prob2) {
+							if (id == 0 || DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.PHYSICAL) {
+								Creature target = getProvokeTarget(provokeTarget, effector, creature);
+								createProvokedEffect(effector, target);
+							}
+						}
+					}
+				};
+				break;
+			case MAHIT:
+				observer = new ActionObserver(ObserverType.ATTACKED) {
+
+					@Override
+					public void attacked(Creature creature, int id) {
+						if (radius > 0) {
+							if (!MathUtil.isIn3dRange(effector, creature, radius))
+								return;
+						}
+						if (Rnd.get(0, 99) <= prob2) {
+							if (id != 0 && DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.MAGICAL) {
+								Creature target = getProvokeTarget(provokeTarget, effector, creature);
+								createProvokedEffect(effector, target);
+							}
+						}
+					}
+				};
+				break;
 			case EVERYHIT:// ATTACKED
 				observer = new ActionObserver(ObserverType.ATTACKED) {
 
 					@Override
-					public void attacked(Creature creature) {
+					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
 							if (!MathUtil.isIn3dRange(effector, creature, radius))
 								return;
@@ -87,7 +124,6 @@ public class ProvokerEffect extends ShieldEffect {
 
 				};
 				break;
-		// TODO MAHIT and PHHIT
 		}
 
 		if (observer == null)

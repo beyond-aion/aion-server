@@ -120,7 +120,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			player.getObserveController().attach(new ActionObserver(ObserverType.ALL) {
 
 				@Override
-				public void attacked(Creature creature) {
+				public void attacked(Creature creature, int skillId) {
 					finishGathering(player);
 				};
 

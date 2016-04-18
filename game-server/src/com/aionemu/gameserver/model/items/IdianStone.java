@@ -48,7 +48,7 @@ public class IdianStone extends ItemStone {
 			actionListener = new ActionObserver(ObserverType.ALL) {
 
 				@Override
-				public void attacked(Creature creature) {
+				public void attacked(Creature creature, int skillId) {
 					decreasePolishCharge(player, true);
 				}
 

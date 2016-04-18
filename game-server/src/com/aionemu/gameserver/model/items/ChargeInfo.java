@@ -62,7 +62,7 @@ public class ChargeInfo extends ActionObserver {
 	}
 
 	@Override
-	public void attacked(Creature creature) {
+	public void attacked(Creature creature, int skillId) {
 		updateChargePoints(-defendBurn);
 		Player player = this.player;
 		if (player != null) {

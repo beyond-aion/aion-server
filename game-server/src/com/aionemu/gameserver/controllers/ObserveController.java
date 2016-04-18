@@ -131,7 +131,7 @@ public class ObserveController {
 				observer.attack((Creature) object[0]);
 				break;
 			case ATTACKED:
-				observer.attacked((Creature) object[0]);
+				observer.attacked((Creature) object[0], (int) object[1]);
 				break;
 			case DEATH:
 				observer.died((Creature) object[0]);
@@ -212,8 +212,8 @@ public class ObserveController {
 	/**
 	 * notify that creature attacked
 	 */
-	public void notifyAttackedObservers(Creature creature) {
-		notifyObservers(ObserverType.ATTACKED, creature);
+	public void notifyAttackedObservers(Creature creature, int skillId) {
+		notifyObservers(ObserverType.ATTACKED, creature, skillId);
 	}
 
 	/**

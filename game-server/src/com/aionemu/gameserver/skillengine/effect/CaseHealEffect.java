@@ -58,7 +58,7 @@ public class CaseHealEffect extends AbstractHealEffect {
 		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override
-			public void attacked(Creature creature) {
+			public void attacked(Creature creature, int skillId) {
 				calculateHeal(effect);
 			}
 		};

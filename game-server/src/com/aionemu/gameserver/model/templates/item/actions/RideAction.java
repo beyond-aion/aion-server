@@ -120,7 +120,7 @@ public class RideAction extends AbstractItemAction {
 		ActionObserver attackedObserver = new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override
-			public void attacked(Creature creature) {
+			public void attacked(Creature creature, int skillId) {
 				if (Rnd.get(1000) < 200)// 20% from client action file
 					player.unsetPlayerMode(PlayerMode.RIDE);
 			}
