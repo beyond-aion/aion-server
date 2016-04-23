@@ -33943,15 +33943,37 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188053906" name="Kind Shugo Transformation Candy Box" />
-	<decomposable item_id="188053909" name="Large Ascension Water Box" />
-	<decomposable item_id="188053910" name="Multiple Option Tuning Scroll Box for Mythic Class - Weapon" />
-	<decomposable item_id="188053911" name="Steampunk Wings Box" />
+	<decomposable item_id="188053906" name="Kind Shugo Transformation Candy Box">
+		<items>
+			<item id="160010103" name="Kind Shugo Form Candy" race="ELYOS"/>
+			<item id="160010104" name="Kind Shugo Form Candy" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053909" name="Large Ascension Water Box">
+		<items>
+			<item id="166030005" name="Tempering Solution" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053910" name="Multiple Option Tuning Scroll Box for Mythic Class - Weapon">
+		<items>
+			<item id="166200013" name="Enduring Mythic Weapon Tuning Scroll" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053911" name="Steampunk Wings Box">
+		<items>
+			<item id="187060174" name="Metaspanner Steampunk Wings"/>
+			<item id="187060175" name="Blackgear Steampunk Wings"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053912" name="Noble Enchantment Stone Bundle" />
 	<decomposable item_id="188053913" name="Noble Enchantment Stone Bundle" />
 	<decomposable item_id="188053914" name="Bountiful Stigma Bundle" />
 	<decomposable item_id="188053915" name="[Event] Aether Bloom Bouquet" />
-	<decomposable item_id="188053916" name="Guestpetal Bundle" />
+	<decomposable item_id="188053916" name="Guestpetal Bundle">
+		<items>
+			<item id="186000146" name="Guestpetal"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053917" name="Gentle Shugo Enchantment Stone Box" />
 	<decomposable item_id="188053918" name="Illusion Godstone Box" />
 	<decomposable item_id="188053919" name="Boxing Posture Motion Card Box" />
