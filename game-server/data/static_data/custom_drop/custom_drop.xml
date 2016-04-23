@@ -1272,6 +1272,9 @@
 	</npc_drop>
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Conqueror's Mark">
+			<drop item_id="186000238" name="Conqueror's Mark" min_amount="3" max_amount="5" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
 			<drop item_id="166500002" name="Amplification Stone" chance="5" each_member="true" />
 		</drop_group>
@@ -1555,6 +1558,9 @@
 	</npc_drop>
 	<!-- Dragon Lords Refuge -->
 	<npc_drop npc_id="701542" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Conqueror's Mark">
+			<drop item_id="186000238" name="Conqueror's Mark" min_amount="3" max_amount="5" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Amplification Stone (Multi)">
 			<drop item_id="166500002" name="Amplification Stone" chance="5" each_member="true" />
 		</drop_group>
@@ -1724,6 +1730,9 @@
 	</npc_drop>
 	<!-- Eternal Bastion S-Grade -->
 	<npc_drop npc_id="701917" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Conqueror's Mark">
+			<drop item_id="186000238" name="Conqueror's Mark" min_amount="3" max_amount="5" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Epic Weapon">
 			<drop item_id="100001584" name="Bastion Aggressor Sword" chance="80" />
 			<drop item_id="100101222" name="Bastion Aggressor Mace" chance="80" />
