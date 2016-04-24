@@ -61,7 +61,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean chanceReady() {
-		return Rnd.get(0, 100) < template.getProbability();
+		return Rnd.get(1, 100) <= template.getProbability();
 	}
 
 	@Override

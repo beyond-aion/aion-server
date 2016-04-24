@@ -54,7 +54,7 @@ public class SignetBurstEffect extends DamageEffect {
 					break;
 			}
 			AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
-			if (Rnd.get(0, 100) < failChance) {
+			if (Rnd.get(1, 100) <= failChance) {
 				effect.setLaunchSubEffect(false);
 			}
 			if (signetEffect != null) {

@@ -693,7 +693,7 @@ public class AttackUtil {
 	 */
 	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill) {
 		if (!isSkill) {
-			if (Rnd.get(0, 1000) < StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
+			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
 				return AttackStatus.RESIST;
 		}
 
@@ -705,7 +705,7 @@ public class AttackUtil {
 	}
 
 	private static AttackStatus calculateHomingAttackStatus(Creature attacker, Creature attacked) {
-		if (Rnd.get(0, 1000) < StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
+		if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
 			return AttackStatus.RESIST;
 
 		else if (StatFunctions.calculatePhysicalDodgeRate(attacker, attacked, 0))
