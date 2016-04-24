@@ -26,6 +26,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -505,8 +506,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (skill == null)
 			return;
 		creature.setCasting(null);
-		if (creature instanceof Npc)
+		if (creature instanceof Npc) {
+			removeQueuedSkill((Npc)creature);
 			((Npc) creature).getGameStats().setLastSkill(null);
+		}
 		if (creature.getSkillNumber() > 0)
 			creature.setSkillNumber(creature.getSkillNumber() - 1);
 	}
@@ -528,8 +531,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		castingSkill.cancelCast();
 		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
 		creature.setCasting(null);
-		if (creature instanceof Npc)
+		if (creature instanceof Npc) {
+			removeQueuedSkill((Npc) creature);
 			((Npc) creature).getGameStats().setLastSkill(null);
+		}
 		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
 		if (getOwner().getAi2() instanceof NpcAI2) {
 			NpcAI2 npcAI = (NpcAI2) getOwner().getAi2();
@@ -540,6 +545,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		if (lastAttacker instanceof Player) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
+		}
+	}
+
+	private void removeQueuedSkill(Npc npc) {
+		NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
+		if (lastSkill != null && lastSkill.isQueued()) {
+			npc.getQueuedSkills().poll();
 		}
 	}
 

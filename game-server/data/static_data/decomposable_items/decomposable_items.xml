@@ -24749,7 +24749,16 @@
 			<item id="125003791" name="Lunatic Modor's Aethertech Magic Helm" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188052761" name="[Event] Bonus Entry Scroll Bundle" />
+	<decomposable item_id="188052761" name="[Event] Bonus Entry Scroll Bundle" selectable="true">
+		<items>
+			<item id="188600260" name="[Event] Danuar Reliquary Bonus Entry Scroll"/>
+			<item id="188600261" name="[Event] Infinity Shard Bonus Entry Scroll"/>
+			<item id="188600262" name="[Event] Danuar Sanctuary Bonus Entry Scroll"/>
+			<item id="188600263" name="[Event] Ophidan Bridge Bonus Entry Scroll"/>
+			<item id="188600264" name="[Event] The Eternal Bastion Bonus Entry Scroll"/>
+			<item id="188600265" name="[Event] Sauro Supply Base Bonus Entry Scroll"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188052762" name="Krotan Siege Reward Chest">
 		<items>
 			<item id="186000242" name="Ceramium Medal" min_count="1" max_count="2" />
@@ -30122,7 +30131,20 @@
 	<decomposable item_id="188053523" name="Classy Gray Cat Set" />
 	<decomposable item_id="188053524" name="Lovely Pink Rabbit Set" />
 	<decomposable item_id="188053525" name="Classy Gray Rabbit Set" />
-	<decomposable item_id="188053526" name="[Event] Aion's Steel Form Candy Box" />
+	<decomposable item_id="188053526" name="[Event] Aion's Steel Form Candy Box" selectable="true">
+		<items>
+			<item id="160010317" name="Wise Iron Cobalt Form Candy" min_count="5" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010323" name="Wunderkind Iron cobalt Form Candy" min_count="5" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010319" name="Nimble Iron Cobalt Form Candy" min_count="5" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010315" name="Dignified Iron Cobalt Form Candy" min_count="5" race="ELYOS" player_classes="ASSASSIN RANGER CHANTER TEMPLAR GLADIATOR"/>
+			<item id="160010321" name="Courageous Iron Cobalt Form Candy" min_count="5" race="ELYOS" player_classes="ASSASSIN RANGER CHANTER TEMPLAR GLADIATOR"/>
+			<item id="160010318" name="Wise Iron Cobalt Form Candy" min_count="5" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010324" name="Wunderkind Iron cobalt Form Candy" min_count="5" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010320" name="Nimble Iron Cobalt Form Candy" min_count="5" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER RIDER BARD"/>
+			<item id="160010316" name="Dignified Iron Cobalt Form Candy" min_count="5" race="ASMODIANS" player_classes="ASSASSIN RANGER CHANTER TEMPLAR GLADIATOR"/>
+			<item id="160010322" name="Courageous Iron Cobalt Form Candy" min_count="5" race="ASMODIANS" player_classes="ASSASSIN RANGER CHANTER TEMPLAR GLADIATOR"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053527" name="[Event] Flying Pagati Box (7 days)" />
 	<decomposable item_id="188053528" name="[Event] Heart Mini Trump" />
 	<decomposable item_id="188053529" name="[Event] Club Mini Trump" />
@@ -33921,15 +33943,37 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188053906" name="Kind Shugo Transformation Candy Box" />
-	<decomposable item_id="188053909" name="Large Ascension Water Box" />
-	<decomposable item_id="188053910" name="Multiple Option Tuning Scroll Box for Mythic Class - Weapon" />
-	<decomposable item_id="188053911" name="Steampunk Wings Box" />
+	<decomposable item_id="188053906" name="Kind Shugo Transformation Candy Box">
+		<items>
+			<item id="160010103" name="Kind Shugo Form Candy" race="ELYOS"/>
+			<item id="160010104" name="Kind Shugo Form Candy" race="ASMODIANS"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053909" name="Large Ascension Water Box">
+		<items>
+			<item id="166030005" name="Tempering Solution" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053910" name="Multiple Option Tuning Scroll Box for Mythic Class - Weapon">
+		<items>
+			<item id="166200013" name="Enduring Mythic Weapon Tuning Scroll" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188053911" name="Steampunk Wings Box">
+		<items>
+			<item id="187060174" name="Metaspanner Steampunk Wings"/>
+			<item id="187060175" name="Blackgear Steampunk Wings"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053912" name="Noble Enchantment Stone Bundle" />
 	<decomposable item_id="188053913" name="Noble Enchantment Stone Bundle" />
 	<decomposable item_id="188053914" name="Bountiful Stigma Bundle" />
 	<decomposable item_id="188053915" name="[Event] Aether Bloom Bouquet" />
-	<decomposable item_id="188053916" name="Guestpetal Bundle" />
+	<decomposable item_id="188053916" name="Guestpetal Bundle">
+		<items>
+			<item id="186000146" name="Guestpetal"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188053917" name="Gentle Shugo Enchantment Stone Box" />
 	<decomposable item_id="188053918" name="Illusion Godstone Box" />
 	<decomposable item_id="188053919" name="Boxing Posture Motion Card Box" />
@@ -34010,7 +34054,16 @@
 	<decomposable item_id="188054009" name="Lockbox Key Pouch" />
 	<decomposable item_id="188054010" name="Lockbox Key Pouch" />
 	<decomposable item_id="188054011" name="Lockbox Key Pouch" />
-	<decomposable item_id="188054013" name="[Event] Companion Box" />
+	<decomposable item_id="188054013" name="[Event] Companion Box" selectable="true">
+		<items>
+			<item id="184002082" name="[Event] Elyos Group Companion Kisk Summoning Stone" race="ELYOS"/>
+			<item id="184002083" name="[Event] Elyos Force Companion Kisk Summoning Stone" race="ELYOS"/>
+			<item id="184002084" name="[]Event] Elyos Legion Companion Kisk Summoning Stone" race="ELYOS"/>
+			<item id="184002085" name="[Event] Asmodian Group Companion Kisk Summoning Stone" race="ASMODIANS"/>
+			<item id="184002086" name="[Event] Asmodian Force Companion Kisk Summoning Stone" race="ASMODIANS"/>
+			<item id="184002087" name="[Event] Asmodian Legion Companion Kisk Summoning Stone" race="ASMODIANS"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188054014" name="[Event] Lunahare Kisk Box" />
 	<decomposable item_id="188054015" name="Group Companion Kisk Box" />
 	<decomposable item_id="188054016" name="Alliance Companion Kisk Box" />

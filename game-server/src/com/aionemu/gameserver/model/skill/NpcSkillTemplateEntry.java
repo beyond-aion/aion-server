@@ -61,7 +61,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean chanceReady() {
-		return Rnd.get(0, 100) < template.getProbability();
+		return Rnd.get(1, 100) <= template.getProbability();
 	}
 
 	@Override
@@ -247,11 +247,25 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public void fireAfterUseSkillEvents(Npc npc) {
+	public void fireOnStartCastEvents(Npc npc) {
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
+			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
+				npc.getAi2().fireOnStartCastEvents(this);
+			}
+			return;
+		}
+	}
+
+	@Override
+	public void fireOnEndCastEvents(Npc npc) {
+		NpcSkillConditionTemplate condTemp = getConditionTemplate();
+		if (condTemp == null) {
+			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
+				npc.getAi2().fireOnEndCastEvents(this);
+			}
 			return;
 		}
 		NpcSkillCondition condType = condTemp.getCondType();
@@ -359,5 +373,10 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) > template.getMaxChainTime())
 			return false;
 		return true;
+	}
+
+	@Override
+	public boolean isQueued() {
+		return false;
 	}
 }

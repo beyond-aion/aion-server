@@ -337,14 +337,14 @@ public abstract class EffectTemplate {
 
 	private boolean firstEffectCheck(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
 		if (this.getPosition() == 1) {
+			// check effectresistrate
+			if (!this.calculateEffectResistRate(effect, statEnum)) {
+				return false;
+			}
 			boolean cannotMiss = false;
 			if (this instanceof SkillAttackInstantEffect)
 				cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
 			if (!noResist && !cannotMiss) {
-				// check effectresistrate
-				if (!this.calculateEffectResistRate(effect, statEnum)) {
-					return false;
-				}
 				// check for BOOST_RESIST
 				int boostResist = 0;
 				switch (effect.getSkillTemplate().getSubType()) {
@@ -629,11 +629,6 @@ public abstract class EffectTemplate {
 					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)
 						return true;
 				}
-			}
-			if (effected.getTransformModel().getType() == TransformType.AVATAR) {
-				if (statEnum == StatEnum.SLOW_RESISTANCE || statEnum == StatEnum.OPENAERIAL_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE
-					|| statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.PULLED_RESISTANCE)
-					return true;
 			}
 		}
 		return false;

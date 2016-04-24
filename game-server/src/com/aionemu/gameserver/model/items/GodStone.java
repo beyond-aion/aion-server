@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -74,8 +75,12 @@ public class GodStone extends ItemStone {
 
 			@Override
 			public void attack(Creature creature) {
-				if (handProbability > Rnd.get(0, 1000)) {
-					Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), player.getTarget(),
+				int procProbability = handProbability;
+				if (creature instanceof Player) {
+					procProbability -= ((Player)creature).getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
+				}
+				if (Rnd.get(1, 1000) <= procProbability) {
+					Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), creature,
 						godItem, false);
 					skill.setFirstTargetRangeCheck(false);
 					if (skill.canUseSkill(CastState.CAST_START)) {
@@ -87,7 +92,7 @@ public class GodStone extends ItemStone {
 						// Illusion Godstones
 						if (breakProb > 0) {
 							increaseActivatedCount();
-							if (activatedCount > nonBreakCount && Rnd.get(0, 1000) < breakProb) {
+							if (activatedCount > nonBreakCount && Rnd.get(1, 1000) <= breakProb) {
 								// TODO: Delay 10 Minutes, send messages etc
 								// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
 								// godItem.getNameId()));

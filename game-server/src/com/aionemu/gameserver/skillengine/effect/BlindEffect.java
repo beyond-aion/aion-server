@@ -37,7 +37,7 @@ public class BlindEffect extends EffectTemplate {
 
 			@Override
 			public boolean checkAttackerStatus(AttackStatus status) {
-				return Rnd.get(0, 100) <= value;
+				return Rnd.get(1, 100) <= value;
 			}
 
 		};

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Objects;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcGameStats;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
@@ -44,6 +46,7 @@ public class Npc extends Creature {
 	private WalkerGroup walkerGroup;
 	private boolean isQuestBusy = false;
 	private NpcSkillList skillList;
+	private ConcurrentLinkedQueue<NpcSkillEntry> queuedSkills;
 	private WalkerGroupShift walkerGroupShift;
 	private String masterName = "";
 	private int creatorId = 0;
@@ -57,6 +60,7 @@ public class Npc extends Creature {
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
 		skillList = new NpcSkillList(this);
+		queuedSkills = new ConcurrentLinkedQueue<>();
 		setupStatContainers();
 
 		boolean aiOverride = false;
@@ -142,6 +146,10 @@ public class Npc extends Creature {
 
 	public NpcSkillList getSkillList() {
 		return this.skillList;
+	}
+
+	public ConcurrentLinkedQueue<NpcSkillEntry> getQueuedSkills() {
+		return this.queuedSkills;
 	}
 
 	public boolean hasWalkRoutes() {

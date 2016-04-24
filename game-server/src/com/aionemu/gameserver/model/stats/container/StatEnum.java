@@ -117,7 +117,7 @@ public enum StatEnum {
 	DEFORM_RESISTANCE_PENETRATION(90), // Deform Penetration
 	FEAR_RESISTANCE_PENETRATION(78), // Fear Penetration
 	NOFLY_RESISTANCE_PENETRATION(92), // NoFly Penetration
-	OPENAREIAL_RESISTANCE_PENETRATION(85), // Aether's Hold Penetration
+	OPENAERIAL_RESISTANCE_PENETRATION(85), // Aether's Hold Penetration
 	PARALYZE_RESISTANCE_PENETRATION(71), // Paralysis Resistance Penetration
 	PERIFICATION_RESISTANCE_PENETRATION(82), // Petrification Penetration
 	POISON_RESISTANCE_PENETRATION(69), // Poisoning Penetration

@@ -30,7 +30,8 @@ public class OpenAerialEffect extends EffectTemplate {
 		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED)
 			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE)
 			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
-			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER))
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.SPIN))
 			return;
 		super.calculate(effect, StatEnum.OPENAERIAL_RESISTANCE, SpellStatus.OPENAERIAL);
 	}

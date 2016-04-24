@@ -1766,7 +1766,7 @@
 			<add name="ROOT_RESISTANCE" value="50" bonus="true"/>
 			<add name="STUN_RESISTANCE" value="80" bonus="true"/>
 			<add name="SLEEP_RESISTANCE" value="100" bonus="true"/>
-			<add name="OPENAREIAL_RESISTANCE" value="150" bonus="true"/>
+			<add name="OPENAERIAL_RESISTANCE" value="150" bonus="true"/>
 		</modifiers>
 	</title>
 	<title id="263" nameId="2399879" desc="Guardian Detachment's Hero" race="ELYOS">

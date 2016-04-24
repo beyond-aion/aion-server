@@ -57,7 +57,11 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract NpcSkillTemplate getTemplate();
 
-	public abstract void fireAfterUseSkillEvents(Npc npc);
+	public abstract void fireOnEndCastEvents(Npc npc);
+
+	public abstract void fireOnStartCastEvents(Npc npc);
+
+	public abstract boolean isQueued();
 	
 }
 

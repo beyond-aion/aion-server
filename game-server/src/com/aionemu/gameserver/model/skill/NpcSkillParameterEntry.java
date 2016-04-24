@@ -98,6 +98,16 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public void fireAfterUseSkillEvents(Npc npc) {
+	public void fireOnEndCastEvents(Npc npc) {
+	}
+
+	@Override
+	public void fireOnStartCastEvents(Npc npc) {
+
+	}
+
+	@Override
+	public boolean isQueued() {
+		return false;
 	}
 }

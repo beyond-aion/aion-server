@@ -77,7 +77,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="523"/>
             <abs name="STUMBLE_RESISTANCE" value="524"/>
             <abs name="STAGGER_RESISTANCE" value="525"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="526"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="526"/>
             <abs name="SNARE_RESISTANCE" value="527"/>
             <abs name="SLOW_RESISTANCE" value="528"/>
             <abs name="SPIN_RESISTANCE" value="529"/>
@@ -100,7 +100,7 @@
             <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="623"/>
             <abs name="STUMBLE_RESISTANCE_PENETRATION" value="624"/>
             <abs name="STAGGER_RESISTANCE_PENETRATION" value="625"/>
-            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="626"/>
+            <abs name="OPENAERIAL_RESISTANCE_PENETRATION" value="626"/>
             <abs name="SNARE_RESISTANCE_PENETRATION" value="627"/>
             <abs name="SLOW_RESISTANCE_PENETRATION" value="628"/>
             <abs name="SPIN_RESISTANCE_PENETRATION" value="629"/>
@@ -187,7 +187,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="723"/>
             <abs name="STUMBLE_RESISTANCE" value="724"/>
             <abs name="STAGGER_RESISTANCE" value="725"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="726"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="726"/>
             <abs name="SNARE_RESISTANCE" value="727"/>
             <abs name="SLOW_RESISTANCE" value="728"/>
             <abs name="SPIN_RESISTANCE" value="729"/>
@@ -210,7 +210,7 @@
             <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="823"/>
             <abs name="STUMBLE_RESISTANCE_PENETRATION" value="824"/>
             <abs name="STAGGER_RESISTANCE_PENETRATION" value="825"/>
-            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="826"/>
+            <abs name="OPENAERIAL_RESISTANCE_PENETRATION" value="826"/>
             <abs name="SNARE_RESISTANCE_PENETRATION" value="827"/>
             <abs name="SLOW_RESISTANCE_PENETRATION" value="828"/>
             <abs name="SPIN_RESISTANCE_PENETRATION" value="829"/>
@@ -410,7 +410,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="500"/>
             <abs name="STUMBLE_RESISTANCE" value="500"/>
             <abs name="STAGGER_RESISTANCE" value="500"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="500"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="500"/>
             <abs name="SNARE_RESISTANCE" value="500"/>
             <abs name="SLOW_RESISTANCE" value="500"/>
             <abs name="SPIN_RESISTANCE" value="500"/>
@@ -433,7 +433,7 @@
             <abs name="PERIFICATION_RESISTANCE_PENETRATION" value="500"/>
             <abs name="STUMBLE_RESISTANCE_PENETRATION" value="500"/>
             <abs name="STAGGER_RESISTANCE_PENETRATION" value="500"/>
-            <abs name="OPENAREIAL_RESISTANCE_PENETRATION" value="500"/>
+            <abs name="OPENAERIAL_RESISTANCE_PENETRATION" value="500"/>
             <abs name="SNARE_RESISTANCE_PENETRATION" value="500"/>
             <abs name="SLOW_RESISTANCE_PENETRATION" value="500"/>
             <abs name="SPIN_RESISTANCE_PENETRATION" value="500"/>
@@ -575,7 +575,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -606,7 +606,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -638,7 +638,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -674,7 +674,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -707,7 +707,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -738,7 +738,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -770,7 +770,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -819,7 +819,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -868,7 +868,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -917,7 +917,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -966,7 +966,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1016,7 +1016,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1069,7 +1069,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1118,7 +1118,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1168,7 +1168,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1217,7 +1217,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>
@@ -1266,7 +1266,7 @@
             <abs name="PERIFICATION_RESISTANCE" value="9999"/>
             <abs name="STUMBLE_RESISTANCE" value="9999"/>
             <abs name="STAGGER_RESISTANCE" value="9999"/>
-            <abs name="OPENAREIAL_RESISTANCE" value="9999"/>
+            <abs name="OPENAERIAL_RESISTANCE" value="9999"/>
             <abs name="SNARE_RESISTANCE" value="9999"/>
             <abs name="SLOW_RESISTANCE" value="9999"/>
             <abs name="SPIN_RESISTANCE" value="9999"/>

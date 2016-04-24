@@ -914,7 +914,7 @@ public class Effect implements StatOwner {
 			EffectTemplate et = itr.next();
 			int effectDuration = et.getDuration2() + et.getDuration1() * getSkillLevel();
 			if (et.getRandomTime() > 0)
-				effectDuration -= Rnd.get(et.getRandomTime());
+				effectDuration -= Rnd.get(0, et.getRandomTime());
 			duration = duration > effectDuration ? duration : effectDuration;
 		}
 

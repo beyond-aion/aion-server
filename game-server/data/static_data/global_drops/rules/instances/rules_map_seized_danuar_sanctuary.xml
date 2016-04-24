@@ -287,6 +287,19 @@
 			<gd_item id="188052583" name="Sanctuary Conquerer Mark Bundle" />
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Conqueror's Mark" base_chance="100" each_member="true" min_count="3" max_count="5">
+		<gd_maps>
+			<gd_map map_id="301140000" name="Seized_Danuar_Sanctuary" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235619" name="Warmage Suyaroka" />
+			<gd_npc npc_id="235620" name="Chief Medic Tagnu" />
+			<gd_npc npc_id="235621" name="Virulent Ukahim" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000238" name="Conqueror's Mark" />
+		</gd_items>
+	</gd_rule>
 	<!-- TODO: find out what items this bundle contains -->
 	<!--<gd_rule rule_name="Recharger Bundle" base_chance="20">
 		<gd_maps>

@@ -495,9 +495,6 @@ public class EffectController {
 	/**
 	 * Method used to calculate number of effects of given dispelcategory, targetslot and dispelLevel used only in DispelBuffCounterAtk, therefore rest
 	 * of cases are skipped
-	 * 
-	 * @param dispelCat
-	 * @param targetSlot
 	 * @param dispelLevel
 	 * @return
 	 */
@@ -996,6 +993,7 @@ public class EffectController {
 			return false;
 		for (Effect effect : mapToUpdate.values()) {
 			if (effect.getSkillSubType().equals(nextEffect.getSkillSubType()) || effect.getTargetSlotEnum().equals(nextEffect.getTargetSlotEnum())) {
+				effectCheck:
 				for (EffectTemplate et : effect.getEffectTemplates()) {
 					if (et.getEffectid() == 0)
 						continue;
@@ -1009,6 +1007,7 @@ public class EffectController {
 								return true;
 							} else {
 								effect.endEffect(false, false);
+								break effectCheck;
 							}
 						}
 					}
