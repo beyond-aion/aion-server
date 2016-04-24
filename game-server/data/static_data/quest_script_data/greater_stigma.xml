@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			3930 [REMOVED] The Shattered Stigma
 			3931 [REMOVED] How to Use Stigma
 			3932 [REMOVED] Stop the Shulacks!
@@ -35,13 +35,16 @@
 			30320 [XML] Smiting for Bhemah
 			30321 [XML] Complete the Last Mission
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="30216" start_npc_ids="798941" end_npc_ids="798909"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="11275" start_npc_ids="798909"/>
 	<item_collecting id="11550" start_npc_ids="205531"/>
 	<item_collecting id="21550" start_npc_ids="205613"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="11553" start_npc_ids="205531"/>
 	<monster_hunt id="21553" start_npc_ids="205613"/>

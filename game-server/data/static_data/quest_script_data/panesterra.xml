@@ -74,13 +74,14 @@
 			41063 [TODO] [Urgent Order] Disilheim, It's Time
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS --> 
-	<report_to_many id="14220" start_npc_ids="802540" end_npc_ids="802540">
-		<npc_infos var="0" npc_id="802541" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="802540" quest_dialog="2375" close_dialog="1009"/>
+	
+	<!-- REPORTING QUESTS -->
+	<report_to_many id="14220" start_npc_ids="802540">
+		<npc_infos npc_ids="802541"/>
+		<npc_infos npc_ids="802540"/>
 	</report_to_many> 
-	<report_to_many id="24220" start_npc_ids="802542" end_npc_ids="802542">
-		<npc_infos var="0" npc_id="802543" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="802542" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="24220" start_npc_ids="802542">
+		<npc_infos npc_ids="802543"/>
+		<npc_infos npc_ids="802542"/>
 	</report_to_many> 
 </quest_scripts>

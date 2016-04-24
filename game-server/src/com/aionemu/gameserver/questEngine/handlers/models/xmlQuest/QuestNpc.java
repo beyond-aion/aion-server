@@ -16,11 +16,12 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestNpc")
+@XmlType(name = "QuestNpc", propOrder = { "dialog" })
 public class QuestNpc {
 
 	@XmlElement(name = "dialog")
 	protected List<QuestDialog> dialog;
+	
 	@XmlAttribute(required = true)
 	protected int id;
 

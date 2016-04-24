@@ -35,24 +35,25 @@
 			29630 [XML] Light Up the Obelisk
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="29601" start_npc_ids="804662" end_npc_ids="804666">
-		<npc_infos var="0" npc_id="804663" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="804664" quest_dialog="1352"/>
-		<npc_infos var="2" npc_id="804665" quest_dialog="1693"/>
-		<npc_infos var="3" npc_id="804666" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="804663"/>
+		<npc_infos npc_ids="804664"/>
+		<npc_infos npc_ids="804665"/>
+		<npc_infos npc_ids="804666"/>
 	</report_to_many>
 	<report_to_many id="29602" start_npc_ids="804663" end_npc_ids="205150">
-		<npc_infos var="0" npc_id="205986" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="205150" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="205986"/>
+		<npc_infos npc_ids="205150"/>
 	</report_to_many>
 	<report_to id="29604" start_npc_ids="804663" end_npc_ids="204817"/>
 	<report_to id="29605" start_npc_ids="804663" end_npc_ids="800421"/>
 	<report_to id="29606" start_npc_ids="804663" end_npc_ids="205225"/>
 	<report_to id="29607" start_npc_ids="804663" end_npc_ids="204837"/>
 	<report_to_many id="29608" start_npc_ids="804664" end_npc_ids="799225">
-		<npc_infos var="0" npc_id="205986" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="799225" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="205986"/>
+		<npc_infos npc_ids="799225"/>
 	</report_to_many>
 	<report_to id="29610" start_npc_ids="804664" end_npc_ids="799208"/>
 	<report_to id="29611" start_npc_ids="804664" end_npc_ids="799333"/>
@@ -73,6 +74,7 @@
 	<report_to id="29628" start_npc_ids="804666" end_npc_ids="802353"/>
 	<report_to id="29629" start_npc_ids="804666" end_npc_ids="801947"/>
 	<report_to id="29630" start_npc_ids="804666" end_npc_ids="804599"/>
+	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="29603" start_npc_ids="804662" end_npc_ids="205150" end_reward_next_step="true"/>
 	<monster_hunt id="29609" start_npc_ids="804662" end_npc_ids="799225" end_reward_next_step="true"/>

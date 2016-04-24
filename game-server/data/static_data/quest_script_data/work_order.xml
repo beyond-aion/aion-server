@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!-- Steel Chisel Supplies -->
 	<work_order id="5000" start_npc_ids="203788 830062" recipe_id="155004001">
 		<give_component item_id="182290000" count="4"/>

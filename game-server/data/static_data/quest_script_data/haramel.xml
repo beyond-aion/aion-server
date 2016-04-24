@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			18500 [SCRIPT] Big Kinah
 			18501 [XML] Shugo Indemnity
 			18502 [UNUSED] Every Shugo Has A Price
@@ -27,10 +27,12 @@
 			28510 [SCRIPT] Destroy the Haramel Facilities
 			28511 [SCRIPT] The Soup? Nutsy!
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="18506" start_npc_ids="799523" end_npc_ids="799524"/>
 	<report_to id="28506" start_npc_ids="799523" end_npc_ids="799524"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18501" start_npc_ids="799522" end_npc_ids="799523"/>
 	<item_collecting id="18503" start_npc_ids="799523" end_npc_ids="203166"/>
@@ -40,6 +42,7 @@
 	<item_collecting id="28503" start_npc_ids="799523" end_npc_ids="804605"/>
 	<item_collecting id="28505" start_npc_ids="804605"/>
 	<item_collecting id="28509" start_npc_ids="799523" end_npc_ids="799524"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18504" start_npc_ids="203166"/>
 	<monster_hunt id="18507" start_npc_ids="799524" end_npc_ids="203166"/>

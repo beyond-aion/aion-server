@@ -27,31 +27,31 @@
 	</xs:complexType>
 	<xs:complexType name="QuestScriptData" abstract="true">
 		<xs:attribute name="id" type="xs:int" use="required"/>
-		<xs:attribute name="movie" type="xs:int" use="optional"/>
-		<xs:attribute name="mission" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="movie" type="xs:int"/>
+		<xs:attribute name="mission" type="xs:boolean"/>
 	</xs:complexType>
-		<xs:complexType name="XmlQuestData">
-		 	<xs:complexContent>
-				<xs:extension base="QuestScriptData">
-					<xs:sequence>
-						<xs:element name="on_talk_event" type="OnTalkEvent" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element name="on_kill_event" type="OnKillEvent" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-					<xs:attribute name="start_npc_id" type="xs:int"/>
-					<xs:attribute name="end_npc_id" type="xs:int"/>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-		<xs:complexType name="QuestCondition" abstract="true">
-			<xs:attribute name="op" type="ConditionOperation" use="required"/>
-		</xs:complexType>
-		<xs:complexType name="QuestOperation" abstract="true"/>
-		<xs:complexType name="QuestEvent" abstract="true">
-			<xs:sequence>
-				<xs:element name="conditions" type="QuestConditions" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="operations" type="QuestOperations" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>
-			<xs:attribute name="ids" type="NumberListType"/>
+	<xs:complexType name="XmlQuestData">
+	 	<xs:complexContent>
+			<xs:extension base="QuestScriptData">
+				<xs:sequence>
+					<xs:element name="on_talk_event" type="OnTalkEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_kill_event" type="OnKillEvent" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuestCondition" abstract="true">
+		<xs:attribute name="op" type="ConditionOperation" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="QuestOperation" abstract="true"/>
+	<xs:complexType name="QuestEvent" abstract="true">
+		<xs:sequence>
+			<xs:element name="conditions" type="QuestConditions" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="operations" type="QuestOperations" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="ids" type="NumberListType"/>
 	</xs:complexType>
 	<xs:complexType name="QuestNpc">
 		<xs:sequence>
@@ -85,9 +85,9 @@
 		<xs:complexContent>
 			<xs:extension base="QuestEvent">
 				<xs:sequence>
-						<xs:element name="monster" type="Monster" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="monster" type="Monster" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="complite" type="QuestOperations" minOccurs="0" maxOccurs="1"/>
-					</xs:sequence>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -254,73 +254,72 @@
 	<xs:complexType name="ItemCollectingData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="next_npc_id" type="xs:int" default="0"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="start_zone" type="xs:string" default="NONE"/>
-				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="start_dialog_id2" type="xs:int" default="0"/>
-				<xs:attribute name="check_ok_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="check_fail_dialog_id" type="xs:int" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="next_npc_id" type="xs:int"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+				<xs:attribute name="start_zone" type="xs:string"/>
+				<xs:attribute name="start_dialog_id" type="xs:int"/>
+				<xs:attribute name="start_dialog_id2" type="xs:int"/>
+				<xs:attribute name="check_ok_dialog_id" type="xs:int"/>
+				<xs:attribute name="check_fail_dialog_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="RelicRewardsData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="CraftingRewardsData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_id" type="xs:int" use="required"/>
+				<xs:attribute name="start_npc_id" type="xs:int"/>
 				<xs:attribute name="skill_id" type="xs:int" use="required"/>
 				<xs:attribute name="level_reward" type="xs:int" use="required"/>
-				<xs:attribute name="end_npc_id" type="xs:int" default="0"/>
+				<xs:attribute name="end_npc_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ReportToData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="start_dialog_id" type="xs:int"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_dialog_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ReportOnLevelUpData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="end_dialog_id" type="xs:int" default="2375"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="MonsterHuntData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="aggro_start_npcs" type="IntListType" default="0"/>
-				<xs:attribute name="invasion_world" type="xs:int" default="0"/>
-				<xs:attribute name="start_zone" type="xs:string" default="NONE"/>
-				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
-				<xs:attribute name="end_reward" type="xs:boolean" default="false"/>
-				<xs:attribute name="end_reward_next_step" type="xs:boolean" default="false"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+				<xs:attribute name="start_dialog_id" type="xs:int"/>
+				<xs:attribute name="end_dialog_id" type="xs:int"/>
+				<xs:attribute name="aggro_start_npc_ids" type="IntListType"/>
+				<xs:attribute name="invasion_world" type="xs:int"/>
+				<xs:attribute name="start_zone" type="xs:string"/>
+				<xs:attribute name="start_dist_npc_id" type="xs:int"/>
+				<xs:attribute name="end_reward" type="xs:boolean"/>
+				<xs:attribute name="end_reward_next_step" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="MentorMonsterHuntData">
 		<xs:complexContent>
 			<xs:extension base="MonsterHuntData">
-				<xs:attribute name="min_mente_level" type="xs:int" default="0"/>
-				<xs:attribute name="max_mente_level" type="xs:int" default="0"/>
+				<xs:attribute name="min_mente_level" type="xs:int"/>
+				<xs:attribute name="max_mente_level" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -339,20 +338,19 @@
 				<xs:sequence>
 					<xs:element name="npc_infos" type="NpcInfos" minOccurs="1" maxOccurs="unbounded"/>
 				</xs:sequence>
-				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="start_item_id" type="xs:int" default="0"/>
-				<xs:attribute name="start_dialog_id" type="xs:int" default="1011"/>
-				<xs:attribute name="end_dialog_id" type="xs:int" default="2375"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="start_item_id" type="xs:int"/>
+				<xs:attribute name="start_dialog_id" type="xs:int"/>
+				<xs:attribute name="end_dialog_id" type="xs:int"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="NpcInfos" >
-		<xs:attribute name="var" type="xs:int" use="required"/>
-		<xs:attribute name="npc_id" type="xs:int" use="required"/>
-		<xs:attribute name="quest_dialog" type="xs:int" use="required"/>
-		<xs:attribute name="close_dialog" type="xs:int" default="0"/>
-		<xs:attribute name="movie" type="xs:int" default="0"/>
+	<xs:complexType name="NpcInfos">
+		<xs:attribute name="npc_ids" type="IntListType" use="required"/>
+		<xs:attribute name="quest_dialog" type="xs:int"/>
+		<xs:attribute name="close_dialog" type="xs:int"/>
+		<xs:attribute name="movie" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="WorkOrdersData">
 		<xs:complexContent>
@@ -366,56 +364,56 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="Monster">
-		<xs:attribute name="var" type="xs:int" use="required"/>
-		<xs:attribute name="start_var" type="xs:int" default="0"/>
-		<xs:attribute name="end_var" type="xs:int" use="required"/>
-		<xs:attribute name="spawner_object" type="xs:int" default="0"/>
+		<xs:attribute name="var" type="xs:int"/>
+		<xs:attribute name="start_var" type="xs:int"/>
+		<xs:attribute name="end_var" type="xs:int"/>
+		<xs:attribute name="spawner_object_id" type="xs:int"/>
 		<xs:attribute name="npc_ids" type="IntListType"/>
 		<xs:attribute name="npc_seq" type="xs:int"/>
-		<xs:attribute name="step" type="xs:int" default="0"/>
+		<xs:attribute name="step" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="KillInWorldData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="worlds" type="IntListType" default="0"/>
-				<xs:attribute name="amount" type="xs:int" use="required"/>
-				<xs:attribute name="min_rank" type="xs:int" default="0"/>
-				<xs:attribute name="level_diff" type="xs:int" default="0"/>
-				<xs:attribute name="invasion_world" type="xs:int" default="0"/>
-				<xs:attribute name="start_dialog_id" type="xs:int" default="0"/>
-				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
-				<xs:attribute name="end_dialog_id" type="xs:int" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+				<xs:attribute name="worlds" type="IntListType"/>
+				<xs:attribute name="amount" type="xs:int"/>
+				<xs:attribute name="min_rank" type="xs:int"/>
+				<xs:attribute name="level_diff" type="xs:int"/>
+				<xs:attribute name="invasion_world" type="xs:int"/>
+				<xs:attribute name="start_dialog_id" type="xs:int"/>
+				<xs:attribute name="start_dist_npc_id" type="xs:int"/>
+				<xs:attribute name="end_dialog_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="KillInZoneData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" default="0"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="zones" type="StringListType" use="required"/>
-				<xs:attribute name="amount" type="xs:int" use="required"/>
-				<xs:attribute name="min_rank" type="xs:int" default="0"/>
-				<xs:attribute name="level_diff" type="xs:int" default="0"/>
-				<xs:attribute name="start_dist_npc_id" type="xs:int" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
+				<xs:attribute name="zones" type="StringListType"/>
+				<xs:attribute name="amount" type="xs:int"/>
+				<xs:attribute name="min_rank" type="xs:int"/>
+				<xs:attribute name="level_diff" type="xs:int"/>
+				<xs:attribute name="start_dist_npc_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ItemOrdersData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="talk_npc_id1" type="xs:int" default="0"/>
-				<xs:attribute name="talk_npc_id2" type="xs:int" default="0"/>
-				<xs:attribute name="end_npc_id" type="xs:int" use="required"/>
+				<xs:attribute name="talk_npc_id1" type="xs:int"/>
+				<xs:attribute name="talk_npc_id2" type="xs:int"/>
+				<xs:attribute name="end_npc_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="FountainRewardsData">
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
-				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -425,15 +423,15 @@
 				<xs:sequence>
 					<xs:element name="skill" type="QuestSkillData" minOccurs="1" maxOccurs="unbounded"/>
 				</xs:sequence>
-				<xs:attribute name="start_npc_ids" type="IntListType" use="required"/>
-				<xs:attribute name="end_npc_ids" type="IntListType" default="0"/>
+				<xs:attribute name="start_npc_ids" type="IntListType"/>
+				<xs:attribute name="end_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="QuestSkillData">
 		<xs:attribute name="ids" type="IntListType" use="required"/>
-		<xs:attribute name="start_var" type="xs:int" default="0"/>
-		<xs:attribute name="end_var" type="xs:int" use="required"/>
-		<xs:attribute name="var_num" type="xs:int" default="0"/>
+		<xs:attribute name="start_var" type="xs:int"/>
+		<xs:attribute name="end_var" type="xs:int"/>
+		<xs:attribute name="var_num" type="xs:int"/>
 	</xs:complexType>
 </xs:schema>

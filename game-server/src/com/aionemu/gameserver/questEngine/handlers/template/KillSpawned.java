@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -26,72 +23,60 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class KillSpawned extends QuestHandler {
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final Set<Integer> endNpcIds = new HashSet<>();
+	private final Set<Integer> spawnerObjectIds = new HashSet<>();
 	private final FastMap<List<Integer>, Monster> spawnedMonsters;
 	private final boolean isDataDriven;
-	private TIntArrayList spawnerObjects;
 
 	public KillSpawned(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<List<Integer>, Monster> spawnedMonsters) {
 		super(questId);
-		this.startNpcs.addAll(startNpcIds);
-		this.startNpcs.remove(0);
-		if (endNpcIds == null) {
-			this.endNpcs.addAll(startNpcs);
-		} else {
-			this.endNpcs.addAll(endNpcIds);
-			this.endNpcs.remove(0);
-		}
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		if (endNpcIds != null)
+			this.endNpcIds.addAll(endNpcIds);
+		else
+			this.endNpcIds.addAll(this.startNpcIds);
 		this.spawnedMonsters = spawnedMonsters;
-		this.spawnerObjects = new TIntArrayList();
-		for (Monster m : spawnedMonsters.values()) {
-			spawnerObjects.add(m.getSpawnerObject());
-		}
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
+		for (Monster m : spawnedMonsters.values())
+			spawnerObjectIds.add(m.getSpawnerObjectId());
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
 	protected void onWorkItemsLoaded() {
 		// Have strange work items as Bait_1, Bait_2... Don't use.
-		if (workItems == null)
-			return;
-		workItems.clear();
-		workItems = null;
+		if (workItems != null)
+			workItems = null;
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcs.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
+		}
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds)
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
 		for (List<Integer> spawnedMonsterIds : spawnedMonsters.keySet()) {
-			iterator = spawnedMonsterIds.iterator();
-			while (iterator.hasNext()) {
-				int spawnedMonsterId = iterator.next();
+			for (Integer spawnedMonsterId : spawnedMonsterIds)
 				qe.registerQuestNpc(spawnedMonsterId).addOnKillEvent(questId);
-			}
 		}
-		iterator = endNpcs.iterator();
-		while (iterator.hasNext()) {
-			int endNpc = iterator.next();
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
-		}
-		for (int i = 0; i < spawnerObjects.size(); i++) {
-			qe.registerQuestNpc(spawnerObjects.get(i)).addOnTalkEvent(questId);
-		}
+		for (Integer spawnerObjectId : spawnerObjectIds)
+			qe.registerQuestNpc(spawnerObjectId).addOnTalkEvent(questId);
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
+		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
+		
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 				} else {
@@ -99,29 +84,29 @@ public class KillSpawned extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (spawnerObjects.contains(targetId)) {
+			if (spawnerObjectIds.contains(targetId)) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					int monsterId = 0;
 					for (Monster m : spawnedMonsters.values()) {
-						if (m.getSpawnerObject() == targetId) {
+						if (m.getSpawnerObjectId() == targetId) {
 							monsterId = m.getNpcIds().get(0);
 							break;
 						}
 					}
-
+					if (monsterId == 0)
+						return false;
 					SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(player.getWorldId(), targetId);
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), monsterId, searchResult.getSpot().getX(), searchResult.getSpot()
-						.getY(), searchResult.getSpot().getZ(), searchResult.getSpot().getHeading());
+					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), monsterId, searchResult.getSpot().getX(),
+						searchResult.getSpot().getY(), searchResult.getSpot().getZ(), searchResult.getSpot().getHeading());
 					return true;
 				}
 			} else {
-				for (Monster mi : spawnedMonsters.values()) {
-					if (mi.getEndVar() > qs.getQuestVarById(mi.getVar())) {
+				for (Monster m : spawnedMonsters.values()) {
+					if (m.getEndVar() > qs.getQuestVarById(m.getVar())) {
 						return false;
 					}
 				}
-
-				if (endNpcs.contains(targetId)) {
+				if (endNpcIds.contains(targetId)) {
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 10002);
 					} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
@@ -130,7 +115,7 @@ public class KillSpawned extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId)) {
 				return sendQuestEndDialog(env);
 			}
 		}
@@ -146,8 +131,8 @@ public class KillSpawned extends QuestHandler {
 				if (m.getNpcIds().contains(env.getTargetId())) {
 					if (qs.getQuestVarById(m.getVar()) < m.getEndVar()) {
 						qs.setQuestVarById(m.getVar(), qs.getQuestVarById(m.getVar()) + 1);
-						for (Monster mi : spawnedMonsters.values()) {
-							if (qs.getQuestVarById(mi.getVar()) < mi.getEndVar()) {
+						for (Monster n : spawnedMonsters.values()) {
+							if (qs.getQuestVarById(n.getVar()) < n.getEndVar()) {
 								updateQuestStatus(env);
 								return true;
 							}
@@ -166,10 +151,9 @@ public class KillSpawned extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (startNpcs != null)
-				constantSpawns.addAll(startNpcs);
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
+			constantSpawns.addAll(startNpcIds);
+			if (!endNpcIds.equals(startNpcIds))
+				constantSpawns.addAll(endNpcIds);
 		}
 		return constantSpawns;
 	}

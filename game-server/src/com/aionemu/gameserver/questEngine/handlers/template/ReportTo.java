@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -26,8 +25,8 @@ public class ReportTo extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ReportTo.class);
 
-	private final Set<Integer> startNpcs = new HashSet<>();
-	private final Set<Integer> endNpcs = new HashSet<>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final int startDialogId;
 	private final int endDialogId;
 	private final boolean isDataDriven;
@@ -41,15 +40,15 @@ public class ReportTo extends QuestHandler {
 	 */
 	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, int startDialogId, int endDialogId) {
 		super(questId);
-		startNpcs.addAll(startNpcIds);
-		startNpcs.remove(0);
-		if (endNpcIds != null) {
-			endNpcs.addAll(endNpcIds);
-			endNpcs.remove(0);
-		}
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		if (endNpcIds != null)
+			this.endNpcIds.addAll(endNpcIds);
+		else
+			this.endNpcIds.addAll(this.startNpcIds);
 		this.startDialogId = startDialogId;
 		this.endDialogId = endDialogId;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -60,33 +59,30 @@ public class ReportTo extends QuestHandler {
 			log.warn("Q{} (ReportTo) has more than 1 work item.", questId);
 		}
 		workItem = workItems.get(0);
-
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcs.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
-		iterator = endNpcs.iterator();
-		while (iterator.hasNext()) {
-			int endNpc = iterator.next();
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds) {
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
+			}
 		}
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
-		int targetId = env.getTargetId();
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
-		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
+		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
@@ -98,12 +94,8 @@ public class ReportTo extends QuestHandler {
 							// Some quest work items come from other quests, don't add again
 							long count = workItem.getCount();
 							count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
-							if (count == 0 || giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM)) {
-								return sendQuestStartDialog(env);
-							}
-							return false;
-						} else {
-							return sendQuestStartDialog(env);
+							if (count > 0)
+								giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM);
 						}
 					}
 					default: {
@@ -112,11 +104,7 @@ public class ReportTo extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (startNpcs.contains(targetId)) {
-				if (dialog == DialogAction.FINISH_DIALOG) {
-					return sendQuestSelectionDialog(env);
-				}
-			} else if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
@@ -137,7 +125,7 @@ public class ReportTo extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId)) {
 				return sendQuestEndDialog(env);
 			}
 		}
@@ -148,10 +136,9 @@ public class ReportTo extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (startNpcs != null)
-				constantSpawns.addAll(startNpcs);
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
+			constantSpawns.addAll(startNpcIds);
+			if (!endNpcIds.equals(startNpcIds))
+				constantSpawns.addAll(endNpcIds);
 		}
 		return constantSpawns;
 	}

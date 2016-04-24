@@ -10,21 +10,23 @@ import com.aionemu.gameserver.questEngine.handlers.template.ItemOrders;
 
 /**
  * @author Bobobear
+ * @modified Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemOrdersData")
 public class ItemOrdersData extends XMLQuest {
 
 	@XmlAttribute(name = "talk_npc_id1")
-	protected int talkNpc1;
+	protected int talkNpcId1;
+
 	@XmlAttribute(name = "talk_npc_id2")
-	protected int talkNpc2;
-	@XmlAttribute(name = "end_npc_id", required = true)
+	protected int talkNpcId2;
+
+	@XmlAttribute(name = "end_npc_id")
 	protected int endNpcId;
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		ItemOrders template = new ItemOrders(id, talkNpc1, talkNpc2, endNpcId);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new ItemOrders(id, talkNpcId1, talkNpcId2, endNpcId));
 	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1011 [SCRIPT] Danger From Above
 			1012 [SCRIPT] Masked Loiterers
 			1013 [SCRIPT] Hunting Lepharist Revolutionaries
@@ -115,7 +115,8 @@
 			80135 [TODO] [Event] Block the Warped Rift
 			80257 [TODO] [Event] Basic Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1138" start_npc_ids="203110" end_npc_ids="203123"/>
 	<report_to id="1140" start_npc_ids="203123" end_npc_ids="730001"/>
@@ -132,6 +133,7 @@
 	<report_to id="1191" start_npc_ids="203099" end_npc_ids="203183"/>
 	<report_to id="1199" start_npc_ids="203161" end_npc_ids="203893"/>
 	<report_to id="1224" start_npc_ids="203110" end_npc_ids="203179"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1132" start_npc_ids="203101" end_npc_ids="203097"/>
 	<item_collecting id="1136" start_npc_ids="203100"/>
@@ -171,6 +173,7 @@
 	<item_collecting id="1225" start_npc_ids="203179"/>
 	<item_collecting id="80002" start_npc_ids="799774"/>
 	<item_collecting id="80134" start_npc_ids="830243"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1133" start_npc_ids="203096"/>
 	<monster_hunt id="1134" start_npc_ids="203102"/>
@@ -190,6 +193,7 @@
 	<monster_hunt id="1216" start_npc_ids="203169"/>
 	<monster_hunt id="1217" start_npc_ids="203184"/>
 	<monster_hunt id="1221" start_npc_ids="203097"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="1182" end_npc_id="203099"/>
 </quest_scripts>

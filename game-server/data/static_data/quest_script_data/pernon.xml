@@ -88,6 +88,7 @@
 			80309 [TODO] [Event/Daily] Just Shove-l It
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="28800" start_npc_ids="798459" end_npc_ids="830532"/>
 	<report_to id="28801" start_npc_ids="830085" end_npc_ids="830102"/>
@@ -98,6 +99,7 @@
 	<report_to id="28845" start_npc_ids="798459" end_npc_ids="830532"/>
 	<report_to id="28846" start_npc_ids="830466" end_npc_ids="798457"/>
 	<report_to id="80271" start_npc_ids="831178" end_npc_ids="831180"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="28812" start_npc_ids="830525"/>
 	<item_collecting id="28813" start_npc_ids="830525"/>
@@ -121,8 +123,11 @@
 	<item_collecting id="28844" start_npc_ids="830394"/>
 	<item_collecting id="28848" start_npc_ids="830532"/>
 	<item_collecting id="51007" start_npc_ids="831033 831039"/>
+	
+	<!-- RELIC REWARDS -->
 	<relic_rewards id="28849" start_npc_ids="831253"/>
 	<relic_rewards id="28850" start_npc_ids="831235"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="28833" end_npc_id="830656"/>
 	<item_order id="28835" end_npc_id="830656"/>

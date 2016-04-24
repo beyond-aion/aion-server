@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1071 [SCRIPT] Speaking Balaur
 			1072 [SCRIPT] Abyss Training
 			1073 [SCRIPT] Saving Elyos Captives
@@ -385,7 +385,8 @@
 			80322 [TODO] Befitting the Hero of Archons (for damage dealers)
 			80323 [TODO] Befitting the Hero of Archons (for mages)
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1729" start_npc_ids="278559" end_npc_ids="278593"/>
 	<report_to id="1732" start_npc_ids="278593" end_npc_ids="278592"/>
@@ -399,38 +400,41 @@
 	<report_to id="4701" start_npc_ids="278035" end_npc_ids="278016"/>
 	<report_to id="4731" start_npc_ids="204301" end_npc_ids="800519"/>
 	<report_to_many id="2725" start_npc_ids="278003" end_npc_ids="278086">
-		<npc_infos var="0" npc_id="278091" quest_dialog="1352" close_dialog="10000"/>
-		<npc_infos var="1" npc_id="278086" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="278091"/>
+		<npc_infos npc_ids="278086"/>
 	</report_to_many>
 	<report_to_many id="2726" start_npc_ids="278002" end_npc_ids="278105">
-		<npc_infos npc_id="278082" var="0" quest_dialog="1352" close_dialog="10000"/>
-		<npc_infos npc_id="278015" var="1" quest_dialog="1693" close_dialog="10001"/>
-		<npc_infos npc_id="278105" var="2" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="278082"/>
+		<npc_infos npc_ids="278015"/>
+		<npc_infos npc_ids="278105"/>
 	</report_to_many>
 	<report_to_many id="2773" start_npc_ids="279019" end_npc_ids="204734">
-		<npc_infos npc_id="798110" var="0" quest_dialog="1352"/>
+		<npc_infos npc_ids="798110" quest_dialog="1352"/>
 	</report_to_many>
 	<report_to_many id="2846" start_item_id="182205677" end_npc_ids="798317">
-		<npc_infos npc_id="278039" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="279027" var="1" quest_dialog="1693"/>
-		<npc_infos npc_id="798317" var="2" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="278039"/>
+		<npc_infos npc_ids="279027"/>
+		<npc_infos npc_ids="798317"/>
 	</report_to_many>
 	<report_to_many id="2847" start_item_id="182205678" end_npc_ids="798063">
-		<npc_infos npc_id="278020" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="279005" var="1" quest_dialog="1693"/>
+		<npc_infos npc_ids="278020"/>
+		<npc_infos npc_ids="279005"/>
 	</report_to_many>
 	<report_to_many id="2848" start_item_id="182205679" end_npc_ids="204799">
-		<npc_infos npc_id="278137" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="278089" var="1" quest_dialog="1693"/>
+		<npc_infos npc_ids="278137"/>
+		<npc_infos npc_ids="278089"/>
 	</report_to_many>
-	<!-- COLLECTING QUESTS -->
+	
+	<!-- FOUNTAIN REWARDS -->
 	<fountain_rewards id="1717" start_npc_ids="730142"/>
 	<fountain_rewards id="2717" start_npc_ids="730143"/>
-	<item_collecting id="1730" start_npc_ids="278593" end_npc_ids="278593"/>
-	<item_collecting id="1731" start_npc_ids="278593" end_npc_ids="278593"/>
+	
+	<!-- ITEM COLLECTING -->
+	<item_collecting id="1730" start_npc_ids="278593"/>
+	<item_collecting id="1731" start_npc_ids="278593"/>
 	<item_collecting id="1734" start_npc_ids="278556"/>
 	<item_collecting id="1735" start_npc_ids="278556"/>
-	<item_collecting id="1743" start_npc_ids="279015" end_npc_ids="279015"/>
+	<item_collecting id="1743" start_npc_ids="279015"/>
 	<item_collecting id="1744" start_npc_ids="279015"/>
 	<item_collecting id="1746" start_npc_ids="278595"/>
 	<item_collecting id="1748" start_npc_ids="263568"/>
@@ -559,6 +563,8 @@
 	<item_collecting id="38501" start_npc_ids="278654"/>
 	<item_collecting id="48500" start_npc_ids="278153"/>
 	<item_collecting id="48501" start_npc_ids="278654"/>
+	
+	<!-- RELIC REWARDS -->
 	<relic_rewards id="1833" start_npc_ids="278644"/>
 	<relic_rewards id="1834" start_npc_ids="278645"/>
 	<relic_rewards id="1835" start_npc_ids="278646"/>
@@ -569,6 +575,7 @@
 	<relic_rewards id="2835" start_npc_ids="278145"/>
 	<relic_rewards id="2836" start_npc_ids="278146"/>
 	<relic_rewards id="2837" start_npc_ids="278147"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1715" start_npc_ids="278516"/>
 	<monster_hunt id="1716" start_npc_ids="278514"/>

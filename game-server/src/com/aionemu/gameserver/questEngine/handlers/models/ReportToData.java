@@ -25,14 +25,13 @@ public class ReportToData extends XMLQuest {
 	protected List<Integer> endNpcIds;
 
 	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialog = 0;
+	protected int startDialogId;
 
 	@XmlAttribute(name = "end_dialog_id")
-	protected int endDialog = 0;
+	protected int endDialogId;
 	
 	@Override
 	public void register(QuestEngine questEngine) {
-		ReportTo template = new ReportTo(id, startNpcIds, endNpcIds, startDialog, endDialog);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new ReportTo(id, startNpcIds, endNpcIds, startDialogId, endDialogId));
 	}
 }

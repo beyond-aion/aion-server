@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-	[BEGIN] SUMMARY
-		16990 [XML] Strengthen the Defense
-		16991 [XML] Destroy the Destroyers
-		16992 [XML] A Test Weapon
-		26990 [XML] Protection Tower Researcher Kamaz
-		26991 [XML] Defending the Pashid Destruction Unit
-		26992 [XML] The Powerful Mechanical Weapon
-	[END] SUMMARY
--->
+	<!--
+		[BEGIN] SUMMARY
+			16990 [XML] Strengthen the Defense
+			16991 [XML] Destroy the Destroyers
+			16992 [XML] A Test Weapon
+			26990 [XML] Protection Tower Researcher Kamaz
+			26991 [XML] Defending the Pashid Destruction Unit
+			26992 [XML] The Powerful Mechanical Weapon
+		[END] SUMMARY
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="16990" start_npc_ids="801543" end_npc_ids="802048"/>
 	<report_to id="26990" start_npc_ids="801547" end_npc_ids="802049"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="16992" start_npc_ids="802048" end_npc_ids="804598"/>
 	<item_collecting id="26992" start_npc_ids="802049" end_npc_ids="804599"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="16991" start_npc_ids="802048" end_npc_ids="804598"/>
 	<monster_hunt id="26991" start_npc_ids="802049" end_npc_ids="804599"/>

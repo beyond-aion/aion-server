@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			3208 [SCRIPT] The Puzzling Blueprint
 			3211 [XML] Against the Steel Rake
 			3217 [SCRIPT] Imprisoned Guardian
@@ -14,8 +14,9 @@
 			4220 [UNUSED] Key Item Hidden Quest 02 (Asmodian)
 			80216 [XML] [Growth] Supress the Steel Rake
 			80225 [XML] [Growth] Stop the Steel Rake
-	[END] SUMMARY
--->
+		[END] SUMMARY
+	-->
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="3211" start_npc_ids="798331" end_npc_ids="798322"/>
 	<monster_hunt id="4211" start_npc_ids="798331"/>

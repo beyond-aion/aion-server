@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			30276 [XML] To the Unstable Abyssal Splinter
 			30277 [XML] [Alliance] Along Came the Spider
 			30278 [XML] [Alliance] Unstable Light and Dar
@@ -19,16 +19,18 @@
 			30382 [XML] [Alliance] Watcher Wrangler
 			30383 [XML] [Alliance] Artisan's Ideas
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="30276" start_npc_ids="800165" end_npc_ids="260264">
-		<npc_infos var="0" npc_id="278549" quest_dialog="1352"/>
-    	<npc_infos var="1" npc_id="260264" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="278549"/>
+    	<npc_infos npc_ids="260264"/>
 	</report_to_many>
 	<report_to_many id="30376" start_npc_ids="800170" end_npc_ids="260265">
-		<npc_infos var="0" npc_id="278048" quest_dialog="1352"/>
-    	<npc_infos var="1" npc_id="260265" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="278048"/>
+    	<npc_infos npc_ids="260265"/>
 	</report_to_many>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30277" start_npc_ids="260264"/>
 	<monster_hunt id="30278" start_npc_ids="260264"/>

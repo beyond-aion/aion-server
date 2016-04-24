@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			30251 [XML] The Road to Reshanta
 			30252 [XML] To the Abyssal Splinter
 			30253 [XML] Fifth Column?
@@ -37,14 +37,17 @@
 			30366 [XML] Whipping the Watchers
 			30367 [XML] Fragmentary Knowledge
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="30251" start_npc_ids="799053" end_npc_ids="278549"/>
 	<report_to id="30252" start_npc_ids="278549" end_npc_ids="260264"/>
 	<report_to id="30351" start_npc_ids="799364" end_npc_ids="278048"/>
 	<report_to id="30352" start_npc_ids="278048" end_npc_ids="260265"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="30260" start_npc_ids="278652"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30253" start_npc_ids="260264"/>
 	<monster_hunt id="30254" start_npc_ids="260264"/>

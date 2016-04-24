@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			2051 [SCRIPT] Saving Beluslan Fortress
 			2052 [SCRIPT] An Undead Occupation
 			2053 [SCRIPT] A Missing Father
@@ -301,7 +301,8 @@
 			80229 [SCRIPT] [Growth] Final Test in Dark Poeta
 			80264 [TODO] [Event] Delicious Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="2507" start_npc_ids="204702" end_npc_ids="204801"/>
 	<report_to id="2508" start_npc_ids="204734" end_npc_ids="204802"/>
@@ -329,6 +330,7 @@
 	<report_to id="4221" start_npc_ids="204710" end_npc_ids="204839"/>
 	<report_to id="4521" start_npc_ids="204725" end_npc_ids="205143"/>
 	<report_to id="4538" start_npc_ids="204701" end_npc_ids="204768"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2502" start_npc_ids="204701"/>
 	<item_collecting id="2503" start_npc_ids="204733"/>
@@ -445,6 +447,7 @@
 	<item_collecting id="28647" start_npc_ids="205237"/>
 	<item_collecting id="80007" start_npc_ids="799791"/>
 	<item_collecting id="80146" start_npc_ids="830244"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="2506" start_npc_ids="204702"/>
 	<monster_hunt id="2509" start_npc_ids="204703" end_npc_ids="204801"/>
@@ -525,5 +528,7 @@
 	<monster_hunt id="26903" start_npc_ids="204702"/>
 	<monster_hunt id="26907" start_npc_ids="204702"/>
 	<monster_hunt id="80224" start_npc_ids="831027"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="49021" end_npc_ids="204702" worlds="220040000" amount="5" invasion_world="220040000"/>
 </quest_scripts>

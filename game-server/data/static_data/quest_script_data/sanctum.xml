@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1900 [SCRIPT] A Ring Imbued With Aether
 			1901 [SCRIPT] Krallic Language Potion
 			1902 [XML] [Craft] Crafting Ingots
@@ -317,7 +317,8 @@
 			80546 [XML] [Event/Daily] A Noble Mission
 			80547 [XML] [Event/Daily] Spread the Joy
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1950" start_npc_ids="203755" end_npc_ids="204424"/>
 	<report_to id="1951" start_npc_ids="203788" end_npc_ids="278510"/>
@@ -354,26 +355,26 @@
 	<report_to id="19076" start_npc_ids="801214" end_npc_ids="801216"/>
 	<report_to id="19077" start_npc_ids="801215" end_npc_ids="801217"/>
 	<report_to id="80268" start_npc_ids="831171" end_npc_ids="831172"/>
-	<report_to id="80545" start_npc_ids="831999" end_npc_ids="831999"/>
-	<report_to id="80546" start_npc_ids="831999" end_npc_ids="831999"/>
+	<report_to id="80545" start_npc_ids="831999"/>
+	<report_to id="80546" start_npc_ids="831999"/>
 	<report_to id="80547" start_npc_ids="832008" end_npc_ids="831999"/>
-	<report_to_many id="1971" start_npc_ids="203812" end_npc_ids="203812">
-		<npc_infos npc_id="203820" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="203812" var="1" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="1971" start_npc_ids="203812">
+		<npc_infos npc_ids="203820"/>
+		<npc_infos npc_ids="203812"/>
 	</report_to_many>
 	<report_to_many id="3201" start_npc_ids="798318" end_npc_ids="203852">
-	    <npc_infos npc_id="279009" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="203852" var="1" quest_dialog="2375" close_dialog="1009"/>
+	    <npc_infos npc_ids="279009"/>
+		<npc_infos npc_ids="203852"/>
 	</report_to_many>
 	<report_to_many id="3914" start_item_id="182206084" end_npc_ids="203384">
-		<npc_infos npc_id="203752" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="203384" var="1" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="203752"/>
+		<npc_infos npc_ids="203384"/>
 	</report_to_many>
 	<report_to_many id="18225" start_npc_ids="205471" end_npc_ids="205315">
-	    <npc_infos npc_id="205309" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="205315" var="1" quest_dialog="2375" close_dialog="1009"/>
+	    <npc_infos npc_ids="205309"/>
+		<npc_infos npc_ids="205315"/>
 	</report_to_many>
-	<xml_quest id="3972" start_npc_id="203893" end_npc_id="203893">
+	<xml_quest id="3972" start_npc_ids="203893">
 		<on_talk_event ids="798949">
 			<var value="0">
 				<npc id="798949">
@@ -407,7 +408,7 @@
 			</var>
 		</on_talk_event>
 	</xml_quest>
-	<xml_quest id="3973" start_npc_id="203893" end_npc_id="798949">
+	<xml_quest id="3973" start_npc_ids="203893" end_npc_ids="798949">
 		<on_talk_event ids="203792 203793 798391 798949">
 			<var value="0">
 				<npc id="203792">
@@ -467,6 +468,8 @@
 			</var>
 		</on_talk_event>
 	</xml_quest>
+	
+	<!-- SKILL USE -->
 	<skill_use id="3909" start_npc_ids="203761" end_npc_ids="203707">
 		<skill end_var="10" ids="9912"/>
 	</skill_use>
@@ -509,6 +512,7 @@
 	<skill_use id="19075" start_npc_ids="801215">
 		<skill end_var="10" ids="4469"/>
 	</skill_use>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1902" start_npc_ids="203788"/>
 	<item_collecting id="1903" start_npc_ids="203790"/>
@@ -616,6 +620,8 @@
 	<item_collecting id="80542" start_npc_ids="831991"/>
 	<item_collecting id="80543" start_npc_ids="831991"/>
 	<item_collecting id="80544" start_npc_ids="831991"/>
+	
+	<!-- CRAFTING REWARDS -->
 	<crafting_rewards id="3943" start_npc_id="203788" end_npc_id="203700" skill_id="40002" level_reward="400"/>
 	<crafting_rewards id="3946" start_npc_id="203790" end_npc_id="203700" skill_id="40003" level_reward="400"/>
 	<crafting_rewards id="3949" start_npc_id="203792" end_npc_id="203700" skill_id="40008" level_reward="400"/>
@@ -637,6 +643,7 @@
 	<crafting_rewards id="19039" start_npc_id="203784" end_npc_id="798600" movie="112" skill_id="40001" level_reward="500"/>
 	<crafting_rewards id="19033" start_npc_id="203786" end_npc_id="798600" movie="113" skill_id="40007" level_reward="500"/>
 	<crafting_rewards id="19058" start_npc_id="798450" end_npc_id="798600" movie="116" skill_id="40010" level_reward="500"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1939" start_npc_ids="203703"/>
 	<monster_hunt id="3213" start_npc_ids="203735"/>
@@ -645,6 +652,7 @@
 	<monster_hunt id="3979" start_npc_ids="798322"/>
 	<monster_hunt id="80010" start_npc_ids="799767"/>
 	<monster_hunt id="80011" start_npc_ids="799767"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="1965" end_npc_id="278555"/>
 	<item_order id="1966" end_npc_id="278555"/>

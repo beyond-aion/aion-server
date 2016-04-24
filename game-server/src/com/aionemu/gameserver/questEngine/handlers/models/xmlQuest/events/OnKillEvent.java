@@ -18,7 +18,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Mr. Poke, modified Bobobear
+ * @author Mr. Poke
+ * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OnKillEvent", propOrder = { "monster", "complite" })
@@ -26,11 +27,13 @@ public class OnKillEvent extends QuestEvent {
 
 	@XmlElement(name = "monster")
 	protected List<Monster> monster;
+	
+	@XmlElement(name = "complite")
 	protected QuestOperations complite;
 
 	public List<Monster> getMonsters() {
 		if (monster == null) {
-			monster = new FastTable<Monster>();
+			monster = new FastTable<>();
 		}
 		return this.monster;
 	}
@@ -48,7 +51,7 @@ public class OnKillEvent extends QuestEvent {
 		for (Monster m : monster) {
 			if (m.getNpcIds().contains(npc.getNpcId())) {
 				int var = qs.getQuestVarById(m.getVar());
-				if (var >= (m.getStartVar() == null ? 0 : m.getStartVar()) && var < m.getEndVar()) {
+				if (var >= m.getStartVar() && var < m.getEndVar()) {
 					qs.setQuestVarById(m.getVar(), var + 1);
 					PacketSendUtility.sendPacket(env.getPlayer(),
 						new SM_QUEST_ACTION(env.getQuestId(), qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
@@ -58,7 +61,7 @@ public class OnKillEvent extends QuestEvent {
 
 		if (complite != null) {
 			for (Monster m : monster) {
-				if (qs.getQuestVarById(m.getVar()) != qs.getQuestVarById(m.getVar()))
+				if (qs.getQuestVarById(m.getVar()) != m.getEndVar())
 					return false;
 			}
 			complite.operate(env);

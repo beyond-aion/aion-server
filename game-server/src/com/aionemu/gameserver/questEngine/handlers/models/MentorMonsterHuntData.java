@@ -28,6 +28,7 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 
 	@XmlAttribute(name = "min_mente_level")
 	protected int minMenteLevel = 1;
+	
 	@XmlAttribute(name = "max_mente_level")
 	protected int maxMenteLevel = 99;
 
@@ -51,17 +52,16 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 					m.setEndVar(qk.getKillCount());
 				if (qk.getNpcIds() != null)
 					m.addNpcIds(qk.getNpcIds());
-				if (qk.getVar() >= 0)
+				if (qk.getVar() > 0)
 					m.setVar(qk.getVar());
-				if (qk.getQuestStep() >= 0)
+				if (qk.getQuestStep() > 0)
 					m.setStep(qk.getQuestStep());
-				if (qk.getSequenceNumber() >= 0)
+				if (qk.getSequenceNumber() > 0)
 					m.setVar(qk.getSequenceNumber());
 				monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
 			}
 		}
 		
-		MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, reward, rewardNextStep);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, reward, rewardNextStep));
 	}
 }

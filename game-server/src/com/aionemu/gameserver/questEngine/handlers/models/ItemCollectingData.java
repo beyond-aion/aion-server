@@ -18,13 +18,13 @@ import com.aionemu.gameserver.questEngine.handlers.template.ItemCollecting;
 @XmlType(name = "ItemCollectingData")
 public class ItemCollectingData extends XMLQuest {
 
-	@XmlAttribute(name = "start_npc_ids", required = true)
+	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
 
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
 
-	@XmlAttribute(name = "next_npc_id", required = true)
+	@XmlAttribute(name = "next_npc_id")
 	protected int nextNpcId;
 
 	@XmlAttribute(name = "start_zone")
@@ -44,9 +44,8 @@ public class ItemCollectingData extends XMLQuest {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, endNpcIds, startZone, questMovie, startDialogId, startDialogId2,
-			checkOkDialogId, checkFailDialogId);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new ItemCollecting(id, startNpcIds, nextNpcId, endNpcIds, startZone, questMovie, startDialogId, startDialogId2,
+			checkOkDialogId, checkFailDialogId));
 	}
 
 }

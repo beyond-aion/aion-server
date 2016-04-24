@@ -32,19 +32,20 @@ public class CraftingRewards extends QuestHandler {
 		this.startNpcId = startNpcId;
 		this.skillId = skillId;
 		this.levelReward = levelReward;
-		if (endNpcId != 0) {
-			this.endNpcId = endNpcId;
-		} else {
+		if (endNpcId == 0)
 			this.endNpcId = startNpcId;
-		}
+		else
+			this.endNpcId = endNpcId;
 		this.questMovie = questMovie;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
-		qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
+		if (startNpcId != 0) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
+		}
 		if (questMovie != 0) {
 			qe.registerOnMovieEndQuest(questMovie, questId);
 		}
@@ -101,14 +102,7 @@ public class CraftingRewards extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
-				switch (dialog) {
-					case QUEST_SELECT: {
-						return sendQuestEndDialog(env);
-					}
-					default: {
-						return sendQuestEndDialog(env);
-					}
-				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
@@ -137,8 +131,9 @@ public class CraftingRewards extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			constantSpawns.add(startNpcId);
-			if (endNpcId != 0)
+			if (startNpcId != 0)
+				constantSpawns.add(startNpcId);
+			if (endNpcId != startNpcId)
 				constantSpawns.add(endNpcId);
 		}
 		return constantSpawns;

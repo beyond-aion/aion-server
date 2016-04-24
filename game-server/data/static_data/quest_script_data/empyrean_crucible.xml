@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			18200 [XML] The Crucible
 			18201 [XML] The First Rule of the Crucible
 			18202 [XML] Molfus's Approval
@@ -53,24 +53,26 @@
 			28223 [XML] The Final Test
 			28224 [XML] After the Warm-Up
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="18200" start_npc_ids="798604" end_npc_ids="799088"/>
 	<report_to id="18207" start_npc_ids="205309" end_npc_ids="205316"/>
 	<report_to_many id="18210" start_npc_ids="205315" end_npc_ids="205985">
-		<npc_infos var="0" npc_id="205985" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="205985"/>
 	</report_to_many>
-	<report_to_many id="18215" start_npc_ids="205315" end_npc_ids="205315">
-		<npc_infos var="0" npc_id="205315" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="18215" start_npc_ids="205315">
+		<npc_infos npc_ids="205315"/>
 	</report_to_many>
 	<report_to id="28200" start_npc_ids="798804" end_npc_ids="799428"/>
 	<report_to id="28207" start_npc_ids="205321" end_npc_ids="205320"/>
 	<report_to_many id="28210" start_npc_ids="205323" end_npc_ids="205986">
-		<npc_infos var="0" npc_id="205986" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="205986"/>
 	</report_to_many>
-	<report_to_many id="28215" start_npc_ids="205323" end_npc_ids="205323">
-		<npc_infos var="0" npc_id="205323" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="28215" start_npc_ids="205323">
+		<npc_infos npc_ids="205323"/>
 	</report_to_many>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18201" start_npc_ids="205309"/>
 	<monster_hunt id="18202" start_npc_ids="205309"/>
@@ -84,13 +86,15 @@
 	<monster_hunt id="28204" start_npc_ids="205321"/>
 	<monster_hunt id="28205" start_npc_ids="205321" end_npc_ids="799428"/>
 	<monster_hunt id="28206" start_npc_ids="205321"/>
+	
 	<!-- KILL IN WORLD QUESTS -->
-	<kill_in_world id="18214" start_npc_ids="205985" end_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
-	<kill_in_world id="18218" start_npc_ids="205985" end_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
-	<kill_in_world id="18224" start_npc_ids="205985" start_dialog_id="4762" end_npc_ids="205985" end_dialog_id="10002" worlds="300350000 300360000" amount="5"/>
-	<kill_in_world id="28214" start_npc_ids="205986" end_npc_ids="205986" worlds="300350000 300360000" amount="5"/>
-	<kill_in_world id="28218" start_npc_ids="205986" end_npc_ids="205986" worlds="300350000 300360000" amount="5"/>
-	<kill_in_world id="28224" start_npc_ids="205986" start_dialog_id="4762" end_npc_ids="205986" end_dialog_id="10002" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="18214" start_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="18218" start_npc_ids="205985" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="18224" start_npc_ids="205985" start_dialog_id="4762" end_dialog_id="10002" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="28214" start_npc_ids="205986" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="28218" start_npc_ids="205986" worlds="300350000 300360000" amount="5"/>
+	<kill_in_world id="28224" start_npc_ids="205986" start_dialog_id="4762" end_dialog_id="10002" worlds="300350000 300360000" amount="5"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18219" start_npc_ids="205985"/>
 	<item_collecting id="18220" start_npc_ids="205985"/>

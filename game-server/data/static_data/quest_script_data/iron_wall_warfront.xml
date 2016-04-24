@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-	[BEGIN] SUMMARY
-		16960 [SCRIPT] [Alliance] Face the Commander
-		16961 [XML] [Alliance] Reclaim the Battle
-		16962 [XML] [Alliance] Forward March
-		26960 [SCRIPT] [Alliance] Face the Commander
-		26961 [XML] [Alliance] Capture the Bastion
-		26962 [XML] [Alliance] Storm the Gateway
-	[END] SUMMARY
--->
+	<!--
+		[BEGIN] SUMMARY
+			16960 [SCRIPT] [Alliance] Face the Commander
+			16961 [XML] [Alliance] Reclaim the Battle
+			16962 [XML] [Alliance] Forward March
+			26960 [SCRIPT] [Alliance] Face the Commander
+			26961 [XML] [Alliance] Capture the Bastion
+			26962 [XML] [Alliance] Storm the Gateway
+		[END] SUMMARY
+	-->
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="16961" start_npc_ids="801281"/>
 	<monster_hunt id="16962" start_npc_ids="801281"/>

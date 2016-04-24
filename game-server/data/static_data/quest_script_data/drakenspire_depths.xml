@@ -14,6 +14,7 @@
 			28954 [XML] Hand It Over
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORT TO -->
 	<report_to id="18950" start_npc_ids="804711" end_npc_ids="209678"/>
 	<report_to id="28950" start_npc_ids="804738" end_npc_ids="209743"/>
@@ -28,7 +29,7 @@
 	<monster_hunt id="28951" start_npc_ids="209743" end_npc_ids="804738"/>
 	<monster_hunt id="28952" start_npc_ids="209743" end_npc_ids="804738"/>
 	
-	<!-- ITEM ORDER -->
+	<!-- ITEM ORDERS -->
 	<item_order id="18954" end_npc_id="804711"/>
 	<item_order id="28954" end_npc_id="804738"/>
 </quest_scripts>

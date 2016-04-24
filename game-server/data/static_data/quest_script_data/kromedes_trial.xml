@@ -36,6 +36,7 @@
 			28648 [XML] Kaliga's Collection
 		[END] SUMMARY
 	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18618" start_npc_ids="730326"/>
 	<item_collecting id="18619" start_npc_ids="730327"/>

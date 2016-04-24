@@ -18,6 +18,7 @@
 			28916 [XML] [Group] Precious Seal
 		[END] SUMMARY
 	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18913" start_npc_ids="801945"/>
 	<item_collecting id="18914" start_npc_ids="801945"/>
@@ -25,11 +26,12 @@
 	<item_collecting id="28913" start_npc_ids="801947"/>
 	<item_collecting id="28914" start_npc_ids="801947"/>
 	<item_collecting id="28916" start_npc_ids="801947"/>
+	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18911" start_npc_ids="801945" end_npc_ids="801945"/>
-	<monster_hunt id="18912" start_npc_ids="801945" end_npc_ids="801945"/>
+	<monster_hunt id="18911" start_npc_ids="801945"/>
+	<monster_hunt id="18912" start_npc_ids="801945"/>
 	<monster_hunt id="18915" start_npc_ids="801945"/>
-	<monster_hunt id="28911" start_npc_ids="801947" end_npc_ids="801947"/>
-	<monster_hunt id="28912" start_npc_ids="801947" end_npc_ids="801947"/>
+	<monster_hunt id="28911" start_npc_ids="801947"/>
+	<monster_hunt id="28912" start_npc_ids="801947"/>
 	<monster_hunt id="28915" start_npc_ids="801947"/>
 </quest_scripts>

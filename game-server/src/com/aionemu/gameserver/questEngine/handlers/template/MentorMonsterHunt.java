@@ -34,7 +34,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 	 */
 	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters,
 		int menteMinLevel, int menteMaxLevel, boolean reward, boolean rewardNextStep) {
-		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, "NONE", 0, reward, rewardNextStep);
+		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, null, 0, reward, rewardNextStep);
 		this.menteMinLevel = menteMinLevel;
 		this.menteMaxLevel = menteMaxLevel;
 		this.qt = DataManager.QUEST_DATA.getQuestById(questId);
@@ -43,7 +43,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (qt.getMentorType()) {
 				case MENTOR:

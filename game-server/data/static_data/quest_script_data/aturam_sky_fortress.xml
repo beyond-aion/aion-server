@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			18300 [SCRIPT] Floating Death
 			18301 [SCRIPT] My Prec-H-ious
 			18302 [SCRIPT] First Priority
 			18303 [SCRIPT] Making a Sur-can't-a
-			18304 [UNUSED] Hollowed and Sealed (level 99)
-			18305 [UNUSED] Weapon Refined by Reian Tribe (Lvl 99)
+			18304 [REMOVED] Hollowed and Sealed
+			18305 [REMOVED] Weapon Refined by Reian Tribe
 			18306 [XML] [Daily] Supplies in the Sky
 			18307 [XML] Relics Reclaimed
 			18308 [XML] [Daily] A Mark of Loyalty
@@ -20,8 +20,8 @@
 			28301 [SCRIPT] Power On
 			28302 [SCRIPT] Document Saved
 			28303 [SCRIPT] Char Bombom-Boom!
-			28304 [UNUSED] Hollowed Be Thy Marble (level 99)
-			28305 [UNUSED] Weapon Refined by Reian Tribe (level 99)
+			28304 [REMOVED] Hollowed Be Thy Marble
+			28305 [REMOVED] Weapon Refined by Reian Tribe
 			28306 [XML] [Daily] Supplies in the Sky...Fortress
 			28307 [XML] Reian Relics Reclaimed
 			28308 [XML] [Daily] A Matter of Loyalty
@@ -31,8 +31,8 @@
 			28312 [XML] [Daily] Outrun a Resonator Network
 			28313 [XML] A Wealthy Patron
 		[END] SUMMARY
--->
-	<!-- REPORTING QUESTS -->
+	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18306" start_npc_ids="799530" end_npc_ids="799531"/>
 	<item_collecting id="18307" start_npc_ids="799596"/>
@@ -42,6 +42,7 @@
 	<item_collecting id="28307" start_npc_ids="799596"/>
 	<item_collecting id="28308" start_npc_ids="799530" end_npc_ids="799531"/>
 	<item_collecting id="28312" start_npc_ids="799531"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18309" start_npc_ids="799596"/>
 	<monster_hunt id="18310" start_npc_ids="799530" end_npc_ids="799531"/>

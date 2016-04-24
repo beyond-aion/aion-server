@@ -20,12 +20,15 @@
 			28036 [SCRIPT] Interrogate Kvash
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="13305" start_npc_ids="801281" end_npc_ids="801037"/>
 	<report_to id="23305" start_npc_ids="801280" end_npc_ids="801047"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18034" start_npc_ids="801037"/>
 	<item_collecting id="28034" start_npc_ids="801047"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18030" start_npc_ids="801037"/>
 	<monster_hunt id="18031" start_npc_ids="801037"/>

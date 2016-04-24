@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1051 [SCRIPT] The Ruins of Roah
 			1052 [SCRIPT] Root of the Rot
 			1053 [SCRIPT] The Klaw Threat
@@ -290,7 +290,8 @@
 			80220 [SCRIPT] [Growth] Dark Poeta Finale
 			80259 [TODO] [Event] Delicious Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1504" start_npc_ids="204500" end_npc_ids="278502"/>
 	<report_to id="1505" start_npc_ids="204502" end_npc_ids="204582"/>
@@ -307,6 +308,7 @@
 	<report_to id="1671" start_npc_ids="798095" end_npc_ids="798027"/>
 	<report_to id="3221" start_npc_ids="204530" end_npc_ids="204658"/>
 	<report_to id="3528" start_npc_ids="204536" end_npc_ids="798165"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1502" start_npc_ids="204525"/>
 	<item_collecting id="1503" start_npc_ids="204505"/>
@@ -434,10 +436,12 @@
 	<item_collecting id="18647" start_npc_ids="205232"/>
 	<item_collecting id="80004" start_npc_ids="799776"/>
 	<item_collecting id="80138" start_npc_ids="830243"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="1514" talk_npc_id1="204582" talk_npc_id2="204505" end_npc_id="203831"/>
 	<item_order id="16904" end_npc_id="801189"/>
 	<item_order id="26904" end_npc_id="801193"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1501" start_npc_ids="204507"/>
 	<monster_hunt id="1507" start_npc_ids="204507"/>
@@ -516,5 +520,7 @@
 	<monster_hunt id="18606" start_npc_ids="205231"/>
 	<monster_hunt id="18617" start_npc_ids="205230"/>
 	<monster_hunt id="80215" start_npc_ids="831024"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="39021" end_npc_ids="204500" worlds="210040000" amount="5" invasion_world="210040000"/>
 </quest_scripts>

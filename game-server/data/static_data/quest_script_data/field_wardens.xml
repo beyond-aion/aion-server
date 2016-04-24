@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			45007 [XML] Monitoring Beluslan
 			45008 [XML] Scanning Beluslan
 			45009 [XML] Oh the Entropy!
@@ -46,90 +46,86 @@
 			48000 [SCRIPT] Summons from the Wardens
 			48003 [XML] Message from the Field Wardens
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="45010" end_npc_ids="799848">
-		<npc_infos var="0" npc_id="204715" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799848" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="204715"/>
+		<npc_infos npc_ids="799848"/>
 	</report_to_many>
 	<report_to_many id="45011" end_npc_ids="799848">
-		<npc_infos var="0" npc_id="204772" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799848" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="204772"/>
+		<npc_infos npc_ids="799848"/>
 	</report_to_many>
 	<report_to_many id="45017" end_npc_ids="799849">
-		<npc_infos var="0" npc_id="205143" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799849" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="205143"/>
+		<npc_infos npc_ids="799849"/>
 	</report_to_many>
 	<report_to_many id="45018" end_npc_ids="799849">
-		<npc_infos var="0" npc_id="205130" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799849" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="205130"/>
+		<npc_infos npc_ids="799849"/>
 	</report_to_many>
 	<report_to_many id="45024" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799244" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799244"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45025" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799271" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799271"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45026" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799285" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799285"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45027" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799305" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799305"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45028" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799314" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799314"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45029" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799354" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799354"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to_many id="45030" end_npc_ids="799842 799843">
-		<npc_infos var="0" npc_id="799360" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799842" quest_dialog="2375" close_dialog="1009"/>
-		<npc_infos var="1" npc_id="799843" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799360"/>
+		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to id="48003" start_npc_ids="204191" end_npc_ids="799845"/>
+	
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="45007" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45008" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45014" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45015" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45021" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<item_collecting id="45022" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<item_collecting id="45031" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45032" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45033" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45034" start_npc_ids="0" end_npc_ids="799848"/>
-	<item_collecting id="45039" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45040" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45041" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45042" start_npc_ids="0" end_npc_ids="799849"/>
-	<item_collecting id="45045" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<item_collecting id="45046" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<item_collecting id="45047" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<item_collecting id="45048" start_npc_ids="0" end_npc_ids="799842 799843"/>
+	<item_collecting id="45007" end_npc_ids="799848"/>
+	<item_collecting id="45008" end_npc_ids="799848"/>
+	<item_collecting id="45014" end_npc_ids="799849"/>
+	<item_collecting id="45015" end_npc_ids="799849"/>
+	<item_collecting id="45021" end_npc_ids="799842 799843"/>
+	<item_collecting id="45022" end_npc_ids="799842 799843"/>
+	<item_collecting id="45031" end_npc_ids="799848"/>
+	<item_collecting id="45032" end_npc_ids="799848"/>
+	<item_collecting id="45033" end_npc_ids="799848"/>
+	<item_collecting id="45034" end_npc_ids="799848"/>
+	<item_collecting id="45039" end_npc_ids="799849"/>
+	<item_collecting id="45040" end_npc_ids="799849"/>
+	<item_collecting id="45041" end_npc_ids="799849"/>
+	<item_collecting id="45042" end_npc_ids="799849"/>
+	<item_collecting id="45045" end_npc_ids="799842 799843"/>
+	<item_collecting id="45046" end_npc_ids="799842 799843"/>
+	<item_collecting id="45047" end_npc_ids="799842 799843"/>
+	<item_collecting id="45048" end_npc_ids="799842 799843"/>
+	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="45009" start_npc_ids="0" end_npc_ids="799848"/>
-	<monster_hunt id="45016" start_npc_ids="0" end_npc_ids="799849"/>
-	<monster_hunt id="45023" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<monster_hunt id="45035" start_npc_ids="0" end_npc_ids="799848"/>
-	<monster_hunt id="45036" start_npc_ids="0" end_npc_ids="799848"/>
-	<monster_hunt id="45037" start_npc_ids="0" end_npc_ids="799848"/>
-	<monster_hunt id="45038" start_npc_ids="0" end_npc_ids="799848"/>
-	<monster_hunt id="45043" start_npc_ids="0" end_npc_ids="799849"/>
-	<monster_hunt id="45044" start_npc_ids="0" end_npc_ids="799849"/>
-	<monster_hunt id="45049" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<monster_hunt id="45050" start_npc_ids="0" end_npc_ids="799842 799843"/>
-	<monster_hunt id="45051" start_npc_ids="0" end_npc_ids="799842 799843"/>
+	<monster_hunt id="45009" end_npc_ids="799848"/>
+	<monster_hunt id="45016" end_npc_ids="799849"/>
+	<monster_hunt id="45023" end_npc_ids="799842 799843"/>
+	<monster_hunt id="45035" end_npc_ids="799848"/>
+	<monster_hunt id="45036" end_npc_ids="799848"/>
+	<monster_hunt id="45037" end_npc_ids="799848"/>
+	<monster_hunt id="45038" end_npc_ids="799848"/>
+	<monster_hunt id="45043" end_npc_ids="799849"/>
+	<monster_hunt id="45044" end_npc_ids="799849"/>
+	<monster_hunt id="45049" end_npc_ids="799842 799843"/>
+	<monster_hunt id="45050" end_npc_ids="799842 799843"/>
+	<monster_hunt id="45051" end_npc_ids="799842 799843"/>
 </quest_scripts>

@@ -15,7 +15,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnTalkEvent")
+@XmlType(name = "OnTalkEvent", propOrder = { "var" })
 public class OnTalkEvent extends QuestEvent {
 
 	@XmlElement(name = "var")

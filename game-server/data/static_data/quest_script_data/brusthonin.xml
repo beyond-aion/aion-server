@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			2091 [SCRIPT] Meet the Reapers
 			2092 [SCRIPT] Graves of the Red Sky Legion
 			2093 [SCRIPT] The Secret Passage
@@ -124,7 +124,8 @@
 			80149 [SCRIPT] [Event] Warped Rift Securing
 			80265 [TODO] [Event] Fantastic Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="4010" start_npc_ids="730104" end_npc_ids="205142"/>
 	<report_to id="4075" start_npc_ids="205128" end_npc_ids="205151"/>
@@ -133,12 +134,15 @@
 	<report_to id="4097" start_npc_ids="205158" end_npc_ids="730104"/>
 	<report_to id="4104" start_npc_ids="205193" end_npc_ids="205159"/>
 	<report_to_many id="39000" start_npc_ids="800165" end_npc_ids="800500">
-		<npc_infos var="0" npc_id="800501" quest_dialog="1352"/>
+		<npc_infos npc_ids="800501"/>
+		<npc_infos npc_ids="800500"/>
 	</report_to_many>
 	<report_to_many id="39003" start_npc_ids="800500" end_npc_ids="800504">
-		<npc_infos var="0" npc_id="800512" quest_dialog="1352"/>
+		<npc_infos npc_ids="800512"/>
+		<npc_infos npc_ids="800504"/>
 	</report_to_many>
 	<report_to id="39010" start_npc_ids="800501" end_npc_ids="800500"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="4002" start_npc_ids="205126"/>
 	<item_collecting id="4006" start_npc_ids="205121"/>
@@ -180,6 +184,7 @@
 	<item_collecting id="4113" start_npc_ids="205148"/>
 	<item_collecting id="4114" start_npc_ids="205148"/>
 	<item_collecting id="80148" start_npc_ids="830244"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="4003" start_npc_ids="205131"/>
 	<monster_hunt id="4005" start_npc_ids="730103"/>
@@ -192,7 +197,6 @@
 	<monster_hunt id="4031" start_npc_ids="205151"/>
 	<monster_hunt id="4032" start_npc_ids="205152"/>
 	<monster_hunt id="4039" start_npc_ids="205193"/>
-	<!-- The Alpha Alitaur -->
 	<monster_hunt id="4040" start_npc_ids="205193"/>
 	<monster_hunt id="4043" start_npc_ids="205192"/>
 	<monster_hunt id="4047" start_npc_ids="205167"/>
@@ -215,9 +219,11 @@
 	<monster_hunt id="39001" start_npc_ids="800500"/>
 	<monster_hunt id="39002" start_npc_ids="800500"/>
 	<monster_hunt id="39004" start_npc_ids="800504" end_npc_ids="800500"/>
-	<monster_hunt id="39005" start_npc_ids="0" end_npc_ids="800500" invasion_world="220050000"/>
-	<monster_hunt id="49007" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000"/>
-	<monster_hunt id="49009" start_npc_ids="0" end_npc_ids="800502" invasion_world="220050000"/>
+	<monster_hunt id="39005" end_npc_ids="800500" invasion_world="220050000"/>
+	<monster_hunt id="49007" end_npc_ids="800502" invasion_world="220050000"/>
+	<monster_hunt id="49009" end_npc_ids="800502" invasion_world="220050000"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="39006" end_npc_ids="800500" worlds="220050000" amount="5" invasion_world="220050000"/>
 	<kill_in_world id="49008" end_npc_ids="800502" worlds="220050000" amount="5" invasion_world="220050000"/>
 </quest_scripts>

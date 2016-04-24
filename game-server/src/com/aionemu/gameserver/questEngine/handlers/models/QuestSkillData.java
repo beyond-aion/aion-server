@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author vlog, modified Bobobear
+ * @author vlog
+ * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestSkillData")
@@ -16,12 +17,15 @@ public class QuestSkillData {
 
 	@XmlAttribute(name = "ids", required = true)
 	protected List<Integer> skillIds;
+	
 	@XmlAttribute(name = "start_var")
-	protected int startVar = 0;
-	@XmlAttribute(name = "end_var", required = true)
+	protected int startVar;
+	
+	@XmlAttribute(name = "end_var")
 	protected int endVar;
+	
 	@XmlAttribute(name = "var_num")
-	protected int varNum = 0;
+	protected int varNum;
 
 	public List<Integer> getSkillIds() {
 		return skillIds;

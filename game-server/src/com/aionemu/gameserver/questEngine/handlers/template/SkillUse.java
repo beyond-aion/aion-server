@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -20,45 +19,35 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @modified Bobobear, Pad
  */
 public class SkillUse extends QuestHandler {
-
+	
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final FastMap<List<Integer>, QuestSkillData> qsd;
 
 	public SkillUse(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<List<Integer>, QuestSkillData> qsd) {
 		super(questId);
-		this.startNpcIds.addAll(startNpcIds);
-		this.startNpcIds.remove(0);
-		if (endNpcIds != null) {
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		if (endNpcIds != null)
 			this.endNpcIds.addAll(endNpcIds);
-			this.endNpcIds.remove(0);
-		} else {
+		else
 			this.endNpcIds.addAll(this.startNpcIds);
-		}
 		this.qsd = qsd;
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcIds.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(questId);
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(questId);
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
-		if (!startNpcIds.equals(endNpcIds)) {
-			iterator = endNpcIds.iterator();
-			while (iterator.hasNext()) {
-				int endNpc = iterator.next();
-				qe.registerQuestNpc(endNpc).addOnTalkEvent(questId);
-			}
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds)
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
 		for (List<Integer> skillIds : qsd.keySet()) {
-			iterator = skillIds.iterator();
-			while (iterator.hasNext()) {
-				int skillId = iterator.next();
+			for (Integer skillId : skillIds)
 				qe.registerQuestSkill(skillId, questId);
-			}
 		}
 	}
 
@@ -70,7 +59,7 @@ public class SkillUse extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcIds.contains(targetId)) {
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
@@ -143,7 +132,7 @@ public class SkillUse extends QuestHandler {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
 			constantSpawns.addAll(startNpcIds);
-			if (!startNpcIds.equals(endNpcIds))
+			if (!endNpcIds.equals(startNpcIds))
 				constantSpawns.addAll(endNpcIds);
 		}
 		return constantSpawns;

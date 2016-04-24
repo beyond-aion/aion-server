@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			2031 [SCRIPT] Petrifying Elim
 			2032 [SCRIPT] Guardian Spirit
 			2033 [SCRIPT] Destroying the Curse
@@ -251,7 +251,8 @@
 			26906 [XML] Blood-scent of Violent Death
 			49020 [XML] [Daily] Aegir's Order
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="2306" start_npc_ids="204303" end_npc_ids="204378"/>
 	<report_to id="2310" start_npc_ids="730038" end_npc_ids="204392"/>
@@ -346,7 +347,7 @@
 	<item_collecting id="2473" start_npc_ids="204356"/>
 	<item_collecting id="2474" start_npc_ids="204390" end_npc_ids="204364"/>
 	<item_collecting id="2475" start_npc_ids="204390"/>
-	<item_collecting id="2476" start_npc_ids="204355" end_npc_ids="204355"/>
+	<item_collecting id="2476" start_npc_ids="204355"/>
 	<item_collecting id="2478" start_npc_ids="204355"/>
 	<item_collecting id="2481" start_npc_ids="204210"/>
 	<item_collecting id="2483" start_npc_ids="204344"/>
@@ -378,6 +379,7 @@
 	<item_collecting id="4334" start_npc_ids="204342"/>
 	<item_collecting id="4336" start_npc_ids="204430"/>
 	<item_collecting id="4337" start_npc_ids="204430"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="2304" start_npc_ids="204302"/>
 	<monster_hunt id="2308" start_npc_ids="204424"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			46015 [XML] A Crystal Clear Job
 			46016 [XML] Ancient Treasures
 			46017 [XML] [Spy/Weekly] Balaurean Booty
@@ -34,51 +34,55 @@
 			48002 [SCRIPT] Charlirunerk's Daemons Want You!
 			48005 [XML] Message from the Daemons
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="48005" start_npc_ids="204191" end_npc_ids="799886"/>
+	
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="46015" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46016" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46017" start_npc_ids="799882 799883" end_npc_ids="799882 799883"/>
-	<item_collecting id="46503" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46509" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46515" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46519" start_npc_ids="799882 799883" end_npc_ids="799882 799883"/>
-	<item_collecting id="46521" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46524" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46525" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46526" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<item_collecting id="46528" start_npc_ids="0" end_npc_ids="799882 799883"/>
+	<item_collecting id="46015" end_npc_ids="799882 799883"/>
+	<item_collecting id="46016" end_npc_ids="799882 799883"/>
+	<item_collecting id="46017" start_npc_ids="799882 799883"/>
+	<item_collecting id="46503" end_npc_ids="799882 799883"/>
+	<item_collecting id="46509" end_npc_ids="799882 799883"/>
+	<item_collecting id="46515" end_npc_ids="799882 799883"/>
+	<item_collecting id="46519" start_npc_ids="799882 799883"/>
+	<item_collecting id="46521" end_npc_ids="799882 799883"/>
+	<item_collecting id="46524" end_npc_ids="799882 799883"/>
+	<item_collecting id="46525" end_npc_ids="799882 799883"/>
+	<item_collecting id="46526" end_npc_ids="799882 799883"/>
+	<item_collecting id="46528" end_npc_ids="799882 799883"/>
+	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="46500" start_npc_ids="0" end_npc_ids="799882 799883" end_reward="true"/>
-	<monster_hunt id="46502" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<monster_hunt id="46506" start_npc_ids="0" end_npc_ids="799882 799883" end_reward="true"/>
-	<monster_hunt id="46508" start_npc_ids="0" end_npc_ids="799882 799883" end_reward="true"/>
-	<monster_hunt id="46512" start_npc_ids="0" end_npc_ids="799882 799883" end_reward="true"/>
-	<monster_hunt id="46514" start_npc_ids="0" end_npc_ids="799882 799883" end_reward="true"/>
-	<monster_hunt id="46518" start_npc_ids="799882 799883" end_npc_ids="799882 799883"/>
-	<monster_hunt id="46520" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<monster_hunt id="46522" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<monster_hunt id="46523" start_npc_ids="0" end_npc_ids="799882 799883"/>
-	<monster_hunt id="46527" start_npc_ids="0" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46500" end_npc_ids="799882 799883" end_reward="true"/>
+	<monster_hunt id="46502" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46506" end_npc_ids="799882 799883" end_reward="true"/>
+	<monster_hunt id="46508" end_npc_ids="799882 799883" end_reward="true"/>
+	<monster_hunt id="46512" end_npc_ids="799882 799883" end_reward="true"/>
+	<monster_hunt id="46514" end_npc_ids="799882 799883" end_reward="true"/>
+	<monster_hunt id="46518" start_npc_ids="799882 799883"/>
+	<monster_hunt id="46520" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46522" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46523" end_npc_ids="799882 799883"/>
+	<monster_hunt id="46527" end_npc_ids="799882 799883"/>
+	
 	<!-- KILL SPAWN QUESTS -->
-	<kill_spawned id="46504" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700772" npc_ids="216640"/>
+	<kill_spawned id="46504" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700772" npc_ids="216640"/>
 	</kill_spawned>
-	<kill_spawned id="46505" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700773" npc_ids="216628"/>
+	<kill_spawned id="46505" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700773" npc_ids="216628"/>
 	</kill_spawned>
-	<kill_spawned id="46510" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700774" npc_ids="216641"/>
+	<kill_spawned id="46510" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700774" npc_ids="216641"/>
 	</kill_spawned>
-	<kill_spawned id="46511" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700775" npc_ids="216629"/>
+	<kill_spawned id="46511" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700775" npc_ids="216629"/>
 	</kill_spawned>
-	<kill_spawned id="46516" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700776" npc_ids="216642"/>
+	<kill_spawned id="46516" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700776" npc_ids="216642"/>
 	</kill_spawned>
-	<kill_spawned id="46517" start_npc_ids="0" end_npc_ids="799882 799883">
-		<monster end_var="1" var="0" spawner_object="700777" npc_ids="216643"/>
+	<kill_spawned id="46517" end_npc_ids="799882 799883">
+		<monster end_var="1" spawner_object_id="700777" npc_ids="216643"/>
 	</kill_spawned>
 </quest_scripts>

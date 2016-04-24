@@ -37,43 +37,37 @@ public class MonsterHunt extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MonsterHunt.class);
 
-	private final Set<Integer> startNpcs = new HashSet<>();
-	private final Set<Integer> endNpcs = new HashSet<>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final Map<Monster, Set<Integer>> monsters;
-	private final int startDialog;
-	private final int endDialog;
-	private final Set<Integer> aggroNpcs = new HashSet<>();
+	private final int startDialogId;
+	private final int endDialogId;
+	private final Set<Integer> aggroNpcIds = new HashSet<>();
 	private final int invasionWorldId;
 	private QuestItems workItem;
 	private final String startZone;
-	private final int startDistanceNpc;
+	private final int startDistanceNpcId;
 	private final boolean reward;
 	private final boolean rewardNextStep;
 	private final boolean isDataDriven;
 
-	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialog,
-		int endDialog, List<Integer> aggroNpcs, int invasionWorld, String startZone, int startDistanceNpc, boolean reward, boolean rewardNextStep) {
+	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialogId,
+		int endDialogId, List<Integer> aggroNpcIds, int invasionWorld, String startZone, int startDistanceNpcId, boolean reward, boolean rewardNextStep) {
 		super(questId);
-		if (startNpcIds != null) {
-			this.startNpcs.addAll(startNpcIds);
-			this.startNpcs.remove(0);
-		}
-		if (endNpcIds == null) {
-			this.endNpcs.addAll(startNpcs);
-		} else {
-			this.endNpcs.addAll(endNpcIds);
-			this.endNpcs.remove(0);
-		}
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		if (endNpcIds != null)
+			this.endNpcIds.addAll(endNpcIds);
+		else
+			this.endNpcIds.addAll(this.startNpcIds);
 		this.monsters = monsters;
-		this.startDialog = startDialog;
-		this.endDialog = endDialog;
-		if (aggroNpcs != null) {
-			this.aggroNpcs.addAll(aggroNpcs);
-			this.aggroNpcs.remove(0);
-		}
+		this.startDialogId = startDialogId;
+		this.endDialogId = endDialogId;
+		if (aggroNpcIds != null)
+			this.aggroNpcIds.addAll(aggroNpcIds);
 		this.invasionWorldId = invasionWorld;
 		this.startZone = startZone;
-		this.startDistanceNpc = startDistanceNpc;
+		this.startDistanceNpcId = startDistanceNpcId;
 		this.reward = reward;
 		this.rewardNextStep = rewardNextStep;
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
@@ -90,9 +84,9 @@ public class MonsterHunt extends QuestHandler {
 
 	@Override
 	public void register() {
-		for (Integer startNpc : startNpcs) {
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
 
 		for (Set<Integer> monsterIds : monsters.values()) {
@@ -100,11 +94,13 @@ public class MonsterHunt extends QuestHandler {
 				qe.registerQuestNpc(monsterId).addOnKillEvent(questId);
 		}
 
-		for (Integer endNpc : endNpcs)
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds)
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
+		}
 
-		for (Integer aggroNpc : aggroNpcs)
-			qe.registerQuestNpc(aggroNpc).addOnAddAggroListEvent(getQuestId());
+		for (Integer aggroNpcId : aggroNpcIds)
+			qe.registerQuestNpc(aggroNpcId).addOnAddAggroListEvent(questId);
 
 		if (invasionWorldId != 0)
 			qe.registerOnEnterWorld(questId);
@@ -112,8 +108,8 @@ public class MonsterHunt extends QuestHandler {
 		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
 			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
 
-		if (startDistanceNpc != 0)
-			qe.registerQuestNpc(startDistanceNpc, 300).addOnAtDistanceEvent(questId);
+		if (startDistanceNpcId != 0)
+			qe.registerQuestNpc(startDistanceNpcId, 300).addOnAtDistanceEvent(questId);
 	}
 
 	@Override
@@ -122,11 +118,12 @@ public class MonsterHunt extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
+		
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, startDialog != 0 ? startDialog : isDataDriven ? 4762 : 1011);
+					return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 				} else {
 					switch (dialog) {
 						case QUEST_ACCEPT:
@@ -146,9 +143,9 @@ public class MonsterHunt extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, endDialog != 0 ? endDialog : 1352);
+					return sendQuestDialog(env, endDialogId != 0 ? endDialogId : 1352);
 				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					for (Monster mi : monsters.keySet()) {
 						int endVar = mi.getEndVar();
@@ -173,8 +170,8 @@ public class MonsterHunt extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (endNpcs.contains(targetId)) {
-				if (!aggroNpcs.isEmpty() || isDataDriven) {
+			if (endNpcIds.contains(targetId)) {
+				if (!aggroNpcIds.isEmpty() || isDataDriven) {
 					switch (dialog) {
 						case QUEST_SELECT:
 						case USE_OBJECT:
@@ -222,7 +219,7 @@ public class MonsterHunt extends QuestHandler {
 					} while (endVar > 0);
 					total += 1;
 					if (total <= m.getEndVar()) {
-						if (!aggroNpcs.isEmpty()) {
+						if (!aggroNpcIds.isEmpty()) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return true;
@@ -274,8 +271,8 @@ public class MonsterHunt extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		VortexLocation vortexLoc = VortexService.getInstance().getLocationByWorld(invasionWorldId);
 		if (player.getWorldId() == invasionWorldId) {
-			if ((qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat())) {
-				if ((vortexLoc != null && vortexLoc.isActive()) || (searchOpenRift()))
+			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+				if (vortexLoc != null && vortexLoc.isActive() || searchOpenRift())
 					return QuestService.startQuest(env);
 			}
 		}
@@ -307,8 +304,7 @@ public class MonsterHunt extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			QuestService.startQuest(env);
-			return true;
+			return QuestService.startQuest(env);
 		}
 		return false;
 	}
@@ -317,12 +313,10 @@ public class MonsterHunt extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (startNpcs != null)
-				constantSpawns.addAll(startNpcs);
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
-			if (aggroNpcs != null)
-				constantSpawns.addAll(aggroNpcs);
+			constantSpawns.addAll(startNpcIds);
+			if (!endNpcIds.equals(startNpcIds))
+				constantSpawns.addAll(endNpcIds);
+			constantSpawns.addAll(aggroNpcIds);
 			for (Set<Integer> mobIds : monsters.values())
 				constantSpawns.addAll(mobIds);
 		}

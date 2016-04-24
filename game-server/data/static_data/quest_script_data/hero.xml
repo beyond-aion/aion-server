@@ -92,16 +92,17 @@
 			80540 [XML_T] [Hero] Only for the Chosen
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORT TO -->
 	<!--
 	<report_to_many id="13900" start_npc_ids="798926" end_npc_ids="798514">
-		<npc_infos var="0" npc_id="203726"/>
-		<npc_infos var="1" npc_id="798514"/>
+		<npc_infos npc_ids="203726"/>
+		<npc_infos npc_ids="798514"/>
 	</report_to_many>
 	<report_to id="13902" start_npc_ids="798514" end_npc_ids="798926"/>
 	<report_to_many id="23900" start_npc_ids="799225" end_npc_ids="798718">
-		<npc_infos var="0" npc_id="204182"/>
-		<npc_infos var="1" npc_id="798718"/>
+		<npc_infos npc_ids="204182"/>
+		<npc_infos npc_ids="798718"/>
 	</report_to_many>
 	<report_to id="23902" start_npc_ids="798718" end_npc_ids="799225"/>
 	-->

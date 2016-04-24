@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			2900 [SCRIPT] No Escaping Destiny
 			2905 [XML] [Craft] Elgar's Mistake
 			2906 [XML] [Craft] Ingots for Armor
@@ -298,7 +298,8 @@
 			80550 [XML] [Event/Daily] A Gallant Mission
 			80551 [XML] [Event/Daily] Bundle the Joy
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="2939" start_npc_ids="204104" end_npc_ids="278010"/>
 	<report_to id="2940" start_npc_ids="204106" end_npc_ids="278011"/>
@@ -341,20 +342,22 @@
 	<report_to id="80550" start_npc_ids="831999" end_npc_ids="831999"/>
 	<report_to id="80551" start_npc_ids="832008" end_npc_ids="831999"/>
 	<report_to_many id="4201" start_npc_ids="204282" end_npc_ids="204173">
-		<npc_infos npc_id="279009" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="204173" var="1" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="279009"/>
+		<npc_infos npc_ids="204173"/>
 	</report_to_many>
 	<report_to_many id="4914" start_item_id="182207127" end_npc_ids="203385">
-		<npc_infos npc_id="204182" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="203385" var="1" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="204182"/>
+		<npc_infos npc_ids="203385"/>
 	</report_to_many>
-	<report_to_many id="29047" start_npc_ids="204052" end_npc_ids="204052">
-		<npc_infos npc_id="204052" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="29047" start_npc_ids="204052">
+		<npc_infos npc_ids="204052"/>
 	</report_to_many>
 	<report_to_many id="28225" start_npc_ids="205472" end_npc_ids="205323">
-	    <npc_infos npc_id="205321" var="0" quest_dialog="1352"/>
-		<npc_infos npc_id="205323" var="1" quest_dialog="2375" close_dialog="1009"/>
+	    <npc_infos npc_ids="205321"/>
+		<npc_infos npc_ids="205323"/>
 	</report_to_many>
+	
+	<!-- SKILL USE -->
 	<skill_use id="4922" start_npc_ids="204056">
 		<skill end_var="10" ids="599"/>
 	</skill_use>
@@ -397,6 +400,7 @@
 	<skill_use id="29075" start_npc_ids="801223">
 		<skill end_var="10" ids="4469"/>
 	</skill_use>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2905" start_npc_ids="204104"/>
 	<item_collecting id="2906" start_npc_ids="204106"/>
@@ -500,6 +504,8 @@
 	<item_collecting id="80168" start_npc_ids="800276"/>
 	<item_collecting id="80169" start_npc_ids="800277"/>
 	<item_collecting id="80171" start_npc_ids="800274"/>
+	
+	<!-- CRAFTING REWARDS -->
 	<crafting_rewards id="4947" start_npc_id="204104" end_npc_id="204052" skill_id="40002" level_reward="400"/>
 	<crafting_rewards id="4950" start_npc_id="204106" end_npc_id="204052" skill_id="40003" level_reward="400"/>
 	<crafting_rewards id="4953" start_npc_id="204108" end_npc_id="204052" skill_id="40008" level_reward="400"/>
@@ -521,6 +527,7 @@
 	<crafting_rewards id="29033" start_npc_id="204102" end_npc_id="798800" movie="144" skill_id="40007" level_reward="500"/>
 	<crafting_rewards id="29021" start_npc_id="204110" end_npc_id="798800" movie="145" skill_id="40004" level_reward="500"/>
 	<crafting_rewards id="29058" start_npc_id="798452" end_npc_id="798800" movie="147" skill_id="40010" level_reward="500"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="4213" start_npc_ids="204202"/>
 	<monster_hunt id="4977" start_npc_ids="203385"/>
@@ -528,6 +535,7 @@
 	<monster_hunt id="4979" start_npc_ids="204283"/>
 	<monster_hunt id="80013" start_npc_ids="799788"/>
 	<monster_hunt id="80014" start_npc_ids="799788"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="2966" end_npc_id="278055"/>
 	<item_order id="2967" end_npc_id="278055"/>

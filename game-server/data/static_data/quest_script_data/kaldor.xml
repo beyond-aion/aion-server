@@ -50,37 +50,39 @@
   			26922 [TODO] Another Passage
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="13800" start_npc_ids="800527" end_npc_ids="801163">
-		<npc_infos var="0" npc_id="800958" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="801163" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="800958"/>
+		<npc_infos npc_ids="801163"/>
 	</report_to_many> 
-	<report_to_many id="13809" start_npc_ids="802427" end_npc_ids="802427">
-		<npc_infos var="0" npc_id="730969" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="730970" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="730971" quest_dialog="2034"/>
-		<npc_infos var="3" npc_id="802427" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="13809" start_npc_ids="802427">
+		<npc_infos npc_ids="730969"/>
+		<npc_infos npc_ids="730970"/>
+		<npc_infos npc_ids="730971"/>
+		<npc_infos npc_ids="802427"/>
 	</report_to_many>
-	<report_to_many id="13815" start_npc_ids="804586" end_npc_ids="804586">
-		<npc_infos var="0" npc_id="804595" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="804586" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="13815" start_npc_ids="804586">
+		<npc_infos npc_ids="804595"/>
+		<npc_infos npc_ids="804586"/>
 	</report_to_many>
 	<report_to_many id="23800" start_npc_ids="800529" end_npc_ids="802433">
-		<npc_infos var="0" npc_id="800980" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="802433" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="800980"/>
+		<npc_infos npc_ids="802433"/>
 	</report_to_many> 
-	<report_to_many id="23809" start_npc_ids="802429" end_npc_ids="802429">
-		<npc_infos var="0" npc_id="730969" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="730970" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="730971" quest_dialog="2034"/>
-		<npc_infos var="3" npc_id="802429" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="23809" start_npc_ids="802429">
+		<npc_infos npc_ids="730969"/>
+		<npc_infos npc_ids="730970"/>
+		<npc_infos npc_ids="730971"/>
+		<npc_infos npc_ids="802429"/>
 	</report_to_many>
-	<report_to_many id="23815" start_npc_ids="804591" end_npc_ids="804591">
-		<npc_infos var="0" npc_id="804594" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="804591" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="23815" start_npc_ids="804591">
+		<npc_infos npc_ids="804594"/>
+		<npc_infos npc_ids="804591"/>
 	</report_to_many>
 	<report_to id="16922" start_npc_ids="802431" end_npc_ids="804628"/>
 	<report_to id="26922" start_npc_ids="802433" end_npc_ids="804628"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="13806" start_npc_ids="802358"/>
 	<item_collecting id="13807" start_npc_ids="802432"/>
@@ -98,6 +100,7 @@
 	<item_collecting id="23819" start_npc_ids="804593"/>
 	<item_collecting id="23820" start_npc_ids="804589"/>
 	<item_collecting id="23821" start_npc_ids="804589"/>
+	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="13802" start_npc_ids="802427"/>
 	<monster_hunt id="13803" start_npc_ids="802427"/>
@@ -113,9 +116,10 @@
 	<monster_hunt id="23808" start_npc_ids="802433"/>
 	<monster_hunt id="23811" start_npc_ids="802429"/>
 	<monster_hunt id="23814" start_npc_ids="804590"/>
+	
 	<!-- KILL IN WORLD QUESTS -->
-    <kill_in_world id="13801" start_npc_ids="000000" end_npc_ids="802431" worlds="600090000" amount="1"/>
-	<kill_in_world id="13818" start_npc_ids="804588" end_npc_ids="804588" worlds="600090000" amount="6"/>
-	<kill_in_world id="23801" start_npc_ids="000000" end_npc_ids="802433" worlds="600090000" amount="1"/>
-	<kill_in_world id="23818" start_npc_ids="804593" end_npc_ids="804593" worlds="600090000" amount="6"/>
+    <kill_in_world id="13801" end_npc_ids="802431" worlds="600090000"/>
+	<kill_in_world id="13818" start_npc_ids="804588" worlds="600090000" amount="6"/>
+	<kill_in_world id="23801" end_npc_ids="802433" worlds="600090000"/>
+	<kill_in_world id="23818" start_npc_ids="804593" worlds="600090000" amount="6"/>
 </quest_scripts>
