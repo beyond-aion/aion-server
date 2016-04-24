@@ -2061,7 +2061,7 @@
 			<tempering_stat stat="STUMBLE_RESISTANCE" value="50"/>
 			<tempering_stat stat="STAGGER_RESISTANCE" value="60"/>
 			<tempering_stat stat="SPIN_RESISTANCE" value="10"/>
-			<tempering_stat stat="OPENAREIAL_RESISTANCE" value="20"/>
+			<tempering_stat stat="OPENAERIAL_RESISTANCE" value="20"/>
 		</tempering_data>
 		<tempering_data level="2">
 			<tempering_stat stat="POISON_RESISTANCE" value="30"/>
@@ -2091,7 +2091,7 @@
 			<tempering_stat stat="STUMBLE_RESISTANCE_PENETRATION" value="10"/>
 			<tempering_stat stat="STAGGER_RESISTANCE_PENETRATION" value="20"/>
 			<tempering_stat stat="SPIN_RESISTANCE_PENETRATION" value="30"/>
-			<tempering_stat stat="OPENAREIAL_RESISTANCE_PENETRATION" value="40"/>
+			<tempering_stat stat="OPENAERIAL_RESISTANCE_PENETRATION" value="40"/>
 		</tempering_data>
 		<tempering_data level="7">
 			<tempering_stat stat="POISON_RESISTANCE_PENETRATION" value="50"/>

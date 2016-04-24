@@ -25,7 +25,10 @@ public class SpinEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED)
-			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.SPIN))
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.SPIN)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE))
 			return;
 		super.calculate(effect, StatEnum.SPIN_RESISTANCE, SpellStatus.SPIN);
 	}

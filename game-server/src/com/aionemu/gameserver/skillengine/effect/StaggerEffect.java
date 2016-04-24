@@ -67,7 +67,9 @@ public class StaggerEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED)
-			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER))
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STAGGER)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
+			|| effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE))
 			return;
 
 		if (!super.calculate(effect, StatEnum.STAGGER_RESISTANCE, SpellStatus.STAGGER))
