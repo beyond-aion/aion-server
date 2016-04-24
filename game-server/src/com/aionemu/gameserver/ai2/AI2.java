@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
@@ -62,4 +63,8 @@ public interface AI2 {
 	ItemAttackType modifyAttackType(ItemAttackType type);
 
 	int modifyARange(int value);
+
+	void fireOnEndCastEvents(NpcSkillEntry usedSkill);
+
+	void fireOnStartCastEvents(NpcSkillEntry startingSkill);
 }

@@ -3,6 +3,8 @@ package com.aionemu.gameserver.ai2.manager;
 import java.util.Collections;
 import java.util.List;
 
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
@@ -27,8 +29,6 @@ import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -192,6 +192,10 @@ public class SkillAttackManager {
 		}
 
 		if (owner.getGameStats().canUseNextSkill()) {
+			NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+			if (queuedSkill != null && isReady(owner, queuedSkill)) {
+				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
+			}
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill() ;
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
 				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
@@ -200,50 +204,45 @@ public class SkillAttackManager {
 						Collections.shuffle(chainSkills);
 					for (NpcSkillEntry entry : chainSkills) {
 						if (entry != null && isReady(owner, entry)) {
-							if (targetTooFar(owner, entry)) {
-								owner.getGameStats().setNextSkillTime(5000);
-								return null;
-							}
-							owner.getGameStats().setLastSkill(entry);
-							owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
-							entry.setLastTimeUsed();
-							return entry;
+							return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 						}
 					}
 				}
 			}
-			
+
 			List<Integer> priorities = skillList.getPriorities();
 			if (priorities != null && !priorities.isEmpty()) {
-				
+
 				for (int index = priorities.size()-1; index >= 0; index--) {
 					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities.get(index));
 					if (skillsByPriority != null && !skillsByPriority.isEmpty()) {
 						if (skillsByPriority.size() > 2)
 							Collections.shuffle(skillsByPriority);
-						
+
 						for (NpcSkillEntry entry : skillsByPriority) {
-							
 							if (entry != null && entry.getChainId() == 0 && isReady(owner, entry)) {
-								if (targetTooFar(owner, entry)) {
-									owner.getGameStats().setNextSkillTime(5000);
-									return null;
-								}
-								owner.getGameStats().setLastSkill(entry);
-								owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
-								entry.setLastTimeUsed();
-								return entry;
+								return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 							}
-							
 						}
 					}
 				}
-	
+
 			}
 		}
 		return null;
 	}
-	
+
+	private static NpcSkillEntry getNpcSkillEntryIfNotTooFarAway(Npc owner, NpcSkillEntry entry) {
+		if (targetTooFar(owner, entry)) {
+			owner.getGameStats().setNextSkillTime(5000);
+			return null;
+		}
+		owner.getGameStats().setLastSkill(entry);
+		owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
+		entry.setLastTimeUsed();
+		return entry;
+	}
+
 	//Check for Bind/Silence/Fear/stun etc debuffs on npc
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
 		if (entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {

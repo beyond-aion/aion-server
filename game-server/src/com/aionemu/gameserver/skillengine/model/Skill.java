@@ -3,6 +3,8 @@ package com.aionemu.gameserver.skillengine.model;
 import java.util.Iterator;
 import java.util.List;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +27,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -54,8 +57,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer Modified by Wakzashi
@@ -292,6 +293,13 @@ public class Skill {
 
 		effector.getObserveController().attach(conditionChangeListener);
 
+		if (effector instanceof Npc) {
+			Npc npc = (Npc) effector;
+			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
+			if (lastSkill != null) {
+				lastSkill.fireOnStartCastEvents(npc);
+			}
+		}
 		if (this.duration > 0) {
 			schedule(this.duration);
 		} else {
@@ -800,8 +808,12 @@ public class Skill {
 
 		if (effector instanceof Npc) {
 			Npc npc = (Npc) effector;
-			if (npc.getGameStats().getLastSkill() != null) {
-				npc.getGameStats().getLastSkill().fireAfterUseSkillEvents(npc);
+			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
+			if (lastSkill != null) {
+				if (lastSkill.isQueued()) {
+					npc.getQueuedSkills().poll();
+				}
+				lastSkill.fireOnEndCastEvents(npc);
 			}
 			SkillAttackManager.afterUseSkill((NpcAI2) effector.getAi2());
 		}
