@@ -526,7 +526,7 @@ public class StatFunctions {
 		if (magicBoost < 0) {
 			magicBoost = 0;
 		} else if (magicBoost > 2900) {
-			magicBoost = 2901;
+			magicBoost = 2900;
 		}
 		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
 		float damages = baseDamages * (1 + (magicBoost / (knowledge * 10f)));
