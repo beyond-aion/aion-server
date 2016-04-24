@@ -34345,12 +34345,12 @@
         <npc_skill id="20751" lv="47" prob="15"/>
         <npc_skill id="20760" lv="47" prob="15"/>
     </npc_skills>
-    <npc_skills npc_ids="219359">
-        <npc_skill id="20963" lv="60" prob="20"/>
-        <npc_skill id="20964" lv="60" prob="20"/>
+     <npc_skills npc_ids="219359">
+        <npc_skill id="20963" lv="60" prob="70" cd="25000"/>
+        <npc_skill id="20964" lv="60" prob="70" cd="25000"/>
     </npc_skills>
     <npc_skills npc_ids="219361">
-        <npc_skill id="20921" lv="60" prob="30"/>
+        <npc_skill id="20921" lv="60" prob="70" cd="20000"/>
     </npc_skills>
     <npc_skills npc_ids="219365">
         <npc_skill id="20105" lv="60" prob="15"/>
