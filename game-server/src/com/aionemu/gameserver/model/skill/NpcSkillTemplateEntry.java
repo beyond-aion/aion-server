@@ -379,4 +379,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public boolean isQueued() {
 		return false;
 	}
+
+	@Override
+	public boolean ignoreNextSkillTime() {
+		return false;
+	}
 }

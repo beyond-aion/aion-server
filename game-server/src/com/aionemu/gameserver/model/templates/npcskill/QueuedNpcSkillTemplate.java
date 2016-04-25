@@ -5,7 +5,9 @@ package com.aionemu.gameserver.model.templates.npcskill;
  */
 public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 
-	public QueuedNpcSkillTemplate(int id, int lv, int prob, int minHp, int maxHp, int minTime, int maxTime, ConjunctionType conjunction, int cd, int nextSkillTime, NpcSkillConditionTemplate conditionTemplate, NpcSkillTargetAttribute target) {
+	private boolean ignoreNextSkillTime = false;
+
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, int minHp, int maxHp, int minTime, int maxTime, ConjunctionType conjunction, int cd, int nextSkillTime, boolean ignoreNextSkillTime, NpcSkillConditionTemplate conditionTemplate, NpcSkillTargetAttribute target) {
 		this.id = id;
 		this.lv = lv;
 		this.prob = prob;
@@ -18,6 +20,7 @@ public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 		this.nextSkillTime = nextSkillTime;
 		this.conditionTemplate = conditionTemplate;
 		this.target = target;
+		this.ignoreNextSkillTime = ignoreNextSkillTime;
 	}
 
 	public QueuedNpcSkillTemplate(int id, int lv, int prob) {
@@ -26,11 +29,26 @@ public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 		this.prob = prob;
 	}
 
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, boolean ignoreNextSkillTime) {
+		this.id = id;
+		this.lv = lv;
+		this.prob = prob;
+		this.ignoreNextSkillTime = ignoreNextSkillTime;
+	}
+
 	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd) {
 		this.id = id;
 		this.lv = lv;
 		this.prob = prob;
 		this.cd = cd;
+	}
+
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, boolean ignoreNextSkillTime) {
+		this.id = id;
+		this.lv = lv;
+		this.prob = prob;
+		this.cd = cd;
+		this.ignoreNextSkillTime = ignoreNextSkillTime;
 	}
 
 	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime) {
@@ -41,6 +59,15 @@ public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 		this.nextSkillTime = nextSkillTime;
 	}
 
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime, boolean ignoreNextSkillTime) {
+		this.id = id;
+		this.lv = lv;
+		this.prob = prob;
+		this.cd = cd;
+		this.nextSkillTime = nextSkillTime;
+		this.ignoreNextSkillTime = ignoreNextSkillTime;
+	}
+
 	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime, NpcSkillTargetAttribute target) {
 		this.id = id;
 		this.lv = lv;
@@ -48,5 +75,19 @@ public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 		this.cd = cd;
 		this.nextSkillTime = nextSkillTime;
 		this.target = target;
+	}
+
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime, NpcSkillTargetAttribute target, boolean ignoreNextSkillTime) {
+		this.id = id;
+		this.lv = lv;
+		this.prob = prob;
+		this.cd = cd;
+		this.nextSkillTime = nextSkillTime;
+		this.target = target;
+		this.ignoreNextSkillTime = ignoreNextSkillTime;
+	}
+
+	public boolean isIgnoreNextSkillTime() {
+		return ignoreNextSkillTime;
 	}
 }

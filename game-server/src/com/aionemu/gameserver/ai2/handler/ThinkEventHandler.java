@@ -88,6 +88,7 @@ public class ThinkEventHandler {
 		} else {
 			npc.getQueuedSkills().clear();
 			npc.getGameStats().setLastSkill(null);
+			npc.getGameStats().resetFightStats();
 			npc.getMoveController().recallPreviousStep();
 			npcAI.onGeneralEvent(AIEventType.ATTACK_FINISH);
 			npcAI.onGeneralEvent(npc.isAtSpawnLocation() ? AIEventType.BACK_HOME : AIEventType.NOT_AT_HOME);

@@ -13,12 +13,9 @@ public class ThreadUncaughtExceptionHandler implements Thread.UncaughtExceptionH
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ThreadUncaughtExceptionHandler.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void uncaughtException(final Thread t, final Throwable e) {
-		log.error("Critical Error - Thread: " + t.getName() + " terminated abnormaly: " + e, e);
+		log.error("Critical Error - Thread [" + t.getName() + "] terminated abnormally:", e);
 		if (e instanceof OutOfMemoryError) {
 			// TODO try get some memory or restart
 		}

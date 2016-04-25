@@ -55,7 +55,7 @@ public class DebugService {
 			/**
 			 * Check CM_PING packet
 			 */
-			long lastPingTimeMS = connection.getLastPingTimeMS();
+			long lastPingTimeMS = connection.getLastPingTime();
 			long pingInterval = System.currentTimeMillis() - lastPingTimeMS;
 			if (lastPingTimeMS > 0 && pingInterval > 300000) {
 				log.warn(String.format("[DEBUG SERVICE] Player with large ping interval: " + "ObjId %d, Name %s, Spawned %s, PingMS %d",

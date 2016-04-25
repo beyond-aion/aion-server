@@ -191,8 +191,11 @@ public class SkillAttackManager {
 			return null;
 		}
 
-		if (owner.getGameStats().canUseNextSkill()) {
-			NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+		if (queuedSkill != null && queuedSkill.ignoreNextSkillTime() && isReady(owner, queuedSkill)) {
+			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
+		}
+		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent()) && owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 			}
@@ -226,7 +229,6 @@ public class SkillAttackManager {
 						}
 					}
 				}
-
 			}
 		}
 		return null;
@@ -238,12 +240,10 @@ public class SkillAttackManager {
 			return null;
 		}
 		owner.getGameStats().setLastSkill(entry);
-		owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
-		entry.setLastTimeUsed();
 		return entry;
 	}
 
-	//Check for Bind/Silence/Fear/stun etc debuffs on npc
+	// check for bind/silence/fear/stun etc debuffs on npc
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
 		if (entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
 			if (entry.conditionReady(owner)) {
@@ -262,22 +262,25 @@ public class SkillAttackManager {
 	}
 	
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
-		if (owner.getTarget() != null && owner.getTarget() instanceof Creature) {
-			Creature target = (Creature) owner.getTarget();
-			if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
-				return true;
-			}
-			SkillTemplate template = entry.getSkillTemplate();
-			Properties prop = template.getProperties();
-			if (prop.getFirstTarget() != FirstTargetAttribute.ME && prop.getTargetType() != TargetRangeAttribute.AREA) {
-				float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
-				float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
-				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision + targetCollision)) {
+		SkillTemplate template = entry.getSkillTemplate();
+		Properties prop = template.getProperties();
+		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
+				&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
+			if (owner.getTarget() instanceof Creature) {
+				Creature target = (Creature) owner.getTarget();
+				if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
 					return true;
 				}
+				if (prop.getTargetType() != TargetRangeAttribute.AREA) {
+					float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
+					float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
+					if (!MathUtil.isIn3dRange(owner, target, prop.getFirstTargetRange() + collision + targetCollision)) {
+						return true;
+					}
+				}
+			} else {
+				return true;
 			}
-		} else {
-			return true;
 		}
 		return false;
 	}
