@@ -243,44 +243,6 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 					}
 					break;
 			}
-			switch (spawns) {
-				case 1:
-				case 3:
-				case 5:
-				case 7:
-					switch (step) {
-						case 1:
-							spawn(236020, 344.016f, 630.834f, 146.514f, (byte) 0);
-							spawn(236020, 325.803f, 645.552f, 146.514f, (byte) 0);
-							spawn(236020, 307.303f, 614.676f, 146.514f, (byte) 0);
-							spawn(236020, 329.768f, 608.466f, 146.514f, (byte) 0);
-							break;
-						case 2:
-							spawn(236096, 303.755f, 772.090f, 148.988f, (byte) 0);
-							spawn(236096, 350.070f, 801.111f, 145.082f, (byte) 0);
-							spawn(236096, 332.003f, 767.004f, 147.394f, (byte) 0);
-							spawn(236096, 325.803f, 810.720f, 144.885f, (byte) 0);
-							break;
-					}
-					break;
-				case 2:
-				case 4:
-				case 6:
-				case 8:
-					switch (step) {
-						case 1:
-							spawn(236021, 312.577f, 605.469f, 146.514f, (byte) 0);
-							spawn(236021, 307.422f, 630.051f, 146.514f, (byte) 0);
-							spawn(236021, 337.200f, 639.658f, 146.514f, (byte) 0);
-							break;
-						case 2:
-							spawn(236097, 344.371f, 781.986f, 147.159f, (byte) 0);
-							spawn(236097, 339.273f, 813.446f, 145.390f, (byte) 0);
-							spawn(236097, 317.126f, 766.019f, 148.844f, (byte) 0);
-							break;
-					}
-					break;
-			}
 		}, 0, delay);
 	}
 
