@@ -36,6 +36,7 @@ public class BrigadeGeneralShebaAI2 extends AggressiveNpcAI2 {
 						break;
 				}
 				percents.remove(percent);
+				break;
 			}
 		}
 	}
