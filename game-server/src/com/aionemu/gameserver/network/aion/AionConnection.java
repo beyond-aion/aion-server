@@ -6,8 +6,6 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,12 +20,15 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.PacketFloodFilter;
+import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
 import com.aionemu.gameserver.network.factories.AionPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.google.common.base.Preconditions;
+
+import javolution.util.FastTable;
 
 /**
  * Object representing connection between GameServer and Aion Client.
@@ -87,10 +88,9 @@ public class AionConnection extends AConnection {
 	 * active Player that owner of this connection is playing [entered game]
 	 */
 	private AtomicReference<Player> activePlayer = new AtomicReference<Player>();
-	private String lastPlayerName = "";
 
 	private AionPacketHandler aionPacketHandler;
-	private long lastPingTimeMS;
+	private long lastPingTime;
 
 	private int nbInvalidPackets = 0;
 	// TODO! why there is no any comments what is this doing? i have no clue what is it for [Nemesiss]
@@ -125,7 +125,6 @@ public class AionConnection extends AConnection {
 		log.debug("connection from: " + ip);
 
 		pingChecker = new PingChecker();
-		pingChecker.start();
 
 		if (SecurityConfig.PFF_ENABLE) {
 			pff = PacketFloodFilter.getInstance().getPackets();
@@ -254,22 +253,13 @@ public class AionConnection extends AConnection {
 			player.getMoveController().abortMove(false);
 			player.getController().stopMoving();
 
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PlayerLeaveWorldService.leaveWorld(player);
-				}
-			}, 10 * 1000); // prevent ctrl+alt+del / close window exploit
+			ThreadPoolManager.getInstance().schedule(() -> PlayerLeaveWorldService.leaveWorld(player), 10 * 1000); // prevent ctrl+alt+del / close window exploit
 		}
 
 		if (!msg.isEmpty())
 			log.info("Client disconnected" + msg);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to client before closing?
@@ -374,7 +364,6 @@ public class AionConnection extends AConnection {
 			setState(State.AUTHED);
 		} else if (activePlayer.compareAndSet(null, player)) {
 			setState(State.IN_GAME);
-			lastPlayerName = player.getName();
 		} else {
 			return false;
 		}
@@ -390,19 +379,12 @@ public class AionConnection extends AConnection {
 		return activePlayer.get();
 	}
 
-	/**
-	 * @return the lastPingTimeMS
-	 */
-	public long getLastPingTimeMS() {
-		return lastPingTimeMS;
+	public long getLastPingTime() {
+		return lastPingTime;
 	}
 
-	/**
-	 * @param lastPingTimeMS
-	 *          the lastPingTimeMS to set
-	 */
-	public void setLastPingTimeMS(long lastPingTimeMS) {
-		this.lastPingTimeMS = lastPingTimeMS;
+	public void setLastPingTime() {
+		this.lastPingTime = System.currentTimeMillis();
 	}
 
 	public void setMacAddress(String mac) {
@@ -423,26 +405,18 @@ public class AionConnection extends AConnection {
 
 	@Override
 	public String toString() {
-		Player player = activePlayer.get();
-		if (player != null) {
-			return "AionConnection [state=" + state + ", account=" + account + ", getObjectId()=" + player.getObjectId() + ", lastPlayerName="
-				+ lastPlayerName + ", macAddress=" + macAddress + ", getIP()=" + getIP() + "]";
-		}
-		return "";
+		return "AionConnection [state=" + state + ", account=" + account + ", activePlayer=" + activePlayer.get() + ", macAddress=" + macAddress + ", getIP()="
+			+ getIP() + "]";
 	}
 
 	private class PingChecker implements Runnable {
 
-		// we don't have to detect hanged connections immediately
-		// its rather some very rare case so 10 minutes check should be enough
-		private static final int checkTime = 10 * 60 * 1000;
 		private ScheduledFuture<?> task;
-		private boolean started;
 
-		private void start() {
-			Preconditions.checkState(!started, "PingChecker can be started only one time!");
-			started = true;
-			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, checkTime, checkTime);
+		private PingChecker() {
+			if (AionConnection.this.pingChecker != null)
+				throw new IllegalStateException("PingChecker for " + AionConnection.this + " is already assigned.");
+			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, CM_PING.CLIENT_PING_INTERVAL * 2, CM_PING.CLIENT_PING_INTERVAL);
 		}
 
 		private void stop() {
@@ -451,9 +425,10 @@ public class AionConnection extends AConnection {
 
 		@Override
 		public void run() {
-			if (System.currentTimeMillis() - getLastPingTimeMS() > checkTime) {
-				log.info("Found hanged up client: " + AionConnection.this + " - closing now :)");
+			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL + 60 * 1000) { // close connection if at least 1 minute overdue
+				log.info("Closing hanged up connection of client: " + AionConnection.this);
 				close();
+				stop();
 			}
 		}
 	}

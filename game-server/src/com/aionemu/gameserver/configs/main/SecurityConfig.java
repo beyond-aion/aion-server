@@ -67,11 +67,8 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.passkey.wrong.maxcount", defaultValue = "5")
 	public static int PASSKEY_WRONG_MAXCOUNT;
 
-	@Property(key = "gameserver.security.pingcheck.enable", defaultValue = "true")
-	public static boolean SECURITY_ENABLE;
-
-	@Property(key = "gameserver.security.pingcheck.interval", defaultValue = "80")
-	public static int PING_INTERVAL;
+	@Property(key = "gameserver.security.pingcheck.kick", defaultValue = "true")
+	public static boolean PINGCHECK_KICK;
 
 	@Property(key = "gameserver.security.flood.delay", defaultValue = "1")
 	public static int FLOOD_DELAY;
