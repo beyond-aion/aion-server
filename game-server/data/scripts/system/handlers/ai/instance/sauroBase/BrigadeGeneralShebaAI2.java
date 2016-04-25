@@ -5,9 +5,10 @@ import java.util.List;
 import javolution.util.FastTable;
 import ai.AggressiveNpcAI2;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -26,7 +27,7 @@ public class BrigadeGeneralShebaAI2 extends AggressiveNpcAI2 {
 
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
-			if (percent <= hpPercentage) {
+			if (hpPercentage <= percent) {
 				switch (percent) {
 					case 25:
 						spawnSpirits(true);
@@ -55,7 +56,7 @@ public class BrigadeGeneralShebaAI2 extends AggressiveNpcAI2 {
 		}
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isAlreadyDead())
-				AI2Actions.useSkill(BrigadeGeneralShebaAI2.this, 21186);
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21186, 1, 100, true)));
 		}, 7000);
 	}
 
