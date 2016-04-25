@@ -1,19 +1,19 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.quest.CollectItem;
 import com.aionemu.gameserver.model.templates.quest.CollectItems;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.questEngine.handlers.models.WorkOrdersData;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -24,46 +24,47 @@ import com.aionemu.gameserver.services.item.ItemService;
 /**
  * @author Mr. Poke
  * @reworked Bobobear
+ * @modified Pad
  */
 public class WorkOrders extends QuestHandler {
+	
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final List<QuestItems> giveComponents = new ArrayList<>();
+	private final int recipeId;
 
-	private final WorkOrdersData workOrdersData;
-
-	/**
-	 * @param questId
-	 */
-	public WorkOrders(WorkOrdersData workOrdersData) {
-		super(workOrdersData.getId());
-		this.workOrdersData = workOrdersData;
+	public WorkOrders(int questId, List<Integer> startNpcIds, List<QuestItems> giveComponents, int recipeId) {
+		super(questId);
+		this.startNpcIds.addAll(startNpcIds);
+		this.giveComponents.addAll(giveComponents);
+		this.recipeId = recipeId;
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = workOrdersData.getStartNpcIds().iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(workOrdersData.getId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(workOrdersData.getId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(workOrdersData.getId());
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (workOrdersData.getStartNpcIds().contains(targetId)) {
+		
+		if (startNpcIds.contains(targetId)) {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id());
 					}
 					case QUEST_ACCEPT_1: {
-						if (RecipeService.validateNewRecipe(player, workOrdersData.getRecipeId()) != null) {
+						if (RecipeService.validateNewRecipe(player, recipeId) != null) {
 							if (QuestService.startQuest(env)) {
-								if (ItemService.addQuestItems(player, workOrdersData.getGiveComponent())) {
-									RecipeService.addRecipe(player, workOrdersData.getRecipeId(), false);
+								if (ItemService.addQuestItems(player, giveComponents)) {
+									RecipeService.addRecipe(player, recipeId, false);
 									closeDialogWindow(env);
 								}
 								return true;
@@ -80,7 +81,7 @@ public class WorkOrders extends QuestHandler {
 					int var = qs.getQuestVarById(0);
 					if (QuestService.collectItemCheck(env, false)) {
 						changeQuestStep(env, var, var, true); // reward
-						QuestWorkItems qwi = DataManager.QUEST_DATA.getQuestById(workOrdersData.getId()).getQuestWorkItems();
+						QuestWorkItems qwi = DataManager.QUEST_DATA.getQuestById(questId).getQuestWorkItems();
 						if (qwi != null) {
 							long count = 0;
 							for (QuestItems qi : qwi.getQuestWorkItem()) {
@@ -97,21 +98,21 @@ public class WorkOrders extends QuestHandler {
 					}
 				}
 			} else if (qs.getStatus() == QuestStatus.REWARD) {
-				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(workOrdersData.getId());
-				CollectItems collectItems = template.getCollectItems();
+				CollectItems collectItems = DataManager.QUEST_DATA.getQuestById(questId).getCollectItems();
 				long count = 0;
 				for (CollectItem collectItem : collectItems.getCollectItem()) {
 					count = player.getInventory().getItemCountByItemId(collectItem.getItemId());
 					if (count > 0)
 						player.getInventory().decreaseByItemId(collectItem.getItemId(), count);
 				}
-				player.getRecipeList().deleteRecipe(player, workOrdersData.getRecipeId());
+				player.getRecipeList().deleteRecipe(player, recipeId);
 				if (dialog == DialogAction.USE_OBJECT) {
-					QuestService.finishQuest(env, 0);
-					env.setQuestId(workOrdersData.getId());
+					QuestService.finishQuest(env);
+					env.setQuestId(questId);
 					return sendQuestDialog(env, 1008);
-				} else
+				} else {
 					return sendQuestEndDialog(env);
+				}
 			}
 		}
 		return false;
@@ -121,7 +122,7 @@ public class WorkOrders extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(workOrdersData.getStartNpcIds());
+			constantSpawns.addAll(startNpcIds);
 		}
 		return constantSpawns;
 	}

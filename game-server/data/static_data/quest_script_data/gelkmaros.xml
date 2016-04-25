@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			20020 [SCRIPT] Crash of the Dredgion
 			20021 [SCRIPT] The Aether Must Flow
 			20022 [SCRIPT] Spreading Asmodae's Reach
@@ -285,7 +285,8 @@
 			49022 [XML] [Daily] Relyt's Order
 			80266 [TODO] [Event] Exquisite Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="21018" start_npc_ids="799245" end_npc_ids="799256"/>
 	<report_to id="21019" start_npc_ids="799246" end_npc_ids="799247"/>
@@ -301,24 +302,26 @@
 	<report_to id="21293" start_npc_ids="799225" end_npc_ids="799444"/>
 	<report_to id="30101" start_npc_ids="799226" end_npc_ids="799333"/>
 	<report_to id="30112" start_npc_ids="799279" end_npc_ids="799337"/>
-	<report_to id="30115" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30117" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30119" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30121" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30123" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30125" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30127" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30129" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30131" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30134" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30136" start_npc_ids="799336" end_npc_ids="799336"/>
-	<report_to id="30138" start_npc_ids="799336" end_npc_ids="799336"/>
+	<report_to id="30115" start_npc_ids="799336"/>
+	<report_to id="30117" start_npc_ids="799336"/>
+	<report_to id="30119" start_npc_ids="799336"/>
+	<report_to id="30121" start_npc_ids="799336"/>
+	<report_to id="30123" start_npc_ids="799336"/>
+	<report_to id="30125" start_npc_ids="799336"/>
+	<report_to id="30127" start_npc_ids="799336"/>
+	<report_to id="30129" start_npc_ids="799336"/>
+	<report_to id="30131" start_npc_ids="799336"/>
+	<report_to id="30134" start_npc_ids="799336"/>
+	<report_to id="30136" start_npc_ids="799336"/>
+	<report_to id="30138" start_npc_ids="799336"/>
 	<report_to_many id="21110" start_npc_ids="799271" end_npc_ids="799289">
-		<npc_infos var="0" npc_id="799263" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="799289" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="799263"/>
+		<npc_infos npc_ids="799289"/>
 	</report_to_many>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="21243" talk_npc_id1="799318" end_npc_id="799419"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="21000" start_npc_ids="799202"/>
 	<item_collecting id="21001" start_npc_ids="799227"/>
@@ -406,6 +409,8 @@
 	<item_collecting id="48503" start_npc_ids="799425"/>
 	<item_collecting id="48505" start_npc_ids="799424"/>
 	<item_collecting id="48506" start_npc_ids="799425"/>
+	
+	<!-- RELIC REWARDS -->
 	<relic_rewards id="21281" start_npc_ids="799949 205621"/>
 	<relic_rewards id="21282" start_npc_ids="799950 205622"/>
 	<relic_rewards id="21283" start_npc_ids="799951 205623"/>
@@ -414,6 +419,7 @@
 	<relic_rewards id="21286" start_npc_ids="799958 205635"/>
 	<relic_rewards id="21287" start_npc_ids="799959 205636"/>
 	<relic_rewards id="21288" start_npc_ids="799960 205637"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="21002" start_npc_ids="799228"/>
 	<monster_hunt id="21005" start_npc_ids="799228"/>
@@ -481,5 +487,7 @@
 	<monster_hunt id="21318" start_npc_ids="799328"/>
 	<monster_hunt id="21456" start_npc_ids="799247"/>
 	<monster_hunt id="21459" start_npc_ids="799250"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="49022" end_npc_ids="799557" worlds="220070000" amount="5" invasion_world="220070000"/>
 </quest_scripts>

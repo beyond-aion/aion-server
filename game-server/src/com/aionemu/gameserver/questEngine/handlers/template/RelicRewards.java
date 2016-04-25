@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class RelicRewards extends QuestHandler {
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
 	private boolean isDataDriven;
 
 	/**
@@ -31,18 +30,16 @@ public class RelicRewards extends QuestHandler {
 	 */
 	public RelicRewards(int questId, List<Integer> startNpcIds) {
 		super(questId);
-		this.startNpcs.addAll(startNpcIds);
-		this.startNpcs.remove(0);
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcs.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
 	}
 
@@ -54,7 +51,7 @@ public class RelicRewards extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.contains(targetId)) {
+			if (startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case EXCHANGE_COIN: {
 						if (player.getCommonData().getLevel() >= 30) {
@@ -68,8 +65,8 @@ public class RelicRewards extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-			if (startNpcs.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+			if (startNpcIds.contains(targetId)) {
 				int rewardId = -1;
 				switch (dialog) {
 					case USE_OBJECT:
@@ -96,19 +93,12 @@ public class RelicRewards extends QuestHandler {
 				} else
 					return sendQuestDialog(env, 1009);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (startNpcs.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (startNpcIds.contains(targetId)) {
 				int var = qs.getQuestVarById(0);
 				switch (dialog) {
 					case USE_OBJECT:
-						if (var == 1)
-							return sendQuestDialog(env, 5);
-						else if (var == 2)
-							return sendQuestDialog(env, 6);
-						else if (var == 3)
-							return sendQuestDialog(env, 7);
-						else if (var == 4)
-							return sendQuestDialog(env, 8);
+						return sendQuestDialog(env, var + 4);
 					case SELECTED_QUEST_NOREWARD:
 						QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 1);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -121,9 +111,10 @@ public class RelicRewards extends QuestHandler {
 
 	@Override
 	public HashSet<Integer> getNpcIds() {
-		HashSet<Integer> constantSpawns = new HashSet<>();
-		if (startNpcs != null)
-			constantSpawns.addAll(startNpcs);
+		if (constantSpawns == null) {
+			constantSpawns = new HashSet<>();
+			constantSpawns.addAll(startNpcIds);
+		}
 		return constantSpawns;
 	}
 }

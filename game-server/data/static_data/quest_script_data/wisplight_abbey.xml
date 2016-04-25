@@ -35,24 +35,25 @@
 			19630 [XML] Threat at Illuminary Obelisk
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="19601" start_npc_ids="804651" end_npc_ids="804655">
-		<npc_infos var="0" npc_id="804652" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="804653" quest_dialog="1352"/>
-		<npc_infos var="2" npc_id="804654" quest_dialog="1693"/>
-		<npc_infos var="3" npc_id="804655" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="804652"/>
+		<npc_infos npc_ids="804653"/>
+		<npc_infos npc_ids="804654"/>
+		<npc_infos npc_ids="804655"/>
 	</report_to_many>
 	<report_to_many id="19602" start_npc_ids="804652" end_npc_ids="798155">
-		<npc_infos var="0" npc_id="205985" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="798155" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="205985"/>
+		<npc_infos npc_ids="798155"/>
 	</report_to_many>
 	<report_to id="19604" start_npc_ids="804652" end_npc_ids="204601"/>
 	<report_to id="19605" start_npc_ids="804652" end_npc_ids="798225"/>
 	<report_to id="19606" start_npc_ids="804652" end_npc_ids="800420"/>
 	<report_to id="19607" start_npc_ids="804652" end_npc_ids="204656"/>
 	<report_to_many id="19608" start_npc_ids="804653" end_npc_ids="798926">
-		<npc_infos var="0" npc_id="205985" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="798926" quest_dialog="10002" close_dialog="1009"/>
+		<npc_infos npc_ids="205985"/>
+		<npc_infos npc_ids="798926"/>
 	</report_to_many>
 	<report_to id="19610" start_npc_ids="804653" end_npc_ids="798909"/>
 	<report_to id="19611" start_npc_ids="804653" end_npc_ids="799029"/>
@@ -73,6 +74,7 @@
 	<report_to id="19628" start_npc_ids="804655" end_npc_ids="802350"/>
 	<report_to id="19629" start_npc_ids="804655" end_npc_ids="801945"/>
 	<report_to id="19630" start_npc_ids="804655" end_npc_ids="804598"/>
+	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="19603" start_npc_ids="804651" end_npc_ids="798155" end_reward_next_step="true"/>
 	<monster_hunt id="19609" start_npc_ids="804651" end_npc_ids="798926" end_reward_next_step="true"/>

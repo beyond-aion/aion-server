@@ -14,6 +14,7 @@
 			23834 [XML]	Major Sixth
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_on_levelup id="13830" end_npc_ids="798380"/>
 	<report_on_levelup id="13831" end_npc_ids="798381"/>

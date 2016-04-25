@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			17100 [XML] [Daily] Village's Old Grudge
 			17101 [XML] [Daily] Blessed Fountain Components Construction
 			17102 [XML] [Daily] Crafting Metal for the Bell Tower
@@ -113,68 +113,70 @@
 			27153 [XML] [Daily] The Flower's Essence that Bloomed in the Flowerbed
 			27154 [XML] [Daily] Appearance of the Shulack Bandits
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="17100" start_npc_ids="0" end_npc_ids="831222"/>
-	<item_collecting id="17101" start_npc_ids="0" end_npc_ids="831222"/>
-	<item_collecting id="17102" start_npc_ids="0" end_npc_ids="831222"/>
-	<item_collecting id="17103" start_npc_ids="0" end_npc_ids="831222"/>
-	<item_collecting id="17104" start_npc_ids="0" end_npc_ids="831222"/>
-	<item_collecting id="17105" start_npc_ids="0" end_npc_ids="831254"/>
-	<item_collecting id="17107" start_npc_ids="0" end_npc_ids="831255"/>
-	<item_collecting id="17109" start_npc_ids="0" end_npc_ids="831256"/>
-	<item_collecting id="17111" start_npc_ids="0" end_npc_ids="831257"/>
-	<item_collecting id="17113" start_npc_ids="0" end_npc_ids="831258"/>
-	<item_collecting id="17115" start_npc_ids="0" end_npc_ids="831259"/>
-	<item_collecting id="17117" start_npc_ids="0" end_npc_ids="831260"/>
-	<item_collecting id="17119" start_npc_ids="0" end_npc_ids="831261"/>
-	<item_collecting id="17121" start_npc_ids="0" end_npc_ids="831262"/>
-	<item_collecting id="17123" start_npc_ids="0" end_npc_ids="831263"/>
-	<item_collecting id="17125" start_npc_ids="0" end_npc_ids="831264"/>
-	<item_collecting id="17127" start_npc_ids="0" end_npc_ids="831265"/>
-	<item_collecting id="17129" start_npc_ids="0" end_npc_ids="831266"/>
-	<item_collecting id="17131" start_npc_ids="0" end_npc_ids="831267"/>
-	<item_collecting id="17133" start_npc_ids="0" end_npc_ids="831268"/>
-	<item_collecting id="17135" start_npc_ids="0" end_npc_ids="831269"/>
-	<item_collecting id="17137" start_npc_ids="0" end_npc_ids="831270"/>
-	<item_collecting id="17139" start_npc_ids="0" end_npc_ids="831271"/>
-	<item_collecting id="17141" start_npc_ids="0" end_npc_ids="831272"/>
-	<item_collecting id="17143" start_npc_ids="0" end_npc_ids="831273"/>
-	<item_collecting id="17145" start_npc_ids="0" end_npc_ids="831274"/>
-	<item_collecting id="17147" start_npc_ids="0" end_npc_ids="831275"/>
-	<item_collecting id="17149" start_npc_ids="0" end_npc_ids="831276"/>
-	<item_collecting id="17151" start_npc_ids="0" end_npc_ids="831277"/>
-	<item_collecting id="17153" start_npc_ids="0" end_npc_ids="831278"/>
-	<item_collecting id="27100" start_npc_ids="0" end_npc_ids="831247"/>
-	<item_collecting id="27101" start_npc_ids="0" end_npc_ids="831247"/>
-	<item_collecting id="27102" start_npc_ids="0" end_npc_ids="831247"/>
-	<item_collecting id="27103" start_npc_ids="0" end_npc_ids="831247"/>
-	<item_collecting id="27104" start_npc_ids="0" end_npc_ids="831247"/>
-	<item_collecting id="27105" start_npc_ids="0" end_npc_ids="831279"/>
-	<item_collecting id="27107" start_npc_ids="0" end_npc_ids="831280"/>
-	<item_collecting id="27109" start_npc_ids="0" end_npc_ids="831281"/>
-	<item_collecting id="27111" start_npc_ids="0" end_npc_ids="831282"/>
-	<item_collecting id="27113" start_npc_ids="0" end_npc_ids="831283"/>
-	<item_collecting id="27115" start_npc_ids="0" end_npc_ids="831284"/>
-	<item_collecting id="27117" start_npc_ids="0" end_npc_ids="831285"/>
-	<item_collecting id="27119" start_npc_ids="0" end_npc_ids="831286"/>
-	<item_collecting id="27121" start_npc_ids="0" end_npc_ids="831287"/>
-	<item_collecting id="27123" start_npc_ids="0" end_npc_ids="831288"/>
-	<item_collecting id="27125" start_npc_ids="0" end_npc_ids="831289"/>
-	<item_collecting id="27127" start_npc_ids="0" end_npc_ids="831290"/>
-	<item_collecting id="27129" start_npc_ids="0" end_npc_ids="831291"/>
-	<item_collecting id="27131" start_npc_ids="0" end_npc_ids="831292"/>
-	<item_collecting id="27133" start_npc_ids="0" end_npc_ids="831293"/>
-	<item_collecting id="27135" start_npc_ids="0" end_npc_ids="831294"/>
-	<item_collecting id="27137" start_npc_ids="0" end_npc_ids="831295"/>
-	<item_collecting id="27139" start_npc_ids="0" end_npc_ids="831296"/>
-	<item_collecting id="27141" start_npc_ids="0" end_npc_ids="831297"/>
-	<item_collecting id="27143" start_npc_ids="0" end_npc_ids="831298"/>
-	<item_collecting id="27145" start_npc_ids="0" end_npc_ids="831299"/>
-	<item_collecting id="27147" start_npc_ids="0" end_npc_ids="831300"/>
-	<item_collecting id="27149" start_npc_ids="0" end_npc_ids="831301"/>
-	<item_collecting id="27151" start_npc_ids="0" end_npc_ids="831302"/>
-	<item_collecting id="27153" start_npc_ids="0" end_npc_ids="831303"/>
+	<item_collecting id="17100" end_npc_ids="831222"/>
+	<item_collecting id="17101" end_npc_ids="831222"/>
+	<item_collecting id="17102" end_npc_ids="831222"/>
+	<item_collecting id="17103" end_npc_ids="831222"/>
+	<item_collecting id="17104" end_npc_ids="831222"/>
+	<item_collecting id="17105" end_npc_ids="831254"/>
+	<item_collecting id="17107" end_npc_ids="831255"/>
+	<item_collecting id="17109" end_npc_ids="831256"/>
+	<item_collecting id="17111" end_npc_ids="831257"/>
+	<item_collecting id="17113" end_npc_ids="831258"/>
+	<item_collecting id="17115" end_npc_ids="831259"/>
+	<item_collecting id="17117" end_npc_ids="831260"/>
+	<item_collecting id="17119" end_npc_ids="831261"/>
+	<item_collecting id="17121" end_npc_ids="831262"/>
+	<item_collecting id="17123" end_npc_ids="831263"/>
+	<item_collecting id="17125" end_npc_ids="831264"/>
+	<item_collecting id="17127" end_npc_ids="831265"/>
+	<item_collecting id="17129" end_npc_ids="831266"/>
+	<item_collecting id="17131" end_npc_ids="831267"/>
+	<item_collecting id="17133" end_npc_ids="831268"/>
+	<item_collecting id="17135" end_npc_ids="831269"/>
+	<item_collecting id="17137" end_npc_ids="831270"/>
+	<item_collecting id="17139" end_npc_ids="831271"/>
+	<item_collecting id="17141" end_npc_ids="831272"/>
+	<item_collecting id="17143" end_npc_ids="831273"/>
+	<item_collecting id="17145" end_npc_ids="831274"/>
+	<item_collecting id="17147" end_npc_ids="831275"/>
+	<item_collecting id="17149" end_npc_ids="831276"/>
+	<item_collecting id="17151" end_npc_ids="831277"/>
+	<item_collecting id="17153" end_npc_ids="831278"/>
+	<item_collecting id="27100" end_npc_ids="831247"/>
+	<item_collecting id="27101" end_npc_ids="831247"/>
+	<item_collecting id="27102" end_npc_ids="831247"/>
+	<item_collecting id="27103" end_npc_ids="831247"/>
+	<item_collecting id="27104" end_npc_ids="831247"/>
+	<item_collecting id="27105" end_npc_ids="831279"/>
+	<item_collecting id="27107" end_npc_ids="831280"/>
+	<item_collecting id="27109" end_npc_ids="831281"/>
+	<item_collecting id="27111" end_npc_ids="831282"/>
+	<item_collecting id="27113" end_npc_ids="831283"/>
+	<item_collecting id="27115" end_npc_ids="831284"/>
+	<item_collecting id="27117" end_npc_ids="831285"/>
+	<item_collecting id="27119" end_npc_ids="831286"/>
+	<item_collecting id="27121" end_npc_ids="831287"/>
+	<item_collecting id="27123" end_npc_ids="831288"/>
+	<item_collecting id="27125" end_npc_ids="831289"/>
+	<item_collecting id="27127" end_npc_ids="831290"/>
+	<item_collecting id="27129" end_npc_ids="831291"/>
+	<item_collecting id="27131" end_npc_ids="831292"/>
+	<item_collecting id="27133" end_npc_ids="831293"/>
+	<item_collecting id="27135" end_npc_ids="831294"/>
+	<item_collecting id="27137" end_npc_ids="831295"/>
+	<item_collecting id="27139" end_npc_ids="831296"/>
+	<item_collecting id="27141" end_npc_ids="831297"/>
+	<item_collecting id="27143" end_npc_ids="831298"/>
+	<item_collecting id="27145" end_npc_ids="831299"/>
+	<item_collecting id="27147" end_npc_ids="831300"/>
+	<item_collecting id="27149" end_npc_ids="831301"/>
+	<item_collecting id="27151" end_npc_ids="831302"/>
+	<item_collecting id="27153" end_npc_ids="831303"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="17106" start_npc_ids="831209"/>
 	<monster_hunt id="17108" start_npc_ids="831209"/>

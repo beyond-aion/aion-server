@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			30007 [XML] Drakan Document
 			30008 [XML] Legendary Jotun
 			30009 [XML] Pieces of You
@@ -17,12 +17,15 @@
 			30114 [XML] Revenge's Last Link
 			30133 [XML] Chakra Choking
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="30109" start_npc_ids="799333"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="30007" talk_npc_id1="799030" end_npc_id="799029"/>
 	<item_order id="30107" talk_npc_id1="799030" end_npc_id="799029"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30033" start_npc_ids="799031"/>
 	<monster_hunt id="30113" start_npc_ids="799337"/>

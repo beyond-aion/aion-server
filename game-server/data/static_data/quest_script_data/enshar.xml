@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
-	[BEGIN] SUMMARY
-		20500 [SCRIPT] Enshar Expedition
-		20501 [SCRIPT] What the Ruins Say
-		20502 [SCRIPT] Evolving Mysteries
-		20503 [SCRIPT] Ancient, Evil Plans
-		20504 [SCRIPT] Tiamat's Shadow
-		20505 [SCRIPT] Ancient Crystal
-		20506 [SCRIPT] Muscle over Mind
-		20507 [SCRIPT] It's Worse than We Thought
-		25000 [XML] Getting to Know You (Report to Many)
-		25001 [XML] Shell Out (Collect Item)
-		25002 [XML] Kill the Kerubs (Monster Hunt)
-		25010 [XML] Ruin Research Relief (Monster Hunt)
-		25012 [XML] Big Scale Research (Collect Item)
-		25013 [XML] Seaweed Procede (Collect Item)
-		25020 [XML] Tejhi Technology (Collect Item)
-		25022 [SCRIPT] Soup De Cure (MultiStep)
-		25023 [SCRIPT] Sprouting Developments (MultiStep)
-		25030 [SCRIPT] Clues from the Undead (MultiStep)
-		25031 [SCRIPT] The Tejhi Ghost (MultiStep)
-		25032 [SCRIPT] Avenge Varnur (MultiStep)
-		25033 [XML] Mouths to Feed (Collect Item)
-		25050 [SCRIPT] Treasure in the Deep Sea (MultiStep)
-		25051 [SCRIPT] Treasure of Ancient Kings (MultiStep)
-		25052 [SCRIPT] An Offering of Peace
-		25060 [XML] Take Down the Barricade (Monster Hunt)
-		25062 [SCRIPT] Ominous Advice
-		25070 [SCRIPT] Truth of the Crystal (Report to)
-		25073 [SCRIPT] No Revival for the Balaur
-		25080 [XML] Hot Shards! (Collect Item)
-		25081 [XML] Red Coral Delights (Collect Item)
-		25082 [ToDo] Tyrant Take Out (MultiStep)
-		25084 [ToDo] Is This a Trap? (MultiStep)
-		25085 [ToDo] Intercept the Ide (Collect Item)
-		25090 [XML] They Chose Poorly (Monster Hunt)
-		25091 [XML] The More You Know... (Collect Item)
-		25092 [XML] Pontificating Possible Power (Collect Item)
-		25093 [XML] A Royal Target (Monster Hunt)
-		25094 [ToDo] An Offering of Friendship (Collect Item)
-		25200 [ToDo] Break Elyos, Take Token
-		25201 [XML] Tejhi Termination (Monster Hunt)
-		25202 [XML] Tejhi Tasks (Monster Hunt)
-		25203 [XML] Creatures of Cloudtalon Valley (Monster Hunt)
-		25204 [XML] [Daily] Elyos in Enshar? (PvP)
-		25205 [XML] Boss Toss (Collect Item)
-		25210 [XML] Melzirinerk's Tempting Proposal (Collect Item)
-		25211 [XML] Pekrunerk's Enticing Proposal (Collect Item)
-		25212 [XML] Moterinerk's Enticing Proposal (Collect Item)
-		25213 [XML] Are Ya Feelin' Lucky? (Collect Item)
-		25215 [XML] [Daily] Securing Leviathan's Ruin (Collect Item)
-		25216 [XML] [Daily] Securing Wavehollow Brink (Collect Item)
-		25217 [XML] [Daily] Securing Cloudtalon Valley (Collect Item)
-		25220 [XML] [Daily] Arden Not Your Heart (PvP)
-		25221 [XML] [Daily] Ready Cet Go (PvP)
-		25222 [XML] [Daily] Embracing Bomire (PvP)
-		25223 [ToDo] [Spy/Daily] Head to Henor (PvP)
-		25224 [ToDo] [Spy/Daily] Aedra Attack (PvP)
-		25225 [ToDo] [Spy/Daily] Assail Erivale (PvP)
-		25230 [XML] Treasure Box Keys (Collect Item)
-		25231 [XML] Treasure Crate Keys (Collect Item)
-		25232 [XML] Treasure Chest Keys (Collect Item)
-		28970 [XML] Opening Corridors (Report to)
-		28971 [XML] [Weekly] Disputed Territory Defense (Monster Hunt)
-	[END] SUMMARY
+		[BEGIN] SUMMARY
+			20500 [SCRIPT] Enshar Expedition
+			20501 [SCRIPT] What the Ruins Say
+			20502 [SCRIPT] Evolving Mysteries
+			20503 [SCRIPT] Ancient, Evil Plans
+			20504 [SCRIPT] Tiamat's Shadow
+			20505 [SCRIPT] Ancient Crystal
+			20506 [SCRIPT] Muscle over Mind
+			20507 [SCRIPT] It's Worse than We Thought
+			25000 [XML] Getting to Know You (Report to Many)
+			25001 [XML] Shell Out (Collect Item)
+			25002 [XML] Kill the Kerubs (Monster Hunt)
+			25010 [XML] Ruin Research Relief (Monster Hunt)
+			25012 [XML] Big Scale Research (Collect Item)
+			25013 [XML] Seaweed Procede (Collect Item)
+			25020 [XML] Tejhi Technology (Collect Item)
+			25022 [SCRIPT] Soup De Cure (MultiStep)
+			25023 [SCRIPT] Sprouting Developments (MultiStep)
+			25030 [SCRIPT] Clues from the Undead (MultiStep)
+			25031 [SCRIPT] The Tejhi Ghost (MultiStep)
+			25032 [SCRIPT] Avenge Varnur (MultiStep)
+			25033 [XML] Mouths to Feed (Collect Item)
+			25050 [SCRIPT] Treasure in the Deep Sea (MultiStep)
+			25051 [SCRIPT] Treasure of Ancient Kings (MultiStep)
+			25052 [SCRIPT] An Offering of Peace
+			25060 [XML] Take Down the Barricade (Monster Hunt)
+			25062 [SCRIPT] Ominous Advice
+			25070 [SCRIPT] Truth of the Crystal (Report to)
+			25073 [SCRIPT] No Revival for the Balaur
+			25080 [XML] Hot Shards! (Collect Item)
+			25081 [XML] Red Coral Delights (Collect Item)
+			25082 [ToDo] Tyrant Take Out (MultiStep)
+			25084 [ToDo] Is This a Trap? (MultiStep)
+			25085 [ToDo] Intercept the Ide (Collect Item)
+			25090 [XML] They Chose Poorly (Monster Hunt)
+			25091 [XML] The More You Know... (Collect Item)
+			25092 [XML] Pontificating Possible Power (Collect Item)
+			25093 [XML] A Royal Target (Monster Hunt)
+			25094 [ToDo] An Offering of Friendship (Collect Item)
+			25200 [ToDo] Break Elyos, Take Token
+			25201 [XML] Tejhi Termination (Monster Hunt)
+			25202 [XML] Tejhi Tasks (Monster Hunt)
+			25203 [XML] Creatures of Cloudtalon Valley (Monster Hunt)
+			25204 [XML] [Daily] Elyos in Enshar? (PvP)
+			25205 [XML] Boss Toss (Collect Item)
+			25210 [XML] Melzirinerk's Tempting Proposal (Collect Item)
+			25211 [XML] Pekrunerk's Enticing Proposal (Collect Item)
+			25212 [XML] Moterinerk's Enticing Proposal (Collect Item)
+			25213 [XML] Are Ya Feelin' Lucky? (Collect Item)
+			25215 [XML] [Daily] Securing Leviathan's Ruin (Collect Item)
+			25216 [XML] [Daily] Securing Wavehollow Brink (Collect Item)
+			25217 [XML] [Daily] Securing Cloudtalon Valley (Collect Item)
+			25220 [XML] [Daily] Arden Not Your Heart (PvP)
+			25221 [XML] [Daily] Ready Cet Go (PvP)
+			25222 [XML] [Daily] Embracing Bomire (PvP)
+			25223 [ToDo] [Spy/Daily] Head to Henor (PvP)
+			25224 [ToDo] [Spy/Daily] Aedra Attack (PvP)
+			25225 [ToDo] [Spy/Daily] Assail Erivale (PvP)
+			25230 [XML] Treasure Box Keys (Collect Item)
+			25231 [XML] Treasure Crate Keys (Collect Item)
+			25232 [XML] Treasure Chest Keys (Collect Item)
+			28970 [XML] Opening Corridors (Report to)
+			28971 [XML] [Weekly] Disputed Territory Defense (Monster Hunt)
+		[END] SUMMARY
 	-->
-		
+	
+	<!-- REPORTING QUESTS -->
+	<report_to_many id="25000" start_npc_ids="804718">
+		<npc_infos npc_ids="804753"/>
+		<npc_infos npc_ids="804990"/>
+		<npc_infos npc_ids="805000"/>
+		<npc_infos npc_ids="804718"/>
+	</report_to_many>
+	<report_to id="28970" start_npc_ids="804927" end_npc_ids="805216 805217 805218"/>
+	
 	<!-- FOUNTAIN REWARD -->
 	<fountain_rewards id="25205" start_npc_ids="804759"/>
 		
@@ -92,15 +101,15 @@
 	<item_collecting id="25232" start_npc_ids="805226"/>
 	
 	<!-- KILL IN ZONE QUESTS -->
-	<kill_in_zone id="25220" start_npc_ids="804723" zones="WASHRUN_STRETCH_220080000 BROKEN_HIGHLANDS_220080000" amount="2" end_npc_ids="804723" level_diff="5"/>
-	<kill_in_zone id="25221" start_npc_ids="804730" zones="AURELIAN_TIMBERS_220080000 MOONTIDE_DIVE_220080000 LUNASHIN_CAVE_220080000" amount="2" end_npc_ids="804730" level_diff="5"/>
-	<kill_in_zone id="25222" start_npc_ids="804732" zones="BONECREAK_VALLEY_220080000 SCALEFANG_DALE_220080000 THE_SANGUISANDS_220080000 THE_BLOOD_GRAINS_220080000" amount="2" end_npc_ids="804732" level_diff="5"/>
-	<kill_in_zone id="25223" start_npc_ids="804719" zones="CRIMSON_HILLS_210070000 CORAL_RISE_210070000" amount="2" end_npc_ids="804719" level_diff="5"/>
-	<kill_in_zone id="25224" start_npc_ids="804719" zones="DRAGON_LORDS_CENTERPIECE_210070000 DRAGON_LORDS_GARDENS_210070000" amount="2" end_npc_ids="804719" level_diff="5"/>
-	<kill_in_zone id="25225" start_npc_ids="804719" zones="PERENNIAL_MOSSWOOD_210070000 TWILIGHT_TEMPLE_210070000" amount="2" end_npc_ids="804719" level_diff="5"/>
+	<kill_in_zone id="25220" start_npc_ids="804723" zones="WASHRUN_STRETCH_220080000 BROKEN_HIGHLANDS_220080000" amount="2" level_diff="5"/>
+	<kill_in_zone id="25221" start_npc_ids="804730" zones="AURELIAN_TIMBERS_220080000 MOONTIDE_DIVE_220080000 LUNASHIN_CAVE_220080000" amount="2" level_diff="5"/>
+	<kill_in_zone id="25222" start_npc_ids="804732" zones="BONECREAK_VALLEY_220080000 SCALEFANG_DALE_220080000 THE_SANGUISANDS_220080000 THE_BLOOD_GRAINS_220080000" amount="2" level_diff="5"/>
+	<kill_in_zone id="25223" start_npc_ids="804719" zones="CRIMSON_HILLS_210070000 CORAL_RISE_210070000" amount="2" level_diff="5"/>
+	<kill_in_zone id="25224" start_npc_ids="804719" zones="DRAGON_LORDS_CENTERPIECE_210070000 DRAGON_LORDS_GARDENS_210070000" amount="2" level_diff="5"/>
+	<kill_in_zone id="25225" start_npc_ids="804719" zones="PERENNIAL_MOSSWOOD_210070000 TWILIGHT_TEMPLE_210070000" amount="2" level_diff="5"/>
 	
 	<!-- KILL IN WORLD QUESTS -->
-	<kill_in_world id="25204" start_npc_ids="804914" worlds="220080000" amount="5" end_npc_ids="804914" level_diff="5"/>
+	<kill_in_world id="25204" start_npc_ids="804914" worlds="220080000" amount="5" level_diff="5"/>
 	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="25002" start_npc_ids="804903"/>
@@ -112,15 +121,4 @@
 	<monster_hunt id="25202" start_npc_ids="804914"/>
 	<monster_hunt id="25203" start_npc_ids="804914"/>
 	<monster_hunt id="28971" start_npc_ids="804924" end_npc_ids="805216 805217 805218"/>
-	
-	<!-- REPORTING QUESTS -->
-	<report_to id="28970" start_npc_ids="804927" end_npc_ids="805216 805217 805218"/>
-	
-	<!-- REPORTING TO MANY QUESTS -->
-	<report_to_many id="25000" start_npc_ids="804718" end_npc_ids="804718">
-		<npc_infos var="0" npc_id="804753" quest_dialog="1011"/>
-		<npc_infos var="1" npc_id="804990" quest_dialog="1352"/>
-		<npc_infos var="2" npc_id="805000" quest_dialog="1693"/>
-		<npc_infos var="3" npc_id="804718" quest_dialog="10002"/>
-	</report_to_many>
 </quest_scripts>

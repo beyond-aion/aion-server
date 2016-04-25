@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,8 +35,8 @@ public class ItemCollecting extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ItemCollecting.class);
 
-	private final Set<Integer> startNpcs = new HashSet<Integer>();
-	private final Set<Integer> endNpcs = new HashSet<Integer>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final int questMovie;
 	private final int nextNpcId;
 	private final int startDialogId;
@@ -51,24 +50,20 @@ public class ItemCollecting extends QuestHandler {
 	public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> endNpcIds, String startZone, int questMovie,
 		int startDialogId, int startDialogId2, int checkOkDialogId, int checkFailDialogId) {
 		super(questId);
-		if (startNpcIds != null) {
-			startNpcs.addAll(startNpcIds);
-			startNpcs.remove(0);
-		}
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
 		this.nextNpcId = nextNpcId;
-		if (endNpcIds == null) {
-			endNpcs.addAll(startNpcs);
-		} else {
-			endNpcs.addAll(endNpcIds);
-			endNpcs.remove(0);
-		}
+		if (endNpcIds != null)
+			this.endNpcIds.addAll(endNpcIds);
+		else
+			this.endNpcIds.addAll(this.startNpcIds);
 		this.startZone = startZone;
 		this.questMovie = questMovie;
 		this.startDialogId = startDialogId;
 		this.startDialogId2 = startDialogId2;
 		this.checkOkDialogId = checkOkDialogId;
 		this.checkFailDialogId = checkFailDialogId;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(getQuestId()).isDataDriven();
+		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -83,30 +78,23 @@ public class ItemCollecting extends QuestHandler {
 
 	@Override
 	public void register() {
-		Iterator<Integer> iterator = startNpcs.iterator();
-		while (iterator.hasNext()) {
-			int startNpc = iterator.next();
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
 		if (nextNpcId != 0) {
-			qe.registerQuestNpc(nextNpcId).addOnTalkEvent(getQuestId());
+			qe.registerQuestNpc(nextNpcId).addOnTalkEvent(questId);
+		}
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds)
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
 		if (actionItems != null) {
-			iterator = actionItems.iterator();
-			while (iterator.hasNext()) {
-				int actionItem = iterator.next();
-				qe.registerQuestNpc(actionItem).addOnTalkEvent(getQuestId());
-				qe.registerCanAct(getQuestId(), actionItem);
+			for (Integer actionItem : actionItems) {
+				qe.registerQuestNpc(actionItem).addOnTalkEvent(questId);
+				qe.registerCanAct(questId, actionItem);
 			}
 		}
-
-		iterator = endNpcs.iterator();
-		while (iterator.hasNext()) {
-			int endNpc = iterator.next();
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
-		}
-
 		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
 			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
 	}
@@ -114,12 +102,12 @@ public class ItemCollecting extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -135,6 +123,10 @@ public class ItemCollecting extends QuestHandler {
 						}
 						return sendQuestDialog(env, 1012);
 					}
+					case QUEST_REFUSE:
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE:
+						return closeDialogWindow(env);
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
@@ -161,7 +153,7 @@ public class ItemCollecting extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
-			} else if (endNpcs.contains(targetId)) {
+			} else if (endNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : isDataDriven ? 1011 : 2375);
@@ -195,19 +187,17 @@ public class ItemCollecting extends QuestHandler {
 						return checkQuestItemsSimple(env, var, var, true, 8, 0, 0);
 					}
 				}
-			}
-
-			else if (targetId != 0 && actionItems != null && actionItems.contains(targetId)) {
+			} else if (actionItems != null && actionItems.contains(targetId)) {
 				return true; // looting
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
+			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			List<QuestBonuses> bonuses = template.getBonus();
 			if (!bonuses.isEmpty() && bonuses.get(0).getType() == BonusType.MEDAL && !BonusService.getInstance().checkInventory(player, template)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
 				return closeDialogWindow(env);
 			}
-			if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId)) {
 				if (workItem != null) {
 					long currentCount = player.getInventory().getItemCountByItemId(workItem.getItemId());
 					if (currentCount > 0)
@@ -236,10 +226,9 @@ public class ItemCollecting extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (startNpcs != null)
-				constantSpawns.addAll(startNpcs);
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
+			constantSpawns.addAll(startNpcIds);
+			if (!endNpcIds.equals(startNpcIds))
+				constantSpawns.addAll(endNpcIds);
 			if (actionItems != null)
 				constantSpawns.addAll(actionItems);
 		}

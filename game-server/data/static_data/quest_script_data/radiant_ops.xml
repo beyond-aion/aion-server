@@ -18,19 +18,21 @@
 			38004 [XML] Radiant Ops Recruitment
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="38004" start_npc_ids="203726" end_npc_ids="799828"/>
+	
 	<!-- KILL IN WORLD -->
 	<kill_in_world id="35502" end_npc_ids="799831" worlds="400010000" amount="3"/>
-	<kill_in_world id="35503" start_npc_ids="799825 799826" end_npc_ids="799825 799826" worlds="600010000" amount="5"/>
+	<kill_in_world id="35503" start_npc_ids="799825 799826" worlds="600010000" amount="5"/>
 	<kill_in_world id="35504" end_npc_ids="799825 799826" worlds="210050000" amount="5"/>
 	<kill_in_world id="35505" end_npc_ids="799825 799826" worlds="220070000" amount="5"/>
-	<kill_in_world id="35506" start_npc_ids="799831" end_npc_ids="799831" worlds="210020000 210040000" amount="2"/>
-	<kill_in_world id="35507" start_npc_ids="799831" end_npc_ids="799831" worlds="220020000 220040000" amount="1"/>
-	<kill_in_world id="35508" end_npc_ids="799831" worlds="0" amount="5"/>
-	<kill_in_world id="35509" end_npc_ids="799825 799826" worlds="0" amount="5"/>
-	<kill_in_world id="35510" end_npc_ids="804940" worlds="0" amount="5"/>
+	<kill_in_world id="35506" start_npc_ids="799831" worlds="210020000 210040000" amount="2"/>
+	<kill_in_world id="35507" start_npc_ids="799831" worlds="220020000 220040000"/>
+	<kill_in_world id="35508" end_npc_ids="799831" amount="5"/>
+	<kill_in_world id="35509" end_npc_ids="799825 799826" amount="5"/>
+	<kill_in_world id="35510" end_npc_ids="804940" amount="5"/>
 	<kill_in_world id="35511" end_npc_ids="804940" worlds="220080000" amount="5"/>
-	<kill_in_world id="35512" end_npc_ids="804940" worlds="0" amount="5"/>
+	<kill_in_world id="35512" end_npc_ids="804940" amount="5"/>
 	<kill_in_world id="35513" end_npc_ids="804940" worlds="220080000" amount="5"/>
 </quest_scripts>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1031 [SCRIPT] The Manduri's Secret
 			1032 [SCRIPT] A Ruler's Duty
 			1033 [SCRIPT] Sataloca's Heart
@@ -267,7 +267,8 @@
 			80313 [TODO] Faviolla's Request
 			80314 [TODO] For the Elyos
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1302" start_npc_ids="203921" end_npc_ids="203932"/>
 	<report_to id="1310" start_npc_ids="203932" end_npc_ids="203997"/>
@@ -296,6 +297,7 @@
 	<report_to id="1465" start_npc_ids="203903" end_npc_ids="212649"/>
 	<report_to id="3330" start_npc_ids="203956" end_npc_ids="203949"/>
 	<report_to id="3337" start_npc_ids="203954" end_npc_ids="790006"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1301" start_npc_ids="203918"/>
 	<item_collecting id="1303" start_npc_ids="203917"/>
@@ -391,11 +393,13 @@
 	<item_collecting id="80003" start_npc_ids="799775"/>
 	<item_collecting id="80136" start_npc_ids="830243"/>
 	<item_collecting id="80213" start_npc_ids="831030"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="1309" talk_npc_id1="203932" end_npc_id="203830"/>
 	<item_order id="1323" talk_npc_id1="730019" end_npc_id="203939"/>
-	<item_order id="1355" end_npc_id="203933" />
+	<item_order id="1355" end_npc_id="203933"/>
 	<item_order id="1391" end_npc_id="204500"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1304" start_npc_ids="203917"/>
 	<monster_hunt id="1305" start_npc_ids="203935"/>
@@ -468,5 +472,7 @@
 	<monster_hunt id="16906" start_npc_ids="203901"/>
 	<monster_hunt id="14125" start_npc_ids="798053"/>
 	<monster_hunt id="80214" start_npc_ids="831030"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="39020" end_npc_ids="203901" worlds="210020000" amount="5" invasion_world="210020000"/>
 </quest_scripts>

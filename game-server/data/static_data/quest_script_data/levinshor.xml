@@ -105,6 +105,7 @@
 			80672 [TODO] [Event] Honorable Ceramium Medal Exchange
 		[END] SUMMARY
 	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="13706" start_npc_ids="802329"/>
 	<item_collecting id="13712" start_npc_ids="802565"/>
@@ -118,14 +119,16 @@
 	<item_collecting id="23741" start_npc_ids="802353"/>
 	<item_collecting id="23742" start_npc_ids="802353"/>
 	<item_collecting id="23743" start_npc_ids="802353"/>
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="13700" start_npc_ids="800527" end_npc_ids="802350"/>
 	<report_to id="13701" start_npc_ids="798926" end_npc_ids="802350"/>
 	<report_to id="23700" start_npc_ids="800529" end_npc_ids="802353"/>
 	<report_to id="23701" start_npc_ids="800529" end_npc_ids="802353"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375"/>
-	<monster_hunt id="13703" start_npc_ids="802350" end_npc_ids="802350" end_dialog_id="2375"/>
+	<monster_hunt id="13703" start_npc_ids="802350" end_dialog_id="2375"/>
 	<monster_hunt id="13705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375"/>
 	<monster_hunt id="13758" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
 	<monster_hunt id="13759" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
@@ -142,7 +145,7 @@
 	<monster_hunt id="13770" start_npc_ids="805281" end_reward_next_step="true"/>
 	<monster_hunt id="16931" start_npc_ids="804626"/>
 	<monster_hunt id="23702" start_npc_ids="802353" end_npc_ids="802354" end_dialog_id="2375"/>
-	<monster_hunt id="23703" start_npc_ids="802353" end_npc_ids="802353" end_dialog_id="2375"/>
+	<monster_hunt id="23703" start_npc_ids="802353" end_dialog_id="2375"/>
 	<monster_hunt id="23705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375"/>
 	<monster_hunt id="23758" start_npc_ids="805291 805292 805293" end_reward_next_step="true"/>
 	<monster_hunt id="23759" start_npc_ids="805291 805292 805293" end_reward_next_step="true"/>

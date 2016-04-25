@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			39500 [XML] It Was A Dark and Cloudy... Merchant
 			39501 [XML] [Daily] Periwinkle Pluma Pickle
 			39502 [XML] [Daily] Ribbit Responsibility
@@ -25,25 +25,27 @@
 			39520 [SCRIPT] [Daily] Vilmanerk Versus Dragonbound
 			39521 [XML] It Was A Dark and Cloudy... Shugo
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="39500" start_npc_ids="800084" end_npc_ids="205631"/>
 	<report_to id="39521" start_npc_ids="800085" end_npc_ids="205631"/>
+	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="39501" start_npc_ids="0" end_npc_ids="205628"/>
-	<monster_hunt id="39502" start_npc_ids="0" end_npc_ids="205628"/>
-	<monster_hunt id="39503" start_npc_ids="0" end_npc_ids="205628"/>
-	<monster_hunt id="39504" start_npc_ids="0" end_npc_ids="205628"/>
-	<monster_hunt id="39506" start_npc_ids="0" end_npc_ids="205629"/>
-	<monster_hunt id="39507" start_npc_ids="0" end_npc_ids="205629"/>
-	<monster_hunt id="39508" start_npc_ids="0" end_npc_ids="205629"/>
-	<monster_hunt id="39509" start_npc_ids="0" end_npc_ids="205629"/>
-	<monster_hunt id="39511" start_npc_ids="0" end_npc_ids="205884"/>
-	<monster_hunt id="39512" start_npc_ids="0" end_npc_ids="205884"/>
-	<monster_hunt id="39513" start_npc_ids="0" end_npc_ids="205884"/>
-	<monster_hunt id="39514" start_npc_ids="0" end_npc_ids="205884"/>
-	<monster_hunt id="39516" start_npc_ids="0" end_npc_ids="205885"/>
-	<monster_hunt id="39517" start_npc_ids="0" end_npc_ids="205885"/>
-	<monster_hunt id="39518" start_npc_ids="0" end_npc_ids="205885"/>
-	<monster_hunt id="39519" start_npc_ids="0" end_npc_ids="205885"/>
+	<monster_hunt id="39501" end_npc_ids="205628"/>
+	<monster_hunt id="39502" end_npc_ids="205628"/>
+	<monster_hunt id="39503" end_npc_ids="205628"/>
+	<monster_hunt id="39504" end_npc_ids="205628"/>
+	<monster_hunt id="39506" end_npc_ids="205629"/>
+	<monster_hunt id="39507" end_npc_ids="205629"/>
+	<monster_hunt id="39508" end_npc_ids="205629"/>
+	<monster_hunt id="39509" end_npc_ids="205629"/>
+	<monster_hunt id="39511" end_npc_ids="205884"/>
+	<monster_hunt id="39512" end_npc_ids="205884"/>
+	<monster_hunt id="39513" end_npc_ids="205884"/>
+	<monster_hunt id="39514" end_npc_ids="205884"/>
+	<monster_hunt id="39516" end_npc_ids="205885"/>
+	<monster_hunt id="39517" end_npc_ids="205885"/>
+	<monster_hunt id="39518" end_npc_ids="205885"/>
+	<monster_hunt id="39519" end_npc_ids="205885"/>
 </quest_scripts>

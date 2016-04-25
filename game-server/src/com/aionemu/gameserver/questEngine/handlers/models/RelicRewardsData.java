@@ -12,18 +12,18 @@ import com.aionemu.gameserver.questEngine.handlers.template.RelicRewards;
 
 /**
  * @author Bobobear
+ * @modified Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelicRewardsData")
 public class RelicRewardsData extends XMLQuest {
 
-	@XmlAttribute(name = "start_npc_ids", required = true)
+	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		RelicRewards template = new RelicRewards(id, startNpcIds);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new RelicRewards(id, startNpcIds));
 	}
 
 }

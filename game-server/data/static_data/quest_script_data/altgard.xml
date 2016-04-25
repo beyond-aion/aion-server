@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			2011 [SCRIPT] Fungus Among Us
 			2012 [SCRIPT] Encroachers
 			2013 [SCRIPT] A Dangerous Crop
@@ -135,7 +135,8 @@
 			80143 [TODO] [Event] Warped Rift Blocking
 			80262 [TODO] [Event] Basic Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="2146" start_npc_ids="203664" end_npc_ids="203659"/>
 	<report_to id="2210" start_npc_ids="203603" end_npc_ids="203605"/>
@@ -150,21 +151,20 @@
 	<report_to id="2260" start_npc_ids="203649" end_npc_ids="203557"/>
 	<report_to id="2261" start_npc_ids="203559" end_npc_ids="203665"/>
 	<report_to id="2262" start_npc_ids="798030" end_npc_ids="798036"/>
+	<report_to_many id="2274" start_item_id="182203249" end_npc_ids="203560">
+		<npc_infos npc_ids="203668"/>
+		<npc_infos npc_ids="203560"/>
+	</report_to_many>
 	<report_to id="2283" start_npc_ids="203557" end_npc_ids="204052"/>
 	<report_to id="2285" start_npc_ids="203640" end_npc_ids="203645"/>
 	<report_to id="2286" start_npc_ids="203557" end_npc_ids="203560"/>
 	<report_to id="2287" start_npc_ids="203557" end_npc_ids="203558"/>
 	<report_to id="2291" start_npc_ids="203639" end_npc_ids="203617"/>
+	<report_to_many id="2296" start_item_id="182203263" end_npc_ids="798036">
+		<npc_infos npc_ids="203656"/>
+		<npc_infos npc_ids="798036"/>
+	</report_to_many>
 	
-	<!-- REPORTING TO MANY QUESTS -->
-	<report_to_many id="2274" start_item_id="182203249" end_npc_ids="203560" end_dialog_id="2375">
-		<npc_infos var="0" npc_id="203668" quest_dialog="1353"/>
-		<npc_infos var="1" npc_id="203560" quest_dialog="2375" close_dialog="1009"/>
-	</report_to_many>
-	<report_to_many id="2296" start_item_id="182203263" end_npc_ids="798036" end_dialog_id="2375">
-		<npc_infos var="0" npc_id="203656" quest_dialog="1353"/>
-		<npc_infos var="1" npc_id="798036" quest_dialog="2375" close_dialog="1009"/>
-	</report_to_many>
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2144" start_npc_ids="203690"/>
 	<item_collecting id="2145" start_npc_ids="203690"/>
@@ -205,6 +205,7 @@
 	<item_collecting id="24231" start_npc_ids="832821"/>
 	<item_collecting id="80005" start_npc_ids="799789"/>
 	<item_collecting id="80142" start_npc_ids="830244"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="2201" start_npc_ids="203563"/>
 	<monster_hunt id="2202" start_npc_ids="203560"/>
@@ -225,5 +226,5 @@
 	<monster_hunt id="2281" start_npc_ids="203558"/>
 	<monster_hunt id="2282" start_npc_ids="203557"/>
 	<monster_hunt id="2293" start_npc_ids="203659"/>
-	<monster_hunt id="24230" start_npc_ids="832821" end_dialog_id="2375"/>
+	<monster_hunt id="24230" start_npc_ids="832821"/>
 </quest_scripts>

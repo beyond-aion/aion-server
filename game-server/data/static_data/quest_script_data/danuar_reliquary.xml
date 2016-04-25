@@ -8,10 +8,8 @@
 		26921 [XML] [Group] Modor's Tale
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS -->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="16921" start_npc_ids="801543"/>
 	<item_collecting id="26921" start_npc_ids="801547"/>
-	<!-- HUNTING QUESTS -->
-	<!-- ITEM ORDERS QUESTS -->
 </quest_scripts>

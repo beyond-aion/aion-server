@@ -8,9 +8,11 @@
 			28941 [XML] [Group] Destroy the Destroyer
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS --> 
 	<report_to id="18940" start_npc_ids="802431" end_npc_ids="802383"/>
 	<report_to id="28940" start_npc_ids="802433" end_npc_ids="802384"/>
+	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="18941" start_npc_ids="802383"/>
 	<monster_hunt id="28941" start_npc_ids="802384"/>

@@ -14,11 +14,10 @@
 			4725 [SCRIPT] Ceaseless Attack
 		[END] SUMMARY
 	-->
-	<!-- REPORTING QUESTS -->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="3723" start_npc_ids="799069"/>
 	<item_collecting id="3724" start_npc_ids="799069" end_npc_ids="798928"/>
 	<item_collecting id="4723" start_npc_ids="799403"/>
 	<item_collecting id="4724" start_npc_ids="799403" end_npc_ids="799226"/>
-	<!-- HUNTING QUESTS -->
 </quest_scripts>

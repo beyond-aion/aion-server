@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1000 [SCRIPT] Prologue
 			1001 [SCRIPT] The Kerubim Threat
 			1002 [SCRIPT] Request of the Elim
@@ -48,24 +48,25 @@
 			9614 [UNUSED] [Test] CollectItem
 			80158 [XML] [Event] Ahead of the Trends
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="1101" start_npc_ids="203049" end_npc_ids="203057"/>
 	<report_to id="1104" start_npc_ids="203057" end_npc_ids="203059"/>
 	<report_to id="1106" start_npc_ids="203050" end_npc_ids="203061"/>
 	<report_to id="1110" start_npc_ids="203065" end_npc_ids="203075"/>
 	<report_to_many id="1115" start_npc_ids="203075" end_npc_ids="203058">
-		<npc_infos var="0" npc_id="203072" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="203058" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="203072"/>
+		<npc_infos npc_ids="203058"/>
 	</report_to_many>
 	<report_to_many id="1118" start_npc_ids="203059" end_npc_ids="203079">
-		<npc_infos var="0" npc_id="203070" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="203079" quest_dialog="2375" close_dialog="1009"/>
+		<npc_infos npc_ids="203070"/>
+		<npc_infos npc_ids="203079"/>
 	</report_to_many>
 	<report_to id="1119" start_npc_ids="203075" end_npc_ids="203080"/>
 	<report_to id="1230" start_npc_ids="801032" end_npc_ids="801033"/>
 	<report_to id="1231" start_npc_ids="801032" end_npc_ids="801033"/>
-	<xml_quest id="1127" start_npc_id="798008" end_npc_id="798008">
+	<xml_quest id="1127" start_npc_ids="798008">
 		<on_talk_event ids="700001">
 			<conditions operate="AND">
 				<quest_status value="START" op="EQUAL"/>
@@ -108,6 +109,7 @@
 			</var>
 		</on_talk_event>
 	</xml_quest>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1103" start_npc_ids="203057"/>
 	<item_collecting id="1105" start_npc_ids="203050"/>
@@ -123,6 +125,7 @@
 	<item_collecting id="1206" start_npc_ids="203059"/>
 	<item_collecting id="1207" start_npc_ids="203082" end_npc_ids="203085"/>
 	<item_collecting id="80158" start_npc_ids="830533"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1102" start_npc_ids="203057"/>
 	<monster_hunt id="1112" start_npc_ids="203072"/>

@@ -15,11 +15,12 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestVar")
+@XmlType(name = "QuestVar", propOrder = { "npc" })
 public class QuestVar {
 
 	@XmlElement(name = "npc")
 	protected List<QuestNpc> npc;
+	
 	@XmlAttribute(required = true)
 	protected int value;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<quest_scripts>
+<quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
 			12400 [XML] Build a Better Greatsword
@@ -34,127 +34,129 @@
 			41565 [XML] The Ballad of Fortitude
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORT TO -->
-	<report_to_many id="12400" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12400" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12401" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12401" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12402" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12402" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12403" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12403" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12404" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12404" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12405" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12405" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12406" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12406" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12407" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12407" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12408" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12408" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12409" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12409" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12410" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12410" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="12411" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="12411" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22400" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22400" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22401" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22401" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22402" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22402" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22403" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22403" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22404" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22404" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22405" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22405" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22406" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22406" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22407" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22407" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22408" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22408" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22409" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22409" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22410" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22410" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
-	<report_to_many id="22411" start_npc_ids="205892" end_npc_ids="205892">
-		<npc_infos var="0" npc_id="205891" quest_dialog="1352"/>
-		<npc_infos var="1" npc_id="205575" quest_dialog="1693"/>
-		<npc_infos var="2" npc_id="205892" quest_dialog="2375" close_dialog="20002"/>
+	<report_to_many id="22411" start_npc_ids="205892">
+		<npc_infos npc_ids="205891"/>
+		<npc_infos npc_ids="205575"/>
+		<npc_infos npc_ids="205892" close_dialog="20002"/>
 	</report_to_many>
+	
 	<!-- ITEM COLLECTING -->
 	<item_collecting id="41560" start_npc_ids="205575"/>
 	<item_collecting id="41561" start_npc_ids="205575"/>

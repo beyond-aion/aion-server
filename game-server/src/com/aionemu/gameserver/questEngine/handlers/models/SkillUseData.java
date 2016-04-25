@@ -18,25 +18,24 @@ import com.aionemu.gameserver.questEngine.handlers.template.SkillUse;
  * @modified Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SkillUseData")
+@XmlType(name = "SkillUseData", propOrder = { "skills" })
 public class SkillUseData extends XMLQuest {
 
+	@XmlElement(name = "skill", required = true)
+	protected List<QuestSkillData> skills;
+	
 	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
 	
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
-	
-	@XmlElement(name = "skill", required = true)
-	protected List<QuestSkillData> skills;
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		FastMap<List<Integer>, QuestSkillData> questSkills = new FastMap<List<Integer>, QuestSkillData>();
+		FastMap<List<Integer>, QuestSkillData> questSkills = new FastMap<>();
 		for (QuestSkillData qsd : skills) {
 			questSkills.put(qsd.getSkillIds(), qsd);
 		}
-		SkillUse questTemplate = new SkillUse(id, startNpcIds, endNpcIds, questSkills);
-		questEngine.addQuestHandler(questTemplate);
+		questEngine.addQuestHandler(new SkillUse(id, startNpcIds, endNpcIds, questSkills));
 	}
 }

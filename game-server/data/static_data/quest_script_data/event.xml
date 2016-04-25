@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			50031 [TODO] [Event/Daily] Love and Slaughter
 			50035 [XML] [Event] Golden Wishes
 			50036 [XML] [Event] Rich Broth
@@ -188,7 +188,7 @@
 			80667 [XML] [Event] Dangerous Efforts for Honor 3
 			80668 [XML] [Event] Dangerous Efforts for Honor 4
 		[END] SUMMARY
--->
+	-->
 
 	<!-- REPORTING QUESTS -->
 	<report_to id="80279" start_npc_ids="831117" end_npc_ids="831350"/>
@@ -196,38 +196,38 @@
 	<report_to id="80325" start_npc_ids="831433" end_npc_ids="831447"/>
 	<report_to id="80326" start_npc_ids="831440" end_npc_ids="831448"/>
 	<report_to id="80327" start_npc_ids="831439" end_npc_ids="831448"/>
-	<report_to_many id="80328" start_npc_ids="831527" end_npc_ids="831527">
-		<npc_infos npc_id="831527" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80328" start_npc_ids="831527">
+		<npc_infos npc_ids="831527"/>
 	</report_to_many>
-	<report_to_many id="80329" start_npc_ids="831531" end_npc_ids="831531">
-		<npc_infos npc_id="831531" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80329" start_npc_ids="831531">
+		<npc_infos npc_ids="831531"/>
 	</report_to_many>
-	<report_to_many id="80344" start_npc_ids="831787" end_npc_ids="831787">
-		<npc_infos npc_id="831787" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80344" start_npc_ids="831787">
+		<npc_infos npc_ids="831787"/>
 	</report_to_many>
-	<report_to_many id="80351" start_npc_ids="831797" end_npc_ids="831797">
-		<npc_infos npc_id="831797" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80351" start_npc_ids="831797">
+		<npc_infos npc_ids="831797"/>
 	</report_to_many>
-	<report_to_many id="80353" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80353" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
-	<report_to_many id="80354" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80354" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
-	<report_to_many id="80355" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80355" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
-	<report_to_many id="80360" start_npc_ids="831806" end_npc_ids="831806">
-		<npc_infos npc_id="831806" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80360" start_npc_ids="831806">
+		<npc_infos npc_ids="831806"/>
 	</report_to_many>
-	<report_to_many id="80362" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80362" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
-	<report_to_many id="80363" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80363" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
-	<report_to_many id="80364" start_npc_ids="831830" end_npc_ids="831830">
-		<npc_infos npc_id="831830" var="0" quest_dialog="2375" close_dialog="1009"/>
+	<report_to_many id="80364" start_npc_ids="831830">
+		<npc_infos npc_ids="831830"/>
 	</report_to_many>
 	<report_to id="80369" start_npc_ids="831833" end_npc_ids="831837"/>
 	<report_to id="80370" start_npc_ids="831833" end_npc_ids="831838"/>
@@ -251,6 +251,7 @@
 	<!-- report_to id="80577" start_npc_ids="832040" end_npc_ids="832040"/-->
 	<!-- report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
 	<!-- report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="50035" start_npc_ids="832749"/>
 	<item_collecting id="50036" start_npc_ids="832749"/>
@@ -261,19 +262,19 @@
 	<item_collecting id="80006" start_npc_ids="799790"/>
 	<item_collecting id="80144" start_npc_ids="830244"/>
 	<item_collecting id="80222" start_npc_ids="831028"/>
-	<item_collecting id="80282" start_npc_ids="831117" end_npc_ids="831350" />
+	<item_collecting id="80282" start_npc_ids="831117" end_npc_ids="831350"/>
 	<item_collecting id="80284" start_npc_ids="831248"/>
 	<item_collecting id="80285" start_npc_ids="831248"/>
 	<item_collecting id="80352" start_npc_ids="831797"/>
-	<item_collecting id="80356" start_npc_ids="831820" end_npc_ids="831830" />
-	<item_collecting id="80357" start_npc_ids="831823" end_npc_ids="831830" />
-	<item_collecting id="80358" start_npc_ids="831825" end_npc_ids="831830" />
-	<item_collecting id="80359" start_npc_ids="831826" end_npc_ids="831830" />
-	<item_collecting id="80361" start_npc_ids="831806" end_npc_ids="831806" />
-	<item_collecting id="80365" start_npc_ids="831820" end_npc_ids="831830" />
-	<item_collecting id="80366" start_npc_ids="831823" end_npc_ids="831830" />
-	<item_collecting id="80367" start_npc_ids="831825" end_npc_ids="831830" />
-	<item_collecting id="80368" start_npc_ids="831826" end_npc_ids="831830" />
+	<item_collecting id="80356" start_npc_ids="831820" end_npc_ids="831830"/>
+	<item_collecting id="80357" start_npc_ids="831823" end_npc_ids="831830"/>
+	<item_collecting id="80358" start_npc_ids="831825" end_npc_ids="831830"/>
+	<item_collecting id="80359" start_npc_ids="831826" end_npc_ids="831830"/>
+	<item_collecting id="80361" start_npc_ids="831806" end_npc_ids="831806"/>
+	<item_collecting id="80365" start_npc_ids="831820" end_npc_ids="831830"/>
+	<item_collecting id="80366" start_npc_ids="831823" end_npc_ids="831830"/>
+	<item_collecting id="80367" start_npc_ids="831825" end_npc_ids="831830"/>
+	<item_collecting id="80368" start_npc_ids="831826" end_npc_ids="831830"/>
 	<item_collecting id="80405" start_npc_ids="831841"/>
 	<item_collecting id="80424" start_npc_ids="831845"/>
 	<item_collecting id="80438" start_npc_ids="831849"/>
@@ -321,6 +322,7 @@
 	<item_collecting id="80666" start_npc_ids="832913"/>
 	<item_collecting id="80667" start_npc_ids="832913"/>
 	<item_collecting id="80668" start_npc_ids="832913"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028"/>
 	<monster_hunt id="80319" start_npc_ids="831426"/>

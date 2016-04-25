@@ -28,14 +28,14 @@ public class ItemOrders extends QuestHandler {
 	private static final Logger log = LoggerFactory.getLogger(ItemOrders.class);
 
 	private int startItemId;
-	private final int talkNpc1;
-	private final int talkNpc2;
+	private final int talkNpcId1;
+	private final int talkNpcId2;
 	private final int endNpcId;
 
-	public ItemOrders(int questId, int talkNpc1, int talkNpc2, int endNpcId) {
+	public ItemOrders(int questId, int talkNpcId1, int talkNpcId2, int endNpcId) {
 		super(questId);
-		this.talkNpc1 = talkNpc1;
-		this.talkNpc2 = talkNpc2;
+		this.talkNpcId1 = talkNpcId1;
+		this.talkNpcId2 = talkNpcId2;
 		this.endNpcId = endNpcId;
 	}
 
@@ -53,14 +53,13 @@ public class ItemOrders extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		qe.registerQuestItem(startItemId, questId);
-		if (talkNpc1 != 0) {
-			qe.registerQuestNpc(talkNpc1).addOnTalkEvent(questId);
-		}
-		if (talkNpc2 != 0) {
-			qe.registerQuestNpc(talkNpc2).addOnTalkEvent(questId);
-		}
+		if (talkNpcId1 != 0)
+			qe.registerQuestNpc(talkNpcId1).addOnTalkEvent(questId);
+		if (talkNpcId2 != 0)
+			qe.registerQuestNpc(talkNpcId2).addOnTalkEvent(questId);
+		if (endNpcId != 0)
+			qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -90,13 +89,19 @@ public class ItemOrders extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if ((targetId == talkNpc1 && talkNpc1 != 0) || (targetId == talkNpc2 && talkNpc2 != 0)) {
+			int var0 = qs.getQuestVarById(0);
+			if (targetId == talkNpcId1 || targetId == talkNpcId2) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
 				} else if (dialog == DialogAction.SETPRO1) {
-					return defaultCloseDialog(env, 0, 1, true, false);
+					boolean reward = ((var0 == 0 && talkNpcId2 == 0) || (var0 == 1 && talkNpcId2 != 0));
+					qs.setQuestVarById(0, var0 + 1);
+					if (reward)
+						qs.setStatus(QuestStatus.REWARD);
+					updateQuestStatus(env);
+					return closeDialogWindow(env);
 				}
-			} else if ((talkNpc1 == 0) && (talkNpc2 == 0) && targetId == endNpcId) {
+			} else if (targetId == endNpcId) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
 				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
@@ -132,11 +137,12 @@ public class ItemOrders extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (talkNpc1 != 0)
-				constantSpawns.add(talkNpc1);
-			if (talkNpc2 != 0)
-				constantSpawns.add(talkNpc2);
-			constantSpawns.add(endNpcId);
+			if (talkNpcId1 != 0)
+				constantSpawns.add(talkNpcId1);
+			if (talkNpcId2 != 0)
+				constantSpawns.add(talkNpcId2);
+			if (endNpcId != 0)
+				constantSpawns.add(endNpcId);
 		}
 		return constantSpawns;
 	}

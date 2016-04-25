@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			18400 [SCRIPT] The Vanishings
 			18401 [XML] Research and Destruction
 			18402 [SCRIPT] Rooting Out Corruption
@@ -33,7 +33,8 @@
 			28413 [UNUSED] Gambling Quest (Fair)
 			28414 [UNUSED] Gambling NPC's Secret
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18403" start_npc_ids="799586"/>
 	<item_collecting id="18404" start_npc_ids="799586"/>
@@ -43,6 +44,7 @@
 	<item_collecting id="28404" start_npc_ids="799589"/>
 	<item_collecting id="28408" start_npc_ids="799558"/>
 	<item_collecting id="28411" start_npc_ids="799589"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18401" start_npc_ids="799553"/>
 	<monster_hunt id="28401" start_npc_ids="799558"/>

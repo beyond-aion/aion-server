@@ -9,6 +9,8 @@
 			11055 [XML] [Group] Another Piece
 		[END] SUMMARY
 	-->
+	
+	<!-- ITEM COLLECTING -->
 	<item_collecting id="11051" start_npc_ids="798989"/>
 	<item_collecting id="11052" start_npc_ids="798984"/>
 	<item_collecting id="11054" start_npc_ids="799017"/>

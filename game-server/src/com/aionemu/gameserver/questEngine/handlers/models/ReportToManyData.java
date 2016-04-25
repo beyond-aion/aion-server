@@ -15,12 +15,15 @@ import com.aionemu.gameserver.questEngine.handlers.template.ReportToMany;
 
 /**
  * @author Hilgert
- * @modified Rolandas
+ * @modified Rolandas, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ReportToManyData")
+@XmlType(name = "ReportToManyData", propOrder = { "npcInfos" })
 public class ReportToManyData extends XMLQuest {
 
+	@XmlElement(name = "npc_infos", required = true)
+	protected List<NpcInfos> npcInfos;
+	
 	@XmlAttribute(name = "start_item_id")
 	protected int startItemId;
 
@@ -31,24 +34,19 @@ public class ReportToManyData extends XMLQuest {
 	protected List<Integer> endNpcIds;
 
 	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialog;
+	protected int startDialogId;
 
 	@XmlAttribute(name = "end_dialog_id")
-	protected int endDialog;
-
-	@XmlElement(name = "npc_infos", required = true)
-	protected List<NpcInfos> npcInfos;
+	protected int endDialogId;
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		int maxVar = 0;
-		FastMap<Integer, NpcInfos> NpcInfo = new FastMap<Integer, NpcInfos>();
-		for (NpcInfos mi : npcInfos) {
-			NpcInfo.put(mi.getNpcId(), mi);
-			if (mi.getVar() > maxVar)
-				maxVar = mi.getVar();
+		int maxVar = -1;
+		FastMap<List<Integer>, NpcInfos> npcInfo = new FastMap<>();
+		for (NpcInfos nI : npcInfos) {
+			npcInfo.put(nI.getNpcIds(), nI);
+			maxVar++;
 		}
-		ReportToMany template = new ReportToMany(id, startItemId, startNpcIds, endNpcIds, NpcInfo, startDialog, endDialog, maxVar, mission);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new ReportToMany(id, startItemId, startNpcIds, endNpcIds, npcInfo, startDialogId, endDialogId, maxVar, mission));
 	}
 }

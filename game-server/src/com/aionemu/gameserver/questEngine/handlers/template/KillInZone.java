@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -24,30 +25,34 @@ public class KillInZone extends QuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(KillInZone.class);
 
-	private final Set<Integer> startNpcs = new HashSet<>();
-	private final Set<Integer> endNpcs = new HashSet<>();
+	private final Set<Integer> startNpcIds = new HashSet<>();
+	private final Set<Integer> endNpcIds = new HashSet<>();
+	private final Set<String> zones = new HashSet<>();
 	private final int killAmount;
 	private final int minRank;
 	private final int levelDiff;
 	private final int startDistanceNpc;
-	private final Set<String> zones = new HashSet<>();
 	private final boolean isDataDriven;
 
 	public KillInZone(int questId, List<Integer> endNpcIds, List<Integer> startNpcIds, List<String> zones, int killAmount, int minRank, int levelDiff,
 		int startDistanceNpc) {
 		super(questId);
-		if (startNpcIds != null) {
-			this.startNpcs.addAll(startNpcIds);
-			this.startNpcs.remove(0);
-		}
-		if (endNpcIds == null) {
-			this.endNpcs.addAll(startNpcs);
+		if (startNpcIds != null)
+			this.startNpcIds.addAll(startNpcIds);
+		if (endNpcIds != null)
+			this.endNpcIds.addAll(endNpcIds);
+		else
+			this.endNpcIds.addAll(startNpcIds);
+		if (zones != null) {
+			this.zones.addAll(zones);
 		} else {
-			this.endNpcs.addAll(endNpcIds);
-			this.endNpcs.remove(0);
+			for (ZoneTemplate template : DataManager.ZONE_DATA.zoneList)
+				this.zones.add(template.getXmlName());
 		}
-		this.zones.addAll(zones);
-		this.killAmount = killAmount;
+		if (killAmount == 0)
+			this.killAmount = 1;
+		else
+			this.killAmount = killAmount;
 		this.minRank = minRank;
 		this.levelDiff = levelDiff;
 		this.startDistanceNpc = startDistanceNpc;
@@ -64,12 +69,14 @@ public class KillInZone extends QuestHandler {
 
 	@Override
 	public void register() {
-		for (Integer startNpc : startNpcs) {
-			qe.registerQuestNpc(startNpc).addOnQuestStart(getQuestId());
-			qe.registerQuestNpc(startNpc).addOnTalkEvent(getQuestId());
+		for (Integer startNpcId : startNpcIds) {
+			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
+			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
-		for (Integer endNpc : endNpcs)
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
+		if (!endNpcIds.equals(startNpcIds)) {
+			for (Integer endNpcId : endNpcIds)
+				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
+		}
 		for (String zone : zones)
 			qe.registerOnKillInZone(zone, questId);
 		if (startDistanceNpc != 0)
@@ -82,22 +89,28 @@ public class KillInZone extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
+		
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (startNpcs.isEmpty() || startNpcs.contains(targetId)) {
+			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					}
-					case QUEST_ACCEPT_1: {
-						return sendQuestStartDialog(env);
+					case QUEST_REFUSE:
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_SIMPLE: {
+						return closeDialogWindow(env);
 					}
+					case QUEST_ACCEPT:
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
 					default: {
 						return sendQuestStartDialog(env);
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (endNpcs.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (endNpcIds.contains(targetId)) {
 				if (isDataDriven && dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
@@ -132,10 +145,9 @@ public class KillInZone extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (startNpcs != null)
-				constantSpawns.addAll(startNpcs);
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
+			constantSpawns.addAll(startNpcIds);
+			if (!endNpcIds.equals(startNpcIds))
+				constantSpawns.addAll(endNpcIds);
 		}
 		return constantSpawns;
 	}

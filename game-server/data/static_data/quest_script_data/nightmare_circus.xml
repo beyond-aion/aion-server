@@ -16,7 +16,8 @@
 			80343 [XML] [Event] Ariatte Rescue Operation
 		[END] SUMMARY
 	-->
+	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="80342" start_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709"/>
+	<monster_hunt id="80342" start_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709"/>
 	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831717 831716 831715 831714 831713 831712 831711 831710 831709"/>
 </quest_scripts>

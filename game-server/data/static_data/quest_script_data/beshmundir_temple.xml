@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			30201 [SCRIPT] Supplies Party
 			30202 [SCRIPT] Suspicious Ceremony
 			30203 [SCRIPT] Halt the Ceremony!
@@ -89,13 +89,15 @@
 			30348 [SCRIPT] Improved Aethercannon
 			30349 [SCRIPT] Improved Harp
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="30204" start_npc_ids="798926" end_npc_ids="798941"/>
 	<report_to id="30209" start_npc_ids="798941" end_npc_ids="203837"/>
 	<report_to id="30304" start_npc_ids="799225" end_npc_ids="799322"/>
 	<report_to id="30309" start_npc_ids="799322" end_npc_ids="204225"/>
 	<report_to id="30316" start_npc_ids="799322" end_npc_ids="799208"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="30205" start_npc_ids="798941"/>
 	<item_collecting id="30206" start_npc_ids="798941"/>
@@ -123,6 +125,7 @@
 	<item_collecting id="30330" start_npc_ids="799321"/>
 	<item_collecting id="30331" start_npc_ids="799321"/>
 	<item_collecting id="30333" start_npc_ids="799321"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30224" start_npc_ids="799051"/>
 	<monster_hunt id="30232" start_npc_ids="798934"/>

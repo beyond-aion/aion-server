@@ -8,6 +8,7 @@
 			26941 [XML] The Belsagos Saga
 		[END] SUMMARY
 	-->
+	
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="16941" start_npc_ids="206361" end_npc_ids="802350"/>
 	<monster_hunt id="26941" start_npc_ids="206362" end_npc_ids="802353"/>

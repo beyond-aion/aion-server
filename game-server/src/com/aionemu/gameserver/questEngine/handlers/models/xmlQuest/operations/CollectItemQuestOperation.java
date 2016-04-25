@@ -20,7 +20,7 @@ public class CollectItemQuestOperation extends QuestOperation {
 	protected QuestOperations _true;
 	@XmlElement(name = "false", required = true)
 	protected QuestOperations _false;
-	@XmlAttribute
+	@XmlAttribute(required = true)
 	protected Boolean removeItems;
 
 	/*

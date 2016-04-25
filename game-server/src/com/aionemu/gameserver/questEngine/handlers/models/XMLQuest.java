@@ -10,45 +10,26 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 
 /**
  * @author MrPoke, Hilgert
+ * @modified Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestScriptData")
-@XmlSeeAlso({ ReportToData.class, RelicRewardsData.class, CraftingRewardsData.class, ReportToManyData.class, MonsterHuntData.class,
-	ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class, FountainRewardsData.class,
-	SkillUseData.class, ReportOnLevelUpData.class })
+@XmlSeeAlso({ CraftingRewardsData.class, FountainRewardsData.class, ItemCollectingData.class, ItemOrdersData.class, KillInWorldData.class,
+	KillInZoneData.class, KillSpawnedData.class, MentorMonsterHuntData.class, MonsterHuntData.class, RelicRewardsData.class, ReportOnLevelUpData.class,
+	ReportToData.class, ReportToManyData.class, SkillUseData.class, WorkOrdersData.class, XmlQuestData.class })
 public abstract class XMLQuest {
 
 	@XmlAttribute(name = "id", required = true)
 	protected int id;
-	@XmlAttribute(name = "movie", required = false)
-	protected int questMovie;
-	@XmlAttribute(name = "mission", required = false)
-	protected boolean mission;
 
-	/**
-	 * Gets the value of the id property.
-	 */
+	@XmlAttribute(name = "movie")
+	protected int questMovie;
+
+	@XmlAttribute(name = "mission")
+	protected boolean mission;
+	
 	public int getId() {
 		return id;
-	}
-
-	public int getQuestMovie() {
-		return questMovie;
-	}
-
-	/**
-	 * @return the mission
-	 */
-	public boolean isMission() {
-		return mission;
-	}
-
-	/**
-	 * @param mission
-	 *          the mission to set
-	 */
-	public void setMission(boolean mission) {
-		this.mission = mission;
 	}
 
 	public abstract void register(QuestEngine questEngine);

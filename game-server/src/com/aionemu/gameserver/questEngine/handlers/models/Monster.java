@@ -17,26 +17,26 @@ import javolution.util.FastTable;
 @XmlType(name = "Monster")
 public class Monster {
 
-	@XmlAttribute(name = "var", required = true)
+	@XmlAttribute(name = "var")
 	protected int var;
 
 	@XmlAttribute(name = "start_var")
-	protected Integer startVar;
+	protected int startVar;
 
-	@XmlAttribute(name = "end_var", required = true)
+	@XmlAttribute(name = "end_var")
 	protected int endVar;
 
 	@XmlAttribute(name = "npc_ids")
 	protected List<Integer> npcIds;
 
 	@XmlAttribute(name = "npc_seq")
-	private Integer npcSequence;
+	private int npcSequence;
 
 	@XmlAttribute(name = "step")
-	private Integer step = 0;
+	private int step;
 
-	@XmlAttribute(name = "spawner_object")
-	protected int spawnerObject;
+	@XmlAttribute(name = "spawner_object_id")
+	protected int spawnerObjectId;
 
 	public int getVar() {
 		return var;
@@ -46,7 +46,7 @@ public class Monster {
 		this.var = value;
 	}
 
-	public Integer getStartVar() {
+	public int getStartVar() {
 		return startVar;
 	}
 
@@ -75,28 +75,28 @@ public class Monster {
 		}
 	}
 
-	public Integer getNpcSequence() {
+	public int getNpcSequence() {
 		return npcSequence;
 	}
 
-	public void setNpcSequence(Integer value) {
+	public void setNpcSequence(int value) {
 		this.npcSequence = value;
 	}
 
-	public Integer getStep() {
+	public int getStep() {
 		return step;
 	}
 
-	public void setStep(Integer value) {
+	public void setStep(int value) {
 		this.step = value;
 	}
 
-	public int getSpawnerObject() {
-		return spawnerObject;
+	public int getSpawnerObjectId() {
+		return spawnerObjectId;
 	}
 
-	public void setSpawnerObject(Integer value) {
-		this.spawnerObject = value;
+	public void setSpawnerObjectId(int value) {
+		this.spawnerObjectId = value;
 	}
 
 }

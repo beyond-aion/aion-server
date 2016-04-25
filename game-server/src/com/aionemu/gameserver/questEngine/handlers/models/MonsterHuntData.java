@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
@@ -29,23 +28,20 @@ import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
 @XmlSeeAlso({ KillSpawnedData.class, MentorMonsterHuntData.class })
 public class MonsterHuntData extends XMLQuest {
 
-	@XmlElement(name = "monster")
-	protected List<Monster> monster;
-
-	@XmlAttribute(name = "start_npc_ids", required = true)
+	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
 
 	@XmlAttribute(name = "end_npc_ids")
 	protected List<Integer> endNpcIds;
 
 	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialog;
+	protected int startDialogId;
 
 	@XmlAttribute(name = "end_dialog_id")
-	protected int endDialog;
+	protected int endDialogId;
 
-	@XmlAttribute(name = "aggro_start_npcs")
-	protected List<Integer> aggroNpcs;
+	@XmlAttribute(name = "aggro_start_npc_ids")
+	protected List<Integer> aggroNpcIds;
 
 	@XmlAttribute(name = "invasion_world")
 	protected int invasionWorld;
@@ -54,17 +50,17 @@ public class MonsterHuntData extends XMLQuest {
 	protected String startZone;
 
 	@XmlAttribute(name = "start_dist_npc_id")
-	protected int startDistanceNpc;
+	protected int startDistanceNpcId;
 
 	@XmlAttribute(name = "end_reward")
 	protected boolean reward;
-	
+
 	@XmlAttribute(name = "end_reward_next_step")
 	protected boolean rewardNextStep;
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		Map<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
+		Map<Monster, Set<Integer>> monsters = new FastMap<>();
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
 		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
@@ -74,19 +70,18 @@ public class MonsterHuntData extends XMLQuest {
 					m.setEndVar(qk.getKillCount());
 				if (qk.getNpcIds() != null)
 					m.addNpcIds(qk.getNpcIds());
-				if (qk.getVar() >= 0)
+				if (qk.getVar() > 0)
 					m.setVar(qk.getVar());
-				if (qk.getQuestStep() >= 0)
+				if (qk.getQuestStep() > 0)
 					m.setStep(qk.getQuestStep());
-				if (qk.getSequenceNumber() >= 0)
+				if (qk.getSequenceNumber() > 0)
 					m.setVar(qk.getSequenceNumber());
-				monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
+				monsters.put(m, new HashSet<>(m.getNpcIds()));
 			}
 		}
 
-		MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld, startZone,
-			startDistanceNpc, reward, rewardNextStep);
-		questEngine.addQuestHandler(template);
+		questEngine.addQuestHandler(new MonsterHunt(id, startNpcIds, endNpcIds, monsters, startDialogId, endDialogId, aggroNpcIds, invasionWorld,
+			startZone, startDistanceNpcId, reward, rewardNextStep));
 	}
 
 }

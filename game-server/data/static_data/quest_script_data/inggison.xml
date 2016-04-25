@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			10020 [SCRIPT] Proving Yourself to Outremus
 			10021 [SCRIPT] Friends for Life
 			10022 [SCRIPT] Support the Inggison Outpost
@@ -270,9 +270,10 @@
 			39022 [XML] [Daily] Tillen's Order
 			80261 [TODO] [Event] Exquisite Birthday Banquet
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
-	<report_to id="11059" start_npc_ids="0" end_npc_ids="799015"/>
+	<report_to id="11059" end_npc_ids="799015"/>
 	<report_to id="11074" start_npc_ids="798938" end_npc_ids="799025"/>
 	<report_to id="11075" start_npc_ids="798939" end_npc_ids="799067"/>
 	<report_to id="11291" start_npc_ids="798926" end_npc_ids="799092"/>
@@ -292,6 +293,7 @@
 	<report_to id="30034" start_npc_ids="798903" end_npc_ids="799032"/>
 	<report_to id="30036" start_npc_ids="798903" end_npc_ids="799032"/>
 	<report_to id="30038" start_npc_ids="798903" end_npc_ids="799032"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="11004" start_npc_ids="798933"/>
 	<item_collecting id="11011" start_npc_ids="799071"/>
@@ -390,6 +392,8 @@
 	<item_collecting id="38503" start_npc_ids="799086"/>
 	<item_collecting id="38505" start_npc_ids="799085"/>
 	<item_collecting id="38506" start_npc_ids="799086"/>
+	
+	<!-- RELIC REWARDS -->
 	<relic_rewards id="11279" start_npc_ids="799945 205553"/>
 	<relic_rewards id="11280" start_npc_ids="799946 205554"/>
 	<relic_rewards id="11281" start_npc_ids="799947 205555"/>
@@ -398,6 +402,7 @@
 	<relic_rewards id="11284" start_npc_ids="799954 205540"/>
 	<relic_rewards id="11285" start_npc_ids="799955 205541"/>
 	<relic_rewards id="11286" start_npc_ids="799956 205542"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="11002" start_npc_ids="798939"/>
 	<monster_hunt id="11023" start_npc_ids="798951"/>
@@ -458,5 +463,7 @@
 	<monster_hunt id="11316" start_npc_ids="799043"/>
 	<monster_hunt id="11317" start_npc_ids="799049"/>
 	<monster_hunt id="11318" start_npc_ids="799049"/>
+	
+	<!-- KILL IN WORLD -->
 	<kill_in_world id="39022" end_npc_ids="799552" worlds="210050000" amount="5" invasion_world="210050000"/>
 </quest_scripts>

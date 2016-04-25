@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			30500 [SCRIPT] Desperation
 			30501 [REMOVED] [Group] Infiltrating Rentus
 			30502 [REMOVED] [Group] Conquer the Vasharti
@@ -37,7 +37,8 @@
 			30565 [XML] [Spy] Reuniting the Reians
 			30566 [XML] [Spy/Group] Recapture Rentus Base
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="30507" start_npc_ids="799543" end_npc_ids="790001"/>
 	<report_to id="30508" start_npc_ids="790001" end_npc_ids="799543"/>

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,32 +13,28 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Majka, Bobobear
+ * @modified Pad
  */
 
 public class ReportOnLevelUp extends QuestHandler {
 
-	private final Set<Integer> endNpcs = new HashSet<>();
-	@SuppressWarnings("unused")
-	private final int endDialog;
+	private final Set<Integer> endNpcIds = new HashSet<>();
 
 	/**
 	 * @param id
 	 * @param endNpcIds
-	 * @param endDialog
 	 */
-	public ReportOnLevelUp(int questId, List<Integer> endNpcIds, int endDialog) {
+	public ReportOnLevelUp(int questId, List<Integer> endNpcIds) {
 		super(questId);
 		if (endNpcIds != null) {
-			endNpcs.addAll(endNpcIds);
-			endNpcs.remove(0);
+			this.endNpcIds.addAll(endNpcIds);
 		}
-		this.endDialog = endDialog;
 	}
 
 	@Override
 	public void register() {
-		for (Integer endNpc : endNpcs)
-			qe.registerQuestNpc(endNpc).addOnTalkEvent(getQuestId());
+		for (Integer endNpcId : endNpcIds)
+			qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnLevelUp(questId);
@@ -47,18 +42,36 @@ public class ReportOnLevelUp extends QuestHandler {
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		int targetId = env.getTargetId();
 
 		if (qs == null)
 			return false;
-
-		int targetId = env.getTargetId();
-
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (endNpcs.contains(targetId)) {
+			if (endNpcIds.contains(targetId))
 				return sendQuestEndDialog(env);
-			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		return startQuest(env);
+	}
+
+	@Override
+	public boolean onLvlUpEvent(QuestEnv env) {
+		return startQuest(env);
+	}
+
+	private boolean startQuest(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null) {
+			env.setQuestId(questId);
+			env.setPlayer(player);
+			return QuestService.startQuest(env, QuestStatus.REWARD);
 		}
 		return false;
 	}
@@ -67,35 +80,8 @@ public class ReportOnLevelUp extends QuestHandler {
 	public HashSet<Integer> getNpcIds() {
 		if (constantSpawns == null) {
 			constantSpawns = new HashSet<>();
-			if (endNpcs != null)
-				constantSpawns.addAll(endNpcs);
+			constantSpawns.addAll(endNpcIds);
 		}
 		return constantSpawns;
-	}
-
-	@Override
-	public boolean onEnterWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null && player.getLevel() >= DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getMinlevelPermitted()) {
-			env.setQuestId(questId);
-			env.setPlayer(player);
-			if (QuestService.startQuest(env, QuestStatus.REWARD))
-				return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null && player.getLevel() >= DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getMinlevelPermitted()) {
-			env.setQuestId(questId);
-			env.setPlayer(player);
-			if (QuestService.startQuest(env, QuestStatus.REWARD))
-				return true;
-		}
-		return false;
 	}
 }

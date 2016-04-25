@@ -89,6 +89,7 @@
 			80303 [TODO] Event/Daily] Shove-l It
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="18800" start_npc_ids="798458" end_npc_ids="830365"/>
 	<report_to id="18801" start_npc_ids="830001" end_npc_ids="830005"/>
@@ -102,6 +103,7 @@
 	<report_to id="18845" start_npc_ids="798458" end_npc_ids="830365"/>
 	<report_to id="18846" start_npc_ids="830205" end_npc_ids="798455"/>
 	<report_to id="80269" start_npc_ids="831172" end_npc_ids="831174"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="18812" start_npc_ids="830522"/>
 	<item_collecting id="18813" start_npc_ids="830522"/>
@@ -125,10 +127,13 @@
 	<item_collecting id="18844" start_npc_ids="830192"/>
 	<item_collecting id="18848" start_npc_ids="830365"/>
 	<item_collecting id="50007" start_npc_ids="831032 831038"/>
+	
+	<!-- RELIC REWARDS -->
 	<relic_rewards id="18849" start_npc_ids="831252"/>
 	<relic_rewards id="18850" start_npc_ids="831210"/>
+	
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order end_npc_id="830655" id="18833"/>
-	<item_order end_npc_id="830655" id="18835"/>
-	<item_order end_npc_id="830655" id="18837"/>
+	<item_order id="18833" end_npc_id="830655"/>
+	<item_order id="18835" end_npc_id="830655"/>
+	<item_order id="18837" end_npc_id="830655"/>
 </quest_scripts>

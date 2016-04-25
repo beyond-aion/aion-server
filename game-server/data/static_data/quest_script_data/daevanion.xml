@@ -67,13 +67,15 @@
 			80311 [XML] Thank You Gift
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="80310" start_npc_ids="831384" end_npc_ids="831384">
-		<npc_infos var="0" npc_id="831384" quest_dialog="1003" close_dialog="1009"/>
+	<report_to_many id="80310" start_npc_ids="831384">
+		<npc_infos npc_ids="831384" quest_dialog="1003"/>
 	</report_to_many>
-	<report_to_many id="80311" start_npc_ids="831387" end_npc_ids="831387">
-		<npc_infos var="0" npc_id="831387" quest_dialog="1003" close_dialog="1009"/>
+	<report_to_many id="80311" start_npc_ids="831387">
+		<npc_infos npc_ids="831387" quest_dialog="1003"/>
 	</report_to_many>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1991" start_npc_ids="203771"/>
 	<item_collecting id="1997" start_npc_ids="203771"/>

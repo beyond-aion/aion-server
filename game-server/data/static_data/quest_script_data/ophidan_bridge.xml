@@ -14,11 +14,13 @@
 			26979 [XML] Defend the Advance Route to the Last Soldiers
 		[END] SUMMARY
 	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to id="16970" start_npc_ids="801762" end_npc_ids="801763"/>
 	<report_to id="16979" start_npc_ids="801762" end_npc_ids="801763"/>
 	<report_to id="26970" start_npc_ids="801764" end_npc_ids="801765"/>
 	<report_to id="26979" start_npc_ids="802026" end_npc_ids="801764"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="16971" start_npc_ids="801763" end_npc_ids="801762"/>
 	<monster_hunt id="16972" start_npc_ids="801762"/>

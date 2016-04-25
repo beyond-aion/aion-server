@@ -23,6 +23,7 @@
 			26988 [XML] [Spy] Expunge the Expeditionary Squad
 		[END] SUMMARY
 	-->
+	
 	<!-- MONSTER HUNT -->
 	<monster_hunt id="16986" start_npc_ids="804862" end_npc_ids="804864"/>
 	<monster_hunt id="16988" start_npc_ids="801953" end_npc_ids="804865"/>

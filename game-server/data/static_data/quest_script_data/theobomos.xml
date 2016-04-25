@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
-<!--
-  [BEGIN] SUMMARY
+	<!--
+  		[BEGIN] SUMMARY
 			1091 [SCRIPT] A Request From Atropos
 			1092 [SCRIPT] Josnack's Dilemma
 			1093 [SCRIPT] The Calydon Ruins
@@ -127,15 +127,17 @@
 			80141 [TODO] [Event] Secure the Warped Rift
 			80260 [XML] [Event] Abundant Cooking Ingredients
 		[END] SUMMARY
--->
+	-->
+	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="49000" start_npc_ids="800170" end_npc_ids="800502">
-		<npc_infos var="0" npc_id="800503" quest_dialog="1352"/>
+		<npc_infos npc_ids="800503" quest_dialog="1352"/>
 	</report_to_many>
 	<report_to_many id="49003" start_npc_ids="800502" end_npc_ids="800505">
-		<npc_infos var="0" npc_id="800511" quest_dialog="1352"/>
+		<npc_infos npc_ids="800511" quest_dialog="1352"/>
 	</report_to_many>
 	<report_to id="49010" start_npc_ids="800503" end_npc_ids="800502"/>
+	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="3003" start_npc_ids="798137"/>
 	<item_collecting id="3004" start_npc_ids="798136"/>
@@ -174,6 +176,7 @@
 	<item_collecting id="3114" start_npc_ids="798170"/>
 	<item_collecting id="3115" start_npc_ids="798170"/>
 	<item_collecting id="80140" start_npc_ids="830243"/>
+	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="3002" start_npc_ids="798132"/>
 	<monster_hunt id="3005" start_npc_ids="798138"/>
@@ -200,12 +203,13 @@
 	<monster_hunt id="3111" start_npc_ids="798154"/>
 	<monster_hunt id="3113" start_npc_ids="798225"/>
 	<monster_hunt id="3121" start_npc_ids="798155" end_npc_ids="798225"/>
-	<monster_hunt id="39007" start_npc_ids="0" end_npc_ids="800500" invasion_world="210060000"/>
-	<monster_hunt id="39009" start_npc_ids="0" end_npc_ids="800500" invasion_world="210060000"/>
+	<monster_hunt id="39007" end_npc_ids="800500" invasion_world="210060000"/>
+	<monster_hunt id="39009" end_npc_ids="800500" invasion_world="210060000"/>
 	<monster_hunt id="49001" start_npc_ids="800502"/>
 	<monster_hunt id="49002" start_npc_ids="800502"/>
 	<monster_hunt id="49004" start_npc_ids="800505" end_npc_ids="800502"/>
-	<monster_hunt id="49005" start_npc_ids="0" end_npc_ids="800502" invasion_world="210060000"/>
+	<monster_hunt id="49005" end_npc_ids="800502" invasion_world="210060000"/>
+	
 	<!-- KILL IN WORLD -->
 	<kill_in_world id="39008" end_npc_ids="800500" worlds="210060000" amount="5" invasion_world="210060000"/>
 	<kill_in_world id="49006" end_npc_ids="800502" worlds="210060000" amount="5" invasion_world="210060000"/>
