@@ -15,4 +15,9 @@ public class QueuedNpcSkillEntry extends NpcSkillTemplateEntry {
 	public boolean isQueued() {
 		return true;
 	}
+
+	@Override
+	public boolean ignoreNextSkillTime() {
+		return ((QueuedNpcSkillTemplate) getTemplate()).isIgnoreNextSkillTime();
+	}
 }
