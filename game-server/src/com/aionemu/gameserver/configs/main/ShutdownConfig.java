@@ -16,7 +16,7 @@ public class ShutdownConfig {
 	/**
 	 * Shutdown Hook delay.
 	 */
-	@Property(key = "gameserver.shutdown.delay", defaultValue = "60")
+	@Property(key = "gameserver.shutdown.delay", defaultValue = "120")
 	public static int HOOK_DELAY;
 
 	/**
