@@ -34,11 +34,18 @@ public class NpcSkill extends AdminCommand {
 
 		StringBuilder strbld = new StringBuilder("-list of skills:\n");
 
-		List<NpcSkillTemplate> list = DataManager.NPC_SKILL_DATA.getNpcSkillList(target.getNpcId()).getNpcSkills();
+		List<NpcSkillTemplate> list = null;
+		if (DataManager.NPC_SKILL_DATA.getNpcSkillList(target.getNpcId()) != null) {
+			list = DataManager.NPC_SKILL_DATA.getNpcSkillList(target.getNpcId()).getNpcSkills();
+		}
 
-		for (NpcSkillTemplate skill : list)
-			strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillId() + ".\n");
-		showAllLines(admin, strbld.toString());
+		if (list != null && !list.isEmpty()) {
+			for (NpcSkillTemplate skill : list)
+				strbld.append("    level " + skill.getSkillLevel() + " of " + skill.getSkillId() + ", " + skill.getProbability() + "% prob and " + skill.getCooldown() +"ms cd.\n");
+			showAllLines(admin, strbld.toString());
+		} else {
+			PacketSendUtility.sendMessage(admin, "This npc does not have any skills.");
+		}
 	}
 
 	private void showAllLines(Player admin, String str) {

@@ -80,23 +80,6 @@ public class SkillAttackManager {
 			if (npcAI.isLogging()) {
 				AI2Logger.info(npcAI, "Using skill " + skillId + " level: " + skillLevel + " duration: " + template.getDuration());
 			}
-			switch (template.getSubType()) {
-				case BUFF:
-					switch (template.getProperties().getFirstTarget()) {
-						case ME:
-							if (owner.getEffectController().isAbnormalPresentBySkillId(skillId)) {
-								afterUseSkill(npcAI);
-								return;
-							}
-							break;
-						default:
-							if (target.getEffectController().isAbnormalPresentBySkillId(skillId)) {
-								afterUseSkill(npcAI);
-								return;
-							}
-					}
-					break;
-			}
 			if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 				|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 				|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
@@ -186,15 +169,17 @@ public class SkillAttackManager {
 		}
 
 		Npc owner = npcAI.getOwner();
-		NpcSkillList skillList = owner.getSkillList();
-		if (skillList == null || skillList.size() == 0) {
-			return null;
-		}
 
 		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
 		if (queuedSkill != null && queuedSkill.ignoreNextSkillTime() && isReady(owner, queuedSkill)) {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
+
+		NpcSkillList skillList = owner.getSkillList();
+		if (skillList == null || skillList.size() == 0) {
+			return null;
+		}
+
 		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent()) && owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
