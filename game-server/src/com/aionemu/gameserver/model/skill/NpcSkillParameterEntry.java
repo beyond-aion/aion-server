@@ -110,4 +110,9 @@ public class NpcSkillParameterEntry extends NpcSkillEntry {
 	public boolean isQueued() {
 		return false;
 	}
+
+	@Override
+	public boolean ignoreNextSkillTime() {
+		return false;
+	}
 }

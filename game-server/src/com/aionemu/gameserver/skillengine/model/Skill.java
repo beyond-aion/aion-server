@@ -297,6 +297,8 @@ public class Skill {
 			Npc npc = (Npc) effector;
 			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
 			if (lastSkill != null) {
+				lastSkill.setLastTimeUsed();
+				npc.getGameStats().setNextSkillTime(lastSkill.getNextSkillTime());
 				lastSkill.fireOnStartCastEvents(npc);
 			}
 		}

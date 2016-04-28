@@ -300,12 +300,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.info(owner.getAi2(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
 		}
-		int nextAttack = 750;
-		if (this instanceof TrapGameStats || this instanceof SummonedObjectGameStats) {
-			nextAttack = 0;
-		} else if (lastAttackTime == 0 && owner.getTarget() instanceof Creature
-				&& !MathUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
-			nextAttack = 0;
+		int nextAttack = 0;
+		if (lastAttackTime == 0 && owner.getTarget() instanceof Creature
+				&& MathUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
+			nextAttack = 750;
 		}
 		if (attackDelay < attackSpeed) {
 			nextAttack = (int) (attackSpeed - attackDelay);
@@ -385,4 +383,13 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		this.lastGeoZUpdate = lastGeoZUpdate;
 	}
 
+	public void resetFightStats() {
+		lastAttackTime = 0;
+		lastAttackedTime = 0;
+		lastChangeTarget = 0;
+		fightStartingTime = 0;
+		nextAttackTime = 0;
+		lastSkillTime = 0;
+		nextSkillTime = 0;
+	}
 }

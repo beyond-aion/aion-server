@@ -80,23 +80,6 @@ public class SkillAttackManager {
 			if (npcAI.isLogging()) {
 				AI2Logger.info(npcAI, "Using skill " + skillId + " level: " + skillLevel + " duration: " + template.getDuration());
 			}
-			switch (template.getSubType()) {
-				case BUFF:
-					switch (template.getProperties().getFirstTarget()) {
-						case ME:
-							if (owner.getEffectController().isAbnormalPresentBySkillId(skillId)) {
-								afterUseSkill(npcAI);
-								return;
-							}
-							break;
-						default:
-							if (target.getEffectController().isAbnormalPresentBySkillId(skillId)) {
-								afterUseSkill(npcAI);
-								return;
-							}
-					}
-					break;
-			}
 			if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 				|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 				|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
@@ -186,13 +169,18 @@ public class SkillAttackManager {
 		}
 
 		Npc owner = npcAI.getOwner();
+
+		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+		if (queuedSkill != null && queuedSkill.ignoreNextSkillTime() && isReady(owner, queuedSkill)) {
+			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
+		}
+
 		NpcSkillList skillList = owner.getSkillList();
 		if (skillList == null || skillList.size() == 0) {
 			return null;
 		}
 
-		if (owner.getGameStats().canUseNextSkill()) {
-			NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent()) && owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 			}
@@ -226,7 +214,6 @@ public class SkillAttackManager {
 						}
 					}
 				}
-
 			}
 		}
 		return null;
@@ -238,12 +225,10 @@ public class SkillAttackManager {
 			return null;
 		}
 		owner.getGameStats().setLastSkill(entry);
-		owner.getGameStats().setNextSkillTime(entry.getNextSkillTime());
-		entry.setLastTimeUsed();
 		return entry;
 	}
 
-	//Check for Bind/Silence/Fear/stun etc debuffs on npc
+	// check for bind/silence/fear/stun etc debuffs on npc
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
 		if (entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
 			if (entry.conditionReady(owner)) {
@@ -262,22 +247,25 @@ public class SkillAttackManager {
 	}
 	
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
-		if (owner.getTarget() != null && owner.getTarget() instanceof Creature) {
-			Creature target = (Creature) owner.getTarget();
-			if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
-				return true;
-			}
-			SkillTemplate template = entry.getSkillTemplate();
-			Properties prop = template.getProperties();
-			if (prop.getFirstTarget() != FirstTargetAttribute.ME && prop.getTargetType() != TargetRangeAttribute.AREA) {
-				float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
-				float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
-				if (!MathUtil.isIn3dRange(owner, owner.getTarget(), prop.getFirstTargetRange() + collision + targetCollision)) {
+		SkillTemplate template = entry.getSkillTemplate();
+		Properties prop = template.getProperties();
+		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
+				&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
+			if (owner.getTarget() instanceof Creature) {
+				Creature target = (Creature) owner.getTarget();
+				if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
 					return true;
 				}
+				if (prop.getTargetType() != TargetRangeAttribute.AREA) {
+					float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
+					float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
+					if (!MathUtil.isIn3dRange(owner, target, prop.getFirstTargetRange() + collision + targetCollision)) {
+						return true;
+					}
+				}
+			} else {
+				return true;
 			}
-		} else {
-			return true;
 		}
 		return false;
 	}

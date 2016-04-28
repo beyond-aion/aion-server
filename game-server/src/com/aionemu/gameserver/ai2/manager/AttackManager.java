@@ -21,6 +21,7 @@ public class AttackManager {
 			AI2Logger.info(npcAI, "AttackManager: startAttacking");
 		}
 		npcAI.getOwner().getGameStats().setFightStartingTime();
+		npcAI.getOwner().getQueuedSkills().clear();
 		EmoteManager.emoteStartAttacking(npcAI.getOwner());
 		scheduleNextAttack(npcAI);
 	}

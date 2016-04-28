@@ -753,7 +753,7 @@
 		</spawn>
 		<!-- Captain Mituna -->
 		<spawn npc_id="216850" respawn_time="295">
-			<spot x="1565.19" y="1944.87" z="2909.5" h="116" walker_id="10B5BA5023313B3D2952644289E8C080F62189C0"/>
+			<spot x="1565.19" y="1944.87" z="2909.5" h="116" walker_id="10B5BA5023313B3D2952644289E8C080F62189C0" walker_index="1"/>
 		</spawn>
 		<!-- Captain Semund -->
 		<spawn npc_id="253016" respawn_time="1800">
@@ -3067,6 +3067,7 @@
 		</spawn>
 		<!-- Makarah Adjutant -->
 		<spawn npc_id="216851" respawn_time="295">
+			<spot x="1565.19" y="1944.87" z="2909.5" h="116" walker_id="10B5BA5023313B3D2952644289E8C080F62189C0"/>
 			<spot x="1565.19" y="1944.87" z="2909.5" h="116" walker_id="10B5BA5023313B3D2952644289E8C080F62189C0"/>
 		</spawn>
 		<!-- Makidna -->

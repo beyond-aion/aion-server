@@ -721,8 +721,10 @@ public class StatFunctions {
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
 
-			int levelDiff = target.getLevel() - attacker.getLevel();
-			damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+			if (attacker instanceof Player) { // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
+				int levelDiff = target.getLevel() - attacker.getLevel();
+				damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+			}
 			switch (element) {
 				case NONE:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;

@@ -28,12 +28,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 
-	private AtomicBoolean isUnderCharge = new AtomicBoolean(false);
+	private AtomicBoolean isUnderCharge = new AtomicBoolean();
 	private List<Future<?>> spawnTasks = new FastTable<>();
 	private List<Npc> assaulter = new FastTable<>();
 	protected List<Npc> support = new FastTable<>();
 	protected int chargeCount = 0;
-	private int attackCount;
+	private int attackCount = 14;
 
 	protected abstract int getAttackMsg();
 
@@ -56,7 +56,7 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		attackCount++;
-		if (attackCount == 10) {
+		if (attackCount >= 15) {
 			attackCount = 0;
 			shout(getAttackMsg());
 		}
@@ -90,71 +90,62 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 	}
 
 	private void handleCharging(final Player player) {
-		try {
-			final ItemUseObserver observer = new ItemUseObserver() {
+		final ItemUseObserver observer = new ItemUseObserver() {
 
-				@Override
-				public void abort() {
-					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
-					player.getObserveController().removeObserver(this);
-				}
-			};
-			final int delay = 20000;
-			player.getObserveController().attach(observer);
-			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
-			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
-			shout(getChargeMsg());
-			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 2));
-					player.getObserveController().removeObserver(observer);
-					player.getInventory().decreaseByItemId(164000289, 1);
-					handleChargeComplete();
-					phaseAttack();
-					chargeCount++;
-				}
-			}, delay));
-		} finally {
-			isUnderCharge.set(false);
-		}
-	}
-
-	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int delay, final String walkerId) {
-		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void abort() {
+				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
+				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
+				player.getObserveController().removeObserver(this);
+				isUnderCharge.set(false);
+			}
+		};
+		player.getObserveController().attach(observer);
+		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 1));
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
+		shout(getChargeMsg());
+		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
-					Npc npc = (Npc) spawn(npcId, x, y, z, h);
-					assaulter.add(npc);
-					npc.getSpawn().setWalkerId(walkerId);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
-					npc.setState(CreatureState.WALKING);
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-				}
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
+				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 2));
+				player.getObserveController().removeObserver(observer);
+				player.getInventory().decreaseByItemId(164000289, 1);
+				handleChargeComplete();
+				phaseAttack();
+				chargeCount++;
+				isUnderCharge.set(false);
 			}
-		}, delay);
-		spawnTasks.add(task);
+		}, 20000));
+	}
+
+	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int delay, final String walkerId) {
+		spawnTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isAlreadyDead()) {
+				Npc npc = (Npc) spawn(npcId, x, y, z, h);
+				assaulter.add(npc);
+				npc.getSpawn().setWalkerId(walkerId);
+				WalkManager.startWalking((NpcAI2) npc.getAi2());
+				npc.setState(CreatureState.WALKING);
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+			}
+		}, delay));
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
+		for (Npc npc : npcs)
 			if (npc != null && !npc.getLifeStats().isAlreadyDead())
 				npc.getController().onDelete();
-		}
 	}
 
 	@Override
 	protected void handleDespawned() {
-		for (Future<?> task : spawnTasks) {
+		for (Future<?> task : spawnTasks)
 			if (task != null && !task.isCancelled())
 				task.cancel(true);
-		}
+
 		deleteNpcs(support);
 		deleteNpcs(assaulter);
 		super.handleDespawned();
