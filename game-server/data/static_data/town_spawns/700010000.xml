@@ -161,26 +161,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="684.3392" y="2241.6287" z="159.97075" h="3"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="672.63696" y="2237.375" z="159.74904" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="670.6207" y="2237.2715" z="159.74904" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="668.5913" y="2237.253" z="159.74904" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="702.8058" y="2227.7083" z="159.74904" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="702.766" y="2225.4055" z="159.74904" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="688.02875" y="2241.5703" z="160.00111" h="3"/>
@@ -392,26 +372,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="236.55617" y="2042.1665" z="122.00517"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="247.73428" y="2042.5504" z="121.78344" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="249.76138" y="2042.5819" z="121.78344" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="251.82852" y="2042.6141" z="121.78344" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="222.41724" y="2059.813" z="121.78344" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="223.43607" y="2061.905" z="121.78344" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -625,26 +585,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="273.21326" y="2643.469" z="265.7314"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="285.64645" y="2644.7642" z="265.5097" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="287.67355" y="2644.7954" z="265.5097" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="289.7407" y="2644.8276" z="265.5097" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="256.91504" y="2655.7993" z="265.5097" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="257.93384" y="2657.8914" z="265.5097" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="269.63586" y="2643.5632" z="265.76178" h="6"/>
@@ -856,26 +796,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="964.9485" y="2617.1074" z="106.43081" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="954.916" y="2624.3843" z="106.2091" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="953.5107" y="2625.8457" z="106.2091" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="952.07733" y="2627.3354" z="106.2091" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="964.8022" y="2596.1714" z="106.2091" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="962.5773" y="2595.4897" z="106.2091" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -1089,26 +1009,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="700.95996" y="1082.6393" z="95.7182" h="8"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="711.5372" y="1079.1876" z="95.496475" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="713.4847" y="1079.17" z="95.496475" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="715.4887" y="1079.1058" z="95.496475" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="694.1091" y="1104.3743" z="95.496475" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="695.695" y="1106.0768" z="95.496475" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="697.64044" y="1084.2512" z="95.74855" h="12"/>
@@ -1320,26 +1220,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="785.37006" y="1526.1149" z="101.87348" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="786.0878" y="1536.9692" z="101.65176" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="786.0918" y="1538.9963" z="101.65176" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="786.09564" y="1541.064" z="101.65176" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="770.1314" y="1513.0792" z="101.65176" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="768.05756" y="1514.1344" z="101.65176" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -1553,26 +1433,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="387.21152" y="1415.106" z="86.02629" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="390.9312" y="1425.4479" z="85.804565" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="391.1212" y="1427.485" z="85.804565" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="391.37082" y="1429.5286" z="85.804565" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="368.88766" y="1407.5446" z="85.804565" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="367.21304" y="1409.16" z="85.804565" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="385.542" y="1411.815" z="86.05664" h="13"/>
@@ -1784,26 +1644,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="281.45486" y="401.64813" z="128.86876" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="285.87183" y="391.2736" z="128.64703" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="287.36246" y="389.83276" z="128.64703" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="288.85184" y="388.3575" z="128.64703" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="289.1636" y="419.65173" z="128.64703" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="291.49045" y="419.65298" z="128.64703" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -2017,26 +1857,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="544.41974" y="649.02374" z="86.17934" h="15"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="547.51605" y="659.86597" z="85.9576" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="547.26434" y="661.92377" z="85.9576" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="547.0353" y="664.00757" z="85.9576" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="525.1631" y="638.02277" z="85.9576" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="523.19403" y="639.2542" z="85.9576" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="543.04346" y="645.59985" z="86.209694" h="13"/>
@@ -2248,26 +2068,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="709.9025" y="324.4258" z="121.04835" h="8"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="699.1825" y="320.92984" z="120.82661" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="697.61725" y="319.57053" z="120.82661" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="696.0178" y="318.2154" z="120.82661" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="729.79095" y="314.61298" z="120.82661" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="729.8711" y="312.292" z="120.82661" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -2481,26 +2281,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="1261.5466" y="1176.4656" z="103.40669" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="1258.2383" y="1187.245" z="103.18496" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="1256.9065" y="1188.8337" z="103.18496" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="1255.5795" y="1190.4565" z="103.18496" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1251.3882" y="1156.7515" z="103.18496" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1249.0662" y="1156.7118" z="103.18496" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="1262.2571" y="1172.8445" z="103.43705" h="15"/>
@@ -2712,26 +2492,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="1020.2919" y="814.4859" z="82.689064" h="10"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="1029.4558" y="806.483" z="82.46733" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="1031.438" y="805.87585" z="82.46733" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="1033.4348" y="805.2376" z="82.46733" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1018.5928" y="835.7878" z="82.46733" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1020.3162" y="837.4655" z="82.46733" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -2945,26 +2705,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="1261.2423" y="520.029" z="110.17815" h="6"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="1272.2483" y="514.2931" z="109.95641" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="1274.3212" y="514.32825" z="109.95641" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="1276.4175" y="514.3383" z="109.95641" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1252.8138" y="538.77026" z="109.95641" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1253.9346" y="540.89844" z="109.95641" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="1258.6251" y="521.9943" z="110.2085" h="12"/>
@@ -3176,26 +2916,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2529.0369" y="1627.5769" z="181.37375" h="8"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2535.9084" y="1607.6575" z="181.25066" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2535.9087" y="1609.7516" z="181.24776" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2535.896" y="1611.8707" z="181.24776" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2516.561" y="1636.2157" z="181.47289" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2518.6265" y="1636.2032" z="181.43236" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -3409,26 +3129,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2058.5386" y="1329.6682" z="78.26119" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2057.0063" y="1318.4244" z="78.03945" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2058.029" y="1316.502" z="78.03945" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2059.0215" y="1314.5844" z="78.03945" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2084.002" y="1316.8823" z="78.03945" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2085.9846" y="1317.8907" z="78.03945" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="2058.644" y="1332.248" z="78.96525" h="15"/>
@@ -3640,26 +3340,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2007.6599" y="1960.4941" z="81.32778" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2001.087" y="1941.3622" z="81.10604" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2002.2927" y="1943.1285" z="81.10604" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2003.4855" y="1944.8823" z="81.10604" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1978.6298" y="1959.5372" z="81.10604" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1977.3844" y="1957.6941" z="81.10604" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -3873,26 +3553,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2062.1133" y="901.53815" z="85.747765" h="6"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2071.9658" y="904.4103" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2073.0542" y="906.2964" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2074.1543" y="908.1542" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2064.3755" y="928.90094" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2062.4697" y="930.0477" z="85.526024" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="2059.6985" y="900.25745" z="85.778114" h="6"/>
@@ -4104,26 +3764,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2758.6074" y="1071.8805" z="192.33095" h="15"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2772.548" y="1088.8265" z="192.20786" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2770.8838" y="1087.4886" z="192.20496" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2769.2356" y="1086.2144" z="192.20496" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2760.9695" y="1057.6857" z="192.43008" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2759.6719" y="1059.3279" z="192.38956" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -4337,26 +3977,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2366.738" y="2190.8394" z="137.45499" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2350.528" y="2180.8127" z="137.3319" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2352.6052" y="2181.0847" z="137.329" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2354.6816" y="2181.3562" z="137.329" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2371.6055" y="2205.07" z="137.55412" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2371.8967" y="2202.9314" z="137.5136" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="2365.804" y="2187.7961" z="138.86058" h="14"/>
@@ -4568,26 +4188,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="1527.9081" y="2722.5522" z="85.285736" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="1512.4832" y="2709.607" z="85.063995" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="1514.4165" y="2710.3914" z="85.063995" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="1516.3337" y="2711.1912" z="85.063995" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1527.3175" y="2736.8809" z="85.063995" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1528.1521" y="2734.9138" z="85.063995" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -4801,26 +4401,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="1625.6165" y="2248.047" z="84.54466" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="1608.2783" y="2238.841" z="84.32292" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="1610.3336" y="2239.11" z="84.32292" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="1612.3777" y="2239.3577" z="84.32292" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="1629.8627" y="2261.611" z="84.32292" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="1630.1202" y="2259.5454" z="84.32292" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="1624.7722" y="2244.8777" z="85.34466" h="14"/>
@@ -5032,26 +4612,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2133.5261" y="434.6855" z="85.747765" h="10"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2127.0557" y="426.48495" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2127.1702" y="424.31027" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2127.2593" y="422.15308" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2151.7852" y="438.99725" z="85.526024" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2153.9326" y="437.9138" z="85.526024" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
@@ -5265,26 +4825,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2013.5948" y="2650.3674" z="157.22174"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2030.9989" y="2643.98" z="157.0" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2029.3262" y="2645.2544" z="157.0" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2027.6581" y="2646.5398" z="157.0" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2000.4752" y="2643.711" z="157.0" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2001.7493" y="2645.3477" z="157.0" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="2016.3643" y="2650.7095" z="157.99466"/>
@@ -5497,26 +5037,6 @@
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2556.5127" y="668.056" z="138.12347" h="14"/>
 				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2541.1692" y="656.00757" z="138.00038" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2543.269" y="656.6649" z="137.99748" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2545.3225" y="657.3216" z="137.99748" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2558.538" y="682.62994" z="138.22261" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2559.146" y="680.6403" z="138.18208" h="14"/>
-				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">
 					<spot x="2556.0413" y="665.57715" z="138.12347" h="14"/>
@@ -5728,26 +5248,6 @@
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831210" respawn_time="295">
 					<spot x="2487.1328" y="2605.1377" z="183.61716" h="15"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831215" respawn_time="295">
-					<spot x="2495.1423" y="2622.7346" z="183.39542" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831216" respawn_time="295">
-					<spot x="2493.693" y="2621.2705" z="183.39542" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831217" respawn_time="295">
-					<spot x="2492.2441" y="2619.8088" z="183.39542" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831213" respawn_time="295">
-					<spot x="2493.0886" y="2592.8591" z="183.39542" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831214" respawn_time="295">
-					<spot x="2491.615" y="2594.313" z="183.39542" h="14"/>
 				</spawn>
 				<!-- Deployed Ancient Goblet Administrator -->
 				<spawn npc_id="831252" respawn_time="295">

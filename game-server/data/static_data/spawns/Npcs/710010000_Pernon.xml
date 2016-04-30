@@ -25,7 +25,7 @@
 			<spot x="722.44806" y="2095.3364" z="164.26404" random_walk="8"/>
 			<spot x="1613.0619" y="311.92545" z="79.44548" random_walk="8"/>
 			<spot x="2196.8706" y="2036.8414" z="238.625" random_walk="8"/>
-			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
+			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA" walker_index="1"/>
 			<spot x="2728.8018" y="281.5719" z="76.5" random_walk="8"/>
 		</spawn>
 		<!-- Agiella -->
@@ -520,7 +520,13 @@
 			<spot x="2762.0569" y="342.7539" z="76.5000" h="113"/>
 		</spawn>
 		<!-- Baby Brax -->
+		<spawn npc_id="219163" respawn_time="295">
+			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
+			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
+		</spawn>
+		<!-- Baby Brax -->
 		<spawn npc_id="219164" respawn_time="295">
+			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
 			<spot x="2441.24" y="435.53" z="97.22187" h="63" walker_id="59885CA7116EA964C1BBC30D0B7F6E1412AAF5BA"/>
 		</spawn>
 		<!-- Barbeta -->

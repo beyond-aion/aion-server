@@ -165,26 +165,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="891.01337" y="910.48883" z="135.9367" h="13"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="883.7423" y="889.0162" z="135.97295" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="885.313" y="890.36005" z="135.81412" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="886.8848" y="891.67914" z="135.6556" h="12"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="877.6396" y="924.5461" z="135.6191" h="10"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="879.61694" y="923.445" z="135.566" h="10"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701519" respawn_time="1800">
 					<spot x="844.403" y="889.5752" z="136.27438" h="14" static_id="1476"/>
@@ -233,31 +213,32 @@
 				</spawn>
 			</town_level>
 		</town_spawn>
+		<!-- Sunny Harbor Village -->
 		<town_spawn town_id="2002">
 			<town_level level="1">
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="1077.209" y="218.0639" z="74.34505" h="14"/>
+					<spot x="1077.209" y="218.0639" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="1060.4271" y="231.54897" z="74.8279" h="14"/>
+					<spot x="1060.4271" y="231.54897" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="1082.9136" y="222.64589" z="74.36765" h="14"/>
+					<spot x="1082.9136" y="222.64589" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="1078.0747" y="245.77174" z="75.243416" h="14"/>
+					<spot x="1078.0747" y="245.77174" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831223" respawn_time="295">
-					<spot x="1062.1276" y="225.75385" z="74.108025" h="14"/>
+					<spot x="1062.1276" y="225.75385" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831224" respawn_time="295">
-					<spot x="1063.4319" y="224.04433" z="74.01086" h="14"/>
+					<spot x="1063.4319" y="224.04433" z="73.125" h="74"/>
 				</spawn>
 			</town_level>
 			<town_level level="2">
@@ -267,31 +248,31 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="1077.209" y="218.0639" z="74.34505" h="14"/>
+					<spot x="1077.209" y="218.0639" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="1060.4271" y="231.54897" z="74.8279" h="14"/>
+					<spot x="1060.4271" y="231.54897" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="1082.9136" y="222.64589" z="74.36765" h="14"/>
+					<spot x="1082.9136" y="222.64589" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="1078.0747" y="245.77174" z="75.243416" h="14"/>
+					<spot x="1078.0747" y="245.77174" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831227" respawn_time="295">
-					<spot x="1063.1693" y="244.76604" z="75.40104" h="14"/>
+					<spot x="1063.1693" y="244.76604" z="73.125" h="45"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831225" respawn_time="295">
-					<spot x="1062.1276" y="225.75385" z="74.108025" h="14"/>
+					<spot x="1062.1276" y="225.75385" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="1063.4319" y="224.04433" z="74.01086" h="14"/>
+					<spot x="1063.4319" y="224.04433" z="73.125" h="74"/>
 				</spawn>
 			</town_level>
 			<town_level level="3">
@@ -301,42 +282,42 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="1077.209" y="218.0639" z="74.34505" h="14"/>
+					<spot x="1077.209" y="218.0639" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="1060.4271" y="231.54897" z="74.8279" h="14"/>
+					<spot x="1060.4271" y="231.54897" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="1082.9136" y="222.64589" z="74.36765" h="14"/>
+					<spot x="1082.9136" y="222.64589" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="1078.0747" y="245.77174" z="75.243416" h="14"/>
+					<spot x="1078.0747" y="245.77174" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="1063.1693" y="244.76604" z="73.125" h="48"/>
+					<spot x="1063.1693" y="244.76604" z="73.125" h="45"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831228" respawn_time="295">
-					<spot x="1062.1276" y="225.75385" z="74.108025" h="14"/>
+					<spot x="1062.1276" y="225.75385" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="1063.4319" y="224.04433" z="74.01086" h="14"/>
+					<spot x="1063.4319" y="224.04433" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="1088.5773" y="228.92192" z="75.03205" h="14"/>
+					<spot x="1088.5773" y="228.92192" z="73.125" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="4">
 				<!-- Dye Plant -->
 				<spawn npc_id="701519" respawn_time="1800">
-					<spot x="966.32947" y="201.22995" z="77.75467" h="14" static_id="2112"/>
-					<spot x="1030.457" y="188.30591" z="74.782776" h="14" static_id="2110"/>
+					<spot x="966.4171" y="201.5560" z="77.3295" h="14" static_id="2112"/>
+					<spot x="1030.457" y="188.30591" z="73.6516" h="14" static_id="2110"/>
 					<spot x="1041.9579" y="266.43124" z="74.66589" h="14" static_id="2108"/>
 				</spawn>
 				<!-- Fireworks Reseller -->
@@ -345,35 +326,35 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="1077.209" y="218.0639" z="74.34505" h="6"/>
+					<spot x="1077.209" y="218.0639" z="73.125" h="6"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="1060.4271" y="231.54897" z="74.8279" h="15"/>
+					<spot x="1060.4271" y="231.54897" z="73.125" h="15"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="1082.9136" y="222.64589" z="74.36765" h="10"/>
+					<spot x="1082.9136" y="222.64589" z="73.125" h="10"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="1078.0747" y="245.77174" z="75.243416"/>
+					<spot x="1078.0747" y="245.77174" z="73.125"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="1083.7648" y="241.51561" z="73.125" h="69"/>
+					<spot x="1083.7648" y="241.51561" z="73.125" h="73"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="1063.1693" y="244.76604" z="75.40104" h="14"/>
+					<spot x="1063.1693" y="244.76604" z="73.125" h="45"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831231" respawn_time="295">
-					<spot x="1062.1276" y="225.75385" z="74.108025" h="14"/>
+					<spot x="1062.1276" y="225.75385" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="1063.4319" y="224.04433" z="74.01086" h="14"/>
+					<spot x="1063.4319" y="224.04433" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
@@ -385,43 +366,23 @@
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="1088.5773" y="228.92192" z="75.03205" h="14"/>
+					<spot x="1088.5773" y="228.92192" z="73.125" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="5">
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831235" respawn_time="295">
-					<spot x="1070.7035" y="218.61601" z="74.33975"/>
+					<spot x="1070.7035" y="218.61601" z="73.125" h="86"/>
 				</spawn>
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
-					<spot x="1067.2218" y="219.36957" z="74.77205" h="6"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1057.0459" y="236.73445" z="74.8083" h="15"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1057.1018" y="234.66814" z="74.64946" h="15"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1057.1377" y="232.61646" z="74.49094" h="15"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1087.4423" y="220.3728" z="74.454445" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1085.3422" y="219.52905" z="74.401344" h="8"/>
+					<spot x="1067.2218" y="219.36957" z="73.125" h="86"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701519" respawn_time="1800">
-					<spot x="966.32947" y="201.22995" z="77.75467" h="14"/>
-					<spot x="1030.457" y="188.30591" z="74.782776" h="14"/>
-					<spot x="1041.9579" y="266.43124" z="74.66589" h="14"/>
+					<spot x="966.4171" y="201.5560" z="77.3295" h="14" static_id="2112"/>
+					<spot x="1030.457" y="188.30591" z="73.6516" h="14" static_id="2110"/>
+					<spot x="1041.9579" y="266.43124" z="74.66589" h="14" static_id="2108"/>
 				</spawn>
 				<!-- Fireworks Reseller -->
 				<spawn npc_id="730680" respawn_time="295">
@@ -433,35 +394,35 @@
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="1083.7648" y="241.51561" z="75.41391" h="12"/>
+					<spot x="1083.7648" y="241.51561" z="73.125" h="73"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="1063.1632" y="244.81108" z="75.40433" h="12"/>
+					<spot x="1063.1632" y="244.81108" z="73.125" h="45"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831234" respawn_time="295">
-					<spot x="1062.1544" y="225.7399" z="74.108" h="12"/>
+					<spot x="1062.1544" y="225.7399" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="1063.458" y="224.03091" z="74.01084" h="12"/>
+					<spot x="1063.458" y="224.03091" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="1071.1443" y="246.86041" z="75.97941" h="8"/>
+					<spot x="1071.1443" y="246.86041" z="73.125" h="8"/>
 				</spawn>
 				<!-- Village Special Guestbloom Merchant -->
 				<spawn npc_id="831236" respawn_time="295">
-					<spot x="1064.5127" y="222.18846" z="74.12425" h="12"/>
+					<spot x="1064.7562" y="222.6129" z="73.125" h="74"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="1088.6244" y="236.83212" z="75.62504" h="14"/>
+					<spot x="1088.6244" y="236.83212" z="73.125" h="14"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="1088.5773" y="228.92192" z="75.03205" h="15"/>
+					<spot x="1088.5773" y="228.92192" z="73.125" h="15"/>
 				</spawn>
 			</town_level>
 		</town_spawn>
@@ -628,26 +589,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="477.6076" y="381.0722" z="198.96567" h="13"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="458.28394" y="372.18158" z="199.0019"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="460.3473" y="372.05716" z="198.84308"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="462.3943" y="371.9141" z="198.68456"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="477.968" y="401.25842" z="198.64806" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="478.6255" y="399.09277" z="198.59496" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701519" respawn_time="1800">
@@ -861,26 +802,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="359.1568" y="1072.4124" z="168.44592" h="13"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="352.00818" y="1051.8698" z="168.48216" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="353.57886" y="1053.2136" z="168.32333" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="355.15073" y="1054.5327" z="168.16481" h="12"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="345.24042" y="1085.6094" z="168.12831" h="10"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="347.21777" y="1084.5083" z="168.07521" h="10"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701519" respawn_time="1800">
 					<spot x="306.10794" y="1143.4095" z="170.58246" h="14" static_id="2115"/>
@@ -929,31 +850,32 @@
 				</spawn>
 			</town_level>
 		</town_spawn>
+		<!-- Spire Isle Village -->
 		<town_spawn town_id="2005">
 			<town_level level="1">
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2180.3813" y="906.43445" z="79.53988" h="14"/>
+					<spot x="2180.3813" y="906.43445" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2180.608" y="885.51587" z="80.022736" h="14"/>
+					<spot x="2180.608" y="885.51587" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2173.3452" y="907.6545" z="79.562485" h="14"/>
+					<spot x="2173.3452" y="907.6545" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2157.8892" y="891.0537" z="80.43825" h="14"/>
+					<spot x="2157.8892" y="891.0537" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831223" respawn_time="295">
-					<spot x="2183.6934" y="889.3617" z="79.30286" h="14"/>
+					<spot x="2183.6934" y="889.3617" z="77.625" h="106"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831224" respawn_time="295">
-					<spot x="2184.2373" y="891.4421" z="79.20569" h="14"/>
+					<spot x="2184.2373" y="891.4421" z="77.625" h="116"/>
 				</spawn>
 			</town_level>
 			<town_level level="2">
@@ -963,31 +885,31 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2180.3813" y="906.43445" z="79.53988" h="14"/>
+					<spot x="2180.3813" y="906.43445" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2180.608" y="885.51587" z="80.022736" h="14"/>
+					<spot x="2180.608" y="885.51587" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2173.3452" y="907.6545" z="79.562485" h="14"/>
+					<spot x="2173.3452" y="907.6545" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2157.8892" y="891.0537" z="80.43825" h="14"/>
+					<spot x="2157.8892" y="891.0537" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831227" respawn_time="295">
-					<spot x="2167.9285" y="879.6478" z="80.59587" h="14"/>
+					<spot x="2167.9285" y="879.6478" z="77.625" h="91"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831225" respawn_time="295">
-					<spot x="2183.6934" y="889.3617" z="79.30286" h="14"/>
+					<spot x="2183.6934" y="889.3617" z="77.625" h="106"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2373" y="891.4421" z="79.20569" h="14"/>
+					<spot x="2184.2373" y="891.4421" z="77.625" h="116"/>
 				</spawn>
 			</town_level>
 			<town_level level="3">
@@ -997,35 +919,35 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2180.3813" y="906.43445" z="79.53988" h="14"/>
+					<spot x="2180.3813" y="906.43445" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2180.608" y="885.51587" z="80.022736" h="14"/>
+					<spot x="2180.608" y="885.51587" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2173.3452" y="907.6545" z="79.562485" h="14"/>
+					<spot x="2173.3452" y="907.6545" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2157.8892" y="891.0537" z="80.43825" h="14"/>
+					<spot x="2157.8892" y="891.0537" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2167.9285" y="879.6478" z="80.59587" h="14"/>
+					<spot x="2167.9285" y="879.6478" z="77.625" h="91"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831228" respawn_time="295">
-					<spot x="2183.6934" y="889.3617" z="79.30286" h="14"/>
+					<spot x="2183.6934" y="889.3617" z="77.625" h="106"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2373" y="891.4421" z="79.20569" h="14"/>
+					<spot x="2184.2373" y="891.4421" z="77.625" h="116"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2165.2507" y="908.8467" z="80.22688" h="14"/>
+					<spot x="2165.2507" y="908.8467" z="77.625" h="33"/>
 				</spawn>
 			</town_level>
 			<town_level level="4">
@@ -1041,77 +963,57 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2180.3813" y="906.43445" z="79.53988" h="14"/>
+					<spot x="2180.3813" y="906.43445" z="77.625" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2180.608" y="885.51587" z="80.022736" h="10"/>
+					<spot x="2180.608" y="885.51587" z="77.625" h="10"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2173.3452" y="907.6545" z="79.562485"/>
+					<spot x="2173.3452" y="907.6545" z="77.625"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2157.8892" y="891.0537" z="80.43825" h="15"/>
+					<spot x="2157.8892" y="891.0537" z="77.6255" h="15"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2157.9263" y="898.05634" z="80.60874" h="14"/>
+					<spot x="2157.9263" y="898.05634" z="77.625" h="114"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2167.9285" y="879.6478" z="80.59587" h="14"/>
+					<spot x="2167.9285" y="879.6478" z="77.625" h="91"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831231" respawn_time="295">
-					<spot x="2183.6934" y="889.3617" z="79.30286" h="14"/>
+					<spot x="2183.6934" y="889.3617" z="77.625" h="106"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2373" y="891.4421" z="79.20569" h="14"/>
+					<spot x="2184.2373" y="891.4421" z="77.625" h="116"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2161.0703" y="884.108" z="81.17211" h="14"/>
+					<spot x="2161.0703" y="884.108" z="77.625" h="78"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2159.3474" y="905.5864" z="80.81987" h="14"/>
+					<spot x="2159.3474" y="905.5864" z="77.625" h="46"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2165.2507" y="908.8467" z="80.22688" h="14"/>
+					<spot x="2165.2507" y="908.8467" z="77.625" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="5">
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831235" respawn_time="295">
-					<spot x="2184.0745" y="900.5837" z="79.534584" h="14"/>
+					<spot x="2184.0745" y="900.5837" z="77.625" h="5"/>
 				</spawn>
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
-					<spot x="2185.315" y="897.11084" z="79.96688" h="15"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2177.3418" y="878.4971" z="80.00313" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2178.9355" y="879.81335" z="79.84429" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2180.5303" y="881.10474" z="79.68577" h="12"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2175.9414" y="912.67535" z="79.64928" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2177.8994" y="911.54004" z="79.596176" h="8"/>
+					<spot x="2185.315" y="897.11084" z="77.625" h="5"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -1125,39 +1027,39 @@
 				</spawn>
 				<!-- Village Building Renovation Manager -->
 				<spawn npc_id="831237" respawn_time="295">
-					<spot x="2162.7197" y="882.7844" z="81.49512" h="10"/>
+					<spot x="2162.7197" y="882.7844" z="77.625" h="78"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2157.9263" y="898.05634" z="80.60874" h="15"/>
+					<spot x="2157.9263" y="898.05634" z="77.625" h="114"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2167.8967" y="879.6153" z="80.59916"/>
+					<spot x="2167.8967" y="879.6153" z="77.625" h="91"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831234" respawn_time="295">
-					<spot x="2183.6875" y="889.39124" z="79.30283" h="14"/>
+					<spot x="2183.6875" y="889.39124" z="77.625" h="106"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2317" y="891.47064" z="79.20567" h="14"/>
+					<spot x="2184.2317" y="891.47064" z="77.625" h="116"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2161.049" y="884.0902" z="81.17424" h="10"/>
+					<spot x="2161.049" y="884.0902" z="77.625" h="78"/>
 				</spawn>
 				<!-- Village Special Guestbloom Merchant -->
 				<spawn npc_id="831236" respawn_time="295">
-					<spot x="2185.0344" y="893.4361" z="79.319084" h="14"/>
+					<spot x="2184.4714" y="893.5601" z="77.625" h="10"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2159.3474" y="905.5864" z="80.81987" h="10"/>
+					<spot x="2159.3474" y="905.5864" z="77.625" h="46"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2165.2507" y="908.8467" z="80.22688" h="6"/>
+					<spot x="2165.2507" y="908.8467" z="77.625" h="6"/>
 				</spawn>
 			</town_level>
 		</town_spawn>
@@ -1324,26 +1226,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1667.3436" y="921.5871" z="73.45098" h="10"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1647.3123" y="920.3261" z="73.48723" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1649.2227" y="919.53674" z="73.32839" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1651.1116" y="918.73505" z="73.16987" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1675.0991" y="940.7562" z="73.13338" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1675.0157" y="938.4945" z="73.08028" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -1557,26 +1439,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1625.882" y="409.13574" z="85.671974" h="13"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1622.8578" y="422.1134" z="85.70822" h="7"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1621.0146" y="422.98413" z="85.549385" h="7"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1619.2122" y="423.8422" z="85.39086" h="7"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1647.4569" y="400.5481" z="85.35437"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1645.1537" y="400.4345" z="85.30127"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
 					<spot x="1651.6663" y="498.1885" z="85.039215" h="14" static_id="2205"/>
@@ -1625,31 +1487,32 @@
 				</spawn>
 			</town_level>
 		</town_spawn>
+		<!-- Coast Road Village -->
 		<town_spawn town_id="2008">
 			<town_level level="1">
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2177.0107" y="295.68982" z="76.70592" h="14"/>
+					<spot x="2177.0107" y="295.68982" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2198.3508" y="308.35516" z="77.188774" h="14"/>
+					<spot x="2198.3508" y="308.35516" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2179.733" y="290.8053" z="76.72852" h="14"/>
+					<spot x="2179.733" y="290.8053" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2203.1836" y="289.9938" z="77.60429" h="14"/>
+					<spot x="2203.1836" y="289.9938" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831223" respawn_time="295">
-					<spot x="2186.0908" y="310.22092" z="76.468895" h="14"/>
+					<spot x="2186.0908" y="310.22092" z="76.25" h="28"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831224" respawn_time="295">
-					<spot x="2184.2761" y="309.034" z="76.37173" h="14"/>
+					<spot x="2184.2761" y="309.034" z="76.25" h="40"/>
 				</spawn>
 			</town_level>
 			<town_level level="2">
@@ -1659,31 +1522,31 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2177.0107" y="295.68982" z="76.70592" h="14"/>
+					<spot x="2177.0107" y="295.68982" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2198.3508" y="308.35516" z="77.188774" h="14"/>
+					<spot x="2198.3508" y="308.35516" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2179.733" y="290.8053" z="76.72852" h="14"/>
+					<spot x="2179.733" y="290.8053" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2203.1836" y="289.9938" z="77.60429" h="14"/>
+					<spot x="2203.1836" y="289.9938" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831227" respawn_time="295">
-					<spot x="2204.075" y="304.49454" z="77.76191" h="14"/>
+					<spot x="2204.075" y="304.49454" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831225" respawn_time="295">
-					<spot x="2186.0908" y="310.22092" z="76.468895" h="14"/>
+					<spot x="2186.0908" y="310.22092" z="76.25" h="28"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2761" y="309.034" z="76.37173" h="14"/>
+					<spot x="2184.2761" y="309.034" z="76.25" h="40"/>
 				</spawn>
 			</town_level>
 			<town_level level="3">
@@ -1693,35 +1556,35 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2177.0107" y="295.68982" z="76.70592" h="14"/>
+					<spot x="2177.0107" y="295.68982" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2198.3508" y="308.35516" z="77.188774" h="14"/>
+					<spot x="2198.3508" y="308.35516" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2179.733" y="290.8053" z="76.72852" h="14"/>
+					<spot x="2179.733" y="290.8053" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2203.1836" y="289.9938" z="77.60429" h="14"/>
+					<spot x="2203.1836" y="289.9938" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2204.075" y="304.49454" z="77.76191" h="14"/>
+					<spot x="2204.075" y="304.49454" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831228" respawn_time="295">
-					<spot x="2186.0908" y="310.22092" z="76.468895" h="14"/>
+					<spot x="2186.0908" y="310.22092" z="76.25" h="28"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2761" y="309.034" z="76.37173" h="14"/>
+					<spot x="2184.2761" y="309.034" z="76.25" h="40"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2184.8333" y="283.039" z="77.39292" h="14"/>
+					<spot x="2184.0708" y="283.8088" z="76.25" h="81"/>
 				</spawn>
 			</town_level>
 			<town_level level="4">
@@ -1737,77 +1600,57 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2177.0107" y="295.68982" z="76.70592" h="14"/>
+					<spot x="2177.0107" y="295.68982" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2198.3508" y="308.35516" z="77.188774" h="8"/>
+					<spot x="2198.3508" y="308.35516" z="76.25" h="8"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2179.733" y="290.8053" z="76.72852" h="13"/>
+					<spot x="2179.733" y="290.8053" z="76.25" h="13"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2203.1836" y="289.9938" z="77.60429" h="13"/>
+					<spot x="2203.1836" y="289.9938" z="76.25" h="13"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2197.6423" y="284.78308" z="77.77478" h="14"/>
+					<spot x="2197.6423" y="284.78308" z="76.25" h="39"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2204.075" y="304.49454" z="77.76191" h="14"/>
+					<spot x="2204.075" y="304.49454" z="76.25" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831231" respawn_time="295">
-					<spot x="2186.0908" y="310.22092" z="76.468895" h="14"/>
+					<spot x="2186.0908" y="310.22092" z="76.25" h="28"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2761" y="309.034" z="76.37173" h="14"/>
+					<spot x="2184.2761" y="309.034" z="76.25" h="40"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2205.9924" y="296.162" z="78.33815" h="14"/>
+					<spot x="2205.9924" y="296.162" z="76.25"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2191.4753" y="281.19513" z="77.98591" h="14"/>
+					<spot x="2190.8982" y="281.61157" z="76.25" h="90"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2184.8333" y="283.039" z="77.39292" h="14"/>
+					<spot x="2184.0708" y="283.8088" z="76.25" h="81"/>
 				</spawn>
 			</town_level>
 			<town_level level="5">
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831235" respawn_time="295">
-					<spot x="2178.0522" y="302.78555" z="76.70062" h="14"/>
+					<spot x="2178.8433" y="304.0125" z="76.25" h="48"/>
 				</spawn>
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
-					<spot x="2179.4827" y="306.10037" z="77.13292" h="12"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2198.7412" y="312.72794" z="77.16917" h="3"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2196.6763" y="312.63593" z="77.01033" h="3"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2194.6255" y="312.56427" z="76.85181" h="3"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2175.2705" y="288.58194" z="76.815315" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2175.6052" y="290.6524" z="76.762215" h="14"/>
+					<spot x="2180.1300" y="305.8015" z="76.25" h="48"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -1821,67 +1664,68 @@
 				</spawn>
 				<!-- Village Building Renovation Manager -->
 				<spawn npc_id="831237" respawn_time="295">
-					<spot x="2205.8997" y="298.48947" z="78.661156" h="15"/>
+					<spot x="2205.8997" y="298.48947" z="76.25"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2197.6423" y="284.78308" z="77.77478" h="10"/>
+					<spot x="2197.6423" y="284.78308" z="76.25" h="39"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2204.1199" y="304.50116" z="77.7652" h="12"/>
+					<spot x="2204.1199" y="304.50116" z="76.25" h="12"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831234" respawn_time="295">
-					<spot x="2186.0774" y="310.19373" z="76.46887" h="8"/>
+					<spot x="2186.0774" y="310.19373" z="76.25" h="28"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2184.2632" y="309.0078" z="76.37171" h="8"/>
+					<spot x="2184.2632" y="309.0078" z="76.25" h="40"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2206.02" y="296.16312" z="78.34028" h="15"/>
+					<spot x="2206.02" y="296.16312" z="76.25"/>
 				</spawn>
 				<!-- Village Special Guestbloom Merchant -->
 				<spawn npc_id="831236" respawn_time="295">
-					<spot x="2182.391" y="308.0158" z="76.48512" h="8"/>
+					<spot x="2182.391" y="308.0158" z="76.25" h="51"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2191.4753" y="281.19513" z="77.98591"/>
+					<spot x="2190.8982" y="281.61157" z="76.25" h="90"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2184.8333" y="283.039" z="77.39292" h="6"/>
+					<spot x="2184.0708" y="283.8088" z="76.25" h="81"/>
 				</spawn>
 			</town_level>
 		</town_spawn>
+		<!-- Azure Inlet Village -->
 		<town_spawn town_id="2009">
 			<town_level level="1">
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2753.664" y="361.60397" z="77.243225" h="14"/>
+					<spot x="2753.664" y="361.60397" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2756.9844" y="337.0117" z="77.72608" h="14"/>
+					<spot x="2756.9844" y="337.0117" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2748.1042" y="361.00687" z="77.26583" h="14"/>
+					<spot x="2748.1042" y="361.00687" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2738.1943" y="339.73743" z="78.141594" h="14"/>
+					<spot x="2738.1943" y="339.73743" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831223" respawn_time="295">
-					<spot x="2763.4922" y="347.56808" z="77.0062" h="14"/>
+					<spot x="2763.4922" y="347.56808" z="76.5"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831224" respawn_time="295">
-					<spot x="2763.1086" y="349.7022" z="76.909035" h="14"/>
+					<spot x="2763.1086" y="349.7022" z="76.5" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="2">
@@ -1891,31 +1735,31 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2753.664" y="361.60397" z="77.243225" h="14"/>
+					<spot x="2753.664" y="361.60397" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2756.9844" y="337.0117" z="77.72608" h="14"/>
+					<spot x="2756.9844" y="337.0117" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2748.1042" y="361.00687" z="77.26583" h="14"/>
+					<spot x="2748.1042" y="361.00687" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2738.1943" y="339.73743" z="78.141594" h="14"/>
+					<spot x="2738.1943" y="339.73743" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831227" respawn_time="295">
-					<spot x="2751.194" y="333.25116" z="78.29922" h="14"/>
+					<spot x="2751.194" y="333.25116" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831225" respawn_time="295">
-					<spot x="2763.4922" y="347.56808" z="77.0062" h="14"/>
+					<spot x="2763.4922" y="347.56808" z="76.5"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2763.1086" y="349.7022" z="76.909035" h="14"/>
+					<spot x="2763.1086" y="349.7022" z="76.5" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="3">
@@ -1925,35 +1769,35 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2753.664" y="361.60397" z="77.243225" h="14"/>
+					<spot x="2753.664" y="361.60397" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2756.9844" y="337.0117" z="77.72608" h="14"/>
+					<spot x="2756.9844" y="337.0117" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2748.1042" y="361.00687" z="77.26583" h="14"/>
+					<spot x="2748.1042" y="361.00687" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2738.1943" y="339.73743" z="78.141594" h="14"/>
+					<spot x="2738.1943" y="339.73743" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2751.194" y="333.25116" z="78.29922" h="14"/>
+					<spot x="2751.194" y="333.25116" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831228" respawn_time="295">
-					<spot x="2763.4922" y="347.56808" z="77.0062" h="14"/>
+					<spot x="2763.4922" y="347.56808" z="76.5"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2763.1086" y="349.7022" z="76.909035" h="14"/>
+					<spot x="2763.1086" y="349.7022" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2738.9624" y="359.34637" z="77.93023" h="14"/>
+					<spot x="2738.9624" y="359.34637" z="76.5" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="4">
@@ -1969,77 +1813,57 @@
 				</spawn>
 				<!-- Village Construction Boss -->
 				<spawn npc_id="831247" respawn_time="295">
-					<spot x="2753.664" y="361.60397" z="77.243225" h="12"/>
+					<spot x="2753.664" y="361.60397" z="76.5" h="12"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831243" respawn_time="295">
-					<spot x="2756.9844" y="337.0117" z="77.72608" h="10"/>
+					<spot x="2756.9844" y="337.0117" z="76.5" h="10"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831244" respawn_time="295">
-					<spot x="2748.1042" y="361.00687" z="77.26583"/>
+					<spot x="2748.1042" y="361.00687" z="76.5"/>
 				</spawn>
 				<!-- Village Construction Worker -->
 				<spawn npc_id="831245" respawn_time="295">
-					<spot x="2738.1943" y="339.73743" z="78.141594" h="12"/>
+					<spot x="2738.1943" y="339.73743" z="76.5" h="12"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2735.563" y="346.87418" z="78.31209" h="14"/>
+					<spot x="2736.2905" y="346.8588" z="76.5"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2751.194" y="333.25116" z="78.29922" h="14"/>
+					<spot x="2751.194" y="333.25116" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831231" respawn_time="295">
-					<spot x="2763.4922" y="347.56808" z="77.0062" h="14"/>
+					<spot x="2763.4922" y="347.56808" z="76.5"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2763.1086" y="349.7022" z="76.909035" h="14"/>
+					<spot x="2763.1086" y="349.7022" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2742.7747" y="334.74176" z="78.87546" h="14"/>
+					<spot x="2742.7747" y="334.74176" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2734.67" y="353.95294" z="78.52322" h="14"/>
+					<spot x="2734.67" y="353.95294" z="76.5" h="50"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2738.9624" y="359.34637" z="77.93023" h="14"/>
+					<spot x="2738.9624" y="359.34637" z="76.5" h="14"/>
 				</spawn>
 			</town_level>
 			<town_level level="5">
 				<!-- Ancient Crown Administrator -->
 				<spawn npc_id="831235" respawn_time="295">
-					<spot x="2759.7888" y="357.87286" z="76.88184" h="10"/>
+					<spot x="2760.3066" y="356.7475" z="76.5" h="14"/>
 				</spawn>
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
-					<spot x="2762.2812" y="355.26102" z="77.67023" h="13"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2760.0618" y="333.75204" z="77.706474" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2760.784" y="335.68884" z="77.54764" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2761.5193" y="337.60464" z="77.389114" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2749.0051" y="366.1331" z="76.873436" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2750.7803" y="365.01614" z="76.820335" h="8"/>
+					<spot x="2761.6343" y="355.0772" z="76.5" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -2053,39 +1877,39 @@
 				</spawn>
 				<!-- Village Building Renovation Manager -->
 				<spawn npc_id="831237" respawn_time="295">
-					<spot x="2744.9534" y="333.91772" z="79.19846" h="6"/>
+					<spot x="2744.9534" y="333.91772" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Flowerbed Manager -->
 				<spawn npc_id="831246" respawn_time="295">
-					<spot x="2735.563" y="346.87418" z="78.31209" h="15"/>
+					<spot x="2736.2905" y="346.8588" z="76.5"/>
 				</spawn>
 				<!-- Village Furniture Merchant -->
 				<spawn npc_id="831229" respawn_time="295">
-					<spot x="2751.1826" y="333.20715" z="78.302505" h="6"/>
+					<spot x="2751.1826" y="333.20715" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Guestbloom Merchant -->
 				<spawn npc_id="831234" respawn_time="295">
-					<spot x="2763.4724" y="347.5911" z="77.00618" h="14"/>
+					<spot x="2763.4724" y="347.5911" z="76.5"/>
 				</spawn>
 				<!-- Village Hearthbloom Merchant -->
 				<spawn npc_id="831226" respawn_time="295">
-					<spot x="2763.0896" y="349.7244" z="76.90902" h="14"/>
+					<spot x="2763.0896" y="349.7244" z="76.5" h="14"/>
 				</spawn>
 				<!-- Village Interior Facility Merchant -->
 				<spawn npc_id="831232" respawn_time="295">
-					<spot x="2742.765" y="334.71588" z="78.87759" h="6"/>
+					<spot x="2742.765" y="334.71588" z="76.5" h="95"/>
 				</spawn>
 				<!-- Village Special Guestbloom Merchant -->
 				<spawn npc_id="831236" respawn_time="295">
-					<spot x="2762.908" y="351.8353" z="77.02243" h="14"/>
+					<spot x="2762.908" y="351.8353" z="76.5" h="8"/>
 				</spawn>
 				<!-- Village Trade Broker -->
 				<spawn npc_id="831233" respawn_time="295">
-					<spot x="2734.67" y="353.95294" z="78.52322" h="14"/>
+					<spot x="2734.67" y="353.95294" z="76.5" h="50"/>
 				</spawn>
 				<!-- Village Warehouse Manager -->
 				<spawn npc_id="831230" respawn_time="295">
-					<spot x="2738.9624" y="359.34637" z="77.93023" h="12"/>
+					<spot x="2739.7450" y="359.6966" z="76.5" h="42"/>
 				</spawn>
 			</town_level>
 		</town_spawn>
@@ -2252,26 +2076,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1771.7242" y="1480.8954" z="113.23974" h="3"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1786.8074" y="1467.5109" z="112.04377" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1785.8192" y="1469.3334" z="112.04377" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1784.8558" y="1471.1522" z="112.04377" h="13"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1756.0009" y="1476.3304" z="112.04053" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1758.0084" y="1476.9397" z="112.04053" h="8"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -2485,26 +2289,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2301.304" y="1400.9987" z="79.782265" h="8"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2314.0273" y="1384.3877" z="78.76054" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2313.4397" y="1386.3757" z="78.76054" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2312.8755" y="1388.3552" z="78.76054" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2284.9753" y="1400.5289" z="79.18839" h="3"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2287.0657" y="1400.7075" z="79.18839" h="3"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
 					<spot x="2234.6482" y="1459.1573" z="86.25504" h="14" static_id="2135"/>
@@ -2716,26 +2500,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2734.3066" y="815.56665" z="85.10882" h="12"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2731.634" y="835.97754" z="84.08709" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2731.3264" y="833.9276" z="84.08709" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2731.001" y="831.8952" z="84.08709" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2749.7422" y="808.77905" z="84.514946" h="6"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2747.7722" y="809.5006" z="84.514946" h="6"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
@@ -2949,26 +2713,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2844.3767" y="1348.0497" z="77.20084" h="12"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2825.9985" y="1344.712" z="76.179115" h="3"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2828.0618" y="1344.5121" z="76.179115" h="3"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2830.1084" y="1344.2936" z="76.179115" h="3"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2850.3472" y="1363.8193" z="76.60697" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2849.7297" y="1361.8145" z="76.60697" h="14"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701520" respawn_time="1800">
 					<spot x="2676.7798" y="1409.8047" z="89.11921" h="14" static_id="2143"/>
@@ -3180,26 +2924,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1763.8723" y="2616.8542" z="232.78629" h="3"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1779.924" y="2613.1292" z="231.76454" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1778.1205" y="2614.1511" z="231.76454" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1776.3391" y="2615.1836" z="231.76454" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1749.615" y="2607.6963" z="231.76454" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1750.6523" y="2609.501" z="231.76454" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
@@ -3413,26 +3137,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1145.7599" y="2164.731" z="190.65515" h="6"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1136.4061" y="2177.738" z="189.6334" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1137.2972" y="2175.8665" z="189.6334" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1138.1643" y="2173.999" z="189.6334" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1162.7861" y="2163.9014" z="189.6334" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1160.9012" y="2163.018" z="189.6334" h="14"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="1118.0913" y="2091.1653" z="189.5575" h="14" static_id="2294"/>
@@ -3644,26 +3348,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="1633.1008" y="2089.6416" z="224.0313" h="13"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="1617.1473" y="2083.0" z="223.00955" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="1619.1921" y="2083.3408" z="223.00955" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="1621.2262" y="2083.6594" z="223.00955" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="1638.5344" y="2105.9797" z="223.00955" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="1638.457" y="2103.8835" z="223.00955" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
@@ -3877,26 +3561,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2212.725" y="1990.0033" z="240.5144" h="13"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2195.4307" y="1979.1741" z="239.49266" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2197.2698" y="1980.1301" z="239.49266" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2199.1057" y="1981.0616" z="239.49266" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2212.844" y="2007.2208" z="239.49266" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2213.4182" y="2005.2034" z="239.49266" h="14"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="2180.1504" y="2090.8533" z="235.37747" h="14" static_id="2252"/>
@@ -4108,26 +3772,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="768.0204" y="2084.0166" z="169.77307" h="14"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="765.951" y="2066.3765" z="168.75133" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="766.50604" y="2068.3735" z="168.75133" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="767.07697" y="2070.3513" z="168.75133" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="756.05206" y="2096.303" z="168.75133" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="757.91907" y="2095.3472" z="168.75133" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
@@ -4341,26 +3985,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="344.01245" y="1805.0651" z="138.43747" h="8"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="364.2907" y="1803.0729" z="137.41573" h="6"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="362.2598" y="1803.4873" z="137.41573" h="6"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="360.24698" y="1803.9188" z="137.41573" h="6"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="333.65076" y="1791.8849" z="137.8436" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="334.474" y="1793.8141" z="137.8436" h="14"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="371.84103" y="1760.1488" z="137.33525" h="14" static_id="2311"/>
@@ -4572,26 +4196,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2690.8577" y="2082.2034" z="342.48608" h="14"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2692.7058" y="2097.9475" z="341.46436" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2692.0469" y="2095.9822" z="341.46436" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2691.3733" y="2094.037" z="341.46436" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2701.4934" y="2069.9055" z="341.8922" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2699.6787" y="2070.958" z="341.8922" h="8"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
@@ -4805,26 +4409,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="266.81964" y="2283.2244" z="198.48705" h="3"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="256.02185" y="2294.2405" z="197.46532" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="257.04147" y="2292.4358" z="197.46532" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="258.03622" y="2290.6338" z="197.46532" h="13"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="282.27576" y="2283.0042" z="197.89317" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="280.27933" y="2282.3599" z="197.89317" h="8"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="336.5664" y="2267.6099" z="198.47832" h="14" static_id="2320"/>
@@ -5036,26 +4620,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="773.56146" y="2691.5835" z="213.26181" h="12"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="773.812" y="2671.1538" z="212.24008" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="774.36707" y="2673.151" z="212.24008" h="14"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="774.9378" y="2675.1284" z="212.24008" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="759.06805" y="2700.2017" z="212.66794" h="6"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="760.93524" y="2699.2454" z="212.66794" h="6"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
@@ -5269,26 +4833,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2423.5315" y="2563.3838" z="324.77686" h="3"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2440.7039" y="2554.9888" z="323.75513" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2439.3313" y="2556.542" z="323.75513" h="12"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2437.9836" y="2558.0974" z="323.75513" h="12"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2408.3596" y="2556.2427" z="324.18298" h="8"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2410.1785" y="2557.2878" z="324.18298" h="8"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="2389.1719" y="2525.0706" z="325.69608" h="14" static_id="2250"/>
@@ -5501,26 +5045,6 @@
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="2754.8945" y="2508.0977" z="361.65784" h="14"/>
 				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="2760.3074" y="2527.129" z="360.6361" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="2759.1028" y="2525.442" z="360.6361" h="13"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="2757.8904" y="2523.779" z="360.6361" h="13"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="2765.7444" y="2494.9487" z="361.06396" h="12"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="2764.317" y="2496.4858" z="361.06396" h="12"/>
-				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
 					<spot x="2717.7551" y="2509.6877" z="361.0509" h="14" static_id="2242"/>
@@ -5732,26 +5256,6 @@
 				<!-- Ancient Goblet Administrator -->
 				<spawn npc_id="831253" respawn_time="295">
 					<spot x="379.25238" y="2671.742" z="211.48528" h="10"/>
-				</spawn>
-				<!-- Band -->
-				<spawn npc_id="831240" respawn_time="295">
-					<spot x="398.15628" y="2675.769" z="210.46355"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831241" respawn_time="295">
-					<spot x="396.0855" y="2675.8606" z="210.46355"/>
-				</spawn>
-				<!-- Celebration Band Promoter -->
-				<spawn npc_id="831242" respawn_time="295">
-					<spot x="394.0302" y="2675.972" z="210.46355"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831238" respawn_time="295">
-					<spot x="372.7817" y="2655.0916" z="210.8914" h="14"/>
-				</spawn>
-				<!-- Celebration Promoter -->
-				<spawn npc_id="831239" respawn_time="295">
-					<spot x="373.2933" y="2657.126" z="210.8914" h="14"/>
 				</spawn>
 				<!-- Dye Plant -->
 				<spawn npc_id="701521" respawn_time="1800">
