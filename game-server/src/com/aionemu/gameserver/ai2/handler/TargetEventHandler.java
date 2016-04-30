@@ -51,6 +51,9 @@ public class TargetEventHandler {
 				WalkManager.targetReached(npcAI);
 				checkAggro(npcAI);
 				break;
+			case FORCED_WALKING:
+				WalkManager.targetReached(npcAI);
+				break;
 		}
 	}
 

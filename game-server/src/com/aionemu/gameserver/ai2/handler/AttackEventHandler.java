@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 
 /**
  * @author ATracer
@@ -34,7 +35,7 @@ public class AttackEventHandler {
 			npcAI.onGeneralEvent(AIEventType.NOT_AT_HOME);
 			return;
 		}
-		if (!npcAI.canThink()) {
+		if (!npcAI.canThink() || npcAI.isInState(AIState.FORCED_WALKING)) {
 			return;
 		}
 		if (npcAI.isInState(AIState.WALKING)) {

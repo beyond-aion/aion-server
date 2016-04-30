@@ -18,7 +18,7 @@ public class ActivateEventHandler {
 	}
 
 	public static void onDeactivate(NpcAI2 npcAI) {
-		if (npcAI.isInState(AIState.WALKING)) {
+		if (npcAI.isInState(AIState.WALKING) || npcAI.isInState(AIState.FORCED_WALKING)) {
 			WalkManager.stopWalking(npcAI);
 		}
 		npcAI.think();

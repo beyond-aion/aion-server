@@ -66,7 +66,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private static enum Destination {
 		TARGET_OBJECT,
-		POINT;
+		POINT,
+		FORCED_POINT
 	}
 
 	/**
@@ -89,6 +90,20 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				AI2Logger.moveinfo(owner, "MC: moveToPoint started");
 			}
 			destination = Destination.POINT;
+			pointX = x;
+			pointY = y;
+			pointZ = z;
+			updateLastMove();
+			MoveTaskManager.getInstance().addCreature(owner);
+		}
+	}
+
+	public void forcedMoveToPoint(float x, float y, float z) {
+		if (started.compareAndSet(false, true)) {
+			if (owner.getAi2().isLogging()) {
+				AI2Logger.moveinfo(owner, "MC: forcedMoveToPoint started");
+			}
+			destination = Destination.FORCED_POINT;
 			pointX = x;
 			pointY = y;
 			pointZ = z;
@@ -159,6 +174,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				moveToLocation(pointX, pointY, pointZ, offset);
 				break;
 			case POINT:
+			case FORCED_POINT:
 				offset = 0.1f;
 				moveToLocation(pointX, pointY, pointZ, offset);
 				break;

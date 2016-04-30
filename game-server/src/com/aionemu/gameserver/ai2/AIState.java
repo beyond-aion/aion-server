@@ -12,5 +12,6 @@ public enum AIState {
 	FOLLOWING,
 	RETURNING,
 	FIGHT,
-	FEAR
+	FEAR,
+	FORCED_WALKING
 }
