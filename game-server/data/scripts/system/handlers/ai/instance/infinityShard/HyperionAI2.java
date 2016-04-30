@@ -4,27 +4,32 @@ import java.util.Collections;
 import java.util.List;
 
 import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
+ * @rework Yeats 26.04.2016
  */
 @AIName("hyperion")
 public class HyperionAI2 extends AggressiveNpcAI2 {
 
 	private List<Integer> percents = new FastTable<Integer>();
+	private byte stage = 0;
 
 	@Override
 	protected void handleSpawned() {
@@ -51,58 +56,60 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 						usePowerfulEnergyBlast();
 						break;
 					case 75:
-						AI2Actions.useSkill(this, 21245);
-						spawnSummons(231096);
-						spawnAncientTyrhund();
+						stage = 0;
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100, true)));
 						break;
 					case 65:
 						combo();// TODO start in Task
 						break;
 					case 55:
 					case 25:
-						AI2Actions.useSkill(this, 21245);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								AI2Actions.targetSelf(HyperionAI2.this);
-								AI2Actions.useSkill(HyperionAI2.this, 21253);
-								spawnSummons(231097);
-								spawnAncientTyrhund();
-							}
-						}, 5000);
+						stage = 1;
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100, true)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 1, 100, true)));
 						break;
 					case 50:
 					case 15:
-						AI2Actions.useSkill(this, 21245);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								AI2Actions.targetSelf(HyperionAI2.this);
-								AI2Actions.useSkill(HyperionAI2.this, 21253);
-								spawnSummons(231098);
-								spawnAncientTyrhund();
-							}
-						}, 5000);
+						stage = 2;
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100, true)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 1, 100, true)));
 						break;
 					case 45:
-						AI2Actions.useSkill(this, 21245);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								AI2Actions.targetSelf(HyperionAI2.this);
-								AI2Actions.useSkill(HyperionAI2.this, 21253);
-								spawnSummons(231099);
-								spawnAncientTyrhund();
-							}
-						}, 5000);
+						stage = 3;
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100, true)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 1, 100, true)));
 						break;
 
 				}
 				break;
 			}
+		}
+	}
+
+	@Override
+	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+		switch (usedSkill.getSkillId()) {
+			case 21245:
+				switch (stage) {
+					case 0:
+						spawnSummons(231096);
+						break;
+					case 1:
+						spawnSummons(231097);
+						break;
+					case 2:
+						spawnSummons(231098);
+						break;
+					case 3:
+						spawnSummons(231099);
+						break;
+					default:
+						break;
+				}
+				spawnAncientTyrhund();
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -139,33 +146,20 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void combo() {
-		AI2Actions.useSkill(this, 21250);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AI2Actions.useSkill(HyperionAI2.this, 21251);
-			}
-		}, 3000);
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21250, 1, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21251, 1, 100, true)));
 	}
 
 	private void usePowerfulEnergyBlast() {
-		long time = 0;
-		for (int i = 0; i < 3; i++) {
-			time += 6000;
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					AI2Actions.useSkill(HyperionAI2.this, 21241);
-				}
-			}, time);
-		}
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100, true)));
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
+		stage = 0;
 		addPercent();
 	}
 
