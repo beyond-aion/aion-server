@@ -63,7 +63,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {
-		percents.stream().filter(percent -> hpPercentage <= percent).filter(percent -> !isInFlameShowerTask.get()).forEach(percent -> {
+		percents.stream().filter(percent -> hpPercentage <= percent && !isInFlameShowerTask.get()).forEach(percent -> {
 			percents.remove(percent);
 			cancelFlameBuffEvent();
 			getOwner().getQueuedSkills().clear();
@@ -89,6 +89,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 				getOwner().getGameStats().renewLastAttackedTime();
 				getOwner().getGameStats().renewLastChangeTargetTime();
 				getOwner().getGameStats().renewLastSkillTime();
+				getOwner().getGameStats().setNextSkillTime(7000);
 				setStateIfNot(AIState.FIGHT);
 				think();
 			}
