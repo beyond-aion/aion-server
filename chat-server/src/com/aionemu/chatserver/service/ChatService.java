@@ -110,8 +110,8 @@ public class ChatService {
 	 * @param channelIdentifier
 	 * @return
 	 */
-	public Channel registerPlayerWithChannel(ChatClient chatClient, int channelIndex, byte[] channelIdentifier) {
-		Channel channel = ChatChannels.getChannelByIdentifier(channelIdentifier);
+	public Channel registerPlayerWithChannel(ChatClient chatClient, int channelIndex, byte[] channelIdentifier, String name) {
+		Channel channel = ChatChannels.getChannelByIdentifierOrCreateNew(channelIdentifier, name);
 		if (channel != null) {
 			ChannelType channelType = channel.getChannelType();
 			if (channelType == ChannelType.GROUP) {
