@@ -65181,16 +65181,16 @@
 		<npc_skill id="21870" lv="1" prob="100" min_hp="0" max_hp="45" cd="10000" />
 	</npc_skills>
 	<npc_skills npc_ids="235683">
-		<npc_skill id="21867" lv="1" prob="100" cd="180000"/>
-		<npc_skill id="21916" lv="1" prob="100" min_hp="45" max_hp="80" cd="15000" />
-		<npc_skill id="21915" lv="1" prob="100" min_hp="30" max_hp="65" cd="15000"/>
-		<npc_skill id="21917" lv="1" prob="100" min_hp="0" max_hp="25" cd="30000"/>
+		<npc_skill id="21867" lv="1" prob="100" max_hp="25" cd="180000"/>
+		<npc_skill id="21916" lv="1" prob="100" cd="15000" />
+		<npc_skill id="21915" lv="1" prob="100" max_hp="65" cd="15000"/>
+		<npc_skill id="21917" lv="1" prob="100" max_hp="25" cd="30000"/>
 	</npc_skills>
 	<npc_skills npc_ids="235647">
-		<npc_skill id="21868" lv="1" prob="100" cd="180000"/>
-		<npc_skill id="21915" lv="1" prob="100" min_hp="0" max_hp="90" cd="5000" />
-		<npc_skill id="21912" lv="1" prob="100" min_hp="0" max_hp="55" cd="90000"/>
-		<npc_skill id="21916" lv="1" prob="100" min_hp="0" max_hp="20" cd="30000"/>
+		<npc_skill id="21868" lv="1" prob="100" max_hp="20" cd="180000"/>
+		<npc_skill id="21915" lv="1" prob="100" max_hp="90" cd="30000" />
+		<npc_skill id="21912" lv="1" prob="100" max_hp="55" cd="90000"/>
+		<npc_skill id="21916" lv="1" prob="100" max_hp="35" cd="30000"/>
 	</npc_skills>
 	<!-- Vocolith Summons -->
 	<npc_skills npc_ids="235217">

@@ -11,15 +11,13 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
-import ai.AggressiveNpcAI2;
-
 
 /**
  * @author Yeats
  *
  */
 @AIName("watchman_hokuruki")
-public class WatchmanHokuruki extends AggressiveNpcAI2 {
+public class WatchmanHokuruki extends IDSweep_Bosses {
 
 	protected List<Integer> percents = new ArrayList<Integer>();
 	private List<Npc> spawnedAdds = new ArrayList<Npc>();
@@ -59,6 +57,7 @@ public class WatchmanHokuruki extends AggressiveNpcAI2 {
 						int rnd3 = Rnd.get(0, (addStages.size()-1));
 						spawnAdds(addStages.get(rnd3)); 
 						addStages.remove(rnd3);
+						break;
 					case 15:
 						spawnAdds(1);
 						break;
