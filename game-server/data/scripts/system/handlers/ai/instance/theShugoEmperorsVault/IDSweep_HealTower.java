@@ -2,13 +2,13 @@ package ai.instance.theShugoEmperorsVault;
 
 import java.util.concurrent.Future;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 
 /**
@@ -39,7 +39,7 @@ public class IDSweep_HealTower extends GeneralNpcAI2 {
 					cancelTask();
 				}
 			}
-		}, 5000, 5000);
+		}, 2000, 3000);
 	}
 
 	/**
