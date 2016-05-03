@@ -47,6 +47,9 @@ public class ThinkEventHandler {
 				case IDLE:
 					thinkIdle(npcAI);
 					break;
+				case FORCED_WALKING:
+					// we should probably handle this somehow, but for now its fine.
+					break;
 			}
 		} finally {
 			npcAI.unlockThink();

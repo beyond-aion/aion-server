@@ -157,6 +157,11 @@ public class NpcAI2 extends AITemplate {
 	}
 
 	@Override
+	public boolean handleForcedMoveArrived() {
+		return false;
+	}
+
+	@Override
 	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
 		ShoutEventHandler.onSwitchedTarget(this, creature);
@@ -193,6 +198,7 @@ public class NpcAI2 extends AITemplate {
 			case FOLLOWING:
 				return FollowEventHandler.isInRange(this, getOwner().getTarget());
 			case WALKING:
+			case FORCED_WALKING:
 				return getSubState() == AISubState.TALK || WalkManager.isArrivedAtPoint(this);
 		}
 		return true;

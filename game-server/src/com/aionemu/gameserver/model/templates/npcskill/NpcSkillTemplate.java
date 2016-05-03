@@ -35,8 +35,8 @@ public class NpcSkillTemplate {
 	protected ConjunctionType conjunction = ConjunctionType.AND;
 	@XmlAttribute(name = "cd")
 	protected int cd = 0;
-	@XmlAttribute(name = "use_after_spawn")
-	protected boolean use_after_spawn = false;
+	@XmlAttribute(name = "is_post_spawn")
+	protected boolean is_post_spawn = false;
 	@XmlAttribute(name = "prio")
 	protected int prio = 0;
 	@XmlAttribute(name = "next_skill_time")
@@ -94,7 +94,7 @@ public class NpcSkillTemplate {
 	}
 
 	public boolean isPostSpawn() {
-		return use_after_spawn;
+		return is_post_spawn;
 	}
 
 	public int getPriority() {

@@ -175,15 +175,16 @@ public class SkillAttackManager {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
 
-		NpcSkillList skillList = owner.getSkillList();
-		if (skillList == null || skillList.size() == 0) {
-			return null;
-		}
-
 		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent()) && owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 			}
+
+			NpcSkillList skillList = owner.getSkillList();
+			if (skillList == null || skillList.size() == 0) {
+				return null;
+			}
+
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill() ;
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
 				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
@@ -201,7 +202,7 @@ public class SkillAttackManager {
 			List<Integer> priorities = skillList.getPriorities();
 			if (priorities != null && !priorities.isEmpty()) {
 
-				for (int index = priorities.size()-1; index >= 0; index--) {
+				for (int index = priorities.size() - 1; index >= 0; index--) {
 					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities.get(index));
 					if (skillsByPriority != null && !skillsByPriority.isEmpty()) {
 						if (skillsByPriority.size() > 2)

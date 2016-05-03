@@ -44,6 +44,25 @@ public class WalkManager {
 	}
 
 	/**
+	 *
+	 * @param npcAI
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	public static void startForcedWalking(NpcAI2 npcAI, float x, float y, float z) {
+		npcAI.setStateIfNot(AIState.FORCED_WALKING);
+		npcAI.setSubStateIfNot(AISubState.NONE);
+		walkToPoint(npcAI.getOwner(), x, y, z);
+	}
+
+
+	private static void walkToPoint(Npc owner, float x, float y, float z) {
+		EmoteManager.emoteStartWalking(owner);
+		owner.getMoveController().forcedMoveToPoint(x, y, z);
+	}
+
+	/**
 	 * @param npcAI
 	 * @param owner
 	 */
@@ -184,6 +203,12 @@ public class WalkManager {
 					npcAI.getOwner().getMoveController().abortMove(false);
 					break;
 			}
+		} else if (npcAI.isInState(AIState.FORCED_WALKING)) {
+			npcAI.getOwner().getMoveController().abortMove(true);
+			if (!npcAI.handleForcedMoveArrived()) {
+				npcAI.setStateIfNot(AIState.FIGHT);
+				npcAI.think();
+			}
 		}
 	}
 
@@ -267,5 +292,4 @@ public class WalkManager {
 	public static boolean isArrivedAtPoint(NpcAI2 npcAI) {
 		return npcAI.getOwner().getMoveController().isReachedPoint();
 	}
-
 }

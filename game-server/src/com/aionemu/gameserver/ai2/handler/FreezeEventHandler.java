@@ -31,7 +31,7 @@ public class FreezeEventHandler {
 	}
 
 	public static void onFreeze(AbstractAI ai) {
-		if (ai.isInState(AIState.WALKING)) {
+		if (ai.isInState(AIState.WALKING) || ai.isInState(AIState.FORCED_WALKING)) {
 			WalkManager.stopWalking((NpcAI2) ai);
 		}
 		ai.setStateIfNot(AIState.IDLE);

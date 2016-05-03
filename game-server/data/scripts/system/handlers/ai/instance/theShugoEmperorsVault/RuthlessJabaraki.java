@@ -8,15 +8,13 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.AggressiveNpcAI2;
-
 
 /**
  * @author Yeats
  *
  */
 @AIName("ruthless_jabaraki")
-public class RuthlessJabaraki extends AggressiveNpcAI2 {
+public class RuthlessJabaraki extends IDSweep_Bosses {
 
 	protected List<Integer> percents = new ArrayList<Integer>();
 	private List<Npc> spawnedAdds = new ArrayList<Npc>();
@@ -37,21 +35,22 @@ public class RuthlessJabaraki extends AggressiveNpcAI2 {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
 				switch (percent) {
-					case 96:
+					case 95:
 						spawnAdds(1);
 						break;
 					case 80:
 						spawnAdds(1);
 						break;
-					case 60:
+					case 65:
 						spawnAdds(2);
-					case 45:
+						break;
+					case 50:
 						spawnAdds(3);
 						break;
-					case 40:
+					case 35:
 						spawnAdds(4);
 						break;
-					case 35:
+					case 20:
 						spawnAdds(5);
 						break;
 				}

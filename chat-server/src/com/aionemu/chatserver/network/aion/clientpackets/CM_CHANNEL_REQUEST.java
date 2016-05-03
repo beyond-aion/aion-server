@@ -47,15 +47,17 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
+		String name = "";
 		try {
+			name = new String(channelIdentifier, "UTF-16le");
 			if (Config.LOG_CHANNEL_REQUEST) {
-				log.info("Channel requested " + new String(channelIdentifier, "UTF-16le"));
+				log.info("Channel requested " + name);
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		ChatClient chatClient = clientChannelHandler.getChatClient();
-		Channel channel = chatService.registerPlayerWithChannel(chatClient, channelIndex, channelIdentifier);
+		Channel channel = chatService.registerPlayerWithChannel(chatClient, channelIndex, channelIdentifier, name);
 		if (channel != null) {
 			clientChannelHandler.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelIndex));
 		}
