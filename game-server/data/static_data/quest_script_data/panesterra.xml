@@ -2,86 +2,82 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
 		[BEGIN] SUMMARY
-			14210 [TODO] Bring Down the Dragon
-			14211 [TODO] Bring Down the Dragon
-			14220 [XML] New Zone, New Rules
-			24210 [TODO] Burning the Dragon
-			24211 [TODO] Burning the Dragon
-			24220 [XML] Welcome to Panesterra
-			41000 [TODO] [Daily] Snuff the Snoops
-			41001 [TODO] [Daily] Bye-Bye, Balaur
-			41002 [TODO] [Daily] Scout Wipeout
-			41003 [TODO] [Daily] Recon Unit Reckoning
-			41004 [TODO] [Daily] Base Threat Abatement
-			41005 [TODO] [Daily] Chastise the Spies
-			41006 [TODO] [Daily] Mar the Balaur
-			41007 [TODO] [Daily] Slay in the Fray
-			41008 [TODO] [Daily] Too Close for Comfort
-			41009 [TODO] [Daily] The Balaur Among Us
-			41010 [TODO] [Daily] The Floating Hills Have Eyes
-			41011 [TODO] [Daily] Balaur-ectomy
-			41012 [TODO] [Daily] Deny the Spies
-			41013 [TODO] [Daily] Balaur Beware
-			41014 [TODO] [Daily] I Spy a Spy
-			41015 [TODO] [Daily] Recon Unit Removal
-			41016 [TODO] [Daily] Scouts Dishonor
-			41017 [TODO] [Daily] Abase a Balaur Unit
-			41018 [TODO] [Daily] Spies of Despise
-			41019 [TODO] [Daily] Compromise the Spies
-			41020 [TODO] [Daily] It's A-Scout Time
-			41021 [TODO] [Daily] Balaur Gone Too Far
-			41022 [TODO] [Daily] Take Out a Scout
-			41023 [TODO] [Daily] Reproach the Encroachers
-			41024 [TODO] [Daily] You Dirty Scouts
-			41025 [TODO] [Daily] Step by Step
-			41026 [TODO] [Daily] No More Today, Please
-			41027 [TODO] [Daily] Persistence is a Virtue
-			41028 [TODO] [Daily] Scout, Scout, Go Away
-			41029 [TODO] [Daily] Too Far, Balaur
-			41030 [TODO] [Daily] Seize the Base
-			41031 [TODO] [Daily] They Think They Can
-			41032 [TODO] [Urgent Order] Eliminate the Infiltrator
-			41033 [TODO] [Urgent Order] Enemy of the Embattled State
-			41034 [TODO] [Urgent Order] Public Enemy
-			41035 [TODO] [Urgent Order] Know Your Enemy
-			41036 [TODO] [Urgent Order] A Shady Infiltration
-			41037 [TODO] [Urgent Order] Scum in Nebulum
-			41038 [TODO] [Urgent Order] Stuck on Aspar
-			41039 [TODO] [Urgent Order] No Hand Holding
-			41040 [TODO] [Urgent Order] No Discrimination in Elimination
-			41041 [TODO] [Urgent Order] Get These Enemies
-			41042 [TODO] [Urgent Order] Nix That Villainous Mix
-			41043 [TODO] [Urgent Order] Eradicate the Reprobates
-			41044 [TODO] [Urgent Order] Disilgot Ya
-			41045 [TODO] [Urgent Order] Don't Doubt the Redoubt
-			41046 [TODO] [Urgent Order] Fighting in Fulminaer
-			41047 [TODO] [Urgent Order] Pay Attention
-			41048 [TODO] [Urgent Order] Expunge Enemy Expansion
-			41049 [TODO] [Urgent Order] Upset the Threat
-			41050 [TODO] [Urgent Order] Fort Due Fortitude
-			41051 [TODO] [Urgent Order] Territory for Glory!
-			41052 [TODO] [Urgent Order] Keep the Pace
-			41053 [TODO] [Urgent Order] Aspatyr Lurker
-			41054 [TODO] [Urgent Order] One More, Blaekmor
-			41055 [TODO] [Urgent Order] Playing Keep Away
-			41056 [TODO] [Urgent Order] Infiltrator Eradicator
-			41057 [TODO] [Urgent Order] Infiltrate-oberfest
-			41058 [TODO] [Urgent Order] Apperances Can Be Deceitful
-			41059 [TODO] [Urgent Order] Behind Enemy Lies
-			41060 [TODO] [Urgent Order] Still Got Disilgot
-			41061 [TODO] [Urgent Order] Cold and Disilveir
-			41062 [TODO] [Urgent Order] No Re-Doubts, No Regrets
-			41063 [TODO] [Urgent Order] Disilheim, It's Time
+			14210 [XML_T] Bring Down the Dragon
+			14211 [XML] Bring Down the Dragon
+			14220 [SCRIPT] New Zone, New Rules
+			24210 [XML_T] Burning the Dragon
+			24211 [XML] Burning the Dragon
+			24220 [SCRIPT] Welcome to Panesterra
+			41000 [REMOVED] [Daily] Snuff the Snoops
+			41001 [REMOVED] [Daily] Bye-Bye, Balaur
+			41002 [REMOVED] [Daily] Scout Wipeout
+			41003 [REMOVED] [Daily] Recon Unit Reckoning
+			41004 [REMOVED] [Daily] Base Threat Abatement
+			41005 [REMOVED] [Daily] Chastise the Spies
+			41006 [REMOVED] [Daily] Mar the Balaur
+			41007 [REMOVED] [Daily] Slay in the Fray
+			41008 [REMOVED] [Daily] Too Close for Comfort
+			41009 [REMOVED] [Daily] The Balaur Among Us
+			41010 [REMOVED] [Daily] The Floating Hills Have Eyes
+			41011 [REMOVED] [Daily] Balaur-ectomy
+			41012 [REMOVED] [Daily] Deny the Spies
+			41013 [REMOVED] [Daily] Balaur Beware
+			41014 [REMOVED] [Daily] I Spy a Spy
+			41015 [REMOVED] [Daily] Recon Unit Removal
+			41016 [REMOVED] [Daily] Scouts Dishonor
+			41017 [REMOVED] [Daily] Abase a Balaur Unit
+			41018 [REMOVED] [Daily] Spies of Despise
+			41019 [REMOVED] [Daily] Compromise the Spies
+			41020 [REMOVED] [Daily] It's A-Scout Time
+			41021 [REMOVED] [Daily] Balaur Gone Too Far
+			41022 [REMOVED] [Daily] Take Out a Scout
+			41023 [REMOVED] [Daily] Reproach the Encroachers
+			41024 [REMOVED] [Daily] You Dirty Scouts
+			41025 [REMOVED] [Daily] Step by Step
+			41026 [REMOVED] [Daily] No More Today, Please
+			41027 [REMOVED] [Daily] Persistence is a Virtue
+			41028 [REMOVED] [Daily] Scout, Scout, Go Away
+			41029 [REMOVED] [Daily] Too Far, Balaur
+			41030 [REMOVED] [Daily] Seize the Base
+			41031 [REMOVED] [Daily] They Think They Can
+			41032 [REMOVED] [Urgent Order] Eliminate the Infiltrator
+			41033 [REMOVED] [Urgent Order] Enemy of the Embattled State
+			41034 [REMOVED] [Urgent Order] Public Enemy
+			41035 [REMOVED] [Urgent Order] Know Your Enemy
+			41036 [REMOVED] [Urgent Order] A Shady Infiltration
+			41037 [REMOVED] [Urgent Order] Scum in Nebulum
+			41038 [REMOVED] [Urgent Order] Stuck on Aspar
+			41039 [REMOVED] [Urgent Order] No Hand Holding
+			41040 [REMOVED] [Urgent Order] No Discrimination in Elimination
+			41041 [REMOVED] [Urgent Order] Get These Enemies
+			41042 [REMOVED] [Urgent Order] Nix That Villainous Mix
+			41043 [REMOVED] [Urgent Order] Eradicate the Reprobates
+			41044 [REMOVED] [Urgent Order] Disilgot Ya
+			41045 [REMOVED] [Urgent Order] Don't Doubt the Redoubt
+			41046 [REMOVED] [Urgent Order] Fighting in Fulminaer
+			41047 [REMOVED] [Urgent Order] Pay Attention
+			41048 [REMOVED] [Urgent Order] Expunge Enemy Expansion
+			41049 [REMOVED] [Urgent Order] Upset the Threat
+			41050 [REMOVED] [Urgent Order] Fort Due Fortitude
+			41051 [REMOVED] [Urgent Order] Territory for Glory!
+			41052 [REMOVED] [Urgent Order] Keep the Pace
+			41053 [REMOVED] [Urgent Order] Aspatyr Lurker
+			41054 [REMOVED] [Urgent Order] One More, Blaekmor
+			41055 [REMOVED] [Urgent Order] Playing Keep Away
+			41056 [REMOVED] [Urgent Order] Infiltrator Eradicator
+			41057 [REMOVED] [Urgent Order] Infiltrate-oberfest
+			41058 [REMOVED] [Urgent Order] Apperances Can Be Deceitful
+			41059 [REMOVED] [Urgent Order] Behind Enemy Lies
+			41060 [REMOVED] [Urgent Order] Still Got Disilgot
+			41061 [REMOVED] [Urgent Order] Cold and Disilveir
+			41062 [REMOVED] [Urgent Order] No Re-Doubts, No Regrets
+			41063 [REMOVED] [Urgent Order] Disilheim, It's Time
 		[END] SUMMARY
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="14220" start_npc_ids="802540">
-		<npc_infos npc_ids="802541"/>
-		<npc_infos npc_ids="802540"/>
-	</report_to_many> 
-	<report_to_many id="24220" start_npc_ids="802542">
-		<npc_infos npc_ids="802543"/>
-		<npc_infos npc_ids="802542"/>
-	</report_to_many> 
+	<report_to id="14210" start_npc_ids="" end_npc_ids="802465 802663 802664 802665"/>
+	<report_to id="14211" start_npc_ids="804752"/>
+	<report_to id="24210" start_npc_ids="" end_npc_ids="802465 802663 802664 802665"/>
+	<report_to id="24211" start_npc_ids="804752"/>
 </quest_scripts>
