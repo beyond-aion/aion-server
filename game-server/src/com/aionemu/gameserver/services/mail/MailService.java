@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services.mail;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +12,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -55,7 +58,6 @@ public class MailService {
 
 	/**
 	 * TODO split this method
-	 * 
 	 * @param sender
 	 * @param recipientName
 	 * @param title
@@ -63,7 +65,7 @@ public class MailService {
 	 * @param attachedItemObjId
 	 * @param attachedItemCount
 	 * @param attachedKinahCount
-	 * @param express
+	 * @param letterType
 	 */
 	public void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
 		long attachedKinahCount, LetterType letterType) {
@@ -204,9 +206,13 @@ public class MailService {
 			sender.getName(), time, true, letterType);
 
 		// first save attached item for FK consistency
-		if (attachedItem != null)
-			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientObjId))
+		if (attachedItem != null) {
+			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientObjId)) {
 				return;
+			}
+			// save item stones too.
+			DAOManager.getDAO(ItemStoneListDAO.class).save(FastTable.of(attachedItem));
+		}
 		// save letter
 		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))
 			return;
@@ -320,7 +326,7 @@ public class MailService {
 
 	/**
 	 * @param player
-	 * @param letterId
+	 * @param mailObjId
 	 */
 	public void deleteMail(Player player, int[] mailObjId) {
 		Mailbox mailbox = player.getMailbox();

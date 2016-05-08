@@ -313,11 +313,9 @@ public class ItemSocketService {
 			public void moved() {
 				super.moved();
 				player.getObserveController().removeObserver(this);
+				player.getController().cancelUseItem();
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, new DescriptionId(weapon.getNameId())));
-				if (player.getMoveController().isInMove()) {
-					player.getMoveController().abortMove(false);
-					player.getController().cancelUseItem();
-				}
+
 			}
 		};
 
