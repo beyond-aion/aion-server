@@ -26,25 +26,25 @@
 			13529 [REMOVED] [Hero/Alliance] In Every Instance
 			13530 [REMOVED] [Hero] A Hero's Reward
 			13531 [REMOVED] [Hero/Daily/Group] Old Habits Die Hard
-			13900 [XML_R] [Hero] When Kaisinel Calls
-			13901 [XML_R] [Hero/Group] A Test of Courage
-			13902 [XML_R] [Hero] Bracing for Balaurea
-			13903 [XML_R] [Hero] Beyond the Basics
-			13904 [XML_R] [Hero/Daily] Ace of Bases
-			13905 [XML_R] [Hero/Daily] Sweeping the North
-			13906 [XML_R] [Hero/Daily] Bringing Peace to the East
-			13907 [XML_R] [Hero/Daily] Striking the Southern Hold
-			13908 [XML_R] [Hero/Daily] Not so Quiet on the Western Front
-			13909 [XML_R] [Hero/Group] Kill Their Idols
-			13910 [XML_R] [Hero/Alliance] Conquering Kaldor
+			13900 [REMOVED] [Hero] When Kaisinel Calls	// NPC-Dialogs are missing
+			13901 [REMOVED] [Hero/Group] A Test of Courage
+			13902 [REMOVED] [Hero] Bracing for Balaurea
+			13903 [REMOVED] [Hero] Beyond the Basics
+			13904 [REMOVED] [Hero/Daily] Ace of Bases
+			13905 [REMOVED] [Hero/Daily] Sweeping the North
+			13906 [REMOVED] [Hero/Daily] Bringing Peace to the East
+			13907 [REMOVED] [Hero/Daily] Striking the Southern Hold
+			13908 [REMOVED] [Hero/Daily] Not so Quiet on the Western Front
+			13909 [REMOVED] [Hero/Group] Kill Their Idols
+			13910 [REMOVED] [Hero/Alliance] Conquering Kaldor
 			13911 [REMOVED] [Hero/Weekly] Four by Four
 			13912 [REMOVED] [Hero/Alliance] O, Captain by Captain
 			13913 [REMOVED] [Hero/Alliance] Dragon's in the Annex
-			13914 [XML_R] [Hero/Alliance] Full Throttle
-			13915 [XML_R] [Hero/Weekly/Alliance] Take 2
-			13916 [XML_R] [Hero/Alliance] A Shadow over Levinshor
-			13917 [XML_R] [Hero/Group] Snuffing out a Flame
-			13918 [XML_R] [Hero/Group] Live by the Sword...
+			13914 [REMOVED] [Hero/Alliance] Full Throttle
+			13915 [REMOVED] [Hero/Weekly/Alliance] Take 2
+			13916 [REMOVED] [Hero/Alliance] A Shadow over Levinshor
+			13917 [REMOVED] [Hero/Group] Snuffing out a Flame
+			13918 [REMOVED] [Hero/Group] Live by the Sword...
 			23500 [REMOVED] [Achievement] Inspect the Katalam Base
 			23509 [REMOVED] [Hero] Building Achievements in Katalam
 			23510 [REMOVED] [Hero] For Honor!
@@ -69,79 +69,27 @@
 			23529 [REMOVED] [Hero/Force] Repurposing the Past
 			23530 [REMOVED] [Hero] Just Rewards
 			23531 [REMOVED] [Hero/Daily/Group] More Spirits, More Grudges
-			23900 [XML_R] [Hero] Fate of the Fierce
-			23901 [XML_R] [Hero/Group] A Test of Valiance
-			23902 [XML_R] [Hero] Prepare to Prevail
-			23903 [XML_R] [Hero] Prove Your Supremacy
-			23904 [XML_R] [Hero/Daily] Cover Your Bases
-			23905 [XML_R] [Hero/Daily] Northern Occupation
-			23906 [XML_R] [Hero/Daily] Defeat the East
-			23907 [XML_R] [Hero/Daily] Southern Knockout
-			23908 [XML_R] [Hero/Daily] Go West, Young Daeva
-			23909 [XML_R] [Hero/Group] Something Wicked
-			23910 [XML_R] [Hero/Alliance] Seizing the Moment
+			23900 [REMOVED] [Hero] Fate of the Fierce		// NPC-Dialogs are missing
+			23901 [REMOVED] [Hero/Group] A Test of Valiance
+			23902 [REMOVED] [Hero] Prepare to Prevail
+			23903 [REMOVED] [Hero] Prove Your Supremacy
+			23904 [REMOVED] [Hero/Daily] Cover Your Bases
+			23905 [REMOVED] [Hero/Daily] Northern Occupation
+			23906 [REMOVED] [Hero/Daily] Defeat the East
+			23907 [REMOVED] [Hero/Daily] Southern Knockout
+			23908 [REMOVED] [Hero/Daily] Go West, Young Daeva
+			23909 [REMOVED] [Hero/Group] Something Wicked
+			23910 [REMOVED] [Hero/Alliance] Seizing the Moment
 			23911 [REMOVED] [Hero/Weekly] Castles Fall
 			23912 [REMOVED] [Hero/Alliance] Marching Orders
 			23913 [REMOVED] [Hero/Alliance] Sword over Scales
-			23914 [XML_R] [Hero/Alliance] Stemming the Tide
-			23915 [XML_R] [Hero/Weekly/Alliance] I'm not Quite Stemmed Yet
-			23916 [XML_R] [Hero/Alliance] Un-Veille the Agents
-			23917 [XML_R] [Hero/Group] Knockout, Watchout
-			23918 [XML_R] [Hero/Group] Can't Stop, Won't Stop
-			80539 [XML_T] [Hero] Only Because You're the Best
-			80540 [XML_T] [Hero] Only for the Chosen
+			23914 [REMOVED] [Hero/Alliance] Stemming the Tide
+			23915 [REMOVED] [Hero/Weekly/Alliance] I'm not Quite Stemmed Yet
+			23916 [REMOVED] [Hero/Alliance] Un-Veille the Agents
+			23917 [REMOVED] [Hero/Group] Knockout, Watchout
+			23918 [REMOVED] [Hero/Group] Can't Stop, Won't Stop
+			80539 [REMOVED] [Hero] Only Because You're the Best
+			80540 [REMOVED] [Hero] Only for the Chosen
 		[END] SUMMARY
-	-->
-	
-	<!-- REPORT TO -->
-	<!--
-	<report_to_many id="13900" start_npc_ids="798926" end_npc_ids="798514">
-		<npc_infos npc_ids="203726"/>
-		<npc_infos npc_ids="798514"/>
-	</report_to_many>
-	<report_to id="13902" start_npc_ids="798514" end_npc_ids="798926"/>
-	<report_to_many id="23900" start_npc_ids="799225" end_npc_ids="798718">
-		<npc_infos npc_ids="204182"/>
-		<npc_infos npc_ids="798718"/>
-	</report_to_many>
-	<report_to id="23902" start_npc_ids="798718" end_npc_ids="799225"/>
-	-->
-	
-	<!-- ITEM COLLECTING -->
-	<!--
-	<item_collecting id="13901" start_npc_ids="798514"/>
-	<item_collecting id="13903" start_npc_ids="798926"/>
-	<item_collecting id="13904" start_npc_ids="798926"/>
-	<item_collecting id="13914" start_npc_ids="798515"/>
-	<item_collecting id="13915" start_npc_ids="798515"/>
-	<item_collecting id="13916" start_npc_ids="802350"/>
-	<item_collecting id="23901" start_npc_ids="798718"/>
-	<item_collecting id="23903" start_npc_ids="799225"/>
-	<item_collecting id="23904" start_npc_ids="799225"/>
-	<item_collecting id="23914" start_npc_ids="798719"/>
-	<item_collecting id="23915" start_npc_ids="798719"/>
-	<item_collecting id="23916" start_npc_ids="802353"/>
-	<item_collecting id="80539"/>
-	<item_collecting id="80540"/>
-	-->
-	
-	<!-- MONSTER HUNT -->
-	<!--
-	<monster_hunt id="13905" start_npc_ids="802350"/>
-	<monster_hunt id="13906" start_npc_ids="802350"/>
-	<monster_hunt id="13907" start_npc_ids="802350"/>
-	<monster_hunt id="13908" start_npc_ids="802350"/>
-	<monster_hunt id="13909" start_npc_ids="802350"/>
-	<monster_hunt id="13910" start_npc_ids="798514"/>
-	<monster_hunt id="13917" start_npc_ids="802350" end_npc_ids="802328"/>
-	<monster_hunt id="13918" start_npc_ids="802328" end_npc_ids="802350"/>
-	<monster_hunt id="23905" start_npc_ids="802353"/>
-	<monster_hunt id="23906" start_npc_ids="802353"/>
-	<monster_hunt id="23907" start_npc_ids="802353"/>
-	<monster_hunt id="23908" start_npc_ids="802353"/>
-	<monster_hunt id="23909" start_npc_ids="802353"/>
-	<monster_hunt id="23910" start_npc_ids="798718"/>
-	<monster_hunt id="23917" start_npc_ids="802353" end_npc_ids="802347"/>
-	<monster_hunt id="23918" start_npc_ids="802347" end_npc_ids="802353"/>
 	-->
 </quest_scripts>
