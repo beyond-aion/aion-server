@@ -58,4 +58,13 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 	public WorldMapTemplate getTemplate(int worldId) {
 		return worldIdMap.get(worldId);
 	}
+
+	public int getWorlIdByName(String name) {
+		for (WorldMapTemplate template : worldMaps) {
+			if (template.getName().equalsIgnoreCase(name)) {
+				return template.getMapId();
+			}
+		}
+		return 0;
+	}
 }

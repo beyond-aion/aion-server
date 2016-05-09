@@ -1,6 +1,7 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_GM_BOOKMARK_ADD;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
@@ -15,7 +16,15 @@ public class Bookmark_add extends ConsoleCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		PacketSendUtility.sendMessage(admin, "Command not implemented.");
-		return;
+		if (params.length > 0) {
+			String bookmark_name = "";
+			for (String string : params) {
+				bookmark_name += string + " ";
+			}
+			if (!bookmark_name.isEmpty()) {
+				bookmark_name = bookmark_name.trim();
+				PacketSendUtility.sendPacket(admin, new SM_GM_BOOKMARK_ADD(bookmark_name, admin.getWorldId(), admin.getX(), admin.getY(), admin.getZ()));
+			}
+		}
 	}
 }
