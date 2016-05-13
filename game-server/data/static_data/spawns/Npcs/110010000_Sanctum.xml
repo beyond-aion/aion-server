@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="110010000">
+		<!-- Robo-Shugo (Skill CD Remover) -->
+		<spawn npc_id="833543" respawn_time="295">
+			<spot x="1422.7744" y="1250.0612" z="569.47" h="16"/>
+		</spawn>
 		<!-- Euterpe -->
 		<spawn npc_id="798173" respawn_time="295">
 			<spot x="1530.0000" y="1551.4000" z="565.9838" h="94"/>

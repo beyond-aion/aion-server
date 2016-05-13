@@ -30,18 +30,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("customcdreset")
 public class SkillCooltimeResetAI2 extends NpcAI2 {
-	//npc_id: 205517
-	int price = 50000; //=50.000 Kinah
-	int maxCooldownTime = 3000; //=5min -> skills with a cd >5min are ignored
+	//npc_id: 205517, 833543
+	int price = 50000; // = 50.000 Kinah
+	int maxCooldownTime = 3000; // = 5min -> skills with a cd >5min are ignored
 	
 	@Override
 	protected void handleDialogStart(Player player) {
 		if (player.getController().isInCombat()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
-		} else if (player.getSkillCoolDowns().isEmpty()) {
-			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "Daeva has no skill cooldowns to reset, yang." , ChatType.NPC));
 		} else if (player.isTransformed() && player.getTransformModel().getType() == TransformType.AVATAR) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
+		} else if (player.getSkillCoolDowns().isEmpty() || checkCooldowns(player)) {
+			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "Daeva has no skill cooldowns to reset, yang." , ChatType.NPC));
 		} else {
 			if (Rnd.get(1, 100) <= 10) {
 				PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "I can reset your skill cooldowns for 50.000 Kinah, yang yang." , ChatType.NPC));
@@ -49,57 +49,64 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 			sendRequest(player);
 		}
 	}
-	
-	private void sendRequest(Player player) {
-		AI2Actions.addRequest(this, player, 1300765, 0, new AI2Request() {
+
+	private boolean checkCooldowns(Player player) {
+		PlayerSkillList skillList = player.getSkillList();
+		for (PlayerSkillEntry skill : skillList.getAllSkills()) {
+			SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
+			if (st != null && st.getCooldown() <= maxCooldownTime && (player.getSkillCoolDown(st.getCooldownId()) - System.currentTimeMillis()) > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void sendRequest(final Player player) {
+		AI2Actions.addRequest(this, player, 1300765, getObjectId(), 5, new AI2Request() {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
 				if (responder.getWorldId() == requester.getWorldId()) {
 					if (responder.getInventory().getKinah() < price) {
 						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
-					} else if (MathUtil.getDistance(requester, responder) > 5) {
-						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 					} else if (responder.isTransformed() && responder.getTransformModel().getType() == TransformType.AVATAR) {
 						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
+					} else if (MathUtil.getDistance(requester, responder) > 5) {
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 					} else {
-				
+
 						HashMap<Integer, Long> resetSkillCoolDowns = new HashMap<>();
-						
+
 						PlayerSkillList skillList = responder.getSkillList();
 						for (PlayerSkillEntry skill : skillList.getAllSkills()) {
 							skillId = skill.getSkillId();
 							SkillTemplate st =  DataManager.SKILL_DATA.getSkillTemplate(skillId);
-							
+
 							if (st != null && st.getCooldown() <= maxCooldownTime) {
 								if (!st.isDeityAvatar()) {
 									boolean hasDpAction = false;
-							
+
 									if (st.getActions() != null) {
 										for (Action ac : st.getActions().getActions()) {
 											if (ac instanceof DpUseAction) {
 												hasDpAction = true;
 												break;
 											}
-										}	
+										}
 									}
-							
+
 									if (!hasDpAction) {
 										if ((responder.getSkillCoolDown(st.getCooldownId()) - System.currentTimeMillis()) > 0) {
-											responder.setSkillCoolDown(st.getCooldownId(), System.currentTimeMillis());
 											resetSkillCoolDowns.put(st.getCooldownId(), System.currentTimeMillis());
 										}
+										responder.removeSkillCoolDown(st.getCooldownId());
 									}
 								}
 							}
 						}
-				
+
 						if (resetSkillCoolDowns.size() > 0 ) {
 							if (responder.getInventory().tryDecreaseKinah(price)) {
-								responder.getEffectController().removeAllEffects();
-								if (responder.getSummon() != null) {
-									responder.getSummon().getEffectController().removeAllEffects();
-								}
 								PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
 							} else {
 								PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
@@ -108,8 +115,8 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 					}
 				} else {
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
-				}	
+				}
 			}
-		}, price);
+		});
 	}
 }
