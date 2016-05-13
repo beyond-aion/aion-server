@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -37,9 +40,6 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * Created on 06.04.2016.
@@ -169,7 +169,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		return canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)
+		return p.isGM() || canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)
 			&& (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
 	}
 
@@ -186,7 +186,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private synchronized void updateJoinOrLeaveTime(Player p) {
-		joinOrLeaveTime.put(p.getObjectId(), System.currentTimeMillis());
+		if (!p.isGM())
+			joinOrLeaveTime.put(p.getObjectId(), System.currentTimeMillis());
 	}
 
 	@Override
@@ -232,8 +233,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		updateJoinOrLeaveTime(player);
 		if (!player.isGM()) {
+			updateJoinOrLeaveTime(player);
 			instance.doOnAllPlayers(p -> {
 				if (!p.equals(player))
 					PacketSendUtility.sendMessage(p, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER);
