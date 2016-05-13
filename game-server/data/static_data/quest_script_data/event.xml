@@ -187,6 +187,14 @@
 			80666 [XML] [Event] Dangerous Efforts for Honor 2
 			80667 [XML] [Event] Dangerous Efforts for Honor 3
 			80668 [XML] [Event] Dangerous Efforts for Honor 4
+			80689 [XML] [Event] Secret of the Vault
+			80690 [XML] [Event/Daily] Kill Kinah Grabbers
+			80691 [XML] [Event] Recapturing the Vault
+			80692 [XML] [Event] [Event] Mirez, the Mired
+			80693 [XML] [Event] Zodica, the Crazed
+			80694 [XML] [Event] Budyn, the Bloodied
+			80695 [XML] [Event] Rupasha, the Rapacious
+			80696 [XML] [Event] Gradi, the Gruesome
 		[END] SUMMARY
 	-->
 
@@ -247,10 +255,11 @@
 	<report_to id="80384" start_npc_ids="831836" end_npc_ids="831851"/>
 	<report_to id="80385" start_npc_ids="831836" end_npc_ids="831848"/>
 	<report_to id="80386" start_npc_ids="831836" end_npc_ids="831852"/>
-	<!-- report_to id="80575" start_npc_ids="832041" end_npc_ids="832041"/-->
-	<!-- report_to id="80577" start_npc_ids="832040" end_npc_ids="832040"/-->
-	<!-- report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
-	<!-- report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
+	<!-- CUSTOM: report_to id="80575" start_npc_ids="832041" end_npc_ids="832041"/-->
+	<!-- CUSTOM: report_to id="80577" start_npc_ids="832040" end_npc_ids="832040"/-->
+	<!-- CUSTOM: report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
+	<!-- CUSTOM: report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
+	<report_to id="80689" start_npc_ids="832921" end_npc_ids="832922"/>
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="50035" start_npc_ids="832749"/>
@@ -393,4 +402,11 @@
 	<monster_hunt id="80454" start_npc_ids="831852"/>
 	<monster_hunt id="80455" start_npc_ids="831852"/>
 	<monster_hunt id="80456" start_npc_ids="831852"/>
+	<monster_hunt id="80690" start_npc_ids="832923" end_npc_ids="832922"/>
+	<monster_hunt id="80691" start_npc_ids="832923"/>
+	<monster_hunt id="80692" start_npc_ids="832921"/>
+	<monster_hunt id="80693" start_npc_ids="832921"/>
+	<monster_hunt id="80694" start_npc_ids="832921"/>
+	<monster_hunt id="80695" start_npc_ids="832921"/>
+	<monster_hunt id="80696" start_npc_ids="832921"/>
 </quest_scripts>
