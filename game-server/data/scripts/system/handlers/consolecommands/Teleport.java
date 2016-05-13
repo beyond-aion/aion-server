@@ -17,7 +17,7 @@ public class Teleport extends ConsoleCommand {
 	@Override
 	protected void execute(Player player, String... params) {
 		if (params.length == 4) {
-			int worldId = DataManager.WORLD_MAPS_DATA.getWorlIdByName(params[0]);
+			int worldId = DataManager.WORLD_MAPS_DATA.getWorldIdByName(params[0]);
 			if (worldId != 0) {
 				int x = -1;
 				int y = -1;
