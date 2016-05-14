@@ -56,6 +56,12 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.START_EMOTE2));
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
+			case JUMP:
+				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.JUMP));
+				break;
+			case SUMMON_STOP_JUMP:
+				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.SUMMON_STOP_JUMP));
+				break;
 			case ATTACKMODE_IN_MOVE: // start attacking
 				summon.setState(CreatureState.WEAPON_EQUIPPED);
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
@@ -63,6 +69,9 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 			case NEUTRALMODE_IN_MOVE: // stop attacking
 				summon.unsetState(CreatureState.WEAPON_EQUIPPED);
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
+				break;
+			default:
+				PacketSendUtility.sendMessage(player, "Emotion: " + emotionType.toString());
 				break;
 		}
 	}
