@@ -70,9 +70,6 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				summon.unsetState(CreatureState.WEAPON_EQUIPPED);
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
-			default:
-				PacketSendUtility.sendMessage(player, "Emotion: " + emotionType.toString());
-				break;
 		}
 	}
 }
