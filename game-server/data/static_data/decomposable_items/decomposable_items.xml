@@ -8312,273 +8312,348 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188051162" name="Unknown Bundle">
-		<items chance="85.5" minlevel="10" maxlevel="20">
-			<item id="186000001" name="Iron Coin" min_count="2" race="ELYOS" />
-			<item id="186000006" name="Iron Coin" min_count="2" race="ASMODIANS" />
+		<items chance="88.0" minlevel="1" maxlevel="20">
+			<item id="186000001" name="Iron Coin" min_count="2" max_count="3" race="ELYOS" />
+			<item id="186000006" name="Iron Coin" min_count="2" max_count="3" race="ASMODIANS" />
 		</items>
-		<items chance="1.8" minlevel="10" maxlevel="20">
-			<item id="152011092" name="Minor Construction Flux" />
-		</items>
-		<items chance="1.7" minlevel="10" maxlevel="20">
-			<item id="152011093" name="Lesser Construction Flux" />
-		</items>
-		<items chance="0.9" minlevel="10" maxlevel="20">
-			<item id="152011094" name="Construction Flux" />
-		</items>
-		<items chance="0.9" minlevel="10" maxlevel="20">
-			<item id="152011095" name="Greater Construction Flux" />
-		</items>
-		<items chance="3.4" minlevel="10" maxlevel="20">
+		<items chance="2.0" minlevel="1" maxlevel="20">
 			<item id="170020001" name="Brown Square Painting" />
 		</items>
-		<items chance="3.2" minlevel="10" maxlevel="20">
+		<items chance="3.0" minlevel="1" maxlevel="20">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="2.6" minlevel="10" maxlevel="20">
+		<items chance="2.0" minlevel="1" maxlevel="20">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="85.0" minlevel="21" maxlevel="30">
-			<item id="186000002" name="Bronze Coin" min_count="2" race="ELYOS" />
-			<item id="186000007" name="Bronze Coin" min_count="2" race="ASMODIANS" />
-		</items>
-		<items chance="0.6" minlevel="21" maxlevel="30">
+		<items chance="1.0" minlevel="1" maxlevel="20">
 			<item id="152011092" name="Minor Construction Flux" />
 		</items>
-		<items chance="1.2" minlevel="21" maxlevel="30">
+		<items chance="1.0" minlevel="1" maxlevel="20">
 			<item id="152011093" name="Lesser Construction Flux" />
 		</items>
-		<items chance="1.5" minlevel="21" maxlevel="30">
+		<items chance="1.0" minlevel="1" maxlevel="20">
 			<item id="152011094" name="Construction Flux" />
 		</items>
-		<items chance="1.7" minlevel="21" maxlevel="30">
+		<items chance="1.0" minlevel="1" maxlevel="20">
 			<item id="152011095" name="Greater Construction Flux" />
 		</items>
-		<items chance="3.6" minlevel="21" maxlevel="30">
+		<items chance="1.0" minlevel="1" maxlevel="20">
+			<item id="152011096" name="Major Construction Flux" />
+		</items>
+		<items chance="78.0" minlevel="21" maxlevel="30">
+			<item id="186000002" name="Bronze Coin" min_count="2" max_count="3" race="ELYOS" />
+			<item id="186000007" name="Bronze Coin" min_count="2" max_count="3" race="ASMODIANS" />
+		</items>
+		<items chance="2.0" minlevel="21" maxlevel="30">
 			<item id="170020001" name="Brown Square Painting" />
 		</items>
-		<items chance="1.8" minlevel="21" maxlevel="30">
+		<items chance="3.0" minlevel="21" maxlevel="30">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="3.3" minlevel="21" maxlevel="30">
+		<items chance="2.0" minlevel="21" maxlevel="30">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="0.6" minlevel="21" maxlevel="30">
+		<items chance="5.0" minlevel="21" maxlevel="30">
 			<item id="186000146" name="Guestpetal" />
 		</items>
-		<items chance="0.7" minlevel="21" maxlevel="30">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+		<items chance="5.0" minlevel="21" maxlevel="30">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
 		</items>
-		<items chance="85.0" minlevel="31" maxlevel="40">
-			<item id="186000003" name="Silver Coin" min_count="2" race="ELYOS" />
-			<item id="186000008" name="Silver Coin" min_count="2" race="ASMODIANS" />
+		<items chance="1.0" minlevel="21" maxlevel="30">
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="0.6" minlevel="31" maxlevel="40">
-			<item id="152011092" name="Minor Construction Flux" />
+		<items chance="1.0" minlevel="21" maxlevel="30">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.2" minlevel="31" maxlevel="40">
-			<item id="152011093" name="Lesser Construction Flux" />
+		<items chance="1.0" minlevel="21" maxlevel="30">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
 		</items>
-		<items chance="1.5" minlevel="31" maxlevel="40">
-			<item id="152011094" name="Construction Flux" />
+		<items chance="1.0" minlevel="21" maxlevel="30">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
 		</items>
-		<items chance="1.7" minlevel="31" maxlevel="40">
-			<item id="152011095" name="Greater Construction Flux" />
+		<items chance="1.0" minlevel="21" maxlevel="30">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
 		</items>
-		<items chance="3.6" minlevel="31" maxlevel="40">
+		<items chance="78.0" minlevel="31" maxlevel="40">
+			<item id="186000003" name="Silver Coin" min_count="2" max_count="3" race="ELYOS" />
+			<item id="186000008" name="Silver Coin" min_count="2" max_count="3" race="ASMODIANS" />
+		</items>
+		<items chance="2.0" minlevel="31" maxlevel="40">
 			<item id="170020001" name="Brown Square Painting" />
 		</items>
-		<items chance="1.8" minlevel="31" maxlevel="40">
+		<items chance="3.0" minlevel="31" maxlevel="40">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="3.3" minlevel="31" maxlevel="40">
+		<items chance="2.0" minlevel="31" maxlevel="40">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="0.6" minlevel="31" maxlevel="40">
+		<items chance="5.0" minlevel="31" maxlevel="40">
 			<item id="186000146" name="Guestpetal" />
 		</items>
-		<items chance="0.7" minlevel="31" maxlevel="40">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+		<items chance="5.0" minlevel="31" maxlevel="40">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
 		</items>
-		<items chance="85.0" minlevel="41" maxlevel="45">
-			<item id="186000004" name="Gold Coin" min_count="2" race="ELYOS" />
-			<item id="186000009" name="Gold Coin" min_count="2" race="ASMODIANS" />
+		<items chance="1.0" minlevel="31" maxlevel="40">
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.5" minlevel="41" maxlevel="45">
-			<item id="152011092" name="Minor Construction Flux" />
+		<items chance="1.0" minlevel="31" maxlevel="40">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.5" minlevel="41" maxlevel="45">
-			<item id="152011093" name="Lesser Construction Flux" />
+		<items chance="1.0" minlevel="31" maxlevel="40">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="31" maxlevel="40">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="31" maxlevel="40">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
+		</items>
+		<items chance="74.0" minlevel="41" maxlevel="45">
+			<item id="186000004" name="Gold Coin" min_count="2" max_count="3" race="ELYOS" />
+			<item id="186000009" name="Gold Coin" min_count="2" max_count="3" race="ASMODIANS" />
+		</items>
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="170410023" name="Fine Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="170410024" name="Fancy Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="170420029" name="Fine Wood Dining Table" />
+		</items>
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="170420030" name="Fancy Wood Dining Table" />
+		</items>
+		<items chance="2.0" minlevel="41" maxlevel="45">
+			<item id="170020001" name="Brown Square Painting" />
 		</items>
 		<items chance="3.0" minlevel="41" maxlevel="45">
-			<item id="152011094" name="Construction Flux" />
-		</items>
-		<items chance="3.0" minlevel="41" maxlevel="45">
-			<item id="152011095" name="Greater Construction Flux" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="170020001" name="Brown Square Painting" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
+		<items chance="2.0" minlevel="41" maxlevel="45">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="170410023" name="Fine Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="170410024" name="Fancy Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="170420029" name="Fine Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="170420030" name="Fancy Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="41" maxlevel="45">
+		<items chance="5.0" minlevel="41" maxlevel="45">
 			<item id="186000146" name="Guestpetal" />
 		</items>
+		<items chance="5.0" minlevel="41" maxlevel="45">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
+		</items>
 		<items chance="1.0" minlevel="41" maxlevel="45">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="85.0" minlevel="46" maxlevel="50">
-			<item id="186000005" name="Platinum Coin" race="ELYOS" />
-			<item id="186000010" name="Platinum Coin" race="ASMODIANS" />
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.5" minlevel="46" maxlevel="50">
-			<item id="152011092" name="Minor Construction Flux" />
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
 		</items>
-		<items chance="1.5" minlevel="46" maxlevel="50">
-			<item id="152011093" name="Lesser Construction Flux" />
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="41" maxlevel="45">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
+		</items>
+		<items chance="74.0" minlevel="46" maxlevel="50">
+			<item id="186000005" name="Platinum Coin" min_count="2" max_count="3" race="ELYOS" />
+			<item id="186000010" name="Platinum Coin" min_count="2" max_count="3" race="ASMODIANS" />
+		</items>
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="170410023" name="Fine Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="170410024" name="Fancy Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="170420029" name="Fine Wood Dining Table" />
+		</items>
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="170420030" name="Fancy Wood Dining Table" />
+		</items>
+		<items chance="2.0" minlevel="46" maxlevel="50">
+			<item id="170020001" name="Brown Square Painting" />
 		</items>
 		<items chance="3.0" minlevel="46" maxlevel="50">
-			<item id="152011094" name="Construction Flux" />
-		</items>
-		<items chance="3.0" minlevel="46" maxlevel="50">
-			<item id="152011095" name="Greater Construction Flux" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="170020001" name="Brown Square Painting" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
+		<items chance="2.0" minlevel="46" maxlevel="50">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="170410023" name="Fine Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="170410024" name="Fancy Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="170420029" name="Fine Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="170420030" name="Fancy Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="46" maxlevel="50">
+		<items chance="5.0" minlevel="46" maxlevel="50">
 			<item id="186000146" name="Guestpetal" />
 		</items>
+		<items chance="5.0" minlevel="46" maxlevel="50">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
+		</items>
 		<items chance="1.0" minlevel="46" maxlevel="50">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="85.0" minlevel="51" maxlevel="55">
-			<item id="186000018" name="Mithril Coin" race="ELYOS" />
-			<item id="186000019" name="Mithril Coin" race="ASMODIANS" />
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.5" minlevel="51" maxlevel="55">
-			<item id="152011092" name="Minor Construction Flux" />
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
 		</items>
-		<items chance="1.5" minlevel="51" maxlevel="55">
-			<item id="152011093" name="Lesser Construction Flux" />
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="46" maxlevel="50">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
+		</items>
+		<items chance="72.0" minlevel="51" maxlevel="55">
+			<item id="186000018" name="Mithril Coin" max_count="2" race="ELYOS" />
+			<item id="186000019" name="Mithril Coin" max_count="2" race="ASMODIANS" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170110022" name="Fine Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170110023" name="Fancy Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170410023" name="Fine Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170410024" name="Fancy Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170420029" name="Fine Wood Dining Table" />
+		</items>
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="170420030" name="Fancy Wood Dining Table" />
 		</items>
 		<items chance="2.0" minlevel="51" maxlevel="55">
-			<item id="152011094" name="Construction Flux" />
+			<item id="170020001" name="Brown Square Painting" />
+		</items>
+		<items chance="3.0" minlevel="51" maxlevel="55">
+			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
 		<items chance="2.0" minlevel="51" maxlevel="55">
-			<item id="152011095" name="Greater Construction Flux" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170020001" name="Brown Square Painting" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170020010" name="Small Dark Brown Round Painting" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170410023" name="Fine Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170410024" name="Fancy Wooden Chair" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170420029" name="Fine Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="170420030" name="Fancy Wood Dining Table" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="152011095" name="Greater Construction Flux" />
-		</items>
-		<items chance="1.0" minlevel="51" maxlevel="55">
+		<items chance="5.0" minlevel="51" maxlevel="55">
 			<item id="186000146" name="Guestpetal" />
 		</items>
+		<items chance="5.0" minlevel="51" maxlevel="55">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
+		</items>
 		<items chance="1.0" minlevel="51" maxlevel="55">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="60.0" minlevel="56" maxlevel="65">
-			<item id="186000018" name="Mithril Coin" race="ELYOS" />
-			<item id="186000019" name="Mithril Coin" race="ASMODIANS" />
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
 		</items>
-		<items chance="4.0" minlevel="56" maxlevel="65">
-			<item id="152011092" name="Minor Construction Flux" />
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
 		</items>
-		<items chance="4.0" minlevel="56" maxlevel="65">
-			<item id="152011093" name="Lesser Construction Flux" />
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
-			<item id="152011094" name="Construction Flux" />
+		<items chance="1.0" minlevel="51" maxlevel="55">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
-			<item id="152011095" name="Greater Construction Flux" />
+		<items chance="72.0" minlevel="56" maxlevel="60">
+			<item id="186000018" name="Mithril Coin" max_count="2" race="ELYOS" />
+			<item id="186000019" name="Mithril Coin" max_count="2" race="ASMODIANS" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170110022" name="Fine Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170110023" name="Fancy Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170410023" name="Fine Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170410024" name="Fancy Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170420029" name="Fine Wood Dining Table" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="170420030" name="Fancy Wood Dining Table" />
+		</items>
+		<items chance="2.0" minlevel="56" maxlevel="60">
 			<item id="170020001" name="Brown Square Painting" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
+		<items chance="3.0" minlevel="56" maxlevel="60">
 			<item id="170020010" name="Small Dark Brown Round Painting" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
+		<items chance="2.0" minlevel="56" maxlevel="60">
 			<item id="170020011" name="Dark Brown Round Painting" />
 		</items>
-		<items chance="5.0" minlevel="56" maxlevel="65">
-			<item id="170110011" name="Fancy Wood Display Cabinet" />
-		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
-			<item id="170410023" name="Fine Wooden Chair" />
-		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
-			<item id="170410024" name="Fancy Wooden Chair" />
-		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
-			<item id="170420029" name="Fine Wood Dining Table" />
-		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
-			<item id="170420030" name="Fancy Wood Dining Table" />
-		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
+		<items chance="5.0" minlevel="56" maxlevel="60">
 			<item id="186000146" name="Guestpetal" />
 		</items>
-		<items chance="4.0" minlevel="56" maxlevel="65">
-			<item id="186000159" name="Guestbloom Fertilizer" />
+		<items chance="5.0" minlevel="56" maxlevel="60">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
 		</items>
-		<items chance="3.0" minlevel="56" maxlevel="65">
-			<item id="186000143" name="Kahrun's Symbol" />
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="56" maxlevel="60">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
+		</items>
+		<items chance="70.0" minlevel="61" maxlevel="65">
+			<item id="186000231" name="Ceramium Coin" max_count="2" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170110022" name="Fine Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170110023" name="Fancy Wood Display Cabinet" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170410023" name="Fine Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170410024" name="Fancy Wooden Chair" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170420029" name="Fine Wood Dining Table" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="170420030" name="Fancy Wood Dining Table" />
+		</items>
+		<items chance="2.0" minlevel="61" maxlevel="65">
+			<item id="170020001" name="Brown Square Painting" />
+		</items>
+		<items chance="3.0" minlevel="61" maxlevel="65">
+			<item id="170020010" name="Small Dark Brown Round Painting" />
+		</items>
+		<items chance="2.0" minlevel="61" maxlevel="65">
+			<item id="170020011" name="Dark Brown Round Painting" />
+		</items>
+		<items chance="5.0" minlevel="61" maxlevel="65">
+			<item id="186000146" name="Guestpetal" />
+		</items>
+		<items chance="5.0" minlevel="61" maxlevel="65">
+			<item id="186000159" name="Guestbloom Fertilizer" max_count="3" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="152011092" name="Minor Construction Flux" min_count="2" max_count="5" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="152011093" name="Lesser Construction Flux" min_count="2" max_count="5" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="152011094" name="Construction Flux" min_count="2" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="152011095" name="Greater Construction Flux" max_count="4" />
+		</items>
+		<items chance="1.0" minlevel="61" maxlevel="65">
+			<item id="152011096" name="Major Construction Flux" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051163" name="Box of Form Candy - Elyos">
