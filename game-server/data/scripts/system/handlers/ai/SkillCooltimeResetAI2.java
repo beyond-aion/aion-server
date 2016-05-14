@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -107,6 +108,8 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 
 						if (resetSkillCoolDowns.size() > 0 ) {
 							if (responder.getInventory().tryDecreaseKinah(price)) {
+								responder.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, responder.getLifeStats().getMaxHp(), 0, SM_ATTACK_STATUS.LOG.REGULAR);
+								responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 								PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
 							} else {
 								PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
