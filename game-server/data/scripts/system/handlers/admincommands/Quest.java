@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -29,6 +30,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author MrPoke
  * @reworked Neon
+ * @modified Pad
  */
 public class Quest extends AdminCommand {
 
@@ -40,6 +42,7 @@ public class Quest extends AdminCommand {
 			"[player] <quest> <status> - Shows the quest status of the specified quest.",
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
+			"[player] <quest> <dialog> <dialog_id> - Sends the specified quest dialog.",
 			"Note: Player name parameters are optional. If missing, your current target will be taken."
 		);
 	}
@@ -144,6 +147,17 @@ public class Quest extends AdminCommand {
 			}
 
 			setQuestFlags(admin, target, questId, flags);
+		} else if (params[index].equalsIgnoreCase("dialog")) {
+			int dialogId;
+			
+			try {
+				dialogId = Integer.valueOf(params[++index]);
+			} catch (IndexOutOfBoundsException | NumberFormatException e) {
+				sendInfo(admin, "<dialog_id> must be an int value.");
+				return;
+			}
+			
+			sendQuestDialog(admin, questId, dialogId);
 		} else {
 			sendInfo(admin);
 		}
@@ -304,5 +318,14 @@ public class Quest extends AdminCommand {
 		qs.setFlags(flags);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 		sendInfo(admin, "Set " + target.getName() + "'s quest flags to " + flags + ".");
+	}
+	
+	private void sendQuestDialog(Player admin, int questId, int dialogId) {
+		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
+			return;
+		}
+		PacketSendUtility.sendPacket(admin, new SM_DIALOG_WINDOW(0, dialogId, questId));
+		sendInfo(admin, "Dialog " + dialogId + " of Q" + questId + " sent!");
 	}
 }
