@@ -5044,6 +5044,10 @@
 			<spot x="2427.10059" y="2866.59106" z="309.24490" random_walk="1"/>
 			<spot x="2468.77734" y="2919.32495" z="305.48566" random_walk="1"/>
 		</spawn>
+		<!-- Supri -->
+		<spawn npc_id="804864" respawn_time="295">
+			<spot x="2091.7" y="2286.5" z="294.625" h="10"/>
+		</spawn>
 		<!-- swooping petalsprite -->
 		<spawn npc_id="235819" respawn_time="295">
 			<spot x="1098.68579" y="698.83331" z="551.66669" random_walk="1"/>

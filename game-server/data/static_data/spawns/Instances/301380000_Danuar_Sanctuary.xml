@@ -50,6 +50,10 @@
 		<spawn npc_id="730866">
 			<spot x="937.55585" y="876.63904" z="305.12701" static_id="1820"/>
 		</spawn>
+		<!-- Alkatron -->
+		<spawn npc_id="804862">
+			<spot x="402.55734" y="1169.1189" z="55.249" h="33"/>
+		</spawn>
 		<!-- Ancient Bloodwing -->
 		<spawn npc_id="235611">
 			<spot x="973.18835" y="1341.4718" z="335.876" h="70" random_walk="1"/>
@@ -136,6 +140,10 @@
 			<spot x="1095.1938" y="458.95532" z="285.454" h="60" random_walk="1"/>
 			<spot x="1097.1538" y="458.15659" z="285.454" h="60" random_walk="1"/>
 			<spot x="1097.2369" y="460.68918" z="285.454" h="60" random_walk="1"/>
+		</spawn>
+		<!-- Dintanum -->
+		<spawn npc_id="804863">
+			<spot x="375.02567" y="1168.3021" z="55.249" h="33"/>
 		</spawn>
 		<!-- Dukaki Peon -->
 		<spawn npc_id="235615">
