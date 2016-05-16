@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Summon_EarthElemental -->
 <summon_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833287" npc_id_dark="833288" level="16">
-		<stats_template maxHp="5178" evasion="672" parry="0" attack="121" accuracy="695" pcrit="50" macc="695" pdef="400" mresist="566" mcrit="9">
+		<stats_template maxHp="1575" evasion="503" parry="0" attack="85" accuracy="503" pcrit="50" macc="291" pdef="575" mresist="340" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833289" npc_id_dark="833290" level="21">
-		<stats_template maxHp="6553" evasion="882" parry="0" attack="164" accuracy="913" pcrit="50" macc="913" pdef="500" mresist="680" mcrit="9">
+		<stats_template maxHp="2950" evasion="637" parry="0" attack="113" accuracy="637" pcrit="50" macc="394" pdef="736" mresist="436" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833291" npc_id_dark="833292" level="26">
-		<stats_template maxHp="7928" evasion="1092" parry="0" attack="213" accuracy="1130" pcrit="50" macc="1130" pdef="600" mresist="794" mcrit="9">
+		<stats_template maxHp="4325" evasion="771" parry="0" attack="141" accuracy="771" pcrit="50" macc="497" pdef="897" mresist="532" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833293" npc_id_dark="833294" level="31">
-		<stats_template maxHp="9303" evasion="1302" parry="0" attack="266" accuracy="1347" pcrit="50" macc="1347" pdef="700" mresist="908" mcrit="9">
+		<stats_template maxHp="5700" evasion="905" parry="0" attack="169" accuracy="905" pcrit="50" macc="600" pdef="1058" mresist="628" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833295" npc_id_dark="833296" level="36">
-		<stats_template maxHp="10678" evasion="1512" parry="0" attack="325" accuracy="1565" pcrit="50" macc="1565" pdef="800" mresist="1022" mcrit="9">
+		<stats_template maxHp="7075" evasion="1039" parry="0" attack="197" accuracy="1039" pcrit="50" macc="703" pdef="1219" mresist="724" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833297" npc_id_dark="833298" level="41">
-		<stats_template maxHp="12053" evasion="1722" parry="0" attack="388" accuracy="1782" pcrit="50" macc="1782" pdef="900" mresist="1136" mcrit="9">
+		<stats_template maxHp="8450" evasion="1173" parry="0" attack="225" accuracy="1173" pcrit="50" macc="806" pdef="1380" mresist="820" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833299" npc_id_dark="833300" level="46">
-		<stats_template maxHp="13428" evasion="1932" parry="0" attack="457" accuracy="2000" pcrit="50" macc="2000" pdef="1000" mresist="1250" mcrit="9">
+		<stats_template maxHp="9825" evasion="1307" parry="0" attack="253" accuracy="1307" pcrit="50" macc="909" pdef="1541" mresist="916" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833301" npc_id_dark="833302" level="51">
-		<stats_template maxHp="14803" evasion="2142" parry="0" attack="530" accuracy="2217" pcrit="50" macc="2217" pdef="1100" mresist="1364" mcrit="9">
+		<stats_template maxHp="11200" evasion="1441" parry="0" attack="281" accuracy="1441" pcrit="50" macc="1012" pdef="1702" mresist="1012" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833303" npc_id_dark="833304" level="56">
-		<stats_template maxHp="16178" evasion="2352" parry="0" attack="609" accuracy="2434" pcrit="50" macc="2434" pdef="1200" mresist="1478" mcrit="9">
+		<stats_template maxHp="12575" evasion="1575" parry="0" attack="309" accuracy="1575" pcrit="50" macc="1115" pdef="1863" mresist="1108" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
-	<!-- Checked by ginho1 on NA -->
+	<!-- Checked by Yeats on GF 4.9.1 16.05.2016 -->
 	<summon_stats npc_id_light="833253" npc_id_dark="833254" level="61">
-		<stats_template maxHp="17515" evasion="2562" parry="0" attack="692" accuracy="2652" pcrit="50" macc="2652" pdef="1300" mresist="1592" mcrit="9">
+		<stats_template maxHp="13950" evasion="1709" parry="0" attack="337" accuracy="1709" pcrit="50" macc="1128" pdef="2024" mresist="1204" mcrit="18">
 			<speeds run="8.4"/>
 		</stats_template>
 	</summon_stats>
