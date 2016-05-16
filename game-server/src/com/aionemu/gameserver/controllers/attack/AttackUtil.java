@@ -556,7 +556,7 @@ public class AttackUtil {
 	public static List<AttackResult> calculateHomingAttackResult(Creature attacker, Creature attacked, SkillElement elem) {
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, elem);
 
-		AttackStatus status = calculateHomingAttackStatus(attacker, attacked);
+		AttackStatus status = calculateHomingAttackStatus(attacker, attacked, elem);
 		List<AttackResult> attackList = new FastTable<AttackResult>();
 		switch (status) {
 			case RESIST:
@@ -693,7 +693,7 @@ public class AttackUtil {
 	 */
 	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill) {
 		if (!isSkill) {
-			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
+			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0, SkillElement.NONE))
 				return AttackStatus.RESIST;
 		}
 
@@ -704,8 +704,8 @@ public class AttackUtil {
 		return AttackStatus.NORMALHIT;
 	}
 
-	private static AttackStatus calculateHomingAttackStatus(Creature attacker, Creature attacked) {
-		if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0))
+	private static AttackStatus calculateHomingAttackStatus(Creature attacker, Creature attacked, SkillElement element) {
+		if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0, element))
 			return AttackStatus.RESIST;
 
 		else if (StatFunctions.calculatePhysicalDodgeRate(attacker, attacked, 0))

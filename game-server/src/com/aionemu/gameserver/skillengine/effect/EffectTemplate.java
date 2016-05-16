@@ -358,7 +358,7 @@ public abstract class EffectTemplate {
 							return false;
 						break;
 					default:
-						if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod))
+						if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
 							return false;
 						break;
 				}
@@ -404,7 +404,7 @@ public abstract class EffectTemplate {
 									return false;
 								break;
 							default:
-								if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod))
+								if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
 									return false;
 								break;
 						}
