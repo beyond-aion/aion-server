@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.stats.container;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -61,28 +62,23 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 			return stat;
 		switch (statEnum) {
 			case MAXHP:
-				stat.setBonusRate(0.5f);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
 			case BOOST_MAGICAL_SKILL:
 			case MAGICAL_ACCURACY:
-				stat.setBonusRate(0.8f);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
 			case PHYSICAL_DEFENSE:
-				stat.setBonusRate(0.3f);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
 			case EVASION:
 			case PARRY:
 			case MAGICAL_RESIST:
-			case MAGICAL_CRITICAL:
-				stat.setBonusRate(0.5f);
+			case MAGIC_SKILL_BOOST_RESIST: // needs some tests
+				Stat2 toReturn = new AdditionStat(statEnum, 0, owner);
 				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
-			case PHYSICAL_ACCURACY:
-				stat.setBonusRate(0.5f);
+			case PHYSICAL_ACCURACY: // needs some tests
 				owner.getMaster().getGameStats().getItemStatBoost(StatEnum.MAIN_HAND_ACCURACY, stat);
 				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
-			case PHYSICAL_CRITICAL:
-				stat.setBonusRate(0.5f);
+			case PHYSICAL_CRITICAL: // needs some tests
 				owner.getMaster().getGameStats().getItemStatBoost(StatEnum.MAIN_HAND_CRITICAL, stat);
+				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
+			case MAGICAL_CRITICAL:
+				stat.setBonusRate(0.95f);
 				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
 		}
 		return stat;
