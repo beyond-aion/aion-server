@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -40,14 +41,16 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 				public void died(Creature creature) {
 					if (effected instanceof Player) {
 						Player effected = (Player) effect.getEffected();
-						if (effected.isInInstance() || effected.getPanesterraTeam() != null)
-							PlayerReviveService.instanceRevive(effected, skillId);
-						else if (effected.getKisk() != null)
-							PlayerReviveService.kiskRevive(effected, skillId);
-						else
-							PlayerReviveService.bindRevive(effected, skillId);
-						PacketSendUtility.broadcastPacket(effected, new SM_EMOTION(effected, EmotionType.RESURRECT), true);
-						PacketSendUtility.sendPacket(effected, new SM_PLAYER_SPAWN(effected));
+						if (!PvpMapService.getInstance().isOnPvPMap(effected)) {
+							if (effected.isInInstance() || effected.getPanesterraTeam() != null)
+								PlayerReviveService.instanceRevive(effected, skillId);
+							else if (effected.getKisk() != null)
+								PlayerReviveService.kiskRevive(effected, skillId);
+							else
+								PlayerReviveService.bindRevive(effected, skillId);
+							PacketSendUtility.broadcastPacket(effected, new SM_EMOTION(effected, EmotionType.RESURRECT), true);
+							PacketSendUtility.sendPacket(effected, new SM_PLAYER_SPAWN(effected));
+						}
 					}
 				}
 			};
