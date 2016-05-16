@@ -3,22 +3,22 @@ package quest.aturam_sky_fortress;
 import java.util.Collections;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author zhkchi
+ * @modified Pad
  */
 public class _28301PowerOn extends QuestHandler {
 
-	private final static int questId = 28301;
+	private static final int questId = 28301;
+	private static final int sphereId = 702656;
 
 	public _28301PowerOn() {
 		super(questId);
@@ -28,53 +28,31 @@ public class _28301PowerOn extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(799530).addOnQuestStart(questId);
 		qe.registerQuestNpc(799530).addOnTalkEvent(questId);
-		qe.registerQuestNpc(730373).addOnTalkEvent(questId);
 		qe.registerQuestNpc(730374).addOnTalkEvent(questId);
+		qe.registerQuestNpc(sphereId).addOnKillEvent(questId);
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 799530) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
-					playQuestMovie(env, 469);
+				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+					playQuestMovie(env, 468);
 					return sendQuestStartDialog(env);
-				} else
+				} else {
 					return sendQuestStartDialog(env);
-			}
-		}
-
-		if (qs == null)
-			return false;
-
-		int var = qs.getQuestVarById(0);
-
-		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 730373 && var < 7) {
-				switch (env.getDialog()) {
-					case USE_OBJECT:
-						return sendQuestDialog(env, 1011);
-					case SETPRO1:
-						if (env.getVisibleObject() instanceof Npc) {
-							targetId = ((Npc) env.getVisibleObject()).getNpcId();
-							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().onDelete();
-							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700978, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
-						}
-					default:
-						return sendQuestEndDialog(env);
 				}
-			} else if (targetId == 730374 && var == 7) {
-				switch (env.getDialog()) {
+			}
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (targetId == 730374 && qs.getQuestVarById(0) == 7) {
+				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:
@@ -88,7 +66,7 @@ public class _28301PowerOn extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799530) {
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:
@@ -100,4 +78,22 @@ public class _28301PowerOn extends QuestHandler {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean onKillEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		int targetId = env.getTargetId();
+		
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int var0 = qs.getQuestVarById(0);
+			if (var0 <= 6 && targetId == sphereId) {
+				qs.setQuestVarById(0, var0 + 1);
+				updateQuestStatus(env);
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
