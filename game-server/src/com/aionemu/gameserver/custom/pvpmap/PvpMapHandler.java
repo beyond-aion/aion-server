@@ -121,9 +121,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public void join(Player p) {
-		if (!canJoin(p)) {
-			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map now.");
-		} else {
+		if (canJoin(p)) {
 			startTeleportation(p, false);
 		}
 	}
@@ -169,8 +167,21 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		return p.isGM() || canJoin.get() && checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)
-			&& (!joinOrLeaveTime.containsKey(p.getObjectId()) || (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) > 300000);
+		if (p.isGM()) {
+			return true;
+		} else if (!canJoin.get() || p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
+			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map now.");
+			return false;
+		} else if (!checkState(p)) {
+			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map in your current state.");
+			return false;
+		} else if (joinOrLeaveTime.containsKey(p.getObjectId()) && ((System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) < 300000)) {
+			int timeInSeconds = (int) Math.ceil((300000 - (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId()))) / 1000f);
+			PacketSendUtility.sendMessage(p, "You can reenter the PvP-Map in " + timeInSeconds + " second" + (timeInSeconds > 1 ? "s." : "."));
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private boolean checkState(Player p) {
