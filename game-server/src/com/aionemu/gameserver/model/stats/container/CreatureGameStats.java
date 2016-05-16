@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.ManaStone;
+import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.ReverseStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -24,6 +25,7 @@ import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
+import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 
 /**
  * @author xavier
@@ -179,8 +181,12 @@ public abstract class CreatureGameStats<T extends Creature> {
 			if (functions == null || functions.isEmpty())
 				return stat;
 			for (IStatFunction func : functions) {
-				if (func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone))
-					func.apply(stat);
+				if (func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
+						|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
+					if (func.isBonus()) {
+						func.apply(stat);
+					}
+				}
 			}
 		} finally {
 			lock.readLock().unlock();
