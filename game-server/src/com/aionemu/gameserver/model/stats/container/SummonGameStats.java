@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.stats.container;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -69,7 +68,6 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 			case PARRY:
 			case MAGICAL_RESIST:
 			case MAGIC_SKILL_BOOST_RESIST: // needs some tests
-				Stat2 toReturn = new AdditionStat(statEnum, 0, owner);
 				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
 			case PHYSICAL_ACCURACY: // needs some tests
 				owner.getMaster().getGameStats().getItemStatBoost(StatEnum.MAIN_HAND_ACCURACY, stat);
