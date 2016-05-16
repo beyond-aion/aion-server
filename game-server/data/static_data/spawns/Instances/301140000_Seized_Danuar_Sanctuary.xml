@@ -52,11 +52,11 @@
 			<spot x="937.55585" y="876.63904" z="305.12701" static_id="1820"/>
 		</spawn>
 		<!-- Dintanum -->
-		<spawn npc_id="804863">
+		<spawn npc_id="801954">
 			<spot x="375.02567" y="1168.3021" z="55.249" h="33"/>
 		</spawn>
 		<!-- Alkatron -->
-		<spawn npc_id="804862">
+		<spawn npc_id="801953">
 			<spot x="402.55734" y="1169.1189" z="55.249" h="33"/>
 		</spawn>
 		<!-- ruins babel -->
