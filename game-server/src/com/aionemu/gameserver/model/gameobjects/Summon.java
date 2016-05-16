@@ -14,6 +14,7 @@ import com.aionemu.gameserver.controllers.movement.SummonMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.SummonGameStats;
@@ -36,6 +37,7 @@ public class Summon extends Creature {
 	private int liveTime;
 	private Queue<SkillOrder> skillOrders = new LinkedList<>();
 	private Future<?> releaseTask;
+	private SkillElement alwaysResistElement = SkillElement.NONE;
 
 	/**
 	 * summoned by skill id
@@ -43,12 +45,13 @@ public class Summon extends Creature {
 	private int summonedBySkillId;
 
 	/**
+	 *
 	 * @param objId
 	 * @param controller
 	 * @param spawnTemplate
 	 * @param objectTemplate
-	 * @param position
 	 * @param level
+	 * @param time
 	 */
 	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level,
 		int time) {
@@ -62,6 +65,32 @@ public class Summon extends Creature {
 		SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(), level);
 		setGameStats(new SummonGameStats(this, statsTemplate));
 		setLifeStats(new SummonLifeStats(this));
+		setAlwaysResistElement(objectTemplate);
+	}
+
+	private void setAlwaysResistElement(NpcTemplate template) {
+		if (template != null) {
+			switch (template.getName()) {
+				case  "lava spirit":
+					this.alwaysResistElement = SkillElement.MAGMA;
+					break;
+				case "tempest spirit":
+					this.alwaysResistElement = SkillElement.TEMPEST;
+					break;
+				case "earth spirit":
+					this.alwaysResistElement = SkillElement.EARTH;
+					break;
+				case "fire spirit":
+					this.alwaysResistElement = SkillElement.FIRE;
+					break;
+				case "water spirit":
+					this.alwaysResistElement = SkillElement.WATER;
+					break;
+				case "wind spirit":
+					this.alwaysResistElement = SkillElement.WIND;
+					break;
+			}
+		}
 	}
 
 	@Override
@@ -251,5 +280,9 @@ public class Summon extends Creature {
 
 	public SkillOrder getNextSkillOrder() {
 		return skillOrders.peek();
+	}
+
+	public SkillElement getAlwaysResistElement() {
+		return alwaysResistElement;
 	}
 }

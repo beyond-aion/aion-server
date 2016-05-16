@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.Homing;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Servant;
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -882,9 +883,14 @@ public class StatFunctions {
 	 * @param attacked
 	 * @return int
 	 */
-	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod) {
+	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.RESIST))
 			return 1000;
+		if (element != SkillElement.NONE && attacked instanceof Summon) {
+			if (element == ((Summon) attacked).getAlwaysResistElement()) {
+				return 1000;
+			}
+		}
 
 		int attackerLevel = attacker.getLevel();
 		int targetLevel = attacked.getLevel();
