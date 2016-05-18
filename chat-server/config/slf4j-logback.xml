@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <configuration>
 	<property name="logFolder" value="log/" />
+	<property file="config/main/logging.properties" />
+	<property file="config/mycs.properties" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
 		<encoder>
@@ -44,8 +46,22 @@
 			<Pattern>%date %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
+		<layout>
+			<pattern>%msg</pattern>
+		</layout>
+		<room>${chatserver.log.chat.hipchat.room}</room>
+		<apiKey>${chatserver.log.chat.hipchat.token}</apiKey>
+		<color>gray</color>
+		<messageFormat>text</messageFormat>
+		<senderSeparatorPattern>:\s</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
+	</appender>
+	<appender name="app_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="app_hipchat" />
+	</appender>
 	<logger name="CHAT_LOG" additivity="false">
 		<appender-ref ref="app_chat" />
+		<appender-ref ref="app_hipchat_async" />
 	</logger>
 	<root level="INFO">
 		<appender-ref ref="out_console" />

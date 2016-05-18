@@ -3,14 +3,14 @@ package com.aionemu.chatserver.model.channel;
 import java.util.Arrays;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.model.Race;
 import com.aionemu.chatserver.service.GameServerService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -25,7 +25,7 @@ public class ChatChannels {
 	/**
 	 * Channel List
 	 */
-	private static final List<Channel> channels = new FastTable<>();
+	private static final List<RaceChannel> channels = new FastTable<>();
 
 	/**
 	 * LFG Channel
@@ -37,7 +37,7 @@ public class ChatChannels {
 	/**
 	 * @param Channel the Channel to add.
 	 */
-	private static Channel addChannel(Channel Channel) {
+	private static RaceChannel addChannel(RaceChannel Channel) {
 		if (channels.add(Channel)) {
 			return Channel;
 		}
@@ -48,14 +48,14 @@ public class ChatChannels {
 	 * @param channelId the channelId of the requesting Channel
 	 * @return Channel with this channelId or throws an IllegalArgumentException if no channel with this id exists.
 	 */
-	public static Channel getChannelById(int channelId) {
+	public static RaceChannel getChannelById(int channelId) {
 		synchronized (channels) {
-			for (Channel channel : channels) {
+			for (RaceChannel channel : channels) {
 				if (channel.getChannelId() == channelId)
 					return channel;
 			}
 		}
-		if (Config.LOG_CHANNEL_INVALID) {
+		if (LoggingConfig.LOG_CHANNEL_INVALID) {
 			log.warn("No registered channel with id " + channelId);
 		}
 		throw new IllegalArgumentException("no channel provided for id " + channelId);
@@ -68,14 +68,14 @@ public class ChatChannels {
 	 * @return Channel with this identifier or creates and returns a new channel if no channel with such identifier exists.<br>
 	 * Null if no channel with this identifier exists and a new channel was not created
 	 */
-	public static Channel getChannelByIdentifierOrCreateNew(byte[] identifier, String name) {
+	public static RaceChannel getChannelByIdentifierOrCreateNew(byte[] identifier, String name) {
 		synchronized (channels) {
-			for (Channel channel : channels) {
+			for (RaceChannel channel : channels) {
 				if (Arrays.equals(channel.getIdentifierBytes(), identifier))
 					return channel;
 			}
 		}
-		Channel channel = null;
+		RaceChannel channel = null;
 		if (!name.isEmpty()) {
 			Race race = Race.ELYOS;
 			if (name.endsWith(".1.AION.KOR")) {

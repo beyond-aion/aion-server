@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <configuration>
 	<property name="logFolder" value="log/" />
+	<property file="config/main/logging.properties" />
+	<property file="config/mygs.properties" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
 		<encoder>
@@ -37,6 +39,23 @@
 		<encoder>
 			<Pattern>%date %logger - %message%n</Pattern>
 		</encoder>
+		<appender-ref ref="app_error_hipchat" />
+	</appender>
+	<appender name="app_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
+		<layout>
+			<pattern>%logger{0} [%thread]:&lt;pre&gt;%msg&lt;/pre&gt;</pattern>
+		</layout>
+		<room>${gameserver.log.status.hipchat.room}</room>
+		<apiKey>${gameserver.log.status.hipchat.token}</apiKey>
+		<color>level</color>
+		<messageFormat>html</messageFormat>
+		<senderSeparatorPattern>:</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
+	</appender>
+	<appender name="app_error_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<appender-ref ref="app_hipchat" />
 	</appender>
 	<appender name="app_admincmd" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/adminaudit.log</file>
@@ -60,7 +79,6 @@
 		<file>${logFolder}/chat.log</file>
 		<encoder>
 			<Pattern>%date %message%n</Pattern>
-			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_craft" class="ch.qos.logback.core.FileAppender">
@@ -211,5 +229,6 @@
 		<appender-ref ref="app_console" />
 		<appender-ref ref="app_error" />
 		<appender-ref ref="app_warn" />
+		<appender-ref ref="app_error_hipchat_async" />
 	</root>
 </configuration>

@@ -12,7 +12,7 @@ import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.network.aion.ClientPacketHandler;
 import com.aionemu.chatserver.network.gameserver.GsConnectionFactoryImpl;
 import com.aionemu.chatserver.network.netty.pipeline.LoginToClientPipeLineFactory;
@@ -36,16 +36,16 @@ public class NettyServer {
 
 	private NettyServer() {
 		aionClientChannelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
-			Config.NIO_READ_WRITE_THREADS + 1);
+			NetworkConfig.NIO_READ_WRITE_THREADS + 1);
 		aionClientChannelGroup = new DefaultChannelGroup(NettyServer.class.getName());
 		aionClientChannelGroup.add(initChannel()); // why not handle aion client packets via NioServer?
 		LoggerFactory.getLogger(this.getClass()).info("Server listening on "
-			+ (Config.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
-				: "IP: " + Config.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress())
-			+ " Port: " + Config.CLIENT_SOCKET_ADDRESS.getPort() + " for Aion Connections");
+			+ (NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
+				: "IP: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress())
+			+ " Port: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getPort() + " for Aion Connections");
 
-		nioServer = new NioServer(Config.NIO_READ_WRITE_THREADS,
-			new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
+		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
+			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
 		nioServer.connect();
 	}
 
@@ -65,7 +65,7 @@ public class NettyServer {
 		bootstrap.setOption("child.reuseAddress", true);
 		bootstrap.setOption("child.connectTimeoutMillis", 100);
 		bootstrap.setOption("readWriteFair", true);
-		return bootstrap.bind(Config.CLIENT_SOCKET_ADDRESS);
+		return bootstrap.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS);
 	}
 
 	/**

@@ -40,6 +40,12 @@ public class ChatServer {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ChatServer.class);
 
+	/**
+	 * Prevent instantiation
+	 */
+	private ChatServer() {
+	}
+
 	private static void initalizeLoggger() {
 		new File("./log/backup/").mkdirs();
 		File[] files = new File("log").listFiles(new FilenameFilter() {

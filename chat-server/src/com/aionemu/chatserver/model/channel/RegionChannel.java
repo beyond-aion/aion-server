@@ -9,6 +9,6 @@ import com.aionemu.chatserver.model.Race;
 public class RegionChannel extends RaceChannel {
 
 	public RegionChannel(Race race, String identifier) {
-		super(ChannelType.PUBLIC, race, identifier);
+		super(ChannelType.REGION, race, identifier);
 	}
 }

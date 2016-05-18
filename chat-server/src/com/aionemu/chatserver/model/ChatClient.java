@@ -6,7 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.main.CSConfig;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 
@@ -127,7 +127,7 @@ public class ChatClient {
 	}
 
 	public boolean verifyLastMessage() {
-		if (Config.MESSAGE_DELAY == 0)
+		if (CSConfig.MESSAGE_DELAY == 0)
 			return true;
 
 		if (this.lastMessage == 0) {
@@ -135,7 +135,7 @@ public class ChatClient {
 			return true;
 		} else {
 			long diff = System.currentTimeMillis() - this.lastMessage;
-			if (Config.MESSAGE_DELAY * 1000 > diff) {
+			if (CSConfig.MESSAGE_DELAY * 1000 > diff) {
 				log.warn("player " + this.getClientId() + " tried to flood (" + diff + "ms) traffic. skipped");
 				return false;
 			} else {
@@ -146,11 +146,9 @@ public class ChatClient {
 	}
 
 	public boolean isGagged() {
-		if (this.gagTime == 0)
+		if (gagTime == 0)
 			return false;
-		if (System.currentTimeMillis() > this.gagTime)
-			return false;
-		return true;
+		return System.currentTimeMillis() < gagTime;
 	}
 
 	public void setGagTime(long gagTime) {

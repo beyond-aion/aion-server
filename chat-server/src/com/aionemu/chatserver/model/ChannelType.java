@@ -4,9 +4,9 @@ package com.aionemu.chatserver.model;
  * @author ATracer
  */
 public enum ChannelType {
-	PUBLIC,
+	REGION,
 	TRADE,
-	GROUP,
+	LFG,
 	JOB,
 	LANG;
 }

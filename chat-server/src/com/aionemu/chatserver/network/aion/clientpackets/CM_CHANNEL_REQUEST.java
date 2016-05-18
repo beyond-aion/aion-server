@@ -6,7 +6,7 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
@@ -50,7 +50,7 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 		String name = "";
 		try {
 			name = new String(channelIdentifier, "UTF-16le");
-			if (Config.LOG_CHANNEL_REQUEST) {
+			if (LoggingConfig.LOG_CHANNEL_REQUEST) {
 				log.info("Channel requested " + name);
 			}
 		} catch (UnsupportedEncodingException e) {

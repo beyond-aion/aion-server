@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.ShutdownHook;
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.main.CSConfig;
 import com.aionemu.chatserver.model.RestartFrequency;
 
 /**
@@ -22,7 +22,7 @@ public class RestartService {
 	private RestartService() {
 		RestartFrequency rf;
 		try {
-			rf = RestartFrequency.valueOf(Config.CHATSERVER_RESTART_FREQUENCY);
+			rf = RestartFrequency.valueOf(CSConfig.CHATSERVER_RESTART_FREQUENCY);
 		} catch (Exception e) {
 			log.warn("Could not find stated RestartFrequency. Using NEVER as default value!");
 			rf = RestartFrequency.NEVER;
@@ -74,7 +74,7 @@ public class RestartService {
 
 	private String[] getRestartTime() {
 		String[] time;
-		if ((time = Config.CHATSERVER_RESTART_TIME.split(":")).length != 2) {
+		if ((time = CSConfig.CHATSERVER_RESTART_TIME.split(":")).length != 2) {
 			log.warn("You did not state a valid restart time. Using 5:00 AM as default value!");
 			return new String[] { "5", "0" };
 		}

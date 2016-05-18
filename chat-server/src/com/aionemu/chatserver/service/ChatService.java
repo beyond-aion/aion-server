@@ -114,7 +114,7 @@ public class ChatService {
 		Channel channel = ChatChannels.getChannelByIdentifierOrCreateNew(channelIdentifier, name);
 		if (channel != null) {
 			ChannelType channelType = channel.getChannelType();
-			if (channelType == ChannelType.GROUP) {
+			if (channelType == ChannelType.LFG) {
 				if (chatClient.isInChannel(channel)) {
 					return null;
 				}

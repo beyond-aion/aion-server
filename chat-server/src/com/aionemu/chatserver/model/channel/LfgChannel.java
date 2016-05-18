@@ -9,6 +9,6 @@ import com.aionemu.chatserver.model.Race;
 public class LfgChannel extends RaceChannel {
 
 	public LfgChannel(Race race, String identifier) {
-		super(ChannelType.GROUP, race, identifier);
+		super(ChannelType.LFG, race, identifier);
 	}
 }

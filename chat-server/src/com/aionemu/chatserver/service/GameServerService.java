@@ -3,7 +3,7 @@ package com.aionemu.chatserver.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.network.gameserver.GsAuthResponse;
 
 /**
@@ -30,7 +30,7 @@ public class GameServerService {
 	public GsAuthResponse registerGameServer(byte gameServerId, String password) {
 		if (isOnline)
 			return GsAuthResponse.ALREADY_REGISTERED;
-		if (!password.equals(Config.GAMESERVER_PASSWORD))
+		if (!password.equals(NetworkConfig.GAMESERVER_PASSWORD))
 			return GsAuthResponse.NOT_AUTHED;
 		isOnline = true;
 		GAMESERVER_ID = gameServerId;
