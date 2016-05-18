@@ -2584,7 +2584,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Code Red: Atreia" start="2015-11-16T00:00:00+00:00" end="2015-11-20T23:59:59+00:00">
+	<event name="Code Red: Atreia" start="2016-05-20T00:00:00+02:00" end="2016-05-29T23:59:59+02:00">
 		<quests>
 			<maintainable>80324;80325;80326;80327</maintainable>
 		</quests>

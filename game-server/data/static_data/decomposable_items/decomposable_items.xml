@@ -34191,7 +34191,15 @@
 	<decomposable item_id="188054171" name="Lucky Mysterious Box" />
 	<decomposable item_id="188054196" name="Enhanced Modor's Weapon Box" />
 	<decomposable item_id="188054197" name="Enhanced Hyperion's Weapon Box" />
-	<decomposable item_id="188054198" name="Greater Scroll Bundle" />
+	<decomposable item_id="188054198" name="Greater Scroll Bundle" selectable="true">
+		<items>
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="25"/>
+			<item id="164002117" name="[Event] Rx: Blitzopan" min_count="25"/>
+			<item id="164002118" name="[Event] Rx: Castafodin" min_count="25"/>
+			<item id="164002119" name="[Event] Rx: Critozyne" min_count="25"/>
+			<item id="164002120" name="[Event] Rx: Mojocycline" min_count="25"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188054237" name="Iron Wall Weapon Box" />
 	<decomposable item_id="188054238" name="Iron Wall Armor Box" />
 	<decomposable item_id="188054239" name="Iron Wall Helm Box" />
