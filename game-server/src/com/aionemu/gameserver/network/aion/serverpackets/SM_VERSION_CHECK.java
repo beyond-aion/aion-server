@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -70,7 +67,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code;
 		writeC(0x00); // unk
 		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
-		writeD((int) ZonedDateTime.now(ZoneOffset.UTC).toEpochSecond()); // current UTC time
+		writeD((int) (System.currentTimeMillis() / 1000)); // current UTC time in seconds
 		writeH(350); // unk
 		writeC(1); // unk (always 1)
 		writeC(10); // time or level restriction (now 5 on official)
