@@ -5,12 +5,6 @@ import com.aionemu.commons.configuration.Property;
 public class CSConfig {
 
 	/**
-	 * Delay between messages
-	 */
-	@Property(key = "chatserver.chat.message.delay", defaultValue = "30")
-	public static int MESSAGE_DELAY;
-
-	/**
 	 * Specifies the frequency the chat server will be restarted
 	 */
 	@Property(key = "chatserver.restart.frequency", defaultValue = "NEVER")

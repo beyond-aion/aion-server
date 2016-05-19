@@ -5,9 +5,9 @@ import java.util.Arrays;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.main.CSConfig;
 import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.dao.ChatLogDAO;
+import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.channel.ChatChannels;
 import com.aionemu.chatserver.model.channel.RaceChannel;
 import com.aionemu.chatserver.model.message.Message;
@@ -53,18 +53,21 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		RaceChannel channel = ChatChannels.getChannelById(channelId);
-		Message message = new Message(channel, content, clientChannelHandler.getChatClient());
-		if (clientChannelHandler.getChatClient().isGagged()) {
-			long endTime = (clientChannelHandler.getChatClient().getGagTime() - System.currentTimeMillis()) / 1000 / 60;
+		ChatClient client = clientChannelHandler.getChatClient();
+		Message message = new Message(channel, content, client);
+		if (client.isGagged()) {
+			long endTime = (client.getGagTime() - System.currentTimeMillis()) / 1000 / 60;
 			message.setText("You have been gagged for " + endTime + " minutes.");
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
 			return;
 		}
-		if (!clientChannelHandler.getChatClient().verifyLastMessage()) {
-			message.setText("You can use chat only once every " + CSConfig.MESSAGE_DELAY + " seconds.");
+		int floodProtectionTime = client.getFloodProtectionTime(channel.getChannelType());
+		if (floodProtectionTime > 0) {
+			message.setText("You can chat again in this channel in " + floodProtectionTime + " second" + (floodProtectionTime == 1 ? "." : "s."));
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
 			return;
 		}
+		client.updateLastMessageTime(channel.getChannelType());
 		broadcastService.broadcastMessage(message);
 
 		if (LoggingConfig.LOG_CHAT) {
