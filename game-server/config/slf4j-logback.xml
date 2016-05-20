@@ -49,7 +49,7 @@
 		<apiKey>${gameserver.log.status.hipchat.token}</apiKey>
 		<color>level</color>
 		<messageFormat>html</messageFormat>
-		<senderSeparatorPattern>:</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
+		<senderSeparatorPattern>\\]:</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
 	</appender>
 	<appender name="app_error_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
