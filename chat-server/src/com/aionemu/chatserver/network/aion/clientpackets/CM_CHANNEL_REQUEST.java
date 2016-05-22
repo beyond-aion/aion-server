@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.main.LoggingConfig;
-import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_RESPONSE;
@@ -20,25 +19,23 @@ import com.aionemu.chatserver.service.ChatService;
 public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_REQUEST.class);
-	private int channelIndex;
+	private int channelRequestId;
 	private byte[] channelIdentifier;
-	private ChatService chatService;
 
 	/**
 	 * @param channelBuffer
 	 * @param gameChannelHandler
 	 * @param opCode
 	 */
-	public CM_CHANNEL_REQUEST(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler, ChatService chatService) {
+	public CM_CHANNEL_REQUEST(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler) {
 		super(channelBuffer, gameChannelHandler, 0x10);
-		this.chatService = chatService;
 	}
 
 	@Override
 	protected void readImpl() {
 		readC(); // 0x40
 		readH(); // 0x00
-		channelIndex = readH();
+		channelRequestId = readH(); // client increases this by 1 for each request (e.g. after teleport)
 		readB(18); // ?
 		int length = (readH() * 2);
 		channelIdentifier = readB(length);
@@ -47,24 +44,20 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		String name = "";
 		try {
-			name = new String(channelIdentifier, "UTF-16le");
-			if (LoggingConfig.LOG_CHANNEL_REQUEST) {
-				log.info("Channel requested " + name);
-			}
+			String name = new String(channelIdentifier, "UTF-16le");
+			if (LoggingConfig.LOG_CHANNEL_REQUEST)
+				log.info("Channel requested: " + name); // e.g. @partyFind_PF1.0.AION.KOR where 1 is the server id and 0 race id
+			Channel channel = ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler.getChatClient(), name);
+			if (channel != null)
+				clientChannelHandler.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		ChatClient chatClient = clientChannelHandler.getChatClient();
-		Channel channel = chatService.registerPlayerWithChannel(chatClient, channelIndex, channelIdentifier, name);
-		if (channel != null) {
-			clientChannelHandler.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelIndex));
+			log.error("Could not read channel name from: " + channelIdentifier);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "CM_CHANNEL_REQUEST [channelIndex=" + channelIndex + ", channelIdentifier=" + new String(channelIdentifier) + "]";
+		return "CM_CHANNEL_REQUEST [channelRequestId=" + channelRequestId + ", channelIdentifier=" + new String(channelIdentifier) + "]";
 	}
 }

@@ -1,14 +1,14 @@
 package com.aionemu.chatserver.model.channel;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.main.LoggingConfig;
+import com.aionemu.chatserver.model.ChannelType;
+import com.aionemu.chatserver.model.PlayerClass;
 import com.aionemu.chatserver.model.Race;
-import com.aionemu.chatserver.service.GameServerService;
 
 import javolution.util.FastTable;
 
@@ -25,32 +25,44 @@ public class ChatChannels {
 	/**
 	 * Channel List
 	 */
-	private static final List<RaceChannel> channels = new FastTable<>();
+	private static final List<Channel> channels = new FastTable<>();
 
-	/**
-	 * LFG Channel
-	 */
-	static {
-		addGroupChannel();
-	}
-
-	/**
-	 * @param Channel the Channel to add.
-	 */
-	private static RaceChannel addChannel(RaceChannel Channel) {
-		if (channels.add(Channel)) {
-			return Channel;
+	private static Channel addChannel(ChannelType ct, String channelMeta, int gameServerId, Race race) {
+		Channel channel = null;
+		switch (ct) {
+			case REGION:
+				channel = new RegionChannel(gameServerId, race, channelMeta);
+				break;
+			case TRADE:
+				channel = new TradeChannel(gameServerId, race, channelMeta);
+				break;
+			case LFG:
+				channel = new LfgChannel(gameServerId, race);
+				break;
+			case JOB:
+				PlayerClass playerClass = PlayerClass.getClassByIdentifier(channelMeta);
+				if (playerClass != null)
+					channel = new JobChannel(gameServerId, race, playerClass);
+				else
+					log.warn("Client requested non existent class channel: " + channelMeta);
+				break;
+			case LANG:
+				channel = new LangChannel(gameServerId, race);
+				break;
 		}
-		return null;
+		if (channel != null)
+			channels.add(channel);
+		return channel;
 	}
 
 	/**
-	 * @param channelId the channelId of the requesting Channel
+	 * @param channelId
+	 *          the channelId of the requesting Channel
 	 * @return Channel with this channelId or throws an IllegalArgumentException if no channel with this id exists.
 	 */
-	public static RaceChannel getChannelById(int channelId) {
+	public static Channel getChannelById(int channelId) {
 		synchronized (channels) {
-			for (RaceChannel channel : channels) {
+			for (Channel channel : channels) {
 				if (channel.getChannelId() == channelId)
 					return channel;
 			}
@@ -62,40 +74,28 @@ public class ChatChannels {
 	}
 
 	/**
-	 *
-	 * @param identifier the byte identifier of the requested channel
-	 * @param name the name of the requested channel
+	 * @param name
+	 *          - the name of the requested channel
 	 * @return Channel with this identifier or creates and returns a new channel if no channel with such identifier exists.<br>
-	 * Null if no channel with this identifier exists and a new channel was not created
+	 *         Null if no channel with this identifier exists and a new channel was not created
 	 */
-	public static RaceChannel getChannelByIdentifierOrCreateNew(byte[] identifier, String name) {
+	public static Channel getOrCreate(String name) {
+		String[] parts = name.split("\u0001"); // @trade_Housing_barrack1.0.AION.KOR
+		if (parts.length != 3)
+			return null;
+		String[] channelType = parts[1].split("_", 2); // { trade, Housing_barrack }
+		String[] channelRestrictions = parts[2].split("\\."); // { 1, 0, AION, KOR }
+
+		ChannelType ct = ChannelType.getByIdentifier(channelType[0]);
+		String channelMeta = channelType[1];
+		int gameServerId = Integer.valueOf(channelRestrictions[0]);
+		Race race = Race.getById(Integer.valueOf(channelRestrictions[1]));
 		synchronized (channels) {
-			for (RaceChannel channel : channels) {
-				if (Arrays.equals(channel.getIdentifierBytes(), identifier))
+			for (Channel channel : channels) {
+				if (channel.matches(ct, gameServerId, race, channelMeta))
 					return channel;
 			}
 		}
-		RaceChannel channel = null;
-		if (!name.isEmpty()) {
-			Race race = Race.ELYOS;
-			if (name.endsWith(".1.AION.KOR")) {
-				race = Race.ASMODIANS;
-			}
-			if (name.contains("public")) {
-				channel = addChannel(new RegionChannel(race, name));
-			} else if (name.contains("job")) {
-				channel = addChannel(new JobChannel(race, name));
-			} else if (name.contains("trade")) {
-				channel = addChannel(new TradeChannel(race, name));
-			} else if (name.contains("User")) {
-				channel = addChannel(new LangChannel(race, name));
-			}
-		}
-		return channel;
-	}
-
-	private static void addGroupChannel() {
-		addChannel(new LfgChannel(Race.ELYOS, "@\u0001partyFind_PF\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
-		addChannel(new LfgChannel(Race.ASMODIANS, "@\u0001partyFind_PF\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
+		return addChannel(ct, channelMeta, gameServerId, race);
 	}
 }

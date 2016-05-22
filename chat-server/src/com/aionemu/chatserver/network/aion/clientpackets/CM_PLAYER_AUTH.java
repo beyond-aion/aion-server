@@ -13,7 +13,6 @@ import com.aionemu.chatserver.service.ChatService;
  */
 public class CM_PLAYER_AUTH extends AbstractClientPacket {
 
-	private ChatService chatService;
 	private int playerId;
 	private byte[] token;
 	private byte[] identifier;
@@ -26,9 +25,8 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	 * @param gameChannelHandler
 	 * @param opCode
 	 */
-	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, ChatService chatService) {
+	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler) {
 		super(channelBuffer, clientChannelHandler, 0x05);
-		this.chatService = chatService;
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		try {
-			chatService.registerPlayerConnection(playerId, token, identifier, clientChannelHandler, realName);
+			ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, clientChannelHandler, realName);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

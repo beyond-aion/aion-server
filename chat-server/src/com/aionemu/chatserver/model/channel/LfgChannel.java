@@ -5,10 +5,11 @@ import com.aionemu.chatserver.model.Race;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class LfgChannel extends RaceChannel {
 
-	public LfgChannel(Race race, String identifier) {
-		super(ChannelType.LFG, race, identifier);
+	public LfgChannel(int gameServerId, Race race) {
+		super(ChannelType.LFG, gameServerId, race);
 	}
 }

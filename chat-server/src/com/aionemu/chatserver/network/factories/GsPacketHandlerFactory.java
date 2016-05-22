@@ -79,6 +79,6 @@ public class GsPacketHandlerFactory {
 	 * @param id
 	 */
 	private static void unknownPacket(State state, int id) {
-		log.warn(String.format("Unknown packet recived from Game Server: 0x%02X state=%s", id, state.toString()));
+		log.warn(String.format("Unknown packet received from Game Server: 0x%02X state=%s", id, state.toString()));
 	}
 }

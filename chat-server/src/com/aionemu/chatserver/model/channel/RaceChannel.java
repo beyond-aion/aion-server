@@ -5,20 +5,28 @@ import com.aionemu.chatserver.model.Race;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public abstract class RaceChannel extends Channel {
 
-	protected Race race;
+	private final Race race;
 
-	public RaceChannel(ChannelType channelType, Race race, String identifier) {
-		super(channelType, identifier);
+	public RaceChannel(ChannelType channelType, int gameServerId, Race race) {
+		super(channelType, gameServerId);
 		this.race = race;
 	}
 
-	/**
-	 * @return the race
-	 */
 	public Race getRace() {
 		return race;
+	}
+
+	@Override
+	public boolean matches(ChannelType channelType, int gameServerId, Race race, String channelMeta) {
+		return race == getRace() && channelType == getChannelType() && gameServerId == getGameServerId();
+	}
+
+	@Override
+	public String name() {
+		return getChannelType().name() + " (" + getRace().name().substring(0, 1) + ")";
 	}
 }

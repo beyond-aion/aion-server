@@ -3,14 +3,14 @@ package com.aionemu.chatserver.model.message;
 import java.io.UnsupportedEncodingException;
 
 import com.aionemu.chatserver.model.ChatClient;
-import com.aionemu.chatserver.model.channel.RaceChannel;
+import com.aionemu.chatserver.model.channel.Channel;
 
 /**
  * @author ATracer
  */
 public class Message {
 
-	private RaceChannel channel;
+	private Channel channel;
 	private byte[] text;
 	private ChatClient sender;
 
@@ -18,7 +18,7 @@ public class Message {
 	 * @param channel
 	 * @param text
 	 */
-	public Message(RaceChannel channel, byte[] text, ChatClient sender) {
+	public Message(Channel channel, byte[] text, ChatClient sender) {
 		this.channel = channel;
 		this.text = text;
 		this.sender = sender;
@@ -35,7 +35,7 @@ public class Message {
 	/**
 	 * @return the channel
 	 */
-	public RaceChannel getChannel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
@@ -70,14 +70,9 @@ public class Message {
 
 	public String getTextString() {
 		try {
-			String s = new String(text, "UTF-16le");
-			return s;
+			return new String(text, "UTF-16le");
 		} catch (Exception e) {
 			return "";
 		}
-	}
-
-	public String getChannelString() {
-		return channel.getChannelType().name() + " (" + channel.getRace().name().substring(0, 1) + ")";
 	}
 }
