@@ -11,7 +11,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.model.channel.ChatChannels;
@@ -27,14 +26,12 @@ public class ChatService {
 	private static ChatService instance = new ChatService();
 	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 	private Map<Integer, ChatClient> players = new HashMap<Integer, ChatClient>();
-	private BroadcastService broadcastService;
 
 	public static ChatService getInstance() {
 		return instance;
 	}
 
-	public ChatService() {
-		broadcastService = BroadcastService.getInstance();
+	private ChatService() {
 	}
 
 	/**
@@ -99,7 +96,7 @@ public class ChatService {
 				channelHandler.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
 				channelHandler.setState(State.AUTHED);
 				channelHandler.setChatClient(chatClient);
-				broadcastService.addClient(chatClient);
+				BroadcastService.getInstance().addClient(chatClient);
 			}
 		}
 	}
@@ -110,17 +107,10 @@ public class ChatService {
 	 * @param channelIdentifier
 	 * @return
 	 */
-	public Channel registerPlayerWithChannel(ChatClient chatClient, int channelIndex, byte[] channelIdentifier, String name) {
-		Channel channel = ChatChannels.getChannelByIdentifierOrCreateNew(channelIdentifier, name);
-		if (channel != null) {
-			ChannelType channelType = channel.getChannelType();
-			if (channelType == ChannelType.LFG) {
-				if (chatClient.isInChannel(channel)) {
-					return null;
-				}
-			}
+	public Channel registerPlayerWithChannel(ChatClient chatClient, String name) {
+		Channel channel = ChatChannels.getOrCreate(name);
+		if (channel != null)
 			chatClient.addChannel(channel);
-		}
 		return channel;
 	}
 
@@ -131,7 +121,7 @@ public class ChatService {
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient != null) {
 			players.remove(playerId);
-			broadcastService.removeClient(chatClient);
+			BroadcastService.getInstance().removeClient(chatClient);
 			if (chatClient.getChannelHandler() != null)
 				chatClient.getChannelHandler().close();
 			else

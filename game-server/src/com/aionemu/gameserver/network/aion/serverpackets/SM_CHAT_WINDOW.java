@@ -99,7 +99,8 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 			writeC(target.getLevel());
 			writeH(target.getPlayerClass().getClassId());
 			writeS(target.getCommonData().getNote());
-			writeD(1);
+			writeD(1); // unk
+			writeC(target.getPlayerAccount().getMembership()); // vip level
 		}
 	}
 }

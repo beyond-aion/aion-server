@@ -20,6 +20,9 @@ public class BroadcastService {
 		return instance;
 	}
 
+	private BroadcastService() {
+	}
+
 	/**
 	 * @param client
 	 */

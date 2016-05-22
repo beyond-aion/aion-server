@@ -28,9 +28,6 @@ public class StaticDoorService {
 	}
 
 	public void openStaticDoor(final Player player, int doorId) {
-		if (player.getAccessLevel() >= 3)
-			PacketSendUtility.sendMessage(player, "door id : " + doorId);
-
 		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
 		if (door == null) {
 			log.warn("Not spawned door worldId: " + player.getWorldId() + " doorId: " + doorId);
@@ -38,14 +35,13 @@ public class StaticDoorService {
 		}
 		int keyId = door.getObjectTemplate().getKeyId();
 
-		if (player.getAccessLevel() >= 3)
-			PacketSendUtility.sendMessage(player, "key id : " + keyId);
+		if (player.getAccessLevel() >= AdminConfig.DOORS_OPEN)
+			PacketSendUtility.sendMessage(player, "door id: " + doorId + " - key id: " + keyId);
 
 		if (checkStaticDoorKey(player, door, keyId)) {
 			player.getPosition().getWorldMapInstance().getInstanceHandler().onOpenDoor(doorId);
 			door.setOpen(true);
-		} else
-			log.info("Opening door without key ...");
+		}
 	}
 
 	public void changeStaticDoorState(final Player player, int doorId, boolean open, int state) {

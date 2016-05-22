@@ -1,44 +1,52 @@
 package com.aionemu.chatserver.model.channel;
 
-import java.nio.charset.Charset;
-
 import com.aionemu.chatserver.model.ChannelType;
+import com.aionemu.chatserver.model.Race;
 import com.aionemu.chatserver.utils.IdFactory;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public abstract class Channel {
 
 	private final ChannelType channelType;
-	private final byte[] identifierBytes;
-	private final String identifier;
+	private final int gameServerId;
 	private final int channelId;
 
-	public Channel(ChannelType channelType, String identifier) {
+	public Channel(ChannelType channelType, int gameServerId) {
 		this.channelType = channelType;
-		this.identifier = identifier;
+		this.gameServerId = gameServerId;
 		this.channelId = IdFactory.getInstance().nextId();
-		this.identifierBytes = identifier.getBytes(Charset.forName("UTF-16le"));
-	}
-
-	public String getStringIdentifier() {
-		return identifier;
 	}
 
 	public ChannelType getChannelType() {
 		return channelType;
 	}
 
-	public byte[] getIdentifierBytes() {
-		return identifierBytes;
+	public int getGameServerId() {
+		return gameServerId;
 	}
 
-	public String getIdentifier() {
-		return identifier;
-	}
-
+	/**
+	 * @return The unique id of this channel.
+	 */
 	public int getChannelId() {
 		return channelId;
 	}
+
+	/**
+	 * @param channelType
+	 * @param gameServerId
+	 * @param race
+	 * @param channelMeta
+	 * @return True, if the channel matches the specified criteria. Used to determine if a clients request matches an existing channel or we need to
+	 *         create a new one.
+	 */
+	public abstract boolean matches(ChannelType channelType, int gameServerId, Race race, String channelMeta);
+
+	/**
+	 * @return The name of this channel (mainly for logging purposes).
+	 */
+	public abstract String name();
 }

@@ -21,7 +21,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
  * @author ATracer
  */
 public class RealGeoData implements GeoData {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RealGeoData.class);
 
 	private TIntObjectHashMap<GeoMap> geoMaps = new TIntObjectHashMap<GeoMap>();
@@ -35,9 +35,6 @@ public class RealGeoData implements GeoData {
 		log.info("Geodata: " + geoMaps.size() + " geo maps loaded!");
 	}
 
-	/**
-	 * @param models
-	 */
 	protected void loadWorldMaps(Map<String, Spatial> models) {
 		log.info("Loading geo maps..");
 		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
@@ -49,8 +46,7 @@ public class RealGeoData implements GeoData {
 				if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap)) {
 					geoMaps.put(map.getMapId(), geoMap);
 				}
-			}
-			catch (Throwable t) {
+			} catch (Throwable t) {
 				mapsWithErrors.add(map.getMapId());
 				geoMaps.put(map.getMapId(), DummyGeoData.DUMMY_MAP);
 			}
@@ -58,21 +54,16 @@ public class RealGeoData implements GeoData {
 		}
 
 		if (mapsWithErrors.size() > 0) {
-			log.warn("Some maps were not loaded correctly and reverted to dummy implementation: ");
-			log.warn(mapsWithErrors.toString());
+			log.warn("Some maps were not loaded correctly and reverted to dummy implementation:\n" + mapsWithErrors);
 		}
 	}
 
-	/**
-	 * @return
-	 */
 	protected Map<String, Spatial> loadMeshes() {
 		log.info("Loading meshes..");
 		Map<String, Spatial> models = null;
 		try {
 			models = GeoWorldLoader.loadMeshs("data/geo/models/geo.mesh");
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new IllegalStateException("Problem loading meshes", e);
 		}
 		return models;

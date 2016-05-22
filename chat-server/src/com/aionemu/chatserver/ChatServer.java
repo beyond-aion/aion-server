@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.network.netty.NettyServer;
+import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.chatserver.service.RestartService;
@@ -103,6 +104,7 @@ public class ChatServer {
 		IdFactory.getInstance();
 		GameServerService.getInstance();
 		ChatService.getInstance();
+		BroadcastService.getInstance();
 		RestartService.getInstance();
 
 		ConsoleUtil.printSection("System Info");

@@ -13,7 +13,7 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
  */
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
-	protected static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
+	private static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
 
 	private final ConcurrentLinkedQueue<T> tasks = new ConcurrentLinkedQueue<>();
 
