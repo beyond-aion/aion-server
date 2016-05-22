@@ -255,11 +255,14 @@ public class KnownList {
 	}
 
 	protected boolean checkObjectInRange(VisibleObject newObject) {
-		// check if Z distance is greater than maxZvisibleDistance
-		if (Math.abs(owner.getZ() - newObject.getZ()) > owner.getMaxZVisibleDistance())
+		// flags/raidmonsters should not be deleted while moving.
+		if (newObject instanceof Npc && (((Npc) newObject).isFlag() || ((Npc) newObject).isRaidMonster())) {
+			return newObject.getWorldId() == owner.getWorldId();
+		} else if (Math.abs(owner.getZ() - newObject.getZ()) > owner.getMaxZVisibleDistance()) {
 			return false;
-
-		return MathUtil.isInRange(owner, newObject, owner.getVisibilityDistance());
+		} else {
+			return MathUtil.isInRange(owner, newObject, owner.getVisibilityDistance());
+		}
 	}
 
 	/**
