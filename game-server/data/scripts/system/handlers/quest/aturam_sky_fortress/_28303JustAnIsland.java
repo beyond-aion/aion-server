@@ -10,12 +10,13 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author zhkchi
+ * @modified Pad
  */
-public class _28303Just_an_Island extends QuestHandler {
+public class _28303JustAnIsland extends QuestHandler {
 
 	private final static int questId = 28303;
 
-	public _28303Just_an_Island() {
+	public _28303JustAnIsland() {
 		super(questId);
 	}
 
@@ -25,7 +26,7 @@ public class _28303Just_an_Island extends QuestHandler {
 		qe.registerQuestNpc(799530).addOnTalkEvent(questId);
 		qe.registerQuestNpc(730390).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700980).addOnTalkEvent(questId);
-		qe.registerQuestNpc(799531).addOnTalkEvent(questId);
+		qe.registerQuestNpc(804821).addOnTalkEvent(questId);
 		qe.registerQuestNpc(217382).addOnKillEvent(questId);
 		qe.registerQuestNpc(217376).addOnKillEvent(questId);
 	}
@@ -34,21 +35,23 @@ public class _28303Just_an_Island extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 799530) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					playQuestMovie(env, 470);
 					return sendQuestStartDialog(env);
-				} else
+				} else {
 					return sendQuestStartDialog(env);
+				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730390) {
-				switch (env.getDialog()) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case USE_OBJECT:
@@ -62,9 +65,9 @@ public class _28303Just_an_Island extends QuestHandler {
 			} else if (targetId == 700980) {
 				return useQuestObject(env, 2, 3, true, true);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799531) {
-				switch (env.getDialog()) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			if (targetId == 804821) {
+				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:
@@ -81,9 +84,9 @@ public class _28303Just_an_Island extends QuestHandler {
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 0)
+			if (qs.getQuestVarById(0) == 0)
 				return defaultOnKillEvent(env, 217382, 0, 1);
 			else
 				return defaultOnKillEvent(env, 217376, 1, 2);

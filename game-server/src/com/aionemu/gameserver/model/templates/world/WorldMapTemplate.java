@@ -25,6 +25,9 @@ public class WorldMapTemplate {
 	@XmlAttribute(name = "name")
 	protected String name = "";
 
+	@XmlAttribute(name = "cName")
+	protected String cName = "";
+
 	@XmlAttribute(name = "id", required = true)
 	protected Integer mapId;
 
@@ -73,6 +76,10 @@ public class WorldMapTemplate {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCName() {
+		return cName;
 	}
 
 	public Integer getMapId() {

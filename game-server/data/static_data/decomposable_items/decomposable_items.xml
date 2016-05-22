@@ -4140,7 +4140,37 @@
 	<decomposable item_id="188050715" name="Honey Candy Box" />
 	<decomposable item_id="188050717" name="Inggison Jewel Pouch" />
 	<decomposable item_id="188050718" name="Chunk of Earth">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_EARTH" min_count="10" />
 		</items>
 	</decomposable>
@@ -4180,12 +4210,72 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050720" name="Chunk of Rock">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_ROCK" min_count="10" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050721" name="Chunk of Gemstone">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_GEMSTONE" min_count="10" />
 		</items>
 	</decomposable>
@@ -4231,7 +4321,37 @@
 	</decomposable>
 	<decomposable item_id="188050724" name="Gelkmaros Jewel Pouch" />
 	<decomposable item_id="188050725" name="Chunk of Earth">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_EARTH" min_count="10" />
 		</items>
 	</decomposable>
@@ -4271,12 +4391,72 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050727" name="Chunk of Rock">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_ROCK" min_count="10" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050728" name="Chunk of Gemstone">
-		<items>
+		<items chance="0.3">
+			<item id="152000060" name="Kashuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000111" name="Euron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000211" name="Makron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000319" name="Dukiron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000467" name="Sniron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000555" name="Hudaron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000655" name="Pseron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000761" name="Tyron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152000859" name="Liuron's Memento" />
+		</items>
+		<items chance="0.3">
+			<item id="152001054" name="Mikaron's Memento" />
+		</items>
+		<items chance="97.0">
 			<random_item type="CHUNK_GEMSTONE" min_count="10" />
 		</items>
 	</decomposable>
@@ -34133,7 +34313,7 @@
 		<items>
 			<item id="184002082" name="[Event] Elyos Group Companion Kisk Summoning Stone" race="ELYOS"/>
 			<item id="184002083" name="[Event] Elyos Force Companion Kisk Summoning Stone" race="ELYOS"/>
-			<item id="184002084" name="[]Event] Elyos Legion Companion Kisk Summoning Stone" race="ELYOS"/>
+			<item id="184002084" name="[Event] Elyos Legion Companion Kisk Summoning Stone" race="ELYOS"/>
 			<item id="184002085" name="[Event] Asmodian Group Companion Kisk Summoning Stone" race="ASMODIANS"/>
 			<item id="184002086" name="[Event] Asmodian Force Companion Kisk Summoning Stone" race="ASMODIANS"/>
 			<item id="184002087" name="[Event] Asmodian Legion Companion Kisk Summoning Stone" race="ASMODIANS"/>
@@ -34191,7 +34371,15 @@
 	<decomposable item_id="188054171" name="Lucky Mysterious Box" />
 	<decomposable item_id="188054196" name="Enhanced Modor's Weapon Box" />
 	<decomposable item_id="188054197" name="Enhanced Hyperion's Weapon Box" />
-	<decomposable item_id="188054198" name="Greater Scroll Bundle" />
+	<decomposable item_id="188054198" name="Greater Scroll Bundle" selectable="true">
+		<items>
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="25"/>
+			<item id="164002117" name="[Event] Rx: Blitzopan" min_count="25"/>
+			<item id="164002118" name="[Event] Rx: Castafodin" min_count="25"/>
+			<item id="164002119" name="[Event] Rx: Critozyne" min_count="25"/>
+			<item id="164002120" name="[Event] Rx: Mojocycline" min_count="25"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188054237" name="Iron Wall Weapon Box" />
 	<decomposable item_id="188054238" name="Iron Wall Armor Box" />
 	<decomposable item_id="188054239" name="Iron Wall Helm Box" />

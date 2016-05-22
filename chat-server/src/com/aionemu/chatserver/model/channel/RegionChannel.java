@@ -5,10 +5,23 @@ import com.aionemu.chatserver.model.Race;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class RegionChannel extends RaceChannel {
 
-	public RegionChannel(Race race, String identifier) {
-		super(ChannelType.PUBLIC, race, identifier);
+	private final String mapIdentifier;
+
+	public RegionChannel(int gameServerId, Race race, String mapIdentifier) {
+		super(ChannelType.REGION, gameServerId, race);
+		this.mapIdentifier = mapIdentifier;
+	}
+
+	public String getMapIdentifier() {
+		return mapIdentifier;
+	}
+
+	@Override
+	public boolean matches(ChannelType channelType, int gameServerId, Race race, String mapIdentifier) {
+		return super.matches(channelType, gameServerId, race, mapIdentifier) && getMapIdentifier().equals(mapIdentifier);
 	}
 }

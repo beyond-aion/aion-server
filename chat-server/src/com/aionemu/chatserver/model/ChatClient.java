@@ -1,14 +1,14 @@
 package com.aionemu.chatserver.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -41,12 +41,9 @@ public class ChatClient {
 	 * Map with all connected channels<br>
 	 * Only one channel of specific type can be added
 	 */
-	private Map<ChannelType, Channel> channelsList = new HashMap<ChannelType, Channel>();
-
-	private long lastMessage;
-
+	private Map<ChannelType, Channel> channelsList = new FastMap<>();
+	private Map<ChannelType, Long> lastMessageTime = new FastMap<>();
 	private String realName;
-
 	private long gagTime;
 
 	/**
@@ -90,6 +87,14 @@ public class ChatClient {
 		return identifier;
 	}
 
+	public long getLastMessageTime(ChannelType ct) {
+		return lastMessageTime.getOrDefault(ct, 0L);
+	}
+
+	public void updateLastMessageTime(ChannelType ct) {
+		lastMessageTime.put(ct, System.currentTimeMillis());
+	}
+
 	public String getRealName() {
 		return realName;
 	}
@@ -126,31 +131,24 @@ public class ChatClient {
 		this.identifier = identifier;
 	}
 
-	public boolean verifyLastMessage() {
-		if (Config.MESSAGE_DELAY == 0)
-			return true;
+	/**
+	 * @param ct
+	 * @return The protection time (delay) in seconds, when the client can chat in the specified channel again.
+	 */
+	public int getFloodProtectionTime(ChannelType ct) {
+		int delay = ct == ChannelType.LFG || ct == ChannelType.TRADE ? 30000 : 1000; // implemented same as on client-side
+		long floodProtectionTime = delay - (System.currentTimeMillis() - getLastMessageTime(ct));
 
-		if (this.lastMessage == 0) {
-			this.lastMessage = System.currentTimeMillis();
-			return true;
-		} else {
-			long diff = System.currentTimeMillis() - this.lastMessage;
-			if (Config.MESSAGE_DELAY * 1000 > diff) {
-				log.warn("player " + this.getClientId() + " tried to flood (" + diff + "ms) traffic. skipped");
-				return false;
-			} else {
-				this.lastMessage = System.currentTimeMillis();
-				return true;
-			}
+		if (floodProtectionTime > 0) {
+			return Math.max(1, (int) (floodProtectionTime / 1000));
 		}
+		return 0;
 	}
 
 	public boolean isGagged() {
-		if (this.gagTime == 0)
+		if (gagTime == 0)
 			return false;
-		if (System.currentTimeMillis() > this.gagTime)
-			return false;
-		return true;
+		return System.currentTimeMillis() < gagTime;
 	}
 
 	public void setGagTime(long gagTime) {

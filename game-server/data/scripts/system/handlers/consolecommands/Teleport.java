@@ -17,20 +17,14 @@ public class Teleport extends ConsoleCommand {
 	@Override
 	protected void execute(Player player, String... params) {
 		if (params.length == 4) {
-			int worldId = DataManager.WORLD_MAPS_DATA.getWorldIdByName(params[0]);
+			int worldId = DataManager.WORLD_MAPS_DATA.getWorldIdByCName(params[0]);
 			if (worldId != 0) {
-				int x = -1;
-				int y = -1;
-				int z = -1;
 				try {
-					x = Integer.valueOf(params[1]);
-					y = Integer.valueOf(params[2]);
-					z = Integer.valueOf(params[3]);
-				} catch (NumberFormatException ex) {
-				}
-
-				if (x > -1 && y > -1 && z > -1) {
+					int x = Integer.valueOf(params[1]);
+					int y = Integer.valueOf(params[2]);
+					int z = Integer.valueOf(params[3]);
 					TeleportService2.teleportTo(player, worldId, x, y, z);
+				} catch (NumberFormatException ex) {
 				}
 			}
 		}

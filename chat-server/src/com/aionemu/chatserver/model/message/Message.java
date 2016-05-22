@@ -57,7 +57,7 @@ public class Message {
 		return sender;
 	}
 
-	public String getSenderString() {
+	public String getSenderName() {
 		try {
 			String s = new String(sender.getIdentifier(), "UTF-16le");
 			int pos = s.indexOf('@');
@@ -70,14 +70,9 @@ public class Message {
 
 	public String getTextString() {
 		try {
-			String s = new String(text, "UTF-16le");
-			return s;
+			return new String(text, "UTF-16le");
 		} catch (Exception e) {
 			return "";
 		}
-	}
-
-	public String getChannelString() {
-		return channel.getChannelType().name();
 	}
 }

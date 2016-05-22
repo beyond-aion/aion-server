@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.network.netty.NettyServer;
+import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.chatserver.service.RestartService;
@@ -39,6 +40,12 @@ public class ChatServer {
 	 * Logger for this class.
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ChatServer.class);
+
+	/**
+	 * Prevent instantiation
+	 */
+	private ChatServer() {
+	}
 
 	private static void initalizeLoggger() {
 		new File("./log/backup/").mkdirs();
@@ -97,6 +104,7 @@ public class ChatServer {
 		IdFactory.getInstance();
 		GameServerService.getInstance();
 		ChatService.getInstance();
+		BroadcastService.getInstance();
 		RestartService.getInstance();
 
 		ConsoleUtil.printSection("System Info");

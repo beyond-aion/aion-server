@@ -267,14 +267,16 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	private ArtifactLocation artifact;
 
 	/**
-	 * Creates a new <tt>SM_QUESTION_WINDOW<tt> packet
+	 * Creates a new <tt>SM_QUESTION_WINDOW</tt> packet
 	 * 
 	 * @param code
-	 *          code The string code to display, found in client_strings.xml
+	 *          - code The string code to display, found in client_strings.xml
 	 * @param senderId
-	 *          sender Object id
+	 *          - sender Object id
+	 * @param range
+	 *          - the valid range to react to this dialog
 	 * @param params
-	 *          params The parameters for the string, if any
+	 *          - params The parameters for the string, if any
 	 */
 	public SM_QUESTION_WINDOW(int code, int senderId, int range, Object... params) {
 		this.code = code;
@@ -283,9 +285,6 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 		this.params = params;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(code);
@@ -334,7 +333,7 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 			writeH(0x00);// unk
 			writeC(range > 0 ? 0x01 : 0x00);// unk maybe boolean for rangecheck?
 			writeD(senderId);
-			writeD(range);// range within the Question is valod
+			writeD(range);// range within the Question is valid
 		}
 	}
 }
