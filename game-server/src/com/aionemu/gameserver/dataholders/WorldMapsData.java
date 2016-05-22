@@ -59,9 +59,9 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 		return worldIdMap.get(worldId);
 	}
 
-	public int getWorldIdByName(String name) {
+	public int getWorldIdByCName(String name) {
 		for (WorldMapTemplate template : worldMaps) {
-			if (template.getName().equalsIgnoreCase(name)) {
+			if (template.getCName().equalsIgnoreCase(name)) {
 				return template.getMapId();
 			}
 		}
