@@ -95,6 +95,15 @@ public class ChatClient {
 		}
 	}
 
+	public boolean removeChannel(Channel channel) {
+		if (channel != null) {
+			List<Channel> channelsOfType = channels.get(channel.getChannelType());
+			if (channelsOfType != null)
+				return channelsOfType.removeIf(ch -> ch.getChannelId() == channel.getChannelId());
+		}
+		return false;
+	}
+
 	public boolean isInChannel(Channel channel) {
 		List<Channel> channelsOfType = channels.get(channel.getChannelType());
 		return channelsOfType != null && channelsOfType.stream().anyMatch(ch -> ch.getChannelId() == channel.getChannelId());
