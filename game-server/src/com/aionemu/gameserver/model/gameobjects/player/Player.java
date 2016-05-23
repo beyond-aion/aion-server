@@ -300,18 +300,15 @@ public class Player extends Creature {
 	}
 
 	public String getName(boolean displayCustomTag) {
-		String nameFormat = "%s";
-
-		if (displayCustomTag) {
+		if (displayCustomTag && getAccessLevel() > 0) {
 			try {
 				String tagID = "CUSTOMTAG_ACCESS" + getAccessLevel();
-				nameFormat = AdminConfig.class.getField(tagID).get(null).toString();
+				return String.format(AdminConfig.class.getField(tagID).get(null).toString(), getName());
 			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 				// should never happen
 			}
 		}
-
-		return String.format(nameFormat, getName());
+		return getName();
 	}
 
 	public PlayerAppearance getPlayerAppearance() {
@@ -850,9 +847,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * accountName of this player
-	 * 
-	 * @return int
+	 * @return The account name of this player.
 	 */
 	public String getAcountName() {
 		return playerAccount.getName();

@@ -65,8 +65,7 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));
 		} else if (receiver.getBlockList().contains(sender.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_YOU_EXCLUDED(receiver.getName()));
-		} else if (!CustomConfig.SPEAKING_BETWEEN_FACTIONS && (sender.getRace().getRaceId() != receiver.getRace().getRaceId()) && !sender.isGM()
-			&& !receiver.isGM()) {
+		} else if (sender.getRace() != receiver.getRace() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !sender.isGM() && !receiver.isGM()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_CANT_WHISPER_OTHER_RACE());
 		} else {
 			if (!RestrictionsManager.canChat(sender))
