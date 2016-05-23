@@ -312,7 +312,7 @@ public class KnownList {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all npcs", ex);
+			log.error("Exception when running visitor on all npcs with owner", ex);
 		}
 		return counter;
 	}
