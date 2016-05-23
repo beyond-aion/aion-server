@@ -8,7 +8,24 @@ import com.aionemu.chatserver.model.Race;
  */
 public class LangChannel extends RaceChannel {
 
-	public LangChannel(int gameServerId, Race race) {
+	private final String language;
+
+	public LangChannel(int gameServerId, Race race, String language) {
 		super(ChannelType.LANG, gameServerId, race);
+		this.language = language;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	@Override
+	public boolean matches(ChannelType channelType, int gameServerId, Race race, String language) {
+		return super.matches(channelType, gameServerId, race, language) && getLanguage().equals(language);
+	}
+
+	@Override
+	public String name() {
+		return getChannelType().name() + ": " + language + " (" + getRace().name().substring(0, 1) + ")";
 	}
 }

@@ -112,8 +112,8 @@ public class ChatService {
 	 * @param channelIdentifier
 	 * @return
 	 */
-	public void registerPlayerWithChannel(ClientChannelHandler clientChannelHandler, int channelRequestId, String name) {
-		Channel channel = ChatChannels.getOrCreate(clientChannelHandler.getChatClient(), name);
+	public void registerPlayerWithChannel(ClientChannelHandler clientChannelHandler, int channelRequestId, String identifier) {
+		Channel channel = ChatChannels.getOrCreate(clientChannelHandler.getChatClient(), identifier);
 		if (channel != null) {
 			clientChannelHandler.getChatClient().addChannel(channel);
 			clientChannelHandler.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));

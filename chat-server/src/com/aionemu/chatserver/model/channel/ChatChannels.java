@@ -40,7 +40,7 @@ public class ChatChannels {
 					log.warn("Client requested non existent class channel: " + channelMeta);
 				break;
 			case LANG:
-				channel = new LangChannel(gameServerId, race);
+				channel = new LangChannel(gameServerId, race, channelMeta);
 				break;
 		}
 		if (channel != null)
