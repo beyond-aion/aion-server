@@ -11,6 +11,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 import com.aionemu.chatserver.service.ChatService;
 
 /**
+ * Request to join a system or language channel (language channels are actually user/private channels)
+ * 
  * @author ATracer
  */
 public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
@@ -19,24 +21,19 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 	private int channelRequestId;
 	private byte[] channelIdentifier;
 
-	/**
-	 * @param channelBuffer
-	 * @param gameChannelHandler
-	 * @param opCode
-	 */
-	public CM_CHANNEL_REQUEST(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler) {
-		super(channelBuffer, gameChannelHandler, 0x10);
+	public CM_CHANNEL_REQUEST(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
+		super(channelBuffer, clientChannelHandler, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
 		readC(); // 0x40 = @
 		readH(); // 0
-		channelRequestId = readH(); // client increases this by 1 for each request (e.g. after teleport)
-		readB(18); // ?
+		channelRequestId = readD(); // client increases this by 1 for each request (e.g. after teleport)
+		readB(16); // 0
 		int length = (readH() * 2);
 		channelIdentifier = readB(length);
-		readD(); // ?
+		readD(); // 0
 	}
 
 	@Override
@@ -44,12 +41,7 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 		try {
 			ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler, channelRequestId, new String(channelIdentifier, "UTF-16le"));
 		} catch (UnsupportedEncodingException e) {
-			log.error("Could not read channel name from: " + channelIdentifier);
+			log.error("Could not read channel identifier from: " + new String(channelIdentifier));
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "CM_CHANNEL_REQUEST [channelRequestId=" + channelRequestId + ", channelIdentifier=" + new String(channelIdentifier) + "]";
 	}
 }

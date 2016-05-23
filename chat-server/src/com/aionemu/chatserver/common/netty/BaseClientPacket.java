@@ -14,7 +14,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 	 * @param channelBuffer
 	 * @param opCode
 	 */
-	public BaseClientPacket(ChannelBuffer channelBuffer, int opCode) {
+	public BaseClientPacket(ChannelBuffer channelBuffer, byte opCode) {
 		super(opCode);
 		this.buf = channelBuffer;
 	}
@@ -32,7 +32,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
-				log.debug("Packet " + this + " not fully readed!");
+				log.warn("Packet " + this + " not fully read (remaining bytes: " + getRemainingBytes() +")");
 			return true;
 		} catch (Exception ex) {
 			log.error("Reading failed for packet " + this, ex);

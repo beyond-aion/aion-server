@@ -13,7 +13,7 @@ public abstract class AbstractServerPacket extends BaseServerPacket {
 	/**
 	 * @param opCode
 	 */
-	public AbstractServerPacket(int opCode) {
+	public AbstractServerPacket(byte opCode) {
 		super(opCode);
 	}
 

@@ -5,19 +5,24 @@ package com.aionemu.chatserver.common.netty;
  */
 public abstract class AbstractPacket {
 
-	protected int opCode;
+	protected byte opCode;
 
 	/**
 	 * @param opCode
 	 */
-	public AbstractPacket(int opCode) {
+	public AbstractPacket(byte opCode) {
 		this.opCode = opCode;
 	}
 
 	/**
 	 * @return the opCode
 	 */
-	public int getOpCode() {
+	public byte getOpCode() {
 		return opCode;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [opCode=" + String.format("0x%02X", getOpCode()) + "]";
 	}
 }

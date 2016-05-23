@@ -11,7 +11,7 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 public class SM_CHAT_INI extends AbstractServerPacket {
 
 	public SM_CHAT_INI() {
-		super(0x31);
+		super((byte) 0x31);
 	}
 
 	@Override

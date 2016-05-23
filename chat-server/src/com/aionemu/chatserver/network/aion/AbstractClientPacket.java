@@ -17,7 +17,7 @@ public abstract class AbstractClientPacket extends BaseClientPacket {
 	 * @param clientChannelHandler
 	 * @param opCode
 	 */
-	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, int opCode) {
+	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
 		super(channelBuffer, opCode);
 		this.clientChannelHandler = clientChannelHandler;
 	}

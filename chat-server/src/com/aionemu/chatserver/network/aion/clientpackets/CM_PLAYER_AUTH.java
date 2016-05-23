@@ -18,13 +18,8 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	private byte[] identifier;
 	private byte[] accountName;
 
-	/**
-	 * @param channelBuffer
-	 * @param gameChannelHandler
-	 * @param opCode
-	 */
-	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler) {
-		super(channelBuffer, clientChannelHandler, 0x05);
+	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
+		super(channelBuffer, clientChannelHandler, opCode);
 	}
 
 	@Override

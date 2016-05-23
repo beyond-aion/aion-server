@@ -11,8 +11,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
  */
 public class CM_CHAT_INI extends AbstractClientPacket {
 
-	public CM_CHAT_INI(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler) {
-		super(channelBuffer, clientChannelHandler, 0x30);
+	public CM_CHAT_INI(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
+		super(channelBuffer, clientChannelHandler, opCode);
 	}
 
 	@Override

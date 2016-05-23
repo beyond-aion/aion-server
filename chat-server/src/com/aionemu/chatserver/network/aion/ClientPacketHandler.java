@@ -31,24 +31,26 @@ public class ClientPacketHandler extends AbstractPacketHandler {
 			case CONNECTED:
 				switch (opCode) {
 					case 0x30:
-						clientPacket = new CM_CHAT_INI(buf, channelHandler);
+						clientPacket = new CM_CHAT_INI(buf, channelHandler, opCode);
 						break;
 					case 0x05:
-						clientPacket = new CM_PLAYER_AUTH(buf, channelHandler);
+						clientPacket = new CM_PLAYER_AUTH(buf, channelHandler, opCode);
 						break;
 					default:
+						unknownPacket(opCode, state, buf);
 						break;
 				}
 				break;
 			case AUTHED:
 				switch (opCode) {
 					case 0x10:
-						clientPacket = new CM_CHANNEL_REQUEST(buf, channelHandler);
+						clientPacket = new CM_CHANNEL_REQUEST(buf, channelHandler, opCode);
 						break;
 					case 0x18:
-						clientPacket = new CM_CHANNEL_MESSAGE(buf, channelHandler);
+						clientPacket = new CM_CHANNEL_MESSAGE(buf, channelHandler, opCode);
 						break;
 					default:
+						unknownPacket(opCode, state, buf);
 						break;
 				}
 				break;

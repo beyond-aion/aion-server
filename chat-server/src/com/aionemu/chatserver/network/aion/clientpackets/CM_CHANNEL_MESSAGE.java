@@ -25,13 +25,8 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 	private int channelId;
 	private byte[] content;
 
-	/**
-	 * @param channelBuffer
-	 * @param gameChannelHandler
-	 * @param opCode
-	 */
-	public CM_CHANNEL_MESSAGE(ChannelBuffer channelBuffer, ClientChannelHandler gameChannelHandler) {
-		super(channelBuffer, gameChannelHandler, 0x18);
+	public CM_CHANNEL_MESSAGE(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
+		super(channelBuffer, clientChannelHandler, opCode);
 	}
 
 	@Override

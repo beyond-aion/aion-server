@@ -14,7 +14,7 @@ public class SM_CHANNEL_MESSAGE extends AbstractServerPacket {
 	private Message message;
 
 	public SM_CHANNEL_MESSAGE(Message message) {
-		super(0x1A);
+		super((byte) 0x1A);
 		this.message = message;
 	}
 

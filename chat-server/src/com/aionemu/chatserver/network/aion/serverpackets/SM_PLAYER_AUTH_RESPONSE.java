@@ -11,7 +11,7 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 public class SM_PLAYER_AUTH_RESPONSE extends AbstractServerPacket {
 
 	public SM_PLAYER_AUTH_RESPONSE() {
-		super(0x02);
+		super((byte) 0x02);
 	}
 
 	@Override
