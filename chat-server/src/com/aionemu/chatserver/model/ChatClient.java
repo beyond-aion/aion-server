@@ -1,11 +1,13 @@
 package com.aionemu.chatserver.model;
 
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -24,9 +26,9 @@ public class ChatClient {
 
 	/**
 	 * Map with all connected channels<br>
-	 * Only one channel of specific type can be added
+	 * Support for 2 channels of ChannelType.JOB, since starting classes join both main class channels
 	 */
-	private Map<ChannelType, Channel> channelsList = new FastMap<>();
+	private Map<ChannelType, List<Channel>> channels = new FastMap<>();
 	private Map<ChannelType, Long> lastMessageTime = new FastMap<>();
 
 	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race) {
@@ -83,11 +85,19 @@ public class ChatClient {
 	}
 
 	public void addChannel(Channel channel) {
-		channelsList.put(channel.getChannelType(), channel);
+		List<Channel> channelsOfType = channels.get(channel.getChannelType());
+		if (channelsOfType == null)
+			channels.put(channel.getChannelType(), FastTable.of(channel));
+		else {
+			if (channel.getChannelType() != ChannelType.JOB || channelsOfType.size() == 2)
+				channelsOfType.clear();
+			channelsOfType.add(channel);
+		}
 	}
 
 	public boolean isInChannel(Channel channel) {
-		return channelsList.containsKey(channel.getChannelType());
+		List<Channel> channelsOfType = channels.get(channel.getChannelType());
+		return channelsOfType != null && channelsOfType.stream().anyMatch(ch -> ch.getChannelId() == channel.getChannelId());
 	}
 
 	public long getLastMessageTime(ChannelType ct) {
