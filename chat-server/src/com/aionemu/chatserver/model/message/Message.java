@@ -57,17 +57,6 @@ public class Message {
 		return sender;
 	}
 
-	public String getSenderName() {
-		try {
-			String s = new String(sender.getIdentifier(), "UTF-16le");
-			int pos = s.indexOf('@');
-			s = s.substring(0, pos);
-			return s;
-		} catch (Exception e) {
-			return "";
-		}
-	}
-
 	public String getTextString() {
 		try {
 			return new String(text, "UTF-16le");

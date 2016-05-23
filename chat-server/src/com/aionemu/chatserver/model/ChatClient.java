@@ -2,9 +2,6 @@ package com.aionemu.chatserver.model;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 
@@ -12,30 +9,18 @@ import javolution.util.FastMap;
 
 /**
  * @author ATracer
+ * @modified Neon
  */
 public class ChatClient {
 
-	private final Logger log = LoggerFactory.getLogger(ChatClient.class);
-
-	/**
-	 * Id of chat client (player id)
-	 */
-	private int clientId;
-
-	/**
-	 * Identifier used when sending message
-	 */
+	private final int clientId;
+	private final byte[] token;
+	private final String accName;
+	private final String name;
+	private final Race race;
 	private byte[] identifier;
-
-	/**
-	 * Token used during auth with GS
-	 */
-	private byte[] token;
-
-	/**
-	 * Channel handler of chat client
-	 */
 	private ClientChannelHandler channelHandler;
+	private long gagTime;
 
 	/**
 	 * Map with all connected channels<br>
@@ -43,48 +28,66 @@ public class ChatClient {
 	 */
 	private Map<ChannelType, Channel> channelsList = new FastMap<>();
 	private Map<ChannelType, Long> lastMessageTime = new FastMap<>();
-	private String realName;
-	private long gagTime;
 
-	/**
-	 * @param clientId
-	 * @param token
-	 * @param playerLogin
-	 * @param nick
-	 * @param identifier
-	 */
-	public ChatClient(int clientId, byte[] token, String nick) {
+	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race) {
 		this.clientId = clientId;
 		this.token = token;
-		this.realName = nick;
+		this.accName = accName;
+		this.name = nick;
+		this.race = race;
 	}
 
 	/**
-	 * @param channel
-	 */
-	public void addChannel(Channel channel) {
-		channelsList.put(channel.getChannelType(), channel);
-	}
-
-	/**
-	 * @return the channelHandler
-	 */
-	public ClientChannelHandler getChannelHandler() {
-		return channelHandler;
-	}
-
-	/**
-	 * @return the clientId
+	 * @return Unique id of the chat client (player id)
 	 */
 	public int getClientId() {
 		return clientId;
 	}
 
 	/**
-	 * @return the identifier
+	 * @return Token used during auth with GS
+	 */
+	public byte[] getToken() {
+		return token;
+	}
+
+	public String getAccountName() {
+		return accName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	/**
+	 * @return Identifier used when sending messages
 	 */
 	public byte[] getIdentifier() {
 		return identifier;
+	}
+
+	public void setIdentifier(byte[] identifier) {
+		this.identifier = identifier;
+	}
+
+	public ClientChannelHandler getChannelHandler() {
+		return channelHandler;
+	}
+
+	public void setChannelHandler(ClientChannelHandler channelHandler) {
+		this.channelHandler = channelHandler;
+	}
+
+	public void addChannel(Channel channel) {
+		channelsList.put(channel.getChannelType(), channel);
+	}
+
+	public boolean isInChannel(Channel channel) {
+		return channelsList.containsKey(channel.getChannelType());
 	}
 
 	public long getLastMessageTime(ChannelType ct) {
@@ -95,42 +98,6 @@ public class ChatClient {
 		lastMessageTime.put(ct, System.currentTimeMillis());
 	}
 
-	public String getRealName() {
-		return realName;
-	}
-
-	/**
-	 * @return the token
-	 */
-	public byte[] getToken() {
-		return token;
-	}
-
-	/**
-	 * @param channel
-	 */
-	public boolean isInChannel(Channel channel) {
-		return channelsList.containsKey(channel.getChannelType());
-	}
-
-	/**
-	 * @param channelHandler
-	 *          the channelHandler to set
-	 */
-	public void setChannelHandler(ClientChannelHandler channelHandler) {
-		this.channelHandler = channelHandler;
-	}
-
-	/**
-	 * @param identifier
-	 *          the identifier to set
-	 * @param realAccount
-	 * @param realName
-	 */
-	public void setIdentifier(byte[] identifier) {
-		this.identifier = identifier;
-	}
-
 	/**
 	 * @param ct
 	 * @return The protection time (delay) in seconds, when the client can chat in the specified channel again.
@@ -139,16 +106,11 @@ public class ChatClient {
 		int delay = ct == ChannelType.LFG || ct == ChannelType.TRADE ? 30000 : 1000; // implemented same as on client-side
 		long floodProtectionTime = delay - (System.currentTimeMillis() - getLastMessageTime(ct));
 
-		if (floodProtectionTime > 0) {
-			return Math.max(1, (int) (floodProtectionTime / 1000));
-		}
-		return 0;
+		return floodProtectionTime <= 0 ? 0 : Math.max(1, (int) (floodProtectionTime / 1000));
 	}
 
 	public boolean isGagged() {
-		if (gagTime == 0)
-			return false;
-		return System.currentTimeMillis() < gagTime;
+		return gagTime > 0 && System.currentTimeMillis() < gagTime;
 	}
 
 	public void setGagTime(long gagTime) {
@@ -159,11 +121,8 @@ public class ChatClient {
 		return this.gagTime;
 	}
 
-	public boolean same(String nick) {
-		if (!this.realName.equals(nick)) {
-			log.warn("chat hack! different name " + nick + ". expected " + this.realName);
-			return true;
-		}
-		return true;
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", id=" + clientId + ", race=" + race + "]";
 	}
 }

@@ -10,26 +10,23 @@ import com.aionemu.gameserver.network.chatserver.CsServerPacket;
 public class SM_CS_PLAYER_AUTH extends CsServerPacket {
 
 	private int playerId;
-	private String playerLogin;
+	private String accName;
 	private String nick;
-	private int accessLevel;
-	private Race race;
+	private int raceId;
 
-	public SM_CS_PLAYER_AUTH(int playerId, String playerLogin, String nick, int accessLevel, Race race) {
+	public SM_CS_PLAYER_AUTH(int playerId, String accName, String nick, Race race) {
 		super(0x01);
 		this.playerId = playerId;
-		this.playerLogin = playerLogin;
+		this.accName = accName;
 		this.nick = nick;
-		this.accessLevel = accessLevel;
-		this.race = race;
+		this.raceId = race.getRaceId();
 	}
 
 	@Override
 	protected void writeImpl(ChatServerConnection con) {
 		writeD(playerId);
-		writeS(playerLogin);
+		writeS(accName);
 		writeS(nick);
-		writeD(accessLevel);
-		writeD(race.getRaceId());
+		writeD(raceId);
 	}
 }

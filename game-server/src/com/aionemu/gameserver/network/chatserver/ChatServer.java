@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.NioServer;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection.State;
@@ -122,8 +123,7 @@ public class ChatServer {
 
 	public void sendPlayerLoginRequest(Player player) {
 		if (isUp())
-			csCon
-				.sendPacket(new SM_CS_PLAYER_AUTH(player.getObjectId(), player.getAcountName(), player.getName(), player.getAccessLevel(), player.getRace()));
+			csCon.sendPacket(new SM_CS_PLAYER_AUTH(player.getObjectId(), player.getAcountName(), player.getName(AdminConfig.CUSTOMTAG_ENABLE), player.getRace()));
 	}
 
 	public void sendPlayerLogout(Player player) {

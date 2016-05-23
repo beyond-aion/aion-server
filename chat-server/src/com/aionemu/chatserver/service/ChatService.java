@@ -12,8 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.model.ChatClient;
+import com.aionemu.chatserver.model.Race;
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.model.channel.ChatChannels;
+import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_RESPONSE;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_PLAYER_AUTH_RESPONSE;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler.State;
@@ -44,13 +46,13 @@ public class ChatService {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public ChatClient registerPlayer(int playerId, String playerLogin, String nick) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ChatClient registerPlayer(int playerId, String accName, String nick, Race race) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.reset();
-		md.update(playerLogin.getBytes("UTF-8"), 0, playerLogin.length());
+		md.update(accName.getBytes("UTF-8"), 0, accName.length());
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
-		ChatClient chatClient = new ChatClient(playerId, token, nick);
+		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race);
 		players.put(playerId, chatClient);
 		return chatClient;
 	}
@@ -78,26 +80,29 @@ public class ChatService {
 	 * @param playerId
 	 * @param token
 	 * @param identifier
-	 * @param realAccount
-	 * @param realName
+	 * @param name
+	 * @param accName
 	 * @param clientChannelHandler
 	 * @throws UnsupportedEncodingException
 	 */
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, ClientChannelHandler channelHandler, String realName)
+	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName, ClientChannelHandler channelHandler)
 		throws UnsupportedEncodingException {
 		ChatClient chatClient = players.get(playerId);
-		if (chatClient != null) {
-			byte[] regToken = chatClient.getToken();
-			chatClient.same(realName);
-			if (Arrays.equals(regToken, token)) {
-				String sreal = chatClient.getRealName() + "@" + new String(identifier);
-				chatClient.setIdentifier(sreal.getBytes("utf-16le"));
-				chatClient.setChannelHandler(channelHandler);
-				channelHandler.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
-				channelHandler.setState(State.AUTHED);
-				channelHandler.setChatClient(chatClient);
-				BroadcastService.getInstance().addClient(chatClient);
-			}
+		if (chatClient == null)
+			log.warn("Client tried to connect but was not yet registered from game server side");
+		else if (!Arrays.equals(chatClient.getToken(), token))
+			log.warn("Client tried to connect but given token doesn't match");
+		else if (!chatClient.getAccountName().equals(accName))
+			log.warn("Client tried to connect with account name: " + accName + " (expected: " + chatClient.getAccountName() + ")");
+		else if (!chatClient.getName().equals(name))
+			log.warn("Client tried to connect with character name: " + name + " (expected: " + chatClient.getName() + ")");
+		else {
+			chatClient.setIdentifier(identifier);
+			chatClient.setChannelHandler(channelHandler);
+			channelHandler.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
+			channelHandler.setState(State.AUTHED);
+			channelHandler.setChatClient(chatClient);
+			BroadcastService.getInstance().addClient(chatClient);
 		}
 	}
 
@@ -107,11 +112,12 @@ public class ChatService {
 	 * @param channelIdentifier
 	 * @return
 	 */
-	public Channel registerPlayerWithChannel(ChatClient chatClient, String name) {
-		Channel channel = ChatChannels.getOrCreate(name);
-		if (channel != null)
-			chatClient.addChannel(channel);
-		return channel;
+	public void registerPlayerWithChannel(ClientChannelHandler clientChannelHandler, int channelRequestId, String name) {
+		Channel channel = ChatChannels.getOrCreate(clientChannelHandler.getChatClient(), name);
+		if (channel != null) {
+			clientChannelHandler.getChatClient().addChannel(channel);
+			clientChannelHandler.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
+		}
 	}
 
 	/**

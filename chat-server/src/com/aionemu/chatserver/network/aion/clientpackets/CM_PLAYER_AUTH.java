@@ -16,9 +16,7 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	private int playerId;
 	private byte[] token;
 	private byte[] identifier;
-	@SuppressWarnings("unused")
 	private byte[] accountName;
-	private String realName;
 
 	/**
 	 * @param channelBuffer
@@ -31,32 +29,33 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readB(29); // AION stuff
-		this.playerId = readD();
-		readD(); // 0x00
-		readD(); // 0x00
-		readD(); // 0x00
+		readC(); // 0x40 = @
+		readH(); // 0
+		readD(); // 1
+		int gameNameLength = readH() * 2;
+		readB(gameNameLength); // AION
+		readD(); // 27
+		int unkLength = readH() * 2;
+		readB(unkLength); // empty
+		playerId = readD();
+		readD(); // 0
+		readD(); // 0
+		readD(); // 0
 		int length = readH() * 2;
-		identifier = readB(length);
+		identifier = readB(length); // Name@identifier
 		int accountLenght = readH() * 2;
 		accountName = readB(accountLenght);
 		int tokenLength = readH();
 		token = readB(tokenLength);
-
-		try {
-			String realid = new String(identifier, "UTF-16le");
-			realName = realid.split("@")[0];
-			String after = realid.split("@")[1];
-			identifier = after.getBytes("UTF-16le");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	protected void runImpl() {
 		try {
-			ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, clientChannelHandler, realName);
+			String nameIdentifier = new String(identifier, "UTF-16le");
+			String charName = nameIdentifier.substring(0, nameIdentifier.lastIndexOf("@"));
+			String accName = new String(accountName, "UTF-16le");
+			ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, charName, accName, clientChannelHandler);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

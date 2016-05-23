@@ -51,6 +51,8 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		Channel channel = ChatChannels.getChannelById(channelId);
+		if (channel == null)
+			return;
 		ChatClient client = clientChannelHandler.getChatClient();
 		Message message = new Message(channel, content, client);
 		if (client.isGagged()) {
@@ -69,11 +71,11 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 		BroadcastService.getInstance().broadcastMessage(message);
 
 		if (LoggingConfig.LOG_CHAT) {
-			LoggerFactory.getLogger("CHAT_LOG").info("[{}] {}: {}", message.getChannel().name(), message.getSenderName(), message.getTextString());
+			LoggerFactory.getLogger("CHAT_LOG").info("[{}] {}: {}", message.getChannel().name(), message.getSender().getName(), message.getTextString());
 		}
 
 		if (LoggingConfig.LOG_CHAT_TO_DB) {
-			DAOManager.getDAO(ChatLogDAO.class).add_ChannelChat(message.getSenderName(), message.getTextString(), "", message.getChannel().name());
+			DAOManager.getDAO(ChatLogDAO.class).add_ChannelChat(message.getSender().getName(), message.getTextString(), "", message.getChannel().name());
 		}
 	}
 
