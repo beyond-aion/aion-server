@@ -914,7 +914,9 @@ public class StatFunctions {
 
 	public static int calculateFallDamage(Player player, float distance) {
 		int fallDamage = 0;
-		if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
+		if (distance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE) {
+			fallDamage = player.getLifeStats().getCurrentHp();
+		} else if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
 			float dmgPerMeter = player.getLifeStats().getMaxHp() * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f;
 			fallDamage = (int) (distance * dmgPerMeter);
 		}

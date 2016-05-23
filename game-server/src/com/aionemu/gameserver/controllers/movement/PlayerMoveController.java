@@ -42,14 +42,15 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		if (lastFallZ != 0) {
 			fallDistance += lastFallZ - newZ;
 			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR) {
-				owner.getController().onStopMove();
-				owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR);
+				fallDistance = 0;
+				lastFallZ = 0;
+				owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR); // calls abortMove() via onDie()
+				owner.getController().onStopMove(); // stops and notifies move observers
 				if (!owner.isInInstance()) {
 					PlayerReviveService.bindRevive(owner); // instant revive at bind point
 					PacketSendUtility.sendPacket(owner, new SM_EMOTION(owner, EmotionType.RESURRECT)); // send to remove res option window
-					fallDistance = 0;
-					newZ = 0;
 				}
+				return;
 			}
 		}
 		lastFallZ = newZ;
@@ -62,14 +63,10 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 
 		if (!owner.isFlying()) {
 			fallDistance += lastFallZ - newZ;
-			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE)
-				owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR);
-			else {
-				int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
-				if (damage > 0) {
-					owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, damage, 0, LOG.REGULAR, owner);
-					owner.getObserveController().notifyAttackedObservers(owner, 0);
-				}
+			int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
+			if (damage > 0) {
+				owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, damage, 0, LOG.REGULAR, owner);
+				owner.getObserveController().notifyAttackedObservers(owner, 0);
 			}
 		}
 		fallDistance = 0;
