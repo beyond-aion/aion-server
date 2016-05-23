@@ -67,7 +67,7 @@ public class CreatureEventHandler {
 
 		if (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange())) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
-			if (TribeRelationService.isAggressive(owner, creature) && owner.isEnemyFrom(creature)) { // aggressive mob
+			if (TribeRelationService.isAggressive(owner, creature) && (creature instanceof Player || creature.isEnemyFrom(owner))) { // aggressive mob
 				if (validateAggro(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
 					ShoutEventHandler.onSee(ai, creature);
 					if (!ai.isInState(AIState.RETURNING))
