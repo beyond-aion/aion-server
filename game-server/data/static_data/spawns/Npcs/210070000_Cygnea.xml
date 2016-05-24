@@ -6303,6 +6303,10 @@
 		<spawn npc_id="804792" respawn_time="295">
 			<spot x="534.01825" y="1898.75598" z="467.79214" static_id="595"/>
 		</spawn>
+		<!-- ornis -->
+		<spawn npc_id="804793" respawn_time="295">
+			<spot x="532.7" y="1897.6" z="467.2014" h="58"/>
+		</spawn>
 		<!-- aether aircraft -->
 		<spawn npc_id="804794" respawn_time="295">
 			<spot x="2170.11987" y="2906.48486" z="325.25000" static_id="712"/>
@@ -6314,6 +6318,10 @@
 		<!-- obelisk -->
 		<spawn npc_id="804797" respawn_time="295">
 			<spot x="2116.10547" y="2903.73853" z="326.43054" static_id="369"/>
+		</spawn>
+		<!-- mehdium -->
+		<spawn npc_id="804798" respawn_time="295">
+			<spot x="2117.5" y="2904.5" z="325.90625" h="106"/>
 		</spawn>
 		<!-- teleport device -->
 		<spawn npc_id="804799" respawn_time="295">
@@ -6338,6 +6346,10 @@
 		<!-- obelisk -->
 		<spawn npc_id="804806" respawn_time="295">
 			<spot x="2350.14331" y="1488.12329" z="438.32385" static_id="420"/>
+		</spawn>
+		<!-- klosion -->
+		<spawn npc_id="804807" respawn_time="295">
+			<spot x="2348.2" y="1488.8" z="437.75" h="27"/>
 		</spawn>
 		<!-- teleport device -->
 		<spawn npc_id="804808" respawn_time="295">
