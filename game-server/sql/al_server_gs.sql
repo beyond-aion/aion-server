@@ -935,17 +935,12 @@ CREATE TABLE IF NOT EXISTS `towns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `web_reward`
+-- Table structure for `web_rewards`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `web_reward` (
-  `unique` int(11) NOT NULL AUTO_INCREMENT,
-  `item_owner` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `item_count` decimal(20,0) NOT NULL DEFAULT '1',
-  `rewarded` tinyint(1) NOT NULL DEFAULT '0',
-  `added` varchar(70) DEFAULT '',
-  `received` varchar(70) DEFAULT '',
-  PRIMARY KEY (`unique`),
-  KEY `item_owner` (`item_owner`),
-  CONSTRAINT `web_reward_ibfk_1` FOREIGN KEY (`item_owner`) REFERENCES `players` (`id`) ON DELETE CASCADE
+CREATE TABLE `web_rewards` (
+	`request_id` int(11) NOT NULL DEFAULT 0,
+	`receiver_name` varchar(50) NOT NULL,
+	`item_id` int(11) NOT NULL DEFAULT 0,
+	`item_count` int(11) NOT NULL DEFAULT 0,
+	PRIMARY KEY (`request_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
