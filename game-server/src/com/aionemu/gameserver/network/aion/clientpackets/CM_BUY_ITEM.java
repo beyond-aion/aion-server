@@ -8,6 +8,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.pet.PetFunction;
+import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.RepurchaseList;
@@ -135,8 +137,9 @@ public class CM_BUY_ITEM extends AionClientPacket {
 					break;
 			}
 		} else if (target instanceof Pet) {
-			if (tradeActionId == 17) {
-				TradeService.performSellToShop(player, tradeList);
+			PetFunction pf = ((Pet) target).getPetTemplate().getPetFunction(PetFunctionType.MERCHANT);
+			if (pf != null && tradeActionId == 17) {
+				TradeService.performSellToShop(player, tradeList, null, pf.getRatePrice());
 			}
 		}
 	}

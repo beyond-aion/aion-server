@@ -94,17 +94,16 @@ public class PricesService {
 	}
 
 	/**
-	 * Used in SM_SELL_ITEM - Can be unique per NPC!
+	 * Used in SM_SELL_ITEM
 	 * 
-	 * @return sellingModifier
+	 * @return The default sellModifier, but some npcs and merchant pets use their own values.
 	 */
 	public static final int getVendorSellModifier() {
 		return PricesConfig.VENDOR_SELL_MODIFIER;
 	}
 
 	/**
-	 * @param basePrice
-	 * @return modifiedPrice
+	 * @return The calculated price after taxes and global modifiers.
 	 */
 	public static final long getPriceForService(long basePrice, Race playerRace) {
 		// Tricky. Requires multiplication by Prices, Modifier, Taxes
@@ -113,22 +112,18 @@ public class PricesService {
 	}
 
 	/**
-	 * @param requiredKinah
-	 * @return modified requiredKinah
+	 * @return The calculated price after taxes, vendor and global modifiers.
 	 */
-	public static final long getKinahForBuy(long requiredKinah, Race playerRace) {
+	public static final long getBuyPrice(long requiredKinah, Race playerRace) {
 		// Requires double precision for 2mil+ kinah items
-		return (long) ((long) ((long) ((long) (requiredKinah * getVendorBuyModifier() / 100.0D) * getGlobalPrices(playerRace) / 100.0D)
-			* getGlobalPricesModifier() / 100.0D)
-			* getTaxes(playerRace) / 100.0D);
+		return (long) ((long) ((long) ((long) (requiredKinah * getVendorBuyModifier() / 100D) * getGlobalPrices(playerRace) / 100D)
+			* getGlobalPricesModifier() / 100D) * getTaxes(playerRace) / 100D);
 	}
 
 	/**
-	 * @param kinahReward
-	 * @return
+	 * @return The calculated Kinah reward after applying sellModifier (default would be 20 = 20% of the original value, see {@link #getVendorSellModifier()}).
 	 */
-	public static final long getKinahForSell(long kinahReward) {
-		return (long) (kinahReward * getVendorSellModifier() / 100D);
+	public static final long getSellReward(long kinahValue, int sellModifier) {
+		return (long) (kinahValue * sellModifier / 100D);
 	}
-
 }

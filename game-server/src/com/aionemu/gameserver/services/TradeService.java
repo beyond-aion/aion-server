@@ -210,11 +210,11 @@ public class TradeService {
 		return true;
 	}
 
-	public static boolean performSellToShop(Player player, TradeList tradeList) {
-		return performSellToShop(player, tradeList, null);
+	public static boolean performSellToShop(Player player, TradeList tradeList, TradeListTemplate purchaseTemplate) {
+		return performSellToShop(player, tradeList, purchaseTemplate, PricesService.getVendorSellModifier());
 	}
 
-	public static boolean performSellToShop(Player player, TradeList tradeList, TradeListTemplate purchaseTemplate) {
+	public static boolean performSellToShop(Player player, TradeList tradeList, TradeListTemplate purchaseTemplate, int sellModifier) {
 		if (!RestrictionsManager.canTrade(player))
 			return false;
 
@@ -248,7 +248,7 @@ public class TradeService {
 					return false;
 				sellReward = (long) (item.getItemTemplate().getPrice() * purchaseTemplate.getBuyPriceRate() / 100D);
 			} else
-				sellReward = PricesService.getKinahForSell(item.getItemTemplate().getPrice());
+				sellReward = PricesService.getSellReward(item.getItemTemplate().getPrice(), sellModifier);
 
 			count = PlayerLimitService.updateSellLimit(player, sellReward, count);
 			if (count == 0)

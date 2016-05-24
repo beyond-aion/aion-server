@@ -57,7 +57,7 @@ public class TradeList {
 		requiredKinah = 0;
 
 		for (TradeItem tradeItem : tradeItems) {
-			requiredKinah += PricesService.getKinahForBuy(tradeItem.getItemTemplate().getPrice(), player.getRace()) * tradeItem.getCount() * modifier / 100;
+			requiredKinah += PricesService.getBuyPrice(tradeItem.getItemTemplate().getPrice(), player.getRace()) * tradeItem.getCount() * modifier / 100;
 		}
 
 		return availableKinah >= requiredKinah;
