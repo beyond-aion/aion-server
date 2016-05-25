@@ -3709,7 +3709,7 @@
 		</spawn>
 		<!-- Naduka Drakie -->
 		<spawn npc_id="216036" respawn_time="295">
-			<spot x="1102.81" y="1040.55" z="279.897" random_walk="6"/>
+			<spot x="1102.81" y="1040.55" z="271.8" random_walk="6"/>
 			<spot x="1106.8" y="1071.44" z="279.897" random_walk="6"/>
 			<spot x="1245.74" y="1051.85" z="279.897" random_walk="6"/>
 			<spot x="1287.37" y="1028.73" z="279.897" random_walk="6"/>
