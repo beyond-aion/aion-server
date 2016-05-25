@@ -245,7 +245,6 @@ public class TeleportService2 {
 			PrivateStoreService.closePrivateStore(player);
 		player.getController().cancelCurrentSkill(null);
 		player.setTarget(null);
-		player.getFlyController().endFly(true);
 		player.unsetPlayerMode(PlayerMode.RIDE);
 	}
 
