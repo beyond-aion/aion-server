@@ -455,12 +455,12 @@ public class World {
 
 	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
 		MapRegion oldMapRegion = object.getActiveRegion();
+		object.getPosition().setIsSpawned(false);
 		if (oldMapRegion != null) { // can be null if an instance gets deleted?
 			if (oldMapRegion.getParent() != null)
 				oldMapRegion.getParent().removeObject(object);
 			oldMapRegion.remove(object);
 		}
-		object.getPosition().setIsSpawned(false);
 		if (oldMapRegion != null && object instanceof Creature) {
 			oldMapRegion.revalidateZones((Creature) object);
 		}

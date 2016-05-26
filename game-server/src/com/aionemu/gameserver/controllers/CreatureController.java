@@ -110,13 +110,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Refresh completely zone irrespective of the current zone
-	 */
-	public void refreshZoneImpl() {
-		getOwner().revalidateZones();
-	}
-
-	/**
 	 * Zone update mask management
 	 * 
 	 */

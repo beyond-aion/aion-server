@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -283,6 +284,25 @@ public class PlayerController extends CreatureController<Player> {
 			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
 		else
 			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0, 0), zoneName);
+	}
+
+	/**
+	 * Called when leaving a fly zone (like citadel of verteron) or a fly map (like the abyss).
+	 */
+	public void onLeaveFlyArea() {
+		Player player = getOwner();
+		if (player.isInFlyingState() && player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
+			if (player.isInGlidingState()) {
+				player.unsetFlyState(FlyState.FLYING);
+				player.unsetState(CreatureState.FLYING);
+				player.getGameStats().updateStatsAndSpeedVisually();
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
+			} else {
+				player.getFlyController().endFly(true);
+				if (player.isSpawned()) // not spawned means leaving by teleporter
+					AuditLogger.info(player, "On leave Fly zone in fly state");
+			}
+		}
 	}
 
 	/**

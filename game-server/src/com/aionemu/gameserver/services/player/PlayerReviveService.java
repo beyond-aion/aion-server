@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.services.player;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team2.common.legacy.PlayerAllianceEvent;
@@ -46,24 +47,20 @@ public class PlayerReviveService {
 			return;
 		}
 		revive(player, 10, 10, true, player.getResurrectionSkill());
-		if (player.getIsFlyingBeforeDeath()) {
-			player.setState(CreatureState.FLYING);
-		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
-			player.getFlyController().startFly();
+			player.getFlyController().startFly(true, true);
+		} else {
+			player.getGameStats().updateStatsAndSpeedVisually();
 		}
-		player.getGameStats().updateStatsAndSpeedVisually();
 
 		if (player.isInPrison())
 			TeleportService2.teleportToPrison(player);
-
-		if (player.isInResPostState())
+		else if (player.isInResPostState())
 			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getResPosX(), player.getResPosY(), player.getResPosZ());
 		player.unsetResPosState();
-		// unset isflyingbeforedeath
 		player.setIsFlyingBeforeDeath(false);
 	}
 
@@ -71,35 +68,30 @@ public class PlayerReviveService {
 		if (!player.canUseRebirthRevive()) {
 			return;
 		}
-		if (player.getRebirthResurrectPercent() <= 0) {
-			PacketSendUtility.sendMessage(player, "Error: Rebirth effect missing percent.");
-			player.setRebirthResurrectPercent(5);
-		}
+		
 		boolean soulSickness = true;
 		int rebirthResurrectPercent = player.getRebirthResurrectPercent();
 		if (player.getAccessLevel() >= AdminConfig.ADMIN_AUTO_RES) {
 			rebirthResurrectPercent = 100;
 			soulSickness = false;
+		} else if (rebirthResurrectPercent <= 0) {
+			LoggerFactory.getLogger(PlayerReviveService.class).warn("Rebirth effect missing percent.");
+			rebirthResurrectPercent = 5;
 		}
 
 		revive(player, rebirthResurrectPercent, rebirthResurrectPercent, soulSickness, player.getRebirthSkill());
-		if (player.getIsFlyingBeforeDeath()) {
-			player.setState(CreatureState.FLYING);
-		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
-			player.getFlyController().startFly();
+			player.getFlyController().startFly(true, true);
+		} else {
+			player.getGameStats().updateStatsAndSpeedVisually();
 		}
-		player.getGameStats().updateStatsAndSpeedVisually();
 
 		if (player.isInPrison())
 			TeleportService2.teleportToPrison(player);
 		player.unsetResPosState();
-
-		// if player was flying before res, start flying
-
-		// unset isflyingbeforedeath
 		player.setIsFlyingBeforeDeath(false);
 	}
 
@@ -251,21 +243,18 @@ public class PlayerReviveService {
 		}
 		// Tombstone Self-Rez retail verified 15%
 		revive(player, 15, 15, true, player.getResurrectionSkill());
-		// if player was flying before res, start flying
-		if (player.getIsFlyingBeforeDeath()) {
-			player.setState(CreatureState.FLYING);
-		}
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
-			player.getFlyController().startFly();
+			player.getFlyController().startFly(true, true);
+		} else {
+			player.getGameStats().updateStatsAndSpeedVisually();
 		}
-		player.getGameStats().updateStatsAndSpeedVisually();
 
 		if (player.isInPrison())
 			TeleportService2.teleportToPrison(player);
 		player.unsetResPosState();
-		// unset isflyingbeforedeath
 		player.setIsFlyingBeforeDeath(false);
 
 	}

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.world;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,9 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
-
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +34,10 @@ import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 /**
  * World map instance object.
@@ -160,8 +159,7 @@ public abstract class WorldMapInstance {
 	 */
 	public void addObject(VisibleObject object) {
 		if (worldMapObjects.put(object.getObjectId(), object) != null) {
-			throw new DuplicateAionObjectException("Object with templateId " + String.valueOf(object.getObjectTemplate().getTemplateId())
-				+ " already spawned in the instance " + String.valueOf(this.getMapId()) + " " + String.valueOf(this.getInstanceId()));
+			throw new DuplicateAionObjectException(object + " already spawned in instance " + getMapId() + " " + getInstanceId());
 		}
 		if (object instanceof Npc) {
 			int npcId = ((Npc) object).getNpcId();
@@ -193,8 +191,11 @@ public abstract class WorldMapInstance {
 	public void removeObject(AionObject object) {
 		worldMapObjects.remove(object.getObjectId());
 		if (object instanceof Player) {
-			if (this.getParent().isPossibleFly())
+			if (this.getParent().isPossibleFly()) {
 				((Player) object).unsetInsideZoneType(ZoneType.FLY);
+				// necessary for fly maps like the abyss (they don't have FlyZones, so no FlyZoneInstance.onLeave() is called)
+				((Player) object).getController().onLeaveFlyArea();
+			}
 			worldMapPlayers.remove(object.getObjectId());
 		}
 	}

@@ -15,7 +15,8 @@ public class ZoneUpdateService extends AbstractFIFOPeriodicTaskManager<Creature>
 
 	@Override
 	protected void callTask(Creature creature) {
-		creature.getController().refreshZoneImpl();
+		// validate all zones irrespective of the current zone
+		creature.revalidateZones();
 		if (creature instanceof Player) {
 			ZoneLevelService.checkZoneLevels((Player) creature);
 		}
