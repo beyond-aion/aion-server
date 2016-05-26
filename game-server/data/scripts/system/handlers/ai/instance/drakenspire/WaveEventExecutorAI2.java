@@ -15,28 +15,22 @@ import ai.GeneralNpcAI2;
 @AIName("wave_event_executor")
 public class WaveEventExecutorAI2 extends GeneralNpcAI2 {
 
-	private AtomicBoolean isDestinationReached = new AtomicBoolean(false);
+	private AtomicBoolean isDestinationReached = new AtomicBoolean();
 
 	@Override
 	public void handleMoveArrived() {
 		super.handleMoveArrived();
-		if (getOwner().getMoveController().isStop()) {
-			if (isDestinationReached.compareAndSet(false, true)) {
-				getOwner().getSpawn().setWalkerId("");
-				PacketSendUtility.broadcastMessage(getOwner(), 1501318, 0);
-				scheduleSummon();
-			}
+		if (getOwner().getMoveController().isStop() && isDestinationReached.compareAndSet(false, true)) {
+			getOwner().getSpawn().setWalkerId("");
+			PacketSendUtility.broadcastMessage(getOwner(), 1501318);
+			scheduleSummon();
 		}
 	}
 
 	private void scheduleSummon() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 20839, 1, getOwner()).useSkill();
-				PacketSendUtility.broadcastMessage(getOwner(), 1501317, 2000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			SkillEngine.getInstance().getSkill(getOwner(), 20839, 1, getOwner()).useSkill();
+			PacketSendUtility.broadcastMessage(getOwner(), 1501317, 2000);
 		}, 3500);
 	}
 }

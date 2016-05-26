@@ -22,15 +22,10 @@ public class OrissanDoorDestroyerAI2 extends GeneralNpcAI2 {
 
 	private void scheduleGateDestruction() {
 		PacketSendUtility.broadcastMessage(getOwner(), 1501313, 7000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs()) {
-					if (npc.getNpcId() == 731580 && isInRange(npc, 15))
-						SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
-				}
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs())
+				if (npc.getNpcId() == 731580 && isInRange(npc, 15))
+					SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
 		}, 14000);
 	}
 }

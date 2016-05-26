@@ -30,12 +30,6 @@ public class BeritraPortalAI2 extends ActionItemNpcAI2 {
 
 				break;
 		}
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915));
-			}
-		}, 3000);
+		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915)), 3000);
 	}
 }

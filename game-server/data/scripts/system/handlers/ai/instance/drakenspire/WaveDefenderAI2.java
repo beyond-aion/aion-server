@@ -14,25 +14,19 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("wave_defender")
 public class WaveDefenderAI2 extends AggressiveNpcAI2 {
 
-	private AtomicBoolean isDestinationReached = new AtomicBoolean(false);
+	private AtomicBoolean isDestinationReached = new AtomicBoolean();
 
 	@Override
 	public void handleMoveArrived() {
 		super.handleMoveArrived();
-		if (getOwner().getMoveController().isStop()) {
-			if (isDestinationReached.compareAndSet(false, true))
+		if (getOwner().getMoveController().isStop() && isDestinationReached.compareAndSet(false, true))
 				scheduleLocationUpdate();
-		}
 	}
 	
 	private void scheduleLocationUpdate() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			
-			@Override
-			public void run() {
+		ThreadPoolManager.getInstance().schedule(() -> {
 				spawn(getOwner().getRace() == Race.ELYOS ? 236248 : 236249, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getHeading());
 				getOwner().getController().onDelete();
-			}
 		}, 3000);
 	}
 	

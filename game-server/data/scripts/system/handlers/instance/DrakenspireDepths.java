@@ -96,73 +96,45 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	}
 
 	private void onTwinFightStart() {
-		twinFailTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				twinProgressCount++;
-				switch (twinProgressCount) {
-					case 8:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_04());
-						break;
-					case 9:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_05(), 5000);
-						break;
-					case 10:
-						cancelTask(twinFailTask);
-						onTwinFail();
-						break;
-				}
+		twinFailTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			twinProgressCount++;
+			switch (twinProgressCount) {
+				case 8:
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_04());
+					break;
+				case 9:
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_05(), 5000);
+					break;
+				case 10:
+					cancelTask(twinFailTask);
+					onTwinFail();
+					break;
 			}
 		}, 30000, 30 * 1000);
-	}
-
-	private void onOrissanFightStart(Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				scheduleOrissansImmortalPhase(npc, 0);
-			}
-		}, 5000);
 	}
 
 	public void onWaveEventStart() {
 		sp(race == Race.ELYOS ? 209720 : 209785, 635.53f, 886.83f, 1600.72f, (byte) 30, "301390000_NPCPathFunction_Npc_Path06", CreatureState.WALKING,
 			7000);
 		spawn(race == Race.ELYOS ? 209731 : 209796, 639.05f, 895.86f, 1600.41f, (byte) 30);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path07", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path08", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path09", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path10", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path13", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path14", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path15", 2000);
-				sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path16", 2000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						deleteNpcById(race == Race.ELYOS ? 209720 : 209785);
-						spawn(race == Race.ELYOS ? 209723 : 209788, 636.09f, 879.98f, 1600.82f, (byte) 33); // Main Npc
-						spawn(race == Race.ELYOS ? 702719 : 702720, 635.68f, 883.03f, 1603.91f, (byte) 29); // Siege Weapon
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_01(), 3000);
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_02(), 6000);
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_03(), 9000);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								handleWaveAttacks();
-							}
-						}, 5000);
-					}
-				}, 12000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path07", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path08", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path09", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 637.75f, 847.98f, 1599.94f, (byte) 30, "301390000_NPCPathFunction_Npc_Path10", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path13", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path14", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path15", 2000);
+			sp(race == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path16", 2000);
+			ThreadPoolManager.getInstance().schedule(() -> {
+				deleteNpcById(race == Race.ELYOS ? 209720 : 209785);
+				spawn(race == Race.ELYOS ? 209723 : 209788, 636.09f, 879.98f, 1600.82f, (byte) 33); // Main Npc
+				spawn(race == Race.ELYOS ? 702719 : 702720, 635.68f, 883.03f, 1603.91f, (byte) 29); // Siege Weapon
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_01(), 3000);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_02(), 6000);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_03(), 9000);
+				ThreadPoolManager.getInstance().schedule(() -> handleWaveAttacks(), 5000);
+			}, 12000);
 		}, 18000);
 	}
 
@@ -171,62 +143,46 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_10(), 5000);
 			return;
 		}
-		orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+		orissanSwitchTask = ThreadPoolManager.getInstance().schedule(() -> {
+			orissanImmortalityCount++;
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_01());
+			SkillEngine.getInstance().getSkill((Creature) npc, 21635, 1, npc).useSkill();
+			orissanSwitchTask = ThreadPoolManager.getInstance().schedule(() -> {
+				if (orissanImmortalityCount >= 3 && isOrissanFailed.compareAndSet(false, true))
+					onOrissanFail();
 
-			@Override
-			public void run() {
-				orissanImmortalityCount++;
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_01()); // Begins the Ascension
-				SkillEngine.getInstance().getSkill((Creature) npc, 21635, 1, npc).useSkill();
-				orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (orissanImmortalityCount >= 3 && isOrissanFailed.compareAndSet(false, true))
-							onOrissanFail();
-
-						scheduleOrissansExhaustedPhase(spawn(236233, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()));
-						npc.getController().onDelete();
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_02());
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_03(), 2000);
-					}
-				}, 12000);
-			}
+				scheduleOrissansExhaustedPhase(spawn(236233, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()));
+				npc.getController().onDelete();
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_02());
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_03(), 2000);
+			}, 12000);
 		}, delay);
 	}
 
 	private void scheduleOrissansExhaustedPhase(VisibleObject npc) {
 		SkillEngine.getInstance().getSkill((Creature) npc, 21634, 1, npc).useSkill();
-		orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_04());
-				orissanSwitchTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_05());
-						switch (orissanImmortalityCount) {
-							case 2:
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_06(), 2000);
-								break;
-							case 3:
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_07(), 2000);
-								break;
-							case 4:
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_08(), 2000);
-								break;
-							case 5:
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_09(), 2000);
-								break;
-						}
-						int newDelay = orissanImmortalityCount == 1 ? 110000 : 218000;
-						scheduleOrissansImmortalPhase(spawn(236234, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()), newDelay);
-						npc.getController().onDelete();
-					}
-				}, 10000);
-			}
+		orissanSwitchTask = ThreadPoolManager.getInstance().schedule(() -> {
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_04());
+			orissanSwitchTask = ThreadPoolManager.getInstance().schedule(() -> {
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_05());
+				switch (orissanImmortalityCount) {
+					case 2:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_06(), 2000);
+						break;
+					case 3:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_07(), 2000);
+						break;
+					case 4:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_08(), 2000);
+						break;
+					case 5:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_09(), 2000);
+						break;
+				}
+				int newDelay = orissanImmortalityCount == 1 ? 110000 : 218000;
+				scheduleOrissansImmortalPhase(spawn(236234, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()), newDelay);
+				npc.getController().onDelete();
+			}, 10000);
 		}, 70000);
 	}
 
@@ -270,77 +226,63 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				break;
 		}
 		scheduleCommanderWave();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				handleWaveAttacks();
-			}
-		}, 60000);
+		ThreadPoolManager.getInstance().schedule(() -> handleWaveAttacks(), 60000);
 	}
 
 	private void scheduleWaveSpawns(int npcId) {
-		waveAssaultTasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				switch (npcId) {
-					case 236204:
-						sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_01", CreatureState.WALKING, 2000);
-						sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_02", CreatureState.WALKING, 2000);
-						sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_01", CreatureState.WALKING, 2000);
-						sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_02", CreatureState.WALKING, 2000);
-						break;
-					case 236205:
-						sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_01", CreatureState.WALKING, 2000);
-						sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_02", CreatureState.WALKING, 2000);
-						sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_01", CreatureState.WALKING, 2000);
-						sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_02", CreatureState.WALKING, 2000);
-						break;
-					case 236206:
-						sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_01", CreatureState.WALKING, 2000);
-						sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_02", CreatureState.WALKING, 2000);
-						sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_01", CreatureState.WALKING, 2000);
-						sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_02", CreatureState.WALKING, 2000);
-						break;
-				}
+		waveAssaultTasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			switch (npcId) {
+				case 236204:
+					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_01", CreatureState.WALKING, 2000);
+					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_02", CreatureState.WALKING, 2000);
+					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_01", CreatureState.WALKING, 2000);
+					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_02", CreatureState.WALKING, 2000);
+					break;
+				case 236205:
+					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_01", CreatureState.WALKING, 2000);
+					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_02", CreatureState.WALKING, 2000);
+					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_01", CreatureState.WALKING, 2000);
+					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_02", CreatureState.WALKING, 2000);
+					break;
+				case 236206:
+					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_01", CreatureState.WALKING, 2000);
+					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_02", CreatureState.WALKING, 2000);
+					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_01", CreatureState.WALKING, 2000);
+					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_02", CreatureState.WALKING, 2000);
+					break;
 			}
 		}, 10000, 40000));
 	}
 
 	private void scheduleCommanderWave() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Left", 1000);
+			sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Middle", 0);
+			sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Right", 1000);
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-			@Override
-			public void run() {
-				sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Left", 1000);
-				sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Middle", 0);
-				sp(Rnd.get(236216, 236220), 635.17f, 811.90f, 1598.50f, (byte) 30, "301390000_Wave_Commander_Right", 1000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Left", 0);
-						sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 0);
-						if (waveCount >= 3)
-							sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 0);
-						if (waveCount >= 4) {
-							sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Left", 4000);
-							sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 4000);
-						}
-						if (!isHardmode && waveCount == 3) {
-							sp(236243, 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 1000); // Commander Virtsha
-							return;
-						}
-						sp(236238 + waveCount, 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 3000); // Boss
+				@Override
+				public void run() {
+					sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Left", 0);
+					sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 0);
+					if (waveCount >= 3)
+						sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 0);
+					if (waveCount >= 4) {
+						sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Left", 4000);
+						sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 4000);
 					}
-				}, 8000);
-			}
+					if (!isHardmode && waveCount == 3) {
+						sp(236243, 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 1000); // Commander Virtsha
+						return;
+					}
+					sp(236238 + waveCount, 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 3000); // Boss
+				}
+			}, 8000);
 		}, 20000);
 	}
 
 	private void scheduleBeritrasDespawn() {
-		/*beritraDespawnTask = */ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+		/* beritraDespawnTask = */ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {
@@ -354,41 +296,29 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	}
 
 	private void onTwinsComplete() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sp(race == Race.ELYOS ? 209690 : 209755, 543.35f, 149.81f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path03", 3000);
-				sp(race == Race.ELYOS ? 209690 : 209755, 543.45f, 208.97f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path01", 3000);
-				sp(race == Race.ELYOS ? 209693 : 209758, 543.43f, 155.08f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path04", 3000);
-				sp(race == Race.ELYOS ? 209693 : 209758, 543.43f, 214.24f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path02", 3000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						spawn(race == Race.ELYOS ? 209695 : 209760, 582.61f, 183.52f, 1683.73f, (byte) 0);
-						spawn(race == Race.ELYOS ? 209694 : 209759, 582.55f, 178.02f, 1683.73f, (byte) 0);
-					}
-				}, 15000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sp(race == Race.ELYOS ? 209690 : 209755, 543.35f, 149.81f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path03", 3000);
+			sp(race == Race.ELYOS ? 209690 : 209755, 543.45f, 208.97f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path01", 3000);
+			sp(race == Race.ELYOS ? 209693 : 209758, 543.43f, 155.08f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path04", 3000);
+			sp(race == Race.ELYOS ? 209693 : 209758, 543.43f, 214.24f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path02", 3000);
+			ThreadPoolManager.getInstance().schedule(() -> {
+				spawn(race == Race.ELYOS ? 209695 : 209760, 582.61f, 183.52f, 1683.73f, (byte) 0);
+				spawn(race == Race.ELYOS ? 209694 : 209759, 582.55f, 178.02f, 1683.73f, (byte) 0);
+			}, 15000);
 		}, 2000);
 	}
 
 	private void onOrissanComplete() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			spawn(race == Race.ELYOS ? 209705 : 209770, 816.18f, 517.78f, 1707.41f, (byte) 33);
+			spawn(race == Race.ELYOS ? 209705 : 209770, 820.82f, 517.82f, 1707.41f, (byte) 33);
+			spawn(race == Race.ELYOS ? 209704 : 209769, 816.00f, 521.35f, 1706.88f, (byte) 33);
+			spawn(race == Race.ELYOS ? 209704 : 209769, 820.48f, 521.49f, 1706.88f, (byte) 33);
 
-			@Override
-			public void run() {
-				spawn(race == Race.ELYOS ? 209705 : 209770, 816.18f, 517.78f, 1707.41f, (byte) 33);
-				spawn(race == Race.ELYOS ? 209705 : 209770, 820.82f, 517.82f, 1707.41f, (byte) 33);
-				spawn(race == Race.ELYOS ? 209704 : 209769, 816.00f, 521.35f, 1706.88f, (byte) 33);
-				spawn(race == Race.ELYOS ? 209704 : 209769, 820.48f, 521.49f, 1706.88f, (byte) 33);
-
-				spawn(race == Race.ELYOS ? 209711 : 209776, 811.00f, 587.83f, 1701.045f, (byte) 32);
-				spawn(race == Race.ELYOS ? 209709 : 209774, 807.50f, 583.54f, 1701.045f, (byte) 32);
-				spawn(race == Race.ELYOS ? 209710 : 209775, 814.85f, 583.56f, 1701.045f, (byte) 32);
-				spawn(race == Race.ELYOS ? 209708 : 209773, 811.11f, 582.62f, 1701.045f, (byte) 32);
-			}
+			spawn(race == Race.ELYOS ? 209711 : 209776, 811.00f, 587.83f, 1701.045f, (byte) 32);
+			spawn(race == Race.ELYOS ? 209709 : 209774, 807.50f, 583.54f, 1701.045f, (byte) 32);
+			spawn(race == Race.ELYOS ? 209710 : 209775, 814.85f, 583.56f, 1701.045f, (byte) 32);
+			spawn(race == Race.ELYOS ? 209708 : 209773, 811.11f, 582.62f, 1701.045f, (byte) 32);
 		}, 2500);
 	}
 
@@ -457,11 +387,11 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				break;
 			case 236232:
 				if (isOrissanFightStarted.compareAndSet(false, true))
-					onOrissanFightStart(npc);
+					ThreadPoolManager.getInstance().schedule(() -> scheduleOrissansImmortalPhase(npc, 0), 5000);
 				break;
 			case 236246: // Lv3mode Human Beritra
 				if (isBeritraFightStarted.compareAndSet(false, true))
-					/*onBeritraFightStart()*/;
+					/* onBeritraFightStart() */;
 				break;
 			case 236247: // Dragon Beritra
 				if (isBeritraTransformed.compareAndSet(false, true))
@@ -492,25 +422,20 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				} else {
 					spawn(npcId == 236227 ? 855708 : 855709, npc.getX(), npc.getY(), npc.getZ(), (byte) 0); // Sphere
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_02());
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (getNpc(npcId == 236227 ? 236228 : 236227) != null) {
-								switch (npcId) {
-									case 236227: // Lava Protector
-										spawn(npcId, 531.0885f, 212.43806f, 1683.4116f, (byte) 60);
-										break;
-									case 236228: // Heatvent Protector
-										spawn(npcId, 530.8584f, 151.8681f, 1683.4116f, (byte) 60);
-										break;
-								}
-								deleteNpcById(855708);
-								deleteNpcById(855709);
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_03());
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (getNpc(npcId == 236227 ? 236228 : 236227) != null) {
+							switch (npcId) {
+								case 236227: // Lava Protector
+									spawn(npcId, 531.0885f, 212.43806f, 1683.4116f, (byte) 60);
+									break;
+								case 236228: // Heatvent Protector
+									spawn(npcId, 530.8584f, 151.8681f, 1683.4116f, (byte) 60);
+									break;
 							}
+							deleteNpcById(855708);
+							deleteNpcById(855709);
+							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_03());
 						}
-
 					}, 15000);
 				}
 				npc.getController().onDelete();
@@ -587,7 +512,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (isRaceSet.compareAndSet(false, true)) { // not really necessary, but pretends bug if GMs port in
+		if (isRaceSet.compareAndSet(false, true)) {
 			if (player.getRace() == Race.ELYOS)
 				race = Race.ELYOS;
 
@@ -626,15 +551,11 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 
 	private void sp(int id, float x, float y, float z, byte h, String walkerId, CreatureState state, int delay) {
 		final Npc npc = (Npc) spawn(id, x, y, z, h);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				npc.getSpawn().setWalkerId(walkerId);
-				WalkManager.startWalking((NpcAI2) npc.getAi2());
-				npc.setState(state.getId());
-				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			npc.getSpawn().setWalkerId(walkerId);
+			WalkManager.startWalking((NpcAI2) npc.getAi2());
+			npc.setState(state.getId());
+			PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 		}, delay);
 	}
 
