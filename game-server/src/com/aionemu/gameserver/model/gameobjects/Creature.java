@@ -727,16 +727,23 @@ public abstract class Creature extends VisibleObject {
 		return false;
 	}
 
+	/**
+	 * Increments an internal counter for the given zone type, to support nested zones
+	 */
 	public void setInsideZoneType(ZoneType zoneType) {
-		byte current = zoneTypes[zoneType.getValue()];
-		zoneTypes[zoneType.getValue()] = (byte) (current + 1);
+		zoneTypes[zoneType.getValue()]++;
 	}
 
+	/**
+	 * Decrements an internal counter for the given zone type, to support nested zones
+	 */
 	public void unsetInsideZoneType(ZoneType zoneType) {
-		byte current = zoneTypes[zoneType.getValue()];
-		zoneTypes[zoneType.getValue()] = (byte) (current - 1);
+		zoneTypes[zoneType.getValue()]--;
 	}
 
+	/**
+	 * @return True, if the creature is inside one or more zones of the specified type.
+	 */
 	public boolean isInsideZoneType(ZoneType zoneType) {
 		return zoneTypes[zoneType.getValue()] > 0;
 	}

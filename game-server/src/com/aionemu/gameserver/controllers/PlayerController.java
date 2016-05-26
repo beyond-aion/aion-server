@@ -701,9 +701,9 @@ public class PlayerController extends CreatureController<Player> {
 	public void stopProtectionActiveTask() {
 		cancelTask(TaskId.PROTECTION_ACTIVE);
 		Player player = getOwner();
-		if (player != null && player.isSpawned()) {
+		if (player.isSpawned()) {
 			player.unsetVisualState(CreatureVisualState.BLINKING);
-			PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_PLAYER_STATE(player), true);
 			notifyAIOnMove();
 		}
 	}
@@ -817,7 +817,6 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public long getLastCombatTime() {

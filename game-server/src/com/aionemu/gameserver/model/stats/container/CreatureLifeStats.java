@@ -29,7 +29,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	protected boolean alreadyDead = false;
 	protected boolean isAboutToDie = false;// for long animation skills that will kill
 	protected int killingBlow;// for long animation skills that will kill - last damage
-	protected T owner;
+	protected final T owner;
 	private final Lock hpLock = new ReentrantLock();
 	private final Lock mpLock = new ReentrantLock();
 	protected final Lock restoreLock = new ReentrantLock();
@@ -195,7 +195,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log) {
 		if (type != null)
-			PacketSendUtility.broadcastPacketAndReceive(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log));
+			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log), true);
 	}
 
 	/**

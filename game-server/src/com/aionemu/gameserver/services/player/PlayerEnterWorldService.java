@@ -137,7 +137,6 @@ public final class PlayerEnterWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
 	private static final VersionInfo gsVer = VersionInfoUtil.getVersionInfo(GameServer.class);
-	private static final String welcomeInfo = GSConfig.SERVER_MOTD;
 	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + gsVer.getDate();
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
 
@@ -393,10 +392,10 @@ public final class PlayerEnterWorldService {
 		// ----------------------------- Retail sequence -----------------------------
 
 		// Intro message
-		if (welcomeInfo != null && !welcomeInfo.isEmpty())
-			PacketSendUtility.sendMessage(player, welcomeInfo, ChatType.WHITE);
+		if (!GSConfig.SERVER_MOTD.isEmpty())
+			PacketSendUtility.sendMessage(player, GSConfig.SERVER_MOTD, ChatType.WHITE);
 
-		if (GSConfig.SERVER_MOTD_DISPLAY_REV && versionInfo != null && !versionInfo.isEmpty())
+		if (GSConfig.SERVER_MOTD_DISPLAY_REV && !versionInfo.isEmpty())
 			PacketSendUtility.sendMessage(player, versionInfo, ChatType.WHITE);
 
 		player.setRates(Rates.getRatesFor(account.getMembership()));

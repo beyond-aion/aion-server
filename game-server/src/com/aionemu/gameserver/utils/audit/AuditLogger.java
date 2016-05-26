@@ -25,7 +25,7 @@ public class AuditLogger {
 		if (PunishmentConfig.PUNISHMENT_ENABLE)
 			AutoBan.punishment(player, message);
 
-		message += " Player name: " + player.getName() + " objectId: " + player.getObjectId();
+		message = player + " " + message;
 
 		if (LoggingConfig.LOG_AUDIT)
 			log.info(message);
