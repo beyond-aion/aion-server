@@ -1197,16 +1197,14 @@ public class Player extends Creature {
 
 	@Override
 	public boolean canSee(Creature creature) {
-		if (creature.isInVisualState(CreatureVisualState.BLINKING))
-			return true;
-
 		if (creature instanceof Player && isInSameTeam((Player) creature))
 			return true;
 
 		if (creature instanceof Trap && ((Trap) creature).getCreator().equals(this))
 			return true;
 
-		return creature.getVisualState() <= getSeeState();
+		int visualState = creature.getVisualState();
+		return visualState <= getSeeState() || visualState == CreatureVisualState.BLINKING.getId();
 	}
 
 	@Override
