@@ -148,6 +148,7 @@ public class EnchantService {
 					enchantStoneLevel = EnchantStone.EPSILON.getRndLevel();
 					break;
 				case 166020000:
+				case 166020003:
 					enchantStoneLevel = EnchantStone.OMEGA.getRndLevel();
 					break;
 				default: // its temporary for existing old enchantment stones
