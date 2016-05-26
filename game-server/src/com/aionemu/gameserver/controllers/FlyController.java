@@ -28,43 +28,49 @@ public class FlyController {
 			player.unsetState(CreatureState.GLIDING);
 			if (!player.isInFlyState(FlyState.FLYING)) {
 				player.getLifeStats().triggerFpRestore();
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE, 0, 0), true);
+				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
 			}
 			player.getGameStats().updateStatsAndSpeedVisually();
 		}
 	}
 
 	/**
-	 * Ends flying 1) by CM_EMOTION (pageDown or fly button press) 2) from server side during teleportation (abyss gates should not break flying) 3)
+	 * Ends flying 1) by CM_EMOTION (pageDown or fly button press) 2) from server side during teleport (abyss gates should not break flying) 3)
 	 * when FP is decreased to 0
 	 */
-	public void endFly(boolean forceEndFly) {
-		// unset flying and gliding
-		if (player.isFlying()) {
-			player.unsetFlyState(FlyState.FLYING);
-			player.unsetFlyState(FlyState.GLIDING);
-			player.unsetState(CreatureState.FLYING);
-			player.unsetState(CreatureState.GLIDING);
-			player.unsetState(CreatureState.FLOATING_CORPSE);
-			player.getGameStats().updateStatsAndSpeedVisually();
+	public void endFly(boolean broadcastPacket) {
+		player.unsetFlyState(FlyState.FLYING);
+		player.unsetFlyState(FlyState.GLIDING);
+		player.unsetState(CreatureState.FLYING);
+		player.unsetState(CreatureState.GLIDING);
+		player.unsetState(CreatureState.FLOATING_CORPSE);
+		player.getGameStats().updateStatsAndSpeedVisually();
 
-			if (forceEndFly)
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.LAND, 0, 0), true);
-			player.getLifeStats().triggerFpRestore();
-		}
+		if (broadcastPacket && player.isSpawned())
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.LAND), true);
+		player.getLifeStats().triggerFpRestore();
 	}
 
 	/**
-	 * This method is called to start flying (called by CM_EMOTION when pageUp or pressed fly button)
+	 * This method is called to start flying (called by CM_EMOTION when pageUp or pressed fly button, on revive or after teleport in some cases)
+	 * 
+	 * @param broadcastPacket
+	 *          - notify the players client, and all players in range that he started flying
+	 * @param ignoreFlightCooldown
+	 *          - if true, this will skip cooldown check and not set a new cooldown
+	 * @return False if the player could not start flying due to some restriction, true otherwise (this method does not consider if the player was
+	 *         already flying).
 	 */
-	public boolean startFly() {
-		if (player.getFlyReuseTime() > System.currentTimeMillis()) {
-			AuditLogger.info(player, "No Flight Cooldown Hack. Reuse time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000));
-			return false;
-		}
+	public boolean startFly(boolean broadcastPacket, boolean ignoreFlightCooldown) {
 		if (!RestrictionsManager.canFly(player))
 			return false;
-		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME - 100);
+		if (!ignoreFlightCooldown) {
+			if (player.getFlyReuseTime() > System.currentTimeMillis()) {
+				AuditLogger.info(player, "No Flight Cooldown Hack. Reuse time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000));
+				return false;
+			}
+			player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME - 100);
+		}
 		player.setFlyState(FlyState.FLYING);
 		player.setState(CreatureState.FLYING);
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
@@ -73,7 +79,8 @@ public class FlyController {
 		player.getLifeStats().triggerFpReduce();
 		player.getGameStats().updateStatsAndSpeedVisually();
 
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.FLY, 0, 0), true);
+		if (broadcastPacket)
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.FLY), true);
 		return true;
 	}
 

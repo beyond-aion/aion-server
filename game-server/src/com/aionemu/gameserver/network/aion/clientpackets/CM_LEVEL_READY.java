@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
@@ -78,7 +79,8 @@ public class CM_LEVEL_READY extends AionClientPacket {
 			World.getInstance().despawn(activePlayer, ObjectDeleteAnimation.NONE);
 		World.getInstance().spawn(activePlayer);
 
-		activePlayer.getController().refreshZoneImpl();
+		if (activePlayer.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)
+			activePlayer.getFlyController().startFly(true, true);
 
 		// SM_SHIELD_EFFECT, SM_ABYSS_ARTIFACT_INFO3
 		if (activePlayer.isInSiegeWorld()) {
@@ -124,5 +126,4 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		TownService.getInstance().onEnterWorld(activePlayer);
 	}
-
 }

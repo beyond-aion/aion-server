@@ -220,9 +220,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	public void sendFpPacketUpdate() {
-		if (owner == null)
-			return;
-
 		PacketSendUtility.sendPacket(owner, new SM_FLY_TIME(currentFp, getMaxFp()));
 	}
 

@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
@@ -191,7 +192,7 @@ public class TeleportService2 {
 		abortPlayerActions(player);
 		// send teleport animation to player and trigger CM_TELEPORT_DONE when player arrived
 		PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
-		// despawn from world and send animation to others
+		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -217,15 +218,7 @@ public class TeleportService2 {
 				player.setPortAnimation(animation.getDefaultArrivalAnimation());
 				if (currentWorldId == worldId && currentInstance == instanceId) {
 					// instant teleport when map is the same
-					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-					player.getController().startProtectionActiveTask();
-					PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-					PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-					World.getInstance().spawn(player);
-					World.getInstance().spawn(player.getPet());
-					player.getEffectController().updatePlayerEffectIcons(null);
-					player.getController().updateZone();
-					player.setPortAnimation(ArrivalAnimation.NONE);
+					spawnOnSameMap(player);
 				} else {
 					// teleport with full map reloading
 					PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
@@ -245,23 +238,29 @@ public class TeleportService2 {
 			PrivateStoreService.closePrivateStore(player);
 		player.getController().cancelCurrentSkill(null);
 		player.setTarget(null);
-		player.getFlyController().endFly(true);
 		player.unsetPlayerMode(PlayerMode.RIDE);
+	}
+
+	private static void spawnOnSameMap(Player player) {
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
+		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		if (player.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)
+			player.getFlyController().startFly(true, true);
+		World.getInstance().spawn(player);
+		World.getInstance().spawn(player.getPet());
+		player.getController().startProtectionActiveTask();
+		player.getEffectController().updatePlayerEffectIcons(null);
+		player.getController().updateZone();
+		player.setPortAnimation(ArrivalAnimation.NONE);
 	}
 
 	public static void teleportTo(Player player, WorldPosition pos) {
 		if (player.getWorldId() == pos.getMapId()) {
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-			PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-			PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
-			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-			World.getInstance().spawn(player);
-			World.getInstance().spawn(player.getPet());
-			player.getController().startProtectionActiveTask();
-			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-			player.getEffectController().updatePlayerEffectIcons(null);
-			player.getController().updateZone();
+			spawnOnSameMap(player);
 		} else if (player.getLifeStats().isAlreadyDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		} else {
@@ -489,8 +488,8 @@ public class TeleportService2 {
 	public static void setEventPos(WorldPosition pos, Race race) {
 		if (race == Race.ELYOS) {
 			eventPosElyos = new double[] { pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading() };
-			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: "
-				+ eventPosElyos[3] + ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
+			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: " + eventPosElyos[3]
+				+ ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
 		} else if (race == Race.ASMODIANS) {
 			eventPosAsmodians = new double[] { pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
 				pos.getHeading() };

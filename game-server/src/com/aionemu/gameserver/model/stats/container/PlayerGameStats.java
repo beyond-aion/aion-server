@@ -51,9 +51,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		int currentAttackSpeed = getAttackSpeed().getCurrent();
 		if (current != cachedSpeed || currentAttackSpeed != cachedAttackSpeed) {
 			updateSpeedInfo();
+			cachedSpeed = current;
+			cachedAttackSpeed = currentAttackSpeed;
 		}
-		cachedSpeed = current;
-		cachedAttackSpeed = currentAttackSpeed;
 	}
 
 	@Override
@@ -407,7 +407,6 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	@Override
 	public void updateSpeedInfo() {
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0), true);
+		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2), true);
 	}
-
 }

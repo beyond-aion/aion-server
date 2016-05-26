@@ -56,8 +56,7 @@ public class CM_EMOTION extends AionClientPacket {
 	 */
 	@Override
 	protected void readImpl() {
-		int et;
-		et = readC();
+		int et = readC();
 		emotionType = EmotionType.getEmotionTypeById(et);
 
 		switch (emotionType) {
@@ -101,9 +100,6 @@ public class CM_EMOTION extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * Send emotion packet
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
@@ -124,14 +120,14 @@ public class CM_EMOTION extends AionClientPacket {
 			return;
 
 		player.getController().cancelUseItem();
-		if (emotionType != EmotionType.SELECT_TARGET)
-			player.getController().cancelCurrentSkill(null);
+		if (emotionType == EmotionType.SELECT_TARGET)
+			return;
+
+		player.getController().cancelCurrentSkill(null);
 
 		// check for stance
 		if (player.getController().isUnderStance()) {
 			switch (emotionType) {
-				case SELECT_TARGET:
-					break;
 				case FLY:
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_TAKE_OFF__WHILE_IN_CURRENT_STANCE());
 					return;
@@ -141,13 +137,10 @@ public class CM_EMOTION extends AionClientPacket {
 			}
 		}
 
-		if (emotionType == EmotionType.JUMP) {
-			player.getMoveController().updateLastJump();
-		}
-
 		switch (emotionType) {
-			case SELECT_TARGET:
-				return;
+			case JUMP:
+				player.getMoveController().updateLastJump();
+				break;
 			case SIT:
 				if (player.isInState(CreatureState.PRIVATE_SHOP)) {
 					return;
@@ -172,7 +165,7 @@ public class CM_EMOTION extends AionClientPacket {
 				player.getController().onFlyTeleportEnd();
 				break;
 			case FLY:
-				if (!player.getFlyController().startFly())
+				if (!player.getFlyController().startFly(false, false))
 					return;
 				break;
 			case LAND:
@@ -189,8 +182,7 @@ public class CM_EMOTION extends AionClientPacket {
 				player.unsetState(CreatureState.WEAPON_EQUIPPED);
 				break;
 			case WALK:
-				// cannot toggle walk when you flying or gliding
-				if (player.isFlying())
+				if (player.isFlying()) // cannot toggle walk when flying or gliding
 					return;
 				player.setState(CreatureState.WALKING);
 				break;
@@ -233,17 +225,11 @@ public class CM_EMOTION extends AionClientPacket {
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, emotionType, emotion, x, y, z, heading, getTargetObjectId(player)), true);
 		}
 
-		if (player.isProtectionActive() && emotionType != EmotionType.SELECT_TARGET) {
+		if (player.isProtectionActive())
 			player.getController().stopProtectionActiveTask();
-		}
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	private final int getTargetObjectId(Player player) {
-		int target = player.getTarget() == null ? 0 : player.getTarget().getObjectId();
-		return target != 0 ? target : this.targetObjectId;
+		return player.getTarget() == null ? targetObjectId : player.getTarget().getObjectId();
 	}
 }

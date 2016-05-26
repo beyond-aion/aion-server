@@ -57,10 +57,8 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
 			case JUMP:
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.JUMP));
-				break;
 			case SUMMON_STOP_JUMP:
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.SUMMON_STOP_JUMP));
+				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
 			case ATTACKMODE_IN_MOVE: // start attacking
 				summon.setState(CreatureState.WEAPON_EQUIPPED);
