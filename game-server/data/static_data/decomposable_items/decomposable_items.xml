@@ -24706,7 +24706,24 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052718" name="Hyperion's Weapons Chest" />
-	<decomposable item_id="188052719" name="[Event] Dye Bundle" />
+	<decomposable item_id="188052719" name="[Event] Dye Bundle" selectable="true">
+		<items>
+			<item id="169231016" name="Dye: Punky Pink" />
+			<item id="169231017" name="Dye: Indian Pink" />
+			<item id="169231018" name="Dye: Romantic Pink" />
+			<item id="169231019" name="Dye: Baby Yellow" />
+			<item id="169231020" name="Dye: Pastel Orange" />
+			<item id="169231021" name="Dye: Pastel Green Tea" />
+			<item id="169231022" name="Dye: Indian Green" />
+			<item id="169231023" name="Dye: Indian Blue" />
+			<item id="169231024" name="Dye: Indian Sky Blue" />
+			<item id="169231025" name="Dye: Pastel Violet" />
+			<item id="169231026" name="Dye: Light Cobalt" />
+			<item id="169231027" name="Dye: Gray Violet" />
+			<item id="169220028" name="Dye: True White" />
+			<item id="169220029" name="Dye: True Black" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188052720" name="[Event] Aion's Gift Box">
 		<items>
 			<item id="162000080" name="Fine Recovery Serum" min_count="10" />
