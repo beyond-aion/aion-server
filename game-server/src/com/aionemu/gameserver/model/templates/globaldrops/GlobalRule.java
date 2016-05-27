@@ -67,7 +67,7 @@ public class GlobalRule {
 	@XmlAttribute(name = "no_reduction")
 	protected boolean noReduction;
 	@XmlAttribute(name = "member_limit")
-	protected int memberLimit;
+	protected int memberLimit = 1;
 	@XmlAttribute(name = "max_drop_rule")
 	protected int maxDropRule = 1;
 	@XmlAttribute(name = "fixed_chance")
