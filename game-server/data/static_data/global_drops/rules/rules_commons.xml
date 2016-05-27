@@ -570,7 +570,8 @@
 			<!-- Dragon Lords Refuge -->
 			<gd_npc npc_id="219359" name="Calindi Flamelord" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231052" name="Vera Defender Archmage" />
+			<gd_npc npc_id="235768" name="Spirited Velkur" />
+			<gd_npc npc_id="235771" name="Velkur Aetherknife" />
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
 			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
@@ -634,7 +635,8 @@
 			<gd_npc npc_id="233090" name="Virulent Ukahim" />
 			<gd_npc npc_id="233086" name="Warmage Suyaroka" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera" />
+			<gd_npc npc_id="235768" name="Spirited Velkur" />
+			<gd_npc npc_id="235771" name="Velkur Aetherknife" />
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
 			<gd_npc npc_id="230858" name="Brigade General Sheba" />
@@ -697,7 +699,8 @@
 			<!-- Danuar Sanctuary -->
 			<gd_npc npc_id="233089" name="Chief Medic Tagnu" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera" />
+			<gd_npc npc_id="235768" name="Spirited Velkur" />
+			<gd_npc npc_id="235771" name="Velkur Aetherknife" />
 			<!-- Danuar Reliquary -->
 			<gd_npc npc_id="231305" name="Enraged Queen Modor" />
 			<!-- Infinity Shard -->
@@ -811,7 +814,8 @@
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" name="Brigade General Vasharti" />
 			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="231050" name="Vera" />
+			<gd_npc npc_id="235768" name="Spirited Velkur" />
+			<gd_npc npc_id="235771" name="Velkur Aetherknife" />
 			<!-- Illuminary Obelisk -->
 			<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
 			<!-- Danuar Sanctuary -->
@@ -828,6 +832,122 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053295" name="Empyrean Plume Chest" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Courier Pass Lv.50" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300040000" name="Dark_Poeta" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217166" name="Tahabata Pyrelord" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950002" name="Special Courier Pass (Mythic/Lv.50 and lower)" />
+			<gd_item id="188950005" name="Special Courier Pass (Eternal/Lv.50 and lower)" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Fabled Courier Pass Lv.51-55" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300190000" name="Talocs_Hollow" />
+			<gd_map map_id="300150000" name="Udas_Temple" />
+			<gd_map map_id="300160000" name="Lower_Udas_Temple" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215488" name="Celestius" />
+			<gd_npc npc_id="215793" name="Devoted Anurati" />
+			<gd_npc npc_id="215795" name="Debilkarim The Maker" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950003" name="Special Courier Pass (Fabled/Lv.51-55)" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Eternal Courier Pass Lv.51-55" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="320150000" name="Padmarashkas_Cave" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="218756" name="Padmarashka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950006" name="Special Courier Pass (Eternal/Lv.51-55)" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Eternal Courier Pass Lv.56-60" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300510000" name="Tiamat_Stronghold" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+			<gd_npc npc_id="701541" name="Tahabata's Treasure Chest" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950007" name="Special Courier Pass (Eternal/Lv.56-60)"  />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mythic Courier Pass Lv.56-60" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300520000" name="Dragon_Lords_Refuge" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="701542" name="Tiamat's Huge Treasure Crate" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950018" name="Special Courier Pass (Mythic/Lv.56-60)" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Eternal Courier Pass Lv.61-65" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="301380000" name="Danuar_Sanctuary" />
+			<gd_map map_id="300590000" name="Ophidan_Bridge" />
+			<gd_map map_id="301340000" name="Linkgate_Foundry" />
+			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
+			<gd_map map_id="301110000" name="Danuar_Reliquary" />
+			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="301140000" name="Seized_Danuar_Sanctuary"/>
+			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="235624" name="Warmage Suyaroka" />
+			<gd_npc npc_id="235768" name="Spirited Velkur" />
+			<gd_npc npc_id="235771" name="Velkur Aetherknife" />
+			<gd_npc npc_id="234991" name="Furious Belsagos" />
+			<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
+			<gd_npc npc_id="701795" name="Treasure Box" />
+			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="833048" name="Rentus Quality Supplies Story Box" />
+			<gd_npc npc_id="235621" name="Virulent Ukahim" />
+			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
+			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950015" name="Special Courier Pass (Eternal/Lv.61-65)" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mythic Courier Pass Lv.61-65" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="301370000" name="Infernal_Illuminary_Obelisk" />
+			<gd_map map_id="301360000" name="Infernal_Danuar_Reliquary" />
+			<gd_map map_id="300800000" name="Infinity_Shard" />
+			<gd_map map_id="300630000" name="Anguished_Dragon_Lords_Refuge" />
+			<gd_map map_id="301390000" name="Drakenspire_Depths" />
+			<gd_map map_id="301360000" name="Infernal_Danuar_Reliquary" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="284858" name="Boss" />
+			<gd_npc npc_id="284376" name="Enraged Queen Modor" />
+			<gd_npc npc_id="231073" name="Hyperion" />
+			<gd_npc npc_id="702729" name="Tiamat's Huge Treasure Crate" />
+			<gd_npc npc_id="833013" name="Cloak of Balaur Lord Beritra" />
+			<gd_npc npc_id="833015" name="Sacred Beast of Balaur Lord Beritra" />
+			<gd_npc npc_id="701913" name="Bastion's Eternal Treasure" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188950019" name="Special Courier Pass (Mythic/Lv.61-65)" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
