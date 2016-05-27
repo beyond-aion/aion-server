@@ -22,7 +22,7 @@ public class PortalPath {
 	@XmlAttribute(name = "loc_id")
 	protected int locId;
 	@XmlAttribute(name = "player_count")
-	protected int playerCount;
+	protected int playerCount = 1;
 	@XmlAttribute(name = "instance")
 	protected boolean instance;
 	@XmlAttribute(name = "siege_id")

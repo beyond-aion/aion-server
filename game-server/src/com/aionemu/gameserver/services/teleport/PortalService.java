@@ -113,11 +113,11 @@ public class PortalService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 				return;
 			} else {
-				log.debug(player.getName() + "doesn't have cd of this instance, can enter and will be registed to this intance");
+				log.debug(player.getName() + " doesn't have cd of this instance, can enter and will be registed to this instance.");
 			}
 		} else if (instance.isRegistered(player.getObjectId())) {
 			reenter = true;
-			log.debug(player.getName() + "has been in instance, can reenter.");
+			log.debug(player.getName() + " has been in instance, can reenter.");
 		}
 
 		if (!reenter) {
@@ -149,6 +149,9 @@ public class PortalService {
 		PlayerGroup group = player.getPlayerGroup2();
 		switch (playerSize) {
 			case 0:
+				log.warn("Tried to enter instance with player limit 0!");
+				break;
+			case 1:
 				// If there is a group (whatever group requirement exists or not)...
 				if (group != null && instanceGroupReq) {
 					instance = InstanceService.getRegisteredInstance(mapId, group.getTeamId());

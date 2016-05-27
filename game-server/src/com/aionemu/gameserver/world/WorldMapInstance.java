@@ -353,14 +353,6 @@ public abstract class WorldMapInstance {
 		registeredObjects.add(objectId);
 	}
 
-	public Set<Integer> getRegister() {
-		return registeredObjects;
-	}
-
-	/**
-	 * @param objectId
-	 * @return
-	 */
 	public boolean isRegistered(int objectId) {
 		return registeredObjects.contains(objectId);
 	}

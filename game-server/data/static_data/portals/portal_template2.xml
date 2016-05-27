@@ -2319,13 +2319,13 @@
 	<!-- Raksang Ruin Entrances -->
 	<!-- ASMO - Portal -->
 	<portal_dialog npc_id="833000">
-		<portal_path dialog="10000" loc_id="3006100" player_count="1" instance="true">
+		<portal_path dialog="10000" loc_id="3006100" instance="true">
 			<portal_req min_level="60" />
 		</portal_path>
 	</portal_dialog>
 	<!-- ELY - Portal -->
 	<portal_dialog npc_id="832999">
-		<portal_path dialog="10000" loc_id="3006100" player_count="1" instance="true">
+		<portal_path dialog="10000" loc_id="3006100" instance="true">
 			<portal_req min_level="60" />
 		</portal_path>
 	</portal_dialog>
@@ -2424,21 +2424,21 @@
 	</portal_dialog>
 	<!-- ASMODIANS -->
 	<portal_dialog npc_id="833025" teleport_dialog_id="10">
-		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
+		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				<item_req item_id="185000230" item_count="1" /> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
 	<portal_dialog npc_id="833044" teleport_dialog_id="10">
-		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
+		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				<item_req item_id="185000230" item_count="1" /> <!-- Requires Stonespear Key -->
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
 	<portal_dialog npc_id="833046" teleport_dialog_id="10">
-		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="1" instance="true">
+		<portal_path dialog="10000" loc_id="3015000" race="ASMODIANS" player_count="12" instance="true">
 			<portal_req min_level="65">
 				<item_req item_id="185000230" item_count="1" /> <!-- Requires Stonespear Key -->
 			</portal_req>

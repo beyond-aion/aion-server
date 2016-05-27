@@ -39,7 +39,7 @@
 		</xs:sequence>
 		<xs:attribute name="dialog" type="xs:int"/>
 		<xs:attribute name="loc_id" type="xs:int"/>
-		<xs:attribute name="player_count" type="xs:int"/>
+		<xs:attribute name="player_count" type="xs:int" default="1"/>
 		<xs:attribute name="instance" type="xs:boolean" default="false"/>
 		<xs:attribute name="siege_id" type="xs:int"/>
 		<xs:attribute name="race" type="Race" default="PC_ALL"/>
