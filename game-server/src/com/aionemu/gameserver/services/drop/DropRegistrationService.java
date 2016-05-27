@@ -270,7 +270,9 @@ public class DropRegistrationService {
 						if (alloweditems.size() == 0)
 							continue;
 
-						if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2())) {
+						if (rule.getMemberLimit() > 1 && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
+							final int limit = rule.getMemberLimit();
+							int distributedItems = 0;
 							for (Player member : winningPlayers) {
 								for (int itemListed : alloweditems) {
 									DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
@@ -281,6 +283,8 @@ public class DropRegistrationService {
 									dropitem.isDistributeItem(true);
 									droppedItems.add(dropitem);
 								}
+								if (++distributedItems >= limit)
+									break;
 							}
 						} else {
 							for (int itemListed : alloweditems) {
@@ -374,7 +378,7 @@ public class DropRegistrationService {
 					if (alloweditems.size() == 0)
 						continue;
 
-					if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
+					if (rule.getMemberLimit() > 1 && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
 						final int limit = rule.getMemberLimit();
 						int distributedItems = 0;
 						for (Player member : winningPlayers) {

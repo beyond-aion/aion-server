@@ -122,7 +122,7 @@
 			<gd_item id="102100644" name="Surama's Cipher-Blade" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Dalia Key" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Dalia Key" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300250000" name="Esoterrace" />
 		</gd_maps>

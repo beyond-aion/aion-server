@@ -2,7 +2,7 @@
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
 	<event name="The Scattered Deck" start="2015-03-12T00:00:00+00:00" end="2015-03-26T00:00:00+00:00">
 		<event_drops>
-			<gd_rule rule_name="The Scattered Deck Event Drop" min_count="1" base_chance="20" min_diff="-20" max_diff="70" each_member="true">
+			<gd_rule rule_name="The Scattered Deck Event Drop" min_count="1" base_chance="20" min_diff="-20" max_diff="70" member_limit="12">
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
 					<gd_world wd_type="ARENA_INSTANCE" />
@@ -3628,7 +3628,7 @@
 			<maintainable>51035;51036;51037;50035;50036;50037</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Boiling Point Event Drop 1" min_count="1" base_chance="10" min_diff="-10" max_diff="70" each_member="true">
+			<gd_rule rule_name="Boiling Point Event Drop 1" min_count="1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
 					<gd_item id="186000387" name="[Event] Rice Cake" />
 				</gd_items>
@@ -3661,7 +3661,7 @@
 					<gd_npc npc_id="230093" name="Furious Barukan" />
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Boiling Point Event Drop 2" min_count="1" base_chance="50" min_diff="-10" max_diff="70" each_member="true">
+			<gd_rule rule_name="Boiling Point Event Drop 2" min_count="1" base_chance="50" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
 					<gd_item id="186000388" name="[Event] Beef Bone Broth" />
 				</gd_items>
@@ -3794,7 +3794,7 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 			</gd_rule>
-			<gd_rule rule_name="Snowball (Shared)" base_chance="100" each_member="true">
+			<gd_rule rule_name="Snowball (Shared)" base_chance="100" member_limit="12">
 				<gd_items>
 					<gd_item id="188052986" name="+1 Snowball" />
 				</gd_items>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" each_member="true" min_count="3" max_count="5">
+	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="3" max_count="5">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge" />
 		</gd_maps>
@@ -15,7 +15,7 @@
 			<gd_item id="186000238" name="Conqueror's Mark" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Treasure Crate" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Treasure Crate" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge" />
 		</gd_maps>
@@ -219,7 +219,7 @@
 			<gd_item id="125003742" name="Vera Defender Captain's Helm" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Bundle A" base_chance="100" each_member="true">
+	<gd_rule rule_name="Bundle A" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge" />
 		</gd_maps>
@@ -232,7 +232,7 @@
 			<gd_item id="188053685" name="Sand Wanderers Trader's Bundle" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Bundle B" base_chance="100" each_member="true">
+	<gd_rule rule_name="Bundle B" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" name="Ophidan_Bridge" />
 		</gd_maps>

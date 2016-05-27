@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Mark" base_chance="100" each_member="true" min_count="3" max_count="5">
+	<gd_rule rule_name="Named Mark" base_chance="100" member_limit="6" min_count="3" max_count="5">
 		<gd_maps>
 			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
 		</gd_maps>
@@ -23,7 +23,7 @@
 			<gd_item id="188052825" name="Illuminary Obelisk Idian Pouch" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Supply Chest" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Supply Chest" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
 		</gd_maps>
@@ -34,7 +34,7 @@
 			<gd_item id="188052823" name="Illuminary Obelisk Supply Chest" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Equipment Chest" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Equipment Chest" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301230000" name="Illuminary_Obelisk" />
 		</gd_maps>

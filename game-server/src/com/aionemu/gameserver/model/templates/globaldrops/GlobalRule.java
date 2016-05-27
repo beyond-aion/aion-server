@@ -66,8 +66,6 @@ public class GlobalRule {
 	protected RestrictionRace restrictionRace;
 	@XmlAttribute(name = "no_reduction")
 	protected boolean noReduction;
-	@XmlAttribute(name = "each_member")
-	protected boolean eachMember;
 	@XmlAttribute(name = "member_limit")
 	protected int memberLimit;
 	@XmlAttribute(name = "max_drop_rule")
@@ -233,10 +231,6 @@ public class GlobalRule {
 
 	public void setNoReduction(boolean value) {
 		this.noReduction = value;
-	}
-
-	public boolean isDropEachMember() {
-		return eachMember;
 	}
 	
 	public int getMemberLimit() {

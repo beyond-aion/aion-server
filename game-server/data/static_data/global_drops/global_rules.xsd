@@ -36,8 +36,7 @@
 		<xs:attribute name="max_diff" type="xs:int" use="optional" default="99" />
 		<xs:attribute name="restriction_race" type="RestrictionRace" />
 		<xs:attribute name="no_reduction" type="xs:boolean" use="optional" default="false" />
-		<xs:attribute name="each_member" type="xs:boolean" use="optional" default="false" />
-		<xs:attribute name="member_limit" type="xs:int" use="optional" default="192" />
+		<xs:attribute name="member_limit" type="xs:int" use="optional" default="1" />
 		<xs:attribute name="max_drop_rule" type="xs:int" use="optional" default="1" />
 		<xs:attribute name="fixed_chance" type="xs:boolean" use="optional" default="false" />
 	</xs:complexType>

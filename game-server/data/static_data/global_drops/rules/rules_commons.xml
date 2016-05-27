@@ -586,7 +586,7 @@
 			<gd_item id="166500002" name="Amplification Stone" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="1.5" each_member="true">
+	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="1.5" member_limit="192">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab" />
 			<gd_map map_id="320130000" name="Adma_Stronghold" />
@@ -716,7 +716,7 @@
 			<gd_item id="166030005" name="Tempering Solution" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="4" each_member="true">
+	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="4" member_limit="192">
 		<gd_maps>
 			<gd_map map_id="310110000" name="Theobomos_Lab" />
 			<gd_map map_id="320080000" name="Draupnir_Cave" />
@@ -776,7 +776,7 @@
 			<gd_item id="188053295" name="Empyrean Plume Chest" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Shared)" base_chance="1.5" each_member="true">
+	<gd_rule rule_name="Empyrean Plume Chest (Shared)" base_chance="1.5" member_limit="192">
 		<gd_maps>
 			<gd_map map_id="300040000" name="Dark_Poeta" />
 			<gd_map map_id="300150000" name="Udas_Temple" />

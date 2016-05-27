@@ -522,7 +522,7 @@
 			<gd_item id="185000216" name="Ancestor's Relic"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Bundle" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Bundle" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>

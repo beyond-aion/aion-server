@@ -576,7 +576,7 @@
 			<gd_item id="170030043" name="[Souvenir] Stormwing Wall-mount Trophy" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" each_member="true">
+	<gd_rule rule_name="Named Material" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300170000" name="Beshmundir_Temple" />
 		</gd_maps>
