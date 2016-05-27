@@ -132,7 +132,7 @@
 		</gd_items>
 	</gd_rule>
 
-	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" each_member="true">
+	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" each_member="true" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="235830" name="Mutated Gatorback Skilex" />
 			<gd_npc npc_id="235832" name="Aggressive Coral Corask " />

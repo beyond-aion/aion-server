@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -48,8 +50,6 @@ import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz, Aioncool, Bobobear
@@ -374,7 +374,9 @@ public class DropRegistrationService {
 					if (alloweditems.size() == 0)
 						continue;
 
-					if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2())) {
+					if (rule.isDropEachMember() && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
+						final int limit = rule.getMemberLimit();
+						int distributedItems = 0;
 						for (Player member : winningPlayers) {
 							for (int itemListed : alloweditems) {
 								DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
@@ -385,6 +387,8 @@ public class DropRegistrationService {
 								dropitem.isDistributeItem(true);
 								droppedItems.add(dropitem);
 							}
+							if (++distributedItems >= limit)
+								break;
 						}
 					} else {
 						for (int itemListed : alloweditems) {
