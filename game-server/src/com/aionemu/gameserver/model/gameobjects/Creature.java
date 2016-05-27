@@ -486,9 +486,6 @@ public abstract class Creature extends VisibleObject {
 
 	@Override
 	public boolean canSee(Creature creature) {
-		if (creature == null)
-			return false;
-
 		return creature.getVisualState() <= getSeeState();
 	}
 
