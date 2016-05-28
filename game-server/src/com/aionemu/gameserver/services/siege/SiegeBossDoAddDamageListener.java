@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.siegeservice;
+package com.aionemu.gameserver.services.siege;
 
 import com.aionemu.gameserver.controllers.attack.AddDamageEvent;
 import com.aionemu.gameserver.controllers.attack.AddDamageEventListener;

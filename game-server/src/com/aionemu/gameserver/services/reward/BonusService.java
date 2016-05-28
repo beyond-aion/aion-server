@@ -45,11 +45,6 @@ public class BonusService {
 		return instance;
 	}
 
-	public static BonusService getInstance(ItemGroupsData itemGroups) {
-		instance.itemGroups = itemGroups;
-		return instance;
-	}
-
 	public BonusItemGroup[] getGroupsByType(BonusType type) {
 		switch (type) {
 			case BOSS:

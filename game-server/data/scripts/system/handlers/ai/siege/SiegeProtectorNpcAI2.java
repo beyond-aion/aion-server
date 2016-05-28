@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.siegeservice.Siege;
+import com.aionemu.gameserver.services.siege.Siege;
 
 /**
  * @author ATracer, Source

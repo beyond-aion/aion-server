@@ -17,8 +17,8 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.siegeservice.BalaurAssaultService;
-import com.aionemu.gameserver.services.siegeservice.Siege;
+import com.aionemu.gameserver.services.siege.BalaurAssaultService;
+import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 

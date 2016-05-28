@@ -10,8 +10,8 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.siegeservice.FortressSiege;
-import com.aionemu.gameserver.services.siegeservice.MercenaryLocation;
+import com.aionemu.gameserver.services.siege.FortressSiege;
+import com.aionemu.gameserver.services.siege.MercenaryLocation;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
