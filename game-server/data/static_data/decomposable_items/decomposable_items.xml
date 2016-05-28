@@ -29360,7 +29360,7 @@
 	</decomposable>
 	<decomposable item_id="188053326" name="Levinshor Alliance Composite Manastone Box">
 		<items>
-			<random_item type="MANASTONE_LEGEND_GRADE_60" />
+			<random_item type="MANASTONE_LEGEND_GRADE_40" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053327" name="Levinshor Alliance Noble Composite Manastone Box">
