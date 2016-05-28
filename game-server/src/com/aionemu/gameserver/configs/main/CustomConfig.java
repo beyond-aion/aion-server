@@ -241,9 +241,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.serialkiller.3nd.rank.kills", defaultValue = "30")
 	public static int KILLER_3ND_RANK_KILLS;
 
-	@Property(key = "gameserver.reward.service.enable", defaultValue = "false")
-	public static boolean ENABLE_REWARD_SERVICE;
-
 	/**
 	 * Limits Config
 	 */

@@ -84,7 +84,6 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.periodic.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
-import com.aionemu.gameserver.services.reward.RewardService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
@@ -302,8 +301,6 @@ public class GameServer {
 		TaskFromDBManager.getInstance();
 		ConsoleUtil.printSection("Periodic Instances");
 		PeriodicInstanceManager.getInstance();
-		if (CustomConfig.ENABLE_REWARD_SERVICE)
-			RewardService.getInstance();
 		EventService.getInstance();
 
 		ConsoleUtil.printSection("Access Management");
