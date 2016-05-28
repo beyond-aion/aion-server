@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.siegeservice;
+package com.aionemu.gameserver.services.siege;
 
 import java.util.ArrayList;
 import java.util.List;

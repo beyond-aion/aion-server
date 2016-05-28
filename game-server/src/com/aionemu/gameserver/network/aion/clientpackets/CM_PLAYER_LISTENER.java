@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.reward.RewardService;
@@ -18,21 +17,13 @@ public class CM_PLAYER_LISTENER extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
-		Player player = getConnection().getActivePlayer();
-
-		if (CustomConfig.ENABLE_REWARD_SERVICE)
-			RewardService.getInstance().verify(player);
+		if (GSConfig.ENABLE_WEB_REWARDS)
+			RewardService.getInstance().verify(getConnection().getActivePlayer());
 	}
 }

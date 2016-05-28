@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.reward;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,25 +12,25 @@ import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 
+import javolution.util.FastTable;
+
 /**
  * @author KID
  */
 public class RewardService {
 
-	private static RewardService controller = new RewardService();
+	private static RewardService instance = new RewardService();
 	private static final Logger log = LoggerFactory.getLogger(RewardService.class);
-	private RewardServiceDAO dao;
 
 	public static RewardService getInstance() {
-		return controller;
+		return instance;
 	}
 
-	public RewardService() {
-		dao = DAOManager.getDAO(RewardServiceDAO.class);
+	private RewardService() {
 	}
 
 	public void verify(Player player) {
-		FastTable<RewardEntryItem> list = dao.getAvailable(player.getObjectId());
+		FastTable<RewardEntryItem> list = DAOManager.getDAO(RewardServiceDAO.class).getAvailable(player.getObjectId());
 		if (list.size() == 0 || player.getMailbox() == null)
 			return;
 
@@ -70,8 +68,7 @@ public class RewardService {
 		}
 
 		if (rewarded.size() > 0) {
-			dao.uncheckAvailable(rewarded);
-
+			DAOManager.getDAO(RewardServiceDAO.class).uncheckAvailable(rewarded);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.siegeservice;
+package com.aionemu.gameserver.services.siege;
 
 import java.util.Iterator;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.siegeservice;
+package com.aionemu.gameserver.services.siege;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.abyss.AddAPGlobalCallback;

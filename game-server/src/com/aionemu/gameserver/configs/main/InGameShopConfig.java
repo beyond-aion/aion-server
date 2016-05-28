@@ -21,7 +21,4 @@ public class InGameShopConfig {
 
 	@Property(key = "gameserver.ingameshop.allow.gift", defaultValue = "true")
 	public static boolean ALLOW_GIFTS;
-
-	@Property(key = "webrequest.update.frequency", defaultValue = "300")
-	public static int WEBREQUEST_UPDATE_FREQUENCY;
 }

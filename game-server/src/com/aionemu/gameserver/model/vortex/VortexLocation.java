@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.templates.vortex.ResurrectionPoint;
 import com.aionemu.gameserver.model.templates.vortex.StartPoint;
 import com.aionemu.gameserver.model.templates.vortex.VortexTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.vortexservice.DimensionalVortex;
+import com.aionemu.gameserver.services.vortex.DimensionalVortex;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;

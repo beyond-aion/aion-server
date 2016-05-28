@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.siegeservice;
+package com.aionemu.gameserver.services.siege;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

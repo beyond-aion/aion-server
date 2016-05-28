@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.vortexservice;
+package com.aionemu.gameserver.services.vortex;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
