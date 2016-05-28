@@ -290,20 +290,6 @@ CREATE TABLE IF NOT EXISTS `ingameshop_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `ingameshop_requests`
--- ----------------------------
-CREATE TABLE IF NOT EXISTS `ingameshop_requests` (
-  `request_id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_id` int(11) NOT NULL,
-  `item_count` bigint(21) NOT NULL,
-  `buyer_character_name` varchar(20) NOT NULL,
-  `receiver_character_name` varchar(20) NOT NULL,
-  `delivered` tinyint(1) NOT NULL DEFAULT '0',
-  `delivered_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for `inventory`
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `inventory` (
@@ -935,12 +921,17 @@ CREATE TABLE IF NOT EXISTS `towns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `web_rewards`
+-- Table structure for `web_reward`
 -- ----------------------------
-CREATE TABLE `web_rewards` (
-	`request_id` int(11) NOT NULL DEFAULT 0,
-	`receiver_name` varchar(50) NOT NULL,
-	`item_id` int(11) NOT NULL DEFAULT 0,
-	`item_count` int(11) NOT NULL DEFAULT 0,
-	PRIMARY KEY (`request_id`)
+CREATE TABLE IF NOT EXISTS `web_reward` (
+  `unique` int(11) NOT NULL AUTO_INCREMENT,
+  `item_owner` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_count` decimal(20,0) NOT NULL DEFAULT '1',
+  `rewarded` tinyint(1) NOT NULL DEFAULT '0',
+  `added` varchar(70) DEFAULT '',
+  `received` varchar(70) DEFAULT '',
+  PRIMARY KEY (`unique`),
+  KEY `item_owner` (`item_owner`),
+  CONSTRAINT `web_reward_ibfk_1` FOREIGN KEY (`item_owner`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
