@@ -30683,7 +30683,26 @@
 	<decomposable item_id="188053613" name="[Event] Critical Hit Boost Bundle" />
 	<decomposable item_id="188053614" name="Illusion Godstone Bundle" />
 	<decomposable item_id="188053615" name="Buff Pet Bundle" />
-	<decomposable item_id="188053616" name="Tidal Idian Bundle" />
+	<decomposable item_id="188053616" name="Tidal Idian Bundle">
+		<items>
+			<item id="166050017" name="Tidal Idian: Physical Attack" />
+		</items>
+		<items>
+			<item id="166050018" name="Tidal Idian: Magical Attack" />
+		</items>
+		<items>
+			<item id="166050019" name="Tidal Idian: Physical Defense" />
+		</items>
+		<items>
+			<item id="166050020" name="Tidal Idian: Magical Defense" />
+		</items>
+		<items>
+			<item id="166050021" name="Tidal Idian: Assistance" />
+		</items>
+		<items>
+			<item id="166050022" name="Tidal Idian: Resistance" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053617" name="Noble Tidal Idian Bundle" />
 	<decomposable item_id="188053618" name="Honorable Elim's Idian Bundle">
 		<items>
@@ -34063,30 +34082,150 @@
 			<item id="186000105" name="Daemon Token" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188053830" name="Ultimate Gold Penguin Transformation Candy Box" />
-	<decomposable item_id="188053831" name="Ultimate Green Penguin Transformation Candy Box" />
-	<decomposable item_id="188053832" name="Ultimate Red Penguin Transformation Candy Box" />
-	<decomposable item_id="188053833" name="Ultimate Violet Penguin Transformation Candy Box" />
-	<decomposable item_id="188053834" name="Ultimate Yellow Penguin Transformation Candy Box" />
-	<decomposable item_id="188053835" name="Invincible Gold Penguin Transformation Candy Box" />
-	<decomposable item_id="188053836" name="Invincible Green Penguin Transformation Candy Box" />
-	<decomposable item_id="188053837" name="Invincible Red Penguin Transformation Candy Box" />
-	<decomposable item_id="188053838" name="Invincible Violet Penguin Transformation Candy Box" />
-	<decomposable item_id="188053839" name="Invincible Yellow Penguin Transformation Candy Box" />
-	<decomposable item_id="188053840" name="Strongest Gold Penguin Transformation Candy Box" />
-	<decomposable item_id="188053841" name="Strongest Green Penguin Transformation Candy Box" />
-	<decomposable item_id="188053842" name="Strongest Red Penguin Transformation Candy Box" />
-	<decomposable item_id="188053843" name="Strongest Violet Penguin Transformation Candy Box" />
-	<decomposable item_id="188053844" name="Strongest Yellow Penguin Transformation Candy Box" />
-	<decomposable item_id="188053845" name="Summer-Loving Penguin Transformation Candy Box" />
-	<decomposable item_id="188053846" name="Enamored Tiger Transformation Candy Box" />
-	<decomposable item_id="188053847" name="Even More Valiant Tiger Transformation Candy Box" />
-	<decomposable item_id="188053848" name="Healthy Polar Bear Transformation Candy Box" />
-	<decomposable item_id="188053849" name="Dignified Aion's Steel Transformation Candy Box" />
-	<decomposable item_id="188053850" name="Fast Aion's Steel Transformation Candy Box" />
-	<decomposable item_id="188053851" name="Prudent Aion's Steel Transformation Candy Box" />
-	<decomposable item_id="188053852" name="Brave Aion's Steel Transformation Candy Box" />
-	<decomposable item_id="188053853" name="Wise Aion's Steel Transformation Candy Box" />
+	<decomposable item_id="188053830" name="Ultimate Gold Penguin Transformation Candy Box">
+		<items>
+			<item id="160010281" name="Gold Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010282" name="Gold Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053831" name="Ultimate Green Penguin Transformation Candy Box">
+		<items>
+			<item id="160010285" name="Green Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010286" name="Green Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053832" name="Ultimate Red Penguin Transformation Candy Box">
+		<items>
+			<item id="160010279" name="Red Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010280" name="Red Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053833" name="Ultimate Violet Penguin Transformation Candy Box">
+		<items>
+			<item id="160010287" name="Violet Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010288" name="Violet Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053834" name="Ultimate Yellow Penguin Transformation Candy Box">
+		<items>
+			<item id="160010283" name="Yellow Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010284" name="Yellow Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053835" name="Invincible Gold Penguin Transformation Candy Box">
+		<items>
+			<item id="160010178" name="Invincible Gold Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010179" name="Invincible Gold Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053836" name="Invincible Green Penguin Transformation Candy Box">
+		<items>
+			<item id="160010182" name="Invincible Green Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010183" name="Invincible Green Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053837" name="Invincible Red Penguin Transformation Candy Box">
+		<items>
+			<item id="160010176" name="Invincible Red Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010177" name="Invincible Red Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053838" name="Invincible Violet Penguin Transformation Candy Box">
+		<items>
+			<item id="160010184" name="Invincible Violet Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010185" name="Invincible Violet Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053839" name="Invincible Yellow Penguin Transformation Candy Box">
+		<items>
+			<item id="160010180" name="Invincible Yellow Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010181" name="Invincible Yellow Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053840" name="Strongest Gold Penguin Transformation Candy Box">
+		<items>
+			<item id="160010188" name="Strongest Gold Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010189" name="Strongest Gold Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053841" name="Strongest Green Penguin Transformation Candy Box">
+		<items>
+			<item id="160010192" name="Strongest Green Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010193" name="Strongest Green Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053842" name="Strongest Red Penguin Transformation Candy Box">
+		<items>
+			<item id="160010186" name="Strongest Red Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010187" name="Strongest Red Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053843" name="Strongest Violet Penguin Transformation Candy Box">
+		<items>
+			<item id="160010194" name="Strongest Violet Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010195" name="Strongest Violet Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053844" name="Strongest Yellow Penguin Transformation Candy Box">
+		<items>
+			<item id="160010190" name="Strongest Yellow Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010191" name="Strongest Yellow Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053845" name="Summer-Loving Penguin Transformation Candy Box">
+		<items>
+			<item id="160010101" name="Summer-Loving Inquin Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010102" name="Summer-Loving Inquin Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053846" name="Enamored Tiger Transformation Candy Box">
+		<items>
+			<item id="160010109" name="Enamored Tiger Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010109" name="Enamored Tiger Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053847" name="Even More Valiant Tiger Transformation Candy Box">
+		<items>
+			<item id="160010107" name="Courageous Tiger Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010108" name="Courageous Tiger Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053848" name="Healthy Polar Bear Transformation Candy Box">
+		<items>
+			<item id="160010105" name="Fuzzy Polar Bear Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010106" name="Fuzzy Polar Bear Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053849" name="Dignified Aion's Steel Transformation Candy Box">
+		<items>
+			<item id="160010315" name="Dignified Iron Cobalt Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010316" name="Dignified Iron Cobalt Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053850" name="Fast Aion's Steel Transformation Candy Box">
+		<items>
+			<item id="160010318" name="Nimble Iron Cobalt Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010319" name="Nimble Iron Cobalt Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053851" name="Prudent Aion's Steel Transformation Candy Box">
+		<items>
+			<item id="160010323" name="Wunderkind Iron Cobalt Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010324" name="Wunderkind Iron Cobalt Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053852" name="Brave Aion's Steel Transformation Candy Box">
+		<items>
+			<item id="160010321" name="Courageous Iron Cobalt Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010322" name="Courageous Iron Cobalt Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053853" name="Wise Aion's Steel Transformation Candy Box">
+		<items>
+			<item id="160010317" name="Wise Iron Cobalt Form Candy" min_count="3" race="ELYOS" />
+			<item id="160010318" name="Wise Iron Cobalt Form Candy" min_count="3" race="ASMODIANS" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053854" name="Group Hiding Kisk Summoning Stone Box (50)" />
 	<decomposable item_id="188053855" name="Force Hiding Kisk Summoning Stone Box (50)" />
 	<decomposable item_id="188053856" name="Stealth Group Kisk Bundle" />
