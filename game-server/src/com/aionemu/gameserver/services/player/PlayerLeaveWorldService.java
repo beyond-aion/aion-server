@@ -30,7 +30,6 @@ import com.aionemu.gameserver.network.aion.clientpackets.CM_QUIT;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.services.ArcadeUpgradeService;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.DuelService;
@@ -79,7 +78,6 @@ public class PlayerLeaveWorldService {
 			player.setPosition(pos);
 		}
 
-		ArcadeUpgradeService.getInstance().cacheProgress(player);
 		BattleService.getInstance().onPlayerLogout(player);
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
 		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());

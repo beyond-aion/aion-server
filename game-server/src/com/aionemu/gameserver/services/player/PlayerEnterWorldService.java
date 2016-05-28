@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,8 +40,8 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
+import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.Emotion;
@@ -87,7 +89,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UNK_3_5_1;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.services.ArcadeUpgradeService;
 import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BonusPackService;
@@ -127,8 +128,6 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -363,7 +362,6 @@ public final class PlayerEnterWorldService {
 
 		KiskService.getInstance().onLogin(player);
 		TeleportService2.sendSetBindPoint(player);
-		ArcadeUpgradeService.getInstance().loadProgress(player);
 		AhserionRaid.getInstance().onPlayerLogin(player);
 
 		// ----------------------------- Retail sequence -----------------------------

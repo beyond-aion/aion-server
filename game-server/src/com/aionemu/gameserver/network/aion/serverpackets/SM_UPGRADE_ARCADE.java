@@ -10,6 +10,7 @@ import com.aionemu.gameserver.services.ArcadeUpgradeService;
 
 /**
  * @author ginho1
+ * @modified Estrayl
  */
 public class SM_UPGRADE_ARCADE extends AionServerPacket {
 

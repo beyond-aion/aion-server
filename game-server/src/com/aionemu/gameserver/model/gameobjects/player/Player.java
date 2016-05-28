@@ -31,7 +31,6 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
-import com.aionemu.gameserver.model.event.ArcadeProgress;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -150,7 +149,6 @@ public class Player extends Creature {
 	private Rates rates;
 
 	private int flyState = 0;
-	private ArcadeProgress arcadeProgress;
 	private boolean isTrading;
 	private long prisonTimer = 0;
 	private long startPrison;
@@ -938,14 +936,6 @@ public class Player extends Creature {
 
 	public boolean isInGlidingState() {
 		return this.isInFlyState(FlyState.GLIDING);
-	}
-	
-	public ArcadeProgress getArcadeProgress() {
-		return arcadeProgress;
-	}
-	
-	public void setArcadeProgress(ArcadeProgress arcadeProgress) {
-		this.arcadeProgress = arcadeProgress;
 	}
 
 	/**
