@@ -87,6 +87,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UNK_3_5_1;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.ArcadeUpgradeService;
 import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BonusPackService;
@@ -362,7 +363,7 @@ public final class PlayerEnterWorldService {
 
 		KiskService.getInstance().onLogin(player);
 		TeleportService2.sendSetBindPoint(player);
-
+		ArcadeUpgradeService.getInstance().loadProgress(player);
 		AhserionRaid.getInstance().onPlayerLogin(player);
 
 		// ----------------------------- Retail sequence -----------------------------

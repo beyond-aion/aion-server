@@ -11,7 +11,6 @@ import com.aionemu.gameserver.services.ArcadeUpgradeService;
 public class CM_UPGRADE_ARCADE extends AionClientPacket {
 
 	private int action;
-	@SuppressWarnings("unused")
 	private int sessionId;
 
 	public CM_UPGRADE_ARCADE(int opcode, State state, State... restStates) {
@@ -27,20 +26,21 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-
 		switch (action) {
 			case 0:// get start upgrade arcade info
-				ArcadeUpgradeService.getInstance().startArcadeUpgrade(player);
+				ArcadeUpgradeService.getInstance().start(player, sessionId);
 				break;
 			case 1:// open upgrade arcade
-				ArcadeUpgradeService.getInstance().openArcadeUpgrade(player);
+				ArcadeUpgradeService.getInstance().open(player);
 				break;
 			case 2:// try upgrade arcade
-				ArcadeUpgradeService.getInstance().tryArcadeUpgrade(player);
+				ArcadeUpgradeService.getInstance().startTry(player);
 				break;
 			case 3:// get reward
 				ArcadeUpgradeService.getInstance().getReward(player);
 				break;
+			case 4:// resume upgreade arcade
+				ArcadeUpgradeService.getInstance().resume(player);
 			case 5:// get reward list
 				ArcadeUpgradeService.getInstance().showRewardList(player);
 				break;

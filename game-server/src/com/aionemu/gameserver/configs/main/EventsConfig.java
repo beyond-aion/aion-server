@@ -21,6 +21,9 @@ public class EventsConfig {
 
 	@Property(key = "gameserver.event.arcade.chance", defaultValue = "50")
 	public static int EVENT_ARCADE_CHANCE;
+	
+	@Property(key = "gameserver.event.arcade.resume_token", defaultValue = "3")
+	public static int ARCADE_RESUME_TOKEN;
 
 	/**
 	 * Monster Raid

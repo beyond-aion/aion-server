@@ -7,6 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -28,6 +31,7 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
+import com.aionemu.gameserver.model.event.ArcadeProgress;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -94,9 +98,6 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * This class is representing Player object, it contains all needed data.
  * 
@@ -149,9 +150,7 @@ public class Player extends Creature {
 	private Rates rates;
 
 	private int flyState = 0;
-	private int arcadeUpgradeFrenzy = 0;
-	private int arcadeUpgradeLevel = 1;
-	private boolean arcadeUpgradeIsFrenzy = false;
+	private ArcadeProgress arcadeProgress;
 	private boolean isTrading;
 	private long prisonTimer = 0;
 	private long startPrison;
@@ -940,29 +939,13 @@ public class Player extends Creature {
 	public boolean isInGlidingState() {
 		return this.isInFlyState(FlyState.GLIDING);
 	}
-
-	public int getArcadeUpgradeFrenzy() {
-		return this.arcadeUpgradeFrenzy;
+	
+	public ArcadeProgress getArcadeProgress() {
+		return arcadeProgress;
 	}
-
-	public void setArcadeUpgradeFrenzy(int arcadeUpgradeFrenzy) {
-		this.arcadeUpgradeFrenzy = arcadeUpgradeFrenzy;
-	}
-
-	public int getArcadeUpgradeLevel() {
-		return this.arcadeUpgradeLevel;
-	}
-
-	public void setArcadeUpgradeLevel(int arcadeUpgradeLevel) {
-		this.arcadeUpgradeLevel = arcadeUpgradeLevel;
-	}
-
-	public boolean getArcadeUpgradeIsFrenzy() {
-		return this.arcadeUpgradeIsFrenzy;
-	}
-
-	public void setArcadeUpgradeIsFrenzy(boolean arcadeUpgradeIsFrenzy) {
-		this.arcadeUpgradeIsFrenzy = arcadeUpgradeIsFrenzy;
+	
+	public void setArcadeProgress(ArcadeProgress arcadeProgress) {
+		this.arcadeProgress = arcadeProgress;
 	}
 
 	/**
