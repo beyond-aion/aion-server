@@ -95,7 +95,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			if (onceUsedObservers.size() > 0) {
-				tempOnceused = new FastTable<ActionObserver>();
+				tempOnceused = new FastTable<>();
 				Iterator<ActionObserver> iterator = onceUsedObservers.iterator();
 				while (iterator.hasNext()) {
 					ActionObserver observer = iterator.next();
@@ -174,6 +174,9 @@ public class ObserveController {
 				break;
 			case HP_CHANGED:
 				observer.hpChanged((int) object[0]);
+				break;
+			case GODSTONE:
+				observer.calculateGodstoneChance((Creature) object[0]);
 				break;
 		}
 	}
@@ -286,6 +289,9 @@ public class ObserveController {
 		notifyObservers(ObserverType.HP_CHANGED, hpValue);
 	}
 
+	public void notifyGodstoneObserver(Creature creature) {
+		notifyObservers(ObserverType.GODSTONE, creature);
+	}
 	/**
 	 * @param status
 	 * @return true or false
