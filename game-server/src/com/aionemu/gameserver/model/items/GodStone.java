@@ -71,10 +71,12 @@ public class GodStone extends ItemStone {
 		Item equippedItem = player.getEquipment().getEquippedItemByObjId(getItemObjId());
 		long equipmentSlot = equippedItem.getEquipmentSlot();
 		final int handProbability = (equipmentSlot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 ? probability : probabilityLeft;
-		actionListener = new ActionObserver(ObserverType.ATTACK) {
+		actionListener = new ActionObserver(ObserverType.GODSTONE) {
 
 			@Override
-			public void attack(Creature creature) {
+			public void calculateGodstoneChance(Creature creature) {
+				if (creature == null)
+					return;
 				int procProbability = handProbability;
 				if (creature instanceof Player) {
 					procProbability -= ((Player)creature).getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
@@ -103,7 +105,6 @@ public class GodStone extends ItemStone {
 				}
 			}
 		};
-
 		player.getObserveController().addObserver(actionListener);
 	}
 

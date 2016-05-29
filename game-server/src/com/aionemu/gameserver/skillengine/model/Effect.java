@@ -26,6 +26,8 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
+import com.aionemu.gameserver.skillengine.effect.DamageEffect;
+import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.Effects;
@@ -637,7 +639,7 @@ public class Effect implements StatOwner {
 
 		if (skillTemplate.getEffects() == null || successEffects.isEmpty())
 			return;
-
+		boolean activateGodstone = false;
 		for (EffectTemplate template : successEffects.values()) {
 			if (getEffected() != null) {
 				if (getEffected().getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
@@ -645,8 +647,15 @@ public class Effect implements StatOwner {
 				}
 				getEffected().getPosition().getWorldMapInstance().getInstanceHandler().onApplyEffect(getEffector(), getEffected(), this.getSkillId());
 			}
+			if (!isForcedEffect && template.getPosition() == 1
+					&& template instanceof DamageEffect && !(template instanceof DelayedSpellAttackInstantEffect)) {
+				activateGodstone = true;
+			}
 			template.applyEffect(this);
 			template.startSubEffect(this);
+		}
+		if (activateGodstone) {
+			effector.getObserveController().notifyGodstoneObserver(getEffected());
 		}
 	}
 

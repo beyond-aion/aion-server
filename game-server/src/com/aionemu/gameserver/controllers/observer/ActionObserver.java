@@ -47,99 +47,105 @@ public class ActionObserver {
 	}
 
 	public void moved() {
-	};
+	}
 
 	/**
 	 * @param creature who effected
-	 * @param the effector skill id, which called this method
+	 * @param skillId - effector skill id, which called this method
 	 */
 	public void attacked(Creature creature, int skillId) {
-	};
+	}
 
 	/**
 	 * @param creature
 	 */
 	public void attack(Creature creature) {
-	};
+	}
 
 	/**
 	 * @param item
 	 * @param owner
 	 */
 	public void equip(Item item, Player owner) {
-	};
+	}
 
 	/**
 	 * @param item
 	 * @param owner
 	 */
 	public void unequip(Item item, Player owner) {
-	};
+	}
 
 	/**
 	 * @param skill
 	 */
 	public void startSkillCast(Skill skill) {
-	};
+	}
 
 	/**
 	 * @param skill
 	 */
 	public void endSkillCast(Skill skill) {
-	};
+	}
 
 	/**
 	 * @param skill
 	 */
 	public void boostSkillCost(Skill skill) {
-	};
+	}
 
 	/**
 	 * @param creature
 	 */
 	public void died(Creature creature) {
-	};
+	}
 
 	/**
 	 * @param creature
 	 * @param dotEffect
 	 */
 	public void dotattacked(Creature creature, Effect dotEffect) {
-	};
+	}
 
 	/**
 	 * @param item
 	 */
 	public void itemused(Item item) {
-	};
+	}
 
 	/**
 	 * @param npc
 	 */
 	public void npcdialogrequested(Npc npc) {
-	};
+	}
 
 	/**
 	 * @param state
 	 */
 	public void abnormalsetted(AbnormalState state) {
-	};
+	}
 
 	/**
 	 * @param
 	 */
 	public void summonrelease() {
-	};
+	}
 
 	/**
 	 * @param
 	 */
 	public void sit() {
-	};
+	}
 
 	/**
 	 * @param
 	 */
 	public void hpChanged(int value) {
-	};
+	}
+
+	/**
+	 * @param creature - the effected Creature
+	 */
+	public void calculateGodstoneChance(Creature creature) {
+	}
 }
