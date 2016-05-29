@@ -47,7 +47,8 @@ public enum RandomType {
 	SCROLLS,
 	POTION,
 	LESSER_POTIONS,
-	POTION_50;
+	POTION_50,
+	ILLUSION_GODSTONE;
 
 	private int level;
 

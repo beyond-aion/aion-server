@@ -99,6 +99,9 @@ public class DecomposeAction extends AbstractItemAction {
 	private static int[] lesser_potions = { 162000003, 162000008, 162000042, 162000022, 162000013, 162000018, 162000047 };
 
 	private static int[] potion_50 = { 162000075, 162000076, 162000077, 162000078, 162000079, 162000080, 162000081 };
+	
+	private static int[] illusion_godstones = { 168000229, 168000230, 168000231, 168000232, 168000233, 168000234, 168000235, 168000236, 168000237,
+		168000238, 168000239, 168000240, 168000241, 168000242, 168000243, 168000244, 16800245 };
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
@@ -410,6 +413,16 @@ public class DecomposeAction extends AbstractItemAction {
 											log.warn("DecomposeAction random item id not found. " + randomId);
 											return;
 										}
+										break;
+									}
+									case ILLUSION_GODSTONE: {
+										randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
+
+										if (!ItemService.checkRandomTemplate(randomId)) {
+											log.warn("DecomposeAction random item id not found. " + randomId);
+											return;
+										}
+										break;
 									}
 								}
 								if (randomId != 0 && randomId != 167000524)

@@ -29256,8 +29256,52 @@
 			<item id="186000054" name="Lesser Ancient Crown" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188053307" name="Legion's Honorable Reward Box" />
-	<decomposable item_id="188053308" name="Legion's Illusion Godstone Bundle" />
+	<decomposable item_id="188053307" name="Legion's Honorable Reward Box">
+		<items>
+			<item id="188053308" name="Legion's Illusion Godstone Bundle" />
+		</items>
+		<items>
+			<item id="188053309" name="Legion's Ceramium Medal Box" />
+		</items>
+		<items>
+			<item id="188053310" name="Legion's Fine Ancient Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053311" name="Legion's Greater Ancient Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053312" name="Legion's Ancient Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053313" name="Legion's Lesser Ancient Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053314" name="Legion's Greater Composite Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053315" name="Legion's Composite Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053316" name="Legion's Lesser Composite Manastone Bundle" />
+		</items>
+		<items>
+			<item id="188053317" name="Legion's Major Crown Bundle" />
+		</items>
+		<items>
+			<item id="188053318" name="Legion's Greater Crown Bundle" />
+		</items>
+		<items>
+			<item id="188053319" name="Legion's Crown Bundle" />
+		</items>
+		<items>
+			<item id="188053320" name="Legion's Lesser Crown Bundle" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188053308" name="Legion's Illusion Godstone Bundle">
+		<items>
+			<random_item type="ILLUSION_GODSTONE" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053309" name="Legion's Ceramium Medal Box">
 		<items>
 			<item id="186000242" name="Ceramium Medal" />
@@ -31868,55 +31912,7 @@
 	</decomposable>
 	<decomposable item_id="188053721" name="Illusion Godstone Bundle of Fortuneers Legion">
 		<items>
-			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed" />
-		</items>
-		<items>
-			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor" />
-		</items>
-		<items>
-			<item id="168000164" name="Illusion Godstone: Beritra's Plot" />
-		</items>
-		<items>
-			<item id="168000165" name="Illusion Godstone: Fregion's Trick" />
-		</items>
-		<items>
-			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack" />
-		</items>
-		<items>
-			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality" />
-		</items>
-		<items>
-			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity" />
-		</items>
-		<items>
-			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness" />
-		</items>
-		<items>
-			<item id="168000174" name="Illusion Godstone: Tiamat's Fury" />
-		</items>
-		<items>
-			<item id="168000175" name="Illusion Godstone: Triniel's Rationality" />
-		</items>
-		<items>
-			<item id="168000176" name="Illusion Godstone: Vaizel's Vow" />
-		</items>
-		<items>
-			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret" />
-		</items>
-		<items>
-			<item id="168000163" name="Illusion Godstone: Nezekan's Advance" />
-		</items>
-		<items>
-			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention" />
-		</items>
-		<items>
-			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy" />
-		</items>
-		<items>
-			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance" />
-		</items>
-		<items>
-			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053722" name="Special Enchantment Stone Bundle of Fortuneers Legion">
@@ -31953,55 +31949,7 @@
 	</decomposable>
 	<decomposable item_id="188053726" name="Illusion Godstone Bundle of Charlirunerk Inquiry Agency">
 		<items>
-			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed" />
-		</items>
-		<items>
-			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor" />
-		</items>
-		<items>
-			<item id="168000164" name="Illusion Godstone: Beritra's Plot" />
-		</items>
-		<items>
-			<item id="168000165" name="Illusion Godstone: Fregion's Trick" />
-		</items>
-		<items>
-			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack" />
-		</items>
-		<items>
-			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality" />
-		</items>
-		<items>
-			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity" />
-		</items>
-		<items>
-			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness" />
-		</items>
-		<items>
-			<item id="168000174" name="Illusion Godstone: Tiamat's Fury" />
-		</items>
-		<items>
-			<item id="168000175" name="Illusion Godstone: Triniel's Rationality" />
-		</items>
-		<items>
-			<item id="168000176" name="Illusion Godstone: Vaizel's Vow" />
-		</items>
-		<items>
-			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret" />
-		</items>
-		<items>
-			<item id="168000163" name="Illusion Godstone: Nezekan's Advance" />
-		</items>
-		<items>
-			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention" />
-		</items>
-		<items>
-			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy" />
-		</items>
-		<items>
-			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance" />
-		</items>
-		<items>
-			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053727" name="Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency">
@@ -33828,55 +33776,7 @@
 	<decomposable item_id="188053791" name="Drakenspire Depths Detachment's Supplies" />
 	<decomposable item_id="188053792" name="Illusion Godstone of Aetheric Field Bundle">
 		<items>
-			<item id="168000161" name="Illusion Godstone: Meslamtaeda's Greed" />
-		</items>
-		<items>
-			<item id="168000162" name="Illusion Godstone: Ereshkigal's Honor" />
-		</items>
-		<items>
-			<item id="168000164" name="Illusion Godstone: Beritra's Plot" />
-		</items>
-		<items>
-			<item id="168000165" name="Illusion Godstone: Fregion's Trick" />
-		</items>
-		<items>
-			<item id="168000170" name="Illusion Godstone: Tiamat's Counterattack" />
-		</items>
-		<items>
-			<item id="168000171" name="Illusion Godstone: Marchutan's Impartiality" />
-		</items>
-		<items>
-			<item id="168000172" name="Illusion Godstone: Yustiel's Generosity" />
-		</items>
-		<items>
-			<item id="168000173" name="Illusion Godstone: Beritra's Selfishness" />
-		</items>
-		<items>
-			<item id="168000174" name="Illusion Godstone: Tiamat's Fury" />
-		</items>
-		<items>
-			<item id="168000175" name="Illusion Godstone: Triniel's Rationality" />
-		</items>
-		<items>
-			<item id="168000176" name="Illusion Godstone: Vaizel's Vow" />
-		</items>
-		<items>
-			<item id="168000177" name="Illusion Godstone: Meslamtaeda's Regret" />
-		</items>
-		<items>
-			<item id="168000163" name="Illusion Godstone: Nezekan's Advance" />
-		</items>
-		<items>
-			<item id="168000166" name="Illusion Godstone: Lumiel's Intervention" />
-		</items>
-		<items>
-			<item id="168000167" name="Illusion Godstone: Kaisinel's Fantasy" />
-		</items>
-		<items>
-			<item id="168000168" name="Illusion Godstone: Zikel's Arrogance" />
-		</items>
-		<items>
-			<item id="168000169" name="Illusion Godstone: Fregion's Stratagem" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053793" name="Rare Manastone of Aetheric Field Bundle">
