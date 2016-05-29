@@ -336,8 +336,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();
-		if (addAttackObservers)
+		if (addAttackObservers) {
 			getOwner().getObserveController().notifyAttackObservers(target);
+			getOwner().getObserveController().notifyGodstoneObserver(target);
+		}
 
 		final Creature creature = getOwner();
 		if (time == 0)
