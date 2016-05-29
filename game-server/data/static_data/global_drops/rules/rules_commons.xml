@@ -200,59 +200,26 @@
 			<gd_item id="188053783" name="Stigma Sack" />
 		</gd_items>
 	</gd_rule>
-	<!-- Godstones (blue, dmg) -->
-	<gd_rule rule_name="Godstones (Legend)" base_chance="0.03" fixed_chance="true">
+	<!-- Godstones -->
+	<gd_rule rule_name="Illusion Godstones" base_chance="0.01" fixed_chance="true">
 		<gd_items>
-			<gd_item id="168000028" name="Godstone: Magical Fire Strike" />
-			<gd_item id="168000029" name="Godstone: Magical Fire Smash" />
-			<gd_item id="168000030" name="Godstone: Magical Earth Strike" />
-			<gd_item id="168000031" name="Godstone: Magical Earth Smash" />
-			<gd_item id="168000032" name="Godstone: Bleeding Altered State Strike" />
-			<gd_item id="168000033" name="Godstone: Bleeding Altered State Smash" />
-			<gd_item id="168000043" name="Godstone: Boreas' Encouragement" />
-			<gd_item id="168000044" name="Godstone: Charna's Cleverness" />
-			<gd_item id="168000045" name="Godstone: Thrasymedes' Wit" />
-			<gd_item id="168000046" name="Godstone: Jumentis' Agility" />
-			<gd_item id="168000047" name="Godstone: Traufnir's Bravery" />
-			<gd_item id="168000048" name="Godstone: Sif's Knowledge" />
-			<gd_item id="168000049" name="Godstone: Freyr's Wisdom" />
-			<gd_item id="168000050" name="Godstone: Sigyn's Intelligence" />
-		</gd_items>
-	</gd_rule>
-	<!-- Godstones (blue, effects) -->
-	<gd_rule rule_name="Godstones (Legend)" base_chance="0.015" fixed_chance="true">
-		<gd_items>
-			<gd_item id="168000034" name="Godstone: Fasimedes' Majesty" />
-			<gd_item id="168000035" name="Godstone: Vidar's Dignity" />
-			<gd_item id="168000036" name="Godstone: Helkes' Revenge" />
-			<gd_item id="168000039" name="Godstone: Deltras' Loyalty" />
-			<gd_item id="168000041" name="Godstone: Orissan's Blood" />
-			<gd_item id="168000042" name="Godstone: Mahisha's Wrath" />
-			<gd_item id="168000073" name="Godstone: Khrudgelmir's Tacitness" />
-			<gd_item id="168000074" name="Godstone: Bollvig's Tragedy" />
-			<gd_item id="168000075" name="Godstone: Ieo's Sadness" />
-		</gd_items>
-	</gd_rule>
-	<!-- Godstones (gold) -->
-	<gd_rule rule_name="Godstones (Unique)" base_chance="0.0075" fixed_chance="true">
-		<gd_items>
-			<gd_item id="168000117" name="Godstone: Meslamtaeda's Greed" />
-			<gd_item id="168000118" name="Godstone: Ereshkigal's Honor" />
-			<gd_item id="168000119" name="Godstone: Nezekan's Advance" />
-			<gd_item id="168000120" name="Godstone: Beritra's Plot" />
-			<gd_item id="168000121" name="Godstone: Fregion's Trick" />
-			<gd_item id="168000122" name="Godstone: Lumiel's Intervention" />
-			<gd_item id="168000123" name="Godstone: Kaisinel's Fantasy" />
-			<gd_item id="168000124" name="Godstone: Zikel's Arrogance" />
-			<gd_item id="168000125" name="Godstone: Fregion's Stratagem" />
-			<gd_item id="168000126" name="Godstone: Tiamat's Counterattack" />
-			<gd_item id="168000127" name="Godstone: Marchutan's Impartiality" />
-			<gd_item id="168000128" name="Godstone: Yustiel's Generosity" />
-			<gd_item id="168000129" name="Godstone: Beritra's Selfishness" />
-			<gd_item id="168000130" name="Godstone: Tiamat's Fury" />
-			<gd_item id="168000131" name="Godstone: Triniel's Rationality" />
-			<gd_item id="168000132" name="Godstone: Vaizel's Vow" />
-			<gd_item id="168000133" name="Godstone: Meslamtaeda's Regret" />
+			<gd_item id="168000229" name="Illusion Godstone: Lumiel's Interference" />
+			<gd_item id="168000230" name="Illusion Godstone: Meslamtaeda's Ambition" />
+			<gd_item id="168000231" name="Illusion Godstone: Yustiel's Consolation" />
+			<gd_item id="168000232" name="Illusion Godstone: Vaizel's Vow" />
+			<gd_item id="168000233" name="Illusion Godstone: Ereshkigal's Reputation" />
+			<gd_item id="168000234" name="Illusion Godstone: Marchutan's Justice" />
+			<gd_item id="168000235" name="Illusion Godstone: Triniel's Intellect" />
+			<gd_item id="168000236" name="Illusion Godstone: Beritra's Conceit" />
+			<gd_item id="168000237" name="Illusion Godstone: Meslamtaeda's Remorse" />
+			<gd_item id="168000238" name="Illusion Godstone: Tiamat's Retaliation" />
+			<gd_item id="168000239" name="Illusion Godstone: Tiamat's Rage" />
+			<gd_item id="168000240" name="Illusion Godstone: Fregion's Stratagem" />
+			<gd_item id="168000241" name="Illusion Godstone: Nezekan's Charge" />
+			<gd_item id="168000242" name="Illusion Godstone: Kaisinel's Mirage" />
+			<gd_item id="168000243" name="Illusion Godstone: Zikel's Arrogance" />
+			<gd_item id="168000244" name="Illusion Godstone: Fregion's Scheme" />
+			<gd_item id="168000245" name="Illusion Godstone: Beritra's Plot" />
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white) -->
