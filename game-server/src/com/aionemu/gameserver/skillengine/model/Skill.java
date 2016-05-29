@@ -399,7 +399,7 @@ public class Skill {
 		if (isCastTimeFixed())
 			duration = skillTemplate.getDuration();
 
-		if (skillTemplate.getName().equals("Resurrection"))
+		if (getSkillId() == 10802) // ap & cash revival stones
 			duration = 0;
 
 		if (duration < 0) {
