@@ -17,16 +17,16 @@ import javolution.util.FastTable;
 /**
  * @author KID
  */
-public class RewardService {
+public class WebRewardService {
 
-	private static RewardService instance = new RewardService();
-	private static final Logger log = LoggerFactory.getLogger(RewardService.class);
+	private static WebRewardService instance = new WebRewardService();
+	private static final Logger log = LoggerFactory.getLogger(WebRewardService.class);
 
-	public static RewardService getInstance() {
+	public static WebRewardService getInstance() {
 		return instance;
 	}
 
-	private RewardService() {
+	private WebRewardService() {
 	}
 
 	public void verify(Player player) {
@@ -37,32 +37,33 @@ public class RewardService {
 		FastTable<Integer> rewarded = new FastTable<>();
 
 		for (RewardEntryItem item : list) {
-			if (DataManager.ITEM_DATA.getItemTemplate(item.id) == null) {
-				log.warn("[RewardController][" + item.unique + "] null template for item " + item.id + " on player " + player.getObjectId() + ".");
+			if (DataManager.ITEM_DATA.getItemTemplate(item.getId()) == null) {
+				log.warn("[RewardController][" + item.getEntryId() + "] null template for item " + item.getId() + " on player " + player.getObjectId() + ".");
 				continue;
 			}
 
 			try {
-				int itemId, kinahCount, itemCount;
-				if (item.id == ItemId.KINAH.value()) {
+				int itemId;
+				long kinahCount, itemCount;
+				if (item.getId() == ItemId.KINAH.value()) {
 					itemId = 0;
 					itemCount = 0;
-					kinahCount = (int) item.count;
+					kinahCount = item.getCount();
 				} else {
-					itemId = item.id;
-					itemCount = (int) item.count;
+					itemId = item.getId();
+					itemCount = item.getCount();
 					kinahCount = 0;
 				}
 
-				if (!SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", player.getName(), item.id + ", " + item.count,
+				if (!SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", player.getName(), item.getId() + ", " + item.getCount(),
 					"0, " + (System.currentTimeMillis() / 1000) + ",", itemId, itemCount, kinahCount, LetterType.BLACKCLOUD)) {
 					continue;
 				}
 
-				log.info("[RewardController][" + item.unique + "] player " + player.getName() + " has received (" + item.count + ")" + item.id + ".");
-				rewarded.add(item.unique);
+				log.info("[RewardController][" + item.getEntryId() + "] player " + player.getName() + " has received (" + item.getCount() + ")" + item.getId() + ".");
+				rewarded.add(item.getEntryId());
 			} catch (Exception e) {
-				log.error("[RewardController][" + item.unique + "] failed to add item (" + item.count + ")" + item.id + " to " + player.getObjectId(), e);
+				log.error("[RewardController][" + item.getEntryId() + "] failed to add item (" + item.getCount() + ")" + item.getId() + " to " + player.getObjectId(), e);
 				continue;
 			}
 		}

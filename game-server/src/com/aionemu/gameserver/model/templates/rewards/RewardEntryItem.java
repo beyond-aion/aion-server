@@ -2,15 +2,18 @@ package com.aionemu.gameserver.model.templates.rewards;
 
 /**
  * @author KID
+ * @modified Neon
  */
-public class RewardEntryItem {
+public class RewardEntryItem extends RewardItem {
 
-	public RewardEntryItem(int unique, int item_id, long count) {
-		this.unique = unique;
-		this.id = item_id;
-		this.count = count;
+	private final int entryId;
+
+	public RewardEntryItem(int entryId, int itemId, long count) {
+		super(itemId, count);
+		this.entryId = entryId;
 	}
 
-	public int id, unique;
-	public long count;
+	public int getEntryId() {
+		return entryId;
+	}
 }
