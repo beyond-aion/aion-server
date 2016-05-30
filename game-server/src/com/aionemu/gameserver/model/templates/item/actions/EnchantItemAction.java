@@ -68,7 +68,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem
 					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
-			} else if (targetItem.isAmplified() && parentItem.getItemId() != 166020000) { // only omega enchantment stone
+			} else if (targetItem.isAmplified() && parentItem.getItemId() != 166020000 && parentItem.getItemId() != 166020003) { // only omega enchantment stone
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(new DescriptionId(parentItem.getItemTemplate().getNameId())));
 				return false;
 			}
