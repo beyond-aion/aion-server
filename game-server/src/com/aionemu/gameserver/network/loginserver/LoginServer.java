@@ -185,8 +185,8 @@ public class LoginServer {
 	 * @param result
 	 * @param accountTime
 	 */
-	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, AccountTime accountTime, byte accessLevel,
-		byte membership, long toll, String allowedHddSerial) {
+	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
+		byte accessLevel, byte membership, long toll, String allowedHddSerial) {
 		AionConnection client = loginRequests.get(accountId);
 		if (client == null)
 			return;
@@ -194,7 +194,7 @@ public class LoginServer {
 		if (!result)
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
 		else {
-			Account account = AccountService.getAccount(accountId, accountName, accountTime, accessLevel, membership, toll, allowedHddSerial);
+			Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, toll, allowedHddSerial);
 			if (validateAccount(account)) {
 				client.setAccount(account);
 				client.setState(AionConnection.State.AUTHED);

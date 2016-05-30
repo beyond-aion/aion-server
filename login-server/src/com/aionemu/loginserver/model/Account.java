@@ -1,5 +1,7 @@
 package com.aionemu.loginserver.model;
 
+import java.sql.Timestamp;
+
 /**
  * This class represents Account model
  * 
@@ -21,6 +23,11 @@ public class Account {
 	 * Password hash
 	 */
 	private String passwordHash;
+
+	/**
+	 * Time of account creation
+	 */
+	private Timestamp creationDate;
 
 	/**
 	 * Access level of account 0 = regular user, > 0 = GM
@@ -117,6 +124,17 @@ public class Account {
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+
+	/**
+	 * @return The account creation date 
+	 */
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	/**

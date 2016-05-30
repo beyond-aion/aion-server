@@ -7,6 +7,7 @@ CREATE TABLE `account_data` (
   `name` varchar(45) DEFAULT NULL,
   `ext_auth_name` varchar(45) DEFAULT NULL,
   `password` varchar(65) NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activated` boolean NOT NULL DEFAULT TRUE, 
   `access_level` tinyint(3) NOT NULL DEFAULT '0',
   `membership` tinyint(3) NOT NULL DEFAULT '0',

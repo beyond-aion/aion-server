@@ -43,6 +43,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setId(rs.getInt("id"));
 				account.setName(name);
 				account.setPasswordHash(rs.getString("password"));
+				account.setCreationDate(rs.getTimestamp("creation_date"));
 				account.setAccessLevel(rs.getByte("access_level"));
 				account.setMembership(rs.getByte("membership"));
 				account.setActivated(rs.getByte("activated"));
@@ -76,6 +77,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setId(rs.getInt("id"));
 				account.setName(rs.getString("name"));
 				account.setPasswordHash(rs.getString("password"));
+				account.setCreationDate(rs.getTimestamp("creation_date"));
 				account.setAccessLevel(rs.getByte("access_level"));
 				account.setMembership(rs.getByte("membership"));
 				account.setActivated(rs.getByte("activated"));

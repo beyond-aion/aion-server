@@ -28,6 +28,11 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 	private final String accountName;
 
 	/**
+	 * Time of account creation, measured in milliseconds since 1.1.1970 UTC
+	 */
+	private long creationDate;
+
+	/**
 	 * Access level
 	 */
 	private final byte accessLevel;
@@ -52,10 +57,11 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 	 * @param membership
 	 * @param toll
 	 */
-	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, byte accessLevel, byte membership, long toll) {
+	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership, long toll) {
 		this.accountId = accountId;
 		this.ok = ok;
 		this.accountName = accountName;
+		this.creationDate = creationDate;
 		this.accessLevel = accessLevel;
 		this.membership = membership;
 		this.toll = toll;
@@ -72,6 +78,7 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 
 		if (ok) {
 			writeS(accountName);
+			writeQ(creationDate);
 
 			AccountTime accountTime = con.getGameServerInfo().getAccountFromGameServer(accountId).getAccountTime();
 
