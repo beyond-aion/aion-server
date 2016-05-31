@@ -765,16 +765,12 @@ public class AttackUtil {
 
 			@Override
 			public void visit(Player observer) {
-				if (validateSee && observer.getTarget() == object) {
-					if (!observer.canSee(object)) {
+				if (observer.getTarget() == object) {
+					if (!validateSee || !observer.canSee(object)) {
 						observer.setTarget(null);
 						// retail packet (//fsc 0x44 dhdd 0 0 0 0) right after SM_PLAYER_STATE
 						PacketSendUtility.sendPacket(observer, new SM_TARGET_SELECTED(observer));
 					}
-				} else if (observer.getTarget() == object) {
-					observer.setTarget(null);
-					// retail packet (//fsc 0x44 dhdd 0 0 0 0) right after SM_PLAYER_STATE
-					PacketSendUtility.sendPacket(observer, new SM_TARGET_SELECTED(observer));
 				}
 			}
 

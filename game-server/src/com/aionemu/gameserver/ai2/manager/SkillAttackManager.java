@@ -63,16 +63,15 @@ public class SkillAttackManager {
 	 */
 	protected static void skillAction(NpcAI2 npcAI) {
 		Npc owner = npcAI.getOwner();
-		Creature target = (Creature) owner.getTarget();
 		if (owner.getObjectTemplate().getAttackRange() == 0) {
-			if (owner.getTarget() != null
-				&& !MathUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
+			if (owner.getTarget() != null && !MathUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				owner.getController().abortCast();
 				return;
 			}
 		}
-		if (target != null && !target.getLifeStats().isAlreadyDead()) {
+		Creature target;
+		if (owner.getTarget() instanceof Creature && !(target = (Creature) owner.getTarget()).getLifeStats().isAlreadyDead()) {
 			final int skillId = npcAI.getSkillId();
 			final int skillLevel = npcAI.getSkillLevel();
 
@@ -95,14 +94,14 @@ public class SkillAttackManager {
 						if (temp != null) {
 							switch (temp.getTarget()) {
 								case ME:
-									if(!owner.getTarget().equals(owner)) {
+									if (!target.equals(owner)) {
 										owner.setTarget(owner);
 									}
 									break;
 								case MOST_HATED:
 									Creature target2 = owner.getAggroList().getMostHated();
 									if (target2 != null && !target2.getLifeStats().isAlreadyDead()) {
-										if (!owner.getTarget().equals(target2)) {
+										if (!target.equals(target2)) {
 											owner.setTarget(target2);
 										}
 									}
@@ -111,18 +110,16 @@ public class SkillAttackManager {
 								case RANDOM_EXCEPT_MOST_HATED:
 									List<Creature> knownCreatures = new FastTable<>();
 									for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
-										if (obj != null && obj instanceof Creature 
-											&& !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
+										if (obj instanceof Creature && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
 											Creature target3 = (Creature) obj;
-											if (target3.getLifeStats().isAlreadyDead()  || target3.getLifeStats().isAboutToDie()) 
+											if (target3.getLifeStats().isAlreadyDead() || target3.getLifeStats().isAboutToDie())
 												continue;
-											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED
-													&& owner.getAggroList().getMostHated().equals(target3))
-													continue;
+											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
+												continue;
 											if (owner.isEnemy(target3) && owner.canSee(target3)
-													&& MathUtil.isIn3dRange(owner, target3, template.getProperties().getFirstTargetRange())
-													&& GeoService.getInstance().canSee(owner, target3)) {
-													knownCreatures.add(target3);
+												&& MathUtil.isIn3dRange(owner, target3, template.getProperties().getFirstTargetRange())
+												&& GeoService.getInstance().canSee(owner, target3)) {
+												knownCreatures.add(target3);
 											}
 										}
 									}
@@ -133,8 +130,8 @@ public class SkillAttackManager {
 										}
 									}
 									break;
-									default:
-										break;
+								default:
+									break;
 							}
 						}
 					}
@@ -175,7 +172,8 @@ public class SkillAttackManager {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
 
-		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent()) && owner.getGameStats().canUseNextSkill()) {
+		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent())
+			&& owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 			}
@@ -185,7 +183,7 @@ public class SkillAttackManager {
 				return null;
 			}
 
-			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill() ;
+			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
 				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
 				if (chainSkills != null && !chainSkills.isEmpty()) {
@@ -246,12 +244,12 @@ public class SkillAttackManager {
 		}
 		return false;
 	}
-	
+
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
 		SkillTemplate template = entry.getSkillTemplate();
 		Properties prop = template.getProperties();
 		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
-				&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
+			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
 			if (owner.getTarget() instanceof Creature) {
 				Creature target = (Creature) owner.getTarget();
 				if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
@@ -259,7 +257,7 @@ public class SkillAttackManager {
 				}
 				if (prop.getTargetType() != TargetRangeAttribute.AREA) {
 					float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
-					float targetCollision = target.getCollision() < 1f? 1f : target.getCollision();
+					float targetCollision = target.getCollision() < 1f ? 1f : target.getCollision();
 					if (!MathUtil.isIn3dRange(owner, target, prop.getFirstTargetRange() + collision + targetCollision)) {
 						return true;
 					}
@@ -270,7 +268,7 @@ public class SkillAttackManager {
 		}
 		return false;
 	}
-	
+
 	private final static class SkillAction implements Runnable {
 
 		private NpcAI2 npcAI;

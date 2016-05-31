@@ -114,7 +114,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return true;
 			case SELECT_TARGET_AFFECTED_BY_SKILL:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj != null && obj instanceof Creature) {
+					if (obj instanceof Creature) {
 						Creature target = (Creature) obj;
 						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie()) 
 							continue;

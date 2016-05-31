@@ -88,7 +88,7 @@ public class AttackManager {
 				return;
 			}
 		}
-		if (!npc.canSee((Creature) npc.getTarget())) {
+		if (!(npc.getTarget() instanceof Creature) || !npc.canSee((Creature) npc.getTarget())) {
 			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 			return;
 		}
