@@ -3,6 +3,7 @@ package mysql5;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -170,6 +171,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 
 		if (result > 0) {
 			account.setId(getAccountId(account.getName()));
+			account.setCreationDate(new Timestamp(System.currentTimeMillis()));
 		}
 
 		return result > 0;
