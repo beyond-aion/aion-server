@@ -13,7 +13,7 @@ public enum XPRewardEnum {
 	MINUS_7(-7, 30),
 	MINUS_6(-6, 40),
 	MINUS_5(-5, 50),
-	MINUS_4(-4, 70),
+	MINUS_4(-4, 60),
 	MINUS_3(-3, 90),
 	MINUS_2(-2, 100),
 	MINUS_1(-1, 100),
