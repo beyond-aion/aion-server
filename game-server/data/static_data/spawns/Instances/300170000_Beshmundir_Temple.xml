@@ -123,11 +123,11 @@
 			<spot x="1330.41" y="172.3624" z="244.6076" h="76" random_walk="1"/>
 		</spawn>
 		<!-- Captain Lakhara -->
-		<spawn npc_id="216157" difficult_id="2">
+		<spawn npc_id="216157" difficult_id="1">
 			<spot x="1342.938" y="288.0483" z="244.9775"/>
 		</spawn>
 		<!-- Captain Lakhara -->
-		<spawn npc_id="216238" difficult_id="1">
+		<spawn npc_id="216238" difficult_id="2">
 			<spot x="1342.938" y="288.0483" z="244.9775"/>
 		</spawn>
 		<!-- Aeshma -->
@@ -672,11 +672,11 @@
 			<spot x="982.20" y="135.82" z="244.00" h="30"/>
 		</spawn>
 		<!-- Taros Lifebane -->
-		<spawn npc_id="216167" difficult_id="2">
+		<spawn npc_id="216167" difficult_id="1">
 			<spot x="1380.6659" y="1302.1467" z="302.375" h="106"/>
 		</spawn>
 		<!-- Taros Lifebane -->
-		<spawn npc_id="216248" difficult_id="1">
+		<spawn npc_id="216248" difficult_id="2">
 			<spot x="1380.6659" y="1302.1467" z="302.375" h="106"/>
 		</spawn>
 		<!-- Laksyaka Deadeye -->
@@ -1765,19 +1765,19 @@
 			<spot x="1187.299" y="599.6928" z="249.3994"/>
 		</spawn>
 		<!-- Dorakiki the Bold -->
-		<spawn npc_id="216250" difficult_id="1">
+		<spawn npc_id="216250" difficult_id="2">
 			<spot x="1173.877" y="1212.452" z="283.5" h="105"/>
 		</spawn>
 		<!-- Dorakiki the Bold -->
-		<spawn npc_id="216169" difficult_id="2">
+		<spawn npc_id="216169" difficult_id="1">
 			<spot x="1173.877" y="1212.452" z="283.5" h="105"/>
 		</spawn>
 		<!-- Isbariya the Resolute -->
-		<spawn npc_id="216182" difficult_id="2">
+		<spawn npc_id="216182" difficult_id="1">
 			<spot x="1603.43" y="1593.01" z="307.034" h="77"/>
 		</spawn>
 		<!-- Isbariya the Resolute -->
-		<spawn npc_id="216263" difficult_id="1">
+		<spawn npc_id="216263" difficult_id="2">
 			<spot x="1603.43" y="1593.01" z="307.034" h="77"/>
 		</spawn>
 		<!-- Sorcery Wardstone -->
