@@ -107,4 +107,6 @@ public interface InstanceHandler {
 
 	boolean canEnter(Player player);
 
+	float getInstanceExpMultiplier();
+
 }

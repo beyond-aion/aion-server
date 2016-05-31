@@ -41,6 +41,11 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			instanceRace = player.getRace();
 		}
 	}
+	
+	@Override
+	public float getInstanceExpMultiplier() {
+		return 10f;
+	}
 
 	@Override
 	public void onDie(Npc npc) {

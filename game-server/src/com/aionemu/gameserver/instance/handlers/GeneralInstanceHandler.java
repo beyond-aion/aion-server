@@ -132,6 +132,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	protected void sendMsg(SM_SYSTEM_MESSAGE msg, int delay) {
 		PacketSendUtility.broadcastToMap(instance, msg, delay);
 	}
+	
+	@Override
+	public float getInstanceExpMultiplier() {
+		return 1;
+	}
 
 	@Override
 	public void onExitInstance(Player player) {

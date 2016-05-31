@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.team2.common.service;
 
 import java.util.List;
 
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -17,8 +19,6 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.google.common.base.Predicate;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, nrg
@@ -56,6 +56,7 @@ public class PlayerTeamDistributionService {
 		if (size > 1) {
 			bonus = 150 + (size - 2) * 10;
 		}
+		bonus *= owner.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceExpMultiplier();
 
 		for (Player member : filteredStats.players) {
 			// mentor and dead players shouldn't receive AP/EP/DP
