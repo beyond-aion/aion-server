@@ -514,11 +514,12 @@ public class DecomposeAction extends AbstractItemAction {
 		for (ResultedItem item : itemsCollections.getItems()) {
 			if (item.isObtainableFor(player)) {
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
-				if (special && template.getExtraInventoryId() > 0) {
+				if (template == null)
+					log.error("Detected invalid item id during decompose action " + item.getItemId());
+				else if (special && template.getExtraInventoryId() > 0)
 					maxCount++;
-				} else if (template.getExtraInventoryId() < 1) {
+				else if (template.getExtraInventoryId() < 1)
 					maxCount++;
-				}
 			}
 		}
 		return maxCount;
