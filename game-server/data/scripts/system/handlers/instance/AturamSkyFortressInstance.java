@@ -185,6 +185,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	public void onLeaveInstance(Player player) {
 		player.getEffectController().removeEffect(19407);
 		player.getEffectController().removeEffect(19408);
+		player.getEffectController().removeEffect(19502);
 		player.getEffectController().removeEffect(19520);
 		player.getEffectController().removeEffect(21807);
 		player.getEffectController().removeEffect(21808);
