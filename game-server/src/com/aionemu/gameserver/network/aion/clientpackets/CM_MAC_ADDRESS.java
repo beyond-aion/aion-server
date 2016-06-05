@@ -3,9 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
-import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.network.BannedMacManager;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -80,13 +78,12 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 				Account account = getConnection().getAccount();
 				LoginServer.getInstance().sendPacket(new SM_MAC(account.getId(), macAddress));
 				LoginServer.getInstance().sendPacket(new SM_HDD_SERIAL(account.getId(), hddSerial));
-				if (LoggingConfig.LOG_ACCOUNTS_LOGIN)
-					LoginServer.getInstance().sendPacket(new SM_ACCOUNT_LOGIN_LOG(account.getId(), NetworkConfig.GAMESERVER_ID, System.currentTimeMillis(),
-						getConnection().getIP(), macAddress, hddSerial));
-				if (account.getAllowedHddSerial().isEmpty()) {
+				LoginServer.getInstance()
+					.sendPacket(new SM_ACCOUNT_LOGIN_LOG(account.getId(), System.currentTimeMillis(), getConnection().getIP(), macAddress, hddSerial));
+				if (account.getAllowedHddSerial() == null) {
 					if (SecurityConfig.HDD_SERIAL_LOCK_NEW_ACCOUNTS && !hddSerial.isEmpty()) {
 						account.setAllowedHddSerial(hddSerial);
-						LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account.getId(), hddSerial));
+						LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
 					}
 				} else if (!account.getAllowedHddSerial().equalsIgnoreCase(hddSerial)) {
 					if (SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_KICK) {

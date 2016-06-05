@@ -30,34 +30,14 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 	/**
 	 * Time of account creation, measured in milliseconds since 1.1.1970 UTC
 	 */
-	private long creationDate;
+	private final long creationDate;
 
-	/**
-	 * Access level
-	 */
-	private final byte accessLevel;
-
-	/**
-	 * Membership
-	 */
-	private final byte membership;
-
-	/**
-	 * TOLL
-	 */
+	private final byte accessLevel, membership;
 	private final long toll;
+	private final String allowedHddSerial;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param accountId
-	 * @param ok
-	 * @param accountName
-	 * @param accessLevel
-	 * @param membership
-	 * @param toll
-	 */
-	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership, long toll) {
+	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership, long toll,
+		String allowedHddSerial) {
 		this.accountId = accountId;
 		this.ok = ok;
 		this.accountName = accountName;
@@ -65,11 +45,9 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 		this.accessLevel = accessLevel;
 		this.membership = membership;
 		this.toll = toll;
+		this.allowedHddSerial = allowedHddSerial;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(1);
@@ -87,6 +65,7 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 			writeC(accessLevel);
 			writeC(membership);
 			writeQ(toll);
+			writeS(allowedHddSerial);
 		}
 	}
 }

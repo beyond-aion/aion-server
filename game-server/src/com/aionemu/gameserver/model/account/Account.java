@@ -57,7 +57,7 @@ public class Account implements Iterable<PlayerAccountData> {
 
 	private String securityToken = "";
 
-	private String allowedHddSerial = "";
+	private String allowedHddSerial;
 
 	private boolean isHacked = false;
 

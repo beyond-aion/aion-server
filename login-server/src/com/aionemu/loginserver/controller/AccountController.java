@@ -29,7 +29,7 @@ import com.aionemu.loginserver.utils.ExternalAuthUtil;
 import com.mysql.jdbc.StringUtils;
 
 /**
- * This class is resposible for controlling all account actions
+ * This class is responsible for controlling all account actions
  * 
  * @author KID, SoulKeeper
  * @modified Neon
@@ -91,9 +91,9 @@ public class AccountController {
 			/**
 			 * Send response to GameServer
 			 */
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), toll));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), toll, acc.getAllowedHddSerial()));
 		} else {
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, 0));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, 0, null));
 		}
 	}
 
@@ -309,13 +309,6 @@ public class AccountController {
 	 */
 	public static boolean refreshAccountsLastHDDSerial(int accountId, String hddSerial) {
 		return getAccountDAO().updateLastHDDSerial(accountId, hddSerial);
-	}
-
-	/**
-	 * 
-	 */
-	public AccountController() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

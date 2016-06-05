@@ -11,9 +11,11 @@ import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_AUTH;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_DISCONNECTED;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_LIST;
+import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_LOGIN_LOG;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_RECONNECT_KEY;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_TOLL_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_BAN;
+import com.aionemu.loginserver.network.gameserver.clientpackets.CM_CHANGE_ALLOWED_HDD_SERIAL;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_AUTH;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_CHARACTER;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_PONG;
@@ -81,6 +83,9 @@ public class GsPacketHandlerFactory {
 					case 6:
 						msg = new CM_BAN();
 						break;
+					case 7:
+						msg = new CM_ACCOUNT_LOGIN_LOG();
+						break;
 					case 8:
 						msg = new CM_GS_CHARACTER();
 						break;
@@ -107,6 +112,9 @@ public class GsPacketHandlerFactory {
 						break;
 					case 16:
 						msg = new CM_HDDBAN_CONTROL();
+						break;
+					case 17:
+						msg = new CM_CHANGE_ALLOWED_HDD_SERIAL();
 						break;
 					default:
 						unknownPacket(state, id);
