@@ -8,9 +8,11 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -139,6 +141,9 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 							responder.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, responder.getLifeStats().getMaxHp(), 0, SM_ATTACK_STATUS.LOG.REGULAR);
 							responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 							PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
+							if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
+								PvpMapService.getInstance().onShugoUsed();
+							}
 						} else {
 							PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
 						}
