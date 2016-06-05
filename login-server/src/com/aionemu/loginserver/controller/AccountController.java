@@ -19,6 +19,7 @@ import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
 import com.aionemu.loginserver.network.aion.SessionKey;
+import com.aionemu.loginserver.network.aion.serverpackets.SM_ACCOUNT_BANNED;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_ACCOUNT_KICK;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_SERVER_LIST;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_UPDATE_SESSION;
@@ -227,7 +228,8 @@ public class AccountController {
 
 		// if account is banned
 		if (AccountTimeController.isAccountPenaltyActive(account)) {
-			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
+			connection.sendPacket(new SM_ACCOUNT_BANNED());
+			return null;
 		}
 
 		// if account is restricted to some ip or mask

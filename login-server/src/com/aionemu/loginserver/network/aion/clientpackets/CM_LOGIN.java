@@ -102,6 +102,8 @@ public class CM_LOGIN extends AionClientPacket {
 
 		LoginConnection client = getConnection();
 		AionAuthResponse response = AccountController.login(user, password, client);
+		if (response == null) // e.g. when account is banned
+			return;
 		switch (response) {
 			case STR_L2AUTH_S_ALL_OK:
 				client.setState(State.AUTHED_LOGIN);
