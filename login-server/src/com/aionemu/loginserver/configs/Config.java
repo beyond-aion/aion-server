@@ -119,6 +119,12 @@ public class Config {
 	public static int PINGPONG_DELAY;
 
 	/**
+	 * Log successful gameserver logins including connection data to DB
+	 */
+	@Property(key = "loginserver.log.logins", defaultValue = "false")
+	public static boolean LOG_LOGINS;
+
+	/**
 	 * Load configs from files.
 	 */
 	public static void load() {

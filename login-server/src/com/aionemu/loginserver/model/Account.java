@@ -65,6 +65,11 @@ public class Account {
 	private String ipForce;
 
 	/**
+	 * The only HDD serial that is allowed for this account (must be checked on game server side)
+	 */
+	private String allowedHddSerial;
+
+	/**
 	 * AccountTime data
 	 */
 	private AccountTime accountTime;
@@ -264,6 +269,20 @@ public class Account {
 	 */
 	public void setIpForce(String ipForce) {
 		this.ipForce = ipForce;
+	}
+
+	/**
+	 * @return The HDD serial that this account is allowed to connect with (null if unset)
+	 */
+	public String getAllowedHddSerial() {
+		return allowedHddSerial;
+	}
+	
+	/**
+	 * Sets the HDD serial that this account is allowed to connect with
+	 */
+	public void setAllowedHddSerial(String allowedHddSerial) {
+		this.allowedHddSerial = allowedHddSerial;
 	}
 
 	/**

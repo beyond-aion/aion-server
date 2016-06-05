@@ -27,7 +27,7 @@ public class BruteForceProtector {
 			this.time = time;
 		}
 
-		public void increseCount() {
+		public void increaseCount() {
 			count++;
 		}
 
@@ -59,7 +59,7 @@ public class BruteForceProtector {
 				failedConnections.remove(ip);
 				return true;
 			} else
-				failed.increseCount();
+				failed.increaseCount();
 		}
 		return false;
 	}

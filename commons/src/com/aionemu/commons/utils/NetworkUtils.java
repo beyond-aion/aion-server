@@ -38,4 +38,11 @@ public class NetworkUtils {
 		}
 		return true;
 	}
+
+	/**
+	 * @return The IP as a human-readable string (i.e. 127.0.0.1).
+	 */
+	public static String intToIpString(int ip) {
+		return (ip & 0xFF) + "." + ((ip >> 8) & 0xFF) + "." + ((ip >> 16) & 0xFF) + "." + ((ip >> 24) & 0xFF);
+	}
 }

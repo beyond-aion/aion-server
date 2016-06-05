@@ -115,7 +115,7 @@ public class LoginServer {
 		try {
 			KeyGen.init();
 		} catch (Exception e) {
-			log.error("Failed initializing Key Generator. Reason: " + e.getMessage(), e);
+			log.error("Failed initializing Key Generator", e);
 			System.exit(ExitCode.CODE_ERROR);
 		}
 
