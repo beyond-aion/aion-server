@@ -92,8 +92,8 @@
     <bind_point npcid="730238" name="Binding_Stone_DF4_OP" price="24882"/><!-- Gelkmaros Fortress -->
     <bind_point npcid="730239" name="Binding_Stone_DF4_Town" price="26578"/><!-- Rhonnam Refugee Village -->
     <bind_point npcid="730240" name="Binding_Stone_DF4_Fort" price="-1"/><!-- 2.6 new -->
-    <bind_point npcid="730281" name="Binding_Stone_LF4_B5" price="-1"/><!-- 2.6 new -->
-    <bind_point npcid="730282" name="Binding_Stone_LF4_C4" price="-1"/><!-- 2.6 new -->
+    <bind_point npcid="730281" name="Binding_Stone_LF4_B5" price="39746"/><!-- Undirborg Observation Post -->
+    <bind_point npcid="730282" name="Binding_Stone_LF4_C4" price="42057"/><!-- Hanarkand Observation Post -->
     <bind_point npcid="730283" name="Binding_Stone_DF4_B6" price="38906"/><!-- Subterranea Obsvervation Post -->
     <bind_point npcid="730284" name="Binding_Stone_DF4_C3" price="41945"/><!-- Volgaltem Scout Post -->
 	<bind_point npcid="730844" name="Binding_Stone_LDF5_L" price="85185"/><!-- Kaisinel's Beacon -->

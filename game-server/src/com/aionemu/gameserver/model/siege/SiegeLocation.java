@@ -176,6 +176,8 @@ public class SiegeLocation implements ZoneHandler {
 	 * @return default true
 	 */
 	public boolean hasValidGpRewards() {
+		if (template.getSiegeRewards() == null)
+			return false;
 		for (SiegeReward sr : template.getSiegeRewards()) {
 			if (sr.getGpForWin() == 0 || sr.getGpForDefeat() == 0)
 				return false;

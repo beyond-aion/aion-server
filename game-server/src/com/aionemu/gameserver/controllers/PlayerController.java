@@ -18,6 +18,7 @@ import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -97,6 +98,7 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.reward.PromotionKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -679,6 +681,8 @@ public class PlayerController extends CreatureController<Player> {
 		SkillLearnService.learnNewSkills(player, minNewLevel, newLevel);
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
+		if (CustomConfig.ENABLE_PROMOTION_KIT)
+			PromotionKitService.getInstance().onLevelUp(player);
 	}
 
 	public void upgradePlayer() {

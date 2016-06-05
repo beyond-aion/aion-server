@@ -7,6 +7,7 @@ CREATE TABLE `account_data` (
   `name` varchar(45) DEFAULT NULL,
   `ext_auth_name` varchar(45) DEFAULT NULL,
   `password` varchar(65) NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activated` boolean NOT NULL DEFAULT TRUE, 
   `access_level` tinyint(3) NOT NULL DEFAULT '0',
   `membership` tinyint(3) NOT NULL DEFAULT '0',
@@ -15,6 +16,7 @@ CREATE TABLE `account_data` (
   `last_ip` varchar(20) DEFAULT NULL,
   `last_mac` varchar(20) NOT NULL DEFAULT 'xx-xx-xx-xx-xx-xx',
   `last_hdd_serial` varchar(100) DEFAULT NULL,
+  `allowed_hdd_serial` varchar(100) DEFAULT NULL,
   `ip_force` varchar(20) DEFAULT NULL,
   `expire` date DEFAULT NULL,
   `toll` bigint(13) NOT NULL DEFAULT '0',
@@ -125,4 +127,18 @@ CREATE TABLE IF NOT EXISTS `banned_hdd` (
   `serial` varchar(100) NOT NULL,
   `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `account_login_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `account_login_history`;
+CREATE TABLE `account_login_history` (
+  `account_id` int(11) NOT NULL,
+  `gameserver_id` tinyint(3) unsigned NOT NULL,
+  `date` timestamp NOT NULL,
+  `ip` varchar(20) DEFAULT NULL,
+  `mac` varchar(20) DEFAULT NULL,
+  `hdd_serial` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`account_id`, `date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

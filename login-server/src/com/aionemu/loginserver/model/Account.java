@@ -1,5 +1,7 @@
 package com.aionemu.loginserver.model;
 
+import java.sql.Timestamp;
+
 /**
  * This class represents Account model
  * 
@@ -21,6 +23,11 @@ public class Account {
 	 * Password hash
 	 */
 	private String passwordHash;
+
+	/**
+	 * Time of account creation
+	 */
+	private Timestamp creationDate;
 
 	/**
 	 * Access level of account 0 = regular user, > 0 = GM
@@ -56,6 +63,11 @@ public class Account {
 	 * The only ip that is allowed to this account
 	 */
 	private String ipForce;
+
+	/**
+	 * The only HDD serial that is allowed for this account (must be checked on game server side)
+	 */
+	private String allowedHddSerial;
 
 	/**
 	 * AccountTime data
@@ -117,6 +129,17 @@ public class Account {
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+
+	/**
+	 * @return The account creation date 
+	 */
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	/**
@@ -246,6 +269,20 @@ public class Account {
 	 */
 	public void setIpForce(String ipForce) {
 		this.ipForce = ipForce;
+	}
+
+	/**
+	 * @return The HDD serial that this account is allowed to connect with (null if unset)
+	 */
+	public String getAllowedHddSerial() {
+		return allowedHddSerial;
+	}
+	
+	/**
+	 * Sets the HDD serial that this account is allowed to connect with
+	 */
+	public void setAllowedHddSerial(String allowedHddSerial) {
+		this.allowedHddSerial = allowedHddSerial;
 	}
 
 	/**

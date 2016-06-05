@@ -216,7 +216,7 @@ public class NpcController extends CreatureController<Npc> {
 					float rewardAp = 1;
 
 					// Dmg percent correction
-					rewardXp *= percentage;
+					rewardXp *= percentage * player.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceExpMultiplier();
 					rewardDp *= percentage;
 					rewardAp *= percentage;
 

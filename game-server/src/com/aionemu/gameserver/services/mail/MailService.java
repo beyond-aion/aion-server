@@ -3,8 +3,6 @@ package com.aionemu.gameserver.services.mail;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +32,7 @@ import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
+import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -41,6 +40,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author kosyachok
@@ -368,6 +369,7 @@ public class MailService {
 			player.setMailbox(DAOManager.getDAO(MailDAO.class).loadPlayerMailbox(player));
 			PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
 			HousingBidService.getInstance().onPlayerLogin(player);
+			VeteranRewardService.getInstance().tryReward(player); // must ensure player mailbox is initialized first
 		}
 
 	}

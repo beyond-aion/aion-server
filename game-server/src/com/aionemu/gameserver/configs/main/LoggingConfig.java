@@ -60,7 +60,4 @@ public class LoggingConfig {
 
 	@Property(key = "gameserver.log.tampering", defaultValue = "false")
 	public static boolean LOG_TAMPERING;
-
-	@Property(key = "log.accounts.login", defaultValue = "false")
-	public static boolean LOG_ACCOUNTS_LOGIN;
 }

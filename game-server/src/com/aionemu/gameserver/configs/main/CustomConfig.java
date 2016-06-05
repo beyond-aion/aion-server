@@ -279,4 +279,10 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
 	public static float PVP_MAP_AP_MULTIPLIER;
+	
+	/**
+	 * Custom Reward Packages
+	 */
+	@Property(key = "gameserver.custom.promotion_kit.enable", defaultValue= "false")
+	public static boolean ENABLE_PROMOTION_KIT;
 }

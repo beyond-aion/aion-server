@@ -89,6 +89,7 @@
 			<xs:enumeration value="POTION" />
 			<xs:enumeration value="LESSER_POTIONS" />
 			<xs:enumeration value="POTION_50" />
+			<xs:enumeration value="ILLUSION_GODSTONE" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

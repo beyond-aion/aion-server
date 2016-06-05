@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SECURITY_TOKEN_REQUEST_STATUS;
-import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_CHANGE_SESSION_ID;
 
 /**
  * @author Artur
@@ -23,7 +21,7 @@ public class SecurityTokenService {
 		String token = MD5(account.getName() + System.currentTimeMillis());
 		account.setSecurityToken(token);
 		sendToken(con, account.getSecurityToken());
-		LoginServer.getInstance().sendPacket(new SM_CHANGE_SESSION_ID(account.getId(), account.getSecurityToken().substring(0, 16)));
+		//LoginServer.getInstance().sendPacket(new SM_CHANGE_SESSION_ID(account.getId(), account.getSecurityToken().substring(0, 16)));
 	}
 
 	public void sendToken(AionConnection con, String token) {

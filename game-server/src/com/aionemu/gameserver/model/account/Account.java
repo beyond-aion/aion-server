@@ -16,7 +16,7 @@ import javolution.util.FastTable;
  * <ul>
  * <li>account id</li>
  * <li>account name</li>
- * <li> {@link AccountTime account time info}</li>
+ * <li>{@link AccountTime account time info}</li>
  * <li>a list of {@link PlayerAccountData} objects each of which keeping information about player that must be available on character selection
  * screen.</li>
  * </ul>
@@ -30,6 +30,10 @@ public class Account implements Iterable<PlayerAccountData> {
 	private int id;
 	/** Unique name of this account */
 	private String name;
+	/**
+	 * Time of account creation, measured in milliseconds since 1.1.1970 0:00 UTC
+	 */
+	private long creationDate;
 	/**
 	 * Access level
 	 */
@@ -53,7 +57,7 @@ public class Account implements Iterable<PlayerAccountData> {
 
 	private String securityToken = "";
 
-	private String allowedHddSerial = "";
+	private String allowedHddSerial;
 
 	private boolean isHacked = false;
 
@@ -87,6 +91,17 @@ public class Account implements Iterable<PlayerAccountData> {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return The account creation date, measured in milliseconds since 1.1.1970 0:00 UTC
+	 */
+	public long getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(long creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public AccountTime getAccountTime() {
@@ -199,16 +214,10 @@ public class Account implements Iterable<PlayerAccountData> {
 		return players.size();
 	}
 
-	/**
-	 * Sorts the accounts on last online.
-	 */
 	public List<PlayerAccountData> getPlayerAccDataList() {
 		return FastTable.of(players.values());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<PlayerAccountData> iterator() {
 		return players.values().iterator();

@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.reward.RewardService;
+import com.aionemu.gameserver.services.reward.WebRewardService;
 
 /**
  * @author ginho1
@@ -24,6 +24,6 @@ public class CM_PLAYER_LISTENER extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		if (GSConfig.ENABLE_WEB_REWARDS)
-			RewardService.getInstance().verify(getConnection().getActivePlayer());
+			WebRewardService.getInstance().verify(getConnection().getActivePlayer());
 	}
 }

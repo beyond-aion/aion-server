@@ -54,8 +54,8 @@ public class AccountService {
 	 * @param membership
 	 * @return Account
 	 */
-	public static Account getAccount(int accountId, String accountName, AccountTime accountTime, byte accessLevel, byte membership, long toll,
-		String allowedHddSerial) {
+	public static Account getAccount(int accountId, String accountName, long creationDate, AccountTime accountTime, byte accessLevel,
+		byte membership, long toll, String allowedHddSerial) {
 		log.debug("[AS] request for account: " + accountId);
 
 		Account account = accountsMap.get(accountId);
@@ -65,6 +65,7 @@ public class AccountService {
 				accountsMap.put(accountId, account);
 		}
 		account.setName(accountName);
+		account.setCreationDate(creationDate);
 		account.setAccountTime(accountTime);
 		account.setAccessLevel(accessLevel);
 		account.setMembership(membership);
@@ -127,7 +128,7 @@ public class AccountService {
 			CharacterBanInfo cbi = DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(playerId);
 			PlayerAppearance appereance = appereanceDAO.load(playerId);
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerId);
-			//Load only equipment and its stones to display on character selection screen
+			// Load only equipment and its stones to display on character selection screen
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(playerId);
 
 			PlayerAccountData acData = new PlayerAccountData(playerCommonData, cbi, appereance, equipment, legionMember);
