@@ -34,8 +34,8 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
 	 * @param client
 	 *          client
 	 */
-	public CM_UPDATE_SESSION(ByteBuffer buf, LoginConnection client) {
-		super(buf, client, 0x08);
+	public CM_UPDATE_SESSION(ByteBuffer buf, LoginConnection client, int opCode) {
+		super(buf, client, opCode);
 	}
 
 	/**

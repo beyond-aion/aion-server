@@ -23,19 +23,10 @@ public class CM_SERVER_LIST extends AionClientPacket {
 	 */
 	private int loginOk;
 
-	/**
-	 * Constructs new instance of <tt>CM_SERVER_LIST </tt> packet.
-	 * 
-	 * @param buf
-	 * @param client
-	 */
-	public CM_SERVER_LIST(ByteBuffer buf, LoginConnection client) {
-		super(buf, client, 0x05);
+	public CM_SERVER_LIST(ByteBuffer buf, LoginConnection client, int opCode) {
+		super(buf, client, opCode);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		accountId = readD();
@@ -43,22 +34,16 @@ public class CM_SERVER_LIST extends AionClientPacket {
 		readD();// unk
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		LoginConnection con = getConnection();
 		if (con.getSessionKey().checkLogin(accountId, loginOk)) {
 			if (GameServerTable.getGameServers().size() == 0)
-				con.close(new SM_LOGIN_FAIL(AionAuthResponse.NO_GS_REGISTERED), false);
+				con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_NO_SERVER_LIST));
 			else
 				AccountController.loadGSCharactersCount(accountId);
 		} else {
-			/**
-			 * Session key is not ok - inform client that smth went wrong - dc client
-			 */
-			con.close(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR), false);
+			con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR));
 		}
 	}
 }

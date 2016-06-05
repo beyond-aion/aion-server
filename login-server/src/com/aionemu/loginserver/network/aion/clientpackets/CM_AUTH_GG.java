@@ -1,5 +1,7 @@
 package com.aionemu.loginserver.network.aion.clientpackets;
 
+import java.nio.ByteBuffer;
+
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.AionClientPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
@@ -27,13 +29,10 @@ public class CM_AUTH_GG extends AionClientPacket {
 	 * @param buf
 	 * @param client
 	 */
-	public CM_AUTH_GG(java.nio.ByteBuffer buf, LoginConnection client) {
-		super(buf, client, 0x07);
+	public CM_AUTH_GG(ByteBuffer buf, LoginConnection client, int opCode) {
+		super(buf, client, opCode);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		sessionId = readD();
@@ -44,9 +43,6 @@ public class CM_AUTH_GG extends AionClientPacket {
 		readB(0x0B);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		LoginConnection con = getConnection();
@@ -54,10 +50,7 @@ public class CM_AUTH_GG extends AionClientPacket {
 			con.setState(State.AUTHED_GG);
 			con.sendPacket(new SM_AUTH_GG(sessionId));
 		} else {
-			/**
-			 * Session id is not ok - inform client that smth went wrong - dc client
-			 */
-			con.close(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR), false);
+			con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR)); // Session id is not ok, notify and disconnect client
 		}
 	}
 }

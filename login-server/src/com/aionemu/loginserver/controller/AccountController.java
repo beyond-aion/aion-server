@@ -18,6 +18,7 @@ import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
 import com.aionemu.loginserver.network.aion.SessionKey;
+import com.aionemu.loginserver.network.aion.serverpackets.SM_ACCOUNT_KICK;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_SERVER_LIST;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_UPDATE_SESSION;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
@@ -149,7 +150,7 @@ public class AccountController {
 	public static AionAuthResponse login(String name, String password, LoginConnection connection) {
 		// if ip is banned
 		if (BannedIpController.isBanned(connection.getIP())) {
-			return AionAuthResponse.BAN_IP;
+			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
 		String accountName = name;
@@ -160,23 +161,23 @@ public class AccountController {
 
 			// if error during auth server connection
 			if (auth == null) {
-				return AionAuthResponse.ACCOUNT_SERVER_DOWN;
+				return AionAuthResponse.STR_L2AUTH_S_ACCOUNTCACHESERVER_DOWN;
 			}
 
 			// if received no auth state for account
 			if (auth.getAuthState() == null) {
-				return AionAuthResponse.AUTHORIZATION_ERROR4;
+				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
 			}
 
 			AionAuthResponse response = AionAuthResponse.getResponseById(auth.getAuthState());
 
 			// if received invalid auth state
 			if (response == null) {
-				return AionAuthResponse.AUTHORIZATION_ERROR4;
+				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
 			}
 
 			switch (response) {
-				case AUTHED:
+				case STR_L2AUTH_S_ALL_OK:
 					// name for this account as sent by external auth server
 					accountName = auth.getIdentifier();
 					break;
@@ -188,7 +189,7 @@ public class AccountController {
 
 		// if no or empty account name
 		if (StringUtils.isNullOrEmpty(accountName)) {
-			return AionAuthResponse.FAILED_ACCOUNT_INFO;
+			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
 		}
 
 		Account account = loadAccount(accountName);
@@ -200,52 +201,50 @@ public class AccountController {
 
 		// if account not found and not created
 		if (account == null) {
-			return AionAuthResponse.NO_SUCH_ACCOUNT;
+			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
 		}
 
 		// if server is under maintenance and account has not the required access level
 		if (Config.MAINTENANCE_MOD && account.getAccessLevel() < Config.MAINTENANCE_MOD_GMLEVEL) {
-			return AionAuthResponse.GM_ONLY;
+			return AionAuthResponse.STR_L2AUTH_S_SEVER_CHECK;
 		}
 
 		// if not external authentication, verify password hash from database
 		if (!Config.AUTH_EXTERNAL && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
-			return AionAuthResponse.INVALID_PASSWORD;
+			return AionAuthResponse.STR_L2AUTH_S_INCORRECT_PWD;
 		}
 
 		// if account is not activated
 		if (account.getActivated() != 1) {
-			return AionAuthResponse.INVALID_PASSWORD;
+			return AionAuthResponse.STR_L2AUTH_S_AGREE_GAME;
 		}
 
 		// if account expired
 		if (AccountTimeController.isAccountExpired(account)) {
-			return AionAuthResponse.TIME_EXPIRED2;
+			return AionAuthResponse.STR_L2AUTH_S_TIME_EXHAUSTED;
 		}
 
 		// if account is banned
 		if (AccountTimeController.isAccountPenaltyActive(account)) {
-			return AionAuthResponse.BAN_IP;
+			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
 		// if account is restricted to some ip or mask
-		if (account.getIpForce() != null) {
-			if (!NetworkUtils.checkIPMatching(account.getIpForce(), connection.getIP())) {
-				return AionAuthResponse.BAN_IP;
-			}
+		if (account.getIpForce() != null && !NetworkUtils.checkIPMatching(account.getIpForce(), connection.getIP())) {
+			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
 		// Do not allow to login two times with same account
 		synchronized (AccountController.class) {
 			if (GameServerTable.kickAccountFromGameServer(account.getId(), true))
-				return AionAuthResponse.ALREADY_LOGGED_IN;
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 
 			// If someone is at loginserver, he should be disconnected
 			if (accountsOnLS.containsKey(account.getId())) {
 				LoginConnection aionConnection = accountsOnLS.remove(account.getId());
 
-				aionConnection.close();
-				return AionAuthResponse.ALREADY_LOGGED_IN;
+				aionConnection.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 			}
 			connection.setAccount(account);
 			accountsOnLS.put(account.getId(), connection);
@@ -258,7 +257,7 @@ public class AccountController {
 		// last mac is updated after receiving packet from gameserver
 		getAccountDAO().updateMembership(account.getId());
 
-		return AionAuthResponse.AUTHED;
+		return AionAuthResponse.STR_L2AUTH_S_ALL_OK;
 	}
 
 	/**
@@ -273,7 +272,7 @@ public class AccountController {
 
 			if (accountsOnLS.containsKey(accountId)) {
 				LoginConnection conn = accountsOnLS.remove(accountId);
-				conn.close();
+				conn.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
 			}
 		}
 	}

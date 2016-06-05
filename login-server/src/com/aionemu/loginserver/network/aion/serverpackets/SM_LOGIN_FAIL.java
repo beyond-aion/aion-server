@@ -27,6 +27,6 @@ public class SM_LOGIN_FAIL extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(LoginConnection con) {
-		writeD(response.getMessageId());
+		writeD(response.getId());
 	}
 }
