@@ -12,6 +12,7 @@ import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.model.Account;
+import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.model.ExternalAuth;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
@@ -287,7 +288,10 @@ public class AccountController {
 	public static Account loadAccount(String name) {
 		Account account = getAccountDAO().getAccount(name);
 		if (account != null) {
-			account.setAccountTime(getAccountTimeDAO().getAccountTime(account.getId()));
+			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+			if (accTime == null)
+				throw new NullPointerException("Account Time for account " + account + " is null");
+			account.setAccountTime(accTime);
 		}
 		return account;
 	}
@@ -295,7 +299,10 @@ public class AccountController {
 	public static Account loadAccount(int id) {
 		Account account = getAccountDAO().getAccount(id);
 		if (account != null) {
-			account.setAccountTime(getAccountTimeDAO().getAccountTime(id));
+			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+			if (accTime == null)
+				throw new NullPointerException("Account Time for account " + account + " is null");
+			account.setAccountTime(accTime);
 		}
 		return account;
 	}
@@ -332,15 +339,6 @@ public class AccountController {
 	 */
 	private static AccountDAO getAccountDAO() {
 		return DAOManager.getDAO(AccountDAO.class);
-	}
-
-	/**
-	 * Returns {@link com.aionemu.loginserver.dao.AccountTimeDAO}, just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.AccountTimeDAO}
-	 */
-	private static AccountTimeDAO getAccountTimeDAO() {
-		return DAOManager.getDAO(AccountTimeDAO.class);
 	}
 
 	/**

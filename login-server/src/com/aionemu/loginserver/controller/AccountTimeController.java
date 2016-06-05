@@ -24,13 +24,6 @@ public class AccountTimeController {
 	public static void updateOnLogin(Account account) {
 		AccountTime accountTime = account.getAccountTime();
 
-		/**
-		 * It seems the account was just created, so new accountTime should be created too
-		 */
-		if (accountTime == null) {
-			accountTime = new AccountTime();
-		}
-
 		int lastLoginDay = getDays(accountTime.getLastLoginTime().getTime());
 		int currentDay = getDays(System.currentTimeMillis());
 
@@ -76,8 +69,7 @@ public class AccountTimeController {
 	 */
 	public static boolean isAccountExpired(Account account) {
 		AccountTime accountTime = account.getAccountTime();
-
-		return accountTime != null && accountTime.getExpirationTime() != null && accountTime.getExpirationTime().getTime() < System.currentTimeMillis();
+		return accountTime.getExpirationTime() != null && accountTime.getExpirationTime().getTime() < System.currentTimeMillis();
 	}
 
 	/**
@@ -88,9 +80,8 @@ public class AccountTimeController {
 	 */
 	public static boolean isAccountPenaltyActive(Account account) {
 		AccountTime accountTime = account.getAccountTime();
-
 		// 1000 is 'infinity' value
-		return accountTime != null && accountTime.getPenaltyEnd() != null
+		return accountTime.getPenaltyEnd() != null
 			&& (accountTime.getPenaltyEnd().getTime() == 1000 || accountTime.getPenaltyEnd().getTime() >= System.currentTimeMillis());
 	}
 

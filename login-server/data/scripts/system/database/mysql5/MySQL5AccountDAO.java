@@ -12,6 +12,7 @@ import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.model.Account;
+import com.aionemu.loginserver.model.AccountTime;
 
 /**
  * MySQL5 Account DAO implementation
@@ -173,6 +174,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 
 		if (result > 0) {
 			account.setId(getAccountId(account.getName()));
+			account.setAccountTime(new AccountTime());
 			account.setCreationDate(new Timestamp(System.currentTimeMillis()));
 		}
 
