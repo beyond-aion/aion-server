@@ -66,8 +66,7 @@ public class GameServerTable {
 	 *          server password that is specified configs, used to check if gs can auth on ls
 	 * @return GsAuthResponse
 	 */
-	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] ip,
-		int port, int maxPlayers, String password) {
+	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] ip, int port, int maxPlayers, String password) {
 		GameServerInfo gsi = gameservers.get(requestedId);
 
 		/**
@@ -130,16 +129,20 @@ public class GameServerTable {
 	/**
 	 * Helper method, used to kick account from any gameServer if it's logged in
 	 * 
-	 * @param account
-	 *          account to kick
+	 * @param accountId
+	 *          - account that must be kicked at GameServer side
+	 * @param notifyDoubleLogin
+	 *          - whether to notify the player that he got kicked due to another client logging in
+	 * @return True, if account was kicked. False, if he was not on any gameserver.
 	 */
-	public static void kickAccountFromGameServer(Account account) {
+	public static boolean kickAccountFromGameServer(int accountId, boolean notifyDoubleLogin) {
 		for (GameServerInfo gsi : getGameServers()) {
-			if (gsi.isAccountOnGameServer(account.getId())) {
-				gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(account.getId()));
-				break;
+			if (gsi.isAccountOnGameServer(accountId)) {
+				gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**

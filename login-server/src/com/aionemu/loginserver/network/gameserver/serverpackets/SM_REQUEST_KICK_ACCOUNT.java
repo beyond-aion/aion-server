@@ -6,30 +6,28 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
 /**
  * In this packet LoginSerer is requesting kicking account from GameServer.
  * 
- * @author -Nemesiss-
+ * @author -Nemesiss-, Neon
  */
 public class SM_REQUEST_KICK_ACCOUNT extends GsServerPacket {
 
-	/**
-	 * Account that must be kicked at GameServer side.
-	 */
 	private final int accountId;
+	private final boolean notifyDoubleLogin;
 
 	/**
-	 * Constructor.
-	 * 
 	 * @param accountId
+	 *          - account that must be kicked at GameServer side
+	 * @param notifyDoubleLogin
+	 *          - whether to notify the player that he got kicked due to another client logging in
 	 */
-	public SM_REQUEST_KICK_ACCOUNT(int accountId) {
+	public SM_REQUEST_KICK_ACCOUNT(int accountId, boolean notifyDoubleLogin) {
 		this.accountId = accountId;
+		this.notifyDoubleLogin = notifyDoubleLogin;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(2);
 		writeD(accountId);
+		writeC(notifyDoubleLogin ? 1 : 0);
 	}
 }

@@ -23,7 +23,6 @@ import com.aionemu.loginserver.network.aion.serverpackets.SM_UPDATE_SESSION;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_AUTH_RESPONSE;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_CHARACTER_RESPONSE;
-import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 import com.aionemu.loginserver.utils.AccountUtils;
 import com.aionemu.loginserver.utils.ExternalAuthUtil;
 import com.mysql.jdbc.StringUtils;
@@ -238,10 +237,8 @@ public class AccountController {
 
 		// Do not allow to login two times with same account
 		synchronized (AccountController.class) {
-			if (GameServerTable.isAccountOnAnyGameServer(account)) {
-				GameServerTable.kickAccountFromGameServer(account);
+			if (GameServerTable.kickAccountFromGameServer(account.getId(), true))
 				return AionAuthResponse.ALREADY_LOGGED_IN;
-			}
 
 			// If someone is at loginserver, he should be disconnected
 			if (accountsOnLS.containsKey(account.getId())) {
@@ -272,43 +269,13 @@ public class AccountController {
 	 */
 	public static void kickAccount(int accountId) {
 		synchronized (AccountController.class) {
-			for (GameServerInfo gsi : GameServerTable.getGameServers()) {
-				if (gsi.isAccountOnGameServer(accountId)) {
-					gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId));
-					break;
-				}
-			}
+			GameServerTable.kickAccountFromGameServer(accountId, false);
+
 			if (accountsOnLS.containsKey(accountId)) {
 				LoginConnection conn = accountsOnLS.remove(accountId);
 				conn.close();
 			}
 		}
-	}
-
-	/**
-	 * Refresh last_mac of account
-	 * 
-	 * @param accountId
-	 *          id of account
-	 * @param adress
-	 *          new macAdress
-	 * @return refreshed or not
-	 */
-	public static boolean refreshAccountsLastMac(int accountId, String address) {
-		return getAccountDAO().updateLastMac(accountId, address);
-	}
-
-	/**
-	 * Refresh last_hdd_serial of account
-	 * 
-	 * @param accountId
-	 *          id of account
-	 * @param adress
-	 *          new macAdress
-	 * @return refreshed or not
-	 */
-	public static boolean refreshAccountsLastHDDSerial(int accountId, String hddSerial) {
-		return getAccountDAO().updateLastHDDSerial(accountId, hddSerial);
 	}
 
 	/**

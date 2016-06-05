@@ -6,7 +6,7 @@ import com.aionemu.gameserver.network.loginserver.LsClientPacket;
 /**
  * This packet is request kicking player.
  * 
- * @author -Nemesiss-
+ * @author -Nemesiss-, Neon
  */
 public class CM_REQUEST_KICK_ACCOUNT extends LsClientPacket {
 
@@ -18,14 +18,16 @@ public class CM_REQUEST_KICK_ACCOUNT extends LsClientPacket {
 	 * account id of account that login server request to kick.
 	 */
 	private int accountId;
+	private boolean notifyDoubleLogin;
 
 	@Override
 	public void readImpl() {
 		accountId = readD();
+		notifyDoubleLogin = readC() == 1;
 	}
 
 	@Override
 	public void runImpl() {
-		LoginServer.getInstance().kickAccount(accountId);
+		LoginServer.getInstance().kickAccount(accountId, notifyDoubleLogin);
 	}
 }

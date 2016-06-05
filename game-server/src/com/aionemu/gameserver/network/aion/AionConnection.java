@@ -299,17 +299,21 @@ public class AionConnection extends AConnection {
 	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
-	 *          Packet that will be send before closing.
+	 *          Packet that will be sent before closing. If closePacket is null, regular {@link #close()} will be called instead.
 	 */
 	public final void close(AionServerPacket closePacket) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
+		if (closePacket == null) {
+			close();
+		} else {
+			synchronized (guard) {
+				if (isWriteDisabled())
+					return;
 
-			pendingClose = true;
-			sendMsgQueue.clear();
-			sendMsgQueue.addLast(closePacket);
-			enableWriteInterest();
+				pendingClose = true;
+				sendMsgQueue.clear();
+				sendMsgQueue.addLast(closePacket);
+				enableWriteInterest();
+			}
 		}
 	}
 
@@ -405,8 +409,8 @@ public class AionConnection extends AConnection {
 
 	@Override
 	public String toString() {
-		return "AionConnection [state=" + state + ", account=" + account + ", activePlayer=" + activePlayer.get() + ", macAddress=" + macAddress + ", getIP()="
-			+ getIP() + "]";
+		return "AionConnection [state=" + state + ", account=" + account + ", activePlayer=" + activePlayer.get() + ", macAddress=" + macAddress
+			+ ", getIP()=" + getIP() + "]";
 	}
 
 	private class PingChecker implements Runnable {
@@ -425,7 +429,8 @@ public class AionConnection extends AConnection {
 
 		@Override
 		public void run() {
-			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL + 60 * 1000) { // close connection if at least 1 minute overdue
+			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL + 60 * 1000) { // close connection if at least 1 minute
+																																																				// overdue
 				log.info("Closing hanged up connection of client: " + AionConnection.this);
 				close();
 				stop();

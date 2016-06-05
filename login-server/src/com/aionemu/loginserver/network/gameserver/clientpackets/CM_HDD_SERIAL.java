@@ -2,7 +2,8 @@ package com.aionemu.loginserver.network.gameserver.clientpackets;
 
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.loginserver.controller.AccountController;
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
 /**
@@ -21,8 +22,7 @@ public class CM_HDD_SERIAL extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		if (!AccountController.refreshAccountsLastHDDSerial(accountId, hddSerial))
-			LoggerFactory.getLogger(CM_HDD_SERIAL.class).error(
-				"[WARN] We just weren't able to update account_data.last_hdd_serial for accountId " + accountId);
+		if (!DAOManager.getDAO(AccountDAO.class).updateLastHDDSerial(accountId, hddSerial))
+			LoggerFactory.getLogger(CM_HDD_SERIAL.class).warn("Couldn't update account_data.last_hdd_serial for accountId " + accountId);
 	}
 }
