@@ -20,8 +20,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_L2AUTH_LOGIN_CHECK;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECONNECT_KEY;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_AUTH;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_DISCONNECTED;
@@ -221,8 +221,7 @@ public class LoginServer {
 			if (pcd.isOnline()) {
 				Player player = World.getInstance().findPlayer(accountData.getPlayerCommonData().getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {
-					// kick
-					player.getClientConnection().close(new SM_QUIT_RESPONSE());
+					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN()); // kick
 					PlayerLeaveWorldService.leaveWorld(player);
 				}
 				return false;
@@ -260,14 +259,12 @@ public class LoginServer {
 
 	/**
 	 * This method is called by CM_REQUEST_KICK_ACCOUNT LoginServer packets to request GameServer to disconnect client with given account id.
-	 * 
-	 * @param accountId
 	 */
-	public void kickAccount(int accountId) {
+	public void kickAccount(int accountId, boolean notifyDoubleLogin) {
 		AionConnection client = loggedInAccounts.get(accountId);
 		if (client != null) {
 			log.info("Kicking account ID " + accountId + " by LS request.");
-			client.close(/* closePacket */);
+			client.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
 		}
 	}
 

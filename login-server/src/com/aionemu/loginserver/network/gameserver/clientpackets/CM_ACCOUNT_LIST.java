@@ -30,7 +30,7 @@ public class CM_ACCOUNT_LIST extends GsClientPacket {
 		for (int id : accountIds) {
 			Account a = AccountController.loadAccount(id);
 			if (GameServerTable.isAccountOnAnyGameServer(a)) {
-				getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(id));
+				getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(id, false));
 				continue;
 			}
 			getConnection().getGameServerInfo().addAccountToGameServer(a);

@@ -15,6 +15,6 @@ public class CM_CHANGE_ALLOWED_HDD_SERIAL extends GsClientPacket {
 	}
 
 	protected void runImpl() {
-		((AccountDAO) DAOManager.getDAO(AccountDAO.class)).updateAllowedHDDSerial(accountId, hddSerial);
+		DAOManager.getDAO(AccountDAO.class).updateAllowedHDDSerial(accountId, hddSerial);
 	}
 }
