@@ -31269,68 +31269,68 @@
 	<decomposable item_id="188053687" name="Test Item" />
 	<decomposable item_id="188053688" name="Inggison Lesser Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="3" max_count="5" />
-			<item id="186000399" name="Honorable Conqueror's Mark" race="ASMODIANS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="10" max_count="15" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ASMODIANS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="3" max_count="5" />
+			<item id="186000238" name="Conqueror's Mark" min_count="10" max_count="15" />
 			<item id="186000236" name="Blood Mark" race="ASMODIANS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" race="ASMODIANS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ASMODIANS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053689" name="Inggison Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="6" max_count="10" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="2" race="ASMODIANS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="20" max_count="30" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="6" race="ASMODIANS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="6" max_count="10" />
+			<item id="186000238" name="Conqueror's Mark" min_count="20" max_count="30" />
 			<item id="186000236" name="Blood Mark" min_count="2" race="ASMODIANS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="2" race="ASMODIANS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="6" race="ASMODIANS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053690" name="Inggison Greater Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="11" max_count="15" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ASMODIANS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="31" max_count="45" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ASMODIANS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="11" max_count="15" />
+			<item id="186000238" name="Conqueror's Mark" min_count="31" max_count="45" />
 			<item id="186000236" name="Blood Mark" min_count="3" race="ASMODIANS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ASMODIANS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ASMODIANS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053691" name="Gelkmaros Lesser Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="3" max_count="5" />
-			<item id="186000399" name="Honorable Conqueror's Mark" race="ELYOS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="10" max_count="15" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ELYOS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="3" max_count="5" />
+			<item id="186000238" name="Conqueror's Mark" min_count="10" max_count="15" />
 			<item id="186000236" name="Blood Mark" race="ELYOS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" race="ELYOS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ELYOS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053692" name="Gelkmaros Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="6" max_count="10" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="2" race="ELYOS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="20" max_count="30" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="6" race="ELYOS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="6" max_count="10" />
+			<item id="186000238" name="Conqueror's Mark" min_count="20" max_count="30" />
 			<item id="186000236" name="Blood Mark" min_count="2" race="ELYOS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="2" race="ELYOS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="6" race="ELYOS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053693" name="Gelkmaros Greater Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="11" max_count="15" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ELYOS" />
+			<item id="186000238" name="Conqueror's Mark" min_count="35" max_count="45" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ELYOS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="11" max_count="15" />
+			<item id="186000238" name="Conqueror's Mark" min_count="35" max_count="45" />
 			<item id="186000236" name="Blood Mark" min_count="3" race="ELYOS" />
-			<item id="186000399" name="Honorable Conqueror's Mark" min_count="3" race="ELYOS" />
+			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ELYOS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053694" name="Ride Box of Conquest">
@@ -31398,7 +31398,7 @@
 	</decomposable>
 	<decomposable item_id="188053697" name="Bundle of Honor and Conquest">
 		<items>
-			<item id="186000238" name="Conqueror's Mark" min_count="1" max_count="100" />
+			<item id="186000238" name="Conqueror's Mark" min_count="10" max_count="100" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053698" name="Honorable Weapon Box of Conquest">
