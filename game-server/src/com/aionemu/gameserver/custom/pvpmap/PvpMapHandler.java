@@ -14,6 +14,7 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
@@ -25,6 +26,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
@@ -37,11 +39,13 @@ import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.spawnengine.StaticDoorSpawnManager;
+import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -51,13 +55,13 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class PvpMapHandler extends GeneralInstanceHandler {
 
+	private static final int SHUGO_SPAWN_RATE = 30;
 	private final Map<Integer, WorldPosition> origins = new FastMap<>();
 	private final Map<Integer, Long> joinOrLeaveTime = new FastMap<>();
 	private final List<WorldPosition> respawnLocations = new FastTable<>();
 	private final List<WorldPosition> supplyPositions = new FastTable<>();
 	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private Future<?> supplyTask, despawnTask, observationTask;
-	private byte stage = 1;
 
 	public PvpMapHandler() {
 		super();
@@ -73,7 +77,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		}
 		addRespawnLocations();
 		startObservationTask();
-		spawnShugo();
 		startSupplyTask();
 		canJoin.set(true);
 	}
@@ -98,13 +101,23 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		}
 	}
 
-	private void spawnShugo() {
-		// TODO
+	private void spawnShugo(Player player) {
+		if (canJoin.get() &&  Rnd.get(1, 100) <= SHUGO_SPAWN_RATE) {
+			Npc oldShugo = instance.getNpc(833543);
+			if (oldShugo != null) {
+				oldShugo.getController().onDelete();
+			}
+			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
+			float x = player.getX() + (float) (Math.cos(radian) * 2);
+			float y = player.getY() + (float) (Math.sin(radian) * 2);
+			float z =  GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), 0.5f, instanceId);
+			spawn(833543, x, y, z, MathUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
+		}
 	}
 
 	// spawns a supply chest every ~6min if there are enough players on the map
 	private void startSupplyTask() {
-		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::scheduleSupplySpawn, 120000, 90000);
+		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::scheduleSupplySpawn, 20000, 90000);
 	}
 
 	private void scheduleSupplySpawn() {
@@ -233,6 +246,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		if (canJoin.get()) {
+			if (lastAttacker instanceof Player && !lastAttacker.equals(player)) {
+				spawnShugo((Player) lastAttacker);
+			}
 			PvpService.getInstance().doReward(player, CustomConfig.PVP_MAP_AP_MULTIPLIER);
 			announceDeath(player);
 			PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 6));
@@ -307,14 +323,15 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		byte asmodians = 0;
 		byte elyos = 0;
 		for (Player player : instance.getPlayersInside()) {
-			if (asmodians > 1 && elyos > 1) {
-				return true;
-			} else if (player.isGM()) {
+			if (player.isGM()) {
 				continue;
-			}else if (player.getRace() == Race.ASMODIANS) {
+			} else if (player.getRace() == Race.ASMODIANS) {
 				asmodians++;
 			} else {
 				elyos++;
+			}
+			if (asmodians > 1 && elyos > 1) {
+				return true;
 			}
 		}
 		return false;
@@ -350,6 +367,10 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private synchronized void removePlayer(Player p) {
 		updateJoinOrLeaveTime(p);
+		if (p.getLifeStats().isAlreadyDead()) {
+			PacketSendUtility.broadcastPacket(p, new SM_EMOTION(p, EmotionType.RESURRECT), true);
+			PlayerReviveService.revive(p, 25, 25, true, 0);
+		}
 		WorldPosition position = origins.get(p.getObjectId());
 		if (position != null && !SiegeService.getInstance().isNearVulnerableFortress(position.getMapId(), position.getX(), position.getY(), position.getZ())) {
 			TeleportService2.teleportTo(p, position);
@@ -370,15 +391,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public boolean isOnMap(Creature creature) {
 		if (creature instanceof Player) {
 			return instance.getPlayer(creature.getObjectId()) != null;
-		} else if (creature instanceof Npc) {
-			return instance.getNpcByObjId(creature.getObjectId()) != null;
 		} else {
-			return false;
+			return creature instanceof Npc && instance.getNpcByObjId(creature.getObjectId()) != null;
 		}
-	}
-
-	public void onShugoUsed() {
-		// TODO
 	}
 
 	private void addRespawnLocations() {

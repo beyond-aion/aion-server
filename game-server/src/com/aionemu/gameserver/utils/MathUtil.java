@@ -418,10 +418,18 @@ public class MathUtil {
 	}
 
 	/**
+	 * @return The heading for the specified x and y coordinates
+	 * to look towards the specified x2 and y2 coordinates.
+	 */
+	public static byte getHeadingTowards(float x, float y, float x2, float y2) {
+		return convertDegreeToHeading(calculateAngleFrom(x, y, x2, y2));
+	}
+
+	/**
 	 * @return The heading for obj1 to look towards the specified x and y coordinates.
 	 */
 	public static byte getHeadingTowards(VisibleObject obj1, float x, float y) {
-		return convertDegreeToHeading(calculateAngleFrom(obj1.getX(), obj1.getY(), x, y));
+		return getHeadingTowards(obj1.getX(), obj1.getY(), x, y);
 	}
 
 	/**

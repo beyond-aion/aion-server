@@ -3,6 +3,7 @@ package ai;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
@@ -12,7 +13,6 @@ import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -26,6 +26,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -38,13 +39,35 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 	private Map<Integer, Long> playersInSight = new ConcurrentHashMap<>();
 	private final int price = 50000; // = 50.000 Kinah
 	private final int maxCooldownTime = 3000; // = 5min -> skills with a cd >5min are ignored
+	private Future<?> despawnSchedule;
+
+	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
+			despawnSchedule = ThreadPoolManager.getInstance().schedule(() ->
+					getOwner().getController().onDelete(), 30000);
+			ThreadPoolManager.getInstance().schedule(() -> {
+			for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
+				if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) ||
+						playersInSight.containsKey(p.getObjectId()))
+					continue;
+				if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
+					playersInSight.put(p.getObjectId(), System.currentTimeMillis());
+					PacketSendUtility.sendPacket(p,
+							new SM_MESSAGE(getOwner(), String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
+				}
+			}
+			}, 1000);
+		}
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {
 		playersInSight.values().removeIf(time -> System.currentTimeMillis() > time + 300000); // remove players if they are already 5 mins+ in the map
 		if (player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_IN_DEAD_STATE());
-		else if (player.getController().isInCombat())
+		else if (!PvpMapService.getInstance().isOnPvPMap(player) && player.getController().isInCombat())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());
 		else if (player.isTransformed() && player.getTransformModel().getType() == TransformType.AVATAR)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
@@ -142,7 +165,7 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 							responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 							PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
 							if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
-								PvpMapService.getInstance().onShugoUsed();
+								getOwner().getController().onDelete();
 							}
 						} else {
 							PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
@@ -151,5 +174,13 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void handleDespawned() {
+		if (despawnSchedule != null && !despawnSchedule.isCancelled()) {
+			despawnSchedule.cancel(false);
+		}
+		super.handleDespawned();
 	}
 }
