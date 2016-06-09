@@ -117,7 +117,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	// spawns a supply chest every ~6min if there are enough players on the map
 	private void startSupplyTask() {
-		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::scheduleSupplySpawn, 20000, 90000);
+		supplyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::scheduleSupplySpawn, 120000, 400000);
 	}
 
 	private void scheduleSupplySpawn() {
