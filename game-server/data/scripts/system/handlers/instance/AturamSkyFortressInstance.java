@@ -64,7 +64,6 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				spawn(282280, 581.1f, 401.3544f, 648.6401f, (byte) 9);
 				break;
 			case 217373:
-				doors.get(26).setOpen(true);
 				spawn(730375, 374.85f, 424.32f, 653.52f, (byte) 0);
 				break;
 			case 701043:
