@@ -169,9 +169,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					int cancelRate = skill.getSkillTemplate().getCancelRate();
 					if (cancelRate >= 99999) {
 						cancelCurrentSkill(attacker);
-					} else if (cancelRate <= 0 || (getOwner() instanceof Npc) && ((Npc) getOwner()).isBoss()) {
-						return;
-					} else {
+					} else if (cancelRate > 0 && !(getOwner() instanceof Npc && ((Npc) getOwner()).isBoss())){
 						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
 						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
