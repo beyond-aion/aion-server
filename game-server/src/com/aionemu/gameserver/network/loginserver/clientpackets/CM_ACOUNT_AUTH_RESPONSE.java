@@ -54,7 +54,7 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 	/**
 	 * Allowed HDD serial
 	 */
-	private String allowedHddSerial = "";
+	private String allowedHddSerial;
 
 	@Override
 	public void readImpl() {
@@ -72,8 +72,7 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 			accessLevel = readSC();
 			membership = readSC();
 			toll = readQ();
-
-			// allowedHddSerial = readS();
+			allowedHddSerial = readS();
 		}
 	}
 

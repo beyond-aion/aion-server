@@ -52,6 +52,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setLastIp(rs.getString("last_ip"));
 				account.setLastMac(rs.getString("last_mac"));
 				account.setIpForce(rs.getString("ip_force"));
+				account.setAllowedHddSerial(rs.getString("allowed_hdd_serial"));
 			}
 		} catch (SQLException e) {
 			log.error("Can't select account with name: " + name, e);
@@ -86,6 +87,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account.setLastIp(rs.getString("last_ip"));
 				account.setLastMac(rs.getString("last_mac"));
 				account.setIpForce(rs.getString("ip_force"));
+				account.setAllowedHddSerial(rs.getString("allowed_hdd_serial"));
 			}
 		} catch (SQLException e) {
 			log.error("Can't select account with name: " + id, e);
@@ -320,6 +322,19 @@ public class MySQL5AccountDAO extends AccountDAO {
 			log.error("Some crap, can't set int parameter to PreparedStatement", e);
 		}
 		DB.executeUpdateAndClose(statement);
+	}
+
+	@Override
+	public boolean updateAllowedHDDSerial(int accountId, String hddSerial) {
+		return DB.insertUpdate("UPDATE `account_data` SET `allowed_hdd_serial` = ? WHERE `id` = ?", new IUStH() {
+
+			@Override
+			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+				preparedStatement.setString(1, hddSerial);
+				preparedStatement.setInt(2, accountId);
+				preparedStatement.execute();
+			}
+		});
 	}
 
 	/**

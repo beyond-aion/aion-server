@@ -123,6 +123,11 @@ public abstract class AccountDAO implements DAO {
 	public abstract void deleteInactiveAccounts(int daysOfInactivity);
 
 	/**
+	 * Set the HDD serial that's allowed to connect to this account (empty or null means no restrictions)
+	 */
+	public abstract boolean updateAllowedHDDSerial(int accountId, String hddSerial);
+
+	/**
 	 * Returns uniquire class name for all implementations
 	 * 
 	 * @return uniquire class name for all implementations

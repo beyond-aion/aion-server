@@ -167,6 +167,9 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_PERMISSION_TO_CREATE));
 			return;
 		}
+
+		AccountService.removeDeletedCharacters(account);
+
 		if (account.getMembership() >= MembershipConfig.CHARACTER_ADDITIONAL_ENABLE) {
 			if (MembershipConfig.CHARACTER_ADDITIONAL_COUNT <= account.size()) {
 				client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_SERVER_LIMIT_EXCEEDED));
@@ -215,7 +218,6 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 				}
 			}
 		}
-		AccountService.removeDeletedCharacters(account);
 		Player player = PlayerService.newPlayer(playerCommonData, playerAppearance, account);
 
 		if (!PlayerService.storeNewPlayer(player, account.getName(), account.getId())) {

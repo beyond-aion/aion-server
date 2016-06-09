@@ -319,7 +319,7 @@
 	<!-- Triniel Arena -->
 	<portal_loc world_id="320090000" loc_id="3200900" x="276" y="293" z="163"/>
 	<!-- Azoturan Fortress -->
-	<portal_loc world_id="310100000" loc_id="3101000" x="304.16013" y="323.43713" z="1021.4955"/>
+	<portal_loc world_id="310100000" loc_id="3101000" x="305.8" y="334.46" z="1019.69" h="27"/>
 	<!-- Empyrean Crucible -->
 	<portal_loc world_id="300300000" loc_id="3003000" x="354.7868" y="349.34567" z="96.09097"/>
 	<!-- Adma Stronghold -->

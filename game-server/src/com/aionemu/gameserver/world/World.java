@@ -429,7 +429,7 @@ public class World {
 		if (object == null)
 			return;
 		if (object.getPosition().isSpawned())
-			throw new AlreadySpawnedException();
+			throw new AlreadySpawnedException(object + " is already spawned.");
 
 		object.getController().onBeforeSpawn();
 		object.getPosition().setIsSpawned(true);

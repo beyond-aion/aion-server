@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -63,8 +64,8 @@ public class PvpMapService {
 		}
 	}
 
-	public boolean isOnPvPMap(Player p) {
-		return handler != null && handler.isOnMap(p);
+	public boolean isOnPvPMap(Creature creature) {
+		return handler != null && handler.isOnMap(creature);
 	}
 
 	public synchronized void closeMap(int instanceId) {

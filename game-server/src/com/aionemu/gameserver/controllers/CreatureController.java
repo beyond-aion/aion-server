@@ -157,31 +157,24 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 */
 	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
 		// avoid killing players after duel
-		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && getOwner() != attacker)
+		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && !getOwner().equals(attacker))
 			return;
 
 		if (damage != 0) {
 			Skill skill = getOwner().getCastingSkill();
-			if (skill != null) {
-				if ((getOwner() instanceof Npc) && ((Npc) getOwner()).isBoss()) {
-					if (skill.getSkillTemplate().getCancelRate() >= 99999) {
+			if (skill != null && notifyAttack) {
+				if (skill.getSkillMethod() == SkillMethod.ITEM) {
+					cancelCurrentSkill(attacker);
+				} else {
+					int cancelRate = skill.getSkillTemplate().getCancelRate();
+					if (cancelRate >= 99999) {
 						cancelCurrentSkill(attacker);
-					}
-				} else if (notifyAttack) {
-					if (skill.getSkillMethod() == SkillMethod.ITEM)
-						cancelCurrentSkill(attacker);
-					else {
-						int cancelRate = skill.getSkillTemplate().getCancelRate();
-						if (cancelRate >= 99999)
+					} else if (cancelRate > 0 && !(getOwner() instanceof Npc && ((Npc) getOwner()).isBoss())){
+						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
+						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
+						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
+						if (Rnd.get(1, 100) <= cancel)
 							cancelCurrentSkill(attacker);
-						else if (cancelRate > 0) {
-							int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
-							float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
-
-							int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
-							if (Rnd.get(1, 100) <= cancel)
-								cancelCurrentSkill(attacker);
-						}
 					}
 				}
 			}
