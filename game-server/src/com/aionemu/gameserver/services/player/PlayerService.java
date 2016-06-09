@@ -11,6 +11,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.PlayerController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
@@ -19,6 +20,7 @@ import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.CraftCooldownsDAO;
 import com.aionemu.gameserver.dao.FriendListDAO;
+import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -151,6 +153,8 @@ public class PlayerService {
 		DAOManager.getDAO(CraftCooldownsDAO.class).storeCraftCooldowns(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).storeNpcFactions(player);
 		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getPlayerAccount());
+		if (EventsConfig.ENABLE_HEADHUNTING)
+			DAOManager.getDAO(HeadhuntingDAO.class).storeHeadhunter(player.getObjectId());
 	}
 
 	/**

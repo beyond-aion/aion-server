@@ -201,6 +201,16 @@ CREATE TABLE IF NOT EXISTS `guides` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for `headhunting`
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `headhunting` (
+  `hunter_id` int(11) NOT NULL,
+  `accumulated_kills`int(11) NOT NULL,
+  `last_update` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`hunter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
 -- Table structure for `house_bids`
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `house_bids` (

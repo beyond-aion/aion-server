@@ -30,4 +30,16 @@ public class EventsConfig {
 	 */
 	@Property(key = "gameserver.monster.raid.enable", defaultValue = "false")
 	public static boolean ENABLE_MONSTER_RAID;
+	
+	/**
+	 * Headhunting
+	 */
+	@Property(key = "gameserver.event.headhunting.enable", defaultValue = "false")
+	public static boolean ENABLE_HEADHUNTING;
+	
+	@Property(key = "gameserver.event.headhunting.maps", defaultValue = "")
+	public static String HEADHUNTING_MAPS;
+	
+	@Property(key = "gameserver.event.headhunting.consolation_prize_kills", defaultValue = "50")
+	public static int HEADHUNTING_CONSOLATION_PRIZE_KILLS;
 }

@@ -65,13 +65,11 @@ public class HTMLService {
 	}
 
 	public static void sendData(Player player, int messageId, String html) {
-		byte packet_count;
-		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8d) + 1);
-		if (ceil > Byte.MAX_VALUE)
+		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
+		if (ceil >= 256.0)
 			return;
-
-		packet_count = (byte) ceil;
-		for (byte i = 0; i < packet_count; i++) {
+		byte packetCount = (byte) ceil;
+		for (byte i = 0; i < packetCount; i++) {
 			try {
 				int from = i * (Short.MAX_VALUE - 8), to = (i + 1) * (Short.MAX_VALUE - 8);
 				if (from < 0)
@@ -79,7 +77,7 @@ public class HTMLService {
 				if (to > html.length())
 					to = html.length();
 				String sub = html.substring(from, to);
-				player.getClientConnection().sendPacket(new SM_QUESTIONNAIRE(messageId, i, packet_count, sub));
+				player.getClientConnection().sendPacket(new SM_QUESTIONNAIRE(messageId, i, packetCount, sub));
 			} catch (Exception e) {
 				log.error("htmlservice.sendData", e);
 			}

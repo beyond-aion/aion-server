@@ -11,9 +11,9 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author Rolandas
  */
-public class Map extends AdminCommand {
+public class MapCommand extends AdminCommand {
 
-	public Map() {
+	public MapCommand() {
 		super("map");
 	}
 

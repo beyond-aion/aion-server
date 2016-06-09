@@ -10,15 +10,20 @@ import javolution.util.FastTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.KillList;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
+import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.event.Headhunter;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
@@ -50,34 +55,25 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpService {
 
 	private static final Logger log = LoggerFactory.getLogger("KILL_LOG");
-	private static final PvpService INSTANCE = new PvpService();
+	private static final List<Integer> headhuntingMaps = new FastTable<>();
 	private final List<KillBountyTemplate> killBounties;
+	private final Map<Integer, Headhunter> headhunters;
 	private Map<Integer, KillList> pvpKillLists;
 
 	private PvpService() {
 		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
+		headhunters = DAOManager.getDAO(HeadhuntingDAO.class).loadHeadhunters();
 		pvpKillLists = new FastMap<>();
+
+		for (String world : EventsConfig.HEADHUNTING_MAPS.split(",")) {
+			if (world.equals(""))
+				break;
+			headhuntingMaps.add(Integer.parseInt(world));
+		}
 	}
 
 	public static final PvpService getInstance() {
-		return INSTANCE;
-	}
-
-	private int getKillsFor(int winnerId, int victimId) {
-		KillList winnerKillList = pvpKillLists.get(winnerId);
-
-		if (winnerKillList == null)
-			return 0;
-		return winnerKillList.getKillsFor(victimId);
-	}
-
-	private void addKillFor(int winnerId, int victimId) {
-		KillList winnerKillList = pvpKillLists.get(winnerId);
-		if (winnerKillList == null) {
-			winnerKillList = new KillList();
-			pvpKillLists.put(winnerId, winnerKillList);
-		}
-		winnerKillList.addKillFor(victimId);
+		return SingletonHolder.INSTANCE;
 	}
 
 	public void sendBountyReward(Player player, BountyType type, int neededKills) {
@@ -96,9 +92,18 @@ public class PvpService {
 					ItemUpdateType.INC_CASH_ITEM));
 		}
 	}
+	
+	public void finalizeHeadhuntingSeason() {
+		headhunters.clear();
+	}
 
 	public void doReward(Player victim) {
 		doReward(victim, 1);
+	}
+
+	private synchronized Headhunter getHeadhunterById(final int objId) {
+		Headhunter headhunter = headhunters.putIfAbsent(objId, new Headhunter(objId, 0, System.currentTimeMillis(), PersistentState.UPDATE_REQUIRED));
+		return headhunter != null ? headhunter : headhunters.get(objId);
 	}
 
 	public void doReward(Player victim, float apWinMulti) {
@@ -110,14 +115,15 @@ public class PvpService {
 		if (totalDamage == 0 || winner == null) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
 			if (victim.isInGroup2()) {
-				victim.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()), new PlayerFilters.ExcludePlayerFilter(victim));
+				victim.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
+					new PlayerFilters.ExcludePlayerFilter(victim));
 			} else if (victim.isInAlliance2()) {
-				victim.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()), new PlayerFilters.ExcludePlayerFilter(victim));
+				victim.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
+					new PlayerFilters.ExcludePlayerFilter(victim));
 			}
 			announceDeath(victim);
 			return;
 		}
-
 
 		// Add Player Kill to record.
 		winner.getAbyssRank().setAllKill();
@@ -128,6 +134,13 @@ public class PvpService {
 				int killStep = template.getKillCount();
 				if (kills % killStep == 0)
 					sendBountyReward(winner, BountyType.PER_X_KILLS, killStep);
+			}
+		}
+
+		if (EventsConfig.ENABLE_HEADHUNTING) {
+			if (headhuntingMaps.contains(winner.getPosition().getMapId())) {
+				Headhunter hunter = getHeadhunterById(winner.getObjectId());
+				hunter.incrementKills();
 			}
 		}
 
@@ -191,8 +204,10 @@ public class PvpService {
 		} else {
 			PacketSendUtility.sendPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_ME(victim.getName()));
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH_TO_B(winner.getName()));
-			PacketSendUtility.broadcastPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()), false, player -> !player.isEnemy(victim));
-			PacketSendUtility.broadcastPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), false, player -> player.isEnemy(victim));
+			PacketSendUtility.broadcastPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH_TO_B(victim.getName(), winner.getName()), false,
+				player -> !player.isEnemy(victim));
+			PacketSendUtility.broadcastPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), false,
+				player -> player.isEnemy(victim));
 			announceDeath(victim);
 		}
 	}
@@ -286,5 +301,35 @@ public class PvpService {
 			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0, 0), victim.getAbyssRank().getRank());
 		}
 		rewarded.clear();
+	}
+
+	private int getKillsFor(int winnerId, int victimId) {
+		KillList winnerKillList = pvpKillLists.get(winnerId);
+
+		if (winnerKillList == null)
+			return 0;
+		return winnerKillList.getKillsFor(victimId);
+	}
+
+	private void addKillFor(int winnerId, int victimId) {
+		KillList winnerKillList = pvpKillLists.get(winnerId);
+		if (winnerKillList == null) {
+			winnerKillList = new KillList();
+			pvpKillLists.put(winnerId, winnerKillList);
+		}
+		winnerKillList.addKillFor(victimId);
+	}
+
+	public Map<Integer, Headhunter> getAllHeadhunters() {
+		return headhunters;
+	}
+
+	public Headhunter getHeadhunter(final int hunterId) {
+		return headhunters.get(hunterId);
+	}
+
+	private static final class SingletonHolder {
+
+		static final PvpService INSTANCE = new PvpService();
 	}
 }
