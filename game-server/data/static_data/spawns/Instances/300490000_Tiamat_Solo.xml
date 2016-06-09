@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<spawn_map map_id="300490000">
-		<!-- Blood-red Jewel -->
-		<spawn npc_id="730691">
-			<spot x="503.2198" y="516.6517" z="243.4827" static_id="4"/>
-		</spawn>
-	</spawn_map>
-</spawns>
