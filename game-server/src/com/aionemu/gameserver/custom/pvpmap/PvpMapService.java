@@ -118,9 +118,4 @@ public class PvpMapService {
 		}
 		return false;
 	}
-
-	public void onShugoUsed() {
-		if (handler != null)
-			handler.onShugoUsed();
-	}
 }
