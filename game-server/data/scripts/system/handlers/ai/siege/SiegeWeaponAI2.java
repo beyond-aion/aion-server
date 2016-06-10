@@ -40,10 +40,6 @@ public class SiegeWeaponAI2 extends AISummon {
 	}
 
 	@Override
-	protected void handleCreatureMoved(Creature creature) {
-	}
-
-	@Override
 	protected void handleStopFollowMe(Creature creature) {
 		this.setStateIfNot(AIState.IDLE);
 		this.getOwner().getMoveController().abortMove(false);

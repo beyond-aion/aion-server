@@ -93,7 +93,7 @@ public class TownService {
 		int townId = 0;
 		MapRegion region = creature.getPosition().getMapRegion();
 		if (region == null) {
-			log.warn("TownService: npc " + creature.getName() + " haven't any map region!");
+			log.warn("TownService: " + creature + " has no map region!");
 			return 0;
 		} else {
 			List<ZoneInstance> zones = region.getZones(creature);
