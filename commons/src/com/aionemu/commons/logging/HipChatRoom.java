@@ -72,9 +72,7 @@ public class HipChatRoom implements Closeable {
 	public void sendMessage(HipChatMessage message) {
 		if (!canSend())
 			return;
-		String errorHeader = "Error sending HipChat message: ";
-		if (message.message.startsWith(errorHeader))
-			return;
+
 		String json = gson.toJson(message);
 
 		HttpPost request = new HttpPost(roomUri);
@@ -105,7 +103,9 @@ public class HipChatRoom implements Closeable {
 				throw new HttpResponseException(response.getStatusLine().getStatusCode(), "HTTP status message: " + errorMsg);
 			}
 		} catch (IOException e) {
-			log.warn(errorHeader + message.message + "\nCaused by: " + (e instanceof HttpResponseException ? e.getMessage() : e));
+			String errorHeader = "Error sending HipChat message: ";
+			if (!message.message.contains(errorHeader)) // avoid potential recursive message sending (if appender sends warnings)
+				log.warn(errorHeader + message.message + "\nCaused by: " + (e instanceof HttpResponseException ? e.getMessage() : e));
 		} finally {
 			IOUtils.closeQuietly(response);
 		}
