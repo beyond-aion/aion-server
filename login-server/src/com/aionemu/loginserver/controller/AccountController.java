@@ -41,17 +41,17 @@ public class AccountController {
 	/**
 	 * Map with accounts that are active on LoginServer or joined GameServer and are not authenticated yet.
 	 */
-	private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<Integer, LoginConnection>();
+	private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<>();
 
 	/**
 	 * Map with accounts that are reconnecting to LoginServer ie was joined GameServer.
 	 */
-	private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<Integer, ReconnectingAccount>();
+	private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<>();
 
 	/**
 	 * Map with characters count on each gameserver and accounts
 	 */
-	private static final Map<Integer, Map<Integer, Integer>> accountsGSCharacterCounts = new HashMap<Integer, Map<Integer, Integer>>();
+	private static final Map<Integer, Map<Byte, Integer>> accountsGSCharacterCounts = new HashMap<>();
 
 	/**
 	 * Removes account from list of connections
@@ -348,12 +348,12 @@ public class AccountController {
 	 */
 	public static synchronized void loadGSCharactersCount(int accountId) {
 		GsConnection gsc = null;
-		Map<Integer, Integer> accountCharacterCount = null;
+		Map<Byte, Integer> accountCharacterCount = null;
 
 		if (accountsGSCharacterCounts.containsKey(accountId))
 			accountsGSCharacterCounts.remove(accountId);
 
-		accountsGSCharacterCounts.put(accountId, new HashMap<Integer, Integer>());
+		accountsGSCharacterCounts.put(accountId, new HashMap<>());
 
 		accountCharacterCount = accountsGSCharacterCounts.get(accountId);
 
@@ -363,7 +363,7 @@ public class AccountController {
 			if (gsc != null)
 				gsc.sendPacket(new SM_GS_CHARACTER_RESPONSE(accountId));
 			else
-				accountCharacterCount.put((int) gsi.getId(), 0);
+				accountCharacterCount.put(gsi.getId(), 0);
 		}
 
 		if (hasAllGSCharacterCounts(accountId))
@@ -375,7 +375,7 @@ public class AccountController {
 	 * @return
 	 */
 	public static synchronized boolean hasAllGSCharacterCounts(int accountId) {
-		Map<Integer, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
+		Map<Byte, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
 
 		if (characterCount != null) {
 			if (characterCount.size() == GameServerTable.getGameServers().size())
@@ -400,7 +400,7 @@ public class AccountController {
 	 * @param accountId
 	 * @return
 	 */
-	public static Map<Integer, Integer> getGSCharacterCountsFor(int accountId) {
+	public static Map<Byte, Integer> getGSCharacterCountsFor(int accountId) {
 		return accountsGSCharacterCounts.get(accountId);
 	}
 
@@ -409,9 +409,9 @@ public class AccountController {
 	 * @param gsid
 	 * @param characterCount
 	 */
-	public static synchronized void addGSCharacterCountFor(int accountId, int gsid, int characterCount) {
+	public static synchronized void addGSCharacterCountFor(int accountId, byte gsid, int characterCount) {
 		if (!accountsGSCharacterCounts.containsKey(accountId))
-			accountsGSCharacterCounts.put(accountId, new HashMap<Integer, Integer>());
+			accountsGSCharacterCounts.put(accountId, new HashMap<>());
 
 		accountsGSCharacterCounts.get(accountId).put(gsid, characterCount);
 	}

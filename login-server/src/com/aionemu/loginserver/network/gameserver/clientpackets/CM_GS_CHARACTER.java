@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
@@ -20,9 +19,7 @@ public class CM_GS_CHARACTER extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		GameServerInfo gsi = this.getConnection().getGameServerInfo();
-
-		AccountController.addGSCharacterCountFor(accountId, gsi.getId(), characterCount);
+		AccountController.addGSCharacterCountFor(accountId, getConnection().getGameServerInfo().getId(), characterCount);
 
 		if (AccountController.hasAllGSCharacterCounts(accountId))
 			AccountController.sendServerListFor(accountId);
