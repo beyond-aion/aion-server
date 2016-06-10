@@ -217,6 +217,19 @@ public abstract class WorldMapInstance {
 		return null;
 	}
 
+	public Npc getNpcByObjId(int objectId) {
+		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
+			VisibleObject obj = iter.next();
+			if (obj instanceof Npc) {
+				Npc npc = (Npc) obj;
+				if (npc.getObjectId() == objectId) {
+					return npc;
+				}
+			}
+		}
+		return null;
+	}
+
 	public List<Player> getPlayersInside() {
 		List<Player> playersInside = new FastTable<Player>();
 		Iterator<Player> players = playerIterator();

@@ -88,7 +88,7 @@ public class PortalService {
 		boolean reenter = false;
 		WorldMapInstance instance = null;
 		switch (playerSize) {
-			case 0: // solo
+			case 1: // solo
 				instance = InstanceService.getRegisteredInstance(mapId, player.getObjectId());
 				break;
 			case 3:

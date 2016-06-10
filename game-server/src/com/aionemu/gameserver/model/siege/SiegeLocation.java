@@ -230,6 +230,15 @@ public class SiegeLocation implements ZoneHandler {
 		return false;
 	}
 
+	public boolean isInsideLocation(float x, float y, float z) {
+		if (zone.isEmpty())
+			return false;
+		for (int i = 0; i < zone.size(); i++)
+			if (zone.get(i).isInsideCordinate(x, y, z))
+				return true;
+		return false;
+	}
+
 	public void clearLocation() {
 	}
 

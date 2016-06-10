@@ -364,7 +364,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Flux -->
-	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Common)" base_chance="15" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -412,7 +412,7 @@
 			<gd_item id="152011088" name="Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Common)" base_chance="10" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Common)" base_chance="15" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -424,7 +424,7 @@
 			<gd_item id="152011106" name="Lesser Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Rare)" base_chance="7.5" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -465,7 +465,7 @@
 			<gd_item id="152011089" name="Worthy Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="5" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Rare)" base_chance="7.5" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -478,7 +478,7 @@
 			<gd_item id="152011107" name="Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Legend)" base_chance="3.75" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -512,7 +512,7 @@
 			<gd_item id="152011090" name="Expert Finest Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="2.5" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Legend)" base_chance="3.75" min_diff="0" max_diff="4">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -526,7 +526,7 @@
 			<gd_item id="152011108" name="Greater Mystic Accessory Flux" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Unique)" base_chance="1" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Unique)" base_chance="1.5" min_diff="-2" max_diff="2">
 		<gd_ratings>
 			<gd_rating rating="ELITE" />
 			<gd_rating rating="HERO" />
@@ -595,7 +595,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Souls -->
-	<gd_rule rule_name="Balaur Souls (Common)" base_chance="6" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Common)" base_chance="9" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -608,7 +608,7 @@
 			<gd_item id="152013043" name="Mortal Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -629,7 +629,7 @@
 			<gd_item id="152013015" name="Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -642,7 +642,7 @@
 			<gd_item id="152013025" name="Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -655,7 +655,7 @@
 			<gd_item id="152013034" name="Urge of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="3" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="4.5" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -668,7 +668,7 @@
 			<gd_item id="152013044" name="Deadly Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-5" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -690,7 +690,7 @@
 			<gd_item id="152013018" name="Fatal Violent Ego" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -703,7 +703,7 @@
 			<gd_item id="152013026" name="Fatal Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -716,7 +716,7 @@
 			<gd_item id="152013035" name="Fatal Urge of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="2.5" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3.75" min_diff="0" max_diff="4">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -729,7 +729,7 @@
 			<gd_item id="152013045" name="Malicious Pride" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.5" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="2.25" min_diff="-2" max_diff="2">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -742,7 +742,7 @@
 			<gd_item id="152013027" name="Inescapable Execration of Pleasure" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="1.5" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="2.25" min_diff="-2" max_diff="0">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />

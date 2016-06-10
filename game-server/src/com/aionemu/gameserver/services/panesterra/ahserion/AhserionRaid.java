@@ -183,11 +183,13 @@ public class AhserionRaid {
 		winner = null;
 		cancelTask(observeTask);
 		cancelTask(progressTask);
-		for (PanesterraTeam team : teams.values()) {
-			team.setIsEliminated(true);
-			team.moveToBindPoint();
+		if (teams != null) {
+			for (PanesterraTeam team : teams.values()) {
+				team.setIsEliminated(true);
+				team.moveToBindPoint();
+			}
+			teams.clear();
 		}
-		teams.clear();
 		despawnAll();
 		for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 			door.setOpen(false);

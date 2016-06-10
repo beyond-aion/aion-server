@@ -105,6 +105,12 @@
 			<Pattern>%date %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_headhunting" class="ch.qos.logback.core.FileAppender">
+		<file>${logFolder}/headhunting.log</file>
+		<encoder>
+			<Pattern>%date %message%n</Pattern>
+		</encoder>
+	</appender>
 	<appender name="app_ingameshop" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/ingameshop.log</file>
 		<encoder>
@@ -187,6 +193,9 @@
 	</logger>
 	<logger name="GAMECONNECTION_LOG">
 		<appender-ref ref="app_gconnection" />
+	</logger>
+	<logger name="HEADHUNTING_LOG">
+		<appender-ref ref="app_headhunting" />
 	</logger>
 	<logger name="INGAMESHOP_LOG">
 		<appender-ref ref="app_ingameshop" />
