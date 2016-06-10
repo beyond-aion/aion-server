@@ -70,8 +70,8 @@ public class PetSpawnService {
 			player.getController().cancelTask(TaskId.PET_UPDATE);
 			toyPet.getCommonData().setDespawnTime(new Timestamp(System.currentTimeMillis()));
 			toyPet.getCommonData().savePetMoodData();
-			player.setToyPet(null);
 			toyPet.getController().onDelete();
+			player.setToyPet(null);
 		}
 	}
 }
