@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +20,8 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * Use this service to send raw html to the client.
@@ -49,15 +48,9 @@ public class HTMLService {
 		return context;
 	}
 
-	public static void pushSurvey(final String html) {
-		final int messageId = IDFactory.getInstance().nextId();
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player player) {
-				sendData(player, messageId, html);
-			}
-		});
+	public static void pushSurvey(String html) {
+		int messageId = IDFactory.getInstance().nextId();
+		World.getInstance().doOnAllPlayers(player -> sendData(player, messageId, html));
 	}
 
 	public static void showHTML(Player player, String html) {
@@ -65,19 +58,16 @@ public class HTMLService {
 	}
 
 	public static void sendData(Player player, int messageId, String html) {
-		double ceil = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
-		if (ceil >= 256.0)
+		double packetCount = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
+		if (packetCount > 255) { // max byte number (0xFF)
+			log.warn("HTML message could not be sent to client, since its content is too long", new Throwable()); // attach throwable for stacktrace
 			return;
-		byte packetCount = (byte) ceil;
-		for (byte i = 0; i < packetCount; i++) {
+		}
+		for (int partNo = 0; partNo < packetCount; partNo++) {
 			try {
-				int from = i * (Short.MAX_VALUE - 8), to = (i + 1) * (Short.MAX_VALUE - 8);
-				if (from < 0)
-					from = 0;
-				if (to > html.length())
-					to = html.length();
-				String sub = html.substring(from, to);
-				player.getClientConnection().sendPacket(new SM_QUESTIONNAIRE(messageId, i, packetCount, sub));
+				int from = Math.max(0, partNo * (Short.MAX_VALUE - 8));
+				int to = Math.min(html.length(), (partNo + 1) * (Short.MAX_VALUE - 8));
+				PacketSendUtility.sendPacket(player, new SM_QUESTIONNAIRE(messageId, (byte) partNo, (byte) packetCount, html.substring(from, to)));
 			} catch (Exception e) {
 				log.error("htmlservice.sendData", e);
 			}
@@ -99,9 +89,6 @@ public class HTMLService {
 	}
 
 	public static void onPlayerLogin(Player player) {
-		if (player == null)
-			return;
-
 		List<Guide> guides = DAOManager.getDAO(GuideDAO.class).loadGuides(player.getObjectId());
 
 		for (Guide guide : guides) {
@@ -162,7 +149,7 @@ public class HTMLService {
 	}
 
 	private static List<SurveyTemplate> getSurveyTemplates(List<SurveyTemplate> surveys, List<Integer> items) {
-		List<SurveyTemplate> templates = new FastTable<SurveyTemplate>();
+		List<SurveyTemplate> templates = new FastTable<>();
 		for (SurveyTemplate survey : surveys) {
 			if (items.contains(survey.getItemId())) {
 				templates.add(survey);

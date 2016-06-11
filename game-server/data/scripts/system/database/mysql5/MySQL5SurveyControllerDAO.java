@@ -3,8 +3,7 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import javolution.util.FastTable;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,8 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.SurveyControllerDAO;
 import com.aionemu.gameserver.model.templates.survey.SurveyItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -29,8 +30,8 @@ public class MySQL5SurveyControllerDAO extends SurveyControllerDAO {
 	}
 
 	@Override
-	public FastTable<SurveyItem> getAllNew() {
-		FastTable<SurveyItem> list = new FastTable<>();
+	public List<SurveyItem> getAllUnused() {
+		List<SurveyItem> list = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, 0);
