@@ -56,10 +56,12 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 				@Override
 				public void run() {
-					PacketSendUtility.sendPacket(player, new SM_HEADING_UPDATE(target));
+					if (npc.getTarget() == null && !npc.getMoveController().isInMove()) {
+						npc.getPosition().setH(npc.getSpawn().getHeading());
+						PacketSendUtility.broadcastPacket(npc, new SM_HEADING_UPDATE(npc));
+					}
 				}
 			}, 1200);
-
 		}
 
 		if (mailbox != null && mailbox.mailBoxState != PlayerMailboxState.CLOSED) {
