@@ -281,7 +281,7 @@ public class Npc extends Creature {
 			super.clearAttackedCount();
 			getGameStats().renewLastChangeTargetTime();
 			if (!getLifeStats().isAlreadyDead()) {
-				if (creature != null && !this.equals(creature))
+				if (creature != null && !this.equals(creature) && !getObjectTemplate().canInteract())
 					getPosition().setH(MathUtil.getHeadingTowards(this, creature));
 				PacketSendUtility.broadcastPacket(this, new SM_LOOKATOBJECT(this));
 			}
