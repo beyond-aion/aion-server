@@ -3959,4 +3959,16 @@
 			</spawn_map>
 		</spawns>
 	</event>
+	<event name="Legendary Symphony Event" start="2015-02-25T00:00:00+00:00" end="2015-03-11T00:00:00+00:00">
+		<quests>
+			<!-- TODO: find the remaining quests: start quest and 10-pc exchange -->
+			<maintainable>80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
+		</quests>
+		<spawns>
+			<!-- TODO -->
+		</spawns>
+		<event_drops>
+			<!-- TODO -->
+		</event_drops>
+	</event>
 </timed_events>
