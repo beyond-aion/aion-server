@@ -2,21 +2,21 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
   		[BEGIN] SUMMARY
-			18300 [SCRIPT_R] Floating Death
-			18301 [SCRIPT_R] My Prec-H-ious
-			18302 [SCRIPT_R] First Priority
-			18303 [SCRIPT_R] Making a Sur-can't-a
+			18300 [SCRIPT] Floating Death
+			18301 [SCRIPT] My Prec-H-ious
+			18302 [SCRIPT] First Priority
+			18303 [SCRIPT] Making a Sur-can't-a
 			18304 [REMOVED] Hollowed and Sealed
 			18305 [REMOVED] Weapon Refined by Reian Tribe
 			18306 [REMOVED] [Daily] Supplies in the Sky
-			18307 [XML_R] Relics Reclaimed
+			18307 [XML] Relics Reclaimed
 			18308 [REMOVED] [Daily] A Mark of Loyalty
-			18309 [XML_R] Crafty Control
-			18310 [XML_R] They Killed Commander Barus!
+			18309 [XML] Crafty Control
+			18310 [XML] They Killed Commander Barus!
 			18311 [REMOVED] Info Crystal
-			18312 [XML_R] [Daily] Surveillance Systems
-			18313 [XML_R] Fortress Interrupted
-			18314 [XML_R] What Not to Forget During a Mission
+			18312 [XML] [Daily] Surveillance Systems
+			18313 [XML] Fortress Interrupted
+			18314 [XML] What Not to Forget During a Mission
 			28300 [SCRIPT] Floating Doom
 			28301 [SCRIPT] Power On
 			28302 [SCRIPT] Document Saved
@@ -24,27 +24,27 @@
 			28304 [REMOVED] Hollowed Be Thy Marble
 			28305 [REMOVED] Weapon Refined by Reian Tribe
 			28306 [REMOVED] [Daily] Supplies in the Sky...Fortress
-			28307 [XML_T] Reian Relics Reclaimed
+			28307 [XML] Reian Relics Reclaimed
 			28308 [REMOVED] [Daily] A Matter of Loyalty
-			28309 [XML_T] Engineering Chains of Slavery
+			28309 [XML] Engineering Chains of Slavery
 			28310 [XML] You Can't Keep A Bad Drakan Down
 			28311 [REMOVED] Info Sphere
-			28312 [XML_T] [Daily] Outrun a Resonator Network
-			28313 [XML_T] A Wealthy Patron
+			28312 [XML] [Daily] Outrun a Resonator Network
+			28313 [XML] A Wealthy Patron
 			28314 [XML] What Not to Forget During a Mission
 		[END] SUMMARY
 	-->
 	
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="18307" start_npc_ids="799596"/>
-	<item_collecting id="18312" start_npc_ids="799531"/>
+	<item_collecting id="18307" start_npc_ids="804820"/>
+	<item_collecting id="18312" start_npc_ids="804820"/>
 	<item_collecting id="28307" start_npc_ids="804821"/>
 	<item_collecting id="28312" start_npc_ids="804821"/>
 	
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18309" start_npc_ids="799596"/>
-	<monster_hunt id="18310" start_npc_ids="799530" end_npc_ids="799531"/>
-	<monster_hunt id="18313" start_npc_ids="799531"/>
+	<monster_hunt id="18309" start_npc_ids="804820"/>
+	<monster_hunt id="18310" start_npc_ids="799530" end_npc_ids="804820"/>
+	<monster_hunt id="18313" start_npc_ids="804820"/>
 	<monster_hunt id="18314" start_npc_ids="799530"/>
 	<monster_hunt id="28309" start_npc_ids="804821"/>
 	<monster_hunt id="28310" start_npc_ids="799530" end_npc_ids="804821"/>
