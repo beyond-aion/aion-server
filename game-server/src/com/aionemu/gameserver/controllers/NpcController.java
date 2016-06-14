@@ -137,7 +137,7 @@ public class NpcController extends CreatureController<Npc> {
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi2().onGeneralEvent(AIEventType.DIED);
 		} catch (Exception e) {
-			log.error("onDie() exception for Npc " + owner + ":", e);
+			log.error("onDie() exception for " + owner + ":", e);
 		} finally { // always make sure npc is scheduled to respawn
 			if (!deleteImmediately) {
 				RespawnService.scheduleDecayTask(owner);

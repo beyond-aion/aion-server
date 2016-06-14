@@ -4280,11 +4280,26 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050722" name="Unknown Petal">
-		<items chance="50.0">
+		<items>
+			<item id="169240001" name="Wiki Petal" />
+		</items>
+		<items>
 			<item id="169240002" name="Omblic Petal" />
 		</items>
-		<items chance="50.0">
+		<items>
+			<item id="169240003" name="Meon Petal" />
+		</items>
+		<items>
 			<item id="169240004" name="Ormea Petal" />
+		</items>
+		<items>
+			<item id="169240005" name="Tange Petal" />
+		</items>
+		<items>
+			<item id="169240006" name="Ervio Petal" />
+		</items>
+		<items>
+			<item id="169240007" name="Lunime Petal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050723" name="Mysterious Lump">
@@ -4461,11 +4476,26 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050729" name="Unknown Petal">
-		<items chance="50.0">
-			<item id="169240002" name="Omblic Petal" />
+		<items>
+			<item id="169240008" name="Vinna Petal" />
 		</items>
-		<items chance="50.0">
-			<item id="169240004" name="Ormea Petal" />
+		<items>
+			<item id="169240009" name="Kirka Petal" />
+		</items>
+		<items>
+			<item id="169240010" name="Brommel Petal" />
+		</items>
+		<items>
+			<item id="169240011" name="Pressa Petal" />
+		</items>
+		<items>
+			<item id="169240012" name="Merone Petal" />
+		</items>
+		<items>
+			<item id="169240013" name="Kukar Petal" />
+		</items>
+		<items>
+			<item id="169240014" name="Leopis Petal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050730" name="Mysterious Lump">
