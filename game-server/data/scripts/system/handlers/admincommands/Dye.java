@@ -12,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEAR
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -38,7 +37,7 @@ public class Dye extends AdminCommand {
 		if (player.getTarget() instanceof Player)
 			target = (Player) player.getTarget();
 
-		int itemColor = 0; // 0 = default item color
+		Integer itemColor = null; // null = default item color
 		String colorText = "default";
 		String colorParam = params[0];
 
@@ -49,6 +48,7 @@ public class Dye extends AdminCommand {
 
 			if (itemColor != 0 && dyeItemTemplate != null && dyeItemTemplate.getActions() != null && dyeItemTemplate.getActions().getDyeAction() != null) {
 				// itemColor is a dyeing item ID
+				itemColor = dyeItemTemplate.getActions().getDyeAction().getColor();
 				colorText = ChatUtil.item(itemColor);
 			} else {
 				try {
@@ -66,7 +66,6 @@ public class Dye extends AdminCommand {
 						itemColor = Integer.valueOf(colorParam, 16);
 					}
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
-					itemColor = Util.toColorBGRA(itemColor);
 				} catch (NumberFormatException e) {
 					sendInfo(player, "Invalid color.");
 					return;
@@ -83,7 +82,7 @@ public class Dye extends AdminCommand {
 		PacketSendUtility.broadcastPacket(target, new SM_UPDATE_PLAYER_APPEARANCE(target.getObjectId(), appearanceItems), true);
 		target.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 
-		if (itemColor == 0)
+		if (itemColor == null)
 			sendInfo(player, "Removed dyeing from " + target.getName() + "'s visible equipment.");
 		else
 			sendInfo(player, "Dyed " + target.getName() + " (color: " + colorText + ")");

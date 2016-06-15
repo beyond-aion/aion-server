@@ -187,7 +187,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(item.getObjectId());
 					writeD(item.getItemId());
 					writeQ(item.getItemCount());
-					writeD(item.getItemColor());
+					writeD(item.getItemColor() == null ? -1 : item.getItemColor());
 
 					writeS(item.getItemCreator());
 					writeD(item.getExpireTime());

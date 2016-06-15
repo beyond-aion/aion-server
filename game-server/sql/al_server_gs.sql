@@ -306,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `item_unique_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `item_count` bigint(20) NOT NULL DEFAULT '0',
-  `item_color` int(11) NOT NULL DEFAULT '0',
+  `item_color` mediumint(8) UNSIGNED NULL DEFAULT NULL,
   `color_expires` int(11) NOT NULL DEFAULT '0',
   `item_creator` varchar(50) DEFAULT NULL,
   `expire_time` int(11) NOT NULL DEFAULT '0',

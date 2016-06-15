@@ -113,4 +113,21 @@ public abstract class AionServerPacket extends BaseServerPacket {
 		}
 		writeH(0x00); // string end marker
 	}
+
+	/**
+	 * Writes dye information (dye status + 3 byte RGB value) to the buffer.
+	 * 
+	 * @param rgb
+	 *          - may be null
+	 */
+	protected final void writeDyeInfo(Integer rgb) {
+		if (rgb == null) {
+			writeB(new byte[4]);
+		} else {
+			writeC(1); // dye status (1 = dyed, 0 = not dyed)
+			writeC((rgb & 0xFF0000) >> 16); // r
+			writeC((rgb & 0xFF00) >> 8); // g
+			writeC(rgb & 0xFF); // b
+		}
+	}
 }

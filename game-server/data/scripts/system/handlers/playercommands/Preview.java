@@ -17,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEAR
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 import javolution.util.FastMap;
@@ -83,7 +82,7 @@ public class Preview extends PlayerCommand {
 			return;
 		}
 
-		int itemColor = 0; // 0 = default item color
+		Integer itemColor = null; // null = default item color
 		String colorText = "default";
 		if (params.length > 1) {
 			if (!itemTemplate.isItemDyePermitted()) {
@@ -98,6 +97,7 @@ public class Preview extends PlayerCommand {
 
 			if (itemColor != 0 && dyeItemTemplate != null && dyeItemTemplate.getActions() != null && dyeItemTemplate.getActions().getDyeAction() != null) {
 				// itemColor is a dyeing item ID
+				itemColor = dyeItemTemplate.getActions().getDyeAction().getColor();
 				colorText = ChatUtil.item(itemColor);
 			} else {
 				try {
@@ -115,7 +115,6 @@ public class Preview extends PlayerCommand {
 						itemColor = Integer.valueOf(colorParam, 16);
 					}
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
-					itemColor = Util.toColorBGRA(itemColor);
 				} catch (NumberFormatException e) {
 					sendInfo(player, "Invalid color.");
 					return;

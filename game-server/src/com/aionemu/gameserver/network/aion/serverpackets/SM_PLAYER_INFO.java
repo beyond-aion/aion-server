@@ -117,7 +117,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			writeD(item.getItemSkinTemplate().getTemplateId());
 			GodStone godStone = item.getGodStone();
 			writeD(godStone != null ? godStone.getItemId() : 0);
-			writeD(item.getItemColor());
+			writeDyeInfo(item.getItemColor());
 			writeH(item.getItemEnchantParam()); // enchant lvl
 			writeH(0); // 4.7
 		}

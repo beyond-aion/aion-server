@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +31,12 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.templates.item.Improvement;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
-import com.aionemu.gameserver.model.templates.item.actions.DyeAction;
-import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, Wakizashi, xTz
@@ -47,7 +45,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	private final Logger log = LoggerFactory.getLogger(Item.class);
 	private long itemCount = 1;
-	private int itemColor = 0;
+	private Integer itemColor;
 	private int colorExpireTime = 0;
 	private String itemCreator;
 	private ItemTemplate itemTemplate;
@@ -118,7 +116,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	/**
 	 * This constructor should be called only from DAO while loading from DB
 	 */
-	public Item(int objId, int itemId, long itemCount, int itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
+	public Item(int objId, int itemId, long itemCount, Integer itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
 		boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int enchantBonus, int itemSkin, int fusionedItem,
 		int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int rndCount, int tempering, int packCount, boolean isAmplified,
 		int buffSkill, int rndPlumeBonusValue) {
@@ -209,7 +207,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	/**
-	 * @param return itemCreator
+	 * @return itemCreator
 	 */
 	public String getItemCreator() {
 		if (itemCreator == null)
@@ -264,7 +262,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public boolean isTuned() {
 		return itemTemplate.canTune() && rndCount >= 0;
 	}
-	
+
 	public boolean isStigmaChargeable() {
 		return itemTemplate.getStigma() != null && itemTemplate.getStigma().isChargeable();
 	}
@@ -295,34 +293,18 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	/**
-	 * @return the itemColor - color value if negative
+	 * @return RGB color value (no alpha channel info) or null if not dyed
 	 */
-	public int getItemColor() {
-		DyeAction dyeAction = getDyeAction();
-		return dyeAction != null ? dyeAction.getColor() : itemColor;
-	}
-
-	private DyeAction getDyeAction() {
-		if (itemColor < 0) {
-			return null;
-		}
-		ItemTemplate dyeTemplate = DataManager.ITEM_DATA.getItemTemplate(itemColor);
-		if (dyeTemplate == null)
-			return null;
-
-		ItemActions actions = dyeTemplate.getActions();
-		if (actions == null)
-			return null;
-
-		return actions.getDyeAction();
+	public Integer getItemColor() {
+		return itemColor;
 	}
 
 	/**
-	 * @param itemColor
-	 *          the itemColor to set (color value or coloring item id)
+	 * @param color
+	 *          - the item color to set (RGB color value or null to remove dye)
 	 */
-	public void setItemColor(int coloringItemId) {
-		this.itemColor = coloringItemId;
+	public void setItemColor(Integer color) {
+		this.itemColor = color;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
@@ -527,7 +509,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public GodStone addGodStone(int itemId) {
 		return addGodStone(itemId, 0);
 	}
-		
+
 	public GodStone addGodStone(int itemId, int activatedCount) {
 		PersistentState state = godStone != null ? PersistentState.UPDATE_REQUIRED : PersistentState.NEW;
 		godStone = new GodStone(getObjectId(), activatedCount, itemId, state);
@@ -725,7 +707,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public boolean isTradeable(Player player) {
 		return (getItemMask(player) & ItemMask.TRADEABLE) == ItemMask.TRADEABLE && !isSoulBound(player);
 	}
-	
+
 	public boolean isLegionTradeable(Player player, Player partner) {
 		if ((getItemMask(player) & ItemMask.LEGION_TRADEABLE) != ItemMask.LEGION_TRADEABLE || isSoulBound(player))
 			return false;
@@ -1012,8 +994,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	public int getRndPlumeBonusValue() {
 		return rndPlumeBonusValue;
 	}
-	
+
 	public void setRndPlumeBonusValue(int rndPlumeBonusValue) {
-	this.rndPlumeBonusValue = rndPlumeBonusValue;	
+		this.rndPlumeBonusValue = rndPlumeBonusValue;
 	}
 }

@@ -163,7 +163,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int objIdOld = readD();
 			int itemId = readD();
 			long itemCnt = readQ();
-			int itemColor = readD();
+			Integer itemColor = readD();
 
 			String itemCreator = readS();
 			int itemExpireTime = readD();
@@ -213,6 +213,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 					continue;
 				}
 
+				if (itemColor.equals(-1))
+					itemColor = null;
 				int newId = IDFactory.getInstance().nextId();
 				// bonus probably is lost, don't know [RR]
 				// dye expiration is lost

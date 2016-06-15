@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network;
 
 import java.nio.ByteBuffer;
 
+import com.aionemu.gameserver.network.aion.AionServerPacket;
+
 /**
  * @author -Nemesiss-
  */
@@ -122,5 +124,19 @@ public abstract class PacketWriteHelper {
 	 */
 	protected final void skip(ByteBuffer buf, int bytes) {
 		buf.put(new byte[bytes]);
+	}
+
+	/**
+	 * @see AionServerPacket#writeDyeInfo(Integer rgb)
+	 */
+	protected final void writeDyeInfo(ByteBuffer buf, Integer rgb) {
+		if (rgb == null) {
+			skip(buf, 4);
+		} else {
+			writeC(buf, 1); // dye status (1 = dyed, 0 = not dyed)
+			writeC(buf, (rgb & 0xFF0000) >> 16); // r
+			writeC(buf, (rgb & 0xFF00) >> 8); // g
+			writeC(buf, rgb & 0xFF); // b
+		}
 	}
 }

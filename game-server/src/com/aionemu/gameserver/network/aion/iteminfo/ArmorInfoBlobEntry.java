@@ -24,10 +24,7 @@ public class ArmorInfoBlobEntry extends ItemBlobEntry {
 
 		writeQ(buf, ItemSlot.getSlotFor(item.getItemTemplate().getItemSlot()).getSlotIdMask());
 		writeQ(buf, 0); // TODO! secondary slot?
-		writeC(buf, item.getItemTemplate().isItemDyePermitted() ? 1 : 0);
-		writeC(buf, (item.getItemColor() & 0xFF0000) >> 16);
-		writeC(buf, (item.getItemColor() & 0xFF00) >> 8);
-		writeC(buf, (item.getItemColor() & 0xFF));
+		writeDyeInfo(buf, item.getItemColor()); // 4 bytes
 	}
 
 	@Override
