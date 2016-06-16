@@ -3961,14 +3961,58 @@
 	</event>
 	<event name="Legendary Symphony Event" start="2015-02-25T00:00:00+00:00" end="2015-03-11T00:00:00+00:00">
 		<quests>
-			<!-- TODO: find the remaining quests: start quest and 10-pc exchange -->
-			<maintainable>80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
+			<maintainable>80673;80674;80675;80676;80677;80678;80679;80680;80681;80682;80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
 		</quests>
 		<spawns>
-			<!-- TODO -->
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Sonatine -->
+				<spawn npc_id="832967" respawn_time="295">
+					<spot x="1468.924" y="1468.615" z="572.876" h="95"/>
+				</spawn>
+				<!-- Andante -->
+				<!-- CUSTOM REWARDS
+				<spawn npc_id="832968" respawn_time="295">
+					<spot x="1465.339" y="1467.533" z="572.876" h="95"/>
+				</spawn>
+				-->
+				<!-- Allegro -->
+				<spawn npc_id="832969" respawn_time="295">
+					<spot x="1467.247" y="1468.093" z="572.876" h="95"/>
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Sonatine -->
+				<spawn npc_id="832970" respawn_time="295">
+					<spot x="1295.02" y="1436.568" z="209.091" h="85"/>
+				</spawn>
+				<!-- Andante -->
+				<!-- CUSTOM REWARDS
+				<spawn npc_id="832971" respawn_time="295">
+					<spot x="1290.006" y="1438.963" z="209.091" h="77"/>
+				</spawn>
+				-->
+				<!-- Allegro -->
+				<spawn npc_id="832972" respawn_time="295">
+					<spot x="1292.396" y="1437.56" z="209.091" h="81"/>
+				</spawn>
+			</spawn_map>
 		</spawns>
 		<event_drops>
-			<!-- TODO -->
+			<!-- TODO: set base_chance -->
+			<gd_rule rule_name="Symphony of Legend Sheets" base_chance="0">
+				<gd_maps>
+					<gd_map map_id="600100000" name="Levinshor"/>
+				</gd_maps>
+				<gd_items>
+					<gd_item id="188100252" name="Symphony of Legend - The First Movement"/>
+					<gd_item id="188100253" name="Symphony of Legend - The Second Movement"/>
+					<gd_item id="188100254" name="Symphony of Legend - The Third Movement"/>
+					<gd_item id="188100255" name="Symphony of Legend - The Fourth Movement"/>
+					<gd_item id="188100256" name="Symphony of Legend - Epilogue"/>
+				</gd_items>
+			</gd_rule>
 		</event_drops>
 	</event>
 </timed_events>
