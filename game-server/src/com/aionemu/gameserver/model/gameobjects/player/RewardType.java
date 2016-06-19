@@ -22,13 +22,6 @@ public enum RewardType {
 			return (long) (reward * player.getRates().getApNpcRate() * statRate);
 		}
 	},
-	GP_NPC {
-
-		@Override
-		public long calcReward(Player player, long reward) {
-			return (long) (reward * player.getRates().getGpNpcRate());
-		}
-	},
 	HUNTING {
 
 		@Override

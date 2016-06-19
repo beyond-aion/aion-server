@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.team2.common.service;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -19,6 +17,8 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.google.common.base.Predicate;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, nrg
@@ -37,36 +37,21 @@ public class PlayerTeamDistributionService {
 		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner);
 		team.applyOnMembers(filteredStats);
 
-		// All are dead or not nearby
+		// All non-mentors are not nearby or dead
 		if (filteredStats.players.isEmpty() || !filteredStats.hasLivingPlayer) {
 			return;
 		}
 
-		// Reward mode
-		long expReward;
-		if (filteredStats.players.size() + filteredStats.mentorCount == 1) {
-			expReward = StatFunctions.calculateSoloExperienceReward(filteredStats.players.get(0), owner);
-		} else {
-			expReward = StatFunctions.calculateGroupExperienceReward(filteredStats.highestLevel, owner);
-		}
-
-		// Party Bonus 2 members 10%, 3 members 20% ... 6 members 50%
-		int size = filteredStats.players.size();
-		int bonus = 100;
-		if (size > 1) {
-			bonus = 150 + (size - 2) * 10;
-		}
-		bonus *= owner.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceExpMultiplier();
+		long expReward = StatFunctions.calculateExperienceReward(filteredStats.highestLevel, owner);
 
 		for (Player member : filteredStats.players) {
-			// mentor and dead players shouldn't receive AP/EP/DP
-			if (member.isMentor() || member.getLifeStats().isAlreadyDead()) {
+			// dead players shouldn't receive AP/EP/DP
+			if (member.getLifeStats().isAlreadyDead())
 				continue;
-			}
 
 			// Reward init
-			long rewardXp = expReward * bonus * member.getLevel() / (filteredStats.partyLvlSum * 100);
-			int rewardDp = StatFunctions.calculateGroupDPReward(member, owner);
+			long rewardXp = Math.round(expReward * member.getLevel() / filteredStats.partyLvlSum);
+			int rewardDp = StatFunctions.calculateDPReward(member, owner);
 			float rewardAp = 1;
 
 			// Players 10 levels below highest member get 0 reward.
@@ -82,7 +67,7 @@ public class PlayerTeamDistributionService {
 
 			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
 			member.getCommonData().addDp(rewardDp);
-			if (owner.isRewardAP() && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
+			if (owner.getAi2().ask(AIQuestion.SHOULD_REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
 				int ap = (int) rewardAp / filteredStats.players.size();
 				if (ap >= 1) {
@@ -97,7 +82,7 @@ public class PlayerTeamDistributionService {
 				return;
 			}
 
-			if (winner.equals(team) && (!owner.getAi2().getName().equals("chest") || filteredStats.mentorCount == 0)) {
+			if (winner.equals(team) && (filteredStats.mentorCount == 0 || !owner.getAi2().getName().equals("chest"))) {
 				DropRegistrationService.getInstance().registerDrop(owner, mostDamagePlayer, filteredStats.highestLevel, filteredStats.players);
 			}
 		}
@@ -118,23 +103,21 @@ public class PlayerTeamDistributionService {
 
 		@Override
 		public boolean apply(Player member) {
-			if (member.isOnline()) {
-				if (MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
-					QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0, 0));
+			if (member.isOnline() && MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
+				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0, 0));
 
-					if (member.isMentor()) {
-						mentorCount++;
-						return true;
-					}
-
-					if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
-						hasLivingPlayer = true;
-
-					players.add(member);
-					partyLvlSum += member.getLevel();
-					if (member.getLevel() > highestLevel)
-						highestLevel = member.getLevel();
+				if (member.isMentor()) {
+					mentorCount++;
+					return true;
 				}
+
+				if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
+					hasLivingPlayer = true;
+
+				players.add(member);
+				partyLvlSum += member.getLevel();
+				if (member.getLevel() > highestLevel)
+					highestLevel = member.getLevel();
 			}
 			return true;
 		}

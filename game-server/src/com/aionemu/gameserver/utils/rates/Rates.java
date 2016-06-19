@@ -13,8 +13,6 @@ public abstract class Rates {
 
 	public abstract float getApPlayerGainRate();
 
-	public abstract float getGpNpcRate();
-
 	public abstract float getGpPlayerGainRate();
 
 	public abstract float getXpPlayerGainRate();

@@ -28,19 +28,25 @@ public class CM_PING extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		long lastMS = getConnection().getLastPingTime();
+		getConnection().setLastPingTime(System.currentTimeMillis());
 
 		if (lastMS > 0 && player != null) {
 			long pingInterval = System.currentTimeMillis() - lastMS;
 			if (pingInterval + 5000 < CLIENT_PING_INTERVAL) { // client timer cheat
-				if (SecurityConfig.PINGCHECK_KICK) {
-					AuditLogger.info(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
-					getConnection().close();
-				} else {
-					AuditLogger.info(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
+				if (getConnection().increaseAndGetPingFailCount() == 3) { // allow 2 detections in a row, before taking actions
+					if (SecurityConfig.PINGCHECK_KICK) {
+						AuditLogger.info(player,
+							"Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
+						getConnection().close();
+					} else {
+						AuditLogger.info(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
+						getConnection().resetPingFailCount();
+					}
 				}
+			} else {
+				getConnection().resetPingFailCount();
 			}
 		}
-		getConnection().setLastPingTime();
 		sendPacket(new SM_PONG());
 	}
 }
