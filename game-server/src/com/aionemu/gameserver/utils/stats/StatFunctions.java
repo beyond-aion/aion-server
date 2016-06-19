@@ -103,23 +103,7 @@ public class StatFunctions {
 		if (target.getName().equals("flame hoverstone"))
 			apNpcRate = 0.5f;
 
-		if (target.getName().equals("controllera") || target.getName().equals("controllerb"))
-			apNpcRate = 0f;
-
 		return (int) (lvlDiff ? 1 : RewardType.AP_NPC.calcReward(player, (int) Math.floor(15 * apPercentage * apNpcRate / 100)));
-	}
-
-	/**
-	 * @param player
-	 * @param target
-	 * @return GP reward
-	 */
-	public static int calculatePvEGpGained(Player player, Creature target) {
-		float gpPercentage = target.isRaidMonster() ? 100f : APRewardEnum.apReward(player.getAbyssRank().getRank().getId());
-		boolean lvlDiff = player.getCommonData().getLevel() - target.getLevel() > 10;
-		float gpNpcRate = GpNpcRating(((Npc) target).getObjectTemplate().getRating());
-
-		return (int) (lvlDiff ? 1 : RewardType.GP_NPC.calcReward(player, (int) Math.floor(15 * gpPercentage * gpNpcRate / 100)));
 	}
 
 	/**
@@ -617,35 +601,6 @@ public class StatFunctions {
 				break;
 			case LEGENDARY:
 				multipler = 2500;// need check
-				break;
-			default:
-				multipler = 1;
-		}
-
-		return multipler;
-	}
-
-	/**
-	 * @param npcRating
-	 * @return GP Rating
-	 */
-	public static int GpNpcRating(NpcRating npcRating) {
-		int multipler;
-		switch (npcRating) {
-			case JUNK:
-				multipler = 1;
-				break;
-			case NORMAL:
-				multipler = 2;
-				break;
-			case ELITE:
-				multipler = 3;
-				break;
-			case HERO:
-				multipler = 10;// need check
-				break;
-			case LEGENDARY:
-				multipler = 20;// need check
 				break;
 			default:
 				multipler = 1;

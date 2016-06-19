@@ -133,9 +133,4 @@ public class PremiumRates extends Rates {
 	public float getSellLimitRate() {
 		return RateConfig.PREMIUM_SELL_LIMIT_RATE;
 	}
-
-	@Override
-	public float getGpNpcRate() {
-		return RateConfig.PREMIUM_GP_NPC_RATE;
-	}
 }

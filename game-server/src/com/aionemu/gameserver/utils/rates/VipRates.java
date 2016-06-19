@@ -127,9 +127,4 @@ public class VipRates extends Rates {
 	public float getSellLimitRate() {
 		return RateConfig.VIP_SELL_LIMIT_RATE;
 	}
-
-	@Override
-	public float getGpNpcRate() {
-		return RateConfig.VIP_GP_NPC_RATE;
-	}
 }

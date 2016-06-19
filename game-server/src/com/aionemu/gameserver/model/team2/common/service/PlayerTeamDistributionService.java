@@ -67,7 +67,7 @@ public class PlayerTeamDistributionService {
 
 			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
 			member.getCommonData().addDp(rewardDp);
-			if (owner.isRewardAP() && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
+			if (owner.getAi2().ask(AIQuestion.SHOULD_REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
 				int ap = (int) rewardAp / filteredStats.players.size();
 				if (ap >= 1) {
@@ -82,7 +82,7 @@ public class PlayerTeamDistributionService {
 				return;
 			}
 
-			if (winner.equals(team) && (!owner.getAi2().getName().equals("chest") || filteredStats.mentorCount == 0)) {
+			if (winner.equals(team) && (filteredStats.mentorCount == 0 || !owner.getAi2().getName().equals("chest"))) {
 				DropRegistrationService.getInstance().registerDrop(owner, mostDamagePlayer, filteredStats.highestLevel, filteredStats.players);
 			}
 		}

@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.aionemu.gameserver.ai2.AI2Engine;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
@@ -331,10 +330,6 @@ public class Npc extends Creature {
 
 	public void setNpcType(CreatureType newType) {
 		type = newType;
-	}
-
-	public boolean isRewardAP() {
-		return getAi2().ask(AIQuestion.SHOULD_REWARD_AP);
 	}
 
 	public boolean canBuyFrom() {

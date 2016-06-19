@@ -186,8 +186,8 @@ public class NpcAI2 extends AITemplate {
 			case SHOULD_LOOT:
 				return true;
 			case SHOULD_REWARD_AP:
-				return getOwner().getWorldType() != WorldType.ELYSEA && getOwner().getWorldType() != WorldType.ASMODAE
-					&& apRewardingRaces.contains(getRace());
+				WorldType wt = getOwner().getWorldType();
+				return wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
 			default:
 				return false;
 		}
