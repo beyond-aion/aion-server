@@ -32,7 +32,7 @@ import com.aionemu.gameserver.model.templates.rewards.BonusType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BonusItemGroup")
-@XmlSeeAlso({ CraftItemGroup.class, CraftRecipeGroup.class, ManastoneGroup.class, FoodGroup.class, MedicineGroup.class, OreGroup.class,
+@XmlSeeAlso({ CraftItemGroup.class, CraftRecipeGroup.class, EventGroup.class, ManastoneGroup.class, FoodGroup.class, MedicineGroup.class, OreGroup.class,
 	GatherGroup.class, EnchantGroup.class, BossGroup.class })
 public abstract class BonusItemGroup {
 

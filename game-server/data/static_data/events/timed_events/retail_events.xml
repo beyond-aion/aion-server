@@ -3971,7 +3971,7 @@
 					<spot x="1468.924" y="1468.615" z="572.876" h="95"/>
 				</spawn>
 				<!-- Andante -->
-				<!-- CUSTOM REWARDS
+				<!-- CUSTOM REWARDS PER CMD
 				<spawn npc_id="832968" respawn_time="295">
 					<spot x="1465.339" y="1467.533" z="572.876" h="95"/>
 				</spawn>
@@ -3988,7 +3988,7 @@
 					<spot x="1295.02" y="1436.568" z="209.091" h="85"/>
 				</spawn>
 				<!-- Andante -->
-				<!-- CUSTOM REWARDS
+				<!-- CUSTOM REWARDS PER CMD
 				<spawn npc_id="832971" respawn_time="295">
 					<spot x="1290.006" y="1438.963" z="209.091" h="77"/>
 				</spawn>
@@ -4000,16 +4000,98 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<!-- TODO: set base_chance -->
-			<gd_rule rule_name="Symphony of Legend Sheets" base_chance="0">
+			<!-- Green Garrisons -->
+			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="20" fixed_chance="true">
 				<gd_maps>
 					<gd_map map_id="600100000" name="Levinshor"/>
 				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235370" name="Tomul Brawler"/>
+					<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
+					<gd_npc npc_id="235372" name="Tomul Shaman"/>
+					<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
+					<gd_npc npc_id="235374" name="Denku Feralclaw"/>
+					<gd_npc npc_id="235375" name="Denku Fang"/>
+					<gd_npc npc_id="235376" name="Denku Restorer"/>
+					<gd_npc npc_id="235377" name="Denku Feralmage"/>
+				</gd_npcs>
 				<gd_items>
 					<gd_item id="188100252" name="Symphony of Legend - The First Movement"/>
+				</gd_items>
+			</gd_rule>
+			<!-- Blue Garrions -->
+			<gd_rule rule_name="Symphony of Legend - The Second Movement" base_chance="20" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="600100000" name="Levinshor"/>
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235346" name="Tomul Brawler"/>
+					<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
+					<gd_npc npc_id="235348" name="Tomul Shaman"/>
+					<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
+					<gd_npc npc_id="235350" name="Denku Feralclaw"/>
+					<gd_npc npc_id="235351" name="Denku Fang"/>
+					<gd_npc npc_id="235352" name="Denku Restorer"/>
+					<gd_npc npc_id="235353" name="Denku Feralmage"/>
+				</gd_npcs>
+				<gd_items>
 					<gd_item id="188100253" name="Symphony of Legend - The Second Movement"/>
+				</gd_items>
+			</gd_rule>
+			<!-- Yellow Garrions -->
+			<gd_rule rule_name="Symphony of Legend - The Third Movement" base_chance="20" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="600100000" name="Levinshor"/>
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235354" name="Tomul Brawler"/>
+					<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
+					<gd_npc npc_id="235356" name="Tomul Shaman"/>
+					<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
+					<gd_npc npc_id="235358" name="Denku Feralclaw"/>
+					<gd_npc npc_id="235359" name="Denku Fang"/>
+					<gd_npc npc_id="235360" name="Denku Restorer"/>
+					<gd_npc npc_id="235361" name="Denku Feralmage"/>
+				</gd_npcs>
+				<gd_items>
 					<gd_item id="188100254" name="Symphony of Legend - The Third Movement"/>
+				</gd_items>
+			</gd_rule>
+			<!-- Red Garrions -->
+			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" base_chance="20" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="600100000" name="Levinshor"/>
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235362" name="Tomul Brawler"/>
+					<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
+					<gd_npc npc_id="235364" name="Tomul Shaman"/>
+					<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
+					<gd_npc npc_id="235366" name="Denku Feralclaw"/>
+					<gd_npc npc_id="235367" name="Denku Fang"/>
+					<gd_npc npc_id="235368" name="Denku Restorer"/>
+					<gd_npc npc_id="235369" name="Denku Feralmage"/>
+				</gd_npcs>
+				<gd_items>
 					<gd_item id="188100255" name="Symphony of Legend - The Fourth Movement"/>
+				</gd_items>
+			</gd_rule>
+			<!-- Central Garrions -->
+			<gd_rule rule_name="Symphony of Legend - Epilogue" base_chance="20" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="600100000" name="Levinshor"/>
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235378" name="Tomul Brawler"/>
+					<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
+					<gd_npc npc_id="235380" name="Tomul Shaman"/>
+					<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
+					<gd_npc npc_id="235382" name="Denku Feralclaw"/>
+					<gd_npc npc_id="235383" name="Denku Fang"/>
+					<gd_npc npc_id="235384" name="Denku Restorer"/>
+					<gd_npc npc_id="235385" name="Denku Feralmage"/>
+				</gd_npcs>
+				<gd_items>
 					<gd_item id="188100256" name="Symphony of Legend - Epilogue"/>
 				</gd_items>
 			</gd_rule>

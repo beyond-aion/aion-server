@@ -4990,6 +4990,58 @@
 		<item id="166000196" level="175"/>
 		<item id="166020000" level="200"/>
 	</enchants>
+	<event_legendary_symphony bonusType="EVENT_LEGENDARY_SYMPHONY">
+		<!-- 80673/80678 - %Quest_Branch_Cashquest_Event_01 -->
+		<item id="188100253" level="1" count="1" chance="16.66"/>
+		<item id="188100254" level="1" count="1" chance="16.66"/>
+		<item id="188100255" level="1" count="1" chance="16.66"/>
+		<item id="188100256" level="1" count="1" chance="16.66"/>
+		<item id="182007170" level="1" count="1" chance="16.66"/>
+		<item id="182007170" level="1" count="5" chance="16.7"/>
+		<!-- 80674/80679 %Quest_Branch_Cashquest_Event_02 -->
+		<item id="188100254" level="2" count="1" chance="20"/>
+		<item id="188100255" level="2" count="1" chance="20"/>
+		<item id="188100256" level="2" count="1" chance="20"/>
+		<item id="182007170" level="2" count="1" chance="20"/>
+		<item id="182007170" level="2" count="5" chance="20"/>
+		<!-- 80675/80680 %Quest_Branch_Cashquest_Event_03 -->
+		<item id="188100253" level="3" count="1" chance="20"/>
+		<item id="188100255" level="3" count="1" chance="20"/>
+		<item id="188100256" level="3" count="1" chance="20"/>
+		<item id="182007170" level="3" count="1" chance="20"/>
+		<item id="182007170" level="3" count="5" chance="20"/>
+		<!-- 80676/80681 %Quest_Branch_Cashquest_Event_04 -->
+		<item id="188100253" level="4" count="1" chance="20"/>
+		<item id="188100254" level="4" count="1" chance="20"/>
+		<item id="188100256" level="4" count="1" chance="20"/>
+		<item id="182007170" level="4" count="1" chance="20"/>
+		<item id="182007170" level="4" count="5" chance="20"/>
+		<!-- 80697/80701 %Quest_Branch_Cashquest_Event_05 -->
+		<item id="188100253" level="5" count="10" chance="16.66"/>
+		<item id="188100254" level="5" count="10" chance="16.66"/>
+		<item id="188100255" level="5" count="10" chance="16.66"/>
+		<item id="188100256" level="5" count="10" chance="16.66"/>
+		<item id="182007170" level="5" count="10" chance="16.66"/>
+		<item id="182007170" level="5" count="50" chance="16.7"/>
+		<!-- 80698/80702 %Quest_Branch_Cashquest_Event_06 -->
+		<item id="188100254" level="6" count="10" chance="20"/>
+		<item id="188100255" level="6" count="10" chance="20"/>
+		<item id="188100256" level="6" count="10" chance="20"/>
+		<item id="182007170" level="6" count="10" chance="20"/>
+		<item id="182007170" level="6" count="50" chance="20"/>
+		<!-- 80699/80703 %Quest_Branch_Cashquest_Event_07 -->
+		<item id="188100253" level="7" count="10" chance="20"/>
+		<item id="188100255" level="7" count="10" chance="20"/>
+		<item id="188100256" level="7" count="10" chance="20"/>
+		<item id="182007170" level="7" count="10" chance="20"/>
+		<item id="182007170" level="7" count="50" chance="20"/>
+		<!-- 80700/80704 %Quest_Branch_Cashquest_Event_08 -->
+		<item id="188100253" level="8" count="10" chance="20"/>
+		<item id="188100254" level="8" count="10" chance="20"/>
+		<item id="188100256" level="8" count="10" chance="20"/>
+		<item id="182007170" level="8" count="10" chance="20"/>
+		<item id="182007170" level="8" count="50" chance="20"/>
+	</event_legendary_symphony>
 	<boss_rare bonusType="BOSS">
 		<item id="110100122" race="ELYOS"/>
 		<item id="110100123" race="ASMODIANS"/>

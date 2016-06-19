@@ -22,6 +22,7 @@
         <xs:element minOccurs="0" name="ores_epic" type="OreGroup"/>
         <xs:element minOccurs="0" name="gather_rare" type="GatherGroup"/>
         <xs:element minOccurs="0" name="enchants" type="EnchantGroup"/>
+		<xs:element minOccurs="0" name="event_legendary_symphony" type="EventGroup"/>
         <xs:element minOccurs="0" name="boss_rare" type="BossGroup"/>
         <xs:element minOccurs="0" name="boss_legendary" type="BossGroup"/>
         <xs:element minOccurs="0" name="feed_fluid" type="FeedFluidGroup"/>
@@ -115,7 +116,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="MedalReward"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="FullRewardItem"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -165,7 +166,17 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="IdLevelReward"/>
+          <xs:element name="item" type="IdLevelReward" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="EventGroup">
+    <xs:complexContent mixed="false">
+      <xs:extension base="BonusItemGroup">
+        <xs:sequence>
+          <xs:element name="item" type="FullRewardItem" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -175,7 +186,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="ItemRaceEntry"/>
+          <xs:element name="item" type="ItemRaceEntry" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -302,7 +313,7 @@
     </xs:complexContent>
   </xs:complexType>
   
-  <xs:complexType name="MedalReward">
+  <xs:complexType name="FullRewardItem">
     <xs:complexContent mixed="false">
       <xs:extension base="IdLevelReward">
         <xs:attribute name="count" type="xs:int" use="required"/>
@@ -317,6 +328,7 @@
       <xs:enumeration value="BOSS"/>
       <xs:enumeration value="COIN"/>
       <xs:enumeration value="ENCHANT"/>
+	  <xs:enumeration value="EVENT_LEGENDARY_SYMPHONY"/>
       <xs:enumeration value="FOOD"/>
       <xs:enumeration value="FORTRESS"/>
       <xs:enumeration value="GATHER"/>
