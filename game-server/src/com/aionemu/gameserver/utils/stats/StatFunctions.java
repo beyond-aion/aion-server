@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
+import com.aionemu.gameserver.configs.main.RateConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.model.SkillElement;
@@ -30,6 +31,8 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Calculations are based on the following research:<br>
@@ -37,38 +40,32 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
  * <br>
  * backup:
  * <a href="http://web.archive.org/web/20120111184941/http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/">Link
- * </a><br>
+ * </a>
  * 
- * @author ATracer, alexa026
+ * @author ATracer, alexa026, Neon
  */
 public class StatFunctions {
 
 	private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
 
 	/**
-	 * @param player
+	 * @param maxLevelInRange
+	 *          - level of the player who receives the reward (solo) or max player level in range (group)
 	 * @param target
+	 *          - the npc
 	 * @return XP reward from target
 	 */
-	public static long calculateSoloExperienceReward(Player player, Creature target) {
-		int playerLevel = player.getCommonData().getLevel();
+	public static long calculateExperienceReward(int maxLevelInRange, Npc target) {
+		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
 		int targetLevel = target.getLevel();
 		int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
-		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
-		return rewardXP;
-	}
-
-	/**
-	 * @param maxLevelInRange
-	 * @param target
-	 * @return
-	 */
-	public static long calculateGroupExperienceReward(int maxLevelInRange, Creature target) {
-		int targetLevel = target.getLevel();
-		int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
+		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier();
+		if (instance.getParent().isInstanceType() && MathUtil.isBetween(2, 6, instance.getPlayerMaxSize())) {
+			mapMulti *= instance.getPlayerMaxSize(); // on retail you get mob EP * max instance member count (only for group instances)
+			mapMulti /= RateConfig.XP_RATE; // custom: divide by regular xp rates, so they will not affect the rewarded XP
+		}
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - maxLevelInRange);
-		long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
+		long rewardXP = Math.round(baseXP * mapMulti * (xpPercentage / 100f));
 		return rewardXP;
 	}
 
@@ -77,7 +74,7 @@ public class StatFunctions {
 	 * @param target
 	 * @return DP reward from target
 	 */
-	public static int calculateSoloDPReward(Player player, Creature target) {
+	public static int calculateDPReward(Player player, Creature target) {
 		int playerLevel = player.getCommonData().getLevel();
 		int targetLevel = target.getLevel();
 		NpcRating npcRating = ((Npc) target).getObjectTemplate().getRating();
@@ -90,7 +87,6 @@ public class StatFunctions {
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
 		float rate = player.getRates().getDpNpcRate();
 		return (int) Math.floor(baseDP * xpPercentage * rate / 100);
-
 	}
 
 	/**
@@ -280,24 +276,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
-	 * @param target
-	 * @return DP reward
-	 */
-	public static int calculateGroupDPReward(Player player, Creature target) {
-		int playerLevel = player.getCommonData().getLevel();
-		int targetLevel = target.getLevel();
-		NpcRating npcRating = ((Npc) target).getObjectTemplate().getRating();
-
-		// TODO: fix to see monster Rating level, NORMAL lvl 1, 2 | ELITE lvl 1, 2 etc..
-		int baseDP = targetLevel * calculateRatingMultipler(npcRating);
-		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		float rate = player.getRates().getDpNpcRate();
-
-		return (int) Math.floor(baseDP * xpPercentage * rate / 100);
-	}
-
-	/**
 	 * Hate based on BOOST_HATE stat Now used only from skills, probably need to use for regular attack
 	 * 
 	 * @param creature
@@ -344,8 +322,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 *
- 	 * @param attacker
+	 * @param attacker
 	 * @param target
 	 * @param isMainHand
 	 * @param isSkill
@@ -471,7 +448,7 @@ public class StatFunctions {
 					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
 
 				int bonusDmg = isMainHand ? mAttack.getBonus() : Math.round(mAttack.getBonus() * 0.82f);
-				resultDamage = bonusDmg  + mAttack.getBase();
+				resultDamage = bonusDmg + mAttack.getBase();
 				resultDamage += Rnd.get(-negativeDiff, diff);
 
 				if (attacker.isInState(CreatureState.POWERSHARD)) {
@@ -678,7 +655,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 *
 	 * @param attacker
 	 * @param target
 	 * @param damages
@@ -699,7 +675,6 @@ public class StatFunctions {
 				damages *= pvpDamage * 0.01;
 			if (!noReduce)
 				damages = Math.round(damages * 0.42f);// 0.42 checked on NA (4.9) 19.03.2016
-
 
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;

@@ -135,7 +135,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	
 	@Override
 	public float getInstanceExpMultiplier() {
-		return 1;
+		return instance != null && instance.getParent().isInstanceType() ? 1.5f : 1.25f; // instance maps * 1.5, world maps * 1.25
 	}
 
 	@Override

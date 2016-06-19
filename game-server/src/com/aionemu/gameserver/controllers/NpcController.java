@@ -211,12 +211,12 @@ public class NpcController extends CreatureController<Npc> {
 				Player player = (Player) attacker;
 				if (!player.getLifeStats().isAlreadyDead()) {
 					// Reward init
-					long rewardXp = StatFunctions.calculateSoloExperienceReward(player, getOwner());
-					int rewardDp = StatFunctions.calculateSoloDPReward(player, getOwner());
+					long rewardXp = StatFunctions.calculateExperienceReward(player.getLevel(), getOwner());
+					int rewardDp = StatFunctions.calculateDPReward(player, getOwner());
 					float rewardAp = 1;
 
 					// Dmg percent correction
-					rewardXp *= percentage * player.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceExpMultiplier();
+					rewardXp *= percentage;
 					rewardDp *= percentage;
 					rewardAp *= percentage;
 
