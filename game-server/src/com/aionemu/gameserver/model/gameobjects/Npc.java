@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcGameStats;
@@ -34,7 +33,6 @@ import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.WorldType;
 
 /**
  * This class is a base class for all in-game NPCs, what includes: monsters and npcs that player can talk to (aka Citizens)
@@ -336,37 +334,7 @@ public class Npc extends Creature {
 	}
 
 	public boolean isRewardAP() {
-		if (this instanceof SiegeNpc) {
-			return true;
-		} else if (this.getWorldType() == WorldType.ABYSS) {
-			return true;
-		} else if (this.getAi2().ask(AIQuestion.SHOULD_REWARD_AP)) {
-			return true;
-		} else if (shouldRewardAp()) {
-			return true;
-		} else if (this.getWorldType() == WorldType.BALAUREA) {
-			return getRace() == Race.DRAKAN || getRace() == Race.LIZARDMAN;
-		}
-
-		return false;
-	}
-
-	// TODO: a better way to handle this. Maybe as an option in npc_templates?
-	private boolean shouldRewardAp() {
-		switch (this.getWorldId()) {
-			case 301380000: // Danuar Sanctuary
-			case 301140000: // Seized Danuar Sanctuary
-				if (this.getNpcId() != 233187 && this.getNpcId() != 233447 && this.getNpcId() != 233448)
-					return true;
-				break;
-			default:
-				break;
-		}
-		if (this.getNpcId() >= 236307 && this.getNpcId() <= 236418) { // Conquest Offering Npcs
-			return true;
-		}
-
-		return false;
+		return getAi2().ask(AIQuestion.SHOULD_REWARD_AP);
 	}
 
 	public boolean canBuyFrom() {
