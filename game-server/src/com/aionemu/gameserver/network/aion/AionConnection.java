@@ -91,6 +91,7 @@ public class AionConnection extends AConnection {
 
 	private AionPacketHandler aionPacketHandler;
 	private long lastPingTime;
+	private volatile int pingFailCount;
 
 	private int nbInvalidPackets = 0;
 	// TODO! why there is no any comments what is this doing? i have no clue what is it for [Nemesiss]
@@ -387,8 +388,16 @@ public class AionConnection extends AConnection {
 		return lastPingTime;
 	}
 
-	public void setLastPingTime() {
-		this.lastPingTime = System.currentTimeMillis();
+	public void setLastPingTime(long time) {
+		this.lastPingTime = time;
+	}
+	
+	public int increaseAndGetPingFailCount() {
+		return ++pingFailCount;
+	}
+
+	public void resetPingFailCount() {
+		pingFailCount = 0;
 	}
 
 	public void setMacAddress(String mac) {

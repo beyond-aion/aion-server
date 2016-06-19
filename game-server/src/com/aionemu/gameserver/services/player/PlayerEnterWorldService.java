@@ -269,6 +269,7 @@ public final class PlayerEnterWorldService {
 		Account account = player.getPlayerAccount();
 		PlayerCommonData pcd = player.getCommonData();
 
+		client.resetPingFailCount(); // client sometimes falls below 5 minutes between pings (after changing characters ?)
 		player.setClientConnection(client);
 		pcd.setOnline(true);
 		player.getFriendList().setStatus(Status.ONLINE, pcd);

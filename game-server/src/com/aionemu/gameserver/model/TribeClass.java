@@ -734,7 +734,7 @@ public enum TribeClass {
 
 	private Race guardRace;
 	private boolean isBasic;
-	private boolean isUsed = true;
+	private boolean isUsed = false;
 
 	private TribeClass() {
 	}
