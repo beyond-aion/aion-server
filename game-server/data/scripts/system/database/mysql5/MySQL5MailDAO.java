@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import javolution.util.FastTable;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +31,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author kosyachok
  */
@@ -41,45 +44,52 @@ public class MySQL5MailDAO extends MailDAO {
 	@Override
 	public Mailbox loadPlayerMailbox(Player player) {
 		final Mailbox mailbox = new Mailbox(player);
-		final int playerId = player.getObjectId();
-		DB.select("SELECT * FROM mail WHERE mail_recipient_id = ? ORDER BY recieved_time", new ParamReadStH() {
+		Map<Letter, Integer> letters = new FastMap<>();
+		List<Item> mailboxItems = null;
+
+		DB.select("SELECT * FROM mail WHERE mail_recipient_id = ?", new ParamReadStH() {
 
 			@Override
 			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, playerId);
+				stmt.setInt(1, player.getObjectId());
 			}
 
 			@Override
 			public void handleRead(ResultSet rset) throws SQLException {
-				List<Item> mailboxItems = loadMailboxItems(playerId);
 				while (rset.next()) {
 					int mailUniqueId = rset.getInt("mail_unique_id");
 					int recipientId = rset.getInt("mail_recipient_id");
 					String senderName = rset.getString("sender_name");
 					String mailTitle = rset.getString("mail_title");
 					String mailMessage = rset.getString("mail_message");
-					int unread = rset.getInt("unread");
-					int attachedItemId = rset.getInt("attached_item_id");
+					boolean unread = rset.getInt("unread") == 1;
+					int attachedItemObjId = rset.getInt("attached_item_id");
 					long attachedKinahCount = rset.getLong("attached_kinah_count");
 					LetterType letterType = LetterType.getLetterTypeById(rset.getInt("express"));
-					Timestamp recievedTime = rset.getTimestamp("recieved_time");
-					Item attachedItem = null;
-					if (attachedItemId != 0)
-						for (Item item : mailboxItems)
-							if (item.getObjectId() == attachedItemId) {
-								if (item.getItemTemplate().isArmor() || item.getItemTemplate().isWeapon())
-									DAOManager.getDAO(ItemStoneListDAO.class).load(Collections.singletonList(item));
-
-								attachedItem = item;
-							}
-
-					Letter letter = new Letter(mailUniqueId, recipientId, attachedItem, attachedKinahCount, mailTitle, mailMessage, senderName, recievedTime,
-						unread == 1, letterType);
-					letter.setPersistState(PersistentState.UPDATED);
-					mailbox.putLetterToMailbox(letter);
+					Timestamp receivedTime = rset.getTimestamp("recieved_time");
+					letters.put(new Letter(mailUniqueId, recipientId, null, attachedKinahCount, mailTitle, mailMessage, senderName, receivedTime, unread,
+						letterType), attachedItemObjId);
 				}
 			}
 		});
+
+		for (Entry<Letter, Integer> e : letters.entrySet()) {
+			Letter letter = e.getKey();
+			int attachedItemObjId = e.getValue();
+
+			if (attachedItemObjId > 0) {
+				if (mailboxItems == null) // lazy initialization to reduce DB load
+					mailboxItems = loadMailboxItems(player.getObjectId());
+				for (Item item : mailboxItems)
+					if (item.getObjectId() == attachedItemObjId) {
+						if (item.getItemTemplate().isArmor() || item.getItemTemplate().isWeapon())
+							DAOManager.getDAO(ItemStoneListDAO.class).load(Collections.singletonList(item));
+						letter.setAttachedItem(item);
+					}
+			}
+			letter.setPersistState(PersistentState.UPDATED);
+			mailbox.putLetterToMailbox(letter);
+		}
 
 		return mailbox;
 	}
