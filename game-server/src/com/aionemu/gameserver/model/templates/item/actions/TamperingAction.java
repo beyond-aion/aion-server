@@ -169,10 +169,10 @@ public class TamperingAction extends AbstractItemAction {
 		double chance = EnchantsConfig.TEMPERING_CHANCE;
 		double curTemp = target.getTempering();
 		if (target.getItemTemplate().getItemGroup().equals(ItemGroup.PLUME)) {
-			if (curTemp < 10)
+			if (curTemp < 8)
 				chance = 100 - (curTemp * 10);
 			else
-				chance = 10;
+				chance = 25;
 		}
 		return chance;
 	}
