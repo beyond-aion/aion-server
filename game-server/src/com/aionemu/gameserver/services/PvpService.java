@@ -55,7 +55,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpService {
 
 	private static final Logger log = LoggerFactory.getLogger("KILL_LOG");
-	private static final List<Integer> headhuntingMaps = new FastTable<>();
+	private static List<Integer> headhuntingMaps;
 	private final List<KillBountyTemplate> killBounties;
 	private final Map<Integer, Headhunter> headhunters;
 	private Map<Integer, KillList> pvpKillLists;
@@ -64,12 +64,7 @@ public class PvpService {
 		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
 		headhunters = DAOManager.getDAO(HeadhuntingDAO.class).loadHeadhunters();
 		pvpKillLists = new FastMap<>();
-
-		for (String world : EventsConfig.HEADHUNTING_MAPS.split(",")) {
-			if (world.equals(""))
-				break;
-			headhuntingMaps.add(Integer.parseInt(world));
-		}
+		headhuntingMaps = EventsConfig.HEADHUNTING_MAPS;
 	}
 
 	public static final PvpService getInstance() {

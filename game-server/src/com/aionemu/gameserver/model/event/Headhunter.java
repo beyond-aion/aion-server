@@ -37,6 +37,7 @@ public class Headhunter implements Comparable<Headhunter> {
 	public void incrementKills() {
 		accumulatedKills++;
 		lastUpdate = System.currentTimeMillis();
+		state = PersistentState.UPDATE_REQUIRED;
 	}
 
 	public PersistentState getPersistentState() {

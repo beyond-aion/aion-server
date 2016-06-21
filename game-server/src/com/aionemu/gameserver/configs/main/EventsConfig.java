@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.util.List;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -38,7 +40,7 @@ public class EventsConfig {
 	public static boolean ENABLE_HEADHUNTING;
 	
 	@Property(key = "gameserver.event.headhunting.maps", defaultValue = "")
-	public static String HEADHUNTING_MAPS;
+	public static List<Integer> HEADHUNTING_MAPS;
 	
 	@Property(key = "gameserver.event.headhunting.consolation_prize_kills", defaultValue = "50")
 	public static int HEADHUNTING_CONSOLATION_PRIZE_KILLS;
