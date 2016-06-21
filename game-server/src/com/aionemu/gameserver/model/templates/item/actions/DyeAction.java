@@ -15,12 +15,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEAR
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author IceReaper
+ * @modified Neon
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DyeAction")
 public class DyeAction extends AbstractItemAction implements IHouseObjectDyeAction {
@@ -42,39 +41,36 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
+		if (!targetItem.getItemSkinTemplate().isItemDyePermitted())
+			return;
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
-		if (targetItem.getItemSkinTemplate().isItemDyePermitted()) {
-			if (color.equals("no")) {
-				targetItem.setItemColor(0);
-				targetItem.setColorExpireTime(0);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_REMOVE_SUCCEED(ChatUtil.item(targetItem.getItemId())));
-			} else {
-				int colorItemId = parentItem.getItemId();
-				targetItem.setItemColor(colorItemId);
-				if (minutes != null)
-					targetItem.setColorExpireTime((int) (System.currentTimeMillis() / 1000 + minutes * 60));
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_SUCCEED(ChatUtil.item(targetItem.getItemId()), ChatUtil.item(colorItemId)));
-			}
-
-			// item is equipped, so need broadcast packet
-			if (player.getEquipment().getEquippedItemByObjId(targetItem.getObjectId()) != null) {
-				PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment()
-					.getEquippedForAppearence()), true);
-				player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			} else { // item is not equipped
-				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			}
-
-			ItemPacketService.updateItemAfterInfoChange(player, targetItem);
+		targetItem.setItemColor(getColor());
+		if (minutes != null)
+			targetItem.setColorExpireTime((int) (System.currentTimeMillis() / 1000 + minutes * 60));
+		else
+			targetItem.setColorExpireTime(0);
+		if (targetItem.getItemColor() == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_REMOVE_SUCCEED(ChatUtil.nameId(targetItem.getNameId())));
+		} else {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_SUCCEED(ChatUtil.nameId(targetItem.getNameId()), ChatUtil.nameId(parentItem.getNameId())));
 		}
+
+		// item is equipped, so need broadcast packet
+		if (player.getEquipment().getEquippedItemByObjId(targetItem.getObjectId()) != null) {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearence()), true);
+			player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		} else { // item is not equipped
+			player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		}
+
+		ItemPacketService.updateItemAfterInfoChange(player, targetItem);
 	}
 
-	public int getColor() {
-		if (color.equals("no"))
-			return 0;
-
-		return Util.toColorBGRA(Integer.parseInt(color, 16));
+	public Integer getColor() {
+		return color.equals("no") ? null : Integer.parseInt(color, 16);
 	}
 
 	@Override
@@ -97,11 +93,7 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 	public void act(Player player, Item parentItem, HouseObject<?> targetHouseObject) {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
-		if (color.equals("no")) {
-			targetHouseObject.setColor(null);
-		} else {
-			targetHouseObject.setColor(Integer.parseInt(color, 16));
-		}
+		targetHouseObject.setColor(getColor());
 		float x = targetHouseObject.getX();
 		float y = targetHouseObject.getY();
 		float z = targetHouseObject.getZ();
@@ -110,7 +102,7 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(5, targetHouseObject.getObjectId(), x, y, z, rotation));
 		targetHouseObject.spawn();
 		int objectName = targetHouseObject.getObjectTemplate().getNameId();
-		if (color.equals("no")) {
+		if (targetHouseObject.getColor() == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_REMOVE_SUCCEED(objectName));
 		} else {
 			int paintName = parentItem.getItemTemplate().getNameId();

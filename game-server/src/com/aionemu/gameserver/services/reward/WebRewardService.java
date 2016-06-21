@@ -31,14 +31,15 @@ public class WebRewardService {
 
 	public void verify(Player player) {
 		FastTable<RewardEntryItem> list = DAOManager.getDAO(RewardServiceDAO.class).getAvailable(player.getObjectId());
-		if (list.size() == 0 || player.getMailbox() == null)
+		if (list.size() == 0)
 			return;
 
 		FastTable<Integer> rewarded = new FastTable<>();
 
 		for (RewardEntryItem item : list) {
 			if (DataManager.ITEM_DATA.getItemTemplate(item.getId()) == null) {
-				log.warn("[RewardController][" + item.getEntryId() + "] null template for item " + item.getId() + " on player " + player.getObjectId() + ".");
+				log.warn("[RewardController][" + item.getEntryId() + "] item ID " + item.getId() + " for " + player
+					+ " is invalid and could therefore not be added.");
 				continue;
 			}
 
@@ -60,10 +61,13 @@ public class WebRewardService {
 					continue;
 				}
 
-				log.info("[RewardController][" + item.getEntryId() + "] player " + player.getName() + " has received (" + item.getCount() + ")" + item.getId() + ".");
+				log.info("[RewardController][" + item.getEntryId() + "] player " + player.getName() + " has received (" + item.getCount() + ")" + item.getId()
+					+ ".");
 				rewarded.add(item.getEntryId());
 			} catch (Exception e) {
-				log.error("[RewardController][" + item.getEntryId() + "] failed to add item (" + item.getCount() + ")" + item.getId() + " to " + player.getObjectId(), e);
+				log.error(
+					"[RewardController][" + item.getEntryId() + "] failed to add item (" + item.getCount() + ")" + item.getId() + " to " + player.getObjectId(),
+					e);
 				continue;
 			}
 		}

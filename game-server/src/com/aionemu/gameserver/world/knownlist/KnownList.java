@@ -2,7 +2,6 @@ package com.aionemu.gameserver.world.knownlist;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -216,12 +215,8 @@ public class KnownList {
 				}
 			}
 		}
-		MapRegion[] regions = owner.getActiveRegion().getNeighbours();
-		for (int i = 0; i < regions.length; i++) {
-			MapRegion r = regions[i];
-			Map<Integer, VisibleObject> objects = r.getObjects();
-			for (Entry<Integer, VisibleObject> e : objects.entrySet()) {
-				VisibleObject newObject = e.getValue();
+		for (MapRegion region : owner.getActiveRegion().getNeighbours()) {
+			for (VisibleObject newObject : region.getObjects().values()) {
 				if (newObject == null || owner.equals(newObject))
 					continue;
 
@@ -282,10 +277,9 @@ public class KnownList {
 	public int doOnAllNpcs(Visitor<Npc> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
-			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
-				VisibleObject newObject = e.getValue();
+			for (VisibleObject newObject : knownObjects.values()) {
 				if (newObject instanceof Npc) {
-					if ((++counter) == iterationLimit)
+					if (++counter > iterationLimit)
 						break;
 					visitor.visit((Npc) newObject);
 				}
@@ -303,10 +297,9 @@ public class KnownList {
 	public int doOnAllNpcsWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
-			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
-				VisibleObject newObject = e.getValue();
+			for (VisibleObject newObject : knownObjects.values()) {
 				if (newObject instanceof Npc) {
-					if ((++counter) == iterationLimit)
+					if (++counter > iterationLimit)
 						break;
 					visitor.visit((Npc) newObject, owner);
 				}
@@ -322,11 +315,9 @@ public class KnownList {
 			return;
 		}
 		try {
-			for (Entry<Integer, Player> e : knownPlayers.entrySet()) {
-				Player player = e.getValue();
-				if (player != null) {
+			for (Player player : knownPlayers.values()) {
+				if (player != null)
 					visitor.visit(player);
-				}
 			}
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
@@ -335,11 +326,9 @@ public class KnownList {
 
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			for (Entry<Integer, VisibleObject> e : knownObjects.entrySet()) {
-				VisibleObject newObject = e.getValue();
-				if (newObject != null) {
+			for (VisibleObject newObject : knownObjects.values()) {
+				if (newObject != null)
 					visitor.visit(newObject);
-				}
 			}
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);

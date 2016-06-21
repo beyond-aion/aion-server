@@ -187,6 +187,16 @@
 			80666 [XML] [Event] Dangerous Efforts for Honor 2
 			80667 [XML] [Event] Dangerous Efforts for Honor 3
 			80668 [XML] [Event] Dangerous Efforts for Honor 4
+			80673 [XML] [Event] Verify Symphony of Legend - The First Movement
+			80674 [XML] [Event] Verify Symphony of Legend - The Second Movement
+			80675 [XML] [Event] Verify Symphony of Legend - The Third Movement
+			80676 [XML] [Event] Verify Symphony of Legend - The Fourth Movement
+			80677 [XML] [Event] How to Verify the Symphony of Legend
+			80678 [XML] [Event] Verify Symphony of Legend - The First Movement
+			80679 [XML] [Event] Verify Symphony of Legend - The Second Movement
+			80680 [XML] [Event] Verify Symphony of Legend - The Third Movement
+			80681 [XML] [Event] Verify Symphony of Legend - The Fourth Movement
+			80682 [XML] [Event] How to Verify the Symphony of Legend
 			80689 [XML] [Event] Secret of the Vault
 			80690 [XML] [Event/Daily] Kill Kinah Grabbers
 			80691 [XML] [Event] Recapturing the Vault
@@ -195,6 +205,16 @@
 			80694 [XML] [Event] Budyn, the Bloodied
 			80695 [XML] [Event] Rupasha, the Rapacious
 			80696 [XML] [Event] Gradi, the Gruesome
+			80697 [XML] [Event] Mass Verification of Symphony of Legend - The First Movement
+			80698 [XML] [Event] Mass Verification of Symphony of Legend - The Second Movement
+			80699 [XML] [Event] Mass Verification of Symphony of Legend - The Third Movement
+			80700 [XML] [Event] Mass Verification of Symphony of Legend - The Fourth Movement
+			80701 [XML] [Event] Mass Verification of Symphony of Legend - The First Movement
+			80702 [XML] [Event] Mass Verification of Symphony of Legend - The Second Movement
+			80703 [XML] [Event] Mass Verification of Symphony of Legend - The Third Movement
+			80704 [XML] [Event] Mass Verification of Symphony of Legend - The Fourth Movement
+			80705 [CUSTOM_REMOVED] [Event] Confirmation of Friendship
+			80706 [CUSTOM_REMOVED] [Event] Confirmation of Friendship
 		[END] SUMMARY
 	-->
 
@@ -331,6 +351,24 @@
 	<item_collecting id="80666" start_npc_ids="832913"/>
 	<item_collecting id="80667" start_npc_ids="832913"/>
 	<item_collecting id="80668" start_npc_ids="832913"/>
+	<item_collecting id="80673" start_npc_ids="832967"/>
+	<item_collecting id="80674" start_npc_ids="832967"/>
+	<item_collecting id="80675" start_npc_ids="832967"/>
+	<item_collecting id="80676" start_npc_ids="832967"/>
+	<item_collecting id="80677" start_npc_ids="832967"/>
+	<item_collecting id="80678" start_npc_ids="832970"/>
+	<item_collecting id="80679" start_npc_ids="832970"/>
+	<item_collecting id="80680" start_npc_ids="832970"/>
+	<item_collecting id="80681" start_npc_ids="832970"/>
+	<item_collecting id="80682" start_npc_ids="832970"/>
+	<item_collecting id="80697" start_npc_ids="832969"/>
+	<item_collecting id="80698" start_npc_ids="832969"/>
+	<item_collecting id="80699" start_npc_ids="832969"/>
+	<item_collecting id="80700" start_npc_ids="832969"/>
+	<item_collecting id="80701" start_npc_ids="832972"/>
+	<item_collecting id="80702" start_npc_ids="832972"/>
+	<item_collecting id="80703" start_npc_ids="832972"/>
+	<item_collecting id="80704" start_npc_ids="832972"/>
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028"/>

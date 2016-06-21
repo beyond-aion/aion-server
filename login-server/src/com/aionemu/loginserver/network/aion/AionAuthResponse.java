@@ -4,344 +4,340 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class contains possible response that LoginServer may send to client if login fail etc.
+ * This class contains possible response that LoginServer may send to client.
  * 
- * @author KID
- * @modified Neon
+ * @author KID, Neon
  */
 public enum AionAuthResponse {
 	/**
-	 * that one is not being sent to client, it's only for internal use. Everything is OK
+	 * Everything is OK.
 	 */
-	AUTHED(0),
+	STR_L2AUTH_S_ALL_OK(0),
 
 	/**
 	 * System error.
 	 */
-	SYSTEM_ERROR(1),
+	STR_L2AUTH_S_DATABASE_FAIL(1),
 
 	/**
-	 * ID or password does not match.
+	 * ID or Password does not match
 	 */
-	INVALID_PASSWORD(2),
+	STR_L2AUTH_S_INVALID_ACCOUT(2),
 
 	/**
-	 * ID or password does not match.
+	 * ID or Password does not match
 	 */
-	INVALID_PASSWORD2(3),
+	STR_L2AUTH_S_INCORRECT_PWD(3),
 
 	/**
 	 * Failed to load your account info.
 	 */
-	FAILED_ACCOUNT_INFO(4),
+	STR_L2AUTH_S_ACCOUNT_LOAD_FAIL(4),
 
 	/**
 	 * Failed to load your social security number.
 	 */
-	FAILED_SOCIAL_NUMBER(5),
+	STR_L2AUTH_S_LOAD_SSN_ERROR(5),
 
 	/**
-	 * No game server is registered to the authorization server.
+	 * No game server is available to the authorization server.
 	 */
-	NO_GS_REGISTERED(6),
+	STR_L2AUTH_S_NO_SERVER_LIST(6),
 
 	/**
 	 * You are already logged in.
 	 */
-	ALREADY_LOGGED_IN(7),
+	STR_L2AUTH_S_ALREADY_LOGIN(7),
 
 	/**
 	 * The selected server is down and you cannot access it.
 	 */
-	SERVER_DOWN(8),
+	STR_L2AUTH_S_SERVER_DOWN(8),
 
 	/**
 	 * The login information does not match the information you provided.
 	 */
-	INVALID_PASSWORD3(9),
+	STR_L2AUTH_S_INCORRECT_MD5Key(9),
 
 	/**
-	 * No Login info available.
+	 * No login info available.
 	 */
-	NO_SUCH_ACCOUNT(10),
+	STR_L2AUTH_S_NO_LOGININFO(10),
 
 	/**
-	 * You have been disconnected from the server by request of the PlayNC Homepage.
+	 * The connection to the server has been interrupted.
 	 */
-	DISCONNECTED(11),
+	STR_L2AUTH_S_KICKED_BY_WEB(11),
 
 	/**
 	 * You are not old enough to play the game.
 	 */
-	AGE_LIMIT(12),
+	STR_L2AUTH_S_UNDER_AGE(12),
 
 	/**
 	 * Double login attempts have been detected.
 	 */
-	ALREADY_LOGGED_IN2(13),
+	STR_L2AUTH_S_KICKED_DOUBLE_LOGIN(13),
 
 	/**
 	 * You are already logged in.
 	 */
-	ALREADY_LOGGED_IN3(14),
+	STR_L2AUTH_S_ALREADY_PLAY_GAME(14),
 
 	/**
-	 * You cannot connect to the server because there are too many users right now.
+	 * Sorry, the queue is full. Please try another server.
 	 */
-	SERVER_FULL(15),
+	STR_L2AUTH_S_LIMIT_EXCEED(15),
 
 	/**
-	 * The server is currently unavailable. Please try connecting again later.
+	 * The server is currently unavailable. Please try again later.
 	 */
-	GM_ONLY(16),
+	STR_L2AUTH_S_SEVER_CHECK(16),
 
 	/**
 	 * Please login to the game after you have changed your password.
 	 */
-	CHANGE_PASSWORD(17),
+	STR_L2AUTH_S_MODIFY_PASSWORD(17),
 
 	/**
-	 * Either the usage period has expired or we are experiencing a temporary connection difficulty. For more information, please contact the
-	 * administrators or our customer center.
+	 * The usage period has expired, or there are temporary connection problems. You have been disconnected. Please contact customer support.
 	 */
-	TIME_EXPIRED(18),
+	STR_L2AUTH_S_NOT_PAID(18),
 
 	/**
 	 * You have used up your allocated time and there is no time left on this account.
 	 */
-	TIME_EXPIRED2(19),
+	STR_L2AUTH_S_NO_SPECIFICTIME(19),
 
 	/**
 	 * System error.
 	 */
-	SYSTEM_ERROR2(20),
+	STR_L2AUTH_S_SYSTEM_ERROR(20),
 
 	/**
 	 * The IP is already in use.
 	 */
-	ALREADY_USED_IP(21),
+	STR_L2AUTH_S_ALREADY_USED_IP(21),
 
 	/**
 	 * You cannot access the game through this IP.
 	 */
-	BAN_IP(22),
+	STR_L2AUTH_S_BLOCKED_IP(22),
 
 	/**
 	 * Deleted the character.
 	 */
-	CHARACTER_DELETED(23),
+	STR_L2AUTH_S_DELETE_CHARACTER_OK(23),
 
 	/**
 	 * Created the character.
 	 */
-	CHARACTER_CREATED(24),
+	STR_L2AUTH_S_CREATE_CHARACTER_OK(24),
 
 	/**
 	 * Invalid character name
 	 */
-	CHARACTER_NAME_INVALID(25),
+	STR_L2AUTH_S_INVALID_NAME(25),
 
 	/**
 	 * Invalid character info
 	 */
-	CHARACTER_INFO_INVALID(26),
+	STR_L2AUTH_S_INVALID_GENDER(26),
 
 	/**
 	 * Invalid character info (class)
 	 */
-	CHARACTER_INFO_INVALID2(27),
+	STR_L2AUTH_S_INVALID_CLASS(27),
 
 	/**
 	 * Invalid character attribute
 	 */
-	CHARACTER_ATTR_INVALID(28),
+	STR_L2AUTH_S_INVALID_ATTR(28),
 
 	/**
 	 * Exceeds the maximum number of characters
 	 */
-	CHARACTER_LIMIT_REACHED(29),
+	STR_L2AUTH_S_MAX_CHAR_NUM_OVER(29),
 
 	/**
-	 * Used up all your relax server time
+	 * Used up all relax server time
 	 */
-	TIME_EXPIRED3(30),
+	STR_L2AUTH_S_TIME_SERVER_LIMIT_EXCEED(30),
 
 	/**
 	 * Failed to authenticate the Security Card.
 	 */
-	FAILED_SECURITY_CARD(31),
+	STR_L2AUTH_S_INVALID_SECURITY_CARD(31),
 
 	/**
-	 * According to the Juvenile Protection Policy, you cannot play the game at this time.
+	 * Age limit applied after a specified time (currently only for Thailand)
 	 */
-	PROTECTION_POLICY(32),
+	STR_L2AUTH_S_UNDER_AGE_TIME_LIMIT(32),
 
 	/**
 	 * Restricted server.
 	 */
-	RESTRICTED_SERVER(33),
+	STR_L2AUTH_S_RESTRICTED_SERVER(33),
 
 	/**
 	 * Usage time has expired
 	 */
-	TIME_EXPIRED4(34),
+	STR_L2AUTH_S_TIME_EXHAUSTED(34),
 
 	/**
 	 * You cannot run 2 clients in one computer in the internet cafe.
 	 */
-	CLIENT_LIMIT_INTERNET_CAFE(35),
+	STR_L2AUTH_S_DISALLOWED_MULTI_LOADING(35),
 
 	/**
 	 * Dormant account
 	 */
-	DORMANT_ACCOUNT(36),
+	STR_L2AUTH_S_DORMANT_USER(36),
 
 	/**
-	 * Your account has not been verified. Please identify yourself on the Aion Free-to-Play website (www.aionfreetoplay.com) and start again.
+	 * Your account has not been verified.\nPlease identify yourself on the Aion Free-to-Play website (www.aionfreetoplay.com) and start again.
 	 */
-	NOT_VERIFIED(37),
+	STR_L2AUTH_S_AGREE_GAME(37),
 
 	/**
 	 * Waiting for parent approval.
 	 */
-	PARENT_APPROVAL(38),
+	STR_L2AUTH_S_WAITING_PARENTS_APPROVAL(38),
 
 	/**
 	 * Waiting to leave
 	 */
-	WAITING_TO_LEAVE(39),
+	STR_L2AUTH_S_WAITING_SECEDE(39),
 
 	/**
 	 * Changed Account
 	 */
-	CHANGED_ACCOUNT(40),
+	STR_L2AUTH_S_LINKED_GAME_ACCOUNT(40),
 
 	/**
 	 * Request Quiz Change
 	 */
-	CHANGE_SECURITY_QUESTION(41),
+	STR_L2AUTH_S_MODIFY_QUIZ(41),
 
 	/**
 	 * Exceeded the maximum number of simultaneously connected accounts for a user.
 	 */
-	CLIENT_LIMIT2(42),
+	STR_L2AUTH_S_EXCEED_CONCURRENT_PLAY_LIMIT(42),
 
 	/**
 	 * If you use an external account, you are blocked in the external authorization system.
 	 */
-	BLOCKED_EXTERNALLY(43),
+	STR_L2AUTH_S_EXTERNAL_AUTH_BLOCKED(43),
 
 	/**
-	 * Authorization Error ()
+	 * Authorization Error (%0)
 	 */
-	AUTHORIZATION_ERROR(44),
+	STR_L2AUTH_UNKNOWN(44),
 
 	/**
 	 * You can only run Aion after logging in on the official homepage.
 	 */
-	WEBSITE_LOGIN(45),
+	STR_L2AUTH_S_APP_LAUNCH_NOT_SUPPORTED(45),
 
 	/**
 	 * The authentication number is incorrect. Please check the number once again.
 	 */
-	PHONE_AUTH_INCORRECT(46),
+	STR_L2AUTH_NCTASD_AUTHFAILED(46),
 
 	/**
 	 * Telephone authentication service is currently under maintenance. Please try again later.
 	 */
-	PHONE_AUTH_MAINTENANCE(47),
+	STR_L2AUTH_NCTASD_IVRNOTAVAILABLE(47),
 
 	/**
 	 * The input time for the ARS number has expired.
 	 */
-	ARS_NUMBER(48),
+	STR_L2AUTH_NCTASD_AUTHTIMEOUT(48),
 
 	/**
 	 * The telephone authentication service is unavailable as there is no phone connection or the line is busy. Please try again after moving to where
 	 * there is phone connection or hanging up the phone.
 	 */
-	PHONE_AUTH_UNAVAILABLE(49),
+	STR_L2AUTH_NCTASD_PHONENOTAVAILABLE(49),
 
 	/**
 	 * The telephone number is incorrect. Please check your registration information.
 	 */
-	PHONE_NUMBER_INCORRECT(50),
+	STR_L2AUTH_NCTASD_INVALIDCUSTOMERINFO(50),
 
 	/**
 	 * Telephone authentication service is currently under maintenance. Please try again later.
 	 */
-	PHONE_AUTH_MAINTENANCE2(51),
+	STR_L2AUTH_NCTASD_NOTAVAILABLE(51),
 
 	/**
 	 * The telephone authentication service is currently unavailable due to a high customer demand. Please try again later.
 	 */
-	PHONE_AUTH_UNAVAILABLE2(52),
+	STR_L2AUTH_NCTASD_TOOBUSY2(52),
 
 	/**
 	 * Telephone authentication service period has expired. Please try again after you have paid for the service.
 	 */
-	PHONE_AUTH_EXPIRED(53),
+	STR_L2AUTH_NCTASD_NOTPAID(53),
 
 	/**
 	 * Telephone authentication service is blocked due to repeated telephone authentication failures. Please try again later.
 	 */
-	PHONE_AUTH_BLOCKED(54),
+	STR_L2AUTH_NCTASD_AUTHBLOCKEDTEMP(54),
 
 	/**
 	 * You have exceeded the number of times you can use the telephone authentication service in one day.
 	 */
-	PHONE_AUTH_EXPIRED2(55),
+	STR_L2AUTH_NCTASD_CALLLIMITEXCEEDED(55),
 
 	/**
 	 * The telephone authentication service is currently in progress. Please wait a moment.
 	 */
-	PHONE_AUTH_PROCESSING(56),
+	STR_L2AUTH_NCTASD_AUTHALREADYINPROCESS(56),
 
 	/**
-	 * Authorization Error ()
+	 * Authorization Error (%0)
 	 */
-	AUTHORIZATION_ERROR2(57),
+	STR_L2AUTH_UNKNOWN2(57),
 
 	/**
-	 * Authorization Error ()
+	 * Authorization Error (%0)
 	 */
-	AUTHORIZATION_ERROR3(58),
+	STR_L2AUTH_UNKNOWN3(58),
 
 	/**
 	 * This computer has not subscribed to the PC registration service.
 	 */
-	PC_REGISTRATION(59),
+	STR_L2AUTH_PCINFO_INVALID_REGISTER_PC(59),
 
 	/**
 	 * Authorization Error
 	 */
-	AUTHORIZATION_ERROR4(60),
+	STR_L2AUTH_UNKNOWN4(60),
 
 	/**
 	 * An illegal program has been detected. Closing the game.
 	 */
-	ILLEGAL_PROGRAM(61),
+	STR_KICK_BOT_AUTO(61),
 
 	/**
 	 * The account server is down. You cannot access it now.
 	 */
-	ACCOUNT_SERVER_DOWN(62);
+	STR_L2AUTH_S_ACCOUNTCACHESERVER_DOWN(62);
 
 	/**
 	 * id of this enum that may be sent to client
 	 */
-	private int messageId;
+	private int msgId;
 
 	/**
 	 * Map which will hold all enum values and their ids.
 	 */
 	private final static Map<Integer, AionAuthResponse> map = new HashMap<Integer, AionAuthResponse>();
 
-	// generate static map
 	static {
-		for (AionAuthResponse enumValue : AionAuthResponse.values()) {
-			map.put(enumValue.getMessageId(), enumValue);
-		}
+		for (AionAuthResponse val : values())
+			map.put(val.getId(), val);
 	}
 
 	/**
@@ -351,7 +347,7 @@ public enum AionAuthResponse {
 	 *          id of the message
 	 */
 	private AionAuthResponse(int msgId) {
-		messageId = msgId;
+		this.msgId = msgId;
 	}
 
 	/**
@@ -359,17 +355,15 @@ public enum AionAuthResponse {
 	 * 
 	 * @return message id
 	 */
-	public int getMessageId() {
-		return messageId;
+	public int getId() {
+		return msgId;
 	}
 
 	/**
-	 * Returns the auth response for the given enum id.
-	 * 
-	 * @param id
-	 * @return corresponding auth response or null if id was not found
+	 * @param msgId
+	 * @return The auth response for the given message id or null if id was not found
 	 */
-	public static AionAuthResponse getResponseById(int id) {
-		return map.get(id);
+	public static AionAuthResponse getResponseById(int msgId) {
+		return map.get(msgId);
 	}
 }

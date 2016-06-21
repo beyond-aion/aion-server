@@ -371,8 +371,6 @@ public class InstanceService {
 	}
 
 	public static void onLeaveInstance(Player player) {
-		if (!player.getPosition().isSpawned())
-			return;
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onLeaveInstance(player);
 		for (Item item : player.getInventory().getItems()) {
 			if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())

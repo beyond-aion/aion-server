@@ -30,13 +30,10 @@ public class CM_PLAY extends AionClientPacket {
 	 */
 	private byte servId;
 
-	public CM_PLAY(ByteBuffer buf, LoginConnection client) {
-		super(buf, client, 0x02);
+	public CM_PLAY(ByteBuffer buf, LoginConnection client, int opCode) {
+		super(buf, client, opCode);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		accountId = readD();
@@ -44,9 +41,6 @@ public class CM_PLAY extends AionClientPacket {
 		servId = (byte) readC();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		LoginConnection con = getConnection();
@@ -54,16 +48,16 @@ public class CM_PLAY extends AionClientPacket {
 		if (key.checkLogin(accountId, loginOk)) {
 			GameServerInfo gsi = GameServerTable.getGameServerInfo(servId);
 			if (gsi == null || !gsi.isOnline())
-				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.SERVER_DOWN));
+				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.STR_L2AUTH_S_SERVER_DOWN));
 			// else if(serv gm only)
 			// con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.GM_ONLY));
 			else if (gsi.isFull())
-				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.SERVER_FULL));
+				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.STR_L2AUTH_S_LIMIT_EXCEED));
 			else {
 				con.setJoinedGs();
 				sendPacket(new SM_PLAY_OK(key, servId));
 			}
 		} else
-			con.close(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR), false);
+			con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR));
 	}
 }

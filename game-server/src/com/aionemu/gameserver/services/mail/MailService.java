@@ -28,15 +28,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
-import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
-import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
@@ -305,7 +302,7 @@ public class MailService {
 						ExpireTimerTask.getInstance().addTask(attachedItem, player);
 				}
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(letterId, attachmentType));
-				letter.removeAttachedItem();
+				letter.setAttachedItem(null);
 				break;
 			}
 			case 1: {
@@ -343,35 +340,13 @@ public class MailService {
 	 * @param player
 	 */
 	public void onPlayerLogin(Player player) {
-		ThreadPoolManager.getInstance().execute(new MailLoadTask(player));
+		player.setMailbox(DAOManager.getDAO(MailDAO.class).loadPlayerMailbox(player));
+		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
 	}
 
 	public void refreshMail(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, player.getMailbox().getLetters(), false));
-	}
-
-	/**
-	 * Task to load all player mail items
-	 * 
-	 * @author ATracer
-	 */
-	private class MailLoadTask implements Runnable {
-
-		private Player player;
-
-		private MailLoadTask(Player player) {
-			this.player = player;
-		}
-
-		@Override
-		public void run() {
-			player.setMailbox(DAOManager.getDAO(MailDAO.class).loadPlayerMailbox(player));
-			PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
-			HousingBidService.getInstance().onPlayerLogin(player);
-			VeteranRewardService.getInstance().tryReward(player); // must ensure player mailbox is initialized first
-		}
-
 	}
 
 	@SuppressWarnings("synthetic-access")

@@ -11,7 +11,7 @@ import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_AUTH;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_DISCONNECTED;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_LIST;
-import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_LOGIN_LOG;
+import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_CONNECTION_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_RECONNECT_KEY;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_TOLL_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_BAN;
@@ -20,9 +20,7 @@ import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_AUTH;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_CHARACTER;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_GS_PONG;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_HDDBAN_CONTROL;
-import com.aionemu.loginserver.network.gameserver.clientpackets.CM_HDD_SERIAL;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_LS_CONTROL;
-import com.aionemu.loginserver.network.gameserver.clientpackets.CM_MAC;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_MACBAN_CONTROL;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_PREMIUM_CONTROL;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_PTRANSFER_CONTROL;
@@ -55,9 +53,6 @@ public class GsPacketHandlerFactory {
 					case 0:
 						msg = new CM_GS_AUTH();
 						break;
-					case 13:
-						msg = new CM_MAC();
-						break;
 					default:
 						unknownPacket(state, id);
 				}
@@ -84,7 +79,7 @@ public class GsPacketHandlerFactory {
 						msg = new CM_BAN();
 						break;
 					case 7:
-						msg = new CM_ACCOUNT_LOGIN_LOG();
+						msg = new CM_ACCOUNT_CONNECTION_INFO();
 						break;
 					case 8:
 						msg = new CM_GS_CHARACTER();
@@ -102,18 +97,12 @@ public class GsPacketHandlerFactory {
 						msg = new CM_GS_PONG();
 						break;
 					case 13:
-						msg = new CM_MAC();
-						break;
-					case 14:
 						msg = new CM_PTRANSFER_CONTROL();
 						break;
-					case 15:
-						msg = new CM_HDD_SERIAL();
-						break;
-					case 16:
+					case 14:
 						msg = new CM_HDDBAN_CONTROL();
 						break;
-					case 17:
+					case 15:
 						msg = new CM_CHANGE_ALLOWED_HDD_SERIAL();
 						break;
 					default:

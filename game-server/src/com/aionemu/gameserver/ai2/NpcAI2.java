@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.ai2;
 
+import java.util.EnumSet;
+
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.event.AIListenable;
 import com.aionemu.gameserver.ai2.handler.ActivateEventHandler;
@@ -28,6 +30,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 
 /**
@@ -35,6 +38,9 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
  */
 @AIName("npc")
 public class NpcAI2 extends AITemplate {
+
+	private static final EnumSet<Race> apRewardingRaces = EnumSet.of(Race.DARK, Race.DRAGON, Race.DRAGONET, Race.DRAKAN, Race.GCHIEF_DARK,
+		Race.GCHIEF_DRAGON, Race.GCHIEF_LIGHT, Race.GHENCHMAN_DARK, Race.GHENCHMAN_LIGHT, Race.LIGHT, Race.LIZARDMAN, Race.NAGA, Race.SIEGEDRAKAN);
 
 	@Override
 	public Npc getOwner() {
@@ -179,6 +185,9 @@ public class NpcAI2 extends AITemplate {
 			case SHOULD_REWARD:
 			case SHOULD_LOOT:
 				return true;
+			case SHOULD_REWARD_AP:
+				WorldType wt = getOwner().getWorldType();
+				return wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
 			default:
 				return false;
 		}

@@ -53,9 +53,12 @@ public class Headhunting extends AdminCommand {
 
 	public Headhunting() {
 		super("headhunting");
-		setParamInfo("<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
-			"<show> - Shows the registered rewards or analyzed results if <rewards | results> was additionally typed",
-			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries).");
+		setParamInfo(
+			"<analyze> - Analyzes the season.",
+			"<clear> - Clears the analayzed results",
+			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
+			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries)."
+		);
 
 		/* Initialize seasonal headhunting rewards */
 		rewards.put(1, new FastTable<>());
@@ -98,7 +101,7 @@ public class Headhunting extends AdminCommand {
 				}
 				break;
 			case "show":
-				if (params.length < 1)
+				if (params.length == 1)
 					sendInfo(admin);
 				else if (params[1].equalsIgnoreCase("rewards"))
 					showRewards(admin);

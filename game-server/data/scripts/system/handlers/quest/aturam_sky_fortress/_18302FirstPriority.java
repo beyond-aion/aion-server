@@ -6,7 +6,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Luzien
@@ -45,7 +44,7 @@ public class _18302FirstPriority extends QuestHandler {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
-					playQuestMovie(env, 468);
+					playQuestMovie(env, 469);
 					return sendQuestStartDialog(env);
 				} else {
 					return sendQuestStartDialog(env);
@@ -103,9 +102,6 @@ public class _18302FirstPriority extends QuestHandler {
 					return true;
 				}
 			}
-		} else if (var0 == 5) {
-			if (targetId == popuchinId)
-				QuestService.spawnQuestNpc(300240000, player.getInstanceId(), 730375, 374.9f, 424.3f, 653.53f, (byte)0);
 		}
 
 		return false;

@@ -22,40 +22,33 @@ public class SM_SERVER_LIST extends AionServerPacket {
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		Collection<GameServerInfo> servers = GameServerTable.getGameServers();
-		Map<Integer, Integer> charactersCountOnServer = null;
+		Map<Byte, Integer> charCountOnServer = AccountController.getGSCharacterCountsFor(con.getAccount().getId());
+		int maxIdWithChars = 0;
 
-		int accountId = con.getAccount().getId();
-		int maxId = 0;
-
-		charactersCountOnServer = AccountController.getGSCharacterCountsFor(accountId);
-
-		writeC(servers.size());// servers
-		writeC(con.getAccount().getLastServer());// last server
+		writeC(servers.size()); // loop size
+		writeC(con.getAccount().getLastServer());
 		for (GameServerInfo gsi : servers) {
-			if (gsi.getId() > maxId)
-				maxId = gsi.getId();
-
-			writeC(gsi.getId());// server id
-			writeB(gsi.getIp()); // server IP
-			writeD(gsi.getPort());// port
-			writeC(0x00); // age limit
-			writeC(0x01);// pvp=1
-			writeH(gsi.getCurrentPlayers());// currentPlayers
-			writeH(gsi.getMaxPlayers());// maxPlayers
-			writeC(gsi.isOnline() ? 1 : 0);// ServerStatus, up=1
-			writeC(1);// bits);
-			writeD(0);// server.brackets ? 0x01 : 0x00);
+			byte gsId = gsi.getId();
+			if (gsId > maxIdWithChars && charCountOnServer.get(gsId) != null)
+				maxIdWithChars = gsi.getId();
+			writeC(gsId);
+			writeB(gsi.getIp());
+			writeH(gsi.getPort());
+			writeH(0); // unk, always 0
+			writeC(0); // age limit (?)
+			writeC(0); // pvp=1 (?)
+			writeH(gsi.getCurrentPlayers());
+			writeH(gsi.getMaxPlayers());
+			writeC(gsi.isOnline() ? 1 : 0);
+			writeC(1); // server type (1 = normal, 4 = test server)
+			writeC(0); // hide server from list (beginner or panesterra server) ? 1 : 0
+			writeH(0); // unk, always 0
+			writeC(0);// server.brackets ? 1 : 0
 		}
-		writeH(++maxId);
-		writeC(0x01);
-
-		for (int i = 1; i < maxId; i++) {
-			if (charactersCountOnServer.containsKey(i))
-				writeC(charactersCountOnServer.get(i));
-			else
-				writeC(0);
-		}
-		writeB(new byte[14]);
+		writeH(++maxIdWithChars);
+		writeC(1); // enable "last server" button & auto-connection ? 1 : 0
+		for (byte i = 1; i < maxIdWithChars; i++)
+			writeC(charCountOnServer.getOrDefault(i, 0));
+		writeB(new byte[13]); // unk (44 77 90 A8 5D 75 C9 98 6D 20 53 2A 97)
 	}
-
 }

@@ -39,7 +39,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 			writeD(item.getItemSkinTemplate().getTemplateId());
 			GodStone godStone = item.getGodStone();
 			writeD(godStone != null ? godStone.getItemId() : 0);
-			writeD(item.getItemColor());
+			writeDyeInfo(item.getItemColor());
 			writeH(item.getItemEnchantParam());
 			writeH(0); // 4.7
 		}

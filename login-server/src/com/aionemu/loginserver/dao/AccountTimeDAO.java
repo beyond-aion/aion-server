@@ -9,28 +9,28 @@ import com.aionemu.loginserver.model.AccountTime;
 public abstract class AccountTimeDAO implements DAO {
 
 	/**
-	 * Updates @link com.aionemu.loginserver.model.AccountTime data of account
+	 * Updates {@link AccountTime} data of account
 	 * 
 	 * @param accountId
 	 *          account id
 	 * @param accountTime
 	 *          account time set
-	 * @return was update successfull or not
+	 * @return Update success status
 	 */
 	public abstract boolean updateAccountTime(int accountId, AccountTime accountTime);
 
 	/**
-	 * Updates @link com.aionemu.loginserver.model.AccountTime data of account
+	 * Updates {@link AccountTime} data of account
 	 * 
 	 * @param accountId
-	 * @return AccountTime
+	 * @return AccountTime or null on error
 	 */
 	public abstract AccountTime getAccountTime(int accountId);
 
 	/**
-	 * Returns uniquire class name for all implementations
+	 * Returns unique class name for all implementations
 	 * 
-	 * @return uniquire class name for all implementations
+	 * @return unique class name for all implementations
 	 */
 	@Override
 	public final String getClassName() {

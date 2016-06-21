@@ -41,21 +41,11 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		ItemStone god = item.getGodStone();
 		writeD(buf, god == null ? 0 : god.getItemId());
 
-		int itemColor = item.getItemColor();
 		int dyeExpiration = item.getColorTimeLeft();
-		// expired dyed items
-		if ((dyeExpiration > 0 && item.getColorExpireTime() > 0 || dyeExpiration == 0 && item.getColorExpireTime() == 0)
-			&& item.getItemTemplate().isItemDyePermitted()) {
-			writeC(buf, itemColor == 0 ? 0 : 1);
-			writeD(buf, itemColor);
-			writeD(buf, 0); // unk 1.5.1.9
-			writeD(buf, dyeExpiration); // seconds until dye expires
-		} else {
-			writeC(buf, 0);
-			writeD(buf, 0);
-			writeD(buf, 0); // unk 1.5.1.9
-			writeD(buf, 0);
-		}
+		writeDyeInfo(buf, dyeExpiration < 0 ? null : item.getItemColor());
+		writeC(buf, 0); // unk (0)
+		writeD(buf, 0); // unk 1.5.1.9
+		writeD(buf, Math.max(0, dyeExpiration)); // seconds until dye expires
 
 		IdianStone idianStone = item.getIdianStone();
 		if (idianStone != null && idianStone.getPolishNumber() > 0) {
@@ -80,14 +70,14 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 				: PlumStatEnum.PLUM_BOOST_MAGICAL_SKILL;
 			writeD(buf, PlumStatEnum.PLUM_HP.getId()); // 1st satId
 			writeD(buf, PlumStatEnum.PLUM_HP.getBoostValue() * item.getTempering()); // value
-			writeD(buf, stat.getId()); //2nd statId
-			writeD(buf, (stat.getBoostValue() * item.getTempering()) + item.getRndPlumeBonusValue()); //value
+			writeD(buf, stat.getId()); // 2nd statId
+			writeD(buf, (stat.getBoostValue() * item.getTempering()) + item.getRndPlumeBonusValue()); // value
 		} else {
 			writeD(buf, 0x00); // 1st statId
 			writeD(buf, 0x00); // value
 			writeD(buf, 0x00); // 2nd statId
 			writeD(buf, 0x00); // value
-		}	
+		}
 		writeD(buf, 0x00); // 3rd statId
 		writeD(buf, 0x00);
 		writeD(buf, 0x00); // 4th statId

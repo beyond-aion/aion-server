@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.templates.itemgroups.BossGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.CraftItemGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.CraftRecipeGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.EnchantGroup;
+import com.aionemu.gameserver.model.templates.itemgroups.EventGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCherryGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCrystalBiscuitGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherGemBiscuitGroup;
@@ -65,8 +66,8 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
 @XmlRootElement(name = "item_groups")
 @XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare",
 	"medals", "foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary",
-	"oresUnique", "oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns", "feedBones",
-	"feedBalaurScales", "feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit",
+	"oresUnique", "oresEpic", "gatherRare", "enchants", "eventLegendarySymphony", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns",
+	"feedBones", "feedBalaurScales", "feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit",
 	"aetherCrystalBiscuit", "aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins", "aetherCherries" })
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemGroupsData {
@@ -129,6 +130,9 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "enchants")
 	protected EnchantGroup enchants;
+	
+	@XmlElement(name = "event_legendary_symphony")
+	protected EventGroup eventLegendarySymphony;
 
 	@XmlElement(name = "boss_rare")
 	protected BossGroup bossRare;
@@ -500,6 +504,10 @@ public class ItemGroupsData {
 	public CraftRecipeGroup getCraftRecipes() {
 		return craftRecipes;
 	}
+	
+	public EventGroup getEventLegendarySymphony() {
+		return eventLegendarySymphony;
+	}
 
 	public BonusItemGroup[] getCraftGroups() {
 		return craftGroups;
@@ -626,7 +634,8 @@ public class ItemGroupsData {
 		return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size() + foodRare.getItems().size()
 			+ foodLegendary.getItems().size() + medicineCommon.getItems().size() + medicineRare.getItems().size() + medicineLegendary.getItems().size()
 			+ oresRare.getItems().size() + oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
-			+ gatherRare.getItems().size() + enchants.getItems().size() + bossRare.getItems().size() + bossLegendary.getItems().size();
+			+ gatherRare.getItems().size() + enchants.getItems().size() + eventLegendarySymphony.getItems().size() + bossRare.getItems().size() 
+			+ bossLegendary.getItems().size();
 	}
 
 	public int petFoodSize() {

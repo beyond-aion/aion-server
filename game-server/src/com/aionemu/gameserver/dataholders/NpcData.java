@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -16,10 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.NpcStatCalculation;
@@ -28,6 +20,9 @@ import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -47,15 +42,11 @@ public class NpcData extends ReloadableData {
 	@XmlTransient
 	private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<NpcTemplate>();
 
-	@XmlTransient
-	private HashSet<TribeClass> unusedTribes = new HashSet<>();
-
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		unusedTribes.addAll(Arrays.asList(TribeClass.values()));
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
-			if (npc.getTribe() != null)
-				unusedTribes.remove(npc.getTribe());
+			if (npc.getTribe() != null && !npc.getTribe().isUsed())
+				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogId : npc.getFuncDialogIds()) {
 					DialogAction dialogAction = DialogAction.getActionByDialogId(dialogId);
@@ -87,14 +78,6 @@ public class NpcData extends ReloadableData {
 		}
 		npcs.clear();
 		npcs = null;
-
-		Iterator<TribeClass> iter = unusedTribes.iterator();
-		if (unusedTribes.size() > 0) {
-			while (iter.hasNext())
-				iter.next().setUsed(false);
-			unusedTribes.clear();
-		}
-		unusedTribes = null;
 	}
 
 	public int size() {

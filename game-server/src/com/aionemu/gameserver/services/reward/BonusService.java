@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.reward;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import com.aionemu.gameserver.model.templates.quest.QuestBonuses;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
-import com.aionemu.gameserver.model.templates.rewards.MedalItem;
+import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
 
 /**
  * @author Rolandas
@@ -71,11 +72,13 @@ public class BonusService {
 
 	public BonusItemGroup getRandomGroup(BonusItemGroup[] groups) {
 		float total = 0;
+		
 		if (groups == null)
 			return null;
 
 		for (BonusItemGroup gr : groups)
 			total += gr.getChance();
+		
 		if (total == 0)
 			return null;
 
@@ -94,7 +97,7 @@ public class BonusService {
 		return chosenGroup;
 	}
 
-	float getNormalizedChance(float chance, float total) {
+	private float getNormalizedChance(float chance, float total) {
 		return chance * 100f / total;
 	}
 
@@ -104,9 +107,10 @@ public class BonusService {
 
 	public QuestItems getQuestBonus(Player player, QuestTemplate questTemplate) {
 		List<QuestBonuses> bonuses = questTemplate.getBonus();
+		
 		if (bonuses.isEmpty())
 			return null;
-		// Only one
+
 		QuestBonuses bonus = bonuses.get(0);
 		if (bonus.getType() == BonusType.NONE)
 			return null;
@@ -114,6 +118,8 @@ public class BonusService {
 		switch (bonus.getType()) {
 			case TASK:
 				return getCraftBonus(player, questTemplate);
+			case EVENT_LEGENDARY_SYMPHONY:
+				return getEventLegendarySymphonyBonus(player, bonus);
 			case MANASTONE:
 				return getManastoneBonus(player, bonus);
 			case MEDAL:
@@ -128,7 +134,7 @@ public class BonusService {
 		}
 	}
 
-	QuestItems getCraftBonus(Player player, QuestTemplate questTemplate) {
+	private QuestItems getCraftBonus(Player player, QuestTemplate questTemplate) {
 		BonusItemGroup[] groups = itemGroups.getCraftGroups();
 		CraftGroup group = null;
 		ItemRaceEntry[] allRewards = null;
@@ -139,7 +145,7 @@ public class BonusService {
 				break;
 			allRewards = group.getRewards(questTemplate.getCombineSkill(), questTemplate.getCombineSkillPoint());
 			if (allRewards.length == 0) {
-				List<BonusItemGroup> temp = new FastTable<BonusItemGroup>();
+				List<BonusItemGroup> temp = new FastTable<>();
 				Collections.addAll(temp, groups);
 				temp.remove(group);
 				group = null;
@@ -147,19 +153,21 @@ public class BonusService {
 			}
 		}
 
-		if (group == null) // probably all chances set to 0
+		if (group == null)
 			return null;
-		List<ItemRaceEntry> finalList = new FastTable<ItemRaceEntry>();
-
+		
+		List<ItemRaceEntry> finalList = new FastTable<>();
 		for (int i = 0; i < allRewards.length; i++) {
 			ItemRaceEntry r = allRewards[i];
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
+			
 			if (template == null) {
-				log.error("Item " + r.getId() + "absent in ItemTemplate");
+				log.warn("Item " + r.getId() + " absent in ItemTemplate");
 				continue;
 			}
 			if (!r.checkRace(player.getCommonData().getRace()))
 				continue;
+			
 			finalList.add(r);
 		}
 
@@ -176,15 +184,42 @@ public class BonusService {
 		return new QuestItems(reward.getId(), itemCount);
 	}
 
-	QuestItems getMedalBonus(Player player, QuestTemplate template) {
+	private QuestItems getEventLegendarySymphonyBonus(Player player, QuestBonuses bonus) {
+		List<FullRewardItem> possibleRewards = new ArrayList<>();
+		
+		float total = 0;
+		for (FullRewardItem fRI : itemGroups.getEventLegendarySymphony().getItems()) {
+			if (fRI.getLevel() != bonus.getLevel()) {
+				continue;
+			}
+			total += fRI.getChance();
+			possibleRewards.add(fRI);
+		}
+		
+		if (total == 0)
+			return null;
+		
+		float rnd = Rnd.get() * total;
+		float luck = 0;
+		
+		for (FullRewardItem fRI : possibleRewards) {
+			luck += fRI.getChance();
+			
+			if (rnd <= luck) {
+				return new QuestItems(fRI.getId(), fRI.getCount());
+			}
+		}
+		return null;
+	}
+	
+	private QuestItems getMedalBonus(Player player, QuestTemplate template) {
 		BonusItemGroup[] groups = itemGroups.getMedalGroups();
 		MedalGroup group = (MedalGroup) getRandomGroup(groups);
+		FullRewardItem finalReward = null;
 		int bonusLevel = template.getBonus().get(0).getLevel();
-
-		MedalItem finalReward = null;
-
 		float total = 0;
-		for (MedalItem medal : group.getItems()) {
+		
+		for (FullRewardItem medal : group.getItems()) {
 			if (medal.getLevel() == bonusLevel)
 				total += medal.getChance();
 		}
@@ -192,14 +227,13 @@ public class BonusService {
 		if (total == 0)
 			return null;
 
-		float rnd = (Rnd.get() * total);
+		float rnd = Rnd.get() * total;
 		float luck = 0;
-		for (MedalItem medal : group.getItems()) {
-
+		for (FullRewardItem medal : group.getItems()) {
 			if (medal.getLevel() != bonusLevel)
 				continue;
+			
 			luck += medal.getChance();
-
 			if (rnd <= luck) {
 				finalReward = medal;
 				break;
@@ -208,17 +242,21 @@ public class BonusService {
 		return finalReward != null ? new QuestItems(finalReward.getId(), finalReward.getCount()) : null;
 	}
 
-	QuestItems getManastoneBonus(Player player, QuestBonuses bonus) {
+	private QuestItems getManastoneBonus(Player player, QuestBonuses bonus) {
 		ManastoneGroup group = (ManastoneGroup) getRandomGroup(BonusType.MANASTONE);
 		ItemRaceEntry[] allRewards = group.getRewards();
-		List<ItemRaceEntry> finalList = new FastTable<ItemRaceEntry>();
+		List<ItemRaceEntry> finalList = new FastTable<>();
+		
 		for (int i = 0; i < allRewards.length; i++) {
 			ItemRaceEntry r = allRewards[i];
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
+			
 			if (bonus.getLevel() != template.getLevel())
 				continue;
+			
 			finalList.add(r);
 		}
+		
 		if (finalList.isEmpty())
 			return null;
 
@@ -227,17 +265,21 @@ public class BonusService {
 		return new QuestItems(reward.getId(), 1);
 	}
 	
-	QuestItems getMedicineBonus(Player player, QuestBonuses bonus) {
+	private QuestItems getMedicineBonus(Player player, QuestBonuses bonus) {
 		MedicineGroup group = (MedicineGroup)getRandomGroup(BonusType.MEDICINE);
 		ItemRaceEntry[] allRewards = group.getRewards();
-		List<ItemRaceEntry> finalList = new FastTable<ItemRaceEntry>();
+		List<ItemRaceEntry> finalList = new FastTable<>();
+		
 		for (int i = 0; i < allRewards.length; i++) {
 			ItemRaceEntry r = allRewards[i];
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
+			
 			if (bonus.getLevel() != template.getLevel())
 				continue;
+			
 			finalList.add(r);
 		}
+		
 		if (finalList.isEmpty())
 			return null;
 		
@@ -252,6 +294,7 @@ public class BonusService {
 		int bonusLevel = template.getBonus().get(0).getLevel();
 		int slotReq = calcMaxCountOfSlots(groups, player, bonusLevel, false);
 		int specialSlotreq = calcMaxCountOfSlots(groups, player, bonusLevel, true);
+		
 		if ((slotReq > 0 && inventory.getFreeSlots() < slotReq) || (specialSlotreq > 0 && inventory.getSpecialCubeFreeSlots() < specialSlotreq))
 			return false;
 		return true;
@@ -263,9 +306,11 @@ public class BonusService {
 
 		for (BonusItemGroup bonusGroup : groups) {
 			MedalGroup group = (MedalGroup) bonusGroup;
-			for (MedalItem item : group.getItems()) {
+			
+			for (FullRewardItem item : group.getItems()) {
 				if (item.getLevel() != bonusLevel)
 					continue;
+				
 				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
 				if (special && template.getExtraInventoryId() > 0) {
 					groupMaxCount++;

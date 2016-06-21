@@ -4280,11 +4280,26 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050722" name="Unknown Petal">
-		<items chance="50.0">
+		<items>
+			<item id="169240001" name="Wiki Petal" />
+		</items>
+		<items>
 			<item id="169240002" name="Omblic Petal" />
 		</items>
-		<items chance="50.0">
+		<items>
+			<item id="169240003" name="Meon Petal" />
+		</items>
+		<items>
 			<item id="169240004" name="Ormea Petal" />
+		</items>
+		<items>
+			<item id="169240005" name="Tange Petal" />
+		</items>
+		<items>
+			<item id="169240006" name="Ervio Petal" />
+		</items>
+		<items>
+			<item id="169240007" name="Lunime Petal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050723" name="Mysterious Lump">
@@ -4461,11 +4476,26 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050729" name="Unknown Petal">
-		<items chance="50.0">
-			<item id="169240002" name="Omblic Petal" />
+		<items>
+			<item id="169240008" name="Vinna Petal" />
 		</items>
-		<items chance="50.0">
-			<item id="169240004" name="Ormea Petal" />
+		<items>
+			<item id="169240009" name="Kirka Petal" />
+		</items>
+		<items>
+			<item id="169240010" name="Brommel Petal" />
+		</items>
+		<items>
+			<item id="169240011" name="Pressa Petal" />
+		</items>
+		<items>
+			<item id="169240012" name="Merone Petal" />
+		</items>
+		<items>
+			<item id="169240013" name="Kukar Petal" />
+		</items>
+		<items>
+			<item id="169240014" name="Leopis Petal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050730" name="Mysterious Lump">
@@ -7197,306 +7227,50 @@
 	<decomposable item_id="188051087" name="Pudgy Porgus Bundle" />
 	<decomposable item_id="188051088" name="Greater Pudgy Porgus Bundle" />
 	<decomposable item_id="188051089" name="Major Pudgy Porgus Bundle" />
-	<decomposable item_id="188051090" name="[Event] Cold Box">
+	<decomposable item_id="188051090" name="[Event] Cold Box" selectable="true">
 		<items>
-			<item id="125040044" name="Cute Swim Hat" />
-		</items>
-		<items>
-			<item id="125040045" name="Diving Helmet/Summer Headwrap" />
-		</items>
-		<items>
-			<item id="125040046" name="Beach Hat" />
-		</items>
-		<items>
-			<item id="160010101" name="Summer-Loving Inquin Form Candy" min_count="6" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="100" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="1000" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="20" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="30" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000004" name="Gold Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000004" name="Gold Coin" min_count="100" />
-		</items>
-		<items>
-			<item id="186000003" name="Silver Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000003" name="Silver Coin" min_count="100" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="5" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="10" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="15" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="30" />
-		</items>
-	</decomposable>
-	<decomposable item_id="188051091" name="[Event] Frozen Box">
-		<items>
-			<item id="125040169" name="[Event] Summer Sunglasses (30 days)" />
-		</items>
-		<items>
+			<item id="125040042" name="Summer Sunglasses" />
 			<item id="125040043" name="Goggles" />
-		</items>
-		<items>
 			<item id="125040044" name="Cute Swim Hat" />
-		</items>
-		<items>
 			<item id="125040045" name="Diving Helmet/Summer Headwrap" />
-		</items>
-		<items>
 			<item id="125040046" name="Beach Hat" />
+			<item id="125045076" name="Cool Swim Cap" />
+			<item id="160010089" name="Summer-Loving Inquin Form Candy" min_count="6" />
 		</items>
+	</decomposable>
+	<decomposable item_id="188051091" name="[Event] Frozen Box" selectable="true">
 		<items>
-			<item id="110900118" name="Cool Swimwear" min_count="5" />
-		</items>
-		<items>
+			<item id="110900103" name="Cute Swimsuit" />
+			<item id="110900104" name="Cool Swimsuit" />
 			<item id="110900105" name="Hot Swimsuit" />
-		</items>
-		<items>
-			<item id="110900116" name="Cute Swimwear" />
-		</items>
-		<items>
-			<item id="160010101" name="Summer-Loving Inquin Form Candy" min_count="15" />
-		</items>
-		<items>
-			<item id="169000009" name="Premium Power Shard" min_count="500" />
-		</items>
-		<items>
-			<item id="169000009" name="Premium Power Shard" min_count="1000" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="20" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="30" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000005" name="Platinum Coin" min_count="300" />
-		</items>
-		<items>
-			<item id="186000004" name="Gold Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000004" name="Gold Coin" min_count="150" />
-		</items>
-		<items>
-			<item id="186000003" name="Silver Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000003" name="Silver Coin" min_count="150" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="50" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="100" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="150" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="25" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="30" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="40" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="50" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="70" />
+			<item id="110900824" name="Inked-Up Swimsuit" />
+			<item id="110900846" name="Urban Summer Blue" />
+			<item id="110900847" name="Urban Summer Lime" />
+			<item id="110900848" name="Urban Summer Red" />
+			<item id="160010089" name="Summer-Loving Inquin Form Candy" min_count="15" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188051092" name="[Event] Cold Box">
+	<decomposable item_id="188051092" name="[Event] Cold Box" selectable="true">
 		<items>
-			<item id="125040044" name="Cute Swim Hat" />
-		</items>
-		<items>
-			<item id="125040045" name="Diving Helmet/Summer Headwrap" />
-		</items>
-		<items>
-			<item id="125040046" name="Beach Hat" />
-		</items>
-		<items>
-			<item id="160010102" name="Summer-Loving Inquin Form Candy" min_count="6" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="100" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" />
-		</items>
-		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="1000" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="20" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="30" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000009" name="Gold Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000009" name="Gold Coin" min_count="100" />
-		</items>
-		<items>
-			<item id="186000008" name="Silver Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000008" name="Silver Coin" min_count="100" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="5" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="10" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="15" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="30" />
-		</items>
-	</decomposable>
-	<decomposable item_id="188051093" name="[Event] Frozen Box">
-		<items>
-			<item id="125040169" name="[Event] Summer Sunglasses (30 days)" />
-		</items>
-		<items>
+			<item id="125040042" name="Summer Sunglasses" />
 			<item id="125040043" name="Goggles" />
-		</items>
-		<items>
 			<item id="125040044" name="Cute Swim Hat" />
-		</items>
-		<items>
 			<item id="125040045" name="Diving Helmet/Summer Headwrap" />
-		</items>
-		<items>
 			<item id="125040046" name="Beach Hat" />
+			<item id="125045076" name="Cool Swim Cap" />
+			<item id="160010090" name="Summer-Loving Inquin Form Candy" min_count="6" />
 		</items>
+	</decomposable>
+	<decomposable item_id="188051093" name="[Event] Frozen Box" selectable="true">
 		<items>
-			<item id="110900118" name="Cool Swimwear" min_count="5" />
-		</items>
-		<items>
+			<item id="110900103" name="Cute Swimsuit" />
+			<item id="110900104" name="Cool Swimsuit" />
 			<item id="110900105" name="Hot Swimsuit" />
-		</items>
-		<items>
-			<item id="110900116" name="Cute Swimwear" />
-		</items>
-		<items>
-			<item id="160010102" name="Summer-Loving Inquin Form Candy" min_count="15" />
-		</items>
-		<items>
-			<item id="169000009" name="Premium Power Shard" min_count="500" />
-		</items>
-		<items>
-			<item id="169000009" name="Premium Power Shard" min_count="1000" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="20" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="30" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="50" />
-		</items>
-		<items>
-			<item id="186000010" name="Platinum Coin" min_count="300" />
-		</items>
-		<items>
-			<item id="186000009" name="Gold Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000009" name="Gold Coin" min_count="150" />
-		</items>
-		<items>
-			<item id="186000008" name="Silver Coin" min_count="70" />
-		</items>
-		<items>
-			<item id="186000008" name="Silver Coin" min_count="150" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="50" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="100" />
-		</items>
-		<items>
-			<item id="186000048" name="Blue Balaur Scale" min_count="150" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="20" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="25" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="30" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="40" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="50" />
-		</items>
-		<items>
-			<item id="186000111" name="Scorching Heat" min_count="70" />
+			<item id="110900824" name="Inked-Up Swimsuit" />
+			<item id="110900846" name="Urban Summer Blue" />
+			<item id="110900847" name="Urban Summer Lime" />
+			<item id="110900848" name="Urban Summer Red" />
+			<item id="160010090" name="Summer-Loving Inquin Form Candy" min_count="15" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051094" name="Scorching Heat Pouch" />
@@ -15208,14 +14982,15 @@
 	</decomposable>
 	<decomposable item_id="188051867" name="[Event] New Daeva Supplies">
 		<items>
-			<item id="169610020" name="[Title Card] 'Adept of Aion'" />
-			<item id="161001001" name="Revival Stone" min_count="3" />
-			<item id="169620010" name="Berdin's 50% XP Amulet" min_count="2" />
-			<item id="164002116" name="[Event] Rx: Accelerox" min_count="20" />
-			<item id="164002117" name="[Event] Rx: Blitzopan" min_count="20" />
-			<item id="164002118" name="[Event] Rx: Castafodin" min_count="20" />
-			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="20" />
-			<item id="190020049" name="Dapper Team Spirit Shugo Egg" />
+			<item id="164000068" name="Anti-Shock Scroll" min_count="20" />
+			<item id="164000076" name="Greater Running Scroll" min_count="20" />
+			<item id="164000073" name="Greater Courage Scroll" min_count="20" player_classes="GLADIATOR TEMPLAR RANGER ASSASSIN CHANTER GUNNER RIDER" />
+			<item id="164000134" name="Greater Awakening Scroll" min_count="20" player_classes="CLERIC SORCERER SPIRIT_MASTER BARD" />
+			<item id="162000023" name="Greater Healing Potion" min_count="20" />
+			<item id="162000025" name="Wind Serum" min_count="20" />
+			<item id="162000048" name="Recovery Serum" min_count="20" />
+			<item id="162000014" name="Life Serum" min_count="20" />
+			<item id="162000019" name="Mana Serum" min_count="20" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051868" name="[Event] Strongest Inquin Form Candy Pouch" />

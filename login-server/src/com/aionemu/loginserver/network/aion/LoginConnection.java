@@ -236,7 +236,7 @@ public class LoginConnection extends AConnection {
 	 * @param closePacket
 	 *          Packet that will be send before closing.
 	 */
-	public final synchronized void close(AionServerPacket closePacket, boolean forced) {
+	public final synchronized void close(AionServerPacket closePacket) {
 		if (isWriteDisabled()) {
 			return;
 		}

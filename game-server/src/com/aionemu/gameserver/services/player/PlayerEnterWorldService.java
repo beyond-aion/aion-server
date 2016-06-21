@@ -98,6 +98,7 @@ import com.aionemu.gameserver.services.DisputeLandService;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.FactionPackService;
 import com.aionemu.gameserver.services.HTMLService;
+import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.services.LegionService;
@@ -114,6 +115,7 @@ import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
+import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.toypet.PetService;
@@ -269,6 +271,7 @@ public final class PlayerEnterWorldService {
 		Account account = player.getPlayerAccount();
 		PlayerCommonData pcd = player.getCommonData();
 
+		client.resetPingFailCount(); // client sometimes falls below 5 minutes between pings (after changing characters ?)
 		player.setClientConnection(client);
 		pcd.setOnline(true);
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
@@ -423,6 +426,7 @@ public final class PlayerEnterWorldService {
 		// ----------------------------- Retail sequence -----------------------------
 		client.sendPacket(new SM_LEGION_DOMINION_LOC_INFO());
 		MailService.getInstance().onPlayerLogin(player);
+		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
 		sendMacroList(client, player);
 		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
@@ -516,6 +520,7 @@ public final class PlayerEnterWorldService {
 		// try to send bonus pack (if mailbox was full on lvlup)
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
+		VeteranRewardService.getInstance().tryReward(player);
 	}
 
 	private static void validateLoginZone(Player player) {

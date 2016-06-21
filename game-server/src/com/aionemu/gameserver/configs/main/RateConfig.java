@@ -262,14 +262,4 @@ public class RateConfig {
 	@Property(key = "gameserver.rate.vip.sell.limit", defaultValue = "3")
 	public static float VIP_SELL_LIMIT_RATE;
 
-	/**
-	 * NPC Glory Points Rates - Regular (1), Premium (2), VIP (3)
-	 */
-	@Property(key = "gameserver.rate.regular.gp.npc", defaultValue = "1.0")
-	public static float GP_NPC_RATE;
-	@Property(key = "gameserver.rate.premium.gp.npc", defaultValue = "2.0")
-	public static float PREMIUM_GP_NPC_RATE;
-	@Property(key = "gameserver.rate.vip.gp.npc", defaultValue = "3.0")
-	public static float VIP_GP_NPC_RATE;
-
 }

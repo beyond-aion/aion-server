@@ -50,21 +50,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		else
 			writeD(0);
 
-		Integer color = null;
-		if (houseObject != null)
-			color = houseObject.getColor();
-
-		if (color != null && color > 0) {
-			writeC(1); // Is dyed (True)
-			writeC((color & 0xFF0000) >> 16);
-			writeC((color & 0xFF00) >> 8);
-			writeC((color & 0xFF));
-		} else {
-			writeC(0); // Is dyed (False)
-			writeC(0);
-			writeC(0);
-			writeC(0);
-		}
+		writeDyeInfo(houseObject == null ? null : houseObject.getColor());
 		writeD(0); // expiration as for armor ?
 
 		byte typeId = houseObject.getObjectTemplate().getTypeId();

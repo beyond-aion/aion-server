@@ -14,10 +14,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_LOGIN_LOG;
+import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_CONNECTION_INFO;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_CHANGE_ALLOWED_HDD_SERIAL;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_HDD_SERIAL;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_MAC;
 import com.aionemu.gameserver.services.ban.HDDBanService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -67,10 +65,8 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 					if (con == null || con.getAccount() == null)
 						return;
 					Account account = con.getAccount();
-					LoginServer.getInstance().sendPacket(new SM_MAC(account.getId(), macAddress));
-					LoginServer.getInstance().sendPacket(new SM_HDD_SERIAL(account.getId(), hddSerial));
 					LoginServer.getInstance()
-						.sendPacket(new SM_ACCOUNT_LOGIN_LOG(account.getId(), System.currentTimeMillis(), con.getIP(), macAddress, hddSerial));
+						.sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), con.getIP(), macAddress, hddSerial));
 					if (account.getAllowedHddSerial() == null) {
 						if (SecurityConfig.HDD_SERIAL_LOCK_NEW_ACCOUNTS && !hddSerial.isEmpty()) {
 							account.setAllowedHddSerial(hddSerial);

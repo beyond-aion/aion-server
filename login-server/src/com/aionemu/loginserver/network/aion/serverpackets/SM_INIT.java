@@ -6,8 +6,7 @@ import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 
 /**
- * Format: dd b dddd s d: session id d: protocol revision b: 0x90 bytes : 0x80 bytes for the scrambled RSA public key 0x10 bytes at 0x00 d: unknow d:
- * unknow d: unknow d: unknow s: blowfish key
+ * @modified Neon
  */
 public final class SM_INIT extends AionServerPacket {
 
@@ -52,24 +51,19 @@ public final class SM_INIT extends AionServerPacket {
 		this.blowfishKey = blowfishKey;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		writeD(sessionId); // session id
 		writeD(0x0000c621); // protocol revision
 		writeB(publicRsaKey); // RSA Public Key, 128 bytes
-		// unk
-		writeD(0x00);
-		writeD(0x00);
-		writeD(0x00);
-		writeD(0x00);
-
+		writeB(new byte[16]); // 0, spacer?
 		writeB(blowfishKey); // BlowFish key, 16 bytes
-		writeD(0); // unk
-		writeB(new byte[11]); // unk
-		writeD(0xD98E9655); // unk
+		writeB(new byte[7]); // 0, spacer?
+		writeC(0); // test server id (100)
+		writeD(0); // test server ip (1632857679 = 79.110.83.97)
+		writeH(0); // test server port (7777)
+		writeC(0); // 0, flag?
+		writeD(0x3FCE09ED); // unk (old 0xD98E9655)
 		writeD(0); // unk
 	}
 }

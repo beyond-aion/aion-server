@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import javolution.util.FastTable;
 
-import com.aionemu.gameserver.model.templates.rewards.MedalItem;
+import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
 
 /**
  * @author Luzien
@@ -19,11 +19,11 @@ import com.aionemu.gameserver.model.templates.rewards.MedalItem;
 public class MedalGroup extends BonusItemGroup {
 
 	@XmlElement(name = "item")
-	protected List<MedalItem> items;
+	protected List<FullRewardItem> items;
 
-	public List<MedalItem> getItems() {
+	public List<FullRewardItem> getItems() {
 		if (items == null) {
-			items = new FastTable<MedalItem>();
+			items = new FastTable<FullRewardItem>();
 		}
 		return this.items;
 	}

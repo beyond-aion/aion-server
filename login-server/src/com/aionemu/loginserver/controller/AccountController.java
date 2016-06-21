@@ -12,12 +12,15 @@ import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.model.Account;
+import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.model.ExternalAuth;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
 import com.aionemu.loginserver.network.aion.SessionKey;
+import com.aionemu.loginserver.network.aion.serverpackets.SM_ACCOUNT_BANNED_2;
+import com.aionemu.loginserver.network.aion.serverpackets.SM_ACCOUNT_KICK;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_SERVER_LIST;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_UPDATE_SESSION;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
@@ -38,17 +41,17 @@ public class AccountController {
 	/**
 	 * Map with accounts that are active on LoginServer or joined GameServer and are not authenticated yet.
 	 */
-	private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<Integer, LoginConnection>();
+	private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<>();
 
 	/**
 	 * Map with accounts that are reconnecting to LoginServer ie was joined GameServer.
 	 */
-	private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<Integer, ReconnectingAccount>();
+	private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<>();
 
 	/**
 	 * Map with characters count on each gameserver and accounts
 	 */
-	private static final Map<Integer, Map<Integer, Integer>> accountsGSCharacterCounts = new HashMap<Integer, Map<Integer, Integer>>();
+	private static final Map<Integer, Map<Byte, Integer>> accountsGSCharacterCounts = new HashMap<>();
 
 	/**
 	 * Removes account from list of connections
@@ -149,7 +152,7 @@ public class AccountController {
 	public static AionAuthResponse login(String name, String password, LoginConnection connection) {
 		// if ip is banned
 		if (BannedIpController.isBanned(connection.getIP())) {
-			return AionAuthResponse.BAN_IP;
+			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
 		String accountName = name;
@@ -160,23 +163,23 @@ public class AccountController {
 
 			// if error during auth server connection
 			if (auth == null) {
-				return AionAuthResponse.ACCOUNT_SERVER_DOWN;
+				return AionAuthResponse.STR_L2AUTH_S_ACCOUNTCACHESERVER_DOWN;
 			}
 
 			// if received no auth state for account
 			if (auth.getAuthState() == null) {
-				return AionAuthResponse.AUTHORIZATION_ERROR4;
+				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
 			}
 
 			AionAuthResponse response = AionAuthResponse.getResponseById(auth.getAuthState());
 
 			// if received invalid auth state
 			if (response == null) {
-				return AionAuthResponse.AUTHORIZATION_ERROR4;
+				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
 			}
 
 			switch (response) {
-				case AUTHED:
+				case STR_L2AUTH_S_ALL_OK:
 					// name for this account as sent by external auth server
 					accountName = auth.getIdentifier();
 					break;
@@ -188,7 +191,7 @@ public class AccountController {
 
 		// if no or empty account name
 		if (StringUtils.isNullOrEmpty(accountName)) {
-			return AionAuthResponse.FAILED_ACCOUNT_INFO;
+			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
 		}
 
 		Account account = loadAccount(accountName);
@@ -200,52 +203,51 @@ public class AccountController {
 
 		// if account not found and not created
 		if (account == null) {
-			return AionAuthResponse.NO_SUCH_ACCOUNT;
+			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
 		}
 
 		// if server is under maintenance and account has not the required access level
 		if (Config.MAINTENANCE_MOD && account.getAccessLevel() < Config.MAINTENANCE_MOD_GMLEVEL) {
-			return AionAuthResponse.GM_ONLY;
+			return AionAuthResponse.STR_L2AUTH_S_SEVER_CHECK;
 		}
 
 		// if not external authentication, verify password hash from database
 		if (!Config.AUTH_EXTERNAL && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
-			return AionAuthResponse.INVALID_PASSWORD;
+			return AionAuthResponse.STR_L2AUTH_S_INCORRECT_PWD;
 		}
 
 		// if account is not activated
 		if (account.getActivated() != 1) {
-			return AionAuthResponse.INVALID_PASSWORD;
+			return AionAuthResponse.STR_L2AUTH_S_AGREE_GAME;
 		}
 
 		// if account expired
 		if (AccountTimeController.isAccountExpired(account)) {
-			return AionAuthResponse.TIME_EXPIRED2;
+			return AionAuthResponse.STR_L2AUTH_S_TIME_EXHAUSTED;
 		}
 
 		// if account is banned
 		if (AccountTimeController.isAccountPenaltyActive(account)) {
-			return AionAuthResponse.BAN_IP;
+			connection.close(new SM_ACCOUNT_BANNED_2());
+			return null;
 		}
 
 		// if account is restricted to some ip or mask
-		if (account.getIpForce() != null) {
-			if (!NetworkUtils.checkIPMatching(account.getIpForce(), connection.getIP())) {
-				return AionAuthResponse.BAN_IP;
-			}
+		if (account.getIpForce() != null && !NetworkUtils.checkIPMatching(account.getIpForce(), connection.getIP())) {
+			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
 		// Do not allow to login two times with same account
 		synchronized (AccountController.class) {
 			if (GameServerTable.kickAccountFromGameServer(account.getId(), true))
-				return AionAuthResponse.ALREADY_LOGGED_IN;
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 
 			// If someone is at loginserver, he should be disconnected
 			if (accountsOnLS.containsKey(account.getId())) {
 				LoginConnection aionConnection = accountsOnLS.remove(account.getId());
 
-				aionConnection.close();
-				return AionAuthResponse.ALREADY_LOGGED_IN;
+				aionConnection.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 			}
 			connection.setAccount(account);
 			accountsOnLS.put(account.getId(), connection);
@@ -258,7 +260,7 @@ public class AccountController {
 		// last mac is updated after receiving packet from gameserver
 		getAccountDAO().updateMembership(account.getId());
 
-		return AionAuthResponse.AUTHED;
+		return AionAuthResponse.STR_L2AUTH_S_ALL_OK;
 	}
 
 	/**
@@ -273,7 +275,7 @@ public class AccountController {
 
 			if (accountsOnLS.containsKey(accountId)) {
 				LoginConnection conn = accountsOnLS.remove(accountId);
-				conn.close();
+				conn.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
 			}
 		}
 	}
@@ -288,7 +290,10 @@ public class AccountController {
 	public static Account loadAccount(String name) {
 		Account account = getAccountDAO().getAccount(name);
 		if (account != null) {
-			account.setAccountTime(getAccountTimeDAO().getAccountTime(account.getId()));
+			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+			if (accTime == null)
+				throw new NullPointerException("Account Time for account " + account + " is null");
+			account.setAccountTime(accTime);
 		}
 		return account;
 	}
@@ -296,7 +301,10 @@ public class AccountController {
 	public static Account loadAccount(int id) {
 		Account account = getAccountDAO().getAccount(id);
 		if (account != null) {
-			account.setAccountTime(getAccountTimeDAO().getAccountTime(id));
+			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+			if (accTime == null)
+				throw new NullPointerException("Account Time for account " + account + " is null");
+			account.setAccountTime(accTime);
 		}
 		return account;
 	}
@@ -336,25 +344,16 @@ public class AccountController {
 	}
 
 	/**
-	 * Returns {@link com.aionemu.loginserver.dao.AccountTimeDAO}, just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.AccountTimeDAO}
-	 */
-	private static AccountTimeDAO getAccountTimeDAO() {
-		return DAOManager.getDAO(AccountTimeDAO.class);
-	}
-
-	/**
 	 * @param accountId
 	 */
 	public static synchronized void loadGSCharactersCount(int accountId) {
 		GsConnection gsc = null;
-		Map<Integer, Integer> accountCharacterCount = null;
+		Map<Byte, Integer> accountCharacterCount = null;
 
 		if (accountsGSCharacterCounts.containsKey(accountId))
 			accountsGSCharacterCounts.remove(accountId);
 
-		accountsGSCharacterCounts.put(accountId, new HashMap<Integer, Integer>());
+		accountsGSCharacterCounts.put(accountId, new HashMap<>());
 
 		accountCharacterCount = accountsGSCharacterCounts.get(accountId);
 
@@ -364,7 +363,7 @@ public class AccountController {
 			if (gsc != null)
 				gsc.sendPacket(new SM_GS_CHARACTER_RESPONSE(accountId));
 			else
-				accountCharacterCount.put((int) gsi.getId(), 0);
+				accountCharacterCount.put(gsi.getId(), 0);
 		}
 
 		if (hasAllGSCharacterCounts(accountId))
@@ -376,7 +375,7 @@ public class AccountController {
 	 * @return
 	 */
 	public static synchronized boolean hasAllGSCharacterCounts(int accountId) {
-		Map<Integer, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
+		Map<Byte, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
 
 		if (characterCount != null) {
 			if (characterCount.size() == GameServerTable.getGameServers().size())
@@ -401,7 +400,7 @@ public class AccountController {
 	 * @param accountId
 	 * @return
 	 */
-	public static Map<Integer, Integer> getGSCharacterCountsFor(int accountId) {
+	public static Map<Byte, Integer> getGSCharacterCountsFor(int accountId) {
 		return accountsGSCharacterCounts.get(accountId);
 	}
 
@@ -410,9 +409,9 @@ public class AccountController {
 	 * @param gsid
 	 * @param characterCount
 	 */
-	public static synchronized void addGSCharacterCountFor(int accountId, int gsid, int characterCount) {
+	public static synchronized void addGSCharacterCountFor(int accountId, byte gsid, int characterCount) {
 		if (!accountsGSCharacterCounts.containsKey(accountId))
-			accountsGSCharacterCounts.put(accountId, new HashMap<Integer, Integer>());
+			accountsGSCharacterCounts.put(accountId, new HashMap<>());
 
 		accountsGSCharacterCounts.get(accountId).put(gsid, characterCount);
 	}

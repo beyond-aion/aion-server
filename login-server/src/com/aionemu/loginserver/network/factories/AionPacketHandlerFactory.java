@@ -34,42 +34,42 @@ public class AionPacketHandlerFactory {
 	public static AionClientPacket handle(ByteBuffer data, LoginConnection client) {
 		AionClientPacket msg = null;
 		State state = client.getState();
-		int id = data.get() & 0xff;
+		int opCode = data.get() & 0xFF;
 
 		switch (state) {
 			case CONNECTED: {
-				switch (id) {
+				switch (opCode) {
 					case 0x07:
-						msg = new CM_AUTH_GG(data, client);
+						msg = new CM_AUTH_GG(data, client, opCode);
 						break;
 					case 0x08:
-						msg = new CM_UPDATE_SESSION(data, client);
+						msg = new CM_UPDATE_SESSION(data, client, opCode);
 						break;
 					default:
-						unknownPacket(state, id);
+						unknownPacket(opCode, state, data);
 				}
 				break;
 			}
 			case AUTHED_GG: {
-				switch (id) {
+				switch (opCode) {
 					case 0x00:
-						msg = new CM_LOGIN(data, client);
+						msg = new CM_LOGIN(data, client, opCode);
 						break;
 					default:
-						unknownPacket(state, id);
+						unknownPacket(opCode, state, data);
 				}
 				break;
 			}
 			case AUTHED_LOGIN: {
-				switch (id) {
+				switch (opCode) {
 					case 0x05:
-						msg = new CM_SERVER_LIST(data, client);
+						msg = new CM_SERVER_LIST(data, client, opCode);
 						break;
 					case 0x02:
-						msg = new CM_PLAY(data, client);
+						msg = new CM_PLAY(data, client, opCode);
 						break;
 					default:
-						unknownPacket(state, id);
+						unknownPacket(opCode, state, data);
 				}
 				break;
 			}
@@ -79,12 +79,13 @@ public class AionPacketHandlerFactory {
 	}
 
 	/**
-	 * Logs unknown packet.
-	 * 
-	 * @param state
-	 * @param id
+	 * Logs an unknown packet
 	 */
-	private static void unknownPacket(State state, int id) {
-		log.warn(String.format("Unknown packet recived from Aion client: 0x%02X state=%s", id, state.toString()));
+	private static void unknownPacket(int opCode, State state, ByteBuffer buf) {
+		int length = buf.remaining();
+		StringBuilder sb = new StringBuilder(length * 3);
+		while (buf.hasRemaining())
+			sb.append(String.format("%02X ", buf.get()));
+		log.warn(String.format("Unknown packet received from client: opCode=0x%02X state=%s length=%d data=[%s]", opCode, state, length, sb.toString().trim()));
 	}
 }

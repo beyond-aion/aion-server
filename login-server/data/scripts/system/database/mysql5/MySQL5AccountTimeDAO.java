@@ -24,34 +24,28 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(MySQL5AccountTimeDAO.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateAccountTime(final int accountId, final AccountTime accountTime) {
 		return DB.insertUpdate("REPLACE INTO account_time (account_id, last_active, expiration_time, "
 			+ "session_duration, accumulated_online, accumulated_rest, penalty_end) values " + "(?,?,?,?,?,?,?)", new IUStH() {
 
-			@Override
-			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				preparedStatement.setLong(1, accountId);
-				preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
-				preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
-				preparedStatement.setLong(4, accountTime.getSessionDuration());
-				preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
-				preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
-				preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
-				preparedStatement.execute();
-			}
-		});
+				@Override
+				public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+					preparedStatement.setLong(1, accountId);
+					preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
+					preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
+					preparedStatement.setLong(4, accountTime.getSessionDuration());
+					preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
+					preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
+					preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
+					preparedStatement.execute();
+				}
+			});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public AccountTime getAccountTime(int accountId) {
-		AccountTime accountTime = null;
+		AccountTime accountTime = new AccountTime();
 		PreparedStatement st = DB.prepareStatement("SELECT * FROM account_time WHERE account_id = ?");
 
 		try {
@@ -60,8 +54,6 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 			ResultSet rs = st.executeQuery();
 
 			if (rs.next()) {
-				accountTime = new AccountTime();
-
 				accountTime.setLastLoginTime(rs.getTimestamp("last_active"));
 				accountTime.setSessionDuration(rs.getLong("session_duration"));
 				accountTime.setAccumulatedOnlineTime(rs.getLong("accumulated_online"));
@@ -70,6 +62,7 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 				accountTime.setExpirationTime(rs.getTimestamp("expiration_time"));
 			}
 		} catch (Exception e) {
+			accountTime = null;
 			log.error("Can't get account time for account with id: " + accountId, e);
 		} finally {
 			DB.close(st);
@@ -79,9 +72,6 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String database, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(database, majorVersion, minorVersion);

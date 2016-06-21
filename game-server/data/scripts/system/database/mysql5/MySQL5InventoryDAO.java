@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Collection;
 import java.util.List;
 
@@ -187,7 +188,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		int itemUniqueId = rset.getInt("item_unique_id");
 		int itemId = rset.getInt("item_id");
 		long itemCount = rset.getLong("item_count");
-		int itemColor = rset.getInt("item_color");
+		Integer itemColor = (Integer) rset.getObject("item_color"); // accepts null (which means not dyed)
 		int colorExpireTime = rset.getInt("color_expires");
 		String itemCreator = rset.getString("item_creator");
 		int expireTime = rset.getInt("expire_time");
@@ -351,7 +352,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(1, item.getObjectId());
 				stmt.setInt(2, item.getItemTemplate().getTemplateId());
 				stmt.setLong(3, item.getItemCount());
-				stmt.setInt(4, item.getItemColor());
+				stmt.setObject(4, item.getItemColor(), Types.INTEGER); // supports inserting null value
 				stmt.setInt(5, item.getColorExpireTime());
 				stmt.setString(6, item.getItemCreator());
 				stmt.setInt(7, item.getExpireTime());
@@ -401,7 +402,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 			for (Item item : items) {
 				stmt.setLong(1, item.getItemCount());
-				stmt.setInt(2, item.getItemColor());
+				stmt.setObject(2, item.getItemColor(), Types.INTEGER); // supports inserting null value
 				stmt.setInt(3, item.getColorExpireTime());
 				stmt.setString(4, item.getItemCreator());
 				stmt.setInt(5, item.getExpireTime());

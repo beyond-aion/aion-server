@@ -46,9 +46,6 @@ public class CM_BAN extends GsClientPacket {
 	 */
 	private int adminObjId;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		this.type = (byte) readC();
@@ -58,9 +55,6 @@ public class CM_BAN extends GsClientPacket {
 		this.adminObjId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		boolean result = false;
@@ -77,20 +71,14 @@ public class CM_BAN extends GsClientPacket {
 				}
 			}
 
-			// 1000 is 'infinity' value
-			Timestamp newTime = null;
-			if (time >= 0)
-				newTime = new Timestamp(time == 0 ? 1000 : System.currentTimeMillis() + ((long) time * 60000));
+			if (time >= 0) {
+				// 1000 is 'infinity' value
+				Timestamp newTime = null;
+				newTime = new Timestamp(time == 0 ? 1000 : System.currentTimeMillis() + (time * 60000L));
 
-			if (account != null) {
-				AccountTime accountTime = account.getAccountTime();
-				accountTime.setPenaltyEnd(newTime);
-				account.setAccountTime(accountTime);
-				result = true;
-			} else {
-				AccountTime accountTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(accountId);
-				accountTime.setPenaltyEnd(newTime);
-				result = DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(accountId, accountTime);
+				AccountTime accTime = account != null ? account.getAccountTime() : DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(accountId);
+				accTime.setPenaltyEnd(newTime);
+				result = DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(accountId, accTime);
 			}
 		}
 

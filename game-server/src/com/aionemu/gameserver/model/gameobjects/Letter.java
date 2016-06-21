@@ -34,11 +34,7 @@ public class Letter extends AionObject {
 		Timestamp timeStamp, boolean unread, LetterType letterType) {
 		super(objId);
 
-		if (letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD)
-			this.express = true;
-		else
-			this.express = false;
-
+		this.express = letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD;
 		this.recipientId = recipientId;
 		this.attachedItem = attachedItem;
 		this.attachedKinahCount = attachedKinahCount;
@@ -53,7 +49,7 @@ public class Letter extends AionObject {
 
 	@Override
 	public String getName() {
-		return String.valueOf(attachedItem.getItemTemplate().getNameId());
+		return title;
 	}
 
 	public int getRecipientId() {
@@ -62,6 +58,11 @@ public class Letter extends AionObject {
 
 	public Item getAttachedItem() {
 		return attachedItem;
+	}
+
+	public void setAttachedItem(Item attachedItem) {
+		this.attachedItem = attachedItem;
+		this.persistentState = PersistentState.UPDATE_REQUIRED;
 	}
 
 	public long getAttachedKinah() {
@@ -112,11 +113,6 @@ public class Letter extends AionObject {
 
 	public PersistentState getLetterPersistentState() {
 		return persistentState;
-	}
-
-	public void removeAttachedItem() {
-		this.attachedItem = null;
-		this.persistentState = PersistentState.UPDATE_REQUIRED;
 	}
 
 	public void removeAttachedKinah() {

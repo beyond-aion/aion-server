@@ -48,8 +48,8 @@ public class CM_LOGIN extends AionClientPacket {
 	 * @param buf
 	 * @param client
 	 */
-	public CM_LOGIN(ByteBuffer buf, LoginConnection client) {
-		super(buf, client, 0x00);
+	public CM_LOGIN(ByteBuffer buf, LoginConnection client, int opCode) {
+		super(buf, client, opCode);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CM_LOGIN extends AionClientPacket {
 			rsaCipher.init(Cipher.DECRYPT_MODE, getConnection().getRSAPrivateKey());
 			decrypted1 = rsaCipher.doFinal(data1, 0, 128);
 		} catch (GeneralSecurityException e) {
-			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR));
+			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR));
 			return;
 		}
 
@@ -82,7 +82,7 @@ public class CM_LOGIN extends AionClientPacket {
 			rsaCipher.init(Cipher.DECRYPT_MODE, getConnection().getRSAPrivateKey());
 			decrypted2 = rsaCipher.doFinal(data2, 0, 128);
 		} catch (GeneralSecurityException e) {
-			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.SYSTEM_ERROR));
+			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR));
 			return;
 		}
 
@@ -95,39 +95,37 @@ public class CM_LOGIN extends AionClientPacket {
 			bytes = Bytes.asList(decrypted2).iterator();
 			password = readStringFromBlock(bytes);
 			if (StringUtils.isNullOrEmpty(password)) {
-				sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.INVALID_PASSWORD3));
+				sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_INCORRECT_PWD));
 				return;
 			}
 		}
 
 		LoginConnection client = getConnection();
 		AionAuthResponse response = AccountController.login(user, password, client);
+		if (response == null) // e.g. when account is banned
+			return;
 		switch (response) {
-			case AUTHED:
+			case STR_L2AUTH_S_ALL_OK:
 				client.setState(State.AUTHED_LOGIN);
 				client.setSessionKey(new SessionKey(client.getAccount()));
 				client.sendPacket(new SM_LOGIN_OK(client.getSessionKey()));
-				log.debug("" + user + " got authed state");
 				break;
-			case INVALID_PASSWORD:
-			case INVALID_PASSWORD2:
-			case INVALID_PASSWORD3:
+			case STR_L2AUTH_S_INVALID_ACCOUT:
+			case STR_L2AUTH_S_INCORRECT_PWD:
 				if (Config.ENABLE_BRUTEFORCE_PROTECTION) {
 					String ip = client.getIP();
 					if ((!ip.equals("127.0.0.1")) && BruteForceProtector.getInstance().addFailedConnect(ip)) {
 						Timestamp newTime = new Timestamp(System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
 						BannedIpController.banIp(ip, newTime);
 						log.debug(user + " on " + ip + " banned for " + Config.WRONG_LOGIN_BAN_TIME + " min. bruteforce");
-						client.close(new SM_LOGIN_FAIL(AionAuthResponse.BAN_IP), false);
+						client.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
 						break;
 					}
 				}
-				log.debug(user + " got invalid password attempt state");
 				client.sendPacket(new SM_LOGIN_FAIL(response));
 				break;
 			default:
-				log.debug(user + " got unknown (" + response.toString() + ") attempt state");
-				client.close(new SM_LOGIN_FAIL(response), false);
+				client.close(new SM_LOGIN_FAIL(response));
 				break;
 		}
 	}

@@ -65,10 +65,6 @@ public class Util {
 		}
 	}
 
-	public static int toColorBGRA(int rgb) {
-		return (rgb & 0xFF) << 24 | (rgb & 0xFF00) << 8 | (rgb & 0xFF0000) >> 8 | 0xFF;
-	}
-
 	/**
 	 * Converts name to valid pattern For example : "atracer" -> "Atracer"
 	 * 

@@ -24,7 +24,7 @@ public class ShieldInfoBlobEntry extends ItemBlobEntry {
 
 		writeQ(buf, ItemSlot.getSlotFor(item.getItemTemplate().getItemSlot()).getSlotIdMask());
 		writeQ(buf, 0); // TODO! secondary slot?
-		writeD(buf, 0); // color ?
+		writeDyeInfo(buf, item.getItemColor()); // 4 bytes
 	}
 
 	@Override

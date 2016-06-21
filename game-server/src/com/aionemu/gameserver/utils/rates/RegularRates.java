@@ -133,9 +133,4 @@ public class RegularRates extends Rates {
 	public float getSellLimitRate() {
 		return RateConfig.SELL_LIMIT_RATE;
 	}
-
-	@Override
-	public float getGpNpcRate() {
-		return RateConfig.GP_NPC_RATE;
-	}
 }

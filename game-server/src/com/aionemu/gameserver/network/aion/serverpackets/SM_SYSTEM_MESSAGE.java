@@ -14408,21 +14408,21 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You received %0 item as reward for the survey.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300945, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1300945, new DescriptionId(nameId));
 	}
 
 	/**
 	 * You received %num1 %0 items as reward for the survey.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300946, num1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(long num1, int nameId) {
+		return new SM_SYSTEM_MESSAGE(1300946, num1, new DescriptionId(nameId));
 	}
 
 	/**
 	 * You received %num0 Kinah as reward for the survey.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_MONEY(int num0) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_MONEY(long num0) {
 		return new SM_SYSTEM_MESSAGE(1300947, num0);
 	}
 
