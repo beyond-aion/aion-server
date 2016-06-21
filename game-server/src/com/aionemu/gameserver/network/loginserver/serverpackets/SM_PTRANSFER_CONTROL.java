@@ -60,26 +60,26 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 	private int taskId;
 
 	public SM_PTRANSFER_CONTROL(byte type, int taskId) {
-		super(14);
+		super(13);
 		this.type = type;
 		this.taskId = taskId;
 	}
 
 	public SM_PTRANSFER_CONTROL(byte type, TransferablePlayer tp) {
-		super(14);
+		super(13);
 		this.type = type;
 		this.taskId = tp.taskId;
 		this.player = tp.player;
 	}
 
 	public SM_PTRANSFER_CONTROL(byte type, TransferablePlayer tp, String result) {
-		super(14);
+		super(13);
 		this.type = type;
 		this.result = result;
 	}
 
 	public SM_PTRANSFER_CONTROL(byte type, int taskId, String result) {
-		super(14);
+		super(13);
 		this.type = type;
 		this.taskId = taskId;
 		this.result = result;

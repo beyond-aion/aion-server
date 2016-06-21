@@ -5,21 +5,29 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
 /**
  * @author ViAl
+ * @modified Neon
  */
-public class SM_HDD_SERIAL extends LsServerPacket {
+public class SM_ACCOUNT_CONNECTION_INFO extends LsServerPacket {
 
-	private int accountId;
-	private String hddSerial;
+	private final int accountId;
+	private final long time;
+	private final String ip, mac, hddSerial;
 
-	public SM_HDD_SERIAL(int accountId, String hddSerial) {
-		super(15);
+	public SM_ACCOUNT_CONNECTION_INFO(int accountId, long time, String ip, String mac, String hddSerial) {
+		super(7);
 		this.accountId = accountId;
+		this.time = time;
+		this.ip = ip;
+		this.mac = mac;
 		this.hddSerial = hddSerial;
 	}
 
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accountId);
+		writeQ(time);
+		writeS(ip);
+		writeS(mac);
 		writeS(hddSerial);
 	}
 }

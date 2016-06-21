@@ -13,7 +13,7 @@ public class SM_CHANGE_ALLOWED_HDD_SERIAL extends LsServerPacket {
 	private String hddSerial;
 
 	public SM_CHANGE_ALLOWED_HDD_SERIAL(Account playerAccount) {
-		super(17);
+		super(15);
 		this.accountId = playerAccount.getId();
 		this.hddSerial = playerAccount.getAllowedHddSerial();
 	}
