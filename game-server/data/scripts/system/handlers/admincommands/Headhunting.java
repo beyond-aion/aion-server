@@ -66,8 +66,7 @@ public class Headhunting extends AdminCommand {
 		rewards.put(3, new FastTable<>());
 		rewards.put(4, new FastTable<>()); // equivalent for consolation prize
 
-		rewards.get(1).add(new RewardItem(188053623, 1)); // Fire Dragon King's Weapon Bundle
-		rewards.get(1).add(new RewardItem(186000242, 40)); // Ceramium Medal
+		rewards.get(1).add(new RewardItem(186000242, 50)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
 		rewards.get(1).add(new RewardItem(188051531, 3)); // Arena Ticket Supply Box
 
