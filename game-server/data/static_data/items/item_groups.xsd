@@ -9,7 +9,7 @@
         <xs:element minOccurs="0" name="craft_recipes" type="CraftRecipeGroup"/>
         <xs:element minOccurs="0" name="manastones_common" type="ManastoneGroup"/>
         <xs:element minOccurs="0" name="manastones_rare" type="ManastoneGroup"/>
-		<xs:element minOccurs="0" name="medals" type="MedalGroup"/>
+        <xs:element minOccurs="0" name="medals" type="MedalGroup"/>
         <xs:element minOccurs="0" name="food_common" type="FoodGroup"/>
         <xs:element minOccurs="0" name="food_rare" type="FoodGroup"/>
         <xs:element minOccurs="0" name="food_legendary" type="FoodGroup"/>
@@ -22,7 +22,7 @@
         <xs:element minOccurs="0" name="ores_epic" type="OreGroup"/>
         <xs:element minOccurs="0" name="gather_rare" type="GatherGroup"/>
         <xs:element minOccurs="0" name="enchants" type="EnchantGroup"/>
-		<xs:element minOccurs="0" name="event_legendary_symphony" type="EventGroup"/>
+        <xs:element minOccurs="0" name="event_legendary_symphony" type="EventGroup"/>
         <xs:element minOccurs="0" name="boss_rare" type="BossGroup"/>
         <xs:element minOccurs="0" name="boss_legendary" type="BossGroup"/>
         <xs:element minOccurs="0" name="feed_fluid" type="FeedFluidGroup"/>
@@ -42,7 +42,7 @@
         <xs:element minOccurs="0" name="tasty_poppy_snack" type="PoppySnackTastyGroup"/>
         <xs:element minOccurs="0" name="nutritious_poppy_snack" type="PoppySnackNutritiousGroup"/>
         <xs:element minOccurs="0" name="feed_shugo_event_coin" type="ShugoEventCoinGroup"/>
-		<xs:element minOccurs="0" name="feed_aether_cherry" type="AetherCherryGroup"/>
+        <xs:element minOccurs="0" name="feed_aether_cherry" type="AetherCherryGroup"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,7 +166,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element name="item" type="IdLevelReward" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="IdLevelReward"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -176,7 +176,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element name="item" type="FullRewardItem" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="FullRewardItem"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -186,7 +186,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="BonusItemGroup">
         <xs:sequence>
-          <xs:element name="item" type="ItemRaceEntry" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="ItemRaceEntry"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
