@@ -21,34 +21,35 @@ public class Symphony extends PlayerCommand {
 	private static final Logger log = LoggerFactory.getLogger(Symphony.class);
 	private static final int requiredItem = 182007170;
 	private static final int[][] rewards = { 
-		{ 3, 188052719 },		// [Event] Dye Bundle
-		{ 5, 186000199 },		// Legion Coin
-		{ 10, 186000238 },	// Conqueror's Mark
-		{ 15, 186000236 },	// Blood Mark
-		{ 50, 166500002 },	// Amplification Stone
-		{ 75, 188053113 },	// Ahserion's Flight Ancient Manastone Bundle
-		{ 100, 188053295 },	// Empyrean Plume Chest  - LE FIX ME
-		{ 150, 166030005 },	// Tempering Solution
-		{ 200, 188053618 },	// Honorable Elim's Idian Bundle
-		{ 250, 190100143 },	// Seakissed Aetherboard
-		{ 300, 187000121 },	// Hyperion Wings
+		// COLLECTION_COUNT, REWARD_ID, REWARD_COUNT
+		{ 3, 188052719, 1 },		// [Event] Dye Bundle
+		{ 5, 188052195, 1 },		// [Event] Legion Coin Chest
+		{ 10, 186000238, 10 },	// Conqueror's Mark
+		{ 15, 186000236, 10 },	// Blood Mark
+		{ 50, 166500002, 1 },		// Amplification Stone
+		{ 75, 188053113, 1 },		// Ahserion's Flight Ancient Manastone Bundle
+		{ 100, 188053295, 1 },	// Empyrean Plume Chest
+		{ 150, 166030005, 1 },	// Tempering Solution
+		{ 200, 188053618, 1 },	// Honorable Elim's Idian Bundle
+		{ 250, 190100143, 1 },	// Seakissed Aetherboard
+		{ 300, 187000121, 1 },	// Hyperion Wings
 	};
 
 	public Symphony() {
 		super("symphony", "Exchanges " + ChatUtil.item(requiredItem) + " for prizes.");
 
 		setParamInfo("Type .symphony <id> to get your reward:",
-			"[1] - (" + rewards[0][0] + " copies) " + ChatUtil.item(rewards[0][1]),
-			"[2] - (" + rewards[1][0] + " copies) " + ChatUtil.item(rewards[1][1]),
-			"[3] - (" + rewards[2][0] + " copies) " + ChatUtil.item(rewards[2][1]),
-			"[4] - (" + rewards[3][0] + " copies) " + ChatUtil.item(rewards[3][1]),
-			"[5] - (" + rewards[4][0] + " copies) " + ChatUtil.item(rewards[4][1]),
-			"[6] - (" + rewards[5][0] + " copies) " + ChatUtil.item(rewards[5][1]),
-			"[7] - (" + rewards[6][0] + " copies) " + ChatUtil.item(rewards[6][1]),
-			"[8] - (" + rewards[7][0] + " copies) " + ChatUtil.item(rewards[7][1]),
-			"[9] - (" + rewards[8][0] + " copies) " + ChatUtil.item(rewards[8][1]),
-			"[10] - (" + rewards[9][0] + " copies) " + ChatUtil.item(rewards[9][1]),
-			"[11] - (" + rewards[10][0] + " copies) " + ChatUtil.item(rewards[10][1])
+			"[1] - (" + rewards[0][0] + " copies): " + rewards[0][2] + "*" + ChatUtil.item(rewards[0][1]),
+			"[2] - (" + rewards[1][0] + " copies): " + rewards[1][2] + "*" + ChatUtil.item(rewards[1][1]),
+			"[3] - (" + rewards[2][0] + " copies): " + rewards[2][2] + "*" + ChatUtil.item(rewards[2][1]),
+			"[4] - (" + rewards[3][0] + " copies): " + rewards[3][2] + "*" + ChatUtil.item(rewards[3][1]),
+			"[5] - (" + rewards[4][0] + " copies): " + rewards[4][2] + "*" + ChatUtil.item(rewards[4][1]),
+			"[6] - (" + rewards[5][0] + " copies): " + rewards[5][2] + "*" + ChatUtil.item(rewards[5][1]),
+			"[7] - (" + rewards[6][0] + " copies): " + rewards[6][2] + "*" + ChatUtil.item(rewards[6][1]),
+			"[8] - (" + rewards[7][0] + " copies): " + rewards[7][2] + "*" + ChatUtil.item(rewards[7][1]),
+			"[9] - (" + rewards[8][0] + " copies): " + rewards[8][2] + "*" + ChatUtil.item(rewards[8][1]),
+			"[10] - (" + rewards[9][0] + " copies): " + rewards[9][2] + "*" + ChatUtil.item(rewards[9][1]),
+			"[11] - (" + rewards[10][0] + " copies): " + rewards[10][2] + "*" + ChatUtil.item(rewards[10][1])
 		);
 	}
 
@@ -69,8 +70,11 @@ public class Symphony extends PlayerCommand {
 				throw new InvalidParameterException("You need " + cost + " " + ChatUtil.item(requiredItem) + " for this.");
 
 			int itemId = rewards[rewardIndex][1];
-			if (ItemService.addItem(player, itemId, 1, true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM)) > 0) {
-				log.warn("[Legendary Symphony Event] " + itemId + " could not be added to " + player.getName() + "'s inventory.");
+			int itemCount = rewards[rewardIndex][2];
+			
+			long notAddedCount = ItemService.addItem(player, itemId, itemCount, true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
+			if (notAddedCount > 0) {
+				log.warn("[Legendary Symphony Event] " + notAddedCount + "*" + + itemId + " could not be added to " + player.getName() + "'s inventory.");
 			}
 		} catch (NumberFormatException | InvalidParameterException e) {
 			sendInfo(player, e instanceof InvalidParameterException ? e.getMessage() : "Invalid prize.");
