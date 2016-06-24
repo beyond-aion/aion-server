@@ -29,9 +29,12 @@ public class NpcSkillData {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (NpcSkillTemplates npcSkill : npcSkills) {
-			for (Integer npcId : npcSkill.getNpcIds())
-				npcSkillData.put(npcId, npcSkill);
-
+			for (Integer npcId : npcSkill.getNpcIds()) {
+				if (!npcSkillData.containsKey(npcId))
+					npcSkillData.put(npcId, npcSkill);
+				else
+					LoggerFactory.getLogger(NpcSkillData.class).error("Tried to duplicated npc skill data entry for npc id " + npcId);
+			}
 			if (npcSkill.getNpcSkills() == null)
 				LoggerFactory.getLogger(NpcSkillData.class).error("NO SKILL");
 		}
@@ -45,13 +48,13 @@ public class NpcSkillData {
 	public NpcSkillTemplates getNpcSkillList(int id) {
 		return npcSkillData.get(id);
 	}
-	
+
 	public void setNpcSkillTemplates(List<NpcSkillTemplates> template) {
 		this.npcSkills = template;
 		npcSkillData.clear();
 		afterUnmarshal(null, null);
 	}
-	
+
 	public List<NpcSkillTemplates> getAllNpcSkillTemplates() {
 		return npcSkills;
 	}
