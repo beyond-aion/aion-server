@@ -287,7 +287,7 @@
 			<gd_item id="188052583" name="Sanctuary Conquerer Mark Bundle" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="35" max_count="45">
+	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="30" max_count="45">
 		<gd_maps>
 			<gd_map map_id="301140000" name="Seized_Danuar_Sanctuary" />
 		</gd_maps>

@@ -31066,11 +31066,11 @@
 	</decomposable>
 	<decomposable item_id="188053690" name="Inggison Greater Conqueror's Mark Box">
 		<items chance="95.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="31" max_count="45" />
+			<item id="186000238" name="Conqueror's Mark" min_count="35" max_count="45" />
 			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ASMODIANS" />
 		</items>
 		<items chance="5.0">
-			<item id="186000238" name="Conqueror's Mark" min_count="31" max_count="45" />
+			<item id="186000238" name="Conqueror's Mark" min_count="35" max_count="45" />
 			<item id="186000236" name="Blood Mark" min_count="3" race="ASMODIANS" />
 			<item id="186000399" name="Honorable Conqueror's Mark" min_count="9" race="ASMODIANS" />
 		</items>
