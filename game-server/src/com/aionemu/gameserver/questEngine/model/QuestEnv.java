@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.questEngine.model;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -100,17 +97,11 @@ public class QuestEnv {
 		this.dialogId = dialogId;
 	}
 
+	/**
+	 * @return the target template id, 0 if no target ({@link #getVisibleObject()}) is set
+	 */
 	public int getTargetId() {
-		if (visibleObject == null) {
-			return 0;
-		} else if (visibleObject instanceof Npc) {
-			return ((Npc) visibleObject).getNpcId();
-		} else if (visibleObject instanceof Gatherable) {
-			return ((Gatherable) visibleObject).getObjectTemplate().getTemplateId();
-		} else if (visibleObject instanceof StaticObject) {
-			return ((StaticObject) visibleObject).getObjectTemplate().getTemplateId();
-		}
-		return 0;
+		return visibleObject == null ? 0 : visibleObject.getObjectTemplate().getTemplateId();
 	}
 
 	public void setExtendedRewardIndex(int index) {

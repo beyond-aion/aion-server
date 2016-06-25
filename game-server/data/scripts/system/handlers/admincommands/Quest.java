@@ -256,7 +256,7 @@ public class Quest extends AdminCommand {
 		}
 		qs.setPersistentState(PersistentState.DELETED);
 		DAOManager.getDAO(PlayerQuestListDAO.class).store(target);
-		qs = null;
+		target.getQuestStateList().removeQuest(questId);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId));
 		sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
