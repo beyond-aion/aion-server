@@ -4,7 +4,7 @@
   		[BEGIN] SUMMARY
 			36015 [XML] A Taste for Adventure
 			36016 [XML] The Jeweled Box
-			36017 [XML] [Spy/Weekly] What a Beautiful Chest
+			36017 [REMOVED] [Spy/Weekly] What a Beautiful Chest
 			36500 [XML] Redfur, Dead or Alive
 			36502 [XML] Going Shulack Hunting
 			36503 [XML] Aether He Goes or I Do
@@ -16,12 +16,12 @@
 			36510 [XML] Straighten Out the Twister
 			36511 [XML] Teaching a Scholar to Die
 			36512 [XML] Blackheart, Cold Hands
-			36514 [XML] Find, Kill, and Drink Ale
+			36514 [REMOVED] Find, Kill, and Drink Ale
 			36515 [XML] Kill Orb Be Killed
 			36516 [XML] Releasing Bad Gas
-			36517 [XML] Killing Pride
-			36518 [XML] A Killer Hunts a Killer
-			36519 [XML] The Bowmaster Disaster
+			36517 [REMOVED] Killing Pride
+			36518 [REMOVED] A Killer Hunts a Killer
+			36519 [REMOVED] The Bowmaster Disaster
 			36520 [XML] Watching You Die
 			36521 [XML] Das Spidona
 			36522 [XML] The Drana Huffer
@@ -31,6 +31,26 @@
 			36526 [XML] Cut Up the Nightbutcher
 			36527 [XML] To Kill a Gryphu
 			36528 [XML] A Sticky Situation
+			36529 [TODO] [Daily] Reward for Gold Pearls
+			36530 [TODO] [Daily] The Black Rose
+			36531 [TODO] [Daily] Furfuraceous Stisch
+			36532 [TODO] [Daily] Clampseal Linkroll
+			36533 [TODO] [Daily] Lichenback Maello
+			36534 [TODO] [Daily] Red Horn Spiner
+			36535 [TODO] [Daily] Shellback Slime
+			36536 [TODO] [Daily] Protector Krudun
+			36537 [TODO] [Daily] Mossy Balaur Boxes
+			36538 [TODO] [Daily] Hybrid Plant Seeds
+			36539 [TODO] [Daily] Adaptor Kremio
+			36540 [TODO] [Daily] Voracious Votarient
+			36541 [TODO] [Daily] Spry Taki
+			36542 [TODO] [Daily] Seascape Manta
+			36543 [TODO] [Daily] Sandsail Shakill
+			36544 [TODO] [Daily] Tidelapped Mutanka
+			36545 [TODO] [Spy/Daily] Ceruleanscale Kerub
+			36546 [TODO] [Spy/Daily] Zephyrwing Klare
+			36547 [TODO] [Spy/Daily] Octena Meduza
+			36548 [TODO] [Spy/Daily] Desert King Durianne
 			38002 [SCRIPT] Fortuneers Call to Arms
 			38005 [XML] Fortuneers Call to Arms
 		[END] SUMMARY
@@ -42,7 +62,6 @@
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="36015" end_npc_ids="799837 799838"/>
 	<item_collecting id="36016" end_npc_ids="799837 799838"/>
-	<item_collecting id="36017" start_npc_ids="799837 799838"/>
 	<item_collecting id="36503" end_npc_ids="799837 799838"/>
 	<item_collecting id="36509" end_npc_ids="799837 799838"/>
 	<item_collecting id="36515" end_npc_ids="799837 799838"/>
@@ -52,14 +71,11 @@
 	<item_collecting id="36525" end_npc_ids="799837 799838"/>
 	<item_collecting id="36527" end_npc_ids="799837 799838"/>
 	<item_collecting id="36528" end_npc_ids="799837 799838"/>
-	<item_collecting id="36519" start_npc_ids="799837 799838"/>
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="36500" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36502" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36508" end_npc_ids="799837 799838"/>
-	<monster_hunt id="36514" end_npc_ids="799837 799838"/>
-	<monster_hunt id="36518" start_npc_ids="799837 799838"/>
 	<monster_hunt id="36521" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36523" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36526" end_npc_ids="799837 799838"/>
@@ -85,8 +101,5 @@
 	</kill_spawned>
 	<kill_spawned id="36516" end_npc_ids="799837 799838">
 		<monster end_var="1" spawner_object_id="700763" npc_ids="216620"/>
-	</kill_spawned>
-	<kill_spawned id="36517" end_npc_ids="799837 799838">
-		<monster end_var="1" spawner_object_id="700764" npc_ids="216621"/>
 	</kill_spawned>
 </quest_scripts>
