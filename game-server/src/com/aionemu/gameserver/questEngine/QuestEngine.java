@@ -222,7 +222,7 @@ public class QuestEngine implements GameEngine {
 					else {
 						QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 						if (qt != null && qt.getCategory() == QuestCategory.CHALLENGE_TASK)
-							PacketSendUtility.sendPacket(env.getPlayer(), new SM_SYSTEM_MESSAGE(1400855, 9));
+							PacketSendUtility.sendPacket(env.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_DAILY(9));
 					}
 			} else {
 				Npc npc = (Npc) env.getVisibleObject();

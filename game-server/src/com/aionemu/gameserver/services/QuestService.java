@@ -300,7 +300,7 @@ public final class QuestService {
 		if (template.isDaily()) {
 			if (now.isAfter(repeatDate))
 				repeatDate = repeatDate.plusHours(24);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_DAILY("9"));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_DAILY(9));
 		} else {
 			int daysToAdd = 7;
 			int startDay = 7;

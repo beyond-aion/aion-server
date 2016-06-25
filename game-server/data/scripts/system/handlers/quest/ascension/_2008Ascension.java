@@ -2,8 +2,6 @@ package quest.ascension;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -29,6 +27,8 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -116,19 +116,19 @@ public class _2008Ascension extends QuestHandler {
 							return sendQuestDialog(env, 2375);
 						else if (var == 6)
 							return sendQuestDialog(env, 2716);
+						return false;
 					case SELECT_ACTION_2376:
 						if (var == 4) {
 							playQuestMovie(env, 57);
 							removeQuestItem(env, 182203009, 1);
 							removeQuestItem(env, 182203010, 1);
 							removeQuestItem(env, 182203011, 1);
-							return false;
 						}
+						return false;
 					case SETPRO1:
 						qs.setQuestVar(1);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.FADE_OUT_BEAM);
-						return true;
+						return TeleportService2.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.FADE_OUT_BEAM);
 					case SETPRO5:
 						if (var == 4) {
 							qs.setQuestVar(99);
@@ -140,105 +140,83 @@ public class _2008Ascension extends QuestHandler {
 							TeleportService2.teleportTo(player, 320020000, newInstance.getInstanceId(), 457.65f, 426.8f, 230.4f);
 							return true;
 						}
+						return false;
 					case SETPRO6:
-						if (var == 6) {
-							PlayerClass playerClass = player.getCommonData().getPlayerClass();
-							if (playerClass.isStartingClass()) {
-								if (playerClass == PlayerClass.WARRIOR)
-									return sendQuestDialog(env, 3057);
-								else if (playerClass == PlayerClass.SCOUT)
-									return sendQuestDialog(env, 3398);
-								else if (playerClass == PlayerClass.MAGE)
-									return sendQuestDialog(env, 3739);
-								else if (playerClass == PlayerClass.PRIEST)
-									return sendQuestDialog(env, 4080);
-								else if (playerClass == PlayerClass.ENGINEER)
-									return sendQuestDialog(env, 3569);
-								else if (playerClass == PlayerClass.ARTIST)
-									return sendQuestDialog(env, 3910);
-							}
-						}
+						int dialogId = ClassChangeService.getClassSelectionDialogId(player.getRace(), player.getPlayerClass());
+						if (var == 6 && dialogId != 0)
+							return sendQuestDialog(env, dialogId);
+						return false;
 					case SETPRO7:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.GLADIATOR);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.GLADIATOR);
 					case SETPRO8:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.TEMPLAR);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.TEMPLAR);
 					case SETPRO9:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.ASSASSIN);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.ASSASSIN);
 					case SETPRO10:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.RANGER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.RANGER);
 					case SETPRO11:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.SORCERER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.SORCERER);
 					case SETPRO12:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.SPIRIT_MASTER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.SPIRIT_MASTER);
 					case SETPRO13:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.CHANTER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.CHANTER);
 					case SETPRO14:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.CLERIC);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.CLERIC);
 					case SETPRO15:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.GUNNER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.GUNNER);
 					case SETPRO16:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.BARD);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.BARD);
 					case SETPRO17:
-						if (var == 6)
-							return setPlayerClass(env, qs, PlayerClass.RIDER);
+						return var == 6 && setPlayerClass(env, qs, PlayerClass.RIDER);
 				}
 			} else if (targetId == 790003) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO2:
 						if (var == 1) {
 							if (player.getInventory().getItemCountByItemId(182203009) == 0)
-								if (!giveQuestItem(env, 182203009, 1))
-									return true;
+								giveQuestItem(env, 182203009, 1);
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.FADE_OUT_BEAM);
-							return true;
+							return TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.FADE_OUT_BEAM);
 						}
+						return false;
 				}
 			} else if (targetId == 790002) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SETPRO3:
 						if (var == 2) {
 							if (player.getInventory().getItemCountByItemId(182203010) == 0)
-								if (!giveQuestItem(env, 182203010, 1))
-									return true;
+								giveQuestItem(env, 182203010, 1);
 							qs.setQuestVar(3);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.FADE_OUT_BEAM);
-							return true;
+							return TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.FADE_OUT_BEAM);
 						}
+						return false;
 				}
 			} else if (targetId == 203546) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						if (var == 3)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case SETPRO4:
 						if (var == 3) {
 							if (player.getInventory().getItemCountByItemId(182203011) == 0)
-								if (!giveQuestItem(env, 182203011, 1))
-									return true;
+								giveQuestItem(env, 182203011, 1);
 							qs.setQuestVar(4);
 							updateQuestStatus(env);
 							TeleportService2.teleportTo(player, 220010000, 383.10248f, 1895.3093f, 327.625f, (byte) 59, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
+						return false;
 				}
 			} else if (targetId == 205020) {
 				switch (env.getDialog()) {
@@ -269,8 +247,6 @@ public class _2008Ascension extends QuestHandler {
 							}, 43000);
 							return true;
 						}
-						return false;
-					default:
 						return false;
 				}
 			}

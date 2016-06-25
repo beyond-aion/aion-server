@@ -433,10 +433,10 @@ public final class PlayerEnterWorldService {
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player);
 		// ----------------------------- Retail sequence -----------------------------
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
+		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogin(player);
-		}
-		ClassChangeService.showClassChangeDialog(player);
+		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
+			ClassChangeService.showClassChangeDialog(player);
 
 		GMService.getInstance().onPlayerLogin(player);
 

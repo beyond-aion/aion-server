@@ -23657,8 +23657,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can receive the daily quest again at %0 in the morning.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_DAILY(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400855, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_DAILY(int num0) {
+		return new SM_SYSTEM_MESSAGE(1400855, num0);
 	}
 
 	/**
