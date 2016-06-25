@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.teleport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
@@ -20,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
@@ -58,6 +60,7 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author xTz
@@ -351,8 +354,7 @@ public class TeleportService2 {
 	}
 
 	public static void teleportToNpc(Player player, int npcId) {
-		int worldId = player.getWorldId();
-		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(worldId, npcId);
+		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(player.getWorldId(), npcId);
 
 		if (searchResult == null) {
 			log.warn("No npc spawn found for : " + npcId);
@@ -361,18 +363,29 @@ public class TeleportService2 {
 
 		SpawnSpotTemplate spot = searchResult.getSpot();
 		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(searchResult.getWorldId());
-		WorldMapInstance newInstance = null;
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		int instanceId = player.getInstanceId();
+		float x = spot.getX(), y = spot.getY(), z = spot.getZ();
+		byte heading = (byte) ((spot.getHeading() & 0xFF) >= 60 ? spot.getHeading() - 60 : spot.getHeading() + 60); // look towards npc
 
-		if (worldTemplate.isInstance()) {
-			newInstance = InstanceService.getNextAvailableInstance(searchResult.getWorldId());
+		if (GeoDataConfig.GEO_ENABLE) {
+			// calculate position 1m in front of the npc
+			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(spot.getHeading()));
+			x += Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
+			y += Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
+			z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), 0.5f, 1);
 		}
 
-		if (newInstance != null) {
-			InstanceService.registerPlayerWithInstance(newInstance, player);
-			teleportTo(player, searchResult.getWorldId(), newInstance.getInstanceId(), spot.getX(), spot.getY(), spot.getZ());
-		} else {
-			teleportTo(player, searchResult.getWorldId(), spot.getX(), spot.getY(), spot.getZ());
+		if (player.getWorldId() != searchResult.getWorldId()) {
+			if (worldTemplate.isInstance()) {
+				WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(searchResult.getWorldId());
+				InstanceService.registerPlayerWithInstance(newInstance, player);
+				instanceId = newInstance.getInstanceId();
+			} else
+				instanceId = 1;
 		}
+
+		teleportTo(player, searchResult.getWorldId(), instanceId, x, y, z, heading);
 	}
 
 	/**
