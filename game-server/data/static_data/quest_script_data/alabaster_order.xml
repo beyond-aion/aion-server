@@ -43,20 +43,20 @@
 			35049 [XML] Driven to Distraction
 			35050 [XML] Vanquish Grim Puca
 			35051 [XML] Causing Much Angrief
-			35052 [TODO] [Daily] Alabaster Orders
-			35053 [TODO] [Daily] Clam Power
-			35054 [TODO] [Daily] Hand Over Sandsalt Shards
-			35055 [TODO] [Daily] Cygnea Site Search
-			35056 [TODO] [Daily] Scouting Cygnea Sites
-			35057 [TODO] [Daily] Surveying Cygnea Sites
-			35058 [TODO] [Daily] Clean Out Seafin Vespines
-			35059 [TODO] [Daily] Silence the Shardjaws
-			35060 [TODO] [Daily] No More Malodors
-			35061 [TODO] [Daily] Away with the Skyrays
-			35062 [TODO] [Daily] Corask Control
-			35063 [TODO] [Daily] Malodor Galore
-			35064 [TODO] [Daily] No Room for Ghostshrooms
-			35065 [TODO] [Daily] Don't Forget the Frillnecks
+			35052 [XML_R] [Daily] Alabaster Orders
+			35053 [XML_R] [Daily] Clam Power
+			35054 [XML_R] [Daily] Hand Over Sandsalt Shards
+			35055 [XML_R] [Daily] Cygnea Site Search
+			35056 [XML_R] [Daily] Scouting Cygnea Sites
+			35057 [XML_R] [Daily] Surveying Cygnea Sites
+			35058 [XML_R] [Daily] Clean Out Seafin Vespines
+			35059 [XML_R] [Daily] Silence the Shardjaws
+			35060 [XML_R] [Daily] No More Malodors
+			35061 [XML_R] [Daily] Away with the Skyrays
+			35062 [XML_R] [Daily] Corask Control
+			35063 [XML_R] [Daily] Malodor Galore
+			35064 [XML_R] [Daily] No Room for Ghostshrooms
+			35065 [XML_R] [Daily] Don't Forget the Frillnecks
 			38000 [SCRIPT] Call of the Alabaster Order
 			38003 [XML] Alabaster Order's Call
 		[END] SUMMARY
@@ -108,6 +108,17 @@
 		<npc_infos npc_ids="799049"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
+	<!-- 
+	<report_to_many id="35055" end_npc_ids="804942">
+		<npc_infos npc_ids="804874"/>
+	</report_to_many>
+	<report_to_many id="35056" end_npc_ids="804943">
+		<npc_infos npc_ids="804704"/>
+	</report_to_many>
+	<report_to_many id="35057" end_npc_ids="804944">
+		<npc_infos npc_ids="804709"/>
+	</report_to_many>
+	-->
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="35007" end_npc_ids="799805"/>
@@ -128,6 +139,10 @@
 	<item_collecting id="35046" end_npc_ids="799800 799801"/>
 	<item_collecting id="35047" end_npc_ids="799800 799801"/>
 	<item_collecting id="35048" end_npc_ids="799800 799801"/>
+	<!-- 
+	<item_collecting id="35053" end_npc_ids="804941"/>
+	<item_collecting id="35054" end_npc_ids="804941"/>
+	-->
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="35009" end_npc_ids="799805"/>
@@ -142,4 +157,15 @@
 	<monster_hunt id="35049" end_npc_ids="799800 799801"/>
 	<monster_hunt id="35050" end_npc_ids="799800 799801"/>
 	<monster_hunt id="35051" end_npc_ids="799800 799801"/>
+	<!-- 
+	<monster_hunt id="35052" end_npc_ids="804941"/>
+	<monster_hunt id="35058" end_npc_ids="804941"/>
+	<monster_hunt id="35059" end_npc_ids="804942"/>
+	<monster_hunt id="35060" end_npc_ids="804945"/>
+	<monster_hunt id="35061" end_npc_ids="804943"/>
+	<monster_hunt id="35062" end_npc_ids="804944"/>
+	<monster_hunt id="35063" end_npc_ids="804946"/>
+	<monster_hunt id="35064" end_npc_ids="804946"/>
+	<monster_hunt id="35065" end_npc_ids="804947"/>
+	-->
 </quest_scripts>
