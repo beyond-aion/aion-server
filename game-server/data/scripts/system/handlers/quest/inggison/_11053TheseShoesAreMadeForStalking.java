@@ -1,4 +1,4 @@
-package quest.inggison_armor;
+package quest.inggison;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
