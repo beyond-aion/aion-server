@@ -49,7 +49,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int itemExpands = 0;
 	private int warehouseNpcExpands = 0;
 	private int warehouseBonusExpands = 0;
-	private int advancedStigmaSlotSize = 0;
 	private int titleId = -1;
 	private int bonusTitleId = -1;
 	private int dp = 0;
@@ -103,14 +102,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public void setItemExpands(int itemExpands) {
 		this.itemExpands = itemExpands;
-	}
-
-	public int getAdvancedStigmaSlotSize() {
-		return advancedStigmaSlotSize;
-	}
-
-	public void setAdvancedStigmaSlotSize(int advancedStigmaSlotSize) {
-		this.advancedStigmaSlotSize = advancedStigmaSlotSize;
 	}
 
 	public long getExpShown() {

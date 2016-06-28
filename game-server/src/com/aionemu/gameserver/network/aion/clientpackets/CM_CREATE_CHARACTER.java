@@ -68,10 +68,6 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 		playerCommonData.setPlayerClass(PlayerClass.getPlayerClassById((byte) readD()));
 		playerCommonData.setLevel(1); // level (exp) must be set after class
 
-		if (getConnection().getAccount().getMembership() >= MembershipConfig.STIGMA_SLOT_QUEST) {
-			playerCommonData.setAdvancedStigmaSlotSize(11);
-		}
-
 		playerAppearance = new PlayerAppearance();
 
 		playerAppearance.setVoice(readD());

@@ -835,7 +835,6 @@ CREATE TABLE IF NOT EXISTS `players` (
   `quest_expands` tinyint(1) NOT NULL DEFAULT '0',
   `npc_expands` tinyint(1) NOT NULL DEFAULT '0',
   `item_expands` tinyint(1) NOT NULL DEFAULT '0',
-  `advenced_stigma_slot_size` tinyint(1) NOT NULL DEFAULT '0',
   `wh_npc_expands` tinyint(1) NOT NULL DEFAULT '0',
   `wh_bonus_expands` tinyint(1) NOT NULL DEFAULT '0',
   `mailbox_letters` tinyint(4) unsigned NOT NULL DEFAULT '0',

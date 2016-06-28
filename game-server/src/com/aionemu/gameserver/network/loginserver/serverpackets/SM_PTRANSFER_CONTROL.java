@@ -112,7 +112,6 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(this.player.getCommonData().getQuestExpands());
 				writeD(this.player.getCommonData().getNpcExpands());
 				writeD(this.player.getCommonData().getItemExpands());
-				writeD(this.player.getCommonData().getAdvancedStigmaSlotSize());
 				writeD(this.player.getCommonData().getWhNpcExpands());
 
 				PlayerAppearance playerAppearance = this.player.getPlayerAppearance();

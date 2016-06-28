@@ -82,7 +82,6 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		playerCommonData.setQuestExpands(readD());
 		playerCommonData.setNpcExpands(readD());
 		playerCommonData.setItemExpands(readD());
-		playerCommonData.setAdvancedStigmaSlotSize(readD());
 		playerCommonData.setWhNpcExpands(readD());
 
 		PlayerAppearance playerAppearance = new PlayerAppearance();
