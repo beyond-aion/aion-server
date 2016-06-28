@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javolution.util.FastTable;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.AtreianPassportData;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -103,10 +105,11 @@ public class AtreianPassportService {
 
 	public void onLogin(Player player) {
 		Account pa = player.getPlayerAccount();
+		ZonedDateTime now = ZonedDateTime.now(GSConfig.TIME_ZONE.toZoneId());
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
 		for (AtreianPassport atp : DATA.getAll().values()) {
-			if (atp.getPeriodStart().isBeforeNow() && atp.getPeriodEnd().isAfterNow()) {
+			if (atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
 				switch (atp.getAttendType()) {
 					case DAILY: {
 						if (doReward) {

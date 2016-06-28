@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.event;
 
+import java.time.ZonedDateTime;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,10 +10,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.joda.time.DateTime;
-
 import com.aionemu.gameserver.model.AttendType;
-import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
 
 /**
  * @author Alcapwnd
@@ -57,12 +56,12 @@ public class AtreianPassport {
 		return name;
 	}
 
-	public DateTime getPeriodStart() {
-		return DateTimeUtil.getDateTime(pStart.toGregorianCalendar());
+	public ZonedDateTime getPeriodStart() {
+		return pStart.toGregorianCalendar().toZonedDateTime();
 	}
 
-	public DateTime getPeriodEnd() {
-		return DateTimeUtil.getDateTime(pEnd.toGregorianCalendar());
+	public ZonedDateTime getPeriodEnd() {
+		return pEnd.toGregorianCalendar().toZonedDateTime();
 	}
 
 	public AttendType getAttendType() {
