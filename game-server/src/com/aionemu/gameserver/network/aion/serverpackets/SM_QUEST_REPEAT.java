@@ -7,6 +7,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class SM_QUEST_REPEAT extends AionServerPacket {
 
@@ -19,8 +20,8 @@ public class SM_QUEST_REPEAT extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(repeatableQuests.size());
-		for (int i = 0; i < repeatableQuests.size(); i++) {
-			writeH(repeatableQuests.get(0));
+		for (Integer questId : repeatableQuests) {
+			writeH(questId);
 		}
 
 		// There are following messages after this packet:
