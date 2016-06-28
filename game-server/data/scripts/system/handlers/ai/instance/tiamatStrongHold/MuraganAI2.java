@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -103,7 +104,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 		final QuestState qs = player.getQuestStateList().getQuestState(quest);
 		if (qs != null && qs.getQuestVarById(0) != 5) {
 			qs.setQuestVar(qs.getQuestVarById(0) + 1);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(quest, qs.getStatus(), qs.getQuestVars().getQuestVars(), 0));
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		}
 	}
 }

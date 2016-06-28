@@ -11,6 +11,7 @@ import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperations;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -27,7 +28,7 @@ public class OnKillEvent extends QuestEvent {
 
 	@XmlElement(name = "monster")
 	protected List<Monster> monster;
-	
+
 	@XmlElement(name = "complite")
 	protected QuestOperations complite;
 
@@ -53,8 +54,7 @@ public class OnKillEvent extends QuestEvent {
 				int var = qs.getQuestVarById(m.getVar());
 				if (var >= m.getStartVar() && var < m.getEndVar()) {
 					qs.setQuestVarById(m.getVar(), var + 1);
-					PacketSendUtility.sendPacket(env.getPlayer(),
-						new SM_QUEST_ACTION(env.getQuestId(), qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+					PacketSendUtility.sendPacket(env.getPlayer(), new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 				}
 			}
 		}

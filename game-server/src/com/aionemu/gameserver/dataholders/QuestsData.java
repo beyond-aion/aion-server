@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,13 +8,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.QuestService;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -55,16 +53,10 @@ public class QuestsData {
 	public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
 		List<QuestTemplate> factionQuests = sortedByFactionId.get(npcFactionId);
 		List<QuestTemplate> quests = new FastTable<QuestTemplate>();
-		QuestEnv questEnv = new QuestEnv(null, player, 0, 0);
 		for (QuestTemplate questTemplate : factionQuests) {
 			if (!QuestEngine.getInstance().isHaveHandler(questTemplate.getId()))
 				continue;
-			if (questTemplate.getMinlevelPermitted() != 0 && player.getLevel() < questTemplate.getMinlevelPermitted())
-				continue;
-			if (questTemplate.getMaxlevelPermitted() != 0 && player.getLevel() > questTemplate.getMaxlevelPermitted())
-				continue;
-			questEnv.setQuestId(questTemplate.getId());
-			if (QuestService.checkStartConditions(questEnv, false))
+			if (QuestService.checkStartConditions(player, questTemplate.getId(), false))
 				quests.add(questTemplate);
 		}
 		return quests;

@@ -2,19 +2,14 @@ package com.aionemu.gameserver.world.zone.handler;
 
 import java.lang.annotation.IncompleteAnnotationException;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.observer.AbstractQuestZoneObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -48,15 +43,6 @@ public abstract class QuestZoneHandler extends GeneralZoneHandler {
 		if (observer != null) {
 			creature.getObserveController().removeObserver(observer);
 			observed.remove(creature.getObjectId());
-		}
-	}
-
-	protected void sendUpdatePacket(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.REWARD) {
-			player.getController().updateNearbyQuests();
 		}
 	}
 

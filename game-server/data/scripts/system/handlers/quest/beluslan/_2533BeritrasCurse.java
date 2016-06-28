@@ -96,7 +96,6 @@ public class _2533BeritrasCurse extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			removeQuestItem(env, 182204426, 1);
 			QuestService.abandonQuest(player, questId);
-			player.getController().updateNearbyQuests();
 			return true;
 		}
 		return false;

@@ -8,8 +8,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author MrPoke, Rolandas
+ * @modified Neon
  */
-
 public class SM_NEARBY_QUESTS extends AionServerPacket {
 
 	private Map<Integer, Integer> nearbyQuestList;
@@ -20,19 +20,11 @@ public class SM_NEARBY_QUESTS extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		if (nearbyQuestList == null || con.getActivePlayer() == null)
-			return;
-
 		writeC(0);
 		writeH(-nearbyQuestList.size() & 0xFFFF);
 		for (Entry<Integer, Integer> nearbyQuest : nearbyQuestList.entrySet()) {
-			if (nearbyQuest.getValue() > 0) {
-				writeH(nearbyQuest.getKey());
-				writeH(0x2); // To show grey icons for future quests
-			} else {
-				// Quests are displayed on map
-				writeD(nearbyQuest.getKey());
-			}
+			writeH(nearbyQuest.getKey()); // quest id (max 65535, because of short data type, so most event quests are invalid)
+			writeH(nearbyQuest.getValue() > 0 ? 2 : 0); // 0 = visible, 1 = hidden, 2 = not yet available (transparent/grey quest marker above npc's head)
 		}
 	}
 }

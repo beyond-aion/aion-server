@@ -55,7 +55,7 @@ public class HolyAltarAI2 extends GeneralNpcAI2 {
 					playerHasQuest = true;
 					break;
 				} else if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-					if (QuestService.checkStartConditions(new QuestEnv(getOwner(), player, questId, 0), true)) {
+					if (QuestService.checkStartConditions(player, questId, true)) {
 						playerCanStartQuest = true;
 						continue;
 					}

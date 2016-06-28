@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public enum DialogPage {
 
@@ -31,17 +32,17 @@ public enum DialogPage {
 	GATHER_SKILL_LEVELUP(DialogAction.GATHER_SKILL_LEVELUP, 23),
 	LOOT(DialogAction.NULL, 24),
 	LEGION_WAREHOUSE(DialogAction.OPEN_LEGION_WAREHOUSE, 25),
-	//PERSONAL_WAREHOUSE(DialogAction.OPEN_PERSONAL_WAREHOUSE, 26),
+	// PERSONAL_WAREHOUSE(DialogAction.OPEN_PERSONAL_WAREHOUSE, 26),
 	NO_RIGHT(27),
 	COMBINETASK_WINDOW(DialogAction.CRAFT, 28),
 	COMPOUND_WEAPON(DialogAction.COMPOUND_WEAPON, 29),
 	DECOMPOUND_WEAPON(DialogAction.DECOMPOUND_WEAPON, 30),
-	HOUSING_MARKER(DialogAction.HOUSING_BUILD, 32),					// housing build
-	HOUSING_LIFETIME(DialogAction.HOUSING_DESTRUCT, 33),		// housing destruct
-	CHARGE_ITEM(DialogAction.CHARGE_ITEM_SINGLE, 35),				// Actually, two choices
-	CHARGE_ITEM2(DialogAction.CHARGE_ITEM_SINGLE2, 42),	 
+	HOUSING_MARKER(DialogAction.HOUSING_BUILD, 32), // housing build
+	HOUSING_LIFETIME(DialogAction.HOUSING_DESTRUCT, 33), // housing destruct
+	CHARGE_ITEM(DialogAction.CHARGE_ITEM_SINGLE, 35), // Actually, two choices
+	CHARGE_ITEM2(DialogAction.CHARGE_ITEM_SINGLE2, 42),
 	HOUSING_FRIENDLIST(DialogAction.HOUSING_FRIENDLIST, 36),
-	HOUSING_POST(DialogAction.NULL, 37),								// Unknown
+	HOUSING_POST(DialogAction.NULL, 37), // Unknown
 	HOUSING_AUCTION(DialogAction.HOUSING_PERSONAL_AUCTION, 38),
 	HOUSING_PAY_RENT(DialogAction.HOUSING_PAY_RENT, 39),
 	HOUSING_KICK(DialogAction.HOUSING_KICK, 40),
@@ -76,6 +77,34 @@ public enum DialogPage {
 				continue;
 			if (page.actionId() == dialogId)
 				return page;
+		}
+		return DialogPage.NULL;
+	}
+
+	public static DialogPage getRewardPageByIndex(Integer rewardIndex) {
+		if (rewardIndex != null) {
+			switch (rewardIndex) {
+				case 0:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW1;
+				case 1:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW2;
+				case 2:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW3;
+				case 3:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW4;
+				case 4:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW5;
+				case 5:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW6;
+				case 6:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW7;
+				case 7:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW8;
+				case 8:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW9;
+				case 9:
+					return DialogPage.SELECT_QUEST_REWARD_WINDOW10;
+			}
 		}
 		return DialogPage.NULL;
 	}

@@ -50,7 +50,7 @@ public class _2343AncientGinseng extends QuestHandler {
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212814, 1008.36f, 481.88f, 509.3f, (byte) 60);
 				removeQuestItem(env, 182204134, 1);
 				qs.setStatus(QuestStatus.REWARD);
-				QuestService.finishQuest(env);
+				QuestService.finishQuest(env, 0);
 				return true;
 			}
 		}

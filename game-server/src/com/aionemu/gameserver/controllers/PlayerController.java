@@ -233,14 +233,8 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
 		for (int questId : region.getParent().getQuestIds()) {
-			// QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-			// if (template.isTimeBased())
-			// continue;
-			int diff = 0;
-			if (questId <= 0xFFFF)
-				diff = QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel());
-			if (diff <= 2 && QuestService.checkStartConditions(new QuestEnv(null, getOwner(), questId, 0), false))
-				nearbyQuestList.put(questId, diff);
+			if (questId <= 0xFFFF && QuestService.checkStartConditions(getOwner(), questId, false, 2, false, false, false))
+				nearbyQuestList.put(questId, QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel()));
 		}
 		PacketSendUtility.sendPacket(getOwner(), new SM_NEARBY_QUESTS(nearbyQuestList));
 	}
@@ -251,10 +245,7 @@ public class PlayerController extends CreatureController<Player> {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			if (!template.isTimeBased())
 				continue;
-			int diff = 0;
-			if (questId <= 0xFFFF)
-				diff = QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel());
-			if (diff <= 2 && QuestService.checkStartConditions(new QuestEnv(null, getOwner(), questId, 0), false)) {
+			if (questId <= 0xFFFF && QuestService.checkStartConditions(getOwner(), questId, false)) {
 				reapeatQuestList.add(questId);
 			}
 		}

@@ -60,6 +60,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.models.WorkOrdersData;
@@ -94,10 +95,17 @@ public final class QuestService {
 	private static Multimap<Integer, QuestDrop> questDrop = ArrayListMultimap.create();
 
 	public static boolean finishQuest(QuestEnv env) {
-		return finishQuest(env, 0);
+		return finishQuest(env, null);
 	}
 
-	public static boolean finishQuest(QuestEnv env, int reward) {
+	/**
+	 * Finishes the quest and rewards the player.
+	 * 
+	 * @param env
+	 * @param rewardGroup
+	 *          - Which {@code <rewards>} group (from quest_data.xml) to use, null for none.
+	 */
+	public static boolean finishQuest(QuestEnv env, Integer rewardGroup) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
 		QuestState qs = player.getQuestStateList().getQuestState(id);
@@ -115,15 +123,14 @@ public final class QuestService {
 			return false; // prevent repeatable reward because of wrong quest handling
 		}
 		List<QuestItems> questItems = new FastTable<QuestItems>();
-		if (!template.getExtendedRewards().isEmpty()) {
-			if (qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
-				questItems.addAll(getRewardItems(env, template, true, reward));
-				extendedRewards = template.getExtendedRewards().get(0);
-			}
+		if (!template.getExtendedRewards().isEmpty() && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
+			questItems.addAll(getRewardItems(env, template, true, null));
+			extendedRewards = template.getExtendedRewards().get(0);
 		}
 		if (!template.getRewards().isEmpty() || !template.getBonus().isEmpty()) {
-			questItems.addAll(getRewardItems(env, template, false, reward));
-			rewards = template.getRewards().get(reward);
+			questItems.addAll(getRewardItems(env, template, false, rewardGroup));
+			if (rewardGroup != null)
+				rewards = template.getRewards().get(rewardGroup);
 		}
 		if (ItemService.addQuestItems(player, questItems)) {
 			giveReward(env, rewards);
@@ -131,102 +138,83 @@ public final class QuestService {
 			if (template.getCategory() == QuestCategory.CHALLENGE_TASK) {
 				ChallengeTaskService.getInstance().onChallengeQuestFinish(player, id);
 			}
-			return setFinishingState(env, template, reward);
+			return setFinishingState(env, template, rewardGroup);
 		}
 		return false;
 	}
 
-	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, int reward) {
+	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, Integer rewardGroup) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
-		List<QuestItems> questItems = new FastTable<>();
-		Rewards rewards;
-		if (extended) {
-			rewards = template.getExtendedRewards().get(0);
-		} else {
-			rewards = template.getRewards().get(reward);
-		}
-		questItems.addAll(rewards.getRewardItem());
 		int dialogId = env.getDialogId();
-		if (dialogId != DialogAction.SELECTED_QUEST_NOREWARD.id() && dialogId != 0 && !extended) {
-			QuestState qs = player.getQuestStateList().getQuestState(id);
-			PlayerClass playerClass = player.getCommonData().getPlayerClass();
-			int selRewIndex = dialogId - 8;
-			boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
-			if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
-				QuestItems classRewardItem = null;
-				if (selRewIndex >= 0 && selRewIndex < template.getSelectableRewardByClass(playerClass).size()) {
-					classRewardItem = template.getSelectableRewardByClass(playerClass).get(selRewIndex);
+		List<QuestItems> questItems = new FastTable<>();
+		if (extended) {
+			Rewards rewards = template.getExtendedRewards().get(0);
+			questItems.addAll(rewards.getRewardItem());
+			if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id() && !rewards.getSelectableRewardItem().isEmpty()) {
+				int index = env.getExtendedRewardIndex();
+				if (index - 8 >= 0 && index - 8 < rewards.getSelectableRewardItem().size()) {
+					questItems.add(rewards.getSelectableRewardItem().get(index - 8));
+				} else if ((index - 1) >= 0 && (index - 1) < rewards.getSelectableRewardItem().size()) {
+					questItems.add(rewards.getSelectableRewardItem().get(index - 1));
 				} else {
-					log.error("The SelectableRewardByClass list has no element with the given index (dialogId - 8) of " + selRewIndex + ". See quest id "
-						+ env.getQuestId());
+					log.error("The extended SelectableRewardItem list has no element on index " + (index - 8) + ". See quest id " + env.getQuestId()
+						+ ". The size is: " + rewards.getSelectableRewardItem().size());
 				}
-				if (classRewardItem != null) {
-					questItems.add(classRewardItem);
-				}
-			} else {
-				QuestItems selectebleRewardItem = null;
-				if (selRewIndex >= 0 && selRewIndex < rewards.getSelectableRewardItem().size()) {
-					selectebleRewardItem = rewards.getSelectableRewardItem().get(selRewIndex);
-				} else {
-					if (rewards.getSelectableRewardItem().isEmpty()) {
-						if (selRewIndex >= 0 && selRewIndex < template.getSelectableRewardByClass(playerClass).size()) {
-							selectebleRewardItem = template.getSelectableRewardByClass(playerClass).get(selRewIndex);
+			}
+		} else {
+			if (rewardGroup != null) {
+				Rewards rewards = template.getRewards().get(rewardGroup);
+				questItems.addAll(rewards.getRewardItem());
+				QuestState qs = player.getQuestStateList().getQuestState(id);
+				PlayerClass playerClass = player.getCommonData().getPlayerClass();
+				int rewardIndex = env.getDialog().getRewardIndex();
+				if (rewardIndex >= 0) {
+					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
+					if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
+						if (rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
+							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.error("The SelectableRewardByClass list has no element with the given index (dialogId - 8) of " + selRewIndex + ". See quest id "
-								+ env.getQuestId());
+							log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
 						}
-					} else
-						log.error("The SelectableRewardItem list has no element with the given index (dialogId - 8) of " + selRewIndex + ". See quest id "
-							+ env.getQuestId());
-				}
-				if (selectebleRewardItem != null) {
-					questItems.add(selectebleRewardItem);
+					} else {
+						if (rewardIndex < rewards.getSelectableRewardItem().size()) {
+							questItems.add(rewards.getSelectableRewardItem().get(rewardIndex));
+						} else {
+							if (rewards.getSelectableRewardItem().isEmpty()) {
+								if (rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
+									questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
+								} else {
+									log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+								}
+							} else
+								log.error("The SelectableRewardItem list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+						}
+					}
+				} else if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+					rewardIndex = env.getExtendedRewardIndex() - 8;
+					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
+					if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
+						if (rewardIndex >= 0 && rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
+							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
+						} else {
+							log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+						}
+					}
 				}
 			}
-		} else if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id() && dialogId != 0 && !extended) {
-			QuestState qs = player.getQuestStateList().getQuestState(id);
-			PlayerClass playerClass = player.getCommonData().getPlayerClass();
-			int selRewIndex = env.getExtendedRewardIndex() - 8;
-			boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
-			if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
-				QuestItems classRewardItem = null;
-				if (selRewIndex >= 0 && selRewIndex < template.getSelectableRewardByClass(playerClass).size()) {
-					classRewardItem = template.getSelectableRewardByClass(playerClass).get(selRewIndex);
-				} else {
-					log.error("The SelectableRewardByClass list has no element with the given index (extendedRewardIndex - 8) of " + selRewIndex
-						+ ". See quest id " + env.getQuestId());
+			if (!template.getBonus().isEmpty()) {
+				QuestBonuses bonus = template.getBonus().get(0);
+				// Handler can add additional bonuses on repeat (for event quests no data)
+				HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, bonus.getType(), questItems);
+				if (result == HandlerResult.SUCCESS) {
+					QuestItems additional = BonusService.getInstance().getQuestBonus(player, template);
+					if (additional != null)
+						questItems.add(additional);
 				}
-				if (classRewardItem != null) {
-					questItems.add(classRewardItem);
-				}
-			}
-		} else if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id() && extended && !rewards.getSelectableRewardItem().isEmpty()) {
-			QuestItems selectebleRewardItem = null;
-			int index = env.getExtendedRewardIndex();
-			if (index - 8 >= 0 && index - 8 < rewards.getSelectableRewardItem().size()) {
-				selectebleRewardItem = rewards.getSelectableRewardItem().get(index - 8);
-			} else if ((index - 1) >= 0 && (index - 1) < rewards.getSelectableRewardItem().size()) {
-				selectebleRewardItem = rewards.getSelectableRewardItem().get(index - 1);
-			} else {
-				log.error("The extended SelectableRewardItem list has no element with the given index (extendedRewardIndex - 8) of " + (index - 8)
-					+ ". See quest id " + env.getQuestId() + ". The size is: " + rewards.getSelectableRewardItem().size());
-			}
-			if (selectebleRewardItem != null) {
-				questItems.add(selectebleRewardItem);
 			}
 		}
 
-		if (!template.getBonus().isEmpty()) {
-			QuestBonuses bonus = template.getBonus().get(0);
-			// Handler can add additional bonuses on repeat (for event quests no data)
-			HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, bonus.getType(), questItems);
-			if (result != HandlerResult.FAILED) {
-				QuestItems additional = BonusService.getInstance().getQuestBonus(player, template);
-				if (additional != null)
-					questItems.add(additional);
-			}
-		}
 		return questItems;
 	}
 
@@ -259,32 +247,18 @@ public final class QuestService {
 		}
 	}
 
-	private static boolean setFinishingState(QuestEnv env, QuestTemplate template, int reward) {
+	private static boolean setFinishingState(QuestEnv env, QuestTemplate template, Integer reward) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
 		QuestState qs = player.getQuestStateList().getQuestState(id);
-		// remove all worker list item if finished.
-		QuestWorkItems qwi = questsData.getQuestById(id).getQuestWorkItems();
-		if (qwi != null) {
-			long count = 0;
-			for (QuestItems qi : qwi.getQuestWorkItem()) {
-				if (qi != null) {
-					count = player.getInventory().getItemCountByItemId(qi.getItemId());
-					if (count > 0) {
-						if (!player.getInventory().decreaseByItemId(qi.getItemId(), count, QuestStatus.COMPLETE))
-							return false;
-					}
-				}
-			}
-		}
+		removeQuestWorkItems(player, qs); // remove all worker list item if finished
 		qs.setStatus(QuestStatus.COMPLETE);
 		qs.setQuestVar(0);
 		qs.setReward(reward);
-		qs.setCompleteCount(qs.getCompleteCount() + 1);
 		if (template.isTimeBased()) {
 			qs.setNextRepeatTime(countNextRepeatTime(player, template));
 		}
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		player.getCommonData().updateDaeva();
 		QuestEngine.getInstance().onEnterZoneMissionEnd(env); // Notifies mission end @ToDo: to rename to onMissionEnd
 		QuestEngine.getInstance().onLvlUp(env);
@@ -322,123 +296,145 @@ public final class QuestService {
 	}
 
 	/**
-	 * This method will not propagate any exceptions to the caller
-	 * 
-	 * @param env
-	 * @return
+	 * @see #checkStartConditions(Player, int, boolean, int, boolean, boolean, boolean)
 	 */
-	public static boolean checkStartConditions(QuestEnv env, boolean warn) {
-		try {
-			return checkStartConditionsImpl(env, warn);
-		} catch (Exception ex) {
-			log.error("QE: exception in checkStartCondition", ex);
-		}
-		return false;
+	public static boolean checkStartConditions(Player player, int questId, boolean warn) {
+		return checkStartConditions(player, questId, warn, 0, false, false, false);
 	}
 
-	private static boolean checkStartConditionsImpl(QuestEnv env, boolean warn) {
-		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
-		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
+	/**
+	 * Checks if the player meets all required conditions to start the specified quest.<br>
+	 * This method will not propagate any exceptions to the caller
+	 * 
+	 * @param player
+	 *          - Player who wants to start the quest
+	 * @param questId
+	 *          - Concerned quest ID
+	 * @param warn
+	 *          - Whether to notify the player with a system message on fail
+	 * @param skipStartedCheck
+	 *          - Whether to ignore if the quest is active
+	 * @param skipRepeatCountCheck
+	 *          - Whether to ignore if the quest cannot be repeated (anymore)
+	 * @param skipXmlPreconditionCheck
+	 *          - Whether to ignore preconditions of this quest (from quest_data.xml)
+	 * @param allowedDiffToMinLevel
+	 *          - Allowed difference between the minimum required level for this quest and the players level
+	 * @return True, if the player is allowed to start the quest.
+	 */
+	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck, boolean skipRepeatCountCheck,
+		boolean skipXmlPreconditionCheck) {
+		try {
+			QuestTemplate template = questsData.getQuestById(questId);
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs != null && qs.getStatus() != QuestStatus.NONE) {
+				if (!skipStartedCheck && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
+					if (warn)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
+					return false;
+				} else if (!skipRepeatCountCheck && !qs.canRepeat()) {
+					if (warn)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(questId)));
+					return false;
+				} else if (!skipRepeatCountCheck && qs.getCompleteCount() >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255) {
+					if (warn)
+						PacketSendUtility.sendPacket(player,
+							SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(questId), template.getMaxRepeatCount()));
+					return false;
+				}
+			}
 
-		if (qs != null && qs.getStatus() != QuestStatus.NONE) {
-			if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD) {
+			if (template.getRacePermitted() != null && template.getRacePermitted() != Race.PC_ALL && template.getRacePermitted() != player.getRace()) {
 				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE());
 				return false;
-			} else if (!qs.canRepeat()) {
+			}
+
+			// min level - 2 so that the gray quest arrow shows when quest is almost available
+			int levelDiff = template.getMinlevelPermitted() - allowedDiffToMinLevel - player.getLevel();
+			if (levelDiff > 0) {
 				if (warn)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(env.getQuestId())));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(template.getMinlevelPermitted()));
 				return false;
-			} else if (qs.getCompleteCount() >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255) {
+			}
+
+			if (template.getMaxlevelPermitted() != 0 && player.getLevel() > template.getMaxlevelPermitted()) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(template.getMaxlevelPermitted()));
+				return false;
+			}
+
+			if (!template.getClassPermitted().isEmpty() && !template.getClassPermitted().contains(player.getPlayerClass())) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS());
+				return false;
+			}
+
+			if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender()) {
+				if (warn)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER());
+				return false;
+			}
+
+			if (template.getRequiredRank() != 0 && player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(env.getQuestId()), template.getMaxRepeatCount()));
+						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
 				return false;
 			}
-		}
 
-		if (template == null)
-			return false;
-
-		if (template.getRacePermitted() != null && template.getRacePermitted() != player.getRace() && template.getRacePermitted() != Race.PC_ALL) {
-			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE());
-			return false;
-		}
-		// min level - 2 so that the gray quest arrow shows when quest is almost available
-		// quest level will be checked again in QuestService.startQuest() when attempting to start
-		int levelDiff = template.getMinlevelPermitted() - player.getLevel();
-		if (levelDiff > 2)
-			return false;
-
-		if (levelDiff > 0) {
-			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
-			return false;
-		}
-
-		if (template.getMaxlevelPermitted() != 0 && player.getLevel() > template.getMaxlevelPermitted()) {
-			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(Integer.toString(template.getMaxlevelPermitted())));
-			return false;
-		}
-
-		if (!template.getClassPermitted().isEmpty() && !template.getClassPermitted().contains(player.getPlayerClass())) {
-			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS());
-			return false;
-		}
-
-		if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender()) {
-			if (warn)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER());
-			return false;
-		}
-
-		if (template.getRequiredRank() != 0 && player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
-			if (warn)
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
-			return false;
-		}
-
-		int requiredStartConditions = template.getRequiredConditionCount();
-		int fulfilledStartConditions = 0;
-		for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-			if (startCondition.check(player, warn)) {
-				fulfilledStartConditions++;
+			if (!skipXmlPreconditionCheck) {
+				int fulfilledStartConditions = 0;
+				for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
+					if (startCondition.check(player, warn))
+						fulfilledStartConditions++;
+				}
+				if (fulfilledStartConditions < template.getRequiredConditionCount())
+					return false;
 			}
-		}
-		if (fulfilledStartConditions < requiredStartConditions) {
-			return false;
-		}
 
-		if (!inventoryItemCheck(env, warn))
-			return false;
-
-		if (!checkCombineSkill(env, warn))
+			QuestEnv env = new QuestEnv(null, player, questId, 0);
+			if (!inventoryItemCheck(env, warn))
 				return false;
 
-		// check if NpcFaction daily quest
-		if (template.getNpcFactionId() != 0) {
-			// check if the NpcFaction daily time limit has passed
-			if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
+			if (!checkCombineSkill(env, warn))
 				return false;
 
-			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
-			if (faction == null || !faction.isActive())
-				return false;
+			// check if NpcFaction daily quest
+			if (template.getNpcFactionId() != 0) {
+				// check if the NpcFaction daily time limit has passed
+				if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
+					return false;
+
+				NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+				if (faction == null || !faction.isActive())
+					return false;
+			}
+
+			return true;
+		} catch (Exception ex) {
+			log.error("QE: exception in checkStartCondition (" + player + ", questId " + questId + ")", ex);
 		}
-
-		return true;
+		return false;
 	}
 
 	/*
 	 * Check the starting conditions and start a quest Reworked 12.06.2011
 	 * @author vlog
 	 */
-	public static boolean startQuest(QuestEnv env, QuestStatus status, boolean warn, int stepGroup) {
+	public static boolean startQuest(QuestEnv env) {
+		return startQuest(env, QuestStatus.START, env.getDialogId() != 0);
+	}
+
+	public static boolean startQuest(QuestEnv env, QuestStatus status) {
+		return startQuest(env, status, env.getDialogId() != 0);
+	}
+
+	/*
+	 * Check the starting conditions and start a quest Reworked 12.06.2011
+	 * @author vlog
+	 */
+	public static boolean startQuest(QuestEnv env, QuestStatus status, boolean warn) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
 		QuestStateList qsl = player.getQuestStateList();
@@ -451,23 +447,21 @@ public final class QuestService {
 				return false;
 			}
 		}
-		if (!checkStartConditions(env, warn)) {
+		if (!checkStartConditions(player, id, warn))
 			return false;
-		}
-		if (player.getLevel() < template.getMinlevelPermitted()) {
-			return false;
-		}
 
 		if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.havePermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_NORMAL());
 			return false;
 		}
 
+		ActionType actionType;
 		if (qs != null) {
+			actionType = ActionType.UPDATE;
 			qs.setStatus(status);
-			qs.setStepGroup(stepGroup);
 		} else {
-			qs = new QuestState(id, status, 0, stepGroup << 6, 0, null, 0, null);
+			actionType = ActionType.ADD;
+			qs = new QuestState(id, status);
 			player.getQuestStateList().addQuest(id, qs);
 		}
 
@@ -475,25 +469,9 @@ public final class QuestService {
 			player.getNpcFactions().startQuest(template);
 		}
 
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, status.value(), 0, qs.getFlags()));
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
 		player.getController().updateNearbyQuests();
 		return true;
-	}
-
-	/*
-	 * Check the starting conditions and start a quest Reworked 12.06.2011
-	 * @author vlog
-	 */
-	public static boolean startQuest(QuestEnv env) {
-		return startQuest(env, QuestStatus.START, env.getDialogId() != 0, 0);
-	}
-
-	public static boolean startQuest(QuestEnv env, int stepGroup) {
-		return startQuest(env, QuestStatus.START, env.getDialogId() != 0, stepGroup);
-	}
-
-	public static boolean startQuest(QuestEnv env, QuestStatus status) {
-		return startQuest(env, status, env.getDialogId() != 0, 0);
 	}
 
 	/**
@@ -506,53 +484,20 @@ public final class QuestService {
 	public static void startMission(QuestEnv env, QuestStatus status) {
 		Player player = env.getPlayer();
 		int questId = env.getQuestId();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (player.getQuestStateList().getQuestState(questId) != null)
+		if (qs != null)
 			return;
-		else
-			player.getQuestStateList().addQuest(questId, new QuestState(questId, status, 0, 0, null, 0, null));
 
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, status.value(), 0, 0));
-	}
-
-	/**
-	 * Check the mission start requirements
-	 * 
-	 * @param env
-	 * @return true, if all requirements are there
-	 */
-	public static boolean checkMissionStatConditions(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
-
-		// Check template existence
-		if (template == null)
-			return false;
-
-		// Check permitted race
-		if (template.getRacePermitted() != null && template.getRacePermitted() != player.getRace())
-			return false;
-
-		// Check permitted class
-		if (template.getClassPermitted().size() != 0 && !template.getClassPermitted().contains(player.getCommonData().getPlayerClass()))
-			return false;
-
-		// Check permitted gender
-		if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender())
-			return false;
-
-		// Check required skills
-		if (!checkCombineSkill(env, false))
-			return false;
-
-		// Everything is ok
-		return true;
+		qs = new QuestState(questId, status);
+		player.getQuestStateList().addQuest(questId, qs);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
 	}
 
 	/**
 	 * Checks if the crafting/tapping skill point requirements for this quest
 	 * 
-	 * @return True, if the quest skill requirement meets the players skill points. 
+	 * @return True, if the quest skill requirement meets the players skill points.
 	 */
 	public static boolean checkCombineSkill(QuestEnv env, boolean warn) {
 		Player player = env.getPlayer();
@@ -561,12 +506,12 @@ public final class QuestService {
 		if (template == null)
 			return false;
 
-		if (template.getCombineSkill() != null) {
+		if (template.getCombineSkill() != 0) {
 			List<Integer> skills = new FastTable<Integer>(); // skills to check
 			if (template.getCombineSkill() == -1) { // any skill
 				if (template.getNpcFactionId() != 12 && template.getNpcFactionId() != 13) { // exclude essence/aether tapping for crafting dailies
-				skills.add(30002);
-				skills.add(30003);
+					skills.add(30002);
+					skills.add(30003);
 				}
 				skills.add(40001);
 				skills.add(40002);
@@ -592,47 +537,41 @@ public final class QuestService {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TS_RANK(Integer.toString(template.getCombineSkillPoint())));
 				return false;
-		}
+			}
 		}
 
 		return true;
 	}
 
 	public static boolean startEventQuest(QuestEnv env, QuestStatus questStatus) {
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		int id = env.getQuestId();
+		Player player = env.getPlayer();
+		QuestTemplate template = questsData.getQuestById(id);
 		if (template.getCategory() != QuestCategory.EVENT)
 			return false;
 
-		int id = env.getQuestId();
-		Player player = env.getPlayer();
-
-		if (player.getLevel() < template.getMinlevelPermitted()) {
-			return false;
-		}
-
-		if (template.getMaxlevelPermitted() != 0 && player.getLevel() > template.getMaxlevelPermitted())
+		if (QuestService.checkLevelRequirement(template, player.getLevel()))
 			return false;
 
-		if (template.getRacePermitted() != null)
-			if (template.getRacePermitted() != player.getRace() && template.getRacePermitted() != Race.PC_ALL)
-				return false;
+		if (template.getRacePermitted() == player.getOppositeRace())
+			return false;
 
 		if (!template.getClassPermitted().isEmpty())
 			if (!template.getClassPermitted().contains(player.getCommonData().getPlayerClass()))
 				return false;
 
-		if (template.getGenderPermitted() != null)
-			if (template.getGenderPermitted() != player.getGender())
-				return false;
+		if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender())
+			return false;
 
 		QuestState qs = player.getQuestStateList().getQuestState(id);
 		if (qs == null) {
-			qs = new QuestState(template.getId(), questStatus, 0, 0, null, 0, null);
+			qs = new QuestState(template.getId(), questStatus);
 			player.getQuestStateList().addQuest(id, qs);
+		} else {
+			qs.setStatus(questStatus);
+			qs.setQuestVar(0);
+			qs.setReward(null);
 		}
-		/*
-		 * else { if (template.getMaxRepeatCount() >= qs.getCompleteCount()) { qs.setStatus(questStatus); qs.setQuestVar(0); } }
-		 */
 		return true;
 	}
 
@@ -642,21 +581,7 @@ public final class QuestService {
 	 */
 	private static boolean checkQuestListSize(QuestStateList qsl) {
 		// The player's quest list size + the new one to start
-		return (qsl.getNormalQuestListSize() + 1) <= CustomConfig.BASIC_QUEST_SIZE_LIMIT;
-	}
-
-	public boolean completeQuest(QuestEnv env) {
-		Player player = env.getPlayer();
-		int id = env.getQuestId();
-		QuestState qs = player.getQuestStateList().getQuestState(id);
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-
-		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-		qs.setStatus(QuestStatus.REWARD);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		player.getController().updateNearbyQuests();
-		return true;
+		return (qsl.getNormalQuests().size() + 1) <= CustomConfig.BASIC_QUEST_SIZE_LIMIT;
 	}
 
 	public static boolean collectItemCheck(QuestEnv env, boolean removeItem) {
@@ -746,7 +671,7 @@ public final class QuestService {
 		int result = -1;
 
 		CollectItems collectItems = template.getCollectItems();
-		if (collectItems == null || template.getRewards() == null || template.getRewards().size() == 0 || rewardIndex >= template.getRewards().size())
+		if (collectItems == null || template.getRewards().isEmpty() || rewardIndex >= template.getRewards().size())
 			return result;
 
 		List<Integer> toCheck = null; // collect item indexes
@@ -1005,19 +930,17 @@ public final class QuestService {
 		return false;
 	}
 
-	/**
-	 * @param id
-	 * @param playerLevel
-	 */
 	public static boolean checkLevelRequirement(int questId, int playerLevel) {
-		return playerLevel >= questsData.getQuestById(questId).getMinlevelPermitted();
+		return checkLevelRequirement(questsData.getQuestById(questId), playerLevel);
+	}
+
+	public static boolean checkLevelRequirement(QuestTemplate qt, int playerLevel) {
+		return playerLevel >= qt.getMinlevelPermitted() && (qt.getMaxlevelPermitted() == 0 || playerLevel <= qt.getMaxlevelPermitted());
 	}
 
 	public static int getLevelRequirementDiff(int questId, int playerLevel) {
 		QuestTemplate template = questsData.getQuestById(questId);
-		if (template == null)
-			return 99;
-		return questsData.getQuestById(questId).getMinlevelPermitted() - playerLevel;
+		return template == null ? 99 : template.getMinlevelPermitted() - playerLevel;
 	}
 
 	public static boolean questTimerStart(QuestEnv env, int timeInSeconds) {
@@ -1058,83 +981,43 @@ public final class QuestService {
 		return true;
 	}
 
-	public static boolean bountyQuest(Player player, int questId) {
-		QuestTemplate template = questsData.getQuestById(questId);
-		if (template == null) {
-			return false;
-		}
-		if (!template.isCanReport()) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs == null) {
-			return false;
-		}
-
-		if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.LOCKED) {
-			AuditLogger.info(player, "Bounty from completed quest. quest Id: " + questId);
-			return false;
-		}
-		QuestEnv env = new QuestEnv(player, player, questId, DialogAction.SELECTED_QUEST_AUTO_REWARD.id());
-		finishQuest(env);
-		player.getController().updateNearbyQuests();
-		return true;
-	}
-
 	public static boolean abandonQuest(Player player, int questId) {
 		QuestTemplate template = questsData.getQuestById(questId);
-		if (template == null) {
+		if (template == null)
 			return false;
-		}
+
 		if (template.isCannotGiveup())
 			return false;
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs == null)
+		if (qs == null || qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.LOCKED)
 			return false;
 
-		if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.LOCKED) {
-			AuditLogger.info(player, "Cancel from completed quest. quest Id: " + questId);
-			return false;
+		if (qs.getCompleteCount() > 0) { // set back to complete if it was completed at least once
+			qs.setStatus(QuestStatus.COMPLETE, false);
+			qs.setQuestVar(0);
+			qs.setFlags(0);
+		} else { // entirely delete from players quest list
+			player.getQuestStateList().deleteQuest(questId);
 		}
+
 		if (template.getNpcFactionId() != 0)
 			player.getNpcFactions().abortQuest(template);
-		qs.setStatus(QuestStatus.NONE);
-		qs.setQuestVar(0);
-		// remove all worker list item if abandoned
-		QuestWorkItems qwi = template.getQuestWorkItems();
-		if (qwi != null) {
-			long count = 0;
-			for (QuestItems qi : qwi.getQuestWorkItem()) {
-				if (qi != null) {
-					count = player.getInventory().getItemCountByItemId(qi.getItemId());
-					if (count > 0)
-						player.getInventory().decreaseByItemId(qi.getItemId(), count);
-				}
-			}
-		}
+
+		removeQuestWorkItems(player, qs);
 		if (template.getCategory() == QuestCategory.TASK) {
-			WorkOrdersData wod = null;
 			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest()) {
-				if (xmlQuest.getId() == questId) {
-					if (xmlQuest instanceof WorkOrdersData) {
-						wod = (WorkOrdersData) xmlQuest;
-						break;
-					}
+				if (xmlQuest.getId() == questId && xmlQuest instanceof WorkOrdersData) {
+					player.getRecipeList().deleteRecipe(player, ((WorkOrdersData) xmlQuest).getRecipeId());
+					break;
 				}
-			}
-			if (wod != null) {
-				player.getRecipeList().deleteRecipe(player, wod.getRecipeId());
 			}
 		}
 
 		if (player.getController().getTask(TaskId.QUEST_TIMER) != null)
 			questTimerEnd(new QuestEnv(null, player, questId, 0));
 
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId));
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		player.getController().updateNearbyQuests();
 		return true;
 	}
@@ -1184,5 +1067,18 @@ public final class QuestService {
 			}
 		}
 		return players;
+	}
+
+	public static void removeQuestWorkItems(Player player, QuestState qs) {
+		QuestWorkItems qwi = questsData.getQuestById(qs.getQuestId()).getQuestWorkItems();
+		if (qwi != null) {
+			for (QuestItems qi : qwi.getQuestWorkItem()) {
+				if (qi != null) {
+					long count = player.getInventory().getItemCountByItemId(qi.getItemId());
+					if (count > 0)
+						player.getInventory().decreaseByItemId(qi.getItemId(), count, qs.getStatus());
+				}
+			}
+		}
 	}
 }

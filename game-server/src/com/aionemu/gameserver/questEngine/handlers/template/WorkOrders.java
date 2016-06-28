@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.CollectItem;
 import com.aionemu.gameserver.model.templates.quest.CollectItems;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -81,17 +80,7 @@ public class WorkOrders extends QuestHandler {
 					int var = qs.getQuestVarById(0);
 					if (QuestService.collectItemCheck(env, false)) {
 						changeQuestStep(env, var, var, true); // reward
-						QuestWorkItems qwi = DataManager.QUEST_DATA.getQuestById(questId).getQuestWorkItems();
-						if (qwi != null) {
-							long count = 0;
-							for (QuestItems qi : qwi.getQuestWorkItem()) {
-								if (qi != null) {
-									count = player.getInventory().getItemCountByItemId(qi.getItemId());
-									if (count > 0)
-										player.getInventory().decreaseByItemId(qi.getItemId(), count);
-								}
-							}
-						}
+						QuestService.removeQuestWorkItems(player, qs);
 						return sendQuestDialog(env, DialogPage.SELECT_QUEST_REWARD_WINDOW1.id());
 					} else {
 						return sendQuestSelectionDialog(env);

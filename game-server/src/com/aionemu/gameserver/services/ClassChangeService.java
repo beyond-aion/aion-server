@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.services;
 
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -28,19 +28,21 @@ public class ClassChangeService {
 	public static void changeClassToSelection(Player player, int dialogId) {
 		setClass(player, getSelectedPlayerClass(player.getRace(), dialogId), true, true);
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
-		if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) // Stigma Quests
-			completeQuest(player, player.getRace() == Race.ELYOS ? 1929 : 2900);
 	}
 
-	public static void completeQuest(Player player, int questId) {
+	public static void completeAscensionQuest(Player player) {
+		int questId = player.getRace() == Race.ELYOS ? 1006 : 2008;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null) {
-			player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
+			qs = new QuestState(questId, QuestStatus.COMPLETE);
+			player.getQuestStateList().addQuest(questId, qs);
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
 		} else {
 			qs.setStatus(QuestStatus.COMPLETE);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 		}
+		qs.setQuestVar(0);
+		qs.setReward(0);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 	}
 
 	public static boolean setClass(Player player, PlayerClass newClass) {
@@ -71,7 +73,7 @@ public class ClassChangeService {
 
 		if (updateDaevaStatus) {
 			if (!newClass.isStartingClass()) {
-				completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
+				completeAscensionQuest(player);
 				player.getCommonData().updateDaeva();
 			} else {
 				player.getCommonData().setDaeva(false);

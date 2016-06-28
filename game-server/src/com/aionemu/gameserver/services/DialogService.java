@@ -384,9 +384,7 @@ public class DialogService {
 		if (dialogId == DialogPage.NO_RIGHT.id())
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
 		else if (checkFuncDialog(dialogId, npc)) {
-			DialogPage showPage = DialogPage.getPageByAction(dialogId);
-			if (showPage != null)
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), showPage.id()));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.getPageByAction(dialogId).id()));
 		}
 	}
 

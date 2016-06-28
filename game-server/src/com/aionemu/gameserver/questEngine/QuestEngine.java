@@ -36,7 +36,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_COMPLETED_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.ConstantSpawnHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -51,6 +50,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -277,76 +277,11 @@ public class QuestEngine implements GameEngine {
 		return true;
 	}
 
-	public FastTable<QuestState> getQuestList(Player player) {
-		FastTable<QuestState> questList = new FastTable<>();
-		for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
-			if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
-				continue;
-			}
-			if (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
-				questList.add(qs);
-			}
-		}
-		return questList;
-	}
-
 	public void sendCompletedQuests(Player player) {
-		try {
-			boolean over1345 = false;
-			FastTable<QuestState> completeQuestList = new FastTable<>();
-			for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
-				if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
-					continue;
-				}
-				if (qs.getCompleteCount() > 0) {
-					completeQuestList.add(qs);
-				}
-				if (completeQuestList.size() < 1345) {
-					continue;
-				}
-				FastTable<QuestState> completedList = new FastTable<>();
-				completedList.addAll(completeQuestList);
-				PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(0x01, false, completedList));
-				completeQuestList.clear();
-				over1345 = true;
-			}
-			PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(over1345 ? 0x101 : 0x01, true, completeQuestList));
-
-		} catch (Exception ex) {
-			log.error("QE: exception in sendCompletedQuests", ex);
-		}
-	}
-
-	public void completeQuestSeparator(Player player, FastTable<QuestState> questState) {
-		try {
-			FastTable<QuestState> questList = new FastTable<>();
-			FastTable<QuestState> completeQuestList = new FastTable<>();
-			boolean over1345 = false;
-			for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
-				if (qs.getStatus() == QuestStatus.NONE && qs.getCompleteCount() == 0) {
-					continue;
-				}
-				if (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
-					questList.add(qs);
-				}
-				if (qs.getCompleteCount() > 0) {
-					completeQuestList.add(qs);
-				}
-
-				if (completeQuestList.size() < 1345) {
-					continue;
-				}
-
-				FastTable<QuestState> completeList = new FastTable<>();
-				completeList.addAll(completeQuestList);
-				PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(0x01, false, completeList));
-				completeQuestList.clear();
-				over1345 = true;
-			}
-			PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(over1345 ? 0x101 : 0x01, true, completeQuestList));
-			PacketSendUtility.sendPacket(player, new SM_QUEST_LIST(questList));
-		} catch (Exception ex) {
-			log.error("QE: exception in completeQuestSeparator", ex);
+		ListSplitter<QuestState> splittedQs = new ListSplitter<>(player.getQuestStateList().getCompletedQuests(), 1345, true);
+		while (splittedQs.hasMore()) {
+			int updateMode = splittedQs.isFirst() ? 0 : 1; // first packet sent resets players list
+			PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(updateMode, splittedQs.getNext()));
 		}
 	}
 
@@ -1203,21 +1138,25 @@ public class QuestEngine implements GameEngine {
 
 			@Override
 			public void run() {
-				SM_SYSTEM_MESSAGE dailyMessage = new SM_SYSTEM_MESSAGE(1400854);
-				SM_SYSTEM_MESSAGE weeklyMessage = new SM_SYSTEM_MESSAGE(1400856);
 				for (Player player : World.getInstance().getAllPlayers()) {
-					for (QuestState qs : player.getQuestStateList().getAllQuestState()) {
-						if (qs != null && qs.canRepeat()) {
+					boolean daily = false, weekly = false;
+					for (QuestState qs : player.getQuestStateList().getCompletedQuests()) {
+						if (qs.canRepeat()) {
 							QuestTemplate template = DataManager.QUEST_DATA.getQuestById(qs.getQuestId());
-							if (template.isDaily()) {
-								player.getController().updateNearbyQuests();
-								PacketSendUtility.sendPacket(player, dailyMessage);
-							} else if (template.isWeekly()) {
-								player.getController().updateNearbyQuests();
-								PacketSendUtility.sendPacket(player, weeklyMessage);
-							}
+							if (!daily && template.isDaily())
+								daily = true;
+							else if (!weekly && template.isWeekly())
+								weekly = true;
+							if (daily && weekly)
+								break;
 						}
 					}
+					if (daily)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_RESET_DAILY());
+					if (weekly)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_RESET_WEEK());
+					if (daily || weekly)
+						player.getController().updateNearbyQuests();
 					player.getNpcFactions().sendDailyQuest();
 				}
 			}

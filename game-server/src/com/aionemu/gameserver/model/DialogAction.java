@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public enum DialogAction {
 
@@ -150,12 +151,6 @@ public enum DialogAction {
 	SELECT_BOSS_LEVEL5(20010),
 	SELECTED_QUEST_NOREWARD(23),
 	SELECTED_QUEST_REWARD1(8),
-	SELECTED_QUEST_REWARD10(17),
-	SELECTED_QUEST_REWARD11(18),
-	SELECTED_QUEST_REWARD12(19),
-	SELECTED_QUEST_REWARD13(20),
-	SELECTED_QUEST_REWARD14(21),
-	SELECTED_QUEST_REWARD15(22),
 	SELECTED_QUEST_REWARD2(9),
 	SELECTED_QUEST_REWARD3(10),
 	SELECTED_QUEST_REWARD4(11),
@@ -164,6 +159,12 @@ public enum DialogAction {
 	SELECTED_QUEST_REWARD7(14),
 	SELECTED_QUEST_REWARD8(15),
 	SELECTED_QUEST_REWARD9(16),
+	SELECTED_QUEST_REWARD10(17),
+	SELECTED_QUEST_REWARD11(18),
+	SELECTED_QUEST_REWARD12(19),
+	SELECTED_QUEST_REWARD13(20),
+	SELECTED_QUEST_REWARD14(21),
+	SELECTED_QUEST_REWARD15(22),
 	SELECTED_QUEST_AUTO_REWARD(108),
 	SELECTED_QUEST_AUTO_REWARD1(110),
 	SELECTED_QUEST_AUTO_REWARD2(111),
@@ -242,6 +243,15 @@ public enum DialogAction {
 
 	public int id() {
 		return id;
+	}
+
+	/**
+	 * Converts the dialog ID to the corresponding reward ID.
+	 * 
+	 * @return The reward index selected, starting at 0. -1 if this action is no reward action.
+	 */
+	public int getRewardIndex() {
+		return id >= SELECTED_QUEST_REWARD1.id && id <= SELECTED_QUEST_REWARD15.id ? id - SELECTED_QUEST_REWARD1.id : -1;
 	}
 
 	public static DialogAction getActionByDialogId(int id) {

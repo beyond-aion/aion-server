@@ -644,8 +644,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			throw new AssertionError("Player " + playerObjId + " has no valid questStateList");
 
 		// check both quest states in case a player changed race
-		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : QuestStatus.NONE;
-		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : QuestStatus.NONE;
+		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : null;
+		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : null;
 		if (elyAscentQuestStatus != QuestStatus.COMPLETE && asmoAscentQuestStatus != QuestStatus.COMPLETE)
 			return false;
 

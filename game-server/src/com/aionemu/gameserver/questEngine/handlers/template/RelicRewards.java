@@ -87,7 +87,6 @@ public class RelicRewards extends QuestHandler {
 				if (rewardId != -1) {
 					qs.setQuestVar(rewardId + 1);
 					qs.setStatus(QuestStatus.REWARD);
-					qs.setCompleteCount(0);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, rewardId + 5);
 				} else

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -64,25 +65,23 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	@Override
 	public QuestStateList load(int playerObjId) {
 		QuestStateList questStateList = new QuestStateList();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, playerObjId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int questId = rset.getInt("quest_id");
-						int questVars = rset.getInt("quest_vars");
-						int flags = rset.getInt("flags");
-						int completeCount = rset.getInt("complete_count");
-						Timestamp nextRepeatTime = rset.getTimestamp("next_repeat_time");
-						Integer reward = rset.getInt("reward");
-						if (rset.wasNull())
-							reward = 0;
-						Timestamp completeTime = rset.getTimestamp("complete_time");
-						QuestStatus status = QuestStatus.valueOf(rset.getString("status"));
-						QuestState questState = new QuestState(questId, status, questVars, flags, completeCount, nextRepeatTime, reward, completeTime);
-						questState.setPersistentState(PersistentState.UPDATED);
-						questStateList.addQuest(questId, questState);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, playerObjId);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int questId = rset.getInt("quest_id");
+					int questVars = rset.getInt("quest_vars");
+					int flags = rset.getInt("flags");
+					int completeCount = rset.getInt("complete_count");
+					Timestamp nextRepeatTime = rset.getTimestamp("next_repeat_time");
+					Integer reward = rset.getInt("reward");
+					if (rset.wasNull())
+						reward = null;
+					Timestamp completeTime = rset.getTimestamp("complete_time");
+					QuestStatus status = QuestStatus.valueOf(rset.getString("status"));
+					QuestState questState = new QuestState(questId, status, questVars, flags, completeCount, nextRepeatTime, reward, completeTime);
+					questState.setPersistentState(PersistentState.UPDATED);
+					questStateList.addQuest(questId, questState);
 				}
 			}
 		} catch (Exception e) {
@@ -93,25 +92,19 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 
 	@Override
 	public void store(Player player) {
-
 		Collection<QuestState> qsList = player.getQuestStateList().getAllQuestState();
-		if (GenericValidator.isBlankOrNull(qsList)) {
+		Set<Integer> delQsList = player.getQuestStateList().getDeletedQuestIds();
+		if (qsList.isEmpty() && delQsList.isEmpty())
 			return;
-		}
 
-		Connection con = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 
-			deleteQuest(con, player.getObjectId(), qsList);
-
+			deleteQuest(con, player.getObjectId(), qsList, delQsList);
 			addQuests(con, player.getObjectId(), qsList);
 			updateQuests(con, player.getObjectId(), qsList);
 		} catch (SQLException e) {
 			log.error("Can't save quests for player " + player.getObjectId(), e);
-		} finally {
-			DatabaseFactory.close(con);
 		}
 
 		for (QuestState qs : qsList) {
@@ -120,17 +113,12 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void addQuests(Connection con, int playerId, Collection<QuestState> states) {
-
 		states = Collections2.filter(states, questsToAddPredicate);
 
-		if (GenericValidator.isBlankOrNull(states)) {
+		if (GenericValidator.isBlankOrNull(states))
 			return;
-		}
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(INSERT_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(INSERT_QUERY)) {
 			for (QuestState qs : states) {
 				ps.setInt(1, playerId);
 				ps.setInt(2, qs.getQuestId());
@@ -138,20 +126,9 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 				ps.setInt(4, qs.getQuestVars().getQuestVars());
 				ps.setInt(5, qs.getFlags());
 				ps.setInt(6, qs.getCompleteCount());
-				if (qs.getNextRepeatTime() != null) {
-					ps.setTimestamp(7, qs.getNextRepeatTime());
-				} else {
-					ps.setNull(7, Types.TIMESTAMP);
-				}
-				if (qs.getReward() == null) {
-					ps.setNull(8, Types.INTEGER);
-				} else {
-					ps.setInt(8, qs.getReward());
-				}
-				if (qs.getCompleteTime() == null)
-					ps.setNull(9, Types.TIMESTAMP);
-				else
-					ps.setTimestamp(9, qs.getCompleteTime());
+				ps.setObject(7, qs.getNextRepeatTime(), Types.TIMESTAMP); // supports inserting null value
+				ps.setObject(8, qs.getReward(), Types.SMALLINT); // supports inserting null value
+				ps.setObject(9, qs.getLastCompleteTime(), Types.TIMESTAMP); // supports inserting null value
 				ps.addBatch();
 			}
 
@@ -159,42 +136,24 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Failed to insert new quests for player " + playerId);
-		} finally {
-			DatabaseFactory.close(ps);
 		}
 	}
 
 	private void updateQuests(Connection con, int playerId, Collection<QuestState> states) {
-
 		states = Collections2.filter(states, questsToUpdatePredicate);
 
-		if (GenericValidator.isBlankOrNull(states)) {
+		if (GenericValidator.isBlankOrNull(states))
 			return;
-		}
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(UPDATE_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(UPDATE_QUERY)) {
 			for (QuestState qs : states) {
 				ps.setString(1, qs.getStatus().toString());
 				ps.setInt(2, qs.getQuestVars().getQuestVars());
 				ps.setInt(3, qs.getFlags());
 				ps.setInt(4, qs.getCompleteCount());
-				if (qs.getNextRepeatTime() != null) {
-					ps.setTimestamp(5, qs.getNextRepeatTime());
-				} else {
-					ps.setNull(5, Types.TIMESTAMP);
-				}
-				if (qs.getReward() == null) {
-					ps.setNull(6, Types.SMALLINT);
-				} else {
-					ps.setInt(6, qs.getReward());
-				}
-				if (qs.getCompleteTime() == null)
-					ps.setNull(7, Types.TIMESTAMP);
-				else
-					ps.setTimestamp(7, qs.getCompleteTime());
+				ps.setObject(5, qs.getNextRepeatTime(), Types.TIMESTAMP); // supports inserting null value
+				ps.setObject(6, qs.getReward(), Types.SMALLINT); // supports inserting null value
+				ps.setObject(7, qs.getLastCompleteTime(), Types.TIMESTAMP); // supports inserting null value
 				ps.setInt(8, playerId);
 				ps.setInt(9, qs.getQuestId());
 				ps.addBatch();
@@ -204,26 +163,25 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Failed to update existing quests for player " + playerId);
-		} finally {
-			DatabaseFactory.close(ps);
 		}
 	}
 
-	private void deleteQuest(Connection con, int playerId, Collection<QuestState> states) {
-
+	private void deleteQuest(Connection con, int playerId, Collection<QuestState> states, Set<Integer> questIds) {
 		states = Collections2.filter(states, questsToDeletePredicate);
 
-		if (GenericValidator.isBlankOrNull(states)) {
+		if (GenericValidator.isBlankOrNull(states) && questIds.isEmpty())
 			return;
-		}
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(DELETE_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(DELETE_QUERY)) {
 			for (QuestState qs : states) {
 				ps.setInt(1, playerId);
 				ps.setInt(2, qs.getQuestId());
+				ps.addBatch();
+			}
+
+			for (Integer questId : questIds) {
+				ps.setInt(1, playerId);
+				ps.setInt(2, questId);
 				ps.addBatch();
 			}
 
@@ -231,14 +189,10 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Failed to delete existing quests for player " + playerId);
-		} finally {
-			DatabaseFactory.close(ps);
 		}
+		questIds.clear();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

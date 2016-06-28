@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -22,11 +23,6 @@ public class SetQuestStatusOperation extends QuestOperation {
 	@XmlAttribute(required = true)
 	protected QuestStatus status;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperation#doOperate(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public void doOperate(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -34,7 +30,7 @@ public class SetQuestStatusOperation extends QuestOperation {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null) {
 			qs.setStatus(status);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 			if (qs.getStatus() == QuestStatus.COMPLETE)
 				player.getController().updateNearbyQuests();
 		}

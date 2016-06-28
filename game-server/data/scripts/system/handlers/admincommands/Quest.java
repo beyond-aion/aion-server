@@ -3,11 +3,8 @@ package admincommands;
 import java.util.Arrays;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.ENpcFactionQuestState;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
@@ -16,7 +13,10 @@ import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_COMPLETED_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -27,6 +27,8 @@ import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastTable;
+
 /**
  * @author MrPoke
  * @reworked Neon
@@ -36,15 +38,13 @@ public class Quest extends AdminCommand {
 
 	public Quest() {
 		super("quest", "Handles quest states of your target.");
-		
-		setParamInfo(
-			"[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
+
+		setParamInfo("[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
 			"[player] <quest> <status> - Shows the quest status of the specified quest.",
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
 			"[player] <quest> <dialog> <dialog_id> - Sends the specified quest dialog.",
-			"Note: Player name parameters are optional. If missing, your current target will be taken."
-		);
+			"Note: Player name parameters are optional. If missing, your current target will be taken.");
 	}
 
 	@Override
@@ -149,14 +149,14 @@ public class Quest extends AdminCommand {
 			setQuestFlags(admin, target, questId, flags);
 		} else if (params[index].equalsIgnoreCase("dialog")) {
 			int dialogId;
-			
+
 			try {
 				dialogId = Integer.valueOf(params[++index]);
 			} catch (IndexOutOfBoundsException | NumberFormatException e) {
 				sendInfo(admin, "<dialog_id> must be an int value.");
 				return;
 			}
-			
+
 			sendQuestDialog(admin, questId, dialogId);
 		} else {
 			sendInfo(admin);
@@ -173,13 +173,13 @@ public class Quest extends AdminCommand {
 			sendInfo(admin, "Quest " + ChatUtil.quest(questId) + " can't be reset.");
 			return;
 		}
-		if (qs.getQuestVarById(0) == 0) {
+		if (qs.getQuestVars().getQuestVars() == 0) {
 			sendInfo(admin, "Player " + target.getName() + "'s quest is already at the beginning.");
 			return;
 		}
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
-		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(admin, "Reset " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
 
@@ -213,8 +213,8 @@ public class Quest extends AdminCommand {
 					}
 				}
 			}
-			sendInfo(admin, "Quest not started. "
-				+ (sb.length() > 0 ? "These quest(s) must be completed first:" + sb.toString() : "Some preconditions failed."));
+			sendInfo(admin,
+				"Quest not started. " + (sb.length() > 0 ? "These quest(s) must be completed first:" + sb.toString() : "Some preconditions failed."));
 		}
 	}
 
@@ -249,15 +249,16 @@ public class Quest extends AdminCommand {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
-		QuestState qs = target.getQuestStateList().getQuestState(questId);
+		QuestState qs = target.getQuestStateList().deleteQuest(questId);
 		if (qs == null) {
 			sendInfo(admin, "Player " + target.getName() + " does not have that quest.");
 			return;
 		}
-		qs.setPersistentState(PersistentState.DELETED);
-		DAOManager.getDAO(PlayerQuestListDAO.class).store(target);
-		target.getQuestStateList().removeQuest(questId);
-		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId));
+		if (qs.getStatus() == QuestStatus.COMPLETE)
+			QuestEngine.getInstance().sendCompletedQuests(target); // rewrite completed quest list
+		else
+			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
+		target.getController().updateNearbyQuests();
 		sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
 
@@ -288,21 +289,31 @@ public class Quest extends AdminCommand {
 			return;
 		}
 		QuestState qs = target.getQuestStateList().getQuestState(questId);
-		if (qs == null) {
-			qs = new QuestState(questId, status, 0, 0, 0, null, 0, null);
+		ActionType actionType;
+		if (qs == null) { // player doesn't have that quest
+			actionType = ActionType.ADD;
+			qs = new QuestState(questId, status);
 			target.getQuestStateList().addQuest(questId, qs);
+		} else {
+			actionType = ActionType.UPDATE;
+			qs.setStatus(status);
 		}
-		qs.setStatus(status);
-		if (varNum == -1)
-			qs.setQuestVar(var);
-		else
-			qs.setQuestVarById(varNum, var);
-		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 		if (status == QuestStatus.COMPLETE) {
-			qs.setCompleteCount(qs.getCompleteCount() + 1);
-			target.getController().updateNearbyQuests();
+			qs.setQuestVar(0); // completed quests vars are always 0
+			if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
+				qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
+		} else {
+			if (varNum == -1)
+				qs.setQuestVar(var);
+			else
+				qs.setQuestVarById(varNum, var);
 		}
-		sendInfo(admin, "Updated quest status of " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+		if (actionType == ActionType.ADD && status == QuestStatus.COMPLETE)
+			PacketSendUtility.sendPacket(target, new SM_QUEST_COMPLETED_LIST(1, FastTable.of(qs)));
+		else
+			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(actionType, qs));
+		target.getController().updateNearbyQuests();
+		sendInfo(admin, "Set quest status of " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
 
 	private void setQuestFlags(Player admin, Player target, int questId, int flags) { // needs rework when flags are implemented like vars
@@ -316,16 +327,16 @@ public class Quest extends AdminCommand {
 			return;
 		}
 		qs.setFlags(flags);
-		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(admin, "Set " + target.getName() + "'s quest flags to " + flags + ".");
 	}
-	
+
 	private void sendQuestDialog(Player admin, int questId, int dialogId) {
 		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
 		PacketSendUtility.sendPacket(admin, new SM_DIALOG_WINDOW(0, dialogId, questId));
-		sendInfo(admin, "Dialog " + dialogId + " of Q" + questId + " sent!");
+		sendInfo(admin, "Sent dialog " + dialogId + " of Q" + questId + ".");
 	}
 }

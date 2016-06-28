@@ -491,7 +491,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 
 			if (PlayerTransferConfig.ALLOW_QUESTS) {
 				player.getQuestStateList().addQuest(questId,
-					new QuestState(questId, QuestStatus.valueOf(status), qvars, flags, completeCount, nextRepeatTime, reward, completeTime));
+					new QuestState(questId, QuestStatus.valueOf(status), qvars, flags, completeCount, nextRepeatTime, reward == -1 ? null : reward, completeTime));
 			}
 		}
 

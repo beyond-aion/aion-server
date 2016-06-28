@@ -11812,15 +11812,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can only receive this quest when your level is %0 or above.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300571, value0);
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300571, num0);
 	}
 
 	/**
 	 * You can only receive this quest when your level is %0 or below.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300572, value0);
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(int num0) {
+		return new SM_SYSTEM_MESSAGE(1300572, num0);
 	}
 
 	/**

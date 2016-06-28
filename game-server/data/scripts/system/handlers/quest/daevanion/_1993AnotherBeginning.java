@@ -1,6 +1,7 @@
 package quest.daevanion;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -10,7 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Tiger
- * @modified Wakizashi, Rolandas, Pad
+ * @modified Wakizashi, Rolandas, Pad, Neon
  */
 public class _1993AnotherBeginning extends QuestHandler {
 
@@ -36,95 +37,65 @@ public class _1993AnotherBeginning extends QuestHandler {
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
-		int targetId = env.getTargetId();
+		if (env.getTargetId() != 203753) // Sibylla
+			return false;
+		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int dialogId = env.getDialogId();
-		int dialogIndex = 0;
-		boolean itemSelected = false;
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			if (targetId == 203753) { // Sibylla
-				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
-					QuestService.startQuest(env);
-					return sendQuestDialog(env, 1011);
-				} else {
-					return sendQuestStartDialog(env);
-				}
+			if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
+				QuestService.startQuest(env);
+				return sendQuestDialog(env, 1011);
+			} else {
+				return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203753) { // Sibylla
-				if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
-					return sendQuestDialog(env, 1011);
-				}
-				for (; dialogIndex < dialogs.length; dialogIndex++) {
-					if (dialogs[dialogIndex] == dialogId) {
-						itemSelected = true;
-						break;
-					}
-				}
-				if (itemSelected) {
-					long itemCount = 0;
+			if (dialogId == DialogAction.EXCHANGE_COIN.id())
+				return sendQuestDialog(env, 1011);
+
+			for (int dialogIndex = 0; dialogIndex < dialogs.length; dialogIndex++) {
+				if (dialogs[dialogIndex] == dialogId) {
 					for (int itemId : items[dialogIndex]) {
-						itemCount = player.getInventory().getItemCountByItemId(itemId);
-						if (itemCount > 0)
-							break;
-					}
-					if (itemCount > 0) {
-						qs.setReward(dialogIndex);
-						return sendQuestDialog(env, 1013);
-					} else {
-						return sendQuestDialog(env, 1352);
-					}
-				} else {
-					switch (dialogId) {
-						case 1012:
-						case 1097:
-						case 1182:
-						case 1267:
-						case 2375:
-							return sendQuestDialog(env, dialogId);
-						case 10000:
-						case 10001:
-						case 10002:
-						case 10003:
-						case 10004: {
-							if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
-								return sendQuestDialog(env, 1009);
-							int savedData = qs.getReward();
-							int itemIdToRemove = 0;
-							for (int itemId : items[savedData]) {
-								if (player.getInventory().getItemCountByItemId(itemId) > 0)
-									itemIdToRemove = itemId;
-							}
-							if (itemIdToRemove == 0)
-								return sendQuestDialog(env, 1352);
-							changeQuestStep(env, 0, 0, true);
-							removeQuestItem(env, 186000041, 1);
-							removeQuestItem(env, itemIdToRemove, 1);
-							qs.setReward(dialogId - 10000);
-							if (dialogId >= 10004)
-								return sendQuestDialog(env, dialogId - 10000 + 41);
-							else
-								return sendQuestDialog(env, dialogId - 10000 + 5);
+						if (player.getInventory().getItemCountByItemId(itemId) > 0) {
+							qs.setReward(dialogIndex);
+							return sendQuestDialog(env, 1013);
 						}
 					}
+					return sendQuestDialog(env, 1352);
 				}
+			}
+
+			switch (dialogId) {
+				case 1012: // exchange plate
+				case 1097: // exchange leather
+				case 1182: // exchange cloth
+				case 1267: // exchange chain
+				case 2375: // exchange magic leather
+					return sendQuestDialog(env, dialogId);
+				case 10000: // get plate
+				case 10001: // get leather
+				case 10002: // get cloth
+				case 10003: // get chain
+				case 10004: // get magic leather
+					if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
+						return sendQuestDialog(env, 1009);
+					Integer savedData = qs.getReward();
+					int itemIdToRemove = 0;
+					for (int itemId : items[savedData]) {
+						if (player.getInventory().getItemCountByItemId(itemId) > 0)
+							itemIdToRemove = itemId;
+					}
+					if (itemIdToRemove == 0)
+						return sendQuestDialog(env, 1352);
+					changeQuestStep(env, 0, 0, true);
+					removeQuestItem(env, 186000041, 1);
+					removeQuestItem(env, itemIdToRemove, 1);
+					qs.setReward(dialogId - 10000);
+					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203753) { // Sibylla
-				int savedData = qs.getReward();
-				if (savedData >= 4) {
-					if (dialogId == DialogAction.USE_OBJECT.id())
-						return sendQuestDialog(env, savedData + 41);
-					else if (dialogId >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_REWARD5.id()) {
-						QuestService.finishQuest(env, savedData);
-						return closeDialogWindow(env);
-					}
-				} else {
-					return sendQuestEndDialog(env, savedData);
-				}
-			}
+			return sendQuestEndDialog(env, qs.getReward());
 		}
 		return false;
 	}
