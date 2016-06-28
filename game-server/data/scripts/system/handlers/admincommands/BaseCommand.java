@@ -85,9 +85,8 @@ public class BaseCommand extends AdminCommand {
 		// capture
 		Base<?> base = BaseService.getInstance().getActiveBase(baseId);
 		if (base != null) {
-			base.setLocRace(race);
-			BaseService.getInstance().capture(baseId, null);
-		}		
+			BaseService.getInstance().capture(baseId, race);
+		}
 	}
 
 	protected void assault(Player player, String[] params) {

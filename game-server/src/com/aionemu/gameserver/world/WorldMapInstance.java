@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.RegionZone;
@@ -73,11 +74,12 @@ public abstract class WorldMapInstance {
 	private final Set<Integer> registeredObjects = Collections.newSetFromMap(new ConcurrentHashMap<Integer, Boolean>());
 	private PlayerGroup registeredGroup = null;
 	private Future<?> emptyInstanceTask = null;
+	private Future<?> updateNearbyQuestsTask = null;
 	/**
 	 * Id of this instance (channel)
 	 */
 	private int instanceId;
-	private final FastSet<Integer> questIds = new FastSet<>();
+	private final Set<Integer> questIds = new FastSet<>();
 	private InstanceHandler instanceHandler;
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
@@ -172,9 +174,18 @@ public abstract class WorldMapInstance {
 					}
 					data.setWasSpawned(true);
 				}
+				boolean updateNearbyQuests = false;
 				for (int id : data.getOnQuestStart()) {
-					if (!questIds.contains(id))
+					if (!questIds.contains(id)) {
 						questIds.add(id);
+						updateNearbyQuests = true;
+					}
+				}
+				if (updateNearbyQuests && updateNearbyQuestsTask == null) { // delayed with null check to prevent packet spam on multispawns (bases, siege, ...)
+					updateNearbyQuestsTask = ThreadPoolManager.getInstance().schedule(() -> {
+						updateNearbyQuestsTask = null;
+						doOnAllPlayers(player -> player.getController().updateNearbyQuests());
+					}, 1500);
 				}
 			}
 		}
@@ -399,7 +410,7 @@ public abstract class WorldMapInstance {
 		return worldMapPlayers.size();
 	}
 
-	public FastSet<Integer> getQuestIds() {
+	public Set<Integer> getQuestIds() {
 		return questIds;
 	}
 
