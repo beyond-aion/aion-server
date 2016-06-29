@@ -233,7 +233,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
 		for (int questId : region.getParent().getQuestIds()) {
-			if (questId <= 0xFFFF && QuestService.checkStartConditions(getOwner(), questId, false, 2, false, false, false))
+			if (QuestService.checkStartConditions(getOwner(), questId, false, 2, false, false, false))
 				nearbyQuestList.put(questId, QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel()));
 		}
 		PacketSendUtility.sendPacket(getOwner(), new SM_NEARBY_QUESTS(nearbyQuestList));
@@ -245,9 +245,8 @@ public class PlayerController extends CreatureController<Player> {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			if (!template.isTimeBased())
 				continue;
-			if (questId <= 0xFFFF && QuestService.checkStartConditions(getOwner(), questId, false)) {
+			if (QuestService.checkStartConditions(getOwner(), questId, false))
 				reapeatQuestList.add(questId);
-			}
 		}
 		if (reapeatQuestList.size() > 0)
 			PacketSendUtility.sendPacket(getOwner(), new SM_QUEST_REPEAT(reapeatQuestList));

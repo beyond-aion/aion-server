@@ -12,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_NEARBY_QUESTS extends AionServerPacket {
 
+	private static final int notYetAvailableBit = 1 << 17;
 	private Map<Integer, Integer> nearbyQuestList;
 
 	public SM_NEARBY_QUESTS(Map<Integer, Integer> nearbyQuestList) {
@@ -23,8 +24,10 @@ public class SM_NEARBY_QUESTS extends AionServerPacket {
 		writeC(0);
 		writeH(-nearbyQuestList.size() & 0xFFFF);
 		for (Entry<Integer, Integer> nearbyQuest : nearbyQuestList.entrySet()) {
-			writeH(nearbyQuest.getKey()); // quest id (max 65535, because of short data type, so most event quests are invalid)
-			writeH(nearbyQuest.getValue() > 0 ? 2 : 0); // 0 = visible, 1 = hidden, 2 = not yet available (transparent/grey quest marker above npc's head)
+			int questId = nearbyQuest.getKey();
+			if (nearbyQuest.getValue() > 0)
+				questId |= notYetAvailableBit; // for transparent/grey quest marker above npc's head
+			writeD(questId); // quest id max 65535, because of short data type
 		}
 	}
 }
