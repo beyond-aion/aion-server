@@ -98,7 +98,7 @@ public class EventTemplate {
 	}
 
 	public ZonedDateTime getEndDate() {
-		return startDate.toGregorianCalendar().toZonedDateTime();
+		return endDate.toGregorianCalendar().toZonedDateTime();
 	}
 
 	public List<Integer> getStartableQuests() {
