@@ -4001,7 +4001,7 @@
 		</spawns>
 		<event_drops>
 			<!-- Green Garrisons -->
-			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="20" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40" fixed_chance="true">
 				<gd_maps>
 					<gd_map map_id="600100000" name="Levinshor"/>
 				</gd_maps>

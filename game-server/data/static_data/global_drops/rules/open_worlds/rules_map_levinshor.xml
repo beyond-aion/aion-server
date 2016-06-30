@@ -100,7 +100,7 @@
 			<gd_item id="186000236" name="Blood Mark"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Conqueror's Mark" base_chance="25" min_count="10" max_count="15">
+	<gd_rule rule_name="Named Conqueror's Mark" base_chance="25" min_count="7" max_count="11">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>
@@ -150,7 +150,7 @@
 			<gd_item id="186000238" name="Conqueror's Mark"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Amplification Stone" base_chance="0.5">
+	<gd_rule rule_name="Named Amplification Stone" base_chance="1">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>
@@ -250,7 +250,7 @@
 			<gd_item id="161000004" name="Tombstone of Revival"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Box" base_chance="25">
+	<gd_rule rule_name="Named Manastone Box" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>
@@ -374,7 +374,7 @@
 			<gd_item id="188053328" name="Levinshor Alliance Heavy Composite Manastone Box"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Rare Idian" base_chance="4">
+	<gd_rule rule_name="Named Rare Idian" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>

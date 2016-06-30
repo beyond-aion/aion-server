@@ -23,14 +23,13 @@ public class Symphony extends PlayerCommand {
 	private static final int[][] rewards = { 
 		// COLLECTION_COUNT, REWARD_ID, REWARD_COUNT
 		{ 3, 188052719, 1 },		// [Event] Dye Bundle
-		{ 5, 188052195, 1 },		// [Event] Legion Coin Chest
-		{ 10, 186000238, 10 },	// Conqueror's Mark
-		{ 15, 186000236, 10 },	// Blood Mark
-		{ 50, 166500002, 1 },		// Amplification Stone
-		{ 75, 188053113, 1 },		// Ahserion's Flight Ancient Manastone Bundle
-		{ 100, 188053295, 1 },	// Empyrean Plume Chest
-		{ 150, 166030005, 1 },	// Tempering Solution
-		{ 200, 188053618, 1 },	// Honorable Elim's Idian Bundle
+		{ 5, 188052195, 10 },		// [Event] Legion Coin Chest
+		{ 20, 186000236, 15 },	// Blood Mark
+		{ 30, 166500002, 1 },		// Amplification Stone
+		{ 50, 166030005, 1 },		// Tempering Solution
+		{ 50, 188053113, 1 },		// Ahserion's Flight Ancient Manastone Bundle
+		{ 75, 188053295, 1 },		// Empyrean Plume Chest
+		{ 100, 188053618, 1 },	// Honorable Elim's Idian Bundle
 		{ 250, 190100143, 1 },	// Seakissed Aetherboard
 		{ 300, 187000121, 1 },	// Hyperion Wings
 	};
@@ -47,9 +46,7 @@ public class Symphony extends PlayerCommand {
 			"[6] - (" + rewards[5][0] + " copies): " + rewards[5][2] + "*" + ChatUtil.item(rewards[5][1]),
 			"[7] - (" + rewards[6][0] + " copies): " + rewards[6][2] + "*" + ChatUtil.item(rewards[6][1]),
 			"[8] - (" + rewards[7][0] + " copies): " + rewards[7][2] + "*" + ChatUtil.item(rewards[7][1]),
-			"[9] - (" + rewards[8][0] + " copies): " + rewards[8][2] + "*" + ChatUtil.item(rewards[8][1]),
-			"[10] - (" + rewards[9][0] + " copies): " + rewards[9][2] + "*" + ChatUtil.item(rewards[9][1]),
-			"[11] - (" + rewards[10][0] + " copies): " + rewards[10][2] + "*" + ChatUtil.item(rewards[10][1])
+			"[9] - (" + rewards[8][0] + " copies): " + rewards[8][2] + "*" + ChatUtil.item(rewards[8][1])
 		);
 	}
 
