@@ -3,7 +3,6 @@ package com.aionemu.gameserver.questEngine.model;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 
 /**
  * @author MrPoke
@@ -22,7 +21,7 @@ public class QuestEnv {
 	 * @param questId
 	 * @param dialogId
 	 */
-	public QuestEnv(VisibleObject visibleObject, Player player, Integer questId, Integer dialogId) {
+	public QuestEnv(VisibleObject visibleObject, Player player, Integer questId, int dialogId) {
 		this.visibleObject = visibleObject;
 		this.player = player;
 		this.questId = questId;
@@ -77,16 +76,12 @@ public class QuestEnv {
 	/**
 	 * @return the dialogId
 	 */
-	public Integer getDialogId() {
+	public int getDialogId() {
 		return dialogId;
 	}
 
 	public DialogAction getDialog() {
-		DialogAction dialog = QuestEngine.getInstance().getDialog(dialogId);
-		if (dialog == null) {
-			return DialogAction.NULL;
-		}
-		return dialog;
+		return DialogAction.getActionByDialogId(dialogId);
 	}
 
 	/**

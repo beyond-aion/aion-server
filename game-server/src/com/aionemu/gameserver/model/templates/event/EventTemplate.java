@@ -133,7 +133,7 @@ public class EventTemplate {
 		return isStarted;
 	}
 
-	public void Start() {
+	public void start() {
 		if (isStarted)
 			return;
 
@@ -191,7 +191,7 @@ public class EventTemplate {
 		isStarted = true;
 	}
 
-	public void Stop() {
+	public void stop() {
 		if (!isStarted)
 			return;
 

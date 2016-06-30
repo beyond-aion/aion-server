@@ -66,7 +66,7 @@ public class EventData {
 
 	public void setEvents(List<EventTemplate> events) {
 		for (EventTemplate et : allEvents.values())
-			et.Stop();
+			et.stop();
 
 		this.events = events == null ? new FastTable<>() : events;
 		afterUnmarshal(null, null);

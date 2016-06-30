@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.model;
 
+import java.util.Map;
+
+import javolution.util.FastMap;
+
 /**
  * @author Rolandas
  * @modified Neon
@@ -235,7 +239,13 @@ public enum DialogAction {
 	OPEN_STIGMA_ENCHANT(125),
 	USE_OBJECT(-1);
 
-	private int id;
+	private static final Map<Integer, DialogAction> dialogsById = new FastMap<>();
+	private final int id;
+
+	static {
+		for (DialogAction action : values())
+			dialogsById.put(action.id(), action);
+	}
 
 	private DialogAction(int id) {
 		this.id = id;
@@ -255,10 +265,7 @@ public enum DialogAction {
 	}
 
 	public static DialogAction getActionByDialogId(int id) {
-		for (DialogAction da : values()) {
-			if (da.id() == id)
-				return da;
-		}
-		return null;
+		DialogAction action = dialogsById.get(id);
+		return action == null ? DialogAction.NULL : action;
 	}
 }

@@ -22,7 +22,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM_ANNOUNCE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -113,7 +112,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		 */
 		WeatherService.getInstance().loadWeather(activePlayer);
 
-		QuestEngine.getInstance().onEnterWorld(new QuestEnv(null, activePlayer, 0, 0));
+		QuestEngine.getInstance().onEnterWorld(activePlayer);
 
 		activePlayer.getController().onEnterWorld();
 		activePlayer.getEffectController().updatePlayerEffectIcons(null);

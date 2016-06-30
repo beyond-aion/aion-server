@@ -31,7 +31,6 @@ public class EventService {
 	private final int CHECK_TIME_PERIOD = 1000 * 60 * 5;
 	private Future<?> checkTask = null;
 	private List<EventTemplate> enabledEvents = new FastTable<>();
-
 	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<List<EventTemplate>>();
 	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<List<EventTemplate>>();
 
@@ -143,7 +142,7 @@ public class EventService {
 		synchronized (enabledEvents) {
 			for (EventTemplate et : enabledEvents) {
 				if (et.isExpired() || !availableEventNames.contains(et.getName()) || !enabledEventNames.contains(et.getName()))
-					et.Stop();
+					et.stop();
 			}
 
 			for (String eventName : enabledEventNames) {
@@ -151,7 +150,7 @@ public class EventService {
 				if (et != null) {
 					newEnabledEvents.add(et);
 					if (et.isActive())
-						et.Start();
+						et.start();
 				}
 			}
 

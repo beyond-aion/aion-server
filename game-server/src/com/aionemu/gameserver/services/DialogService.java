@@ -91,11 +91,6 @@ public class DialogService {
 		}
 
 		if (questId == 0) {
-			DialogAction action = DialogAction.getActionByDialogId(dialogId);
-			if (action == null) {
-				log.warn("Dialog Service: unknown dialog action, dialog id:" + dialogId);
-				return;
-			}
 			switch (DialogAction.getActionByDialogId(dialogId)) {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
@@ -357,10 +352,14 @@ public class DialogService {
 								: TeleportAnimation.FADE_OUT_BEAM);
 					}
 					break;
-				default:
-					if (QuestEngine.getInstance().onDialog(env)) {
+				case NULL:
+					if (dialogId != DialogAction.NULL.id()) {
+						log.warn("Dialog Service: unknown dialog action, dialog id:" + dialogId);
 						return;
 					}
+				default:
+					if (QuestEngine.getInstance().onDialog(env))
+						return;
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId));
 					break;
 			}

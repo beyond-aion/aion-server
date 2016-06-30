@@ -19,7 +19,6 @@ import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -63,7 +62,7 @@ import javolution.util.FastTable;
 
 /**
  * @author MrPoke, Hilgert
- * @modified vlog
+ * @modified vlog, Neon
  */
 public class QuestEngine implements GameEngine {
 
@@ -88,7 +87,6 @@ public class QuestEngine implements GameEngine {
 	private Map<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<>();
 	private Map<Integer, TIntArrayList> questOnKillInWorld = new FastMap<>();
 	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<>();
-	private Map<Integer, DialogAction> dialogMap = new FastMap<>();
 	private Map<Integer, Integer> questOnFailCraft = new FastMap<>();
 	private Map<Integer, Set<Integer>> questOnEquipItem = new FastMap<>();
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<>();
@@ -139,9 +137,6 @@ public class QuestEngine implements GameEngine {
 		}
 
 		addMessageSendingTask();
-		for (DialogAction d : DialogAction.values()) {
-			dialogMap.put(d.id(), d);
-		}
 	}
 
 	public void reload(CountDownLatch progressLatch) {
@@ -391,14 +386,13 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	public void onEnterWorld(QuestEnv env) {
+	public void onEnterWorld(Player player) {
 		try {
 			for (int index = 0; index < questOnEnterWorld.size(); index++) {
-				QuestHandler questHandler = getQuestHandlerByQuestId(questOnEnterWorld.get(index));
-				if (questHandler != null) {
-					env.setQuestId(questOnEnterWorld.get(index));
-					questHandler.onEnterWorldEvent(env);
-				}
+				int questId = questOnEnterWorld.get(index);
+				QuestHandler questHandler = getQuestHandlerByQuestId(questId);
+				if (questHandler != null)
+					questHandler.onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 			}
 		} catch (Exception ex) {
 			log.error("QE: exception in onEnterWorld", ex);
@@ -413,7 +407,7 @@ public class QuestEngine implements GameEngine {
 				if (questHandler != null) {
 					env.setQuestId(lists.get(index));
 					HandlerResult result = questHandler.onItemUseEvent(env, item);
-					// allow other quests to process, the same item can be used not in one quest
+					// allow other quests to process, the same item can be used in multiple quests
 					if (result != HandlerResult.UNKNOWN)
 						return result;
 				}
@@ -1011,13 +1005,6 @@ public class QuestEngine implements GameEngine {
 			return questNpcs.get(npcId);
 		}
 		return new QuestNpc(npcId);
-	}
-
-	public DialogAction getDialog(int dialogId) {
-		if (dialogMap.containsKey(dialogId)) {
-			return dialogMap.get(dialogId);
-		}
-		return null;
 	}
 
 	private TIntArrayList getItemRelatedQuests(int itemId) {

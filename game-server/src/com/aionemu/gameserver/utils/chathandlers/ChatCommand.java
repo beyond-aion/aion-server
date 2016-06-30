@@ -53,7 +53,10 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 		try {
 			execute(player, params);
 		} catch (Exception e) {
-			log.error("Exception executing " + getClass().getSimpleName() + " " + getAliasWithPrefix(), e);
+			StringBuilder paramString = new StringBuilder();
+			for (String param : params)
+				paramString.append(" ").append(param);
+			log.error("Exception executing chat command " + getAliasWithPrefix() + paramString, e);
 			return false;
 		}
 		return true;
