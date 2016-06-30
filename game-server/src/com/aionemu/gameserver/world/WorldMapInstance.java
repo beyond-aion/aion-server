@@ -70,7 +70,7 @@ public abstract class WorldMapInstance {
 	/**
 	 * All players spawned in this world map instance
 	 */
-	private final ConcurrentHashMap<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>();
+	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>();
 	private final Set<Integer> registeredObjects = Collections.newSetFromMap(new ConcurrentHashMap<Integer, Boolean>());
 	private PlayerGroup registeredGroup = null;
 	private Future<?> emptyInstanceTask = null;
@@ -435,10 +435,7 @@ public abstract class WorldMapInstance {
 	 */
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (Player player : worldMapPlayers.values())
-				if (player != null) {
-					visitor.visit(player);
-				}
+			worldMapPlayers.values().forEach(player -> visitor.visit(player));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}

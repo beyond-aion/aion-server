@@ -311,14 +311,11 @@ public class KnownList {
 	}
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
-		if (knownPlayers == null) {
+		if (knownPlayers == null)
 			return;
-		}
+
 		try {
-			for (Player player : knownPlayers.values()) {
-				if (player != null)
-					visitor.visit(player);
-			}
+			knownPlayers.values().forEach(player -> visitor.visit(player));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}
@@ -326,10 +323,7 @@ public class KnownList {
 
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			for (VisibleObject newObject : knownObjects.values()) {
-				if (newObject != null)
-					visitor.visit(newObject);
-			}
+			knownObjects.values().forEach(object -> visitor.visit(object));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);
 		}

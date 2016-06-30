@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.world.zone;
 
-import javolution.util.FastMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +17,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class SiegeZoneInstance extends ZoneInstance {
 
 	private static final Logger log = LoggerFactory.getLogger(SiegeZoneInstance.class);
-
-	private FastMap<Integer, Player> players = new FastMap<Integer, Player>();
+	private Map<Integer, Player> players = new ConcurrentHashMap<>();
 
 	/**
 	 * @param mapId
@@ -50,12 +50,7 @@ public class SiegeZoneInstance extends ZoneInstance {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (FastMap.Entry<Integer, Player> e : players.entrySet()) {
-				Player player = e.getValue();
-				if (player != null) {
-					visitor.visit(player);
-				}
-			}
+			players.values().forEach(player -> visitor.visit(player));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}

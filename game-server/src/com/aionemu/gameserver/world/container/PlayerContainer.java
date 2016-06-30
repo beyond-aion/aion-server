@@ -4,12 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * Container for storing Players by objectId and name.
@@ -17,8 +13,6 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  * @author -Nemesiss-
  */
 public class PlayerContainer implements Iterable<Player> {
-
-	private static final Logger log = LoggerFactory.getLogger(PlayerContainer.class);
 
 	/**
 	 * Map<ObjectId,Player>
@@ -76,22 +70,6 @@ public class PlayerContainer implements Iterable<Player> {
 	@Override
 	public Iterator<Player> iterator() {
 		return playersById.values().iterator();
-	}
-
-	/**
-	 * @param visitor
-	 */
-	public void doOnAllPlayers(Visitor<Player> visitor) {
-		try {
-			for (ConcurrentHashMap.Entry<Integer, Player> e : playersById.entrySet()) {
-				Player player = e.getValue();
-				if (player != null) {
-					visitor.visit(player);
-				}
-			}
-		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
-		}
 	}
 
 	public Collection<Player> getAllPlayers() {
