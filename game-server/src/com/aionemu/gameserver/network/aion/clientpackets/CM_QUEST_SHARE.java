@@ -68,10 +68,10 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 					continue;
 			}
 
-			if (!QuestService.checkLevelRequirement(questId, member.getLevel())) {
+			if (!QuestService.checkLevelRequirement(questTemplate, member.getLevel())) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName()));
 			} else {
-				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(questId, member.getObjectId(), member.isInAlliance2()));
+				PacketSendUtility.sendPacket(member, new SM_QUEST_ACTION(questId, player.getObjectId(), member.isInAlliance2()));
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100002, member.getName()));
 			}
 		}

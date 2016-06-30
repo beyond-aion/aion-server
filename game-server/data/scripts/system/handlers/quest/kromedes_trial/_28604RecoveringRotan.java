@@ -33,7 +33,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			return QuestService.startQuest(env, QuestStatus.START);
+			return QuestService.startQuest(env);
 		}
 
 		if (env.getTargetId() == 700961) {
@@ -79,7 +79,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			env.setQuestId(questId);
-			return QuestService.startQuest(env, QuestStatus.START);
+			return QuestService.startQuest(env);
 		}
 
 		return false;

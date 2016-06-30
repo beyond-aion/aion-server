@@ -12,8 +12,6 @@ import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -93,21 +91,11 @@ public class RelinquishCraftStatus {
 
 	public static void deleteCraftStatusQuests(int skillId, Player player, boolean isExpert) {
 		for (int questId : MasterQuestsList.getSkillsIds(skillId, player.getRace())) {
-			final QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs != null) {
-				qs.setStatus(QuestStatus.NONE);
-				qs.setQuestVar(0);
-				qs.setCompleteCount(0);
-			}
+			player.getQuestStateList().deleteQuest(questId);
 		}
 		if (isExpert) {
 			for (int questId : ExpertQuestsList.getSkillsIds(skillId, player.getRace())) {
-				final QuestState qs = player.getQuestStateList().getQuestState(questId);
-				if (qs != null) {
-					qs.setStatus(QuestStatus.NONE);
-					qs.setQuestVar(0);
-					qs.setCompleteCount(0);
-				}
+				player.getQuestStateList().deleteQuest(questId);
 			}
 		}
 		QuestEngine.getInstance().sendCompletedQuests(player);

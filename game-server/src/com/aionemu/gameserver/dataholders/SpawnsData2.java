@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
-import static ch.lambdaj.Lambda.*;
+import static ch.lambdaj.Lambda.extractIterator;
+import static ch.lambdaj.Lambda.flatten;
+import static ch.lambdaj.Lambda.on;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +11,6 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -19,12 +20,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -294,16 +295,15 @@ public class SpawnsData2 {
 
 		File xml = new File("./data/static_data/spawns/" + getRelativePath(visibleObject));
 		SpawnsData2 data = null;
-		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = null;
-		JAXBContext jc = null;
+		Schema schema = XmlUtil.getSchema("./data/static_data/spawns/spawns.xsd");
+		JAXBContext jc;
 		boolean addGroup = false;
 
 		try {
-			schema = sf.newSchema(new File("./data/static_data/spawns/spawns.xsd"));
 			jc = JAXBContext.newInstance(SpawnsData2.class);
 		} catch (Exception e) {
-			// ignore, if schemas are wrong then we even could not call the command;
+			log.error("Could not create JAXB context for XML unmarshalling!", e);
+			return false;
 		}
 
 		if (xml.exists()) {

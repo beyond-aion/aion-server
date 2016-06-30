@@ -88,31 +88,27 @@ public class _4074GainOrLose extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205181) { // Bonarunerk
 				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
+					if (qs.getReward() == null)
+						return false;
 					switch (qs.getReward()) {
-						case 0: {
-							if (QuestService.finishQuest(env, 0)) {
-								player.getInventory().decreaseKinah(1000);
+						case 0:
+							if (player.getInventory().tryDecreaseKinah(1000) && QuestService.finishQuest(env, 0)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, 1);
-								break;
 							}
-						}
-						case 1: {
-							if (QuestService.finishQuest(env, 1)) {
-								player.getInventory().decreaseKinah(5000);
+							break;
+						case 1:
+							if (player.getInventory().tryDecreaseKinah(5000) && QuestService.finishQuest(env, 1)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, Rnd.get(1, 3));
-								break;
 							}
-						}
-						case 2: {
-							if (QuestService.finishQuest(env, 2)) {
-								player.getInventory().decreaseKinah(25000);
+							break;
+						case 2:
+							if (player.getInventory().tryDecreaseKinah(25000) && QuestService.finishQuest(env, 2)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, Rnd.get(1, 6));
-								break;
 							}
-						}
+							break;
 					}
 					return closeDialogWindow(env);
 				} else {

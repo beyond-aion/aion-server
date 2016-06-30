@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.questEngine.model;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
+import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author MrPoke
@@ -16,7 +13,7 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
  */
 public class QuestState {
 
-	private final int questId;
+	private int questId;
 	private QuestVars questVars;
 	private int questFlags;
 	private QuestStatus status;
@@ -25,8 +22,6 @@ public class QuestState {
 	private Timestamp nextRepeatTime;
 	private Integer reward;
 	private PersistentState persistentState;
-
-	private static final Logger log = LoggerFactory.getLogger(QuestState.class);
 
 	public QuestState(int questId, QuestStatus status, int questVars, int flags, int completeCount, Timestamp nextRepeatTime, Integer reward,
 		Timestamp completeTime) {
@@ -41,9 +36,9 @@ public class QuestState {
 		this.persistentState = PersistentState.NEW;
 	}
 
-	public QuestState(int questId, QuestStatus status, int questVars, int completeCount, Timestamp nextRepeatTime, Integer reward,
-		Timestamp completeTime) {
-		this(questId, status, questVars, 0, completeCount, nextRepeatTime, reward, completeTime);
+	public QuestState(int questId, QuestStatus status) {
+		this(questId, status, 0, 0, status == QuestStatus.COMPLETE ? 1 : 0, null, null,
+			status == QuestStatus.COMPLETE ? new Timestamp(System.currentTimeMillis()) : null);
 	}
 
 	public QuestVars getQuestVars() {
@@ -77,35 +72,33 @@ public class QuestState {
 	}
 
 	public void setStatus(QuestStatus status) {
-		if (status == QuestStatus.COMPLETE && this.status != QuestStatus.COMPLETE)
-			updateCompleteTime();
+		setStatus(status, true);
+	}
+
+	public void setStatus(QuestStatus status, boolean updateCompleteCountAndTime) {
+		if (status == QuestStatus.COMPLETE && this.status != QuestStatus.COMPLETE && updateCompleteCountAndTime) {
+			completeTime = new Timestamp(System.currentTimeMillis());
+			completeCount++;
+		}
 		this.status = status;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public Timestamp getCompleteTime() {
+	public Timestamp getLastCompleteTime() {
 		return completeTime;
-	}
-
-	public void setCompleteTime(Timestamp time) {
-		completeTime = time;
-	}
-
-	public void updateCompleteTime() {
-		completeTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	}
 
 	public int getQuestId() {
 		return questId;
 	}
 
+	public int getCompleteCount() {
+		return completeCount;
+	}
+
 	public void setCompleteCount(int completeCount) {
 		this.completeCount = completeCount;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-	}
-
-	public int getCompleteCount() {
-		return completeCount;
 	}
 
 	public void setNextRepeatTime(Timestamp nextRepeatTime) {
@@ -121,13 +114,11 @@ public class QuestState {
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
+	/**
+	 * @return The reward group or null if not set. This is set by the quest handler, via {@link QuestService#finishQuest(env, reward)}
+	 */
 	public Integer getReward() {
-		if (reward == null) {
-			log.warn("No reward for the quest " + String.valueOf(questId));
-		} else {
-			return reward;
-		}
-		return 0;
+		return reward;
 	}
 
 	public boolean canRepeat() {
@@ -148,19 +139,18 @@ public class QuestState {
 		return true;
 	}
 
-	/**
-	 * @return the pState
-	 */
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
-	/**
-	 * @param persistentState
-	 *          the pState to set
-	 */
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
+			case DELETED:
+				if (this.persistentState == PersistentState.NEW)
+					this.persistentState = PersistentState.NOACTION;
+				else
+					this.persistentState = PersistentState.DELETED;
+				break;
 			case UPDATE_REQUIRED:
 				if (this.persistentState == PersistentState.NEW)
 					break;

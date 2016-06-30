@@ -1,25 +1,20 @@
 package quest.talocs_hollow;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
  */
 public class _11467DeathToTheQueen extends QuestHandler {
 
-	private final static int questId = 11467;
-
 	public _11467DeathToTheQueen() {
-		super(questId);
+		super(11467);
 	}
 
 	@Override
@@ -52,18 +47,18 @@ public class _11467DeathToTheQueen extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
-			int rewInd = 0;
+			int rewardGroup = 0;
 			if (var == 1)
-				rewInd = 1;
+				rewardGroup = 1;
 			else if (var == 2)
-				rewInd = 2;
+				rewardGroup = 2;
 			else if (var == 3)
-				rewInd = 3;
+				rewardGroup = 3;
 			if (targetId == 799503) {
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
-					return sendQuestEndDialog(env, rewInd);
+					return sendQuestEndDialog(env, rewardGroup);
 				}
 			}
 		}
@@ -94,12 +89,12 @@ public class _11467DeathToTheQueen extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 0) {
 				QuestService.questTimerStart(env, 240);
-				changeQuestStep(env, 0, 1, false);
+				changeQuestStep(env, var, 1);
 			} else if (var == 1) {
 				QuestService.questTimerStart(env, 240);
-				changeQuestStep(env, 1, 2, false);
-			} else if (var == 3) {
-				changeQuestStep(env, 2, 3, false);
+				changeQuestStep(env, var, 2);
+			} else if (var == 2) {
+				changeQuestStep(env, var, 3);
 			}
 			return true;
 		}
@@ -111,11 +106,7 @@ public class _11467DeathToTheQueen extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			qs.setStatus(QuestStatus.NONE);
-			qs.setQuestVar(0);
-			updateQuestStatus(env);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-				.getName()));
+			QuestService.abandonQuest(player, questId);
 			return true;
 		}
 		return false;
@@ -126,9 +117,7 @@ public class _11467DeathToTheQueen extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			qs.setStatus(QuestStatus.NONE);
-			qs.setQuestVar(0);
-			updateQuestStatus(env);
+			QuestService.abandonQuest(player, questId);
 		}
 		return false;
 	}

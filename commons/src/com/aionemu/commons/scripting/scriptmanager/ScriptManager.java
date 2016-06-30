@@ -1,17 +1,11 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-
-import javolution.util.FastTable;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -22,6 +16,9 @@ import com.aionemu.commons.scripting.ScriptContext;
 import com.aionemu.commons.scripting.ScriptContextFactory;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
+import com.aionemu.commons.utils.xml.JAXBUtil;
+
+import javolution.util.FastTable;
 
 /**
  * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may be extended to support
@@ -59,27 +56,15 @@ public class ScriptManager {
 	private ClassListener globalClassListener;
 
 	/**
-	 * Loads script contexes from descriptor
+	 * Loads script contexts from descriptor
 	 * 
 	 * @param scriptDescriptor
-	 *          xml file that describes contexes
+	 *          xml file that describes contexts
 	 * @throws Exception
 	 *           if can't load file
 	 */
 	public synchronized void load(File scriptDescriptor) throws Exception {
-		FileInputStream fin = new FileInputStream(scriptDescriptor);
-		JAXBContext c = JAXBContext.newInstance(ScriptInfo.class, ScriptList.class);
-		Unmarshaller u = c.createUnmarshaller();
-
-		ScriptList list = null;
-		try {
-			list = (ScriptList) u.unmarshal(fin);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			if (fin != null)
-				fin.close();
-		}
+		ScriptList list = JAXBUtil.deserialize(scriptDescriptor, ScriptList.class);
 
 		for (ScriptInfo si : list.getScriptInfos()) {
 			ScriptContext context = createContext(si, null);

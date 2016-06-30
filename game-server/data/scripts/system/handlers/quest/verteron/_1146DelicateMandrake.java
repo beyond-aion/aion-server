@@ -92,7 +92,6 @@ public class _1146DelicateMandrake extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			removeQuestItem(env, 182200519, 1);
 			QuestService.abandonQuest(player, questId);
-			player.getController().updateNearbyQuests();
 			return true;
 		}
 		return false;

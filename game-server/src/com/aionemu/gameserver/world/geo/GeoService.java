@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -60,8 +61,8 @@ public class GeoService {
 	 * @return
 	 */
 	public float getZ(int worldId, float x, float y, float z, float defaultUp, int instanceId) {
-		float newZ = geoData.getMap(worldId).getZ(x, y, z, instanceId);
-		return GeoDataConfig.GEO_ENABLE ? newZ : newZ + defaultUp;
+		GeoMap map = geoData.getMap(worldId);
+		return map.getZ(x, y, map instanceof DummyGeoMap ? z + defaultUp : z, instanceId);
 	}
 
 	/**

@@ -3,7 +3,6 @@ package consolecommands;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,6 +12,7 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -37,23 +37,14 @@ public class Teleport_to_named extends ConsoleCommand {
 		String npcName = params[0];
 		int npcId = 0;
 
-		try {
+		File xml = new File("./data/scripts/system/handlers/consolecommands/data/npcs.xml");
+		NpcData data = JAXBUtil.deserialize(xml, NpcData.class);
+		NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-			JAXBContext jc = JAXBContext.newInstance(NpcData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			NpcData data = (NpcData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/npcs.xml"));
+		if (npcTemplate != null) {
 
-			NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
-
-			if (npcTemplate != null) {
-
-				System.out.println(npcTemplate.getName());
-				npcId = npcTemplate.getTemplateId();
-			}
-
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Npc templates reload failed!");
-			System.out.println(e);
+			System.out.println(npcTemplate.getName());
+			npcId = npcTemplate.getTemplateId();
 		}
 
 		if (npcId > 0) {

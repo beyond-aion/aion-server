@@ -31,12 +31,11 @@ public class DialogIdCondition extends QuestCondition {
 	 */
 	@Override
 	public boolean doCheck(QuestEnv env) {
-		int data = env.getDialogId();
 		switch (getOp()) {
 			case EQUAL:
-				return data == value;
+				return env.getDialogId() == value;
 			case NOT_EQUAL:
-				return data != value;
+				return env.getDialogId() != value;
 			default:
 				return false;
 		}

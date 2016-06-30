@@ -48,34 +48,33 @@ public class SystemMailService {
 	 * @param recipientName
 	 * @param title
 	 * @param message
-	 * @param attachedItemObjId
+	 * @param attachedItemId
 	 * @param attachedItemCount
 	 * @param attachedKinahCount
 	 * @param express
 	 */
-	public boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
+	public boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemId, long attachedItemCount,
 		long attachedKinahCount, LetterType letterType) {
 
-		if (attachedItemObjId != 0) {
-			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(attachedItemObjId);
+		if (attachedItemId != 0) {
+			if (attachedItemCount <= 0)
+				return false;
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(attachedItemId);
 			if (itemTemplate == null) {
-				log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + itemTemplate
+				log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
 					+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " ITEM TEMPLATE IS MISSING ");
 				return false;
 			}
 		}
 
-		if (attachedItemCount == 0 && attachedItemObjId != 0)
-			return false;
-
 		if (recipientName.length() > 16) {
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemObjId
+			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId
 				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
 			return false;
 		}
 
 		if (!sender.startsWith("$$") && sender.length() > 16) {
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemObjId
+			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId
 				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
 			return false;
 		}
@@ -97,7 +96,7 @@ public class SystemMailService {
 		if (recipient != null) {
 			if (recipient.getMailbox() != null && !(recipient.getMailbox().size() < 200)) {
 				log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN"
-					+ attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
+					+ attachedItemId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
 				return false;
 			}
 		} else if (recipientCommonData.getMailboxLetters() > 199) {
@@ -105,7 +104,7 @@ public class SystemMailService {
 		}
 		Item attachedItem = null;
 		long finalAttachedKinahCount = 0;
-		int itemId = attachedItemObjId;
+		int itemId = attachedItemId;
 		long count = attachedItemCount;
 
 		if (itemId != 0) {

@@ -89,30 +89,24 @@ public class _3074DangerousProbability extends QuestHandler {
 			if (targetId == 798193) { // Nagrunerk
 				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
 					switch (qs.getReward()) {
-						case 0: {
-							if (QuestService.finishQuest(env, 0)) {
-								player.getInventory().decreaseKinah(1000);
+						case 0:
+							if (player.getInventory().tryDecreaseKinah(1000) && QuestService.finishQuest(env, 0)) {
 								removeQuestItem(env, 186000037, 1);
 								ItemService.addItem(player, 186000005, 1);
-								break;
 							}
-						}
-						case 1: {
-							if (QuestService.finishQuest(env, 1)) {
-								player.getInventory().decreaseKinah(5000);
+							break;
+						case 1:
+							if (player.getInventory().tryDecreaseKinah(5000) && QuestService.finishQuest(env, 1)) {
 								removeQuestItem(env, 186000037, 1);
 								ItemService.addItem(player, 186000005, Rnd.get(1, 3));
-								break;
 							}
-						}
-						case 2: {
-							if (QuestService.finishQuest(env, 2)) {
-								ItemService.addItem(player, 186000005, Rnd.get(1, 6));
-								player.getInventory().decreaseKinah(25000);
+							break;
+						case 2:
+							if (player.getInventory().tryDecreaseKinah(25000) && QuestService.finishQuest(env, 2)) {
 								removeQuestItem(env, 186000037, 1);
-								break;
+								ItemService.addItem(player, 186000005, Rnd.get(1, 6));
 							}
-						}
+							break;
 					}
 					return closeDialogWindow(env);
 				} else {

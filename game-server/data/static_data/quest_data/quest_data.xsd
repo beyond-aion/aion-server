@@ -15,7 +15,7 @@
 			<xs:element name="collect_items" type="CollectItems" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="inventory_items" type="InventoryItems" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="rewards" type="Rewards" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="bonus" type="QuestBonuses" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="bonus" type="QuestBonuses" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="extended_rewards" type="Rewards" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="quest_drop" type="QuestDrop" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="quest_kill" type="QuestKill" minOccurs="0" maxOccurs="unbounded"/>

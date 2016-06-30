@@ -3,12 +3,13 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.services.ExchangeService;
 
 /**
  * Response to SM_QUESTION_WINDOW
  * 
- * @author Ben
- * @author Sarynth
+ * @author Ben, Sarynth
+ * @modified Neon
  */
 public class CM_QUESTION_RESPONSE extends AionClientPacket {
 
@@ -21,9 +22,6 @@ public class CM_QUESTION_RESPONSE extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		questionid = readD();
@@ -36,14 +34,11 @@ public class CM_QUESTION_RESPONSE extends AionClientPacket {
 		readH();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTrading())
-			return;
+		if (player.isTrading() && response != 0) // answered request with yes during exchange
+			ExchangeService.getInstance().cancelExchange(player);
 		player.getResponseRequester().respond(questionid, response);
 	}
 

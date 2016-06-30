@@ -123,7 +123,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, advenced_stigma_slot_size=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
+					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 				log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 				PlayerCommonData pcd = player.getCommonData();
 				stmt.setString(1, player.getName());
@@ -140,21 +140,20 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.setInt(12, player.getQuestExpands());
 				stmt.setInt(13, player.getNpcExpands());
 				stmt.setInt(14, player.getItemExpands());
-				stmt.setInt(15, pcd.getAdvancedStigmaSlotSize());
-				stmt.setInt(16, player.getWhNpcExpands());
-				stmt.setInt(17, player.getWhBonusExpands());
-				stmt.setString(18, pcd.getNote());
-				stmt.setInt(19, pcd.getTitleId());
-				stmt.setInt(20, pcd.getBonusTitleId());
-				stmt.setInt(21, pcd.getDp());
-				stmt.setInt(22, pcd.getDeathCount());
+				stmt.setInt(15, player.getWhNpcExpands());
+				stmt.setInt(16, player.getWhBonusExpands());
+				stmt.setString(17, pcd.getNote());
+				stmt.setInt(18, pcd.getTitleId());
+				stmt.setInt(19, pcd.getBonusTitleId());
+				stmt.setInt(20, pcd.getDp());
+				stmt.setInt(21, pcd.getDeathCount());
 				Mailbox mailBox = player.getMailbox();
 				int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
-				stmt.setInt(23, mails);
-				stmt.setLong(24, pcd.getCurrentReposeEnergy());
-				stmt.setInt(25, pcd.getMentorFlagTime());
-				stmt.setInt(26, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
-				stmt.setInt(27, player.getObjectId());
+				stmt.setInt(22, mails);
+				stmt.setLong(23, pcd.getCurrentReposeEnergy());
+				stmt.setInt(24, pcd.getMentorFlagTime());
+				stmt.setInt(25, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
+				stmt.setInt(26, player.getObjectId());
 				stmt.execute();
 			}
 		} catch (Exception e) {
@@ -272,7 +271,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setQuestExpands(resultSet.getInt("quest_expands"));
 						cd.setNpcExpands(resultSet.getInt("npc_expands"));
 						cd.setItemExpands(resultSet.getInt("item_expands"));
-						cd.setAdvancedStigmaSlotSize(resultSet.getInt("advenced_stigma_slot_size"));
 						cd.setTitleId(resultSet.getInt("title_id"));
 						cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
 						cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));

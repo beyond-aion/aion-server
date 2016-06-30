@@ -2,6 +2,7 @@ package playercommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -51,7 +52,9 @@ public class Questrestart extends PlayerCommand {
 
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(id, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
+		qs.setFlags(0);
+		qs.setReward(null);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(player, "Quest " + ChatUtil.quest(id) + " was restarted.");
 	}
 }

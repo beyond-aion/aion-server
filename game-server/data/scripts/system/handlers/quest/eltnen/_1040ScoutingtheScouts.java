@@ -6,7 +6,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
@@ -79,10 +78,8 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 3398);
 					case SELECT_QUEST_REWARD:
-						return sendQuestEndDialog(env);
 					case SELECTED_QUEST_NOREWARD:
-						QuestService.finishQuest(env);
-						return closeDialogWindow(env);
+						return sendQuestEndDialog(env, 0);
 				}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203989) { // Tumblusen

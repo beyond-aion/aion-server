@@ -9,8 +9,8 @@
 	-->
 	<!-- Example: send first SM_MESSAGE packet -->
 	<!-- Format: ccdhS -->
-	<packet opcode="0x1B">
-		<part type="c" value="0x19"/><!-- chat type: ANNOUNCEMENTS -->
+	<packet opcode="0x18">
+		<part type="c" value="10"/><!-- chat type: legion -->
 		<part type="c" value="0x00"/>
 		<part type="d" value="${objectId}"/><!-- write sender objectId -->
 		<part type="h" value="0x00"/>
@@ -20,10 +20,10 @@
 	Example: send second SM_MESSAGE packet.
 	Packet will be sent after {packets#delay} milliseconds.
 	-->
-	<packet opcode="0x1B">
-		<part type="c" value="0x19"/>
+	<packet opcode="0x18">
+		<part type="c" value="1"/><!-- chat type: npc -->
 		<part type="c" value="0x00"/>
-		<part type="d" value="${objectId}"/>
+		<part type="d" value="${targetObjectId}"/>
 		<part type="h" value="0x00"/>
 		<part type="s" value="New message!"/>
 	</packet>

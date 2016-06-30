@@ -1,28 +1,26 @@
 package com.aionemu.gameserver.services;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
+import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-
-import org.joda.time.DateTime;
-
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EventType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
-import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -33,7 +31,6 @@ public class EventService {
 	private final int CHECK_TIME_PERIOD = 1000 * 60 * 5;
 	private Future<?> checkTask = null;
 	private List<EventTemplate> enabledEvents = new FastTable<>();
-
 	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<List<EventTemplate>>();
 	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<List<EventTemplate>>();
 
@@ -47,8 +44,7 @@ public class EventService {
 	}
 
 	private EventService() {
-		if (EventsConfig.ENABLE_EVENT_SERVICE)
-			start();
+		start();
 	}
 
 	/**
@@ -62,8 +58,8 @@ public class EventService {
 
 		List<Integer> activeStartQuests = new FastTable<Integer>();
 		List<Integer> activeMaintainQuests = new FastTable<Integer>();
-		TIntObjectHashMap<List<EventTemplate>> map1 = null;
-		TIntObjectHashMap<List<EventTemplate>> map2 = null;
+		TIntObjectHashMap<List<EventTemplate>> map1;
+		TIntObjectHashMap<List<EventTemplate>> map2;
 
 		synchronized (enabledEvents) {
 			for (EventTemplate et : enabledEvents) {
@@ -76,96 +72,51 @@ public class EventService {
 			map2 = new TIntObjectHashMap<List<EventTemplate>>(eventsForMaintainQuest);
 		}
 
-		StartOrMaintainQuests(player, activeStartQuests.listIterator(), map1, true);
-		StartOrMaintainQuests(player, activeMaintainQuests.listIterator(), map2, false);
-
-		activeStartQuests.clear();
-		activeMaintainQuests.clear();
-		map1.clear();
-		map2.clear();
+		startOrMaintainQuests(player, activeStartQuests, map1, true);
+		startOrMaintainQuests(player, activeMaintainQuests, map2, false);
 	}
 
-	void StartOrMaintainQuests(Player player, ListIterator<Integer> questList, TIntObjectHashMap<List<EventTemplate>> templateMap, boolean start) {
-		while (questList.hasNext()) {
-			int questId = questList.next();
+	private void startOrMaintainQuests(Player player, List<Integer> questList, TIntObjectHashMap<List<EventTemplate>> templateMap, boolean start) {
+		for (Integer questId : questList) {
+			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
+			if (template.getCategory() != QuestCategory.EVENT)
+				continue;
+
+			if (!QuestService.checkStartConditions(player, questId, false, 0, true, true, false))
+				continue;
+
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			QuestEnv cookie = new QuestEnv(null, player, questId, 0);
-			QuestStatus status = qs == null ? QuestStatus.START : qs.getStatus();
-
-			if (QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel())) {
-				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-				if (template.getRacePermitted() != null) {
-					if (template.getRacePermitted().ordinal() != player.getCommonData().getRace().ordinal())
-						continue;
-				}
-
-				if (template.getClassPermitted().size() != 0) {
-					if (!template.getClassPermitted().contains(player.getCommonData().getPlayerClass()))
-						continue;
-				}
-
-				if (template.getGenderPermitted() != null) {
-					if (template.getGenderPermitted().ordinal() != player.getGender().ordinal())
-						continue;
-				}
-
-				int requiredStartConditions = template.getRequiredConditionCount();
-				int fulfilledStartConditions = 0;
-				for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-					if (startCondition.check(player, false)) {
-						fulfilledStartConditions++;
-					}
-				}
-				if (fulfilledStartConditions < requiredStartConditions) {
-					continue;
-				}
-
-				if (qs != null) {
-					if (qs.getCompleteTime() != null || status == QuestStatus.COMPLETE) {
-						DateTime completed = null;
-						if (qs.getCompleteTime() == null)
-							completed = new DateTime(0);
-						else
-							completed = new DateTime(qs.getCompleteTime().getTime());
-
-						if (templateMap.containsKey(questId)) {
-							for (EventTemplate et : templateMap.get(questId)) {
-								// recurring event, reset it
-								if (et.getStartDate().isAfter(completed)) {
-									if (start) {
-										status = QuestStatus.START;
-										qs.setQuestVar(0);
-										qs.setCompleteCount(0);
-										qs.setStatus(status);
-									}
-									break;
-								}
+			if (qs != null) {
+				if (qs.getLastCompleteTime() != null && qs.getCompleteCount() > 0 && templateMap.containsKey(questId)) {
+					ZonedDateTime completeTime = qs.getLastCompleteTime().toInstant().atZone(GSConfig.TIME_ZONE.toZoneId());
+					for (EventTemplate et : templateMap.get(questId)) {
+						if (et.getStartDate().isAfter(completeTime)) { // recurring event, reset it
+							qs.setCompleteCount(0); // reset complete count if quest was last completed on a previous event, so it can be done again
+							if (start && qs.getStatus() != QuestStatus.START) {
+								qs.setStatus(QuestStatus.START);
+								qs.setQuestVar(0);
+								qs.setReward(null);
+								PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 							}
+							break;
 						}
 					}
-					// re-register quests
-					if (status == QuestStatus.COMPLETE) {
-						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, status, qs.getQuestVars().getQuestVars(), qs.getFlags()));
-					} else
-						QuestService.startEventQuest(cookie, status);
-				} else if (start) {
-					QuestService.startEventQuest(cookie, status);
+				}
+			} else {
+				if (start) {
+					player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.START));
+					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
 				}
 			}
 		}
 	}
 
-	public void start() {
-		if (checkTask != null)
-			checkTask.cancel(true);
+	public boolean start() {
+		if (!EventsConfig.ENABLE_EVENT_SERVICE || checkTask != null)
+			return false;
 
-		checkTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				checkEvents();
-			}
-		}, 0, CHECK_TIME_PERIOD);
+		checkTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> checkEvents(), 0, CHECK_TIME_PERIOD);
+		return true;
 	}
 
 	public void stop() {
@@ -178,12 +129,13 @@ public class EventService {
 	private void checkEvents() {
 		List<EventTemplate> newEnabledEvents = new FastTable<EventTemplate>();
 		List<String> availableEventNames = DataManager.EVENT_DATA.getEventNames();
-		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames : FastTable.of(EventsConfig.ENABLED_EVENTS.split(","));
+		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames
+			: FastTable.of(EventsConfig.ENABLED_EVENTS.split(","));
 
 		synchronized (enabledEvents) {
 			for (EventTemplate et : enabledEvents) {
 				if (et.isExpired() || !availableEventNames.contains(et.getName()) || !enabledEventNames.contains(et.getName()))
-					et.Stop();
+					et.stop();
 			}
 
 			for (String eventName : enabledEventNames) {
@@ -191,7 +143,7 @@ public class EventService {
 				if (et != null) {
 					newEnabledEvents.add(et);
 					if (et.isActive())
-						et.Start();
+						et.start();
 				}
 			}
 

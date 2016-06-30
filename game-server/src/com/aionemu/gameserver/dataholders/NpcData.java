@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,18 +9,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.NpcStatCalculation;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -33,7 +30,7 @@ import javolution.util.FastTable;
  */
 @XmlRootElement(name = "npc_templates")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class NpcData extends ReloadableData {
+public class NpcData {
 
 	@XmlElement(name = "npc_template")
 	private List<NpcTemplate> npcs;
@@ -49,9 +46,8 @@ public class NpcData extends ReloadableData {
 				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogId : npc.getFuncDialogIds()) {
-					DialogAction dialogAction = DialogAction.getActionByDialogId(dialogId);
-					if (dialogAction == null)
-						log.warn("Missing dialog action " + dialogId + " for Npc " + npc.getTemplateId());
+					if (DialogAction.getActionByDialogId(dialogId) == DialogAction.NULL && dialogId != DialogAction.NULL.id())
+						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogId + " for Npc " + npc.getTemplateId());
 				}
 			}
 			NpcRating rating = npc.getRating();
@@ -100,39 +96,5 @@ public class NpcData extends ReloadableData {
 	 */
 	public TIntObjectHashMap<NpcTemplate> getNpcData() {
 		return npcData;
-	}
-
-	@Override
-	public void reload(Player admin) {
-		File dir = new File("./data/static_data/npcs");
-		try {
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-			List<NpcTemplate> newTemplates = new FastTable<NpcTemplate>();
-			for (File file : listFiles(dir, true)) {
-				NpcData data = (NpcData) un.unmarshal(file);
-				if (data != null && data.getData() != null)
-					newTemplates.addAll(data.getData());
-			}
-			DataManager.NPC_DATA.setData(newTemplates);
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Npc reload failed!");
-			log.error("Npc reload failed!", e);
-		} finally {
-			PacketSendUtility.sendMessage(admin, "Npc reload Success! Total loaded: " + DataManager.NPC_DATA.size());
-		}
-	}
-
-	@Override
-	protected List<NpcTemplate> getData() {
-		return npcs;
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	protected void setData(List<?> templates) {
-		this.npcs = (List<NpcTemplate>) templates;
-		afterUnmarshal(null, null);
 	}
 }

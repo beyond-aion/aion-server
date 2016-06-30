@@ -1,12 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -17,15 +14,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
+import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.geometry.CylinderArea;
 import com.aionemu.gameserver.model.geometry.PolyArea;
@@ -34,6 +27,9 @@ import com.aionemu.gameserver.model.geometry.SphereArea;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -120,23 +116,11 @@ public class ZoneData {
 	}
 
 	public void saveData() {
-		Schema schema = null;
-		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-		try {
-			schema = sf.newSchema(new File("./data/static_data/zones/zones.xsd"));
-		} catch (SAXException e1) {
-			log.error("Error while saving data: " + e1.getMessage(), e1.getCause());
-			return;
-		}
-
 		File xml = new File("./data/static_data/zones/generated_zones.xml");
-		JAXBContext jc;
-		Marshaller marshaller;
 		try {
-			jc = JAXBContext.newInstance(ZoneData.class);
-			marshaller = jc.createMarshaller();
-			marshaller.setSchema(schema);
+			JAXBContext jc = JAXBContext.newInstance(ZoneData.class);
+			Marshaller marshaller = jc.createMarshaller();
+			marshaller.setSchema(XmlUtil.getSchema("./data/static_data/zones/zones.xsd"));
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(this, xml);
 		} catch (JAXBException e) {

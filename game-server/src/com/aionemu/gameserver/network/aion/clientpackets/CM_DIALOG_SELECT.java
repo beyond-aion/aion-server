@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -79,13 +80,14 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 			if (QuestEngine.getInstance().onDialog(new QuestEnv(null, player, questId, dialogId)))
 				return;
 			// FIXME client sends unk1=1, targetObjectId=0, dialogId=2 (trader) => we miss some packet to close window
-			ClassChangeService.changeClassToSelection(player, dialogId);
+			if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
+				ClassChangeService.changeClassToSelection(player, dialogId);
 			return;
 		}
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
 
-		if (obj != null && obj instanceof Creature) {
+		if (obj instanceof Creature) {
 			Creature creature = (Creature) obj;
 			creature.getController().onDialogSelect(dialogId, lastPage, player, questId, extendedRewardIndex);
 		}

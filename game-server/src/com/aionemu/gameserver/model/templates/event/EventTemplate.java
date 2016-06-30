@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.event;
 
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -14,10 +15,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData2;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
@@ -93,12 +93,12 @@ public class EventTemplate {
 		return eventDrops;
 	}
 
-	public DateTime getStartDate() {
-		return DateTimeUtil.getDateTime(startDate.toGregorianCalendar());
+	public ZonedDateTime getStartDate() {
+		return startDate.toGregorianCalendar().toZonedDateTime();
 	}
 
-	public DateTime getEndDate() {
-		return DateTimeUtil.getDateTime(endDate.toGregorianCalendar());
+	public ZonedDateTime getEndDate() {
+		return endDate.toGregorianCalendar().toZonedDateTime();
 	}
 
 	public List<Integer> getStartableQuests() {
@@ -114,7 +114,8 @@ public class EventTemplate {
 	}
 
 	public boolean isActive() {
-		return getStartDate().isBeforeNow() && getEndDate().isAfterNow();
+		ZonedDateTime now = ZonedDateTime.now(GSConfig.TIME_ZONE.toZoneId());
+		return getStartDate().isBefore(now) && getEndDate().isAfter(now);
 	}
 
 	public boolean isExpired() {
@@ -132,7 +133,7 @@ public class EventTemplate {
 		return isStarted;
 	}
 
-	public void Start() {
+	public void start() {
 		if (isStarted)
 			return;
 
@@ -190,7 +191,7 @@ public class EventTemplate {
 		isStarted = true;
 	}
 
-	public void Stop() {
+	public void stop() {
 		if (!isStarted)
 			return;
 

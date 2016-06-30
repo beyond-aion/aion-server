@@ -149,8 +149,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private ExceedEnchantSkillSetType exceedEnchantSkill;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
-	@XmlTransient
-	private boolean isQuestUpdateItem;
 
 	/**
 	 * @param u
@@ -534,14 +532,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isPotion() {
 		return itemId >= 162000000 && itemId < 163000000;
-	}
-
-	public boolean isQuestUpdateItem() {
-		return isQuestUpdateItem;
-	}
-
-	public void setQuestUpdateItem(boolean value) {
-		this.isQuestUpdateItem = value;
 	}
 
 	public Idian getIdianAction() {

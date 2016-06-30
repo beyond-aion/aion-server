@@ -7,6 +7,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Rolandas
+ * @modified Neon
  */
 public class SM_QUEST_REPEAT extends AionServerPacket {
 
@@ -19,9 +20,8 @@ public class SM_QUEST_REPEAT extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(repeatableQuests.size());
-		for (int i = 0; i < repeatableQuests.size(); i++) {
-			writeH(repeatableQuests.get(0));
-		}
+		for (Integer questId : repeatableQuests)
+			writeD(questId);
 
 		// There are following messages after this packet:
 		// You can receive the daily quest. - STR_MSG_QUEST_LIMIT_RESET_DAILY = 1400854

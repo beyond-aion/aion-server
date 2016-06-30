@@ -112,7 +112,6 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(this.player.getCommonData().getQuestExpands());
 				writeD(this.player.getCommonData().getNpcExpands());
 				writeD(this.player.getCommonData().getItemExpands());
-				writeD(this.player.getCommonData().getAdvancedStigmaSlotSize());
 				writeD(this.player.getCommonData().getWhNpcExpands());
 
 				PlayerAppearance playerAppearance = this.player.getPlayerAppearance();
@@ -379,7 +378,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(this.taskId);
 				QuestStateList qsl = this.player.getQuestStateList();
 				FastTable<QuestState> quests = new FastTable<>();
-				for (QuestState qs : qsl.getQuests().values()) {
+				for (QuestState qs : qsl.getAllQuestState()) {
 					if (qs == null) {
 						log.warn("there are null quest on player " + this.player.getName() + ". taskId #" + this.taskId + ". transfer skip that");
 						continue;
@@ -392,8 +391,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeS(qs.getStatus().toString());
 					writeD(qs.getQuestVars().getQuestVars());
 					writeD(qs.getCompleteCount());
-					writeD(qs.getReward());
-					writeQ(qs.getCompleteTime().getTime());
+					writeD(qs.getReward() == null ? -1 : qs.getReward());
+					writeQ(qs.getLastCompleteTime().getTime());
 					writeQ(qs.getNextRepeatTime().getTime());
 					writeD(qs.getFlags());
 				}

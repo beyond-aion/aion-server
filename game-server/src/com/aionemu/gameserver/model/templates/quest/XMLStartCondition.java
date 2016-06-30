@@ -54,7 +54,7 @@ public class XMLStartCondition {
 				int questId = fqc.getQuestId();
 				int reward = fqc.getReward();
 				QuestState qs = qsl.getQuestState(questId);
-				if (qs == null || qs.getStatus() != QuestStatus.COMPLETE || (reward >= 0 && reward != qs.getReward())) {
+				if (qs == null || qs.getStatus() != QuestStatus.COMPLETE || (reward >= 0 && (qs.getReward() == null || reward != qs.getReward()))) {
 					return false;
 				}
 				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);

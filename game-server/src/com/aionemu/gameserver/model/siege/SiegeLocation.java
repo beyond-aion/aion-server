@@ -2,10 +2,7 @@ package com.aionemu.gameserver.model.siege;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +15,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
+
+import javolution.util.FastTable;
 
 /**
  * @author Sarynth, Source, Wakizashi
@@ -46,8 +45,8 @@ public class SiegeLocation implements ZoneHandler {
 	protected int siegeDuration;
 	protected int influenceValue;
 	protected int occupiedCount;
-	private Map<Integer, Creature> creatures = new FastMap<>();
-	private Map<Integer, Player> players = new FastMap<>();
+	private Map<Integer, Creature> creatures = new ConcurrentHashMap<>();
+	private Map<Integer, Player> players = new ConcurrentHashMap<>();
 
 	public SiegeLocation() {
 	}
@@ -262,12 +261,7 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			for (Entry<Integer, Player> e : players.entrySet()) {
-				Player player = e.getValue();
-				if (player != null) {
-					visitor.visit(player);
-				}
-			}
+			players.values().forEach(player -> visitor.visit(player));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}

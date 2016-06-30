@@ -225,9 +225,6 @@ public class NpcFactions {
 		}
 	}
 
-	/**
-	 * 
-	 */
 	public void sendDailyQuest() {
 		for (int i = 0; i < 2; i++) {
 			NpcFaction faction = activeNpcFaction[i];
@@ -257,7 +254,7 @@ public class NpcFactions {
 				faction.setQuestId(questId);
 				faction.setTime(getNextTime());
 			}
-			PacketSendUtility.sendPacket(owner, new SM_QUEST_ACTION(questId, true));
+			PacketSendUtility.sendPacket(owner, new SM_QUEST_ACTION(questId));
 		}
 	}
 

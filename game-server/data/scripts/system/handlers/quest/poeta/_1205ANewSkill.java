@@ -89,60 +89,48 @@ public class _1205ANewSkill extends QuestHandler {
 				if (playerClass == PlayerClass.WARRIOR) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 1011);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 5);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 0);
 				}
 				return false;
 			case 203088:
 				if (playerClass == PlayerClass.SCOUT) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 1352);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 6);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 1);
 				}
 				return false;
 			case 203089:
 				if (playerClass == PlayerClass.MAGE) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 1693);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 7);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 2);
 				}
 				return false;
 			case 203090:
 				if (playerClass == PlayerClass.PRIEST) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 2034);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 8);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 3);
 				}
 				return false;
 			case 801210:
 				if (playerClass == PlayerClass.ENGINEER) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 2375);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 45);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 4);
 				}
 				return false;
 			case 801211:
 				if (playerClass == PlayerClass.ARTIST) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 2716);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
-						return sendQuestDialog(env, 46);
 					else
-						return this.sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 5);
 				}
 				return false;
 		}

@@ -111,7 +111,7 @@ public class DatabaseFactory {
 
 		if (!con.getAutoCommit()) {
 			log.error("Connection Settings Error: Connection obtained from database factory should be in auto-commit"
-				+ " mode. Forsing auto-commit to true. Please check source code for connections beeing not properly" + " closed.");
+				+ " mode. Forcing auto-commit to true. Please check source code for connections beeing not properly closed.");
 			con.setAutoCommit(true);
 		}
 

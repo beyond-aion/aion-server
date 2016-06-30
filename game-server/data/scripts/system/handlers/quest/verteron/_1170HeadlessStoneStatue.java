@@ -81,7 +81,7 @@ public class _1170HeadlessStoneStatue extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (movieId == 16) {
 				removeQuestItem(env, 182200504, 1);
-				return QuestService.finishQuest(env);
+				return QuestService.finishQuest(env, 0);
 			}
 		}
 		return false;

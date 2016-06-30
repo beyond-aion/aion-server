@@ -335,9 +335,8 @@ public final class PlayerEnterWorldService {
 		if (player.getItemCoolDowns() != null)
 			client.sendPacket(new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
 
-		QuestEngine qe = QuestEngine.getInstance();
-		qe.sendCompletedQuests(player);
-		client.sendPacket(new SM_QUEST_LIST(qe.getQuestList(player)));
+		QuestEngine.getInstance().sendCompletedQuests(player);
+		client.sendPacket(new SM_QUEST_LIST(player.getQuestStateList().getUncompletedQuests()));
 		client.sendPacket(new SM_TITLE_INFO(pcd.getTitleId()));
 		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
 		if (pcd.getBonusTitleId() != 0) {
@@ -433,10 +432,10 @@ public final class PlayerEnterWorldService {
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player);
 		// ----------------------------- Retail sequence -----------------------------
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
+		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogin(player);
-		}
-		ClassChangeService.showClassChangeDialog(player);
+		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
+			ClassChangeService.showClassChangeDialog(player);
 
 		GMService.getInstance().onPlayerLogin(player);
 

@@ -120,7 +120,6 @@ public class _1373WaterTherapy extends QuestHandler
 		{
 			removeQuestItem(env, 182201373, 1);
 			QuestService.abandonQuest(player, questId);
-			player.getController().updateNearbyQuests();
 			return true;
 		}
 		return false;

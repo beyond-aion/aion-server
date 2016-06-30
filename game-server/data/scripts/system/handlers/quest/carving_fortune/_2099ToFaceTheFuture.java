@@ -163,7 +163,7 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 			if (var > 1) {
 				changeQuestStep(env, var, 1, false); // 1
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-					.getName()));
+					.getNameId()));
 				return true;
 			}
 		}
@@ -180,7 +180,7 @@ public class _2099ToFaceTheFuture extends QuestHandler {
 				if (var > 1) {
 					changeQuestStep(env, var, 1, false); // 1
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-						.getName()));
+						.getNameId()));
 					return true;
 				}
 			}

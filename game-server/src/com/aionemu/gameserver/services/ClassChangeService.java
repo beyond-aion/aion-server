@@ -1,186 +1,48 @@
 package com.aionemu.gameserver.services;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer, sweetkr
+ * @reworked Neon
  */
 public class ClassChangeService {
 
-	// TODO dialog enum
-	/**
-	 * @param player
-	 */
 	public static void showClassChangeDialog(Player player) {
-		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
-			PlayerClass playerClass = player.getPlayerClass();
-			Race playerRace = player.getRace();
-			if (player.getLevel() >= 9 && playerClass.isStartingClass()) {
-				if (playerRace == Race.ELYOS) {
-					switch (playerClass) {
-						case WARRIOR:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 2375, 1006));
-							break;
-						case SCOUT:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 2716, 1006));
-							break;
-						case MAGE:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3057, 1006));
-							break;
-						case PRIEST:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3398, 1006));
-							break;
-						case ENGINEER:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3739, 1006));
-							break;
-						case ARTIST:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 4080, 1006));
-							break;
-					}
-				} else if (playerRace == Race.ASMODIANS) {
-					switch (playerClass) {
-						case WARRIOR:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3057, 2008));
-							break;
-						case SCOUT:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3398, 2008));
-							break;
-						case MAGE:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3739, 2008));
-							break;
-						case PRIEST:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 4080, 2008));
-							break;
-						case ENGINEER:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3569, 2008));
-							break;
-						case ARTIST:
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 3910, 2008));
-							break;
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param player
-	 * @param dialogId
-	 */
-	public static void changeClassToSelection(final Player player, final int dialogId) {
+		PlayerClass playerClass = player.getPlayerClass();
 		Race playerRace = player.getRace();
-		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
-			if (playerRace == Race.ELYOS) {
-				switch (dialogId) {
-					case 2376:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 1));
-						break;
-					case 2461:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 2));
-						break;
-					case 2717:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 4));
-						break;
-					case 2802:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 5));
-						break;
-					case 3058:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 7));
-						break;
-					case 3143:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 8));
-						break;
-					case 3399:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 10));
-						break;
-					case 3484:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 11));
-						break;
-					case 3825:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 13));
-						break;
-					case 3740:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 14));
-						break;
-					case 4081:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
-						break;
-
-				}
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
-				completeQuest(player, 1006);
-
-				// Stigma Quests Elyos
-				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
-					completeQuest(player, 1929);
-				}
-			} else if (playerRace == Race.ASMODIANS) {
-				switch (dialogId) {
-					case 3058:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 1));
-						break;
-					case 3143:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 2));
-						break;
-					case 3399:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 4));
-						break;
-					case 3484:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 5));
-						break;
-					case 3740:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 7));
-						break;
-					case 3825:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 8));
-						break;
-					case 4081:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 10));
-						break;
-					case 4166:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 11));
-						break;
-					case 3591:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 13));
-						break;
-					case 3570:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 14));
-						break;
-					case 3911:
-						setClass(player, PlayerClass.getPlayerClassById((byte) 16));
-						break;
-				}
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
-				// Optimate @Enomine
-				completeQuest(player, 2008);
-
-				// Stigma Quests Asmodians
-				if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST)) {
-					completeQuest(player, 2900);
-				}
-			}
-		}
+		if (player.getLevel() >= 9 && playerClass.isStartingClass())
+			PacketSendUtility.sendPacket(player,
+				new SM_DIALOG_WINDOW(0, getClassSelectionDialogId(playerRace, playerClass), playerRace == Race.ELYOS ? 1006 : 2008));
 	}
 
-	public static void completeQuest(Player player, int questId) {
+	public static void changeClassToSelection(Player player, int dialogId) {
+		setClass(player, getSelectedPlayerClass(player.getRace(), dialogId), true, true);
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
+	}
+
+	public static void completeAscensionQuest(Player player) {
+		int questId = player.getRace() == Race.ELYOS ? 1006 : 2008;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null) {
-			player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.COMPLETE, 0, 0, null, 0, null));
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, QuestStatus.COMPLETE.value(), 0, 0));
+			qs = new QuestState(questId, QuestStatus.COMPLETE);
+			player.getQuestStateList().addQuest(questId, qs);
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
 		} else {
 			qs.setStatus(QuestStatus.COMPLETE);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
 		}
+		qs.setQuestVar(0);
+		qs.setReward(0);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 	}
 
 	public static boolean setClass(Player player, PlayerClass newClass) {
@@ -188,14 +50,17 @@ public class ClassChangeService {
 	}
 
 	public static boolean setClass(Player player, PlayerClass newClass, boolean validate, boolean updateDaevaStatus) {
+		if (newClass == null)
+			return false;
+
 		if (validate) {
 			PlayerClass oldClass = player.getPlayerClass();
 			if (!oldClass.isStartingClass()) {
 				PacketSendUtility.sendMessage(player, "You already switched class");
 				return false;
 			}
-			int id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
-			if (id > PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
+			byte id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
+			if (oldClass == newClass || id >= PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
 				PacketSendUtility.sendMessage(player, "Invalid class chosen");
 				return false;
 			}
@@ -208,12 +73,92 @@ public class ClassChangeService {
 
 		if (updateDaevaStatus) {
 			if (!newClass.isStartingClass()) {
-				completeQuest(player, player.getRace() == Race.ELYOS ? 1006 : 2008);
+				completeAscensionQuest(player);
 				player.getCommonData().updateDaeva();
 			} else {
 				player.getCommonData().setDaeva(false);
 			}
 		}
 		return true;
+	}
+
+	public static int getClassSelectionDialogId(Race playerRace, PlayerClass playerClass) {
+		switch (playerClass) {
+			case WARRIOR:
+				return playerRace == Race.ELYOS ? 2375 : 3057;
+			case SCOUT:
+				return playerRace == Race.ELYOS ? 2716 : 3398;
+			case MAGE:
+				return playerRace == Race.ELYOS ? 3057 : 3739;
+			case PRIEST:
+				return playerRace == Race.ELYOS ? 3398 : 4080;
+			case ENGINEER:
+				return playerRace == Race.ELYOS ? 3739 : 3569;
+			case ARTIST:
+				return playerRace == Race.ELYOS ? 4080 : 3910;
+			default:
+				return 0;
+		}
+	}
+
+	public static PlayerClass getSelectedPlayerClass(Race race, int dialogId) {
+		switch (race) {
+			case ELYOS:
+				switch (dialogId) {
+					case 2376:
+						return PlayerClass.GLADIATOR;
+					case 2461:
+						return PlayerClass.TEMPLAR;
+					case 2717:
+						return PlayerClass.ASSASSIN;
+					case 2802:
+						return PlayerClass.RANGER;
+					case 3058:
+						return PlayerClass.SORCERER;
+					case 3143:
+						return PlayerClass.SPIRIT_MASTER;
+					case 3399:
+						return PlayerClass.CLERIC;
+					case 3484:
+						return PlayerClass.CHANTER;
+					case 3825:
+						return PlayerClass.RIDER;
+					case 3740:
+						return PlayerClass.GUNNER;
+					case 4081:
+						return PlayerClass.BARD;
+					default:
+						return null;
+				}
+			case ASMODIANS:
+				switch (dialogId) {
+					case 3058:
+						return PlayerClass.GLADIATOR;
+					case 3143:
+						return PlayerClass.TEMPLAR;
+					case 3399:
+						return PlayerClass.ASSASSIN;
+					case 3484:
+						return PlayerClass.RANGER;
+					case 3740:
+						return PlayerClass.SORCERER;
+					case 3825:
+						return PlayerClass.SPIRIT_MASTER;
+					case 4081:
+						return PlayerClass.CLERIC;
+					case 4166:
+						return PlayerClass.CHANTER;
+					case 3591:
+						return PlayerClass.RIDER;
+					case 3570:
+						return PlayerClass.GUNNER;
+					case 3911:
+						return PlayerClass.BARD;
+					default:
+						return null;
+				}
+			default:
+				return null;
+		}
 	}
 }

@@ -1,109 +1,115 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import javolution.util.FastTable;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.QuestsData;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
+import javolution.util.FastSet;
+import javolution.util.FastTable;
+
 /**
- * @author MrPoke
+ * @author MrPoke, vlog, Neon
  */
 public class QuestStateList {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestStateList.class);
-
-	private final SortedMap<Integer, QuestState> _quests;
-	private QuestsData _questData = DataManager.QUEST_DATA;
+	private SortedMap<Integer, QuestState> quests = new TreeMap<>();
+	private Set<Integer> deletedQuests = new FastSet<>();
 
 	/**
 	 * Creates an empty quests list
 	 */
 	public QuestStateList() {
-		_quests = new TreeMap<Integer, QuestState>();
+	}
+
+	/**
+	 * @param questId
+	 * @return True if there is a quest in the list with this id.
+	 */
+	public boolean hasQuest(int questId) {
+		return quests.containsKey(questId);
 	}
 
 	public synchronized boolean addQuest(int questId, QuestState questState) {
-		if (_quests.containsKey(questId)) {
-			log.warn("Duplicate quest. ");
+		if (quests.containsKey(questId)) {
+			log.warn("Tried to add duplicate quest to quest list: " + questId);
 			return false;
 		}
-		_quests.put(questId, questState);
+		quests.put(questId, questState);
 		return true;
 	}
 
-	public synchronized boolean removeQuest(int questId) {
-		if (_quests.containsKey(questId)) {
-			_quests.remove(questId);
-			return true;
+	/**
+	 * @param questId
+	 * @return The quest that was deleted, null if it didn't exist in the list.
+	 */
+	public synchronized QuestState deleteQuest(int questId) {
+		QuestState qs = quests.remove(questId);
+		if (qs != null) {
+			deletedQuests.add(qs.getQuestId());
+			qs.setPersistentState(PersistentState.DELETED);
 		}
-		return false;
+		return qs;
 	}
 
 	public QuestState getQuestState(int questId) {
-		return _quests.get(questId);
+		return quests.get(questId);
 	}
 
+	/**
+	 * @return All quests, including abandoned ones since login.
+	 */
 	public Collection<QuestState> getAllQuestState() {
-		return _quests.values();
+		return quests.values();
 	}
 
-	/*
-	 * Issue #13 fix Used by the QuestService to check the amount of normal quests in the player's list
-	 * @author vlog
+	/**
+	 * @return All quests, that are completed.
 	 */
-	public int getNormalQuestListSize() {
-		return this.getNormalQuests().size();
+	public List<QuestState> getCompletedQuests() {
+		return getAllQuestState().stream().filter(qs -> qs.getStatus() == QuestStatus.COMPLETE).collect(Collectors.toList());
 	}
 
-	/*
-	 * Issue #13 fix Returns the list of normal quests
-	 * @author vlog
+	/**
+	 * @return All quests, that are currently active or locked.
 	 */
-	public Collection<QuestState> getNormalQuests() {
-		Collection<QuestState> l = new FastTable<QuestState>();
+	public List<QuestState> getUncompletedQuests() {
+		return getAllQuestState().stream().filter(qs -> qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)
+			.collect(Collectors.toList());
+	}
 
-		for (QuestState qs : this.getAllQuestState()) {
-			QuestCategory qc = _questData.getQuestById(qs.getQuestId()).getCategory();
+	/**
+	 * @return All normal (light blue) quests, that are currently active.
+	 */
+	public List<QuestState> getNormalQuests() {
+		List<QuestState> questList = new FastTable<QuestState>();
+		for (QuestState qs : getAllQuestState()) {
+			QuestCategory qc = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getCategory();
 			QuestStatus s = qs.getStatus();
 
-			if (s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED && s != QuestStatus.NONE && qc == QuestCategory.QUEST) {
-				l.add(qs);
+			if (qc == QuestCategory.QUEST && s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED && s != QuestStatus.NONE) {
+				questList.add(qs);
 			}
 		}
-		return l;
+		return questList;
 	}
 
-	/*
-	 * Returns true if there is a quest in the list with this id Used by the QuestService
-	 * @author vlog
+	/**
+	 * @return IDs of all quests that are specifically marked as deleted (this set will be cleared after each DB update).
 	 */
-	public boolean hasQuest(int questId) {
-		return _quests.containsKey(questId);
-	}
-
-	/*
-	 * Change the old value of the quest status to the new one Used by the QuestService
-	 * @author vlog
-	 */
-	public void changeQuestStatus(Integer key, QuestStatus newStatus) {
-		_quests.get(key).setStatus(newStatus);
-	}
-
-	public int size() {
-		return this._quests.size();
-	}
-
-	public SortedMap<Integer, QuestState> getQuests() {
-		return this._quests;
+	public Set<Integer> getDeletedQuestIds() {
+		return deletedQuests;
 	}
 }

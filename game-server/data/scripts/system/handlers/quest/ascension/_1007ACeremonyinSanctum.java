@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -141,121 +140,43 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2034);
-					case 1009:
-						return sendQuestDialog(env, 5);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 0)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 0);
 				}
 			} else if (targetId == 203759 && var == 20) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2375);
-					case 1009:
-						return sendQuestDialog(env, 6);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 1)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 1);
 				}
 			} else if (targetId == 203760 && var == 30) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 2716);
-					case 1009:
-						return sendQuestDialog(env, 7);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 2)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 2);
 				}
 			} else if (targetId == 203761 && var == 40) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3057);
-					case 1009:
-						return sendQuestDialog(env, 8);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 3)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 3);
 				}
 			} else if (targetId == 801212 && var == 50) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3398);
-					case 1009:
-						return sendQuestDialog(env, 45);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 4)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 4);
 				}
 			} else if (targetId == 801213 && var == 60) {
 				switch (env.getDialogId()) {
 					case -1:
 						return sendQuestDialog(env, 3739);
-					case 1009:
-						return sendQuestDialog(env, 46);
-					case 8:
-					case 9:
-					case 10:
-					case 11:
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-					case 16:
-					case 18:
-						if (QuestService.finishQuest(env, 5)) {
-							return sendQuestSelectionDialog(env);
-						}
+					default:
+						return sendQuestEndDialog(env, 5);
 				}
 			}
 		}

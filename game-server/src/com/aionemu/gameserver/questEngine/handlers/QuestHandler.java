@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
@@ -34,6 +37,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -55,6 +59,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public abstract class QuestHandler extends AbstractQuestHandler implements ConstantSpawnHandler {
 
+	private static final Logger log = LoggerFactory.getLogger(QuestHandler.class);
 	protected final int questId;
 	protected QuestEngine qe;
 	protected List<QuestItems> workItems;
@@ -144,8 +149,16 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	}
 
 	/** Update the status of the quest in player's journal */
-	public synchronized void updateQuestStatus(QuestEnv env) {
-		sendUpdatePacket(env);
+	public void updateQuestStatus(QuestEnv env) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
+		if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.REWARD)
+			player.getController().updateNearbyQuests();
+	}
+
+	public void changeQuestStep(QuestEnv env, int oldStep, int newStep) {
+		changeQuestStep(env, oldStep, newStep, false, 0);
 	}
 
 	public void changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward) {
@@ -160,6 +173,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 				qs.setStatus(QuestStatus.REWARD);
 			} else { // quest can be rolled back if nextStep < step
 				if (nextStep != step) {
+					if (step > nextStep && qs.getStatus() == QuestStatus.START)
+						PacketSendUtility.sendPacket(env.getPlayer(), SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
 					qs.setQuestVarById(varNum, nextStep);
 				}
 			}
@@ -171,29 +186,20 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 
 	/** Send dialog to the player */
 	public boolean sendQuestDialog(QuestEnv env, int dialogId) {
-		boolean isExploitDialog = false;
-		if (DialogPage.getPageByAction(dialogId) != null) {
-			switch (DialogPage.getPageByAction(dialogId)) {
-				case SELECT_QUEST_REWARD_WINDOW1:
-				case SELECT_QUEST_REWARD_WINDOW2:
-				case SELECT_QUEST_REWARD_WINDOW3:
-				case SELECT_QUEST_REWARD_WINDOW4:
-				case SELECT_QUEST_REWARD_WINDOW5:
-				case SELECT_QUEST_REWARD_WINDOW6:
-				case SELECT_QUEST_REWARD_WINDOW7:
-				case SELECT_QUEST_REWARD_WINDOW8:
-				case SELECT_QUEST_REWARD_WINDOW9:
-				case SELECT_QUEST_REWARD_WINDOW10:
-					isExploitDialog = true;
-					break;
-			}
-		}
-		if (isExploitDialog) { // reward packet exploitation fix
-			Player player = env.getPlayer();
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs.getStatus() != QuestStatus.REWARD) {
-				return false;
-			}
+		switch (DialogPage.getPageByAction(dialogId)) {
+			case SELECT_QUEST_REWARD_WINDOW1:
+			case SELECT_QUEST_REWARD_WINDOW2:
+			case SELECT_QUEST_REWARD_WINDOW3:
+			case SELECT_QUEST_REWARD_WINDOW4:
+			case SELECT_QUEST_REWARD_WINDOW5:
+			case SELECT_QUEST_REWARD_WINDOW6:
+			case SELECT_QUEST_REWARD_WINDOW7:
+			case SELECT_QUEST_REWARD_WINDOW8:
+			case SELECT_QUEST_REWARD_WINDOW9:
+			case SELECT_QUEST_REWARD_WINDOW10:
+				QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
+				if (qs == null || qs.getStatus() != QuestStatus.REWARD) // reward packet exploitation fix
+					return false;
 		}
 		sendDialogPacket(env, dialogId);
 		return true;
@@ -210,19 +216,11 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	}
 
 	public boolean sendQuestStartDialog(QuestEnv env) {
-		return sendQuestStartDialog(env, 0, 0, 0);
-	}
-
-	public boolean sendQuestStartDialog(QuestEnv env, int stepGroup) {
-		return sendQuestStartDialog(env, 0, 0, stepGroup);
-	}
-
-	public boolean sendQuestStartDialog(QuestEnv env, int itemId, int itemCount) {
-		return sendQuestStartDialog(env, itemId, itemCount, 0);
+		return sendQuestStartDialog(env, 0, 0);
 	}
 
 	/** Send default start quest dialog and start it (give the item on start) */
-	public boolean sendQuestStartDialog(QuestEnv env, int itemId, int itemCount, int stepGroup) {
+	public boolean sendQuestStartDialog(QuestEnv env, int itemId, int itemCount) {
 		switch (env.getDialog()) {
 			case ASK_QUEST_ACCEPT: {
 				return sendQuestDialog(env, 4);
@@ -230,13 +228,13 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			case QUEST_ACCEPT_1: {
 				if (itemId != 0 && itemCount != 0) {
 					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
-						if (QuestService.startQuest(env, stepGroup)) {
+						if (QuestService.startQuest(env)) {
 							giveQuestItem(env, itemId, itemCount);
 							return sendQuestDialog(env, 1003);
 						}
 					}
 				} else {
-					if (QuestService.startQuest(env, stepGroup)) {
+					if (QuestService.startQuest(env)) {
 						if (env.getVisibleObject() == null || env.getVisibleObject() instanceof Player)
 							return closeDialogWindow(env);
 						else
@@ -247,13 +245,13 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			case QUEST_ACCEPT_SIMPLE: {
 				if (itemId != 0 && itemCount != 0) {
 					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
-						if (QuestService.startQuest(env, stepGroup)) {
+						if (QuestService.startQuest(env)) {
 							giveQuestItem(env, itemId, itemCount);
 							return closeDialogWindow(env);
 						}
 					}
 				} else {
-					if (QuestService.startQuest(env, stepGroup)) {
+					if (QuestService.startQuest(env)) {
 						if (env.getVisibleObject() == null || env.getVisibleObject() instanceof Player)
 							return closeDialogWindow(env);
 						else
@@ -289,25 +287,27 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 
 	/** Send completion dialog of the quest and finish it. Give the default reward from quest_data.xml */
 	public boolean sendQuestEndDialog(QuestEnv env) {
-		return sendQuestEndDialog(env, 0);
+		int rewardGroups = DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getRewards().size();
+		if (rewardGroups > 1) // you should explicitly specify the reward group when there are more than 1
+			log.warn("Quest handler for quest: " + env.getQuestId() + " possibly rewarded the wrong reward group.");
+		return sendQuestEndDialog(env, rewardGroups == 0 ? null : 0);
 	}
 
 	/**
-	 * Send completion dialog of the quest and finish it
+	 * Sends reward selection dialog of the quest or finishes it (if selection dialog was active)
 	 * 
 	 * @param env
-	 * @param reward
-	 *          The index of the List<Reward>.
+	 * @param rewardGroup
+	 *          - Which {@code <rewards>} group (from quest_data.xml) to use, null for none.
 	 */
-	public boolean sendQuestEndDialog(QuestEnv env, int reward) {
+	public boolean sendQuestEndDialog(QuestEnv env, Integer rewardGroup) {
 		Player player = env.getPlayer();
 		int dialogId = env.getDialogId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
+			return false; // reward packet exploitation fix (or buggy quest handler)
 		if (dialogId >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-			if (qs == null || qs.getStatus() != QuestStatus.REWARD) {
-				return false; // reward packet exploitation fix
-			}
-			if (QuestService.finishQuest(env, reward)) {
+			if (QuestService.finishQuest(env, rewardGroup)) {
 				Npc npc = (Npc) env.getVisibleObject();
 				if ("useitem".equals(npc.getAi2().getName()) || ("quest_use_item".equals(npc.getAi2().getName()))) {
 					return closeDialogWindow(env);
@@ -316,10 +316,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 				}
 			}
 			return false;
-		} else if (dialogId == DialogAction.SELECT_QUEST_REWARD.id() || dialogId == DialogAction.USE_OBJECT.id()) {
-			if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				return sendQuestDialog(env, 5 + reward);
-			}
+		} else if (dialogId == DialogAction.SELECT_QUEST_REWARD.id() || dialogId == DialogAction.USE_OBJECT.id()) { // show reward selection page
+			return sendQuestDialog(env, DialogPage.getRewardPageByIndex(rewardGroup).id());
 		}
 		return false;
 	}
@@ -639,7 +637,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	public boolean defaultOnKillInZoneEvent(QuestEnv env, int startVar, int endVar, boolean reward) {
 		return defaultOnKillRankedEvent(env, startVar, endVar, reward, false);
 	}
-	
+
 	public boolean defaultOnKillInZoneEvent(QuestEnv env, int startVar, int endVar, boolean reward, boolean isDataDriven) {
 		return defaultOnKillRankedEvent(env, startVar, endVar, reward, isDataDriven);
 	}
@@ -863,22 +861,20 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		// Only null quests can be started!
-		if (qs != null) {
+		if (qs != null)
 			return false;
-		}
 
-		// Check all player requirements
-		if (!QuestService.checkMissionStatConditions(env)) {
+		// Check all player requirements (but allowed diff to quest minLevel = 2) 
+		if (!QuestService.checkStartConditions(player, questId, false, 2, false, false, true))
 			return false;
-		}
 
-		// Check, if the player has required level
+		// Send locked quest if the player is <= 2 levels below quest min level (as specified in the check above)
 		if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel())) {
 			QuestService.startMission(env, QuestStatus.LOCKED);
 			return false;
 		}
 
-		// Check the quests, that has to be done before starting this one
+		// Check the quests, that have to be done before starting this one
 		for (int id : quests) {
 			if (id != 0) {
 				QuestState qs2 = player.getQuestStateList().getQuestState(id);
@@ -894,9 +890,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
 			if (!startCondition.check(player, false)) {
-				if (qs == null) {
-					QuestService.startMission(env, QuestStatus.LOCKED);
-				}
+				QuestService.startMission(env, QuestStatus.LOCKED);
 				return false;
 			}
 		}
@@ -941,12 +935,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (qs != null && qs.getStatus() != QuestStatus.LOCKED)
 			return false;
 		// Check all player requirements
-		if (!QuestService.checkMissionStatConditions(env))
+		if (!QuestService.checkStartConditions(player, questId, false, 0, false, false, true))
 			return false;
-		// Check, if the player has required level
-		if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel()))
-			return false;
-		// Check the quests, that has to be done before starting this one
+		// Check the quests, that have to be done before starting this one
 		// Set the quest status to LOCKED, if these requirements aren't there
 		// Zone missions should be already LOCKED before!
 		// TEMPORARY till the new quest_data will be parsed
@@ -968,8 +959,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			if (!startCondition.check(player, false))
 				if (qs == null && !isZoneMission) {
 					QuestService.startMission(env, QuestStatus.LOCKED);
-				return false;
-			}
+					return false;
+				}
 		}
 
 		// All conditions are done. Start the quest
@@ -1096,15 +1087,6 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	@Override
 	public int getQuestId() {
 		return questId;
-	}
-
-	private void sendUpdatePacket(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars(), qs.getFlags()));
-		if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.REWARD) {
-			player.getController().updateNearbyQuests();
-		}
 	}
 
 	private void sendDialogPacket(QuestEnv env, int dialogId) {

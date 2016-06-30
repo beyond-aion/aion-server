@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -44,12 +45,12 @@ public class World {
 	/**
 	 * Container with all players that entered world.
 	 */
-	private final PlayerContainer allPlayers;
+	private final PlayerContainer allPlayers = new PlayerContainer();;
 
 	/**
 	 * Container with all AionObjects in the world [ie Players, Npcs etc]
 	 */
-	private final ConcurrentHashMap<Integer, VisibleObject> allObjects;
+	private final Map<Integer, VisibleObject> allObjects = new ConcurrentHashMap<>();
 
 	/**
 	 * Container with all SiegeNpcs in the world [SiegeNpcs,SiegeProtectors etc]
@@ -59,28 +60,22 @@ public class World {
 	/**
 	 * Container with all Npcs related to base spawns
 	 */
-	private final ConcurrentHashMap<Integer, List<Npc>> baseNpc;
+	private final Map<Integer, List<Npc>> baseNpc = new ConcurrentHashMap<>();
 
 	/**
 	 * Container with all Npcs in the world
 	 */
-	private final ConcurrentHashMap<Integer, Npc> allNpcs;
+	private final Map<Integer, Npc> allNpcs = new ConcurrentHashMap<>();
 
 	/**
 	 * World maps supported by server.
 	 */
-	private final TIntObjectHashMap<WorldMap> worldMaps;
+	private final TIntObjectHashMap<WorldMap> worldMaps = new TIntObjectHashMap<>();
 
 	/**
 	 * Constructor.
 	 */
 	private World() {
-		allPlayers = new PlayerContainer();
-		allObjects = new ConcurrentHashMap<>();
-		baseNpc = new ConcurrentHashMap<>();
-		allNpcs = new ConcurrentHashMap<>();
-		worldMaps = new TIntObjectHashMap<>();
-
 		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA)
 			worldMaps.put(template.getMapId(), new WorldMap(template));
 
@@ -478,7 +473,11 @@ public class World {
 	 * @param visitor
 	 */
 	public void doOnAllPlayers(Visitor<Player> visitor) {
-		allPlayers.doOnAllPlayers(visitor);
+		try {
+			allPlayers.forEach(player -> visitor.visit(player));
+		} catch (Exception ex) {
+			log.error("Exception when running visitor on all players", ex);
+		}
 	}
 
 	/**
@@ -486,12 +485,7 @@ public class World {
 	 */
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			for (ConcurrentHashMap.Entry<Integer, VisibleObject> e : allObjects.entrySet()) {
-				VisibleObject object = e.getValue();
-				if (object != null) {
-					visitor.visit(object);
-				}
-			}
+			allObjects.values().forEach(obj -> visitor.visit(obj));
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);
 		}

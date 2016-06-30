@@ -49,7 +49,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	private int itemExpands = 0;
 	private int warehouseNpcExpands = 0;
 	private int warehouseBonusExpands = 0;
-	private int advancedStigmaSlotSize = 0;
 	private int titleId = -1;
 	private int bonusTitleId = -1;
 	private int dp = 0;
@@ -103,14 +102,6 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 	public void setItemExpands(int itemExpands) {
 		this.itemExpands = itemExpands;
-	}
-
-	public int getAdvancedStigmaSlotSize() {
-		return advancedStigmaSlotSize;
-	}
-
-	public void setAdvancedStigmaSlotSize(int advancedStigmaSlotSize) {
-		this.advancedStigmaSlotSize = advancedStigmaSlotSize;
 	}
 
 	public long getExpShown() {
@@ -640,12 +631,9 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		else
 			qsl = DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId);
 
-		if (qsl == null)
-			throw new AssertionError("Player " + playerObjId + " has no valid questStateList");
-
 		// check both quest states in case a player changed race
-		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : QuestStatus.NONE;
-		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : QuestStatus.NONE;
+		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : null;
+		QuestStatus asmoAscentQuestStatus = qsl.getQuestState(2008) != null ? qsl.getQuestState(2008).getStatus() : null;
 		if (elyAscentQuestStatus != QuestStatus.COMPLETE && asmoAscentQuestStatus != QuestStatus.COMPLETE)
 			return false;
 

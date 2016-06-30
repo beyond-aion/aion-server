@@ -1,16 +1,11 @@
 package com.aionemu.gameserver.dataholders.loadingutils;
 
-import static org.apache.commons.io.filefilter.FileFilterUtils.and;
-import static org.apache.commons.io.filefilter.FileFilterUtils.makeSVNAware;
-import static org.apache.commons.io.filefilter.FileFilterUtils.suffixFileFilter;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Properties;
 
@@ -32,8 +27,6 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.filefilter.HiddenFileFilter;
-import org.apache.commons.io.filefilter.IOFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -41,6 +34,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.aionemu.commons.utils.xml.XmlUtil;
 
 /**
  * <p>
@@ -300,7 +295,7 @@ public class XmlMerger {
 			boolean singleRootTag = Boolean.valueOf(getAttributeValue(element, qNameSingleRootTag, "false"));
 			boolean recImport = Boolean.valueOf(getAttributeValue(element, qNameRecursiveImport, "true"));
 			logger.debug("Processing dir " + file);
-			for (Iterator<File> it = listFiles(file, recImport).iterator(); it.hasNext();) {
+			for (Iterator<File> it = XmlUtil.listFiles(file, recImport).iterator(); it.hasNext();) {
 				boolean skipRootStartElement = singleRootTag && endElement != null;
 				StartElement startElement = importFile(it.next(), skipRootStartElement, singleRootTag, writer, metadata);
 				if (endElement == null)
@@ -309,12 +304,6 @@ public class XmlMerger {
 			if (endElement != null)
 				writer.add(endElement);
 		}
-	}
-
-	private static Collection<File> listFiles(File root, boolean recursive) {
-		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
-
-		return FileUtils.listFiles(root, and(suffixFileFilter(".xml"), HiddenFileFilter.VISIBLE), dirFilter);
 	}
 
 	/**
@@ -447,23 +436,17 @@ public class XmlMerger {
 
 			File file = new File(basedir, value);
 
-			if (!file.exists())
-				// noinspection ThrowableInstanceNeverThrown
+			if (!file.exists()) // noinspection ThrowableInstanceNeverThrown
 				throw new SAXParseException("Imported file not found. file=" + file.getPath(), locator);
 
-			if (file.isFile() && checkFile(file))// if file - just check it.
-			{
+			if (file.isFile() && checkFile(file)) { // if file - just check it.
 				isModified = true;
 				return;
 			}
 
-			if (file.isDirectory())// otherwise check all files inside
-			{
+			if (file.isDirectory()) { // otherwise check all files inside
 				String rec = attributes.getValue(qNameRecursiveImport.getLocalPart());
-
-				Collection<File> files = listFiles(file, rec == null ? true : Boolean.valueOf(rec));
-
-				for (File childFile : files) {
+				for (File childFile : XmlUtil.listFiles(file, rec == null ? true : Boolean.valueOf(rec))) {
 					if (checkFile(childFile)) {
 						isModified = true;
 						return;
