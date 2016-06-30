@@ -24633,115 +24633,84 @@
 	<decomposable item_id="188052741" name="[Event] Brilliant Composite Manastone Bundle" />
 	<decomposable item_id="188052742" name="Fortress Supplies">
 		<items>
-			<item id="169405267" name="Flame Vitality" />
-		</items>
-		<items>
 			<item id="186000242" name="Ceramium Medal" />
 			<item id="169405267" name="Flame Vitality" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
+		</items>
+		<items>
+			<item id="152012580" name="Fire Mote" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
 		</items>
 		<items>
 			<item id="152012582" name="Fire Fragment" />
-			<item id="169405267" name="Flame Vitality" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
+		</items>
+		<items>
+			<item id="152012584" name="Water Source" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
+		</items>
+		<items>
+			<item id="169405252" name="Fury Powder" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
+		</items>
+		<items>
+			<item id="152012600" name="Patience Crystal" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
+		</items>
+		<items>
+			<item id="152012602" name="Ore of Patience" />
+			<item id="186000242" name="Ceramium Medal" />
+			<item id="186000199" name="Legion Coin" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052743" name="Manastone Box">
-		<items chance="92.0">
+		<items chance="75.0">
 			<random_item type="MANASTONE_RARE_GRADE_70" />
 		</items>
-		<items chance="8.0">
+		<items chance="15.0">
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
+		</items>
+		<items chance="10.0">
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052744" name="Ancient Relic Box">
 		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
+			<item id="186000065" name="Ancient Icon" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
 			<item id="186000062" name="Lesser Ancient Seal" />
 		</items>
 		<items>
-			<item id="186000249" name="Danuar Relic" />
+			<item id="186000061" name="Ancient Seal" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-		</items>
-		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000241" name="Pradeth Crest" />
+			<item id="186000058" name="Lesser Ancient Goblet" />
 		</items>
 		<items>
 			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000249" name="Danuar Relic" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000241" name="Pradeth Crest" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
 			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000249" name="Danuar Relic" />
-			<item id="186000240" name="Silona Crest" />
 		</items>
 		<items>
 			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000239" name="Sillus Crest" />
 		</items>
 		<items>
 			<item id="186000249" name="Danuar Relic" />
-			<item id="186000239" name="Sillus Crest" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000239" name="Sillus Crest" />
+			<item id="186000248" name="Greater Danuar Relic" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052745" name="[Event] Silverine Token Chest" />
@@ -25777,115 +25746,72 @@
 	<decomposable item_id="188052918" name="[Event] Angel Wings Chest" />
 	<decomposable item_id="188052919" name="Fortress Supplies">
 		<items>
-			<item id="169405267" name="Flame Vitality" />
-		</items>
-		<items>
 			<item id="186000242" name="Ceramium Medal" />
 			<item id="169405267" name="Flame Vitality" />
 		</items>
 		<items>
+			<item id="152012580" name="Fire Mote" />
+			<item id="186000242" name="Ceramium Medal" />
+		</items>
+		<items>
 			<item id="152012582" name="Fire Fragment" />
-			<item id="169405267" name="Flame Vitality" />
+			<item id="186000242" name="Ceramium Medal" />
+		</items>
+		<items>
+			<item id="152012584" name="Water Source" />
+			<item id="186000242" name="Ceramium Medal" />
+		</items>
+		<items>
+			<item id="169405252" name="Fury Powder" />
+			<item id="186000242" name="Ceramium Medal" />
+		</items>
+		<items>
+			<item id="152012600" name="Patience Crystal" />
+			<item id="186000242" name="Ceramium Medal" />
+		</items>
+		<items>
+			<item id="152012602" name="Ore of Patience" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052920" name="Manastone Box">
-		<items chance="92.0">
+		<items chance="80.0">
 			<random_item type="MANASTONE_RARE_GRADE_70" />
 		</items>
-		<items chance="8.0">
+		<items chance="12.0">
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
+		</items>
+		<items chance="8.0">
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052921" name="Ancient Relic Box">
 		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
+			<item id="186000065" name="Ancient Icon" />
 		</items>
 		<items>
 			<item id="186000062" name="Lesser Ancient Seal" />
 		</items>
 		<items>
-			<item id="186000249" name="Danuar Relic" />
+			<item id="186000061" name="Ancient Seal" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-		</items>
-		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000241" name="Pradeth Crest" />
+			<item id="186000058" name="Lesser Ancient Goblet" />
 		</items>
 		<items>
 			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000249" name="Danuar Relic" />
-			<item id="186000241" name="Pradeth Crest" />
-		</items>
-		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000241" name="Pradeth Crest" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 		<items>
 			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000249" name="Danuar Relic" />
-			<item id="186000240" name="Silona Crest" />
 		</items>
 		<items>
 			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000240" name="Silona Crest" />
-		</items>
-		<items>
-			<item id="186000054" name="Lesser Ancient Crown" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000057" name="Ancient Goblet" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000061" name="Ancient Seal" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000062" name="Lesser Ancient Seal" />
-			<item id="186000239" name="Sillus Crest" />
 		</items>
 		<items>
 			<item id="186000249" name="Danuar Relic" />
-			<item id="186000239" name="Sillus Crest" />
-		</items>
-		<items>
-			<item id="186000250" name="Lesser Danuar Relic" />
-			<item id="186000239" name="Sillus Crest" />
+			<item id="186000242" name="Ceramium Medal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052922" name="[Event] Crimsonimbus Box" />

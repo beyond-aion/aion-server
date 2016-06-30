@@ -33,10 +33,6 @@
 		<spawn npc_id="215148" respawn_time="295">
 			<spot x="428.5251" y="591.3604" z="191.1638" h="75" />
 		</spawn>		
-		<!-- Ancient Treasure Box -->
-		<spawn npc_id="700542">
-			<spot x="577.5694" y="836.9684" z="199.4252" h="56" />
-		</spawn>
 		<!-- Awakened Kysis Duke -->
 		<spawn npc_id="215179">
 			<spot x="526.456" y="845.34" z="199.452" h="27"/>
@@ -51,7 +47,7 @@
 		</spawn>
 		<!-- IDAB1_SensoryArea_Timer_G -->
 		<spawn npc_id="206096">
-			<spot x="528.743" y="756.131" z="201.71" h="6"/>
+			<spot x="528.181" y="767.973" z="199.570"/>
 		</spawn>
 		<!-- Kysis Chamber Artifact -->
 		<spawn npc_id="215414">

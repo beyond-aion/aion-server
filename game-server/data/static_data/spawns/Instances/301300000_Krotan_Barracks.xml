@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<spawn_map map_id="301300000">
-		<!-- Huge Abyss Statue -->
-		<spawn npc_id="235538">
-			<spot x="618" y="459" z="197.6905" h="90" />
-			<spot x="546" y="365" z="180.7989" h="90" />
-		</spawn>
-		<!-- Solid Abyss Statue -->
-		<spawn npc_id="235537">
-			<spot x="518" y="565" z="177.2951" h="90" />
-			<spot x="649" y="277" z="191.7261" h="90" />
-		</spawn>
-		<!-- Small Abyss Statue -->
-		<spawn npc_id="235536">
-			<spot x="425" y="277" z="191.733" h="90" />
-			<spot x="431" y="458" z="197.7089" h="90" />
-			<spot x="396" y="594" z="191.2018" h="90" />
-			<spot x="626" y="599" z="191.118" h="90" />
-			<spot x="546" y="436" z="180.9103" h="90" />
-		</spawn>
-		<!-- Baranath High Priest -->
-		<spawn npc_id="233614">
-			<spot x="613.0815" y="260.8197" z="191.7882" />
-		</spawn>
-		<!-- Baranath Fearblade -->
-		<spawn npc_id="233624">
-			<spot x="501.5747" y="362.2985" z="180.7989" h="105" />
-		</spawn>
-		<!-- Baranath Elite Medico -->
-		<spawn npc_id="233602">
-			<spot x="393.7971" y="580.8381" z="191.1588" />
-		</spawn>
-		<!-- Baranath Elite Master-at-Arms -->
-		<spawn npc_id="233599">
-			<spot x="428.4878" y="276.7921" z="191.757" h="73" />
-		</spawn>
-		<!-- Baranath Bodyshield -->
-		<spawn npc_id="233611">
-			<spot x="655.6967" y="599.4521" z="191.2424" h="75" />
-		</spawn>
-		<!-- Baranath Chief Medic -->
-		<spawn npc_id="233626">
-			<spot x="506.5846" y="431.7111" z="180.9143" />
-		</spawn>
-		<!-- Baranath Blade Legate -->
-		<spawn npc_id="233600">
-			<spot x="388.3633" y="408.0185" z="197.7089" h="6" />
-		</spawn>
 		<!-- 1221_Temporary Door -->
 		<spawn npc_id="700545">
 			<spot x="410.5551" y="289.2252" z="190.4981" static_id="10" />
@@ -63,21 +17,17 @@
 			<spot x="526.1989" y="393.6786" z="179.7231" static_id="8" />
 			<spot x="635.3989" y="284.1712" z="190.3621" static_id="29" />
 		</spawn>
-		<!-- Enraged Krotan Lord -->
-		<spawn npc_id="233633">
-			<spot x="526.401" y="845.38" z="199.395" h="28"/>
-		</spawn>
-		<!-- Ebonlord Arknamium -->
-		<spawn npc_id="233631">
-			<spot x="527.3" y="729.667" z="192.52" h="79"/>
-		</spawn>
-		<!-- Mossy Gate -->
-		<spawn npc_id="700459">
-			<spot x="527.4063" y="106.0371" z="175.9239" static_id="4" />
-		</spawn>
-		<!-- IDAB1_SensoryArea_Timer_F -->
-		<spawn npc_id="206095">
-			<spot x="528.2" y="759.52" z="200" h="106"/>
+		<!-- Abyss Treasure Box -->
+		<spawn npc_id="832865">
+			<spot x="432.08" y="260.17" z="191.778" h="60"/>
+			<spot x="440.38" y="436.07" z="197.729" h="60"/>
+			<spot x="432.37" y="596.29" z="191.242" h="60"/>
+			<spot x="498.49" y="344.39" z="180.784"/>
+			<spot x="507.58" y="444.88" z="180.934"/>
+			<spot x="554.14" y="563.29" z="177.041" h="60"/>
+			<spot x="656.80" y="260.13" z="191.778" h="60"/>
+			<spot x="662.81" y="439.02" z="197.701" h="60"/>
+			<spot x="659.33" y="579.21" z="191.201" h="60"/>
 		</spawn>
 		<!-- Baranath Apone -->
 		<spawn npc_id="233619">
@@ -115,14 +65,9 @@
 		<spawn npc_id="233613">
 			<spot x="618.336" y="666.573" z="185.542" h="19"/>
 		</spawn>
-		<!-- Baranath Conqueror -->
-		<spawn npc_id="233612">
-			<spot x="608.518" y="426.048" z="197.701" h="73"/>
-		</spawn>
-		<!-- Baranath Bloodmage -->
-		<spawn npc_id="233764">
-			<spot x="639.676" y="482.439" z="194.435" h="49"/>
-			<spot x="658.52" y="261.199" z="191.801" h="95"/>
+		<!-- Baranath Blade Legate -->
+		<spawn npc_id="233600">
+			<spot x="388.3633" y="408.0185" z="197.7089" h="6" />
 		</spawn>
 		<!-- Baranath Bloodmage -->
 		<spawn npc_id="233609">
@@ -132,12 +77,34 @@
 			<spot x="636.66" y="424.51" z="196.79149" h="33" walker_id="C9ACE11542AED59935C1DB541CF03E4D5C1FB83E"/>
 			<spot x="644.807" y="586.418" z="189.766" h="109"/>
 		</spawn>
-		<!-- Baranath Magus -->
-		<spawn npc_id="233617">
-			<spot x="521.116" y="278.594" z="180.289" h="15"/>
-			<spot x="526.25" y="315.08" z="179.91246" h="79" walker_id="0A90D60C999C62283D35B09603958BB09F9CD143"/>
-			<spot x="544.604" y="415.199" z="180.926" h="44"/>
-			<spot x="546.954" y="311.839" z="180.799" h="113"/>
+		<!-- Baranath Bloodmage -->
+		<spawn npc_id="233764">
+			<spot x="639.676" y="482.439" z="194.435" h="49"/>
+			<spot x="658.52" y="261.199" z="191.801" h="95"/>
+		</spawn>
+		<!-- Baranath Bodyshield -->
+		<spawn npc_id="233611">
+			<spot x="655.6967" y="599.4521" z="191.2424" h="75" />
+		</spawn>
+		<!-- Baranath Chief Medic -->
+		<spawn npc_id="233626">
+			<spot x="506.5846" y="431.7111" z="180.9143" />
+		</spawn>
+		<!-- Baranath Conjurer -->
+		<spawn npc_id="233605">
+			<spot x="582.488" y="188.025" z="179.536" h="44"/>
+			<spot x="620.155" y="274.754" z="191.742" h="37"/>
+			<spot x="634.89" y="252.0" z="190.36212" h="67" walker_id="11DA9D109EF42CA85AEEADEEA085D18ED0DD84D0"/>
+			<spot x="658.527" y="258.576" z="191.801" h="20"/>
+			<spot x="664.796" y="440.222" z="197.701" h="74"/>
+		</spawn>
+		<!-- Baranath Conjurer -->
+		<spawn npc_id="233776">
+			<spot x="617.889" y="246.604" z="191.742" h="15"/>
+		</spawn>
+		<!-- Baranath Conqueror -->
+		<spawn npc_id="233612">
+			<spot x="608.518" y="426.048" z="197.701" h="73"/>
 		</spawn>
 		<!-- Baranath Curate -->
 		<spawn npc_id="233622">
@@ -152,97 +119,12 @@
 			<spot x="546.345" y="725.63" z="191.864" h="22"/>
 			<spot x="550.028" y="363.441" z="180.799" h="42"/>
 		</spawn>
-		<!-- Baranath Elite Praetor -->
-		<spawn npc_id="233615">
-			<spot x="501.036" y="337.234" z="180.327" h="1"/>
-			<spot x="505.264" y="311.765" z="180.799" h="97"/>
-			<spot x="512.425" y="448.158" z="180.889" h="7"/>
-			<spot x="530.001" y="409.441" z="179.52" h="59"/>
-			<spot x="541.632" y="351.917" z="179.912" h="70"/>
-			<spot x="543.225" y="413.917" z="180.912" h="48"/>
-		</spawn>
-		<!-- Baranath Finder -->
-		<spawn npc_id="233616">
-			<spot x="517.4" y="343.02" z="179.91246" h="110" walker_id="9E8AEF091081723243FB8EB20651F2D581884A09"/>
-			<spot x="522.849" y="301.284" z="181.119" h="92"/>
-			<spot x="529.919" y="301.335" z="181.119" h="70"/>
-		</spawn>
-		<!-- Baranath Fleshmender -->
-		<spawn npc_id="233777">
-			<spot x="657.194" y="458.765" z="197.691" h="102"/>
-			<spot x="663.771" y="424.273" z="197.676" h="68"/>
-		</spawn>
-		<!-- Baranath Fleshmender -->
-		<spawn npc_id="233606">
-			<spot x="612.375" y="451.605" z="197.206" h="105"/>
-			<spot x="630.372" y="218.575" z="190.156" h="97"/>
-			<spot x="651.805" y="242.731" z="191.752" h="106"/>
-		</spawn>
-		<!-- Baranath Elite Healer -->
-		<spawn npc_id="233594">
-			<spot x="411.11" y="217.15" z="190.18983" h="100" walker_id="E5094859E60C54A52CEAC8DCBF61B8BE79B929AE"/>
-			<spot x="432.962" y="258.825" z="191.79" h="54"/>
-			<spot x="503.5" y="215.28" z="179.14668" h="51" walker_id="2C49C6764DCF21DF3CE50E6E47F21A9906C978B0"/>
-			<spot x="552.192" y="199.631" z="179.147" h="46"/>
-		</spawn>
-		<!-- Baranath Elite Healer -->
-		<spawn npc_id="233769">
-			<spot x="384.236" y="424.444" z="197.719" h="65"/>
-			<spot x="385.385" y="438.913" z="197.694" h="119"/>
-			<spot x="438.051" y="424.876" z="197.694" h="76"/>
-		</spawn>
-		<!-- Baranath Hospitaller -->
-		<spawn npc_id="233598">
-			<spot x="400.63" y="455.24" z="196.79149" h="56" walker_id="4B76477A9D834555C3B4F15FBDE94019748AA228"/>
-			<spot x="408.476" y="540.809" z="189.79" h="114"/>
-			<spot x="418.461" y="563.056" z="189.766" h="85"/>
-			<spot x="427.799" y="652.107" z="185.244" h="21"/>
-		</spawn>
-		<!-- Baranath Elite Hospitaller -->
-		<spawn npc_id="233773">
-			<spot x="433.434" y="406.218" z="197.709" h="100"/>
-		</spawn>
-		<!-- Baranath Elite Hospitaller -->
-		<spawn npc_id="233757">
-			<spot x="430.201" y="596.745" z="191.242" h="67"/>
-			<spot x="432.951" y="261.394" z="191.79" h="14"/>
-		</spawn>
-		<!-- Baranath Implacable -->
-		<spawn npc_id="233623">
-			<spot x="526.6149" y="565.672" z="177.9525" h="89" />
-		</spawn>
-		<!-- Baranath Juggernaut -->
-		<spawn npc_id="233595">
-			<spot x="405.055" y="280.878" z="190.362" h="41"/>
-			<spot x="410.48" y="242.19" z="190.36212" h="117" walker_id="9001C5E509C5ADD8943D50011ECA5891C0A33B09"/>
-			<spot x="413.871" y="589.297" z="189.766" h="37" walker_id="F0D41D4BAC3375DD101FA58B907F133547663964"/>
-			<spot x="416.462" y="604.486" z="189.766" h="38"/>
-			<spot x="418.962" y="540.787" z="189.79" h="117"/>
-			<spot x="423.733" y="654.491" z="185.245" h="15"/>
-			<spot x="430.523" y="567.154" z="191.202" h="68"/>
-		</spawn>
-		<!-- Baranath Elite Juggernaut -->
-		<spawn npc_id="233770">
-			<spot x="386.952" y="251.509" z="191.806" h="86"/>
-		</spawn>
-		<!-- Baranath Elite Juggernaut -->
-		<spawn npc_id="233754">
-			<spot x="434.992" y="457.147" z="197.709" h="18"/>
-		</spawn>
-		<!-- Baranath Justicar -->
-		<spawn npc_id="233781">
-			<spot x="608.486" y="436.98" z="197.676" h="107"/>
-		</spawn>
-		<!-- Baranath Justicar -->
-		<spawn npc_id="233765">
-			<spot x="658.107" y="580.013" z="191.163" h="104"/>
-		</spawn>
-		<!-- Baranath Justicar -->
-		<spawn npc_id="233610">
-			<spot x="598.35" y="695.74" z="184.01733" h="97" walker_id="587CD26C7A662EA3DA7A9B64AC27C3DE164B6364"/>
-			<spot x="626.529" y="583.275" z="190.089" h="15"/>
-			<spot x="639.054" y="281.284" z="190.362" h="40"/>
-			<spot x="643.316" y="540.466" z="189.79" h="65"/>
+		<!-- Baranath Curatus -->
+		<spawn npc_id="233618">
+			<spot x="511.039" y="351.957" z="179.912" h="9"/>
+			<spot x="522.457" y="409.272" z="179.52" h="43"/>
+			<spot x="530.575" y="281.585" z="180.429" h="111"/>
+			<spot x="551.661" y="337.29" z="180.327" h="21"/>
 		</spawn>
 		<!-- Baranath Elite Combatant -->
 		<spawn npc_id="233591">
@@ -263,43 +145,43 @@
 			<spot x="392.354" y="404.081" z="197.709" h="96"/>
 			<spot x="440.343" y="439.226" z="197.719" h="84"/>
 		</spawn>
-		<!-- Baranath Lifeender -->
-		<spawn npc_id="233778">
-			<spot x="613.699" y="406.509" z="197.691" h="109"/>
+		<!-- Baranath Elite Healer -->
+		<spawn npc_id="233769">
+			<spot x="384.236" y="424.444" z="197.719" h="65"/>
+			<spot x="385.385" y="438.913" z="197.694" h="119"/>
+			<spot x="438.051" y="424.876" z="197.694" h="76"/>
 		</spawn>
-		<!-- Baranath Lifeender -->
-		<spawn npc_id="233762">
-			<spot x="658.055" y="582.661" z="191.162" h="82"/>
-			<spot x="664.806" y="437.775" z="197.701" h="8"/>
+		<!-- Baranath Elite Healer -->
+		<spawn npc_id="233594">
+			<spot x="411.11" y="217.15" z="190.18983" h="100" walker_id="E5094859E60C54A52CEAC8DCBF61B8BE79B929AE"/>
+			<spot x="432.962" y="258.825" z="191.79" h="54"/>
+			<spot x="503.5" y="215.28" z="179.14668" h="51" walker_id="2C49C6764DCF21DF3CE50E6E47F21A9906C978B0"/>
+			<spot x="552.192" y="199.631" z="179.147" h="46"/>
 		</spawn>
-		<!-- Baranath Lifeender -->
-		<spawn npc_id="233607">
-			<spot x="626.624" y="654.702" z="185.276" h="39"/>
-			<spot x="633.269" y="560.584" z="189.766" h="10"/>
-			<spot x="634.954" y="465.951" z="196.791" h="107"/>
-			<spot x="653.275" y="244.087" z="191.766" h="109"/>
-			<spot x="656.161" y="565.757" z="191.202" h="18"/>
+		<!-- Baranath Elite Hospitaller -->
+		<spawn npc_id="233757">
+			<spot x="430.201" y="596.745" z="191.242" h="67"/>
+			<spot x="432.951" y="261.394" z="191.79" h="14"/>
 		</spawn>
-		<!-- Baranath Marauder -->
-		<spawn npc_id="233779">
-			<spot x="658.954" y="456.933" z="197.691" h="44"/>
+		<!-- Baranath Elite Hospitaller -->
+		<spawn npc_id="233773">
+			<spot x="433.434" y="406.218" z="197.709" h="100"/>
 		</spawn>
-		<!-- Baranath Marauder -->
-		<spawn npc_id="233763">
-			<spot x="634.256" y="482.43" z="194.437" h="95"/>
+		<!-- Baranath Elite Juggernaut -->
+		<spawn npc_id="233754">
+			<spot x="434.992" y="457.147" z="197.709" h="18"/>
 		</spawn>
-		<!-- Baranath Marauder -->
-		<spawn npc_id="233608">
-			<spot x="617.228" y="571.812" z="191.174" h="73"/>
-			<spot x="621.751" y="275.998" z="191.727" h="46"/>
-			<spot x="624.567" y="653.535" z="185.276" h="52"/>
-			<spot x="632.743" y="540.547" z="189.79" h="16"/>
-			<spot x="636.344" y="604.173" z="189.766" h="39"/>
-			<spot x="654.484" y="564.238" z="191.202" h="112"/>
+		<!-- Baranath Elite Juggernaut -->
+		<spawn npc_id="233770">
+			<spot x="386.952" y="251.509" z="191.806" h="86"/>
 		</spawn>
-		<!-- Baranath Patrol Legate -->
-		<spawn npc_id="233601">
-			<spot x="433.876" y="667.444" z="185.542" h="17"/>
+		<!-- Baranath Elite Master-at-Arms -->
+		<spawn npc_id="233599">
+			<spot x="428.4878" y="276.7921" z="191.757" h="73" />
+		</spawn>
+		<!-- Baranath Elite Medico -->
+		<spawn npc_id="233602">
+			<spot x="393.7971" y="580.8381" z="191.1588" />
 		</spawn>
 		<!-- Baranath Elite Patrol -->
 		<spawn npc_id="233593">
@@ -312,23 +194,171 @@
 			<spot x="543.36" y="229.71" z="179.17125" h="17" walker_id="A4ED716EDD8E396D8868AA7C42D225E45D0161CC"/>
 		</spawn>
 		<!-- Baranath Elite Patrol -->
+		<spawn npc_id="233752">
+			<spot x="431.416" y="414.044" z="197.135" h="93"/>
+		</spawn>
+		<!-- Baranath Elite Patrol -->
 		<spawn npc_id="233768">
 			<spot x="438.378" y="441.357" z="197.719" h="81"/>
 		</spawn>
-		<!-- Baranath Elite Patrol -->
-		<spawn npc_id="233752">
-			<spot x="431.416" y="414.044" z="197.135" h="93"/>
+		<!-- Baranath Elite Praetor -->
+		<spawn npc_id="233615">
+			<spot x="501.036" y="337.234" z="180.327" h="1"/>
+			<spot x="505.264" y="311.765" z="180.799" h="97"/>
+			<spot x="512.425" y="448.158" z="180.889" h="7"/>
+			<spot x="530.001" y="409.441" z="179.52" h="59"/>
+			<spot x="541.632" y="351.917" z="179.912" h="70"/>
+			<spot x="543.225" y="413.917" z="180.912" h="48"/>
+		</spawn>
+		<!-- Baranath Elite Skullcrusher -->
+		<spawn npc_id="233596">
+			<spot x="395.2" y="568.071" z="191.202" h="16"/>
+			<spot x="395.209" y="566.013" z="191.202" h="32"/>
+			<spot x="397.463" y="418.453" z="196.791" h="18"/>
+			<spot x="412.11" y="362.96" z="196.47536" h="30" walker_id="E4FC6AF0B64DA29035F7246F1984BAB6FDCCABB3"/>
+			<spot x="430.182" y="599.112" z="191.242" h="50"/>
+			<spot x="453.08" y="695.57" z="183.97017" h="31" walker_id="F26D882DCEC7E4877DE26F0566D852BF54BD902B"/>
+		</spawn>
+		<!-- Baranath Elite Skullcrusher -->
+		<spawn npc_id="233755">
+			<spot x="397.894" y="597.98" z="191.202" h="1"/>
+			<spot x="426.543" y="433.621" z="196.791" h="11"/>
+		</spawn>
+		<!-- Baranath Elite Skullcrusher -->
+		<spawn npc_id="233771">
+			<spot x="425.978" y="242.597" z="191.741" h="4"/>
+		</spawn>
+		<!-- Baranath Elite Skirmisher -->
+		<spawn npc_id="233756">
+			<spot x="394.984" y="597.99" z="191.202" h="117"/>
+			<spot x="400.919" y="259.971" z="190.677" h="60"/>
+		</spawn>
+		<!-- Baranath Elite Skirmisher -->
+		<spawn npc_id="233772">
+			<spot x="391.836" y="458.165" z="197.709" h="82"/>
+		</spawn>
+		<!-- Baranath Elite Trooper -->
+		<spawn npc_id="233592">
+			<spot x="395.344" y="450.693" z="197.206" h="106"/>
+			<spot x="398.288" y="261.306" z="190.688" h="65"/>
+			<spot x="406.598" y="217.529" z="190.204" h="58"/>
+			<spot x="415.381" y="280.732" z="190.362" h="98"/>
+			<spot x="415.87" y="250.27" z="190.36212" h="76" walker_id="D4BB9923AC2339CA57F4DA543D21439911116524"/>
+			<spot x="418.93" y="408.44" z="196.79149" h="60" walker_id="F0BF35A11460CBF414313918137FF445411CC6C1"/>
+			<spot x="426.567" y="430.817" z="196.791" h="61"/>
+			<spot x="522.91" y="236.988" z="179.147" h="98"/>
+			<spot x="528.51" y="236.971" z="179.147" h="60"/>
+			<spot x="536.23" y="188.0" z="179.14728" h="14" walker_id="1D4B3022AC739BA477B3FE3084C9F5520FA9B9A1"/>
+		</spawn>
+		<!-- Baranath Fearblade -->
+		<spawn npc_id="233624">
+			<spot x="501.5747" y="362.2985" z="180.7989" h="105" />
+		</spawn>
+		<!-- Baranath Finder -->
+		<spawn npc_id="233616">
+			<spot x="517.4" y="343.02" z="179.91246" h="110" walker_id="9E8AEF091081723243FB8EB20651F2D581884A09"/>
+			<spot x="522.849" y="301.284" z="181.119" h="92"/>
+			<spot x="529.919" y="301.335" z="181.119" h="70"/>
+		</spawn>
+		<!-- Baranath Fleshmender -->
+		<spawn npc_id="233606">
+			<spot x="612.375" y="451.605" z="197.206" h="105"/>
+			<spot x="630.372" y="218.575" z="190.156" h="97"/>
+			<spot x="651.805" y="242.731" z="191.752" h="106"/>
+		</spawn>
+		<!-- Baranath Fleshmender -->
+		<spawn npc_id="233777">
+			<spot x="657.194" y="458.765" z="197.691" h="102"/>
+			<spot x="663.771" y="424.273" z="197.676" h="68"/>
+		</spawn>
+		<!-- Baranath High Priest -->
+		<spawn npc_id="233614">
+			<spot x="613.0815" y="260.8197" z="191.7882" />
+		</spawn>
+		<!-- Baranath Hospitaller -->
+		<spawn npc_id="233598">
+			<spot x="400.63" y="455.24" z="196.79149" h="56" walker_id="4B76477A9D834555C3B4F15FBDE94019748AA228"/>
+			<spot x="408.476" y="540.809" z="189.79" h="114"/>
+			<spot x="418.461" y="563.056" z="189.766" h="85"/>
+			<spot x="427.799" y="652.107" z="185.244" h="21"/>
+		</spawn>
+		<!-- Baranath Implacable -->
+		<spawn npc_id="233623">
+			<spot x="526.6149" y="565.672" z="177.9525" h="89" />
+		</spawn>
+		<!-- Baranath Juggernaut -->
+		<spawn npc_id="233595">
+			<spot x="405.055" y="280.878" z="190.362" h="41"/>
+			<spot x="410.48" y="242.19" z="190.36212" h="117" walker_id="9001C5E509C5ADD8943D50011ECA5891C0A33B09"/>
+			<spot x="413.871" y="589.297" z="189.766" h="37" walker_id="F0D41D4BAC3375DD101FA58B907F133547663964"/>
+			<spot x="416.462" y="604.486" z="189.766" h="38"/>
+			<spot x="418.962" y="540.787" z="189.79" h="117"/>
+			<spot x="423.733" y="654.491" z="185.245" h="15"/>
+			<spot x="430.523" y="567.154" z="191.202" h="68"/>
+		</spawn>
+		<!-- Baranath Justicar -->
+		<spawn npc_id="233610">
+			<spot x="598.35" y="695.74" z="184.01733" h="97" walker_id="587CD26C7A662EA3DA7A9B64AC27C3DE164B6364"/>
+			<spot x="626.529" y="583.275" z="190.089" h="15"/>
+			<spot x="639.054" y="281.284" z="190.362" h="40"/>
+			<spot x="643.316" y="540.466" z="189.79" h="65"/>
+		</spawn>
+		<!-- Baranath Justicar -->
+		<spawn npc_id="233765">
+			<spot x="658.107" y="580.013" z="191.163" h="104"/>
+		</spawn>
+		<!-- Baranath Justicar -->
+		<spawn npc_id="233781">
+			<spot x="608.486" y="436.98" z="197.676" h="107"/>
+		</spawn>
+		<!-- Baranath Lifeender -->
+		<spawn npc_id="233607">
+			<spot x="626.624" y="654.702" z="185.276" h="39"/>
+			<spot x="633.269" y="560.584" z="189.766" h="10"/>
+			<spot x="634.954" y="465.951" z="196.791" h="107"/>
+			<spot x="653.275" y="244.087" z="191.766" h="109"/>
+			<spot x="656.161" y="565.757" z="191.202" h="18"/>
+		</spawn>
+		<!-- Baranath Lifeender -->
+		<spawn npc_id="233762">
+			<spot x="658.055" y="582.661" z="191.162" h="82"/>
+			<spot x="664.806" y="437.775" z="197.701" h="8"/>
+		</spawn>
+		<!-- Baranath Lifeender -->
+		<spawn npc_id="233778">
+			<spot x="613.699" y="406.509" z="197.691" h="109"/>
+		</spawn>
+		<!-- Baranath Magus -->
+		<spawn npc_id="233617">
+			<spot x="521.116" y="278.594" z="180.289" h="15"/>
+			<spot x="526.25" y="315.08" z="179.91246" h="79" walker_id="0A90D60C999C62283D35B09603958BB09F9CD143"/>
+			<spot x="544.604" y="415.199" z="180.926" h="44"/>
+			<spot x="546.954" y="311.839" z="180.799" h="113"/>
+		</spawn>
+		<!-- Baranath Marauder -->
+		<spawn npc_id="233608">
+			<spot x="617.228" y="571.812" z="191.174" h="73"/>
+			<spot x="621.751" y="275.998" z="191.727" h="46"/>
+			<spot x="624.567" y="653.535" z="185.276" h="52"/>
+			<spot x="632.743" y="540.547" z="189.79" h="16"/>
+			<spot x="636.344" y="604.173" z="189.766" h="39"/>
+			<spot x="654.484" y="564.238" z="191.202" h="112"/>
+		</spawn>
+		<!-- Baranath Marauder -->
+		<spawn npc_id="233763">
+			<spot x="634.256" y="482.43" z="194.437" h="95"/>
+		</spawn>
+		<!-- Baranath Marauder -->
+		<spawn npc_id="233779">
+			<spot x="658.954" y="456.933" z="197.691" h="44"/>
+		</spawn>
+		<!-- Baranath Patrol Legate -->
+		<spawn npc_id="233601">
+			<spot x="433.876" y="667.444" z="185.542" h="17"/>
 		</spawn>
 		<!-- Baranath Sartip -->
 		<spawn npc_id="233625">
 			<spot x="526.103" y="631.854" z="180.03" h="17"/>
-		</spawn>
-		<!-- Baranath Curatus -->
-		<spawn npc_id="233618">
-			<spot x="511.039" y="351.957" z="179.912" h="9"/>
-			<spot x="522.457" y="409.272" z="179.52" h="43"/>
-			<spot x="530.575" y="281.585" z="180.429" h="111"/>
-			<spot x="551.661" y="337.29" z="180.327" h="21"/>
 		</spawn>
 		<!-- Baranath Scourge -->
 		<spawn npc_id="233603">
@@ -360,33 +390,6 @@
 			<spot x="418.333" y="560.701" z="189.766" h="28"/>
 			<spot x="420.564" y="587.347" z="190.071" h="62"/>
 		</spawn>
-		<!-- Baranath Elite Skirmisher -->
-		<spawn npc_id="233772">
-			<spot x="391.836" y="458.165" z="197.709" h="82"/>
-		</spawn>
-		<!-- Baranath Elite Skirmisher -->
-		<spawn npc_id="233756">
-			<spot x="394.984" y="597.99" z="191.202" h="117"/>
-			<spot x="400.919" y="259.971" z="190.677" h="60"/>
-		</spawn>
-		<!-- Baranath Elite Skullcrusher -->
-		<spawn npc_id="233596">
-			<spot x="395.2" y="568.071" z="191.202" h="16"/>
-			<spot x="395.209" y="566.013" z="191.202" h="32"/>
-			<spot x="397.463" y="418.453" z="196.791" h="18"/>
-			<spot x="412.11" y="362.96" z="196.47536" h="30" walker_id="E4FC6AF0B64DA29035F7246F1984BAB6FDCCABB3"/>
-			<spot x="430.182" y="599.112" z="191.242" h="50"/>
-			<spot x="453.08" y="695.57" z="183.97017" h="31" walker_id="F26D882DCEC7E4877DE26F0566D852BF54BD902B"/>
-		</spawn>
-		<!-- Baranath Elite Skullcrusher -->
-		<spawn npc_id="233771">
-			<spot x="425.978" y="242.597" z="191.741" h="4"/>
-		</spawn>
-		<!-- Baranath Elite Skullcrusher -->
-		<spawn npc_id="233755">
-			<spot x="397.894" y="597.98" z="191.202" h="1"/>
-			<spot x="426.543" y="433.621" z="196.791" h="11"/>
-		</spawn>
 		<!-- Baranath Slicer -->
 		<spawn npc_id="233620">
 			<spot x="503.548" y="312.984" z="180.799" h="117"/>
@@ -405,43 +408,48 @@
 			<spot x="553.98" y="564.884" z="177.041" h="57"/>
 			<spot x="553.99" y="561.807" z="177.041" h="80"/>
 		</spawn>
-		<!-- Baranath Conjurer -->
-		<spawn npc_id="233776">
-			<spot x="617.889" y="246.604" z="191.742" h="15"/>
-		</spawn>
-		<!-- Baranath Conjurer -->
-		<spawn npc_id="233605">
-			<spot x="582.488" y="188.025" z="179.536" h="44"/>
-			<spot x="620.155" y="274.754" z="191.742" h="37"/>
-			<spot x="634.89" y="252.0" z="190.36212" h="67" walker_id="11DA9D109EF42CA85AEEADEEA085D18ED0DD84D0"/>
-			<spot x="658.527" y="258.576" z="191.801" h="20"/>
-			<spot x="664.796" y="440.222" z="197.701" h="74"/>
-		</spawn>
 		<!-- Baranath Sorcerer -->
 		<spawn npc_id="233760">
 			<spot x="623.251" y="419.48" z="196.791" h="93"/>
-		</spawn>
-		<!-- Baranath Elite Trooper -->
-		<spawn npc_id="233592">
-			<spot x="395.344" y="450.693" z="197.206" h="106"/>
-			<spot x="398.288" y="261.306" z="190.688" h="65"/>
-			<spot x="406.598" y="217.529" z="190.204" h="58"/>
-			<spot x="415.381" y="280.732" z="190.362" h="98"/>
-			<spot x="415.87" y="250.27" z="190.36212" h="76" walker_id="D4BB9923AC2339CA57F4DA543D21439911116524"/>
-			<spot x="418.93" y="408.44" z="196.79149" h="60" walker_id="F0BF35A11460CBF414313918137FF445411CC6C1"/>
-			<spot x="426.567" y="430.817" z="196.791" h="61"/>
-			<spot x="522.91" y="236.988" z="179.147" h="98"/>
-			<spot x="528.51" y="236.971" z="179.147" h="60"/>
-			<spot x="536.23" y="188.0" z="179.14728" h="14" walker_id="1D4B3022AC739BA477B3FE3084C9F5520FA9B9A1"/>
 		</spawn>
 		<!-- Baranath Trooper -->
 		<spawn npc_id="233767">
 			<spot x="393.09" y="432.41" z="196.79149" h="71" walker_id="163F8F7BC168A4C1D8C4D4582F6D32EF198EF2F1"/>
 			<spot x="440.511" y="422.54" z="197.694" h="75"/>
 		</spawn>
-		<!-- Ancient Treasure Box -->
-		<spawn npc_id="702291">
-			<spot x="576.4634" y="837.3374" z="199.3736" h="56" />
+		<!-- Ebonlord Arknamium -->
+		<spawn npc_id="233631">
+			<spot x="527.3" y="729.667" z="192.52" h="79"/>
+		</spawn>
+		<!-- Enraged Krotan Lord -->
+		<spawn npc_id="233633">
+			<spot x="526.401" y="845.38" z="199.395" h="28"/>
+		</spawn>
+		<!-- Huge Abyss Statue -->
+		<spawn npc_id="235538">
+			<spot x="618" y="459" z="197.6905" h="90" />
+			<spot x="546" y="365" z="180.7989" h="90" />
+		</spawn>
+		<!-- IDAB1_SensoryArea_Timer_F -->
+		<spawn npc_id="206095">
+			<spot x="528.181" y="767.973" z="199.570"/>
+		</spawn>
+		<!-- Mossy Gate -->
+		<spawn npc_id="700459">
+			<spot x="527.4063" y="106.0371" z="175.9239" static_id="4" />
+		</spawn>
+		<!-- Solid Abyss Statue -->
+		<spawn npc_id="235537">
+			<spot x="518" y="565" z="177.2951" h="90" />
+			<spot x="649" y="277" z="191.7261" h="90" />
+		</spawn>
+		<!-- Small Abyss Statue -->
+		<spawn npc_id="235536">
+			<spot x="425" y="277" z="191.733" h="90" />
+			<spot x="431" y="458" z="197.7089" h="90" />
+			<spot x="396" y="594" z="191.2018" h="90" />
+			<spot x="626" y="599" z="191.118" h="90" />
+			<spot x="546" y="436" z="180.9103" h="90" />
 		</spawn>
 	</spawn_map>
 </spawns>

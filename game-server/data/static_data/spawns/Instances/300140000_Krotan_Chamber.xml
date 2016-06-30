@@ -63,7 +63,7 @@
 		</spawn>
 		<!-- IDAB1_SensoryArea_Timer_F -->
 		<spawn npc_id="206095">
-			<spot x="528.2" y="759.52" z="200" h="106"/>
+			<spot x="528.181" y="767.973" z="199.570"/>
 		</spawn>
 		<!-- Krotan Barracks Artifact -->
 		<spawn npc_id="215413">

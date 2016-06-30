@@ -1990,20 +1990,72 @@
 			<drop item_id="164000290" name="Danuar Cannonball" chance="100" no_reduce="true" />
 		</drop_group>
 	</npc_drop>
+	<!-- Additional Chest for all Lv65 Inner Abyss Instances -->
+	<npc_drop npc_id="832865" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053450" name="Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
+	</npc_drop>
 	<!-- Krotan Barracks -->
 	<npc_drop npc_id="702288" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
-			<drop item_id="188052743" name="Manastone Box" chance="15" />
-			<drop item_id="188052744" name="Ancient Relic Box" chance="15" />
+			<drop item_id="188052920" name="Manastone Box" chance="50" each_member="true" />
+			<drop item_id="188052921" name="Ancient Relic Box" chance="50" each_member="true" />
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Food">
-			<drop item_id="160002421" name="Pepento Salad" chance="20" />
-			<drop item_id="160003586" name="Refreshing Rava Juice" chance="20" />
+			<drop item_id="160002418" name="Fried Kucien" chance="25" />
+			<drop item_id="160002421" name="Pepento Salad" chance="25" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="25" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="25" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="25" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="25" />
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702289" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052919" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="10" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="5" />
+		</drop_group>
+	</npc_drop>
+	<!-- Krotan Barracks (Legion) -->
+	<npc_drop npc_id="702290" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
+			<drop item_id="188052743" name="Manastone Box" chance="55" each_member="true" />
+			<drop item_id="188052744" name="Ancient Relic Box" chance="55" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="160002418" name="Fried Kucien" chance="30" />
+			<drop item_id="160002421" name="Pepento Salad" chance="30" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="30" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="30" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="30" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="30" />
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="702291" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
-			<drop item_id="188052742" name="Fortress Supplies" chance="100" />
+			<drop item_id="188052742" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="15" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="10" />
 		</drop_group>
 	</npc_drop>
 	<!-- Krotan Chamber -->
@@ -2122,18 +2174,63 @@
 	<!-- Kysis Barracks -->
 	<npc_drop npc_id="702292" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
-			<drop item_id="188052743" name="Manastone Box" chance="15" />
-			<drop item_id="188052744" name="Ancient Relic Box" chance="15" />
+			<drop item_id="188052920" name="Manastone Box" chance="50" each_member="true" />
+			<drop item_id="188052921" name="Ancient Relic Box" chance="50" each_member="true" />
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Food">
-			<drop item_id="160002428" name="Broiled Spicy Pepento" chance="20" />
-			<drop item_id="160002421" name="Pepento Salad" chance="20" />
-			<drop item_id="160003586" name="Refreshing Rava Juice" chance="20" />
+			<drop item_id="160002418" name="Fried Kucien" chance="25" />
+			<drop item_id="160002421" name="Pepento Salad" chance="25" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="25" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="25" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="25" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="25" />
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702293" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052919" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="10" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="5" />
+		</drop_group>
+	</npc_drop>
+	<!-- Kysis Barracks (Legion) -->
+	<npc_drop npc_id="702294" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
+			<drop item_id="188052743" name="Manastone Box" chance="55" each_member="true" />
+			<drop item_id="188052744" name="Ancient Relic Box" chance="55" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="160002418" name="Fried Kucien" chance="30" />
+			<drop item_id="160002421" name="Pepento Salad" chance="30" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="30" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="30" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="30" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="30" />
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="702295" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
-			<drop item_id="188052742" name="Fortress Supplies" chance="100" />
+			<drop item_id="188052742" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="15" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="10" />
 		</drop_group>
 	</npc_drop>
 	<!-- Kysis Chamber -->
@@ -2468,18 +2565,63 @@
 	<!-- Miren Barracks -->
 	<npc_drop npc_id="702296" replace_type="FULL">
 		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
-			<drop item_id="188052743" name="Manastone Box" chance="15" />
-			<drop item_id="188052744" name="Ancient Relic Box" chance="15" />
+			<drop item_id="188052920" name="Manastone Box" chance="50" each_member="true" />
+			<drop item_id="188052921" name="Ancient Relic Box" chance="50" each_member="true" />
 		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Food">
-			<drop item_id="160002418" name="Fried Kucien" chance="20" />
-			<drop item_id="160002421" name="Pepento Salad" chance="20" />
-			<drop item_id="160003586" name="Refreshing Rava Juice" chance="20" />
+			<drop item_id="160002418" name="Fried Kucien" chance="25" />
+			<drop item_id="160002421" name="Pepento Salad" chance="25" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="25" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="25" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="25" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="25" />
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="702297" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
+			<drop item_id="188052919" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="10" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="5" />
+		</drop_group>
+	</npc_drop>
+	<!-- Miren Barracks (Legion) -->
+	<npc_drop npc_id="702298" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Boxes">
+			<drop item_id="188052743" name="Manastone Box" chance="55" each_member="true" />
+			<drop item_id="188052744" name="Ancient Relic Box" chance="55" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="160002418" name="Fried Kucien" chance="30" />
+			<drop item_id="160002421" name="Pepento Salad" chance="30" />
+			<drop item_id="160003586" name="Refreshing Rava Juice" chance="30" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Food">
+			<drop item_id="162000122" name="Superior Life Serum" chance="30" />
+			<drop item_id="162000123" name="Superior Mana Serum" chance="30" />
+			<drop item_id="162000124" name="Superior Recovery Serum" chance="30" />
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="702299" replace_type="FULL">
+		<drop_group race="PC_ALL" use_category="true" name="Named Box">
+			<drop item_id="188053451" name="Ornate Abyss Fortress Box" chance="100" each_member="true" />
+		</drop_group>
 		<drop_group race="PC_ALL" use_category="true" name="Named Supply">
-			<drop item_id="188052742" name="Fortress Supplies" chance="100" />
+			<drop item_id="188052742" name="Fortress Supplies" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Serum Box">
+			<drop item_id="188053083" name="Tempering Solution Chest" chance="15" />
+		</drop_group>
+		<drop_group race="PC_ALL" use_category="true" name="Named Plume Box">
+			<drop item_id="188053295" name="Empyrean Plume Chest" chance="10" />
 		</drop_group>
 	</npc_drop>
 	<!-- Miren Chamber -->

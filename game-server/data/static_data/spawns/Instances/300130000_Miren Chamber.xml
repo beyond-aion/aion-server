@@ -67,7 +67,7 @@
 		</spawn>
 		<!-- IDAB1_SensoryArea_Timer_H -->
 		<spawn npc_id="206097">
-			<spot x="528.199" y="759.52" z="200" h="60"/>
+			<spot x="528.181" y="767.973" z="199.570"/>
 		</spawn>
 		<!-- Miren Chamber Artifact -->
 		<spawn npc_id="215415">
