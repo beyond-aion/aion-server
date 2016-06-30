@@ -321,13 +321,13 @@ public abstract class WorldMapInstance {
 	}
 
 	/**
-	 * Check player is in instance
+	 * Gets the player with the given object id in this world map instance
 	 * 
 	 * @param objId
-	 * @return
+	 * @return Player or null if there is no player with this id on the map instance
 	 */
-	public boolean isInInstance(int objId) {
-		return worldMapPlayers.containsKey(objId);
+	public Player getPlayer(int objId) {
+		return worldMapPlayers.get(objId);
 	}
 
 	/**
@@ -428,15 +428,6 @@ public abstract class WorldMapInstance {
 
 	public float[] getStartPos() {
 		return startPos;
-	}
-
-	public Player getPlayer(Integer object) {
-		for (Player player : worldMapPlayers.values()) {
-			if (object.equals(player.getObjectId())) {
-				return player;
-			}
-		}
-		return null;
 	}
 
 	/**
