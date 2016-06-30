@@ -3959,7 +3959,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony Event" start="2016-07-01T00:00:00+02:00" end="2016-07-17T23:59:59+02:00">
+	<event name="Legendary Symphony Event" start="2016-07-01T00:00:00+02:00" end="2016-07-20T23:59:59+02:00">
 		<quests>
 			<maintainable>80673;80674;80675;80676;80677;80678;80679;80680;80681;80682;80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
 		</quests>
@@ -3999,6 +3999,8 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
+	</event>
+	<event name="Legendary Symphony Event Drop" start="2016-07-01T00:00:00+02:00" end="2016-07-17T23:59:59+02:00">
 		<event_drops>
 			<!-- Green Garrisons -->
 			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40" fixed_chance="true">
