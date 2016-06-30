@@ -2,10 +2,7 @@ package quest.ascension;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -17,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -33,6 +29,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import javolution.util.FastTable;
+
 /**
  * Talk with Pernos (790001). Go to the island at the center of Cliona Lake (CLIONA_LAKE_210010000) and fill up the bottle Pernos gave you
  * (182200007). Meet Daminu (730008) and obtain Daminu's Essence (182200009). Talk with Pernos. Explore your lost past (310020000, 52, 174, 229).
@@ -43,10 +41,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1006Ascension extends QuestHandler {
 
-	private final static int questId = 1006;
-
 	public _1006Ascension() {
-		super(questId);
+		super(1006);
 	}
 
 	@Override
@@ -262,13 +258,10 @@ public class _1006Ascension extends QuestHandler {
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() != QuestStatus.START) {
+		if (qs != null && qs.getStatus() == QuestStatus.START && player.getWorldId() == 310020000) {
 			int var = qs.getQuestVars().getQuestVars();
-			if (var == 4 || (var == 5 && player.getPlayerClass().isStartingClass()) || (var >= 50 && var <= 55)) {
-				qs.setQuestVar(3);
-				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
-			}
+			if (var > 3)
+				changeQuestStep(env, var, 3);
 		}
 		return false;
 	}
@@ -279,16 +272,10 @@ public class _1006Ascension extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
-			if (var == 4 || (var == 5 && player.getPlayerClass().isStartingClass()) || (var >= 50 && var <= 55) || var == 99) {
-				if (player.getWorldId() != 310020000) {
-					qs.setQuestVar(3);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
-				} else {
-					PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
-					return true;
-				}
-			}
+			if (player.getWorldId() == 310020000)
+				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
+			else if (var > 3 && var != 5) // 5 is class selection, quest should not reset anymore after you killed orissan
+				changeQuestStep(env, var, 3);
 		}
 		return false;
 	}

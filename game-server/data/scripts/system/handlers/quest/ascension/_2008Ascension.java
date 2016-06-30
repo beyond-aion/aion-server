@@ -3,7 +3,6 @@ package quest.ascension;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.actions.NpcActions;
@@ -14,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -276,17 +274,10 @@ public class _2008Ascension extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
-			if (var == 5 || (var == 6 && player.getPlayerClass().isStartingClass()) || (var >= 50 && var <= 55) || var == 99) {
-				if (player.getWorldId() != 320020000) {
-					qs.setQuestVar(4);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-						.getName()));
-				} else {
-					PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
-					return true;
-				}
-			}
+			if (player.getWorldId() == 320020000)
+				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
+			else if (var > 4 && var != 6) // 6 is class selection, quest should not reset anymore after you killed hellion
+				changeQuestStep(env, var, 4);
 		}
 		return false;
 	}
@@ -303,16 +294,10 @@ public class _2008Ascension extends QuestHandler {
 	public boolean onDieEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-		if (qs.getStatus() != QuestStatus.START)
-			return false;
-		int var = qs.getQuestVars().getQuestVars();
-		if (var == 5 || (var == 6 && player.getPlayerClass().isStartingClass()) || (var >= 51 && var <= 53)) {
-			qs.setQuestVar(4);
-			updateQuestStatus(env);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-				.getName()));
+		if (qs != null && qs.getStatus() == QuestStatus.START && player.getWorldId() == 320020000) {
+			int var = qs.getQuestVars().getQuestVars();
+			if (var > 4)
+				changeQuestStep(env, var, 4);
 		}
 		return false;
 	}

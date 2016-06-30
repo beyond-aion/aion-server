@@ -157,6 +157,10 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			player.getController().updateNearbyQuests();
 	}
 
+	public void changeQuestStep(QuestEnv env, int oldStep, int newStep) {
+		changeQuestStep(env, oldStep, newStep, false, 0);
+	}
+
 	public void changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward) {
 		changeQuestStep(env, step, nextStep, reward, 0);
 	}
@@ -169,6 +173,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 				qs.setStatus(QuestStatus.REWARD);
 			} else { // quest can be rolled back if nextStep < step
 				if (nextStep != step) {
+					if (step > nextStep && qs.getStatus() == QuestStatus.START)
+						PacketSendUtility.sendPacket(env.getPlayer(), SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
 					qs.setQuestVarById(varNum, nextStep);
 				}
 			}

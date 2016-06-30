@@ -1,12 +1,10 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -244,9 +242,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var >= 95 && var <= 99) {
 				removeStigma(env);
-				qs.setQuestVar(4);
-				updateQuestStatus(env);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				changeQuestStep(env, var, 4);
 				return true;
 			}
 		}
@@ -262,9 +258,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 			if (player.getWorldId() != 320070000) {
 				if (var >= 95 && var <= 99) {
 					removeStigma(env);
-					qs.setQuestVar(4);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					changeQuestStep(env, var, 4);
 					return true;
 				}
 				else if (var == 9) {

@@ -1,13 +1,11 @@
 package quest.hidden_truth;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -168,8 +166,6 @@ public class _1099AnImportantChoice extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var > 1) {
 				changeQuestStep(env, var, 1, false); // 1
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-					.getName()));
 				return true;
 			}
 		}
@@ -185,8 +181,6 @@ public class _1099AnImportantChoice extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				if (var > 1) {
 					changeQuestStep(env, var, 1, false); // 1
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId)
-						.getName()));
 					return true;
 				}
 			}
