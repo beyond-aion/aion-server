@@ -810,6 +810,22 @@ CREATE TABLE `player_veteran_rewards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Table structure for `player_web_rewards`
+-- ----------------------------
+DROP TABLE IF EXISTS `player_web_rewards`;
+CREATE TABLE `player_web_rewards` (
+  `entry_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` int(11) NOT NULL,
+  `item_id` int(9) NOT NULL,
+  `item_count` bigint(20) NOT NULL DEFAULT '1',
+  `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `received` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`entry_id`),
+  KEY `item_owner` (`player_id`),
+  CONSTRAINT `player_web_rewards_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for `players`
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `players` (
@@ -938,20 +954,4 @@ CREATE TABLE IF NOT EXISTS `towns` (
   `race` enum('ELYOS','ASMODIANS') NOT NULL,
   `level_up_date` timestamp NOT NULL DEFAULT '1970-01-01 07:00:01',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for `web_reward`
--- ----------------------------
-CREATE TABLE IF NOT EXISTS `web_reward` (
-  `unique` int(11) NOT NULL AUTO_INCREMENT,
-  `item_owner` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `item_count` decimal(20,0) NOT NULL DEFAULT '1',
-  `rewarded` tinyint(1) NOT NULL DEFAULT '0',
-  `added` varchar(70) DEFAULT '',
-  `received` varchar(70) DEFAULT '',
-  PRIMARY KEY (`unique`),
-  KEY `item_owner` (`item_owner`),
-  CONSTRAINT `web_reward_ibfk_1` FOREIGN KEY (`item_owner`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

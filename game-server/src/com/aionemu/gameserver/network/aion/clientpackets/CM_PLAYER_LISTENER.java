@@ -6,13 +6,12 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.reward.WebRewardService;
 
 /**
+ * This packet is sent every five minutes by the client.
+ * 
  * @author ginho1
  */
 public class CM_PLAYER_LISTENER extends AionClientPacket {
 
-	/*
-	 * This CM is send every five minutes by client.
-	 */
 	public CM_PLAYER_LISTENER(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
@@ -24,6 +23,6 @@ public class CM_PLAYER_LISTENER extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		if (GSConfig.ENABLE_WEB_REWARDS)
-			WebRewardService.getInstance().verify(getConnection().getActivePlayer());
+			WebRewardService.getInstance().sendAvailableRewards(getConnection().getActivePlayer());
 	}
 }

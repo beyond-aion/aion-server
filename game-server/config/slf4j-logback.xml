@@ -167,6 +167,12 @@
 			<Pattern>%date %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_webrewards" class="ch.qos.logback.core.FileAppender">
+		<file>${logFolder}/webrewards.log</file>
+		<encoder>
+			<Pattern>%date %message%n</Pattern>
+		</encoder>
+	</appender>
 	<appender name="app_auction" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/auction.log</file>
 		<encoder>
@@ -220,6 +226,9 @@
 	</logger>
 	<logger name="SYSMAIL_LOG">
 		<appender-ref ref="app_sysmail" />
+	</logger>
+	<logger name="WEB_REWARDS_LOG" additivity="false">
+		<appender-ref ref="app_webrewards" />
 	</logger>
 	<logger name="HOUSE_AUCTION_LOG">
 		<appender-ref ref="app_auction" />

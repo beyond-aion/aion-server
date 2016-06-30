@@ -606,6 +606,9 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		this.worldOwnerId = worldOwnerId;
 	}
 
+	/**
+	 * @return True, if the player has a main class and completed the ascension quest (gets updated on login and quest completion).
+	 */
 	public boolean isDaeva() {
 		return isDaeva;
 	}

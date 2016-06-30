@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import javolution.util.FastTable;
+import java.util.List;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
@@ -15,7 +15,17 @@ public abstract class RewardServiceDAO implements DAO {
 		return RewardServiceDAO.class.getName();
 	}
 
-	public abstract FastTable<RewardEntryItem> getAvailable(int playerId);
+	/**
+	 * @param playerId
+	 * @return Rewards that have not yet been added to the player.
+	 */
+	public abstract List<RewardEntryItem> loadUnreceived(int playerId);
 
-	public abstract void uncheckAvailable(FastTable<Integer> ids);
+	/**
+	 * Sets all given reward entries as received, so the player cannot receive it again.
+	 * 
+	 * @param entryIds
+	 * @param timeReceived
+	 */
+	public abstract void storeReceived(List<Integer> entryIds, long timeReceived);
 }

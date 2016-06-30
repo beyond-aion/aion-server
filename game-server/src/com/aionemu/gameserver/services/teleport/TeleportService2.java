@@ -7,16 +7,19 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
+import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -40,6 +43,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_LOC;
@@ -522,5 +526,33 @@ public class TeleportService2 {
 			moveToBindLocation(player);
 		else
 			teleportTo(player, (int) pos[0], (int) pos[1], (float) pos[2], (float) pos[3], (float) pos[4], (byte) pos[5], TeleportAnimation.FADE_OUT_BEAM);
+	}
+
+	/**
+	 * Sends a teleport request to the player. He will only be teleported to the Npc if he accepts the request.
+	 * 
+	 * @param player
+	 * @param npcId
+	 * @return True, if the request was sent. False if he already had an active teleport request.
+	 */
+	public static boolean sendTeleportRequest(Player player, int npcId) {
+		int questionMsgId = 905097; // You will be teleported to %0 Continue?
+		RequestResponseHandler handler = new RequestResponseHandler(null) {
+
+			@Override
+			public void denyRequest(Creature requester, Player responder) {
+			}
+
+			@Override
+			public void acceptRequest(Creature requester, Player responder) {
+				teleportToNpc(player, npcId);
+			}
+		};
+
+		if (!player.getResponseRequester().putRequest(questionMsgId, handler))
+			return false;
+		PacketSendUtility.sendPacket(player,
+			new SM_QUESTION_WINDOW(questionMsgId, 0, 0, new DescriptionId(DataManager.NPC_DATA.getNpcTemplate(npcId).getNameId() * 2 + 1)));
+		return true;
 	}
 }

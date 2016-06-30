@@ -20,4 +20,9 @@ public class RewardItem {
 	public long getCount() {
 		return count;
 	}
+
+	@Override
+	public String toString() {
+		return "RewardItem [id=" + id + ", count=" + count + "]";
+	}
 }

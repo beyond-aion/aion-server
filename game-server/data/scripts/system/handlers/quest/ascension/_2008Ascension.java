@@ -20,6 +20,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
+import com.aionemu.gameserver.services.reward.WebRewardService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -257,7 +258,10 @@ public class _2008Ascension extends QuestHandler {
 						}
 						break;
 				}
-				return sendQuestEndDialog(env);
+				boolean retVal = sendQuestEndDialog(env); // finishes quest or shows reward selection
+				if (qs.getStatus() == QuestStatus.COMPLETE && WebRewardService.MaxLevelReward.isPendingAscension(player))
+					WebRewardService.MaxLevelReward.reward(player);
+				return retVal;
 			}
 		}
 		return false;
