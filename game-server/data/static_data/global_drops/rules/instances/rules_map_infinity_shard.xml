@@ -23,7 +23,7 @@
 			<gd_item id="188052501" name="Infinity Shard Expedition's Excavation Box" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="12" min_count="30" max_count="45">
+	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="12" min_count="60" max_count="90">
 		<gd_maps>
 			<gd_map map_id="300800000" name="Infinity_Shard" />
 		</gd_maps>

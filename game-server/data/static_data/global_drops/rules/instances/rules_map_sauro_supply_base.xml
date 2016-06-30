@@ -17,18 +17,13 @@
 			<gd_item id="188052577" name="Veteran's Composite Manastone Bundle" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mark" base_chance="100" member_limit="6" min_count="30" max_count="45">
+	<gd_rule rule_name="Named Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
 		<gd_maps>
 			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
 			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
 			<gd_npc npc_id="230858" name="Brigade General Sheba" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000238" name="Conqueror's Mark" />
