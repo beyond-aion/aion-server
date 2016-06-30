@@ -1,12 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,31 +10,27 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author Luno
  */
 @XmlRootElement(name = "item_templates")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ItemData extends ReloadableData {
+public class ItemData {
 
 	@XmlElement(name = "item_template")
 	private List<ItemTemplate> its;
 
 	@XmlTransient
 	private TIntObjectHashMap<ItemTemplate> items;
-
-	// @XmlTransient
-	// private TIntObjectHashMap<ItemTemplate> petEggs = new TIntObjectHashMap<ItemTemplate>();
 
 	@XmlTransient
 	Map<Integer, List<ItemTemplate>> manastones = new FastMap<>();
@@ -78,10 +70,6 @@ public class ItemData extends ReloadableData {
 				if (!it.getName().toLowerCase().startsWith("[stamp]"))
 					specialManastones.get(level).add(it);
 			}
-			/**
-			 * NOT USED if (it.getActions() == null) continue; AdoptPetAction adoptAction = it.getActions().getAdoptPetAction(); if (adoptAction != null) {
-			 * petEggs.put(adoptAction.getPetId(), it); }
-			 */
 		}
 		its = null;
 	}
@@ -135,40 +123,5 @@ public class ItemData extends ReloadableData {
 
 	public Map<Integer, List<ItemTemplate>> getSpecialManastones() {
 		return specialManastones;
-	}
-
-	// public ItemTemplate getPetEggTemplate(int petId) {
-	// return petEggs.get(petId);
-	// }
-
-	@Override
-	public void reload(Player admin) {
-		try {
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-			List<ItemTemplate> newTemplates = new FastTable<ItemTemplate>();
-			ItemData data = (ItemData) un.unmarshal(new File("./data/static_data/items/item_templates.xml"));
-			if (data != null && data.getData() != null)
-				newTemplates.addAll(data.getData());
-			DataManager.ITEM_DATA.setData(newTemplates);
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Item templates reload failed!");
-			log.error("Item templates reload failed!", e);
-		} finally {
-			PacketSendUtility.sendMessage(admin, "Item templates reload Success! Total loaded: " + DataManager.ITEM_DATA.size());
-		}
-	}
-
-	@Override
-	protected List<ItemTemplate> getData() {
-		return its;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void setData(List<?> data) {
-		this.its = (List<ItemTemplate>) data;
-		this.afterUnmarshal(null, null);
 	}
 }

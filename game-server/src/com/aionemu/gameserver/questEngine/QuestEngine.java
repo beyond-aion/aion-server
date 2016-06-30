@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
@@ -25,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.quest.HandlerSideDrop;
 import com.aionemu.gameserver.model.templates.quest.InventoryItem;
@@ -68,6 +68,7 @@ public class QuestEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestEngine.class);
 	private ScriptManager scriptManager = new ScriptManager();
+	private Future<?> messageTask;
 	private Map<Integer, QuestHandler> questHandlers = new FastMap<>();
 	private TIntObjectHashMap<QuestNpc> questNpcs = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questItemRelated = new TIntObjectHashMap<>();
@@ -92,6 +93,7 @@ public class QuestEngine implements GameEngine {
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<>();
 	private List<Integer> questOnDredgionReward = new FastTable<>();
 	private Map<BonusType, TIntArrayList> questOnBonusApply = new FastMap<>();
+	private TIntArrayList questUpdateItems = new TIntArrayList();
 	private TIntArrayList reachTarget = new TIntArrayList();
 	private TIntArrayList lostTarget = new TIntArrayList();
 	private TIntArrayList questOnEnterWindStream = new TIntArrayList();
@@ -112,8 +114,8 @@ public class QuestEngine implements GameEngine {
 			}
 			if (data.getInventoryItems() != null) {
 				for (InventoryItem inventoryItem : data.getInventoryItems().getInventoryItem()) {
-					ItemTemplate item = DataManager.ITEM_DATA.getItemTemplate(inventoryItem.getItemId());
-					item.setQuestUpdateItem(true);
+					if (!questUpdateItems.contains(inventoryItem.getItemId()))
+						questUpdateItems.add(inventoryItem.getItemId());
 				}
 			}
 		}
@@ -139,31 +141,9 @@ public class QuestEngine implements GameEngine {
 		addMessageSendingTask();
 	}
 
-	public void reload(CountDownLatch progressLatch) {
-		log.info("Quest engine reload started");
-
-		AggregatedClassListener acl = new AggregatedClassListener();
-		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
-		acl.addClassListener(new QuestHandlerLoader());
-		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			scriptManager.load(new File("./data/scripts/system/quest_handlers.xml"));
-			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest())
-				xmlQuest.register(this);
-			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize quest handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
-		}
-
-		addMessageSendingTask();
-		for (DialogAction d : DialogAction.values()) {
-			dialogMap.put(d.id(), d);
-		}
+	public void reload() {
+		shutdown();
+		load(null);
 	}
 
 	@Override
@@ -175,6 +155,8 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void clear() {
+		messageTask.cancel(false);
+		QuestService.clearQuestDrops();
 		questNpcs.clear();
 		questItemRelated.clear();
 		questItems.clear();
@@ -199,6 +181,7 @@ public class QuestEngine implements GameEngine {
 		questCanAct.clear();
 		questOnDredgionReward.clear();
 		questOnBonusApply.clear();
+		questUpdateItems.clear();
 		reachTarget.clear();
 		lostTarget.clear();
 		questOnEnterWindStream.clear();
@@ -433,17 +416,22 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	public void onItemGet(QuestEnv env, int itemId) {
+	public void onItemGet(Player player, int itemId) {
 		if (questItems.containsKey(itemId)) {
 			for (int i = 0; i < questItems.get(itemId).size(); i++) {
 				int questId = questItems.get(itemId).get(i);
 				QuestHandler questHandler = getQuestHandlerByQuestId(questId);
-				if (questHandler != null) {
-					env.setQuestId(questId);
-					questHandler.onGetItemEvent(env);
-				}
+				if (questHandler != null)
+					questHandler.onGetItemEvent(new QuestEnv(null, player, questId, 0));
 			}
 		}
+		if (questUpdateItems.contains(itemId))
+			player.getController().updateNearbyQuests();
+	}
+
+	public void onItemRemoved(Player player, int itemId) {
+		if (questUpdateItems.contains(itemId))
+			player.getController().updateNearbyQuests();
 	}
 
 	public boolean onKillRanked(QuestEnv env, AbyssRankEnum playerRank) {
@@ -1052,6 +1040,10 @@ public class QuestEngine implements GameEngine {
 	private QuestHandler getQuestHandlerByQuestId(int questId) {
 		return questHandlers.get(questId);
 	}
+	
+	public int getQuestHandlerCount() {
+		return questHandlers.size();
+	}
 
 	public boolean isHaveHandler(int questId) {
 		return questHandlers.containsKey(questId);
@@ -1121,7 +1113,7 @@ public class QuestEngine implements GameEngine {
 		if (sendingDate.getTime().getTime() < System.currentTimeMillis()) {
 			sendingDate.add(Calendar.HOUR, 24); // next day 09:00
 		}
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+		messageTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
 			public void run() {

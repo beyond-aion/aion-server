@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.procedure.TObjectProcedure;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -10,8 +7,6 @@ import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.List;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +18,9 @@ import com.aionemu.gameserver.model.drop.DropGroup;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.drop.NpcDrop.ReplaceType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+
+import gnu.trove.procedure.TObjectProcedure;
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -118,7 +116,7 @@ public class NpcDropData {
 				if (npcTemplate != null) {
 					NpcDrop npcDrop = npcTemplate.getNpcDrop();
 					if (npcDrop == null) {
-						npcCount += 1;
+						npcCount++;
 						npcDrop = new NpcDrop(npcId);
 					}
 
@@ -127,10 +125,10 @@ public class NpcDropData {
 						mergeWithCustomDrop(npcDrop, customDrop);
 						npcTemplate.setNpcDrop(npcDrop);
 					} else {
-						npcsSkippedCustom += 1;
+						npcsSkippedCustom++;
 					}
 				} else {
-					npcsSkippedCustom += 1;
+					npcsSkippedCustom++;
 				}
 			}
 		}
@@ -145,13 +143,12 @@ public class NpcDropData {
 	}
 
 	public static void reload() {
-		TIntObjectHashMap<NpcTemplate> npcData = DataManager.NPC_DATA.getNpcData();
-		npcData.forEachValue(new TObjectProcedure<NpcTemplate>() {
+		DataManager.NPC_DATA.getNpcData().forEachValue(new TObjectProcedure<NpcTemplate>() {
 
 			@Override
 			public boolean execute(NpcTemplate npcTemplate) {
 				npcTemplate.setNpcDrop(null);
-				return false;
+				return true;
 			}
 		});
 		load();
@@ -172,9 +169,6 @@ public class NpcDropData {
 			}
 			originalDrop.getDropGroup().removeAll(toDel);
 			originalDrop.getDropGroup().addAll(customDrop.getDropGroup());
-			toDel.clear();
-			toDel = null;
 		}
 	}
-
 }

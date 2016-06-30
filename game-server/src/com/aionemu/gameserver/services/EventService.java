@@ -111,19 +111,12 @@ public class EventService {
 		}
 	}
 
-	public void start() {
-		if (!EventsConfig.ENABLE_EVENT_SERVICE)
-			return;
-		if (checkTask != null)
-			checkTask.cancel(true);
+	public boolean start() {
+		if (!EventsConfig.ENABLE_EVENT_SERVICE || checkTask != null)
+			return false;
 
-		checkTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				checkEvents();
-			}
-		}, 0, CHECK_TIME_PERIOD);
+		checkTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> checkEvents(), 0, CHECK_TIME_PERIOD);
+		return true;
 	}
 
 	public void stop() {

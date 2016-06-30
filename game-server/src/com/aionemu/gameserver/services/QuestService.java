@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,6 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.QuestsData;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -59,8 +56,8 @@ import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.models.WorkOrdersData;
@@ -84,13 +81,14 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import javolution.util.FastTable;
+
 /**
  * @author Mr. Poke
  * @modified vlog, bobobear, xTz, Rolandas
  */
 public final class QuestService {
 
-	static QuestsData questsData = DataManager.QUEST_DATA;
 	private static final Logger log = LoggerFactory.getLogger(QuestService.class);
 	private static Multimap<Integer, QuestDrop> questDrop = ArrayListMultimap.create();
 
@@ -118,7 +116,7 @@ public final class QuestService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 			return false;
 		}
-		QuestTemplate template = questsData.getQuestById(id);
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0) {
 			return false; // prevent repeatable reward because of wrong quest handling
 		}
@@ -230,7 +228,7 @@ public final class QuestService {
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
 		if (rewards.getAp() != null) {
 			int ap = rewards.getAp();
-			if (questsData.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
+			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
 				ap *= player.getRates().getQuestApRate();
 			AbyssPointsService.addAp(player, ap);
 		}
@@ -322,10 +320,10 @@ public final class QuestService {
 	 *          - Allowed difference between the minimum required level for this quest and the players level
 	 * @return True, if the player is allowed to start the quest.
 	 */
-	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck, boolean skipRepeatCountCheck,
-		boolean skipXmlPreconditionCheck) {
+	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck,
+		boolean skipRepeatCountCheck, boolean skipXmlPreconditionCheck) {
 		try {
-			QuestTemplate template = questsData.getQuestById(questId);
+			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null && qs.getStatus() != QuestStatus.NONE) {
 				if (!skipStartedCheck && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
@@ -439,7 +437,7 @@ public final class QuestService {
 		int id = env.getQuestId();
 		QuestStateList qsl = player.getQuestStateList();
 		QuestState qs = qsl.getQuestState(id);
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		if (template.getNpcFactionId() != 0) {
 			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
 			if (!faction.isActive() || faction.getQuestId() != env.getQuestId()) {
@@ -501,7 +499,7 @@ public final class QuestService {
 	 */
 	public static boolean checkCombineSkill(QuestEnv env, boolean warn) {
 		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 
 		if (template == null)
 			return false;
@@ -546,7 +544,7 @@ public final class QuestService {
 	public static boolean startEventQuest(QuestEnv env, QuestStatus questStatus) {
 		int id = env.getQuestId();
 		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(id);
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 		if (template.getCategory() != QuestCategory.EVENT)
 			return false;
 
@@ -589,7 +587,7 @@ public final class QuestService {
 		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
 		if (qs == null && removeItem)
 			return false;
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		CollectItems collectItems = template.getCollectItems();
 		if (collectItems == null) {
 			// check inventoryItem to prevent exploits
@@ -631,7 +629,7 @@ public final class QuestService {
 
 	public static boolean inventoryItemCheck(QuestEnv env, boolean showWarning) {
 		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		InventoryItems inventoryItems = template.getInventoryItems();
 		if (inventoryItems == null)
 			return true;
@@ -666,7 +664,7 @@ public final class QuestService {
 	 */
 	public static int checkCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem, int rewardIndex) {
 		Player player = env.getPlayer();
-		QuestTemplate template = questsData.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		int requiredItemNameId = 0;
 		int result = -1;
 
@@ -917,7 +915,7 @@ public final class QuestService {
 			}
 		}
 
-		CollectItems collectItems = questsData.getQuestById(questId).getCollectItems();
+		CollectItems collectItems = DataManager.QUEST_DATA.getQuestById(questId).getCollectItems();
 		if (collectItems == null)
 			return true;
 
@@ -931,7 +929,7 @@ public final class QuestService {
 	}
 
 	public static boolean checkLevelRequirement(int questId, int playerLevel) {
-		return checkLevelRequirement(questsData.getQuestById(questId), playerLevel);
+		return checkLevelRequirement(DataManager.QUEST_DATA.getQuestById(questId), playerLevel);
 	}
 
 	public static boolean checkLevelRequirement(QuestTemplate qt, int playerLevel) {
@@ -939,7 +937,7 @@ public final class QuestService {
 	}
 
 	public static int getLevelRequirementDiff(int questId, int playerLevel) {
-		QuestTemplate template = questsData.getQuestById(questId);
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		return template == null ? 99 : template.getMinlevelPermitted() - playerLevel;
 	}
 
@@ -982,7 +980,7 @@ public final class QuestService {
 	}
 
 	public static boolean abandonQuest(Player player, int questId) {
-		QuestTemplate template = questsData.getQuestById(questId);
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		if (template == null)
 			return false;
 
@@ -1037,6 +1035,13 @@ public final class QuestService {
 		}
 	}
 
+	/**
+	 * Clears all quest drop info (used when reloading quest data)
+	 */
+	public static void clearQuestDrops() {
+		questDrop.clear();
+	}
+
 	public static List<Player> getEachDropMembersGroup(PlayerGroup group, int npcId, int questId) {
 		List<Player> players = new FastTable<Player>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
@@ -1070,7 +1075,7 @@ public final class QuestService {
 	}
 
 	public static void removeQuestWorkItems(Player player, QuestState qs) {
-		QuestWorkItems qwi = questsData.getQuestById(qs.getQuestId()).getQuestWorkItems();
+		QuestWorkItems qwi = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getQuestWorkItems();
 		if (qwi != null) {
 			for (QuestItems qi : qwi.getQuestWorkItem()) {
 				if (qi != null) {

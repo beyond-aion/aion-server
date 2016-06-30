@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
@@ -23,6 +20,8 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+
+import javolution.util.FastTable;
 
 /**
  * @author KID, ATracer
@@ -186,12 +185,8 @@ public abstract class Storage implements IStorage {
 		item.setItemLocation(storageType.getId());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		ItemPacketService.sendStorageUpdatePacket(actor, storageType, item, addType);
-		// TODO: move to ItemService
-		if (storageType == StorageType.CUBE) {
-			QuestEngine.getInstance().onItemGet(new QuestEnv(null, actor, 0, 0), item.getItemTemplate().getTemplateId());
-			if (item.getItemTemplate().isQuestUpdateItem())
-				actor.getController().updateNearbyQuests();
-		}
+		if (storageType == StorageType.CUBE)
+			QuestEngine.getInstance().onItemGet(actor, item.getItemId());
 		return item;
 	}
 
@@ -252,9 +247,7 @@ public abstract class Storage implements IStorage {
 			if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0)
 				if (item.getItemId() < 160000000 || item.getItemId() >= 165000000) // exclude potions, food, scrolls and other unimportant consumables from logging
 					log.info("Item: " +  item.getItemId() + " [" + item.getItemName()+ "] deleted from player " + actor.getName() + " (count: " + item.getItemCount() + ") (deletion type: " + deleteType + ")");
-
-			if (item.getItemTemplate().isQuestUpdateItem())
-				actor.getController().updateNearbyQuests();
+			QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
 			return item;
 		}
 		return null;
