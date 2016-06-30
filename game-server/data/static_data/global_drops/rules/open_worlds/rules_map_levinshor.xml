@@ -150,7 +150,7 @@
 			<gd_item id="186000238" name="Conqueror's Mark"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Amplification Stone" base_chance="1">
+	<gd_rule rule_name="Named Amplification Stone" base_chance="0.75">
 		<gd_maps>
 			<gd_map map_id="600100000" name="Levinshor"/>
 		</gd_maps>
