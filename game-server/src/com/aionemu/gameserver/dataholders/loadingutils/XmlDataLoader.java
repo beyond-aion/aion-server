@@ -1,18 +1,12 @@
 package com.aionemu.gameserver.dataholders.loadingutils;
 
 import java.io.File;
-import java.io.FileReader;
-
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
+import com.aionemu.commons.utils.xml.JAXBUtil;
+import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.StaticData;
 
 /**
@@ -53,35 +47,11 @@ public class XmlDataLoader {
 		mergeXmlFiles(cachedXml, cleanMainXml);
 
 		try {
-			JAXBContext jc = JAXBContext.newInstance(StaticData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			un.setEventHandler(new XmlValidationHandler());
-			un.setSchema(getSchema());
 			log.info("Processing cache file...");
-			return (StaticData) un.unmarshal(new FileReader(CACHE_XML_FILE));
-		} catch (Exception e) {
-			log.error("Error while loading static data", e);
-			return null;
+			return JAXBUtil.deserialize(cachedXml, StaticData.class, XML_SCHEMA_FILE);
+		} catch (Throwable e) {
+			throw new GameServerError("Error while loading static data", e);
 		}
-	}
-
-	/**
-	 * Creates and returns {@link Schema} object representing xml schema of xml files
-	 * 
-	 * @return a Schema object.
-	 */
-	private Schema getSchema() {
-		Schema schema = null;
-		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-		try {
-			schema = sf.newSchema(new File(XML_SCHEMA_FILE));
-		} catch (SAXException saxe) {
-			log.error("Error while getting schema", saxe);
-			throw new Error("Error while getting schema", saxe);
-		}
-
-		return schema;
 	}
 
 	/**
@@ -97,9 +67,8 @@ public class XmlDataLoader {
 		XmlMerger merger = new XmlMerger(cleanMainXml, cachedXml);
 		try {
 			merger.process();
-		} catch (Exception e) {
-			log.error("Error while merging xml files", e);
-			throw new Error("Error while merging xml files", e);
+		} catch (Throwable e) {
+			throw new GameServerError("Error while merging xml files", e);
 		}
 	}
 

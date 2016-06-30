@@ -3,7 +3,6 @@ package consolecommands;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,6 +12,7 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SkillLearnService;
@@ -49,31 +49,16 @@ public class Deleteskill extends ConsoleCommand {
 			return;
 		}
 
-		final Player player = (Player) target;
+		Player player = (Player) target;
+		File xml = new File("./data/scripts/system/handlers/consolecommands/data/skills.xml");
+		SkillData data = JAXBUtil.deserialize(xml, SkillData.class);
+		SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 
-		try {
+		if (skillTemplate != null)
+			skillId = skillTemplate.getTemplateId();
 
-			JAXBContext jc = JAXBContext.newInstance(SkillData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			SkillData data = (SkillData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/skills.xml"));
-
-			SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
-
-			if (skillTemplate != null) {
-				skillId = skillTemplate.getTemplateId();
-			}
-
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!");
-			System.out.println(e);
-		}
-
-		if (skillId > 0) {
-			if (!check(admin, player, skillId))
-				return;
-
+		if (skillId > 0 && check(admin, player, skillId))
 			apply(admin, player, skillId);
-		}
 	}
 
 	private static boolean check(Player admin, Player player, int skillId) {

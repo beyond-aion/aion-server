@@ -3,7 +3,6 @@ package consolecommands;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,6 +12,7 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -58,22 +58,12 @@ public class Combineskill extends ConsoleCommand {
 			return;
 		}
 
-		try {
+		File xml = new File("./data/scripts/system/handlers/consolecommands/data/skills.xml");
+		SkillData data = JAXBUtil.deserialize(xml, SkillData.class);
+		SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 
-			JAXBContext jc = JAXBContext.newInstance(SkillData.class);
-			Unmarshaller un = jc.createUnmarshaller();
-			SkillData data = (SkillData) un.unmarshal(new File("./data/scripts/system/handlers/consolecommands/data/skills.xml"));
-
-			SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
-
-			if (skillTemplate != null) {
-				skillId = skillTemplate.getTemplateId();
-			}
-
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Skill templates reload failed!");
-			System.out.println(e);
-		}
+		if (skillTemplate != null)
+			skillId = skillTemplate.getTemplateId();
 
 		if (skillId > 0) {
 			player.getSkillList().addSkill(player, skillId, skillLvl);
