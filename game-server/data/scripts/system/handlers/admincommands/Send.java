@@ -5,27 +5,21 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.GameServerError;
+import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET.PacketElementType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+
+import javolution.util.FastTable;
 
 /**
  * This admin command is used for sending custom packets from server to client.
@@ -35,76 +29,48 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  * * 1 - packet mappings name.<br />
  * * - 'demo' for file './data/packets/demo.xml'<br />
  * * - 'test' for file './data/packets/test.xml'<br />
- * * Reciever is a targetted by admin player. If target is 'null' or not a Player - sends to admin.<br />
  * <p/>
  * Created on: 14.07.2009 13:54:46
  * 
  * @author Aquanox
+ * @modified Neon
  */
 public class Send extends AdminCommand {
 
+	private static final String FOLDER = "./data/packets/";
+	private static final String SCHEMAFILE = FOLDER + "packets.xsd";
+
 	public Send() {
-		super("send");
-		// init unmrshaller once.
-		try {
-			unmarshaller = JAXBContext.newInstance(Packets.class, Packet.class, Part.class).createUnmarshaller();
-		} catch (Exception e) {
-			throw new GameServerError("Failed to initialize unmarshaller.", e);
-		}
+		super("send", "Sends custom packets.");
+
+		setParamInfo("<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.");
 	}
-
-	private static final Logger logger = LoggerFactory.getLogger(Send.class);
-
-	private static final File FOLDER = new File("./data/packets");
-
-	private Unmarshaller unmarshaller;
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length != 1) {
-			PacketSendUtility.sendMessage(admin, "Example: //send [file] ");
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		final String mappingName = params[0];
-		final Player target = getTargetPlayer(admin);
+		String fileName = params[0] + ".xml";
+		File file = new File(FOLDER + fileName);
 
-		// logger.debug("Mapping: " + mappingName);
-		// logger.debug("Target: " + target);
-
-		File packetsData = new File(FOLDER, mappingName + ".xml");
-
-		if (!packetsData.exists()) {
-			PacketSendUtility.sendMessage(admin, "Mapping with name " + mappingName + " not found");
+		if (!file.isFile()) {
+			sendInfo(admin, "File " + fileName + " not found");
 			return;
 		}
 
-		final Packets packetsTemplate;
-
-		try {
-			packetsTemplate = (Packets) unmarshaller.unmarshal(packetsData);
-		} catch (JAXBException e) {
-			logger.error("Unmarshalling error", e);
-			return;
-		}
-
-		if (packetsTemplate.getPackets().isEmpty()) {
-			PacketSendUtility.sendMessage(admin, "No packets to send.");
-			return;
-		}
-
-		send(admin, target, packetsTemplate);
+		Packets packetsTemplate = (Packets) JAXBUtil.deserialize(file, Packets.class, SCHEMAFILE);
+		send(admin, packetsTemplate);
 	}
 
-	private void send(Player sender, final Player target, Packets packets) {
-		final String senderObjectId = String.valueOf(sender.getObjectId());
-		final String targetObjectId = String.valueOf(target.getObjectId());
-
+	private void send(Player player, Packets packets) {
+		String senderObjectId = String.valueOf(player.getObjectId());
+		String targetObjectId = player.getTarget() != null ? String.valueOf(player.getTarget().getObjectId()) : "0";
 		long delay = 0;
-		for (final Packet packetTemplate : packets) {
-			// logger.debug("Processing: " + packetTemplate);
-
-			final SM_CUSTOM_PACKET packet = new SM_CUSTOM_PACKET(packetTemplate.getOpcode());
+		for (Packet packetTemplate : packets) {
+			SM_CUSTOM_PACKET packet = new SM_CUSTOM_PACKET(packetTemplate.getOpcode());
 
 			for (Part part : packetTemplate.getParts()) {
 				PacketElementType byCode = PacketElementType.getByCode(part.getType());
@@ -112,41 +78,20 @@ public class Send extends AdminCommand {
 				String value = part.getValue();
 
 				if (value.indexOf("${objectId}") != -1)
-					value = value.replace("${objectId}", targetObjectId);
-				if (value.indexOf("${senderObjectId}") != -1)
-					value = value.replace("${senderObjectId}", senderObjectId);
+					value = value.replace("${objectId}", senderObjectId);
 				if (value.indexOf("${targetObjectId}") != -1)
 					value = value.replace("${targetObjectId}", targetObjectId);
 
-				if (part.getRepeatCount() == 1) // skip loop
-				{
+				for (int i = 0; i < part.getRepeatCount(); i++)
 					packet.addElement(byCode, value);
-				} else {
-					for (int i = 0; i < part.getRepeatCount(); i++)
-						packet.addElement(byCode, value);
-				}
 			}
 
 			delay += packetTemplate.getDelay();
 
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					// logger.debug("Sending: " + packetTemplate);
-					PacketSendUtility.sendPacket(target, packet);
-				}
-			}, delay);
+			ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, packet), delay);
 
 			delay += packets.getDelay();
 		}
-	}
-
-	private Player getTargetPlayer(Player admin) {
-		if (admin.getTarget() instanceof Player) {
-			return (Player) admin.getTarget();
-		}
-		return admin;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
@@ -154,22 +99,13 @@ public class Send extends AdminCommand {
 	private static class Packets implements Iterable<Packet> {
 
 		@XmlElement(name = "packet")
-		private List<Packet> packets = new FastTable<Packet>();
+		private List<Packet> packets;
 
 		@XmlAttribute(name = "delay")
 		private long delay = -1;
 
 		public long getDelay() {
 			return delay;
-		}
-
-		public List<Packet> getPackets() {
-			return packets;
-		}
-
-		@SuppressWarnings("unused")
-		public boolean add(Packet packet) {
-			return packets.add(packet);
 		}
 
 		@Override
@@ -259,10 +195,5 @@ public class Send extends AdminCommand {
 			sb.append('}');
 			return sb.toString();
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		// TODO Auto-generated method stub
 	}
 }
