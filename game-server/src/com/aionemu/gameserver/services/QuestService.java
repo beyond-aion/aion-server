@@ -455,7 +455,7 @@ public final class QuestService {
 
 		ActionType actionType;
 		if (qs != null) {
-			actionType = ActionType.UPDATE;
+			actionType = qs.getStatus() == QuestStatus.COMPLETE ? ActionType.ADD : ActionType.UPDATE;
 			qs.setStatus(status);
 		} else {
 			actionType = ActionType.ADD;
