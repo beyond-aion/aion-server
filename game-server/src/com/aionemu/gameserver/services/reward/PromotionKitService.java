@@ -42,17 +42,17 @@ public class PromotionKitService {
 		itemMap.get(50).add(new RewardItem(188053526, 5));
 	}
 
-	public void onLevelUp(Player player) {
-		if (itemMap == null || itemMap.isEmpty())
-			return;
-		if (!itemMap.containsKey((int) player.getLevel()))
-			return;
-		for (RewardItem e : itemMap.get((int) player.getLevel())) {
-			SystemMailService.getInstance().sendMail("Beyond Aion", player.getName(), "Promotion Kit",
-				"Greetings Daeva!\n\n"
-					+ "In gratitude for your decision to level your character during our promotion phase we prepared an additional item pack.\n\n"
-					+ "Enjoy your stay on Beyond Aion!",
-				e.getId(), e.getCount(), 0, LetterType.EXPRESS);
+	public void onLevelUp(Player player, int fromLevel, int toLevel) {
+		for (int level = fromLevel; level <= toLevel; level++) {
+			if (!itemMap.containsKey(level))
+				continue;
+			for (RewardItem e : itemMap.get(level)) {
+				SystemMailService.getInstance().sendMail("Beyond Aion", player.getName(), "Promotion Kit",
+					"Greetings Daeva!\n\n"
+						+ "In gratitude for your decision to level your character during our promotion phase we prepared an additional item pack.\n\n"
+						+ "Enjoy your stay on Beyond Aion!",
+					e.getId(), e.getCount(), 0, LetterType.EXPRESS);
+			}
 		}
 	}
 }

@@ -672,7 +672,7 @@ public class PlayerController extends CreatureController<Player> {
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
 		if (CustomConfig.ENABLE_PROMOTION_KIT)
-			PromotionKitService.getInstance().onLevelUp(player);
+			PromotionKitService.getInstance().onLevelUp(player, minNewLevel, newLevel);
 	}
 
 	public void upgradePlayer() {
