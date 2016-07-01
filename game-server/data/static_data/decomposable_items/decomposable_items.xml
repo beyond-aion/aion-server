@@ -30513,8 +30513,8 @@
 	</decomposable>
 	<decomposable item_id="188053624" name="Unified Return Scroll Bundle">
 		<items>
-			<item id="164020005" name="Integrated Return Scroll" min_count="10" race="ELYOS" />
-			<item id="164020006" name="Integrated Return Scroll" min_count="10" race="ASMODIANS" />
+			<item id="164020005" name="Integrated Return Scroll" min_count="1" race="ELYOS" />
+			<item id="164020006" name="Integrated Return Scroll" min_count="1" race="ASMODIANS" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053625" name="Empyrean Plume Bundle">
