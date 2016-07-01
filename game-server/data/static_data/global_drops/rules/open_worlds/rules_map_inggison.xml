@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Inggison Conqueror's Mark Box (Normal)" base_chance="100" min_count="1" max_count="3">
+	<gd_rule rule_name="Inggison Conqueror's Mark Box (Normal)" base_chance="100" min_count="1">
 		<gd_maps>
 			<gd_map map_id="210050000" name="Inggison" />
 		</gd_maps>
@@ -48,7 +48,7 @@
 			<gd_item id="188053690" name="Inggison Greater Conqueror's Mark Box" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Inggison Conqueror's Mark Box (Vulgar)" base_chance="100" min_count="1" max_count="3">
+	<gd_rule rule_name="Inggison Conqueror's Mark Box (Vulgar)" base_chance="100" min_count="3">
 		<gd_maps>
 			<gd_map map_id="210050000" name="Inggison" />
 		</gd_maps>
