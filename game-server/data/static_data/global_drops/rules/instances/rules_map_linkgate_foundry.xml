@@ -101,7 +101,7 @@
 			<gd_item id="185000196" name="Abyss Gap Sealing Key" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="4" fixed_chance="true">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="8" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="186000236" name="Blood Mark" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="8" fixed_chance="true">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="16" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="186000236" name="Blood Mark" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="12" fixed_chance="true">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="24" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
