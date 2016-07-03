@@ -778,6 +778,10 @@
 		<spawn npc_id="235967" respawn_time="14395">
 			<spot x="128.97565" y="228.75020" z="455.98117"/>
 		</spawn>
+		<!-- Bethdry -->
+		<spawn npc_id="804946" respawn_time="295">
+			<spot x="2093.18" y="2973.06" z="330.57" h="113"/>
+		</spawn>
 		<!-- bilogea -->
 		<spawn npc_id="804875" respawn_time="295">
 			<spot x="2585.94800" y="401.69214" z="588.37500" h="30"/>
