@@ -98,7 +98,7 @@ public class _18602NightmareinShiningArmor extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205229) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

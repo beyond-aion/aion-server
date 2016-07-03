@@ -15,35 +15,28 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2132ANewSkill extends QuestHandler {
 
-	private final static int questId = 2132;
-
 	public _2132ANewSkill() {
-		super(questId);
+		super(2132);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203527).addOnTalkEvent(questId); // Warrior
 		qe.registerQuestNpc(203528).addOnTalkEvent(questId); // Scout
 		qe.registerQuestNpc(203529).addOnTalkEvent(questId); // Mage
 		qe.registerQuestNpc(203530).addOnTalkEvent(questId); // Priest
-		qe.registerQuestNpc(801218).addOnTalkEvent(questId); // Gunner
-		qe.registerQuestNpc(801219).addOnTalkEvent(questId); // Bard
+		qe.registerQuestNpc(801218).addOnTalkEvent(questId); // Engineer
+		qe.registerQuestNpc(801219).addOnTalkEvent(questId); // Artist
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		boolean lvlCheck = QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel());
-		if (!lvlCheck)
-			return false;
-		if (qs != null)
-			return false;
-		env.setQuestId(questId);
+	public void onLevelChangedEvent(Player player) {
+		if (player.getQuestStateList().hasQuest(questId))
+			return;
+		QuestEnv env = new QuestEnv(null, player, questId, 0);
 		if (QuestService.startQuest(env)) {
-			qs = player.getQuestStateList().getQuestState(questId);
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			qs.setStatus(QuestStatus.REWARD);
 			PlayerClass playerClass = player.getPlayerClass();
 			if (!playerClass.isStartingClass())
@@ -70,7 +63,7 @@ public class _2132ANewSkill extends QuestHandler {
 			}
 			updateQuestStatus(env);
 		}
-		return true;
+		return;
 	}
 
 	@Override

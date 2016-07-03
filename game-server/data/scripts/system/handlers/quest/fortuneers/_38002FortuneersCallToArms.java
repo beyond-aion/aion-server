@@ -13,26 +13,21 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _38002FortuneersCallToArms extends QuestHandler {
 
-	public static final int questId = 38002;
-
 	public _38002FortuneersCallToArms() {
-		super(questId);
+		super(38002);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(799840).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
+	public void onLevelChangedEvent(Player player) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getLevel() >= 50 && (qs == null || qs.getStatus() == QuestStatus.NONE)) {
-			return QuestService.startQuest(env);
-		}
-		return false;
+		if (player.getLevel() >= 50 && (qs == null || qs.getStatus() == QuestStatus.NONE))
+			QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 	}
 
 	@Override

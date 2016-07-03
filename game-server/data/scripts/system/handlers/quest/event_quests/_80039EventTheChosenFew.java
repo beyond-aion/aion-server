@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -17,20 +16,16 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Rolandas
  */
-
 public class _80039EventTheChosenFew extends QuestHandler {
 
-	private final static int questId = 80039;
-
 	public _80039EventTheChosenFew() {
-		super(questId);
+		super(80039);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(799780).addOnQuestStart(questId);
 		qe.registerQuestNpc(799780).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 		qe.registerOnBonusApply(questId, BonusType.LUNAR);
 	}
 
@@ -65,17 +60,6 @@ public class _80039EventTheChosenFew extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		if (env.getQuestId() != questId)
-			return false;
-		Player player = env.getPlayer();
-		Storage storage = player.getInventory();
-		if (storage.getItemCountByItemId(164002018) > 0) // if has more restart quest
-			QuestService.startEventQuest(new QuestEnv(null, player, questId, 0), QuestStatus.START);
-		return false;
-	}
-
-	@Override
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		if (bonusType != BonusType.LUNAR || env.getQuestId() != questId)
 			return HandlerResult.UNKNOWN;
@@ -87,5 +71,4 @@ public class _80039EventTheChosenFew extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-
 }

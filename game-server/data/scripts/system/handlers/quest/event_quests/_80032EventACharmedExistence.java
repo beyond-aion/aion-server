@@ -6,26 +6,20 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Rolandas
  */
-
 public class _80032EventACharmedExistence extends QuestHandler {
 
-	private final static int questId = 80032;
-
 	public _80032EventACharmedExistence() {
-		super(questId);
+		super(80032);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(799781).addOnQuestStart(questId);
 		qe.registerQuestNpc(799781).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 	}
 
 	@Override
@@ -54,14 +48,4 @@ public class _80032EventACharmedExistence extends QuestHandler {
 		}
 		return sendQuestRewardDialog(env, 799781, 0);
 	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
-	}
-
 }

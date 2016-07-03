@@ -17,12 +17,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _1467TheFourLeaders extends QuestHandler {
 
-	private static final int questId = 1467;
 	private static final int npcId = 204045;
 	private static final int[] mobIds = { 211696, 211697, 211698, 211699 };
 
 	public _1467TheFourLeaders() {
-		super(questId);
+		super(1467);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _1467TheFourLeaders extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
 				switch (dialog) {
 					case QUEST_SELECT: {

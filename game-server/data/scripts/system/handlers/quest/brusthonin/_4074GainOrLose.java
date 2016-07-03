@@ -16,10 +16,8 @@ import com.aionemu.gameserver.services.item.ItemService;
  */
 public class _4074GainOrLose extends QuestHandler {
 
-	private final static int questId = 4074;
-
 	public _4074GainOrLose() {
-		super(questId);
+		super(4074);
 	}
 
 	@Override
@@ -35,7 +33,7 @@ public class _4074GainOrLose extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205181) { // Bonarunerk
 				if (dialog == DialogAction.EXCHANGE_COIN) {
 					if (QuestService.startQuest(env)) {

@@ -90,7 +90,7 @@ public class KillInZone extends QuestHandler {
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -134,7 +134,7 @@ public class KillInZone extends QuestHandler {
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			QuestService.startQuest(env);
 			return true;
 		}

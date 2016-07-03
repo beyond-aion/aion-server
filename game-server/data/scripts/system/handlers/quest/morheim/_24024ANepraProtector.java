@@ -13,17 +13,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24024ANepraProtector extends QuestHandler {
 
-	private final static int questId = 24024;
-	private final static int[] npc_ids = { 204369, 204361, 278004 };
-
 	public _24024ANepraProtector() {
-		super(questId);
+		super(24024);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204369, 204361, 278004 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(212861).addOnKillEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"), questId);
 		for (int npc_id : npc_ids)
@@ -31,13 +29,13 @@ public class _24024ANepraProtector extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24020);
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class _24024ANepraProtector extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204369: {
@@ -87,8 +85,7 @@ public class _24024ANepraProtector extends QuestHandler {
 				}
 
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204369) {
 				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

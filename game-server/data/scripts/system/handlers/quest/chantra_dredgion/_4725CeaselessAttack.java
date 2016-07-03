@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4725CeaselessAttack extends QuestHandler {
 
-	private static final int questId = 4725;
-
 	public _4725CeaselessAttack() {
-		super(questId);
+		super(4725);
 	}
 
 	@Override
@@ -35,7 +33,7 @@ public class _4725CeaselessAttack extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799403) { // Yorgen
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

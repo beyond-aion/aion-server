@@ -54,7 +54,7 @@ public class WorkOrders extends QuestHandler {
 		int targetId = env.getTargetId();
 		
 		if (startNpcIds.contains(targetId)) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs.isStartable()) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id());

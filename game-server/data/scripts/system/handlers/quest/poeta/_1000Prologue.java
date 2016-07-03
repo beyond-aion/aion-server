@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1000Prologue extends QuestHandler {
 
-	private final static int questId = 1000;
-
 	public _1000Prologue() {
-		super(questId);
+		super(1000);
 	}
 
 	@Override
@@ -30,17 +28,12 @@ public class _1000Prologue extends QuestHandler {
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		if (player.getCommonData().getRace() != Race.ELYOS)
-			return false;
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null) {
+		if (player.getRace() == Race.ELYOS && !player.getQuestStateList().hasQuest(questId)) {
 			env.setQuestId(questId);
-			QuestService.startQuest(env);
-		}
-		qs = player.getQuestStateList().getQuestState(questId);
-		if (qs.getStatus() == QuestStatus.START) {
-			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 1));
-			return true;
+			if (QuestService.startQuest(env) || player.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START) {
+				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 1));
+				return true;
+			}
 		}
 		return false;
 	}
@@ -50,8 +43,6 @@ public class _1000Prologue extends QuestHandler {
 		if (movieId != 1)
 			return false;
 		Player player = env.getPlayer();
-		if (player.getCommonData().getRace() != Race.ELYOS)
-			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;

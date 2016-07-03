@@ -13,22 +13,21 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14054KrallIngToKralltumagna extends QuestHandler {
 
-	private final static int questId = 14054;
 	private final static int[] indratu_runaway = { 	235483, 235484, 235485, 235486, 235487, 235488, 235489, 235490, 235491, 235492, 
 													235493, 235494, 235495, 235496, 235497, 235498, 235499, 235500, 235501, 235502 };
 	private final static int baranath = 702040;
 	private final static int vitusa = 233861;
-	private final static int[] npc_ids = { 204602, 800413, 802050 };
 
 	public _14054KrallIngToKralltumagna() {
-		super(questId);
+		super(14054);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
+		int[] npc_ids = { 204602, 800413, 802050 };
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLogOut(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npc_ids)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		for (int mob_id : indratu_runaway)
@@ -38,13 +37,13 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 
 	@Override

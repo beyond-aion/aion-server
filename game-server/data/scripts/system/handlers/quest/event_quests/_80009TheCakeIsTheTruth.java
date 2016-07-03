@@ -5,21 +5,16 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
-import com.aionemu.gameserver.services.QuestService;
 
 public class _80009TheCakeIsTheTruth extends QuestHandler {
 
-	private final static int questId = 80009;
-
 	public _80009TheCakeIsTheTruth() {
-		super(questId);
+		super(80009);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798417).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 	}
 
 	@Override
@@ -48,14 +43,5 @@ public class _80009TheCakeIsTheTruth extends QuestHandler {
 			}
 		}
 		return sendQuestRewardDialog(env, 798417, 0);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
 	}
 }

@@ -136,7 +136,18 @@ public final class QuestService {
 			if (template.getCategory() == QuestCategory.CHALLENGE_TASK) {
 				ChallengeTaskService.getInstance().onChallengeQuestFinish(player, id);
 			}
-			return setFinishingState(env, template, rewardGroup);
+			removeQuestWorkItems(player, qs); // remove all worker list item if finished
+			qs.setStatus(QuestStatus.COMPLETE);
+			qs.setQuestVar(0);
+			qs.setReward(rewardGroup);
+			if (template.isTimeBased())
+				qs.setNextRepeatTime(countNextRepeatTime(player, template));
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
+			QuestEngine.getInstance().onQuestCompleted(player, id);
+			if (template.getNpcFactionId() != 0)
+				player.getNpcFactions().completeQuest(template);
+			player.getController().updateNearbyQuests();
+			return true;
 		}
 		return false;
 	}
@@ -245,27 +256,6 @@ public final class QuestService {
 		}
 	}
 
-	private static boolean setFinishingState(QuestEnv env, QuestTemplate template, Integer reward) {
-		Player player = env.getPlayer();
-		int id = env.getQuestId();
-		QuestState qs = player.getQuestStateList().getQuestState(id);
-		removeQuestWorkItems(player, qs); // remove all worker list item if finished
-		qs.setStatus(QuestStatus.COMPLETE);
-		qs.setQuestVar(0);
-		qs.setReward(reward);
-		if (template.isTimeBased()) {
-			qs.setNextRepeatTime(countNextRepeatTime(player, template));
-		}
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
-		player.getCommonData().updateDaeva();
-		QuestEngine.getInstance().onEnterZoneMissionEnd(env); // Notifies mission end @ToDo: to rename to onMissionEnd
-		QuestEngine.getInstance().onLvlUp(env);
-		if (template.getNpcFactionId() != 0)
-			player.getNpcFactions().completeQuest(template);
-		player.getController().updateNearbyQuests();
-		return true;
-	}
-
 	private static Timestamp countNextRepeatTime(Player player, QuestTemplate template) {
 		DateTime now = DateTime.now();
 		DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), 9, 0, 0);
@@ -330,14 +320,15 @@ public final class QuestService {
 					if (warn)
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
 					return false;
-				} else if (!skipRepeatCountCheck && !qs.canRepeat()) {
-					if (warn)
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(questId)));
-					return false;
-				} else if (!skipRepeatCountCheck && qs.getCompleteCount() >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255) {
-					if (warn)
-						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(questId), template.getMaxRepeatCount()));
+				} else if (!skipRepeatCountCheck && qs.getStatus() == QuestStatus.COMPLETE && !qs.canRepeat()) {
+					if (template.getMaxRepeatCount() > 1 && template.getMaxRepeatCount() != 255 && qs.getCompleteCount() >= template.getMaxRepeatCount()) {
+						if (warn)
+							PacketSendUtility.sendPacket(player,
+								SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_REPEAT_COUNT(ChatUtil.quest(questId), template.getMaxRepeatCount()));
+					} else {
+						if (warn)
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(questId)));
+					}
 					return false;
 				}
 			}
@@ -404,7 +395,7 @@ public final class QuestService {
 				if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
 					return false;
 
-				NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
+				NpcFaction faction = player.getNpcFactions().getFactionById(template.getNpcFactionId());
 				if (faction == null || !faction.isActive())
 					return false;
 			}
@@ -437,11 +428,11 @@ public final class QuestService {
 		int id = env.getQuestId();
 		QuestStateList qsl = player.getQuestStateList();
 		QuestState qs = qsl.getQuestState(id);
-		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 		if (template.getNpcFactionId() != 0) {
-			NpcFaction faction = player.getNpcFactions().getNpcFactinById(template.getNpcFactionId());
-			if (!faction.isActive() || faction.getQuestId() != env.getQuestId()) {
-				AuditLogger.info(player, "Possible packet hack learn Guild quest");
+			NpcFaction faction = player.getNpcFactions().getFactionById(template.getNpcFactionId());
+			if (!faction.isActive() || faction.getQuestId() != id) {
+				AuditLogger.info(player, "Possible packet hack to start npc faction quest");
 				return false;
 			}
 		}
@@ -473,23 +464,28 @@ public final class QuestService {
 	}
 
 	/**
-	 * Starts or temporary locks the mission Used only from the QuestHandler class
+	 * Adds the quest to the players quest list.
 	 * 
-	 * @param env
+	 * @param player
+	 * @param questId
 	 * @param status
-	 *          START or LOCKED
 	 */
-	public static void startMission(QuestEnv env, QuestStatus status) {
-		Player player = env.getPlayer();
-		int questId = env.getQuestId();
+	public static void addOrUpdateQuest(Player player, int questId, QuestStatus status) {
+		ActionType actionType;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs != null)
-			return;
-
-		qs = new QuestState(questId, status);
-		player.getQuestStateList().addQuest(questId, qs);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
+		if (qs == null) {
+			actionType = ActionType.ADD;
+			qs = new QuestState(questId, status);
+			player.getQuestStateList().addQuest(questId, qs);
+		} else {
+			if (qs.getStatus() == status)
+				return;
+			actionType = qs.getStatus() == QuestStatus.COMPLETE ? ActionType.ADD : ActionType.UPDATE;
+			qs.setStatus(status);
+			if (status == QuestStatus.COMPLETE)
+				qs.setQuestVar(0);
+		}
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
 	}
 
 	/**
@@ -548,7 +544,7 @@ public final class QuestService {
 		if (template.getCategory() != QuestCategory.EVENT)
 			return false;
 
-		if (QuestService.checkLevelRequirement(template, player.getLevel()))
+		if (!checkLevelRequirement(template, player.getLevel()))
 			return false;
 
 		if (template.getRacePermitted() == player.getOppositeRace())
@@ -718,7 +714,7 @@ public final class QuestService {
 		}
 
 		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			boolean stateValid = true;
 			if (collectItems.getStartCheck())
 				stateValid = startQuest(env);

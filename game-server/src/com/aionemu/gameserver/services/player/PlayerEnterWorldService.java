@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,7 +86,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UNK_3_5_1;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BonusPackService;
@@ -130,6 +127,8 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -338,7 +337,6 @@ public final class PlayerEnterWorldService {
 		QuestEngine.getInstance().sendCompletedQuests(player);
 		client.sendPacket(new SM_QUEST_LIST(player.getQuestStateList().getUncompletedQuests()));
 		client.sendPacket(new SM_TITLE_INFO(pcd.getTitleId()));
-		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
 		if (pcd.getBonusTitleId() != 0) {
 			player.getTitleList().setBonusTitle(pcd.getBonusTitleId());
 		}

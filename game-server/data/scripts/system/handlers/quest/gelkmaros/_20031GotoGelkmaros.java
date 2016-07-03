@@ -18,26 +18,24 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20031GotoGelkmaros extends QuestHandler {
 
-	private final static int questId = 20031;
-
-	// Vidar			ID: 204052
-	// Agehia			ID: 798800
-	// Tigrina		ID: 798409
-	// Richelle		ID: 799225
-	// Merhen			ID: 799364
-	// Hogidin		ID: 799365
-	// Valetta		ID: 799226
-	private final static int[] npcs = {204052, 798409, 798800, 799225, 799226, 799364, 799365};
-	private final static int[] mobs = {216091, 216092, 216093, 216095, 216096, 216097};
+	private final static int[] mobs = { 216091, 216092, 216093, 216095, 216096, 216097 };
 
 	public _20031GotoGelkmaros() {
-		super(questId);
+		super(20031);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		// Vidar ID: 204052
+		// Agehia ID: 798800
+		// Tigrina ID: 798409
+		// Richelle ID: 799225
+		// Merhen ID: 799364
+		// Hogidin ID: 799365
+		// Valetta ID: 799226
+		int[] npcs = { 204052, 798409, 798800, 799225, 799226, 799364, 799365 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -112,8 +110,8 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						}
 						break;
 					case SELECT_ACTION_2717:
-							PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 31));
-							return sendQuestDialog(env, 2717);
+						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 31));
+						return sendQuestDialog(env, 2717);
 					case SETPRO6:
 						return defaultCloseDialog(env, var, var + 1); // 6
 				}
@@ -143,9 +141,9 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						}
 						break;
 					case CHECK_USER_HAS_QUEST_ITEM:
-						if(var == 10) {
-							if(checkItemExistence(env, 182215591, 1, true)) {
-								qs.setQuestVar(var+1); // 11
+						if (var == 10) {
+							if (checkItemExistence(env, 182215591, 1, true)) {
+								qs.setQuestVar(var + 1); // 11
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
@@ -191,7 +189,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (player.getWorldId() == 220070000) {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
@@ -210,28 +208,28 @@ public class _20031GotoGelkmaros extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(var == 9) {
+			if (var == 9) {
 				if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20031_220070000"))) {
-					
-					return  HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false, 566));
-					//playQuestMovie(env, 566);
-					//return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false)); // 10
+
+					return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false, 566));
+					// playQuestMovie(env, 566);
+					// return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false)); // 10
 				}
 			}
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if(movieId == 551) {
+		if (movieId == 551) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			
+
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
 				if (var == 3) {
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 					return true;
 				}
@@ -242,12 +240,12 @@ public class _20031GotoGelkmaros extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

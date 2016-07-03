@@ -13,15 +13,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2945HoningYourSkills extends QuestHandler {
 
-	private final static int questId = 2945;
-
 	public _2945HoningYourSkills() {
-		super(questId);
+		super(2945);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(204075).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204088).addOnTalkEvent(questId);
 	}
@@ -78,7 +76,7 @@ public class _2945HoningYourSkills extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

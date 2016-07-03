@@ -26,8 +26,8 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = { 278003, 278086, 278039, 279027, 204210 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(253610).addOnAttackEvent(questId);
 		qe.registerQuestNpc(253611).addOnAttackEvent(questId);
 		for (int npc : npcs) {
@@ -157,12 +157,12 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24040);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24040);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24040);
 	}
 }

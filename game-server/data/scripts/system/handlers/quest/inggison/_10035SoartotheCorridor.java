@@ -13,24 +13,23 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _10035SoartotheCorridor extends QuestHandler {
 
-	private final static int questId = 10035;
-	// Yulia											ID: 798928
-	// Laokon											ID: 799025
-	// Veille											ID: 798958
-	// Laetia											ID: 798996
-	// Corridor Entry Controller	ID: 702663
-	// Outremus										ID: 798926
-	private final static int[] npcs = { 798928, 799025, 798958, 798996, 206363, 702663, 798926 };
 	private final static int[] mobs = { 220021, 220022, 216775 };
 
 	public _10035SoartotheCorridor() {
-		super(questId);
+		super(10035);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		// Yulia ID: 798928
+		// Laokon ID: 799025
+		// Veille ID: 798958
+		// Laetia ID: 798996
+		// Corridor Entry Controller ID: 702663
+		// Outremus ID: 798926
+		int[] npcs = { 798928, 799025, 798958, 798996, 206363, 702663, 798926 };
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnEnterZone(ZoneName.get("ANGRIEF_GATE_210050000"), questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
@@ -113,7 +112,8 @@ public class _10035SoartotheCorridor extends QuestHandler {
 						case USE_OBJECT:
 							if (var == 6) {
 								removeQuestItem(env, 182215629, 1);
-								//QuestService.addNewSpawn(210050000, player.getInstanceId(), 700641, 1377, 2297, 296, (byte) 90); ToDo: to check on retail what's its function
+								// QuestService.addNewSpawn(210050000, player.getInstanceId(), 700641, 1377, 2297, 296, (byte) 90); ToDo: to check on retail what's
+								// its function
 								qs.setQuestVar(7);
 								updateQuestStatus(env);
 								return true;
@@ -170,12 +170,12 @@ public class _10035SoartotheCorridor extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

@@ -74,7 +74,7 @@ public class QuestEngine implements GameEngine {
 	private TIntObjectHashMap<TIntArrayList> questItemRelated = new TIntObjectHashMap<>();
 	private TIntArrayList questHouseItems = new TIntArrayList();
 	private TIntObjectHashMap<TIntArrayList> questItems = new TIntObjectHashMap<>();
-	private TIntArrayList questOnEnterZoneMissionEnd = new TIntArrayList();
+	private TIntArrayList questOnCompleted = new TIntArrayList();
 	private Map<Race, TIntArrayList> questOnLevelUp = new FastMap<>();
 	private TIntArrayList questOnDie = new TIntArrayList();
 	private TIntArrayList questOnLogOut = new TIntArrayList();
@@ -162,7 +162,7 @@ public class QuestEngine implements GameEngine {
 		questItems.clear();
 		questHouseItems.clear();
 		questOnLevelUp.clear();
-		questOnEnterZoneMissionEnd.clear();
+		questOnCompleted.clear();
 		questOnEnterWorld.clear();
 		questOnDie.clear();
 		questOnLogOut.clear();
@@ -263,38 +263,47 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	public void onLvlUp(QuestEnv env) {
+	/**
+	 * Notifies all quest handlers (which registered the event), that the player level changed
+	 * 
+	 * @param player
+	 *          - The player who leveled up
+	 */
+	public void onLevelChanged(Player player) {
 		try {
-			Player player = env.getPlayer();
 			TIntArrayList raceQuestsOnLevelUp = getOrCreateOnLevelUpForRace(player.getRace());
 			for (int index = 0; index < raceQuestsOnLevelUp.size(); index++) {
-				QuestHandler questHandler = null;
-				QuestState qs = player.getQuestStateList().getQuestState(raceQuestsOnLevelUp.get(index));
+				int questId = raceQuestsOnLevelUp.get(index);
+				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs == null || qs.getStatus() != QuestStatus.COMPLETE) {
-					questHandler = getQuestHandlerByQuestId(raceQuestsOnLevelUp.get(index));
-				}
-				if (questHandler != null) {
-					env.setQuestId(raceQuestsOnLevelUp.get(index));
-					questHandler.onLvlUpEvent(env);
+					QuestHandler questHandler = getQuestHandlerByQuestId(questId);
+					if (questHandler != null)
+						questHandler.onLevelChangedEvent(player);
 				}
 			}
 		} catch (Exception ex) {
-			log.error("QE: exception in onLvlUp", ex);
+			log.error("QE: exception in onLevelChanged", ex);
 		}
 	}
 
-	public void onEnterZoneMissionEnd(QuestEnv env) {
+	/**
+	 * Notifies all quest handlers (which registered the event), that the quest with the specified ID completed
+	 * 
+	 * @param player
+	 *          - Player who completed the quest
+	 * @param questId
+	 *          - The quest that the player completed
+	 */
+	public void onQuestCompleted(Player player, int questId) {
 		try {
-			int result = questOnEnterZoneMissionEnd.indexOf(env.getQuestId());
-			QuestHandler questHandler = null;
-			if (result != -1)
-				questHandler = getQuestHandlerByQuestId(questOnEnterZoneMissionEnd.get(result));
-			if (questHandler != null) {
-				env.setQuestId(questOnEnterZoneMissionEnd.get(result));
-				questHandler.onZoneMissionEndEvent(env);
+			QuestEnv env = new QuestEnv(null, player, questId, 0);
+			for (int index = 0; index < questOnCompleted.size(); index++) {
+				QuestHandler questHandler = getQuestHandlerByQuestId(questOnCompleted.get(index));
+				if (questHandler != null)
+					questHandler.onQuestCompletedEvent(env);
 			}
 		} catch (Exception ex) {
-			log.error("QE: exception in onEnterZoneMissionEnd", ex);
+			log.error("QE: exception in onQuestCompleted", ex);
 		}
 	}
 
@@ -336,7 +345,7 @@ public class QuestEngine implements GameEngine {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("QE: exception in onProtectEndEvent", ex);
+			log.error("QE: exception in onNpcReachTarget", ex);
 		}
 	}
 
@@ -350,7 +359,7 @@ public class QuestEngine implements GameEngine {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("QE: exception in onProtectFailEvent", ex);
+			log.error("QE: exception in onNpcLostTarget", ex);
 		}
 	}
 
@@ -767,7 +776,7 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	public void registerOnLevelUp(int questId) {
+	public void registerOnLevelChanged(int questId) {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		Race racePermitted = template.getRacePermitted();
 		TIntArrayList quests = null;
@@ -794,9 +803,9 @@ public class QuestEngine implements GameEngine {
 		return quests;
 	}
 
-	public void registerOnEnterZoneMissionEnd(int questId) {
-		if (!questOnEnterZoneMissionEnd.contains(questId))
-			questOnEnterZoneMissionEnd.add(questId);
+	public void registerOnQuestCompleted(int questId) {
+		if (!questOnCompleted.contains(questId))
+			questOnCompleted.add(questId);
 	}
 
 	public void registerOnEnterWorld(int questId) {
@@ -1040,7 +1049,7 @@ public class QuestEngine implements GameEngine {
 	private QuestHandler getQuestHandlerByQuestId(int questId) {
 		return questHandlers.get(questId);
 	}
-	
+
 	public int getQuestHandlerCount() {
 		return questHandlers.size();
 	}

@@ -25,20 +25,20 @@ public class _14053DangerCubed extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(204020).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204602).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14050);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14050);
 	}
 
 	@Override

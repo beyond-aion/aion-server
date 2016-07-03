@@ -52,7 +52,7 @@ public class _13745EljersRequest extends QuestHandler {
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getWorldId() == worldId && (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()))
+		if (player.getWorldId() == worldId && (qs == null || qs == null || qs.isStartable()))
 			return QuestService.startQuest(env);
 		return false;
 	}

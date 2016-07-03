@@ -14,19 +14,18 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14021ToCureACurse extends QuestHandler {
 
-	private final static int questId = 14021;
 	private final static int[] mob_ids = { 210771, 210758, 210763, 210764, 210759, 210770 };
-	private final static int[] npc_ids = { 203902, 700179, 204043, 204030 };
 
 	public _14021ToCureACurse() {
-		super(questId);
+		super(14021);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
+		int[] npc_ids = { 203902, 700179, 204043, 204030 };
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLogOut(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npc_ids)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		for (int mob_id : mob_ids)
@@ -34,13 +33,13 @@ public class _14021ToCureACurse extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 
 	@Override

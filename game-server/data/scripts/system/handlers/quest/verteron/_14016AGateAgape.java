@@ -15,17 +15,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  */
 public class _14016AGateAgape extends QuestHandler {
 
-	private final static int questId = 14016;
-
 	public _14016AGateAgape() {
-		super(questId);
+		super(14016);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = {203098, 700142};
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
 		qe.registerQuestNpc(233873).addOnKillEvent(questId);
@@ -154,15 +152,14 @@ public class _14016AGateAgape extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] verteronQuests = {14015, 14014, 14013, 14012, 14011, 14010};
-		return defaultOnZoneMissionEndEvent(env, verteronQuests);
+		defaultOnQuestCompletedEvent(env, verteronQuests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] verteronQuests = {14015, 14014, 14013, 14012, 14011, 14010};
-		return defaultOnLvlUpEvent(env, verteronQuests, false);
+		defaultOnLevelChangedEvent(player, verteronQuests);
 	}
-
 }

@@ -31,7 +31,7 @@ public class _80275EventEmpiresPast extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 831117) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

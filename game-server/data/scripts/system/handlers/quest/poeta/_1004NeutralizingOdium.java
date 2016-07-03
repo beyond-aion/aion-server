@@ -14,16 +14,14 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _1004NeutralizingOdium extends QuestHandler {
 
-	private final static int questId = 1004;
-
 	public _1004NeutralizingOdium() {
-		super(questId);
+		super(1004);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203082).addOnTalkEvent(questId); // Tula
 		qe.registerQuestNpc(700030).addOnTalkEvent(questId); // The Cauldron
 		qe.registerQuestNpc(790001).addOnTalkEvent(questId); // Pernos
@@ -123,12 +121,12 @@ public class _1004NeutralizingOdium extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1100);
 	}
 }

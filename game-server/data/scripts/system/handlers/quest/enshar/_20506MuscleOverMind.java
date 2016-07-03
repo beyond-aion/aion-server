@@ -27,10 +27,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20506MuscleOverMind extends QuestHandler {
 
-	private final static int questId = 20506;
-
 	public _20506MuscleOverMind() {
-		super(questId);
+		super(20506);
 	}
 
 	@Override
@@ -47,8 +45,8 @@ public class _20506MuscleOverMind extends QuestHandler {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20506A_206376_2_220080000"), questId); // Mindboggle Waste zone
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnLogOut(questId);
 	}
 
@@ -192,13 +190,13 @@ public class _20506MuscleOverMind extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 	
 	private boolean restoreQuestStep(QuestEnv env) {

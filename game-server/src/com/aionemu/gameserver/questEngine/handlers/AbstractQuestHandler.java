@@ -3,6 +3,7 @@ package com.aionemu.gameserver.questEngine.handlers;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
@@ -22,7 +23,10 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	public boolean onEnterWorldEvent(QuestEnv questEnv) {
+	/**
+	 * This method is called on every handler (which registered the event), after a player entered a map.
+	 */
+	public boolean onEnterWorldEvent(QuestEnv env) {
 		return false;
 	}
 
@@ -58,12 +62,22 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	public boolean onLvlUpEvent(QuestEnv questEnv) {
-		return false;
+	/**
+	 * This method is called on every handler (which registered the event), after a player leveled up or down.
+	 * 
+	 * @param player
+	 *          - The player whose level changed
+	 */
+	public void onLevelChangedEvent(Player player) {
 	}
 
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return false;
+	/**
+	 * This method is called on every handler (which registered the event), after a quest completed.
+	 * 
+	 * @param env
+	 *          - QuestEnv containing the player and the quest ID he completed
+	 */
+	public void onQuestCompletedEvent(QuestEnv env) {
 	}
 
 	public boolean onDieEvent(QuestEnv questEnv) {

@@ -23,17 +23,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 public class _24030ShowdownWithDestiny extends QuestHandler {
 
-	private final static int questId = 24030;
 	private final static int[] mobs = { 214591, 798346, 798344, 798342, 798345, 798343 };
-	private final static int[] npc_ids = { 204206, 204207, 203550, 205020, 204052 };
 
 	public _24030ShowdownWithDestiny() {
-		super(questId);
+		super(24030);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204206, 204207, 203550, 205020, 204052 };
+		qe.registerOnLevelChanged(questId);
 		for (int npc : mobs)
 			qe.registerQuestNpc(npc).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
@@ -171,8 +170,8 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 				else if (var1 == 49) {
 					qs.setQuestVar(7);
 					updateQuestStatus(env);
-					Npc mob = (Npc) QuestService
-						.spawnQuestNpc(320140000, player.getInstanceId(), 798346, player.getX(), player.getY(), player.getZ(), (byte) 0);
+					Npc mob = (Npc) QuestService.spawnQuestNpc(320140000, player.getInstanceId(), 798346, player.getX(), player.getY(), player.getZ(),
+						(byte) 0);
 					mob.getAggroList().addHate(player, 100);;
 					return true;
 				}
@@ -188,7 +187,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

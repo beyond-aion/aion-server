@@ -31,8 +31,8 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1936);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1936);
 	}
 
 	@Override

@@ -25,10 +25,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _20504TiamatsShadow extends QuestHandler {
 
-	private final static int questId = 20504;
-
 	public _20504TiamatsShadow() {
-		super(questId);
+		super(20504);
 	}
 
 	@Override
@@ -45,8 +43,8 @@ public class _20504TiamatsShadow extends QuestHandler {
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnInvisibleTimerEnd(questId);
 		qe.registerOnLogOut(questId);
 	}
@@ -198,12 +196,12 @@ public class _20504TiamatsShadow extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 }

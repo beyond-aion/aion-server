@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -69,6 +70,7 @@ public class ClassChangeService {
 		player.getCommonData().setPlayerClass(newClass);
 		player.getController().upgradePlayer();
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player));
 		SkillLearnService.learnNewSkills(player, 9, player.getLevel());
 
 		if (updateDaevaStatus) {

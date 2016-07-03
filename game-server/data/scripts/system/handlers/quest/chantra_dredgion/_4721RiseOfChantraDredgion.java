@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4721RiseOfChantraDredgion extends QuestHandler {
 
-	private static final int questId = 4721;
-
 	public _4721RiseOfChantraDredgion() {
-		super(questId);
+		super(4721);
 	}
 
 	@Override

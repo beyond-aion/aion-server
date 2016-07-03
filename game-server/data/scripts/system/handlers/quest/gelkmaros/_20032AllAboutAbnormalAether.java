@@ -21,22 +21,19 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _20032AllAboutAbnormalAether extends QuestHandler {
 
-	private final static int questId = 20032;
-	
-	// Angrad						ID: 799247
-	// Eddas						ID: 799250
-	// Taloc's Guardian	ID: 799325
-	// Taloc's Mirage		ID: 799503
-	private final static int[] npcs = { 799247, 799250, 799325 };
-
 	public _20032AllAboutAbnormalAether() {
-		super(questId);
+		super(20032);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		// Angrad ID: 799247
+		// Eddas ID: 799250
+		// Taloc's Guardian ID: 799325
+		// Taloc's Mirage ID: 799503
+		int[] npcs = { 799247, 799250, 799325 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
 		qe.registerOnLogOut(questId);
@@ -65,7 +62,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 					}
 				}
 			} else if (targetId == 799250) { // Eddas
@@ -74,7 +71,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
-							return defaultCloseDialog(env, var, var+1); // 2
+							return defaultCloseDialog(env, var, var + 1); // 2
 					}
 				}
 			} else if (targetId == 799325) { // Taloc's Guardian
@@ -90,31 +87,34 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 							changeQuestStep(env, 2, 3, false); // 3
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
+								TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {
 							PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY());
 							return sendQuestSelectionDialog(env);
 						}
 				}
-			} 
-			/* To check on retail if there is a dedicate portal to exit.
-			else if (targetId == 799503) { // Taloc's Mirage
-				switch (dialog) {
-					case USE_OBJECT:
-						if (var == 7) {
-							return sendQuestDialog(env, 3057);
-						}
-						break;
-					case SETPRO7: {
-						qs.setQuestVar(8); // Reward
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						TeleportService2.teleportTo(env.getPlayer(), 220070000, 1025, 2782, 388, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
-						return closeDialogWindow(env);
-					}
-				}
-			}*/
+			}
+			/*
+			 * To check on retail if there is a dedicate portal to exit.
+			 * else if (targetId == 799503) { // Taloc's Mirage
+			 * switch (dialog) {
+			 * case USE_OBJECT:
+			 * if (var == 7) {
+			 * return sendQuestDialog(env, 3057);
+			 * }
+			 * break;
+			 * case SETPRO7: {
+			 * qs.setQuestVar(8); // Reward
+			 * qs.setStatus(QuestStatus.REWARD);
+			 * updateQuestStatus(env);
+			 * TeleportService2.teleportTo(env.getPlayer(), 220070000, 1025, 2782, 388, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+			 * return closeDialogWindow(env);
+			 * }
+			 * }
+			 * }
+			 */
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799247) { // Angrad
 				if (dialog == DialogAction.USE_OBJECT) {
@@ -136,9 +136,9 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 
 			switch (targetId) {
 				case 215488: { // Celestius
-					if(var == 6) {
+					if (var == 6) {
 						playQuestMovie(env, 437);
-						return defaultOnKillEvent(env, 215488, var, var+1); // 7
+						return defaultOnKillEvent(env, 215488, var, var + 1); // 7
 					}
 				}
 			}
@@ -158,14 +158,12 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 				if (itemId == 182215593) { // quest_20032b
 					changeQuestStep(env, 4, 5, false); // 7
 					return HandlerResult.SUCCESS; // //TODO: Should return FAILED (not removed, but skill still should be used)
-				}
-				else if (itemId == 182215592) { // quest_20032a
+				} else if (itemId == 182215592) { // quest_20032a
 					if (var == 5) {
 						if (var1 >= 0 && var1 < 19) {
 							changeQuestStep(env, var1, var1 + 1, false, 1); // 3: 19
 							return HandlerResult.SUCCESS;
-						}
-						else if (var1 == 19) {
+						} else if (var1 == 19) {
 							qs.setQuestVar(6);
 							updateQuestStatus(env);
 							return HandlerResult.SUCCESS;
@@ -189,13 +187,12 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			} else {
 				removeQuestItem(env, 182215592, 1);
 				removeQuestItem(env, 182215593, 1);
-				
+
 				int var = qs.getQuestVarById(0);
 				if (var >= 3 && var < 7) {
 					restoreStep(env);
 					return true;
-				}
-				else if (var == 7) { // Final boss killed
+				} else if (var == 7) { // Final boss killed
 					removeQuestItem(env, 182215618, 1);
 					removeQuestItem(env, 182215619, 1);
 					qs.setQuestVar(8); // Reward
@@ -207,27 +204,27 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onDieEvent(QuestEnv env) {
 		return restoreStep(env);
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		return restoreStep(env);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
-	
+
 	private boolean restoreStep(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);

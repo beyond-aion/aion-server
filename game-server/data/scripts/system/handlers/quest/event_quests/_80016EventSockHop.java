@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
@@ -19,15 +18,12 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _80016EventSockHop extends QuestHandler {
 
-	private final static int questId = 80016;
-
 	public _80016EventSockHop() {
-		super(questId);
+		super(80016);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(799763).addOnQuestStart(questId);
 		qe.registerQuestNpc(799763).addOnTalkEvent(questId);
 		qe.registerOnBonusApply(questId, BonusType.MOVIE);
@@ -37,11 +33,7 @@ public class _80016EventSockHop extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if ((qs == null || qs.getStatus() == QuestStatus.NONE) && !onLvlUpEvent(env))
-			return false;
-
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < 10) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.canRepeat()) {
 			if (env.getTargetId() == 799763) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -73,25 +65,6 @@ public class _80016EventSockHop extends QuestHandler {
 		}
 
 		return sendQuestRewardDialog(env, 799763, 0);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (EventService.getInstance().checkQuestIsActive(questId)) {
-			if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel()))
-				return false;
-
-			// Start once
-			if (qs == null || qs.getStatus() == QuestStatus.NONE)
-				return QuestService.startEventQuest(env, QuestStatus.START);
-		} else if (qs != null) {
-			// Set as expired
-			QuestService.abandonQuest(player, questId);
-		}
-		return false;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class QuestEnv {
 	 * @param questId
 	 * @param dialogId
 	 */
-	public QuestEnv(VisibleObject visibleObject, Player player, Integer questId, int dialogId) {
+	public QuestEnv(VisibleObject visibleObject, Player player, int questId, int dialogId) {
 		this.visibleObject = visibleObject;
 		this.player = player;
 		this.questId = questId;

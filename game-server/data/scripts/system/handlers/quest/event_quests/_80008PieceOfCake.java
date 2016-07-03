@@ -6,21 +6,17 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
 
 public class _80008PieceOfCake extends QuestHandler {
 
-	private final static int questId = 80008;
-
 	public _80008PieceOfCake() {
-		super(questId);
+		super(80008);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798415).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 	}
 
 	@Override
@@ -54,14 +50,5 @@ public class _80008PieceOfCake extends QuestHandler {
 			}
 		}
 		return sendQuestRewardDialog(env, 798415, 0);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
 	}
 }

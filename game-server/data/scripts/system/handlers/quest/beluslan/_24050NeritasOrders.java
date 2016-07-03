@@ -2,11 +2,12 @@ package quest.beluslan;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Ritsu
@@ -14,17 +15,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24050NeritasOrders extends QuestHandler {
 
-	private final static int questId = 24050;
-
 	public _24050NeritasOrders() {
-		super(questId);
+		super(24050);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(204702).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnEnterWorld(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -53,17 +52,17 @@ public class _24050NeritasOrders extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 0, true);
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.BELUSLAN.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
-	
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 24051, 24052, 24053, 24054 };
-		for (int id : ids)
-			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		return true;
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

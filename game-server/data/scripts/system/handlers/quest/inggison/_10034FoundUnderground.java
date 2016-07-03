@@ -21,21 +21,19 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _10034FoundUnderground extends QuestHandler {
 
-	private final static int questId = 10034;
-	// Sueros										ID: 799030
-	// Honeus										ID: 799029
-	// Titus										ID: 798990
-	// Drakan Stone Statue			ID: 730295
-	// Hidden Switch						ID: 700604
-	// Traveller's bag					ID: 730229
-	private final static int[] npcs = {799030, 799029, 798990, 730295, 700604, 730229};
-
 	public _10034FoundUnderground() {
-		super(questId);
+		super(10034);
 	}
 
 	@Override
 	public void register() {
+		// Sueros ID: 799030
+		// Honeus ID: 799029
+		// Titus ID: 798990
+		// Drakan Stone Statue ID: 730295
+		// Hidden Switch ID: 700604
+		// Traveller's bag ID: 730229
+		int[] npcs = { 799030, 799029, 798990, 730295, 700604, 730229 };
 		qe.addHandlerSideQuestDrop(questId, 730229, 182215628, 1, 100);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -43,8 +41,8 @@ public class _10034FoundUnderground extends QuestHandler {
 		qe.registerOnEnterWorld(questId);
 		qe.registerQuestItem(182215628, questId);
 		qe.registerQuestNpc(216531).addOnKillEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -108,10 +106,11 @@ public class _10034FoundUnderground extends QuestHandler {
 								if (player.getInventory().getItemCountByItemId(182215627) > 0) {
 									removeQuestItem(env, 182215627, 1);
 									WorldMapInstance oldInstance = InstanceService.getRegisteredInstance(300160000, player.getObjectId());
-									if(oldInstance == null)
+									if (oldInstance == null)
 										oldInstance = InstanceService.getNextAvailableInstance(300160000);
 									InstanceService.registerPlayerWithInstance(oldInstance, player);
-									TeleportService2.teleportTo(player, 300160000, oldInstance.getInstanceId(), 795.28143f, 918.806f, 149.80243f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
+									TeleportService2.teleportTo(player, 300160000, oldInstance.getInstanceId(), 795.28143f, 918.806f, 149.80243f, (byte) 73,
+										TeleportAnimation.FADE_OUT_BEAM);
 									return true;
 								} else {
 									return sendQuestDialog(env, 10001);
@@ -123,7 +122,7 @@ public class _10034FoundUnderground extends QuestHandler {
 				case 700604:
 					if (var == 4 && dialog == DialogAction.USE_OBJECT) {
 						InstanceHandler instanceHandler = player.getPosition().getWorldMapInstance().getInstanceHandler();
-						instanceHandler.handleUseItemFinish(player, (Npc)env.getVisibleObject());
+						instanceHandler.handleUseItemFinish(player, (Npc) env.getVisibleObject());
 						return useQuestObject(env, 4, 5, false, 0);
 					}
 					break;
@@ -132,7 +131,7 @@ public class _10034FoundUnderground extends QuestHandler {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 3057);
 						}
-						
+
 						if (dialog == DialogAction.SETPRO7) {
 							giveQuestItem(env, 182215628, 1);
 							return defaultCloseDialog(env, 6, 7);
@@ -199,7 +198,7 @@ public class _10034FoundUnderground extends QuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if(item.getItemId() == 182215628) {
+		if (item.getItemId() == 182215628) {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				qs.setQuestVar(8);
@@ -212,12 +211,12 @@ public class _10034FoundUnderground extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

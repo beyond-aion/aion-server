@@ -19,19 +19,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1007ACeremonyinSanctum extends QuestHandler {
 
-	private final static int questId = 1007;
-
 	public _1007ACeremonyinSanctum() {
-		super(questId);
+		super(1007);
 	}
 
 	@Override
 	public void register() {
-		int[] npcs = { 790001, 203725, 203752, 203758, 203759, 203760, 203761, 801212, 801213 };
-		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
+		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
 			return;
-		}
-		qe.registerOnLevelUp(questId);
+		int[] npcs = { 790001, 203725, 203752, 203758, 203759, 203760, 203761, 801212, 801213 };
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -184,7 +182,12 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1006);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1006);
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1006);
 	}
 }

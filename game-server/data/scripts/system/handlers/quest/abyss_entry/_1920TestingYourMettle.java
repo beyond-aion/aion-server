@@ -15,15 +15,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1920TestingYourMettle extends QuestHandler {
 
-	private final static int questId = 1920;
-
 	public _1920TestingYourMettle() {
-		super(questId);
+		super(1920);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203752).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203876).addOnTalkEvent(questId);
 	}
@@ -80,7 +78,7 @@ public class _1920TestingYourMettle extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

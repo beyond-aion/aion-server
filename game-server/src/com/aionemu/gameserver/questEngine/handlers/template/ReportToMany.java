@@ -73,7 +73,7 @@ public class ReportToMany extends QuestHandler {
 	@Override
 	public void register() {
 		if (mission) {
-			qe.registerOnLevelUp(questId);
+			qe.registerOnLevelChanged(questId);
 		}
 		if (startItemId != 0)
 			qe.registerQuestItem(startItemId, questId);
@@ -101,7 +101,7 @@ public class ReportToMany extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startItemId != 0) {
 				switch (dialog) {
 					case QUEST_ACCEPT:
@@ -162,7 +162,7 @@ public class ReportToMany extends QuestHandler {
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
 					}
-					
+
 					int closeDialogId = getCloseDialogId(var, targetNpcInfo);
 					if (dialog.id() == closeDialogId) {
 						if (dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE
@@ -240,7 +240,7 @@ public class ReportToMany extends QuestHandler {
 		if (startItemId != 0) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs == null || qs.isStartable()) {
 				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 			}
 		}
@@ -248,8 +248,8 @@ public class ReportToMany extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv questEnv) {
-		return defaultOnLvlUpEvent(questEnv);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 
 	@Override
@@ -268,7 +268,7 @@ public class ReportToMany extends QuestHandler {
 		}
 		return constantSpawns;
 	}
-	
+
 	private int getCloseDialogId(int var, NpcInfos targetNpcInfo) {
 		if (targetNpcInfo.getCloseDialog() == 0) {
 			if (var == maxVar)
@@ -279,7 +279,7 @@ public class ReportToMany extends QuestHandler {
 			return targetNpcInfo.getCloseDialog();
 		}
 	}
-	
+
 	private int getDialogId(int var, NpcInfos targetNpcInfo) {
 		if (targetNpcInfo.getQuestDialog() == 0) {
 			if (var == maxVar)

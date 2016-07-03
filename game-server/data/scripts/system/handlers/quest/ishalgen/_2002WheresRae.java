@@ -26,17 +26,15 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _2002WheresRae extends QuestHandler {
 
-	private final static int questId = 2002;
-	private final static int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538 };
-
 	public _2002WheresRae() {
-		super(questId);
+		super(2002);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(210377).addOnKillEvent(questId);
 		qe.registerQuestNpc(210378).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
@@ -234,12 +232,12 @@ public class _2002WheresRae extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2100);
 	}
 }

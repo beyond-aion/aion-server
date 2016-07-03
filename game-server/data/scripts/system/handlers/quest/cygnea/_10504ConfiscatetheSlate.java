@@ -19,13 +19,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _10504ConfiscatetheSlate extends QuestHandler {
 
-	private final static int questId = 10504;
 	private final static int workItem = 182215606; // Flame Pepper Bomb
 	private final static int collectItemId = 182215607; // Broken Slate Piece
 	
 
 	public _10504ConfiscatetheSlate() {
-		super(questId);
+		super(10504);
 	}
 
 	@Override
@@ -41,8 +40,8 @@ public class _10504ConfiscatetheSlate extends QuestHandler {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
 		qe.registerQuestItem(collectItemId, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -142,12 +141,12 @@ public class _10504ConfiscatetheSlate extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

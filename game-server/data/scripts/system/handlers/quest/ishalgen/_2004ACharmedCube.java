@@ -16,18 +16,17 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2004ACharmedCube extends QuestHandler {
 
-	private final static int questId = 2004;
 	private int[] mobs = { 210402, 210403 };
 
 	public _2004ACharmedCube() {
-		super(questId);
+		super(2004);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = { 203539, 700047, 203550 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -120,12 +119,12 @@ public class _2004ACharmedCube extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2100);
 	}
 }

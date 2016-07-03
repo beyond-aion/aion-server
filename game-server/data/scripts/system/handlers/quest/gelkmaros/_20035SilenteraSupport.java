@@ -15,24 +15,23 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20035SilenteraSupport extends QuestHandler {
 
-	private final static int questId = 20035;
-	// Richelle					ID: 799225
-	// Valetta					ID: 799226
-	// Jecasti					ID: 799283
-	// Arango						ID: 799309
-	// Mastarius				ID: 799323
-	// Notud						ID: 799329
-	private final static int[] npcs = {799225, 799226, 799283, 799309, 799323, 799329};
-	private final static int[] mobs = {216101, 216104, 216107, 216108, 216109, 216112, 216448, 216449, 216450, 216451};
+	private final static int[] mobs = { 216101, 216104, 216107, 216108, 216109, 216112, 216448, 216449, 216450, 216451 };
 
 	public _20035SilenteraSupport() {
-		super(questId);
+		super(20035);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		// Richelle ID: 799225
+		// Valetta ID: 799226
+		// Jecasti ID: 799283
+		// Arango ID: 799309
+		// Mastarius ID: 799323
+		// Notud ID: 799329
+		int[] npcs = { 799225, 799226, 799283, 799309, 799323, 799329 };
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestItem(182215659, questId);
 		qe.registerQuestItem(182215660, questId);
 		for (int mob : mobs) {
@@ -70,7 +69,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 						case SET_SUCCEED:
 							removeQuestItem(env, 182215660, 1);
 							qs.setStatus(QuestStatus.REWARD);
-							return defaultCloseDialog(env, 7, 8); //reward
+							return defaultCloseDialog(env, 7, 8); // reward
 					}
 					break;
 				}
@@ -159,7 +158,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 				if (var1 >= 0 && var1 < 9) {
 					return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
 				} else if (var1 == 9) {
-					qs.setQuestVar(6); //6
+					qs.setQuestVar(6); // 6
 					updateQuestStatus(env);
 					return true;
 				}
@@ -178,12 +177,12 @@ public class _20035SilenteraSupport extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

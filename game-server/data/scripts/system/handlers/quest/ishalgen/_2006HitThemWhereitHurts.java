@@ -14,16 +14,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2006HitThemWhereitHurts extends QuestHandler {
 
-	private final static int questId = 2006;
-
 	public _2006HitThemWhereitHurts() {
-		super(questId);
+		super(2006);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203540).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700095).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203516).addOnTalkEvent(questId);
@@ -84,12 +82,12 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2100);
 	}
 }

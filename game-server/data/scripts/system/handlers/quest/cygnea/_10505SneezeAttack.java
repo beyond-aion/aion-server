@@ -27,11 +27,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _10505SneezeAttack extends QuestHandler {
 
-	private final static int questId = 10505;
 	private final static int workItemId = 182215612; // Restored Beritra's Plans
 
 	public _10505SneezeAttack() {
-		super(questId);
+		super(10505);
 	}
 
 	@Override
@@ -47,8 +46,8 @@ public class _10505SneezeAttack extends QuestHandler {
 		for (int item : items) {
 			qe.registerQuestItem(item, questId);
 		}
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -160,12 +159,12 @@ public class _10505SneezeAttack extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 	
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

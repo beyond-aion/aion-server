@@ -16,19 +16,16 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Enomine
  */
-
 public class _24031EnemyAtTheDoorstep extends QuestHandler {
 
-	private final static int questId = 24031;
-	private final static int[] npc_ids = { 204052, 801224, 203550, 203654, 204369 };
-
 	public _24031EnemyAtTheDoorstep() {
-		super(questId);
+		super(24031);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204052, 801224, 203550, 203654, 204369 };
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerQuestItem(182215394, questId);
 		qe.registerQuestItem(182215395, questId);
@@ -229,7 +226,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

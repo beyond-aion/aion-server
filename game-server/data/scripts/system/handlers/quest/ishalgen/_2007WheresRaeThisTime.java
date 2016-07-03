@@ -14,17 +14,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  */
 public class _2007WheresRaeThisTime extends QuestHandler {
 
-	private final static int questId = 2007;
-
 	public _2007WheresRaeThisTime() {
-		super(questId);
+		super(2007);
 	}
 
 	@Override
 	public void register() {
 		int[] talkNpcs = { 203516, 203519, 203539, 203552, 203554, 700085, 700086, 700087 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int id : talkNpcs)
 			qe.registerQuestNpc(id).addOnTalkEvent(questId);
 	}
@@ -163,15 +161,15 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = { 2006, 2005, 2004, 2003, 2002, 2001 };
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = { 2100, 2006, 2005, 2004, 2003, 2002, 2001 };
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 	private void destroy(final int var, final QuestEnv env) {

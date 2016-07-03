@@ -12,15 +12,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28601NightmaresandDreamscapes extends QuestHandler {
 
-	private final static int questId = 28601;
-	private final static int[] npc_ids = { 204702, 205234 };
-
 	public _28601NightmaresandDreamscapes() {
-		super(questId);
+		super(28601);
 	}
 
 	@Override
 	public void register() {
+		int[] npc_ids = { 204702, 205234 };
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204702).addOnQuestStart(questId);
@@ -31,7 +29,7 @@ public class _28601NightmaresandDreamscapes extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204702) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);

@@ -52,7 +52,8 @@ public class _1006Ascension extends QuestHandler {
 			return;
 		int[] mobs = { 211042, 211043 };
 		int[] npcs = { 790001, 730008, 205000 };
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -194,10 +195,7 @@ public class _1006Ascension extends QuestHandler {
 							TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						break;
 				}
-				boolean retVal = sendQuestEndDialog(env); // finishes quest or shows reward selection
-				if (qs.getStatus() == QuestStatus.COMPLETE && WebRewardService.MaxLevelReward.isPendingAscension(player))
-					WebRewardService.MaxLevelReward.reward(player);
-				return retVal;
+				return sendQuestEndDialog(env); // finishes quest or shows reward selection
 			}
 		}
 		return false;
@@ -285,7 +283,17 @@ public class _1006Ascension extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		if (env.getQuestId() == questId) {
+			Player player = env.getPlayer();
+			player.getCommonData().updateDaeva();
+			if (WebRewardService.MaxLevelReward.isPendingAscension(player))
+				WebRewardService.MaxLevelReward.reward(player);
+		}
 	}
 }

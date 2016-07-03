@@ -12,23 +12,21 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _10033PetrifiedSubside extends QuestHandler {
 
-	private final static int questId = 10033;
-	// Pomponia										ID: 798970
-	// Sulla											ID: 798975
-	// Philon											ID: 798981
-	// Western Petrified Mass			ID: 730226
-	// Eastern Petrified Mass			ID: 730227
-	// Southern Petrified Mass		ID: 730228
-	private final static int[] npcs = {798970, 798975, 798981, 730226, 730227, 730228};
-
 	public _10033PetrifiedSubside() {
-		super(questId);
+		super(10033);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		// Pomponia ID: 798970
+		// Sulla ID: 798975
+		// Philon ID: 798981
+		// Western Petrified Mass ID: 730226
+		// Eastern Petrified Mass ID: 730227
+		// Southern Petrified Mass ID: 730228
+		int[] npcs = { 798970, 798975, 798981, 730226, 730227, 730228 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -72,9 +70,9 @@ public class _10033PetrifiedSubside extends QuestHandler {
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2);
 						case SET_SUCCEED:
-							if(var == 6) {
+							if (var == 6) {
 								removeQuestItem(env, 182215625, 1);
-								qs.setQuestVar(var+1); // 11
+								qs.setQuestVar(var + 1); // 11
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return closeDialogWindow(env);
@@ -101,11 +99,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
-						
+
 						if (dialog == DialogAction.SETPRO4) {
 							removeQuestItem(env, 182215622, 1);
 							giveQuestItem(env, 182215623, 1);
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 					break;
@@ -114,11 +112,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2375);
 						}
-						
+
 						if (dialog == DialogAction.SETPRO5) {
 							removeQuestItem(env, 182215623, 1);
 							giveQuestItem(env, 182215624, 1);
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 					break;
@@ -127,11 +125,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
-						
-						if (dialog == DialogAction.SETPRO6)  {
+
+						if (dialog == DialogAction.SETPRO6) {
 							removeQuestItem(env, 182215624, 1);
 							giveQuestItem(env, 182215625, 1);
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 					break;
@@ -148,12 +146,12 @@ public class _10033PetrifiedSubside extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

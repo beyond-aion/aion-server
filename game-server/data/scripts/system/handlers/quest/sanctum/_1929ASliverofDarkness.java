@@ -35,7 +35,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	public void register() {
 		int[] npcs = { 203752, 203852, 203164, 205110, 700240, 205111, 203701, 203711 };
 		int[] stigmas = { 140000001, 140000002, 140000003, 140000004 };
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnMovieEndQuest(155, questId);
 		qe.registerQuestNpc(212992).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
@@ -317,7 +317,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

@@ -25,19 +25,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24026AHandfromEachSide extends QuestHandler {
 
-	private final static int questId = 24026;
-	private final static int[] npcIds = { 204301, 204403, 204432 };
 	private final static int[] mobIds = { 213575, 280818 };
 	private int balaurKilled = 0;
 
 	public _24026AHandfromEachSide() {
-		super(questId);
+		super(24026);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npcIds = { 204301, 204403, 204432 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnLogOut(questId);
 		qe.registerOnEnterWorld(questId);
@@ -48,15 +47,15 @@ public class _24026AHandfromEachSide extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = { 24025, 24024, 24023, 24022, 24021, 24020 };
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = { 24025, 24024, 24023, 24022, 24021, 24020 };
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 	@Override

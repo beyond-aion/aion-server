@@ -15,16 +15,14 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24015TotemPlowed extends QuestHandler {
 
-	private final static int questId = 24015;
-
 	public _24015TotemPlowed() {
-		super(questId);
+		super(24015);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203669).addOnTalkEvent(questId); // Taora
 		qe.registerQuestNpc(203557).addOnTalkEvent(questId); // Suthran
 		qe.registerQuestNpc(700099).addOnKillEvent(questId); // Zemurru's Totem
@@ -108,13 +106,13 @@ public class _24015TotemPlowed extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24010);
 	}
 
 }

@@ -3,11 +3,12 @@ package quest.poeta;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author MrPoke
@@ -15,17 +16,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1100KaliosCall extends QuestHandler {
 
-	private final static int questId = 1100;
-
 	public _1100KaliosCall() {
-		super(questId);
+		super(1100);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203067).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnEnterWorld(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -52,18 +51,17 @@ public class _1100KaliosCall extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 1001, 1002, 1003, 1004, 1005 };
-		for (int id : ids) {
-			QuestEngine.getInstance().onEnterZoneMissionEnd( new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		}
-		return true;
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.POETA.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
-	
+
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

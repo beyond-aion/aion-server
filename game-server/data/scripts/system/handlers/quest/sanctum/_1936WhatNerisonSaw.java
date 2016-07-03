@@ -27,8 +27,8 @@ public class _1936WhatNerisonSaw extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1935);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1935);
 	}
 
 	@Override

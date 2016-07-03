@@ -12,15 +12,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2902DispatchtoAltgard extends QuestHandler {
 
-	private final static int questId = 2902;
-
 	public _2902DispatchtoAltgard() {
-		super(questId);
+		super(2902);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(204191).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203559).addOnTalkEvent(questId);
 	}
@@ -71,7 +69,7 @@ public class _2902DispatchtoAltgard extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 }

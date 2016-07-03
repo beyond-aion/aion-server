@@ -6,7 +6,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
@@ -15,16 +14,13 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _80000JoyfulDaevasDay extends QuestHandler {
 
-	private final static int questId = 80000;
-
 	public _80000JoyfulDaevasDay() {
-		super(questId);
+		super(80000);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798415).addOnTalkEvent(questId); // Ias
-		qe.registerOnLevelUp(questId);
 	}
 
 	@Override
@@ -52,14 +48,5 @@ public class _80000JoyfulDaevasDay extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
 	}
 }

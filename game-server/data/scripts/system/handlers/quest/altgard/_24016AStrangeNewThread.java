@@ -17,17 +17,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  */
 public class _24016AStrangeNewThread extends QuestHandler {
 
-	private final static int questId = 24016;
-	private final static int[] npcs = { 203557, 700140, 700141 };
-
 	public _24016AStrangeNewThread() {
-		super(questId);
+		super(24016);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npcs = { 203557, 700140, 700141 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnDie(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnMovieEndQuest(154, questId);
@@ -170,14 +168,14 @@ public class _24016AStrangeNewThread extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = { 24015, 24014, 24013, 24012, 24011 };
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = { 24015, 24014, 24013, 24012, 24011 };
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 }

@@ -18,19 +18,17 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _14014TurningTheIde extends QuestHandler {
 
-	private final static int questId = 14014;	
-	
-	private final int[] questNpcs = { 203146, 203147, 802045, 203098 };
 	private final int[] mobs = { 210178, 216892 };
 
 	public _14014TurningTheIde() {
-		super(questId);
+		super(14014);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] questNpcs = { 203146, 203147, 802045, 203098 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(182215314, questId);
 		for (int questNpc : questNpcs)
 			qe.registerQuestNpc(questNpc).addOnTalkEvent(questId);
@@ -118,12 +116,12 @@ public class _14014TurningTheIde extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14010, true);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14010);
 	}
 }

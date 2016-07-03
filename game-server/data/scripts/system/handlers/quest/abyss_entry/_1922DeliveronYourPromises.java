@@ -18,15 +18,13 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _1922DeliveronYourPromises extends QuestHandler {
 
-	private final static int questId = 1922;
-
 	public _1922DeliveronYourPromises() {
-		super(questId);
+		super(1922);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnMovieEndQuest(165, questId);
@@ -208,7 +206,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1921);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1922);
 	}
 }

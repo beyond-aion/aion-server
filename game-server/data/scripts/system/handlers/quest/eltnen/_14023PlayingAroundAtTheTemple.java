@@ -14,16 +14,14 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 
-	private final static int questId = 14023;
-
 	public _14023PlayingAroundAtTheTemple() {
-		super(questId);
+		super(14023);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203965).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203967).addOnTalkEvent(questId);
 	}
@@ -88,12 +86,12 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 }

@@ -17,20 +17,19 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _20033DranaSolution extends QuestHandler {
 
-	private final static int questId = 20033;
-	// Nunglark Drana Growing Device	ID: 700701
-	// Skira			ID: 799270
-	private final static int[] npcs = {700701, 799270};
-	private final static int[] mobs = {216444, 216445, 216446, 216447};
+	private final static int[] mobs = { 216444, 216445, 216446, 216447 };
 
 	public _20033DranaSolution() {
-		super(questId);
+		super(20033);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		// Nunglark Drana Growing Device ID: 700701
+		// Skira ID: 799270
+		int[] npcs = { 700701, 799270 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -93,7 +92,7 @@ public class _20033DranaSolution extends QuestHandler {
 				if (var1 >= 0 && var1 < 4) {
 					return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
 				} else if (var1 == 4) {
-					qs.setQuestVar(2); //2
+					qs.setQuestVar(2); // 2
 					updateQuestStatus(env);
 					return true;
 				}
@@ -112,13 +111,14 @@ public class _20033DranaSolution extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START || id != 182215594) {
 			return HandlerResult.UNKNOWN;
 		}
-		
+
 		int var = qs.getQuestVarById(0);
-		if(var != 3)
+		if (var != 3)
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
@@ -134,12 +134,12 @@ public class _20033DranaSolution extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

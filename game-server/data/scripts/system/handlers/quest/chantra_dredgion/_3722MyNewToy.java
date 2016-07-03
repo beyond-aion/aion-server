@@ -14,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3722MyNewToy extends QuestHandler {
 
-	private static final int questId = 3722;
-
 	public _3722MyNewToy() {
-		super(questId);
+		super(3722);
 	}
 
 	@Override
@@ -34,7 +32,7 @@ public class _3722MyNewToy extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799069) { // Yannis
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

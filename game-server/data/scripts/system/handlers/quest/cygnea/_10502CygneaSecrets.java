@@ -25,11 +25,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _10502CygneaSecrets extends QuestHandler {
 
-	private final static int questId = 10502;
 	private final static int workItemId = 182215601; // Rubbing Tool Bag
 
 	public _10502CygneaSecrets() {
-		super(questId);
+		super(10502);
 	}
 
 	@Override
@@ -44,8 +43,8 @@ public class _10502CygneaSecrets extends QuestHandler {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
 		qe.registerQuestItem(workItemId, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -175,12 +174,12 @@ public class _10502CygneaSecrets extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

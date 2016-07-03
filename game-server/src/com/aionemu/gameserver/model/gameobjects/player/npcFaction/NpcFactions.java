@@ -63,7 +63,7 @@ public class NpcFactions {
 			timeLimit[type] = faction.getTime();
 	}
 
-	public NpcFaction getNpcFactinById(int id) {
+	public NpcFaction getFactionById(int id) {
 		return factions.get(id);
 	}
 
@@ -98,7 +98,7 @@ public class NpcFactions {
 		if (npcFactionTemplate == null) {
 			return;
 		}
-		NpcFaction npcFaction = getNpcFactinById(npcFactionTemplate.getId());
+		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());
 		if (npcFaction == null || !npcFaction.isActive()) {
 			PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1438));
 			return;
@@ -126,7 +126,7 @@ public class NpcFactions {
 		if (npcFactionTemplate == null) {
 			return;
 		}
-		NpcFaction npcFaction = getNpcFactinById(npcFactionTemplate.getId());
+		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());
 		NpcFaction activeNpcFaction = getActiveNpcFaction(npcFactionTemplate.isMentor());
 		int npcFactionId = npcFactionTemplate.getId();
 		int skillPoints = npcFactionTemplate.getSkillPoints();

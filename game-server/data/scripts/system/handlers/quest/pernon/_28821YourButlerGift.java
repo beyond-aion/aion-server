@@ -58,7 +58,7 @@ public class _28821YourButlerGift extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			switch (dialog) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 1011);

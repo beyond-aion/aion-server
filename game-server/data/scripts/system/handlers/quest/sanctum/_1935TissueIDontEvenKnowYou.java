@@ -31,8 +31,8 @@ public class _1935TissueIDontEvenKnowYou extends QuestHandler {
 
 	// @Override
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1934);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1934);
 	}
 
 	@Override

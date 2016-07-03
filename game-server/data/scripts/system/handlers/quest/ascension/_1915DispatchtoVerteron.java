@@ -12,15 +12,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1915DispatchtoVerteron extends QuestHandler {
 
-	private final static int questId = 1915;
-
 	public _1915DispatchtoVerteron() {
-		super(questId);
+		super(1915);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(203726).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203097).addOnTalkEvent(questId);
 	}
@@ -71,7 +69,7 @@ public class _1915DispatchtoVerteron extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 }

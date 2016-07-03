@@ -31,7 +31,7 @@ public class _80331TransformWithTheMagicCane extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 831531) {
 				switch (dialog) {
 					case QUEST_SELECT: {

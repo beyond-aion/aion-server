@@ -2,11 +2,12 @@ package quest.altgard;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
@@ -14,17 +15,14 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24010SuthransOrders extends QuestHandler {
 
-	private final static int questId = 24010;
-
 	public _24010SuthransOrders() {
-		super(questId);
+		super(24010);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203557).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnEnterWorld(questId);
 	}
 
 	@Override
@@ -54,15 +52,10 @@ public class _24010SuthransOrders extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 0, true);
-	}
-	
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 24011, 24012, 24013, 22014, 24015, 24016 };
-		for (int id : ids)
-			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		return true;
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.ALTGARD.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
 }

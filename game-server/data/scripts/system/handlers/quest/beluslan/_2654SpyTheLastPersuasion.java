@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2654SpyTheLastPersuasion extends QuestHandler {
 
-	private final static int questId = 2654;
-
 	public _2654SpyTheLastPersuasion() {
-		super(questId);
+		super(2654);
 	}
 
 	@Override
@@ -24,11 +22,6 @@ public class _2654SpyTheLastPersuasion extends QuestHandler {
 		qe.registerQuestNpc(204775).addOnQuestStart(questId);
 		qe.registerQuestNpc(204775).addOnTalkEvent(questId);
 		qe.registerQuestNpc(212314).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2653);
 	}
 
 	@Override

@@ -26,8 +26,8 @@ public class _14044ShardsOfMemory extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(279029).addOnTalkEvent(questId);
 		qe.registerQuestNpc(278501).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790001).addOnTalkEvent(questId);
@@ -115,12 +115,12 @@ public class _14044ShardsOfMemory extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14040);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14040);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14040);
 	}
 }

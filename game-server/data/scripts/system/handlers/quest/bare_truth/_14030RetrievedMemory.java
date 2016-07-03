@@ -22,17 +22,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _14030RetrievedMemory extends QuestHandler {
 
-	private final static int questId = 14030;
 	private final static int[] npcs = { 790001, 700551, 205119, 700552, 203700 };
 	private final static int[] mobs = { 211043, 214578, 215396, 215397, 215398, 215399, 215400 };
 
 	public _14030RetrievedMemory() {
-		super(questId);
+		super(14030);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -48,11 +47,11 @@ public class _14030RetrievedMemory extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203700: { // Fasimedes
@@ -154,7 +153,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var >= 2 && var < 55) {
@@ -191,8 +190,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
-
 }

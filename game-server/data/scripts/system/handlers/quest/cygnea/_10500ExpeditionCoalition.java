@@ -2,21 +2,20 @@ package quest.cygnea;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @Author Majka
  */
 public class _10500ExpeditionCoalition extends QuestHandler {
 
-	private final static int questId = 10500;
-
 	public _10500ExpeditionCoalition() {
-		super(questId);
+		super(10500);
 	}
 
 	@Override
@@ -24,11 +23,10 @@ public class _10500ExpeditionCoalition extends QuestHandler {
 		// Nubes 804968
 		// Atmis 804699
 		int[] npcs = { 804698, 804699 };
-		for (int npc : npcs) {
+		for (int npc : npcs)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
-		}
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnEnterWorld(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -38,17 +36,17 @@ public class _10500ExpeditionCoalition extends QuestHandler {
 		if (qs == null)
 			return false;
 
-		//int var = qs.getQuestVarById(0);
+		// int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804698: // Nubes
 				if (qs.getStatus() == QuestStatus.START) {
 					if (dialog == DialogAction.QUEST_SELECT) {
 						return sendQuestDialog(env, 1011);
 					}
-					
+
 					if (dialog == DialogAction.SET_SUCCEED) {
 						qs.setQuestVar(1);
 						qs.setStatus(QuestStatus.REWARD);
@@ -70,15 +68,15 @@ public class _10500ExpeditionCoalition extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 0, true);
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.CYGNEA.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
-	
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 10501, 10502, 10503, 10504, 10505, 10506, 10507 };
-		for (int id : ids)
-			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		return true;
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

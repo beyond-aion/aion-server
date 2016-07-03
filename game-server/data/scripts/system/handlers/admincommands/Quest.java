@@ -295,13 +295,14 @@ public class Quest extends AdminCommand {
 			qs = new QuestState(questId, status);
 			target.getQuestStateList().addQuest(questId, qs);
 		} else {
-			actionType = ActionType.UPDATE;
+			actionType = qs.getStatus() == QuestStatus.COMPLETE ? ActionType.ADD : ActionType.UPDATE;
 			qs.setStatus(status);
 		}
 		if (status == QuestStatus.COMPLETE) {
 			qs.setQuestVar(0); // completed quests vars are always 0
 			if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
 				qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
+			QuestEngine.getInstance().onQuestCompleted(target, questId);
 		} else {
 			if (varNum == -1)
 				qs.setQuestVar(var);

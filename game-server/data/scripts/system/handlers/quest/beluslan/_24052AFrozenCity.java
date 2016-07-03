@@ -19,32 +19,30 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24052AFrozenCity extends QuestHandler {
 
-	private final static int questId = 24052;
-	private final static int[] npc_ids = { 204753, 790016, 730036, 279000 };
-
 	public _24052AFrozenCity() {
-		super(questId);
+		super(24052);
 	}
 
 	@Override
 	public void register() {
+		int[] npc_ids = { 204753, 790016, 730036, 279000 };
 		qe.registerQuestItem(182215378, questId);
 		qe.registerQuestItem(182215379, questId);
 		qe.registerQuestItem(182215380, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24050);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24050);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24050);
 	}
 
 	@Override

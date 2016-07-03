@@ -34,17 +34,16 @@ import javolution.util.FastTable;
  */
 public class _2008Ascension extends QuestHandler {
 
-	private final static int questId = 2008;
-
 	public _2008Ascension() {
-		super(questId);
+		super(2008);
 	}
 
 	@Override
 	public void register() {
 		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
 			return;
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(203550).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790003).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790002).addOnTalkEvent(questId);
@@ -258,18 +257,15 @@ public class _2008Ascension extends QuestHandler {
 						}
 						break;
 				}
-				boolean retVal = sendQuestEndDialog(env); // finishes quest or shows reward selection
-				if (qs.getStatus() == QuestStatus.COMPLETE && WebRewardService.MaxLevelReward.isPendingAscension(player))
-					WebRewardService.MaxLevelReward.reward(player);
-				return retVal;
+				return sendQuestEndDialog(env); // finishes quest or shows reward selection
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 
 	@Override
@@ -304,5 +300,16 @@ public class _2008Ascension extends QuestHandler {
 				changeQuestStep(env, var, 4);
 		}
 		return false;
+	}
+
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		if (env.getQuestId() == questId) {
+			Player player = env.getPlayer();
+			player.getCommonData().updateDaeva();
+			if (WebRewardService.MaxLevelReward.isPendingAscension(player))
+				WebRewardService.MaxLevelReward.reward(player);
+		}
 	}
 }

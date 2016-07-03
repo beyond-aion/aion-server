@@ -20,17 +20,16 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24013PoisonInTheWaters extends QuestHandler {
 
-	private final static int questId = 24013;
 	private final static int[] mobs = { 210455, 210456, 214039, 210458, 214032 };
 	
 	public _24013PoisonInTheWaters() {
-		super(questId);
+		super(24013);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -112,12 +111,12 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24010);
 	}
 }

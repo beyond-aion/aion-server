@@ -18,17 +18,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24051InvesetigatetheDisappearance extends QuestHandler {
 
-	private final static int questId = 24051;
-
 	public _24051InvesetigatetheDisappearance() {
-		super(questId);
+		super(24051);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = { 204707, 204749, 204800, 700359 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(182215375, questId);
 		qe.registerOnMovieEndQuest(236, questId);
 		qe.registerOnEnterZone(ZoneName.get("MINE_PORT_220040000"), questId);
@@ -164,12 +162,12 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24050);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24050);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24050);
 	}
 }

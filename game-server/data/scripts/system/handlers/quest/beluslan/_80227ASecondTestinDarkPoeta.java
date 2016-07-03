@@ -12,12 +12,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _80227ASecondTestinDarkPoeta extends QuestHandler {
 
-	private final static int questId = 80227;
-
 	int[] mobs = { 214904 };
 
 	public _80227ASecondTestinDarkPoeta() {
-		super(questId);
+		super(80227);
 	}
 
 	@Override
@@ -32,7 +30,7 @@ public class _80227ASecondTestinDarkPoeta extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 831027) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);

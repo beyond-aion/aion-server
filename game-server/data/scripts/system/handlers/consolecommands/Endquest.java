@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
+import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -53,6 +54,7 @@ public class Endquest extends ConsoleCommand {
 		if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
 			qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
+		QuestEngine.getInstance().onQuestCompleted(player, qs.getQuestId());
 		player.getController().updateNearbyQuests();
 	}
 }

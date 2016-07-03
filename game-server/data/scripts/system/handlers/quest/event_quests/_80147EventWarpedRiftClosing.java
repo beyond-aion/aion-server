@@ -10,8 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
@@ -19,16 +17,13 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _80147EventWarpedRiftClosing extends QuestHandler {
 
-	private final static int questId = 80147;
-
 	public _80147EventWarpedRiftClosing() {
-		super(questId);
+		super(80147);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(830246).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 		qe.registerOnBonusApply(questId, BonusType.RIFT);
 	}
 
@@ -58,15 +53,6 @@ public class _80147EventWarpedRiftClosing extends QuestHandler {
 			}
 		}
 		return sendQuestRewardDialog(env, 830246, 0);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
 	}
 
 	@Override

@@ -121,20 +121,21 @@ public class QuestState {
 		return reward;
 	}
 
+	/**
+	 * @return True, if the quest is not active or is complete and can currently be repeated.
+	 */
+	public boolean isStartable() {
+		return status == QuestStatus.NONE && questVars.getQuestVars() == 0 || status == QuestStatus.COMPLETE && canRepeat();
+	}
+
 	public boolean canRepeat() {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		if (status != QuestStatus.NONE
-			&& (status != QuestStatus.COMPLETE || (completeCount >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255))) {
+		if (completeCount >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255)
 			return false;
-		}
-		if (questVars.getQuestVars() != 0) {
-			return false;
-		}
 		if (template.isTimeBased() && nextRepeatTime != null) {
 			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-			if (currentTime.before(nextRepeatTime)) {
+			if (currentTime.before(nextRepeatTime))
 				return false;
-			}
 		}
 		return true;
 	}

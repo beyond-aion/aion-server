@@ -13,19 +13,18 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14022TheTestOfTheHeart extends QuestHandler {
 
-	private final static int questId = 14022;
 	private final static int[] mob_ids = { 210808, 210799 };
-	private final static int[] npc_ids = { 203900, 203996 };
 
 	public _14022TheTestOfTheHeart() {
-		super(questId);
+		super(14022);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
+		int[] npc_ids = { 203900, 203996 };
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLogOut(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npc_ids)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		for (int mob_id : mob_ids)
@@ -33,13 +32,13 @@ public class _14022TheTestOfTheHeart extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 
 	@Override

@@ -29,13 +29,12 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _10503GuardDownSecretsOut extends QuestHandler {
 
-	private final static int questId = 10503;
 	private final static int mobTargetId = 236252; // Aetheric Field Guard
 	private final static int collectItemId = 182215603; // Old Balaur Document
 	private final static int workItemId = 182215604; // Deciphered Balaur Document
 
 	public _10503GuardDownSecretsOut() {
-		super(questId);
+		super(10503);
 	}
 
 	@Override
@@ -51,8 +50,8 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 		qe.registerQuestItem(collectItemId, questId);
 		qe.registerQuestItem(workItemId, questId);
 		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10503_206364_3_210070000"), questId); // Aetheric Field Stone of Earth zone
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -216,12 +215,12 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

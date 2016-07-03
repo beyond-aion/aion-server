@@ -129,7 +129,7 @@ public class _11001KindMeira extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 11001);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 11001);
 	}
 }

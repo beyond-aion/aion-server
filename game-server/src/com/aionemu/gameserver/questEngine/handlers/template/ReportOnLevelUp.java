@@ -37,7 +37,7 @@ public class ReportOnLevelUp extends QuestHandler {
 			qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -57,22 +57,17 @@ public class ReportOnLevelUp extends QuestHandler {
 
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
-		return startQuest(env);
+		return startQuest(env.getPlayer());
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return startQuest(env);
+	public void onLevelChangedEvent(Player player) {
+		startQuest(player);
 	}
 
-	private boolean startQuest(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null) {
-			env.setQuestId(questId);
-			env.setPlayer(player);
-			return QuestService.startQuest(env, QuestStatus.REWARD, false);
-		}
+	private boolean startQuest(Player player) {
+		if (!player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(new QuestEnv(null, player, questId, 0), QuestStatus.REWARD, false);
 		return false;
 	}
 

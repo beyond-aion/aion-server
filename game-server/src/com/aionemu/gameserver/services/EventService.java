@@ -93,10 +93,11 @@ public class EventService {
 						if (et.getStartDate().isAfter(completeTime)) { // recurring event, reset it
 							qs.setCompleteCount(0); // reset complete count if quest was last completed on a previous event, so it can be done again
 							if (start && qs.getStatus() != QuestStatus.START) {
+								ActionType actionType = qs.getStatus() == QuestStatus.COMPLETE ? ActionType.ADD : ActionType.UPDATE;
 								qs.setStatus(QuestStatus.START);
 								qs.setQuestVar(0);
 								qs.setReward(null);
-								PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
+								PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
 							}
 							break;
 						}

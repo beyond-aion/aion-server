@@ -31,7 +31,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	public void register() {
 		int[] npcs = { 204182, 203550, 790003, 790002, 203546, 204264, 204061 };
 		int[] stigmas = { 140000001, 140000002, 140000003, 140000004 };
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnMovieEndQuest(156, questId);
 		qe.registerQuestNpc(204263).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
@@ -312,7 +312,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

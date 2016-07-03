@@ -44,7 +44,7 @@ public class FountainRewards extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) { // Coin Fountain
 				switch (dialog) {
 					case USE_OBJECT: {

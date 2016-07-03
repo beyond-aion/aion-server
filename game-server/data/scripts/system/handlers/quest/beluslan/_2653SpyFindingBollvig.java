@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2653SpyFindingBollvig extends QuestHandler {
 
-	private final static int questId = 2653;
-
 	public _2653SpyFindingBollvig() {
-		super(questId);
+		super(2653);
 	}
 
 	@Override
@@ -27,11 +25,6 @@ public class _2653SpyFindingBollvig extends QuestHandler {
 		qe.registerQuestNpc(204650).addOnTalkEvent(questId);
 		qe.registerQuestNpc(212314).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204775).addOnTalkEvent(questId);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2652);
 	}
 
 	@Override

@@ -10,21 +10,19 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _2948HuronsLetter extends QuestHandler {
 
-	private final static int questId = 2948;
-
 	public _2948HuronsLetter() {
-		super(questId);
+		super(2948);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(204274).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 
 	@Override

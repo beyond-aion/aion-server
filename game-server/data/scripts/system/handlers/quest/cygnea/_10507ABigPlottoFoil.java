@@ -26,10 +26,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _10507ABigPlottoFoil extends QuestHandler {
 
-	private final static int questId = 10507;
-
 	public _10507ABigPlottoFoil() {
-		super(questId);
+		super(10507);
 	}
 
 	@Override
@@ -51,8 +49,8 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10507_206366_2_210070000"), questId); // Beritra Guard Captain's Tent zone
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnMovieEndQuest(993, questId);
 	}
 
@@ -229,12 +227,12 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

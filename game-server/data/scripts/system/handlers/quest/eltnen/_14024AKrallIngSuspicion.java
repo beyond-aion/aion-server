@@ -16,29 +16,27 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _14024AKrallIngSuspicion extends QuestHandler {
 
-	private final static int questId = 14024;
-	private final static int[] npc_ids = { 203904, 204045, 204003, 204004, 204020, 203901 };
-
 	public _14024AKrallIngSuspicion() {
-		super(questId);
+		super(14024);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 203904, 204045, 204003, 204004, 204020, 203901 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 
 	@Override

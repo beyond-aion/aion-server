@@ -16,17 +16,17 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2042TheLastCheckpoint extends QuestHandler {
 
-	private final static int questId = 2042;
 	private String[] rings = { "MORHEIM_ICE_FORTRESS_220020000_1", "MORHEIM_ICE_FORTRESS_220020000_2", "MORHEIM_ICE_FORTRESS_220020000_3",
 		"MORHEIM_ICE_FORTRESS_220020000_4", "MORHEIM_ICE_FORTRESS_220020000_5", "MORHEIM_ICE_FORTRESS_220020000_6" };
 
 	public _2042TheLastCheckpoint() {
-		super(questId);
+		super(2042);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(204301).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204319).addOnTalkEvent(questId);
 		for (String ring : rings) {
@@ -119,11 +119,6 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2947);
-	}
-
-	@Override
 	public boolean onPassFlyingRingEvent(QuestEnv env, String flyingRing) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -177,5 +172,15 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		QuestService.questTimerEnd(env);
 		return onQuestTimerEndEvent(env);
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2947);
+	}
+
+	@Override
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2947);
 	}
 }

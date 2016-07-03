@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -32,7 +30,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
@@ -46,6 +43,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastTable;
 
 /**
  * @author Estrayl
@@ -160,7 +159,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 				else
 					questId = 23744;
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
-				if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat())
+				if (qs == null || qs == null || qs.isStartable())
 					QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 			}
 		}

@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3721DisarmTheChantraDredgion extends QuestHandler {
 
-	private static final int questId = 3721;
-
 	public _3721DisarmTheChantraDredgion() {
-		super(questId);
+		super(3721);
 	}
 
 	@Override

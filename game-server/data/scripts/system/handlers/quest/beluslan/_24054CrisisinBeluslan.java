@@ -12,17 +12,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24054CrisisinBeluslan extends QuestHandler {
 
-	private final static int questId = 24054;
-	private final static int[] npc_ids = { 204701, 204702, 802053 };
-
 	public _24054CrisisinBeluslan() {
-		super(questId);
+		super(24054);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204701, 204702, 802053 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(702041).addOnKillEvent(questId);
 		qe.registerQuestNpc(233865).addOnKillEvent(questId);
 		for (int npc_id : npc_ids)
@@ -30,15 +28,15 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = { 24053, 24052, 24051, 24050 };
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = { 24053, 24052, 24051, 24050 };
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 	@Override

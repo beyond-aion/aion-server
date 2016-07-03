@@ -50,7 +50,7 @@ public class RelicRewards extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case EXCHANGE_COIN: {

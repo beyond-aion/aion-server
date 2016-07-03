@@ -37,7 +37,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 		final int targetId = env.getTargetId();
 
 		DialogAction dialog = env.getDialog();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 205842) {
 				switch (dialog) {
 					case QUEST_SELECT:

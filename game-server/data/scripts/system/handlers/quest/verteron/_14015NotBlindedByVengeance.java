@@ -14,27 +14,25 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _14015NotBlindedByVengeance extends QuestHandler {
 
-	private final static int questId = 14015;
-
 	public _14015NotBlindedByVengeance() {
-		super(questId);
+		super(14015);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203098).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14010);
 	}
 
 	@Override

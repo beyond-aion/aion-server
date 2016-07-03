@@ -32,7 +32,7 @@ public class _2106VanarsFlattery extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(getQuestId());
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 203502) {
 				switch (dialog) {
 					case QUEST_SELECT: {

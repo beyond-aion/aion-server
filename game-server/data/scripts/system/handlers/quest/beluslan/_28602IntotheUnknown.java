@@ -18,18 +18,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _28602IntotheUnknown extends QuestHandler {
 
-	private final static int questId = 28602;
-	// Bridget						205234
-	// Maga's Potions			730308
-	// Robstin's Corpse		700939
-	private final static int[] npc_ids = { 205234, 730308, 700939 };
-
 	public _28602IntotheUnknown() {
-		super(questId);
+		super(28602);
 	}
 
 	@Override
 	public void register() {
+		// Bridget 205234
+		// Maga's Potions 730308
+		// Robstin's Corpse 700939
+		int[] npc_ids = { 205234, 730308, 700939 };
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
 		for (int npc_id : npc_ids)
@@ -38,7 +36,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		qe.registerQuestNpc(217005).addOnKillEvent(questId); // Shadow Judge Kaliga
 		qe.registerOnMovieEndQuest(454, questId);
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -69,7 +67,6 @@ public class _28602IntotheUnknown extends QuestHandler {
 		return false;
 	}
 
-	
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -79,7 +76,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId != 454)
@@ -97,7 +94,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205234) { // Bridget
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
@@ -112,7 +109,8 @@ public class _28602IntotheUnknown extends QuestHandler {
 				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
 					InstanceService.registerPlayerWithInstance(newInstance, player);
-					TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f,	189.52058f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+					TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
+						TeleportAnimation.FADE_OUT_BEAM);
 					changeQuestStep(env, 0, 1, false); // 1
 					return closeDialogWindow(env);
 				}
@@ -124,10 +122,10 @@ public class _28602IntotheUnknown extends QuestHandler {
 				} else if (env.getDialog() == DialogAction.SELECT_ACTION_1353) {
 					return sendQuestDialog(env, 1353);
 				} else if (env.getDialog() == DialogAction.SETPRO2) {
-					
+
 					// Check item
-					if(var == 1) {
-						if(checkItemExistence(env, 185000109, 1, true)) { // Hisen's key
+					if (var == 1) {
+						if (checkItemExistence(env, 185000109, 1, true)) { // Hisen's key
 							changeQuestStep(env, 1, 2, false); // 2
 							TeleportService2.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
@@ -153,7 +151,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205234) { // Bridget
-				if(env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

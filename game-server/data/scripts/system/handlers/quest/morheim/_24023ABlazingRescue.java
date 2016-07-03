@@ -15,30 +15,28 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24023ABlazingRescue extends QuestHandler {
 
-	private final static int questId = 24023;
-	private final static int[] npc_ids = { 204317, 204372, 204408 };
-
 	public _24023ABlazingRescue() {
-		super(questId);
+		super(24023);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204317, 204372, 204408 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24020);
 	}
 
 	@Override
@@ -64,7 +62,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204317: {

@@ -12,29 +12,27 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24025CrisisinMorheim extends QuestHandler {
 
-	private final static int questId = 24025;
-	private final static int[] npc_ids = { 204388, 204414, 204304, 204345 };
-
 	public _24025CrisisinMorheim() {
-		super(questId);
+		super(24025);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204388, 204414, 204304, 204345 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24020);
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204388: {
@@ -74,7 +72,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 						case SET_SUCCEED:
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 3, true, false);
-								
+
 							}
 					}
 				}
@@ -95,8 +93,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 				}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204304) {
 				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 10002);

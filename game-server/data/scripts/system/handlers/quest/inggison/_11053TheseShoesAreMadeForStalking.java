@@ -31,7 +31,7 @@ public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (qs == null || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799015) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);

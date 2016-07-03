@@ -32,8 +32,8 @@ public class _14045RumorsOnWings extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npcs = {278506, 279023, 278643};
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -142,14 +142,15 @@ public class _14045RumorsOnWings extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env, 14041);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		int[] quests = {14040, 14041};
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = {14040, 14041};
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 }

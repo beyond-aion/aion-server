@@ -17,17 +17,16 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _1044TestingFlightSkills extends QuestHandler {
 
-	private final static int questId = 1044;
 	private String[] rings = { "ELTNEN_FORTRESS_210020000_1", "ELTNEN_FORTRESS_210020000_2", "ELTNEN_FORTRESS_210020000_3",
 		"ELTNEN_FORTRESS_210020000_4", "ELTNEN_FORTRESS_210020000_5", "ELTNEN_FORTRESS_210020000_6" };
 
 	public _1044TestingFlightSkills() {
-		super(questId);
+		super(1044);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(203901).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203930).addOnTalkEvent(questId);
 		for (String ring : rings) {
@@ -120,8 +119,8 @@ public class _1044TestingFlightSkills extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1922);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1922);
 	}
 
 	@Override

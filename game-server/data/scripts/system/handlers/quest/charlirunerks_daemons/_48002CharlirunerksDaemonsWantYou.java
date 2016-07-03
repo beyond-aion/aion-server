@@ -13,26 +13,21 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _48002CharlirunerksDaemonsWantYou extends QuestHandler {
 
-	public static final int questId = 48002;
-
 	public _48002CharlirunerksDaemonsWantYou() {
-		super(questId);
+		super(48002);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(799886).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
+	public void onLevelChangedEvent(Player player) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getLevel() >= 50 && (qs == null || qs.getStatus() == QuestStatus.NONE)) {
-			return QuestService.startQuest(env);
-		}
-		return false;
+		if (player.getLevel() >= 50 && (qs == null || qs.getStatus() == QuestStatus.NONE))
+			QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 	}
 
 	@Override

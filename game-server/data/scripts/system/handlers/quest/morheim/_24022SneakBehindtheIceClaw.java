@@ -18,17 +18,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
-	private final static int questId = 24022;
-
 	public _24022SneakBehindtheIceClaw() {
-		super(questId);
+		super(24022);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = { 204329, 204332, 204335, 700246, 204301, 802047 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(204417).addOnKillEvent(questId);
 		qe.registerQuestNpc(212877).addOnKillEvent(questId);
 		qe.registerQuestItem(182215364, questId);
@@ -170,12 +168,12 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24020);
 	}
 }

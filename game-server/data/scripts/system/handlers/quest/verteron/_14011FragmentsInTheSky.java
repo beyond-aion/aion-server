@@ -14,18 +14,16 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14011FragmentsInTheSky extends QuestHandler {
 
-	private final static int questId = 14011;
-
 	public _14011FragmentsInTheSky() {
-		super(questId);
+		super(14011);
 	}
 
 	@Override
 	public void register() {
 		int[] talkNpcs = { 203109, 203122 };
 		qe.registerQuestNpc(700091).addOnKillEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int id : talkNpcs)
 			qe.registerQuestNpc(id).addOnTalkEvent(questId);
 	}
@@ -104,12 +102,12 @@ public class _14011FragmentsInTheSky extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14010);
 	}
 }

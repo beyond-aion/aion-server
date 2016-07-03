@@ -21,31 +21,29 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _20034RescuetheReians extends QuestHandler {
 
-	private final static int questId = 20034;
-	// Rebirthing Chamber Exit	ID: 700706
-	// Destroyed Gargoyle				ID: 730243
-	// Ortiz										ID: 799295
-	// Fjoelnir									ID: 799297
-	// Anilmo										ID: 799341
-	// Brainwashed Reian				ID: 799513 (var1)
-	// Brainwashed Reian				ID: 799514 (var2)
-	// Brainwashed Reian				ID: 799515 (var3)
-	// Brainwashed Reian				ID: 799516 (var4)
-	private final static int[] npcs = { 730243, 799295, 799297, 799341, 799513, 799514, 799515, 799516};
-
 	public _20034RescuetheReians() {
-		super(questId);
+		super(20034);
 	}
 
 	@Override
 	public void register() {
+		// Rebirthing Chamber Exit ID: 700706
+		// Destroyed Gargoyle ID: 730243
+		// Ortiz ID: 799295
+		// Fjoelnir ID: 799297
+		// Anilmo ID: 799341
+		// Brainwashed Reian ID: 799513 (var1)
+		// Brainwashed Reian ID: 799514 (var2)
+		// Brainwashed Reian ID: 799515 (var3)
+		// Brainwashed Reian ID: 799516 (var4)
+		int[] npcs = { 730243, 799295, 799297, 799341, 799513, 799514, 799515, 799516 };
 		qe.registerOnDie(questId);
 		qe.registerOnLogOut(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(216592).addOnKillEvent(questId);
 		qe.registerOnMovieEndQuest(442, questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnQuestCompleted(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -62,9 +60,10 @@ public class _20034RescuetheReians extends QuestHandler {
 					qs.setQuestVar(3);
 					updateQuestStatus(env);
 				}
-			} else if(var > 2 && var < 6) {
+			} else if (var > 2 && var < 6) {
 				if (player.getWorldId() != 300150000) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+					PacketSendUtility.sendPacket(player,
+						SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
 					qs.setQuestVar(2);
 					updateQuestStatus(env);
 				}
@@ -90,7 +89,8 @@ public class _20034RescuetheReians extends QuestHandler {
 		if (var >= 3 && var < 6) {
 			qs.setQuestVar(2);
 			updateQuestStatus(env);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
 		}
 
 		return false;
@@ -103,7 +103,8 @@ public class _20034RescuetheReians extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var >= 3 && var < 6) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
+				PacketSendUtility.sendPacket(player,
+					SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP_QUEST(DataManager.QUEST_DATA.getQuestById(questId).getName()));
 			}
 		}
 		return false;
@@ -117,13 +118,13 @@ public class _20034RescuetheReians extends QuestHandler {
 			return false;
 		}
 		int var = qs.getQuestVarById(0);
-		//int var1 = qs.getQuestVarById(1);
+		// int var1 = qs.getQuestVarById(1);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		Npc npc = (Npc) player.getTarget();
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799295) { //Ortiz
+			if (targetId == 799295) { // Ortiz
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
@@ -133,7 +134,7 @@ public class _20034RescuetheReians extends QuestHandler {
 		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
-		if (targetId == 799297) { //Fjoelnir
+		if (targetId == 799297) { // Fjoelnir
 			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 0) {
@@ -144,7 +145,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1); // 1
 
 			}
-		} else if (targetId == 799295) { //Ortiz
+		} else if (targetId == 799295) { // Ortiz
 			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1) {
@@ -166,7 +167,8 @@ public class _20034RescuetheReians extends QuestHandler {
 						removeQuestItem(env, 182215595, 1);
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300150000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f, 134.53333f, (byte) 90, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f, 134.53333f, (byte) 90,
+							TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}
@@ -193,8 +195,8 @@ public class _20034RescuetheReians extends QuestHandler {
 							var4 = qs.getQuestVarById(4);
 						}
 						updateQuestStatus(env);
-						
-						if(var1 * var2 * var3 * var4 == 1) { // All Reians are free
+
+						if (var1 * var2 * var3 * var4 == 1) { // All Reians are free
 							playQuestMovie(env, 442);
 							qs.setQuestVar(4);
 							updateQuestStatus(env);
@@ -212,7 +214,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					}
 					break;
 				case SETPRO6:
-					changeQuestStep(env, 5, 6, false);//6
+					changeQuestStep(env, 5, 6, false);// 6
 					npc.getController().onDelete();
 					return closeDialogWindow(env);
 			}
@@ -255,12 +257,12 @@ public class _20034RescuetheReians extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

@@ -43,7 +43,7 @@ public class _1993AnotherBeginning extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int dialogId = env.getDialogId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
 				QuestService.startQuest(env);
 				return sendQuestDialog(env, 1011);

@@ -13,15 +13,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1921TheAbyssQuiz extends QuestHandler {
 
-	private final static int questId = 1921;
-
 	public _1921TheAbyssQuiz() {
-		super(questId);
+		super(1921);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(203752).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203836).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203834).addOnTalkEvent(questId);
@@ -95,7 +93,7 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1920);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1920);
 	}
 }

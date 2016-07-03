@@ -13,26 +13,21 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _38001RadiantOpsRecruitment extends QuestHandler {
 
-	public static final int questId = 38001;
-
 	public _38001RadiantOpsRecruitment() {
-		super(questId);
+		super(38001);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(799828).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
+	public void onLevelChangedEvent(Player player) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getLevel() >= 40 && (qs == null || qs.getStatus() == QuestStatus.NONE)) {
-			return QuestService.startQuest(env);
-		}
-		return false;
+		if (player.getLevel() >= 40 && (qs == null || qs.getStatus() == QuestStatus.NONE))
+			QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 	}
 
 	@Override

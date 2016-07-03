@@ -17,11 +17,10 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _24053TheMaulingoftheMau extends QuestHandler {
 
-	private final static int questId = 24053;
 	private final static int[] npc_ids = { 204787, 204795, 204796, 204700 };
 
 	public _24053TheMaulingoftheMau() {
-		super(questId);
+		super(24053);
 	}
 
 	@Override
@@ -29,8 +28,8 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerAddOnReachTargetEvent(questId);
 		qe.registerAddOnLostTargetEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
@@ -59,13 +58,13 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24050);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24050);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24050);
 	}
 
 	@Override

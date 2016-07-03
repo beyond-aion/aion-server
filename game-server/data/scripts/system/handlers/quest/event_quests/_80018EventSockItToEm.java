@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
@@ -19,15 +18,12 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _80018EventSockItToEm extends QuestHandler {
 
-	private final static int questId = 80018;
-
 	public _80018EventSockItToEm() {
-		super(questId);
+		super(80018);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
 		qe.registerQuestNpc(799778).addOnQuestStart(questId);
 		qe.registerQuestNpc(799778).addOnTalkEvent(questId);
 		qe.registerOnBonusApply(questId, BonusType.MOVIE);
@@ -37,11 +33,7 @@ public class _80018EventSockItToEm extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if ((qs == null || qs.getStatus() == QuestStatus.NONE) && !onLvlUpEvent(env))
-			return false;
-
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < 10) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.canRepeat()) {
 			if (env.getTargetId() == 799778) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
@@ -76,25 +68,6 @@ public class _80018EventSockItToEm extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (EventService.getInstance().checkQuestIsActive(questId)) {
-			if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel()))
-				return false;
-
-			// Start once
-			if (qs == null || qs.getStatus() == QuestStatus.NONE)
-				return QuestService.startEventQuest(env, QuestStatus.START);
-		} else if (qs != null) {
-			// Set as expired
-			QuestService.abandonQuest(player, questId);
-		}
-		return false;
-	}
-
-	@Override
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		if (bonusType != BonusType.MOVIE || env.getQuestId() != questId)
 			return HandlerResult.UNKNOWN;
@@ -111,5 +84,4 @@ public class _80018EventSockItToEm extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-
 }

@@ -23,10 +23,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _20502EvolvingMysteries extends QuestHandler {
 
-	private final static int questId = 20502;
-
 	public _20502EvolvingMysteries() {
-		super(questId);
+		super(20502);
 	}
 
 	@Override
@@ -40,8 +38,8 @@ public class _20502EvolvingMysteries extends QuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -145,12 +143,12 @@ public class _20502EvolvingMysteries extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 }

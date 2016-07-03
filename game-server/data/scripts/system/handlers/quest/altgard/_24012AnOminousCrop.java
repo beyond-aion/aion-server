@@ -15,16 +15,14 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24012AnOminousCrop extends QuestHandler {
 
-	private final static int questId = 24012;
-
 	public _24012AnOminousCrop() {
-		super(questId);
+		super(24012);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203605).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700096).addOnTalkEvent(questId);
 		qe.registerOnEnterZone(ZoneName.get("MUMU_FARMLAND_220030000"), questId);
@@ -97,12 +95,12 @@ public class _24012AnOminousCrop extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24010);
 	}
 }

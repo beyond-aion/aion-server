@@ -3,12 +3,12 @@ package quest.reshanta;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
@@ -16,17 +16,15 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _24040VotansOrders extends QuestHandler {
 
-	private final static int questId = 24040;
-
 	public _24040VotansOrders() {
-		super(questId);
+		super(24040);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(278001).addOnTalkEvent(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -50,8 +48,7 @@ public class _24040VotansOrders extends QuestHandler {
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
@@ -60,23 +57,13 @@ public class _24040VotansOrders extends QuestHandler {
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		if (player.getWorldId() == 400010000) {
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null) {
-				env.setQuestId(questId);
-				if (QuestService.startQuest(env)) {
-					return true;
-				}
-			}
-		}
+		if (player.getWorldId() == WorldMapType.RESHANTA.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
 		return false;
 	}
-		
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 24041, 24042, 24043, 24044, 24045, 24046, 24047 };
-		for (int id : ids)
-			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		return true;
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

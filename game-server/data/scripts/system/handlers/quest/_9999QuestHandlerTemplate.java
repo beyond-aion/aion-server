@@ -23,10 +23,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _9999QuestHandlerTemplate extends QuestHandler {
 
-	private static final int questId = 9999;
-
 	public _9999QuestHandlerTemplate() {
-		super(questId);
+		super(9999); // quest id
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		// If this is a mission, the qs should be != null and you will not need this
-		if (qs == null || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 000000) { // Viktor Logwin
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011); // can be different

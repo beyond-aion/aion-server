@@ -22,10 +22,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20503AncientEvilPlans extends QuestHandler {
 
-	private final static int questId = 20503;
-
 	public _20503AncientEvilPlans() {
-		super(questId);
+		super(20503);
 	}
 
 	@Override
@@ -38,8 +36,8 @@ public class _20503AncientEvilPlans extends QuestHandler {
 		}
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20503A_206394_8_220080000"), questId); // Aetheric Field Stone Findspot zone
 		qe.registerOnMovieEndQuest(862, questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -132,13 +130,13 @@ public class _20503AncientEvilPlans extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 	
 	@Override

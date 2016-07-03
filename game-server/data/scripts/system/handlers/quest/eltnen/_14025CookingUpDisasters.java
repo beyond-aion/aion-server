@@ -16,18 +16,17 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  */
 public class _14025CookingUpDisasters extends QuestHandler {
 
-	private final static int questId = 14025;
-	private final static int[] npcs = { 203989, 203901, 204020 };
 	private final static int[] mobs = { 211776, 217090, 232133 };
 
 	public _14025CookingUpDisasters() {
-		super(questId);
+		super(14025);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npcs = { 203989, 203901, 204020 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnDie(questId);
 		for (int npc : npcs)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -36,13 +35,13 @@ public class _14025CookingUpDisasters extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14020);
 	}
 
 	@Override

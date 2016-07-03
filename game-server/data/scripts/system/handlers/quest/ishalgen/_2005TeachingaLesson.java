@@ -15,16 +15,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2005TeachingaLesson extends QuestHandler {
 
-	private final static int questId = 2005;
-
 	public _2005TeachingaLesson() {
-		super(questId);
+		super(2005);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203540).addOnTalkEvent(questId);
 	}
 
@@ -81,12 +79,12 @@ public class _2005TeachingaLesson extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2100);
 	}
 }

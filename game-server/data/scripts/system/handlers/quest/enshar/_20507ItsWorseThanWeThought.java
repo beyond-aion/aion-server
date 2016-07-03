@@ -23,10 +23,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20507ItsWorseThanWeThought extends QuestHandler {
 
-	private final static int questId = 20507;
-
 	public _20507ItsWorseThanWeThought() {
-		super(questId);
+		super(20507);
 	}
 
 	@Override
@@ -40,8 +38,8 @@ public class _20507ItsWorseThanWeThought extends QuestHandler {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20507A_206377_9_220080000"), questId); // Uncharted Cave zone
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnMovieEndQuest(864, questId);
 	}
 
@@ -141,13 +139,13 @@ public class _20507ItsWorseThanWeThought extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 	
 	@Override

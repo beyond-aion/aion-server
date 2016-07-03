@@ -40,7 +40,7 @@ public class _2720ChallengeElyosGenerals extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(_questId);
 
 		if (env.getTargetId() == 278001) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

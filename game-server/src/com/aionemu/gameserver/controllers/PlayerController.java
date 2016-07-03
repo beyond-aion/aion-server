@@ -664,7 +664,7 @@ public class PlayerController extends CreatureController<Player> {
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, newLevel), true);
 
 		player.getNpcFactions().onLevelUp();
-		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
+		QuestEngine.getInstance().onLevelChanged(player);
 		updateNearbyQuests();
 		if (HTMLConfig.ENABLE_GUIDES && player.isSpawned())
 			HTMLService.sendGuideHtml(player, minNewLevel, newLevel);

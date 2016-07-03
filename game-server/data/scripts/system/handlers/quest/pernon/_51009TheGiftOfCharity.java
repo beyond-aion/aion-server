@@ -33,7 +33,7 @@ public class _51009TheGiftOfCharity extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 831033 || targetId == 831039) {
 				switch (dialog) {
 					case QUEST_SELECT:

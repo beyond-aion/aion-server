@@ -123,7 +123,7 @@ public class PortalDialogAI2 extends PortalAI2 {
 				if (qs != null && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
 					playerHasQuest = true;
 					break;
-				} else if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+				} else if (qs == null || qs.isStartable()) {
 					if (QuestService.checkStartConditions(player, questId, false)) {
 						playerCanStartQuest = true;
 						continue;

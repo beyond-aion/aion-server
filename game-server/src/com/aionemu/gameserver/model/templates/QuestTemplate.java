@@ -431,6 +431,13 @@ public class QuestTemplate {
 		return isMaster() || isExpert();
 	}
 
+	/**
+	 * @return True, if the quest is a mission quest (campaign quest)
+	 */
+	public boolean isMission() {
+		return category == QuestCategory.MISSION;
+	}
+
 	public boolean isNoCount() {
 		return category == QuestCategory.NON_COUNT || category == QuestCategory.EVENT;
 	}

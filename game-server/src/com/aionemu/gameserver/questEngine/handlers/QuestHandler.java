@@ -21,10 +21,12 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.quest.CollectItem;
 import com.aionemu.gameserver.model.templates.quest.CollectItems;
+import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
 import com.aionemu.gameserver.model.templates.quest.QuestDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
@@ -36,8 +38,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -174,7 +176,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			} else { // quest can be rolled back if nextStep < step
 				if (nextStep != step) {
 					if (step > nextStep && qs.getStatus() == QuestStatus.START)
-						PacketSendUtility.sendPacket(env.getPlayer(), SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
+						PacketSendUtility.sendPacket(env.getPlayer(),
+							SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
 					qs.setQuestVarById(varNum, nextStep);
 				}
 			}
@@ -839,139 +842,153 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		return false;
 	}
 
-	/** For missions after on enter zone mission complete without preconditions */
-	public boolean defaultOnZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = { 0 };
-		return defaultOnZoneMissionEndEvent(env, quests);
-	}
-
-	/** For missions after on enter zone mission complete with one precondition */
-	public boolean defaultOnZoneMissionEndEvent(QuestEnv env, int quest) {
-		int[] quests = { quest };
-		return defaultOnZoneMissionEndEvent(env, quests);
-	}
-
 	/**
-	 * Check requirements and starts or lock mission after completing the onEnterZone mission. Should only be used from onEnterZone missions handler!
-	 * Will be called only once for every on zone mission end quest
+	 * Starts or locks quest on level up (usually used from campaign quest handlers)
+	 * 
+	 * @param player
+	 *          - Player who wants to start the quest
+	 * @param preQuests
+	 *          - The quests to be completed before starting this one
+	 * @return True if successfully started
 	 */
-	public boolean defaultOnZoneMissionEndEvent(QuestEnv env, int[] quests) {
-		Player player = env.getPlayer();
-		env.setQuestId(questId);
+	public boolean defaultOnLevelChangedEvent(Player player, int... preQuests) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		// Only null quests can be started!
-		if (qs != null)
+		// Only null or LOCKED quests can be started
+		if (qs != null && qs.getStatus() != QuestStatus.LOCKED)
 			return false;
 
-		// Check all player requirements (but allowed diff to quest minLevel = 2) 
-		if (!QuestService.checkStartConditions(player, questId, false, 2, false, false, true))
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
+		int minLvlDiff = template.isMission() ? 2 : 0;
+		// Check all player requirements (but allowed diff to quest minLevel = 2)
+		if (!QuestService.checkStartConditions(player, questId, false, minLvlDiff, false, false, template.isMission()))
 			return false;
 
-		// Send locked quest if the player is <= 2 levels below quest min level (as specified in the check above)
-		if (!QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel())) {
-			QuestService.startMission(env, QuestStatus.LOCKED);
-			return false;
-		}
-
-		// Check the quests, that have to be done before starting this one
-		for (int id : quests) {
-			if (id != 0) {
-				QuestState qs2 = player.getQuestStateList().getQuestState(id);
-				if (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE) {
-					QuestService.startMission(env, QuestStatus.LOCKED);
+		boolean missingRequirement = false;
+		for (int id : preQuests) {
+			QuestState qs2 = player.getQuestStateList().getQuestState(id);
+			if (!missingRequirement && (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE)) {
+				if (qs != null || !template.isMission()) // fast return if its already locked or no campaign quest
 					return false;
-				}
+				missingRequirement = true;
+			}
+			if (missingRequirement && qs2 != null && qs2.getStatus() == QuestStatus.COMPLETE) {
+				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
+				return false;
 			}
 		}
+		if (missingRequirement)
+			return false;
 
-		// Check other start conditions, listed in the quest_data
-		// Zone missions should be already LOCKED before!
-		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
-		for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-			if (!startCondition.check(player, false)) {
-				QuestService.startMission(env, QuestStatus.LOCKED);
+		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
+		for (XMLStartCondition cond : template.getXMLStartConditions()) {
+			if (!cond.check(player, false)) {
+				if (qs == null && template.isMission())
+					QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 				return false;
 			}
 		}
 
-		// All conditions are done. Start the quest
-		QuestService.startMission(env, QuestStatus.START);
+		// Send locked quest if the player is <= 2 levels below quest min level (as specified in the check above)
+		if (minLvlDiff > 0 && player.getLevel() < template.getMinlevelPermitted()) {
+			if (qs == null && template.isMission())
+				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
+			return false;
+		}
+
+		// All conditions are met, start the quest
+		QuestService.addOrUpdateQuest(player, questId, QuestStatus.START);
 		return true;
-	}
-
-	/** For normal missions (not zone missions) without preconditions */
-	public boolean defaultOnLvlUpEvent(QuestEnv env) {
-		int[] quests = { 0 };
-		return defaultOnLvlUpEvent(env, quests, false);
-	}
-
-	/** For normal missions with one precondition */
-	public boolean defaultOnLvlUpEvent(QuestEnv env, int quest) {
-		int[] quests = { quest };
-		return defaultOnLvlUpEvent(env, quests, false);
-	}
-
-	/** For zone missions with one precondition */
-	public boolean defaultOnLvlUpEvent(QuestEnv env, int quest, boolean isZoneMission) {
-		int[] quests = { quest };
-		return defaultOnLvlUpEvent(env, quests, isZoneMission);
 	}
 
 	/**
-	 * Check the mission starting conditions on the level up
+	 * Starts or locks quest after quest completion (usually used from campaign quest handlers).
 	 * 
 	 * @param env
-	 * @param quests
-	 *          The quests to be completed before starting this one
-	 * @return true if successfully started
+	 *          - QuestEnv containing the player and quest which he completed
+	 * @param preQuests
+	 *          - The quests to be completed before starting this one
+	 * @return True if successfully started
 	 */
-	public boolean defaultOnLvlUpEvent(QuestEnv env, int[] quests, boolean isZoneMission) {
+	public boolean defaultOnQuestCompletedEvent(QuestEnv env, int... preQuests) {
 		Player player = env.getPlayer();
-		env.setQuestId(questId);
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		QuestStateList qsl = player.getQuestStateList();
+		QuestState qs = qsl.getQuestState(questId);
 
-		// Only null and LOCKED quests can be started
+		// Only null or LOCKED quests can be started
 		if (qs != null && qs.getStatus() != QuestStatus.LOCKED)
 			return false;
-		// Check all player requirements
-		if (!QuestService.checkStartConditions(player, questId, false, 0, false, false, true))
+
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
+		int minLvlDiff = template.isMission() ? 9 : 0; // this ensures to add all follow-up quests in locked state
+		// Check all player requirements first
+		if (!QuestService.checkStartConditions(player, questId, false, minLvlDiff, false, false, template.isMission()))
 			return false;
-		// Check the quests, that have to be done before starting this one
-		// Set the quest status to LOCKED, if these requirements aren't there
-		// Zone missions should be already LOCKED before!
-		// TEMPORARY till the new quest_data will be parsed
-		for (int id : quests) {
-			if (id != 0) {
-				QuestState qs2 = player.getQuestStateList().getQuestState(id);
-				if (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE) {
-					if (qs == null && !isZoneMission)
-						QuestService.startMission(env, QuestStatus.LOCKED);
+
+		boolean missingRequirement = false;
+		for (int id : preQuests) {
+			QuestState qs2 = qsl.getQuestState(id);
+			if (!missingRequirement && (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE)) {
+				if (qs != null || !template.isMission()) // fast return if its already locked or no campaign quest
 					return false;
-				}
+				missingRequirement = true;
+			}
+			if (missingRequirement && qs2 != null && qs2.getStatus() == QuestStatus.COMPLETE) {
+				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
+				return false;
 			}
 		}
+		if (missingRequirement)
+			return false;
 
-		// Check other start conditions, listed in the quest_data
-		// Zone missions should be already LOCKED before!
-		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
-		for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-			if (!startCondition.check(player, false))
-				if (qs == null && !isZoneMission) {
-					QuestService.startMission(env, QuestStatus.LOCKED);
+		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
+		missingRequirement = false;
+		for (XMLStartCondition cond : template.getXMLStartConditions()) {
+			if (!cond.check(player, false)) {
+				if (qs != null || !template.isMission()) // fast return if its already locked or no campaign quest
+					return false;
+				else if (hasAnyPreQuestFinished(qsl, cond)) { // recursive check
+					QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 					return false;
 				}
+				missingRequirement = true;
+			}
+		}
+		if (missingRequirement)
+			return false;
+
+		// Send locked quest if the player is <= 2 levels below quest min level (as specified in the check above)
+		if (minLvlDiff > 0 && player.getLevel() < template.getMinlevelPermitted()) {
+			if (qs == null && template.isMission() && player.getLevel() + 2 >= template.getMinlevelPermitted())
+				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
+			return false;
 		}
 
-		// All conditions are done. Start the quest
-		if (qs == null) {
-			QuestService.startMission(env, QuestStatus.START);
-		} else {
-			qs.setStatus(QuestStatus.START);
-			updateQuestStatus(env);
-		}
-
+		// All conditions are met, start the quest
+		QuestService.addOrUpdateQuest(player, questId, QuestStatus.START);
 		return true;
+	}
+
+	/**
+	 * Checks recursively if any pre-quest that is required, is completed
+	 * 
+	 * @param qsl
+	 *          - Players {@link QuestStateList}
+	 * @param startCondition
+	 *          - The XML start condition list
+	 * @return True, if any pre-quest of this series is finished
+	 */
+	private static boolean hasAnyPreQuestFinished(QuestStateList qsl, XMLStartCondition startCondition) {
+		for (FinishedQuestCond finishedCond : startCondition.getFinishedPreconditions()) {
+			QuestState qs = qsl.getQuestState(finishedCond.getQuestId());
+			if (qs != null && qs.getStatus() == QuestStatus.COMPLETE)
+				return true;
+			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(finishedCond.getQuestId());
+			for (XMLStartCondition cond : template.getXMLStartConditions())
+				if (hasAnyPreQuestFinished(qsl, cond))
+					return true;
+		}
+		return false;
 	}
 
 	/** Start a mission on enter the questZone */
@@ -983,9 +1000,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs == null) {
 				env.setQuestId(questId);
-				if (QuestService.startQuest(env)) {
+				if (QuestService.startQuest(env))
 					return true;
-				}
 			}
 		}
 		return false;
@@ -1023,7 +1039,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, dialogId);
@@ -1048,7 +1064,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId, int itemId, int itemCout) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, dialogId);
@@ -1107,7 +1123,6 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId));
 	}
 
-	/** @see com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler#register() */
 	@Override
 	public abstract void register();
 

@@ -13,18 +13,16 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24011FunnyFloatingFungus extends QuestHandler {
 
-	private final static int questId = 24011;
-
 	public _24011FunnyFloatingFungus() {
-		super(questId);
+		super(24011);
 	}
 
 	@Override
 	public void register() {
 		int[] talkNpcs = { 203558, 203572, 203558 };
 		qe.registerQuestNpc(700092).addOnKillEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int id : talkNpcs)
 			qe.registerQuestNpc(id).addOnTalkEvent(questId);
 	}
@@ -101,13 +99,12 @@ public class _24011FunnyFloatingFungus extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24010);
 	}
-
 }

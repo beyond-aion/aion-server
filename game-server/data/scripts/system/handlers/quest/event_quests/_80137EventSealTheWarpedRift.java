@@ -10,24 +10,19 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.EventService;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
  */
 public class _80137EventSealTheWarpedRift extends QuestHandler {
 
-	private final static int questId = 80137;
-
 	public _80137EventSealTheWarpedRift() {
-		super(questId);
+		super(80137);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(830245).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 		qe.registerOnBonusApply(questId, BonusType.RIFT);
 	}
 
@@ -57,15 +52,6 @@ public class _80137EventSealTheWarpedRift extends QuestHandler {
 			}
 		}
 		return sendQuestRewardDialog(env, 830245, 0);
-	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
 	}
 
 	@Override

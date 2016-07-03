@@ -108,7 +108,7 @@ public class KillInWorld extends QuestHandler {
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 		
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT: {
@@ -144,7 +144,7 @@ public class KillInWorld extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		VortexLocation vortexLoc = VortexService.getInstance().getLocationByWorld(invasionWorldId);
 		if (player.getWorldId() == invasionWorldId) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs == null || qs.isStartable()) {
 				if (vortexLoc != null && vortexLoc.isActive() || searchOpenRift())
 					return QuestService.startQuest(env);
 			}
@@ -176,10 +176,8 @@ public class KillInWorld extends QuestHandler {
 	public boolean onAtDistanceEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-			QuestService.startQuest(env);
-			return true;
-		}
+		if (qs == null || qs.isStartable())
+			return QuestService.startQuest(env);
 		return false;
 	}
 

@@ -17,20 +17,16 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Rolandas
  */
-
 public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 
-	private final static int questId = 80030;
-
 	public _80030EventAnUnwelcomeGaze() {
-		super(questId);
+		super(80030);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(799766).addOnQuestStart(questId);
 		qe.registerQuestNpc(799766).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
 		qe.registerQuestItem(188051133, questId); // [Event] Charm Card
 	}
 
@@ -117,14 +113,4 @@ public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 			status = QuestStatus.START;
 		return status;
 	}
-
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!EventService.getInstance().checkQuestIsActive(questId) && qs != null)
-			QuestService.abandonQuest(player, questId);
-		return true;
-	}
-
 }

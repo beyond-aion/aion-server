@@ -29,9 +29,7 @@ import javolution.util.FastTable;
  */
 public class _14026ALoneDefense extends QuestHandler {
 
-	private final static int questId = 14026;
-
-	private static List<Integer> mobs = new FastTable<Integer>();
+	private static List<Integer> mobs = new FastTable<>();
 
 	static {
 		mobs.add(211628);
@@ -40,13 +38,13 @@ public class _14026ALoneDefense extends QuestHandler {
 	}
 
 	public _14026ALoneDefense() {
-		super(questId);
+		super(14026);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnDie(questId);
 		qe.registerOnLogOut(questId);
 		qe.registerOnQuestTimerEnd(questId);
@@ -155,15 +153,15 @@ public class _14026ALoneDefense extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = { 14020, 14021, 14022, 14023, 14024, 14025 };
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = { 14020, 14021, 14022, 14023, 14024, 14025 };
-		return defaultOnLvlUpEvent(env, quests, true);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 	@Override

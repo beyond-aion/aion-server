@@ -17,16 +17,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24014StompOutThePlot extends QuestHandler {
 
-	private final static int questId = 24014;
-
 	public _24014StompOutThePlot() {
-		super(questId);
+		super(24014);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203665).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203668).addOnTalkEvent(questId);
 		qe.registerQuestNpc(210562).addOnKillEvent(questId);
@@ -111,12 +109,12 @@ public class _24014StompOutThePlot extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24010);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24010);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24010);
 	}
 }

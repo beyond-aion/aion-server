@@ -58,7 +58,7 @@ public class SkillUse extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

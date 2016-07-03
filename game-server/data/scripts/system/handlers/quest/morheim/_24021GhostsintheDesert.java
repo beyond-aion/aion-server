@@ -15,17 +15,16 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24021GhostsintheDesert extends QuestHandler {
 
-	private final static int questId = 24021;
 	private int itemId = 182215363;
 
 	public _24021GhostsintheDesert() {
-		super(questId);
+		super(24021);
 	}
 	
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(itemId, questId);
 		qe.registerQuestNpc(204302).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204329).addOnTalkEvent(questId);
@@ -33,13 +32,13 @@ public class _24021GhostsintheDesert extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24020);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 24020);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 24020);
 	}
 
 	@Override

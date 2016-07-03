@@ -40,7 +40,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 
 		if (targetId == 204500) // Perento
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id())

@@ -26,11 +26,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _20501WhattheRuinsSay extends QuestHandler {
 
-	private final static int questId = 20501;
 	private final static int workItemId = 182215637; // Enshar Ruins Piece
 
 	public _20501WhattheRuinsSay() {
-		super(questId);
+		super(20501);
 	}
 
 	@Override
@@ -46,8 +45,8 @@ public class _20501WhattheRuinsSay extends QuestHandler {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20501A_206375_1_220080000"), questId); // Dreg Findspot zone
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -162,12 +161,12 @@ public class _20501WhattheRuinsSay extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 20500);
 	}
 	
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 20500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 20500);
 	}
 }

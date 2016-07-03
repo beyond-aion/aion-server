@@ -2,11 +2,12 @@ package quest.eltnen;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
@@ -14,17 +15,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14020OrdersFromEltnen extends QuestHandler {
 
-	private final static int questId = 14020;
-
 	public _14020OrdersFromEltnen() {
-		super(questId);
+		super(14020);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(203901).addOnTalkEvent(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnEnterWorld(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -42,34 +41,24 @@ public class _14020OrdersFromEltnen extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);
-			}
-			else
+			} else
 				return sendQuestStartDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-				int[] ids = { 14021, 14022, 14023, 14024, 14025, 14026 };
-				for (int id : ids) {
-					QuestEngine.getInstance().onEnterZoneMissionEnd(
-						new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-				}
-			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 14021, 14022, 14023, 14024, 14025, 14026 };
-		for (int id : ids) {
-			QuestEngine.getInstance().onEnterZoneMissionEnd( new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		}
-		return true;
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.ELTNEN.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
-	
+
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 0, true);
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

@@ -14,17 +14,15 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _14051RootOfTheProblem extends QuestHandler {
 
-	private final static int questId = 14051;
-	private final static int[] npc_ids = { 204500, 204549, 730026, 730024 };
-
 	public _14051RootOfTheProblem() {
-		super(questId);
+		super(14051);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		int[] npc_ids = { 204500, 204549, 730026, 730024 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(182215337, questId);
 		qe.registerQuestItem(182215338, questId);
 		for (int npc_id : npc_ids)
@@ -32,13 +30,13 @@ public class _14051RootOfTheProblem extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 14050);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 14050);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 14050);
 	}
 
 	@Override
@@ -53,26 +51,24 @@ public class _14051RootOfTheProblem extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs.getStatus() == QuestStatus.REWARD) { //Trajanus
-			if (targetId == 730024){
+		if (qs.getStatus() == QuestStatus.REWARD) { // Trajanus
+			if (targetId == 730024) {
 				removeQuestItem(env, 182215337, 3);
 				removeQuestItem(env, 182215338, 3);
-			return sendQuestEndDialog(env);
-		}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+				return sendQuestEndDialog(env);
+			}
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
-		if (targetId == 204500) { //Perento
+		if (targetId == 204500) { // Perento
 			switch (env.getDialog()) {
-				case QUEST_SELECT: 
+				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 				case SETPRO1:
-						return defaultCloseDialog(env, 0, 1); // 1
+					return defaultCloseDialog(env, 0, 1); // 1
 			}
-		}
-		else if (targetId == 204549) { //Aphesius
+		} else if (targetId == 204549) { // Aphesius
 			switch (env.getDialog()) {
 				case QUEST_SELECT: {
 					if (var == 1)
@@ -80,33 +76,31 @@ public class _14051RootOfTheProblem extends QuestHandler {
 					else if (var == 2)
 						return sendQuestDialog(env, 1693);
 				}
-				case SELECT_ACTION_1353: 
+				case SELECT_ACTION_1353:
 					return sendQuestDialog(env, 1353);
 				case SELECT_ACTION_1354:
 					return sendQuestDialog(env, 1354);
-				case SETPRO2: 
+				case SETPRO2:
 					return defaultCloseDialog(env, 1, 2); // 2
-				case CHECK_USER_HAS_QUEST_ITEM: 
+				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
 						changeQuestStep(env, 2, 3, false);
 						updateQuestStatus(env);
-						return sendQuestDialog(env, 10000);  //3
-					}
-					else
+						return sendQuestDialog(env, 10000); // 3
+					} else
 						return sendQuestDialog(env, 10001);
 			}
-		}
-		else if (targetId == 730026) {//Mersephon
+		} else if (targetId == 730026) {// Mersephon
 			switch (env.getDialog()) {
 				case QUEST_SELECT: {
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
 				}
 				case SELECT_ACTION_2035:
-					return sendQuestDialog(env, 2035);					
-				case SETPRO4: 
+					return sendQuestDialog(env, 2035);
+				case SETPRO4:
 					return defaultCloseDialog(env, 3, 4, true, false); // 4
-				}
+			}
 		}
 		return false;
 	}

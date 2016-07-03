@@ -14,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4722NewWeaponTest extends QuestHandler {
 
-	private static final int questId = 4722;
-
 	public _4722NewWeaponTest() {
-		super(questId);
+		super(4722);
 	}
 
 	@Override
@@ -34,7 +32,7 @@ public class _4722NewWeaponTest extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799403) { // Yorgen
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

@@ -2,11 +2,12 @@ package quest.morheim;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Ritsu
@@ -14,17 +15,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24020AegirsOrders extends QuestHandler {
 
-	private final static int questId = 24020;
-
 	public _24020AegirsOrders() {
-		super(questId);
+		super(24020);
 	}
 
 	@Override
 	public void register() {
 		qe.registerQuestNpc(204301).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
+		qe.registerOnEnterWorld(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class _24020AegirsOrders extends QuestHandler {
 
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (targetId != 204301)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
@@ -44,26 +43,24 @@ public class _24020AegirsOrders extends QuestHandler {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);
-			}
-			else
+			} else
 				return sendQuestStartDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 0, true);
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		Player player = env.getPlayer();
+		if (player.getWorldId() == WorldMapType.MORHEIM.getId() && !player.getQuestStateList().hasQuest(questId))
+			return QuestService.startQuest(env);
+		return false;
 	}
-	
+
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] ids = { 24021, 24022, 24023, 22024, 24025, 24026 };
-		for (int id : ids)
-			QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
-		return true;
+	public void onLevelChangedEvent(Player player) {
+		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
 	}
 }

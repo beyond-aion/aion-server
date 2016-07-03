@@ -18,17 +18,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2009ACeremonyinPandaemonium extends QuestHandler {
 
-	private final static int questId = 2009;
-
 	public _2009ACeremonyinPandaemonium() {
-		super(questId);
+		super(2009);
 	}
 
 	@Override
 	public void register() {
 		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
 			return;
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
+		qe.registerOnQuestCompleted(questId);;
 		qe.registerQuestNpc(203550).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204182).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204075).addOnTalkEvent(questId);
@@ -164,7 +163,12 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2008);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 2008);
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2008);
 	}
 }

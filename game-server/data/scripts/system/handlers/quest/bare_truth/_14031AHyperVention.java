@@ -23,16 +23,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 public class _14031AHyperVention extends QuestHandler {
 
-	private final static int questId = 14031;
 	private final static int[] npc_ids = { 203700, 801216, 790001, 203183, 203989, };
 
 	public _14031AHyperVention() {
-		super(questId);
+		super(14031);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerQuestItem(182215388, questId);
 		qe.registerQuestItem(182215389, questId);
@@ -244,7 +243,7 @@ public class _14031AHyperVention extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

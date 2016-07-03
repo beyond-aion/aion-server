@@ -100,7 +100,7 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 11008);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 11008);
 	}
 }

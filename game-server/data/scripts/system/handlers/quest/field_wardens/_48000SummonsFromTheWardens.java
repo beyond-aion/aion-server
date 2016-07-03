@@ -13,26 +13,21 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _48000SummonsFromTheWardens extends QuestHandler {
 
-	public static final int questId = 48000;
-
 	public _48000SummonsFromTheWardens() {
-		super(questId);
+		super(48000);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnLevelUp(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(799845).addOnTalkEvent(questId);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		Player player = env.getPlayer();
+	public void onLevelChangedEvent(Player player) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getLevel() >= 30 && (qs == null || qs.getStatus() == QuestStatus.NONE)) {
-			return QuestService.startQuest(env);
-		}
-		return false;
+		if (player.getLevel() >= 30 && (qs == null || qs.getStatus() == QuestStatus.NONE))
+			QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 	}
 
 	@Override

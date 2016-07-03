@@ -26,17 +26,15 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _1002RequestoftheElim extends QuestHandler {
 
-	private final static int questId = 1002;
-
 	public _1002RequestoftheElim() {
-		super(questId);
+		super(1002);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = { 203076, 730007, 730010, 730008, 205000, 203067 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -210,12 +208,12 @@ public class _1002RequestoftheElim extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1100);
 	}
 }

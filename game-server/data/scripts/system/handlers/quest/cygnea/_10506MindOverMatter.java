@@ -29,10 +29,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _10506MindOverMatter extends QuestHandler {
 
-	private final static int questId = 10506;
-
 	public _10506MindOverMatter() {
-		super(questId);
+		super(10506);
 	}
 
 	@Override
@@ -49,8 +47,8 @@ public class _10506MindOverMatter extends QuestHandler {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10506_206365_5_210070000"), questId); // Beritra Invasion Corridor zone
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		qe.registerOnInvisibleTimerEnd(questId);
 		qe.registerOnLogOut(questId);
 	}
@@ -228,12 +226,12 @@ public class _10506MindOverMatter extends QuestHandler {
 	}
 	
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 10500);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 10500);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 10500);
 	}
 }

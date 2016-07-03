@@ -16,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1001TheKerubThreat extends QuestHandler {
 
-	private final static int questId = 1001;
-
 	public _1001TheKerubThreat() {
-		super(questId);
+		super(1001);
 	}
 
 	@Override
@@ -27,7 +25,8 @@ public class _1001TheKerubThreat extends QuestHandler {
 		qe.registerQuestNpc(210670).addOnKillEvent(questId);
 		qe.registerQuestNpc(203071).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203067).addOnTalkEvent(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 	}
 
 	@Override
@@ -55,13 +54,13 @@ public class _1001TheKerubThreat extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 1100);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1100);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player, 1100);
 	}
 
 	@Override

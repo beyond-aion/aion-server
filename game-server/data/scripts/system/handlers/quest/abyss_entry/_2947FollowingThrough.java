@@ -35,17 +35,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
  */
 public class _2947FollowingThrough extends QuestHandler {
 
-	private final static int questId = 2947;
-
 	public _2947FollowingThrough() {
-		super(questId);
+		super(2947);
 	}
 
 	@Override
 	public void register() {
 		int[] npcs = { 204053, 204301, 204089, 700268 };
 		int[] mobs = { 212396, 212611, 212408, 213583, 290048, 211987, 290047, 290050, 211986, 290049, 213584, 211982 };
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnMovieEndQuest(167, questId);
@@ -264,7 +262,7 @@ public class _2947FollowingThrough extends QuestHandler {
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 2946);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 2946);
 	}
 }

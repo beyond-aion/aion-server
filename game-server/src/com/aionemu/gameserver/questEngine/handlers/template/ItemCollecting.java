@@ -106,7 +106,7 @@ public class ItemCollecting extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
@@ -214,7 +214,7 @@ public class ItemCollecting extends QuestHandler {
 		if (zoneName.name().equalsIgnoreCase(startZone)) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+			if (qs == null || qs == null || qs.isStartable()) {
 				QuestService.startQuest(env);
 				return true;
 			}

@@ -20,28 +20,26 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _10031ARiskfortheObelisk extends QuestHandler {
 
-	private final static int questId = 10031;
-
-	// Fasimedes			ID: 203700
-	// Southern Obelisk Support					ID: 702662
-	// Overheated Obelisk								ID: 730224
-	// Sibylle				ID: 798408
-	// Eremitia				ID: 798600
-	// Outremus				ID: 798926
-	// Versetti				ID: 798927
-	// Steropes				ID: 799052
-	
-	private final static int[] npcs = { 203700, 702662, 730224, 798408, 798600, 798926, 798927, 799052 };
-	private final static int[] mobs = { 215504, 215505, 215516, 215517, 215518, 215519, 216463, 216464, 216647, 216648, 216691, 216692, 216782, 216783, 215508, 215509 };
+	private final static int[] mobs = { 215504, 215505, 215516, 215517, 215518, 215519, 216463, 216464, 216647, 216648, 216691, 216692, 216782, 216783,
+		215508, 215509 };
 
 	public _10031ARiskfortheObelisk() {
-		super(questId);
+		super(10031);
 	}
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		// Fasimedes ID: 203700
+		// Southern Obelisk Support ID: 702662
+		// Overheated Obelisk ID: 730224
+		// Sibylle ID: 798408
+		// Eremitia ID: 798600
+		// Outremus ID: 798926
+		// Versetti ID: 798927
+		// Steropes ID: 799052
+		int[] npcs = { 203700, 702662, 730224, 798408, 798600, 798926, 798927, 799052 };
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -114,8 +112,8 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						}
 						break;
 					case SELECT_ACTION_2717:
-							PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 30));
-							return sendQuestDialog(env, 2717);
+						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 30));
+						return sendQuestDialog(env, 2717);
 					case SETPRO6:
 						return defaultCloseDialog(env, var, var + 1); // 6
 				}
@@ -148,7 +146,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 					case USE_OBJECT:
 						if (var == 8) {
 							removeQuestItem(env, 182215617, 1); // Obelisk
-							QuestService.addNewSpawn(210050000, player.getInstanceId(), 700600, 2192, 368, 431, (byte)90, 1); // Enhanced Obelisk
+							QuestService.addNewSpawn(210050000, player.getInstanceId(), 700600, 2192, 368, 431, (byte) 90, 1); // Enhanced Obelisk
 							qs.setQuestVar(9); // 9
 							updateQuestStatus(env);
 							return true;
@@ -180,7 +178,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 				if (defaultOnKillEvent(env, basrasas, 0, 10, 1) || defaultOnKillEvent(env, spallers, 0, 2, 2)) {
 					int var1 = qs.getQuestVarById(1);
 					int var2 = qs.getQuestVarById(2);
-				  if (var1 == 10 && var2 == 2) {
+					if (var1 == 10 && var2 == 2) {
 						qs.setStatus(QuestStatus.REWARD);
 						qs.setQuestVar(10);
 						updateQuestStatus(env);
@@ -198,7 +196,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if(var == 9) {
+			if (var == 9) {
 				if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20031_220070000"))) {
 					playQuestMovie(env, 566);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false)); // 10
@@ -207,12 +205,12 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (player.getWorldId() == 210050000) {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
@@ -224,17 +222,17 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if(movieId == 501) {
+		if (movieId == 501) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			
+
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
 				if (var == 3) {
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 					return true;
 				}
@@ -245,12 +243,12 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env);
+	public void onLevelChangedEvent(Player player) {
+		defaultOnLevelChangedEvent(player);
 	}
 }

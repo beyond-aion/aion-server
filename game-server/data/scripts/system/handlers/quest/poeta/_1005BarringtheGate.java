@@ -14,17 +14,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1005BarringtheGate extends QuestHandler {
 
-	private final static int questId = 1005;
-
 	public _1005BarringtheGate() {
-		super(questId);
+		super(1005);
 	}
 
 	@Override
 	public void register() {
 		int[] talkNpcs = { 203067, 203081, 790001, 203085, 203086, 700080, 700081, 700082, 700083 };
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
+		qe.registerOnQuestCompleted(questId);
+		qe.registerOnLevelChanged(questId);
 		for (int id : talkNpcs)
 			qe.registerQuestNpc(id).addOnTalkEvent(questId);
 	}
@@ -143,15 +141,15 @@ public class _1005BarringtheGate extends QuestHandler {
 	}
 
 	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
+	public void onQuestCompletedEvent(QuestEnv env) {
 		int[] quests = {1100, 1004, 1003, 1002, 1001};
-		return defaultOnZoneMissionEndEvent(env, quests);
+		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+	public void onLevelChangedEvent(Player player) {
 		int[] quests = {1100, 1004, 1003, 1002, 1001};
-		return defaultOnLvlUpEvent(env, quests, false);
+		defaultOnLevelChangedEvent(player, quests);
 	}
 
 	private void destroy(final int var, final QuestEnv env) {
