@@ -1,25 +1,19 @@
 package quest.esoterrace;
 
-import java.util.Collections;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author Ritsu
  */
 public class _28409GroupMaketheBladeComplete extends QuestHandler {
 
-	private final static int questId = 28409;
-
 	public _28409GroupMaketheBladeComplete() {
-		super(questId);
+		super(28409);
 	}
 
 	@Override
@@ -65,7 +59,7 @@ public class _28409GroupMaketheBladeComplete extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO2)
-					return defaultCloseDialog(env, 1, 2, 182215007, 1, 182215006, 1);
+					return defaultCloseDialog(env, 1, 2, 182215019, 1, 182215018, 1);
 				else
 					return sendQuestStartDialog(env);
 			}
@@ -85,8 +79,8 @@ public class _28409GroupMaketheBladeComplete extends QuestHandler {
 		switch (targetId) {
 			case 215795:
 				if (qs.getQuestVarById(0) == 2) {
-					ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(182215008, 1)));
-					player.getInventory().decreaseByItemId(182215007, 1);
+					giveQuestItem(env, 182215020, 1);
+					player.getInventory().decreaseByItemId(182215019, 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 				}

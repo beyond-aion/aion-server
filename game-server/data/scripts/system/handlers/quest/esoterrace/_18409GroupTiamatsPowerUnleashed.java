@@ -1,16 +1,12 @@
 package quest.esoterrace;
 
-import java.util.Collections;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -18,10 +14,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _18409GroupTiamatsPowerUnleashed extends QuestHandler {
 
-	private final static int questId = 18409;
-
 	public _18409GroupTiamatsPowerUnleashed() {
-		super(questId);
+		super(18409);
 	}
 
 	@Override
@@ -70,13 +64,7 @@ public class _18409GroupTiamatsPowerUnleashed extends QuestHandler {
 				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogId() == DialogAction.SETPRO2.id()) {
-					if (!ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(182215007, 1))))
-						return true;
-					player.getInventory().decreaseByItemId(182215006, 1);
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
+					return defaultCloseDialog(env, 1, 2, 182215007, 1, 182215006, 1);
 				} else
 					return sendQuestStartDialog(env);
 			}
@@ -96,7 +84,7 @@ public class _18409GroupTiamatsPowerUnleashed extends QuestHandler {
 		switch (targetId) {
 			case 215795:
 				if (qs.getQuestVarById(0) == 2) {
-					ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(182215008, 1)));
+					giveQuestItem(env, 182215008, 1);
 					player.getInventory().decreaseByItemId(182215007, 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

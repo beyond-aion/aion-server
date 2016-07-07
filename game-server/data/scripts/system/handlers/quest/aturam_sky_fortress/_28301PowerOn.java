@@ -1,15 +1,11 @@
 package quest.aturam_sky_fortress;
 
-import java.util.Collections;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author zhkchi
@@ -17,11 +13,10 @@ import com.aionemu.gameserver.services.item.ItemService;
  */
 public class _28301PowerOn extends QuestHandler {
 
-	private static final int questId = 28301;
 	private static final int sphereId = 702656;
 
 	public _28301PowerOn() {
-		super(questId);
+		super(28301);
 	}
 
 	@Override
@@ -56,7 +51,7 @@ public class _28301PowerOn extends QuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:
-						ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(182212110, 1)));
+						giveQuestItem(env, 182212110, 1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
