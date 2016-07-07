@@ -120,7 +120,7 @@ public final class QuestService {
 		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0) {
 			return false; // prevent repeatable reward because of wrong quest handling
 		}
-		List<QuestItems> questItems = new FastTable<QuestItems>();
+		List<QuestItems> questItems = new FastTable<>();
 		if (!template.getExtendedRewards().isEmpty() && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
 			questItems.addAll(getRewardItems(env, template, true, null));
 			extendedRewards = template.getExtendedRewards().get(0);
@@ -216,7 +216,7 @@ public final class QuestService {
 				QuestBonuses bonus = template.getBonus().get(0);
 				// Handler can add additional bonuses on repeat (for event quests no data)
 				HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, bonus.getType(), questItems);
-				if (result == HandlerResult.SUCCESS) {
+				if (result != HandlerResult.FAILED) {
 					QuestItems additional = BonusService.getInstance().getQuestBonus(player, template);
 					if (additional != null)
 						questItems.add(additional);
