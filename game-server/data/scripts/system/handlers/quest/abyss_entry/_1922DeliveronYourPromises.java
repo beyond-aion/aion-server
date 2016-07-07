@@ -207,6 +207,6 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env, 1922);
+		defaultOnQuestCompletedEvent(env, 1921);
 	}
 }
