@@ -488,8 +488,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			long existentItemCount = player.getInventory().getItemCountByItemId(itemId);
 			if (existentItemCount < itemCount) {
 				long itemsToGive = itemCount - existentItemCount;
-				ItemService.ItemUpdatePredicate predicate = new ItemService.ItemUpdatePredicate(addType, updateType);
-				return ItemService.addQuestItems(player, Collections.singletonList(new QuestItems(itemId, itemsToGive)), predicate);
+				ItemService.addItem(player, itemId, itemsToGive, true, new ItemService.ItemUpdatePredicate(addType, updateType));
+				return true;
 			} else {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM((new DescriptionId(item.getNameId()))));
 				return true;

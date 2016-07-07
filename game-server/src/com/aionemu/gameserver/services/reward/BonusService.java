@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +12,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ItemGroupsData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
@@ -28,6 +25,8 @@ import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
 import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -286,40 +285,5 @@ public class BonusService {
 		int itemIndex = Rnd.get(finalList.size());
 		ItemRaceEntry reward = finalList.get(itemIndex);
 		return new QuestItems(reward.getId(), 1);
-	}
-
-	public boolean checkInventory(Player player, QuestTemplate template) {
-		BonusItemGroup[] groups = itemGroups.getMedalGroups();
-		Storage inventory = player.getInventory();
-		int bonusLevel = template.getBonus().get(0).getLevel();
-		int slotReq = calcMaxCountOfSlots(groups, player, bonusLevel, false);
-		int specialSlotreq = calcMaxCountOfSlots(groups, player, bonusLevel, true);
-		
-		if ((slotReq > 0 && inventory.getFreeSlots() < slotReq) || (specialSlotreq > 0 && inventory.getSpecialCubeFreeSlots() < specialSlotreq))
-			return false;
-		return true;
-	}
-
-	private int calcMaxCountOfSlots(BonusItemGroup[] groups, Player player, int bonusLevel, boolean special) {
-		int groupMaxCount = 0;
-		int maxCount = 0;
-
-		for (BonusItemGroup bonusGroup : groups) {
-			MedalGroup group = (MedalGroup) bonusGroup;
-			
-			for (FullRewardItem item : group.getItems()) {
-				if (item.getLevel() != bonusLevel)
-					continue;
-				
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
-				if (special && template.getExtraInventoryId() > 0) {
-					groupMaxCount++;
-				} else if (template.getExtraInventoryId() < 1) {
-					groupMaxCount++;
-				}
-			}
-			maxCount = groupMaxCount > maxCount ? groupMaxCount : maxCount;
-		}
-		return maxCount;
 	}
 }

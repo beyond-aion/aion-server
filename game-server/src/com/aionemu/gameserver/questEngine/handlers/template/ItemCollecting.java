@@ -10,20 +10,14 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.quest.QuestBonuses;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.rewards.BonusType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
-import com.aionemu.gameserver.services.reward.BonusService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -191,12 +185,6 @@ public class ItemCollecting extends QuestHandler {
 				return true; // looting
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-			List<QuestBonuses> bonuses = template.getBonus();
-			if (!bonuses.isEmpty() && bonuses.get(0).getType() == BonusType.MEDAL && !BonusService.getInstance().checkInventory(player, template)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
-				return closeDialogWindow(env);
-			}
 			if (endNpcIds.contains(targetId)) {
 				if (workItem != null) {
 					long currentCount = player.getInventory().getItemCountByItemId(workItem.getItemId());

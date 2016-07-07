@@ -130,26 +130,24 @@ public final class QuestService {
 			if (rewardGroup != null)
 				rewards = template.getRewards().get(rewardGroup);
 		}
-		if (ItemService.addQuestItems(player, questItems)) {
-			giveReward(env, rewards);
-			giveReward(env, extendedRewards);
-			if (template.getCategory() == QuestCategory.CHALLENGE_TASK) {
-				ChallengeTaskService.getInstance().onChallengeQuestFinish(player, id);
-			}
-			removeQuestWorkItems(player, qs); // remove all worker list item if finished
-			qs.setStatus(QuestStatus.COMPLETE);
-			qs.setQuestVar(0);
-			qs.setReward(rewardGroup);
-			if (template.isTimeBased())
-				qs.setNextRepeatTime(countNextRepeatTime(player, template));
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
-			QuestEngine.getInstance().onQuestCompleted(player, id);
-			if (template.getNpcFactionId() != 0)
-				player.getNpcFactions().completeQuest(template);
-			player.getController().updateNearbyQuests();
-			return true;
-		}
-		return false;
+		for (QuestItems qi : questItems)
+			ItemService.addItem(player, qi.getItemId(), qi.getCount(), true);
+		giveReward(env, rewards);
+		giveReward(env, extendedRewards);
+		if (template.getCategory() == QuestCategory.CHALLENGE_TASK)
+			ChallengeTaskService.getInstance().onChallengeQuestFinish(player, id);
+		removeQuestWorkItems(player, qs); // remove all worker list item if finished
+		qs.setStatus(QuestStatus.COMPLETE);
+		qs.setQuestVar(0);
+		qs.setReward(rewardGroup);
+		if (template.isTimeBased())
+			qs.setNextRepeatTime(countNextRepeatTime(player, template));
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
+		QuestEngine.getInstance().onQuestCompleted(player, id);
+		if (template.getNpcFactionId() != 0)
+			player.getNpcFactions().completeQuest(template);
+		player.getController().updateNearbyQuests();
+		return true;
 	}
 
 	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, Integer rewardGroup) {

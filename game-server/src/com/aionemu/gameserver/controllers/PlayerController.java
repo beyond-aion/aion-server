@@ -1,15 +1,11 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +53,6 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -97,7 +92,6 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.reward.PromotionKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -122,6 +116,9 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * This class is for controlling players.
@@ -763,10 +760,6 @@ public class PlayerController extends CreatureController<Player> {
 			player.setState(CreatureState.ACTIVE);
 			updateZone();
 		}
-	}
-
-	public boolean addItems(int itemId, int count) {
-		return ItemService.addQuestItems(getOwner(), Collections.singletonList(new QuestItems(itemId, count)));
 	}
 
 	public void startStance(final int skillId) {

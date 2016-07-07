@@ -17,13 +17,6 @@ public class QuestItems {
 	@XmlAttribute
 	protected long count = 1L;
 
-	/**
-	 * Constructor used by unmarshaller
-	 */
-	public QuestItems() {
-		this.count = 1L;
-	}
-
 	public QuestItems(int itemId, long count) {
 		this.itemId = itemId;
 		this.count = count;

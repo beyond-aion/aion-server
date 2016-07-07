@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.item;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -15,12 +14,10 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -99,15 +96,14 @@ public class ItemService {
 			return 0;
 		}
 
-		if (itemTemplate.isStackable()) {
+		if (itemTemplate.isStackable())
 			count = addStackableItem(player, itemTemplate, count, allowInventoryOverflow, predicate);
-		} else {
+		else
 			count = addNonStackableItem(player, itemTemplate, count, sourceItem, allowInventoryOverflow, predicate);
-		}
 
-		if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+		if (count > 0 && inventory.isFull(itemTemplate.getExtraInventoryId()))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
-		}
+
 		return count;
 	}
 
@@ -186,48 +182,12 @@ public class ItemService {
 			count = inventory.increaseItemCount(item, count, predicate.getUpdateType(item, true));
 		}
 
-		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
+		while (count > 0 && (allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId()))) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId(), count);
 			count -= newItem.getItemCount();
 			inventory.add(newItem, predicate.getAddType());
 		}
 		return count;
-	}
-
-	public static boolean addQuestItems(Player player, List<QuestItems> questItems) {
-		return addQuestItems(player, questItems, DEFAULT_UPDATE_PREDICATE);
-	}
-
-	public static boolean addQuestItems(Player player, List<QuestItems> questItems, ItemUpdatePredicate predicate) {
-		int slotReq = 0, specialSlot = 0;
-
-		for (QuestItems qi : questItems) {
-			if (qi.getItemId() != ItemId.KINAH.value() && qi.getCount() != 0) {
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(qi.getItemId());
-				long stackCount = template.getMaxStackCount();
-				long count = qi.getCount() / stackCount;
-				if (qi.getCount() % stackCount != 0)
-					count++;
-				if (template.getExtraInventoryId() > 0) {
-					specialSlot += count;
-				} else {
-					slotReq += count;
-				}
-			}
-		}
-		Storage inventory = player.getInventory();
-		if (slotReq > 0 && inventory.getFreeSlots() < slotReq) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
-			return false;
-		}
-		if (specialSlot > 0 && inventory.getSpecialCubeFreeSlots() < specialSlot) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
-			return false;
-		}
-		for (QuestItems qi : questItems) {
-			addItem(player, qi.getItemId(), qi.getCount(), false, predicate);
-		}
-		return true;
 	}
 
 	public static void releaseItemId(Item item) {

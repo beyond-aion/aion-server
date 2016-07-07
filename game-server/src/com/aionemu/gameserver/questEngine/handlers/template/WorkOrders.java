@@ -26,7 +26,7 @@ import com.aionemu.gameserver.services.item.ItemService;
  * @modified Pad
  */
 public class WorkOrders extends QuestHandler {
-	
+
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final List<QuestItems> giveComponents = new ArrayList<>();
 	private final int recipeId;
@@ -52,28 +52,26 @@ public class WorkOrders extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (startNpcIds.contains(targetId)) {
 			if (qs == null || qs.isStartable()) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id());
-					}
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						if (RecipeService.validateNewRecipe(player, recipeId) != null) {
 							if (QuestService.startQuest(env)) {
-								if (ItemService.addQuestItems(player, giveComponents)) {
-									RecipeService.addRecipe(player, recipeId, false);
-									closeDialogWindow(env);
-								}
+								for (QuestItems qi : giveComponents)
+									ItemService.addItem(player, qi.getItemId(), qi.getCount(), true);
+								RecipeService.addRecipe(player, recipeId, false);
+								closeDialogWindow(env);
 								return true;
 							}
 						}
-					}
-					case CRAFT: {
+						return false;
+					case CRAFT:
 						env.setQuestId(0);
 						return sendQuestDialog(env, DialogPage.COMBINETASK_WINDOW.id());
-					}
 				}
 			} else if (qs.getStatus() == QuestStatus.START) {
 				if (dialog == DialogAction.QUEST_SELECT) {
