@@ -108,14 +108,8 @@ public class ReportToMany extends QuestHandler {
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						if (QuestService.startQuest(env)) {
-							if (workItem != null) {
-								// some quest work items come from other quests, so we don't add them again
-								long count = workItem.getCount();
-								count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
-								if (count > 0) {
-									giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM);
-								}
-							}
+							if (workItem != null)
+								giveQuestItem(env, workItem.getItemId(), workItem.getCount());
 						}
 						return closeDialogWindow(env);
 					case QUEST_REFUSE:

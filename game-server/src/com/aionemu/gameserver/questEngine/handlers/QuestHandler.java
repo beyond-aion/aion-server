@@ -487,7 +487,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (itemId != 0 && itemCount != 0) {
 			long existentItemCount = player.getInventory().getItemCountByItemId(itemId);
 			if (existentItemCount < itemCount) {
-				long itemsToGive = itemCount - existentItemCount;
+				long itemsToGive = itemCount - existentItemCount; // some quest work items come from multiple quests, don't add again
 				ItemService.addItem(player, itemId, itemsToGive, true, new ItemService.ItemUpdatePredicate(addType, updateType));
 				return true;
 			} else {

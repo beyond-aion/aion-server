@@ -24,7 +24,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.VortexService;
-import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -129,16 +128,10 @@ public class MonsterHunt extends QuestHandler {
 						case QUEST_ACCEPT:
 						case QUEST_ACCEPT_1:
 						case QUEST_ACCEPT_SIMPLE:
-							if (workItem != null) {
-								// Some quest work items come from other quests, don't add again
-								long currentCount = workItem.getCount();
-								currentCount -= player.getInventory().getItemCountByItemId(workItem.getItemId());
-								if (currentCount > 0)
-									giveQuestItem(env, workItem.getItemId(), currentCount, ItemAddType.QUEST_WORK_ITEM);
-							}
-						default: {
+							if (workItem != null)
+								giveQuestItem(env, workItem.getItemId(), workItem.getCount());
+						default:
 							return sendQuestStartDialog(env);
-						}
 					}
 				}
 			}

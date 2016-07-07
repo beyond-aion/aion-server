@@ -15,7 +15,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
  * @author MrPoke
@@ -84,23 +83,15 @@ public class ReportTo extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
-					}
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
-					case QUEST_ACCEPT_SIMPLE: {
-						if (workItem != null) {
-							// Some quest work items come from other quests, don't add again
-							long count = workItem.getCount();
-							count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
-							if (count > 0)
-								giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM);
-						}
-					}
-					default: {
+					case QUEST_ACCEPT_SIMPLE:
+						if (workItem != null)
+							giveQuestItem(env, workItem.getItemId(), workItem.getCount());
+					default:
 						return sendQuestStartDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
