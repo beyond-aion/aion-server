@@ -138,7 +138,7 @@ public class Npc extends Creature {
 
 	@Override
 	public ItemAttackType getAttackType() {
-		return ai2.modifyAttackType(attacktype);
+		return getAi2().modifyAttackType(attacktype);
 	}
 
 	public NpcSkillList getSkillList() {
@@ -168,7 +168,7 @@ public class Npc extends Creature {
 	}
 
 	public int getAggroRange() {
-		return ai2.modifyARange(aRange);
+		return getAi2().modifyARange(aRange);
 	}
 
 	/**

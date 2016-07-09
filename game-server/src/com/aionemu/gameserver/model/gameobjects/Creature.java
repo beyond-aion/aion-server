@@ -46,9 +46,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public abstract class Creature extends VisibleObject {
 
-	// private static final Logger log = LoggerFactory.getLogger(Creature.class);
-
-	protected AI2 ai2;
+	private AI2 ai2;
 	private boolean isDespawnDelayed = false;
 
 	private CreatureLifeStats<? extends Creature> lifeStats;
