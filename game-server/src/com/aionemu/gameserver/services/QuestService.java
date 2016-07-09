@@ -109,17 +109,11 @@ public final class QuestService {
 		QuestState qs = player.getQuestStateList().getQuestState(id);
 		Rewards rewards = new Rewards();
 		Rewards extendedRewards = new Rewards();
-		if (qs == null || qs.getStatus() != QuestStatus.REWARD) {
+		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
 			return false;
-		}
-		if (player.getInventory().getFreeSlots(0) == 0 || player.getInventory().getFreeSlots(1) == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
-			return false;
-		}
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
-		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0) {
+		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0)
 			return false; // prevent repeatable reward because of wrong quest handling
-		}
 		List<QuestItems> questItems = new FastTable<>();
 		if (!template.getExtendedRewards().isEmpty() && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
 			questItems.addAll(getRewardItems(env, template, true, null));
