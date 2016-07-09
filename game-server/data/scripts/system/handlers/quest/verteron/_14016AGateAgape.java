@@ -21,7 +21,7 @@ public class _14016AGateAgape extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = {203098, 700142};
+		int[] npcs = { 203098, 700142 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
@@ -68,15 +68,12 @@ public class _14016AGateAgape extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 2034);
-				}
-				else {
-					return sendQuestEndDialog(env);
-				}
+				else
+					return sendQuestEndDialog(env, 0);
 			}
 		}
 		return false;
@@ -109,11 +106,9 @@ public class _14016AGateAgape extends QuestHandler {
 				changeQuestStep(env, 2, 1, false);
 				removeQuestItem(env, 182215317, 1);
 				return true;
-			}
-			else if (var == 1 && player.getWorldId() == 310030000) {
+			} else if (var == 1 && player.getWorldId() == 310030000) {
 				changeQuestStep(env, 1, 2, false); // 2
-				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166,
-										 (float) 217.06035, (byte) 0);
+				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
 				return true;
 			}
 		}
@@ -153,13 +148,13 @@ public class _14016AGateAgape extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		int[] verteronQuests = {14015, 14014, 14013, 14012, 14011, 14010};
+		int[] verteronQuests = { 14015, 14014, 14013, 14012, 14011, 14010 };
 		defaultOnQuestCompletedEvent(env, verteronQuests);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		int[] verteronQuests = {14015, 14014, 14013, 14012, 14011, 14010};
+		int[] verteronQuests = { 14015, 14014, 14013, 14012, 14011, 14010 };
 		defaultOnLevelChangedEvent(player, verteronQuests);
 	}
 }

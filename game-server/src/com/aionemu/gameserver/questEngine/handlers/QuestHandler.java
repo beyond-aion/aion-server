@@ -291,7 +291,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	/** Send completion dialog of the quest and finish it. Give the default reward from quest_data.xml */
 	public boolean sendQuestEndDialog(QuestEnv env) {
 		int rewardGroups = DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getRewards().size();
-		if (rewardGroups > 1) // you should explicitly specify the reward group when there are more than 1
+		// you should explicitly specify the reward group when there are more than 1
+		if (rewardGroups > 1 && env.getDialogId() >= DialogAction.SELECTED_QUEST_REWARD1.id()
+			&& env.getDialogId() <= DialogAction.SELECTED_QUEST_NOREWARD.id())
 			log.warn("Quest handler for quest: " + env.getQuestId() + " possibly rewarded the wrong reward group.");
 		return sendQuestEndDialog(env, rewardGroups == 0 ? null : 0);
 	}

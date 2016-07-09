@@ -138,14 +138,10 @@ public class _14026ALoneDefense extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
-						return sendQuestDialog(env, 5);
-					}
 					default:
-						return sendQuestEndDialog(env);
+						return sendQuestEndDialog(env, 0);
 				}
 			}
 		}
