@@ -3,7 +3,6 @@ package quest.reshanta;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -16,6 +15,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
@@ -24,15 +24,11 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _14047ChainingMemories extends QuestHandler {
 
-	private final static int questId = 14047;
-	private static final int azoturanId = 310100000;
-	private static final int oldAcestesId = 204652, newAcestesId = 802051;
-	private static final int oldPeithoId = 204653, newPeithoId = 802052;
-	private static final int icaronixNormalId = 233877, icaronixEliteId = 214598;
+	private static final int icaronixNormalId = 233877; // elite version is not for this quest
 	private final static int[] npc_ids = { 203704, 798154, 204574, 802051, 802052, 278500 };
 
 	public _14047ChainingMemories() {
-		super(questId);
+		super(14047);
 	}
 
 	@Override
@@ -105,29 +101,12 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 					case SETPRO3:
 						changeQuestStep(env, 2, 3, false);
-						WorldMapInstance instance = InstanceService.getNextAvailableInstance(azoturanId);
+						WorldMapInstance instance = InstanceService.getNextAvailableInstance(WorldMapType.AZOTURAN_FORTRESS.getId());
 						InstanceService.registerPlayerWithInstance(instance, player);
-
-						Npc icaronixElite = instance.getNpc(icaronixEliteId);
-						if (icaronixElite != null) {
-							icaronixElite.getController().delete();
-							QuestService.spawnQuestNpc(azoturanId, instance.getInstanceId(), icaronixNormalId, 461.07f, 439.876f, 993.046f, (byte) 58);
-						}
-						
-						/* temporal fix */
-						Npc oldAcestes = instance.getNpc(oldAcestesId);
-						if (oldAcestes != null) {
-							oldAcestes.getController().delete();
-							QuestService.spawnQuestNpc(azoturanId, instance.getInstanceId(), newAcestesId, 309.67f, 336f, 1020.88f, (byte) 41);
-						}
-						Npc oldPeitho = instance.getNpc(oldPeithoId);
-						if (oldPeitho != null) {
-							oldPeitho.getController().delete();
-							QuestService.spawnQuestNpc(azoturanId, instance.getInstanceId(), newPeithoId, 584.75f, 508.81f, 1188.18f, (byte) 57);
-						}
-
-						TeleportService2.teleportTo(player, azoturanId, instance.getInstanceId(), 305.8f, 334.46f, 1019.69f, (byte) 27,
-							TeleportAnimation.FADE_OUT_BEAM);
+						QuestService.spawnQuestNpc(WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), icaronixNormalId, 478.8f, 431.1f, 1062.0067f,
+							(byte) 58);
+						TeleportService2.teleportTo(player, WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), 305.8f, 334.46f, 1019.69f,
+							(byte) 27, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 				}
 			} else if (targetId == npc_ids[3]) {
@@ -150,12 +129,8 @@ public class _14047ChainingMemories extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 71001, 0));
 						return true;
 					case SET_SUCCEED:
-						if (var == 6) {
-							if (defaultCloseDialog(env, 6, 6, true, false)) {
-								TeleportService2.teleportToNpc(player, npc_ids[5]);
-								return true;
-							}
-						}
+						if (var == 6)
+							return defaultCloseDialog(env, 6, 6, true, false);
 						break;
 				}
 			} else if (targetId == npc_ids[4]) {
@@ -197,11 +172,7 @@ public class _14047ChainingMemories extends QuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		if (defaultOnKillEvent(env, icaronixNormalId, 5, 6)) {
-			playQuestMovie(env, 422);
-			return true;
-		}
-		return false;
+		return defaultOnKillEvent(env, icaronixNormalId, 5, 6);
 	}
 
 	@Override
@@ -210,16 +181,14 @@ public class _14047ChainingMemories extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.getWorldId() != azoturanId) {
+			if (player.getWorldId() != WorldMapType.AZOTURAN_FORTRESS.getId()) {
 				int var = qs.getQuestVarById(0);
 				if (var >= 3 && var <= 6) {
-					qs.setQuestVarById(0, 2);
-					updateQuestStatus(env);
+					changeQuestStep(env, var, 2);
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-
 }

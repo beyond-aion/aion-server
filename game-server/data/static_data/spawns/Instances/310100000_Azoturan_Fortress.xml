@@ -191,11 +191,11 @@
 			<spot x="494.241" y="372.229" z="1021.22" h="5"/>
 		</spawn>
 		<!-- Acestes -->
-		<spawn npc_id="204652">
+		<spawn npc_id="802051">
 			<spot x="309.668" y="336.003" z="1020.88" h="30"/>
 		</spawn>
 		<!-- Peitho -->
-		<spawn npc_id="204653">
+		<spawn npc_id="802052">
 			<spot x="584.746" y="508.814" z="1188.18" h="21"/>
 		</spawn>
 		<!-- Pretor Fighter -->
