@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.ai2.handler;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -61,6 +63,11 @@ public class CreatureEventHandler {
 
 		if (owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY))
 			return;
+
+		if (owner.getActiveRegion() == null) {
+			LoggerFactory.getLogger(CreatureEventHandler.class).warn(owner + " has no map region");
+			return;
+		}
 
 		if (!owner.getActiveRegion().isMapRegionActive())
 			return;
