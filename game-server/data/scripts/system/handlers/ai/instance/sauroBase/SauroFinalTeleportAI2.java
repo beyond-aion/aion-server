@@ -27,7 +27,7 @@ public class SauroFinalTeleportAI2 extends NpcAI2 {
 	}
 
 	private void switchWay(Player player, int dialogId) {
-		switch (DialogAction.getActionByDialogId(dialogId)) {
+		switch (DialogAction.getByActionId(dialogId)) {
 			case SELECT_BOSS_LEVEL3:
 				checkKeys(player, 1);
 				break;

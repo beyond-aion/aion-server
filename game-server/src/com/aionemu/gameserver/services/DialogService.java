@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -18,15 +19,15 @@ import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
+import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.SubDialogType;
-import com.aionemu.gameserver.model.templates.npc.TalkInfo;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
@@ -36,6 +37,7 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLASTIC_SURGERY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
@@ -52,32 +54,53 @@ import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.periodic.DredgionService2;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author VladimirZ
+ * @modified Neon
  */
 public class DialogService {
 
 	private static final Logger log = LoggerFactory.getLogger(DialogService.class);
 
-	public static void onCloseDialog(Npc npc, Player player) {
-		if (checkFuncDialog(DialogAction.OPEN_LEGION_WAREHOUSE.id(), npc)) {
-			sendDialogWindow(DialogAction.NULL.id(), player, npc);
-			Legion legion = player.getLegion();
-			if (legion != null) {
+	public static void onCloseDialog(Player player, VisibleObject target) {
+		if (target == null)
+			return;
+
+		if (target instanceof Npc) {
+			Npc npc = (Npc) target;
+			npc.getAi2().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
+
+			if (npc.getObjectTemplate().supportsAction(DialogAction.OPEN_LEGION_WAREHOUSE) && player.isLegionMember()) {
 				LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
-				if (lwh.getWhUser() == player.getObjectId()) {
+				if (lwh.getWhUser() == player.getObjectId())
 					lwh.setWhUser(0);
-				}
 			}
+
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+				@Override
+				public void run() {
+					if (npc.getTarget() == null && !npc.getMoveController().isInMove()) {
+						npc.getPosition().setH(npc.getSpawn().getHeading());
+						PacketSendUtility.broadcastPacket(npc, new SM_HEADING_UPDATE(npc));
+					}
+				}
+			}, 1200);
 		}
+
+		Mailbox mailbox = player.getMailbox();
+		if (mailbox != null && mailbox.mailBoxState != PlayerMailboxState.CLOSED)
+			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
 	public static void onDialogSelect(int dialogId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
@@ -91,11 +114,12 @@ public class DialogService {
 		}
 
 		if (questId == 0) {
-			switch (DialogAction.getActionByDialogId(dialogId)) {
+			DialogAction action = DialogAction.getByActionId(dialogId);
+			switch (action) {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
-						log.error("Buy list missing for npc " + npc.getNpcId());
+						log.warn("Buy list is missing for npc " + npc.getNpcId());
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
 						break;
 					}
@@ -110,8 +134,8 @@ public class DialogService {
 						break;
 					}
 					if (hasAnythingToSell)
-						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc.getObjectId(), tradeListTemplate, PricesService.getVendorBuyModifier()
-							* tradeModifier / 100));
+						PacketSendUtility.sendPacket(player,
+							new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier() * tradeModifier / 100));
 					else
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
 					break;
@@ -119,7 +143,7 @@ public class DialogService {
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
 					if (!RestrictionsManager.canUseWarehouse(player))
 						return;
-					sendDialogWindow(dialogId, player, npc);
+					sendDialogWindow(action, player, npc);
 					break;
 				case OPEN_VENDOR: // Consign trade?? npc karinerk, koorunerk (2.5)
 				case OPEN_STIGMA_WINDOW: // stigma
@@ -141,7 +165,7 @@ public class DialogService {
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
 				case TOWN_CHALLENGE: // town improvement
 					// Custom Feature: Quests can be done in any village
-					sendDialogWindow(dialogId, player, npc);
+					sendDialogWindow(action, player, npc);
 					break;
 				case DISPERSE_LEGION: // disband legion
 					LegionService.getInstance().requestDisbandLegion(npc, player);
@@ -182,8 +206,8 @@ public class DialogService {
 					if (player.getCommonData().getExpRecoverable() > 0) {
 						boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, responseHandler);
 						if (result) {
-							PacketSendUtility
-								.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
+							PacketSendUtility.sendPacket(player,
+								new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
 						}
 					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE());
@@ -220,7 +244,7 @@ public class DialogService {
 						case 203679: // ishalgen teleporter
 						case 203194: // poeta teleporter
 							if (!player.getCommonData().isDaeva()) {
-								sendDialogWindow(DialogPage.NO_RIGHT.id(), player, npc);
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
 								break;
 							}
 						default:
@@ -269,8 +293,6 @@ public class DialogService {
 						AutoGroupType agt = AutoGroupType.getAutoGroup(npc.getNpcId());
 						if (agt != null && agt.isDredgion())
 							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
-						else
-							sendDialogWindow(DialogAction.NULL.id(), player, npc);
 					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 1011));
 					}
@@ -293,15 +315,14 @@ public class DialogService {
 				case CHARGE_ITEM_MULTI: // condition all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 1);
 					break;
-				case TRADE_IN: {
+				case TRADE_IN:
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeInListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
-						PacketSendUtility.sendMessage(player, "Buy list is missing!!");
-						break;
-					}
-					PacketSendUtility.sendPacket(player, new SM_TRADE_IN_LIST(npc, tradeListTemplate, 100));
+						log.warn("Trade-in list is missing for npc " + npc.getNpcId());
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
+					} else
+						PacketSendUtility.sendPacket(player, new SM_TRADE_IN_LIST(npc, tradeListTemplate, 100));
 					break;
-				}
 				case SELL:
 				case TRADE_SELL_LIST:
 					PacketSendUtility.sendPacket(player, new SM_SELL_ITEM(npc));
@@ -320,7 +341,7 @@ public class DialogService {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(28802));
 						return;
 					}
-					sendDialogWindow(dialogId, player, npc);
+					sendDialogWindow(action, player, npc);
 					break;
 				case FUNC_PET_H_ADOPT:
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ADOPT));
@@ -348,8 +369,8 @@ public class DialogService {
 					} else if (template != null) {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
 						if (loc != null)
-							TeleportService2.teleport(template, loc.getLocId(), player, npc, npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN
-								: TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleport(template, loc.getLocId(), player, npc,
+								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
 					}
 					break;
 				case NULL:
@@ -370,21 +391,9 @@ public class DialogService {
 		}
 	}
 
-	private static boolean checkFuncDialog(int dialogId, Npc npc) {
-		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
-		if (talkInfo == null || talkInfo.getFuncDialogIds() == null)
-			return false;
-		if (!talkInfo.getFuncDialogIds().contains(dialogId))
-			return false;
-		return true;
-	}
-
-	private static void sendDialogWindow(int dialogId, final Player player, Npc npc) {
-		if (dialogId == DialogPage.NO_RIGHT.id())
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
-		else if (checkFuncDialog(dialogId, npc)) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.getPageByAction(dialogId).id()));
-		}
+	private static void sendDialogWindow(DialogAction action, final Player player, Npc npc) {
+		if (npc.getObjectTemplate().supportsAction(action))
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.getPageByAction(action.id()).id()));
 	}
 
 	public static boolean isSubDialogRestricted(int dialogId, final Player player, Npc npc) {
@@ -428,8 +437,7 @@ public class DialogService {
 			case ABYSSRANK:
 				return player.getAbyssRank().getRank().getId() < value;
 			case TARGET_LEGION_DOMINION:
-				if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.WEDNESDAY
-						&& LocalDateTime.now().getHour() >= 8 && LocalDateTime.now().getHour() <= 10) {
+				if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.WEDNESDAY && LocalDateTime.now().getHour() >= 8 && LocalDateTime.now().getHour() <= 10) {
 					return true;
 				}
 				if (player.getLegion() != null) {

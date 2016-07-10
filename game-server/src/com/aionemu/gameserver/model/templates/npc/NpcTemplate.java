@@ -270,41 +270,24 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	}
 
 	public final int getTalkDistance() {
-		if (talkInfo == null)
-			return 2;
-		return talkInfo.getDistance();
+		return talkInfo == null ? 2 : talkInfo.getDistance();
 	}
 
 	public int getTalkDelay() {
-		if (talkInfo == null)
-			return 0;
-		return talkInfo.getDelay();
+		return talkInfo == null ? 0 : talkInfo.getDelay();
 	}
 
 	public List<Integer> getFuncDialogIds() {
-		if (talkInfo == null)
-			return null;
-		return talkInfo.getFuncDialogIds();
+		return talkInfo == null ? null : talkInfo.getFuncDialogIds();
 	}
 
-	public boolean hasBuyList() {
+	/**
+	 * @param action
+	 * @return True if the npc supports this function/action.
+	 */
+	public boolean supportsAction(DialogAction action) {
 		List<Integer> dialogIds = getFuncDialogIds();
-		return dialogIds != null && dialogIds.contains(DialogAction.BUY.id());
-	}
-
-	public boolean hasSellList() {
-		List<Integer> dialogIds = getFuncDialogIds();
-		return dialogIds != null && (dialogIds.contains(DialogAction.SELL.id()) || dialogIds.contains(DialogAction.BUY.id()));
-	}
-
-	public boolean hasTradeInList() {
-		List<Integer> dialogIds = getFuncDialogIds();
-		return dialogIds != null && dialogIds.contains(DialogAction.TRADE_IN.id());
-	}
-
-	public boolean hasPurchaseList() {
-		List<Integer> dialogIds = getFuncDialogIds();
-		return dialogIds != null && dialogIds.contains(DialogAction.TRADE_SELL_LIST.id());
+		return dialogIds != null && dialogIds.contains(action.id());
 	}
 
 	public int getMassiveLootCount() {

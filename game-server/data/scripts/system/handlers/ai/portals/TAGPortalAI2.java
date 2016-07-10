@@ -21,7 +21,7 @@ public class TAGPortalAI2 extends PortalDialogAI2 {
 			return true;
 		}
 		int worldId = 0;
-		switch (DialogAction.getActionByDialogId(dialogId)) {
+		switch (DialogAction.getByActionId(dialogId)) {
 			case SETPRO1:
 				worldId = 300430000;
 				break;

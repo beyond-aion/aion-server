@@ -1,17 +1,10 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.services.DialogService;
-import com.aionemu.gameserver.services.player.PlayerMailboxState;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @modified Neon
@@ -41,31 +34,6 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		VisibleObject target = player.getKnownList().getObject(targetObjectId);
-
-		if (target == null)
-			return;
-
-		Mailbox mailbox = player.getMailbox();
-
-		if (target instanceof Npc) {
-			Npc npc = (Npc) target;
-			npc.getAi2().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
-			DialogService.onCloseDialog(npc, player);
-
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (npc.getTarget() == null && !npc.getMoveController().isInMove()) {
-						npc.getPosition().setH(npc.getSpawn().getHeading());
-						PacketSendUtility.broadcastPacket(npc, new SM_HEADING_UPDATE(npc));
-					}
-				}
-			}, 1200);
-		}
-
-		if (mailbox != null && mailbox.mailBoxState != PlayerMailboxState.CLOSED) {
-			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
-		}
+		DialogService.onCloseDialog(player, target);
 	}
 }

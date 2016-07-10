@@ -46,7 +46,7 @@ public class NpcData {
 				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogId : npc.getFuncDialogIds()) {
-					if (DialogAction.getActionByDialogId(dialogId) == DialogAction.NULL && dialogId != DialogAction.NULL.id())
+					if (DialogAction.getByActionId(dialogId) == DialogAction.NULL && dialogId != DialogAction.NULL.id())
 						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogId + " for Npc " + npc.getTemplateId());
 				}
 			}

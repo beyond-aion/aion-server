@@ -239,12 +239,12 @@ public enum DialogAction {
 	OPEN_STIGMA_ENCHANT(125),
 	USE_OBJECT(-1);
 
-	private static final Map<Integer, DialogAction> dialogsById = new FastMap<>();
+	private static final Map<Integer, DialogAction> actionsById = new FastMap<>();
 	private final int id;
 
 	static {
 		for (DialogAction action : values())
-			dialogsById.put(action.id(), action);
+			actionsById.put(action.id(), action);
 	}
 
 	private DialogAction(int id) {
@@ -264,8 +264,8 @@ public enum DialogAction {
 		return id >= SELECTED_QUEST_REWARD1.id && id <= SELECTED_QUEST_REWARD15.id ? id - SELECTED_QUEST_REWARD1.id : -1;
 	}
 
-	public static DialogAction getActionByDialogId(int id) {
-		DialogAction action = dialogsById.get(id);
+	public static DialogAction getByActionId(int actionId) {
+		DialogAction action = actionsById.get(actionId);
 		return action == null ? DialogAction.NULL : action;
 	}
 }

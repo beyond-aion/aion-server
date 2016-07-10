@@ -110,8 +110,8 @@ public class CM_BUY_ITEM extends AionClientPacket {
 				return;
 			}
 			switch (tradeActionId) {
-				case 1:// sell to shop
-					if (npc.canPurchase() || npc.canSell()) {
+				case 1: // sell to shop
+					if (npc.canBuy() || npc.canPurchase()) {
 						tradeTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
 						if (tradeTemplate != null && tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
 							TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
@@ -119,21 +119,19 @@ public class CM_BUY_ITEM extends AionClientPacket {
 							TradeService.performSellToShop(player, tradeList, tradeTemplate);
 					}
 					break;
-				case 2:// repurchase
-					if (npc.canSell())
+				case 2: // repurchase
+					if (npc.canBuy())
 						RepurchaseService.getInstance().repurchaseFromShop(player, repurchaseList);
 					break;
-				case 13:// buy from shop
-				case 14:// buy from abyss shop
+				case 13: // buy from shop
+				case 14: // buy from abyss shop
 				case 15: // reward shop
-				case 16:// abyss_kinah shop
-					if (npc.canBuyFrom()) {
-						if (DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId()) != null)
-							TradeService.performBuyFromShop(npc, player, tradeList);
-					}
+				case 16: // abyss_kinah shop
+					if (npc.canSell())
+						TradeService.performBuyFromShop(npc, player, tradeList);
 					break;
 				default:
-					log.info(String.format("Unhandle shop action unk1: %d", tradeActionId));
+					log.warn("Unknown shop action: " + tradeActionId);
 					break;
 			}
 		} else if (target instanceof Pet) {

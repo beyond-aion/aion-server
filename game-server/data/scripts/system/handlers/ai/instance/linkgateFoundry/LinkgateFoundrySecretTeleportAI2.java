@@ -28,7 +28,7 @@ public class LinkgateFoundrySecretTeleportAI2 extends ActionItemNpcAI2 {
 	}
 
 	private void switchFloor(Player player, int dialogId) {
-		switch (DialogAction.getActionByDialogId(dialogId)) {
+		switch (DialogAction.getByActionId(dialogId)) {
 			case SETPRO1:
 				TeleportService2.teleportTo(player, 301270000, 177.65f, 258.15f, 313, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 				break;

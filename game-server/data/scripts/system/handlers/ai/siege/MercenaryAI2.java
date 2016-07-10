@@ -42,7 +42,7 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
 		int siegeId = ((SiegeNpc) getOwner()).getSiegeId();
 		int zoneId = 0;
-		switch (DialogAction.getActionByDialogId(dialogId)) {
+		switch (DialogAction.getByActionId(dialogId)) {
 			case SELECT_ACTION_1097:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1097));
 				break;

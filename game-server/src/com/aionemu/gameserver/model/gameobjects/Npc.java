@@ -9,6 +9,7 @@ import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.drop.NpcDrop;
@@ -332,20 +333,32 @@ public class Npc extends Creature {
 		type = newType;
 	}
 
-	public boolean canBuyFrom() {
-		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasBuyList();
-	}
-
+	/**
+	 * @return True if this npc sells items.
+	 */
 	public boolean canSell() {
-		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(this.getNpcId()) != null && getObjectTemplate().hasSellList();
+		return DataManager.TRADE_LIST_DATA.getTradeListTemplate(getNpcId()) != null && getObjectTemplate().supportsAction(DialogAction.BUY);
 	}
 
+	/**
+	 * @return True if this npc buys items.
+	 */
+	public boolean canBuy() {
+		return getObjectTemplate().supportsAction(DialogAction.SELL) || canSell();
+	}
+
+	/**
+	 * @return True if this npc trades items for other items.
+	 */
 	public boolean canTradeIn() {
-		return DataManager.TRADE_LIST_DATA.getTradeInListTemplate(this.getNpcId()) != null && getObjectTemplate().hasTradeInList();
+		return DataManager.TRADE_LIST_DATA.getTradeInListTemplate(getNpcId()) != null && getObjectTemplate().supportsAction(DialogAction.TRADE_IN);
 	}
 
+	/**
+	 * @return True if this npc buys specific items.
+	 */
 	public boolean canPurchase() {
-		return DataManager.TRADE_LIST_DATA.getPurchaseTemplate(this.getNpcId()) != null && getObjectTemplate().hasPurchaseList();
+		return DataManager.TRADE_LIST_DATA.getPurchaseTemplate(getNpcId()) != null && getObjectTemplate().supportsAction(DialogAction.TRADE_SELL_LIST);
 	}
 
 	public GroupDropType getGroupDrop() {

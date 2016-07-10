@@ -29,7 +29,7 @@ public class SiegeCannonAI2 extends NpcAI2 {
 		int morphSkill = getMorphSkill();
 		Npc owner = getOwner();
 
-		if ((DialogAction.getActionByDialogId(dialogId)) == DialogAction.SETPRO1 && (morphSkill != 0)) {
+		if ((DialogAction.getByActionId(dialogId)) == DialogAction.SETPRO1 && (morphSkill != 0)) {
 			TeleportService2.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 			SkillEngine.getInstance().getSkill(getOwner(), morphSkill >> 8, morphSkill & 0xFF, player).useNoAnimationSkill();
 			player.getController().stopProtectionActiveTask();

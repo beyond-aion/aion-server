@@ -46,8 +46,7 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
 		}
 
 		Npc broker = World.getInstance().findNpc(brokerObjId);
-		if (broker == null || broker.getObjectTemplate().getTalkInfo() == null || broker.getObjectTemplate().getTalkInfo().getFuncDialogIds() == null
-			|| !broker.getObjectTemplate().getTalkInfo().getFuncDialogIds().contains(DialogAction.OPEN_VENDOR.id())) {
+		if (broker == null || !broker.getObjectTemplate().supportsAction(DialogAction.OPEN_VENDOR)) {
 			AuditLogger.info(player, "Possibly modified packet to register broker item with no broker around.");
 			return;
 		}

@@ -31,7 +31,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 	}
 
 	private void switchWay(Player player, int dialogId) {
-		switch (DialogAction.getActionByDialogId(dialogId)) {
+		switch (DialogAction.getByActionId(dialogId)) {
 			case SELECT_BOSS_LEVEL2:
 				checkKeys(player, 1);
 				break;

@@ -81,7 +81,7 @@ public class QuestEnv {
 	}
 
 	public DialogAction getDialog() {
-		return DialogAction.getActionByDialogId(dialogId);
+		return DialogAction.getByActionId(dialogId);
 	}
 
 	/**

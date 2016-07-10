@@ -2,20 +2,20 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
+
+import javolution.util.FastTable;
 
 /**
  * @author alexa026, ATracer, Sarynth, xTz
@@ -32,16 +32,15 @@ public class SM_TRADELIST extends AionServerPacket {
 	private List<TradeTab> tradeTablist;
 	private List<LimitedItem> limitedItems;
 
-	public SM_TRADELIST(Player player, int targetObjId, TradeListTemplate tlist, int buyPriceModifier) {
-		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(tlist.getNpcId());
+	public SM_TRADELIST(Player player, Npc npc, TradeListTemplate tlist, int buyPriceModifier) {
 		int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
 
-		this.targetObjId = targetObjId;
+		this.targetObjId = npc.getObjectId();
 		this.playerObjId = player.getObjectId();
 		this.tradeNpcType = tlist.getTradeNpcType();
 		this.buyPriceModifier = buyPriceModifier;
-		this.showBuyTab = template.hasSellList();
-		this.showSellTab = template.hasBuyList();
+		this.showBuyTab = npc.canSell();
+		this.showSellTab = npc.canBuy();
 		this.tradeTablist = new FastTable<>();
 		this.limitedItems = new FastTable<>();
 
