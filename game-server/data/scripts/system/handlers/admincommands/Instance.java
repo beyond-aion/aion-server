@@ -57,14 +57,14 @@ public class Instance extends AdminCommand {
 				if (DredgionService2.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
 				} else {
-					DredgionService2.getInstance().startRegistration();;
+					DredgionService2.getInstance().startRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {
 				if (EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
 				} else {
-					EngulfedOphidianBridgeService.getInstance().startRegistration();;
+					EngulfedOphidianBridgeService.getInstance().startRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("iron_wall_front")) {
@@ -102,7 +102,7 @@ public class Instance extends AdminCommand {
 				if (!EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
 				} else {
-					EngulfedOphidianBridgeService.getInstance().stopRegistration();;
+					EngulfedOphidianBridgeService.getInstance().stopRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("iron_wall_front")) {

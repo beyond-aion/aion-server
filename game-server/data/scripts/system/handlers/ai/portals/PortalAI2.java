@@ -1,18 +1,20 @@
 package ai.portals;
 
-import ai.ActionItemNpcAI2;
-
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
+import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author xTz
@@ -37,12 +39,8 @@ public class PortalAI2 extends ActionItemNpcAI2 {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		AI2Actions.selectDialog(this, player, 0, -1);
-		if (getTalkDelay() != 0) {
-			super.handleDialogStart(player);
-		} else {
-			handleUseItemFinish(player);
-		}
+		QuestEngine.getInstance().onDialog(new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT.id()));
+		super.handleDialogStart(player);
 	}
 
 	@Override

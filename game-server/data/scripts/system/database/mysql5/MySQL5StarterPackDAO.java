@@ -40,7 +40,7 @@ public class MySQL5StarterPackDAO extends StarterPackDAO {
 			@Override
 			public void handleRead(ResultSet rset) throws SQLException {
 				while (rset.next()) {
-					receivingPlayer[0] = rset.getInt("receiving_player");;
+					receivingPlayer[0] = rset.getInt("receiving_player");
 				}
 			}
 		});

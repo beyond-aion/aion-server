@@ -2,11 +2,7 @@ package ai.quests;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
-import com.aionemu.gameserver.ai2.AI2Actions.SelectDialogResult;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.handler.CreatureEventHandler;
 import com.aionemu.gameserver.model.DialogAction;
@@ -19,6 +15,9 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.ActionItemNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -39,28 +38,25 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		SelectDialogResult dialogResult = AI2Actions.selectDialog(this, player, 0, -1);
-		if (!dialogResult.isSuccess()) {
-			if (isDialogNpc()) {
-				// show default dialog
+		QuestEnv env = new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT.id());
+		if (!QuestEngine.getInstance().onDialog(env)) {
+			if (getObjectTemplate().isDialogNpc()) // show default dialog
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id()));
-			}
 			return;
 		}
-		QuestEnv questEnv = dialogResult.getEnv();
-		if (QuestService.getQuestDrop(getNpcId()).isEmpty()) {
+
+		if (QuestService.getQuestDrop(getNpcId()).isEmpty())
 			return;
-		}
 
 		if (registeredPlayers.isEmpty()) {
 			AI2Actions.scheduleRespawn(this);
 			if (player.isInGroup2()) {
-				registeredPlayers = QuestService.getEachDropMembersGroup(player.getPlayerGroup2(), getNpcId(), questEnv.getQuestId());
+				registeredPlayers = QuestService.getEachDropMembersGroup(player.getPlayerGroup2(), getNpcId(), env.getQuestId());
 				if (registeredPlayers.isEmpty()) {
 					registeredPlayers.add(player);
 				}
 			} else if (player.isInAlliance2()) {
-				registeredPlayers = QuestService.getEachDropMembersAlliance(player.getPlayerAlliance2(), getNpcId(), questEnv.getQuestId());
+				registeredPlayers = QuestService.getEachDropMembersAlliance(player.getPlayerAlliance2(), getNpcId(), env.getQuestId());
 				if (registeredPlayers.isEmpty()) {
 					registeredPlayers.add(player);
 				}
@@ -72,10 +68,6 @@ public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 		} else if (registeredPlayers.contains(player)) {
 			DropService.getInstance().requestDropList(player, getObjectId());
 		}
-	}
-
-	private boolean isDialogNpc() {
-		return getObjectTemplate().isDialogNpc();
 	}
 
 	@Override

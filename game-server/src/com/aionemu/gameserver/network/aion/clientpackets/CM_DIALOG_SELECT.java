@@ -54,28 +54,25 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		final Player player = getConnection().getActivePlayer();
-		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
-		QuestEnv env = new QuestEnv(null, player, questId, 0);
+		Player player = getConnection().getActivePlayer();
 		if (player.isTrading())
 			return;
 
 		if (targetObjectId == 0 || targetObjectId == player.getObjectId()) {
-			if (questTemplate != null) {
-				if (!questTemplate.isCannotShare() && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id())) {
-					QuestService.startQuest(env);
-					return;
-				} else if (questTemplate.isCanReport() && (dialogId == DialogAction.SELECTED_QUEST_AUTO_REWARD.id()
-					|| (dialogId >= DialogAction.SELECTED_QUEST_AUTO_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_AUTO_REWARD15.id()))) {
-					QuestService.finishQuest(env);
-					return;
-				}
-			}
-			if (QuestEngine.getInstance().onDialog(new QuestEnv(null, player, questId, dialogId)))
+			QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
+			if (questTemplate == null)
 				return;
-			// FIXME client sends unk1=1, targetObjectId=0, dialogId=2 (trader) => we miss some packet to close window
-			if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
-				ClassChangeService.changeClassToSelection(player, dialogId);
+
+			QuestEnv env = new QuestEnv(null, player, questId, dialogId);
+			if (!questTemplate.isCannotShare() && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id()))
+				QuestService.startQuest(env);
+			else if (questTemplate.isCanReport() && (dialogId == DialogAction.SELECTED_QUEST_AUTO_REWARD.id()
+				|| (dialogId >= DialogAction.SELECTED_QUEST_AUTO_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_AUTO_REWARD15.id())))
+				QuestService.finishQuest(env);
+			else if (!QuestEngine.getInstance().onDialog(env)) {
+				if (CustomConfig.ENABLE_SIMPLE_2NDCLASS && (questId == 1006 || questId == 2008))
+					ClassChangeService.changeClassToSelection(player, dialogId);
+			}
 			return;
 		}
 

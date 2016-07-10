@@ -55,7 +55,7 @@ public class BanChar extends AdminCommand {
 
 		if (dayCount < 0) {
 			PacketSendUtility.sendMessage(admin, "Second parameter has to be a positive daycount or 0 for infinity");
-			sendInfo(admin, true);;
+			sendInfo(admin, true);
 			return;
 		}
 

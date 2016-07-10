@@ -8,8 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -94,32 +92,6 @@ public class AI2Actions {
 
 	public static void scheduleRespawn(AbstractAI ai2) {
 		RespawnService.scheduleRespawnTask(ai2.getOwner());
-	}
-
-	public static SelectDialogResult selectDialog(AbstractAI ai2, Player player, int questId, int dialogId) {
-		QuestEnv env = new QuestEnv(ai2.getOwner(), player, questId, dialogId);
-		boolean result = QuestEngine.getInstance().onDialog(env);
-		return new SelectDialogResult(result, env);
-	}
-
-	public static final class SelectDialogResult {
-
-		private final boolean success;
-		private final QuestEnv env;
-
-		private SelectDialogResult(boolean success, QuestEnv env) {
-			this.success = success;
-			this.env = env;
-		}
-
-		public boolean isSuccess() {
-			return success;
-		}
-
-		public QuestEnv getEnv() {
-			return env;
-		}
-
 	}
 
 	/**

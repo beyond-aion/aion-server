@@ -28,7 +28,7 @@ public class ClassChangeService {
 
 	public static void changeClassToSelection(Player player, int dialogId) {
 		setClass(player, getSelectedPlayerClass(player.getRace(), dialogId), true, true);
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0, 0));
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0)); // close dialog window
 	}
 
 	public static void completeAscensionQuest(Player player) {

@@ -172,7 +172,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 					updateQuestStatus(env);
 					Npc mob = (Npc) QuestService.spawnQuestNpc(320140000, player.getInstanceId(), 798346, player.getX(), player.getY(), player.getZ(),
 						(byte) 0);
-					mob.getAggroList().addHate(player, 100);;
+					mob.getAggroList().addHate(player, 100);
 					return true;
 				}
 			}

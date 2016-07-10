@@ -27,7 +27,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
 			return;
 		qe.registerOnLevelChanged(questId);
-		qe.registerOnQuestCompleted(questId);;
+		qe.registerOnQuestCompleted(questId);
 		qe.registerQuestNpc(203550).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204182).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204075).addOnTalkEvent(questId);

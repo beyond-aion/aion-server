@@ -112,7 +112,7 @@ public class Reload extends AdminCommand {
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/events/timed_events", true);
 			JAXBUtil.deserialize(files, EventData.class, "./data/static_data/static_data.xsd").forEach(e -> templates.addAll(e.getEvents()));
 			EventService.getInstance().stop();
-			DataManager.EVENT_DATA.setEvents(templates);;
+			DataManager.EVENT_DATA.setEvents(templates);
 			EventService.getInstance().start();
 			sendInfo(admin, DataManager.EVENT_DATA.size() + " events loaded.");
 		} else

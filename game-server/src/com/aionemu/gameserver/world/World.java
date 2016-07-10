@@ -45,7 +45,7 @@ public class World {
 	/**
 	 * Container with all players that entered world.
 	 */
-	private final PlayerContainer allPlayers = new PlayerContainer();;
+	private final PlayerContainer allPlayers = new PlayerContainer();
 
 	/**
 	 * Container with all AionObjects in the world [ie Players, Npcs etc]

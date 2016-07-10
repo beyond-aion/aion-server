@@ -18,13 +18,12 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class SM_DIALOG_WINDOW extends AionServerPacket {
 
-	private int targetObjectId;
-	private int dialogID;
-	private int questId = 0;
+	private final int targetObjectId;
+	private final int dialogID;
+	private final int questId;
 
 	public SM_DIALOG_WINDOW(int targetObjectId, int dlgID) {
-		this.targetObjectId = targetObjectId;
-		this.dialogID = dlgID;
+		this(targetObjectId, dlgID, 0);
 	}
 
 	public SM_DIALOG_WINDOW(int targetObjectId, int dlgID, int questId) {
@@ -33,9 +32,6 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 		this.questId = questId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player player = con.getActivePlayer();
