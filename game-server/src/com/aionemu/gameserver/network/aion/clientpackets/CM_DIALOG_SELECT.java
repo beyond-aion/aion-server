@@ -42,9 +42,6 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();
@@ -55,9 +52,6 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		unk = readH(); // unk 4.7
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final Player player = getConnection().getActivePlayer();
@@ -86,11 +80,9 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		}
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
-
 		if (obj instanceof Creature) {
 			Creature creature = (Creature) obj;
 			creature.getController().onDialogSelect(dialogId, lastPage, player, questId, extendedRewardIndex);
 		}
-		// log.info("id: "+targetObjectId+" dialogId: " + dialogId +" unk1: " + unk1 + " questId: "+questId);
 	}
 }

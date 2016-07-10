@@ -1,5 +1,7 @@
 package ai.siege;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
 import com.aionemu.gameserver.ai2.AIName;
@@ -57,11 +59,10 @@ public class SiegeFortressGateAI2 extends NpcAI2 {
 		super.handleSpawned();
 		doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), "ab_castledoor_100.cgf", getOwner().getX(), getOwner().getY(),
 			getOwner().getZ());
-		if (doorName != null) {
+		if (doorName != null)
 			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, false);
-		} else {
-			System.out.println(" Not found Siege door name ");
-		}
+		else
+			LoggerFactory.getLogger(SiegeFortressGateAI2.class).warn("Couldn't find siege door name");
 	}
 
 	@Override

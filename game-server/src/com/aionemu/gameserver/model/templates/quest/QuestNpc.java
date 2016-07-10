@@ -2,13 +2,14 @@ package com.aionemu.gameserver.model.templates.quest;
 
 import java.util.HashSet;
 import java.util.List;
-
-import javolution.util.FastTable;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
+
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -18,7 +19,7 @@ public class QuestNpc {
 	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(QuestNpc.class);
 
-	private final HashSet<Integer> onQuestStart;
+	private final Set<Integer> onQuestStart;
 	private final List<Integer> onKillEvent;
 	private final List<Integer> onTalkEvent;
 	private final List<Integer> onAttackEvent;
@@ -26,19 +27,19 @@ public class QuestNpc {
 	private final List<Integer> onAtDistanceEvent;
 	private final int npcId;
 	private final int questRange;
-	private HashSet<Integer> allQuestIds;
+	private Set<Integer> allQuestIds;
 	private boolean wasSpawned;
 
 	public QuestNpc(int npcId, int questRange) {
 		this.npcId = npcId;
 		this.questRange = questRange;
-		onQuestStart = new HashSet<Integer>(0);
+		onQuestStart = new HashSet<>(0);
 		onKillEvent = new FastTable<>();
 		onTalkEvent = new FastTable<>();
 		onAttackEvent = new FastTable<>();
 		onAddAggroListEvent = new FastTable<>();
 		onAtDistanceEvent = new FastTable<>();
-		allQuestIds = new HashSet<Integer>(0);
+		allQuestIds = new HashSet<>(0);
 	}
 
 	public QuestNpc(int npcId) {
@@ -57,7 +58,7 @@ public class QuestNpc {
 		}
 	}
 
-	public HashSet<Integer> getOnQuestStart() {
+	public Set<Integer> getOnQuestStart() {
 		return onQuestStart;
 	}
 
@@ -125,7 +126,7 @@ public class QuestNpc {
 	 * 
 	 * @return
 	 */
-	public HashSet<Integer> getNotCheckedQuestIds() {
+	public Set<Integer> getNotCheckedQuestIds() {
 		return allQuestIds;
 	}
 

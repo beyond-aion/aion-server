@@ -305,7 +305,6 @@ public final class QuestService {
 	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck,
 		boolean skipRepeatCountCheck, boolean skipXmlPreconditionCheck) {
 		try {
-			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null && qs.getStatus() != QuestStatus.NONE) {
 				if (!skipStartedCheck && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
@@ -313,6 +312,7 @@ public final class QuestService {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
 					return false;
 				} else if (!skipRepeatCountCheck && qs.getStatus() == QuestStatus.COMPLETE && !qs.canRepeat()) {
+					QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 					if (template.getMaxRepeatCount() > 1 && template.getMaxRepeatCount() != 255 && qs.getCompleteCount() >= template.getMaxRepeatCount()) {
 						if (warn)
 							PacketSendUtility.sendPacket(player,
@@ -325,6 +325,7 @@ public final class QuestService {
 				}
 			}
 
+			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			if (template.getRacePermitted() != null && template.getRacePermitted() != Race.PC_ALL && template.getRacePermitted() != player.getRace()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE());

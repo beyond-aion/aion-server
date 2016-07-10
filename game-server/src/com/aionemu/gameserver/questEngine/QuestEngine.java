@@ -1086,7 +1086,7 @@ public class QuestEngine implements GameEngine {
 	 */
 	public void onNotifyNpcSpawned(int questId, int npcId) {
 		QuestHandler handler = questHandlers.get(questId);
-		if (handler == null || !(handler instanceof ConstantSpawnHandler))
+		if (!(handler instanceof ConstantSpawnHandler))
 			return;
 		ConstantSpawnHandler checker = handler;
 		HashSet<Integer> allNpcs = checker.getNpcIds();

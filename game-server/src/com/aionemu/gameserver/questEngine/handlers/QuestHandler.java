@@ -225,10 +225,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	/** Send default start quest dialog and start it (give the item on start) */
 	public boolean sendQuestStartDialog(QuestEnv env, int itemId, int itemCount) {
 		switch (env.getDialog()) {
-			case ASK_QUEST_ACCEPT: {
+			case ASK_QUEST_ACCEPT:
 				return sendQuestDialog(env, 4);
-			}
-			case QUEST_ACCEPT_1: {
+			case QUEST_ACCEPT_1:
 				if (itemId != 0 && itemCount != 0) {
 					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
 						if (QuestService.startQuest(env)) {
@@ -244,8 +243,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 							return sendQuestDialog(env, 1003);
 					}
 				}
-			}
-			case QUEST_ACCEPT_SIMPLE: {
+				break;
+			case QUEST_ACCEPT_SIMPLE:
 				if (itemId != 0 && itemCount != 0) {
 					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
 						if (QuestService.startQuest(env)) {
@@ -253,25 +252,17 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 							return closeDialogWindow(env);
 						}
 					}
-				} else {
-					if (QuestService.startQuest(env)) {
-						if (env.getVisibleObject() == null || env.getVisibleObject() instanceof Player)
-							return closeDialogWindow(env);
-						else
-							return closeDialogWindow(env);
-					}
+				} else if (QuestService.startQuest(env)) {
+					return closeDialogWindow(env);
 				}
-			}
+				break;
 			case QUEST_REFUSE_1:
-			case QUEST_REFUSE_2: {
+			case QUEST_REFUSE_2:
 				return sendQuestDialog(env, 1004);
-			}
-			case QUEST_REFUSE_SIMPLE: {
+			case QUEST_REFUSE_SIMPLE:
 				return closeDialogWindow(env);
-			}
-			case FINISH_DIALOG: {
+			case FINISH_DIALOG:
 				return sendQuestSelectionDialog(env);
-			}
 		}
 		return false;
 	}

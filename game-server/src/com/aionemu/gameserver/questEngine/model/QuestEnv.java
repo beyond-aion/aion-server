@@ -61,7 +61,7 @@ public class QuestEnv {
 	/**
 	 * @return the questId
 	 */
-	public Integer getQuestId() {
+	public int getQuestId() {
 		return questId;
 	}
 

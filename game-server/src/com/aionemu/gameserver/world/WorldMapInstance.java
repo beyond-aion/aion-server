@@ -2,7 +2,6 @@ package com.aionemu.gameserver.world;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -167,7 +166,7 @@ public abstract class WorldMapInstance {
 			int npcId = ((Npc) object).getNpcId();
 			QuestNpc data = QuestEngine.getInstance().getQuestNpc(npcId);
 			if (data != null) {
-				HashSet<Integer> questsToCheck = data.getNotCheckedQuestIds();
+				Set<Integer> questsToCheck = data.getNotCheckedQuestIds();
 				if (!questsToCheck.isEmpty()) {
 					for (int id : questsToCheck) {
 						QuestEngine.getInstance().onNotifyNpcSpawned(id, npcId);
