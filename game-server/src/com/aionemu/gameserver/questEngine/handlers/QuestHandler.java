@@ -29,6 +29,7 @@ import com.aionemu.gameserver.model.templates.quest.CollectItems;
 import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
 import com.aionemu.gameserver.model.templates.quest.QuestDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
+import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
@@ -305,11 +306,41 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (dialogId >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 			if (QuestService.finishQuest(env, rewardGroup)) {
 				Npc npc = (Npc) env.getVisibleObject();
-				if ("useitem".equals(npc.getAi2().getName()) || ("quest_use_item".equals(npc.getAi2().getName()))) {
-					return closeDialogWindow(env);
-				} else {
-					return sendQuestSelectionDialog(env);
+				QuestNpc questNpc = QuestEngine.getInstance().getQuestNpc(npc.getNpcId());
+				boolean npcHasActiveQuest = false;
+				for (Integer questId : questNpc.getOnTalkEvent()) { // all quest IDs that have registered talk events for this npc
+					QuestState qs2 = player.getQuestStateList().getQuestState(questId);
+					if (qs2 != null && qs2.getStatus() == QuestStatus.REWARD) { // TODO make sure that this npc is the end npc
+						env.setQuestId(questId);
+						env.setDialogId(DialogAction.USE_OBJECT.id()); // show default dialog (reward selection for next quest)
+						return QuestEngine.getInstance().onDialog(new QuestEnv(npc, player, questId, DialogAction.USE_OBJECT.id()));
+					} else if (!npcHasActiveQuest && qs2 != null && qs2.getStatus() == QuestStatus.START) {
+						boolean isQuestStartNpc = questNpc.getOnQuestStart().contains(questId);
+						if (!isQuestStartNpc
+							|| isQuestStartNpc && DataManager.QUEST_DATA.getQuestById(questId).isMission() && qs2.getQuestVars().getQuestVars() == 0)
+							npcHasActiveQuest = true; // TODO correct way to make sure that active quest can be continued at this npc
+					}
 				}
+				boolean npcHasNewQuest = false;
+				for (Integer questId : questNpc.getOnQuestStart()) { // all quest IDs that are registered to be started at this npc
+					if (QuestService.checkStartConditions(player, questId, false)) {
+						npcHasNewQuest = true;
+						QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
+						for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
+							List<FinishedQuestCond> finishedQuests = startCondition.getFinishedPreconditions();
+							if (finishedQuests != null) {
+								for (FinishedQuestCond fcondition : finishedQuests) {
+									if (fcondition.getQuestId() == env.getQuestId()) {
+										env.setQuestId(questId);
+										env.setDialogId(DialogAction.QUEST_SELECT.id());
+										return QuestEngine.getInstance().onDialog(env); // show start dialog of follow-up quest
+									}
+								}
+							}
+						}
+					}
+				}
+				return npcHasActiveQuest || npcHasNewQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
 			return false;
 		} else if (dialogId == DialogAction.SELECT_QUEST_REWARD.id() || dialogId == DialogAction.USE_OBJECT.id()) { // show reward selection page
