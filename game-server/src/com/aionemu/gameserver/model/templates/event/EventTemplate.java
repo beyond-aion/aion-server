@@ -173,11 +173,11 @@ public class EventTemplate {
 						public void visit(Player player) {
 							if (player.isOnline() && player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
 								// TODO: check the exact type in retail
-								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, false, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
+								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
 						}
 					});
 				}
-			}, inventoryDrop.getInterval() * 60000, inventoryDrop.getInterval() * 60000);
+			}, 0, inventoryDrop.getInterval() * 60000);
 		}
 
 		if (surveys != null) {

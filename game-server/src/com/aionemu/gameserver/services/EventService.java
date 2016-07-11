@@ -131,7 +131,7 @@ public class EventService {
 		List<EventTemplate> newEnabledEvents = new FastTable<EventTemplate>();
 		List<String> availableEventNames = DataManager.EVENT_DATA.getEventNames();
 		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames
-			: FastTable.of(EventsConfig.ENABLED_EVENTS.split(","));
+			: FastTable.of(EventsConfig.ENABLED_EVENTS.split("\\s*,\\s*"));
 
 		synchronized (enabledEvents) {
 			for (EventTemplate et : enabledEvents) {
@@ -140,7 +140,7 @@ public class EventService {
 			}
 
 			for (String eventName : enabledEventNames) {
-				EventTemplate et = DataManager.EVENT_DATA.getEvent(eventName.trim());
+				EventTemplate et = DataManager.EVENT_DATA.getEvent(eventName);
 				if (et != null) {
 					newEnabledEvents.add(et);
 					if (et.isActive())
