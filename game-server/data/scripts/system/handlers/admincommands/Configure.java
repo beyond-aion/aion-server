@@ -1,6 +1,10 @@
 package admincommands;
 
 import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
@@ -35,96 +39,111 @@ import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.google.common.collect.ImmutableMap;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
  * @modified Rolandas
+ * @reworked Neon
  */
 public class Configure extends AdminCommand {
 
-	private static final ImmutableMap<String, Class<?>> commands = new ImmutableMap.Builder<String, Class<?>>().put("admin", AdminConfig.class)
-		.put("ai", AIConfig.class).put("autogroup", AutoGroupConfig.class).put("cache", CacheConfig.class).put("craft", CraftConfig.class)
-		.put("custom", CustomConfig.class).put("developer", DeveloperConfig.class).put("drop", DropConfig.class).put("enchants", EnchantsConfig.class)
-		.put("events", EventsConfig.class).put("falldamage", FallDamageConfig.class).put("gameserver", GSConfig.class)
-		.put("geodata", GeoDataConfig.class).put("group", GroupConfig.class).put("html", HTMLConfig.class).put("housing", HousingConfig.class)
-		.put("ingameshop", InGameShopConfig.class).put("legions", LegionConfig.class).put("logging", LoggingConfig.class)
-		.put("membership", MembershipConfig.class).put("name", NameConfig.class).put("periodicsave", PeriodicSaveConfig.class)
-		.put("prices", PricesConfig.class).put("punishment", PunishmentConfig.class).put("ranking", RankingConfig.class).put("rates", RateConfig.class)
-		.put("security", SecurityConfig.class).put("shutdown", ShutdownConfig.class).put("siege", SiegeConfig.class).put("thread", ThreadConfig.class)
-		.put("world", WorldConfig.class).put("network", NetworkConfig.class).build();
+	private static final Map<String, Class<?>> configs = new FastMap<>();
+
+	static {
+		List<Class<?>> classes = FastTable.of(AIConfig.class, AdminConfig.class, AutoGroupConfig.class, CacheConfig.class, CraftConfig.class,
+			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EnchantsConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
+			GeoDataConfig.class, GroupConfig.class, HTMLConfig.class, HousingConfig.class, InGameShopConfig.class, LegionConfig.class, LoggingConfig.class,
+			MembershipConfig.class, NameConfig.class, NetworkConfig.class, PeriodicSaveConfig.class, PricesConfig.class, PunishmentConfig.class,
+			RankingConfig.class, RateConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class);
+
+		for (Class<?> cls : classes)
+			configs.put(cls.getSimpleName().toLowerCase().replace("config", ""), cls);
+	}
 
 	public Configure() {
-		super("configure");
+		super("configure", "Shows/changes config settings.");
+
+		// @formatter:off
+		setParamInfo(
+			"<list> - Shows a list of available configuration categories.",
+			"<configname> - Lists all available properties of the specified configuration.",
+			"<configname> <property> - Shows the current setting of the specified configuration.",
+			"<configname> <property> <value> - Changes the specified configuration setting to the new value."
+		);
+		// @formatter:on
 	}
 
 	@Override
-	public void execute(Player player, String... params) {
-		String command = "";
-		if (params.length == 3) {
-			// show
-			command = params[0];
-			if (!"show".equalsIgnoreCase(command)) {
-				PacketSendUtility.sendMessage(player, "syntax //configure <set|show> <configname> <property> [<newvalue>]");
-				return;
-			}
-		} else if (params.length == 4) {
-			// set
-			command = params[0];
-			if (!"set".equalsIgnoreCase(command)) {
-				PacketSendUtility.sendMessage(player, "syntax //configure <set|show> <configname> <property> [<newvalue>]");
-				return;
-			}
-		} else {
-			PacketSendUtility.sendMessage(player, "syntax //configure <set|show> <configname> <property> [<newvalue>]");
+	public void execute(Player admin, String... params) {
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		Class<?> classToMofify = commands.get(params[1].toLowerCase());
-
-		if (command.equalsIgnoreCase("show")) {
-			String fieldName = params[2];
-			Field someField;
-			try {
-				someField = classToMofify.getDeclaredField(fieldName.toUpperCase());
-				PacketSendUtility.sendMessage(player, "Current value is " + someField.get(null));
-			} catch (Exception e) {
-				PacketSendUtility.sendMessage(player, "Error! Wrong property or value.");
+		if ("list".equalsIgnoreCase(params[0])) {
+			StringBuilder sb = new StringBuilder("List of available configuration names:");
+			for (String configname : configs.keySet())
+				sb.append("\n\t").append(configname);
+			sendInfo(admin, sb.toString());
+		} else {
+			Class<?> cls = configs.get(params[0].toLowerCase());
+			if (cls == null) {
+				sendInfo(admin, "Invalid configuration name. You can get a list of available configuration categories via the <list> parameter.");
 				return;
 			}
-		} else if (command.equalsIgnoreCase("set")) {
-			String fieldName = params[2];
-			String newValue = params[3];
-			if (classToMofify != null) {
-				Field someField;
-				try {
-					someField = classToMofify.getDeclaredField(fieldName.toUpperCase());
-					Class<?> classType = someField.getType();
-					if (classType == String.class) {
-						someField.set(null, newValue);
-					} else if (classType == int.class || classType == Integer.class) {
-						someField.set(null, Integer.parseInt(newValue));
-					} else if (classType == Boolean.class || classType == boolean.class) {
-						someField.set(null, Boolean.valueOf(newValue));
-					} else if (classType == byte.class || classType == Byte.class) {
-						someField.set(null, Byte.valueOf(newValue));
-					} else if (classType == float.class || classType == Float.class) {
-						someField.set(null, Float.valueOf(newValue));
+			if (params.length < 2) {
+				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
+				for (Field field : cls.getDeclaredFields()) {
+					try {
+						String val = String.valueOf(field.get(null)); // can throw an exception if not accessible
+						sb.append("\n\t").append(field.getName()).append("\t-\t(").append(val).append(")");
+					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
 					}
-
-				} catch (Exception e) {
-					PacketSendUtility.sendMessage(player, "Error! Wrong property or value.");
-					return;
 				}
+				sendInfo(admin, sb.toString());
+				return;
 			}
-			PacketSendUtility.sendMessage(player, "Property changed and applied");
+			String fieldName = params[1].toUpperCase();
+			try {
+				Field property = cls.getDeclaredField(fieldName);
+				Object value = property.get(null);
+				if (params.length > 2) {
+					String newValue = StringUtils.join(params, " ", 2, params.length);
+					try {
+						Class<?> classType = property.getType();
+						if (classType == String.class)
+							property.set(null, newValue);
+						else if (classType == boolean.class || classType == Boolean.class)
+							property.set(null, Boolean.parseBoolean(newValue));
+						else if (classType == byte.class || classType == Byte.class)
+							property.set(null, Byte.parseByte(newValue));
+						else if (classType == short.class || classType == Short.class)
+							property.set(null, Short.parseShort(newValue));
+						else if (classType == int.class || classType == Integer.class)
+							property.set(null, Integer.parseInt(newValue));
+						else if (classType == long.class || classType == Long.class)
+							property.set(null, Long.parseLong(newValue));
+						else if (classType == float.class || classType == Float.class)
+							property.set(null, Float.parseFloat(newValue));
+						else if (classType == double.class || classType == Double.class)
+							property.set(null, Double.parseDouble(newValue));
+						else
+							throw new UnsupportedOperationException();
+					} catch (Exception e) {
+						sendInfo(admin, "The new value could not be set.");
+						return;
+					}
+					sendInfo(admin, "The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + property.get(null));
+				} else {
+					sendInfo(admin, "The current value of " + cls.getSimpleName() + "." + fieldName + " is " + value);
+				}
+			} catch (Exception e) {
+				sendInfo(admin, "The property " + cls.getSimpleName() + "." + fieldName + " does not exist.");
+			}
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //configure <set|show> <configname> <property> [<newvalue>]");
 	}
 }
