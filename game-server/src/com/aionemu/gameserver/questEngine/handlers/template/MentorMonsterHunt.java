@@ -8,7 +8,6 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -24,7 +23,6 @@ public class MentorMonsterHunt extends MonsterHunt {
 
 	private int menteMinLevel;
 	private int menteMaxLevel;
-	private QuestTemplate qt;
 
 	/**
 	 * @param questId
@@ -37,7 +35,6 @@ public class MentorMonsterHunt extends MonsterHunt {
 		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, null, 0, reward, rewardNextStep);
 		this.menteMinLevel = menteMinLevel;
 		this.menteMaxLevel = menteMaxLevel;
-		this.qt = DataManager.QUEST_DATA.getQuestById(questId);
 	}
 
 	@Override
@@ -45,7 +42,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			switch (qt.getMentorType()) {
+			switch (DataManager.QUEST_DATA.getQuestById(questId).getMentorType()) {
 				case MENTOR:
 					if (player.isMentor()) {
 						PlayerGroup group = player.getPlayerGroup2();

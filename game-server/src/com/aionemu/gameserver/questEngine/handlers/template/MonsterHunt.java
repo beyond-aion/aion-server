@@ -93,10 +93,8 @@ public class MonsterHunt extends QuestHandler {
 				qe.registerQuestNpc(monsterId).addOnKillEvent(questId);
 		}
 
-		if (!endNpcIds.equals(startNpcIds)) {
-			for (Integer endNpcId : endNpcIds)
-				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
-		}
+		for (Integer endNpcId : endNpcIds)
+			qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 
 		for (Integer aggroNpcId : aggroNpcIds)
 			qe.registerQuestNpc(aggroNpcId).addOnAddAggroListEvent(questId);
@@ -117,7 +115,7 @@ public class MonsterHunt extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {

@@ -33,7 +33,7 @@ public class _14053DangerCubed extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
+		defaultOnQuestCompletedEvent(env, 14050);
 	}
 
 	@Override
