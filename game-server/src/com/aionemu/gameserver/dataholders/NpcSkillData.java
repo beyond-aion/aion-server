@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,6 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -28,15 +28,11 @@ public class NpcSkillData {
 	private TIntObjectHashMap<NpcSkillTemplates> npcSkillData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (NpcSkillTemplates npcSkill : npcSkills) {
-			for (Integer npcId : npcSkill.getNpcIds()) {
-				if (!npcSkillData.containsKey(npcId))
-					npcSkillData.put(npcId, npcSkill);
-				else
-					LoggerFactory.getLogger(NpcSkillData.class).error("Tried to duplicated npc skill data entry for npc id " + npcId);
+		for (NpcSkillTemplates npcSkillList : npcSkills) {
+			for (Integer npcId : npcSkillList.getNpcIds()) {
+				if (npcSkillData.putIfAbsent(npcId, npcSkillList) != null)
+					LoggerFactory.getLogger(NpcSkillData.class).warn("Npc " + npcId + " has multiple skill lists in npc_skills.xml");
 			}
-			if (npcSkill.getNpcSkills() == null)
-				LoggerFactory.getLogger(NpcSkillData.class).error("NO SKILL");
 		}
 
 	}

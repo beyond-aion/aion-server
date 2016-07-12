@@ -64717,6 +64717,12 @@
 		<npc_skill id="22052" lv="1" prob="60"/>
 		<npc_skill id="22040" lv="1" prob="40"/>
 	</npc_skills>
+    <npc_skills npc_ids="833412">
+        <npc_skill id="21934" lv="1" prob="100"/>
+    </npc_skills>
+    <npc_skills npc_ids="833414">
+        <npc_skill id="21935" lv="1" prob="100"/>
+    </npc_skills>
 	<npc_skills npc_ids="833416">
 		<npc_skill id="21936" lv="1" prob="100"/>
 	</npc_skills>
@@ -64888,26 +64894,17 @@
     <npc_skills npc_ids="833430">
         <npc_skill id="21943" lv="1" prob="100"/>
     </npc_skills>
-    <npc_skills npc_ids="833412">
-        <npc_skill id="21934" lv="1" prob="100"/>
-    </npc_skills>
     <npc_skills npc_ids="833432">
         <npc_skill id="21944" lv="1" prob="100"/>
     </npc_skills>
     <npc_skills npc_ids="833434">
         <npc_skill id="21945" lv="1" prob="100"/>
     </npc_skills>
-    <npc_skills npc_ids="833414">
-        <npc_skill id="21935" lv="1" prob="100"/>
-    </npc_skills>
     <npc_skills npc_ids="833436">
         <npc_skill id="21946" lv="1" prob="100"/>
     </npc_skills>
     <npc_skills npc_ids="833438">
         <npc_skill id="21947" lv="1" prob="100"/>
-    </npc_skills>
-    <npc_skills npc_ids="833416">
-        <npc_skill id="21936" lv="1" prob="100"/>
     </npc_skills>
 	<npc_skills npc_ids="855419">
 		<npc_skill id="19498" lv="49" prob="100"/>
@@ -66084,7 +66081,7 @@
 	<npc_skills npc_ids="236363 236364 236367 236369 236371 236373 236376 236378 236380 236382 236383 236386 236387 236390 236391 236392 236395 236397 236399 236401 236404 236406 236408 236410 236411 236414 236415 236418">
 		<npc_skill id="21923" lv="1" prob="0" cd="0" is_post_spawn="true"/>
 	</npc_skills>
-	<npc_skills npc_ids="236365 236366 236368 236370 236372 236374 236375 236377 236379 236381 236384 236385 236388 236389 236393 236394 236396 236398 236400 236402 236403 236405 236407 236409 236412 236413 236414 236416 236417">
+	<npc_skills npc_ids="236365 236366 236368 236370 236372 236374 236375 236377 236379 236381 236384 236385 236388 236389 236393 236394 236396 236398 236400 236402 236403 236405 236407 236409 236412 236413 236416 236417">
 		<npc_skill id="21922" lv="1" prob="0" cd="0" is_post_spawn="true"/>
 	</npc_skills>
 	<!-- Ophidan Bridge -->

@@ -12,7 +12,7 @@
 	</xs:element>
 	<xs:complexType name="NpcSkillList">
 		<xs:sequence>
-			<xs:element name="npc_skill" type="NpcSkillTemplate" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="npc_skill" type="NpcSkillTemplate" minOccurs="1" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="npc_ids" type="IntListType" />
 	</xs:complexType>

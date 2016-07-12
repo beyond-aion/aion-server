@@ -56,7 +56,7 @@
       <npc_skill id="17703" lv="61" prob="25"/>
       <npc_skill id="17704" lv="61" prob="25"/>
    </npc_skills>
-	<!-- Ebonlord -->
+	<!-- Ebonlord Arknamium -->
 	<npc_skills npc_ids="233631">
       <npc_skill id="17293" lv="61" prob="25"/>
       <npc_skill id="17295" lv="61" prob="25"/>
@@ -70,7 +70,7 @@
       <npc_skill id="18109" lv="61" prob="25"/>
     </npc_skills>
 	<!-- Fighter -->
-	<npc_skills npc_ids="233591 233599 233623 233627 233631 233754 233766 233770">
+	<npc_skills npc_ids="233591 233599 233623 233627 233754 233766 233770">
       <npc_skill id="16602" lv="61" prob="25"/>
       <npc_skill id="17459" lv="61" prob="25"/>
       <npc_skill id="17471" lv="61" prob="25"/>
