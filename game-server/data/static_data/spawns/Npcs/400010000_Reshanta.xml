@@ -3,7 +3,7 @@
 	<spawn_map map_id="400010000">
 		<!-- Abend -->
 		<spawn npc_id="278129" respawn_time="295">
-			<spot x="687.21" y="2841.99" z="1595.24"/>
+			<spot x="687.21" y="2841.99" z="1595.24" h="108"/>
 		</spawn>
 		<!-- Achelos -->
 		<spawn npc_id="278638" respawn_time="295">
@@ -15,7 +15,7 @@
 		</spawn>
 		<!-- Adrastea -->
 		<spawn npc_id="278629" respawn_time="295">
-			<spot x="3112.2" y="958.904" z="1515"/>
+			<spot x="3112.2" y="958.904" z="1515" h="24"/>
 		</spawn>
 		<!-- Aether's Defender -->
 		<spawn npc_id="251002" respawn_time="295">
@@ -726,7 +726,7 @@
 		</spawn>
 		<!-- Brysa -->
 		<spawn npc_id="278130" respawn_time="295">
-			<spot x="690.674" y="2799.22" z="1595.22"/>
+			<spot x="690.674" y="2799.22" z="1595.22" h="18"/>
 		</spawn>
 		<!-- Bronze Garcikhan -->
 		<spawn npc_id="254535" respawn_time="295">
@@ -781,15 +781,15 @@
 		</spawn>
 		<!-- Cymaon -->
 		<spawn npc_id="278556" respawn_time="295">
-			<spot x="2860.56" y="916.051" z="1533.65"/>
+			<spot x="2860.56" y="916.051" z="1533.65" h="34"/>
 		</spawn>
 		<!-- Clatanan -->
 		<spawn npc_id="278555" respawn_time="295">
-			<spot x="2858.69" y="916.062" z="1533.65"/>
+			<spot x="2858.69" y="916.062" z="1533.65" h="30"/>
 		</spawn>
 		<!-- Claudia -->
 		<spawn npc_id="278554" respawn_time="295">
-			<spot x="2848.22" y="916.953" z="1533.65"/>
+			<spot x="2848.22" y="916.953" z="1533.65" h="19"/>
 		</spawn>
 		<!-- Climis -->
 		<spawn npc_id="278576" respawn_time="295">
@@ -1040,7 +1040,7 @@
 		</spawn>
 		<!-- Dellaron -->
 		<spawn npc_id="278557" respawn_time="295">
-			<spot x="2856.68" y="916.881" z="1533.65"/>
+			<spot x="2856.68" y="916.881" z="1533.65" h="39"/>
 		</spawn>
 		<!-- Delling -->
 		<spawn npc_id="278081" respawn_time="295">
@@ -1276,7 +1276,7 @@
 		</spawn>
 		<!-- Eldorey -->
 		<spawn npc_id="278131" respawn_time="295">
-			<spot x="712.694" y="2792.68" z="1595.22"/>
+			<spot x="712.694" y="2792.68" z="1595.22" h="33"/>
 		</spawn>
 		<!-- Elian -->
 		<spawn npc_id="278582" respawn_time="295">
@@ -1326,7 +1326,7 @@
 		</spawn>
 		<!-- Erdias -->
 		<spawn npc_id="278631" respawn_time="295">
-			<spot x="3148.25" y="990.803" z="1515"/>
+			<spot x="3148.25" y="990.803" z="1515" h="63"/>
 		</spawn>
 		<!-- Ereshkigal Legend -->
 		<spawn npc_id="730184" respawn_time="295">
@@ -1334,7 +1334,7 @@
 		</spawn>
 		<!-- Erienne -->
 		<spawn npc_id="278518" respawn_time="295">
-			<spot x="2846.28" y="918.138" z="1533.65"/>
+			<spot x="2846.28" y="918.138" z="1533.65" h="22"/>
 		</spawn>
 		<!-- Erik -->
 		<spawn npc_id="278033" respawn_time="295">
@@ -1510,7 +1510,7 @@
 		</spawn>
 		<!-- Eulos -->
 		<spawn npc_id="278627" respawn_time="295">
-			<spot x="3065.18" y="1011.38" z="1513.79"/>
+			<spot x="3065.18" y="1011.38" z="1513.79" h="49"/>
 		</spawn>
 		<!-- Eurytion -->
 		<spawn npc_id="278528" respawn_time="295">
@@ -2448,7 +2448,7 @@
 		</spawn>
 		<!-- Jenirius -->
 		<spawn npc_id="278632" respawn_time="295">
-			<spot x="3138.72" y="1007.51" z="1515"/>
+			<spot x="3138.72" y="1007.51" z="1515" h="76"/>
 		</spawn>
 		<!-- Jielinlinerk -->
 		<spawn npc_id="279010" respawn_time="295">
@@ -2738,7 +2738,7 @@
 		</spawn>
 		<!-- Lachesis -->
 		<spawn npc_id="278630" respawn_time="295">
-			<spot x="3130.93" y="959.253" z="1513.91"/>
+			<spot x="3130.93" y="959.253" z="1513.91" h="36"/>
 		</spawn>
 		<!-- Ladacus -->
 		<spawn npc_id="278593" respawn_time="295">
@@ -2762,7 +2762,7 @@
 		</spawn>
 		<!-- Larentia -->
 		<spawn npc_id="278633" respawn_time="295">
-			<spot x="3119.92" y="1014.07" z="1515"/>
+			<spot x="3119.92" y="1014.07" z="1515" h="90"/>
 		</spawn>
 		<!-- Larva -->
 		<spawn npc_id="290119" respawn_time="295">
@@ -3288,7 +3288,7 @@
 		</spawn>
 		<!-- Mont -->
 		<spawn npc_id="278128" respawn_time="295">
-			<spot x="707.46" y="2851.94" z="1595.22"/>
+			<spot x="707.46" y="2851.94" z="1595.22" h="90"/>
 		</spawn>
 		<!-- Morheim Teleport Device -->
 		<spawn npc_id="730077" respawn_time="295">
@@ -3343,7 +3343,7 @@
 		</spawn>
 		<!-- Nereus -->
 		<spawn npc_id="278517" respawn_time="295">
-			<spot x="3064.47" y="1010.12" z="1513.79"/>
+			<spot x="3064.47" y="1010.12" z="1513.79" h="54"/>
 		</spawn>
 		<!-- Nerites -->
 		<spawn npc_id="278635" respawn_time="295">
@@ -3378,7 +3378,7 @@
 		</spawn>
 		<!-- Noiman -->
 		<spawn npc_id="278136" respawn_time="295">
-			<spot x="732.517" y="2802.66" z="1595.22"/>
+			<spot x="732.517" y="2802.66" z="1595.22" h="46"/>
 		</spawn>
 		<!-- Nonorerk -->
 		<spawn npc_id="278649" respawn_time="295">
@@ -4084,7 +4084,7 @@
 		</spawn>
 		<!-- Sileni -->
 		<spawn npc_id="278628" respawn_time="295">
-			<spot x="3096.87" y="970.77" z="1513.91"/>
+			<spot x="3096.87" y="970.77" z="1513.91" h="10"/>
 		</spawn>
 		<!-- Sinjah -->
 		<spawn npc_id="278086" respawn_time="295">
@@ -4728,7 +4728,7 @@
 		</spawn>
 		<!-- Vicht -->
 		<spawn npc_id="278127" respawn_time="295">
-			<spot x="729.416" y="2845.22" z="1595.22"/>
+			<spot x="729.416" y="2845.22" z="1595.22" h="76"/>
 		</spawn>
 		<!-- Vile Acheron Drake -->
 		<spawn npc_id="254526" respawn_time="295">
