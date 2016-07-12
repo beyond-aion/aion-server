@@ -2398,6 +2398,7 @@
 			<spot x="1368.13" y="282.35" z="302.91" h="2" walker_id="40E3362B28B1F14A083130F87B8FF754A3E3DDBF"/>
 			<spot x="1373.18" y="351.23" z="304.31064" h="85" walker_id="924090B772A6DA60036FF5924C2BD6141165AB1C"/>
 			<spot x="1571.85" y="217.71" z="284.375" h="75" walker_id="C739DA2655CB27A976EB6BE7D79462BC203997FB"/>
+			<spot x="1571.85" y="217.71" z="284.375" h="75" walker_id="C739DA2655CB27A976EB6BE7D79462BC203997FB"/>
 		</spawn>
 		<!-- MuMu Lu -->
 		<spawn npc_id="210599" respawn_time="295">
