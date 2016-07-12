@@ -47,12 +47,13 @@ public class AhserionRaid {
 		return SingletonHolder.instance;
 	}
 
-	public void start() {
-		if (isStarted.compareAndSet(false, true)) {
-			status = AhserionRaidStatus.PREPARING_REGISTRATION;
-			PanesterraMatchmakingService.getInstance().onStart();
-			ThreadPoolManager.getInstance().schedule((Runnable) () -> startInstancePreparation(), 600 * 1000);
-		}
+	public boolean start() {
+		if (!isStarted.compareAndSet(false, true))
+			return false;
+		status = AhserionRaidStatus.PREPARING_REGISTRATION;
+		PanesterraMatchmakingService.getInstance().onStart();
+		ThreadPoolManager.getInstance().schedule((Runnable) () -> startInstancePreparation(), 600 * 1000);
+		return true;
 	}
 
 	private void startInstancePreparation() {
@@ -68,7 +69,7 @@ public class AhserionRaid {
 			teleportPlayers();
 			instanceStartTimer();
 		} else {
-			onStop();
+			stop();
 		}
 	}
 
@@ -152,7 +153,7 @@ public class AhserionRaid {
 							spawnStage(4, teamId);
 					break;
 				case 360:
-					onStop(); // stop after 60min (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill Ahserion)
+					stop(); // stop after 60min (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill Ahserion)
 					break;
 			}
 		}, 10000, 10000);
@@ -174,11 +175,12 @@ public class AhserionRaid {
 		}, 5000, 60000);
 	}
 
-	public void onStop() {
+	public boolean stop() {
+		if (!isStarted.compareAndSet(true, false))
+			return false;
 		synchronized (status) {
 			status = AhserionRaidStatus.OFF;
 		}
-		isStarted.set(false);
 		PanesterraMatchmakingService.getInstance().onStop();
 		winner = null;
 		cancelTask(observeTask);
@@ -193,6 +195,7 @@ public class AhserionRaid {
 		despawnAll();
 		for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 			door.setOpen(false);
+		return true;
 	}
 
 	public void spawnStage(int stage, PanesterraTeamId team) {
@@ -259,7 +262,7 @@ public class AhserionRaid {
 					}
 				}
 			}
-			onStop();
+			stop();
 			return;
 		}
 		cancelTask(progressTask);
@@ -417,7 +420,7 @@ public class AhserionRaid {
 	}
 
 	private void scheduleStop() {
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> onStop(), 900000); // 15min
+		ThreadPoolManager.getInstance().schedule((Runnable) () -> stop(), 900000); // 15min
 	}
 
 	private void cancelTask(Future<?> task) {

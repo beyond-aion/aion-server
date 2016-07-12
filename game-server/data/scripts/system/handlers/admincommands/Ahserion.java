@@ -2,39 +2,42 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Yeats
- *
+ * @modified Neon
  */
 public class Ahserion extends AdminCommand {
 
 	public Ahserion() {
-		super("ahserion");
+		super("ahserion", "Starts/stops Ahserions Flight.");
+
+		// @formatter:off
+		setParamInfo(
+			"<start> - Starts Ahserions Flight.",
+			"<stop> - Stops Ahserions Flight."
+		);
+		// @formatter:on		
 	}
 
 	@Override
-	protected void execute(Player player, String... params) {
-		if (params.length < 1) {
+	protected void execute(Player admin, String... params) {
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
+
 		if (params[0].equalsIgnoreCase("start")) {
-			if (!AhserionRaid.getInstance().isStarted()) {
-				AhserionRaid.getInstance().start();
-				PacketSendUtility.sendMessage(player, "Started Ahserion's Flight.");
-			} else {
-				PacketSendUtility.sendMessage(player, "Ahserion's Flight is already running.");
-			}
+			if (AhserionRaid.getInstance().start())
+				sendInfo(admin, "Started Ahserion's Flight.");
+			else
+				sendInfo(admin, "Ahserion's Flight is already running.");
 		} else if (params[0].equalsIgnoreCase("stop")) {
-			if (AhserionRaid.getInstance().isStarted()) {
-				AhserionRaid.getInstance().onStop();
-				PacketSendUtility.sendMessage(player, "Stopped Ahserion's Flight.");
-			} else {
-				PacketSendUtility.sendMessage(player, "Ahserion's Flight is not running.");
-			}
+			if (AhserionRaid.getInstance().stop())
+				sendInfo(admin, "Stopped Ahserion's Flight.");
+			else
+				sendInfo(admin, "Ahserion's Flight is not running.");
 		}
 	}
-
 }
