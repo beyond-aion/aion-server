@@ -10,8 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
@@ -26,28 +24,12 @@ public class NpcDrop implements DropCalculator {
 	protected List<DropGroup> dropGroup;
 	@XmlAttribute(name = "npc_id", required = true)
 	protected int npcId;
-	@XmlAttribute(name = "replace_type", required = false)
-	protected ReplaceType replaceType = ReplaceType.NONE;
-
-	/**
-	 * @param dropGroup
-	 * @param npcId
-	 */
-	public NpcDrop(List<DropGroup> dropGroup, int npcId) {
-		super();
-		this.dropGroup = dropGroup;
-		this.npcId = npcId;
-	}
-
-	public NpcDrop(int npcId) {
-		this(new FastTable<>(), npcId);
-	}
 
 	public NpcDrop() {
 	}
 
 	public List<DropGroup> getDropGroup() {
-		return this.dropGroup;
+		return dropGroup;
 	}
 
 	/**
@@ -55,10 +37,6 @@ public class NpcDrop implements DropCalculator {
 	 */
 	public int getNpcId() {
 		return npcId;
-	}
-
-	public ReplaceType getReplaceType() {
-		return replaceType;
 	}
 
 	@Override
@@ -71,14 +49,5 @@ public class NpcDrop implements DropCalculator {
 			}
 		}
 		return index;
-	}
-
-	/**
-	 * Used for custom drop.
-	 */
-	public enum ReplaceType {
-		NONE,
-		FULL,
-		PARTIAL;
 	}
 }

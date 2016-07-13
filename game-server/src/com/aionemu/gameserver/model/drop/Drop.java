@@ -47,9 +47,6 @@ public class Drop implements DropCalculator {
 		template = DataManager.ITEM_DATA.getItemTemplate(itemId);
 	}
 
-	/**
-	 * 
-	 */
 	public Drop() {
 	}
 
