@@ -13,7 +13,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.EventData;
 import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.NpcData;
-import com.aionemu.gameserver.dataholders.NpcDropData;
 import com.aionemu.gameserver.dataholders.NpcSkillData;
 import com.aionemu.gameserver.dataholders.QuestsData;
 import com.aionemu.gameserver.dataholders.SkillData;
@@ -102,7 +101,6 @@ public class Reload extends AdminCommand {
 		} else if (params[0].equalsIgnoreCase("customdrops")) {
 			File xml = new File("./data/static_data/custom_drop/custom_drop.xml");
 			DataManager.CUSTOM_NPC_DROP = JAXBUtil.deserialize(xml, CustomDrop.class, "./data/static_data/static_data.xsd");
-			NpcDropData.reload();
 			sendInfo(admin, DataManager.CUSTOM_NPC_DROP.size() + " custom drops loaded.");
 		} else if (params[0].equalsIgnoreCase("gameshop")) {
 			InGameShopEn.getInstance().reload();

@@ -122,10 +122,6 @@ public final class DataManager {
 	private DataManager() {
 		long start = System.currentTimeMillis();
 		StaticData data = XmlDataLoader.getInstance().loadStaticData();
-		long time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
-
-		start = System.currentTimeMillis();
 		NPC_DATA = data.npcData;
 		CUSTOM_NPC_DROP = data.customNpcDrop;
 		WORLD_MAPS_DATA = data.worldMapsData;
@@ -219,13 +215,12 @@ public final class DataManager {
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
 
-		// subsequent data processing and modifications (order is important)
+		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
-		NpcDropData.load();
-		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData());
+		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData().valueCollection());
 
-		time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data processed in " + String.format("%.1f", time / 1000f) + " seconds] #####");
+		long time = System.currentTimeMillis() - start;
+		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
 	}
 
 	@SuppressWarnings("synthetic-access")

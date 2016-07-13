@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
-import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
@@ -323,10 +322,6 @@ public class Npc extends Creature {
 	@Override
 	public Race getRace() {
 		return this.getObjectTemplate().getRace();
-	}
-
-	public NpcDrop getNpcDrop() {
-		return getObjectTemplate().getNpcDrop();
 	}
 
 	public void setNpcType(CreatureType newType) {

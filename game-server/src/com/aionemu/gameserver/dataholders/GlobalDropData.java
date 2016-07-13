@@ -3,22 +3,16 @@ package com.aionemu.gameserver.dataholders;
 import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
+import java.util.Collection;
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import javolution.util.FastTable;
 
 import org.hamcrest.Matchers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcName;
@@ -27,10 +21,12 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.globaldrops.StringFunction;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
-/**
- * @author AionCool, modified Bobobear
- */
+import javolution.util.FastTable;
 
+/**
+ * @author AionCool
+ * @modified Bobobear, Neon
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "global_rules")
 public class GlobalDropData {
@@ -38,24 +34,9 @@ public class GlobalDropData {
 	@XmlElement(name = "gd_rule")
 	protected List<GlobalRule> globalDropRules;
 
-	@XmlTransient
-	private List<GlobalRule> gdRules = new FastTable<GlobalRule>();
-	
-	@XmlTransient
-	private static final Logger log = LoggerFactory.getLogger(GlobalDropData.class);
-
-	void afterUnmarshal(Unmarshaller u, Object parent) {
+	public void processRules(Collection<NpcTemplate> npcs) {
+		List<NpcTemplate> npcList = FastTable.of(npcs);
 		for (GlobalRule gr : globalDropRules) {
-			gdRules.add(gr);
-		}
-		globalDropRules.clear();
-		globalDropRules = null;
-	}
-
-	public void processRules(TIntObjectHashMap<NpcTemplate> npcs) {
-		List<NpcTemplate> npcList = new FastTable<NpcTemplate>();
-		npcList.addAll(npcs.valueCollection());
-		for (GlobalRule gr : gdRules) {
 			if (gr.getGlobalRuleNpcNames() != null) {
 				List<GlobalDropNpc> allowedNpcs = getAllowedNpcs(gr, npcList);
 				if (!allowedNpcs.isEmpty()) {
@@ -65,7 +46,6 @@ public class GlobalDropData {
 				}
 			}
 		}
-		log.info("Global drops: Processed " + gdRules.size() + " global drop rules.");
 	}
 
 	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {
@@ -101,10 +81,10 @@ public class GlobalDropData {
 	 * Gets the value of the globalDrop property.
 	 */
 	public List<GlobalRule> getAllRules() {
-		return gdRules;
+		return globalDropRules;
 	}
 
 	public int size() {
-		return gdRules.size();
+		return globalDropRules.size();
 	}
 }

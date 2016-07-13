@@ -156,7 +156,7 @@ public class StaticData {
 
 	@XmlElement(name = "dopings")
 	public PetDopingData petDopingData;
-	
+
 	@XmlElement(name = "pet_buffs")
 	public PetBuffsData petBuffsData;
 
@@ -291,11 +291,11 @@ public class StaticData {
 
 	@XmlElement(name = "raid_locations")
 	public MonsterRaidData raidData;
-	
+
 	@XmlElement(name = "kill_bounties")
 	public KillBountyData killBountyData;
-	
-	@XmlElement(name= "legion_dominion_template") 
+
+	@XmlElement(name = "legion_dominion_template")
 	public LegionDominionData legionDominionData;
 
 	// JAXB callback
@@ -311,7 +311,7 @@ public class StaticData {
 		log.info("Loaded " + itemCleanup.size() + " item cleanup entries");
 		log.info("Loaded " + itemData.size() + " item templates");
 		log.info("Loaded " + itemRandomBonuses.size() + " item bonus templates");
-		log.info("Loaded " + itemGroupsData.bonusSize() + " bonus item group templates and " + +itemGroupsData.petFoodSize() + " pet food items");
+		log.info("Loaded " + itemGroupsData.bonusSize() + " bonus item group templates and " + itemGroupsData.petFoodSize() + " pet food items");
 		log.info("Loaded " + npcData.size() + " npc templates");
 		log.info("Loaded " + customNpcDrop.size() + " custom npc drops");
 		log.info("Loaded " + systemMailTemplates.size() + " system mail templates");
@@ -375,21 +375,22 @@ public class StaticData {
 		log.info("Loaded " + houseBuildingData.size() + " house building styles");
 		log.info("Loaded " + housePartsData.size() + " house parts");
 		log.info("Loaded " + houseNpcsData.size() + " house spawns");
-		log.info("Loaded " + curingObjectsData.size() + " curing Objects entries");
+		log.info("Loaded " + curingObjectsData.size() + " curing object entries");
 		log.info("Loaded " + assemblyItemData.size() + " assembly items entries");
 		log.info("Loaded " + challengeData.size() + " challenge tasks entries");
 		log.info("Loaded " + serialKillerData.size() + " serialKiller entries");
 		log.info("Loaded " + townSpawnsData.getSpawnsCount() + " town spawns");
 		log.info("Loaded " + temperingData.size() + " temperings");
 		log.info("Loaded " + enchantData.size() + " enchants");
-		log.info("Loaded " + globalDropData.size() + " global drops Rules");
-		log.info("Loaded " + globalExclusionData.size() + " global npc exclusions drop Rules");
+		log.info("Loaded " + globalDropData.size() + " global drop rules");
+		log.info("Loaded " + globalExclusionData.size() + " global drop npc exclusion rules");
 		log.info("Loaded " + multiReturnItem.size() + " multi return item entries");
 		log.info("Loaded " + hotspotData.size() + " hotspot entries");
 		log.info("Loaded " + itemPurificationData.size() + " item purifications entries");
 		log.info("Loaded " + arcadeUpgradeData.size() + " arcade upgrade entries");
 		log.info("Loaded " + atreianPassportData.size() + " atreian passports");
 		log.info("Loaded " + raidData.size() + " raid entries");
-		log.info("Loaded " + legionDominionData.size() + " Legion Dominion Locations");
+		log.info("Loaded " + killBountyData.size() + " kill bounty templates");
+		log.info("Loaded " + legionDominionData.size() + " legion dominion locations");
 	}
 }

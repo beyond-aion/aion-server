@@ -79,7 +79,7 @@ public class DropRegistrationService {
 		int npcObjId = npc.getObjectId();
 
 		// Getting all possible drops for this Npc
-		NpcDrop npcDrop = npc.getNpcDrop();
+		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
 		Set<DropItem> droppedItems = new HashSet<DropItem>();
 		int index = 1;
 		int dropChance = 100;

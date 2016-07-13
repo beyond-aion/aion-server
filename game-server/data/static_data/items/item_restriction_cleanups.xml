@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item_restriction_cleanups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="item_restriction_cleanups.xsd">
-	<!-- this is required, do not delete or comment -->
-	<cleanup id="100000001" trade="1"/>
+	<!--
+		Here you can modify item properties, such as tradability.
+		The following example enables to trade the Atreian Faithful Sword, as well as store it in account and legion warehouse:
+		<cleanup id="100001748" trade="1" awh="1" lwh="1"/>
+
+		Client must be also patched in order to remove any client restrictions, otherwise it won't allow to trade the item.
+		Forbidding tradability (trade="0") however works without patching the client, although players won't see the info in the item tooltip in that 
+		case.
+	-->
 </item_restriction_cleanups>

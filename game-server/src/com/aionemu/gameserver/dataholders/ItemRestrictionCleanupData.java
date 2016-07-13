@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 
+import javolution.util.FastTable;
+
 /**
  * @author KID
  */
@@ -20,10 +22,10 @@ public class ItemRestrictionCleanupData {
 	private List<ItemCleanupTemplate> bplist;
 
 	public int size() {
-		return bplist.size();
+		return getList().size();
 	}
 
 	public List<ItemCleanupTemplate> getList() {
-		return this.bplist;
+		return bplist == null ? new FastTable<>() : bplist;
 	}
 }

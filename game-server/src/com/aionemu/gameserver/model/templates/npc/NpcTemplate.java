@@ -8,13 +8,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.ai2.AiNames;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
-import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
@@ -126,9 +124,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	@XmlElement(name = "massive_loot")
 	private MassiveLoot massiveLoot;
-
-	@XmlTransient
-	private NpcDrop npcDrop;
 
 	@Override
 	public int getTemplateId() {
@@ -304,21 +299,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	public int getMassiveLootMaxLevel() {
 		return massiveLoot.getMLootMaxLevel();
-	}
-
-	/**
-	 * @return the npcDrop
-	 */
-	public NpcDrop getNpcDrop() {
-		return npcDrop;
-	}
-
-	/**
-	 * @param npcDrop
-	 *          the npcDrop to set
-	 */
-	public void setNpcDrop(NpcDrop npcDrop) {
-		this.npcDrop = npcDrop;
 	}
 
 	/**

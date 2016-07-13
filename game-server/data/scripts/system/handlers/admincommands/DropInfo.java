@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -46,29 +45,16 @@ public class DropInfo extends AdminCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		Npc currentNpc = null;
-		NpcDrop npcDrop = null;
-		if (params.length > 0) {
-			int npcId = Integer.parseInt(params[0]);
-			NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
-			if (npcTemplate == null) {
-				sendInfo(player, "Incorrect npcId: " + npcId);
-				return;
-			}
-			npcDrop = npcTemplate.getNpcDrop();
-		} else {
-			VisibleObject visibleObject = player.getTarget();
+		VisibleObject visibleObject = player.getTarget();
 
-			if (visibleObject == null) {
-				sendInfo(player, "You should target some NPC first !");
-				return;
-			}
-
-			if (visibleObject instanceof Npc) {
-				npcDrop = ((Npc) visibleObject).getNpcDrop();
-				currentNpc = ((Npc) visibleObject);
-			}
+		if (!(visibleObject instanceof Npc)) {
+			sendInfo(player, "You should target some NPC first !");
+			return;
 		}
+
+		Npc currentNpc = (Npc) visibleObject;
+		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(currentNpc.getNpcId());
+
 		if (npcDrop == null && !EventsConfig.ENABLE_EVENT_SERVICE) {
 			sendInfo(player, "No drops for the selected NPC");
 			return;
