@@ -28209,7 +28209,8 @@
 		<items>
 			<item id="111101603" name="Fine Betrayer's Gloves" player_classes="SORCERER SPIRIT_MASTER" />
 			<item id="111101604" name="Superb Betrayer's Gloves" player_classes="BARD" />
-			<item id="111301707" name="Superb Betrayer's Vambrace" player_classes="ASSASSIN GUNNER" />
+			<item id="111301707" name="Superb Betrayer's Vambrace" player_classes="ASSASSIN RANGER" />
+			<item id="111301706" name="Fine Betrayer's Vambrace" player_classes="GUNNER" />
 			<item id="111501661" name="Fine Betrayer's Handguards" player_classes="CLERIC" />
 			<item id="111501662" name="Superb Betrayer's Handguards" player_classes="CHANTER" />
 			<item id="111501661" name="Fine Betrayer's Handguards" player_classes="RIDER" />
