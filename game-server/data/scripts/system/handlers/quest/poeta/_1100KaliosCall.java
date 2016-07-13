@@ -62,6 +62,7 @@ public class _1100KaliosCall extends QuestHandler {
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
+		if (player.getWorldId() == WorldMapType.POETA.getId())
+			defaultOnLevelChangedEvent(player);
 	}
 }

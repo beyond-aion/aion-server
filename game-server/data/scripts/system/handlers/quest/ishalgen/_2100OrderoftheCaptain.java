@@ -60,6 +60,7 @@ public class _2100OrderoftheCaptain extends QuestHandler {
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
+		if (player.getWorldId() == WorldMapType.ISHALGEN.getId())
+			defaultOnLevelChangedEvent(player);
 	}
 }

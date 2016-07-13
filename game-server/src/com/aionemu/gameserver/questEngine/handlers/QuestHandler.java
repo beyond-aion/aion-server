@@ -936,6 +936,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	 */
 	public boolean defaultOnQuestCompletedEvent(QuestEnv env, int... preQuests) {
 		Player player = env.getPlayer();
+		int finishedQuestId = env.getQuestId();
 		QuestStateList qsl = player.getQuestStateList();
 		QuestState qs = qsl.getQuestState(questId);
 
@@ -944,12 +945,13 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			return false;
 
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		int minLvlDiff = template.isMission() ? 9 : 0; // this ensures to add all follow-up quests in locked state
+		int minLvlDiff = template.isMission() ? 15 : 0; // this ensures to add all follow-up quests in locked state
 		// Check all player requirements first
 		if (!QuestService.checkStartConditions(player, questId, false, minLvlDiff, false, false, template.isMission()))
 			return false;
 
 		boolean missingRequirement = false;
+		boolean hasFinishedPreQuest = false;
 		for (int id : preQuests) {
 			QuestState qs2 = qsl.getQuestState(id);
 			if (!missingRequirement && (qs2 == null || qs2.getStatus() != QuestStatus.COMPLETE)) {
@@ -957,7 +959,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 					return false;
 				missingRequirement = true;
 			}
-			if (missingRequirement && qs2 != null && qs2.getStatus() == QuestStatus.COMPLETE) {
+			if (finishedQuestId == id)
+				hasFinishedPreQuest = true;
+			if (missingRequirement && (hasFinishedPreQuest || qs2 != null && qs2.getStatus() == QuestStatus.COMPLETE)) { // if any pre quest is finished
 				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 				return false;
 			}
@@ -981,9 +985,9 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		if (missingRequirement)
 			return false;
 
-		// Send locked quest if the player is <= 2 levels below quest min level (as specified in the check above)
+		// Send locked quest if the players level is in the minLvlDiff range (1-15)
 		if (minLvlDiff > 0 && player.getLevel() < template.getMinlevelPermitted()) {
-			if (qs == null && template.isMission() && player.getLevel() + 2 >= template.getMinlevelPermitted())
+			if (qs == null && hasFinishedPreQuest)
 				QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 			return false;
 		}

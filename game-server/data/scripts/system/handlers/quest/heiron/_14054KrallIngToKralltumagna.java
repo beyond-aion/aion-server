@@ -52,7 +52,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
-		
+
 		int targetId = env.getTargetId();
 		int var = qs.getQuestVarById(0);
 		DialogAction dialog = env.getDialog();
@@ -66,7 +66,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							break;
 						case SETPRO1:
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 					}
 					break;
 				case 800413: // Javlantia
@@ -76,10 +76,10 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							break;
 						case SETPRO2:
-							return defaultCloseDialog(env, var, var+1); // 2
-						}
-						break;
-				
+							return defaultCloseDialog(env, var, var + 1); // 2
+					}
+					break;
+
 				case 802050: // Bartyn
 					switch (dialog) {
 						case QUEST_SELECT:
@@ -97,10 +97,11 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 			}
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 800413) // Javlantia
-				if(dialog == DialogAction.USE_OBJECT)
+			if (targetId == 800413) { // Javlantia
+				if (dialog == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 3057);
-				return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env, 0);
+			}
 		}
 		return false;
 	}
