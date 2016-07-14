@@ -96,7 +96,9 @@
         <sphere x="2096.1797" y="612.72784" z="104.52399" r="10.0"/>
     </zone>
     <zone mapid="210030000" name="LF1A_SENSORYAREA_Q18500_206150_3_210030000" area_type="SPHERE" zone_type="SUB">
-        <sphere x="2531.256" y="849.5465" z="106.06438" r="10.0"/>
+        <!-- TEMP FIX -->
+		<sphere x="2527" y="834" z="104" r="10.0"/>
+		<!-- CLIENT: sphere x="2531.256" y="849.5465" z="106.06438" r="10.0"/-->
     </zone>
     <zone mapid="210030000" name="LF1A_SENSORYAREA_Q1012_2_206005_4_210030000" area_type="SPHERE" zone_type="SUB">
         <sphere x="1826.4846" y="1375.7574" z="110.0" r="10.0"/>
