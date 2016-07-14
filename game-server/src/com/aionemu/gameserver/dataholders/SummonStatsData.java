@@ -11,6 +11,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.slf4j.LoggerFactory;
+
 import javolution.util.FastTable;
 
 import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
@@ -47,8 +49,10 @@ public class SummonStatsData {
 	 */
 	public SummonStatsTemplate getSummonTemplate(int npcId, int level) {
 		SummonStatsTemplate template = summonTemplates.get(makeHash(npcId, level));
-		if (template == null)
-			template = summonTemplates.get(makeHash(201022, 10));// TEMP till all templates are done
+		if (template == null) {
+			LoggerFactory.getLogger(SummonStatsData.class).warn("Missing summon stats template for npc: " + npcId + ", level: " + level);
+			template = summonTemplates.get(level >= 50 ? makeHash(833359, 50) : makeHash(833347, 20)); // TEMP till all templates are done
+		}
 		return template;
 	}
 
