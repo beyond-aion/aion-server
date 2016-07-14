@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -199,31 +198,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onLeaveTeam(Player player) {
-
-	}
-
-	@Override
-	public void onHealMember(Player effector, Player effected, int value) {
-
-	}
-
-	@Override
-	public void onBaseCapture(Player player) {
-
-	}
-
-	@Override
-	public void onAddLegionMember(Legion legion, Player player) {
-
-	}
-
-	@Override
-	public void onAddAp(Player player, int value) {
-
-	}
-
-	@Override
 	public void onStartInstanceDestroy() {
 
 	}
@@ -231,11 +205,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public boolean canUseSkill(Player player, Skill skill) {
 		return true;
-	}
-
-	@Override
-	public void onAttack(Creature attacked, Creature attacker, int damage) {
-
 	}
 
 	@Override

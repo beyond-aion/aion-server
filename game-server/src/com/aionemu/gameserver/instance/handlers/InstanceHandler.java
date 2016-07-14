@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -81,19 +80,7 @@ public interface InstanceHandler {
 
 	void handleUseItemFinish(Player player, Npc npc);
 
-	void onLeaveTeam(Player player);
-
-	void onHealMember(Player effector, Player effected, int value);
-
-	void onBaseCapture(Player player);
-
-	void onAddLegionMember(Legion legion, Player player);
-
-	void onAddAp(Player player, int value);
-
 	boolean canUseSkill(Player player, Skill skill);
-
-	void onAttack(Creature attacked, Creature attacker, int damage);
 
 	void onAggro(Npc npc);
 
