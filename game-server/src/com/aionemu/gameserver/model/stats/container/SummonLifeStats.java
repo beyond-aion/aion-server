@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -21,14 +20,9 @@ public class SummonLifeStats extends CreatureLifeStats<Summon> {
 	@Override
 	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
 		super.onIncreaseHp(type, value, skillId, log);
-		Creature master = getOwner().getMaster();
-		if (master instanceof Player)
-			PacketSendUtility.sendPacket((Player) master, new SM_SUMMON_UPDATE(getOwner()));
-	}
-
-	@Override
-	public Summon getOwner() {
-		return super.getOwner();
+		Player master = getOwner().getMaster();
+		if (master != null)
+			PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(getOwner()));
 	}
 
 	@Override

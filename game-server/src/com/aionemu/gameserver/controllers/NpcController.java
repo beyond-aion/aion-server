@@ -60,10 +60,10 @@ public class NpcController extends CreatureController<Npc> {
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
 		if (object instanceof Creature) {
-			getOwner().getAi2().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, (Creature) object);
-			getOwner().getAggroList().remove((Creature) object);
+			Creature creature = (Creature) object;
+			getOwner().getAi2().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
+			getOwner().getAggroList().remove(creature);
 		}
-		// TODO not see player ai event
 	}
 
 	@Override
@@ -73,13 +73,10 @@ public class NpcController extends CreatureController<Npc> {
 		if (object instanceof Creature) {
 			Creature creature = (Creature) object;
 			owner.getAi2().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
-		}
-		if (object instanceof Player) {
-			// TODO see player ai event
-			if (owner.getLifeStats().isAlreadyDead())
-				DropService.getInstance().see((Player) object, owner);
-		} else if (object instanceof Summon) {
-			// TODO see summon ai event
+			if (creature instanceof Player) {
+				if (owner.getLifeStats().isAlreadyDead())
+					DropService.getInstance().see((Player) creature, owner);
+			}
 		}
 	}
 
