@@ -258,11 +258,11 @@ public class _20034RescuetheReians extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
+		defaultOnQuestCompletedEvent(env, 20031);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player);
+		defaultOnLevelChangedEvent(player, 20031);
 	}
 }

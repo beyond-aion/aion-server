@@ -1,4 +1,4 @@
-package quest.gelkmaros_armor;
+package quest.gelkmaros;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -8,20 +8,20 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author zhkchi
+ * @author keqi
  */
-public class _21052DragonHuntin extends QuestHandler {
+public class _21054MissionofDestiny extends QuestHandler {
 
-	private final static int questId = 21052;
+	private final static int questId = 21054;
 
-	public _21052DragonHuntin() {
+	public _21054MissionofDestiny() {
 		super(questId);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(799268).addOnQuestStart(questId);
-		qe.registerQuestNpc(799268).addOnTalkEvent(questId);
+		qe.registerQuestNpc(799318).addOnQuestStart(questId);
+		qe.registerQuestNpc(799318).addOnTalkEvent(questId);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class _21052DragonHuntin extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 799268) {
+			if (targetId == 799318) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
@@ -51,26 +51,18 @@ public class _21052DragonHuntin extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 799268) {
+			if (targetId == 799318) {
 				switch (dialog) {
 					case QUEST_SELECT: {
 						return sendQuestDialog(env, 2375);
 					}
-					case SELECT_ACTION_2034: {
-						return sendQuestDialog(env, 2034);
+					default: {
+						return sendQuestStartDialog(env);
 					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
-						return checkQuestItems(env, var, var, true, 5, 2716);
-					}
-					case FINISH_DIALOG: {
-						return sendQuestSelectionDialog(env);
-					}
-
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799268) {
+			if (targetId == 799318) {
 				return sendQuestEndDialog(env);
 			}
 		}

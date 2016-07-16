@@ -217,12 +217,12 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
+		defaultOnQuestCompletedEvent(env, 20031);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player);
+		defaultOnLevelChangedEvent(player, 20031);
 	}
 
 	private boolean restoreStep(QuestEnv env) {

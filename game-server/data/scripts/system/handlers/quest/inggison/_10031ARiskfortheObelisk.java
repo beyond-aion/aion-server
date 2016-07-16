@@ -38,7 +38,6 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 		// Versetti ID: 798927
 		// Steropes ID: 799052
 		int[] npcs = { 203700, 702662, 730224, 798408, 798600, 798926, 798927, 799052 };
-		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
@@ -240,11 +239,6 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override

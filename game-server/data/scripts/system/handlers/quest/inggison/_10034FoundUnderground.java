@@ -212,11 +212,11 @@ public class _10034FoundUnderground extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
+		defaultOnQuestCompletedEvent(env, 10031);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player);
+		defaultOnLevelChangedEvent(player, 10031);
 	}
 }

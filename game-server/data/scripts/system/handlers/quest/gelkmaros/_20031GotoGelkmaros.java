@@ -34,7 +34,6 @@ public class _20031GotoGelkmaros extends QuestHandler {
 		// Hogidin ID: 799365
 		// Valetta ID: 799226
 		int[] npcs = { 204052, 798409, 798800, 799225, 799226, 799364, 799365 };
-		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
@@ -237,11 +236,6 @@ public class _20031GotoGelkmaros extends QuestHandler {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env);
 	}
 
 	@Override

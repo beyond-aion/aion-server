@@ -1,4 +1,4 @@
-package quest.gelkmaros_armor;
+package quest.gelkmaros;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
