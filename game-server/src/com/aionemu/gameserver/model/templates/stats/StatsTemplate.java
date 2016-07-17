@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This class is only a container for Stats. Created on: 04.08.2009 14:59:10
  * 
  * @author Aquanox
- * @modified Estrayl
+ * @modified Estrayl, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "stats_template")
@@ -39,23 +39,25 @@ public abstract class StatsTemplate {
 	private int strikeResist;
 	@XmlAttribute(name = "spell_resist")
 	private int spellResist;
-	
+
 	@XmlAttribute(name = "attack")
 	private int attack;
 	@XmlAttribute(name = "accuracy")
 	private int accuracy;
 	@XmlAttribute(name = "pcrit")
 	private int pcrit;
-	
-	@XmlAttribute(name = "mcrit")
-	private int mcrit;
+
+	@XmlAttribute(name = "matk")
+	private int matk;
 	@XmlAttribute(name = "macc")
 	private int macc;
+	@XmlAttribute(name = "mcrit")
+	private int mcrit;
 	@XmlAttribute(name = "mboost")
 	private int magicBoost;
 
 	@XmlElement
-	protected CreatureSpeeds speeds;
+	private CreatureSpeeds speeds;
 
 	/* ======================================= */
 
@@ -73,32 +75,6 @@ public abstract class StatsTemplate {
 
 	public void setMaxMp(int maxMp) {
 		this.maxMp = maxMp;
-	}
-
-	/* ======================================= */
-
-	public float getWalkSpeed() {
-		return speeds == null ? 0 : speeds.getWalkSpeed();
-	}
-
-	public float getRunSpeed() {
-		return speeds == null ? 0 : speeds.getRunSpeed();
-	}
-
-	public float getGroupWalkSpeed() {
-		return getWalkSpeed();
-	}
-
-	public float getRunSpeedFight() {
-		return getRunSpeed();
-	}
-
-	public float getGroupRunSpeedFight() {
-		return getRunSpeed();
-	}
-
-	public float getFlySpeed() {
-		return speeds == null ? 0 : speeds.getFlySpeed();
 	}
 
 	/* ======================================= */
@@ -126,27 +102,27 @@ public abstract class StatsTemplate {
 	public void setParry(int parry) {
 		this.parry = parry;
 	}
-	
+
 	public int getPdef() {
 		return pdef;
 	}
-	
+
 	public void setPdef(int pdef) {
 		this.pdef = pdef;
 	}
-	
+
 	public int getMdef() {
 		return mdef;
 	}
-	
+
 	public int getMresist() {
 		return mresist;
 	}
-	
+
 	public void setMresist(int mresist) {
 		this.mresist = mresist;
 	}
-	
+
 	public int getMsup() {
 		return msup;
 	}
@@ -154,11 +130,11 @@ public abstract class StatsTemplate {
 	public int getStrikeResist() {
 		return strikeResist;
 	}
-	
+
 	public void setStrikeResist(int strikeResist) {
 		this.strikeResist = strikeResist;
 	}
-	
+
 	public int getSpellResist() {
 		return spellResist;
 	}
@@ -168,7 +144,7 @@ public abstract class StatsTemplate {
 	public int getAttack() {
 		return attack;
 	}
-	
+
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
@@ -176,31 +152,72 @@ public abstract class StatsTemplate {
 	public int getAccuracy() {
 		return accuracy;
 	}
-	
+
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
-	
+
 	public int getPcrit() {
 		return pcrit;
 	}
 
+	public void setPcrit(int pcrit) {
+		this.pcrit = pcrit;
+	}
+
 	/* ======================================= */
+
+	public int getMagicalAttack() {
+		return matk;
+	}
+
+	public void setMagicalAttack(int matk) {
+		this.matk = matk;
+	}
+
+	public int getMacc() {
+		return macc;
+	}
+
+	public void setMacc(int macc) {
+		this.macc = macc;
+	}
 
 	public int getMcrit() {
 		return mcrit;
 	}
-	
-	public int getMacc() {
-		return macc;
+
+	public void setMcrit(int mcrit) {
+		this.mcrit = mcrit;
 	}
-	
-	public void setMacc(int macc) {
-		this.macc = macc;
-	}
-	
+
 	public int getMagicBoost() {
 		return magicBoost;
 	}
-	
+
+	/* ======================================= */
+
+	public float getWalkSpeed() {
+		return speeds == null ? 0 : speeds.getWalkSpeed();
+	}
+
+	public float getRunSpeed() {
+		return speeds == null ? 0 : speeds.getRunSpeed();
+	}
+
+	public float getGroupWalkSpeed() {
+		return speeds == null ? 0 : speeds.getGroupWalkSpeed();
+	}
+
+	public float getRunSpeedFight() {
+		return speeds == null ? 0 : speeds.getRunSpeedFight();
+	}
+
+	public float getGroupRunSpeedFight() {
+		return speeds == null ? 0 : speeds.getGroupRunSpeedFight();
+	}
+
+	public float getFlySpeed() {
+		return speeds == null ? 0 : speeds.getFlySpeed();
+	}
 }

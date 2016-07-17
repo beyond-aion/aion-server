@@ -42,11 +42,6 @@ public class ModorsCloneAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public int modifyMattack(int value) {
-		return 1000;
-	}
-
-	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {

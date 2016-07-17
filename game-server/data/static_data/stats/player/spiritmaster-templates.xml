@@ -2,343 +2,343 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="9">
-		<stats_template maxHp="448" maxMp="1245" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="173" block="173" parry="173" attack="14" accuracy="262" pcrit="2" macc="128">
+		<stats_template maxHp="448" maxMp="1245" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="173" block="173" parry="173" attack="14" accuracy="262" pcrit="2" mcrit="50" macc="128" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="10">
-		<stats_template maxHp="493" maxMp="1350" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="186" block="186" parry="186" attack="14" accuracy="270" pcrit="2" macc="142">
+		<stats_template maxHp="493" maxMp="1350" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="186" block="186" parry="186" attack="14" accuracy="270" pcrit="2" mcrit="50" macc="142" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="11">
-		<stats_template maxHp="540" maxMp="1455" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="198" block="198" parry="198" attack="14" accuracy="278" pcrit="2" macc="156">
+		<stats_template maxHp="540" maxMp="1455" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="198" block="198" parry="198" attack="14" accuracy="278" pcrit="2" mcrit="50" macc="156" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="12">
-		<stats_template maxHp="589" maxMp="1561" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="210" block="210" parry="210" attack="14" accuracy="286" pcrit="2" macc="171">
+		<stats_template maxHp="589" maxMp="1561" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="210" block="210" parry="210" attack="14" accuracy="286" pcrit="2" mcrit="50" macc="171" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="13">
-		<stats_template maxHp="639" maxMp="1666" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="223" block="223" parry="223" attack="14" accuracy="294" pcrit="2" macc="185">
+		<stats_template maxHp="639" maxMp="1666" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="223" block="223" parry="223" attack="14" accuracy="294" pcrit="2" mcrit="50" macc="185" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="14">
-		<stats_template maxHp="691" maxMp="1771" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="235" block="235" parry="235" attack="14" accuracy="302" pcrit="2" macc="199">
+		<stats_template maxHp="691" maxMp="1771" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="235" block="235" parry="235" attack="14" accuracy="302" pcrit="2" mcrit="50" macc="199" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="15">
-		<stats_template maxHp="744" maxMp="1876" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="248" block="248" parry="248" attack="14" accuracy="310" pcrit="2" macc="213">
+		<stats_template maxHp="744" maxMp="1876" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="248" block="248" parry="248" attack="14" accuracy="310" pcrit="2" mcrit="50" macc="213" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="16">
-		<stats_template maxHp="799" maxMp="1981" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="260" block="260" parry="260" attack="14" accuracy="318" pcrit="2" macc="228">
+		<stats_template maxHp="799" maxMp="1981" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="260" block="260" parry="260" attack="14" accuracy="318" pcrit="2" mcrit="50" macc="228" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="17">
-		<stats_template maxHp="856" maxMp="2087" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="272" block="272" parry="272" attack="14" accuracy="326" pcrit="2" macc="242">
+		<stats_template maxHp="856" maxMp="2087" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="272" block="272" parry="272" attack="14" accuracy="326" pcrit="2" mcrit="50" macc="242" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="18">
-		<stats_template maxHp="914" maxMp="2192" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="285" block="285" parry="285" attack="14" accuracy="334" pcrit="2" macc="256">
+		<stats_template maxHp="914" maxMp="2192" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="285" block="285" parry="285" attack="14" accuracy="334" pcrit="2" mcrit="50" macc="256" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="19">
-		<stats_template maxHp="974" maxMp="2297" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="297" block="297" parry="297" attack="14" accuracy="342" pcrit="2" macc="270">
+		<stats_template maxHp="974" maxMp="2297" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="297" block="297" parry="297" attack="14" accuracy="342" pcrit="2" mcrit="50" macc="270" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="20">
-		<stats_template maxHp="1036" maxMp="2403" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="310" block="310" parry="310" attack="14" accuracy="350" pcrit="2" macc="285">
+		<stats_template maxHp="1036" maxMp="2403" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="310" block="310" parry="310" attack="14" accuracy="350" pcrit="2" mcrit="50" macc="285" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="21">
-		<stats_template maxHp="1099" maxMp="2508" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="322" block="322" parry="322" attack="14" accuracy="358" pcrit="2" macc="299">
+		<stats_template maxHp="1099" maxMp="2508" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="322" block="322" parry="322" attack="14" accuracy="358" pcrit="2" mcrit="50" macc="299" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="22">
-		<stats_template maxHp="1163" maxMp="2613" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="334" block="334" parry="334" attack="14" accuracy="366" pcrit="2" macc="313">
+		<stats_template maxHp="1163" maxMp="2613" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="334" block="334" parry="334" attack="14" accuracy="366" pcrit="2" mcrit="50" macc="313" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="23">
-		<stats_template maxHp="1230" maxMp="2718" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="347" block="347" parry="347" attack="14" accuracy="374" pcrit="2" macc="327">
+		<stats_template maxHp="1230" maxMp="2718" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="347" block="347" parry="347" attack="14" accuracy="374" pcrit="2" mcrit="50" macc="327" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="24">
-		<stats_template maxHp="1298" maxMp="2824" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="359" block="359" parry="359" attack="14" accuracy="382" pcrit="2" macc="342">
+		<stats_template maxHp="1298" maxMp="2824" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="359" block="359" parry="359" attack="14" accuracy="382" pcrit="2" mcrit="50" macc="342" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="25">
-		<stats_template maxHp="1367" maxMp="2929" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="372" block="372" parry="372" attack="14" accuracy="390" pcrit="2" macc="356">
+		<stats_template maxHp="1367" maxMp="2929" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="372" block="372" parry="372" attack="14" accuracy="390" pcrit="2" mcrit="50" macc="356" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="26">
-		<stats_template maxHp="1438" maxMp="3035" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="384" block="384" parry="384" attack="14" accuracy="398" pcrit="2" macc="370">
+		<stats_template maxHp="1438" maxMp="3035" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="384" block="384" parry="384" attack="14" accuracy="398" pcrit="2" mcrit="50" macc="370" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="27">
-		<stats_template maxHp="1511" maxMp="3140" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="396" block="396" parry="396" attack="14" accuracy="406" pcrit="2" macc="384">
+		<stats_template maxHp="1511" maxMp="3140" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="396" block="396" parry="396" attack="14" accuracy="406" pcrit="2" mcrit="50" macc="384" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="28">
-		<stats_template maxHp="1585" maxMp="3245" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="409" block="409" parry="409" attack="14" accuracy="414" pcrit="2" macc="399">
+		<stats_template maxHp="1585" maxMp="3245" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="409" block="409" parry="409" attack="14" accuracy="414" pcrit="2" mcrit="50" macc="399" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="29">
-		<stats_template maxHp="1661" maxMp="3351" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="421" block="421" parry="421" attack="14" accuracy="422" pcrit="2" macc="413">
+		<stats_template maxHp="1661" maxMp="3351" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="421" block="421" parry="421" attack="14" accuracy="422" pcrit="2" mcrit="50" macc="413" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="30">
-		<stats_template maxHp="1739" maxMp="3456" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="434" block="434" parry="434" attack="14" accuracy="430" pcrit="2" macc="427">
+		<stats_template maxHp="1739" maxMp="3456" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="434" block="434" parry="434" attack="14" accuracy="430" pcrit="2" mcrit="50" macc="427" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="31">
-		<stats_template maxHp="1818" maxMp="3562" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="446" block="446" parry="446" attack="14" accuracy="438" pcrit="2" macc="441">
+		<stats_template maxHp="1818" maxMp="3562" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="446" block="446" parry="446" attack="14" accuracy="438" pcrit="2" mcrit="50" macc="441" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="32">
-		<stats_template maxHp="1899" maxMp="3667" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="458" block="458" parry="458" attack="14" accuracy="446" pcrit="2" macc="456">
+		<stats_template maxHp="1899" maxMp="3667" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="458" block="458" parry="458" attack="14" accuracy="446" pcrit="2" mcrit="50" macc="456" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="33">
-		<stats_template maxHp="1981" maxMp="3773" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="471" block="471" parry="471" attack="14" accuracy="454" pcrit="2" macc="470">
+		<stats_template maxHp="1981" maxMp="3773" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="471" block="471" parry="471" attack="14" accuracy="454" pcrit="2" mcrit="50" macc="470" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="34">
-		<stats_template maxHp="2065" maxMp="3878" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="483" block="483" parry="483" attack="14" accuracy="462" pcrit="2" macc="484">
+		<stats_template maxHp="2065" maxMp="3878" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="483" block="483" parry="483" attack="14" accuracy="462" pcrit="2" mcrit="50" macc="484" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="35">
-		<stats_template maxHp="2151" maxMp="3984" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="496" block="496" parry="496" attack="14" accuracy="470" pcrit="2" macc="498">
+		<stats_template maxHp="2151" maxMp="3984" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="496" block="496" parry="496" attack="14" accuracy="470" pcrit="2" mcrit="50" macc="498" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="36">
-		<stats_template maxHp="2238" maxMp="4089" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="508" block="508" parry="508" attack="14" accuracy="478" pcrit="2" macc="513">
+		<stats_template maxHp="2238" maxMp="4089" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="508" block="508" parry="508" attack="14" accuracy="478" pcrit="2" mcrit="50" macc="513" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="37">
-		<stats_template maxHp="2327" maxMp="4195" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="520" block="520" parry="520" attack="14" accuracy="486" pcrit="2" macc="527">
+		<stats_template maxHp="2327" maxMp="4195" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="520" block="520" parry="520" attack="14" accuracy="486" pcrit="2" mcrit="50" macc="527" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="38">
-		<stats_template maxHp="2418" maxMp="4300" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="533" block="533" parry="533" attack="14" accuracy="494" pcrit="2" macc="541">
+		<stats_template maxHp="2418" maxMp="4300" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="533" block="533" parry="533" attack="14" accuracy="494" pcrit="2" mcrit="50" macc="541" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="39">
-		<stats_template maxHp="2510" maxMp="4406" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="545" block="545" parry="545" attack="14" accuracy="502" pcrit="2" macc="555">
+		<stats_template maxHp="2510" maxMp="4406" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="545" block="545" parry="545" attack="14" accuracy="502" pcrit="2" mcrit="50" macc="555" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="40">
-		<stats_template maxHp="2604" maxMp="4512" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="558" block="558" parry="558" attack="14" accuracy="510" pcrit="2" macc="570">
+		<stats_template maxHp="2604" maxMp="4512" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="558" block="558" parry="558" attack="14" accuracy="510" pcrit="2" mcrit="50" macc="570" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="41">
-		<stats_template maxHp="2699" maxMp="4617" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="570" block="570" parry="570" attack="14" accuracy="518" pcrit="2" macc="584">
+		<stats_template maxHp="2699" maxMp="4617" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="570" block="570" parry="570" attack="14" accuracy="518" pcrit="2" mcrit="50" macc="584" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="42">
-		<stats_template maxHp="2796" maxMp="4723" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="582" block="582" parry="582" attack="14" accuracy="526" pcrit="2" macc="598">
+		<stats_template maxHp="2796" maxMp="4723" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="582" block="582" parry="582" attack="14" accuracy="526" pcrit="2" mcrit="50" macc="598" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="43">
-		<stats_template maxHp="2894" maxMp="4828" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="595" block="595" parry="595" attack="14" accuracy="534" pcrit="2" macc="612">
+		<stats_template maxHp="2894" maxMp="4828" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="595" block="595" parry="595" attack="14" accuracy="534" pcrit="2" mcrit="50" macc="612" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="44">
-		<stats_template maxHp="2994" maxMp="4934" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="607" block="607" parry="607" attack="14" accuracy="542" pcrit="2" macc="627">
+		<stats_template maxHp="2994" maxMp="4934" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="607" block="607" parry="607" attack="14" accuracy="542" pcrit="2" mcrit="50" macc="627" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="45">
-		<stats_template maxHp="3096" maxMp="5040" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="620" block="620" parry="620" attack="14" accuracy="550" pcrit="2" macc="641">
+		<stats_template maxHp="3096" maxMp="5040" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="620" block="620" parry="620" attack="14" accuracy="550" pcrit="2" mcrit="50" macc="641" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="46">
-		<stats_template maxHp="3199" maxMp="5145" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="632" block="632" parry="632" attack="14" accuracy="558" pcrit="2" macc="655">
+		<stats_template maxHp="3199" maxMp="5145" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="632" block="632" parry="632" attack="14" accuracy="558" pcrit="2" mcrit="50" macc="655" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="47">
-		<stats_template maxHp="3304" maxMp="5251" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="644" block="644" parry="644" attack="14" accuracy="566" pcrit="2" macc="669">
+		<stats_template maxHp="3304" maxMp="5251" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="644" block="644" parry="644" attack="14" accuracy="566" pcrit="2" mcrit="50" macc="669" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="48">
-		<stats_template maxHp="3411" maxMp="5357" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="657" block="657" parry="657" attack="14" accuracy="574" pcrit="2" macc="684">
+		<stats_template maxHp="3411" maxMp="5357" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="657" block="657" parry="657" attack="14" accuracy="574" pcrit="2" mcrit="50" macc="684" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="49">
-		<stats_template maxHp="3519" maxMp="5463" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="669" block="669" parry="669" attack="14" accuracy="582" pcrit="2" macc="698">
+		<stats_template maxHp="3519" maxMp="5463" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="669" block="669" parry="669" attack="14" accuracy="582" pcrit="2" mcrit="50" macc="698" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="50">
-		<stats_template maxHp="3629" maxMp="5568" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="682" block="682" parry="682" attack="14" accuracy="590" pcrit="2" macc="712">
+		<stats_template maxHp="3629" maxMp="5568" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="682" block="682" parry="682" attack="14" accuracy="590" pcrit="2" mcrit="50" macc="712" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="51">
-		<stats_template maxHp="3740" maxMp="5674" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="694" block="694" parry="694" attack="14" accuracy="598" pcrit="2" macc="726">
+		<stats_template maxHp="3740" maxMp="5674" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="694" block="694" parry="694" attack="14" accuracy="598" pcrit="2" mcrit="50" macc="726" spell_resist="50" strike_resist="6">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="52">
-		<stats_template maxHp="3853" maxMp="5780" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="706" block="706" parry="706" attack="14" accuracy="606" pcrit="2" macc="741">
+		<stats_template maxHp="3853" maxMp="5780" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="706" block="706" parry="706" attack="14" accuracy="606" pcrit="2" mcrit="50" macc="741" spell_resist="50" strike_resist="12">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="53">
-		<stats_template maxHp="3968" maxMp="5886" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="719" block="719" parry="719" attack="14" accuracy="614" pcrit="2" macc="755">
+		<stats_template maxHp="3968" maxMp="5886" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="719" block="719" parry="719" attack="14" accuracy="614" pcrit="2" mcrit="50" macc="755" spell_resist="50" strike_resist="18">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="54">
-		<stats_template maxHp="4084" maxMp="5991" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="731" block="731" parry="731" attack="14" accuracy="622" pcrit="2" macc="769">
+		<stats_template maxHp="4084" maxMp="5991" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="731" block="731" parry="731" attack="14" accuracy="622" pcrit="2" mcrit="50" macc="769" spell_resist="50" strike_resist="24">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="55">
-		<stats_template maxHp="4202" maxMp="6097" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="744" block="744" parry="744" attack="14" accuracy="630" pcrit="2" macc="783">
+		<stats_template maxHp="4202" maxMp="6097" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="744" block="744" parry="744" attack="14" accuracy="630" pcrit="2" mcrit="50" macc="783" spell_resist="50" strike_resist="30">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="56">
-		<stats_template maxHp="4322" maxMp="6203" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="756" block="756" parry="756" attack="14" accuracy="638" pcrit="2" macc="798">
+		<stats_template maxHp="4322" maxMp="6203" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="756" block="756" parry="756" attack="14" accuracy="638" pcrit="2" mcrit="50" macc="798" spell_resist="50" strike_resist="36">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="57">
-		<stats_template maxHp="4443" maxMp="6309" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="768" block="768" parry="768" attack="14" accuracy="646" pcrit="2" macc="812">
+		<stats_template maxHp="4443" maxMp="6309" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="768" block="768" parry="768" attack="14" accuracy="646" pcrit="2" mcrit="50" macc="812" spell_resist="50" strike_resist="42">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="58">
-		<stats_template maxHp="4565" maxMp="6415" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="781" block="781" parry="781" attack="14" accuracy="654" pcrit="2" macc="826">
+		<stats_template maxHp="4565" maxMp="6415" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="781" block="781" parry="781" attack="14" accuracy="654" pcrit="2" mcrit="50" macc="826" spell_resist="50" strike_resist="48">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="59">
-		<stats_template maxHp="4690" maxMp="6521" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="793" block="793" parry="793" attack="14" accuracy="662" pcrit="2" macc="840">
+		<stats_template maxHp="4690" maxMp="6521" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="793" block="793" parry="793" attack="14" accuracy="662" pcrit="2" mcrit="50" macc="840" spell_resist="50" strike_resist="54">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="60">
-		<stats_template maxHp="4816" maxMp="6627" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="806" block="806" parry="806" attack="14" accuracy="670" pcrit="2" macc="855">
+		<stats_template maxHp="4816" maxMp="6627" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="806" block="806" parry="806" attack="14" accuracy="670" pcrit="2" mcrit="50" macc="855" spell_resist="50" strike_resist="60">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="61">
-		<stats_template maxHp="4943" maxMp="6732" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="818" block="818" parry="818" attack="14" accuracy="678" pcrit="2" macc="869">
+		<stats_template maxHp="4943" maxMp="6732" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="818" block="818" parry="818" attack="14" accuracy="678" pcrit="2" mcrit="50" macc="869" spell_resist="50" strike_resist="66">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="62">
-		<stats_template maxHp="5072" maxMp="6838" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="830" block="830" parry="830" attack="14" accuracy="686" pcrit="2" macc="883">
+		<stats_template maxHp="5072" maxMp="6838" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="830" block="830" parry="830" attack="14" accuracy="686" pcrit="2" mcrit="50" macc="883" spell_resist="50" strike_resist="72">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="63">
-		<stats_template maxHp="5203" maxMp="6944" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="843" block="843" parry="843" attack="14" accuracy="694" pcrit="2" macc="897">
+		<stats_template maxHp="5203" maxMp="6944" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="843" block="843" parry="843" attack="14" accuracy="694" pcrit="2" mcrit="50" macc="897" spell_resist="50" strike_resist="78">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="64">
-		<stats_template maxHp="5335" maxMp="7050" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="855" block="855" parry="855" attack="14" accuracy="702" pcrit="2" macc="912">
+		<stats_template maxHp="5335" maxMp="7050" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="855" block="855" parry="855" attack="14" accuracy="702" pcrit="2" mcrit="50" macc="912" spell_resist="50" strike_resist="84">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SPIRIT_MASTER" level="65">
-		<stats_template maxHp="5469" maxMp="7156" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="868" block="868" parry="868" attack="14" accuracy="710" pcrit="2" macc="926">
+		<stats_template maxHp="5469" maxMp="7156" power="90" health="90" agility="100" base_accuracy="100" knowledge="115" will="115" evasion="868" block="868" parry="868" attack="14" accuracy="710" pcrit="2" mcrit="50" macc="926" spell_resist="50" strike_resist="90">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>

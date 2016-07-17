@@ -2,343 +2,343 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="9">
-		<stats_template maxHp="414" maxMp="1215" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="173" block="173" parry="173" attack="14" accuracy="262" pcrit="2" macc="128">
+		<stats_template maxHp="414" maxMp="1215" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="173" block="173" parry="173" attack="14" accuracy="262" pcrit="2" mcrit="50" macc="128" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="10">
-		<stats_template maxHp="456" maxMp="1320" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="186" block="186" parry="186" attack="14" accuracy="270" pcrit="2" macc="142">
+		<stats_template maxHp="456" maxMp="1320" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="186" block="186" parry="186" attack="14" accuracy="270" pcrit="2" mcrit="50" macc="142" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="11">
-		<stats_template maxHp="500" maxMp="1425" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="198" block="198" parry="198" attack="14" accuracy="278" pcrit="2" macc="156">
+		<stats_template maxHp="500" maxMp="1425" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="198" block="198" parry="198" attack="14" accuracy="278" pcrit="2" mcrit="50" macc="156" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="12">
-		<stats_template maxHp="545" maxMp="1531" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="210" block="210" parry="210" attack="14" accuracy="286" pcrit="2" macc="171">
+		<stats_template maxHp="545" maxMp="1531" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="210" block="210" parry="210" attack="14" accuracy="286" pcrit="2" mcrit="50" macc="171" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="13">
-		<stats_template maxHp="592" maxMp="1636" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="223" block="223" parry="223" attack="14" accuracy="294" pcrit="2" macc="185">
+		<stats_template maxHp="592" maxMp="1636" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="223" block="223" parry="223" attack="14" accuracy="294" pcrit="2" mcrit="50" macc="185" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="14">
-		<stats_template maxHp="640" maxMp="1741" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="235" block="235" parry="235" attack="14" accuracy="302" pcrit="2" macc="199">
+		<stats_template maxHp="640" maxMp="1741" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="235" block="235" parry="235" attack="14" accuracy="302" pcrit="2" mcrit="50" macc="199" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="15">
-		<stats_template maxHp="690" maxMp="1846" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="248" block="248" parry="248" attack="14" accuracy="310" pcrit="2" macc="213">
+		<stats_template maxHp="690" maxMp="1846" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="248" block="248" parry="248" attack="14" accuracy="310" pcrit="2" mcrit="50" macc="213" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="16">
-		<stats_template maxHp="741" maxMp="1951" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="260" block="260" parry="260" attack="14" accuracy="318" pcrit="2" macc="228">
+		<stats_template maxHp="741" maxMp="1951" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="260" block="260" parry="260" attack="14" accuracy="318" pcrit="2" mcrit="50" macc="228" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="17">
-		<stats_template maxHp="793" maxMp="2057" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="272" block="272" parry="272" attack="14" accuracy="326" pcrit="2" macc="242">
+		<stats_template maxHp="793" maxMp="2057" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="272" block="272" parry="272" attack="14" accuracy="326" pcrit="2" mcrit="50" macc="242" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="18">
-		<stats_template maxHp="848" maxMp="2162" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="285" block="285" parry="285" attack="14" accuracy="334" pcrit="2" macc="256">
+		<stats_template maxHp="848" maxMp="2162" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="285" block="285" parry="285" attack="14" accuracy="334" pcrit="2" mcrit="50" macc="256" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="19">
-		<stats_template maxHp="903" maxMp="2267" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="297" block="297" parry="297" attack="14" accuracy="342" pcrit="2" macc="270">
+		<stats_template maxHp="903" maxMp="2267" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="297" block="297" parry="297" attack="14" accuracy="342" pcrit="2" mcrit="50" macc="270" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="20">
-		<stats_template maxHp="961" maxMp="2373" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="310" block="310" parry="310" attack="14" accuracy="350" pcrit="2" macc="285">
+		<stats_template maxHp="961" maxMp="2373" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="310" block="310" parry="310" attack="14" accuracy="350" pcrit="2" mcrit="50" macc="285" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="21">
-		<stats_template maxHp="1019" maxMp="2478" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="322" block="322" parry="322" attack="14" accuracy="358" pcrit="2" macc="299">
+		<stats_template maxHp="1019" maxMp="2478" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="322" block="322" parry="322" attack="14" accuracy="358" pcrit="2" mcrit="50" macc="299" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="22">
-		<stats_template maxHp="1079" maxMp="2583" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="334" block="334" parry="334" attack="14" accuracy="366" pcrit="2" macc="313">
+		<stats_template maxHp="1079" maxMp="2583" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="334" block="334" parry="334" attack="14" accuracy="366" pcrit="2" mcrit="50" macc="313" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="23">
-		<stats_template maxHp="1141" maxMp="2688" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="347" block="347" parry="347" attack="14" accuracy="374" pcrit="2" macc="327">
+		<stats_template maxHp="1141" maxMp="2688" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="347" block="347" parry="347" attack="14" accuracy="374" pcrit="2" mcrit="50" macc="327" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="24">
-		<stats_template maxHp="1204" maxMp="2794" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="359" block="359" parry="359" attack="14" accuracy="382" pcrit="2" macc="342">
+		<stats_template maxHp="1204" maxMp="2794" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="359" block="359" parry="359" attack="14" accuracy="382" pcrit="2" mcrit="50" macc="342" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="25">
-		<stats_template maxHp="1269" maxMp="2899" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="372" block="372" parry="372" attack="14" accuracy="390" pcrit="2" macc="356">
+		<stats_template maxHp="1269" maxMp="2899" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="372" block="372" parry="372" attack="14" accuracy="390" pcrit="2" mcrit="50" macc="356" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="26">
-		<stats_template maxHp="1335" maxMp="3005" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="384" block="384" parry="384" attack="14" accuracy="398" pcrit="2" macc="370">
+		<stats_template maxHp="1335" maxMp="3005" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="384" block="384" parry="384" attack="14" accuracy="398" pcrit="2" mcrit="50" macc="370" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="27">
-		<stats_template maxHp="1403" maxMp="3110" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="396" block="396" parry="396" attack="14" accuracy="406" pcrit="2" macc="384">
+		<stats_template maxHp="1403" maxMp="3110" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="396" block="396" parry="396" attack="14" accuracy="406" pcrit="2" mcrit="50" macc="384" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="28">
-		<stats_template maxHp="1472" maxMp="3215" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="409" block="409" parry="409" attack="14" accuracy="414" pcrit="2" macc="399">
+		<stats_template maxHp="1472" maxMp="3215" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="409" block="409" parry="409" attack="14" accuracy="414" pcrit="2" mcrit="50" macc="399" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="29">
-		<stats_template maxHp="1542" maxMp="3321" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="421" block="421" parry="421" attack="14" accuracy="422" pcrit="2" macc="413">
+		<stats_template maxHp="1542" maxMp="3321" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="421" block="421" parry="421" attack="14" accuracy="422" pcrit="2" mcrit="50" macc="413" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="30">
-		<stats_template maxHp="1614" maxMp="3426" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="434" block="434" parry="434" attack="14" accuracy="430" pcrit="2" macc="427">
+		<stats_template maxHp="1614" maxMp="3426" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="434" block="434" parry="434" attack="14" accuracy="430" pcrit="2" mcrit="50" macc="427" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="31">
-		<stats_template maxHp="1688" maxMp="3532" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="446" block="446" parry="446" attack="14" accuracy="438" pcrit="2" macc="441">
+		<stats_template maxHp="1688" maxMp="3532" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="446" block="446" parry="446" attack="14" accuracy="438" pcrit="2" mcrit="50" macc="441" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="32">
-		<stats_template maxHp="1763" maxMp="3637" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="458" block="458" parry="458" attack="14" accuracy="446" pcrit="2" macc="456">
+		<stats_template maxHp="1763" maxMp="3637" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="458" block="458" parry="458" attack="14" accuracy="446" pcrit="2" mcrit="50" macc="456" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="33">
-		<stats_template maxHp="1840" maxMp="3743" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="471" block="471" parry="471" attack="14" accuracy="454" pcrit="2" macc="470">
+		<stats_template maxHp="1840" maxMp="3743" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="471" block="471" parry="471" attack="14" accuracy="454" pcrit="2" mcrit="50" macc="470" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="34">
-		<stats_template maxHp="1918" maxMp="3848" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="483" block="483" parry="483" attack="14" accuracy="462" pcrit="2" macc="484">
+		<stats_template maxHp="1918" maxMp="3848" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="483" block="483" parry="483" attack="14" accuracy="462" pcrit="2" mcrit="50" macc="484" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="35">
-		<stats_template maxHp="1997" maxMp="3954" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="496" block="496" parry="496" attack="14" accuracy="470" pcrit="2" macc="498">
+		<stats_template maxHp="1997" maxMp="3954" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="496" block="496" parry="496" attack="14" accuracy="470" pcrit="2" mcrit="50" macc="498" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="36">
-		<stats_template maxHp="2078" maxMp="4059" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="508" block="508" parry="508" attack="14" accuracy="478" pcrit="2" macc="513">
+		<stats_template maxHp="2078" maxMp="4059" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="508" block="508" parry="508" attack="14" accuracy="478" pcrit="2" mcrit="50" macc="513" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="37">
-		<stats_template maxHp="2161" maxMp="4165" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="520" block="520" parry="520" attack="14" accuracy="486" pcrit="2" macc="527">
+		<stats_template maxHp="2161" maxMp="4165" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="520" block="520" parry="520" attack="14" accuracy="486" pcrit="2" mcrit="50" macc="527" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="38">
-		<stats_template maxHp="2245" maxMp="4270" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="533" block="533" parry="533" attack="14" accuracy="494" pcrit="2" macc="541">
+		<stats_template maxHp="2245" maxMp="4270" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="533" block="533" parry="533" attack="14" accuracy="494" pcrit="2" mcrit="50" macc="541" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="39">
-		<stats_template maxHp="2330" maxMp="4376" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="545" block="545" parry="545" attack="14" accuracy="502" pcrit="2" macc="555">
+		<stats_template maxHp="2330" maxMp="4376" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="545" block="545" parry="545" attack="14" accuracy="502" pcrit="2" mcrit="50" macc="555" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="40">
-		<stats_template maxHp="2418" maxMp="4482" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="558" block="558" parry="558" attack="14" accuracy="510" pcrit="2" macc="570">
+		<stats_template maxHp="2418" maxMp="4482" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="558" block="558" parry="558" attack="14" accuracy="510" pcrit="2" mcrit="50" macc="570" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="41">
-		<stats_template maxHp="2506" maxMp="4587" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="570" block="570" parry="570" attack="14" accuracy="518" pcrit="2" macc="584">
+		<stats_template maxHp="2506" maxMp="4587" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="570" block="570" parry="570" attack="14" accuracy="518" pcrit="2" mcrit="50" macc="584" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="42">
-		<stats_template maxHp="2596" maxMp="4693" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="582" block="582" parry="582" attack="14" accuracy="526" pcrit="2" macc="598">
+		<stats_template maxHp="2596" maxMp="4693" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="582" block="582" parry="582" attack="14" accuracy="526" pcrit="2" mcrit="50" macc="598" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="43">
-		<stats_template maxHp="2688" maxMp="4798" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="595" block="595" parry="595" attack="14" accuracy="534" pcrit="2" macc="612">
+		<stats_template maxHp="2688" maxMp="4798" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="595" block="595" parry="595" attack="14" accuracy="534" pcrit="2" mcrit="50" macc="612" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="44">
-		<stats_template maxHp="2781" maxMp="4904" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="607" block="607" parry="607" attack="14" accuracy="542" pcrit="2" macc="627">
+		<stats_template maxHp="2781" maxMp="4904" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="607" block="607" parry="607" attack="14" accuracy="542" pcrit="2" mcrit="50" macc="627" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="45">
-		<stats_template maxHp="2875" maxMp="5010" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="620" block="620" parry="620" attack="14" accuracy="550" pcrit="2" macc="641">
+		<stats_template maxHp="2875" maxMp="5010" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="620" block="620" parry="620" attack="14" accuracy="550" pcrit="2" mcrit="50" macc="641" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="46">
-		<stats_template maxHp="2971" maxMp="5115" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="632" block="632" parry="632" attack="14" accuracy="558" pcrit="2" macc="655">
+		<stats_template maxHp="2971" maxMp="5115" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="632" block="632" parry="632" attack="14" accuracy="558" pcrit="2" mcrit="50" macc="655" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="47">
-		<stats_template maxHp="3068" maxMp="5221" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="644" block="644" parry="644" attack="14" accuracy="566" pcrit="2" macc="669">
+		<stats_template maxHp="3068" maxMp="5221" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="644" block="644" parry="644" attack="14" accuracy="566" pcrit="2" mcrit="50" macc="669" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="48">
-		<stats_template maxHp="3167" maxMp="5327" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="657" block="657" parry="657" attack="14" accuracy="574" pcrit="2" macc="684">
+		<stats_template maxHp="3167" maxMp="5327" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="657" block="657" parry="657" attack="14" accuracy="574" pcrit="2" mcrit="50" macc="684" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="49">
-		<stats_template maxHp="3268" maxMp="5433" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="669" block="669" parry="669" attack="14" accuracy="582" pcrit="2" macc="698">
+		<stats_template maxHp="3268" maxMp="5433" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="669" block="669" parry="669" attack="14" accuracy="582" pcrit="2" mcrit="50" macc="698" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="50">
-		<stats_template maxHp="3370" maxMp="5538" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="682" block="682" parry="682" attack="14" accuracy="590" pcrit="2" macc="712">
+		<stats_template maxHp="3370" maxMp="5538" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="682" block="682" parry="682" attack="14" accuracy="590" pcrit="2" mcrit="50" macc="712" spell_resist="50">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="51">
-		<stats_template maxHp="3473" maxMp="5644" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="694" block="694" parry="694" attack="14" accuracy="598" pcrit="2" macc="726">
+		<stats_template maxHp="3473" maxMp="5644" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="694" block="694" parry="694" attack="14" accuracy="598" pcrit="2" mcrit="50" macc="726" spell_resist="50" strike_resist="6">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="52">
-		<stats_template maxHp="3578" maxMp="5750" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="706" block="706" parry="706" attack="14" accuracy="606" pcrit="2" macc="741">
+		<stats_template maxHp="3578" maxMp="5750" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="706" block="706" parry="706" attack="14" accuracy="606" pcrit="2" mcrit="50" macc="741" spell_resist="50" strike_resist="12">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="53">
-		<stats_template maxHp="3685" maxMp="5856" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="719" block="719" parry="719" attack="14" accuracy="614" pcrit="2" macc="755">
+		<stats_template maxHp="3685" maxMp="5856" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="719" block="719" parry="719" attack="14" accuracy="614" pcrit="2" mcrit="50" macc="755" spell_resist="50" strike_resist="18">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="54">
-		<stats_template maxHp="3793" maxMp="5961" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="731" block="731" parry="731" attack="14" accuracy="622" pcrit="2" macc="769">
+		<stats_template maxHp="3793" maxMp="5961" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="731" block="731" parry="731" attack="14" accuracy="622" pcrit="2" mcrit="50" macc="769" spell_resist="50" strike_resist="24">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="55">
-		<stats_template maxHp="3902" maxMp="6067" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="744" block="744" parry="744" attack="14" accuracy="630" pcrit="2" macc="783">
+		<stats_template maxHp="3902" maxMp="6067" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="744" block="744" parry="744" attack="14" accuracy="630" pcrit="2" mcrit="50" macc="783" spell_resist="50" strike_resist="30">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="56">
-		<stats_template maxHp="4013" maxMp="6173" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="756" block="756" parry="756" attack="14" accuracy="638" pcrit="2" macc="798">
+		<stats_template maxHp="4013" maxMp="6173" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="756" block="756" parry="756" attack="14" accuracy="638" pcrit="2" mcrit="50" macc="798" spell_resist="50" strike_resist="36">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="57">
-		<stats_template maxHp="4125" maxMp="6279" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="768" block="768" parry="768" attack="14" accuracy="646" pcrit="2" macc="812">
+		<stats_template maxHp="4125" maxMp="6279" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="768" block="768" parry="768" attack="14" accuracy="646" pcrit="2" mcrit="50" macc="812" spell_resist="50" strike_resist="42">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="58">
-		<stats_template maxHp="4239" maxMp="6385" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="781" block="781" parry="781" attack="14" accuracy="654" pcrit="2" macc="826">
+		<stats_template maxHp="4239" maxMp="6385" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="781" block="781" parry="781" attack="14" accuracy="654" pcrit="2" mcrit="50" macc="826" spell_resist="50" strike_resist="48">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="59">
-		<stats_template maxHp="4355" maxMp="6491" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="793" block="793" parry="793" attack="14" accuracy="662" pcrit="2" macc="840">
+		<stats_template maxHp="4355" maxMp="6491" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="793" block="793" parry="793" attack="14" accuracy="662" pcrit="2" mcrit="50" macc="840" spell_resist="50" strike_resist="54">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="60">
-		<stats_template maxHp="4472" maxMp="6597" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="806" block="806" parry="806" attack="14" accuracy="670" pcrit="2" macc="855">
+		<stats_template maxHp="4472" maxMp="6597" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="806" block="806" parry="806" attack="14" accuracy="670" pcrit="2" mcrit="50" macc="855" spell_resist="50" strike_resist="60">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="61">
-		<stats_template maxHp="4590" maxMp="6702" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="818" block="818" parry="818" attack="14" accuracy="678" pcrit="2" macc="869">
+		<stats_template maxHp="4590" maxMp="6702" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="818" block="818" parry="818" attack="14" accuracy="678" pcrit="2" mcrit="50" macc="869" spell_resist="50" strike_resist="66">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="62">
-		<stats_template maxHp="4710" maxMp="6808" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="830" block="830" parry="830" attack="14" accuracy="686" pcrit="2" macc="883">
+		<stats_template maxHp="4710" maxMp="6808" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="830" block="830" parry="830" attack="14" accuracy="686" pcrit="2" mcrit="50" macc="883" spell_resist="50" strike_resist="72">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="63">
-		<stats_template maxHp="4831" maxMp="6914" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="843" block="843" parry="843" attack="14" accuracy="694" pcrit="2" macc="897">
+		<stats_template maxHp="4831" maxMp="6914" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="843" block="843" parry="843" attack="14" accuracy="694" pcrit="2" mcrit="50" macc="897" spell_resist="50" strike_resist="78">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="64">
-		<stats_template maxHp="4954" maxMp="7020" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="855" block="855" parry="855" attack="14" accuracy="702" pcrit="2" macc="912">
+		<stats_template maxHp="4954" maxMp="7020" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="855" block="855" parry="855" attack="14" accuracy="702" pcrit="2" mcrit="50" macc="912" spell_resist="50" strike_resist="84">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="SORCERER" level="65">
-		<stats_template maxHp="5078" maxMp="7126" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="868" block="868" parry="868" attack="14" accuracy="710" pcrit="2" macc="926">
+		<stats_template maxHp="5078" maxMp="7126" power="90" health="90" agility="100" base_accuracy="100" knowledge="120" will="110" evasion="868" block="868" parry="868" attack="14" accuracy="710" pcrit="2" mcrit="50" macc="926" spell_resist="50" strike_resist="90">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>

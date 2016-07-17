@@ -64,8 +64,9 @@
 		<xs:attribute name="attack" type="xs:int"/>
 		<xs:attribute name="accuracy" type="xs:int"/>
 		<xs:attribute name="pcrit" type="xs:int"/>
-		<xs:attribute name="mcrit" type="xs:int"/>
+		<xs:attribute name="matk" type="xs:int"/>
 		<xs:attribute name="macc" type="xs:int"/>
+		<xs:attribute name="mcrit" type="xs:int"/>
 		<xs:attribute name="magic_boost" type="xs:int"/>
 		<xs:attribute name="msup" type="xs:int"/>
 		<xs:attribute name="strike_resist" type="xs:int"/>

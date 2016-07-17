@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
@@ -49,12 +50,6 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getAllSpeed() {
-		int base = 7500; // TODO current value
-		return getStat(StatEnum.ALLSPEED, base);
-	}
-
-	@Override
 	public Stat2 getStat(StatEnum statEnum, int base) {
 		Stat2 stat = super.getStat(statEnum, base);
 		if (owner.getMaster() == null)
@@ -83,23 +78,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getMaxHp() {
-		return getStat(StatEnum.MAXHP, statsTemplate.getMaxHp());
-	}
-
-	@Override
-	public Stat2 getPCR() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, 0);
-	}
-
-	@Override
-	public Stat2 getMCR() {
-		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, 0);
-	}
-
-	@Override
-	public Stat2 getMaxMp() {
-		return getStat(StatEnum.MAXHP, statsTemplate.getMaxMp());
+	public SummonStatsTemplate getStatsTemplate() {
+		return statsTemplate;
 	}
 
 	@Override
@@ -114,7 +94,7 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 		if (master != null && master.isFlying()) {
 			bonusSpeed += 3000;
 		}
-		return getStat(StatEnum.SPEED, Math.round(statsTemplate.getRunSpeed() * 1000) + bonusSpeed);
+		return getStat(StatEnum.SPEED, Math.round(getStatsTemplate().getRunSpeed() * 1000) + bonusSpeed);
 	}
 
 	@Override
@@ -123,109 +103,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getPDef() {
-		return getStat(StatEnum.PHYSICAL_DEFENSE, statsTemplate.getPdef());
-	}
-
-	@Override
-	public Stat2 getMDef() {
-		return getStat(StatEnum.MAGICAL_DEFEND, 0);
-	}
-
-	@Override
-	public Stat2 getMResist() {
-		return getStat(StatEnum.MAGICAL_RESIST, statsTemplate.getMresist());
-	}
-
-	@Override
-	public Stat2 getMBResist() {
-		int base = 0;
-		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, base);
-	}
-
-	@Override
-	public Stat2 getPower() {
-		return getStat(StatEnum.POWER, 100);
-	}
-
-	@Override
-	public Stat2 getHealth() {
-		return getStat(StatEnum.HEALTH, 100);
-	}
-
-	@Override
-	public Stat2 getAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, 100);
-	}
-
-	@Override
-	public Stat2 getAgility() {
-		return getStat(StatEnum.AGILITY, 100);
-	}
-
-	@Override
-	public Stat2 getKnowledge() {
-		return getStat(StatEnum.KNOWLEDGE, 100);
-	}
-
-	@Override
-	public Stat2 getWill() {
-		return getStat(StatEnum.WILL, 100);
-	}
-
-	@Override
-	public Stat2 getEvasion() {
-		return getStat(StatEnum.EVASION, statsTemplate.getEvasion());
-	}
-
-	@Override
-	public Stat2 getParry() {
-		return getStat(StatEnum.PARRY, statsTemplate.getParry());
-	}
-
-	@Override
-	public Stat2 getBlock() {
-		return getStat(StatEnum.BLOCK, statsTemplate.getBlock());
-	}
-
-	@Override
-	public Stat2 getMainHandPAttack() {
-		return getStat(StatEnum.PHYSICAL_ATTACK, statsTemplate.getAttack());
-	}
-
-	@Override
-	public Stat2 getMainHandPCritical() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL, statsTemplate.getPcrit());
-	}
-
-	@Override
-	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, statsTemplate.getAccuracy());
-	}
-
-	@Override
-	public Stat2 getMainHandMAttack() {
-		return getStat(StatEnum.MAGICAL_ATTACK, 100);
-	}
-
-	@Override
-	public Stat2 getMBoost() {
-		return getStat(StatEnum.BOOST_MAGICAL_SKILL, 0);
-	}
-
-	@Override
-	public Stat2 getMAccuracy() {
-		return getStat(StatEnum.MAGICAL_ACCURACY, statsTemplate.getMacc());
-	}
-
-	@Override
-	public Stat2 getMCritical() {
-		return getStat(StatEnum.MAGICAL_CRITICAL, statsTemplate.getMcrit());
-	}
-
-	@Override
 	public Stat2 getHpRegenRate() {
-		int base = (int) (owner.getLifeStats().getMaxHp() * (owner.getMode().getId() == 2 ? 0.05f : 0.025f));
+		int base = (int) (owner.getLifeStats().getMaxHp() * (owner.getMode() == SummonMode.REST ? 0.05f : 0.025f));
 		return getStat(StatEnum.REGEN_HP, base);
 	}
 

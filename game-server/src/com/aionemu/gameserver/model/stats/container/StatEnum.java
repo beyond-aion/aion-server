@@ -265,21 +265,6 @@ public enum StatEnum {
 		return itemStoneMask;
 	}
 
-	/**
-	 * Used to find specific StatEnum by its item stone mask
-	 * 
-	 * @param mask
-	 * @return StatEnum
-	 */
-	public static StatEnum findByItemStoneMask(int mask) {
-		for (StatEnum sEnum : values()) {
-			if (sEnum.getItemStoneMask() == mask) {
-				return sEnum;
-			}
-		}
-		throw new IllegalArgumentException("Cannot find StatEnum for stone mask: " + mask);
-	}
-
 	public StatEnum getHandStat(long itemSlot) {
 		switch (this) {
 			case PHYSICAL_ATTACK:

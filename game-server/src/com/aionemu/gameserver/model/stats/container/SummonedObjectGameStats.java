@@ -40,11 +40,4 @@ public class SummonedObjectGameStats extends NpcGameStats {
 	public Stat2 getMBoost() {
 		return getStat(StatEnum.BOOST_MAGICAL_SKILL, (int) (owner.getMaster().getGameStats().getMBoost().getCurrent() * 0.6f));
 	}
-
-	@Override
-	public Stat2 getMainHandMAttack() {
-		int power = owner.getObjectTemplate().getStatsTemplate().getMagicalAttack();
-		return getStat(StatEnum.MAGICAL_ATTACK, power);
-	}
-
 }

@@ -1,16 +1,12 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -26,28 +22,28 @@ import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
+import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author xavier
+ * @modified Neon
  */
 public abstract class CreatureGameStats<T extends Creature> {
 
-	protected static final Logger log = LoggerFactory.getLogger(CreatureGameStats.class);
-
 	private static final int ATTACK_MAX_COUNTER = Integer.MAX_VALUE;
-	private long lastGeoUpdate = 0;
 
-	private FastMap<StatEnum, TreeSet<IStatFunction>> stats;
+	protected final T owner;
+	private final Map<StatEnum, TreeSet<IStatFunction>> stats = new EnumMap<StatEnum, TreeSet<IStatFunction>>(StatEnum.class);
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
+	private long lastGeoUpdate = 0;
 	private int attackCounter = 0;
-	protected T owner = null;
-
 	private int cachedMaxHp, cachedMaxMp;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
-		this.stats = new FastMap<StatEnum, TreeSet<IStatFunction>>();
 	}
 
 	/**
@@ -167,7 +163,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 					func.apply(stat);
 				}
 			}
-			StatCapUtil.calculateBaseValue(stat, ((Creature) owner).isPlayer());
+			StatCapUtil.calculateBaseValue(stat, owner.isPlayer());
 			return stat;
 		} finally {
 			lock.readLock().unlock();
@@ -181,11 +177,9 @@ public abstract class CreatureGameStats<T extends Creature> {
 			if (functions == null || functions.isEmpty())
 				return stat;
 			for (IStatFunction func : functions) {
-				if (func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
-						|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
-					if (func.isBonus()) {
-						func.apply(stat);
-					}
+				if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
+					|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
+					func.apply(stat);
 				}
 			}
 		} finally {
@@ -194,9 +188,103 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return stat;
 	}
 
-	public abstract Stat2 getMaxHp();
+	public abstract StatsTemplate getStatsTemplate();
 
-	public abstract Stat2 getMaxMp();
+	public Stat2 getPower() {
+		return getStat(StatEnum.POWER, 100);
+	}
+
+	public Stat2 getHealth() {
+		return getStat(StatEnum.HEALTH, 100);
+	}
+
+	public Stat2 getAccuracy() { // FIXME unused
+		return getStat(StatEnum.ACCURACY, 100);
+	}
+
+	public Stat2 getAgility() { // FIXME unused
+		return getStat(StatEnum.AGILITY, 100);
+	}
+
+	public Stat2 getKnowledge() {
+		return getStat(StatEnum.KNOWLEDGE, 100);
+	}
+
+	public Stat2 getWill() {
+		return getStat(StatEnum.WILL, 100);
+	}
+
+	public Stat2 getMaxHp() {
+		return getStat(StatEnum.MAXHP, getStatsTemplate().getMaxHp());
+	}
+
+	public Stat2 getMaxMp() {
+		return getStat(StatEnum.MAXMP, getStatsTemplate().getMaxMp());
+	}
+
+	public Stat2 getPDef() {
+		return getStat(StatEnum.PHYSICAL_DEFENSE, getStatsTemplate().getPdef());
+	}
+
+	public Stat2 getMDef() {
+		return getStat(StatEnum.MAGICAL_DEFEND, getStatsTemplate().getMdef());
+	}
+
+	public Stat2 getEvasion() {
+		return getStat(StatEnum.EVASION, getStatsTemplate().getEvasion());
+	}
+
+	public Stat2 getParry() {
+		return getStat(StatEnum.PARRY, getStatsTemplate().getParry());
+	}
+
+	public Stat2 getBlock() {
+		return getStat(StatEnum.BLOCK, getStatsTemplate().getBlock());
+	}
+
+	public Stat2 getMResist() {
+		return getStat(StatEnum.MAGICAL_RESIST, getStatsTemplate().getMresist());
+	}
+
+	public Stat2 getPCR() {
+		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, getStatsTemplate().getStrikeResist());
+	}
+
+	public Stat2 getMCR() {
+		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, getStatsTemplate().getSpellResist());
+	}
+
+	public Stat2 getMainHandPAttack() {
+		return getStat(StatEnum.PHYSICAL_ATTACK, getStatsTemplate().getAttack());
+	}
+
+	public Stat2 getMainHandPCritical() {
+		return getStat(StatEnum.PHYSICAL_CRITICAL, getStatsTemplate().getPcrit());
+	}
+
+	public Stat2 getMainHandPAccuracy() {
+		return getStat(StatEnum.PHYSICAL_ACCURACY, getStatsTemplate().getAccuracy());
+	}
+
+	public Stat2 getMainHandMAttack() {
+		return getStat(StatEnum.MAGICAL_ATTACK, getStatsTemplate().getMagicalAttack());
+	}
+
+	public Stat2 getMCritical() {
+		return getStat(StatEnum.MAGICAL_CRITICAL, getStatsTemplate().getMcrit());
+	}
+
+	public Stat2 getMAccuracy() {
+		return getStat(StatEnum.MAGICAL_ACCURACY, getStatsTemplate().getMacc());
+	}
+
+	public Stat2 getMBoost() {
+		return getStat(StatEnum.BOOST_MAGICAL_SKILL, getStatsTemplate().getMagicBoost());
+	}
+
+	public Stat2 getMBResist() {
+		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, getStatsTemplate().getMsup());
+	}
 
 	public abstract Stat2 getAttackSpeed();
 
@@ -204,55 +292,9 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public abstract Stat2 getAttackRange();
 
-	public abstract Stat2 getPDef();
-
-	public abstract Stat2 getMDef();
-
-	public abstract Stat2 getMResist();
-
-	public abstract Stat2 getPower();
-
-	public abstract Stat2 getHealth();
-
-	public abstract Stat2 getAccuracy();
-
-	public abstract Stat2 getAgility();
-
-	public abstract Stat2 getKnowledge();
-
-	public abstract Stat2 getWill();
-
-	public abstract Stat2 getEvasion();
-
-	public abstract Stat2 getParry();
-
-	public abstract Stat2 getBlock();
-
-	public abstract Stat2 getMainHandPAttack();
-
-	public abstract Stat2 getMainHandPCritical();
-
-	public abstract Stat2 getMainHandPAccuracy();
-
-	public abstract Stat2 getMainHandMAttack();
-
-	public abstract Stat2 getMBoost();
-
-	public abstract Stat2 getMBResist();
-
-	public abstract Stat2 getMAccuracy();
-
-	public abstract Stat2 getMCritical();
-
 	public abstract Stat2 getHpRegenRate();
 
 	public abstract Stat2 getMpRegenRate();
-
-	public abstract Stat2 getPCR();
-
-	public abstract Stat2 getMCR();
-
-	public abstract Stat2 getAllSpeed();
 
 	public int getMagicalDefenseFor(SkillElement element) {
 		switch (element) {

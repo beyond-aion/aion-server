@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
 
 /**
  * @author Estrayl
+ * @modified Neon
  */
 public class NpcStatCalculation {
 
@@ -42,7 +43,7 @@ public class NpcStatCalculation {
 	private static float getBaseValue(StatEnum stat) {
 		switch (stat) {
 			case PHYSICAL_ATTACK:
-				return 25f;
+				return 8f;
 			case MAGICAL_ATTACK:
 			case PHYSICAL_DEFENSE:
 				return 20f;
@@ -65,13 +66,15 @@ public class NpcStatCalculation {
 			case JUNK:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 0.8f;
+						return 1.05f;
+					case MAGICAL_ATTACK:
+						return 0.4f;
 				}
 				return 1f;
 			case NORMAL:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 0.8f;
+						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
 					case PHYSICAL_ACCURACY:
@@ -82,7 +85,7 @@ public class NpcStatCalculation {
 			case ELITE:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 0.805f;
+						return 1.1f;
 					case MAGICAL_ATTACK:
 						return 0.5f;
 					case PHYSICAL_DEFENSE:
@@ -100,7 +103,7 @@ public class NpcStatCalculation {
 			case HERO:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.072f;
+						return 1.4f;
 					case MAGICAL_ATTACK:
 						return 0.6f;
 					case PHYSICAL_ACCURACY:
@@ -119,7 +122,6 @@ public class NpcStatCalculation {
 			case LEGENDARY:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.32f;
 					case PHYSICAL_DEFENSE:
 						return 1.75f;
 					case MAGICAL_RESIST:
@@ -141,15 +143,11 @@ public class NpcStatCalculation {
 	private static float getRankModifier(StatEnum stat, NpcRank rank) {
 		switch (rank) {
 			case NOVICE:
-				switch (stat) {
-					case PHYSICAL_ATTACK:
-						return 0.585f;
-				}
 				return 1f;
 			case DISCIPLINED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 0.585f;
+						return 1.1f;
 					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.02f;
@@ -162,13 +160,13 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 						return 1.01f;
 					case PHYSICAL_CRITICAL_RESIST:
-						return 1.5f;
+						return 1.2f;
 				}
 				return 1f;
 			case SEASONED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.3f;
+						return 1.6f;
 					case PHYSICAL_DEFENSE:
 						return 1.2f;
 					case MAGICAL_ACCURACY:
@@ -181,13 +179,13 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 						return 1.02f;
 					case PHYSICAL_CRITICAL_RESIST:
-						return 2f;
+						return 1.4f;
 				}
 				return 1f;
 			case EXPERT:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.4f;
+						return 1.95f;
 					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.04f;
@@ -200,12 +198,13 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 						return 1.03f;
 					case PHYSICAL_CRITICAL_RESIST:
-						return 2.4f;
+						return 1.6f;
 				}
 				return 1f;
 			case VETERAN:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
+						return 2.2f;
 					case PHYSICAL_DEFENSE:
 						return 1.4f;
 					case MAGICAL_ACCURACY:
@@ -218,12 +217,13 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 						return 1.04f;
 					case PHYSICAL_CRITICAL_RESIST:
-						return 2.5f;
+						return 1.8f;
 				}
 				return 1f;
 			case MASTER:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
+						return 2.5f;
 					case PHYSICAL_DEFENSE:
 						return 1.5f;
 					case MAGICAL_ACCURACY:
@@ -236,7 +236,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_ACCURACY:
 						return 1.05f;
 					case PHYSICAL_CRITICAL_RESIST:
-						return 2.6f;
+						return 2f;
 				}
 				return 1f;
 			default:

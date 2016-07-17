@@ -557,21 +557,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	@Override
-	public int modifyMaccuracy(int value) {
-		return value;
-	}
-
-	@Override
-	public int modifyMattack(int value) {
-		return value;
-	}
-
-	@Override
-	public int modifyPdef(int value) {
-		return value;
-	}
-
-	@Override
 	public ItemAttackType modifyAttackType(ItemAttackType type) {
 		return type;
 	}

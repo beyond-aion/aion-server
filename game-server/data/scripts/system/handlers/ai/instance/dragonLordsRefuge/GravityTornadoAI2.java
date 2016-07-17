@@ -35,11 +35,6 @@ public class GravityTornadoAI2 extends NpcAI2 {
 	}
 
 	@Override
-	public int modifyMaccuracy(int value) {
-		return 1200;
-	}
-
-	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
 			case SHOULD_DECAY:

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,12 +9,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.stats.CalculatedPlayerStatsTemplate;
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * Created on: 31.07.2009 14:20:03
@@ -36,9 +34,10 @@ public class PlayerStatsData {
 		for (PlayerStatsType pt : templatesList) {
 			int code = makeHash(pt.getRequiredPlayerClass(), pt.getRequiredLevel());
 			PlayerStatsTemplate template = pt.getTemplate();
-			// TODO move to DP
-			template.setMaxMp(Math.round(template.getMaxMp() * 100f / template.getWill()));
-			template.setMaxHp(Math.round(template.getMaxHp() * 100f / template.getHealth()));
+			// XXX template values for hp/mp are the effective values from retail, including health and will modifiers so we need to remove these here
+			// ceil since these values get floored in stat calculation, where health and will are applied as the base rate
+			template.setMaxMp((int) Math.ceil(template.getMaxMp() * 100f / template.getWill()));
+			template.setMaxHp((int) Math.ceil(template.getMaxHp() * 100f / template.getHealth()));
 			playerTemplates.put(code, pt.getTemplate());
 		}
 
@@ -63,17 +62,6 @@ public class PlayerStatsData {
 
 		templatesList.clear();
 		templatesList = null;
-	}
-
-	/**
-	 * @param player
-	 * @return
-	 */
-	public PlayerStatsTemplate getTemplate(Player player) {
-		PlayerStatsTemplate template = getTemplate(player.getCommonData().getPlayerClass(), player.getLevel());
-		if (template == null)
-			template = getTemplate(player.getCommonData().getPlayerClass(), 0);
-		return template;
 	}
 
 	/**

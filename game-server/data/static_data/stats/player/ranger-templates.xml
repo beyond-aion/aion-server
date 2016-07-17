@@ -2,343 +2,343 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="9">
-		<stats_template maxHp="476" maxMp="730" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="220" block="220" parry="220" attack="18" accuracy="252" pcrit="3" macc="128">
+		<stats_template maxHp="476" maxMp="730" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="220" block="220" parry="220" attack="18" accuracy="252" pcrit="3" mcrit="50" macc="128">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="10">
-		<stats_template maxHp="521" maxMp="800" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="232" block="232" parry="232" attack="18" accuracy="260" pcrit="3" macc="142">
+		<stats_template maxHp="521" maxMp="800" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="232" block="232" parry="232" attack="18" accuracy="260" pcrit="3" mcrit="50" macc="142">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="11">
-		<stats_template maxHp="568" maxMp="870" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="244" block="244" parry="244" attack="18" accuracy="268" pcrit="3" macc="156">
+		<stats_template maxHp="568" maxMp="870" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="244" block="244" parry="244" attack="18" accuracy="268" pcrit="3" mcrit="50" macc="156">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="12">
-		<stats_template maxHp="617" maxMp="940" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="257" block="257" parry="257" attack="18" accuracy="276" pcrit="3" macc="171">
+		<stats_template maxHp="617" maxMp="940" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="257" block="257" parry="257" attack="18" accuracy="276" pcrit="3" mcrit="50" macc="171">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="13">
-		<stats_template maxHp="667" maxMp="1010" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="269" block="269" parry="269" attack="18" accuracy="284" pcrit="3" macc="185">
+		<stats_template maxHp="667" maxMp="1010" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="269" block="269" parry="269" attack="18" accuracy="284" pcrit="3" mcrit="50" macc="185">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="14">
-		<stats_template maxHp="719" maxMp="1080" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="282" block="282" parry="282" attack="18" accuracy="292" pcrit="3" macc="199">
+		<stats_template maxHp="719" maxMp="1080" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="282" block="282" parry="282" attack="18" accuracy="292" pcrit="3" mcrit="50" macc="199">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="15">
-		<stats_template maxHp="772" maxMp="1151" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="294" block="294" parry="294" attack="18" accuracy="300" pcrit="3" macc="213">
+		<stats_template maxHp="772" maxMp="1151" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="294" block="294" parry="294" attack="18" accuracy="300" pcrit="3" mcrit="50" macc="213">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="16">
-		<stats_template maxHp="827" maxMp="1221" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="306" block="306" parry="306" attack="18" accuracy="308" pcrit="3" macc="228">
+		<stats_template maxHp="827" maxMp="1221" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="306" block="306" parry="306" attack="18" accuracy="308" pcrit="3" mcrit="50" macc="228">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="17">
-		<stats_template maxHp="884" maxMp="1291" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="319" block="319" parry="319" attack="18" accuracy="316" pcrit="3" macc="242">
+		<stats_template maxHp="884" maxMp="1291" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="319" block="319" parry="319" attack="18" accuracy="316" pcrit="3" mcrit="50" macc="242">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="18">
-		<stats_template maxHp="942" maxMp="1361" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="331" block="331" parry="331" attack="18" accuracy="324" pcrit="3" macc="256">
+		<stats_template maxHp="942" maxMp="1361" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="331" block="331" parry="331" attack="18" accuracy="324" pcrit="3" mcrit="50" macc="256">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="19">
-		<stats_template maxHp="1002" maxMp="1431" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="344" block="344" parry="344" attack="18" accuracy="332" pcrit="3" macc="270">
+		<stats_template maxHp="1002" maxMp="1431" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="344" block="344" parry="344" attack="18" accuracy="332" pcrit="3" mcrit="50" macc="270">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="20">
-		<stats_template maxHp="1064" maxMp="1502" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="356" block="356" parry="356" attack="18" accuracy="340" pcrit="3" macc="285">
+		<stats_template maxHp="1064" maxMp="1502" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="356" block="356" parry="356" attack="18" accuracy="340" pcrit="3" mcrit="50" macc="285">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="21">
-		<stats_template maxHp="1127" maxMp="1572" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="368" block="368" parry="368" attack="18" accuracy="348" pcrit="3" macc="299">
+		<stats_template maxHp="1127" maxMp="1572" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="368" block="368" parry="368" attack="18" accuracy="348" pcrit="3" mcrit="50" macc="299">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="22">
-		<stats_template maxHp="1191" maxMp="1642" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="381" block="381" parry="381" attack="18" accuracy="356" pcrit="3" macc="313">
+		<stats_template maxHp="1191" maxMp="1642" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="381" block="381" parry="381" attack="18" accuracy="356" pcrit="3" mcrit="50" macc="313">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="23">
-		<stats_template maxHp="1258" maxMp="1712" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="393" block="393" parry="393" attack="18" accuracy="364" pcrit="3" macc="327">
+		<stats_template maxHp="1258" maxMp="1712" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="393" block="393" parry="393" attack="18" accuracy="364" pcrit="3" mcrit="50" macc="327">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="24">
-		<stats_template maxHp="1326" maxMp="1782" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="406" block="406" parry="406" attack="18" accuracy="372" pcrit="3" macc="342">
+		<stats_template maxHp="1326" maxMp="1782" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="406" block="406" parry="406" attack="18" accuracy="372" pcrit="3" mcrit="50" macc="342">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="25">
-		<stats_template maxHp="1395" maxMp="1853" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="418" block="418" parry="418" attack="18" accuracy="380" pcrit="3" macc="356">
+		<stats_template maxHp="1395" maxMp="1853" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="418" block="418" parry="418" attack="18" accuracy="380" pcrit="3" mcrit="50" macc="356">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="26">
-		<stats_template maxHp="1466" maxMp="1923" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="430" block="430" parry="430" attack="18" accuracy="388" pcrit="3" macc="370">
+		<stats_template maxHp="1466" maxMp="1923" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="430" block="430" parry="430" attack="18" accuracy="388" pcrit="3" mcrit="50" macc="370">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="27">
-		<stats_template maxHp="1539" maxMp="1993" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="443" block="443" parry="443" attack="18" accuracy="396" pcrit="3" macc="384">
+		<stats_template maxHp="1539" maxMp="1993" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="443" block="443" parry="443" attack="18" accuracy="396" pcrit="3" mcrit="50" macc="384">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="28">
-		<stats_template maxHp="1613" maxMp="2063" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="455" block="455" parry="455" attack="18" accuracy="404" pcrit="3" macc="399">
+		<stats_template maxHp="1613" maxMp="2063" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="455" block="455" parry="455" attack="18" accuracy="404" pcrit="3" mcrit="50" macc="399">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="29">
-		<stats_template maxHp="1689" maxMp="2134" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="468" block="468" parry="468" attack="18" accuracy="412" pcrit="3" macc="413">
+		<stats_template maxHp="1689" maxMp="2134" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="468" block="468" parry="468" attack="18" accuracy="412" pcrit="3" mcrit="50" macc="413">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="30">
-		<stats_template maxHp="1767" maxMp="2204" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="480" block="480" parry="480" attack="18" accuracy="420" pcrit="3" macc="427">
+		<stats_template maxHp="1767" maxMp="2204" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="480" block="480" parry="480" attack="18" accuracy="420" pcrit="3" mcrit="50" macc="427">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="31">
-		<stats_template maxHp="1846" maxMp="2274" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="492" block="492" parry="492" attack="18" accuracy="428" pcrit="3" macc="441">
+		<stats_template maxHp="1846" maxMp="2274" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="492" block="492" parry="492" attack="18" accuracy="428" pcrit="3" mcrit="50" macc="441">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="32">
-		<stats_template maxHp="1927" maxMp="2345" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="505" block="505" parry="505" attack="18" accuracy="436" pcrit="3" macc="456">
+		<stats_template maxHp="1927" maxMp="2345" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="505" block="505" parry="505" attack="18" accuracy="436" pcrit="3" mcrit="50" macc="456">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="33">
-		<stats_template maxHp="2009" maxMp="2415" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="517" block="517" parry="517" attack="18" accuracy="444" pcrit="3" macc="470">
+		<stats_template maxHp="2009" maxMp="2415" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="517" block="517" parry="517" attack="18" accuracy="444" pcrit="3" mcrit="50" macc="470">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="34">
-		<stats_template maxHp="2093" maxMp="2485" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="530" block="530" parry="530" attack="18" accuracy="452" pcrit="3" macc="484">
+		<stats_template maxHp="2093" maxMp="2485" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="530" block="530" parry="530" attack="18" accuracy="452" pcrit="3" mcrit="50" macc="484">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="35">
-		<stats_template maxHp="2179" maxMp="2556" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="542" block="542" parry="542" attack="18" accuracy="460" pcrit="3" macc="498">
+		<stats_template maxHp="2179" maxMp="2556" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="542" block="542" parry="542" attack="18" accuracy="460" pcrit="3" mcrit="50" macc="498">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="36">
-		<stats_template maxHp="2266" maxMp="2626" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="554" block="554" parry="554" attack="18" accuracy="468" pcrit="3" macc="513">
+		<stats_template maxHp="2266" maxMp="2626" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="554" block="554" parry="554" attack="18" accuracy="468" pcrit="3" mcrit="50" macc="513">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="37">
-		<stats_template maxHp="2355" maxMp="2696" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="567" block="567" parry="567" attack="18" accuracy="476" pcrit="3" macc="527">
+		<stats_template maxHp="2355" maxMp="2696" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="567" block="567" parry="567" attack="18" accuracy="476" pcrit="3" mcrit="50" macc="527">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="38">
-		<stats_template maxHp="2446" maxMp="2767" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="579" block="579" parry="579" attack="18" accuracy="484" pcrit="3" macc="541">
+		<stats_template maxHp="2446" maxMp="2767" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="579" block="579" parry="579" attack="18" accuracy="484" pcrit="3" mcrit="50" macc="541">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="39">
-		<stats_template maxHp="2538" maxMp="2837" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="592" block="592" parry="592" attack="18" accuracy="492" pcrit="3" macc="555">
+		<stats_template maxHp="2538" maxMp="2837" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="592" block="592" parry="592" attack="18" accuracy="492" pcrit="3" mcrit="50" macc="555">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="40">
-		<stats_template maxHp="2632" maxMp="2908" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="604" block="604" parry="604" attack="18" accuracy="500" pcrit="3" macc="570">
+		<stats_template maxHp="2632" maxMp="2908" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="604" block="604" parry="604" attack="18" accuracy="500" pcrit="3" mcrit="50" macc="570">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="41">
-		<stats_template maxHp="2727" maxMp="2978" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="616" block="616" parry="616" attack="18" accuracy="508" pcrit="3" macc="584">
+		<stats_template maxHp="2727" maxMp="2978" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="616" block="616" parry="616" attack="18" accuracy="508" pcrit="3" mcrit="50" macc="584">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="42">
-		<stats_template maxHp="2824" maxMp="3048" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="629" block="629" parry="629" attack="18" accuracy="516" pcrit="3" macc="598">
+		<stats_template maxHp="2824" maxMp="3048" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="629" block="629" parry="629" attack="18" accuracy="516" pcrit="3" mcrit="50" macc="598">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="43">
-		<stats_template maxHp="2922" maxMp="3119" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="641" block="641" parry="641" attack="18" accuracy="524" pcrit="3" macc="612">
+		<stats_template maxHp="2922" maxMp="3119" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="641" block="641" parry="641" attack="18" accuracy="524" pcrit="3" mcrit="50" macc="612">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="44">
-		<stats_template maxHp="3022" maxMp="3189" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="654" block="654" parry="654" attack="18" accuracy="532" pcrit="3" macc="627">
+		<stats_template maxHp="3022" maxMp="3189" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="654" block="654" parry="654" attack="18" accuracy="532" pcrit="3" mcrit="50" macc="627">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="45">
-		<stats_template maxHp="3124" maxMp="3260" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="666" block="666" parry="666" attack="18" accuracy="540" pcrit="3" macc="641">
+		<stats_template maxHp="3124" maxMp="3260" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="666" block="666" parry="666" attack="18" accuracy="540" pcrit="3" mcrit="50" macc="641">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="46">
-		<stats_template maxHp="3227" maxMp="3330" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="678" block="678" parry="678" attack="18" accuracy="548" pcrit="3" macc="655">
+		<stats_template maxHp="3227" maxMp="3330" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="678" block="678" parry="678" attack="18" accuracy="548" pcrit="3" mcrit="50" macc="655">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="47">
-		<stats_template maxHp="3332" maxMp="3401" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="691" block="691" parry="691" attack="18" accuracy="576" pcrit="3" macc="669">
+		<stats_template maxHp="3332" maxMp="3401" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="691" block="691" parry="691" attack="18" accuracy="576" pcrit="3" mcrit="50" macc="669">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="48">
-		<stats_template maxHp="3439" maxMp="3471" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="703" block="703" parry="703" attack="18" accuracy="584" pcrit="3" macc="684">
+		<stats_template maxHp="3439" maxMp="3471" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="703" block="703" parry="703" attack="18" accuracy="584" pcrit="3" mcrit="50" macc="684">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="49">
-		<stats_template maxHp="3547" maxMp="3542" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="716" block="716" parry="716" attack="18" accuracy="592" pcrit="3" macc="698">
+		<stats_template maxHp="3547" maxMp="3542" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="716" block="716" parry="716" attack="18" accuracy="592" pcrit="3" mcrit="50" macc="698">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="50">
-		<stats_template maxHp="3657" maxMp="3612" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="728" block="728" parry="728" attack="18" accuracy="600" pcrit="3" macc="712">
+		<stats_template maxHp="3657" maxMp="3612" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="728" block="728" parry="728" attack="18" accuracy="600" pcrit="3" mcrit="50" macc="712">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="51">
-		<stats_template maxHp="3768" maxMp="3683" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="740" block="740" parry="740" attack="18" accuracy="608" pcrit="3" macc="726">
+		<stats_template maxHp="3768" maxMp="3683" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="740" block="740" parry="740" attack="18" accuracy="608" pcrit="3" mcrit="50" macc="726" strike_resist="6">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="52">
-		<stats_template maxHp="3881" maxMp="3753" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="753" block="753" parry="753" attack="18" accuracy="616" pcrit="3" macc="741">
+		<stats_template maxHp="3881" maxMp="3753" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="753" block="753" parry="753" attack="18" accuracy="616" pcrit="3" mcrit="50" macc="741" strike_resist="12">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="53">
-		<stats_template maxHp="3996" maxMp="3824" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="765" block="765" parry="765" attack="18" accuracy="624" pcrit="3" macc="755">
+		<stats_template maxHp="3996" maxMp="3824" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="765" block="765" parry="765" attack="18" accuracy="624" pcrit="3" mcrit="50" macc="755" strike_resist="18">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="54">
-		<stats_template maxHp="4112" maxMp="3894" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="778" block="778" parry="778" attack="18" accuracy="632" pcrit="3" macc="769">
+		<stats_template maxHp="4112" maxMp="3894" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="778" block="778" parry="778" attack="18" accuracy="632" pcrit="3" mcrit="50" macc="769" strike_resist="24">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="55">
-		<stats_template maxHp="4230" maxMp="3965" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="790" block="790" parry="790" attack="18" accuracy="640" pcrit="3" macc="783">
+		<stats_template maxHp="4230" maxMp="3965" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="790" block="790" parry="790" attack="18" accuracy="640" pcrit="3" mcrit="50" macc="783" strike_resist="30">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="56">
-		<stats_template maxHp="4350" maxMp="4035" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="802" block="802" parry="802" attack="18" accuracy="668" pcrit="3" macc="798">
+		<stats_template maxHp="4350" maxMp="4035" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="802" block="802" parry="802" attack="18" accuracy="668" pcrit="3" mcrit="50" macc="798" strike_resist="36">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="57">
-		<stats_template maxHp="4471" maxMp="4106" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="815" block="815" parry="815" attack="18" accuracy="676" pcrit="3" macc="812">
+		<stats_template maxHp="4471" maxMp="4106" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="815" block="815" parry="815" attack="18" accuracy="676" pcrit="3" mcrit="50" macc="812" strike_resist="42">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="58">
-		<stats_template maxHp="4593" maxMp="4176" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="827" block="827" parry="827" attack="18" accuracy="684" pcrit="3" macc="826">
+		<stats_template maxHp="4593" maxMp="4176" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="827" block="827" parry="827" attack="18" accuracy="684" pcrit="3" mcrit="50" macc="826" strike_resist="48">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="59">
-		<stats_template maxHp="4718" maxMp="4247" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="840" block="840" parry="840" attack="18" accuracy="692" pcrit="3" macc="840">
+		<stats_template maxHp="4718" maxMp="4247" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="840" block="840" parry="840" attack="18" accuracy="692" pcrit="3" mcrit="50" macc="840" strike_resist="54">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="60">
-		<stats_template maxHp="4844" maxMp="4318" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="852" block="852" parry="852" attack="18" accuracy="700" pcrit="3" macc="855">
+		<stats_template maxHp="4844" maxMp="4318" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="852" block="852" parry="852" attack="18" accuracy="700" pcrit="3" mcrit="50" macc="855" strike_resist="60">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="61">
-		<stats_template maxHp="4971" maxMp="4388" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="864" block="864" parry="864" attack="18" accuracy="708" pcrit="3" macc="869">
+		<stats_template maxHp="4971" maxMp="4388" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="864" block="864" parry="864" attack="18" accuracy="708" pcrit="3" mcrit="50" macc="869" strike_resist="66">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="62">
-		<stats_template maxHp="5100" maxMp="4459" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="877" block="877" parry="877" attack="18" accuracy="716" pcrit="3" macc="883">
+		<stats_template maxHp="5100" maxMp="4459" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="877" block="877" parry="877" attack="18" accuracy="716" pcrit="3" mcrit="50" macc="883" strike_resist="72">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="63">
-		<stats_template maxHp="5231" maxMp="4529" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="889" block="889" parry="889" attack="18" accuracy="724" pcrit="3" macc="897">
+		<stats_template maxHp="5231" maxMp="4529" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="889" block="889" parry="889" attack="18" accuracy="724" pcrit="3" mcrit="50" macc="897" strike_resist="78">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="64">
-		<stats_template maxHp="5363" maxMp="4600" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="902" block="902" parry="902" attack="18" accuracy="732" pcrit="3" macc="912">
+		<stats_template maxHp="5363" maxMp="4600" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="902" block="902" parry="902" attack="18" accuracy="732" pcrit="3" mcrit="50" macc="912" strike_resist="84">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By ginho1 08/2014 at NA Retail -->
 	<player_stats class="RANGER" level="65">
-		<stats_template maxHp="5497" maxMp="4671" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="914" block="914" parry="914" attack="18" accuracy="740" pcrit="3" macc="926">
+		<stats_template maxHp="5497" maxMp="4671" power="100" health="100" agility="115" base_accuracy="115" knowledge="90" will="90" evasion="914" block="914" parry="914" attack="18" accuracy="740" pcrit="3" mcrit="50" macc="926" strike_resist="90">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>

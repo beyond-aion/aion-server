@@ -65,6 +65,10 @@ public class NpcData {
 				npc.getStatsTemplate().setMacc(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ACCURACY, rating, rank, level));
 			if (npc.getStatsTemplate().getMresist() == 0)
 				npc.getStatsTemplate().setMresist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_RESIST, rating, rank, level));
+			if (npc.getStatsTemplate().getMcrit() == 0)
+				npc.getStatsTemplate().setMcrit(50);
+			if (npc.getStatsTemplate().getPcrit() == 0)
+				npc.getStatsTemplate().setPcrit(10);
 			if (npc.getStatsTemplate().getPdef() == 0)
 				npc.getStatsTemplate().setPdef(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_DEFENSE, rating, rank, level));
 			if (npc.getStatsTemplate().getParry() == 0)

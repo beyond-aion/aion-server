@@ -38,11 +38,6 @@ public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public int modifyMaccuracy(int value) {
-		return 1200;
-	}
-
-	@Override
 	public ItemAttackType modifyAttackType(ItemAttackType type) {
 		return ItemAttackType.MAGICAL_EARTH;
 	}

@@ -60,8 +60,13 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
+	public NpcStatsTemplate getStatsTemplate() {
+		return owner.getObjectTemplate().getStatsTemplate();
+	}
+
+	@Override
 	public Stat2 getMaxHp() {
-		Stat2 stat = getStat(StatEnum.MAXHP, owner.getObjectTemplate().getStatsTemplate().getMaxHp());
+		Stat2 stat = super.getMaxHp();
 		if (owner.getSpawn() instanceof SiegeSpawnTemplate
 			&& owner.getRating() == NpcRating.LEGENDARY
 			&& (owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS || owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.GUARD
@@ -71,28 +76,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 getMaxMp() {
-		return getStat(StatEnum.MAXMP, owner.getObjectTemplate().getStatsTemplate().getMaxMp());
-	}
-
-	@Override
 	public Stat2 getAttackSpeed() {
 		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackDelay());
-	}
-
-	@Override
-	public Stat2 getPCR() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getStrikeResist());
-	}
-
-	@Override
-	public Stat2 getMCR() {
-		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getSpellResist());
-	}
-
-	@Override
-	public Stat2 getAllSpeed() {
-		return getStat(StatEnum.ALLSPEED, 7500); // TODO current value
 	}
 
 	@Override
@@ -107,20 +92,20 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			float speed = 0;
 			if (owner.getWalkerGroup() != null)
-				speed = owner.getObjectTemplate().getStatsTemplate().getGroupRunSpeedFight();
+				speed = getStatsTemplate().getGroupRunSpeedFight();
 			else
-				speed = owner.getObjectTemplate().getStatsTemplate().getRunSpeedFight();
+				speed = getStatsTemplate().getRunSpeedFight();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
 		} else if (owner.isInState(CreatureState.WALKING)) {
 			float speed = 0;
 			if (owner.getWalkerGroup() != null && owner.getAi2().getSubState() == AISubState.WALK_PATH)
-				speed = owner.getObjectTemplate().getStatsTemplate().getGroupWalkSpeed();
+				speed = getStatsTemplate().getGroupWalkSpeed();
 			else
-				speed = owner.getObjectTemplate().getStatsTemplate().getWalkSpeed();
+				speed = getStatsTemplate().getWalkSpeed();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
 		} else {
 			float multiplier = owner.isFlying() ? 1.3f : 1.0f;
-			newSpeedStat = getStat(StatEnum.SPEED, Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * multiplier * 1000));
+			newSpeedStat = getStat(StatEnum.SPEED, Math.round(getStatsTemplate().getRunSpeed() * multiplier * 1000));
 		}
 		cachedState = currentState;
 		cachedSpeedStat = newSpeedStat;
@@ -133,122 +118,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 getPDef() {
-		int pdef = owner.getObjectTemplate().getStatsTemplate().getPdef();
-		return getStat(StatEnum.PHYSICAL_DEFENSE, owner.getAi2().modifyPdef(pdef));
-	}
-
-	@Override
-	public Stat2 getMDef() {
-		return getStat(StatEnum.MAGICAL_DEFEND, 0);
-	}
-
-	@Override
-	public Stat2 getMResist() {
-		return getStat(StatEnum.MAGICAL_RESIST, owner.getObjectTemplate().getStatsTemplate().getMresist());
-	}
-
-	@Override
-	public Stat2 getMBResist() {
-		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, owner.getObjectTemplate().getStatsTemplate().getMsup());
-	}
-
-	@Override
-	public Stat2 getPower() {
-		return getStat(StatEnum.POWER, 100);
-	}
-
-	@Override
-	public Stat2 getHealth() {
-		return getStat(StatEnum.HEALTH, 100);
-	}
-
-	@Override
-	public Stat2 getAccuracy() {
-		return getStat(StatEnum.ACCURACY, 100);
-	}
-
-	@Override
-	public Stat2 getAgility() {
-		return getStat(StatEnum.AGILITY, 100);
-	}
-
-	@Override
-	public Stat2 getKnowledge() {
-		return getStat(StatEnum.KNOWLEDGE, 100);
-	}
-
-	@Override
-	public Stat2 getWill() {
-		return getStat(StatEnum.WILL, 100);
-	}
-
-	@Override
-	public Stat2 getEvasion() {
-		return getStat(StatEnum.EVASION, owner.getObjectTemplate().getStatsTemplate().getEvasion());
-	}
-
-	@Override
-	public Stat2 getParry() {
-		return getStat(StatEnum.PARRY, owner.getObjectTemplate().getStatsTemplate().getParry());
-	}
-
-	@Override
-	public Stat2 getBlock() {
-		return getStat(StatEnum.BLOCK, owner.getObjectTemplate().getStatsTemplate().getBlock());
-	}
-
-	@Override
-	public Stat2 getMainHandPAttack() {
-		int atk = owner.getObjectTemplate().getStatsTemplate().getAttack();
-		if (owner.getRating() == NpcRating.NORMAL) { // FIXME: fix templates or formula
-			if (owner.getLevel() <= 50)
-				atk *= 0.75f;
-			else
-				atk *= 0.8f;
-		}
-		return getStat(StatEnum.PHYSICAL_ATTACK, atk);
-	}
-
-	@Override
-	public Stat2 getMainHandPCritical() {
-		return getStat(StatEnum.PHYSICAL_CRITICAL, owner.getObjectTemplate().getStatsTemplate().getPcrit());
-	}
-
-	@Override
-	public Stat2 getMainHandPAccuracy() {
-		return getStat(StatEnum.PHYSICAL_ACCURACY, owner.getObjectTemplate().getStatsTemplate().getAccuracy());
-	}
-
-	@Override
-	public Stat2 getMainHandMAttack() {
-		int matk = owner.getObjectTemplate().getStatsTemplate().getMagicalAttack();
-		return getStat(StatEnum.MAGICAL_ATTACK, owner.getAi2().modifyMattack(matk));
-	}
-
-	@Override
-	public Stat2 getMBoost() {
-		return getStat(StatEnum.BOOST_MAGICAL_SKILL, owner.getObjectTemplate().getStatsTemplate().getMagicBoost());
-	}
-
-	@Override
-	public Stat2 getMAccuracy() {
-		int base = owner.getAi2().modifyMaccuracy(owner.getObjectTemplate().getStatsTemplate().getMacc());
-		return getStat(StatEnum.MAGICAL_ACCURACY, base);
-	}
-
-	@Override
-	public Stat2 getMCritical() {
-		int value = owner.getObjectTemplate().getStatsTemplate().getMcrit();
-		if (value == 0)
-			value = 50;
-		return getStat(StatEnum.MAGICAL_CRITICAL, value);
-	}
-
-	@Override
 	public Stat2 getHpRegenRate() {
-		NpcStatsTemplate nst = owner.getObjectTemplate().getStatsTemplate();
-		return getStat(StatEnum.REGEN_HP, nst.getMaxHp() / 4);
+		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / 4);
 	}
 
 	@Override

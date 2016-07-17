@@ -6,15 +6,14 @@ import static ch.lambdaj.Lambda.selectMax;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -52,7 +51,7 @@ class PhysicalAttackFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat) {
 		if (stat.getOwner() instanceof Player) {
-			PlayerStatsTemplate pst = DataManager.PLAYER_STATS_DATA.getTemplate(((Player) stat.getOwner()).getPlayerClass(), ((Player) stat.getOwner()).getLevel());
+			PlayerStatsTemplate pst = ((Player) stat.getOwner()).getGameStats().getStatsTemplate();
 			if (stat.getBase() == pst.getAttack())
 				return;
 		}
@@ -94,7 +93,6 @@ class MaxMpFunction extends StatFunction {
 	public void apply(Stat2 stat) {
 		float will = stat.getOwner().getGameStats().getWill().getCurrent();
 		stat.setBaseRate(will * 0.01f);
-
 	}
 
 	@Override

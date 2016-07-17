@@ -54,12 +54,6 @@ public interface AI2 {
 
 	int modifyHealValue(int value);
 
-	int modifyMaccuracy(int value);
-
-	int modifyMattack(int value);
-
-	int modifyPdef(int value);
-
 	ItemAttackType modifyAttackType(ItemAttackType type);
 
 	int modifyARange(int value);

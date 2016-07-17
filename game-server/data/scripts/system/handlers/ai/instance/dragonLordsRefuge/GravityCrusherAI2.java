@@ -99,11 +99,6 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public int modifyMaccuracy(int value) {
-		return 1200;
-	}
-
-	@Override
 	public boolean canThink() {
 		return false;
 	}

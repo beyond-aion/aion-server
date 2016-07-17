@@ -2,55 +2,55 @@
 <player_stats_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../stats.xsd">
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="1">
-		<stats_template maxHp="201" maxMp="375" evasion="74" block="74" parry="74" attack="18" accuracy="198" pcrit="2" macc="14" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="201" maxMp="375" evasion="74" block="74" parry="74" attack="18" accuracy="198" pcrit="2" mcrit="50" macc="14" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="2">
-		<stats_template maxHp="243" maxMp="480" evasion="86" block="86" parry="86" attack="18" accuracy="206" pcrit="2" macc="28" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="243" maxMp="480" evasion="86" block="86" parry="86" attack="18" accuracy="206" pcrit="2" mcrit="50" macc="28" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="3">
-		<stats_template maxHp="287" maxMp="585" evasion="99" block="99" parry="99" attack="18" accuracy="214" pcrit="2" macc="42" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="287" maxMp="585" evasion="99" block="99" parry="99" attack="18" accuracy="214" pcrit="2" mcrit="50" macc="42" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="4">
-		<stats_template maxHp="333" maxMp="690" evasion="111" block="111" parry="111" attack="18" accuracy="222" pcrit="2" macc="57" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="333" maxMp="690" evasion="111" block="111" parry="111" attack="18" accuracy="222" pcrit="2" mcrit="50" macc="57" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="5">
-		<stats_template maxHp="381" maxMp="795" evasion="124" block="124" parry="124" attack="18" accuracy="230" pcrit="2" macc="71" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="381" maxMp="795" evasion="124" block="124" parry="124" attack="18" accuracy="230" pcrit="2" mcrit="50" macc="71" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="6">
-		<stats_template maxHp="431" maxMp="900" evasion="136" block="136" parry="136" attack="18" accuracy="238" pcrit="2" macc="85" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="431" maxMp="900" evasion="136" block="136" parry="136" attack="18" accuracy="238" pcrit="2" mcrit="50" macc="85" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="7">
-		<stats_template maxHp="483" maxMp="1005" evasion="148" block="148" parry="148" attack="18" accuracy="246" pcrit="2" macc="99" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="483" maxMp="1005" evasion="148" block="148" parry="148" attack="18" accuracy="246" pcrit="2" mcrit="50" macc="99" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="8">
-		<stats_template maxHp="537" maxMp="1110" evasion="161" block="161" parry="161" attack="18" accuracy="254" pcrit="2" macc="114" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="537" maxMp="1110" evasion="161" block="161" parry="161" attack="18" accuracy="254" pcrit="2" mcrit="50" macc="114" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
 	<!-- Checked By Kamui 10/2009 at US Retail -->
 	<player_stats class="PRIEST" level="9">
-		<stats_template maxHp="594" maxMp="1215" evasion="173" block="173" parry="173" attack="18" accuracy="262" pcrit="2" macc="128" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
+		<stats_template maxHp="594" maxMp="1215" evasion="173" block="173" parry="173" attack="18" accuracy="262" pcrit="2" mcrit="50" macc="128" power="95" health="95" agility="100" base_accuracy="100" knowledge="100" will="110">
 			<speeds walk="1.5" run="6" fly="9"/>
 		</stats_template>
 	</player_stats>
