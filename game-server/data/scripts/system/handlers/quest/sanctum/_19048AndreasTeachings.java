@@ -65,6 +65,6 @@ public class _19048AndreasTeachings extends QuestHandler {
 				return HandlerResult.SUCCESS;
 			}
 		}
-		return HandlerResult.FAILED;
+		return HandlerResult.UNKNOWN;
 	}
 }

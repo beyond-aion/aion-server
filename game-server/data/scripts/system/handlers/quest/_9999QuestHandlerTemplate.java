@@ -107,6 +107,6 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));
 			}
 		}
-		return HandlerResult.FAILED;
+		return HandlerResult.UNKNOWN; // allow other quests to process, the same item can be used in multiple quests
 	}
 }
