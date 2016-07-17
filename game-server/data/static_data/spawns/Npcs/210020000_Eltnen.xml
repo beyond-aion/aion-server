@@ -7055,5 +7055,9 @@
 		<spawn npc_id="804515" respawn_time="295">
 			<spot x="263.5851" y="2742.388" z="270.6597" h="105"/>
 		</spawn>
+		<!-- Changarnerk Glove Box -->
+		<spawn npc_id="211867" respawn_time="295">
+			<spot x="2310.8" y="423.5" z="487.875" h="120"/>
+		</spawn>
 	</spawn_map>
 </spawns>
