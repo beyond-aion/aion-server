@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "stats_template")
-public abstract class StatsTemplate {
+public class StatsTemplate {
 
 	@XmlAttribute(name = "maxHp")
 	private int maxHp;

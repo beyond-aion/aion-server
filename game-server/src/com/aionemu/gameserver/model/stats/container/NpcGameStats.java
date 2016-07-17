@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
+import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -60,7 +60,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public NpcStatsTemplate getStatsTemplate() {
+	public StatsTemplate getStatsTemplate() {
 		return owner.getObjectTemplate().getStatsTemplate();
 	}
 

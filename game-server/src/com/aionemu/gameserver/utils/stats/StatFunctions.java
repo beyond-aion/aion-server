@@ -57,16 +57,47 @@ public class StatFunctions {
 	 */
 	public static long calculateExperienceReward(int maxLevelInRange, Npc target) {
 		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
-		int targetLevel = target.getLevel();
-		int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
-		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier();
+		int baseXP = calculateBaseExp(target);
+		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier(); // map modifier to approach retail exp values
 		if (instance.getParent().isInstanceType() && MathUtil.isBetween(2, 6, instance.getPlayerMaxSize())) {
 			mapMulti *= instance.getPlayerMaxSize(); // on retail you get mob EP * max instance member count (only for group instances)
 			mapMulti /= RateConfig.XP_RATE; // custom: divide by regular xp rates, so they will not affect the rewarded XP
 		}
-		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - maxLevelInRange);
+		int xpPercentage = XPRewardEnum.xpRewardFrom(target.getLevel() - maxLevelInRange);
 		long rewardXP = Math.round(baseXP * mapMulti * (xpPercentage / 100f));
 		return rewardXP;
+	}
+
+	/**
+	 * @param npc
+	 * @return Experience value identical to the ones seen on aion databases (but seen retail exp rewards are always higher)
+	 */
+	private static int calculateBaseExp(Npc npc) {
+		int maxHp = npc.getObjectTemplate().getStatsTemplate().getMaxHp();
+		if (maxHp <= 0)
+			return 0;
+		float multiplier;
+		switch (npc.getRating()) {
+			case JUNK:
+				multiplier = 2f;
+				break;
+			case NORMAL:
+				multiplier = 2.2f;
+				break;
+			case ELITE:
+				multiplier = 4f;
+				break;
+			case HERO:
+				multiplier = 5.4f;
+				break;
+			case LEGENDARY:
+				multiplier = 6.4f;
+				break;
+			default:
+				throw new IllegalArgumentException("Could not calculate experience reward for " + npc + " due to unknown rating.");
+		}
+		multiplier += npc.getRank().ordinal() * 0.2f;
+		return Math.round(maxHp * multiplier);
 	}
 
 	/**
