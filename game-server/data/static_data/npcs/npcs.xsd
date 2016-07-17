@@ -14,7 +14,7 @@
 	</xs:complexType>
 	<xs:complexType name="npcTemplate">
 		<xs:sequence>
-			<xs:element name="stats" type="npcStatsTemplate"/>
+			<xs:element name="stats" type="statsTemplate"/>
 			<xs:element name="equipment" type="npcEquipmentList" minOccurs="0"/>
 			<xs:element name="kisk_stats" type="KiskStats" minOccurs="0"/>
 			<xs:element name="bound_radius" type="BoundRadius" minOccurs="0" maxOccurs="1"/>
@@ -49,13 +49,6 @@
 		<xs:attribute name="flag_type" type="xs:int"/>
 		<xs:attribute name="war_flag" type="xs:int"/>
 		<xs:attribute name="item_upgrade" type="xs:int"/>
-	</xs:complexType>
-	<xs:complexType name="npcStatsTemplate">
-		<xs:complexContent>
-			<xs:extension base="statsTemplate">
-				<xs:attribute name="maxXp" type="xs:int"/>
-			</xs:extension>
-		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="npcEquipmentList">
 		<xs:sequence>

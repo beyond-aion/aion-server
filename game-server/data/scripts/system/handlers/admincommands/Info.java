@@ -20,6 +20,7 @@ import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.ClusteredNpc;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author Nemiroff Date: 28.12.2009
@@ -125,7 +126,7 @@ public class Info extends AdminCommand {
 			sendInfo(admin,
 				"[Life stats]" + "\nHP: " + npc.getLifeStats().getCurrentHp() + " / " + npc.getLifeStats().getMaxHp() + "\nMP: "
 					+ npc.getLifeStats().getCurrentMp() + " / " + npc.getLifeStats().getMaxMp() + "\nXP: "
-					+ npc.getObjectTemplate().getStatsTemplate().getMaxXp());
+					+ StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
 			sendInfo(admin,
 				"[Sense range]" + "\nRadius: " + npc.getAggroRange() + "\nSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + " / Front: "
 					+ npc.getObjectTemplate().getBoundRadius().getFront() + "\nDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)

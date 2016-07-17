@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
-import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
+import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 
 /**
  * @author Luno
@@ -47,7 +47,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	private float height = 1;
 
 	@XmlElement(name = "stats")
-	private NpcStatsTemplate statsTemplate;
+	private StatsTemplate statsTemplate;
 
 	@XmlElement(name = "equipment")
 	private NpcEquippedGear equipment;
@@ -156,11 +156,11 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return level;
 	}
 
-	public NpcStatsTemplate getStatsTemplate() {
+	public StatsTemplate getStatsTemplate() {
 		return statsTemplate;
 	}
 
-	public void setStatsTemplate(NpcStatsTemplate statsTemplate) {
+	public void setStatsTemplate(StatsTemplate statsTemplate) {
 		this.statsTemplate = statsTemplate;
 	}
 

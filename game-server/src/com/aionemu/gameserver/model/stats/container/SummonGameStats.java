@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.summons.SummonMode;
-import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
+import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -76,7 +76,7 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public NpcStatsTemplate getStatsTemplate() {
+	public StatsTemplate getStatsTemplate() {
 		return owner.getObjectTemplate().getStatsTemplate();
 	}
 

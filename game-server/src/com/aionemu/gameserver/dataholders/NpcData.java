@@ -12,13 +12,13 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.NpcStatCalculation;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -51,12 +51,10 @@ public class NpcData {
 						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogId + " for Npc " + npc.getTemplateId());
 				}
 			}
-			if (npc.getNpcTemplateType() != NpcTemplateType.SUMMON_PET) {
+			if (npc.getTribe() != TribeClass.PET && npc.getTribe() != TribeClass.PET_DARK) { // summons and siege weapons have fixed stats
 				NpcRating rating = npc.getRating();
 				NpcRank rank = npc.getRank();
 				int level = npc.getLevel();
-				if (npc.getStatsTemplate().getMaxXp() == 0 && npc.getStatsTemplate().getMaxHp() > 0)
-					npc.getStatsTemplate().setMaxXp(NpcStatCalculation.calculateExp(rating, rank, npc.getStatsTemplate().getMaxHp()));
 				if (npc.getStatsTemplate().getAttack() == 0)
 					npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
 				if (npc.getStatsTemplate().getAccuracy() == 0)
