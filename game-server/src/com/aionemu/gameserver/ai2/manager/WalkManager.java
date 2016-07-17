@@ -255,8 +255,8 @@ public class WalkManager {
 					if (distToSpawn > walkRange) {
 						owner.getMoveController().moveToPoint(owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
 					} else {
-						int nextX = Rnd.nextInt(walkRange * 2) - walkRange;
-						int nextY = Rnd.nextInt(walkRange * 2) - walkRange;
+						int nextX = Rnd.get(walkRange * 2) - walkRange;
+						int nextY = Rnd.get(walkRange * 2) - walkRange;
 						if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
 							byte flags = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId() | CollisionIntention.WALK.getId());
 							Vector3f loc = GeoService.getInstance().getClosestCollision(owner, owner.getX() + nextX, owner.getY() + nextY, owner.getZ(), true,

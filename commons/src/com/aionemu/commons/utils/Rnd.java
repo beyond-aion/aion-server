@@ -1,7 +1,7 @@
 package com.aionemu.commons.utils;
 
 /**
- * @author Balancer
+ * @author Balancer, Neon
  */
 public class Rnd {
 
@@ -9,65 +9,63 @@ public class Rnd {
 
 	/**
 	 * @return Random number from 0.0f (inclusive) to 1.0f (exclusive)
-	 * @see java.util.Random#nextFloat()
+	 * @see MTRandom#nextFloat()
 	 */
-	public static float get()
-	{
+	public static float get() {
 		return rnd.nextFloat();
 	}
 
 	/**
-	 * Gets a random number from 0(inclusive) to n(exclusive)
+	 * Gets a random number from 0 (inclusive) to n (exclusive)
 	 * 
 	 * @param n
-	 *          The superior limit (exclusive)
-	 * @return A number from 0 to n-1
+	 * @return A number between 0 and n-1
 	 */
 	public static int get(int n) {
-		return (int) Math.floor(rnd.nextDouble() * n);
+		return (int) Math.floor(rnd.nextFloat() * n);
 	}
 
 	/**
+	 * Gets a random number from min (inclusive) to max (inclusive)
+	 * 
 	 * @param min
 	 * @param max
-	 * @return Integer between min(inclusive) and max(inclusive)
+	 * @return A number between min and max
 	 */
-	public static int get(int min, int max) 
-	{
-		return min + (int) Math.floor(rnd.nextDouble() * (max - min + 1));
+	public static int get(int min, int max) {
+		return min + (int) Math.floor(rnd.nextFloat() * (max - min + 1));
 	}
 
 	/**
-	 * @param n
-	 * @return n
-	 */
-	public static int nextInt(int n) {
-		return (int) Math.floor(rnd.nextDouble() * n);
-	}
-
-	/**
-	 * @return int
+	 * @see MTRandom#nextInt()
 	 */
 	public static int nextInt() {
 		return rnd.nextInt();
 	}
 
 	/**
-	 * @return double
+	 * @see MTRandom#nextFloat()
+	 */
+	public static double nextFloat() {
+		return rnd.nextFloat();
+	}
+
+	/**
+	 * @see MTRandom#nextDouble()
 	 */
 	public static double nextDouble() {
 		return rnd.nextDouble();
 	}
 
 	/**
-	 * @return double
+	 * @see MTRandom#nextGaussian()
 	 */
 	public static double nextGaussian() {
 		return rnd.nextGaussian();
 	}
 
 	/**
-	 * @return double
+	 * @see MTRandom#nextBoolean()
 	 */
 	public static boolean nextBoolean() {
 		return rnd.nextBoolean();

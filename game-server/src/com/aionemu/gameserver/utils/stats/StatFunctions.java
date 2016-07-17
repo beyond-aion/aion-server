@@ -744,7 +744,7 @@ public class StatFunctions {
 		// blockRate = blockRate*0.6f+50;
 		if (blockRate > 500)
 			blockRate = 500;
-		return Rnd.nextInt(1000) < blockRate;
+		return Rnd.get(1000) < blockRate;
 	}
 
 	/**
@@ -756,7 +756,7 @@ public class StatFunctions {
 		diff = diff * 0.6f + 50;
 		if (diff > upperCap)
 			diff = upperCap;
-		return Rnd.nextInt(1000) < diff;
+		return Rnd.get(1000) < diff;
 	}
 
 	/**
@@ -786,7 +786,7 @@ public class StatFunctions {
 			if (acStatus.isPercent())
 				critical *= (1 + acStatus.getValue() / 100);
 			else
-				return Rnd.nextInt(1000) < acStatus.getValue();
+				return Rnd.get(1000) < acStatus.getValue();
 		}
 
 		critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.PHYSICAL_CRITICAL_RESIST, critical);
@@ -803,7 +803,7 @@ public class StatFunctions {
 		else
 			criticalRate = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
 
-		return Rnd.nextInt(100) < criticalRate;
+		return Rnd.get(100) < criticalRate;
 	}
 
 	/**
