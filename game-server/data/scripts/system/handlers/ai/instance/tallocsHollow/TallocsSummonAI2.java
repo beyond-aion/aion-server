@@ -30,11 +30,11 @@ public class TallocsSummonAI2 extends NpcAI2 {
 		if (dialogId == DialogAction.MAKE_MERCENARY.id() && isTransformed.compareAndSet(false, true)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			if (player.getSummon() != null) { // to do remove
-				PacketSendUtility.sendMessage(player, "please dismiss your summon first.");
+				PacketSendUtility.sendMessage(player, "Please dismiss your summon first.");
 				return true;
 			}
 
-			Summon summon = new Summon(getObjectId(), new SummonController(), getSpawnTemplate(), getObjectTemplate(), getObjectTemplate().getLevel(), 0);
+			Summon summon = new Summon(getObjectId(), new SummonController(), getSpawnTemplate(), getObjectTemplate(), 0);
 			player.setSummon(summon);
 			summon.setMaster(player);
 			summon.setTarget(player.getTarget());

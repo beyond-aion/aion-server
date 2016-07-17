@@ -178,7 +178,6 @@
 					<xs:element ref="skill_tree" minOccurs="0" />
 					<xs:element ref="spawns" minOccurs="0" />
 					<xs:element ref="staticdoor_templates" minOccurs="0" />
-					<xs:element ref="summon_stats_templates" minOccurs="0" />
 					<xs:element ref="teleport_location" minOccurs="0" />
 					<xs:element ref="tempering_templates" minOccurs="0" />
 					<xs:element ref="town_spawns_data" minOccurs="0" />

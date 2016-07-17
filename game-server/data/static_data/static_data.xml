@@ -134,7 +134,6 @@
 	<import file="staticdoors/staticdoor_templates.xml" />
 	<import file="stats/absolute_stats.xml" />
 	<import file="stats/player" singleRootTag="true" />
-	<import file="stats/summon" singleRootTag="true" />
 	<import file="teleport_location.xml" />
 	<import file="town_spawns" singleRootTag="true" />
 	<import file="tribe/tribe_relations.xml" />

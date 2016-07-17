@@ -11,7 +11,6 @@ import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.PlayerAggroList;
 import com.aionemu.gameserver.controllers.movement.SiegeWeaponMoveController;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.SkillElement;
@@ -23,7 +22,6 @@ import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -33,37 +31,26 @@ public class Summon extends Creature {
 
 	private Player master;
 	private SummonMode mode = SummonMode.GUARD;
-	private byte level;
-	private int liveTime;
 	private Queue<SkillOrder> skillOrders = new LinkedList<>();
 	private Future<?> releaseTask;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
+	private int summonedBySkillId, liveTime;
 
 	/**
-	 * summoned by skill id
-	 */
-	private int summonedBySkillId;
-
-	/**
-	 *
 	 * @param objId
 	 * @param controller
 	 * @param spawnTemplate
 	 * @param objectTemplate
-	 * @param level
 	 * @param time
 	 */
-	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level,
-		int time) {
+	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, int time) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
 		String ai = objectTemplate.getAi();
 		AI2Engine.getInstance().setupAI(ai, this);
 		moveController = ai.equals("siege_weapon") ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
-		this.level = level;
 		this.liveTime = time;
-		SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(), level);
-		setGameStats(new SummonGameStats(this, statsTemplate));
+		setGameStats(new SummonGameStats(this));
 		setLifeStats(new SummonLifeStats(this));
 		setAlwaysResistElement(objectTemplate);
 	}
@@ -71,7 +58,7 @@ public class Summon extends Creature {
 	private void setAlwaysResistElement(NpcTemplate template) {
 		if (template != null) {
 			switch (template.getName()) {
-				case  "lava spirit":
+				case "lava spirit":
 					this.alwaysResistElement = SkillElement.MAGMA;
 					break;
 				case "tempest spirit":
@@ -126,7 +113,7 @@ public class Summon extends Creature {
 	 */
 	@Override
 	public byte getLevel() {
-		return level;
+		return getObjectTemplate().getLevel();
 	}
 
 	@Override

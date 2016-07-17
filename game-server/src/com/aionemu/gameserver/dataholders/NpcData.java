@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -50,31 +51,33 @@ public class NpcData {
 						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogId + " for Npc " + npc.getTemplateId());
 				}
 			}
-			NpcRating rating = npc.getRating();
-			NpcRank rank = npc.getRank();
-			int level = npc.getLevel();
-			if (npc.getStatsTemplate().getMaxHp() >= 0)
-				npc.getStatsTemplate().setMaxXp(NpcStatCalculation.calculateExp(rating, rank, npc.getStatsTemplate().getMaxHp()));
-			if (npc.getStatsTemplate().getAttack() == 0)
-				npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
-			if (npc.getStatsTemplate().getAccuracy() == 0)
-				npc.getStatsTemplate().setAccuracy(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ACCURACY, rating, rank, level));
-			if (npc.getStatsTemplate().getMagicalAttack() == 0)
-				npc.getStatsTemplate().setMagicalAttack(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ATTACK, rating, rank, level));
-			if (npc.getStatsTemplate().getMacc() == 0)
-				npc.getStatsTemplate().setMacc(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ACCURACY, rating, rank, level));
-			if (npc.getStatsTemplate().getMresist() == 0)
-				npc.getStatsTemplate().setMresist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_RESIST, rating, rank, level));
-			if (npc.getStatsTemplate().getMcrit() == 0)
-				npc.getStatsTemplate().setMcrit(50);
-			if (npc.getStatsTemplate().getPcrit() == 0)
-				npc.getStatsTemplate().setPcrit(10);
-			if (npc.getStatsTemplate().getPdef() == 0)
-				npc.getStatsTemplate().setPdef(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_DEFENSE, rating, rank, level));
-			if (npc.getStatsTemplate().getParry() == 0)
-				npc.getStatsTemplate().setParry(NpcStatCalculation.calculateStat(StatEnum.PARRY, rating, rank, level));
-			if (level >= 60 && npc.getStatsTemplate().getStrikeResist() == 0)
-				npc.getStatsTemplate().setStrikeResist(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_CRITICAL_RESIST, rating, rank, level));
+			if (npc.getNpcTemplateType() != NpcTemplateType.SUMMON_PET) {
+				NpcRating rating = npc.getRating();
+				NpcRank rank = npc.getRank();
+				int level = npc.getLevel();
+				if (npc.getStatsTemplate().getMaxXp() == 0 && npc.getStatsTemplate().getMaxHp() > 0)
+					npc.getStatsTemplate().setMaxXp(NpcStatCalculation.calculateExp(rating, rank, npc.getStatsTemplate().getMaxHp()));
+				if (npc.getStatsTemplate().getAttack() == 0)
+					npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
+				if (npc.getStatsTemplate().getAccuracy() == 0)
+					npc.getStatsTemplate().setAccuracy(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ACCURACY, rating, rank, level));
+				if (npc.getStatsTemplate().getMagicalAttack() == 0)
+					npc.getStatsTemplate().setMagicalAttack(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ATTACK, rating, rank, level));
+				if (npc.getStatsTemplate().getMacc() == 0)
+					npc.getStatsTemplate().setMacc(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ACCURACY, rating, rank, level));
+				if (npc.getStatsTemplate().getMresist() == 0)
+					npc.getStatsTemplate().setMresist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_RESIST, rating, rank, level));
+				if (npc.getStatsTemplate().getMcrit() == 0)
+					npc.getStatsTemplate().setMcrit(50);
+				if (npc.getStatsTemplate().getPcrit() == 0)
+					npc.getStatsTemplate().setPcrit(10);
+				if (npc.getStatsTemplate().getPdef() == 0)
+					npc.getStatsTemplate().setPdef(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_DEFENSE, rating, rank, level));
+				if (npc.getStatsTemplate().getParry() == 0)
+					npc.getStatsTemplate().setParry(NpcStatCalculation.calculateStat(StatEnum.PARRY, rating, rank, level));
+				if (level >= 60 && npc.getStatsTemplate().getStrikeResist() == 0)
+					npc.getStatsTemplate().setStrikeResist(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_CRITICAL_RESIST, rating, rank, level));
+			}
 		}
 		npcs.clear();
 		npcs = null;

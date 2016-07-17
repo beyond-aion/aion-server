@@ -101,14 +101,4 @@ public class SkillLearnService {
 		}
 		return false;
 	}
-
-	public static int getSkillMinLevel(Player player, int skillId, int wantedSkillLevel) {
-		int nearestMinLevel = 0;
-		for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(),
-			player.getLevel())) {
-			if (template.getSkillLevel() <= wantedSkillLevel)
-				nearestMinLevel = Math.max(template.getMinLevel(), nearestMinLevel);
-		}
-		return nearestMinLevel == 0 ? player.getLevel() : nearestMinLevel;
-	}
 }

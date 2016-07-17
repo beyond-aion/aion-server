@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.summons.SummonMode;
-import com.aionemu.gameserver.model.templates.stats.SummonStatsTemplate;
+import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -16,15 +16,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	private int cachedSpeed;
-	private final SummonStatsTemplate statsTemplate;
 
 	/**
 	 * @param owner
 	 * @param statsTemplate
 	 */
-	public SummonGameStats(Summon owner, SummonStatsTemplate statsTemplate) {
+	public SummonGameStats(Summon owner) {
 		super(owner);
-		this.statsTemplate = statsTemplate;
 	}
 
 	@Override
@@ -78,8 +76,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public SummonStatsTemplate getStatsTemplate() {
-		return statsTemplate;
+	public NpcStatsTemplate getStatsTemplate() {
+		return owner.getObjectTemplate().getStatsTemplate();
 	}
 
 	@Override
@@ -125,5 +123,4 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));
 	}
-
 }

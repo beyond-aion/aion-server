@@ -52,7 +52,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -413,13 +412,7 @@ public class VisibleObjectSpawner {
 		return homing;
 	}
 
-	/**
-	 * @param creator
-	 * @param npcId
-	 * @param skillLevel
-	 * @return
-	 */
-	public static Summon spawnSummon(Player creator, int npcId, int skillId, int skillLevel, int time) {
+	public static Summon spawnSummon(Player creator, int npcId, int skillId, int time) {
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(creator.getHeading()));
 		float x = creator.getX() + (float) (Math.cos(radian) * 2);
 		float y = creator.getY() + (float) (Math.sin(radian) * 2);
@@ -431,10 +424,9 @@ public class VisibleObjectSpawner {
 		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
-		byte level = (byte) SkillLearnService.getSkillMinLevel(creator, skillId, skillLevel);
 		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
 		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId) : new SummonController(), spawn,
-			npcTemplate, isSiegeWeapon ? npcTemplate.getLevel() : level, time);
+			npcTemplate, time);
 		summon.setKnownlist(new CreatureAwareKnownList(summon));
 		summon.setEffectController(new EffectController(summon));
 		summon.setMaster(creator);

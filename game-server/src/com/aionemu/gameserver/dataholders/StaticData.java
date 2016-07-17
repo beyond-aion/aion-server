@@ -55,9 +55,6 @@ public class StaticData {
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
 
-	@XmlElement(name = "summon_stats_templates")
-	public SummonStatsData summonStatsData;
-
 	@XmlElement(name = "item_templates")
 	public ItemData itemData;
 
@@ -307,7 +304,6 @@ public class StaticData {
 		log.info("Loaded " + playerExperienceTable.getMaxLevel() + " player experience table entries");
 		log.info("Loaded " + playerStatsData.size() + " player stat templates");
 		log.info("Loaded " + absoluteStatsData.size() + " absolute stat templates");
-		log.info("Loaded " + summonStatsData.size() + " summon stat templates");
 		log.info("Loaded " + itemCleanup.size() + " item cleanup entries");
 		log.info("Loaded " + itemData.size() + " item templates");
 		log.info("Loaded " + itemRandomBonuses.size() + " item bonus templates");

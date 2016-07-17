@@ -10,14 +10,6 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="summon_stats_templates">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="summon_stats" type="summonStatsTemplateType" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 	<xs:complexType name="playerStatsTemplateType">
 		<xs:sequence>
 			<xs:element name="stats_template" type="playerStatsTemplate" minOccurs="0"/>
@@ -35,19 +27,6 @@
 				<xs:attribute name="knowledge" type="xs:int" use="required"/>
 				<xs:attribute name="will" type="xs:int" use="required"/>
 			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="summonStatsTemplateType">
-		<xs:sequence>
-			<xs:element name="stats_template" type="summonStatsTemplate" minOccurs="0"/>
-		</xs:sequence>
-		<xs:attribute name="npc_id_light" type="xs:int"/>
-		<xs:attribute name="npc_id_dark" type="xs:int"/>
-		<xs:attribute name="level" type="xs:byte" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="summonStatsTemplate">
-		<xs:complexContent>
-			<xs:extension base="statsTemplate"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="statsTemplate" abstract="true">

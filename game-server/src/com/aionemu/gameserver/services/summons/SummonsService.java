@@ -32,7 +32,7 @@ public class SummonsService {
 			PacketSendUtility.sendPacket(master, new SM_SYSTEM_MESSAGE(1300072));
 			return;
 		}
-		Summon summon = VisibleObjectSpawner.spawnSummon(master, npcId, skillId, skillLevel, time);
+		Summon summon = VisibleObjectSpawner.spawnSummon(master, npcId, skillId, time);
 		if (summon.getAi2().getName().equals("siege_weapon")) {
 			summon.getAi2().onGeneralEvent(AIEventType.SPAWNED);
 		}

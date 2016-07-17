@@ -93,7 +93,6 @@ public final class DataManager {
 	public static SkillTreeData SKILL_TREE_DATA;
 	public static SpawnsData2 SPAWNS_DATA2;
 	public static StaticDoorData STATICDOOR_DATA;
-	public static SummonStatsData SUMMON_STATS_DATA;
 	public static TeleLocationData TELELOCATION_DATA;
 	public static TeleporterData TELEPORTER_DATA;
 	public static TemperingData TEMPERING_DATA;
@@ -129,7 +128,6 @@ public final class DataManager {
 		MAP_WEATHER_DATA = data.mapWeatherData;
 		PLAYER_EXPERIENCE_TABLE = data.playerExperienceTable;
 		PLAYER_STATS_DATA = data.playerStatsData;
-		SUMMON_STATS_DATA = data.summonStatsData;
 		ABSOLUTE_STATS_DATA = data.absoluteStatsData;
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;
