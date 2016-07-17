@@ -299,7 +299,6 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	// TODO [AT] move
 	public void onEnterWorld() {
-		InstanceService.onEnterInstance(getOwner());
 		if (getOwner().getPosition().getWorldMapInstance().getParent().isExceptBuff()) {
 			getOwner().getEffectController().removeAllEffects();
 		}
@@ -317,6 +316,7 @@ public class PlayerController extends CreatureController<Player> {
 				getOwner().getEffectController().clearEffect(ef);
 			}
 		}
+		InstanceService.onEnterInstance(getOwner());
 	}
 
 	public void onDie(@Nonnull Creature lastAttacker) {
