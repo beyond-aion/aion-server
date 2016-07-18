@@ -3,7 +3,6 @@ package ai;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
@@ -12,6 +11,7 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -39,25 +39,23 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 	private Map<Integer, Long> playersInSight = new ConcurrentHashMap<>();
 	private final int price = 50000; // = 50.000 Kinah
 	private final int maxCooldownTime = 3000; // = 5min -> skills with a cd >5min are ignored
-	private Future<?> despawnSchedule;
 
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
-			despawnSchedule = ThreadPoolManager.getInstance().schedule(() ->
-					getOwner().getController().onDelete(), 30000);
+			getOwner().getController().addTask(TaskId.DESPAWN,
+				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().onDelete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
-			for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
-				if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) ||
-						playersInSight.containsKey(p.getObjectId()))
-					continue;
-				if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
-					playersInSight.put(p.getObjectId(), System.currentTimeMillis());
-					PacketSendUtility.sendPacket(p,
-							new SM_MESSAGE(getOwner(), String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
+				for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
+					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
+						continue;
+					if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
+						playersInSight.put(p.getObjectId(), System.currentTimeMillis());
+						PacketSendUtility.sendPacket(p, new SM_MESSAGE(getOwner(),
+							String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
+					}
 				}
-			}
 			}, 1000);
 		}
 	}
@@ -174,13 +172,5 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 				}
 			}
 		});
-	}
-
-	@Override
-	protected void handleDespawned() {
-		if (despawnSchedule != null && !despawnSchedule.isCancelled()) {
-			despawnSchedule.cancel(false);
-		}
-		super.handleDespawned();
 	}
 }

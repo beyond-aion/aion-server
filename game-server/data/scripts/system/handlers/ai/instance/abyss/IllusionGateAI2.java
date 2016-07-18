@@ -45,7 +45,7 @@ public class IllusionGateAI2 extends NoActionAI2 {
 	}
 
 	private void cancelTask() {
-		if (spawnTask != null && spawnTask.isCancelled())
+		if (spawnTask != null && !spawnTask.isCancelled())
 			spawnTask.cancel(true);
 	}
 

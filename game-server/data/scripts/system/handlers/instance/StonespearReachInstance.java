@@ -803,7 +803,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void cancelAllTasks() {
-		if (failTask != null && failTask.isCancelled()) {
+		if (failTask != null && !failTask.isCancelled()) {
 			failTask.cancel(false);
 		}
 		tasks.stream().filter(future -> future != null && !future.isCancelled()).forEach(future -> future.cancel(true));

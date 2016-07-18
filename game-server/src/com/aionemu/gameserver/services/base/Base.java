@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -24,6 +22,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastTable;
+
 /**
  * @author Source
  * @reworked Estrayl
@@ -31,13 +31,12 @@ import com.aionemu.gameserver.world.World;
 public abstract class Base<T extends BaseLocation> {
 
 	private final BaseBossDeathListener bossDeathListener = new BaseBossDeathListener(this);
-	private final List<SpawnGroup2> spawns;
 	private final T bLoc;
 	private final int id;
 	private List<Npc> assaulter = new FastTable<>();
 	private Future<?> assaultTask, assaultDespawnTask, bossSpawnTask, enhancedSpawnTask, outriderSpawnTask;
-	private AtomicBoolean isStarted = new AtomicBoolean(false);
-	private AtomicBoolean isFinished = new AtomicBoolean(false);
+	private AtomicBoolean isStarted = new AtomicBoolean();
+	private AtomicBoolean isFinished = new AtomicBoolean();
 	private Npc boss, flag;
 
 	protected abstract int getAssaultDelay();
@@ -51,7 +50,6 @@ public abstract class Base<T extends BaseLocation> {
 	Base(T bLoc) {
 		this.bLoc = bLoc;
 		this.id = bLoc.getId();
-		spawns = initSpawns();
 	}
 
 	public final void start() throws BaseException {
@@ -172,7 +170,7 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	public void spawnBySpawnHandler(SpawnHandlerType type, Race targetRace) {
-		for (SpawnGroup2 group : spawns) {
+		for (SpawnGroup2 group : DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id)) {
 			for (SpawnTemplate temp : group.getSpawnTemplates()) {
 				final BaseSpawnTemplate template = (BaseSpawnTemplate) temp;
 				if (template.getBaseRace().equals(targetRace)) {
@@ -222,14 +220,6 @@ public abstract class Base<T extends BaseLocation> {
 		} else {
 			throw new BaseException("Tried to initialize non-flag npc as flag for base ID:" + id);
 		}
-	}
-
-	private List<SpawnGroup2> initSpawns() throws NullPointerException {
-		List<SpawnGroup2> temp = DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id);
-		if (temp != null)
-			return temp;
-		else
-			throw new NullPointerException("No spawns found for base ID:" + id);
 	}
 
 	private SM_SYSTEM_MESSAGE getBossSpawnMsg() {
@@ -301,20 +291,18 @@ public abstract class Base<T extends BaseLocation> {
 	private void regDeathListener() {
 		if (boss == null)
 			throw new BaseException("Tried to register DeathListener for null boss! BaseID:" + id);
-		AbstractAI ai = (AbstractAI) getBoss().getAi2();
-		ai.addEventListener(bossDeathListener);
+		((AbstractAI) boss.getAi2()).addEventListener(bossDeathListener);
 	}
 
 	protected void unregDeathListener() {
 		if (boss == null)
 			return;
-		AbstractAI ai = (AbstractAI) getBoss().getAi2();
-		ai.removeEventListener(bossDeathListener);
+		((AbstractAI) boss.getAi2()).removeEventListener(bossDeathListener);
 	}
 
 	protected void cancelTask(Future<?>... tasks) {
 		for (Future<?> task : tasks) {
-			if (task != null && task.isCancelled())
+			if (!task.isDone())
 				task.cancel(true);
 		}
 	}
