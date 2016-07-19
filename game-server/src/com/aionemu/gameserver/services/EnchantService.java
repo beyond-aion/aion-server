@@ -289,7 +289,7 @@ public class EnchantService {
 
 		// Items that are Fabled or Eternal can get up to +15.
 		if (result) {
-			if (targetItem.isAmplified() && parentItem.getItemId() == 166020000) { // Omega Enchantment Stone
+			if (targetItem.isAmplified() && (parentItem.getItemId() == 166020000 || parentItem.getItemId() == 166020003)) { // Omega Enchantment Stone
 				currentEnchant += 1;
 			} else {
 				while (currentEnchant + addLevel > maxEnchant && addLevel > 0) {
