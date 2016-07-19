@@ -178,11 +178,11 @@ public class _20035SilenteraSupport extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env, 20031);
+		defaultOnQuestCompletedEvent(env, 20031, 20032, 20033, 20034);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player, 20031);
+		defaultOnLevelChangedEvent(player, 20031, 20032, 20033, 20034);
 	}
 }

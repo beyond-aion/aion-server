@@ -38,12 +38,12 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env, 14050);
+		defaultOnQuestCompletedEvent(env, 14050, 14051, 14052, 14053);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player, 14050);
+		defaultOnLevelChangedEvent(player, 14050, 14051, 14052, 14053);
 	}
 
 	@Override

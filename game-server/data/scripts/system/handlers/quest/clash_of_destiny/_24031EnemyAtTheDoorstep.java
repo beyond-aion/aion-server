@@ -25,6 +25,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 	@Override
 	public void register() {
 		int[] npc_ids = { 204052, 801224, 203550, 203654, 204369 };
+		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerQuestItem(182215394, questId);
@@ -227,6 +228,11 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player);
+		defaultOnLevelChangedEvent(player, 24030);
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+		defaultOnQuestCompletedEvent(env, 24030);
 	}
 }

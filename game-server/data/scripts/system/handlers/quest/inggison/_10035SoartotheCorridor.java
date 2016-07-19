@@ -171,11 +171,11 @@ public class _10035SoartotheCorridor extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		defaultOnQuestCompletedEvent(env, 10031);
+		defaultOnQuestCompletedEvent(env, 10031, 10032, 10033, 10034);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		defaultOnLevelChangedEvent(player, 10031);
+		defaultOnLevelChangedEvent(player, 10031, 10032, 10033, 10034);
 	}
 }
