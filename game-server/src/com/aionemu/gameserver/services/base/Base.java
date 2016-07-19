@@ -300,9 +300,13 @@ public abstract class Base<T extends BaseLocation> {
 		((AbstractAI) boss.getAi2()).removeEventListener(bossDeathListener);
 	}
 
+	/**
+	 * @param tasks
+	 *          - can be null if the base will be captured with command or under npc control
+	 */
 	protected void cancelTask(Future<?>... tasks) {
 		for (Future<?> task : tasks) {
-			if (!task.isDone())
+			if (task != null && !task.isDone())
 				task.cancel(true);
 		}
 	}
