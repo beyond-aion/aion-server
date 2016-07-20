@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -161,9 +160,7 @@ public class AhserionRaid {
 
 	private void scheduleObservation() {
 		observeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
-			Iterator<Player> iter = World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().playerIterator();
-			while (iter.hasNext()) {
-				Player player = iter.next();
+			for (Player player : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getPlayersInside()) {
 				if (!player.isGM()) {
 					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
 						player.setPanesterraTeam(null);
@@ -248,9 +245,7 @@ public class AhserionRaid {
 					team.moveToBindPoint();
 				}
 			}
-			Iterator<VisibleObject> iter = World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().objectIterator();
-			while (iter.hasNext()) {
-				VisibleObject obj = iter.next();
+			for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
 				if (obj instanceof Npc) {
 					((Npc) obj).getController().onDelete();
 				} else if (obj instanceof Player) {

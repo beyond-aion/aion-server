@@ -389,11 +389,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	public boolean isOnMap(Creature creature) {
-		if (creature instanceof Player) {
-			return instance.getPlayer(creature.getObjectId()) != null;
-		} else {
-			return creature instanceof Npc && instance.getNpcByObjId(creature.getObjectId()) != null;
-		}
+		return instance.getObject(creature.getObjectId()) != null;
 	}
 
 	private void addRespawnLocations() {

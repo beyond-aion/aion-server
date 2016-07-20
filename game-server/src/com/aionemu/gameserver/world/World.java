@@ -455,9 +455,8 @@ public class World {
 			if (oldMapRegion.getParent() != null)
 				oldMapRegion.getParent().removeObject(object);
 			oldMapRegion.remove(object);
-		}
-		if (oldMapRegion != null && object instanceof Creature) {
-			oldMapRegion.revalidateZones((Creature) object);
+			if (object instanceof Creature)
+				oldMapRegion.revalidateZones((Creature) object);
 		}
 		object.clearKnownlist(animation);
 	}

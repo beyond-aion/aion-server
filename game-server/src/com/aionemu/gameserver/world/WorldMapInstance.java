@@ -44,7 +44,7 @@ import javolution.util.FastTable;
  * 
  * @author -Nemesiss-
  */
-public abstract class WorldMapInstance {
+public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	/**
 	 * Logger for this class.
@@ -159,7 +159,7 @@ public abstract class WorldMapInstance {
 	 * @param object
 	 */
 	public void addObject(VisibleObject object) {
-		if (worldMapObjects.put(object.getObjectId(), object) != null) {
+		if (worldMapObjects.putIfAbsent(object.getObjectId(), object) != null) {
 			throw new DuplicateAionObjectException(object + " already spawned in instance " + getMapId() + " " + getInstanceId());
 		}
 		if (object instanceof Npc) {
@@ -210,88 +210,59 @@ public abstract class WorldMapInstance {
 		}
 	}
 
-	/**
-	 * @param npcId
-	 * @return npc
-	 */
-	public Npc getNpc(int npcId) {
-		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
-			VisibleObject obj = iter.next();
-			if (obj instanceof Npc) {
-				Npc npc = (Npc) obj;
-				if (npc.getNpcId() == npcId) {
-					return npc;
-				}
-			}
-		}
-		return null;
-	}
-
-	public Npc getNpcByObjId(int objectId) {
-		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
-			VisibleObject obj = iter.next();
-			if (obj instanceof Npc) {
-				Npc npc = (Npc) obj;
-				if (npc.getObjectId() == objectId) {
-					return npc;
-				}
-			}
-		}
-		return null;
+	public int playerCount() {
+		return worldMapPlayers.size();
 	}
 
 	public List<Player> getPlayersInside() {
-		List<Player> playersInside = new FastTable<Player>();
-		Iterator<Player> players = playerIterator();
-		while (players.hasNext()) {
-			playersInside.add(players.next());
-		}
-		return playersInside;
+		return FastTable.of(worldMapPlayers.values());
 	}
 
 	/**
-	 * @param npcId
-	 * @return List<npc>
+	 * Gets the player with the given object id in this world map instance
+	 * 
+	 * @param objId
+	 * @return Player or null if there is no player with this id on the map instance
 	 */
+	public Player getPlayer(int objId) {
+		return worldMapPlayers.get(objId);
+	}
+
+	public VisibleObject getObject(int objId) {
+		return worldMapObjects.get(objId);
+	}
+
+	public Npc getNpc(int npcId) {
+		for (VisibleObject v : worldMapObjects.values()) {
+			if (v.getObjectTemplate().getTemplateId() == npcId && v instanceof Npc)
+				return (Npc) v;
+		}
+		return null;
+	}
+
 	public List<Npc> getNpcs(int npcId) {
-		List<Npc> npcs = new FastTable<Npc>();
-		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
-			VisibleObject obj = iter.next();
-			if (obj instanceof Npc) {
-				Npc npc = (Npc) obj;
-				if (npc.getNpcId() == npcId) {
-					npcs.add(npc);
-				}
-			}
+		List<Npc> npcs = new FastTable<>();
+		for (VisibleObject v : worldMapObjects.values()) {
+			if (v.getObjectTemplate().getTemplateId() == npcId && v instanceof Npc)
+				npcs.add((Npc) v);
 		}
 		return npcs;
 	}
 
-	/**
-	 * @return List<npcs>
-	 */
 	public List<Npc> getNpcs() {
-		List<Npc> npcs = new FastTable<Npc>();
-		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
-			VisibleObject obj = iter.next();
-			if (obj instanceof Npc) {
-				npcs.add((Npc) obj);
-			}
+		List<Npc> npcs = new FastTable<>();
+		for (VisibleObject v : worldMapObjects.values()) {
+			if (v instanceof Npc)
+				npcs.add((Npc) v);
 		}
 		return npcs;
 	}
 
-	/**
-	 * @return List<doors>
-	 */
 	public Map<Integer, StaticDoor> getDoors() {
-		Map<Integer, StaticDoor> doors = new HashMap<Integer, StaticDoor>();
-		for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
-			VisibleObject obj = iter.next();
-			if (obj instanceof StaticDoor) {
-				StaticDoor door = (StaticDoor) obj;
-				doors.put(door.getSpawn().getStaticId(), door);
-			}
+		Map<Integer, StaticDoor> doors = new HashMap<>();
+		for (VisibleObject obj : worldMapObjects.values()) {
+			if (obj instanceof StaticDoor)
+				doors.put(obj.getSpawn().getStaticId(), (StaticDoor) obj);
 		}
 		return doors;
 	}
@@ -317,30 +288,6 @@ public abstract class WorldMapInstance {
 		if (twinCount == 0)
 			twinCount = 1;
 		return getInstanceId() > twinCount;
-	}
-
-	/**
-	 * Gets the player with the given object id in this world map instance
-	 * 
-	 * @param objId
-	 * @return Player or null if there is no player with this id on the map instance
-	 */
-	public Player getPlayer(int objId) {
-		return worldMapPlayers.get(objId);
-	}
-
-	/**
-	 * @return
-	 */
-	public Iterator<VisibleObject> objectIterator() {
-		return worldMapObjects.values().iterator();
-	}
-
-	/**
-	 * @return
-	 */
-	public Iterator<Player> playerIterator() {
-		return worldMapPlayers.values().iterator();
 	}
 
 	public void registerGroup(PlayerGroup group, int playerSize) {
@@ -400,13 +347,6 @@ public abstract class WorldMapInstance {
 	 */
 	public PlayerGroup getRegisteredGroup() {
 		return registeredGroup;
-	}
-
-	/**
-	 * @return
-	 */
-	public int playersCount() {
-		return worldMapPlayers.size();
 	}
 
 	public Set<Integer> getQuestIds() {
@@ -488,4 +428,8 @@ public abstract class WorldMapInstance {
 		return playerSize;
 	}
 
+	@Override
+	public Iterator<VisibleObject> iterator() {
+		return worldMapObjects.values().iterator();
+	}
 }

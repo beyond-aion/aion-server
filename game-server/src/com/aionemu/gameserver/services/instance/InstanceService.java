@@ -78,10 +78,10 @@ public class InstanceService {
 		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId, handler);
 
 		map.addInstance(nextInstanceId, worldMapInstance);
-		
-		if(handler == null)
+
+		if (handler == null)
 			SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficult, ownerId);
-		
+
 		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
 
 		// finally start the checker
@@ -120,9 +120,7 @@ public class InstanceService {
 
 		log.info("Destroying instance:" + worldId + " " + instanceId);
 
-		Iterator<VisibleObject> it = instance.objectIterator();
-		while (it.hasNext()) {
-			VisibleObject obj = it.next();
+		for (VisibleObject obj : instance) {
 			if (obj instanceof Player) {
 				Player player = (Player) obj;
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
@@ -296,8 +294,8 @@ public class InstanceService {
 
 		int delay = 150000; // 2.5 minutes
 		int period = 60000; // 1 minute
-		worldMapInstance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay,
-			period));
+		worldMapInstance
+			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay, period));
 	}
 
 	private static class EmptyInstanceCheckerTask implements Runnable {
@@ -325,28 +323,17 @@ public class InstanceService {
 			WorldMap map = World.getInstance().getWorldMap(worldId);
 			PlayerGroup registeredGroup = worldMapInstance.getRegisteredGroup();
 			if (registeredGroup == null) {
-				if (worldMapInstance.playersCount() > 0) {
-					updateSoloInstanceDestroyTime();
-					return;
-				}
-				if (worldMapInstance.playersCount() == 0) {
-					if (canDestroySoloInstance() || worldMapInstance.isPersonal()) {
-						map.removeWorldMapInstance(instanceId);
-						destroyInstance(worldMapInstance);
-						return;
-					} else {
+				for (Player player : worldMapInstance.getPlayersInside()) {
+					if (player.isOnline()) {
+						updateSoloInstanceDestroyTime();
 						return;
 					}
 				}
-				Iterator<Player> playerIterator = worldMapInstance.playerIterator();
-				int mapId = worldMapInstance.getMapId();
-				while (playerIterator.hasNext()) {
-					Player player = playerIterator.next();
-					if (player.isOnline() && player.getWorldId() == mapId)
-						return;
+
+				if (canDestroySoloInstance() || worldMapInstance.isPersonal()) {
+					map.removeWorldMapInstance(instanceId);
+					destroyInstance(worldMapInstance);
 				}
-				map.removeWorldMapInstance(instanceId);
-				destroyInstance(worldMapInstance);
 			} else if (registeredGroup.size() == 0) {
 				map.removeWorldMapInstance(instanceId);
 				destroyInstance(worldMapInstance);
