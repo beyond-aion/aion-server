@@ -257,9 +257,6 @@ public class EnchantService {
 		if (random <= success)
 			result = true;
 
-		if (targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL)
-			result = false;
-
 		// For test purpose. To use by administrator
 		if (player.getAccessLevel() > 2)
 			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " Rnd:" + random + " Luck:" + success);
@@ -331,7 +328,7 @@ public class EnchantService {
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
 			if (targetItem.isEquipped())
 				player.getSkillList().addSkill(player, buffId, 1);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), addLevel,
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), 20,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}
 

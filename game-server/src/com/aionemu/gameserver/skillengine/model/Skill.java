@@ -452,7 +452,7 @@ public class Skill {
 			return false;
 		}
 
-		if (motion.getName() == null) {
+		if (motion.getName() == null) { // TODO default motion? some skills have explicit motion speeds but no motion name
 			log.warn("Missing motion name for skill id: " + getSkillId());
 			return true;
 		}
