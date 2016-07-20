@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -90,20 +89,18 @@ public class TownService {
 			if (((Npc) creature).getTownId() != 0)
 				return ((Npc) creature).getTownId();
 		}
-		int townId = 0;
-		MapRegion region = creature.getPosition().getMapRegion();
-		if (region == null) {
-			log.warn("TownService: " + creature + " has no map region!");
-			return 0;
-		} else {
-			List<ZoneInstance> zones = region.getZones(creature);
-			for (ZoneInstance zone : zones) {
-				townId = zone.getTownId();
-				if (townId > 0)
-					break;
+		if (creature.isSpawned()) {
+			MapRegion region = creature.getPosition().getMapRegion();
+			if (region == null) {
+				log.warn("TownService: " + creature + " has no map region!");
+			} else {
+				for (ZoneInstance zone : region.getZones(creature)) {
+					if (zone.getTownId() > 0)
+						return zone.getTownId();
+				}
 			}
 		}
-		return townId;
+		return 0;
 	}
 
 	public void onEnterWorld(Player player) {

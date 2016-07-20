@@ -305,7 +305,7 @@ public class KnownList {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all npcs with owner", ex);
+			log.error("Exception when running visitor on all npcs with owner", ex.fillInStackTrace()); // XXX temporary to find the root cause of the stack trace-less npe
 		}
 		return counter;
 	}
