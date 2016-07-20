@@ -222,12 +222,7 @@ public class House extends VisibleObject {
 	}
 
 	@Override
-	public float getVisibilityDistance() {
-		return HousingConfig.VISIBILITY_DISTANCE;
-	}
-
-	@Override
-	public float getMaxZVisibleDistance() {
+	public float getVisibleDistance() {
 		return HousingConfig.VISIBILITY_DISTANCE;
 	}
 

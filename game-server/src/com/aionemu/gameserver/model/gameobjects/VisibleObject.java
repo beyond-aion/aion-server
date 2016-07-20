@@ -25,12 +25,6 @@ public abstract class VisibleObject extends AionObject {
 
 	protected VisibleObjectTemplate objectTemplate;
 
-	// how far player will see visible object
-	public static final float VisibilityDistance = 95;
-
-	// maxZvisibleDistance
-	public static final float maxZvisibleDistance = 95;
-
 	/**
 	 * Constructor.
 	 *
@@ -277,24 +271,11 @@ public abstract class VisibleObject extends AionObject {
 		this.position = position;
 	}
 
-	public float getVisibilityDistance() {
-		if (this instanceof Npc) {
-			Npc npc = (Npc) this;
-			if (npc.isFlag() || npc.isRaidMonster()) {
-				return Integer.MAX_VALUE;
-			}
-		}
-		return VisibilityDistance;
-	}
-
-	public float getMaxZVisibleDistance() {
-		if (this instanceof Npc) {
-			Npc npc = (Npc) this;
-			if (npc.isFlag() || npc.isRaidMonster()) {
-				return Integer.MAX_VALUE;
-			}
-		}
-		return maxZvisibleDistance;
+	/**
+	 * @return Distance in in-game meters how far this object can be seen/detected (a.k.a. known)
+	 */
+	public float getVisibleDistance() {
+		return 95;
 	}
 
 	@Override

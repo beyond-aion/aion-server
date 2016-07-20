@@ -352,4 +352,9 @@ public class Npc extends Creature {
 	public GroupDropType getGroupDrop() {
 		return getObjectTemplate().getGroupDrop();
 	}
+
+	@Override
+	public float getVisibleDistance() {
+		return isFlag() || isRaidMonster() ? Integer.MAX_VALUE : super.getVisibleDistance();
+	}
 }

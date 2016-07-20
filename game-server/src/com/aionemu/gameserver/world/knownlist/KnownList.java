@@ -180,7 +180,7 @@ public class KnownList {
 	 */
 	private void forgetObjects() {
 		for (VisibleObject object : knownObjects.values()) {
-			if (!checkObjectInRange(object) && !object.getKnownList().checkReversedObjectInRange(owner)) {
+			if (!MathUtil.isIn3dRange(owner, object, object.getVisibleDistance()) && !object.getKnownList().checkReversedObjectInRange(owner)) {
 				del(object, ObjectDeleteAnimation.NONE);
 				object.getKnownList().del(owner, ObjectDeleteAnimation.NONE);
 			}
@@ -226,7 +226,7 @@ public class KnownList {
 				if (knownObjects.containsKey(newObject.getObjectId()))
 					continue;
 
-				if (!checkObjectInRange(newObject) && !newObject.getKnownList().checkReversedObjectInRange(owner))
+				if (!MathUtil.isIn3dRange(owner, newObject, newObject.getVisibleDistance()) && !newObject.getKnownList().checkReversedObjectInRange(owner))
 					continue;
 
 				/**
@@ -247,17 +247,6 @@ public class KnownList {
 	 */
 	protected boolean isAwareOf(VisibleObject newObject) {
 		return true;
-	}
-
-	protected boolean checkObjectInRange(VisibleObject newObject) {
-		// flags/raidmonsters should not be deleted while moving.
-		if (newObject instanceof Npc && (((Npc) newObject).isFlag() || ((Npc) newObject).isRaidMonster())) {
-			return newObject.getWorldId() == owner.getWorldId();
-		} else if (Math.abs(owner.getZ() - newObject.getZ()) > owner.getMaxZVisibleDistance()) {
-			return false;
-		} else {
-			return MathUtil.isInRange(owner, newObject, owner.getVisibilityDistance());
-		}
 	}
 
 	/**
