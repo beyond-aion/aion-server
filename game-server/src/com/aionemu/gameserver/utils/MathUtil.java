@@ -165,7 +165,7 @@ public class MathUtil {
 		float dy = y1 - y2;
 		float dz = z1 - z2;
 
-		// We should avoid Math.pow or Math.hypot due to perfomance reasons
+		// We should avoid Math.pow or Math.hypot due to performance reasons
 		return Math.sqrt(dx * dx + dy * dy + dz * dz);
 	}
 

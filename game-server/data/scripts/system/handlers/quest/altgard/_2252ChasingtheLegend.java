@@ -2,6 +2,7 @@ package quest.altgard;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _2252ChasingtheLegend extends QuestHandler {
 
-	private final static int questId = 2252;
 	private final static int questStartNpcId = 203646; // Sinood
 	private final static int questStep1NpcId = 700060; // Bones of Munishan (Npc)
 	private final static int questActionItemId = 182203235; // Bones of Munishan (Item)
@@ -26,7 +26,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 	private final static int questKillNpc2Id = 210635; // Minushan Drakie. To check on retail if it is spawned also 210635
 
 	public _2252ChasingtheLegend() {
-		super(questId);
+		super(2252);
 	}
 
 	@Override
@@ -64,9 +64,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0) {
-							long MinushanBone = player.getInventory().getItemCountByItemId(questActionItemId);
-							if (MinushanBone == 0) { // Player hasn't action item; dialogue for a new chance
-								giveQuestItem(env, questActionItemId, 1);
+							if (giveQuestItem(env, questActionItemId, 1)) { // Player hasn't action item; dialogue for a new chance
 								qs.setQuestVarById(0, 0);
 								return sendQuestDialog(env, 1693);
 							} else { // Dialogue for encouragement
@@ -79,37 +77,30 @@ public class _2252ChasingtheLegend extends QuestHandler {
 				switch (dialog) {
 					case USE_OBJECT:
 						final Npc npc = (Npc) player.getTarget();
-
-						if (npc == null || npc.getIsQuestBusy()) {
+						if (npc == null)
 							return false;
-						}
+
+						if (player.getKnownList().findObject(questKillNpc1Id) != null || player.getKnownList().findObject(questKillNpc1Id) != null)
+							return false;
 
 						if (var == 0 && checkItemExistence(env, questActionItemId, 1, true)) {
-							npc.setIsQuestBusy(true); // Set npc not usable during spawn time
-
 							// Random spawn
 							int chance = 95; // Chance to spawn biggest reward mob
 							int spawnTime = 3; // 3 min of spawn
-							int questSpawnedNpcId = (Rnd.get(1, 100) <= chance ? questKillNpc1Id : questKillNpc2Id);
-							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
-							PacketSendUtility.broadcastMessage(questMob, 1100630);
+							int questSpawnedNpcId = Rnd.get(1, 100) <= chance ? questKillNpc1Id : questKillNpc2Id;
+							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(),
+								npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
+							PacketSendUtility.broadcastMessage(questMob, 500, 1100630);
+							// TODO: set not usable icon to questStep1NpcId while mob is spawned, setting usable icon after mob is despawned
+							questMob.getController().addTask(TaskId.DESPAWN,
+								ThreadPoolManager.getInstance().schedule(() -> questMob.getController().delete(), spawnTime * 60000));
 
-							// @ToDo: setting not usable icon while mob is spawned
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									npc.setIsQuestBusy(false);
-									questMob.getController().delete();
-									// @ToDo: setting usable icon after mob is despawned
-								}
-							}, spawnTime * 60000);
 						}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
-			
+
 			switch (dialog) {
 				case SELECT_QUEST_REWARD:
 				case SELECTED_QUEST_NOREWARD:

@@ -124,7 +124,7 @@ public class WebRewardService {
 						qs.setQuestVar(questVar);
 					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 				}
-				VisibleObject questNpc = player.getKnownList().getObject(questNpcId);
+				VisibleObject questNpc = player.getKnownList().findObject(questNpcId);
 				if (questNpc == null || MathUtil.getDistance(player, questNpc) >= 20)
 					TeleportService2.sendTeleportRequest(player, questNpcId); // completing the quest (updates daeva status) calls the reward method again
 			} else {

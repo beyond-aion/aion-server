@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.NpcController;
@@ -41,11 +43,10 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Npc extends Creature {
 
 	private WalkerGroup walkerGroup;
-	private boolean isQuestBusy = false;
 	private NpcSkillList skillList;
 	private ConcurrentLinkedQueue<NpcSkillEntry> queuedSkills;
 	private WalkerGroupShift walkerGroupShift;
-	private String masterName = "";
+	private String masterName;
 	private int creatorId = 0;
 	private int townId;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
@@ -229,19 +230,11 @@ public class Npc extends Creature {
 		return Math.max(skillSeeState, congenitalSeeState);
 	}
 
-	public boolean getIsQuestBusy() {
-		return isQuestBusy;
-	}
-
-	public void setIsQuestBusy(boolean busy) {
-		isQuestBusy = busy;
-	}
-
 	/**
 	 * @return Name of the Master
 	 */
 	public String getMasterName() {
-		return masterName;
+		return masterName == null ? StringUtils.EMPTY : masterName;
 	}
 
 	public void setMasterName(String masterName) {

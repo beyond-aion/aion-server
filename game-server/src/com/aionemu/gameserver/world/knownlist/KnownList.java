@@ -365,6 +365,18 @@ public class KnownList {
 		}
 	}
 
+	/**
+	 * @param templateId
+	 * @return The visible object with the given template ID or null if not found.
+	 */
+	public VisibleObject findObject(int templateId) {
+		for (VisibleObject v : knownObjects.values()) {
+			if (v.getObjectTemplate().getTemplateId() == templateId)
+				return v;
+		}
+		return null;
+	}
+
 	public VisibleObject getObject(int targetObjectId) {
 		return knownObjects.get(targetObjectId);
 	}
