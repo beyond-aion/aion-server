@@ -8,29 +8,31 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author kecimis
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Motion")
 public class Motion {
 
 	@XmlAttribute(required = true)
-	protected String name;// TODO enum
+	private String name;// TODO enum
 
 	@XmlAttribute
-	protected int speed = 100;
+	private int speed = 100;
 
 	@XmlAttribute(name = "instant_skill")
-	protected boolean instantSkill = false;
+	private boolean instantSkill = false;
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
+	/**
+	 * @return Animation play speed in percent
+	 */
 	public int getSpeed() {
-		return this.speed;
+		return speed;
 	}
 
-	public boolean getInstantSkill() {
-		return this.instantSkill;
+	public boolean isInstantSkill() {
+		return instantSkill;
 	}
 }

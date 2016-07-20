@@ -82,7 +82,7 @@ public class MotionLoggingService {
 		// clientTime is send from client
 		int baseTime = clientTime;// adjusted time
 
-		if (motion.getInstantSkill()) {
+		if (motion.isInstantSkill()) {
 			PacketSendUtility.sendMessage(player, "Skill: " + skillId + " is instant");
 			return;
 		} else if (clientTime == 0) {

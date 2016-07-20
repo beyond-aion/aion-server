@@ -329,6 +329,17 @@ public class Skill {
 	}
 
 	protected void calculateSkillDuration() {
+		// ap & cash revival stones, or 2nd+ time of multicast-skill activation
+		if (getSkillId() == 10802
+			|| isMulticast() && effector instanceof Player && ((Player) effector).getChainSkills().getCurrentChainCount(chainCategory) > 0) {
+			duration = 0;
+			return;
+		}
+		if (isCastTimeFixed()) {
+			duration = skillTemplate.getDuration();
+			return;
+		}
+
 		// Skills that are not affected by boost casting time
 		if (skillMethod != SkillMethod.CHARGE) {
 			duration = 0;
@@ -392,19 +403,8 @@ public class Skill {
 			}
 		}
 
-		if (effector instanceof Player) {
-			if (isMulticast() && ((Player) effector).getChainSkills().getCurrentChainCount(chainCategory) > 0)
-				duration = 0;
-		}
-		if (isCastTimeFixed())
-			duration = skillTemplate.getDuration();
-
-		if (getSkillId() == 10802) // ap & cash revival stones
+		if (duration < 0)
 			duration = 0;
-
-		if (duration < 0) {
-			duration = 0;
-		}
 	}
 
 	private boolean checkAnimationTime() {
@@ -419,8 +419,8 @@ public class Skill {
 		/**
 		 * exceptions for certain skills -herb and mana treatment -traps
 		 */
-		if (this.getSkillTemplate().getGroup() != null) {
-			switch (this.getSkillTemplate().getGroup()) {
+		if (getSkillTemplate().getGroup() != null) {
+			switch (getSkillTemplate().getGroup()) {
 				case "MENDING_L": // Bandage Heal
 				case "MENDING": // Herb Treatment
 				case "AROMATHERAPY": // Mana Treatment
@@ -429,36 +429,36 @@ public class Skill {
 					return true;
 			}
 		}
-		if (this.getSkillId() == 11580)
+
+		if (player.getTransformModel().isActive() && player.getTransformModel().getType() == TransformType.FORM1)
 			return true;
 
-		if (player.getTransformModel().isActive()) {
-			if (player.getTransformModel().getType() == TransformType.FORM1)
-				return true;
-		}
-
-		if (this.getSkillTemplate().getSubType() == SkillSubType.SUMMONTRAP)
+		if (getSkillTemplate().getSubType() == SkillSubType.SUMMONTRAP)
 			return true;
 
-		Motion motion = this.getSkillTemplate().getMotion();
+		Motion motion = getSkillTemplate().getMotion();
+		if (motion == null)
+			return true; // some skills, like Blind Side (3467) or scroll/food buffs have no motion
 
-		if (motion == null || motion.getName() == null) {
-			log.warn("missing motion for skillId: " + this.getSkillId());
-			return true;
-		}
-
-		if (motion.getInstantSkill() && hitTime != 0) {
-			log.warn("Instant and hitTime not 0! modified client_skills? player objectid: " + player.getObjectId());
-			return false;
-		} else if (!motion.getInstantSkill() && hitTime == 0) {
-			log.warn("modified client_skills! player objectid: " + player.getObjectId());
+		if (motion.isInstantSkill()) {
+			if (hitTime != 0) {
+				log.warn("Instant skill with hitTime > 0 (modified client_skills?) skill id: " + getSkillId() + ", " + player);
+				return false;
+			}
+			if (motion.getName() == null) // skills like Remove Shock (283) or Feint (912)
+				return true; // in this case, no update for NextSkillUse time is needed, so return instantly
+		} else if (hitTime == 0) {
+			AuditLogger.info(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");
 			return false;
 		}
 
+		if (motion.getName() == null) {
+			log.warn("Missing motion name for skill id: " + getSkillId());
+			return true;
+		}
 		MotionTime motionTime = DataManager.MOTION_DATA.getMotionTime(motion.getName());
-
 		if (motionTime == null) {
-			log.warn("missing motiontime for motionName: " + motion.getName() + " skillId: " + this.getSkillId());
+			log.warn("missing motiontime for motionName: " + motion.getName() + " skillId: " + getSkillId());
 			return true;
 		}
 
@@ -468,14 +468,14 @@ public class Skill {
 
 		if (serverTime == 0) {
 			log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " Race: " + player.getRace()
-				+ " Gender: " + player.getGender() + " skillId: " + this.getSkillId());
+				+ " Gender: " + player.getGender() + " skillId: " + getSkillId());
 			return true;
 		}
 
 		// adjust client time with ammotime
 		long ammoTime = 0;
-		double distance = MathUtil.getDistance(effector, firstTarget);
 		if (getSkillTemplate().getAmmoSpeed() != 0) {
+			double distance = MathUtil.getDistance(effector, firstTarget);
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
 			clientTime -= ammoTime;
 		}
@@ -499,7 +499,7 @@ public class Skill {
 			serverTime *= 0.5f;
 
 		int finalTime = Math.round(serverTime);
-		if (motion.getInstantSkill() && hitTime == 0) {
+		if (motion.isInstantSkill() && hitTime == 0) {
 			this.serverTime = (int) ammoTime;
 		} else {
 			if (clientTime < finalTime) {
@@ -678,7 +678,7 @@ public class Skill {
 		Motion motion = this.getSkillTemplate().getMotion();
 		if (skillTemplate.getSkillCategory() == SkillCategory.HEAL)
 			instantSkill = true;
-		else if (motion != null && motion.getInstantSkill())
+		else if (motion != null && motion.isInstantSkill())
 			instantSkill = true;
 		else if (hitTime == 0)
 			instantSkill = true;
@@ -1164,7 +1164,7 @@ public class Skill {
 			case 19:
 			case 20:
 			case 3589:// Fear Shriek I
-			//case 2006:// Hand of Torpor removed on 4.8??
+				// case 2006:// Hand of Torpor removed on 4.8??
 			case 8707:// Spirit Hypnosis
 			case 1337:// Sleep I
 			case 17:
