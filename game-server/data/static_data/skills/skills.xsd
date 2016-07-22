@@ -27,7 +27,7 @@
 		<xs:attribute name="skill_id" type="skillId" use="required"/>
 		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="nameId" type="xs:int"/>
-		<xs:attribute name="stack" type="xs:string"/>
+		<xs:attribute name="stack" type="xs:string" use="required"/>
 		<xs:attribute name="group" type="xs:string"/>
 		<xs:attribute name="cooldownId" type="xs:int"/>
 		<xs:attribute name="lvl" type="xs:int"/>

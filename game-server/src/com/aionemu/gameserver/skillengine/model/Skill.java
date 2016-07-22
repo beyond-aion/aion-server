@@ -790,17 +790,15 @@ public class Skill {
 		}
 
 		if (setCooldowns && !isPenaltySkill)
-			this.setCooldowns();
+			setCooldowns();
 
 		if (instantSkill)
 			applyEffect(effects);
-		else {
-			ThreadPoolManager.getInstance().schedule((Runnable) () -> applyEffect(effects), hitTime);
-		}
-		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
-			if (!isPenaltySkill)
-				sendCastspellEnd(dashStatus, effects);
-		}
+		else
+			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
+
+		if (!isPenaltySkill && (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE))
+			sendCastspellEnd(dashStatus, effects);
 
 		endCondCheck();
 

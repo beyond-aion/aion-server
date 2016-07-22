@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
@@ -31,90 +28,87 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
  * @author ATracer modified by Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions",
-	"effects", "actions", "periodicActions", "motion" })
+@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects",
+	"actions", "periodicActions", "motion" })
 public class SkillTemplate {
 
-	protected Properties properties;
-	protected Conditions startconditions;
-	protected Conditions useconditions;
+	private Properties properties;
+	private Conditions startconditions;
+	private Conditions useconditions;
 	private Conditions endconditions;
-	protected Conditions useequipmentconditions;
-	protected Effects effects;
-	protected Actions actions;
+	private Conditions useequipmentconditions;
+	private Effects effects;
+	private Actions actions;
 	@XmlElement(name = "periodicactions")
-	protected PeriodicActions periodicActions;
-	protected Motion motion;
+	private PeriodicActions periodicActions;
+	private Motion motion;
 
 	@XmlAttribute(name = "skill_id", required = true)
-	protected int skillId;
+	private int skillId;
 	@XmlAttribute(required = true)
-	protected String name;
+	private String name;
 	@XmlAttribute(required = true)
-	protected int nameId;
+	private int nameId;
 	@XmlAttribute
-	protected String stack = "NONE";
+	private String stack = "NONE";
 	@XmlAttribute(name = "group", required = false)
 	private String group;
 	@XmlAttribute
-	protected int cooldownId;
+	private int cooldownId;
 	@XmlAttribute
-	protected int lvl;
+	private int lvl;
 	@XmlAttribute(name = "skilltype", required = true)
-	protected SkillType type = SkillType.NONE;
+	private SkillType type = SkillType.NONE;
 	@XmlAttribute(name = "skillsubtype", required = true)
-	protected SkillSubType subType;
+	private SkillSubType subType;
 	@XmlAttribute(name = "skill_category")
-	protected SkillCategory skillCategory = SkillCategory.NONE;
+	private SkillCategory skillCategory = SkillCategory.NONE;
 	@XmlAttribute(name = "tslot")
-	protected SkillTargetSlot targetSlot;
+	private SkillTargetSlot targetSlot;
 	@XmlAttribute(name = "tslot_level")
-	protected int targetSlotLevel;
+	private int targetSlotLevel;
 	@XmlAttribute(name = "dispel_category")
-	protected DispelCategoryType dispelCategory = DispelCategoryType.NONE;
+	private DispelCategoryType dispelCategory = DispelCategoryType.NONE;
 	@XmlAttribute(name = "req_dispel_level")
-	protected int reqDispelLevel;
+	private int reqDispelLevel;
 	@XmlAttribute(name = "activation", required = true)
-	protected ActivationAttribute activationAttribute;
+	private ActivationAttribute activationAttribute;
 	@XmlAttribute(required = true)
-	protected int duration;
+	private int duration;
 	@XmlAttribute(name = "toggle_timer")
-	protected int toggleTimer;
+	private int toggleTimer;
 	@XmlAttribute(name = "cooldown")
-	protected int cooldown;
+	private int cooldown;
 	@XmlAttribute(name = "cooldown_delta_lv")
-  protected int cooldownDeltaLv;
+	private int cooldownDeltaLv;
 	@XmlAttribute(name = "penalty_skill_id")
-	protected int penaltySkillId;
+	private int penaltySkillId;
 	@XmlAttribute(name = "pvp_damage")
-	protected int pvpDamage;
+	private int pvpDamage;
 	@XmlAttribute(name = "pvp_duration")
-	protected int pvpDuration;
+	private int pvpDuration;
 	@XmlAttribute(name = "chain_skill_prob")
-	protected int chainSkillProb = 100;
+	private int chainSkillProb = 100;
 	@XmlAttribute(name = "cancel_rate")
-	protected int cancelRate;
+	private int cancelRate;
 	@XmlAttribute(name = "stance")
-	protected boolean stance;
+	private boolean stance;
 	@XmlAttribute(name = "avatar")
-	protected boolean isDeityAvatar;
+	private boolean isDeityAvatar;
 	@XmlAttribute(name = "ground")
-	protected boolean isGroundSkill;// TODO remove!
+	private boolean isGroundSkill;// TODO remove!
 	@XmlAttribute(name = "ammospeed")
-	protected int ammoSpeed;
+	private int ammoSpeed;
 	@XmlAttribute(name = "conflict_id")
-	protected int conflictId;
+	private int conflictId;
 	@XmlAttribute(name = "counter_skill")
-	protected AttackStatus counterSkill = null;
+	private AttackStatus counterSkill = null;
 	@XmlAttribute(name = "noremoveatdie")
-	protected boolean noRemoveAtDie = false;
+	private boolean noRemoveAtDie = false;
 	@XmlAttribute(name = "no_save_on_logout")
-	protected boolean noSaveOnLogout = false;
+	private boolean noSaveOnLogout = false;
 	@XmlAttribute(name = "stigma")
-	protected StigmaType stigmaType = StigmaType.NONE;
-
-	@XmlTransient
-	protected HashMap<Integer, Integer> effectIds = null;
+	private StigmaType stigmaType = StigmaType.NONE;
 
 	/**
 	 * @return the Properties
@@ -338,7 +332,7 @@ public class SkillTemplate {
 	public int getCooldown() {
 		return cooldown;
 	}
-	
+
 	public int getCooldownDeltaLv() {
 		return cooldownDeltaLv;
 	}
@@ -477,23 +471,6 @@ public class SkillTemplate {
 		}
 
 		return null;
-	}
-
-	public HashMap<Integer, Integer> getEffectIds() {
-		return this.effectIds;
-	}
-
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (this.getEffects() != null && this.getEffects().getEffects() != null) {
-			for (EffectTemplate et : this.getEffects().getEffects()) {
-				if (et.getEffectid() != 0) {
-					if (effectIds == null)
-						effectIds = new HashMap<Integer, Integer>();
-
-					effectIds.put(et.getEffectid(), et.getBasicLvl());
-				}
-			}
-		}
 	}
 
 	/**
