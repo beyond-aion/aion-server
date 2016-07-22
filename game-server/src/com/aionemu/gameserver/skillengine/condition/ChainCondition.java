@@ -39,9 +39,6 @@ public class ChainCondition extends Condition {
 			if (shouldReset(chain, env))
 				chain.resetChain();
 
-			if (currentSkill.getCategory().equals(category) && currentSkill.getUseCount() >= selfCount) // multicast max activation count
-				return false;
-
 			if (preCategory != null) {
 				if (currentSkill.getCategory().equals(preCategory)) {
 					if (currentSkill.getUseCount() < preCount) // preCategory skill must have been activated x times
