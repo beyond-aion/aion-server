@@ -424,7 +424,7 @@ public class Skill {
 				case "MENDING_L": // Bandage Heal
 				case "MENDING": // Herb Treatment
 				case "AROMATHERAPY": // Mana Treatment
-				case "PR_FOCUSCASTING":// Prayer of focus
+				case "PR_FOCUSCASTING": // Prayer of focus
 				case "RI_SUMMONARMOR": // Embark skill
 					return true;
 			}
@@ -1157,44 +1157,62 @@ public class Skill {
 		if (skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE) // only casted skills are affected
 			return true;
 
-		switch (this.getSkillId()) {
-			case 3775:// Fear I
-			case 19:
-			case 20:
-			case 3589:// Fear Shriek I
-				// case 2006:// Hand of Torpor removed on 4.8??
-			case 8707:// Spirit Hypnosis
-			case 1337:// Sleep I
-			case 17:
-			case 18:
-			case 1339:// Sleeping Storm
-			case 1417:// Curse of Roots
-			case 1416:// Curse of Old Roots
-			case 1338:// Tranquilizing Cloud I
-			case 11885:// abyss transformation elyos
+		switch (getSkillId()) {
+			case 3775: // Fear
+			case 19: // Fear: Poppy
+			case 20: // Fear: Ginseng
+			case 3589: // Fear Shriek I
+			case 1337: // Sleep
+			case 17: // Sleep: Scarecrow
+			case 18: // Sleep: Frightcorn
+			case 1339: // Sleeping Storm
+			case 1417: // Curse of Roots
+			case 1416: // Curse of Old Roots
+			case 1338: // Tranquilizing Cloud I
+			case 1340: // Slumberswept Wind
+			case 1341: // Slumberswept Wind
+			case 1342: // Slumberswept Wind
+			case 1343: // Somnolence
+			case 1344: // Somnolence
+			case 1345: // Somnolence
+			case 1956: // Freeze Cannon (3rd charge stage with sleep effect)
+			case 11885: // abyss transformation elyos
 			case 11886:
 			case 11887:
 			case 11888:
 			case 11889:
-			case 11890:// abyss transformation asmo
+			case 11890: // abyss transformation asmo
 			case 11891:
 			case 11892:
 			case 11893:
 			case 11894:
-			case 243:// return skill
-			case 245:// herb treatment
-			case 246:
-			case 247:
-			case 251:
-			case 253:
-			case 297:
-			case 249:// mana treatment
-			case 250:
-			case 252:
-			case 254:
-			case 298:
-			case 315:
-			case 302: // escape
+			case 243: // Return
+			case 245: // Bandage Heal
+			case 246: // Herb Treatment
+			case 247: // Herb Treatment
+			case 249: // MP Recovery
+			case 250: // MP Recovery
+			case 251: // Herb Treatment
+			case 252: // MP Recovery
+			case 253: // Herb Treatment
+			case 254: // MP Recovery
+			case 297: // Herb Treatment
+			case 298: // MP Recovery
+			case 302: // Escape
+			case 308: // Herb Treatment
+			case 309: // Herb Treatment
+			case 310: // Herb Treatment
+			case 311: // Herb Treatment
+			case 312: // Herb Treatment
+			case 313: // Herb Treatment
+			case 314: // Herb Treatment
+			case 315: // MP Recovery
+			case 316: // MP Recovery
+			case 317: // MP Recovery
+			case 318: // MP Recovery
+			case 319: // MP Recovery
+			case 320: // MP Recovery
+			case 321: // MP Recovery
 				return true;
 		}
 
