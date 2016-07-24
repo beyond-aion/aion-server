@@ -128,7 +128,6 @@ public class Town {
 				SpawnTemplate spawnTemplate = SpawnEngine.addNewSpawn(worldId, spawn.getNpcId(), sst.getX(), sst.getY(), sst.getZ(), sst.getHeading(),
 					spawn.getRespawnTime());
 				spawnTemplate.setStaticId(sst.getStaticId());
-				spawnTemplate.setRandomWalk(0);
 				VisibleObject object = SpawnEngine.spawnObject(spawnTemplate, 1);
 				if (object instanceof Npc) {
 					((Npc) object).setTownId(this.id);

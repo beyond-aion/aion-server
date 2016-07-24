@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Iterator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,17 +36,13 @@ public class DebugService {
 	private void analyzeWorldPlayers() {
 		log.info("Starting analysis of world players");
 
-		Iterator<Player> playersIterator = World.getInstance().getPlayersIterator();
-		while (playersIterator.hasNext()) {
-			Player player = playersIterator.next();
-
+		for (Player player : World.getInstance().getAllPlayers()) {
 			/**
 			 * Check connection
 			 */
 			AionConnection connection = player.getClientConnection();
 			if (connection == null) {
-				log.warn(String.format("[DEBUG SERVICE] Player without connection: " + "detected: ObjId %d, Name %s, Spawned %s", player.getObjectId(),
-					player.getName(), player.isSpawned()));
+				log.warn("[DEBUG SERVICE] Found {} without connection: Spawned {}", player, player.isSpawned());
 				continue;
 			}
 
@@ -58,8 +52,12 @@ public class DebugService {
 			long lastPingTimeMS = connection.getLastPingTime();
 			long pingInterval = System.currentTimeMillis() - lastPingTimeMS;
 			if (lastPingTimeMS > 0 && pingInterval > 300000) {
-				log.warn(String.format("[DEBUG SERVICE] Player with large ping interval: " + "ObjId %d, Name %s, Spawned %s, PingMS %d",
-					player.getObjectId(), player.getName(), player.isSpawned(), pingInterval));
+				if (pingInterval > 600000) { // close connection if client didn't send any ping for at least 10 minutes
+					connection.close();
+					log.warn("[DEBUG SERVICE] Kicking {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
+				} else {
+					log.warn("[DEBUG SERVICE] Found {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
+				}
 			}
 		}
 

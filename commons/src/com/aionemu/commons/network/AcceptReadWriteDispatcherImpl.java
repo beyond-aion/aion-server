@@ -43,6 +43,8 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	void dispatch() throws IOException {
 		int selected = selector.select();
 
+		processPendingClose();
+
 		if (selected != 0) {
 			Iterator<SelectionKey> selectedKeys = this.selector.selectedKeys().iterator();
 			while (selectedKeys.hasNext()) {
@@ -72,7 +74,6 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 			}
 		}
 
-		processPendingClose();
 	}
 
 	/**
