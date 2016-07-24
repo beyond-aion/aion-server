@@ -329,11 +329,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}
+		MoveTaskManager.getInstance().removeCreature(owner);
 		started.set(false);
-		// temp fix otherwise npcs start moving around to unknown positions TODO: final fix
-		if (isFight) {
-			destination = Destination.TARGET_OBJECT;
-		}
 		targetDestX = 0;
 		targetDestY = 0;
 		targetDestZ = 0;
