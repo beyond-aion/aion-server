@@ -60,7 +60,7 @@ public class WalkerData {
 		return walkerlistData.get(routeId);
 	}
 
-	public void AddTemplate(WalkerTemplate newTemplate) {
+	public void addTemplate(WalkerTemplate newTemplate) {
 		if (walkerlist == null)
 			walkerlist = new FastTable<WalkerTemplate>();
 		walkerlist.add(newTemplate);

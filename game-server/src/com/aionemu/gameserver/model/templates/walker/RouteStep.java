@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.walker;
 
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,28 +26,19 @@ public class RouteStep {
 	private float locZ;
 
 	@XmlAttribute(name = "rest_time", required = true)
-	private Integer time = 0;
-	
+	private int time = 0;
+
 	@XmlAttribute(name = "stop")
 	private boolean isStop = false;
 
 	@XmlTransient
 	private RouteStep nextStep;
 
-	void beforeMarshal(Marshaller marshaller) {
-		if (time == 0)
-			time = null;
-	}
-
-	void afterMarshal(Marshaller marshaller) {
-		if (time == null)
-			time = 0;
-	}
-
 	public RouteStep() {
 	}
 
-	public RouteStep(float x, float y, float z, int restTime) {
+	public RouteStep(int step, float x, float y, float z, int restTime) {
+		routeStep = step;
 		locX = x;
 		locY = y;
 		locZ = z;
@@ -87,10 +77,6 @@ public class RouteStep {
 		return routeStep;
 	}
 
-	public void setRouteStep(int routeStep) {
-		this.routeStep = routeStep;
-	}
-	
 	public boolean isStop() {
 		return isStop;
 	}

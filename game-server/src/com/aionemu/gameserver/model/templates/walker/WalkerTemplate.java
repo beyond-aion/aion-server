@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.templates.walker;
 
 import java.util.List;
 
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -37,7 +36,7 @@ public class WalkerTemplate {
 	private String rowValues;
 
 	@XmlAttribute(name = "reversed")
-	private Boolean isReversed = false;
+	private boolean isReversed = false;
 
 	@XmlTransient
 	private int[] rows;
@@ -49,36 +48,22 @@ public class WalkerTemplate {
 		this.routeId = routeId;
 	}
 
-	void beforeMarshal(Marshaller marshaller) {
-		if (isReversed == false)
-			isReversed = null;
-		if (formation == WalkerGroupType.POINT)
-			formation = null;
-	}
-
-	void afterMarshal(Marshaller marshaller) {
-		if (isReversed == null)
-			isReversed = false;
-		if (formation == null)
-			formation = WalkerGroupType.POINT;
-	}
-
 	/**
 	 * @param u
 	 * @param parent
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (isReversed) {
+		routeStepList.sort((a, b) -> a.getRouteStep() - b.getRouteStep()); // sort ascending by step, to support scrambled templates
+		if (isReversed) { // add steps in backward order, so npcs turn and walk the same way back
+			int stepNo = routeStepList.size();
 			for (int i = routeStepList.size() - 2; i > 0; i--) {
 				RouteStep step = routeStepList.get(i);
-				routeStepList.add(new RouteStep(step.getX(), step.getY(), step.getZ(), step.getRestTime()));
+				routeStepList.add(new RouteStep(++stepNo, step.getX(), step.getY(), step.getZ(), step.getRestTime()));
 			}
 		}
 		for (int i = 0; i < routeStepList.size() - 1; i++) {
 			routeStepList.get(i).setNextStep(routeStepList.get(i + 1));
-			routeStepList.get(i).setRouteStep(i + 1);
 		}
-		routeStepList.get(routeStepList.size() - 1).setRouteStep(routeStepList.size());
 		routeStepList.get(routeStepList.size() - 1).setNextStep(routeStepList.get(0));
 
 		if (pool == 2) {
@@ -138,11 +123,15 @@ public class WalkerTemplate {
 		return formation;
 	}
 
-	/**
-	 * @return the rows
-	 */
+	public void setType(WalkerGroupType type) {
+		formation = type;
+	}
+
 	public int[] getRows() {
 		return rows;
 	}
 
+	public void setRows(int[] rows) {
+		this.rows = rows;
+	}
 }
