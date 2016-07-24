@@ -262,7 +262,7 @@ public class InstanceService {
 				}
 				World.getInstance().setPosition(player, worldId, registeredInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
 					player.getHeading());
-				player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayerLogin(player);
+				registeredInstance.getInstanceHandler().onPlayerLogin(player);
 				return;
 			}
 
@@ -358,7 +358,9 @@ public class InstanceService {
 	}
 
 	public static void onLeaveInstance(Player player) {
-		player.getPosition().getWorldMapInstance().getInstanceHandler().onLeaveInstance(player);
+		WorldMapInstance registeredInstance = getRegisteredInstance(player.getWorldId(), getLastRegisteredId(player));
+		if (registeredInstance != null) // don't access instance via player.getPosition, since he maybe isn't registered with it anymore (login after dc)
+			registeredInstance.getInstanceHandler().onLeaveInstance(player);
 		for (Item item : player.getInventory().getItems()) {
 			if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
 				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
