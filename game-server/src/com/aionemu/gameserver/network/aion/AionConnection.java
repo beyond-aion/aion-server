@@ -391,7 +391,7 @@ public class AionConnection extends AConnection {
 	public void setLastPingTime(long time) {
 		this.lastPingTime = time;
 	}
-	
+
 	public int increaseAndGetPingFailCount() {
 		return ++pingFailCount;
 	}
@@ -438,11 +438,9 @@ public class AionConnection extends AConnection {
 
 		@Override
 		public void run() {
-			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL + 60 * 1000) { // close connection if at least 1 minute
-																																																				// overdue
+			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL * 2) {
 				log.info("Closing hanged up connection of client: " + AionConnection.this);
 				close();
-				stop();
 			}
 		}
 	}
