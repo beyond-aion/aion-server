@@ -1,9 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,10 +11,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.skillengine.model.Motion;
+import com.aionemu.gameserver.skillengine.model.MotionTime;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -129,5 +134,25 @@ public class SkillData {
 	 */
 	public List<Integer> getSkillsForCooldownId(int cooldownId) {
 		return cooldownGroups.get(cooldownId);
+	}
+
+	public void validateMotions() {
+		StringBuilder missing = new StringBuilder();
+		StringBuilder empty = new StringBuilder();
+		Set<String> motionNames = new FastSet<>();
+		for (SkillTemplate t : skillTemplates) {
+			Motion m = t.getMotion();
+			if (m != null && m.getName() != null && motionNames.add(m.getName())) {
+				MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());
+				if (mt == null)
+					missing.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
+				else if (mt.isAllZero())
+					empty.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
+			}
+		}
+		if (missing.length() > 0)
+			LoggerFactory.getLogger(SkillData.class).warn("Missing motion times for these motion names: {}", missing.substring(0, missing.length() - 2));
+		if (empty.length() > 0)
+			LoggerFactory.getLogger(SkillData.class).warn("Emtpy motion times for these motion names (all times are zero): {}", empty.substring(0, empty.length() - 2));
 	}
 }

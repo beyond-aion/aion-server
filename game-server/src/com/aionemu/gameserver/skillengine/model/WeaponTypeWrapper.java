@@ -57,7 +57,7 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 
 	@Override
 	public String toString() {
-		return "mainHandType=\"" + mainHand  + "\"" + " offHandType=\"" + offHand;
+		return "mainHand=\"" + mainHand  + "\"" + " offHand=\"" + offHand + "\"";
 	}
 
 	@Override

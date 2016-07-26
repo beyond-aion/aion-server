@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,9 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.skillengine.model.MotionTime;
+
+import gnu.trove.map.hash.THashMap;
 
 /**
  * @author kecimis
@@ -23,25 +22,21 @@ import com.aionemu.gameserver.skillengine.model.MotionTime;
 public class MotionData {
 
 	@XmlElement(name = "motion_time")
-	protected List<MotionTime> motionTimes;
+	private List<MotionTime> motionTimes;
 
 	@XmlTransient
-	private THashMap<String, MotionTime> motionTimesMap = new THashMap<String, MotionTime>();
+	private THashMap<String, MotionTime> motionTimesMap = new THashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (MotionTime motion : motionTimes) {
 			motionTimesMap.put(motion.getName(), motion);
 		}
+		motionTimes.clear();
+		motionTimes = null;
 	}
 
-	/**
-	 * @return the motionTimeList
-	 */
-	public List<MotionTime> getMotionTimes() {
-		if (motionTimes == null)
-			motionTimes = new FastTable<MotionTime>();
-
-		return motionTimes;
+	public Collection<MotionTime> getMotionTimes() {
+		return motionTimesMap.values();
 	}
 
 	public MotionTime getMotionTime(String name) {
@@ -49,9 +44,6 @@ public class MotionData {
 	}
 
 	public int size() {
-		if (motionTimes == null)
-			return 0;
-
-		return motionTimes.size();
+		return motionTimesMap.size();
 	}
 }

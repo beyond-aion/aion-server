@@ -3,8 +3,6 @@ package com.aionemu.gameserver.skillengine.model;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +55,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer Modified by Wakzashi
@@ -146,7 +146,8 @@ public class Skill {
 	 * @param skillLvl
 	 * @param firstTarget
 	 */
-	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate, boolean isPenaltySkill) {
+	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate,
+		boolean isPenaltySkill) {
 		this.effectedList = new FastTable<>();
 		this.conditionChangeListener = new StartMovingListener();
 		this.dieObserver = new DieObserver(this);
@@ -456,19 +457,19 @@ public class Skill {
 			log.warn("Missing motion name for skill id: " + getSkillId());
 			return true;
 		}
+
 		MotionTime motionTime = DataManager.MOTION_DATA.getMotionTime(motion.getName());
-		if (motionTime == null) {
-			log.warn("missing motiontime for motionName: " + motion.getName() + " skillId: " + getSkillId());
+		if (motionTime == null) // no warning here (already sent on server startup to avoid permanent spam, see DataManager.SKILL_DATA.validateMotions())
 			return true;
-		}
 
 		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		float serverTime = motionTime.getTimeForWeapon(player.getRace(), player.getGender(), weapons);
 		int clientTime = hitTime;
 
 		if (serverTime == 0) {
-			log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " Race: " + player.getRace()
-				+ " Gender: " + player.getGender() + " skillId: " + getSkillId());
+			if (!motionTime.isAllZero()) // only warn if motionTime isn't "empty" (warning for allZero motionTimes is sent on server startup)
+				log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " Race: " + player.getRace()
+					+ " Gender: " + player.getGender() + " skillId: " + getSkillId());
 			return true;
 		}
 

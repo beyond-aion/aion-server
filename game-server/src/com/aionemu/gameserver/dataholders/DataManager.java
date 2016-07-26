@@ -216,6 +216,7 @@ public final class DataManager {
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData().valueCollection());
+		SKILL_DATA.validateMotions();
 
 		long time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");

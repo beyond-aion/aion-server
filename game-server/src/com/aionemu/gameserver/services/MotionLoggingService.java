@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -15,9 +16,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,18 +33,18 @@ import com.aionemu.gameserver.skillengine.model.Times;
 import com.aionemu.gameserver.skillengine.model.WeaponTypeWrapper;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author kecimis
  */
 public class MotionLoggingService {
 
 	private static Logger log = LoggerFactory.getLogger(MotionLoggingService.class);
-
 	private ConcurrentHashMap<String, MotionLog> motionsMap = new ConcurrentHashMap<>();
-
+	private volatile boolean started = false;
 	private boolean advancedLog = false;
-
-	private boolean started = false;
 
 	public static final MotionLoggingService getInstance() {
 		return SingletonHolder.instance;
@@ -174,7 +172,7 @@ public class MotionLoggingService {
 
 	public void createFinalFile() {
 		MotionData motionData = new MotionData();
-		List<MotionTime> motionTimes = motionData.getMotionTimes();
+		Collection<MotionTime> motionTimes = motionData.getMotionTimes();
 
 		// create results
 		TreeMap<String, List<WeaponTime>> results = new TreeMap<>();
@@ -282,16 +280,12 @@ public class MotionLoggingService {
 			motionTimes.add(motion);
 		}
 
-		// marshall the final xml file
-		marshallFile(motionData, "data/static_data/skills/new_motion_times.xml");
-	}
-
-	public static void marshallFile(Object templates, String file) {
+		// marshal the final xml file
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(templates.getClass());
+			JAXBContext jaxbContext = JAXBContext.newInstance(motionData.getClass());
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
-			marshaller.marshal(templates, new FileOutputStream(file));
+			marshaller.marshal(motionData, new FileOutputStream("data/static_data/skills/new_motion_times.xml"));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

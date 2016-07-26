@@ -12,13 +12,13 @@ import com.aionemu.gameserver.model.Race;
 @XmlType(name = "motion_time", propOrder = { "am", "af", "em", "ef" })
 public class MotionTime {
 
-	protected Times am;
-	protected Times af;
-	protected Times em;
-	protected Times ef;
+	private Times am;
+	private Times af;
+	private Times em;
+	private Times ef;
 
 	@XmlAttribute(required = true)
-	protected String name;// TODO enum
+	private String name; // TODO enum
 
 	public String getName() {
 		return name;
@@ -92,42 +92,28 @@ public class MotionTime {
 		this.name = name;
 	}
 
-	public Times getTimes(Race race, Gender gender) {
+	public boolean isAllZero() {
+		return getAm().isAllZero() && getAf().isAllZero() && getEm().isAllZero() && getEf().isAllZero();
+	}
 
+	public Times getTimes(Race race, Gender gender) {
 		switch (race) {
 			case ASMODIANS:
 				if (gender == Gender.MALE)
-					return this.getAm();
+					return getAm();
 				else
-					return this.getAf();
+					return getAf();
 			case ELYOS:
 				if (gender == Gender.MALE)
-					return this.getEm();
+					return getEm();
 				else
-					return this.getEf();
+					return getEf();
 
 		}
-
 		return null;
 	}
 
 	public int getTimeForWeapon(Race race, Gender gender, WeaponTypeWrapper weapon) {
-
-		switch (race) {
-			case ASMODIANS:
-				if (gender == Gender.MALE)
-					return this.getAm().getTimeForWeapon(weapon);
-				else
-					return this.getAf().getTimeForWeapon(weapon);
-			case ELYOS:
-				if (gender == Gender.MALE)
-					return this.getEm().getTimeForWeapon(weapon);
-				else
-					return this.getEf().getTimeForWeapon(weapon);
-
-		}
-
-		return 0;
+		return getTimes(race, gender).getTimeForWeapon(weapon);
 	}
-
 }

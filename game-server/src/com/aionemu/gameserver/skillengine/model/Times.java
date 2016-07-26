@@ -25,6 +25,9 @@ public class Times {
 	@XmlTransient
 	private HashMap<WeaponTypeWrapper, Integer> timeForWeaponType = new HashMap<>();
 
+	@XmlTransient
+	private boolean isAllZero;
+
 	public String getTimes() {
 		return times;
 	}
@@ -39,6 +42,10 @@ public class Times {
 
 	public int getTimeForWeapon(WeaponTypeWrapper weapon) {
 		return timeForWeaponType.get(weapon);
+	}
+
+	public boolean isAllZero() {
+		return isAllZero;
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
@@ -63,5 +70,13 @@ public class Times {
 		timeForWeaponType.put(new WeaponTypeWrapper(ItemGroup.CANNON, null), Integer.parseInt(tokens[17]));
 		timeForWeaponType.put(new WeaponTypeWrapper(ItemGroup.HARP, null), Integer.parseInt(tokens[18]));
 		timeForWeaponType.put(new WeaponTypeWrapper(ItemGroup.KEYBLADE, null), Integer.parseInt(tokens[19]));
+		isAllZero = check();
+	}
+
+	private boolean check() {
+		for (Integer time : timeForWeaponType.values())
+			if (time > 0)
+				return false;
+		return true;
 	}
 }
