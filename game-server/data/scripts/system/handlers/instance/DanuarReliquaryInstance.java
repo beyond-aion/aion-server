@@ -21,6 +21,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
 	private AtomicInteger cloneKill = new AtomicInteger();
 	private AtomicBoolean isSpawning = new AtomicBoolean();
+	private AtomicBoolean isBossSpawned = new AtomicBoolean();
 	private Future<?> timer10minTask;
 	private Future<?> timer15minTask;
 
@@ -32,33 +33,22 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			case 284378:
 			case 284377:
 				despawnNpc(npc);
-				if (isDeadNpc(284377) && isDeadNpc(284378) && isDeadNpc(284379)) {
+				if (isDeadNpc(284377) && isDeadNpc(284378) && isDeadNpc(284379) && isBossSpawned.compareAndSet(false, true)) {
 					spawn(231304, 255.98627f, 259.0136f, 241.73842f, (byte) 90);
+					sendMsg(1401676);
+					timer10minTask = ThreadPoolManager.getInstance().schedule(() -> sendMsg(1401677), 10 * 60000);
+					timer15minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-					if (timer10minTask == null) {
-						sendMsg(1401676);
-						timer10minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								sendMsg(1401677);
-							}
-						}, 10 * 60000);
-					}
-					if (timer15minTask == null) {
-						timer15minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								// KILLALL (skill 21199)
-								sendMsg(1401678);
-								despawnNpcs(231304); // despawn bosses
-								despawnNpcs(231305);
-								despawnAll();
-								spawn(730843, 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
-							}
-						}, 15 * 60000);
-					}
+						@Override
+						public void run() {
+							// KILLALL (skill 21199)
+							sendMsg(1401678);
+							despawnNpcs(231304); // despawn bosses
+							despawnNpcs(231305);
+							despawnAll();
+							spawn(730843, 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
+						}
+					}, 15 * 60000);
 				}
 				break;
 			case 284383:
