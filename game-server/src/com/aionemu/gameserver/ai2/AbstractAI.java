@@ -103,26 +103,13 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	protected boolean canHandleEvent(AIEventType eventType) {
-		switch (this.currentState) {
-			case DESPAWNED:
-				return StateEvents.DESPAWN_EVENTS.hasEvent(eventType);
-			case DIED:
-				return StateEvents.DEAD_EVENTS.hasEvent(eventType);
-			case CREATED:
-				return StateEvents.CREATED_EVENTS.hasEvent(eventType);
-		}
 		switch (eventType) {
+			case CREATURE_MOVED:
 			case DIALOG_START:
 			case DIALOG_FINISH:
-				return isNonFightingState();
-			case CREATURE_MOVED:
-				return getName().equals("trap") || currentState != AIState.FIGHT && isNonFightingState();
+				return currentState == AIState.IDLE || currentState == AIState.WALKING;
 		}
 		return true;
-	}
-
-	public boolean isNonFightingState() {
-		return currentState == AIState.WALKING || currentState == AIState.IDLE;
 	}
 
 	public synchronized boolean setStateIfNot(AIState newState) {
@@ -157,7 +144,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	@Override
 	public final void onGeneralEvent(AIEventType event) {
-		if (canHandleEvent(event)) {
+		if (currentState.canHandle(event) && canHandleEvent(event)) {
 			if (this.isLogging()) {
 				AI2Logger.info(this, "General event " + event);
 			}
@@ -168,7 +155,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@Override
 	public final void onCreatureEvent(AIEventType event, Creature creature) {
 		Objects.requireNonNull(creature, "Creature must not be null");
-		if (canHandleEvent(event)) {
+		if (currentState.canHandle(event) && canHandleEvent(event)) {
 			if (this.isLogging()) {
 				AI2Logger.info(this, "Creature event " + event + ": " + creature.getObjectTemplate().getTemplateId());
 			}

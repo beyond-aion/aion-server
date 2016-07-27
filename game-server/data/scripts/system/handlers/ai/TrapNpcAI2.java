@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -68,13 +69,22 @@ public class TrapNpcAI2 extends NpcAI2 {
 			if (npcSkill != null) {
 				AI2Actions.useSkill(TrapNpcAI2.this, npcSkill.getSkillId());
 			}
-			despawnTask = ThreadPoolManager.getInstance().schedule(new TrapDelete(TrapNpcAI2.this), 5000);
+			despawnTask = ThreadPoolManager.getInstance().schedule(() -> AI2Actions.deleteOwner(TrapNpcAI2.this), 5000);
 		}
 	}
 
 	@Override
 	public boolean isMoveSupported() {
 		return false;
+	}
+
+	@Override
+	protected boolean canHandleEvent(AIEventType eventType) {
+		switch (eventType) {
+			case CREATURE_MOVED:
+				return true;
+		}
+		return super.canHandleEvent(eventType);
 	}
 
 	@Override
@@ -88,21 +98,4 @@ public class TrapNpcAI2 extends NpcAI2 {
 				return super.ask(question);
 		}
 	}
-
-	private static final class TrapDelete implements Runnable {
-
-		private TrapNpcAI2 ai;
-
-		TrapDelete(TrapNpcAI2 ai) {
-			this.ai = ai;
-		}
-
-		@Override
-		public void run() {
-			AI2Actions.deleteOwner(ai);
-			ai = null;
-		}
-
-	}
-
 }

@@ -44,11 +44,6 @@ public class AttakersMobsAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	protected void handleMoveArrived() {
-		super.handleMoveArrived();
-	}
-
-	@Override
 	protected void handleBackHome() {
 
 	}

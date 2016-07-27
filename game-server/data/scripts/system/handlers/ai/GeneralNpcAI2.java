@@ -2,6 +2,7 @@ package ai;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AttackIntention;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
@@ -106,11 +106,6 @@ public class GeneralNpcAI2 extends NpcAI2 {
 	}
 
 	@Override
-	protected void handleMoveValidate() {
-		MoveEventHandler.onMoveValidate(this);
-	}
-
-	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
 		MoveEventHandler.onMoveArrived(this);
@@ -124,15 +119,11 @@ public class GeneralNpcAI2 extends NpcAI2 {
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
-		boolean canHandle = super.canHandleEvent(eventType);
-
 		switch (eventType) {
-			case CREATURE_MOVED:
-				return canHandle || DataManager.NPC_SHOUT_DATA.getNpcShouts(getOwner().getWorldId(), getOwner().getNpcId(), ShoutEventType.SEE) != null;
 			case CREATURE_NEEDS_SUPPORT:
-				return canHandle && isNonFightingState() && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
+				return (getState() == AIState.IDLE || getState() == AIState.WALKING) && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
 		}
-		return canHandle;
+		return super.canHandleEvent(eventType);
 	}
 
 	@Override

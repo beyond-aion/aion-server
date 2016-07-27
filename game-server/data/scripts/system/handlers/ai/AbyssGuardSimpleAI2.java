@@ -2,7 +2,6 @@ package ai;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.StateEvents;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.handler.SimpleAbyssGuardHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -15,22 +14,11 @@ public class AbyssGuardSimpleAI2 extends AggressiveNpcAI2 {
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
-		switch (getState()) {
-			case DESPAWNED:
-				return StateEvents.DESPAWN_EVENTS.hasEvent(eventType);
-			case DIED:
-				return StateEvents.DEAD_EVENTS.hasEvent(eventType);
-			case CREATED:
-				return StateEvents.CREATED_EVENTS.hasEvent(eventType);
-		}
 		switch (eventType) {
-			case DIALOG_START:
-			case DIALOG_FINISH:
-				return isNonFightingState();
 			case CREATURE_MOVED:
 				return getState() != AIState.FIGHT;
 		}
-		return true;
+		return super.canHandleEvent(eventType);
 	}
 
 	@Override

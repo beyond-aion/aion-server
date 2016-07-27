@@ -2,7 +2,6 @@ package ai;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.StateEvents;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.handler.FollowEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -20,19 +19,10 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
-		switch (getState()) {
-			case DESPAWNED:
-				return StateEvents.DESPAWN_EVENTS.hasEvent(eventType);
-			case DIED:
-				return StateEvents.DEAD_EVENTS.hasEvent(eventType);
-			case CREATED:
-				return StateEvents.CREATED_EVENTS.hasEvent(eventType);
-		}
-
 		if (eventType == AIEventType.CREATURE_MOVED) {
 			return getState() == AIState.FOLLOWING;
 		}
-		return true;
+		return super.canHandleEvent(eventType);
 	}
 
 	@Override
