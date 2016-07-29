@@ -3,6 +3,7 @@ package com.aionemu.gameserver.dataholders;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -36,15 +37,12 @@ public class WalkerData {
 	private List<WalkerTemplate> walkerlist;
 
 	@XmlTransient
-	private FastMap<String, WalkerTemplate> walkerlistData = new FastMap<String, WalkerTemplate>();
+	private Map<String, WalkerTemplate> walkerlistData = new FastMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WalkerTemplate route : walkerlist) {
-			if (walkerlistData.containsKey(route.getRouteId())) {
+			if (walkerlistData.putIfAbsent(route.getRouteId(), route) != null)
 				log.warn("Duplicate route ID: " + route.getRouteId());
-				continue;
-			}
-			walkerlistData.put(route.getRouteId(), route);
 		}
 		walkerlist.clear();
 		walkerlist = null;
@@ -55,14 +53,12 @@ public class WalkerData {
 	}
 
 	public WalkerTemplate getWalkerTemplate(String routeId) {
-		if (routeId == null)
-			return null;
 		return walkerlistData.get(routeId);
 	}
 
 	public void addTemplate(WalkerTemplate newTemplate) {
 		if (walkerlist == null)
-			walkerlist = new FastTable<WalkerTemplate>();
+			walkerlist = new FastTable<>();
 		walkerlist.add(newTemplate);
 	}
 

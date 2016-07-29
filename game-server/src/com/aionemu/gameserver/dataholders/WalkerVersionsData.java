@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,16 +21,18 @@ import com.aionemu.gameserver.model.templates.walker.RouteVersion;
 public class WalkerVersionsData {
 
 	@XmlElement(name = "walk_parent")
-	protected List<RouteParent> routeGroups;
+	private List<RouteParent> routeGroups;
 
 	@XmlTransient
-	protected HashMap<String, String> walkParents = new HashMap<>();
+	private Map<String, String> walkParents = new HashMap<>();
 
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (RouteParent group : routeGroups) {
 			for (RouteVersion version : group.getRouteVersion())
 				walkParents.put(version.getId(), group.getId());
 		}
+		routeGroups.clear();
+		routeGroups = null;
 	}
 
 	public boolean isRouteVersioned(String routeId) {

@@ -23,24 +23,49 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class WalkManager {
 
+	public static byte RANDOM_WALK_GEO_FLAGS = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId()
+		| CollisionIntention.WALK.getId());
+
 	/**
 	 * @param npcAI
+	 * @return True, if the npc started walking. False if walking is disabled, not supported, or the npc is already walking.
 	 */
 	public static boolean startWalking(NpcAI2 npcAI) {
-		npcAI.setStateIfNot(AIState.WALKING);
+		if (!AIConfig.ACTIVE_NPC_MOVEMENT)
+			return false;
+		return startRandomWalking(npcAI) || startRouteWalking(npcAI);
+	}
+
+	private static boolean startRandomWalking(NpcAI2 npcAI) {
+		if (!npcAI.getOwner().isRandomWalker())
+			return false;
+		if (!npcAI.setStateIfNot(AIState.WALKING) || !npcAI.setSubStateIfNot(AISubState.WALK_RANDOM))
+			return false;
+		EmoteManager.emoteStartWalking(npcAI.getOwner());
+		chooseNextRandomPoint(npcAI);
+		return true;
+	}
+
+	private static boolean startRouteWalking(NpcAI2 npcAI) {
 		Npc owner = npcAI.getOwner();
+		if (!owner.isPathWalker())
+			return false;
 		WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId());
-		if (template != null) {
-			npcAI.setSubStateIfNot(AISubState.WALK_PATH);
-			startRouteWalking(npcAI, owner, template);
-		} else {
-			return startRandomWalking(npcAI, owner);
-		}
+		if (template == null)
+			return false;
+		if (!npcAI.setStateIfNot(AIState.WALKING) || !npcAI.setSubStateIfNot(AISubState.WALK_PATH))
+			return false;
+		List<RouteStep> route = template.getRouteSteps();
+		int currentPoint = owner.getMoveController().getCurrentPoint();
+		RouteStep nextStep = findNextRoutStep(owner, route);
+		owner.getMoveController().setCurrentRoute(route);
+		owner.getMoveController().setRouteStep(nextStep, route.get(currentPoint));
+		EmoteManager.emoteStartWalking(npcAI.getOwner());
+		npcAI.getOwner().getMoveController().moveToNextPoint();
 		return true;
 	}
 
 	/**
-	 *
 	 * @param npcAI
 	 * @param x
 	 * @param y
@@ -49,50 +74,8 @@ public class WalkManager {
 	public static void startForcedWalking(NpcAI2 npcAI, float x, float y, float z) {
 		npcAI.setStateIfNot(AIState.FORCED_WALKING);
 		npcAI.setSubStateIfNot(AISubState.NONE);
-		walkToPoint(npcAI.getOwner(), x, y, z);
-	}
-
-
-	private static void walkToPoint(Npc owner, float x, float y, float z) {
-		EmoteManager.emoteStartWalking(owner);
-		owner.getMoveController().forcedMoveToPoint(x, y, z);
-	}
-
-	/**
-	 * @param npcAI
-	 * @param owner
-	 */
-	private static boolean startRandomWalking(NpcAI2 npcAI, Npc owner) {
-		if (!AIConfig.ACTIVE_NPC_MOVEMENT) {
-			return false;
-		}
-		int randomWalkNr = owner.getSpawn().getRandomWalk();
-		if (randomWalkNr == 0) {
-			return false;
-		}
-		if (npcAI.setSubStateIfNot(AISubState.WALK_RANDOM)) {
-			EmoteManager.emoteStartWalking(npcAI.getOwner());
-			chooseNextRandomPoint(npcAI);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @param npcAI
-	 * @param owner
-	 * @param template
-	 */
-	protected static void startRouteWalking(NpcAI2 npcAI, Npc owner, WalkerTemplate template) {
-		if (!AIConfig.ACTIVE_NPC_MOVEMENT)
-			return;
-		List<RouteStep> route = template.getRouteSteps();
-		int currentPoint = owner.getMoveController().getCurrentPoint();
-		RouteStep nextStep = findNextRoutStep(owner, route);
-		owner.getMoveController().setCurrentRoute(route);
-		owner.getMoveController().setRouteStep(nextStep, route.get(currentPoint));
 		EmoteManager.emoteStartWalking(npcAI.getOwner());
-		npcAI.getOwner().getMoveController().moveToNextPoint();
+		npcAI.getOwner().getMoveController().forcedMoveToPoint(x, y, z);
 	}
 
 	/**
@@ -157,21 +140,11 @@ public class WalkManager {
 	}
 
 	/**
-	 * Is this npc will walk. Currently all monsters will walk and those npc wich has walk routes
-	 * 
 	 * @param npcAI
-	 * @return
+	 * @return True if the npc is able to walk.
 	 */
-	public static boolean isWalking(NpcAI2 npcAI) {
-		return npcAI.isMoveSupported() && hasWalkRoutes(npcAI);
-	}
-
-	/**
-	 * @param npcAI
-	 * @return
-	 */
-	public static boolean hasWalkRoutes(NpcAI2 npcAI) {
-		return npcAI.getOwner().hasWalkRoutes();
+	public static boolean canWalk(NpcAI2 npcAI) {
+		return npcAI.isMoveSupported() && npcAI.getOwner().isWalker();
 	}
 
 	/**
@@ -235,39 +208,28 @@ public class WalkManager {
 	/**
 	 * @param npcAI
 	 */
-	private static void chooseNextRandomPoint(final NpcAI2 npcAI) {
-		final Npc owner = npcAI.getOwner();
+	private static void chooseNextRandomPoint(NpcAI2 npcAI) {
+		Npc owner = npcAI.getOwner();
 		owner.getMoveController().abortMove(false);
-		int randomWalkRange = owner.getSpawn().getRandomWalkRange();
-		final float distToSpawn = (float) owner.getDistanceToSpawnLocation();
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if (npcAI.isInState(AIState.WALKING)) {
-					if (distToSpawn > randomWalkRange) {
-						owner.getMoveController().moveToPoint(owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
-					} else {
-						float nextX = Rnd.get() * randomWalkRange;
-						float nextY = Rnd.get() * randomWalkRange;
-						if (nextX < 0.5f)
-							nextX = 0;
-						if (nextY < 0.5f)
-							nextY = 0;
-						if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
-							byte flags = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId() | CollisionIntention.WALK.getId());
-							Vector3f loc = GeoService.getInstance().getClosestCollision(owner, owner.getX() + nextX, owner.getY() + nextY, owner.getZ(), true,
-								flags);
-							owner.getMoveController().moveToPoint(loc.x, loc.y, loc.z);
-						} else {
-							owner.getMoveController().moveToPoint(owner.getX() + nextX, owner.getY() + nextY, owner.getZ());
-						}
-					}
+				if (!npcAI.isInState(AIState.WALKING))
+					return;
+				int randomWalkRange = owner.getSpawn().getRandomWalkRange();
+				int diameter = randomWalkRange * 2;
+				float nextX = (Rnd.get() * diameter - randomWalkRange) + owner.getSpawn().getX();
+				float nextY = (Rnd.get() * diameter - randomWalkRange) + owner.getSpawn().getY();
+				if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
+					Vector3f loc = GeoService.getInstance().getClosestCollision(owner, nextX, nextY, owner.getZ(), true, RANDOM_WALK_GEO_FLAGS);
+					owner.getMoveController().moveToPoint(loc.x, loc.y, loc.z);
+				} else {
+					owner.getMoveController().moveToPoint(nextX, nextY, owner.getZ());
 				}
 			}
 		}, Rnd.get(AIConfig.MINIMIMUM_DELAY, AIConfig.MAXIMUM_DELAY) * 1000);
-
 	}
 
 	public static void stopWalking(NpcAI2 npcAI) {

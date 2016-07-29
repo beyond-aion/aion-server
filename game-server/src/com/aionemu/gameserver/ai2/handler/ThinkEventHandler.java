@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.ai2.handler;
 
 import com.aionemu.gameserver.ai2.AI2Logger;
-import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -41,14 +40,8 @@ public class ThinkEventHandler {
 				case FIGHT:
 					thinkAttack(npcAI);
 					break;
-				case WALKING:
-					thinkWalking(npcAI);
-					break;
 				case IDLE:
 					thinkIdle(npcAI);
-					break;
-				case FORCED_WALKING:
-					// we should probably handle this somehow, but for now its fine.
 					break;
 			}
 		} finally {
@@ -101,19 +94,8 @@ public class ThinkEventHandler {
 	/**
 	 * @param npcAI
 	 */
-	public static void thinkWalking(NpcAI2 npcAI) {
-		WalkManager.startWalking(npcAI);
-	}
-
-	/**
-	 * @param npcAI
-	 */
 	public static void thinkIdle(NpcAI2 npcAI) {
-		if (WalkManager.isWalking(npcAI)) {
-			boolean startedWalking = WalkManager.startWalking(npcAI);
-			if (!startedWalking) {
-				npcAI.setStateIfNot(AIState.IDLE);
-			}
-		}
+		if (WalkManager.canWalk(npcAI))
+			WalkManager.startWalking(npcAI);
 	}
 }

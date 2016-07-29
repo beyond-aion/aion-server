@@ -116,10 +116,6 @@ public class GeoService {
 		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, limit, instanceId);
 	}
 
-	public boolean isGeoOn() {
-		return GeoDataConfig.GEO_ENABLE;
-	}
-
 	public Vector3f getClosestCollision(Creature object, float x, float y, float z, boolean changeDirection, byte intentions) {
 		return geoData.getMap(object.getWorldId()).getClosestCollision(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection,
 			object.isInFlyingState(), object.getInstanceId(), intentions);

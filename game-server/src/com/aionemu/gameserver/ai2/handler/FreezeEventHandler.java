@@ -17,10 +17,10 @@ public class FreezeEventHandler {
 			ai.setSubStateIfNot(AISubState.NONE);
 			if (ai instanceof NpcAI2) {
 				Npc npc = ((NpcAI2) ai).getOwner();
-				if (npc.getWalkerGroup() != null) {
+				if (npc.isPathWalker()) {
 					ai.setStateIfNot(AIState.WALKING);
 					ai.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
-				} else if (npc.getSpawn().getRandomWalk() > 0) {
+				} else if (npc.isRandomWalker()) {
 					ai.setStateIfNot(AIState.WALKING);
 					ai.setSubStateIfNot(AISubState.WALK_RANDOM);
 				}
@@ -31,10 +31,10 @@ public class FreezeEventHandler {
 	}
 
 	public static void onFreeze(AbstractAI ai) {
-		if (ai.isInState(AIState.WALKING) || ai.isInState(AIState.FORCED_WALKING)) {
+		if (ai.isInState(AIState.WALKING) || ai.isInState(AIState.FORCED_WALKING))
 			WalkManager.stopWalking((NpcAI2) ai);
-		}
-		ai.setStateIfNot(AIState.IDLE);
+		else
+			ai.setStateIfNot(AIState.IDLE);
 		ai.setSubStateIfNot(AISubState.FREEZE);
 		ai.think();
 		if (ai instanceof NpcAI2) {

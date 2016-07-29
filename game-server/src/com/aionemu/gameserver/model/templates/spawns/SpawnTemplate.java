@@ -101,12 +101,8 @@ public class SpawnTemplate {
 		this.staticId = staticId;
 	}
 
-	public int getRandomWalk() {
+	public int getRandomWalkRange() {
 		return randomWalk;
-	}
-
-	public void setRandomWalk(int randomWalk) {
-		this.randomWalk = randomWalk;
 	}
 
 	public int getFly() {
@@ -154,9 +150,6 @@ public class SpawnTemplate {
 		return anchor;
 	}
 
-	public boolean hasRandomWalk() {
-		return randomWalk != 0;
-	}
 
 	public boolean isNoRespawn() {
 		return spawnGroup.getRespawnTime() == 0;

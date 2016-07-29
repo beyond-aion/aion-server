@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 
 /**
@@ -32,10 +31,10 @@ public class WalkerFormator {
 	 * @return <tt>true</tt> if npc was brought into world by the method call.
 	 */
 	public static boolean processClusteredNpc(Npc npc, int worldId, int instanceId) {
-		SpawnTemplate spawn = npc.getSpawn();
-		if (spawn.getWalkerId() != null) {
+		String walkerId = npc.getSpawn().getWalkerId();
+		if (walkerId != null) {
 			InstanceWalkerFormations formations = WalkerFormationsCache.getInstanceFormations(worldId, instanceId);
-			WalkerGroup wg = formations.getSpawnWalkerGroup(spawn.getWalkerId());
+			WalkerGroup wg = formations.getSpawnWalkerGroup(walkerId);
 
 			if (wg != null) {
 				npc.setWalkerGroup(wg);
@@ -43,9 +42,9 @@ public class WalkerFormator {
 				return false;
 			}
 
-			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(spawn.getWalkerId());
+			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
 			if (template == null) {
-				log.warn("Missing walker ID: " + spawn.getWalkerId());
+				log.warn("Missing walker ID: " + walkerId);
 				return false;
 			}
 			if (template.getPool() < 2)
