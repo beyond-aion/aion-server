@@ -133,7 +133,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 							setStateIfNot(AIState.FIGHT);
 							think();
 						} else {
-							getMoveController().abortMove(false);
+							getMoveController().abortMove();
 							getOwner().setTarget(creature);
 							getOwner().getGameStats().renewLastAttackTime();
 							getOwner().getGameStats().renewLastAttackedTime();

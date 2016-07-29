@@ -17,7 +17,7 @@ public interface MoveController {
 
 	void startMovingToDestination();
 
-	void abortMove(boolean isFight);
+	void abortMove();
 
 	byte getMovementMask();
 

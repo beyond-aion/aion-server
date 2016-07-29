@@ -37,7 +37,7 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 		super.handleMoveArrived();
 		if (isDestroyed.compareAndSet(false, true)) {
 			if (!isAlreadyDead()) {
-				getMoveController().abortMove(false);
+				getMoveController().abortMove();
 				VisibleObject target = getTarget();
 				if (target != null && target instanceof Npc) {
 					final Npc npc = (Npc) target;

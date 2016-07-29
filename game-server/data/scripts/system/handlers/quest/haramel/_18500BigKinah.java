@@ -119,7 +119,7 @@ public class _18500BigKinah extends QuestHandler {
 
 				if (var == 3) {
 					playQuestMovie(env, 175);
-					player.getMoveController().abortMove(false);
+					player.getMoveController().abortMove();
 				}
 			}
 			return true;

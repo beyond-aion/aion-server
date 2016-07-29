@@ -63,7 +63,7 @@ public abstract class CreatureMoveController<T extends VisibleObject> implements
 	}
 
 	@Override
-	public void abortMove(boolean isFight) {
+	public void abortMove() {
 	}
 
 	protected void setAndSendStopMove(Creature owner) {

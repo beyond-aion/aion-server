@@ -249,9 +249,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@AIListenable(enabled = false, type = AIEventType.ATTACK_FINISH)
 	protected abstract void handleFinishAttack();
 
-	@AIListenable(enabled = false, type = AIEventType.TARGET_REACHED)
-	protected abstract void handleTargetReached();
-
 	@AIListenable(enabled = false, type = AIEventType.TARGET_TOOFAR)
 	protected abstract void handleTargetTooFar();
 
@@ -384,9 +381,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 				break;
 			case ATTACK_FINISH:
 				handleFinishAttack();
-				break;
-			case TARGET_REACHED:
-				handleTargetReached();
 				break;
 			case TARGET_TOOFAR:
 				handleTargetTooFar();

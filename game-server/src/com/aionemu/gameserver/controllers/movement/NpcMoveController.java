@@ -52,7 +52,6 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private LastUsedCache<Byte, Point3D> lastSteps = null;
 	private byte stepSequenceNr = 0;
 
-	private float offset = 0.1f;
 	// walk related
 	List<RouteStep> currentRoute;
 	int currentPoint;
@@ -132,7 +131,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			AI2Logger.moveinfo(owner, "moveToDestination destination: " + destination);
 		}
 		if (NpcActions.isAlreadyDead(owner)) {
-			abortMove(false);
+			abortMove();
 			return;
 		}
 		if (!owner.canPerformMove()) {
@@ -163,17 +162,15 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				}
 				if (MathUtil.getDistance(target, pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
 					Creature creature = (Creature) target;
-					offset = owner.getController().getAttackDistanceToTarget();
 					pointX = target.getX();
 					pointY = target.getY();
 					pointZ = getTargetZ(owner, creature);
 				}
-				moveToLocation(pointX, pointY, pointZ, offset);
+				moveToLocation(pointX, pointY, pointZ);
 				break;
 			case POINT:
 			case FORCED_POINT:
-				offset = 0.1f;
-				moveToLocation(pointX, pointY, pointZ, offset);
+				moveToLocation(pointX, pointY, pointZ);
 				break;
 		}
 		updateLastMove();
@@ -199,10 +196,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	 * @param targetX
 	 * @param targetY
 	 * @param targetZ
-	 * @param offset
 	 * @return
 	 */
-	protected void moveToLocation(float targetX, float targetY, float targetZ, float offset) {
+	protected void moveToLocation(float targetX, float targetY, float targetZ) {
 		boolean directionChanged = false;
 		float ownerX = owner.getX();
 		float ownerY = owner.getY();
@@ -312,17 +308,17 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	@Override
-	public void abortMove(boolean isFight) {
+	public void abortMove() {
 		if (!started.get())
 			return;
-		resetMove(isFight);
+		resetMove();
 		setAndSendStopMove(owner);
 	}
 
 	/**
 	 * Initialize values to default ones
 	 */
-	public void resetMove(boolean isFight) {
+	public void resetMove() {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}

@@ -3,7 +3,6 @@ package ai.instance.stonespearReach;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
-import com.aionemu.gameserver.ai2.handler.TargetEventHandler;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
@@ -32,11 +31,6 @@ public class AethericFieldBlaststoneAI2 extends NpcAI2 {
 	public void handleDied() {
 		super.handleDied();
 		getOwner().getController().onDelete();
-	}
-
-	@Override
-	protected void handleTargetReached() {
-		TargetEventHandler.onTargetReached(this);
 	}
 
 	@Override

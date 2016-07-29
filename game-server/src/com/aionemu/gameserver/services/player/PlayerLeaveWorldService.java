@@ -92,7 +92,7 @@ public class PlayerLeaveWorldService {
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
-		player.getMoveController().abortMove(false);
+		player.getMoveController().abortMove();
 
 		if (player.isLooting())
 			DropService.getInstance().closeDropList(player, player.getLootingNpcOid());

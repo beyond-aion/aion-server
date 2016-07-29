@@ -96,7 +96,7 @@ public class FearEffect extends EffectTemplate {
 
 		// for now we support only players
 		if (GeoDataConfig.FEAR_ENABLE) {
-			effect.getEffected().getMoveController().abortMove(false);// TODO impl stopMoving?
+			effect.getEffected().getMoveController().abortMove();// TODO impl stopMoving?
 		}
 		if (effect.getEffected() instanceof Npc) {
 			((NpcAI2) effect.getEffected().getAi2()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
@@ -138,7 +138,7 @@ public class FearEffect extends EffectTemplate {
 					closestCollision.setZ(effected.getZ());
 				}
 				if (effected instanceof Npc) {
-					((Npc) effected).getMoveController().resetMove(false);
+					((Npc) effected).getMoveController().resetMove();
 					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);

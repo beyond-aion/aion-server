@@ -69,11 +69,6 @@ public class GeneralNpcAI2 extends NpcAI2 {
 	}
 
 	@Override
-	protected void handleTargetReached() {
-		TargetEventHandler.onTargetReached(this);
-	}
-
-	@Override
 	protected void handleNotAtHome() {
 		ReturningEventHandler.onNotAtHome(this);
 	}

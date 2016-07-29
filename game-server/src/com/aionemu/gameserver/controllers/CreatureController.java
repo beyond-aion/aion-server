@@ -139,7 +139,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param lastAttacker
 	 */
 	public void onDie(@Nonnull Creature lastAttacker) {
-		getOwner().getMoveController().abortMove(false);
+		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
 		if (getOwner() instanceof Player && ((Player) getOwner()).getIsFlyingBeforeDeath()) {

@@ -74,7 +74,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	@Override
 	public boolean handleForcedMoveArrived() {
 		if (isInFlameShowerTask.get() && MathUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
-			getOwner().getMoveController().abortMove(true);
+			getOwner().getMoveController().abortMove();
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);
 			Creature creature = getAggroList().getMostHated();
@@ -182,7 +182,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 				setStateIfNot(AIState.FIGHT);
 				think();
 			} else {
-				getMoveController().abortMove(false);
+				getMoveController().abortMove();
 				getOwner().setTarget(creature);
 				getOwner().getGameStats().renewLastAttackTime();
 				getOwner().getGameStats().renewLastAttackedTime();

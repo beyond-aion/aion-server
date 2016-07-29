@@ -34,7 +34,7 @@ public class SacrificialSoulAI2 extends GeneralNpcAI2 {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (creature.getEffectController().hasAbnormalEffect(18959)) {
-			getMoveController().abortMove(false);
+			getMoveController().abortMove();
 			AI2Actions.deleteOwner(this);
 		}
 	}

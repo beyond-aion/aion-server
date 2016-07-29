@@ -118,7 +118,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 
 				if (var == 3) {
 					playQuestMovie(env, 217);
-					player.getMoveController().abortMove(false);
+					player.getMoveController().abortMove();
 				}
 			}
 			return true;

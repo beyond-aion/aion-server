@@ -42,7 +42,7 @@ public class SpallerEchtraAI2 extends AggressiveNpcAI2 {
 					AI2Actions.applyEffect(this, paralyze, getOwner());
 					getOwner().getEffectController().setAbnormal(4);
 					getOwner().getController().cancelCurrentSkill(null);
-					getOwner().getMoveController().abortMove(false);
+					getOwner().getMoveController().abortMove();
 					getOwner().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
 					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 

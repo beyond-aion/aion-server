@@ -29,7 +29,7 @@ public class AttackEventHandler {
 		}
 		// TODO lock or better switch
 		if (npcAI.isInState(AIState.RETURNING)) {
-			npcAI.getOwner().getMoveController().abortMove(false);
+			npcAI.getOwner().getMoveController().abortMove();
 			npcAI.setStateIfNot(AIState.IDLE);
 			npcAI.onGeneralEvent(AIEventType.NOT_AT_HOME);
 			return;
@@ -38,7 +38,7 @@ public class AttackEventHandler {
 			return;
 		}
 		if (npcAI.isInState(AIState.WALKING)) {
-			WalkManager.stopWalking(npcAI, true);
+			WalkManager.stopWalking(npcAI);
 		}
 		npcAI.getOwner().getGameStats().renewLastAttackedTime();
 		if (npcAI.setStateIfNot(AIState.FIGHT)) {

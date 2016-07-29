@@ -169,11 +169,11 @@ public class WalkManager {
 					chooseNextRandomPoint(npcAI);
 					break;
 				case TALK:
-					npcAI.getOwner().getMoveController().abortMove(false);
+					npcAI.getOwner().getMoveController().abortMove();
 					break;
 			}
 		} else if (npcAI.isInState(AIState.FORCED_WALKING)) {
-			npcAI.getOwner().getMoveController().abortMove(true);
+			npcAI.getOwner().getMoveController().abortMove();
 			if (!npcAI.handleForcedMoveArrived()) {
 				npcAI.setStateIfNot(AIState.FIGHT);
 				npcAI.think();
@@ -187,11 +187,11 @@ public class WalkManager {
 	protected static void chooseNextRouteStep(final NpcAI2 npcAI) {
 		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
 		if (walkPause == 0) {
-			npcAI.getOwner().getMoveController().resetMove(false);
+			npcAI.getOwner().getMoveController().resetMove();
 			if (npcAI.getOwner().getMoveController().isNextRouteStepChosen())
 				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
-			npcAI.getOwner().getMoveController().abortMove(false);
+			npcAI.getOwner().getMoveController().abortMove();
 			npcAI.getOwner().getMoveController().isNextRouteStepChosen();
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -210,7 +210,7 @@ public class WalkManager {
 	 */
 	private static void chooseNextRandomPoint(NpcAI2 npcAI) {
 		Npc owner = npcAI.getOwner();
-		owner.getMoveController().abortMove(false);
+		owner.getMoveController().abortMove();
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -232,15 +232,11 @@ public class WalkManager {
 		}, Rnd.get(AIConfig.MINIMIMUM_DELAY, AIConfig.MAXIMUM_DELAY) * 1000);
 	}
 
-	public static void stopWalking(NpcAI2 npcAI) {
-		stopWalking(npcAI, false);
-	}
-
 	/**
 	 * @param npcAI
 	 */
-	public static void stopWalking(NpcAI2 npcAI, boolean isFight) {
-		npcAI.getOwner().getMoveController().abortMove(isFight);
+	public static void stopWalking(NpcAI2 npcAI) {
+		npcAI.getOwner().getMoveController().abortMove();
 		npcAI.setStateIfNot(AIState.IDLE);
 		npcAI.setSubStateIfNot(AISubState.NONE);
 		EmoteManager.emoteStopWalking(npcAI.getOwner());

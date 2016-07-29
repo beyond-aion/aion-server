@@ -171,7 +171,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					playQuestMovie(env, 993);
-					player.getMoveController().abortMove(false);
+					player.getMoveController().abortMove();
 				}
 			}
 			return true;

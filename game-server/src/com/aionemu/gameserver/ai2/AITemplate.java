@@ -113,10 +113,6 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	protected void handleTargetReached() {
-	}
-
-	@Override
 	protected void handleAttackComplete() {
 	}
 

@@ -307,7 +307,7 @@ public class World {
 			log.warn(String.format("CHECKPOINT: newRegion is null, map - %d, object coordinates - %f %f %f", object.getWorldId(), newX, newY, newZ),
 				new Throwable());
 			if (object instanceof Creature)
-				((Creature) object).getMoveController().abortMove(false);
+				((Creature) object).getMoveController().abortMove();
 			if (object instanceof Player) {
 				Player player = (Player) object;
 				float x, y, z;

@@ -251,7 +251,7 @@ public class AionConnection extends AConnection {
 		if (player != null) {
 			msg += " [Player: " + player.getName() + "]";
 			// force stop movement of player
-			player.getMoveController().abortMove(false);
+			player.getMoveController().abortMove();
 			player.getController().stopMoving();
 
 			ThreadPoolManager.getInstance().schedule(() -> PlayerLeaveWorldService.leaveWorld(player), 10 * 1000); // prevent ctrl+alt+del / close window exploit
