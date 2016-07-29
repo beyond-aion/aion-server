@@ -18,14 +18,10 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
-
-
 /**
  * @author ATracer
  */
 public class WalkManager {
-
-	private static final int WALK_RANDOM_RANGE = 5;
 
 	/**
 	 * @param npcAI
@@ -219,7 +215,7 @@ public class WalkManager {
 		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
 		if (walkPause == 0) {
 			npcAI.getOwner().getMoveController().resetMove(false);
-			if(npcAI.getOwner().getMoveController().isNextRouteStepChosen())
+			if (npcAI.getOwner().getMoveController().isNextRouteStepChosen())
 				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
 			npcAI.getOwner().getMoveController().abortMove(false);
@@ -242,9 +238,7 @@ public class WalkManager {
 	private static void chooseNextRandomPoint(final NpcAI2 npcAI) {
 		final Npc owner = npcAI.getOwner();
 		owner.getMoveController().abortMove(false);
-		int randomWalkNr = owner.getSpawn().getRandomWalk();
-		final int walkRange = Math.max(randomWalkNr, WALK_RANDOM_RANGE);
-
+		int randomWalkRange = owner.getSpawn().getRandomWalkRange();
 		final float distToSpawn = (float) owner.getDistanceToSpawnLocation();
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -252,11 +246,15 @@ public class WalkManager {
 			@Override
 			public void run() {
 				if (npcAI.isInState(AIState.WALKING)) {
-					if (distToSpawn > walkRange) {
+					if (distToSpawn > randomWalkRange) {
 						owner.getMoveController().moveToPoint(owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
 					} else {
-						int nextX = Rnd.get(walkRange * 2) - walkRange;
-						int nextY = Rnd.get(walkRange * 2) - walkRange;
+						float nextX = Rnd.get() * randomWalkRange;
+						float nextY = Rnd.get() * randomWalkRange;
+						if (nextX < 0.5f)
+							nextX = 0;
+						if (nextY < 0.5f)
+							nextY = 0;
 						if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
 							byte flags = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId() | CollisionIntention.WALK.getId());
 							Vector3f loc = GeoService.getInstance().getClosestCollision(owner, owner.getX() + nextX, owner.getY() + nextY, owner.getZ(), true,
@@ -275,6 +273,7 @@ public class WalkManager {
 	public static void stopWalking(NpcAI2 npcAI) {
 		stopWalking(npcAI, false);
 	}
+
 	/**
 	 * @param npcAI
 	 */
