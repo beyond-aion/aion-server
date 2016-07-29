@@ -304,7 +304,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 *          - the item color to set (RGB color value or null to remove dye)
 	 */
 	public void setItemColor(Integer color) {
-		this.itemColor = color;
+		this.itemColor = color == null ? null : color & 0xFFFFFF; // use bit mask to ensure valid value range (no alpha channel support)
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
