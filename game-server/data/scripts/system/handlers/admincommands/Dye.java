@@ -47,9 +47,8 @@ public class Dye extends AdminCommand {
 			ItemTemplate dyeItemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemColor);
 
 			if (itemColor != 0 && dyeItemTemplate != null && dyeItemTemplate.getActions() != null && dyeItemTemplate.getActions().getDyeAction() != null) {
-				// itemColor is a dyeing item ID
 				itemColor = dyeItemTemplate.getActions().getDyeAction().getColor();
-				colorText = ChatUtil.item(itemColor);
+				colorText = ChatUtil.item(dyeItemTemplate.getTemplateId());
 			} else {
 				try {
 					try {
