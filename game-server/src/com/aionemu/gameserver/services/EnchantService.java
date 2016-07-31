@@ -271,9 +271,9 @@ public class EnchantService {
 		maxEnchant += targetItem.getEnchantBonus();
 		if (!targetItem.isAmplified()) {
 			int rnd = Rnd.get(1, 100); // crit modifier
-			if (rnd < 2)
+			if (rnd <= 5)
 				addLevel = 3;
-			else if (rnd < 7)
+			else if (rnd <= 10)
 				addLevel = 2;
 		}
 
