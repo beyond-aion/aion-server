@@ -46,8 +46,6 @@ public interface InstanceHandler {
 
 	void onEnterZone(Player player, ZoneInstance zone);
 
-	void onEnterZone(Npc npc, ZoneInstance zone);
-
 	void onLeaveZone(Player player, ZoneInstance zone);
 
 	void onPlayMovieEnd(Player player, int movieId);
