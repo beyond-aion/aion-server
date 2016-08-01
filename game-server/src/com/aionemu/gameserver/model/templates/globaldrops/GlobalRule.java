@@ -77,48 +77,24 @@ public class GlobalRule {
 		return gdItems;
 	}
 
-	public void setItems(GlobalDropItems value) {
-		this.gdItems = value;
-	}
-
 	public GlobalDropWorlds getGlobalRuleWorlds() {
 		return gdWorlds;
-	}
-
-	public void setWorlds(GlobalDropWorlds value) {
-		this.gdWorlds = value;
 	}
 
 	public GlobalDropRaces getGlobalRuleRaces() {
 		return gdRaces;
 	}
 
-	public void setNpcRaces(GlobalDropRaces value) {
-		this.gdRaces = value;
-	}
-
 	public GlobalDropRatings getGlobalRuleRatings() {
 		return gdRatings;
-	}
-
-	public void setNpcRatings(GlobalDropRatings value) {
-		this.gdRatings = value;
 	}
 
 	public GlobalDropMaps getGlobalRuleMaps() {
 		return gdMaps;
 	}
 
-	public void setMaps(GlobalDropMaps value) {
-		this.gdMaps = value;
-	}
-
 	public GlobalDropTribes getGlobalRuleTribes() {
 		return gdTribes;
-	}
-
-	public void setNpcTribes(GlobalDropTribes value) {
-		this.gdTribes = value;
 	}
 
 	public GlobalDropNpcs getGlobalRuleNpcs() {
@@ -133,40 +109,20 @@ public class GlobalRule {
 		return gdNpcNames;
 	}
 
-	public void setNpcNames(GlobalDropNpcNames value) {
-		this.gdNpcNames = value;
-	}
-
 	public GlobalDropNpcGroups getGlobalRuleNpcGroups() {
 		return gdNpcGroups;
-	}
-
-	public void setNpcGroups(GlobalDropNpcGroups value) {
-		this.gdNpcGroups = value;
 	}
 
 	public GlobalDropExcludedNpcs getGlobalRuleExcludedNpcs() {
 		return gdExcludedNpcs;
 	}
 
-	public void setExcludedNpcs(GlobalDropExcludedNpcs value) {
-		this.gdExcludedNpcs = value;
-	}
-
 	public GlobalDropZones getGlobalRuleZones() {
 		return gdZones;
 	}
 
-	public void setZones(GlobalDropZones value) {
-		this.gdZones = value;
-	}
-
 	public String getRuleName() {
 		return ruleName;
-	}
-
-	public void setRuleName(String value) {
-		this.ruleName = value;
 	}
 
 	public long getMinCount() {
@@ -177,10 +133,6 @@ public class GlobalRule {
 		}
 	}
 
-	public void setMinCount(Long value) {
-		this.minCount = value;
-	}
-
 	public long getMaxCount() {
 		if (maxCount == null) {
 			return 1L;
@@ -189,40 +141,20 @@ public class GlobalRule {
 		}
 	}
 
-	public void setMaxCount(Long value) {
-		this.maxCount = value;
-	}
-
 	public float getChance() {
 		return chance;
-	}
-
-	public void setChance(float value) {
-		this.chance = value;
 	}
 
 	public int getMinDiff() {
 		return minDiff;
 	}
 
-	public void setMinDiff(int value) {
-		this.minDiff = value;
-	}
-
 	public int getMaxDiff() {
 		return maxDiff;
 	}
 
-	public void setMaxDiff(int value) {
-		this.maxDiff = value;
-	}
-
 	public RestrictionRace getRestrictionRace() {
 		return restrictionRace;
-	}
-
-	public void setRestrictionRace(RestrictionRace value) {
-		this.restrictionRace = value;
 	}
 
 	public boolean getNoReduction() {
