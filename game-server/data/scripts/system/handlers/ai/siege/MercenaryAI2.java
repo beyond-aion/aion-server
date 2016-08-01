@@ -27,8 +27,7 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
-		int siegeId = ((SiegeNpc) getOwner()).getSiegeId();
-		FortressLocation location = SiegeService.getInstance().getFortress(siegeId);
+		FortressLocation location = SiegeService.getInstance().getFortress(((SiegeNpc) getOwner()).getSiegeId());
 		if (!location.isVulnerable())
 			return;
 		if (location.getLegionId() != player.getLegion().getLegionId()) {

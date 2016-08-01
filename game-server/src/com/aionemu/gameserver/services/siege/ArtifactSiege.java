@@ -18,7 +18,6 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author SoulKeeper
@@ -76,14 +75,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
 			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), getSiegeLocation().getRace()
 				.getDescriptionId());
-			World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player object) {
-					PacketSendUtility.sendPacket(object, lRacePacket);
-				}
-
-			});
+			World.getInstance().doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, lRacePacket));
 		} else {
 			// Prepare packet data
 			String wPlayerName = "";
@@ -101,14 +93,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), wRace.getRaceDescriptionId());
 
 			// send update to players
-			World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, player.getRace().equals(wRace) ? wRacePacket : lRacePacket);
-				}
-
-			});
+			World.getInstance().doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, p.getRace().equals(wRace) ? wRacePacket : lRacePacket));
 		}
 	}
 
