@@ -61,6 +61,9 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			case "MANOR_ENTRANCE_300230000":
 				sendMovie(player, 462);
 				break;
+			case "KALIGA_LIBRARY_300230000":
+				PacketSendUtility.sendMonologue(player, 1111370); // The door to the Kaliga Treasury should be around here somewhere....
+				break;
 			case "KALIGA_TREASURY_300230000":
 				if (isBossSpawned.compareAndSet(false, true)) {
 					Npc wyr = instance.getNpc(217002);
@@ -168,7 +171,6 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		List<Integer> items = FastTable.of(185000098, // Temple Vault Door Key
 			185000099, // Dungeon Grate Key
 			185000100, // Dungeon Door Key
-			185000101, // Secret Safe Key
 			185000109 // Relic Key
 		);
 		Storage storage = player.getInventory();
