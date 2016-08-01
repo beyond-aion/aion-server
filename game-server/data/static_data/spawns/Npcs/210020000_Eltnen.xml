@@ -562,10 +562,6 @@
 		<spawn npc_id="212351" respawn_time="300">
 			<spot x="2364.8892" y="769.1064" z="362.3885" h="73"/>
 		</spawn>
-		<!-- Klaw Gatherer -->
-		<spawn npc_id="212137" respawn_time="295">
-			<spot x="1675" y="1428" z="370.25" h="41"/>
-		</spawn>
 		<!-- Kaidan Shaman -->
 		<spawn npc_id="232135" respawn_time="295">
 			<spot x="2186.1670" y="692.5851" z="460.0335" h="10"/>

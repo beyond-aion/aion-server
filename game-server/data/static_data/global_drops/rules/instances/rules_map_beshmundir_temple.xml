@@ -243,6 +243,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216167" name="Taros Lifebane" />
+			<gd_npc npc_id="216248" name="Taros Lifebane" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000092" name="Temple of Eternity Key" />
@@ -254,6 +255,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216167" name="Taros Lifebane" />
+			<gd_npc npc_id="216248" name="Taros Lifebane" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="111301106" name="Beshmundir Vambrace" />
@@ -268,6 +270,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216167" name="Taros Lifebane" />
+			<gd_npc npc_id="216248" name="Taros Lifebane" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114101002" name="Beshmundir Spiritmaster Shoes" />
@@ -342,6 +345,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000091" name="Incinerator Key" />
@@ -353,6 +357,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="113101121" name="Beshmundir Leggings" />
@@ -371,6 +376,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="113100976" name="Beshmundir Spiritmaster Leggings" />
@@ -384,7 +390,7 @@
 			<gd_map map_id="300170000" name="Beshmundir_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="112100922" name="Stormwing's Pauldrons" />
@@ -445,6 +451,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125002264" name="Underground Temple Headband" />
@@ -459,6 +466,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="170195083" name="[Souvenir] Coffin Accessory of Beshmundir" />
@@ -470,6 +478,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101069" name="Beshmundir Sorcerer Tunic" />
@@ -491,6 +500,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115000964" name="Beshmundir Scale Shield" />
@@ -502,7 +512,7 @@
 			<gd_map map_id="300170000" name="Beshmundir_Temple" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="113100977" name="Stormwing's Leggings" />
