@@ -229,10 +229,6 @@ public class GlobalRule {
 		return noReduction;
 	}
 
-	public void setNoReduction(boolean value) {
-		this.noReduction = value;
-	}
-	
 	public int getMemberLimit() {
 		return memberLimit;
 	}
