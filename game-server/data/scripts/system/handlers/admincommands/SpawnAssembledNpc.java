@@ -40,14 +40,14 @@ public class SpawnAssembledNpc extends AdminCommand {
 
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
 		if (template == null) {
-			PacketSendUtility.sendMessage(player, "This spawnId is Wrong.");
+			PacketSendUtility.sendMessage(player, "This spawnId is wrong.");
 			return;
 		}
-		FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
+		FastTable<AssembledNpcPart> assembledParts = new FastTable<AssembledNpcPart>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
-			assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
+			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}
-		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledPatrs);
+		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledParts);
 		Iterator<Player> iter = World.getInstance().getPlayersIterator();
 		Player findedPlayer = null;
 		while (iter.hasNext()) {
@@ -58,6 +58,6 @@ public class SpawnAssembledNpc extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //spawnAssembledNpc <sapwnId>");
+		PacketSendUtility.sendMessage(player, "syntax //spawnAssembledNpc <spawnId>");
 	}
 }

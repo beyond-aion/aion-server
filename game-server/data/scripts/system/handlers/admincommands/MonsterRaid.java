@@ -11,9 +11,6 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  */
 public class MonsterRaid extends AdminCommand {
 
-	private static final String START = "start";
-	private static final String STOP = "stop";
-
 	public MonsterRaid() {
 		super("monsterraid", "Starts/stops the Beritra Invasion event.");
 
@@ -28,29 +25,25 @@ public class MonsterRaid extends AdminCommand {
 		}
 
 		int raidLocId = NumberUtils.toInt(params[1]);
-		if (!isValidRaidLocation(raidLocId)) {
+		if (!MonsterRaidService.getInstance().getMonsterRaidLocations().keySet().contains(raidLocId)) {
 			sendInfo(player, "ID " + raidLocId + " is invalid");
 			return;
 		}
 
-		if (START.equalsIgnoreCase(params[0])) {
+		if (params[0].equalsIgnoreCase("start")) {
 			if (MonsterRaidService.getInstance().isRaidInProgress(raidLocId)) {
 				sendInfo(player, "Raid Location " + raidLocId + " is already active");
 			} else {
-				sendInfo(player, "Raid Location " + raidLocId + " - starting monster raid!");
+				sendInfo(player, "Raid Location " + raidLocId + " - started.");
 				MonsterRaidService.getInstance().startRaid(raidLocId);
 			}
-		} else if (STOP.equalsIgnoreCase(params[0])) {
+		} else if (params[0].equalsIgnoreCase("stop")) {
 			if (!MonsterRaidService.getInstance().isRaidInProgress(raidLocId)) {
-				sendInfo(player, "Raid Location " + raidLocId + " is not active");
+				sendInfo(player, "Raid Location " + raidLocId + " is not active.");
 			} else {
-				sendInfo(player, "Raid Location " + raidLocId + " - stopping monster raid!");
+				sendInfo(player, "Raid Location " + raidLocId + " - stopped.");
 				MonsterRaidService.getInstance().stopRaid(raidLocId);
 			}
 		}
-	}
-
-	private boolean isValidRaidLocation(int locId) {
-		return MonsterRaidService.getInstance().getMonsterRaidLocations().keySet().contains(locId);
 	}
 }
