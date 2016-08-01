@@ -67,11 +67,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onEnterZone(Npc npc, ZoneInstance zone) {
-
-	}
-
-	@Override
 	public void onLeaveZone(Player player, ZoneInstance zone) {
 	}
 

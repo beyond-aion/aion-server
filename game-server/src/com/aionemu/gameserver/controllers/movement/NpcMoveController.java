@@ -266,8 +266,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ, 0, owner.getInstanceId());
 				if (Math.abs(newZ - geoZ) > 1)
 					directionChanged = true;
-				// add altitude
-				newZ = geoZ + owner.getObjectTemplate().getBoundRadius().getUpper() - owner.getObjectTemplate().getHeight();
+				newZ = geoZ;
 			}
 			owner.getGameStats().setLastGeoZUpdate(System.currentTimeMillis() + 1000);
 		}

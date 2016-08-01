@@ -25,14 +25,12 @@ public class ReturningEventHandler {
 				AI2Logger.info(npcAI, "returning and restoring");
 			}
 			EmoteManager.emoteStartReturning(npcAI.getOwner());
-		}
-		if (npcAI.isInState(AIState.RETURNING)) {
 			Npc npc = npcAI.getOwner();
-			if (npc.isWalker()) {
+			if (npc.isPathWalker()) {
 				WalkManager.startWalking(npcAI);
 			} else {
-				Point3D prevStep = npcAI.getOwner().getMoveController().recallPreviousStep();
-				npcAI.getOwner().getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
+				Point3D prevStep = npc.getMoveController().recallPreviousStep();
+				npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
 			}
 		}
 	}
