@@ -66,7 +66,7 @@ public class PortalService {
 			instanceLevelReq = !player.havePermission(MembershipConfig.INSTANCES_LEVEL_REQ);
 			instanceRaceReq = !player.havePermission(MembershipConfig.INSTANCES_RACE_REQ);
 			instanceQuestReq = !player.havePermission(MembershipConfig.INSTANCES_QUEST_REQ);
-			if (portalPath.getPlayerCount() > 1)
+			if (playerSize > 1)
 				instanceGroupReq = !player.havePermission(MembershipConfig.INSTANCES_GROUP_REQ);
 		}
 
@@ -88,6 +88,9 @@ public class PortalService {
 		boolean reenter = false;
 		WorldMapInstance instance = null;
 		switch (playerSize) {
+			case 0:
+				log.warn("Tried to enter instance with player limit 0!");
+				return;
 			case 1: // solo
 				instance = InstanceService.getRegisteredInstance(mapId, player.getObjectId());
 				break;
@@ -112,12 +115,9 @@ public class PortalService {
 			if (player.getPortalCooldownList().isPortalUseDisabled(mapId)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 				return;
-			} else {
-				log.debug(player.getName() + " doesn't have cd of this instance, can enter and will be registed to this instance.");
 			}
-		} else if (instance.isRegistered(player.getObjectId())) {
+		} else if (instance.isRegistered(player.getObjectId()) && (player.getWorldId() != loc.getWorldId() || player.getInstanceId() != instance.getInstanceId())) {
 			reenter = true;
-			log.debug(player.getName() + " has been in instance, can reenter.");
 		}
 
 		if (!reenter) {
@@ -144,13 +144,14 @@ public class PortalService {
 					return;
 				}
 			}
+			if (mapId == player.getWorldId()) { // teleport within this instance
+				TeleportService2.teleportTo(player, mapId, player.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
+				return;
+			}
 		}
 
 		PlayerGroup group = player.getPlayerGroup2();
 		switch (playerSize) {
-			case 0:
-				log.warn("Tried to enter instance with player limit 0!");
-				break;
 			case 1:
 				// If there is a group (whatever group requirement exists or not)...
 				if (group != null && instanceGroupReq) {
@@ -181,7 +182,7 @@ public class PortalService {
 
 				// if already registered - just teleport
 				if (instance != null) {
-					if (loc.getWorldId() != player.getWorldId()) {
+					if (mapId != player.getWorldId()) {
 						transfer(player, loc, instance, reenter);
 						return;
 					}
@@ -404,11 +405,7 @@ public class PortalService {
 			InstanceService.registerPlayerWithInstance(instance, requester);
 			transfer(requester, loc, instance, reenter);
 		} else {
-			/*
-			 * WorldMap worldMap = World.getInstance().getWorldMap(worldId); if (worldMap == null) { log.warn("There is no registered map with id " +
-			 * worldId); return; } instance = worldMap.getWorldMapInstance();
-			 */
-			easyTransfer(requester, loc);
+			TeleportService2.teleportTo(requester, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
 		}
 	}
 
@@ -440,9 +437,5 @@ public class PortalService {
 		if (useDelay > 0 && !reenter) {
 			player.getPortalCooldownList().addPortalCooldown(loc.getWorldId(), useDelay);
 		}
-	}
-
-	private static void easyTransfer(Player player, PortalLoc loc) {
-		TeleportService2.teleportTo(player, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

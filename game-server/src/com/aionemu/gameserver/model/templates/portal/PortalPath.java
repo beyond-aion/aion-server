@@ -42,32 +42,16 @@ public class PortalPath {
 		return dialog;
 	}
 
-	public void setDialog(int value) {
-		this.dialog = value;
-	}
-
 	public int getLocId() {
 		return locId;
-	}
-
-	public void setLocId(int value) {
-		this.locId = value;
 	}
 
 	public int getPlayerCount() {
 		return playerCount;
 	}
 
-	public void setPlayerCount(int value) {
-		this.playerCount = value;
-	}
-
 	public boolean isInstance() {
 		return instance;
-	}
-
-	public void setInstance(boolean value) {
-		this.instance = value;
 	}
 
 	public int getSiegeId() {
