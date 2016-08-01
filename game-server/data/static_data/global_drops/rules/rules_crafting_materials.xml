@@ -1126,7 +1126,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Frillneck -->
-	<gd_rule rule_name="Huge Frillneck Claw" base_chance="2" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Huge Frillneck Claw" base_chance="10" min_diff="-5" max_diff="0">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1138,7 +1138,7 @@
 			<gd_item id="152012019" name="Huge Frillneck Claw" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Raw Frillneck Meat" base_chance="2" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Frillneck Meat" base_chance="10" min_diff="-15" max_diff="-10">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1639,6 +1639,30 @@
 		<gd_items>
 			<!-- Level 46 -->
 			<gd_item id="152012544" name="Hornskull Back Scale" />
+		</gd_items>
+	</gd_rule>
+	<!-- Fresh Meat -->
+	<gd_rule rule_name="Fresh Marbled Meat" base_chance="10" min_diff="0" max_diff="4">
+		<gd_worlds>
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BAKU" />
+			<gd_npc_group group="CHAPIREPRIEST" />
+			<gd_npc_group group="CLODWORM" />
+			<gd_npc_group group="DRAKE" />
+			<gd_npc_group group="DRAKY" />
+			<gd_npc_group group="FETHLOT" />
+			<gd_npc_group group="FLOWERWORM" />
+			<gd_npc_group group="KALNIF" />
+			<gd_npc_group group="KUILLUS" />
+			<gd_npc_group group="UNICORN" />
+			<gd_npc_group group="WORM" />
+			<gd_npc_group group="ZAIF" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152015017" name="Fresh Marbled Meat" />
 		</gd_items>
 	</gd_rule>
 	<!-- Ceramium Fragment -->
