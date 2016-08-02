@@ -44,7 +44,7 @@ public class LegionCommand extends AdminCommand {
 		}
 
 		if (params[0].equalsIgnoreCase("disband")) {
-			if (!verifyLenght(player, 2, params)) // legion disband NAME
+			if (!verifyLength(player, 2, params)) // legion disband NAME
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -54,7 +54,7 @@ public class LegionCommand extends AdminCommand {
 			service.disbandLegion(legion);
 			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " was disbanded.");
 		} else if (params[0].equalsIgnoreCase("setlevel")) {
-			if (!verifyLenght(player, 3, params)) // legion setlevel NAME level
+			if (!verifyLength(player, 3, params)) // legion setlevel NAME level
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -79,7 +79,7 @@ public class LegionCommand extends AdminCommand {
 			service.changeLevel(legion, level, true);
 			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " has raised from " + old + " to " + level + " level.");
 		} else if (params[0].equalsIgnoreCase("setpoints")) {
-			if (!verifyLenght(player, 3, params)) // legion setpoints NAME points
+			if (!verifyLength(player, 3, params)) // legion setpoints NAME points
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -102,7 +102,7 @@ public class LegionCommand extends AdminCommand {
 			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " has raised from " + old + " to " + points
 				+ " contributiong points.");
 		} else if (params[0].equalsIgnoreCase("setname")) {
-			if (!verifyLenght(player, 3, params)) // legion setname NAME NEWNAME
+			if (!verifyLength(player, 3, params)) // legion setname NAME NEWNAME
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -124,7 +124,7 @@ public class LegionCommand extends AdminCommand {
 			}
 			PacketSendUtility.sendMessage(player, "legion " + old + " has changed name from " + old + " to " + params[2] + ".");
 		} else if (params[0].equalsIgnoreCase("info")) {
-			if (!verifyLenght(player, 2, params)) // legion info NAME
+			if (!verifyLength(player, 2, params)) // legion info NAME
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -163,7 +163,7 @@ public class LegionCommand extends AdminCommand {
 				PacketSendUtility.sendMessage(player, msg);
 
 		} else if (params[0].equalsIgnoreCase("kick")) {
-			if (!verifyLenght(player, 2, params)) // legion kick PLAYER
+			if (!verifyLength(player, 2, params)) // legion kick PLAYER
 				return;
 
 			Player target = World.getInstance().findPlayer(Util.convertName(params[1]));
@@ -180,7 +180,7 @@ public class LegionCommand extends AdminCommand {
 			else
 				PacketSendUtility.sendMessage(player, "You have failed to kick player " + target.getName() + " from legion.");
 		} else if (params[0].equalsIgnoreCase("invite")) {
-			if (!verifyLenght(player, 3, params)) // legion invite NAME PLAYER
+			if (!verifyLength(player, 3, params)) // legion invite NAME PLAYER
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -204,7 +204,7 @@ public class LegionCommand extends AdminCommand {
 				PacketSendUtility.sendMessage(player, "probably legion " + legion.getLegionName() + " is full");
 			}
 		} else if (params[0].equalsIgnoreCase("bg")) {
-			if (!verifyLenght(player, 3, params)) // legion bg NAME PLAYER
+			if (!verifyLength(player, 3, params)) // legion bg NAME PLAYER
 				return;
 
 			Legion legion = verifyLegionExists(player, params[1]);
@@ -253,7 +253,7 @@ public class LegionCommand extends AdminCommand {
 		} else if (params[0].equalsIgnoreCase("help")) {
 			this.info(player, null);
 		} else if (params[0].equalsIgnoreCase("setrank")) {
-			if (!verifyLenght(player, 3, params)) // legion setrank PLAYER RANK
+			if (!verifyLength(player, 3, params)) // legion setrank PLAYER RANK
 				return;
 
 			Player target = World.getInstance().findPlayer(Util.convertName(params[1]));
@@ -300,7 +300,7 @@ public class LegionCommand extends AdminCommand {
 		return legion;
 	}
 
-	private boolean verifyLenght(Player player, int size, String... cmd) {
+	private boolean verifyLength(Player player, int size, String... cmd) {
 		boolean ok = cmd.length >= size;
 		if (!ok)
 			this.info(player, size + " parameters required for element //legion " + cmd[0] + ".");

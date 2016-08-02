@@ -1,11 +1,13 @@
 package com.aionemu.gameserver.services;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
@@ -25,8 +27,6 @@ import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
-import javolution.util.FastTable;
-
 /**
  * @author Source
  */
@@ -34,9 +34,9 @@ public class RiftService {
 
 	private RiftSchedule schedule;
 	private Map<Integer, RiftLocation> locations;
+	private Map<Integer, RiftLocation> activeRifts = new FastMap<>();
 	private final Lock closing = new ReentrantLock();
 	private static final int duration = CustomConfig.RIFT_DURATION;
-	private HashMap<Integer, RiftLocation> activeRifts = new HashMap<Integer, RiftLocation>();
 
 	public void initRiftLocations() {
 		if (CustomConfig.RIFT_ENABLED) {
@@ -49,11 +49,9 @@ public class RiftService {
 	public void initRifts() {
 		if (CustomConfig.RIFT_ENABLED) {
 			schedule = RiftSchedule.load();
-			for (RiftSchedule.Rift rift : schedule.getRiftsList()) {
-				for (OpenRift open : rift.getRift()) {
+			for (RiftSchedule.Rift rift : schedule.getRiftsList())
+				for (OpenRift open : rift.getRift())
 					CronService.getInstance().schedule(new RiftOpenRunnable(rift.getWorldId(), open.spawnGuards()), open.getSchedule());
-				}
-			}
 		}
 	}
 
@@ -62,9 +60,8 @@ public class RiftService {
 			return RiftService.getInstance().getRiftLocations().keySet().contains(id);
 		} else {
 			for (RiftLocation loc : RiftService.getInstance().getRiftLocations().values()) {
-				if (loc.getWorldId() == id) {
+				if (loc.getWorldId() == id)
 					return true;
-				}
 			}
 		}
 
@@ -213,9 +210,8 @@ public class RiftService {
 		closing.lock();
 
 		try {
-			for (RiftLocation rift : activeRifts.values()) {
+			for (RiftLocation rift : activeRifts.values())
 				closeRift(rift);
-			}
 
 			activeRifts.clear();
 		} finally {

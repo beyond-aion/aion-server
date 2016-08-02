@@ -7,7 +7,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.AssaultType;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.siege.SiegeModType;
@@ -21,7 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Luzien
@@ -39,19 +37,9 @@ public class FortressAssault extends Assault<FortressSiege> {
 
 	@Override
 	protected void scheduleAssault(int delay) {
-		dredgionTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				BalaurAssaultService.getInstance().spawnDredgion(getSpawnIdByFortressId());
-				spawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						scheduleSpawns();
-					}
-				}, Rnd.get(240, 300) * 1000);
-			}
+		dredgionTask = ThreadPoolManager.getInstance().schedule(() -> {
+			BalaurAssaultService.getInstance().spawnDredgion(getSpawnIdByFortressId());
+			spawnTask = ThreadPoolManager.getInstance().schedule(() -> scheduleSpawns(), Rnd.get(240, 300) * 1000);
 		}, delay * 1000);
 	}
 
@@ -60,15 +48,8 @@ public class FortressAssault extends Assault<FortressSiege> {
 		if (!spawned)
 			return;
 
-		if (captured) {
-			siegeLocation.doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
-				}
-			});
-		}
+		if (captured)
+			siegeLocation.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
 	}
 
 	private void scheduleSpawns() {
@@ -82,35 +63,23 @@ public class FortressAssault extends Assault<FortressSiege> {
 			return;
 
 		initiateSpawn(getWave(AssaultType.TELEPORT));
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (siegeLocation.isVulnerable()) {
-					initiateSpawn(getWave(AssaultType.FIRST_WAVE));
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (siegeLocation.isVulnerable()) {
-								initiateSpawn(getWave(AssaultType.SECOND_WAVE));
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										if (siegeLocation.isVulnerable())
-											initiateSpawn(getWave(AssaultType.COMMANDER));
-									}
-								}, Rnd.get(90, 180) * 1000);
-							}
-						}
-					}, Rnd.get(90, 120) * 1000);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (initiateSpawn(getWave(AssaultType.FIRST_WAVE))) {
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (initiateSpawn(getWave(AssaultType.SECOND_WAVE))) {
+						ThreadPoolManager.getInstance().schedule(() -> {
+							if (siegeLocation.isVulnerable())
+								initiateSpawn(getWave(AssaultType.COMMANDER));
+						}, Rnd.get(90, 180) * 1000);
+					}
+				}, Rnd.get(90, 120) * 1000);
 			}
 		}, Rnd.get(30, 60) * 1000);
 	}
 
-	private void initiateSpawn(AssaultWave wave) {
+	private boolean initiateSpawn(AssaultWave wave) {
+		if (!siegeLocation.isVulnerable())
+			return false;
 		int influenceMultiplier = getInfluenceMultiplier(siegeLocation.getRace());
 
 		for (Spawn spawn : wave.getSpawns()) {
@@ -128,6 +97,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 			}
 		}
 		announceInvasion(wave.getAssaultType());
+		return true;
 	}
 
 	private void spawnAssaulter(int mapId, int npcId, int locId, float x, float y, float z, byte heading, AssaultType aType) {
@@ -141,31 +111,15 @@ public class FortressAssault extends Assault<FortressSiege> {
 	}
 
 	private void announceInvasion(AssaultType aType) {
-		siegeLocation.doOnAllPlayers(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player player) {
-				switch (aType) {
-					case TELEPORT:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON());
-						break;
-					case FIRST_WAVE:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FIELDABYSS_CARRIER_DROP_DRAGON());
-						break;
-					case SECOND_WAVE:
-					case COMMANDER:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON());
-						break;
-				}
-			}
-		});
+		siegeLocation.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, aType == AssaultType.TELEPORT ? SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON()
+			: SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON()));
 	}
 
 	private AssaultWave getWave(AssaultType aType) {
 		AssaultWave wave = null;
 		AssaultSpawn spawn = DataManager.SPAWNS_DATA2.getAssaultSpawnBySiegeId(locationId);
 		if (spawn == null) {
-			log.info("There are no assault spawns for siege " + locationId + " and wave " + aType);
+			log.warn("There are no assault spawns for siege " + locationId + " and wave " + aType);
 			return wave;
 		}
 		for (AssaultWave awave : spawn.getAssaultWaves()) {
@@ -175,7 +129,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 			}
 		}
 		if (wave == null) {
-			log.info("There is no assault wave for siege " + locationId + " and wave " + aType);
+			log.warn("There is no assault wave for siege " + locationId + " and wave " + aType);
 			return wave;
 		}
 		return wave;

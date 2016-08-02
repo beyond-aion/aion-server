@@ -116,13 +116,7 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 			break;
 		}
 		if (stop == step) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				
-				@Override
-				public void run() {
-					onDestinationArrived();
-				}
-			}, 5000);
+			ThreadPoolManager.getInstance().schedule(() -> onDestinationArrived(), 5000);
 			
 		}
 	}

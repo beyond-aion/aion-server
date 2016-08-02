@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,7 +15,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpc;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpcPart;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.siege.SiegeRace;
@@ -31,18 +29,16 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author synchro2
  * @reworked Luzien
- * @modified Whoop TODO: Send Peace Dredgion without assault
+ * @modified Estrayl
+ * TODO: Send Peace Dredgion without assault
  */
 public class BalaurAssaultService {
-
-	private static final BalaurAssaultService instance = new BalaurAssaultService();
-	private Logger log = LoggerFactory.getLogger("SIEGE_LOG");
+	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 	private final Map<Integer, FortressAssault> fortressAssaults = new ConcurrentHashMap<>();
-
 	private final Map<Integer, ArtifactAssault> artifactAssaults = new ConcurrentHashMap<>();
 
 	public static BalaurAssaultService getInstance() {
-		return instance;
+		return SingletonHolder.INSTANCE;
 	}
 
 	public void onSiegeStart(final Siege<?> siege) {
@@ -51,13 +47,13 @@ public class BalaurAssaultService {
 				return;
 			newAssault(siege, Rnd.get(60, 900)); // between 1 and 15 minutes
 		} else if (siege instanceof ArtifactSiege) {
-			if (!calculateArtifactAssault(((ArtifactSiege) siege).getSiegeLocation()))
+			if (artifactAssaults.containsKey(siege.getSiegeLocation().getLocationId()) || siege.getSiegeLocation().getRace() == SiegeRace.BALAUR)
 				return;
 			newAssault(siege, Rnd.get(180, 2880)); // between 3 and 48 hours
 		} else
 			return;
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("[SIEGE] Balaur Assault scheduled on Siege ID: " + siege.getSiegeLocationId() + "!");
+			log.debug("[SIEGE] Balaur Assault scheduled on Siege ID: " + siege.getSiegeLocationId() + "!");
 	}
 
 	public void onSiegeFinish(Siege<?> siege) {
@@ -66,17 +62,17 @@ public class BalaurAssaultService {
 			Boolean bossIsKilled = siege.isBossKilled();
 			fortressAssaults.get(locId).finishAssault(bossIsKilled);
 			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.info("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
+				log.debug("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
 			else
-				log.info("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
+				log.debug("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
 			fortressAssaults.remove(locId);
 		} else if (artifactAssaults.containsKey(locId)) {
 			Boolean bossIsKilled = siege.isBossKilled();
 			artifactAssaults.get(locId).finishAssault(bossIsKilled);
 			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.info("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
+				log.debug("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
 			else {
-				log.info("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
+				log.debug("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
 			}
 			artifactAssaults.remove(locId);
 		}
@@ -108,18 +104,9 @@ public class BalaurAssaultService {
 		return true;
 	}
 
-	private boolean calculateArtifactAssault(ArtifactLocation artifact) {
-		int locationId = artifact.getLocationId();
-
-		if (artifactAssaults.containsKey(locationId) || artifact.getRace() == SiegeRace.BALAUR)
-			return false;
-
-		return true;
-	}
-
 	public void startAssault(Player player, int location, int delay) {
 		if (fortressAssaults.containsKey(location) || artifactAssaults.containsKey(location)) {
-			PacketSendUtility.sendMessage(player, "Assault on " + location + " was already started");
+			PacketSendUtility.sendMessage(player, "Assault on " + location + " was already started.");
 			return;
 		}
 
@@ -140,18 +127,19 @@ public class BalaurAssaultService {
 
 	public void spawnDredgion(int spawnId) {
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
-		FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
-		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
-			assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
-		}
+		FastTable<AssembledNpcPart> assembledParts = new FastTable<AssembledNpcPart>();
+		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates())
+			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 
-		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledPatrs);
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		Player findedPlayer;
-		while (iter.hasNext()) {
-			findedPlayer = iter.next();
-			PacketSendUtility.sendPacket(findedPlayer, new SM_NPC_ASSEMBLER(npc));
-			PacketSendUtility.sendPacket(findedPlayer, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN());
+		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledParts);
+		for (Player p : World.getInstance().getAllPlayers()) {
+			PacketSendUtility.sendPacket(p, new SM_NPC_ASSEMBLER(npc));
+			PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN());
 		}
+	}
+	
+	private static class SingletonHolder {
+
+		private static final BalaurAssaultService INSTANCE = new BalaurAssaultService();
 	}
 }

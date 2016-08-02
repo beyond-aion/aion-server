@@ -1,16 +1,14 @@
 package com.aionemu.gameserver.services.siege;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Luzien
@@ -26,13 +24,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 
 	@Override
 	public void scheduleAssault(int delay) {
-		spawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawnAttacker();
-			}
-		}, delay * 60 * 1000); // Assault between 1h and 10h
+		spawnTask = ThreadPoolManager.getInstance().schedule(() -> spawnAttacker(), delay * 60 * 1000); // Assault between 1h and 10h
 	}
 
 	@Override
@@ -40,15 +32,8 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 		if (!spawned)
 			return;
 
-		if (captured) {
-			siegeLocation.doOnAllPlayers(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
-				}
-			});
-		}
+		if (captured)
+			siegeLocation.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
 	}
 
 	private void spawnAttacker() {
@@ -56,7 +41,6 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 			return;
 
 		spawned = true;
-
 		float x1 = (float) (boss.getX() + Math.cos(Math.PI * Rnd.get()));
 		float y1 = (float) (boss.getY() + Math.sin(Math.PI * Rnd.get()));
 

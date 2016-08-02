@@ -22,20 +22,15 @@ public class OmegaAI2 extends SummonerAI2 {
 
 	@Override
 	protected void handleSpawnFinished(SummonGroup summonGroup) {
-		if (summonGroup.getNpcId() == 281948) {
+		if (summonGroup.getNpcId() == 281948)
 			AI2Actions.useSkill(this, 18671);
-		}
 	}
 
 	@Override
 	protected boolean checkBeforeSpawn() {
-		boolean hit = false;
-		for (Player player : getKnownList().getKnownPlayers().values()) {
-			if (isInRange(player, 30)) {
-				hit = true;
-				break;
-			}
-		}
-		return hit;
+		for (Player player : getKnownList().getKnownPlayers().values())
+			if (isInRange(player, 30))
+				return true;
+		return false;
 	}
 }
