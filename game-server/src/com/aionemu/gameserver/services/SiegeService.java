@@ -260,24 +260,7 @@ public class SiegeService {
 		log.debug("Starting preparations of siege Location:" + locationId);
 		FortressLocation loc = this.getFortress(locationId);
 		// Set siege start timer..
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				// Special case for Anoha Fortress artifacts
-				if (locationId == 7011) {
-					List<ArtifactLocation> artis = FastTable.of(getArtifact(7012), getArtifact(7013), getArtifact(7014));
-					for (ArtifactLocation arti : artis) {
-						if (!arti.getRace().equals(SiegeRace.BALAUR))
-							resetSiegeLocation(arti);
-					}
-					artis.clear();
-				}
-				// Start siege warfare
-				startSiege(locationId);
-			}
-
-		}, 300 * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> startSiege(locationId), 300 * 1000);
 		if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount()
 			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
 			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
