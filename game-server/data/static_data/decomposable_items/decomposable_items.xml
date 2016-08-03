@@ -32684,13 +32684,13 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053783" name="Stigma Sack">
-		<items>
+		<items chance="44">
 			<item id="188053784" name="Stigma Bundle" />
 		</items>
-		<items>
+		<items chance="33">
 			<item id="188053785" name="Greater Stigma Bundle" />
 		</items>
-		<items>
+		<items chance="23">
 			<item id="188053786" name="Major Stigma Bundle" />
 		</items>
 	</decomposable>
