@@ -2373,8 +2373,8 @@
 				<spawn npc_id="832149" handler="FLAG">
 					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
 				</spawn>
-				<!-- West Relay Force Subjugator -->
-				<spawn npc_id="235142" handler="BOSS">
+				<!-- West Relay Defense Warcaptain -->
+				<spawn npc_id="235168" handler="BOSS">
 					<spot x="1679.426" y="237.2532" z="251.7167" h="51"/>
 				</spawn>
 				<!-- Archon Quickblade -->
