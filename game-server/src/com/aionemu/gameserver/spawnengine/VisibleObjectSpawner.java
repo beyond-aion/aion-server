@@ -37,8 +37,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.rift.RiftLocation;
-import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
@@ -47,12 +45,9 @@ import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplat
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
-import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.RiftService;
-import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -180,28 +175,13 @@ public class VisibleObjectSpawner {
 		if (!SiegeConfig.SIEGE_ENABLED)
 			return null;
 
-		int npcId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(npcId));
+			log.error("No template for NPC " + String.valueOf(spawn.getNpcId()));
 			return null;
 		}
-		IDFactory iDFactory = IDFactory.getInstance();
-		Npc npc = null;
-
-		int spawnSiegeId = spawn.getSiegeId();
-		SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(spawnSiegeId);
-		if ((spawn.isPeace() || loc.isVulnerable()) && spawnSiegeId == loc.getLocationId() && spawn.getSiegeRace() == loc.getRace()) {
-			// default: GUARD
-			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
-			npc.setKnownlist(new NpcKnownList(npc));
-		} else if (spawn.isAssault() && loc.isVulnerable() && spawn.getSiegeRace().equals(SiegeRace.BALAUR)) {
-			// attackers
-			npc = new SiegeNpc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
-			npc.setKnownlist(new NpcKnownList(npc));
-		} else {
-			return null;
-		}
+		Npc npc = new SiegeNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
+		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		return npc;
@@ -212,26 +192,13 @@ public class VisibleObjectSpawner {
 			return null;
 		}
 
-		int npcId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		if (npcTemplate == null) {
-			log.error("No template for NPC " + String.valueOf(npcId));
+			log.error("No template for NPC " + String.valueOf(spawn.getNpcId()));
 			return null;
 		}
-		IDFactory iDFactory = IDFactory.getInstance();
-		Npc npc;
-
-		int spawnId = spawn.getId();
-		VortexLocation loc = VortexService.getInstance().getVortexLocation(spawnId);
-		if (loc.isActive() && spawnId == loc.getId() && spawn.isInvasion()) {
-			npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
-			npc.setKnownlist(new NpcKnownList(npc));
-		} else if (!loc.isActive() && spawnId == loc.getId() && spawn.isPeace()) {
-			npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
-			npc.setKnownlist(new NpcKnownList(npc));
-		} else {
-			return null;
-		}
+		Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
+		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		return npc;

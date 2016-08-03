@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -18,15 +20,18 @@ import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.LegionService;
@@ -36,6 +41,7 @@ import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
@@ -64,7 +70,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// Mark fortress as vulnerable
 		getSiegeLocation().setVulnerable(true);
 
-		// Let the world know where the siege are
+		// Let the world know where the siege is
 		broadcastState(getSiegeLocation());
 
 		// Clear fortress from enemys
@@ -83,17 +89,44 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
 			BalaurAssaultService.getInstance().onSiegeStart(this);
+		if (!getSiegeLocation().getRace().equals(SiegeRace.BALAUR) && getBoss().getLevel() == 65)
+			ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(6, 18) * 1000); // Faction Balance NPCs
 	}
-	
+
+	/**
+	 * Handles an additional assault of race-specific troops, which were requested
+	 * by players to ensure their glory point rewards.
+	 */
+	private final void scheduleFactionTroopAssault() {
+		if (!getSiegeLocation().isVulnerable())
+			return;
+
+		final int worldId = getSiegeLocation().getWorldId();
+		final SiegeRace oppositeRace = SiegeRace.getOppositeRace(getSiegeLocation().getRace());
+		for (SiegeNpc sn : World.getInstance().getLocalSiegeNpcs(getSiegeLocationId())) {
+			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || Rnd.get(1, 100) <= 35)
+				continue;
+			final int amount = Rnd.get(1, 2);
+			for (int i = 0; i < amount; i++) {
+				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
+				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
+				SpawnTemplate temp = SpawnEngine.addNewSiegeSpawn(worldId,
+					oppositeRace == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417), getSiegeLocationId(), oppositeRace,
+					SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
+				SpawnEngine.spawnObject(temp, 1);
+			}
+		}
+	}
+
 	private final void initMercenaryZones() {
 		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
 			return;
-		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); //can be null if not implemented
+		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); // can be null if not implemented
 		if (mercs == null)
 			return;
 		for (SiegeMercenaryZone zone : mercs) {
 			MercenaryLocation mLoc = new MercenaryLocation(zone, getSiegeLocation().getRace(), getSiegeLocationId());
-				activeMercenaryLocs.put(zone.getId(), mLoc);
+			activeMercenaryLocs.put(zone.getId(), mLoc);
 		}
 	}
 
@@ -403,8 +436,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 					PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 					++rewardedPC;
 					if (result.equals(SiegeResult.OCCUPY) || result.equals(SiegeResult.DEFENDER))
-						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), 
-							topGrade.getItemId(), topGrade.getMedalCount(), 0);
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
+							topGrade.getMedalCount(), 0);
 
 					if (getSiegeLocation().hasValidGpRewards())
 						GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
