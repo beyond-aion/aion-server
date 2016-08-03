@@ -90,7 +90,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
 			BalaurAssaultService.getInstance().onSiegeStart(this);
 		if (!getSiegeLocation().getRace().equals(SiegeRace.BALAUR) && getBoss().getLevel() == 65)
-			ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(6, 18) * 1000); // Faction Balance NPCs
+			ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
 	}
 
 	/**
