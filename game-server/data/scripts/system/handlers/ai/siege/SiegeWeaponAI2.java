@@ -1,8 +1,11 @@
 package ai.siege;
 
+import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AISummon;
+import com.aionemu.gameserver.ai2.handler.FollowEventHandler;
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -97,4 +100,25 @@ public class SiegeWeaponAI2 extends AISummon {
 		}
 	}
 
+	@Override
+	public boolean ask(AIQuestion question) {
+		switch (question) {
+			case DESTINATION_REACHED:
+				return destinationReached();
+			default:
+				return super.ask(question);
+		}
+	}
+
+	private boolean destinationReached() {
+		AIState state = getState();
+		switch (state) {
+			case FOLLOWING:
+				return FollowEventHandler.isInRange(this, getOwner().getTarget());
+			default:
+				AI2Logger.info(this, "[siege_weapon] calling destinationReached with unhandled state: " + state.toString());
+				break;
+		}
+		return true;
+	}
 }
