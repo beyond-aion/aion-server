@@ -138,6 +138,8 @@ public abstract class Base<T extends BaseLocation> {
 		enhancedSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (isFinished.get())
 				return;
+			despawnByHandlerType(SpawnHandlerType.GUARDIAN); // prevents double spawns
+			despawnByHandlerType(SpawnHandlerType.OUTRIDER_ENHANCED);
 			spawnBySpawnHandler(SpawnHandlerType.GUARDIAN, getRace());
 			spawnBySpawnHandler(SpawnHandlerType.OUTRIDER_ENHANCED, getRace());
 		}, 295 * 1000);
@@ -190,6 +192,25 @@ public abstract class Base<T extends BaseLocation> {
 						}
 					}
 				}
+			}
+		}
+	}
+	
+	/**
+	 * Gets npcs for base id and despawns all which have the
+	 * parameterized SpawnHandlerType
+	 * 
+	 * @param SpawnHandlerType
+	 *          type
+	 * @param id
+	 */
+	public void despawnByHandlerType(SpawnHandlerType type) {
+		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
+			if (npc == null)
+				continue;
+			if (npc.getSpawn().getHandlerType().equals(type)) {
+				if (!npc.getLifeStats().isAlreadyDead())
+					npc.getController().onDelete();
 			}
 		}
 	}

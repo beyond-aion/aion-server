@@ -14,14 +14,12 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.SiegeBaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.base.Base;
 import com.aionemu.gameserver.services.base.BaseException;
 import com.aionemu.gameserver.services.base.CasualBase;
 import com.aionemu.gameserver.services.base.SiegeBase;
 import com.aionemu.gameserver.services.base.StainedBase;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Source
@@ -134,8 +132,8 @@ public class BaseService {
 		if (target.isEnhanced()) { // handles de-activation of enhanced mode
 			target.setEnhanced(false);
 			for (StainedBase sBase : spec) {
-				despawnByHandlerType(SpawnHandlerType.OUTRIDER_ENHANCED, sBase.getId());
-				despawnByHandlerType(SpawnHandlerType.GUARDIAN, sBase.getId());
+				sBase.despawnByHandlerType(SpawnHandlerType.OUTRIDER_ENHANCED);
+				sBase.despawnByHandlerType(SpawnHandlerType.GUARDIAN);
 				sBase.setEnhanced(false);
 			}
 		} else { // handles activation of enhanced mode
@@ -177,25 +175,6 @@ public class BaseService {
 			garrison.stop();
 		} catch (BaseException e) {
 			log.error("Base could not be stopped! ID:" + id, e);
-		}
-	}
-
-	/**
-	 * Gets npcs for base id and despawns all which have the
-	 * parameterized SpawnHandlerType
-	 * 
-	 * @param SpawnHandlerType
-	 *          type
-	 * @param id
-	 */
-	private static void despawnByHandlerType(SpawnHandlerType type, int id) {
-		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
-			if (npc == null)
-				continue;
-			if (npc.getSpawn().getHandlerType().equals(type)) {
-				if (!npc.getLifeStats().isAlreadyDead())
-					npc.getController().onDelete();
-			}
 		}
 	}
 
