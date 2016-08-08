@@ -2729,16 +2729,37 @@
 	</npc_drop>
 	<!-- Nightmare Circus -->
 	<!-- Custom-Drops für 831745 & 831575 -->
-	<!-- Occupied Rentus Base TODO: 236705 -->
+	<!-- Occupied Rentus Base -->
 	<npc_drop npc_id="833048">
 		<drop_group race="PC_ALL" name="Named Equipment Box">
-			<drop item_id="188053702" name="Vasharti's Equipment Box" min_amount="1" max_amount="1" chance="25" each_member="true" />
+			<drop item_id="188053702" name="Vasharti's Equipment Box" chance="25" each_member="true" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named Supply Box">
-			<drop item_id="188053706" name="Rentus Base Supplies" min_amount="1" max_amount="1" chance="25" each_member="true" />
+			<drop item_id="188053706" name="Rentus Base Supplies" chance="25" each_member="true" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named Stigma Bundle">
 			<drop item_id="188053783" name="Stigma Sack" min_amount="1" max_amount="1" chance="25" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Named Accessoire (Epic)">
+			<drop item_id="125004267" name="Vasharti Legionnaire's Plate Helmet" chance="35" />
+			<drop item_id="125004268" name="Vasharti Legionnaire's Magic Chain Helm" chance="35" />
+			<drop item_id="125004269" name="Vasharti Legionnaire's Magic Chain Helm" chance="35" />
+			<drop item_id="125004270" name="Vasharti Legionnaire's Magic Hat" chance="35" />
+			<drop item_id="125004271" name="Vasharti Legionnaire's Magic Hat" chance="35" />
+			<drop item_id="125004272" name="Vasharti Legionnaire's Cloth Hat" chance="35" />
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="236705">
+		<drop_group race="PC_ALL" name="Named Bundle">
+			<drop item_id="188053713" name="Blood Mark Bundle" chance="100" each_member="true" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Named Armor (Epic)">
+			<drop item_id="113101703" name="Vasharti Legionnaire's Leggings" chance="35" />
+			<drop item_id="113301838" name="Vasharti Legionnaire's Legguards" chance="35" />
+			<drop item_id="113301839" name="Vasharti Legionnaire's Magic Legguards" chance="35" />
+			<drop item_id="113501775" name="Vasharti Legionnaire's Chausses" chance="35" />
+			<drop item_id="113501776" name="Vasharti Legionnaire's Magic Chausses" chance="35" />
+			<drop item_id="113601610" name="Vasharti Legionnaire's Greaves" chance="35" />
 		</drop_group>
 	</npc_drop>
 	<!-- Poeta -->
@@ -2855,7 +2876,7 @@
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="219215">
-		<drop_group race="PC_ALL" name="Named Armor (Unique)">
+		<drop_group race="PC_ALL" name="Named Armor (Epic)">
 			<drop item_id="113101693" name="Leggings of Rentus Recovery Squad" chance="35" />
 			<drop item_id="113301826" name="Legguards of Rentus Recovery Squad" chance="35" />
 			<drop item_id="113301827" name="Leather Gaiters of Rentus Recovery Squad" chance="35" />
