@@ -44,7 +44,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(skillList.size()); // skills list size
-		writeC(isNew ? 0 : 1); // 1 all learned skills, 0 newly updated skills
+		writeC(isNew ? 1 : 0); // 0 all learned skills, 1 newly updated skills
 		for (PlayerSkillEntry entry : skillList) {
 			writeH(entry.getSkillId());// id
 			writeH(entry.isNormalSkill() ? 1 : entry.getSkillLevel()); // don't ask me, it's retail like...
