@@ -33945,7 +33945,292 @@
 			<item id="186000051" name="Major Ancient Crown" min_count="3" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188053903" name="Honorable Equipment of Conquest Box" />
+	<decomposable item_id="188053903" name="Honorable Equipment of Conquest Box">
+		<items chance="2">
+			<item id="100001567" name="Vanquisher's Sword" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER" />
+			<item id="115001611" name="Vanquisher's Staff" player_classes="CHANTER CLERIC" />
+			<item id="100501200" name="Vanquisher's Jewel" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101900999" name="Vanquisher's Aethercannon" player_classes="GUNNER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="102100836" name="Vanquisher's Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="2">
+			<item id="100201378" name="Vanquisher's Dagger" player_classes="ASSASSIN RANGER" />
+			<item id="100101205" name="Vanquisher's Mace" player_classes="GLADIATOR TEMPLAR CHANTER CLERIC" />
+			<item id="100501200" name="Vanquisher's Jewel" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101900999" name="Vanquisher's Aethercannon" player_classes="GUNNER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="102100836" name="Vanquisher's Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="2">
+			<item id="100901220" name="Vanquisher's Greatsword" player_classes="TEMPLAR" />
+			<item id="115001611" name="Vanquisher's Staff" player_classes="CHANTER CLERIC" />
+			<item id="100201378" name="Vanquisher's Dagger" player_classes="GLADIATOR ASSASSIN RANGER" />
+			<item id="100501200" name="Vanquisher's Jewel" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101900999" name="Vanquisher's Aethercannon" player_classes="GUNNER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="102100836" name="Vanquisher's Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="2">
+			<item id="115001611" name="Vanquisher's Staff" player_classes="CHANTER" />
+			<item id="100101205" name="Vanquisher's Mace" player_classes="CLERIC" />
+			<item id="101701251" name="Vanquisher's Bow" player_classes="ASSASSIN RANGER" />
+			<item id="100901220" name="Vanquisher's Greatsword" player_classes="GLADIATOR TEMPLAR" />
+			<item id="100601292" name="Vanquisher's Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="102100836" name="Vanquisher's Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="2">
+			<item id="115001611" name="Vanquisher's Magic Shield" player_classes="CHANTER CLERIC" />
+			<item id="100001567" name="Vanquisher's Sword" player_classes="TEMPLAR ASSASSIN RANGER" />
+			<item id="101301146" name="Vanquisher's Polearm" player_classes="GLADIATOR" />
+			<item id="100601292" name="Vanquisher's Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="101801041" name="Vanquisher's Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="2">
+			<item id="100101205" name="Vanquisher's Mace" player_classes="TEMPLAR CHANTER CLERIC" />
+			<item id="101701251" name="Vanquisher's Bow" player_classes="GLADIATOR ASSASSIN RANGER" />
+			<item id="100601292" name="Vanquisher's Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="101801041" name="Vanquisher's Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="2">
+			<item id="115001610" name="Vanquisher's Protective Shield" player_classes="GLADIATOR TEMPLAR" />
+			<item id="115001611" name="Vanquisher's Magic Shield" player_classes="CHANTER CLERIC" />
+			<item id="100201378" name="Vanquisher's Dagger" player_classes="ASSASSIN" />
+			<item id="101701251" name="Vanquisher's Bow" player_classes="RANGER" />
+			<item id="100501200" name="Vanquisher's Jewel" player_classes="SPIRIT_MASTER" />
+			<item id="100601292" name="Vanquisher's Spellbook" player_classes="SORCERER" />
+			<item id="102001064" name="Vanquisher's Harp" player_classes="BARD" />
+			<item id="101801041" name="Vanquisher's Pistol" player_classes="GUNNER" />
+			<item id="102100836" name="Vanquisher's Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="2">
+			<item id="110101652" name="Vanquisher's Magic Tunic" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="110101653" name="Vanquisher's Pure Tunic" player_classes="BARD" />
+			<item id="110301661" name="Vanquisher's Flash Jerkin" player_classes="ASSASSIN RANGER" />
+			<item id="110301662" name="Vanquisher's Magical Magic Jerkin" player_classes="GUNNER" />
+			<item id="110501498" name="Vanquisher's Splendor Hauberk" player_classes="CHANTER" />
+			<item id="110501499" name="Vanquisher's Divine Hauberk" player_classes="CLERIC" />
+			<item id="110551236" name="Magical Chain Breastplate of Conquest" player_classes="RIDER" />
+			<item id="110601471" name="Vanquisher's Protection Breastplate" player_classes="TEMPLAR" />
+			<item id="110601472" name="Vanquisher's Iron Wall Breastplate" player_classes="GLADIATOR" />
+		</items>
+		<items chance="2">
+			<item id="111101490" name="Vanquisher's Magic Gloves" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="111101491" name="Vanquisher's Pure Gloves" player_classes="BARD" />
+			<item id="111301601" name="Vanquisher's Flash Vambrace" player_classes="ASSASSIN RANGER" />
+			<item id="111301602" name="Vanquisher's Magical Magic Vambrace" player_classes="GUNNER" />
+			<item id="111501453" name="Vanquisher's Splendor Handguards" player_classes="CHANTER" />
+			<item id="111501454" name="Vanquisher's Divine Handguards" player_classes="CLERIC" />
+			<item id="111501795" name="Magical Chain Combat Gloves of Conquest" player_classes="RIDER" />
+			<item id="111601434" name="Vanquisher's Protection Gauntlets" player_classes="TEMPLAR" />
+			<item id="111601435" name="Vanquisher's Iron Wall Gauntlets" player_classes="GLADIATOR" />
+		</items>
+		<items chance="2">
+			<item id="112101443" name="Vanquisher's Magic Pauldrons" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="112101444" name="Vanquisher's Pure Pauldrons" player_classes="BARD" />
+			<item id="112301540" name="Vanquisher's Flash Shoulderguards" player_classes="ASSASSIN RANGER" />
+			<item id="112301541" name="Vanquisher's Magical Magic Shoulderguards" player_classes="GUNNER" />
+			<item id="112501395" name="Vanquisher's Splendor Spaulders" player_classes="CHANTER" />
+			<item id="112501396" name="Vanquisher's Divine Spaulder" player_classes="CLERIC" />
+			<item id="112501732" name="Magical Chain Spaulders of Conquest" player_classes="RIDER" />
+			<item id="112601415" name="Vanquisher's Protection Shoulderplates" player_classes="TEMPLAR" />
+			<item id="112601416" name="Vanquisher's Iron Wall Shoulderplates" player_classes="GLADIATOR" />
+		</items>
+		<items chance="2">
+			<item id="113101503" name="Vanquisher's Magic Leggings" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="113101504" name="Vanquisher's Pure Leggings" player_classes="BARD" />
+			<item id="113301630" name="Vanquisher's Flash Breeches" player_classes="ASSASSIN RANGER" />
+			<item id="113301631" name="Vanquisher's Magical Magic Breeches" player_classes="GUNNER" />
+			<item id="113501471" name="Vanquisher's Splendor Chausses" player_classes="CHANTER" />
+			<item id="113501472" name="Vanquisher's Divine Chausses" player_classes="CLERIC" />
+			<item id="113501813" name="Magical Chain Gaiters of Conquest" player_classes="RIDER" />
+			<item id="113601417" name="Vanquisher's Protection Greaves" player_classes="TEMPLAR" />
+			<item id="113601418" name="Vanquisher's Iron Wall Greaves" player_classes="GLADIATOR" />
+		</items>
+		<items chance="2">
+			<item id="114101537" name="Vanquisher's Magic Shoes" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="114101538" name="Vanquisher's Pure Shoes" player_classes="BARD" />
+			<item id="114301667" name="Vanquisher's Flash Boots" player_classes="ASSASSIN RANGER" />
+			<item id="114301668" name="Vanquisher's Magical Magic Boots" player_classes="GUNNER" />
+			<item id="114501478" name="Vanquisher's Splendor Brogans" player_classes="CHANTER" />
+			<item id="114501479" name="Vanquisher's Divine Brogans" player_classes="CLERIC" />
+			<item id="114501823" name="Magical Chain Combat Boots of Conquest" player_classes="RIDER" />
+			<item id="114601422" name="Vanquisher's Protection Sabatons" player_classes="TEMPLAR" />
+			<item id="114601423" name="Vanquisher's Iron Wall Sabatons" player_classes="GLADIATOR" />
+		</items>
+		<items chance="3">
+			<item id="125003639" name="Vanquisher's Magic Headband" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="125003640" name="Vanquisher's Pure Headband" player_classes="BARD" />
+			<item id="125003637" name="Vanquisher's Flash Hat" player_classes="ASSASSIN RANGER" />
+			<item id="125003638" name="Vanquisher's Magical Hat" player_classes="GUNNER" />
+			<item id="125003635" name="Vanquisher's Splendor Chain Hood" player_classes="CHANTER" />
+			<item id="125003636" name="Vanquisher's Divine Chain Hood" player_classes="CLERIC" />
+			<item id="125004347" name="Chain Combat Helm of Conquest" player_classes="RIDER" />
+			<item id="125003633" name="Vanquisher's Protection Helm" player_classes="TEMPLAR" />
+			<item id="125003634" name="Vanquisher's Iron Wall Helm" player_classes="GLADIATOR" />
+		</items>
+		<items chance="3">
+			<item id="120001456" name="Vanquisher's Flame Earrings" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="120001457" name="Vanquisher's Freezing Earrings" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="3">
+			<item id="121001330" name="Vanquisher's Flame Necklace" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="121001330" name="Vanquisher's Freezing Necklace" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="3">
+			<item id="122001599" name="Vanquisher's Flame Ring" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="122001599" name="Vanquisher's Freezing Ring" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="3">
+			<item id="123001359" name="Vanquisher's Flame Belt" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="123001359" name="Vanquisher's Freezing Belt" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="3">
+			<item id="100001794" name="Conqueror's Honorable Sword" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER" />
+			<item id="101501399" name="Conqueror's Honorable Staff" player_classes="CHANTER CLERIC" />
+			<item id="100501352" name="Conqueror's Honorable Orb" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101901170" name="Conqueror's Honorable Aethercannon" player_classes="GUNNER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="102101106" name="Conqueror's Honorable Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="3">
+			<item id="100201559" name="Conqueror's Honorable Dagger" player_classes="ASSASSIN RANGER" />
+			<item id="100101384" name="Conqueror's Honorable Mace" player_classes="GLADIATOR TEMPLAR CHANTER CLERIC" />
+			<item id="100501352" name="Conqueror's Honorable Orb" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101901170" name="Conqueror's Honorable Aethercannon" player_classes="GUNNER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="102101106" name="Conqueror's Honorable Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="3">
+			<item id="100901421" name="Conqueror's Honorable Greatsword" player_classes="TEMPLAR" />
+			<item id="101501399" name="Conqueror's Honorable Staff" player_classes="CHANTER CLERIC" />
+			<item id="100201559" name="Conqueror's Honorable Dagger" player_classes="GLADIATOR ASSASSIN RANGER" />
+			<item id="100501352" name="Conqueror's Honorable Orb" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="101901170" name="Conqueror's Honorable Aethercannon" player_classes="GUNNER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="102101106" name="Conqueror's Honorable Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="3">
+			<item id="101501399" name="Conqueror's Honorable Staff" player_classes="CHANTER" />
+			<item id="100101384" name="Conqueror's Honorable Mace" player_classes="CLERIC" />
+			<item id="101701405" name="Conqueror's Honorable Bow" player_classes="ASSASSIN RANGER" />
+			<item id="100901421" name="Conqueror's Honorable Greatsword" player_classes="GLADIATOR TEMPLAR" />
+			<item id="100601469" name="Conqueror's Honorable Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="102101106" name="Conqueror's Honorable Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="3">
+			<item id="115001824" name="Conqueror's Honorable Magic Shield" player_classes="CHANTER CLERIC" />
+			<item id="100001794" name="Conqueror's Honorable Sword" player_classes="TEMPLAR ASSASSIN RANGER" />
+			<item id="101301310" name="Conqueror's Honorable Polearm" player_classes="GLADIATOR" />
+			<item id="100601469" name="Conqueror's Honorable Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="101801263" name="Conqueror's Honorable Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="3">
+			<item id="100101384" name="Conqueror's Honorable Mace" player_classes="TEMPLAR CHANTER CLERIC" />
+			<item id="101701405" name="Conqueror's Honorable Bow" player_classes="GLADIATOR ASSASSIN RANGER" />
+			<item id="100601469" name="Conqueror's Honorable Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="101801263" name="Conqueror's Honorable Pistol" player_classes="RIDER GUNNER" />
+		</items>
+		<items chance="3">
+			<item id="115001823" name="Conqueror's Honorable Protective Shield" player_classes="GLADIATOR TEMPLAR" />
+			<item id="115001824" name="Conqueror's Honorable Magic Shield" player_classes="CHANTER CLERIC" />
+			<item id="100201559" name="Conqueror's Honorable Dagger" player_classes="ASSASSIN" />
+			<item id="101701405" name="Conqueror's Honorable Bow" player_classes="RANGER" />
+			<item id="100501352" name="Conqueror's Honorable Orb" player_classes="SPIRIT_MASTER" />
+			<item id="100601469" name="Conqueror's Honorable Spellbook" player_classes="SORCERER" />
+			<item id="102001289" name="Conqueror's Honorable Harp" player_classes="BARD" />
+			<item id="101801263" name="Conqueror's Honorable Pistol" player_classes="GUNNER" />
+			<item id="102101106" name="Conqueror's Honorable Cipher-Blade" player_classes="RIDER" />
+		</items>
+		<items chance="4">
+			<item id="110101875" name="Conqueror's Honorable Magic Jacket" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="110101876" name="Conqueror's Honorable Pure Jacket" player_classes="BARD" />
+			<item id="110301867" name="Conqueror's Honorable Flash Jerkin" player_classes="ASSASSIN RANGER" />
+			<item id="110301868" name="Conqueror's Honorable Bright Jerkin" player_classes="GUNNER" />
+			<item id="110551196" name="Conqueror's Honorable Boon Hauberk" player_classes="CHANTER" />
+			<item id="110551197" name="Conqueror's Honorable Holy Hauberk" player_classes="CLERIC" />
+			<item id="110551237" name="Honorable Magical Chain Breastplate of Conquest" player_classes="RIDER" />
+			<item id="110601662" name="Conqueror's Honorable Solid Breastplate" player_classes="TEMPLAR" />
+			<item id="110601663" name="Conqueror's Honorable Iron Breastplate" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="111101690" name="Conqueror's Honorable Magic Gloves" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="111101691" name="Conqueror's Honorable Pure Gloves" player_classes="BARD" />
+			<item id="111301805" name="Conqueror's Honorable Flash Vambraces" player_classes="ASSASSIN RANGER" />
+			<item id="111301806" name="Conqueror's Honorable Bright Vambraces" player_classes="GUNNER" />
+			<item id="111501755" name="Conqueror's Honorable Boon Handguards" player_classes="CHANTER" />
+			<item id="111501756" name="Conqueror's Honorable Holy Handguards" player_classes="CLERIC" />
+			<item id="111501796" name="Honorable Magical Chain Combat Gloves of Conquest" player_classes="RIDER" />
+			<item id="111601625" name="Conqueror's Honorable Solid Gauntlets" player_classes="TEMPLAR" />
+			<item id="111601626" name="Conqueror's Honorable Iron Gauntlets" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="112101639" name="Conqueror's Honorable Magic Pauldrons" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="112101640" name="Conqueror's Honorable Pure Pauldrons" player_classes="BARD" />
+			<item id="112301744" name="Conqueror's Honorable Flash Shoulderguards" player_classes="ASSASSIN RANGER" />
+			<item id="112301745" name="Conqueror's Honorable Bright Shoulderguards" player_classes="GUNNER" />
+			<item id="112501694" name="Conqueror's Honorable Boon Spaulders" player_classes="CHANTER" />
+			<item id="112501695" name="Conqueror's Honorable Holy Spaulders" player_classes="CLERIC" />
+			<item id="112501733" name="Honorable Magical Chain Spaulders of Conquest" player_classes="RIDER" />
+			<item id="112601607" name="Conqueror's Honorable Solid Shoulderplates" player_classes="TEMPLAR" />
+			<item id="112601608" name="Conqueror's Honorable Iron Shoulderplates" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="113101701" name="Conqueror's Honorable Magic Leggings" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="113101702" name="Conqueror's Honorable Pure Leggings" player_classes="BARD" />
+			<item id="113301836" name="Conqueror's Honorable Flash Legguards" player_classes="ASSASSIN RANGER" />
+			<item id="113301837" name="Conqueror's Honorable Bright Legguards" player_classes="GUNNER" />
+			<item id="113501773" name="Conqueror's Honorable Boon Chausses" player_classes="CHANTER" />
+			<item id="113501774" name="Conqueror's Honorable Holy Chausses" player_classes="CLERIC" />
+			<item id="113501814" name="Honorable Magical Chain Gaiters of Conquest" player_classes="RIDER" />
+			<item id="113601608" name="Conqueror's Honorable Solid Greaves" player_classes="TEMPLAR" />
+			<item id="113601609" name="Conqueror's Honorable Iron Greaves" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="114101735" name="Conqueror's Honorable Magic Shoes" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="114101736" name="Conqueror's Honorable Pure Shoes" player_classes="BARD" />
+			<item id="114301873" name="Conqueror's Honorable Flash Boots" player_classes="ASSASSIN RANGER" />
+			<item id="114301874" name="Conqueror's Honorable Bright Boots" player_classes="GUNNER" />
+			<item id="114501783" name="Conqueror's Honorable Boon Brogans" player_classes="CHANTER" />
+			<item id="114501784" name="Conqueror's Honorable Holy Brogans" player_classes="CLERIC" />
+			<item id="114501824" name="Honorable Magical Chain Combat Boots of Conquest" player_classes="RIDER" />
+			<item id="114601615" name="Conqueror's Honorable Solid Sabatons" player_classes="TEMPLAR" />
+			<item id="114601616" name="Conqueror's Honorable Iron Sabatons" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="125004265" name="Conqueror's Honorable Magic Bandana" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="125004265" name="Conqueror's Honorable Pure Bandana" player_classes="BARD" />
+			<item id="125004263" name="Conqueror's Honorable Flash Hat" player_classes="ASSASSIN RANGER" />
+			<item id="125004264" name="Conqueror's Honorable Bright Hat" player_classes="GUNNER" />
+			<item id="125004261" name="Conqueror's Honorable Boon Chain Helm" player_classes="CHANTER" />
+			<item id="125004262" name="Conqueror's Honorable Holy Chain Helm" player_classes="CLERIC" />
+			<item id="125004346" name="Honorable Chain Combat Helmet of Conquest" player_classes="RIDER" />
+			<item id="125004259" name="Conqueror's Honorable Solid Helm" player_classes="TEMPLAR" />
+			<item id="125004260" name="Conqueror's Honorable Iron Helm" player_classes="GLADIATOR" />
+		</items>
+		<items chance="4">
+			<item id="120001558" name="Honorable Flame Earrings of Conquest" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="120001559" name="Honorable Freezing Earrings of Conquest" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="4">
+			<item id="121001430" name="Honorable Flame Necklace of Conquest" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="121001431" name="Honorable Freezing Necklace of Conquest" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="4">
+			<item id="122001708" name="Honorable Flame Ring of Conquest" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="122001709" name="Honorable Freezing Ring of Conquest" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+		<items chance="4">
+			<item id="123001475" name="Honorable Flame Waist Band of Conquest" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="123001476" name="Honorable Freezing Waist Band of Conquest" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053904" name="Faded Middle Grade Composite Manastone Bundle">
 		<items>
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
