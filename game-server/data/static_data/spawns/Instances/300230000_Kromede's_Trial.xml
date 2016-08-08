@@ -12,11 +12,6 @@
 			<spot x="643.938" y="795.352" z="216.159" h="30"/>
 		</spawn>
 		<!-- Ancient Temple Nagolem -->
-		<spawn npc_id="282124">
-			<spot x="633.67" y="756.79" z="216.14"/>
-			<spot x="633.67" y="791.59" z="216.14"/>
-		</spawn>
-		<!-- Ancient Temple Nagolem -->
 		<spawn npc_id="282126">
 			<spot x="613.889" y="793.743" z="216.095" h="90"/>
 			<spot x="613.903" y="754.872" z="216.095" h="30"/>
