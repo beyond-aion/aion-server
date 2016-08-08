@@ -2778,42 +2778,118 @@
 	</npc_drop>
 	<!-- Rentus Base -->
 	<npc_drop npc_id="218572">
+		<drop_group race="PC_ALL" name="Named Armor (Unique)">
+			<drop item_id="114101284" name="Rebel Sorcerer's Shoes" chance="100" />
+			<drop item_id="114101285" name="Rebel Spiritmaster's Shoes" chance="100" />
+			<drop item_id="114101434" name="Rebel Songweaver's Shoes" chance="100" />
+			<drop item_id="114301290" name="Rebel Assassin's Boots" chance="100" />
+			<drop item_id="114301291" name="Rebel Ranger's Boots" chance="100" />
+			<drop item_id="114301440" name="Rebel Gunslinger's Boots" chance="100" />
+			<drop item_id="114501248" name="Rebel Cleric's Brogans" chance="100" />
+			<drop item_id="114501249" name="Rebel Chanter's Brogans" chance="100" />
+			<drop item_id="114501646" name="Rebel Aethertech's Magic Brogans" chance="100" />
+			<drop item_id="114601190" name="Rebel Gladiator's Sabatons" chance="100" />
+			<drop item_id="114601191" name="Rebel Templar's Sabatons" chance="100" />
+			<drop item_id="111101238" name="Rebel Sorcerer's Gloves" chance="100" />
+			<drop item_id="111101239" name="Rebel Spiritmaster's Gloves" chance="100" />
+			<drop item_id="111101387" name="Rebel Songweaver's Gloves" chance="100" />
+			<drop item_id="111301233" name="Rebel Assassin's Vambrace" chance="100" />
+			<drop item_id="111301234" name="Rebel Ranger's Vambrace" chance="100" />
+			<drop item_id="111301379" name="Rebel Gunslinger's Vambrace" chance="100" />
+			<drop item_id="111501227" name="Rebel Cleric's Handguards" chance="100" />
+			<drop item_id="111501228" name="Rebel Chanter's Handguards" chance="100" />
+			<drop item_id="111501617" name="Rebel Aethertech's Magic Handguards" chance="100" />
+			<drop item_id="111601206" name="Rebel Gladiator's Gauntlets" chance="100" />
+			<drop item_id="111601207" name="Rebel Templar's Gauntlets" chance="100" />
+			<drop item_id="112101196" name="Rebel Sorcerer's Pauldrons" chance="100" />
+			<drop item_id="112101197" name="Rebel Spiritmaster's Pauldrons" chance="100" />
+			<drop item_id="112101341" name="Rebel Songweaver's Pauldrons" chance="100" />
+			<drop item_id="112301179" name="Rebel Assassin's Shoulderguards" chance="100" />
+			<drop item_id="112301180" name="Rebel Ranger's Shoulderguards" chance="100" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Named Armor (Unique)">
+			<drop item_id="113101257" name="Rebel Sorcerer's Leggings" chance="100" />
+			<drop item_id="113101258" name="Rebel Spiritmaster's Leggings" chance="100" />
+			<drop item_id="113101403" name="Rebel Songweaver's Leggings" chance="100" />
+			<drop item_id="113301259" name="Rebel Assassin's Breeches" chance="100" />
+			<drop item_id="113301260" name="Rebel Ranger's Breeches" chance="100" />
+			<drop item_id="113301402" name="Rebel Gunslinger's Breeches" chance="100" />
+			<drop item_id="113501244" name="Rebel Cleric's Chausses" chance="100" />
+			<drop item_id="113501245" name="Rebel Chanter's Chausses" chance="100" />
+			<drop item_id="113501637" name="Rebel Aethertech's Magic Chausses" chance="100" />
+			<drop item_id="113601197" name="Rebel Gladiator's Greaves" chance="100" />
+			<drop item_id="113601198" name="Rebel Templar's Greaves" chance="100" />
+			<drop item_id="110101363" name="Rebel Sorcerer's Tunic" chance="100" />
+			<drop item_id="110101364" name="Rebel Spiritmaster's Tunic" chance="100" />
+			<drop item_id="110101541" name="Rebel Songweaver's Tunic" chance="100" />
+			<drop item_id="110301290" name="Rebel Assassin's Jerkin" chance="100" />
+			<drop item_id="110301291" name="Rebel Ranger's Jerkin" chance="100" />
+			<drop item_id="110301437" name="Rebel Gunslinger's Jerkin" chance="100" />
+			<drop item_id="110501268" name="Rebel Cleric's Hauberk" chance="100" />
+			<drop item_id="110501269" name="Rebel Chanter's Hauberk" chance="100" />
+			<drop item_id="110551060" name="Rebel Aethertech's Magic Hauberk" chance="100" />
+			<drop item_id="110601237" name="Rebel Gladiator's Breastplate" chance="100" />
+			<drop item_id="110601238" name="Rebel Templar's Breastplate" chance="100" />
+			<drop item_id="112301323" name="Rebel Gunslinger's Shoulderguards" chance="100" />
+			<drop item_id="112501172" name="Rebel Cleric's Spaulders" chance="100" />
+			<drop item_id="112501173" name="Rebel Chanter's Spaulders" chance="100" />
+			<drop item_id="112501558" name="Rebel Aethertech's Magic Spaulder" chance="100" />
+			<drop item_id="112601184" name="Rebel Gladiator's Shoulderplates" chance="100" />
+			<drop item_id="112601185" name="Rebel Templar's Shoulderplates" chance="100" />
+		</drop_group>
 		<drop_group race="PC_ALL" name="Named Head (Unique)">
-			<drop item_id="125002896" name="Rebel Sorcerer's Headband" chance="20" />
-			<drop item_id="125002897" name="Rebel Spiritmaster's Headband" chance="20" />
-			<drop item_id="125003321" name="Rebel Songweaver's Headband" chance="20" />
-			<drop item_id="125002898" name="Rebel Assassin's Hat" chance="20" />
-			<drop item_id="125002899" name="Rebel Ranger's Hat" chance="20" />
-			<drop item_id="125003320" name="Rebel Gunslinger's Hat" chance="20" />
-			<drop item_id="125002900" name="Rebel Cleric's Chain Hood" chance="20" />
-			<drop item_id="125002901" name="Rebel Chanter's Chain Hood" chance="20" />
-			<drop item_id="125003902" name="Rebel Aethertech's Magic Helm" chance="20" />
-			<drop item_id="125002902" name="Rebel Gladiator's Helm" chance="20" />
-			<drop item_id="125002903" name="Rebel Templar's Helm" chance="20" />
+			<drop item_id="125002896" name="Rebel Sorcerer's Headband" chance="100" />
+			<drop item_id="125002897" name="Rebel Spiritmaster's Headband" chance="100" />
+			<drop item_id="125003321" name="Rebel Songweaver's Headband" chance="100" />
+			<drop item_id="125002898" name="Rebel Assassin's Hat" chance="100" />
+			<drop item_id="125002899" name="Rebel Ranger's Hat" chance="100" />
+			<drop item_id="125003320" name="Rebel Gunslinger's Hat" chance="100" />
+			<drop item_id="125002900" name="Rebel Cleric's Chain Hood" chance="100" />
+			<drop item_id="125002901" name="Rebel Chanter's Chain Hood" chance="100" />
+			<drop item_id="125003902" name="Rebel Aethertech's Magic Helm" chance="100" />
+			<drop item_id="125002902" name="Rebel Gladiator's Helm" chance="100" />
+			<drop item_id="125002903" name="Rebel Templar's Helm" chance="100" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named Guestbloom (Unique)">
-			<drop item_id="170195085" name="Resistance Army's Guestbloom" chance="10" />
+			<drop item_id="170195085" name="Resistance Army's Guestbloom" chance="20" />
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="219215">
 		<drop_group race="PC_ALL" name="Named Armor (Unique)">
-			<drop item_id="112101196" name="Rebel Sorcerer's Pauldrons" chance="20" />
-			<drop item_id="112101197" name="Rebel Spiritmaster's Pauldrons" chance="20" />
-			<drop item_id="112101341" name="Rebel Songweaver's Pauldrons" chance="20" />
-			<drop item_id="112301179" name="Rebel Assassin's Shoulderguards" chance="20" />
-			<drop item_id="112301180" name="Rebel Ranger's Shoulderguards" chance="20" />
-			<drop item_id="112301323" name="Rebel Gunslinger's Shoulderguards" chance="20" />
-			<drop item_id="112501172" name="Rebel Cleric's Spaulders" chance="20" />
-			<drop item_id="112501173" name="Rebel Chanter's Spaulders" chance="20" />
-			<drop item_id="112501558" name="Rebel Aethertech's Magic Spaulder" chance="20" />
-			<drop item_id="112601184" name="Rebel Gladiator's Shoulderplates" chance="20" />
-			<drop item_id="112601185" name="Rebel Templar's Shoulderplates" chance="20" />
+			<drop item_id="113101693" name="Leggings of Rentus Recovery Squad" chance="35" />
+			<drop item_id="113301826" name="Legguards of Rentus Recovery Squad" chance="35" />
+			<drop item_id="113301827" name="Leather Gaiters of Rentus Recovery Squad" chance="35" />
+			<drop item_id="113501761" name="Chausses of Rentus Recovery Squad" chance="35" />
+			<drop item_id="113501762" name="Chain Gaiters of Rentus Recovery Squad" chance="35" />
+			<drop item_id="113601600" name="Greaves of Rentus Recovery Squad" chance="35" />
 		</drop_group>
-		<drop_group race="PC_ALL" name="Named Armor (Legend)">
-			<drop item_id="114101282" name="Defeated Reian's Shoes" chance="30" />
-			<drop item_id="114301288" name="Defeated Reian's Boots" chance="30" />
-			<drop item_id="114501246" name="Defeated Reian's Brogans" chance="30" />
-			<drop item_id="114601188" name="Defeated Reian's Sabatons" chance="30" />
+	</npc_drop>
+	<npc_drop npc_id="833047">
+		<drop_group race="PC_ALL" name="Name Weapon (Epic)">
+			<drop item_id="100001262" name="Vasharti's Sword" chance="25" />
+			<drop item_id="101701008" name="Vasharti's Longbow" chance="25" />
+			<drop item_id="101500991" name="Vasharti's Staff" chance="25" />
+			<drop item_id="101300928" name="Vasharti's Spear" chance="25" />
+			<drop item_id="100900965" name="Vasharti's Greatsword" chance="25" />
+			<drop item_id="100601037" name="Vasharti's Tome" chance="25" />
+			<drop item_id="100500983" name="Vasharti's Jewel" chance="25" />
+			<drop item_id="100201121" name="Vasharti's Dagger" chance="25" />
+			<drop item_id="100100963" name="Vasharti's Warhammer" chance="25" />
+			<drop item_id="101800855" name="Vasharti's Pistol" chance="25" />
+			<drop item_id="101900853" name="Vasharti's Aethercannon" chance="25" />
+			<drop item_id="102000887" name="Vasharti's Harp" chance="25" />
+			<drop item_id="102100747" name="Vasharti's Cipher-Blade" chance="25" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Named Accessoire (Epic)">
+			<drop item_id="125004221" name="Cloth Bandana of Rentus Recovery Squad" chance="35" />
+			<drop item_id="125004222" name="Leather Hat of Rentus Recovery Squad" chance="35" />
+			<drop item_id="125004223" name="Chain Helm of Rentus Recovery Squad" chance="35" />
+			<drop item_id="125004224" name="Plate Helmet of Rentus Recovery Squad" chance="35" />
+			<drop item_id="125004225" name="Leather Helmet of Rentus Recovery Squad" chance="35" />
+			<drop item_id="125004226" name="Chain Combat Helmet of Rentus Recovery Squad" chance="35" />
+		</drop_group>
+		<drop_group race="PC_ALL" name="Named Souvenir (Unique)">
+			<drop item_id="170030052" name="[Souvenir] Vasharti's Gloves Wall Decoration" chance="20" />
 		</drop_group>
 	</npc_drop>
 	<!-- Right Wing Chamber -->

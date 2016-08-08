@@ -369,7 +369,7 @@
 	<portal_loc world_id="300240000" loc_id="3002403" x="605.076" y="448.6475" z="653.5657" h="30"/> <!-- Teleporter Loc 1-->
 	<portal_loc world_id="300240000" loc_id="3002404" x="627.0481" y="347.0431" z="637.9468" h="60"/> <!-- Teleporter Loc 2 -->
 	<!-- Rentus Base -->
-	<portal_loc world_id="300280000" loc_id="3002800" x="584.74915" y="124.48231" z="47.25" h="6"/> <!-- Rentus Base Entrance -->
+	<portal_loc world_id="300280000" loc_id="3002800" x="555.0269" y="593.1607" z="154.0642" h="77"/> <!-- Rentus Base Entrance -->
 	<!-- Poeta -->
 	<portal_loc world_id="210010000" loc_id="2100100" x="806.12335" y="1242.6829" z="118.98627" h="109"/> <!-- Akarios Village -->
 	<portal_loc world_id="210010000" loc_id="2100101" x="426.63187" y="1740.2509" z="119.925865" h="78"/> <!-- Melponeh's Campsite -->
