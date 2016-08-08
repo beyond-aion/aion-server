@@ -227,11 +227,9 @@ public class NpcController extends CreatureController<Npc> {
 							AbyssPointsService.addAp(player, getOwner(), (int) rewardAp);
 						}
 					}
-
-					if (getOwner().getAi2().ask(AIQuestion.SHOULD_LOOT) && attacker.equals(winner)) {
-						DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
-					}
 				}
+				if (attacker.equals(winner) && getOwner().getAi2().ask(AIQuestion.SHOULD_LOOT))
+					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 			}
 		}
 	}
