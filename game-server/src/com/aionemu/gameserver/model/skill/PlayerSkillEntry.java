@@ -90,14 +90,8 @@ public class PlayerSkillEntry extends SkillEntry {
 		return 0;
 	}
 
-	public int getFlag(boolean isNew) {
-		if (isNormalOrStigmaSkill()) {
-			if (isNew)
-				return isStigmaSkill() ? 0 : 1; // highlights the skill in the list
-			else
-				return getDateLearned();
-		}
-		return 0;
+	public int getFlag() {
+		return isNormalSkill() ? getDateLearned() : 0;
 	}
 
 	public int getDateLearned() {

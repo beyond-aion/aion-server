@@ -6,13 +6,11 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Bobobear
@@ -120,7 +118,6 @@ public class CraftingRewards extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (movieId == questMovie && canLearn(player)) {
 				player.getSkillList().addSkill(player, skillId, levelReward);
-				PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player.getSkillList().getSkillEntry(skillId), 1330064, false));
 				return true;
 			}
 		}

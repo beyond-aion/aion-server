@@ -90,7 +90,7 @@ public class RelinquishCraft extends AdminCommand {
 		}
 
 		skill.setSkillLvl(minValue - 1);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId, false));
+		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId));
 		RelinquishCraftStatus.removeRecipesAbove(player, skillId, minValue);
 		RelinquishCraftStatus.deleteCraftStatusQuests(skillId, player, false);
 		PacketSendUtility.sendMessage(admin, "Craft status successfull relinquished.");

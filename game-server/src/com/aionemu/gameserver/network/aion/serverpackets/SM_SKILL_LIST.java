@@ -19,38 +19,31 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	private int messageId;
 	private int skillNameId;
 	private String skillLvl;
-	boolean isNew = false;
-
-	/**
-	 * This constructor is used on player entering the world Constructs new <tt>SM_SKILL_LIST</tt> packet
-	 */
-	public SM_SKILL_LIST(PlayerSkillEntry skillListEntry) {
-		this(FastTable.of(skillListEntry));
-	}
+	boolean silentUpdate = false;
 
 	public SM_SKILL_LIST(List<PlayerSkillEntry> skillList) {
 		this.skillList = skillList;
 		this.messageId = 0;
+		this.silentUpdate = true;
 	}
 
-	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId, boolean isNew) {
+	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId) {
 		this.skillList = FastTable.of(skill);
 		this.messageId = messageId;
 		this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getNameId();
 		this.skillLvl = String.valueOf(skill.getSkillLevel());
-		this.isNew = isNew;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(skillList.size()); // skills list size
-		writeC(isNew ? 1 : 0); // 0 all learned skills, 1 newly updated skills
+		writeC(silentUpdate ? 1 : 0); // 1 only list in skill list, 0 list in skill list, update skill bar level and notify if new
 		for (PlayerSkillEntry entry : skillList) {
 			writeH(entry.getSkillId());// id
 			writeH(entry.isNormalSkill() ? 1 : entry.getSkillLevel()); // don't ask me, it's retail like...
 			writeC(0x00);
 			writeC(entry.getProfessionSkillBarSize());
-			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag(isNew));
+			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag());
 			writeC(entry.getSkillType()); // 0 normal skill , 1 stigma skill , 3 linked stigma skill
 		}
 		writeD(messageId);

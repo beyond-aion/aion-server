@@ -24,7 +24,7 @@ public class SM_GM_SHOW_PLAYER_SKILLS extends AionServerPacket {
 			writeH(entry.isNormalSkill() ? 1 : entry.getSkillLevel()); // don't ask me, it's retail like...
 			writeC(0x00);
 			writeC(entry.getProfessionSkillBarSize());
-			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag(false));
+			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag());
 			writeC(entry.getSkillType()); // 0 normal skill , 1 stigma skill , 3 linked stigma skill
 		}
 	}
