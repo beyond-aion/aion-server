@@ -137,19 +137,26 @@ public class SkillData {
 	}
 
 	public void validateMotions() {
+		StringBuilder names = new StringBuilder();
 		StringBuilder missing = new StringBuilder();
 		StringBuilder empty = new StringBuilder();
 		Set<String> motionNames = new FastSet<>();
 		for (SkillTemplate t : skillTemplates) {
 			Motion m = t.getMotion();
-			if (m != null && m.getName() != null && motionNames.add(m.getName())) {
-				MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());
-				if (mt == null)
-					missing.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
-				else if (mt.isAllZero())
-					empty.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
+			if (m != null) {
+				if (m.getName() == null && !m.isInstantSkill()) {// TODO initialize a default motion? some skills have explicit motion speeds but no motion name o.O
+					names.append(t.getSkillId()).append(", ");
+				} else if (m.getName() != null && motionNames.add(m.getName())) {
+					MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());
+					if (mt == null)
+						missing.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
+					else if (mt.isAllZero())
+						empty.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
+				}
 			}
 		}
+		if (names.length() > 0)
+			LoggerFactory.getLogger(SkillData.class).warn("Missing motion names for these skills: {}", names.substring(0, names.length() - 2));
 		if (missing.length() > 0)
 			LoggerFactory.getLogger(SkillData.class).warn("Missing motion times for these motion names: {}", missing.substring(0, missing.length() - 2));
 		if (empty.length() > 0)
