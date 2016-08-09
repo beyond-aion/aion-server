@@ -15,7 +15,6 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 
 	private static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
 	private final ConcurrentLinkedQueue<T> tasks = new ConcurrentLinkedQueue<>();
-	private int lastPendingTasks = 0;
 	private int counter = 0;
 
 	public AbstractFIFOPeriodicTaskManager(int period) {
@@ -28,7 +27,8 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 
 	@Override
 	public final void run() {
-		for (int i = tasks.size(); i > 0; --i) {
+		int processedTasks = tasks.size();
+		for (int i = processedTasks; i > 0; --i) {
 			T task = tasks.poll();
 			if (task == null) // no tasks left
 				break;
@@ -43,12 +43,10 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 				RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), System.nanoTime() - begin);
 			}
 		}
-		int pendingTasks = tasks.size();
-		if (pendingTasks == 0 || pendingTasks < lastPendingTasks)
+		if (tasks.size() <= processedTasks)
 			counter = 0;
-		else if (pendingTasks > lastPendingTasks && ++counter == 5) // log error if the pending task queue size increased 5 times without ever decreasing
+		else if (++counter == 5) // log error if the pending task queue size increased 5 times in a row
 			log.error("Tasks for " + getClass().getSimpleName() + " are added faster than they can be executed.");
-		lastPendingTasks = pendingTasks;
 	}
 
 	protected abstract void callTask(T task);
