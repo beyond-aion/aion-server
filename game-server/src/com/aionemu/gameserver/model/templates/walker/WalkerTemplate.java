@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.spawnengine.WalkerGroupType;
 
@@ -62,7 +63,11 @@ public class WalkerTemplate {
 			}
 		}
 		for (int i = 0; i < routeStepList.size() - 1; i++) {
-			routeStepList.get(i).setNextStep(routeStepList.get(i + 1));
+			RouteStep step = routeStepList.get(i);
+			RouteStep nextStep = routeStepList.get(i + 1);
+			if (step.getRouteStep() != nextStep.getRouteStep() - 1)
+				throw new GameServerError("Walker " + routeId + " has a gap between step " + step.getRouteStep() + " and " + nextStep.getRouteStep());
+			step.setNextStep(nextStep);
 		}
 		routeStepList.get(routeStepList.size() - 1).setNextStep(routeStepList.get(0));
 
