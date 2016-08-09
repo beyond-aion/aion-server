@@ -19,8 +19,12 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
-		if (eventType == AIEventType.CREATURE_MOVED) {
-			return getState() == AIState.FOLLOWING;
+		switch (eventType) {
+			case CREATURE_MOVED:
+				return getState() == AIState.FOLLOWING;
+			case DIALOG_START:
+			case DIALOG_FINISH:
+				return getState() == AIState.FOLLOWING || super.canHandleEvent(eventType);
 		}
 		return super.canHandleEvent(eventType);
 	}
