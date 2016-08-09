@@ -337,7 +337,8 @@ public class Skill {
 			return;
 		}
 		if (isCastTimeFixed()) {
-			duration = skillTemplate.getDuration();
+			if (skillMethod != SkillMethod.CHARGE) // base durations of charge skills are set via setDuration  
+				duration = skillTemplate.getDuration();
 			return;
 		}
 
