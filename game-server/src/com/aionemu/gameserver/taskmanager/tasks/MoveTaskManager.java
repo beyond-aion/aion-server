@@ -25,13 +25,15 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 
 		@Override
 		public boolean apply(Creature creature) {
-			creature.getMoveController().moveToDestination();
-			if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
-				removeCreature(creature);
-				creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
-				ZoneUpdateService.getInstance().add(creature);
-			} else {
-				creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
+			if (creature != null) { // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
+				creature.getMoveController().moveToDestination();
+				if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
+					removeCreature(creature);
+					creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
+					ZoneUpdateService.getInstance().add(creature);
+				} else {
+					creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
+				}
 			}
 			return true;
 		}
