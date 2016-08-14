@@ -84,7 +84,7 @@ public class CM_MANASTONE extends AionClientPacket {
 				}
 				break;
 			case 3: // remove manastone
-				if (obj != null && obj instanceof Npc && MathUtil.isInRange(player, obj, 7)) {
+				if (obj instanceof Npc && MathUtil.isInRange(player, obj, 7)) {
 					if (targetFusedSlot == 1)
 						ItemSocketService.removeManastone(player, targetItemUniqueId, slotNum);
 					else

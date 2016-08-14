@@ -91,7 +91,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		if (target != null && target instanceof Player) {
+		if (target instanceof Player) {
 			Player playerTarget = (Player) target;
 			if (playerTarget.isUsingFlyTeleport() || playerTarget.isInPlayerMode(PlayerMode.WINDSTREAM)) {
 				return false;

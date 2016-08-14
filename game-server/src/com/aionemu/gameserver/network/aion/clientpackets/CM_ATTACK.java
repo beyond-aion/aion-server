@@ -48,7 +48,7 @@ public class CM_ATTACK extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
-		if (obj != null && obj instanceof Creature) {
+		if (obj instanceof Creature) {
 			player.getController().attackTarget((Creature) obj, time, false);
 		} else {
 			if (obj != null) {

@@ -39,7 +39,7 @@ public class ScaldingExecutorAI2 extends AggressiveNpcAI2 {
 			if (!isAlreadyDead()) {
 				getMoveController().abortMove();
 				VisibleObject target = getTarget();
-				if (target != null && target instanceof Npc) {
+				if (target instanceof Npc) {
 					final Npc npc = (Npc) target;
 					final int targetId = npc.getNpcId();
 					SkillEngine.getInstance().getSkill(getOwner(), 19928, 44, npc).useNoAnimationSkill();

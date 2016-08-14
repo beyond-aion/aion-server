@@ -31,7 +31,7 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
 				public void run() {
 					if (!isAlreadyDead() && !isHome) {
 						VisibleObject target = getTarget();
-						if (target != null && target instanceof Player) {
+						if (target instanceof Player) {
 							SkillEngine.getInstance().getSkill(getOwner(), 19413, 49, target).useNoAnimationSkill();
 						}
 						ThreadPoolManager.getInstance().schedule(new Runnable() {

@@ -45,7 +45,7 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
                     return;
                 }
                 for (VisibleObject obj : getOwner().getKnownList().getKnownObjects().values()) {
-                    if (obj != null && obj instanceof Creature) {
+                    if (obj instanceof Creature) {
                         if (obj.getObjectId() == getOwner().getCreatorId() && !((Creature) obj).getLifeStats().isAlreadyDead()) {
                             spawner = (Creature) obj;
                             break;

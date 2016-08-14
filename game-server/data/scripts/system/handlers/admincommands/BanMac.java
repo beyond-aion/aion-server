@@ -42,7 +42,7 @@ public class BanMac extends AdminCommand {
 			address = params[1];
 		} else { // no address defined
 			VisibleObject target = player.getTarget();
-			if (target != null && target instanceof Player) {
+			if (target instanceof Player) {
 				if (target.equals(player)) {
 					info(player, "Omg, disselect yourself please.");
 					return;

@@ -69,7 +69,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 
 			writeC(typeId);
 			// Additional info about the usage
-			if (obj != null && obj instanceof UseableItemObject) {
+			if (obj instanceof UseableItemObject) {
 				writeD(player.getObjectId());
 				((UseableItemObject) obj).writeUsageData(getBuf());
 			}

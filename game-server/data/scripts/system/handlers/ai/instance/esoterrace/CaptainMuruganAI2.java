@@ -33,7 +33,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 
 	private void startTaskEvent() {
 		VisibleObject target = getTarget();
-		if (target != null && target instanceof Player) {
+		if (target instanceof Player) {
 			SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
 		}
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
@@ -53,7 +53,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 								if (!isAlreadyDead()) {
 									PacketSendUtility.broadcastMessage(getOwner(), 1500193);
 									VisibleObject target = getTarget();
-									if (target != null && target instanceof Player) {
+									if (target instanceof Player) {
 										SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
 									}
 									specialSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -62,7 +62,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
 										public void run() {
 											if (!isAlreadyDead()) {
 												VisibleObject target = getTarget();
-												if (target != null && target instanceof Player) {
+												if (target instanceof Player) {
 													SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
 												}
 											}

@@ -47,7 +47,7 @@ public class AggroEventHandler {
 		if (TribeRelationService.isSupport(notMyTarget, owner) && MathUtil.isInRange(owner, notMyTarget, owner.getAggroRange())
 			&& GeoService.getInstance().canSee(owner, notMyTarget)) {
 			VisibleObject myTarget = notMyTarget.getTarget();
-			if (myTarget != null && myTarget instanceof Creature) {
+			if (myTarget instanceof Creature) {
 				Creature targetCreature = (Creature) myTarget;
 				PacketSendUtility.broadcastPacket(owner,
 					new SM_ATTACK(owner, targetCreature, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
@@ -65,7 +65,7 @@ public class AggroEventHandler {
 			return false;
 		}
 		VisibleObject target = attacker.getTarget();
-		if (target != null && target instanceof Player) {
+		if (target instanceof Player) {
 			Player playerTarget = (Player) target;
 			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker) && MathUtil.isInRange(owner, playerTarget, owner.getAggroRange())
 				&& GeoService.getInstance().canSee(owner, attacker)) {

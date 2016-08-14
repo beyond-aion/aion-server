@@ -592,7 +592,7 @@ public class PlayerController extends CreatureController<Player> {
 				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
 
-		if (lastAttacker != null && lastAttacker instanceof Player && !lastAttacker.equals(getOwner())) {
+		if (lastAttacker instanceof Player && !lastAttacker.equals(getOwner())) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
 		}
 	}

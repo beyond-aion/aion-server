@@ -78,7 +78,7 @@ public class SummonController extends CreatureController<Summon> {
 	 */
 	public void attackMode(int targetObjId) {
 		VisibleObject obj = getOwner().getKnownList().getObject(targetObjId);
-		if (obj != null && obj instanceof Creature) {
+		if (obj instanceof Creature) {
 			SummonsService.attackMode(getOwner());
 		}
 	}
