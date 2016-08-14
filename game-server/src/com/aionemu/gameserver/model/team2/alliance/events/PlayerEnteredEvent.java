@@ -60,7 +60,7 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 		Player player = member.getObject();
 		if (!invited.equals(player)) {
 			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
-			if (player.getKnownList().getKnownPlayers().containsKey(invited.getObjectId())) {
+			if (player.getKnownList().knows(invited)) {
 				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, invited));
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_ENTERED_FORCE(invited.getName()));

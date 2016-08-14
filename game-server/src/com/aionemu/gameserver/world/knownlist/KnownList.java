@@ -274,7 +274,7 @@ public class KnownList {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all npcs", ex);
+			log.error("Exception when running visitor on all npcs known by " + owner, ex);
 		}
 		return counter;
 	}
@@ -294,7 +294,7 @@ public class KnownList {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all npcs with owner", ex.fillInStackTrace()); // XXX temporary to find the root cause of the stack trace-less npe
+			log.error("Exception when running visitor (with owner) on all npcs known by " + owner, ex);
 		}
 		return counter;
 	}
@@ -304,7 +304,10 @@ public class KnownList {
 			return;
 
 		try {
-			knownPlayers.values().forEach(player -> visitor.visit(player));
+			knownPlayers.values().forEach(player -> {
+				if (player != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(player);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}
@@ -312,7 +315,10 @@ public class KnownList {
 
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			knownObjects.values().forEach(object -> visitor.visit(object));
+			knownObjects.values().forEach(object -> {
+				if (object != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(object);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);
 		}
@@ -360,7 +366,7 @@ public class KnownList {
 	 */
 	public VisibleObject findObject(int templateId) {
 		for (VisibleObject v : knownObjects.values()) {
-			if (v.getObjectTemplate().getTemplateId() == templateId)
+			if (v != null && v.getObjectTemplate().getTemplateId() == templateId) // can be null if entry got removed after iterator allocation
 				return v;
 		}
 		return null;

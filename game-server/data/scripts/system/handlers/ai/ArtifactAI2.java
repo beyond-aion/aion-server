@@ -257,21 +257,21 @@ public class ArtifactAI2 extends NpcAI2 {
 
 			});
 			boolean pc = skill.getProperties().getTargetSpecies() == TargetSpeciesAttribute.PC;
-			for (Creature creature : artifact.getCreatures().values()) {
+			artifact.doOnAllCreatures(creature -> {
 				if (creature.getActingCreature() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
 					switch (skill.getProperties().getTargetRelation()) {
 						case FRIEND:
 							if (player.isEnemy(creature))
-								continue;
+								return;
 							break;
 						case ENEMY:
 							if (!player.isEnemy(creature))
-								continue;
+								return;
 							break;
 					}
 					AI2Actions.applyEffect(ArtifactAI2.this, skill, creature);
 				}
-			}
+			});
 		}
 
 	}

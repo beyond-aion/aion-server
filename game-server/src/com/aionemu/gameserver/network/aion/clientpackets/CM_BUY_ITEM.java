@@ -94,7 +94,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		if (isAudit || player == null)
 			return;
 
-		VisibleObject target = player.getKnownList().getKnownObjects().get(sellerObjId);
+		VisibleObject target = player.getKnownList().getObject(sellerObjId);
 
 		if (target == null)
 			return;

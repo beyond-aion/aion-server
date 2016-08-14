@@ -50,7 +50,10 @@ public class SiegeZoneInstance extends ZoneInstance {
 
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			players.values().forEach(player -> visitor.visit(player));
+			players.values().forEach(player -> {
+				if (player != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(player);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}

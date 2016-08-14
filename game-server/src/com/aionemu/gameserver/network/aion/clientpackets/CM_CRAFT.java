@@ -58,7 +58,7 @@ public class CM_CRAFT extends AionClientPacket {
 
 		// 129 = Morph Substances
 		if (unk != 129) {
-			VisibleObject staticObject = player.getKnownList().getKnownObjects().get(targetObjId);
+			VisibleObject staticObject = player.getKnownList().getObject(targetObjId);
 			if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10)
 				|| staticObject.getObjectTemplate().getTemplateId() != targetTemplateId)
 				return;

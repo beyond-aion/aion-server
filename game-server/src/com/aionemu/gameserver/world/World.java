@@ -191,22 +191,14 @@ public class World {
 	}
 
 	/**
-	 * Finds player by player name.
-	 * 
-	 * @param name
-	 *          - name of player
-	 * @return Player
+	 * @see PlayerContainer#get(String)
 	 */
 	public Player findPlayer(String name) {
 		return allPlayers.get(name);
 	}
 
 	/**
-	 * Finds player by player objectId.
-	 * 
-	 * @param objectId
-	 *          - objectId of player
-	 * @return Player
+	 * @see PlayerContainer#get(int)
 	 */
 	public Player findPlayer(int objectId) {
 		return allPlayers.get(objectId);
@@ -473,7 +465,10 @@ public class World {
 	 */
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			allPlayers.forEach(player -> visitor.visit(player));
+			allPlayers.forEach(player -> {
+				if (player != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(player);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}
@@ -484,7 +479,10 @@ public class World {
 	 */
 	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
 		try {
-			allObjects.values().forEach(obj -> visitor.visit(obj));
+			allObjects.values().forEach(obj -> {
+				if (obj != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(obj);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all objects", ex);
 		}

@@ -259,26 +259,25 @@ public class SiegeLocation implements ZoneHandler {
 		}
 	}
 
+	public void doOnAllCreatures(Visitor<Creature> visitor) {
+		try {
+			creatures.values().forEach(c -> {
+				if (c != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(c);
+			});
+		} catch (Exception ex) {
+			log.error("Exception when running visitor on all creatures", ex);
+		}
+	}
+
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			players.values().forEach(player -> visitor.visit(player));
+			players.values().forEach(p -> {
+				if (p != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(p);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}
 	}
-
-	/**
-	 * @return the creatures
-	 */
-	public Map<Integer, Creature> getCreatures() {
-		return creatures;
-	}
-
-	/**
-	 * @return the players
-	 */
-	public Map<Integer, Player> getPlayers() {
-		return players;
-	}
-
 }

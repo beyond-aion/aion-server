@@ -48,7 +48,7 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 		if (!player.equals(enteredPlayer)) {
 			// TODO probably here JOIN event
 			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.ENTER));
-			if (player.getKnownList().getKnownPlayers().containsKey(enteredPlayer.getObjectId())) {
+			if (player.getKnownList().knows(enteredPlayer)) {
 				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer));
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_ENTERED_PARTY(enteredPlayer.getName()));

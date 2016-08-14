@@ -49,7 +49,7 @@ public class FortressLocation extends SiegeLocation {
 	public List<SiegeLegionReward> getLegionReward() {
 		return this.siegeLegionRewards;
 	}
-	
+
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
 		return this.siegeMercenaryZones;
 	}
@@ -82,19 +82,14 @@ public class FortressLocation extends SiegeLocation {
 
 	@Override
 	public void clearLocation() {
-		// TODO: not allow to place Kisk if siege will be soon
-		for (Creature creature : getCreatures().values()) {
+		doOnAllCreatures(creature -> {
 			if (isEnemy(creature)) {
-				if (creature instanceof Kisk) {
-					Kisk kisk = (Kisk) creature;
-					kisk.getController().die();
-				}
+				if (creature instanceof Kisk)
+					((Kisk) creature).getController().die();
+				else if (creature instanceof Player)
+					TeleportService2.moveToBindLocation((Player) creature);
 			}
-		}
-
-		for (Player player : getPlayers().values())
-			if (isEnemy(player))
-				TeleportService2.moveToBindLocation(player);
+		});
 	}
 
 	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {
