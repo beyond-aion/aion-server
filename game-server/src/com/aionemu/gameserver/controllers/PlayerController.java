@@ -201,7 +201,7 @@ public class PlayerController extends CreatureController<Player> {
 		Pet pet = getOwner().getPet();
 		getOwner().getKnownList().doOnAllPlayers(other -> {
 			KnownList knownList = other.getKnownList();
-			if (knownList.getVisiblePlayers().containsKey(getOwner().getObjectId()) && !other.canSee(getOwner())) {
+			if (knownList.sees(getOwner()) && !other.canSee(getOwner())) {
 				knownList.delVisualObject(getOwner(), ObjectDeleteAnimation.DELAYED);
 				if (pet != null)
 					knownList.delVisualObject(pet, ObjectDeleteAnimation.NONE);

@@ -1,14 +1,13 @@
 package ai.instance.stonespearReach;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Yeats on 20.02.2016.
@@ -25,11 +24,9 @@ public class StonespearGuardianStoneAI2 extends NpcAI2 {
 	}
 
 	private void startTask() {
-		task = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		task = ThreadPoolManager.getInstance().schedule(() -> {
 			if (getOwner() != null) {
-				for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402925));
-				}
+				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_OBJ_End());
 				getOwner().getController().onDelete();
 			}
 		}, 55000); // message says 2mins but its actually only ~1min.

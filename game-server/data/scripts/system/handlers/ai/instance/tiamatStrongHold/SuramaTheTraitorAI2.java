@@ -1,18 +1,17 @@
 package ai.instance.tiamatStrongHold;
 
-import ai.GeneralNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -64,8 +63,8 @@ public class SuramaTheTraitorAI2 extends GeneralNpcAI2 {
 
 	private void changeNpcType(Npc npc, CreatureType newType) {
 		npc.setNpcType(newType);
-		for (Player player : npc.getKnownList().getKnownPlayers().values()) {
+		npc.getKnownList().doOnAllPlayers(player -> {
 			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, newType.getId(), 0));
-		}
+		});
 	}
 }

@@ -1983,8 +1983,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] %0d [%SkillTarget]'s enmity %0 by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ChangeHateOnAttacked_ME_TO_B(String skillcaster, String value0d, String skilltarget, String value0,
-		String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ChangeHateOnAttacked_ME_TO_B(String skillcaster, String value0d, String skilltarget,
+		String value0, String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200494, skillcaster, value0d, skilltarget, value0, skillname);
 	}
 
@@ -5219,7 +5219,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget] recovered %num0 HP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ConvertHeal_INTERVAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ConvertHeal_INTERVAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200956, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -5298,7 +5299,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] and dispelled some of its magical buffs by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_DispelBuffCounterATK_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_DispelBuffCounterATK_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200967, skillcaster, num0, skilltarget, skillname);
 	}
 
@@ -5382,7 +5384,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget]'s flight time increased by %num0 because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_FPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_FPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200979, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -5461,7 +5464,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_MagicCounterATK_INTERVAL_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_MagicCounterATK_INTERVAL_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200990, skillcaster, num0, skilltarget, skillname);
 	}
 
@@ -5496,7 +5500,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget] recovered %num0 MP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_MPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_MPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1200995, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -5552,28 +5557,32 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ProcATK_Instant_Ratio_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ProcATK_Instant_Ratio_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201003, skillcaster, num0, skilltarget, skillname);
 	}
 
 	/**
 	 * [%SkillTarget]'s flight time increased by %num0 because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCFPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCFPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201004, skilltarget, num0, skillcaster, skillname);
 	}
 
 	/**
 	 * [%SkillTarget] recovered %num0 HP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201005, skilltarget, num0, skillcaster, skillname);
 	}
 
 	/**
 	 * [%SkillTarget] recovered %num0 MP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCMPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_PROCMPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201006, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -5692,7 +5701,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SkillATKDrain_Instant_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SkillATKDrain_Instant_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201023, skillcaster, num0, skilltarget, skillname);
 	}
 
@@ -5720,7 +5730,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SpellATKDrain_Instant_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SpellATKDrain_Instant_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201027, skillcaster, num0, skilltarget, skillname);
 	}
 
@@ -5748,7 +5759,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget]'s %0 resistance effects were weakened because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SubTypeBoostResist_A_TO_B(String skilltarget, String value0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SubTypeBoostResist_A_TO_B(String skilltarget, String value0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201031, skilltarget, value0, skillcaster, skillname);
 	}
 
@@ -5777,7 +5789,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] has summoned %0 to [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SummonGroupGate_A_TO_B(String skillcaster, String value0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_SummonGroupGate_A_TO_B(String skillcaster, String value0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201035, skillcaster, value0, skilltarget, skillname);
 	}
 
@@ -6687,14 +6700,16 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by reflecting [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_Reflector_PROTECT_SKILL_A_to_ME(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_Reflector_PROTECT_SKILL_A_to_ME(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201165, skillcaster, num0, skilltarget, skillname);
 	}
 
 	/**
 	 * [%SkillTarget] inflicted %num0 damage on [%SkillCaster] by reflecting [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_Reflector_PROTECT_SKILL_A_to_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_Reflector_PROTECT_SKILL_A_to_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201166, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -6764,7 +6779,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You received the %num0 damage inflicted on [%SkillTarget] by [%SkillCaster]'s [%SkillName], because of the protection effect you cast on it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_SKILL_A_to_B(int num0, String skilltarget, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_SKILL_A_to_B(int num0, String skilltarget, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201176, num0, skilltarget, skillcaster, skillname);
 	}
 
@@ -6794,8 +6810,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%Protector] received the %num0 damage inflicted on [%SkillTarget] by [%SkillCaster]'s [%SkillName], because of the protection effect cast on it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_SKILL_HEAL_A_to_B(String protector, int num0, String skilltarget, String skillcaster,
-		String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_SKILL_HEAL_A_to_B(String protector, int num0, String skilltarget,
+		String skillcaster, String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201180, protector, num0, skilltarget, skillcaster, skillname);
 	}
 
@@ -6816,7 +6832,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%Protector] received %num0 damage inflicted on [%SkillTarget] by [%SkillCaster], because of the protection effect cast on it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_HEAL_A_to_B(String protector, int num0, String skilltarget, String skillcaster) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_protect_PROTECT_HEAL_A_to_B(String protector, int num0, String skilltarget,
+		String skillcaster) {
 		return new SM_SYSTEM_MESSAGE(1201183, protector, num0, skilltarget, skillcaster);
 	}
 
@@ -7033,7 +7050,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget] recovered %num0 DP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_DPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_DPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201226, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -7117,7 +7135,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillTarget] recovered %num0 DP because [%SkillCaster] used [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ProcDPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_ProcDPHeal_Instant_HEAL_A_TO_B(String skilltarget, int num0, String skillcaster,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201238, skilltarget, num0, skillcaster, skillname);
 	}
 
@@ -7404,7 +7423,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * [%SkillCaster] inflicted %num0 damage on [%SkillTarget] by using [%SkillName].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_NoReduceSpellATK_Instant_A_TO_B(String skillcaster, int num0, String skilltarget, String skillname) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUCC_NoReduceSpellATK_Instant_A_TO_B(String skillcaster, int num0, String skilltarget,
+		String skillname) {
 		return new SM_SYSTEM_MESSAGE(1201279, skillcaster, num0, skilltarget, skillname);
 	}
 
@@ -10876,14 +10896,16 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 can only upgrade warehouses to level %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
+	public static final SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0,
+		String value1) {
 		return new SM_SYSTEM_MESSAGE(1300439, value0, value1);
 	}
 
 	/**
 	 * %0 can only upgrade warehouses of level %1 or higher.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTEND_ACCOUNT_WAREHOUSE_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
+	public static final SM_SYSTEM_MESSAGE STR_EXTEND_ACCOUNT_WAREHOUSE_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0,
+		String value1) {
 		return new SM_SYSTEM_MESSAGE(1300440, value0, value1);
 	}
 
@@ -17815,7 +17837,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * %0 %1 %2 has died in %3.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, DescriptionId rankDescId, int zoneNameId) {
-		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(), new DescriptionId(zoneNameId * 2 + 1));
+		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(),
+			new DescriptionId(zoneNameId * 2 + 1));
 	}
 
 	/**
@@ -26766,77 +26789,77 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_GUARDIAN_03() {
 		return new SM_SYSTEM_MESSAGE(1402730);
 	}
-	
+
 	/**
 	 * Prepare for combat! Enemies approaching!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_START() {
 		return new SM_SYSTEM_MESSAGE(1402780);
 	}
-	
+
 	/**
 	 * Use the open entrance to move to the next area.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_END() {
 		return new SM_SYSTEM_MESSAGE(1402781);
 	}
-	
+
 	/**
 	 * The switch is now operational.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_START() {
 		return new SM_SYSTEM_MESSAGE(1402782);
 	}
-	
+
 	/**
 	 * Prepare for combat! Enemies approaching!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_ING() {
 		return new SM_SYSTEM_MESSAGE(1402783);
 	}
-	
+
 	/**
 	 * Use the open entrance to move to the next area.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_B_END() {
 		return new SM_SYSTEM_MESSAGE(1402784);
 	}
-	
+
 	/**
 	 * Prepare for combat! Enemies approaching!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_C_START() {
 		return new SM_SYSTEM_MESSAGE(1402785);
 	}
-	
+
 	/**
 	 * Use the open entrance to move to the next area.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_C_END() {
 		return new SM_SYSTEM_MESSAGE(1402786);
 	}
-	
+
 	/**
 	 * The door cannot be opened yet.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_DOOR_CONDITION() {
 		return new SM_SYSTEM_MESSAGE(1402831);
 	}
-	
+
 	/**
 	 * Prepare for combat! More enemies swarming in!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRAKSHA_SOLO_WAVEMID() {
 		return new SM_SYSTEM_MESSAGE(1402832);
 	}
-	
+
 	/**
 	 * Hold a little longer and you will survive.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRAKSHA_SOLO_WAVELAST() {
 		return new SM_SYSTEM_MESSAGE(1402833);
 	}
-	
+
 	/**
 	 * Only a few enemies left!
 	 */
@@ -26849,6 +26872,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(int value0, int value1) {
 		return new SM_SYSTEM_MESSAGE(1402895, new DescriptionId(value0), value1);
+	}
+
+	/**
+	 * You have successfully protected the Guardian Stone.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_OBJ_End() {
+		return new SM_SYSTEM_MESSAGE(1402925);
 	}
 
 	/**

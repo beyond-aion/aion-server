@@ -3,7 +3,6 @@ package quest.poeta;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -122,16 +121,12 @@ public class _1114TheNymphsGown extends QuestHandler {
 			switch (env.getDialog()) {
 				case USE_OBJECT:
 					if (var == 1) {
-						for (VisibleObject obj : player.getKnownList().getKnownObjects().values()) {
-							if (!(obj instanceof Npc))
-								continue;
-							if (((Npc) obj).getNpcId() != 203175) // Seirenia
-								continue;
-							((Npc) obj).getAggroList().addDamage(player, 50);
-						}
-						// Nymph's Dress
-						if (!giveQuestItem(env, 182200217, 1))
-							; // wtf ?
+						player.getKnownList().doOnAllNpcs(npc -> {
+							if (npc.getNpcId() != 203175) // Seirenia
+								return;
+							npc.getAggroList().addDamage(player, 50);
+						});
+						giveQuestItem(env, 182200217, 1); // Nymph's Dress
 						qs.setQuestVarById(0, 2);
 						updateQuestStatus(env);
 					}

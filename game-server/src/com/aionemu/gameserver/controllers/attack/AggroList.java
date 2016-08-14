@@ -93,11 +93,11 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		ai.addHate(hate);
 		// TODO move out to controller
 		if (creature instanceof Player && owner instanceof Npc) {
-			for (Player player : owner.getKnownList().getKnownPlayers().values()) {
+			owner.getKnownList().doOnAllPlayers(player -> {
 				if (MathUtil.isIn3dRange(owner, player, 50)) {
 					QuestEngine.getInstance().onAddAggroList(new QuestEnv(owner, player, 0, 0));
 				}
-			}
+			});
 		}
 		owner.getAi2().onCreatureEvent(AIEventType.ATTACK, creature);
 	}

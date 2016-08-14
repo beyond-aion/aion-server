@@ -29,7 +29,6 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -90,13 +89,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 				}
 				break;
 			case 700739:
-				npc.getKnownList().doOnAllPlayers(new Visitor<Player>() {
-
-					@Override
-					public void visit(Player player) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400477));
-					}
-				});
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_WIND_INFO());
 				SpawnTemplate template = npc.getSpawn();
 				spawn(281817, template.getX(), template.getY(), template.getZ(), template.getHeading(), 9);
 				npc.getController().onDelete();

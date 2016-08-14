@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -39,11 +38,11 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		AionObject target = activePlayer.getKnownList().getObject(objectId);
 
 		if (!CustomConfig.INSTANCE_DUEL_ENABLE && activePlayer.isInInstance())
 			return;
 
+		Player target = activePlayer.getKnownList().getPlayer(objectId);
 		if (target == null)
 			return;
 
@@ -51,7 +50,7 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		if (target instanceof Player && !((Player) target).equals(activePlayer)) {
+		if (!target.equals(activePlayer)) {
 			DuelService duelService = DuelService.getInstance();
 
 			Player targetPlayer = (Player) target;

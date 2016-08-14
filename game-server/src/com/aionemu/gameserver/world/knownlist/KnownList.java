@@ -47,11 +47,6 @@ public class KnownList {
 	 */
 	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
 
-	/**
-	 * List of players that this KnownList owner sees
-	 */
-	protected volatile Map<Integer, Player> visualPlayers;
-
 	private ReentrantLock lock = new ReentrantLock();
 
 	/**
@@ -89,9 +84,6 @@ public class KnownList {
 			knownPlayers.clear();
 		}
 		visualObjects.clear();
-		if (visualPlayers != null) {
-			visualPlayers.clear();
-		}
 	}
 
 	/**
@@ -136,13 +128,8 @@ public class KnownList {
 	}
 
 	public void addVisualObject(VisibleObject object) {
-		if (visualObjects.put(object.getObjectId(), object) == null) {
-			if (object instanceof Player) {
-				checkVisiblePlayersInitialized();
-				visualPlayers.put(object.getObjectId(), (Player) object);
-			}
+		if (visualObjects.put(object.getObjectId(), object) == null)
 			owner.getController().see(object);
-		}
 	}
 
 	/**
@@ -168,11 +155,8 @@ public class KnownList {
 	 *          - the disappear animation others will see
 	 */
 	public void delVisualObject(VisibleObject object, ObjectDeleteAnimation animation) {
-		if (visualObjects.remove(object.getObjectId()) != null) {
-			if (visualPlayers != null)
-				visualPlayers.remove(object.getObjectId());
+		if (visualObjects.remove(object.getObjectId()) != null)
 			owner.getController().notSee(object, animation);
-		}
 	}
 
 	/**
@@ -309,7 +293,7 @@ public class KnownList {
 					visitor.visit(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
+			log.error("Exception when running visitor on all players known by " + owner, ex);
 		}
 	}
 
@@ -320,7 +304,18 @@ public class KnownList {
 					visitor.visit(object);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all objects", ex);
+			log.error("Exception when running visitor on all objects known by " + owner, ex);
+		}
+	}
+
+	public void doOnAllVisibleObjects(Visitor<VisibleObject> visitor) {
+		try {
+			visualObjects.values().forEach(object -> {
+				if (object != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(object);
+			});
+		} catch (Exception ex) {
+			log.error("Exception when running visitor on all visual objects seen by " + owner, ex);
 		}
 	}
 
@@ -328,16 +323,8 @@ public class KnownList {
 		return knownObjects;
 	}
 
-	public Map<Integer, VisibleObject> getVisibleObjects() {
-		return visualObjects;
-	}
-
 	public Map<Integer, Player> getKnownPlayers() {
 		return knownPlayers != null ? knownPlayers : Collections.<Integer, Player> emptyMap();
-	}
-
-	public Map<Integer, Player> getVisiblePlayers() {
-		return visualPlayers != null ? visualPlayers : Collections.<Integer, Player> emptyMap();
 	}
 
 	final void checkKnownPlayersInitialized() {
@@ -345,16 +332,6 @@ public class KnownList {
 			synchronized (this) {
 				if (knownPlayers == null) {
 					knownPlayers = new ConcurrentHashMap<Integer, Player>();
-				}
-			}
-		}
-	}
-
-	final void checkVisiblePlayersInitialized() {
-		if (visualPlayers == null) {
-			synchronized (this) {
-				if (visualPlayers == null) {
-					visualPlayers = new ConcurrentHashMap<Integer, Player>();
 				}
 			}
 		}
@@ -374,6 +351,10 @@ public class KnownList {
 
 	public VisibleObject getObject(int targetObjectId) {
 		return knownObjects.get(targetObjectId);
+	}
+
+	public Player getPlayer(int targetObjectId) {
+		return knownPlayers == null ? null : knownPlayers.get(targetObjectId);
 	}
 
 	/**

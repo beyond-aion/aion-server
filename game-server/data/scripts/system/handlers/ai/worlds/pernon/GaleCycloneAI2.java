@@ -70,7 +70,7 @@ public class GaleCycloneAI2 extends NpcAI2 {
 	private void clear() {
 		blocked = true;
 		for (Integer obj : observed.keySet()) {
-			Player player = getKnownList().getKnownPlayers().get(obj);
+			Player player = getKnownList().getPlayer(obj);
 			GaleCycloneObserver observer = observed.remove(obj);
 			if (player != null) {
 				player.getObserveController().removeObserver(observer);

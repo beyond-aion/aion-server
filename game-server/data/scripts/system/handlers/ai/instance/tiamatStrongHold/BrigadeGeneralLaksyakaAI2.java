@@ -66,12 +66,12 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 
 	private void startSkeletonEvent() {
 		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);// 4.0
-		List<Player> players = new FastTable<Player>();
-		for (Player player : getKnownList().getKnownPlayers().values()) {
+		List<Player> players = new FastTable<>();
+		getKnownList().doOnAllPlayers(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, tiamatEye, 40)) {
 				players.add(player);
 			}
-		}
+		});
 		Player player = !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
 		SkillEngine.getInstance().applyEffectDirectly(20865, tiamatEye, player, 30000);
 	}

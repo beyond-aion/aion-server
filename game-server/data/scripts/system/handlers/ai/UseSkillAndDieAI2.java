@@ -55,7 +55,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 	
 	private Creature findCreator(int objId) {
 		for (VisibleObject obj : getOwner().getKnownList().getKnownObjects().values()) {
-			if (obj != null && obj instanceof Creature) {
+			if (obj instanceof Creature) {
 				if (obj.getObjectId() == objId) {
 					return (Creature) obj;
 				}

@@ -47,15 +47,15 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 			getOwner().getController().addTask(TaskId.DESPAWN,
 				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().onDelete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
-				for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
+				getOwner().getKnownList().doOnAllPlayers(p -> {
 					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
-						continue;
+						return;
 					if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
 						playersInSight.put(p.getObjectId(), System.currentTimeMillis());
 						PacketSendUtility.sendPacket(p, new SM_MESSAGE(getOwner(),
 							String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
 					}
-				}
+				});
 			}, 1000);
 		}
 	}

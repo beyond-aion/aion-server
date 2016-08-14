@@ -112,10 +112,9 @@ public class TargetEventHandler {
 	}
 
 	private static void checkAggro(NpcAI2 npcAI) {
-		for (VisibleObject obj : npcAI.getOwner().getKnownList().getKnownObjects().values()) {
-			if (obj instanceof Creature) {
+		npcAI.getOwner().getKnownList().doOnAllObjects(obj -> {
+			if (obj instanceof Creature)
 				CreatureEventHandler.checkAggro(npcAI, (Creature) obj);
-			}
-		}
+		});
 	}
 }

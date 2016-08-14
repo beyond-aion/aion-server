@@ -483,9 +483,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param value
 	 */
 	public void broadcastHate(int value) {
-		for (VisibleObject visibleObject : getOwner().getKnownList().getKnownObjects().values())
+		getOwner().getKnownList().doOnAllObjects(visibleObject -> {
 			if (visibleObject instanceof Creature)
 				((Creature) visibleObject).getAggroList().notifyHate(getOwner(), value);
+		});
 	}
 
 	public void abortCast() {

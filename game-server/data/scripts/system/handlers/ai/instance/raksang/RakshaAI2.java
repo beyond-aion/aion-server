@@ -110,11 +110,11 @@ public class RakshaAI2 extends AggressiveNpcAI2 {
 
 	private List<Player> getLifedPlayers() {
 		List<Player> players = new FastTable<Player>();
-		for (Player player : getKnownList().getKnownPlayers().values()) {
+		getKnownList().doOnAllPlayers(player -> {
 			if (!PlayerActions.isAlreadyDead(player)) {
 				players.add(player);
 			}
-		}
+		});
 		return players;
 	}
 

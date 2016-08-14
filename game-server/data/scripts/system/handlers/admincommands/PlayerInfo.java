@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -141,12 +140,14 @@ public class PlayerInfo extends AdminCommand {
 			}
 		} else if (params[1].equals("knownlist")) {
 			sendInfo(admin, "KnownList of " + target.getName());
-			for (VisibleObject obj : target.getKnownList().getKnownObjects().values())
+			target.getKnownList().doOnAllObjects(obj -> {
 				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
+			});
 		} else if (params[1].equals("visuallist")) {
 			sendInfo(admin, "VisualList of " + target.getName());
-			for (VisibleObject obj : target.getKnownList().getVisibleObjects().values())
+			target.getKnownList().doOnAllVisibleObjects(obj -> {
 				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
+			});
 		} else {
 			sendInfo(admin);
 		}
