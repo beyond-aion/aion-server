@@ -263,11 +263,11 @@ public class KnownList {
 		return counter;
 	}
 
-	public void doOnAllNpcsWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor) {
-		doOnAllNpcsWithOwner(visitor, Integer.MAX_VALUE);
+	public void forEachNpcWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor) {
+		forEachNpcWithOwner(visitor, Integer.MAX_VALUE);
 	}
 
-	public int doOnAllNpcsWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
+	public int forEachNpcWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
 			for (VisibleObject newObject : knownObjects.values()) {

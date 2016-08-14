@@ -57,7 +57,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 		// max_move_broadcast_count is 200 and
 		// min_move_broadcast_range is 75, as in client WorldId.xml
 		int limit = creature.getWorldId() == 400010000 ? 200 : Integer.MAX_VALUE;
-		int iterations = creature.getKnownList().doOnAllNpcsWithOwner(MOVE_NOTIFIER, limit);
+		int iterations = creature.getKnownList().forEachNpcWithOwner(MOVE_NOTIFIER, limit);
 
 		if (!(creature instanceof Player)) {
 			int[] maxCounts = moveBroadcastCounts.get(creature.getWorldId());
