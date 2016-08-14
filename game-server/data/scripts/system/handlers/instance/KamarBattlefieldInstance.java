@@ -238,7 +238,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		}
 		kamarReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = kamarReward.getWinningRace();
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -422,7 +422,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

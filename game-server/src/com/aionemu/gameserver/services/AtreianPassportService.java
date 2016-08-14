@@ -49,7 +49,7 @@ public class AtreianPassportService {
 					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
 				}
 
-				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player p) {

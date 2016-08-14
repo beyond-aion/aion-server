@@ -126,7 +126,7 @@ public class ArtifactAI2 extends NpcAI2 {
 			skillTemplate.getNameId()));
 		loc.setStatus(ArtifactStatus.ACTIVATION);
 		final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-		player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -149,7 +149,7 @@ public class ArtifactAI2 extends NpcAI2 {
 				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
 				loc.setStatus(ArtifactStatus.IDLE);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-				getOwner().getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {
@@ -179,7 +179,7 @@ public class ArtifactAI2 extends NpcAI2 {
 				loc.setStatus(ArtifactStatus.CASTING);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 
-				player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+				player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {
@@ -241,7 +241,7 @@ public class ArtifactAI2 extends NpcAI2 {
 			final boolean end = (runCount == artifact.getTemplate().getRepeatCount());
 
 			runCount++;
-			player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+			player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {
@@ -257,7 +257,7 @@ public class ArtifactAI2 extends NpcAI2 {
 
 			});
 			boolean pc = skill.getProperties().getTargetSpecies() == TargetSpeciesAttribute.PC;
-			artifact.doOnAllCreatures(creature -> {
+			artifact.forEachCreature(creature -> {
 				if (creature.getActingCreature() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
 					switch (skill.getProperties().getTargetRelation()) {
 						case FRIEND:

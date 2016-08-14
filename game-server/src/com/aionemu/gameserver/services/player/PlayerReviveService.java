@@ -192,7 +192,7 @@ public class PlayerReviveService {
 	}
 
 	public static final void revive(final Player player, int hpPercent, int mpPercent, boolean setSoulsickness, int resurrectionSkill) {
-		player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		player.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player visitor) {

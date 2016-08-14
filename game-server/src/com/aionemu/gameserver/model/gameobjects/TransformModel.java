@@ -94,7 +94,7 @@ public class TransformModel {
 
 	private void updateTribeVisually() {
 		if (owner instanceof Npc) {
-			owner.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+			owner.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {
@@ -102,7 +102,7 @@ public class TransformModel {
 				}
 			});
 		} else if (owner instanceof Player) {
-			owner.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+			owner.getKnownList().forEachNpc(new Visitor<Npc>() {
 
 				@Override
 				public void visit(Npc npc) {

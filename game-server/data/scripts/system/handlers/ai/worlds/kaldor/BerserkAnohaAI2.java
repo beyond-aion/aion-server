@@ -88,7 +88,7 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void broadcastAnnounce(SM_SYSTEM_MESSAGE msg) {
-		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, msg));
+		World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, msg));
 	}
 
 	@Override

@@ -81,7 +81,7 @@ public class SerialKillerService {
 
 								PacketSendUtility.sendPacket(info.getOwner(), new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-								info.getOwner().getKnownList().doOnAllPlayers(new Visitor<Player>() {
+								info.getOwner().getKnownList().forEachPlayer(new Visitor<Player>() {
 
 									@Override
 									public void visit(Player observed) {
@@ -188,7 +188,7 @@ public class SerialKillerService {
 				int rank = getKillerRank(--info.victims);
 				boolean isEnemyWorld = isEnemyWorld(victim);
 				if (isEnemyWorld && info.getRank() == 3) { //old rank
-					World.getInstance().getWorldMap(victim.getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player> () {
+					World.getInstance().getWorldMap(victim.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Visitor<Player> () {
 						
 						@Override
 						public void visit(Player player) {
@@ -204,7 +204,7 @@ public class SerialKillerService {
 
 						PacketSendUtility.sendPacket(victim, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-						victim.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+						victim.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 							@Override
 							public void visit(Player observed) {
@@ -264,7 +264,7 @@ public class SerialKillerService {
 
 						PacketSendUtility.sendPacket(killer, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-						killer.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+						killer.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 							@Override
 							public void visit(Player observed) {
@@ -294,7 +294,7 @@ public class SerialKillerService {
 			
 			PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-			player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+			player.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player observed) {

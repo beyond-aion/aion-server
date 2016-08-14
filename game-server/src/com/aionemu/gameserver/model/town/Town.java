@@ -110,7 +110,7 @@ public class Town {
 		Map<Integer, Town> data = new HashMap<Integer, Town>(1);
 		data.put(this.id, this);
 		final SM_TOWNS_LIST packet = new SM_TOWNS_LIST(data);
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

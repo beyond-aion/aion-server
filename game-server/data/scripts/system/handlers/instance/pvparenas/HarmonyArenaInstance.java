@@ -71,7 +71,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			return;
 		}
 
-		instance.doOnAllPlayers((Player opponent) -> {
+		instance.forEachPlayer((Player opponent) -> {
 			if (!group.containPlayer(opponent.getObjectId())) {
 				PacketSendUtility.sendPacket(opponent,
 					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, object), getInstanceReward(), getTime()));
@@ -281,7 +281,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

@@ -29,7 +29,7 @@ public class KexkraPrototypeAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75) {
 			if (isStartEvent.compareAndSet(false, true)) {
-				getKnownList().doOnAllPlayers(new Visitor<Player>() {
+				getKnownList().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {

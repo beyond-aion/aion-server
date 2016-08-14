@@ -143,7 +143,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (isInstanceDestroyed)
 					return;
-				instance.doOnAllPlayers(new Visitor<Player>() {
+				instance.forEachPlayer(new Visitor<Player>() {
 					@Override
 					public void visit(Player pl) {
 						if (!pl.getLifeStats().isAlreadyDead())

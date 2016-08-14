@@ -101,7 +101,7 @@ public class RiftInformer {
 	}
 
 	private static void syncRiftsState(int worldId, final List<AionServerPacket> packets, final boolean isDespawnInfo) {
-		World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

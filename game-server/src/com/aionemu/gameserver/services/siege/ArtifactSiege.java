@@ -75,7 +75,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
 			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), getSiegeLocation().getRace()
 				.getDescriptionId());
-			World.getInstance().doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, lRacePacket));
+			World.getInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, lRacePacket));
 		} else {
 			// Prepare packet data
 			String wPlayerName = "";
@@ -93,7 +93,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), wRace.getRaceDescriptionId());
 
 			// send update to players
-			World.getInstance().doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, p.getRace().equals(wRace) ? wRacePacket : lRacePacket));
+			World.getInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, p.getRace().equals(wRace) ? wRacePacket : lRacePacket));
 		}
 	}
 

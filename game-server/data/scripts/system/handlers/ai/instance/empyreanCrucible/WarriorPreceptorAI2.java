@@ -93,7 +93,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
 
 	private Player getTargetPlayer() {
 		List<Player> players = new FastTable<Player>();
-		getKnownList().doOnAllPlayers(player -> {
+		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 15)) {
 				players.add(player);
 			}

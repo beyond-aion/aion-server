@@ -272,7 +272,7 @@ public class SpawnEngine {
 
 	public static void printWorldSpawnStats() {
 		StatsCollector visitor = new StatsCollector();
-		World.getInstance().doOnAllObjects(visitor);
+		World.getInstance().forEachObject(visitor);
 		log.info("Loaded " + visitor.getNpcCount() + " npc spawns");
 		log.info("Loaded " + visitor.getGatherableCount() + " gatherable spawns");
 		QuestEngine.getInstance().printMissingSpawns();

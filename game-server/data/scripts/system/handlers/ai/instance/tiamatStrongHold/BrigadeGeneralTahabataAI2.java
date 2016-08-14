@@ -109,7 +109,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
 	private void teleportRandomPlayer() {
 		List<Player> players = new FastTable<>();
-		getKnownList().doOnAllPlayers(player -> {
+		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40)) {
 				players.add(player);
 			}

@@ -68,7 +68,7 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
 	private void check() {
 		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false);
 		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false);
-		getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

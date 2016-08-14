@@ -101,7 +101,7 @@ public class AbyssRankingCache {
 	 * Updates the ranking list for all online players
 	 */
 	public void updateAbyssRankList() {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

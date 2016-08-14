@@ -250,7 +250,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		}
 		engulfedOBReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = engulfedOBReward.getWinningRace();
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -337,7 +337,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (points == 0) {
 			return;
 		}
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -499,7 +499,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

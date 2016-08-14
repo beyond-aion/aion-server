@@ -84,7 +84,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private void startObservationTask() {
 		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			if (canJoin.get()) {
-				instance.doOnAllPlayers(this::checkLastFightTime);
+				instance.forEachPlayer(this::checkLastFightTime);
 			}
 		}, 300000, 300000);
 	}
@@ -272,7 +272,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public void onEnterInstance(Player player) {
 		if (!player.isGM()) {
 			updateJoinOrLeaveTime(player);
-			instance.doOnAllPlayers(p -> {
+			instance.forEachPlayer(p -> {
 				if (!p.equals(player))
 					PacketSendUtility.sendMessage(p, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER);
 			});
@@ -354,7 +354,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public void removeAllPlayersAndStop() {
 		canJoin.set(false);
 		cancelTasks();
-		instance.doOnAllPlayers(this::removePlayer);
+		instance.forEachPlayer(this::removePlayer);
 		clearLists();
 	}
 

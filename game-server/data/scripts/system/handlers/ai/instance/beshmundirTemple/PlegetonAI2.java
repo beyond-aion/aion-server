@@ -65,7 +65,7 @@ public class PlegetonAI2 extends NpcAI2 {
 	}
 
 	private void sendTimer() {
-		getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

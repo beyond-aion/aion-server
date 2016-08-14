@@ -55,7 +55,7 @@ public class Time extends AdminCommand {
 		int hourOffset = hour - GameTimeService.getInstance().getGameTime().getHour(); // hour offset inside the same day
 		gameTime.addMinutes((60 * hourOffset) - gameTime.getMinute());
 
-		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
+		World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
 
 		sendInfo(admin, "You changed the time to " + gameTime.getHour() + ":" + String.format("%02d", gameTime.getMinute()) + ".");
 	}

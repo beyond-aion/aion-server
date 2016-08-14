@@ -57,7 +57,7 @@ public class Faction extends PlayerCommand {
 
 		PlayerChatService.logMessage(player, ChatType.NORMAL, "[Faction Msg] " + message);
 
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player listener) {

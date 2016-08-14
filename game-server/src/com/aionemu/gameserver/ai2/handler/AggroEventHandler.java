@@ -92,7 +92,7 @@ public class AggroEventHandler {
 		public void run() {
 			aggressive.getAggroList().addHate(target, 1);
 			if (broadcast) {
-				aggressive.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+				aggressive.getKnownList().forEachNpc(new Visitor<Npc>() {
 
 					@Override
 					public void visit(Npc object) {

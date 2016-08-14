@@ -50,7 +50,7 @@ public class HTMLService {
 
 	public static void pushSurvey(String html) {
 		int messageId = IDFactory.getInstance().nextId();
-		World.getInstance().doOnAllPlayers(player -> sendData(player, messageId, html));
+		World.getInstance().forEachPlayer(player -> sendData(player, messageId, html));
 	}
 
 	public static void showHTML(Player player, String html) {

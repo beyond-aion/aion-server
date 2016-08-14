@@ -51,7 +51,7 @@ public class QueenMosquaAI2 extends SummonerAI2 {
 		if (npc != null) {
 			SpawnTemplate template = npc.getSpawn();
 			spawn(700739, template.getX(), template.getY(), template.getZ(), template.getHeading(), 11);
-			npc.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+			npc.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {

@@ -115,7 +115,7 @@ public class DisputeLandService {
 	}
 
 	private void broadcast() {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

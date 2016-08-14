@@ -116,7 +116,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			return;
 		ironWallFrontReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = ironWallFrontReward.getWinningRace();
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -272,7 +272,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

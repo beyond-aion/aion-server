@@ -171,7 +171,7 @@ public class MonsterRaid {
 
 	private void broadcastMessage(SM_SYSTEM_MESSAGE msg) {
 		if (msg != null) {
-			World.getInstance().getWorldMap(mrl.getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+			World.getInstance().getWorldMap(mrl.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {

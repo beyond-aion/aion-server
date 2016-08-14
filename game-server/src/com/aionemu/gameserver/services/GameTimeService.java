@@ -59,7 +59,7 @@ public class GameTimeService {
 			@Override
 			public void run() {
 				log.info("Sending current game time to all players");
-				World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
+				World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
 				if (saveGameTime())
 					log.info("Game time saved...");
 				else

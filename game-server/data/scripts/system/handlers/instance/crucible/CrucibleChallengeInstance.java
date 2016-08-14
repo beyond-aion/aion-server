@@ -58,7 +58,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(final int nameId, final int points) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -73,7 +73,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendEventPacket() {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

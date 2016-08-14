@@ -70,7 +70,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 		spawn(282426, 1328.446289f, 1159.062500f, 53.203529f, (byte) 0, 718);
 		spawn(282174, 1290.778442f, 1170.730957f, 53.203529f, (byte) 0, 597);
 
-		getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

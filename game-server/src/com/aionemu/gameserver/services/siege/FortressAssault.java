@@ -49,7 +49,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 			return;
 
 		if (captured)
-			siegeLocation.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
+			siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
 	}
 
 	private void scheduleSpawns() {
@@ -111,7 +111,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 	}
 
 	private void announceInvasion(AssaultType aType) {
-		siegeLocation.doOnAllPlayers(p -> PacketSendUtility.sendPacket(p, aType == AssaultType.TELEPORT ? SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON()
+		siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, aType == AssaultType.TELEPORT ? SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON()
 			: SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON()));
 	}
 

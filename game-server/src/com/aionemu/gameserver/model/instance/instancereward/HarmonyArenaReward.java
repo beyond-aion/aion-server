@@ -71,7 +71,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 	}
 
 	public void sendPacket(final int type, final Integer object) {
-		instance.doOnAllPlayers((Player player) -> {
+		instance.forEachPlayer((Player player) -> {
 			PacketSendUtility.sendPacket(player,
 				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, object == null ? player.getObjectId() : object),
 					getInstanceReward(), getTime()));

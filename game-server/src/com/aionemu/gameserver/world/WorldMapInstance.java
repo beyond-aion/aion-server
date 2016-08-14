@@ -183,7 +183,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 				if (updateNearbyQuests && updateNearbyQuestsTask == null) { // delayed with null check to prevent packet spam on multispawns (bases, siege, ...)
 					updateNearbyQuestsTask = ThreadPoolManager.getInstance().schedule(() -> {
 						updateNearbyQuestsTask = null;
-						doOnAllPlayers(player -> player.getController().updateNearbyQuests());
+						forEachPlayer(player -> player.getController().updateNearbyQuests());
 					}, 1500);
 				}
 			}
@@ -369,7 +369,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return startPos;
 	}
 
-	public void doOnAllPlayers(Visitor<Player> visitor) {
+	public void forEachPlayer(Visitor<Player> visitor) {
 		try {
 			worldMapPlayers.values().forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation

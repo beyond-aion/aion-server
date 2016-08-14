@@ -48,7 +48,7 @@ public class SiegeZoneInstance extends ZoneInstance {
 		return false;
 	}
 
-	public void doOnAllPlayers(Visitor<Player> visitor) {
+	public void forEachPlayer(Visitor<Player> visitor) {
 		try {
 			players.values().forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation

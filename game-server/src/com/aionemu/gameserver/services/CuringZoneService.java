@@ -39,7 +39,7 @@ public class CuringZoneService {
 			@Override
 			public void run() {
 				for (final CuringObject obj : curingObjects) {
-					obj.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+					obj.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 						@Override
 						public void visit(Player player) {

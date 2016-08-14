@@ -167,7 +167,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
 	private Player getTargetPlayer() {
 		List<Player> players = new FastTable<Player>();
-		getKnownList().doOnAllPlayers(player -> {
+		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);
 			}

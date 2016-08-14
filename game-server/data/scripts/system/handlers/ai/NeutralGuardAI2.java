@@ -32,7 +32,7 @@ public class NeutralGuardAI2 extends AggressiveNpcAI2 {
 
 	private void changeType(final CreatureType type) {
 		getOwner().setNpcType(type);
-		getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

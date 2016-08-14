@@ -64,7 +64,7 @@ public class MercenaryLocation {
 		spawnedMercs.addAll(mercs);
 		lastSpawn = System.currentTimeMillis();
 
-		SiegeService.getInstance().getFortress(siegeId).doOnAllPlayers(new Visitor<Player>() {
+		SiegeService.getInstance().getFortress(siegeId).forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player visitor) {

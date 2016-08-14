@@ -140,12 +140,12 @@ public class PlayerInfo extends AdminCommand {
 			}
 		} else if (params[1].equals("knownlist")) {
 			sendInfo(admin, "KnownList of " + target.getName());
-			target.getKnownList().doOnAllObjects(obj -> {
+			target.getKnownList().forEachObject(obj -> {
 				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
 			});
 		} else if (params[1].equals("visuallist")) {
 			sendInfo(admin, "VisualList of " + target.getName());
-			target.getKnownList().doOnAllVisibleObjects(obj -> {
+			target.getKnownList().forEachVisibleObject(obj -> {
 				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
 			});
 		} else {

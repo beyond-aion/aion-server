@@ -128,7 +128,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 		idgelDomeReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = idgelDomeReward.getWinningRace();
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -235,7 +235,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

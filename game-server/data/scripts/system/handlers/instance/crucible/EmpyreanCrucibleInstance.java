@@ -92,7 +92,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(final int points, final int nameId) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -117,7 +117,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 			@Override
 			public void run() {
-				instance.doOnAllPlayers(new Visitor<Player>() {
+				instance.forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {
@@ -1060,7 +1060,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	public boolean onReviveEvent(final Player player) {
 		super.onReviveEvent(player);
 		moveToReadyRoom(player);
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player p) {

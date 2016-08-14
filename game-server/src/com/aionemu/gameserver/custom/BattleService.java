@@ -107,7 +107,7 @@ public class BattleService {
 
 	public void announceToAllPlayers(String message) {
 		if (isPublic())
-			World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW_CENTER));
+			World.getInstance().forEachPlayer(player -> PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW_CENTER));
 		else
 			for (Player player : this.invitedPlayers)
 				PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW_CENTER);

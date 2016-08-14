@@ -22,7 +22,7 @@ public class SurkanaAI2 extends OneDmgPerHitAI2 {
 	}
 
 	private void checkForSupport(Creature creature) {
-		getKnownList().doOnAllNpcs(npc -> {
+		getKnownList().forEachNpc(npc -> {
 			if (isInRange(npc, 25) && !npc.getLifeStats().isAlreadyDead())
 				npc.getAi2().onCreatureEvent(AIEventType.CREATURE_AGGRO, creature);
 		});

@@ -230,7 +230,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	private void broadcastMessage(AionServerPacket packet) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

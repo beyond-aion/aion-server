@@ -199,7 +199,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			applyEffectOnCritical((Player) attacker, getOwner(), status, skillId);
 
 		// notify all NPC's around that creature is attacking me
-		getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+		getOwner().getKnownList().forEachNpc(new Visitor<Npc>() {
 
 			@Override
 			public void visit(Npc object) {
@@ -483,7 +483,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param value
 	 */
 	public void broadcastHate(int value) {
-		getOwner().getKnownList().doOnAllObjects(visibleObject -> {
+		getOwner().getKnownList().forEachObject(visibleObject -> {
 			if (visibleObject instanceof Creature)
 				((Creature) visibleObject).getAggroList().notifyHate(getOwner(), value);
 		});

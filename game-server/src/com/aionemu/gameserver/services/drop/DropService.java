@@ -581,7 +581,7 @@ public class DropService {
 				final int pMapId = player.getWorldId();
 				final int pInstance = player.isInInstance() ? player.getInstanceId() : 0;
 
-				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player other) {

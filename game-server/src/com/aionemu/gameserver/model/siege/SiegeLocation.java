@@ -259,7 +259,7 @@ public class SiegeLocation implements ZoneHandler {
 		}
 	}
 
-	public void doOnAllCreatures(Visitor<Creature> visitor) {
+	public void forEachCreature(Visitor<Creature> visitor) {
 		try {
 			creatures.values().forEach(c -> {
 				if (c != null) // can be null if entry got removed after iterator allocation
@@ -270,7 +270,7 @@ public class SiegeLocation implements ZoneHandler {
 		}
 	}
 
-	public void doOnAllPlayers(Visitor<Player> visitor) {
+	public void forEachPlayer(Visitor<Player> visitor) {
 		try {
 			players.values().forEach(p -> {
 				if (p != null) // can be null if entry got removed after iterator allocation

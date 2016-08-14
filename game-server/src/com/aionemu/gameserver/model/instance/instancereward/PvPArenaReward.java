@@ -243,7 +243,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public void sendPacket() {
-		instance.doOnAllPlayers((Player player) -> {
+		instance.forEachPlayer((Player player) -> {
 			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), getInstanceReward(), getTime()));
 		});
 	}

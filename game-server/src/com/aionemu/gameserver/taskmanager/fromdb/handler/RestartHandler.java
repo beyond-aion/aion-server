@@ -42,7 +42,7 @@ public class RestartHandler extends TaskFromDBHandler {
 	public void trigger() {
 		log.info("Task[" + taskId + "] launched : restarting the server !");
 
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

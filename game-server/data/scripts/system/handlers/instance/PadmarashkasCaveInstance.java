@@ -83,7 +83,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendMovie() {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

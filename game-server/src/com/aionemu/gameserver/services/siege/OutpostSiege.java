@@ -35,7 +35,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 		initSiegeBoss();
 
 		// TODO: Refactor me
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -56,7 +56,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 		if (isBossKilled())
 			onCapture();
 		else {
-			World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {
@@ -83,7 +83,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 			final AionServerPacket asp = new SM_SYSTEM_MESSAGE(messageId, race, topPlayerName);
 
 			// send packet for all players
-			World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {

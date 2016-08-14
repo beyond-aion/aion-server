@@ -831,7 +831,7 @@ public class Skill {
 		}
 		effects.stream().filter(effect -> effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)).forEach(effect -> {
 			effect.getEffected().getAggroList().addHate(effector, 1);
-			effect.getEffected().getKnownList().doOnAllNpcs(object -> object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
+			effect.getEffected().getKnownList().forEachNpc(object -> object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
 		});
 	}
 

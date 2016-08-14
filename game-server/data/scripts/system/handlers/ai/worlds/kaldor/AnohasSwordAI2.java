@@ -57,7 +57,7 @@ public class AnohasSwordAI2 extends NpcAI2 {
 
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2375));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_ITEM());
-		World.getInstance().doOnAllPlayers(receiver -> {
+		World.getInstance().forEachPlayer(receiver -> {
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN());
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM());
 		});
@@ -79,7 +79,7 @@ public class AnohasSwordAI2 extends NpcAI2 {
 					flag.getController().onDelete();
 				}
 			});
-			World.getInstance().doOnAllPlayers(receiver -> {
+			World.getInstance().forEachPlayer(receiver -> {
 				PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
 				swordController.onDelete(); // despawn sword
 				if (receiver.getRace() == raceSummoned)

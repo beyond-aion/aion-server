@@ -47,7 +47,7 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 			getOwner().getController().addTask(TaskId.DESPAWN,
 				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().onDelete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
-				getOwner().getKnownList().doOnAllPlayers(p -> {
+				getOwner().getKnownList().forEachPlayer(p -> {
 					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
 						return;
 					if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {

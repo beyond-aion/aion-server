@@ -431,7 +431,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 	
 	private void reward() {
-		instance.doOnAllPlayers(player -> ItemService.addItem(player, instanceReward.getRewardItem1(), instanceReward.getRewardItem1Count()));
+		instance.forEachPlayer(player -> ItemService.addItem(player, instanceReward.getRewardItem1(), instanceReward.getRewardItem1Count()));
 	}
 	
 	private void spawnShugos() {

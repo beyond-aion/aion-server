@@ -229,7 +229,7 @@ public class SiegeService {
 			@Override
 			public void run() {
 				updateFortressNextState();
-				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {
@@ -363,7 +363,7 @@ public class SiegeService {
 		loc.setOccupiedCount(0);
 
 		// On start preparations msg
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -676,7 +676,7 @@ public class SiegeService {
 	}
 
 	public void broadcast(final AionServerPacket pkt1, final AionServerPacket pkt2) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -697,7 +697,7 @@ public class SiegeService {
 	}
 
 	private void broadcast(final AionServerPacket pkt, final AionServerPacket info, final SiegeRace race) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
@@ -724,7 +724,7 @@ public class SiegeService {
 	}
 
 	private void broadcast(final SM_RIFT_ANNOUNCE rift, final SM_SYSTEM_MESSAGE info) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

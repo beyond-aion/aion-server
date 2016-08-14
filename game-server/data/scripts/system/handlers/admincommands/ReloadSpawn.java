@@ -142,7 +142,7 @@ public class ReloadSpawn extends AdminCommand {
 		final String dest = destinationMap;
 
 		if (IdWorld != 0) {
-			World.getInstance().doOnAllObjects(new Visitor<VisibleObject>() {
+			World.getInstance().forEachObject(new Visitor<VisibleObject>() {
 
 				@Override
 				public void visit(VisibleObject object) {

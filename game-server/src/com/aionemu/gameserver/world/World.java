@@ -463,7 +463,7 @@ public class World {
 	/**
 	 * @param visitor
 	 */
-	public void doOnAllPlayers(Visitor<Player> visitor) {
+	public void forEachPlayer(Visitor<Player> visitor) {
 		try {
 			allPlayers.forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation
@@ -477,7 +477,7 @@ public class World {
 	/**
 	 * @param visitor
 	 */
-	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
+	public void forEachObject(Visitor<VisibleObject> visitor) {
 		try {
 			allObjects.values().forEach(obj -> {
 				if (obj != null) // can be null if entry got removed after iterator allocation

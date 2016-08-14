@@ -79,7 +79,7 @@ public class AhserionConstructAI extends NpcAI2 {
 	}
 	
 	private void sendPacket(int msgId) {
-		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
       @Override
       public void visit(Player player) {
       	PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msgId));

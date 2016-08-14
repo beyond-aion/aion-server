@@ -255,7 +255,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void reward() {
-		instance.doOnAllPlayers(player -> {
+		instance.forEachPlayer(player -> {
 			ItemService.addItem(player, reward.getRewardItem1(), reward.getRewardItem1Count(), true);
 			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count(), true);
 			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count(), true);

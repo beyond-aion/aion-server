@@ -52,6 +52,6 @@ public class CrucibleRiftAI2 extends ActionItemNpcAI2 {
 	}
 
 	private void announceRift() {
-		getPosition().getWorldMapInstance().doOnAllPlayers(player -> PacketSendUtility.sendMonologue(player, 1111482));
+		getPosition().getWorldMapInstance().forEachPlayer(player -> PacketSendUtility.sendMonologue(player, 1111482));
 	}
 }

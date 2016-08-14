@@ -69,7 +69,7 @@ public class AbyssRankUpdateService {
 				long startTime = System.currentTimeMillis();
 
 				// update and store rank statistics for all online players (offline players update on login)
-				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {

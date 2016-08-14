@@ -100,7 +100,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(final int nameId, final int point) {
-		instance.doOnAllPlayers((Player player) -> {
+		instance.forEachPlayer((Player player) -> {
 			if (nameId != 0) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
 			}

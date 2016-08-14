@@ -119,7 +119,7 @@ public class PacketSendUtility {
 	 * @param toTeam
 	 */
 	public static void broadcastTeamPacket(Player visibleObject, AionServerPacket packet, boolean toTeam) {
-		visibleObject.getKnownList().doOnAllPlayers(player -> {
+		visibleObject.getKnownList().forEachPlayer(player -> {
 			if (toTeam) {
 				if (player.isInTeam() && player.getCurrentTeamId() == visibleObject.getCurrentTeamId()) {
 					sendPacket(player, packet);
@@ -157,11 +157,11 @@ public class PacketSendUtility {
 	 * @param packet
 	 */
 	public static void broadcastPacket(VisibleObject visibleObject, AionServerPacket packet) {
-		visibleObject.getKnownList().doOnAllPlayers(player -> sendPacket(player, packet));
+		visibleObject.getKnownList().forEachPlayer(player -> sendPacket(player, packet));
 	}
 
 	public static void broadcastPacketAndAIEvent(Creature creature, AionServerPacket packet, AIEventType et) {
-		creature.getKnownList().doOnAllObjects(object -> {
+		creature.getKnownList().forEachObject(object -> {
 			if (object instanceof Player)
 				sendPacket((Player) object, packet);
 			else if (et != null && object instanceof Npc)
@@ -184,7 +184,7 @@ public class PacketSendUtility {
 		if (toSelf && object instanceof Player)
 			sendPacket((Player) object, packet);
 
-		object.getKnownList().doOnAllPlayers(player -> {
+		object.getKnownList().forEachPlayer(player -> {
 			if (filter.acceptObject(player))
 				sendPacket(player, packet);
 		});
@@ -207,7 +207,7 @@ public class PacketSendUtility {
 	 *          filter determining who should be messaged
 	 */
 	public static void broadcastFilteredPacket(AionServerPacket packet, ObjectFilter<Player> filter) {
-		World.getInstance().doOnAllPlayers(player -> {
+		World.getInstance().forEachPlayer(player -> {
 			if (filter.acceptObject(player))
 				sendPacket(player, packet);
 		});
@@ -273,7 +273,7 @@ public class PacketSendUtility {
 	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet, int delay) {
-		schedule(() -> object.getPosition().getWorldMapInstance().doOnAllPlayers(player -> sendPacket(player, packet)), delay);
+		schedule(() -> object.getPosition().getWorldMapInstance().forEachPlayer(player -> sendPacket(player, packet)), delay);
 	}
 
 	/**
@@ -294,11 +294,11 @@ public class PacketSendUtility {
 	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the specified map instance.
 	 */
 	public static void broadcastToMap(WorldMapInstance mapInstance, AionServerPacket packet, int delay) {
-		schedule(() -> mapInstance.doOnAllPlayers(player -> sendPacket(player, packet)), delay);
+		schedule(() -> mapInstance.forEachPlayer(player -> sendPacket(player, packet)), delay);
 	}
 
 	public static void broadcastToZone(SiegeZoneInstance zone, AionServerPacket packet) {
-		schedule(() -> zone.doOnAllPlayers(player -> sendPacket(player, packet)), 0);
+		schedule(() -> zone.forEachPlayer(player -> sendPacket(player, packet)), 0);
 	}
 
 	private static void schedule(Runnable r, int delay) {

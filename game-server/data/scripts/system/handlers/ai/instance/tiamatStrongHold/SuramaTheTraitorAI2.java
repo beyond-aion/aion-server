@@ -63,7 +63,7 @@ public class SuramaTheTraitorAI2 extends GeneralNpcAI2 {
 
 	private void changeNpcType(Npc npc, CreatureType newType) {
 		npc.setNpcType(newType);
-		npc.getKnownList().doOnAllPlayers(player -> {
+		npc.getKnownList().forEachPlayer(player -> {
 			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, newType.getId(), 0));
 		});
 	}

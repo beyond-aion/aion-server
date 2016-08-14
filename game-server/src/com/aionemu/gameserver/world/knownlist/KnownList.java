@@ -180,7 +180,7 @@ public class KnownList {
 
 		if (owner instanceof Npc) {
 			if (((Creature) owner).isFlag()) {
-				owner.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+				owner.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {
@@ -243,11 +243,11 @@ public class KnownList {
 		return false;
 	}
 
-	public void doOnAllNpcs(Visitor<Npc> visitor) {
-		doOnAllNpcs(visitor, Integer.MAX_VALUE);
+	public void forEachNpc(Visitor<Npc> visitor) {
+		forEachNpc(visitor, Integer.MAX_VALUE);
 	}
 
-	public int doOnAllNpcs(Visitor<Npc> visitor, int iterationLimit) {
+	public int forEachNpc(Visitor<Npc> visitor, int iterationLimit) {
 		int counter = 0;
 		try {
 			for (VisibleObject newObject : knownObjects.values()) {
@@ -283,7 +283,7 @@ public class KnownList {
 		return counter;
 	}
 
-	public void doOnAllPlayers(Visitor<Player> visitor) {
+	public void forEachPlayer(Visitor<Player> visitor) {
 		if (knownPlayers == null)
 			return;
 
@@ -297,7 +297,7 @@ public class KnownList {
 		}
 	}
 
-	public void doOnAllObjects(Visitor<VisibleObject> visitor) {
+	public void forEachObject(Visitor<VisibleObject> visitor) {
 		try {
 			knownObjects.values().forEach(object -> {
 				if (object != null) // can be null if entry got removed after iterator allocation
@@ -308,7 +308,7 @@ public class KnownList {
 		}
 	}
 
-	public void doOnAllVisibleObjects(Visitor<VisibleObject> visitor) {
+	public void forEachVisibleObject(Visitor<VisibleObject> visitor) {
 		try {
 			visualObjects.values().forEach(object -> {
 				if (object != null) // can be null if entry got removed after iterator allocation
@@ -364,7 +364,7 @@ public class KnownList {
 		if (!(owner instanceof Player))
 			return;
 
-		doOnAllPlayers(other -> {
+		forEachPlayer(other -> {
 			boolean canSee = owner.canSee(other);
 			boolean isSee = sees(other);
 

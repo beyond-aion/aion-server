@@ -82,7 +82,7 @@ public class FortressLocation extends SiegeLocation {
 
 	@Override
 	public void clearLocation() {
-		doOnAllCreatures(creature -> {
+		forEachCreature(creature -> {
 			if (isEnemy(creature)) {
 				if (creature instanceof Kisk)
 					((Kisk) creature).getController().die();

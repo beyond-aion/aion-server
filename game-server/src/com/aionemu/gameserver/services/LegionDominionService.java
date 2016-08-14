@@ -127,6 +127,6 @@ public class LegionDominionService {
 			DAOManager.getDAO(LegionDominionDAO.class).updateLegionDominionLocation(loc);
 		}
 
-		World.getInstance().doOnAllPlayers(player -> PacketSendUtility.sendPacket(player, new SM_LEGION_DOMINION_LOC_INFO()));
+		World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_LEGION_DOMINION_LOC_INFO()));
 	}
 }

@@ -684,7 +684,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 			return false;
 		}
 		follower.setNpcType(CreatureType.PEACE);
-		follower.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		follower.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

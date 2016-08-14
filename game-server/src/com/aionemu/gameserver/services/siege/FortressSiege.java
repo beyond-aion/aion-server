@@ -188,7 +188,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
 
 		if (isBossKilled()) {
-			getSiegeLocation().doOnAllPlayers(new Visitor<Player>() {
+			getSiegeLocation().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player player) {
@@ -313,7 +313,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 				return;
 		}
 
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

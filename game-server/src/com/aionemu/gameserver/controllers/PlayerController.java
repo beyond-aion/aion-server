@@ -199,7 +199,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onHide() {
 		Pet pet = getOwner().getPet();
-		getOwner().getKnownList().doOnAllPlayers(other -> {
+		getOwner().getKnownList().forEachPlayer(other -> {
 			KnownList knownList = other.getKnownList();
 			if (knownList.sees(getOwner()) && !other.canSee(getOwner())) {
 				knownList.delVisualObject(getOwner(), ObjectDeleteAnimation.DELAYED);
@@ -216,7 +216,7 @@ public class PlayerController extends CreatureController<Player> {
 		Pet pet = getOwner().getPet();
 		if (pet != null && !MathUtil.isIn3dRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
 			pet.getPosition().setXYZH(getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
-		getOwner().getKnownList().doOnAllPlayers(other -> {
+		getOwner().getKnownList().forEachPlayer(other -> {
 			KnownList knownList = other.getKnownList();
 			knownList.addVisualObject(getOwner());
 			if (pet != null)

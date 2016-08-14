@@ -30,7 +30,7 @@ public class ShieldNpcAI2 extends SiegeNpcAI2 {
 		SiegeService.getInstance().getFortress(id).setUnderShield(shieldStatus);
 
 		final SM_SHIELD_EFFECT packet = new SM_SHIELD_EFFECT(id);
-		getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

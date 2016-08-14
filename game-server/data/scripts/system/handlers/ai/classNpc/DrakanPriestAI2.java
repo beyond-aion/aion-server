@@ -47,7 +47,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void despawnServant() {
-		getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+		getOwner().getKnownList().forEachNpc(new Visitor<Npc>() {
 
 			@Override
 			public void visit(Npc object) {

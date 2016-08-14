@@ -229,7 +229,7 @@ public class Kisk extends SummonedObject<Player> {
 
 		final Kisk kisk = this;
 		// all players having the same race in knownlist
-		getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player object) {

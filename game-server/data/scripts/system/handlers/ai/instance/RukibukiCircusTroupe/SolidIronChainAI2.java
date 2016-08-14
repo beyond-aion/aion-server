@@ -27,7 +27,7 @@ public class SolidIronChainAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (moviePlayed.compareAndSet(false, true)) {
-			getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+			getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player p) {

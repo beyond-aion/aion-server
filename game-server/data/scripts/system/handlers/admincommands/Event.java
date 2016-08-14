@@ -65,7 +65,7 @@ public class Event extends AdminCommand {
 			for (int i = 1; i < params.length; i++)
 				sb.append(" ").append(params[i]);
 
-			World.getInstance().doOnAllPlayers(p -> {
+			World.getInstance().forEachPlayer(p -> {
 				if (p.isInEvent() || p == admin)
 					PacketSendUtility.sendMessage(p, sb.toString(), ChatType.BRIGHT_YELLOW_CENTER);
 			});

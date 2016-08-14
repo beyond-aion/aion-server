@@ -32,7 +32,7 @@ public class AbyssService {
 	 */
 	public static final void rankedKillAnnounce(final Player victim) {
 
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player p) {
@@ -44,7 +44,7 @@ public class AbyssService {
 	}
 
 	public static final void rankerSkillAnnounce(final Player player, final int nameId) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player p) {

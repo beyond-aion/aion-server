@@ -148,7 +148,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(final AionServerPacket packet) {
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

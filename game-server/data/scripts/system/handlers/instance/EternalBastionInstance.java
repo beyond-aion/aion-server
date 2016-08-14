@@ -203,7 +203,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	protected void sendPacket(final int nameId, final int point) {
-		instance.doOnAllPlayers((Player player) -> {
+		instance.forEachPlayer((Player player) -> {
 			if (nameId != 0) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
 			}
@@ -280,7 +280,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				break;
 		}
 
-		instance.doOnAllPlayers(new Visitor<Player>() {
+		instance.forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

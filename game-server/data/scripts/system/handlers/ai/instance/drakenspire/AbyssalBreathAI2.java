@@ -18,7 +18,7 @@ public class AbyssalBreathAI2 extends GeneralNpcAI2 {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			SkillEngine.getInstance().getSkill(getOwner(), 21620, 1, getOwner()).useSkill();
 			ThreadPoolManager.getInstance().schedule(() -> {
-				getOwner().getKnownList().doOnAllPlayers(p -> {
+				getOwner().getKnownList().forEachPlayer(p -> {
 						if (isInRange(p, 11))
 							SkillEngine.getInstance().getSkill(getOwner(), 21874, 1, p).useSkill();
 				});

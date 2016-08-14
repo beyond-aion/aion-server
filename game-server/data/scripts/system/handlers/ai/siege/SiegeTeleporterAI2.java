@@ -39,7 +39,7 @@ public class SiegeTeleporterAI2 extends GeneralNpcAI2 {
 
 		SiegeService.getInstance().getSiegeLocation(id).setCanTeleport(status);
 
-		getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

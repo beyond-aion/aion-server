@@ -293,7 +293,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket() {
-		instance.doOnAllPlayers((Player player) -> {
+		instance.forEachPlayer((Player player) -> {
 			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward,
 				getTime()));
 		});
@@ -346,7 +346,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				instance.doOnAllPlayers(new Visitor<Player>() {
+				instance.forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player player) {

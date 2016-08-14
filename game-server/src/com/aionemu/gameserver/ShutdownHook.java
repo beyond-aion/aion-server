@@ -65,7 +65,7 @@ public class ShutdownHook extends Thread {
 	}
 
 	private void broadcastShutdownMessage(int seconds) {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {

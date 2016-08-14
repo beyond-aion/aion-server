@@ -65,7 +65,7 @@ public class EmpyreanArbiterAI2 extends NpcAI2 {
 			}
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 
-			getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+			getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 				@Override
 				public void visit(Player p) {

@@ -198,7 +198,7 @@ public final class PlayerEnterWorldService {
 
 		if (SecurityConfig.DUALBOXING && !player.isGM()) {
 			boolean[] kick = { false };
-			World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Visitor<Player>() {
 
 				String pMac = client.getMacAddress() == null || client.getMacAddress().isEmpty() ? "empty" : client.getMacAddress();
 				String pHdd = client.getHddSerial() == null || client.getHddSerial().isEmpty() ? "empty" : client.getHddSerial();

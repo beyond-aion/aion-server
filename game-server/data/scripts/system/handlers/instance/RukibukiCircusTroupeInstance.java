@@ -363,7 +363,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 				despawnNpcs(getNpcs(831349));
 				break;
 			case 233467:
-				instance.doOnAllPlayers(new Visitor<Player>() {
+				instance.forEachPlayer(new Visitor<Player>() {
 
 					@Override
 					public void visit(Player p) {

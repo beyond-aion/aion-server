@@ -723,7 +723,7 @@ public class AttackUtil {
 	}
 
 	public static void cancelCastOn(final Creature target) {
-		target.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		target.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player observer) {
@@ -733,7 +733,7 @@ public class AttackUtil {
 
 		});
 
-		target.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+		target.getKnownList().forEachNpc(new Visitor<Npc>() {
 
 			@Override
 			public void visit(Npc observer) {
@@ -761,7 +761,7 @@ public class AttackUtil {
 	}
 
 	public static void removeTargetFrom(final Creature object, final boolean validateSee) {
-		object.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+		object.getKnownList().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player observer) {

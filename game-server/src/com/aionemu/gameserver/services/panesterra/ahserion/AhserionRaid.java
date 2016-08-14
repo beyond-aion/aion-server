@@ -393,7 +393,7 @@ public class AhserionRaid {
 	}
 
 	private void sendMessage(int teamId, SM_SYSTEM_MESSAGE msg) {
-		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
 			@Override
 			public void visit(Player player) {
