@@ -233,8 +233,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	public Npc getNpc(int npcId) {
-		for (VisibleObject v : worldMapObjects.values()) {
-			if (v.getObjectTemplate().getTemplateId() == npcId && v instanceof Npc)
+		for (VisibleObject v : this) {
+			if (v instanceof Npc && v.getObjectTemplate().getTemplateId() == npcId)
 				return (Npc) v;
 		}
 		return null;
@@ -242,8 +242,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public List<Npc> getNpcs(int npcId) {
 		List<Npc> npcs = new FastTable<>();
-		for (VisibleObject v : worldMapObjects.values()) {
-			if (v.getObjectTemplate().getTemplateId() == npcId && v instanceof Npc)
+		for (VisibleObject v : this) {
+			if (v instanceof Npc && v.getObjectTemplate().getTemplateId() == npcId)
 				npcs.add((Npc) v);
 		}
 		return npcs;
@@ -251,7 +251,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public List<Npc> getNpcs() {
 		List<Npc> npcs = new FastTable<>();
-		for (VisibleObject v : worldMapObjects.values()) {
+		for (VisibleObject v : this) {
 			if (v instanceof Npc)
 				npcs.add((Npc) v);
 		}
@@ -260,9 +260,9 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public Map<Integer, StaticDoor> getDoors() {
 		Map<Integer, StaticDoor> doors = new HashMap<>();
-		for (VisibleObject obj : worldMapObjects.values()) {
-			if (obj instanceof StaticDoor)
-				doors.put(obj.getSpawn().getStaticId(), (StaticDoor) obj);
+		for (VisibleObject v : this) {
+			if (v instanceof StaticDoor)
+				doors.put(v.getSpawn().getStaticId(), (StaticDoor) v);
 		}
 		return doors;
 	}
@@ -369,12 +369,12 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return startPos;
 	}
 
-	/**
-	 * @param visitor
-	 */
 	public void doOnAllPlayers(Visitor<Player> visitor) {
 		try {
-			worldMapPlayers.values().forEach(player -> visitor.visit(player));
+			worldMapPlayers.values().forEach(player -> {
+				if (player != null) // can be null if entry got removed after iterator allocation
+					visitor.visit(player);
+			});
 		} catch (Exception ex) {
 			log.error("Exception when running visitor on all players", ex);
 		}
