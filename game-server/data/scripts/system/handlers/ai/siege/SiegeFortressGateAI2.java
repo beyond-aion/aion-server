@@ -62,7 +62,7 @@ public class SiegeFortressGateAI2 extends NpcAI2 {
 		if (doorName != null)
 			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, false);
 		else
-			LoggerFactory.getLogger(SiegeFortressGateAI2.class).warn("Couldn't find siege door name");
+			LoggerFactory.getLogger(SiegeFortressGateAI2.class).warn("Couldn't find siege door name for position of " + getOwner());
 	}
 
 	@Override
