@@ -258,8 +258,6 @@ public class PanesterraMatchmakingService {
 						break;
 				}
 				break;
-				default:
-					break;
 		}
 	}
 

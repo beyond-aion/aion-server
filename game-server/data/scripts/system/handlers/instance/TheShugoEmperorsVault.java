@@ -87,8 +87,6 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					}
 				}
 				break;
-				default:
-					break;
 		}
 	}
 	
@@ -289,8 +287,6 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				sendMsg(1402681); //Intruders have fled
 				checkRank(instanceReward.getPoints());
 				break;
-			default:
-				break;
 		}
 
 		if (lastStage) {
@@ -331,8 +327,6 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					spawnCommanderGradi();
 				}
 				break;
-				default:
-					break;
 		}
 	}
 

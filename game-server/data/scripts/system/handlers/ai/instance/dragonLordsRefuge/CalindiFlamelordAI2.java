@@ -85,8 +85,6 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 				if (target != null) {
 					spawn(283130, target.getX(), target.getY(), target.getZ(), (byte) 0);
 				}
-			default:
-				break;
 		}
 	}
 

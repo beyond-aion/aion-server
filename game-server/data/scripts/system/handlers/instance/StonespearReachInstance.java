@@ -199,8 +199,6 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			case 856469:
 				checkRank(reward.getPoints(), false);
 				break;
-			default:
-				break;
 		}
 
 		npc.getController().onDelete();
@@ -776,8 +774,6 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			case 4:
 				SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(mapId, (isElyos ? 855832 : 856469), 231.14f, 264.399f, 96.5f, (byte) 10),
 					instanceId);
-				break;
-			default:
 				break;
 		}
 	}

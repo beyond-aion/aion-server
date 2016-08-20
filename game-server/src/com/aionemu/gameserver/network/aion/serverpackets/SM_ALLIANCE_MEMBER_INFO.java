@@ -147,8 +147,6 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 			case MEMBER_GROUP_CHANGE:
 				writeS(pcd.getName());
 				break;
-			default:
-				break;
 		}
 	}
 

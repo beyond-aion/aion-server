@@ -70,8 +70,6 @@ public class SiegeLocationData {
 					agentLoc = new AgentLocation(template);
 					siegeLocations.put(template.getId(), agentLoc);
 					break;
-				default:
-					break;
 			}
 	}
 

@@ -23,21 +23,8 @@ public class TombAttackerAI2 extends AggressiveNpcAI2 {
 		EmoteManager.emoteStopAttacking(getOwner());
 		for (int npc_id : npc_ids) {
 			Npc tower = getOwner().getPosition().getWorldMapInstance().getNpc(npc_id);
-			if (tower != null && !tower.getLifeStats().isAlreadyDead()) {
-				switch (npc_id) {
-					case 831251:
-						getOwner().getAggroList().addHate(tower, 100);
-					case 831250:
-						getOwner().getAggroList().addHate(tower, 100);
-					case 831304:
-						getOwner().getAggroList().addHate(tower, 100);
-					case 831305:
-						getOwner().getAggroList().addHate(tower, 100);
-					case 831130:
-						getOwner().getAggroList().addHate(tower, 100);
-						break;
-				}
-			}
+			if (tower != null && !tower.getLifeStats().isAlreadyDead())
+				getOwner().getAggroList().addHate(tower, 100);
 		}
 	}
 

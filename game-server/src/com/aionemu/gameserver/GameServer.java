@@ -412,8 +412,6 @@ public class GameServer {
 				case ELYOS:
 					ELYOS_COUNT += i;
 					break;
-				default:
-					break;
 			}
 
 			if ((ASMOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT) && (ELYOS_COUNT <= GSConfig.RATIO_MIN_CHARACTERS_COUNT)) {

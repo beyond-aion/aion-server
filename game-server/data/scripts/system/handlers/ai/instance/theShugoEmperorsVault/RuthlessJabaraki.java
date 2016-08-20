@@ -122,8 +122,6 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235631, 560.6854f, 384.02362f, 395.86785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235631, 566.9021f, 402.29718f, 395.86262f, (byte) 69));
 				break;
-				default:
-				break;
 		}
 		startHate();
 	}

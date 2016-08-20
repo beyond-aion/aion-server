@@ -74,8 +74,6 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
 				duration = 3000;
 				startDelay = 100;
 				break;
-				default:
-					break;
 		}
 		final Creature target = (Creature) getOwner().getTarget();
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {

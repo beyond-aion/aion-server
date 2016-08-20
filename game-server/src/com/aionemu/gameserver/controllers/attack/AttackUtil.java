@@ -137,8 +137,6 @@ public class AttackUtil {
 			case PARRY:
 				damage *= 0.6;
 				break;
-			default:
-				break;
 		}
 
 		if (status.isCritical()) {
@@ -166,8 +164,6 @@ public class AttackUtil {
 		switch (AttackStatus.getBaseStatus(status)) {
 			case RESIST:
 				damage = 0;
-				break;
-			default:
 				break;
 		}
 
@@ -470,8 +466,6 @@ public class AttackUtil {
 			case PARRY:
 				damage *= 0.6;
 				break;
-			default:
-				break;
 		}
 
 		switch (element) {
@@ -603,8 +597,6 @@ public class AttackUtil {
 		switch (status) {
 			case CRITICAL:
 				damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-				break;
-			default:
 				break;
 		}
 

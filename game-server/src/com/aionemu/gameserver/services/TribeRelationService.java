@@ -20,20 +20,14 @@ public class TribeRelationService {
 				switch (creature2.getTribe()) {
 					case YUN_GUARD:
 						return true;
-					default:
-						break;
 				}
 				break;
 			case IDF5U2_SHULACK:
 				switch (creature2.getTribe()) {
 					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
 						return false;
-					default:
-						break;
 				}
 				break;
-				default:
-					break;
 		}
 		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69_AGGRESSIVE:
@@ -97,8 +91,6 @@ public class TribeRelationService {
 				switch (creature2.getTribe()) {
 					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
 						return true;
-					default:
-						break;
 				}
 		}
 		switch (creature1.getBaseTribe()) {
@@ -231,11 +223,7 @@ public class TribeRelationService {
 				switch (creature2.getTribe()) {
 					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
 						return false;
-					default:
-						break;
 				}
-				break;
-			default:
 				break;
 		}
 		switch (creature1.getBaseTribe()) {

@@ -115,8 +115,6 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 						spawnClone();
 						getOwner().getController().onDelete();
 						break;
-					default:
-						break;
 				}
 				break;
 			case 21179:
@@ -126,8 +124,6 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 				if (creature != null) {
 					spawn(284385, creature.getX(), creature.getY(), creature.getZ(), creature.getHeading());
 				}
-				break;
-			default:
 				break;
 		}
 	}

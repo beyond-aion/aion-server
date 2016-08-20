@@ -130,8 +130,6 @@ public class SkillAttackManager {
 										}
 									}
 									break;
-								default:
-									break;
 							}
 						}
 					}

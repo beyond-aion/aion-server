@@ -54,8 +54,6 @@ public class _10033PetrifiedSubside extends QuestHandler {
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
 						}
-						default:
-							break;
 					}
 					break;
 				case 798975: // Sulla
@@ -90,8 +88,6 @@ public class _10033PetrifiedSubside extends QuestHandler {
 							giveQuestItem(env, 182215622, 1);
 							return defaultCloseDialog(env, 2, 3);
 						}
-						default:
-							break;
 					}
 					break;
 				case 730226: // Western Petrified Mass

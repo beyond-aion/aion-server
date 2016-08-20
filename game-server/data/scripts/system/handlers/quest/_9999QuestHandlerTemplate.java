@@ -61,6 +61,7 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 							} else if (var == 5) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1353: {
 							playQuestMovie(env, 0);

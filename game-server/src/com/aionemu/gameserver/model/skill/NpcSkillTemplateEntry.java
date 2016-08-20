@@ -326,8 +326,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 					}
 				}
 				break;
-			default:
-				break;
 		}
 	}
 	

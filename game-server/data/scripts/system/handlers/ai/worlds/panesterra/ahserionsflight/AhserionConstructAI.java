@@ -119,8 +119,6 @@ public class AhserionConstructAI extends NpcAI2 {
 					case 183:
 						AhserionRaid.getInstance().spawnStage(6, PanesterraTeamId.BALAUR);
 							break;
-							default:
-								break;
 				}
 			}
 		}, 300000); //5min

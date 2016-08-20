@@ -103,12 +103,8 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 					case 3:
 						spawnSummons(231099);
 						break;
-					default:
-						break;
 				}
 				spawnAncientTyrhund();
-				break;
-			default:
 				break;
 		}
 	}

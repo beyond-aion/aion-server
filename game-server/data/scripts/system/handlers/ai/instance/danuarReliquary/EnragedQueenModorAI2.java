@@ -146,8 +146,6 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 					}
 				}, 35000);
 				break;
-			default:
-				break;
 		}
 	}
 

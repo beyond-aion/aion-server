@@ -124,9 +124,6 @@ public class RiftManager {
 				case 2177:
 				case 2178:
 					return true;
-				default:
-					break;
-
 			}
 		}
 		return false;

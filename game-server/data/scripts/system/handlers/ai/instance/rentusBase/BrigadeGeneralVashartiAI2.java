@@ -105,8 +105,6 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 			case 20534:
 				startAirEvent();
 				break;
-			default:
-				break;
 		}
 	}
 
@@ -141,8 +139,6 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 					}, 1200);
 				}
-				break;
-			default:
 				break;
 		}
 	}

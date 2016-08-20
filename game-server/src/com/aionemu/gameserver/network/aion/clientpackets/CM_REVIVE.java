@@ -62,8 +62,6 @@ public class CM_REVIVE extends AionClientPacket {
 			case INSTANCE_REVIVE:
 				PlayerReviveService.instanceRevive(activePlayer);
 				break;
-			default:
-				break;
 		}
 
 	}

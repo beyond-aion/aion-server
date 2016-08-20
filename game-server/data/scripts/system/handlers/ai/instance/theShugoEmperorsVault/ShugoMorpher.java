@@ -95,8 +95,6 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21834, 1, player).useSkill();
 				}
 				break;
-			default:
-				break;
 		}
 
 		if (morphed) {

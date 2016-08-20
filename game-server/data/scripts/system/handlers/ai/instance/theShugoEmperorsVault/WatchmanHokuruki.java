@@ -88,8 +88,6 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 				spawn(235649, 496.56f, 631.78f, 395.20126f, (byte) 49);
 				spawn(235649, 488.86f, 627.54f, 395.27853f, (byte) 38);
 				break;
-				default:
-				break;
 		}
 		startHate();
 	}

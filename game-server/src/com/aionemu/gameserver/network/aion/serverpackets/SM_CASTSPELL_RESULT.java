@@ -111,8 +111,6 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 					writeF(skill.getY());
 					writeF(skill.getZ());
 					break;
-				default:
-					break;
 			}
 		}
 
