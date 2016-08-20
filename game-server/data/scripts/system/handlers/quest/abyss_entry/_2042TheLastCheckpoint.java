@@ -55,6 +55,7 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -77,12 +78,14 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 							} else if (var == 9) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1354: {
 							if (var == 1 || var == 10) {
 								playQuestMovie(env, 89);
 								return sendQuestDialog(env, 1354);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							if (var == 1) {
@@ -92,6 +95,7 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 								QuestService.questTimerStart(env, 70);
 								return defaultCloseDialog(env, 9, 2); // 2
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (var == 8) {

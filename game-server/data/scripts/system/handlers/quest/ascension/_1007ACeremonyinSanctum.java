@@ -74,6 +74,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1353: {
 							return playQuestMovie(env, 92);
@@ -90,6 +91,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1694: {
 							return playQuestMovie(env, 91);

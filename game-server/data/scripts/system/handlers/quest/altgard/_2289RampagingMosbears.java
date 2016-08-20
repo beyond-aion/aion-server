@@ -60,6 +60,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 							else if (var == 7) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1354: {
 							playQuestMovie(env, 62);
@@ -83,6 +84,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 6, 7, 182203017, 1, 0, 0); // 7

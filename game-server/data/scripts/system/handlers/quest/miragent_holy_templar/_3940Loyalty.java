@@ -70,6 +70,7 @@ public class _3940Loyalty extends QuestHandler {
 							} else if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							return checkQuestItems(env, 0, 6, false, 10000, 10001); // 1
@@ -94,6 +95,7 @@ public class _3940Loyalty extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SELECT_ACTION_2718: {
 							if (player.getCommonData().getDp() >= 4000) {

@@ -76,6 +76,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							} else if (var == 4) {
 								return sendQuestDialog(env, 1019);
 							}
+							return false;
 						}
 						case SETPRO12: {
 							if (var == 0) {
@@ -83,6 +84,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							} else if (var == 4) {
 								return defaultCloseDialog(env, 4, 4);
 							}
+							return false;
 						}
 						case FINISH_DIALOG: {
 							if (var == 0) {
@@ -98,6 +100,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							if (var == 7) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							updateQuestStatus(env);
@@ -112,6 +115,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
 							}
+							return false;
 						}
 						case QUEST_SELECT: {
 							if (var == 4) {
@@ -119,6 +123,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							if (var == 4 || var == 6)

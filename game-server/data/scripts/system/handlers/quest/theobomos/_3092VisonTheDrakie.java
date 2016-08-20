@@ -61,11 +61,13 @@ public class _3092VisonTheDrakie extends QuestHandler {
 									return sendQuestDialog(env, 1352);
 								}
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
 						}
 					}
+					return false;
 				}
 				case 798191: {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)

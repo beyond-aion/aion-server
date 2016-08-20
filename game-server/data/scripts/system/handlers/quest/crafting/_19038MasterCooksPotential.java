@@ -120,6 +120,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 							} else if (var == 7) {
 								return defaultCloseDialog(env, 7, 8, 152202202, 1, 0, 0); // 8
 							}
+							return false;
 						}
 						case SETPRO40: {
 							player.getInventory().decreaseKinah(6500);
@@ -128,6 +129,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 							} else if (var == 10) {
 								return defaultCloseDialog(env, 10, 11, 152202203, 1, 0, 0); // 11
 							}
+							return false;
 						}
 						case FINISH_DIALOG: {
 							return sendQuestSelectionDialog(env);
@@ -152,6 +154,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 									return sendQuestDialog(env, 2120);
 								}
 							}
+							return false;
 						}
 						case SETPRO11: {
 							return checkItemExistence(env, 2, 3, false, 182206773, 1, true, 1182, 2716, 0, 0); // 3

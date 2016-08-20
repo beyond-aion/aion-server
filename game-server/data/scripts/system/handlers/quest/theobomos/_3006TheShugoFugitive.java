@@ -62,6 +62,7 @@ public class _3006TheShugoFugitive extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -78,12 +79,14 @@ public class _3006TheShugoFugitive extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1694: {
 							if (qs.getQuestVarById(0) == 1) {
 								playQuestMovie(env, 361);
 								return sendQuestDialog(env, 1694);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							giveQuestItem(env, 182208003, 1);

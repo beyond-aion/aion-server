@@ -64,6 +64,7 @@ public class _29064FangOfConstruction extends QuestHandler {
 								&& player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
 							if (player.getInventory().getItemCountByItemId(182213239) >= 1 && player.getInventory().getItemCountByItemId(186000085) >= 1) {

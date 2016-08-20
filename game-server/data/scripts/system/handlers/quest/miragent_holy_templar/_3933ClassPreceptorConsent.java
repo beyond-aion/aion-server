@@ -115,6 +115,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {

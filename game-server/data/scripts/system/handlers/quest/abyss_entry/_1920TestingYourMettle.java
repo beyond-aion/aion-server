@@ -44,6 +44,7 @@ public class _1920TestingYourMettle extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -57,6 +58,7 @@ public class _1920TestingYourMettle extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							return defaultCloseDialog(env, 1, 1, true, false); // reward

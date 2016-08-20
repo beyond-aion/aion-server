@@ -53,6 +53,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -66,6 +67,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -79,6 +81,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 3, 4); // 4
@@ -95,6 +98,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SELECT_ACTION_3058: {
 							removeQuestItem(env, 182215373, 1);
@@ -116,6 +120,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							return defaultCloseDialog(env, 5, 6, 182215373, 1, 0, 0); // 6

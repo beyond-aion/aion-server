@@ -103,6 +103,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {

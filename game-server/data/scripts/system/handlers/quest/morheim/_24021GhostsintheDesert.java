@@ -79,17 +79,20 @@ public class _24021GhostsintheDesert extends QuestHandler {
 									return sendQuestDialog(env, 10000);
 								}
 							}
+							return false;
 						}
 						case SELECT_ACTION_1353: {
 							if (var == 1) {
 								playQuestMovie(env, 73);
 								return sendQuestDialog(env, 1353);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 					}
+					return false;
 				}
 				case 802046: { //Tofynir
 					switch (dialog) {
@@ -100,6 +103,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 							if (var == 3){
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							return checkQuestItems(env, 2, 3, false, 10000, 10001); // 3

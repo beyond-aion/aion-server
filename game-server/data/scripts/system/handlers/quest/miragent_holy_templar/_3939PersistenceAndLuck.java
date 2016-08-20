@@ -99,6 +99,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {

@@ -63,6 +63,7 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 								case 2:
 									return sendQuestDialog(env, 4080);
 							}
+							return false;
 						}
 						case SETPRO10:
 							if (kinah >= 167500) // Need check how many kinah decrased

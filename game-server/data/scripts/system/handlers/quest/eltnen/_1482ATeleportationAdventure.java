@@ -69,6 +69,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 									return sendQuestDialog(env, 10002);
 								}
 							}
+							return false;
 						}
 						case SETPRO1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

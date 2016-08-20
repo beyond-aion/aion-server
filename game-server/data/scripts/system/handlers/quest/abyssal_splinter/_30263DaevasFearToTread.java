@@ -47,6 +47,7 @@ public class _30263DaevasFearToTread extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						}
+						return false;
 					}
 					case SETPRO1: {
 						return defaultCloseDialog(env, 0, 1, true, false, 0, 0, 182209801, 1); // reward

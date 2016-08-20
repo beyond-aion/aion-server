@@ -53,6 +53,7 @@ public class _13708ProximityProtect extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SELECT_QUEST_REWARD: {
 						return defaultCloseDialog(env, 1, 1, true, true);

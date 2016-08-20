@@ -64,6 +64,7 @@ public class _19064TemplarOfConstruction extends QuestHandler {
 								&& player.getInventory().getItemCountByItemId(186000081) >= 1) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
 							if (player.getInventory().getItemCountByItemId(182213237) >= 1 && player.getInventory().getItemCountByItemId(186000081) >= 1) {

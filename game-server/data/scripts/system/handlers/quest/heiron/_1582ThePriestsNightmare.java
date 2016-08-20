@@ -61,6 +61,7 @@ public class _1582ThePriestsNightmare extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 204560: {
 					switch (env.getDialog()) {
@@ -68,6 +69,7 @@ public class _1582ThePriestsNightmare extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -77,6 +79,7 @@ public class _1582ThePriestsNightmare extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 204573: {
 					switch (env.getDialog()) {
@@ -84,6 +87,7 @@ public class _1582ThePriestsNightmare extends QuestHandler {
 							if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							if (qs.getQuestVarById(0) == 2) {

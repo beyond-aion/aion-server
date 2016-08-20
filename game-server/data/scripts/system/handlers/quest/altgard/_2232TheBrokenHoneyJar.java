@@ -52,6 +52,7 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
 						return checkQuestItems(env, 1, 1, true, 5, 2716); // reward

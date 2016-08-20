@@ -57,6 +57,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -73,6 +74,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -86,6 +88,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							player.getTitleList().addTitle(58, true, 0);
@@ -105,6 +108,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 								} else
 									return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							if (var == 2) {

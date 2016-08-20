@@ -60,6 +60,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							long itemCount = player.getInventory().getItemCountByItemId(182208008);
@@ -73,6 +74,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 798146: {
 					switch (env.getDialog()) {
@@ -80,6 +82,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							qs.setStatus(QuestStatus.REWARD);

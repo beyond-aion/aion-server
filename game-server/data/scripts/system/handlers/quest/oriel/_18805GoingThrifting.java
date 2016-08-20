@@ -64,6 +64,7 @@ public class _18805GoingThrifting extends QuestHandler {
 							return sendQuestDialog(env, 5);
 						}
 					}
+					return false;
 				}
 				case 730525:
 				case 730522: {

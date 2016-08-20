@@ -52,6 +52,7 @@ public class _1146DelicateMandrake extends QuestHandler {
 								return sendQuestDialog(env, 1003);
 							}
 						}
+						return false;
 					}
 					case QUEST_REFUSE_1: {
 						return sendQuestDialog(env, 1004);
@@ -68,6 +69,7 @@ public class _1146DelicateMandrake extends QuestHandler {
 						if (player.getInventory().getItemCountByItemId(182200519) > 0) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SELECT_QUEST_REWARD: {
 						removeQuestItem(env, 182200519, 1);

@@ -58,6 +58,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						else if (var == 3){
 							return sendQuestDialog(env, 2034);
 						}
+						return false;
 					}
 					case SETPRO1: {
 						return defaultCloseDialog(env, 0, 1); // 1
@@ -73,6 +74,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
 						}
+						return false;
 					}
 					case SETPRO2: {
 						return defaultCloseDialog(env, 1, 2, 182215375, 1, 0, 0); // 2
@@ -85,6 +87,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						if (var == 4) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SETPRO5: {
 						return defaultCloseDialog(env, 4, 5); // 5

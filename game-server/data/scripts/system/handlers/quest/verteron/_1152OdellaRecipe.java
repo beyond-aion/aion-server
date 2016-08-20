@@ -53,6 +53,7 @@ public class _1152OdellaRecipe extends QuestHandler {
 						} else if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SETPRO1: {
 						return defaultCloseDialog(env, 0, 1, 0, 0, 182200526, 1); // 1

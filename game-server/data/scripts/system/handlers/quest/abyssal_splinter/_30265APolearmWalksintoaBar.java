@@ -47,6 +47,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -60,6 +61,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2, false, false); // 2
@@ -73,6 +75,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 2, 2, true); // reward

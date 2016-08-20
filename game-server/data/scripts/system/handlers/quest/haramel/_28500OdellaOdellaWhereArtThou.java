@@ -67,6 +67,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -80,6 +81,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							playQuestMovie(env, 217);

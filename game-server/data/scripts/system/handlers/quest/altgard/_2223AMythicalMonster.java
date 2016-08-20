@@ -65,6 +65,7 @@ public class _2223AMythicalMonster extends QuestHandler {
 									return sendQuestDialog(env, 1779);
 								}
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1, 182203217, 1, 0, 0); // 1
@@ -89,6 +90,7 @@ public class _2223AMythicalMonster extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case FINISH_DIALOG: {
 							return sendQuestSelectionDialog(env);

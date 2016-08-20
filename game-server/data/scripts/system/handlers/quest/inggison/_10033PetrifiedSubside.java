@@ -50,6 +50,7 @@ public class _10033PetrifiedSubside extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
@@ -83,6 +84,7 @@ public class _10033PetrifiedSubside extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							giveQuestItem(env, 182215622, 1);

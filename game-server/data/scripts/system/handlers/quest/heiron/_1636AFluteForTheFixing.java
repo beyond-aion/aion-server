@@ -62,6 +62,7 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 							else if (var == 2) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1

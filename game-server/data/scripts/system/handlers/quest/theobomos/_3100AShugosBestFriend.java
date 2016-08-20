@@ -69,6 +69,7 @@ public class _3100AShugosBestFriend extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							removeQuestItem(env, 182208072, 1);

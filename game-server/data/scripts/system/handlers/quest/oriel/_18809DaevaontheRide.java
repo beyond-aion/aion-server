@@ -56,6 +56,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 830201: {
 					switch (dialog) {
@@ -66,6 +67,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
+					return false;
 				}
 				case 830168: {
 					switch (dialog) {

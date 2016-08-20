@@ -89,6 +89,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 2, 3);

@@ -68,6 +68,7 @@ public class _3056InSearchOfZirius extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

@@ -50,6 +50,7 @@ public class _3721DisarmTheChantraDredgion extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						}
+						return false;
 					}
 					case SETPRO1: {
 						return defaultCloseDialog(env, 0, 1); // 1

@@ -55,6 +55,7 @@ public class _28511TheSoupNutsy extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							return checkQuestItems(env, 0, 0, false, 1352, 10001);

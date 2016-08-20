@@ -58,6 +58,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1013: {
 							playQuestMovie(env, 272);
@@ -75,6 +76,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
@@ -96,6 +98,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 							else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							if (var == 2) {
@@ -110,6 +113,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 								qs.setQuestVarById(0, 3); // 3
 								return closeDialogWindow(env);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							if (var == 3) {

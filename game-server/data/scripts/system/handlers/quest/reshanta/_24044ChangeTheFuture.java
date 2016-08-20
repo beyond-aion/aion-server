@@ -50,6 +50,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -63,6 +64,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -76,6 +78,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 2, 3); // 3
@@ -89,6 +92,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 3, 4); // 4
@@ -105,6 +109,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 							else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							return defaultCloseDialog(env, 4, 5); // 5

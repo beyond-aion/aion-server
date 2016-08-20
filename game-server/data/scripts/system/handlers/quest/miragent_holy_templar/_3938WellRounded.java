@@ -155,6 +155,7 @@ public class _3938WellRounded extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000081) >= 1) {

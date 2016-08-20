@@ -62,6 +62,7 @@ public class _1463MessageToASpy extends QuestHandler {
 							else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							if (player.getInventory().getItemCountByItemId(182201382) == 0)
@@ -80,6 +81,7 @@ public class _1463MessageToASpy extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
+					return false;
 				}
 				case 204424: {
 					switch (env.getDialog()) {
@@ -87,6 +89,7 @@ public class _1463MessageToASpy extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

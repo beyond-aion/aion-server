@@ -58,6 +58,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -73,6 +74,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -88,6 +90,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

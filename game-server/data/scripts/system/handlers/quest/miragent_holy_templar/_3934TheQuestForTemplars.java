@@ -144,6 +144,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {

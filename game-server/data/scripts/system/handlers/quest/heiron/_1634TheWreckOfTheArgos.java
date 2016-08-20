@@ -61,6 +61,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0 && itemCount1 >= 3) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SELECT_ACTION_4763: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

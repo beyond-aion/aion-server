@@ -70,6 +70,7 @@ public class _1990ASagesGift extends QuestHandler {
 						} else if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
+						return false;
 					}
 					case CHECK_USER_HAS_QUEST_ITEM: {
 						return checkQuestItems(env, 0, 1, false, 10000, 10001); // 1

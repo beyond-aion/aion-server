@@ -68,6 +68,7 @@ public class _3050RescuingRuria extends QuestHandler {
 							} else if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1013);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1012: {
 							removeQuestItem(env, 182208035, 1);
@@ -87,6 +88,7 @@ public class _3050RescuingRuria extends QuestHandler {
 							if (qs.getQuestVarById(0) == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							return defaultCloseDialog(env, 3, 3, true, false);

@@ -54,6 +54,7 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 							} else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1

@@ -156,6 +156,7 @@ public class _4942ProvingProficiency extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3740);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000085) >= 1) {

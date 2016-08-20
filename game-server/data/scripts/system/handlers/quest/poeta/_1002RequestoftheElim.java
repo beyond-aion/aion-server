@@ -59,6 +59,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -78,12 +79,14 @@ public class _1002RequestoftheElim extends QuestHandler {
 							} else if (var == 12) {
 								return sendQuestDialog(env, 2120);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1353: {
 							if (var == 1) {
 								playQuestMovie(env, 20);
 								return sendQuestDialog(env, 1353);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2, 182200002, 1, 0, 0); // 2
@@ -97,6 +100,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 							} else if (var == 12) {
 								return sendQuestDialog(env, 2120);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 12, 13); // 13
@@ -129,6 +133,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 							} else if (var == 14) {
 								return sendQuestDialog(env, 2461);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);

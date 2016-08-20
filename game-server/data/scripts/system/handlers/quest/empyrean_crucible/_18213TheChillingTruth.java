@@ -71,6 +71,7 @@ public class _18213TheChillingTruth extends QuestHandler {
 						} else if (var == 3) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SETPRO2: {
 						return defaultCloseDialog(env, 1, 2);

@@ -97,6 +97,7 @@ public class _1626LightThePath extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700224: {
 					switch (env.getDialog()) {
@@ -107,6 +108,7 @@ public class _1626LightThePath extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700225: {
 					switch (env.getDialog()) {
@@ -117,6 +119,7 @@ public class _1626LightThePath extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700226: {
 					switch (env.getDialog()) {
@@ -127,6 +130,7 @@ public class _1626LightThePath extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 700227: {
 					switch (env.getDialog()) {

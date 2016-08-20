@@ -75,6 +75,7 @@ public class _2430SecretInformation extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1267);
 						}
+						return false;
 					}
 					case SETPRO7: {
 						if (player.getInventory().getKinah() >= 50000) {
@@ -106,6 +107,7 @@ public class _2430SecretInformation extends QuestHandler {
 									return sendQuestDialog(env, 3398);
 								}
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2, 182204221, 1, 0, 0); // 2
@@ -125,6 +127,7 @@ public class _2430SecretInformation extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							removeQuestItem(env, 182204221, 1);
@@ -140,6 +143,7 @@ public class _2430SecretInformation extends QuestHandler {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							return defaultCloseDialog(env, 4, 5); // 5
@@ -153,6 +157,7 @@ public class _2430SecretInformation extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							return defaultCloseDialog(env, 5, 6); // 6
@@ -166,6 +171,7 @@ public class _2430SecretInformation extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 6, 6, true); // reward 1
@@ -184,6 +190,7 @@ public class _2430SecretInformation extends QuestHandler {
 									return sendQuestDialog(env, 3825);
 								}
 							}
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							removeQuestItem(env, 182204222, 1);

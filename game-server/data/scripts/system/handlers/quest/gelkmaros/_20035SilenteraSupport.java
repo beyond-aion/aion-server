@@ -79,6 +79,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -93,6 +94,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							giveQuestItem(env, 182215596, 1);
@@ -108,6 +110,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							removeQuestItem(env, 182215596, 1);
@@ -122,6 +125,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SELECT_ACTION_2376: {
 							playQuestMovie(env, 567);

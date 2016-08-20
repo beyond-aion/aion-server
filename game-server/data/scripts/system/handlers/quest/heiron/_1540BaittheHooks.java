@@ -70,6 +70,7 @@ public class _1540BaittheHooks extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 730190: {
 					switch (env.getDialog()) {
@@ -79,6 +80,7 @@ public class _1540BaittheHooks extends QuestHandler {
 							}
 						}
 					}
+					return false;
 				}
 				case 730191: {
 					switch (env.getDialog()) {

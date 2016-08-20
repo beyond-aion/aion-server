@@ -62,6 +62,7 @@ public class _3087DivingForTreasure extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							if (player.getInventory().getItemCountByItemId(182208063) == 0) {

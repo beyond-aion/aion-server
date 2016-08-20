@@ -62,6 +62,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 							} else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
@@ -71,6 +72,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 							return defaultCloseDialog(env, 3, 3, true, false);
 						}
 					}
+					return false;
 				}
 				case 204537: {
 					switch (env.getDialog()) {

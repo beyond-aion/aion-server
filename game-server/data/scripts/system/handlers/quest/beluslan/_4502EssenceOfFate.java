@@ -72,6 +72,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							return checkQuestItems(env, 2, 2, true, 5, 10001); // reward

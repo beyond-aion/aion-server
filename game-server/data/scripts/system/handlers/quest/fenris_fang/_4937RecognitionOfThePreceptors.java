@@ -62,6 +62,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -75,6 +76,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 2, 3); // 3
@@ -88,6 +90,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 3, 4, 182207113, 1, 182207112, 1); // 4
@@ -101,6 +104,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							return defaultCloseDialog(env, 4, 5);
@@ -114,6 +118,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							return defaultCloseDialog(env, 5, 6);
@@ -127,6 +132,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 							if (var == 6 && checkItemExistence(env, 182207113, 1, false)) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case FINISH_DIALOG: {
 							return defaultCloseDialog(env, var, var);

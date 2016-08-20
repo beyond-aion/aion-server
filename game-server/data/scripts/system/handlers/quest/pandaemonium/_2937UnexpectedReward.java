@@ -49,6 +49,7 @@ public class _2937UnexpectedReward extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					}
 					case SELECT_QUEST_REWARD: {
 						qs.setQuestVar(1);

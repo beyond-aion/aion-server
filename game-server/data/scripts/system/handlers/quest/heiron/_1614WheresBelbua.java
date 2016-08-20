@@ -59,6 +59,7 @@ public class _1614WheresBelbua extends QuestHandler {
 							} else if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							changeQuestStep(env, 0, 1, false);

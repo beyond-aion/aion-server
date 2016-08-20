@@ -60,6 +60,7 @@ public class _1220ASecretDelivery extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1, 182200569, 1, 182200568, 1);
 						}
 					}
+					return false;
 				}
 				case 205240: {
 					switch (env.getDialog()) {

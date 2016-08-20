@@ -62,10 +62,12 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
+					return false;
 				}
 				case 799517: {
 					switch (dialog) {

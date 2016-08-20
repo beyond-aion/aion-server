@@ -65,6 +65,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 798918: // Pilipides
 				{
@@ -79,6 +80,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
+					return false;
 				}
 				case 798903: // Drenia
 				{

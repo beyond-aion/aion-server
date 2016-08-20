@@ -75,6 +75,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 							else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -99,6 +100,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

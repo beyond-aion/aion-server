@@ -45,6 +45,7 @@ public class _2106VanarsFlattery extends QuestHandler {
 						if (giveQuestItem(env, 182203106, 1)) {
 							return sendQuestStartDialog(env);
 						}
+						return false;
 					}
 					case QUEST_REFUSE_1:{
 						return sendQuestDialog(env, 1004);

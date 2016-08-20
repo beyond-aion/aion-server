@@ -56,6 +56,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 830417: {
 					switch (dialog) {
@@ -66,6 +67,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
+					return false;
 				}
 				case 830169: {
 					switch (dialog) {

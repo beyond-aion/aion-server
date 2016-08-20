@@ -49,6 +49,7 @@ public class _30222AGuardsCurse extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
 						}
+						return false;
 					}
 					case SELECT_QUEST_REWARD: {
 						changeQuestStep(env, 1, 1, true); // reward

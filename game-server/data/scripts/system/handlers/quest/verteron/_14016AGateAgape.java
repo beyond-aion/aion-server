@@ -51,6 +51,7 @@ public class _14016AGateAgape extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							TeleportService2.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);

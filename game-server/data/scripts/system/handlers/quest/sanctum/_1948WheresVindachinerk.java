@@ -51,6 +51,7 @@ public class _1948WheresVindachinerk extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SELECT_ACTION_1353: {
 							playQuestMovie(env, 0);
@@ -60,6 +61,7 @@ public class _1948WheresVindachinerk extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 798132: {
 					switch (dialog) {

@@ -54,6 +54,7 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							giveQuestItem(env, 122001250, 1);
@@ -68,6 +69,7 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);

@@ -52,6 +52,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -65,6 +66,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -78,6 +80,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 2, 3); // 3
@@ -91,6 +94,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 3, 4); // 4
@@ -104,6 +108,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							return defaultCloseDialog(env, 4, 5); // 5
@@ -117,6 +122,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							return defaultCloseDialog(env, 5, 6); // 6
@@ -130,6 +136,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SETPRO7: {
 							return defaultCloseDialog(env, 6, 7); // 7
@@ -143,6 +150,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
+							return false;
 						}
 						case SETPRO8: {
 							return defaultCloseDialog(env, 7, 8); // 8
@@ -156,6 +164,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SET_SUCCEED: {
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {

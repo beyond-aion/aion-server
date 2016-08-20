@@ -54,6 +54,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO12: {
 							return defaultCloseDialog(env, 0, 4); // 4
@@ -88,6 +89,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
 							}
+							return false;
 						}
 						case QUEST_SELECT: {
 							if (var == 4) {
@@ -95,6 +97,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310080000);

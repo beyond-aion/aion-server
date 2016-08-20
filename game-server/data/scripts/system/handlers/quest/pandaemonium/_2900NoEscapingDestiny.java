@@ -63,6 +63,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							if (defaultCloseDialog(env, 0, 1)) { // 1
@@ -81,6 +82,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							} else if (var == 10) {
 								return sendQuestDialog(env, 4080);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							return defaultCloseDialog(env, 1, 2); // 2
@@ -99,6 +101,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							return defaultCloseDialog(env, 2, 3); // 3
@@ -112,6 +115,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							return defaultCloseDialog(env, 3, 4); // 4
@@ -127,6 +131,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							} else if (var == 9) {
 								return sendQuestDialog(env, 3739);
 							}
+							return false;
 						}
 						case SETPRO5: {
 							if (var == 4) {
@@ -151,6 +156,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							if (var == 99 && !isStigmaEquipped(env)) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case QUEST_SELECT: {
 							if (var == 95) {
@@ -160,12 +166,14 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							} else if (var == 97) {
 								return sendQuestDialog(env, 3398);
 							}
+							return false;
 						}
 						case SETPRO6: {
 							if (var == 95) {
 								playQuestMovie(env, 156);
 								return closeDialogWindow(env);
 							}
+							return false;
 						}
 						case SELECT_ACTION_3058: {
 							if (var == 96) {
@@ -178,6 +186,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 									}
 								}
 							}
+							return false;
 						}
 						case SETPRO7: {
 							if (var == 99) {

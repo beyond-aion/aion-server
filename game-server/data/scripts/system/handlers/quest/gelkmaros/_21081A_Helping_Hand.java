@@ -59,6 +59,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 799217: // Pilipides
 				{
@@ -73,6 +74,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
+					return false;
 				}
 				case 799202: // Drenia
 				{

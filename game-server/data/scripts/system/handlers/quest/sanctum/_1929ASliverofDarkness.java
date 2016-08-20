@@ -67,6 +67,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -80,6 +81,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						}
 						case SETPRO2: {
 							if (defaultCloseDialog(env, 1, 2)) { // 2
@@ -98,6 +100,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							} else if (var == 8) {
 								return sendQuestDialog(env, 3057);
 							}
+							return false;
 						}
 						case SETPRO3: {
 							if (var == 2) {
@@ -107,6 +110,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								TeleportService2.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
 								return closeDialogWindow(env);
 							}
+							return false;
 						}
 						case SETPRO7: {
 							if (defaultCloseDialog(env, 8, 9)) { // 9
@@ -123,6 +127,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 93) {
 								return sendQuestDialog(env, 2034);
 							}
+							return false;
 						}
 						case SETPRO4: {
 							if (var == 93) {
@@ -161,6 +166,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 98) {
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						}
 						case SELECT_ACTION_2546: {
 							if (var == 98) {
@@ -188,6 +194,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							if (var == 9) {
 								return sendQuestDialog(env, 3398);
 							}
+							return false;
 						}
 						case SETPRO8: {
 							return defaultCloseDialog(env, 9, 9, true, false); // reward

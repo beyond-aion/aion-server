@@ -107,6 +107,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 						} else if (var == 25) {
 							return sendQuestDialog(env, 1438);
 						}
+						return false;
 					}
 					case SELECT_QUEST_REWARD: {
 						return sendQuestDialog(env, 5 + choice);
