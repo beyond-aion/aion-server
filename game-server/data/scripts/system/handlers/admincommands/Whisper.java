@@ -1,29 +1,30 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 public class Whisper extends AdminCommand {
 
 	public Whisper() {
-		super("whisper");
+		super("whisper", "Enables/disables incoming whispers.");
+
+		setParamInfo("<on|off> - Enable or disable whispers from others (GMs can always whisper you).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
+		if (params.length == 0) {
+			sendInfo(admin);
+			return;
+		}
 
 		if (params[0].equalsIgnoreCase("off")) {
-			admin.setUnWispable();
-			PacketSendUtility.sendMessage(admin, "Accepting Whisper : OFF");
+			admin.setCustomState(CustomPlayerState.NO_WHISPERS_MODE);
+			sendInfo(admin, "Accepting whispers: OFF");
 		} else if (params[0].equalsIgnoreCase("on")) {
-			admin.setWispable();
-			PacketSendUtility.sendMessage(admin, "Accepting Whisper : ON");
+			admin.unsetCustomState(CustomPlayerState.NO_WHISPERS_MODE);
+			sendInfo(admin, "Accepting whispers: ON");
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //whisper [on for wispable / off for unwispable]");
 	}
 }

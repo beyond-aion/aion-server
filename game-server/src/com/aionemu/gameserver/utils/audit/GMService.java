@@ -11,6 +11,7 @@ import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -53,7 +54,7 @@ public class GMService {
 			String delimiter = "=============================";
 			StringBuilder sb = new StringBuilder(delimiter);
 			if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
-				player.setInvulnerable(true);
+				player.setCustomState(CustomPlayerState.INVULNERABLE);
 				sb.append("\n>> Connection in Invulnerable mode <<");
 			}
 			if (AdminConfig.INVISIBLE_GM_CONNECTION) {
@@ -78,7 +79,7 @@ public class GMService {
 				sb.append("\n>> Connection in Vision mode <<");
 			}
 			if (AdminConfig.WHISPER_GM_CONNECTION) {
-				player.setUnWispable();
+				player.setCustomState(CustomPlayerState.NO_WHISPERS_MODE);
 				sb.append("\n>> Accepting Whisper: OFF <<");
 			}
 			if (sb.length() > delimiter.length())
@@ -95,7 +96,7 @@ public class GMService {
 	}
 
 	public boolean isAnnounceable(Player gm) {
-		return gm.isGM() && gm.isWispable() && gm.getFriendList().getStatus() != Status.OFFLINE && (announceList == null || announceList.contains(gm.getAccessLevel()));
+		return gm.isGM() && !gm.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && gm.getFriendList().getStatus() != Status.OFFLINE && (announceList == null || announceList.contains(gm.getAccessLevel()));
 	}
 
 	public void broadcastMessageToGMs(String message) {

@@ -2,6 +2,7 @@ package admincommands;
 
 import java.awt.Color;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -18,7 +19,11 @@ public class Teleportation extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		admin.setAdminTeleportation(!admin.isAdminTeleportation());
-		sendInfo(admin, "Teleportation mode is now " + (admin.isAdminTeleportation() ?ChatUtil.color("active", Color.GREEN) : ChatUtil.color("inactive", Color.RED)) + ".");
+		if (admin.isInCustomState(CustomPlayerState.TELEPORTATION_MODE))
+			admin.unsetCustomState(CustomPlayerState.TELEPORTATION_MODE);
+		else
+			admin.setCustomState(CustomPlayerState.TELEPORTATION_MODE);
+		sendInfo(admin, "Teleportation mode is now " + (admin.isInCustomState(CustomPlayerState.TELEPORTATION_MODE)
+			? ChatUtil.color("active", Color.GREEN) : ChatUtil.color("inactive", Color.RED)) + ".");
 	}
 }

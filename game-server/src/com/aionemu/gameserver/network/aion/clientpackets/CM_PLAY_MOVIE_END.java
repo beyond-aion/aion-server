@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -19,9 +20,6 @@ public class CM_PLAY_MOVIE_END extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		type = readC();
@@ -31,14 +29,11 @@ public class CM_PLAY_MOVIE_END extends AionClientPacket {
 		readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		player.unsetCustomState(CustomPlayerState.WATCHING_CUTSCENE);
 		QuestEngine.getInstance().onMovieEnd(new QuestEnv(null, player, 0, 0), movieId);
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayMovieEnd(player, movieId);
 	}
-
 }

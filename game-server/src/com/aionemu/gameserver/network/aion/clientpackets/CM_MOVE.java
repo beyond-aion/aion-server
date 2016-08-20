@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -73,7 +74,7 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (player.getLifeStats().isAlreadyDead())
 			return;
-		if (player.getEffectController().isUnderFear())
+		if (player.getEffectController().isUnderFear() || player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
 			return;
 
 		float speed = player.getGameStats().getMovementSpeedFloat();
@@ -103,7 +104,7 @@ public class CM_MOVE extends AionClientPacket {
 			if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) { // start move or change direction
 				if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
 					m.setNewDirection(x2, y2, z2, heading);
-					if (player.isAdminTeleportation()) {
+					if (player.isInCustomState(CustomPlayerState.TELEPORTATION_MODE)) {
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
 						m.updateLastMove();
 						PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player), true);

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -59,7 +60,7 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 
 		if (receiver == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(realName));
-		} else if (!receiver.isWispable() && !sender.isGM()) {
+		} else if (receiver.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && !sender.isGM()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_WHISPER_REFUSE(receiver.getName(AdminConfig.CUSTOMTAG_ENABLE)));
 		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER && !receiver.isGM()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));

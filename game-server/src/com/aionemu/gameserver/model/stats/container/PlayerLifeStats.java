@@ -273,7 +273,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		cancelFpRestore();
 		restoreLock.lock();
 		try {
-			if (flyReduceTask == null && !alreadyDead && owner.getAccessLevel() < AdminConfig.GM_FLIGHT_UNLIMITED && !owner.isUnderNoFPConsum()) {
+			if (flyReduceTask == null && !alreadyDead && owner.getAccessLevel() < AdminConfig.GM_FLIGHT_UNLIMITED) {
 				this.flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
 			}
 		} finally {

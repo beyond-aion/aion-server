@@ -6,6 +6,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
@@ -100,7 +101,7 @@ public class PlayerReviveService {
 	}
 
 	public static final void bindRevive(Player player, int skillId) {
-		if (player.isInEvent())
+		if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
 			revive(player, 100, 100, false, skillId);
 		else
 			revive(player, 25, 25, true, skillId);
@@ -109,7 +110,7 @@ public class PlayerReviveService {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
 			TeleportService2.teleportToPrison(player);
-		} else if (player.isInEvent()) {
+		} else if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			TeleportService2.teleportToEvent(player);
 		} else {
 			WorldPosition resPos = null;
@@ -136,7 +137,7 @@ public class PlayerReviveService {
 
 		if (player.isInPrison())
 			TeleportService2.teleportToPrison(player);
-		else if (player.isInEvent())
+		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
 			TeleportService2.teleportToEvent(player);
 
 		// TODO: find right place for this
@@ -161,7 +162,7 @@ public class PlayerReviveService {
 	}
 
 	public static final void instanceRevive(Player player, int skillId) {
-		if (player.isInEvent()) {
+		if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			revive(player, 100, 100, false, skillId);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			player.getGameStats().updateStatsAndSpeedVisually();

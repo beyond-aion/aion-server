@@ -13,6 +13,7 @@ import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.WalkerData;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
@@ -106,7 +107,7 @@ public class FixPath extends AdminCommand {
 		final float zOff = zOffset;
 
 		ThreadPoolManager.getInstance().execute(() -> { // run in a new thread to avoid blocking everything
-			admin.setInvulnerable(true);
+			admin.setCustomState(CustomPlayerState.INVULNERABLE);
 			RouteStep start = template.getRouteStep(1);
 			TeleportService2.teleportTo(admin, new WorldPosition(worldId, start.getX(), start.getY(), start.getZ() + zOff, admin.getHeading()));
 			float zDelta = getZ(admin) - start.getZ() + zOff;
@@ -138,7 +139,7 @@ public class FixPath extends AdminCommand {
 					if (template.isReversed()) {
 						int maxUnReversedStep = (template.getRouteSteps().size() + 1) / 2;
 						if (oldStep.getRouteStep() < maxUnReversedStep)
-							template.getRouteStep(template.getRouteSteps().size() + 1 - oldStep.getRouteStep()).setZ(e.getValue());;
+							template.getRouteStep(template.getRouteSteps().size() + 1 - oldStep.getRouteStep()).setZ(e.getValue());
 					}
 				}
 
@@ -186,8 +187,10 @@ public class FixPath extends AdminCommand {
 
 	private void stop() {
 		if (runner != null) {
-			if (runner.isOnline())
-				runner.setInvulnerable(oldInvul);
+			if (runner.isOnline()) {
+				if (!oldInvul && runner.isInvulnerable())
+					runner.unsetCustomState(CustomPlayerState.INVULNERABLE);
+			}
 			runner = null;
 		}
 	}

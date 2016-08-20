@@ -7,9 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -97,6 +94,9 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * This class is representing Player object, it contains all needed data.
  * 
@@ -152,7 +152,6 @@ public class Player extends Creature {
 	private boolean isTrading;
 	private long prisonTimer = 0;
 	private long startPrison;
-	private boolean isInvulnerable;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
 	private int flightTeleportId;
@@ -169,11 +168,7 @@ public class Player extends Creature {
 	private float resPosX = 0;
 	private float resPosY = 0;
 	private float resPosZ = 0;
-	private boolean underNoFPConsum = false;
-	private boolean isAdminTeleportation = false;
-	private boolean cooldownZero = false;
 	private boolean isUnderInvulnerableWing = false;
-	private boolean isWispable = true;
 
 	private int abyssRankListUpdateMask = 0;
 
@@ -234,7 +229,7 @@ public class Player extends Creature {
 	private float[] battleReturnCoords;
 	private int robotId;
 	private int enemyState;
-	private boolean isEvent = false;
+	private int customStates;
 
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
@@ -906,12 +901,7 @@ public class Player extends Creature {
 	}
 
 	public boolean isInFlyState(FlyState flyState) {
-		int isState = this.flyState & flyState.getId();
-
-		if (isState == flyState.getId())
-			return true;
-
-		return false;
+		return (this.flyState & flyState.getId()) == flyState.getId();
 	}
 
 	/**
@@ -1002,11 +992,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isInvulnerable() {
-		return isInvulnerable;
-	}
-
-	public void setInvulnerable(boolean isInvulnerable) {
-		this.isInvulnerable = isInvulnerable;
+		return isInCustomState(CustomPlayerState.INVULNERABLE);
 	}
 
 	public void setMailbox(Mailbox mailbox) {
@@ -1302,28 +1288,6 @@ public class Player extends Creature {
 		itemCoolDowns.remove(itemMask);
 	}
 
-	/**
-	 * @return isAdminTeleportation
-	 */
-	public boolean isAdminTeleportation() {
-		return isAdminTeleportation;
-	}
-
-	/**
-	 * @param isAdminTeleportation
-	 */
-	public void setAdminTeleportation(boolean isAdminTeleportation) {
-		this.isAdminTeleportation = isAdminTeleportation;
-	}
-
-	public final boolean isCoolDownZero() {
-		return cooldownZero;
-	}
-
-	public final void setCoolDownZero(boolean cooldownZero) {
-		this.cooldownZero = cooldownZero;
-	}
-
 	public void setPlayerResActivate(boolean isActivated) {
 		this.isResByPlayer = isActivated;
 	}
@@ -1570,21 +1534,6 @@ public class Player extends Creature {
 		return this.getEffectController().isAbnormalSet(AbnormalState.NOFLY);
 	}
 
-	/**
-	 * @param the
-	 *          status of NoFpConsum Effect
-	 */
-	public void setUnderNoFPConsum(boolean value) {
-		this.underNoFPConsum = value;
-	}
-
-	/**
-	 * @return true if player is under NoFpConsumEffect
-	 */
-	public boolean isUnderNoFPConsum() {
-		return this.underNoFPConsum;
-	}
-
 	public boolean havePermission(byte perm) {
 		return playerAccount.getMembership() >= perm;
 	}
@@ -1648,18 +1597,6 @@ public class Player extends Creature {
 
 	public FlyPathEntry getCurrentFlyPath() {
 		return flyLocationId;
-	}
-
-	public void setUnWispable() {
-		this.isWispable = false;
-	}
-
-	public void setWispable() {
-		this.isWispable = true;
-	}
-
-	public boolean isWispable() {
-		return isWispable;
 	}
 
 	public boolean isInvulnerableWing() {
@@ -1899,12 +1836,12 @@ public class Player extends Creature {
 
 	@Override
 	public int getSkillCooldown(SkillTemplate template) {
-		return isCoolDownZero() ? 0 : template.getCooldown();
+		return isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE) ? 0 : template.getCooldown();
 	}
 
 	@Override
 	public int getItemCooldown(ItemTemplate template) {
-		return isCoolDownZero() ? 0 : template.getUseLimits().getDelayTime();
+		return template.getUseLimits().getDelayTime();
 	}
 
 	public void setLastMessageTime() {
@@ -2124,12 +2061,16 @@ public class Player extends Creature {
 	public String toString() {
 		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
 	}
-	
-	public boolean isInEvent() {
-		return isEvent;
+
+	public void setCustomState(CustomPlayerState state) {
+		customStates |= state.getMask();
 	}
 
-	public void setIsInEvent(boolean isEvent) {
-		this.isEvent = isEvent;
+	public void unsetCustomState(CustomPlayerState state) {
+		customStates &= ~state.getMask();
+	}
+
+	public boolean isInCustomState(CustomPlayerState state) {
+		return (customStates & state.getMask()) == state.getMask();
 	}
 }

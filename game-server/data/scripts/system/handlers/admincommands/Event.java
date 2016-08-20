@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
@@ -66,12 +67,12 @@ public class Event extends AdminCommand {
 				sb.append(" ").append(params[i]);
 
 			World.getInstance().forEachPlayer(p -> {
-				if (p.isInEvent() || p == admin)
+				if (p.isInCustomState(CustomPlayerState.EVENT_MODE) || p == admin)
 					PacketSendUtility.sendMessage(p, sb.toString(), ChatType.BRIGHT_YELLOW_CENTER);
 			});
 		} else if (params[0].equalsIgnoreCase("list")) {
 			StringBuilder sb = new StringBuilder("Players in event state:");
-			World.getInstance().getAllPlayers().stream().filter(p -> p.isInEvent()).forEach(p -> sb.append("\n\t").append(ChatUtil.name(p)));
+			World.getInstance().getAllPlayers().stream().filter(p -> p.isInCustomState(CustomPlayerState.EVENT_MODE)).forEach(p -> sb.append("\n\t").append(ChatUtil.name(p)));
 			sendInfo(admin, sb.toString());
 		} else if (params[0].equalsIgnoreCase("removeAll")) {
 			for (Player player : World.getInstance().getAllPlayers())
@@ -119,7 +120,7 @@ public class Event extends AdminCommand {
 			} else if (admin.getTarget() instanceof Player) {
 				player = (Player) admin.getTarget();
 			}
-			if (player == null || !player.isInEvent()) {
+			if (player == null || !player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 				sendInfo(admin, "No valid target! (Event state available?)");
 				return;
 			}
@@ -172,8 +173,8 @@ public class Event extends AdminCommand {
 	}
 
 	private void setEventState(Player admin, Player player, boolean onlyRemove) {
-		if (player.isInEvent()) {
-			player.setIsInEvent(false);
+		if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
+			player.unsetCustomState(CustomPlayerState.EVENT_MODE);
 			player.setEnemyState(0);
 			player.clearKnownlist();
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
@@ -182,7 +183,7 @@ public class Event extends AdminCommand {
 			sendInfo(admin, ChatUtil.name(player) + " was removed from event state.");
 			PacketSendUtility.sendMessage(player, "You were removed from event state!", ChatType.BRIGHT_YELLOW_CENTER);
 		} else if (!onlyRemove) {
-			player.setIsInEvent(true);
+			player.setCustomState(CustomPlayerState.EVENT_MODE);
 			sendInfo(admin, ChatUtil.name(player) + " was set in event state.");
 			PacketSendUtility.sendMessage(player,
 				"You are in event state now. Please notice that you are not allowed to leave the event without removal of this state!",

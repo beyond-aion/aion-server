@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -32,10 +33,11 @@ public class SM_PLAY_MOVIE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		con.getActivePlayer().setCustomState(CustomPlayerState.WATCHING_CUTSCENE);
 		writeC(type);
 		writeD(objectId);
 		writeD(id);
 		writeH(movieId);
-		writeD(restrictionId);
+		writeD(restrictionId); // 16777216 (leftmost byte = 1) disables the ability to abort the video
 	}
 }
