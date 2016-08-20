@@ -175,48 +175,40 @@ public class PetService {
 			action = 0;
 		} else if (action == 3) { // use item
 			List<Item> items = player.getInventory().getItemsByItemId(itemId);
-			for (;;) {
-				Item useItem = items.get(0);
-				ItemActions itemActions = useItem.getItemTemplate().getActions();
-				
-				if (!isPetItemUseAllowed(player, useItem))
-				   return;
-				
-				ItemUseLimits limit = new ItemUseLimits();
-				int useDelay = player.getItemCooldown(useItem.getItemTemplate()) / 3;
-				if (useDelay < 3000)
-					useDelay = 3000;
-				limit.setDelayId(useItem.getItemTemplate().getUseLimits().getDelayId());
-				limit.setDelayTime(useDelay);
+			Item useItem = items.get(0);
+			ItemActions itemActions = useItem.getItemTemplate().getActions();
 
-				if (player.isItemUseDisabled(limit)) {
-					final int useAction = action;
-					final int useItemId = itemId;
-					final int useSlot = slot;
-					// schedule re-check
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
+			if (!isPetItemUseAllowed(player, useItem))
+				return;
 
-						@Override
-						public void run() {
-							PacketSendUtility.sendPacket(player, new SM_PET(useAction, useItemId, useSlot));
-						}
-					}, useDelay);
-					return;
-				}
+			ItemUseLimits limit = new ItemUseLimits();
+			int useDelay = player.getItemCooldown(useItem.getItemTemplate()) / 3;
+			if (useDelay < 3000)
+				useDelay = 3000;
+			limit.setDelayId(useItem.getItemTemplate().getUseLimits().getDelayId());
+			limit.setDelayTime(useDelay);
 
-				for (AbstractItemAction itemAction : itemActions.getItemActions()) {
-					if (itemAction instanceof SkillUseAction) {
-						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(),
-							useItem.getItemId(), 0, 1, 1, 1, 0, 15360), true);
-						SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillid(), ((SkillUseAction) itemAction).getLevel(),
-							player, player, 0);
-						player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
-							player.getItemCooldown(useItem.getItemTemplate()) / 1000);
-						player.getInventory().decreaseByItemId(itemId, 1);
-					} else
-						log.warn("Pet attempt to use not skill use item");
-				}
-				break;
+			if (player.isItemUseDisabled(limit)) {
+				final int useAction = action;
+				final int useItemId = itemId;
+				final int useSlot = slot;
+				// schedule re-check
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(useAction, useItemId, useSlot)), useDelay);
+				return;
+			}
+
+			for (AbstractItemAction itemAction : itemActions.getItemActions()) {
+				if (itemAction instanceof SkillUseAction) {
+					PacketSendUtility.broadcastPacket(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
+						true);
+					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillid(), ((SkillUseAction) itemAction).getLevel(), player,
+						player, 0);
+					player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
+						player.getItemCooldown(useItem.getItemTemplate()) / 1000);
+					player.getInventory().decreaseByItemId(itemId, 1);
+				} else
+					log.warn("Pet attempt to use not skill use item");
 			}
 		}
 
@@ -239,10 +231,10 @@ public class PetService {
 			PacketSendUtility.sendPacket(player, new SM_PET(1, false));
 		}
 	}
-	
+
 	private boolean isPetItemUseAllowed(Player player, Item item) {
-	   //TODO: more restrictions?
-	   if (item.getItemTemplate().hasAreaRestriction()) {
+		// TODO: more restrictions?
+		if (item.getItemTemplate().hasAreaRestriction()) {
 			ZoneName restriction = item.getItemTemplate().getUseArea();
 			if (restriction != null && !player.isInsideItemUseZone(restriction)) {
 				return false;
