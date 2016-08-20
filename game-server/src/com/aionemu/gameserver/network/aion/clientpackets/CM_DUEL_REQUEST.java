@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -27,9 +28,6 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		objectId = readD();
@@ -38,19 +36,18 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
+		VisibleObject target = activePlayer.getKnownList().getObject(objectId);
 
-		if (!CustomConfig.INSTANCE_DUEL_ENABLE && activePlayer.isInInstance())
+		if (activePlayer.getLifeStats().isAlreadyDead())
 			return;
 
-		Player target = activePlayer.getKnownList().getPlayer(objectId);
+		if (activePlayer.isInInstance() && !CustomConfig.INSTANCE_DUEL_ENABLE)
+			return;
+
 		if (target == null)
 			return;
 
-		if (activePlayer.getLifeStats().isAlreadyDead()) {
-			return;
-		}
-
-		if (!target.equals(activePlayer)) {
+		if (target instanceof Player && !((Player) target).equals(activePlayer)) {
 			DuelService duelService = DuelService.getInstance();
 
 			Player targetPlayer = (Player) target;

@@ -8,9 +8,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.ai2.GeneralAIEvent;
+import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
@@ -51,7 +55,7 @@ public class CustomBase implements Comparable<CustomBase> {
 	public Npc getTarget() {
 		return target;
 	}
-	
+
 	public int getBuffId() {
 		return buffID;
 	}
@@ -61,14 +65,14 @@ public class CustomBase implements Comparable<CustomBase> {
 	}
 
 	public boolean isPreparingToSpawn() {
-		if(this.bossRespawn == null) {
+		if (this.bossRespawn == null) {
 			return false;
 		}
-		
-		if(this.bossRespawn.isCancelled()) {
+
+		if (this.bossRespawn.isCancelled()) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -143,14 +147,14 @@ public class CustomBase implements Comparable<CustomBase> {
 		if (!bossRespawn.isDone()) {
 			bossRespawn.cancel(false);
 		}
-		
-			for(Npc npc : spawned) {
-				if(npc != null) {
-					if(npc.getSpawn().getHandlerType() != null || npc.getRace() != owner) {
-						npc.getController().onDelete();
-					}
+
+		for (Npc npc : spawned) {
+			if (npc != null) {
+				if (npc.getSpawn().getHandlerType() != null || npc.getRace() != owner) {
+					npc.getController().onDelete();
 				}
 			}
+		}
 
 		flag = null;
 
@@ -230,4 +234,35 @@ public class CustomBase implements Comparable<CustomBase> {
 		return 0;
 	}
 
+	class CBaseDeathListener extends OnDieEventListener {
+
+		private final CustomBase base;
+
+		public CBaseDeathListener(CustomBase base) {
+			this.base = base;
+		}
+
+		@Override
+		public void onBeforeEvent(GeneralAIEvent event) {
+			super.onBeforeEvent(event);
+
+			if (!event.isHandled()) {
+				return;
+			}
+
+			AionObject winner = base.getBoss().getAggroList().getMostDamage();
+
+			if (winner instanceof Creature) {
+				Creature killer = (Creature) winner;
+
+				if (killer.getRace().isPlayerRace()) {
+					base.capture(killer.getRace(), killer.getName(), (Player) killer);
+				}
+			} else if (winner instanceof TemporaryPlayerTeam) {
+				TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
+				if (team.getRace().isPlayerRace())
+					base.capture(team.getRace(), team.getLeader().getName(), team);
+			}
+		}
+	}
 }

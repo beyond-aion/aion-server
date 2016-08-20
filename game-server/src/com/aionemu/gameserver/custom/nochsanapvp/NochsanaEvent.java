@@ -9,23 +9,18 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.ai2.GeneralAIEvent;
-import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.custom.GameEvent;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -293,40 +288,4 @@ public class NochsanaEvent extends GameEvent {
 		}
 		return new Point3D(521.75507f, 672.61615f, 332.13452f);
 	}
-
-}
-
-@SuppressWarnings("rawtypes")
-class CBaseDeathListener extends OnDieEventListener {
-
-	private final CustomBase base;
-
-	public CBaseDeathListener(CustomBase base) {
-		this.base = base;
-	}
-
-	@Override
-	public void onBeforeEvent(GeneralAIEvent event) {
-		super.onBeforeEvent(event);
-
-		if (!event.isHandled()) {
-			return;
-		}
-
-		AionObject winner = base.getBoss().getAggroList().getMostDamage();
-
-		if (winner instanceof Creature) {
-			Creature killer = (Creature) winner;
-
-			if (killer.getRace().isPlayerRace()) {
-				base.capture(killer.getRace(), killer.getName(), (Player) killer);
-			}
-
-		} else if (winner instanceof TemporaryPlayerTeam) {
-			TemporaryPlayerTeam team = (TemporaryPlayerTeam) winner;
-			if (team.getRace().isPlayerRace())
-				base.capture(team.getRace(), team.getLeader().getName(), team);
-		}
-	}
-
 }

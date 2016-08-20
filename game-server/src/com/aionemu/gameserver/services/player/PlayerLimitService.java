@@ -34,7 +34,7 @@ public class PlayerLimitService {
 		if (itemPrice < 0 || itemCount <= 0)
 			return 0;
 
-		long possibleCount = Math.max(0, (long) (limit / itemPrice));
+		long possibleCount = Math.max(0, limit / itemPrice);
 		if (CustomConfig.LIMITS_ENABLE_DYNAMIC_CAP && possibleCount < itemCount)
 			possibleCount += 1;
 
