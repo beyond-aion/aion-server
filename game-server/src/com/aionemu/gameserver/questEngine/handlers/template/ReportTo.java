@@ -90,7 +90,6 @@ public class ReportTo extends QuestHandler {
 					case QUEST_ACCEPT_SIMPLE:
 						if (workItem != null)
 							giveQuestItem(env, workItem.getItemId(), workItem.getCount());
-					default:
 						return sendQuestStartDialog(env);
 				}
 			}

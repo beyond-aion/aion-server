@@ -245,11 +245,10 @@ public class DialogService {
 						case 203194: // poeta teleporter
 							if (!player.getCommonData().isDaeva()) {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
-								break;
+								return;
 							}
-						default:
-							TeleportService2.showMap(player, npc);
 					}
+					TeleportService2.showMap(player, npc);
 					break;
 				}
 				case GATHER_SKILL_LEVELUP: // improve extraction (2.5)
@@ -373,12 +372,11 @@ public class DialogService {
 								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
 					}
 					break;
-				case NULL:
-					if (dialogId != DialogAction.NULL.id()) {
+				default:
+					if (action == DialogAction.NULL && dialogId != DialogAction.NULL.id()) {
 						log.warn("Dialog Service: unknown dialog action, dialog id:" + dialogId);
 						return;
 					}
-				default:
 					if (QuestEngine.getInstance().onDialog(env))
 						return;
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId));

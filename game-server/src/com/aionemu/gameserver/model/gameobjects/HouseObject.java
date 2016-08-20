@@ -50,6 +50,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		return persistentState;
 	}
 
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

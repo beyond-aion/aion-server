@@ -554,6 +554,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

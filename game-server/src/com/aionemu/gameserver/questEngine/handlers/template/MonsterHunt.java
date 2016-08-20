@@ -119,18 +119,15 @@ public class MonsterHunt extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
-				if (dialog == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
-				} else {
-					switch (dialog) {
-						case QUEST_ACCEPT:
-						case QUEST_ACCEPT_1:
-						case QUEST_ACCEPT_SIMPLE:
-							if (workItem != null)
-								giveQuestItem(env, workItem.getItemId(), workItem.getCount());
-						default:
-							return sendQuestStartDialog(env);
-					}
+				switch (dialog) {
+					case QUEST_SELECT:
+						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
+					case QUEST_ACCEPT:
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						if (workItem != null)
+							giveQuestItem(env, workItem.getItemId(), workItem.getCount());
+						return sendQuestStartDialog(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

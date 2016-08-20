@@ -34,6 +34,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 	}
 
 	@Override
+	@SuppressWarnings("fallthrough")
 	protected void writeImpl(AionConnection con) {
 		writeD(effected.getObjectId());
 		writeC(effectType); // unk
@@ -45,7 +46,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 		for (Effect effect : filtered) {
 			switch (effectType) {
 				case 2:
-					writeD(effect.getEffectorId());
+					writeD(effect.getEffectorId()); // fall-through on purpose
 				case 1:
 					writeH(effect.getSkillId());
 					writeC(effect.getSkillLevel());

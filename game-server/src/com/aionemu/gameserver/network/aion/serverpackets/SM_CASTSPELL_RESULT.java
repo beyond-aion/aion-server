@@ -159,7 +159,6 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 							writeF(effect.getTargetX());
 							writeF(effect.getTargetY());
 							writeF(effect.getTargetZ());
-						default:
 							break;
 					}
 					break;

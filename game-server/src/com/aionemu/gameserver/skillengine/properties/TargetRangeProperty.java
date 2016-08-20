@@ -36,11 +36,11 @@ public class TargetRangeProperty {
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
 		int maxcount = properties.getTargetMaxCount();
-		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent() : properties
-			.getEffectiveRange();
+		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent()
+			: properties.getEffectiveRange();
 		int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
 		int ineffectiveRange = properties.getIneffectiveRange();
-		
+
 		final List<Creature> effectedList = skill.getEffectedList();
 		skill.setTargetRangeAttribute(value);
 		switch (value) {
@@ -107,15 +107,18 @@ public class TargetRangeProperty {
 						skill.getEffectedList().add((Creature) nextCreature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
-						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature, (properties.getEffectiveDist() + skill.getEffector().getObjectTemplate().getBoundRadius().getFront()), 
-							((effectiveRange/2f) + skill.getEffector().getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
+						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature,
+							(properties.getEffectiveDist() + skill.getEffector().getObjectTemplate().getBoundRadius().getFront()),
+							((effectiveRange / 2f) + skill.getEffector().getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
 							skill.getEffectedList().add((Creature) nextCreature);
 						}
-					} else if (MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
-						//for target_range_area_type = fireball
-						if (ineffectiveRange > 0 && MathUtil.isIn3dRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
+					} else if (MathUtil.isIn3dRange(firstTarget, nextCreature,
+						effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+						// for target_range_area_type = fireball
+						if (ineffectiveRange > 0
+							&& MathUtil.isIn3dRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
 							continue;
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
@@ -210,14 +213,16 @@ public class TargetRangeProperty {
 						&& (((Player) nextCreature).isProtectionActive()))
 						continue;
 
-					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ()) <= distanceToTarget + 1) {
+					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
+						nextCreature.getZ()) <= distanceToTarget + 1) {
 						effectedList.add((Creature) nextCreature);
 					}
 				}
+				break;
 			case NONE:
 				break;
 
-		// TODO other enum values
+			// TODO other enum values
 		}
 		return true;
 	}

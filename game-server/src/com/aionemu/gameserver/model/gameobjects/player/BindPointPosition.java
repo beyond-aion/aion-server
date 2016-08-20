@@ -76,6 +76,7 @@ public class BindPointPosition {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case UPDATE_REQUIRED:

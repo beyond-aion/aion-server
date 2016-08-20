@@ -159,6 +159,7 @@ public class SM_FIND_GROUP extends AionServerPacket {
 					writeC(findGroup.getClassId());// classId?
 					writeS(findGroup.getName());// writerName
 				}
+				break;
 			case 0x16:
 				writeD(0);// GroupEntryId
 				writeD(0);// instanceId

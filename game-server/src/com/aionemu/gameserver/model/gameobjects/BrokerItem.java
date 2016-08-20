@@ -177,6 +177,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 		return this.isSold;
 	}
 
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

@@ -237,7 +237,6 @@ public class SpawnEngine {
 							break;
 						case STATIC:
 							StaticObjectSpawnManager.spawnTemplate(spawn, instanceId);
-						default:
 							break;
 					}
 				} else if (spawn.hasPool() && checkPool(spawn)) {

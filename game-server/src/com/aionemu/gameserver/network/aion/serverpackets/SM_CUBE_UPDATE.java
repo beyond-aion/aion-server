@@ -76,8 +76,6 @@ public class SM_CUBE_UPDATE extends AionServerPacket {
 				writeC(questExpands); // cube size from quest (so max 2 for now)
 				writeC(itemExpands); // count of used items (tickets)
 				break;
-			default:
-				break;
 		}
 	}
 }

@@ -192,6 +192,7 @@ public class LegionEmblem {
 	/**
 	 * @param persistentState
 	 */
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case UPDATE_REQUIRED:

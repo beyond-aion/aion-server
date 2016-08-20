@@ -87,6 +87,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 	/**
 	 * Only for usage with gathering and crafting skills.
 	 */
+	@SuppressWarnings("fallthrough")
 	public boolean addSkillXp(Player player, int skillId, int xpReward, int objSkillLvl) {
 		PlayerSkillEntry skill = getSkillEntry(skillId);
 		int skillLvl = skill.getSkillLevel();

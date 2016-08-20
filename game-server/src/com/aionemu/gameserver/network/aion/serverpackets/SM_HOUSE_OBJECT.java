@@ -63,7 +63,6 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 			case 7: // Npc type
 				NpcObject npcObj = (NpcObject) houseObject;
 				writeD(npcObj.getNpcObjectId());
-			default:
 				break;
 		}
 	}

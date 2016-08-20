@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -18,7 +16,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+
+import javolution.util.FastMap;
 
 /**
  * @author Hilgert
@@ -128,14 +127,8 @@ public class ReportToMany extends QuestHandler {
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
-						if (workItem != null) {
-							// some quest work items come from other quests, so we don't add them again
-							long count = workItem.getCount();
-							count -= player.getInventory().getItemCountByItemId(workItem.getItemId());
-							if (count > 0)
-								giveQuestItem(env, workItem.getItemId(), count, ItemAddType.QUEST_WORK_ITEM);
-						}
-					default:
+						if (workItem != null)
+							giveQuestItem(env, workItem.getItemId(), workItem.getCount());
 						return sendQuestStartDialog(env);
 				}
 			}

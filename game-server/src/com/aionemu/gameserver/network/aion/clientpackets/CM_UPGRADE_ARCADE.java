@@ -39,8 +39,9 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 			case 3:// get reward
 				ArcadeUpgradeService.getInstance().getReward(player);
 				break;
-			case 4:// resume upgreade arcade
+			case 4:// resume upgrade arcade
 				ArcadeUpgradeService.getInstance().resume(player);
+				break;
 			case 5:// get reward list
 				ArcadeUpgradeService.getInstance().showRewardList(player);
 				break;

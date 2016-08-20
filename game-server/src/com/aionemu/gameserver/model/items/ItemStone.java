@@ -76,6 +76,7 @@ public class ItemStone implements StatOwner {
 	/**
 	 * @param persistentState
 	 */
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

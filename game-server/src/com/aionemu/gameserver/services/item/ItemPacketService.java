@@ -207,6 +207,7 @@ public class ItemPacketService {
 	/**
 	 * Item will be updated in UI slot (stacked items)
 	 */
+	@SuppressWarnings("fallthrough")
 	public static final void sendItemUpdatePacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
 		switch (storageType) {
 			case CUBE:
@@ -229,6 +230,7 @@ public class ItemPacketService {
 	/**
 	 * New item will be displayed in storage
 	 */
+	@SuppressWarnings("fallthrough")
 	public static final void sendStorageUpdatePacket(Player player, StorageType storageType, Item item, ItemAddType addType) {
 		switch (storageType) {
 			case CUBE:
