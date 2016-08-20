@@ -70,7 +70,7 @@ public class _1908UlaguruSpeaks extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203864) {
 				if (qs.getQuestVarById(0) == 21)
-					return sendQuestEndDialog(env);
+					return sendQuestEndDialog(env, 0);
 				else if (qs.getQuestVarById(0) == 22)
 					return sendQuestEndDialog(env, 1);
 				else if (qs.getQuestVarById(0) == 23)

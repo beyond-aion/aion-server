@@ -44,11 +44,11 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 
 		final Summon summon = player.getSummon();
 		if (summon == null) {
-			log.warn("summon castspell without active summon on {}.", player.getName());
+			log.warn(player + " tried to cast a summon spell without a summon");
 			return;
 		}
 		if (summon.getObjectId() != summonObjId) {
-			log.warn("summon castspell from a different summon instance on {}.", player.getName());
+			log.warn(player + " tried to cast a summon spell from a different summon instance");
 			return;
 		}
 
@@ -66,18 +66,11 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 			final SkillOrder order = summon.retrieveNextSkillOrder();
 			if (order != null && order.getTarget() == target) {
 				if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
-					log.warn("Player {} used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", player.getName(), skillId,
+					log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId,
 						order.getSkillId(), skillLvl, order.getSkillLevel());
-
-				ThreadPoolManager.getInstance().execute(new Runnable() {
-
-					@Override
-					public void run() {
-						summon.getController().useSkill(order);
-					}
-				});
+				ThreadPoolManager.getInstance().execute(() -> summon.getController().useSkill(order));
 			}
 		} else
-			log.warn("summon castspell on a wrong target on {}.", player.getName());
+			log.warn(player + " tried to cast a summon spell on a wrong target: " + summon.getKnownList().getObject(targetObjId));
 	}
 }

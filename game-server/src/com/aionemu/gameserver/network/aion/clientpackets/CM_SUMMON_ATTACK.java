@@ -45,12 +45,12 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 
 		Summon summon = player.getSummon();
 		if (summon == null) {
-			log.warn("summon attack without active summon on " + player.getName() + ".");
+			log.warn(player + " tried to use summon attack without an active summon");
 			return;
 		}
 
 		if (summon.getObjectId() != summonObjId) {
-			log.warn("summon attack from a different summon instance on " + player.getName() + ".");
+			log.warn(player + " tried to use summon attack from a different summon instance");
 			return;
 		}
 
@@ -58,6 +58,6 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		if (obj instanceof Creature) {
 			summon.getController().attackTarget((Creature) obj, time, false);
 		} else
-			log.warn("summon attack on a wrong target on " + player.getName());
+			log.warn(player + " tried to use summon attack on a wrong target: " + obj);
 	}
 }
