@@ -59,7 +59,7 @@ public class _1626LightThePath extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700221: {
+				case 700221:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -69,8 +69,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					break;
-				}
-				case 700222: {
+				case 700222:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -80,8 +79,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					break;
-				}
-				case 700223: {
+				case 700223:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -91,8 +89,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700224: {
+				case 700224:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -102,8 +99,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700225: {
+				case 700225:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -113,8 +109,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700226: {
+				case 700226:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -124,8 +119,7 @@ public class _1626LightThePath extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700227: {
+				case 700227:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201788);
@@ -134,7 +128,6 @@ public class _1626LightThePath extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204592) {

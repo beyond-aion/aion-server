@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -12,6 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author LokiReborn
@@ -27,7 +27,7 @@ public class WindstreamData {
 	private TIntObjectHashMap<WindstreamTemplate> windstreams;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		windstreams = new TIntObjectHashMap<WindstreamTemplate>();
+		windstreams = new TIntObjectHashMap<>();
 		for (WindstreamTemplate wt : wts) {
 			windstreams.put(wt.getMapid(), wt);
 		}

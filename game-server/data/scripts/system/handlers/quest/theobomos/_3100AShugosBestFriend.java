@@ -56,7 +56,7 @@ public class _3100AShugosBestFriend extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798168: {
+				case 798168:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -73,7 +73,6 @@ public class _3100AShugosBestFriend extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798169) {

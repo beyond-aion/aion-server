@@ -55,7 +55,7 @@ public class _1540BaittheHooks extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 730189: {
+				case 730189:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182201822) == 1) {
@@ -64,8 +64,7 @@ public class _1540BaittheHooks extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 730190: {
+				case 730190:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182201822) == 1) {
@@ -74,8 +73,7 @@ public class _1540BaittheHooks extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 730191: {
+				case 730191:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 2 && player.getInventory().getItemCountByItemId(182201822) == 1) {
@@ -87,7 +85,6 @@ public class _1540BaittheHooks extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204588) {

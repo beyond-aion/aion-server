@@ -55,59 +55,51 @@ public class _14031AHyperVention extends QuestHandler {
 			switch (targetId) {
 				case 203700:// Fasimedes
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 801216:// Losthes
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 790001:// Pernos
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (!giveQuestItem(env, 182215388, 1))
 								return true;
 							qs.setQuestVar(3);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 203183:// Khidia
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							if (!giveQuestItem(env, 182215389, 1))
 								return true;
 							qs.setQuestVar(5);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 203989:// Tumblusen
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
@@ -115,27 +107,24 @@ public class _14031AHyperVention extends QuestHandler {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SETPRO7: {
+						case SETPRO7:
 							if (!giveQuestItem(env, 182215390, 1))
 								return true;
 							qs.setQuestVar(7);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
-						case SETPRO9: {
+						case SETPRO9:
 							qs.setQuestVar(9);
 							updateQuestStatus(env);
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320040000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 320040000, newInstance.getInstanceId(), 274, 167, 204);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 730888:// Large Teleporter
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730888)
 								NpcActions.delete(npc);
@@ -145,19 +134,17 @@ public class _14031AHyperVention extends QuestHandler {
 							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95);// Broken
 																																																												// Teleporter
 																																																												// Device
-						}
 					}
 					break;
 				case 730898:// Broken Large Teleporter
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730898)
 								NpcActions.delete(npc);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
-						}
 					}
 					break;
 			}
@@ -166,12 +153,10 @@ public class _14031AHyperVention extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700)// Fasimedes
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 4083);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

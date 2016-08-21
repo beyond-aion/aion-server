@@ -15,14 +15,14 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
 	protected CraftType craftType = CraftType.NORMAL;
 	
 	protected enum CraftType {
-		NORMAL(1), 
-		CRIT_BLUE(2), 
+		NORMAL(1),
+		CRIT_BLUE(2),
 		CRIT_PURPLE(3);
 		
 		private int critId;
 		
 		private CraftType(int critId) {
-			this.critId = critId;			
+			this.critId = critId;
 		}
 		
 		public int getCritId() {

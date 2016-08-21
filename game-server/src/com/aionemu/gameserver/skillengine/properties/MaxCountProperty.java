@@ -23,7 +23,7 @@ public class MaxCountProperty {
 				if (firstTarget == null) {
 					return false;
 				}
-				SortedMap<Double, Creature> sortedMap = new TreeMap<Double, Creature>();
+				SortedMap<Double, Creature> sortedMap = new TreeMap<>();
 				for (Creature creature : skill.getEffectedList()) {
 					sortedMap.put(MathUtil.getDistance(firstTarget, creature), creature);
 				}

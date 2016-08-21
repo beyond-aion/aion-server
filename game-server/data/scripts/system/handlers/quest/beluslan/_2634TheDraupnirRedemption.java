@@ -55,7 +55,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700350: {
+				case 700350:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -73,7 +73,6 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204828) {

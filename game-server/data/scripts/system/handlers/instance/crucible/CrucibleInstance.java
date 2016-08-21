@@ -35,7 +35,7 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		instanceReward = new InstanceReward<CruciblePlayerReward>(mapId, instanceId);
+		instanceReward = new InstanceReward<>(mapId, instanceId);
 	}
 
 	protected void addPlayerReward(Player player) {

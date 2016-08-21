@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -90,11 +90,11 @@ public class NpcSkillList implements SkillList<Npc> {
 
 	private void initSkills() {
 		if (skills == null) {
-			skills = new FastTable<NpcSkillEntry>();
+			skills = new FastTable<>();
 		}
 		
 		if (priorities == null) {
-			priorities = new FastTable<Integer>();
+			priorities = new FastTable<>();
 		}
 	}
 
@@ -142,7 +142,7 @@ public class NpcSkillList implements SkillList<Npc> {
 	
 	public List<NpcSkillEntry> getSkillsByPriority(int priority) {
 		if (skills != null && priorities != null && priorities.contains(priority)) {
-			List<NpcSkillEntry> skillsByPriority = new FastTable<>();	
+			List<NpcSkillEntry> skillsByPriority = new FastTable<>();
 			
 			for (NpcSkillEntry entry : skills) {
 				if (entry.getPriority() == priority) {
@@ -151,7 +151,7 @@ public class NpcSkillList implements SkillList<Npc> {
 			}
 			return skillsByPriority;
 			
-		} else {	
+		} else {
 			return null;
 		}
 	}

@@ -68,82 +68,69 @@ public class _2947FollowingThrough extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204053: { // Kvasir
+				case 204053: // Kvasir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 4) {
 								return sendQuestDialog(env, 1019);
 							}
 							return false;
-						}
-						case SETPRO12: {
+						case SETPRO12:
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 4); // 4
 							} else if (var == 4) {
 								return defaultCloseDialog(env, 4, 4);
 							}
 							return false;
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 0);
 							}
-						}
 					}
 					break;
-				}
-				case 204301: { // Aegir
+				case 204301: // Aegir
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 7) {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 6);
-						}
 					}
 					break;
-				}
-				case 204089: { // Garm
+				case 204089: // Garm
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
 							}
 							return false;
-						}
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 1693);
 							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (var == 4 || var == 6)
 								return defaultCloseDialog(env, var, 5); // 5
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							qs.setQuestVarById(0, 7);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return defaultCloseDialog(env, 7, 7); // 7
-						}
 					}
 					break;
-				}
-				case 700268: { // Statue of Urgasch
+				case 700268: // Statue of Urgasch
 					if (var == 9 && dialog == DialogAction.USE_OBJECT) {
 						return true; // loot
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
@@ -169,7 +156,7 @@ public class _2947FollowingThrough extends QuestHandler {
 				int var2 = qs.getQuestVarById(2);
 				int var3 = qs.getQuestVarById(3);
 				switch (env.getTargetId()) {
-					case 212396: { // Guzzling Kurin
+					case 212396: // Guzzling Kurin
 						if (var2 == 3 && var3 == 3) {
 							qs.setQuestVar(3); // 3
 							updateQuestStatus(env);
@@ -178,8 +165,7 @@ public class _2947FollowingThrough extends QuestHandler {
 						}
 						changeQuestStep(env, var1, var1 + 1, false, 1); // 1: 1 - 3
 						return true;
-					}
-					case 212611: { // Klaw Scouter
+					case 212611: // Klaw Scouter
 						if (var1 == 3 && var3 == 3) {
 							qs.setQuestVar(3); // 3
 							updateQuestStatus(env);
@@ -188,15 +174,13 @@ public class _2947FollowingThrough extends QuestHandler {
 						}
 						changeQuestStep(env, var2, var2 + 1, false, 2); // 2: 1 - 3
 						return true;
-					}
-					case 212408: { // Dark Lake Spirit
+					case 212408: // Dark Lake Spirit
 						if (var1 == 3 && var2 == 3) {
 							qs.setQuestVar(3); // 3
 							updateQuestStatus(env);
 							return true;
 						}
 						changeQuestStep(env, var3, var3 + 1, false, 3); // 3: 1 - 3
-					}
 				}
 			} else if (var == 5) {
 				int var4 = qs.getQuestVarById(4);

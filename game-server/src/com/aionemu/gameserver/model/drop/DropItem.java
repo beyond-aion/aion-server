@@ -2,12 +2,12 @@ package com.aionemu.gameserver.model.drop;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer

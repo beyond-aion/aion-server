@@ -24,7 +24,7 @@ public class BindPointTeleportService {
 	/**
 	 * player id - cooldown
 	 */
-	private static final Map<Integer, Cooldown> cooldowns = new HashMap<Integer, Cooldown>();
+	private static final Map<Integer, Cooldown> cooldowns = new HashMap<>();
 
 	public static void onLogin(Player player) {
 		Cooldown cooldown = getCooldown(player);

@@ -3,8 +3,6 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
@@ -13,6 +11,8 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ArmorType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.PacketWriteHelper;
+
+import javolution.util.FastTable;
 
 /**
  * Entry item info packet data (contains blob entries with detailed info).
@@ -25,7 +25,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 	protected final Player player;
 	protected final Item item;
 
-	private List<ItemBlobEntry> itemBlobEntries = new FastTable<ItemBlobEntry>();
+	private List<ItemBlobEntry> itemBlobEntries = new FastTable<>();
 
 	public ItemInfoBlob(Player player, Item item) {
 		this.player = player;

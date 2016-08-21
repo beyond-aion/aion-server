@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @AIName("tiamat")
 public class TiamatAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isSinkingFlag = new AtomicBoolean(false);
 	private Future<?> skillTask;

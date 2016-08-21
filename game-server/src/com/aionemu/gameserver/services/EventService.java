@@ -31,8 +31,8 @@ public class EventService {
 	private final int CHECK_TIME_PERIOD = 1000 * 60 * 5;
 	private Future<?> checkTask = null;
 	private List<EventTemplate> enabledEvents = new FastTable<>();
-	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<List<EventTemplate>>();
-	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<List<EventTemplate>>();
+	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<>();
+	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<>();
 
 	private static class SingletonHolder {
 
@@ -56,8 +56,8 @@ public class EventService {
 		if (!EventsConfig.ENABLE_EVENT_SERVICE)
 			return;
 
-		List<Integer> activeStartQuests = new FastTable<Integer>();
-		List<Integer> activeMaintainQuests = new FastTable<Integer>();
+		List<Integer> activeStartQuests = new FastTable<>();
+		List<Integer> activeMaintainQuests = new FastTable<>();
 		TIntObjectHashMap<List<EventTemplate>> map1;
 		TIntObjectHashMap<List<EventTemplate>> map2;
 
@@ -68,8 +68,8 @@ public class EventService {
 					activeMaintainQuests.addAll(et.getMaintainableQuests());
 				}
 			}
-			map1 = new TIntObjectHashMap<List<EventTemplate>>(eventsForStartQuest);
-			map2 = new TIntObjectHashMap<List<EventTemplate>>(eventsForMaintainQuest);
+			map1 = new TIntObjectHashMap<>(eventsForStartQuest);
+			map2 = new TIntObjectHashMap<>(eventsForMaintainQuest);
 		}
 
 		startOrMaintainQuests(player, activeStartQuests, map1, true);
@@ -128,7 +128,7 @@ public class EventService {
 	}
 
 	private void checkEvents() {
-		List<EventTemplate> newEnabledEvents = new FastTable<EventTemplate>();
+		List<EventTemplate> newEnabledEvents = new FastTable<>();
 		List<String> availableEventNames = DataManager.EVENT_DATA.getEventNames();
 		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames
 			: FastTable.of(EventsConfig.ENABLED_EVENTS.split("\\s*,\\s*"));

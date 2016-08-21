@@ -59,7 +59,7 @@ public class _11001KindMeira extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798918: {
+				case 798918:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -72,8 +72,7 @@ public class _11001KindMeira extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798946: {
+				case 798946:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -86,8 +85,7 @@ public class _11001KindMeira extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798943: {
+				case 798943:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
@@ -100,8 +98,7 @@ public class _11001KindMeira extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798945: {
+				case 798945:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -115,14 +112,12 @@ public class _11001KindMeira extends QuestHandler {
 						default:
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {
 				switch (env.getDialog()) {
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

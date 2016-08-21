@@ -21,7 +21,7 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 public class GsConnection extends AConnection {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
-	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<GsServerPacket>();
+	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
 	private State state;
 
 	public static enum State {

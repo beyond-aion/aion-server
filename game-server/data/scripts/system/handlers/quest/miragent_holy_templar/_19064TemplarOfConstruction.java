@@ -59,20 +59,18 @@ public class _19064TemplarOfConstruction extends QuestHandler {
 					break;
 				case 203752:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1 && player.getInventory().getItemCountByItemId(182213237) >= 1
 								&& player.getInventory().getItemCountByItemId(186000081) >= 1) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
 							if (player.getInventory().getItemCountByItemId(182213237) >= 1 && player.getInventory().getItemCountByItemId(186000081) >= 1) {
 								removeQuestItem(env, 182213237, 1);
 								removeQuestItem(env, 186000081, 1);
 								return defaultCloseDialog(env, 1, 1, true, false);
 							}
-						}
 					}
 					break;
 			}

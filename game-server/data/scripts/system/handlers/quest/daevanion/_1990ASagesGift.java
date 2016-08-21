@@ -60,7 +60,7 @@ public class _1990ASagesGift extends QuestHandler {
 			int var1 = qs.getQuestVarById(1);
 			if (targetId == 203771) { // Fermina
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						} else if (var == 1) {
@@ -71,11 +71,9 @@ public class _1990ASagesGift extends QuestHandler {
 							return sendQuestDialog(env, 2034);
 						}
 						return false;
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 0, 1, false, 10000, 10001); // 1
-					}
-					case SELECT_ACTION_2035: {
+					case SELECT_ACTION_2035:
 						int currentDp = player.getCommonData().getDp();
 						int maxDp = player.getGameStats().getMaxDp().getCurrent();
 						long burner = player.getInventory().getItemCountByItemId(186000040); // Divine Incense Burner
@@ -87,18 +85,14 @@ public class _1990ASagesGift extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 2120);
 						}
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2); // 2
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						qs.setQuestVar(3); // 3
 						updateQuestStatus(env);
 						return sendQuestSelectionDialog(env);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -117,7 +111,7 @@ public class _1990ASagesGift extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
 				switch (env.getTargetId()) {
-					case 256617: { // Strange Lake Spirit
+					case 256617: // Strange Lake Spirit
 						if (A >= 0 && A < 30) {
 							++A;
 							ALL = C;
@@ -131,9 +125,8 @@ public class _1990ASagesGift extends QuestHandler {
 							updateQuestStatus(env);
 						}
 						break;
-					}
 					case 253721:
-					case 253720: { // Lava Hoverstone
+					case 253720: // Lava Hoverstone
 						if (B >= 0 && B < 30) {
 							++B;
 							ALL = C;
@@ -147,9 +140,8 @@ public class _1990ASagesGift extends QuestHandler {
 							updateQuestStatus(env);
 						}
 						break;
-					}
 					case 254514:
-					case 254513: { // Disturbed Resident
+					case 254513: // Disturbed Resident
 						if (C >= 0 && C < 30) {
 							++C;
 							ALL = C;
@@ -163,7 +155,6 @@ public class _1990ASagesGift extends QuestHandler {
 							updateQuestStatus(env);
 						}
 						break;
-					}
 				}
 				if (qs.getQuestVarById(0) == 2 && A == 30 && B == 30 && C == 30) {
 					qs.setQuestVarById(1, 60);

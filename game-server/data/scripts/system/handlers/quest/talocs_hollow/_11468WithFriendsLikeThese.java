@@ -45,9 +45,8 @@ public class _11468WithFriendsLikeThese extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799503) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

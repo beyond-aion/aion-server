@@ -352,8 +352,8 @@ public class BoundingSphere extends BoundingVolume {
 		center.multLocal(quantity);
 
 		float maxRadiusSqr = 0;
-		for (int i = 0; i < points.length; i++) {
-			Vector3f diff = points[i].subtract(center);
+		for (Vector3f point : points) {
+			Vector3f diff = point.subtract(center);
 			float radiusSqr = diff.lengthSquared();
 			if (radiusSqr > maxRadiusSqr) {
 				maxRadiusSqr = radiusSqr;

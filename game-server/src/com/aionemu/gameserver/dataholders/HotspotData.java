@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.hotspot.HotspotTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author ginho1
@@ -23,7 +23,7 @@ public class HotspotData {
 
 	public int size() {
 		if (hotspotTemplates == null) {
-			hotspotTemplates = new FastTable<HotspotTemplate>();
+			hotspotTemplates = new FastTable<>();
 			return 0;
 		}
 		return hotspotTemplates.size();
@@ -31,7 +31,7 @@ public class HotspotData {
 
 	public List<HotspotTemplate> getHotspotTemplates() {
 		if (hotspotTemplates == null) {
-			return new FastTable<HotspotTemplate>();
+			return new FastTable<>();
 		}
 		return hotspotTemplates;
 	}

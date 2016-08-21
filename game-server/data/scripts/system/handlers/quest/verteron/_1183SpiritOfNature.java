@@ -51,7 +51,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 730013: {
+				case 730013:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							return sendQuestDialog(env, 1352);
@@ -67,8 +67,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 730014: {
+				case 730014:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -85,8 +84,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 						default:
 							return sendQuestEndDialog(env);
 					}
-				}
-				case 730012: {
+				case 730012:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -100,7 +98,6 @@ public class _1183SpiritOfNature extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 730012) {

@@ -39,40 +39,35 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203965: { // Castor
+				case 203965: // Castor
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							return false;
-						}
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
-				}
-				case 203967: { // Axelion
+				case 203967: // Axelion
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							else if (var == 2)
 								return sendQuestDialog(env, 1693);
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 2 && QuestService.collectItemCheck(env, true)) {
 								changeQuestStep(env, 2, 2, true);
 								return sendQuestDialog(env, 10000);
 							} else {
 								return sendQuestDialog(env, 10001);
 							}
-						}
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203965) { // Castor

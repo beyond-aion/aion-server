@@ -2,13 +2,13 @@ package com.aionemu.commons.network.util;
 
 import java.util.Collection;
 
-import javolution.util.FastTable;
-
 import org.testng.annotations.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastTable;
 
 /**
  * This test is for checking print of deadlock report. Should not be executed during unit test phase
@@ -31,7 +31,7 @@ public class DeadlockTest {
 	 * This "smart" logic is for generating long stacktrace
 	 */
 	private void createDeadlock() {
-		final Collection<String> coll = new FastTable<String>();
+		final Collection<String> coll = new FastTable<>();
 		coll.add("1");
 		synchronized (lock1) {
 			Collection<Integer> filtered = Collections2.filter(Collections2.transform(coll, new Function<String, Integer>() {

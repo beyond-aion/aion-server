@@ -52,7 +52,7 @@ public class _1612LepharistSecrets extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 700352: {
+				case 700352:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							switch (qs.getQuestVarById(0)) {
@@ -67,7 +67,6 @@ public class _1612LepharistSecrets extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204530) {

@@ -54,12 +54,12 @@ public class Plane implements Cloneable {
         Negative
     }
 
-    /** 
+    /**
      * Vector normal to the plane.
      */
     protected Vector3f normal;
 
-    /** 
+    /**
      * Constant of the plane. See formula in class definition.
      */
     protected float constant;

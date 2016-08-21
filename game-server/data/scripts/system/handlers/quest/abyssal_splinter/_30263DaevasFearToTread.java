@@ -43,15 +43,13 @@ public class _30263DaevasFearToTread extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 207945) { // Fallen Shugo
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						}
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1, true, false, 0, 0, 182209801, 1); // reward
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

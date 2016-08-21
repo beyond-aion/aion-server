@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -24,7 +24,7 @@ public class RiftSpawn {
 	@XmlAttribute(name = "world")
 	private int world;
 	@XmlElement(name = "spawn")
-	private List<Spawn> spawns = new FastTable<Spawn>();
+	private List<Spawn> spawns = new FastTable<>();
 
 	public int getId() {
 		return id;

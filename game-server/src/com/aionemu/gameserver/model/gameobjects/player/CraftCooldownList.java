@@ -45,7 +45,7 @@ public class CraftCooldownList {
 
 	public void addCraftCooldown(int delayId, int delay) {
 		if (craftCooldowns == null) {
-			craftCooldowns = new FastMap<Integer, Long>();
+			craftCooldowns = new FastMap<>();
 		}
 
 		long nextUseTime = System.currentTimeMillis() + (delay * 1000);

@@ -55,17 +55,15 @@ public class _1938BlackCloudFakery extends QuestHandler {
 					break;
 				case 279008:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1693);
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							qs.setQuestVar(2);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 			}

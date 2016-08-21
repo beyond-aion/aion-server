@@ -2,12 +2,12 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.AtreianPassportService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -15,8 +15,8 @@ import com.aionemu.gameserver.services.AtreianPassportService;
 public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	private int count;
-	private List<Integer> passportId = new FastTable<Integer>();
-	private List<Integer> timestamps = new FastTable<Integer>();
+	private List<Integer> passportId = new FastTable<>();
+	private List<Integer> timestamps = new FastTable<>();
 
 	/**
 	 * @param opcode

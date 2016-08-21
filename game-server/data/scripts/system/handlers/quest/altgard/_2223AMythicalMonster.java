@@ -48,9 +48,9 @@ public class _2223AMythicalMonster extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203620: { // Lamir
+				case 203620: // Lamir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 1) {
@@ -62,47 +62,37 @@ public class _2223AMythicalMonster extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1, 182203217, 1, 0, 0); // 1
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 700134: { // Old Incense Burner
+				case 700134: // Old Incense Burner
 					if (env.getDialog() == DialogAction.USE_OBJECT) {
 						if (player.getInventory().getItemCountByItemId(182203217) == 1) {
 							return useQuestObject(env, 1, 1, false, 0, 0, 0, 182203217, 1, 67, true); // movie + die
 						}
 					}
 					break;
-				}
-				case 203616: { // Gefion
+				case 203616: // Gefion
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203616) { // Gefion
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

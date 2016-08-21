@@ -45,7 +45,7 @@ public class _2443TaisanMessage extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204403: {
+				case 204403:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -64,7 +64,6 @@ public class _2443TaisanMessage extends QuestHandler {
 							return sendQuestDialog(env, 1013);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790016) {

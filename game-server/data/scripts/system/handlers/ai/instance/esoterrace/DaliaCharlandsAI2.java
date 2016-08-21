@@ -3,9 +3,6 @@ package ai.instance.esoterrace;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -15,13 +12,16 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
+
 /**
  * @author xTz
  */
 @AIName("dalia_charlands")
 public class DaliaCharlandsAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 
 	@Override
 	protected void handleSpawned() {

@@ -64,14 +64,14 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 				writeD(failure);
 				writeD(executionSpeed);
 				writeD(delay);
-				writeD(0); 
+				writeD(0);
 				writeNameId(0);
 				break;
 			case 3: //crit = proc
 				writeD(success);
 				writeD(failure);
 				writeD(0);
-				writeD(delay); 
+				writeD(delay);
 				writeD(0);
 				writeNameId(0);
 				break;

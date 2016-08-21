@@ -333,7 +333,7 @@ public enum AionAuthResponse {
 	/**
 	 * Map which will hold all enum values and their ids.
 	 */
-	private final static Map<Integer, AionAuthResponse> map = new HashMap<Integer, AionAuthResponse>();
+	private final static Map<Integer, AionAuthResponse> map = new HashMap<>();
 
 	static {
 		for (AionAuthResponse val : values())

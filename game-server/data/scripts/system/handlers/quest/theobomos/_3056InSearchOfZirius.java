@@ -43,14 +43,12 @@ public class _3056InSearchOfZirius extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 730147) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						QuestService.startQuest(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 						return true;
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -62,7 +60,7 @@ public class _3056InSearchOfZirius extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798213: {
+				case 798213:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -77,7 +75,6 @@ public class _3056InSearchOfZirius extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798213) {

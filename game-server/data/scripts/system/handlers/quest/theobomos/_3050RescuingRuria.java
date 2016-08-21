@@ -47,18 +47,17 @@ public class _3050RescuingRuria extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798211) { // Ruria
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798211: { // Ruria
+				case 798211: // Ruria
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 0) {
 								long itemCount = player.getInventory().getItemCountByItemId(182208035);
 								if (itemCount >= 1) {
@@ -69,32 +68,25 @@ public class _3050RescuingRuria extends QuestHandler {
 								return sendQuestDialog(env, 1013);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1012: {
+						case SELECT_ACTION_1012:
 							removeQuestItem(env, 182208035, 1);
 							changeQuestStep(env, 0, 1, false);
 							return sendQuestDialog(env, 1012);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							playQuestMovie(env, 370);
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 798208, 1, 2); // 1
-						}
 					}
-				}
 					break;
-				case 798208: { // Melleas
+				case 798208: // Melleas
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							return defaultCloseDialog(env, 3, 3, true, false);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798190) { // Rosina

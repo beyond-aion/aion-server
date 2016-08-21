@@ -36,36 +36,28 @@ public class _21052DragonHuntin extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1012: {
+					case SELECT_ACTION_1012:
 						return sendQuestDialog(env, 1012);
-					}
-					case ASK_QUEST_ACCEPT: {
+					case ASK_QUEST_ACCEPT:
 						return sendQuestDialog(env, 4);
-					}
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						return sendQuestStartDialog(env);
-					}
-					case QUEST_REFUSE_1: {
+					case QUEST_REFUSE_1:
 						return sendQuestDialog(env, 1004);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 799268) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_ACTION_2034: {
+					case SELECT_ACTION_2034:
 						return sendQuestDialog(env, 2034);
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, var, var, true, 5, 2716);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 
 				}
 			}

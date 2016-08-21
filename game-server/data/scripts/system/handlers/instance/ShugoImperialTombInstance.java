@@ -36,7 +36,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 	private AtomicInteger stage = new AtomicInteger();
 	private AtomicInteger destroyedTowers = new AtomicInteger();
 	private AtomicBoolean isCancelled = new AtomicBoolean();
-	private List<Npc> npcs = new FastTable<Npc>();
+	private List<Npc> npcs = new FastTable<>();
 	protected boolean isInstanceDestroyed = false;
 	private Future<?> cancelSpawnTask;
 	private Future<?> cancelMessageTask;

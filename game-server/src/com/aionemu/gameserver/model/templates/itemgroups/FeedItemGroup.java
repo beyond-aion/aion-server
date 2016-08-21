@@ -32,7 +32,7 @@ public abstract class FeedItemGroup {
 
 	public List<ItemRaceEntry> getItems() {
 		if (items == null) {
-			items = new FastTable<ItemRaceEntry>();
+			items = new FastTable<>();
 		}
 		return this.items;
 	}

@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -95,7 +95,7 @@ public class Spawn {
 
 	public List<SpawnSpotTemplate> getSpawnSpotTemplates() {
 		if (spawnTemplates == null)
-			spawnTemplates = new FastTable<SpawnSpotTemplate>();
+			spawnTemplates = new FastTable<>();
 		return spawnTemplates;
 	}
 

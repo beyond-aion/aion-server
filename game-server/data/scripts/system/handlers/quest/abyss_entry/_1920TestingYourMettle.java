@@ -38,34 +38,28 @@ public class _1920TestingYourMettle extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203752: { // Jucleas
+				case 203752: // Jucleas
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 203876: { // Rinos
+				case 203876: // Rinos
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							return defaultCloseDialog(env, 1, 1, true, false); // reward
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203752) { // Jucleas

@@ -36,9 +36,8 @@ public class _28809FirstClassorCoach extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 830169) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						giveQuestItem(env, 190100013, 1);
@@ -47,7 +46,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 830408: {
+				case 830408:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -57,8 +56,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 830417: {
+				case 830417:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -68,8 +66,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 830169: {
+				case 830169:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -79,7 +76,6 @@ public class _28809FirstClassorCoach extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830169) {

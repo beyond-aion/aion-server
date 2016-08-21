@@ -55,11 +55,10 @@ public class _11465MysteriousSeed extends QuestHandler {
 				switch (dialog) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						removeQuestItem(env, 182209523, 1);
 						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

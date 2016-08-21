@@ -79,7 +79,7 @@ public class AdminConfig {
 	public static String CUSTOMTAG_ACCESS9;
 	
 	/**
-	 * Special command permissions 
+	 * Special command permissions
 	 */
 	@Property(key = "gameserver.administration.command.quest.advanced_parameters", defaultValue = "3")
 	public static byte CMD_QUEST_ADV_PARAMS;

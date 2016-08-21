@@ -38,11 +38,11 @@ public class LoginConnection extends AConnection {
 	/**
 	 * PacketProcessor for executing packets.
 	 */
-	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<LoginConnection>(1, 8, 50, 3);
+	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3);
 	/**
 	 * Server Packet "to send" Queue
 	 */
-	private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<AionServerPacket>();
+	private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<>();
 
 	/**
 	 * Unique Session Id of this connection

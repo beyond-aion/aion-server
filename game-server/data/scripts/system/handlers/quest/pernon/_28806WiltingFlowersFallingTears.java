@@ -55,9 +55,8 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (butlers.contains(targetId)) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
@@ -65,7 +64,7 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 830530: {
+				case 830530:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -78,8 +77,7 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 						}
 					}
 					break;
-				}
-				case 830211: {
+				case 830211:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -88,7 +86,6 @@ public class _28806WiltingFlowersFallingTears extends QuestHandler {
 							changeQuestStep(env, 1, 1, true);
 							return sendQuestDialog(env, 5);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830211) {

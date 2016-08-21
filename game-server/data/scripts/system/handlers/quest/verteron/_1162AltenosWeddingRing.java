@@ -50,7 +50,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700005: {
+				case 700005:
 					if (qs.getQuestVarById(0) == 0) {
 						switch (env.getDialog()) {
 							case USE_OBJECT: {
@@ -66,8 +66,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 203093: {
+				case 203093:
 					if (qs.getQuestVarById(0) == 1) {
 						switch (env.getDialog()) {
 							case USE_OBJECT:
@@ -79,8 +78,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 203095: {
+				case 203095:
 					if (qs.getQuestVarById(0) == 1) {
 						switch (env.getDialog()) {
 							case USE_OBJECT:
@@ -92,7 +90,6 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 						}
 					}
 					return false;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203093) {

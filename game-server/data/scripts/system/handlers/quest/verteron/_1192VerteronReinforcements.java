@@ -52,7 +52,7 @@ public class _1192VerteronReinforcements extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203701: {
+				case 203701:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -65,8 +65,7 @@ public class _1192VerteronReinforcements extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 203833: {
+				case 203833:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -81,8 +80,7 @@ public class _1192VerteronReinforcements extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
-				case 203098: {
+				case 203098:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -98,7 +96,6 @@ public class _1192VerteronReinforcements extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) {

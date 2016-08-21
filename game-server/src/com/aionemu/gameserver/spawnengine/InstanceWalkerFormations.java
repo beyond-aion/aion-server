@@ -11,16 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.lambdaj.group.Group;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ch.lambdaj.group.Group;
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -49,7 +48,7 @@ public class InstanceWalkerFormations {
 		String walkerId = npcWalker.getWalkTemplate().getRouteId();
 		List<ClusteredNpc> candidateList = groupedSpawnObjects.get(walkerId);
 		if (candidateList == null) {
-			candidateList = new FastTable<ClusteredNpc>();
+			candidateList = new FastTable<>();
 			groupedSpawnObjects.put(walkerId, candidateList);
 		}
 		return candidateList.add(npcWalker);

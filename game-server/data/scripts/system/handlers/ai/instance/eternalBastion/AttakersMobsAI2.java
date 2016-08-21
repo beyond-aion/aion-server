@@ -1,7 +1,5 @@
 package ai.instance.eternalBastion;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -11,6 +9,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller

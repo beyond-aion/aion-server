@@ -40,7 +40,7 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204075: {
+				case 204075:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -49,9 +49,8 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
-				}
 					break;
-				case 204210: {
+				case 204210:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -60,9 +59,8 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
-				}
 					break;
-				case 204211: {
+				case 204211:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -71,9 +69,8 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
 						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
 					}
-				}
 					break;
-				case 204208: {
+				case 204208:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 3)
@@ -82,7 +79,6 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
 						case SET_SUCCEED:
 							return defaultCloseDialog(env, 3, 3, true, false); // reward
 					}
-				}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

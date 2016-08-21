@@ -1,6 +1,5 @@
 package ai;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -8,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Yeats
@@ -45,7 +45,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 						Creature spawner = findCreator(getOwner().getCreatorId());
 						if (spawner != null && !spawner.getLifeStats().isAlreadyDead()) {
 							SkillEngine.getInstance().getSkill(getOwner(), skillList.getNpcSkills().get(0).getSkillId(),  skillList.getNpcSkills().get(0).getSkillLevel(), getOwner()).useSkill();
-						} 
+						}
 					}
 					despawn(despawn_time);
 				}
@@ -78,7 +78,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 	public int modifyDamage(Creature creature, int damage) {
 		if (!canDie)
 			return 0;
-		else 
+		else
 			return damage;
 	}
 	
@@ -86,7 +86,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 	public int modifyDamage(Skill skill, Creature creature, int damage) {
 		if (!canDie)
 			return 0;
-		else 
+		else
 			return damage;
 	}
 	

@@ -130,7 +130,7 @@ public enum ItemSlot {
 	public static ItemSlot[] getSlotsFor(long slotIdMask) {
 		if (slotIdMask == 0)
 			throw new IllegalArgumentException("slotIdMask cannot be 0");
-		List<ItemSlot> slots = new FastTable<ItemSlot>();
+		List<ItemSlot> slots = new FastTable<>();
 		for (ItemSlot itemSlot : values()) {
 			if (!itemSlot.isCombo() && (slotIdMask & itemSlot.slotIdMask) == itemSlot.slotIdMask)
 				slots.add(itemSlot);

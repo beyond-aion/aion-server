@@ -23,7 +23,7 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 	 */
 	@Override
 	public Set<Announcement> getAnnouncements() {
-		final Set<Announcement> result = new HashSet<Announcement>();
+		final Set<Announcement> result = new HashSet<>();
 		DB.select("SELECT * FROM announcements ORDER BY id", new ReadStH() {
 
 			@Override

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.monsterraid;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,6 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.MonsterRaidService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
@@ -218,7 +218,7 @@ public class MonsterRaid {
 	}
 
 	/**
-	 * Need to be stopped by service to remove active raid from list to secure multiple raids 
+	 * Need to be stopped by service to remove active raid from list to secure multiple raids
 	 * for the same location if server is running longer then one day or multiple raids at one day
 	 */
 	private void stopRaid() {

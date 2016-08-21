@@ -432,7 +432,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (owner.getAi2().getState() == AIState.RETURNING)
 			return;
 		if (lastSteps == null)
-			lastSteps = new LastUsedCache<Byte, Point3D>(10);
+			lastSteps = new LastUsedCache<>(10);
 		Point3D currentStep = new Point3D(owner.getX(), owner.getY(), owner.getZ());
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.moveinfo(owner, "store back step: X=" + owner.getX() + " Y=" + owner.getY() + " Z=" + owner.getZ());
@@ -443,7 +443,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	public Point3D recallPreviousStep() {
 		if (lastSteps == null)
-			lastSteps = new LastUsedCache<Byte, Point3D>(10);
+			lastSteps = new LastUsedCache<>(10);
 
 		Point3D result = stepSequenceNr == 0 ? null : lastSteps.get(stepSequenceNr--);
 

@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.items.storage;
 import java.util.List;
 import java.util.Queue;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,6 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+
+import javolution.util.FastTable;
 
 /**
  * Public interface for Storage, later will rename probably

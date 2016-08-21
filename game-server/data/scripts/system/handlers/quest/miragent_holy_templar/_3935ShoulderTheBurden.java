@@ -99,23 +99,20 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 				// 5 - Report the result to Jucleas with the Oath Stone
 				case 203752:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 4, 4, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 2461);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				// No match

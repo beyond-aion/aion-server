@@ -53,54 +53,46 @@ public class _14045RumorsOnWings extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 278506: { // Tellus
+				case 278506: // Tellus
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1013: {
+						case SELECT_ACTION_1013:
 							playQuestMovie(env, 272);
 							break;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 279023: { // Agemonerk
+				case 279023: // Agemonerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 							player.setState(CreatureState.FLIGHT_TELEPORT);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(57001);
 							PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 57001, 0));
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 278643: { // Raithor
+				case 278643: // Raithor
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (var == 2) {
 								QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f, (byte) 86, 5);
 								QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f, (byte) 52, 5);
@@ -114,8 +106,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							if (var == 3) {
 								qs.setQuestVarById(0, 12);
 								qs.setStatus(QuestStatus.REWARD);
@@ -127,9 +118,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 								PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 58001, 0));
 								return sendQuestSelectionDialog(env);
 							}
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279023) { // Agemonerk

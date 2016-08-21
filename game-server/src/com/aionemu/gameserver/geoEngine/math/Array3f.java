@@ -41,11 +41,11 @@ public class Array3f /*implements Reusable */{
   /**
    * Recycles a text builder {@link #newInstance() instance} immediately
    * (on the stack when executing in a {@link javolution.context.StackContext
-   * StackContext}). 
+   * StackContext}).
    */
   @SuppressWarnings("unchecked")
 	public static void recycle(Array3f instance) {
-  	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)  
+  	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
   		//FACTORY.recycle(instance);
   	//else
   		instance = null;

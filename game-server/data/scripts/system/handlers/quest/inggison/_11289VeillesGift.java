@@ -53,12 +53,10 @@ public class _11289VeillesGift extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799038) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

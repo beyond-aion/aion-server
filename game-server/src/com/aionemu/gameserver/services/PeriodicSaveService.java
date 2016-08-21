@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer

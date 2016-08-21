@@ -46,7 +46,7 @@ public class _80275EventEmpiresPast extends QuestHandler {
 		else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 831117: {
+				case 831117:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -61,7 +61,6 @@ public class _80275EventEmpiresPast extends QuestHandler {
 							return sendQuestSelectionDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831117)

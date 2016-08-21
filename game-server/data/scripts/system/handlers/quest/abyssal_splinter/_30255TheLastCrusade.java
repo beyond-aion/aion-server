@@ -47,20 +47,18 @@ public class _30255TheLastCrusade extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 700856) { // Artifact of Protection
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						if (var == 1) {
 							return useQuestObject(env, 1, 1, true, false);
 						}
 						break;
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278501) { // Michalis
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

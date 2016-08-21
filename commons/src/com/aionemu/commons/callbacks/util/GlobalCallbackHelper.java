@@ -20,7 +20,7 @@ public class GlobalCallbackHelper {
 
 	private static final Logger log = LoggerFactory.getLogger(GlobalCallbackHelper.class);
 
-	private static final CopyOnWriteArrayList<Callback> globalCallbacks = new CopyOnWriteArrayList<Callback>();
+	private static final CopyOnWriteArrayList<Callback> globalCallbacks = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Private constructor to prevent initialization

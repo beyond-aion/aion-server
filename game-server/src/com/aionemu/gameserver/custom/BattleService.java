@@ -23,8 +23,8 @@ public class BattleService {
 	public static BattleService instance = new BattleService();
 	private final static Logger log = LoggerFactory.getLogger(BattleService.class);
 	private boolean isPublic = false;
-	private List<Player> invitedPlayers = new LinkedList<Player>();
-	private Map<Player, GameEvent> registeredPlayers = new HashMap<Player, GameEvent>();
+	private List<Player> invitedPlayers = new LinkedList<>();
+	private Map<Player, GameEvent> registeredPlayers = new HashMap<>();
 	private int rewardID = 0;
 
 	public BattleService() {

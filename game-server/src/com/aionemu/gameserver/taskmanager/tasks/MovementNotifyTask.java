@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -20,12 +18,14 @@ import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.world.knownlist.VisitorWithOwner;
 
+import javolution.util.FastTable;
+
 /**
  * @author ATracer
  */
 public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature> {
 
-	private static Map<Integer, int[]> moveBroadcastCounts = new HashMap<Integer, int[]>();
+	private static Map<Integer, int[]> moveBroadcastCounts = new HashMap<>();
 
 	static {
 		Iterator<WorldMapTemplate> iter = DataManager.WORLD_MAPS_DATA.iterator();
@@ -71,7 +71,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 	}
 
 	public String[] dumpBroadcastStats() {
-		List<String> lines = new FastTable<String>();
+		List<String> lines = new FastTable<>();
 		lines.add("------- Movement broadcast counts -------");
 		for (Entry<Integer, int[]> entry : moveBroadcastCounts.entrySet()) {
 			lines.add("WorldId=" + entry.getKey() + ": " + entry.getValue()[0] + " (NpcId " + entry.getValue()[1] + ")");

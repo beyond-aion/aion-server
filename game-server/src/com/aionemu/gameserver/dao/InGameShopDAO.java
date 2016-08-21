@@ -2,10 +2,10 @@ package com.aionemu.gameserver.dao;
 
 import java.util.List;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.ingameshop.IGItem;
+
+import javolution.util.FastMap;
 
 /**
  * @author xTz, KID

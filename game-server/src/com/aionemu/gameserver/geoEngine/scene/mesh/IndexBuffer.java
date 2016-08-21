@@ -36,7 +36,7 @@ import java.nio.Buffer;
 
 /**
  * <code>IndexBuffer</code> is an abstraction for integer index buffers,
- * it is used to retrieve indices without knowing in which format they 
+ * it is used to retrieve indices without knowing in which format they
  * are stored (ushort or uint).
  *
  * @author lex

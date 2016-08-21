@@ -1,7 +1,5 @@
 package ai.instance.beshmundirTemple;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -9,6 +7,8 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Luzien

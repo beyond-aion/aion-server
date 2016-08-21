@@ -23,7 +23,7 @@ public class AssemblyItem {
 
 	public List<Integer> getParts() {
 		if (parts == null) {
-			parts = new FastTable<Integer>();
+			parts = new FastTable<>();
 		}
 		return this.parts;
 	}

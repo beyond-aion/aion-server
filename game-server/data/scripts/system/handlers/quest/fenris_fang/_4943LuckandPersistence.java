@@ -104,23 +104,20 @@ public class _4943LuckandPersistence extends QuestHandler {
 				// 4 - Better purify yourself! Take Glossy Holy Water and visit High Priest Balder
 				case 204075:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
 								return defaultCloseDialog(env, 3, 3, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 2120);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				// No match

@@ -32,7 +32,7 @@ public class CM_ACCOUNT_DISCONNECTED extends GsClientPacket {
 		Account account = this.getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
 
 		/**
-		 * account can be null if a player logged out from gs {@link CM_ACCOUNT_RECONNECT_KEY 
+		 * account can be null if a player logged out from gs {@link CM_ACCOUNT_RECONNECT_KEY
 		 */
 		if (account != null) {
 			AccountTimeController.updateOnLogout(account);

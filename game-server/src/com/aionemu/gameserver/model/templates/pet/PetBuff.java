@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas

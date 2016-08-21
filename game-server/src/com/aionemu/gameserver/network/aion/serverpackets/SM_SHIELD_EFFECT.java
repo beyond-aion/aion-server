@@ -2,12 +2,12 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.SiegeService;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz, Source
@@ -21,7 +21,7 @@ public class SM_SHIELD_EFFECT extends AionServerPacket {
 	}
 
 	public SM_SHIELD_EFFECT(int location) {
-		this.locations = new FastTable<SiegeLocation>();
+		this.locations = new FastTable<>();
 		this.locations.add(SiegeService.getInstance().getSiegeLocation(location));
 	}
 

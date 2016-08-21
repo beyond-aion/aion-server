@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -29,6 +27,8 @@ import com.aionemu.gameserver.model.templates.quest.QuestTarget;
 import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.model.templates.quest.Rewards;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+
+import javolution.util.FastTable;
 
 /**
  * @author MrPoke

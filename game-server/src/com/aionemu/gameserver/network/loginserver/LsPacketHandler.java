@@ -20,7 +20,7 @@ public class LsPacketHandler {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(LsPacketHandler.class);
 
-	private static Map<State, Map<Integer, LsClientPacket>> packetPrototypes = new HashMap<State, Map<Integer, LsClientPacket>>();
+	private static Map<State, Map<Integer, LsClientPacket>> packetPrototypes = new HashMap<>();
 
 	/**
 	 * Reads one packet from given ByteBuffer
@@ -40,7 +40,7 @@ public class LsPacketHandler {
 		for (State state : states) {
 			Map<Integer, LsClientPacket> pm = packetPrototypes.get(state);
 			if (pm == null) {
-				pm = new HashMap<Integer, LsClientPacket>();
+				pm = new HashMap<>();
 				packetPrototypes.put(state, pm);
 			}
 			pm.put(packetPrototype.getOpcode(), packetPrototype);

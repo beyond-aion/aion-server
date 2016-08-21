@@ -49,57 +49,47 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204329: { // Tofa
+				case 204329: // Tofa
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							return defaultCloseDialog(env, 7, 7, true, false); // reward
-						}
 					}
 					break;
-				}
-				case 204335: { // Aprily
+				case 204335: // Aprily
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 802047: { // Landver
+				case 802047: // Landver
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							player.getTitleList().addTitle(58, true, 0);
 							return defaultCloseDialog(env, 5, 6); // 6
-						}
 					}
 					break;
-				}
-				case 204332: { // Jorund
+				case 204332: // Jorund
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 3) {
@@ -109,16 +99,13 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 									return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (var == 2) {
 								return defaultCloseDialog(env, 2, 3, 182215364, 1, 0, 0); // 3
 							}
-						}
 					}
 					break;
-				}
-				case 700246: { // Dead Fire
+				case 700246: // Dead Fire
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var == 3) {
 							if (player.getInventory().getItemCountByItemId(182215365) > 0) {
@@ -130,7 +117,6 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
@@ -160,12 +146,10 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int targetId = env.getTargetId();
 			switch (targetId) {
-				case 204417: {
+				case 204417:
 					return defaultOnKillEvent(env, 204417, 4, 5); // 5
-				}
-				case 212877: {
+				case 212877:
 					return defaultOnKillEvent(env, 212877, 6, 7); // 7
-				}
 			}
 		}
 		return false;

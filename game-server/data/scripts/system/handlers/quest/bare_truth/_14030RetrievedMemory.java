@@ -54,43 +54,36 @@ public class _14030RetrievedMemory extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203700: { // Fasimedes
+				case 203700: // Fasimedes
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							break;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 790001: { // Pernos
+				case 790001: // Pernos
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							break;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							TeleportService2.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							if (!giveQuestItem(env, 182215387, 1))
 								return false;
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
 					break;
-				}
-				case 700551: { // Fissure of Destiny
+				case 700551: // Fissure of Destiny
 					if (dialog == DialogAction.USE_OBJECT && var == 4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
@@ -98,16 +91,14 @@ public class _14030RetrievedMemory extends QuestHandler {
 						return true;
 					}
 					break;
-				}
-				case 205119: { // Hermione
+				case 205119: // Hermione
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							break;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							if (var == 4) {
 								player.setState(CreatureState.FLIGHT_TELEPORT);
 								player.unsetState(CreatureState.ACTIVE);
@@ -117,11 +108,9 @@ public class _14030RetrievedMemory extends QuestHandler {
 								return true;
 							}
 							break;
-						}
 					}
 					break;
-				}
-				case 700552: { // Artifact of Memory
+				case 700552: // Artifact of Memory
 					if (dialog == DialogAction.USE_OBJECT && var == 56) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -129,17 +118,14 @@ public class _14030RetrievedMemory extends QuestHandler {
 						return useQuestObject(env, 56, 56, false, 0, 0, 0, 182215387, 1, 0, false); // 56
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) { // Fasimedes
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3739);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

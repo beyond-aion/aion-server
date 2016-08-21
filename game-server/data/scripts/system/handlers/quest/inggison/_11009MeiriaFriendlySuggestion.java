@@ -57,7 +57,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799008: {
+				case 799008:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -71,8 +71,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 799017: {
+				case 799017:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -87,8 +86,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798941: {
+				case 798941:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
@@ -102,7 +100,6 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {

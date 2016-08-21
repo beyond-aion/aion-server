@@ -28,7 +28,7 @@ public class AhserionBalaurTroopersAI2 extends NpcAI2 {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 				@Override
 				public void run() {
-					if (AhserionRaid.getInstance().isStarted() 
+					if (AhserionRaid.getInstance().isStarted()
 						&& AhserionRaid.getInstance().isTeamNotEliminated(((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam())) {
 							AhserionRaid.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam());
 						}

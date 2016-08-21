@@ -1,13 +1,13 @@
 package ai.instance.rakes;
 
-import ai.ShifterAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.ShifterAI2;
 
 /**
  * @author xTz

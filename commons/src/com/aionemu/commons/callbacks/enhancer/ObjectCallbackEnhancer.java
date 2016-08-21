@@ -6,15 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.LoaderClassPath;
-import javassist.Modifier;
-import javassist.NotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +15,15 @@ import com.aionemu.commons.callbacks.EnhancedObject;
 import com.aionemu.commons.callbacks.metadata.ObjectCallback;
 import com.aionemu.commons.callbacks.util.CallbacksUtil;
 import com.aionemu.commons.callbacks.util.ObjectCallbackHelper;
+
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtField;
+import javassist.CtMethod;
+import javassist.LoaderClassPath;
+import javassist.Modifier;
+import javassist.NotFoundException;
 
 public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
 
@@ -56,7 +56,7 @@ public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
 		cp.appendClassPath(new LoaderClassPath(loader));
 		CtClass clazz = cp.makeClass(new ByteArrayInputStream(clazzBytes));
 
-		Set<CtMethod> methdosToEnhance = new HashSet<CtMethod>();
+		Set<CtMethod> methdosToEnhance = new HashSet<>();
 
 		for (CtMethod method : clazz.getDeclaredMethods()) {
 			if (!isEnhanceable(method)) {

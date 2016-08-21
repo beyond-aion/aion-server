@@ -264,7 +264,7 @@ final public class FastMath {
      * within the safe area on the x86 processor (-45 degrees to +45 degrees)
      * The results may be very slightly off from what the Math and StrictMath
      * trig functions give due to rounding in the angle reduction but it will be
-     * very very close. 
+     * very very close.
      * 
      * note: code from wiki posting on java.net by jeffpk
      */
@@ -281,7 +281,7 @@ final public class FastMath {
     }
 
     /**
-     * Returns sine of a value. 
+     * Returns sine of a value.
      * 
      * note: code from wiki posting on java.net by jeffpk
      * 
@@ -382,7 +382,7 @@ final public class FastMath {
     }
 
     /**
-     * Returns the logarithm of value with given base, calculated as log(value)/log(base), 
+     * Returns the logarithm of value with given base, calculated as log(value)/log(base),
      * so that pow(base, return)==value (contributed by vear)
      * @param value The value to log.
      * @param base Base of logarithm.

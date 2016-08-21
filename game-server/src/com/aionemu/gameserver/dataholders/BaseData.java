@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.SiegeBaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
+import javolution.util.FastMap;
+
 /**
  * @author Source
- * @modified Estrayl	
+ * @modified Estrayl
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "base_locations")

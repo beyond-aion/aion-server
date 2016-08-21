@@ -58,11 +58,10 @@ public class _3329DinnersonMe extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203956) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 2375);
-					}
 					case SELECT_QUEST_REWARD:
 						return sendQuestEndDialog(env);
 				}

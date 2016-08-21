@@ -54,15 +54,13 @@ public class GameConnectionFactoryImpl implements ConnectionFactory {
 			String host = socket.socket().getInetAddress().getHostAddress();
 			final Result isFlooding = floodAcceptor.isFlooding(host, true);
 			switch (isFlooding) {
-				case REJECTED: {
+				case REJECTED:
 					log.warn("Rejected connection from " + host);
 					socket.close();
 					return null;
-				}
-				case WARNED: {
+				case WARNED:
 					log.warn("Connection over warn limit from " + host);
 					break;
-				}
 			}
 		}
 

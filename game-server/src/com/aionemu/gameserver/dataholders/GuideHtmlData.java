@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,11 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -25,7 +24,7 @@ public class GuideHtmlData {
 
 	@XmlElement(name = "guide", type = GuideTemplate.class)
 	private List<GuideTemplate> guideTemplates;
-	private final TIntObjectHashMap<List<GuideTemplate>> templates = new TIntObjectHashMap<List<GuideTemplate>>();
+	private final TIntObjectHashMap<List<GuideTemplate>> templates = new TIntObjectHashMap<>();
 	private final int CLASS_ALL = 255;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
@@ -44,7 +43,7 @@ public class GuideHtmlData {
 		int hash = makeHash(classId, race.ordinal(), template.getLevel());
 		List<GuideTemplate> value = templates.get(hash);
 		if (value == null) {
-			value = new FastTable<GuideTemplate>();
+			value = new FastTable<>();
 			templates.put(hash, value);
 		}
 		value.add(template);
@@ -70,7 +69,7 @@ public class GuideHtmlData {
 	}
 
 	public GuideTemplate[] getTemplatesFor(PlayerClass playerClass, Race race, int level) {
-		List<GuideTemplate> guideTemplate = new FastTable<GuideTemplate>();
+		List<GuideTemplate> guideTemplate = new FastTable<>();
 
 		List<GuideTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<GuideTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));

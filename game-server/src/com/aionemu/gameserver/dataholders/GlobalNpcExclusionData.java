@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalExclusion;
+
+import javolution.util.FastTable;
 
 /**
  * @author bobobear
@@ -23,7 +23,7 @@ public class GlobalNpcExclusionData {
 	protected List<GlobalExclusion> list;
 
 	// @XmlTransient
-	private final List<GlobalExclusion> globalExclusionsData = new FastTable<GlobalExclusion>();
+	private final List<GlobalExclusion> globalExclusionsData = new FastTable<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (GlobalExclusion template : list) {

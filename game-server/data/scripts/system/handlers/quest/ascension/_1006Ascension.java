@@ -79,7 +79,7 @@ public class _1006Ascension extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 790001: { // Pernos
+				case 790001: // Pernos
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -132,8 +132,7 @@ public class _1006Ascension extends QuestHandler {
 							return var == 5 && setPlayerClass(env, qs, PlayerClass.RIDER);
 					}
 					break;
-				}
-				case 730008: { // Daminu
+				case 730008: // Daminu
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2 && player.getInventory().getItemCountByItemId(182200008) >= 1)
@@ -153,8 +152,7 @@ public class _1006Ascension extends QuestHandler {
 							}
 					}
 					break;
-				}
-				case 205000: { // Belpartan
+				case 205000: // Belpartan
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (qs.getQuestVars().getQuestVars() == 99) {
@@ -185,7 +183,6 @@ public class _1006Ascension extends QuestHandler {
 								return true;
 							}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790001) { // Pernos

@@ -93,14 +93,12 @@ public class KillInZone extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
-					}
 					case QUEST_REFUSE:
 					case QUEST_REFUSE_1:
-					case QUEST_REFUSE_SIMPLE: {
+					case QUEST_REFUSE_SIMPLE:
 						return closeDialogWindow(env);
-					}
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:

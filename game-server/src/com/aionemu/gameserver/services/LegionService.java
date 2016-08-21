@@ -366,7 +366,7 @@ public class LegionService {
 
 	public List<Integer> getMembersByRank(int legionId, LegionRank rank) {
 		Legion legion = LegionService.getInstance().getLegion(legionId);
-		List<Integer> members = new FastTable<Integer>();
+		List<Integer> members = new FastTable<>();
 		for (int memberObjId : legion.getLegionMembers()) {
 			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
 			if (legionMember.getRank() == rank)
@@ -920,7 +920,7 @@ public class LegionService {
 	 * @param legion
 	 */
 	public List<LegionMemberEx> loadLegionMemberExList(Legion legion, Integer objExcluded) {
-		List<LegionMemberEx> legionMembers = new FastTable<LegionMemberEx>();
+		List<LegionMemberEx> legionMembers = new FastTable<>();
 		for (Integer memberObjId : legion.getLegionMembers()) {
 			LegionMemberEx legionMemberEx;
 			if (objExcluded != null && objExcluded.equals(memberObjId)) {

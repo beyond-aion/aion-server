@@ -71,11 +71,10 @@ public class _30237NewPolearm extends QuestHandler {
 			switch (targetId) {
 				case 286904:
 				case 281419:
-				case 215795: {
+				case 215795:
 					if (QuestService.collectItemCheck(env, true)) {
 						return giveQuestItem(env, 182209635, 1);
 					}
-				}
 			}
 		}
 		return false;

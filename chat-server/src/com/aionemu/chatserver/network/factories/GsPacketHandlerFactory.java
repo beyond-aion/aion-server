@@ -36,7 +36,7 @@ public class GsPacketHandlerFactory {
 		int id = data.get() & 0xff;
 
 		switch (state) {
-			case CONNECTED: {
+			case CONNECTED:
 				switch (id) {
 					case 0x00:
 						msg = new CM_CS_AUTH(data, client);
@@ -45,8 +45,7 @@ public class GsPacketHandlerFactory {
 						unknownPacket(state, id);
 				}
 				break;
-			}
-			case AUTHED: {
+			case AUTHED:
 				switch (id) {
 					case 0x01:
 						msg = new CM_PLAYER_AUTH(data, client);
@@ -61,7 +60,6 @@ public class GsPacketHandlerFactory {
 						unknownPacket(state, id);
 				}
 				break;
-			}
 		}
 
 		if (msg != null) {

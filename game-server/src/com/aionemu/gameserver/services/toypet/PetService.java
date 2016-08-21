@@ -221,9 +221,9 @@ public class PetService {
 		totalDopes += player.getInventory().getItemCountByItemId(itemId);
 
 		int[] scrollBag = pet.getCommonData().getDopingBag().getScrollsUsed();
-		for (int i = 0; i < scrollBag.length; i++) {
-			if (scrollBag[i] != 0)
-				totalDopes += player.getInventory().getItemCountByItemId(scrollBag[i]);
+		for (int element : scrollBag) {
+			if (element != 0)
+				totalDopes += player.getInventory().getItemCountByItemId(element);
 		}
 
 		if (totalDopes == 0) {

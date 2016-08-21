@@ -37,7 +37,7 @@ public class Actions {
 	 */
 	public List<Action> getActions() {
 		if (actions == null) {
-			actions = new FastTable<Action>();
+			actions = new FastTable<>();
 		}
 		return this.actions;
 	}

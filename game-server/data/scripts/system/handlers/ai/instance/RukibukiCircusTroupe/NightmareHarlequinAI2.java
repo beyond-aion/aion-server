@@ -1,7 +1,5 @@
 package ai.instance.RukibukiCircusTroupe;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
@@ -11,6 +9,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Ritsu
@@ -22,10 +22,9 @@ public class NightmareHarlequinAI2 extends GeneralNpcAI2 {
 	protected void handleDialogStart(Player player) {
 		switch (getNpcId()) {
 			case 831599:
-			case 831600: {
+			case 831600:
 				super.handleDialogStart(player);
 				break;
-			}
 			default: {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 				break;

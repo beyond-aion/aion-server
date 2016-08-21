@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source

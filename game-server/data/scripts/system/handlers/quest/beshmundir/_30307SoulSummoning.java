@@ -45,7 +45,7 @@ public class _30307SoulSummoning extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799322: {
+				case 799322:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182209709);
@@ -58,7 +58,6 @@ public class _30307SoulSummoning extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799322) {

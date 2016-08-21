@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -15,6 +13,8 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Bobobear

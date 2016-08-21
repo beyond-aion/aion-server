@@ -40,28 +40,24 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204108) { // Lanse
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
-					}
 				}
 			} else if (targetId == 204058) { // Sif
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 1, 1, true); // reward
 						return sendQuestEndDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

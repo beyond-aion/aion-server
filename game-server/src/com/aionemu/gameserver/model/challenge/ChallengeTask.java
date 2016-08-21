@@ -44,7 +44,7 @@ public class ChallengeTask {
 	public ChallengeTask(int ownerId, ChallengeTaskTemplate template) {
 		this.taskId = template.getId();
 		this.ownerId = ownerId;
-		Map<Integer, ChallengeQuest> quests = new HashMap<Integer, ChallengeQuest>();
+		Map<Integer, ChallengeQuest> quests = new HashMap<>();
 		for (ChallengeQuestTemplate qt : template.getQuests()) {
 			ChallengeQuest quest = new ChallengeQuest(qt, 0);
 			quest.setPersistentState(PersistentState.NEW);

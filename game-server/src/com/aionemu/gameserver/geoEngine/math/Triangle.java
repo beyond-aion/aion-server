@@ -55,7 +55,7 @@ public class Triangle extends AbstractTriangle /* implements Reusable*/ {
     
     private int index;
     
-    public Triangle() {} 
+    public Triangle() {}
 
     /**
      * Constructor instantiates a new <Code>Triangle</code> object with the
@@ -149,7 +149,7 @@ public class Triangle extends AbstractTriangle /* implements Reusable*/ {
     }
     
     /**
-     * calculateCenter finds the average point of the triangle. 
+     * calculateCenter finds the average point of the triangle.
      *
      */
     public void calculateCenter() {
@@ -160,7 +160,7 @@ public class Triangle extends AbstractTriangle /* implements Reusable*/ {
     }
     
     /**
-     * calculateCenter finds the average point of the triangle. 
+     * calculateCenter finds the average point of the triangle.
      *
      */
     public void calculateNormal() {

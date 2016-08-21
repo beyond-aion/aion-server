@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.vortex;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,14 +15,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import javolution.util.FastMap;
+
 /**
  * @author Source
  */
 public class Invasion extends DimensionalVortex<VortexLocation> {
 
 	PlayerAlliance invAlliance, defAlliance;
-	protected FastMap<Integer, Player> invaders = new FastMap<Integer, Player>();
-	protected FastMap<Integer, Player> defenders = new FastMap<Integer, Player>();
+	protected FastMap<Integer, Player> invaders = new FastMap<>();
+	protected FastMap<Integer, Player> defenders = new FastMap<>();
 
 	public Invasion(VortexLocation vortex) {
 		super(vortex);

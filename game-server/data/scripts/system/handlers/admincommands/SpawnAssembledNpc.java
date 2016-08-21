@@ -2,8 +2,6 @@ package admincommands;
 
 import java.util.Iterator;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpc;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpcPart;
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -43,7 +43,7 @@ public class SpawnAssembledNpc extends AdminCommand {
 			PacketSendUtility.sendMessage(player, "This spawnId is wrong.");
 			return;
 		}
-		FastTable<AssembledNpcPart> assembledParts = new FastTable<AssembledNpcPart>();
+		FastTable<AssembledNpcPart> assembledParts = new FastTable<>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
 			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}

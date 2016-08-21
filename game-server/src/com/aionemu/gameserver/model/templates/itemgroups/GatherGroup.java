@@ -55,7 +55,7 @@ public class GatherGroup extends BonusItemGroup {
 	 */
 	public List<ItemRaceEntry> getItems() {
 		if (items == null) {
-			items = new FastTable<ItemRaceEntry>();
+			items = new FastTable<>();
 		}
 		return this.items;
 	}

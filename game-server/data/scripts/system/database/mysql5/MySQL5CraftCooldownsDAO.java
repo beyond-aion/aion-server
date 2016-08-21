@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +13,8 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.CraftCooldownsDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastMap;
 
 /**
  * @author synchro2
@@ -29,7 +29,7 @@ public class MySQL5CraftCooldownsDAO extends CraftCooldownsDAO {
 
 	@Override
 	public void loadCraftCooldowns(final Player player) {
-		FastMap<Integer, Long> craftCoolDowns = new FastMap<Integer, Long>();
+		FastMap<Integer, Long> craftCoolDowns = new FastMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, player.getObjectId());

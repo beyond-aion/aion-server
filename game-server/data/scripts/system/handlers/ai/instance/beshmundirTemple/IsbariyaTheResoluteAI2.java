@@ -30,7 +30,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
 	private int stage = 0;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
-	private List<Point3D> soulLocations = new FastTable<Point3D>();
+	private List<Point3D> soulLocations = new FastTable<>();
 	private Future<?> basicSkillTask;
 	private Future<?> shedule;
 
@@ -154,7 +154,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void spawnSouls() {
-		List<Point3D> points = new FastTable<Point3D>();
+		List<Point3D> points = new FastTable<>();
 		points.addAll(soulLocations);
 		int count = Rnd.get(3, 6);
 		for (int i = 0; i < count; i++) {
@@ -166,7 +166,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new FastTable<Player>();
+		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);

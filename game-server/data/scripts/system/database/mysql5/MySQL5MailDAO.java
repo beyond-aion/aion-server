@@ -120,7 +120,7 @@ public class MySQL5MailDAO extends MailDAO {
 	}
 
 	private List<Item> loadMailboxItems(final int playerId) {
-		final List<Item> mailboxItems = new FastTable<Item>();
+		final List<Item> mailboxItems = new FastTable<>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
 

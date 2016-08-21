@@ -34,7 +34,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class CollisionMaterialActor extends AbstractCollisionObserver implements IActor {
 
 	private MaterialTemplate actionTemplate;
-	private AtomicReference<MaterialSkill> currentSkill = new AtomicReference<MaterialSkill>();
+	private AtomicReference<MaterialSkill> currentSkill = new AtomicReference<>();
 	private AtomicBoolean isCanceled = new AtomicBoolean();
 
 	public CollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate actionTemplate) {

@@ -71,13 +71,12 @@ public class _14051RootOfTheProblem extends QuestHandler {
 			}
 		} else if (targetId == 204549) { // Aphesius
 			switch (env.getDialog()) {
-				case QUEST_SELECT: {
+				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					else if (var == 2)
 						return sendQuestDialog(env, 1693);
 					return false;
-				}
 				case SELECT_ACTION_1353:
 					return sendQuestDialog(env, 1353);
 				case SELECT_ACTION_1354:
@@ -94,11 +93,10 @@ public class _14051RootOfTheProblem extends QuestHandler {
 			}
 		} else if (targetId == 730026) {// Mersephon
 			switch (env.getDialog()) {
-				case QUEST_SELECT: {
+				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
 					return false;
-				}
 				case SELECT_ACTION_2035:
 					return sendQuestDialog(env, 2035);
 				case SETPRO4:

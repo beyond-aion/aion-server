@@ -71,11 +71,10 @@ public class _30347ImprovedPistol extends QuestHandler {
 			switch (targetId) {
 				case 286904:
 				case 281419:
-				case 215795: {
+				case 215795:
 					if (QuestService.collectItemCheck(env, true)) {
 						return giveQuestItem(env, 182213288, 1);
 					}
-				}
 			}
 		}
 		return false;

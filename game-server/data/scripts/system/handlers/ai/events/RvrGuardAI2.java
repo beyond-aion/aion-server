@@ -2,13 +2,13 @@ package ai.events;
 
 import org.joda.time.DateTime;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SiegeService;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Bobobear

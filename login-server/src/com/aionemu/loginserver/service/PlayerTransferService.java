@@ -3,9 +3,6 @@ package com.aionemu.loginserver.service;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +19,9 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferResultStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author KID

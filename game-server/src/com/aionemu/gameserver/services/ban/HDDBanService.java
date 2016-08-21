@@ -15,7 +15,7 @@ public class HDDBanService {
 	/**
 	 * HDD serial - ban time
 	 */
-	private Map<String, Timestamp> bannedSerials = new HashMap<String, Timestamp>();
+	private Map<String, Timestamp> bannedSerials = new HashMap<>();
 
 	public static HDDBanService getInstance() {
 		return SingletonHolder.instance;

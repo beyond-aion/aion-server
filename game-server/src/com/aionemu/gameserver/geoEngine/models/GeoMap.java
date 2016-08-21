@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +21,8 @@ import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 
+import javolution.util.FastMap;
+
 /**
  * @author Mr. Poke
  */
@@ -31,8 +31,8 @@ public class GeoMap extends Node {
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
 
 	private short[] terrainData;
-	private List<BoundingBox> tmpBox = new ArrayList<BoundingBox>();
-	private Map<String, DoorGeometry> doors = new FastMap<String, DoorGeometry>();
+	private List<BoundingBox> tmpBox = new ArrayList<>();
+	private Map<String, DoorGeometry> doors = new FastMap<>();
 
 	/**
 	 * 

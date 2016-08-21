@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.road.RoadTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author SheppeR
@@ -24,7 +24,7 @@ public class RoadData {
 
 	public int size() {
 		if (roadTemplates == null) {
-			roadTemplates = new FastTable<RoadTemplate>();
+			roadTemplates = new FastTable<>();
 			return 0;
 		}
 		return roadTemplates.size();
@@ -32,14 +32,14 @@ public class RoadData {
 
 	public List<RoadTemplate> getRoadTemplates() {
 		if (roadTemplates == null) {
-			return new FastTable<RoadTemplate>();
+			return new FastTable<>();
 		}
 		return roadTemplates;
 	}
 
 	public void addAll(Collection<RoadTemplate> templates) {
 		if (roadTemplates == null) {
-			roadTemplates = new FastTable<RoadTemplate>();
+			roadTemplates = new FastTable<>();
 		}
 		roadTemplates.addAll(templates);
 	}

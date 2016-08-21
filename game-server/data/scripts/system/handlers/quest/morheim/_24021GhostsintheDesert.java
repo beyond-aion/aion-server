@@ -54,20 +54,17 @@ public class _24021GhostsintheDesert extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204302: { // Bragi
+				case 204302: // Bragi
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 204329: { // Tofa
+				case 204329: // Tofa
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							switch (var) {
 								case 1: {
 									return sendQuestDialog(env, 1352);
@@ -80,23 +77,19 @@ public class _24021GhostsintheDesert extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:
 							if (var == 1) {
 								playQuestMovie(env, 73);
 								return sendQuestDialog(env, 1353);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					return false;
-				}
-				case 802046: { // Tofynir
+				case 802046: // Tofynir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
@@ -104,22 +97,17 @@ public class _24021GhostsintheDesert extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 2, 3, false, 10000, 10001); // 3
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 3, 4, 182215363, 1, 0, 0); // 4
 							} else {
 								return sendQuestSelectionDialog(env);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204329) { // Tofa

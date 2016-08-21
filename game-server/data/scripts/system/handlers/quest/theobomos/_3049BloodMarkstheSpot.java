@@ -60,9 +60,8 @@ public class _3049BloodMarkstheSpot extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798211) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

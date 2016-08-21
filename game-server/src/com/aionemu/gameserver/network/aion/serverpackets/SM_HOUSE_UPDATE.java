@@ -49,8 +49,8 @@ public class SM_HOUSE_UPDATE extends AionServerPacket {
 		writeC(house.getNoticeState().getPacketValue());
 
 		byte[] signNotice = house.getSignNotice();
-		for (int i = 0; i < signNotice.length; i++)
-			writeC(signNotice[i]);
+		for (byte element : signNotice)
+			writeC(element);
 		for (int i = signNotice.length; i < House.NOTICE_LENGTH; i++)
 			writeC(0);
 

@@ -1,10 +1,10 @@
 package ai.quests;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.handler.TalkEventHandler;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @Author Majka

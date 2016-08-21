@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,13 +21,15 @@ import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 
+import javolution.util.FastTable;
+
 public class MySQL5BrokerDAO extends BrokerDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5BrokerDAO.class);
 
 	@Override
 	public List<BrokerItem> loadBroker() {
-		final List<BrokerItem> brokerItems = new FastTable<BrokerItem>();
+		final List<BrokerItem> brokerItems = new FastTable<>();
 
 		final List<Item> items = getBrokerItems();
 
@@ -74,7 +74,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 	}
 
 	private List<Item> getBrokerItems() {
-		final List<Item> brokerItems = new FastTable<Item>();
+		final List<Item> brokerItems = new FastTable<>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_location` = 126", new ReadStH() {
 

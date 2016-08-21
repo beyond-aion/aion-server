@@ -35,8 +35,8 @@ public class ShieldService {
 		protected static final ShieldService instance = new ShieldService();
 	}
 
-	private final FastMap<Integer, Shield> sphereShields = new FastMap<Integer, Shield>();
-	private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<Integer, List<SiegeShield>>();
+	private final FastMap<Integer, Shield> sphereShields = new FastMap<>();
+	private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<>();
 
 	public static final ShieldService getInstance() {
 		return SingletonHolder.instance;
@@ -85,7 +85,7 @@ public class ShieldService {
 	public void registerShield(int worldId, SiegeShield shield) {
 		List<SiegeShield> mapShields = registeredShields.get(worldId);
 		if (mapShields == null) {
-			mapShields = new FastTable<SiegeShield>();
+			mapShields = new FastTable<>();
 			registeredShields.put(worldId, mapShields);
 		}
 		mapShields.add(shield);
@@ -103,7 +103,7 @@ public class ShieldService {
 			return;
 
 		ZoneInstance zone = location.getZone().get(0);
-		List<SiegeShield> shields = new FastTable<SiegeShield>();
+		List<SiegeShield> shields = new FastTable<>();
 
 		for (int index = mapShields.size() - 1; index >= 0; index--) {
 			SiegeShield shield = mapShields.get(index);

@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +22,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastTable;
+
 /**
  * @author Ben
  */
@@ -37,7 +37,7 @@ public class MySQL5FriendListDAO extends FriendListDAO {
 
 	@Override
 	public FriendList load(final Player player) {
-		final List<Friend> friends = new FastTable<Friend>();
+		final List<Friend> friends = new FastTable<>();
 		Connection con = null;
 		try {
 			con = DatabaseFactory.getConnection();

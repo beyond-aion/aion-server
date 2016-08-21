@@ -1,10 +1,10 @@
 package ai.instance.darkPoeta;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Ritsu

@@ -46,7 +46,7 @@ public class _1977ExpertExpertofHandicrafting extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203792: {
+				case 203792:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182206896);
@@ -59,7 +59,6 @@ public class _1977ExpertExpertofHandicrafting extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203792) {

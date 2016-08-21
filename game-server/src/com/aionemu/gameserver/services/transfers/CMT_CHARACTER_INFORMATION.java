@@ -3,8 +3,6 @@ package com.aionemu.gameserver.services.transfers;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -50,6 +48,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import javolution.util.FastTable;
 
 /**
  * @author KID

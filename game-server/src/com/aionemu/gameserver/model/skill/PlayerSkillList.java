@@ -3,15 +3,15 @@ package com.aionemu.gameserver.model.skill;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author IceReaper, orfeo087, Avol, AEJTester

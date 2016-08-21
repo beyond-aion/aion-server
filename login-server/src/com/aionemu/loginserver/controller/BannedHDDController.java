@@ -3,10 +3,10 @@ package com.aionemu.loginserver.controller;
 import java.sql.Timestamp;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.BannedHddDAO;
+
+import javolution.util.FastMap;
 
 /**
  * @author ViAl
@@ -16,7 +16,7 @@ public class BannedHDDController {
 	private static BannedHDDController instance = new BannedHDDController();
 	private BannedHddDAO dao = DAOManager.getDAO(BannedHddDAO.class);
 
-	private Map<String, Timestamp> bannedList = new FastMap<String, Timestamp>();
+	private Map<String, Timestamp> bannedList = new FastMap<>();
 
 	public static BannedHDDController getInstance() {
 		return instance;

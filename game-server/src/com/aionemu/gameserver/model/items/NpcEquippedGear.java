@@ -48,7 +48,7 @@ public class NpcEquippedGear implements Iterable<Entry<ItemSlot, ItemTemplate>> 
 	public void init() {
 		synchronized (this) {
 			if (items == null) {
-				items = new TreeMap<ItemSlot, ItemTemplate>();
+				items = new TreeMap<>();
 				for (ItemTemplate item : v.items) {
 					ItemSlot[] itemSlots = ItemSlot.getSlotsFor(item.getItemSlot());
 					for (ItemSlot itemSlot : itemSlots) {

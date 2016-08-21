@@ -49,16 +49,14 @@ public class _4920MakingTheActivatedSurkana extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 730212: { // Balaur Material Converter
+				case 730212: // Balaur Material Converter
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if ((var == 0) && player.getInventory().getItemCountByItemId(182207100) > 0) {
 								return useQuestObject(env, 0, 1, true, 0, 182207101, 1, 182207100, 1, 0, false);
 							}
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798358) { // Chopirunerk

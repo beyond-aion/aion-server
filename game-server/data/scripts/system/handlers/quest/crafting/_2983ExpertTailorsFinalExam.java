@@ -46,7 +46,7 @@ public class _2983ExpertTailorsFinalExam extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204110: {
+				case 204110:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207948);
@@ -59,7 +59,6 @@ public class _2983ExpertTailorsFinalExam extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204110) {

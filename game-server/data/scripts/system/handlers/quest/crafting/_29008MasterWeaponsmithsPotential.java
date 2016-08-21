@@ -75,7 +75,7 @@ public class _29008MasterWeaponsmithsPotential extends QuestHandler {
 					return false;
 				case 204104:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207898);
 							if (itemCount1 > 0) {
 								removeQuestItem(env, 182207898, 1);
@@ -84,7 +84,6 @@ public class _29008MasterWeaponsmithsPotential extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							} else
 								return sendQuestDialog(env, 10001);
-						}
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -33,7 +33,7 @@
 package com.aionemu.gameserver.geoEngine.scene;
 
 /**
- * Describes a GL object. An encapsulation of a certain object 
+ * Describes a GL object. An encapsulation of a certain object
  * on the native side of the graphics library.
  * This class is used to track
  */

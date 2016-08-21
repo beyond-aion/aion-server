@@ -3,14 +3,14 @@ package consolecommands;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author ginho1
@@ -41,7 +41,7 @@ public class Clearusercoolt extends ConsoleCommand {
 			if (player.getPortalCooldownList() == null || player.getPortalCooldownList().getPortalCoolDowns() == null)
 				return;
 
-			List<Integer> mapIds = new FastTable<Integer>();
+			List<Integer> mapIds = new FastTable<>();
 			for (Entry<Integer, PortalCooldown> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet())
 				mapIds.add(mapId.getKey());
 

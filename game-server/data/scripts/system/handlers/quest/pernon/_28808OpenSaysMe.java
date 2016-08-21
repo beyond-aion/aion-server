@@ -47,7 +47,7 @@ public class _28808OpenSaysMe extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 730534: {
+				case 730534:
 					switch (dialog) {
 						case USE_OBJECT: {
 							if (var == 0)
@@ -59,7 +59,6 @@ public class _28808OpenSaysMe extends QuestHandler {
 							return sendQuestDialog(env, 5);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

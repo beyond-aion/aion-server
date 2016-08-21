@@ -35,7 +35,7 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
 
 	@Override
 	public Map<Integer, ChallengeTask> load(int ownerId, ChallengeType type) {
-		ConcurrentHashMap<Integer, ChallengeTask> tasks = new ConcurrentHashMap<Integer, ChallengeTask>();
+		ConcurrentHashMap<Integer, ChallengeTask> tasks = new ConcurrentHashMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, ownerId);
@@ -50,7 +50,7 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
 						ChallengeQuest quest = new ChallengeQuest(template, completeCount);
 						quest.setPersistentState(PersistentState.UPDATED);
 						if (!tasks.containsKey(taskId)) {
-							Map<Integer, ChallengeQuest> quests = new HashMap<Integer, ChallengeQuest>(2);
+							Map<Integer, ChallengeQuest> quests = new HashMap<>(2);
 							quests.put(quest.getQuestId(), quest);
 							ChallengeTask task = new ChallengeTask(taskId, ownerId, quests, date);
 							tasks.putIfAbsent(taskId, task);

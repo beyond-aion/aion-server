@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.instance.instancereward;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import com.aionemu.commons.utils.Rnd;
@@ -12,6 +10,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz

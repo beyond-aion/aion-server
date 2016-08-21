@@ -43,7 +43,7 @@ public class _26940RaidtheLinkgateFoundry extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 206362: {
+				case 206362:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -54,9 +54,8 @@ public class _26940RaidtheLinkgateFoundry extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
-				}
 					break;
-				case 802353: {
+				case 802353:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 1)
@@ -71,7 +70,6 @@ public class _26940RaidtheLinkgateFoundry extends QuestHandler {
 								return closeDialogWindow(env);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -57,14 +57,12 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 		Npc orb = getNpc(280973);
 		if (MathUtil.getDistance(orb, npc) <= 7) {
 			switch (npcId) {
-				case 280971: {
+				case 280971:
 					isDead1 = true;
 					break;
-				}
-				case 280972: {
+				case 280972:
 					isDead2 = true;
 					break;
-				}
 			}
 			return true;
 		} else {

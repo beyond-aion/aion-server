@@ -45,18 +45,16 @@ public class _2937UnexpectedReward extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798059) { // Nekorunuerk
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						qs.setQuestVar(1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -32,8 +32,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 public abstract class GameEvent extends GeneralInstanceHandler implements Comparable<GameEvent> {
 
-	protected List<Player> participants = new LinkedList<Player>();
-	protected Map<Player, EventStatistic> statistics = new HashMap<Player, EventStatistic>();
+	protected List<Player> participants = new LinkedList<>();
+	protected Map<Player, EventStatistic> statistics = new HashMap<>();
 
 	protected enum EventStage {
 		IDLE,
@@ -85,7 +85,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		if(currentStage != EventStage.AFTER_END) {
 			PacketSendUtility.sendMessage(player, "You left during an Event.\n Please note"
 				+ " that your Teammates Need you and we will keep track of your amount of leaves.");
-		}		
+		}
 		BattleService.getInstance().unregisterPlayer(player);
 		tryDestroyInstance();
 	}
@@ -124,7 +124,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			+ " \n Even tought there is still a lot of work to do, we want to reward your help with some items. \n"
 			+ " Keep going! \n The Beyond Aion Team";
 
-		List<Player> players = new LinkedList<Player>();
+		List<Player> players = new LinkedList<>();
 		players.addAll(participants);
 
 		Iterator<Player> iter = players.iterator();
@@ -160,7 +160,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		} else {
 			if(player.getAggroList().getMostPlayerDamage() != null) {
 				killer = player.getAggroList().getMostPlayerDamage();
-			}		
+			}
 		}
 		
 		if(killer != null) {
@@ -257,7 +257,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	}
 
 	private synchronized List<Player> getMissingPlayers() {
-		List<Player> missing = new LinkedList<Player>();
+		List<Player> missing = new LinkedList<>();
 
 		for (Player player : participants) {
 			if (player.getPosition().getWorldMapInstance().getInstanceHandler() != this) {
@@ -330,7 +330,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	}
 
 	protected synchronized List<Player> getPlayerByRace(Race race) {
-		List<Player> result = new LinkedList<Player>();
+		List<Player> result = new LinkedList<>();
 		for (Player p : participants) {
 			if (p.getRace() == race) {
 				result.add(p);

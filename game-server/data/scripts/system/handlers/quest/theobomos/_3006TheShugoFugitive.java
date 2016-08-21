@@ -42,9 +42,8 @@ public class _3006TheShugoFugitive extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798132) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -56,7 +55,7 @@ public class _3006TheShugoFugitive extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798146: {
+				case 798146:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -72,8 +71,7 @@ public class _3006TheShugoFugitive extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700339: {
+				case 700339:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -96,7 +94,6 @@ public class _3006TheShugoFugitive extends QuestHandler {
 							return closeDialogWindow(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798132) {

@@ -8,13 +8,13 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.google.common.base.Preconditions;
+
+import javolution.util.FastTable;
 
 /**
  * Packet Processor responsible for executing packets in correct order with respecting rules: - 1 packet / client at one time. - execute packets in
@@ -54,12 +54,12 @@ public class PacketProcessor<T extends AConnection> {
 	/**
 	 * Queue of packet that will be executed in correct order.
 	 */
-	private final List<BaseClientPacket<T>> packets = new LinkedList<BaseClientPacket<T>>();
+	private final List<BaseClientPacket<T>> packets = new LinkedList<>();
 
 	/**
 	 * Working threads.
 	 */
-	private final List<Thread> threads = new FastTable<Thread>();
+	private final List<Thread> threads = new FastTable<>();
 
 	/**
 	 * minimum number of working Threads

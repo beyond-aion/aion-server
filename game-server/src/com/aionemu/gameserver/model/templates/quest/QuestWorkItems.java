@@ -32,7 +32,7 @@ public class QuestWorkItems {
 	 */
 	public List<QuestItems> getQuestWorkItem() {
 		if (questWorkItem == null)
-			questWorkItem = new FastTable<QuestItems>();
+			questWorkItem = new FastTable<>();
 		return this.questWorkItem;
 	}
 

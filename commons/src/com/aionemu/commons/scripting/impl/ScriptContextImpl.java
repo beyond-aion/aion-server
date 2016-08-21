@@ -228,7 +228,7 @@ public class ScriptContextImpl implements ScriptContext {
 
 		synchronized (this) {
 			if (childScriptContexts == null) {
-				childScriptContexts = new HashSet<ScriptContext>();
+				childScriptContexts = new HashSet<>();
 			}
 
 			if (childScriptContexts.contains(context)) {

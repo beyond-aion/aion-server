@@ -50,7 +50,7 @@ public class _1423ExpertAdvice extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203983: {
+				case 203983:
 					switch (env.getDialog()) {
 						case SETPRO1: {
 							playQuestMovie(env, 41);
@@ -65,7 +65,6 @@ public class _1423ExpertAdvice extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203983) {

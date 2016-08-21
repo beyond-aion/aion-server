@@ -54,10 +54,10 @@ public class _29038MasterCooksPotential extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204101: { // Daraia
+				case 204101: // Daraia
 					long kinah = player.getInventory().getKinah();
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (kinah >= 6500) {
 								switch (var) {
 									case 0: {
@@ -97,8 +97,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 4400);
 							}
-						}
-						case SETPRO10: {
+						case SETPRO10:
 							player.getInventory().decreaseKinah(6500);
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 2, 152207202, 1, 0, 0); // 2
@@ -106,8 +105,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 								return defaultCloseDialog(env, 1, 2, 152207202, 1, 0, 0); // 2
 							}
 							return false;
-						}
-						case SETPRO20: {
+						case SETPRO20:
 							player.getInventory().decreaseKinah(6500);
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 5, 152207203, 1, 0, 0); // 5
@@ -115,8 +113,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 								return defaultCloseDialog(env, 4, 5, 152207203, 1, 0, 0); // 5
 							}
 							return false;
-						}
-						case SETPRO30: {
+						case SETPRO30:
 							player.getInventory().decreaseKinah(6500);
 							if (var == 6) {
 								return defaultCloseDialog(env, 6, 8, 152207204, 1, 0, 0); // 8
@@ -124,8 +121,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 								return defaultCloseDialog(env, 7, 8, 152207204, 1, 0, 0); // 8
 							}
 							return false;
-						}
-						case SETPRO40: {
+						case SETPRO40:
 							player.getInventory().decreaseKinah(6500);
 							if (var == 9) {
 								return defaultCloseDialog(env, 9, 11, 152207205, 1, 0, 0); // 11
@@ -133,16 +129,13 @@ public class _29038MasterCooksPotential extends QuestHandler {
 								return defaultCloseDialog(env, 10, 11, 152207205, 1, 0, 0); // 11
 							}
 							return false;
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 204100: { // Lainita
+				case 204100: // Lainita
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							switch (var) {
 								case 2: {
 									return sendQuestDialog(env, 1097);
@@ -158,24 +151,17 @@ public class _29038MasterCooksPotential extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SETPRO11: {
+						case SETPRO11:
 							return checkItemExistence(env, 2, 3, false, 182207907, 1, true, 1182, 2716, 0, 0); // 3
-						}
-						case SETPRO21: {
+						case SETPRO21:
 							return checkItemExistence(env, 5, 6, false, 182207908, 1, true, 1523, 3057, 0, 0); // 6
-						}
-						case SETPRO31: {
+						case SETPRO31:
 							return checkItemExistence(env, 8, 9, false, 182207909, 1, true, 1864, 3398, 0, 0); // 9
-						}
-						case SETPRO41: {
+						case SETPRO41:
 							return checkItemExistence(env, 11, 11, true, 182207910, 1, true, 5, 3057, 0, 0); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204100) { // Lainita
@@ -191,22 +177,18 @@ public class _29038MasterCooksPotential extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (itemId) {
-				case 182207907: {
+				case 182207907:
 					changeQuestStep(env, 2, 1, false); // 1
 					return true;
-				}
-				case 182207908: {
+				case 182207908:
 					changeQuestStep(env, 5, 4, false); // 4
 					return true;
-				}
-				case 182207909: {
+				case 182207909:
 					changeQuestStep(env, 8, 7, false); // 7
 					return true;
-				}
-				case 182207910: {
+				case 182207910:
 					changeQuestStep(env, 11, 10, false); // 10
 					return true;
-				}
 			}
 		}
 		return false;

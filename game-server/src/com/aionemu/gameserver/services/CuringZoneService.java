@@ -1,18 +1,18 @@
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.curingzone.CuringObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.curingzones.CuringTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class CuringZoneService {
 
 	Logger log = LoggerFactory.getLogger(CuringZoneService.class);
-	private FastTable<CuringObject> curingObjects = new FastTable<CuringObject>();
+	private FastTable<CuringObject> curingObjects = new FastTable<>();
 
 	private CuringZoneService() {
 		for (CuringTemplate t : DataManager.CURING_OBJECTS_DATA.getCuringObject()) {

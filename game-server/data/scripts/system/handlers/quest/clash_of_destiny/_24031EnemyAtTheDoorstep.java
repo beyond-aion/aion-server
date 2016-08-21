@@ -50,59 +50,51 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 			switch (targetId) {
 				case 204052:// vidar
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 801224:// Rapidfire Rita
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 203550:// Munin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (!giveQuestItem(env, 182215394, 1))
 								return true;
 							qs.setQuestVar(3);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 203654:// Aurtri
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							if (!giveQuestItem(env, 182215395, 1))
 								return true;
 							qs.setQuestVar(5);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 204369:// Tyr
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
@@ -110,24 +102,21 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SETPRO7: {
+						case SETPRO7:
 							if (!giveQuestItem(env, 182215396, 1))
 								return true;
 							qs.setQuestVar(7);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
-						case SETPRO9: {
+						case SETPRO9:
 							qs.setQuestVar(9);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				case 730888:// Teleporter Device
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							// TODO:play movie find movie ID
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730888)
@@ -137,18 +126,16 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95);// Broken
 																																																																					// Teleporter
 																																																																					// Device
-						}
 					}
 					break;
 				case 730898:// Broken Teleporter
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730898)
 								NpcActions.delete(npc);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-						}
 					}
 					break;
 			}
@@ -157,12 +144,10 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204052)// vidar
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 4083);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

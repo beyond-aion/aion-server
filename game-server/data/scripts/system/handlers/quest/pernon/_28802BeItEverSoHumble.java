@@ -36,9 +36,8 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 830102) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 830153: {
+				case 830153:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -56,7 +55,6 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830153) {

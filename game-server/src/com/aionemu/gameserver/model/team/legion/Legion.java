@@ -15,13 +15,13 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ICON_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author Simple
@@ -35,14 +35,14 @@ public class Legion {
 	private int legionRank = 0;
 	private long contributionPoints = 0;
 	private int siegeGloryPoints = 0;
-	private List<Integer> legionMembers = new FastTable<Integer>();
+	private List<Integer> legionMembers = new FastTable<>();
 	private int onlineMembersCount = 0;
 	private short deputyPermission = 0x1E0C;
 	private short centurionPermission = 0x1C08;
 	private short legionaryPermission = 0x1800;
 	private short volunteerPermission = 0x800;
 	private int disbandTime;
-	private TreeMap<Timestamp, String> announcementList = new TreeMap<Timestamp, String>();
+	private TreeMap<Timestamp, String> announcementList = new TreeMap<>();
 	private LegionEmblem legionEmblem = new LegionEmblem();
 	private LegionWarehouse legionWarehouse;
 	private SortedSet<LegionHistory> legionHistory;
@@ -68,7 +68,7 @@ public class Legion {
 	 */
 	public Legion() {
 		this.legionWarehouse = new LegionWarehouse(this);
-		this.legionHistory = new TreeSet<LegionHistory>(new Comparator<LegionHistory>() {
+		this.legionHistory = new TreeSet<>(new Comparator<LegionHistory>() {
 
 			@Override
 			public int compare(LegionHistory o1, LegionHistory o2) {
@@ -127,7 +127,7 @@ public class Legion {
 	 * @return the online legionMembers
 	 */
 	public List<Player> getOnlineLegionMembers() {
-		List<Player> onlineLegionMembers = new FastTable<Player>();
+		List<Player> onlineLegionMembers = new FastTable<>();
 		for (int legionMemberObjId : legionMembers) {
 			Player onlineLegionMember = World.getInstance().findPlayer(legionMemberObjId);
 			if (onlineLegionMember != null)

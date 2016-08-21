@@ -70,8 +70,7 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 			case 6:
 				writeD(buf, 100);
 				IronWallFrontPlayerReward[] ironWallFrontElyos = ironWallFrontReward.getPlayersByRace(Race.ELYOS);
-				for (int i = 0; i < ironWallFrontElyos.length; i++) {
-					IronWallFrontPlayerReward reward = ironWallFrontElyos[i];
+				for (IronWallFrontPlayerReward reward : ironWallFrontElyos) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -83,8 +82,7 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 					}
 				}
 				IronWallFrontPlayerReward[] ironWallFrontAsmodians = ironWallFrontReward.getPlayersByRace(Race.ASMODIANS);
-				for (int i = 0; i < ironWallFrontAsmodians.length; i++) {
-					IronWallFrontPlayerReward reward = ironWallFrontAsmodians[i];
+				for (IronWallFrontPlayerReward reward : ironWallFrontAsmodians) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);

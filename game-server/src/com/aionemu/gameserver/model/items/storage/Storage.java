@@ -46,7 +46,7 @@ public abstract class Storage implements IStorage {
 		itemStorage = new ItemStorage(storageType);
 		this.storageType = storageType;
 		if (withDeletedItems)
-			this.deletedItems = new ConcurrentLinkedQueue<Item>();
+			this.deletedItems = new ConcurrentLinkedQueue<>();
 	}
 
 	@Override

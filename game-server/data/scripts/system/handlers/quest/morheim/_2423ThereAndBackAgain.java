@@ -43,7 +43,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204375: {
+				case 204375:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -70,7 +70,6 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204375) {

@@ -56,7 +56,7 @@ public class DecomposeAction extends AbstractItemAction {
 	public static final int USAGE_DELAY = 3000;
 	private static Map<Integer, List<ItemTemplate>> specialManastones;
 	private static Map<Integer, List<ItemTemplate>> manastones;
-	private static Map<Race, int[]> chunkEarth = new HashMap<Race, int[]>();
+	private static Map<Race, int[]> chunkEarth = new HashMap<>();
 
 	static {
 		chunkEarth.put(Race.ASMODIANS, new int[] { 152000051, 152000052, 152000053, 152000054, 152000055, 152000056, 152000057, 152000058, 152000059,
@@ -74,7 +74,7 @@ public class DecomposeAction extends AbstractItemAction {
 			152000808, 152000809, 152000810, 152001001, 152001002, 152001003, 152001004, 152001005 });
 	}
 
-	private static Map<Race, int[]> chunkSand = new HashMap<Race, int[]>();
+	private static Map<Race, int[]> chunkSand = new HashMap<>();
 
 	static {
 
@@ -185,7 +185,7 @@ public class DecomposeAction extends AbstractItemAction {
 								int i = 0;
 								int itemLvl = parentItem.getItemTemplate().getLevel();
 								switch (randomItem.getType()) {
-									case ENCHANTMENT: {
+									case ENCHANTMENT:
 										do {
 											randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.get(4);
 											i++;
@@ -196,7 +196,6 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
 									case MANASTONE:
 									case MANASTONE_COMMON_GRADE_10:
 									case MANASTONE_COMMON_GRADE_20:
@@ -222,7 +221,7 @@ public class DecomposeAction extends AbstractItemAction {
 										if (manastones == null) {
 											manastones = DataManager.ITEM_DATA.getManastones();
 										}
-										if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level) 
+										if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level)
 											itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
 										else
 											itemLvl = randomType.getLevel();
@@ -280,7 +279,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									case CHUNK_EARTH: {
+									case CHUNK_EARTH:
 										int[] earth = chunkEarth.get(player.getRace());
 
 										randomId = earth[Rnd.get(earth.length)];
@@ -289,8 +288,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case CHUNK_SAND: {
+									case CHUNK_SAND:
 										int[] sand = chunkSand.get(player.getRace());
 
 										randomId = sand[Rnd.get(sand.length)];
@@ -300,8 +298,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case CHUNK_ROCK: {
+									case CHUNK_ROCK:
 										randomId = chunkRock[Rnd.get(chunkRock.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -309,8 +306,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case CHUNK_GEMSTONE: {
+									case CHUNK_GEMSTONE:
 										randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -318,8 +314,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case SCROLLS: {
+									case SCROLLS:
 										randomId = scrolls[Rnd.get(scrolls.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -327,8 +322,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case POTION: {
+									case POTION:
 										randomId = potion[Rnd.get(potion.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -336,8 +330,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case ANCIENTITEMS: {
+									case ANCIENTITEMS:
 										do {
 											randomId = Rnd.get(186000051, 186000066);
 											i++;
@@ -348,8 +341,7 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
-									case ANCIENT_CROWN: {
+									case ANCIENT_CROWN:
 										do {
 											randomId = Rnd.get(186000051, 186000054);
 											i++;
@@ -360,8 +352,7 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
-									case ANCIENT_GOBLET: {
+									case ANCIENT_GOBLET:
 										do {
 											randomId = Rnd.get(186000055, 186000058);
 											i++;
@@ -372,8 +363,7 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
-									case ANCIENT_SEAL: {
+									case ANCIENT_SEAL:
 										do {
 											randomId = Rnd.get(186000059, 186000062);
 											i++;
@@ -384,8 +374,7 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
-									case ANCIENT_ICON: {
+									case ANCIENT_ICON:
 										do {
 											randomId = Rnd.get(186000063, 186000066);
 											i++;
@@ -396,8 +385,7 @@ public class DecomposeAction extends AbstractItemAction {
 											}
 										} while (!ItemService.checkRandomTemplate(randomId));
 										break;
-									}
-									case LESSER_POTIONS: {
+									case LESSER_POTIONS:
 										randomId = lesser_potions[Rnd.get(lesser_potions.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -405,8 +393,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case POTION_50: {
+									case POTION_50:
 										randomId = potion_50[Rnd.get(potion_50.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -414,8 +401,7 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
-									case ILLUSION_GODSTONE: {
+									case ILLUSION_GODSTONE:
 										randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
 
 										if (!ItemService.checkRandomTemplate(randomId)) {
@@ -423,7 +409,6 @@ public class DecomposeAction extends AbstractItemAction {
 											return;
 										}
 										break;
-									}
 								}
 								if (randomId != 0 && randomId != 167000524)
 									ItemService.addItem(player, randomId, randomItem.getResultCount(), true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
@@ -475,7 +460,7 @@ public class DecomposeAction extends AbstractItemAction {
 			return null;
 		}
 		int playerLevel = player.getLevel();
-		Collection<ExtractedItemsCollection> result = new FastTable<ExtractedItemsCollection>();
+		Collection<ExtractedItemsCollection> result = new FastTable<>();
 		for (ExtractedItemsCollection collection : itemsCollections) {
 			if (collection.getMinLevel() > playerLevel) {
 				continue;

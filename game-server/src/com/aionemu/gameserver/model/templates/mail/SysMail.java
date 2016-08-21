@@ -12,9 +12,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.Race;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -30,14 +30,14 @@ public class SysMail {
 	private String name;
 
 	@XmlTransient
-	private Map<String, List<MailTemplate>> mailCaseTemplates = new HashMap<String, List<MailTemplate>>();
+	private Map<String, List<MailTemplate>> mailCaseTemplates = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (MailTemplate template : templates) {
 			String caseName = template.getName().toLowerCase();
 			List<MailTemplate> sysTemplates = mailCaseTemplates.get(caseName);
 			if (sysTemplates == null) {
-				sysTemplates = new FastTable<MailTemplate>();
+				sysTemplates = new FastTable<>();
 				mailCaseTemplates.put(caseName, sysTemplates);
 			}
 			sysTemplates.add(template);

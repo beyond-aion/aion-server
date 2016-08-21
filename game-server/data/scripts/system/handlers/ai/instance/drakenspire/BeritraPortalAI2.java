@@ -1,7 +1,5 @@
 package ai.instance.drakenspire;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -10,6 +8,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Estrayl

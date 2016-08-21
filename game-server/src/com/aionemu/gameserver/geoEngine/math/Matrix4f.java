@@ -40,8 +40,8 @@ import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
 
 /**
  * <code>Matrix4f</code> defines and maintains a 4x4 matrix in row major order.
- * This matrix is intended for use in a translation and rotational capacity. 
- * It provides convenience methods for creating the matrix from a multitude 
+ * This matrix is intended for use in a translation and rotational capacity.
+ * It provides convenience methods for creating the matrix from a multitude
  * of sources.
  * 
  * Matrices are stored assuming column vectors on the right, with the translation
@@ -67,7 +67,7 @@ public final class Matrix4f implements Cloneable {
     /**
      * Constructor instantiates a new <code>Matrix</code> that is set to the
      * identity matrix.
-     *  
+     * 
      */
     public Matrix4f() {
         loadIdentity();
@@ -76,7 +76,7 @@ public final class Matrix4f implements Cloneable {
     /**
      * constructs a matrix with the given values.
      */
-    public Matrix4f(float m00, float m01, float m02, float m03, 
+    public Matrix4f(float m00, float m01, float m02, float m03,
             float m10, float m11, float m12, float m13,
             float m20, float m21, float m22, float m23,
             float m30, float m31, float m32, float m33) {
@@ -678,7 +678,7 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix,
      * namely all zeros with ones along the diagonal.
-     *  
+     * 
      */
     public void loadIdentity() {
         m01 = m02 = m03 = 0.0f;
@@ -712,7 +712,7 @@ public final class Matrix4f implements Cloneable {
             // A
             m02 = (right + left) / (right - left);
             
-            // B 
+            // B
             m12 = (top + bottom) / (top - bottom);
             
             // C
@@ -846,25 +846,25 @@ public final class Matrix4f implements Cloneable {
         float temp20, temp21, temp22, temp23;
         float temp30, temp31, temp32, temp33;
 
-        temp00 = m00 * in2.m00 + 
-                m01 * in2.m10 + 
-                m02 * in2.m20 + 
+        temp00 = m00 * in2.m00 +
+                m01 * in2.m10 +
+                m02 * in2.m20 +
                 m03 * in2.m30;
-        temp01 = m00 * in2.m01 + 
-                m01 * in2.m11 + 
+        temp01 = m00 * in2.m01 +
+                m01 * in2.m11 +
                 m02 * in2.m21 +
                 m03 * in2.m31;
-        temp02 = m00 * in2.m02 + 
-                m01 * in2.m12 + 
+        temp02 = m00 * in2.m02 +
+                m01 * in2.m12 +
                 m02 * in2.m22 +
                 m03 * in2.m32;
-        temp03 = m00 * in2.m03 + 
-                m01 * in2.m13 + 
-                m02 * in2.m23 + 
+        temp03 = m00 * in2.m03 +
+                m01 * in2.m13 +
+                m02 * in2.m23 +
                 m03 * in2.m33;
         
-        temp10 = m10 * in2.m00 + 
-                m11 * in2.m10 + 
+        temp10 = m10 * in2.m00 +
+                m11 * in2.m10 +
                 m12 * in2.m20 +
                 m13 * in2.m30;
         temp11 = m10 * in2.m01 +
@@ -872,45 +872,45 @@ public final class Matrix4f implements Cloneable {
                 m12 * in2.m21 +
                 m13 * in2.m31;
         temp12 = m10 * in2.m02 +
-                m11 * in2.m12 + 
+                m11 * in2.m12 +
                 m12 * in2.m22 +
                 m13 * in2.m32;
         temp13 = m10 * in2.m03 +
                 m11 * in2.m13 +
-                m12 * in2.m23 + 
+                m12 * in2.m23 +
                 m13 * in2.m33;
 
-        temp20 = m20 * in2.m00 + 
-                m21 * in2.m10 + 
+        temp20 = m20 * in2.m00 +
+                m21 * in2.m10 +
                 m22 * in2.m20 +
                 m23 * in2.m30;
-        temp21 = m20 * in2.m01 + 
-                m21 * in2.m11 + 
+        temp21 = m20 * in2.m01 +
+                m21 * in2.m11 +
                 m22 * in2.m21 +
                 m23 * in2.m31;
-        temp22 = m20 * in2.m02 + 
-                m21 * in2.m12 + 
+        temp22 = m20 * in2.m02 +
+                m21 * in2.m12 +
                 m22 * in2.m22 +
                 m23 * in2.m32;
-        temp23 = m20 * in2.m03 + 
-                m21 * in2.m13 + 
+        temp23 = m20 * in2.m03 +
+                m21 * in2.m13 +
                 m22 * in2.m23 +
                 m23 * in2.m33;
 
-        temp30 = m30 * in2.m00 + 
-                m31 * in2.m10 + 
+        temp30 = m30 * in2.m00 +
+                m31 * in2.m10 +
                 m32 * in2.m20 +
                 m33 * in2.m30;
-        temp31 = m30 * in2.m01 + 
-                m31 * in2.m11 + 
+        temp31 = m30 * in2.m01 +
+                m31 * in2.m11 +
                 m32 * in2.m21 +
                 m33 * in2.m31;
-        temp32 = m30 * in2.m02 + 
-                m31 * in2.m12 + 
+        temp32 = m30 * in2.m02 +
+                m31 * in2.m12 +
                 m32 * in2.m22 +
                 m33 * in2.m32;
-        temp33 = m30 * in2.m03 + 
-                m31 * in2.m13 + 
+        temp33 = m30 * in2.m03 +
+                m31 * in2.m13 +
                 m32 * in2.m23 +
                 m33 * in2.m33;
         
@@ -924,7 +924,7 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * <code>mult</code> multiplies this matrix with another matrix. The
-     * results are stored internally and a handle to this matrix will 
+     * results are stored internally and a handle to this matrix will
      * then be returned. This matrix will be on the left hand
      * side, while the parameter matrix will be on the right.
      * 
@@ -1019,7 +1019,7 @@ public final class Matrix4f implements Cloneable {
      * @param vec
      *            vec to multiply against.
      * @param store
-     *            a vector to store the result in. 
+     *            a vector to store the result in.
      * @return the W value
      */
     public float multProj(Vector3f vec, Vector3f store) {
@@ -1056,7 +1056,7 @@ public final class Matrix4f implements Cloneable {
     }
     
     /**
-     * <code>mult</code> multiplies an array of 4 floats against this rotation 
+     * <code>mult</code> multiplies an array of 4 floats against this rotation
      * matrix. The results are stored directly in the array. (vec4f x mat4f)
      * 
      * @param vec4f
@@ -1080,7 +1080,7 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * <code>mult</code> multiplies an array of 4 floats against this rotation 
+     * <code>mult</code> multiplies an array of 4 floats against this rotation
      * matrix. The results are stored directly in the array. (vec4f x mat4f)
      * 
      * @param vec4f
@@ -1774,7 +1774,7 @@ public final class Matrix4f implements Cloneable {
      * @return true if this matrix is identity
      */
     public boolean isIdentity() {
-        return 
+        return
         (m00 == 1 && m01 == 0 && m02 == 0 && m03 == 0) &&
         (m10 == 0 && m11 == 1 && m12 == 0 && m13 == 0) &&
         (m20 == 0 && m21 == 0 && m22 == 1 && m23 == 0) &&

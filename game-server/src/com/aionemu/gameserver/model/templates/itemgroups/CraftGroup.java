@@ -3,12 +3,12 @@ package com.aionemu.gameserver.model.templates.itemgroups;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.Range;
 
 import com.aionemu.gameserver.model.templates.rewards.CraftReward;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas

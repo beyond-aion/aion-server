@@ -14,10 +14,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.*;
  */
 public class ServerPacketsOpcodes {
 
-	private static Map<Class<? extends AionServerPacket>, Integer> opcodes = new HashMap<Class<? extends AionServerPacket>, Integer>();
+	private static Map<Class<? extends AionServerPacket>, Integer> opcodes = new HashMap<>();
 
 	static {
-		Set<Integer> idSet = new HashSet<Integer>();
+		Set<Integer> idSet = new HashSet<>();
 
 		addPacketOpcode(SM_VERSION_CHECK.class, 0x00, idSet);
 		addPacketOpcode(SM_STATS_INFO.class, 0x01, idSet);

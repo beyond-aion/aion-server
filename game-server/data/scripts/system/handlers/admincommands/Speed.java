@@ -49,7 +49,7 @@ public class Speed extends AdminCommand implements StatOwner {
 			return;
 		}
 
-		List<IStatFunction> functions = new FastTable<IStatFunction>();
+		List<IStatFunction> functions = new FastTable<>();
 		functions.add(new SpeedFunction(StatEnum.SPEED, parameter));
 		functions.add(new SpeedFunction(StatEnum.FLY_SPEED, parameter));
 		admin.getGameStats().addEffect(this, functions);

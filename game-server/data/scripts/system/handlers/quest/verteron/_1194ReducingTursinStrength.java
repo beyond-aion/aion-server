@@ -56,12 +56,10 @@ public class _1194ReducingTursinStrength extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) {
 				switch (env.getDialog()) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

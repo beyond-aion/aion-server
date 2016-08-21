@@ -45,7 +45,7 @@ public class _1156StolenVillageSeal extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 700003: { // Item Stack
+				case 700003: // Item Stack
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
@@ -55,8 +55,7 @@ public class _1156StolenVillageSeal extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 					break;
-				}
-				case 798003: { // Gaphyrk
+				case 798003: // Gaphyrk
 					if (dialog == DialogAction.QUEST_SELECT) {
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
@@ -65,7 +64,6 @@ public class _1156StolenVillageSeal extends QuestHandler {
 						changeQuestStep(env, 1, 1, true); // reward
 						return sendQuestDialog(env, 5);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798003) { // Gaphyrk

@@ -65,7 +65,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204317: {
+				case 204317:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -76,9 +76,8 @@ public class _24023ABlazingRescue extends QuestHandler {
 								return defaultCloseDialog(env, 0, 1); // 1
 							}
 					}
-				}
 					break;
-				case 204408: {
+				case 204408:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -111,7 +110,6 @@ public class _24023ABlazingRescue extends QuestHandler {
 							}
 
 					}
-				}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

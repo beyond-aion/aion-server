@@ -35,9 +35,8 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203550) { // Munin
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default: {
 						return sendQuestStartDialog(env);
 					}
@@ -45,12 +44,11 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203550: { // Munin
+				case 203550: // Munin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							if (player.getInventory().getItemCountByItemId(182203121) >= 1) {
 								qs.setQuestVar(5); // 5
 								qs.setStatus(QuestStatus.REWARD); // rewatd
@@ -60,8 +58,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 1693);
 							}
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							if (player.getInventory().getItemCountByItemId(182203122) >= 1) {
 								qs.setQuestVar(6); // 6
 								qs.setStatus(QuestStatus.REWARD); // rewatd
@@ -71,8 +68,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 1693);
 							}
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (player.getInventory().getItemCountByItemId(182203123) >= 1) {
 								qs.setQuestVar(7); // 7
 								qs.setStatus(QuestStatus.REWARD); // rewatd
@@ -82,16 +78,12 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 1693);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 700128: { // Methu Egg
+				case 700128: // Methu Egg
 					return true;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin

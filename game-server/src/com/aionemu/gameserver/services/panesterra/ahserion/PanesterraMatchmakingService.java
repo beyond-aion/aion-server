@@ -7,8 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.ChatType;
@@ -20,6 +18,8 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -57,7 +57,7 @@ public class PanesterraMatchmakingService {
 		}
 	}
 	
-	private void startNotifier() {		
+	private void startNotifier() {
 		notifier = ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
@@ -198,7 +198,7 @@ public class PanesterraMatchmakingService {
 			notifyFail();
 			onStop();
 			return;
-		} 
+		}
 		if (elyos.size() > asmodians.size()) {
 			if (asmodians.size() < maximumPlayers){
 				maximumPlayers = asmodians.size();
@@ -219,7 +219,7 @@ public class PanesterraMatchmakingService {
 					teams.put(PanesterraTeamId.GAB1_SUB_DEST_70, new AhserionTeam(PanesterraTeamId.GAB1_SUB_DEST_70));
 					teams.put(PanesterraTeamId.GAB1_SUB_DEST_71, new AhserionTeam(PanesterraTeamId.GAB1_SUB_DEST_71));
 					teams.put(PanesterraTeamId.GAB1_SUB_DEST_72, new AhserionTeam(PanesterraTeamId.GAB1_SUB_DEST_72));
-					buildTeams(1, 24, PanesterraTeamId.GAB1_SUB_DEST_69, PanesterraTeamId.GAB1_SUB_DEST_70, 
+					buildTeams(1, 24, PanesterraTeamId.GAB1_SUB_DEST_69, PanesterraTeamId.GAB1_SUB_DEST_70,
 						PanesterraTeamId.GAB1_SUB_DEST_71, PanesterraTeamId.GAB1_SUB_DEST_72);
 				break;
 			case 2: // X vs X

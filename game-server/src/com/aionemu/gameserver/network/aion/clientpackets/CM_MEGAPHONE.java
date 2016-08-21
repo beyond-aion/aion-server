@@ -10,8 +10,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,6 +20,8 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MEGAPHONE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author Artur, ginho1
@@ -84,7 +84,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 			return;
 		}
 
-		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
+		List<AbstractItemAction> actions = new FastTable<>();
 
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
 			if (itemAction.canAct(player, item, null))

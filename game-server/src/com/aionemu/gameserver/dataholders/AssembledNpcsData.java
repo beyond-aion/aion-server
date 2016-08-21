@@ -21,7 +21,7 @@ public class AssembledNpcsData {
 
 	@XmlElement(name = "assembled_npc", type = AssembledNpcTemplate.class)
 	private List<AssembledNpcTemplate> templates;
-	private final Map<Integer, AssembledNpcTemplate> assembledNpcsTemplates = new ConcurrentHashMap<Integer, AssembledNpcTemplate>();
+	private final Map<Integer, AssembledNpcTemplate> assembledNpcsTemplates = new ConcurrentHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (AssembledNpcTemplate template : templates) {

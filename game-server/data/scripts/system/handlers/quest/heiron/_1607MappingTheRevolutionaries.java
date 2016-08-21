@@ -63,12 +63,10 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 			int var4 = qs.getQuestVarById(4);
 			if (targetId == 204578) { // Kuobe
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
-					}
 				}
 			} else if (targetId == 204574) { // Finn
 				if (dialog == DialogAction.QUEST_SELECT) {

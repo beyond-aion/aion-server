@@ -22,7 +22,7 @@ public class Materials {
 	 */
 	public List<Material> getMaterial() {
 		if (material == null) {
-			material = new FastTable<Material>();
+			material = new FastTable<>();
 		}
 		return this.material;
 	}

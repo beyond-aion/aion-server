@@ -378,7 +378,7 @@ public class BIHTree implements CollisionData {
         triIndices[index2] = tmp2;
     }
 
-    private int collideWithRay(Ray r, 
+    private int collideWithRay(Ray r,
                                Matrix4f worldMatrix,
                                BoundingVolume worldBound,
                                CollisionResults results){
@@ -421,7 +421,7 @@ public class BIHTree implements CollisionData {
         return root.intersectWhere(bv, bbox, worldMatrix, this, results);
     }
 
-    public int collideWith(Collidable other, 
+    public int collideWith(Collidable other,
                            Matrix4f worldMatrix,
                            BoundingVolume worldBound,
                            CollisionResults results){

@@ -7,7 +7,7 @@ import javolution.util.FastTable;
  */
 public class AssembledNpc {
 
-	private FastTable<AssembledNpcPart> assembledPatrs = new FastTable<AssembledNpcPart>();
+	private FastTable<AssembledNpcPart> assembledPatrs = new FastTable<>();
 	private long spawnTime = System.currentTimeMillis();
 	private int routeId;
 	private int mapId;

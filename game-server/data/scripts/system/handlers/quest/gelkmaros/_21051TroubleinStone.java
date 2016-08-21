@@ -35,9 +35,8 @@ public class _21051TroubleinStone extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799291) { // Aquila
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default: {
 						return sendQuestStartDialog(env);
 					}
@@ -46,15 +45,12 @@ public class _21051TroubleinStone extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799291) { // Aquila
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 0, 0, true, 5, 2716); // reward
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

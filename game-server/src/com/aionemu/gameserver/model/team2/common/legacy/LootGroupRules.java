@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.team2.common.legacy;
 
 import java.util.Collection;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
@@ -11,6 +9,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.services.drop.DropDistributionService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, xTz

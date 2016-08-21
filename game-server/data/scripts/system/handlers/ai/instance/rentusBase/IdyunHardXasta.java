@@ -2,9 +2,9 @@ package ai.instance.rentusBase;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Estrayl

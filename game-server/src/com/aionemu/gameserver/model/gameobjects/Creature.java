@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.ai2.AI2;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.controllers.CreatureController;
@@ -38,6 +36,8 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastMap;
 
 /**
  * This class is representing movable objects, its base class for all in game objects that may move
@@ -578,7 +578,7 @@ public abstract class Creature extends VisibleObject {
 	 * @return the skillCoolDowns
 	 */
 	public FastMap<Integer, Long> getSkillCoolDowns() {
-		FastMap<Integer, Long> tmp = new FastMap<Integer, Long>();
+		FastMap<Integer, Long> tmp = new FastMap<>();
 		if (skillCoolDowns == null)
 			return tmp;
 		tmp.putAll(skillCoolDowns);

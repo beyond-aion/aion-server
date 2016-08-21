@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz

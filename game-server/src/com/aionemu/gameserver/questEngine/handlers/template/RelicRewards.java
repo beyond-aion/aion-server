@@ -53,7 +53,7 @@ public class RelicRewards extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) {
 				switch (dialog) {
-					case EXCHANGE_COIN: {
+					case EXCHANGE_COIN:
 						if (player.getCommonData().getLevel() >= 30) {
 							int rewardId = QuestService.getCollectItemsReward(env, false, false);
 							if (rewardId != -1)
@@ -62,7 +62,6 @@ public class RelicRewards extends QuestHandler {
 								return sendQuestDialog(env, 3398);
 						} else
 							return sendQuestDialog(env, 3398);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {

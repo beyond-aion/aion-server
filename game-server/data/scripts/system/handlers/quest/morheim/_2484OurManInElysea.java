@@ -55,7 +55,7 @@ public class _2484OurManInElysea extends QuestHandler {
 						removeQuestItem(env, 182204205, 1);
 					}
 					return false;
-				case 203331: {
+				case 203331:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id())
 							return sendQuestDialog(env, 5);
@@ -66,7 +66,6 @@ public class _2484OurManInElysea extends QuestHandler {
 						} else
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203331)

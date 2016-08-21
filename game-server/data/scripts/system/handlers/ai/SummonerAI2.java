@@ -3,9 +3,6 @@ package ai;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -16,7 +13,10 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.World;
 @AIName("summoner")
 public class SummonerAI2 extends AggressiveNpcAI2 {
 
-	private final List<Integer> spawnedNpc = new FastTable<Integer>();
+	private final List<Integer> spawnedNpc = new FastTable<>();
 
 	private List<Percentage> percentage = Collections.emptyList();
 

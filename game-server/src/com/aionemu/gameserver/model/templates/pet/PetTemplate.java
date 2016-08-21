@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author IlBuono
@@ -57,7 +57,7 @@ public class PetTemplate {
 		if (hasPlayerFuncs == null) {
 			hasPlayerFuncs = false;
 			if (petFunctions == null) {
-				List<PetFunction> result = new FastTable<PetFunction>();
+				List<PetFunction> result = new FastTable<>();
 				result.add(PetFunction.CreateEmpty());
 				petFunctions = result;
 			} else {

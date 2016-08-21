@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("calindiflamelord")
 public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 
 	@Override

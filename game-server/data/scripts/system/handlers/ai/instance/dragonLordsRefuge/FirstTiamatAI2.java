@@ -1,9 +1,9 @@
 package ai.instance.dragonLordsRefuge;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller

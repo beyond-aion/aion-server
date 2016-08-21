@@ -37,7 +37,7 @@ public class AionPacketHandlerFactory {
 		int opCode = data.get() & 0xFF;
 
 		switch (state) {
-			case CONNECTED: {
+			case CONNECTED:
 				switch (opCode) {
 					case 0x07:
 						msg = new CM_AUTH_GG(data, client, opCode);
@@ -49,8 +49,7 @@ public class AionPacketHandlerFactory {
 						unknownPacket(opCode, state, data);
 				}
 				break;
-			}
-			case AUTHED_GG: {
+			case AUTHED_GG:
 				switch (opCode) {
 					case 0x00:
 						msg = new CM_LOGIN(data, client, opCode);
@@ -59,8 +58,7 @@ public class AionPacketHandlerFactory {
 						unknownPacket(opCode, state, data);
 				}
 				break;
-			}
-			case AUTHED_LOGIN: {
+			case AUTHED_LOGIN:
 				switch (opCode) {
 					case 0x05:
 						msg = new CM_SERVER_LIST(data, client, opCode);
@@ -72,7 +70,6 @@ public class AionPacketHandlerFactory {
 						unknownPacket(opCode, state, data);
 				}
 				break;
-			}
 		}
 
 		return msg;

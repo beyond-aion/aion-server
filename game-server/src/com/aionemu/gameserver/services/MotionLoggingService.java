@@ -486,7 +486,7 @@ public class MotionLoggingService {
 
 	private class MotionLog {
 
-		private FastMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new FastMap<WeaponTypeWrapper, List<SkillTime>>();
+		private FastMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new FastMap<>();
 
 		public FastMap<WeaponTypeWrapper, List<SkillTime>> getMotionLog() {
 			return this.motionsForWeapons;
@@ -499,7 +499,7 @@ public class MotionLoggingService {
 					return true;
 				}
 			} else {
-				List<SkillTime> list = new FastTable<SkillTime>();
+				List<SkillTime> list = new FastTable<>();
 				list.add(skillTime);
 				motionsForWeapons.put(weapon, list);
 				return true;
@@ -629,7 +629,7 @@ public class MotionLoggingService {
 
 	private class WeaponTime {
 
-		private TreeMap<WeaponTypeWrapper, List<Integer>> values = new TreeMap<WeaponTypeWrapper, List<Integer>>();
+		private TreeMap<WeaponTypeWrapper, List<Integer>> values = new TreeMap<>();
 		private Race race;
 		private Gender gender;
 
@@ -656,14 +656,14 @@ public class MotionLoggingService {
 			if (values.containsKey(weapon))
 				values.get(weapon).add(value);
 			else {
-				List<Integer> list = new FastTable<Integer>();
+				List<Integer> list = new FastTable<>();
 				list.add(value);
 				values.put(weapon, list);
 			}
 		}
 
 		public TreeMap<WeaponTypeWrapper, Integer> process() {
-			TreeMap<WeaponTypeWrapper, Integer> weaponMap = new TreeMap<WeaponTypeWrapper, Integer>();
+			TreeMap<WeaponTypeWrapper, Integer> weaponMap = new TreeMap<>();
 
 			for (Entry<WeaponTypeWrapper, List<Integer>> entry2 : values.entrySet()) {
 				// logic to calculate one value per weaponType

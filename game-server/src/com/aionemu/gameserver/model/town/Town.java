@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -21,6 +19,8 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -49,7 +49,7 @@ public class Town {
 		this.levelUpDate = levelUpDate;
 		this.race = race;
 		this.persistentState = PersistentState.UPDATED;
-		this.spawnedNpcs = new FastTable<Npc>();
+		this.spawnedNpcs = new FastTable<>();
 		spawnNewObjects();
 	}
 
@@ -107,7 +107,7 @@ public class Town {
 	}
 
 	private void broadcastUpdate() {
-		Map<Integer, Town> data = new HashMap<Integer, Town>(1);
+		Map<Integer, Town> data = new HashMap<>(1);
 		data.put(this.id, this);
 		final SM_TOWNS_LIST packet = new SM_TOWNS_LIST(data);
 		World.getInstance().forEachPlayer(new Visitor<Player>() {

@@ -8,13 +8,13 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastTable;
 
 /**
  * @author kosyachok
@@ -52,7 +52,7 @@ public class Mailbox {
 	 * @return
 	 */
 	public Collection<Letter> getLetters() {
-		SortedSet<Letter> letters = new TreeSet<Letter>(new Comparator<Letter>() {
+		SortedSet<Letter> letters = new TreeSet<>(new Comparator<Letter>() {
 
 			@Override
 			public int compare(Letter o1, Letter o2) {
@@ -80,7 +80,7 @@ public class Mailbox {
 	 * @return new list of letters
 	 */
 	public List<Letter> getNewSystemLetters(String substring) {
-		List<Letter> letters = new FastTable<Letter>();
+		List<Letter> letters = new FastTable<>();
 		if (substring.startsWith("%") || substring.startsWith("$$")) {
 			for (Letter letter : mails.values()) {
 				if (!letter.isUnread() || letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))

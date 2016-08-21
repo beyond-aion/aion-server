@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  */
 public class AbyssService {
 
-	private static final int[] abyssMapList = { 210050000, 210070000, 220070000, 220080000, 400010000, 
+	private static final int[] abyssMapList = { 210050000, 210070000, 220070000, 220080000, 400010000,
 			400020000, 400030000, 400040000, 400050000, 400060000, 600010000, 600070000, 600090000, 600100000 };
 
 	/**

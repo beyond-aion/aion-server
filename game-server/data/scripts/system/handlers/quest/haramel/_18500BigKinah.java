@@ -50,47 +50,38 @@ public class _18500BigKinah extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203166: { // Zephyros
+				case 203166: // Zephyros
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 730304: { // Suspicious Odium Piece
+				case 730304: // Suspicious Odium Piece
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 730305: { // Suspicious Odium Pile
+				case 730305: // Suspicious Odium Pile
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799522) { // Moorilerk

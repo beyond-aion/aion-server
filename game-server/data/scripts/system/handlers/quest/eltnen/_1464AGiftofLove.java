@@ -47,7 +47,7 @@ public class _1464AGiftofLove extends QuestHandler {
 
 		else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204424: {
+				case 204424:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(152000455);
@@ -61,7 +61,6 @@ public class _1464AGiftofLove extends QuestHandler {
 								return sendQuestDialog(env, 10001);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203755) {

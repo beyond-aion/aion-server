@@ -6,7 +6,23 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.aionemu.commons.configuration.transformers.*;
+import com.aionemu.commons.configuration.transformers.ArrayTransformer;
+import com.aionemu.commons.configuration.transformers.BooleanTransformer;
+import com.aionemu.commons.configuration.transformers.ByteTransformer;
+import com.aionemu.commons.configuration.transformers.CharTransformer;
+import com.aionemu.commons.configuration.transformers.ClassTransformer;
+import com.aionemu.commons.configuration.transformers.CollectionTransformer;
+import com.aionemu.commons.configuration.transformers.DoubleTransformer;
+import com.aionemu.commons.configuration.transformers.EnumTransformer;
+import com.aionemu.commons.configuration.transformers.FileTransformer;
+import com.aionemu.commons.configuration.transformers.FloatTransformer;
+import com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer;
+import com.aionemu.commons.configuration.transformers.IntegerTransformer;
+import com.aionemu.commons.configuration.transformers.LongTransformer;
+import com.aionemu.commons.configuration.transformers.PatternTransformer;
+import com.aionemu.commons.configuration.transformers.ShortTransformer;
+import com.aionemu.commons.configuration.transformers.StringTransformer;
+import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 
 /**
  * This annotation is used to mark fields that should be processed by {@link com.aionemu.commons.configuration.ConfigurableProcessor}

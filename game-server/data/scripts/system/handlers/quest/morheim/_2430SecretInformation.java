@@ -39,22 +39,17 @@ public class _2430SecretInformation extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204327) { // Sveinn
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case ASK_QUEST_ACCEPT: {
+					case ASK_QUEST_ACCEPT:
 						return sendQuestDialog(env, 4);
-					}
-					case QUEST_REFUSE_1: {
+					case QUEST_REFUSE_1:
 						return sendQuestDialog(env, 1004);
-					}
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						return sendQuestDialog(env, 1003);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						if (player.getInventory().getKinah() >= 500) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(500);
@@ -65,8 +60,7 @@ public class _2430SecretInformation extends QuestHandler {
 							return sendQuestDialog(env, 1267);
 						}
 						return false;
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						if (player.getInventory().getKinah() >= 5000) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(5000);
@@ -77,8 +71,7 @@ public class _2430SecretInformation extends QuestHandler {
 							return sendQuestDialog(env, 1267);
 						}
 						return false;
-					}
-					case SETPRO7: {
+					case SETPRO7:
 						if (player.getInventory().getKinah() >= 50000) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(50000);
@@ -88,15 +81,14 @@ public class _2430SecretInformation extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1267);
 						}
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204327: { // Sveinn
+				case 204327: // Sveinn
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							switch (var) {
 								case 1: {
 									return sendQuestDialog(env, 1352);
@@ -109,81 +101,64 @@ public class _2430SecretInformation extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2, 182204221, 1, 0, 0); // 2
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
-						case SETPRO8: {
+						case SETPRO8:
 							return defaultCloseDialog(env, 7, 8); // 8
-						}
 					}
 					break;
-				}
-				case 204377: { // Grall
+				case 204377: // Grall
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182204221, 1);
 							changeQuestStep(env, 2, 2, true); // reward 0
 							return sendQuestDialog(env, 5);
-						}
 					}
 					break;
-				}
-				case 205244: { // Hugorunerk
+				case 205244: // Hugorunerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
 					}
 					break;
-				}
-				case 798081: { // Nicoyerk
+				case 798081: // Nicoyerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							return defaultCloseDialog(env, 5, 6); // 6
-						}
 					}
 					break;
-				}
-				case 798082: { // Bicorunerk
+				case 798082: // Bicorunerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							changeQuestStep(env, 6, 6, true); // reward 1
 							return sendQuestDialog(env, 6);
-						}
 					}
 					break;
-				}
-				case 204300: { // Bolverk
+				case 204300: // Bolverk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 8) {
 								if (player.getInventory().getItemCountByItemId(182204222) > 0) {
 									return sendQuestDialog(env, 3739);
@@ -192,39 +167,32 @@ public class _2430SecretInformation extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182204222, 1);
 							changeQuestStep(env, 8, 8, true); // reward 2
 							return sendQuestDialog(env, 7);
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204377: { // Grall
+				case 204377: // Grall
 					if (var == 2) {
 						return sendQuestEndDialog(env, 0);
 					}
 					break;
-				}
-				case 798082: { // Bicorunerk
+				case 798082: // Bicorunerk
 					if (var == 6) {
 						return sendQuestEndDialog(env, 1);
 					}
 					break;
-				}
-				case 204300: { // Bolverk
+				case 204300: // Bolverk
 					if (var == 8) {
 						return sendQuestEndDialog(env, 2);
 					}
 					break;
-				}
 			}
 		}
 		return false;

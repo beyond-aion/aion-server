@@ -45,7 +45,7 @@ public class _1948WheresVindachinerk extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 798004: {
+				case 798004:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0) {
@@ -62,8 +62,7 @@ public class _1948WheresVindachinerk extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798132: {
+				case 798132:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -75,7 +74,6 @@ public class _1948WheresVindachinerk extends QuestHandler {
 							changeQuestStep(env, 1, 2, false);
 							return defaultCloseDialog(env, 2, 3, true, false);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279006) {

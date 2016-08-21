@@ -23,7 +23,7 @@ public class AtreianPassportData {
 	@XmlElement(name = "login_event")
 	private List<AtreianPassport> list;
 
-	private Map<Integer, AtreianPassport> passportData = new HashMap<Integer, AtreianPassport>();
+	private Map<Integer, AtreianPassport> passportData = new HashMap<>();
 
 	/**
 	 * @param u

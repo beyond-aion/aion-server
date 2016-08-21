@@ -457,7 +457,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	private Set<ManaStone> itemStonesCollection() {
-		return new TreeSet<ManaStone>(new Comparator<ManaStone>() {
+		return new TreeSet<>(new Comparator<ManaStone>() {
 
 			@Override
 			public int compare(ManaStone o1, ManaStone o2) {
@@ -881,7 +881,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public List<StatFunction> getCurrentModifiers() {
 		if (currentModifiers == null)
-			currentModifiers = new FastTable<StatFunction>();
+			currentModifiers = new FastTable<>();
 		return currentModifiers;
 	}
 

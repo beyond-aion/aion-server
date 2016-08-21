@@ -141,7 +141,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235641, 536.034f, 540.707f, 393.75214f, (byte) 74);
 		spawn(235641, 526.133f, 539.792f, 394.33356f, (byte) 7);
 		spawn(235652, 534.795f, 545.717f, 393.8253f, (byte) 84);
-		spawn(235652, 525.675f, 543.710f, 394.52032f, (byte) 105);  
+		spawn(235652, 525.675f, 543.710f, 394.52032f, (byte) 105);
 		spawn(235644, 530.4512f, 551.6766f, 393.7782f, (byte) 89);
 	}
 	
@@ -421,7 +421,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				spawn(832932, 384f, 736f, 398.42203f, (byte) 105); //Shugo Emperor's Butler
 				spawnChests();
 			}
-    } 
+    }
 	}
 	
 	private void reward() {
@@ -534,7 +534,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
     } else if (result < 480000) {
         return (int) (480000 - result);
     }
-    return 0; 
+    return 0;
 	}
 	
 	@Override

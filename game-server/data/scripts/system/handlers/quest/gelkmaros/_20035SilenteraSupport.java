@@ -55,7 +55,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799226: { // Valetta
+				case 799226: // Valetta
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0) {
@@ -72,73 +72,59 @@ public class _20035SilenteraSupport extends QuestHandler {
 							return defaultCloseDialog(env, 7, 8); // reward
 					}
 					break;
-				}
-				case 799329: { // Notud
+				case 799329: // Notud
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 
 					}
 					break;
-				}
-				case 799323: { // Mastarius
+				case 799323: // Mastarius
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							giveQuestItem(env, 182215596, 1);
 							giveQuestItem(env, 182215597, 1);
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
 					break;
-				}
-				case 799283: { // Jecasti
+				case 799283: // Jecasti
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							removeQuestItem(env, 182215596, 1);
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
 					break;
-				}
-				case 799309: { // Arango
+				case 799309: // Arango
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SELECT_ACTION_2376: {
+						case SELECT_ACTION_2376:
 							playQuestMovie(env, 567);
 							return sendQuestDialog(env, 2376);
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							removeQuestItem(env, 182215597, 1);
 							giveQuestItem(env, 182215659, 1);
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225) { // Richelle

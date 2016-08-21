@@ -45,7 +45,7 @@ public class Account implements Iterable<PlayerAccountData> {
 
 	private AccountTime accountTime;
 
-	private Map<Integer, PlayerAccountData> players = new HashMap<Integer, PlayerAccountData>();
+	private Map<Integer, PlayerAccountData> players = new HashMap<>();
 
 	private Storage accountWarehouse;
 

@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -57,7 +57,7 @@ public class EnchantGroup extends BonusItemGroup {
 	 */
 	public List<IdLevelReward> getItems() {
 		if (items == null) {
-			items = new FastTable<IdLevelReward>();
+			items = new FastTable<>();
 		}
 		return this.items;
 	}

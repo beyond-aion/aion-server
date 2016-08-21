@@ -55,7 +55,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799322: {
+				case 799322:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
@@ -68,7 +68,6 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 							return true;
 					}
 					return false;
-				}
 				case 799208:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

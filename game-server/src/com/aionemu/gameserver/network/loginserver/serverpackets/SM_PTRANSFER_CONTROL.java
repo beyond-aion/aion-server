@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +36,8 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.transfers.TransferablePlayer;
+
+import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -100,7 +100,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(this.taskId);
 				writeS(this.result);
 				break;
-			case CHARACTER_INFORMATION: {
+			case CHARACTER_INFORMATION:
 				writeD(this.taskId);
 				writeS(this.player.getName());
 				writeD(this.player.getPlayerClass().getClassId());
@@ -174,9 +174,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeF(this.player.getZ());
 				writeC(this.player.getHeading());
 				writeD(this.player.getWorldId());
-			}
 				break;
-			case ITEMS_INFORMATION: {
+			case ITEMS_INFORMATION:
 				writeD(this.taskId);
 				// inventory
 				List<Item> inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
@@ -280,9 +279,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(item.getTempering());
 					writeD(item.getPackCount());
 				}
-			}
 				break;
-			case DATA_INFORMATION: {
+			case DATA_INFORMATION:
 				writeD(this.taskId);
 				EmotionList emo = this.player.getEmotions();
 				writeD(emo.getEmotions().size());
@@ -343,9 +341,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				}
 				writeD(ps.getDeny());
 				writeD(ps.getDisplay());
-			}
 				break;
-			case SKILL_INFORMATION: {
+			case SKILL_INFORMATION:
 				writeD(this.taskId);
 				PlayerSkillList skillList = this.player.getSkillList();
 
@@ -363,18 +360,16 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(sk.getSkillLevel());
 				}
 
-			}
 				break;
-			case RECIPE_INFORMATION: {
+			case RECIPE_INFORMATION:
 				writeD(this.taskId);
 				RecipeList rec = this.player.getRecipeList();
 				writeD(rec.getRecipeList().size());
 				for (int id : rec.getRecipeList()) {
 					writeD(id);
 				}
-			}
 				break;
-			case QUEST_INFORMATION: {
+			case QUEST_INFORMATION:
 				writeD(this.taskId);
 				QuestStateList qsl = this.player.getQuestStateList();
 				FastTable<QuestState> quests = new FastTable<>();
@@ -396,7 +391,6 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeQ(qs.getNextRepeatTime().getTime());
 					writeD(qs.getFlags());
 				}
-			}
 				break;
 		}
 	}

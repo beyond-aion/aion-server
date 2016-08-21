@@ -48,7 +48,7 @@ public class ChestAI2 extends ActionItemNpcAI2 {
 				return;
 			}
 
-			Collection<Player> players = new HashSet<Player>();
+			Collection<Player> players = new HashSet<>();
 			if (player.isInGroup2()) {
 				for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
 					if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {

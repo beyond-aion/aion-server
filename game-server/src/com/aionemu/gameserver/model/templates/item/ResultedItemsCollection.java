@@ -27,7 +27,7 @@ public class ResultedItemsCollection {
 		if (randomItems != null) {
 			return randomItems;
 		} else {
-			return new FastTable<RandomItem>();
+			return new FastTable<>();
 		}
 	}
 }

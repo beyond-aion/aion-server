@@ -46,48 +46,38 @@ public class _2289RampagingMosbears extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203616: { // Gefion
+				case 203616: // Gefion
 					switch (dialog) {
-						case SETPRO1: {
+						case SETPRO1:
 							return sendQuestSelectionDialog(env);
-						}
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 7) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1354: {
+						case SELECT_ACTION_1354:
 							playQuestMovie(env, 62);
 							return sendQuestDialog(env, 1354);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 5, 6); // 6
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 7, 7, true, 5, 2120); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 7, 7);
-						}
 					}
 					break;
-				}
-				case 203618: { // Skanin
+				case 203618: // Skanin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 6, 7, 182203017, 1, 0, 0); // 7
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203616) { // Gefion

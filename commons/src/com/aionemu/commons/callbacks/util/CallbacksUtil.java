@@ -2,11 +2,11 @@ package com.aionemu.commons.callbacks.util;
 
 import java.util.List;
 
-import javassist.CtMethod;
-import javassist.bytecode.AnnotationsAttribute;
-
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackPriority;
+
+import javassist.CtMethod;
+import javassist.bytecode.AnnotationsAttribute;
 
 @SuppressWarnings("rawtypes")
 public class CallbacksUtil {

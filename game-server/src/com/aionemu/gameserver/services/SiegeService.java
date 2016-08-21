@@ -9,9 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.slf4j.Logger;
@@ -65,6 +62,9 @@ import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
@@ -540,7 +540,7 @@ public class SiegeService {
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations(int worldId) {
-		Map<Integer, SiegeLocation> mapLocations = new FastMap<Integer, SiegeLocation>();
+		Map<Integer, SiegeLocation> mapLocations = new FastMap<>();
 		for (SiegeLocation location : getSiegeLocations().values())
 			if (location.getWorldId() == worldId)
 				mapLocations.put(location.getLocationId(), location);
@@ -908,8 +908,8 @@ public class SiegeService {
 			}
 			crons[1] = String.valueOf(minutes);
 			crons[2] = String.valueOf(hours);
-			for (int i = 0; i < crons.length; i++) {
-				prepCron += crons[i];
+			for (String cron : crons) {
+				prepCron += cron;
 				prepCron += " ";
 			}
 			prepCron = prepCron.trim();
@@ -923,6 +923,6 @@ public class SiegeService {
 
 	// clear RVR event players list
 	public void clearRvrPlayersOnEvent() {
-		rvrPlayersOnEvent = new FastTable<Player>();
+		rvrPlayersOnEvent = new FastTable<>();
 	}
 }

@@ -46,14 +46,12 @@ public class _3031Pirates extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 730144) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						QuestService.startQuest(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 						return true;
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -104,7 +102,7 @@ public class _3031Pirates extends QuestHandler {
 				case 11:
 				case 12:
 				case 13:
-				case 14: {
+				case 14:
 					qs.setQuestVarById(1, qs.getQuestVarById(1) + 1);
 					updateQuestStatus(env);
 
@@ -114,7 +112,6 @@ public class _3031Pirates extends QuestHandler {
 						return true;
 					}
 					return true;
-				}
 			}
 		} else if (targetId == 214222 || targetId == 214223) {
 			switch (qs.getQuestVarById(2)) {
@@ -129,7 +126,7 @@ public class _3031Pirates extends QuestHandler {
 				case 8:
 				case 9:
 				case 10:
-				case 11: {
+				case 11:
 					qs.setQuestVarById(2, qs.getQuestVarById(2) + 1);
 					updateQuestStatus(env);
 
@@ -139,7 +136,6 @@ public class _3031Pirates extends QuestHandler {
 						return true;
 					}
 					return true;
-				}
 			}
 		}
 		return false;

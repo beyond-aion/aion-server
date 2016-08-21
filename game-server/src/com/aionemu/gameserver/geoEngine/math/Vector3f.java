@@ -348,7 +348,7 @@ public final class Vector3f implements Cloneable/*, Reusable */{
      */
     public Vector3f cross(float otherX, float otherY, float otherZ, Vector3f result) {
         if (result == null) result = new Vector3f();
-        float resX = ((y * otherZ) - (z * otherY)); 
+        float resX = ((y * otherZ) - (z * otherY));
         float resY = ((z * otherX) - (x * otherZ));
         float resZ = ((x * otherY) - (y * otherX));
         result.set(resX, resY, resZ);
@@ -775,10 +775,10 @@ public final class Vector3f implements Cloneable/*, Reusable */{
     }
 
     /**
-     * <code>maxLocal</code> computes the maximum value for each 
+     * <code>maxLocal</code> computes the maximum value for each
      * component in this and <code>other</code> vector. The result is stored
      * in this vector.
-     * @param other 
+     * @param other
      */
     public void maxLocal(Vector3f other){
         x = other.x > x ? other.x : x;
@@ -1065,7 +1065,7 @@ public final class Vector3f implements Cloneable/*, Reusable */{
     /**
      * Recycles a text builder {@link #newInstance() instance} immediately
      * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}). 
+     * StackContext}).
      */
     @SuppressWarnings("unchecked")
 		public static void recycle(Vector3f instance) {

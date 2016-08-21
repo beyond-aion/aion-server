@@ -24,10 +24,10 @@ public class MeshList {
 	protected int worldId;
 
 	@XmlTransient
-	Map<String, Integer> materialIdsByPath = new HashMap<String, Integer>();
+	Map<String, Integer> materialIdsByPath = new HashMap<>();
 
 	@XmlTransient
-	Map<Integer, String> pathZones = new HashMap<Integer, String>();
+	Map<Integer, String> pathZones = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (meshMaterials == null)

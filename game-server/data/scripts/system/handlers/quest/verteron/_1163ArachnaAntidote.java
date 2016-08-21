@@ -50,7 +50,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203151: {
+				case 203151:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -62,8 +62,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
-				case 203155: {
+				case 203155:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -77,7 +76,6 @@ public class _1163ArachnaAntidote extends QuestHandler {
 							return sendQuestEndDialog(env);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203155) {

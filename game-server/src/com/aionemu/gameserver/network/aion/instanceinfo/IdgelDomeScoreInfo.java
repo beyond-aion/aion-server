@@ -70,8 +70,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 			case 6:
 				writeD(buf, 100);
 				IdgelDomePlayerReward[] idgelDomeElyos = idgelDomeReward.getPlayersByRace(Race.ELYOS);
-				for (int i = 0; i < idgelDomeElyos.length; i++) {
-					IdgelDomePlayerReward reward = idgelDomeElyos[i];
+				for (IdgelDomePlayerReward reward : idgelDomeElyos) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -83,8 +82,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 					}
 				}
 				IdgelDomePlayerReward[] idgelDomeAsmodians = idgelDomeReward.getPlayersByRace(Race.ASMODIANS);
-				for (int i = 0; i < idgelDomeAsmodians.length; i++) {
-					IdgelDomePlayerReward reward = idgelDomeAsmodians[i];
+				for (IdgelDomePlayerReward reward : idgelDomeAsmodians) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);

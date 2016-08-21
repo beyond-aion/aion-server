@@ -3,8 +3,6 @@ package ai.instance.infinityShard;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -20,6 +18,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -28,7 +27,7 @@ import ai.AggressiveNpcAI2;
 @AIName("hyperion")
 public class HyperionAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 	private byte stage = 0;
 
 	@Override

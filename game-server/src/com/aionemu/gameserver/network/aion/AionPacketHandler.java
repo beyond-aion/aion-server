@@ -23,7 +23,7 @@ public class AionPacketHandler {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AionPacketHandler.class);
 
-	private Map<Integer, AionClientPacket> packetsPrototypes = new HashMap<Integer, AionClientPacket>();
+	private Map<Integer, AionClientPacket> packetsPrototypes = new HashMap<>();
 
 	/**
 	 * Reads one packet from given ByteBuffer

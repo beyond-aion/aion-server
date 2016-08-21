@@ -99,22 +99,22 @@ public class VertexBuffer extends GLObject implements Cloneable {
          */
         Index,
 
-        /** 
-         * Inital vertex position, used with animation 
+        /**
+         * Inital vertex position, used with animation
          */
         BindPosePosition,
 
-        /** 
+        /**
          * Inital vertex normals, used with animation
          */
         BindPoseNormal,
 
-        /** 
+        /**
          * Bone weights, used with animation
          */
         BoneWeight,
 
-        /** 
+        /**
          * Bone indices, used with animation
          */
         BoneIndex,

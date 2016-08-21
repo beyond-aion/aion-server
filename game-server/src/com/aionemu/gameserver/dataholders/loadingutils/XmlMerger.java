@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Properties;
 
 import javax.xml.namespace.QName;
@@ -295,9 +294,9 @@ public class XmlMerger {
 			boolean singleRootTag = Boolean.valueOf(getAttributeValue(element, qNameSingleRootTag, "false"));
 			boolean recImport = Boolean.valueOf(getAttributeValue(element, qNameRecursiveImport, "true"));
 			logger.debug("Processing dir " + file);
-			for (Iterator<File> it = XmlUtil.listFiles(file, recImport).iterator(); it.hasNext();) {
+			for (File file2 : XmlUtil.listFiles(file, recImport)) {
 				boolean skipRootStartElement = singleRootTag && endElement != null;
-				StartElement startElement = importFile(it.next(), skipRootStartElement, singleRootTag, writer, metadata);
+				StartElement startElement = importFile(file2, skipRootStartElement, singleRootTag, writer, metadata);
 				if (endElement == null)
 					endElement = eventFactory.createEndElement(startElement.getName(), null);
 			}

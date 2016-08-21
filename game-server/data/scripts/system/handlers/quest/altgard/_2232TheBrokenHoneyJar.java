@@ -46,18 +46,15 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203613) { // Gilungk
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 1, 1, true, 5, 2716); // reward
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			} else if (targetId == 700061) { // Beehive
 				if (dialog == DialogAction.USE_OBJECT) {

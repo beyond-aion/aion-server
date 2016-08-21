@@ -83,7 +83,7 @@ public class SimpleAttackManager {
 				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 				return;
 			}
-			if (!npc.canSee(target)) { 
+			if (!npc.canSee(target)) {
 				npc.getController().cancelCurrentSkill(null);
 				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 				return;

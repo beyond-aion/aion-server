@@ -40,15 +40,12 @@ public class _19600WelcometoWisplightAbbey extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return defaultCloseDialog(env, 0, 0, true, true);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

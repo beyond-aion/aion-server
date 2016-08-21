@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
+
+import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventDrops")
@@ -23,7 +23,7 @@ public class EventDrops {
 	 */
 	public List<GlobalRule> getAllRules() {
 		if (globalDropRules == null) {
-			globalDropRules = new FastTable<GlobalRule>();
+			globalDropRules = new FastTable<>();
 		}
 		return this.globalDropRules;
 	}

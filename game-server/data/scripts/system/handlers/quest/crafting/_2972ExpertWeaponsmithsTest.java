@@ -46,7 +46,7 @@ public class _2972ExpertWeaponsmithsTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204104: {
+				case 204104:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207964);
@@ -59,7 +59,6 @@ public class _2972ExpertWeaponsmithsTest extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204104) {

@@ -153,23 +153,20 @@ public class _4942ProvingProficiency extends QuestHandler {
 				// 10 - Take Brightly Glowing Holy Water to visit High Priest Balder for a purification ritual.
 				case 204075:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 8) {
 								return sendQuestDialog(env, 3740);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								removeQuestItem(env, 186000085, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 3825);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				// No match

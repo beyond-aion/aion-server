@@ -51,35 +51,29 @@ public class _28213TheColiseumSecret extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 205320) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SELECT_ACTION_1353: {
+					case SELECT_ACTION_1353:
 						removeQuestItem(env, 182212222, 1);
 						giveQuestItem(env, 182212223, 1);
 						return sendQuestDialog(env, 1353);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
-					}
 				}
 			} else if (targetId == 798804) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1693);
 						} else if (var == 3) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 3, 3, true);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

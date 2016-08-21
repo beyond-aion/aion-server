@@ -41,7 +41,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203605: { // Loriniah
+				case 203605: // Loriniah
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -58,16 +58,13 @@ public class _24012AnOminousCrop extends QuestHandler {
 							return checkQuestItems(env, 5, 6, true, 5, 10001); // reward
 					}
 					break;
-				}
-				case 700096: { // MuMu Cart
+				case 700096: // MuMu Cart
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var >= 2 && var < 5) {
 								return useQuestObject(env, var, var + 1, false, true); // 4,5
 							}
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203605) // Loriniah

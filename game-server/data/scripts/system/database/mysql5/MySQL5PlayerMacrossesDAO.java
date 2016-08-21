@@ -84,7 +84,7 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
 	/** {@inheritDoc} */
 	@Override
 	public MacroList restoreMacrosses(final int playerId) {
-		final Map<Integer, String> macrosses = new HashMap<Integer, String>();
+		final Map<Integer, String> macrosses = new HashMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);

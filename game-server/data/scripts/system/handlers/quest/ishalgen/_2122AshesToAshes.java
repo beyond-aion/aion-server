@@ -48,35 +48,28 @@ public class _2122AshesToAshes extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203551) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case SELECT_ACTION_1012: {
+					case SELECT_ACTION_1012:
 						removeQuestItem(env, 182203120, 1);
 						return sendQuestDialog(env, 1012);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
-					}
 				}
 			} else if (targetId == 730029) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						if (player.getInventory().getItemCountByItemId(182203133) >= 1)
 							return sendQuestDialog(env, 1352);
 						else
 							return sendQuestDialog(env, 1693);
-					}
-					case SELECT_ACTION_1353: {
+					case SELECT_ACTION_1353:
 						removeQuestItem(env, 182203133, 1);
 						return sendQuestDialog(env, 1353);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return closeDialogWindow(env);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 1, true, false);
-					}
 				}
 			} else if (targetId == 700148) {
 				return true; // just give quest drop on use

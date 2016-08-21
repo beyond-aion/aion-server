@@ -48,7 +48,7 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 798068: { // Maochinicherk
+				case 798068: // Maochinicherk
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -58,7 +58,6 @@ public class _4967GrowthNinissSecondCharm extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1, 0, 0, 182207137, 1); // 1
 					}
 					break;
-				}
 				case 798385: // Ninis
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

@@ -1,8 +1,8 @@
 package ai.instance.drakenspire;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * Possible NPC IDs 236245, 236246, 236247

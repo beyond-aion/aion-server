@@ -56,7 +56,7 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 				case 798451:
 					long kinah = player.getInventory().getKinah();
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							switch (var) {
 								case 0:
 									return sendQuestDialog(env, 1011);
@@ -64,7 +64,6 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 									return sendQuestDialog(env, 4080);
 							}
 							return false;
-						}
 						case SETPRO10:
 							if (kinah >= 167500) // Need check how many kinah decrased
 							{
@@ -92,9 +91,8 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 					return false;
 				case 798450:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						}
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setStatus(QuestStatus.REWARD);

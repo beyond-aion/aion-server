@@ -2,11 +2,11 @@ package com.aionemu.chatserver;
 
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-
 import com.aionemu.chatserver.network.netty.NettyServer;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.utils.ExitCode;
+
+import ch.qos.logback.classic.LoggerContext;
 
 /**
  * @author nrg

@@ -1,10 +1,10 @@
 package ai.instance.rakes;
 
-import ai.SummonerAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.ai.Percentage;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.SummonerAI2;
 
 /**
  * @author xTz

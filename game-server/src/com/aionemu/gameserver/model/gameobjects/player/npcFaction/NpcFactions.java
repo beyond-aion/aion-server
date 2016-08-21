@@ -36,7 +36,7 @@ public class NpcFactions {
 
 	private Player owner;
 
-	private Map<Integer, NpcFaction> factions = new HashMap<Integer, NpcFaction>();
+	private Map<Integer, NpcFaction> factions = new HashMap<>();
 	private NpcFaction[] activeNpcFaction = new NpcFaction[2];
 	private int[] timeLimit = new int[] { 0, 0 };
 

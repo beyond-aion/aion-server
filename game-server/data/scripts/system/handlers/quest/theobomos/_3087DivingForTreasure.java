@@ -42,9 +42,8 @@ public class _3087DivingForTreasure extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798201) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -56,7 +55,7 @@ public class _3087DivingForTreasure extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700419: {
+				case 700419:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -78,7 +77,6 @@ public class _3087DivingForTreasure extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798144) {

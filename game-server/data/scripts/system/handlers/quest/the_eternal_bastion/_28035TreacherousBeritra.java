@@ -42,7 +42,7 @@ public class _28035TreacherousBeritra extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 801047: {
+				case 801047:
 					switch (dialogAction) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -54,8 +54,7 @@ public class _28035TreacherousBeritra extends QuestHandler {
 							return sendQuestSelectionDialog(env);
 					}
 					return false;
-				}
-				case 800529: {
+				case 800529:
 					switch (dialogAction) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
@@ -65,7 +64,6 @@ public class _28035TreacherousBeritra extends QuestHandler {
 							return sendQuestDialog(env, 5);
 					}
 
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 800529) {

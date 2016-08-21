@@ -46,7 +46,7 @@ public class _14042ARescueOperation extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 278502: { // Sakmis
+				case 278502: // Sakmis
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -56,8 +56,7 @@ public class _14042ARescueOperation extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
-				}
-				case 278517: { // Nereus
+				case 278517: // Nereus
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -67,8 +66,7 @@ public class _14042ARescueOperation extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
 					break;
-				}
-				case 278590: { // Dactyl
+				case 278590: // Dactyl
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -78,24 +76,20 @@ public class _14042ARescueOperation extends QuestHandler {
 							return defaultCloseDialog(env, 2, 3); // 3
 					}
 					break;
-				}
-				case 253623: { // Captured Elyos Prisoner
+				case 253623: // Captured Elyos Prisoner
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						case SELECT_ACTION_2035: {
+						case SELECT_ACTION_2035:
 							playQuestMovie(env, 269);
 							return sendQuestDialog(env, 2035);
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1295.1139f, 1498.6543f, 1571.1763f, 3, 4); // 4
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus

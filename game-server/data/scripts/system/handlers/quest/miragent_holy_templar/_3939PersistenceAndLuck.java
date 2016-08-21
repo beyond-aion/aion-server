@@ -55,7 +55,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203780: { // Cornelius
+				case 203780: // Cornelius
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -71,52 +71,45 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 							return defaultCloseDialog(env, var, var);
 					}
 					break;
-				}
-				case 203781: { // Sabotes
+				case 203781: // Sabotes
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							return false;
-						case SELECT_ACTION_1354: {
+						case SELECT_ACTION_1354:
 							if (var == 1 && player.getInventory().tryDecreaseKinah(3400000)) {
 								return defaultCloseDialog(env, 1, 2, 122001274, 1, 0, 0); // 2
 							} else {
 								return sendQuestDialog(env, 1438);
 							}
-						}
 						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 1, 1);
 					}
 					break;
-				}
 				case 700537:
 					if (dialog == DialogAction.USE_OBJECT && var == 2) {
 						return useQuestObject(env, 2, 2, false, 0);
 					}
 					break;
-				case 203752: { // Jucleas
+				case 203752: // Jucleas
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 3, 3, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 2120);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
 				// No match
 				default:
 					return sendQuestStartDialog(env);

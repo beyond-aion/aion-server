@@ -3,9 +3,6 @@ package com.aionemu.gameserver.services.abyss;
 import java.util.Arrays;
 import java.util.List;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
@@ -20,6 +17,9 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author VladimirZ
@@ -60,9 +60,9 @@ public class AbyssRankingCache {
 	 */
 	private void refreshCache() {
 		List<Race> races = Arrays.asList(Race.ASMODIANS, Race.ELYOS);
-		FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>>();
-		FastMap<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new FastMap<Race, SM_ABYSS_RANKING_LEGIONS>();
-		FastMap<Integer, Integer> newLegionRanking = new FastMap<Integer, Integer>();
+		FastMap<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new FastMap<>();
+		FastMap<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new FastMap<>();
+		FastMap<Integer, Integer> newLegionRanking = new FastMap<>();
 		List<AbyssRankingResult> rankList;
 
 		int updateTime = (int) (System.currentTimeMillis() / 1000);
@@ -123,7 +123,7 @@ public class AbyssRankingCache {
 	}
 
 	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, List<AbyssRankingResult> list) {
-		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new FastTable<SM_ABYSS_RANKING_PLAYERS>();
+		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new FastTable<>();
 		int page = 1;
 
 		for (int i = 0; i < list.size(); i += 44) {
@@ -139,7 +139,7 @@ public class AbyssRankingCache {
 	}
 
 	private FastMap<Integer, Integer> getLegionRanking(List<AbyssRankingResult> rankList) {
-		FastMap<Integer, Integer> rankMap = new FastMap<Integer, Integer>();
+		FastMap<Integer, Integer> rankMap = new FastMap<>();
 
 		for (AbyssRankingResult rank : rankList) {
 			rankMap.put(rank.getLegionId(), rank.getRankPos());

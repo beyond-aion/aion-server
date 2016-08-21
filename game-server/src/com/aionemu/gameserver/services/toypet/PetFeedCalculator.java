@@ -6,8 +6,6 @@ import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
@@ -15,6 +13,8 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
 import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 import com.aionemu.gameserver.model.templates.pet.PetRewards;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -45,7 +45,7 @@ public final class PetFeedCalculator {
 	static final int[][] pointValues;
 
 	static {
-		TreeSet<Short> counts = new TreeSet<Short>();
+		TreeSet<Short> counts = new TreeSet<>();
 		for (PetFlavour flavour : DataManager.PET_FEED_DATA.getPetFlavours()) {
 			if (flavour.getFullCount() > 0)
 				counts.add((short) (flavour.getFullCount() & 0xFFFF));
@@ -174,7 +174,7 @@ public final class PetFeedCalculator {
 		if (progress.isLovedFeeded()) { // for cash feed
 			if (rewardGroup.getResults().size() == 1)
 				return rewardGroup.getResults().get(0);
-			List<PetFeedResult> validRewards = new FastTable<PetFeedResult>();
+			List<PetFeedResult> validRewards = new FastTable<>();
 			int maxLevel = 0;
 			for (PetFeedResult result : rewardGroup.getResults()) {
 				int resultLevel = DataManager.ITEM_DATA.getItemTemplate(result.getItem()).getLevel();

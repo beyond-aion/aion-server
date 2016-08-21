@@ -494,7 +494,7 @@ public final class QuestService {
 			return false;
 
 		if (template.getCombineSkill() != 0) {
-			List<Integer> skills = new FastTable<Integer>(); // skills to check
+			List<Integer> skills = new FastTable<>(); // skills to check
 			if (template.getCombineSkill() == -1) { // any skill
 				if (template.getNpcFactionId() != 12 && template.getNpcFactionId() != 13) { // exclude essence/aether tapping for crafting dailies
 					skills.add(30002);
@@ -778,7 +778,7 @@ public final class QuestService {
 				continue;
 
 			if (players != null && player.isInGroup2()) {
-				List<Player> pls = new FastTable<Player>();
+				List<Player> pls = new FastTable<>();
 				if (drop.isDropEachMemberGroup()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -812,7 +812,7 @@ public final class QuestService {
 					pls.clear();
 				}
 			} else if (players != null && player.isInAlliance2()) {
-				List<Player> pls = new FastTable<Player>();
+				List<Player> pls = new FastTable<>();
 				if (drop.isDropEachMemberAlliance()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -1032,7 +1032,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersGroup(PlayerGroup group, int npcId, int questId) {
-		List<Player> players = new FastTable<Player>();
+		List<Player> players = new FastTable<>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : group.getMembers()) {
@@ -1048,7 +1048,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersAlliance(PlayerAlliance alliance, int npcId, int questId) {
-		List<Player> players = new FastTable<Player>();
+		List<Player> players = new FastTable<>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : alliance.getMembers()) {

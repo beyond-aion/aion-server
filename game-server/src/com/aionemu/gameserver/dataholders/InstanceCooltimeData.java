@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastMap;
-
 import org.joda.time.DateTime;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.services.instance.InstanceService;
+
+import javolution.util.FastMap;
 
 /**
  * @author VladimirZ
@@ -28,8 +28,8 @@ public class InstanceCooltimeData {
 	@XmlElement(name = "instance_cooltime", required = true)
 	protected List<InstanceCooltime> instanceCooltime;
 
-	private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<Integer, InstanceCooltime>();
-	private HashMap<Integer, Integer> syncIdToMapId = new HashMap<Integer, Integer>();
+	private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<>();
+	private HashMap<Integer, Integer> syncIdToMapId = new HashMap<>();
 
 	/**
 	 * @param u

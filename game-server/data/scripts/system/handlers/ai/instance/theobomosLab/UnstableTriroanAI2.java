@@ -3,9 +3,6 @@ package ai.instance.theobomosLab;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -16,13 +13,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
+
 /**
  * @author Ritsu
  */
 @AIName("triroan")
 public class UnstableTriroanAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 
 	@Override
 	protected void handleSpawned() {

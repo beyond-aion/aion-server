@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instanceposition.ChaosInstancePosition;
@@ -30,13 +28,15 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
+import javolution.util.FastTable;
+
 /**
  * @author xTz
  */
 public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
-	private Map<Integer, Boolean> positions = new HashMap<Integer, Boolean>();
-	private FastTable<Integer> zones = new FastTable<Integer>();
+	private Map<Integer, Boolean> positions = new HashMap<>();
+	private FastTable<Integer> zones = new FastTable<>();
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;
@@ -97,7 +97,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	private List<Integer> getFreePositions() {
-		List<Integer> p = new FastTable<Integer>();
+		List<Integer> p = new FastTable<>();
 		for (Integer key : positions.keySet()) {
 			if (!positions.get(key)) {
 				p.add(key);

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,13 +8,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
 
 /**
  * @author Ranastic
@@ -34,8 +33,8 @@ public class ItemPurificationData {
 	private FastMap<Integer, FastMap<Integer, PurificationResultItem>> ResultItemMap;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		itemPurificationSets = new TIntObjectHashMap<ItemPurificationTemplate>();
-		ResultItemMap = new FastMap<Integer, FastMap<Integer, PurificationResultItem>>();
+		itemPurificationSets = new TIntObjectHashMap<>();
+		ResultItemMap = new FastMap<>();
 
 		for (ItemPurificationTemplate set : ItemPurificationTemplates) {
 			itemPurificationSets.put(set.getPurification_base_item_id(), set);

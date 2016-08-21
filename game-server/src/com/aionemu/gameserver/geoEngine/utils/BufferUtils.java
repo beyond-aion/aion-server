@@ -42,10 +42,10 @@ import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.geoEngine.math.Vector2f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <code>BufferUtils</code> is a helper class for generating nio buffers from
@@ -97,9 +97,9 @@ public final class BufferUtils {
     public static FloatBuffer createFloatBuffer(Vector3f ... data) {
         if (data == null) return null;
         FloatBuffer buff = createFloatBuffer(3 * data.length);
-        for (int x = 0; x < data.length; x++) {
-            if (data[x] != null)
-                buff.put(data[x].x).put(data[x].y).put(data[x].z);
+        for (Vector3f element : data) {
+            if (element != null)
+                buff.put(element.x).put(element.y).put(element.z);
             else
                 buff.put(0).put(0).put(0);
         }
@@ -342,9 +342,9 @@ public final class BufferUtils {
     public static FloatBuffer createFloatBuffer(Vector2f ... data) {
         if (data == null) return null;
         FloatBuffer buff = createFloatBuffer(2 * data.length);
-        for (int x = 0; x < data.length; x++) {
-            if (data[x] != null)
-                buff.put(data[x].x).put(data[x].y);
+        for (Vector2f element : data) {
+            if (element != null)
+                buff.put(element.x).put(element.y);
             else
                 buff.put(0).put(0);
         }
@@ -846,7 +846,7 @@ public final class BufferUtils {
     public static void printCurrentDirectMemory(StringBuilder store) {
         long totalHeld = 0;
         // make a new set to hold the keys to prevent concurrency issues.
-        ArrayList<Buffer> bufs = new ArrayList<Buffer>(trackingHash.keySet());
+        ArrayList<Buffer> bufs = new ArrayList<>(trackingHash.keySet());
         int fBufs = 0, bBufs = 0, iBufs = 0, sBufs = 0, dBufs = 0;
         int fBufsM = 0, bBufsM = 0, iBufsM = 0, sBufsM = 0, dBufsM = 0;
         for (Buffer b : bufs) {

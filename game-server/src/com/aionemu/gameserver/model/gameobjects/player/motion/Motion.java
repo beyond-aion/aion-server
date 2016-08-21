@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.gameobjects.player.motion;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.IExpirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastMap;
 
 /**
  * @author MrPoke

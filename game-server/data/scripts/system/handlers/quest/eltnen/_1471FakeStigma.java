@@ -47,37 +47,30 @@ public class _1471FakeStigma extends QuestHandler {
 			int var0 = qs.getQuestVarById(0);
 			if (targetId == 203703) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var0 == 0)
 							return sendQuestDialog(env, 1352);
 						else if (var0 == 3)
 							return sendQuestDialog(env, 2375);
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return defaultCloseDialog(env, 3, 3, true, true);
-					}
 				}
 			} else if (targetId == 798024) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2);
-					}
 				}
 			} else if (targetId == 798321) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						return defaultCloseDialog(env, 2, 3);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -29,7 +29,7 @@ import javolution.util.FastTable;
 public class SerialKillerService {
 
 	private final Map<Integer, SerialKiller> serialKillers = new FastMap<>();
-	private final Map<Integer, Long> cooldowns = new ConcurrentHashMap<Integer, Long>(); //cd for intruder scan
+	private final Map<Integer, Long> cooldowns = new ConcurrentHashMap<>(); //cd for intruder scan
 	private final List<Integer> ldPlayers = new FastTable<>();
 	private static final Map<Integer, WorldType> handledWorlds = new FastMap<>();
 	private final int refresh = CustomConfig.SERIALKILLER_REFRESH;
@@ -125,7 +125,7 @@ public class SerialKillerService {
 			player.getSKInfo().refreshOwner(player);
 			if (ldPlayers.contains(player.getObjectId())) {
 				PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(7, player.getSKInfo().getLDRank(), getOrRemoveCooldown(player.getObjectId())));
-			} else { 
+			} else {
 				PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 0 : 7, player.getSKInfo().getRank(), getOrRemoveCooldown(player.getObjectId())));
 			}
 		}

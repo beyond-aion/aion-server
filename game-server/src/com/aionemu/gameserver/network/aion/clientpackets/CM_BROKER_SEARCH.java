@@ -33,7 +33,7 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 		this.page = readH();
 		this.mask = readH();
 		this.itemCount = readH();
-		this.itemList = new FastTable<Integer>();
+		this.itemList = new FastTable<>();
 
 		for (int index = 0; index < this.itemCount; index++)
 			this.itemList.add(readD());

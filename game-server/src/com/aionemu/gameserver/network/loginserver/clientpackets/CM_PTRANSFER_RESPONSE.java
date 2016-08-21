@@ -90,7 +90,7 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 				PlayerTransferService.getInstance().onError(taskId, reason);
 			}
 				break;
-			case 23: {
+			case 23:
 				byte serverId = readSC();
 				if (NetworkConfig.GAMESERVER_ID != serverId) {
 					try {
@@ -106,7 +106,6 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 					int taskId = readD();
 					PlayerTransferService.getInstance().startTransfer(account, targetAccount, playerId, targetServerId, taskId);
 				}
-			}
 				break;
 		}
 	}

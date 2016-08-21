@@ -152,23 +152,20 @@ public class _3938WellRounded extends QuestHandler {
 				// 10 - Take the Glossy Oath Stone to High Priest Jucleas and ask him to perform the ritual of affirmation
 				case 203752:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000081) >= 1) {
 								removeQuestItem(env, 186000081, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 3825);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				// No match

@@ -21,8 +21,8 @@ public class State extends AdminCommand {
 		super("state");
 	}
 
-	static final Map<Integer, CreatureState> creatureStateLookup = new HashMap<Integer, CreatureState>();
-	static final Map<Integer, TestState> testStateLookup = new HashMap<Integer, TestState>();
+	static final Map<Integer, CreatureState> creatureStateLookup = new HashMap<>();
+	static final Map<Integer, TestState> testStateLookup = new HashMap<>();
 
 	static {
 		for (CreatureState s : EnumSet.allOf(CreatureState.class))

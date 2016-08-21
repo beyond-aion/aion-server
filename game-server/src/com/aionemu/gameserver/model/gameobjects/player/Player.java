@@ -180,7 +180,7 @@ public class Player extends Creature {
 	private HouseObjectCooldownList houseObjectCooldownList;
 	private long nextSkillUse;
 	private ChainSkills chainSkills;
-	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<AttackStatus, Long>();
+	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
 
 	private int dualEffectValue = 0;
 	/**
@@ -627,7 +627,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public List<Item> getDirtyItemsToUpdate() {
-		List<Item> dirtyItems = new FastTable<Item>();
+		List<Item> dirtyItems = new FastTable<>();
 
 		IStorage cubeStorage = getStorage(StorageType.CUBE.getId());
 		if (cubeStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {

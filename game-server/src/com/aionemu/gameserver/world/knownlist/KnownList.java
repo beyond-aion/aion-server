@@ -331,7 +331,7 @@ public class KnownList {
 		if (knownPlayers == null) {
 			synchronized (this) {
 				if (knownPlayers == null) {
-					knownPlayers = new ConcurrentHashMap<Integer, Player>();
+					knownPlayers = new ConcurrentHashMap<>();
 				}
 			}
 		}

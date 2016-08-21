@@ -22,7 +22,7 @@ public class GlobalDropExcludedNpcs {
 
 	public List<GlobalDropExcludedNpc> getGlobalDropExcludedNpcs() {
 		if (gdExcludedNpcs == null) {
-			gdExcludedNpcs = new FastTable<GlobalDropExcludedNpc>();
+			gdExcludedNpcs = new FastTable<>();
 		}
 		return this.gdExcludedNpcs;
 	}

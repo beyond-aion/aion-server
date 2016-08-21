@@ -69,7 +69,7 @@ public class _1373WaterTherapy extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203949: {
+				case 203949:
 					if (qs.getQuestVarById(0) == 2) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
@@ -81,7 +81,6 @@ public class _1373WaterTherapy extends QuestHandler {
 						} else
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203949)

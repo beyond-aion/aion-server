@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -12,10 +10,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawns;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -31,13 +30,13 @@ public class HouseNpcsData {
 
 	public List<HouseSpawns> getHouseSpawns() {
 		if (houseSpawnsData == null) {
-			houseSpawnsData = new FastTable<HouseSpawns>();
+			houseSpawnsData = new FastTable<>();
 		}
 		return this.houseSpawnsData;
 	}
 
 	@XmlTransient
-	private TIntObjectHashMap<List<HouseSpawn>> houseSpawnsByAddressId = new TIntObjectHashMap<List<HouseSpawn>>();
+	private TIntObjectHashMap<List<HouseSpawn>> houseSpawnsByAddressId = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (HouseSpawns houseSpawns : getHouseSpawns()) {

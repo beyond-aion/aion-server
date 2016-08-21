@@ -46,12 +46,11 @@ public class _1131UndeliveredArmor extends QuestHandler {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					case SETPRO1: {
+					case SETPRO1:
 						qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -59,12 +58,11 @@ public class _1131UndeliveredArmor extends QuestHandler {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						qs.setQuestVar(2);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestEndDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

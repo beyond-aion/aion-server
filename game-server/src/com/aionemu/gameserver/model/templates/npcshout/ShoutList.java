@@ -63,7 +63,7 @@ public class ShoutList {
 	 */
 	public List<NpcShout> getNpcShouts() {
 		if (npcShouts == null) {
-			npcShouts = new FastTable<NpcShout>();
+			npcShouts = new FastTable<>();
 		}
 		return this.npcShouts;
 	}
@@ -84,7 +84,7 @@ public class ShoutList {
 	 */
 	public List<Integer> getNpcIds() {
 		if (npcIds == null) {
-			npcIds = new FastTable<Integer>();
+			npcIds = new FastTable<>();
 		}
 		return this.npcIds;
 	}

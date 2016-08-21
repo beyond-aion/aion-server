@@ -85,7 +85,7 @@ public class Mesh {
 	// private EnumMap<VertexBuffer.Type, VertexBuffer> buffers = new EnumMap<Type,
 	// VertexBuffer>(VertexBuffer.Type.class);
 	// private VertexBuffer[] buffers = new VertexBuffer[BUFFERS_SIZE];
-	private IntMap<VertexBuffer> buffers = new IntMap<VertexBuffer>();
+	private IntMap<VertexBuffer> buffers = new IntMap<>();
 	private float pointSize = 1;
 	private float lineWidth = 1;
 
@@ -161,7 +161,7 @@ public class Mesh {
 	}
 
 	public void setInterleaved() {
-		ArrayList<VertexBuffer> vbs = new ArrayList<VertexBuffer>();
+		ArrayList<VertexBuffer> vbs = new ArrayList<>();
 		for (Entry<VertexBuffer> entry : buffers) {
 			vbs.add(entry.getValue());
 		}

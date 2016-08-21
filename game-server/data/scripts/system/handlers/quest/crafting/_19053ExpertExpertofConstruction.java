@@ -47,7 +47,7 @@ public class _19053ExpertExpertofConstruction extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798450: {
+				case 798450:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -60,7 +60,6 @@ public class _19053ExpertExpertofConstruction extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798450) {

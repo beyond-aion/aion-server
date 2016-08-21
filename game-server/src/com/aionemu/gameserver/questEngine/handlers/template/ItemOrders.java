@@ -73,7 +73,7 @@ public class ItemOrders extends QuestHandler {
 			switch (dialog) {
 				case QUEST_ACCEPT:
 				case QUEST_ACCEPT_1:
-				case QUEST_ACCEPT_SIMPLE: {
+				case QUEST_ACCEPT_SIMPLE:
 					if (player.getInventory().getItemCountByItemId(startItemId) > 0) {
 						QuestService.startQuest(env);
 					} else {
@@ -81,12 +81,10 @@ public class ItemOrders extends QuestHandler {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
 					}
 					return closeDialogWindow(env);
-				}
 				case QUEST_REFUSE:
 				case QUEST_REFUSE_1:
-				case QUEST_REFUSE_SIMPLE: {
+				case QUEST_REFUSE_SIMPLE:
 					return closeDialogWindow(env);
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var0 = qs.getQuestVarById(0);
@@ -111,9 +109,8 @@ public class ItemOrders extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

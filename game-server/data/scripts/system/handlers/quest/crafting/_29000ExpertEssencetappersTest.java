@@ -48,31 +48,27 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204097: { // Relir
+				case 204097: // Relir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							if (!player.getInventory().isFullSpecialCube()) {
 								return defaultCloseDialog(env, 0, 1, 122001250, 1, 0, 0); // 1
 							}
-						}
 					}
 					break;
-				}
-				case 204096: { // Latatusk
+				case 204096: // Latatusk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
 							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
 							long itemCount3 = player.getInventory().getItemCountByItemId(itemId3);
@@ -86,12 +82,9 @@ public class _29000ExpertEssencetappersTest extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 10001);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 1, 1);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204096) {

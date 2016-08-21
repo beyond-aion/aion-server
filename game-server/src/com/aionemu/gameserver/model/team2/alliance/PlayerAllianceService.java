@@ -296,14 +296,14 @@ public class PlayerAllianceService {
 	public static void distributeKinah(Player player, long amount) {
 		PlayerAlliance alliance = player.getPlayerAlliance2();
 		if (alliance != null) {
-			alliance.onEvent(new TeamKinahDistributionEvent<PlayerAlliance>(alliance, player, amount));
+			alliance.onEvent(new TeamKinahDistributionEvent<>(alliance, player, amount));
 		}
 	}
 
 	public static void distributeKinahInGroup(Player player, long amount) {
 		PlayerAllianceGroup allianceGroup = player.getPlayerAllianceGroup2();
 		if (allianceGroup != null) {
-			allianceGroup.onEvent(new TeamKinahDistributionEvent<PlayerAllianceGroup>(allianceGroup, player, amount));
+			allianceGroup.onEvent(new TeamKinahDistributionEvent<>(allianceGroup, player, amount));
 		}
 	}
 
@@ -313,7 +313,7 @@ public class PlayerAllianceService {
 	public static void showBrand(Player player, int targetObjId, int brandId) {
 		PlayerAlliance alliance = player.getPlayerAlliance2();
 		if (alliance != null) {
-			alliance.onEvent(new ShowBrandEvent<PlayerAlliance>(alliance, targetObjId, brandId));
+			alliance.onEvent(new ShowBrandEvent<>(alliance, targetObjId, brandId));
 		}
 	}
 

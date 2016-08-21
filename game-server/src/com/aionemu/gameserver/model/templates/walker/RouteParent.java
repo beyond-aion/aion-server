@@ -22,7 +22,7 @@ public class RouteParent {
 
 	public List<RouteVersion> getRouteVersion() {
 		if (versions == null)
-			versions = new FastTable<RouteVersion>();
+			versions = new FastTable<>();
 		return this.versions;
 	}
 

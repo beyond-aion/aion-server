@@ -36,12 +36,12 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 	/**
 	 * Classes that were loaded from libraries. They are no parsed for any annotations, but they are needed by JavaCompiler to perform valid compilation
 	 */
-	private Set<String> libraryClassNames = new HashSet<String>();
+	private Set<String> libraryClassNames = new HashSet<>();
 
 	/**
 	 * List of jar files that were scanned by this classloader for classes
 	 */
-	private Set<File> loadedLibraries = new HashSet<File>();
+	private Set<File> loadedLibraries = new HashSet<>();
 
 	/**
 	 * Just for compatibility with {@link URLClassLoader}

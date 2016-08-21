@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -56,7 +56,7 @@ public class CraftItemGroup extends CraftGroup {
 	 */
 	public List<CraftItem> getItems() {
 		if (items == null) {
-			items = new FastTable<CraftItem>();
+			items = new FastTable<>();
 		}
 		return this.items;
 	}

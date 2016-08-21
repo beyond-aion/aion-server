@@ -43,25 +43,20 @@ public class _2920ElementaryMyDearDaeva extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204141) { // Deyla
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return sendQuestDialog(env, 1693);
-					}
-					case SETPRO11: {
+					case SETPRO11:
 						changeQuestStep(env, 0, 0, true); // reward
 						choice = 0;
 						return sendQuestDialog(env, 5);
-					}
-					case SETPRO12: {
+					case SETPRO12:
 						changeQuestStep(env, 0, 0, true); // reward
 						choice = 1;
 						return sendQuestDialog(env, 6);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

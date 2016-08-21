@@ -30,7 +30,7 @@ public class MySQL5TownDAO extends TownDAO {
 
 	@Override
 	public Map<Integer, Town> load(Race race) {
-		Map<Integer, Town> towns = new HashMap<Integer, Town>();
+		Map<Integer, Town> towns = new HashMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setString(1, race.toString());

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -22,7 +22,7 @@ public class PanelSkillsData {
 	@XmlElement(name = "panel")
 	protected List<SkillPanel> templates;
 
-	private TIntObjectHashMap<SkillPanel> skillPanels = new TIntObjectHashMap<SkillPanel>();
+	private TIntObjectHashMap<SkillPanel> skillPanels = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (SkillPanel panel : templates) {

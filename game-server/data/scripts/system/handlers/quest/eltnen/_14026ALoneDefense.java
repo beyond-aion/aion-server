@@ -71,7 +71,7 @@ public class _14026ALoneDefense extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203901: {
+				case 203901:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -89,8 +89,7 @@ public class _14026ALoneDefense extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204020: {
+				case 204020:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -108,8 +107,7 @@ public class _14026ALoneDefense extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204044: {
+				case 204044:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							switch (qs.getQuestVarById(0)) {
@@ -138,7 +136,6 @@ public class _14026ALoneDefense extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) {
@@ -231,21 +228,18 @@ public class _14026ALoneDefense extends QuestHandler {
 		float y = 0;
 		final float z = 217.48f;
 		switch (mobToSpawn) {
-			case 211628: {
+			case 211628:
 				x = 254.74f;
 				y = 236.72f;
 				break;
-			}
-			case 211630: {
+			case 211630:
 				x = 257.92f;
 				y = 237.39f;
 				break;
-			}
-			case 213575: {
+			case 213575:
 				x = 261.86f;
 				y = 237.5f;
 				break;
-			}
 		}
 		Npc spawn = (Npc) QuestService.spawnQuestNpc(310040000, player.getInstanceId(), mobToSpawn, x, y, z, (byte) 95);
 		Collection<Npc> allNpcs = World.getInstance().getNpcs();

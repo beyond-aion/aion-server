@@ -53,7 +53,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 		}
 
 		switch (targetId) {
-			case 205192: {
+			case 205192:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1352);
@@ -82,8 +82,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 				return false;
-			}
-			case 204225: {
+			case 204225:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
@@ -96,7 +95,6 @@ public class _4042MessageinaBottle extends QuestHandler {
 					} else
 						return sendQuestStartDialog(env);
 				}
-			}
 		}
 		return false;
 	}

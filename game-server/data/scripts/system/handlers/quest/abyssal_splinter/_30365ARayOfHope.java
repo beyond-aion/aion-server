@@ -43,54 +43,44 @@ public class _30365ARayOfHope extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204241: { // Annemari
+				case 204241: // Annemari
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 203574: { // Arekedil
+				case 203574: // Arekedil
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 3) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							changeQuestStep(env, 3, 3, true); // reward
 							return sendQuestEndDialog(env);
-						}
 					}
 					break;
-				}
-				case 278040: { // Haug
+				case 278040: // Haug
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203574) { // Arekedil

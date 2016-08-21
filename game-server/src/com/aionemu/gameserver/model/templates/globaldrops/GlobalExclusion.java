@@ -7,11 +7,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
+
+import javolution.util.FastTable;
 
 /**
  * @author synchro2, bobobear
@@ -37,35 +37,35 @@ public class GlobalExclusion {
 
 	public List<Integer> getNpcIds() {
 		if (excludedNpcIds == null) {
-			excludedNpcIds = new FastTable<Integer>();
+			excludedNpcIds = new FastTable<>();
 		}
 		return excludedNpcIds;
 	}
 
 	public List<String> getNpcNames() {
 		if (excludedNpcNames == null) {
-			excludedNpcNames = new FastTable<String>();
+			excludedNpcNames = new FastTable<>();
 		}
 		return excludedNpcNames;
 	}
 
 	public List<NpcTemplateType> getNpcTemplateTypes() {
 		if (excludedTypes == null) {
-			excludedTypes = new FastTable<NpcTemplateType>();
+			excludedTypes = new FastTable<>();
 		}
 		return excludedTypes;
 	}
 
 	public List<TribeClass> getNpcTribes() {
 		if (excludedTribes == null) {
-			excludedTribes = new FastTable<TribeClass>();
+			excludedTribes = new FastTable<>();
 		}
 		return excludedTribes;
 	}
 
 	public List<AbyssNpcType> getNpcAbyssTypes() {
 		if (excludedAbyssTypes == null) {
-			excludedAbyssTypes = new FastTable<AbyssNpcType>();
+			excludedAbyssTypes = new FastTable<>();
 		}
 		return excludedAbyssTypes;
 	}

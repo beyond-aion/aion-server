@@ -16,7 +16,7 @@ public class AgentAbyssPointsListener extends AddAPGlobalCallback {
 	}
 
 	@Override
-	public void onAbyssPointsAdded(Player player, int abyssPoints) {	
+	public void onAbyssPointsAdded(Player player, int abyssPoints) {
 		if (player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))	|| player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")))
 			siege.addAbyssPoints(player, abyssPoints);
 	}

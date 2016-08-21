@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,14 +20,16 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
+import javolution.util.FastTable;
+
 /**
  * @author Source
  */
 public class RiftManager {
 
 	private static Logger log = LoggerFactory.getLogger(RiftManager.class);
-	private static List<Npc> rifts = new FastTable<Npc>();
-	private static Map<String, SpawnTemplate> riftGroups = new HashMap<String, SpawnTemplate>();
+	private static List<Npc> rifts = new FastTable<>();
+	private static Map<String, SpawnTemplate> riftGroups = new HashMap<>();
 
 	public static void addRiftSpawnTemplate(SpawnGroup2 spawn) {
 		if (spawn.hasPool()) {

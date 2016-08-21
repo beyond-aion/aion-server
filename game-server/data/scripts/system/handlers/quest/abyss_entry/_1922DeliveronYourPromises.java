@@ -48,30 +48,25 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203830: { // Fuchsia
+				case 203830: // Fuchsia
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO12: {
+						case SETPRO12:
 							return defaultCloseDialog(env, 0, 4); // 4
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 203901: { // Telemachus
+				case 203901: // Telemachus
 					switch (env.getDialog()) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 7)
 								return sendQuestDialog(env, 3739);
 							return false;
-						}
 						// Should be removed (it's for backward compatibility)
 						// Epeios sets REWARD status now and doesn't reach this part
 						case SELECT_QUEST_REWARD:
@@ -82,40 +77,34 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 							}
 					}
 					break;
-				}
-				case 203764: { // Epeios
+				case 203764: // Epeios
 					switch (env.getDialog()) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
 							}
 							return false;
-						}
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 1693);
 							} else if (qs.getQuestVarById(4) == 10) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310080000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 310080000, newInstance.getInstanceId(), 276, 293, 163, (byte) 90);
 							if (var == 4 || var == 6)
 								changeQuestStep(env, var, 5, false); // 5
 							return closeDialogWindow(env);
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							qs.setQuestVarById(0, 7);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return defaultCloseDialog(env, 7, 7); // 7
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus

@@ -129,7 +129,7 @@ public class Send extends AdminCommand {
 	private static class Packet {
 
 		@XmlElement(name = "part")
-		private Collection<Part> parts = new FastTable<Part>();
+		private Collection<Part> parts = new FastTable<>();
 
 		@XmlAttribute(name = "opcode")
 		private String opcode = "-1";

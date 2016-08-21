@@ -74,8 +74,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 			case 6:
 				writeD(buf, 100);
 				KamarPlayerReward[] kamarElyos = kamarReward.getPlayersByRace(Race.ELYOS);
-				for (int i = 0; i < kamarElyos.length; i++) {
-					KamarPlayerReward reward = kamarElyos[i];
+				for (KamarPlayerReward reward : kamarElyos) {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
 						writeD(buf, reward.getRemaningTime()); // bufftime
@@ -87,8 +86,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 					}
 				}
 				KamarPlayerReward[] kamarAsmodians = kamarReward.getPlayersByRace(Race.ASMODIANS);
-				for (int i = 0; i < kamarAsmodians.length; i++) {
-					KamarPlayerReward reward = kamarAsmodians[i];
+				for (KamarPlayerReward reward : kamarAsmodians) {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
 						writeD(buf, reward.getRemaningTime()); // bufftime

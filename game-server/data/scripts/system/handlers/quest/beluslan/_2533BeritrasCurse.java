@@ -76,10 +76,9 @@ public class _2533BeritrasCurse extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						QuestService.questTimerEnd(env);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -3,14 +3,14 @@ package playercommands;
 import java.awt.Color;
 import java.util.Collection;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.ChatCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
+
+import javolution.util.FastTable;
 
 /**
  * @author Neon

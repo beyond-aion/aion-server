@@ -19,7 +19,7 @@ public enum GameEventType {
 	private final Class<? extends GameEvent> eventClazz;
 	private final int playersPerRace;
 	private final String eventName;
-	private List<GameEvent> activeEvents = new LinkedList<GameEvent>();
+	private List<GameEvent> activeEvents = new LinkedList<>();
 	private Race priorityRace;
 
 	private GameEventType(Class<? extends GameEvent> eventClazz, int playersPerRace, String eventName) {

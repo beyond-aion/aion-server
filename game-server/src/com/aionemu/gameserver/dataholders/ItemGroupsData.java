@@ -17,10 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.Range;
 
 import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
@@ -59,6 +55,10 @@ import com.aionemu.gameserver.model.templates.rewards.CraftItem;
 import com.aionemu.gameserver.model.templates.rewards.CraftRecipe;
 import com.aionemu.gameserver.model.templates.rewards.CraftReward;
 import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
+
+import javolution.util.FastMap;
+import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -351,7 +351,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftRecipes(int skillId) {
 		if (craftRecipesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<CraftReward>();
+		List<CraftReward> result = new FastTable<>();
 		for (List<CraftReward> items : craftRecipesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -634,7 +634,7 @@ public class ItemGroupsData {
 		return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size() + foodRare.getItems().size()
 			+ foodLegendary.getItems().size() + medicineCommon.getItems().size() + medicineRare.getItems().size() + medicineLegendary.getItems().size()
 			+ oresRare.getItems().size() + oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
-			+ gatherRare.getItems().size() + enchants.getItems().size() + eventLegendarySymphony.getItems().size() + bossRare.getItems().size() 
+			+ gatherRare.getItems().size() + enchants.getItems().size() + eventLegendarySymphony.getItems().size() + bossRare.getItems().size()
 			+ bossLegendary.getItems().size();
 	}
 

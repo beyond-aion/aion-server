@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -12,6 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
+
+import gnu.trove.map.hash.THashMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Wakizashi
@@ -24,8 +24,8 @@ public class ChestData {
 	private List<ChestTemplate> chests;
 
 	/** A map containing all npc templates */
-	private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<ChestTemplate>();
-	private THashMap<String, ChestTemplate> namedChests = new THashMap<String, ChestTemplate>();
+	private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<>();
+	private THashMap<String, ChestTemplate> namedChests = new THashMap<>();
 
 	/**
 	 * Initializes all maps for subsequent use - Don't nullify initial chest list as it will be used during reload

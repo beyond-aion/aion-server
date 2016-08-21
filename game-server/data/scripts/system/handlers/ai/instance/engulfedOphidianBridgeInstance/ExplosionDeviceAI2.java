@@ -19,7 +19,7 @@ import javolution.util.FastTable;
 @AIName("engulfedophidianexplosiondevice")
 public class ExplosionDeviceAI2 extends ActionItemNpcAI2 {
 
-	private List<Npc> bomb = new FastTable<Npc>();
+	private List<Npc> bomb = new FastTable<>();
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

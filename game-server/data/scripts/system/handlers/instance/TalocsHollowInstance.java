@@ -38,7 +38,7 @@ import javolution.util.FastTable;
 @InstanceID(300190000)
 public class TalocsHollowInstance extends GeneralInstanceHandler {
 
-	private List<Integer> movies = new FastTable<Integer>();
+	private List<Integer> movies = new FastTable<>();
 	private Map<Integer, StaticDoor> doors;
 
 	@Override

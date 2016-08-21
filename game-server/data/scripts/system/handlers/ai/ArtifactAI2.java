@@ -51,7 +51,7 @@ public class ArtifactAI2 extends NpcAI2 {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 
-	private Map<Integer, ItemUseObserver> observers = new HashMap<Integer, ItemUseObserver>();
+	private Map<Integer, ItemUseObserver> observers = new HashMap<>();
 
 	@Override
 	protected SiegeSpawnTemplate getSpawnTemplate() {

@@ -49,7 +49,7 @@ public class _2669AtlaEscape extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204815: {
+				case 204815:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -60,7 +60,6 @@ public class _2669AtlaEscape extends QuestHandler {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 730111, 0, 1); // 1
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204777) {

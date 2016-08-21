@@ -80,7 +80,7 @@ public class DropRegistrationService {
 
 		// Getting all possible drops for this Npc
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
-		Set<DropItem> droppedItems = new HashSet<DropItem>();
+		Set<DropItem> droppedItems = new HashSet<>();
 		int index = 1;
 		int dropChance = 100;
 		int npcLevel = npc.getLevel();
@@ -95,10 +95,10 @@ public class DropRegistrationService {
 		Integer winnerObj = 0;
 
 		// Distributing drops to players
-		Collection<Player> dropPlayers = new FastTable<Player>();
-		Collection<Player> winningPlayers = new FastTable<Player>();
+		Collection<Player> dropPlayers = new FastTable<>();
+		Collection<Player> winningPlayers = new FastTable<>();
 		if (player.isInGroup2() || player.isInAlliance2()) {
-			List<Integer> dropMembers = new FastTable<Integer>();
+			List<Integer> dropMembers = new FastTable<>();
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
 
 			switch (lootGrouRules.getLootRule()) {
@@ -144,7 +144,7 @@ public class DropRegistrationService {
 			dropNpc.setInRangePlayers(groupMembers);
 			dropNpc.setGroupSize(groupMembers.size());
 		} else {
-			List<Integer> singlePlayer = new FastTable<Integer>();
+			List<Integer> singlePlayer = new FastTable<>();
 			singlePlayer.add(player.getObjectId());
 			dropPlayers.add(player);
 			dropRegistrationMap.put(npcObjId, new DropNpc(npcObjId));
@@ -606,8 +606,8 @@ public class DropRegistrationService {
 	}
 
 	public List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
-		List<Integer> alloweditems = new FastTable<Integer>();
-		List<Integer> droppeditems = new FastTable<Integer>();
+		List<Integer> alloweditems = new FastTable<>();
+		List<Integer> droppeditems = new FastTable<>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			// check for prevent different race drops
 			if (player.getRace() == Race.ASMODIANS && globalItem.getItemTemplate().getRace().equals(Race.ELYOS)

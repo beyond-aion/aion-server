@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +22,8 @@ import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastTable;
 
 /**
  * @author SoulKeeper
@@ -63,7 +63,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 	@Override
 	public PlayerSkillList loadSkillList(int playerId) {
-		List<PlayerSkillEntry> skills = new FastTable<PlayerSkillEntry>();
+		List<PlayerSkillEntry> skills = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);

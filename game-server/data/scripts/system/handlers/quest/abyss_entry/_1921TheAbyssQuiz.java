@@ -40,7 +40,7 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203752: {
+				case 203752:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -49,9 +49,8 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
-				}
 					break;
-				case 203836: {
+				case 203836:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -60,9 +59,8 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
-				}
 					break;
-				case 203834: {
+				case 203834:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -71,9 +69,8 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
 					}
-				}
 					break;
-				case 203833: {
+				case 203833:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 3)
@@ -82,7 +79,6 @@ public class _1921TheAbyssQuiz extends QuestHandler {
 						case SET_SUCCEED:
 							return defaultCloseDialog(env, 3, 3, true, false); // reward
 					}
-				}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

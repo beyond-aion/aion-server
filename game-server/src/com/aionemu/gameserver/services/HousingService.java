@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +18,8 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.Building;
@@ -41,6 +39,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
+import javolution.util.FastTable;
+
 /**
  * @author Rolandas
  */
@@ -48,7 +48,7 @@ public class HousingService {
 
 	private static final Logger log = LoggerFactory.getLogger(HousingService.class);
 	// Contains non-instance houses initially (which are spawned)
-	private static final Map<Integer, List<House>> housesByMapId = new HashMap<Integer, List<House>>();
+	private static final Map<Integer, List<House>> housesByMapId = new HashMap<>();
 	// Contains all houses by their addresses
 	private final Map<Integer, House> customHouses;
 	private final Map<Integer, House> studios;
@@ -130,7 +130,7 @@ public class HousingService {
 
 				List<House> housesForMap = housesByMapId.get(worldId);
 				if (housesForMap == null) {
-					housesForMap = new FastTable<House>();
+					housesForMap = new FastTable<>();
 					housesByMapId.put(worldId, housesForMap);
 				}
 				housesForMap.add(customHouse);
@@ -142,7 +142,7 @@ public class HousingService {
 	}
 
 	public List<House> searchPlayerHouses(int playerObjId) {
-		List<House> houses = new FastTable<House>();
+		List<House> houses = new FastTable<>();
 		synchronized (studios) {
 			if (studios.containsKey(playerObjId)) {
 				houses.add(studios.get(playerObjId));

@@ -43,7 +43,7 @@ public class _16940DiarySecrets extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 206361: {
+				case 206361:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -54,9 +54,8 @@ public class _16940DiarySecrets extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
-				}
 					break;
-				case 802350: {
+				case 802350:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 1)
@@ -71,7 +70,6 @@ public class _16940DiarySecrets extends QuestHandler {
 								return closeDialogWindow(env);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

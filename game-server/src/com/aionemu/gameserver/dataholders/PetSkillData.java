@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntIntHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,6 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.petskill.PetSkillTemplate;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntIntHashMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -25,9 +25,9 @@ public class PetSkillData {
 	private List<PetSkillTemplate> petSkills;
 
 	/** A map containing all npc skill templates */
-	private TIntObjectHashMap<TIntIntHashMap> petSkillData = new TIntObjectHashMap<TIntIntHashMap>();
+	private TIntObjectHashMap<TIntIntHashMap> petSkillData = new TIntObjectHashMap<>();
 
-	private TIntObjectHashMap<TIntArrayList> petSkillsMap = new TIntObjectHashMap<TIntArrayList>();
+	private TIntObjectHashMap<TIntArrayList> petSkillsMap = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetSkillTemplate petSkill : petSkills) {

@@ -3,8 +3,6 @@ package com.aionemu.gameserver.controllers.attack;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
@@ -37,6 +35,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastTable;
+
 /**
  * @author ATracer
  */
@@ -48,7 +48,7 @@ public class AttackUtil {
 	public static List<AttackResult> calculatePhysicalAttackResult(Creature attacker, Creature attacked) {
 		AttackStatus attackerStatus = null;
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, SkillElement.NONE);
-		List<AttackResult> attackList = new FastTable<AttackResult>();
+		List<AttackResult> attackList = new FastTable<>();
 		AttackStatus mainHandStatus = calculateMainHandResult(attacker, attacked, attackerStatus, damage, attackList, SkillElement.NONE);
 
 		if (attacker instanceof Player && ((Player) attacker).getEquipment().getOffHandWeaponType() != null) {
@@ -536,7 +536,7 @@ public class AttackUtil {
 
 		AttackStatus attackerStatus = null;
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, elem);
-		List<AttackResult> attackList = new FastTable<AttackResult>();
+		List<AttackResult> attackList = new FastTable<>();
 		AttackStatus mainHandStatus = calculateMainHandResult(attacker, attacked, attackerStatus, damage, attackList, elem);
 
 		if (attacker instanceof Player && ((Player) attacker).getEquipment().getOffHandWeaponType() != null) {
@@ -551,7 +551,7 @@ public class AttackUtil {
 		int damage = StatFunctions.calculateAttackDamage(attacker, attacked, true, elem);
 
 		AttackStatus status = calculateHomingAttackStatus(attacker, attacked, elem);
-		List<AttackResult> attackList = new FastTable<AttackResult>();
+		List<AttackResult> attackList = new FastTable<>();
 		switch (status) {
 			case RESIST:
 			case DODGE:

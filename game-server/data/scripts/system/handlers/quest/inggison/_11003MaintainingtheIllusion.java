@@ -45,7 +45,7 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 
 		else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798942: {
+				case 798942:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182206701);
@@ -60,7 +60,6 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798942) {

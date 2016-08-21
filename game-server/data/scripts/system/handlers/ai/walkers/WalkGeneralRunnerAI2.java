@@ -1,9 +1,9 @@
 package ai.walkers;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Rolandas

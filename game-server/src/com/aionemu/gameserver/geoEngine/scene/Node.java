@@ -60,7 +60,7 @@ public class Node extends Spatial implements Cloneable {
 	/**
 	 * This node's children.
 	 */
-	protected ArrayList<Spatial> children = new ArrayList<Spatial>(1);
+	protected ArrayList<Spatial> children = new ArrayList<>(1);
 
 	protected short collisionFlags;
 
@@ -396,7 +396,7 @@ public class Node extends Spatial implements Cloneable {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Spatial> List<T> descendantMatches(Class<T> spatialSubclass, String nameRegex) {
-		List<T> newList = new ArrayList<T>();
+		List<T> newList = new ArrayList<>();
 		if (getQuantity() < 1)
 			return newList;
 		for (int i = 0; i < children.size(); i++) {

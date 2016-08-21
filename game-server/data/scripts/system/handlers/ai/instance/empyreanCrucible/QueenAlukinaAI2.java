@@ -19,7 +19,7 @@ import javolution.util.FastTable;
 @AIName("alukina_emp")
 public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 	private Future<?> task;
 
 	@Override

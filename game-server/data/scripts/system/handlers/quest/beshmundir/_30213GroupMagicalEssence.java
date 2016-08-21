@@ -50,7 +50,7 @@ public class _30213GroupMagicalEssence extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 730275: {
+				case 730275:
 					switch (dialog) {
 						case SETPRO1: {
 							removeQuestItem(env, 182209617, 1);
@@ -59,17 +59,14 @@ public class _30213GroupMagicalEssence extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

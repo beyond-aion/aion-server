@@ -5,9 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +12,9 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.InGameShopDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.ingameshop.IGItem;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author xTz

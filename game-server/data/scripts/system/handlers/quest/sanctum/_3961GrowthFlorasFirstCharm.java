@@ -48,7 +48,7 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203740: { // Erdos
+				case 203740: // Erdos
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -58,7 +58,6 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1, 0, 0, 182206108, 1); // 1
 					}
 					return false;
-				}
 				case 798384: // Flora
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

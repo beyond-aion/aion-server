@@ -57,7 +57,7 @@ public class SpawnMap {
 
 	public List<Spawn> getSpawns() {
 		if (spawns == null) {
-			spawns = new FastTable<Spawn>();
+			spawns = new FastTable<>();
 		}
 		return spawns;
 	}
@@ -72,20 +72,20 @@ public class SpawnMap {
 
 	public List<BaseSpawn> getBaseSpawns() {
 		if (baseSpawns == null) {
-			baseSpawns = new FastTable<BaseSpawn>();
+			baseSpawns = new FastTable<>();
 		}
 		return baseSpawns;
 	}
 
 	public List<MercenarySpawn> getMercenarySpawns() {
 		if (mercenarySpawns == null)
-			mercenarySpawns = new FastTable<MercenarySpawn>();
+			mercenarySpawns = new FastTable<>();
 		return mercenarySpawns;
 	}
 
 	public List<AssaultSpawn> getAssaultSpawns() {
 		if (assaultSpawns == null)
-			assaultSpawns = new FastTable<AssaultSpawn>();
+			assaultSpawns = new FastTable<>();
 		return assaultSpawns;
 	}
 
@@ -95,7 +95,7 @@ public class SpawnMap {
 
 	public List<RiftSpawn> getRiftSpawns() {
 		if (riftSpawns == null) {
-			riftSpawns = new FastTable<RiftSpawn>();
+			riftSpawns = new FastTable<>();
 		}
 		return riftSpawns;
 	}
@@ -106,7 +106,7 @@ public class SpawnMap {
 
 	public List<SiegeSpawn> getSiegeSpawns() {
 		if (siegeSpawns == null) {
-			siegeSpawns = new FastTable<SiegeSpawn>();
+			siegeSpawns = new FastTable<>();
 		}
 		return siegeSpawns;
 	}
@@ -117,7 +117,7 @@ public class SpawnMap {
 
 	public List<VortexSpawn> getVortexSpawns() {
 		if (vortexSpawns == null) {
-			vortexSpawns = new FastTable<VortexSpawn>();
+			vortexSpawns = new FastTable<>();
 		}
 		return vortexSpawns;
 	}
@@ -128,7 +128,7 @@ public class SpawnMap {
 
 	public List<AhserionsFlightSpawn> getAhserionSpawns() {
 		if (ahserionSpawns == null) {
-			ahserionSpawns = new FastTable<AhserionsFlightSpawn>();
+			ahserionSpawns = new FastTable<>();
 		}
 		return ahserionSpawns;
 	}

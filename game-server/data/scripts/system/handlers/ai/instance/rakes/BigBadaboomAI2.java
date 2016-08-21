@@ -1,11 +1,11 @@
 package ai.instance.rakes;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.ActionItemNpcAI2;
 
 @AIName("big_badaboom")
 public class BigBadaboomAI2 extends ActionItemNpcAI2 {

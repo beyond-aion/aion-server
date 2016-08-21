@@ -71,9 +71,8 @@ public class _11143BabyShulackJourney extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798948) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					}
 					default: {
 						removeQuestItem(env, 182206866, 1);
 						return sendQuestEndDialog(env);

@@ -3,8 +3,6 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -145,7 +145,7 @@ public abstract class PanesterraTeam {
 				return 1084100351;
 			case GAB1_SUB_DEST_72:
 				return -1135668993;
-				default: 
+				default:
 					return 0;
 		}
 	}

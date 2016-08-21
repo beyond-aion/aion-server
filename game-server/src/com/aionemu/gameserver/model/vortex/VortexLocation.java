@@ -2,9 +2,6 @@ package com.aionemu.gameserver.model.vortex;
 
 import java.util.List;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -24,6 +21,9 @@ import com.aionemu.gameserver.world.zone.InvasionZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author Source
  */
@@ -37,9 +37,9 @@ public class VortexLocation implements ZoneHandler {
 	protected Race offenceRace;
 	protected Race defendsRace;
 	protected List<InvasionZoneInstance> zones;
-	protected FastMap<Integer, Player> players = new FastMap<Integer, Player>();
-	protected FastMap<Integer, Kisk> kisks = new FastMap<Integer, Kisk>();
-	private final List<VisibleObject> spawned = new FastTable<VisibleObject>();
+	protected FastMap<Integer, Player> players = new FastMap<>();
+	protected FastMap<Integer, Kisk> kisks = new FastMap<>();
+	private final List<VisibleObject> spawned = new FastTable<>();
 	protected HomePoint home;
 	protected ResurrectionPoint resurrection;
 	protected StartPoint start;
@@ -52,7 +52,7 @@ public class VortexLocation implements ZoneHandler {
 		this.id = template.getId();
 		this.offenceRace = template.getInvadersRace();
 		this.defendsRace = template.getDefendersRace();
-		this.zones = new FastTable<InvasionZoneInstance>();
+		this.zones = new FastTable<>();
 		this.home = template.getHomePoint();
 		this.resurrection = template.getResurrectionPoint();
 		this.start = template.getStartPoint();

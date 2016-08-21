@@ -65,7 +65,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
     /**
      * Constructor instantiates a new <code>Matrix3f</code> object. The
      * initial values for the matrix is that of the identity matrix.
-     *  
+     * 
      */
     public Matrix3f() {
         loadIdentity();
@@ -624,7 +624,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
     /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix.
      * Where all values are zero except those along the diagonal which are one.
-     *  
+     * 
      */
     public void loadIdentity() {
         m01 = m02 = m10 = m12 = m20 = m21 = 0;
@@ -635,7 +635,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
      * @return true if this matrix is identity
      */
     public boolean isIdentity() {
-        return 
+        return
         (m00 == 1 && m01 == 0 && m02 == 0) &&
         (m10 == 0 && m11 == 1 && m12 == 0) &&
         (m20 == 0 && m21 == 0 && m22 == 1);
@@ -785,7 +785,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
     }
 
     /**
-     * <code>multLocal</code> multiplies this matrix internally by 
+     * <code>multLocal</code> multiplies this matrix internally by
      * a given float scale factor.
      * 
      * @param scale
@@ -1289,11 +1289,11 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
     /**
      * Recycles a text builder {@link #newInstance() instance} immediately
      * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}). 
+     * StackContext}).
      */
     @SuppressWarnings("unchecked")
 		public static void recycle(Matrix3f instance) {
-    	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)  
+    	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
     		//FACTORY.recycle(instance);
     	//else
     		instance = null;

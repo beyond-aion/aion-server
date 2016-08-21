@@ -58,7 +58,7 @@ public class _10034FoundUnderground extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799030: { // Sueros
+				case 799030: // Sueros
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0) {
@@ -69,8 +69,7 @@ public class _10034FoundUnderground extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 					}
 					break;
-				}
-				case 799029: {
+				case 799029:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1) {
@@ -81,8 +80,7 @@ public class _10034FoundUnderground extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 					}
 					break;
-				}
-				case 798990: {
+				case 798990:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2) {
@@ -96,7 +94,6 @@ public class _10034FoundUnderground extends QuestHandler {
 							return defaultCloseDialog(env, 2, 3);
 					}
 					break;
-				}
 				case 730295:
 					switch (dialog) {
 						case QUEST_SELECT:

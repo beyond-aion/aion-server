@@ -58,7 +58,7 @@ public class Reload extends AdminCommand {
 			File xml = new File("./data/static_data/quest_data/quest_data.xml");
 			QuestsData data = JAXBUtil.deserialize(xml, QuestsData.class, "./data/static_data/static_data.xsd");
 			DataManager.QUEST_DATA.setQuestsData(data.getQuestsData());
-			List<XMLQuest> templates = new FastTable<XMLQuest>();
+			List<XMLQuest> templates = new FastTable<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/quest_script_data", true);
 			JAXBUtil.deserialize(files, XMLQuests.class, "./data/static_data/static_data.xsd").forEach(e -> {
 				List<XMLQuest> xmlQuests = e.getQuest();
@@ -74,7 +74,7 @@ public class Reload extends AdminCommand {
 			DataManager.SKILL_DATA.setSkillTemplates(data.getSkillTemplates());
 			sendInfo(admin, DataManager.SKILL_DATA.size() + " skills loaded.");
 		} else if (params[0].equalsIgnoreCase("npcskills")) {
-			List<NpcSkillTemplates> templates = new FastTable<NpcSkillTemplates>();
+			List<NpcSkillTemplates> templates = new FastTable<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/npc_skills", true);
 			JAXBUtil.deserialize(files, NpcSkillData.class, "./data/static_data/static_data.xsd")
 				.forEach(e -> templates.addAll(e.getAllNpcSkillTemplates()));

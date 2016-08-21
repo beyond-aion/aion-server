@@ -284,7 +284,7 @@ public class MailService {
 			return;
 
 		switch (attachmentType) {
-			case 0: {
+			case 0:
 				Item attachedItem = letter.getAttachedItem();
 				if (attachedItem == null)
 					return;
@@ -304,8 +304,7 @@ public class MailService {
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(letterId, attachmentType));
 				letter.setAttachedItem(null);
 				break;
-			}
-			case 1: {
+			case 1:
 				// TODO normal fix
 				// fix for kinah dupe
 				long attachedKinahCount = letter.getAttachedKinah();
@@ -318,7 +317,6 @@ public class MailService {
 				player.getInventory().increaseKinah(attachedKinahCount);
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(letterId, attachmentType));
 				break;
-			}
 		}
 	}
 

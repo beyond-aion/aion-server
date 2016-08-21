@@ -46,7 +46,7 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204099: {
+				case 204099:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
@@ -59,8 +59,7 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 							return true;
 					}
 					return false;
-				}
-				case 204257: {
+				case 204257:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
@@ -76,7 +75,6 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204257) {

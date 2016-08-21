@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -24,7 +24,7 @@ public class RiftData {
 	@XmlElement(name = "rift_location")
 	private List<RiftTemplate> riftTemplates;
 	@XmlTransient
-	private FastMap<Integer, RiftLocation> rift = new FastMap<Integer, RiftLocation>();
+	private FastMap<Integer, RiftLocation> rift = new FastMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (RiftTemplate template : riftTemplates) {

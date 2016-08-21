@@ -43,18 +43,17 @@ public class _3092VisonTheDrakie extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798191) { // Tityus
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798214: { // Vison
+				case 798214: // Vison
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 0) {
 								long itemCount = player.getInventory().getItemCountByItemId(182208066);
 								if (itemCount >= 25) {
@@ -62,14 +61,11 @@ public class _3092VisonTheDrakie extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					return false;
-				}
-				case 798191: {
+				case 798191:
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
 					if (env.getDialog() == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
@@ -77,7 +73,6 @@ public class _3092VisonTheDrakie extends QuestHandler {
 					}
 					if (env.getDialogId() == DialogAction.FINISH_DIALOG.id())
 						return defaultCloseDialog(env, 1, 1);
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798191) {

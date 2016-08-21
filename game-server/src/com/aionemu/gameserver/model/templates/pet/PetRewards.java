@@ -28,7 +28,7 @@ public class PetRewards {
 
 	public List<PetFeedResult> getResults() {
 		if (results == null) {
-			results = new FastTable<PetFeedResult>();
+			results = new FastTable<>();
 		}
 		return this.results;
 	}

@@ -71,15 +71,15 @@ public class SpawnsData2 {
 	private static final Logger log = LoggerFactory.getLogger(SpawnsData2.class);
 	@XmlElement(name = "spawn_map", type = SpawnMap.class)
 	protected List<SpawnMap> templates;
-	private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>>();
-	private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-	private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-	private TIntObjectHashMap<List<SpawnGroup2>> siegeSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-	private TIntObjectHashMap<List<SpawnGroup2>> vortexSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<MercenarySpawn>();
-	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<AssaultSpawn>();
-	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<Spawn>();
-	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>(); // ahserions flight
+	private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<SpawnGroup2>> siegeSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<SpawnGroup2>> vortexSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // ahserions flight
 
 	/**
 	 * @param u
@@ -372,7 +372,7 @@ public class SpawnsData2 {
 
 		SpawnMap map = null;
 		if (data.templates == null) {
-			data.templates = new FastTable<SpawnMap>();
+			data.templates = new FastTable<>();
 			map = new SpawnMap(spawn.getWorldId());
 			data.templates.add(map);
 		} else {
@@ -531,7 +531,7 @@ public class SpawnsData2 {
 	 */
 	public void addNewSpawnMap(SpawnMap spawnMap) {
 		if (templates == null)
-			templates = new FastTable<SpawnMap>();
+			templates = new FastTable<>();
 		templates.add(spawnMap);
 	}
 

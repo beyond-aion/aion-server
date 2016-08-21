@@ -53,7 +53,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 700953: { // Processed Odella
+				case 700953: // Processed Odella
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var >= 3 && var < 5) {
 							return useQuestObject(env, var, var + 1, false, true); // 4,5
@@ -61,17 +61,14 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 							return useQuestObject(env, var, var + 1, true, true); // Reward
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203560) { // Morn
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

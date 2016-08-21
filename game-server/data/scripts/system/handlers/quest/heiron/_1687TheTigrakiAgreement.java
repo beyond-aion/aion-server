@@ -53,7 +53,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						long collect1 = player.getInventory().getItemCountByItemId(186000035);
 						long collect2 = player.getInventory().getItemCountByItemId(186000036);
 						if (collect1 >= 2 && collect2 >= 5) {
@@ -62,21 +62,17 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 							return sendQuestDialog(env, 1352); // choose your reward
 						} else
 							return sendQuestDialog(env, 1097);
-					}
 					case FINISH_DIALOG:
 						return defaultCloseDialog(env, var, var);
-					case SETPRO10: {
+					case SETPRO10:
 						rewardGroup = 0;
 						return defaultCloseDialog(env, var, var, true, true, 0); // reward 1
-					}
-					case SETPRO20: {
+					case SETPRO20:
 						rewardGroup = 1;
 						return defaultCloseDialog(env, var, var, true, true, 1); // reward 2
-					}
-					case SETPRO30: {
+					case SETPRO30:
 						rewardGroup = 2;
 						return defaultCloseDialog(env, var, var, true, true, 2); // reward 3
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

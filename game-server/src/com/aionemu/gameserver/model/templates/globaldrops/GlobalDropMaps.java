@@ -22,7 +22,7 @@ public class GlobalDropMaps {
 
 	public List<GlobalDropMap> getGlobalDropMaps() {
 		if (gdMaps == null) {
-			gdMaps = new FastTable<GlobalDropMap>();
+			gdMaps = new FastTable<>();
 		}
 		return this.gdMaps;
 	}

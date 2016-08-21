@@ -71,9 +71,8 @@ public class CraftingRewards extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == startNpcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
-					}
 					default: {
 						return sendQuestStartDialog(env);
 					}
@@ -82,10 +81,9 @@ public class CraftingRewards extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == endNpcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 1011 : 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						qs.setQuestVar(0);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -95,7 +93,6 @@ public class CraftingRewards extends QuestHandler {
 							player.getSkillList().addSkill(player, skillId, levelReward);
 						}
 						return sendQuestEndDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

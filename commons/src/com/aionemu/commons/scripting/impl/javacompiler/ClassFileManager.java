@@ -16,9 +16,9 @@ import javax.tools.JavaFileObject;
 import javax.tools.JavaFileObject.Kind;
 import javax.tools.StandardLocation;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.scripting.ScriptClassLoader;
+
+import javolution.util.FastTable;
 
 /**
  * This class extends manages loaded classes. It is also responsible for tricking compiler. Unfortunally compiler doen't work with classloaders, so we
@@ -31,7 +31,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	/**
 	 * This map contains classes compiled for this classloader
 	 */
-	private final Map<String, BinaryClass> compiledClasses = new HashMap<String, BinaryClass>();
+	private final Map<String, BinaryClass> compiledClasses = new HashMap<>();
 
 	/**
 	 * Classloader that will be used to load compiled classes
@@ -163,7 +163,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 		Iterable<JavaFileObject> objects = super.list(location, packageName, kinds, recurse);
 
 		if (StandardLocation.CLASS_PATH.equals(location) && kinds.contains(Kind.CLASS)) {
-			List<JavaFileObject> temp = new FastTable<JavaFileObject>();
+			List<JavaFileObject> temp = new FastTable<>();
 			for (JavaFileObject object : objects) {
 				temp.add(object);
 			}

@@ -57,83 +57,69 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204182: { // Heimdall
+				case 204182: // Heimdall
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							if (defaultCloseDialog(env, 0, 1)) { // 1
 								TeleportService2.teleportTo(player, 220010000, 1, 389.0f, 1896.0f, 327.5f, (byte) 61, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
-						}
 					}
 					break;
-				}
-				case 203550: { // Munin
+				case 203550: // Munin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 10) {
 								return sendQuestDialog(env, 4080);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
-						case SETPRO10: {
+						case SETPRO10:
 							defaultCloseDialog(env, 10, 10, true, false); // reward
 							TeleportService2.teleportTo(player, 120010000, 1294.8f, 1213.8f, 214.34f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
-						}
 					}
 					break;
-				}
-				case 790003: { // Urd
+				case 790003: // Urd
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
 					break;
-				}
-				case 790002: { // Verdandi
+				case 790002: // Verdandi
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
 					break;
-				}
-				case 203546: { // Skuld
+				case 203546: // Skuld
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							} else if (var == 9) {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							if (var == 4) {
 								changeQuestStep(env, 4, 95, false); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
@@ -143,24 +129,20 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 							return false;
-						}
-						case SETPRO9: {
+						case SETPRO9:
 							changeQuestStep(env, 9, 10, false); // 10
 							TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
-				}
-				case 204264: { // Skuld 2
+				case 204264: // Skuld 2
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 99 && !isStigmaEquipped(env)) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 95) {
 								return sendQuestDialog(env, 2716);
 							} else if (var == 96) {
@@ -169,15 +151,13 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								return sendQuestDialog(env, 3398);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							if (var == 95) {
 								playQuestMovie(env, 156);
 								return closeDialogWindow(env);
 							}
 							return false;
-						}
-						case SELECT_ACTION_3058: {
+						case SELECT_ACTION_3058:
 							if (var == 96) {
 								if (!player.getInventory().isFull()) {
 									if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
@@ -189,24 +169,20 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SETPRO7: {
+						case SETPRO7:
 							if (var == 99) {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 								return true;
 							}
 							return false;
-						}
-						case SETPRO8: {
+						case SETPRO8:
 							if (var == 97) {
 								changeQuestStep(env, 97, 98, false); // 98
 								QuestService.addNewSpawn(320070000, player.getInstanceId(), 204263, 257.5f, 245f, 125f, (byte) 0);
 								return closeDialogWindow(env);
 							}
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204061) { // Aud

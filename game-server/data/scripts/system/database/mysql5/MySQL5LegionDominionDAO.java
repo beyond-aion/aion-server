@@ -52,7 +52,7 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 					loc.setLegionId(resultSet.getInt("legion_id"));
 					loc.setOccupiedDate(resultSet.getTimestamp("occupied_date"));
 					loaded.add(loc.getLocationId());
-				}	
+				}
 		} catch (SQLException e) {
 			log.warn("Error loading Legion Dominion location from Database: " + e.getMessage(), e);
 			success = false;

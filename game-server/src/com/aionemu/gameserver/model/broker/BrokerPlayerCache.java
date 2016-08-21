@@ -2,9 +2,9 @@ package com.aionemu.gameserver.model.broker;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -15,7 +15,7 @@ public class BrokerPlayerCache {
 	private int brokerMaskCache;
 	private int brokerSoftTypeCache;
 	private int brokerStartPageCache;
-	private List<Integer> itemList = new FastTable<Integer>();
+	private List<Integer> itemList = new FastTable<>();
 
 	/**
 	 * @return the brokerListCache

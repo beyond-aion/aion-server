@@ -48,7 +48,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204388: {
+				case 204388:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -64,9 +64,8 @@ public class _24025CrisisinMorheim extends QuestHandler {
 						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 2, 3, false, 10000, 10001);
 					}
-				}
 					break;
-				case 204345: {
+				case 204345:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 3)
@@ -78,9 +77,8 @@ public class _24025CrisisinMorheim extends QuestHandler {
 
 							}
 					}
-				}
 					break;
-				case 204414: {
+				case 204414:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -94,7 +92,6 @@ public class _24025CrisisinMorheim extends QuestHandler {
 								return defaultCloseDialog(env, 1, 2); // 2
 							}
 					}
-				}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

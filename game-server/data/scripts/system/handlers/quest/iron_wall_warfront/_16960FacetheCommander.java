@@ -36,23 +36,19 @@ public class _16960FacetheCommander extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 801281) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case QUEST_ACCEPT_SIMPLE: {
+					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 802055) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SELECT_ACTION_1353: {
+					case SELECT_ACTION_1353:
 						return sendQuestDialog(env, 1353);
-					}
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}

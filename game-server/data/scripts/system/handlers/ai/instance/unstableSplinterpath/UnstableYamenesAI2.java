@@ -25,7 +25,7 @@ import javolution.util.FastTable;
 public class UnstableYamenesAI2 extends AggressiveNpcAI2 {
 
 	private boolean top;
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 	private Future<?> portalTask = null;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 

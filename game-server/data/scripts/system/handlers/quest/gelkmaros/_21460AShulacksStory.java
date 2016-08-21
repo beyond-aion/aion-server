@@ -44,35 +44,29 @@ public class _21460AShulacksStory extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 799502: { // Dorkin
+				case 799502: // Dorkin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1, 182209520, 1, 0, 0); // 1
-						}
 					}
 					break;
-				}
-				case 799276: { // Chenkiki
+				case 799276: // Chenkiki
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							if (removeQuestItem(env, 182209520, 1))
 								changeQuestStep(env, 1, 1, true); // reward
 							return sendQuestDialog(env, 5);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799276) { // Chenkiki

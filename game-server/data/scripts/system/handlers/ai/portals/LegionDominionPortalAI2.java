@@ -1,5 +1,8 @@
 package ai.portals;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
@@ -13,9 +16,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 
 /**
  * Created by Yeats on 19.02.2016.

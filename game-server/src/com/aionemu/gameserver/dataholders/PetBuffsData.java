@@ -11,9 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.pet.PetBuff;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas

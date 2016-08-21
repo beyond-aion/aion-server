@@ -55,7 +55,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799521: {
+				case 799521:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -67,25 +67,21 @@ public class _30327GroupMiredSouls extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 					}
 					return false;
-				}
-				case 799517: {
+				case 799517:
 					switch (dialog) {
 						case SETPRO1: {
 							QuestService.questTimerStart(env, 300);
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799244) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

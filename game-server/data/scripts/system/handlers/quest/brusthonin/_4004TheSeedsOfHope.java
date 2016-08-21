@@ -51,7 +51,7 @@ public class _4004TheSeedsOfHope extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			final int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 700340: { // Earth Mound
+				case 700340: // Earth Mound
 					if (qs != null && env.getDialog() == DialogAction.USE_OBJECT) {
 						if (var < 4) {
 							return useQuestObject(env, var, var + 1, false, true);
@@ -59,7 +59,6 @@ public class _4004TheSeedsOfHope extends QuestHandler {
 							return useQuestObject(env, 4, 4, true, true); // reward
 						}
 					}
-				}
 			}
 		}
 		return false;

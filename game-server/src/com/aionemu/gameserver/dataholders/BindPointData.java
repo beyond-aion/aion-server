@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.BindPointTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author avol
@@ -23,7 +23,7 @@ public class BindPointData {
 	private List<BindPointTemplate> bplist;
 
 	/** A map containing all bind point location templates */
-	private TIntObjectHashMap<BindPointTemplate> bindplistData = new TIntObjectHashMap<BindPointTemplate>();
+	private TIntObjectHashMap<BindPointTemplate> bindplistData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (BindPointTemplate bind : bplist) {

@@ -48,7 +48,7 @@ public class ScriptManager {
 	/**
 	 * Collection of script contexts
 	 */
-	private Set<ScriptContext> contexts = new HashSet<ScriptContext>();
+	private Set<ScriptContext> contexts = new HashSet<>();
 
 	/**
 	 * Global ClassListener instance. Automatically assigned for each new context. Fires after each successful compilation.

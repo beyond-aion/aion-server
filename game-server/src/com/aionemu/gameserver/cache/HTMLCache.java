@@ -12,14 +12,14 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.HTMLConfig;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @authors Layane, nbali, savormix, hex1r0, lord_rex
@@ -47,7 +47,7 @@ public final class HTMLCache {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private FastMap<String, String> cache = new FastMap<String, String>();
+	private FastMap<String, String> cache = new FastMap<>();
 
 	private int loadedFiles;
 	private int size;
@@ -149,7 +149,7 @@ public final class HTMLCache {
 		// TODO: is there any other tag that should be replaced?
 		final String[] tagsToCompact = { "html", "title", "body", "br", "br1", "p", "table", "tr", "td" };
 
-		final List<String> list = new FastTable<String>();
+		final List<String> list = new FastTable<>();
 
 		for (String tag : tagsToCompact) {
 			list.add("<" + tag + ">");
@@ -158,7 +158,7 @@ public final class HTMLCache {
 			list.add("<" + tag + " />");
 		}
 
-		final List<String> list2 = new FastTable<String>();
+		final List<String> list2 = new FastTable<>();
 
 		for (String tag : list) {
 			list2.add(tag);

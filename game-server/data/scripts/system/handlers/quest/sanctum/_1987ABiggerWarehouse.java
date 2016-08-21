@@ -43,13 +43,11 @@ public class _1987ABiggerWarehouse extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203749) { // Bustant
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 0, 0, true); // reward
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

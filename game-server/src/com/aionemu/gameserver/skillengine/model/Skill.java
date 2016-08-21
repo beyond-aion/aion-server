@@ -450,7 +450,7 @@ public class Skill {
 			if (motion.getName() == null) // skills like Remove Shock (283) or Feint (912)
 				return true; // in this case, no update for NextSkillUse time is needed, so return instantly
 		} else {
-			if (motion.getName() == null) // cannot check animations without motion name (warning is sent on server startup to avoid permanent spam, see DataManager.SKILL_DATA.validateMotions()) 
+			if (motion.getName() == null) // cannot check animations without motion name (warning is sent on server startup to avoid permanent spam, see DataManager.SKILL_DATA.validateMotions())
 				return true;
 			if (hitTime == 0) {
 				AuditLogger.info(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");

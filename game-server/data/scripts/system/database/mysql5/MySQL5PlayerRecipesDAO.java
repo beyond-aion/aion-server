@@ -23,7 +23,7 @@ public class MySQL5PlayerRecipesDAO extends PlayerRecipesDAO {
 
 	@Override
 	public RecipeList load(final int playerId) {
-		final HashSet<Integer> recipeList = new HashSet<Integer>();
+		final HashSet<Integer> recipeList = new HashSet<>();
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
 			@Override

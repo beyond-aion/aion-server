@@ -54,7 +54,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204545: {
+				case 204545:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -73,8 +73,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204537: {
+				case 204537:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -83,14 +82,12 @@ public class _1644AVeryOldLetter extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2, 0, 0, 182201765, 1);
 						}
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204546) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.CommandsAccessDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+
+import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -35,7 +35,7 @@ public class MySQL5CommandsAccessDAO extends CommandsAccessDAO {
 
 	@Override
 	public Map<Integer, List<String>> loadAccesses() {
-		Map<Integer, List<String>> accesses = new HashMap<Integer, List<String>>();
+		Map<Integer, List<String>> accesses = new HashMap<>();
 		try (Connection conn = DatabaseFactory.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(LOAD_QUERY);
 			ResultSet rset = stmt.executeQuery()) {

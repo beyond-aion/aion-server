@@ -36,9 +36,8 @@ public class _30500Desperation extends QuestHandler {
 		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 205842) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -46,15 +45,13 @@ public class _30500Desperation extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 804879) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						qs.setQuestVarById(0, 1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
-					}
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {

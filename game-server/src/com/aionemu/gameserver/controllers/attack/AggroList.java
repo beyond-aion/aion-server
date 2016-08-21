@@ -311,7 +311,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * @return finalDamageList
 	 */
 	public Collection<AggroInfo> getFinalDamageList(boolean mergeGroupDamage) {
-		Map<Integer, AggroInfo> list = new HashMap<Integer, AggroInfo>();
+		Map<Integer, AggroInfo> list = new HashMap<>();
 
 		for (AggroInfo ai : aggroList.values()) {
 			// Get master only to control damage.

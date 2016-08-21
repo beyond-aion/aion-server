@@ -156,8 +156,8 @@ public class BonusService {
 			return null;
 		
 		List<ItemRaceEntry> finalList = new FastTable<>();
-		for (int i = 0; i < allRewards.length; i++) {
-			ItemRaceEntry r = allRewards[i];
+		for (ItemRaceEntry allReward : allRewards) {
+			ItemRaceEntry r = allReward;
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
 			
 			if (template == null) {
@@ -246,8 +246,7 @@ public class BonusService {
 		ItemRaceEntry[] allRewards = group.getRewards();
 		List<ItemRaceEntry> finalList = new FastTable<>();
 		
-		for (int i = 0; i < allRewards.length; i++) {
-			ItemRaceEntry r = allRewards[i];
+		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
 			
 			if (bonus.getLevel() != template.getLevel())
@@ -269,8 +268,7 @@ public class BonusService {
 		ItemRaceEntry[] allRewards = group.getRewards();
 		List<ItemRaceEntry> finalList = new FastTable<>();
 		
-		for (int i = 0; i < allRewards.length; i++) {
-			ItemRaceEntry r = allRewards[i];
+		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
 			
 			if (bonus.getLevel() != template.getLevel())

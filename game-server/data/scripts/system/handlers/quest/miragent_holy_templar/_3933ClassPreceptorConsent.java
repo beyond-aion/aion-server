@@ -110,23 +110,20 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 					break;
 				case 203752: // 7 - Report the result to Lavirintos with the Oath Stone
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
 								return defaultCloseDialog(env, 6, 6, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 3143);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				// No match

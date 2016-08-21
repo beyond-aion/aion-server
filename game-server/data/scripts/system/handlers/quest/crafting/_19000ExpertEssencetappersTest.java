@@ -48,30 +48,26 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203781: { // Sabotes
+				case 203781: // Sabotes
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							giveQuestItem(env, 122001250, 1);
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 203780: { // Cornelius
+				case 203780: // Cornelius
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
 							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
 							long itemCount3 = player.getInventory().getItemCountByItemId(itemId3);
@@ -85,12 +81,9 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 10001);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203780) { // Cornelius

@@ -59,20 +59,18 @@ public class _29064FangOfConstruction extends QuestHandler {
 					break;
 				case 204075:
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1 && player.getInventory().getItemCountByItemId(182213239) >= 1
 								&& player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
 							if (player.getInventory().getItemCountByItemId(182213239) >= 1 && player.getInventory().getItemCountByItemId(186000085) >= 1) {
 								removeQuestItem(env, 182213239, 1);
 								removeQuestItem(env, 186000085, 1);
 								return defaultCloseDialog(env, 1, 1, true, false);
 							}
-						}
 					}
 					break;
 			}

@@ -83,7 +83,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 				writeC(status);// quest status goes by ENUM value
 				writeC(0x0);
 				writeD(step | flags << 24);// current quest step
-				writeH(0); // seen sometimes 1 when status == COMPLETED 
+				writeH(0); // seen sometimes 1 when status == COMPLETED
 				break;
 			case ABANDON:
 				writeD(0);

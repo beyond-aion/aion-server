@@ -261,7 +261,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	 */
 	@Override
 	public TreeMap<Timestamp, String> loadAnnouncementList(final int legionId) {
-		final TreeMap<Timestamp, String> announcementList = new TreeMap<Timestamp, String>();
+		final TreeMap<Timestamp, String> announcementList = new TreeMap<>();
 
 		boolean success = DB.select(SELECT_ANNOUNCEMENTLIST_QUERY, new ParamReadStH() {
 

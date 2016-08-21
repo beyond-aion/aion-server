@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.ai2.GeneralAIEvent;
 import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
@@ -22,6 +21,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Woge
@@ -40,7 +40,7 @@ public class CustomBase implements Comparable<CustomBase> {
 	private boolean isTeleport = false;
 	private Npc target;
 	private int buffID;
-	private List<Npc> spawned = new LinkedList<Npc>();
+	private List<Npc> spawned = new LinkedList<>();
 
 	public CustomBase(int id, NochsanaEvent ownerEvent, boolean siegeBoss, Race initialOwner, int buffID) {
 		bossDeathListener = new CBaseDeathListener(this);

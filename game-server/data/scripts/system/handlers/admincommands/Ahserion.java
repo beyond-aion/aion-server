@@ -18,7 +18,7 @@ public class Ahserion extends AdminCommand {
 			"<start> - Starts Ahserions Flight.",
 			"<stop> - Stops Ahserions Flight."
 		);
-		// @formatter:on		
+		// @formatter:on
 	}
 
 	@Override

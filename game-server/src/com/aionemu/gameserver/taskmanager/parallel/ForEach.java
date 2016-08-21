@@ -33,7 +33,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		if (list.size() > 0) {
 			@SuppressWarnings("unchecked")
 			E[] objects = list.toArray((E[]) new Object[list.size()]);
-			CountedCompleter<E> completer = new ForEach<E>(null, operation, 0, objects.length, objects);
+			CountedCompleter<E> completer = new ForEach<>(null, operation, 0, objects.length, objects);
 			return completer;
 		}
 		return null;
@@ -45,7 +45,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	@SafeVarargs
 	public static <E> ForkJoinTask<E> newTask(Predicate<E> operation, E... list) {
 		if (list != null && list.length > 0) {
-			CountedCompleter<E> completer = new ForEach<E>(null, operation, 0, list.length, list);
+			CountedCompleter<E> completer = new ForEach<>(null, operation, 0, list.length, list);
 			return completer;
 		}
 		return null;
@@ -69,7 +69,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		while (h - l >= 2) {
 			int mid = (l + h) >>> 1;
 			addToPendingCount(1);
-			new ForEach<E>(this, operation, mid, h, list).fork(); // right child
+			new ForEach<>(this, operation, mid, h, list).fork(); // right child
 			h = mid;
 		}
 		if (h > l) {

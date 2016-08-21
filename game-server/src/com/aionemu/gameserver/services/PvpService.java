@@ -4,9 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +44,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author Sarynth
@@ -271,7 +271,7 @@ public class PvpService {
 		if (winner.getRace() == victim.getRace())
 			return;
 
-		List<Player> rewarded = new FastTable<Player>();
+		List<Player> rewarded = new FastTable<>();
 		int worldId = victim.getWorldId();
 		List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
 

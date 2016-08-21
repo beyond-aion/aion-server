@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -54,7 +54,7 @@ public class Conditions {
 	 */
 	public List<Condition> getConditions() {
 		if (conditions == null) {
-			conditions = new FastTable<Condition>();
+			conditions = new FastTable<>();
 		}
 		return this.conditions;
 	}

@@ -90,7 +90,7 @@ public class PlayerTeamDistributionService {
 
 	private static class PlayerTeamRewardStats implements Predicate<Player> {
 
-		final List<Player> players = new FastTable<Player>();
+		final List<Player> players = new FastTable<>();
 		int partyLvlSum = 0;
 		int highestLevel = 0;
 		int mentorCount = 0;

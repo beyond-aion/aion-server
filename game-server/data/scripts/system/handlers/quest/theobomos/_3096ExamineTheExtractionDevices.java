@@ -42,9 +42,8 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE) {
 			if (targetId == 798225) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -56,7 +55,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798225: {
+				case 798225:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -66,8 +65,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700423: {
+				case 700423:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208067) < 1) {
@@ -76,8 +74,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700424: {
+				case 700424:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208068) < 1) {
@@ -86,8 +83,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700425: {
+				case 700425:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208069) < 1) {
@@ -96,8 +92,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700426: {
+				case 700426:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208070) < 1) {
@@ -106,7 +101,6 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 						}
 					}
 					return false;
-				}
 			}
 			return false;
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

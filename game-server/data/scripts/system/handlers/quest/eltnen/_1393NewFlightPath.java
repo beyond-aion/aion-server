@@ -43,9 +43,8 @@ public class _1393NewFlightPath extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204041) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -57,13 +56,12 @@ public class _1393NewFlightPath extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204041) {
 				switch (env.getDialog()) {
-					case SETPRO1: {
+					case SETPRO1:
 						player.setState(CreatureState.FLIGHT_TELEPORT);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(17001);
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 17001, 0));
 						return defaultCloseDialog(env, 0, 1, true, false);
-					}
 					default:
 						return closeDialogWindow(env);
 				}
@@ -73,9 +71,8 @@ public class _1393NewFlightPath extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204041) {
 				switch (env.getDialog()) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

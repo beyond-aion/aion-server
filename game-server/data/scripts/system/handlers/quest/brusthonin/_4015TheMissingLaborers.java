@@ -43,13 +43,12 @@ public class _4015TheMissingLaborers extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 730107: {
+				case 730107:
 					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
 						return useQuestObject(env, 0, 1, false, false); // 1
 					}
 					return false;
-				}
-				case 205130: {
+				case 205130:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
@@ -60,7 +59,6 @@ public class _4015TheMissingLaborers extends QuestHandler {
 						} else
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205130)

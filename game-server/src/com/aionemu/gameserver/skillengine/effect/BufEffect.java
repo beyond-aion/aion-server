@@ -73,7 +73,7 @@ public abstract class BufEffect extends EffectTemplate {
 		int skillId = effect.getSkillId();
 		int skillLvl = effect.getSkillLevel();
 
-		List<IStatFunction> modifiers = new FastTable<IStatFunction>();
+		List<IStatFunction> modifiers = new FastTable<>();
 
 		if (change == null)
 			return modifiers;

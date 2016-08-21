@@ -22,7 +22,7 @@ public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
 		writeH(0); // 0, 4 or 5
 		writeC(0); // 0, 4 or 124
 		writeH(0); // can be 1
-		writeD(0); // 0 or 16 (or 31 = strong energy of repose) 
+		writeD(0); // 0 or 16 (or 31 = strong energy of repose)
 		writeD(0); // always 0
 		writeD(0); // purchased packet (8 = gold pack)
 		writeD(4); // account status (0 = gold-user, 1/2 = starter, 3/4 = veteran)

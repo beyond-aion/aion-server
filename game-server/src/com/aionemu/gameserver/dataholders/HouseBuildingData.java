@@ -24,7 +24,7 @@ public class HouseBuildingData {
 	protected List<Building> buildings;
 
 	@XmlTransient
-	Map<Integer, Building> buildingById = new HashMap<Integer, Building>();
+	Map<Integer, Building> buildingById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (buildings == null)

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.templates.towns;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -9,6 +7,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ViAl
@@ -21,7 +21,7 @@ public class TownSpawn {
 	@XmlElement(name = "town_level")
 	private List<TownLevel> townLevels;
 
-	private TIntObjectHashMap<TownLevel> townLevelsData = new TIntObjectHashMap<TownLevel>();
+	private TIntObjectHashMap<TownLevel> townLevelsData = new TIntObjectHashMap<>();
 
 	/**
 	 * @param u

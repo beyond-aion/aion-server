@@ -100,12 +100,12 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public boolean conditionReady(Creature creature) {	
+	public boolean conditionReady(Creature creature) {
 		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
-		} 
+		}
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
-		if (condTemp == null) 
+		if (condTemp == null)
 			return true;
 		VisibleObject curTarget = creature.getTarget();
 		NpcSkillCondition condType = condTemp.getCondType();
@@ -116,7 +116,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature) {
 						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie()) 
+						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
 								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
@@ -131,10 +131,10 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature) {
 						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie()) 
+						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 							continue;
-						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target)) 
-								&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target) 
+						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
+								&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
 								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
 								&& GeoService.getInstance().canSee(creature, target)) {
 								creature.setTarget(target);
@@ -229,7 +229,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
-		if (curTarget instanceof Creature 
+		if (curTarget instanceof Creature
 				&& !((Creature) curTarget).getLifeStats().isAlreadyDead() && !((Creature) curTarget).getLifeStats().isAboutToDie()) {
 			if (skillTemp != null && skillTemp.getEffects().getEffectTypes().contains(EffectType.SIGNETBURST)) {
 				for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
@@ -278,7 +278,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
 								return;
 							}
-							int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount(); 
+							int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();
 							for (int i = 0; i < amount; i++) {
 								float x1 = 0;
 								float y1 = 0;
@@ -289,7 +289,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 								}
-								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(),
 									npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
 								if (template != null) {
 									template.setCreatorId(npc.getObjectId());
@@ -304,7 +304,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 					if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
 						return;
 					}
-					int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount(); 
+					int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();
 					for (int i = 0; i < amount; i++) {
 						float x1 = 0;
 						float y1 = 0;
@@ -315,7 +315,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 						}
-						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), 
+						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(),
 							npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
 						if (template != null) {
 							template.setCreatorId(npc.getObjectId());

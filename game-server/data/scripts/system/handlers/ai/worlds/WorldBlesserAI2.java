@@ -1,7 +1,5 @@
 package ai.worlds;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,6 +8,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz, modified bobobear
@@ -25,10 +25,9 @@ public class WorldBlesserAI2 extends GeneralNpcAI2 {
 			case 831025: // Erdat
 			case 831026: // Erdat
 			case 831028: // Erdat
-			case 831027: { // Karzanke
+			case 831027: // Karzanke
 				super.handleDialogStart(player);
 				break;
-			}
 			default: {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 				break;

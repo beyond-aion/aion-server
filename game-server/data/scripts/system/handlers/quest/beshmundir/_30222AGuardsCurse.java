@@ -45,16 +45,14 @@ public class _30222AGuardsCurse extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798979) { // Gelon
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 1, 1, true); // reward
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -79,9 +77,8 @@ public class _30222AGuardsCurse extends QuestHandler {
 				// npc.getZ(), npc.getHeading());
 				// return true;
 				// }
-				case 216239: { // Ahbana the Wicked
+				case 216239: // Ahbana the Wicked
 					return defaultOnKillEvent(env, 216239, 0, 1); // 1
-				}
 			}
 		}
 		return false;

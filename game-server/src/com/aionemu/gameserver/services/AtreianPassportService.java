@@ -5,8 +5,6 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -29,6 +27,8 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -111,15 +111,14 @@ public class AtreianPassportService {
 		for (AtreianPassport atp : DATA.getAll().values()) {
 			if (atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
 				switch (atp.getAttendType()) {
-					case DAILY: {
+					case DAILY:
 						if (doReward) {
 							Passport passport = new Passport(atp.getId(), false, new Timestamp(System.currentTimeMillis()));
 							passport.setState(PersistentState.NEW);
 							pa.getPassportsList().addPassport(passport);
 						}
 						break;
-					}
-					case CUMULATIVE: {
+					case CUMULATIVE:
 						if (doReward && atp.getAttendNum() == pa.getPassportStamps() + 1) {
 							Passport passport = new Passport(atp.getId(), false, new Timestamp(System.currentTimeMillis()));
 							passport.setState(PersistentState.NEW);
@@ -134,7 +133,6 @@ public class AtreianPassportService {
 							}
 						}
 						break;
-					}
 					case ANNIVERSARY:
 						// TODO
 						break;

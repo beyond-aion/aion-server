@@ -15,10 +15,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javolution.util.FastTable;
 
 /**
  * @author NB4L1
@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public final class RunnableStatsManager {
 
 	private static final Logger log = LoggerFactory.getLogger(RunnableStatsManager.class);
-	private static final Map<Class<?>, ClassStat> classStats = new HashMap<Class<?>, ClassStat>();
+	private static final Map<Class<?>, ClassStat> classStats = new HashMap<>();
 
 	private static final class ClassStat {
 
@@ -221,7 +221,7 @@ public final class RunnableStatsManager {
 	}
 
 	public static void dumpClassStats(final SortBy sortBy) {
-		final List<MethodStat> methodStats = new FastTable<MethodStat>();
+		final List<MethodStat> methodStats = new FastTable<>();
 
 		synchronized (RunnableStatsManager.class) {
 			for (ClassStat classStat : classStats.values())
@@ -233,7 +233,7 @@ public final class RunnableStatsManager {
 		if (sortBy != null)
 			Collections.sort(methodStats, sortBy.comparator);
 
-		final List<String> lines = new FastTable<String>();
+		final List<String> lines = new FastTable<>();
 
 		lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 		lines.add("<entries>");

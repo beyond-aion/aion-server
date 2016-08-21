@@ -173,7 +173,7 @@ public class Eigen3f {
     }
 
     /**
-     * Compute the eigenvectors of the given Matrix, using the 
+     * Compute the eigenvectors of the given Matrix, using the
      * @param mat
      * @param vect
      * @param index1

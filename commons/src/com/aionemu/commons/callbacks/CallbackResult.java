@@ -133,6 +133,6 @@ public class CallbackResult<T> {
 	 * @return new callback instance with given result that will be returned as method result
 	 */
 	public static <T> CallbackResult<T> newFullBlocker(T result) {
-		return new CallbackResult<T>(result, BLOCK_ALL);
+		return new CallbackResult<>(result, BLOCK_ALL);
 	}
 }

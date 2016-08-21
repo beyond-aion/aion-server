@@ -49,26 +49,22 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204301: { // Aegir
+				case 204301: // Aegir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 0, 0);
-						}
 					}
 					break;
-				}
-				case 204319: { // Yornduf
+				case 204319: // Yornduf
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							} else if (var >= 2 && var <= 7) {
@@ -79,15 +75,13 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1354: {
+						case SELECT_ACTION_1354:
 							if (var == 1 || var == 10) {
 								playQuestMovie(env, 89);
 								return sendQuestDialog(env, 1354);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							if (var == 1) {
 								QuestService.questTimerStart(env, 70);
 								return defaultCloseDialog(env, 1, 2); // 2
@@ -96,20 +90,16 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 								return defaultCloseDialog(env, 9, 2); // 2
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (var == 8) {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestSelectionDialog(env);
 							}
 							return false;
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir

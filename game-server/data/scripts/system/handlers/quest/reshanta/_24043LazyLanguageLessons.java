@@ -47,85 +47,68 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 278003: { // Hisui
+				case 278003: // Hisui
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 278086: { // Sinjah
+				case 278086: // Sinjah
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 278039: { // Grunn
+				case 278039: // Grunn
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
 					break;
-				}
-				case 279027: { // Kaoranerk
+				case 279027: // Kaoranerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							} else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SELECT_ACTION_3058: {
+						case SELECT_ACTION_3058:
 							removeQuestItem(env, 182215373, 1);
 							playQuestMovie(env, 293);
 							return sendQuestDialog(env, 3058);
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							return defaultCloseDialog(env, 6, 6, true, false); // reward
-						}
 					}
 					break;
-				}
-				case 204210: { // Phosphor
+				case 204210: // Phosphor
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							return defaultCloseDialog(env, 5, 6, 182215373, 1, 0, 0); // 6
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278003) { // Hisui

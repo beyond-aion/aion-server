@@ -77,27 +77,24 @@ public class _2759TenaciousGuardian extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var < 3) {
 				switch (targetId) {
-					case 278588: {
+					case 278588:
 						if (!killedMobs.contains(278588)) {
 							killedMobs.add(278588);
 							return defaultOnKillEvent(env, 278588, var, var + 1);
 						}
 						break;
-					}
-					case 278589: {
+					case 278589:
 						if (!killedMobs.contains(278589)) {
 							killedMobs.add(278589);
 							return defaultOnKillEvent(env, 278589, var, var + 1);
 						}
 						break;
-					}
-					case 278590: {
+					case 278590:
 						if (!killedMobs.contains(278590)) {
 							killedMobs.add(278590);
 							return defaultOnKillEvent(env, 278590, var, var + 1);
 						}
 						break;
-					}
 				}
 			}
 		}

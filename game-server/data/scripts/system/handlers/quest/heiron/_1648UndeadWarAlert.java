@@ -54,7 +54,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204612: {
+				case 204612:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -70,8 +70,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204500: {
+				case 204500:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -87,7 +86,6 @@ public class _1648UndeadWarAlert extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204590) {

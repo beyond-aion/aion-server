@@ -78,10 +78,10 @@ public class Equipment {
 	private PersistentState persistentState = PersistentState.UPDATED;
 
 	private static final long[] ARMOR_SLOTS = new long[] { // @formatter:off
-		ItemSlot.BOOTS.getSlotIdMask(), 
+		ItemSlot.BOOTS.getSlotIdMask(),
 		ItemSlot.GLOVES.getSlotIdMask(),
-		ItemSlot.PANTS.getSlotIdMask(), 
-		ItemSlot.SHOULDER.getSlotIdMask(), 
+		ItemSlot.PANTS.getSlotIdMask(),
+		ItemSlot.SHOULDER.getSlotIdMask(),
 		ItemSlot.TORSO.getSlotIdMask()
 	}; // @formatter:on
 
@@ -173,8 +173,7 @@ public class Equipment {
 
 			ItemSlot[] possibleSlots = ItemSlot.getSlotsFor(itemSlotMask);
 			// find correct slot
-			for (int i = 0; i < possibleSlots.length; i++) {
-				ItemSlot possibleSlot = possibleSlots[i];
+			for (ItemSlot possibleSlot : possibleSlots) {
 				long slotId = possibleSlot.getSlotIdMask();
 				if (equipment.get(slotId) == null || markedFreeSlots.contains(slotId)) {
 					if (item.getItemTemplate().isTwoHandWeapon()) {
@@ -584,7 +583,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsByItemId(int value) {
-		List<Item> equippedItemsById = new FastTable<Item>();
+		List<Item> equippedItemsById = new FastTable<>();
 		synchronized (equipment) {
 			for (Item item : equipment.values()) {
 				if (item.getItemTemplate().getTemplateId() == value)
@@ -599,14 +598,14 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItems() {
-		HashSet<Item> equippedItems = new HashSet<Item>();
+		HashSet<Item> equippedItems = new HashSet<>();
 		equippedItems.addAll(equipment.values());
 
 		return Arrays.asList(equippedItems.toArray(new Item[0]));
 	}
 
 	public List<Integer> getEquippedItemIds() {
-		HashSet<Integer> equippedIds = new HashSet<Integer>();
+		HashSet<Integer> equippedIds = new HashSet<>();
 		for (Item i : equipment.values()) {
 			equippedIds.add(i.getItemId());
 		}
@@ -618,7 +617,7 @@ public class Equipment {
 	 */
 	public FastTable<Item> getEquippedItemsWithoutStigma() {
 		FastTable<Item> equippedItems = new FastTable<>();
-		List<Item> twoHanded = new FastTable<Item>();
+		List<Item> twoHanded = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
 				if (item.getItemTemplate().isTwoHandWeapon()) {
@@ -648,7 +647,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAllStigma() {
-		List<Item> equippedItems = new FastTable<Item>();
+		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -661,7 +660,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsRegularStigma() {
-		List<Item> equippedItems = new FastTable<Item>();
+		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isRegularStigma(item.getEquipmentSlot()))
 				equippedItems.add(item);
@@ -673,7 +672,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAdvancedStigma() {
-		List<Item> equippedItems = new FastTable<Item>();
+		List<Item> equippedItems = new FastTable<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -937,7 +936,7 @@ public class Equipment {
 		Item mainOffHandItem = equipment.get(ItemSlot.MAIN_OFF_HAND.getSlotIdMask());
 		Item subOffHandItem = equipment.get(ItemSlot.SUB_OFF_HAND.getSlotIdMask());
 
-		List<Item> equippedWeapon = new FastTable<Item>();
+		List<Item> equippedWeapon = new FastTable<>();
 
 		if (mainHandItem != null)
 			equippedWeapon.add(mainHandItem);

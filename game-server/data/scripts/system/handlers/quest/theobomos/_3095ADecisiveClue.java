@@ -50,7 +50,7 @@ public class _3095ADecisiveClue extends QuestHandler {
 		}
 
 		switch (targetId) {
-			case 798225: {
+			case 798225:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1352);
@@ -74,8 +74,7 @@ public class _3095ADecisiveClue extends QuestHandler {
 				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestEndDialog(env);
 				return false;
-			}
-			case 203898: {
+			case 203898:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
@@ -87,7 +86,6 @@ public class _3095ADecisiveClue extends QuestHandler {
 					} else
 						return sendQuestStartDialog(env);
 				}
-			}
 		}
 		return false;
 	}

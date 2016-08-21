@@ -28,7 +28,7 @@ public class HouseSpawns implements Comparable<HouseSpawns> {
 
 	public List<HouseSpawn> getSpawns() {
 		if (spawns == null) {
-			spawns = new FastTable<HouseSpawn>();
+			spawns = new FastTable<>();
 		}
 		return this.spawns;
 	}

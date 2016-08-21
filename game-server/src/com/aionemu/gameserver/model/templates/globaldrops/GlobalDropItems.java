@@ -22,7 +22,7 @@ public class GlobalDropItems {
 
 	public List<GlobalDropItem> getGlobalDropItems() {
 		if (gdItems == null) {
-			gdItems = new FastTable<GlobalDropItem>();
+			gdItems = new FastTable<>();
 		}
 		return this.gdItems;
 	}

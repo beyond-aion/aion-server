@@ -42,13 +42,13 @@ public class ItemActions {
 	 */
 	public List<AbstractItemAction> getItemActions() {
 		if (itemActions == null) {
-			itemActions = new FastTable<AbstractItemAction>();
+			itemActions = new FastTable<>();
 		}
 		return this.itemActions;
 	}
 
 	public List<ToyPetSpawnAction> getToyPetSpawnActions() {
-		List<ToyPetSpawnAction> result = new FastTable<ToyPetSpawnAction>();
+		List<ToyPetSpawnAction> result = new FastTable<>();
 		if (itemActions == null)
 			return result;
 

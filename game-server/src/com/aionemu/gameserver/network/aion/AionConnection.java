@@ -42,7 +42,7 @@ public class AionConnection extends AConnection {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
 
-	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<AionConnection>(
+	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(
 		NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
 		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper());
 
@@ -67,7 +67,7 @@ public class AionConnection extends AConnection {
 	/**
 	 * Server Packet "to send" Queue
 	 */
-	private final FastTable<AionServerPacket> sendMsgQueue = new FastTable<AionServerPacket>();
+	private final FastTable<AionServerPacket> sendMsgQueue = new FastTable<>();
 
 	/**
 	 * Current state of this connection
@@ -87,7 +87,7 @@ public class AionConnection extends AConnection {
 	/**
 	 * active Player that owner of this connection is playing [entered game]
 	 */
-	private AtomicReference<Player> activePlayer = new AtomicReference<Player>();
+	private AtomicReference<Player> activePlayer = new AtomicReference<>();
 
 	private AionPacketHandler aionPacketHandler;
 	private long lastPingTime;

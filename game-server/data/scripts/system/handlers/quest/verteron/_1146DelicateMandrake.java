@@ -39,13 +39,11 @@ public class _1146DelicateMandrake extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203123) { // Gano
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case ASK_QUEST_ACCEPT: {
+					case ASK_QUEST_ACCEPT:
 						return sendQuestDialog(env, 4);
-					}
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						if (giveQuestItem(env, 182200519, 1)) {
 							if (QuestService.startQuest(env)) {
 								QuestService.questTimerStart(env, 900);
@@ -53,30 +51,25 @@ public class _1146DelicateMandrake extends QuestHandler {
 							}
 						}
 						return false;
-					}
-					case QUEST_REFUSE_1: {
+					case QUEST_REFUSE_1:
 						return sendQuestDialog(env, 1004);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203139) { // Krodis
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						if (player.getInventory().getItemCountByItemId(182200519) > 0) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						removeQuestItem(env, 182200519, 1);
 						changeQuestStep(env, 0, 0, true);
 						QuestService.questTimerEnd(env);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

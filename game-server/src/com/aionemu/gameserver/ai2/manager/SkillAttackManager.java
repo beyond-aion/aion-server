@@ -3,8 +3,6 @@ package com.aionemu.gameserver.ai2.manager;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AISubState;
@@ -29,6 +27,8 @@ import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer

@@ -34,7 +34,7 @@ public class Points {
 
 	public List<Point2D> getPoint() {
 		if (point == null) {
-			point = new FastTable<Point2D>();
+			point = new FastTable<>();
 		}
 		return this.point;
 	}

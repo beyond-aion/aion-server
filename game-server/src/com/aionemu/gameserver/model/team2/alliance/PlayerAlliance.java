@@ -17,8 +17,8 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
-	private final Map<Integer, PlayerAllianceGroup> groups = new HashMap<Integer, PlayerAllianceGroup>();
-	private final Collection<Integer> viceCaptainIds = new CopyOnWriteArrayList<Integer>();
+	private final Map<Integer, PlayerAllianceGroup> groups = new HashMap<>();
+	private final Collection<Integer> viceCaptainIds = new CopyOnWriteArrayList<>();
 	private int allianceReadyStatus;
 	private TeamType type;
 	private League league;

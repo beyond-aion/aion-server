@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.team2.alliance.events;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -17,6 +15,8 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Preconditions;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -50,7 +50,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler {
 				}
 			}
 
-			List<Player> playersToAdd = new FastTable<Player>();
+			List<Player> playersToAdd = new FastTable<>();
 			collectPlayersToAdd(playersToAdd, alliance);
 
 			if (alliance == null) {

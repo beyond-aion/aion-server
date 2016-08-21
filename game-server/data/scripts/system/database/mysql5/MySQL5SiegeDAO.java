@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +14,8 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
+
+import javolution.util.FastTable;
 
 /**
  * @author Sarynth
@@ -31,7 +31,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 	@Override
 	public boolean loadSiegeLocations(final Map<Integer, SiegeLocation> locations) {
 		boolean success = true;
-		List<Integer> loaded = new FastTable<Integer>();
+		List<Integer> loaded = new FastTable<>();
 
 		try {
 			try (Connection con = DatabaseFactory.getConnection();

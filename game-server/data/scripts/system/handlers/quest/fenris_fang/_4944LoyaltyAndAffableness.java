@@ -54,9 +54,9 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			switch (targetId) {
-				case 204053: { // Kvasir
+				case 204053: // Kvasir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 306) {
@@ -65,49 +65,38 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 0, 6, false, 10000, 10001); // 6
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 0, 0);
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							qs.setQuestVar(3); // 3
 							updateQuestStatus(env);
 							return sendQuestSelectionDialog(env);
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
 					}
 					break;
-				}
-				case 204075: { // Balder
+				case 204075: // Balder
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SELECT_ACTION_2718: {
+						case SELECT_ACTION_2718:
 							if (player.getCommonData().getDp() >= 4000) {
 								return checkItemExistence(env, 5, 5, false, 186000087, 1, true, 2718, 2887, 0, 0);
 							} else {
 								return sendQuestDialog(env, 2802);
 							}
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							player.getCommonData().setDp(0);
 							return defaultCloseDialog(env, 5, 5, true, false); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 5, 5);
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir

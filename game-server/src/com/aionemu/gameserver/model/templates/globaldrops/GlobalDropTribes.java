@@ -22,7 +22,7 @@ public class GlobalDropTribes {
 
 	public List<GlobalDropTribe> getGlobalDropTribes() {
 		if (gdTribes == null) {
-			gdTribes = new FastTable<GlobalDropTribe>();
+			gdTribes = new FastTable<>();
 		}
 		return this.gdTribes;
 	}

@@ -55,7 +55,7 @@ public class _30217GroupStigmasScars extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798941: {
+				case 798941:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0 && qs != null)
@@ -70,7 +70,6 @@ public class _30217GroupStigmasScars extends QuestHandler {
 							return true;
 					}
 					return false;
-				}
 				case 798909:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

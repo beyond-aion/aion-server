@@ -34,9 +34,8 @@ public class _80330TransformWithTheMagicCane extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 831527) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
@@ -46,10 +45,9 @@ public class _80330TransformWithTheMagicCane extends QuestHandler {
 			if (targetId == 831527)
 				switch (dialog) {
 					case QUEST_SELECT:
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 0, 0, true); // reward
 						return sendQuestDialog(env, 5);
-					}
 				}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831527)

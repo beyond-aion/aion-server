@@ -35,7 +35,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	private static final int ATTACK_MAX_COUNTER = Integer.MAX_VALUE;
 
 	protected final T owner;
-	private final Map<StatEnum, TreeSet<IStatFunction>> stats = new EnumMap<StatEnum, TreeSet<IStatFunction>>(StatEnum.class);
+	private final Map<StatEnum, TreeSet<IStatFunction>> stats = new EnumMap<>(StatEnum.class);
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
 	private long lastGeoUpdate = 0;
@@ -335,12 +335,12 @@ public abstract class CreatureGameStats<T extends Creature> {
 		TreeSet<IStatFunction> allStats = stats.get(stat);
 		if (allStats == null)
 			return null;
-		TreeSet<IStatFunction> tmp = new TreeSet<IStatFunction>();
+		TreeSet<IStatFunction> tmp = new TreeSet<>();
 		List<IStatFunction> setFuncs = null;
 		for (IStatFunction func : allStats) {
 			if (func.getPriority() >= Integer.MAX_VALUE - 10) {
 				if (setFuncs == null)
-					setFuncs = new FastTable<IStatFunction>();
+					setFuncs = new FastTable<>();
 				setFuncs.add(func);
 			} else if (setFuncs != null) {
 				// all StatSetFunctions added

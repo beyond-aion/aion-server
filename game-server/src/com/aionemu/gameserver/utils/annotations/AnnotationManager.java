@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class AnnotationManager {
 
-	private static Map<Class<?>, AnnotatedClass> classToAnnotatedMap = new ConcurrentHashMap<Class<?>, AnnotatedClass>();
+	private static Map<Class<?>, AnnotatedClass> classToAnnotatedMap = new ConcurrentHashMap<>();
 
 	/**
 	 * @param theClass

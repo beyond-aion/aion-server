@@ -16,7 +16,7 @@ import javolution.util.FastMap;
  */
 public abstract class QuestZoneHandler extends GeneralZoneHandler {
 
-	FastMap<Integer, AbstractQuestZoneObserver> observed = new FastMap<Integer, AbstractQuestZoneObserver>();
+	FastMap<Integer, AbstractQuestZoneObserver> observed = new FastMap<>();
 	protected int questId;
 
 	public QuestZoneHandler() {

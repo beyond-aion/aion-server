@@ -51,10 +51,9 @@ public class _1640TeleporterRepairs extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730033) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						if (player.getInventory().getItemCountByItemId(182201790) > 0) {
 							removeQuestItem(env, 182201790, 1);
 							qs.setStatus(QuestStatus.REWARD);
@@ -64,7 +63,6 @@ public class _1640TeleporterRepairs extends QuestHandler {
 							return closeDialogWindow(env);
 						} else
 							return sendQuestDialog(env, 1353);
-					}
 				}
 			}
 		}

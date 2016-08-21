@@ -61,48 +61,41 @@ public class _1929ASliverofDarkness extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203752: { // Jucleas
+				case 203752: // Jucleas
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 203852: { // Ludina
+				case 203852: // Ludina
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							if (defaultCloseDialog(env, 1, 2)) { // 2
 								TeleportService2.teleportToNpc(player, 203164);
 								return true;
 							}
-						}
 					}
 					break;
-				}
-				case 203164: { // Morai
+				case 203164: // Morai
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 8) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (var == 2) {
 								changeQuestStep(env, 2, 93, false); // 93
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
@@ -111,25 +104,21 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 							return false;
-						}
-						case SETPRO7: {
+						case SETPRO7:
 							if (defaultCloseDialog(env, 8, 9)) { // 9
 								TeleportService2.teleportToNpc(player, 203701);
 								return true;
 							}
-						}
 					}
 					break;
-				}
-				case 205110: { // Icaronix
+				case 205110: // Icaronix
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 93) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							if (var == 93) {
 								changeQuestStep(env, 93, 94, false); // 94
 								player.setState(CreatureState.FLIGHT_TELEPORT);
@@ -138,10 +127,8 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 31001, 0));
 								return true;
 							}
-						}
 					}
 					break;
-				}
 				case 700240: { // Icaronix's Box
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var == 94) {
@@ -150,9 +137,9 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				}
-				case 205111: { // Ecus
+				case 205111: // Ecus
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 96) {
 								if (isStigmaEquipped(env)) {
 									return sendQuestDialog(env, 2716);
@@ -162,14 +149,12 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 98) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SELECT_ACTION_2546: {
+						case SELECT_ACTION_2546:
 							if (var == 98) {
 								if (giveQuestItem(env, getStoneId(player), 1)) {
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
@@ -177,8 +162,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								}
 							}
 							return false;
-						}
-						case SELECT_ACTION_2720: {
+						case SELECT_ACTION_2720:
 							if (var == 96) {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().onDelete();
@@ -186,23 +170,18 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								changeQuestStep(env, 96, 97, false); // 97
 								return closeDialogWindow(env);
 							}
-						}
 					}
 					break;
-				}
-				case 203701: { // Lavirintos
+				case 203701: // Lavirintos
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 9) {
 								return sendQuestDialog(env, 3398);
 							}
 							return false;
-						}
-						case SETPRO8: {
+						case SETPRO8:
 							return defaultCloseDialog(env, 9, 9, true, false); // reward
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203711) { // Miriya

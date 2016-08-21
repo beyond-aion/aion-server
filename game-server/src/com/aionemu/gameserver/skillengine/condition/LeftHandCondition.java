@@ -26,7 +26,7 @@ public class LeftHandCondition extends Condition {
 		if (env.getEffector() instanceof Player) {
 			Player player = (Player) env.getEffector();
 			switch (type) {
-				case DUAL: {
+				case DUAL:
 					if ((player.getEquipment().getOffHandWeapon() != null && player.getEquipment().getOffHandWeapon().getItemTemplate().isWeapon())
 						|| player.getEquipment().getMainHandWeapon().getItemTemplate().isTwoHandWeapon())
 						return true;
@@ -34,15 +34,13 @@ public class LeftHandCondition extends Condition {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_DUAL_WEAPON());
 						return false;
 					}
-				}
-				case SHIELD: {
+				case SHIELD:
 					if (player.getEquipment().isShieldEquipped())
 						return true;
 					else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_SHIELD());
 						return false;
 					}
-				}
 			}
 		}
 		return false;

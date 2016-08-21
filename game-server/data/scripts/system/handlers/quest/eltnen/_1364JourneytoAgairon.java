@@ -50,18 +50,15 @@ public class _1364JourneytoAgairon extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203945: { // Teos
+				case 203945: // Teos
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1693);
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 790007, 0, 1); // 1
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790007) { // Dellome

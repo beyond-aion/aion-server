@@ -1,7 +1,5 @@
 package ai.siege;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,6 +11,8 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.siege.FortressSiege;
 import com.aionemu.gameserver.services.siege.MercenaryLocation;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author ViAl

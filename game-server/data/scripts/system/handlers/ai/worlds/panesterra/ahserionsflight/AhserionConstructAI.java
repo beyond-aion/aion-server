@@ -46,7 +46,7 @@ public class AhserionConstructAI extends NpcAI2 {
 	
 	private void broadcastAttack() {
 		if (canShout.compareAndSet(true, false)) {
-			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead() 
+			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()
 				&& getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
@@ -97,9 +97,9 @@ public class AhserionConstructAI extends NpcAI2 {
 	}
 	
 	private void scheduleAttack() {
-		if (getOwner().getSpawn().getStaticId() == 0 
+		if (getOwner().getSpawn().getStaticId() == 0
 			|| !(getOwner().getSpawn() instanceof AhserionsFlightSpawnTemplate)
-			|| !AhserionRaid.getInstance().isStarted() 
+			|| !AhserionRaid.getInstance().isStarted()
 			|| getOwner().getTribe() == TribeClass.GAB1_SUB_NONAGGRESSIVE_DRAKAN) {
 			return;
 		}
@@ -233,7 +233,7 @@ public class AhserionConstructAI extends NpcAI2 {
 		
 		//Only players or balaur can attack the controller, there are no other npcs on this map
 		for (AggroInfo ai : getOwner().getAggroList().getFinalDamageList(false)) {
-			if (ai.getAttacker() instanceof Player) { 
+			if (ai.getAttacker() instanceof Player) {
 				Player attacker = (Player) ai.getAttacker();
 				if (attacker.getPanesterraTeam() != null) {
 					PanesterraTeamId teamId = attacker.getPanesterraTeam().getTeamId();
@@ -265,28 +265,28 @@ public class AhserionConstructAI extends NpcAI2 {
 		//just in case: we'll spawn balaur construct again
 		PanesterraTeamId winner = PanesterraTeamId.BALAUR;
 		int maxDmg = 0;
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69) 
+		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69)
 			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_69)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_69;
 			}
 		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_70) 
+		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_70)
 			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_70)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_70;
 			}
 		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_71) 
+		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_71)
 			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_71)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71);
 				winner = PanesterraTeamId.GAB1_SUB_DEST_71;
 			}
 		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_72) 
+		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_72)
 			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_72)) {
 			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72) > maxDmg) {
 				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72);
@@ -296,7 +296,7 @@ public class AhserionConstructAI extends NpcAI2 {
 		spawnTankFleetForWinner(getOwner().getSpawn().getStaticId(), winner);
 	}
 	
-	private void spawnTankFleetForWinner(int staticId, PanesterraTeamId team) {		
+	private void spawnTankFleetForWinner(int staticId, PanesterraTeamId team) {
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
@@ -320,7 +320,7 @@ public class AhserionConstructAI extends NpcAI2 {
 	}
 	
 	private void spawnNpc(int npcId) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, npcId, 
+		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, npcId,
 			getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 		flag = (Npc) SpawnEngine.spawnObject(template, 1);
 		flag.getPosition().getMapRegion().activate();

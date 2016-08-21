@@ -51,7 +51,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203837: {
+				case 203837:
 					if (qs.getQuestVarById(0) == 0) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
@@ -62,9 +62,8 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 							return true;
 						}
 					}
-				}
 					break;
-				case 203761: {
+				case 203761:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
@@ -75,9 +74,8 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 							return true;
 						}
 					}
-				}
 					break;
-				case 203833: {
+				case 203833:
 					if (qs.getQuestVarById(0) == 2) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2034);
@@ -88,9 +86,8 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 							return true;
 						}
 					}
-				}
 					break;
-				case 204573: {
+				case 204573:
 					if (qs.getQuestVarById(0) == 3) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
@@ -101,7 +98,6 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 						} else
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204573)

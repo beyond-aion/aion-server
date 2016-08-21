@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +18,8 @@ import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.services.LegionService;
+
+import javolution.util.FastTable;
 
 /**
  * @author Simple
@@ -222,7 +222,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 	 */
 	@Override
 	public List<Integer> loadLegionMembers(final int legionId) {
-		final List<Integer> legionMembers = new FastTable<Integer>();
+		final List<Integer> legionMembers = new FastTable<>();
 
 		boolean success = DB.select(SELECT_LEGIONMEMBERS_QUERY, new ParamReadStH() {
 

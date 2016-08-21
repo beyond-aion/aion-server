@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link PetTemplate} instances.<br>
@@ -25,7 +25,7 @@ public class PetData {
 	private List<PetTemplate> pets;
 
 	/** A map containing all pet templates */
-	private TIntObjectHashMap<PetTemplate> petData = new TIntObjectHashMap<PetTemplate>();
+	private TIntObjectHashMap<PetTemplate> petData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetTemplate pet : pets) {

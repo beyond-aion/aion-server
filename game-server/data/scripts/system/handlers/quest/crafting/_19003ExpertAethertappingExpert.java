@@ -50,14 +50,13 @@ public class _19003ExpertAethertappingExpert extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203700: {
+				case 203700:
 					switch (dialog) {
 						case QUEST_SELECT:
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 2375);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) {

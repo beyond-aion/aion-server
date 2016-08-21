@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.instance;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -16,13 +14,15 @@ import com.aionemu.gameserver.model.templates.instance_bonusatrr.InstancePenalty
 import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import javolution.util.FastTable;
+
 /**
  * @author xTz
  */
 public class InstanceBuff implements StatOwner {
 
 	private Future<?> task;
-	private List<IStatFunction> functions = new FastTable<IStatFunction>();
+	private List<IStatFunction> functions = new FastTable<>();
 	private InstanceBonusAttr instanceBonusAttr;
 	private long startTime;
 

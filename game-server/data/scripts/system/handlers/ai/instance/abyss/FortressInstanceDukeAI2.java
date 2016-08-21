@@ -1,10 +1,10 @@
 package ai.instance.abyss;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.utils.MathUtil;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * Created on June 24th, 2016

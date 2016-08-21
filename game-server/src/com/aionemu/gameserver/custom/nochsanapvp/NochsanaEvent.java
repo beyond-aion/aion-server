@@ -30,12 +30,12 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 public class NochsanaEvent extends GameEvent {
 
-	private List<CustomBase> bases = new LinkedList<CustomBase>();
+	private List<CustomBase> bases = new LinkedList<>();
 	private CustomBase siegeBoss = null;
-	private List<CustomBase> defenderBases = new LinkedList<CustomBase>();
-	private List<CustomBase> attackerBases = new LinkedList<CustomBase>();
-	private Map<Integer, VisibleObject> spawnControl = new HashMap<Integer, VisibleObject>();
-	private Map<Npc, CustomBase> teleportToBase = new HashMap<Npc, CustomBase>();
+	private List<CustomBase> defenderBases = new LinkedList<>();
+	private List<CustomBase> attackerBases = new LinkedList<>();
+	private Map<Integer, VisibleObject> spawnControl = new HashMap<>();
+	private Map<Npc, CustomBase> teleportToBase = new HashMap<>();
 	private Future<?> timeout;
 	private long definedEnd;
 
@@ -95,7 +95,7 @@ public class NochsanaEvent extends GameEvent {
 	@Override
 	public boolean onReviveEvent(Player player) {
 		applyBuffs(player);
-		return super.onReviveEvent(player);		
+		return super.onReviveEvent(player);
 	}
 	
 	private void applyBuffs(Player player) {
@@ -151,7 +151,7 @@ public class NochsanaEvent extends GameEvent {
 			}
 		}, 20 * 60 * 1000);
 		
-		announceAll("Nochsana is under Siege! Fight!");		
+		announceAll("Nochsana is under Siege! Fight!");
 		
 	}
 	
@@ -160,7 +160,7 @@ public class NochsanaEvent extends GameEvent {
 		this.sendMajorTimer(time);
 	}
 	
-	private void onEventTimeout() {		
+	private void onEventTimeout() {
 		this.announceAll("The Battle is Over");
 		if(attackerBases.size() >= bases.size() / 2) {
 			this.announceAll("Attackers are Controlling the half of all Bases. Attackers win.");
@@ -199,7 +199,7 @@ public class NochsanaEvent extends GameEvent {
 
 		if (winner == defender && siegeBoss.getBoss() != null || winner == defender && siegeBoss.isPreparingToSpawn()) {
 			sendCornerTimer(0);
-			this.sendRemainingMajorTimer();		
+			this.sendRemainingMajorTimer();
 			stopSiege();
 		}
 

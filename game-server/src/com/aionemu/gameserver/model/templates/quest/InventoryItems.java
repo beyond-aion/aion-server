@@ -35,7 +35,7 @@ public class InventoryItems {
 	 */
 	public List<InventoryItem> getInventoryItem() {
 		if (inventoryItem == null) {
-			inventoryItem = new FastTable<InventoryItem>();
+			inventoryItem = new FastTable<>();
 		}
 		return this.inventoryItem;
 	}

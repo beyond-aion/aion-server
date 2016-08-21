@@ -36,31 +36,28 @@ public class _30553ComradesInArms extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		if (qs == null || qs == null || qs.isStartable()) {
 			switch (targetId) {
-				case 205438: {
+				case 205438:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 4762);
 						default:
 							return sendQuestStartDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 
 			switch (targetId) {
-				case 205438: {
+				case 205438:
 					switch (dialog) {
 						case SELECT_QUEST_REWARD:
 							return defaultCloseDialog(env, 1, 1, true, true);
 					}
 					return false;
-				}
-				case 701097: {
+				case 701097:
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().onDelete();
 					return true;
-				}
-				case 799541: {
+				case 799541:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
@@ -68,15 +65,13 @@ public class _30553ComradesInArms extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1, true, false);// reward
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
-				case 205438: {
+				case 205438:
 
 					return sendQuestEndDialog(env);
 
-				}
 			}
 		}
 		return false;

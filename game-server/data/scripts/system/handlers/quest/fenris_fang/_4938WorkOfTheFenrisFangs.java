@@ -46,140 +46,112 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 798367: { // Riikaard
+				case 798367: // Riikaard
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 798368: { // Herosir
+				case 798368: // Herosir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 798369: { // Gellner
+				case 798369: // Gellner
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
 					break;
-				}
-				case 798370: { // Natorp
+				case 798370: // Natorp
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4); // 4
-						}
 					}
 					break;
-				}
-				case 798371: { // Needham
+				case 798371: // Needham
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
 					}
 					break;
-				}
-				case 798372: { // Landsberg
+				case 798372: // Landsberg
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							return defaultCloseDialog(env, 5, 6); // 6
-						}
 					}
 					break;
-				}
-				case 798373: { // Levinard
+				case 798373: // Levinard
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case SETPRO7: {
+						case SETPRO7:
 							return defaultCloseDialog(env, 6, 7); // 7
-						}
 					}
 					break;
-				}
-				case 798374: { // Lonergan
+				case 798374: // Lonergan
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 7) {
 								return sendQuestDialog(env, 3398);
 							}
 							return false;
-						}
-						case SETPRO8: {
+						case SETPRO8:
 							return defaultCloseDialog(env, 7, 8); // 8
-						}
 					}
 					break;
-				}
-				case 204075: { // Balder
+				case 204075: // Balder
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
 								return defaultCloseDialog(env, 8, 8, true, false, 0);
 							} else {
 								return sendQuestDialog(env, 3825);
 							}
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir

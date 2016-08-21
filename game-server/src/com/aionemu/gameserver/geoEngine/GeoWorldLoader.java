@@ -55,7 +55,7 @@ public class GeoWorldLoader {
 	}
 
 	public static Map<String, Spatial> loadMeshs(String fileName) throws IOException {
-		Map<String, Spatial> geoms = new HashMap<String, Spatial>();
+		Map<String, Spatial> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
 		FileChannel roChannel = null;
 		MappedByteBuffer geo = null;
@@ -247,8 +247,8 @@ public class GeoWorldLoader {
 	}
 
 	/*
-	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked 
-	 * for boxes during the creation. Boxes are more efficient way to handle collisions. So, it replaces 
+	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked
+	 * for boxes during the creation. Boxes are more efficient way to handle collisions. So, it replaces
 	 * geo mesh with the artfitial Box geometry, taken from the static_doors.xml. Basically, you can create
 	 * missing doors here but that is not implemented. matrix is never used, as well as scale.
 	 * Those two arguments are needed if location MUST be repositioned according to geo mesh.

@@ -94,7 +94,7 @@ public class QuestStateList {
 	 * @return All normal (light blue) quests, that are currently active.
 	 */
 	public List<QuestState> getNormalQuests() {
-		List<QuestState> questList = new FastTable<QuestState>();
+		List<QuestState> questList = new FastTable<>();
 		for (QuestState qs : getAllQuestState()) {
 			QuestCategory qc = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getCategory();
 			QuestStatus s = qs.getStatus();

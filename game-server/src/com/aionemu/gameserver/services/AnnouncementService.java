@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +17,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 /**
  * Automatic Announcement System
@@ -34,7 +34,7 @@ public class AnnouncementService {
 	private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
 
 	private FastSet<Announcement> announcements = new FastSet<Announcement>().shared();
-	private List<Future<?>> delays = new FastTable<Future<?>>();
+	private List<Future<?>> delays = new FastTable<>();
 
 	private AnnouncementService() {
 		this.load();

@@ -40,9 +40,8 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798132) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -54,7 +53,7 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 700418: {
+				case 700418:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208062) < 1) {
@@ -65,7 +64,6 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798201) {

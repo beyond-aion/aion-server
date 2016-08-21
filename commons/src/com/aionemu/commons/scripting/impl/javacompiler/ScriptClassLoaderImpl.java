@@ -93,7 +93,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 	 *           if was unable to load class
 	 */
 	public Set<JavaFileObject> getClassesForPackage(String packageName) throws IOException {
-		Set<JavaFileObject> result = new HashSet<JavaFileObject>();
+		Set<JavaFileObject> result = new HashSet<>();
 
 		// load parent
 		ClassLoader parent = getParent();
@@ -112,7 +112,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		}
 
 		// initialize set with class names, will be used to resolve classes
-		Set<String> classNames = new HashSet<String>();
+		Set<String> classNames = new HashSet<>();
 
 		// load package members from this classloader
 		Enumeration<URL> urls = getResources(packageName.replace('.', '/'));

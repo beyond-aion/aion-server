@@ -104,7 +104,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			}
 			if (player.isInAlliance2()) {
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
-			} 
+			}
 			if (player.isInGroup2()) {
 				PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
 			}

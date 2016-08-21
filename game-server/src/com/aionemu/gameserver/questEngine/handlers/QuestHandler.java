@@ -1110,13 +1110,11 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 
 	public boolean sendItemCollectingStartDialog(QuestEnv env) {
 		switch (env.getDialog()) {
-			case QUEST_ACCEPT_1: {
+			case QUEST_ACCEPT_1:
 				QuestService.startQuest(env);
 				return sendQuestSelectionDialog(env);
-			}
-			case QUEST_REFUSE_1: {
+			case QUEST_REFUSE_1:
 				return sendQuestSelectionDialog(env);
-			}
 		}
 		return false;
 	}

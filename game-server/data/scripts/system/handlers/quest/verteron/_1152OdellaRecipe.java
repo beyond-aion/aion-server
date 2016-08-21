@@ -47,23 +47,19 @@ public class _1152OdellaRecipe extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203130) { // Eradis
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						} else if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1, 0, 0, 182200526, 1); // 1
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 1, 1, true, 5, 2716); // reward
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

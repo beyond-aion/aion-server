@@ -39,8 +39,8 @@ public class DuelService {
 	 * @param duels
 	 */
 	private DuelService() {
-		this.duels = new ConcurrentHashMap<Integer, Integer>();
-		this.drawTasks = new ConcurrentHashMap<Integer, Future<?>>();
+		this.duels = new ConcurrentHashMap<>();
+		this.drawTasks = new ConcurrentHashMap<>();
 		log.info("DuelService started.");
 	}
 

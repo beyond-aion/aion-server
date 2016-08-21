@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +14,8 @@ import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 
+import javolution.util.FastTable;
+
 /**
  * @author xTz TYPE_A: BuyLimit == 0 && SellLimit != 0 TYPE_B: BuyLimit != 0 && SellLimit == 0 TYPE_C: BuyLimit != 0 && SellLimit != 0
  */
@@ -24,7 +24,7 @@ public class LimitedItemTradeService {
 	private static final Logger log = LoggerFactory.getLogger(LimitedItemTradeService.class);
 	private GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 	private TradeListData tradeListData = DataManager.TRADE_LIST_DATA;
-	private ConcurrentHashMap<Integer, LimitedTradeNpc> limitedTradeNpcs = new ConcurrentHashMap<Integer, LimitedTradeNpc>();
+	private ConcurrentHashMap<Integer, LimitedTradeNpc> limitedTradeNpcs = new ConcurrentHashMap<>();
 
 	public void start() {
 		for (int npcId : tradeListData.getTradeListTemplate().keys()) {

@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
@@ -19,6 +17,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import javolution.util.FastTable;
+
 /**
  * Find Group Service
  * 
@@ -26,10 +26,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class FindGroupService {
 
-	private ConcurrentHashMap<Integer, FindGroup> elyosRecruitFindGroups = new ConcurrentHashMap<Integer, FindGroup>();
-	private ConcurrentHashMap<Integer, FindGroup> elyosApplyFindGroups = new ConcurrentHashMap<Integer, FindGroup>();
-	private ConcurrentHashMap<Integer, FindGroup> asmodianRecruitFindGroups = new ConcurrentHashMap<Integer, FindGroup>();
-	private ConcurrentHashMap<Integer, FindGroup> asmodianApplyFindGroups = new ConcurrentHashMap<Integer, FindGroup>();
+	private ConcurrentHashMap<Integer, FindGroup> elyosRecruitFindGroups = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<Integer, FindGroup> elyosApplyFindGroups = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<Integer, FindGroup> asmodianRecruitFindGroups = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<Integer, FindGroup> asmodianApplyFindGroups = new ConcurrentHashMap<>();
 
 	private FindGroupService() {
 
@@ -78,7 +78,7 @@ public class FindGroupService {
 				break;
 		}
 
-		Collection<FindGroup> findGroupList = new FastTable<FindGroup>();
+		Collection<FindGroup> findGroupList = new FastTable<>();
 		findGroupList.add(findGroup);
 
 		PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, ((int) (System.currentTimeMillis() / 1000)), findGroupList));

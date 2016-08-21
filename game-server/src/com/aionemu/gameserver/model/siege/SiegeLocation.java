@@ -57,7 +57,7 @@ public class SiegeLocation implements ZoneHandler {
 		this.worldId = template.getWorldId();
 		this.type = template.getType();
 		this.siegeDuration = template.getSiegeDuration();
-		this.zone = new FastTable<SiegeZoneInstance>();
+		this.zone = new FastTable<>();
 		this.influenceValue = template.getInfluenceValue();
 	}
 

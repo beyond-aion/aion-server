@@ -34,7 +34,7 @@ public class DAOManager {
 	/**
 	 * Collection of registered DAOs
 	 */
-	private static final Map<String, DAO> daoMap = new HashMap<String, DAO>();
+	private static final Map<String, DAO> daoMap = new HashMap<>();
 
 	/**
 	 * This script manager is responsible for loading {@link com.aionemu.commons.database.dao.DAO} implementations

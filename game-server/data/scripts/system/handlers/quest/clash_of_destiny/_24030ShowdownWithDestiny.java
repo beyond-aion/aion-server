@@ -52,34 +52,30 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 			switch (targetId) {
 				case 204206:// Cavalorn
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
 				case 204207:// Kasir
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
-						}
 					}
 					break;
 				case 203550:// Munin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
 							if (var == 3) {
@@ -92,11 +88,9 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 								return sendQuestDialog(env, 3739);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3);
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 3 && player.getInventory().getItemCountByItemId(182215391) == 1) {
 								removeQuestItem(env, 182215391, 1);
 								qs.setQuestVar(4);
@@ -105,30 +99,26 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 							} else {
 								return sendQuestDialog(env, 10001);
 							}
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							qs.setQuestVar(5);
 							updateQuestStatus(env);
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320140000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 320140000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
 							return true;
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							if (var == 8) {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								return sendQuestSelectionDialog(env);
 							}
-						}
 					}
 					break;
 				case 205020:// Hagen
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 2716);
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							// TODO: Find out, if any effect or so is getting applied to player
 							player.setState(CreatureState.FLIGHT_TELEPORT);
 							player.unsetState(CreatureState.ACTIVE);
@@ -137,20 +127,17 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 							qs.setQuestVar(6);
 							updateQuestStatus(env);
 							return true;
-						}
 					}
 					break;
 			}
 		}
 		if (targetId == 204052 && qs.getStatus() == QuestStatus.REWARD) {// Vidar
 			switch (dialog) {
-				case USE_OBJECT: {
+				case USE_OBJECT:
 					return sendQuestDialog(env, 10002);
-				}
-				case SELECT_QUEST_REWARD: {
+				case SELECT_QUEST_REWARD:
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);
-				}
 				default: {
 					return sendQuestEndDialog(env);
 				}

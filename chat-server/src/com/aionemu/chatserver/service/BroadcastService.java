@@ -14,7 +14,7 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 public class BroadcastService {
 
 	private static BroadcastService instance = new BroadcastService();
-	private Map<Integer, ChatClient> clients = new HashMap<Integer, ChatClient>();
+	private Map<Integer, ChatClient> clients = new HashMap<>();
 
 	public static BroadcastService getInstance() {
 		return instance;

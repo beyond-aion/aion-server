@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author Alcapwnd

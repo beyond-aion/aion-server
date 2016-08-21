@@ -22,7 +22,7 @@ public class GlobalDropWorlds {
 
 	public List<GlobalDropWorld> getGlobalDropWorlds() {
 		if (gdWorlds == null) {
-			gdWorlds = new FastTable<GlobalDropWorld>();
+			gdWorlds = new FastTable<>();
 		}
 		return this.gdWorlds;
 	}

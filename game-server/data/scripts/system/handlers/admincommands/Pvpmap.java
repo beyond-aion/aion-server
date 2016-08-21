@@ -1,6 +1,6 @@
 package admincommands;
 
-import java.awt.*;
+import java.awt.Color;
 
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

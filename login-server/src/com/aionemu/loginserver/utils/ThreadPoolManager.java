@@ -9,14 +9,14 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
+
+import javolution.util.FastTable;
 
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
@@ -200,7 +200,7 @@ public final class ThreadPoolManager {
 	}
 
 	public List<String> getStats() {
-		List<String> list = new FastTable<String>();
+		List<String> list = new FastTable<>();
 
 		list.add("");
 		list.add("Scheduled pool:");

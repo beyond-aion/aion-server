@@ -71,11 +71,10 @@ public class _30241NewBow extends QuestHandler {
 			switch (targetId) {
 				case 286904:
 				case 281419:
-				case 215795: {
+				case 215795:
 					if (QuestService.collectItemCheck(env, true)) {
 						return giveQuestItem(env, 182209639, 1);
 					}
-				}
 			}
 		}
 		return false;

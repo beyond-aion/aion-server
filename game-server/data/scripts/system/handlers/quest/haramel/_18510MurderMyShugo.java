@@ -51,7 +51,7 @@ public class _18510MurderMyShugo extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 700953: {
+				case 700953:
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var >= 3 && var < 5) {
 							return useQuestObject(env, var, var + 1, false, true); // 4,5
@@ -59,17 +59,14 @@ public class _18510MurderMyShugo extends QuestHandler {
 							return useQuestObject(env, 5, 5, true, true); // reward
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203166) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

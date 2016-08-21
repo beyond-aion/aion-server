@@ -52,7 +52,7 @@ public class GameServerInfo {
 	/**
 	 * Map<AccId,Account> of accounts logged in on this GameServer.
 	 */
-	private final Map<Integer, Account> accountsOnGameServer = new HashMap<Integer, Account>();
+	private final Map<Integer, Account> accountsOnGameServer = new HashMap<>();
 
 	/**
 	 * Constructor.

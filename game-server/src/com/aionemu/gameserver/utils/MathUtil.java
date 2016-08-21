@@ -569,7 +569,7 @@ public class MathUtil {
 		v = BigDecimal.ONE.divide(TWO.multiply(x), nMC); // v0 = 1/(2*x)
 
 		// Collect iteration precisions beforehand
-		List<Integer> nPrecs = new FastTable<Integer>();
+		List<Integer> nPrecs = new FastTable<>();
 
 		assert nInit > 3 : "Never ending loop!"; // assume nInit = 16 <= prec
 

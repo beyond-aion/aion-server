@@ -23,7 +23,7 @@ public class MySQL5GameServersDAO extends GameServersDAO {
 	@Override
 	public Map<Byte, GameServerInfo> getAllGameServers() {
 
-		final Map<Byte, GameServerInfo> result = new HashMap<Byte, GameServerInfo>();
+		final Map<Byte, GameServerInfo> result = new HashMap<>();
 		DB.select("SELECT * FROM gameservers", new ReadStH() {
 
 			@Override

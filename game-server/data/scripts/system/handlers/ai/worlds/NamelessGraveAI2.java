@@ -2,12 +2,12 @@ package ai.worlds;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Tibald

@@ -37,7 +37,7 @@ public class _2005TeachingaLesson extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203540: {
+				case 203540:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -67,7 +67,6 @@ public class _2005TeachingaLesson extends QuestHandler {
 							}
 							break;
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203540)

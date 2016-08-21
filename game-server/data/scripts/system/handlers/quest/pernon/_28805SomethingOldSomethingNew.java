@@ -48,7 +48,7 @@ public class _28805SomethingOldSomethingNew extends QuestHandler {
 			switch (targetId) {
 				case 830521:
 				case 830662:
-				case 830663: {
+				case 830663:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -66,9 +66,8 @@ public class _28805SomethingOldSomethingNew extends QuestHandler {
 						}
 					}
 					return false;
-				}
 				case 730525:
-				case 730522: {
+				case 730522:
 					switch (dialog) {
 						case USE_OBJECT: {
 							if (var == 1)
@@ -79,7 +78,6 @@ public class _28805SomethingOldSomethingNew extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

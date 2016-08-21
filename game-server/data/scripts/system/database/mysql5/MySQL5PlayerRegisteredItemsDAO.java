@@ -11,8 +11,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +34,8 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -140,7 +140,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);
 				try (ResultSet rset = stmt.executeQuery()) {
-					HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<PartType, List<HouseDecoration>>();
+					HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<>();
 					while (rset.next()) {
 						String area = rset.getString("area");
 						if ("DECOR".equals(area)) {
@@ -153,7 +153,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 									dec.setRoom(0);
 								List<HouseDecoration> usedForType = usedParts.get(dec.getTemplate().getType());
 								if (usedForType == null) {
-									usedForType = new FastTable<HouseDecoration>();
+									usedForType = new FastTable<>();
 									usedParts.put(dec.getTemplate().getType(), usedForType);
 								}
 								usedForType.add(dec);

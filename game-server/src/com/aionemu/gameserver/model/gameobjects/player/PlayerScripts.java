@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.Set;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +9,8 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.utils.xml.CompressUtil;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -26,7 +26,7 @@ public class PlayerScripts {
 
 	public PlayerScripts(int houseId) {
 		this.houseObjId = houseId;
-		this.scripts = new FastMap<Integer, PlayerScript>();
+		this.scripts = new FastMap<>();
 	}
 
 	public boolean set(int id, byte[] compressedXML, int uncompressedSize) {

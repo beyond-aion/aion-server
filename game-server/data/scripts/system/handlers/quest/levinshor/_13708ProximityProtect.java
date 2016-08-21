@@ -49,15 +49,13 @@ public class _13708ProximityProtect extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == npcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return defaultCloseDialog(env, 1, 1, true, true);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -59,7 +59,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204630: {
+				case 204630:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -85,8 +85,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204614: {
+				case 204614:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -109,7 +108,6 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204545) {

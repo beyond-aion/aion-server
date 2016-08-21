@@ -48,46 +48,38 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 			switch (targetId) {
 				case 730155: { // Groznak's Skull
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 1, 2, false, 10000, 10001); // 2
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 2, true, false); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
 				}
-				case 700380: { // Weathered Skeleton
+				case 700380: // Weathered Skeleton
 					if (var == 1) {
 						return true; // loot
 					}
 					break;
-				}
-				case 700381: { // Intact Skeleton
+				case 700381: // Intact Skeleton
 					if (var == 1) {
 						return true; // loot
 					}
 					break;
-				}
-				case 700382: { // Muddy Skeleton
+				case 700382: // Muddy Skeleton
 					if (var == 1) {
 						return true; // loot
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205150) { // Surt

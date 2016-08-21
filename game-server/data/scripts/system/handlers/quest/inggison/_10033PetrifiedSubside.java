@@ -46,15 +46,13 @@ public class _10033PetrifiedSubside extends QuestHandler {
 			switch (targetId) {
 				case 798970: // Pomponia
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
-						}
 					}
 					break;
 				case 798975: // Sulla
@@ -80,16 +78,14 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					break;
 				case 798981: // Philon
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							giveQuestItem(env, 182215622, 1);
 							return defaultCloseDialog(env, 2, 3);
-						}
 					}
 					break;
 				case 730226: // Western Petrified Mass

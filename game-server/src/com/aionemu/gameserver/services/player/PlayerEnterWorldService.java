@@ -549,7 +549,7 @@ public final class PlayerEnterWorldService {
 		player.setWarehouseLimit();
 		// items
 		Storage inventory = player.getInventory();
-		List<Item> allItems = new FastTable<Item>();
+		List<Item> allItems = new FastTable<>();
 		if (inventory.getKinah() == 0) {
 			inventory.increaseKinah(0); // create an empty object with value 0
 		}

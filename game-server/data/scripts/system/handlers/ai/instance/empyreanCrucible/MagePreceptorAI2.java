@@ -3,10 +3,6 @@ package ai.instance.empyreanCrucible;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.PlayerActions;
@@ -15,7 +11,11 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @AIName("mage_preceptor")
 public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>();
+	private List<Integer> percents = new FastTable<>();
 
 	@Override
 	public void handleSpawned() {
@@ -112,7 +112,7 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new FastTable<Player>();
+		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 37)) {
 				players.add(player);

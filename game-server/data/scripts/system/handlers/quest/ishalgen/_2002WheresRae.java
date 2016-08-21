@@ -53,7 +53,7 @@ public class _2002WheresRae extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203519: {
+				case 203519:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -68,8 +68,7 @@ public class _2002WheresRae extends QuestHandler {
 							}
 					}
 					return false;
-				}
-				case 203534: {
+				case 203534:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -87,8 +86,7 @@ public class _2002WheresRae extends QuestHandler {
 							}
 					}
 					return false;
-				}
-				case 790002: {
+				case 790002:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -139,7 +137,6 @@ public class _2002WheresRae extends QuestHandler {
 									return sendQuestDialog(env, 2376);
 							}
 					}
-				}
 					break;
 				case 700045:
 					if (var == 11 && env.getDialog() == DialogAction.USE_OBJECT) {

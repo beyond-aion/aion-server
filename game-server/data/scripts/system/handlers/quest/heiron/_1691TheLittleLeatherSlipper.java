@@ -52,7 +52,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 790005: {
+				case 790005:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
@@ -68,8 +68,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798386: {
+				case 798386:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
@@ -85,8 +84,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 700563: {
+				case 700563:
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 2) {
@@ -102,7 +100,6 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {

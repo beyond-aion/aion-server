@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +28,8 @@ import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -162,7 +162,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadEquipment(int playerId) {
-		final List<Item> items = new FastTable<Item>();
+		final List<Item> items = new FastTable<>();
 		final int storage = 0;
 		final int equipped = 1;
 

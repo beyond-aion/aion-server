@@ -22,7 +22,7 @@ public class GlobalDropZones {
 
 	public List<GlobalDropZone> getGlobalDropZones() {
 		if (gdZones == null) {
-			gdZones = new FastTable<GlobalDropZone>();
+			gdZones = new FastTable<>();
 		}
 		return this.gdZones;
 	}

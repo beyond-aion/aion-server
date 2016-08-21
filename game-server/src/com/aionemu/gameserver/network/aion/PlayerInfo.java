@@ -2,8 +2,6 @@ package com.aionemu.gameserver.network.aion;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerSettingsDAO;
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.services.BrokerService;
+
+import javolution.util.FastTable;
 
 /**
  * @author AEJTester, Nemesiss, Niato
@@ -31,7 +31,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		CharacterBanInfo cbi = accPlData.getCharBanInfo();
 		boolean isBanned = (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000);
 
-		List<Item> itemList = new FastTable<Item>();
+		List<Item> itemList = new FastTable<>();
 		for (Item item : accPlData.getEquipment()) {
 			if (itemList.size() == 16)
 				break;

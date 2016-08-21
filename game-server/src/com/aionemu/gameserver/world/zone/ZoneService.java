@@ -142,7 +142,7 @@ public final class ZoneService implements GameEngine {
 	 * @return
 	 */
 	public Map<ZoneName, ZoneInstance> getZoneInstancesByWorldId(int mapId) {
-		Map<ZoneName, ZoneInstance> zones = new HashMap<ZoneName, ZoneInstance>();
+		Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 		int worldSize = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getWorldSize();
 		WorldZoneTemplate zone = new WorldZoneTemplate(worldSize, mapId);
 		PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
@@ -227,7 +227,7 @@ public final class ZoneService implements GameEngine {
 	}
 
 	public void saveMaterialZones() {
-		List<ZoneTemplate> templates = new FastTable<ZoneTemplate>();
+		List<ZoneTemplate> templates = new FastTable<>();
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(map.getMapId());
 			if (areas == null)

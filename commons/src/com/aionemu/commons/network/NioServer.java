@@ -29,7 +29,7 @@ public class NioServer {
 	/**
 	 * The channels on which we'll accept connections
 	 */
-	private final List<SelectionKey> serverChannelKeys = new FastTable<SelectionKey>();
+	private final List<SelectionKey> serverChannelKeys = new FastTable<>();
 
 	/**
 	 * Dispatcher that will accept connections

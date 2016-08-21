@@ -23,7 +23,7 @@ public class IGCategory {
 
 	public List<IGSubCategory> getSubCategories() {
 		if (subCategories == null) {
-			subCategories = new FastTable<IGSubCategory>();
+			subCategories = new FastTable<>();
 		}
 		return this.subCategories;
 	}

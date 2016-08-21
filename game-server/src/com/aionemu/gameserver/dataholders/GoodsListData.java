@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -34,15 +34,15 @@ public class GoodsListData {
 	private TIntObjectHashMap<GoodsList> goodsPurchaseListData;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		goodsListData = new TIntObjectHashMap<GoodsList>();
+		goodsListData = new TIntObjectHashMap<>();
 		for (GoodsList it : list) {
 			goodsListData.put(it.getId(), it);
 		}
-		goodsInListData = new TIntObjectHashMap<GoodsList>();
+		goodsInListData = new TIntObjectHashMap<>();
 		for (GoodsList it : inList) {
 			goodsInListData.put(it.getId(), it);
 		}
-		goodsPurchaseListData = new TIntObjectHashMap<GoodsList>();
+		goodsPurchaseListData = new TIntObjectHashMap<>();
 		for (GoodsList it : purchaseList) {
 			goodsPurchaseListData.put(it.getId(), it);
 		}

@@ -32,10 +32,10 @@ public class HouseData {
 	protected List<HousingLand> lands;
 
 	@XmlTransient
-	Map<Integer, HousingLand> landsById = new HashMap<Integer, HousingLand>();
+	Map<Integer, HousingLand> landsById = new HashMap<>();
 
 	@XmlTransient
-	Map<Integer, Set<HousingLand>> landsByEntryWorldId = new HashMap<Integer, Set<HousingLand>>();
+	Map<Integer, Set<HousingLand>> landsByEntryWorldId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (lands == null)
@@ -49,7 +49,7 @@ public class HouseData {
 					exitMapId = address.getMapId();
 				Set<HousingLand> landList = landsByEntryWorldId.get(exitMapId);
 				if (landList == null) {
-					landList = new HashSet<HousingLand>();
+					landList = new HashSet<>();
 					landsByEntryWorldId.put(exitMapId, landList);
 				}
 				landList.add(land);

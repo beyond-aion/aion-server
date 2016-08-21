@@ -20,7 +20,7 @@ public class PrivateStore {
 	 */
 	public PrivateStore(Player owner) {
 		this.owner = owner;
-		this.items = new LinkedHashMap<Integer, TradePSItem>();
+		this.items = new LinkedHashMap<>();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class PrivateStore {
 	 */
 	public void removeItem(int itemObjId) {
 		if (items.containsKey(itemObjId)) {
-			LinkedHashMap<Integer, TradePSItem> newItems = new LinkedHashMap<Integer, TradePSItem>();
+			LinkedHashMap<Integer, TradePSItem> newItems = new LinkedHashMap<>();
 			for (int itemObjIds : items.keySet()) {
 				if (itemObjId != itemObjIds)
 					newItems.put(itemObjIds, items.get(itemObjIds));

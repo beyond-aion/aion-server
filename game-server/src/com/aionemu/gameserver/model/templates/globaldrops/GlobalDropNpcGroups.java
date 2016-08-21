@@ -22,7 +22,7 @@ public class GlobalDropNpcGroups {
 
 	public List<GlobalDropNpcGroup> getGlobalDropNpcGroups() {
 		if (gdNpcGroups == null) {
-			gdNpcGroups = new FastTable<GlobalDropNpcGroup>();
+			gdNpcGroups = new FastTable<>();
 		}
 		return this.gdNpcGroups;
 	}

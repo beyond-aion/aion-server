@@ -46,7 +46,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 
-				case 805156: {
+				case 805156:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -55,9 +55,8 @@ public class _30550MomentOfCrisis extends QuestHandler {
 						}
 					}
 					return false;
-				}
 				case 799592:
-				case 799666: {
+				case 799666:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
@@ -69,15 +68,13 @@ public class _30550MomentOfCrisis extends QuestHandler {
 							}
 						}
 					}
-				}
 			}
 
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 799592:
-				case 799666: {
+				case 799666:
 					return sendQuestEndDialog(env);
-				}
 			}
 		}
 		return false;

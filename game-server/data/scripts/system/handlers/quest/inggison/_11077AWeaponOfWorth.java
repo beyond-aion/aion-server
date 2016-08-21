@@ -54,42 +54,34 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 				case 799028: // Brontes
 				{
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1353);
-						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:
 							return sendQuestDialog(env, 1353);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
-						}
 					}
 					return false;
 				}
 				case 798918: // Pilipides
 				{
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
-						}
-						case SELECT_ACTION_1694: {
+						case SELECT_ACTION_1694:
 							return sendQuestDialog(env, 1694);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2);
-						}
 					}
 					return false;
 				}
 				case 798903: // Drenia
 				{
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							return defaultCloseDialog(env, 2, 3, true, true);
-						}
 					}
 				}
 			}
@@ -97,9 +89,8 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 			if (targetId == 798903) // Drenia
 			{
 				switch (env.getDialogId()) {
-					case 1009: {
+					case 1009:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

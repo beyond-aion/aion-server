@@ -46,36 +46,31 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 			switch (targetId) {
 				case 730141: { // Jaiorunerk's Tomb
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 0) {
 								if (player.getInventory().getItemCountByItemId(182202163) > 0) {
 									return sendQuestDialog(env, 1352);
 								}
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							removeQuestItem(env, 182202163, 1);
 							changeQuestStep(env, 0, 1, false);
 							return closeDialogWindow(env);
-						}
 					}
 					break;
 				}
-				case 279016: { // Vindachinerk
+				case 279016: // Vindachinerk
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							changeQuestStep(env, 1, 1, true); // reward
 							return sendQuestDialog(env, 5);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279016) { // Vindachinerk

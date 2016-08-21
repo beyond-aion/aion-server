@@ -36,10 +36,10 @@ public class WeatherService {
 	}
 
 	private WeatherService() {
-		worldZoneWeathers = new HashMap<WeatherKey, WeatherEntry[]>();
+		worldZoneWeathers = new HashMap<>();
 		GameTime gameTime = (GameTime) GameTimeService.getInstance().getGameTime().clone();
-		for (Iterator<WorldMapTemplate> mapIterator = DataManager.WORLD_MAPS_DATA.iterator(); mapIterator.hasNext();) {
-			int mapId = mapIterator.next().getMapId();
+		for (WorldMapTemplate worldMapTemplate : DataManager.WORLD_MAPS_DATA) {
+			int mapId = worldMapTemplate.getMapId();
 			WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(mapId);
 			if (table != null) {
 				WeatherKey key = new WeatherKey(gameTime, mapId);
@@ -131,7 +131,7 @@ public class WeatherService {
 		else if (chance > 400)
 			rank = 1;
 
-		List<WeatherEntry> chosenWeather = new FastTable<WeatherEntry>();
+		List<WeatherEntry> chosenWeather = new FastTable<>();
 		while (rank >= 0) {
 			for (WeatherEntry entry : weathers) {
 				if (entry.getRank() == -1)
@@ -237,7 +237,7 @@ public class WeatherService {
 	 * Allows server to reinitialize Weathers for all regions TODO: not thread safe if run by admin
 	 */
 	public synchronized void resetWeather() {
-		Set<WeatherKey> loadedWeathers = new HashSet<WeatherKey>(worldZoneWeathers.keySet());
+		Set<WeatherKey> loadedWeathers = new HashSet<>(worldZoneWeathers.keySet());
 		for (WeatherKey key : loadedWeathers) {
 			WeatherEntry[] oldEntries = worldZoneWeathers.get(key);
 			for (int i = 0; i < oldEntries.length; i++) {

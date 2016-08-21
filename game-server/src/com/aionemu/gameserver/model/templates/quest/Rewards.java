@@ -56,7 +56,7 @@ public class Rewards {
 	 */
 	public List<QuestItems> getSelectableRewardItem() {
 		if (selectableRewardItem == null) {
-			selectableRewardItem = new FastTable<QuestItems>();
+			selectableRewardItem = new FastTable<>();
 		}
 		return this.selectableRewardItem;
 	}
@@ -77,7 +77,7 @@ public class Rewards {
 	 */
 	public List<QuestItems> getRewardItem() {
 		if (rewardItem == null) {
-			rewardItem = new FastTable<QuestItems>();
+			rewardItem = new FastTable<>();
 		}
 		return this.rewardItem;
 	}
@@ -152,13 +152,13 @@ public class Rewards {
 
 	public List<Integer> getCollectItemChecks() {
 		if (ccheck == null)
-			ccheck = new FastTable<Integer>();
+			ccheck = new FastTable<>();
 		return this.ccheck;
 	}
 
 	public List<Integer> getInventoryItemChecks() {
 		if (icheck == null)
-			icheck = new FastTable<Integer>();
+			icheck = new FastTable<>();
 		return this.icheck;
 	}
 

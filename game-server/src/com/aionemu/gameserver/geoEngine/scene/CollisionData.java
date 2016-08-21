@@ -38,7 +38,7 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 
 /**
- * <code>CollisionData</code> is an interface that can be used to 
+ * <code>CollisionData</code> is an interface that can be used to
  * do triangle-accurate collision between bounding volumes and rays.
  *
  * @author Kirill Vainer

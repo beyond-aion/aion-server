@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -26,6 +24,8 @@ import com.aionemu.gameserver.model.templates.housing.HousingStorage;
 import com.aionemu.gameserver.model.templates.housing.HousingUseableItem;
 import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  */
@@ -43,7 +43,7 @@ public class HousingObjectData {
 	protected List<PlaceableHouseObject> housingObjects;
 
 	@XmlTransient
-	protected TIntObjectHashMap<PlaceableHouseObject> objectTemplatesById = new TIntObjectHashMap<PlaceableHouseObject>();
+	protected TIntObjectHashMap<PlaceableHouseObject> objectTemplatesById = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (housingObjects == null)

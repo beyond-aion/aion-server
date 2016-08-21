@@ -22,7 +22,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	public long startInstanceTime;
 	public WorldMapInstance instance;
 	public AutoGroupType agt;
-	public Map<Integer, AGPlayer> players = new HashMap<Integer, AGPlayer>();
+	public Map<Integer, AGPlayer> players = new HashMap<>();
 
 	protected boolean decrease(Player player, int itemId, long count) {
 		long i = 0;

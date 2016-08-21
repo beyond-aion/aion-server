@@ -59,7 +59,7 @@ public class ShoutGroup {
 	 */
 	public List<ShoutList> getShoutNpcs() {
 		if (shoutNpcs == null) {
-			shoutNpcs = new FastTable<ShoutList>();
+			shoutNpcs = new FastTable<>();
 		}
 		return this.shoutNpcs;
 	}

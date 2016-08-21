@@ -62,7 +62,7 @@ public class WeatherTable {
 	}
 
 	public List<WeatherEntry> getWeathersForZone(int zoneId) {
-		List<WeatherEntry> result = new FastTable<WeatherEntry>();
+		List<WeatherEntry> result = new FastTable<>();
 		for (WeatherEntry entry : getZoneData()) {
 			if (entry.getZoneId() == zoneId)
 				result.add(entry);

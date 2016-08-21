@@ -47,21 +47,17 @@ public class _3205FortheBlackCloudTraders extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcIds[0]) { // Jielinlinerk
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 15, 16);
-					}
 				}
 			} else if (targetId == npcIds[1]) { // Himusus
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
-					}
-					case SET_SUCCEED: {
+					case SET_SUCCEED:
 						return defaultCloseDialog(env, 16, 16, true, false);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

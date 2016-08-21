@@ -132,7 +132,7 @@ public class Account {
 	}
 
 	/**
-	 * @return The account creation date 
+	 * @return The account creation date
 	 */
 	public Timestamp getCreationDate() {
 		return creationDate;

@@ -38,10 +38,9 @@ public class _80016EventSockHop extends QuestHandler {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1011);
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						QuestService.startEventQuest(env, QuestStatus.START);
 						return sendQuestDialog(env, 1003);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}

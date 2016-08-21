@@ -9,9 +9,6 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +34,9 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author KID, xTz
@@ -64,7 +64,7 @@ public class InGameShopEn {
 		iGProperty = InGameShopProperty.load();
 		dao = DAOManager.getDAO(InGameShopDAO.class);
 		items = new FastMap<>();
-		activeRequests = new ConcurrentHashMap<Integer, IGRequest>();
+		activeRequests = new ConcurrentHashMap<>();
 		items = dao.loadInGameShopItems();
 		log.info("Loaded with " + items.size() + " items.");
 	}

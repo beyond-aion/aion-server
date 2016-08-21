@@ -30,7 +30,7 @@ public enum PlayerClass {
 	
 	PHYSICAL_CLASS(WARRIOR.getClassId() | GLADIATOR.getClassId() | TEMPLAR.getClassId() |
 								SCOUT.getClassId() | ASSASSIN.getClassId() | RANGER.getClassId() | CHANTER.getClassId()),
-	MAGICAL_CLASS(MAGE.getClassId() | SORCERER.getClassId() | SPIRIT_MASTER.getClassId() |  PRIEST.getClassId() | 
+	MAGICAL_CLASS(MAGE.getClassId() | SORCERER.getClassId() | SPIRIT_MASTER.getClassId() |  PRIEST.getClassId() |
 								CLERIC.getClassId() | ENGINEER.getClassId() | RIDER.getClassId() | GUNNER.getClassId() |
 								ARTIST.getClassId() | BARD.getClassId());
 

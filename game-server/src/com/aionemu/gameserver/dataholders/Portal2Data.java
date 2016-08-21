@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +18,8 @@ import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalScroll;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author xTz
  */
@@ -36,11 +36,11 @@ public class Portal2Data {
 	protected List<PortalScroll> portalScroll;
 
 	@XmlTransient
-	private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<PortalUse>();
+	private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<>();
 	@XmlTransient
-	private TIntObjectHashMap<PortalDialog> portalDialogs = new TIntObjectHashMap<PortalDialog>();
+	private TIntObjectHashMap<PortalDialog> portalDialogs = new TIntObjectHashMap<>();
 	@XmlTransient
-	private Map<String, PortalScroll> portalScrolls = new HashMap<String, PortalScroll>();
+	private Map<String, PortalScroll> portalScrolls = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		if (portalUse != null) {

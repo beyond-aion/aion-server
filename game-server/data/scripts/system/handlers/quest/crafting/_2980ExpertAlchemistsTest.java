@@ -46,7 +46,7 @@ public class _2980ExpertAlchemistsTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204102: {
+				case 204102:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207968);
@@ -59,7 +59,6 @@ public class _2980ExpertAlchemistsTest extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204102) {

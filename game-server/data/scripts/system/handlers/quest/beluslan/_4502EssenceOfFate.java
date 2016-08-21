@@ -55,7 +55,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 730192: { // Balaur Operation Orders
+				case 730192: // Balaur Operation Orders
 					if (var == 0) {
 						if (dialog == DialogAction.USE_OBJECT) {
 							return sendQuestDialog(env, 1011);
@@ -65,23 +65,18 @@ public class _4502EssenceOfFate extends QuestHandler {
 						}
 					}
 					break;
-				}
-				case 204837: { // Hresvelgr
+				case 204837: // Hresvelgr
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 2, 2, true, 5, 10001); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204837) {
@@ -104,32 +99,28 @@ public class _4502EssenceOfFate extends QuestHandler {
 			int var3 = qs.getQuestVarById(3);
 
 			switch (targetId) {
-				case 214894: { // Telepathy Controller
+				case 214894: // Telepathy Controller
 					if (var == 1)
 						return defaultOnKillEvent(env, 214894, 1, 2, 0); // 2
 					break;
-				}
-				case 214895: { // Main Power Generator
+				case 214895: // Main Power Generator
 					if (var == 2 && var1 != 1) {
 						defaultOnKillEvent(env, 214895, 0, 1, 1); // 1: 1
 						return true;
 					}
 					break;
-				}
-				case 214896: { // Auxiliary Power Generator
+				case 214896: // Auxiliary Power Generator
 					if (var == 2 && var2 != 1) {
 						defaultOnKillEvent(env, 214896, 0, 1, 2); // 2: 1
 						return true;
 					}
 					break;
-				}
-				case 214897: { // Emergency Generator
+				case 214897: // Emergency Generator
 					if (var == 2 && var3 != 1) {
 						defaultOnKillEvent(env, 214897, 0, 1, 3); // 3: 1
 						return true;
 					}
 					break;
-				}
 			}
 		}
 		return false;

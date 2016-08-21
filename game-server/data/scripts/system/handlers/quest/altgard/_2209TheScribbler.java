@@ -43,7 +43,7 @@ public class _2209TheScribbler extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203562: {
+				case 203562:
 					if (qs.getQuestVarById(0) == 0) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
@@ -51,9 +51,8 @@ public class _2209TheScribbler extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 						}
 					}
-				}
 					break;
-				case 203572: {
+				case 203572:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
@@ -61,9 +60,8 @@ public class _2209TheScribbler extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2); // 2
 						}
 					}
-				}
 					break;
-				case 203592: {
+				case 203592:
 					if (qs.getQuestVarById(0) == 2) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2034);
@@ -71,9 +69,8 @@ public class _2209TheScribbler extends QuestHandler {
 							return defaultCloseDialog(env, 2, 3); // 3
 						}
 					}
-				}
 					break;
-				case 203555: {
+				case 203555:
 					if (qs.getQuestVarById(0) == 3) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
@@ -84,7 +81,6 @@ public class _2209TheScribbler extends QuestHandler {
 						} else
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203555)

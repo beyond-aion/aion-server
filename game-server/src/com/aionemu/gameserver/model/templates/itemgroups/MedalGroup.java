@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -23,7 +23,7 @@ public class MedalGroup extends BonusItemGroup {
 
 	public List<FullRewardItem> getItems() {
 		if (items == null) {
-			items = new FastTable<FullRewardItem>();
+			items = new FastTable<>();
 		}
 		return this.items;
 	}

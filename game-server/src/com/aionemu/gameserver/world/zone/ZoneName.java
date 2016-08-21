@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.world.zone;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -12,7 +12,7 @@ public final class ZoneName {
 
 	private final static Logger log = LoggerFactory.getLogger(ZoneName.class);
 
-	private static final FastMap<String, ZoneName> zoneNames = new FastMap<String, ZoneName>();
+	private static final FastMap<String, ZoneName> zoneNames = new FastMap<>();
 	public static final String NONE = "NONE";
 	public static final String ABYSS_CASTLE = "_ABYSS_CASTLE_AREA_";
 

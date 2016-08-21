@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.curingzones.CuringTemplate;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -25,7 +25,7 @@ public class CuringObjectsData {
 	@XmlElement(name = "curing_object")
 	protected List<CuringTemplate> curingObject;
 	@XmlTransient
-	private List<CuringTemplate> curingObjects = new FastTable<CuringTemplate>();
+	private List<CuringTemplate> curingObjects = new FastTable<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (CuringTemplate template : curingObject) {

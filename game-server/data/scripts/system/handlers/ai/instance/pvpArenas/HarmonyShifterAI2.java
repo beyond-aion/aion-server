@@ -3,14 +3,14 @@ package ai.instance.pvpArenas;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.ShifterAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.ShifterAI2;
 
 /**
  * @author xTz

@@ -8,10 +8,10 @@ import static org.hamcrest.Matchers.lessThan;
 
 import java.util.List;
 
+import com.aionemu.gameserver.model.gameobjects.Item;
+
 import javolution.util.FastMap;
 import javolution.util.FastTable;
-
-import com.aionemu.gameserver.model.gameobjects.Item;
 
 /**
  * @author KID

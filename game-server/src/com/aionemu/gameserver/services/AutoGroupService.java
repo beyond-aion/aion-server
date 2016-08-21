@@ -12,9 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
@@ -40,10 +37,13 @@ import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
 import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -309,7 +309,7 @@ public class AutoGroupService {
 	private void startSort(EntryRequestType ert, Integer instanceMaskId, boolean checkNewGroup) {
 		lock.lock();
 		try {
-			Collection<Player> players = new HashSet<Player>();
+			Collection<Player> players = new HashSet<>();
 			if (ert.isQuickGroupEntry()) {
 				for (LookingForParty lfp : searchers.values()) {
 					if (lfp.getPlayer() == null || lfp.isOnStartEnterTask()) {

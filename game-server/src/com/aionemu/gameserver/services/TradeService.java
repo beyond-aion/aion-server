@@ -191,7 +191,7 @@ public class TradeService {
 	private static boolean validateBuyItems(Npc npc, TradeList tradeList, Player player) {
 		TradeListTemplate tradeListTemplate = tradeListData.getTradeListTemplate(npc.getObjectTemplate().getTemplateId());
 
-		Set<Integer> allowedItems = new HashSet<Integer>();
+		Set<Integer> allowedItems = new HashSet<>();
 		for (TradeTab tradeTab : tradeListTemplate.getTradeTablist()) {
 			GoodsList goodsList = goodsListData.getGoodsListById(tradeTab.getId());
 			if (goodsList != null && goodsList.getItemIdList() != null) {

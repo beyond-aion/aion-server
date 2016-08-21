@@ -36,7 +36,7 @@ public class _1913DispatchtoVerteron extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203726: {
+				case 203726:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -50,7 +50,6 @@ public class _1913DispatchtoVerteron extends QuestHandler {
 							}
 					}
 					return false;
-				}
 				case 203097:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

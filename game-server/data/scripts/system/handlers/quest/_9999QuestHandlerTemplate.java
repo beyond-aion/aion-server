@@ -51,9 +51,9 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 111111: { // Oliver
+				case 111111: // Oliver
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 4) {
@@ -62,25 +62,18 @@ public class _9999QuestHandlerTemplate extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:
 							playQuestMovie(env, 0);
 							return sendQuestDialog(env, 1353);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 4, 5); // 5
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 5, 6, true, 2375, 10001);
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 000000) { // Viktor Logwin

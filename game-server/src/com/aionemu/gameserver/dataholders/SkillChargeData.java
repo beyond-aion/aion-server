@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,6 +11,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.skillengine.model.ChargeSkillEntry;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Rolandas
@@ -26,7 +26,7 @@ public class SkillChargeData {
 	protected List<ChargeSkillEntry> chargeSkills;
 
 	@XmlTransient
-	private TIntObjectHashMap<ChargeSkillEntry> skillChargeData = new TIntObjectHashMap<ChargeSkillEntry>();
+	private TIntObjectHashMap<ChargeSkillEntry> skillChargeData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (ChargeSkillEntry chargeSkill : chargeSkills) {

@@ -25,7 +25,7 @@ import javolution.util.FastTable;
 @AIName("quest_use_item")
 public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 
-	private List<Player> registeredPlayers = new FastTable<Player>();
+	private List<Player> registeredPlayers = new FastTable<>();
 
 	@Override
 	protected void handleDialogStart(Player player) {

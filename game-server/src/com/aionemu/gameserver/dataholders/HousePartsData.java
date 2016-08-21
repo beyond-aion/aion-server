@@ -13,10 +13,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.HousePart;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -30,10 +30,10 @@ public class HousePartsData {
 	protected List<HousePart> houseParts;
 
 	@XmlTransient
-	Map<String, List<HousePart>> partsByTags = new HashMap<String, List<HousePart>>(5);
+	Map<String, List<HousePart>> partsByTags = new HashMap<>(5);
 
 	@XmlTransient
-	Map<Integer, HousePart> partsById = new HashMap<Integer, HousePart>();
+	Map<Integer, HousePart> partsById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (houseParts == null)
@@ -46,7 +46,7 @@ public class HousePartsData {
 				String tag = iterator.next();
 				List<HousePart> parts = partsByTags.get(tag);
 				if (parts == null) {
-					parts = new FastTable<HousePart>();
+					parts = new FastTable<>();
 					partsByTags.put(tag, parts);
 				}
 				parts.add(part);

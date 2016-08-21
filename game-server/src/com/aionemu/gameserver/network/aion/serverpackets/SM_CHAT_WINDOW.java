@@ -70,8 +70,8 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 						}
 					}
 				}
-				for (int i = 0; i < capitans.length; i++) {
-					writeS(capitans[i]);
+				for (String capitan : capitans) {
+					writeS(capitan);
 				}
 				writeH(0);
 				writeC(alliance.size());
@@ -81,8 +81,8 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 				for (Player groupMember : members) {
 					counts[groupMember.getPlayerClass().getClassId()]++;
 				}
-				for (int i = 0; i < counts.length; i++) {
-					writeH(counts[i]);
+				for (short count : counts) {
+					writeH(count);
 				}
 			} else {
 				writeC(4); // no group

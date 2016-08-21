@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +26,8 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer, Divinity, nrg
@@ -233,7 +233,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 
 	@Override
 	public List<AbyssRankingResult> getAbyssRankingPlayers(final Race race, final int maxOfflineDays) {
-		final List<AbyssRankingResult> results = new FastTable<AbyssRankingResult>();
+		final List<AbyssRankingResult> results = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement(maxOfflineDays > 0 ? SELECT_PLAYERS_RANKING_ACTIVE_ONLY : SELECT_PLAYERS_RANKING)) {
@@ -274,7 +274,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 
 	@Override
 	public List<AbyssRankingResult> getAbyssRankingLegions(final Race race) {
-		final List<AbyssRankingResult> results = new FastTable<AbyssRankingResult>();
+		final List<AbyssRankingResult> results = new FastTable<>();
 		DB.select(SELECT_LEGIONS_RANKING, new ParamReadStH() {
 
 			@Override

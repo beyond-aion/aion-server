@@ -54,7 +54,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204547: {
+				case 204547:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201760);
@@ -71,8 +71,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 204540: {
+				case 204540:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -86,8 +85,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 790018: {
+				case 790018:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
@@ -101,7 +99,6 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204541) {

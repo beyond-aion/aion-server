@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -29,8 +26,11 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastTable;
 
 /**
  * @author M.O.G. Dision
@@ -41,7 +41,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
 	private AtomicBoolean isRaceSet = new AtomicBoolean(false);
 	public Map<Integer, StaticDoor> doors;
-	private List<Future<?>> spawnTasks = new FastTable<>();	
+	private List<Future<?>> spawnTasks = new FastTable<>();
 	private Future<?> generatorCheckTask;
 	protected Future<?> wipeTask;
 	public boolean isInstanceDestroyed;
@@ -55,7 +55,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance wmi) {
 		super.onInstanceCreate(wmi);
-		doors = wmi.getDoors();		
+		doors = wmi.getDoors();
 		scheduleInstanceStart();
 	}
 	
@@ -66,7 +66,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				sendMsg(1402193);
 				doors.get(129).setOpen(true);
 				scheduleWipeTask();
-				scheduleGeneratorCheck();			
+				scheduleGeneratorCheck();
 				spawn(702014, 343.1202f, 254.10585f, 291.62302f, (byte) 0, 34); //Invasion Corridors
 				spawn(702015, 169.5563f, 254.52907f, 293.04276f, (byte) 0, 17);
 				spawn(702016, 255.7034f, 171.83853f, 325.81653f, (byte) 0, 18);
@@ -75,7 +75,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		}, 60000);
 	}
 
-	protected void scheduleWipeTask() {	
+	protected void scheduleWipeTask() {
 		wipeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
@@ -137,7 +137,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		spawn(getBossId(), 255.48956f, 254.5804f, 455.1201f, (byte) 15);
 	}
 
-	protected void wipe() {		
+	protected void wipe() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
@@ -280,8 +280,8 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 			case 730905:
 				TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
-				break;				
-		}	
+				break;
+		}
 	}
 	
 	@Override
@@ -301,7 +301,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));		
+		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;
 	}
 	

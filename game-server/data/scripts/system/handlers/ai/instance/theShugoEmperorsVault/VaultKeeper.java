@@ -29,7 +29,7 @@ public class VaultKeeper extends GeneralNpcAI2 {
 		return true;
 	}
 	
-	private synchronized void checkEntryConditions(Player player, int dialogId) {	
+	private synchronized void checkEntryConditions(Player player, int dialogId) {
 		if (dialogId == 10000) {
 			int roomNo = room;
 			

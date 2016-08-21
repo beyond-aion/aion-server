@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.enchants.EnchantList;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.EnchantTemplateData;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author xTz

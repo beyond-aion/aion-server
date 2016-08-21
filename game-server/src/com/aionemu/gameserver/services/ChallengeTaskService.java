@@ -6,8 +6,6 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +31,8 @@ import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastTable;
+
 /**
  * @author ViAl
  */
@@ -52,8 +52,8 @@ public class ChallengeTaskService {
 	}
 
 	private ChallengeTaskService() {
-		cityTasks = new ConcurrentHashMap<Integer, Map<Integer, ChallengeTask>>();
-		legionTasks = new ConcurrentHashMap<Integer, Map<Integer, ChallengeTask>>();
+		cityTasks = new ConcurrentHashMap<>();
+		legionTasks = new ConcurrentHashMap<>();
 		log.info("ChallengeTaskService initialized.");
 	}
 
@@ -83,7 +83,7 @@ public class ChallengeTaskService {
 		else
 			taskMap = cityTasks;
 		int playerTownId = TownService.getInstance().getTownResidence(player);
-		List<ChallengeTask> availableTasks = new FastTable<ChallengeTask>();
+		List<ChallengeTask> availableTasks = new FastTable<>();
 		if (!taskMap.containsKey(ownerId)) {
 			Map<Integer, ChallengeTask> tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(ownerId, challengeType);
 			taskMap.put(ownerId, tasks);
@@ -209,7 +209,7 @@ public class ChallengeTaskService {
 			quest.increaseCompleteCount();
 			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
 			if (task.isCompleted()) {
-				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<Integer, List<Integer>>();
+				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
 				for (Integer memberObjId : player.getLegion().getLegionMembers()) {
 					Player member = World.getInstance().findPlayer(memberObjId);
 					if (member != null) {

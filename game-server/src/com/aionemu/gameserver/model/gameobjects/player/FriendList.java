@@ -47,7 +47,7 @@ public class FriendList implements Iterable<Friend> {
 	 *          Friends on the list
 	 */
 	public FriendList(Player owner, Collection<Friend> newFriends) {
-		this.friends = new ConcurrentLinkedQueue<Friend>(newFriends);
+		this.friends = new ConcurrentLinkedQueue<>(newFriends);
 		this.player = owner;
 	}
 

@@ -3,12 +3,12 @@ package com.aionemu.gameserver.model.stats.calc;
 import java.util.HashMap;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -36,9 +36,9 @@ public class StatCapUtil {
 		}
 	}
 
-	static HashMap<StatEnum, Integer> minValues = new HashMap<StatEnum, Integer>();
-	static HashMap<StatEnum, Integer> maxValues = new HashMap<StatEnum, Integer>();
-	static HashMap<StatEnum, StatLimits> limits = new HashMap<StatEnum, StatLimits>();
+	static HashMap<StatEnum, Integer> minValues = new HashMap<>();
+	static HashMap<StatEnum, Integer> maxValues = new HashMap<>();
+	static HashMap<StatEnum, StatLimits> limits = new HashMap<>();
 
 	static {
 		for (StatEnum stat : StatEnum.values()) {
@@ -145,7 +145,7 @@ public class StatCapUtil {
 				wrongStat = stat;
 			if (wrongStat != null) {
 				if (wrongStats == null)
-					wrongStats = new FastTable<Stat2>();
+					wrongStats = new FastTable<>();
 				wrongStats.add(wrongStat);
 			}
 		}

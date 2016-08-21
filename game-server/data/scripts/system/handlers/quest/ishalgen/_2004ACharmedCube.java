@@ -47,58 +47,47 @@ public class _2004ACharmedCube extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203539: { // Derot
+				case 203539: // Derot
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							giveQuestItem(env, 182203005, 1);
 							return sendQuestSelectionDialog(env);
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 1, 2, false, 1438, 1353); // 2
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 700047: { // Tombstone
+				case 700047: // Tombstone
 					if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialog == DialogAction.USE_OBJECT) {
 						Npc npc = (Npc) env.getVisibleObject();
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 						return true;
 					}
 					return false;
-				}
-				case 203550: { // Munin
+				case 203550: // Munin
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							} else if (var == 6) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3, 0, 0, 182203005, 1); // 3
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 6, 6, true, false); // reward
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203539) { // Derot

@@ -10,9 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +27,9 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * Just some part of map.
@@ -119,7 +119,7 @@ public class MapRegion {
 	}
 
 	public Map<Integer, StaticDoor> getDoors() {
-		Map<Integer, StaticDoor> doors = new HashMap<Integer, StaticDoor>();
+		Map<Integer, StaticDoor> doors = new HashMap<>();
 		for (VisibleObject obj : objects.values()) {
 			if (obj instanceof StaticDoor) {
 				StaticDoor door = (StaticDoor) obj;
@@ -261,8 +261,7 @@ public class MapRegion {
 	}
 
 	boolean isNeighboursActive() {
-		for (int i = 0; i < neighbours.length; i++) {
-			MapRegion r = neighbours[i];
+		for (MapRegion r : neighbours) {
 			if (r != null && r.regionActive.get() && r.playerCount.get() > 0)
 				return true;
 		}
@@ -293,7 +292,7 @@ public class MapRegion {
 	}
 
 	public List<ZoneInstance> getZones(Creature creature) {
-		List<ZoneInstance> z = new FastTable<ZoneInstance>();
+		List<ZoneInstance> z = new FastTable<>();
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
@@ -364,16 +363,15 @@ public class MapRegion {
 	}
 
 	private void createZoneMap(ZoneInstance[] zones) {
-		zoneMap = new FastMap<Integer, TreeSet<ZoneInstance>>();
-		for (int i = 0; i < zones.length; i++) {
-			ZoneInstance zone = zones[i];
+		zoneMap = new FastMap<>();
+		for (ZoneInstance zone : zones) {
 			int category = -1;
 			if (zone.getZoneTemplate().getPriority() != 0) {
 				category = zone.getZoneTemplate().getZoneType().ordinal();
 			}
 			TreeSet<ZoneInstance> zoneCategory = zoneMap.get(category);
 			if (zoneCategory == null) {
-				zoneCategory = new TreeSet<ZoneInstance>();
+				zoneCategory = new TreeSet<>();
 				zoneMap.put(category, zoneCategory);
 			}
 			zoneCategory.add(zone);

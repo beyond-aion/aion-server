@@ -46,7 +46,7 @@ public class _24042AReadyRescue extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 278002: { // Jebal
+				case 278002: // Jebal
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -56,8 +56,7 @@ public class _24042AReadyRescue extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
-				}
-				case 278019: { // Lakadi
+				case 278019: // Lakadi
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -67,8 +66,7 @@ public class _24042AReadyRescue extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
 					break;
-				}
-				case 278088: { // Glati
+				case 278088: // Glati
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -78,24 +76,20 @@ public class _24042AReadyRescue extends QuestHandler {
 							return defaultCloseDialog(env, 2, 3); // 3
 					}
 					break;
-				}
-				case 253626: { // Captured Asmodian Prisoner
+				case 253626: // Captured Asmodian Prisoner
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						case SELECT_ACTION_2035: {
+						case SELECT_ACTION_2035:
 							playQuestMovie(env, 294);
 							return sendQuestDialog(env, 2035);
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1295.0565f, 1499.0419f, 1571.1864f, 3, 4); // 4
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278019) { // Lakadi

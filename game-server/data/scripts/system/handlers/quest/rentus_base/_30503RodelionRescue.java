@@ -36,9 +36,8 @@ public class _30503RodelionRescue extends QuestHandler {
 		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 205438) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -46,9 +45,8 @@ public class _30503RodelionRescue extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799541) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case SET_SUCCEED:
 						changeQuestStep(env, 0, 0, true);
 						return closeDialogWindow(env);

@@ -46,7 +46,7 @@ public class _2979ExpertCooksFinalExam extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204100: {
+				case 204100:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207955);
@@ -65,7 +65,6 @@ public class _2979ExpertCooksFinalExam extends QuestHandler {
 								return sendQuestDialog(env, 2716);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204100) {

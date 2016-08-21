@@ -65,7 +65,7 @@ public class Effect implements StatOwner {
 
 	private int effectedHp = -1;
 
-	private HashSet<EffectReserved> reserveds = new HashSet<EffectReserved>();
+	private HashSet<EffectReserved> reserveds = new HashSet<>();
 
 	/**
 	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
@@ -377,7 +377,7 @@ public class Effect implements StatOwner {
 	}
 
 	public TreeSet<EffectReserved> getReservedsToSend() {
-		TreeSet<EffectReserved> toSend = new TreeSet<EffectReserved>();
+		TreeSet<EffectReserved> toSend = new TreeSet<>();
 
 		for (EffectReserved er : this.reserveds) {
 			if (er.isSend() && er.getValue() != 0)

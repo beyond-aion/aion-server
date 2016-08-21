@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +16,8 @@ import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
+
+import javolution.util.FastTable;
 
 /**
  * @author M@xx, xTz, Rolandas
@@ -112,7 +112,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 
 	@Override
 	public List<PetCommonData> getPlayerPets(Player player) {
-		List<PetCommonData> pets = new FastTable<PetCommonData>();
+		List<PetCommonData> pets = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_pets WHERE player_id = ?")) {

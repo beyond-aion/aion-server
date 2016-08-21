@@ -20,7 +20,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	/**
 	 * List of connections that should be closed by this <code>Dispatcher</code> as soon as possible.
 	 */
-	private final List<AConnection> pendingClose = new FastTable<AConnection>();
+	private final List<AConnection> pendingClose = new FastTable<>();
 
 	/**
 	 * Constructor that accept <code>String</code> name and <code>DisconnectionThreadPool</code> dcPool as parameter.

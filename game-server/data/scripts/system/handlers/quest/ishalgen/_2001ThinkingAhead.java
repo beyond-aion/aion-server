@@ -52,22 +52,17 @@ public class _2001ThinkingAhead extends QuestHandler {
 							return sendQuestDialog(env, 1694);
 						}
 						break;
-					case SELECT_ACTION_1012: {
+					case SELECT_ACTION_1012:
 						playQuestMovie(env, 51);
 						return sendQuestDialog(env, 1012);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						return defaultCloseDialog(env, 2, 3); // 3
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 1, 2, false, 1694, 1693);
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			} else if (targetId == 700093) {
 				return true; // just give quest drop on use

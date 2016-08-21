@@ -38,9 +38,8 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 790019) { // Zetus
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
 					default: {
 						return sendQuestStartDialog(env, 182201783, 1);
 					}
@@ -63,9 +62,8 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790019) { // Zetus
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
-					}
 					default: {
 						return sendQuestEndDialog(env);
 					}

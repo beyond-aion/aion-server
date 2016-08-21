@@ -70,10 +70,9 @@ public class _14021ToCureACurse extends QuestHandler {
 						switch (env.getDialog()) {
 							case USE_OBJECT:
 								return sendQuestDialog(env, 2034);
-							case SELECT_ACTION_2035: {
+							case SELECT_ACTION_2035:
 								changeQuestStep(env, 7, 8, false); // 7
 								return sendQuestDialog(env, 0);
-							}
 						}
 					}
 					break;

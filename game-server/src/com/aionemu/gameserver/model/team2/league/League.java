@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.GeneralTeam;
@@ -19,6 +17,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer

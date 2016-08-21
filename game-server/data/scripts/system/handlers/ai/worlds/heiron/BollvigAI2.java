@@ -4,16 +4,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @AIName("bollvig")
 public class BollvigAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 	private Future<?> firstTask;
 	private Future<?> secondTask;
 	private Future<?> thirdTask;

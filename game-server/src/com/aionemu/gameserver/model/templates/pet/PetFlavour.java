@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.services.toypet.PetFeedCalculator;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
+
+import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -39,7 +39,7 @@ public class PetFlavour {
 
 	public List<PetRewards> getFood() {
 		if (food == null) {
-			food = new FastTable<PetRewards>();
+			food = new FastTable<>();
 		}
 		return this.food;
 	}

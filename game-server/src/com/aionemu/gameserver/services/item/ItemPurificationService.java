@@ -68,7 +68,7 @@ public class ItemPurificationService {
 			}
 		}
 		int nameId = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getNameId();
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), 
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()),
 			new DescriptionId(nameId)));
 		return true;
 	}

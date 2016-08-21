@@ -42,12 +42,12 @@ public class EventQuestList {
 	}
 
 	List<Integer> getQuestsFromData(String data) {
-		Set<String> q = new HashSet<String>();
+		Set<String> q = new HashSet<>();
 		Collections.addAll(q, data.split(";"));
-		List<Integer> result = new FastTable<Integer>();
+		List<Integer> result = new FastTable<>();
 
 		if (q.size() > 0) {
-			result = new FastTable<Integer>();
+			result = new FastTable<>();
 			Iterator<String> it = q.iterator();
 			while (it.hasNext())
 				result.add(Integer.parseInt(it.next()));
@@ -61,7 +61,7 @@ public class EventQuestList {
 	 */
 	public List<Integer> getStartableQuests() {
 		if (startQuests == null)
-			startQuests = new FastTable<Integer>();
+			startQuests = new FastTable<>();
 		return startQuests;
 	}
 
@@ -70,7 +70,7 @@ public class EventQuestList {
 	 */
 	public List<Integer> getMaintainQuests() {
 		if (maintainQuests == null)
-			maintainQuests = new FastTable<Integer>();
+			maintainQuests = new FastTable<>();
 		return maintainQuests;
 	}
 

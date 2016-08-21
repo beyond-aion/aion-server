@@ -42,14 +42,12 @@ public class _3044RecruitingAnnouncement extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 730145) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						QuestService.startQuest(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 						return true;
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}

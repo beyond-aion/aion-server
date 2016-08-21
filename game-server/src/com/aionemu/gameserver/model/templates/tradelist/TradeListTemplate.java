@@ -43,7 +43,7 @@ public class TradeListTemplate {
 	 */
 	public List<TradeTab> getTradeTablist() {
 		if (tradeTablist == null)
-			tradeTablist = new FastTable<TradeTab>();
+			tradeTablist = new FastTable<>();
 		return this.tradeTablist;
 	}
 

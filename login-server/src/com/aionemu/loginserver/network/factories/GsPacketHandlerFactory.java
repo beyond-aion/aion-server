@@ -9,9 +9,9 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_AUTH;
+import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_CONNECTION_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_DISCONNECTED;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_LIST;
-import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_CONNECTION_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_RECONNECT_KEY;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_ACCOUNT_TOLL_INFO;
 import com.aionemu.loginserver.network.gameserver.clientpackets.CM_BAN;
@@ -48,7 +48,7 @@ public class GsPacketHandlerFactory {
 		int id = data.get() & 0xff;
 
 		switch (state) {
-			case CONNECTED: {
+			case CONNECTED:
 				switch (id) {
 					case 0:
 						msg = new CM_GS_AUTH();
@@ -57,8 +57,7 @@ public class GsPacketHandlerFactory {
 						unknownPacket(state, id);
 				}
 				break;
-			}
-			case AUTHED: {
+			case AUTHED:
 				switch (id) {
 					case 1:
 						msg = new CM_ACCOUNT_AUTH();
@@ -109,7 +108,6 @@ public class GsPacketHandlerFactory {
 						unknownPacket(state, id);
 				}
 				break;
-			}
 		}
 
 		if (msg != null) {

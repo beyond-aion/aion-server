@@ -30,7 +30,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 	public SM_HOUSE_SCRIPTS(int address, PlayerScripts scripts, int... scriptIds) {
 		this.address = address;
 		this.scripts = scripts;
-		this.scriptIds = scriptIds.length > 0 ? new HashSet<Integer>(Ints.asList(scriptIds)) : scripts.getIds();
+		this.scriptIds = scriptIds.length > 0 ? new HashSet<>(Ints.asList(scriptIds)) : scripts.getIds();
 	}
 
 	@Override

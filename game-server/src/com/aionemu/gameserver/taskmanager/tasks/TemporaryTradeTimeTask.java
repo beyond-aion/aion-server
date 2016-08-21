@@ -3,8 +3,6 @@ package com.aionemu.gameserver.taskmanager.tasks;
 import java.util.Collection;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -12,13 +10,15 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastMap;
+
 /**
  * @author Mr. Poke
  */
 public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 
-	private final FastMap<Item, Collection<Integer>> items = new FastMap<Item, Collection<Integer>>();
-	private final FastMap<Integer, Item> itemById = new FastMap<Integer, Item>();
+	private final FastMap<Item, Collection<Integer>> items = new FastMap<>();
+	private final FastMap<Integer, Item> itemById = new FastMap<>();
 
 	/**
 	 * @param period

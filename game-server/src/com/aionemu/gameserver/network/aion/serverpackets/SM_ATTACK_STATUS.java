@@ -167,15 +167,15 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 	 * fp regen(natural_fp) 187 //187 in 4.5
 	 * fp pot(fp) 171
 	 * prochp(7) 187 //checked in 4.5
-	 * procmp(21) 187 //checked in 4.5 
-	 * heal_instant (regular) 171 protecteffect on protector - (8) 171 4.5 
-	 * type="MP(21)" skillId="17722" logId="UNKNOWN(141) - mpattack 
-	 * type="UNKNOWN(15)" skillId="2196" logId="UNKNOWN(112) - magiccounteratk 
-	 * type="DAMAGE_HEAL_HP(7)" skillId="2858" logId="UNKNOWN(3073)" - spellatk(Flame Cage only)??? 
-	 * type="DAMAGE_HEAL_HP(7)"  skillId="8759" logId="UNKNOWN(132)" - spellatkdrain 
-	 * type="DAMAGE_HEAL_HP(7)"  skillId="2391" logId="UNKNOWN(21)" - caseheal(hp) 
-	 * type="DAMAGE_HEAL_FP(26)" skillId="8772" logId="UNKNOWN(134) - fpheal 
-	 * type="UNKNOWN(16)" skillId="0" logId="REGULAR(187)" - dispelbuffcounteratk(2404) 
+	 * procmp(21) 187 //checked in 4.5
+	 * heal_instant (regular) 171 protecteffect on protector - (8) 171 4.5
+	 * type="MP(21)" skillId="17722" logId="UNKNOWN(141) - mpattack
+	 * type="UNKNOWN(15)" skillId="2196" logId="UNKNOWN(112) - magiccounteratk
+	 * type="DAMAGE_HEAL_HP(7)" skillId="2858" logId="UNKNOWN(3073)" - spellatk(Flame Cage only)???
+	 * type="DAMAGE_HEAL_HP(7)"  skillId="8759" logId="UNKNOWN(132)" - spellatkdrain
+	 * type="DAMAGE_HEAL_HP(7)"  skillId="2391" logId="UNKNOWN(21)" - caseheal(hp)
+	 * type="DAMAGE_HEAL_FP(26)" skillId="8772" logId="UNKNOWN(134) - fpheal
+	 * type="UNKNOWN(16)" skillId="0" logId="REGULAR(187)" - dispelbuffcounteratk(2404)
 	 * type="UNKNOWN(13)" skillId="0" logId="REGULAR(187)" - setting hp after resurrect
 	 * TODO find rest of logIds
 	 */

@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -22,7 +22,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
 	private Future<?> skillTask;
 	private Future<?> skill2Task;
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 
 	@Override
 	public void handleSpawned() {

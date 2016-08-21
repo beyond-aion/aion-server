@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +15,8 @@ import com.aionemu.gameserver.dao.GuideDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.guide.Guide;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -49,7 +49,7 @@ public class MySQL5GuideDAO extends GuideDAO {
 
 	@Override
 	public List<Guide> loadGuides(int playerId) {
-		final List<Guide> guides = new FastTable<Guide>();
+		final List<Guide> guides = new FastTable<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);

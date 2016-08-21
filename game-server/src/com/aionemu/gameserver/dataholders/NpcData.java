@@ -38,7 +38,7 @@ public class NpcData {
 
 	/** A map containing all npc templates */
 	@XmlTransient
-	private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<NpcTemplate>();
+	private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (NpcTemplate npc : npcs) {

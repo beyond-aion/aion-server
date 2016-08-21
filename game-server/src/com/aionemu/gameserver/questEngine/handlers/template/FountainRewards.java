@@ -47,13 +47,12 @@ public class FountainRewards extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) { // Coin Fountain
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						if (!QuestService.inventoryItemCheck(env, true)) {
 							return true;
 						} else
 							return sendQuestSelectionDialog(env);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						if (QuestService.collectItemCheck(env, false)) {
 							if (!player.getInventory().isFullSpecialCube()) {
 								if (QuestService.startQuest(env)) {
@@ -67,7 +66,6 @@ public class FountainRewards extends QuestHandler {
 						} else {
 							return sendQuestSelectionDialog(env);
 						}
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

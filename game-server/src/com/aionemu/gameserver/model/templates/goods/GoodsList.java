@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -36,7 +36,7 @@ public class GoodsList {
 	private List<Integer> itemIdList;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		itemIdList = new FastTable<Integer>();
+		itemIdList = new FastTable<>();
 		if (items == null)
 			return;
 
@@ -49,7 +49,7 @@ public class GoodsList {
 	 * return the limitedItems.
 	 */
 	public FastTable<LimitedItem> getLimitedItems() {
-		FastTable<LimitedItem> limitedItems = new FastTable<LimitedItem>();
+		FastTable<LimitedItem> limitedItems = new FastTable<>();
 		if (items != null) {
 			for (Item item : items) {
 				if (item.getBuyLimit() != null && item.getSellLimit() != null) {

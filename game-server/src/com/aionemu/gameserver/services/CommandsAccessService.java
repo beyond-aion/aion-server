@@ -3,13 +3,13 @@ package com.aionemu.gameserver.services;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.CommandsAccessDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
+
+import javolution.util.FastTable;
 
 /**
  * @author ViAl

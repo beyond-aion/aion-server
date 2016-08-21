@@ -51,44 +51,37 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204707) { // Mani
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						} else if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
-					}
-					case SETPRO4: {
+					case SETPRO4:
 						return defaultCloseDialog(env, 3, 4); // 4
-					}
 				}
 			} else if (targetId == 204749) { // Paeru
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2, 182215375, 1, 0, 0); // 2
-					}
 				}
 			} else if (targetId == 204800) { // Hammel
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 4) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SETPRO5: {
+					case SETPRO5:
 						return defaultCloseDialog(env, 4, 5); // 5
-					}
 				}
 			} else if (targetId == 700359 && var == 5 && player.getInventory().getItemCountByItemId(182215377) >= 1) { // Secret Port Entrance
 				if (env.getDialog() == DialogAction.USE_OBJECT) {

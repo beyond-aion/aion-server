@@ -48,7 +48,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 278501: {
+				case 278501:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -61,9 +61,8 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return true;
 							}
 					}
-				}
 					break;
-				case 279029: {
+				case 279029:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -78,7 +77,6 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return true;
 							}
 					}
-				}
 					break;
 				case 700355:
 					if (var == 3) {
@@ -87,7 +85,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 						PacketSendUtility.sendMonologue(player, 1111203); // I need an Artifact Activation Stone!
 					}
 					break;
-				case 790001: {
+				case 790001:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -100,7 +98,6 @@ public class _14044ShardsOfMemory extends QuestHandler {
 								return true;
 							}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -27,7 +27,7 @@ public class InstanceExitData {
 	protected List<InstanceExit> instanceExit;
 
 	@XmlTransient
-	protected List<InstanceExit> instanceExits = new FastTable<InstanceExit>();
+	protected List<InstanceExit> instanceExits = new FastTable<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (InstanceExit exit : instanceExit) {

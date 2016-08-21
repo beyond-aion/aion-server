@@ -54,27 +54,23 @@ public class _39520VilmanerkVersusDragonbound extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 205984) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						if (env.getVisibleObject() instanceof Npc) {
 							targetId = ((Npc) env.getVisibleObject()).getNpcId();
 							Npc npc = (Npc) env.getVisibleObject();
 							npc.getController().onDelete();
 						}
 						return defaultCloseDialog(env, 0, 1);
-					}
 				}
 			} else if (targetId == 205885) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 1, 1, true);
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -56,7 +56,7 @@ public class ObjectCallbackHelper {
 
 			List<Callback> list = cbMap.get(callback.getBaseClass());
 			if (list == null) {
-				list = new CopyOnWriteArrayList<Callback>();
+				list = new CopyOnWriteArrayList<>();
 				cbMap.put(callback.getBaseClass(), list);
 			}
 

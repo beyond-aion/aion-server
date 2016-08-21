@@ -42,7 +42,7 @@ public class LoginServerConnection extends AConnection {
 	/**
 	 * Server Packet "to send" Queue
 	 */
-	private final Deque<LsServerPacket> sendMsgQueue = new ArrayDeque<LsServerPacket>();
+	private final Deque<LsServerPacket> sendMsgQueue = new ArrayDeque<>();
 
 	/**
 	 * Current state of this connection

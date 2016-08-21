@@ -22,7 +22,7 @@ public class GlobalDropRaces {
 
 	public List<GlobalDropRace> getGlobalDropRaces() {
 		if (gdRaces == null) {
-			gdRaces = new FastTable<GlobalDropRace>();
+			gdRaces = new FastTable<>();
 		}
 		return this.gdRaces;
 	}

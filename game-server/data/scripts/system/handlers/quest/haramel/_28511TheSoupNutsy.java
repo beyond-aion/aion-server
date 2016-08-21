@@ -49,26 +49,21 @@ public class _28511TheSoupNutsy extends QuestHandler {
 				case 700954: { // Well-Dried Ginseng
 					return true; // loot
 				}
-				case 730359: { // Huge Cauldron
+				case 730359: // Huge Cauldron
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 0, 0, false, 1352, 10001);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							giveQuestItem(env, 182212023, 1);
 							return closeDialogWindow(env);
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return closeDialogWindow(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798031) { // Chagarinerk

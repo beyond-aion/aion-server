@@ -923,7 +923,7 @@ public class QuestEngine implements GameEngine {
 
 	public void registerOnEquipItem(int itemId, int questId) {
 		if (!questOnEquipItem.containsKey(itemId)) {
-			Set<Integer> questIds = new HashSet<Integer>();
+			Set<Integer> questIds = new HashSet<>();
 			questIds.add(questId);
 			questOnEquipItem.put(itemId, questIds);
 		} else {

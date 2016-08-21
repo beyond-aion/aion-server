@@ -115,7 +115,7 @@ public class GoTo extends AdminCommand {
 		 * Asmodae
 		 */
 		// Pandaemonium
-		else if (destination.equalsIgnoreCase("Pandaemonium") || destination.equalsIgnoreCase("pandae") 
+		else if (destination.equalsIgnoreCase("Pandaemonium") || destination.equalsIgnoreCase("pandae")
 						|| destination.equalsIgnoreCase("pandaemonium"))
 			goTo(player, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195);
 		// Marchutran
@@ -362,7 +362,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Nightmare Circus") || destination.equalsIgnoreCase("NC")
 						|| destination.equalsIgnoreCase("Rukibuki Zirkus"))
 			goTo(player, 301160000, 467.64f, 568.34f, 201.67f);
-		else if (destination.equalsIgnoreCase("Kamar Battlefield") || destination.equalsIgnoreCase("KB") 
+		else if (destination.equalsIgnoreCase("Kamar Battlefield") || destination.equalsIgnoreCase("KB")
 						|| destination.equalsIgnoreCase("Schlachtfeld von Kamar"))
 			goTo(player, 301120000, 1329, 1501, 593);
 		// 4.5 instances
@@ -378,7 +378,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Lucky Danuar Reliquary") || destination.equalsIgnoreCase("LDR")
 						|| destination.equalsIgnoreCase("Lucky Danuar") || destination.equalsIgnoreCase("jormungand bonus"))
 			goTo(player, 301320000, 750, 554, 574);
-		else if (destination.equalsIgnoreCase("Illuminary Obelisk") || destination.equalsIgnoreCase("IB") 
+		else if (destination.equalsIgnoreCase("Illuminary Obelisk") || destination.equalsIgnoreCase("IB")
 						|| destination.equalsIgnoreCase("Schutzturm"))
 			goTo(player, 301230000, 322.38f, 324.47f, 405.49997f);
 
@@ -520,7 +520,7 @@ public class GoTo extends AdminCommand {
 		/**
 		 * 4.7 Instances
 		 */
-		else if (destination.equalsIgnoreCase("idgel_dome") || destination.equalsIgnoreCase("idgel dome") 
+		else if (destination.equalsIgnoreCase("idgel_dome") || destination.equalsIgnoreCase("idgel dome")
 						|| destination.equalsIgnoreCase("ruhnatorium"))
 			goTo(player, 301310000, 254, 179, 83);
 		else if (destination.equalsIgnoreCase("linkgate_foundry") || destination.equalsIgnoreCase("linkgate foundry")
@@ -575,9 +575,9 @@ public class GoTo extends AdminCommand {
 			goTo(player, 220080000, 2685, 1407, 341);
 		else if (destination.equalsIgnoreCase("griffoen") || destination.equalsIgnoreCase("ellegef"))
 			goTo(player, 210080000, 263, 127, 501);
-		else if (destination.equalsIgnoreCase("habrok") || destination.equalsIgnoreCase("lagnatun")) 
+		else if (destination.equalsIgnoreCase("habrok") || destination.equalsIgnoreCase("lagnatun"))
 			goTo(player, 220090000, 253, 107, 505);
-		else if (destination.equalsIgnoreCase("new idian asmo") || destination.equalsIgnoreCase("untergrund von katalam asmo") 
+		else if (destination.equalsIgnoreCase("new idian asmo") || destination.equalsIgnoreCase("untergrund von katalam asmo")
 						|| destination.equalsIgnoreCase("uga"))
 			goTo(player, 220100000, 684, 654, 515);
 		else if (destination.equalsIgnoreCase("new idian elyos") || destination.equalsIgnoreCase("untergrund von katalam ely")

@@ -3,9 +3,6 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
@@ -20,6 +17,9 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastSet;
+import javolution.util.FastTable;
 
 /**
  * @author Sarynth, nrg
@@ -52,7 +52,7 @@ public class Kisk extends SummonedObject<Player> {
 		if (this.kiskStatsTemplate == null)
 			this.kiskStatsTemplate = new KiskStatsTemplate();
 
-		this.kiskMemberIds = new FastSet<Integer>();
+		this.kiskMemberIds = new FastSet<>();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
 		this.ownerLegion = owner.getLegion();
@@ -97,7 +97,7 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	public List<Player> getCurrentMemberList() {
-		List<Player> currentMemberList = new FastTable<Player>();
+		List<Player> currentMemberList = new FastTable<>();
 
 		for (int memberId : this.kiskMemberIds) {
 			Player member = World.getInstance().findPlayer(memberId);

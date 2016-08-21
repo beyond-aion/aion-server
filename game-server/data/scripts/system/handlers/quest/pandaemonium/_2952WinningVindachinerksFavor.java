@@ -52,22 +52,18 @@ public class _2952WinningVindachinerksFavor extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 279016: { // Vindachinerk
+				case 279016: // Vindachinerk
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 0, 0, true, 5, 2716); // reward
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, 0, 0);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 279016) {
 			return sendQuestEndDialog(env);

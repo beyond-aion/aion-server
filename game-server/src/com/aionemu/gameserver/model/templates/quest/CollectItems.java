@@ -39,7 +39,7 @@ public class CollectItems {
 	 */
 	public List<CollectItem> getCollectItem() {
 		if (collectItem == null) {
-			collectItem = new FastTable<CollectItem>();
+			collectItem = new FastTable<>();
 		}
 		return this.collectItem;
 	}

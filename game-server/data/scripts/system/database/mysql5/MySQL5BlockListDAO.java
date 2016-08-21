@@ -60,7 +60,7 @@ public class MySQL5BlockListDAO extends BlockListDAO {
 
 	@Override
 	public BlockList load(int playerObjId) {
-		final Map<Integer, BlockedPlayer> list = new HashMap<Integer, BlockedPlayer>();
+		final Map<Integer, BlockedPlayer> list = new HashMap<>();
 
 		DB.select(LOAD_QUERY, new ParamReadStH() {
 

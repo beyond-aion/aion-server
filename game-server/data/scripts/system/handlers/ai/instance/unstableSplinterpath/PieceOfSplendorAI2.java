@@ -1,12 +1,12 @@
 package ai.instance.unstableSplinterpath;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.MathUtil;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller

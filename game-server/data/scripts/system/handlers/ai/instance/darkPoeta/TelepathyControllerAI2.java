@@ -2,11 +2,11 @@ package ai.instance.darkPoeta;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu

@@ -181,9 +181,9 @@ public class MySQL5HousesDAO extends HousesDAO {
 
 	@Override
 	public Map<Integer, House> loadHouses(Collection<HousingLand> lands, boolean studios) {
-		Map<Integer, House> houses = new HashMap<Integer, House>();
-		Map<Integer, HouseAddress> addressesById = new HashMap<Integer, HouseAddress>();
-		Map<Integer, List<Building>> buildingsForAddress = new HashMap<Integer, List<Building>>();
+		Map<Integer, House> houses = new HashMap<>();
+		Map<Integer, HouseAddress> addressesById = new HashMap<>();
+		Map<Integer, List<Building>> buildingsForAddress = new HashMap<>();
 		for (HousingLand land : lands) {
 			for (HouseAddress address : land.getAddresses()) {
 				addressesById.put(address.getId(), address);
@@ -191,7 +191,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 			}
 		}
 
-		HashMap<Integer, Integer> addressHouseIds = new HashMap<Integer, Integer>();
+		HashMap<Integer, Integer> addressHouseIds = new HashMap<>();
 
 		try {
 			try (Connection con = DatabaseFactory.getConnection();

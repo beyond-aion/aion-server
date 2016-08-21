@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +34,8 @@ import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
+import javolution.util.FastTable;
+
 /**
  * @author ATracer
  */
@@ -43,7 +43,7 @@ public class ExchangeService {
 
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
-	private Map<Integer, Exchange> exchanges = new HashMap<Integer, Exchange>();
+	private Map<Integer, Exchange> exchanges = new HashMap<>();
 
 	private ExchangePeriodicTaskManager saveManager;
 

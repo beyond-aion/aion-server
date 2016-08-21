@@ -44,7 +44,7 @@ public class _18807BlessedBeThyHame extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 730524: {
+				case 730524:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -54,8 +54,7 @@ public class _18807BlessedBeThyHame extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 					}
 					break;
-				}
-				case 830194: {
+				case 830194:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -64,7 +63,6 @@ public class _18807BlessedBeThyHame extends QuestHandler {
 							changeQuestStep(env, 1, 1, true);
 							return sendQuestDialog(env, 5);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830194) {

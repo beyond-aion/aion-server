@@ -14,9 +14,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +38,9 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.world.World;
 import com.google.common.collect.Maps;
 
+import javolution.util.FastMap;
+import javolution.util.FastTable;
+
 /**
  * @author SoulKeeper, Saelya
  * @author cura
@@ -48,8 +48,8 @@ import com.google.common.collect.Maps;
 public class MySQL5PlayerDAO extends PlayerDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerDAO.class);
-	private ConcurrentHashMap<Integer, PlayerCommonData> playerCommonData = new ConcurrentHashMap<Integer, PlayerCommonData>();
-	private ConcurrentHashMap<String, PlayerCommonData> playerCommonDataByName = new ConcurrentHashMap<String, PlayerCommonData>();
+	private ConcurrentHashMap<Integer, PlayerCommonData> playerCommonData = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, PlayerCommonData> playerCommonDataByName = new ConcurrentHashMap<>();
 
 	/**
 	 * {@inheritDoc}
@@ -332,7 +332,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	 */
 	@Override
 	public List<Integer> getPlayerOidsOnAccount(final int accountId) {
-		final List<Integer> result = new FastTable<Integer>();
+		final List<Integer> result = new FastTable<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ?", new ParamReadStH() {
 
 			@Override

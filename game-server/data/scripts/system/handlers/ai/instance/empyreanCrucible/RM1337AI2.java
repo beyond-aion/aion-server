@@ -144,7 +144,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new FastTable<Player>();
+		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 37)) {
 				players.add(player);

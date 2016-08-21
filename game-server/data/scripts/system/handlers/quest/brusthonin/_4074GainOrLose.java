@@ -48,10 +48,9 @@ public class _4074GainOrLose extends QuestHandler {
 				long kinahAmount = player.getInventory().getKinah();
 				long demonsEye = player.getInventory().getItemCountByItemId(186000038);
 				switch (dialog) {
-					case EXCHANGE_COIN: {
+					case EXCHANGE_COIN:
 						return sendQuestDialog(env, 1011);
-					}
-					case SELECT_ACTION_1011: {
+					case SELECT_ACTION_1011:
 						if (kinahAmount >= 1000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(0);
@@ -59,8 +58,7 @@ public class _4074GainOrLose extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					}
-					case SELECT_ACTION_1352: {
+					case SELECT_ACTION_1352:
 						if (kinahAmount >= 5000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(1);
@@ -68,8 +66,7 @@ public class _4074GainOrLose extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					}
-					case SELECT_ACTION_1693: {
+					case SELECT_ACTION_1693:
 						if (kinahAmount >= 25000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(2);
@@ -77,10 +74,8 @@ public class _4074GainOrLose extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

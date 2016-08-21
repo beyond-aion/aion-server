@@ -48,7 +48,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 790001: { // Pernos
+				case 790001: // Pernos
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0) {
@@ -68,36 +68,29 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 							}
 					}
 					break;
-				}
-				case 203725: { // Leah
+				case 203725: // Leah
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:
 							return playQuestMovie(env, 92);
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 203752: { // Jucleas
+				case 203752: // Jucleas
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1694: {
+						case SELECT_ACTION_1694:
 							return playQuestMovie(env, 91);
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (var == 2) {
 								PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
 								switch (playerClass) {
@@ -130,10 +123,8 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 								updateQuestStatus(env);
 								return sendQuestSelectionDialog(env);
 							}
-						}
 							break;
 					}
-				}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

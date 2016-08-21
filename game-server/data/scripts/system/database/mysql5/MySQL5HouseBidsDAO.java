@@ -34,7 +34,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 
 	@Override
 	public Set<PlayerHouseBid> loadBids() {
-		Set<PlayerHouseBid> results = new HashSet<PlayerHouseBid>();
+		Set<PlayerHouseBid> results = new HashSet<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
 				try (ResultSet rset = stmt.executeQuery()) {

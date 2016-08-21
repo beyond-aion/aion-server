@@ -49,11 +49,10 @@ public class _1559WhatsintheBox extends QuestHandler {
 		} else if (targetId == 700513) {
 			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 				switch (env.getDialog()) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						if (player.getInventory().getItemCountByItemId(182201823) == 0) {
 							return giveQuestItem(env, 182201823, 1);
 						}
-					}
 				}
 			}
 		}

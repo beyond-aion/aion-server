@@ -96,10 +96,9 @@ public class ReportTo extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (endNpcIds.contains(targetId)) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						if (workItem != null) {
 							long currentCount = player.getInventory().getItemCountByItemId(workItem.getItemId());
 							if (currentCount < workItem.getCount()) {
@@ -111,7 +110,6 @@ public class ReportTo extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestEndDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

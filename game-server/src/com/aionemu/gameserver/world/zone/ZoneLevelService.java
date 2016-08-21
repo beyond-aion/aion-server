@@ -30,7 +30,7 @@ public class ZoneLevelService {
 		}
 
 		float noseHeight = player.getPlayerAppearance().getBoundHeight() - 0.1f;
-		if (z + noseHeight < world.getWorldMap(player.getWorldId()).getWaterLevel()) 
+		if (z + noseHeight < world.getWorldMap(player.getWorldId()).getWaterLevel())
 			startDrowning(player);
 		else
 			stopDrowning(player);

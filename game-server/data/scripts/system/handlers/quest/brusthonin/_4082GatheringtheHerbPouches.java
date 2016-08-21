@@ -101,10 +101,9 @@ public class _4082GatheringtheHerbPouches extends QuestHandler {
 			switch (targetId) {
 				case 700430:
 				case 700431:
-				case 700432: {
+				case 700432:
 					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT)
 						return true;
-				}
 			}
 		}
 		return false;

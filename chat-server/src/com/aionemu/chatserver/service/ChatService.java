@@ -27,7 +27,7 @@ public class ChatService {
 
 	private static ChatService instance = new ChatService();
 	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
-	private Map<Integer, ChatClient> players = new HashMap<Integer, ChatClient>();
+	private Map<Integer, ChatClient> players = new HashMap<>();
 
 	public static ChatService getInstance() {
 		return instance;

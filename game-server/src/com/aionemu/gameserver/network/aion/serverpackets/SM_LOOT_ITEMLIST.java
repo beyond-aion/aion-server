@@ -2,8 +2,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.drop.Drop;
@@ -13,6 +11,8 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastTable;
 
 /**
  * @author alexa026, Avol, Corrected by Metos modified by ATracer, KID
@@ -24,7 +24,7 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 
 	public SM_LOOT_ITEMLIST(int targetObjectId, Set<DropItem> setItems, Player player) {
 		this.targetObjectId = targetObjectId;
-		this.dropItems = new FastTable<DropItem>();
+		this.dropItems = new FastTable<>();
 		if (setItems == null) {
 			LoggerFactory.getLogger(SM_LOOT_ITEMLIST.class).warn("null Set<DropItem>, skip");
 			return;

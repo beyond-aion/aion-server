@@ -49,7 +49,7 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 799036: {
+				case 799036:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -60,7 +60,6 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 296.63f, 482.98f, 574.37f, 0, 1); // 1
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799035) {

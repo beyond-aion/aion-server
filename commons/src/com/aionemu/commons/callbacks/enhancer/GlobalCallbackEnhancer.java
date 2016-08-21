@@ -4,6 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.callbacks.CallbackResult;
+import com.aionemu.commons.callbacks.metadata.GlobalCallback;
+import com.aionemu.commons.callbacks.util.CallbacksUtil;
+import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
+
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -12,14 +20,6 @@ import javassist.CtMethod;
 import javassist.LoaderClassPath;
 import javassist.Modifier;
 import javassist.NotFoundException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.commons.callbacks.CallbackResult;
-import com.aionemu.commons.callbacks.metadata.GlobalCallback;
-import com.aionemu.commons.callbacks.util.CallbacksUtil;
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 
 /**
  * @author SoulKeeper
@@ -34,7 +34,7 @@ public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
 		cp.appendClassPath(new LoaderClassPath(loader));
 		CtClass clazz = cp.makeClass(new ByteArrayInputStream(clazzBytes));
 
-		Set<CtMethod> methdosToEnhance = new HashSet<CtMethod>();
+		Set<CtMethod> methdosToEnhance = new HashSet<>();
 
 		for (CtMethod method : clazz.getDeclaredMethods()) {
 			if (!isEnhanceable(method)) {

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +18,8 @@ import com.aionemu.gameserver.services.base.CasualBase;
 import com.aionemu.gameserver.services.base.SiegeBase;
 import com.aionemu.gameserver.services.base.StainedBase;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
+
+import javolution.util.FastTable;
 
 /**
  * @author Source

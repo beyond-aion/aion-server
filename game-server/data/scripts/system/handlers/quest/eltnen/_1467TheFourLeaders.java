@@ -42,13 +42,11 @@ public class _1467TheFourLeaders extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case QUEST_ACCEPT_1: {
+					case QUEST_ACCEPT_1:
 						QuestService.startQuest(env);
 						return sendQuestDialog(env, 1011);
-					}
 					default: {
 						return sendQuestStartDialog(env);
 					}
@@ -57,34 +55,27 @@ public class _1467TheFourLeaders extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 0, 2);
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						return defaultCloseDialog(env, 0, 3);
-					}
-					case SETPRO4: {
+					case SETPRO4:
 						return defaultCloseDialog(env, 0, 4);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId) {
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, qs.getQuestVarById(0) + 4);
-					}
-					case SELECTED_QUEST_NOREWARD: {
+					case SELECTED_QUEST_NOREWARD:
 						QuestService.finishQuest(env, qs.getQuestVarById(0) - 1);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
-					}
 				}
 			}
 		}

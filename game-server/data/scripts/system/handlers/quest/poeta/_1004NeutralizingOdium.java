@@ -107,14 +107,13 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							return true;
 						}
 						return false;
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						if (QuestService.collectItemCheck(env, true)) {
 							qs.setQuestVarById(0, 11);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 1694);
 						} else
 							return sendQuestDialog(env, 1779);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

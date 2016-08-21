@@ -103,19 +103,16 @@ public class ItemCollecting extends QuestHandler {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						QuestService.startQuest(env);
 						return closeDialogWindow(env);
-					}
-					case SELECT_ACTION_1012: {
+					case SELECT_ACTION_1012:
 						if (questMovie != 0) {
 							playQuestMovie(env, questMovie);
 						}
 						return sendQuestDialog(env, 1012);
-					}
 					case QUEST_REFUSE:
 					case QUEST_REFUSE_1:
 					case QUEST_REFUSE_SIMPLE:
@@ -132,46 +129,35 @@ public class ItemCollecting extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == nextNpcId && var == 0) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
-					}
 				}
 			} else if (endNpcIds.contains(targetId)) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : isDataDriven ? 1011 : 2375);
-					}
-					case CHECK_USER_HAS_QUEST_ITEM: {
+					case CHECK_USER_HAS_QUEST_ITEM:
 						int okDialogId = checkOkDialogId != 0 ? checkOkDialogId : isDataDriven ? 10000 : 5;
 						int failDialogId = checkFailDialogId != 0 ? checkFailDialogId : isDataDriven ? 10001 : 2716;
 						return checkQuestItems(env, var, var, true, okDialogId, failDialogId); // reward
-					}
-					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
 						return checkQuestItemsSimple(env, var, var, true, 5, 0, 0); // reward
-					}
-					case FINISH_DIALOG: {
+					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
-					}
-					case SET_SUCCEED: {
+					case SET_SUCCEED:
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return checkQuestItemsSimple(env, var, var, true, 5, 0, 0);
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return checkQuestItemsSimple(env, var, var, true, 6, 0, 0);
-					}
-					case SETPRO3: {
+					case SETPRO3:
 						return checkQuestItemsSimple(env, var, var, true, 7, 0, 0);
-					}
-					case SETPRO4: {
+					case SETPRO4:
 						return checkQuestItemsSimple(env, var, var, true, 8, 0, 0);
-					}
 				}
 			} else if (actionItems != null && actionItems.contains(targetId)) {
 				return true; // looting

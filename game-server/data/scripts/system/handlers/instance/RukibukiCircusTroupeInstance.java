@@ -31,7 +31,7 @@ import javolution.util.FastTable;
 @InstanceID(301160000)
 public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
-	private List<Integer> movies = new FastTable<Integer>();
+	private List<Integer> movies = new FastTable<>();
 	private boolean isInstanceDestroyed;
 	private Future<?> spawnTask;
 	private Future<?> despawnBossTask;

@@ -34,7 +34,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 
 	public SM_SIEGE_LOCATION_INFO(SiegeLocation loc) {
 		this.infoType = 1;
-		locations = new FastMap<Integer, SiegeLocation>();
+		locations = new FastMap<>();
 		locations.put(loc.getLocationId(), loc);
 	}
 
@@ -45,9 +45,9 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 			writeC(0);
 			writeH(0);
 			return;
-		} 
+		}
 
-		if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() >= 69 
+		if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() >= 69
 				&& player.getPanesterraTeam().getTeamId().getId() <= 72) {
 			writeC(0);
 			writeH(4); //4 Panesterra Fortresses
@@ -70,7 +70,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 				writeC(0); //cannot teleport
 				writeC(0); //next state invulnerable
 					
-				writeH(0); 
+				writeH(0);
 				writeH(0);
 				writeD(0);
 					

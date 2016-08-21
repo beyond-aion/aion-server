@@ -381,7 +381,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-		List<ZoneInstance> regionZones = new FastTable<ZoneInstance>();
+		List<ZoneInstance> regionZones = new FastTable<>();
 		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
 
 		for (ZoneInstance zoneInstance : zones.values()) {

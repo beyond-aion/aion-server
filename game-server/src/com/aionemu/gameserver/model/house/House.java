@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -55,6 +53,8 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
+import javolution.util.FastTable;
+
 /**
  * @author Rolandas
  */
@@ -72,7 +72,7 @@ public class House extends VisibleObject {
 	private boolean feePaid = true;
 	private Timestamp nextPay;
 	private Timestamp sellStarted;
-	private Map<SpawnType, Npc> spawns = new HashMap<SpawnType, Npc>(3);
+	private Map<SpawnType, Npc> spawns = new HashMap<>(3);
 	private HouseRegistry houseRegistry;
 	private byte houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 	private PlayerScripts playerScripts;
@@ -191,7 +191,7 @@ public class House extends VisibleObject {
 		int creatorId = getAddress().getId();
 		String masterName = StringUtils.EMPTY;
 		if (playerObjectId != 0) {
-			List<Integer> players = new FastTable<Integer>();
+			List<Integer> players = new FastTable<>();
 			players.add(playerObjectId);
 			Map<Integer, String> playerNames = DAOManager.getDAO(PlayerDAO.class).getPlayerNames(players);
 			if (playerNames.containsKey(playerObjectId)) {

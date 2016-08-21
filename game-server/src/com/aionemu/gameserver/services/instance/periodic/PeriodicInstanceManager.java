@@ -19,7 +19,7 @@ public class PeriodicInstanceManager {
 	private Map<Byte, PeriodicInstance> services;
 
 	private PeriodicInstanceManager() {
-		this.services = new HashMap<Byte, PeriodicInstance>();
+		this.services = new HashMap<>();
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 			DredgionService2.getInstance().initIfEnabled();
 			registerInstance(DredgionService2.getInstance());

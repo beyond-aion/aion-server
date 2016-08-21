@@ -56,7 +56,7 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798934: {
+				case 798934:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -69,8 +69,7 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798997: {
+				case 798997:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
@@ -84,14 +83,12 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 						default:
 							return sendQuestEndDialog(env);
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798997) {
 				switch (env.getDialog()) {
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

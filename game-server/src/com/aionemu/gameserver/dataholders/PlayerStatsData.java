@@ -26,9 +26,9 @@ import javolution.util.FastTable;
 public class PlayerStatsData {
 
 	@XmlElement(name = "player_stats", required = true)
-	private List<PlayerStatsType> templatesList = new FastTable<PlayerStatsType>();
+	private List<PlayerStatsType> templatesList = new FastTable<>();
 
-	private final TIntObjectHashMap<PlayerStatsTemplate> playerTemplates = new TIntObjectHashMap<PlayerStatsTemplate>();
+	private final TIntObjectHashMap<PlayerStatsTemplate> playerTemplates = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PlayerStatsType pt : templatesList) {

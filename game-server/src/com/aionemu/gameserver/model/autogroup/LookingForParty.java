@@ -2,17 +2,17 @@ package com.aionemu.gameserver.model.autogroup;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
  */
 public class LookingForParty extends AbstractLockManager {
 
-	private List<SearchInstance> searchInstances = new FastTable<SearchInstance>();
+	private List<SearchInstance> searchInstances = new FastTable<>();
 	private Player player;
 	private long startEnterTime;
 	private long penaltyTime;

@@ -26,7 +26,7 @@ public class Mails {
 	private List<SysMail> sysMailTemplates;
 
 	@XmlTransient
-	private Map<String, SysMail> sysMailByName = new HashMap<String, SysMail>();
+	private Map<String, SysMail> sysMailByName = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SysMail template : sysMailTemplates) {

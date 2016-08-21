@@ -431,7 +431,7 @@ public abstract class EffectTemplate {
 	}
 
 	private FastTable<Integer> getPreEffects() {
-		FastTable<Integer> preEffects = new FastTable<Integer>();
+		FastTable<Integer> preEffects = new FastTable<>();
 
 		if (this.getPreEffect() == null)
 			return preEffects;

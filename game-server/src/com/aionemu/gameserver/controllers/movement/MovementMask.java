@@ -27,7 +27,7 @@ public class MovementMask {
 	public static final byte VEHICLE = (byte) 0x10; // 16
 
 	/**
-	 * Absolute destination coordinates (e.g. mouse related movement). Movements without this flag use relative directions. 
+	 * Absolute destination coordinates (e.g. mouse related movement). Movements without this flag use relative directions.
 	 */
 	public static final byte ABSOLUTE = (byte) 0x20; // 32
 

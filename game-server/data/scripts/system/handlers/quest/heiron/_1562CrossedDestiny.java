@@ -58,7 +58,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204616: { // Litonos
+				case 204616: // Litonos
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 1 && player.getInventory().getItemCountByItemId(182201780) == 1)
@@ -78,7 +78,6 @@ public class _1562CrossedDestiny extends QuestHandler {
 								return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 204589, 1, 2);
 							}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204589) { // Berone

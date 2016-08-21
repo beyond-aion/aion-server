@@ -8,11 +8,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.conditions.QuestConditions;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperations;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+
+import javolution.util.FastTable;
 
 /**
  * @author Mr. Poke
@@ -47,7 +47,7 @@ public abstract class QuestEvent {
 	 */
 	public List<Integer> getIds() {
 		if (ids == null) {
-			ids = new FastTable<Integer>();
+			ids = new FastTable<>();
 		}
 		return this.ids;
 	}

@@ -25,8 +25,8 @@ public class QuestsData {
 
 	@XmlElement(name = "quest", required = true)
 	protected List<QuestTemplate> questsData;
-	private TIntObjectHashMap<QuestTemplate> questData = new TIntObjectHashMap<QuestTemplate>();
-	private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<List<QuestTemplate>>();
+	private TIntObjectHashMap<QuestTemplate> questData = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		questData.clear();
@@ -37,7 +37,7 @@ public class QuestsData {
 			if (npcFactionId == 0 || quest.isTimeBased())
 				continue;
 			if (!sortedByFactionId.containsKey(npcFactionId)) {
-				List<QuestTemplate> factionQuests = new FastTable<QuestTemplate>();
+				List<QuestTemplate> factionQuests = new FastTable<>();
 				factionQuests.add(quest);
 				sortedByFactionId.put(npcFactionId, factionQuests);
 			} else {
@@ -52,7 +52,7 @@ public class QuestsData {
 
 	public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
 		List<QuestTemplate> factionQuests = sortedByFactionId.get(npcFactionId);
-		List<QuestTemplate> quests = new FastTable<QuestTemplate>();
+		List<QuestTemplate> quests = new FastTable<>();
 		for (QuestTemplate questTemplate : factionQuests) {
 			if (!QuestEngine.getInstance().isHaveHandler(questTemplate.getId()))
 				continue;

@@ -70,7 +70,7 @@ public class _80341EventRequestfromPucas extends QuestHandler {
 				case 831712:
 				case 831711:
 				case 831710:
-				case 831709: {
+				case 831709:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0) {
@@ -83,7 +83,6 @@ public class _80341EventRequestfromPucas extends QuestHandler {
 							return sendQuestDialog(env, 5);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 || targetId == 831713 || targetId == 831712

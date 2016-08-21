@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -13,11 +11,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+
+import gnu.trove.map.hash.THashMap;
+import javolution.util.FastTable;
 
 /**
  * This table contains all nesessary data for new players. <br/>
@@ -30,14 +29,14 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 public class PlayerInitialData {
 
 	@XmlElement(name = "player_data")
-	private List<PlayerCreationData> dataList = new FastTable<PlayerCreationData>();
+	private List<PlayerCreationData> dataList = new FastTable<>();
 
 	@XmlElement(name = "elyos_spawn_location", required = true)
 	private LocationData elyosSpawnLocation;
 	@XmlElement(name = "asmodian_spawn_location", required = true)
 	private LocationData asmodianSpawnLocation;
 
-	private THashMap<PlayerClass, PlayerCreationData> data = new THashMap<PlayerClass, PlayerCreationData>();
+	private THashMap<PlayerClass, PlayerCreationData> data = new THashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PlayerCreationData pt : dataList) {
@@ -92,7 +91,7 @@ public class PlayerInitialData {
 		static class ItemsType {
 
 			@XmlElement(name = "item")
-			public List<ItemType> items = new FastTable<ItemType>();
+			public List<ItemType> items = new FastTable<>();
 		}
 
 		public static class ItemType {

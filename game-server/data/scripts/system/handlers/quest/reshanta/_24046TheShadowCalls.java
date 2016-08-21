@@ -60,7 +60,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798300: { // Phyper
+				case 798300: // Phyper
 					if (dialog == DialogAction.QUEST_SELECT && var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
@@ -68,8 +68,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
-				}
-				case 204253: { // Khrudgelmir
+				case 204253: // Khrudgelmir
 					if (dialog == DialogAction.QUEST_SELECT && var == 2) {
 						return sendQuestDialog(env, 1693);
 					}
@@ -84,16 +83,14 @@ public class _24046TheShadowCalls extends QuestHandler {
 						return defaultCloseDialog(env, 6, 6, true, false); // reward
 					}
 					break;
-				}
-				case 700369: { // Underground Arena Exit
+				case 700369: // Underground Arena Exit
 					if (dialog == DialogAction.USE_OBJECT && var == 5) {
 						TeleportService2.teleportTo(player, 120010000, 981.6009f, 1552.97f, 210.46f);
 						changeQuestStep(env, 5, 6, false); // 6
 						return true;
 					}
 					break;
-				}
-				case 204089: { // Garm
+				case 204089: // Garm
 					if (dialog == DialogAction.QUEST_SELECT && var == 3) {
 						return sendQuestDialog(env, 2034);
 					}
@@ -106,7 +103,6 @@ public class _24046TheShadowCalls extends QuestHandler {
 						return closeDialogWindow(env);
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin

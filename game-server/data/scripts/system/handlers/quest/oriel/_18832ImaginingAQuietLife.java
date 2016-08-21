@@ -42,7 +42,7 @@ public class _18832ImaginingAQuietLife extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 830001: {
+				case 830001:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -55,7 +55,6 @@ public class _18832ImaginingAQuietLife extends QuestHandler {
 							return sendQuestDialog(env, 5);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

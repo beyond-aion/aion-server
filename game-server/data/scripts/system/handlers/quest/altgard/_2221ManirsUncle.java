@@ -46,7 +46,7 @@ public class _2221ManirsUncle extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203608: { // Groken
+				case 203608: // Groken
 					if (dialog == DialogAction.QUEST_SELECT) {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
@@ -61,7 +61,6 @@ public class _2221ManirsUncle extends QuestHandler {
 						return sendQuestDialog(env, 5);
 					}
 					break;
-				}
 				case 700214: { // Groken's Safe
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var == 1) {

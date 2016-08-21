@@ -53,7 +53,7 @@ public class MySQL5BannedHddDAO extends BannedHddDAO {
 
 	@Override
 	public Map<String, Timestamp> load() {
-		Map<String, Timestamp> map = new HashMap<String, Timestamp>();
+		Map<String, Timestamp> map = new HashMap<>();
 		PreparedStatement ps = DB.prepareStatement("SELECT * FROM `banned_hdd`");
 		try {
 			ResultSet rs = ps.executeQuery();

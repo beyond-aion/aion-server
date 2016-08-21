@@ -22,7 +22,7 @@ public class GlobalDropNpcNames {
 
 	public List<GlobalDropNpcName> getGlobalDropNpcNames() {
 		if (gdNpcNames == null) {
-			gdNpcNames = new FastTable<GlobalDropNpcName>();
+			gdNpcNames = new FastTable<>();
 		}
 		return this.gdNpcNames;
 	}

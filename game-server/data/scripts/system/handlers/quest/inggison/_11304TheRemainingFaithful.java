@@ -38,9 +38,8 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == 798927) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default: {
 						return sendQuestStartDialog(env);
 					}
@@ -48,7 +47,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798941: {
+				case 798941:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -57,7 +56,6 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926)

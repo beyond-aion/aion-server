@@ -77,7 +77,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204301: { // Aegir
+				case 204301: // Aegir
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -89,8 +89,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							return true;
 					}
 					break;
-				}
-				case 204403: { // Taisan
+				case 204403: // Taisan
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -102,8 +101,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							return true;
 					}
 					break;
-				}
-				case 204432: { // Kargate
+				case 204432: // Kargate
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
@@ -111,13 +109,12 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							else if (var == 4)
 								return sendQuestDialog(env, 2034);
 							return false;
-						case SETPRO3: {
+						case SETPRO3:
 							balaurKilled = 0;
 							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
 							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
 							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 						case SETPRO4:
 							if (var == 4) {
 								defaultCloseDialog(env, 4, 4, true, false); // reward
@@ -126,7 +123,6 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							}
 					}
 					break;
-				}
 			}
 		}
 		return false;

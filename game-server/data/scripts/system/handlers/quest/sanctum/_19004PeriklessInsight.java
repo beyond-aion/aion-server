@@ -49,40 +49,34 @@ public class _19004PeriklessInsight extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203752) { // Jucleas
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					}
-					case SETPRO1: {
+					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
-					}
 				}
 			} else if (targetId == 203701) { // Lavirintos
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1693);
 						}
 						return false;
-					}
-					case SETPRO2: {
+					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2); // 2
-					}
 				}
 			} else if (targetId == 798500) { // Mysteris
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 2, 2, true); // reward
 						return sendQuestDialog(env, 5);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

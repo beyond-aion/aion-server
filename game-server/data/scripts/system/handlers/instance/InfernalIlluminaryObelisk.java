@@ -1,8 +1,8 @@
 package instance;
 
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
@@ -18,7 +18,7 @@ public class InfernalIlluminaryObelisk extends IlluminaryObeliskInstance {
 	}
 	
 	@Override
-	protected void scheduleWipeTask() {	
+	protected void scheduleWipeTask() {
 		wipeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {

@@ -44,7 +44,7 @@ public class _13817WeeklyTheWithin extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 804595: {
+				case 804595:
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 0)
@@ -55,18 +55,15 @@ public class _13817WeeklyTheWithin extends QuestHandler {
 							return defaultCloseDialog(env, 0, 0, true, false);
 						}
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 804585)
 				switch (dialog) {
-					case USE_OBJECT: {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					}
-					case SELECT_QUEST_REWARD: {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
-					}
 					default:
 						return sendQuestEndDialog(env);
 				}

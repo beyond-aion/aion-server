@@ -52,7 +52,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204514: {
+				case 204514:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
@@ -64,9 +64,8 @@ public class _1693AreYouMyFather extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
-				}
 					break;
-				case 798388: {
+				case 798388:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1)
@@ -77,9 +76,8 @@ public class _1693AreYouMyFather extends QuestHandler {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 203893, 1, 2);
 						}
 					}
-				}
 					break;
-				case 203893: {
+				case 203893:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 2)
@@ -90,7 +88,6 @@ public class _1693AreYouMyFather extends QuestHandler {
 							return defaultCloseDialog(env, 2, 2, true, true);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203893) {

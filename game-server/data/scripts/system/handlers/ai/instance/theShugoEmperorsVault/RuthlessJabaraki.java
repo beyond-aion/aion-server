@@ -16,9 +16,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 @AIName("ruthless_jabaraki")
 public class RuthlessJabaraki extends IDSweep_Bosses {
 
-	protected List<Integer> percents = new ArrayList<Integer>();
-	private List<Npc> spawnedAdds = new ArrayList<Npc>();
-	//private Map<Integer, Integer> skills = new FastMap<>(); 
+	protected List<Integer> percents = new ArrayList<>();
+	private List<Npc> spawnedAdds = new ArrayList<>();
+	//private Map<Integer, Integer> skills = new FastMap<>();
 	
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -67,7 +67,7 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235631, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235631, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235631, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
-				break; 
+				break;
 			case 2:
 				spawnedAdds.add((Npc) spawn(235630, 541.625f, 407.0712f, 395.46875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235630, 538.86127f, 389.05258f, 395.4342f, (byte) 8));

@@ -49,12 +49,10 @@ public class _80318TroubledArabella extends QuestHandler {
 			switch (targetId) {
 				case 831425:// Arabella
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							return sendQuestDialog(env, 1011);
-						}
-						case ASK_QUEST_ACCEPT: {
+						case ASK_QUEST_ACCEPT:
 							return sendQuestDialog(env, 4);
-						}
 						case QUEST_ACCEPT_1:
 							if (!giveQuestItem(env, 182215301, 1))
 								return true;

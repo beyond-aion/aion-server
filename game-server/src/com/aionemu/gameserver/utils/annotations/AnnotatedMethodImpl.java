@@ -28,7 +28,7 @@ class AnnotatedMethodImpl implements AnnotatedMethod {
 	}
 
 	private Map<Class<?>, Annotation> getAllAnnotationMapCalculated() {
-		HashMap<Class<?>, Annotation> result = new HashMap<Class<?>, Annotation>();
+		HashMap<Class<?>, Annotation> result = new HashMap<>();
 
 		final Class<?> superClass = getAnnotatedClass().getTheClass().getSuperclass();
 		// Get the superclass's overriden method annotations

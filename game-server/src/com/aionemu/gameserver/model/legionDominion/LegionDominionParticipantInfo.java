@@ -92,7 +92,7 @@ public class LegionDominionParticipantInfo implements Comparable<LegionDominionP
 			} else {
 				return 1;
 			}
-		} else if (info.getPoints() > points) {		
+		} else if (info.getPoints() > points) {
 			return 1;
 		} else {
 			return -1;

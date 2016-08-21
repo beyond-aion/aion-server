@@ -3,9 +3,6 @@ package ai.instance.shugoImperialTomb;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
@@ -17,6 +14,9 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.world.World;
 
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
+
 /**
  * @author Ritsu
  */
@@ -25,7 +25,7 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2 {
 
 	private WalkerTemplate template;
 	private boolean canThink = true;
-	private final List<Integer> spawnedNpc = new FastTable<Integer>();
+	private final List<Integer> spawnedNpc = new FastTable<>();
 	private AtomicBoolean isSpawnedHelpers = new AtomicBoolean(false);
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 

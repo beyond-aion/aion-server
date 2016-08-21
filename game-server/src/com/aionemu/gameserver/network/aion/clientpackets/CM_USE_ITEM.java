@@ -145,7 +145,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 		// for multi-return scrolls
 		item.setIndexReturn(indexReturn);
 
-		List<AbstractItemAction> actions = new FastTable<AbstractItemAction>();
+		List<AbstractItemAction> actions = new FastTable<>();
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
 			// check if the item can be used before placing it on the cooldown list.
 			if (targetHouseObject != null && itemAction instanceof IHouseObjectDyeAction) {

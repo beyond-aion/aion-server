@@ -42,8 +42,8 @@ public class TribeRelationService {
 				break;
 			case GAB1_SUB_DRAKAN:
 			case GAB1_SUB_KILLER:
-				if (creature2.getBaseTribe() != TribeClass.GAB1_SUB_DRAKAN 
-					&& creature2.getBaseTribe() != TribeClass.GAB1_SUB_KILLER 
+				if (creature2.getBaseTribe() != TribeClass.GAB1_SUB_DRAKAN
+					&& creature2.getBaseTribe() != TribeClass.GAB1_SUB_KILLER
 					&& creature2.getBaseTribe() != TribeClass.GAB1_SUB_ATTACKABLE_FOBJ) {
 					return true;
 				}
@@ -106,7 +106,7 @@ public class TribeRelationService {
 					if (!checkPanesterraRelation(creature1, (Player) creature2)) {
 						return true;
 					}
-				} 
+				}
 				break;
 			case USEALL:
 			case FIELD_OBJECT_ALL:

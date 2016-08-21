@@ -122,7 +122,7 @@ public final class FloodManager {
 
 	private static final long ZERO = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
 
-	private final Map<String, LogEntry> _entries = new HashMap<String, LogEntry>();
+	private final Map<String, LogEntry> _entries = new HashMap<>();
 	private final ReentrantLock _lock = new ReentrantLock();
 
 	private final int _tickLength;

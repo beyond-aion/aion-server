@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.templates.item.AssemblyItem;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -26,7 +26,7 @@ public class AssemblyItemsData {
 	protected List<AssemblyItem> item;
 
 	@XmlTransient
-	private List<AssemblyItem> items = new FastTable<AssemblyItem>();
+	private List<AssemblyItem> items = new FastTable<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (AssemblyItem template : item) {

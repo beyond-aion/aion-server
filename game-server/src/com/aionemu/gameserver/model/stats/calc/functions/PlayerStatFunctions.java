@@ -20,7 +20,7 @@ import javolution.util.FastTable;
  */
 public class PlayerStatFunctions {
 
-	private static final List<IStatFunction> FUNCTIONS = new FastTable<IStatFunction>();
+	private static final List<IStatFunction> FUNCTIONS = new FastTable<>();
 
 	static {
 		FUNCTIONS.add(new PhysicalAttackFunction());
@@ -171,7 +171,7 @@ class DuplicateStatFunction extends StatFunction {
 		if (mainWeapon != null) {
 			StatFunction func1 = null;
 			StatFunction func2 = null;
-			List<StatFunction> functions = new FastTable<StatFunction>();
+			List<StatFunction> functions = new FastTable<>();
 			List<StatFunction> functions1 = mainWeapon.getItemTemplate().getModifiers();
 
 			if (functions1 != null) {
@@ -217,7 +217,7 @@ class DuplicateStatFunction extends StatFunction {
 	}
 
 	private List<StatFunction> getFunctions(List<StatFunction> list, Stat2 stat, Item item) {
-		List<StatFunction> functions = new FastTable<StatFunction>();
+		List<StatFunction> functions = new FastTable<>();
 		for (StatFunction func : list) {
 			if (func.getName() == getName()) {
 				StatFunctionProxy func2 = new StatFunctionProxy(item, func);

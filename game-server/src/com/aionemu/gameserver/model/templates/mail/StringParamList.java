@@ -22,7 +22,7 @@ public class StringParamList {
 
 	public List<StringParamList.Param> getParam() {
 		if (param == null)
-			param = new FastTable<StringParamList.Param>();
+			param = new FastTable<>();
 		return this.param;
 	}
 

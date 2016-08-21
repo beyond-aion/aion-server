@@ -5,8 +5,6 @@ import static ch.lambdaj.Lambda.maxFrom;
 import java.util.Collection;
 import java.util.HashSet;
 
-import ai.ActionItemNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -20,6 +18,8 @@ import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Ritsu
@@ -63,7 +63,7 @@ public class NightmareCrateAI2 extends ActionItemNpcAI2 {
 			return;
 		}
 
-		Collection<Player> players = new HashSet<Player>();
+		Collection<Player> players = new HashSet<>();
 		if (player.isInGroup2()) {
 			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
 				if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {

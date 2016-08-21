@@ -2,13 +2,13 @@ package ai.instance.abyss;
 
 import java.util.concurrent.Future;
 
-import ai.NoActionAI2;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import ai.NoActionAI2;
 
 /**
  * Created on June 24th, 2016

@@ -53,23 +53,20 @@ public class _1002RequestoftheElim extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203076: { // Ampeis
+				case 203076: // Ampeis
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 730007: { // Forest Protector Noah
+				case 730007: // Forest Protector Noah
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							} else if (var == 5) {
@@ -80,38 +77,30 @@ public class _1002RequestoftheElim extends QuestHandler {
 								return sendQuestDialog(env, 2120);
 							}
 							return false;
-						}
-						case SELECT_ACTION_1353: {
+						case SELECT_ACTION_1353:
 							if (var == 1) {
 								playQuestMovie(env, 20);
 								return sendQuestDialog(env, 1353);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2, 182200002, 1, 0, 0); // 2
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 5, 6, 0, 0, 182200002, 1); // 6
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 6) {
 								return checkQuestItems(env, 6, 12, false, 2120, 2205); // 12
 							} else if (var == 12) {
 								return sendQuestDialog(env, 2120);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 12, 13); // 13
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
 					break;
-				}
-				case 730010: { // Sleeping Elder
+				case 730010: // Sleeping Elder
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (player.getInventory().getItemCountByItemId(182200002) == 1) {
 							if (var == 2) {
@@ -124,32 +113,27 @@ public class _1002RequestoftheElim extends QuestHandler {
 						}
 					}
 					break;
-				}
-				case 730008: { // Daminu
+				case 730008: // Daminu
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 13) {
 								return sendQuestDialog(env, 2375);
 							} else if (var == 14) {
 								return sendQuestDialog(env, 2461);
 							}
 							return false;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);
 							TeleportService2.teleportTo(player, 310010000, newInstance.getInstanceId(), 52, 174, 229);
 							changeQuestStep(env, 13, 20, false); // 20
 							return closeDialogWindow(env);
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							return defaultCloseDialog(env, 14, 14, true, false); // reward
-						}
 					}
 					break;
-				}
-				case 205000: { // Belpartan
+				case 205000: // Belpartan
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 20) {
 								player.setState(CreatureState.FLIGHT_TELEPORT);
 								player.unsetState(CreatureState.ACTIVE);
@@ -165,9 +149,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 								}, 43000);
 								return true;
 							}
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067) { // Kalio

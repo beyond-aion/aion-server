@@ -32,7 +32,7 @@ public class AdvanceCorridorShield extends NpcAI2 {
 	
 	private void broadcastAttack() {
 		if (canShout.compareAndSet(true, false)) {
-			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead() 
+			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()
 				&& getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getNpcId()) {
 					case 297306:

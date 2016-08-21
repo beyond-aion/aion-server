@@ -31,7 +31,7 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 		Player firstObject = player.isInTeam() ? player.getCurrentTeam().getLeaderObject() : player; // always the team leader
 		sendPacket(new SM_INSTANCE_INFO(updateType, firstObject));
 		if (updateType == 1 && player.isInTeam()) {
-			ListSplitter<Player> splitter = new ListSplitter<Player>(player.getCurrentTeam().filterMembers(new ExcludePlayerFilter(firstObject)), 3, false);
+			ListSplitter<Player> splitter = new ListSplitter<>(player.getCurrentTeam().filterMembers(new ExcludePlayerFilter(firstObject)), 3, false);
 			while (splitter.hasMore())
 				sendPacket(new SM_INSTANCE_INFO((byte) 2, splitter.getNext())); // send info for max 3 members at once
 		}

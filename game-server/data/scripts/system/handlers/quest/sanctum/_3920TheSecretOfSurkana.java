@@ -49,16 +49,14 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 730212: { // Balaur Material Converter
+				case 730212: // Balaur Material Converter
 					switch (dialog) {
-						case USE_OBJECT: {
+						case USE_OBJECT:
 							if ((var == 0) && player.getInventory().getItemCountByItemId(182206073) > 0) {
 								return useQuestObject(env, 0, 1, true, 0, 182206074, 1, 182206073, 1, 0, false);
 							}
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798357) { // Shoshinerk

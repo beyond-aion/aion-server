@@ -13,7 +13,7 @@ public class LimitedItem {
 	private int buyLimit;
 	private int defaultSellLimit;
 	private String salesTime;
-	private TIntObjectHashMap<Integer> buyCounts = new TIntObjectHashMap<Integer>();
+	private TIntObjectHashMap<Integer> buyCounts = new TIntObjectHashMap<>();
 
 	public LimitedItem(int itemId, int sellLimit, int buyLimit, String salesTime) {
 		this.itemId = itemId;

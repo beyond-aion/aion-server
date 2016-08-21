@@ -31,7 +31,7 @@ public class MacroList {
 	 * Creates an empty macro list
 	 */
 	public MacroList() {
-		this.macrosses = new HashMap<Integer, String>(12);
+		this.macrosses = new HashMap<>(12);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class MacroList {
 	 * Returns an unmodifiable map of macro id to macro contents. NOTE: Retail sends only 7 macros per packet, that's why we have to split macros
 	 */
 	public Map<Integer, String> getMarcosPart(boolean secondPart) {
-		Map<Integer, String> macrosPart = new LinkedHashMap<Integer, String>();
+		Map<Integer, String> macrosPart = new LinkedHashMap<>();
 		int currentIndex = secondPart ? 7 : 0;
 		int endIndex = secondPart ? 12 : 6;
 

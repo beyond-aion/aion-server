@@ -45,103 +45,81 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 204059: { // Freyr
+				case 204059: // Freyr
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
 					}
 					break;
-				}
-				case 204058: { // Sif
+				case 204058: // Sif
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
-						}
 					}
 					break;
-				}
-				case 204057: { // Sigyn
+				case 204057: // Sigyn
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
-						}
 					}
 					break;
-				}
-				case 204056: { // Traufnir
+				case 204056: // Traufnir
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 3, 4, 182207113, 1, 182207112, 1); // 4
-						}
 					}
 					break;
-				}
-				case 801222: { // Hadubrant
+				case 801222: // Hadubrant
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						}
-						case SETPRO5: {
+						case SETPRO5:
 							return defaultCloseDialog(env, 4, 5);
-						}
 					}
 					break;
-				}
-				case 801223: { // Brynhilde
+				case 801223: // Brynhilde
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						}
-						case SETPRO6: {
+						case SETPRO6:
 							return defaultCloseDialog(env, 5, 6);
-						}
 					}
 					break;
-				}
-				case 204075: { // Balder
+				case 204075: // Balder
 					switch (env.getDialog()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 6 && checkItemExistence(env, 182207113, 1, false)) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return defaultCloseDialog(env, var, var);
-						}
-						case SET_SUCCEED: {
+						case SET_SUCCEED:
 							return checkItemExistence(env, 6, 6, true, 186000084, 1, true, 0, 3143, 0, 0); // reward
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir

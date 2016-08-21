@@ -45,29 +45,25 @@ public class _14016AGateAgape extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 203098: { // Spatalos
+				case 203098: // Spatalos
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							TeleportService2.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);
 							changeQuestStep(env, 0, 1, false); // 1
 							return closeDialogWindow(env);
-						}
 					}
 					break;
-				}
-				case 700142: { // Abyss Gate Guardian Stone
+				case 700142: // Abyss Gate Guardian Stone
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (QuestService.collectItemCheck(env, true)) {
 							return playQuestMovie(env, 153);
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203098) { // Spatalos

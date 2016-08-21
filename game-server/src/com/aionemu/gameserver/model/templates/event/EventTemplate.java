@@ -103,13 +103,13 @@ public class EventTemplate {
 
 	public List<Integer> getStartableQuests() {
 		if (quests == null)
-			return new FastTable<Integer>();
+			return new FastTable<>();
 		return quests.getStartableQuests();
 	}
 
 	public List<Integer> getMaintainableQuests() {
 		if (quests == null)
-			return new FastTable<Integer>();
+			return new FastTable<>();
 		return quests.getMaintainQuests();
 	}
 
@@ -139,7 +139,7 @@ public class EventTemplate {
 
 		if (spawns != null && spawns.size() > 0) {
 			if (spawnedObjects == null)
-				spawnedObjects = new FastTable<VisibleObject>();
+				spawnedObjects = new FastTable<>();
 			for (SpawnMap map : spawns.getTemplates()) {
 				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
@@ -224,7 +224,7 @@ public class EventTemplate {
 
 	public void addSpawnedObject(VisibleObject object) {
 		if (spawnedObjects == null)
-			spawnedObjects = new FastTable<VisibleObject>();
+			spawnedObjects = new FastTable<>();
 		spawnedObjects.add(object);
 	}
 

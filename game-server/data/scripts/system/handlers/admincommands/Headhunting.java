@@ -5,9 +5,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +25,9 @@ import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * Created on 01.06.2016

@@ -38,19 +38,18 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 
 		if (qs == null || qs == null || qs.isStartable()) {
 			switch (targetId) {
-				case 205864: {
+				case 205864:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						default:
 							return sendQuestStartDialog(env);
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 800327: {
+				case 800327:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -59,8 +58,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 205864: {
+				case 205864:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
@@ -73,13 +71,11 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 						}
 
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
-				case 205864: {
+				case 205864:
 					return sendQuestEndDialog(env);
-				}
 			}
 		}
 		return false;

@@ -39,7 +39,7 @@ public class FortressLocation extends SiegeLocation {
 		this.siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
 		this.siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
 		this.siegeMercenaryZones = template.getSiegeMercenaryZones() != null ? template.getSiegeMercenaryZones() : null;
-		this.mercenaries = new HashMap<Integer, List<VisibleObject>>();
+		this.mercenaries = new HashMap<>();
 	}
 
 	public List<SiegeReward> getReward() {

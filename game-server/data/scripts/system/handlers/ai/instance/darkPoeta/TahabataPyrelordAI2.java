@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-import ai.AggressiveNpcAI2;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
+import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 @AIName("tahabatapyrelord")
 public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
 
-	protected List<Integer> percents = new FastTable<Integer>();
+	protected List<Integer> percents = new FastTable<>();
 	private boolean lock1 = false;
 	private boolean lock2 = false;
 	private Future<?> useSkillTask;

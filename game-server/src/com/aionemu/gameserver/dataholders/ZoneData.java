@@ -45,10 +45,10 @@ public class ZoneData {
 	public List<ZoneTemplate> zoneList;
 
 	@XmlTransient
-	private TIntObjectHashMap<List<ZoneInfo>> zoneNameMap = new TIntObjectHashMap<List<ZoneInfo>>();
+	private TIntObjectHashMap<List<ZoneInfo>> zoneNameMap = new TIntObjectHashMap<>();
 
 	@XmlTransient
-	private HashMap<ZoneTemplate, Integer> weatherZoneIds = new HashMap<ZoneTemplate, Integer>();
+	private HashMap<ZoneTemplate, Integer> weatherZoneIds = new HashMap<>();
 
 	@XmlTransient
 	private int count;
@@ -79,7 +79,7 @@ public class ZoneData {
 			if (area != null) {
 				List<ZoneInfo> zones = zoneNameMap.get(zone.getMapid());
 				if (zones == null) {
-					zones = new FastTable<ZoneInfo>();
+					zones = new FastTable<>();
 					zoneNameMap.put(zone.getMapid(), zones);
 				}
 				if (zone.getZoneType() == ZoneClassName.WEATHER) {

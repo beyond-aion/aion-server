@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
@@ -32,6 +30,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastTable;
 
 /**
  * @author xavier modified by Wakizashi
@@ -206,7 +206,7 @@ public class ItemEquipmentListener {
 	 * @return
 	 */
 	private static List<StatFunction> wrapModifiers(Item item, List<StatFunction> modifiers) {
-		List<StatFunction> allModifiers = new FastTable<StatFunction>();
+		List<StatFunction> allModifiers = new FastTable<>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
 			// why they are removed look at DuplicateStatFunction

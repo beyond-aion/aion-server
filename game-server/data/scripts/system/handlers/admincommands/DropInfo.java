@@ -65,7 +65,7 @@ public class DropInfo extends AdminCommand {
 		int npcLevel = currentNpc.getLevel();
 		String dropType = currentNpc.getGroupDrop().name().toLowerCase();
 		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
-		FastTable<Integer> noReductionMaps = new FastTable<Integer>();
+		FastTable<Integer> noReductionMaps = new FastTable<>();
 		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
 			noReductionMaps.add(Integer.parseInt(zone));
 		}
@@ -278,7 +278,7 @@ public class DropInfo extends AdminCommand {
 	}
 
 	private List<Integer> getAllowedItems(GlobalRule rule, Npc npc) {
-		List<Integer> alloweditems = new FastTable<Integer>();
+		List<Integer> alloweditems = new FastTable<>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
 			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff()) {

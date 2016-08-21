@@ -40,35 +40,29 @@ public class _30361StrangeFragment extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 278033: { // Erik
+				case 278033: // Erik
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
-						}
 					}
 					break;
-				}
-				case 279029: { // Lugbug
+				case 279029: // Lugbug
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO2: {
+						case SETPRO2:
 							changeQuestStep(env, 1, 2, false);
 							return defaultCloseDialog(env, 2, 2, true, false); // reward
-						}
 					}
 					break;
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 260265) { // Gwal

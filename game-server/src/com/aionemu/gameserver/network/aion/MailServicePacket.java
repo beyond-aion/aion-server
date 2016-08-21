@@ -28,7 +28,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 		writeD(player.getObjectId());
 		writeC(0);
 		writeH(-lettersToDisplay);
-		for (int i = 0; i < lettersToDisplay; i++) { // mail #101+ will be hidden on client side until you delete some 
+		for (int i = 0; i < lettersToDisplay; i++) { // mail #101+ will be hidden on client side until you delete some
 			Letter letter = letters.get(i);
 			writeD(letter.getObjectId());
 			writeS(letter.getSenderName());

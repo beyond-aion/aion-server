@@ -48,9 +48,9 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
-				case 203792: { // Utsida
+				case 203792: // Utsida
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							} else if (var == 1) {
@@ -59,21 +59,15 @@ public class _1636AFluteForTheFixing extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						}
-						case SETPRO1: {
+						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
+						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 1, 2, false, 10000, 10001); // 2
-						}
-						case SETPRO4: {
+						case SETPRO4:
 							return defaultCloseDialog(env, 2, 3, 182201785, 1, 0, 0); // 3
-						}
-						case FINISH_DIALOG: {
+						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
-						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204535) { // Maximus

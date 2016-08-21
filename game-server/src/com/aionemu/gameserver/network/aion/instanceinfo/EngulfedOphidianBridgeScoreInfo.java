@@ -67,8 +67,7 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 			case 6:
 				writeD(buf, 100);
 				EngulfedOphidianBridgePlayerReward[] engulfedOBElyos = engulfedOBReward.getPlayersByRace(Race.ELYOS);
-				for (int i = 0; i < engulfedOBElyos.length; i++) {
-					EngulfedOphidianBridgePlayerReward reward = engulfedOBElyos[i];
+				for (EngulfedOphidianBridgePlayerReward reward : engulfedOBElyos) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -80,8 +79,7 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 					}
 				}
 				EngulfedOphidianBridgePlayerReward[] engulfedOBAsmodians = engulfedOBReward.getPlayersByRace(Race.ASMODIANS);
-				for (int i = 0; i < engulfedOBAsmodians.length; i++) {
-					EngulfedOphidianBridgePlayerReward reward = engulfedOBAsmodians[i];
+				for (EngulfedOphidianBridgePlayerReward reward : engulfedOBAsmodians) {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);

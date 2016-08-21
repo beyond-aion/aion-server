@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +10,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Object of this class is containing <tt>WorldMapTemplate</tt> objects for all world maps. World maps are defined in data/static_data/world_maps.xml
@@ -26,7 +26,7 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 	@XmlElement(name = "map")
 	protected List<WorldMapTemplate> worldMaps;
 
-	protected TIntObjectHashMap<WorldMapTemplate> worldIdMap = new TIntObjectHashMap<WorldMapTemplate>();
+	protected TIntObjectHashMap<WorldMapTemplate> worldIdMap = new TIntObjectHashMap<>();
 
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WorldMapTemplate map : worldMaps) {

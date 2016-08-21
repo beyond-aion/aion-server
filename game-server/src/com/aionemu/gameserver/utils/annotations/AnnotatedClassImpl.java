@@ -45,7 +45,7 @@ class AnnotatedClassImpl implements AnnotatedClass {
 	 * @return the calculated map of classes to annotations
 	 */
 	private Map<Class<?>, Annotation> getAllAnnotationMapCalculated() {
-		HashMap<Class<?>, Annotation> result = new HashMap<Class<?>, Annotation>();
+		HashMap<Class<?>, Annotation> result = new HashMap<>();
 
 		final Class<?> superClass = getTheClass().getSuperclass();
 		// Get the superclass's annotations
@@ -119,9 +119,9 @@ class AnnotatedClassImpl implements AnnotatedClass {
 
 	private Map<Method, AnnotatedMethod> getMethodMapCalculated() {
 		// Preserve order of addition to map
-		HashMap<Method, AnnotatedMethod> result = new LinkedHashMap<Method, AnnotatedMethod>();
+		HashMap<Method, AnnotatedMethod> result = new LinkedHashMap<>();
 
-		List<Method> methods = new FastTable<Method>();
+		List<Method> methods = new FastTable<>();
 		getAllMethods(getTheClass(), methods);
 		for (Method method : methods) {
 			if (method.getAnnotations().length == 0)

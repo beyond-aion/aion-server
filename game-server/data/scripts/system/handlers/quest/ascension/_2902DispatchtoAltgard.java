@@ -36,7 +36,7 @@ public class _2902DispatchtoAltgard extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204191: {
+				case 204191:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -50,7 +50,6 @@ public class _2902DispatchtoAltgard extends QuestHandler {
 							}
 					}
 					return false;
-				}
 				case 203559:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:

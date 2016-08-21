@@ -33,9 +33,8 @@ public class _28910AStabbingInSauro extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 801946) { // Sibeldum.
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env);
@@ -45,13 +44,11 @@ public class _28910AStabbingInSauro extends QuestHandler {
 			switch (targetId) {
 				case 801947: { // Giriltia.
 					switch (dialog) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
-						}
-						case SELECT_QUEST_REWARD: {
+						case SELECT_QUEST_REWARD:
 							changeQuestStep(env, 0, 0, true);
 							return sendQuestEndDialog(env);
-						}
 					}
 				}
 			}

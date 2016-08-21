@@ -51,7 +51,7 @@ public class _24024ANepraProtector extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 204369: {
+				case 204369:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 0)
@@ -66,8 +66,7 @@ public class _24024ANepraProtector extends QuestHandler {
 							}
 					}
 					return false;
-				}
-				case 204361: {
+				case 204361:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
@@ -79,14 +78,12 @@ public class _24024ANepraProtector extends QuestHandler {
 							}
 					}
 					return false;
-				}
-				case 278004: {
+				case 278004:
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
 					}
-				}
 
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

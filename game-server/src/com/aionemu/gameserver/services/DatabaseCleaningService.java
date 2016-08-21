@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastTable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +12,8 @@ import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastTable;
 
 /**
  * Offers the functionality to delete all data about inactive players
@@ -129,7 +129,7 @@ public class DatabaseCleaningService {
 
 	private class Worker implements Runnable {
 
-		private List<Integer> ids = new FastTable<Integer>();
+		private List<Integer> ids = new FastTable<>();
 		private int deletedChars = 0;
 		private boolean _READY = false;
 

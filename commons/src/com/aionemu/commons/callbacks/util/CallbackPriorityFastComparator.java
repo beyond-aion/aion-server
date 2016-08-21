@@ -1,8 +1,8 @@
 package com.aionemu.commons.callbacks.util;
 
-import javolution.util.function.Equality;
-
 import com.aionemu.commons.callbacks.Callback;
+
+import javolution.util.function.Equality;
 
 public class CallbackPriorityFastComparator implements Equality<Callback<?>> {
 

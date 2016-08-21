@@ -38,7 +38,7 @@ public class InstanceBonusAttr {
 	 */
 	public List<InstancePenaltyAttr> getPenaltyAttr() {
 		if (penaltyAttr == null) {
-			penaltyAttr = new FastTable<InstancePenaltyAttr>();
+			penaltyAttr = new FastTable<>();
 		}
 		return this.penaltyAttr;
 	}

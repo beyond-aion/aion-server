@@ -19,9 +19,9 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 @AIName("watchman_hokuruki")
 public class WatchmanHokuruki extends IDSweep_Bosses {
 
-	protected List<Integer> percents = new ArrayList<Integer>();
-	private List<Npc> spawnedAdds = new ArrayList<Npc>();
-	private List<Integer> addStages = new ArrayList<Integer>();
+	protected List<Integer> percents = new ArrayList<>();
+	private List<Npc> spawnedAdds = new ArrayList<>();
+	private List<Integer> addStages = new ArrayList<>();
 	
 	
 	@Override
@@ -45,17 +45,17 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 						break;
 					case 75:
 						int rnd = Rnd.get(0, (addStages.size()-1));
-						spawnAdds(addStages.get(rnd)); 
+						spawnAdds(addStages.get(rnd));
 						addStages.remove(rnd);
 						break;
 					case 50:
 						int rnd2 = Rnd.get(0, (addStages.size()-1));
-						spawnAdds(addStages.get(rnd2)); 
+						spawnAdds(addStages.get(rnd2));
 						addStages.remove(rnd2);
 						break;
 					case 25:
 						int rnd3 = Rnd.get(0, (addStages.size()-1));
-						spawnAdds(addStages.get(rnd3)); 
+						spawnAdds(addStages.get(rnd3));
 						addStages.remove(rnd3);
 						break;
 					case 15:

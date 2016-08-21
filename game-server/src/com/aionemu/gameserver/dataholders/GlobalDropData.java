@@ -49,13 +49,13 @@ public class GlobalDropData {
 	}
 
 	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {
-		List<GlobalDropNpc> allowedNpcs = new FastTable<GlobalDropNpc>();
+		List<GlobalDropNpc> allowedNpcs = new FastTable<>();
 		if (rule.getGlobalRuleNpcs() != null) {
 			allowedNpcs = rule.getGlobalRuleNpcs().getGlobalDropNpcs();
 		}
 		if (rule.getGlobalRuleNpcNames() != null) {
 			for (GlobalDropNpcName gdNpcName : rule.getGlobalRuleNpcNames().getGlobalDropNpcNames()) {
-				List<NpcTemplate> matchesNpcs = new FastTable<NpcTemplate>();
+				List<NpcTemplate> matchesNpcs = new FastTable<>();
 				if (gdNpcName.getFunction().equals(StringFunction.CONTAINS))
 					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.containsString(gdNpcName.getValue().toLowerCase())));
 				else if (gdNpcName.getFunction().equals(StringFunction.END_WITH))

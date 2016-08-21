@@ -31,7 +31,7 @@ public class ActionModifiers {
 	 */
 	public List<ActionModifier> getActionModifiers() {
 		if (actionModifiers == null) {
-			actionModifiers = new FastTable<ActionModifier>();
+			actionModifiers = new FastTable<>();
 		}
 		return this.actionModifiers;
 	}

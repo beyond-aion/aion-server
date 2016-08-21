@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -32,6 +29,9 @@ import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author ATracer modified by Wakizashi, Sippolo, Cheatkiller
@@ -775,7 +775,7 @@ public class EffectController {
 	 * @return copy of anbornals list
 	 */
 	public List<Effect> getAbnormalEffects() {
-		List<Effect> effects = new FastTable<Effect>();
+		List<Effect> effects = new FastTable<>();
 		Iterator<Effect> iterator = iterator();
 		while (iterator.hasNext()) {
 			Effect effect = iterator.next();

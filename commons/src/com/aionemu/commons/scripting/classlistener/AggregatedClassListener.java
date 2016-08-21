@@ -2,9 +2,9 @@ package com.aionemu.commons.scripting.classlistener;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.google.common.collect.Lists;
+
+import javolution.util.FastTable;
 
 /**
  * ClassListener that aggregates a collection of ClassListeners.<br>

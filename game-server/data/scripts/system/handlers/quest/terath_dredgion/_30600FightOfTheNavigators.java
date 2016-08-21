@@ -49,7 +49,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);// the station is important
 			switch (targetId) {
-				case 800325: {
+				case 800325:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
@@ -58,8 +58,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 205842: {
+				case 205842:
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
@@ -72,13 +71,11 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 						}
 
 					}
-				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
-				case 205842: {
+				case 205842:
 					return sendQuestEndDialog(env);
-				}
 			}
 		}
 		return false;

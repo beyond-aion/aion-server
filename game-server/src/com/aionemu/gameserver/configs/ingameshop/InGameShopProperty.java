@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastTable;
-
 import org.apache.commons.io.FileUtils;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.templates.ingameshop.IGCategory;
+
+import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -27,7 +27,7 @@ public class InGameShopProperty {
 
 	public List<IGCategory> getCategories() {
 		if (categories == null) {
-			categories = new FastTable<IGCategory>();
+			categories = new FastTable<>();
 		}
 		return this.categories;
 	}

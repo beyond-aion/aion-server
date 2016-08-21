@@ -27,7 +27,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	protected final Lock teamLock = new ReentrantLock();
 	private TM leader;
 
-	private final MemberTransformFunction<TM, M> TRANSFORM_FUNCTION = new MemberTransformFunction<TM, M>();
+	private final MemberTransformFunction<TM, M> TRANSFORM_FUNCTION = new MemberTransformFunction<>();
 
 	public GeneralTeam(Integer objId) {
 		super(objId);

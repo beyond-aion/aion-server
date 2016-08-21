@@ -2,8 +2,6 @@ package consolecommands;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -13,6 +11,8 @@ import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
+
+import javolution.util.FastTable;
 
 /**
  * @author ginho1
@@ -49,7 +49,7 @@ public class Attrbonus extends ConsoleCommand implements StatOwner {
 		Creature effected = admin;
 		CreatureGameStats<? extends Creature> cgs = effected.getGameStats();
 
-		List<IStatFunction> modifiers = new FastTable<IStatFunction>();
+		List<IStatFunction> modifiers = new FastTable<>();
 
 		modifiers.add(new StatSetFunction(stat, value));
 

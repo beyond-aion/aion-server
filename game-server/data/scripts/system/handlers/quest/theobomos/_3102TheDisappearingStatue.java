@@ -44,9 +44,8 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798206) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
 					default:
 						return sendQuestStartDialog(env);
 				}
@@ -58,7 +57,7 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				case 798167: {
+				case 798167:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
@@ -71,8 +70,7 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 						}
 					}
 					return false;
-				}
-				case 798177: {
+				case 798177:
 					switch (env.getDialog()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
@@ -85,7 +83,6 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 							return true;
 						}
 					}
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798225) {

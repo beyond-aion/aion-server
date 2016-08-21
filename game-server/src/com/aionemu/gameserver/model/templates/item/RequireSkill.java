@@ -18,7 +18,7 @@ public class RequireSkill {
 
 	public List<Integer> getSkillIds() {
 		if (skillIds == null) {
-			skillIds = new FastTable<Integer>();
+			skillIds = new FastTable<>();
 		}
 		return this.skillIds;
 	}

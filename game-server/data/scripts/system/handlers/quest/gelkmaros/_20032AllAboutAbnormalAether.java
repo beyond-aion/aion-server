@@ -76,12 +76,11 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 				}
 			} else if (targetId == 799325) { // Taloc's Guardian
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
 						}
 						break;
-					}
 					case SETPRO3:
 						if (giveQuestItem(env, 182215592, 1) && giveQuestItem(env, 182215593, 1)) {
 							changeQuestStep(env, 2, 3, false); // 3
@@ -135,12 +134,11 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 
 			switch (targetId) {
-				case 215488: { // Celestius
+				case 215488: // Celestius
 					if (var == 6) {
 						playQuestMovie(env, 437);
 						return defaultOnKillEvent(env, 215488, var, var + 1); // 7
 					}
-				}
 			}
 		}
 		return false;
