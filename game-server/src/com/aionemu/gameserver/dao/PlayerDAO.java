@@ -85,6 +85,11 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract List<Integer> getPlayerOidsOnAccount(int accountId);
 
 	/**
+	 * Returns a list of objectIds of players that are on the account with given accountId and exp <= maxExp
+	 */
+	public abstract List<Integer> getPlayerOidsOnAccount(int accountId, long maxExp);
+
+	/**
 	 * Stores the last online time
 	 *
 	 * @param objectId

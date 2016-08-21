@@ -351,6 +351,28 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return success ? result : null;
 	}
 
+	@Override
+	public List<Integer> getPlayerOidsOnAccount(final int accountId, final long exp) {
+		final List<Integer> result = new FastTable<>();
+		boolean success = DB.select("SELECT id FROM players WHERE account_id = ? AND exp <= ?", new ParamReadStH() {
+			
+			@Override
+			public void handleRead(ResultSet resultSet) throws SQLException {
+				while (resultSet.next()) {
+					result.add(resultSet.getInt("id"));
+				}
+			}
+			
+			@Override
+			public void setParams(PreparedStatement preparedStatement) throws SQLException {
+				preparedStatement.setInt(1, accountId);
+				preparedStatement.setLong(2, exp);
+			}
+		});
+		
+		return success ? result : null;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */

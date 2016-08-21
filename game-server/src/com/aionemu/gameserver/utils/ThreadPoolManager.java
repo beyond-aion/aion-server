@@ -122,16 +122,6 @@ public final class ThreadPoolManager {
 		return longRunningPool.submit(r);
 	}
 
-	/**
-	 * Executes a loginServer packet task
-	 * 
-	 * @param pkt
-	 *          runnable packet for Login Server
-	 */
-	public void executeLsPacket(Runnable pkt) {
-		execute(pkt);
-	}
-
 	public void purge() {
 		scheduledPool.purge();
 		instantPool.purge();

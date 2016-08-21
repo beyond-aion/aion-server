@@ -414,14 +414,14 @@ public class PlayerService {
 	 *
 	 * @param accountId
 	 *          id of account to delete player on
+	 * @param maxExp
+	 *          maximum allowed character experience points (level) for deletion
 	 * @return number of deleted chars
 	 */
-	public static int deleteAccountsCharsFromDB(int accountId) {
-		List<Integer> charIds = DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId);
-		for (int playerId : charIds) {
+	public static int deleteAccountsCharsFromDB(int accountId, long maxExp) {
+		List<Integer> charIds = DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId, maxExp);
+		for (int playerId : charIds)
 			deletePlayerFromDB(playerId);
-		}
-
 		return charIds.size();
 	}
 

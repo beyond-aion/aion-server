@@ -33,6 +33,7 @@ import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
+import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
@@ -210,7 +211,6 @@ public class GameServer {
 
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
-		DatabaseCleaningService.getInstance();
 
 		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
@@ -326,7 +326,7 @@ public class GameServer {
 		NioServer nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
-		
+
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
 			ChatServer.getInstance().connect(nioServer);
@@ -371,6 +371,10 @@ public class GameServer {
 		// Initialize thread pools
 		ConsoleUtil.printSection("Threads");
 		ThreadPoolManager.getInstance();
+
+		if (CleaningConfig.CLEANING_ENABLE)
+			DatabaseCleaningService.getInstance().runCleaning();
+
 		// Initialize cron service
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 	}
@@ -379,15 +383,8 @@ public class GameServer {
 		Lambda.enableJitting(true);
 		CountDownLatch progressLatch = new CountDownLatch(engines.length);
 
-		for (int i = 0; i < engines.length; i++) {
-			final int index = i;
-			ThreadPoolManager.getInstance().execute(new Runnable() {
-
-				@Override
-				public void run() {
-					engines[index].load(progressLatch);
-				}
-			});
+		for (GameEngine engine : engines) {
+			ThreadPoolManager.getInstance().execute(() -> engine.load(progressLatch));
 		}
 
 		try {

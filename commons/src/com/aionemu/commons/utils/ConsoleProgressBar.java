@@ -7,8 +7,8 @@ class ConsoleProgressBar {
 
 	private static final int MAX_POSITION = ConsoleUtil.DEFAULT_CONSOLE_WIDTH - 12;
 
-	private int position;
-	private int currentProgress;
+	private volatile int position;
+	private volatile int currentProgress;
 	private double maxProgress; // double for division purposes
 
 	/**
