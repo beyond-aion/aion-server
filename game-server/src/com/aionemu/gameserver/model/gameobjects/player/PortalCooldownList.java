@@ -102,7 +102,7 @@ public class PortalCooldownList {
 	/**
 	 * @param worldId
 	 */
-	public void removePortalCoolDown(int worldId) {
+	public void removePortalCooldown(int worldId) {
 		if (portalCooldowns != null)
 			portalCooldowns.remove(worldId);
 	}

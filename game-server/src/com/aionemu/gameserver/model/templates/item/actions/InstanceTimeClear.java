@@ -89,7 +89,7 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 					portalCD.decreaseEnterCount();
 					if (portalCD.getEnterCount() < 1)
-						player.getPortalCooldownList().removePortalCoolDown(mapid);
+						player.getPortalCooldownList().removePortalCooldown(mapid);
 
 					if (player.isInTeam())
 						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 2, player, mapid));
