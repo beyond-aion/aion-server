@@ -124,7 +124,7 @@
 	<!-- Tiamat Stronghold -->
 	<instance_exit instance_id="300510000" exit_world="210070000" race="ELYOS" x="97.80567" y="1469.4922" z="491.5476" h="44"/>
 	<instance_exit instance_id="300510000" exit_world="220080000" race="ASMODIANS" x="2840.8413" y="1664.5078" z="302.76703" h="107"/>
-	 <!-- Dragon Lord's Refuge -->
+	<!-- Dragon Lord's Refuge -->
 	<instance_exit instance_id="300520000" exit_world="210070000" race="ELYOS" x="106.4101" y="1466.2885" z="491.8714" h="78"/>
 	<instance_exit instance_id="300520000" exit_world="220080000" race="ASMODIANS" x="2857.5056" y="1674.4569" z="306.40497" h="13"/>
 	<!-- Arena of Glory -->
@@ -172,9 +172,12 @@
 	<!-- Rukibuki Circus Troupe -->
 	<instance_exit instance_id="301160000" exit_world="110010000" race="ELYOS" x="1450.5635" y="1502.4572" z="573.0719"/>
 	<instance_exit instance_id="301160000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
-	<!-- 4.6 Krotan Barraks -->
+	<!-- 4.6 Krotan Barracks -->
 	<instance_exit instance_id="301260000" exit_world="400010000" race="PC_ALL" x="2010.7422" y="1254.336" z="2945.4092"/>
-	<!-- 4.6 Legion Krotan Barraks -->
+	<!-- Linkgate Foundry -->
+	<instance_exit instance_id="301270000" exit_world="600100000" race="ELYOS" x="334.91916" y="409.39972" z="318.5" h="89"/>
+	<instance_exit instance_id="301270000" exit_world="600100000" race="ASMODIANS" x="1763.6152" y="1608.1003" z="289.643" h="23"/>
+	<!-- 4.6 Legion Krotan Barracks -->
 	<instance_exit instance_id="301300000" exit_world="400010000" race="PC_ALL" x="2010.7422" y="1254.336" z="2945.4092"/>
 	<!-- Illuminary Obelisk -->
 	<instance_exit instance_id="301230000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102"/>

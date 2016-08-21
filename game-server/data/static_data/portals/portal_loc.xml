@@ -473,8 +473,8 @@
 	<!-- Levinshor -->
 	<portal_loc world_id="600100000" loc_id="6001000" x="96.37983" y="99.38854" z="348.3574" h="6"/> <!-- Lumewillow Glade -->
 	<portal_loc world_id="600100000" loc_id="6001001" x="1850.624" y="1782.898" z="305.539" h="60"/> <!-- Pinnacle Cataract -->
-	<portal_loc world_id="600100000" loc_id="6001002" x="334.06253" y="412.31686" z="318.5" h="83"/> <!-- Linkgate Foundry Lab exit -->
-	<portal_loc world_id="600100000" loc_id="6001003" x="1761.9077" y="1604.264" z="289.75" h="23"/> <!-- Linkgate Foundry Lab exit -->
+	<portal_loc world_id="600100000" loc_id="6001002" x="334.91916" y="409.39972" z="318.5" h="89"/> <!-- Linkgate Foundry Lab exit -->
+	<portal_loc world_id="600100000" loc_id="6001003" x="1763.6152" y="1608.1003" z="289.643" h="23"/> <!-- Linkgate Foundry Lab exit -->
 	<portal_loc world_id="600100000" loc_id="6001004" x="352.5449" y="153.11859" z="352.5" h="113"/> <!-- Balaurea Frontier Portal (Elyos) -->
 	<portal_loc world_id="600100000" loc_id="6001005" x="1578.7433" y="1729.1093" z="284.375" h="64"/> <!-- Balaurea Frontier Portal (Asmo) -->
 	<portal_loc world_id="600100000" loc_id="6001006" x="459.49335" y="1544.7773" z="241.50125" h="101"/> <!-- Balaurea Frontier Portal (Elyos) -->

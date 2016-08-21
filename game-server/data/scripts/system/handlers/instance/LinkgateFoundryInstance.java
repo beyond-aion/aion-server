@@ -48,6 +48,8 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 			case 804578:
 				sendMsg(1402453); // 20 min
 				startTimeCheck();
+				npc.getController().die(); // not a static door in client data o.O
+				break;
 			case 234193:
 				npc.getController().die();
 				break;
