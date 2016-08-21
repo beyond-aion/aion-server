@@ -77,6 +77,7 @@ public class _30056DirvisiasSorrow extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						}
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							defaultCloseDialog(env, 0, 0, true, false);

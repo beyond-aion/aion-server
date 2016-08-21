@@ -42,6 +42,7 @@ public class _11118MakingSetzkikiLaugh extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 1)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 					case CHECK_USER_HAS_QUEST_ITEM:
@@ -52,6 +53,7 @@ public class _11118MakingSetzkikiLaugh extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case SET_SUCCEED:
 						return defaultCloseDialog(env, 2, 3, true, false);
 				}

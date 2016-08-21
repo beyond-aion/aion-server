@@ -47,6 +47,7 @@ public class _4015TheMissingLaborers extends QuestHandler {
 					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
 						return useQuestObject(env, 0, 1, false, false); // 1
 					}
+					return false;
 				}
 				case 205130: {
 					if (qs.getQuestVarById(0) == 1) {

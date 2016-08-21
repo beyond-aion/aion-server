@@ -62,6 +62,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 						case CHECK_USER_HAS_QUEST_ITEM:
@@ -76,6 +77,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SELECT_ACTION_1354: {
 							if (var == 1 && player.getInventory().tryDecreaseKinah(3400000)) {
 								return defaultCloseDialog(env, 1, 2, 122001274, 1, 0, 0); // 2

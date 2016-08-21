@@ -271,12 +271,10 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 	/** Remove all quest items and send and finish the quest */
 	public boolean sendQuestEndDialog(QuestEnv env, int[] questItemsToRemove) {
 		Player player = env.getPlayer();
-		for (int item : questItemsToRemove) {
-			long count = player.getInventory().getItemCountByItemId(item);
-			if (count > 0) {
-				player.getInventory().decreaseByItemId(item, count);
-			}
-		}
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		QuestStatus status = qs != null ? qs.getStatus() : QuestStatus.NONE;
+		for (int itemId : questItemsToRemove)
+			removeQuestItem(env, itemId, player.getInventory().getItemCountByItemId(itemId), status);
 		return sendQuestEndDialog(env);
 	}
 
@@ -517,10 +515,10 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		return false;
 	}
 
-	/** Remove the quest item from player's inventory */
+	/** Remove the specified count of this quest item from player's inventory */
 	public boolean removeQuestItem(QuestEnv env, int itemId, long itemCount) {
 		Player player = env.getPlayer();
-		if (itemId != 0 && itemCount != 0) {
+		if (itemId != 0 && itemCount > 0) {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			return player.getInventory().decreaseByItemId(itemId, itemCount, qs == null ? QuestStatus.START : qs.getStatus());
 		}

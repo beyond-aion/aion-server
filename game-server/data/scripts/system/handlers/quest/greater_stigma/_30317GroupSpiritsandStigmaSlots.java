@@ -67,6 +67,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				}
 				case 799208:
 					switch (env.getDialog()) {
@@ -84,11 +85,13 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 									return sendQuestDialog(env, 10001);
 							}
 					}
+					return false;
 				case 799506:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							env.getVisibleObject().getController().onDelete();
 							qs.setQuestVarById(0, 2);

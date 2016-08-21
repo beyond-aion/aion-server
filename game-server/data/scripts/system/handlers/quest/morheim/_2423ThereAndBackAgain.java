@@ -52,6 +52,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							else if (qs.getQuestVarById(0) == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							return checkQuestItems(env, 1, 2, false, 10000, 10001);

@@ -66,6 +66,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);
@@ -80,6 +81,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					return checkQuestItems(env, 1, 2, false, 10000, 10001, 182206791, 1);
 			}
@@ -88,6 +90,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SET_SUCCEED:
 					if (var == 2) {
 						if (!giveQuestItem(env, 182206792, 1))

@@ -48,9 +48,9 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700057: { // Okaru Tree
-					if (env.getDialog() == DialogAction.USE_OBJECT) {
+					if (env.getDialog() == DialogAction.USE_OBJECT)
 						return true; // loot
-					}
+					return false;
 				}
 				case 203604: {
 					if (qs.getQuestVarById(0) == 1) {

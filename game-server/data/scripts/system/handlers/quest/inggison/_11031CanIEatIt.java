@@ -65,6 +65,7 @@ public class _11031CanIEatIt extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							else if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 0) {
 								if (QuestService.collectItemCheck(env, true)) {
@@ -75,6 +76,7 @@ public class _11031CanIEatIt extends QuestHandler {
 								} else
 									return sendQuestDialog(env, 10001);
 							}
+							return false;
 						case SETPRO2:
 							if (var == 1) {
 								if (!giveQuestItem(env, 182206724, 1))

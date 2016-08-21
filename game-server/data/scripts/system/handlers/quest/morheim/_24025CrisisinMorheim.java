@@ -55,10 +55,12 @@ public class _24025CrisisinMorheim extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							else if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						case SETPRO1:
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 1); // 1
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 2, 3, false, 10000, 10001);
 					}
@@ -69,6 +71,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
+							return false;
 						case SET_SUCCEED:
 							if (var == 3) {
 								return defaultCloseDialog(env, 3, 3, true, false);
@@ -82,6 +85,7 @@ public class _24025CrisisinMorheim extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SELECT_ACTION_1354:
 							playQuestMovie(env, 85);
 							break;

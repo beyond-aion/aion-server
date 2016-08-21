@@ -68,6 +68,7 @@ public class _29014MasterArmorsmithsPotential extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204106:
 					switch (dialog) {
 						case QUEST_SELECT:

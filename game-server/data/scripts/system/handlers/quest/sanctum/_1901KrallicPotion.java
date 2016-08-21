@@ -70,6 +70,7 @@ public class _1901KrallicPotion extends QuestHandler {
 										return sendQuestDialog(env, 1352);
 									else if (var == 5)
 										return sendQuestDialog(env, 3057);
+									return false;
 								case SELECT_ACTION_1438:
 									Storage inventory = player.getInventory();
 									if (inventory.tryDecreaseKinah(10000)) {
@@ -103,6 +104,7 @@ public class _1901KrallicPotion extends QuestHandler {
 										return sendQuestDialog(env, 1693);
 									else if (var == 4)
 										return sendQuestDialog(env, 2716);
+									return false;
 								case SETPRO3:
 									qs.setQuestVarById(0, var + 1);// var==2
 									updateQuestStatus(env);
@@ -115,6 +117,7 @@ public class _1901KrallicPotion extends QuestHandler {
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 									return true;
 							}
+							return false;
 						case 203131:// Maniparas
 							switch (env.getDialog()) {
 								case QUEST_SELECT:
@@ -125,6 +128,7 @@ public class _1901KrallicPotion extends QuestHandler {
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 									return true;
 							}
+							return false;
 						case 798003:// Gaphyrk
 							switch (env.getDialog()) {
 								case QUEST_SELECT:

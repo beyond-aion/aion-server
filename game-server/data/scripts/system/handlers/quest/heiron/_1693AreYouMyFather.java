@@ -57,6 +57,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SETPRO1: {
 							TeleportService2.teleportTo(player, 110010000, 1323.37f, 1511.89f, 567.87f, (byte) 0);
@@ -70,6 +71,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						}
 						case SETPRO2: {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 203893, 1, 2);
@@ -82,6 +84,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							return defaultCloseDialog(env, 2, 2, true, true);

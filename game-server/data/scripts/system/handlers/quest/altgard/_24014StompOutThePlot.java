@@ -70,6 +70,7 @@ public class _24014StompOutThePlot extends QuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 								return true;
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 5) {
 								if (QuestService.collectItemCheck(env, true)) {

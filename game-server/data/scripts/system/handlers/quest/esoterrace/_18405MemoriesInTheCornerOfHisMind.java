@@ -56,6 +56,7 @@ public class _18405MemoriesInTheCornerOfHisMind extends QuestHandler {
 						else if (env.getDialog() == DialogAction.SETPRO1)
 							return defaultCloseDialog(env, 0, 1, 182215024, 1, 182215002, 1);
 					}
+					return false;
 				case npcTillen:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)

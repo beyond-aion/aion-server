@@ -71,6 +71,7 @@ public class _11001KindMeira extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798946: {
 					switch (env.getDialog()) {
@@ -84,6 +85,7 @@ public class _11001KindMeira extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798943: {
 					switch (env.getDialog()) {
@@ -97,6 +99,7 @@ public class _11001KindMeira extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798945: {
 					switch (env.getDialog()) {

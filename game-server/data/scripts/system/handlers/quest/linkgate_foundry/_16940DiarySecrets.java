@@ -48,6 +48,7 @@ public class _16940DiarySecrets extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
+							return false;
 						}
 						case SETPRO1: {
 							return defaultCloseDialog(env, 0, 1);
@@ -60,6 +61,7 @@ public class _16940DiarySecrets extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1)
 								return sendQuestDialog(env, 2375);
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
 							if (QuestService.collectItemCheck(env, true)) {

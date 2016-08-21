@@ -55,6 +55,7 @@ public class _14014TurningTheIde extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							ItemService.addItem(player, 182215314, 1);
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -65,6 +66,7 @@ public class _14014TurningTheIde extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						case SETPRO3:
 							return defaultCloseDialog(env, 2, 3); // 3
 					}
@@ -74,6 +76,7 @@ public class _14014TurningTheIde extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 3)
 								return checkQuestItems(env, 3, 5, false, 2375, 2120);
@@ -84,6 +87,7 @@ public class _14014TurningTheIde extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 8)
 								return sendQuestDialog(env, 3057);
+							return false;
 						case SELECT_QUEST_REWARD:
 							return defaultCloseDialog(env, 8, 8, true, false);
 					}

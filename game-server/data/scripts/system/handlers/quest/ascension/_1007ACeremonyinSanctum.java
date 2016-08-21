@@ -57,6 +57,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1013);
 							}
+							return false;
 						case SETPRO1:
 							if (var <= 1) {
 								qs.setQuestVar(1);

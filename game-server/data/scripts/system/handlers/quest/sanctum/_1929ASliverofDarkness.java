@@ -161,6 +161,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 									return closeDialogWindow(env);
 								}
 							}
+							return false;
 						}
 						case QUEST_SELECT: {
 							if (var == 98) {
@@ -175,6 +176,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 									return true;
 								}
 							}
+							return false;
 						}
 						case SELECT_ACTION_2720: {
 							if (var == 96) {

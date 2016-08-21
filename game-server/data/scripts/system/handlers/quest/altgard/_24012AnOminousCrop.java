@@ -48,6 +48,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							else if (var == 5)
 								return sendQuestDialog(env, 2716);
+							return false;
 						case SELECT_ACTION_1013:
 							playQuestMovie(env, 61);
 							return sendQuestDialog(env, 1013);

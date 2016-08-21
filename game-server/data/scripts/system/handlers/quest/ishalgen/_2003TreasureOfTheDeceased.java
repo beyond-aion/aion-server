@@ -43,6 +43,7 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 1)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SELECT_ACTION_1012:
 						playQuestMovie(env, 53);
 						break;
@@ -53,6 +54,7 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						if (var == 1) {
 							if (QuestService.collectItemCheck(env, true)) {

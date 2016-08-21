@@ -54,6 +54,7 @@ public class _2484OurManInElysea extends QuestHandler {
 						updateQuestStatus(env);
 						removeQuestItem(env, 182204205, 1);
 					}
+					return false;
 				case 203331: {
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id())

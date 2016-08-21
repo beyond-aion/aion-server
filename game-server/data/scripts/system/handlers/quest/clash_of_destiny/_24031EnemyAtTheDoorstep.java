@@ -109,7 +109,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
-
+							return false;
 						}
 						case SETPRO7: {
 							if (!giveQuestItem(env, 182215396, 1))

@@ -52,6 +52,7 @@ public class _28808OpenSaysMe extends QuestHandler {
 						case USE_OBJECT: {
 							if (var == 0)
 								return sendQuestDialog(env, 2375);
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 0, 0, true);

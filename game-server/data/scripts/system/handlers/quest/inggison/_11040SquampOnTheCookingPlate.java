@@ -54,6 +54,7 @@ public class _11040SquampOnTheCookingPlate extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SETPRO1: {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 296.63f, 482.98f, 574.37f, 0, 1); // 1

@@ -43,7 +43,7 @@ public class _38000CallOfTheAlabasterOrder extends QuestHandler {
 					return sendQuestDialog(env, 10002);
 				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 0, 0, true);
-					return sendQuestDialog(env, 5);
+					return sendQuestEndDialog(env);
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {

@@ -64,6 +64,7 @@ public class _1345BearerOfBadNews extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							removeQuestItem(env, 186000015, 1);

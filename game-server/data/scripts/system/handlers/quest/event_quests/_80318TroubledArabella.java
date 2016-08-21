@@ -71,6 +71,7 @@ public class _80318TroubledArabella extends QuestHandler {
 							removeQuestItem(env, 182215301, 1);
 							return sendQuestDialog(env, 1352);
 						}
+						return false;
 					case SELECT_ACTION_1353:
 						return sendQuestDialog(env, 5);
 					default:

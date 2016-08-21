@@ -70,6 +70,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 204540: {
 					switch (env.getDialog()) {
@@ -84,6 +85,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 790018: {
 					switch (env.getDialog()) {
@@ -104,18 +106,12 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204541) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					}
-					case SELECT_QUEST_REWARD: {
-						return sendQuestDialog(env, 5);
-					}
-					case SELECTED_QUEST_NOREWARD: {
-						removeQuestItem(env, 182201760, 1);
-					}
-					default:
-						return sendQuestEndDialog(env);
+					case SELECTED_QUEST_NOREWARD:
+						return sendQuestEndDialog(env, new int[] { 182201760 });
 				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

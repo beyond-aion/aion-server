@@ -49,6 +49,7 @@ public class _23817WeeklyFreeSpirit extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SET_SUCCEED: {
 							return defaultCloseDialog(env, 0, 0, true, false);

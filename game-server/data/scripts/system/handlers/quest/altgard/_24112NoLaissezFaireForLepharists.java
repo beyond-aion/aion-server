@@ -64,6 +64,7 @@ public class _24112NoLaissezFaireForLepharists extends QuestHandler {
 						} else if (var == 1) {
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					case SETPRO1:
 						qs.setQuestVarById(0, 1);
 						return sendQuestSelectionDialog(env);

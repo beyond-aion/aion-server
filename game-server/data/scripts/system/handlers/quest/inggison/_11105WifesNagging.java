@@ -70,6 +70,7 @@ public class _11105WifesNagging extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						removeQuestItem(env, 182206778, 1);
@@ -86,6 +87,7 @@ public class _11105WifesNagging extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SETPRO2:
 					if (var == 1) {
 						removeQuestItem(env, 182206779, 1);

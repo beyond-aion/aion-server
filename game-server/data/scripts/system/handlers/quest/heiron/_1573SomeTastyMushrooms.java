@@ -75,6 +75,7 @@ public class _1573SomeTastyMushrooms extends QuestHandler {
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 10002);
 						}
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 0, 1, false, 0, 10001, 182201784, 1);
 					case SELECT_QUEST_REWARD:

@@ -58,6 +58,7 @@ public class _2239MalodorAntidote extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 1693);
 						}
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -65,6 +66,7 @@ public class _2239MalodorAntidote extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						if (var == 1) {
 							if (QuestService.collectItemCheck(env, true)) {
@@ -90,6 +92,7 @@ public class _2239MalodorAntidote extends QuestHandler {
 						if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
+						return false;
 					case SETPRO3:
 						if (var == 3) {
 							qs.setStatus(QuestStatus.REWARD);

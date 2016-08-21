@@ -59,6 +59,7 @@ public class _20033DranaSolution extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						}
+						return false;
 					case SETPRO1:
 						giveQuestItem(env, 182215614, 1);
 						giveQuestItem(env, 182215594, 1);

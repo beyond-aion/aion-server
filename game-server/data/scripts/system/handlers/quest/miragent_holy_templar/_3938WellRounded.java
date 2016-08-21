@@ -71,6 +71,7 @@ public class _3938WellRounded extends QuestHandler {
 						}
 						break;
 					}
+					break;
 					// 2 - Talk with Weaponsmithing Master Anteros.
 				case 203788:
 					if (var == 1) {

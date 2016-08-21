@@ -55,6 +55,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
 				}
@@ -66,6 +67,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 						if (var == 2)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -73,6 +75,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
+						return false;
 					case SETPRO3:
 						if (var == 2) {
 							removeQuestItem(env, 182204517, 1);
@@ -90,6 +93,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SETPRO2:
 						if (var == 1) {
 							if (!giveQuestItem(env, 182204517, 1))

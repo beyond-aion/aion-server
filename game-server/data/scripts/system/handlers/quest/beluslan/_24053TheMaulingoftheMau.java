@@ -96,6 +96,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					else if (var == 4)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SELECT_ACTION_1012:
 					playQuestMovie(env, 252);
 					break;
@@ -103,6 +104,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					if (var == 0) {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
+					return false;
 				case SET_SUCCEED:
 					if (var == 4) {
 						return defaultCloseDialog(env, 4, 4, true, false); // reward
@@ -113,6 +115,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO2:
 					if (var == 1) {
 						return defaultCloseDialog(env, 1, 2); // 2
@@ -123,6 +126,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),

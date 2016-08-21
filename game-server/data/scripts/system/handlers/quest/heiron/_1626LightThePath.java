@@ -45,18 +45,11 @@ public class _1626LightThePath extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204592) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					}
-					case QUEST_ACCEPT_1: {
-						if (player.getInventory().getItemCountByItemId(182201788) == 0) {
-							if (!giveQuestItem(env, 182201788, 1)) {
-								return true;
-							}
-						}
-					}
-					default:
-						return sendQuestStartDialog(env);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182201788, 1);
 				}
 			}
 		}

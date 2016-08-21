@@ -36,6 +36,7 @@ public class _80009TheCakeIsTheTruth extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);
+						return false;
 					case SELECT_QUEST_REWARD:
 						removeQuestItem(env, 182214007, 1);
 						return defaultCloseDialog(env, 0, 1, true, true);

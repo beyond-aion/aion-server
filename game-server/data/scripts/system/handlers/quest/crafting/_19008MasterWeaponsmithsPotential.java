@@ -72,6 +72,7 @@ public class _19008MasterWeaponsmithsPotential extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				}
 				case 203788: {
 					switch (dialog) {

@@ -49,6 +49,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SELECT_ACTION_1012:
 							return sendQuestDialog(env, 1012);
 						case SELECT_ACTION_1097:
@@ -64,6 +65,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							if (var == 5)
 								return sendQuestDialog(env, 2716);
+							return false;
 						case SELECT_ACTION_1353:
 							return sendQuestDialog(env, 1353);
 						case SELECT_ACTION_1438:
@@ -91,6 +93,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							if (var == 4)
 								return sendQuestDialog(env, 2375);
+							return false;
 						case SELECT_ACTION_1694:
 							return sendQuestDialog(env, 1694);
 						case SELECT_ACTION_1779:
@@ -103,6 +106,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 						case FINISH_DIALOG:
 							if (var == 3)
 								defaultCloseDialog(env, 3, 3); // 3
+							return false;
 						case SELECT_ACTION_2376:
 							return sendQuestDialog(env, 2376);
 						case SETPRO5:

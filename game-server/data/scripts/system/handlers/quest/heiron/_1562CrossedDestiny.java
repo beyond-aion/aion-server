@@ -72,6 +72,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 								defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 204589, 0, 0);
 								return defaultCloseDialog(env, 1, 2, false, false, 0, 0, 182201780, 1); // 2
 							}
+							return false;
 						case USE_OBJECT:
 							if (qs.getQuestVarById(0) == 1) {
 								return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 204589, 1, 2);

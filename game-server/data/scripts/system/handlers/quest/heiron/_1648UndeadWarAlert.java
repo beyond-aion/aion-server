@@ -69,6 +69,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 204500: {
 					switch (env.getDialog()) {

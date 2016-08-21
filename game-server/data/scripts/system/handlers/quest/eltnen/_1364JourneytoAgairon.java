@@ -55,6 +55,7 @@ public class _1364JourneytoAgairon extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1693);
+							return false;
 						}
 						case SETPRO1: {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 790007, 0, 1); // 1

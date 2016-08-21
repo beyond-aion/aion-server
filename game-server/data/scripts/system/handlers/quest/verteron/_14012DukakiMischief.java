@@ -75,6 +75,7 @@ public class _14012DukakiMischief extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 					}
+					return false;
 				case SETPRO3:
 					int var1 = qs.getQuestVarById(1);
 					int var2 = qs.getQuestVarById(2);

@@ -53,6 +53,7 @@ public class _2513TheStrangeCottage extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							qs.setStatus(QuestStatus.REWARD);
@@ -68,6 +69,7 @@ public class _2513TheStrangeCottage extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						}
+						return false;
 					case SETPRO2:
 						if (var == 0) {
 							qs.setStatus(QuestStatus.REWARD);
@@ -83,6 +85,7 @@ public class _2513TheStrangeCottage extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1693);
 						}
+						return false;
 					case SETPRO3:
 						if (var == 0) {
 							qs.setStatus(QuestStatus.REWARD);

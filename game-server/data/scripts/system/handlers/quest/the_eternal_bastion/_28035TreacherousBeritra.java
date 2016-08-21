@@ -53,6 +53,7 @@ public class _28035TreacherousBeritra extends QuestHandler {
 						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
 					}
+					return false;
 				}
 				case 800529: {
 					switch (dialogAction) {

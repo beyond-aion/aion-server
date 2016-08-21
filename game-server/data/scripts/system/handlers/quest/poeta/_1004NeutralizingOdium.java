@@ -47,6 +47,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 5)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case SELECT_ACTION_1013:
 						if (var == 0)
 							playQuestMovie(env, 19);
@@ -86,6 +87,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							return sendQuestDialog(env, 1693);
 						else if (var == 11)
 							return sendQuestDialog(env, 1694);
+						return false;
 					case SETPRO2:
 						if (var == 2) {
 							qs.setQuestVarById(0, var + 1);
@@ -93,6 +95,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							sendQuestSelectionDialog(env);
 							return true;
 						}
+						return false;
 					case SETPRO3:
 						if (var == 11) {
 							if (!giveQuestItem(env, 182200006, 1))
@@ -103,6 +106,7 @@ public class _1004NeutralizingOdium extends QuestHandler {
 							sendQuestSelectionDialog(env);
 							return true;
 						}
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM: {
 						if (QuestService.collectItemCheck(env, true)) {
 							qs.setQuestVarById(0, 11);

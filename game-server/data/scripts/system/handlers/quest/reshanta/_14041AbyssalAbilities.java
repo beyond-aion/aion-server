@@ -71,6 +71,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SELECT_ACTION_1013:
 					playQuestMovie(env, 262);
 					break;
@@ -88,6 +89,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SELECT_ACTION_1353:
 					playQuestMovie(env, 263);
 					break;
@@ -105,6 +107,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SELECT_ACTION_1694:
 					playQuestMovie(env, 264);
 					break;
@@ -122,6 +125,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
+					return false;
 				case SELECT_ACTION_2035:
 					playQuestMovie(env, 265);
 					break;
@@ -139,6 +143,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 4)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SELECT_ACTION_2376:
 					playQuestMovie(env, 266);
 					break;
@@ -156,6 +161,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 5)
 						return sendQuestDialog(env, 2716);
+					return false;
 				case SELECT_ACTION_2717:
 					playQuestMovie(env, 267);
 					break;
@@ -173,6 +179,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
+					return false;
 				case SELECT_ACTION_3058:
 					playQuestMovie(env, 268);
 					break;

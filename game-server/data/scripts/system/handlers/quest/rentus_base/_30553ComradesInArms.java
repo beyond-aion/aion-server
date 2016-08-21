@@ -53,6 +53,7 @@ public class _30553ComradesInArms extends QuestHandler {
 						case SELECT_QUEST_REWARD:
 							return defaultCloseDialog(env, 1, 1, true, true);
 					}
+					return false;
 				}
 				case 701097: {
 					Npc npc = (Npc) env.getVisibleObject();

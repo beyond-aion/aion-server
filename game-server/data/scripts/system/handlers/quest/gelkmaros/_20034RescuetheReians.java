@@ -140,6 +140,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					if (var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
+					return false;
 				case SETPRO1:
 					giveQuestItem(env, 182215630, 1);
 					return defaultCloseDialog(env, 0, 1); // 1
@@ -151,6 +152,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					if (var == 1) {
 						return sendQuestDialog(env, 1352);
 					}
+					return false;
 				case SETPRO2:
 					removeQuestItem(env, 182215630, 1);
 					giveQuestItem(env, 182215595, 1);
@@ -162,6 +164,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					if (var == 2) {
 						return sendQuestDialog(env, 1693);
 					}
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						removeQuestItem(env, 182215595, 1);

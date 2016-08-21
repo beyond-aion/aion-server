@@ -53,9 +53,11 @@ public class _3964GrowthFlorasFourthCharm extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1, 0, 0, 182206111, 1); // 1
 					}
+					return false;
 				}
 				case 798384: // Flora
 					switch (env.getDialog()) {
@@ -64,6 +66,7 @@ public class _3964GrowthFlorasFourthCharm extends QuestHandler {
 								removeQuestItem(env, 182206111, 1);
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemAmount = player.getInventory().getItemCountByItemId(186000090);
 							if (var == 1 && itemAmount >= 1 && player.getInventory().tryDecreaseKinah(90000)) {

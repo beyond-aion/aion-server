@@ -66,6 +66,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798934: {
 					switch (env.getDialog()) {
@@ -79,6 +80,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798933: {
 					switch (env.getDialog()) {
@@ -92,6 +94,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798927: {
 					switch (env.getDialog()) {

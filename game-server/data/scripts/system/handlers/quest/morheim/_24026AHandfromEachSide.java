@@ -82,6 +82,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							defaultCloseDialog(env, 0, 1); // 1
 							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
@@ -94,6 +95,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							defaultCloseDialog(env, 1, 2); // 2
 							TeleportService2.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
@@ -108,6 +110,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 								return sendQuestDialog(env, 1693);
 							else if (var == 4)
 								return sendQuestDialog(env, 2034);
+							return false;
 						case SETPRO3: {
 							balaurKilled = 0;
 							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader

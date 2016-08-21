@@ -60,6 +60,7 @@ public class _80291DurableDaevanionWeapon extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						if (var == 0) {
 							return checkQuestItems(env, 0, 1, true, 5, 0);

@@ -72,6 +72,7 @@ public class _24052AFrozenCity extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SELECT_ACTION_1012:
 					playQuestMovie(env, 242);
 					break;
@@ -80,6 +81,7 @@ public class _24052AFrozenCity extends QuestHandler {
 						if (giveQuestItem(env, 182215378, 1))
 							return sendQuestDialog(env, 1097);
 					}
+					return false;
 				case SETPRO1:
 					return defaultCloseDialog(env, 0, 1); // 1
 			}

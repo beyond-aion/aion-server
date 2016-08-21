@@ -70,6 +70,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							if (var == 0) {
 								return defaultCloseDialog(env, 0, 1); // 1
@@ -84,6 +85,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							else if (var == 3)
 								return sendQuestDialog(env, 2034);
+							return false;
 						case SELECT_ACTION_1354:
 							playQuestMovie(env, 78);
 							break;
@@ -96,6 +98,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 								return true;
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 3) {
 								if (QuestService.collectItemCheck(env, true)) {

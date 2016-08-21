@@ -68,6 +68,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (player.getInventory().getItemCountByItemId(182209049) >= 9) {
 						if (!giveQuestItem(env, 182209050, 1))

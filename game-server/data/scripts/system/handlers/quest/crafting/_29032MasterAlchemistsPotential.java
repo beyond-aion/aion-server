@@ -72,6 +72,7 @@ public class _29032MasterAlchemistsPotential extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204102:
 					switch (dialog) {
 						case QUEST_SELECT:

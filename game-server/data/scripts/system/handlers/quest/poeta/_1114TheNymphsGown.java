@@ -85,7 +85,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					else if (var == 3)
 						return sendQuestDialog(env, 2375);
-
+					return false;
 				case SELECT_QUEST_REWARD:
 					if (var == 2) {
 						qs.setQuestVarById(0, var + 2);
@@ -101,6 +101,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 						removeQuestItem(env, 182200217, 1);
 						return sendQuestDialog(env, 6);
 					}
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);
@@ -109,6 +110,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 					}
+					return false;
 				case SETPRO2:
 					if (var == 2) {
 						qs.setQuestVarById(0, var + 1);
@@ -139,6 +141,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
+					return false;
 				case SETPRO3:
 					if (var == 3) {
 						qs.setStatus(QuestStatus.REWARD);
@@ -146,6 +149,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 						removeQuestItem(env, 182200217, 1);
 						return sendQuestDialog(env, 5);
 					}
+					return false;
 				case SETPRO2:
 					if (var == 3) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

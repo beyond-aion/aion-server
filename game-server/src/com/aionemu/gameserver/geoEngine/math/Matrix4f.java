@@ -233,6 +233,7 @@ public final class Matrix4f implements Cloneable {
             case 2: return m02;
             case 3: return m03;
             }
+            break;
         case 1:
             switch (j) {
             case 0: return m10;
@@ -240,6 +241,7 @@ public final class Matrix4f implements Cloneable {
             case 2: return m12;
             case 3: return m13;
             }
+            break;
         case 2:
             switch (j) {
             case 0: return m20;
@@ -247,6 +249,7 @@ public final class Matrix4f implements Cloneable {
             case 2: return m22;
             case 3: return m23;
             }
+            break;
         case 3:
             switch (j) {
             case 0: return m30;
@@ -384,6 +387,7 @@ public final class Matrix4f implements Cloneable {
             case 2: m02 = value; return;
             case 3: m03 = value; return;
             }
+            break;
         case 1:
             switch (j) {
             case 0: m10 = value; return;
@@ -391,6 +395,7 @@ public final class Matrix4f implements Cloneable {
             case 2: m12 = value; return;
             case 3: m13 = value; return;
             }
+            break;
         case 2:
             switch (j) {
             case 0: m20 = value; return;
@@ -398,6 +403,7 @@ public final class Matrix4f implements Cloneable {
             case 2: m22 = value; return;
             case 3: m23 = value; return;
             }
+            break;
         case 3:
             switch (j) {
             case 0: m30 = value; return;

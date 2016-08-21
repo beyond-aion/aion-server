@@ -71,6 +71,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);
@@ -84,6 +85,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SELECT_ACTION_1353:
 					playQuestMovie(env, 292);
 					break;
@@ -102,6 +104,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					else if (var == 4)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						qs.setQuestVarById(0, var + 1);
@@ -113,6 +116,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 55001, 0));
 						return true;
 					}
+					return false;
 				case SETPRO5:
 					if (var == 4) {
 						qs.setStatus(QuestStatus.REWARD);
@@ -126,6 +130,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
+					return false;
 				case SETPRO4:
 					if (var == 3) {
 						qs.setQuestVarById(0, var + 1);

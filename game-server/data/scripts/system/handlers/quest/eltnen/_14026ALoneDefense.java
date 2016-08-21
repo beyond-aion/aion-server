@@ -88,6 +88,7 @@ public class _14026ALoneDefense extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 204020: {
 					switch (env.getDialog()) {
@@ -106,6 +107,7 @@ public class _14026ALoneDefense extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 204044: {
 					switch (env.getDialog()) {

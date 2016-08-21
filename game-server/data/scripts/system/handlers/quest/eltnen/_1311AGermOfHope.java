@@ -56,6 +56,7 @@ public class _1311AGermOfHope extends QuestHandler {
 						updateQuestStatus(env);
 						return true;
 					}
+					return false;
 				}
 				case 203997: {
 					if (qs.getQuestVarById(0) == 1) {

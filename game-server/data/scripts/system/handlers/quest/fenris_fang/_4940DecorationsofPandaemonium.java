@@ -55,6 +55,7 @@ public class _4940DecorationsofPandaemonium extends QuestHandler {
 								return sendQuestDialog(env, 1011);
 							else if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 						case CHECK_USER_HAS_QUEST_ITEM:

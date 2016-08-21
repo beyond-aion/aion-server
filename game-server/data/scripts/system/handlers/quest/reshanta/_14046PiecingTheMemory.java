@@ -70,6 +70,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						TeleportService2.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
@@ -86,6 +87,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 						return sendQuestDialog(env, 2034);
 					else if (var == 5)
 						return sendQuestDialog(env, 2716);
+					return false;
 				case SELECT_ACTION_1353:
 					playQuestMovie(env, 102);
 					break;
@@ -94,12 +96,14 @@ public class _14046PiecingTheMemory extends QuestHandler {
 						changeQuestStep(env, 1, 2, false);
 						return closeDialogWindow(env);
 					}
+					return false;
 				case SETPRO4:
 					if (var == 3) {
 						TeleportService2.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 3, 4, false);
 						return true;
 					}
+					return false;
 				case SETPRO6:
 					if (var == 5) {
 						changeQuestStep(env, 5, 6, false);
@@ -111,6 +115,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					return checkQuestItems(env, 2, 3, false, 10000, 10001, 182215354, 1);
 			}
@@ -119,6 +124,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
+					return false;
 				case SET_SUCCEED:
 					if (var == 6) {
 						removeQuestItem(env, 182215354, 1);

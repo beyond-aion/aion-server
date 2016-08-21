@@ -49,6 +49,7 @@ public class _30154FleshtoStone extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						if (var == 0)
 							return defaultCloseDialog(env, 0, 1);
@@ -59,6 +60,7 @@ public class _30154FleshtoStone extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 2375);
+						return false;
 					case SELECT_QUEST_REWARD:
 						if (var == 1)
 							return defaultCloseDialog(env, 1, 1, true, true);

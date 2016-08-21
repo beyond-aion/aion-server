@@ -53,6 +53,7 @@ public class _4969GrowthNinissFourthCharm extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1, 0, 0, 182207139, 1); // 1
 					}
@@ -65,6 +66,7 @@ public class _4969GrowthNinissFourthCharm extends QuestHandler {
 								removeQuestItem(env, 182207139, 1);
 								return sendQuestDialog(env, 2375);
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							long itemAmount = player.getInventory().getItemCountByItemId(186000093);
 							if (var == 1 && itemAmount >= 1 && player.getInventory().tryDecreaseKinah(90000)) {

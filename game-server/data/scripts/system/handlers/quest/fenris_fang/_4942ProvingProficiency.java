@@ -72,6 +72,7 @@ public class _4942ProvingProficiency extends QuestHandler {
 						}
 						break;
 					}
+					break;
 					// 2 - Talk with Weaponsmithing Master Logi.
 				case 204104:
 					if (var == 1) {

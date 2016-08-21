@@ -69,6 +69,7 @@ public class _1846PaperTrail extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);
@@ -83,6 +84,7 @@ public class _1846PaperTrail extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SETPRO2:
 					if (var == 1) {
 						qs.setQuestVarById(0, var + 1);

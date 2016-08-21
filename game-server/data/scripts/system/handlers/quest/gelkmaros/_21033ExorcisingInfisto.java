@@ -40,6 +40,7 @@ public class _21033ExorcisingInfisto extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1, true, false, 182207830, 1, 182207829, 1);
 				}

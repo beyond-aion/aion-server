@@ -58,6 +58,7 @@ public class _2002WheresRae extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							if (var == 0) {
 								qs.setQuestVarById(0, var + 1);
@@ -66,12 +67,14 @@ public class _2002WheresRae extends QuestHandler {
 								return true;
 							}
 					}
+					return false;
 				}
 				case 203534: {
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SELECT_ACTION_1353:
 							playQuestMovie(env, 52);
 							break;
@@ -83,6 +86,7 @@ public class _2002WheresRae extends QuestHandler {
 								return true;
 							}
 					}
+					return false;
 				}
 				case 790002: {
 					switch (dialog) {
@@ -97,6 +101,7 @@ public class _2002WheresRae extends QuestHandler {
 								return sendQuestDialog(env, 2462);
 							else if (var == 13)
 								return sendQuestDialog(env, 2716);
+							return false;
 						case SETPRO3:
 						case SETPRO4:
 						case SETPRO6:
@@ -123,6 +128,7 @@ public class _2002WheresRae extends QuestHandler {
 								TeleportService2.teleportTo(player, 320010000, newInstance.getInstanceId(), 457.65f, 426.8f, 230.4f);
 								return true;
 							}
+							return false;
 						case CHECK_USER_HAS_QUEST_ITEM:
 							if (var == 11) {
 								if (QuestService.collectItemCheck(env, true)) {
@@ -140,6 +146,7 @@ public class _2002WheresRae extends QuestHandler {
 						SkillEngine.getInstance().applyEffectDirectly(8343, player, player, 0);
 						return true;
 					}
+					return false;
 				case 203538:
 					if (var == 14 && env.getDialog() == DialogAction.USE_OBJECT) {
 						qs.setQuestVarById(0, var + 1);
@@ -156,6 +163,7 @@ public class _2002WheresRae extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 15)
 								return sendQuestDialog(env, 3057);
+							return false;
 						case SETPRO7:
 							if (var == 15) {
 								env.getVisibleObject().getController().onDelete();
@@ -165,6 +173,7 @@ public class _2002WheresRae extends QuestHandler {
 								return true;
 							}
 					}
+					return false;
 				case 205020:
 					switch (dialog) {
 						case QUEST_SELECT:

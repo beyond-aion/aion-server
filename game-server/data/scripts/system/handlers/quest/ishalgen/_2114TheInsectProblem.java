@@ -50,6 +50,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
+						return false;
 					case SETPRO2:
 						if (QuestService.startQuest(env)) {
 							qs = player.getQuestStateList().getQuestState(questId);
@@ -67,6 +68,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 							return sendQuestDialog(env, 5);
 						else if (var == 20)
 							return sendQuestDialog(env, 6);
+						return false;
 					case SELECTED_QUEST_NOREWARD:
 						if (QuestService.finishQuest(env, var / 10 - 1)) {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -104,6 +106,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
+				return false;
 			case 210380:
 			case 210381:
 				if (var >= 11 && var < 20) {

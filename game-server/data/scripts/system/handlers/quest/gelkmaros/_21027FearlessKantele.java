@@ -41,6 +41,7 @@ public class _21027FearlessKantele extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 1)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 1, 2, true, 10000, 10001);
 					case SETPRO1:

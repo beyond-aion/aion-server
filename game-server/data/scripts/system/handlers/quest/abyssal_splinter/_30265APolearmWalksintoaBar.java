@@ -79,7 +79,7 @@ public class _30265APolearmWalksintoaBar extends QuestHandler {
 						}
 						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 2, 2, true); // reward
-							return sendQuestDialog(env, 5);
+							return sendQuestEndDialog(env);
 						}
 					}
 				}

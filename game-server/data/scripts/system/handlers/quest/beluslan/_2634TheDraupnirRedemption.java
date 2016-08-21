@@ -60,6 +60,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SETPRO1: {
 							Npc npc = (Npc) env.getVisibleObject();

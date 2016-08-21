@@ -64,6 +64,7 @@ public class _2430SecretInformation extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1267);
 						}
+						return false;
 					}
 					case SETPRO3: {
 						if (player.getInventory().getKinah() >= 5000) {

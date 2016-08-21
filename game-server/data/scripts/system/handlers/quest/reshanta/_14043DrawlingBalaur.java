@@ -79,6 +79,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						changeQuestStep(env, 0, 1, false);
@@ -100,6 +101,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 						return sendQuestDialog(env, 2375);
 					else if (var == 6 || var == 8)
 						return sendQuestDialog(env, 3057);
+					return false;
 				case SETPRO5:
 					if (var == 4) {
 						qs.setQuestVarById(0, var + 1);
@@ -144,6 +146,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						qs.setQuestVarById(0, var + 1);

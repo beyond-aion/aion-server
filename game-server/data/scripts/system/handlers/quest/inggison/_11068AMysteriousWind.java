@@ -60,6 +60,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						if (giveQuestItem(env, 182206858, 1))
@@ -75,6 +76,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SELECT_QUEST_REWARD:
 					if (var == 1) {
 						removeQuestItem(env, 182206858, 1);

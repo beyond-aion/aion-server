@@ -40,6 +40,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
@@ -48,6 +49,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2, true, false);
 				}

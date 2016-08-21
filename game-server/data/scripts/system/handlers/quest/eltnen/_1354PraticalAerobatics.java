@@ -104,11 +104,13 @@ public class _1354PraticalAerobatics extends QuestHandler {
 							return sendQuestDialog(env, 2717);
 						else if (var0 == 8)
 							return sendQuestDialog(env, 2375);
+						return false;
 					case SETPRO1:
 						if (qs.getQuestVarById(0) == 0) {
 							QuestService.questTimerStart(env, 120);
 							return defaultCloseDialog(env, 0, 1);
 						}
+						return false;
 					case SELECT_QUEST_REWARD:
 						return sendQuestEndDialog(env);
 				}

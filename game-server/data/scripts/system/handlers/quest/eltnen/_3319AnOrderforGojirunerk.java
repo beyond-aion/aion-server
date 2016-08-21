@@ -64,6 +64,7 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798050: {
 					switch (env.getDialog()) {

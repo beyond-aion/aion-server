@@ -57,6 +57,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 							return defaultCloseDialog(env, 0, 0);
 						}
 					}
+					return false;
 				}
 				case 205842: {
 					switch (dialog) {
@@ -101,7 +102,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 						updateQuestStatus(env);
 						return true;
 					}
-
+					return false;
 				case 219264:
 					if (qs.getQuestVarById(0) == 1) {
 						qs.setStatus(QuestStatus.REWARD);

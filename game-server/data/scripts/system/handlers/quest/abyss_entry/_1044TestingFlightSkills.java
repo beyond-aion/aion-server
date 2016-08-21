@@ -103,6 +103,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 								updateQuestStatus(env);
 								return sendQuestSelectionDialog(env);
 							}
+							return false;
 						}
 						case FINISH_DIALOG: {
 							return sendQuestSelectionDialog(env);

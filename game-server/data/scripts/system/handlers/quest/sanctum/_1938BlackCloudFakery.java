@@ -48,6 +48,7 @@ public class _1938BlackCloudFakery extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
@@ -57,6 +58,7 @@ public class _1938BlackCloudFakery extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 1)
 								return sendQuestDialog(env, 1693);
+							return false;
 						}
 						case SETPRO2: {
 							qs.setQuestVar(2);

@@ -60,6 +60,7 @@ public class _14021ToCureACurse extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
@@ -81,6 +82,7 @@ public class _14021ToCureACurse extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 8)
 								return sendQuestDialog(env, 2036);
+							return false;
 						case SETPRO4:
 							return defaultCloseDialog(env, 8, 9); // 8
 					}
@@ -90,6 +92,7 @@ public class _14021ToCureACurse extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 9)
 								return sendQuestDialog(env, 2376);
+							return false;
 						case SETPRO5:
 							return defaultCloseDialog(env, 9, 10, true, false); // reward
 					}

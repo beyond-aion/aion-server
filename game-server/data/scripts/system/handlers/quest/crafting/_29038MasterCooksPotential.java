@@ -73,26 +73,27 @@ public class _29038MasterCooksPotential extends QuestHandler {
 										return sendQuestDialog(env, 2034);
 									}
 									case 1: {
-										if (!player.getRecipeList().isRecipePresent(155007241)) {
+										if (!player.getRecipeList().isRecipePresent(155007241))
 											return sendQuestDialog(env, 4081);
-										}
+										return false;
 									}
 									case 4: {
-										if (!player.getRecipeList().isRecipePresent(155007242)) {
+										if (!player.getRecipeList().isRecipePresent(155007242))
 											return sendQuestDialog(env, 4166);
-										}
+										return false;
 									}
 									case 7: {
-										if (!player.getRecipeList().isRecipePresent(155007243)) {
+										if (!player.getRecipeList().isRecipePresent(155007243))
 											return sendQuestDialog(env, 4251);
-										}
+										return false;
 									}
 									case 10: {
-										if (!player.getRecipeList().isRecipePresent(155007244)) {
+										if (!player.getRecipeList().isRecipePresent(155007244))
 											return sendQuestDialog(env, 4336);
-										}
+										return false;
 									}
 								}
+								return false;
 							} else {
 								return sendQuestDialog(env, 4400);
 							}
@@ -104,6 +105,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							} else if (var == 1) {
 								return defaultCloseDialog(env, 1, 2, 152207202, 1, 0, 0); // 2
 							}
+							return false;
 						}
 						case SETPRO20: {
 							player.getInventory().decreaseKinah(6500);
@@ -112,6 +114,7 @@ public class _29038MasterCooksPotential extends QuestHandler {
 							} else if (var == 4) {
 								return defaultCloseDialog(env, 4, 5, 152207203, 1, 0, 0); // 5
 							}
+							return false;
 						}
 						case SETPRO30: {
 							player.getInventory().decreaseKinah(6500);

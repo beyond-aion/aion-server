@@ -170,12 +170,9 @@ public class MonsterHunt extends QuestHandler {
 								if (currentCount > 0)
 									removeQuestItem(env, workItem.getItemId(), currentCount, QuestStatus.COMPLETE);
 							}
-							return sendQuestDialog(env, 5);
-						default:
-							return sendQuestEndDialog(env);
 					}
-				} else
-					return sendQuestEndDialog(env);
+				}
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

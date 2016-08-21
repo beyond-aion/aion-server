@@ -70,6 +70,7 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798177: {
 					switch (env.getDialog()) {

@@ -45,6 +45,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							if (var == 0) {
 								qs.setQuestVarById(0, var + 1);
@@ -59,6 +60,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							if (var == 1) {
 								qs.setQuestVarById(0, var + 1);
@@ -73,6 +75,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						case SELECT_ACTION_1694:
 							playQuestMovie(env, 55);
 							break;
@@ -90,6 +93,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
+							return false;
 						case SETPRO4:
 							if (var == 3) {
 								qs.setQuestVarById(0, var + 1);
@@ -106,6 +110,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 								return sendQuestDialog(env, 2375);
 							else if (var == 8)
 								return sendQuestDialog(env, 2716);
+							return false;
 						case SETPRO5:
 							if (var == 4) {
 								qs.setQuestVar(5);

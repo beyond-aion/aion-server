@@ -60,6 +60,7 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
+					return false;
 				case 203621:
 					switch (dialog) {
 						case QUEST_SELECT:

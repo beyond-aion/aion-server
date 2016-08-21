@@ -114,7 +114,7 @@ public class _14031AHyperVention extends QuestHandler {
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
 							}
-
+							return false;
 						}
 						case SETPRO7: {
 							if (!giveQuestItem(env, 182215390, 1))

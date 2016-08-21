@@ -142,6 +142,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 									TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}
+							return false;
 						}
 						case SETPRO9: {
 							changeQuestStep(env, 9, 10, false); // 10
@@ -194,6 +195,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
 								return true;
 							}
+							return false;
 						}
 						case SETPRO8: {
 							if (var == 97) {

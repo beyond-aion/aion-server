@@ -64,6 +64,7 @@ public class _11005TheLimitsofGenius extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798951: {
 					switch (env.getDialog()) {
@@ -77,6 +78,7 @@ public class _11005TheLimitsofGenius extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798942: {
 					switch (env.getDialog()) {

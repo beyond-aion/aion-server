@@ -123,9 +123,11 @@ public class _14025CookingUpDisasters extends QuestHandler {
 							} else
 								return sendQuestDialog(env, 1353);
 						}
+						return false;
 					case SETPRO2:
 						if (var == 2)
 							return defaultCloseDialog(env, var, var + 1); // 3
+						return false;
 					case SETPRO4:
 						if (var == 4)
 							return defaultCloseDialog(env, var, var + 1); // 5

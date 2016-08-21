@@ -50,6 +50,7 @@ public class _2443TaisanMessage extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1003);
+							return false;
 						}
 						case SETPRO1:
 						case QUEST_ACCEPT_1: {

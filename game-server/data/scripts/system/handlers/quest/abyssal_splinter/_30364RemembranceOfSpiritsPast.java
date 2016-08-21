@@ -60,7 +60,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 					}
 					case SELECT_QUEST_REWARD: {
 						changeQuestStep(env, 1, 1, true); // reward
-						return sendQuestDialog(env, 5);
+						return sendQuestEndDialog(env);
 					}
 				}
 			}

@@ -54,6 +54,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}
+					return false;
 				}
 				case 799592:
 				case 799666: {

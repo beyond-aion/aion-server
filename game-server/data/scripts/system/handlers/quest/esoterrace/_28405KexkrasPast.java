@@ -56,6 +56,7 @@ public class _28405KexkrasPast extends QuestHandler {
 						else if (env.getDialog() == DialogAction.SETPRO1)
 							return defaultCloseDialog(env, 0, 1, 182215025, 1, 182215014, 1);
 					}
+					return false;
 				case npcRelyt:
 					if (qs.getQuestVarById(0) == 1) {
 						if (env.getDialog() == DialogAction.QUEST_SELECT)

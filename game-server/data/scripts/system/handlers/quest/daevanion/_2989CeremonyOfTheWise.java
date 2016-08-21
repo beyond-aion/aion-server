@@ -73,6 +73,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204057:// Sigyn
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -86,6 +87,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204058:// Sif
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -99,6 +101,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204059:// Freyr
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -112,6 +115,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 801222:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -125,6 +129,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 801223:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -138,6 +143,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 204146:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
@@ -156,6 +162,7 @@ public class _2989CeremonyOfTheWise extends QuestHandler {
 								else
 									return sendQuestDialog(env, 3739);
 							}
+							return false;
 						case SELECT_QUEST_REWARD:
 							if (var == 3) {
 								playQuestMovie(env, 137);

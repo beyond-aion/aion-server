@@ -67,6 +67,7 @@ public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 						} else if (qs.getQuestVarById(0) == 0) {
 							return sendQuestDialog(env, 1003);
 						}
+						return false;
 					case SETPRO1:
 						QuestService.questTimerStart(env, 600);
 						qs.setQuestVarById(0, 1);

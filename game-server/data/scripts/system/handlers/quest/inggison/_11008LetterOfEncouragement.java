@@ -68,6 +68,7 @@ public class _11008LetterOfEncouragement extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798997: {
 					switch (env.getDialog()) {

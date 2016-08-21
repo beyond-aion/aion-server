@@ -178,12 +178,14 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
             case 1: return m01;
             case 2: return m02;
             }
+            break;
         case 1:
             switch (j) {
             case 0: return m10;
             case 1: return m11;
             case 2: return m12;
             }
+            break;
         case 2:
             switch (j) {
             case 0: return m20;
@@ -497,12 +499,14 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
             case 1: m01 = value; return this;
             case 2: m02 = value; return this;
             }
+            break;
         case 1:
             switch (j) {
             case 0: m10 = value; return this;
             case 1: m11 = value; return this;
             case 2: m12 = value; return this;
             }
+            break;
         case 2:
             switch (j) {
             case 0: m20 = value; return this;

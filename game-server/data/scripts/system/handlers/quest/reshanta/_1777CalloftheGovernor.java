@@ -65,6 +65,7 @@ public class _1777CalloftheGovernor extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);

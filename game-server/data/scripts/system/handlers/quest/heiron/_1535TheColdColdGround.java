@@ -60,6 +60,7 @@ public class _1535TheColdColdGround extends QuestHandler {
 				case QUEST_SELECT:
 					if (abexSkins || worgSkins || karnifSkins)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (abexSkins) {
 						qs.setQuestVarById(0, 1);

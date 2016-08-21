@@ -72,6 +72,7 @@ public class _19026MasterHandicraftersPotential extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 203792:
 					switch (dialog) {
 						case QUEST_SELECT:

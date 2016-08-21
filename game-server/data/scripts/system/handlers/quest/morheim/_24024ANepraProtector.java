@@ -56,6 +56,7 @@ public class _24024ANepraProtector extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SELECT_ACTION_1012:
 							playQuestMovie(env, 80);
 							break;
@@ -64,17 +65,20 @@ public class _24024ANepraProtector extends QuestHandler {
 								return defaultCloseDialog(env, 0, 1); // 1
 							}
 					}
+					return false;
 				}
 				case 204361: {
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							if (var == 1) {
 								return defaultCloseDialog(env, 1, 2); // 2
 							}
 					}
+					return false;
 				}
 				case 278004: {
 					switch (dialog) {

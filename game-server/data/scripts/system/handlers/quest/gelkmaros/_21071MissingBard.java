@@ -40,6 +40,7 @@ public class _21071MissingBard extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1, true, false);
 				}

@@ -66,11 +66,13 @@ public class _30155StonetoFlesh extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SETPRO2:
 						if (var == 1) {
 							changeQuestStep(env, 1, 2, false);
 							return sendQuestDialog(env, 2375);
 						}
+						return false;
 					case SELECT_QUEST_REWARD:
 						if (var == 2) {
 							removeQuestItem(env, 182209252, 1);
@@ -84,6 +86,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						if (var == 0)
 							return defaultCloseDialog(env, 0, 1, false, false, 182209252, 1, 0, 0);
@@ -93,6 +96,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case SETPRO3:
 						if (var == 1)
 							changeQuestStep(env, 1, 3, false);

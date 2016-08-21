@@ -60,6 +60,7 @@ public class _30217GroupStigmasScars extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0 && qs != null)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(), player.getZ(),
 								player.getHeading());
@@ -68,6 +69,7 @@ public class _30217GroupStigmasScars extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				}
 				case 798909:
 					switch (env.getDialog()) {
@@ -85,11 +87,13 @@ public class _30217GroupStigmasScars extends QuestHandler {
 									return sendQuestDialog(env, 10001);
 							}
 					}
+					return false;
 				case 799506:
 					switch (env.getDialog()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							env.getVisibleObject().getController().onDelete();
 							qs.setQuestVarById(0, 2);

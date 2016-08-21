@@ -57,6 +57,7 @@ public class _4205SmackTheShulack extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 16)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SET_SUCCEED:
 						if (var == 16)
 							changeQuestStep(env, 16, 16, true);

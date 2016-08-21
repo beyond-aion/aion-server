@@ -44,6 +44,7 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
@@ -57,6 +58,7 @@ public class _14023PlayingAroundAtTheTemple extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							else if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {
 							if (var == 2 && QuestService.collectItemCheck(env, true)) {

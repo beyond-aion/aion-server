@@ -64,6 +64,7 @@ public class _1192VerteronReinforcements extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 203833: {
 					switch (env.getDialog()) {

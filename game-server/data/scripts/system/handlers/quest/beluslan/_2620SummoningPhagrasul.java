@@ -95,6 +95,7 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

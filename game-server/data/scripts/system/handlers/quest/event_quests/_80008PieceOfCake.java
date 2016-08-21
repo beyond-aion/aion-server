@@ -43,6 +43,7 @@ public class _80008PieceOfCake extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);
+						return false;
 					case SELECT_QUEST_REWARD:
 						removeQuestItem(env, 182214006, 1);
 						return defaultCloseDialog(env, 0, 1, true, true);

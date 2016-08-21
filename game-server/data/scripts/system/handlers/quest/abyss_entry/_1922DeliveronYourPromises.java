@@ -68,9 +68,9 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 				case 203901: { // Telemachus
 					switch (env.getDialog()) {
 						case USE_OBJECT: {
-							if (var == 7) {
+							if (var == 7)
 								return sendQuestDialog(env, 3739);
-							}
+							return false;
 						}
 						// Should be removed (it's for backward compatibility)
 						// Epeios sets REWARD status now and doesn't reach this part

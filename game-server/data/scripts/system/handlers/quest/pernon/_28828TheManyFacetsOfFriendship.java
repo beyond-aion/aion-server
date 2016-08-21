@@ -74,10 +74,9 @@ public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:
-					removeQuestItem(env, 182213205, 1);
+					return sendQuestEndDialog(env, new int[] { 182213205 });
 				case SELECTED_QUEST_NOREWARD:
-					sendQuestEndDialog(env);
-					return true;
+					return sendQuestEndDialog(env);
 			}
 		}
 		return false;

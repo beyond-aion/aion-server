@@ -66,6 +66,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 730014: {
 					switch (env.getDialog()) {

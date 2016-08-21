@@ -42,18 +42,11 @@ public class _3100AShugosBestFriend extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 203792) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case QUEST_ACCEPT_1: {
-						if (player.getInventory().getItemCountByItemId(182208072) == 0) {
-							if (!giveQuestItem(env, 182208072, 1)) {
-								return true;
-							}
-						}
-					}
-					default:
-						return sendQuestStartDialog(env);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182208072, 1);
 				}
 			}
 		}

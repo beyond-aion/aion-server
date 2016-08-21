@@ -70,6 +70,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 799017: {
 					switch (env.getDialog()) {
@@ -85,6 +86,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 								return true;
 						}
 					}
+					return false;
 				}
 				case 798941: {
 					switch (env.getDialog()) {

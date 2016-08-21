@@ -188,6 +188,7 @@ public class _10506MindOverMatter extends QuestHandler {
 					updateQuestStatus(env);
 					return true;
 				}
+				return false;
 			case 236263:
 				if (var == 6) { // Step 6: Subdue Noep's Ego (1).
 					qs.setQuestVarById(1, 1);

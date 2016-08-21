@@ -50,16 +50,15 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-				// 1 - Receive the signature of Boreas on the recommendation letter.
-				case 203704:
+				case 203704: // 1 - Receive the signature of Boreas on the recommendation letter.
 					switch (dialog) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
-					// 2 - Receive the signature of Jumentis on the recommendation letter.
-				case 203705:
+					break;
+				case 203705: // 2 - Receive the signature of Jumentis on the recommendation letter.
 					if (var == 1) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -68,8 +67,8 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 								return defaultCloseDialog(env, 1, 2);
 						}
 					}
-					// 3 - Receive the signature of Charna on the recommendation letter.
-				case 203706:
+					break;
+				case 203706: // 3 - Receive the signature of Charna on the recommendation letter.
 					if (var == 2) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -78,8 +77,8 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 								return defaultCloseDialog(env, 2, 3);
 						}
 					}
-					// 4 - Receive the signature of Thrasymedes on the recommendation letter.
-				case 203707:
+					break;
+				case 203707: // 4 - Receive the signature of Thrasymedes on the recommendation letter.
 					if (var == 3) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -88,8 +87,8 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 								return defaultCloseDialog(env, 3, 4);
 						}
 					}
-					// 5 - Receive the signature of Oakley on the recommendation letter.
-				case 801214:
+					break;
+				case 801214: // 5 - Receive the signature of Oakley on the recommendation letter.
 					if (var == 4) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -98,8 +97,8 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 								return defaultCloseDialog(env, 4, 5);
 						}
 					}
-					// 6 - Receive the signature of Dion on the recommendation letter.
-				case 801215:
+					break;
+				case 801215: // 6 - Receive the signature of Dion on the recommendation letter.
 					if (var == 5) {
 						switch (dialog) {
 							case QUEST_SELECT:
@@ -108,8 +107,8 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 								return defaultCloseDialog(env, 5, 6, 182206087, 1, 182206086, 1);
 						}
 					}
-					// 7 - Report the result to Lavirintos with the Oath Stone
-				case 203752:
+					break;
+				case 203752: // 7 - Report the result to Lavirintos with the Oath Stone
 					switch (dialog) {
 						case QUEST_SELECT: {
 							if (var == 6) {

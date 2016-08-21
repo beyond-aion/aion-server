@@ -61,6 +61,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 						if (var == 1) {
 							return sendQuestDialog(env, 1013);
 						}
+						return false;
 					case SETPRO1:
 						if (var <= 1) {
 							qs.setQuestVar(1);
@@ -75,11 +76,13 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SELECT_ACTION_1353:
 						if (var == 1) {
 							playQuestMovie(env, 121);
 							return false;
 						}
+						return false;
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2); // 2
 				}
@@ -88,11 +91,13 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1693);
+						return false;
 					case SELECT_ACTION_1694:
 						if (var == 2) {
 							playQuestMovie(env, 122);
 							return false;
 						}
+						return false;
 					case SETPRO3:
 						if (var == 2) {
 							PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());

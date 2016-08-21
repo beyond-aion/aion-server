@@ -128,6 +128,7 @@ public class _2947FollowingThrough extends QuestHandler {
 						case SETPRO3: {
 							if (var == 4 || var == 6)
 								return defaultCloseDialog(env, var, 5); // 5
+							return false;
 						}
 						case SETPRO4: {
 							qs.setQuestVarById(0, 7);
@@ -176,6 +177,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							return true;
 						}
 						changeQuestStep(env, var1, var1 + 1, false, 1); // 1: 1 - 3
+						return true;
 					}
 					case 212611: { // Klaw Scouter
 						if (var1 == 3 && var3 == 3) {
@@ -185,6 +187,7 @@ public class _2947FollowingThrough extends QuestHandler {
 							return true;
 						}
 						changeQuestStep(env, var2, var2 + 1, false, 2); // 2: 1 - 3
+						return true;
 					}
 					case 212408: { // Dark Lake Spirit
 						if (var1 == 3 && var2 == 3) {

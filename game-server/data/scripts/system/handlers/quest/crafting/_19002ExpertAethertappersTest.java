@@ -58,6 +58,7 @@ public class _19002ExpertAethertappersTest extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				}
 				case 203782: {
 					switch (dialog) {

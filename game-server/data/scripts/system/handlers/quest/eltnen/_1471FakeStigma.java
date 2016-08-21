@@ -52,6 +52,7 @@ public class _1471FakeStigma extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 						else if (var0 == 3)
 							return sendQuestDialog(env, 2375);
+						return false;
 					}
 					case SETPRO1: {
 						return defaultCloseDialog(env, 0, 1);

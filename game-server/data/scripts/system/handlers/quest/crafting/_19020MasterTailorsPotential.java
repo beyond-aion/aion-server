@@ -68,6 +68,7 @@ public class _19020MasterTailorsPotential extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 					}
+					return false;
 				case 203793:
 					switch (dialog) {
 						case QUEST_SELECT:

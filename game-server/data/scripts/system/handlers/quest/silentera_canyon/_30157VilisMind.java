@@ -73,6 +73,7 @@ public class _30157VilisMind extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SETPRO1:
 						if (var == 0) {
 							defaultCloseDialog(env, 0, 0, true, false);

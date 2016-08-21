@@ -54,6 +54,7 @@ public class _2669AtlaEscape extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						}
 						case SETPRO1: {
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 730111, 0, 1); // 1

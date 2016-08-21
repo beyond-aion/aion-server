@@ -64,6 +64,7 @@ public class _14052RestlessSouls extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					else if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						return defaultCloseDialog(env, 0, 1); // 1
@@ -78,12 +79,14 @@ public class _14052RestlessSouls extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					else if (var == 4)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					return checkQuestItems(env, 2, 3, false, 10000, 10001, 182215344, 1); // 3
 				case SETPRO2:
 					if (var == 1) {
 						return defaultCloseDialog(env, 1, 2); // 2
 					}
+					return false;
 				case SET_SUCCEED:
 					if (var == 4) {
 						return defaultCloseDialog(env, 4, 4, true, false); // 4
@@ -95,6 +98,7 @@ public class _14052RestlessSouls extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1694);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						if (player.getInventory().getItemCountByItemId(182215340) == 0) {
@@ -111,6 +115,7 @@ public class _14052RestlessSouls extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1781);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						if (player.getInventory().getItemCountByItemId(182215341) == 0) {
@@ -127,6 +132,7 @@ public class _14052RestlessSouls extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1864);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						if (player.getInventory().getItemCountByItemId(182215342) == 0) {
@@ -143,6 +149,7 @@ public class _14052RestlessSouls extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1949);
+					return false;
 				case SETPRO3:
 					if (var == 2) {
 						if (player.getInventory().getItemCountByItemId(182215343) == 0) {

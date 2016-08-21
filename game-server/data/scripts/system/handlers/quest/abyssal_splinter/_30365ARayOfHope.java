@@ -72,7 +72,7 @@ public class _30365ARayOfHope extends QuestHandler {
 						}
 						case SELECT_QUEST_REWARD: {
 							changeQuestStep(env, 3, 3, true); // reward
-							return sendQuestDialog(env, 5);
+							return sendQuestEndDialog(env);
 						}
 					}
 					break;

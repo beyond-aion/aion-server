@@ -60,6 +60,7 @@ public class _1947ALuckyDay extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 2375);
+							return false;
 						case SELECT_QUEST_REWARD:
 							if (var == 0) {
 								qs.setStatus(QuestStatus.REWARD);

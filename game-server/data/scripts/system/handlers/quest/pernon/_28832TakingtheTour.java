@@ -47,6 +47,7 @@ public class _28832TakingtheTour extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 0)
 								return sendQuestDialog(env, 2375);
+							return false;
 						}
 						case SELECT_QUEST_REWARD: {
 							playQuestMovie(env, 802);

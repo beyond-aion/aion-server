@@ -41,18 +41,11 @@ public class _1540BaittheHooks extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204588) {
 				switch (env.getDialog()) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case QUEST_ACCEPT_1: {
-						if (player.getInventory().getItemCountByItemId(182201822) == 0) {
-							if (!giveQuestItem(env, 182201822, 1)) {
-								return true;
-							}
-						}
-					}
-					default:
-						return sendQuestStartDialog(env);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182201822, 1);
 				}
 			}
 		}

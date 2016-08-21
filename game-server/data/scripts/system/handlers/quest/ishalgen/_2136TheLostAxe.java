@@ -77,6 +77,7 @@ public class _2136TheLostAxe extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 1) {
 						qs.setStatus(QuestStatus.REWARD);
@@ -85,6 +86,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 						return sendQuestDialog(env, 6);
 					}
+					return false;
 				case SETPRO2:
 					if (var == 1) {
 						qs.setStatus(QuestStatus.REWARD);

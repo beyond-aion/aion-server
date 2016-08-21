@@ -79,6 +79,7 @@ public class _2004ACharmedCube extends QuestHandler {
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 						return true;
 					}
+					return false;
 				}
 				case 203550: { // Munin
 					switch (dialog) {

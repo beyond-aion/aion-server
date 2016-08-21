@@ -62,6 +62,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						return defaultCloseDialog(env, 0, 1);
@@ -72,6 +73,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SELECT_ACTION_1354:
 					if (var == 1)
 						playQuestMovie(env, 32);
@@ -101,6 +103,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 					}
+					return false;
 				case SETPRO4:
 					if (var == 3) {
 						playQuestMovie(env, 50);
@@ -120,6 +123,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (var == 2)
 						return checkQuestItems(env, 2, 2, false, 2802, 2717);
+					return false;
 				case SETPRO4:
 					if (var == 2) {
 						if (!giveQuestItem(env, 182201004, 1))

@@ -67,6 +67,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 798386: {
 					switch (env.getDialog()) {
@@ -83,6 +84,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 							return true;
 						}
 					}
+					return false;
 				}
 				case 700563: {
 					switch (env.getDialog()) {

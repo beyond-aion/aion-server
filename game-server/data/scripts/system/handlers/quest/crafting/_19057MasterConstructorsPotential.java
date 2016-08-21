@@ -89,6 +89,7 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 							} else
 								return sendQuestDialog(env, 4400);
 					}
+					return false;
 				case 798450:
 					switch (dialog) {
 						case QUEST_SELECT: {

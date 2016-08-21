@@ -53,6 +53,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
+							return false;
 						case SETPRO1:
 							if (var == 0) {
 								changeQuestStep(env, 0, 1, false);
@@ -67,6 +68,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
+							return false;
 						case SETPRO3:
 							if (var == 2) {
 								qs.setQuestVarById(0, var + 1);
@@ -90,6 +92,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
+							return false;
 						case SETPRO2:
 							if (var == 1) {
 								changeQuestStep(env, 1, 2, false);

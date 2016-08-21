@@ -73,8 +73,8 @@ public class _3095ADecisiveClue extends QuestHandler {
 						return sendQuestStartDialog(env);
 				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestEndDialog(env);
+				return false;
 			}
-
 			case 203898: {
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 					if (env.getDialog() == DialogAction.QUEST_SELECT)

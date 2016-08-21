@@ -49,6 +49,7 @@ public class _29070ADispatchtoAltgard extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 					}
+					return false;
 				}
 				case 203559:
 					switch (env.getDialog()) {

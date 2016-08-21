@@ -64,6 +64,7 @@ public class _10034FoundUnderground extends QuestHandler {
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
+							return false;
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
@@ -75,6 +76,7 @@ public class _10034FoundUnderground extends QuestHandler {
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
+							return false;
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2);
 					}
@@ -86,6 +88,7 @@ public class _10034FoundUnderground extends QuestHandler {
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
+							return false;
 						case SELECT_ACTION_1695:
 							playQuestMovie(env, 504);
 							return sendQuestDialog(env, 1695);

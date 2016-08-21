@@ -39,14 +39,11 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 798357) {
 				switch (dialog) {
-					case QUEST_SELECT: {
+					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					}
-					case QUEST_ACCEPT_1: {
-						giveQuestItem(env, 182206073, 1);
-					}
-					default:
-						return sendQuestStartDialog(env);
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
+						return sendQuestStartDialog(env, 182206073, 1);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

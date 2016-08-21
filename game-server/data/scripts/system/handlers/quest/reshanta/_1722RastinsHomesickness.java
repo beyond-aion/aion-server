@@ -60,6 +60,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						qs.setQuestVarById(0, var + 1);
@@ -74,6 +75,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO2:
 					if (var == 1) {
 						qs.setQuestVarById(0, var + 1);
@@ -88,6 +90,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
+					return false;
 				case SELECT_QUEST_REWARD:
 					if (var == 2) {
 						qs.setQuestVarById(0, var + 1);
@@ -102,6 +105,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
+					return false;
 				case SETPRO4:
 					if (var == 3) {
 						qs.setQuestVarById(0, var + 1);
@@ -116,6 +120,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 4)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SETPRO5:
 					if (var == 4) {
 						qs.setQuestVarById(0, var + 1);
@@ -130,6 +135,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 5)
 						return sendQuestDialog(env, 2716);
+					return false;
 				case SETPRO6:
 					if (var == 5) {
 						qs.setQuestVarById(0, var + 1);
@@ -144,6 +150,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
+					return false;
 				case SETPRO7:
 					if (var == 6) {
 						qs.setQuestVarById(0, var + 1);
@@ -158,6 +165,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 7)
 						return sendQuestDialog(env, 3398);
+					return false;
 				case SET_SUCCEED:
 					if (var == 7) {
 						if (!giveQuestItem(env, 182202101, 1))

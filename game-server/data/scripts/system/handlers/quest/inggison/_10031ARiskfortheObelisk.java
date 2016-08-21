@@ -67,6 +67,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
 						}
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, var, var + 1); // 1
 				}

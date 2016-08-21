@@ -61,6 +61,7 @@ public class _2600HumongousMalek extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
+					return false;
 				case SETPRO1:
 					if (var == 0) {
 						if (giveQuestItem(env, 182204528, 1))
@@ -90,6 +91,7 @@ public class _2600HumongousMalek extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 2375);
+					return false;
 				case SELECT_QUEST_REWARD:
 					if (var == 1) {
 						removeQuestItem(env, 182204529, 1);

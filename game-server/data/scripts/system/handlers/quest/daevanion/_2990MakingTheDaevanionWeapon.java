@@ -79,6 +79,7 @@ public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 							return sendQuestDialog(env, 1693);
 						if (var == 3 && player.getInventory().getItemCountByItemId(186000040) > 0)
 							return sendQuestDialog(env, 2034);
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						if (var == 0) {
 							if (QuestService.collectItemCheck(env, true)) {
@@ -92,6 +93,7 @@ public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 					case SELECT_ACTION_1352:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
+						return false;
 					case SELECT_ACTION_2035:
 						if (var == 3) {
 							if (player.getCommonData().getDp() == 4000 && player.getInventory().getItemCountByItemId(186000040) > 0) {

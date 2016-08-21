@@ -52,6 +52,7 @@ public class _14015NotBlindedByVengeance extends QuestHandler {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
+					return false;
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
 						qs.setStatus(QuestStatus.REWARD);

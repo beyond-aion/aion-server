@@ -60,7 +60,7 @@ public class _1003IllegalLogging extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 7)
 							return sendQuestDialog(env, 1352);
-
+						return false;
 					case SETPRO1:
 					case SETPRO2:
 						if (var == 0 || var == 7) {

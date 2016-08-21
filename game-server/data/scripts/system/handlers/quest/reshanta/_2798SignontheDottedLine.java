@@ -35,6 +35,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
+						return false;
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}

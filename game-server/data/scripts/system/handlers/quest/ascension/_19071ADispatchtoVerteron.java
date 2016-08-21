@@ -49,6 +49,7 @@ public class _19071ADispatchtoVerteron extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 					}
+					return false;
 				}
 				case 203097:
 					switch (env.getDialog()) {

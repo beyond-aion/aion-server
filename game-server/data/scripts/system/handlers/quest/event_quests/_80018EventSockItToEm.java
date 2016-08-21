@@ -58,6 +58,7 @@ public class _80018EventSockItToEm extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);
+						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, 0, 1, true, 5, 2716);
 				}

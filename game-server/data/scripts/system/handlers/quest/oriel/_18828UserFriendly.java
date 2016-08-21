@@ -74,10 +74,9 @@ public class _18828UserFriendly extends QuestHandler {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:
-					removeQuestItem(env, 182213191, 1);
+					return sendQuestEndDialog(env, new int[] { 182213191 });
 				case SELECTED_QUEST_NOREWARD:
-					sendQuestEndDialog(env);
-					return true;
+					return sendQuestEndDialog(env);
 			}
 		}
 		return false;
