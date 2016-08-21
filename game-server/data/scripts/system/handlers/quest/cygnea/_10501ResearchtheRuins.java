@@ -16,15 +16,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @Author Majka
  * @Description:
- * Talk with Mosphera at the Aequis First Hold.
- * Use the Ruins Location Map to find the first location.
- * Examine the Collapsed Ruins.
- * Use the Ruins Location Map to find the second location.
- * Examine the Ancient Balaur Corpse.
- * Use the Ruins Location Map to find the third location.
- * Obtain the Token of Balaur and take it to Mosphera.
- * 
- * Help Mosphera investigate the secret of the suspicious ruins.
+ * 							Talk with Mosphera at the Aequis First Hold.
+ *               Use the Ruins Location Map to find the first location.
+ *               Examine the Collapsed Ruins.
+ *               Use the Ruins Location Map to find the second location.
+ *               Examine the Ancient Balaur Corpse.
+ *               Use the Ruins Location Map to find the third location.
+ *               Obtain the Token of Balaur and take it to Mosphera.
+ *               Help Mosphera investigate the secret of the suspicious ruins.
  */
 public class _10501ResearchtheRuins extends QuestHandler {
 
@@ -58,26 +57,26 @@ public class _10501ResearchtheRuins extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804700: // Mosphera
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 0) { // Step 0: Talk with Mosphera at the Aequis First Hold.
+					if (var == 0) { // Step 0: Talk with Mosphera at the Aequis First Hold.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
-						
+
 						if (dialog == DialogAction.SETPRO1)
-							return defaultCloseDialog(env, var, var+1, workItemId, 1); // Gives item Ruins Location Map [ID: 182215598]
+							return defaultCloseDialog(env, var, var + 1, workItemId, 1); // Gives item Ruins Location Map [ID: 182215598]
 					}
-					
-					if(var == 6) { // Step 6: Obtain the Token of Balaur and take it to Mosphera.
+
+					if (var == 6) { // Step 6: Obtain the Token of Balaur and take it to Mosphera.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 3057);
-						
+
 						// @ToCheck: is Cygnea Aetheric Field Stone [ID: 702760] related with mission?
 						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(182215599);
-							if(itemCount > 0) {
+							if (itemCount > 0) {
 								removeQuestItem(env, 182215599, itemCount);
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
@@ -92,47 +91,49 @@ public class _10501ResearchtheRuins extends QuestHandler {
 					if (dialog == DialogAction.USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
-					
+
 					return sendQuestEndDialog(env);
 				}
 				break;
 			case 731535: // Ancient Balaur Corpse
-				if(var == 4) { // Step 4: Examine the Ancient Balaur Corpse.
+				if (var == 4) { // Step 4: Examine the Ancient Balaur Corpse.
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
 					if (dialog == DialogAction.SETPRO5) {
 						// Beritra Raider [ID: 236250] is spawned for 10 minutes
-						QuestService.addNewSpawn(210070000, player.getInstanceId(), 236250, (float) 2067.6863, (float) 386.52222, (float) 565.7099, (byte) 70, 10);
-						return defaultCloseDialog(env, var, var+1);
+						QuestService.addNewSpawn(210070000, player.getInstanceId(), 236250, (float) 2067.6863, (float) 386.52222, (float) 565.7099, (byte) 70,
+							10);
+						return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 				break;
 			case 731536: // Collapsed Ruins
-				if(var == 2) { // Step 2: Examine the Collapsed Ruins
+				if (var == 2) { // Step 2: Examine the Collapsed Ruins
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
 					if (dialog == DialogAction.SETPRO3)
-						return defaultCloseDialog(env, var, var+1);
+						return defaultCloseDialog(env, var, var + 1);
 				}
 				break;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
-		
+
 		final int id = item.getItemTemplate().getTemplateId();
 		if (id != workItemId)
 			return HandlerResult.UNKNOWN;
-	
+
 		final int itemObjId = item.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
@@ -140,15 +141,15 @@ public class _10501ResearchtheRuins extends QuestHandler {
 				// Step 1: Use the Ruins Location Map to find the first location
 				// Step 3: Use the Ruins Location Map to find the second location
 				// Step 5: Use the Ruins Location Map to find the third location
-				if(var == 1 || var == 3 || var == 5) {
-					qs.setQuestVar(var+1);
+				if (var == 1 || var == 3 || var == 5) {
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 				}
 			}
 		}, 1000);
 		return HandlerResult.SUCCESS;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 10500);

@@ -52,7 +52,7 @@ public class _4939ProvingGround extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Talk with Njord
+				// 1 - Talk with Njord
 				case 204055:
 					switch (dialog) {
 						case QUEST_SELECT:

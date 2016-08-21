@@ -35,7 +35,7 @@ public class _3205FortheBlackCloudTraders extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs == null || qs.isStartable()) {
 			if (targetId == npcIds[0]) { // Jielinlinerk
 				if (dialog == DialogAction.QUEST_SELECT) {

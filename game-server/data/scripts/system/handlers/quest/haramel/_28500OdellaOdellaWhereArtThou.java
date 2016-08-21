@@ -124,17 +124,17 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 				}
 			}
 			return true;
-				}
+		}
 		return false;
-				}
-	
+	}
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
 
 		if (player == null) {
 			return false;
-				}
+		}
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {

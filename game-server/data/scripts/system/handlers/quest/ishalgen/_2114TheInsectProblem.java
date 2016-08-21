@@ -46,7 +46,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 						if (QuestService.startQuest(env)) {
 							qs = player.getQuestStateList().getQuestState(questId);
 							qs.setQuestVar(1);
-							this.updateQuestStatus(env);
+							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}
@@ -54,7 +54,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 						if (QuestService.startQuest(env)) {
 							qs = player.getQuestStateList().getQuestState(questId);
 							qs.setQuestVar(11);
-							this.updateQuestStatus(env);
+							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
 						}

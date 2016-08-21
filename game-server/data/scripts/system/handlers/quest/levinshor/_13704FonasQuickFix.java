@@ -79,5 +79,5 @@ public class _13704FonasQuickFix extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

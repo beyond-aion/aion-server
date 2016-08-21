@@ -19,7 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author Mr. Poke
  * @modified Hellboy, Gigi, Bobobear, Majka
@@ -106,8 +105,7 @@ public class _2002WheresRae extends QuestHandler {
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 								return true;
-							}
-							else if (var == 13) {
+							} else if (var == 13) {
 								qs.setQuestVarById(0, 14);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -115,7 +113,7 @@ public class _2002WheresRae extends QuestHandler {
 							}
 							break;
 						case SETPRO5:
-							if (var == 12 || var == 99 ) {
+							if (var == 12 || var == 99) {
 								qs.setQuestVar(99);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
@@ -131,8 +129,7 @@ public class _2002WheresRae extends QuestHandler {
 									qs.setQuestVarById(0, 12);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 2461);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 2376);
 							}
 					}
@@ -176,7 +173,8 @@ public class _2002WheresRae extends QuestHandler {
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(3001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
-								ThreadPoolManager.getInstance().schedule(new Runnable(){
+								ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 									@Override
 									public void run() {
 										TeleportService2.teleportTo(player, 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
@@ -185,14 +183,13 @@ public class _2002WheresRae extends QuestHandler {
 									}
 								}, 40000);
 								return true;
-						}
-						return false;
-					default:
-						return false;
+							}
+							return false;
+						default:
+							return false;
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) {
 				if (dialog == DialogAction.USE_OBJECT || dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3398);

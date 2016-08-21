@@ -53,7 +53,7 @@ public class _1393NewFlightPath extends QuestHandler {
 		}
 		if (qs == null)
 			return false;
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204041) {
 				switch (env.getDialog()) {

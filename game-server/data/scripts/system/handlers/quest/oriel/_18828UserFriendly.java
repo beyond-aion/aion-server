@@ -23,7 +23,7 @@ public class _18828UserFriendly extends QuestHandler {
 	private static final Set<Integer> butlers;
 
 	static {
-		butlers = new HashSet<Integer>();
+		butlers = new HashSet<>();
 		butlers.add(810017);
 		butlers.add(810018);
 		butlers.add(810019);

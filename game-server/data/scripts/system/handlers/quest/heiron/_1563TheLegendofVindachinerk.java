@@ -59,8 +59,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 						case SETPRO2:
 							if (player.getInventory().getItemCountByItemId(182201729) < 1) {
 								return sendQuestDialog(env, 1353);
-							}
-							else {
+							} else {
 								player.getInventory().decreaseByItemId(182201729, 1);
 								qs.setQuestVar(2);
 								qs.setStatus(QuestStatus.REWARD);
@@ -76,8 +75,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 						case SETPRO2:
 							if (player.getInventory().getItemCountByItemId(182201729) < 1) {
 								return sendQuestDialog(env, 1439);
-							}
-							else {
+							} else {
 								player.getInventory().decreaseByItemId(182201729, 1);
 								qs.setQuestVar(2);
 								qs.setStatus(QuestStatus.REWARD);
@@ -106,7 +104,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
 		changeQuestStep(env, 0, 1, false);
-		
+
 		return HandlerResult.SUCCESS;
 	}
 }

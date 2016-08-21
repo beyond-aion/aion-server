@@ -44,22 +44,19 @@ public class _28604RecoveringRotan extends QuestHandler {
 				}
 				if (qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					giveQuestItem(env, 164000141, 1);
 					env.setQuestId(0);
 					return sendQuestDialog(env, 1012);
 				}
-			}
-			else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+			} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 				return sendQuestDialog(env, 5);
-			}
-			else {
+			} else {
 				changeQuestStep(env, 0, 0, true);
 				return sendQuestEndDialog(env);
 			}
 		}
-		
+
 		return false;
 	}
 

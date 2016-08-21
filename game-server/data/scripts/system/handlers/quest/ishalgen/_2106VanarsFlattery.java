@@ -39,7 +39,7 @@ public class _2106VanarsFlattery extends QuestHandler {
 						return sendQuestDialog(env, 4762);
 					}
 					case ASK_QUEST_ACCEPT: {
-						 return sendQuestDialog(env, 4);
+						return sendQuestDialog(env, 4);
 					}
 					case QUEST_ACCEPT_1: {
 						if (giveQuestItem(env, 182203106, 1)) {
@@ -47,18 +47,17 @@ public class _2106VanarsFlattery extends QuestHandler {
 						}
 						return false;
 					}
-					case QUEST_REFUSE_1:{
+					case QUEST_REFUSE_1: {
 						return sendQuestDialog(env, 1004);
 					}
-					case FINISH_DIALOG: 
+					case FINISH_DIALOG:
 						return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203502) {
 				switch (dialog) {
-					case QUEST_SELECT:{
+					case QUEST_SELECT: {
 						return sendQuestDialog(env, 1003);
 					}
 					case SETPRO1:
@@ -66,8 +65,7 @@ public class _2106VanarsFlattery extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203517) {
 				return sendQuestEndDialog(env);
 			}

@@ -1,9 +1,9 @@
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -28,7 +28,7 @@ public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 		qe.registerQuestNpc(questStartNpcId).addOnQuestStart(questId);
 		qe.registerQuestNpc(questStartNpcId).addOnTalkEvent(questId);
 		// Register kill events for each monster
-		int[] mobs = {210436, 210437, 210440, 210564, 210581, 210584};
+		int[] mobs = { 210436, 210437, 210440, 210564, 210581, 210584 };
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}

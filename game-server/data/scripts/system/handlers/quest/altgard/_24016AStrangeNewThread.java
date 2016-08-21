@@ -39,10 +39,10 @@ public class _24016AStrangeNewThread extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
@@ -51,9 +51,9 @@ public class _24016AStrangeNewThread extends QuestHandler {
 			switch (targetId) {
 				case 203557: // Suthran
 					if (var == 0) {
-						if(player.getPlayerClass() == PlayerClass.RIDER) { // Path for Rider
+						if (player.getPlayerClass() == PlayerClass.RIDER) { // Path for Rider
 							if (dialog == DialogAction.QUEST_SELECT) {
-									return sendQuestDialog(env, 1011);
+								return sendQuestDialog(env, 1011);
 							} else if (dialog == DialogAction.SELECT_ACTION_1013) {
 								playQuestMovie(env, 219);
 								return sendQuestDialog(env, 1013);
@@ -66,7 +66,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 								return sendQuestDialog(env, 1695);
 							}
 						}
-						
+
 						if (dialog == DialogAction.SETPRO1) {
 							TeleportService2.teleportTo(player, 220030000, 2467.6052f, 2548.0076f, 316.12375f, (byte) 63, TeleportAnimation.FADE_OUT_BEAM);
 							changeQuestStep(env, 0, 1, false); // 1
@@ -77,8 +77,9 @@ public class _24016AStrangeNewThread extends QuestHandler {
 				case 700140: // Gate Guardian Stone
 					if (var == 2) {
 						if (dialog == DialogAction.USE_OBJECT) {
-							if(player.getPlayerClass() == PlayerClass.RIDER) { // Spawn for Rider
-								QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Officer Tavasha
+							if (player.getPlayerClass() == PlayerClass.RIDER) { // Spawn for Rider
+								QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Officer
+																																																																								// Tavasha
 								return useQuestObject(env, 2, 3, false, false); // 3
 							} else { // Spawn for other classes
 								QuestService.addNewSpawn(320030000, player.getInstanceId(), 210753, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Kuninasha
@@ -94,11 +95,10 @@ public class _24016AStrangeNewThread extends QuestHandler {
 					}
 					break;
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) { // Suthran
 				if (dialog == DialogAction.USE_OBJECT) {
-					if(player.getPlayerClass() == PlayerClass.RIDER) { // Reward for Rider
+					if (player.getPlayerClass() == PlayerClass.RIDER) { // Reward for Rider
 						return sendQuestDialog(env, 2034);
 					} else { // Reward for other classes
 						return sendQuestDialog(env, 1352);
@@ -121,8 +121,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 			if (var >= 2 && player.getWorldId() != 320030000) {
 				changeQuestStep(env, var, 1, false);
 				return true;
-			}
-			else if (var == 1 && player.getWorldId() == 320030000) {
+			} else if (var == 1 && player.getWorldId() == 320030000) {
 				changeQuestStep(env, 1, 2, false); // 2
 				return true;
 			}
@@ -133,7 +132,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		if(player.getPlayerClass() == PlayerClass.RIDER) { // Kill for Rider
+		if (player.getPlayerClass() == PlayerClass.RIDER) { // Kill for Rider
 			return defaultOnKillEvent(env, 233876, 3, 4); // 4
 		} else { // Kill for other classes
 			return defaultOnKillEvent(env, 210753, 13, 14); // 4
@@ -159,7 +158,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (movieId == 154 && qs != null) {
 			TeleportService2.teleportTo(env.getPlayer(), 220030000, 1683.2405f, 1757.608f, 259.44543f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
 			return true;

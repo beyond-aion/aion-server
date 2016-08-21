@@ -62,16 +62,14 @@ public class _2005TeachingaLesson extends QuestHandler {
 									qs.setStatus(QuestStatus.REWARD);
 									updateQuestStatus(env);
 									return sendQuestDialog(env, 5);
-								}
-								else
+								} else
 									return sendQuestDialog(env, 1693);
 							}
 							break;
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203540)
 				return sendQuestEndDialog(env);
 		}

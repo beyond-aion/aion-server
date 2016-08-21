@@ -52,7 +52,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 
 			switch (targetId) {
-			// 1 - Talk with Ettamirel
+				// 1 - Talk with Ettamirel
 				case 203316:
 					switch (dialog) {
 						case QUEST_SELECT:

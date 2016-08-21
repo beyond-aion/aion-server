@@ -12,13 +12,12 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @Author Majka
  * @Description:
- * Talk with Engrid.
- * Talk with Egzen.
- * Kill Aetheric Protection Dominators to get information and return to Egzen.
- * Go to the Aetheric Field Stone Findspot.
- * Talk with Engrid.
- * 
- * Order: Engrid is looking for you. Go see him.
+ * 							Talk with Engrid.
+ *               Talk with Egzen.
+ *               Kill Aetheric Protection Dominators to get information and return to Egzen.
+ *               Go to the Aetheric Field Stone Findspot.
+ *               Talk with Engrid.
+ *               Order: Engrid is looking for you. Go see him.
  */
 public class _20503AncientEvilPlans extends QuestHandler {
 
@@ -50,45 +49,45 @@ public class _20503AncientEvilPlans extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804728:
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 0) { // Step 0: Talk with Engrid.
+					if (var == 0) { // Step 0: Talk with Engrid.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
-						
+
 						if (dialog == DialogAction.SETPRO1)
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
-				
+
 				if (qs.getStatus() == QuestStatus.REWARD) {
 					if (dialog == DialogAction.USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
-					
+
 					return sendQuestEndDialog(env);
 				}
 				break;
 			case 804729: // Egzen
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 1) { // Step 1: Talk with Egzen.
+					if (var == 1) { // Step 1: Talk with Egzen.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
-						
+
 						if (dialog == DialogAction.SETPRO2)
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 					}
-					
-					if(var == 2) { // Step 2: Kill Aetheric Protection Dominators to get information and return to Egzen.
+
+					if (var == 2) { // Step 2: Kill Aetheric Protection Dominators to get information and return to Egzen.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
 						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(182215640); // Aetheric Token
-							if(itemCount >= 1) {
+							if (itemCount >= 1) {
 								removeQuestItem(env, 182215640, itemCount);
-								qs.setQuestVar(var+1);
+								qs.setQuestVar(var + 1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
 							} else {
@@ -101,12 +100,12 @@ public class _20503AncientEvilPlans extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
 
 		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20503A_206394_8_220080000")) {
-			
+
 			Player player = env.getPlayer();
 			if (player == null) {
 				return false;
@@ -118,7 +117,7 @@ public class _20503AncientEvilPlans extends QuestHandler {
 
 				if (var == 3) { // Step 3: Go to the Aetheric Field Stone Findspot.
 					qs.setStatus(QuestStatus.REWARD);
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 					playQuestMovie(env, 862);
 					player.getMoveController().abortMove();
@@ -128,7 +127,7 @@ public class _20503AncientEvilPlans extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 20500);
@@ -138,7 +137,7 @@ public class _20503AncientEvilPlans extends QuestHandler {
 	public void onLevelChangedEvent(Player player) {
 		defaultOnLevelChangedEvent(player, 20500);
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();

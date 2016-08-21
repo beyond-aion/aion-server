@@ -105,7 +105,7 @@ public class _28302DocumentSaved extends QuestHandler {
 			}
 		} else if (var0 == 5) {
 			if (targetId == popuchinId)
-				QuestService.spawnQuestNpc(300240000, player.getInstanceId(), 730375, 374.9f, 424.3f, 653.53f, (byte)0);
+				QuestService.spawnQuestNpc(300240000, player.getInstanceId(), 730375, 374.9f, 424.3f, 653.53f, (byte) 0);
 		}
 
 		return false;

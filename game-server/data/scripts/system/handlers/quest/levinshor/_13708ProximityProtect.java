@@ -79,5 +79,5 @@ public class _13708ProximityProtect extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

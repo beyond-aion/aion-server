@@ -105,8 +105,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 						case QUEST_SELECT: {
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
-							}
-							else if (var == 6) {
+							} else if (var == 6) {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
@@ -134,13 +133,11 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					break;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278036) { // Scoda
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}

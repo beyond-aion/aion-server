@@ -38,7 +38,7 @@ public class _25052AnOfferingPeace extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 804913) { // Redelf
 				if (dialog == DialogAction.QUEST_SELECT)
@@ -48,29 +48,30 @@ public class _25052AnOfferingPeace extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			
-			switch(targetId) {
+
+			switch (targetId) {
 				case 731561: // Sea Jotun's treasure
-					if(var == 0) {
+					if (var == 0) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
 						if (dialog == DialogAction.SET_SUCCEED) {
 							Npc npc = (Npc) env.getVisibleObject();
-							if(npc != null)
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220032, npc.getPosition().getX(), npc.getPosition().getY(), npc.getPosition().getZ(), (byte) 10, 5);
+							if (npc != null)
+								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220032, npc.getPosition().getX(), npc.getPosition().getY(),
+									npc.getPosition().getZ(), (byte) 10, 5);
 							giveQuestItem(env, 182215721, 1);
-							qs.setQuestVar(var+1);
-							return defaultCloseDialog(env, var+1, var+1, true, false);
+							qs.setQuestVar(var + 1);
+							return defaultCloseDialog(env, var + 1, var + 1, true, false);
 						}
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch(targetId) {
+			switch (targetId) {
 				case 804915: // Soglo
 					if (dialog == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 10002);
-					
+
 					removeQuestItem(env, 182215721, 1);
 					return sendQuestEndDialog(env);
 			}

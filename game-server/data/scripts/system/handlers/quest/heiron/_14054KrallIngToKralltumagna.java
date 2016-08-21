@@ -13,8 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14054KrallIngToKralltumagna extends QuestHandler {
 
-	private final static int[] indratu_runaway = { 	235483, 235484, 235485, 235486, 235487, 235488, 235489, 235490, 235491, 235492, 
-													235493, 235494, 235495, 235496, 235497, 235498, 235499, 235500, 235501, 235502 };
+	private final static int[] indratu_runaway = { 235483, 235484, 235485, 235486, 235487, 235488, 235489, 235490, 235491, 235492, 235493, 235494,
+		235495, 235496, 235497, 235498, 235499, 235500, 235501, 235502 };
 	private final static int baranath = 702040;
 	private final static int vitusa = 233861;
 

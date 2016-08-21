@@ -36,7 +36,7 @@ public class _29600WelcomeBack extends QuestHandler {
 
 		if (qs == null)
 			return false;
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
 				switch (dialog) {

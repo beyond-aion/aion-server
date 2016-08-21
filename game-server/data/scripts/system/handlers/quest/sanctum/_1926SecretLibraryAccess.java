@@ -34,7 +34,7 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 	}
 
 	private boolean AreVerteronQuestsFinished(Player player) {
-		int id = player.getQuestStateList().getQuestState(1130) != null ? 1020 : 14016; //  1020 Old path, 14016 New path
+		int id = player.getQuestStateList().getQuestState(1130) != null ? 1020 : 14016; // 1020 Old path, 14016 New path
 		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Verteron state
 		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
 	}

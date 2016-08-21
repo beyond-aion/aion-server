@@ -23,7 +23,7 @@ public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 	private static final Set<Integer> butlers;
 
 	static {
-		butlers = new HashSet<Integer>();
+		butlers = new HashSet<>();
 		butlers.add(810022);
 		butlers.add(810023);
 		butlers.add(810024);

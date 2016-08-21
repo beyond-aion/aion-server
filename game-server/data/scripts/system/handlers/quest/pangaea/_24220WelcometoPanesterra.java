@@ -92,5 +92,5 @@ public class _24220WelcometoPanesterra extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 }

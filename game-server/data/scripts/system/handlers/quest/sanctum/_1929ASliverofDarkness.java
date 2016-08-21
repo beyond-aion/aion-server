@@ -272,8 +272,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					removeStigma(env);
 					changeQuestStep(env, var, 2);
 					return true;
-				}
-				else if (var == 8) {
+				} else if (var == 8) {
 					removeStigma(env);
 					return true;
 				}
@@ -283,7 +282,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 	}
 
 	private int getStoneId(Player player) {
-		//TODO: find out the correct stigma ids for each class on official servers
+		// TODO: find out the correct stigma ids for each class on official servers
 		switch (player.getCommonData().getPlayerClass()) {
 			case CHANTER:
 			case CLERIC:

@@ -10,16 +10,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @Author Majka
  * @Description:
- * Talk with Walque.
- * Talk with Kronag.
- * Talk with Kanovi.
- * Get a Highland Husk and take it to Kanovi.
- * Talk with Kanovi.
- * Talk with Muratun.
- * Take the Tejhi Trust Token that Muratun gave you to Batuga.
- * Report to Walque.
- * 
- * Order: Meet with Walqule.
+ * 							Talk with Walque.
+ *               Talk with Kronag.
+ *               Talk with Kanovi.
+ *               Get a Highland Husk and take it to Kanovi.
+ *               Talk with Kanovi.
+ *               Talk with Muratun.
+ *               Take the Tejhi Trust Token that Muratun gave you to Batuga.
+ *               Report to Walque.
+ *               Order: Meet with Walqule.
  */
 public class _20502EvolvingMysteries extends QuestHandler {
 
@@ -52,55 +51,55 @@ public class _20502EvolvingMysteries extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804723: // Walque
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 0) { // Step 0: Talk with Walque.
+					if (var == 0) { // Step 0: Talk with Walque.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
-						
+
 						if (dialog == DialogAction.SETPRO1)
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
-				
+
 				if (qs.getStatus() == QuestStatus.REWARD) { // Step 8: Report to Walque.
 					if (dialog == DialogAction.USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
-					
+
 					return sendQuestEndDialog(env);
 				}
 				break;
 			case 804724: // Kronag
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 1) { // Step 1: Talk with Kronag.
+					if (var == 1) { // Step 1: Talk with Kronag.
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
-						
+
 						if (dialog == DialogAction.SETPRO2)
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 				break;
 			case 804725: // Kanovi
-				if(var == 2) { // Step 2: Talk with Kanovi.
+				if (var == 2) { // Step 2: Talk with Kanovi.
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
 					if (dialog == DialogAction.SETPRO3) {
-						return defaultCloseDialog(env, var, var+1);
+						return defaultCloseDialog(env, var, var + 1);
 					}
 				}
-				
-				if(var == 3) { // Step 3: Get a Highland Husk and take it to Kanovi
+
+				if (var == 3) { // Step 3: Get a Highland Husk and take it to Kanovi
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2034);
 					if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 						long itemCount = player.getInventory().getItemCountByItemId(182215639); // Highland Husk
-						if(itemCount >= 5) {
+						if (itemCount >= 5) {
 							removeQuestItem(env, 182215639, itemCount);
-							qs.setQuestVar(var+1);
+							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 10000);
 						} else {
@@ -108,31 +107,31 @@ public class _20502EvolvingMysteries extends QuestHandler {
 						}
 					}
 				}
-				
-				if(var == 4) { // Step 4: Talk with Kanovi.
+
+				if (var == 4) { // Step 4: Talk with Kanovi.
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
 					if (dialog == DialogAction.SETPRO5) {
-						return defaultCloseDialog(env, var, var+1);
+						return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 				break;
 			case 804726: // Muratun
-				if(var == 5) { // Step 5: Talk with Muratun.
+				if (var == 5) { // Step 5: Talk with Muratun.
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 2716);
 					if (dialog == DialogAction.SETPRO6)
-						return defaultCloseDialog(env, var, var+1, 182215638, 1); // Token of Friendship
+						return defaultCloseDialog(env, var, var + 1, 182215638, 1); // Token of Friendship
 				}
 				break;
 			case 804727: // Batuga
-				if(var == 6) { // Step 6: Take the Tejhi Trust Token that Muratun gave you to Batuga.
+				if (var == 6) { // Step 6: Take the Tejhi Trust Token that Muratun gave you to Batuga.
 					if (dialog == DialogAction.QUEST_SELECT)
 						return sendQuestDialog(env, 3057);
 					if (dialog == DialogAction.SET_SUCCEED) {
 						removeQuestItem(env, 182215638, 1);
 						qs.setStatus(QuestStatus.REWARD);
-						qs.setQuestVar(var+1);
+						qs.setQuestVar(var + 1);
 						updateQuestStatus(env);
 						return closeDialogWindow(env);
 					}
@@ -141,7 +140,7 @@ public class _20502EvolvingMysteries extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 20500);

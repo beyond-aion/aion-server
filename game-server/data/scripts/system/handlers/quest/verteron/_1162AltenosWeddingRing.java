@@ -94,15 +94,13 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 					return false;
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203093) {
 				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 6);
 				else
 					return sendQuestEndDialog(env);
-			}
-			else if (targetId == 203095) {
+			} else if (targetId == 203095) {
 				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else

@@ -43,8 +43,7 @@ public class _1463MessageToASpy extends QuestHandler {
 			if (targetId == 203940) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
 		}
@@ -58,8 +57,7 @@ public class _1463MessageToASpy extends QuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
-							}
-							else if (qs.getQuestVarById(0) == 2) {
+							} else if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
@@ -106,8 +104,7 @@ public class _1463MessageToASpy extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203903) {
 				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
 					return sendQuestDialog(env, 5);

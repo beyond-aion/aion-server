@@ -142,13 +142,13 @@ public class _1005BarringtheGate extends QuestHandler {
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
-		int[] quests = {1100, 1004, 1003, 1002, 1001};
+		int[] quests = { 1100, 1004, 1003, 1002, 1001 };
 		defaultOnQuestCompletedEvent(env, quests);
 	}
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		int[] quests = {1100, 1004, 1003, 1002, 1001};
+		int[] quests = { 1100, 1004, 1003, 1002, 1001 };
 		defaultOnLevelChangedEvent(player, quests);
 	}
 

@@ -36,7 +36,7 @@ public class _25062OminousAdvice extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 804917) { // Runlil
 				if (dialog == DialogAction.QUEST_SELECT)
@@ -46,17 +46,17 @@ public class _25062OminousAdvice extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			
-			switch(targetId) {
+
+			switch (targetId) {
 				case 804917: // Runlil
-					if(var == 0) {
+					if (var == 0) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
 						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setStatus(QuestStatus.REWARD);
-								qs.setQuestVar(var+1);
+								qs.setQuestVar(var + 1);
 								updateQuestStatus(env);
 								return sendQuestDialog(env, 10000);
 							} else {
@@ -66,11 +66,11 @@ public class _25062OminousAdvice extends QuestHandler {
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch(targetId) {
+			switch (targetId) {
 				case 804918: // Sorg
 					if (dialog == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 10002);
-					
+
 					return sendQuestEndDialog(env);
 			}
 		}

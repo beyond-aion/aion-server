@@ -34,7 +34,7 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 	}
 
 	private boolean AreAltgardQuestsFinished(Player player) {
-		int id = player.getQuestStateList().getQuestState(2200) != null ? 2022 : 24016; //  2022 Old path, 24016 New path
+		int id = player.getQuestStateList().getQuestState(2200) != null ? 2022 : 24016; // 2022 Old path, 24016 New path
 		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Altgard state
 		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
 	}

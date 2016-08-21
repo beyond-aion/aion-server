@@ -79,5 +79,5 @@ public class _23704LoudNoises extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

@@ -90,8 +90,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 								removeQuestItem(env, 182201399, itemCount1);
 								changeQuestStep(env, 1, 2, false);
 								return sendQuestDialog(env, 10000);
-							}
-							else
+							} else
 								return sendQuestDialog(env, 10001);
 						}
 						default:

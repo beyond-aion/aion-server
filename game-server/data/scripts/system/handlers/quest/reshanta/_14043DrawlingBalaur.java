@@ -84,9 +84,9 @@ public class _14043DrawlingBalaur extends QuestHandler {
 						changeQuestStep(env, 0, 1, false);
 						int currentHour = GameTimeService.getInstance().getGameTime().getHour();
 						if (currentHour < 8 || currentHour >= 20)
-							TeleportService2.teleportTo(player, 110010000, 1819.51f, 2189.24f, 528.52f, (byte)36, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleportTo(player, 110010000, 1819.51f, 2189.24f, 528.52f, (byte) 36, TeleportAnimation.FADE_OUT_BEAM);
 						else
-							TeleportService2.teleportTo(player, 110010000, 1964.69f, 1767.63f, 576.76f, (byte)2, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleportTo(player, 110010000, 1964.69f, 1767.63f, 576.76f, (byte) 2, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;
@@ -115,7 +115,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						TeleportService2.teleportTo(player, 400010000, 2979.37f, 923.05f, 1538.92f, (byte)103, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService2.teleportTo(player, 400010000, 2979.37f, 923.05f, 1538.92f, (byte) 103, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;

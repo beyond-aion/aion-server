@@ -2,8 +2,6 @@ package quest.reshanta;
 
 import java.util.List;
 
-import javolution.util.FastTable;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -11,13 +9,15 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
+import javolution.util.FastTable;
+
 /**
  * @author vlog
  */
 public class _2759TenaciousGuardian extends QuestHandler {
 
 	private static final int questId = 2759;
-	private final List<Integer> killedMobs = new FastTable<Integer>();
+	private final List<Integer> killedMobs = new FastTable<>();
 
 	public _2759TenaciousGuardian() {
 		super(questId);

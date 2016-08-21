@@ -109,8 +109,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 				}
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798225) {
 				return sendQuestEndDialog(env);
 			}

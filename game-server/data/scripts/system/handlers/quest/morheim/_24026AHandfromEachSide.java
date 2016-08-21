@@ -85,7 +85,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case SETPRO1:
 							defaultCloseDialog(env, 0, 1); // 1
 							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
-							return true; 
+							return true;
 					}
 					break;
 				}
@@ -197,7 +197,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -212,12 +212,12 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	private boolean kargateIsAlive(QuestEnv env) {
 		Npc kargate = env.getPlayer().getPosition().getWorldMapInstance().getNpc(204432);
 		return (kargate != null && !kargate.getLifeStats().isAlreadyDead());
 	}
-	
+
 	private void deleteBalaur(QuestEnv env) {
 		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs();
 		for (Npc npc : npcs) {

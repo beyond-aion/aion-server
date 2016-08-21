@@ -51,7 +51,7 @@ public class _4942ProvingProficiency extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Talk with Kvasir to choose the crafting skill
+				// 1 - Talk with Kvasir to choose the crafting skill
 				case 204053:
 					if (var == 0) {
 						switch (dialog) {

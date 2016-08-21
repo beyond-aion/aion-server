@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Pad
  */
 public class _1479HelpingMemnes extends QuestHandler {
@@ -38,21 +37,18 @@ public class _1479HelpingMemnes extends QuestHandler {
 			if (targetId == npcIds[0]) { // Demro
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} 
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == npcIds[1]) { // Memnes
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
-						}
-						else if (var == 2) {
+						} else if (var == 2) {
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
@@ -65,8 +61,7 @@ public class _1479HelpingMemnes extends QuestHandler {
 						return sendQuestDialog(env, 5);
 					}
 				}
-			}
-			else if (targetId == npcIds[2]) { // Coeus
+			} else if (targetId == npcIds[2]) { // Coeus
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -79,10 +74,9 @@ public class _1479HelpingMemnes extends QuestHandler {
 					}
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcIds[1]) { // Memnes
-					return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

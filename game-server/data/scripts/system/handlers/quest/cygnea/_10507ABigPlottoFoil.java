@@ -12,17 +12,17 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @Author Majka
  * @Description
- * Talk with Aithria at Aequis Detachment Post.
- * Talk with Pluvis at Aequis Detachment Post.
- * Talk with Pruina at Aequis Detachment Post.
- * Talk with Ricoro at Aequis Detachment Post.
- * Talk with Aithria at Aequis Detachment Post.
- * Talk with Nostibas who has been dispatched to Wailing Dunes.
- * Create a diversion for the Beritra Frontier Units of the Beritra Legion. Eliminate Beritra Guards (5). Destroy Beritra Supplies Boxes (3)
- * Infiltrate Beritra Guard Captain's Tent.
- * Report back to Aithria at Aequis Detachment Post.
- * 
- * See Aithria and prepare for an all-out battle against Beritra.
+ * 							Talk with Aithria at Aequis Detachment Post.
+ *              Talk with Pluvis at Aequis Detachment Post.
+ *              Talk with Pruina at Aequis Detachment Post.
+ *              Talk with Ricoro at Aequis Detachment Post.
+ *              Talk with Aithria at Aequis Detachment Post.
+ *              Talk with Nostibas who has been dispatched to Wailing Dunes.
+ *              Create a diversion for the Beritra Frontier Units of the Beritra Legion. Eliminate Beritra Guards (5). Destroy Beritra Supplies Boxes
+ *              (3)
+ *              Infiltrate Beritra Guard Captain's Tent.
+ *              Report back to Aithria at Aequis Detachment Post.
+ *              See Aithria and prepare for an all-out battle against Beritra.
  */
 public class _10507ABigPlottoFoil extends QuestHandler {
 
@@ -41,7 +41,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		
+
 		// Beritra Guard 236264 236265
 		// Beritra Supplies Box 702668
 		int[] mobs = { 236264, 236265, 702668 };
@@ -64,31 +64,31 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804711: // Aithria
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 0) { // Step 0: Talk with Aithria at Aequis Detachment Post.
+					if (var == 0) { // Step 0: Talk with Aithria at Aequis Detachment Post.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
 						if (dialog == DialogAction.SETPRO1) {
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
-					
-					if(var == 4) { // Step 4: Talk with Aithria at Aequis Detachment Post.
+
+					if (var == 4) { // Step 4: Talk with Aithria at Aequis Detachment Post.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2375);
 						}
 
 						if (dialog == DialogAction.SETPRO5) {
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
-				
+
 				if (qs.getStatus() == QuestStatus.REWARD) {
 					if (dialog == DialogAction.USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
@@ -98,52 +98,52 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 				break;
 			case 804712: // Pluvis
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 1) { // Step 1: Talk with Pluvis at Aequis Detachment Post.
+					if (var == 1) { // Step 1: Talk with Pluvis at Aequis Detachment Post.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1352);
 						}
 
 						if (dialog == DialogAction.SETPRO2) {
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
 				}
 				break;
 			case 804713: // Pruina
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 2) { // Step 2: Talk with Pruina at Aequis Detachment Post.
+					if (var == 2) { // Step 2: Talk with Pruina at Aequis Detachment Post.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1693);
 						}
 
 						if (dialog == DialogAction.SETPRO3) {
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
 				}
 				break;
 			case 804714: // Ricoro
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 3) { // Step 3: Talk with Ricoro at Aequis Detachment Post.
+					if (var == 3) { // Step 3: Talk with Ricoro at Aequis Detachment Post.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
 						if (dialog == DialogAction.SETPRO4) {
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
 				}
 				break;
 			case 804715: // Nostibas
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 5) { // Step 5: 
+					if (var == 5) { // Step 5:
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
 
 						if (dialog == DialogAction.SETPRO6) {
-							return defaultCloseDialog(env, var, var+1); // 1
+							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
 				}
@@ -151,7 +151,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 7: Infiltrate Beritra Guard Captain's Tent.
 
@@ -167,7 +167,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 
 				if (var == 7) {
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					playQuestMovie(env, 993);
@@ -178,7 +178,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -192,23 +192,23 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		if (var == 6) { // Step 6: Eliminate Beritra Guards (5). Destroy Beritra Supplies Boxes (3)
 			int varKill1 = qs.getQuestVarById(1); // Kill counter var 1
 			int varKill2 = qs.getQuestVarById(2); // Kill counter var 2
-			if(targetId == 702668 && varKill2 <= 2) { // Beritra Supplies Box
-				qs.setQuestVarById(2, varKill2+1); // 1-3 with varNum 2
+			if (targetId == 702668 && varKill2 <= 2) { // Beritra Supplies Box
+				qs.setQuestVarById(2, varKill2 + 1); // 1-3 with varNum 2
 				updateQuestStatus(env);
-			} else if((targetId == 236264 || targetId == 236265) && varKill1 <= 4) { // Beritra Guards
-				qs.setQuestVarById(1, varKill1+1); // 1-5 with varNum 1
+			} else if ((targetId == 236264 || targetId == 236265) && varKill1 <= 4) { // Beritra Guards
+				qs.setQuestVarById(1, varKill1 + 1); // 1-5 with varNum 1
 				updateQuestStatus(env);
 			}
 
-			if(varKill1 >= 4 && varKill2 >= 2) {
-				qs.setQuestVar(var+1);
+			if (varKill1 >= 4 && varKill2 >= 2) {
+				qs.setQuestVar(var + 1);
 				updateQuestStatus(env);
 			}
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
@@ -225,7 +225,7 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 10500);

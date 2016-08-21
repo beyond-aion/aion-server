@@ -233,7 +233,7 @@ public class _2008Ascension extends QuestHandler {
 								public void run() {
 									qs.setQuestVar(51);
 									updateQuestStatus(env);
-									List<Npc> mobs = new FastTable<Npc>();
+									List<Npc> mobs = new FastTable<>();
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 294f, 277f, 207f, (byte) 0));
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 305f, 279f, 206.5f, (byte) 0));
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 298f, 253f, 205.7f, (byte) 0));
@@ -301,7 +301,6 @@ public class _2008Ascension extends QuestHandler {
 		}
 		return false;
 	}
-
 
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {

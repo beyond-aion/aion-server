@@ -61,10 +61,10 @@ public class _13745EljersRequest extends QuestHandler {
 	public boolean onKillInWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVarById(0) != 0)
 			return false;
-		
+
 		if (!(env.getVisibleObject() instanceof Player))
 			return false;
 		Player target = (Player) env.getVisibleObject();
@@ -79,7 +79,7 @@ public class _13745EljersRequest extends QuestHandler {
 			updateQuestStatus(env);
 			return true;
 		}
-			
+
 		return false;
 	}
 }

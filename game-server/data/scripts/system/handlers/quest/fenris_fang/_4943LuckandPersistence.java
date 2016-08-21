@@ -52,7 +52,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Talk with Latatusk
+				// 1 - Talk with Latatusk
 				case 204096:
 					if (var == 0) {
 						switch (dialog) {

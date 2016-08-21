@@ -92,5 +92,5 @@ public class _14220NewZoneNewRules extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 }

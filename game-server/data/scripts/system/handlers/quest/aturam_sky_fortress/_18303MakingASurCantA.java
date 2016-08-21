@@ -84,7 +84,7 @@ public class _18303MakingASurCantA extends QuestHandler {
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (qs.getQuestVarById(0) == 0)
 				return defaultOnKillEvent(env, 217382, 0, 1);

@@ -23,7 +23,7 @@ public class _18830MovingIn extends QuestHandler {
 	private static final Set<Integer> butlers;
 
 	static {
-		butlers = new HashSet<Integer>();
+		butlers = new HashSet<>();
 		butlers.add(810017);
 		butlers.add(810018);
 		butlers.add(810019);
@@ -73,8 +73,7 @@ public class _18830MovingIn extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
 				if (house.getButler().getNpcId() != targetId)
 					return false;
@@ -84,15 +83,13 @@ public class _18830MovingIn extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
-			}
-			else if (targetId == 830645) {
+			} else if (targetId == 830645) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
 					return closeDialogWindow(env);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830645) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830645) {
 			switch (dialog) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);

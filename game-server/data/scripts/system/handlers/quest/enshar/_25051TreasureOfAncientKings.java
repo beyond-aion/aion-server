@@ -43,7 +43,7 @@ public class _25051TreasureOfAncientKings extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 804915) { // Soglo
 				if (dialog == DialogAction.QUEST_SELECT)
@@ -53,88 +53,89 @@ public class _25051TreasureOfAncientKings extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			
-			switch(targetId) {
+
+			switch (targetId) {
 				case 731553: // Recluse's grave
-					if(var == 0) {
+					if (var == 0) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
 						if (dialog == DialogAction.SETPRO1) {
 							// Spawn of Zagmus
-							if(!qe.getQuestNpc(805160).isWasSpawned())
+							if (!qe.getQuestNpc(805160).isWasSpawned())
 								QuestService.addNewSpawn(220080000, player.getInstanceId(), 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90, 5);
 							QuestService.invisibleTimerStart(env, 300);
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 					break;
 				case 805160: // Zagmus
-					if(var == 1) {
+					if (var == 1) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
 
 						if (dialog == DialogAction.SETPRO2)
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 					}
 					break;
 				case 731554: // Recluse's relic
-					if(var == 2) {
+					if (var == 2) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
 
 						if (dialog == DialogAction.SETPRO3)
-							return defaultCloseDialog(env, var, var+1, 182215720, 1);
+							return defaultCloseDialog(env, var, var + 1, 182215720, 1);
 					}
 					break;
 				case 731555: // Ancient King's treasure chest
-					if(var == 3) {
+					if (var == 3) {
 						if (dialog == DialogAction.QUEST_SELECT)
 							return sendQuestDialog(env, 2034);
 
 						if (dialog == DialogAction.SET_SUCCEED) {
 							Npc npc = (Npc) env.getVisibleObject();
-							if(npc != null)
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220031, npc.getPosition().getX() - 2, npc.getPosition().getY() + 2, npc.getPosition().getZ(), (byte) 10, 5);
+							if (npc != null)
+								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220031, npc.getPosition().getX() - 2, npc.getPosition().getY() + 2,
+									npc.getPosition().getZ(), (byte) 10, 5);
 							removeQuestItem(env, 182215720, 1);
-							qs.setQuestVar(var+1);
-							return defaultCloseDialog(env, var+1, var+1, true, false);
+							qs.setQuestVar(var + 1);
+							return defaultCloseDialog(env, var + 1, var + 1, true, false);
 						}
 					}
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch(targetId) {
+			switch (targetId) {
 				case 804916: // Rolef
 					if (dialog == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 10002);
-					
+
 					return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		return RestoreQuestStep(env);
 	}
-	
+
 	@Override
 	public boolean onInvisibleTimerEndEvent(QuestEnv env) {
 		return RestoreQuestStep(env);
 	}
-	
+
 	private boolean RestoreQuestStep(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
-		if(qs == null)
+
+		if (qs == null)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
-		if(var == 1) {
-			qs.setQuestVar(var-1);
+		if (var == 1) {
+			qs.setQuestVar(var - 1);
 			updateQuestStatus(env);
 		}
 		return true;

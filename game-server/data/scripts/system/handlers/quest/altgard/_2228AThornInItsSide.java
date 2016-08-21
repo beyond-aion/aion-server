@@ -87,7 +87,7 @@ public class _2228AThornInItsSide extends QuestHandler {
 
 				@Override
 				public void run() {
-						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 					sendQuestDialog(env, 4);
 				}
 			}, 3000);

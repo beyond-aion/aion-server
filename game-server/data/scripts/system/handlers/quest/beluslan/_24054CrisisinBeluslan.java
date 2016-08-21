@@ -45,7 +45,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-		
+
 		switch (env.getTargetId()) {
 			case 702041:
 				if (qs.getQuestVarById(0) >= 2 && qs.getQuestVarById(0) < 5) {
@@ -97,8 +97,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 					if (var == 0)
 						return defaultCloseDialog(env, 0, 1); // 1
 			}
-		} 
-		else if (targetId == 802053) { // Fafner
+		} else if (targetId == 802053) { // Fafner
 			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -108,8 +107,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 					if (var == 1)
 						return defaultCloseDialog(env, 1, 2); // 2
 			}
-		}
-		else if (targetId == 204701) { // Hod
+		} else if (targetId == 204701) { // Hod
 			switch (dialog) {
 				case QUEST_SELECT:
 					if (var == 6)

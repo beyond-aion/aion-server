@@ -36,7 +36,7 @@ public class _1620StartSpreadingTheNews extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 204519) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
@@ -44,21 +44,18 @@ public class _1620StartSpreadingTheNews extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 790000 && qs.getQuestVarById(0) == 0) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1)
 					return defaultCloseDialog(env, 0, 1);
-			}
-			else if (targetId == 730001 && qs.getQuestVarById(0) == 1) {
+			} else if (targetId == 730001 && qs.getQuestVarById(0) == 1) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialog() == DialogAction.SETPRO2)
 					return defaultCloseDialog(env, 1, 2);
-			}
-			else if (targetId == 203125 && qs.getQuestVarById(0) == 2) {
+			} else if (targetId == 203125 && qs.getQuestVarById(0) == 2) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
@@ -66,8 +63,7 @@ public class _1620StartSpreadingTheNews extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203125) {
 				return sendQuestEndDialog(env);
 			}

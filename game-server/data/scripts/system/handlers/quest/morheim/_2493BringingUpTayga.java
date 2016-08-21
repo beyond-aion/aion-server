@@ -57,8 +57,7 @@ public class _2493BringingUpTayga extends QuestHandler {
 					changeQuestStep(env, 0, 0, true); // reward
 					return closeDialogWindow(env);
 				}
-			}
-			else if (targetId == 204436 || targetId == 204437 || targetId == 204438) { // Purra? other Spots
+			} else if (targetId == 204436 || targetId == 204437 || targetId == 204438) { // Purra? other Spots
 				if (dialog == DialogAction.QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1353);

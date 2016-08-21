@@ -46,8 +46,7 @@ public class _51009TheGiftOfCharity extends QuestHandler {
 						return sendQuestDialog(env, 1004);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831033 || targetId == 831039) {
 				switch (dialog) {
 					case QUEST_SELECT:
@@ -57,8 +56,7 @@ public class _51009TheGiftOfCharity extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831033 || targetId == 831039)
 				return sendQuestEndDialog(env);
 		}

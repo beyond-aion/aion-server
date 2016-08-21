@@ -11,20 +11,20 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.zone.ZoneName;
+
 /**
  * @Author Majka
  * @Description
- * Talk with Brunte at Aequis Outpost.
- * Talk with Noep at Perennial Mosswood.
- * Look for the Beritra Invasion Corridor.
- * Eliminate Beritra Invasion Spelltongues (2).
- * Use the Beritra Invasion Corridor to pursue Beritra.
- * It's a trap! Use the Beritra Invasion Corridor to escape and talk with Noep.
- * Subdue Noep's Ego (1).
- * Talk with Noep.
- * Report the outcome to Brunte.
- * 
- * Assist Brunte by meeting with Investigator Noep and then pursue Beritra.
+ * 							Talk with Brunte at Aequis Outpost.
+ *              Talk with Noep at Perennial Mosswood.
+ *              Look for the Beritra Invasion Corridor.
+ *              Eliminate Beritra Invasion Spelltongues (2).
+ *              Use the Beritra Invasion Corridor to pursue Beritra.
+ *              It's a trap! Use the Beritra Invasion Corridor to escape and talk with Noep.
+ *              Subdue Noep's Ego (1).
+ *              Talk with Noep.
+ *              Report the outcome to Brunte.
+ *              Assist Brunte by meeting with Investigator Noep and then pursue Beritra.
  * @ToCheck: correct behaviour of Corridor and spawn.
  */
 public class _10506MindOverMatter extends QuestHandler {
@@ -63,21 +63,21 @@ public class _10506MindOverMatter extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 804709: // Brunte
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 0) { // Step 0: Talk with Brunte at Aequis Outpost.
+					if (var == 0) { // Step 0: Talk with Brunte at Aequis Outpost.
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
 						if (dialog == DialogAction.SETPRO1) {
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
-				
+
 				if (qs.getStatus() == QuestStatus.REWARD) {
 					if (dialog == DialogAction.USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
@@ -87,40 +87,41 @@ public class _10506MindOverMatter extends QuestHandler {
 				break;
 			case 804710: // Noep
 				if (qs.getStatus() == QuestStatus.START) {
-					if(var == 1) {
+					if (var == 1) {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1352);
 						}
-						
+
 						if (dialog == DialogAction.SETPRO2) {
-							return defaultCloseDialog(env, var, var+1);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
-					
-					if(var == 5) {
+
+					if (var == 5) {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
-						
+
 						if (dialog == DialogAction.SETPRO6) {
 							// Spawn Noep's Ego [ID: 236263]
 							Npc npc = (Npc) env.getVisibleObject();
 							if (npc != null) {
-								QuestService.addNewSpawn(210070000, player.getInstanceId(), 236263, npc.getPosition().getX(), npc.getPosition().getY(), npc.getPosition().getZ(), npc.getPosition().getHeading(), 2);
+								QuestService.addNewSpawn(210070000, player.getInstanceId(), 236263, npc.getPosition().getX(), npc.getPosition().getY(),
+									npc.getPosition().getZ(), npc.getPosition().getHeading(), 2);
 								QuestService.invisibleTimerStart(env, 120);
-								return defaultCloseDialog(env, var, var+1);
+								return defaultCloseDialog(env, var, var + 1);
 							}
 						}
 					}
-					
-					if(var == 7) {
+
+					if (var == 7) {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 3398);
 						}
-						
+
 						if (dialog == DialogAction.SET_SUCCEED) {
 							qs.setStatus(QuestStatus.REWARD);
-							qs.setQuestVar(var+1);
+							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);
 							return closeDialogWindow(env);
 						}
@@ -130,9 +131,9 @@ public class _10506MindOverMatter extends QuestHandler {
 			case 702666: // Beritra Invasion Corridor
 				if (qs.getStatus() == QuestStatus.START) {
 					if (dialog == DialogAction.USE_OBJECT) {
-						if(var == 4) {
+						if (var == 4) {
 							TeleportService2.teleportTo(player, 210070000, 2837f, 2991f, 680f, (byte) 67, TeleportAnimation.FADE_OUT_BEAM);
-							qs.setQuestVar(var+1);
+							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);
 						}
 					}
@@ -141,7 +142,7 @@ public class _10506MindOverMatter extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 2: Look for the Beritra Invasion Corridor.
 
@@ -157,7 +158,7 @@ public class _10506MindOverMatter extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 
 				if (var == 2) {
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 				}
 			}
@@ -165,7 +166,7 @@ public class _10506MindOverMatter extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -175,14 +176,14 @@ public class _10506MindOverMatter extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-	
-		switch(targetId) {
+
+		switch (targetId) {
 			case 236259:
 				if (var == 3) { // Step 3: Eliminate Beritra Invasion Spelltongues (2).
 					int varKill = qs.getQuestVarById(1); // Kill counter
-					qs.setQuestVarById(1, varKill+1); // 1-2 with varNum 1
-					if(varKill >= 1) {
-						qs.setQuestVar(var+1);
+					qs.setQuestVarById(1, varKill + 1); // 1-2 with varNum 1
+					if (varKill >= 1) {
+						qs.setQuestVar(var + 1);
 					}
 					updateQuestStatus(env);
 					return true;
@@ -191,40 +192,40 @@ public class _10506MindOverMatter extends QuestHandler {
 				if (var == 6) { // Step 6: Subdue Noep's Ego (1).
 					qs.setQuestVarById(1, 1);
 					updateQuestStatus(env);
-					
-					qs.setQuestVar(var+1);
+
+					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
 					return true;
 				}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		return RestoreQuestStep(env);
 	}
-	
+
 	@Override
 	public boolean onInvisibleTimerEndEvent(QuestEnv env) {
 		return RestoreQuestStep(env);
 	}
-	
+
 	private boolean RestoreQuestStep(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
-		if(qs == null)
+
+		if (qs == null)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
-		if(var == 6) {
-			qs.setQuestVar(var-1);
+		if (var == 6) {
+			qs.setQuestVar(var - 1);
 			updateQuestStatus(env);
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 10500);

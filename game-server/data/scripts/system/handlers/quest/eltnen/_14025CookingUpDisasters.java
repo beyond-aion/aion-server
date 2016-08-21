@@ -50,15 +50,15 @@ public class _14025CookingUpDisasters extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		
-		switch(targetId) {
+
+		switch (targetId) {
 			case 211776:
 			case 232133:
 				int killVar1 = qs.getQuestVarById(1);
-				if(var == 5 && killVar1 < 4) {
+				if (var == 5 && killVar1 < 4) {
 					qs.setQuestVarById(1, killVar1 + 1);
 					updateQuestStatus(env);
 					return true;
@@ -66,7 +66,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 				break;
 			case 217090:
 				int killVar2 = qs.getQuestVarById(2);
-				if(var == 5 && killVar2 < 1) {
+				if (var == 5 && killVar2 < 1) {
 					qs.setQuestVarById(2, killVar2 + 1);
 					updateQuestStatus(env);
 					return true;
@@ -88,12 +88,11 @@ public class _14025CookingUpDisasters extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) // Telemachus
-				if(dialog == DialogAction.USE_OBJECT) {
+				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 3057);
 				}
-				return sendQuestEndDialog(env);
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+			return sendQuestEndDialog(env);
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203989) // Tumblusen
 			{
 				switch (dialog) {
@@ -102,9 +101,9 @@ public class _14025CookingUpDisasters extends QuestHandler {
 							return sendQuestDialog(env, 1011);
 						else if (var == 1)
 							return sendQuestDialog(env, 1352);
-						else if(var == 4)
+						else if (var == 4)
 							return sendQuestDialog(env, 2034);
-						else if(var == 5)
+						else if (var == 5)
 							return sendQuestDialog(env, 2716);
 						break;
 					case SELECT_ACTION_1013:
@@ -112,27 +111,27 @@ public class _14025CookingUpDisasters extends QuestHandler {
 							playQuestMovie(env, 183);
 						break;
 					case SETPRO1:
-						if(var == 0)
-							return defaultCloseDialog(env, var, var+1); // 1
+						if (var == 0)
+							return defaultCloseDialog(env, var, var + 1); // 1
 						else
 							return sendQuestDialog(env, 1352);
 					case CHECK_USER_HAS_QUEST_ITEM:
 						if (var == 1) {
 							if (QuestService.collectItemCheck(env, true)) {
-								changeQuestStep(env, var, var+1, false); // 2
+								changeQuestStep(env, var, var + 1, false); // 2
 								return sendQuestDialog(env, 1438);
 							} else
 								return sendQuestDialog(env, 1353);
 						}
 					case SETPRO2:
-						if(var == 2)
-							return defaultCloseDialog(env, var, var+1); // 3
+						if (var == 2)
+							return defaultCloseDialog(env, var, var + 1); // 3
 					case SETPRO4:
-						if(var == 4)
-							return defaultCloseDialog(env, var, var+1); // 5
+						if (var == 4)
+							return defaultCloseDialog(env, var, var + 1); // 5
 						break;
 					case SETPRO6:
-						if(var == 5) {
+						if (var == 5) {
 							changeQuestStep(env, 5, 6, true);
 							return closeDialogWindow(env);
 						}
@@ -140,7 +139,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 			} else if (targetId == 204020) { // Mabangtah
 				switch (dialog) {
 					case QUEST_SELECT:
-						if(var == 3)
+						if (var == 3)
 							return sendQuestDialog(env, 1693);
 						if (var == 6)
 							return sendQuestDialog(env, 2034);

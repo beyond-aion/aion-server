@@ -73,12 +73,12 @@ public class _30222AGuardsCurse extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// case 216739: { // Warrior Monument
-			// Npc npc = (Npc) env.getVisibleObject();
-			// QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 216239, npc.getX(), npc.getY(),
-			// npc.getZ(), npc.getHeading());
-			// return true;
-			// }
+				// case 216739: { // Warrior Monument
+				// Npc npc = (Npc) env.getVisibleObject();
+				// QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 216239, npc.getX(), npc.getY(),
+				// npc.getZ(), npc.getHeading());
+				// return true;
+				// }
 				case 216239: { // Ahbana the Wicked
 					return defaultOnKillEvent(env, 216239, 0, 1); // 1
 				}

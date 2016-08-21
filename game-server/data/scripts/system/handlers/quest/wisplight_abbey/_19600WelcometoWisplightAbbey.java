@@ -36,7 +36,7 @@ public class _19600WelcometoWisplightAbbey extends QuestHandler {
 
 		if (qs == null)
 			return false;
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
 				switch (dialog) {

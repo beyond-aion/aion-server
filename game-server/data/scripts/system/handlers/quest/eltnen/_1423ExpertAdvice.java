@@ -39,8 +39,7 @@ public class _1423ExpertAdvice extends QuestHandler {
 			if (targetId == 203983) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} 
-				else {
+				} else {
 					return sendQuestStartDialog(env);
 				}
 			}

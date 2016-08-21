@@ -125,11 +125,11 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 						if (!giveQuestItem(env, 182201004, 1))
 							return true;
 						changeQuestStep(env, 2, 2, true);
-						TeleportService2.teleportTo(player, 210020000, 1608.11f, 1528.7f, 318.07f, (byte)118, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService2.teleportTo(player, 210020000, 1608.11f, 1528.7f, 318.07f, (byte) 118, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}
-		} 
+		}
 		return false;
 	}
 }

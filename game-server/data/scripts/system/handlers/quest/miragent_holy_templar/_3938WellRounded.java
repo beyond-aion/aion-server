@@ -50,7 +50,7 @@ public class _3938WellRounded extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Talk with Lavirintos and choose a crafting skill
+				// 1 - Talk with Lavirintos and choose a crafting skill
 				case 203701:
 					if (var == 0) {
 						switch (dialog) {

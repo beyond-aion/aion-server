@@ -49,7 +49,7 @@ public class _3936DecorationsOfSanctum extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
-			// 1 - Report the result to Dairos.
+				// 1 - Report the result to Dairos.
 				case 203710:
 					switch (dialog) {
 						case QUEST_SELECT:

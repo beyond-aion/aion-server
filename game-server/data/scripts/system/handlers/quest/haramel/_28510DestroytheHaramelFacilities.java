@@ -1,8 +1,8 @@
 package quest.haramel;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -22,7 +22,7 @@ public class _28510DestroytheHaramelFacilities extends QuestHandler {
 
 	@Override
 	public void register() {
-		int[] npcs = {804605, 700953, 203560};
+		int[] npcs = { 804605, 700953, 203560 };
 		qe.registerQuestNpc(804605).addOnQuestStart(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);

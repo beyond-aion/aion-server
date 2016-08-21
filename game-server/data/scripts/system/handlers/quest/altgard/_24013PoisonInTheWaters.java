@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _24013PoisonInTheWaters extends QuestHandler {
 
 	private final static int[] mobs = { 210455, 210456, 214039, 210458, 214032 };
-	
+
 	public _24013PoisonInTheWaters() {
 		super(24013);
 	}
@@ -61,24 +61,23 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 				case 203621:
-					switch (dialog){
+					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							break;
 						case SETPRO2:
-							return defaultCloseDialog(env, 1, 2, 182215359,1); // 2
+							return defaultCloseDialog(env, 1, 2, 182215359, 1); // 2
 					}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203631) {
 				return sendQuestEndDialog(env);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
@@ -86,6 +85,7 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 
 			// Spawns 2 Feral Black Claw Sharpeye [ID: 210457] far from the player
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 				@Override
 				public void run() {
 					Player player = env.getPlayer();
@@ -98,15 +98,15 @@ public class _24013PoisonInTheWaters extends QuestHandler {
 				}
 			}, 3000);
 
-			return HandlerResult.fromBoolean(useQuestItem(env, item, 2, 3, false)); //3
+			return HandlerResult.fromBoolean(useQuestItem(env, item, 2, 3, false)); // 3
 		}
 		return HandlerResult.UNKNOWN;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-	   if (defaultOnKillEvent(env, mobs, 7, true))
-		  return true;
+		if (defaultOnKillEvent(env, mobs, 7, true))
+			return true;
 		return defaultOnKillEvent(env, mobs, 3, 7); // 6
 	}
 

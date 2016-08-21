@@ -21,7 +21,7 @@ public class _18821AlmostForgotMyBlessings extends QuestHandler {
 	private static final Set<Integer> butlers;
 
 	static {
-		butlers = new HashSet<Integer>();
+		butlers = new HashSet<>();
 		butlers.add(810017);
 		butlers.add(810018);
 		butlers.add(810019);

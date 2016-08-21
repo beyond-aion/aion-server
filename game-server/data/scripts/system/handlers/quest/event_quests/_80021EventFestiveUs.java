@@ -31,8 +31,7 @@ public class _80021EventFestiveUs extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-			&& qs.canRepeat()) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.canRepeat()) {
 			if (env.getTargetId() == 799784) {
 				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

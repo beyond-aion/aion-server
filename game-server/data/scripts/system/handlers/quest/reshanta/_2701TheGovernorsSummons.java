@@ -42,13 +42,12 @@ public class _2701TheGovernorsSummons extends QuestHandler {
 				return sendQuestDialog(env, 10002);
 			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
 				qs.setStatus(QuestStatus.REWARD);
-				//qs.setQuestVarById(0, 1);
+				// qs.setQuestVarById(0, 1);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 5);
 			}
 			return false;
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

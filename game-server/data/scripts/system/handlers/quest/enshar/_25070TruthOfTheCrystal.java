@@ -34,7 +34,7 @@ public class _25070TruthOfTheCrystal extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
 			if (targetId == 804919) { // Brandun
 				if (dialog == DialogAction.QUEST_SELECT)
@@ -44,27 +44,27 @@ public class _25070TruthOfTheCrystal extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			
-			switch(targetId) {
+
+			switch (targetId) {
 				case 731552: // Cold crystal
-					if(var == 0) {
+					if (var == 0) {
 						if (dialog == DialogAction.QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
 						if (dialog == DialogAction.SET_SUCCEED) {
 							giveQuestItem(env, 182215723, 1);
-							qs.setQuestVar(var+1);
-							return defaultCloseDialog(env, var+1, var+1, true, false);
+							qs.setQuestVar(var + 1);
+							return defaultCloseDialog(env, var + 1, var + 1, true, false);
 						}
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch(targetId) {
+			switch (targetId) {
 				case 804919: // Brandun
 					if (dialog == DialogAction.USE_OBJECT)
 						return sendQuestDialog(env, 10002);
-					
+
 					removeQuestItem(env, 182215723, 1);
 					return sendQuestEndDialog(env);
 			}

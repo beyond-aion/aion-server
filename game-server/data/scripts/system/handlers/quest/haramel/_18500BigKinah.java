@@ -126,9 +126,9 @@ public class _18500BigKinah extends QuestHandler {
 				}
 			}
 			return true;
-				}
+		}
 		return false;
-				}
+	}
 
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
@@ -136,7 +136,7 @@ public class _18500BigKinah extends QuestHandler {
 
 		if (player == null) {
 			return false;
-				}
+		}
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {

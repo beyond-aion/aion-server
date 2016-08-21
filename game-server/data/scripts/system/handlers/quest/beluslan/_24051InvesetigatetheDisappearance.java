@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- * #Modified Majka
+ *         #Modified Majka
  */
 public class _24051InvesetigatetheDisappearance extends QuestHandler {
 
@@ -40,7 +40,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null)
 			return false;
 
@@ -54,8 +54,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 					case QUEST_SELECT: {
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
-						}
-						else if (var == 3){
+						} else if (var == 3) {
 							return sendQuestDialog(env, 2034);
 						}
 						return false;
@@ -67,8 +66,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4); // 4
 					}
 				}
-			}
-			else if (targetId == 204749) { // Paeru
+			} else if (targetId == 204749) { // Paeru
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 1) {
@@ -80,8 +78,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2, 182215375, 1, 0, 0); // 2
 					}
 				}
-			}
-			else if (targetId == 204800) { // Hammel
+			} else if (targetId == 204800) { // Hammel
 				switch (dialog) {
 					case QUEST_SELECT: {
 						if (var == 4) {
@@ -93,20 +90,17 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 4, 5); // 5
 					}
 				}
-			}
-			else if (targetId == 700359 && var == 5 && player.getInventory().getItemCountByItemId(182215377) >= 1) { // Secret Port Entrance
+			} else if (targetId == 700359 && var == 5 && player.getInventory().getItemCountByItemId(182215377) >= 1) { // Secret Port Entrance
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 1757.82f, 1392.94f, 401.75f, (byte) 94);
 					return true;
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204707) { // Mani
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -137,19 +131,20 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (name == ZoneName.get("MINE_PORT_220040000")) {
-				if(var == 5) {
+				if (var == 5) {
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
-						playQuestMovie(env, 236);
+							playQuestMovie(env, 236);
 						}
-					}, 10000);	
+					}, 10000);
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId != 236)

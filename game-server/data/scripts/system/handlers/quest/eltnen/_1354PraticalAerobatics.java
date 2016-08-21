@@ -20,8 +20,8 @@ public class _1354PraticalAerobatics extends QuestHandler {
 
 	private final static int questId = 1354;
 	// chronological order of the flight rings has been changed
-	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_4", "ERACUS_TEMPLE_210020000_3", 
-		"ERACUS_TEMPLE_210020000_6", "ERACUS_TEMPLE_210020000_5", "ERACUS_TEMPLE_210020000_2", "ERACUS_TEMPLE_210020000_7" };
+	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_4", "ERACUS_TEMPLE_210020000_3", "ERACUS_TEMPLE_210020000_6",
+		"ERACUS_TEMPLE_210020000_5", "ERACUS_TEMPLE_210020000_2", "ERACUS_TEMPLE_210020000_7" };
 
 	public _1354PraticalAerobatics() {
 		super(questId);
@@ -93,8 +93,7 @@ public class _1354PraticalAerobatics extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203983) {
 				int var0 = qs.getQuestVarById(0);
 				switch (dialog) {
@@ -114,14 +113,13 @@ public class _1354PraticalAerobatics extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-		} 
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203983)
 				return sendQuestEndDialog(env);
 		}
 		return false;
 	}
-	
+
 	private void applyFlightRingEffect(QuestEnv env) {
 		Player player = env.getPlayer();
 		player.getLifeStats().increaseFp(TYPE.FP_RINGS, 7, 0, LOG.REGULAR);

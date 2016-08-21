@@ -39,10 +39,10 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		
+
 		if (qs == null)
 			return false;
-		
+
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();

@@ -89,7 +89,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 						}
 						case SETPRO10: {
 							defaultCloseDialog(env, 10, 10, true, false); // reward
-							TeleportService2.teleportTo(player, 120010000, 1294.8f, 1213.8f, 214.34f, (byte)30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService2.teleportTo(player, 120010000, 1294.8f, 1213.8f, 214.34f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}
@@ -138,7 +138,8 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								changeQuestStep(env, 4, 95, false); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60,
+									TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}
 						}
@@ -269,8 +270,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					removeStigma(env);
 					changeQuestStep(env, var, 4);
 					return true;
-				}
-				else if (var == 9) {
+				} else if (var == 9) {
 					removeStigma(env);
 					return true;
 				}
@@ -280,7 +280,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	}
 
 	private int getStoneId(Player player) {
-		//TODO: find out the correct stigma ids for each class on official servers
+		// TODO: find out the correct stigma ids for each class on official servers
 		switch (player.getCommonData().getPlayerClass()) {
 			case CHANTER:
 			case CLERIC:

@@ -58,7 +58,7 @@ public class _80036EventGamblingWithGrace extends QuestHandler {
 		}
 		return sendQuestRewardDialog(env, 799765, 0);
 	}
-	
+
 	@Override
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		if (bonusType != BonusType.LUNAR || env.getQuestId() != questId)

@@ -68,8 +68,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 								removeQuestItem(env, 182208008, itemCount);
 								changeQuestStep(env, 0, 1, false);
 								return sendQuestDialog(env, 10000);
-							} 
-							else {
+							} else {
 								return sendQuestDialog(env, 10001);
 							}
 						}

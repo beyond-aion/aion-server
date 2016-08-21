@@ -28,7 +28,7 @@ public class _24015TotemPlowed extends QuestHandler {
 		qe.registerQuestNpc(700099).addOnKillEvent(questId); // Zemurru's Totem
 		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q2021_206013_2_220030000"), questId);
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -57,16 +57,16 @@ public class _24015TotemPlowed extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
-		
+
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203669: // Taora
 					switch (dialog) {
 						case QUEST_SELECT:
-								return sendQuestDialog(env, 1011);
+							return sendQuestDialog(env, 1011);
 						case SELECT_ACTION_1013:
 							playQuestMovie(env, 218);
 							qs.setQuestVarById(0, 1);

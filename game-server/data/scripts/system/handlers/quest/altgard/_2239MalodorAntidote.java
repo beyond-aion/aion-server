@@ -13,7 +13,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu Modified Majka
- *
  */
 public class _2239MalodorAntidote extends QuestHandler {
 
@@ -25,9 +24,9 @@ public class _2239MalodorAntidote extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(203613).addOnQuestStart(questId); //Gilungk
-		qe.registerQuestNpc(203613).addOnTalkEvent(questId);//Gilungk
-		qe.registerQuestNpc(203630).addOnTalkEvent(questId); //Vovetirn
+		qe.registerQuestNpc(203613).addOnQuestStart(questId); // Gilungk
+		qe.registerQuestNpc(203613).addOnTalkEvent(questId);// Gilungk
+		qe.registerQuestNpc(203630).addOnTalkEvent(questId); // Vovetirn
 	}
 
 	@Override

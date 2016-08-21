@@ -16,16 +16,15 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @Author Majka
  * @Description
- * Talk with Eukraton at Aequis Advance Post.
- * Eliminate Aetheric Field Guards (3) at Dragon Lord's Gardens.
- * Obtain the Old Balaur Document from the Scattered Balaur Document and take it to Euvia.
- * Talk with Euvia at Dragon Lord's Gardens.
- * Read the Deciphered Balaur Document and find out what it says.
- * Talk with Euvia at Dragon Lord's Gardens.
- * Examine the Aetheric Field Stone of Earth.
- * Report back to Eukraton.
- *
- * Meet Eukraton, eliminate Aetheric Field Guards, and discover the secrets of Tiamat's ruins.
+ * 							Talk with Eukraton at Aequis Advance Post.
+ *              Eliminate Aetheric Field Guards (3) at Dragon Lord's Gardens.
+ *              Obtain the Old Balaur Document from the Scattered Balaur Document and take it to Euvia.
+ *              Talk with Euvia at Dragon Lord's Gardens.
+ *              Read the Deciphered Balaur Document and find out what it says.
+ *              Talk with Euvia at Dragon Lord's Gardens.
+ *              Examine the Aetheric Field Stone of Earth.
+ *              Report back to Eukraton.
+ *              Meet Eukraton, eliminate Aetheric Field Guards, and discover the secrets of Tiamat's ruins.
  */
 public class _10503GuardDownSecretsOut extends QuestHandler {
 
@@ -129,7 +128,8 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 				}
 				break;
 			case 702670:
-				if (dialog == DialogAction.USE_OBJECT && var == 2) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it to Euvia.
+				if (dialog == DialogAction.USE_OBJECT && var == 2) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it
+																															// to Euvia.
 					return useQuestObject(env, 2, 2, false, 0);
 				}
 				break;
@@ -152,7 +152,7 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 
 				if (var == 6) {
-					qs.setQuestVar(var+1);
+					qs.setQuestVar(var + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					playQuestMovie(env, 991);
@@ -163,7 +163,7 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -201,6 +201,7 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 		final int itemObjId = item.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
@@ -213,7 +214,7 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 		}, 1000);
 		return HandlerResult.SUCCESS;
 	}
-	
+
 	@Override
 	public void onQuestCompletedEvent(QuestEnv env) {
 		defaultOnQuestCompletedEvent(env, 10500);

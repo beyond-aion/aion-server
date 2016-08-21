@@ -54,8 +54,8 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 						return sendQuestDialog(env, 1352);
 				} else if (dialog == DialogAction.SETPRO1) {
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799079, player.getX(), player.getY(), player.getZ(), (byte) 0);
-					QuestService
-						.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799081, player.getX() - 1, player.getY() + 2, player.getZ(), (byte) 0);
+					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799081, player.getX() - 1, player.getY() + 2, player.getZ(),
+						(byte) 0);
 					return defaultCloseDialog(env, 0, 1);
 				} else if (dialog == DialogAction.SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);

@@ -58,27 +58,22 @@ public class _2290GrokensEscape extends QuestHandler {
 					if (QuestService.startQuest(env)) {
 						return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 700178, 0, 1); // 1
 					}
-				}
-				else
+				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203608) { // Groken
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 0) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 700178, 0, 1); // 1
 				}
-			}
-			else if (targetId == 203607) { // Groken
+			} else if (targetId == 203607) { // Groken
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 3) {
 					return sendQuestDialog(env, 1693);
-				}
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 3, 3, true, true);
 				}
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203607) { // Manir
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 5);
@@ -88,7 +83,7 @@ public class _2290GrokensEscape extends QuestHandler {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
 		Player player = env.getPlayer();

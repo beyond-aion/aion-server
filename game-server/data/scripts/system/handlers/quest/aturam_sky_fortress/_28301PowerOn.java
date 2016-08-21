@@ -79,7 +79,7 @@ public class _28301PowerOn extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		
+
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var0 = qs.getQuestVarById(0);
 			if (var0 <= 6 && targetId == sphereId) {

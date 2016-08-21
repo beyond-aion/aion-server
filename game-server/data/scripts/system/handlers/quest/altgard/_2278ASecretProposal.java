@@ -24,11 +24,11 @@ public class _2278ASecretProposal extends QuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(203590).addOnQuestStart(questId); //Emgata
+		qe.registerQuestNpc(203590).addOnQuestStart(questId); // Emgata
 		qe.registerQuestNpc(203590).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203557).addOnTalkEvent(questId); //Suthran
-		qe.registerQuestNpc(204206).addOnTalkEvent(questId); //Cavalorn
-		qe.registerQuestNpc(204075).addOnTalkEvent(questId); //Balder
+		qe.registerQuestNpc(203557).addOnTalkEvent(questId); // Suthran
+		qe.registerQuestNpc(204206).addOnTalkEvent(questId); // Cavalorn
+		qe.registerQuestNpc(204075).addOnTalkEvent(questId); // Balder
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class _2278ASecretProposal extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 203557) {//Suthran
+			if (targetId == 203557) {// Suthran
 				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 0) {
@@ -75,7 +75,7 @@ public class _2278ASecretProposal extends QuestHandler {
 						return sendQuestEndDialog(env);
 				}
 			}
-			if (targetId == 204206) {//Cavalorn
+			if (targetId == 204206) {// Cavalorn
 				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 1) {
@@ -91,7 +91,7 @@ public class _2278ASecretProposal extends QuestHandler {
 						}
 				}
 			}
-			if (targetId == 204075) {//Balder
+			if (targetId == 204075) {// Balder
 				switch (dialog) {
 					case QUEST_SELECT:
 						if (var == 2) {

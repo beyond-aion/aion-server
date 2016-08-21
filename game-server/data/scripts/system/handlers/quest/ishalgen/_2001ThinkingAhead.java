@@ -69,17 +69,14 @@ public class _2001ThinkingAhead extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				}
-			}
-			else if (targetId == 700093) {
+			} else if (targetId == 700093) {
 				return true; // just give quest drop on use
 			}
-		}
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203518) { // Boromer
 				if (dialog == DialogAction.USE_OBJECT) {
 					return sendQuestDialog(env, 2034);
-				}
-				else {
+				} else {
 					return sendQuestEndDialog(env);
 				}
 			}
@@ -96,8 +93,7 @@ public class _2001ThinkingAhead extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (var >= 3 && var < 8) {
 			return defaultOnKillEvent(env, mobs, 3, 8); // 3 - 8
-		}
-		else if (var == 8) {
+		} else if (var == 8) {
 			return defaultOnKillEvent(env, mobs, 8, true); // reward
 		}
 		return false;

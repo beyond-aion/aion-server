@@ -55,7 +55,7 @@ public class _2911SongOfBlessing extends QuestHandler {
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 6);
 				} else
-					return sendQuestEndDialog(env, qs.getQuestVarById(0) - 2); // different rewards and follow-up quests, depending on the decision 
+					return sendQuestEndDialog(env, qs.getQuestVarById(0) - 2); // different rewards and follow-up quests, depending on the decision
 			}
 		}
 		return false;

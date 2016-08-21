@@ -79,5 +79,5 @@ public class _23708SoundtheAlarm extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-	
+
 }

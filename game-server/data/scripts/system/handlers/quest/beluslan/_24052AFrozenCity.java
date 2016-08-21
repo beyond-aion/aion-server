@@ -64,8 +64,7 @@ public class _24052AFrozenCity extends QuestHandler {
 				int[] questItems = { 182215378, 182215379, 182215380 };
 				return sendQuestEndDialog(env, questItems);
 			}
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 204753) {
@@ -98,7 +97,8 @@ public class _24052AFrozenCity extends QuestHandler {
 		if (!player.isInsideItemUseZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
 			return HandlerResult.FAILED;
 
-		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2 || id != 182215380 && qs.getQuestVarById(0) == 3)
+		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2
+			|| id != 182215380 && qs.getQuestVarById(0) == 3)
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);

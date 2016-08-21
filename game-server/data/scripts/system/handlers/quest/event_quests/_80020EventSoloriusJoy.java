@@ -28,8 +28,7 @@ public class _80020EventSoloriusJoy extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-			&& qs.canRepeat()) {
+		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.canRepeat()) {
 			if (env.getTargetId() == 799769) {
 				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

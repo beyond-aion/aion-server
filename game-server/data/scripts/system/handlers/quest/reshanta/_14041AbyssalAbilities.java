@@ -63,8 +63,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 			return false;
-		}
-		else if (qs.getStatus() != QuestStatus.START) {
+		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}
 		if (targetId == 278627) {
@@ -84,8 +83,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278628) {
+		} else if (targetId == 278628) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 1)
@@ -102,8 +100,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278629) {
+		} else if (targetId == 278629) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 2)
@@ -120,8 +117,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278630) {
+		} else if (targetId == 278630) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 3)
@@ -138,8 +134,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278631) {
+		} else if (targetId == 278631) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 4)
@@ -156,8 +151,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278632) {
+		} else if (targetId == 278632) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 5)
@@ -174,8 +168,7 @@ public class _14041AbyssalAbilities extends QuestHandler {
 					}
 					return false;
 			}
-		}
-		else if (targetId == 278633) {
+		} else if (targetId == 278633) {
 			switch (env.getDialog()) {
 				case QUEST_SELECT:
 					if (var == 6)

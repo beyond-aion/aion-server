@@ -172,7 +172,7 @@ public class _1006Ascension extends QuestHandler {
 									public void run() {
 										qs.setQuestVar(51);
 										updateQuestStatus(env);
-										List<Npc> mobs = new FastTable<Npc>();
+										List<Npc> mobs = new FastTable<>();
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 224.073f, 239.1f, 206.7f, (byte) 0));
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 233.5f, 241.04f, 206.365f, (byte) 0));
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 229.6f, 265.7f, 205.7f, (byte) 0));
