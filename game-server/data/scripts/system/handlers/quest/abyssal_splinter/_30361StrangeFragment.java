@@ -59,7 +59,7 @@ public class _30361StrangeFragment extends QuestHandler {
 							}
 							return false;
 						case SETPRO2:
-							changeQuestStep(env, 1, 2, false);
+							changeQuestStep(env, 1, 2);
 							return defaultCloseDialog(env, 2, 2, true, false); // reward
 					}
 					break;

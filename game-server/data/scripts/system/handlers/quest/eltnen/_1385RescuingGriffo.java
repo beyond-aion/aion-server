@@ -37,7 +37,7 @@ public class _1385RescuingGriffo extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 1) {
-				changeQuestStep(env, 1, 0, false);
+				changeQuestStep(env, 1, 0);
 			}
 		}
 		return false;

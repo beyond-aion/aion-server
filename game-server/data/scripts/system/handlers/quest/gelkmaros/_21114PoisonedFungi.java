@@ -67,7 +67,7 @@ public class _21114PoisonedFungi extends QuestHandler {
 			} else if (targetId == 700729) {
 				if (qs.getQuestVarById(0) == 2) {
 					removeQuestItem(env, 182207862, 1);
-					changeQuestStep(env, 2, 3, false);
+					changeQuestStep(env, 2, 3);
 					return true;
 				}
 			}

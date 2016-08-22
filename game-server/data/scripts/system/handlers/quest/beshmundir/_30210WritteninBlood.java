@@ -52,7 +52,7 @@ public class _30210WritteninBlood extends QuestHandler {
 				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					if (var == 0 && player.getInventory().getItemCountByItemId(182209613) >= 30) {
 						removeQuestItem(env, 182209613, 30);
-						changeQuestStep(env, 0, 0, true, 0);
+						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 10000);
 					} else
 						return sendQuestDialog(env, 10001);

@@ -103,7 +103,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
-		changeQuestStep(env, 0, 1, false);
+		changeQuestStep(env, 0, 1);
 
 		return HandlerResult.SUCCESS;
 	}

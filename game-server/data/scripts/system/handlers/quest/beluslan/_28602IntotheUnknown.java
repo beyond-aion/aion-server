@@ -45,7 +45,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 			if (player.getWorldId() != 300230000) {
 				int var = qs.getQuestVarById(0);
 				if (var > 0) {
-					changeQuestStep(env, var, 0, false);
+					changeQuestStep(env, var, 0);
 					return true;
 				}
 			}
@@ -60,7 +60,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var > 0) {
-				changeQuestStep(env, var, 0, false);
+				changeQuestStep(env, var, 0);
 				return true;
 			}
 		}
@@ -85,7 +85,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-		changeQuestStep(env, 1, 2, false);
+		changeQuestStep(env, 1, 2);
 		return true;
 	}
 
@@ -111,7 +111,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 					InstanceService.registerPlayerWithInstance(newInstance, player);
 					TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
 						TeleportAnimation.FADE_OUT_BEAM);
-					changeQuestStep(env, 0, 1, false); // 1
+					changeQuestStep(env, 0, 1); // 1
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 730308) {
@@ -126,7 +126,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 					// Check item
 					if (var == 1) {
 						if (checkItemExistence(env, 185000109, 1, true)) { // Hisen's key
-							changeQuestStep(env, 1, 2, false); // 2
+							changeQuestStep(env, 1, 2); // 2
 							TeleportService2.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {

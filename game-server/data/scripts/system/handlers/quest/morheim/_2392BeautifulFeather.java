@@ -46,7 +46,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO1) {
 					if (player.getInventory().getItemCountByItemId(182204159) != 0) {
 						removeQuestItem(env, 182204159, 1);
-						changeQuestStep(env, 0, 1, false);
+						changeQuestStep(env, 0, 1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
@@ -55,7 +55,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO2) {
 					if (player.getInventory().getItemCountByItemId(182204160) != 0) {
 						removeQuestItem(env, 182204160, 1);
-						changeQuestStep(env, 0, 2, false);
+						changeQuestStep(env, 0, 2);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 6);
@@ -64,7 +64,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO3) {
 					if (player.getInventory().getItemCountByItemId(182204161) != 0) {
 						removeQuestItem(env, 182204161, 1);
-						changeQuestStep(env, 0, 3, false);
+						changeQuestStep(env, 0, 3);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 7);

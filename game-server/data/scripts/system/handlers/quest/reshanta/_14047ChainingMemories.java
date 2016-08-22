@@ -71,7 +71,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 					case SETPRO1:
 						if (var == 0) {
-							changeQuestStep(env, 0, 1, false);
+							changeQuestStep(env, 0, 1);
 							TeleportService2.teleportTo(player, 210060000, 2278.23f, 2217.8f, 59.27f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
@@ -86,7 +86,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 					case SETPRO2:
 						if (var == 1) {
-							changeQuestStep(env, 1, 2, false);
+							changeQuestStep(env, 1, 2);
 							TeleportService2.teleportTo(player, 210040000, 713.6f, 625.36f, 129.75f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
@@ -100,7 +100,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						}
 						break;
 					case SETPRO3:
-						changeQuestStep(env, 2, 3, false);
+						changeQuestStep(env, 2, 3);
 						WorldMapInstance instance = InstanceService.getNextAvailableInstance(WorldMapType.AZOTURAN_FORTRESS.getId());
 						InstanceService.registerPlayerWithInstance(instance, player);
 						QuestService.spawnQuestNpc(WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), icaronixNormalId, 478.8f, 431.1f, 1062.0067f,
@@ -120,7 +120,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 					case SETPRO10:
 						if (var == 3) {
-							changeQuestStep(env, 3, 4, false);
+							changeQuestStep(env, 3, 4);
 						}
 						closeDialogWindow(env);
 						player.setState(CreatureState.FLIGHT_TELEPORT);
@@ -147,7 +147,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 					case SETPRO11:
 						if (var == 4) {
-							changeQuestStep(env, 4, 5, false);
+							changeQuestStep(env, 4, 5);
 						}
 						closeDialogWindow(env);
 						player.setState(CreatureState.FLIGHT_TELEPORT);

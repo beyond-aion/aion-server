@@ -94,7 +94,7 @@ public class _28213TheColiseumSecret extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 			removeQuestItem(env, 182212223, 1);
-			changeQuestStep(env, 2, 3, false);
+			changeQuestStep(env, 2, 3);
 			return HandlerResult.SUCCESS;
 		}
 		return HandlerResult.FAILED;

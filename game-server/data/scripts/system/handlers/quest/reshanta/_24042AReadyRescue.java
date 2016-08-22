@@ -109,7 +109,7 @@ public class _24042AReadyRescue extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 4) {
-				changeQuestStep(env, 4, 3, false);
+				changeQuestStep(env, 4, 3);
 			}
 		}
 		return false;

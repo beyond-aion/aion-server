@@ -83,7 +83,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 						break;
 					case SETPRO3:
 						if (giveQuestItem(env, 182215592, 1) && giveQuestItem(env, 182215593, 1)) {
-							changeQuestStep(env, 2, 3, false); // 3
+							changeQuestStep(env, 2, 3); // 3
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
@@ -154,7 +154,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				int var1 = qs.getQuestVarById(1);
 				if (itemId == 182215593) { // quest_20032b
-					changeQuestStep(env, 4, 5, false); // 7
+					changeQuestStep(env, 4, 5); // 7
 					return HandlerResult.SUCCESS; // //TODO: Should return FAILED (not removed, but skill still should be used)
 				} else if (itemId == 182215592) { // quest_20032a
 					if (var == 5) {

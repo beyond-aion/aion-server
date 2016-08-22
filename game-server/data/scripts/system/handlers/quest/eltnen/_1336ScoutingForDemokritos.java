@@ -66,11 +66,11 @@ public class _1336ScoutingForDemokritos extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 206020 && var == 0) {
 				playQuestMovie(env, 43);
-				changeQuestStep(env, 0, 16, false);
+				changeQuestStep(env, 0, 16);
 				return true;
 			} else if (targetId == 206021 && var == 16) {
 				playQuestMovie(env, 44);
-				changeQuestStep(env, 16, 48, false);
+				changeQuestStep(env, 16, 48);
 				return true;
 			} else if (targetId == 206022 && var == 48) {
 				playQuestMovie(env, 45);

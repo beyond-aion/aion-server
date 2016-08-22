@@ -65,7 +65,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 							long itemCount = player.getInventory().getItemCountByItemId(182208008);
 							if (itemCount >= 1) {
 								removeQuestItem(env, 182208008, itemCount);
-								changeQuestStep(env, 0, 1, false);
+								changeQuestStep(env, 0, 1);
 								return sendQuestDialog(env, 10000);
 							} else {
 								return sendQuestDialog(env, 10001);

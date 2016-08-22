@@ -134,7 +134,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {
 					npc.getController().onDie(player);
-					changeQuestStep(env, 2, 3, false); // 3
+					changeQuestStep(env, 2, 3); // 3
 					return true;
 				}
 			}

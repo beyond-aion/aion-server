@@ -72,7 +72,7 @@ public class _51008NonHelpingHands extends QuestHandler {
 					npc.getZ()) <= 15) {
 					NpcActions.delete(npc, true);
 					if (var == 0)
-						changeQuestStep(env, 0, 1, false);
+						changeQuestStep(env, 0, 1);
 					else
 						changeQuestStep(env, 1, 1, true);
 					return true;

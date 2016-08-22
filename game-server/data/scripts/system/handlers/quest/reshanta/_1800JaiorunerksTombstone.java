@@ -55,7 +55,7 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 							return false;
 						case SETPRO1:
 							removeQuestItem(env, 182202163, 1);
-							changeQuestStep(env, 0, 1, false);
+							changeQuestStep(env, 0, 1);
 							return closeDialogWindow(env);
 					}
 					break;

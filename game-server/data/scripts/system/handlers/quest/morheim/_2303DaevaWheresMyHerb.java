@@ -51,7 +51,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 						return sendQuestDialog(env, 1004);
 					case SETPRO10:
 						if (QuestService.startQuest(env)) {
-							changeQuestStep(env, 0, 11, false); // 11
+							changeQuestStep(env, 0, 11); // 11
 							choice = 0;
 							return sendQuestDialog(env, 1012);
 						} else {
@@ -59,7 +59,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 						}
 					case SETPRO20:
 						if (QuestService.startQuest(env)) {
-							changeQuestStep(env, 0, 21, false); // 21
+							changeQuestStep(env, 0, 21); // 21
 							choice = 1;
 							return sendQuestDialog(env, 1097);
 						} else {
@@ -81,11 +81,11 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 					}
 				} else if (dialog == DialogAction.SETPRO10) {
-					changeQuestStep(env, 0, 11, false); // 11
+					changeQuestStep(env, 0, 11); // 11
 					choice = 0;
 					return sendQuestDialog(env, 1012);
 				} else if (dialog == DialogAction.SETPRO20) {
-					changeQuestStep(env, 0, 21, false); // 21
+					changeQuestStep(env, 0, 21); // 21
 					choice = 1;
 					return sendQuestDialog(env, 1097);
 				}

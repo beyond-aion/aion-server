@@ -61,7 +61,7 @@ public class _1614WheresBelbua extends QuestHandler {
 							}
 							return false;
 						case SETPRO1:
-							changeQuestStep(env, 0, 1, false);
+							changeQuestStep(env, 0, 1);
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 376f, 529f, 133f, 1, 2);
@@ -84,7 +84,7 @@ public class _1614WheresBelbua extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (qs.getQuestVarById(0) == 2) {
-				changeQuestStep(env, 2, 1, false);
+				changeQuestStep(env, 2, 1);
 			}
 		}
 		return false;

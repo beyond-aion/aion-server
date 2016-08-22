@@ -97,7 +97,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							return false;
 						case SETPRO3:
 							if (var == 2) {
-								changeQuestStep(env, 2, 93, false); // 93
+								changeQuestStep(env, 2, 93); // 93
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
 								TeleportService2.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
@@ -120,7 +120,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							return false;
 						case SETPRO4:
 							if (var == 93) {
-								changeQuestStep(env, 93, 94, false); // 94
+								changeQuestStep(env, 93, 94); // 94
 								player.setState(CreatureState.FLIGHT_TELEPORT);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(31001);
@@ -167,7 +167,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().onDelete();
 								QuestService.addNewSpawn(310070000, player.getInstanceId(), 212992, (float) 191.9, (float) 267.68, 1374, (byte) 0);
-								changeQuestStep(env, 96, 97, false); // 97
+								changeQuestStep(env, 96, 97); // 97
 								return closeDialogWindow(env);
 							}
 					}
@@ -200,7 +200,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 		final Player player = env.getPlayer();
 		if (movieId == 155) {
 			QuestService.addNewSpawn(310070000, player.getInstanceId(), 205111, (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
-			changeQuestStep(env, 94, 98, false); // 98
+			changeQuestStep(env, 94, 98); // 98
 			return true;
 		}
 		return false;
@@ -208,7 +208,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 
 	@Override
 	public boolean onEquipItemEvent(QuestEnv env, int itemId) {
-		changeQuestStep(env, 98, 96, false); // 96
+		changeQuestStep(env, 98, 96); // 96
 		return closeDialogWindow(env);
 	}
 
@@ -219,7 +219,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 97) {
-				changeQuestStep(env, 97, 8, false); // 8
+				changeQuestStep(env, 97, 8); // 8
 				TeleportService2.teleportTo(player, 210030000, 1, 2315.9f, 1800f, 195.2f);
 				return true;
 			}

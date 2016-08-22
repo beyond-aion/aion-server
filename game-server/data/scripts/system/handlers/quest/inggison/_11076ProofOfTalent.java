@@ -71,11 +71,11 @@ public class _11076ProofOfTalent extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() == 210050000) {
 				if (teleportId == 152001)
-					changeQuestStep(env, 0, 1, false);
+					changeQuestStep(env, 0, 1);
 				else if (teleportId == 153001)
-					changeQuestStep(env, 1, 2, false);
+					changeQuestStep(env, 1, 2);
 				else if (teleportId == 154001)
-					changeQuestStep(env, 2, 3, false);
+					changeQuestStep(env, 2, 3);
 				return true;
 			}
 		}

@@ -82,7 +82,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 					return false;
 				case SETPRO1:
 					if (var == 0) {
-						changeQuestStep(env, 0, 1, false);
+						changeQuestStep(env, 0, 1);
 						int currentHour = GameTimeService.getInstance().getGameTime().getHour();
 						if (currentHour < 8 || currentHour >= 20)
 							TeleportService2.teleportTo(player, 110010000, 1819.51f, 2189.24f, 528.52f, (byte) 36, TeleportAnimation.FADE_OUT_BEAM);

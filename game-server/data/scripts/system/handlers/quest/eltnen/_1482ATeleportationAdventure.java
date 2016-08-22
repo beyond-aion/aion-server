@@ -88,7 +88,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201399);
 							if (itemCount1 >= 3) {
 								removeQuestItem(env, 182201399, itemCount1);
-								changeQuestStep(env, 1, 2, false);
+								changeQuestStep(env, 1, 2);
 								return sendQuestDialog(env, 10000);
 							} else
 								return sendQuestDialog(env, 10001);

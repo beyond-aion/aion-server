@@ -58,7 +58,7 @@ public class _21249TheInvincibleStarket extends QuestHandler {
 					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
 				} else if (dialog == DialogAction.SET_SUCCEED) {
-					changeQuestStep(env, 0, 1, false);
+					changeQuestStep(env, 0, 1);
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().onDelete();
 					return defaultCloseDialog(env, 1, 1, true, false);

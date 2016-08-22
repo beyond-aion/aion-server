@@ -52,7 +52,7 @@ public class _30310RankandBile extends QuestHandler {
 				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
 					if (var == 0 && player.getInventory().getItemCountByItemId(182209713) >= 40) {
 						removeQuestItem(env, 182209713, 40);
-						changeQuestStep(env, 0, 0, true, 0);
+						changeQuestStep(env, 0, 0, true);
 						return sendQuestDialog(env, 10000);
 					} else
 						return sendQuestDialog(env, 10001);

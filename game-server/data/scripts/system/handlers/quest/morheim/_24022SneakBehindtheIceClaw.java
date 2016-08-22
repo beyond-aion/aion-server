@@ -113,7 +113,7 @@ public class _24022SneakBehindtheIceClaw extends QuestHandler {
 								QuestService.addNewSpawn(220020000, player.getInstanceId(), 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 								removeQuestItem(env, 182215364, 1);
 								removeQuestItem(env, 182215365, 1);
-								changeQuestStep(env, 3, 4, false); // 4
+								changeQuestStep(env, 3, 4); // 4
 							}
 						}
 					}

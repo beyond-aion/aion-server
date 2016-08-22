@@ -71,7 +71,7 @@ public class _14021ToCureACurse extends QuestHandler {
 							case USE_OBJECT:
 								return sendQuestDialog(env, 2034);
 							case SELECT_ACTION_2035:
-								changeQuestStep(env, 7, 8, false); // 7
+								changeQuestStep(env, 7, 8); // 7
 								return sendQuestDialog(env, 0);
 						}
 					}
@@ -145,7 +145,7 @@ public class _14021ToCureACurse extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 10) {
-				changeQuestStep(env, 10, 9, false);
+				changeQuestStep(env, 10, 9);
 			}
 		}
 		return false;

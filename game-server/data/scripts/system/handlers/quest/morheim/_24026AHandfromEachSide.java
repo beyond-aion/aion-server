@@ -145,10 +145,10 @@ public class _24026AHandfromEachSide extends QuestHandler {
 				} else if (balaurKilled == 4) {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {
-						changeQuestStep(env, 3, 4, false);
+						changeQuestStep(env, 3, 4);
 						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
 					} else {
-						changeQuestStep(env, 3, 2, false);
+						changeQuestStep(env, 3, 2);
 						QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
 					}
 				}
@@ -168,10 +168,10 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		if (qs.getQuestVarById(0) == 3) {
 			deleteBalaur(env);
 			if (kargateIsAlive(env)) {
-				changeQuestStep(env, 3, 4, false);
+				changeQuestStep(env, 3, 4);
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
 			} else {
-				changeQuestStep(env, 3, 2, false);
+				changeQuestStep(env, 3, 2);
 				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
 			}
 			return true;
@@ -189,7 +189,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		if (qs.getQuestVarById(0) == 3) {
 			deleteBalaur(env);
 			QuestService.questTimerEnd(env);
-			changeQuestStep(env, 3, 2, false);
+			changeQuestStep(env, 3, 2);
 			if (!kargateIsAlive(env))
 				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
 			return true;
@@ -206,7 +206,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 
 		if (qs.getQuestVarById(0) == 3 && player.getWorldId() != 320040000) {
 			QuestService.questTimerEnd(env);
-			changeQuestStep(env, 3, 2, false);
+			changeQuestStep(env, 3, 2);
 			return true;
 		}
 		return false;

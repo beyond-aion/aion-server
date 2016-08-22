@@ -74,7 +74,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 				case SETPRO1:
 					if (var == 0) {
 						TeleportService2.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
-						changeQuestStep(env, 0, 1, false);
+						changeQuestStep(env, 0, 1);
 						return true;
 					}
 			}
@@ -93,20 +93,20 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					break;
 				case SETPRO2:
 					if (var == 1) {
-						changeQuestStep(env, 1, 2, false);
+						changeQuestStep(env, 1, 2);
 						return closeDialogWindow(env);
 					}
 					return false;
 				case SETPRO4:
 					if (var == 3) {
 						TeleportService2.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.FADE_OUT_BEAM);
-						changeQuestStep(env, 3, 4, false);
+						changeQuestStep(env, 3, 4);
 						return true;
 					}
 					return false;
 				case SETPRO6:
 					if (var == 5) {
-						changeQuestStep(env, 5, 6, false);
+						changeQuestStep(env, 5, 6);
 						return closeDialogWindow(env);
 					}
 			}
@@ -150,7 +150,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 		final QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-		changeQuestStep(env, 4, 5, false);
+		changeQuestStep(env, 4, 5);
 		return true;
 	}
 

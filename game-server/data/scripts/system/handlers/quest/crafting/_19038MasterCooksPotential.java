@@ -181,16 +181,16 @@ public class _19038MasterCooksPotential extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (itemId) {
 				case 182206773:
-					changeQuestStep(env, 2, 1, false); // 1
+					changeQuestStep(env, 2, 1); // 1
 					return true;
 				case 182206774:
-					changeQuestStep(env, 5, 4, false); // 4
+					changeQuestStep(env, 5, 4); // 4
 					return true;
 				case 182206775:
-					changeQuestStep(env, 8, 7, false); // 7
+					changeQuestStep(env, 8, 7); // 7
 					return true;
 				case 182206776:
-					changeQuestStep(env, 11, 10, false); // 10
+					changeQuestStep(env, 11, 10); // 10
 					return true;
 			}
 		}

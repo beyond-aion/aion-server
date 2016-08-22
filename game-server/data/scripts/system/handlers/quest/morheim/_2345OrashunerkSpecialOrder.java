@@ -58,13 +58,13 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 					return sendQuestDialog(env, 1438);
 				} else if (dialog == DialogAction.SETPRO10) {
 					giveQuestItem(env, 182204137, 1);
-					changeQuestStep(env, 1, 10, false);
+					changeQuestStep(env, 1, 10);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
 				} else if (dialog == DialogAction.SETPRO20) {
 					giveQuestItem(env, 182204138, 1);
-					changeQuestStep(env, 1, 20, false);
+					changeQuestStep(env, 1, 20);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);

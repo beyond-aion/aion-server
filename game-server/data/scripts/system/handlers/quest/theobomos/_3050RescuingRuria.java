@@ -70,7 +70,7 @@ public class _3050RescuingRuria extends QuestHandler {
 							return false;
 						case SELECT_ACTION_1012:
 							removeQuestItem(env, 182208035, 1);
-							changeQuestStep(env, 0, 1, false);
+							changeQuestStep(env, 0, 1);
 							return sendQuestDialog(env, 1012);
 						case SETPRO1:
 							playQuestMovie(env, 370);
@@ -106,7 +106,7 @@ public class _3050RescuingRuria extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 1) {
-				changeQuestStep(env, 1, 0, false);
+				changeQuestStep(env, 1, 0);
 			}
 		}
 		return false;

@@ -86,7 +86,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 				case 700369: // Underground Arena Exit
 					if (dialog == DialogAction.USE_OBJECT && var == 5) {
 						TeleportService2.teleportTo(player, 120010000, 981.6009f, 1552.97f, 210.46f);
-						changeQuestStep(env, 5, 6, false); // 6
+						changeQuestStep(env, 5, 6); // 6
 						return true;
 					}
 					break;
@@ -99,7 +99,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
 						playQuestMovie(env, 423);
-						changeQuestStep(env, 3, 5, false); // 5
+						changeQuestStep(env, 3, 5); // 5
 						return closeDialogWindow(env);
 					}
 					break;
@@ -125,7 +125,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (zoneName == ZoneName.get("BALTASAR_HILL_VILLAGE_220050000") && var == 1) {
 				giveQuestItem(env, 182205502, 1);
-				changeQuestStep(env, 1, 2, false); // 2
+				changeQuestStep(env, 1, 2); // 2
 				return true;
 			}
 		}

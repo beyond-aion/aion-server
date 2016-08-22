@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.questEngine.model;
 
+import java.security.InvalidParameterException;
+
+import org.slf4j.LoggerFactory;
+
 /**
  * @author MrPoke
  */
@@ -27,6 +31,8 @@ public class QuestVars {
 	 * @param var
 	 */
 	public void setVarById(int id, int var) {
+		if (var > 0x3F)
+			LoggerFactory.getLogger(QuestVars.class).warn("Out of range value was passed for quest var on index " + id, new InvalidParameterException());
 		questVars[id] = var;
 	}
 
@@ -45,7 +51,8 @@ public class QuestVars {
 	/**
 	 * Fill the array with values, based on
 	 * 
-	 * @param int value, represented like above
+	 * @param int
+	 *          value, represented like above
 	 */
 	public void setVar(int var) {
 		for (int i = 0; i <= 5; i++) {

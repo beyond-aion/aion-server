@@ -66,7 +66,7 @@ public class _14053DangerCubed extends QuestHandler {
 					break;
 				case SETPRO2:
 					if (var == 1) {
-						changeQuestStep(env, 1, 2, false); // 2
+						changeQuestStep(env, 1, 2); // 2
 						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2010.1975f, 1395.4108f, 118.125f, (byte) 62,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
@@ -94,7 +94,7 @@ public class _14053DangerCubed extends QuestHandler {
 						return sendQuestDialog(env, 10001);
 				case SETPRO1:
 					if (var == 0) {
-						changeQuestStep(env, 0, 1, false); // 1
+						changeQuestStep(env, 0, 1); // 1
 						TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);

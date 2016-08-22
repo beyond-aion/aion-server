@@ -72,7 +72,7 @@ public class _30011Arachnophobia extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 0) {
-				changeQuestStep(env, 0, 1, false);
+				changeQuestStep(env, 0, 1);
 				return true;
 			}
 		}

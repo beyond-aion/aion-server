@@ -69,7 +69,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 						return false;
 					case SETPRO2:
 						if (var == 1) {
-							changeQuestStep(env, 1, 2, false);
+							changeQuestStep(env, 1, 2);
 							return sendQuestDialog(env, 2375);
 						}
 						return false;
@@ -99,7 +99,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 						return false;
 					case SETPRO3:
 						if (var == 1)
-							changeQuestStep(env, 1, 3, false);
+							changeQuestStep(env, 1, 3);
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
 						if (var == 3) {

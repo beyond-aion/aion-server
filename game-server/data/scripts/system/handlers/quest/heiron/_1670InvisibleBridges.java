@@ -75,10 +75,10 @@ public class _1670InvisibleBridges extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 212281 && var == 0) {
-				changeQuestStep(env, 0, 16, false);
+				changeQuestStep(env, 0, 16);
 				return true;
 			} else if (targetId == 212282 && var == 16) {
-				changeQuestStep(env, 16, 48, false);
+				changeQuestStep(env, 16, 48);
 				return true;
 			} else if (targetId == 212283 && var == 48) {
 				changeQuestStep(env, 48, 48, true);

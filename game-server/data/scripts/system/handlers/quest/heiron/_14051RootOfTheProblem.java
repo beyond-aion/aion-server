@@ -85,7 +85,7 @@ public class _14051RootOfTheProblem extends QuestHandler {
 					return defaultCloseDialog(env, 1, 2); // 2
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
-						changeQuestStep(env, 2, 3, false);
+						changeQuestStep(env, 2, 3);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 10000); // 3
 					} else

@@ -121,7 +121,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							return false;
 						case SETPRO5:
 							if (var == 4) {
-								changeQuestStep(env, 4, 95, false); // 95
+								changeQuestStep(env, 4, 95); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
 								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60,
@@ -130,7 +130,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							}
 							return false;
 						case SETPRO9:
-							changeQuestStep(env, 9, 10, false); // 10
+							changeQuestStep(env, 9, 10); // 10
 							TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 					}
@@ -161,7 +161,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							if (var == 96) {
 								if (!player.getInventory().isFull()) {
 									if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
-										changeQuestStep(env, 96, 99, false); // 99
+										changeQuestStep(env, 96, 99); // 99
 										return sendQuestDialog(env, 3058);
 									} else {
 										return closeDialogWindow(env);
@@ -177,7 +177,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							return false;
 						case SETPRO8:
 							if (var == 97) {
-								changeQuestStep(env, 97, 98, false); // 98
+								changeQuestStep(env, 97, 98); // 98
 								QuestService.addNewSpawn(320070000, player.getInstanceId(), 204263, 257.5f, 245f, 125f, (byte) 0);
 								return closeDialogWindow(env);
 							}
@@ -195,7 +195,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId == 156) {
-			changeQuestStep(env, 95, 96, false); // 96
+			changeQuestStep(env, 95, 96); // 96
 			return true;
 		}
 		return false;
@@ -203,7 +203,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 
 	@Override
 	public boolean onEquipItemEvent(QuestEnv env, int itemId) {
-		changeQuestStep(env, 99, 97, false); // 97
+		changeQuestStep(env, 99, 97); // 97
 		return closeDialogWindow(env);
 	}
 
@@ -214,7 +214,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 98) {
-				changeQuestStep(env, 98, 9, false); // 9
+				changeQuestStep(env, 98, 9); // 9
 				TeleportService2.teleportTo(player, 220010000, 1, 1112.492f, 1718.974f, 270.45917f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
 				return true;
 			}

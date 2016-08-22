@@ -97,7 +97,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				changeQuestStep(env, 2, 1, false);
+				changeQuestStep(env, 2, 1);
 			}
 		}
 		return false;

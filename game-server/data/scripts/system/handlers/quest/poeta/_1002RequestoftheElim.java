@@ -125,7 +125,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 						case SETPRO5:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);
 							TeleportService2.teleportTo(player, 310010000, newInstance.getInstanceId(), 52, 174, 229);
-							changeQuestStep(env, 13, 20, false); // 20
+							changeQuestStep(env, 13, 20); // 20
 							return closeDialogWindow(env);
 						case SETPRO6:
 							return defaultCloseDialog(env, 14, 14, true, false); // reward
@@ -143,7 +143,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 
 									@Override
 									public void run() {
-										changeQuestStep(env, 20, 14, false); // 14
+										changeQuestStep(env, 20, 14); // 14
 										TeleportService2.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
 									}
 								}, 43000);
@@ -174,7 +174,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 			} else {
 				int var = qs.getQuestVarById(0);
 				if (var == 20) {
-					changeQuestStep(env, 20, 13, false); // 13
+					changeQuestStep(env, 20, 13); // 13
 				}
 			}
 		}

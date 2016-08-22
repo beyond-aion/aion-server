@@ -89,7 +89,7 @@ public class _4939ProvingGround extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							case CHECK_USER_HAS_QUEST_ITEM:
 								if (QuestService.collectItemCheck(env, true)) {
-									changeQuestStep(env, 3, 4, false);
+									changeQuestStep(env, 3, 4);
 									return sendQuestDialog(env, 10000);
 								} else
 									return sendQuestDialog(env, 10001);

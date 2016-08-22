@@ -55,7 +55,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 				break;
 			case 233865:
 				if (qs.getQuestVarById(0) == 5) {
-					changeQuestStep(env, 5, 6, false); // 6
+					changeQuestStep(env, 5, 6); // 6
 				}
 				break;
 		}

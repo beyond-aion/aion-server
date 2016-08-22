@@ -69,7 +69,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 
 						if (dialog == DialogAction.SETPRO1) {
 							TeleportService2.teleportTo(player, 220030000, 2467.6052f, 2548.0076f, 316.12375f, (byte) 63, TeleportAnimation.FADE_OUT_BEAM);
-							changeQuestStep(env, 0, 1, false); // 1
+							changeQuestStep(env, 0, 1); // 1
 							return closeDialogWindow(env);
 						}
 					}
@@ -119,10 +119,10 @@ public class _24016AStrangeNewThread extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var >= 2 && player.getWorldId() != 320030000) {
-				changeQuestStep(env, var, 1, false);
+				changeQuestStep(env, var, 1);
 				return true;
 			} else if (var == 1 && player.getWorldId() == 320030000) {
-				changeQuestStep(env, 1, 2, false); // 2
+				changeQuestStep(env, 1, 2); // 2
 				return true;
 			}
 		}

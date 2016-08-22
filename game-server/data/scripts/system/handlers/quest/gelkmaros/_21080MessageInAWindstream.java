@@ -72,7 +72,7 @@ public class _21080MessageInAWindstream extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (zoneName == ZoneName.get("ANTAGOR_CANYON_220070000")) {
 				if (var < 3) {
-					changeQuestStep(env, var, var + 1, false);
+					changeQuestStep(env, var, var + 1);
 					return true;
 				}
 			} else if (zoneName == ZoneName.get("GELKMAROS_FORTRESS_220070000") && var == 4) {

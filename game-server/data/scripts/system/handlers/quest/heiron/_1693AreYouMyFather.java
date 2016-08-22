@@ -120,7 +120,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				changeQuestStep(env, 2, 0, false);
+				changeQuestStep(env, 2, 0);
 			}
 		}
 		return false;

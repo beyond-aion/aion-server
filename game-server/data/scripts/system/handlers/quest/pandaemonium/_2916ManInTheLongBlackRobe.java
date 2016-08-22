@@ -110,7 +110,7 @@ public class _2916ManInTheLongBlackRobe extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 5) {
-				changeQuestStep(env, 5, 6, false);
+				changeQuestStep(env, 5, 6);
 				return true;
 			}
 		}

@@ -69,7 +69,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 							case CHECK_USER_HAS_QUEST_ITEM:
 								if (QuestService.collectItemCheck(env, true)) {
 									removeQuestItem(env, 182207123, 1);
-									changeQuestStep(env, 2, 3, false);
+									changeQuestStep(env, 2, 3);
 									return sendQuestDialog(env, 10000);
 								} else
 									return sendQuestDialog(env, 10001);
@@ -88,7 +88,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 										if (!giveQuestItem(env, 182207123, 1))
 											return true;
 									}
-									changeQuestStep(env, 1, 2, false);
+									changeQuestStep(env, 1, 2);
 									return sendQuestDialog(env, 1354);
 								} else {
 									return sendQuestDialog(env, 1438);

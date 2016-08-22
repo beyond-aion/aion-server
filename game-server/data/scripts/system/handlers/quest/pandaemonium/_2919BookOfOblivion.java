@@ -65,11 +65,11 @@ public class _2919BookOfOblivion extends QuestHandler {
 					else if (qs.getQuestVarById(0) == 6)
 						return sendQuestDialog(env, 3057);
 				} else if (dialog == DialogAction.SETPRO4) {
-					changeQuestStep(env, 2, 3, false);
+					changeQuestStep(env, 2, 3);
 					return closeDialogWindow(env);
 				} else if (dialog == DialogAction.SETPRO7) {
 					giveQuestItem(env, 182207013, 1);
-					changeQuestStep(env, 6, 7, false);
+					changeQuestStep(env, 6, 7);
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 204206) {

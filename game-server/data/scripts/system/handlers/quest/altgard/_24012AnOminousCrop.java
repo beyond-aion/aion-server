@@ -83,7 +83,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
 				if (var == 1) {
-					changeQuestStep(env, 1, 2, false); // 2
+					changeQuestStep(env, 1, 2); // 2
 					return true;
 				}
 			}

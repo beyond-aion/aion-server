@@ -53,7 +53,7 @@ public class _2430SecretInformation extends QuestHandler {
 						if (player.getInventory().getKinah() >= 500) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(500);
-								changeQuestStep(env, 0, 1, false); // 1
+								changeQuestStep(env, 0, 1); // 1
 								return sendQuestDialog(env, 1352);
 							}
 						} else {
@@ -64,7 +64,7 @@ public class _2430SecretInformation extends QuestHandler {
 						if (player.getInventory().getKinah() >= 5000) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(5000);
-								changeQuestStep(env, 0, 3, false); // 3
+								changeQuestStep(env, 0, 3); // 3
 								return sendQuestDialog(env, 2034);
 							}
 						} else {
@@ -75,7 +75,7 @@ public class _2430SecretInformation extends QuestHandler {
 						if (player.getInventory().getKinah() >= 50000) {
 							if (QuestService.startQuest(env)) {
 								player.getInventory().decreaseKinah(50000);
-								changeQuestStep(env, 0, 7, false); // 7
+								changeQuestStep(env, 0, 7); // 7
 								return sendQuestDialog(env, 3398);
 							}
 						} else {

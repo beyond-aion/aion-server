@@ -51,7 +51,7 @@ public class _1156StolenVillageSeal extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 						}
 					} else if (dialog == DialogAction.SETPRO1) {
-						changeQuestStep(env, 0, 1, false); // 1
+						changeQuestStep(env, 0, 1); // 1
 						return closeDialogWindow(env);
 					}
 					break;

@@ -51,7 +51,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
-				changeQuestStep(env, 3, 2, false);
+				changeQuestStep(env, 3, 2);
 			}
 		}
 		return false;

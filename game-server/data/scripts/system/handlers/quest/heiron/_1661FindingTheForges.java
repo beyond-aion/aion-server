@@ -68,10 +68,10 @@ public class _1661FindingTheForges extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 206045 && var == 0) {
-				changeQuestStep(env, 0, 16, false);
+				changeQuestStep(env, 0, 16);
 				return true;
 			} else if (targetId == 206046 && var == 16) {
-				changeQuestStep(env, 16, 48, false);
+				changeQuestStep(env, 16, 48);
 				return true;
 			} else if (targetId == 206047 && var == 48) {
 				changeQuestStep(env, 48, 48, true);

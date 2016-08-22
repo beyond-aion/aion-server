@@ -51,13 +51,13 @@ public class _2411EarthSpiritWaterSpirit extends QuestHandler {
 				} else if (dialog == DialogAction.SELECT_ACTION_1097) {
 					return sendQuestDialog(env, 1097);
 				} else if (dialog == DialogAction.SETPRO10) {
-					changeQuestStep(env, 0, 1, false);
+					changeQuestStep(env, 0, 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
 				} else if (dialog == DialogAction.SETPRO20) {
 					rewardIndex = 1;
-					changeQuestStep(env, 0, 2, false);
+					changeQuestStep(env, 0, 2);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);

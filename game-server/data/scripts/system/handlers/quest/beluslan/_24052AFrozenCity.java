@@ -112,12 +112,12 @@ public class _24052AFrozenCity extends QuestHandler {
 				if (qs.getQuestVarById(0) == 1) {
 					playQuestMovie(env, 243);
 					removeQuestItem(env, id, 1);
-					changeQuestStep(env, 1, 2, false); // 2
+					changeQuestStep(env, 1, 2); // 2
 					giveQuestItem(env, 182215379, 1);
 				} else if (qs.getQuestVarById(0) == 2) {
 					playQuestMovie(env, 244);
 					removeQuestItem(env, id, 1);
-					changeQuestStep(env, 2, 3, false); // 3
+					changeQuestStep(env, 2, 3); // 3
 					giveQuestItem(env, 182215380, 1);
 				} else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
 					removeQuestItem(env, id, 1);

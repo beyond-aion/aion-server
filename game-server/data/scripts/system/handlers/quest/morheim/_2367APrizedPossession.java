@@ -53,13 +53,13 @@ public class _2367APrizedPossession extends QuestHandler {
 					giveQuestItem(env, 182204147, 1);
 					return sendQuestDialog(env, 1097);
 				} else if (dialog == DialogAction.SETPRO10) {
-					changeQuestStep(env, 0, 10, false);
+					changeQuestStep(env, 0, 10);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
 				} else if (dialog == DialogAction.SETPRO20) {
 					rewardIndex = 1;
-					changeQuestStep(env, 0, 20, false);
+					changeQuestStep(env, 0, 20);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);

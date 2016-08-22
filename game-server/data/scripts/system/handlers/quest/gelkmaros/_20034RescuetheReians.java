@@ -217,7 +217,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					}
 					break;
 				case SETPRO6:
-					changeQuestStep(env, 5, 6, false);// 6
+					changeQuestStep(env, 5, 6);// 6
 					npc.getController().onDelete();
 					return closeDialogWindow(env);
 			}

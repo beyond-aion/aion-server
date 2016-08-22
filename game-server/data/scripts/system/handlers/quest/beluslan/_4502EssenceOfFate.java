@@ -60,7 +60,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 						if (dialog == DialogAction.USE_OBJECT) {
 							return sendQuestDialog(env, 1011);
 						} else {
-							changeQuestStep(env, 0, 1, false); // 1
+							changeQuestStep(env, 0, 1); // 1
 							return sendQuestDialog(env, 0);
 						}
 					}

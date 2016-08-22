@@ -39,7 +39,7 @@ public class _2477ADishForDukar extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
-					changeQuestStep(env, 0, 1, false);
+					changeQuestStep(env, 0, 1);
 					return sendQuestDialog(env, 1003);
 				} else {
 					return sendQuestStartDialog(env);

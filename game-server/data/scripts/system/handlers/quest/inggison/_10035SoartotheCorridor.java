@@ -161,7 +161,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (zoneName.equals(ZoneName.get("ANGRIEF_GATE_210050000"))) {
 				if (var == 4) {
-					changeQuestStep(env, 4, 5, false);
+					changeQuestStep(env, 4, 5);
 					return true;
 				}
 			}

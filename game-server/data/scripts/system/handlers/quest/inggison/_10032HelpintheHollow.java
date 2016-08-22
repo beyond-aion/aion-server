@@ -87,7 +87,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 						if (player.isInGroup2()) {
 							return sendQuestDialog(env, 1864);
 						} else if (giveQuestItem(env, 182215618, 1) && giveQuestItem(env, 182215619, 1)) {
-							changeQuestStep(env, 2, 3, false); // 3
+							changeQuestStep(env, 2, 3); // 3
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
 							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
@@ -98,7 +98,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 							return sendQuestSelectionDialog(env);
 						}
 					case SETPRO4:
-						changeQuestStep(env, 2, 3, false); // 3
+						changeQuestStep(env, 2, 3); // 3
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
@@ -137,7 +137,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 				int var = qs.getQuestVarById(0);
 				int var1 = qs.getQuestVarById(1);
 				if (itemId == 182215618) { // quest_20032b
-					changeQuestStep(env, 4, 5, false); // 7
+					changeQuestStep(env, 4, 5); // 7
 					return HandlerResult.SUCCESS; // //TODO: Should return FAILED (not removed, but skill still should be used)
 				} else if (itemId == 182215619) { // quest_20032a
 					if (var == 5) {

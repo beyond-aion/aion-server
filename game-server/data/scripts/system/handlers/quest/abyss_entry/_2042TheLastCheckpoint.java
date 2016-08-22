@@ -119,22 +119,22 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (rings[0].equals(flyingRing)) {
-				changeQuestStep(env, 2, 3, false); // 3
+				changeQuestStep(env, 2, 3); // 3
 				return true;
 			} else if (rings[1].equals(flyingRing)) {
-				changeQuestStep(env, 3, 4, false); // 4
+				changeQuestStep(env, 3, 4); // 4
 				return true;
 			} else if (rings[2].equals(flyingRing)) {
-				changeQuestStep(env, 4, 5, false); // 5
+				changeQuestStep(env, 4, 5); // 5
 				return true;
 			} else if (rings[3].equals(flyingRing)) {
-				changeQuestStep(env, 5, 6, false); // 6
+				changeQuestStep(env, 5, 6); // 6
 				return true;
 			} else if (rings[4].equals(flyingRing)) {
-				changeQuestStep(env, 6, 7, false); // 7
+				changeQuestStep(env, 6, 7); // 7
 				return true;
 			} else if (rings[5].equals(flyingRing)) {
-				changeQuestStep(env, 7, 8, false); // 8
+				changeQuestStep(env, 7, 8); // 8
 				if (qs.getQuestVarById(0) == 8)
 					QuestService.questTimerEnd(env);
 				return true;
@@ -150,7 +150,7 @@ public class _2042TheLastCheckpoint extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var > 1 && var < 8) {
-				changeQuestStep(env, var, 9, false); // 9
+				changeQuestStep(env, var, 9); // 9
 				return true;
 			}
 		}

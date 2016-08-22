@@ -56,7 +56,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 							return false;
 						case SETPRO1:
 							if (var == 0) {
-								changeQuestStep(env, 0, 1, false);
+								changeQuestStep(env, 0, 1);
 								TeleportService2.teleportTo(player, 210010000, 244.09f, 1638.28f, 100.38f, (byte) 52, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
@@ -93,7 +93,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 							return false;
 						case SETPRO2:
 							if (var == 1) {
-								changeQuestStep(env, 1, 2, false);
+								changeQuestStep(env, 1, 2);
 								TeleportService2.teleportTo(player, 400010000, 2929.65f, 964.836f, 1538.17f, (byte) 43, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}

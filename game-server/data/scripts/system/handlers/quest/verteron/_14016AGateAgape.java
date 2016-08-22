@@ -54,7 +54,7 @@ public class _14016AGateAgape extends QuestHandler {
 							return false;
 						case SETPRO1:
 							TeleportService2.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);
-							changeQuestStep(env, 0, 1, false); // 1
+							changeQuestStep(env, 0, 1); // 1
 							return closeDialogWindow(env);
 					}
 					break;
@@ -83,7 +83,7 @@ public class _14016AGateAgape extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 2) {
-				changeQuestStep(env, 2, 1, false);
+				changeQuestStep(env, 2, 1);
 				removeQuestItem(env, 182215317, 1);
 				return true;
 			}
@@ -100,11 +100,11 @@ public class _14016AGateAgape extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 2 && player.getWorldId() != 310030000) {
-				changeQuestStep(env, 2, 1, false);
+				changeQuestStep(env, 2, 1);
 				removeQuestItem(env, 182215317, 1);
 				return true;
 			} else if (var == 1 && player.getWorldId() == 310030000) {
-				changeQuestStep(env, 1, 2, false); // 2
+				changeQuestStep(env, 1, 2); // 2
 				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
 				return true;
 			}
