@@ -46,13 +46,13 @@ public class ChatService {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public ChatClient registerPlayer(int playerId, String accName, String nick, Race race) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ChatClient registerPlayer(int playerId, String accName, String nick, Race race, byte accessLevel) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.reset();
 		md.update(accName.getBytes("UTF-8"), 0, accName.length());
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
-		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race);
+		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race, accessLevel);
 		players.put(playerId, chatClient);
 		return chatClient;
 	}

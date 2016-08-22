@@ -20,6 +20,7 @@ public class ChatClient {
 	private final String accName;
 	private final String name;
 	private final Race race;
+	private final byte accessLevel;
 	private byte[] identifier;
 	private ClientChannelHandler channelHandler;
 	private long gagTime;
@@ -31,12 +32,13 @@ public class ChatClient {
 	private Map<ChannelType, List<Channel>> channels = new FastMap<>();
 	private Map<ChannelType, Long> lastMessageTime = new FastMap<>();
 
-	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race) {
+	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race, byte accessLevel) {
 		this.clientId = clientId;
 		this.token = token;
 		this.accName = accName;
 		this.name = nick;
 		this.race = race;
+		this.accessLevel = accessLevel;
 	}
 
 	/**
@@ -63,6 +65,10 @@ public class ChatClient {
 
 	public Race getRace() {
 		return race;
+	}
+
+	public byte getAccessLevel() {
+		return accessLevel;
 	}
 
 	/**

@@ -81,7 +81,7 @@ public class ChatChannels {
 		String channelMeta = channelType[1];
 		int gameServerId = Integer.valueOf(channelRestrictions[0]);
 		Race race = Race.getById(Integer.valueOf(channelRestrictions[1]));
-		if (client.getRace() != race) {
+		if (client.getRace() != race && client.getAccessLevel() == 0) {
 			log.warn(client + " requested channel of race: " + race);
 			return null;
 		}

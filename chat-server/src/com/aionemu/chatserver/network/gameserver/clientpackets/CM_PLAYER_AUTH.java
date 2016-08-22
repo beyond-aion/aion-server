@@ -24,6 +24,7 @@ public class CM_PLAYER_AUTH extends GsClientPacket {
 	private String accName;
 	private String nick;
 	private int raceId;
+	private byte accessLevel;
 
 	public CM_PLAYER_AUTH(ByteBuffer buf, GsConnection connection) {
 		super(buf, connection, 0x01);
@@ -35,12 +36,13 @@ public class CM_PLAYER_AUTH extends GsClientPacket {
 		accName = readS();
 		nick = readS();
 		raceId = readD();
+		accessLevel = readSC();
 	}
 
 	@Override
 	protected void runImpl() {
 		try {
-			ChatClient chatClient = ChatService.getInstance().registerPlayer(playerId, accName, nick, Race.getById(raceId));
+			ChatClient chatClient = ChatService.getInstance().registerPlayer(playerId, accName, nick, Race.getById(raceId), accessLevel);
 			getConnection().sendPacket(new SM_PLAYER_AUTH_RESPONSE(chatClient));
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			log.error("Error registering player " + playerId + " on ChatServer: " + e.getMessage());
