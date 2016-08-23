@@ -105,7 +105,7 @@
 		<!-- Bakarma Cursewitch -->
 		<spawn npc_id="213445">
 			<spot x="576.846" y="452.567" z="444.92" h="27"/>
-			<spot x="659.21" y="461.85" z="313.58002" h="4" walker_id="2AFF0647F4E0FE276DE404BC8E0C22DB6BA232FA"/>
+			<spot x="659.21" y="461.85" z="313.58002" h="4"/>
 		</spawn>
 		<!-- Bakarma Deathbringer -->
 		<spawn npc_id="213426">
