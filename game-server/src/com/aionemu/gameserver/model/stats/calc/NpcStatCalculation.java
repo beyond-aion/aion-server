@@ -25,10 +25,11 @@ public class NpcStatCalculation {
 			case PHYSICAL_DEFENSE:
 				return 20f;
 			case MAGICAL_ACCURACY:
-				return 27f;
+				return 25f;
 			case MAGICAL_RESIST:
 				return 23f;
 			case PHYSICAL_ACCURACY:
+				return 37f;
 			case PARRY:
 				return 40f;
 			case PHYSICAL_CRITICAL_RESIST:
@@ -54,9 +55,6 @@ public class NpcStatCalculation {
 						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
-					case PHYSICAL_ACCURACY:
-					case MAGICAL_ACCURACY:
-						return 1.025f;
 				}
 				return 1f;
 			case ELITE:
@@ -69,9 +67,10 @@ public class NpcStatCalculation {
 						return 1.25f;
 					case MAGICAL_RESIST:
 						return 1.1f;
-					case MAGICAL_ACCURACY:
-					case PARRY:
 					case PHYSICAL_ACCURACY:
+					case MAGICAL_ACCURACY:
+						return 1.03f;
+					case PARRY:
 						return 1.025f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.5f;
@@ -125,7 +124,6 @@ public class NpcStatCalculation {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 						return 1.1f;
-					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.02f;
 					case PHYSICAL_DEFENSE:
@@ -134,8 +132,6 @@ public class NpcStatCalculation {
 						return 1.45f;
 					case PARRY:
 						return 1.05f;
-					case PHYSICAL_ACCURACY:
-						return 1.01f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.2f;
 				}
@@ -146,7 +142,6 @@ public class NpcStatCalculation {
 						return 1.6f;
 					case PHYSICAL_DEFENSE:
 						return 1.2f;
-					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.03f;
 					case MAGICAL_ATTACK:
@@ -154,7 +149,8 @@ public class NpcStatCalculation {
 					case PARRY:
 						return 1.1f;
 					case PHYSICAL_ACCURACY:
-						return 1.02f;
+					case MAGICAL_ACCURACY:
+						return 1.01f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.4f;
 				}
@@ -163,7 +159,6 @@ public class NpcStatCalculation {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 						return 1.95f;
-					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.04f;
 					case PHYSICAL_DEFENSE:
@@ -173,7 +168,8 @@ public class NpcStatCalculation {
 					case PARRY:
 						return 1.1f;
 					case PHYSICAL_ACCURACY:
-						return 1.03f;
+					case MAGICAL_ACCURACY:
+						return 1.02f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.6f;
 				}
@@ -184,7 +180,6 @@ public class NpcStatCalculation {
 						return 2.2f;
 					case PHYSICAL_DEFENSE:
 						return 1.4f;
-					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.05f;
 					case MAGICAL_ATTACK:
@@ -192,7 +187,8 @@ public class NpcStatCalculation {
 					case PARRY:
 						return 1.12f;
 					case PHYSICAL_ACCURACY:
-						return 1.04f;
+					case MAGICAL_ACCURACY:
+						return 1.03f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.8f;
 				}
@@ -203,7 +199,6 @@ public class NpcStatCalculation {
 						return 2.5f;
 					case PHYSICAL_DEFENSE:
 						return 1.5f;
-					case MAGICAL_ACCURACY:
 					case MAGICAL_RESIST:
 						return 1.06f;
 					case MAGICAL_ATTACK:
@@ -211,7 +206,8 @@ public class NpcStatCalculation {
 					case PARRY:
 						return 1.12f;
 					case PHYSICAL_ACCURACY:
-						return 1.05f;
+					case MAGICAL_ACCURACY:
+						return 1.04f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2f;
 				}
