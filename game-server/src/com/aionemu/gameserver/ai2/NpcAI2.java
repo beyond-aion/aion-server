@@ -39,8 +39,9 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
 @AIName("npc")
 public class NpcAI2 extends AITemplate {
 
-	private static final EnumSet<Race> apRewardingRaces = EnumSet.of(Race.DARK, Race.DRAGON, Race.DRAGONET, Race.DRAKAN, Race.GCHIEF_DARK,
-		Race.GCHIEF_DRAGON, Race.GCHIEF_LIGHT, Race.GHENCHMAN_DARK, Race.GHENCHMAN_LIGHT, Race.LIGHT, Race.LIZARDMAN, Race.NAGA, Race.SIEGEDRAKAN);
+	private static final EnumSet<Race> apRewardingRaces = EnumSet.of(Race.ASMODIANS, Race.DARK, Race.DRAGON, Race.DRAGONET, Race.DRAKAN, Race.ELYOS,
+		Race.GCHIEF_DARK, Race.GCHIEF_DRAGON, Race.GCHIEF_LIGHT, Race.GHENCHMAN_DARK, Race.GHENCHMAN_LIGHT, Race.LIGHT, Race.LIZARDMAN, Race.NAGA,
+		Race.SIEGEDRAKAN);
 
 	@Override
 	public Npc getOwner() {
