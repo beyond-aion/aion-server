@@ -23,7 +23,7 @@ public class LootGroupRules {
 	private final int superior_item_above;
 	private final int heroic_item_above;
 	private final int fabled_item_above;
-	private final int ethernal_item_above;
+	private final int eternal_item_above;
 	private final int mythic_item_above;
 	private int nrMisc;
 	private int nrRoundRobin;
@@ -35,12 +35,12 @@ public class LootGroupRules {
 		superior_item_above = 2;
 		heroic_item_above = 2;
 		fabled_item_above = 2;
-		ethernal_item_above = 2;
+		eternal_item_above = 2;
 		mythic_item_above = 2;
 	}
 
 	public LootGroupRules(LootRuleType lootRule, int misc, int commonItemAbove, int superiorItemAbove, int heroicItemAbove, int fabledItemAbove,
-		int ethernalItemAbove, int mythicItemAbove) {
+		int eternalItemAbove, int mythicItemAbove) {
 		super();
 		this.lootRule = lootRule;
 		this.misc = misc;
@@ -48,7 +48,7 @@ public class LootGroupRules {
 		superior_item_above = superiorItemAbove;
 		heroic_item_above = heroicItemAbove;
 		fabled_item_above = fabledItemAbove;
-		ethernal_item_above = ethernalItemAbove;
+		eternal_item_above = eternalItemAbove;
 		mythic_item_above = mythicItemAbove;
 	}
 
@@ -66,9 +66,9 @@ public class LootGroupRules {
 				return heroic_item_above != 0;
 			case UNIQUE: // Yellow
 				return fabled_item_above != 0;
-			case MYTHIC: // Orange
-				return ethernal_item_above != 0;
-			case EPIC: // Purple
+			case EPIC: // Orange
+				return eternal_item_above != 0;
+			case MYTHIC: // Purple
 				return mythic_item_above != 0;
 		}
 		return false;
@@ -129,8 +129,8 @@ public class LootGroupRules {
 	/**
 	 * @return the ethernal_item_above
 	 */
-	public int getEthernalItemAbove() {
-		return ethernal_item_above;
+	public int getEternalItemAbove() {
+		return eternal_item_above;
 	}
 
 	/**

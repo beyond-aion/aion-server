@@ -38,7 +38,7 @@ public class SM_GROUP_INFO extends AionServerPacket {
 		writeD(lootRules.getSuperiorItemAbove());
 		writeD(lootRules.getHeroicItemAbove());
 		writeD(lootRules.getFabledItemAbove());
-		writeD(lootRules.getEthernalItemAbove());
+		writeD(lootRules.getEternalItemAbove());
 		writeD(lootRules.getMythicItemAbove());
 		writeD(0x02);
 		writeC(0x00);
