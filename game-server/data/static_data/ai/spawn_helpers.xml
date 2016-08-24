@@ -148,7 +148,7 @@
 				<summonGroup npcId="280685" count="3" distance="2"/>
 			</percentage>
 			<percentage percent="50">
-				<summonGroup npcId="280686" count="4" distance="2"/>
+				<summonGroup npcId="280686" count="3" distance="2"/>
 			</percentage>
 		</summons>
 	</ai>
