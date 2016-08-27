@@ -77,7 +77,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 		writeC(pcd.getGender().getGenderId());
 		writeC(pcd.getLevel());
 		writeC(this.event.getId());
-		writeC(1); // unk 600020000 & 600030000 0x00, rest 0x01
+		writeC(1); // unk, always 0x01 since removal of Sarpan & Tiamaranta
 		writeC(player.getFlyState()); // isFly
 		writeC(0x0);
 		switch (this.event) {

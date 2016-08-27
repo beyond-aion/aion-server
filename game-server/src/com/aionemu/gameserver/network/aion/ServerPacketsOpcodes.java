@@ -35,7 +35,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ENTER_WORLD_CHECK.class, 0xD, idSet);
 		addPacketOpcode(SM_NPC_INFO.class, 0xE, idSet);
 		addPacketOpcode(SM_PLAYER_SPAWN.class, 0xF, idSet);
-		//16
+		// 16
 		addPacketOpcode(SM_GATHERABLE_INFO.class, 0x11, idSet);
 		// 0x12
 		// 0x13
@@ -116,7 +116,7 @@ public class ServerPacketsOpcodes {
 		// 0x5E
 		// 0x5F
 		// 0x60
-		//97
+		// 97
 		addPacketOpcode(SM_QUIT_RESPONSE.class, 0x62, idSet);
 		addPacketOpcode(SM_CHAT_WINDOW.class, 0x63, idSet);// 2.1
 		// 100
@@ -149,11 +149,11 @@ public class ServerPacketsOpcodes {
 		// 126
 		addPacketOpcode(SM_NEARBY_QUESTS.class, 0x7F, idSet);
 		addPacketOpcode(SM_PING_RESPONSE.class, 0x80, idSet);
-		//129
+		// 129
 		addPacketOpcode(SM_CUBE_UPDATE.class, 0x82, idSet);
 		addPacketOpcode(SM_HOUSE_SCRIPTS.class, 0x83, idSet);
 		addPacketOpcode(SM_FRIEND_LIST.class, 0x84, idSet);
-		//133
+		// 133
 		addPacketOpcode(SM_PRIVATE_STORE.class, 0x86, idSet);
 		addPacketOpcode(SM_GROUP_LOOT.class, 0x87, idSet);
 		addPacketOpcode(SM_ABYSS_RANK_UPDATE.class, 0x88, idSet);
@@ -163,13 +163,13 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_INSTANCE_STAGE_INFO.class, 0x8C, idSet);
 		addPacketOpcode(SM_INSTANCE_INFO.class, 0x8D, idSet);
 		addPacketOpcode(SM_PONG.class, 0x8E, idSet);
-		//143
+		// 143
 		addPacketOpcode(SM_KISK_UPDATE.class, 0x90, idSet);
 		addPacketOpcode(SM_PRIVATE_STORE_NAME.class, 0x91, idSet);
 		addPacketOpcode(SM_BROKER_SERVICE.class, 0x92, idSet);
 		addPacketOpcode(SM_INSTANCE_COUNT_INFO.class, 0x93, idSet);
 		addPacketOpcode(SM_MOTION.class, 0x94, idSet);
-		//149 Systemfehler später erneut versuchen ??
+		// 149 Systemfehler später erneut versuchen ??
 		addPacketOpcode(SM_UNK_3_5_1.class, 0x96, idSet);
 		addPacketOpcode(SM_TRADE_IN_LIST.class, 0x97, idSet);
 		// addPacketOpcode(SM_BROKER_REGISTRATION_SERVICE.class, 0x93, idSet);
@@ -186,7 +186,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_SUMMON_USESKILL.class, 0xA2, idSet);
 		addPacketOpcode(SM_WINDSTREAM.class, 0xA3, idSet);
 		addPacketOpcode(SM_WINDSTREAM_ANNOUNCE.class, 0xA4, idSet);
-		//165
+		// 165
 		addPacketOpcode(SM_FIND_GROUP.class, 0xA6, idSet);
 		addPacketOpcode(SM_REPURCHASE.class, 0xA7, idSet);
 		addPacketOpcode(SM_WAREHOUSE_INFO.class, 0xA8, idSet);
@@ -208,7 +208,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ITEM_USAGE_ANIMATION.class, 0xB7, idSet);
 		addPacketOpcode(SM_CUSTOM_SETTINGS.class, 0xB8, idSet);
 		addPacketOpcode(SM_DUEL.class, 0xB9, idSet);
-		//186
+		// 186
 		addPacketOpcode(SM_PET_EMOTE.class, 0xBB, idSet);
 		// 188 destroy your ui & get kicked!
 		// 189
@@ -273,58 +273,58 @@ public class ServerPacketsOpcodes {
 		// 248
 		addPacketOpcode(SM_SHOW_BRAND.class, 0xF9, idSet);
 		addPacketOpcode(SM_ALLIANCE_READY_CHECK.class, 0xFA, idSet);
-		//251
+		// 251
 		addPacketOpcode(SM_PRICES.class, 0xFC, idSet);
 		addPacketOpcode(SM_TRADELIST.class, 0xFD, idSet);
-		//254
+		// 254
 		addPacketOpcode(SM_RECONNECT_KEY.class, 0xFF, idSet);
 		addPacketOpcode(SM_HOUSE_BIDS.class, 0x100, idSet);
 		// 257 TODO: Format: d "Unknown Error d"
-		//258
+		// 258
 		addPacketOpcode(SM_RECEIVE_BIDS.class, 0x103, idSet);
-		//260
-		//261 FastTrack not available
+		// 260
+		// 261 FastTrack not available
 		addPacketOpcode(SM_HOUSE_PAY_RENT.class, 0x106, idSet);
 		addPacketOpcode(SM_HOUSE_OWNER_INFO.class, 0x107, idSet);
 		addPacketOpcode(SM_OBJECT_USE_UPDATE.class, 0x108, idSet);
-		//265
+		// 265
 		addPacketOpcode(SM_PACKAGE_INFO_NOTIFY.class, 0x10A, idSet);
-		//267
+		// 267
 		addPacketOpcode(SM_HOUSE_OBJECT.class, 0x10C, idSet);
 		addPacketOpcode(SM_DELETE_HOUSE_OBJECT.class, 0x10D, idSet);
 		addPacketOpcode(SM_HOUSE_OBJECTS.class, 0x10E, idSet);
 		addPacketOpcode(SM_HOUSE_RENDER.class, 0x10F, idSet);
 		addPacketOpcode(SM_DELETE_HOUSE.class, 0x110, idSet);
-		//273
+		// 273
 		addPacketOpcode(SM_SECURITY_TOKEN_REQUEST_STATUS.class, 0x112, idSet);
 		addPacketOpcode(SM_HOUSE_ACQUIRE.class, 0x113, idSet);
 		addPacketOpcode(SM_STATS_STATUS_UNK.class, 0x114, idSet);
-		//277 // download parts, "client is restricted youve to download part 1 first"
+		// 277 // download parts, "client is restricted youve to download part 1 first"
 		// 0x116
 		addPacketOpcode(SM_MARK_FRIENDLIST.class, 0x117, idSet);
 		addPacketOpcode(SM_CHALLENGE_LIST.class, 0x118, idSet);
-		//281
+		// 281
 		// 0x11A
-		addPacketOpcode(SM_DISPUTE_LAND.class, 0x11B, idSet);
+		// addPacketOpcode(SM_DISPUTE_LAND.class, 0x11B, idSet);
 		addPacketOpcode(SM_FIRST_SHOW_DECOMPOSABLE.class, 0x11C, idSet);
 		addPacketOpcode(SM_MEGAPHONE.class, 0x11D, idSet); // Megaphone
 		addPacketOpcode(SM_SECONDARY_SHOW_DECOMPOSABLE.class, 0x11E, idSet);
-		//287
+		// 287
 		// 0x120
 		addPacketOpcode(SM_UNWARP_ITEM.class, 0x121, idSet);
 		addPacketOpcode(SM_QUEST_REPEAT.class, 0x122, idSet);
-		//291
+		// 291
 		/* unknown */
 		addPacketOpcode(SM_AFTER_TIME_CHECK_4_7_5.class, 0x124, idSet);
 		addPacketOpcode(SM_AFTER_SIEGE_LOCINFO_475.class, 0x125, idSet);
 		/* ------ */
-		//294
+		// 294
 		// 0x127
 		addPacketOpcode(SM_BIND_POINT_TELEPORT.class, 0x128, idSet);
-		//297
+		// 297
 		addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet);
 		addPacketOpcode(SM_ATREIAN_PASSPORT.class, 0x12B, idSet);
-		//300
+		// 300
 		// 0x12D
 		addPacketOpcode(SM_LEGION_DOMINION_RANK.class, 0x12E, idSet);
 		addPacketOpcode(SM_LEGION_DOMINION_LOC_INFO.class, 0x12F, idSet);

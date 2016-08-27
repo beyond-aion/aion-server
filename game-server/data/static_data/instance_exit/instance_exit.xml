@@ -6,10 +6,6 @@
 	<!-- Chantra Dredgion -->
 	<instance_exit instance_id="300210000" exit_world="110070000" race="ELYOS" x="444.95486" y="250.77603" z="126.97165"/>
 	<instance_exit instance_id="300210000" exit_world="120080000" race="ASMODIANS" x="549.487" y="202.21657" z="93.479576" h="29"/>
-	<!-- Terath Dredgion
-	<instance_exit instance_id="300440000" exit_world="600030000" race="ELYOS" x="144.1655" y="1611.9403" z="295.27646" h="2"/>
-	<instance_exit instance_id="300440000" exit_world="600030000" race="ASMODIANS" x="143.6365" y="1857.7517" z="294.6865" h="119"/>
-	-->
 	<!-- Nochsana Training Camp -->
 	<instance_exit instance_id="300030000" exit_world="400010000" race="ELYOS" x="2890" y="754" z="1498.5786"/>
 	<instance_exit instance_id="300030000" exit_world="400010000" race="ASMODIANS" x="876.7211" y="3079.2874" z="1644.5786"/>
@@ -138,22 +134,12 @@
 	<instance_exit instance_id="300560000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
 	<!-- Hexway -->
 	<instance_exit instance_id="300700000" exit_world="600010000" race="PC_ALL" x="524.7724" y="767.15015" z="299.61633" h="60"/>
-	<!-- Test Subject Prison -->
-	<instance_exit instance_id="301000000" exit_world="600060000" race="ELYOS" x="292.5209" y="2371.7844" z="521.131" h="119"/>
-	<instance_exit instance_id="301000000" exit_world="600060000" race="ASMODIANS" x="158.7789" y="944.99554" z="547.9603" h="88"/>
-	<!-- Kamar Battlefield
-	<instance_exit instance_id="301120000" exit_world="600020000" race="PC_ALL" x="1374.0" y="1455.0" z="599.3814" h="98"/>
-	-->
 	<!-- Danuar Reliquary
 	<instance_exit instance_id="301110000" exit_world="600090000" race="PC_ALL" x="775.7178" y="1029.159" z="112.1926"/>
 	-->
 	<!-- 4.3 Sauro Supply Base -->
 	<instance_exit instance_id="301130000" exit_world="600100000" race="ELYOS" x="351.01273" y="154.34937" z="352.5" h="112"/>
 	<instance_exit instance_id="301130000" exit_world="600100000" race="ASMODIANS" x="1578.6261" y="1729.967" z="284.375" h="66"/>
-	<!-- 4.3 Eternal Bastion 
-	<instance_exit instance_id="300540000" exit_world="600050000" race="ELYOS" x="397.67697" y="2718.1467" z="142.14284" h="109"/>
-	<instance_exit instance_id="300540000" exit_world="600050000" race="ASMODIANS" x="363.3748" y="384.92285" z="281.80835" h="72"/>
-	-->
 	<!-- 4.8 Seized Danuar Sanctuary -->
 	<instance_exit instance_id="301140000" exit_world="210070000" race="ASMODIANS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
 	<instance_exit instance_id="301140000" exit_world="220080000" race="ELYOS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>

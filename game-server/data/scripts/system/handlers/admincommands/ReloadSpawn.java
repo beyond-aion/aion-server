@@ -3,14 +3,12 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Luno, reworked Bobobear
@@ -71,29 +69,21 @@ public class ReloadSpawn extends AdminCommand {
 			else if (destination.equalsIgnoreCase("Gelkmaros"))
 				worldId = WorldMapType.GELKMAROS.getId();
 			else if (destination.equalsIgnoreCase("Silentera"))
-				worldId = 600010000;
+				worldId = WorldMapType.SILENTERA_CANYON.getId();
 			else if (destination.equalsIgnoreCase("Reshanta"))
 				worldId = WorldMapType.RESHANTA.getId();
 			else if (destination.equalsIgnoreCase("Kaisinel Academy"))
-				worldId = 110070000;
+				worldId = WorldMapType.KAISINEL_ACADEMY.getId();
 			else if (destination.equalsIgnoreCase("Marchutan Priory"))
-				worldId = 120080000;
-			else if (destination.equalsIgnoreCase("Sarpan"))
-				worldId = 600020000;
-			else if (destination.equalsIgnoreCase("Tiamaranta"))
-				worldId = 600030000;
+				worldId = WorldMapType.MARCHUTAN_PRIORY.getId();
 			else if (destination.equalsIgnoreCase("Oriel"))
-				worldId = 700010000;
+				worldId = WorldMapType.ORIEL.getId();
 			else if (destination.equalsIgnoreCase("Pernon"))
-				worldId = 710010000;
-			else if (destination.equalsIgnoreCase("Katalam"))
-				worldId = 600050000;
-			else if (destination.equalsIgnoreCase("Danaria"))
-				worldId = 600060000;
+				worldId = WorldMapType.PERNON.getId();
 			else if (destination.equalsIgnoreCase("Kaldor"))
-				worldId = 600090000;
+				worldId = WorldMapType.KALDOR.getId();
 			else if (destination.equalsIgnoreCase("Levinshor"))
-				worldId = 600100000;
+				worldId = WorldMapType.LEVINSHOR.getId();
 			else if (destination.equalsIgnoreCase("All"))
 				worldId = 0;
 			else
@@ -119,18 +109,14 @@ public class ReloadSpawn extends AdminCommand {
 			reloadMap(WorldMapType.BELUSLAN.getId(), player, "Beluslan");
 			reloadMap(WorldMapType.INGGISON.getId(), player, "Inggison");
 			reloadMap(WorldMapType.GELKMAROS.getId(), player, "Gelkmaros");
-			reloadMap(600010000, player, "Silentera");
+			reloadMap(WorldMapType.SILENTERA_CANYON.getId(), player, "Silentera");
 			reloadMap(WorldMapType.RESHANTA.getId(), player, "Reshanta");
-			reloadMap(110070000, player, "Kaisinel Academy");
-			reloadMap(120080000, player, "Marchutan Priory");
-			reloadMap(600020000, player, "Sarpan");
-			reloadMap(600030000, player, "Tiamaranta");
-			reloadMap(700010000, player, "Oriel");
-			reloadMap(710010000, player, "Pernon");
-			reloadMap(600050000, player, "Katalam");
-			reloadMap(600060000, player, "Danaria");
-			reloadMap(600090000, player, "Kaldor");
-			reloadMap(600100000, player, "Levinshor");
+			reloadMap(WorldMapType.KAISINEL_ACADEMY.getId(), player, "Kaisinel Academy");
+			reloadMap(WorldMapType.MARCHUTAN_PRIORY.getId(), player, "Marchutan Priory");
+			reloadMap(WorldMapType.ORIEL.getId(), player, "Oriel");
+			reloadMap(WorldMapType.PERNON.getId(), player, "Pernon");
+			reloadMap(WorldMapType.KALDOR.getId(), player, "Kaldor");
+			reloadMap(WorldMapType.LEVINSHOR.getId(), player, "Levinshor");
 		} else {
 			reloadMap(worldId, player, destinationMap);
 		}
@@ -142,17 +128,11 @@ public class ReloadSpawn extends AdminCommand {
 		final String dest = destinationMap;
 
 		if (IdWorld != 0) {
-			World.getInstance().forEachObject(new Visitor<VisibleObject>() {
-
-				@Override
-				public void visit(VisibleObject object) {
-					if (object.getWorldId() != IdWorld) {
-						return;
-					}
-					if (object instanceof Npc || object instanceof Gatherable || object instanceof StaticObject) {
-						object.getController().onDelete();
-					}
-				}
+			World.getInstance().forEachObject(v -> {
+				if (v.getWorldId() != IdWorld)
+					return;
+				if (v instanceof Npc || v instanceof Gatherable || v instanceof StaticObject)
+					v.getController().onDelete();
 			});
 			SpawnEngine.spawnWorldMap(IdWorld);
 			PacketSendUtility.sendMessage(adm, "Spawns for map: " + IdWorld + " (" + dest + ") reloaded succesfully");

@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +93,6 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BonusPackService;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.ClassChangeService;
-import com.aionemu.gameserver.services.DisputeLandService;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.FactionPackService;
 import com.aionemu.gameserver.services.HTMLService;
@@ -127,8 +128,6 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -323,7 +322,8 @@ public final class PlayerEnterWorldService {
 		InstanceService.onPlayerLogin(player);
 		// Update player skills first!!!
 		AbyssSkillService.updateSkills(player);
-		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked, 745 crashed)
+		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked,
+																																																										// 745 crashed)
 		while (splitter.hasMore()) {
 			client.sendPacket(new SM_SKILL_LIST(splitter.getNext()));
 		}
@@ -385,7 +385,6 @@ public final class PlayerEnterWorldService {
 			AutoGroupService.getInstance().onPlayerLogin(player);
 		}
 		client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
-		DisputeLandService.getInstance().onLogin(player);
 		client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
 		client.sendPacket(new SM_STATS_INFO(player));
 		// ----------------------------- Retail sequence -----------------------------
@@ -501,10 +500,14 @@ public final class PlayerEnterWorldService {
 			}
 		}
 		// scheduler periodic update
-		player.getController().addTask(TaskId.PLAYER_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(
-			new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000, PeriodicSaveConfig.PLAYER_GENERAL * 1000));
-		player.getController().addTask(TaskId.INVENTORY_UPDATE, ThreadPoolManager.getInstance()
-			.scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000, PeriodicSaveConfig.PLAYER_ITEMS * 1000));
+		player.getController().addTask(
+			TaskId.PLAYER_UPDATE,
+			ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000,
+				PeriodicSaveConfig.PLAYER_GENERAL * 1000));
+		player.getController().addTask(
+			TaskId.INVENTORY_UPDATE,
+			ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000,
+				PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
 		SurveyService.getInstance().showAvailable(player);
 		EventService.getInstance().onPlayerLogin(player);

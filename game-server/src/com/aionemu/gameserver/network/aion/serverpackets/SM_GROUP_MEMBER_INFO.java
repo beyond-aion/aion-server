@@ -73,7 +73,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 		writeC(pcd.getLevel()); // level
 
 		writeC(event.getId()); // something events
-		writeC(1); // unk 600020000 & 600030000 0x00, rest 0x01
+		writeC(1); // unk, always 0x01 since removal of Sarpan & Tiamarana
 		writeC(player.getFlyState()); // isFly
 		writeC(player.isMentor() ? 0x01 : 0x00);
 

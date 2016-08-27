@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javolution.util.FastMap;
+
 import com.aionemu.gameserver.ai2.AI2;
 import com.aionemu.gameserver.ai2.AI2Engine;
 import com.aionemu.gameserver.controllers.CreatureController;
@@ -31,13 +33,9 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.world.MapRegion;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastMap;
 
 /**
  * This class is representing movable objects, its base class for all in game objects that may move
@@ -744,30 +742,11 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInsidePvPZone() {
-		boolean isDisputedWorld = getWorldId() == 600020000 || getWorldId() == 600030000;
 		if (zoneTypes[ZoneType.SIEGE.getValue()] > 0) {
 			return true;
 		}
 		int pvpValue = zoneTypes[ZoneType.PVP.getValue()];
-		return isDisputedWorld ? isCurrentZonePvp(pvpValue) : pvpValue == 0 || pvpValue == 2;
-	}
-
-	private boolean isCurrentZonePvp(int pvpValue) {
-		boolean isPvpAllowed = World.getInstance().getWorldMap(getWorldId()).isPvpAllowed();
-		if (isPvpAllowed && pvpValue == 0) {
-			return true;
-		} else if (pvpValue != 1) {
-			return false;
-		} else {
-			List<ZoneInstance> zones = getPosition().getMapRegion().getZones(this);
-			for (ZoneInstance zone : zones) {
-				if (zone.getZoneTemplate().getZoneType().equals(ZoneClassName.PVP)
-					&& !((zone.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0)) {
-					return false;
-				}
-			}
-			return true;
-		}
+		return pvpValue == 0 || pvpValue == 2;
 	}
 
 	public Race getRace() {

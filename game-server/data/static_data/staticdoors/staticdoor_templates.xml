@@ -3112,17 +3112,6 @@
 			<box x1="1135.72876" y1="1017.73419" z1="1530.17273" x2="1136.338" y2="1031.71436" z2="1545.14453" />
 		</staticdoor>
 	</world>
-	<world world="600020000">
-		<staticdoor doorid="146" x="166.534851" y="2239.22754" z="536.613647" mesh="ldf4a_b2_switch.cga" state="0x4">
-			<box x1="132.35733" y1="2210.891" z1="480.592621" x2="200.712357" y2="2278.96484" z2="556.2355" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="480" x="654.064148" y="2892.81421" z="405.788818" mesh="door_temple_ldf4a.cga" state="0x4">
-			<box x1="623.277832" y1="2875.5376" z1="405.785645" x2="685.167664" y2="2910.10229" z2="500.352173" />
-		</staticdoor>
-		<staticdoor keyid="1" doorid="860" x="664.278564" y="2921.14941" z="416.936249" mesh="bu_y_boss_rockdoor_01a.cga" state="0x4">
-			<box x1="617.5486" y1="2900.09033" z1="407.207367" x2="735.6391" y2="2984.67261" z2="470.523468" />
-		</staticdoor>
-	</world>
 	<world world="600090000">
 		<staticdoor type="ABYSS" doorid="151" x="786.439636" y="564.1998" z="148.771255" mesh="barricade_light_large_01a.cgf">
 			<box x1="778.460632" y1="562.1" z1="148.677322" x2="794.41864" y2="567.4113" z2="155.939667" />
