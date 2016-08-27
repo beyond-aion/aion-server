@@ -53,46 +53,46 @@ public class SiegeLocationTemplate {
 	 * @return the location id
 	 */
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @return the location type
 	 */
 	public SiegeType getType() {
-		return this.type;
+		return type;
 	}
 
 	/**
 	 * @return the world id
 	 */
 	public int getWorldId() {
-		return this.world;
+		return world;
 	}
 
 	public ArtifactActivation getActivation() {
-		return this.artifactActivation;
+		return artifactActivation;
 	}
 
 	/**
 	 * @return the reward list
 	 */
 	public List<SiegeReward> getSiegeRewards() {
-		return this.siegeRewards;
+		return siegeRewards;
 	}
 
 	/**
 	 * @return the legion rewards
 	 */
 	public List<SiegeLegionReward> getSiegeLegionRewards() {
-		return this.siegeLegionRewards;
+		return siegeLegionRewards;
 	}
 	
 	/**
 	 * @return the mercenary zones
 	 */
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
-		return this.siegeMercenaryZones;
+		return siegeMercenaryZones;
 	}
 
 	/**
@@ -129,20 +129,20 @@ public class SiegeLocationTemplate {
 	 * @return the Duration in Seconds
 	 */
 	public int getSiegeDuration() {
-		return this.siegeDuration;
+		return siegeDuration;
 	}
 
 	/**
 	 * @return the influence Points
 	 */
 	public int getInfluenceValue() {
-		return this.influenceValue;
+		return influenceValue;
 	}
 
 	/**
 	 * @return occupyCount
 	 */
 	public int getMaxOccupyCount() {
-		return this.maxOccupyCount;
+		return maxOccupyCount;
 	}
 }

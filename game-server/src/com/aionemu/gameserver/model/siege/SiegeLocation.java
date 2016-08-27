@@ -71,23 +71,23 @@ public class SiegeLocation implements ZoneHandler {
 	 * @return Integer LocationId
 	 */
 	public int getLocationId() {
-		return this.locationId;
+		return locationId;
 	}
 
 	public int getWorldId() {
-		return this.worldId;
+		return worldId;
 	}
 
 	public SiegeType getType() {
-		return this.type;
+		return type;
 	}
 
 	public int getSiegeDuration() {
-		return this.siegeDuration;
+		return siegeDuration;
 	}
 
 	public SiegeRace getRace() {
-		return this.siegeRace;
+		return siegeRace;
 	}
 
 	public void setRace(SiegeRace siegeRace) {
@@ -95,7 +95,7 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	public int getLegionId() {
-		return this.legionId;
+		return legionId;
 	}
 
 	public void setLegionId(int legionId) {
@@ -119,14 +119,14 @@ public class SiegeLocation implements ZoneHandler {
 	 * @return isVulnerable
 	 */
 	public boolean isVulnerable() {
-		return this.vulnerable;
+		return vulnerable;
 	}
 
 	/**
 	 * @return isUnderShield
 	 */
 	public boolean isUnderShield() {
-		return this.isUnderShield;
+		return isUnderShield;
 	}
 
 	public int getOccupiedCount() {
@@ -134,7 +134,7 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	public void increaseOccupiedCount() {
-		this.occupiedCount += 1;
+		occupiedCount += 1;
 	}
 
 	public void setOccupiedCount(int occupiedCount) {
@@ -201,7 +201,7 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	public int getInfluenceValue() {
-		return this.influenceValue;
+		return influenceValue;
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class SiegeLocation implements ZoneHandler {
 
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
-		if (!this.isInsideLocation(creature)) {
+		if (!isInsideLocation(creature)) {
 			creatures.remove(creature.getObjectId());
 			players.remove(creature.getObjectId());
 		}

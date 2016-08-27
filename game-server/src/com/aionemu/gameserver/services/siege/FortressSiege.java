@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +17,6 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -41,9 +42,6 @@ import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
-
-import javolution.util.FastTable;
 
 /**
  * Object that controls siege of certain fortress. Siege object is not reusable. New siege = new instance.
@@ -85,12 +83,14 @@ public class FortressSiege extends Siege<FortressLocation> {
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
-		initMercenaryZones();
+		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR)) {
+			initMercenaryZones();
+			if (getBoss().getLevel() == 65)
+				ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
+		}
 		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
 			BalaurAssaultService.getInstance().onSiegeStart(this);
-		if (!getSiegeLocation().getRace().equals(SiegeRace.BALAUR) && getBoss().getLevel() == 65)
-			ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
 	}
 
 	/**
@@ -119,8 +119,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	private final void initMercenaryZones() {
-		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-			return;
 		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); // can be null if not implemented
 		if (mercs == null)
 			return;
@@ -188,14 +186,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
 
 		if (isBossKilled()) {
-			getSiegeLocation().forEachPlayer(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player player) {
-					if (SiegeRace.getByRace(player.getRace()) == getSiegeLocation().getRace())
-						QuestEngine.getInstance().onKill(new QuestEnv(getBoss(), player, 0, 0));
-				}
-
+			getSiegeLocation().forEachPlayer(p -> {
+				if (SiegeRace.getByRace(p.getRace()) == getSiegeLocation().getRace())
+					QuestEngine.getInstance().onKill(new QuestEnv(getBoss(), p, 0, 0));
 			});
 		}
 	}
@@ -204,12 +197,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
 		SiegeRace winnerRace = winner.getSiegeRace();
 
-		try {
-			// Players gain buffs on capture of some fortresses
-			applyWorldBuffs(winnerRace, getSiegeLocation().getRace());
-		} catch (Exception e) {
-			log.error("Error while applying buffs after capture, location " + getSiegeLocation().getLocationId(), e);
-		}
+		// Players gain buffs on capture of some fortresses
+		applyWorldBuffs(winnerRace);
 		// Set new fortress and artifact owner race
 		getSiegeLocation().setRace(winnerRace);
 		getArtifact().setRace(winnerRace);
@@ -241,107 +230,59 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	private void onDefended() {
-		SiegeRace loserRace = getSiegeLocation().getRace() != SiegeRace.BALAUR ? (getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS
-			: SiegeRace.ELYOS) : SiegeRace.BALAUR;
-
 		// Increase fortress occupied count
 		if (getSiegeLocation().getRace() != SiegeRace.BALAUR && getSiegeLocation().getTemplate().getMaxOccupyCount() > 0) {
 			getSiegeLocation().increaseOccupiedCount();
 		}
 
-		try {
-			// Players gain buffs for successfully defense / failed capture the fortress
-			applyWorldBuffs(getSiegeLocation().getRace(), loserRace);
-		} catch (Exception e) {
-			log.error("Error while applying buffs after defense, location " + getSiegeLocation().getLocationId(), e);
-		}
+		// Players gain buffs for successfully defense / failed capture the fortress
+		applyWorldBuffs(getSiegeLocation().getRace());
 	}
 
-	private void applyWorldBuffs(SiegeRace wRace, SiegeRace lRace) {
-		final int loserSkillId;
-		final int winnerSkillId;
-		final int floc = getSiegeLocation().getLocationId();
-		final Race winningRace = wRace != SiegeRace.BALAUR ? (wRace == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS) : null;
-		final Race losingRace = lRace != SiegeRace.BALAUR ? (lRace == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS) : null;
+	private void applyWorldBuffs(SiegeRace winner) {
+		final int skillId;
 
-		switch (floc) {
+		switch (getSiegeLocation().getLocationId()) {
 			case 1131:
-				loserSkillId = 0;
-				winnerSkillId = 12147;
+				skillId = 12147;
 				break;
 			case 1132:
-				loserSkillId = 0;
-				winnerSkillId = 12148;
+				skillId = 12148;
 				break;
 			case 1141:
-				loserSkillId = 0;
-				winnerSkillId = 12149;
+				skillId = 12149;
 				break;
 			case 1221:
-				loserSkillId = 0;
-				winnerSkillId = 12075;
+				skillId = 12075;
 				break;
 			case 1231:
-				loserSkillId = 0;
-				winnerSkillId = 12076;
+				skillId = 12076;
 				break;
 			case 1241:
-				loserSkillId = 0;
-				winnerSkillId = 12077;
+				skillId = 12077;
 				break;
 			case 1251:
-				loserSkillId = 0;
-				winnerSkillId = 12074;
+				skillId = 12074;
 				break;
 			case 2011:
-				loserSkillId = 0;
-				winnerSkillId = 12155;
+				skillId = 12155;
 				break;
 			case 2021:
-				loserSkillId = 0;
-				winnerSkillId = 12156;
+				skillId = 12156;
 				break;
 			case 3011:
-				loserSkillId = 0;
-				winnerSkillId = 12157;
+				skillId = 12157;
 				break;
 			case 3021:
-				loserSkillId = 0;
-				winnerSkillId = 12158;
+				skillId = 12158;
 				break;
 			default:
 				return;
 		}
 
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
-
-			@Override
-			public void visit(Player player) {
-				if (floc == 1131 || floc == 1132 || floc == 1141 || floc == 1221 || floc == 1231 || floc == 1241 || floc == 1251) {
-					if (player.getWorldId() == 400010000) {
-						if (winningRace != null && player.getRace().equals(winningRace)) {
-							SkillEngine.getInstance().applyEffectDirectly(winnerSkillId, player, player, 0);
-						} else if (losingRace != null && player.getRace().equals(losingRace) && loserSkillId != 0) {
-							SkillEngine.getInstance().applyEffectDirectly(loserSkillId, player, player, 0);
-						}
-					}
-				} else if (floc == 2011 || floc == 2021 || floc == 3011 || floc == 3021) {
-					if (player.getWorldId() == 220070000 || player.getWorldId() == 600010000 || player.getWorldId() == 210050000) {
-						if (winningRace != null && player.getRace().equals(winningRace)) {
-							SkillEngine.getInstance().applyEffectDirectly(winnerSkillId, player, player, 0);
-						} else if (losingRace != null && player.getRace().equals(losingRace) && loserSkillId != 0) {
-							SkillEngine.getInstance().applyEffectDirectly(loserSkillId, player, player, 0);
-						}
-					}
-				} else if (floc == 5011 || floc == 6011 || floc == 6021) {
-					if (player.getWorldId() == 600050000 || player.getWorldId() == 600060000) {
-						if (winningRace != null && player.getRace().equals(winningRace)) {
-							SkillEngine.getInstance().applyEffectDirectly(winnerSkillId, player, player, 0);
-						} else if (losingRace != null && player.getRace().equals(losingRace) && loserSkillId != 0) {
-							SkillEngine.getInstance().applyEffectDirectly(loserSkillId, player, player, 0);
-						}
-					}
-				}
+		World.getInstance().forEachPlayer(p -> {
+			if (SiegeRace.getByRace(p.getRace()) == winner) {
+				SkillEngine.getInstance().applyEffectDirectly(skillId, p, p, 0);
 			}
 		});
 	}

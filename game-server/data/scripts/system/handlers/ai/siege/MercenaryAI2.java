@@ -171,11 +171,7 @@ public class MercenaryAI2 extends GeneralNpcAI2 {
 		if (siege == null)
 			return;
 		MercenaryLocation mLoc = siege.getMercenaryLocationByZoneId(zoneId);
-		if (mLoc == null)
-			return;
-		if (!mLoc.isRequestValid())
-			return;
-		if (!hasRequiredItems(player, mLoc.getCosts()))
+		if (mLoc == null || !mLoc.isRequestValid() || !hasRequiredItems(player, mLoc.getCosts()))
 			return;
 		player.getInventory().decreaseByItemId(186000236, mLoc.getCosts());
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(mLoc.getMsgId()));

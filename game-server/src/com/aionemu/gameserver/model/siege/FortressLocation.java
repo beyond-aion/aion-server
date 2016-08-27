@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.siege;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastMap;
 
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -36,22 +37,22 @@ public class FortressLocation extends SiegeLocation {
 
 	public FortressLocation(SiegeLocationTemplate template) {
 		super(template);
-		this.siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
-		this.siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
-		this.siegeMercenaryZones = template.getSiegeMercenaryZones() != null ? template.getSiegeMercenaryZones() : null;
-		this.mercenaries = new HashMap<>();
+		siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
+		siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
+		siegeMercenaryZones = template.getSiegeMercenaryZones() != null ? template.getSiegeMercenaryZones() : null;
+		mercenaries = new FastMap<>();
 	}
 
 	public List<SiegeReward> getReward() {
-		return this.siegeRewards;
+		return siegeRewards;
 	}
 
 	public List<SiegeLegionReward> getLegionReward() {
-		return this.siegeLegionRewards;
+		return siegeLegionRewards;
 	}
 
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
-		return this.siegeMercenaryZones;
+		return siegeMercenaryZones;
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class FortressLocation extends SiegeLocation {
 	}
 
 	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {
-		this.mercenaries.put(zoneId, mercs);
+		mercenaries.put(zoneId, mercs);
 	}
 
 }
