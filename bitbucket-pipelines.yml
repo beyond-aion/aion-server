@@ -1,0 +1,15 @@
+# This is a sample build configuration for Maven.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Dockerhub as your build environment.
+image: maven:3.3.9
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - mvn --version
+          - mvn -f commons/pom.xml clean install
+          - mvn -f chat-server/pom.xml clean package
+          - mvn -f login-server/pom.xml clean package
+          - mvn -f game-server/pom.xml clean package
