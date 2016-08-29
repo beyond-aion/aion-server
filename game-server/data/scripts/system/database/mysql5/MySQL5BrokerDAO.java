@@ -84,7 +84,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 					int itemUniqueId = rset.getInt("item_unique_id");
 					int itemId = rset.getInt("item_id");
 					long itemCount = rset.getLong("item_count");
-					int itemColor = rset.getInt("item_color");
+					Integer itemColor = (Integer) rset.getObject("item_color");
 					int colorExpireTime = rset.getInt("color_expires");
 					String itemCreator = rset.getString("item_creator");
 					int expireTime = rset.getInt("expire_time");

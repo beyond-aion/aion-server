@@ -209,7 +209,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		obj.setY(rset.getFloat("y"));
 		obj.setZ(rset.getFloat("z"));
 		obj.setHeading((byte) rset.getInt("h"));
-		obj.setColor(rset.getInt("color"));
+		obj.setColor((Integer) rset.getObject("color"));
 		obj.setColorExpireEnd(rset.getInt("color_expires"));
 		if (obj.getObjectTemplate().getUseDays() > 0)
 			obj.setExpireTime(rset.getInt("expire_time"));
