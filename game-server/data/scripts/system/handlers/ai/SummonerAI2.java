@@ -63,7 +63,7 @@ public class SummonerAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		percentage = DataManager.AI_DATA.getAiTemplate().get(getNpcId()).getSummons().getPercentage();
+		percentage = FastTable.of(DataManager.AI_DATA.getAiTemplate().get(getNpcId()).getSummons().getPercentage());
 	}
 
 	@Override
