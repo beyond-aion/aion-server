@@ -225,8 +225,7 @@ public class WorldPosition {
 
 	@Override
 	public String toString() {
-		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned
-			+ ", mapRegion=" + mapRegion + "]";
+		return "WorldPosition [mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", heading=" + heading + ", isSpawned=" + isSpawned + "]";
 	}
 
 	public String toCoordString() {
