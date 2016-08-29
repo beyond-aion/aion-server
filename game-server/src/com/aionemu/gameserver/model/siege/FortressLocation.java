@@ -32,14 +32,11 @@ public class FortressLocation extends SiegeLocation {
 	 */
 	protected Map<Integer, List<VisibleObject>> mercenaries;
 
-	public FortressLocation() {
-	}
-
 	public FortressLocation(SiegeLocationTemplate template) {
 		super(template);
-		siegeRewards = template.getSiegeRewards() != null ? template.getSiegeRewards() : null;
-		siegeLegionRewards = template.getSiegeLegionRewards() != null ? template.getSiegeLegionRewards() : null;
-		siegeMercenaryZones = template.getSiegeMercenaryZones() != null ? template.getSiegeMercenaryZones() : null;
+		siegeRewards = template.getSiegeRewards();
+		siegeLegionRewards = template.getSiegeLegionRewards();
+		siegeMercenaryZones = template.getSiegeMercenaryZones();
 		mercenaries = new FastMap<>();
 	}
 
