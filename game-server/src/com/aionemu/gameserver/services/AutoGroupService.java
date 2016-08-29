@@ -1,10 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.select;
-import static org.hamcrest.Matchers.equalTo;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
-import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.autogroup.AGQuestion;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.autogroup.AutoInstance;
@@ -276,7 +270,7 @@ public class AutoGroupService {
 				WorldMapInstance instance = autoInstance.instance;
 				if (instance != null) {
 					autoInstance.players.get(obj).setOnline(false);
-					if (select(autoInstance.players, having(on(AGPlayer.class).isOnline(), equalTo(true))).isEmpty()) {
+					if (!autoInstance.players.values().stream().anyMatch(p -> p.isOnline())) {
 						autoInstance = autoInstances.remove(instanceId);
 						InstanceService.destroyInstance(instance);
 						autoInstance.clear();
@@ -293,7 +287,7 @@ public class AutoGroupService {
 			AutoInstance autoInstance = autoInstances.get(instanceId);
 			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
 				autoInstance.onLeaveInstance(player);
-				if (select(autoInstance.players, having(on(AGPlayer.class).isOnline(), equalTo(true))).isEmpty()) {
+				if (!autoInstance.players.values().stream().anyMatch(p -> p.isOnline())) {
 					WorldMapInstance instance = autoInstance.instance;
 					autoInstances.remove(instanceId);
 					if (instance != null) {

@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.sort;
-import static ch.lambdaj.Lambda.sum;
-
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -80,8 +76,9 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	@Override
 	public int getRank(int points) {
+		List<HarmonyGroupReward> sortedByPoints = groups.stream().sorted((r1, r2) -> Integer.compare(r2.getPoints(), r1.getPoints())).collect(Collectors.toList());
 		int rank = -1;
-		for (HarmonyGroupReward reward : sortGroupPoints()) {
+		for (HarmonyGroupReward reward : sortedByPoints) {
 			if (reward.getPoints() >= points) {
 				rank++;
 			}
@@ -89,19 +86,9 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		return rank;
 	}
 
-	public List<HarmonyGroupReward> sortGroupPoints() {
-		return sort(groups, on(HarmonyGroupReward.class).getPoints(), new Comparator<Integer>() {
-
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				return o2.compareTo(o1);
-			}
-		});
-	}
-
 	@Override
 	public int getTotalPoints() {
-		return sum(groups, on(HarmonyGroupReward.class).getPoints());
+		return groups.stream().mapToInt(r -> r.getPoints()).sum();
 	}
 
 	@Override

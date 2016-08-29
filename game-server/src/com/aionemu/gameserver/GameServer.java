@@ -98,7 +98,6 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
-import ch.lambdaj.Lambda;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
@@ -376,7 +375,6 @@ public class GameServer {
 	}
 
 	private static void loadMultithreaded(GameEngine... engines) {
-		Lambda.enableJitting(true);
 		CountDownLatch progressLatch = new CountDownLatch(engines.length);
 
 		for (GameEngine engine : engines) {

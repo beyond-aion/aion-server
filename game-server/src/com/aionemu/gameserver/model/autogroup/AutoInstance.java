@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.sort;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.aionemu.commons.taskmanager.AbstractLockManager;
+import com.aionemu.gameserver.model.PlayerClass;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -33,7 +33,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 		if (i < count) {
 			return false;
 		}
-		items = sort(items, on(Item.class).getExpireTime());
+		items.sort((i1, i2) -> Integer.compare(i1.getExpireTime(), i2.getExpireTime()));
 		for (Item item : items) {
 			long l = player.getInventory().decreaseItemCount(item, count);
 			if (l == 0) {
@@ -109,4 +109,15 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 		return System.currentTimeMillis() - startInstanceTime < time;
 	}
 
+	protected List<AGPlayer> getAGPlayersByRace(Race race) {
+		return players.values().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
+	}
+
+	protected List<AGPlayer> getAGPlayersByClass(PlayerClass playerClass) {
+		return players.values().stream().filter(p -> p.getPlayerClass() == playerClass).collect(Collectors.toList());
+	}
+
+	protected List<Player> getPlayersByRace(Race race) {
+		return instance.getPlayersInside().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
+	}
 }

@@ -1,10 +1,5 @@
 package com.aionemu.gameserver.model.team.legion;
 
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.select;
-import static org.hamcrest.Matchers.equalTo;
-
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Comparator;
@@ -14,6 +9,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -528,10 +524,9 @@ public class Legion {
 	}
 
 	public Collection<LegionHistory> getLegionHistoryByTabId(int tabType) {
-		if (legionHistory.isEmpty()) {
+		if (legionHistory.isEmpty())
 			return legionHistory;
-		}
-		return select(legionHistory, having(on(LegionHistory.class).getTabId(), equalTo(tabType)));
+		return legionHistory.stream().filter(h -> h.getTabId() == tabType).collect(Collectors.toList());
 	}
 
 	/**

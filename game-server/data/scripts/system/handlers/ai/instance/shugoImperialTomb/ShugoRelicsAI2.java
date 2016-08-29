@@ -1,7 +1,5 @@
 package ai.instance.shugoImperialTomb;
 
-import static ch.lambdaj.Lambda.maxFrom;
-
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -70,7 +68,11 @@ public class ShugoRelicsAI2 extends ActionItemNpcAI2 {
 		} else {
 			players.add(player);
 		}
-		DropRegistrationService.getInstance().registerDrop(getOwner(), player, maxFrom(players).getLevel(), players);
+		DropRegistrationService.getInstance().registerDrop(getOwner(), player, getHighestLevel(players), players);
 		DropService.getInstance().requestDropList(player, getObjectId());
+	}
+
+	private int getHighestLevel(Collection<Player> players) {
+		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt(); 
 	}
 }

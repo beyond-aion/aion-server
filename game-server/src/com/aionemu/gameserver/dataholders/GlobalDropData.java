@@ -1,18 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.select;
-
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hamcrest.Matchers;
 
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcName;
@@ -55,17 +50,17 @@ public class GlobalDropData {
 		}
 		if (rule.getGlobalRuleNpcNames() != null) {
 			for (GlobalDropNpcName gdNpcName : rule.getGlobalRuleNpcNames().getGlobalDropNpcNames()) {
-				List<NpcTemplate> matchesNpcs = new FastTable<>();
+				List<NpcTemplate> matchedNpcs = new FastTable<>();
 				if (gdNpcName.getFunction().equals(StringFunction.CONTAINS))
-					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.containsString(gdNpcName.getValue().toLowerCase())));
+					matchedNpcs = npcs.stream().filter(npc -> npc.getName().contains(gdNpcName.getValue().toLowerCase())).collect(Collectors.toList());
 				else if (gdNpcName.getFunction().equals(StringFunction.END_WITH))
-					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.endsWith(gdNpcName.getValue().toLowerCase())));
+					matchedNpcs = npcs.stream().filter(npc -> npc.getName().endsWith(gdNpcName.getValue().toLowerCase())).collect(Collectors.toList());
 				else if (gdNpcName.getFunction().equals(StringFunction.START_WITH))
-					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.startsWith(gdNpcName.getValue().toLowerCase())));
+					matchedNpcs = npcs.stream().filter(npc -> npc.getName().startsWith(gdNpcName.getValue().toLowerCase())).collect(Collectors.toList());
 				else if (gdNpcName.getFunction().equals(StringFunction.EQUALS)) {
-					matchesNpcs = select(npcs, having(on(NpcTemplate.class).getName(), Matchers.equalToIgnoringCase(gdNpcName.getValue().toLowerCase())));
+					matchedNpcs = npcs.stream().filter(npc -> npc.getName().equalsIgnoreCase(gdNpcName.getValue())).collect(Collectors.toList());
 				}
-				for (NpcTemplate npc : matchesNpcs) {
+				for (NpcTemplate npc : matchedNpcs) {
 					GlobalDropNpc gdNpc = new GlobalDropNpc();
 					gdNpc.setNpcId(npc.getTemplateId());
 					if (!allowedNpcs.contains(gdNpc)) {

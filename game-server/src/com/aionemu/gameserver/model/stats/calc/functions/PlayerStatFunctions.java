@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
-import static ch.lambdaj.Lambda.forEach;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.selectMax;
-
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -207,9 +203,9 @@ class DuplicateStatFunction extends StatFunction {
 			}
 			if (!functions.isEmpty()) {
 				if (getName() == StatEnum.PVP_ATTACK_RATIO) {
-					forEach(functions).apply(stat);
+					functions.forEach(f -> f.apply(stat));
 				} else {
-					((StatFunction) selectMax(functions, on(StatFunction.class).getValue())).apply(stat);
+					functions.stream().max((f1, f2) -> Integer.compare(f1.getValue(), f2.getValue())).get().apply(stat);
 				}
 				functions.clear();
 			}

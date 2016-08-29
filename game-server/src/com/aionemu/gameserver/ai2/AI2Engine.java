@@ -1,15 +1,11 @@
 package com.aionemu.gameserver.ai2;
 
-import static ch.lambdaj.Lambda.join;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.selectDistinct;
-import static ch.lambdaj.collection.LambdaCollections.with;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +20,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 /**
  * @author ATracer
@@ -50,8 +45,8 @@ public class AI2Engine implements GameEngine {
 
 		try {
 			scriptManager.load(new File("./data/scripts/system/aihandlers.xml"));
-			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
 			validateScripts();
+			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize ai handlers.", e);
 		} finally {
@@ -104,7 +99,7 @@ public class AI2Engine implements GameEngine {
 	}
 
 	private void validateScripts() {
-		Collection<String> npcAINames = selectDistinct(with(DataManager.NPC_DATA.getNpcData().valueCollection()).extract(on(NpcTemplate.class).getAi()));
+		Collection<String> npcAINames = DataManager.NPC_DATA.getNpcData().valueCollection().stream().map(npc -> npc.getAi()).distinct().collect(Collectors.toList());
 		for (String name : npcAINames) {
 			try {
 				aiHandlers.get(name).newInstance();
@@ -114,7 +109,7 @@ public class AI2Engine implements GameEngine {
 		}
 		npcAINames.removeAll(aiHandlers.keySet());
 		if (npcAINames.size() > 0) {
-			log.warn("Bad AI names: " + join(npcAINames));
+			log.warn("Bad AI names: " + String.join(", ", npcAINames));
 		}
 	}
 

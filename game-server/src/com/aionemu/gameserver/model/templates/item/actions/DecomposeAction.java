@@ -1,16 +1,11 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.select;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -231,17 +226,17 @@ public class DecomposeAction extends AbstractItemAction {
 											break;
 										}
 										if (!randomType.equals(RandomType.MANASTONE)) {
-											ItemQuality itemQuality = ItemQuality.COMMON;
-											if (randomType.name().contains("RARE")) {
+											final ItemQuality itemQuality;
+											if (randomType.name().contains("RARE"))
 												itemQuality = ItemQuality.RARE;
-											} else if (randomType.name().contains("LEGEND")) {
+											else if (randomType.name().contains("LEGEND"))
 												itemQuality = ItemQuality.LEGEND;
-											}
-											List<ItemTemplate> selectedStones = select(stones, having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+											else
+												itemQuality = ItemQuality.COMMON;
+											List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
 											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 										} else {
-											List<ItemTemplate> selectedStones = select(stones,
-												having(on(ItemTemplate.class).getItemQuality(), not(equalTo(ItemQuality.LEGEND))));
+											List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() != ItemQuality.LEGEND).collect(Collectors.toList());
 											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 										}
 
@@ -262,7 +257,7 @@ public class DecomposeAction extends AbstractItemAction {
 											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
 											break;
 										}
-										ItemQuality itemQuality = ItemQuality.COMMON;
+										final ItemQuality itemQuality;
 										if (randomType.name().contains("RARE"))
 											itemQuality = ItemQuality.RARE;
 										else if (randomType.name().contains("LEGEND"))
@@ -271,7 +266,9 @@ public class DecomposeAction extends AbstractItemAction {
 											itemQuality = ItemQuality.UNIQUE;
 										else if (randomType.name().contains("EPIC"))
 											itemQuality = ItemQuality.EPIC;
-										List<ItemTemplate> selectedStones = select(ancientStones, having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+										else
+											itemQuality = ItemQuality.COMMON;
+										List<ItemTemplate> selectedStones = ancientStones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
 										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 
 										if (!ItemService.checkRandomTemplate(randomId)) {

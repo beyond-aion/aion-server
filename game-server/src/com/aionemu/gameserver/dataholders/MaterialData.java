@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import static ch.lambdaj.Lambda.extract;
-import static ch.lambdaj.Lambda.on;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 
 /**
@@ -45,7 +41,7 @@ public class MaterialData {
 		for (MaterialTemplate template : materialTemplates) {
 			materialsById.put(template.getId(), template);
 			if (template.getSkills() != null)
-				skillIds.addAll(extract(template.getSkills(), on(MaterialSkill.class).getId()));
+				template.getSkills().forEach(skill -> skillIds.add(skill.getId()));
 		}
 
 		materialTemplates.clear();

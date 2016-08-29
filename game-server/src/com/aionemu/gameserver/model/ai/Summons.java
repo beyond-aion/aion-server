@@ -18,6 +18,6 @@ public class Summons {
 	private List<Percentage> percentage;
 
 	public List<Percentage> getPercentage() {
-		return this.percentage;
+		return percentage;
 	}
 }

@@ -1,12 +1,9 @@
 package com.aionemu.gameserver.spawnengine;
 
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.sort;
-import static ch.lambdaj.Lambda.sum;
-
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +34,7 @@ public class WalkerGroup {
 	private boolean isSpawned;
 
 	public WalkerGroup(List<ClusteredNpc> members) {
-		this.members = sort(members, on(ClusteredNpc.class).getWalkerIndex());
+		this.members = members.stream().sorted((w1, w2) -> Integer.compare(w1.getWalkerIndex(), w2.getWalkerIndex())).collect(Collectors.toList());
 		memberSteps = new int[members.size()];
 		walkerXpos = members.get(0).getX();
 		walkerYpos = members.get(0).getY();
@@ -48,17 +45,17 @@ public class WalkerGroup {
 	public void form() {
 		if (getWalkType() == WalkerGroupType.SQUARE) {
 			int[] rows = members.get(0).getWalkTemplate().getRows();
-			if (sum(ArrayUtils.toObject(rows), on(Integer.class)) != members.size()) {
+			if (IntStream.of(rows).sum() != members.size()) {
 				log.warn("Invalid row sizes for walk cluster " + members.get(0).getWalkTemplate().getRouteId());
 			}
 			if (rows.length == 1) {
 				// Line formation: distance 2 meters from each other (divide by 2 and multiple by 2)
 				// negative at left hand and positive at the right hand
-				float bounds = sum(members, on(ClusteredNpc.class).getNpc().getObjectTemplate().getBoundRadius().getSide());
+				float bounds = (float) members.stream().mapToDouble(cNpc -> cNpc.getNpc().getObjectTemplate().getBoundRadius().getSide()).sum();
 				float distance = (1 - members.size()) / 2f * (WalkerGroupShift.DISTANCE + bounds);
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate().getRouteStep(2)
-					.getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
+					members.get(0).getWalkTemplate().getRouteStep(2).getY());
 				for (int i = 0; i < members.size(); i++, distance += WalkerGroupShift.DISTANCE) {
 					WalkerGroupShift shift = new WalkerGroupShift(distance, 0);
 					Point2D loc = getLinePoint(origin, destination, shift);
@@ -80,8 +77,8 @@ public class WalkerGroup {
 					coronalDist -= rowDistances[i];
 				}
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate().getRouteStep(2)
-					.getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
+					members.get(0).getWalkTemplate().getRouteStep(2).getY());
 				int index = 0;
 				for (int i = 0; i < rows.length; i++) {
 					float sagittalDist = (1 - rows[i]) / 2f * WalkerGroupShift.DISTANCE;
@@ -129,11 +126,11 @@ public class WalkerGroup {
 		WalkerGroupShift dir = getShiftSigns(origin, destination);
 		Point2D result = null;
 		if (origin.getY() - destination.getY() == 0) {
-			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getCoronalShift(), origin.getY() - dir.getSagittalShift()
-				* shift.getSagittalShift());
+			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getCoronalShift(),
+				origin.getY() - dir.getSagittalShift() * shift.getSagittalShift());
 		} else if (origin.getX() - destination.getX() == 0) {
-			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getSagittalShift(), origin.getY() + dir.getCoronalShift()
-				* shift.getCoronalShift());
+			return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getSagittalShift(),
+				origin.getY() + dir.getCoronalShift() * shift.getCoronalShift());
 		} else {
 			double slope = (origin.getX() - destination.getX()) / (origin.getY() - destination.getY());
 			double dx = Math.abs(shift.getSagittalShift()) / Math.sqrt(1 + slope * slope);

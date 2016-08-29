@@ -72,7 +72,7 @@ public class DropRegistrationService {
 	/**
 	 * After NPC dies, it can register arbitrary drop
 	 */
-	public void registerDrop(Npc npc, Player player, int heighestLevel, Collection<Player> groupMembers) {
+	public void registerDrop(Npc npc, Player player, int highestLevel, Collection<Player> groupMembers) {
 		if (player == null) {
 			return;
 		}
@@ -87,7 +87,7 @@ public class DropRegistrationService {
 		String dropType = npc.getGroupDrop().name().toLowerCase();
 		boolean isChest = npc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
-			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - heighestLevel); // reduce chance depending on level
+			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - highestLevel); // reduce chance depending on level
 		}
 
 		// Generete drop by this player

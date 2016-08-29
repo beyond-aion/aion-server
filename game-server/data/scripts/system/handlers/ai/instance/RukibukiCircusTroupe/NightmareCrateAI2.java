@@ -1,7 +1,5 @@
 package ai.instance.RukibukiCircusTroupe;
 
-import static ch.lambdaj.Lambda.maxFrom;
-
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -79,9 +77,13 @@ public class NightmareCrateAI2 extends ActionItemNpcAI2 {
 		} else {
 			players.add(player);
 		}
-		DropRegistrationService.getInstance().registerDrop(getOwner(), player, maxFrom(players).getLevel(), players);
+		DropRegistrationService.getInstance().registerDrop(getOwner(), player, getHighestLevel(players), players);
 		AI2Actions.die(this, player);
 		DropService.getInstance().requestDropList(player, getObjectId());
 		super.handleUseItemFinish(player);
+	}
+
+	private int getHighestLevel(Collection<Player> players) {
+		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt(); 
 	}
 }

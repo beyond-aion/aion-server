@@ -1,10 +1,5 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.select;
-import static org.hamcrest.Matchers.equalTo;
-
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -30,8 +25,8 @@ public class AutoGeneralInstance extends AutoInstance {
 				return AGQuestion.FAILED;
 			}
 			PlayerClass playerClass = player.getPlayerClass();
-			int clericSize = getPlayersByClass(PlayerClass.CLERIC).size();
-			int templarSize = getPlayersByClass(PlayerClass.TEMPLAR).size();
+			int clericSize = getAGPlayersByClass(PlayerClass.CLERIC).size();
+			int templarSize = getAGPlayersByClass(PlayerClass.TEMPLAR).size();
 			if (playerClass.equals(PlayerClass.CLERIC)) {
 				if (clericSize > 0) {
 					return AGQuestion.FAILED;
@@ -97,9 +92,5 @@ public class AutoGeneralInstance extends AutoInstance {
 	public void onLeaveInstance(Player player) {
 		super.unregister(player);
 		PlayerGroupService.removePlayer(player);
-	}
-
-	private List<AGPlayer> getPlayersByClass(PlayerClass playerClass) {
-		return select(players, having(on(AGPlayer.class).getPlayerClass(), equalTo(playerClass)));
 	}
 }
