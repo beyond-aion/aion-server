@@ -9,21 +9,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author kecimis,Tiger
- * @reworked vlog
+ * @reworked vlog, Neon
  */
 public class _1990ASagesGift extends QuestHandler {
 
-	private final static int questId = 1990;
-
-	// mob counter
-	// it's binary. Don't change!
-	private int ALL = 0;
-	private int A = 0;
-	private int B = 0;
-	private int C = 0;
-
 	public _1990ASagesGift() {
-		super(questId);
+		super(1990);
 	}
 
 	@Override
@@ -108,55 +99,59 @@ public class _1990ASagesGift extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int all;
+			int a = (qs.getQuestVars().getQuestVars() >> 7) & 0x7F;
+			int b = (qs.getQuestVars().getQuestVars() >> 14) & 0x7F;
+			int c = (qs.getQuestVars().getQuestVars() >> 21) & 0x7F;
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
 				switch (env.getTargetId()) {
 					case 256617: // Strange Lake Spirit
-						if (A >= 0 && A < 30) {
-							++A;
-							ALL = C;
-							ALL = ALL << 7;
-							ALL += B;
-							ALL = ALL << 7;
-							ALL += A;
-							ALL = ALL << 7;
-							ALL += 2;// var0
-							qs.setQuestVar(ALL);
+						if (a >= 0 && a < 30) {
+							++a;
+							all = c;
+							all = all << 7;
+							all += b;
+							all = all << 7;
+							all += a;
+							all = all << 7;
+							all += 2;// var0
+							qs.setQuestVar(all);
 							updateQuestStatus(env);
 						}
 						break;
 					case 253721:
 					case 253720: // Lava Hoverstone
-						if (B >= 0 && B < 30) {
-							++B;
-							ALL = C;
-							ALL = ALL << 7;
-							ALL += B;
-							ALL = ALL << 7;
-							ALL += A;
-							ALL = ALL << 7;
-							ALL += 2;// var0
-							qs.setQuestVar(ALL);
+						if (b >= 0 && b < 30) {
+							++b;
+							all = c;
+							all = all << 7;
+							all += b;
+							all = all << 7;
+							all += a;
+							all = all << 7;
+							all += 2;// var0
+							qs.setQuestVar(all);
 							updateQuestStatus(env);
 						}
 						break;
 					case 254514:
 					case 254513: // Disturbed Resident
-						if (C >= 0 && C < 30) {
-							++C;
-							ALL = C;
-							ALL = ALL << 7;
-							ALL += B;
-							ALL = ALL << 7;
-							ALL += A;
-							ALL = ALL << 7;
-							ALL += 2;// var0
-							qs.setQuestVar(ALL);
+						if (c >= 0 && c < 30) {
+							++c;
+							all = c;
+							all = all << 7;
+							all += b;
+							all = all << 7;
+							all += a;
+							all = all << 7;
+							all += 2;// var0
+							qs.setQuestVar(all);
 							updateQuestStatus(env);
 						}
 						break;
 				}
-				if (qs.getQuestVarById(0) == 2 && A == 30 && B == 30 && C == 30) {
+				if (qs.getQuestVarById(0) == 2 && a == 30 && b == 30 && c == 30) {
 					qs.setQuestVarById(1, 60);
 					updateQuestStatus(env);
 					return true;
