@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.gameserver.ai2.AiNames;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
@@ -96,7 +95,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	private TribeClass tribe;
 
 	@XmlAttribute(name = "ai")
-	private String ai = AiNames.DUMMY_NPC.getName();
+	private String ai = "dummy";
 
 	@XmlAttribute
 	private Race race = Race.NONE;

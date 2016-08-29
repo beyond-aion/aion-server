@@ -19,7 +19,6 @@ import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author ATracer
@@ -88,14 +87,6 @@ public class AI2Engine implements GameEngine {
 			log.error("[AI2] AI factory error: " + name, e);
 		}
 		return aiInstance;
-	}
-
-	/**
-	 * @param aiName
-	 * @param owner
-	 */
-	public void setupAI(AiNames aiName, Npc owner) {
-		setupAI(aiName.getName(), owner);
 	}
 
 	private void validateScripts() {
