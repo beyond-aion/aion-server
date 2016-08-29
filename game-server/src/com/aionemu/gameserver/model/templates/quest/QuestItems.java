@@ -13,9 +13,9 @@ import javax.xml.bind.annotation.XmlType;
 public class QuestItems {
 
 	@XmlAttribute(name = "item_id")
-	protected Integer itemId;
+	private int itemId;
 	@XmlAttribute
-	protected long count = 1L;
+	private long count = 1L;
 
 	/**
 	 * Constructor used by unmarshaller
@@ -34,7 +34,7 @@ public class QuestItems {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public Integer getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
 

@@ -226,38 +226,25 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		return sendQuestStartDialog(env, 0, 0);
 	}
 
+	public boolean sendQuestStartDialog(QuestEnv env, QuestItems workItem) {
+		return workItem == null ? sendQuestStartDialog(env, 0, 0) : sendQuestStartDialog(env, workItem.getItemId(), workItem.getCount());
+	}
+
 	/** Send default start quest dialog and start it (give the item on start) */
-	public boolean sendQuestStartDialog(QuestEnv env, int itemId, int itemCount) {
+	public boolean sendQuestStartDialog(QuestEnv env, int itemId, long itemCount) {
 		switch (env.getDialog()) {
 			case ASK_QUEST_ACCEPT:
 				return sendQuestDialog(env, 4);
+			case QUEST_ACCEPT:
 			case QUEST_ACCEPT_1:
-				if (itemId != 0 && itemCount != 0) {
-					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
-						if (QuestService.startQuest(env)) {
-							giveQuestItem(env, itemId, itemCount);
-							return sendQuestDialog(env, 1003);
-						}
-					}
-				} else {
-					if (QuestService.startQuest(env)) {
-						if (env.getVisibleObject() == null || env.getVisibleObject() instanceof Player)
-							return closeDialogWindow(env);
-						else
-							return sendQuestDialog(env, 1003);
-					}
-				}
-				break;
 			case QUEST_ACCEPT_SIMPLE:
-				if (itemId != 0 && itemCount != 0) {
-					if (!env.getPlayer().getInventory().isFullSpecialCube()) {
-						if (QuestService.startQuest(env)) {
-							giveQuestItem(env, itemId, itemCount);
-							return closeDialogWindow(env);
-						}
-					}
-				} else if (QuestService.startQuest(env)) {
-					return closeDialogWindow(env);
+				if (QuestService.startQuest(env)) {
+					if (itemId != 0 && itemCount != 0)
+						giveQuestItem(env, itemId, itemCount);
+					if (env.getDialog() != DialogAction.QUEST_ACCEPT_SIMPLE && env.getVisibleObject() instanceof Npc)
+						return sendQuestDialog(env, 1003);
+					else
+						return closeDialogWindow(env);
 				}
 				break;
 			case QUEST_REFUSE_1:

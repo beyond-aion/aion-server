@@ -114,15 +114,9 @@ public class ItemCollecting extends QuestHandler {
 						}
 						return sendQuestDialog(env, 1012);
 					case QUEST_REFUSE:
-					case QUEST_REFUSE_1:
-					case QUEST_REFUSE_SIMPLE:
 						return closeDialogWindow(env);
-					case QUEST_ACCEPT:
-					case QUEST_ACCEPT_1:
-					case QUEST_ACCEPT_SIMPLE:
-						if (workItem != null)
-							giveQuestItem(env, workItem.getItemId(), workItem.getCount());
-						return sendQuestStartDialog(env);
+					default:
+						return sendQuestStartDialog(env, workItem);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
