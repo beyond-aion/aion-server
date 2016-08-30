@@ -25,10 +25,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _1929ASliverofDarkness extends QuestHandler {
 
-	private final static int questId = 1929;
-
 	public _1929ASliverofDarkness() {
-		super(questId);
+		super(1929);
 	}
 
 	@Override
@@ -217,7 +215,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
+			int var = qs.getQuestVars().getQuestVars();
 			if (var == 97) {
 				changeQuestStep(env, 97, 8); // 8
 				TeleportService2.teleportTo(player, 210030000, 1, 2315.9f, 1800f, 195.2f);
