@@ -21,10 +21,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _2900NoEscapingDestiny extends QuestHandler {
 
-	private final static int questId = 2900;
-
 	public _2900NoEscapingDestiny() {
-		super(questId);
+		super(2900);
 	}
 
 	@Override
@@ -212,7 +210,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
+			int var = qs.getQuestVars().getQuestVars();
 			if (var == 98) {
 				changeQuestStep(env, 98, 9); // 9
 				TeleportService2.teleportTo(player, 220010000, 1, 1112.492f, 1718.974f, 270.45917f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
