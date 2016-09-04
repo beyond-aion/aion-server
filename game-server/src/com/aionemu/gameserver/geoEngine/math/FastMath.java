@@ -701,14 +701,14 @@ final public class FastMath {
      * @return floating point value of the half.
      */
     public static float convertHalfToFloat(short half) {
-        switch ((int) half) {
-            case 0x0000:
+        switch (half) {
+            case (short) 0x0000:
                 return 0f;
-            case 0x8000:
+            case (short) 0x8000:
                 return -0f;
-            case 0x7c00:
+            case (short) 0x7c00:
                 return Float.POSITIVE_INFINITY;
-            case 0xfc00:
+            case (short) 0xfc00:
                 return Float.NEGATIVE_INFINITY;
             // TODO: Support for NaN?
             default:

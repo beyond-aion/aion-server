@@ -36,7 +36,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_COMPLETED_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.questEngine.handlers.ConstantSpawnHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandlerLoader;
@@ -1086,10 +1085,9 @@ public class QuestEngine implements GameEngine {
 	 */
 	public void onNotifyNpcSpawned(int questId, int npcId) {
 		QuestHandler handler = questHandlers.get(questId);
-		if (!(handler instanceof ConstantSpawnHandler))
+		if (handler == null)
 			return;
-		ConstantSpawnHandler checker = handler;
-		HashSet<Integer> allNpcs = checker.getNpcIds();
+		Set<Integer> allNpcs = handler.getNpcIds();
 		if (allNpcs == null)
 			return;
 		allNpcs.remove(npcId);
@@ -1098,9 +1096,7 @@ public class QuestEngine implements GameEngine {
 	public void printMissingSpawns() {
 		StringBuilder sb = new StringBuilder();
 		for (QuestHandler handler : questHandlers.values()) {
-			if (!(handler instanceof ConstantSpawnHandler))
-				continue;
-			HashSet<Integer> allNpcs = ((ConstantSpawnHandler) handler).getNpcIds();
+			Set<Integer> allNpcs = handler.getNpcIds();
 			if (allNpcs == null || allNpcs.size() == 0)
 				return;
 			sb.append("Q" + handler.getQuestId() + ": ");

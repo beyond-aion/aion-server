@@ -56,7 +56,7 @@ public class _1197KrallBook extends QuestHandler {
 					if (giveQuestItem(env, 182200558, 1)) {
 						VisibleObject target = player.getTarget();
 						if (target instanceof Npc)
-							NpcActions.delete((Npc) target, true);
+							NpcActions.delete(target, true);
 					}
 				}
 			}

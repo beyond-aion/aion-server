@@ -61,7 +61,7 @@ public class Send extends AdminCommand {
 			return;
 		}
 
-		Packets packetsTemplate = (Packets) JAXBUtil.deserialize(file, Packets.class, SCHEMAFILE);
+		Packets packetsTemplate = JAXBUtil.deserialize(file, Packets.class, SCHEMAFILE);
 		send(admin, packetsTemplate);
 	}
 

@@ -72,11 +72,11 @@ public class GeoWorldLoader {
 				Node node = new Node(DEBUG ? name : null);
 				byte intentions = 0;
 				byte singleChildMaterialId = -1;
-				int modelCount = geo.getShort();
+				int modelCount = geo.getShort() & 0xFFFF;
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
 
-					int vectorCount = ((int) geo.getShort()) * 3;
+					int vectorCount = (geo.getShort() & 0xFFFF) * 3;
 					ByteBuffer floatBuffer = MappedByteBuffer.allocateDirect(vectorCount * 4);
 					FloatBuffer vertices = floatBuffer.asFloatBuffer();
 					for (int x = 0; x < vectorCount; x++) {

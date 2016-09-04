@@ -271,7 +271,7 @@ public class GameTime implements Cloneable {
 	}
 
 	@Override
-	public Object clone() {
+	public GameTime clone() {
 		return new GameTime(gameTime);
 	}
 }

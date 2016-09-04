@@ -203,7 +203,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 	}
 
 	public Iterator<Entry<T>> iterator() {
-		return (Iterator<Entry<T>>) new IntMapIterator();
+		return new IntMapIterator();
 	}
 
 	final class IntMapIterator implements Iterator<Entry<T>> {

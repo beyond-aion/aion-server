@@ -37,7 +37,7 @@ public class WeatherService {
 
 	private WeatherService() {
 		worldZoneWeathers = new HashMap<>();
-		GameTime gameTime = (GameTime) GameTimeService.getInstance().getGameTime().clone();
+		GameTime gameTime = GameTimeService.getInstance().getGameTime().clone();
 		for (WorldMapTemplate worldMapTemplate : DataManager.WORLD_MAPS_DATA) {
 			int mapId = worldMapTemplate.getMapId();
 			WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(mapId);
@@ -104,7 +104,7 @@ public class WeatherService {
 	private synchronized void setNextWeather(WeatherKey key) {
 		WeatherEntry[] weatherEntries = getWeatherEntries(key.getMapId());
 		WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(key.getMapId());
-		key.created = (GameTime) GameTimeService.getInstance().getGameTime().clone();
+		key.created = GameTimeService.getInstance().getGameTime().clone();
 		for (int zoneIndex = 0; zoneIndex < weatherEntries.length; zoneIndex++) {
 			WeatherEntry oldEntry = weatherEntries[zoneIndex];
 			WeatherEntry newEntry = null;

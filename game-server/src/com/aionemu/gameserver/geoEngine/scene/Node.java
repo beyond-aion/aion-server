@@ -78,7 +78,7 @@ public class Node extends Spatial implements Cloneable {
 	 */
 	public Node(String name) {
 		super(name);
-		collisionFlags = (short) CollisionIntention.ALL.getId();
+		collisionFlags = CollisionIntention.ALL.getId();
 	}
 
 	/**

@@ -105,7 +105,7 @@ public class Decompose extends PlayerCommand {
 
 			@Override
 			public void run() {
-				if (!(decomposeAction instanceof DecomposeAction)) {
+				if (decomposeAction == null) {
 					cancelTask(player, observer, "This item cannot be processed.");
 					return;
 				}

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
@@ -30,8 +29,6 @@ public class RaceCondition extends Condition {
 	public boolean validate(Skill env) {
 		if (env.getFirstTarget() == null || env.getEffector() == null)
 			return false;
-		if (!(env.getFirstTarget() instanceof Creature))
-			return false;
 
 		boolean result = false;
 		for (Race race : races) {
@@ -45,8 +42,6 @@ public class RaceCondition extends Condition {
 	@Override
 	public boolean validate(Effect effect) {
 		if (effect.getEffected() == null || effect.getEffector() == null)
-			return false;
-		if (!(effect.getEffected() instanceof Creature))
 			return false;
 
 		boolean result = false;

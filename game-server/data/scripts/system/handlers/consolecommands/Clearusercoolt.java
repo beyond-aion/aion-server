@@ -37,25 +37,22 @@ public class Clearusercoolt extends ConsoleCommand {
 			return;
 		}
 
-		if (player instanceof Player) {
-			if (player.getPortalCooldownList() == null || player.getPortalCooldownList().getPortalCoolDowns() == null)
-				return;
+		if (player.getPortalCooldownList() == null || player.getPortalCooldownList().getPortalCoolDowns() == null)
+			return;
 
-			List<Integer> mapIds = new FastTable<>();
-			for (Entry<Integer, PortalCooldown> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet())
-				mapIds.add(mapId.getKey());
+		List<Integer> mapIds = new FastTable<>();
+		for (Entry<Integer, PortalCooldown> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet())
+			mapIds.add(mapId.getKey());
 
-			for (Integer id : mapIds)
-				player.getPortalCooldownList().addPortalCooldown(id, 0);
+		for (Integer id : mapIds)
+			player.getPortalCooldownList().addPortalCooldown(id, 0);
 
-			mapIds.clear();
-			if (player.equals(admin))
-				PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed.");
-			else {
-				PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
-				PacketSendUtility.sendMessage(player, "Your instance cooldowns were removed by admin.");
-			}
-		} else
-			PacketSendUtility.sendMessage(admin, "Only players are allowed as target.");
+		mapIds.clear();
+		if (player.equals(admin))
+			PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed.");
+		else {
+			PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of player: " + player.getName());
+			PacketSendUtility.sendMessage(player, "Your instance cooldowns were removed by admin.");
+		}
 	}
 }

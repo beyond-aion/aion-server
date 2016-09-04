@@ -82,7 +82,7 @@ public class NpcShoutsService {
 		if (sender.getTarget() != null && "target".equals(param))
 			param = sender.getTarget().getObjectTemplate().getName();
 
-		if (shoutCooldown > 0 && target instanceof Player && "quest".equals(shout.getPattern()))
+		if (shoutCooldown > 0 && target != null && "quest".equals(shout.getPattern()))
 			shoutCooldown = 0;
 
 		SM_SYSTEM_MESSAGE message = new SM_SYSTEM_MESSAGE(ChatType.NPC, sender, shout.getStringId(), param);
