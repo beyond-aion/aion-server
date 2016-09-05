@@ -8,6 +8,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @Author Majka
@@ -62,8 +64,8 @@ public class _25051TreasureOfAncientKings extends QuestHandler {
 
 						if (dialog == DialogAction.SETPRO1) {
 							// Spawn of Zagmus
-							if (!qe.getQuestNpc(805160).isWasSpawned())
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90, 5);
+							if (World.getInstance().getWorldMap(WorldMapType.ENSHAR.getId()).getMainWorldMapInstance().getNpc(805160) == null)
+								QuestService.addNewSpawn(WorldMapType.ENSHAR.getId(), 1, 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90);
 							QuestService.invisibleTimerStart(env, 300);
 							return defaultCloseDialog(env, var, var + 1);
 						}
