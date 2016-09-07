@@ -262,9 +262,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.ride.restriction.enable", defaultValue = "true")
 	public static boolean ENABLE_RIDE_RESTRICTION;
 
-	@Property(key = "gameserver.quest.questdatakills", defaultValue = "true")
-	public static boolean QUESTDATA_MONSTER_KILLS;
-
 	/**
 	 * Enables sell apitems
 	 */
