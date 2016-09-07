@@ -93,6 +93,10 @@ public class EventTemplate {
 		return eventDrops;
 	}
 
+	public SpawnsData2 getSpawns() {
+		return spawns;
+	}
+
 	public ZonedDateTime getStartDate() {
 		return startDate.toGregorianCalendar().toZonedDateTime();
 	}

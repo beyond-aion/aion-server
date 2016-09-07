@@ -235,23 +235,6 @@ public class ReportToMany extends QuestHandler {
 		defaultOnLevelChangedEvent(player);
 	}
 
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-			if (!endNpcIds.equals(startNpcIds)) {
-				constantSpawns.addAll(endNpcIds);
-			}
-			for (List<Integer> npcIds : npcInfos.keySet()) {
-				for (int npcId : npcIds) {
-					constantSpawns.add(npcId);
-				}
-			}
-		}
-		return constantSpawns;
-	}
-
 	private int getCloseDialogId(int var, NpcInfos targetNpcInfo) {
 		if (targetNpcInfo.getCloseDialog() == 0) {
 			if (var == maxVar)

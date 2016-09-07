@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 
 import javolution.util.FastMap;
+import javolution.util.FastSet;
 import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,13 +28,20 @@ public class EventData {
 	@XmlTransient
 	private FastMap<String, EventTemplate> allEvents = new FastMap<>();
 
+	@XmlTransient
+	private Set<Integer> allNpcIds = new FastSet<>();
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (events == null)
 			return;
 
 		allEvents.clear();
-		for (EventTemplate ev : events)
+		allNpcIds.clear();
+		for (EventTemplate ev : events) {
 			allEvents.put(ev.getName(), ev);
+			if (ev.getSpawns() != null)
+				allNpcIds.addAll(ev.getSpawns().getAllNpcIds());
+		}
 
 		events.clear();
 		events = null;
@@ -70,5 +79,13 @@ public class EventData {
 
 		this.events = events == null ? new FastTable<>() : events;
 		afterUnmarshal(null, null);
+	}
+
+	/**
+	 * @param npcId
+	 * @return True, if the given npc appears in any of the spawn templates (town level 1-5)
+	 */
+	public boolean containsAnySpawnForNpc(int npcId) {
+		return allNpcIds.contains(npcId);
 	}
 }

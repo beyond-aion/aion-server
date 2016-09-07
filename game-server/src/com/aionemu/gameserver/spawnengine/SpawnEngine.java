@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplat
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.world.World;
@@ -274,7 +273,6 @@ public class SpawnEngine {
 		World.getInstance().forEachObject(visitor);
 		log.info("Loaded " + visitor.getNpcCount() + " npc spawns");
 		log.info("Loaded " + visitor.getGatherableCount() + " gatherable spawns");
-		QuestEngine.getInstance().printMissingSpawns();
 	}
 
 	static class StatsCollector implements Visitor<VisibleObject> {

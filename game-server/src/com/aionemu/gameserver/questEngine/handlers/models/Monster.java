@@ -91,12 +91,7 @@ public class Monster {
 		this.step = value;
 	}
 
-	public int getSpawnerObjectId() {
+	public int getSpawnerNpcId() {
 		return spawnerObjectId;
 	}
-
-	public void setSpawnerObjectId(int value) {
-		this.spawnerObjectId = value;
-	}
-
 }

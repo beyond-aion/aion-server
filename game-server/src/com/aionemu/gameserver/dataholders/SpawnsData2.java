@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBContext;
@@ -66,8 +67,10 @@ import javolution.util.FastTable;
 public class SpawnsData2 {
 
 	private static final Logger log = LoggerFactory.getLogger(SpawnsData2.class);
+
 	@XmlElement(name = "spawn_map", type = SpawnMap.class)
-	protected List<SpawnMap> templates;
+	private List<SpawnMap> templates;
+
 	private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<>();
@@ -75,21 +78,30 @@ public class SpawnsData2 {
 	private TIntObjectHashMap<List<SpawnGroup2>> vortexSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // ahserions flight
+	private Set<Integer> allNpcIds;
+	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<>();
 
 	/**
 	 * @param u
 	 * @param parent
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (templates != null) {
+			allSpawnMaps.clear();
+			baseSpawnMaps.clear();
+			riftSpawnMaps.clear();
+			siegeSpawnMaps.clear();
+			vortexSpawnMaps.clear();
+			mercenarySpawns.clear();
+			assaultSpawns.clear();
+			ahserionSpawnMaps.clear();
+			
 			for (SpawnMap spawnMap : templates) {
 				int mapId = spawnMap.getMapId();
 
 				if (!allSpawnMaps.containsKey(mapId)) {
-					allSpawnMaps.put(mapId, new FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>());
+					allSpawnMaps.put(mapId, new FastMap<>());
 				}
 
 				for (Spawn spawn : spawnMap.getSpawns()) {
@@ -99,15 +111,15 @@ public class SpawnsData2 {
 						customs.put(spawn.getNpcId(), spawn);
 					} else if (customs.containsKey(spawn.getNpcId()))
 						continue;
-					allSpawnMaps.get(mapId).put(spawn.getNpcId(), new SimpleEntry(new SpawnGroup2(mapId, spawn), spawn));
+					allSpawnMaps.get(mapId).put(spawn.getNpcId(), new SimpleEntry<>(new SpawnGroup2(mapId, spawn), spawn));
 				}
 
-				for (BaseSpawn BaseSpawn : spawnMap.getBaseSpawns()) {
-					int baseId = BaseSpawn.getId();
+				for (BaseSpawn baseSpawn : spawnMap.getBaseSpawns()) {
+					int baseId = baseSpawn.getId();
 					if (!baseSpawnMaps.containsKey(baseId)) {
 						baseSpawnMaps.put(baseId, new FastTable<SpawnGroup2>());
 					}
-					for (BaseSpawn.SimpleRaceTemplate simpleRace : BaseSpawn.getBaseRaceTemplates()) {
+					for (BaseSpawn.SimpleRaceTemplate simpleRace : baseSpawn.getBaseRaceTemplates()) {
 						for (Spawn spawn : simpleRace.getSpawns()) {
 							if (spawn.isCustom()) {
 								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
@@ -235,6 +247,9 @@ public class SpawnsData2 {
 				customs.clear();
 			}
 		}
+		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
+		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(s -> s.getNpcId())).distinct().collect(Collectors.toList()));
+		allNpcIds.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(s -> s.getNpcId())).distinct().collect(Collectors.toList()));
 	}
 
 	public void clearTemplates() {
@@ -552,4 +567,18 @@ public class SpawnsData2 {
 		return ahserionSpawnMaps.get(id);
 	}
 
+	/**
+	 * @return All npc ids which appear in the spawn templates.
+	 */
+	public Set<Integer> getAllNpcIds() {
+		return allNpcIds;
+	}
+
+	/**
+	 * @param npcId
+	 * @return True, if the given npc appears in any of the spawn templates (world, instance, siege, base, ...)
+	 */
+	public boolean containsAnySpawnForNpc(int npcId) {
+		return allNpcIds.contains(npcId);
+	}
 }

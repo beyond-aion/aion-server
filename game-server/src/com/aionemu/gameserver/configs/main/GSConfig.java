@@ -75,4 +75,7 @@ public class GSConfig {
 
 	@Property(key = "gameserver.web_rewards.enable", defaultValue = "false")
 	public static boolean ENABLE_WEB_REWARDS;
+
+	@Property(key = "gameserver.analysis.quest_handlers", defaultValue = "true")
+	public static boolean ANALYZE_QUESTHANDLERS;
 }

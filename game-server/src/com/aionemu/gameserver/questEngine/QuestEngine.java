@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,7 @@ import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
@@ -26,6 +28,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
+import com.aionemu.gameserver.model.templates.factions.NpcFactionTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.quest.HandlerSideDrop;
 import com.aionemu.gameserver.model.templates.quest.InventoryItem;
@@ -57,6 +60,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntProcedure;
 import javolution.util.FastMap;
+import javolution.util.FastSet;
 import javolution.util.FastTable;
 
 /**
@@ -127,9 +131,11 @@ public class QuestEngine implements GameEngine {
 
 		try {
 			scriptManager.load(new File("./data/scripts/system/quest_handlers.xml"));
-			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest())
+			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getAllQuests())
 				xmlQuest.register(this);
 			log.info("Loaded " + questHandlers.size() + " quest handlers.");
+			if (GSConfig.ANALYZE_QUESTHANDLERS)
+				analyzeQuestHandlers();
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize quest handlers.", e);
 		} finally {
@@ -1077,36 +1083,68 @@ public class QuestEngine implements GameEngine {
 		QuestService.addQuestDrop(hsd.getNpcId(), hsd);
 	}
 
-	/**
-	 * Called by Spawn Engine to check missing spawns
-	 * 
-	 * @param id
-	 * @param npcId
-	 */
-	public void onNotifyNpcSpawned(int questId, int npcId) {
-		QuestHandler handler = questHandlers.get(questId);
-		if (handler == null)
-			return;
-		Set<Integer> allNpcs = handler.getNpcIds();
-		if (allNpcs == null)
-			return;
-		allNpcs.remove(npcId);
+	private void analyzeQuestHandlers() {
+		log.info("Analyzing quest handlers...");
+		Set<Integer> unobtainableQuests = new FastSet<>();
+		Set<Integer> factionIds = new FastSet<>();
+		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
+			if (nft.getNpcId() == 0 || existsSpawnData(nft.getNpcId()))
+				factionIds.add(nft.getId());
+		}
+		StringBuilder obsoleteHandlers = new StringBuilder();
+		for (QuestHandler qh : questHandlers.values()) {
+			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
+			if (qt.getMinlevelPermitted() == 99) {
+				obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (minLvl=99, handler=").append(qh.getClass().getName()).append(")");
+				unobtainableQuests.add(qh.getQuestId());
+			} else if (qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId())) { // outdated or unimplemented npc faction
+				obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (npcFactionId=").append(qt.getNpcFactionId()).append(", handler=")
+					.append(qh.getClass().getName()).append(")");;
+				unobtainableQuests.add(qh.getQuestId());
+			}
+		}
+		StringBuilder missingSpawns = new StringBuilder();
+		for (int npcId : questNpcs.keys()) {
+			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
+				Set<Integer> questIds = getQuestNpc(npcId).getAllRegisteredQuestIds();
+				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
+					continue; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
+				missingSpawns.append("\n\tNpc ").append(npcId).append(" (quests: ").append(StringUtils.join(questIds, ", ")).append(")");
+			}
+		}
+		if (obsoleteHandlers.length() > 0)
+			log.warn("Possibly obsolete quest handlers (quests are not obtainable):{}", obsoleteHandlers.toString());
+		if (missingSpawns.length() > 0)
+			log.warn("Missing quest npc spawns:{}", missingSpawns.toString());
+		if (obsoleteHandlers.length() == 0 && missingSpawns.length() == 0)
+			log.info("Quest handler analysis finished without errors!");
+		else
+			log.info("Quest handler analysis finished (see above log messages for found errors)");
 	}
 
-	public void printMissingSpawns() {
-		StringBuilder sb = new StringBuilder();
-		for (QuestHandler handler : questHandlers.values()) {
-			Set<Integer> allNpcs = handler.getNpcIds();
-			if (allNpcs == null || allNpcs.size() == 0)
-				return;
-			sb.append("Q" + handler.getQuestId() + ": ");
-			for (Integer npcId : allNpcs)
-				sb.append(Integer.toString(npcId) + "; ");
-		}
-		if (sb.length() > 0) {
-			sb.insert(0, "Missing quest npcs:\n");
-			log.warn(sb.toString());
-		}
+	private boolean existsSpawnData(int npcId) {
+		if (DataManager.SPAWNS_DATA2.containsAnySpawnForNpc(npcId))
+			return true;
+		if (DataManager.TOWN_SPAWNS_DATA.containsAnySpawnForNpc(npcId))
+			return true;
+		if (DataManager.EVENT_DATA.containsAnySpawnForNpc(npcId))
+			return true;
+		return false;
+	}
+
+	/**
+	 * @param questId
+	 * @param npcId
+	 * @return True, if alternative npc ids, which are valid for this quest, appear in spawn templates (e.g. mobs for quest kills or talk npcs)
+	 */
+	private boolean existsSpawnDataForAnyAlternativeNpc(int questId, int npcId) {
+		XMLQuest quest = DataManager.XML_QUESTS.getQuest(questId);
+		if (quest == null)
+			return true; // no way to get alternative npcs from non-xml based handlers, so assume the quest spawns work (lol)
+		Set<Integer> alternativeNpcs = quest.getAlternativeNpcs(npcId);
+		if (alternativeNpcs == null)
+			return false;
+		return alternativeNpcs.stream().anyMatch(npc -> existsSpawnData(npc));
 	}
 
 	private void addMessageSendingTask() {

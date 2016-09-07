@@ -60,11 +60,7 @@ public class Reload extends AdminCommand {
 			DataManager.QUEST_DATA.setQuestsData(data.getQuestsData());
 			List<XMLQuest> templates = new FastTable<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/quest_script_data", true);
-			JAXBUtil.deserialize(files, XMLQuests.class, "./data/static_data/static_data.xsd").forEach(e -> {
-				List<XMLQuest> xmlQuests = e.getQuest();
-				if (xmlQuests != null)
-					templates.addAll(xmlQuests);
-			});
+			JAXBUtil.deserialize(files, XMLQuests.class, "./data/static_data/static_data.xsd").forEach(e -> templates.addAll(e.getAllQuests()));
 			DataManager.XML_QUESTS.setData(templates);
 			QuestEngine.getInstance().reload();
 			sendInfo(admin, DataManager.QUEST_DATA.size() + " quest templates loaded (" + QuestEngine.getInstance().getQuestHandlerCount() + " handlers).");

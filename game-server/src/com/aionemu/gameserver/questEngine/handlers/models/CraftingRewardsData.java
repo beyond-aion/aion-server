@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,4 +35,8 @@ public class CraftingRewardsData extends XMLQuest {
 		questEngine.addQuestHandler(new CraftingRewards(id, startNpcId, skillId, levelReward, endNpcId, questMovie));
 	}
 
+	@Override
+	public Set<Integer> getAlternativeNpcs(int npcId) {
+		return null;
+	}
 }

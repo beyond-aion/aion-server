@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -84,4 +85,22 @@ public class MonsterHuntData extends XMLQuest {
 			startZone, startDistanceNpcId, reward, rewardNextStep));
 	}
 
+	@Override
+	public Set<Integer> getAlternativeNpcs(int npcId) {
+		if (startNpcIds != null && startNpcIds.size() > 1 && startNpcIds.contains(npcId))
+			return startNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		if (endNpcIds != null && endNpcIds.size() > 1 && endNpcIds.contains(npcId))
+			return endNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		if (aggroNpcIds != null && aggroNpcIds.size() > 1 && aggroNpcIds.contains(npcId))
+			return aggroNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		List<QuestKill> questKills = DataManager.QUEST_DATA.getQuestById(id).getQuestKill();
+		if (questKills != null) {
+			for (QuestKill qk : questKills) {
+				List<Integer> npcIds = qk.getNpcIds();
+				if (npcIds != null && npcIds.size() > 1 && npcIds.contains(npcId))
+					return npcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+			}
+		}
+		return null;
+	}
 }

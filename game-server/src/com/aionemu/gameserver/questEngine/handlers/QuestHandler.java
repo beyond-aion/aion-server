@@ -60,19 +60,17 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @author MrPoke
  * @modified vlog, Majka
  */
-public abstract class QuestHandler extends AbstractQuestHandler implements ConstantSpawnHandler {
+public abstract class QuestHandler extends AbstractQuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestHandler.class);
+	protected static final QuestEngine qe = QuestEngine.getInstance();
 	protected final int questId;
-	protected QuestEngine qe;
 	protected List<QuestItems> workItems;
-	protected HashSet<Integer> actionItems;
-	protected HashSet<Integer> constantSpawns;
+	protected Set<Integer> actionItems;
 
 	/** Create a new QuestHandler object */
 	protected QuestHandler(int questId) {
 		this.questId = questId;
-		this.qe = QuestEngine.getInstance();
 		loadWorkItems();
 		loadActionItems();
 		onWorkItemsLoaded();
@@ -1131,13 +1129,4 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
 		}
 		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId));
 	}
-
-	@Override
-	public abstract void register();
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		return null;
-	}
-
 }

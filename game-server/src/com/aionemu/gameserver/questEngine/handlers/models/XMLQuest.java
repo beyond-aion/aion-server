@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,4 +35,6 @@ public abstract class XMLQuest {
 	}
 
 	public abstract void register(QuestEngine questEngine);
+
+	public abstract Set<Integer> getAlternativeNpcs(int npcId);
 }

@@ -106,13 +106,4 @@ public class RelicRewards extends QuestHandler {
 		}
 		return false;
 	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-		}
-		return constantSpawns;
-	}
 }

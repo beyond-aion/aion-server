@@ -244,11 +244,12 @@ public class GameServer {
 
 		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();
-		RiftService.getInstance().initRifts();
 		TemporarySpawnEngine.spawnAll();
+		TownService.getInstance();
+		FlyRingService.getInstance();
+		RiftService.getInstance().initRifts();
 		if (SiegeConfig.SIEGE_ENABLED)
 			ShieldService.getInstance().spawnAll();
-		FlyRingService.getInstance();
 
 		ConsoleUtil.printSection("Limits");
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
@@ -308,7 +309,6 @@ public class GameServer {
 		ConsoleUtil.printSection("Housing");
 		HousingBidService.getInstance().start();
 		MaintenanceTask.getInstance();
-		TownService.getInstance();
 		ChallengeTaskService.getInstance();
 		GameTimeService.getInstance().startClock();
 

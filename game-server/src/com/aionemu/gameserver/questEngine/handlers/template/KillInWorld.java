@@ -107,7 +107,7 @@ public class KillInWorld extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		
+
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				switch (dialog) {
@@ -177,16 +177,5 @@ public class KillInWorld extends QuestHandler {
 		if (qs == null || qs.isStartable())
 			return QuestService.startQuest(env);
 		return false;
-	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-			if (!endNpcIds.equals(startNpcIds))
-				constantSpawns.addAll(endNpcIds);
-		}
-		return constantSpawns;
 	}
 }

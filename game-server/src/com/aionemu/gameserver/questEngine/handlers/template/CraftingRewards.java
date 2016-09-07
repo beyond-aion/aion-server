@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
-import java.util.HashSet;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,22 +16,18 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
  */
 public class CraftingRewards extends QuestHandler {
 
-	private final int startNpcId;
+	private final int startNpcId, endNpcId;
 	private final int skillId;
 	private final int levelReward;
 	private final int questMovie;
-	private final int endNpcId;
 	private final boolean isDataDriven;
 
 	public CraftingRewards(int questId, int startNpcId, int skillId, int levelReward, int endNpcId, int questMovie) {
 		super(questId);
 		this.startNpcId = startNpcId;
+		this.endNpcId = endNpcId != 0 ? endNpcId : startNpcId;
 		this.skillId = skillId;
 		this.levelReward = levelReward;
-		if (endNpcId == 0)
-			this.endNpcId = startNpcId;
-		else
-			this.endNpcId = endNpcId;
 		this.questMovie = questMovie;
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
@@ -119,17 +113,5 @@ public class CraftingRewards extends QuestHandler {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			if (startNpcId != 0)
-				constantSpawns.add(startNpcId);
-			if (endNpcId != startNpcId)
-				constantSpawns.add(endNpcId);
-		}
-		return constantSpawns;
 	}
 }

@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,5 +26,12 @@ public class ReportOnLevelUpData extends XMLQuest {
 	@Override
 	public void register(QuestEngine questEngine) {
 		questEngine.addQuestHandler(new ReportOnLevelUp(id, endNpcIds));
+	}
+
+	@Override
+	public Set<Integer> getAlternativeNpcs(int npcId) {
+		if (endNpcIds != null && endNpcIds.size() > 1 && endNpcIds.contains(npcId))
+			return endNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		return null;
 	}
 }

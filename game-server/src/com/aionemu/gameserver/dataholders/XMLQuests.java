@@ -1,12 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.Collection;
 import java.util.List;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.questEngine.handlers.models.CraftingRewardsData;
 import com.aionemu.gameserver.questEngine.handlers.models.FountainRewardsData;
@@ -26,6 +29,8 @@ import com.aionemu.gameserver.questEngine.handlers.models.WorkOrdersData;
 import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
 import com.aionemu.gameserver.questEngine.handlers.models.XmlQuestData;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author MrPoke
  */
@@ -41,13 +46,32 @@ public class XMLQuests {
 		@XmlElement(name = "kill_spawned", type = KillSpawnedData.class), @XmlElement(name = "mentor_monster_hunt", type = MentorMonsterHuntData.class),
 		@XmlElement(name = "fountain_rewards", type = FountainRewardsData.class), @XmlElement(name = "item_order", type = ItemOrdersData.class),
 		@XmlElement(name = "work_order", type = WorkOrdersData.class), @XmlElement(name = "report_on_levelup", type = ReportOnLevelUpData.class) })
-	protected List<XMLQuest> data;
+	private List<XMLQuest> data;
+
+	@XmlTransient
+	private TIntObjectHashMap<XMLQuest> questsById = new TIntObjectHashMap<>();
+
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (data != null) {
+			questsById.clear();
+			data.forEach(quest -> questsById.put(quest.getId(), quest));
+		}
+		data.clear();
+		data = null;
+	}
 
 	/**
 	 * @return the data
 	 */
-	public List<XMLQuest> getQuest() {
-		return data;
+	public Collection<XMLQuest> getAllQuests() {
+		return questsById.valueCollection();
+	}
+
+	/**
+	 * @return the data
+	 */
+	public XMLQuest getQuest(int questId) {
+		return questsById.get(questId);
 	}
 
 	/**
@@ -56,5 +80,6 @@ public class XMLQuests {
 	 */
 	public void setData(List<XMLQuest> data) {
 		this.data = data;
+		afterUnmarshal(null, null);
 	}
 }

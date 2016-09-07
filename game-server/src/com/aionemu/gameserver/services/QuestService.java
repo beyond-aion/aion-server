@@ -749,22 +749,17 @@ public final class QuestService {
 
 	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int timeInMin) {
 		final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, heading);
-		if (!npc.getPosition().isInstanceMap())
-			despawnQuestNpc(npc, timeInMin);
-	}
+		if (timeInMin > 0 && !npc.getPosition().isInstanceMap()) {
+			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-	private static void despawnQuestNpc(final Npc npc, int timeInMin) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+				@Override
+				public void run() {
+					if (npc != null && !npc.getLifeStats().isAlreadyDead())
+						npc.getController().onDelete();
+				}
 
-			@Override
-			public void run() {
-				if (npc == null || npc.getLifeStats().isAlreadyDead()) {
-					return;
-				} else
-					npc.getController().onDelete();
-			}
-
-		}, 60000 * timeInMin);
+			}, 60000 * timeInMin);
+		}
 	}
 
 	public static int getQuestDrop(Set<DropItem> dropItems, int index, Npc npc, Collection<Player> players, Player player) {
@@ -993,12 +988,9 @@ public final class QuestService {
 
 		removeQuestWorkItems(player, qs);
 		if (template.getCategory() == QuestCategory.TASK) {
-			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getQuest()) {
-				if (xmlQuest.getId() == questId && xmlQuest instanceof WorkOrdersData) {
-					player.getRecipeList().deleteRecipe(player, ((WorkOrdersData) xmlQuest).getRecipeId());
-					break;
-				}
-			}
+			XMLQuest xmlQuest = DataManager.XML_QUESTS.getQuest(questId);
+			if (xmlQuest instanceof WorkOrdersData)
+				player.getRecipeList().deleteRecipe(player, ((WorkOrdersData) xmlQuest).getRecipeId());
 		}
 
 		if (player.getController().getTask(TaskId.QUEST_TIMER) != null)

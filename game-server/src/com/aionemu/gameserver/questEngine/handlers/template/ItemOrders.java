@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
-import java.util.HashSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,19 +127,4 @@ public class ItemOrders extends QuestHandler {
 		}
 		return HandlerResult.FAILED;
 	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			if (talkNpcId1 != 0)
-				constantSpawns.add(talkNpcId1);
-			if (talkNpcId2 != 0)
-				constantSpawns.add(talkNpcId2);
-			if (endNpcId != 0)
-				constantSpawns.add(endNpcId);
-		}
-		return constantSpawns;
-	}
-
 }

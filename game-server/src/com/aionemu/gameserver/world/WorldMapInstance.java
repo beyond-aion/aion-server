@@ -164,17 +164,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		}
 		if (object instanceof Npc) {
 			int npcId = ((Npc) object).getNpcId();
-			QuestNpc data = QuestEngine.getInstance().getQuestNpc(npcId);
-			if (data != null) {
-				Set<Integer> questsToCheck = data.getNotCheckedQuestIds();
-				if (!questsToCheck.isEmpty()) {
-					for (int id : questsToCheck) {
-						QuestEngine.getInstance().onNotifyNpcSpawned(id, npcId);
-					}
-					data.setWasSpawned(true);
-				}
+			QuestNpc qNpc = QuestEngine.getInstance().getQuestNpc(npcId);
+			if (qNpc != null) {
 				boolean updateNearbyQuests = false;
-				for (int id : data.getOnQuestStart()) {
+				for (int id : qNpc.getOnQuestStart()) {
 					if (!questIds.contains(id)) {
 						questIds.add(id);
 						updateNearbyQuests = true;

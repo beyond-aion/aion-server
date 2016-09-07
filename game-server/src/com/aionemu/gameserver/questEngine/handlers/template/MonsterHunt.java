@@ -289,19 +289,4 @@ public class MonsterHunt extends QuestHandler {
 		}
 		return false;
 	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-			if (!endNpcIds.equals(startNpcIds))
-				constantSpawns.addAll(endNpcIds);
-			constantSpawns.addAll(aggroNpcIds);
-			for (Set<Integer> mobIds : monsters.values())
-				constantSpawns.addAll(mobIds);
-		}
-		return constantSpawns;
-	}
-
 }

@@ -39,7 +39,7 @@ public class KillSpawned extends QuestHandler {
 			this.endNpcIds.addAll(this.startNpcIds);
 		this.spawnedMonsters = spawnedMonsters;
 		for (Monster m : spawnedMonsters.values())
-			spawnerObjectIds.add(m.getSpawnerObjectId());
+			spawnerObjectIds.add(m.getSpawnerNpcId());
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
@@ -74,7 +74,7 @@ public class KillSpawned extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		
+
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
 				if (dialog == DialogAction.QUEST_SELECT) {
@@ -88,7 +88,7 @@ public class KillSpawned extends QuestHandler {
 				if (dialog == DialogAction.USE_OBJECT) {
 					int monsterId = 0;
 					for (Monster m : spawnedMonsters.values()) {
-						if (m.getSpawnerObjectId() == targetId) {
+						if (m.getSpawnerNpcId() == targetId) {
 							monsterId = m.getNpcIds().get(0);
 							break;
 						}
@@ -146,16 +146,4 @@ public class KillSpawned extends QuestHandler {
 		}
 		return false;
 	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-			if (!endNpcIds.equals(startNpcIds))
-				constantSpawns.addAll(endNpcIds);
-		}
-		return constantSpawns;
-	}
-
 }

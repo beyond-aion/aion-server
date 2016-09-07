@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,6 +15,7 @@ import com.aionemu.gameserver.model.templates.towns.TownSpawn;
 import com.aionemu.gameserver.model.templates.towns.TownSpawnMap;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastSet;
 
 /**
  * @author ViAl
@@ -23,6 +27,7 @@ public class TownSpawnsData {
 	private List<TownSpawnMap> spawnMap;
 
 	private TIntObjectHashMap<TownSpawnMap> spawnMapsData = new TIntObjectHashMap<>();
+	private Set<Integer> allNpcIds = new FastSet<>();
 
 	/**
 	 * @param u
@@ -30,8 +35,11 @@ public class TownSpawnsData {
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		spawnMapsData.clear();
+		allNpcIds.clear();
 
 		for (TownSpawnMap map : spawnMap) {
+			Stream<Spawn> spawns = map.getTownSpawns().stream().flatMap(ts -> ts.getTownLevels().stream().flatMap(tl -> tl.getSpawns().stream()));
+			allNpcIds.addAll(spawns.map(spawn -> spawn.getNpcId()).distinct().collect(Collectors.toList()));
 			spawnMapsData.put(map.getMapId(), map);
 		}
 		spawnMap.clear();
@@ -72,4 +80,11 @@ public class TownSpawnsData {
 		return 0;
 	}
 
+	/**
+	 * @param npcId
+	 * @return True, if the given npc appears in any of the spawn templates (town level 1-5)
+	 */
+	public boolean containsAnySpawnForNpc(int npcId) {
+		return allNpcIds.contains(npcId);
+	}
 }

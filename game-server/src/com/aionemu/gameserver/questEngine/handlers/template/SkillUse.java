@@ -19,7 +19,7 @@ import javolution.util.FastMap;
  * @modified Bobobear, Pad
  */
 public class SkillUse extends QuestHandler {
-	
+
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final FastMap<List<Integer>, QuestSkillData> qsd;
@@ -125,16 +125,5 @@ public class SkillUse extends QuestHandler {
 			return success;
 		}
 		return false;
-	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(startNpcIds);
-			if (!endNpcIds.equals(startNpcIds))
-				constantSpawns.addAll(endNpcIds);
-		}
-		return constantSpawns;
 	}
 }

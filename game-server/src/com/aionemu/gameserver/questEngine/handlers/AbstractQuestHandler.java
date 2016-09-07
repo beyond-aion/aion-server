@@ -17,6 +17,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public abstract class AbstractQuestHandler {
 
+	public abstract int getQuestId();
+
 	public abstract void register();
 
 	public boolean onDialogEvent(QuestEnv questEnv) {

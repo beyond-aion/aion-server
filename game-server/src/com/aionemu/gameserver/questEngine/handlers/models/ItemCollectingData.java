@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,4 +50,12 @@ public class ItemCollectingData extends XMLQuest {
 			checkOkDialogId, checkFailDialogId));
 	}
 
+	@Override
+	public Set<Integer> getAlternativeNpcs(int npcId) {
+		if (startNpcIds != null && startNpcIds.size() > 1 && startNpcIds.contains(npcId))
+			return startNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		if (endNpcIds != null && endNpcIds.size() > 1 && endNpcIds.contains(npcId))
+			return endNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+		return null;
+	}
 }

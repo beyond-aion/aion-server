@@ -70,13 +70,4 @@ public class ReportOnLevelUp extends QuestHandler {
 			return QuestService.startQuest(new QuestEnv(null, player, questId, 0), QuestStatus.REWARD, false);
 		return false;
 	}
-
-	@Override
-	public HashSet<Integer> getNpcIds() {
-		if (constantSpawns == null) {
-			constantSpawns = new HashSet<>();
-			constantSpawns.addAll(endNpcIds);
-		}
-		return constantSpawns;
-	}
 }
