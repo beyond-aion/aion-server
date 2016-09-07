@@ -42,6 +42,7 @@ import com.aionemu.gameserver.services.item.ItemInfoService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -394,7 +395,8 @@ public class DropService {
 				currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount);
 		} else if (!player.isInGroup2() && !player.isInAlliance2() && !requestedItem.isItemWonNotCollected() && dropNpc.getDistributionId() == 0) {
 			currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount);
-			uniqueDropAnnounce(player, requestedItem);
+			if (DropConfig.ENABLE_UNIQUE_DROP_ANNOUNCE && currentDropItemCount == 0)
+				uniqueDropAnnounce(player, requestedItem);
 		}
 
 		if (autoLoot) {
@@ -570,35 +572,18 @@ public class DropService {
 	}
 
 	private void uniqueDropAnnounce(final Player player, final DropItem requestedItem) {
-		if (DropConfig.ENABLE_UNIQUE_DROP_ANNOUNCE
-			&& !player.getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
-			final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(requestedItem.getDropTemplate().getItemId());
+		int itemId = requestedItem.getDropTemplate().getItemId();
+		if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality().getQualityId() >= ItemQuality.UNIQUE.getQualityId()) {
+			String winnerName = requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getName() : player.getName();
+			player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
 
-			if (itemTemplate.getItemQuality() == ItemQuality.UNIQUE || itemTemplate.getItemQuality() == ItemQuality.EPIC) {
-				final String lastGetName = requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getName() : player.getName();
-				final int pObjectId = player.getObjectId();
-				final int pRaceId = player.getRace().getRaceId();
-				final int pMapId = player.getWorldId();
-				final int pInstance = player.isInInstance() ? player.getInstanceId() : 0;
-
-				World.getInstance().forEachPlayer(new Visitor<Player>() {
-
-					@Override
-					public void visit(Player other) {
-
-						int oObjectId = other.getObjectId();
-						int oRaceId = other.getRace().getRaceId();
-						int oMapId = other.getWorldId();
-						int oInstance = other.isInInstance() ? other.getInstanceId() : 0;
-
-						if (oObjectId != pObjectId && other.isSpawned() && oRaceId == pRaceId && oMapId == pMapId && oInstance == pInstance) {
-							PacketSendUtility.sendPacket(other,
-								new SM_SYSTEM_MESSAGE(1390003, lastGetName, "[item: " + requestedItem.getDropTemplate().getItemId() + "]"));
-						}
+				@Override
+				public void visit(Player other) {
+					if (!player.equals(other) && other.getRace() == player.getRace()) {
+						PacketSendUtility.sendPacket(other, SM_SYSTEM_MESSAGE.STR_FORCE_ITEM_WIN(winnerName, ChatUtil.item(itemId)));
 					}
-
-				});
-			}
+				}
+			});
 		}
 	}
 

@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "quality")
 @XmlEnum
 public enum ItemQuality {
-	// TODO: Reorder and rename - requires ATracer parser update (?)
 
 	JUNK(0), // Junk - Gray
 	COMMON(1), // Common - White
@@ -17,13 +16,10 @@ public enum ItemQuality {
 	LEGEND(3), // Heroic - Blue
 	UNIQUE(4), // Fabled - Yellow
 	EPIC(5), // Eternal - Orange
-	MYTHIC(6); // Test - Purple
+	MYTHIC(6); // Mythic - Purple
 
 	private int qualityId;
 
-	/**
-	 * Constructors
-	 */
 	private ItemQuality(int qualityId) {
 		this.qualityId = qualityId;
 	}
@@ -34,5 +30,4 @@ public enum ItemQuality {
 	public int getQualityId() {
 		return qualityId;
 	}
-
 }

@@ -66,7 +66,7 @@ public class PacketSendUtility {
 		schedule(() -> {
 			if (npc.isSpawned())
 				broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, msgParams));
-		} , delay);
+		}, delay);
 	}
 
 	/**
@@ -273,7 +273,10 @@ public class PacketSendUtility {
 	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet, int delay) {
-		schedule(() -> object.getPosition().getWorldMapInstance().forEachPlayer(player -> sendPacket(player, packet)), delay);
+		schedule(() -> object.getPosition().getWorldMapInstance().forEachPlayer(player -> {
+			if (!object.equals(player))
+				sendPacket(player, packet);
+		}), delay);
 	}
 
 	/**
