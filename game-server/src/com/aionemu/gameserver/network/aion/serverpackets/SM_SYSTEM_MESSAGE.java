@@ -16476,8 +16476,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has acquired %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE(String value0, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1390002, value0, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE(String value0, int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390002, value0, new DescriptionId(nameId));
 	}
 
 	/**
@@ -17024,15 +17024,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are now the owner of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_ME(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1390180, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_ME(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390180, new DescriptionId(nameId));
 	}
 
 	/**
 	 * %0 is now the owner of %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_OTHER(String value0, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1390181, value0, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_OTHER(String value0, int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390181, value0, new DescriptionId(nameId));
 	}
 
 	/**
@@ -17297,8 +17297,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is one of the quality items waiting to be distributed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1390219, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390219, new DescriptionId(nameId));
 	}
 
 	/**
