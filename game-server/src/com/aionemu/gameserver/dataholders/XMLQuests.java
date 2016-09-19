@@ -55,9 +55,9 @@ public class XMLQuests {
 		if (data != null) {
 			questsById.clear();
 			data.forEach(quest -> questsById.put(quest.getId(), quest));
+			data.clear();
+			data = null;
 		}
-		data.clear();
-		data = null;
 	}
 
 	/**
