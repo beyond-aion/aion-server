@@ -411,7 +411,7 @@
 		</spawn>
 		<!-- Sealed Akaimum -->
 		<spawn npc_id="280973" respawn_time="100">
-			<spot x="392.2187" y="727.5579" z="188.14429" h="30"/>
+			<spot x="392.2187" y="727.5579" z="188.14429" h="30" walker_id="81A2D7233FBB15F8B91C5BCE9D48A4FA20A7A40E"/>
 		</spawn>
 		<!-- Second Silikor Guard -->
 		<spawn npc_id="280972" respawn_time="100">

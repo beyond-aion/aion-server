@@ -150,4 +150,15 @@
 		<routestep step="16" x="269.13" y="208.37" z="174.99982" />
 		<routestep step="17" x="271.58" y="208.43" z="174.99982" />
 	</walker_template>
+	<!-- Sealed Akaimum -->
+	<walker_template route_id="81A2D7233FBB15F8B91C5BCE9D48A4FA20A7A40E" pool="1">
+		<routestep step="1" z="188.14394" y="732.73047" x="404.26022"/>
+		<routestep step="2" z="188.92496" y="750.50867" x="414.79214"/>
+		<routestep step="3" z="188.9252" y="768.93964" x="411.94653"/>
+		<routestep step="4" z="188.92668" y="771.6343" x="393.93668"/>
+		<routestep step="5" z="188.92767" y="765.9283" x="372.32846"/>
+		<routestep step="6" z="188.92572" y="751.7711" x="370.23312"/>
+		<routestep step="7" z="188.14383" y="734.25366" x="372.08008"/>
+		<routestep step="8" z="188.14398" y="731.989" x="402.58774"/>
+	</walker_template>
 </npc_walker>

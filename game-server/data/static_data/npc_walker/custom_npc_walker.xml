@@ -823,17 +823,6 @@
 		<routestep step="4" z="885.4783" y="459.88834" x="502.14362"/>
 		<routestep step="5" z="885.1844" y="437.69382" x="505.69427" rest_time="20000"/>
 	</walker_template>
-	<!-- Sealed Akaimum -->
-	<walker_template route_id="sealedakaimum" pool="1">
-		<routestep step="1" z="188.14394" y="732.73047" x="404.26022"/>
-		<routestep step="2" z="188.92496" y="750.50867" x="414.79214"/>
-		<routestep step="3" z="188.9252" y="768.93964" x="411.94653"/>
-		<routestep step="4" z="188.92668" y="771.6343" x="393.93668"/>
-		<routestep step="5" z="188.92767" y="765.9283" x="372.32846"/>
-		<routestep step="6" z="188.92572" y="751.7711" x="370.23312"/>
-		<routestep step="7" z="188.14383" y="734.25366" x="372.08008"/>
-		<routestep step="8" z="188.14398" y="731.989" x="402.58774"/>
-	</walker_template>
 	<!-- Shugo Imperial Tomb -->
 	<!--Level 1 Side 1-->
 	<walker_template route_id="3005600001" pool="1">
