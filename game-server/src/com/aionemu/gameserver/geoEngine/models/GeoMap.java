@@ -171,14 +171,12 @@ public class GeoMap extends Node {
 		float zChecked2 = 0;
 		if (!fly && changeDirection) {
 			zChecked1 = z;
-			z = getZ(x, y, z + 2, instanceId);
+			z = getZ(x, y, z, instanceId);
 		}
-		z += 1f;
-		targetZ += 1f;
 		Vector3f start = new Vector3f(x, y, z);
 		Vector3f end = new Vector3f(targetX, targetY, targetZ);
-		Vector3f pos = new Vector3f(x, y, z);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
+		Vector3f pos = new Vector3f(x, y, z + 1);
+		Vector3f dir = new Vector3f(targetX, targetY, targetZ + 1);
 
 		CollisionResults results = new CollisionResults(intentions, false, instanceId);
 
@@ -186,7 +184,7 @@ public class GeoMap extends Node {
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
 		r.setLimit(limit);
-		Vector3f terrain = calculateTerrainCollision(start.x, start.y, start.z, end.x, end.y, end.z, r);
+		Vector3f terrain = calculateTerrainCollision(start.x, start.y, end.x, end.y, r);
 		if (terrain != null) {
 			CollisionResult result = new CollisionResult(terrain, terrain.distance(pos));
 			results.addCollision(result);
@@ -198,11 +196,11 @@ public class GeoMap extends Node {
 		if (results.size() == 0) {
 			if (fly)
 				return end;
-			if (zChecked1 > 0 && targetX == x && targetY == y && targetZ - 1f == zChecked1)
-				geoZ = z - 1f;
+			if (zChecked1 > 0 && targetX == x && targetY == y && targetZ == zChecked1)
+				geoZ = z;
 			else {
 				zChecked2 = targetZ;
-				geoZ = getZ(targetX, targetY, targetZ + 2, instanceId);
+				geoZ = getZ(targetX, targetY, targetZ, instanceId);
 			}
 			if (Math.abs(geoZ - targetZ) < start.distance(end)) {
 				return end.setZ(geoZ);
@@ -217,11 +215,11 @@ public class GeoMap extends Node {
 		contactPoint = contactPoint.subtract(dir);
 		if (!fly && changeDirection) {
 			if (zChecked1 > 0 && contactPoint.x == x && contactPoint.y == y && contactPoint.z == zChecked1)
-				contactPoint.z = z - 1f;
+				contactPoint.z = z;
 			else if (zChecked2 > 0 && contactPoint.x == targetX && contactPoint.y == targetY && contactPoint.z == zChecked2)
 				contactPoint.z = geoZ;
 			else
-				contactPoint.z = getZ(contactPoint.x, contactPoint.y, contactPoint.z + 2, instanceId);
+				contactPoint.z = getZ(contactPoint.x, contactPoint.y, contactPoint.z, instanceId);
 		}
 		if (!fly && Math.abs(start.z - contactPoint.z) > distance)
 			return start;
@@ -232,14 +230,10 @@ public class GeoMap extends Node {
 	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection,
 		boolean fly, int instanceId, byte intentions) {
 		if (!fly && changeDirection) {
-			z = getZ(x, y, z + 2, instanceId);
+			z = getZ(x, y, z, instanceId);
 		}
-		z += 1f;
-		targetZ += 1f;
-		Vector3f start = new Vector3f(x, y, z);
-		Vector3f end = new Vector3f(targetX, targetY, targetZ);
-		Vector3f pos = new Vector3f(x, y, z);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
+		Vector3f pos = new Vector3f(x, y, z + 1);
+		Vector3f dir = new Vector3f(targetX, targetY, targetZ + 1);
 
 		CollisionResults results = new CollisionResults(intentions, false, instanceId);
 
@@ -247,7 +241,7 @@ public class GeoMap extends Node {
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
 		r.setLimit(limit);
-		Vector3f terrain = calculateTerrainCollision(start.x, start.y, start.z, end.x, end.y, end.z, r);
+		Vector3f terrain = calculateTerrainCollision(x, y, targetX, targetY, r);
 		if (terrain != null) {
 			CollisionResult result = new CollisionResult(terrain, terrain.distance(pos));
 			results.addCollision(result);
@@ -257,7 +251,7 @@ public class GeoMap extends Node {
 		return results;
 	}
 
-	private Vector3f calculateTerrainCollision(float x, float y, float z, float targetX, float targetY, float targetZ, Ray ray) {
+	private Vector3f calculateTerrainCollision(float x, float y, float targetX, float targetY, Ray ray) {
 
 		float x2 = targetX - x;
 		float y2 = targetY - y;
