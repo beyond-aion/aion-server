@@ -737,7 +737,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053295" name="Empyrean Plume Chest" />

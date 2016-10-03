@@ -3,9 +3,9 @@ package ai.instance.linkgateFoundry;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
@@ -26,51 +26,52 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		switchWay(player, dialogId);
+		selectBoss(player, dialogId);
 		return true;
 	}
 
-	private void switchWay(Player player, int dialogId) {
+	private void selectBoss(Player player, int dialogId) {
+		int keyId = 185000196;
+		int minKeyCount, bossId, msgId;
+		boolean spawnGuardian;
 		switch (DialogAction.getByActionId(dialogId)) {
 			case SELECT_BOSS_LEVEL2:
-				checkKeys(player, 1);
+				minKeyCount = 1;
+				bossId = 234990;
+				msgId = 1402440;
+				spawnGuardian = true;
 				break;
 			case SELECT_BOSS_LEVEL3:
-				checkKeys(player, 5);
+				minKeyCount = 5;
+				bossId = 233898;
+				msgId = 1402441;
+				spawnGuardian = true;
 				break;
 			case SELECT_BOSS_LEVEL4:
-				checkKeys(player, 7);
-				break;
-		}
-	}
-
-	private void checkKeys(Player player, long keyCount) {
-		Item keys = player.getInventory().getFirstItemByItemId(185000196);
-		int bossId = 0;
-		int msg = 0;
-		if (keys != null && keys.getItemCount() >= keyCount) {
-			if (keyCount == 1) {
-				bossId = 234990;
-				msg = 1402440;
-				spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);
-			} else if (keyCount == 5) {
-				bossId = 234542;
-				msg = 1402441;
-				spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);
-			} else if (keyCount == 7) {
+				minKeyCount = 7;
 				bossId = 234991;
-				msg = 1402442;
-			}
-			player.getInventory().decreaseByItemId(185000196, keys.getItemCount());
-			spawn(bossId, 252.2439f, 259.3866f, 312.3536f, (byte) 41);
-			spawn(702592, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0, 51);
-			getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().onDelete();
-			TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			PacketSendUtility.broadcastToMap(getOwner(), msg);
-			AI2Actions.deleteOwner(this);
-		} else {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+				msgId = 1402442;
+				spawnGuardian = false;
+				break;
+			default:
+				return;
 		}
+		long keyCount = player.getInventory().getItemCountByItemId(keyId);
+		if (keyCount < minKeyCount) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
+			return;
+		}
+		player.getInventory().decreaseByItemId(keyId, keyCount);
+		// replace portal
+		AI2Actions.deleteOwner(this);
+		spawn(702592, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0, 51);
+		// spawn boss and guardian
+		PacketSendUtility.broadcastToMap(getOwner(), msgId);
+		getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().onDelete(); // default belsagos spawn (visible from outside)
+		spawn(bossId, 252.2439f, 259.3866f, 312.3536f, (byte) 41);
+		if (spawnGuardian)
+			spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);
+		// teleport player
+		TeleportService2.teleportTo(player, getOwner().getWorldId(), 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

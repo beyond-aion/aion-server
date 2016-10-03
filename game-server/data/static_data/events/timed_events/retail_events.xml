@@ -3833,7 +3833,7 @@
 					<!-- -->
 					<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
 					<gd_npc npc_id="234990" name="Wounded Belsagos" />
-					<gd_npc npc_id="234542" name="Volatile Belsagos" />
+					<gd_npc npc_id="233898" name="Volatile Belsagos" />
 					<gd_npc npc_id="234991" name="Furious Belsagos" />
 					<!-- Lunatic Queen Modor -->
 					<gd_npc npc_id="284858" name="Boss" />

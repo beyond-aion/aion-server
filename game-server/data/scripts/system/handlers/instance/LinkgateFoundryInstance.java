@@ -96,8 +96,8 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 					case 20:
 						sendMsg(1402461);
 						for (Npc npc : instance.getNpcs()) {
-							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 && npc.getNpcId() != 234542 //belsagos does not despawn
-								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { //teleport device does not despawn
+							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
+								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { // teleport device does not despawn
 								npc.getController().onDelete();
 							}
 						}

@@ -17,7 +17,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 			<gd_npc npc_id="234990" name="Wounded Belsagos" />
 			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
@@ -30,7 +30,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 			<gd_npc npc_id="234990" name="Wounded Belsagos" />
 			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
@@ -43,7 +43,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 			<gd_npc npc_id="234990" name="Wounded Belsagos" />
 			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
@@ -56,7 +56,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 			<gd_npc npc_id="234991" name="Furious Belsagos" />
 		</gd_npcs>
 		<gd_items>
@@ -70,7 +70,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="234991" name="Furious Belsagos" />
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="169405254" name="Earth Trace" />
@@ -117,7 +117,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000236" name="Blood Mark" />
@@ -139,7 +139,7 @@
 			<gd_map map_id="301270000" name="Linkgate_Foundry" />
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="234542" name="Volatile Belsagos" />
+			<gd_npc npc_id="233898" name="Volatile Belsagos" />
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053332" name="Linkgate Foundry Heavy Ancient Manastone Bundle" />
