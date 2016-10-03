@@ -307,10 +307,8 @@ public class MathUtil {
 		float dx = (object2.getX() - object1.getX());
 		float dy = (object2.getY() - object1.getY());
 		float distSquared = dx * dx + dy * dy;
-		if (!centerToCenter) {
-			float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
-			distSquared -= offset * offset;
-		}
+		if (!centerToCenter)
+			range += object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
 		return distSquared < range * range;
 	}
 
