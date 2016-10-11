@@ -7,8 +7,8 @@
 	<instance_exit instance_id="300210000" exit_world="110070000" race="ELYOS" x="444.95486" y="250.77603" z="126.97165"/>
 	<instance_exit instance_id="300210000" exit_world="120080000" race="ASMODIANS" x="549.487" y="202.21657" z="93.479576" h="29"/>
 	<!-- Nochsana Training Camp -->
-	<instance_exit instance_id="300030000" exit_world="400010000" race="ELYOS" x="2890" y="754" z="1498.5786"/>
-	<instance_exit instance_id="300030000" exit_world="400010000" race="ASMODIANS" x="876.7211" y="3079.2874" z="1644.5786"/>
+	<instance_exit instance_id="300030000" exit_world="210020000" race="ELYOS" x="330" y="2732.1643" z="263.4721"/>
+	<instance_exit instance_id="300030000" exit_world="220020000" race="ASMODIANS" x="264.6885" y="2366.3713" z="445.1222"/>
 	<!-- Dark Poeta -->
 	<instance_exit instance_id="300040000" exit_world="210040000" race="ELYOS" x="2019.51" y="1467.34" z="127.19"/>
 	<instance_exit instance_id="300040000" exit_world="220040000" race="ASMODIANS" x="2420.12" y="2061.31" z="579.7"/>
