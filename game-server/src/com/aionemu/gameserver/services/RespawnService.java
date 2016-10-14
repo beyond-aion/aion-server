@@ -23,7 +23,6 @@ import com.aionemu.gameserver.world.World;
 public class RespawnService {
 
 	public static final int IMMEDIATE_DECAY = 2 * 1000;
-	public static final int WITHOUT_DROP_DECAY = (int) (1.5 * 60 * 1000);
 	public static final int WITH_DROP_DECAY = 5 * 60 * 1000;
 
 	/**
@@ -34,10 +33,8 @@ public class RespawnService {
 		int decayInterval;
 		Set<DropItem> drop = DropRegistrationService.getInstance().getCurrentDropMap().get(npc.getObjectId());
 
-		if (drop == null)
+		if (drop == null || drop.isEmpty())
 			decayInterval = IMMEDIATE_DECAY;
-		else if (drop.isEmpty())
-			decayInterval = WITHOUT_DROP_DECAY;
 		else
 			decayInterval = WITH_DROP_DECAY;
 
