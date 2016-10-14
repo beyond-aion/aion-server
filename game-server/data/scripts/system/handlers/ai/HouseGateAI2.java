@@ -15,7 +15,6 @@ import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -71,40 +70,29 @@ public class HouseGateAI2 extends NpcAI2 {
 					int address = HousingService.getInstance().getPlayerAddress(creatorId);
 					house = HousingService.getInstance().getHouseByAddress(address);
 				}
-				int instanceOwnerId = responder.getPosition().getWorldMapInstance().getOwnerId();
 
 				int exitMapId = 0;
 				float x = 0, y = 0, z = 0;
 				byte heading = 0;
 				int instanceId = 0;
-
-				if (instanceOwnerId > 0) { // leaving
-					house = HousingService.getInstance().getPlayerStudio(instanceOwnerId);
-					exitMapId = house.getAddress().getExitMapId();
-					instanceId = World.getInstance().getWorldMap(exitMapId).getMainWorldMapInstance().getInstanceId();
-					x = house.getAddress().getExitX();
-					y = house.getAddress().getExitY();
-					z = house.getAddress().getExitZ();
-				} else { // entering house
-					exitMapId = house.getAddress().getMapId();
-					if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // entering studio
-						WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
-						if (instance == null) {
-							instance = InstanceService.getNextAvailableInstance(exitMapId, creatorId);
-							InstanceService.registerPlayerWithInstance(instance, responder);
-						}
-						instanceId = instance.getInstanceId();
-					} else { // entering ordinary house
-						instanceId = house.getInstanceId();
+				exitMapId = house.getAddress().getMapId();
+				if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // entering studio
+					WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
+					if (instance == null) {
+						instance = InstanceService.getNextAvailableInstance(exitMapId, creatorId);
+						InstanceService.registerPlayerWithInstance(instance, responder);
 					}
-					x = house.getAddress().getX();
-					y = house.getAddress().getY();
-					z = house.getAddress().getZ();
-					if (exitMapId == 710010000) // pernon apartment
-						heading = 36;
-					else if (exitMapId == 720010000) // oriel apartment
-						heading = 63;
+					instanceId = instance.getInstanceId();
+				} else { // entering ordinary house
+					instanceId = house.getInstanceId();
 				}
+				x = house.getAddress().getX();
+				y = house.getAddress().getY();
+				z = house.getAddress().getZ();
+				if (exitMapId == 710010000) // pernon apartment
+					heading = 36;
+				else if (exitMapId == 720010000) // oriel apartment
+					heading = 63;
 				boolean canReturnToBattle = true;
 				for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
 					if (!zone.canReturnToBattle()) {
