@@ -13,6 +13,7 @@ import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.world.zone.ZoneService;
  * @modified Neon
  */
 public class GeoWorldLoader {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
 
 	private static String GEO_DIR = "data/geo/";
@@ -68,7 +68,7 @@ public class GeoWorldLoader {
 				short namelenght = geo.getShort();
 				byte[] nameByte = new byte[namelenght];
 				geo.get(nameByte);
-				String name = new String(nameByte).intern();
+				String name = new String(nameByte).replace("/", "\\").toLowerCase().intern();
 				Node node = new Node(DEBUG ? name : null);
 				byte intentions = 0;
 				byte singleChildMaterialId = -1;
@@ -106,8 +106,7 @@ public class GeoWorldLoader {
 							continue;
 						// Ignore mesh for now, should set sizes to 0 in geodata parser
 						geom = new DoorGeometry(name);
-					}
-					else {
+					} else {
 						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
 						geom = new Geometry(null, m);
 						if (mtl != null || m.getMaterialId() == 11) {
@@ -116,8 +115,7 @@ public class GeoWorldLoader {
 						if (modelCount == 1) {
 							geom.setName(name);
 							singleChildMaterialId = geom.getMaterialId();
-						}
-						else
+						} else
 							geom.setName(("child" + c + "_" + name).intern());
 						node.attachChild(geom);
 					}
@@ -134,7 +132,7 @@ public class GeoWorldLoader {
 
 	}
 
-	public static boolean loadWorld(int worldId, Map<String, Spatial> models, GeoMap map) throws IOException {
+	public static boolean loadWorld(int worldId, Map<String, Spatial> models, GeoMap map, Set<String> missingMeshes, List<String> missingDoors) {
 		File geoFile = new File(GEO_DIR + worldId + ".geo");
 		FileChannel roChannel = null;
 		MappedByteBuffer geo = null;
@@ -157,7 +155,7 @@ public class GeoWorldLoader {
 				int nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
-				String name = new String(nameByte);
+				String name = new String(nameByte).replace("/", "\\").toLowerCase().intern();
 				Vector3f loc = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
 				float[] matrix = new float[9];
 				for (int i = 0; i < 9; i++)
@@ -165,28 +163,26 @@ public class GeoWorldLoader {
 				float scale = geo.getFloat();
 				Matrix3f matrix3f = new Matrix3f();
 				matrix3f.set(matrix);
-				Spatial node = models.get(name.toLowerCase().intern());
-				try {
-					if (node != null) {
+				Spatial node = models.get(name);
+				if (node != null) {
+					try {
 						Spatial nodeClone = node;
 						if (node instanceof DoorGeometry) {
 							try {
 								nodeClone = node.clone();
-							}
-							catch (CloneNotSupportedException e) {
+							} catch (CloneNotSupportedException e) {
 								e.printStackTrace();
 							}
-							if (createDoors(nodeClone, worldId, matrix3f, loc, scale)) {
+							if (createDoors(nodeClone, worldId, matrix3f, loc, scale))
 								map.attachChild(nodeClone);
-							}
-						}
-						else {
+							else
+								missingDoors.add(nodeClone.getName() + " (map=" + worldId + "; pos=" + loc + ")");
+						} else {
 							nodeClone = attachChild(map, node, matrix3f, loc, scale);
 							List<Spatial> children = ((Node) node).descendantMatches("child\\d+_" + name.replace("\\", "\\\\"));
 							if (children.size() == 0) {
 								createZone(nodeClone, worldId, 0);
-							}
-							else {
+							} else {
 								for (int c = 0; c < children.size(); c++) {
 									Spatial child = children.get(c);
 									nodeClone = attachChild(map, child, matrix3f, loc, scale);
@@ -194,14 +190,17 @@ public class GeoWorldLoader {
 								}
 							}
 						}
+					} catch (Exception e) {
+						log.error("", e);
 					}
-				}
-				catch (Exception e) {
-					log.error("", e);
+				} else {
+					missingMeshes.add(name);
 				}
 			}
 			destroyDirectByteBuffer(geo);
 			map.updateModelBound();
+		} catch (IOException e) {
+			return false;
 		}
 		return true;
 	}
@@ -210,8 +209,7 @@ public class GeoWorldLoader {
 		Spatial nodeClone = node;
 		try {
 			nodeClone = node.clone();
-		}
-		catch (CloneNotSupportedException e) {
+		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 		nodeClone.setTransform(matrix, location, scale);
@@ -225,8 +223,7 @@ public class GeoWorldLoader {
 			return;
 		}
 		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (node.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
-			BoundingVolume bv = node.getWorldBound();
-			int regionId = getVectorHash(bv.getCenter().x, bv.getCenter().y, bv.getCenter().z);
+			int regionId = getVectorHash(node.getWorldBound().getCenter());
 			int index = node.getName().lastIndexOf('\\');
 			int dotIndex = node.getName().lastIndexOf('.');
 			String zoneName = node.getName().substring(index + 1, dotIndex).toUpperCase();
@@ -238,8 +235,7 @@ public class GeoWorldLoader {
 				zoneName += "_" + regionId;
 				node.setName(zoneName);
 				ZoneService.getInstance().createMaterialZoneTemplate(node, worldId, node.getMaterialId(), true);
-			}
-			else {
+			} else {
 				node.setName(zoneName);
 				ZoneService.getInstance().createMaterialZoneTemplate(node, regionId, worldId, node.getMaterialId());
 			}
@@ -259,7 +255,8 @@ public class GeoWorldLoader {
 		DoorGeometry geom = (DoorGeometry) node;
 
 		StaticDoorWorld worldDoors = DataManager.STATICDOOR_DATA.getStaticDoorWorlds(worldId);
-
+		if (worldDoors == null)
+			return false;
 
 		for (StaticDoorTemplate template : worldDoors.getStaticDoors()) {
 			BoundingBox boundingBox = template.getBoundingBox();
@@ -275,8 +272,7 @@ public class GeoWorldLoader {
 					templatePos = new Vector3f(template.getX(), template.getY(), template.getZ());
 					if (location.distance(templatePos) > 1f)
 						continue;
-				}
-				else
+				} else
 					continue;
 			}
 
@@ -284,38 +280,36 @@ public class GeoWorldLoader {
 			Box boxMesh = new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f()));
 			geom.setMesh(boxMesh);
 			// Assign flags if they are missing in geo (geo bugs)
-			geom.setCollisionFlags((short)((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
+			geom.setCollisionFlags((short) ((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
 			break;
 		}
 
-		if (geom.getMesh() == null) {
-			log.warn("No template for geo door " + node.getName() + " (map=" + worldId + "; pos=" + location.toString() + ")");
+		if (geom.getMesh() == null)
 			return false;
-		}
 
 		// Here if geo has a real mesh, it expands as big as it should be, so replacement falls back to geo mesh
 		node.updateModelBound();
-		BoundingVolume bv = node.getWorldBound();
-		int regionId = getVectorHash(bv.getCenter().x, bv.getCenter().y, bv.getCenter().z);
+		int regionId = getVectorHash(node.getWorldBound().getCenter());
 		int index = node.getName().lastIndexOf('\\');
 		// Create a unique name for doors
-		String doorName = worldId + "_" + "DOOR" + "_" + regionId + "_" + node.getName().substring(index + 1).toUpperCase();
+		String doorName = worldId + "_DOOR_" + regionId + "_" + node.getName().substring(index + 1).toUpperCase();
 		node.setName(doorName);
 		return true;
 	}
 
 	/**
 	 * Hash formula from paper <a href="http://www.beosil.com/download/CollisionDetectionHashing_VMV03.pdf">
-	 * Optimized Spatial Hashing for Collision Detection of Deformable Objects</a><br> Hash table size 900000,
-	 * the higher value, more precision
+	 * Optimized Spatial Hashing for Collision Detection of Deformable Objects</a> found
+	 * <a href="http://stackoverflow.com/questions/5928725/hashing-2d-3d-and-nd-vectors">here</a>.<br>
+	 * Hash table size is 700001. The higher value, the more precision (works most efficiently if it's a prime number).
 	 */
-	private static int getVectorHash(float x, float y, float z) {
-		long xIntBits = Float.floatToIntBits(x);
-		long yIntBits = Float.floatToIntBits(y);
-		long zIntBits = Float.floatToIntBits(z);
-		return (int) ((xIntBits * 73856093 ^ yIntBits * 19349663 ^ zIntBits * 83492791) % 900000);
+	private static int getVectorHash(Vector3f location) {
+		long xIntBits = Float.floatToIntBits(location.x);
+		long yIntBits = Float.floatToIntBits(location.y);
+		long zIntBits = Float.floatToIntBits(location.z);
+		return (int) ((xIntBits * 73856093 ^ yIntBits * 19349669 ^ zIntBits * 83492791) % 700001);
 	}
-	
+
 	private static void destroyDirectByteBuffer(ByteBuffer toBeDestroyed) {
 		if (!toBeDestroyed.isDirect())
 			return;

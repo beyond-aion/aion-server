@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastSet;
 
 /**
  * @author ATracer
@@ -38,24 +41,28 @@ public class RealGeoData implements GeoData {
 	protected void loadWorldMaps(Map<String, Spatial> models) {
 		log.info("Loading geo maps..");
 		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
-		List<Integer> mapsWithErrors = new ArrayList<>();
+		Set<String> missingMeshes = new FastSet<>();
+		List<String> missingDoors = new ArrayList<>();
+		List<Integer> missingGeos = new ArrayList<>();
 
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			GeoMap geoMap = new GeoMap(Integer.toString(map.getMapId()), map.getWorldSize());
-			try {
-				if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap)) {
-					geoMaps.put(map.getMapId(), geoMap);
-				}
-			} catch (Throwable t) {
-				mapsWithErrors.add(map.getMapId());
+
+			if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap, missingMeshes, missingDoors)) {
+				geoMaps.put(map.getMapId(), geoMap);
+			} else {
+				missingGeos.add(map.getMapId());
 				geoMaps.put(map.getMapId(), DummyGeoData.DUMMY_MAP);
 			}
 			ConsoleUtil.increaseAndPrintProgress();
 		}
 
-		if (mapsWithErrors.size() > 0) {
-			log.warn("Some maps were not loaded correctly and reverted to dummy implementation:\n" + mapsWithErrors);
-		}
+		if (missingMeshes.size() > 0)
+			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
+		if (missingDoors.size() > 0)
+			log.warn(missingDoors.size() + " door templates are missing:\n" + missingDoors.stream().sorted().collect(Collectors.joining("\n")));
+		if (missingGeos.size() > 0)
+			log.warn(missingGeos.size() + " maps are missing and reverted to dummy implementation:\n" + missingGeos);
 	}
 
 	protected Map<String, Spatial> loadMeshes() {
