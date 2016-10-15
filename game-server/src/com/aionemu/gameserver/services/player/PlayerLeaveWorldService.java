@@ -144,7 +144,7 @@ public class PlayerLeaveWorldService {
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
-		player.getController().onDelete();
+		player.getController().delete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
 

@@ -98,7 +98,7 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 		}
 
 		if (morphed) {
-			getOwner().getController().onDelete();
+			getOwner().getController().delete();
 		} else {
 			started.set(false);
 		}

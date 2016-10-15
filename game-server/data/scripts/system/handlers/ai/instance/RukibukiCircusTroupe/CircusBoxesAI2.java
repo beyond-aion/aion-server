@@ -60,7 +60,7 @@ public class CircusBoxesAI2 extends NpcAI2 {
 							default:
 								return;
 						}
-						getOwner().getController().onDelete();
+						getOwner().getController().delete();
 					}
 				}
 			}
