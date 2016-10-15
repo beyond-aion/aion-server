@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai2.AI2Request;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -22,7 +23,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 @AIName("fortressgate")
 public class SiegeFortressGateAI2 extends NpcAI2 {
 
-	private String doorName;
+	private String doorName = null;
 
 	@Override
 	protected void handleDialogStart(Player player) {
@@ -57,19 +58,20 @@ public class SiegeFortressGateAI2 extends NpcAI2 {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), "ab_castledoor_100.cgf", getOwner().getX(), getOwner().getY(),
-			getOwner().getZ());
-		if (doorName != null)
-			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, false);
-		else
-			LoggerFactory.getLogger(SiegeFortressGateAI2.class).warn("Couldn't find siege door name for position of " + getOwner());
+		if (GeoDataConfig.GEO_DOORS_ENABLE) {
+			doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), "ab_castledoor_100.cgf", getOwner().getX(), getOwner().getY(),
+				getOwner().getZ());
+			if (doorName != null)
+				GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, false);
+			else
+				LoggerFactory.getLogger(SiegeFortressGateAI2.class).warn("Couldn't find siege door name for position of " + getOwner());
+		}
 	}
 
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		if (doorName != null) {
+		if (doorName != null)
 			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, true);
-		}
 	}
 }
