@@ -33,7 +33,7 @@ public class GarnonQ20060AI2 extends NpcAI2 {
 			@Override
 			public void run() {
 				spawn(800020, 442.279f, 464.349f, 341.520f, (byte) 20);
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 			}
 		}, 60000 * 3);
 	}

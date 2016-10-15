@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
@@ -50,8 +49,6 @@ public class GeoMap extends Node {
 	}
 
 	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
-		if (!GeoDataConfig.GEO_DOORS_ENABLE)
-			return null;
 		String mesh = meshFile.toUpperCase();
 		Vector3f templatePoint = new Vector3f(x, y, z);
 		float distance = Float.MAX_VALUE;

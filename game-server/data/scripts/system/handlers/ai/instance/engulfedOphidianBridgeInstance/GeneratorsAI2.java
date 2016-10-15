@@ -74,14 +74,14 @@ public class GeneratorsAI2 extends ActionItemNpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 
 }

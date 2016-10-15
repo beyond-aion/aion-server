@@ -64,7 +64,7 @@ public class _2136TheLostAxe extends QuestHandler {
 
 					@Override
 					public void run() {
-						npc.getController().onDelete();
+						npc.getController().delete();
 					}
 				}, 10000);
 				return sendQuestEndDialog(env);

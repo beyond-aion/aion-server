@@ -178,7 +178,7 @@ public class DropService {
 		Npc npc = (Npc) World.getInstance().findVisibleObject(npcId);
 		if (npc != null) {
 			if (dropItems == null || dropItems.isEmpty()) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 				return;
 			}
 
@@ -491,7 +491,7 @@ public class DropService {
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_LOOT, 0, npcObjectId), true);
 			}
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

@@ -37,7 +37,7 @@ public class NpcObject extends HouseObject<HousingNpc> {
 	public synchronized void onDespawn() {
 		super.onDespawn();
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 			npc = null;
 		}
 	}

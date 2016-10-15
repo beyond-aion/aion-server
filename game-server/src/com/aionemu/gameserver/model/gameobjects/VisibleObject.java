@@ -148,7 +148,7 @@ public abstract class VisibleObject extends AionObject {
 	 * @return
 	 */
 	public boolean isInWorld() {
-		return World.getInstance().findVisibleObject(getObjectId()) != null;
+		return World.getInstance().isInWorld(getObjectId());
 	}
 
 	/**

@@ -101,7 +101,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
 	protected void despawnNpc(Npc npc) {
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

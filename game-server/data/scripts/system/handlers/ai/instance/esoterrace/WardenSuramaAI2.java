@@ -97,7 +97,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 	private void despawnNpc(int npcId) {
 		Npc npc = getPosition().getWorldMapInstance().getNpc(npcId);
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

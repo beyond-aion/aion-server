@@ -32,14 +32,14 @@ public class ConquestOfferingBuffNpcAI2 extends ActionItemNpcAI2 {
 			sendTalkedMsg();
 			int skillId = 21924 + Rnd.get(0, 3);
 			SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, player).useSkill();
-			getOwner().getController().onDelete();
+			getOwner().getController().delete();
 		}
 	}
 
 	private void startDespawnTask() {
 		despawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			if (getOwner() != null)
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 		}, 65000);
 	}
 

@@ -55,7 +55,7 @@ public class _2284EscapingAsmodae extends QuestHandler {
 					if (env.getVisibleObject() instanceof Npc) {
 						targetId = ((Npc) env.getVisibleObject()).getNpcId();
 						Npc npc = (Npc) env.getVisibleObject();
-						npc.getController().onDelete();
+						npc.getController().delete();
 						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 798041, 2553.9f, 916.9f, 311.8f, (byte) 82);
 						return defaultCloseDialog(env, 0, 1);
 					}

@@ -36,9 +36,9 @@ public class FlameVentAI2 extends ActionItemNpcAI2 {
 
 				@Override
 				public void run() {
-					repelling1.getController().delete();
-					fx1.getController().delete();
-					fx2.getController().delete();
+					repelling1.getController().onDelete();
+					fx1.getController().onDelete();
+					fx2.getController().onDelete();
 				}
 
 			}, 60000);
@@ -59,9 +59,9 @@ public class FlameVentAI2 extends ActionItemNpcAI2 {
 
 				@Override
 				public void run() {
-					repelling2.getController().delete();
-					fx3.getController().delete();
-					fx4.getController().delete();
+					repelling2.getController().onDelete();
+					fx3.getController().onDelete();
+					fx4.getController().onDelete();
 				}
 
 			}, 60000);

@@ -76,12 +76,12 @@ public class AnohasSwordAI2 extends NpcAI2 {
 
 				@Override
 				public void died(Creature creature) {
-					flag.getController().onDelete();
+					flag.getController().delete();
 				}
 			});
 			World.getInstance().forEachPlayer(receiver -> {
 				PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
-				swordController.onDelete(); // despawn sword
+				swordController.delete(); // despawn sword
 				if (receiver.getRace() == raceSummoned)
 					startQuest(receiver, raceSummoned == Race.ELYOS ? 13817 : 23817);
 				else

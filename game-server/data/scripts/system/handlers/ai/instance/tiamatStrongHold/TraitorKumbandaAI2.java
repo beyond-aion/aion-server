@@ -52,7 +52,7 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

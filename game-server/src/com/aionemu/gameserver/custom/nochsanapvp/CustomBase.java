@@ -151,7 +151,7 @@ public class CustomBase implements Comparable<CustomBase> {
 		for (Npc npc : spawned) {
 			if (npc != null) {
 				if (npc.getSpawn().getHandlerType() != null || npc.getRace() != owner) {
-					npc.getController().onDelete();
+					npc.getController().delete();
 				}
 			}
 		}
@@ -167,7 +167,7 @@ public class CustomBase implements Comparable<CustomBase> {
 		}
 		AbstractAI ai = (AbstractAI) boss.getAi2();
 		ai.removeEventListener(bossDeathListener);
-		boss.getController().onDelete();
+		boss.getController().delete();
 	}
 
 	protected void addBossListeners() {

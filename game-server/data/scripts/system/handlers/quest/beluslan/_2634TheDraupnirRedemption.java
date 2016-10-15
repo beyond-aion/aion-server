@@ -64,7 +64,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 						}
 						case SETPRO1: {
 							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().onDelete();
+							npc.getController().delete();
 							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(),
 								player.getZ(), (byte) 0);
 							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor));

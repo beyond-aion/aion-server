@@ -278,7 +278,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 
 		});
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -414,7 +414,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 
 		if (points > 0) {
 			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 
@@ -440,7 +440,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					break;
 			}
 			updatePoints(-5000, npc.getRace(), true, 0, null);
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 
@@ -482,7 +482,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					break;
 			}
 			updatePoints(5000, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

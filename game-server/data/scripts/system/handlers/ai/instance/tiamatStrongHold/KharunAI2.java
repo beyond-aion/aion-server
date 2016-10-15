@@ -45,7 +45,7 @@ public class KharunAI2 extends NpcAI2 {
 				PacketSendUtility.broadcastMessage(Kharun, 1500597, 1000);
 				PacketSendUtility.broadcastMessage(Kharun, 1500598, 5000);
 				strongholdDoor.getController().die();
-				aethericField.getController().onDelete();
+				aethericField.getController().delete();
 			}
 		}, 3000);
 	}

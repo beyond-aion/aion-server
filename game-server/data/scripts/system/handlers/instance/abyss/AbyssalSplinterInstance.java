@@ -68,7 +68,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 
 					}, 60000);
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 281907:
 				Npc ebonsoul = getNpc(216949);
@@ -79,7 +79,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 						break;
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 281908:
 				Npc rukril = getNpc(216948);
@@ -90,7 +90,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 						break;
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 216960: // Yamennes Painflare
 			case 216952: // Yamennes Blindsight
@@ -102,7 +102,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 700955: // HugeAetherFragment
 				destroyedFragments++;
 				onFragmentKill();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 281909:
 				if (++killedPazuzuWorms == 5) {
@@ -113,13 +113,13 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 						pazuzu.getEffectController().removeEffect(19291);
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 282014:
 			case 282015:
 			case 282131:// Spawn Gate
 				removeSummoned();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -226,7 +226,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

@@ -201,7 +201,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 						PacketSendUtility.broadcastMessage(kahrun, 1500599, 1000);
 						PacketSendUtility.broadcastMessage(kahrun, 1500600, 5000);
 					}
-					npc.getController().onDelete();
+					npc.getController().delete();
 				}
 			}, 13000);
 		}

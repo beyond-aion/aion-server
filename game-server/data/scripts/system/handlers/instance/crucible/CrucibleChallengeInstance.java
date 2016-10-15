@@ -352,7 +352,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					if (poppy != null) {
 						sendMsg(1401072);
 						sp(218571, poppy.getX(), poppy.getY(), poppy.getZ(), (byte) 0, 0);
-						poppy.getController().onDelete();
+						poppy.getController().delete();
 					}
 				}
 				break;

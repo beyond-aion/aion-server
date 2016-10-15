@@ -94,7 +94,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 				doors.get(3).setOpen(true);
 				sendMsg(1402801);
 				TeleportService2.teleportTo(player, mapId, instanceId, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 702715:
 				TeleportService2.teleportTo(player, mapId, instanceId, 236.1f, 488.86f, 152f, (byte) 25, TeleportAnimation.FADE_OUT_BEAM);
@@ -112,7 +112,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402804), 175000));
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			instance.getNpcs().stream().filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 ||
-					npc.getNpcId() == 702700 || npc.getNpcId() == 702701)).forEach(npc -> npc.getController().onDelete());
+					npc.getNpcId() == 702700 || npc.getNpcId() == 702701)).forEach(npc -> npc.getController().delete());
 			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);
 			sendMsg(1402805);
 			sendMsg(1402806);

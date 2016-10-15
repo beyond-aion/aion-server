@@ -128,7 +128,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		cancelSingleTask(wipeTask);
 		sendMsg(1402202); // Portal
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		spawn(730886, 255.49f, 293.3f, 321.18497f, (byte) 30);
 		spawn(730886, 255.49f, 215.8f, 321.21344f, (byte) 30);
@@ -276,7 +276,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			case 702009:
 				TeleportService2.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 730905:
 				TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
@@ -309,7 +309,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		int npcId = npc.getNpcId();
 		if (npcId >= 233720 && npcId <= 233739)
-			npc.getController().onDelete();
+			npc.getController().delete();
 		if (npcId == getBossId())
 			spawn(730905, 267.64062f, 267.84793f, 276.65512f, (byte) 75); // exit
 	}
@@ -330,7 +330,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		cancelTaskList();
 		doors.clear();
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		isInstanceDestroyed = true;
 	}

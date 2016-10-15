@@ -180,7 +180,7 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 	private void despawnNpc(int npcId) {
 		Npc npc = getNpc(npcId);
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

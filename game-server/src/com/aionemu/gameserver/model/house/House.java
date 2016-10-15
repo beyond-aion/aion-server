@@ -314,7 +314,7 @@ public class House extends VisibleObject {
 				if (newNpcId != oldNpcId) {
 					SpawnTemplate t = sign.getSpawn();
 					sign.setSpawn(null);
-					sign.getController().onDelete();
+					sign.getController().delete();
 					t = SpawnEngine.addNewSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading());
 					sign = (Npc) SpawnEngine.spawnObject(t, this.getPosition().getInstanceId());
 					spawns.put(SpawnType.SIGN, sign);
@@ -384,7 +384,7 @@ public class House extends VisibleObject {
 		if (npc == null) {
 			npc = spawns.remove(type);
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		} else {
 			spawns.put(type, npc);

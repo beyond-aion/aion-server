@@ -66,7 +66,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 			}
 			return true;
 		} else {
-			npc.getController().onDelete();
+			npc.getController().delete();
 			spawn(npcId, p.getX(), p.getY(), p.getZ(), (byte) 41);
 			return false;
 		}
@@ -79,7 +79,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (!isInstanceDestroyed && isDead1 && isDead2) {
 					getNpc(214668).getEffectController().removeEffect(18481);
-					getNpc(280973).getController().onDelete();
+					getNpc(280973).getController().delete();
 				}
 			}
 		}, 1000);

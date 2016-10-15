@@ -38,7 +38,6 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * @param object
 	 */
 	public void see(VisibleObject object) {
-
 	}
 
 	/**
@@ -48,18 +47,12 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * @param deleteType
 	 */
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-
 	}
 
 	/**
-	 * Removes controlled object from the world.
+	 * Despawns the object and deletes it from the world
 	 */
-	public void delete() {
-		// despawn object from world
-		if (getOwner().isSpawned())
-			World.getInstance().despawn(getOwner());
-
-		// delete object from world
+	public final void delete() {
 		World.getInstance().removeObject(getOwner());
 	}
 
@@ -67,29 +60,23 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * Called before object is placed into world
 	 */
 	public void onBeforeSpawn() {
-
 	}
 
 	/**
 	 * Called after object was placed into world
 	 */
 	public void onAfterSpawn() {
-
 	}
 
 	/**
-	 * Properly despawn object
+	 * Called before object despawns
 	 */
 	public void onDespawn() {
 	}
 
 	/**
-	 * This method should be called to make despawn of VisibleObject and delete it from the world
+	 * Called before object gets removed from the world
 	 */
 	public void onDelete() {
-		if (getOwner().isInWorld()) {
-			this.onDespawn();
-			this.delete();
-		}
 	}
 }

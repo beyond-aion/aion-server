@@ -71,7 +71,7 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 		PacketSendUtility.broadcastToMap(getOwner(), 1402212);
 		Npc portal = getPosition().getWorldMapInstance().getNpc(702216);
 		if (portal != null)
-			portal.getController().onDelete();
+			portal.getController().delete();
 	}
 
 	private void scheduleDespawn() {
@@ -104,7 +104,7 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 	private void onDespawn() {
 		if (getOwner() != null && getOwner().getLifeStats().isAlreadyDead())
 			SkillEngine.getInstance().getSkill(getOwner(), 21534, 1, getOwner()).useSkill();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 
 	protected void addPercent() {
@@ -143,7 +143,7 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 	private void deleteAdds() {
 		for (VisibleObject npc : adds) {
 			if (npc != null)
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 	}
 
@@ -167,6 +167,6 @@ public class DainatoumAI2 extends AggressiveNpcAI2 {
 		deleteAdds();
 		PacketSendUtility.broadcastToMap(getOwner(), 1402146);
 		super.handleBackHome();
-		getOwner().getController().onDelete(); // No Full Reset needed.
+		getOwner().getController().delete(); // No Full Reset needed.
 	}
 }

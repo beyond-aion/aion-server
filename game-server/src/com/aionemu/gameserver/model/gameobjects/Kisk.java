@@ -257,7 +257,7 @@ public class Kisk extends SummonedObject<Player> {
 		remainingResurrections--;
 		broadcastKiskUpdate();
 		if (remainingResurrections <= 0)
-			this.getController().onDelete();
+			this.getController().delete();
 	}
 
 	/**

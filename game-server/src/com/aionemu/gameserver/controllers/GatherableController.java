@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -26,7 +26,6 @@ import com.aionemu.gameserver.skillengine.task.GatheringTask;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.captcha.CAPTCHAUtil;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer, sphinx, Cura
@@ -34,12 +33,8 @@ import com.aionemu.gameserver.world.World;
 public class GatherableController extends VisibleObjectController<Gatherable> {
 
 	private int gatherCount;
-
-	private int currentGatherer;
-
+	private AtomicInteger currentGatherer = new AtomicInteger();
 	private GatheringTask task;
-
-	private AtomicBoolean isOcuppied = new AtomicBoolean();
 
 	/**
 	 * Start gathering process
@@ -115,8 +110,11 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			}
 		}
 
-		if (isOcuppied.compareAndSet(false, true)) {
-			currentGatherer = player.getObjectId();
+		int gatherer = currentGatherer.get();
+		if (gatherer > 0 && getOwner().getPosition().getWorldMapInstance().getPlayer(gatherer) == null)
+			currentGatherer.set(0);
+
+		if (currentGatherer.compareAndSet(0, player.getObjectId())) {
 			player.getObserveController().attach(new ActionObserver(ObserverType.ALL) {
 
 				@Override
@@ -211,9 +209,12 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 
 	public void completeInteraction() {
 		if (++gatherCount == getOwner().getObjectTemplate().getHarvestCount()) {
-			onDespawn();
+			if (!getOwner().isInInstance())
+				RespawnService.scheduleRespawnTask(getOwner());
+			getOwner().getController().delete();
+			gatherCount = 0;
 		}
-		isOcuppied.set(false);
+		currentGatherer.set(0);
 	}
 
 	public void rewardPlayer(Player player) {
@@ -231,8 +232,8 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP());
 				player.getCommonData().addExp(xpReward, RewardType.GATHERING);
 			} else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(
-					getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
+					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));
 		}
 	}
 
@@ -242,25 +243,8 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 	 * @param player
 	 */
 	public void finishGathering(Player player) {
-		if (currentGatherer == player.getObjectId()) {
-			currentGatherer = 0;
-			if (isOcuppied.compareAndSet(true, false)) {
-				task.abort();
-			}
-		}
-	}
-
-	@Override
-	public void onDespawn() {
-		Gatherable owner = getOwner();
-		if (!owner.isInInstance())
-			RespawnService.scheduleRespawnTask(owner);
-		World.getInstance().despawn(owner);
-	}
-
-	@Override
-	public void onBeforeSpawn() {
-		this.gatherCount = 0;
+		if (currentGatherer.compareAndSet(player.getObjectId(), 0))
+			task.abort();
 	}
 
 	@Override

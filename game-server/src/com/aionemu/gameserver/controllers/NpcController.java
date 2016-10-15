@@ -123,48 +123,47 @@ public class NpcController extends CreatureController<Npc> {
 		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
 
-		boolean shouldReward = false;
-		boolean deleteImmediately = false;
+		boolean shouldDecay = true;
 		boolean shouldRespawn = true;
+		boolean shouldLoot = true;
 		try {
-			deleteImmediately = !owner.getAi2().ask(AIQuestion.SHOULD_DECAY);
+			shouldDecay = owner.getAi2().ask(AIQuestion.SHOULD_DECAY);
 			shouldRespawn = owner.getAi2().ask(AIQuestion.SHOULD_RESPAWN);
-			if (shouldReward = owner.getAi2().ask(AIQuestion.SHOULD_REWARD))
+			shouldLoot = owner.getAi2().ask(AIQuestion.SHOULD_LOOT);
+			if (owner.getAi2().ask(AIQuestion.SHOULD_REWARD))
 				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi2().onGeneralEvent(AIEventType.DIED);
 		} catch (Exception e) {
 			log.error("onDie() exception for " + owner + ":", e);
-		} finally { // always make sure npc is scheduled to respawn
-			if (!deleteImmediately) {
-				RespawnService.scheduleDecayTask(owner);
-			} else if (shouldReward && owner.getAi2().ask(AIQuestion.SHOULD_LOOT)) {
-				log.warn("AI " + owner.getAi2().getName() + " has SHOULD_REWARD && SHOULD_LOOT but not SHOULD_DECAY, rewards will be lost!");
-			}
-			// TODO: refactor this: used for rift AI, better to use getDecayTime for AI
-			if (shouldRespawn && !owner.isDeleteDelayed() && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner))
-				RespawnService.scheduleRespawnTask(getOwner());
 		}
-		super.onDie(lastAttacker);
 
-		if (lastAttacker instanceof Player) {
-			Player player = (Player) lastAttacker;
-			int npcObjId = owner.getObjectId();
-			if (player.getPet() != null && player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null
-				&& player.getPet().getCommonData().isLooting()) {
-				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
-				Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-				if (drops != null) {
-					for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
-						DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
+		super.onDie(lastAttacker);
+		
+		if (shouldRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
+			RespawnService.scheduleRespawnTask(getOwner());
+		
+		if (shouldDecay) {
+			RespawnService.scheduleDecayTask(owner);
+			if (lastAttacker instanceof Player && shouldLoot) { // pet loot
+				Player player = (Player) lastAttacker;
+				int npcObjId = owner.getObjectId();
+				if (player.getPet() != null && player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null
+					&& player.getPet().getCommonData().isLooting()) {
+					PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
+					Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
+					if (drops != null) {
+						for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
+							DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
+					}
+					PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
+					if (shouldDecay && (drops == null || drops.size() == 0)) // without drop it's 2 seconds, re-schedule it
+						RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY);
 				}
-				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
-				if ((drops == null || drops.size() == 0) && !deleteImmediately) // without drop it's 2 seconds, re-schedule it
-					RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY);
 			}
+		} else { // instant despawn (no decay time = no loot)
+			delete();
 		}
-		if (deleteImmediately)
-			onDelete();
 	}
 
 	@Override
@@ -259,7 +258,8 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onDialogSelect(int dialogId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
 		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
-		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false) && !QuestEngine.getInstance().onDialog(env)) {
+		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false)
+			&& !QuestEngine.getInstance().onDialog(env)) {
 			return;
 		}
 		if (!getOwner().getAi2().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {
@@ -297,14 +297,6 @@ public class NpcController extends CreatureController<Npc> {
 	public void onStartMove() {
 		getOwner().getMoveController().setInMove(true);
 		super.onStartMove();
-	}
-
-	@Override
-	public void onReturnHome() {
-		if (getOwner().isDeleteDelayed()) {
-			onDelete();
-		}
-		super.onReturnHome();
 	}
 
 	@Override

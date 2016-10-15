@@ -204,7 +204,7 @@ public class _20034RescuetheReians extends QuestHandler {
 							qs.setQuestVar(4);
 							updateQuestStatus(env);
 						}
-						npc.getController().onDelete();
+						npc.getController().delete();
 						return closeDialogWindow(env);
 					}
 			}
@@ -218,7 +218,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					break;
 				case SETPRO6:
 					changeQuestStep(env, 5, 6);// 6
-					npc.getController().onDelete();
+					npc.getController().delete();
 					return closeDialogWindow(env);
 			}
 		}

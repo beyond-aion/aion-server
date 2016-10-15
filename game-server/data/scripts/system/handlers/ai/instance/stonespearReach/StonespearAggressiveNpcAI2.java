@@ -44,7 +44,7 @@ public class StonespearAggressiveNpcAI2 extends AggressiveNpcAI2 {
 	@Override
 	public void handleDied() {
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 
 	@Override

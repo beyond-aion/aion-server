@@ -97,7 +97,7 @@ public class CodeRedNurserAI2 extends GeneralNpcAI2 {
 				if (currentDay >= 1 && currentDay <= 4)
 					super.handleSpawned();
 				else if (!isAlreadyDead())
-					getOwner().getController().onDelete();
+					getOwner().getController().delete();
 				break;
 			}
 			case 831437: // Dalloren (FRI-SAT)
@@ -107,7 +107,7 @@ public class CodeRedNurserAI2 extends GeneralNpcAI2 {
 				if (currentDay >= 5 && currentDay <= 7)
 					super.handleSpawned();
 				else if (!isAlreadyDead())
-					getOwner().getController().onDelete();
+					getOwner().getController().delete();
 				break;
 			}
 		}

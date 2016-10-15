@@ -122,7 +122,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 				if (failCounter.incrementAndGet() >= 11) {
 					Npc boss = getNpc(getBossId());
 					if (boss != null)
-						boss.getController().onDelete();
+						boss.getController().delete();
 					if (chestReductionTask != null && !chestReductionTask.isCancelled())
 						chestReductionTask.cancel(true);
 				}
@@ -130,7 +130,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 
 			PacketSendUtility.broadcastToMap(detected, STR_MSG_INSTANCE_START_IDABRE());
 			PacketSendUtility.broadcastToMap(detected, new SM_QUEST_ACTION(0, 600));
-			detector.getController().onDelete();
+			detector.getController().delete();
 		}
 	}
 
@@ -141,7 +141,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	 *          - of the door NPC to be deleted
 	 */
 	protected final void openDoor(int staticId) {
-		instance.getNpcs(getDoorId()).stream().filter(n -> n.getSpawn().getStaticId() == staticId).forEach(n -> n.getController().onDelete());
+		instance.getNpcs(getDoorId()).stream().filter(n -> n.getSpawn().getStaticId() == staticId).forEach(n -> n.getController().delete());
 	}
 
 	/**
@@ -152,7 +152,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 			Npc boss = getNpc(getBossId());
 			if (boss != null && !boss.getLifeStats().isAlreadyDead()) {
 				spawn(getBossId() - 1, boss.getX(), boss.getY(), boss.getZ(), boss.getHeading());
-				boss.getController().onDelete();
+				boss.getController().delete();
 			}
 		}
 	}

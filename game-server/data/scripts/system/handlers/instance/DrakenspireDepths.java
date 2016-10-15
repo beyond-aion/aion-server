@@ -152,7 +152,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 					onOrissanFail();
 
 				scheduleOrissansExhaustedPhase(spawn(236233, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()));
-				npc.getController().onDelete();
+				npc.getController().delete();
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_02());
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_03(), 2000);
 			}, 12000);
@@ -181,7 +181,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				}
 				int newDelay = orissanImmortalityCount == 1 ? 110000 : 218000;
 				scheduleOrissansImmortalPhase(spawn(236234, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()), newDelay);
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}, 10000);
 		}, 70000);
 	}
@@ -369,7 +369,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	private void deleteNpcById(int id) {
 		for (Npc npc : instance.getNpcs()) {
 			if (npc.getNpcId() == id)
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 	}
 
@@ -438,7 +438,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 						}
 					}, 15000);
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 236229: // Orissan Hero
 			case 236234: // Exhausted Orissan Legendary
@@ -453,7 +453,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 236218:
 			case 236219:
 			case 236220:
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 236239:
 			case 236240:
@@ -462,7 +462,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 			case 236243:
 				if (killedCommanderCount.incrementAndGet() == (isHardmode ? 5 : 3))
 					onWaveEventComplete();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 236224:
 				doors.get(375).setOpen(true);

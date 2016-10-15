@@ -126,7 +126,7 @@ public class InstanceService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
 				moveToExitPoint((Player) obj);
 			} else {
-				obj.getController().onDelete();
+				obj.getController().delete();
 			}
 		}
 		instance.getInstanceHandler().onInstanceDestroy();

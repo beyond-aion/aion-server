@@ -93,7 +93,7 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 
 	private void despawnNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

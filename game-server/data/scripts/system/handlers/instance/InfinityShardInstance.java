@@ -95,7 +95,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		Npc gen4 = getNpc(231086);
 		if (isDead(gen1) && isDead(gen2) && isDead(gen3) && isDead(gen4)) {
 			sendMsg(1401796);
-			instance.getNpc(730741).getController().onDelete();
+			instance.getNpc(730741).getController().delete();
 			instance.getNpc(231073).getEffectController().removeEffect(21254);
 			startIdeResonatorTask();
 			startFailTimer();
@@ -146,7 +146,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				hyperion.getController().onDelete();
+				hyperion.getController().delete();
 				sendMsg(1401909);
 				for (Npc npc : idePolls) {
 					npc.getController().useSkill(21199);
@@ -213,7 +213,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

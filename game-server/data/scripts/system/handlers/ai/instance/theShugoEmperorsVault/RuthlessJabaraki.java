@@ -144,6 +144,6 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 	protected void handleDied() {
 		super.handleDied();
 		percents.clear();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 }

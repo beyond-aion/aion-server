@@ -25,7 +25,7 @@ public class AI2Actions {
 	 * Despawn and delete owner
 	 */
 	public static void deleteOwner(AbstractAI ai2) {
-		ai2.getOwner().getController().onDelete();
+		ai2.getOwner().getController().delete();
 	}
 
 	/**

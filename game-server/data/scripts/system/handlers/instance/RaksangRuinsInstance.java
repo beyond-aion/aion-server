@@ -128,7 +128,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				delaySpawn(player, 236074 + Rnd.get(3), 8000);
 				delaySpawn(player, 236074 + Rnd.get(3), 8000);
 				delaySpawn(player, 236074 + Rnd.get(3), 12000);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 730438: // Terror' Vault
 				if (isDoorAccessible)
@@ -270,21 +270,21 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			switch (detector.getNpcId()) {
 				case 206197:
 					if (isEventStarted.compareAndSet(false, true)) {
-						detector.getController().onDelete();
+						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
 						delaySpawn((byte) 3, 20000);
 					}
 					break;
 				case 206198:
 					if (isEventStarted.compareAndSet(false, true)) {
-						detector.getController().onDelete();
+						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 1, 10000);
 					}
 					break;
 				case 206199:
 					if (isEventStarted.compareAndSet(true, false)) {
-						detector.getController().onDelete();
+						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 2, 10000);
 					}

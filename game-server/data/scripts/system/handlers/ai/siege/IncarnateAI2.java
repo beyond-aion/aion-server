@@ -25,7 +25,7 @@ public class IncarnateAI2 extends SiegeNpcAI2 {
 
 			@Override
 			public void run() {
-				claw.getController().onDelete();
+				claw.getController().delete();
 			}
 		}, 60000 * 5);
 	}

@@ -37,7 +37,7 @@ public class PlegetonAI2 extends NpcAI2 {
 							public void run() {
 								Npc npc = getPosition().getWorldMapInstance().getNpc(216586);
 								if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
-									npc.getController().onDelete();
+									npc.getController().delete();
 									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
 									getPosition().getWorldMapInstance().getDoors().get(467).setOpen(true);
 								}

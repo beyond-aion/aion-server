@@ -515,7 +515,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 	
 	private void despawnAll() {
-		instance.getNpcs().stream().filter(npc -> npc != null).filter(npc -> npc.getNpcId() != 832925).forEach(npc -> npc.getController().onDelete());
+		instance.getNpcs().stream().filter(npc -> npc != null).filter(npc -> npc.getNpcId() != 832925).forEach(npc -> npc.getController().delete());
 	}
 	
 	private void sendPacket(final int nameId, final int point) {

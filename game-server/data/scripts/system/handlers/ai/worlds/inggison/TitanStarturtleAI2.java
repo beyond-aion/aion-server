@@ -25,6 +25,6 @@ public class TitanStarturtleAI2 extends AggressiveNpcAI2 {
 		super.handleSpawned();
 		Npc windStream = getPosition().getWorldMapInstance().getNpc(700545);
 		if (windStream != null)
-			windStream.getController().onDelete();
+			windStream.getController().delete();
 	}
 }

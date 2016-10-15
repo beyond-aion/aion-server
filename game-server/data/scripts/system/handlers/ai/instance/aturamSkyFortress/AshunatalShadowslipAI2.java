@@ -58,7 +58,7 @@ public class AshunatalShadowslipAI2 extends AggressiveNpcAI2 {
 		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false);
 		Npc npc = getPosition().getWorldMapInstance().getNpc(219186);
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

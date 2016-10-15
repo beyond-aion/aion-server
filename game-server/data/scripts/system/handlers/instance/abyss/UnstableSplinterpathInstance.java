@@ -67,7 +67,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 					}, 60000);
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 283204: // ex 284022
 				Npc ebonsoul = getNpc(219552);
@@ -78,7 +78,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 						break;
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 283205: // ex 284023:
 				Npc rukril = getNpc(219551);
@@ -89,7 +89,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 						break;
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 219563: // ex 219951 unstable Yamennes Painflare
 			case 219555: // ex 219943 strengthened Yamennes Blindsight
@@ -103,7 +103,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 701588: // HugeAetherFragment
 				destroyedFragments++;
 				onFragmentKill();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 
 			case 283206: // ex 284024:
@@ -115,13 +115,13 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 						pazuzu.getEffectController().removeEffect(19291);
 					}
 				}
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 219567: // ex 219955
 			case 219579: // ex 219967
 			case 219580: // ex 219968 Spawn Gate
 				removeSummoned();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -137,12 +137,12 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 700957:
 				sendMsg(1400732);
 				spawn(219563, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 701589:
 				sendMsg(1400731);
 				spawn(219555, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -215,7 +215,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

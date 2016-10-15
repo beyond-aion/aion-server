@@ -38,7 +38,7 @@ public class FireStormAI2 extends NpcAI2 {
 
 			@Override
 			public void run() {
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 			}
 		}, 20000);
 	}

@@ -142,7 +142,7 @@ public class AethicFieldGeneratorAI2 extends GeneralNpcAI2 {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

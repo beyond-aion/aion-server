@@ -139,7 +139,7 @@ public class Town {
 
 	private void despawnOldObjects() {
 		for (Npc npc : spawnedNpcs)
-			npc.getController().onDelete();
+			npc.getController().delete();
 		spawnedNpcs.clear();
 	}
 

@@ -98,11 +98,11 @@ public class KinquidAI2 extends AggressiveNpcAI2 {
 	private void despawnDestroyer() {
 		Npc cleaveArmor = getPosition().getWorldMapInstance().getNpc(282008);
 		if (cleaveArmor != null) {
-			cleaveArmor.getController().onDelete();
+			cleaveArmor.getController().delete();
 		}
 		Npc accessoryDestruction = getPosition().getWorldMapInstance().getNpc(282009);
 		if (accessoryDestruction != null) {
-			accessoryDestruction.getController().onDelete();
+			accessoryDestruction.getController().delete();
 		}
 	}
 

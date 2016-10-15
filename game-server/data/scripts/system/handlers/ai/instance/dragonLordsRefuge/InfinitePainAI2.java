@@ -33,7 +33,7 @@ public class InfinitePainAI2 extends NpcAI2 {
 
 			@Override
 			public void run() {
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 			}
 		}, 5000);
 	}

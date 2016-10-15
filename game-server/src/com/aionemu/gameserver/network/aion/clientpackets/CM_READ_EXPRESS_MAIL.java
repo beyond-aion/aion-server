@@ -39,7 +39,7 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 			case 0:
 				// window is closed
 				if (player.getPostman() != null) {
-					player.getPostman().getController().onDelete();
+					player.getPostman().getController().delete();
 					player.setPostman(null);
 				}
 				break;

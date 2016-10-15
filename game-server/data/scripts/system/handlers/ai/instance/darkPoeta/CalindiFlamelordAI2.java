@@ -102,7 +102,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 						@Override
 						public void run() {
 							if (!isAlreadyDead()) {
-								getOwner().getController().onDelete();
+								getOwner().getController().delete();
 								PacketSendUtility.broadcastToMap(getOwner(), 1400260);
 							}
 						}

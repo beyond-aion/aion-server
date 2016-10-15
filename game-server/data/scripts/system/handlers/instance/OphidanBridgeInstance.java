@@ -51,7 +51,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 				if (!isNormalMode.get()) {
 					Npc nc = instance.getNpc(235764);
 					if (nc != null) {
-						nc.getController().onDelete();
+						nc.getController().delete();
 					}
 				}
 				bossKills++;
@@ -79,7 +79,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 				}
 				break;
 			case 235786: // Steel Wall
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -116,7 +116,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 701644:
 				if (used.compareAndSet(false, true)) {
-					npc.getController().onDelete();
+					npc.getController().delete();
 					spawn(731544, 436.36f, 496.45f, 604.8871f, (byte) 2);
 				}
 				break;

@@ -137,7 +137,7 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs)
 			if (npc != null && !npc.getLifeStats().isAlreadyDead())
-				npc.getController().onDelete();
+				npc.getController().delete();
 	}
 
 	@Override

@@ -164,7 +164,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 			if (!buffNpc.getLifeStats().isAlreadyDead()) {
 				startFlameSmashEvent(percent);
 				SkillEngine.getInstance().getSkill(buffNpc, 20538, 60, buffNpc).useNoAnimationSkill();
-				ThreadPoolManager.getInstance().schedule(() -> buffNpc.getController().onDelete(), 4000);
+				ThreadPoolManager.getInstance().schedule(() -> buffNpc.getController().delete(), 4000);
 			}
 		}, 1000);
 
@@ -268,7 +268,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
-		npcs.stream().filter(npc -> npc != null).forEach(npc -> npc.getController().onDelete());
+		npcs.stream().filter(npc -> npc != null).forEach(npc -> npc.getController().delete());
 	}
 
 	private void cancelAirEvent() {

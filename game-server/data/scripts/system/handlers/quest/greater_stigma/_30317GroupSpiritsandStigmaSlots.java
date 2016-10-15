@@ -92,7 +92,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 								return sendQuestDialog(env, 1352);
 							return false;
 						case SETPRO2:
-							env.getVisibleObject().getController().onDelete();
+							env.getVisibleObject().getController().delete();
 							qs.setQuestVarById(0, 2);
 							updateQuestStatus(env);
 							return true;

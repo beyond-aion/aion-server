@@ -755,7 +755,7 @@ public final class QuestService {
 				@Override
 				public void run() {
 					if (npc != null && !npc.getLifeStats().isAlreadyDead())
-						npc.getController().onDelete();
+						npc.getController().delete();
 				}
 
 			}, 60000 * timeInMin);

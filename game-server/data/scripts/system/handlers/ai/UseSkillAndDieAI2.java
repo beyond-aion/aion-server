@@ -69,7 +69,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 			@Override
 			public void run() {
 				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead())
-					getOwner().getController().onDelete();
+					getOwner().getController().delete();
 			}
 		}, despawn_time);
 	}
@@ -93,6 +93,6 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 	@Override
 	public void handleDied() {
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 }

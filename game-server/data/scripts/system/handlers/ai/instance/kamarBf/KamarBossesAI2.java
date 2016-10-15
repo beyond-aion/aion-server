@@ -55,7 +55,7 @@ public class KamarBossesAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class KamarBossesAI2 extends AggressiveNpcAI2 {
 
 		}
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 
 }

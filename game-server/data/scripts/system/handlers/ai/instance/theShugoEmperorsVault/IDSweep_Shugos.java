@@ -23,7 +23,7 @@ public class IDSweep_Shugos extends AggressiveNpcAI2 {
 			reward = handler.getInstanceReward();
 			if (reward != null) {
 				if (reward.getInstanceScoreType() == InstanceScoreType.END_PROGRESS) {
-					getOwner().getController().delete();
+					getOwner().getController().onDelete();
 				}
 			}
 		}

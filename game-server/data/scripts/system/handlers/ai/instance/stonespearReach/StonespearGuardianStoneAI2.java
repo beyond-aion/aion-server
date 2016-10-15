@@ -27,7 +27,7 @@ public class StonespearGuardianStoneAI2 extends NpcAI2 {
 		task = ThreadPoolManager.getInstance().schedule(() -> {
 			if (getOwner() != null) {
 				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_OBJ_End());
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 			}
 		}, 55000); // message says 2mins but its actually only ~1min.
 	}
@@ -35,7 +35,7 @@ public class StonespearGuardianStoneAI2 extends NpcAI2 {
 	@Override
 	public void handleDied() {
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 		if (task != null && !task.isCancelled()) {
 			task.cancel(true);
 		}

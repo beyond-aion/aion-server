@@ -37,7 +37,7 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	private void scheduleDespawn() {
 		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			if (!isAlreadyDead()) {
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 				broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
 			}
 		} , 60 * 60000)); // 1hour
@@ -47,7 +47,7 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		Npc flag = getOwner().getPosition().getWorldMapInstance().getNpc(702618); // see AnohasSword AI
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 		super.handleDespawned();
 	};
 

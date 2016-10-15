@@ -133,7 +133,7 @@ public class PlayerLeaveWorldService {
 		PetSpawnService.dismissPet(player);
 
 		if (player.getPostman() != null)
-			player.getPostman().getController().onDelete();
+			player.getPostman().getController().delete();
 		player.setPostman(null);
 
 		PunishmentService.stopPrisonTask(player, true);
@@ -144,7 +144,7 @@ public class PlayerLeaveWorldService {
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
-		player.getController().delete();
+		player.getController().onDelete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
 

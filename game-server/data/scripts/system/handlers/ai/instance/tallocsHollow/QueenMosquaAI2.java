@@ -65,7 +65,7 @@ public class QueenMosquaAI2 extends SummonerAI2 {
 					}
 				}
 			});
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

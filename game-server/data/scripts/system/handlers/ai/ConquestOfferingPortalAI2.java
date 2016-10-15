@@ -40,7 +40,7 @@ public class ConquestOfferingPortalAI2 extends ActionItemNpcAI2 {
 	private void startDespawnTask() {
 		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 			if (getOwner() != null)
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 		}, 65000);
 	}
 }

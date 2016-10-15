@@ -67,7 +67,7 @@ public class LinkgateFoundryBossTeleportAI2 extends ActionItemNpcAI2 {
 		spawn(702592, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0, 51);
 		// spawn boss and guardian
 		PacketSendUtility.broadcastToMap(getOwner(), msgId);
-		getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().onDelete(); // default belsagos spawn (visible from outside)
+		getOwner().getPosition().getWorldMapInstance().getNpc(233898).getController().delete(); // default belsagos spawn (visible from outside)
 		spawn(bossId, 252.2439f, 259.3866f, 312.3536f, (byte) 41);
 		if (spawnGuardian)
 			spawn(player.getRace() == Race.ELYOS ? 855087 : 855088, 226.76f, 256.7708f, 312.577f, (byte) 0);

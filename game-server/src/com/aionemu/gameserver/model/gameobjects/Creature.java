@@ -45,7 +45,6 @@ import javolution.util.FastMap;
 public abstract class Creature extends VisibleObject {
 
 	private AI2 ai2;
-	private boolean isDespawnDelayed = false;
 
 	private CreatureLifeStats<? extends Creature> lifeStats;
 	private CreatureGameStats<? extends Creature> gameStats;
@@ -160,14 +159,6 @@ public abstract class Creature extends VisibleObject {
 
 	public void setAi2(AI2 ai2) {
 		this.ai2 = ai2;
-	}
-
-	public boolean isDeleteDelayed() {
-		return isDespawnDelayed;
-	}
-
-	public void setDespawnDelayed(boolean delayed) {
-		isDespawnDelayed = delayed;
 	}
 
 	public boolean isFlag() {

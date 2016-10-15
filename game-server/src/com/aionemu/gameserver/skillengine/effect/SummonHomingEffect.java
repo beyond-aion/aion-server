@@ -52,7 +52,7 @@ public class SummonHomingEffect extends SummonEffect {
 					public void attack(Creature creature) {
 						homing.setAttackCount(homing.getAttackCount() - 1);
 						if (homing.getAttackCount() <= 0)
-							homing.getController().onDelete();
+							homing.getController().delete();
 					}
 				};
 
@@ -65,7 +65,7 @@ public class SummonHomingEffect extends SummonEffect {
 				@Override
 				public void run() {
 					if ((homing != null) && (homing.isSpawned()))
-						homing.getController().onDelete();
+						homing.getController().delete();
 				}
 			}, 15 * 1000);
 			homing.getController().addTask(TaskId.DESPAWN, task);

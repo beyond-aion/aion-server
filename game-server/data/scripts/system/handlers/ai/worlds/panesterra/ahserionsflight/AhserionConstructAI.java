@@ -202,7 +202,7 @@ public class AhserionConstructAI extends NpcAI2 {
 			attackSchedule.cancel(false);
 		}
 		if (flag != null) {
-			flag.getController().onDelete();
+			flag.getController().delete();
 		}
 		super.handleDespawned();
 	}
@@ -213,7 +213,7 @@ public class AhserionConstructAI extends NpcAI2 {
 			attackSchedule.cancel(false);
 		}
 		if (flag != null) {
-			flag.getController().onDelete();
+			flag.getController().delete();
 		}
 		switch (getOwner().getSpawn().getStaticId()) {
 			case 180:

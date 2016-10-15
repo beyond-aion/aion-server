@@ -85,14 +85,14 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 			case 215457:
 				Npc newNpc = getNpc(700633);
 				if (newNpc != null) {
-					newNpc.getController().onDelete();
+					newNpc.getController().delete();
 				}
 				break;
 			case 700739:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_WIND_INFO());
 				SpawnTemplate template = npc.getSpawn();
 				spawn(281817, template.getX(), template.getY(), template.getZ(), template.getHeading(), 9);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 215488:
 				Player player = npc.getAggroList().getMostPlayerDamage();
@@ -103,7 +103,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 				if (newNpc2 != null) {
 					SpawnTemplate template2 = newNpc2.getSpawn();
 					spawn(700741, template2.getX(), template2.getY(), template2.getZ(), template2.getHeading(), 92);
-					newNpc2.getController().onDelete();
+					newNpc2.getController().delete();
 				}
 				spawn(799503, 548f, 811f, 1375f, (byte) 0);
 				break;

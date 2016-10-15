@@ -143,7 +143,7 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 
 	private void despawnNpc(Npc npc) {
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 }

@@ -2,13 +2,13 @@ package admincommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Luno
@@ -39,12 +39,10 @@ public class Delete extends AdminCommand {
 			return;
 		}
 
-		if (target instanceof Npc) {
-			((Npc) target).getController().cancelTask(TaskId.RESPAWN);
-			target.getController().onDelete();
-		} else if (target instanceof Gatherable) {
-			World.getInstance().despawn(target); // onDelete would trigger a respawn task
-		}
+		if (target instanceof Creature)
+			((Creature) target).getController().cancelTask(TaskId.RESPAWN);
+
+		target.getController().delete();
 		sendInfo(admin, "Spawn removed.");
 
 		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, true)) {

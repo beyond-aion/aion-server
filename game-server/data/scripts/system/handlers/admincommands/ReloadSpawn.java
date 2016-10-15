@@ -132,7 +132,7 @@ public class ReloadSpawn extends AdminCommand {
 				if (v.getWorldId() != IdWorld)
 					return;
 				if (v instanceof Npc || v instanceof Gatherable || v instanceof StaticObject)
-					v.getController().onDelete();
+					v.getController().delete();
 			});
 			SpawnEngine.spawnWorldMap(IdWorld);
 			PacketSendUtility.sendMessage(adm, "Spawns for map: " + IdWorld + " (" + dest + ") reloaded succesfully");

@@ -221,7 +221,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs();
 		for (Npc npc : npcs) {
 			if (npc.getNpcId() == 213575 || npc.getNpcId() == 280818)
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 	}
 }

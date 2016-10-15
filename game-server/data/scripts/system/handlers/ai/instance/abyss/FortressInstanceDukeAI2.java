@@ -23,7 +23,7 @@ public class FortressInstanceDukeAI2 extends AggressiveNpcAI2 {
 	
 	private void deleteSummons() {
 		getPosition().getWorldMapInstance().getNpcs().stream().filter(n -> MathUtil.isBetween(284978, 284981, n.getNpcId()))
-		.forEach(n -> n.getController().onDelete());
+		.forEach(n -> n.getController().delete());
 	}
 
 	@Override

@@ -113,7 +113,7 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 						break;
 					case 4:
 						spawnClone();
-						getOwner().getController().onDelete();
+						getOwner().getController().delete();
 						break;
 				}
 				break;

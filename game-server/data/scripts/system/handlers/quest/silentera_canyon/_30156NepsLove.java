@@ -84,7 +84,7 @@ public class _30156NepsLove extends QuestHandler {
 
 								@Override
 								public void run() {
-									npc.getController().onDelete();
+									npc.getController().delete();
 								}
 							}, 400);
 							return true;

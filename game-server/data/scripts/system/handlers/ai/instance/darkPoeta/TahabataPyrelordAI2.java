@@ -242,7 +242,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
 
 	private void despawn(int npcId) {
 		for (Npc npc : getPosition().getWorldMapInstance().getNpcs(npcId)) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

@@ -55,7 +55,7 @@ public class _30553ComradesInArms extends QuestHandler {
 					return false;
 				case 701097:
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().onDelete();
+					npc.getController().delete();
 					return true;
 				case 799541:
 					switch (dialog) {

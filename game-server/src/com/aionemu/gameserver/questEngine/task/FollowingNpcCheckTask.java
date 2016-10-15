@@ -65,6 +65,6 @@ public class FollowingNpcCheckTask implements Runnable {
 		player.getController().cancelTask(TaskId.QUEST_FOLLOW);
 		npc.getAi2().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, player);
 		if (!npc.getAi2().getName().equals("following"))
-			npc.getController().onDelete();
+			npc.getController().delete();
 	}
 }

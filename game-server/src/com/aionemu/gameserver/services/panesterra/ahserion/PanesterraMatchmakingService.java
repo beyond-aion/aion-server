@@ -100,10 +100,10 @@ public class PanesterraMatchmakingService {
 		Npc asmo = World.getInstance().getWorldMap(120080000).getMainWorldMapInstance().getNpc(802219);
 		Npc ely = World.getInstance().getWorldMap(110070000).getMainWorldMapInstance().getNpc(802219);
 		if (asmo != null) {
-			asmo.getController().onDelete();
+			asmo.getController().delete();
 		}
 		if (ely != null) {
-			ely.getController().onDelete();
+			ely.getController().delete();
 		}
 	}
 	

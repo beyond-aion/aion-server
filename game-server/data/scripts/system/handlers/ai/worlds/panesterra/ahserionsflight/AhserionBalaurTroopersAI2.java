@@ -42,7 +42,7 @@ public class AhserionBalaurTroopersAI2 extends NpcAI2 {
 			@Override
 			public void run() {
 				if (getOwner() != null)
-					getOwner().getController().onDelete();
+					getOwner().getController().delete();
 			}
 		}, 25000);
 	}

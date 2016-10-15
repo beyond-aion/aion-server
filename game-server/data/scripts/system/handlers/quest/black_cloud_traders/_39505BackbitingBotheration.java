@@ -60,7 +60,7 @@ public class _39505BackbitingBotheration extends QuestHandler {
 						if (env.getVisibleObject() instanceof Npc) {
 							targetId = ((Npc) env.getVisibleObject()).getNpcId();
 							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().onDelete();
+							npc.getController().delete();
 						}
 						return defaultCloseDialog(env, 0, 1);
 				}
@@ -92,7 +92,7 @@ public class _39505BackbitingBotheration extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (Rnd.get(1, 100) < 20) {
 				Npc npc = (Npc) env.getVisibleObject();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701153, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
 				return true;
 			}

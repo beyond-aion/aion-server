@@ -16,6 +16,6 @@ public class WaveEntrySensorAI2 extends AggressiveNpcAI2 {
 	public void handleCreatureDetected(Creature creature) {
 		super.handleCreatureDetected(creature);
 		if (creature instanceof Player)
-			getOwner().getController().onDelete();
+			getOwner().getController().delete();
 	}
 }

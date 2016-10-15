@@ -28,6 +28,6 @@ public class DranaLumpAI2 extends ActionItemNpcAI2 {
 				break;
 		}
 		SkillEngine.getInstance().getSkill(player, skillId, level, player).useSkill();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 }

@@ -4,7 +4,6 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
-import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
@@ -33,8 +32,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * Client is saying that level[map] is ready.
  *
- * @author -Nemesiss-
- * @author Kwazar
+ * @author -Nemesiss-, Kwazar
  */
 public class CM_LEVEL_READY extends AionClientPacket {
 
@@ -73,9 +71,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		/**
 		 * Spawn player into the world.
 		 */
-		// If already spawned, despawn before spawning into the world
-		if (activePlayer.isSpawned())
-			World.getInstance().despawn(activePlayer, ObjectDeleteAnimation.NONE);
 		World.getInstance().spawn(activePlayer);
 
 		if (activePlayer.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)

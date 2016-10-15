@@ -71,7 +71,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
 						@Override
 						public void run() {
-							getNpc(831747).getController().delete();
+							getNpc(831747).getController().onDelete();
 						}
 					}, 3000);
 					spawnPhase();
@@ -330,7 +330,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
 	private void despawnNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 
@@ -418,7 +418,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
 	protected void despawnNpc(Npc npc) {
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

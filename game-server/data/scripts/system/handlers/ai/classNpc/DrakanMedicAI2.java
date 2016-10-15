@@ -56,7 +56,7 @@ public class DrakanMedicAI2 extends AggressiveNpcAI2 {
 				int servant = getOwner().getObjectTemplate().getRating() == NpcRating.NORMAL ? 281621 : 281839;
 				Npc holyServant = getPosition().getWorldMapInstance().getNpc(servant);
 				if (holyServant != null)
-					holyServant.getController().onDelete();
+					holyServant.getController().delete();
 			}
 		});
 	}

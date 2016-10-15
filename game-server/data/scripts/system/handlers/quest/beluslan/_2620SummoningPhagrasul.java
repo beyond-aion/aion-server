@@ -106,7 +106,7 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 
 								@Override
 								public void run() {
-									npc.getController().onDelete();
+									npc.getController().delete();
 								}
 							}, 40000);
 							return true;

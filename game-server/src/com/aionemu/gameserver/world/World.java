@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.GenericValidator;
+import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -99,72 +101,77 @@ public class World {
 		if (allObjects.put(object.getObjectId(), object) != null)
 			throw new DuplicateAionObjectException();
 
-		if (object instanceof Player) {
-			allPlayers.add((Player) object);
-		}
-
-		if (object instanceof SiegeNpc) {
-			SiegeNpc siegeNpc = (SiegeNpc) object;
-			Collection<SiegeNpc> npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
-			if (npcs == null) {
-				synchronized (localSiegeNpcs) {
-					if (localSiegeNpcs.containsKey(siegeNpc.getSiegeId())) {
-						npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
-					} else {
-						// We now have multi-threaded siege timers
-						// This should be thread-safe
-						npcs = new CopyOnWriteArrayList<>();
-						localSiegeNpcs.put(siegeNpc.getSiegeId(), npcs);
+		if (object instanceof Npc) {
+			if (object instanceof SiegeNpc) {
+				SiegeNpc siegeNpc = (SiegeNpc) object;
+				Collection<SiegeNpc> npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
+				if (npcs == null) {
+					synchronized (localSiegeNpcs) {
+						if (localSiegeNpcs.containsKey(siegeNpc.getSiegeId())) {
+							npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
+						} else {
+							// We now have multi-threaded siege timers
+							// This should be thread-safe
+							npcs = new CopyOnWriteArrayList<>();
+							localSiegeNpcs.put(siegeNpc.getSiegeId(), npcs);
+						}
 					}
 				}
+
+				npcs.add(siegeNpc);
 			}
 
-			npcs.add(siegeNpc);
-		}
-
-		if (object.getSpawn() instanceof BaseSpawnTemplate) {
-			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
-			int baseId = bst.getId();
-			if (!baseNpc.containsKey(baseId)) {
-				baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<Npc>());
+			if (object.getSpawn() instanceof BaseSpawnTemplate) {
+				BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
+				int baseId = bst.getId();
+				if (!baseNpc.containsKey(baseId)) {
+					baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<Npc>());
+				}
+				baseNpc.get(baseId).add((Npc) object);
 			}
-			baseNpc.get(baseId).add((Npc) object);
-		}
 
-		if (object instanceof Npc) {
 			allNpcs.put(object.getObjectId(), (Npc) object);
+		} else if (object instanceof Player) {
+			allPlayers.add((Player) object);
 		}
 	}
 
 	/**
-	 * Remove Object from the world.<br>
-	 * If the given object is Npc then it also releases it's objId from IDFactory.
+	 * Removes the object from the world. If the object is an Npc then it also releases it's objId from IDFactory.<br>
+	 * <font color="red"><b>IMPORTANT</b></font>: Must only be called from {@link CreatureController#delete()}
 	 * 
 	 * @param object
 	 */
 	public void removeObject(VisibleObject object) {
-		allObjects.remove(object.getObjectId());
+		if (allObjects.containsKey(object.getObjectId())) {
+			try {
+				if (object.isSpawned())
+					despawn(object);
+				object.getController().onDelete();
+			} finally {
+				allObjects.remove(object.getObjectId());
 
-		if (object instanceof SiegeNpc) {
-			SiegeNpc siegeNpc = (SiegeNpc) object;
-			Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
-			if (!GenericValidator.isBlankOrNull(locSpawn)) {
-				locSpawn.remove(siegeNpc);
+				if (object instanceof Npc) {
+					if (object instanceof SiegeNpc) {
+						SiegeNpc siegeNpc = (SiegeNpc) object;
+						Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
+						if (!GenericValidator.isBlankOrNull(locSpawn)) {
+							locSpawn.remove(siegeNpc);
+						}
+					}
+
+					if (object.getSpawn() instanceof BaseSpawnTemplate) {
+						BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
+						int baseId = bst.getId();
+						baseNpc.get(baseId).remove(object);
+					}
+
+					allNpcs.remove(object.getObjectId());
+					IDFactory.getInstance().releaseId(object.getObjectId());
+				} else if (object instanceof Player) {
+					allPlayers.remove((Player) object);
+				}
 			}
-		}
-
-		if (object.getSpawn() instanceof BaseSpawnTemplate) {
-			BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
-			int baseId = bst.getId();
-			baseNpc.get(baseId).remove(object);
-		}
-
-		if (object instanceof Npc) {
-			allNpcs.remove(object.getObjectId());
-		}
-
-		if (object instanceof Player) {
-			allPlayers.remove((Player) object);
 		}
 	}
 
@@ -430,27 +437,36 @@ public class World {
 	}
 
 	/**
-	 * Despawn VisibleObject, object will become invisible and object position will become invalid. All others objects will be noticed that this object
-	 * is no longer visible.
+	 * Despawns the object with the default delete animation.
 	 * 
-	 * @throws NullPointerException
-	 *           if object is already despawned
+	 * @see #despawn(VisibleObject, ObjectDeleteAnimation)
 	 */
 	public void despawn(VisibleObject object) {
 		despawn(object, ObjectDeleteAnimation.FADE_OUT);
 	}
 
+	/**
+	 * Despawns the object, object will become invisible and object position will become invalid. All other objects will be noticed that this object
+	 * is no longer visible.
+	 * 
+	 * @throws NullPointerException
+	 *           if object is already despawned
+	 */
 	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
-		MapRegion oldMapRegion = object.getActiveRegion();
-		object.getPosition().setIsSpawned(false);
-		if (oldMapRegion != null) { // can be null if an instance gets deleted?
-			if (oldMapRegion.getParent() != null)
-				oldMapRegion.getParent().removeObject(object);
-			oldMapRegion.remove(object);
-			if (object instanceof Creature)
-				oldMapRegion.revalidateZones((Creature) object);
+		try {
+			object.getController().onDespawn();
+		} finally {
+			MapRegion oldMapRegion = object.getActiveRegion();
+			object.getPosition().setIsSpawned(false);
+			if (oldMapRegion != null) { // can be null if an instance gets deleted?
+				if (oldMapRegion.getParent() != null)
+					oldMapRegion.getParent().removeObject(object);
+				oldMapRegion.remove(object);
+				if (object instanceof Creature)
+					oldMapRegion.revalidateZones((Creature) object);
+			}
+			object.clearKnownlist(animation);
 		}
-		object.clearKnownlist(animation);
 	}
 
 	/**

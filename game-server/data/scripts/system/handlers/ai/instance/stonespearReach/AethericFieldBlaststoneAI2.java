@@ -30,7 +30,7 @@ public class AethericFieldBlaststoneAI2 extends NpcAI2 {
 	@Override
 	public void handleDied() {
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 
 	@Override

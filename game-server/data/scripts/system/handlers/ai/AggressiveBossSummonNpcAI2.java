@@ -18,13 +18,13 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
     public void handleAttackComplete() {
         super.handleAttackComplete();
         if (searched && (spawner == null || spawner.getLifeStats().isAlreadyDead() || spawner.getAggroList().getMostHated() == null)) {
-            getOwner().getController().onDelete();
+            getOwner().getController().delete();
         }
     }
 
     @Override
     public void handleFinishAttack() {
-        getOwner().getController().onDelete();
+        getOwner().getController().delete();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
 
     private void findCreator() {
         if (getOwner().getCreatorId() == 0) {
-            getOwner().getController().onDelete();
+            getOwner().getController().delete();
             return;
         }
         ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -60,6 +60,6 @@ public class AggressiveBossSummonNpcAI2 extends AggressiveNpcAI2 {
     @Override
     public void handleDied() {
         super.handleDied();
-        getOwner().getController().onDelete();
+        getOwner().getController().delete();
     }
 }

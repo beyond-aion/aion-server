@@ -79,7 +79,7 @@ public class LowerUdasTempleInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		for (Npc trap : traps) {
 			if (trap != null && trap.getNpcId() != 216531)
-				trap.getController().onDelete();
+				trap.getController().delete();
 		}
 	}
 }

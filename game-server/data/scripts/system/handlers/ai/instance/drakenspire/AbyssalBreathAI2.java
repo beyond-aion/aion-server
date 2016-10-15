@@ -22,7 +22,7 @@ public class AbyssalBreathAI2 extends GeneralNpcAI2 {
 						if (isInRange(p, 11))
 							SkillEngine.getInstance().getSkill(getOwner(), 21874, 1, p).useSkill();
 				});
-				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().onDelete(), 3000);
+				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 3000);
 			}, 4250);
 		}, 4000);
 	}

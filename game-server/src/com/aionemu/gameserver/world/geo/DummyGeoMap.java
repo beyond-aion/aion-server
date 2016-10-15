@@ -35,6 +35,11 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
+	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
+		return null;
+	}
+
+	@Override
 	public void setDoorState(int instanceId, String name, boolean state) {
 
 	}

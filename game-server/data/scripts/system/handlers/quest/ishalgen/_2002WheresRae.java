@@ -163,7 +163,7 @@ public class _2002WheresRae extends QuestHandler {
 							return false;
 						case SETPRO7:
 							if (var == 15) {
-								env.getVisibleObject().getController().onDelete();
+								env.getVisibleObject().getController().delete();
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

@@ -89,7 +89,7 @@ public class MonsterRaid {
 			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_DIE_03());
 			cancelDespawn();
 		} else {
-			boss.getController().onDelete();
+			boss.getController().delete();
 		}
 	}
 
@@ -111,9 +111,9 @@ public class MonsterRaid {
 
 	private void despawnVisiualNpcs() {
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 		if (vortex != null)
-			vortex.getController().onDelete();
+			vortex.getController().delete();
 	}
 
 	private void regDeathListener() {

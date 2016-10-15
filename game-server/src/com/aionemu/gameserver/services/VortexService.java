@@ -31,7 +31,6 @@ import com.aionemu.gameserver.world.WorldMapType;
  */
 public class VortexService {
 
-	private static final int duration = CustomConfig.VORTEX_DURATION;
 	private final Map<Integer, DimensionalVortex<?>> activeInvasions = new ConcurrentHashMap<>();
 	private Map<Integer, VortexLocation> vortex;
 
@@ -91,7 +90,7 @@ public class VortexService {
 				}
 			}
 
-		}, duration * 3600 * 1000);
+		}, getDuration() * 3600 * 1000);
 	}
 
 	public void stopInvasion(int id) {
@@ -137,7 +136,7 @@ public class VortexService {
 		// Despawn all NPC
 		for (VisibleObject npc : loc.getSpawned()) {
 			((Npc) npc).getController().cancelTask(TaskId.RESPAWN);
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 
 		loc.getSpawned().clear();
@@ -152,7 +151,7 @@ public class VortexService {
 	}
 
 	public int getDuration() {
-		return duration;
+		return CustomConfig.VORTEX_DURATION;
 	}
 
 	public void removeDefenderPlayer(Player player) {

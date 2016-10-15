@@ -22,7 +22,7 @@ public class HaramelInstance extends GeneralInstanceHandler {
 			return;
 		switch (npc.getNpcId()) {
 			case 216922:
-				npc.getController().onDelete();
+				npc.getController().delete();
 				sendMsg(1400713); // Hamerun has dropped a treasure chest.
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 457));
 				switch (player.getPlayerClass()) {
@@ -52,7 +52,7 @@ public class HaramelInstance extends GeneralInstanceHandler {
 			case 216921: // Brainwashed Dukaki Peon
 			case 217067: // Brainwashed MuMu Worker
 			case 700950: // Aether Cart
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}

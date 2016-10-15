@@ -29,7 +29,7 @@ public class VisibleObjectActions {
 	 */
 	public static void delete(VisibleObject obj, boolean scheduleRespawn) {
 		if (obj != null) {
-			obj.getController().onDelete();
+			obj.getController().delete();
 			if (scheduleRespawn)
 				RespawnService.scheduleRespawnTask(obj);
 		}

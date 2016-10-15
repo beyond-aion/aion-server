@@ -31,7 +31,7 @@ public class SummonFunctionalNpcEffect extends SummonEffect {
 			@Override
 			public void run() {
 				if (functionalNpc != null && functionalNpc.isSpawned())
-					functionalNpc.getController().onDelete();
+					functionalNpc.getController().delete();
 			}
 		}, 300000);
 	}

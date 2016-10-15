@@ -294,7 +294,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 		List<Npc> npcs = getPosition().getWorldMapInstance().getNpcs(npcId);
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

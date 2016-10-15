@@ -22,6 +22,6 @@ public class SealGuardianAI2 extends AggressiveNpcAI2 {
 		if (killer != null)
 			SkillEngine.getInstance().applyEffect(21625, getOwner(), killer);
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 }

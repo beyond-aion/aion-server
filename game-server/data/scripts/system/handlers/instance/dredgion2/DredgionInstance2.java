@@ -143,7 +143,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			QuestEngine.getInstance().onDredgionReward(env);
 		}
 		for (Npc npc : instance.getNpcs())
-			npc.getController().onDelete();
+			npc.getController().delete();
 
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isInstanceDestroyed) {

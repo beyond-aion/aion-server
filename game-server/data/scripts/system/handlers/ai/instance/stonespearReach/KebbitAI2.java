@@ -32,7 +32,7 @@ public class KebbitAI2 extends GeneralNpcAI2 {
 			@Override
 			public void run() {
 				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()) {
-					getOwner().getController().onDelete();
+					getOwner().getController().delete();
 				}
 			}
 		}, 15500); // 15,5s
@@ -42,7 +42,7 @@ public class KebbitAI2 extends GeneralNpcAI2 {
 	public void handleDied() {
 		cancelTask();
 		super.handleDied();
-		getOwner().getController().onDelete();
+		getOwner().getController().delete();
 	}
 
 	private void cancelTask() {

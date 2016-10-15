@@ -36,7 +36,7 @@ public class NidalberBalaurAI2 extends AggressiveNpcAI2 {
 			setNewSpawnPosition();
 			moveToQuestNpc();
 		} else {
-			getOwner().getController().onDelete();
+			getOwner().getController().delete();
 		}
 	}
 
@@ -71,7 +71,7 @@ public class NidalberBalaurAI2 extends AggressiveNpcAI2 {
 		if (getOwner().getPosition().getMapId() != 310040000 && getOwner().getPosition().getMapId() != 320040000)
 			return;
 		if (questNpc == null || questNpc.getLifeStats().isAlreadyDead()) {
-			getOwner().getController().onDelete();
+			getOwner().getController().delete();
 			return;
 		}
 		for (AggroInfo info : getOwner().getAggroList().getList()) {

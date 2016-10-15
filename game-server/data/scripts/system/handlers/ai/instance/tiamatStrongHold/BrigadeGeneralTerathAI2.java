@@ -154,7 +154,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
 			if (npc != null) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 		super.handleDied();
 		percents.clear();
 		cancelskillTask();
-		aethericField.getController().onDelete();
+		aethericField.getController().delete();
 		getPosition().getWorldMapInstance().getDoors().get(706).setOpen(true);
 		despawn();
 	}
@@ -185,7 +185,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 		isGravityEvent = false;
 		canThink = true;
 		isHome.set(true);
-		aethericField.getController().onDelete();
+		aethericField.getController().delete();
 		despawn();
 		getPosition().getWorldMapInstance().getDoors().get(706).setOpen(true);
 	}

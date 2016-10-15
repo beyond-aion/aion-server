@@ -117,7 +117,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			if (obj == null)
 				return;
 			sendPacket(new SM_HOUSE_EDIT(action + 1, 0, itemObjectId));
-			obj.getController().onDelete();
+			obj.getController().delete();
 			obj.setX(x);
 			obj.setY(y);
 			obj.setZ(z);
@@ -131,7 +131,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			if (obj == null)
 				return;
 			sendPacket(new SM_HOUSE_EDIT(action, 0, itemObjectId));
-			obj.getController().onDelete();
+			obj.getController().delete();
 			obj.removeFromHouse();
 			obj.clearKnownlist();
 			player.getHouseRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);

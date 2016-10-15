@@ -13,7 +13,6 @@ import com.aionemu.gameserver.configs.shedule.RiftSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
@@ -36,7 +35,6 @@ public class RiftService {
 	private Map<Integer, RiftLocation> locations;
 	private Map<Integer, RiftLocation> activeRifts = new FastMap<>();
 	private final Lock closing = new ReentrantLock();
-	private static final int duration = CustomConfig.RIFT_DURATION;
 
 	public void initRiftLocations() {
 		if (CustomConfig.RIFT_ENABLED) {
@@ -176,7 +174,7 @@ public class RiftService {
 			for (SpawnGroup2 group : locSpawns) {
 				for (SpawnTemplate st : group.getSpawnTemplates()) {
 					RiftSpawnTemplate template = (RiftSpawnTemplate) st;
-					location.getSpawned().add(SpawnEngine.spawnObject(template, 1));
+					location.getSpawned().add((Npc) SpawnEngine.spawnObject(template, 1));
 				}
 			}
 		}
@@ -190,16 +188,11 @@ public class RiftService {
 		location.setOpened(false);
 
 		// Despawn NPC
-		for (VisibleObject obj : location.getSpawned()) {
-			Npc spawned = (Npc) obj;
-			if (spawned == null)
+		for (Npc rift : location.getSpawned()) {
+			if (rift == null)
 				continue;
-			spawned.setDespawnDelayed(true);
-			if (spawned.getAggroList().getList().isEmpty()) {
-				spawned.getController().cancelTask(TaskId.RESPAWN);
-				if (!spawned.getLifeStats().isAlreadyDead())
-					obj.getController().onDelete();
-			}
+			rift.getController().cancelTask(TaskId.RESPAWN);
+			rift.getController().delete();
 		}
 
 		// Clear spawned list
@@ -220,7 +213,7 @@ public class RiftService {
 	}
 
 	public int getDuration() {
-		return duration;
+		return CustomConfig.RIFT_DURATION;
 	}
 
 	public RiftLocation getRiftLocation(int id) {

@@ -64,7 +64,7 @@ public class _30208GroupTheTruthHurts extends QuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SET_SUCCEED:
-							env.getVisibleObject().getController().onDelete();
+							env.getVisibleObject().getController().delete();
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return true;

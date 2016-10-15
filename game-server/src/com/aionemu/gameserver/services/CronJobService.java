@@ -60,7 +60,7 @@ public class CronJobService {
 					@Override
 					public void run() {
 						if (moltenus != null && !moltenus.getLifeStats().isAlreadyDead()) {
-							moltenus.getController().onDelete();
+							moltenus.getController().delete();
 							moltenus = null;
 						}
 					}
@@ -126,11 +126,11 @@ public class CronJobService {
 					@Override
 					public void run() {
 						if (asmodianUndergroundEntrance != null) {
-							asmodianUndergroundEntrance.getController().onDelete();
+							asmodianUndergroundEntrance.getController().delete();
 							asmodianUndergroundEntrance = null;
 						}
 						if (elyosUndergroundEntrance != null) {
-							elyosUndergroundEntrance.getController().onDelete();
+							elyosUndergroundEntrance.getController().delete();
 							elyosUndergroundEntrance = null;
 						}
 					}

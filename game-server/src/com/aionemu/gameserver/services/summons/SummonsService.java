@@ -89,7 +89,7 @@ public class SummonsService {
 
 			int summonedBySkillId = owner.getSummonedBySkillId();
 
-			owner.getController().onDelete();
+			owner.getController().delete();
 			owner.setMaster(null);
 			master.setSummon(null);
 
@@ -187,7 +187,7 @@ public class SummonsService {
 			return;
 		}
 		if (summon.getMaster() == null) {
-			summon.getController().onDelete();
+			summon.getController().delete();
 			return;
 		}
 		switch (summonMode) {

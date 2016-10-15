@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.rift;
 
 import java.util.List;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
 
 import javolution.util.FastTable;
@@ -15,7 +15,7 @@ public class RiftLocation {
 	private boolean opened;
 	private boolean withGuards = false;
 	protected RiftTemplate template;
-	private List<VisibleObject> spawned = new FastTable<>();
+	private List<Npc> spawned = new FastTable<>();
 
 	public RiftLocation() {
 	}
@@ -44,7 +44,7 @@ public class RiftLocation {
 		opened = state;
 	}
 
-	public List<VisibleObject> getSpawned() {
+	public List<Npc> getSpawned() {
 		return spawned;
 	}
 

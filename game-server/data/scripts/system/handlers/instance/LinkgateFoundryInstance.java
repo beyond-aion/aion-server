@@ -61,7 +61,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				break;
 			case 702590:
 				TeleportService2.teleportTo(player, 301270000, 257.11f, 323, 271, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				secretLabEntranceCount++;
 				if (secretLabEntranceCount < 3) {
 					spawn(234992, 244.1839f, 322.5356f, 270.9474f, (byte) 0);
@@ -98,7 +98,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 						for (Npc npc : instance.getNpcs()) {
 							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
 								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { // teleport device does not despawn
-								npc.getController().onDelete();
+								npc.getController().delete();
 							}
 						}
 						if (timeCheckTask != null && !timeCheckTask.isDone()) {

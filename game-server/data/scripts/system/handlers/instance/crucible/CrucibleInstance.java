@@ -70,13 +70,13 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 
 	protected void despawnNpc(Npc npc) {
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 
 	protected void despawnNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

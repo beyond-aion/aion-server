@@ -84,7 +84,7 @@ public class _4212MissingSidrunerk extends QuestHandler {
 				}
 			} else if (targetId == 730208) {
 				Npc npc = (Npc) env.getVisibleObject();
-				npc.getController().onDelete();
+				npc.getController().delete();
 				return true;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

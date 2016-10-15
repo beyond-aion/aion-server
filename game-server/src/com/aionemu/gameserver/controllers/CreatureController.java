@@ -263,14 +263,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Perform drop operation
-	 * 
-	 * @param player
-	 */
-	public void doDrop(Player player) {
-	}
-
-	/**
 	 * Perform reward operation
 	 */
 	public void doReward() {
@@ -421,9 +413,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	@Override
-	public void delete() {
+	public void onDelete() {
 		cancelAllTasks();
-		super.delete();
+		super.onDelete();
 	}
 
 	/**
@@ -555,9 +547,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		cancelTask(TaskId.DECAY);
 
 		Creature owner = getOwner();
-		if (owner == null || !owner.isSpawned()) {
-			return;
-		}
 		owner.getAggroList().clear();
 		owner.getObserveController().clear();
 	}

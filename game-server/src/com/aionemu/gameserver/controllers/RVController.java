@@ -191,10 +191,10 @@ public class RVController extends NpcController {
 	}
 
 	@Override
-	public void onDelete() {
+	public void onDespawn() {
 		RiftInformer.sendRiftDespawn(getOwner().getWorldId(), getOwner().getObjectId());
 		RiftManager.getSpawned().remove(getOwner());
-		super.onDelete();
+		super.onDespawn();
 	}
 
 	public boolean isMaster() {

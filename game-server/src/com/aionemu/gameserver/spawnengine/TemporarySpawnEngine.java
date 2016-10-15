@@ -45,7 +45,7 @@ public class TemporarySpawnEngine {
 						npc.getController().cancelTask(TaskId.RESPAWN);
 					}
 					if (object.isSpawned()) {
-						object.getController().onDelete();
+						object.getController().delete();
 					}
 				}
 			}

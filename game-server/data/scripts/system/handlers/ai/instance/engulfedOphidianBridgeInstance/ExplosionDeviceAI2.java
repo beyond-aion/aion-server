@@ -86,7 +86,7 @@ public class ExplosionDeviceAI2 extends ActionItemNpcAI2 {
 			@Override
 			public void run() {
 				for (Npc npc : bomb) {
-					npc.getController().onDelete();
+					npc.getController().delete();
 				}
 			}
 		}, 20000);

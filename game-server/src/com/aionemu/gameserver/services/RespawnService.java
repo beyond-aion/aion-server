@@ -107,7 +107,7 @@ public class RespawnService {
 		public void run() {
 			VisibleObject visibleObject = World.getInstance().findVisibleObject(objectId);
 			if (visibleObject != null) {
-				visibleObject.getController().onDelete();
+				visibleObject.getController().delete();
 			}
 		}
 

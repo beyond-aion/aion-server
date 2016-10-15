@@ -47,7 +47,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				break;
 			case 282291: // Surkana Feeder enables "hardmode"
 				sendMsg(1400996);
-				getNpc(217204).getController().onDelete();
+				getNpc(217204).getController().delete();
 				spawn(217205, 1315.43f, 1171.04f, 51.8054f, (byte) 66);
 				break;
 			case 217289:
@@ -84,7 +84,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				Npc keeningSirokin = getNpc(799580);
 				spawn(701025, 1038.63f, 987.74f, 328.356f, (byte) 0, 725);
 				PacketSendUtility.broadcastMessage(keeningSirokin, 342359);
-				keeningSirokin.getController().onDelete();
+				keeningSirokin.getController().delete();
 				break;
 			case 217284:
 			case 217283:

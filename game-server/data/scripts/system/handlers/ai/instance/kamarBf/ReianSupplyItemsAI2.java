@@ -23,13 +23,13 @@ public class ReianSupplyItemsAI2 extends ChestAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		if (flag != null)
-			flag.getController().onDelete();
+			flag.getController().delete();
 	}
 }

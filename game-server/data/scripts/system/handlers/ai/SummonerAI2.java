@@ -78,7 +78,7 @@ public class SummonerAI2 extends AggressiveNpcAI2 {
 		for (Integer object : spawnedNpc) {
 			VisibleObject npc = World.getInstance().findVisibleObject(object);
 			if (npc != null && npc.isSpawned()) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

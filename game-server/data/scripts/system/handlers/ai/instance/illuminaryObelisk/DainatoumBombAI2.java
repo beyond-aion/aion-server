@@ -31,7 +31,7 @@ public class DainatoumBombAI2 extends AggressiveNpcAI2 {
 						@Override
 						public void run() {
 							if (!isAlreadyDead())
-								getOwner().getController().onDelete();
+								getOwner().getController().delete();
 						}
 					}, 3500);
 				}

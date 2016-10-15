@@ -45,7 +45,7 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 		super.handleSpawned();
 		if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
 			getOwner().getController().addTask(TaskId.DESPAWN,
-				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().onDelete(), 30000));
+				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
 				getOwner().getKnownList().forEachPlayer(p -> {
 					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
@@ -163,7 +163,7 @@ public class SkillCooltimeResetAI2 extends NpcAI2 {
 							responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 							PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
 							if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
-								getOwner().getController().onDelete();
+								getOwner().getController().delete();
 							}
 						} else {
 							PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));

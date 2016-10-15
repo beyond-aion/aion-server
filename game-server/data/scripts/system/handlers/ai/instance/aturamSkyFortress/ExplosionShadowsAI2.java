@@ -80,7 +80,7 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
 						@Override
 						public void run() {
 							if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
-								npc.getController().onDelete();
+								npc.getController().delete();
 							}
 						}
 

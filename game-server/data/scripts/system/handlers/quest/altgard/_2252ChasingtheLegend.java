@@ -93,7 +93,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 							PacketSendUtility.broadcastMessage(questMob, 500, 1100630);
 							// TODO: set not usable icon to questStep1NpcId while mob is spawned, setting usable icon after mob is despawned
 							questMob.getController().addTask(TaskId.DESPAWN,
-								ThreadPoolManager.getInstance().schedule(() -> questMob.getController().delete(), spawnTime * 60000));
+								ThreadPoolManager.getInstance().schedule(() -> questMob.getController().onDelete(), spawnTime * 60000));
 
 						}
 				}

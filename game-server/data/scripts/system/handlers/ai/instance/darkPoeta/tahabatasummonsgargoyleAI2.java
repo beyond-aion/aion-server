@@ -44,7 +44,7 @@ public class tahabatasummonsgargoyleAI2 extends GeneralNpcAI2 {
 
 					@Override
 					public void run() {
-						getOwner().getController().onDelete();
+						getOwner().getController().delete();
 					}
 				}, 5000);
 			}

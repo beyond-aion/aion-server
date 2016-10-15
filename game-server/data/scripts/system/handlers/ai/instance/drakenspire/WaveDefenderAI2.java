@@ -26,7 +26,7 @@ public class WaveDefenderAI2 extends AggressiveNpcAI2 {
 	private void scheduleLocationUpdate() {
 		ThreadPoolManager.getInstance().schedule(() -> {
 				spawn(getOwner().getRace() == Race.ELYOS ? 236248 : 236249, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getHeading());
-				getOwner().getController().onDelete();
+				getOwner().getController().delete();
 		}, 3000);
 	}
 	

@@ -98,7 +98,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 
 	protected void selfDestroy(final Player player, SM_SYSTEM_MESSAGE message) {
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, getObjectId()));
-		getController().onDelete();
+		getController().delete();
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 		PacketSendUtility.sendPacket(player, message);
 		ownerHouse.getRegistry().removeObject(getObjectId());

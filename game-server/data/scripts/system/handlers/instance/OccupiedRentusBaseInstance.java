@@ -52,7 +52,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
 				doors.get(43).setOpen(false);
 				doors.get(150).setOpen(true);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 236302: // Archmagus Upadi
 				doors.get(70).setOpen(true);
@@ -183,12 +183,12 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	private void despawnNpc(Npc npc) {
 		if (npc != null)
-			npc.getController().onDelete();
+			npc.getController().delete();
 	}
 
 	private void deleteNpc(int npcId) {
 		if (getNpc(npcId) != null && !getNpc(npcId).getLifeStats().isAlreadyDead())
-			getNpc(npcId).getController().onDelete();
+			getNpc(npcId).getController().delete();
 	}
 
 	private boolean isDeadNpc(int npcId) {
@@ -231,7 +231,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				for (int npcId = 702677; npcId <= 702682; npcId++) {
 					Npc npc = getNpc(npcId);
 					spawn(npcId + 6, npc.getX(), npc.getY(), 151.785f, npc.getHeading()).getSpawn().setStaticId(npc.getSpawn().getStaticId());
-					npc.getController().onDelete();
+					npc.getController().delete();
 				}
 			}
 		}

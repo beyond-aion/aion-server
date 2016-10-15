@@ -50,7 +50,7 @@ public class SummonTrapEffect extends SummonEffect {
 
 			@Override
 			public void run() {
-				trap.getController().onDelete();
+				trap.getController().delete();
 			}
 		}, time * 1000);
 		trap.getController().addTask(TaskId.DESPAWN, task);

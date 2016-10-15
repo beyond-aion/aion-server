@@ -141,7 +141,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed && getNpc(700478) != null)
-					getNpc(700478).getController().onDelete();
+					getNpc(700478).getController().delete();
 			}
 		}, 300000);
 	}

@@ -102,7 +102,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
 
 								@Override
 								public void run() {
-									npc.getController().onDelete();
+									npc.getController().delete();
 								}
 							}, 40000);
 							return true;

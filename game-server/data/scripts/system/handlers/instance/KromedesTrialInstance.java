@@ -104,12 +104,12 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			case 282093: // Mana Relic
 				removeKaligaBuff(19248);
 				scheduleRespawn(npc);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 282095: // Strength Relic
 				removeKaligaBuff(19247);
 				scheduleRespawn(npc);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 		}
 	}

@@ -266,7 +266,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 
 		});
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -397,13 +397,13 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 					spawn(701900, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				} else {
 					spawn(701901, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-					npc.getController().onDelete();
+					npc.getController().delete();
 				}
 				break;
 		}
 		if (points > 0) {
 			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

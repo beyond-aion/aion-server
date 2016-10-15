@@ -34,7 +34,7 @@ public class BollvigAI2 extends AggressiveNpcAI2 {
 		super.handleSpawned();
 		Npc npc = getPosition().getWorldMapInstance().getNpc(204655);
 		if (npc != null)
-			npc.getController().onDelete();
+			npc.getController().delete();
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class BollvigAI2 extends AggressiveNpcAI2 {
 		if (getPosition().getWorldMapInstance().getNpcs(npcId) != null) {
 			List<Npc> npcs = getPosition().getWorldMapInstance().getNpcs(npcId);
 			for (Npc npc : npcs) {
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

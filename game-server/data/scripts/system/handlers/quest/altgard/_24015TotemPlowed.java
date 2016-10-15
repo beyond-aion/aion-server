@@ -40,12 +40,12 @@ public class _24015TotemPlowed extends QuestHandler {
 		if (var >= 2 && var < 4) {
 			qs.setQuestVarById(0, var + 1);
 			updateQuestStatus(env);
-			((Npc) env.getVisibleObject()).getController().onDelete();
+			((Npc) env.getVisibleObject()).getController().delete();
 			return true;
 		} else if (var == 4) {
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
-			((Npc) env.getVisibleObject()).getController().onDelete();
+			((Npc) env.getVisibleObject()).getController().delete();
 			return true;
 		}
 		return false;

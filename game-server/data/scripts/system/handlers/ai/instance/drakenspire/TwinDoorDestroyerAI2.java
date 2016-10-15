@@ -40,7 +40,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs())
 				if (npc.getNpcId() == 207128 || npc.getNpcId() == 207129)
-					npc.getController().onDelete();
+					npc.getController().delete();
 		}, 1500);
 	}
 

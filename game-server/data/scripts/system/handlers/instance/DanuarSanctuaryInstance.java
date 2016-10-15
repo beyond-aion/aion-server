@@ -37,7 +37,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 233187:
 				spawn(233087, 906.4945f, 861.5854f, 280.5441f, (byte) 73, 1699);
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 			case 235624:
 			case 235625:
@@ -47,7 +47,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 			case 730866:
 			case 233448:
 			case 233447:
-				npc.getController().onDelete();
+				npc.getController().delete();
 				break;
 
 		}

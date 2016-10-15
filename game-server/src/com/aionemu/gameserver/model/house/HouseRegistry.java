@@ -298,7 +298,7 @@ public class HouseRegistry {
 	public void despawnObjects(boolean remove) {
 		for (HouseObject<?> obj : getSpawnedObjects()) {
 			if (obj.isInWorld())
-				obj.getController().onDelete();
+				obj.getController().delete();
 			if (remove)
 				obj.removeFromHouse();
 		}

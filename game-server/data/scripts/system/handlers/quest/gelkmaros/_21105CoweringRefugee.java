@@ -51,7 +51,7 @@ public class _21105CoweringRefugee extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				} else if (dialog == DialogAction.SET_SUCCEED) {
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().onDelete();
+					npc.getController().delete();
 					removeQuestItem(env, 182207857, 1);
 					return defaultCloseDialog(env, 0, 1, true, false);
 				}

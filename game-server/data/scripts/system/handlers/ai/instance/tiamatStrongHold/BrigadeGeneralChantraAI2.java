@@ -67,7 +67,7 @@ public class BrigadeGeneralChantraAI2 extends AggressiveNpcAI2 {
 						spawn(283171, 1031.1f, 466.38f, 445.45f, (byte) 0);// 4.0
 					else
 						spawn(283172, 1031.1f, 466.38f, 445.45f, (byte) 0);// 4.0
-					ring.getController().onDelete();
+					ring.getController().delete();
 				}
 			}, 5000);
 		}

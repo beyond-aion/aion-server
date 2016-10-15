@@ -85,7 +85,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 
 	private void deleteNpc(Npc npc) {
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 	}
 

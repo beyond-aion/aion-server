@@ -50,7 +50,7 @@ public class _3712DredgionPrisonBreak extends QuestHandler {
 					}
 				} else if (dialog == DialogAction.SETPRO1) {
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().onDelete();
+					npc.getController().delete();
 					return defaultCloseDialog(env, 0, 1, true, false);
 				}
 			}

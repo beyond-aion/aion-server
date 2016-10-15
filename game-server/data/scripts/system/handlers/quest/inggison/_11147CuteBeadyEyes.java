@@ -65,7 +65,7 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 					return sendQuestDialog(env, 1693);
 				} else if (dialog == DialogAction.SETPRO3) {
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().onDelete();
+					npc.getController().delete();
 					return defaultCloseDialog(env, 2, 3);
 				}
 			} else if (targetId == 799081) {
@@ -73,7 +73,7 @@ public class _11147CuteBeadyEyes extends QuestHandler {
 					return sendQuestDialog(env, 2034);
 				} else if (dialog == DialogAction.SETPRO4) {
 					Npc npc = (Npc) env.getVisibleObject();
-					npc.getController().onDelete();
+					npc.getController().delete();
 					return defaultCloseDialog(env, 3, 4);
 				}
 			}

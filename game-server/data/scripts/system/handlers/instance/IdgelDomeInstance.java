@@ -157,7 +157,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 		});
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 

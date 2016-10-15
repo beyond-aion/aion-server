@@ -85,7 +85,7 @@ public abstract class Base<T extends BaseLocation> {
 		if (spawned != null) {
 			for (Npc npc : spawned) {
 				if (npc != null)
-					npc.getController().onDelete();
+					npc.getController().delete();
 			}
 		}
 	}
@@ -166,7 +166,7 @@ public abstract class Base<T extends BaseLocation> {
 	private void despawnAssaulter() {
 		for (Npc npc : assaulter) {
 			if (npc != null && !npc.getLifeStats().isAlreadyDead())
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 		assaulter.clear();
 	}
@@ -210,7 +210,7 @@ public abstract class Base<T extends BaseLocation> {
 				continue;
 			if (npc.getSpawn().getHandlerType().equals(type)) {
 				if (!npc.getLifeStats().isAlreadyDead())
-					npc.getController().onDelete();
+					npc.getController().delete();
 			}
 		}
 	}

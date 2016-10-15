@@ -255,7 +255,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		instanceReward.setRank(rank);
 		for (Npc npc : instance.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		doReward(rank);
 		return rank;
@@ -681,7 +681,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		if (npc.getNpcId() == 701625 || npc.getNpcId() == 701922) {
 			SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() == 701625 ? 21138 : 21139, player, player, 0);
-			npc.getController().onDelete();
+			npc.getController().delete();
 			switch (Rnd.get(1, 2)) {
 				case 1:
 					spawn(231160, 707.70288f, 259.17334f, 253.03772f, (byte) 40);

@@ -70,7 +70,7 @@ public class SummonServantEffect extends SummonEffect {
 
 			@Override
 			public void run() {
-				servant.getController().onDelete();
+				servant.getController().delete();
 			}
 		}, (time + 5) * 1000);
 		servant.getController().addTask(TaskId.DESPAWN, task);

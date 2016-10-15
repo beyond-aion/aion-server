@@ -62,7 +62,7 @@ public class IDSweep_HealTower extends GeneralNpcAI2 {
 			schedule.cancel(true);
 		}
 		
-		getOwner().getController().delete();
+		getOwner().getController().onDelete();
 	}
 	
 	private void doHeal() {

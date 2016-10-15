@@ -250,7 +250,7 @@ public final class PlayerEnterWorldService {
 					try {
 						enterWorld(client, player);
 					} catch (Throwable ex) {
-						player.getController().delete();
+						player.getController().onDelete();
 						pcd.setOnline(false);
 						DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
 						player.setClientConnection(null);

@@ -82,7 +82,7 @@ public class _30157VilisMind extends QuestHandler {
 
 								@Override
 								public void run() {
-									npc.getController().onDelete();
+									npc.getController().delete();
 								}
 							}, 40000);
 							return true;

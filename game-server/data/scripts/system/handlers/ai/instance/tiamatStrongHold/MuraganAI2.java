@@ -94,7 +94,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 		for (Npc npc : instance.getNpcs()) {
 			if (npc.getNpcId() == 219392) {// 4.0
 				spawn(283145, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());// 4.0
-				npc.getController().onDelete();
+				npc.getController().delete();
 			}
 		}
 	}

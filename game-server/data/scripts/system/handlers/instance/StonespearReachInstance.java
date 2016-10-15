@@ -201,7 +201,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 				break;
 		}
 
-		npc.getController().onDelete();
+		npc.getController().delete();
 	}
 
 	private synchronized void checkRank(int points, boolean bossKilled) {
@@ -270,7 +270,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void startInstance() {
 		Npc npc = instance.getNpc(833284);
 		if (npc != null) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 		}
 		startStage1_1();
 	}
@@ -795,7 +795,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void despawnAll() {
-		instance.getNpcs().stream().filter(npc -> npc != null).forEach(npc -> npc.getController().onDelete());
+		instance.getNpcs().stream().filter(npc -> npc != null).forEach(npc -> npc.getController().delete());
 	}
 
 	private void cancelAllTasks() {

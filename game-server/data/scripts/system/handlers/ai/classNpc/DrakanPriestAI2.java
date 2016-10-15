@@ -53,7 +53,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 			public void visit(Npc object) {
 				Npc healServant = getPosition().getWorldMapInstance().getNpc(282988);
 				if (healServant != null)
-					healServant.getController().onDelete();
+					healServant.getController().delete();
 			}
 		});
 	}

@@ -238,7 +238,7 @@ public class AhserionRaid {
 				status = AhserionRaidStatus.OFF;
 			}
 			// something went wrong, remove all players from the map
-			owner.getController().onDelete();
+			owner.getController().delete();
 			for (PanesterraTeam team : teams.values()) {
 				if (team != null) {
 					team.setIsEliminated(true);
@@ -247,7 +247,7 @@ public class AhserionRaid {
 			}
 			for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
 				if (obj instanceof Npc) {
-					((Npc) obj).getController().onDelete();
+					((Npc) obj).getController().delete();
 				} else if (obj instanceof Player) {
 					Player player = (Player) obj;
 					if (player != null && !player.isGM()) {
@@ -273,7 +273,7 @@ public class AhserionRaid {
 		}
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
 			if (npc != null && npc.getNpcId() != owner.getNpcId())
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 		scheduleStop();
 	}
@@ -318,7 +318,7 @@ public class AhserionRaid {
 	public void despawnAll() {
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
 			if (npc != null && !npc.getLifeStats().isAlreadyDead())
-				npc.getController().onDelete();
+				npc.getController().delete();
 		}
 	}
 
@@ -329,7 +329,7 @@ public class AhserionRaid {
 			if (!npc.getLifeStats().isAlreadyDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
 				AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
 				if (template.getTeam() == id)
-					npc.getController().onDelete();
+					npc.getController().delete();
 			}
 		}
 	}

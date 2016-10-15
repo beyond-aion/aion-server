@@ -163,7 +163,7 @@ public class Event extends AdminCommand {
 		}
 		int count = 0;
 		for (Npc npc : map.getNpcs()) {
-			npc.getController().onDelete();
+			npc.getController().delete();
 			count++;
 		}
 		for (StaticDoor door : map.getDoors().values())

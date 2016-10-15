@@ -650,20 +650,20 @@ public class SiegeService {
 	public void deSpawnNpcs(int siegeLocationId) {
 		// iterate over an array copy, since onDelete directly modifies the underlying collection
 		for (Object siegeNpc : World.getInstance().getLocalSiegeNpcs(siegeLocationId).toArray())
-			((SiegeNpc) siegeNpc).getController().onDelete();
+			((SiegeNpc) siegeNpc).getController().delete();
 	}
 
-	public boolean isSiegeNpcInActiveSiege(Npc npc) {
+	public boolean isRespawnAllowed(Npc npc) {
 		if (npc instanceof SiegeNpc) {
 			FortressLocation fort = getFortress(((SiegeNpc) npc).getSiegeId());
 			if (fort != null) {
 				if (fort.isVulnerable())
-					return true;
+					return false;
 				else if (fort.getNextState() == 1)
-					return npc.getSpawn().getRespawnTime() >= getSecondsBeforeHourEnd();
+					return npc.getSpawn().getRespawnTime() < getSecondsBeforeHourEnd();
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public void broadcastUpdate() {
