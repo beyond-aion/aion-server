@@ -142,8 +142,6 @@ public class EventTemplate {
 			return;
 
 		if (spawns != null && spawns.size() > 0) {
-			if (spawnedObjects == null)
-				spawnedObjects = new FastTable<>();
 			for (SpawnMap map : spawns.getTemplates()) {
 				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
@@ -201,11 +199,11 @@ public class EventTemplate {
 
 		if (spawnedObjects != null) {
 			for (VisibleObject o : spawnedObjects) {
-				if (o.isSpawned())
+				if (o.isInWorld())
 					o.getController().delete();
 			}
 			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
-			log.info("Despawned " + spawnedObjects.size() + " event objects (" + this.getName() + ")");
+			log.info("Deleted " + spawnedObjects.size() + " event objects (" + this.getName() + ")");
 			spawnedObjects.clear();
 			spawnedObjects = null;
 		}
@@ -236,8 +234,6 @@ public class EventTemplate {
 	 * @return the theme name
 	 */
 	public String getTheme() {
-		if (theme != null)
-			return theme.toLowerCase();
 		return theme;
 	}
 

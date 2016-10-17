@@ -145,7 +145,7 @@ public abstract class VisibleObject extends AionObject {
 	}
 
 	/**
-	 * @return
+	 * @return True if the object is in the world (can be a spawned or despawned object)
 	 */
 	public boolean isInWorld() {
 		return World.getInstance().isInWorld(getObjectId());

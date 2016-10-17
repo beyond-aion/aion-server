@@ -29,9 +29,8 @@ public enum EventType {
 
 	public static EventType getEventType(String theme) {
 		for (EventType type : values()) {
-			if (theme.equals(type.getTheme())) {
+			if (type.getTheme().equalsIgnoreCase(theme))
 				return type;
-			}
 		}
 		return EventType.NONE;
 	}

@@ -182,13 +182,8 @@ public class EventService {
 	public EventType getEventType() {
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
 			for (EventTemplate et : enabledEvents) {
-				String theme = et.getTheme();
-				if (theme != null) {
-					EventType type = EventType.getEventType(theme);
-					if (et.isActive() && !type.equals(EventType.NONE)) {
-						return type;
-					}
-				}
+				if (et.isStarted() && et.getTheme() != null)
+					return EventType.getEventType(et.getTheme());
 			}
 		}
 		return EventType.NONE;
