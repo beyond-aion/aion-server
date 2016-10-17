@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -26,7 +27,6 @@ import com.aionemu.gameserver.network.factories.AionPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.google.common.base.Preconditions;
 
 import javolution.util.FastTable;
 
@@ -353,7 +353,7 @@ public class AionConnection extends AConnection {
 	 *          account object associated with this connection
 	 */
 	public void setAccount(Account account) {
-		Preconditions.checkArgument(account != null, "Account can't be null");
+		Objects.requireNonNull(account, "Account can't be null");
 		this.account = account;
 	}
 

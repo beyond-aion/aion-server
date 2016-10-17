@@ -18,13 +18,7 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
 	 */
 	private final Player player;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param player
-	 */
 	public SM_PLAYER_SPAWN(Player player) {
-		super();
 		this.player = player;
 	}
 
