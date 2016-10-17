@@ -117,7 +117,7 @@ public class AbyssRankingCache {
 		for (Legion legion : LegionService.getInstance().getCachedLegions()) {
 			if (legionRanking.containsKey(legion.getLegionId())) {
 				legion.setLegionRank(getLegionRank(legion));
-				PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_EDIT(0x01, legion));
+				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_EDIT(0x01, legion));
 			}
 		}
 	}

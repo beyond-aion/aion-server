@@ -4,12 +4,12 @@ import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.model.EventType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.services.EventService;
 
 /**
  * @author -Nemesiss- CC fix
@@ -18,12 +18,35 @@ import com.aionemu.gameserver.services.EventService;
 public class SM_VERSION_CHECK extends AionServerPacket {
 
 	/**
+	 * Version number used for client version validation<br>
+	 * aion 3.0.0.0 = 194<br>
+	 * aion 3.1.0.0 = 195<br>
+	 * aion 3.5.0.0 = 196<br>
+	 * aion 4.0.0.0 = 201<br>
+	 * aion 4.5.0.0 = 203<br>
+	 * aion 4.5.0.15 = 204<br>
+	 * aion 4.7.0.5 = 205<br>
+	 * aion 4.7.5.0 = 206<br>
+	 * aion 4.8.0.0 = 207
+	 */
+	public static final int INTERNAL_VERSION = 207;
+
+	/**
 	 * Aion Client version
 	 */
 	private int version;
+	/**
+	 * City theme (for Pandemonium & Sanctum)
+	 */
+	private EventType cityDecoration;
 
-	public SM_VERSION_CHECK(int version) {
+	public SM_VERSION_CHECK(EventType cityDecoration) {
+		this(INTERNAL_VERSION, cityDecoration);
+	}
+
+	public SM_VERSION_CHECK(int version, EventType cityDecoration) {
 		this.version = version;
+		this.cityDecoration = cityDecoration;
 	}
 
 	@Override
@@ -43,16 +66,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 				limitFactionMode = 3;
 		}
 
-		// aion 3.0.0.0 = 194
-		// aion 3.1.0.0 = 195
-		// aion 3.5.0.0 = 196
-		// aion 4.0.0.0 = 201
-		// aion 4.5.0.0 = 203
-		// aion 4.5.0.15 = 204
-		// aion 4.7.0.5 = 205
-		// aion 4.7.5.0 = 206
-		// aion 4.8.0.0 = 207
-		if (version != 207) {
+		if (version != INTERNAL_VERSION) {
 			writeC(0x01); // Send wrong client version
 			return;
 		}
@@ -79,7 +93,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(1); // unk (always 1)
 		writeH(2); // unk (always 2)
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
-		writeC(EventService.getInstance().getEventType().getId()); // city decoration
+		writeC(cityDecoration.getId());
 		writeD(0); // unk
 		writeD(-(GSConfig.TIME_ZONE.getRawOffset() / 1000)); // server time zone offset relative to UTC in seconds
 		writeC(0x04); // unk

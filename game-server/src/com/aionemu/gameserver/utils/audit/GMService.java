@@ -109,9 +109,9 @@ public class GMService {
 		SM_SYSTEM_MESSAGE sysMsg = connected ? SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGIN_BUDDY(name) : SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGOFF_BUDDY(name);
 
 		if ((connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)) {
-			PacketSendUtility.broadcastFilteredPacket(sysMsg, p -> !p.equals(gm));
+			PacketSendUtility.broadcastToWorld(sysMsg, p -> !p.equals(gm));
 		} else {
-			PacketSendUtility.broadcastFilteredPacket(sysMsg, p -> p.isGM() && !p.equals(gm));
+			PacketSendUtility.broadcastToWorld(sysMsg, p -> p.isGM() && !p.equals(gm));
 		}
 	}
 

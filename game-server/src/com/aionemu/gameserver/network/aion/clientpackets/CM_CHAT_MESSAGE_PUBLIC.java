@@ -148,6 +148,6 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToLegionMembers(final Player player) {
-		PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_MESSAGE(player, message, type));
+		PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_MESSAGE(player, message, type));
 	}
 }

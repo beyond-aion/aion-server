@@ -46,7 +46,7 @@ public class AbyssPointsService {
 		// Add Abyss Points to Legion
 		if (player.isLegionMember() && value > 0) {
 			player.getLegion().addContributionPoints(value);
-			PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_LEGION_EDIT(0x03, player.getLegion()));
+			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_EDIT(0x03, player.getLegion()));
 		}
 	}
 

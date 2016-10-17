@@ -170,7 +170,7 @@ public class FindGroupService {
 				unk2 = 0;
 				unk3 = 16;
 			}
-			PacketSendUtility.broadcastFilteredPacket(new SM_FIND_GROUP(action + 1, playerObjId, serverId, unk1, unk2, unk3), p -> race == p.getRace());
+			PacketSendUtility.broadcastToWorld(new SM_FIND_GROUP(action + 1, playerObjId, serverId, unk1, unk2, unk3), p -> race == p.getRace());
 		}
 		return findGroup;
 	}
