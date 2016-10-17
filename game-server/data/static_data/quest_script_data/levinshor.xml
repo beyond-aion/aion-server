@@ -129,7 +129,7 @@
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375"/>
 	<monster_hunt id="13703" start_npc_ids="802350" end_dialog_id="2375"/>
-	<monster_hunt id="13705" start_npc_ids="802343" end_npc_ids="802345" end_dialog_id="2375"/>
+	<monster_hunt id="13705" start_npc_ids="802331" end_npc_ids="802333" end_dialog_id="2375"/>
 	<monster_hunt id="13758" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
 	<monster_hunt id="13759" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
 	<monster_hunt id="13760" start_npc_ids="805269 805270 805271" end_reward_next_step="true"/>
