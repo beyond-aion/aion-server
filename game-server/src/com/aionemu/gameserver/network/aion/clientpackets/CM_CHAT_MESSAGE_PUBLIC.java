@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -102,14 +101,8 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 	private void broadcastFromCommander(final Player player) {
 		final int senderRace = player.getRace().getRaceId();
-		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
-
-			@Override
-			public boolean acceptObject(Player object) {
-				return (senderRace == object.getRace().getRaceId() || player.isGM() || object.isGM());
-			}
-
-		});
+		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true,
+			p -> senderRace == p.getRace().getRaceId() || player.isGM() || p.isGM());
 	}
 
 	/**
@@ -118,14 +111,8 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToPlayers(final Player player) {
-		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
-
-			@Override
-			public boolean acceptObject(Player object) {
-				return !object.getBlockList().contains(player.getObjectId()) || player.isGM() || object.isGM();
-			}
-
-		});
+		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true,
+			p -> !p.getBlockList().contains(player.getObjectId()) || player.isGM() || p.isGM());
 	}
 
 	/**

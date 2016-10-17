@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -110,21 +109,9 @@ public class GMService {
 		SM_SYSTEM_MESSAGE sysMsg = connected ? SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGIN_BUDDY(name) : SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGOFF_BUDDY(name);
 
 		if ((connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)) {
-			PacketSendUtility.broadcastFilteredPacket(sysMsg, new ObjectFilter<Player>() {
-
-				@Override
-				public boolean acceptObject(Player player) {
-					return !player.equals(gm);
-				}
-			});
+			PacketSendUtility.broadcastFilteredPacket(sysMsg, p -> !p.equals(gm));
 		} else {
-			PacketSendUtility.broadcastFilteredPacket(sysMsg, new ObjectFilter<Player>() {
-
-				@Override
-				public boolean acceptObject(Player player) {
-					return player.isGM() && !player.equals(gm);
-				}
-			});
+			PacketSendUtility.broadcastFilteredPacket(sysMsg, p -> p.isGM() && !p.equals(gm));
 		}
 	}
 

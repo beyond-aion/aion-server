@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -77,13 +76,7 @@ public class DropService {
 						// fix for elyos/asmodians being able to loot elyos/asmodian npcs
 						// TODO there might be more npcs who are friendly towards players and should not be loot able by them
 						if (npc instanceof Npc && (Race.ASMODIANS == ((Npc) npc).getRace() || Race.ELYOS == ((Npc) npc).getRace())) {
-							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), false, new ObjectFilter<Player>() {
-
-								@Override
-								public boolean acceptObject(Player object) {
-									return ((Npc) npc).getRace() != object.getRace();
-								}
-							});
+							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), false, p -> ((Npc) npc).getRace() != p.getRace());
 						} else {
 							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0));
 						}
@@ -200,14 +193,7 @@ public class DropService {
 			if (dropNpc.isFreeForAll()) {
 				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcId, 0));
 			} else {
-				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcId, 0), true, new ObjectFilter<Player>() {
-
-					@Override
-					public boolean acceptObject(Player object) {
-						return dropNpc.containsKey(object.getObjectId());
-					}
-
-				});
+				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcId, 0), true, p -> dropNpc.containsKey(p.getObjectId()));
 			}
 		}
 	}

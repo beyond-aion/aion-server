@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.utils;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
+import java.util.function.Predicate;
+
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -180,12 +181,12 @@ public class PacketSendUtility {
 	 * @param filter
 	 *          filter determining who should be messaged
 	 */
-	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, ObjectFilter<Player> filter) {
+	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, Predicate<Player> filter) {
 		if (toSelf && object instanceof Player)
 			sendPacket((Player) object, packet);
 
 		object.getKnownList().forEachPlayer(player -> {
-			if (filter.acceptObject(player))
+			if (filter.test(player))
 				sendPacket(player, packet);
 		});
 	}
@@ -206,9 +207,9 @@ public class PacketSendUtility {
 	 * @param filter
 	 *          filter determining who should be messaged
 	 */
-	public static void broadcastFilteredPacket(AionServerPacket packet, ObjectFilter<Player> filter) {
+	public static void broadcastFilteredPacket(AionServerPacket packet, Predicate<Player> filter) {
 		World.getInstance().forEachPlayer(player -> {
-			if (filter.acceptObject(player))
+			if (filter.test(player))
 				sendPacket(player, packet);
 		});
 	}

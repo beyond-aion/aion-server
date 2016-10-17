@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
-import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -171,13 +170,7 @@ public class FindGroupService {
 				unk2 = 0;
 				unk3 = 16;
 			}
-			PacketSendUtility.broadcastFilteredPacket(new SM_FIND_GROUP(action + 1, playerObjId, serverId, unk1, unk2, unk3), new ObjectFilter<Player>() {
-
-				@Override
-				public boolean acceptObject(Player object) {
-					return race == object.getRace();
-				}
-			});
+			PacketSendUtility.broadcastFilteredPacket(new SM_FIND_GROUP(action + 1, playerObjId, serverId, unk1, unk2, unk3), p -> race == p.getRace());
 		}
 		return findGroup;
 	}
