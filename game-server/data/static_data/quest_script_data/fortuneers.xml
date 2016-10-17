@@ -31,25 +31,25 @@
 			36526 [XML] Cut Up the Nightbutcher
 			36527 [XML] To Kill a Gryphu
 			36528 [XML] A Sticky Situation
-			36529 [XML_R] [Daily] Reward for Gold Pearls
-			36530 [XML_R] [Daily] The Black Rose
-			36531 [XML_R] [Daily] Furfuraceous Stisch
-			36532 [XML_R] [Daily] Clampseal Linkroll
-			36533 [XML_R] [Daily] Lichenback Maello
-			36534 [XML_R] [Daily] Red Horn Spiner
-			36535 [XML_R] [Daily] Shellback Slime
-			36536 [XML_R] [Daily] Protector Krudun
-			36537 [XML_R] [Daily] Mossy Balaur Boxes
-			36538 [XML_R] [Daily] Hybrid Plant Seeds
-			36539 [XML_R] [Daily] Adaptor Kremio
-			36540 [XML_R] [Daily] Voracious Votarient
-			36541 [XML_R] [Daily] Spry Taki
-			36542 [XML_R] [Daily] Seascape Manta
-			36543 [XML_R] [Daily] Sandsail Shakill
-			36544 [XML_R] [Daily] Tidelapped Mutanka
-			36545 [XML_R] [Spy/Daily] Ceruleanscale Kerub
-			36546 [XML_R] [Spy/Daily] Zephyrwing Klare
-			36547 [XML_R] [Spy/Daily] Octena Meduza
+			36529 [XML] [Daily] Reward for Gold Pearls
+			36530 [XML] [Daily] The Black Rose
+			36531 [XML] [Daily] Furfuraceous Stisch
+			36532 [XML] [Daily] Clampseal Linkroll
+			36533 [XML] [Daily] Lichenback Maello
+			36534 [XML] [Daily] Red Horn Spiner
+			36535 [XML] [Daily] Shellback Slime
+			36536 [XML] [Daily] Protector Krudun
+			36537 [XML] [Daily] Mossy Balaur Boxes
+			36538 [XML] [Daily] Hybrid Plant Seeds
+			36539 [XML] [Daily] Adaptor Kremio
+			36540 [XML] [Daily] Voracious Votarient
+			36541 [XML] [Daily] Spry Taki
+			36542 [XML] [Daily] Seascape Manta
+			36543 [XML] [Daily] Sandsail Shakill
+			36544 [XML] [Daily] Tidelapped Mutanka
+			36545 [XML] [Spy/Daily] Ceruleanscale Kerub
+			36546 [XML] [Spy/Daily] Zephyrwing Klare
+			36547 [XML] [Spy/Daily] Octena Meduza
 			36548 [XML_R] [Spy/Daily] Desert King Durianne
 			38002 [SCRIPT] Fortuneers Call to Arms
 			38005 [XML] Fortuneers Call to Arms
@@ -71,12 +71,10 @@
 	<item_collecting id="36525" end_npc_ids="799837 799838"/>
 	<item_collecting id="36527" end_npc_ids="799837 799838"/>
 	<item_collecting id="36528" end_npc_ids="799837 799838"/>
-	<!-- 
 	<item_collecting id="36529" end_npc_ids="804948"/>
 	<item_collecting id="36530" end_npc_ids="804948"/>
 	<item_collecting id="36537" end_npc_ids="804950"/>
 	<item_collecting id="36538" end_npc_ids="804951"/>
-	-->
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="36500" end_npc_ids="799837 799838"/>
@@ -85,7 +83,6 @@
 	<monster_hunt id="36521" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36523" end_npc_ids="799837 799838"/>
 	<monster_hunt id="36526" end_npc_ids="799837 799838"/>
-	<!--
 	<monster_hunt id="36531" end_npc_ids="804948"/>
 	<monster_hunt id="36532" end_npc_ids="804949"/>
 	<monster_hunt id="36533" end_npc_ids="804949"/>
@@ -94,7 +91,7 @@
 	<monster_hunt id="36536" end_npc_ids="236647"/>
 	<monster_hunt id="36539" end_npc_ids="804952"/>
 	<monster_hunt id="36540" end_npc_ids="804952"/>
-	<monster_hunt id="36541" end_npc_ids="804951"/>
+	<monster_hunt id="36541" end_npc_ids="804951"/> 
 	<monster_hunt id="36542" end_npc_ids="804951"/>
 	<monster_hunt id="36543" end_npc_ids="804954"/>
 	<monster_hunt id="36544" end_npc_ids="804951"/>
@@ -102,7 +99,6 @@
 	<monster_hunt id="36546" end_npc_ids="804948"/>
 	<monster_hunt id="36547" end_npc_ids="804948"/>
 	<monster_hunt id="36548" end_npc_ids="804948"/>
-	-->
 	
 	<!-- KILL SPAWNED -->
 	<kill_spawned id="36504" end_npc_ids="799837 799838">

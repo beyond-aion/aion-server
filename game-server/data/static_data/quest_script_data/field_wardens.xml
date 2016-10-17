@@ -43,20 +43,20 @@
 			45049 [XML] Hunt the Starved Barghest
 			45050 [XML] Eradicate the Plains Baku
 			45051 [XML] Eradicate the Smiling Dragrint
-			45052 [XML_R] [Daily] Field Orders
-			45053 [XML_R] [Daily] Supply Pearls
-			45054 [XML_R] [Daily] Supply Ancient Drana
-			45055 [XML_R] [Daily] Survey Pentachroma Coast
-			45056 [XML_R] [Daily] Aurelian Timbers Assessment
-			45057 [XML_R] [Daily] Sanguisands Survey
-			45058 [XML_R] [Daily] Starmaw Dionae Must Die
-			45059 [XML_R] [Daily] Petalsprite Fight
-			45060 [XML_R] [Daily] Skulk the Petrahulks
-			45061 [XML_R] [Daily] Bad Luck Sheluk
-			45062 [XML_R] [Daily] Bad to the Brawlers
-			45063 [XML_R] [Daily] Corask Task
-			45064 [XML_R] [Daily] Petrahulk Bulk
-			45065 [XML_R] [Daily] Frillnecks on the Fray
+			45052 [XML] [Daily] Field Orders
+			45053 [XML] [Daily] Supply Pearls
+			45054 [XML] [Daily] Supply Ancient Drana
+			45055 [XML] [Daily] Survey Pentachroma Coast
+			45056 [XML] [Daily] Aurelian Timbers Assessment
+			45057 [XML] [Daily] Sanguisands Survey
+			45058 [XML] [Daily] Starmaw Dionae Must Die
+			45059 [XML] [Daily] Petalsprite Fight
+			45060 [XML] [Daily] Skulk the Petrahulks
+			45061 [XML] [Daily] Bad Luck Sheluk
+			45062 [XML] [Daily] Bad to the Brawlers
+			45063 [XML] [Daily] Corask Task
+			45064 [XML] [Daily] Petrahulk Bulk
+			45065 [XML] [Daily] Frillnecks on the Fray
 			48000 [SCRIPT] Summons from the Wardens
 			48003 [XML] Message from the Field Wardens
 		[END] SUMMARY
@@ -108,7 +108,6 @@
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to id="48003" start_npc_ids="204191" end_npc_ids="799845"/>
-	<!-- 
 	<report_to_many id="45055" end_npc_ids="804931">
 		<npc_infos npc_ids="804902"/>
 	</report_to_many>
@@ -118,7 +117,6 @@
 	<report_to_many id="45057" end_npc_ids="804933">
 		<npc_infos npc_ids="804924"/>
 	</report_to_many>
-	-->
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="45007" end_npc_ids="799848"/>
@@ -139,10 +137,8 @@
 	<item_collecting id="45046" end_npc_ids="799842 799843"/>
 	<item_collecting id="45047" end_npc_ids="799842 799843"/>
 	<item_collecting id="45048" end_npc_ids="799842 799843"/>
-	<!-- 
 	<item_collecting id="45053" end_npc_ids="804930"/>
 	<item_collecting id="45054" end_npc_ids="804930"/>
-	-->
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="45009" end_npc_ids="799848"/>
@@ -157,7 +153,6 @@
 	<monster_hunt id="45049" end_npc_ids="799842 799843"/>
 	<monster_hunt id="45050" end_npc_ids="799842 799843"/>
 	<monster_hunt id="45051" end_npc_ids="799842 799843"/>
-	<!-- 
 	<monster_hunt id="45052" end_npc_ids="804930"/>
 	<monster_hunt id="45058" end_npc_ids="804931"/>
 	<monster_hunt id="45059" end_npc_ids="804931"/>
@@ -167,5 +162,4 @@
 	<monster_hunt id="45063" end_npc_ids="804935"/>
 	<monster_hunt id="45064" end_npc_ids="804936"/>
 	<monster_hunt id="45065" end_npc_ids="804937"/>
-	-->
 </quest_scripts>

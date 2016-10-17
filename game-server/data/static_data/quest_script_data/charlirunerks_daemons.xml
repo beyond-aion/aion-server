@@ -31,26 +31,26 @@
 			46526 [XML] Talking to Plants
 			46527 [XML] An Officer and a Drakan
 			46528 [XML] Ancient Mutant Warrior Beast
-			46529 [XML_R] [Daily] Bounty on Mossy Treasure Chests
-			46530 [XML_R] [Daily] Bounty on Sea Crystals
-			46531 [XML_R] [Daily] Bounty on Ceruleanscale Kerub
-			46532 [XML_R] [Daily] Bounty on Zephyrwing Klare
-			46533 [XML_R] [Daily] Bounty on Crimsontipped Menui
-			46534 [XML_R] [Daily] Bounty on Goldclamp Pincers
-			46535 [XML_R] [Daily] Bounty on Octena Meduza
-			46536 [XML_R] [Daily] Bounty on Scotch Bonnet Bartul
-			46537 [XML_R] [Daily] Bounty on Ancient Fossils
-			46538 [XML_R] [Daily] Find the Remains of the Giant Weapon
-			46539 [XML_R] [Daily] Bounty on Death Tail Venod
-			46540 [XML_R] [Daily] Bounty on Slothstep Marg
-			46541 [XML_R] [Daily] Bounty on Desert King Durianne
-			46542 [XML_R] [Daily] Bounty on Jzas the Tyrant
-			46543 [XML_R] [Daily] Bounty on Steelhide Tocal
-			46544 [XML_R] [Daily] Bounty on Smolderscale Alligate
-			46545 [XML_R] [Spy/Daily] Bounty on Furfuraceous Stisch
-			46546 [XML_R] [Spy/Daily] Bounty on Clampseal Linkroll
-			46547 [XML_R] [Spy/Daily] Bounty on Slimepaw Gerger
-			46548 [XML_R] [Spy/Daily] Bounty on Spry Taki
+			46529 [XML] [Daily] Bounty on Mossy Treasure Chests
+			46530 [XML] [Daily] Bounty on Sea Crystals
+			46531 [XML] [Daily] Bounty on Ceruleanscale Kerub
+			46532 [XML] [Daily] Bounty on Zephyrwing Klare
+			46533 [XML] [Daily] Bounty on Crimsontipped Menui
+			46534 [XML] [Daily] Bounty on Goldclamp Pincers
+			46535 [XML] [Daily] Bounty on Octena Meduza
+			46536 [XML] [Daily] Bounty on Scotch Bonnet Bartul
+			46537 [XML] [Daily] Bounty on Ancient Fossils
+			46538 [XML] [Daily] Find the Remains of the Giant Weapon
+			46539 [XML] [Daily] Bounty on Death Tail Venod
+			46540 [XML] [Daily] Bounty on Slothstep Marg
+			46541 [XML] [Daily] Bounty on Desert King Durianne
+			46542 [XML] [Daily] Bounty on Jzas the Tyrant
+			46543 [XML] [Daily] Bounty on Steelhide Tocal
+			46544 [XML] [Daily] Bounty on Smolderscale Alligate
+			46545 [XML] [Spy/Daily] Bounty on Furfuraceous Stisch
+			46546 [XML] [Spy/Daily] Bounty on Clampseal Linkroll
+			46547 [XML] [Spy/Daily] Bounty on Slimepaw Gerger
+			46548 [XML] [Spy/Daily] Bounty on Spry Taki
 			48002 [SCRIPT] Charlirunerk's Daemons Want You!
 			48005 [XML] Message from the Daemons
 		[END] SUMMARY
@@ -69,12 +69,10 @@
 	<item_collecting id="46525" end_npc_ids="799882 799883"/>
 	<item_collecting id="46526" end_npc_ids="799882 799883"/>
 	<item_collecting id="46528" end_npc_ids="799882 799883"/>
-	<!-- 
 	<item_collecting id="46529" end_npc_ids="804955"/>
 	<item_collecting id="46530" end_npc_ids="804955"/>
 	<item_collecting id="46537" end_npc_ids="804956"/>
 	<item_collecting id="46538" end_npc_ids="804957"/>
-	-->
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="46500" end_npc_ids="799882 799883" end_reward="true"/>
@@ -87,7 +85,6 @@
 	<monster_hunt id="46522" end_npc_ids="799882 799883"/>
 	<monster_hunt id="46523" end_npc_ids="799882 799883"/>
 	<monster_hunt id="46527" end_npc_ids="799882 799883"/>
-	<!-- 
 	<monster_hunt id="46531" end_npc_ids="804955"/>
 	<monster_hunt id="46532" end_npc_ids="804958"/>
 	<monster_hunt id="46533" end_npc_ids="804958"/>
@@ -104,7 +101,6 @@
 	<monster_hunt id="46546" end_npc_ids="804955"/>
 	<monster_hunt id="46547" end_npc_ids="804955"/>
 	<monster_hunt id="46548" end_npc_ids="804955"/>
-	-->
 	
 	<!-- KILL SPAWN QUESTS -->
 	<kill_spawned id="46504" end_npc_ids="799882 799883">
