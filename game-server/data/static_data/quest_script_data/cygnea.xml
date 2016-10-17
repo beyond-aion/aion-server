@@ -175,7 +175,7 @@
 	<item_collecting id="15232" start_npc_ids="805222"/>
 	
 	<!-- FOUNTAIN REWARD -->
-	<fountain_rewards id="15205" start_npc_ids="804788"/>
+	<fountain_rewards id="15205" start_npc_ids="730556 804788"/>
 	
 	<!-- KILL IN ZONE QUESTS -->
 	<kill_in_zone id="15220" start_npc_ids="804876" zones="CRIMSON_HILLS_210070000 CORAL_RISE_210070000" amount="2" level_diff="5"/>
