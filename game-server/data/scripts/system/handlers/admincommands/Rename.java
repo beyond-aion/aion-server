@@ -120,7 +120,7 @@ public class Rename extends AdminCommand {
 		}
 
 		if (player.isLegionMember()) {
-			PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
 		}
 		PacketSendUtility.sendMessage(player, "You have been renamed to " + rename);
 		PacketSendUtility.sendMessage(admin, "Player " + recipient + " has been renamed to " + rename);

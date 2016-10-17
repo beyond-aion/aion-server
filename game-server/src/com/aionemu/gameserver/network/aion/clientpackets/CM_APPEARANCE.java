@@ -129,7 +129,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			legion.setLegionName(newName);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
 
-			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
+			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player member : legion.getOnlineLegionMembers()) {
 				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getLegionName(),
 					member.getLegionMember().getRank().getRankId()), true);

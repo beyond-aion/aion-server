@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.utils;
 
-import com.aionemu.commons.objects.filter.ObjectFilter;
+import java.util.function.Predicate;
+
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -70,7 +71,7 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Send packet to this player
+	 * Sends a packet to the given player
 	 */
 	public static void sendPacket(Player player, AionServerPacket packet) {
 		if (player.isOnline())
@@ -78,7 +79,7 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcast packet to all visible players.
+	 * Broadcasts a packet to all players, that the given player knows.
 	 *
 	 * @param player
 	 * @param packet
@@ -94,7 +95,7 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcast packet to players.
+	 * Broadcasts a packet to all players, that the given player knows and are in/not in his team.
 	 *
 	 * @param player
 	 * @param packet
@@ -108,30 +109,19 @@ public class PacketSendUtility {
 		if (toSelf)
 			sendPacket(player, packet);
 
-		broadcastTeamPacket(player, packet, toTeam);
-	}
-
-	/**
-	 * Broadcast packet to Players only in team or all others w/o team members
-	 *
-	 * @param visibleObject
-	 * @param packet
-	 * @param toTeam
-	 */
-	public static void broadcastTeamPacket(Player visibleObject, AionServerPacket packet, boolean toTeam) {
-		visibleObject.getKnownList().forEachPlayer(player -> {
+		player.getKnownList().forEachPlayer(p -> {
 			if (toTeam) {
-				if (player.isInTeam() && player.getCurrentTeamId() == visibleObject.getCurrentTeamId()) {
-					sendPacket(player, packet);
+				if (p.isInTeam() && p.getCurrentTeamId() == player.getCurrentTeamId()) {
+					sendPacket(p, packet);
 				}
-			} else if (!player.isInTeam() || player.getCurrentTeamId() != visibleObject.getCurrentTeamId()) {
-				sendPacket(player, packet);
+			} else if (!p.isInTeam() || p.getCurrentTeamId() != player.getCurrentTeamId()) {
+				sendPacket(p, packet);
 			}
 		});
 	}
 
 	/**
-	 * Broadcast packet to all visible players.
+	 * Broadcasts a packet to all players, that the given object knows and the object itself, if it's a player.
 	 *
 	 * @param visibleObject
 	 * @param packet
@@ -151,7 +141,7 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcast packet to all Players from knownList of the given visible object.
+	 * Broadcasts a packet to all players that the given object knows.
 	 *
 	 * @param visibleObject
 	 * @param packet
@@ -170,7 +160,7 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcasts packet to all known players matching a filter
+	 * Broadcasts a packet to all players that the given object knows and matches the filter.
 	 *
 	 * @param object
 	 * @param packet
@@ -180,35 +170,41 @@ public class PacketSendUtility {
 	 * @param filter
 	 *          filter determining who should be messaged
 	 */
-	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, ObjectFilter<Player> filter) {
+	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, Predicate<Player> filter) {
 		if (toSelf && object instanceof Player)
 			sendPacket((Player) object, packet);
 
 		object.getKnownList().forEachPlayer(player -> {
-			if (filter.acceptObject(player))
+			if (filter.test(player))
 				sendPacket(player, packet);
 		});
 	}
 
 	/**
-	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that the given object knows.
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that the given object knows.
 	 */
 	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, int delay) {
 		schedule(() -> broadcastPacket(object, packet), delay);
 	}
 
 	/**
-	 * Broadcasts packet to all logged in players matching a filter.
+	 * Broadcasts a packet to all logged in players.
+	 */
+	public static void broadcastToWorld(AionServerPacket packet) {
+		World.getInstance().forEachPlayer(player -> sendPacket(player, packet));
+	}
+
+	/**
+	 * Broadcasts a packet to all logged in players matching a filter.
 	 *
-	 * @param player
 	 * @param packet
 	 *          ServerPacket to be broadcast
 	 * @param filter
 	 *          filter determining who should be messaged
 	 */
-	public static void broadcastFilteredPacket(AionServerPacket packet, ObjectFilter<Player> filter) {
+	public static void broadcastToWorld(AionServerPacket packet, Predicate<Player> filter) {
 		World.getInstance().forEachPlayer(player -> {
-			if (filter.acceptObject(player))
+			if (filter.test(player))
 				sendPacket(player, packet);
 		});
 	}
@@ -221,13 +217,13 @@ public class PacketSendUtility {
 	 * @param packet
 	 *          ServerPacket to be broadcast
 	 */
-	public static void broadcastPacketToLegion(Legion legion, AionServerPacket packet) {
+	public static void broadcastToLegion(Legion legion, AionServerPacket packet) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
 			sendPacket(onlineLegionMember, packet);
 		}
 	}
 
-	public static void broadcastPacketToLegion(Legion legion, AionServerPacket packet, int playerObjId) {
+	public static void broadcastToLegion(Legion legion, AionServerPacket packet, int playerObjId) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
 			if (onlineLegionMember.getObjectId() != playerObjId)
 				sendPacket(onlineLegionMember, packet);
@@ -263,14 +259,14 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcasts the packet to all players that are on the same map instance as the object.
+	 * Broadcasts a packet to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet) {
 		broadcastToMap(object, packet, 0);
 	}
 
 	/**
-	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet, int delay) {
 		schedule(() -> object.getPosition().getWorldMapInstance().forEachPlayer(player -> {
@@ -280,21 +276,21 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcasts the packet to all players that are on the default map instance.
+	 * Broadcasts a packet to all players that are on the default map instance.
 	 */
 	public static void broadcastToMap(WorldMap map, AionServerPacket packet) {
 		broadcastToMap(map.getMainWorldMapInstance(), packet, 0);
 	}
 
 	/**
-	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the default map instance.
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the default map instance.
 	 */
 	public static void broadcastToMap(WorldMap map, AionServerPacket packet, int delay) {
 		broadcastToMap(map.getMainWorldMapInstance(), packet, delay);
 	}
 
 	/**
-	 * Broadcasts the packet after the specified delay (in milliseconds) to all players that are on the specified map instance.
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the specified map instance.
 	 */
 	public static void broadcastToMap(WorldMapInstance mapInstance, AionServerPacket packet, int delay) {
 		schedule(() -> mapInstance.forEachPlayer(player -> sendPacket(player, packet)), delay);

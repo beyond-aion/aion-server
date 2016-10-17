@@ -276,7 +276,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				if (!p.equals(player))
 					PacketSendUtility.sendMessage(p, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER);
 			});
-			PacketSendUtility.broadcastFilteredPacket(new SM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER),
+			PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER),
 					p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
 		}
 	}

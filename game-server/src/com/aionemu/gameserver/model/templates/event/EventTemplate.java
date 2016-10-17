@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData2;
+import com.aionemu.gameserver.model.EventType;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
@@ -28,11 +29,14 @@ import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
+import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
@@ -142,8 +146,6 @@ public class EventTemplate {
 			return;
 
 		if (spawns != null && spawns.size() > 0) {
-			if (spawnedObjects == null)
-				spawnedObjects = new FastTable<>();
 			for (SpawnMap map : spawns.getTemplates()) {
 				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
@@ -177,7 +179,8 @@ public class EventTemplate {
 						public void visit(Player player) {
 							if (player.isOnline() && player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
 								// TODO: check the exact type in retail
-								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
+								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, true,
+									new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
 						}
 					});
 				}
@@ -193,6 +196,9 @@ public class EventTemplate {
 		}
 
 		isStarted = true;
+
+		if (theme != null) // show city decoration (visible after teleport)
+			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.getEventType(theme)));
 	}
 
 	public void stop() {
@@ -201,11 +207,11 @@ public class EventTemplate {
 
 		if (spawnedObjects != null) {
 			for (VisibleObject o : spawnedObjects) {
-				if (o.isSpawned())
+				if (o.isInWorld())
 					o.getController().delete();
 			}
 			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
-			log.info("Despawned " + spawnedObjects.size() + " event objects (" + this.getName() + ")");
+			log.info("Deleted " + spawnedObjects.size() + " event objects (" + this.getName() + ")");
 			spawnedObjects.clear();
 			spawnedObjects = null;
 		}
@@ -224,6 +230,9 @@ public class EventTemplate {
 		}
 
 		isStarted = false;
+
+		if (theme != null && EventService.getInstance().getEventType() == EventType.NONE) // remove city decoration (visible after teleport)
+			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.NONE));
 	}
 
 	public void addSpawnedObject(VisibleObject object) {
@@ -236,8 +245,6 @@ public class EventTemplate {
 	 * @return the theme name
 	 */
 	public String getTheme() {
-		if (theme != null)
-			return theme.toLowerCase();
 		return theme;
 	}
 

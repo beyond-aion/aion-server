@@ -118,8 +118,8 @@ public class LegionDominionService {
 					legion.setCurrentLegionDominion(0);
 					DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
 					DAOManager.getDAO(LegionDominionDAO.class).delete(info);
-					PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_DOMINION_RANK(loc.getLocationId()));
-					PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
+					PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(loc.getLocationId()));
+					PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 				}
 			}
 			//reset locations participant info and update this location

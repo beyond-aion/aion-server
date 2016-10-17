@@ -54,6 +54,7 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 			con.close();
 			log.info("[MAC_AUDIT] Account:" + con.getAccount() + ", HDD Serial " + hddSerial + " (" + con.getIP() + ") was kicked due to hdd serial ban");
 		} else {
+			boolean firstPacket = con.getMacAddress() == null;
 			con.setMacAddress(macAddress);
 			con.setHddSerial(hddSerial);
 
@@ -61,12 +62,12 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 
 				@Override
 				public void run() {
-					AionConnection con = getConnection();
-					if (con == null || con.getAccount() == null)
+					Account account = getConnection().getAccount();
+					if (account == null)
 						return;
-					Account account = con.getAccount();
-					LoginServer.getInstance()
-						.sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), con.getIP(), macAddress, hddSerial));
+					if (firstPacket) // don't log re-entering from server selection
+						LoginServer.getInstance()
+							.sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), con.getIP(), macAddress, hddSerial));
 					if (account.getAllowedHddSerial() == null) {
 						if (SecurityConfig.HDD_SERIAL_LOCK_NEW_ACCOUNTS && !hddSerial.isEmpty()) {
 							account.setAllowedHddSerial(hddSerial);
@@ -75,7 +76,8 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 					} else if (!account.getAllowedHddSerial().equalsIgnoreCase(hddSerial)) {
 						if (SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_KICK) {
 							con.close(SM_SYSTEM_MESSAGE.STR_L2AUTH_S_SYSTEM_ERROR());
-							log.info("[MAC_AUDIT] " + account + ",  HDD Serial " + hddSerial + " (" + con.getIP() + ") was kicked due to allowed hdd serial mismatch");
+							log.info(
+								"[MAC_AUDIT] " + account + ",  HDD Serial " + hddSerial + " (" + con.getIP() + ") was kicked due to allowed hdd serial mismatch");
 						} else {
 							account.setHacked(true);
 						}

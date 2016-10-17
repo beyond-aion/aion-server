@@ -116,7 +116,7 @@ public class LegionCommand extends AdminCommand {
 			String old = legion.getLegionName();
 			legion.setLegionName(params[2]);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
-			PacketSendUtility.broadcastPacketToLegion(legion, new SM_LEGION_INFO(legion));
+			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player legionMember : legion.getOnlineLegionMembers()) {
 				PacketSendUtility.broadcastPacket(legionMember,
 					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getLegionName(), legionMember.getLegionMember().getRank()
@@ -228,7 +228,7 @@ public class LegionCommand extends AdminCommand {
 				if (pl != null) {
 					if (pl.getLegionMember().getRank() == LegionRank.BRIGADE_GENERAL) {
 						pl.getLegionMember().setRank(LegionRank.LEGIONARY);
-						PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(pl, 0, ""));
+						PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(pl, 0, ""));
 						PacketSendUtility.sendMessage(player, "You have sucessfully demoted " + pl.getName() + " to Legionary rank.");
 						break;
 					}
@@ -238,7 +238,7 @@ public class LegionCommand extends AdminCommand {
 						LegionMember bgPlayer = LegionService.getInstance().getLegionMember(member.getObjectId());
 						bgPlayer.setRank(LegionRank.LEGIONARY);
 						member.setRank(LegionRank.LEGIONARY);
-						PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(member, 0, ""));
+						PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(member, 0, ""));
 						PacketSendUtility.sendMessage(player, "You have sucessfully demoted " + member.getName() + " to Legionary rank.");
 						DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(memberId, bgPlayer);
 						break;
@@ -248,7 +248,7 @@ public class LegionCommand extends AdminCommand {
 			}
 
 			target.getLegionMember().setRank(LegionRank.BRIGADE_GENERAL);
-			PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
+			PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
 			PacketSendUtility.sendMessage(player, "You have sucessfully promoted " + target.getName() + " to BG rank.");
 		} else if (params[0].equalsIgnoreCase("help")) {
 			this.info(player, null);
@@ -269,19 +269,19 @@ public class LegionCommand extends AdminCommand {
 
 			if (params[2].equalsIgnoreCase("centurion")) {
 				target.getLegionMember().setRank(LegionRank.CENTURION);
-				PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
+				PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
 				PacketSendUtility.sendMessage(player, "you have promoted player " + target.getName() + " as centurion.");
 			} else if (params[2].equalsIgnoreCase("deputy")) {
 				target.getLegionMember().setRank(LegionRank.DEPUTY);
-				PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
+				PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
 				PacketSendUtility.sendMessage(player, "you have promoted player " + target.getName() + " as deputy.");
 			} else if (params[2].equalsIgnoreCase("legionary")) {
 				target.getLegionMember().setRank(LegionRank.LEGIONARY);
-				PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
+				PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
 				PacketSendUtility.sendMessage(player, "you have promoted player " + target.getName() + " as legionary.");
 			} else if (params[2].equalsIgnoreCase("volunteer")) {
 				target.getLegionMember().setRank(LegionRank.VOLUNTEER);
-				PacketSendUtility.broadcastPacketToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
+				PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(target, 0, ""));
 				PacketSendUtility.sendMessage(player, "you have promoted player " + target.getName() + " as volunteer.");
 			} else {
 				PacketSendUtility.sendMessage(player, "rank " + params[2] + " is not supported.");

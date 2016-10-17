@@ -234,7 +234,7 @@ public class TeleportService2 {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
 				}
 				if (player.isLegionMember())
-					PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+					PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
 			}
 
 		}, animation.getDuration());
@@ -287,7 +287,7 @@ public class TeleportService2 {
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 
 		if (player.isLegionMember()) {
-			PacketSendUtility.broadcastPacketToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
 		}
 	}
 
