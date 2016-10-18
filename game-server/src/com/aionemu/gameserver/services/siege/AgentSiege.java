@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.siege;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
@@ -41,7 +42,6 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 import javolution.util.FastTable;
@@ -230,10 +230,10 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	private void broadcastMessage(AionServerPacket packet) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (packet != null)
 					PacketSendUtility.sendPacket(player, packet);
 			}

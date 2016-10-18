@@ -1,5 +1,7 @@
 package ai.instance.beshmundirTemple;
 
+import java.util.function.Consumer;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.DialogAction;
@@ -11,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Tiger0319, xTz, Gigi
@@ -65,10 +66,10 @@ public class PlegetonAI2 extends NpcAI2 {
 	}
 
 	private void sendTimer() {
-		getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+		getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 420));
 			}
 

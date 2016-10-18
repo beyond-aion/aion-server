@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -28,7 +29,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -143,9 +143,9 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (isInstanceDestroyed)
 					return;
-				instance.forEachPlayer(new Visitor<Player>() {
+				instance.forEachPlayer(new Consumer<Player>() {
 					@Override
-					public void visit(Player pl) {
+					public void accept(Player pl) {
 						if (!pl.getLifeStats().isAlreadyDead())
 							pl.getController().onAttack(pl, pl.getLifeStats().getMaxHp() + 1, true);
 					}

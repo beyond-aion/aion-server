@@ -1,5 +1,7 @@
 package ai.classNpc;
 
+import java.util.function.Consumer;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -8,7 +10,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import ai.AggressiveNpcAI2;
 
@@ -47,10 +48,10 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void despawnServant() {
-		getOwner().getKnownList().forEachNpc(new Visitor<Npc>() {
+		getOwner().getKnownList().forEachNpc(new Consumer<Npc>() {
 
 			@Override
-			public void visit(Npc object) {
+			public void accept(Npc object) {
 				Npc healServant = getPosition().getWorldMapInstance().getNpc(282988);
 				if (healServant != null)
 					healServant.getController().delete();

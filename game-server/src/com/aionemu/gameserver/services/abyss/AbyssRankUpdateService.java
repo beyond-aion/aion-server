@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -69,10 +69,10 @@ public class AbyssRankUpdateService {
 				long startTime = System.currentTimeMillis();
 
 				// update and store rank statistics for all online players (offline players update on login)
-				World.getInstance().forEachPlayer(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						player.getAbyssRank().doUpdate();
 						DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
 					}

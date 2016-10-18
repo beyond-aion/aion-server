@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.GenericValidator;
@@ -84,7 +85,6 @@ import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.KnownList;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -504,10 +504,10 @@ public class PlayerService {
 		// Get names of all online players
 		// Certain names can be changed in runtime
 		// this should prevent errors
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player object) {
+			public void accept(Player object) {
 				if (playerObjIdsCopy.contains(object.getObjectId())) {
 					result.put(object.getObjectId(), object.getName());
 					playerObjIdsCopy.remove(object.getObjectId());

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -110,10 +110,10 @@ public class Town {
 		Map<Integer, Town> data = new HashMap<>(1);
 		data.put(this.id, this);
 		final SM_TOWNS_LIST packet = new SM_TOWNS_LIST(data);
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.getRace() == race)
 					PacketSendUtility.sendPacket(player, packet);
 			}

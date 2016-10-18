@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers.attack;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -715,20 +715,20 @@ public class AttackUtil {
 	}
 
 	public static void cancelCastOn(final Creature target) {
-		target.getKnownList().forEachPlayer(new Visitor<Player>() {
+		target.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player observer) {
+			public void accept(Player observer) {
 				if (observer.getTarget() == target)
 					cancelCast(observer, target);
 			}
 
 		});
 
-		target.getKnownList().forEachNpc(new Visitor<Npc>() {
+		target.getKnownList().forEachNpc(new Consumer<Npc>() {
 
 			@Override
-			public void visit(Npc observer) {
+			public void accept(Npc observer) {
 				if (observer.getTarget() == target)
 					cancelCast(observer, target);
 			}
@@ -753,10 +753,10 @@ public class AttackUtil {
 	}
 
 	public static void removeTargetFrom(final Creature object, final boolean validateSee) {
-		object.getKnownList().forEachPlayer(new Visitor<Player>() {
+		object.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player observer) {
+			public void accept(Player observer) {
 				if (observer.getTarget() == object) {
 					if (!validateSee || !observer.canSee(object)) {
 						observer.setTarget(null);

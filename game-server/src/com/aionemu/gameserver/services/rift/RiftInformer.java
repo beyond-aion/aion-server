@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.rift;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -101,10 +101,10 @@ public class RiftInformer {
 	}
 
 	private static void syncRiftsState(int worldId, final List<AionServerPacket> packets, final boolean isDespawnInfo) {
-		World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				syncRiftsState(player, packets);
 			}
 

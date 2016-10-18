@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,7 +40,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -173,10 +173,10 @@ public class EventTemplate {
 
 				@Override
 				public void run() {
-					World.getInstance().forEachPlayer(new Visitor<Player>() {
+					World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 						@Override
-						public void visit(Player player) {
+						public void accept(Player player) {
 							if (player.isOnline() && player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
 								// TODO: check the exact type in retail
 								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, true,

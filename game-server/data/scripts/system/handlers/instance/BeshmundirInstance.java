@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Gigi, nrg, oslo0322, xTz
@@ -150,10 +150,10 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
 			}
 

@@ -3,6 +3,7 @@ package com.aionemu.gameserver;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,6 @@ import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import ch.qos.logback.classic.LoggerContext;
 
@@ -65,10 +65,10 @@ public class ShutdownHook extends Thread {
 	}
 
 	private void broadcastShutdownMessage(int seconds) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, STR_SERVER_SHUTDOWN(seconds));
 			}
 		});

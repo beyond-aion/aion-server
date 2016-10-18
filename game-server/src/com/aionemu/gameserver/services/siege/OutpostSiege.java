@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.siege;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author SoulKeeper
@@ -35,10 +35,10 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 		initSiegeBoss();
 
 		// TODO: Refactor me
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(getSiegeLocationId() == 2111 ? 1400317 : 1400318));
 			}
 
@@ -56,10 +56,10 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 		if (isBossKilled())
 			onCapture();
 		else {
-			World.getInstance().forEachPlayer(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player player) {
+				public void accept(Player player) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(getSiegeLocationId() == 2111 ? 1400319 : 1400320));
 				}
 
@@ -83,10 +83,10 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 			final AionServerPacket asp = new SM_SYSTEM_MESSAGE(messageId, race, topPlayerName);
 
 			// send packet for all players
-			World.getInstance().forEachPlayer(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player player) {
+				public void accept(Player player) {
 					PacketSendUtility.sendPacket(player, asp);
 					if (player.getRace().equals(race)) {
 						SkillEngine.getInstance().applyEffectDirectly(race == Race.ELYOS ? 12120 : 12119, player, player, 0);

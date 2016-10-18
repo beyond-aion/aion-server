@@ -2,6 +2,7 @@ package instance.crucible;
 
 import java.util.Set;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -28,7 +29,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -58,10 +58,10 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(final int nameId, final int points) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.isOnline()) {
 					PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
 					if (nameId != 0) {
@@ -73,10 +73,10 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendEventPacket() {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.isOnline()) {
 					PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
 				}

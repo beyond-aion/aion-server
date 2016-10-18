@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.function.Consumer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +12,6 @@ import com.aionemu.gameserver.model.templates.curingzones.CuringTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -39,10 +40,10 @@ public class CuringZoneService {
 			@Override
 			public void run() {
 				for (final CuringObject obj : curingObjects) {
-					obj.getKnownList().forEachPlayer(new Visitor<Player>() {
+					obj.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 						@Override
-						public void visit(Player player) {
+						public void accept(Player player) {
 							if (MathUtil.isIn3dRange(obj, player, obj.getRange()) && !player.getEffectController().hasAbnormalEffect(8751)) {
 								SkillEngine.getInstance().getSkill(player, 8751, 1, player).useNoAnimationSkill();
 							}

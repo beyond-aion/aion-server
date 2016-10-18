@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
@@ -59,7 +60,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 
@@ -229,10 +229,10 @@ public class SiegeService {
 			@Override
 			public void run() {
 				updateFortressNextState();
-				World.getInstance().forEachPlayer(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						for (FortressLocation fortress : getFortresses().values())
 							PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), false));
 
@@ -363,10 +363,10 @@ public class SiegeService {
 		loc.setOccupiedCount(0);
 
 		// On start preparations msg
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (legionId != 0 && player.getRace().getRaceId() == oldOwnerRaceId)
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301037, legionName, nameId));
 
@@ -676,10 +676,10 @@ public class SiegeService {
 	}
 
 	public void broadcast(final AionServerPacket pkt1, final AionServerPacket pkt2) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (pkt1 != null)
 					PacketSendUtility.sendPacket(player, pkt1);
 				if (pkt2 != null)
@@ -697,10 +697,10 @@ public class SiegeService {
 	}
 
 	private void broadcast(final AionServerPacket pkt, final AionServerPacket info, final SiegeRace race) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.getRace().getRaceId() == race.getRaceId())
 					PacketSendUtility.sendPacket(player, info);
 				PacketSendUtility.sendPacket(player, pkt);
@@ -724,10 +724,10 @@ public class SiegeService {
 	}
 
 	private void broadcast(final SM_RIFT_ANNOUNCE rift, final SM_SYSTEM_MESSAGE info) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, rift);
 				if (info != null && player.getWorldType().equals(WorldType.BALAUREA))
 					PacketSendUtility.sendPacket(player, info);

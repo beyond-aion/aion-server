@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.Race;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 import javolution.util.FastMap;
@@ -81,10 +81,10 @@ public class SerialKillerService {
 
 								PacketSendUtility.sendPacket(info.getOwner(), new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-								info.getOwner().getKnownList().forEachPlayer(new Visitor<Player>() {
+								info.getOwner().getKnownList().forEachPlayer(new Consumer<Player>() {
 
 									@Override
-									public void visit(Player observed) {
+									public void accept(Player observed) {
 										PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 7, info.getOwner()));
 									}
 								});
@@ -188,10 +188,10 @@ public class SerialKillerService {
 				int rank = getKillerRank(--info.victims);
 				boolean isEnemyWorld = isEnemyWorld(victim);
 				if (isEnemyWorld && info.getRank() == 3) { //old rank
-					World.getInstance().getWorldMap(victim.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Visitor<Player> () {
+					World.getInstance().getWorldMap(victim.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Consumer<Player> () {
 						
 						@Override
-						public void visit(Player player) {
+						public void accept(Player player) {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(killer.getRace() == Race.ASMODIANS ? 1400141 : 1400142, killer.getName(), victim.getName()));
 						}
 					});
@@ -204,10 +204,10 @@ public class SerialKillerService {
 
 						PacketSendUtility.sendPacket(victim, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-						victim.getKnownList().forEachPlayer(new Visitor<Player>() {
+						victim.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 							@Override
-							public void visit(Player observed) {
+							public void accept(Player observed) {
 								PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, victim));
 							}
 						});
@@ -264,10 +264,10 @@ public class SerialKillerService {
 
 						PacketSendUtility.sendPacket(killer, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-						killer.getKnownList().forEachPlayer(new Visitor<Player>() {
+						killer.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 							@Override
-							public void visit(Player observed) {
+							public void accept(Player observed) {
 								PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, killer));
 							}
 						});
@@ -294,10 +294,10 @@ public class SerialKillerService {
 			
 			PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
 
-			player.getKnownList().forEachPlayer(new Visitor<Player>() {
+			player.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player observed) {
+				public void accept(Player observed) {
 					PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, player));
 				}
 			});

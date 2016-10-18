@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.siege;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Whoop
@@ -64,11 +64,11 @@ public class MercenaryLocation {
 		spawnedMercs.addAll(mercs);
 		lastSpawn = System.currentTimeMillis();
 
-		SiegeService.getInstance().getFortress(siegeId).forEachPlayer(new Visitor<Player>() {
+		SiegeService.getInstance().getFortress(siegeId).forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player visitor) {
-				PacketSendUtility.sendPacket(visitor, new SM_SYSTEM_MESSAGE(smz.getAnnounceId()));
+			public void accept(Player player) {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(smz.getAnnounceId()));
 			}
 		});
 	}

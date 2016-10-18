@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -35,7 +36,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Cheatkiller
@@ -280,10 +280,10 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				break;
 		}
 
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				AbyssPointsService.addAp(player, instanceReward.getFinalAp());
 				ItemService.addItem(player, instanceReward.getRewardItem1(), instanceReward.getRewardItem1Count());
 				ItemService.addItem(player, instanceReward.getRewardItem2(), instanceReward.getRewardItem2Count());

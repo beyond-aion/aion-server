@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.player;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +126,6 @@ import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -197,14 +197,14 @@ public final class PlayerEnterWorldService {
 
 		if (SecurityConfig.DUALBOXING && !player.isGM()) {
 			boolean[] kick = { false };
-			World.getInstance().forEachPlayer(new Visitor<Player>() {
+			World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 				String pMac = client.getMacAddress() == null || client.getMacAddress().isEmpty() ? "empty" : client.getMacAddress();
 				String pHdd = client.getHddSerial() == null || client.getHddSerial().isEmpty() ? "empty" : client.getHddSerial();
 				String pIp = client.getIP() == null || client.getIP().isEmpty() ? "empty" : client.getIP();
 
 				@Override
-				public void visit(Player visitor) {
+				public void accept(Player visitor) {
 					final AionConnection vCon = visitor.getClientConnection();
 					if (visitor.equals(player) || visitor.isGM() || vCon == null)
 						return;

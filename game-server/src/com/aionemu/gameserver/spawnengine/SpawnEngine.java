@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.spawnengine;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,6 @@ import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the future.
@@ -269,19 +269,19 @@ public class SpawnEngine {
 	}
 
 	public static void printWorldSpawnStats() {
-		StatsCollector visitor = new StatsCollector();
-		World.getInstance().forEachObject(visitor);
-		log.info("Loaded " + visitor.getNpcCount() + " npc spawns");
-		log.info("Loaded " + visitor.getGatherableCount() + " gatherable spawns");
+		StatsCollector function = new StatsCollector();
+		World.getInstance().forEachObject(function);
+		log.info("Loaded " + function.getNpcCount() + " npc spawns");
+		log.info("Loaded " + function.getGatherableCount() + " gatherable spawns");
 	}
 
-	static class StatsCollector implements Visitor<VisibleObject> {
+	static class StatsCollector implements Consumer<VisibleObject> {
 
 		int npcCount;
 		int gatherableCount;
 
 		@Override
-		public void visit(VisibleObject object) {
+		public void accept(VisibleObject object) {
 			if (object instanceof Npc) {
 				npcCount++;
 			} else if (object instanceof Gatherable) {

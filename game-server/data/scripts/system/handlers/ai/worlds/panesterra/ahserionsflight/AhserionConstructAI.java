@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -25,7 +26,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Yeats
@@ -79,9 +79,9 @@ public class AhserionConstructAI extends NpcAI2 {
 	}
 	
 	private void sendPacket(int msgId) {
-		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachPlayer(new Consumer<Player>() {
       @Override
-      public void visit(Player player) {
+      public void accept(Player player) {
       	PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msgId));
       }
 		});

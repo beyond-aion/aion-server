@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Ritsu
@@ -128,10 +128,10 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 		idgelDomeReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = idgelDomeReward.getWinningRace();
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				IdgelDomePlayerReward reward = idgelDomeReward.getPlayerReward(player.getObjectId());
 				if (reward.getRace().equals(winningrace)) {
 					reward.setBonusReward(Rnd.get(5000, 7000));
@@ -235,10 +235,10 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
 			}
 

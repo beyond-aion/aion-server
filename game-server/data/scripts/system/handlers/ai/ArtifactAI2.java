@@ -10,6 +10,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.properties.TargetSpeciesAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author ATracer, Source
@@ -126,10 +126,10 @@ public class ArtifactAI2 extends NpcAI2 {
 			skillTemplate.getNameId()));
 		loc.setStatus(ArtifactStatus.ACTIVATION);
 		final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-		player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+		player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, startMessage);
 				PacketSendUtility.sendPacket(player, artifactInfo);
 			}
@@ -149,10 +149,10 @@ public class ArtifactAI2 extends NpcAI2 {
 				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
 				loc.setStatus(ArtifactStatus.IDLE);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						PacketSendUtility.sendPacket(player, message);
 						PacketSendUtility.sendPacket(player, artifactInfo);
 					}
@@ -179,10 +179,10 @@ public class ArtifactAI2 extends NpcAI2 {
 				loc.setStatus(ArtifactStatus.CASTING);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 
-				player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+				player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						PacketSendUtility.sendPacket(player, message);
 						PacketSendUtility.sendPacket(player, artifactInfo);
 					}
@@ -241,10 +241,10 @@ public class ArtifactAI2 extends NpcAI2 {
 			final boolean end = (runCount == artifact.getTemplate().getRepeatCount());
 
 			runCount++;
-			player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+			player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player player) {
+				public void accept(Player player) {
 					if (start)
 						PacketSendUtility.sendPacket(player, message);
 					artifact.setStatus(ArtifactStatus.ACTIVATED);

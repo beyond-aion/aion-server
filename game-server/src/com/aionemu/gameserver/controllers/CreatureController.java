@@ -3,6 +3,7 @@ package com.aionemu.gameserver.controllers;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import javax.annotation.Nonnull;
 
@@ -49,7 +50,6 @@ import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 
@@ -199,10 +199,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			applyEffectOnCritical((Player) attacker, getOwner(), status, skillId);
 
 		// notify all NPC's around that creature is attacking me
-		getOwner().getKnownList().forEachNpc(new Visitor<Npc>() {
+		getOwner().getKnownList().forEachNpc(new Consumer<Npc>() {
 
 			@Override
-			public void visit(Npc object) {
+			public void accept(Npc object) {
 				object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner());
 			}
 

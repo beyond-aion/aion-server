@@ -1,11 +1,12 @@
 package ai.siege;
 
+import java.util.function.Consumer;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Source
@@ -30,10 +31,10 @@ public class ShieldNpcAI2 extends SiegeNpcAI2 {
 		SiegeService.getInstance().getFortress(id).setUnderShield(shieldStatus);
 
 		final SM_SHIELD_EFFECT packet = new SM_SHIELD_EFFECT(id);
-		getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+		getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
 			}
 

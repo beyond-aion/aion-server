@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -362,14 +362,14 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return startPos;
 	}
 
-	public void forEachPlayer(Visitor<Player> visitor) {
+	public void forEachPlayer(Consumer<Player> function) {
 		try {
 			worldMapPlayers.values().forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(player);
+					function.accept(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
+			log.error("Exception when iterating over players", ex);
 		}
 	}
 

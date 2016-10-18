@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.ai2.handler;
 
 import java.util.Collections;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author ATracer
@@ -92,10 +92,10 @@ public class AggroEventHandler {
 		public void run() {
 			aggressive.getAggroList().addHate(target, 1);
 			if (broadcast) {
-				aggressive.getKnownList().forEachNpc(new Visitor<Npc>() {
+				aggressive.getKnownList().forEachNpc(new Consumer<Npc>() {
 
 					@Override
-					public void visit(Npc object) {
+					public void accept(Npc object) {
 						object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, aggressive);
 					}
 				});

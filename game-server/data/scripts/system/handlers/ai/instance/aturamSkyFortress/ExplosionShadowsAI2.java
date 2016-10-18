@@ -1,6 +1,7 @@
 package ai.instance.aturamSkyFortress;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -9,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import ai.AggressiveNpcAI2;
 
@@ -68,10 +68,10 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
 	private void check() {
 		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false);
 		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false);
-		getKnownList().forEachPlayer(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.getEffectController().hasAbnormalEffect(19502)) {
 					final Npc npc = (Npc) spawn(799657, player.getX(), player.getY(), player.getZ(), player.getHeading());
 					player.getEffectController().removeEffect(19502);

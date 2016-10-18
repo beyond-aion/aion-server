@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Tibald
@@ -250,10 +250,10 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		}
 		engulfedOBReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = engulfedOBReward.getWinningRace();
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				EngulfedOphidianBridgePlayerReward reward = engulfedOBReward.getPlayerReward(player.getObjectId());
 				reward.setBonusReward(Rnd.get(8000, 12000));
 				if (reward.getRace().equals(winningrace)) {
@@ -337,10 +337,10 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (points == 0) {
 			return;
 		}
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
 			}
 		});
@@ -499,10 +499,10 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
 			}
 

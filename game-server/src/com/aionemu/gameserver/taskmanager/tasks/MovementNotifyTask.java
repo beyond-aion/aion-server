@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.BiConsumer;
 
 import com.aionemu.gameserver.ai2.AI2Logger;
 import com.aionemu.gameserver.ai2.AIState;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
-import com.aionemu.gameserver.world.knownlist.VisitorWithOwner;
 
 import javolution.util.FastTable;
 
@@ -85,10 +85,10 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 		return "notifyOnMove()";
 	}
 
-	private class MoveNotifier implements VisitorWithOwner<Npc, VisibleObject> {
+	private class MoveNotifier implements BiConsumer<Npc, VisibleObject> {
 
 		@Override
-		public void visit(Npc object, VisibleObject owner) {
+		public void accept(Npc object, VisibleObject owner) {
 
 			if (object.getAi2().getState() == AIState.DIED || object.getLifeStats().isAlreadyDead()) {
 				if (object.getAi2().isLogging()) {

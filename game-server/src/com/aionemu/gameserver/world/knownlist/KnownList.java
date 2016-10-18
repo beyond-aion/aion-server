@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -180,10 +182,10 @@ public class KnownList {
 
 		if (owner instanceof Npc) {
 			if (((Creature) owner).isFlag()) {
-				owner.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+				owner.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						if (add(player)) {
 							player.getKnownList().add(owner);
 						}
@@ -243,79 +245,79 @@ public class KnownList {
 		return false;
 	}
 
-	public void forEachNpc(Visitor<Npc> visitor) {
-		forEachNpc(visitor, Integer.MAX_VALUE);
+	public void forEachNpc(Consumer<Npc> function) {
+		forEachNpc(function, Integer.MAX_VALUE);
 	}
 
-	public int forEachNpc(Visitor<Npc> visitor, int iterationLimit) {
+	public int forEachNpc(Consumer<Npc> function, int iterationLimit) {
 		int counter = 0;
 		try {
 			for (VisibleObject newObject : knownObjects.values()) {
 				if (newObject instanceof Npc) {
 					if (++counter > iterationLimit)
 						break;
-					visitor.visit((Npc) newObject);
+					function.accept((Npc) newObject);
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all npcs known by " + owner, ex);
+			log.error("Exception when iterating over npcs known by " + owner, ex);
 		}
 		return counter;
 	}
 
-	public void forEachNpcWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor) {
-		forEachNpcWithOwner(visitor, Integer.MAX_VALUE);
+	public void forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> function) {
+		forEachNpcWithOwner(function, Integer.MAX_VALUE);
 	}
 
-	public int forEachNpcWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
+	public int forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> function, int iterationLimit) {
 		int counter = 0;
 		try {
 			for (VisibleObject newObject : knownObjects.values()) {
 				if (newObject instanceof Npc) {
 					if (++counter > iterationLimit)
 						break;
-					visitor.visit((Npc) newObject, owner);
+					function.accept((Npc) newObject, owner);
 				}
 			}
 		} catch (Exception ex) {
-			log.error("Exception when running visitor (with owner) on all npcs known by " + owner, ex);
+			log.error("Exception when iterating over npcs known by " + owner, ex);
 		}
 		return counter;
 	}
 
-	public void forEachPlayer(Visitor<Player> visitor) {
+	public void forEachPlayer(Consumer<Player> function) {
 		if (knownPlayers == null)
 			return;
 
 		try {
 			knownPlayers.values().forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(player);
+					function.accept(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players known by " + owner, ex);
+			log.error("Exception when iterating over players known by " + owner, ex);
 		}
 	}
 
-	public void forEachObject(Visitor<VisibleObject> visitor) {
+	public void forEachObject(Consumer<VisibleObject> function) {
 		try {
 			knownObjects.values().forEach(object -> {
 				if (object != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(object);
+					function.accept(object);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all objects known by " + owner, ex);
+			log.error("Exception when iterating over objects known by " + owner, ex);
 		}
 	}
 
-	public void forEachVisibleObject(Visitor<VisibleObject> visitor) {
+	public void forEachVisibleObject(Consumer<VisibleObject> function) {
 		try {
 			visualObjects.values().forEach(object -> {
 				if (object != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(object);
+					function.accept(object);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all visual objects seen by " + owner, ex);
+			log.error("Exception when iterating over visual objects seen by " + owner, ex);
 		}
 	}
 

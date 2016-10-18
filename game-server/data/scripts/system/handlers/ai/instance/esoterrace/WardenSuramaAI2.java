@@ -2,6 +2,7 @@ package ai.instance.esoterrace;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import ai.AggressiveNpcAI2;
 import javolution.util.FastTable;
@@ -70,10 +70,10 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 		spawn(282426, 1328.446289f, 1159.062500f, 53.203529f, (byte) 0, 718);
 		spawn(282174, 1290.778442f, 1170.730957f, 53.203529f, (byte) 0, 597);
 
-		getKnownList().forEachPlayer(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.isOnline()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400998));
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400997));

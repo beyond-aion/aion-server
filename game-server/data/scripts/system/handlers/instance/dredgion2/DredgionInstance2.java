@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 
@@ -42,7 +43,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -346,10 +346,10 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				instance.forEachPlayer(new Visitor<Player>() {
+				instance.forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						if (player.getRace().equals(race) || race.equals(Race.PC_ALL)) {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(msg));
 						}

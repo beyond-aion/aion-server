@@ -1,5 +1,7 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.function.Consumer;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.DialogAction;
@@ -10,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author xTz
@@ -65,10 +66,10 @@ public class EmpyreanArbiterAI2 extends NpcAI2 {
 			}
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 
-			getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+			getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player p) {
+				public void accept(Player p) {
 					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400964, player.getName()));
 				}
 

@@ -1,6 +1,7 @@
 package ai.instance.esoterrace;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -8,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import ai.AggressiveNpcAI2;
 
@@ -29,10 +29,10 @@ public class KexkraPrototypeAI2 extends AggressiveNpcAI2 {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75) {
 			if (isStartEvent.compareAndSet(false, true)) {
-				getKnownList().forEachPlayer(new Visitor<Player>() {
+				getKnownList().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						if (player.isOnline() && !player.getLifeStats().isAlreadyDead()) {
 							PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 472));
 						}

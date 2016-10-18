@@ -3,6 +3,7 @@ package instance;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -21,7 +22,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -363,10 +363,10 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 				despawnNpcs(getNpcs(831349));
 				break;
 			case 233467:
-				instance.forEachPlayer(new Visitor<Player>() {
+				instance.forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player p) {
+					public void accept(Player p) {
 						PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984));
 					}
 

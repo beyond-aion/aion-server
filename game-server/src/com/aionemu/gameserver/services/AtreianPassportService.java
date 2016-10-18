@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
@@ -26,7 +27,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -49,10 +49,10 @@ public class AtreianPassportService {
 					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
 				}
 
-				World.getInstance().forEachPlayer(new Visitor<Player>() {
+				World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player p) {
+					public void accept(Player p) {
 						if (p.getCommonData() != null) {
 							p.getPlayerAccount().setLastStamp(null);
 

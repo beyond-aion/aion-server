@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +54,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -670,10 +670,10 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			return false;
 		}
 		follower.setNpcType(CreatureType.PEACE);
-		follower.getKnownList().forEachPlayer(new Visitor<Player>() {
+		follower.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(follower.getObjectId(), 0, follower.getType(player).getId(), 0));
 			}
 		});

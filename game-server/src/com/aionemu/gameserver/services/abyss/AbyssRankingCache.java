@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.abyss;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.RankingConfig;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_EDIT;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastMap;
 import javolution.util.FastTable;
@@ -101,10 +101,10 @@ public class AbyssRankingCache {
 	 * Updates the ranking list for all online players
 	 */
 	public void updateAbyssRankList() {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				player.resetAbyssRankListUpdated();
 			}
 		});

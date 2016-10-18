@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.services.abyss;
 
+import java.util.function.Consumer;
+
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author ATracer
@@ -32,10 +33,10 @@ public class AbyssService {
 	 */
 	public static final void rankedKillAnnounce(final Player victim) {
 
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player p) {
+			public void accept(Player p) {
 				if (p != victim && victim.getWorldType() == p.getWorldType() && !p.isInInstance()) {
 					PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(victim, AbyssRankEnum.getRankDescriptionId(victim)));
 				}
@@ -44,10 +45,10 @@ public class AbyssService {
 	}
 
 	public static final void rankerSkillAnnounce(final Player player, final int nameId) {
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player p) {
+			public void accept(Player p) {
 				if (p != player && player.getWorldType() == p.getWorldType() && !p.isInInstance()) {
 					PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_SKILL_ABYSS_SKILL_IS_FIRED(player, new DescriptionId(nameId)));
 				}

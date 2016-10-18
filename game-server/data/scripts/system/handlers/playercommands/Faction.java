@@ -1,5 +1,7 @@
 package playercommands;
 
+import java.util.function.Consumer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -13,7 +15,6 @@ import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Shepper
@@ -57,10 +58,10 @@ public class Faction extends PlayerCommand {
 
 		PlayerChatService.logMessage(player, ChatType.NORMAL, "[Faction Msg] " + message);
 
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player listener) {
+			public void accept(Player listener) {
 				// GMs can read both factions (but only write to their own)
 				if (listener.getRace() == player.getRace() || listener.isGM()) {
 					String name = listener.isGM() ? (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + senderName : senderName;

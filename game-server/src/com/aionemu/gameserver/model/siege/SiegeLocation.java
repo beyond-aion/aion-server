@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.siege;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -259,25 +259,25 @@ public class SiegeLocation implements ZoneHandler {
 		}
 	}
 
-	public void forEachCreature(Visitor<Creature> visitor) {
+	public void forEachCreature(Consumer<Creature> function) {
 		try {
 			creatures.values().forEach(c -> {
 				if (c != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(c);
+					function.accept(c);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all creatures", ex);
+			log.error("Exception when iterating over creatures", ex);
 		}
 	}
 
-	public void forEachPlayer(Visitor<Player> visitor) {
+	public void forEachPlayer(Consumer<Player> function) {
 		try {
 			players.values().forEach(p -> {
 				if (p != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(p);
+					function.accept(p);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
+			log.error("Exception when iterating over players", ex);
 		}
 	}
 }

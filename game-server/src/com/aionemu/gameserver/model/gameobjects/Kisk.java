@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastSet;
 import javolution.util.FastTable;
@@ -229,10 +229,10 @@ public class Kisk extends SummonedObject<Player> {
 
 		final Kisk kisk = this;
 		// all players having the same race in knownlist
-		getKnownList().forEachPlayer(new Visitor<Player>() {
+		getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player object) {
+			public void accept(Player object) {
 				// Logic to prevent enemy race from knowing kisk information.
 				if (object.getRace() == ownerRace)
 					PacketSendUtility.sendPacket(object, new SM_KISK_UPDATE(kisk));

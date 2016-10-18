@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -560,10 +560,10 @@ public class DropService {
 		int itemId = requestedItem.getDropTemplate().getItemId();
 		if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality().getQualityId() >= ItemQuality.UNIQUE.getQualityId()) {
 			String winnerName = requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getName() : player.getName();
-			player.getPosition().getWorldMapInstance().forEachPlayer(new Visitor<Player>() {
+			player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
-				public void visit(Player other) {
+				public void accept(Player other) {
 					if (!player.equals(other) && other.getRace() == player.getRace()) {
 						PacketSendUtility.sendPacket(other, SM_SYSTEM_MESSAGE.STR_FORCE_ITEM_WIN(winnerName, ChatUtil.item(itemId)));
 					}

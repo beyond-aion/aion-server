@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,6 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -476,31 +476,25 @@ public class World {
 		return allPlayers.getAllPlayers();
 	}
 
-	/**
-	 * @param visitor
-	 */
-	public void forEachPlayer(Visitor<Player> visitor) {
+	public void forEachPlayer(Consumer<Player> function) {
 		try {
 			allPlayers.forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(player);
+					function.accept(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
+			log.error("Exception when iterating over all players", ex);
 		}
 	}
 
-	/**
-	 * @param visitor
-	 */
-	public void forEachObject(Visitor<VisibleObject> visitor) {
+	public void forEachObject(Consumer<VisibleObject> function) {
 		try {
 			allObjects.values().forEach(obj -> {
 				if (obj != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(obj);
+					function.accept(obj);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all objects", ex);
+			log.error("Exception when iterating over objects", ex);
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.world.zone;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author MrPoke
@@ -48,14 +48,14 @@ public class SiegeZoneInstance extends ZoneInstance {
 		return false;
 	}
 
-	public void forEachPlayer(Visitor<Player> visitor) {
+	public void forEachPlayer(Consumer<Player> function) {
 		try {
 			players.values().forEach(player -> {
 				if (player != null) // can be null if entry got removed after iterator allocation
-					visitor.visit(player);
+					function.accept(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when running visitor on all players", ex);
+			log.error("Exception when iterating over players", ex);
 		}
 	}
 }

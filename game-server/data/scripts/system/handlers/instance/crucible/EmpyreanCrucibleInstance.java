@@ -2,6 +2,7 @@ package instance.crucible;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -26,7 +27,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -92,10 +92,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(final int points, final int nameId) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				if (player.isOnline()) {
 					CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
 					if (nameId != 0) {
@@ -117,10 +117,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 			@Override
 			public void run() {
-				instance.forEachPlayer(new Visitor<Player>() {
+				instance.forEachPlayer(new Consumer<Player>() {
 
 					@Override
-					public void visit(Player player) {
+					public void accept(Player player) {
 						PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()));
 					}
 
@@ -1060,10 +1060,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	public boolean onReviveEvent(final Player player) {
 		super.onReviveEvent(player);
 		moveToReadyRoom(player);
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player p) {
+			public void accept(Player p) {
 				if (player.equals(p)) {
 					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400932));
 				} else

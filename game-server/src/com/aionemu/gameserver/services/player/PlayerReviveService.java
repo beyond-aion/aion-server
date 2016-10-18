@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.player;
 
+import java.util.function.Consumer;
+
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -28,7 +30,6 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Jego, xTz
@@ -193,10 +194,10 @@ public class PlayerReviveService {
 	}
 
 	public static final void revive(final Player player, int hpPercent, int mpPercent, boolean setSoulsickness, int resurrectionSkill) {
-		player.getKnownList().forEachPlayer(new Visitor<Player>() {
+		player.getKnownList().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player visitor) {
+			public void accept(Player visitor) {
 				if (player.equals(visitor.getTarget())) {
 					visitor.setTarget(null);
 					PacketSendUtility.sendPacket(visitor, new SM_TARGET_SELECTED(null));

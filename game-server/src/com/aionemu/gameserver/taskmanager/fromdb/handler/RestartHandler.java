@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.taskmanager.fromdb.handler;
 
+import java.util.function.Consumer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Divinity, nrg
@@ -42,10 +43,10 @@ public class RestartHandler extends TaskFromDBHandler {
 	public void trigger() {
 		log.info("Task[" + taskId + "] launched : restarting the server !");
 
-		World.getInstance().forEachPlayer(new Visitor<Player>() {
+		World.getInstance().forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendMessage(player, "Automatic Task: The server will restart in " + warnCountDown
 					+ " seconds ! Please find a safe place and disconnect your character.", ChatType.BRIGHT_YELLOW_CENTER);
 			}

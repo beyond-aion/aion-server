@@ -5,6 +5,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 import javolution.util.FastTable;
 
@@ -238,10 +238,10 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		}
 		kamarReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 		final Race winningrace = kamarReward.getWinningRace();
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				KamarPlayerReward reward = kamarReward.getPlayerReward(player.getObjectId());
 				reward.setKamarBox(1);
 				reward.setBonusReward(Rnd.get(2300, 2700));
@@ -422,10 +422,10 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Visitor<Player>() {
+		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
-			public void visit(Player player) {
+			public void accept(Player player) {
 				PacketSendUtility.sendPacket(player, packet);
 			}
 
