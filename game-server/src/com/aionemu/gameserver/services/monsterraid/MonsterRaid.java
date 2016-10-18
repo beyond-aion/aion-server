@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Whoop
@@ -23,8 +21,8 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class MonsterRaid {
 
 	private final MonsterRaidDeathListener deathListener = new MonsterRaidDeathListener(this);
-	private final AtomicBoolean isFinished = new AtomicBoolean(false);
-	private final AtomicBoolean isStarted = new AtomicBoolean(false);
+	private final AtomicBoolean isFinished = new AtomicBoolean();
+	private final AtomicBoolean isStarted = new AtomicBoolean();
 	private final MonsterRaidLocation mrl;
 	private boolean isBossKilled;
 	private Npc boss, flag, vortex;
@@ -52,34 +50,22 @@ public class MonsterRaid {
 		spawnFlag();
 		broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_01());
 		// TODO: Better Implementation for this latency period
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawnVortex();
-				broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_02());
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								spawnBoss();
-								regDeathListener();
-								broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
-								scheduleDespawn();
-							}
-						}, 300000);
-						//}, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce
-					}
-				}, 900000);
-				//}, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			spawnVortex();
+			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_02());
+			ThreadPoolManager.getInstance().schedule(() -> {
+				broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
+				ThreadPoolManager.getInstance().schedule(() -> {
+					spawnBoss();
+					regDeathListener();
+					broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
+					scheduleDespawn();
+				}, 300000);
+				// }, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce
+			}, 900000);
+			// }, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
 		}, 600000);
-		//}, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
+		// }, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
 	}
 
 	private final void onMonsterRaidFinish() {
@@ -94,14 +80,10 @@ public class MonsterRaid {
 	}
 
 	private final void scheduleDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!boss.getLifeStats().isAlreadyDead())
-					stopRaid();
-			}
-		}, 3600000); // two hours should be enough + some latency for troll
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!boss.getLifeStats().isAlreadyDead())
+				MonsterRaidService.getInstance().stopRaid(getLocationId());
+		}, 3600 * 1000);
 	}
 
 	private final void cancelDespawn() {
@@ -170,19 +152,8 @@ public class MonsterRaid {
 	}
 
 	private void broadcastMessage(SM_SYSTEM_MESSAGE msg) {
-		if (msg != null) {
-			World.getInstance().getWorldMap(mrl.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Visitor<Player>() {
-
-				@Override
-				public void visit(Player player) {
-					PacketSendUtility.sendPacket(player, msg);
-				}
-			});
-		}
-	}
-
-	public MonsterRaidLocation getLocation() {
-		return mrl;
+		if (msg != null)
+			World.getInstance().getWorldMap(mrl.getWorldId()).getMainWorldMapInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, msg));
 	}
 
 	public int getLocationId() {
@@ -197,31 +168,11 @@ public class MonsterRaid {
 		this.isBossKilled = bossKilled;
 	}
 
-	public boolean isStarted() {
-		return isStarted.get();
-	}
-
 	public boolean isFinished() {
 		return isFinished.get();
 	}
 
 	public Npc getBoss() {
 		return boss;
-	}
-
-	public Npc getFlag() {
-		return flag;
-	}
-
-	public Npc getVortex() {
-		return vortex;
-	}
-
-	/**
-	 * Need to be stopped by service to remove active raid from list to secure multiple raids
-	 * for the same location if server is running longer then one day or multiple raids at one day
-	 */
-	private void stopRaid() {
-		MonsterRaidService.getInstance().stopRaid(getLocationId());
 	}
 }

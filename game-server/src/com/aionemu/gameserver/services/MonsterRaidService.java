@@ -24,7 +24,6 @@ public class MonsterRaidService {
 	private static final MonsterRaidService instance = new MonsterRaidService();
 	private final Map<Integer, MonsterRaid> activeRaids = new ConcurrentHashMap<>();
 	private Map<Integer, MonsterRaidLocation> monsterRaids;
-	private MonsterRaidSchedule schedule;
 
 	public final void initMonsterRaidLocations() {
 		log.debug("Initializing monster raid locations...");
@@ -40,14 +39,8 @@ public class MonsterRaidService {
 		if (!EventsConfig.ENABLE_MONSTER_RAID)
 			return;
 		// Initialize Raid Schedules
-		schedule = MonsterRaidSchedule.load();
-
-		for (final MonsterRaidSchedule.Raid r : schedule.getMonsterRaidsList()) {
-			for (String raidTime : r.getRaidTimes()) {
-				CronService.getInstance().schedule(new MonsterRaidStartRunnable(r.getRaidId()), raidTime);
-				log.debug("Scheduled siege of fortressID " + r.getRaidId() + " based on cron expression: " + raidTime);
-			}
-		}
+		MonsterRaidSchedule.load().getMonsterRaidsList().stream()
+			.forEach(r -> r.getRaidTimes().stream().forEach(rt -> CronService.getInstance().schedule(new MonsterRaidStartRunnable(r.getRaidId()), rt)));
 		log.debug("Finished initialization of monster raid schedules.");
 	}
 
@@ -71,7 +64,7 @@ public class MonsterRaidService {
 		}
 		try {
 			raid.startMonsterRaid();
-		} catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			log.error("MonsterRaid could not be started! ID:" + locId, e);
 		}
 		log.debug("Finished monster raid start of raid location: " + locId);
@@ -89,12 +82,12 @@ public class MonsterRaidService {
 		}
 		try {
 			raid.stopMonsterRaid();
-		} catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			log.error("monster raid could not be finished! ID:" + locId, e);
 		}
 		log.debug("Succeeded to finish monster raid of raid location: " + locId);
 	}
-	
+
 	private MonsterRaid newMonsterRaid(int locId) throws RuntimeException {
 		if (monsterRaids.containsKey(locId))
 			return new MonsterRaid(monsterRaids.get(locId));
@@ -109,7 +102,7 @@ public class MonsterRaidService {
 	public MonsterRaidLocation getMonsterRaidLocation(int id) {
 		return monsterRaids.get(id);
 	}
-	
+
 	public boolean isRaidInProgress(int raidLocationId) {
 		return activeRaids.containsKey(raidLocationId);
 	}
