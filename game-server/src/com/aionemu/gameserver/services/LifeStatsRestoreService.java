@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
@@ -71,8 +70,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			boolean inWorld = World.getInstance().isInWorld(lifeStats.getOwner());
-			if (!inWorld || lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || lifeStats.getOwner().getAi2().getState().equals(AIState.FIGHT)) {
+			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || !lifeStats.getOwner().isInWorld() || lifeStats.getOwner().getAi2().getState() == AIState.FIGHT) {
 				lifeStats.cancelRestoreTask();
 				lifeStats = null;
 			} else {
@@ -91,8 +89,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			boolean inWorld = World.getInstance().isInWorld(lifeStats.getOwner());
-			if (!inWorld || lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHpMp()) {
+			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHpMp() || !lifeStats.getOwner().isInWorld()) {
 				lifeStats.cancelRestoreTask();
 				lifeStats = null;
 			} else {
@@ -114,8 +111,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			boolean inWorld = World.getInstance().isInWorld(lifeStats.getOwner());
-			if (!inWorld || lifeStats.isAlreadyDead()) {
+			if (lifeStats.isAlreadyDead() || !lifeStats.getOwner().isInWorld()) {
 				lifeStats.cancelFpReduce();
 				lifeStats = null;
 				return;

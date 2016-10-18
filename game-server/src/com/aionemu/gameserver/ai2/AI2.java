@@ -56,7 +56,7 @@ public interface AI2 {
 
 	ItemAttackType modifyAttackType(ItemAttackType type);
 
-	int modifyARange(int value);
+	int modifyAggroRange(int value);
 
 	void fireOnEndCastEvents(NpcSkillEntry usedSkill);
 

@@ -207,8 +207,7 @@ public class EventTemplate {
 
 		if (spawnedObjects != null) {
 			for (VisibleObject o : spawnedObjects) {
-				if (o.isInWorld())
-					o.getController().delete();
+				o.getController().delete();
 			}
 			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
 			log.info("Deleted " + spawnedObjects.size() + " event objects (" + this.getName() + ")");

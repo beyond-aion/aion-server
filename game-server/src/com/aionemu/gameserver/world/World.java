@@ -95,7 +95,7 @@ public class World {
 	 */
 	public void storeObject(VisibleObject object) {
 		if (object.getPosition() == null) {
-			log.warn("Not putting object with null position!!! " + object.getObjectTemplate().getTemplateId());
+			log.error("Tried to add {} with null position in world", object);
 			return;
 		}
 		if (allObjects.put(object.getObjectId(), object) != null)
@@ -241,16 +241,6 @@ public class World {
 	 */
 	public boolean isInWorld(int objectId) {
 		return allObjects.containsKey(objectId);
-	}
-
-	/**
-	 * Check whether object is in world
-	 * 
-	 * @param object
-	 * @return
-	 */
-	public boolean isInWorld(VisibleObject object) {
-		return isInWorld(object.getObjectId());
 	}
 
 	/**

@@ -242,7 +242,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		restoreLock.lock();
 		try {
 			if (flyRestoreTask == null && !alreadyDead && !isFlyTimeFullyRestored()) {
-				this.flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
+				flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
 			}
 		} finally {
 			restoreLock.unlock();
@@ -254,7 +254,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		try {
 			if (flyRestoreTask != null && !flyRestoreTask.isCancelled()) {
 				flyRestoreTask.cancel(false);
-				this.flyRestoreTask = null;
+				flyRestoreTask = null;
 			}
 		} finally {
 			restoreLock.unlock();
@@ -274,7 +274,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		restoreLock.lock();
 		try {
 			if (flyReduceTask == null && !alreadyDead && owner.getAccessLevel() < AdminConfig.GM_FLIGHT_UNLIMITED) {
-				this.flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
+				flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
 			}
 		} finally {
 			restoreLock.unlock();
@@ -286,7 +286,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		try {
 			if (flyReduceTask != null && !flyReduceTask.isCancelled()) {
 				flyReduceTask.cancel(false);
-				this.flyReduceTask = null;
+				flyReduceTask = null;
 			}
 		} finally {
 			restoreLock.unlock();

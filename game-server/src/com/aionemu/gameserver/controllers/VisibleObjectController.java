@@ -50,7 +50,7 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	}
 
 	/**
-	 * Despawns the object and deletes it from the world
+	 * Despawns the object (if spawned) and deletes it from the world
 	 */
 	public final void delete() {
 		World.getInstance().removeObject(getOwner());

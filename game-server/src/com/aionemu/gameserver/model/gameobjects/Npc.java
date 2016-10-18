@@ -49,7 +49,6 @@ public class Npc extends Creature {
 	private int creatorId = 0;
 	private int townId;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
-	private int aRange = getObjectTemplate().getAggroRange();
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
@@ -176,7 +175,7 @@ public class Npc extends Creature {
 	}
 
 	public int getAggroRange() {
-		return getAi2().modifyARange(aRange);
+		return getAi2().modifyAggroRange(getObjectTemplate().getAggroRange());
 	}
 
 	/**

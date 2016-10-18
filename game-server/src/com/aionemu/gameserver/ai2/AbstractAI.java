@@ -543,7 +543,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	@Override
-	public int modifyARange(int value) {
+	public int modifyAggroRange(int value) {
 		return value;
 	}
 }

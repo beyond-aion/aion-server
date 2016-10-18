@@ -53,7 +53,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.CreatureAwareKnownList;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
@@ -91,10 +90,8 @@ public class VisibleObjectSpawner {
 		try {
 			SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		} catch (Exception ex) {
-			log.error("Error during spawn of npc {}, world {}, x-y {}-{}", new Object[] { npcTemplate.getTemplateId(), spawn.getWorldId(), spawn.getX(),
-				spawn.getY() });
-			log.error("Npc {} will be despawned", npcTemplate.getTemplateId(), ex);
-			World.getInstance().despawn(npc);
+			log.error("Error during spawn of {}", npc, ex);
+			npc.getController().delete();
 		}
 		return npc;
 	}

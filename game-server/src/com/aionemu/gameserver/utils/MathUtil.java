@@ -306,10 +306,9 @@ public class MathUtil {
 
 		float dx = (object2.getX() - object1.getX());
 		float dy = (object2.getY() - object1.getY());
-		float distSquared = dx * dx + dy * dy;
 		if (!centerToCenter)
 			range += object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
-		return distSquared < range * range;
+		return dx * dx + dy * dy < range * range;
 	}
 
 	/**
@@ -337,7 +336,8 @@ public class MathUtil {
 		float dx = (object2.getX() - object1.getX());
 		float dy = (object2.getY() - object1.getY());
 		float dz = (object2.getZ() - object1.getZ());
-		return dx * dx + dy * dy + dz * dz > minRange * minRange && dx * dx + dy * dy + dz * dz < maxRange * maxRange;
+		float distSquared = dx * dx + dy * dy + dz * dz;
+		return !(distSquared < minRange * minRange || distSquared > maxRange * maxRange);
 	}
 
 	/**
