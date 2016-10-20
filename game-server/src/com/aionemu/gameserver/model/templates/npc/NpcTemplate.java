@@ -106,9 +106,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	@XmlAttribute
 	private boolean floatcorpse;
 
-	@XmlAttribute(name = "on_mist")
-	private Boolean onMist;
-
 	@XmlElement(name = "bound_radius")
 	private BoundRadius boundRadius;
 
@@ -327,10 +324,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	 */
 	public boolean isFloatCorpse() {
 		return floatcorpse;
-	}
-
-	public Boolean getMistSpawnCondition() {
-		return onMist;
 	}
 
 	public GroupDropType getGroupDrop() {

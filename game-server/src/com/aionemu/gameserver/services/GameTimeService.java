@@ -12,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.gametime.GameTime;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
@@ -59,7 +58,7 @@ public class GameTimeService {
 			@Override
 			public void run() {
 				log.info("Sending current game time to all players");
-				World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
+				PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
 				if (saveGameTime())
 					log.info("Game time saved...");
 				else

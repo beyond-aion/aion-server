@@ -16,7 +16,7 @@ public class GameTime implements Cloneable {
 
 	private static final int MINUTES_IN_HOUR = 60;
 	private static final int MINUTES_IN_DAY = MINUTES_IN_HOUR * 24;
-	private static final int MINUTES_IN_YEAR = (31 * 12) * MINUTES_IN_DAY;
+	private static final int MINUTES_IN_YEAR = Month.getDaysOfYear() * MINUTES_IN_DAY;
 	private int gameTime;
 	private DayTime dayTime;
 
@@ -43,6 +43,13 @@ public class GameTime implements Cloneable {
 		public int getDays() {
 			return days;
 		}
+
+		public static int getDaysOfYear() {
+			int daysOfYear = 0;
+			for (Month m : values())
+				daysOfYear += m.getDays();
+			return daysOfYear;
+		}
 	};
 
 	/**
@@ -59,8 +66,6 @@ public class GameTime implements Cloneable {
 	}
 
 	/**
-	 * Gets the ingame time in minutes
-	 * 
 	 * @return The number of minutes since 01.01.0000 00:00
 	 */
 	public int getTime() {
@@ -68,11 +73,14 @@ public class GameTime implements Cloneable {
 	}
 
 	/**
-	 * Increases game time by a minute
+	 * Adds the given number of minutes to the GameTime
 	 */
 	public void addMinutes(int minutes) {
-		gameTime += minutes;
-		onTimeChange();
+		if (minutes != 0) {
+			gameTime += minutes;
+			if (getMinute() == 0)
+				onHourChange(minutes == 1);
+		}
 	}
 
 	/**
@@ -82,6 +90,10 @@ public class GameTime implements Cloneable {
 		return dayTime;
 	}
 
+	/**
+	 * @param dayTime
+	 * @return True if the daytime changed
+	 */
 	public boolean setDayTime(DayTime dayTime) {
 		if (this.dayTime == dayTime)
 			return false;
@@ -90,107 +102,69 @@ public class GameTime implements Cloneable {
 	}
 
 	/**
-	 * Gets the year in the game: 0 - <integer bound>
-	 * 
-	 * @return Year
+	 * @return The year in the game, 0-4008 (since gameTime is int based)
 	 */
 	public int getYear() {
 		return gameTime / MINUTES_IN_YEAR;
 	}
 
 	/**
-	 * Gets the month in the game, 1 - 12
-	 * 
-	 * @return Month 1-12
+	 * @return The number of the current month in the game, ranging from 1 to 12
 	 */
 	public int getMonth() {
-		int answer = 1;
-		int minutesInYear = gameTime % MINUTES_IN_YEAR;
+		int month = 0;
+		int minutesOfThisYear = gameTime % MINUTES_IN_YEAR;
 		for (Month m : Month.values()) {
-			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
-				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
-				answer = answer + 1;
-			} else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
-				answer = answer + 1;
+			month += 1;
+			if ((minutesOfThisYear -= m.getDays() * MINUTES_IN_DAY) < 0)
 				break;
-			} else {
-				break;
-			}
 		}
-		return answer;
+		return month;
 	}
 
 	/**
-	 * Get the proper amount of minutes in this month
-	 * 
-	 * @param m
-	 * @return time in minutes in this month
-	 */
-	public int getProperMinutesInMonth(Month m) {
-		return m.getDays() * MINUTES_IN_DAY;
-	}
-
-	/**
-	 * Gets the day in the game, 1 - Month.getDays()
-	 * 
-	 * @return Day 1 - Month.getDays()
+	 * @return The number of the day of month in the game, ranging from 1 to Month.getDays()
 	 */
 	public int getDay() {
-		int answer = 1;
+		int day = 1;
 		int minutesInYear = gameTime % MINUTES_IN_YEAR;
 		for (Month m : Month.values()) {
-			if ((minutesInYear - getProperMinutesInMonth(m)) > 0) {
-				minutesInYear = minutesInYear - getProperMinutesInMonth(m);
-			} else if ((minutesInYear - getProperMinutesInMonth(m)) == 0) {
-				break;
+			int minutesInMonth = m.getDays() * MINUTES_IN_DAY;
+			if (minutesInYear > minutesInMonth) {
+				minutesInYear -= minutesInMonth;
 			} else {
-				answer = minutesInYear / MINUTES_IN_DAY + 1;
+				if (minutesInYear < minutesInMonth) // if both are equal, it's day 1 of the following month
+					day += minutesInYear / MINUTES_IN_DAY;
 				break;
 			}
 		}
-		return answer;
+		return day;
 	}
 
 	/**
-	 * Gets the hour in the game, 0-23
-	 * 
-	 * @return Hour 0-23
+	 * @return The hour in the game, 0-23
 	 */
 	public int getHour() {
 		return (gameTime % MINUTES_IN_DAY) / MINUTES_IN_HOUR;
 	}
 
 	/**
-	 * Gets the minute in the game, 0-59
-	 * 
-	 * @return Minute 0-59
+	 * @return The minute in the game, 0-59
 	 */
 	public int getMinute() {
 		return gameTime % MINUTES_IN_HOUR;
 	}
 
-	/**
-	 * Perform actions upon time change
-	 */
-	public void onTimeChange() {
-		if (getMinute() == 0)
-			onHourChange();
-		if (setDayTime(calculateDayTime()))
-			onDayTimeChange();
-	}
-
-	private void onHourChange() {
+	private void onHourChange(boolean changedByClock) {
 		TemporarySpawnEngine.onHourChange();
-	}
-
-	private void onDayTimeChange() {
-		WeatherService.getInstance().checkWeathersTime();
+		if (setDayTime(calculateDayTime()) && changedByClock) // don't change weather if time was changed by admin
+			WeatherService.getInstance().checkWeathersTime();
 	}
 
 	/**
 	 * @return The calculated day time based on the current game hour.
 	 */
-	public DayTime calculateDayTime() {
+	private DayTime calculateDayTime() {
 		int hour = getHour();
 		if (hour > 21 || hour < 4)
 			return DayTime.NIGHT;
@@ -200,15 +174,6 @@ public class GameTime implements Cloneable {
 			return DayTime.AFTERNOON;
 		else
 			return DayTime.MORNING;
-	}
-
-	/**
-	 * Convert from game time into real time
-	 * 
-	 * @author vlog
-	 */
-	public int convertTime() {
-		return this.getTime() / 12;
 	}
 
 	/**
@@ -263,7 +228,7 @@ public class GameTime implements Cloneable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this != obj)
+		if (this == obj)
 			return true;
 		if (!(obj instanceof GameTime))
 			return false;

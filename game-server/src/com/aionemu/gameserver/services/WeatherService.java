@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,13 +17,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.gametime.DayTime;
 import com.aionemu.gameserver.utils.gametime.GameTime;
-import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
 
 /**
- * @author ATracer
- * @author Kwazar
+ * @author ATracer, Kwazar
  * @reworked Rolandas
  */
 public class WeatherService {
@@ -80,34 +77,35 @@ public class WeatherService {
 
 		@Override
 		public int hashCode() {
-			return Integer.valueOf(mapId).hashCode();
+			return mapId;
 		}
 
 	}
 
 	/**
-	 * triggered on every day time change
+	 * Triggered on every day time change (4x every two hours, since an in-game day equals 120 minutes)
 	 */
 	public void checkWeathersTime() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
+				GameTime weatherTime = GameTimeService.getInstance().getGameTime().clone();
 				for (WeatherKey key : worldZoneWeathers.keySet()) {
+					key.created = weatherTime;
 					setNextWeather(key);
 					onWeatherChange(key.getMapId(), null);
 				}
 			}
-		}, 0);
+		}, Rnd.get(20000, 240000)); // change weather 20s to 4m after daytime change
 	}
 
 	private synchronized void setNextWeather(WeatherKey key) {
 		WeatherEntry[] weatherEntries = getWeatherEntries(key.getMapId());
 		WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(key.getMapId());
-		key.created = GameTimeService.getInstance().getGameTime().clone();
 		for (int zoneIndex = 0; zoneIndex < weatherEntries.length; zoneIndex++) {
 			WeatherEntry oldEntry = weatherEntries[zoneIndex];
-			WeatherEntry newEntry = null;
+			WeatherEntry newEntry;
 			if (oldEntry == null)
 				newEntry = getRandomWeather(key.getCreatedTime(), table, zoneIndex + 1);
 			else {
@@ -271,20 +269,10 @@ public class WeatherService {
 			return;
 
 		if (player == null) {
-			for (Iterator<Player> playerIterator = World.getInstance().getPlayersIterator(); playerIterator.hasNext();) {
-				Player currentPlayer = playerIterator.next();
-				if (!currentPlayer.isSpawned())
-					continue;
-
-				if (currentPlayer.getWorldId() == mapId) {
-					PacketSendUtility.sendPacket(currentPlayer, new SM_WEATHER(weatherEntries));
-				}
-			}
+			PacketSendUtility.broadcastToWorld(new SM_WEATHER(weatherEntries), p -> p.isSpawned() && p.getWorldId() == mapId);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_WEATHER(weatherEntries));
 		}
-		for (WeatherEntry entry : weatherEntries)
-			SiegeService.getInstance().onWeatherChanged(entry);
 	}
 
 	@SuppressWarnings("synthetic-access")

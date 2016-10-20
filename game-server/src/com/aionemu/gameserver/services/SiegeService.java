@@ -36,7 +36,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.model.templates.world.WeatherEntry;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_ARTIFACT_INFO3;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_SIEGE_LOCINFO_475;
@@ -802,15 +801,6 @@ public class SiegeService {
 
 		PacketSendUtility.sendPacket(player, new SM_SHIELD_EFFECT(worldLocations.values()));
 		PacketSendUtility.sendPacket(player, new SM_ABYSS_ARTIFACT_INFO3(worldArtifacts.values()));
-	}
-
-	public void onWeatherChanged(WeatherEntry entry) {
-		/*
-		 * int siegeLocationId = 10000; Collection<SiegeNpc> siegeNpcs = World.getInstance().getLocalSiegeNpcs(siegeLocationId); for (SiegeNpc npc :
-		 * siegeNpcs) { Boolean condition = npc.getObjectTemplate().getMistSpawnCondition(); if (condition == null) continue; if
-		 * (npc.isInsideWeatherZone(entry.getZoneId())) { if (entry.getCode() == 3 && condition || entry.getCode() == 2 && !condition)
-		 * npc.getController().onDelete(); } }
-		 */
 	}
 
 	public int getSiegeIdByLocId(int locId) {
