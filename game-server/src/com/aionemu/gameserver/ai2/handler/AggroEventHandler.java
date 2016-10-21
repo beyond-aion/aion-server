@@ -69,7 +69,7 @@ public class AggroEventHandler {
 			Player playerTarget = (Player) target;
 			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker) && MathUtil.isInRange(owner, playerTarget, owner.getAggroRange())
 				&& GeoService.getInstance().canSee(owner, attacker)) {
-				owner.getAggroList().startHate(attacker);
+				owner.getAggroList().addHate(attacker, 1);
 				return true;
 			}
 		}

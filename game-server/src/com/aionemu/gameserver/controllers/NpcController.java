@@ -139,10 +139,10 @@ public class NpcController extends CreatureController<Npc> {
 		}
 
 		super.onDie(lastAttacker);
-		
+
 		if (shouldRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
 			RespawnService.scheduleRespawnTask(getOwner());
-		
+
 		if (shouldDecay) {
 			RespawnService.scheduleDecayTask(owner);
 			if (lastAttacker instanceof Player && shouldLoot) { // pet loot
@@ -265,6 +265,19 @@ public class NpcController extends CreatureController<Npc> {
 		if (!getOwner().getAi2().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogId, player, getOwner(), questId, extendedRewardIndex);
 		}
+	}
+
+	@Override
+	public void onAddHate(Creature attacker, boolean isNewInAggroList) {
+		if (isNewInAggroList && attacker instanceof Player) {
+			if (((Player) attacker).isInTeam()) {
+				for (Player player : ((Player) attacker).getCurrentTeam().filterMembers(m -> MathUtil.isIn3dRange(getOwner(), m, 50)))
+					QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), player, 0, 0));
+			} else {
+				QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), (Player) attacker, 0, 0));
+			}
+		}
+		super.onAddHate(attacker, isNewInAggroList);
 	}
 
 	@Override

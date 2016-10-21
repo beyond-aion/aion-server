@@ -176,7 +176,7 @@ public class _1006Ascension extends QuestHandler {
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 229.6f, 265.7f, 205.7f, (byte) 0));
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 222.8f, 262.5f, 205.7f, (byte) 0));
 										for (Npc mob : mobs) {
-											mob.getAggroList().addDamage(player, 1000);
+											mob.getAggroList().addHate(player, 1000);
 										}
 									}
 								}, 43000);
@@ -229,7 +229,7 @@ public class _1006Ascension extends QuestHandler {
 					qs.setQuestVar(4); // 4
 					updateQuestStatus(env);
 					Npc mob = (Npc) QuestService.spawnQuestNpc(310020000, player.getInstanceId(), 211043, 226.7f, 251.5f, 205.5f, (byte) 0);
-					mob.getAggroList().addDamage(player, 1000);
+					mob.getAggroList().addHate(player, 1000);
 					return true;
 				}
 			} else if (targetId == 211043 && var == 4) {

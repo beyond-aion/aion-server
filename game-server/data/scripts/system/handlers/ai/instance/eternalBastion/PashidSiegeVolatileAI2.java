@@ -27,7 +27,7 @@ public class PashidSiegeVolatileAI2 extends AggressiveNpcAI2 {
 
 			@Override
 			public void run() {
-				getOwner().getAggroList().addDamage(wall, 1000);
+				getOwner().getAggroList().addHate(wall, 1000);
 			}
 		}, 3000);
 	}

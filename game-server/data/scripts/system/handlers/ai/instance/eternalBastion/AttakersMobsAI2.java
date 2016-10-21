@@ -36,9 +36,9 @@ public class AttakersMobsAI2 extends AggressiveNpcAI2 {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			if (generalE != null) {
-				getOwner().getAggroList().addDamage(generalE, 1000);
+				getOwner().getAggroList().addHate(generalE, 1000);
 			} else if (generalA != null) {
-				getOwner().getAggroList().addDamage(generalA, 1000);
+				getOwner().getAggroList().addHate(generalA, 1000);
 			}
 		}
 	}

@@ -6,21 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.events.AbstractEventSource;
 import com.aionemu.gameserver.events.Listenable;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 
 /**
@@ -58,48 +53,29 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 		AggroInfo ai = getAggroInfo(attacker);
 		ai.addDamage(damage);
-		/**
-		 * For now we add hate equal to each damage received Additionally there will be broadcast of extra hate
-		 */
-		ai.addHate(damage);
 
-		// TODO move out to controller
-		owner.getAi2().onCreatureEvent(AIEventType.ATTACK, attacker);
+		// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
+		boolean isNewInAggroList = ai.getHate() == 0;
+		ai.addHate(damage);
+		owner.getController().onAddHate(attacker, isNewInAggroList);
 
 		if (evObj != null)
 			super.fireAfterEvent(evObj);
 	}
 
 	/**
-	 * Extra hate that is received from using non-damage skill effects
+	 * Hate that is received without dealing damage
 	 */
 	public void addHate(final Creature creature, int hate) {
 		if (!isAware(creature))
 			return;
 		if (hate < 0 && !aggroList.containsKey(creature.getObjectId()))
 			return;
-		addHateValue(creature, hate);
-	}
 
-	/**
-	 * start hating creature by adding 1 hate value
-	 */
-	public void startHate(final Creature creature) {
-		addHateValue(creature, 1);
-	}
-
-	protected void addHateValue(final Creature creature, int hate) {
 		AggroInfo ai = getAggroInfo(creature);
+		boolean isNewInAggroList = ai.getHate() == 0;
 		ai.addHate(hate);
-		// TODO move out to controller
-		if (creature instanceof Player && owner instanceof Npc) {
-			owner.getKnownList().forEachPlayer(player -> {
-				if (MathUtil.isIn3dRange(owner, player, 50)) {
-					QuestEngine.getInstance().onAddAggroList(new QuestEnv(owner, player, 0, 0));
-				}
-			});
-		}
-		owner.getAi2().onCreatureEvent(AIEventType.ATTACK, creature);
+		owner.getController().onAddHate(creature, isNewInAggroList);
 	}
 
 	/**
@@ -234,15 +210,6 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	/**
 	 * @param creature
-	 * @param value
-	 */
-	public void notifyHate(Creature creature, int value) {
-		if (isHating(creature))
-			addHate(creature, value);
-	}
-
-	/**
-	 * @param creature
 	 */
 	public void stopHating(VisibleObject creature) {
 		AggroInfo aggroInfo = aggroList.get(creature.getObjectId());
@@ -355,7 +322,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	protected boolean isAware(Creature creature) {
 		return creature != null && !creature.equals(owner)
 			&& !owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY)
-			&& (creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
+			&& (isHating(creature) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
 	}
 
 	@Override

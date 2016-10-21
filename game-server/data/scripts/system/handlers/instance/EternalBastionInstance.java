@@ -313,7 +313,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 						@Override
 						public void run() {
-							instance.getNpc(231171).getAggroList().addDamage(wall, 1000);
+							instance.getNpc(231171).getAggroList().addHate(wall, 1000);
 							sendMsg(1401823);
 						}
 					}, 1500);

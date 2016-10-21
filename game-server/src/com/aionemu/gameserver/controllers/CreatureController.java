@@ -14,6 +14,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -111,7 +112,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Zone update mask management
-	 * 
 	 */
 	public final void updateZone() {
 		ZoneUpdateService.getInstance().add(getOwner());
@@ -153,6 +153,16 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
+	 * Called when the creature gains or loses hate towards the attacker
+	 * 
+	 * @param attacker
+	 * @param isNewInAggroList
+	 */
+	public void onAddHate(Creature attacker, boolean isNewInAggroList) {
+		getOwner().getAi2().onCreatureEvent(AIEventType.ATTACK, attacker);
+	}
+
+	/**
 	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
 	 */
 	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
@@ -169,7 +179,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					int cancelRate = skill.getSkillTemplate().getCancelRate();
 					if (cancelRate >= 99999) {
 						cancelCurrentSkill(attacker);
-					} else if (cancelRate > 0 && !(getOwner() instanceof Npc && ((Npc) getOwner()).isBoss())){
+					} else if (cancelRate > 0 && !(getOwner() instanceof Npc && ((Npc) getOwner()).isBoss())) {
 						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
 						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
@@ -476,8 +486,11 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 */
 	public void broadcastHate(int value) {
 		getOwner().getKnownList().forEachObject(visibleObject -> {
-			if (visibleObject instanceof Creature)
-				((Creature) visibleObject).getAggroList().notifyHate(getOwner(), value);
+			if (visibleObject instanceof Creature) {
+				AggroList al = ((Creature) visibleObject).getAggroList();
+				if (al.isHating(getOwner()))
+					al.addHate(getOwner(), value);
+			}
 		});
 	}
 
@@ -488,7 +501,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 		creature.setCasting(null);
 		if (creature instanceof Npc) {
-			removeQueuedSkill((Npc)creature);
+			removeQueuedSkill((Npc) creature);
 			((Npc) creature).getGameStats().setLastSkill(null);
 		}
 		if (creature.getSkillNumber() > 0)

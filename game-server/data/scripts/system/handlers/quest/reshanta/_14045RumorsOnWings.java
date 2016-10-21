@@ -99,8 +99,8 @@ public class _14045RumorsOnWings extends QuestHandler {
 								Creature raithor = World.getInstance().getWorldMap(400010000).getWorldMapInstanceById(player.getInstanceId()).getNpc(278643);
 								List<Npc> npcs = World.getInstance().getWorldMap(400010000).getWorldMapInstanceById(player.getInstanceId()).getNpcs(214102);
 								for (Npc npc : npcs) {
-									npc.getAggroList().startHate(raithor);
-									raithor.getAggroList().startHate(npc);
+									npc.getAggroList().addHate(raithor, 1);
+									raithor.getAggroList().addHate(npc, 1);
 								}
 								qs.setQuestVarById(0, 3); // 3
 								return closeDialogWindow(env);
