@@ -169,6 +169,7 @@ public class WalkManager {
 					chooseNextRandomPoint(npcAI);
 					break;
 				case TALK:
+					npcAI.setStateIfNot(AIState.IDLE);
 					npcAI.getOwner().getMoveController().abortMove();
 					break;
 			}

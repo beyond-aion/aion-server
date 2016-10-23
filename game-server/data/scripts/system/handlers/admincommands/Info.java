@@ -87,7 +87,7 @@ public class Info extends AdminCommand {
 			} else if (creature instanceof Npc) {
 				Npc npc = (Npc) creature;
 				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank() + "\n\tTemplateType: " + npc.getNpcTemplateType()
-					+ ", AbyssType: " + npc.getAbyssNpcType() + "\n\tRelative XP: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
+					+ ", AbyssType: " + npc.getAbyssNpcType() + "\n\tRelative XP reward: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
 				if (npc instanceof SiegeNpc)
 					sendInfo(admin, "[Siege info]\n\tSiegeId: " + ((SiegeNpc) npc).getSiegeId() + ", SiegeRace: " + ((SiegeNpc) npc).getSiegeRace());
 				sendInfo(admin,
@@ -99,14 +99,14 @@ public class Info extends AdminCommand {
 						+ (npc.getAggroRange() - npc.getCollision()));
 				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
 				if (npc.isPathWalker()) {
-					sendInfo(admin, "\n\tRouteId: " + npc.getSpawn().getWalkerId());
+					sendInfo(admin, "\tRouteId: " + npc.getSpawn().getWalkerId());
 					if (npc.getWalkerGroup() != null) {
 						ClusteredNpc snpc = npc.getWalkerGroup().getClusterData(npc);
 						sendInfo(admin, "\tWalkerGroupType: " + npc.getWalkerGroup().getWalkType() + ", XDelta: " + snpc.getXDelta() + ", YDelta: "
 							+ snpc.getYDelta() + ", Index: " + snpc.getWalkerIndex());
 					}
 				} else if (npc.isRandomWalker()) {
-					sendInfo(admin, "\n\tRandomWalkRange: " + npc.getSpawn().getRandomWalkRange() + "m");
+					sendInfo(admin, "\tRandomWalkRange: " + npc.getSpawn().getRandomWalkRange() + "m");
 				}
 			}
 			sendInfo(admin, "[Current zone]\n\t" + target.getPosition().toCoordString() + "\n\tTown ID: "
