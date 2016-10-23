@@ -7,6 +7,8 @@ import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
  * @author ATracer
@@ -27,7 +29,7 @@ public class ReturningEventHandler {
 			EmoteManager.emoteStartReturning(npcAI.getOwner());
 			Npc npc = npcAI.getOwner();
 			if (npc.isPathWalker()) {
-				WalkManager.startWalking(npcAI);
+					WalkManager.startWalking(npcAI);
 			} else {
 				Point3D prevStep = npc.getMoveController().recallPreviousStep();
 				npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
@@ -45,10 +47,11 @@ public class ReturningEventHandler {
 		npcAI.getOwner().getMoveController().clearBackSteps();
 		if (npcAI.setStateIfNot(AIState.IDLE)) {
 			EmoteManager.emoteStartIdling(npcAI.getOwner());
-			ThinkEventHandler.thinkIdle(npcAI);
+			npcAI.think();
+			Npc npc = npcAI.getOwner();
+			NpcSkillEntry skill = npc.getSkillList().getUseInSpawnedSkill();
+			if (skill != null)
+				SkillEngine.getInstance().getSkill(npc, skill.getSkillId(), skill.getSkillLevel(), npc).useWithoutPropSkill();
 		}
-		Npc npc = npcAI.getOwner();
-		npc.getController().onReturnHome();
 	}
-
 }

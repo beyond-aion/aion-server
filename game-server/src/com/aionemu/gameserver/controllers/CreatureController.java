@@ -98,12 +98,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Perform tasks on Creature return at home
-	 */
-	public void onReturnHome() {
-	}
-
-	/**
 	 * Notify everyone in knownlist about move event
 	 */
 	protected void notifyAIOnMove() {

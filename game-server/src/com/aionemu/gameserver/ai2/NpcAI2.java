@@ -28,7 +28,6 @@ import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.KnownList;
@@ -122,25 +121,13 @@ public class NpcAI2 extends AITemplate {
 	@Override
 	@AIListenable(type = AIEventType.BEFORE_SPAWNED)
 	protected void handleBeforeSpawned() {
-		SpawnEventHandler.onRespawn(this);
-		if (getSkillList().getUseInSpawnedSkill() != null) {
-			int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
-			int skillLevel = getSkillList().getSkillLevel(skillId);
-			AI2Actions.targetSelf(this);
-			SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useNoAnimationSkill();
-		}
+		SpawnEventHandler.onBeforeSpawn(this);
 	}
 
 	@Override
 	@AIListenable(type = AIEventType.SPAWNED)
 	protected void handleSpawned() {
 		SpawnEventHandler.onSpawn(this);
-		if (getSkillList().getUseInSpawnedSkill() != null) {
-			int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
-			int skillLevel = getSkillList().getSkillLevel(skillId);
-			AI2Actions.targetSelf(this);
-			SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useNoAnimationSkill();
-		}
 		ShoutEventHandler.onSpawn(this);
 	}
 
@@ -225,7 +212,7 @@ public class NpcAI2 extends AITemplate {
 	}
 
 	public boolean isMoveSupported() {
-		return getOwner().getGameStats().getMovementSpeedFloat() > 0 && !this.isInSubState(AISubState.FREEZE);
+		return getOwner().getGameStats().getMovementSpeed().getCurrent() > 0 && !isInSubState(AISubState.FREEZE);
 	}
 
 	/**

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Tiamat -->
+	<npc_skills npc_ids="219360">
+		<npc_skill id="20917" lv="1" is_post_spawn="true" />
+	</npc_skills>
+</npc_skill_templates>

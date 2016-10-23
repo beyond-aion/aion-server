@@ -1,6 +1,5 @@
 package ai;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AttackIntention;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
  * @author ATracer
@@ -76,12 +74,6 @@ public class GeneralNpcAI2 extends NpcAI2 {
 	@Override
 	protected void handleBackHome() {
 		ReturningEventHandler.onBackHome(this);
-		if (getSkillList().getUseInSpawnedSkill() != null) {
-			int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
-			int skillLevel = getSkillList().getSkillLevel(skillId);
-			AI2Actions.targetSelf(this);
-			SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useNoAnimationSkill();
-		}
 	}
 
 	@Override

@@ -247,11 +247,12 @@ public class MapRegion {
 	 * Send DEACTIVATE event to all objects with AI2
 	 */
 	private void deactivateObjects() {
+		if (getParent().getParent().isInstanceType() || getMapId() == 400030000)
+			return;
 		for (VisibleObject visObject : objects.values()) {
 			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
-				&& !((Creature) visObject).isRaidMonster() && !((Creature) visObject).isInInstance() && ((Creature) visObject).getWorldId() != 400030000) {
-				Creature creature = (Creature) visObject;
-				creature.getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
+				&& !((Creature) visObject).isRaidMonster()) {
+				((Creature) visObject).getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
 		}
 	}
