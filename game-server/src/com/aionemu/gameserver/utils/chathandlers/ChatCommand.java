@@ -181,13 +181,13 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 		} else {
 			StringBuilder sb = new StringBuilder(lines[0]);
 			for (int i = 1; i < lines.length; i++) {
-				if (((i + 1) % SM_MESSAGE.MESSAGE_LINE_LIMIT) == 1) {
+				if (i % SM_MESSAGE.MESSAGE_LINE_LIMIT == 0) {
 					PacketSendUtility.sendMessage(player, sb.toString());
-					sb.delete(0, sb.length());
-					sb.append(lines[i]);
+					sb.setLength(0);
 				} else {
-					sb.append("\n" + lines[i]);
+					sb.append("\n");
 				}
+				sb.append(lines[i]);
 			}
 			PacketSendUtility.sendMessage(player, sb.toString());
 		}

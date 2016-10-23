@@ -6,24 +6,25 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.ENpcFactionQuestState;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.TownService;
-import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.ClusteredNpc;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author Nemiroff Date: 28.12.2009
+ * @modified Neon
  */
 public class Info extends AdminCommand {
 
@@ -36,144 +37,110 @@ public class Info extends AdminCommand {
 		VisibleObject target = admin.getTarget();
 
 		if (target == null) {
-			sendInfo(admin, "Please select a target.");
-		} else if (target instanceof Player) {
-			Player player = (Player) target;
-			Pet pet = player.getPet();
-			sendInfo(admin,
-				"[Info about " + player.getName() + "]\nPlayer Id: " + player.getObjectId() + "\n" + player.getPosition().toCoordString()
-					+ (pet != null ? "\nPet Id: " + pet.getPetId() + " / ObjectId: " + pet.getObjectId() : "") + "\n Town ID: "
-					+ TownService.getInstance().getTownResidence(player) + "\n Tribe: " + player.getTribe() + "\n TribeBase: " + player.getBaseTribe());
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			return;
+		}
 
-			sendInfo(admin,
-				"[Stats]\nPvP attack: " + player.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%\nPvP p. attack: "
-					+ player.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\nPvP m. attack: "
-					+ player.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\nPvP defend: "
-					+ player.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.1f + "%\nPvP p. defend: "
-					+ player.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\nPvP m. defend: "
-					+ player.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\nCast Time Boost: +"
-					+ (player.getGameStats().getStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() * 0.1f - 100) + "%\nAttack Speed: "
-					+ player.getGameStats().getAttackSpeed().getCurrent() * 0.001f + "\nMovement Speed: " + player.getGameStats().getMovementSpeedFloat()
-					+ "\n----------Main Hand------------\nAttack: " + player.getGameStats().getMainHandPAttack().getCurrent() + "\nAccuracy: "
-					+ player.getGameStats().getMainHandPAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getMainHandPCritical().getCurrent()
-					+ "\n------------Off Hand------------\nFinal-Attack: "
-					+ (player.getGameStats().getOffHandPAttack().getBase() + Math.round(player.getGameStats().getOffHandPAttack().getBonus() * 0.98f))
-					+ "\n[Current]Attack: " + player.getGameStats().getOffHandPAttack().getCurrent() + "\nAccuracy: "
-					+ player.getGameStats().getOffHandPAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getOffHandPCritical().getCurrent()
-					+ "\n-------------Magical-------------\nFinal-Attack: "
-					+ (player.getGameStats().getOffHandMAttack().getBase() + Math.round(player.getGameStats().getOffHandMAttack().getBonus() * 0.82f))
-					+ "\n[Current]Attack: " + player.getGameStats().getMainHandMAttack().getCurrent() + "\nAccuracy: "
-					+ player.getGameStats().getMAccuracy().getCurrent() + "\nCritical: " + player.getGameStats().getMCritical().getCurrent() + "\nBoost: "
-					+ player.getGameStats().getMBoost().getCurrent() + "\n-------------Protect--------------\nPhysical Defence: "
-					+ player.getGameStats().getPDef().getCurrent() + "\nBlock: " + player.getGameStats().getBlock().getCurrent() + "\nParry: "
-					+ player.getGameStats().getParry().getCurrent() + "\nEvasion: " + player.getGameStats().getEvasion().getCurrent() + "\nMagic Resist: "
-					+ player.getGameStats().getMResist().getCurrent());
+		sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\n\tName: " + target.getName() + ", ObjectId: " + target.getObjectId()
+			+ "\n\tTemplateId: " + target.getObjectTemplate().getTemplateId());
 
-			for (int i = 0; i < 2; i++) {
-				NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
-				if (faction != null) {
-					sendInfo(admin,
-						player.getName() + " have join to " + (i == 0 ? "mentor" : "daily") + " faction: "
-							+ DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getName() + "\nCurrent quest state: " + faction.getState().name()
-							+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE)
-								? ("\nNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
-				}
-			}
-			sendInfo(admin, "[Life stats]\nisAlive: " + !player.getLifeStats().isAlreadyDead() + "\nHP: " + player.getLifeStats().getCurrentHp() + " / "
-				+ player.getLifeStats().getMaxHp() + "\nMP: " + player.getLifeStats().getCurrentMp() + " / " + player.getLifeStats().getMaxMp());
-			sendInfo(admin, "[Current Zone Info]\nPvP: " + player.isInsidePvPZone());
-		} else if (target instanceof Summon) {
-			Summon summon = (Summon) admin.getTarget();
-			sendInfo(admin, "[Current Zone Info]\nPvP: " + summon.isInsidePvPZone());
+		if (target instanceof Creature) {
+			Creature creature = (Creature) target;
+			if (creature instanceof Player) {
+				Player player = (Player) creature;
+				Pet pet = player.getPet();
+				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getPetId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "") + "Town ID: "
+					+ TownService.getInstance().getTownResidence(player));
+				PlayerGameStats pgs = player.getGameStats();
+				sendInfo(admin,
+					"[Stats]\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%\n\tPvP p. attack: "
+						+ pgs.getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\n\tPvP m. attack: "
+						+ pgs.getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\n\tPvP defend: "
+						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.1f + "%\n\tPvP p. defend: "
+						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\n\tPvP m. defend: "
+						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\n\tCast Time Boost: +"
+						+ (pgs.getStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() * 0.1f - 100) + "%\n\tAttack Speed: "
+						+ pgs.getAttackSpeed().getCurrent() * 0.001f + "\n\tMovement Speed: " + pgs.getMovementSpeedFloat()
+						+ "\n\t----------Main Hand------------\n\tAttack: " + pgs.getMainHandPAttack().getCurrent() + "\n\tAccuracy: "
+						+ pgs.getMainHandPAccuracy().getCurrent() + "\n\tCritical: " + pgs.getMainHandPCritical().getCurrent()
+						+ "\n\t------------Off Hand------------\n\tFinal-Attack: "
+						+ (pgs.getOffHandPAttack().getBase() + Math.round(pgs.getOffHandPAttack().getBonus() * 0.98f)) + "\n\t[Current]Attack: "
+						+ pgs.getOffHandPAttack().getCurrent() + "\n\tAccuracy: " + pgs.getOffHandPAccuracy().getCurrent() + "\n\tCritical: "
+						+ pgs.getOffHandPCritical().getCurrent() + "\n\t-------------Magical-------------\n\tFinal-Attack: "
+						+ (pgs.getOffHandMAttack().getBase() + Math.round(pgs.getOffHandMAttack().getBonus() * 0.82f)) + "\n\t[Current]Attack: "
+						+ pgs.getMainHandMAttack().getCurrent() + "\n\tAccuracy: " + pgs.getMAccuracy().getCurrent() + "\n\tCritical: "
+						+ pgs.getMCritical().getCurrent() + "\n\tBoost: " + pgs.getMBoost().getCurrent()
+						+ "\n\t-------------Protect--------------\n\tPhysical Defence: " + pgs.getPDef().getCurrent() + "\n\tBlock: "
+						+ pgs.getBlock().getCurrent() + "\n\tParry: " + pgs.getParry().getCurrent() + "\n\tEvasion: " + pgs.getEvasion().getCurrent()
+						+ "\n\tMagic Resist: " + pgs.getMResist().getCurrent());
 
-			int asmoDmg = 0;
-			int elyDmg = 0;
-			int npcDmg = 0;
-			sendInfo(admin, "[AggroList]");
-			for (AggroInfo ai : summon.getAggroList().getList()) {
-				if (!(ai.getAttacker() instanceof Creature))
-					continue;
-				Creature master = ((Creature) ai.getAttacker()).getMaster();
-				if (master == null)
-					continue;
-				if (master instanceof Player) {
-					Player player = (Player) master;
-					sendInfo(admin, "Name: " + player.getName() + " Dmg: " + ai.getDamage());
-					if (player.getRace() == Race.ASMODIANS)
-						asmoDmg += ai.getDamage();
-					else
-						elyDmg += ai.getDamage();
-				} else
-					npcDmg += ai.getDamage();
-			}
-			sendInfo(admin, "[TotalDmg]\n(A) Dmg: " + asmoDmg + "\n(E) Dmg: " + elyDmg + "\n(N) Dmg: " + npcDmg);
-		} else if (target instanceof Npc) {
-			Npc npc = (Npc) admin.getTarget();
-			sendInfo(admin,
-				"[Info about target]\nName: " + npc.getName() + "\nId: " + npc.getNpcId() + " / ObjectId: " + admin.getTarget().getObjectId()
-					+ " / StaticId: " + npc.getSpawn().getStaticId() + "\n" + admin.getTarget().getPosition().toCoordString() + ", Angle: "
-					+ PositionUtil.getAngleToTarget(admin, admin.getTarget()) + " \n Town ID:"
-					+ TownService.getInstance().getTownIdByPosition((Creature) target));
-			if (npc instanceof SiegeNpc) {
-				SiegeNpc siegeNpc = (SiegeNpc) npc;
-				sendInfo(admin, "[Siege info]\nSiegeId: " + siegeNpc.getSiegeId() + "\nSiegeRace: " + siegeNpc.getSiegeRace());
-			}
-			sendInfo(admin,
-				"Tribe: " + npc.getTribe() + "\n TribeBase: " + npc.getBaseTribe() + "\nRace: " + npc.getObjectTemplate().getRace() + "\nNpcType: "
-					+ npc.getType(admin) + "\nTemplateType: " + npc.getObjectTemplate().getNpcTemplateType().name() + "\nAbyssType: "
-					+ npc.getObjectTemplate().getAbyssNpcType().name() + "\nAI: " + npc.getAi2().getName() + "\n NpcRating: "
-					+ npc.getObjectTemplate().getRating().name());
-			sendInfo(admin, "[Relations to target]\nisEnemy: " + admin.isEnemy(npc) + "\ncanAttack: " + RestrictionsManager.canAttack(admin, target)
-				+ "\n[Relations to you]\nisEnemy: " + npc.isEnemy(admin) + "\nisAggressive: " + TribeRelationService.isAggressive(npc, admin));
-			sendInfo(admin,
-				"[Life stats]\nHP: " + npc.getLifeStats().getCurrentHp() + " / " + npc.getLifeStats().getMaxHp() + "\nMP: "
-					+ npc.getLifeStats().getCurrentMp() + " / " + npc.getLifeStats().getMaxMp() + "\nXP: "
-					+ StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
-			sendInfo(admin,
-				"[Sense range]\nRadius: " + npc.getAggroRange() + "\nSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + " / Front: "
-					+ npc.getObjectTemplate().getBoundRadius().getFront() + "\nDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)
-					+ "\nDistance: " + (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\nCollision: "
-					+ (npc.getAggroRange() - npc.getCollision()));
-
-			sendInfo(admin, "[Current Zone Info]\nPvP: " + npc.isInsidePvPZone());
-
-			int asmoDmg = 0;
-			int elyDmg = 0;
-			int npcDmg = 0;
-			sendInfo(admin, "[AggroList]");
-			for (AggroInfo ai : npc.getAggroList().getList()) {
-				if (!(ai.getAttacker() instanceof Creature))
-					continue;
-				Creature master = ((Creature) ai.getAttacker()).getMaster();
-				if (master == null)
-					continue;
-				if (master instanceof Player) {
-					Player player = (Player) master;
-					sendInfo(admin, "Name: " + player.getName() + " Dmg: " + ai.getDamage());
-					if (player.getRace() == Race.ASMODIANS)
-						asmoDmg += ai.getDamage();
-					else
-						elyDmg += ai.getDamage();
-				} else
-					npcDmg += ai.getDamage();
-			}
-			sendInfo(admin, "[TotalDmg]\n(A) Dmg: " + asmoDmg + "\n(E) Dmg: " + elyDmg + "\n(N) Dmg: " + npcDmg);
-			if (npc.isPathWalker()) {
-				WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(npc.getSpawn().getWalkerId());
-				if (template != null) {
-					sendInfo(admin, "[Route]\nRouteId: " + npc.getSpawn().getWalkerId() + " (Reversed: " + template.isReversed() + ")");
-					if (npc.getWalkerGroup() != null) {
-						ClusteredNpc snpc = npc.getWalkerGroup().getClusterData(npc);
-						sendInfo(admin, "[Group]\nType: " + npc.getWalkerGroup().getWalkType() + " / XDelta: " + snpc.getXDelta() + " / YDelta: "
-							+ snpc.getYDelta() + " / Index: " + snpc.getWalkerIndex());
+				for (int i = 0; i < 2; i++) {
+					NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
+					if (faction != null) {
+						sendInfo(admin,
+							player.getName() + " have join to " + (i == 0 ? "mentor" : "daily") + " faction: "
+								+ DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getName() + "\n\tCurrent quest state: " + faction.getState().name()
+								+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE)
+									? ("\n\tNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
 					}
 				}
-			} else if (npc.isRandomWalker()) {
-				sendInfo(admin, "[Route]\nRandomWalkRange: " + npc.getSpawn().getRandomWalkRange() + "m");
+			} else if (creature instanceof Npc) {
+				Npc npc = (Npc) creature;
+				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank() + "\n\tTemplateType: " + npc.getNpcTemplateType()
+					+ ", AbyssType: " + npc.getAbyssNpcType() + "\n\tRelative XP: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
+				if (npc instanceof SiegeNpc)
+					sendInfo(admin, "[Siege info]\n\tSiegeId: " + ((SiegeNpc) npc).getSiegeId() + ", SiegeRace: " + ((SiegeNpc) npc).getSiegeRace());
+				sendInfo(admin,
+					"[AI info]\n\tAI: " + npc.getAi2().getName() + "\n\tState: " + npc.getAi2().getState() + ", SubState: " + npc.getAi2().getSubState());
+				sendInfo(admin,
+					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
+						+ npc.getObjectTemplate().getBoundRadius().getFront() + "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)
+						+ "\n\tDistance: " + (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\n\tCollision: "
+						+ (npc.getAggroRange() - npc.getCollision()));
+				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
+				if (npc.isPathWalker()) {
+					sendInfo(admin, "\n\tRouteId: " + npc.getSpawn().getWalkerId());
+					if (npc.getWalkerGroup() != null) {
+						ClusteredNpc snpc = npc.getWalkerGroup().getClusterData(npc);
+						sendInfo(admin, "\tWalkerGroupType: " + npc.getWalkerGroup().getWalkType() + ", XDelta: " + snpc.getXDelta() + ", YDelta: "
+							+ snpc.getYDelta() + ", Index: " + snpc.getWalkerIndex());
+					}
+				} else if (npc.isRandomWalker()) {
+					sendInfo(admin, "\n\tRandomWalkRange: " + npc.getSpawn().getRandomWalkRange() + "m");
+				}
 			}
-		} else {
-			sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\nName: " + target.getName() + "\nId: "
-				+ target.getObjectTemplate().getTemplateId() + " / ObjectId: " + target.getObjectId() + "\n" + target.getPosition().toCoordString());
+			sendInfo(admin, "[Current zone]\n\t" + target.getPosition().toCoordString() + "\n\tTown ID: "
+				+ TownService.getInstance().getTownIdByPosition(creature) + "\n\tPvP: " + creature.isInsidePvPZone());
+			sendInfo(admin, "[Tribe]\n\tRace: " + creature.getRace() + ", Tribe: " + creature.getTribe() + ", TribeBase: " + creature.getBaseTribe());
+			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + RestrictionsManager.canAttack(admin, target));
+			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin) + ", Hostility: " + creature.getType(admin));
+			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "
+				+ creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
+			sendInfo(admin, getAggroInfo(creature));
 		}
+	}
+
+	private String getAggroInfo(Creature creature) {
+		StringBuilder sb = new StringBuilder("[AggroList]");
+		int aDmg = 0, eDmg = 0, tDmg = creature.getAggroList().getTotalDamage();
+		for (AggroInfo ai : creature.getAggroList().getList()) {
+			if (!(ai.getAttacker() instanceof Creature))
+				continue;
+			Creature master = ((Creature) ai.getAttacker()).getMaster();
+			if (master instanceof Player) {
+				if (master.getRace() == Race.ASMODIANS)
+					aDmg += ai.getDamage();
+				else
+					eDmg += ai.getDamage();
+			}
+			sb.append("\n\tName: " + (master == null ? "NULL" : master.getName()) + " Dmg: " + ai.getDamage());
+		}
+		if (tDmg > 0) {
+			sb.append("\n\tTotal Dmg: ").append(tDmg);
+			sb.append("\n\t\t(A) Dmg: ").append(aDmg);
+			sb.append("\n\t\t(E) Dmg: ").append(eDmg);
+			sb.append("\n\t\t(N) Dmg: ").append(tDmg - aDmg - eDmg);
+		}
+		return sb.toString();
 	}
 }

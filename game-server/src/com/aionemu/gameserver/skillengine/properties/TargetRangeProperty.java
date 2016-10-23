@@ -2,7 +2,6 @@ package com.aionemu.gameserver.skillengine.properties;
 
 import java.util.List;
 
-import org.apache.commons.lang3.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,17 +86,20 @@ public class TargetRangeProperty {
 							skill.getEffectedList().add((Creature) nextCreature);
 						}
 					} else if (properties.getEffectiveAngle() > 0) {
-						// Fire Storm; only positive angles
-						float angle = properties.getEffectiveAngle() / 2f;
-						Range<Float> range = Range.between(angle, -angle);
-						float angleToTarget = PositionUtil.getAngleToTarget(skill.getEffector(), nextCreature);
-						angleToTarget = angleToTarget >= 180 ? angleToTarget - 360 : angleToTarget;
-						if (properties.getDirection() != AreaDirections.BACK) {
-							if (!range.contains(angleToTarget))
-								continue;
-						} else {
-							if (range.contains(PositionUtil.getAngleToTarget(skill.getEffector(), nextCreature)))
-								continue;
+						// for target_range_area_type = firestorm
+						if (properties.getEffectiveAngle() < 360) {
+							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
+							float angleToTarget = PositionUtil.getAngleToTarget(skill.getEffector(), nextCreature);
+							if (angleToTarget > 180) // convert 0 to 360 range => -180 to 180 range (0 is in front of effector)
+								angleToTarget -= 360;
+							if (properties.getDirection() != AreaDirections.BACK) {
+								if (!MathUtil.isBetween(-angle, angle, angleToTarget)) // e.g. range from -30 to 30, not inside means miss
+									continue;
+							} else {
+								angle = 180 - angle; // convert effective angle to ineffective angle
+								if (MathUtil.isBetween(-angle, angle, angleToTarget)) // e.g. range from -150 to 150, inside means miss
+									continue;
+							}
 						}
 						if (!MathUtil.isInRange(skill.getEffector(), nextCreature, properties.getEffectiveDist()))
 							continue;

@@ -378,7 +378,7 @@ public class MathUtil {
 	/**
 	 * Returns true if the given value is between lowerCap(inclusive) and upperCap(inclusive)
 	 */
-	public static boolean isBetween(final int lowerCap, final int upperCap, final int value) {
+	public static boolean isBetween(final float lowerCap, final float upperCap, final float value) {
 		return lowerCap <= value && value <= upperCap;
 	}
 
@@ -388,7 +388,7 @@ public class MathUtil {
 	public final static float calculateAngleFrom(float obj1X, float obj1Y, float obj2X, float obj2Y) {
 		float angleTarget = (float) Math.toDegrees(Math.atan2(obj2Y - obj1Y, obj2X - obj1X));
 		if (angleTarget < 0)
-			angleTarget = 360 + angleTarget;
+			angleTarget += 360;
 		return angleTarget;
 	}
 

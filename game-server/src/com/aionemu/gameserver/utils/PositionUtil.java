@@ -66,6 +66,9 @@ public class PositionUtil {
 	}
 
 	/**
+	 * Calculates the angle where object2 is located, relative to object1's heading.<br>
+	 * 0 degrees means directly looking at object2 and 180 degrees means object2 stands behind object1
+	 * 
 	 * <pre>
 	 *       0 (head view)
 	 *  270     90
