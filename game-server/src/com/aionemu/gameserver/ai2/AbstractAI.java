@@ -241,8 +241,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@AIListenable(enabled = false, type = AIEventType.MOVE_ARRIVED)
 	protected abstract void handleMoveArrived();
 
-	protected abstract boolean handleForcedMoveArrived();
-
 	@AIListenable(enabled = false, type = AIEventType.ATTACK_COMPLETE)
 	protected abstract void handleAttackComplete();
 

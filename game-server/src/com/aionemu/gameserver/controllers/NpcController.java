@@ -319,10 +319,6 @@ public class NpcController extends CreatureController<Npc> {
 		}
 	}
 
-	public final float getAttackDistanceToTarget() {
-		return getOwner().getGameStats().getAttackRange().getCurrent() / 1000f;
-	}
-
 	@Override
 	public boolean useSkill(int skillId, int skillLevel) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);

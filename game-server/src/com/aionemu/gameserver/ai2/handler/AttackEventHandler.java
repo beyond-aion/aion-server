@@ -34,7 +34,7 @@ public class AttackEventHandler {
 			npcAI.onGeneralEvent(AIEventType.NOT_AT_HOME);
 			return;
 		}
-		if (!npcAI.canThink() || npcAI.isInState(AIState.FORCED_WALKING)) {
+		if (!npcAI.canThink()) {
 			return;
 		}
 		if (npcAI.isInState(AIState.WALKING)) {

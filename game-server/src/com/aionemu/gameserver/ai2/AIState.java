@@ -18,7 +18,7 @@ public enum AIState {
 	RETURNING,
 	FIGHT,
 	FEAR,
-	FORCED_WALKING;
+	FORCED_WALKING(AIEventType.MOVE_ARRIVED, AIEventType.MOVE_VALIDATE, AIEventType.DESPAWNED, AIEventType.DIED);
 
 	private final EnumSet<AIEventType> handledAiEvents;
 

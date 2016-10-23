@@ -42,11 +42,6 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	protected boolean handleForcedMoveArrived() {
-		return false;
-	}
-
-	@Override
 	protected void handleAttack(Creature creature) {
 	}
 

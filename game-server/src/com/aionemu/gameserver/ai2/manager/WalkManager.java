@@ -174,10 +174,8 @@ public class WalkManager {
 			}
 		} else if (npcAI.isInState(AIState.FORCED_WALKING)) {
 			npcAI.getOwner().getMoveController().abortMove();
-			if (!npcAI.handleForcedMoveArrived()) {
-				npcAI.setStateIfNot(AIState.FIGHT);
-				npcAI.think();
-			}
+			npcAI.setStateIfNot(AIState.IDLE);
+			npcAI.think();
 		}
 	}
 

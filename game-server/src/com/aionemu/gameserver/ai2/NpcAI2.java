@@ -151,11 +151,6 @@ public class NpcAI2 extends AITemplate {
 	}
 
 	@Override
-	public boolean handleForcedMoveArrived() {
-		return false;
-	}
-
-	@Override
 	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
 		ShoutEventHandler.onSwitchedTarget(this, creature);

@@ -71,15 +71,13 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public boolean handleForcedMoveArrived() {
-		if (isInFlameShowerTask.get() && MathUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
+	public void handleMoveArrived() {
+		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get() && MathUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
 			getOwner().getMoveController().abortMove();
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);
 			Creature creature = getAggroList().getMostHated();
-			if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
-				think();
-			} else {
+			if (creature != null && creature.getLifeStats().isAlreadyDead() && getOwner().canSee(creature)) {
 				getOwner().getQueuedSkills().clear();
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100, true)));
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000, true)));
@@ -89,13 +87,10 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 				getOwner().getGameStats().renewLastChangeTargetTime();
 				getOwner().getGameStats().renewLastSkillTime();
 				getOwner().getGameStats().setNextSkillTime(7000);
-				setStateIfNot(AIState.FIGHT);
-				think();
 			}
-			return true;
-		} else {
-			return false;
+			think();
 		}
+		super.handleMoveArrived();
 	}
 
 	@Override
