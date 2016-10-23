@@ -540,6 +540,14 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
+	public void onStartMove() {
+		super.onStartMove();
+		PlayerMoveTaskManager.getInstance().addPlayer(getOwner());
+		cancelUseItem();
+		cancelCurrentSkill(null);
+	}
+
+	@Override
 	public void onMove() {
 		super.onMove();
 		if (getOwner().isInTeam())
@@ -548,20 +556,10 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void onStopMove() {
+		super.onStopMove();
 		PlayerMoveTaskManager.getInstance().removePlayer(getOwner());
-		getOwner().getMoveController().setInMove(false);
 		cancelCurrentSkill(null);
 		updateZone();
-		super.onStopMove();
-	}
-
-	@Override
-	public void onStartMove() {
-		getOwner().getMoveController().setInMove(true);
-		PlayerMoveTaskManager.getInstance().addPlayer(getOwner());
-		cancelUseItem();
-		cancelCurrentSkill(null);
-		super.onStartMove();
 	}
 
 	@Override

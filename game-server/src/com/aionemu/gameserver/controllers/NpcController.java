@@ -42,6 +42,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
@@ -301,15 +302,15 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onStopMove() {
-		getOwner().getMoveController().setInMove(false);
-		super.onStopMove();
+	public void onStartMove() {
+		super.onStartMove();
+		MoveTaskManager.getInstance().addCreature(getOwner());
 	}
 
 	@Override
-	public void onStartMove() {
-		getOwner().getMoveController().setInMove(true);
-		super.onStartMove();
+	public void onStopMove() {
+		super.onStopMove();
+		MoveTaskManager.getInstance().removeCreature(getOwner());
 	}
 
 	@Override

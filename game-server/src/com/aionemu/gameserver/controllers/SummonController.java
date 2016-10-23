@@ -149,8 +149,6 @@ public class SummonController extends CreatureController<Summon> {
 	@Override
 	public void onStartMove() {
 		super.onStartMove();
-		getOwner().getMoveController().setInMove(true);
-		getOwner().getObserveController().notifyMoveObservers();
 		PlayerMoveTaskManager.getInstance().addPlayer(getOwner());
 		updateZone();
 	}
@@ -159,14 +157,6 @@ public class SummonController extends CreatureController<Summon> {
 	public void onStopMove() {
 		super.onStopMove();
 		PlayerMoveTaskManager.getInstance().removePlayer(getOwner());
-		getOwner().getObserveController().notifyMoveObservers();
-		getOwner().getMoveController().setInMove(false);
-	}
-
-	@Override
-	public void onMove() {
-		getOwner().getObserveController().notifyMoveObservers();
-		super.onMove();
 	}
 
 	protected Player getMaster() {

@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
-import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.collections.LastUsedCache;
@@ -79,7 +78,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			}
 			destination = Destination.TARGET_OBJECT;
 			updateLastMove();
-			MoveTaskManager.getInstance().addCreature(owner);
+			owner.getController().onStartMove();
 		}
 	}
 
@@ -93,7 +92,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			pointY = y;
 			pointZ = z;
 			updateLastMove();
-			MoveTaskManager.getInstance().addCreature(owner);
+			owner.getController().onStartMove();
 		}
 	}
 
@@ -107,7 +106,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			pointY = y;
 			pointZ = z;
 			updateLastMove();
-			MoveTaskManager.getInstance().addCreature(owner);
+			owner.getController().onStartMove();
 		}
 	}
 
@@ -118,7 +117,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			}
 			destination = Destination.POINT;
 			updateLastMove();
-			MoveTaskManager.getInstance().addCreature(owner);
+			owner.getController().onStartMove();
 		}
 	}
 
@@ -321,7 +320,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (owner.getAi2().isLogging()) {
 			AI2Logger.moveinfo(owner, "MC perform stop");
 		}
-		MoveTaskManager.getInstance().removeCreature(owner);
+		owner.getController().onStopMove();
 		started.set(false);
 		targetDestX = 0;
 		targetDestY = 0;

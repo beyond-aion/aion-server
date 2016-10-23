@@ -76,6 +76,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks on Creature starting to move
 	 */
 	public void onStartMove() {
+		getOwner().getMoveController().setInMove(true);
 		getOwner().getObserveController().notifyMoveObservers();
 		notifyAIOnMove();
 	}
@@ -93,6 +94,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks on Creature stop move
 	 */
 	public void onStopMove() {
+		getOwner().getMoveController().setInMove(false);
 		getOwner().getObserveController().notifyMoveObservers();
 		notifyAIOnMove();
 	}
