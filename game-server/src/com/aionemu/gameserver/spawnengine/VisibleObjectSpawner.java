@@ -77,8 +77,7 @@ public class VisibleObjectSpawner {
 			log.error("No template for NPC " + String.valueOf(npcId));
 			return null;
 		}
-		IDFactory iDFactory = IDFactory.getInstance();
-		Npc npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
+		Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		npc.setCreatorId(spawn.getCreatorId());
 		npc.setMasterName(spawn.getMasterName());
 		npc.setKnownlist(new NpcKnownList(npc));
@@ -90,7 +89,7 @@ public class VisibleObjectSpawner {
 		try {
 			SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		} catch (Exception ex) {
-			log.error("Error during spawn of {}", npc, ex);
+			log.error("Error during spawn:", ex);
 			npc.getController().delete();
 		}
 		return npc;

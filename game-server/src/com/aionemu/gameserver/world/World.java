@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.GenericValidator;
-import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
@@ -25,7 +24,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -137,8 +135,8 @@ public class World {
 	}
 
 	/**
-	 * Removes the object from the world. If the object is an Npc then it also releases it's objId from IDFactory.<br>
-	 * <font color="red"><b>IMPORTANT</b></font>: Must only be called from {@link CreatureController#delete()}
+	 * Despawns (if spawned) and completely removes the object from the world.<br>
+	 * If the object is an Npc, it's objId will be released from IDFactory once it gets garbage collected (see {@link Npc#finalize()}}).
 	 * 
 	 * @param object
 	 */
@@ -167,10 +165,11 @@ public class World {
 					}
 
 					allNpcs.remove(object.getObjectId());
-					IDFactory.getInstance().releaseId(object.getObjectId());
 				} else if (object instanceof Player) {
 					allPlayers.remove((Player) object);
 				}
+				if (object.getSpawn() != null && !object.getSpawn().isTemporarySpawn()) // allow object getting garbage collected
+					object.getSpawn().setVisibleObject(null);
 			}
 		}
 	}

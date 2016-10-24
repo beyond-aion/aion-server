@@ -32,6 +32,7 @@ import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -362,5 +363,11 @@ public class Npc extends Creature {
 	@Override
 	public float getVisibleDistance() {
 		return isFlag() || isRaidMonster() ? Integer.MAX_VALUE : super.getVisibleDistance();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		IDFactory.getInstance().releaseId(getObjectId()); // release ID once the object is garbage collected
+		super.finalize();
 	}
 }

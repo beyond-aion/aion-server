@@ -160,11 +160,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 */
 	public void addObject(VisibleObject object) {
 		if (worldMapObjects.putIfAbsent(object.getObjectId(), object) != null) {
-			throw new DuplicateAionObjectException(object + " already spawned in instance " + getMapId() + " " + getInstanceId());
+			throw new DuplicateAionObjectException(object + " already present:\n" + worldMapObjects.get(object.getObjectId()));
 		}
 		if (object instanceof Npc) {
-			int npcId = ((Npc) object).getNpcId();
-			QuestNpc qNpc = QuestEngine.getInstance().getQuestNpc(npcId);
+			QuestNpc qNpc = QuestEngine.getInstance().getQuestNpc(object.getObjectTemplate().getTemplateId());
 			if (qNpc != null) {
 				boolean updateNearbyQuests = false;
 				for (int id : qNpc.getOnQuestStart()) {
