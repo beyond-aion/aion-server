@@ -9,11 +9,13 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
@@ -209,20 +211,30 @@ public class MapRegion {
 
 			@Override
 			public void run() {
-				log.debug("Deactivating in map {} region {}", getMapId(), regionId);
+				log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getMapId(), getParent().getInstanceId());
+				List<Creature> walkers = new FastTable<>();
 				for (MapRegion neighbor : getNeighbours()) {
-					if (!neighbor.isNeighboursActive()) {
-						neighbor.deactivate();
+					if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
+						for (VisibleObject o : neighbor.getObjects().values()) {
+							if (o instanceof Creature && ((Creature) o).getAi2().getState() == AIState.WALKING)
+								walkers.add((Creature) o);
+						}
 					}
+				}
+				if (walkers.size() > 0) {
+					String aiNames = walkers.stream().map(o -> o.getAi2().getName()).distinct().collect(Collectors.joining(", "));
+					log.warn("There are {} objects walking on inactive map {} [{}]\nAIs: {}", walkers.size(), getMapId(), getParent().getInstanceId(), aiNames);
 				}
 			}
 		}, 60000);
 	}
 
-	public void activate() {
+	public boolean activate() {
 		if (regionActive.compareAndSet(false, true)) {
 			activateObjects();
+			return true;
 		}
+		return false;
 	}
 
 	/**
@@ -237,10 +249,12 @@ public class MapRegion {
 		}
 	}
 
-	public void deactivate() {
+	public boolean deactivate() {
 		if (regionActive.compareAndSet(true, false)) {
 			deactivateObjects();
+			return true;
 		}
+		return false;
 	}
 
 	/**

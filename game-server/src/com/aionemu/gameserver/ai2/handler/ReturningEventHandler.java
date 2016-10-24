@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -28,8 +29,8 @@ public class ReturningEventHandler {
 			}
 			EmoteManager.emoteStartReturning(npcAI.getOwner());
 			Npc npc = npcAI.getOwner();
-			if (npc.isPathWalker()) {
-					WalkManager.startWalking(npcAI);
+			if (AIConfig.ACTIVE_NPC_MOVEMENT && npc.isPathWalker()) {
+				WalkManager.startWalking(npcAI);
 			} else {
 				Point3D prevStep = npc.getMoveController().recallPreviousStep();
 				npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());

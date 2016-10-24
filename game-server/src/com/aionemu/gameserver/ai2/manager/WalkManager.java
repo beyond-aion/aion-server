@@ -141,14 +141,6 @@ public class WalkManager {
 
 	/**
 	 * @param npcAI
-	 * @return True if the npc is able to walk.
-	 */
-	public static boolean canWalk(NpcAI2 npcAI) {
-		return npcAI.isMoveSupported() && npcAI.getOwner().isWalker();
-	}
-
-	/**
-	 * @param npcAI
 	 */
 	public static void targetReached(final NpcAI2 npcAI) {
 		if (npcAI.isInState(AIState.WALKING)) {
@@ -237,7 +229,8 @@ public class WalkManager {
 	public static void stopWalking(NpcAI2 npcAI) {
 		npcAI.getOwner().getMoveController().abortMove();
 		npcAI.setStateIfNot(AIState.IDLE);
-		npcAI.setSubStateIfNot(AISubState.NONE);
+		if (npcAI.getSubState() != AISubState.FREEZE)
+			npcAI.setSubStateIfNot(AISubState.NONE);
 		EmoteManager.emoteStopWalking(npcAI.getOwner());
 	}
 

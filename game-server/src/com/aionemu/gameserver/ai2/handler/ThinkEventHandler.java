@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.ai2.handler;
 
 import com.aionemu.gameserver.ai2.AI2Logger;
+import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -17,15 +18,12 @@ public class ThinkEventHandler {
 	 * @param npcAI
 	 */
 	public static void onThink(NpcAI2 npcAI) {
-		if (npcAI.isLogging()) {
-			AI2Logger.info(npcAI, "think");
-		}
 		if (npcAI.isAlreadyDead()) {
 			AI2Logger.info(npcAI, "can't think in dead state");
 			return;
 		}
 		if (!npcAI.tryLockThink()) {
-			AI2Logger.info(npcAI, "can't acquire lock");
+			AI2Logger.info(npcAI, "can't acquire think lock");
 			return;
 		}
 		try {
@@ -34,7 +32,7 @@ public class ThinkEventHandler {
 				return;
 			}
 			if (npcAI.isLogging()) {
-				AI2Logger.info(npcAI, "think state " + npcAI.getState());
+				AI2Logger.info(npcAI, "think in ai state: " + npcAI.getState());
 			}
 			switch (npcAI.getState()) {
 				case FIGHT:
@@ -53,13 +51,15 @@ public class ThinkEventHandler {
 	 * @param npcAI
 	 */
 	private static void thinkInInactiveRegion(NpcAI2 npcAI) {
-
+		if (npcAI.isInState(AIState.WALKING)) {
+			WalkManager.stopWalking(npcAI);
+			return;
+		}
 		if (!npcAI.canThink()) {
 			return;
 		}
-
 		if (npcAI.isLogging()) {
-			AI2Logger.info(npcAI, "think in inactive region: " + npcAI.getState());
+			AI2Logger.info(npcAI, "think (inactive region) in ai state: " + npcAI.getState());
 		}
 		switch (npcAI.getState()) {
 			case FIGHT:
@@ -95,7 +95,7 @@ public class ThinkEventHandler {
 	 * @param npcAI
 	 */
 	public static void thinkIdle(NpcAI2 npcAI) {
-		if (WalkManager.canWalk(npcAI))
+		if (npcAI.isMoveSupported() && npcAI.getOwner().isWalker())
 			WalkManager.startWalking(npcAI);
 	}
 }
