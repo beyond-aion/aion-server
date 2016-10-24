@@ -139,7 +139,7 @@ public class SpawnTemplate {
 	}
 
 	public TemporarySpawn getTemporarySpawn() {
-		return temporarySpawn != null ? temporarySpawn : spawnGroup.geTemporarySpawn();
+		return temporarySpawn != null ? temporarySpawn : spawnGroup.getTemporarySpawn();
 	}
 
 	public SpawnHandlerType getHandlerType() {

@@ -16,22 +16,16 @@ import com.aionemu.gameserver.utils.gametime.GameTime;
 public class TemporarySpawn {
 
 	@XmlAttribute(name = "spawn_time")
-	// *.*.* hour.day.month (* == all)
-	private String spawnTime;
+	private String spawnTime; // *.*.* hour.day.month (* == all)
 
 	@XmlAttribute(name = "despawn_time")
-	// *.*.* hour.day.month (* == all)
-	private String despawnTime;
+	private String despawnTime; // *.*.* hour.day.month (* == all)
 
-	public String getSpawnTime() {
-		return spawnTime;
-	}
-
-	public Integer geSpawnHour() {
+	public Integer getSpawnHour() {
 		return getTime(spawnTime, 0);
 	}
 
-	public Integer geSpawnDay() {
+	public Integer getSpawnDay() {
 		return getTime(spawnTime, 1);
 	}
 
@@ -39,11 +33,11 @@ public class TemporarySpawn {
 		return getTime(spawnTime, 2);
 	}
 
-	public Integer geDespawnHour() {
+	public Integer getDespawnHour() {
 		return getTime(despawnTime, 0);
 	}
 
-	public Integer geDespawnDay() {
+	public Integer getDespawnDay() {
 		return getTime(despawnTime, 1);
 	}
 
@@ -53,14 +47,7 @@ public class TemporarySpawn {
 
 	private Integer getTime(String time, int type) {
 		String result = time.split("\\.")[type];
-		if (result.equals("*")) {
-			return null;
-		}
-		return Integer.parseInt(result);
-	}
-
-	public String getDespawnTime() {
-		return despawnTime;
+		return result.equals("*") ? null : Integer.parseInt(result);
 	}
 
 	private boolean isTime(Integer hour, Integer day, Integer month) {
@@ -75,64 +62,42 @@ public class TemporarySpawn {
 	}
 
 	public boolean canSpawn() {
-		return isTime(geSpawnHour(), geSpawnDay(), getSpawnMonth());
+		return isTime(getSpawnHour(), getSpawnDay(), getSpawnMonth());
 	}
 
 	public boolean canDespawn() {
-		return isTime(geDespawnHour(), geDespawnDay(), getDespawnMonth());
+		return isTime(getDespawnHour(), getDespawnDay(), getDespawnMonth());
 	}
 
 	public boolean isInSpawnTime() {
 		GameTime gameTime = GameTimeService.getInstance().getGameTime();
-		Integer spawnHour = geSpawnHour();
-		Integer spawnDay = geSpawnDay();
+
 		Integer spawnMonth = getSpawnMonth();
-		Integer despawnHour = geDespawnHour();
-		Integer despawnDay = geDespawnDay();
-		Integer despawnMonth = getDespawnMonth();
-		int curentHour = gameTime.getHour();
-		int curentDay = gameTime.getDay();
-		int curentMonth = gameTime.getMonth();
-
-		if (spawnMonth != null) {
-			if (!checkTime(curentMonth, spawnMonth, despawnMonth)) {
-				return false;
-			}
-		}
-		if (spawnDay != null) {
-			if (!checkTime(curentDay, spawnDay, despawnDay)) {
-				return false;
-			}
-		}
-		if (spawnMonth == null && spawnDay == null && !checkHour(curentHour, spawnHour, despawnHour)) {
+		if (spawnMonth != null && !checkDate(gameTime.getMonth(), spawnMonth, getDespawnMonth()))
 			return false;
-		}
+
+		Integer spawnDay = getSpawnDay();
+		if (spawnDay != null && !checkDate(gameTime.getDay(), spawnDay, getDespawnDay()))
+			return false;
+
+		if (spawnMonth == null && spawnDay == null && !checkHour(gameTime.getHour(), getSpawnHour(), getDespawnHour()))
+			return false;
+
 		return true;
 	}
 
-	private boolean checkTime(int curentTime, int spawnTime, int despawnTime) {
-		if (spawnTime < despawnTime) {
-			if (!(curentTime >= spawnTime && curentTime <= despawnTime)) {
-				return false;
-			}
-		} else if (spawnTime > despawnTime) {
-			if (!(curentTime >= spawnTime || curentTime <= despawnTime)) {
-				return false;
-			}
-		}
-		return true;
+	private boolean checkDate(int currentDate, int spawnDate, int despawnDate) {
+		if (spawnDate <= despawnDate)
+			return currentDate >= spawnDate && currentDate <= despawnDate;
+		else
+			return currentDate >= spawnDate || currentDate <= despawnDate;
 	}
 
-	private boolean checkHour(int curentTime, int spawnTime, int despawnTime) {
-		if (spawnTime < despawnTime) {
-			if (!(curentTime >= spawnTime && curentTime < despawnTime)) {
-				return false;
-			}
-		} else if (spawnTime > despawnTime) {
-			if (!(curentTime >= spawnTime || curentTime < despawnTime)) {
-				return false;
-			}
-		}
+	private boolean checkHour(int currentHour, int spawnHour, int despawnHour) {
+		if (spawnHour < despawnHour)
+			return currentHour >= spawnHour && currentHour < despawnHour;
+		else if (spawnHour > despawnHour)
+			return currentHour >= spawnHour || currentHour < despawnHour;
 		return true;
 	}
 

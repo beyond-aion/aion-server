@@ -80,7 +80,7 @@ public class RespawnService {
 	 * @param instanceId
 	 */
 	private static final VisibleObject respawn(SpawnTemplate spawnTemplate, final int instanceId) {
-		if (spawnTemplate.isTemporarySpawn() && !spawnTemplate.getTemporarySpawn().canSpawn() && !spawnTemplate.getTemporarySpawn().isInSpawnTime())
+		if (spawnTemplate.isTemporarySpawn() && !spawnTemplate.getTemporarySpawn().isInSpawnTime())
 			return null;
 
 		int worldId = spawnTemplate.getWorldId();

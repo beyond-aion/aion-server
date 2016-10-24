@@ -54,7 +54,7 @@ public class TemporarySpawnEngine {
 		for (SpawnGroup2 spawn : temporarySpawns) {
 			HashSet<Integer> instances = tempSpawnInstanceMap.get(spawn);
 			if (spawn.hasPool()) {
-				TemporarySpawn temporarySpawn = spawn.geTemporarySpawn();
+				TemporarySpawn temporarySpawn = spawn.getTemporarySpawn();
 				if (temporarySpawn.canSpawn() || (startCheck && spawn.getRespawnTime() != 0 && temporarySpawn.isInSpawnTime())) {
 					for (Integer instanceId : instances) {
 						spawn.resetTemplates(instanceId);

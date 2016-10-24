@@ -146,7 +146,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 		return npcId;
 	}
 
-	public TemporarySpawn geTemporarySpawn() {
+	public TemporarySpawn getTemporarySpawn() {
 		return temporarySpawn;
 	}
 
