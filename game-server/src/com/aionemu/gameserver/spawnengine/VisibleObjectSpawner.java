@@ -16,7 +16,6 @@ import com.aionemu.gameserver.dataholders.NpcData;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.GroupGate;
@@ -48,6 +47,7 @@ import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTem
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.RiftService;
+import com.aionemu.gameserver.services.base.Base;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -114,19 +114,14 @@ public class VisibleObjectSpawner {
 			return null;
 		}
 
-		boolean isActive = BaseService.getInstance().isActive(spawn.getId());
-		if (!isActive) {
+		Base<?> base = BaseService.getInstance().getActiveBase(spawn.getId());
+		if (base == null) // inactive base
 			return null;
-		}
 
-		// Chk owner race for non handled spawn
-		BaseLocation base = BaseService.getInstance().getBaseLocation(spawn.getId());
-		if (spawn.getHandlerType() == null && !spawn.getBaseRace().equals(base.getRace())) {
+		if (spawn.getBaseRace() != base.getRace()) // avoid respawn of previous owner race spawns
 			return null;
-		}
 
-		IDFactory iDFactory = IDFactory.getInstance();
-		Npc npc = new Npc(iDFactory.nextId(), new NpcController(), spawn, npcTemplate);
+		Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 
 		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));

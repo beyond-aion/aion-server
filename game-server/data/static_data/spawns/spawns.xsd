@@ -34,7 +34,7 @@
 		<xs:sequence>
 			<xs:element name="spawn" type="Spawn" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="race" type="Race"/>
+		<xs:attribute name="race" type="Race" use="required" />
 	</xs:complexType>
 	<xs:complexType name="RiftSpawn">
 		<xs:sequence>
