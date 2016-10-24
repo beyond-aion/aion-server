@@ -81,10 +81,8 @@ public class AttackEventHandler {
 		}
 		Npc npc = npcAI.getOwner();
 		EmoteManager.emoteStopAttacking(npc);
-		npc.getLifeStats().triggerRestoreTask();
-		npc.getAggroList().clear();
 		ShoutEventHandler.onAttackEnd(npcAI);
-		npc.setTarget(null);
+		npc.getController().loseAggro(true);
 		npc.setSkillNumber(0);
 	}
 }

@@ -90,7 +90,7 @@ public class AethicFieldGeneratorAI2 extends GeneralNpcAI2 {
 				} else {
 					if (!isInRangePlayer()) {
 						handleBackHome();
-						getLifeStats().triggerRestoreTask();
+						getOwner().getController().loseAggro(true);
 					}
 				}
 			}

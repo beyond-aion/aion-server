@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.handler.AggroEventHandler;
 import com.aionemu.gameserver.ai2.handler.AttackEventHandler;
-import com.aionemu.gameserver.ai2.handler.DiedEventHandler;
 import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
 import com.aionemu.gameserver.ai2.handler.ReturningEventHandler;
 import com.aionemu.gameserver.ai2.handler.TalkEventHandler;
@@ -29,11 +28,6 @@ public class GeneralNpcAI2 extends NpcAI2 {
 	@Override
 	public void think() {
 		ThinkEventHandler.onThink(this);
-	}
-
-	@Override
-	protected void handleDied() {
-		DiedEventHandler.onDie(this);
 	}
 
 	@Override

@@ -330,4 +330,10 @@ public class NpcController extends CreatureController<Npc> {
 		return false;
 	}
 
+	public void loseAggro(boolean restoreHp) {
+		getOwner().setTarget(null);
+		getOwner().getAggroList().clear();
+		if (restoreHp)
+			getOwner().getLifeStats().triggerRestoreTask();
+	}
 }

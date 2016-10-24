@@ -20,7 +20,7 @@ public class ActivateEventHandler {
 		npcAI.think();
 		Npc npc = npcAI.getOwner();
 		npc.updateKnownlist();
-		npc.getAggroList().clear();
+		npc.getController().loseAggro(false);
 		npc.getEffectController().removeAllEffects();
 	}
 }

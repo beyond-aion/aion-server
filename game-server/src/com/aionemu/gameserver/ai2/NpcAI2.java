@@ -141,7 +141,7 @@ public class NpcAI2 extends AITemplate {
 	@Override
 	@AIListenable(type = AIEventType.DIED)
 	protected void handleDied() {
-		DiedEventHandler.onSimpleDie(this);
+		DiedEventHandler.onDie(this);
 	}
 
 	@Override
