@@ -17874,30 +17874,30 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * %WORLDNAME0% region restricts access. You cannot reenter the region for %1 hour(s) if all your group members left the region or if you left the
 	 * current group.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_COOL_TIME_HOUR(String worldname0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400027, worldname0, value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_COOL_TIME_HOUR(int worldId, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400027, worldId, value1);
 	}
 
 	/**
 	 * %WORLDNAME0% region restricts access. You cannot reenter the region for %1 minute(s) if all your group members left the region or if you left the
 	 * current group.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_COOL_TIME_MIN(String worldname0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400028, worldname0, value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_COOL_TIME_MIN(int worldId, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400028, worldId, value1);
 	}
 
 	/**
 	 * You may enter %WORLDNAME0 again after %1 hour(s).
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_ENTER_INSTANCE_COOL_TIME_HOUR(String worldname0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400029, worldname0, value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_ENTER_INSTANCE_COOL_TIME_HOUR(int worldId, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400029, worldId, value1);
 	}
 
 	/**
 	 * You may enter %WORLDNAME0 again after %1 minute(s).
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_ENTER_INSTANCE_COOL_TIME_MIN(String worldname0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400030, worldname0, value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_ENTER_INSTANCE_COOL_TIME_MIN(int worldId, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400030, worldId, value1);
 	}
 
 	/**
@@ -18962,8 +18962,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have already applied to enter %WORLDNAME0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400181, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400181, worldId);
 	}
 
 	/**
@@ -19333,8 +19333,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot enter %WORLDNAME0 as the entry time has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_CANT_ENTER_FOR_TIMEOVER(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400235, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_CANT_ENTER_FOR_TIMEOVER(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400235, worldId);
 	}
 
 	/**
@@ -22167,8 +22167,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have entered %WORLDNAME0. Your allies are barred from joining you.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400640, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400640, worldId);
 	}
 
 	/**
@@ -23056,15 +23056,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot enter %WORLDNAME0 with a Mentor in your group.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_MENTOR_CANT_ENTER(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400766, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_MENTOR_CANT_ENTER(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400766, worldId);
 	}
 
 	/**
 	 * You were forced to leave %WORLDNAME0 because you stopped Mentoring.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_MENTOR_END_BANISH(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400767, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_MENTOR_END_BANISH(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400767, worldId);
 	}
 
 	/**
@@ -23077,8 +23077,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot become a Mentor in %WORLDNAME0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_BE_MENTOR(String worldname0) {
-		return new SM_SYSTEM_MESSAGE(1400769, worldname0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_BE_MENTOR(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1400769, worldId);
 	}
 
 	/**
@@ -24966,8 +24966,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have already requested entry into %WORLDNAME0 (Difficulty: %1).
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED_WITH_DIFFICULTY(String worldname0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1401053, worldname0, value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED_WITH_DIFFICULTY(int worldId, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401053, worldId, value1);
 	}
 
 	/**
@@ -24989,13 +24989,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_NOTICE_BLANK() {
 		return new SM_SYSTEM_MESSAGE(1401057);
-	}
-
-	/**
-	 * You have entered %WORLDNAME0. Your allies are barred from joining you.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(int worldId) {
-		return new SM_SYSTEM_MESSAGE(1400640, worldId);
 	}
 
 	/**
