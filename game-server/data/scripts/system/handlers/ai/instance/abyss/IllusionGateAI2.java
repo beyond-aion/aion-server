@@ -4,11 +4,10 @@ import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import ai.NoActionAI2;
 
 /**
  * Created on June 24th, 2016
@@ -17,7 +16,7 @@ import ai.NoActionAI2;
  * @since AION 4.8
  */
 @AIName("illusion_gate")
-public class IllusionGateAI2 extends NoActionAI2 {
+public class IllusionGateAI2 extends NpcAI2 {
 
 	private Future<?> spawnTask;
 

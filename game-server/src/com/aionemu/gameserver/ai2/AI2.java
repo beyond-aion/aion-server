@@ -5,8 +5,9 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author ATracer
@@ -46,19 +47,35 @@ public interface AI2 {
 
 	long getRemainigTime();
 
-	int modifyDamage(Skill skill, Creature creature, int damage);
+	/**
+	 * @param attacker
+	 * @param damage
+	 *          - The calculated damage from given attacker
+	 * @param effect
+	 *          - The effect which caused the damage (may be null)
+	 * @return The effectively received damage
+	 */
+	int modifyDamage(Creature attacker, int damage, Effect effect);
 
-	int modifyDamage(Creature creature, int damage);
-
+	/**
+	 * @param damage
+	 *          - The calculated damage output of this creature
+	 * @return The effective damage output of this creature
+	 */
 	int modifyOwnerDamage(int damage);
 
-	int modifyHealValue(int value);
+	/**
+	 * Used to manipulate any game stat of the owner.
+	 * 
+	 * @param stat
+	 */
+	void modifyOwnerStat(Stat2 stat);
 
 	ItemAttackType modifyAttackType(ItemAttackType type);
 
 	int modifyAggroRange(int value);
 
-	void fireOnEndCastEvents(NpcSkillEntry usedSkill);
+	void onStartUseSkill(NpcSkillEntry startingSkill);
 
-	void fireOnStartCastEvents(NpcSkillEntry startingSkill);
+	void onEndUseSkill(NpcSkillEntry usedSkill);
 }

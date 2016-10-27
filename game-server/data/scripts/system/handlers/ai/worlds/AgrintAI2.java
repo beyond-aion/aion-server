@@ -10,14 +10,14 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import ai.AggressiveNpcAI2;
+import ai.OneDmgAI2;
 
 /**
  * @author xTz
  * @modified Neon
  */
 @AIName("agrint")
-public class AgrintAI2 extends AggressiveNpcAI2 {
+public class AgrintAI2 extends OneDmgAI2 {
 
 	private AtomicBoolean isSpawned = new AtomicBoolean(false);
 
@@ -134,16 +134,6 @@ public class AgrintAI2 extends AggressiveNpcAI2 {
 				break;
 		}
 		super.handleDied();
-	}
-
-	@Override
-	public int modifyOwnerDamage(int damage) {
-		return 1;
-	}
-
-	@Override
-	public int modifyDamage(Creature creature, int damage) {
-		return 1;
 	}
 
 }

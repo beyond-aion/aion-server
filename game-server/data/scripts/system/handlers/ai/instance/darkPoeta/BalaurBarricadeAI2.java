@@ -7,6 +7,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI2;
 import javolution.util.FastTable;
@@ -21,7 +22,7 @@ public class BalaurBarricadeAI2 extends AggressiveNpcAI2 {
 	protected List<Integer> percents = new FastTable<>();
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 1;
 	}
 

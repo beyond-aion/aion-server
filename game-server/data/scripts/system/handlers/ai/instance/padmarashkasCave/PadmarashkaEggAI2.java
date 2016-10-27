@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -16,13 +17,11 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.NoActionAI2;
-
 /**
  * @author Ritsu
  */
 @AIName("padmarashkaegg")
-public class PadmarashkaEggAI2 extends NoActionAI2 {
+public class PadmarashkaEggAI2 extends NpcAI2 {
 
 	boolean isSmallEggProtectorSpawned = false;
 	boolean isHugeEggProtectorSpawned = false;

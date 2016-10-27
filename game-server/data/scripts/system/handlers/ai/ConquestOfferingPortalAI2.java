@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
@@ -21,7 +22,7 @@ public class ConquestOfferingPortalAI2 extends ActionItemNpcAI2 {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-		startDespawnTask();
+		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 65000));
 	}
 
 	@Override
@@ -31,16 +32,10 @@ public class ConquestOfferingPortalAI2 extends ActionItemNpcAI2 {
 		if (spawns != null) {
 			List<SpawnSpotTemplate> spots = spawns.getSpawnSpotTemplates();
 			if (!spots.isEmpty()) {
-				SpawnSpotTemplate template = spots.get(Rnd.get(0, spots.size()-1));
-				TeleportService2.teleportTo(player, player.getWorldId(), template.getX(), template.getY(), template.getZ(), template.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+				SpawnSpotTemplate template = spots.get(Rnd.get(spots.size()));
+				TeleportService2.teleportTo(player, player.getWorldId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
+					TeleportAnimation.FADE_OUT_BEAM);
 			}
 		}
-	}
-
-	private void startDespawnTask() {
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
-			if (getOwner() != null)
-				getOwner().getController().delete();
-		}, 65000);
 	}
 }

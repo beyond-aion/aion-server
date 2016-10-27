@@ -3,7 +3,7 @@ package ai;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
-import com.aionemu.gameserver.model.stats.container.NpcGameStats;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author xTz, Neon
@@ -12,13 +12,7 @@ import com.aionemu.gameserver.model.stats.container.NpcGameStats;
 public class OneDmgAI2 extends AggressiveNpcAI2 {
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		disableMissingHits();
-	}
-
-	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 1;
 	}
 
@@ -27,13 +21,13 @@ public class OneDmgAI2 extends AggressiveNpcAI2 {
 		return 1;
 	}
 
-	private void disableMissingHits() {
-		NpcGameStats stats = getOwner().getGameStats();
-		Stat2 mRes = stats.getMResist();
-		Stat2 evasion = stats.getEvasion();
-		mRes.setBase(0);
-		mRes.setBonus(0);
-		evasion.setBase(0);
-		evasion.setBonus(0);
+	@Override
+	public void modifyOwnerStat(Stat2 stat) {
+		switch (stat.getStat()) { // ai owner should not evade or resist
+			case MAGICAL_RESIST:
+			case EVASION:
+				stat.setBase(0);
+				stat.setBonus(0);
+		}
 	}
 }

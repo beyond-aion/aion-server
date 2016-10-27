@@ -65,6 +65,13 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
+	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
+		Stat2 s = super.getStat(statEnum, stat);
+		owner.getAi2().modifyOwnerStat(s);
+		return s;
+	}
+
+	@Override
 	public Stat2 getMaxHp() {
 		Stat2 stat = super.getMaxHp();
 		if (owner.getSpawn() instanceof SiegeSpawnTemplate

@@ -3,6 +3,7 @@ package ai.siege;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author Bobobear
@@ -11,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 public class FlagBaseNpcAI2 extends NpcAI2 {
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 0;
 	}
 

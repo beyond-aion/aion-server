@@ -9,7 +9,7 @@ import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.OneDmgPerHitAI2;
+import ai.OneDmgNoActionAI2;
 
 /**
  * Spawns Chaos Dracus after the Mysterious Crate dies, and schedules Crate respawn after Dracus dies.
@@ -17,7 +17,7 @@ import ai.OneDmgPerHitAI2;
  * @author Neon
  */
 @AIName("dracusbox")
-public class DracusBox extends OneDmgPerHitAI2 {
+public class DracusBox extends OneDmgNoActionAI2 {
 
 	private static int dracusId = 211800;
 

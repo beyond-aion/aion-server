@@ -70,7 +70,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		switch (usedSkill.getSkillId()) {
 			case 20911:
 				SkillEngine.getInstance().applyEffectDirectly(20590, getOwner(), getOwner(), 0);

@@ -174,9 +174,8 @@ public class AttackUtil {
 				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, isMain);
 		}
 
-		if (attacked instanceof Npc) {
-			damage = attacked.getAi2().modifyDamage(attacker, damage);
-		}
+		if (attacked instanceof Npc)
+			damage = attacked.getAi2().modifyDamage(attacker, damage, null);
 
 		if (damage < 1)
 			damage = 0;
@@ -486,8 +485,7 @@ public class AttackUtil {
 		}
 
 		if (effected instanceof Npc) {
-			damage = effected.getAi2().modifyDamage(effector, damage);
-			damage = effected.getAi2().modifyDamage(effect.getSkill(), effector, damage);
+			damage = effected.getAi2().modifyDamage(effector, damage, effect);
 		}
 		if (effector instanceof Npc) {
 			damage = effector.getAi2().modifyOwnerDamage(damage);
@@ -603,9 +601,8 @@ public class AttackUtil {
 		if (damage <= 0)
 			damage = 1;
 
-		if (effected instanceof Npc) {
-			damage = effected.getAi2().modifyDamage(effector, damage);
-		}
+		if (effected instanceof Npc)
+			damage = effected.getAi2().modifyDamage(effector, damage, null);
 
 		return damage;
 	}

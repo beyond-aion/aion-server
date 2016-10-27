@@ -253,7 +253,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
 			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
-				npc.getAi2().fireOnStartCastEvents(this);
+				npc.getAi2().onStartUseSkill(this);
 			}
 			return;
 		}
@@ -264,7 +264,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
 			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
-				npc.getAi2().fireOnEndCastEvents(this);
+				npc.getAi2().onEndUseSkill(this);
 			}
 			return;
 		}

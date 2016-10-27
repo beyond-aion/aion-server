@@ -106,7 +106,7 @@ public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		switch (usedSkill.getSkillId()) {
 			case 21179:
 				Creature creature = getAggroList().getMostHated();

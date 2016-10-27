@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -82,7 +83,7 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
 	}
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		if (getNpcId() == 219037)
 			return damage;
 		else

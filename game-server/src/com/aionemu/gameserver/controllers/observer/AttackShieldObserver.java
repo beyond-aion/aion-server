@@ -83,9 +83,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 	@Override
 	public void checkShield(List<AttackResult> attackList, Effect attackerEffect, Creature attacker) {
 		for (AttackResult attackResult : attackList) {
-
-			if (AttackStatus.getBaseStatus(attackResult.getAttackStatus()) == AttackStatus.DODGE
-				|| AttackStatus.getBaseStatus(attackResult.getAttackStatus()) == AttackStatus.RESIST)
+			AttackStatus baseStatus = AttackStatus.getBaseStatus(attackResult.getAttackStatus());
+			if (baseStatus == AttackStatus.DODGE || baseStatus == AttackStatus.RESIST)
 				continue;
 
 			// Handle Hit Types for Shields
@@ -146,7 +145,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					}
 					attackResult.setShieldType(shieldType.getId());
 					if (attacker instanceof Npc) {
-						reflectedHit = attacker.getAi2().modifyDamage(attacker, reflectedHit);
+						reflectedHit = attacker.getAi2().modifyDamage(attacker, reflectedHit, effect);
 					}
 					attackResult.setReflectedDamage(reflectedHit);
 					attackResult.setReflectedSkillId(effect.getSkillId());
@@ -188,8 +187,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedSkillId(effect.getSkillId());
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
-					effect.getEffector().getController()
-						.onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR, attackResult.getAttackStatus());
+					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
+						attackResult.getAttackStatus());
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

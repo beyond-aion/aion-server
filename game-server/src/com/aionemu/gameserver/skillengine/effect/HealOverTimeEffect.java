@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -34,9 +33,6 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 		// calculate value of heals
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
-		if (effect.getEffected() instanceof Npc) {
-			value = effector.getAi2().modifyHealValue(value);
-		}
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = 0;

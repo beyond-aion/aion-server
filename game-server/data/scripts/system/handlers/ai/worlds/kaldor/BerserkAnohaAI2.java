@@ -35,7 +35,7 @@ public class BerserkAnohaAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void scheduleDespawn() {
-		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isAlreadyDead()) {
 				getOwner().getController().delete();
 				broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());

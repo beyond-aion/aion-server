@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -21,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("gods")
 public class GodsAI2 extends AggressiveNpcAI2 {
 
-	private List<Integer> percents = new FastTable<Integer>().atomic();
+	private List<Integer> percents = new FastTable<>();
 	Npc tiamat;
 
 	@Override
@@ -29,7 +30,7 @@ public class GodsAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 6000;
 	}
 

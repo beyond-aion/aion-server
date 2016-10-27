@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
-import ai.OneDmgPerHitAI2;
+import ai.OneDmgNoActionAI2;
 
 /**
  * recieve only 1 dmg with each attack(handled by super) Aggro the whole room on attack
@@ -12,7 +12,7 @@ import ai.OneDmgPerHitAI2;
  * @author Luzien
  */
 @AIName("surkana")
-public class SurkanaAI2 extends OneDmgPerHitAI2 {
+public class SurkanaAI2 extends OneDmgNoActionAI2 {
 
 	@Override
 	protected void handleAttack(Creature creature) {

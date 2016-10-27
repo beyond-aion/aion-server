@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -32,12 +32,7 @@ public class SiegeDrill extends NpcAI2 {
 	private AtomicBoolean isUsed = new AtomicBoolean(false);
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
-		return 0;
-	}
-
-	@Override
-	public int modifyDamage(Skill skill, Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 0;
 	}
 

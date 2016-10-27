@@ -16,7 +16,7 @@ import ai.AggressiveNpcAI2;
 public class FortressInstanceDukeAI2 extends AggressiveNpcAI2 {
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		if (usedSkill.getSkillId() == 18003)
 			spawn(284978, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 	}

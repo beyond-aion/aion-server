@@ -7,16 +7,17 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
+ * this ai handles (re-)spawns of random npc with the title "conquest offering"
+ * 
  * @author Yeats 15.03.2016.
  */
 @AIName("conquest_offering_spawner")
 public class ConquestOfferingSpawnerAI2 extends NpcAI2 {
-	// this npc handles (re-)spawns of random npc with the title "conquest offering"
 
 	private Future<?> respawnTask;
 
@@ -86,14 +87,14 @@ public class ConquestOfferingSpawnerAI2 extends NpcAI2 {
 		int npcId;
 		// calculate what kind of npc will be spawned 'normal'(70%) and 'party' (30%)
 		if (Rnd.get(1, 100) <= 70) {
-			//theres another kind of spawn called 'all'(30%)
+			// theres another kind of spawn called 'all'(30%)
 			if (Rnd.get(1, 100) <= 30) {
 				npcId = getRndNpc(startNormal);
 			} else {
 				npcId = startNormal + Rnd.get(0, 3);
 			}
 		} else {
-			//theres another kind of spawn called 'all'(30%)
+			// theres another kind of spawn called 'all'(30%)
 			if (Rnd.get(1, 100) <= 30) {
 				npcId = getRndNpc(startNormal);
 			} else {
@@ -149,12 +150,7 @@ public class ConquestOfferingSpawnerAI2 extends NpcAI2 {
 	}
 
 	@Override
-	public int modifyDamage(Skill skill, Creature creature, int damage) {
-		return 0;
-	}
-
-	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 0;
 	}
 

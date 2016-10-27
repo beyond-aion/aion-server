@@ -17,10 +17,11 @@ import com.aionemu.gameserver.events.AbstractEventSource;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -516,12 +517,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	@Override
-	public int modifyDamage(Skill skill, Creature creature, int damage) {
-		return damage;
-	}
-
-	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return damage;
 	}
 
@@ -531,8 +527,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	@Override
-	public int modifyHealValue(int value) {
-		return value;
+	public void modifyOwnerStat(Stat2 stat) {
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -105,7 +106,7 @@ public class ShugoMorpher extends GeneralNpcAI2 {
 	}
 
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		return 0;
 	}
 

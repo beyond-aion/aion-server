@@ -94,7 +94,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnStartCastEvents(NpcSkillEntry startingSkill) {
+	public void onStartUseSkill(NpcSkillEntry startingSkill) {
 		switch (startingSkill.getSkillId()) {
 			case 20534:
 				startAirEvent();
@@ -103,7 +103,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		switch (usedSkill.getSkillId()) {
 			case 20530:
 			case 20531:

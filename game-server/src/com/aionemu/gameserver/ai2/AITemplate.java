@@ -154,12 +154,10 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
-
+	public void onStartUseSkill(NpcSkillEntry startingSkill) {
 	}
 
 	@Override
-	public void fireOnStartCastEvents(NpcSkillEntry startingSkill) {
-
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 	}
 }

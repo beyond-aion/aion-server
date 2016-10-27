@@ -77,14 +77,14 @@ public class CursedQueenModorAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnStartCastEvents(NpcSkillEntry startingSkill) {
+	public void onStartUseSkill(NpcSkillEntry startingSkill) {
 		if (startingSkill.getSkillId() == 21165 && stage == 1) {
 			PacketSendUtility.broadcastMessage(getOwner(), 1500743);
 		}
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		switch (usedSkill.getSkillId()) {
 			case 21165:
 				switch (stage) {

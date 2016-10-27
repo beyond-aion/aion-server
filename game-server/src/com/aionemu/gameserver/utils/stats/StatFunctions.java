@@ -329,7 +329,7 @@ public class StatFunctions {
 		 */
 
 		if (target instanceof Npc)
-			return target.getAi2().modifyDamage(attacker, resultDamage);
+			return target.getAi2().modifyDamage(attacker, resultDamage, null);
 		if (attacker instanceof Npc)
 			return attacker.getAi2().modifyOwnerDamage(resultDamage);
 
@@ -543,13 +543,11 @@ public class StatFunctions {
 		// damages -= target.getGameStats().getMDef().getCurrent();
 		// }
 
-		if (damages <= 0) {
+		if (damages < 1)
 			damages = 1;
-		}
 
-		if (target instanceof Npc) {
-			return target.getAi2().modifyDamage(speller, (int) damages);
-		}
+		if (target instanceof Npc)
+			return target.getAi2().modifyDamage(speller, (int) damages, null);
 
 		return Math.round(damages);
 	}

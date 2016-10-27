@@ -86,7 +86,7 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 	}
 
 	@Override
-	public void fireOnEndCastEvents(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		switch (usedSkill.getSkillId()) {
 			case 21245:
 				switch (stage) {

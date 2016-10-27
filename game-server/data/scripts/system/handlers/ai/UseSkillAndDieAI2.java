@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -75,15 +75,7 @@ public class UseSkillAndDieAI2 extends NpcAI2 {
 	}
 	
 	@Override
-	public int modifyDamage(Creature creature, int damage) {
-		if (!canDie)
-			return 0;
-		else
-			return damage;
-	}
-	
-	@Override
-	public int modifyDamage(Skill skill, Creature creature, int damage) {
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
 		if (!canDie)
 			return 0;
 		else
