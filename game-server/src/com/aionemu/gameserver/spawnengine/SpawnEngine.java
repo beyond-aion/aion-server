@@ -211,11 +211,11 @@ public class SpawnEngine {
 	 */
 	public static void spawnInstance(int worldId, int instanceId, byte difficultId, int ownerId) {
 		List<SpawnGroup2> worldSpawns = DataManager.SPAWNS_DATA2.getSpawnsByWorldId(worldId);
-		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
 		StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
 
 		int spawnedCounter = 0;
 		if (worldSpawns != null) {
+			WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
 			for (SpawnGroup2 spawn : worldSpawns) {
 				int difficult = spawn.getDifficultId();
 				if (difficult != 0 && difficult != difficultId) {
@@ -256,7 +256,7 @@ public class SpawnEngine {
 			}
 			WalkerFormator.organizeAndSpawn(worldId, instanceId);
 		}
-		log.info("Spawned " + worldId + " [" + instanceId + "] : " + spawnedCounter);
+		log.info("Spawned " + worldId + " [" + instanceId + "]: " + spawnedCounter);
 		HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
 	}
 

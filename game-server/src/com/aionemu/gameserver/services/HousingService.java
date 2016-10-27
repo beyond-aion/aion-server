@@ -137,7 +137,7 @@ public class HousingService {
 			}
 		}
 		if (spawnedCounter > 0) {
-			log.info("Spawned houses " + worldId + " [" + instanceId + "] : " + spawnedCounter);
+			log.info("Spawned houses " + worldId + " [" + instanceId + "]: " + spawnedCounter);
 		}
 	}
 

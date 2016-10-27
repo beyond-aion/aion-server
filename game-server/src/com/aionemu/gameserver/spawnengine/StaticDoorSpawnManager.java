@@ -56,7 +56,7 @@ public class StaticDoorSpawnManager {
 			counter++;
 		}
 		if (counter > 0)
-			log.info("Spawned static doors: " + worldId + " [" + instanceIndex + "] : " + counter);
+			log.info("Spawned static doors " + worldId + " [" + instanceIndex + "]: " + counter);
 	}
 
 	/**

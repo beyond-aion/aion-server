@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,7 +60,7 @@ import javolution.util.FastTable;
 
 /**
  * @author xTz
- * @modified Rolandas
+ * @modified Rolandas, Neon
  */
 @XmlRootElement(name = "spawns")
 @XmlType(namespace = "", name = "SpawnsData2")
@@ -71,7 +72,7 @@ public class SpawnsData2 {
 	@XmlElement(name = "spawn_map", type = SpawnMap.class)
 	private List<SpawnMap> templates;
 
-	private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<Map<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> siegeSpawnMaps = new TIntObjectHashMap<>();
@@ -80,171 +81,124 @@ public class SpawnsData2 {
 	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup2>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // ahserions flight
 	private Set<Integer> allNpcIds;
-	private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<>();
 
 	/**
 	 * @param u
 	 * @param parent
 	 */
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (templates != null) {
-			allSpawnMaps.clear();
-			baseSpawnMaps.clear();
-			riftSpawnMaps.clear();
-			siegeSpawnMaps.clear();
-			vortexSpawnMaps.clear();
-			mercenarySpawns.clear();
-			assaultSpawns.clear();
-			ahserionSpawnMaps.clear();
-			
-			for (SpawnMap spawnMap : templates) {
-				int mapId = spawnMap.getMapId();
+		for (SpawnMap map : templates) {
+			Map<Integer, SimpleEntry<SpawnGroup2, Spawn>> mapSpawns = allSpawnMaps.get(map.getMapId());
+			if (mapSpawns == null) {
+				mapSpawns = new FastMap<>();
+				allSpawnMaps.put(map.getMapId(), mapSpawns);
+			}
 
-				if (!allSpawnMaps.containsKey(mapId)) {
-					allSpawnMaps.put(mapId, new FastMap<>());
+			List<Integer> customs = new FastTable<>();
+			for (Spawn spawn : map.getSpawns()) {
+				if (spawn.isCustom()) {
+					if (mapSpawns.containsKey(spawn.getNpcId()))
+						mapSpawns.remove(spawn.getNpcId());
+					customs.add(spawn.getNpcId());
+				} else if (customs.contains(spawn.getNpcId()))
+					continue;
+				mapSpawns.put(spawn.getNpcId(), new SimpleEntry<>(new SpawnGroup2(map.getMapId(), spawn), spawn));
+			}
+
+			for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
+				int baseId = baseSpawn.getId();
+				if (!baseSpawnMaps.containsKey(baseId)) {
+					baseSpawnMaps.put(baseId, new FastTable<SpawnGroup2>());
 				}
+				for (BaseSpawn.SimpleRaceTemplate simpleRace : baseSpawn.getBaseRaceTemplates()) {
+					for (Spawn spawn : simpleRace.getSpawns()) {
+						SpawnGroup2 spawnGroup = new SpawnGroup2(map.getMapId(), spawn, baseId, simpleRace.getBaseRace());
+						baseSpawnMaps.get(baseId).add(spawnGroup);
+					}
+				}
+			}
 
-				for (Spawn spawn : spawnMap.getSpawns()) {
-					if (spawn.isCustom()) {
-						if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
-							allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-						customs.put(spawn.getNpcId(), spawn);
-					} else if (customs.containsKey(spawn.getNpcId()))
+			for (RiftSpawn rift : map.getRiftSpawns()) {
+				int id = rift.getId();
+				if (!riftSpawnMaps.containsKey(id)) {
+					riftSpawnMaps.put(id, new FastTable<SpawnGroup2>());
+				}
+				for (Spawn spawn : rift.getSpawns()) {
+					SpawnGroup2 spawnGroup = new SpawnGroup2(map.getMapId(), spawn, id);
+					riftSpawnMaps.get(id).add(spawnGroup);
+				}
+			}
+
+			for (SiegeSpawn SiegeSpawn : map.getSiegeSpawns()) {
+				int siegeId = SiegeSpawn.getSiegeId();
+				if (!siegeSpawnMaps.containsKey(siegeId)) {
+					siegeSpawnMaps.put(siegeId, new FastTable<SpawnGroup2>());
+				}
+				for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
+					for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
+						if (mod == null || mod.getSpawns() == null) {
+							continue;
+						}
+						for (Spawn spawn : mod.getSpawns()) {
+							SpawnGroup2 spawnGroup = new SpawnGroup2(map.getMapId(), spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType());
+							siegeSpawnMaps.get(siegeId).add(spawnGroup);
+						}
+					}
+				}
+			}
+
+			for (VortexSpawn VortexSpawn : map.getVortexSpawns()) {
+				int id = VortexSpawn.getId();
+				if (!vortexSpawnMaps.containsKey(id)) {
+					vortexSpawnMaps.put(id, new FastTable<SpawnGroup2>());
+				}
+				for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
+					if (type == null || type.getSpawns() == null) {
 						continue;
-					allSpawnMaps.get(mapId).put(spawn.getNpcId(), new SimpleEntry<>(new SpawnGroup2(mapId, spawn), spawn));
-				}
-
-				for (BaseSpawn baseSpawn : spawnMap.getBaseSpawns()) {
-					int baseId = baseSpawn.getId();
-					if (!baseSpawnMaps.containsKey(baseId)) {
-						baseSpawnMaps.put(baseId, new FastTable<SpawnGroup2>());
 					}
-					for (BaseSpawn.SimpleRaceTemplate simpleRace : baseSpawn.getBaseRaceTemplates()) {
-						for (Spawn spawn : simpleRace.getSpawns()) {
-							if (spawn.isCustom()) {
-								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
-									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-								customs.put(spawn.getNpcId(), spawn);
-							} else if (customs.containsKey(spawn.getNpcId()))
-								continue;
-							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, baseId, simpleRace.getBaseRace());
-							baseSpawnMaps.get(baseId).add(spawnGroup);
-						}
+					for (Spawn spawn : type.getSpawns()) {
+						SpawnGroup2 spawnGroup = new SpawnGroup2(map.getMapId(), spawn, id, type.getStateType());
+						vortexSpawnMaps.get(id).add(spawnGroup);
 					}
 				}
+			}
 
-				for (RiftSpawn rift : spawnMap.getRiftSpawns()) {
-					int id = rift.getId();
-					if (!riftSpawnMaps.containsKey(id)) {
-						riftSpawnMaps.put(id, new FastTable<SpawnGroup2>());
+			for (MercenarySpawn mercenarySpawn : map.getMercenarySpawns()) {
+				int id = mercenarySpawn.getSiegeId();
+				mercenarySpawns.put(id, mercenarySpawn);
+				for (MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
+					for (MercenaryZone mzone : mrace.getMercenaryZones()) {
+						mzone.setWorldId(map.getMapId());
+						mzone.setSiegeId(mercenarySpawn.getSiegeId());
 					}
-					for (Spawn spawn : rift.getSpawns()) {
-						if (spawn.isCustom()) {
-							if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId())) {
-								allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-							}
-							customs.put(spawn.getNpcId(), spawn);
-						} else if (customs.containsKey(spawn.getNpcId()))
-							continue;
-						SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id);
-						riftSpawnMaps.get(id).add(spawnGroup);
-					}
+
+				}
+			}
+
+			for (AssaultSpawn assaultSpawn : map.getAssaultSpawns()) {
+				int id = assaultSpawn.getSiegeId();
+				assaultSpawns.put(id, assaultSpawn);
+				for (AssaultWave awave : assaultSpawn.getAssaultWaves()) {
+					awave.setWorldId(map.getMapId());
+					awave.setSiegeId(assaultSpawn.getSiegeId());
+				}
+			}
+
+			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
+				int teamId = ahserionSpawn.getTeam().getId();
+				if (!ahserionSpawnMaps.containsKey(teamId)) {
+					ahserionSpawnMaps.put(teamId, new FastTable<SpawnGroup2>());
 				}
 
-				for (SiegeSpawn SiegeSpawn : spawnMap.getSiegeSpawns()) {
-					int siegeId = SiegeSpawn.getSiegeId();
-					if (!siegeSpawnMaps.containsKey(siegeId)) {
-						siegeSpawnMaps.put(siegeId, new FastTable<SpawnGroup2>());
-					}
-					for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
-						for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
-							if (mod == null || mod.getSpawns() == null) {
-								continue;
-							}
-							for (Spawn spawn : mod.getSpawns()) {
-								if (spawn.isCustom()) {
-									if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
-										allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-									customs.put(spawn.getNpcId(), spawn);
-								} else if (customs.containsKey(spawn.getNpcId()))
-									continue;
-								SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType());
-								siegeSpawnMaps.get(siegeId).add(spawnGroup);
-							}
-						}
+				for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
+					if (stageTemplate == null || stageTemplate.getSpawns() == null)
+						continue;
+
+					for (Spawn spawn : stageTemplate.getSpawns()) {
+						SpawnGroup2 spawnGroup = new SpawnGroup2(map.getMapId(), spawn, stageTemplate.getStage(), ahserionSpawn.getTeam());
+						ahserionSpawnMaps.get(teamId).add(spawnGroup);
 					}
 				}
-
-				for (VortexSpawn VortexSpawn : spawnMap.getVortexSpawns()) {
-					int id = VortexSpawn.getId();
-					if (!vortexSpawnMaps.containsKey(id)) {
-						vortexSpawnMaps.put(id, new FastTable<SpawnGroup2>());
-					}
-					for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
-						if (type == null || type.getSpawns() == null) {
-							continue;
-						}
-						for (Spawn spawn : type.getSpawns()) {
-							if (spawn.isCustom()) {
-								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId())) {
-									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-								}
-								customs.put(spawn.getNpcId(), spawn);
-							} else if (customs.containsKey(spawn.getNpcId()))
-								continue;
-							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id, type.getStateType());
-							vortexSpawnMaps.get(id).add(spawnGroup);
-						}
-					}
-				}
-
-				for (MercenarySpawn mercenarySpawn : spawnMap.getMercenarySpawns()) {
-					int id = mercenarySpawn.getSiegeId();
-					mercenarySpawns.put(id, mercenarySpawn);
-					for (MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
-						for (MercenaryZone mzone : mrace.getMercenaryZones()) {
-							mzone.setWorldId(spawnMap.getMapId());
-							mzone.setSiegeId(mercenarySpawn.getSiegeId());
-						}
-
-					}
-				}
-
-				for (AssaultSpawn assaultSpawn : spawnMap.getAssaultSpawns()) {
-					int id = assaultSpawn.getSiegeId();
-					assaultSpawns.put(id, assaultSpawn);
-					for (AssaultWave awave : assaultSpawn.getAssaultWaves()) {
-						awave.setWorldId(spawnMap.getMapId());
-						awave.setSiegeId(assaultSpawn.getSiegeId());
-					}
-				}
-
-				for (AhserionsFlightSpawn ahserionSpawn : spawnMap.getAhserionSpawns()) {
-					int teamId = ahserionSpawn.getTeam().getId();
-					if (!ahserionSpawnMaps.containsKey(teamId)) {
-						ahserionSpawnMaps.put(teamId, new FastTable<SpawnGroup2>());
-					}
-
-					for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
-						if (stageTemplate == null || stageTemplate.getSpawns() == null) {
-							continue;
-						}
-
-						for (Spawn spawn : stageTemplate.getSpawns()) {
-							if (spawn.isCustom()) {
-								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId()))
-									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-								customs.put(spawn.getNpcId(), spawn);
-							} else if (customs.contains(spawn.getNpcId())) {
-								continue;
-							}
-							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, stageTemplate.getStage(), ahserionSpawn.getTeam());
-							ahserionSpawnMaps.get(teamId).add(spawnGroup);
-						}
-					}
-				}
-
-				customs.clear();
 			}
 		}
 		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
@@ -403,7 +357,6 @@ public class SpawnsData2 {
 			DataManager.SPAWNS_DATA2.templates = data.templates;
 			DataManager.SPAWNS_DATA2.afterUnmarshal(null, null);
 			DataManager.SPAWNS_DATA2.clearTemplates();
-			data.clearTemplates();
 		} catch (Exception e) {
 			log.error("Could not save XML file!", e);
 			return false;

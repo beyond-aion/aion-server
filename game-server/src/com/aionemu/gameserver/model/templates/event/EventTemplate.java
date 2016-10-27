@@ -145,7 +145,7 @@ public class EventTemplate {
 		if (isStarted)
 			return;
 
-		if (spawns != null && spawns.size() > 0) {
+		if (spawns != null && spawns.size() > 0) { // TODO limit pooled spawns (refactor SpawnEngine to use its methods)
 			for (SpawnMap map : spawns.getTemplates()) {
 				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
@@ -161,7 +161,7 @@ public class EventTemplate {
 							spawnCount++;
 						}
 					}
-					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "] : " + spawnCount + " (" + this.getName() + ")");
+					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "]: " + spawnCount + " (" + getName() + ")");
 				}
 			}
 			DataManager.SPAWNS_DATA2.afterUnmarshal(null, null);
@@ -210,8 +210,7 @@ public class EventTemplate {
 				o.getController().delete();
 			}
 			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
-			log.info("Deleted " + spawnedObjects.size() + " event objects (" + this.getName() + ")");
-			spawnedObjects.clear();
+			log.info("Deleted " + spawnedObjects.size() + " event objects (" + getName() + ")");
 			spawnedObjects = null;
 		}
 
