@@ -161,6 +161,9 @@ public abstract class Creature extends VisibleObject {
 		this.ai2 = ai2;
 	}
 
+	/**
+	 * @return True if the creature is a flag (symbol on map)
+	 */
 	public boolean isFlag() {
 		return false;
 	}
@@ -316,12 +319,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInState(CreatureState state) {
-		int isState = this.state & state.getId();
-
-		if (isState == state.getId())
-			return true;
-
-		return false;
+		return (this.state & state.getId()) == state.getId();
 	}
 
 	/**
@@ -675,7 +673,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isPvpTarget(Creature creature) {
-		return getActingCreature() instanceof Player && creature.getActingCreature() instanceof Player;
+		return false;
 	}
 
 	public void revalidateZones() {

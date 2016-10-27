@@ -162,10 +162,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
 	 */
 	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
-		// avoid killing players after duel
-		if (!getOwner().isEnemy(attacker) && getOwner().isPvpTarget(attacker) && !getOwner().equals(attacker))
-			return;
-
 		if (damage != 0) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null && notifyAttack) {

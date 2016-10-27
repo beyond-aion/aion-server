@@ -491,11 +491,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		return false;
 	}
 
-	@Override
-	public long getRemainigTime() {
-		return 0;
-	}
-
 	/**
 	 * Spawn object in the same world and instance as AI's owner
 	 */

@@ -303,12 +303,12 @@ public class Npc extends Creature {
 
 	@Override
 	public boolean isFlag() {
-		return getObjectTemplate().getNpcTemplateType().equals(NpcTemplateType.FLAG);
+		return getObjectTemplate().getNpcTemplateType() == NpcTemplateType.FLAG;
 	}
 
 	@Override
 	public boolean isRaidMonster() {
-		return getObjectTemplate().getNpcTemplateType().equals(NpcTemplateType.RAID_MONSTER);
+		return getObjectTemplate().getNpcTemplateType() == NpcTemplateType.RAID_MONSTER;
 	}
 
 	public boolean isBoss() {
@@ -321,7 +321,7 @@ public class Npc extends Creature {
 
 	@Override
 	public Race getRace() {
-		return this.getObjectTemplate().getRace();
+		return getObjectTemplate().getRace();
 	}
 
 	public void setNpcType(CreatureType newType) {

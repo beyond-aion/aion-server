@@ -77,6 +77,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
@@ -186,8 +187,6 @@ public class Player extends Creature {
 	/**
 	 * Static information for players
 	 */
-	private boolean isAttackMode = false;
-
 	private long gatherableTimer = 0;
 	private long stopGatherable;
 	private String captchaWord;
@@ -387,12 +386,8 @@ public class Player extends Creature {
 		this.lookingForGroup = lookingForGroup;
 	}
 
-	public boolean isAttackMode() {
-		return isAttackMode;
-	}
-
-	public void setAttackMode(boolean isAttackMode) {
-		this.isAttackMode = isAttackMode;
+	public boolean isInAttackMode() {
+		return isInState(CreatureState.WEAPON_EQUIPPED);
 	}
 
 	public boolean isNotGatherable() {
@@ -1111,7 +1106,7 @@ public class Player extends Creature {
 	public boolean isEnemyFrom(Player enemy) {
 		if (equals(enemy))
 			return false;
-		else if (getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1 || canPvP(enemy) || getController().isDueling(enemy))
+		else if (getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1 || canPvP(enemy) || isDueling(enemy))
 			return true;
 		else
 			return (getEnemyState() == 2 || enemy.getEnemyState() == 2 || (!isInSameTeam(enemy) && (getEnemyState() == 1 || enemy.getEnemyState() == 1)));
@@ -1141,6 +1136,10 @@ public class Player extends Creature {
 			return isInsideZoneType(ZoneType.PVP) && enemy.isInsideZoneType(ZoneType.PVP) && !isInSameTeam(enemy);
 		}
 		return false;
+	}
+
+	public boolean isDueling(Player player) {
+		return DuelService.getInstance().isDueling(player.getObjectId(), this.getObjectId());
 	}
 
 	public boolean isInSameTeam(Player player) {
@@ -1630,6 +1629,11 @@ public class Player extends Creature {
 			return 2;
 		else
 			return 1;
+	}
+
+	@Override
+	public boolean isPvpTarget(Creature creature) {
+		return creature.getActingCreature() instanceof Player;
 	}
 
 	/**

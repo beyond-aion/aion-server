@@ -175,6 +175,11 @@ public class Summon extends Creature {
 	}
 
 	@Override
+	public boolean isPvpTarget(Creature creature) {
+		return getMaster() != null && creature.getActingCreature() instanceof Player;
+	}
+
+	@Override
 	public TribeClass getTribe() {
 		if (master == null)
 			return ((NpcTemplate) objectTemplate).getTribe();

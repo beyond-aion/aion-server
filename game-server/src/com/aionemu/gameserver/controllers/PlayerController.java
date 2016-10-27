@@ -326,7 +326,7 @@ public class PlayerController extends CreatureController<Player> {
 		Creature master = lastAttacker.getMaster();
 
 		if (DuelService.getInstance().isDueling(player.getObjectId())) {
-			if (master != null && DuelService.getInstance().isDueling(player.getObjectId(), master.getObjectId())) {
+			if (master instanceof Player && ((Player) master).isDueling(player)) {
 				DuelService.getInstance().loseDuel(player);
 				player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
 				if (player.getLifeStats().getHpPercentage() < 33)
@@ -471,6 +471,10 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
 		if (getOwner().getLifeStats().isAlreadyDead())
+			return;
+
+		// avoid killing players after duel
+		if (attacker.getActingCreature() instanceof Player && !getOwner().isEnemy(attacker))
 			return;
 
 		if (getOwner().isProtectionActive())
@@ -618,15 +622,6 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public Player getOwner() {
 		return (Player) super.getOwner();
-	}
-
-	/**
-	 * @param player
-	 * @return
-	 */
-	// TODO [AT] move to Player
-	public boolean isDueling(Player player) {
-		return DuelService.getInstance().isDueling(player.getObjectId(), getOwner().getObjectId());
 	}
 
 	@Override

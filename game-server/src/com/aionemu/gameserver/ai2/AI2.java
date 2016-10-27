@@ -45,8 +45,6 @@ public interface AI2 {
 
 	boolean isLogging();
 
-	long getRemainigTime();
-
 	/**
 	 * @param attacker
 	 * @param damage

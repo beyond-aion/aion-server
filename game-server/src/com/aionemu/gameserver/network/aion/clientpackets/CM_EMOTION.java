@@ -115,7 +115,7 @@ public class CM_EMOTION extends AionClientPacket {
 			}
 		}
 
-		if (player.getState() == CreatureState.PRIVATE_SHOP.getId() || player.isAttackMode()
+		if (player.isInState(CreatureState.PRIVATE_SHOP) || player.isInAttackMode()
 			&& (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP))
 			return;
 
@@ -173,12 +173,10 @@ public class CM_EMOTION extends AionClientPacket {
 				break;
 			case ATTACKMODE_IN_MOVE:
 			case ATTACKMODE_IN_STANDING:
-				player.setAttackMode(true);
 				player.setState(CreatureState.WEAPON_EQUIPPED);
 				break;
 			case NEUTRALMODE_IN_MOVE:
 			case NEUTRALMODE_IN_STANDING:
-				player.setAttackMode(false);
 				player.unsetState(CreatureState.WEAPON_EQUIPPED);
 				break;
 			case WALK:

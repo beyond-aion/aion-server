@@ -656,7 +656,7 @@ public class StatFunctions {
 
 		if (attacker.isPvpTarget(target)) {
 			if (pvpDamage > 0)
-				damages *= pvpDamage * 0.01;
+				damages *= pvpDamage * 0.01f;
 			if (!noReduce)
 				damages = Math.round(damages * 0.42f);// 0.42 checked on NA (4.9) 19.03.2016
 

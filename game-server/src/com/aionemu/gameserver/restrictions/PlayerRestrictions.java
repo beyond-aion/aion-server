@@ -46,10 +46,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (player != target && target instanceof Player) {
 			Player tPlayer = (Player) target;
-			if (!tPlayer.getRace().equals(player.getRace())) {
+			if (tPlayer.getRace() != player.getRace()) {
 				if (!tPlayer.isEnemyFrom(player))
 					return false;
-			} else if (tPlayer.getController().isDueling(player)) {
+			} else if (tPlayer.isDueling(player)) {
 				if (skill.getSkillTemplate().getProperties().getTargetRelation() != TargetRelationAttribute.ENEMY) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					return false;
@@ -474,7 +474,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_MOVING_OBJECT());
 			return false;
 		}
-		if (player.isAttackMode()) {
+		if (player.isInAttackMode()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_COMBAT_MODE());
 			return false;
 		}

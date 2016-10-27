@@ -44,7 +44,7 @@ public class PolishAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401750));
 			return false;
 		}
-		return !player.isAttackMode() && targetItem.getItemTemplate().isWeapon() && targetItem.getItemTemplate().isCanPolish();
+		return !player.isInAttackMode() && targetItem.getItemTemplate().isWeapon() && targetItem.getItemTemplate().isCanPolish();
 	}
 
 	@Override
