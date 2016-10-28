@@ -152,7 +152,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	protected void sendSystemMsg(Player player, Creature creature, int rewardPoints) {
 		int nameId = creature.getObjectTemplate().getNameId();
 		DescriptionId name = new DescriptionId(nameId * 2 + 1);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0 ? creature.getName() : name, rewardPoints));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(nameId == 0 ? creature.getName() : name, rewardPoints));
 	}
 
 	private int getNpcBonus(int npcId) {

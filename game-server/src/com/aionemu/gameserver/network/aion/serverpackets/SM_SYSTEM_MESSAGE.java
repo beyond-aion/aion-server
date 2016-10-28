@@ -19347,8 +19347,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have gained %num1 points from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_SCORE(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400237, num1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_SCORE(Object value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1400237, value0, num1);
 	}
 
 	/**

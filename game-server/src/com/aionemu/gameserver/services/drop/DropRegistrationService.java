@@ -163,7 +163,7 @@ public class DropRegistrationService {
 		// EoS 5% Boost drop rate
 		boostDropRate += genesis.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
-		boostDropRate += genesis.getActiveHouse() != null ? genesis.getActiveHouse().getHouseType().equals(HouseType.PALACE) ? 0.05f : 0 : 0;
+		boostDropRate += genesis.getActiveHouse() != null && genesis.getActiveHouse().getHouseType() == HouseType.PALACE ? 0.05f : 0;
 		// Hmm.. 169625013 have boost drop rate 5% info but no such desc on buff
 
 		// can be exploited on duel with Spiritmaster Erosion skill
@@ -204,14 +204,9 @@ public class DropRegistrationService {
 						// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 						// so the following restrictions will be ignored
 						if (rule.getGlobalRuleNpcs() == null) {
-							// EXCLUSIONS:
-							// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
+							// exclude most siege spawns, and inner base spawns
 							if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 								continue;
-							// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
-							// continue;
-
-							// exclude Inner Base Npcs
 							if (npc.getSpawn() instanceof BaseSpawnTemplate) {
 								if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
 									&& npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
@@ -310,14 +305,9 @@ public class DropRegistrationService {
 				// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 				// so the following restrictions will be ignored
 				if (rule.getGlobalRuleNpcs() == null) {
-					// EXCLUSIONS:
-					// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
+					// exclude most siege spawns, and inner base spawns
 					if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 						continue;
-					// if (npc.getSpawn() instanceof RiftSpawnTemplate || npc.getSpawn() instanceof VortexSpawnTemplate)
-					// continue;
-
-					// exclude Inner Base Npcs
 					if (npc.getSpawn() instanceof BaseSpawnTemplate) {
 						if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
 							continue;

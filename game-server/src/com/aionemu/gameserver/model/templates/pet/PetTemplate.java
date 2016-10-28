@@ -87,7 +87,7 @@ public class PetTemplate {
 	/**
 	 * Used to write to SM_PET packet, so checks only needed ones
 	 */
-	public boolean ContainsFunction(PetFunctionType type) {
+	public boolean containsFunction(PetFunctionType type) {
 		if (type.getId() < 0)
 			return false;
 

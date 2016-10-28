@@ -18,11 +18,10 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
+import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
@@ -55,11 +54,6 @@ public class DropInfo extends AdminCommand {
 		Npc currentNpc = (Npc) visibleObject;
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(currentNpc.getNpcId());
 
-		if (npcDrop == null && !EventsConfig.ENABLE_EVENT_SERVICE) {
-			sendInfo(player, "No drops for the selected NPC");
-			return;
-		}
-
 		DropRegistrationService drs = DropRegistrationService.getInstance();
 		int dropChance = 100;
 		int npcLevel = currentNpc.getLevel();
@@ -85,14 +79,14 @@ public class DropInfo extends AdminCommand {
 		// EoS 5% Boost drop rate
 		boostDropRate += player.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
 		// Deed to Palace 5% Boost drop rate
-		boostDropRate += player.getActiveHouse() != null ? player.getActiveHouse().getHouseType().equals(HouseType.PALACE) ? 0.05f : 0 : 0;
+		boostDropRate += player.getActiveHouse() != null && player.getActiveHouse().getHouseType() == HouseType.PALACE ? 0.05f : 0;
 
 		boostDropRate += player.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 
 		float dropRate = player.getRates().getDropRate() * boostDropRate * dropChance / 100F;
 
 		int count = 0;
-		sendInfo(player, "\n[Drop Info for the specified NPC]");
+		sendInfo(player, "\n[Drop info for " + currentNpc.getName() + "]");
 		if (npcDrop != null) {
 			for (DropGroup dropGroup : npcDrop.getDropGroup()) {
 				sendInfo(player, "DropGroup: " + dropGroup.getGroupName() + " MaxDropGroup: " + dropGroup.getMaxItems());
@@ -125,11 +119,13 @@ public class DropInfo extends AdminCommand {
 						// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 						// so the following restrictions will be ignored
 						if (rule.getGlobalRuleNpcs() == null) {
-							// EXCLUSIONS:
-							// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-							if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate || currentNpc.getSpawn() instanceof RiftSpawnTemplate
-								|| currentNpc.getSpawn() instanceof VortexSpawnTemplate || currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
+							// exclude siege spawns, and inner base spawns
+							if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 								continue;
+							if (currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
+								if (currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+									&& currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+									continue;
 							}
 							// if npc level ==1 means missing stats, so better exclude it from drops
 							if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId()
@@ -207,12 +203,13 @@ public class DropInfo extends AdminCommand {
 				// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 				// so the following restrictions will be ignored
 				if (rule.getGlobalRuleNpcs() == null) {
-					// EXCLUSIONS:
-					// siege spawns, base spawns, rift spawns and vortex spawns must not have drops
-					if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER
-						|| currentNpc.getSpawn() instanceof RiftSpawnTemplate || currentNpc.getSpawn() instanceof VortexSpawnTemplate
-						|| currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
+					// exclude most siege spawns, and inner base spawns
+					if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 						continue;
+					if (currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
+						if (currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+							&& currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+							continue;
 					}
 					// if npc level ==1 means missing stats, so better exclude it from drops
 					if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId()

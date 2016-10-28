@@ -50,12 +50,12 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
 		this.masterObjectId = masterObjectId;
 		this.expireTime = expireTime;
 		PetTemplate template = DataManager.PET_DATA.getPetTemplate(petId);
-		if (template.ContainsFunction(PetFunctionType.FOOD)) {
+		if (template.containsFunction(PetFunctionType.FOOD)) {
 			int flavourId = template.getPetFunction(PetFunctionType.FOOD).getId();
 			int lovedLimit = DataManager.PET_FEED_DATA.getFlavourById(flavourId).getLovedFoodLimit();
 			feedProgress = new PetFeedProgress((byte) (lovedLimit & 0xFF));
 		}
-		if (template.ContainsFunction(PetFunctionType.DOPING)) {
+		if (template.containsFunction(PetFunctionType.DOPING)) {
 			dopingBag = new PetDopingBag();
 		}
 	}
@@ -158,8 +158,7 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
 
 	@Override
 	public int getNameId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return DataManager.PET_DATA.getPetTemplate(petId).getNameId();
 	}
 
 	public final long getMoodStartTime() {

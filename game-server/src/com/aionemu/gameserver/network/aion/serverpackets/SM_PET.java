@@ -138,16 +138,16 @@ public class SM_PET extends AionServerPacket {
 					writeD(expireTime != 0 ? expireTime - (int) (System.currentTimeMillis() / 1000) : 0); // accompanying time
 
 					int specialtyCount = 0;
-					if (petTemplate.ContainsFunction(PetFunctionType.WAREHOUSE)) {
+					if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
 						writeH(PetFunctionType.WAREHOUSE.getId());
 						specialtyCount++;
 					}
-					if (petTemplate.ContainsFunction(PetFunctionType.LOOT)) {
+					if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
 						writeH(PetFunctionType.LOOT.getId());
 						writeC(0);
 						specialtyCount++;
 					}
-					if (petTemplate.ContainsFunction(PetFunctionType.DOPING)) {
+					if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
 						writeH(PetFunctionType.DOPING.getId());
 						short dopeId = (short) petTemplate.getPetFunction(PetFunctionType.DOPING).getId();
 						PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
@@ -168,7 +168,7 @@ public class SM_PET extends AionServerPacket {
 						}
 						specialtyCount++;
 					}
-					if (petTemplate.ContainsFunction(PetFunctionType.FOOD)) {
+					if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
 						writeH(PetFunctionType.FOOD.getId());
 						writeD(petCommonData.getFeedProgress().getDataForPacket());
 						writeD((int) petCommonData.getRefeedDelay() / 1000);
@@ -205,16 +205,16 @@ public class SM_PET extends AionServerPacket {
 				writeD(commonData.getExpireTime() != 0 ? commonData.getExpireTime() - (int) (System.currentTimeMillis() / 1000) : 0); // accompanying time
 				petTemplate = DataManager.PET_DATA.getPetTemplate(commonData.getPetId());
 				int specialtyCount = 0;
-				if (petTemplate.ContainsFunction(PetFunctionType.WAREHOUSE)) {
+				if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
 					writeH(PetFunctionType.WAREHOUSE.getId());
 					specialtyCount++;
 				}
-				if (petTemplate.ContainsFunction(PetFunctionType.LOOT)) {
+				if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
 					writeH(PetFunctionType.LOOT.getId());
 					writeC(0);
 					specialtyCount++;
 				}
-				if (petTemplate.ContainsFunction(PetFunctionType.DOPING)) {
+				if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
 					writeH(PetFunctionType.DOPING.getId());
 					writeQ(0);
 					writeQ(0);
@@ -222,7 +222,7 @@ public class SM_PET extends AionServerPacket {
 					writeQ(0);
 					specialtyCount++;
 				}
-				if (petTemplate.ContainsFunction(PetFunctionType.FOOD)) {
+				if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
 					writeH(PetFunctionType.FOOD.getId());
 					writeQ(0);
 					specialtyCount++;
