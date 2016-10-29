@@ -139,21 +139,22 @@ public class AttackUtil {
 				break;
 		}
 
-		if (status.isCritical()) {
-			if (attacker instanceof Player)
-				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, isMain);
-			else
-				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, isMain);
-		}
+		if (status.isCritical())
+			damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE,
+				isMain);
 
 		if (damage < 1)
 			damage = 0;
 
-		int firstHit = (int) (damage * (1f - (0.1f * (hitCount - 1))));
-		int otherHits = Math.round(damage * 0.1f);
-		for (int i = 0; i < hitCount; i++) {
-			int dmg = (i == 0 ? firstHit : otherHits);
-			attackList.add(new AttackResult(dmg, status, HitType.PHHIT));
+		if (hitCount == 1) {
+			attackList.add(new AttackResult(damage, status, HitType.PHHIT));
+		} else {
+			// example: 2385 total dmg with hitCount 4 is 1x 1836 (mainHit) + 3x 183 (minorHits), or 1x 2169 + 1x 216 (hitCount 2)
+			int minorHits = damage / (hitCount + 9);
+			int mainHit = damage - (minorHits * (hitCount - 1));
+			attackList.add(new AttackResult(mainHit, status, HitType.PHHIT));
+			for (int i = 1; i < hitCount; i++)
+				attackList.add(new AttackResult(minorHits, AttackStatus.NORMALHIT, HitType.PHHIT));
 		}
 		return attackList;
 	}
@@ -167,30 +168,26 @@ public class AttackUtil {
 				break;
 		}
 
-		if (status.isCritical()) {
-			if (attacker instanceof Player) {
-				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, isMain);
-			} else
-				damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, isMain);
-		}
-
-		if (attacked instanceof Npc)
-			damage = attacked.getAi2().modifyDamage(attacker, damage, null);
+		if (status.isCritical())
+			damage = (int) calculateWeaponCritical(element, attacked, damage, getWeaponGroup(attacker, isMain), StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE,
+				isMain);
 
 		if (damage < 1)
 			damage = 0;
 
-		int firstHit = (int) (damage * (1f - (0.1f * (hitCount - 1))));
-		int otherHits = Math.round(damage * 0.1f);
-		for (int i = 0; i < hitCount; i++) {
-			int dmg = (i == 0 ? firstHit : otherHits);
-			attackList.add(new AttackResult(dmg, status, HitType.MAHIT));
+		if (hitCount == 1) {
+			attackList.add(new AttackResult(damage, status, HitType.MAHIT));
+		} else {
+			int minorHits = damage / (hitCount + 9);
+			int mainHit = damage - (minorHits * (hitCount - 1));
+			attackList.add(new AttackResult(mainHit, status, HitType.MAHIT));
+			for (int i = 1; i < hitCount; i++)
+				attackList.add(new AttackResult(minorHits, AttackStatus.NORMALHIT, HitType.MAHIT));
 		}
 		return attackList;
 	}
 
 	/**
-	 *
 	 * @param element
 	 * @param attacked
 	 * @param damages
@@ -204,7 +201,6 @@ public class AttackUtil {
 	}
 
 	/**
-	 *
 	 * @param element
 	 * @param attacked
 	 * @param damages
@@ -243,11 +239,11 @@ public class AttackUtil {
 	private static float getWeaponMultiplier(ItemGroup group) {
 		switch (group) {
 			case DAGGER:
-				return  2.3f;
+				return 2.3f;
 			case SWORD:
-				return  2.2f;
+				return 2.2f;
 			case MACE:
-				return  2f;
+				return 2f;
 			case GREATSWORD:
 			case POLEARM:
 				return 1.8f;
@@ -255,10 +251,9 @@ public class AttackUtil {
 			case BOW:
 				return 1.7f;
 			default:
-				return  1.5f;
+				return 1.5f;
 		}
 	}
-
 
 	/*
 	 * @param effect
