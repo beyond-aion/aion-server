@@ -183,20 +183,12 @@ public class DropRegistrationService {
 			// also check if npc must be excluded due to global npc restrictions
 			if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
 				for (EventTemplate eventTemplate : EventService.getInstance().getEnabledEvents()) {
-					if (eventTemplate.getEventDrops() == null || !eventTemplate.isActive()) {
+					if (eventTemplate.getEventDrops() == null || !eventTemplate.isActive())
 						continue;
-					}
-					// instances with world drop type == None must not have global drops (example Arenas)
-					if (npc.getWorldDropType().equals(WorldDropType.NONE)) {
-						continue;
-					}
 
-					List<GlobalRule> eventDropRules = eventTemplate.getEventDrops().getAllRules();
-
-					for (GlobalRule rule : eventDropRules) {
-						if (rule.getGlobalRuleItems() == null) {
+					for (GlobalRule rule : eventTemplate.getEventDrops().getAllRules()) {
+						if (rule.getGlobalRuleItems() == null)
 							continue;
-						}
 
 						// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 						// so the following restrictions will be ignored
@@ -230,7 +222,8 @@ public class DropRegistrationService {
 						if (Rnd.get() * 100 > chance)
 							continue;
 
-						if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
+						if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest))
+							&& !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 							if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
 								continue;
 						}
@@ -287,18 +280,14 @@ public class DropRegistrationService {
 			}
 		}
 
-		boolean isNpcQuest = npc.getAi2().getName().equals("quest_use_item");
 		// if npc ai == quest_use_item it will be always excluded from global drops
-		if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
-			List<GlobalRule> globalrules = DataManager.GLOBAL_DROP_DATA.getAllRules();
-			for (GlobalRule rule : globalrules) {
-				if (rule.getGlobalRuleItems() == null) {
+		boolean isNpcQuest = npc.getAi2().getName().equals("quest_use_item");
+		// instances with WorldDropType.NONE must not have global drops (example Arenas)
+		if (!isNpcQuest && !hasGlobalNpcExclusions(npc) && npc.getWorldDropType() != WorldDropType.NONE) {
+			for (GlobalRule rule : DataManager.GLOBAL_DROP_DATA.getAllRules()) {
+				if (rule.getGlobalRuleItems() == null)
 					continue;
-				}
-				// instances with world drop type == None must not have global drops (example Arenas)
-				if (npc.getWorldDropType().equals(WorldDropType.NONE)) {
-					continue;
-				}
+
 				// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
 				// so the following restrictions will be ignored
 				if (rule.getGlobalRuleNpcs() == null) {
@@ -330,7 +319,8 @@ public class DropRegistrationService {
 				if (Rnd.get() * 100 > chance)
 					continue;
 
-				if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
+				if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest)
+					&& !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 					if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
 						continue;
 				}
