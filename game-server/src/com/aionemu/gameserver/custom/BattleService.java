@@ -17,17 +17,16 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author Woge
  */
-
 public class BattleService {
 
-	public static BattleService instance = new BattleService();
+	private static BattleService instance = new BattleService();
 	private final static Logger log = LoggerFactory.getLogger(BattleService.class);
 	private boolean isPublic = false;
 	private List<Player> invitedPlayers = new LinkedList<>();
 	private Map<Player, GameEvent> registeredPlayers = new HashMap<>();
 	private int rewardID = 0;
 
-	public BattleService() {
+	private BattleService() {
 	}
 
 	public int getRewardId() {

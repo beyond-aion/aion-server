@@ -18,11 +18,6 @@ public class AgentDeathListener extends OnDieEventListener {
 	public AgentDeathListener(AgentSiege siege) {
 		this.siege = siege;
 	}
-	
-	@Override
-	public void onBeforeEvent(GeneralAIEvent event) {
-		super.onBeforeEvent(event);
-	}
 
 	@Override
 	public void onAfterEvent(GeneralAIEvent event) {

@@ -53,10 +53,13 @@ public class TrapNpcAI2 extends NpcAI2 {
 
 	@Override
 	protected void handleSpawned() {
+		String name = getObjectTemplate().getName().toLowerCase();
+		if (!name.equals("scrapped mechanisms"))
+			getOwner().setVisualState(CreatureVisualState.HIDE1);
 		super.handleSpawned();
-		if (getObjectTemplate().getName().toLowerCase().equals("shock trap")) {
+		if (name.equals("shock trap"))
 			explode(getOwner());
-		}
+
 	}
 
 	private void explode(final Creature creature) {

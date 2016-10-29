@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.concurrent.Future;
-
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,26 +23,23 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		this.action = readC();
+		action = readC();
 	}
 
 	@Override
 	protected void runImpl() {
-
 		final Player player = getConnection().getActivePlayer();
 		boolean haveUnreadExpress = player.getMailbox().haveUnreadByType(LetterType.EXPRESS);
 		boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
 
-		switch (this.action) {
-			case 0:
-				// window is closed
+		switch (action) {
+			case 0: // window is closed
 				if (player.getPostman() != null) {
 					player.getPostman().getController().delete();
 					player.setPostman(null);
 				}
 				break;
-			case 1:
-				// click on icon
+			case 1: // click on icon
 				if (player.getPostman() != null) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED());
 				} else if (player.isFlying()) {
@@ -52,20 +47,13 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 				} else if (haveUnreadBlackcloud) {
 					VisibleObjectSpawner.spawnPostman(player);
 				} else if (haveUnreadExpress) {
-					if (player.getController().hasScheduledTask(TaskId.EXPRESS_MAIL_USE)) {
+					if (player.getController().hasTask(TaskId.EXPRESS_MAIL_USE)) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_COOLTIME());
 						return;
 					}
-
 					VisibleObjectSpawner.spawnPostman(player);
-					Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-						}
-
-					}, 600000); // 10 min
-					player.getController().addTask(TaskId.EXPRESS_MAIL_USE, task);
+					player.getController().addTask(TaskId.EXPRESS_MAIL_USE,
+						ThreadPoolManager.getInstance().schedule(() -> player.getController().cancelTask(TaskId.EXPRESS_MAIL_USE), 600000)); // 10 min
 				}
 				break;
 		}

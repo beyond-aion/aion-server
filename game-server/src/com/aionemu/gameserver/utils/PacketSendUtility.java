@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 
@@ -44,8 +43,7 @@ public class PacketSendUtility {
 	 * Lets the npc say a client message to the player. He will see the message in /s chat and in a speech bubble above the npcs head.
 	 */
 	public static void sendMessage(Player player, Npc npc, int msgId, Object... params) {
-		if (npc != null)
-			broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, params));
+		sendPacket(player, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, params));
 	}
 
 	/**
@@ -64,9 +62,9 @@ public class PacketSendUtility {
 	public static void broadcastMessage(Npc npc, int msgId, int delay, Object... msgParams) {
 		if (npc == null)
 			return;
-		schedule(() -> {
+		scheduleOrRun(() -> {
 			if (npc.isSpawned())
-				broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, msgParams));
+				broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, msgParams), player -> MathUtil.isInRange(npc, player, 40));
 		}, delay);
 	}
 
@@ -92,6 +90,23 @@ public class PacketSendUtility {
 			sendPacket(player, packet);
 
 		broadcastPacket(player, packet);
+	}
+
+	/**
+	 * Broadcasts a packet to all players that the given object knows.
+	 */
+	public static void broadcastPacket(VisibleObject object, AionServerPacket packet) {
+		object.getKnownList().forEachPlayer(player -> sendPacket(player, packet));
+	}
+
+	/**
+	 * Broadcasts a packet to all players that the given object knows and which match the filter.
+	 */
+	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, Predicate<Player> filter) {
+		object.getKnownList().forEachPlayer(player -> {
+			if (filter.test(player))
+				sendPacket(player, packet);
+		});
 	}
 
 	/**
@@ -140,16 +155,6 @@ public class PacketSendUtility {
 		broadcastPacketAndAIEvent(creature, packet, et);
 	}
 
-	/**
-	 * Broadcasts a packet to all players that the given object knows.
-	 *
-	 * @param visibleObject
-	 * @param packet
-	 */
-	public static void broadcastPacket(VisibleObject visibleObject, AionServerPacket packet) {
-		visibleObject.getKnownList().forEachPlayer(player -> sendPacket(player, packet));
-	}
-
 	public static void broadcastPacketAndAIEvent(Creature creature, AionServerPacket packet, AIEventType et) {
 		creature.getKnownList().forEachObject(object -> {
 			if (object instanceof Player)
@@ -178,13 +183,6 @@ public class PacketSendUtility {
 			if (filter.test(player))
 				sendPacket(player, packet);
 		});
-	}
-
-	/**
-	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that the given object knows.
-	 */
-	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, int delay) {
-		schedule(() -> broadcastPacket(object, packet), delay);
 	}
 
 	/**
@@ -248,61 +246,69 @@ public class PacketSendUtility {
 	 * Broadcasts the system message to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, int msgId) {
-		broadcastToMap(object, new SM_SYSTEM_MESSAGE(msgId), 0);
+		broadcastToMap(object.getPosition().getWorldMapInstance(), new SM_SYSTEM_MESSAGE(msgId), 0, p -> !object.equals(p));
 	}
 
 	/**
 	 * Broadcasts the system message after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, int msgId, int delay) {
-		broadcastToMap(object, new SM_SYSTEM_MESSAGE(msgId), delay);
+		broadcastToMap(object.getPosition().getWorldMapInstance(), new SM_SYSTEM_MESSAGE(msgId), delay, p -> !object.equals(p));
 	}
 
 	/**
 	 * Broadcasts a packet to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet) {
-		broadcastToMap(object, packet, 0);
+		broadcastToMap(object.getPosition().getWorldMapInstance(), packet, 0, p -> !object.equals(p));
 	}
 
 	/**
 	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object.
 	 */
 	public static void broadcastToMap(VisibleObject object, AionServerPacket packet, int delay) {
-		schedule(() -> object.getPosition().getWorldMapInstance().forEachPlayer(player -> {
-			if (!object.equals(player))
-				sendPacket(player, packet);
-		}), delay);
+		broadcastToMap(object.getPosition().getWorldMapInstance(), packet, delay, p -> !object.equals(p));
 	}
 
 	/**
-	 * Broadcasts a packet to all players that are on the default map instance.
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the same map instance as the object and match the
+	 * given filter.
 	 */
-	public static void broadcastToMap(WorldMap map, AionServerPacket packet) {
-		broadcastToMap(map.getMainWorldMapInstance(), packet, 0);
+	public static void broadcastToMap(VisibleObject object, AionServerPacket packet, int delay, Predicate<Player> filter) {
+		broadcastToMap(object.getPosition().getWorldMapInstance(), packet, delay, filter);
 	}
 
 	/**
-	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the default map instance.
+	 * Broadcasts a packet to all players that are on the specified map instance.
 	 */
-	public static void broadcastToMap(WorldMap map, AionServerPacket packet, int delay) {
-		broadcastToMap(map.getMainWorldMapInstance(), packet, delay);
+	public static void broadcastToMap(WorldMapInstance mapInstance, AionServerPacket packet) {
+		broadcastToMap(mapInstance, packet, 0, player -> true);
 	}
 
 	/**
 	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the specified map instance.
 	 */
 	public static void broadcastToMap(WorldMapInstance mapInstance, AionServerPacket packet, int delay) {
-		schedule(() -> mapInstance.forEachPlayer(player -> sendPacket(player, packet)), delay);
+		broadcastToMap(mapInstance, packet, delay, player -> true);
+	}
+
+	/**
+	 * Broadcasts a packet after the specified delay (in milliseconds) to all players that are on the specified map instance and match the given filter.
+	 */
+	public static void broadcastToMap(WorldMapInstance mapInstance, AionServerPacket packet, int delay, Predicate<Player> filter) {
+		scheduleOrRun(() -> mapInstance.forEachPlayer(player -> {
+			if (filter.test(player))
+				sendPacket(player, packet);
+		}), delay);
 	}
 
 	public static void broadcastToZone(SiegeZoneInstance zone, AionServerPacket packet) {
-		schedule(() -> zone.forEachPlayer(player -> sendPacket(player, packet)), 0);
+		scheduleOrRun(() -> zone.forEachPlayer(player -> sendPacket(player, packet)), 0);
 	}
 
-	private static void schedule(Runnable r, int delay) {
+	private static void scheduleOrRun(Runnable r, int delay) {
 		if (delay <= 0)
-			ThreadPoolManager.getInstance().execute(r);
+			r.run();
 		else
 			ThreadPoolManager.getInstance().schedule(r, delay);
 	}

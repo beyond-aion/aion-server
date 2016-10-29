@@ -90,7 +90,7 @@ public class NpcShoutsService {
 		if (target != null) {
 			PacketSendUtility.sendPacket(target, message);
 		} else {
-			PacketSendUtility.broadcastPacket(sender, message, false, player -> MathUtil.isIn3dRange(player, sender, shoutRange));
+			PacketSendUtility.broadcastPacket(sender, message, player -> MathUtil.isIn3dRange(player, sender, shoutRange));
 		}
 		if (shoutCooldown <= 0)
 			removeShoutCooldown(sender);

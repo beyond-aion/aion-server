@@ -279,21 +279,20 @@ public class World {
 	 * @param newHeading
 	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading, boolean updateKnownList) {
-		// prevent updating object position in despawned state
-		if (!object.isSpawned())
+		if (!object.isSpawned()) { // MapRegion would be null
+			log.warn("Can't update position of despawned object: {}", object, new Throwable());
 			return;
+		}
 
 		MapRegion oldRegion = object.getActiveRegion();
 		if (oldRegion == null) {
-			log.warn(String.format("CHECKPOINT: oldRegion is null, map - %d, object coordinates - %f %f %f", object.getWorldId(), object.getX(),
-				object.getY(), object.getZ()));
+			log.warn("Old MapRegion was null when trying to update position of {}", object, new Throwable());
 			return;
 		}
 
 		MapRegion newRegion = oldRegion.getParent().getRegion(newX, newY, newZ);
 		if (newRegion == null) {
-			log.warn(String.format("CHECKPOINT: newRegion is null, map - %d, object coordinates - %f %f %f", object.getWorldId(), newX, newY, newZ),
-				new Throwable());
+			log.warn("New MapRegion doesn't exist for coordinates: Map {}, X {}, Y {}, Z {}", object.getWorldId(), newX, newY, newZ, new Throwable());
 			if (object instanceof Creature)
 				((Creature) object).getMoveController().abortMove();
 			if (object instanceof Player) {

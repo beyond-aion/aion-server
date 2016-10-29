@@ -31,7 +31,7 @@ public class FollowingNpcAI2 extends GeneralNpcAI2 {
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature == getOwner().getTarget()) {
+		if (creature.equals(getOwner().getTarget())) {
 			FollowEventHandler.creatureMoved(this, creature);
 		} else if (getOwner().getTarget() == null) {
 			FollowEventHandler.stopFollow(this, creature);

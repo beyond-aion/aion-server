@@ -13,11 +13,6 @@ public class SiegeBossDeathListener extends OnDieEventListener {
 	}
 
 	@Override
-	public void onBeforeEvent(GeneralAIEvent event) {
-		super.onBeforeEvent(event);
-	}
-
-	@Override
 	public void onAfterEvent(GeneralAIEvent event) {
 		if (event.isHandled()) {
 			siege.setBossKilled(true);

@@ -81,12 +81,12 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			else if (classMask > 0 && (player.getPlayerClass().getMask() & classMask) == 0)
 				continue;
-			else if (region > 0 && player.getActiveRegion().getMapId() != region)
+			else if (region > 0 && player.getWorldId() != region)
 				continue;
 			matches.add(player);
 		}
 
-		sendPacket(new SM_PLAYER_SEARCH(matches, region));
+		sendPacket(new SM_PLAYER_SEARCH(matches));
 	}
 
 }

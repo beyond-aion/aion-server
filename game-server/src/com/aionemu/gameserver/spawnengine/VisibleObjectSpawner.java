@@ -32,7 +32,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
@@ -219,8 +218,6 @@ public class VisibleObjectSpawner {
 		trap.setKnownlist(new NpcKnownList(trap));
 		trap.setEffectController(new EffectController(trap));
 		trap.setCreator(creator);
-		if (!npcTemplate.getName().equals("scrapped mechanisms"))
-			trap.setVisualState(CreatureVisualState.HIDE1);
 		SpawnEngine.bringIntoWorld(trap, spawn, instanceIndex);
 		PacketSendUtility.broadcastPacket(trap, new SM_PLAYER_STATE(trap));
 		return trap;

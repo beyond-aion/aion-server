@@ -15,29 +15,25 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_PLAYER_SEARCH extends AionServerPacket {
 
 	private List<Player> players;
-	private int region;
 
 	/**
 	 * Constructs a new packet that will send these players
 	 * 
 	 * @param players
 	 *          List of players to show
-	 * @param region
-	 *          of search - should be passed as parameter to prevent null in player.getActiveRegion()
 	 */
-	public SM_PLAYER_SEARCH(List<Player> players, int region) {
+	public SM_PLAYER_SEARCH(List<Player> players) {
 		this.players = players;
-		this.region = region;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(players.size());
 		for (Player player : players) {
-			writeD(player.getActiveRegion() == null ? region : player.getActiveRegion().getMapId());
-			writeF(player.getPosition().getX());
-			writeF(player.getPosition().getY());
-			writeF(player.getPosition().getZ());
+			writeD(player.getWorldId());
+			writeF(player.getX());
+			writeF(player.getY());
+			writeF(player.getZ());
 			writeC(player.getPlayerClass().getClassId());
 			writeC(player.getGender().getGenderId());
 			writeC(player.getLevel());

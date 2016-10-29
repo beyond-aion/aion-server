@@ -31,7 +31,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class NochsanaEvent extends GameEvent {
 
 	private List<CustomBase> bases = new LinkedList<>();
-	private CustomBase siegeBoss = null;
+	private CustomBase customBase = null;
 	private List<CustomBase> defenderBases = new LinkedList<>();
 	private List<CustomBase> attackerBases = new LinkedList<>();
 	private Map<Integer, VisibleObject> spawnControl = new HashMap<>();
@@ -126,7 +126,7 @@ public class NochsanaEvent extends GameEvent {
 		bases.add(new CustomBase(10, this, false, defender, 12115));
 		bases.add(new CustomBase(11, this, false, defender, 12116));
 		bases.add(new CustomBase(12, this, false, defender, 0));
-		siegeBoss = new CustomBase(13, this, true, defender, 0);
+		customBase = new CustomBase(13, this, true, defender, 0);
 		defenderBases.addAll(bases);
 		Collections.sort(defenderBases);
 		// Spawn Teleporter
@@ -176,7 +176,7 @@ public class NochsanaEvent extends GameEvent {
 			return;
 		}
 
-		if (base == siegeBoss) {
+		if (base == customBase) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
@@ -197,7 +197,7 @@ public class NochsanaEvent extends GameEvent {
 			}
 		}
 
-		if (winner == defender && siegeBoss.getBoss() != null || winner == defender && siegeBoss.isPreparingToSpawn()) {
+		if (winner == defender && customBase.getBoss() != null || winner == defender && customBase.isPreparingToSpawn()) {
 			sendCornerTimer(0);
 			this.sendRemainingMajorTimer();
 			stopSiege();
@@ -225,7 +225,7 @@ public class NochsanaEvent extends GameEvent {
 				return;
 			}
 
-			siegeBoss.scheduleBossRespawn();
+			customBase.scheduleBossRespawn();
 			announceAll(winner.name() + " captured all bases. The fortress boss will arrive in less than 30 seconds");
 			sendCornerTimer(30);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -251,7 +251,7 @@ public class NochsanaEvent extends GameEvent {
 	}
 
 	private void stopSiege() {
-		siegeBoss.deleteBoss();
+		customBase.deleteBoss();
 		announceAll("The fortress is now immortal");
 	}
 
