@@ -101,8 +101,12 @@ public enum Race {
 		return raceId;
 	}
 
+	public boolean isAsmoOrEly() {
+		return raceId < 2;
+	}
+
 	public boolean isPlayerRace() {
-		return raceId < 2 || raceId == 27;
+		return isAsmoOrEly() || raceId == 27;
 	}
 
 	public DescriptionId getRaceDescriptionId() {

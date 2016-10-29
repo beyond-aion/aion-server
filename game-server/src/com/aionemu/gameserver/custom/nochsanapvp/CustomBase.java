@@ -26,12 +26,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Woge
  */
-
 public class CustomBase implements Comparable<CustomBase> {
 
 	private Npc boss, flag;
 	private NochsanaEvent ownerEvent = null;
-	private final CBaseDeathListener bossDeathListener;
 	private Race owner;
 	private int id;
 	private Lock lock = new ReentrantLock();
@@ -43,7 +41,6 @@ public class CustomBase implements Comparable<CustomBase> {
 	private List<Npc> spawned = new LinkedList<>();
 
 	public CustomBase(int id, NochsanaEvent ownerEvent, boolean siegeBoss, Race initialOwner, int buffID) {
-		bossDeathListener = new CBaseDeathListener(this);
 		this.siegeBoss = siegeBoss;
 		this.owner = initialOwner;
 		this.id = id;
@@ -130,7 +127,7 @@ public class CustomBase implements Comparable<CustomBase> {
 								Npc npc = (Npc) ownerEvent.spawnObject(template.getNpcId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 									0);
 								boss = npc;
-								addBossListeners();
+								((AbstractAI) boss.getAi2()).addEventListener(new CBaseDeathListener(CustomBase.this));
 							}
 						}
 					}
@@ -165,14 +162,8 @@ public class CustomBase implements Comparable<CustomBase> {
 			if (bossRespawn.cancel(false))
 				return;
 		}
-		AbstractAI ai = (AbstractAI) boss.getAi2();
-		ai.removeEventListener(bossDeathListener);
 		boss.getController().delete();
-	}
-
-	protected void addBossListeners() {
-		AbstractAI ai = (AbstractAI) boss.getAi2();
-		ai.addEventListener(bossDeathListener);
+		boss = null;
 	}
 
 	protected void capture(Race winner, String name, Player killer) {
@@ -191,13 +182,9 @@ public class CustomBase implements Comparable<CustomBase> {
 			if (!siegeBoss) {
 				spawn();
 			}
-
 		} catch (Exception ex) {
-			BattleService.getInstance().log("Error:");
-			ex.printStackTrace();
-		}
-
-		finally {
+			BattleService.getInstance().logError("Error:", ex);
+		} finally {
 			lock.unlock();
 		}
 
@@ -255,12 +242,12 @@ public class CustomBase implements Comparable<CustomBase> {
 			if (winner instanceof Creature) {
 				Creature killer = (Creature) winner;
 
-				if (killer.getRace().isPlayerRace()) {
+				if (killer.getRace().isAsmoOrEly()) {
 					base.capture(killer.getRace(), killer.getName(), (Player) killer);
 				}
 			} else if (winner instanceof TemporaryPlayerTeam) {
 				TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
-				if (team.getRace().isPlayerRace())
+				if (team.getRace().isAsmoOrEly())
 					base.capture(team.getRace(), team.getLeader().getName(), team);
 			}
 		}

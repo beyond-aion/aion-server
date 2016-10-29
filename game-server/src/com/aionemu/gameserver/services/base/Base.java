@@ -8,6 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -30,7 +31,6 @@ import javolution.util.FastTable;
  */
 public abstract class Base<T extends BaseLocation> {
 
-	private final BaseBossDeathListener bossDeathListener = new BaseBossDeathListener(this);
 	private final T bLoc;
 	private final int id;
 	private List<Npc> assaulter = new FastTable<>();
@@ -76,7 +76,6 @@ public abstract class Base<T extends BaseLocation> {
 
 	protected void handleStop() {
 		cancelTask(assaultTask, assaultDespawnTask, bossSpawnTask, enhancedSpawnTask, outriderSpawnTask);
-		unregDeathListener();
 		despawnAllNpcs();
 	}
 
@@ -173,73 +172,61 @@ public abstract class Base<T extends BaseLocation> {
 
 	public void spawnBySpawnHandler(SpawnHandlerType type, Race targetRace) {
 		for (SpawnGroup2 group : DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id)) {
-			for (SpawnTemplate temp : group.getSpawnTemplates()) {
-				final BaseSpawnTemplate template = (BaseSpawnTemplate) temp;
-				if (template.getBaseRace().equals(targetRace)) {
-					if (template.getHandlerType().equals(type)) {
-						Npc npc = (Npc) SpawnEngine.spawnObject(template, 1);
-						switch (type) {
-							case ATTACKER:
-								assaulter.add(npc);
-								break;
-							case BOSS:
-								initBoss(npc);
-								break;
-							case FLAG:
-								initFlag(npc);
-								npc.getPosition().getMapRegion().activate();
-								break;
-						}
-					}
+			if (group.getHandlerType() != type)
+				continue;
+			for (SpawnTemplate template : group.getSpawnTemplates()) {
+				if (((BaseSpawnTemplate) template).getBaseRace() != targetRace)
+					continue;
+				Npc npc = (Npc) SpawnEngine.spawnObject(template, 1);
+				switch (type) {
+					case ATTACKER:
+						assaulter.add(npc);
+						break;
+					case BOSS:
+						initBoss(npc);
+						break;
+					case FLAG:
+						initFlag(npc);
+						break;
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Gets npcs for base id and despawns all which have the
-	 * parameterized SpawnHandlerType
-	 * 
-	 * @param SpawnHandlerType
-	 *          type
-	 * @param id
-	 */
-	public void despawnByHandlerType(SpawnHandlerType type) {
-		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
-			if (npc == null)
-				continue;
-			if (npc.getSpawn().getHandlerType().equals(type)) {
-				if (!npc.getLifeStats().isAlreadyDead())
-					npc.getController().delete();
-			}
-		}
+		if (type == SpawnHandlerType.BOSS && boss == null)
+			throw new BaseException("No boss found for base! ID: " + id);
+		if (type == SpawnHandlerType.FLAG && flag == null)
+			throw new BaseException("No flag found for base! ID: " + id);
 	}
 
 	private void initBoss(Npc npc) throws BaseException, NullPointerException {
 		if (npc == null)
-			throw new NullPointerException("No boss found for base! ID:" + id);
-		if (npc.getSpawn().getHandlerType().equals(SpawnHandlerType.BOSS)) {
-			if (boss == null) {
-				boss = npc;
-				regDeathListener();
-			} else {
-				throw new BaseException("Tried to initialize boss twice! Base ID:" + id);
-			}
-		} else {
-			throw new BaseException("Tried to initialize non-boss npc as boss for base ID:" + id);
-		}
+			throw new BaseException("Boss could not be spawned! Base ID: " + id);
+		if (boss != null)
+			throw new BaseException("Tried to initialize boss twice! Base ID: " + id);
+		boss = npc;
+		((AbstractAI) boss.getAi2()).addEventListener(new BaseBossDeathListener(this));
 	}
 
 	private void initFlag(Npc npc) throws BaseException, NullPointerException {
 		if (npc == null)
-			throw new NullPointerException("No flag found for base! ID:" + id);
-		if (npc.getSpawn().getHandlerType().equals(SpawnHandlerType.FLAG)) {
-			if (flag == null)
-				flag = npc;
-			else
-				throw new BaseException("Tried to initialize flag twice! Base ID:" + id);
-		} else {
-			throw new BaseException("Tried to initialize non-flag npc as flag for base ID:" + id);
+			throw new BaseException("Flag could not be spawned! Base ID: " + id);
+		if (flag != null)
+			throw new BaseException("Tried to initialize flag twice! Base ID: " + id);
+		flag = npc;
+	}
+
+	/**
+	 * Despawns all alive npcs of this base, which have the given SpawnHandlerType. Respawn tasks of dead base npcs will be cancelled.
+	 * 
+	 * @param type
+	 */
+	public void despawnByHandlerType(SpawnHandlerType type) {
+		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
+			if (npc != null && npc.getSpawn().getHandlerType() == type) {
+				if (!npc.getLifeStats().isAlreadyDead())
+					npc.getController().delete();
+				else
+					npc.getController().cancelTask(TaskId.RESPAWN);
+			}
 		}
 	}
 
@@ -307,18 +294,6 @@ public abstract class Base<T extends BaseLocation> {
 			default:
 				return null;
 		}
-	}
-
-	private void regDeathListener() {
-		if (boss == null)
-			throw new BaseException("Tried to register DeathListener for null boss! BaseID:" + id);
-		((AbstractAI) boss.getAi2()).addEventListener(bossDeathListener);
-	}
-
-	protected void unregDeathListener() {
-		if (boss == null)
-			return;
-		((AbstractAI) boss.getAi2()).removeEventListener(bossDeathListener);
 	}
 
 	/**

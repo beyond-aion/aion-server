@@ -11,16 +11,12 @@ public class OnDieEventListener implements EventListener<GeneralAIEvent> {
 
 	@Override
 	public void onBeforeEvent(GeneralAIEvent event) {
-		if (AIEventType.DIED == event.getEventType()) {
+		if (AIEventType.DIED == event.getEventType())
 			event.setHandled(true);
-		}
 	}
 
 	@Override
 	public void onAfterEvent(GeneralAIEvent event) {
-		if (AIEventType.DIED == event.getEventType()) {
-			event.setHandled(true);
-		}
 	}
 
 }

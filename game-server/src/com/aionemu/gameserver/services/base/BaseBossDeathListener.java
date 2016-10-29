@@ -28,27 +28,18 @@ public class BaseBossDeathListener extends OnDieEventListener {
 
 		AionObject winner = event.getSource().getOwner().getAggroList().getMostDamage();
 
+		Race winnerRace = Race.NPC;
 		if (winner instanceof Creature) {
 			Creature kill = (Creature) winner;
-			if (kill.getRace().isPlayerRace())
-				base.setLocRace(kill.getRace());
-			else
-				base.setLocRace(Race.NPC);
+			if (kill.getRace().isAsmoOrEly())
+				winnerRace = kill.getRace();
+		} else if (winner instanceof TemporaryPlayerTeam) {
+			winnerRace = ((TemporaryPlayerTeam<?>) winner).getRace();
 		}
-		else if (winner instanceof TemporaryPlayerTeam) {
-			TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) winner;
-			if (team.getRace().isPlayerRace())
-				base.setLocRace(team.getRace());
-		}
-		else
-			base.setLocRace(Race.NPC);
 
-		BaseService.getInstance().capture(base.getId(), null); //TODO: Improve me!
-	}
-
-	@Override
-	public void onAfterEvent(GeneralAIEvent event) {
+		if (winnerRace == base.getRace())
+			throw new BaseException("Base boss got killed by its own race! Boss killer: " + winner + ", Base ID: " + base.getId());
+		BaseService.getInstance().capture(base.getId(), winnerRace);
 	}
 
 }
-
