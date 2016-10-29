@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,9 +37,6 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc} dc
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjectId);
@@ -52,8 +50,8 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 			writeC(dropItem.getOptionalSocket());
 			writeC(0);
 			writeC(0); // 3.5
-			ItemTemplate template = drop.getItemTemplate();
-			writeC(!template.getItemGroup().equals(ItemGroup.QUEST) && !template.isTradeable() ? 1 : 0);
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(drop.getItemId());
+			writeC(template.getItemGroup() != ItemGroup.QUEST && !template.isTradeable() ? 1 : 0);
 		}
 
 	}

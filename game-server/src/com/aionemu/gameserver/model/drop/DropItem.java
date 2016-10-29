@@ -3,8 +3,8 @@ package com.aionemu.gameserver.model.drop;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
@@ -28,12 +28,9 @@ public class DropItem {
 
 	public DropItem(Drop dropTemplate) {
 		this.dropTemplate = dropTemplate;
-		ItemTemplate template = dropTemplate.getItemTemplate();
-		int optionalBonus = template.getOptionSlotBonus();
 		this.playerObjIds = new FastTable<>();
-		if (optionalBonus != 0) {
+		if (DataManager.ITEM_DATA.getItemTemplate(dropTemplate.getItemId()).getOptionSlotBonus() != 0)
 			optionalSocket = -1;
-		}
 	}
 
 	/**

@@ -8,13 +8,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author MrPoke
@@ -35,8 +32,6 @@ public class Drop implements DropCalculator {
 	private boolean noReduce = false;
 	@XmlAttribute(name = "each_member", required = false)
 	private boolean eachMember = false;
-	@XmlTransient
-	private ItemTemplate template;
 
 	public Drop(int itemId, int minAmount, int maxAmount, float chance, boolean noReduce) {
 		this.itemId = itemId;
@@ -44,14 +39,9 @@ public class Drop implements DropCalculator {
 		this.maxAmount = maxAmount;
 		this.chance = chance;
 		this.noReduce = noReduce;
-		template = DataManager.ITEM_DATA.getItemTemplate(itemId);
 	}
 
 	public Drop() {
-	}
-
-	public ItemTemplate getItemTemplate() {
-		return template == null ? DataManager.ITEM_DATA.getItemTemplate(itemId) : template;
 	}
 
 	/**

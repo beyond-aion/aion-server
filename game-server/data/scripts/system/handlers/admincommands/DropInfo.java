@@ -59,11 +59,7 @@ public class DropInfo extends AdminCommand {
 		int npcLevel = currentNpc.getLevel();
 		String dropType = currentNpc.getGroupDrop().name().toLowerCase();
 		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
-		FastTable<Integer> noReductionMaps = new FastTable<>();
-		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
-			noReductionMaps.add(Integer.parseInt(zone));
-		}
-		if (!DropConfig.DISABLE_DROP_REDUCTION && ((isNpcChest && npcLevel != 1 || !isNpcChest)) && !noReductionMaps.contains(currentNpc.getWorldId())) {
+		if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && npcLevel != 1 || !isNpcChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - player.getLevel()); // reduce chance depending on level
 		}
 
@@ -146,8 +142,8 @@ public class DropInfo extends AdminCommand {
 						if (!rule.getNoReduction())
 							chance *= dropRate;
 
-						if (!DropConfig.DISABLE_DROP_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
-							&& !noReductionMaps.contains(currentNpc.getWorldId())) {
+						if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
+							&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
 							if ((player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
 								continue;
 						}
@@ -231,8 +227,8 @@ public class DropInfo extends AdminCommand {
 				if (!rule.getNoReduction())
 					chance *= dropRate;
 
-				if (!DropConfig.DISABLE_DROP_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
-					&& !noReductionMaps.contains(currentNpc.getWorldId())) {
+				if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
+					&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
 					if ((player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
 						continue;
 				}

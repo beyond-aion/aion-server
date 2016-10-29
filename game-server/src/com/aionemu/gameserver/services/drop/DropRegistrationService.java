@@ -58,11 +58,8 @@ public class DropRegistrationService {
 
 	private Map<Integer, Set<DropItem>> currentDropMap = new ConcurrentHashMap<>();
 	private Map<Integer, DropNpc> dropRegistrationMap = new ConcurrentHashMap<>();
-	private List<Integer> noReductionMaps = new FastTable<>();
 
 	private DropRegistrationService() {
-		for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(","))
-			noReductionMaps.add(Integer.parseInt(zone));
 	}
 
 	public void registerDrop(Npc npc, Player player, Collection<Player> groupMembers) {
@@ -86,7 +83,7 @@ public class DropRegistrationService {
 		int npcLevel = npc.getLevel();
 		String dropType = npc.getGroupDrop().name().toLowerCase();
 		boolean isChest = npc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
-		if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
+		if (!DropConfig.DISABLE_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - highestLevel); // reduce chance depending on level
 		}
 
@@ -233,7 +230,7 @@ public class DropRegistrationService {
 						if (Rnd.get() * 100 > chance)
 							continue;
 
-						if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest)) && !noReductionMaps.contains(npc.getWorldId())) {
+						if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 							if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
 								continue;
 						}
@@ -333,7 +330,7 @@ public class DropRegistrationService {
 				if (Rnd.get() * 100 > chance)
 					continue;
 
-				if (!DropConfig.DISABLE_DROP_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest) && !noReductionMaps.contains(npc.getWorldId())) {
+				if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 					if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
 						continue;
 				}

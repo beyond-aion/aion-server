@@ -3,6 +3,7 @@ package com.aionemu.commons.configuration.transformers;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
+import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
@@ -45,7 +46,7 @@ public class EnumTransformer implements PropertyTransformer<Enum<?>> {
 		Class<? extends Enum> clazz = (Class<? extends Enum>) field.getType();
 
 		try {
-			return Enum.valueOf(clazz, value);
+			return value.isEmpty() || value.equals(Property.DEFAULT_VALUE) ? null : Enum.valueOf(clazz, value);
 		} catch (Exception e) {
 			throw new TransformationException(e);
 		}
