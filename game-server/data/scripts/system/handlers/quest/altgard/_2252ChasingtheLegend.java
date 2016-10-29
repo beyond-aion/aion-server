@@ -90,7 +90,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 							int questSpawnedNpcId = Rnd.get(1, 100) <= chance ? questKillNpc1Id : questKillNpc2Id;
 							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(),
 								npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
-							PacketSendUtility.broadcastMessage(questMob, 500, 1100630);
+							PacketSendUtility.broadcastMessage(questMob, 1100630, 500);
 							// TODO: set not usable icon to questStep1NpcId while mob is spawned, setting usable icon after mob is despawned
 							questMob.getController().addTask(TaskId.DESPAWN,
 								ThreadPoolManager.getInstance().schedule(() -> questMob.getController().delete(), spawnTime * 60000));

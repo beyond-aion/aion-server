@@ -261,10 +261,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			int zoneNameId = getZoneNameId(player);
 			if (zoneNameId > 0)
 				PacketSendUtility.broadcastToMap(instance,
-					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId), 0);
+					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId));
 			else
-				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)),
-					0);
+				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)));
 		}
 	}
 

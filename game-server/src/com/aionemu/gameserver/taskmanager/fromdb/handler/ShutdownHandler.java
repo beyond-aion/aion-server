@@ -1,16 +1,12 @@
 package com.aionemu.gameserver.taskmanager.fromdb.handler;
 
-import java.util.function.Consumer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ShutdownHook;
-import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Divinity, nrg
@@ -43,20 +39,13 @@ public class ShutdownHandler extends TaskFromDBHandler {
 	public void trigger() {
 		log.info("Task[" + taskId + "] launched : shuting down the server !");
 
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendMessage(player, "Automatic Task: The server will shutdown in " + warnCountDown
-					+ " seconds ! Please find a peace place and disconnect your character.", ChatType.BRIGHT_YELLOW_CENTER);
-			}
-		});
+		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(warnCountDown + countDown));
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				ShutdownHook.getInstance().doShutdown(countDown, announceInterval, ShutdownHook.ShutdownMode.SHUTDOWN);
+				ShutdownHook.getInstance().shutdown(countDown, announceInterval, ShutdownHook.ShutdownMode.SHUTDOWN);
 			}
 		}, warnCountDown * 1000);
 	}

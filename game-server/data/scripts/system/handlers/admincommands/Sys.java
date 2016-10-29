@@ -80,22 +80,18 @@ public class Sys extends AdminCommand {
 			try {
 				int val = Integer.parseInt(params[1]);
 				int announceInterval = Integer.parseInt(params[2]);
-				ShutdownHook.getInstance().doShutdown(val, announceInterval, ShutdownMode.SHUTDOWN);
+				ShutdownHook.getInstance().shutdown(val, announceInterval, ShutdownMode.SHUTDOWN);
 				PacketSendUtility.sendMessage(player, "Server will shutdown in " + val + " seconds.");
-			} catch (ArrayIndexOutOfBoundsException e) {
-				PacketSendUtility.sendMessage(player, "Numbers only!");
-			} catch (NumberFormatException e) {
+			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
 		} else if (params[0].equals("restart")) {
 			try {
 				int val = Integer.parseInt(params[1]);
 				int announceInterval = Integer.parseInt(params[2]);
-				ShutdownHook.getInstance().doShutdown(val, announceInterval, ShutdownMode.RESTART);
+				ShutdownHook.getInstance().shutdown(val, announceInterval, ShutdownMode.RESTART);
 				PacketSendUtility.sendMessage(player, "Server will restart in " + val + " seconds.");
-			} catch (ArrayIndexOutOfBoundsException e) {
-				PacketSendUtility.sendMessage(player, "Numbers only!");
-			} catch (NumberFormatException e) {
+			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
 		} else if (params[0].equals("threadpool")) {

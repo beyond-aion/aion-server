@@ -12,7 +12,6 @@ import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.NpcData;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
@@ -265,41 +264,32 @@ public class VisibleObjectSpawner {
 	 */
 	public static Npc spawnPostman(final Player owner) {
 		int npcId = owner.getRace() == Race.ELYOS ? 798100 : 798101;
-		NpcData npcData = DataManager.NPC_DATA;
-		NpcTemplate template = npcData.getNpcTemplate(npcId);
-		IDFactory iDFactory = IDFactory.getInstance();
-		int worldId = owner.getWorldId();
-		int instanceId = owner.getInstanceId();
+		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
-		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 5),
-			owner.getY() + (float) (Math.sin(radian) * 5), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
-		final Npc postman = new Npc(iDFactory.nextId(), new NpcController(), spawn, template);
+		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
+			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
+		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
+		final Npc postman = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		postman.setCreatorId(owner.getObjectId());
 		postman.setMasterName(owner.getName());
 		postman.setKnownlist(new PlayerAwareKnownList(postman));
 		postman.setEffectController(new EffectController(postman));
-		postman.getAi2().onCustomEvent(1, owner);
-		SpawnEngine.bringIntoWorld(postman, spawn, instanceId);
+		SpawnEngine.bringIntoWorld(postman, spawn, owner.getInstanceId());
 		owner.setPostman(postman);
 		return postman;
 	}
 
 	public static Npc spawnFunctionalNpc(final Player owner, int npcId, SummonOwner summonOwner) {
-		NpcData npcData = DataManager.NPC_DATA;
-		NpcTemplate template = npcData.getNpcTemplate(npcId);
-		IDFactory iDFactory = IDFactory.getInstance();
-		int worldId = owner.getWorldId();
-		int instanceId = owner.getInstanceId();
+		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
 			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
-		final Npc functionalNpc = new Npc(iDFactory.nextId(), new NpcController(), spawn, template);
+		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
+		final Npc functionalNpc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
 		functionalNpc.setEffectController(new EffectController(functionalNpc));
-		functionalNpc.getAi2().onCustomEvent(1, owner);
-		SpawnEngine.bringIntoWorld(functionalNpc, spawn, instanceId);
+		functionalNpc.getAi2().onCustomEvent(1, owner, summonOwner);
+		SpawnEngine.bringIntoWorld(functionalNpc, spawn, owner.getInstanceId());
 		return functionalNpc;
 	}
 

@@ -30,7 +30,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 		super.handleMoveArrived();
 		if (getOwner().getMoveController().isStop()) {
 			if (isGateReached.compareAndSet(false, true)) {
-				PacketSendUtility.broadcastMessage(getOwner(), 1501310, 0);
+				PacketSendUtility.broadcastMessage(getOwner(), 1501310);
 				scheduleGateAttack();
 			}
 		}
@@ -49,7 +49,7 @@ public class TwinDoorDestroyerAI2 extends GeneralNpcAI2 {
 			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs())
 				if (npc.getNpcId() == 731580 && isInRange(npc, 10))
 					SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
-			PacketSendUtility.broadcastMessage(getOwner(), 1501311, 0);
+			PacketSendUtility.broadcastMessage(getOwner(), 1501311);
 		}, 3500);
 	}
 }

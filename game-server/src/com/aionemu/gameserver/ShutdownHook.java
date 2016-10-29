@@ -1,9 +1,6 @@
 package com.aionemu.gameserver;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN;
-
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +11,7 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager.SortBy;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.GameTimeService;
@@ -42,9 +40,9 @@ public class ShutdownHook extends Thread {
 	@Override
 	public void run() {
 		if (ShutdownConfig.HOOK_MODE == 1) {
-			shutdownHook(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.SHUTDOWN);
+			shutdown(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.SHUTDOWN);
 		} else if (ShutdownConfig.HOOK_MODE == 2) {
-			shutdownHook(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.RESTART);
+			shutdown(ShutdownConfig.HOOK_DELAY, ShutdownConfig.ANNOUNCE_INTERVAL, ShutdownMode.RESTART);
 		}
 	}
 
@@ -64,17 +62,7 @@ public class ShutdownHook extends Thread {
 		}
 	}
 
-	private void broadcastShutdownMessage(int seconds) {
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, STR_SERVER_SHUTDOWN(seconds));
-			}
-		});
-	}
-
-	private void shutdownHook(int duration, int interval, ShutdownMode mode) {
+	public void shutdown(int duration, int interval, ShutdownMode mode) {
 		// set shutdown status, return if already running
 		if (!isRunning.compareAndSet(false, true))
 			return;
@@ -85,7 +73,7 @@ public class ShutdownHook extends Thread {
 					break; // fast exit
 
 				log.info("Runtime is " + mode.getText() + " in " + i + " seconds.");
-				broadcastShutdownMessage(i);
+				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(i));
 
 				sleep(Math.min(interval, i) * 1000);
 			} catch (InterruptedException e) {
@@ -124,15 +112,6 @@ public class ShutdownHook extends Thread {
 
 		// Do system exit.
 		Runtime.getRuntime().halt(mode == ShutdownMode.RESTART ? ExitCode.CODE_RESTART : ExitCode.CODE_NORMAL);
-	}
-
-	/**
-	 * @param delay
-	 * @param announceInterval
-	 * @param mode
-	 */
-	public void doShutdown(int delay, int announceInterval, ShutdownMode mode) {
-		shutdownHook(delay, announceInterval, mode);
 	}
 
 	private static final class SingletonHolder {
