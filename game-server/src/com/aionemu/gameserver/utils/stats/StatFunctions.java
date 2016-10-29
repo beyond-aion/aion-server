@@ -851,22 +851,17 @@ public class StatFunctions {
 			}
 		}
 
-		int attackerLevel = attacker.getLevel();
-		int targetLevel = attacked.getLevel();
+		int levelDiff = attacked.getLevel() - attacker.getLevel();
+		int mResi = attacked.getGameStats().getMResist().getCurrent();
+		int resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
 
-		int resistRate = attacked.getGameStats().getMResist().getCurrent() - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
+		if (mResi > 0 && levelDiff > 2) // only apply if creature has mres > 0 (to keep effect of AI.modifyStat())
+			resistRate += (levelDiff - 2) * 100;
 
-		if ((targetLevel - attackerLevel) > 2)
-			resistRate += (targetLevel - attackerLevel - 2) * 100;
-
-		// if MR < MA - never resist
-		if (resistRate <= 0) {
-			resistRate = 1;// its 0.1% because its min possible
-		}
-		// 50% Resist Cap. New 4.7
-		if (resistRate > 500) {
+		if (resistRate <= 0) // 0.1% min cap
+			resistRate = 1;
+		else if (resistRate > 500) // 50% max cap (new in 4.7)
 			resistRate = 500;
-		}
 
 		return resistRate;
 	}
