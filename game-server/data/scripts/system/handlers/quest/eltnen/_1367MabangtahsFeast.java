@@ -1,6 +1,7 @@
 package quest.eltnen;
 
 import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -11,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Atomics
  */
-
 public class _1367MabangtahsFeast extends QuestHandler {
 
-	private static final int questId = 1367;
 	private static final int ITEM_ID_1 = 182201331;
 	private static final int ITEM_ID_2 = 182201332;
 	private static final int ITEM_ID_3 = 182201333;
@@ -22,7 +21,7 @@ public class _1367MabangtahsFeast extends QuestHandler {
 	private long itemCount1, itemCount2, itemCount3;
 
 	public _1367MabangtahsFeast() {
-		super(questId);
+		super(1367);
 	}
 
 	@Override
@@ -59,7 +58,8 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						return sendQuestDialog(env, 5);
+						qs.setReward(0);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialog() == DialogAction.SETPRO2) {
@@ -67,7 +67,8 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						return sendQuestDialog(env, 6);
+						qs.setReward(1);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialog() == DialogAction.SETPRO3) {
@@ -75,13 +76,14 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						return sendQuestDialog(env, 7);
+						qs.setReward(2);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.REWARD) {
-				return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env, qs.getReward());
 			}
 		}
 		return false;
