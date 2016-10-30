@@ -23,12 +23,14 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData2;
 import com.aionemu.gameserver.model.EventType;
+import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
-import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
 import com.aionemu.gameserver.services.EventService;
@@ -153,10 +155,7 @@ public class EventTemplate {
 					int spawnCount = 0;
 					for (Spawn spawn : map.getSpawns()) {
 						spawn.setEventTemplate(this);
-						for (SpawnSpotTemplate spot : spawn.getSpawnSpotTemplates()) {
-							SpawnTemplate t = SpawnEngine.addNewSpawn(map.getMapId(), spawn.getNpcId(), spot.getX(), spot.getY(), spot.getZ(), spot.getHeading(),
-								spawn.getRespawnTime());
-							t.setEventTemplate(this);
+						for (SpawnTemplate t : new SpawnGroup2(map.getMapId(), spawn).getSpawnTemplates()) {
 							SpawnEngine.spawnObject(t, instanceId);
 							spawnCount++;
 						}
@@ -207,6 +206,8 @@ public class EventTemplate {
 
 		if (spawnedObjects != null) {
 			for (VisibleObject o : spawnedObjects) {
+				if (o instanceof Creature)
+					((Creature) o).getController().cancelTask(TaskId.RESPAWN);
 				o.getController().delete();
 			}
 			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
