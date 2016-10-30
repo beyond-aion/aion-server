@@ -3,6 +3,7 @@ package com.aionemu.gameserver.taskmanager.tasks;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinTask;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.parallel.ForEach;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
@@ -21,21 +21,25 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 
 	public static final int UPDATE_PERIOD = 100;
 	private final Map<Integer, Creature> movingCreatures = new ConcurrentHashMap<>();
-	private final Predicate<Creature> CREATURE_MOVE_PREDICATE = new Predicate<Creature>() {
+	private final Consumer<Creature> CREATURE_MOVE_PREDICATE = new Consumer<Creature>() {
 
 		@Override
-		public boolean apply(Creature creature) {
-			if (creature != null) { // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
-				creature.getMoveController().moveToDestination();
-				if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
-					removeCreature(creature);
-					creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
-					ZoneUpdateService.getInstance().add(creature);
-				} else {
-					creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
-				}
+		public void accept(Creature creature) {
+			if (creature == null) // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
+				return;
+			if (!creature.isSpawned()) {
+				removeCreature(creature);
+				return;
 			}
-			return true;
+			creature.getMoveController().moveToDestination();
+			if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
+				removeCreature(creature);
+				creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
+				ZoneUpdateService.getInstance().add(creature);
+			} else {
+				creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
+			}
+
 		}
 	};
 

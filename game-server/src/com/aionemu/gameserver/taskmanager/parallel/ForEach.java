@@ -3,13 +3,12 @@ package com.aionemu.gameserver.taskmanager.parallel;
 import java.util.Collection;
 import java.util.concurrent.CountedCompleter;
 import java.util.concurrent.ForkJoinTask;
+import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Predicate;
 
 /**
  * @author Rolandas
@@ -21,7 +20,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	private static final long serialVersionUID = 7902148320917998146L;
 
 	/**
-	 * Creates a task that applies a predicate for each element in the collection asynchronously (after invocation). Utilizes Fork/Join framework to
+	 * Creates a task that executes an operation for each element in the collection asynchronously (after invocation). Utilizes Fork/Join framework to
 	 * speed up processing, by using a divide/conquer algorithm
 	 * 
 	 * @param list
@@ -29,33 +28,31 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	 * @param operation
 	 *          - operation to perform on each element
 	 */
-	public static <E> ForkJoinTask<E> newTask(Collection<E> list, Predicate<E> operation) {
+	public static <E> ForkJoinTask<E> newTask(Collection<E> list, Consumer<E> operation) {
 		if (list.size() > 0) {
 			@SuppressWarnings("unchecked")
 			E[] objects = list.toArray((E[]) new Object[list.size()]);
-			CountedCompleter<E> completer = new ForEach<>(null, operation, 0, objects.length, objects);
-			return completer;
+			return new ForEach<>(null, operation, 0, objects.length, objects);
 		}
 		return null;
 	}
 
 	/**
-	 * See {@link #newTask(Collection, Predicate) newTask(Collection&lt;E&gt; list, Predicate&lt;E&gt; operation)}
+	 * See {@link #newTask(Collection, Consumer) newTask(Collection&lt;E&gt; list, Consumer&lt;E&gt; operation)}
 	 */
 	@SafeVarargs
-	public static <E> ForkJoinTask<E> newTask(Predicate<E> operation, E... list) {
+	public static <E> ForkJoinTask<E> newTask(Consumer<E> operation, E... list) {
 		if (list != null && list.length > 0) {
-			CountedCompleter<E> completer = new ForEach<>(null, operation, 0, list.length, list);
-			return completer;
+			return new ForEach<>(null, operation, 0, list.length, list);
 		}
 		return null;
 	}
 
 	final E[] list;
-	final Predicate<E> operation;
+	final Consumer<E> operation;
 	final int lo, hi;
 
-	private ForEach(@Nullable CountedCompleter<E> rootTask, Predicate<E> operation, int lo, int hi, E[] list) {
+	private ForEach(@Nullable CountedCompleter<E> rootTask, Consumer<E> operation, int lo, int hi, E[] list) {
 		super(rootTask);
 		this.list = list;
 		this.operation = operation;
@@ -74,7 +71,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		}
 		if (h > l) {
 			try {
-				operation.apply(list[l]);
+				operation.accept(list[l]);
 			} catch (Throwable ex) {
 				// we want to complete without an exception re-thrown
 				// otherwise, should call completeExceptionally(ex);
