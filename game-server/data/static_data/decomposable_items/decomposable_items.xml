@@ -7310,18 +7310,24 @@
 	</decomposable>
 	<decomposable item_id="188051103" name="[Event] Pumpkin King's Present Box">
 		<items>
-			<item id="169620003" name="[Event] Pumpkin King's Blessing" />
+			<item id="166000194" name="Delta Enchantment Stone" min_count="1" max_count="2" />
+		</items>
+		<items>
+			<item id="166000195" name="Epsilon Enchantment Stone" min_count="1" max_count="2" />
+		</items>
+		<items>
+			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="2" />
+		</items>
+		<items>
+			<item id="166030007" name="[Event] Tempering Solution" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051104" name="[Event] Surprise Box">
 		<items>
-			<item id="160010093" name="[Event] Harvest Revel Chocolate" min_count="10" />
-		</items>
-		<items>
+			<item id="160010093" name="[Event] Harvest Revel Chocolate" min_count="30" />
 			<item id="169620003" name="[Event] Pumpkin King's Blessing" />
-		</items>
-		<items>
-			<random_item type="ENCHANTMENT" />
+			<item id="166000195" name="Epsilon Enchantment Stone" min_count="5" />
+			<item id="166030007" name="[Event] Tempering Solution" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051105" name="[Event] Pumpkin Pouch">
@@ -7331,9 +7337,10 @@
 			<item id="164000118" name="Major Crit Strike Scroll" min_count="3" />
 			<item id="164000122" name="Major Crit Spell Scroll" min_count="3" />
 			<item id="164000079" name="Greater Raging Wind Scroll" min_count="3" />
+			<item id="164000134" name="Greater Awakening Scroll" min_count="3" />
 		</items>
 		<items>
-			<random_item type="MANASTONE_RARE_GRADE_60" />
+			<random_item type="MANASTONE_RARE_GRADE_70" />
 		</items>
 		<items>
 			<item id="162000075" name="Fine Life Potion" min_count="3" />
@@ -10343,97 +10350,93 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188051337" name="[Event] Sugarcrook's Pack">
-		<items chance="7.0">
-			<item id="186000031" name="Silver Medal" min_count="1" max_count="10" />
+		<items>
+			<item id="186000031" name="Silver Medal" min_count="5" max_count="10" />
 		</items>
-		<items chance="7.0">
-			<item id="186000030" name="Gold Medal" min_count="1" max_count="5" />
+		<items>
+			<item id="186000030" name="Gold Medal" min_count="3" max_count="5" />
 		</items>
-		<items chance="2.0">
-			<item id="169230025" name="[Event] Dye: Blue" />
-		</items>
-		<items chance="2.0">
-			<item id="169231002" name="[Event] Concentrated Dye: True White" />
-		</items>
-		<items chance="2.0">
-			<item id="169231003" name="[Event] Concentrated Dye: Rich Purple" />
-		</items>
-		<items chance="2.0">
-			<item id="169231004" name="[Event] Concentrated Dye: Mustard" />
-		</items>
-		<items chance="2.0">
-			<item id="169231006" name="[Event] Concentrated Dye: Olive Green" />
-		</items>
-		<items chance="2.0">
-			<item id="169231001" name="[Event] Concentrated Dye: True Red" />
-		</items>
-		<items chance="2.0">
-			<item id="169231009" name="[Event] Concentrated Dye: Hot Orange" />
-		</items>
-		<items chance="2.0">
-			<item id="169231010" name="[Event] Concentrated Dye: Hot Pink" />
-		</items>
-		<items chance="2.0">
-			<item id="169231005" name="[Event] Concentrated Dye: Green Tea" />
-		</items>
-		<items chance="2.0">
-			<item id="169231007" name="[Event] Concentrated Dye: Deep Blue" />
-		</items>
-		<items chance="2.0">
-			<item id="169231008" name="[Event] Concentrated Dye: True Black" />
-		</items>
-		<items chance="2.0">
-			<item id="169230026" name="[Event] Dye: Brown" />
-		</items>
-		<items chance="2.0">
-			<item id="169230024" name="[Event] Dye: Teal" />
-		</items>
-		<items chance="2.0">
-			<item id="169230027" name="[Event] Dye: Purple" />
-		</items>
-		<items chance="4.0">
+		<items>
 			<item id="161000003" name="Reviving Elemental Stone" />
 		</items>
-		<items chance="3.0">
-			<item id="164002010" name="[Event] Greater Courage Scroll" />
+		<items>
+			<item id="169000009" name="Power Shard: +35" min_count="100"/>
 		</items>
-		<items chance="3.0">
-			<item id="164002057" name="[Event] Greater Awakening Scroll" />
+		<items>
+			<item id="169000010" name="Power Shard: +40" min_count="100"/>
 		</items>
-		<items chance="3.0">
-			<item id="164002011" name="[Event] Greater Running Scroll" />
+		<items>
+			<item id="169620009" name="[Event] Witch's Night" />
 		</items>
-		<items chance="3.0">
-			<item id="164002012" name="[Event] Greater Raging Wind Scroll" />
+		<items>
+			<item id="169230015" name="[Event] Dye: Green Tea" />
 		</items>
-		<items chance="9.0">
+		<items>
+			<item id="169230018" name="[Event] Dye: Deep Blue" />
+		</items>
+		<items>
+			<item id="169230019" name="[Event] Dye: Rich Purple" />
+		</items>
+		<items>
+			<item id="169230021" name="[Event] Dye: Hot Orange" />
+		</items>
+		<items>
+			<item id="169230022" name="[Event] Dye: Hot Pink" />
+		</items>
+		<items>
+			<item id="169230023" name="[Event] Dye: Romantic Purple" />
+		</items>
+		<items>
+			<item id="160010153" name="[Event] Warm Dry Pumpkin Ale" min_count="5" />
+		</items>
+		<items>
+			<item id="164002117" name="[Event] Greater Courage Scroll" min_count="5" />
+			<item id="164002118" name="[Event] Greater Awakening Scroll" min_count="5" />
+		</items>
+		<items>
+			<item id="164002116" name="[Event] Greater Running Scroll" min_count="5" />
+		</items>
+		<items>
+			<item id="164002119" name="[Event] Greater Crit Strike Scroll" min_count="5" />
+			<item id="164002120" name="[Event] Greater Crit Spell Scroll" min_count="5" />
+		</items>
+		<items>
+			<item id="164002272" name="[Event] Greater Raging Wind Scroll" min_count="5" />
+		</items>
+		<items>
 			<item id="110900168" name="[Event] Enchanting Sorcerer Robe (7 days)" />
 		</items>
-		<items chance="9.0">
+		<items>
+			<item id="110900169" name="[Event] Enchanting Sorcerer Robe" />
+		</items>
+		<items>
 			<item id="114000017" name="[Event] Enchanting Sorcerer Shoes (7 days)" />
 		</items>
-		<items chance="9.0">
+		<items>
+			<item id="114000018" name="[Event] Enchanting Sorcerer Shoes" />
+		</items>
+		<items>
 			<item id="111000022" name="[Event] Enchanting Sorcerer Gloves (7 days)" />
 		</items>
-		<items chance="9.0">
+		<items>
+			<item id="111000023" name="[Event] Enchanting Sorcerer Gloves" />
+		</items>
+		<items>
 			<item id="125040157" name="[Event] Enchanting Sorcerer Hat (7 days)" />
 		</items>
-		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+		<items>
+			<item id="125040158" name="[Event] Enchanting Sorcerer Hat" />
 		</items>
-		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+		<items>
+			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+		<items>
+			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="2" max_count="5" />
 		</items>
-		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
-		</items>
-		<items chance="1.0">
+		<items>
 			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
 		</items>
-		<items chance="1.0">
+		<items>
 			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
 		</items>
 	</decomposable>
