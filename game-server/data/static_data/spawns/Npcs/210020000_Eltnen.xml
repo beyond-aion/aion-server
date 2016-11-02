@@ -1271,7 +1271,7 @@
 			<spot x="2255.5740" y="2577.7734" z="267.8316" h="15"/>
 		</spawn>
 		<!-- Crack Kaidan Wallarm -->
-		<spawn npc_id="212061" respawn_time="300">
+		<spawn npc_id="235462" respawn_time="295">
 			<spot x="1331.42" y="2666.71" z="301.25" h="117" walker_id="AE15D2497B70E5F4F1431C05D058E9CB44A7F8B4"/>
 			<spot x="1304.36" y="2654.13" z="303.898" h="45"/>
 			<spot x="1265.4" y="2682.46" z="303.95248" h="62" walker_id="D1BDD186DF70B6C504B566E06C427A88C221DF89"/>
@@ -1303,11 +1303,11 @@
 			<spot x="322.544" y="2788.78" z="263.49" h="33"/>
 		</spawn>
 		<!-- Crack Kaidan Wallarm -->
-		<spawn npc_id="212060" respawn_time="300">
+		<spawn npc_id="235461" respawn_time="295">
 			<spot x="1341.2334" y="2611.5171" z="293.6613" h="66"/>
 		</spawn>
 		<!-- Veteran Smackstopper -->
-		<spawn npc_id="212063" respawn_time="300">
+		<spawn npc_id="235463" respawn_time="295">
 			<spot x="1372.0918" y="2604.9324" z="297.1219" h="26"/>
 			<spot x="1230.7926" y="2634.2947" z="292.6250" h="70"/>
 			<spot x="1439.0713" y="2645.9424" z="301.1214" h="73"/>
@@ -1350,7 +1350,7 @@
 			<spot x="1250.9786" y="2739.6189" z="304.6767" h="30"/>
 		</spawn>
 		<!-- Crack Kaidan Charger -->
-		<spawn npc_id="212059" respawn_time="300">
+		<spawn npc_id="235460" respawn_time="295">
 			<spot x="1312.5800" y="2686.5" z="301.7228" h="86"/>
 			<spot x="1417.9192" y="2639.9661" z="300.7449" h="102"/>
 		</spawn>
@@ -1364,7 +1364,7 @@
 			<spot x="1289.7610" y="2725.9617" z="302.5" h="90"/>
 		</spawn>
 		<!-- Crack Kaidan Charger -->
-		<spawn npc_id="212058" respawn_time="300">
+		<spawn npc_id="235459" respawn_time="295">
 			<spot x="1235.2489" y="2509.0247" z="275.9600" h="90"/>
 			<spot x="1385.4264" y="2452.0527" z="285.3368" h="15"/>
 			<spot x="1253.6104" y="2516.5535" z="274.8398" h="100"/>
@@ -1510,7 +1510,7 @@
 			<spot x="144.7392" y="312.0028" z="215.2111" static_id="641"/>
 		</spawn>
 		<!-- Crack Kaidan Witchdoctor -->
-		<spawn npc_id="212074" respawn_time="300">
+		<spawn npc_id="235474" respawn_time="295">
 			<spot x="1268.8021" y="2609.8420" z="288.4549"/>
 			<spot x="1313.3152" y="2639.5364" z="288.7500" h="80"/>
 			<spot x="1273.0861" y="2654.9614" z="292.9058" h="75"/>
@@ -1541,7 +1541,7 @@
 			<spot x="2321.88" y="2229.98" z="370.117" h="89"/>
 		</spawn>
 		<!-- Crack Kaidan Witchdoctor -->
-		<spawn npc_id="212075" respawn_time="300">
+		<spawn npc_id="235475" respawn_time="295">
 			<spot x="1421.1400" y="2642.5500" z="300.75" h="70"/>
 		</spawn>
 		<!-- Destroyed Artifact -->
@@ -1559,7 +1559,7 @@
 			<spot x="2159.99" y="1464.28" z="390.858" h="106"/>
 		</spawn>
 		<!-- Kaidan Special Shaman -->
-		<spawn npc_id="212072" respawn_time="300">
+		<spawn npc_id="235472" respawn_time="295">
 			<spot x="1339.7382" y="2761.3335" z="314.3750" h="53"/>
 		</spawn>
 		<!-- Ferocious Griffon -->
@@ -1574,7 +1574,7 @@
 			<spot x="284.592" y="2746.91" z="270.456" h="17"/>
 		</spawn>
 		<!-- Crack Kaidan Loudmouth -->
-		<spawn npc_id="212070" respawn_time="300">
+		<spawn npc_id="235470" respawn_time="295">
 			<spot x="1337.1614" y="2474.5544" z="273.8629" h="76"/>
 			<spot x="1396.4800" y="2513.0400" z="285.2500" h="60"/>
 			<spot x="1287.6350" y="2531.4797" z="275.5325" h="105"/>
@@ -1599,7 +1599,7 @@
 			<spot x="368.1409" y="288.2102" z="209.0179" static_id="643"/>
 		</spawn>
 		<!-- Crack Kaidan Loudmouth -->
-		<spawn npc_id="212071" respawn_time="300">
+		<spawn npc_id="235471" respawn_time="295">
 			<spot x="1332.1691" y="2579.2439" z="289.7410" h="30"/>
 			<spot x="1406.6910" y="2542.5659" z="303.4967" h="60"/>
 			<spot x="1385.1320" y="2619.2917" z="297.9808" h="51"/>
@@ -1630,7 +1630,7 @@
 			<spot x="304.24" y="118.63" z="145.975" h="20"/>
 		</spawn>
 		<!-- Crack Kaidan Snapper -->
-		<spawn npc_id="212068" respawn_time="300">
+		<spawn npc_id="235468" respawn_time="295">
 			<spot x="1396.9301" y="2510.4700" z="285.1968" h="75"/>
 			<spot x="1308.0792" y="2720.8389" z="302.5" h="106"/>
 		</spawn>
@@ -1654,7 +1654,7 @@
 			<spot x="163.5148" y="145.2396" z="145.1258" static_id="642"/>
 		</spawn>
 		<!-- Crack Kaidan Snapper -->
-		<spawn npc_id="212069" respawn_time="300">
+		<spawn npc_id="235469" respawn_time="295">
 			<spot x="1312.1801" y="2683.7700" z="301.7388" h="26"/>
 			<spot x="1347.1665" y="2685.2019" z="304.6666" h="60"/>
 		</spawn>
@@ -1678,7 +1678,7 @@
 			<spot x="1792.68" y="724.16" z="420.52502" h="28" walker_id="2F3123318D261EC5C534D11A3B92B610A1C3F0F6" walker_index="1"/>
 		</spawn>
 		<!-- Crack Kaidan Slicer -->
-		<spawn npc_id="212066" respawn_time="300">
+		<spawn npc_id="235466" respawn_time="295">
 			<spot x="1330.2256" y="2443.8828" z="272.6117" h="116"/>
 		</spawn>
 		<!-- Laquepin Life Stone -->
@@ -1686,7 +1686,7 @@
 			<spot x="1645.02" y="2248.63" z="296.223" static_id="265"/>
 		</spawn>
 		<!-- Crack Kaidan Slicer -->
-		<spawn npc_id="212067" respawn_time="300">
+		<spawn npc_id="235467" respawn_time="295">
 			<spot x="1226.9039" y="2724.8120" z="308.1542" h="108"/>
 			<spot x="1353.6995" y="2670.1082" z="311.3474" h="63"/>
 			<spot x="1388.2405" y="2667.3831" z="311.9961" h="50"/>
@@ -1711,7 +1711,7 @@
 			<spot x="185" y="2118" z="214.319" h="84"/>
 		</spawn>
 		<!-- Crack Kaidan Grappler -->
-		<spawn npc_id="212064" respawn_time="300">
+		<spawn npc_id="235464" respawn_time="295">
 			<spot x="1344.4769" y="2527.3669" z="281.6803" h="100"/>
 			<spot x="1385.3809" y="2576.4700" z="298.7277" h="15"/>
 			<spot x="1394.0132" y="2633.3359" z="298.7500" h="43"/>
@@ -1745,7 +1745,7 @@
 			<spot x="1758.5" y="656.84" z="425.375" h="69" walker_id="4673CF406DAB344445CAFF7AC393E0D12ADC6E50"/>
 		</spawn>
 		<!-- Crack Kaidan Grappler -->
-		<spawn npc_id="212065" respawn_time="300">
+		<spawn npc_id="235465" respawn_time="295">
 			<spot x="1377.4728" y="2633.5676" z="297.9531" h="30"/>
 			<spot x="1310.2823" y="2718.9963" z="302.5" h="46"/>
 			<spot x="1366.1801" y="2694.4500" z="307.5518" h="30"/>
@@ -3131,7 +3131,7 @@
 			<spot x="1321.41" y="2698.09" z="302.0056" h="41"/>
 		</spawn>
 		<!-- Veteran Kaidan Scout -->
-		<spawn npc_id="211831" respawn_time="300">
+		<spawn npc_id="235479" respawn_time="295">
 			<spot x="1317.1930" y="2416.4985" z="272.8654" h="30"/>
 			<spot x="1427.85" y="2538.97" z="310.12436" h="64" walker_id="CC8A24CD7968F23FA475D2C2BCA8112C2AF475BD"/>
 			<spot x="1227.9700" y="2614.1499" z="291.7312" h="51"/>
@@ -3149,7 +3149,7 @@
 			<spot x="1667.53" y="2137.27" z="280.125" h="56" random_walk="10"/>
 		</spawn>
 		<!-- Veteran Kaidan Scout -->
-		<spawn npc_id="211830" respawn_time="300">
+		<spawn npc_id="235478" respawn_time="295">
 			<spot x="1385.0382" y="2528.8894" z="279.7908" h="60"/>
 		</spawn>
 		<!-- Trainee Kaidan Wallarm -->
@@ -3568,7 +3568,7 @@
 			<spot x="2275.1770" y="1120.8112" z="389.4694" h="75"/>
 		</spawn>
 		<!-- Kaidan Plantygrunt -->
-		<spawn npc_id="210869" respawn_time="300">
+		<spawn npc_id="235476" respawn_time="295">
 			<spot x="1377.9150" y="2636.1521" z="298.0000" h="91"/>
 			<spot x="1244.7521" y="2634.9121" z="292.5780" h="113"/>
 			<spot x="1231.9490" y="2722.5728" z="308.1636" h="51"/>
@@ -3648,7 +3648,7 @@
 			<spot x="1429.1" y="240.545" z="348.057" h="31"/>
 		</spawn>
 		<!-- Kaidan Charger -->
-		<spawn npc_id="210867" respawn_time="300">
+		<spawn npc_id="235482" respawn_time="295">
 			<spot x="1352.7441" y="2460.0764" z="275.2693" h="56"/>
 			<spot x="1282.1315" y="2580.2688" z="286.6332" h="60"/>
 			<spot x="1232.1957" y="2606.6216" z="291.8087" h="5"/>
@@ -3974,7 +3974,7 @@
 			<spot x="2423.4700" y="310.1771" z="495.4052" h="30"/>
 		</spawn>
 		<!-- Kaidan Wallarm -->
-		<spawn npc_id="210839" respawn_time="300">
+		<spawn npc_id="235481" respawn_time="295">
 			<spot x="1283.2784" y="2476.4529" z="266.3533" h="23"/>
 			<spot x="1405.6613" y="2480.4636" z="285.2500" h="90"/>
 			<spot x="1414.8481" y="2504.8672" z="285.4834" h="41"/>
@@ -4249,7 +4249,7 @@
 			<spot x="1274.1556" y="2401.2883" z="275.8798" h="75"/>
 		</spawn>
 		<!-- Kaidan Sharpeye -->
-		<spawn npc_id="210840" respawn_time="300">
+		<spawn npc_id="235480" respawn_time="295">
 			<spot x="1312.5" y="2458.0320" z="268.7440" h="90"/>
 			<spot x="1257.1567" y="2481.2942" z="265.6691" h="3"/>
 			<spot x="1371.3073" y="2464.1770" z="285.1620" h="33"/>
@@ -5170,7 +5170,7 @@
 			<spot x="374.7435" y="158.9271" z="274.4435" h="64"/>
 		</spawn>
 		<!-- Crack Kaidan Plantygrunt -->
-		<spawn npc_id="210892" respawn_time="300">
+		<spawn npc_id="235477" respawn_time="295">
 			<spot x="1364.4500" y="2692.2000" z="307.4059" h="40"/>
 			<spot x="1367.0455" y="2717.4751" z="306.3750" h="83"/>
 			<spot x="1376.4465" y="2705.2190" z="306.3750" h="53"/>

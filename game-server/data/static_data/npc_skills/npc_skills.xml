@@ -4374,14 +4374,16 @@
         <npc_skill id="16740" lv="19" prob="25"/>
         <npc_skill id="16742" lv="19" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="210839">
+    <!-- Kaidan Wallarm -->
+    <npc_skills npc_ids="210839 235481">
         <npc_skill id="16602" lv="19" prob="25"/>
         <npc_skill id="16606" lv="19" prob="25"/>
         <npc_skill id="16609" lv="19" prob="25"/>
         <npc_skill id="16611" lv="19" prob="25"/>
         <npc_skill id="16614" lv="19" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="210840">
+    <!-- Kaidan Sharpeye -->
+    <npc_skills npc_ids="210840 235480">
         <npc_skill id="16656" lv="19" prob="25"/>
         <npc_skill id="16745" lv="19" prob="25"/>
         <npc_skill id="16748" lv="19" prob="25"/>
@@ -4471,14 +4473,16 @@
         <npc_skill id="16738" lv="20" prob="25"/>
         <npc_skill id="16740" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="210867">
+    <!-- Kaidan Charger -->
+    <npc_skills npc_ids="210867 235482">
         <npc_skill id="16602" lv="20" prob="25"/>
         <npc_skill id="16606" lv="20" prob="25"/>
         <npc_skill id="16609" lv="20" prob="25"/>
         <npc_skill id="16611" lv="20" prob="25"/>
         <npc_skill id="16614" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="210869">
+    <!-- Kaidan Plantygrunt -->
+    <npc_skills npc_ids="210869 235476">
         <npc_skill id="16565" lv="20" prob="25"/>
         <npc_skill id="16633" lv="20" prob="25"/>
         <npc_skill id="16628" lv="20" prob="25"/>
@@ -4532,7 +4536,8 @@
         <npc_skill id="16531" lv="21" prob="25"/>
         <npc_skill id="16808" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="210892">
+    <!-- Crack Kaidan Plantygrunt -->
+    <npc_skills npc_ids="210892 235477">
         <npc_skill id="16565" lv="21" prob="25"/>
         <npc_skill id="16628" lv="21" prob="25"/>
         <npc_skill id="16633" lv="21" prob="25"/>
@@ -7162,13 +7167,15 @@
     <npc_skills npc_ids="211829">
         <npc_skill id="16516" lv="19" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="211830">
+    <!-- Veteran Kaidan Scout -->
+    <npc_skills npc_ids="211830 235478">
         <npc_skill id="16623" lv="19" prob="25"/>
         <npc_skill id="16656" lv="19" prob="25"/>
         <npc_skill id="16768" lv="19" prob="25"/>
         <npc_skill id="16770" lv="19" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="211831">
+    <!-- Veteran Kaidan Scout -->
+    <npc_skills npc_ids="211831 235479">
         <npc_skill id="16623" lv="20" prob="25"/>
         <npc_skill id="16656" lv="20" prob="25"/>
         <npc_skill id="16768" lv="20" prob="25"/>
@@ -8030,99 +8037,116 @@
         <npc_skill id="16529" lv="25" prob="25"/>
         <npc_skill id="16531" lv="25" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212058">
+    <!-- Crack Kaidan Charger -->
+    <npc_skills npc_ids="212058 235459">
         <npc_skill id="16606" lv="20" prob="25"/>
         <npc_skill id="16608" lv="20" prob="25"/>
         <npc_skill id="16616" lv="20" prob="25"/>
         <npc_skill id="16735" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212059">
+    <!-- Crack Kaidan Charger -->
+    <npc_skills npc_ids="212059 235460">
         <npc_skill id="16606" lv="21" prob="25"/>
         <npc_skill id="16608" lv="21" prob="25"/>
         <npc_skill id="16616" lv="21" prob="25"/>
         <npc_skill id="16735" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212060">
+    <!-- Crack Kaidan Wallarm -->
+    <npc_skills npc_ids="212060 235461">
         <npc_skill id="16605" lv="20" prob="25"/>
         <npc_skill id="16614" lv="20" prob="25"/>
         <npc_skill id="16735" lv="20" prob="25"/>
         <npc_skill id="16606" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212061">
+    <!-- Crack Kaidan Wallarm -->
+    <npc_skills npc_ids="212061 235462">
         <npc_skill id="16605" lv="21" prob="25"/>
         <npc_skill id="16614" lv="21" prob="25"/>
         <npc_skill id="16735" lv="21" prob="25"/>
     </npc_skills>
+    <!-- Veteran Smackstopper -->
     <npc_skills npc_ids="212062">
         <npc_skill id="16605" lv="19" prob="25"/>
         <npc_skill id="16738" lv="19" prob="25"/>
         <npc_skill id="16742" lv="19" prob="25"/>
         <npc_skill id="16741" lv="19" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212063">
+    <!-- Veteran Smackstopper -->
+    <npc_skills npc_ids="212063 235463">
         <npc_skill id="16605" lv="20" prob="25"/>
         <npc_skill id="16738" lv="20" prob="25"/>
         <npc_skill id="16742" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212064">
+    <!-- Crack Kaidan Grappler -->
+    <npc_skills npc_ids="212064 235464">
         <npc_skill id="16739" lv="20" prob="25"/>
         <npc_skill id="16741" lv="20" prob="25"/>
         <npc_skill id="16605" lv="20" prob="25"/>
         <npc_skill id="16737" lv="20" prob="25"/>
         <npc_skill id="16742" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212065">
+    <!-- Crack Kaidan Grappler -->
+    <npc_skills npc_ids="212065 235465">
         <npc_skill id="16605" lv="21" prob="25"/>
         <npc_skill id="16737" lv="21" prob="25"/>
         <npc_skill id="16739" lv="21" prob="25"/>
         <npc_skill id="16741" lv="21" prob="25"/>
         <npc_skill id="16742" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212066">
+    <!-- Crack Kaidan Slicer -->
+    <npc_skills npc_ids="212066 235466">
         <npc_skill id="16763" lv="20" prob="25"/>
         <npc_skill id="16765" lv="20" prob="25"/>
         <npc_skill id="16766" lv="20" prob="25"/>
         <npc_skill id="16770" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212067">
+    <!-- Crack Kaidan Slicer -->
+    <npc_skills npc_ids="212067 235467">
         <npc_skill id="16763" lv="21" prob="25"/>
         <npc_skill id="16766" lv="21" prob="25"/>
         <npc_skill id="16770" lv="21" prob="25"/>
         <npc_skill id="16765" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212068">
+    <!-- Crack Kaidan Snapper -->
+    <npc_skills npc_ids="212068 235468">
         <npc_skill id="16759" lv="20" prob="25"/>
         <npc_skill id="16760" lv="20" prob="25"/>
         <npc_skill id="16761" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212069">
+    <!-- Crack Kaidan Snapper -->
+    <npc_skills npc_ids="212069 235469">
         <npc_skill id="16759" lv="21" prob="25"/>
         <npc_skill id="16760" lv="21" prob="25"/>
         <npc_skill id="16761" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212070">
+    <!-- Crack Kaidan Loudmouth -->
+    <npc_skills npc_ids="212070 235470">
         <npc_skill id="16656" lv="20" prob="25"/>
         <npc_skill id="16745" lv="20" prob="25"/>
         <npc_skill id="16748" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212071">
+    <!-- Crack Kaidan Loudmouth -->
+    <npc_skills npc_ids="212071 235471">
         <npc_skill id="16656" lv="21" prob="25"/>
         <npc_skill id="16745" lv="21" prob="25"/>
         <npc_skill id="16748" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212072">
+    <!-- Kaidan Special Shaman -->
+    <npc_skills npc_ids="212072 235472">
         <npc_skill id="16775" lv="21" prob="25"/>
         <npc_skill id="16777" lv="21" prob="25"/>
         <npc_skill id="16776" lv="21" prob="25"/>
         <npc_skill id="16778" lv="21" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212074">
+    <!-- Crack Kaidan Witchdoctor -->
+    <npc_skills npc_ids="212074 235474">
         <npc_skill id="16643" lv="20" prob="25"/>
         <npc_skill id="16644" lv="20" prob="25"/>
         <npc_skill id="16780" lv="20" prob="25"/>
         <npc_skill id="16781" lv="20" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="212075">
+    <!-- Crack Kaidan Witchdoctor -->
+    <npc_skills npc_ids="212075 235475">
         <npc_skill id="16780" lv="21" prob="25"/>
     </npc_skills>
     <npc_skills npc_ids="212078">
