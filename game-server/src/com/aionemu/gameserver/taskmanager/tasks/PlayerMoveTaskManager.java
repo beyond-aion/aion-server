@@ -28,7 +28,10 @@ public class PlayerMoveTaskManager extends AbstractPeriodicTaskManager {
 	@Override
 	public void run() {
 		for (Creature player : movingPlayers.values()) {
-			player.getMoveController().moveToDestination();
+			if (player.isSpawned())
+				player.getMoveController().moveToDestination();
+			else
+				removePlayer(player);
 		}
 	}
 
