@@ -210,10 +210,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			reward += repose + salvation;
 		}
 
-		long oldExp = exp;
 		setExp(exp + reward);
-		if (exp == oldExp)
-			reward = repose = salvation = 0; // don't re-add used EoR and EoS since it boosts drop rates
 		if (player != null) {
 			if (rewardType != null) {
 				switch (rewardType) {
@@ -269,6 +266,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 						break;
 				}
+				if (getLevel() == 9 && exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(10))
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LEVEL_LIMIT_QUEST_NOT_FINISHED1());
 			}
 		}
 	}
