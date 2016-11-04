@@ -388,19 +388,16 @@ public class VisibleObjectSpawner {
 	 * @return
 	 */
 	public static Pet spawnPet(Player player, int petId) {
-
 		PetCommonData petCommonData = player.getPetList().getPet(petId);
-		if (petCommonData == null) {
+		if (petCommonData == null)
 			return null;
-		}
+
 		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(petId);
 		if (petTemplate == null)
 			return null;
 
-		PetController controller = new PetController();
-		Pet pet = new Pet(petTemplate, controller, petCommonData, player);
+		Pet pet = new Pet(petTemplate, new PetController(), petCommonData, player);
 		pet.setKnownlist(new PlayerAwareKnownList(pet));
-		player.setToyPet(pet);
 
 		float x = player.getX();
 		float y = player.getY();
@@ -409,8 +406,8 @@ public class VisibleObjectSpawner {
 		int worldId = player.getWorldId();
 		int instanceId = player.getInstanceId();
 		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, petId, x, y, z, heading);
-
 		SpawnEngine.bringIntoWorld(pet, spawn, instanceId);
+		player.setToyPet(pet);
 		return pet;
 	}
 

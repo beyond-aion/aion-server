@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author ATracer
@@ -42,17 +43,17 @@ public class PetSpawnService {
 			PeriodicSaveConfig.PLAYER_PETS * 1000, PeriodicSaveConfig.PLAYER_PETS * 1000));
 
 		Pet pet = VisibleObjectSpawner.spawnPet(player, petId);
-		// It means serious error or cheater - why its just nothing say "null"?
-		if (pet != null) {
-			if (System.currentTimeMillis() - pet.getCommonData().getDespawnTime().getTime() > 10 * 60 * 1000) // reset mood if pet was despawned for > 10 minutes
-				player.getPet().getCommonData().clearMoodStatistics();
-			player.getPetList().setLastUsedPetId(petId);
+		if (pet == null) {
+			AuditLogger.info(player, "tried to spawn pet with id " + petId);
+			return;
 		}
+		if (System.currentTimeMillis() - pet.getCommonData().getDespawnTime().getTime() > 10 * 60 * 1000) // reset mood if pet was despawned for > 10 minutes
+			player.getPet().getCommonData().clearMoodStatistics();
+		player.getPetList().setLastUsedPetId(petId);
 	}
 
 	/**
 	 * @param player
-	 * @param isManualDespawn
 	 */
 	public static final void dismissPet(Player player) {
 		Pet toyPet = player.getPet();
