@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -49,8 +48,6 @@ public class DecomposeAction extends AbstractItemAction {
 
 	private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
 	public static final int USAGE_DELAY = 3000;
-	private static Map<Integer, List<ItemTemplate>> specialManastones;
-	private static Map<Integer, List<ItemTemplate>> manastones;
 	private static Map<Race, int[]> chunkEarth = new HashMap<>();
 
 	static {
@@ -94,12 +91,14 @@ public class DecomposeAction extends AbstractItemAction {
 	private static int[] lesser_potions = { 162000003, 162000008, 162000042, 162000022, 162000013, 162000018, 162000047 };
 
 	private static int[] potion_50 = { 162000075, 162000076, 162000077, 162000078, 162000079, 162000080, 162000081 };
-	
+
 	private static int[] illusion_godstones = { 168000229, 168000230, 168000231, 168000232, 168000233, 168000234, 168000235, 168000236, 168000237,
 		168000238, 168000239, 168000240, 168000241, 168000242, 168000243, 168000244, 168000245 };
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+		if (player.getLifeStats().isAlreadyDead() || !player.isSpawned())
+			return false;
 		List<ExtractedItemsCollection> itemsCollections = null;
 		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		if (itemsCollections == null || itemsCollections.isEmpty()) {
@@ -108,7 +107,7 @@ public class DecomposeAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getNameId()));
 			return false;
 		}
-		if (player.getInventory().isFull()) {
+		if (player.getInventory().isFull() || player.getInventory().isFullSpecialCube() && containsSpecialCubeItems(itemsCollections, player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
 			return false;
 		}
@@ -119,9 +118,8 @@ public class DecomposeAction extends AbstractItemAction {
 	public void act(final Player player, final Item parentItem, final Item targetItem) {
 		player.getController().cancelUseItem();
 		Collection<ResultedItem> selectable = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId());
-		if (selectable != null && !selectable.isEmpty()) {
-			Iterator<ResultedItem> iter = selectable.iterator();
-			while (iter.hasNext()) {
+		if (selectable != null) {
+			for (Iterator<ResultedItem> iter = selectable.iterator(); iter.hasNext();) {
 				ResultedItem item = iter.next();
 				if (!item.isObtainableFor(player))
 					iter.remove();
@@ -132,14 +130,15 @@ public class DecomposeAction extends AbstractItemAction {
 		List<ExtractedItemsCollection> itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
 		final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
-		if (selectedCollection.getItems().isEmpty() && selectedCollection.getRandomItems().isEmpty()) {
-			log.warn("Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getNameId()));
+		if (selectedCollection.getItems().stream().filter(i -> i.isObtainableFor(player)).count() == 0 && selectedCollection.getRandomItems().isEmpty()) {
+			log.warn(
+				"Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getNameId()));
 			return;
 		}
 
-		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0));
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0), true);
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -148,8 +147,8 @@ public class DecomposeAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
@@ -164,283 +163,258 @@ public class DecomposeAction extends AbstractItemAction {
 				boolean validAction = postValidate(player, parentItem);
 				if (validAction) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getNameId()));
-					if (selectedCollection.getItems().size() > 0) {
-						for (ResultedItem resultItem : selectedCollection.getItems()) {
-							if (resultItem.isObtainableFor(player)) {
-								ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), true,
-									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
-							}
+					for (ResultedItem resultItem : selectedCollection.getItems()) {
+						if (resultItem.isObtainableFor(player)) {
+							ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), true,
+								new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 						}
 					}
-					if (selectedCollection.getRandomItems().size() > 0) {
-						for (RandomItem randomItem : selectedCollection.getRandomItems()) {
-							RandomType randomType = randomItem.getType();
-							if (randomType != null) {
-								int randomId = 0;
-								int i = 0;
-								int itemLvl = parentItem.getItemTemplate().getLevel();
-								switch (randomItem.getType()) {
-									case ENCHANTMENT:
-										do {
-											randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.get(4);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case MANASTONE:
-									case MANASTONE_COMMON_GRADE_10:
-									case MANASTONE_COMMON_GRADE_20:
-									case MANASTONE_COMMON_GRADE_30:
-									case MANASTONE_COMMON_GRADE_40:
-									case MANASTONE_COMMON_GRADE_50:
-									case MANASTONE_COMMON_GRADE_60:
-									case MANASTONE_COMMON_GRADE_70:
-									case MANASTONE_RARE_GRADE_10:
-									case MANASTONE_RARE_GRADE_20:
-									case MANASTONE_RARE_GRADE_30:
-									case MANASTONE_RARE_GRADE_40:
-									case MANASTONE_RARE_GRADE_50:
-									case MANASTONE_RARE_GRADE_60:
-									case MANASTONE_RARE_GRADE_70:
-									case MANASTONE_LEGEND_GRADE_10:
-									case MANASTONE_LEGEND_GRADE_20:
-									case MANASTONE_LEGEND_GRADE_30:
-									case MANASTONE_LEGEND_GRADE_40:
-									case MANASTONE_LEGEND_GRADE_50:
-									case MANASTONE_LEGEND_GRADE_60:
-									case MANASTONE_LEGEND_GRADE_70:
-										if (manastones == null) {
-											manastones = DataManager.ITEM_DATA.getManastones();
-										}
-										if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level)
-											itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
-										else
-											itemLvl = randomType.getLevel();
-										List<ItemTemplate> stones = manastones.get(itemLvl);
-										if (stones == null) {
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+					for (RandomItem randomItem : selectedCollection.getRandomItems()) {
+						RandomType randomType = randomItem.getType();
+						if (randomType != null) {
+							int randomId = 0;
+							int i = 0;
+							int itemLvl = parentItem.getItemTemplate().getLevel();
+							switch (randomItem.getType()) {
+								case ENCHANTMENT:
+									do {
+										randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.get(4);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-										if (!randomType.equals(RandomType.MANASTONE)) {
-											final ItemQuality itemQuality;
-											if (randomType.name().contains("RARE"))
-												itemQuality = ItemQuality.RARE;
-											else if (randomType.name().contains("LEGEND"))
-												itemQuality = ItemQuality.LEGEND;
-											else
-												itemQuality = ItemQuality.COMMON;
-											List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
-											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
-										} else {
-											List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() != ItemQuality.LEGEND).collect(Collectors.toList());
-											randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
-										}
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case MANASTONE:
+								case MANASTONE_COMMON_GRADE_10:
+								case MANASTONE_COMMON_GRADE_20:
+								case MANASTONE_COMMON_GRADE_30:
+								case MANASTONE_COMMON_GRADE_40:
+								case MANASTONE_COMMON_GRADE_50:
+								case MANASTONE_COMMON_GRADE_60:
+								case MANASTONE_COMMON_GRADE_70:
+								case MANASTONE_RARE_GRADE_10:
+								case MANASTONE_RARE_GRADE_20:
+								case MANASTONE_RARE_GRADE_30:
+								case MANASTONE_RARE_GRADE_40:
+								case MANASTONE_RARE_GRADE_50:
+								case MANASTONE_RARE_GRADE_60:
+								case MANASTONE_RARE_GRADE_70:
+								case MANASTONE_LEGEND_GRADE_10:
+								case MANASTONE_LEGEND_GRADE_20:
+								case MANASTONE_LEGEND_GRADE_30:
+								case MANASTONE_LEGEND_GRADE_40:
+								case MANASTONE_LEGEND_GRADE_50:
+								case MANASTONE_LEGEND_GRADE_60:
+								case MANASTONE_LEGEND_GRADE_70:
+									if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level)
+										itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
+									else
+										itemLvl = randomType.getLevel();
+									List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones().get(itemLvl);
+									if (stones == null) {
+										log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
 										break;
-									case SPECIAL_MANASTONE_RARE_GRADE:
-									case SPECIAL_MANASTONE_LEGEND_GRADE:
-									case SPECIAL_MANASTONE_UNIQUE_GRADE:
-									case SPECIAL_MANASTONE_EPIC_GRADE:
-										if (specialManastones == null) {
-											specialManastones = DataManager.ITEM_DATA.getSpecialManastones();
-										}
-										List<ItemTemplate> ancientStones = specialManastones.get(randomType.getLevel());
-										if (ancientStones == null) {
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
-											break;
-										}
+									}
+									if (!randomType.equals(RandomType.MANASTONE)) {
 										final ItemQuality itemQuality;
 										if (randomType.name().contains("RARE"))
 											itemQuality = ItemQuality.RARE;
 										else if (randomType.name().contains("LEGEND"))
 											itemQuality = ItemQuality.LEGEND;
-										else if (randomType.name().contains("UNIQUE"))
-											itemQuality = ItemQuality.UNIQUE;
-										else if (randomType.name().contains("EPIC"))
-											itemQuality = ItemQuality.EPIC;
 										else
 											itemQuality = ItemQuality.COMMON;
-										List<ItemTemplate> selectedStones = ancientStones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
+										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
 										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+									} else {
+										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() != ItemQuality.LEGEND)
+											.collect(Collectors.toList());
+										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+									}
 
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case SPECIAL_MANASTONE_RARE_GRADE:
+								case SPECIAL_MANASTONE_LEGEND_GRADE:
+								case SPECIAL_MANASTONE_UNIQUE_GRADE:
+								case SPECIAL_MANASTONE_EPIC_GRADE:
+									List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getSpecialManastones().get(randomType.getLevel());
+									if (ancientStones == null) {
+										log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+										break;
+									}
+									final ItemQuality itemQuality;
+									if (randomType.name().contains("RARE"))
+										itemQuality = ItemQuality.RARE;
+									else if (randomType.name().contains("LEGEND"))
+										itemQuality = ItemQuality.LEGEND;
+									else if (randomType.name().contains("UNIQUE"))
+										itemQuality = ItemQuality.UNIQUE;
+									else if (randomType.name().contains("EPIC"))
+										itemQuality = ItemQuality.EPIC;
+									else
+										itemQuality = ItemQuality.COMMON;
+									List<ItemTemplate> selectedStones = ancientStones.stream().filter(t -> t.getItemQuality() == itemQuality)
+										.collect(Collectors.toList());
+									randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case CHUNK_EARTH:
+									int[] earth = chunkEarth.get(player.getRace());
+
+									randomId = earth[Rnd.get(earth.length)];
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case CHUNK_SAND:
+									int[] sand = chunkSand.get(player.getRace());
+
+									randomId = sand[Rnd.get(sand.length)];
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case CHUNK_ROCK:
+									randomId = chunkRock[Rnd.get(chunkRock.length)];
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case CHUNK_GEMSTONE:
+									randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case SCROLLS:
+									randomId = scrolls[Rnd.get(scrolls.length)];
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case POTION:
+									randomId = potion[Rnd.get(potion.length)];
+
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case ANCIENTITEMS:
+									do {
+										randomId = Rnd.get(186000051, 186000066);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+											break;
 										}
-										break;
-									case CHUNK_EARTH:
-										int[] earth = chunkEarth.get(player.getRace());
-
-										randomId = earth[Rnd.get(earth.length)];
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case ANCIENT_CROWN:
+									do {
+										randomId = Rnd.get(186000051, 186000054);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+											break;
 										}
-										break;
-									case CHUNK_SAND:
-										int[] sand = chunkSand.get(player.getRace());
-
-										randomId = sand[Rnd.get(sand.length)];
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case ANCIENT_GOBLET:
+									do {
+										randomId = Rnd.get(186000055, 186000058);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+											break;
 										}
-										break;
-									case CHUNK_ROCK:
-										randomId = chunkRock[Rnd.get(chunkRock.length)];
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case ANCIENT_SEAL:
+									do {
+										randomId = Rnd.get(186000059, 186000062);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+											break;
 										}
-										break;
-									case CHUNK_GEMSTONE:
-										randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case ANCIENT_ICON:
+									do {
+										randomId = Rnd.get(186000063, 186000066);
+										i++;
+										if (i > 50) {
+											randomId = 0;
+											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+											break;
 										}
-										break;
-									case SCROLLS:
-										randomId = scrolls[Rnd.get(scrolls.length)];
+									} while (!ItemService.checkRandomTemplate(randomId));
+									break;
+								case LESSER_POTIONS:
+									randomId = lesser_potions[Rnd.get(lesser_potions.length)];
 
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
-										break;
-									case POTION:
-										randomId = potion[Rnd.get(potion.length)];
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case POTION_50:
+									randomId = potion_50[Rnd.get(potion_50.length)];
 
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
-										break;
-									case ANCIENTITEMS:
-										do {
-											randomId = Rnd.get(186000051, 186000066);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case ANCIENT_CROWN:
-										do {
-											randomId = Rnd.get(186000051, 186000054);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case ANCIENT_GOBLET:
-										do {
-											randomId = Rnd.get(186000055, 186000058);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case ANCIENT_SEAL:
-										do {
-											randomId = Rnd.get(186000059, 186000062);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case ANCIENT_ICON:
-										do {
-											randomId = Rnd.get(186000063, 186000066);
-											i++;
-											if (i > 50) {
-												randomId = 0;
-												log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-												break;
-											}
-										} while (!ItemService.checkRandomTemplate(randomId));
-										break;
-									case LESSER_POTIONS:
-										randomId = lesser_potions[Rnd.get(lesser_potions.length)];
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
+								case ILLUSION_GODSTONE:
+									randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
 
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
-										break;
-									case POTION_50:
-										randomId = potion_50[Rnd.get(potion_50.length)];
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
-										break;
-									case ILLUSION_GODSTONE:
-										randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
-
-										if (!ItemService.checkRandomTemplate(randomId)) {
-											log.warn("DecomposeAction random item id not found. " + randomId);
-											return;
-										}
-										break;
-								}
-								if (randomId != 0 && randomId != 167000524)
-									ItemService.addItem(player, randomId, randomItem.getResultCount(), true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+									if (!ItemService.checkRandomTemplate(randomId)) {
+										log.warn("DecomposeAction random item id not found. " + randomId);
+										return;
+									}
+									break;
 							}
+							if (randomId != 0 && randomId != 167000524)
+								ItemService.addItem(player, randomId, randomItem.getResultCount(), true,
+									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 						}
 					}
 				}
-				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0), true);
 			}
 
 			boolean postValidate(Player player, Item parentItem) {
 				if (!canAct(player, parentItem, targetItem)) {
 					return false;
 				}
-				Storage inventory = player.getInventory();
-				int slotReq = calcMaxCountOfSlots(selectedCollection, player, false);
-				int specialSlotreq = calcMaxCountOfSlots(selectedCollection, player, true);
-				if (slotReq > 0 && inventory.getFreeSlots() < slotReq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
-					return false;
-				}
-				if (specialSlotreq > 0 && inventory.getSpecialCubeFreeSlots() < specialSlotreq) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVENTORY_IS_FULL());
-					return false;
-				}
-				if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
-					return false;
-				}
 				if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
-					return false;
-				}
-				if (selectedCollection.getItems().isEmpty() && selectedCollection.getRandomItems().isEmpty()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getNameId()));
 					return false;
 				}
 				return true;
@@ -459,10 +433,7 @@ public class DecomposeAction extends AbstractItemAction {
 		int playerLevel = player.getLevel();
 		Collection<ExtractedItemsCollection> result = new FastTable<>();
 		for (ExtractedItemsCollection collection : itemsCollections) {
-			if (collection.getMinLevel() > playerLevel) {
-				continue;
-			}
-			if (collection.getMaxLevel() > 0 && collection.getMaxLevel() < playerLevel) {
+			if (collection.getMinLevel() > playerLevel || collection.getMaxLevel() < playerLevel) {
 				continue;
 			}
 			result.add(collection);
@@ -491,20 +462,21 @@ public class DecomposeAction extends AbstractItemAction {
 		return selectedCollection;
 	}
 
-	private int calcMaxCountOfSlots(ExtractedItemsCollection itemsCollections, Player player, boolean special) {
-		int maxCount = 0;
-		for (ResultedItem item : itemsCollections.getItems()) {
-			if (item.isObtainableFor(player)) {
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
-				if (template == null)
-					log.error("Detected invalid item id during decompose action " + item.getItemId());
-				else if (special && template.getExtraInventoryId() > 0)
-					maxCount++;
-				else if (template.getExtraInventoryId() < 1)
-					maxCount++;
+	private boolean containsSpecialCubeItems(List<ExtractedItemsCollection> itemGroups, Player player) {
+		for (ExtractedItemsCollection items : itemGroups) {
+			if (items.getMinLevel() > player.getLevel() || items.getMaxLevel() < player.getLevel())
+				continue;
+			for (ResultedItem item : items.getItems()) {
+				if (item.isObtainableFor(player)) {
+					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
+					if (template == null)
+						log.error("Detected invalid item id during decompose action " + item.getItemId());
+					if (template.getExtraInventoryId() > 0)
+						return true;
+				}
 			}
 		}
-		return maxCount;
+		return false;
 	}
 
 	private float calcSumOfChances(Collection<ExtractedItemsCollection> itemsCollections) {

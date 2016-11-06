@@ -10,11 +10,11 @@ import javax.xml.bind.annotation.XmlType;
 public class ExtractedItemsCollection extends ResultedItemsCollection {
 
 	@XmlAttribute(name = "chance")
-	protected float chance = 100f;
+	private float chance = 100f;
 	@XmlAttribute(name = "minlevel")
-	protected int minLevel;
+	private int minLevel;
 	@XmlAttribute(name = "maxlevel")
-	protected int maxLevel;
+	private int maxLevel = 99;
 
 	public final float getChance() {
 		return chance;
