@@ -399,11 +399,4 @@ public abstract class Storage implements IStorage {
 	public int size() {
 		return itemStorage.size();
 	}
-
-	public void clear() {
-		for (Item i : itemStorage.getItems()) {
-			remove(i);
-		}
-	}
-
 }

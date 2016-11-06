@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
@@ -99,13 +98,9 @@ public class AccountService {
 			}
 		}
 		if (account.isEmpty()) {
-			removeAccountWH(account.getId());
-			account.getAccountWarehouse().clear();
+			DAOManager.getDAO(InventoryDAO.class).deleteAccountWH(account.getId());
+			loadAccountWarehouse(account);
 		}
-	}
-
-	private static void removeAccountWH(int accountId) {
-		DAOManager.getDAO(InventoryDAO.class).deleteAccountWH(accountId);
 	}
 
 	/**
@@ -119,14 +114,13 @@ public class AccountService {
 		Account account = new Account(accountId);
 
 		PlayerDAO playerDAO = DAOManager.getDAO(PlayerDAO.class);
-		PlayerAppearanceDAO appereanceDAO = DAOManager.getDAO(PlayerAppearanceDAO.class);
 
 		List<Integer> playerIdList = playerDAO.getPlayerOidsOnAccount(accountId);
 
 		for (int playerId : playerIdList) {
 			PlayerCommonData playerCommonData = playerDAO.loadPlayerCommonData(playerId);
 			CharacterBanInfo cbi = DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(playerId);
-			PlayerAppearance appereance = appereanceDAO.load(playerId);
+			PlayerAppearance appereance = DAOManager.getDAO(PlayerAppearanceDAO.class).load(playerId);
 			LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerId);
 			// Load only equipment and its stones to display on character selection screen
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(playerId);
@@ -135,18 +129,15 @@ public class AccountService {
 			playerDAO.setCreationDeletionTime(acData);
 
 			account.addPlayerAccountData(acData);
-
-			if (account.getAccountWarehouse() == null) {
-				Storage accWarehouse = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerId, StorageType.ACCOUNT_WAREHOUSE);
-				ItemService.loadItemStones(accWarehouse.getItems());
-				account.setAccountWarehouse(accWarehouse);
-			}
 		}
 
-		// For new accounts - create empty account warehouse
-		if (account.getAccountWarehouse() == null) {
-			account.setAccountWarehouse(new PlayerStorage(StorageType.ACCOUNT_WAREHOUSE));
-		}
+		loadAccountWarehouse(account);
 		return account;
+	}
+
+	private static void loadAccountWarehouse(Account account) {
+		Storage wh = DAOManager.getDAO(InventoryDAO.class).loadStorage(account.getId(), StorageType.ACCOUNT_WAREHOUSE);
+		ItemService.loadItemStones(wh.getItems());
+		account.setAccountWarehouse(wh);
 	}
 }

@@ -16,13 +16,14 @@ import javolution.util.FastTable;
 public abstract class InventoryDAO implements IDFactoryAwareDAO {
 
 	/**
-	 * @param playerId
+	 * @param ownerId
+	 *          - account id for account warehouse, legion id for legion warehouse, player id for all other storage types
 	 * @param storageType
 	 * @return IStorage
 	 */
-	public abstract Storage loadStorage(int playerId, StorageType storageType);
+	public abstract Storage loadStorage(int ownerId, StorageType storageType);
 
-	public abstract List<Item> loadStorageDirect(int playerId, StorageType storageType);
+	public abstract List<Item> loadStorageDirect(int ownerId, StorageType storageType);
 
 	/**
 	 * @param player
