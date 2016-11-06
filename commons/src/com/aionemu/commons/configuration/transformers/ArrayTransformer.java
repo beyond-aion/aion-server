@@ -34,9 +34,9 @@ public class ArrayTransformer implements PropertyTransformer<Object[]> {
 			if (value.isEmpty() || value.equals(Property.DEFAULT_VALUE))
 				return (Object[]) Array.newInstance(type, 0); // return empty
 
-			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer((Class<?>) type);
+			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(type);
 			List<Object> list = new FastTable<>();
-			for (String val : value.split("[ ]*,[ ]*"))
+			for (String val : value.split(" *, *"))
 				list.add(pt.transform(val, field, new Type[] {}));
 
 			return list.toArray();
