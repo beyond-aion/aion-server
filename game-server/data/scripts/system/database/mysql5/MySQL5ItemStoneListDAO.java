@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -28,8 +31,6 @@ import com.aionemu.gameserver.model.items.ItemStone;
 import com.aionemu.gameserver.model.items.ItemStone.ItemStoneType;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Sets;
 
 /**
  * @author ATracer
@@ -44,7 +45,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneAddPredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean apply(@Nullable ItemStone itemStone) {
+		public boolean test(@Nullable ItemStone itemStone) {
 			return itemStone != null && PersistentState.NEW == itemStone.getPersistentState();
 		}
 
@@ -52,7 +53,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneDeletedPredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean apply(@Nullable ItemStone itemStone) {
+		public boolean test(@Nullable ItemStone itemStone) {
 			return itemStone != null && PersistentState.DELETED == itemStone.getPersistentState();
 		}
 
@@ -60,7 +61,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneUpdatePredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean apply(@Nullable ItemStone itemStone) {
+		public boolean test(@Nullable ItemStone itemStone) {
 			return itemStone != null && PersistentState.UPDATE_REQUIRED == itemStone.getPersistentState();
 		}
 
@@ -68,63 +69,62 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 	@Override
 	public void load(final Collection<Item> items) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				for (Item item : items) {
-					if (item.getItemTemplate().isArmor() || item.getItemTemplate().isWeapon()) {
-						stmt.setInt(1, item.getObjectId());
-						try (ResultSet rset = stmt.executeQuery()) {
-							while (rset.next()) {
-								int itemId = rset.getInt("item_id");
-								int slot = rset.getInt("slot");
-								int stoneType = rset.getInt("category");
-								int activatedCount = rset.getInt("proc_count");
-								switch (stoneType) {
-									case 0:
-										if (item.getSockets(false) <= item.getItemStonesSize()) {
-											log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
-											if (EnchantsConfig.CLEAN_STONE) {
-												deleteItemStone(con, item.getObjectId(), slot, stoneType);
-											}
-											continue;
-										}
-										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
-											&& slot >= item.getItemTemplate().getSpecialSlots()) {
-											log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
-											if (EnchantsConfig.CLEAN_STONE) {
-												deleteItemStone(con, item.getObjectId(), slot, stoneType);
-											}
-											continue;
-										}
-										item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
-										break;
-									case 1:
-										item.setGodStone(new GodStone(item.getObjectId(), activatedCount, itemId, PersistentState.UPDATED));
-										break;
-									case 2:
-										if (item.getSockets(true) <= item.getFusionStonesSize()) {
-											log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
-											if (EnchantsConfig.CLEAN_STONE) {
-												deleteItemStone(con, item.getObjectId(), slot, stoneType);
-											}
-											continue;
-										}
-										if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
-											&& slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
-											log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
-											if (EnchantsConfig.CLEAN_STONE) {
-												deleteItemStone(con, item.getObjectId(), slot, stoneType);
-											}
-											continue;
-										}
-										item.getFusionStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
-										break;
-									case 3:
-										item.setIdianStone(new IdianStone(itemId, PersistentState.UPDATE_REQUIRED, item, rset.getInt("polishNumber"), rset
-											.getInt("polishCharge")));
-										break;
+		List<Item> validItems = items.stream().filter(i -> i.getItemTemplate().isArmor() || i.getItemTemplate().isWeapon()).collect(Collectors.toList());
+		if (validItems.isEmpty())
+			return;
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			for (Item item : validItems) {
+				stmt.setInt(1, item.getObjectId());
+				try (ResultSet rset = stmt.executeQuery()) {
+					while (rset.next()) {
+						int itemId = rset.getInt("item_id");
+						int slot = rset.getInt("slot");
+						int stoneType = rset.getInt("category");
+						int activatedCount = rset.getInt("proc_count");
+						switch (stoneType) {
+							case 0:
+								if (item.getSockets(false) <= item.getItemStonesSize()) {
+									log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
+									if (EnchantsConfig.CLEAN_STONE) {
+										deleteItemStone(con, item.getObjectId(), slot, stoneType);
+									}
+									continue;
 								}
-							}
+								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
+									&& slot >= item.getItemTemplate().getSpecialSlots()) {
+									log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
+									if (EnchantsConfig.CLEAN_STONE) {
+										deleteItemStone(con, item.getObjectId(), slot, stoneType);
+									}
+									continue;
+								}
+								item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
+								break;
+							case 1:
+								item.setGodStone(new GodStone(item.getObjectId(), activatedCount, itemId, PersistentState.UPDATED));
+								break;
+							case 2:
+								if (item.getSockets(true) <= item.getFusionStonesSize()) {
+									log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
+									if (EnchantsConfig.CLEAN_STONE) {
+										deleteItemStone(con, item.getObjectId(), slot, stoneType);
+									}
+									continue;
+								}
+								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
+									&& slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
+									log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
+									if (EnchantsConfig.CLEAN_STONE) {
+										deleteItemStone(con, item.getObjectId(), slot, stoneType);
+									}
+									continue;
+								}
+								item.getFusionStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
+								break;
+							case 3:
+								item.setIdianStone(
+									new IdianStone(itemId, PersistentState.UPDATE_REQUIRED, item, rset.getInt("polishNumber"), rset.getInt("polishCharge")));
+								break;
 						}
 					}
 				}
@@ -140,10 +140,10 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			return;
 		}
 
-		Set<ManaStone> manaStones = Sets.newHashSet();
-		Set<ManaStone> fusionStones = Sets.newHashSet();
-		Set<GodStone> godStones = Sets.newHashSet();
-		Set<IdianStone> idianStones = Sets.newHashSet();
+		Set<ManaStone> manaStones = new HashSet<>();
+		Set<ManaStone> fusionStones = new HashSet<>();
+		Set<GodStone> godStones = new HashSet<>();
+		Set<IdianStone> idianStones = new HashSet<>();
 
 		for (Item item : items) {
 			if (item.hasManaStones()) {
@@ -194,13 +194,12 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			return;
 		}
 
-		Set<? extends ItemStone> stonesToAdd = Sets.filter(stones, itemStoneAddPredicate);
-		Set<? extends ItemStone> stonesToDelete = Sets.filter(stones, itemStoneDeletedPredicate);
-		Set<? extends ItemStone> stonesToUpdate = Sets.filter(stones, itemStoneUpdatePredicate);
+		Set<ItemStone> stonesToAdd = stones.stream().filter(itemStoneAddPredicate).collect(Collectors.toSet());
+		Set<ItemStone> stonesToDelete = stones.stream().filter(itemStoneDeletedPredicate).collect(Collectors.toSet());
+		Set<ItemStone> stonesToUpdate = stones.stream().filter(itemStoneUpdatePredicate).collect(Collectors.toSet());
 
-		Connection con = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		try (Connection con = DatabaseFactory.getConnection()) {
+
 			con.setAutoCommit(false);
 
 			deleteItemStones(con, stonesToDelete, ist);
@@ -209,8 +208,6 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 
 		} catch (SQLException e) {
 			log.error("Can't save stones", e);
-		} finally {
-			DatabaseFactory.close(con);
 		}
 
 		for (ItemStone is : stones) {
@@ -218,16 +215,12 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 		}
 	}
 
-	private void addItemStones(Connection con, Collection<? extends ItemStone> itemStones, ItemStoneType ist) {
-
+	private void addItemStones(Connection con, Collection<ItemStone> itemStones, ItemStoneType ist) {
 		if (GenericValidator.isBlankOrNull(itemStones)) {
 			return;
 		}
 
-		PreparedStatement st = null;
-		try {
-			st = con.prepareStatement(INSERT_QUERY);
-
+		try (PreparedStatement st = con.prepareStatement(INSERT_QUERY)) {
 			for (ItemStone is : itemStones) {
 				st.setInt(1, is.getItemObjId());
 				st.setInt(2, is.getItemId());
@@ -255,20 +248,15 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		} finally {
-			DatabaseFactory.close(st);
 		}
 	}
 
-	private void updateItemStones(Connection con, Collection<? extends ItemStone> itemStones, ItemStoneType ist) {
+	private void updateItemStones(Connection con, Collection<ItemStone> itemStones, ItemStoneType ist) {
 		if (GenericValidator.isBlankOrNull(itemStones)) {
 			return;
 		}
 
-		PreparedStatement st = null;
-		try {
-			st = con.prepareStatement(UPDATE_QUERY);
-
+		try (PreparedStatement st = con.prepareStatement(UPDATE_QUERY)) {
 			for (ItemStone is : itemStones) {
 				st.setInt(1, is.getItemId());
 				st.setInt(2, is.getSlot());
@@ -295,20 +283,15 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		} finally {
-			DatabaseFactory.close(st);
 		}
 	}
 
-	private void deleteItemStones(Connection con, Collection<? extends ItemStone> itemStones, ItemStoneType ist) {
+	private void deleteItemStones(Connection con, Collection<ItemStone> itemStones, ItemStoneType ist) {
 		if (GenericValidator.isBlankOrNull(itemStones)) {
 			return;
 		}
 
-		PreparedStatement st = null;
-		try {
-			st = con.prepareStatement(DELETE_QUERY);
-
+		try (PreparedStatement st = con.prepareStatement(DELETE_QUERY)) {
 			// TODO: Shouldn't we update stone slot?
 			for (ItemStone is : itemStones) {
 				st.setInt(1, is.getItemObjId());
@@ -322,24 +305,17 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		} finally {
-			DatabaseFactory.close(st);
 		}
 	}
 
 	private void deleteItemStone(Connection con, int uid, int slot, int category) {
-
-		PreparedStatement st = null;
-		try {
-			st = con.prepareStatement(DELETE_QUERY);
+		try (PreparedStatement st = con.prepareStatement(DELETE_QUERY)) {
 			st.setInt(1, uid);
 			st.setInt(2, slot);
 			st.setInt(3, category);
 			st.execute();
 		} catch (SQLException e) {
 			log.error("Error occured while saving item stones", e);
-		} finally {
-			DatabaseFactory.close(st);
 		}
 	}
 

@@ -135,7 +135,6 @@ public class Player extends Creature {
 	private Storage[] petBag = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
 	private Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
 	private Storage regularWarehouse;
-	private Storage accountWarehouse;
 	private Equipment equipment;
 	private HouseRegistry houseRegistry;
 
@@ -325,7 +324,7 @@ public class Player extends Creature {
 	 * @return AionConnection of this player.
 	 */
 	public AionConnection getClientConnection() {
-		return this.clientConnection;
+		return clientConnection;
 	}
 
 	public MacroList getMacroList() {
@@ -475,15 +474,15 @@ public class Player extends Creature {
 	}
 
 	public int getQuestExpands() {
-		return this.playerCommonData.getQuestExpands();
+		return playerCommonData.getQuestExpands();
 	}
 
 	public int getNpcExpands() {
-		return this.playerCommonData.getNpcExpands();
+		return playerCommonData.getNpcExpands();
 	}
 
 	public int getItemExpands() {
-		return this.playerCommonData.getItemExpands();
+		return playerCommonData.getItemExpands();
 	}
 
 	public void setCubeLimit() {
@@ -564,25 +563,18 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param inventory
-	 *          the inventory to set Inventory should be set right after player object is created
+	 * @param storage
+	 *          the storage to set (should be set right after player object is created)
 	 */
-	public void setStorage(Storage storage, StorageType storageType) {
-		if (storageType == StorageType.CUBE) {
-			this.inventory = storage;
-		}
-		if (storageType.getId() >= StorageType.PET_BAG_MIN && storageType.getId() <= StorageType.PET_BAG_MAX) {
-			this.petBag[storageType.getId() - StorageType.PET_BAG_MIN] = storage;
-		}
-		if (storageType.getId() >= StorageType.HOUSE_WH_MIN && storageType.getId() <= StorageType.HOUSE_WH_MAX) {
-			this.cabinets[storageType.getId() - StorageType.HOUSE_WH_MIN] = storage;
-		}
-		if (storageType == StorageType.REGULAR_WAREHOUSE) {
-			this.regularWarehouse = storage;
-		}
-		if (storageType == StorageType.ACCOUNT_WAREHOUSE) {
-			this.accountWarehouse = storage;
-		}
+	public void setStorage(Storage storage) {
+		if (storage.getStorageType() == StorageType.CUBE)
+			inventory = storage;
+		else if (storage.getStorageType().getId() >= StorageType.PET_BAG_MIN && storage.getStorageType().getId() <= StorageType.PET_BAG_MAX)
+			petBag[storage.getStorageType().getId() - StorageType.PET_BAG_MIN] = storage;
+		else if (storage.getStorageType().getId() >= StorageType.HOUSE_WH_MIN && storage.getStorageType().getId() <= StorageType.HOUSE_WH_MAX)
+			cabinets[storage.getStorageType().getId() - StorageType.HOUSE_WH_MIN] = storage;
+		else if (storage.getStorageType() == StorageType.REGULAR_WAREHOUSE)
+			regularWarehouse = storage;
 		storage.setOwner(this);
 	}
 
@@ -591,15 +583,17 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public IStorage getStorage(int storageType) {
+		if (storageType == StorageType.CUBE.getId())
+			return inventory;
+
 		if (storageType == StorageType.REGULAR_WAREHOUSE.getId())
 			return regularWarehouse;
 
 		if (storageType == StorageType.ACCOUNT_WAREHOUSE.getId())
-			return accountWarehouse;
+			return playerAccount.getAccountWarehouse();
 
-		if (storageType == StorageType.LEGION_WAREHOUSE.getId() && getLegion() != null) {
+		if (storageType == StorageType.LEGION_WAREHOUSE.getId() && getLegion() != null)
 			return new LegionStorageProxy(getLegion().getLegionWarehouse(), this);
-		}
 
 		if (storageType >= StorageType.PET_BAG_MIN && storageType <= StorageType.PET_BAG_MAX)
 			return petBag[storageType - StorageType.PET_BAG_MIN];
@@ -607,13 +601,11 @@ public class Player extends Creature {
 		if (storageType >= StorageType.HOUSE_WH_MIN && storageType <= StorageType.HOUSE_WH_MAX)
 			return cabinets[storageType - StorageType.HOUSE_WH_MIN];
 
-		if (storageType == StorageType.CUBE.getId())
-			return inventory;
 		return null;
 	}
 
 	public Storage[] getPetBag() {
-		return this.petBag;
+		return petBag;
 	}
 
 	/**
@@ -624,55 +616,15 @@ public class Player extends Creature {
 	public List<Item> getDirtyItemsToUpdate() {
 		List<Item> dirtyItems = new FastTable<>();
 
-		IStorage cubeStorage = getStorage(StorageType.CUBE.getId());
-		if (cubeStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-			dirtyItems.addAll(cubeStorage.getItemsWithKinah());
-			dirtyItems.addAll(cubeStorage.getDeletedItems());
-			cubeStorage.setPersistentState(PersistentState.UPDATED);
-		}
-
-		IStorage regularWhStorage = getStorage(StorageType.REGULAR_WAREHOUSE.getId());
-		if (regularWhStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-			dirtyItems.addAll(regularWhStorage.getItemsWithKinah());
-			dirtyItems.addAll(regularWhStorage.getDeletedItems());
-			regularWhStorage.setPersistentState(PersistentState.UPDATED);
-		}
-
-		IStorage accountWhStorage = getStorage(StorageType.ACCOUNT_WAREHOUSE.getId());
-		if (accountWhStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-			dirtyItems.addAll(accountWhStorage.getItemsWithKinah());
-			dirtyItems.addAll(accountWhStorage.getDeletedItems());
-			accountWhStorage.setPersistentState(PersistentState.UPDATED);
-		}
-
-		IStorage legionWhStorage = getStorage(StorageType.LEGION_WAREHOUSE.getId());
-		if (legionWhStorage != null) {
-			if (legionWhStorage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				dirtyItems.addAll(legionWhStorage.getItemsWithKinah());
-				dirtyItems.addAll(legionWhStorage.getDeletedItems());
-				legionWhStorage.setPersistentState(PersistentState.UPDATED);
+		for (StorageType st : StorageType.values()) {
+			IStorage storage = getStorage(st.getId());
+			if (storage != null && storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
+				dirtyItems.addAll(storage.getItemsWithKinah());
+				dirtyItems.addAll(storage.getDeletedItems());
+				storage.setPersistentState(PersistentState.UPDATED);
 			}
 		}
 
-		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
-			IStorage petBag = getStorage(petBagId);
-			if (petBag != null && petBag.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				dirtyItems.addAll(petBag.getItemsWithKinah());
-				dirtyItems.addAll(petBag.getDeletedItems());
-				petBag.setPersistentState(PersistentState.UPDATED);
-			}
-		}
-
-		for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
-			IStorage cabinet = getStorage(houseWhId);
-			if (cabinet != null && cabinet.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				dirtyItems.addAll(cabinet.getItemsWithKinah());
-				dirtyItems.addAll(cabinet.getDeletedItems());
-				cabinet.setPersistentState(PersistentState.UPDATED);
-			}
-		}
-
-		Equipment equipment = getEquipment();
 		if (equipment.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
 			dirtyItems.addAll(equipment.getEquippedItems());
 			equipment.setPersistentState(PersistentState.UPDATED);
@@ -688,11 +640,9 @@ public class Player extends Creature {
 	 */
 	public FastTable<Item> getAllItems() {
 		FastTable<Item> items = new FastTable<>();
-		items.addAll(this.inventory.getItemsWithKinah());
-		if (this.regularWarehouse != null)
-			items.addAll(this.regularWarehouse.getItemsWithKinah());
-		if (this.accountWarehouse != null)
-			items.addAll(this.accountWarehouse.getItemsWithKinah());
+		items.addAll(inventory.getItemsWithKinah());
+		items.addAll(regularWarehouse.getItemsWithKinah());
+		items.addAll(playerAccount.getAccountWarehouse().getItemsWithKinah());
 
 		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
 			IStorage petBag = getStorage(petBagId);
@@ -801,7 +751,7 @@ public class Player extends Creature {
 	 * @return true if the object id is the same
 	 */
 	public boolean sameObjectId(int objectId) {
-		return this.getObjectId() == objectId;
+		return getObjectId() == objectId;
 	}
 
 	/**
@@ -858,15 +808,15 @@ public class Player extends Creature {
 	}
 
 	public int getWarehouseSize() {
-		return this.playerCommonData.getWhNpcExpands() + this.playerCommonData.getWhBonusExpands();
+		return playerCommonData.getWhNpcExpands() + playerCommonData.getWhBonusExpands();
 	}
 
 	public int getWhNpcExpands() {
-		return this.playerCommonData.getWhNpcExpands();
+		return playerCommonData.getWhNpcExpands();
 	}
 
 	public int getWhBonusExpands() {
-		return this.playerCommonData.getWhBonusExpands();
+		return playerCommonData.getWhBonusExpands();
 	}
 
 	public void setWarehouseLimit() {
@@ -884,7 +834,7 @@ public class Player extends Creature {
 	 * 0: regular, 1: fly, 2: glide its bitset
 	 */
 	public int getFlyState() {
-		return this.flyState;
+		return flyState;
 	}
 
 	public void setFlyState(FlyState flyState) {
@@ -916,11 +866,11 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isInFlyingState() {
-		return this.isInFlyState(FlyState.FLYING);
+		return isInFlyState(FlyState.FLYING);
 	}
 
 	public boolean isInGlidingState() {
-		return this.isInFlyState(FlyState.GLIDING);
+		return isInFlyState(FlyState.GLIDING);
 	}
 
 	/**
@@ -1225,7 +1175,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public Kisk getKisk() {
-		return this.kisk;
+		return kisk;
 	}
 
 	/**
@@ -1415,9 +1365,9 @@ public class Player extends Creature {
 	 * chain skills
 	 */
 	public ChainSkills getChainSkills() {
-		if (this.chainSkills == null)
-			this.chainSkills = new ChainSkills();
-		return this.chainSkills;
+		if (chainSkills == null)
+			chainSkills = new ChainSkills();
+		return chainSkills;
 	}
 
 	public void setLastCounterSkill(AttackStatus status) {
@@ -1428,16 +1378,16 @@ public class Player extends Creature {
 			case PARRY:
 			case BLOCK:
 			case RESIST:
-				this.lastCounterSkill.put(result, System.currentTimeMillis());
+				lastCounterSkill.put(result, System.currentTimeMillis());
 				break;
 		}
 	}
 
 	public long getLastCounterSkill(AttackStatus status) {
-		if (this.lastCounterSkill.get(status) == null)
+		if (lastCounterSkill.get(status) == null)
 			return 0;
 
-		return this.lastCounterSkill.get(status);
+		return lastCounterSkill.get(status);
 	}
 
 	/**
@@ -1459,7 +1409,7 @@ public class Player extends Creature {
 	 * @return the Resurrection Positional State
 	 */
 	public boolean isInResPostState() {
-		return this.isInResurrectPosState;
+		return isInResurrectPosState;
 	}
 
 	/**
@@ -1482,7 +1432,7 @@ public class Player extends Creature {
 	 * @return the Resurrection Positional X value
 	 */
 	public float getResPosX() {
-		return this.resPosX;
+		return resPosX;
 	}
 
 	/**
@@ -1497,7 +1447,7 @@ public class Player extends Creature {
 	 * @return the Resurrection Positional Y value
 	 */
 	public float getResPosY() {
-		return this.resPosY;
+		return resPosY;
 	}
 
 	/**
@@ -1512,7 +1462,7 @@ public class Player extends Creature {
 	 * @return the Resurrection Positional Z value
 	 */
 	public float getResPosZ() {
-		return this.resPosZ;
+		return resPosZ;
 	}
 
 	public boolean isInSiegeWorld() {
@@ -1530,7 +1480,7 @@ public class Player extends Creature {
 	 * @return true if player is under NoFly Effect
 	 */
 	public boolean isUnderNoFly() {
-		return this.getEffectController().isAbnormalSet(AbnormalState.NOFLY);
+		return getEffectController().isAbnormalSet(AbnormalState.NOFLY);
 	}
 
 	public boolean havePermission(byte perm) {
@@ -1591,7 +1541,7 @@ public class Player extends Creature {
 	}
 
 	public long getFlyStartTime() {
-		return this.flyStartTime;
+		return flyStartTime;
 	}
 
 	public FlyPathEntry getCurrentFlyPath() {
@@ -1599,7 +1549,7 @@ public class Player extends Creature {
 	}
 
 	public boolean isInvulnerableWing() {
-		return this.isUnderInvulnerableWing;
+		return isUnderInvulnerableWing;
 	}
 
 	public void setInvulnerableWing(boolean value) {
@@ -1615,17 +1565,17 @@ public class Player extends Creature {
 	}
 
 	public boolean isAbyssRankListUpdated(AbyssRankUpdateType type) {
-		return (this.abyssRankListUpdateMask & type.value()) == type.value();
+		return (abyssRankListUpdateMask & type.value()) == type.value();
 	}
 
 	public void addSalvationPoints(long points) {
-		this.playerCommonData.addSalvationPoints(points);
+		playerCommonData.addSalvationPoints(points);
 		PacketSendUtility.sendPacket(this, new SM_STATS_INFO(this));
 	}
 
 	@Override
 	public byte isPlayer() {
-		if (this.isGM())
+		if (isGM())
 			return 2;
 		else
 			return 1;
@@ -1813,22 +1763,22 @@ public class Player extends Creature {
 	public void setVar(String key, Object value, boolean sql) {
 		vars.put(key, value);
 		if (sql)
-			daoVars.set(this.getObjectId(), key, value);
+			daoVars.set(getObjectId(), key, value);
 	}
 
 	public Object getVar(String key) {
-		return this.vars.get(key);
+		return vars.get(key);
 	}
 
 	public int getVarInt(String key) {
-		Object o = this.vars.get(key);
+		Object o = vars.get(key);
 		if (o != null)
 			return Integer.parseInt(o.toString());
 		return 0;
 	}
 
 	public String getVarStr(String key) {
-		Object o = this.vars.get(key);
+		Object o = vars.get(key);
 		if (o != null)
 			return o.toString();
 		return null;
@@ -1883,7 +1833,7 @@ public class Player extends Creature {
 	public void updateSupplements() {
 		if (subtractedSupplementId == 0 || subtractedSupplementsCount == 0)
 			return;
-		this.getInventory().decreaseByItemId(subtractedSupplementId, subtractedSupplementsCount);
+		getInventory().decreaseByItemId(subtractedSupplementId, subtractedSupplementsCount);
 		subtractedSupplementsCount = 0;
 		subtractedSupplementId = 0;
 	}
@@ -1977,7 +1927,7 @@ public class Player extends Creature {
 	}
 
 	public float[] getBattleReturnCoords() {
-		return this.battleReturnCoords;
+		return battleReturnCoords;
 	}
 
 	public void setBattleReturnCoords(int mapId, float[] coords) {
@@ -2041,13 +1991,13 @@ public class Player extends Creature {
 	}
 
 	public boolean isInRobotMode() {
-		return this.robotId != 0;
+		return robotId != 0;
 	}
 
 	@Override
 	public boolean canPerformMove() {
 		// player cannot move is transformed
-		if (this.getTransformModel().getBanMovement() == 1)
+		if (getTransformModel().getBanMovement() == 1)
 			return false;
 
 		return super.canPerformMove();

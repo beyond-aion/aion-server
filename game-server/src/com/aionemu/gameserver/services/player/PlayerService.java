@@ -204,16 +204,10 @@ public class PlayerService {
 		player.setQuestStateList(DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId));
 		player.setRecipeList(DAOManager.getDAO(PlayerRecipesDAO.class).load(player.getObjectId()));
 
-		/**
-		 * Account warehouse should be already loaded in account
-		 */
-		Storage accWarehouse = account.getAccountWarehouse();
-		player.setStorage(accWarehouse, StorageType.ACCOUNT_WAREHOUSE);
-
+		account.getAccountWarehouse().setOwner(player);
 		Storage inventory = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.CUBE);
 		ItemService.loadItemStones(inventory.getItems());
-
-		player.setStorage(inventory, StorageType.CUBE);
+		player.setStorage(inventory);
 
 		Equipment equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player);
 		ItemService.loadItemStones(equipment.getEquippedItemsWithoutStigma());
@@ -223,8 +217,7 @@ public class PlayerService {
 		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
 			Storage petBag = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.getStorageTypeById(petBagId));
 			ItemService.loadItemStones(petBag.getItems());
-
-			player.setStorage(petBag, StorageType.getStorageTypeById(petBagId));
+			player.setStorage(petBag);
 		}
 
 		for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
@@ -232,14 +225,13 @@ public class PlayerService {
 			if (whType != null) {
 				Storage cabinet = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.getStorageTypeById(houseWhId));
 				ItemService.loadItemStones(cabinet.getItems());
-				player.setStorage(cabinet, StorageType.getStorageTypeById(houseWhId));
+				player.setStorage(cabinet);
 			}
 		}
 
 		Storage warehouse = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.REGULAR_WAREHOUSE);
 		ItemService.loadItemStones(warehouse.getItems());
-
-		player.setStorage(warehouse, StorageType.REGULAR_WAREHOUSE);
+		player.setStorage(warehouse);
 
 		HouseRegistry houseRegistry = null;
 		for (House house : player.getHouses()) {
@@ -309,11 +301,8 @@ public class PlayerService {
 		// Starting items
 		PlayerCreationData playerCreationData = playerInitialData.getPlayerCreationData(playerCommonData.getPlayerClass());
 		Storage playerInventory = new PlayerStorage(StorageType.CUBE);
-		Storage regularWarehouse = new PlayerStorage(StorageType.REGULAR_WAREHOUSE);
-		Storage accountWarehouse = new PlayerStorage(StorageType.ACCOUNT_WAREHOUSE);
-		newPlayer.setStorage(playerInventory, StorageType.CUBE);
-		newPlayer.setStorage(regularWarehouse, StorageType.REGULAR_WAREHOUSE);
-		newPlayer.setStorage(accountWarehouse, StorageType.ACCOUNT_WAREHOUSE);
+		newPlayer.setStorage(playerInventory);
+		newPlayer.setStorage(new PlayerStorage(StorageType.REGULAR_WAREHOUSE));
 
 		Equipment equipment = new Equipment(newPlayer);
 		if (playerCreationData != null) { // player transfer
@@ -341,19 +330,6 @@ public class PlayerService {
 		}
 		newPlayer.setEquipment(equipment);
 		newPlayer.setMailbox(new Mailbox(newPlayer));
-
-		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
-			Storage petBag = new PlayerStorage(StorageType.getStorageTypeById(petBagId));
-			newPlayer.setStorage(petBag, StorageType.getStorageTypeById(petBagId));
-		}
-
-		for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
-			StorageType whType = StorageType.getStorageTypeById(houseWhId);
-			if (whType != null) {
-				Storage cabinet = new PlayerStorage(whType);
-				newPlayer.setStorage(cabinet, StorageType.getStorageTypeById(houseWhId));
-			}
-		}
 
 		/**
 		 * Mark inventory and equipment as UPDATE_REQUIRED to be saved during character creation

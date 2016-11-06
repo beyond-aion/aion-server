@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
@@ -161,7 +160,7 @@ public class PlayerLeaveWorldService {
 		player.getEquipment().setOwner(null);
 		player.getInventory().setOwner(null);
 		player.getWarehouse().setOwner(null);
-		player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).setOwner(null);
+		player.getPlayerAccount().getAccountWarehouse().setOwner(null);
 
 		AionConnection con = player.getClientConnection();
 		if (con != null) {
