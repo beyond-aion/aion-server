@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -37,8 +36,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 		writeD(mask);
 		for (Item item : items) {
 			writeD(item.getItemSkinTemplate().getTemplateId());
-			GodStone godStone = item.getGodStone();
-			writeD(godStone != null ? godStone.getItemId() : 0);
+			writeD(item.getGodStoneId());
 			writeDyeInfo(item.getItemColor());
 			writeH(item.getItemEnchantParam());
 			writeH(0); // 4.7

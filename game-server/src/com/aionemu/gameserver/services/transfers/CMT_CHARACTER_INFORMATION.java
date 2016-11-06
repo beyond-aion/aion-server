@@ -35,6 +35,7 @@ import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
 import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -157,12 +158,14 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		}
 		// read items data
 		int cnt = readD();
-		FastTable<String> itemOut = new FastTable<>();
+		StringBuilder sb = new StringBuilder();
 		for (int a = 0; a < cnt; a++) { // inventory
 			int objIdOld = readD();
 			int itemId = readD();
 			long itemCnt = readQ();
 			Integer itemColor = readD();
+			if (itemColor == -1)
+				itemColor = null;
 
 			String itemCreator = readS();
 			int itemExpireTime = readD();
@@ -190,10 +193,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			for (byte b = 0; b < len; b++) {
 				fusions.add(new int[] { readD(), readD() });
 			}
-			int godstone = 0;
-			if (readC() == 1)
-				godstone = readD();
-
+			int godstone = readD();
 			int colorExpires = readD();
 			int bonusNum = readD();
 			int randomNum = readD();
@@ -201,145 +201,52 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int packCount = readD();
 			boolean itemAmplified = readC() == 1;
 			int buffSkill = readH();
-			if (PlayerTransferConfig.ALLOW_INV) {
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(itemId);
-				if (template == null) {
-					textLog.info("(cube" + targetAccount + ")item with id " + itemId + " was not found in dp");
-					continue;
-				}
-
-				if (template.isStigma() && !PlayerTransferConfig.ALLOW_STIGMA) {
-					continue;
-				}
-
-				if (itemColor.equals(-1))
-					itemColor = null;
-				int newId = IDFactory.getInstance().nextId();
-				// bonus probably is lost, don't know [RR]
-				// dye expiration is lost
-				// plume Bonus is lost
-				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
-					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill, 0);
-				if (manastones.size() > 0) {
-					for (int[] stone : manastones) {
-						ItemSocketService.addManaStone(item, stone[0], stone[1]);
-					}
-
-				}
-				if (fusions.size() > 0) {
-					for (int[] stone : fusions) {
-						ItemSocketService.addFusionStone(item, stone[0], stone[1]);
-					}
-
-				}
-				if (godstone != 0) {
-					item.addGodStone(godstone);
-				}
-
-				String itemTxt = "(cube)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";"
-					+ item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";"
-					+ item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";"
-					+ item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
-				itemOut.add(itemTxt);
-				item.setPersistentState(PersistentState.NEW);
-				player.getInventory().add_CharacterTransfer(item);
+			if (!(location == StorageType.CUBE.getId() && PlayerTransferConfig.ALLOW_INV
+				|| location == StorageType.REGULAR_WAREHOUSE.getId() && PlayerTransferConfig.ALLOW_WAREHOUSE)) {
+				continue;
 			}
-		}
-
-		cnt = readD();
-		for (int a = 0; a < cnt; a++) { // warehouse
-			int objIdOld = readD();
-			int itemId = readD();
-			long itemCnt = readQ();
-			int itemColor = readD();
-
-			String itemCreator = readS();
-			int itemExpireTime = readD();
-			int itemActivationCnt = readD();
-			boolean itemEquipped = readSC() == 1;
-
-			boolean itemSoulBound = readSC() == 1;
-			long equipSlot = readQ(); // OMG
-			int location = readD();
-			int enchant = readD();
-			int enchantBonus = readD();
-
-			int skinId = readD();
-			int fusionId = readD();
-			int optSocket = readD();
-			int optFusion = readD();
-
-			int charge = readD();
-			FastTable<int[]> manastones = new FastTable<>(), fusions = new FastTable<>();
-			byte len = readSC();
-			for (byte b = 0; b < len; b++) {
-				manastones.add(new int[] { readD(), readD() });
-			}
-			len = readSC();
-			for (byte b = 0; b < len; b++) {
-				fusions.add(new int[] { readD(), readD() });
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(itemId);
+			if (template == null) {
+				textLog.warn("(accId=" + targetAccount + ") item with id " + itemId + " was not found in templates");
+				continue;
 			}
 
-			int godstone = 0;
-			if (readC() == 1)
-				godstone = readD();
-
-			int colorExpires = readD();
-			int bonusNum = readD();
-			int randomNum = readD();
-			int tempering = readD();
-			int packCount = readD();
-			boolean itemAmplified = readC() == 1;
-			int buffSkill = readH();
-
-			if (PlayerTransferConfig.ALLOW_WAREHOUSE) {
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(itemId);
-				if (template == null) {
-					textLog.info("(warehouse" + targetAccount + ")item with id " + itemId + " was not found in dp");
-					continue;
-				}
-
-				if (template.isStigma() && !PlayerTransferConfig.ALLOW_STIGMA) {
-					continue;
-				}
-
-				int newId = IDFactory.getInstance().nextId();
-				// bonus probably is lost, don't know [RR]
-				// dye expiration is lost
-				// Plume Bonus is lost
-				Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
-					itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-					packCount, itemAmplified, buffSkill, 0);
-				if (manastones.size() > 0) {
-					for (int[] stone : manastones) {
-						ItemSocketService.addManaStone(item, stone[0], stone[1]);
-					}
-
-				}
-				if (fusions.size() > 0) {
-					for (int[] stone : fusions) {
-						ItemSocketService.addFusionStone(item, stone[0], stone[1]);
-					}
-
-				}
-				if (godstone != 0) {
-					item.addGodStone(godstone);
-				}
-
-				String itemTxt = "(warehouse)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";"
-					+ item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";"
-					+ item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";"
-					+ item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
-				itemOut.add(itemTxt);
-				item.setPersistentState(PersistentState.NEW);
-				player.getWarehouse().add_CharacterTransfer(item);
+			if (template.isStigma() && !PlayerTransferConfig.ALLOW_STIGMA) {
+				continue;
 			}
+
+			if (itemColor.equals(-1))
+				itemColor = null;
+			int newId = IDFactory.getInstance().nextId();
+			// bonus probably is lost, don't know [RR]
+			// dye expiration is lost
+			// plume Bonus is lost
+			Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
+				itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
+				packCount, itemAmplified, buffSkill, 0);
+			if (manastones.size() > 0) {
+				for (int[] stone : manastones) {
+					ItemSocketService.addManaStone(item, stone[0], stone[1]);
+				}
+
+			}
+			if (fusions.size() > 0) {
+				for (int[] stone : fusions) {
+					ItemSocketService.addFusionStone(item, stone[0], stone[1]);
+				}
+
+			}
+			if (godstone != 0) {
+				item.addGodStone(godstone);
+			}
+
+			sb.append("\n(old objId=").append(objIdOld).append(") -> ").append(item);
+			item.setPersistentState(PersistentState.NEW);
+			player.getInventory().add_CharacterTransfer(item);
 		}
 		DAOManager.getDAO(InventoryDAO.class).store(player);
 
-		for (String s : itemOut)
-			textLog.info(s);
+		textLog.info(sb.toString());
 
 		// read data
 		cnt = readD();

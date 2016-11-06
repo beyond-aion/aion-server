@@ -43,7 +43,8 @@ import javolution.util.FastTable;
  */
 public class Item extends AionObject implements IExpirable, StatOwner {
 
-	private final Logger log = LoggerFactory.getLogger(Item.class);
+	public static final int MAX_BASIC_STONES = 6;
+	private static final Logger log = LoggerFactory.getLogger(Item.class);
 	private long itemCount = 1;
 	private Integer itemColor;
 	private int colorExpireTime = 0;
@@ -76,7 +77,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	private int packCount;
 	private int indexReturn;
 	private int tempering;
-	public static final int MAX_BASIC_STONES = 6;
 	private EnchantEffect enchantEffect;
 	private TemperingEffect temperingEffect;
 	private boolean isAmplified = false;
@@ -495,11 +495,12 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		return godStone != null;
 	}
 
-	/**
-	 * @return the goodStone
-	 */
 	public GodStone getGodStone() {
 		return godStone;
+	}
+
+	public int getGodStoneId() {
+		return godStone == null ? 0 : godStone.getItemId();
 	}
 
 	/**
@@ -604,13 +605,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		if (itemTemplate.isStigma())
 			return EquipType.STIGMA;
 		return itemTemplate.getEquipmentType();
-	}
-
-	@Override
-	public String toString() {
-		return "Item [itemId=" + itemTemplate.getTemplateId() + " equipmentSlot=" + equipmentSlot + ", godStone=" + godStone + ", isEquipped="
-			+ isEquipped + ", itemColor=" + itemColor + ", itemCount=" + itemCount + ", itemLocation=" + itemLocation + ", itemTemplate=" + itemTemplate
-			+ ", manaStones=" + manaStones + ", persistentState=" + persistentState + "]";
 	}
 
 	public int getItemId() {
@@ -998,5 +992,18 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public void setRndPlumeBonusValue(int rndPlumeBonusValue) {
 		this.rndPlumeBonusValue = rndPlumeBonusValue;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [getItemId()=" + getItemId() + ", getObjectId()=" + getObjectId() + ", itemCount=" + itemCount + ", itemColor=" + itemColor
+			+ ", colorExpireTime=" + colorExpireTime + ", itemCreator=" + itemCreator + ", itemSkinId=" + getItemSkinTemplate().getTemplateId()
+			+ ", getFusionedItemId()=" + getFusionedItemId() + ", isEquipped=" + isEquipped + ", manaStones=" + manaStones + ", fusionStones="
+			+ fusionStones + ", optionalSocket=" + optionalSocket + ", optionalFusionSocket=" + optionalFusionSocket + ", getGodStoneId()="
+			+ getGodStoneId() + ", isSoulBound=" + isSoulBound + ", itemLocation=" + itemLocation + ", enchantLevel=" + enchantLevel + ", enchantBonus="
+			+ enchantBonus + ", expireTime=" + expireTime + ", temporaryExchangeTime=" + temporaryExchangeTime + ", repurchasePrice=" + repurchasePrice
+			+ ", activationCount=" + activationCount + ", bonusNumber=" + bonusNumber + ", rndCount=" + rndCount + ", packCount=" + packCount
+			+ ", indexReturn=" + indexReturn + ", tempering=" + tempering + ", isAmplified=" + isAmplified + ", buffSkill=" + buffSkill
+			+ ", rndPlumeBonusValue=" + rndPlumeBonusValue + ", getChargePoints()=" + getChargePoints() + "]";
 	}
 }

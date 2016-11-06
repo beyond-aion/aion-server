@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.IdianStone;
-import com.aionemu.gameserver.model.items.ItemStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.stats.container.PlumStatEnum;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
@@ -38,8 +37,7 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 
 		writeItemStones(buf);
 
-		ItemStone god = item.getGodStone();
-		writeD(buf, god == null ? 0 : god.getItemId());
+		writeD(buf, item.getGodStoneId());
 
 		int dyeExpiration = item.getColorTimeLeft();
 		writeDyeInfo(buf, dyeExpiration < 0 ? null : item.getItemColor());

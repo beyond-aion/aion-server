@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
 import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
-import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -179,6 +178,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(this.taskId);
 				// inventory
 				List<Item> inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
+				inv.addAll(DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
 				writeD(inv.size());
 				ItemService.loadItemStones(inv);
 				for (Item item : inv) {
@@ -216,68 +216,14 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 						writeD(stone.getItemId());
 						writeD(stone.getSlot());
 					}
-					GodStone stone = item.getGodStone();
-					writeC(stone == null ? 0 : 1);
-					if (stone != null) {
-						writeD(stone.getItemId());
-					}
+					writeD(item.getGodStoneId());
 					writeD(item.getColorExpireTime());
 					writeD(item.getBonusNumber());
 					writeD(item.getRandomCount());
 					writeD(item.getTempering());
 					writeD(item.getPackCount());
 					writeC(item.isAmplified() ? 1 : 0);
-          writeH(item.getBuffSkill());
-				}
-
-				inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE);
-				ItemService.loadItemStones(inv);
-				writeD(inv.size());
-				for (Item item : inv) {
-					writeD(item.getObjectId());
-					writeD(item.getItemId());
-					writeQ(item.getItemCount());
-					writeD(item.getItemColor());
-
-					writeS(item.getItemCreator());
-					writeD(item.getExpireTime());
-					writeD(item.getActivationCount());
-					writeC(item.isEquipped() ? 1 : 0);
-
-					writeC(item.isSoulBound() ? 1 : 0);
-					writeQ(item.getEquipmentSlot());
-					writeD(item.getItemLocation());
-					writeD(item.getEnchantLevel());
-					writeD(item.getEnchantBonus());
-
-					writeD(item.getItemSkinTemplate().getTemplateId());
-					writeD(item.getFusionedItemId());
-					writeD(item.getOptionalSocket());
-					writeD(item.getOptionalFusionSocket());
-
-					writeD(item.getChargePoints());
-					Set<ManaStone> itemStones = item.getItemStones();
-					writeC(itemStones.size());
-					for (ManaStone stone : itemStones) {
-						writeD(stone.getItemId());
-						writeD(stone.getSlot());
-					}
-					itemStones = item.getFusionStones();
-					writeC(itemStones.size());
-					for (ManaStone stone : itemStones) {
-						writeD(stone.getItemId());
-						writeD(stone.getSlot());
-					}
-					GodStone stone = item.getGodStone();
-					writeC(stone == null ? 0 : 1);
-					if (stone != null) {
-						writeD(stone.getItemId());
-					}
-					writeD(item.getColorExpireTime());
-					writeD(item.getBonusNumber());
-					writeD(item.getRandomCount());
-					writeD(item.getTempering());
-					writeD(item.getPackCount());
+					writeH(item.getBuffSkill());
 				}
 				break;
 			case DATA_INFORMATION:

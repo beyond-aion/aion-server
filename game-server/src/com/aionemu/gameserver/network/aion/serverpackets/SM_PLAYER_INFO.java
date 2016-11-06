@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -115,8 +114,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeD(mask);
 		for (Item item : items) {
 			writeD(item.getItemSkinTemplate().getTemplateId());
-			GodStone godStone = item.getGodStone();
-			writeD(godStone != null ? godStone.getItemId() : 0);
+			writeD(item.getGodStoneId());
 			writeDyeInfo(item.getItemColor());
 			writeH(item.getItemEnchantParam()); // enchant lvl
 			writeH(0); // 4.7

@@ -120,7 +120,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 			Item item = i < itemList.size() ? itemList.get(i) : null;
 			writeC(item == null ? 0 : ItemSlot.getEquipmentSlotType(item.getEquipmentSlot())); // 0 = not visible, 1 = default (right-hand) slot, 2 = secondary (left-hand) slot
 			writeD(item == null ? 0 : item.getItemSkinTemplate().getTemplateId());
-			writeD(item == null || item.getGodStone() == null ? 0 : item.getGodStone().getItemId());
+			writeD(item == null ? 0 : item.getGodStoneId());
 			writeDyeInfo(item == null ? null : item.getItemColor());
 		}
 		writeD(0);
