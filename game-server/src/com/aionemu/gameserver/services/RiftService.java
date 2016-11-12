@@ -164,12 +164,11 @@ public class RiftService {
 			openRifts(loc, guards);
 	}
 
-	public void openRifts(RiftLocation location, boolean guards) {
+	public void openRifts(RiftLocation location, boolean isWithGuards) {
 		location.setOpened(true);
 
 		// Spawn NPC guards
-		if (guards) {
-			location.setWithGuards(true);
+		if (isWithGuards) {
 			List<SpawnGroup2> locSpawns = DataManager.SPAWNS_DATA2.getRiftSpawnsByLocId(location.getId());
 			for (SpawnGroup2 group : locSpawns) {
 				for (SpawnTemplate st : group.getSpawnTemplates()) {
@@ -180,7 +179,7 @@ public class RiftService {
 		}
 
 		// Spawn rifts
-		RiftManager.getInstance().spawnRift(location);
+		RiftManager.getInstance().spawnRift(location, isWithGuards);
 		activeRifts.put(location.getId(), location);
 	}
 

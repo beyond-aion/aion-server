@@ -13,12 +13,8 @@ import javolution.util.FastTable;
 public class RiftLocation {
 
 	private boolean opened;
-	private boolean withGuards = false;
-	protected RiftTemplate template;
+	private final RiftTemplate template;
 	private List<Npc> spawned = new FastTable<>();
-
-	public RiftLocation() {
-	}
 
 	public RiftLocation(RiftTemplate template) {
 		this.template = template;
@@ -46,13 +42,5 @@ public class RiftLocation {
 
 	public List<Npc> getSpawned() {
 		return spawned;
-	}
-
-	public void setWithGuards(boolean withGuards) {
-		this.withGuards = withGuards;
-	}
-
-	public boolean isWithGuards() {
-		return withGuards;
 	}
 }

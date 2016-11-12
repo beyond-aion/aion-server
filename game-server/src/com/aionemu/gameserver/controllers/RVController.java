@@ -63,7 +63,7 @@ public class RVController extends NpcController {
 		}
 	}
 
-	public RVController(Npc slave, RiftEnum riftTemplate, boolean isVolatile) {
+	public RVController(Npc slave, RiftEnum riftTemplate, boolean isWithGuards) {
 		this.riftTemplate = riftTemplate;
 		this.isVortex = riftTemplate.isVortex();
 		this.maxEntries = riftTemplate.getEntries();
@@ -75,10 +75,10 @@ public class RVController extends NpcController {
 		if (slave != null)// master rift should be created
 		{
 			this.slave = slave;
-			this.slaveSpawnTemplate = slave.getSpawn();
+			slaveSpawnTemplate = slave.getSpawn();
 			isMaster = true;
 			isAccepting = true;
-			this.isVolatile = isVolatile;
+			isVolatile = riftTemplate.canBeVolatile() && isWithGuards;
 		}
 	}
 
@@ -193,7 +193,7 @@ public class RVController extends NpcController {
 	@Override
 	public void onDespawn() {
 		RiftInformer.sendRiftDespawn(getOwner().getWorldId(), getOwner().getObjectId());
-		RiftManager.getSpawned().remove(getOwner());
+		RiftManager.removeSpawnedRift(getOwner());
 		super.onDespawn();
 	}
 

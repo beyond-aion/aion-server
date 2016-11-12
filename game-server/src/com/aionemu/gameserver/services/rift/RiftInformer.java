@@ -20,16 +20,6 @@ import javolution.util.FastTable;
  */
 public class RiftInformer {
 
-	public static List<Npc> getSpawned(int worldId) {
-		List<Npc> rifts = RiftManager.getSpawned();
-		List<Npc> worldRifts = new FastTable<>();
-		for (Npc rift : rifts) {
-			if (rift.getWorldId() == worldId)
-				worldRifts.add(rift);
-		}
-		return worldRifts;
-	}
-
 	public static void sendRiftsInfo(int worldId) {
 		syncRiftsState(worldId, getPackets(worldId));
 		int twinId = getTwinId(worldId);
@@ -60,7 +50,7 @@ public class RiftInformer {
 	private static List<AionServerPacket> getPackets(int worldId, int objId) {
 		List<AionServerPacket> packets = new FastTable<>();
 		if (objId == -1) {
-			for (Npc rift : getSpawned(worldId)) {
+			for (Npc rift : RiftManager.getSpawnedRifts(worldId)) {
 				RVController controller = (RVController) rift.getController();
 				if (!controller.isMaster()) {
 					continue;
@@ -72,7 +62,7 @@ public class RiftInformer {
 			packets.add(new SM_RIFT_ANNOUNCE(objId));
 		} else {
 			packets.add(new SM_RIFT_ANNOUNCE(getAnnounceData(worldId)));
-			for (Npc rift : getSpawned(worldId)) {
+			for (Npc rift : RiftManager.getSpawnedRifts(worldId)) {
 				RVController controller = (RVController) rift.getController();
 				if (!controller.isMaster()) {
 					continue;
@@ -140,7 +130,7 @@ public class RiftInformer {
 		}
 
 
-		for (Npc rift : getSpawned(worldId)) {
+		for (Npc rift : RiftManager.getSpawnedRifts(worldId)) {
 			RVController rc = (RVController) rift.getController();
 			localRifts = calcRiftsData(rc, localRifts);
 		}

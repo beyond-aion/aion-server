@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.services.rift;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +23,13 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
-import javolution.util.FastTable;
-
 /**
  * @author Source
  */
 public class RiftManager {
 
 	private static Logger log = LoggerFactory.getLogger(RiftManager.class);
-	private static List<Npc> rifts = new FastTable<>();
+	private static Map<Integer, List<Npc>> riftsPerWorld = new ConcurrentHashMap<>();
 	private static Map<String, SpawnTemplate> riftGroups = new HashMap<>();
 
 	public static void addRiftSpawnTemplate(SpawnGroup2 spawn) {
@@ -42,17 +43,17 @@ public class RiftManager {
 		}
 	}
 
-	public void spawnRift(RiftLocation loc) {
+	public void spawnRift(RiftLocation loc, boolean isWithGuards) {
 		RiftEnum rift = RiftEnum.getRift(loc.getId());
-		spawnRift(rift, null, loc);
+		spawnRift(rift, null, loc, isWithGuards);
 	}
 
 	public void spawnVortex(VortexLocation loc) {
 		RiftEnum rift = RiftEnum.getVortex(loc.getDefendersRace());
-		spawnRift(rift, loc, null);
+		spawnRift(rift, loc, null, false);
 	}
 
-	private void spawnRift(RiftEnum rift, VortexLocation vl, RiftLocation rl) {
+	private void spawnRift(RiftEnum rift, VortexLocation vl, RiftLocation rl, boolean isWithGuards) {
 		SpawnTemplate masterTemplate = riftGroups.get(rift.getMaster());
 		SpawnTemplate slaveTemplate = riftGroups.get(rift.getSlave());
 
@@ -68,7 +69,7 @@ public class RiftManager {
 				slaveTemplate = slaveTemplate.changeTemplate(i);
 			}
 			Npc slave = spawnInstance(i, slaveTemplate, new RVController(null, rift));
-			Npc master = spawnInstance(i, masterTemplate, new RVController(slave, rift, isVolatileRift(rl)));
+			Npc master = spawnInstance(i, masterTemplate, new RVController(slave, rift, isWithGuards));
 
 			if (rift.isVortex()) {
 				vl.setVortexController((RVController) master.getController());
@@ -82,7 +83,7 @@ public class RiftManager {
 			}
 		}
 
-		log.info("Rift opened: " + rift.name() + " successfully spawned " + spawned + " Npc.");
+		log.info("Rift opened: " + rift.name() + ", spawned " + spawned + " Npcs (guards=" + isWithGuards + ").");
 	}
 
 	private Npc spawnInstance(int instance, SpawnTemplate template, RVController controller) {
@@ -96,37 +97,36 @@ public class RiftManager {
 		world.storeObject(npc);
 		world.setPosition(npc, template.getWorldId(), instance, template.getX(), template.getY(), template.getZ(), template.getHeading());
 		world.spawn(npc);
-		rifts.add(npc);
+		addSpawnedRift(npc);
 
 		return npc;
 	}
 
-	public static List<Npc> getSpawned() {
-		return rifts;
+	private static void addSpawnedRift(Npc rift) {
+		List<Npc> rifts = riftsPerWorld.get(rift.getWorldId());
+		if (rifts == null) {
+			rifts = new CopyOnWriteArrayList<>();
+			riftsPerWorld.put(rift.getWorldId(), rifts);
+		}
+		rifts.add(rift);
+	}
+
+	public static List<Npc> getSpawnedRifts(int worldId) {
+		List<Npc> rifts = riftsPerWorld.get(worldId);
+		return rifts != null ? rifts : Collections.emptyList();
+	}
+
+	public static boolean removeSpawnedRift(Npc rift) {
+		List<Npc> rifts = riftsPerWorld.get(rift.getWorldId());
+		return rifts != null && rifts.remove(rift);
 	}
 
 	public static RiftManager getInstance() {
-		return RiftManagerHolder.INSTANCE;
+		return SingletonHolder.INSTANCE;
 	}
 
-	private static class RiftManagerHolder {
+	private static class SingletonHolder {
 
 		private static final RiftManager INSTANCE = new RiftManager();
 	}
-
-	private boolean isVolatileRift(RiftLocation loc) {
-		if (loc != null && loc.isWithGuards()) {
-			switch (loc.getId()) {
-				case 2286:
-				case 2287:
-				case 2288:
-				case 2176:
-				case 2177:
-				case 2178:
-					return true;
-			}
-		}
-		return false;
-	}
-
 }
