@@ -8798,10 +8798,37 @@
 	</decomposable>
 	<decomposable item_id="188051210" name="Festival Accessory Gift Box">
 		<items>
-			<item id="125040114" name="Winged Circlet" />
+			<item id="188052638" name="[Event] Fabled Godstone Bundle" />
 		</items>
 		<items>
-			<item id="120010004" name="Festival Earrings" />
+			<item id="166030007" name="[Event] Tempering Solution" min_count="5" />
+		</items>
+		<items>
+			<item id="188053295" name="Empyrean Plume Chest" />
+		</items>
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone" min_count="10" />
+		</items>
+		<items>
+			<item id="166500002" name="Amplification Stone" min_count="5" />
+		</items>
+		<items>
+			<item id="187000156" name="Tiamat's Glimmering Wings" />
+		</items>
+		<items>
+			<item id="188053006" name="[Event] Hyperion's Mythic Armor Chest" />
+		</items>
+		<items>
+			<item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest" />
+		</items>
+		<items>
+			<item id="188053728" name="Beritra's Equipment Chest" />
+		</items>
+		<items>
+			<item id="168310019" name="Major Blessed Augment: Level 2" />
+		</items>
+		<items>
+			<item id="188052637" name="[Event] Greater Composite Manastone Bundle" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051211" name="Lesser Supplements Bag (Fabled)">
@@ -8836,142 +8863,112 @@
 	</decomposable>
 	<decomposable item_id="188051217" name="[Event] Gift for a Daeva">
 		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" max_count="1000" />
+			<item id="186000242" name="Ceramium Medal" min_count="10" />
 		</items>
 		<items>
-			<item id="160010089" name="Summer-Loving Inquin Form Candy" min_count="5" />
+			<item id="160010217" name="[Event] Birthday Cake Piece" min_count="10" />
 		</items>
 		<items>
-			<item id="188051211" name="Lesser Supplements Bag (Fabled)" />
+			<item id="164002119" name="[Event] Rx: Critozyne" min_count="20" />
+			<item id="164002120" name="[Event] Rx: Mojocycline" min_count="20" />
 		</items>
 		<items>
-			<item id="188051212" name="Supplements Bag (Fabled)" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="20" />
 		</items>
 		<items>
-			<item id="188051213" name="Greater Supplements Bag (Fabled)" />
+			<item id="164002117" name="[Event] Rx: Blitzopan" min_count="20" />
+			<item id="164002118" name="[Event] Rx: Castafodin" min_count="20" />
 		</items>
 		<items>
-			<item id="188051214" name="Lesser Supplements Bag (Eternal)" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 		</items>
 		<items>
-			<item id="188051215" name="Supplements Bag (Eternal)" />
+			<item id="162002030" name="[Event] Premium Restoration Potion" min_count="25" />
 		</items>
 		<items>
-			<item id="188051216" name="Greater Supplements Bag (Eternal)" />
+			<item id="162000137" name="Sublime Life Serum" min_count="5" />
+			<item id="162000139" name="Sublime Mana Serum" min_count="5" />
 		</items>
 		<items>
-			<item id="188051210" name="Festival Accessory Gift Box" />
+			<item id="162000107" name="Saam King's Herbs" min_count="10" />
 		</items>
 		<items>
-			<item id="169200006" name="Dye: True White" />
-		</items>
-		<items>
-			<item id="169200007" name="Dye: True Black" />
+			<item id="164002219" name="Flame Pillar Firecracker" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051218" name="[Event] Gift for a Daeva">
 		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" max_count="1000" />
+			<item id="186000242" name="Ceramium Medal" min_count="10" />
 		</items>
 		<items>
-			<item id="160010090" name="Summer-Loving Inquin Form Candy" min_count="5" />
+			<item id="160010217" name="[Event] Birthday Cake Piece" min_count="10" />
 		</items>
 		<items>
-			<item id="188051211" name="Lesser Supplements Bag (Fabled)" />
+			<item id="164002119" name="[Event] Rx: Critozyne" min_count="20" />
+			<item id="164002120" name="[Event] Rx: Mojocycline" min_count="20" />
 		</items>
 		<items>
-			<item id="188051212" name="Supplements Bag (Fabled)" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="20" />
 		</items>
 		<items>
-			<item id="188051213" name="Greater Supplements Bag (Fabled)" />
+			<item id="164002117" name="[Event] Rx: Blitzopan" min_count="20" />
+			<item id="164002118" name="[Event] Rx: Castafodin" min_count="20" />
 		</items>
 		<items>
-			<item id="188051214" name="Lesser Supplements Bag (Eternal)" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 		</items>
 		<items>
-			<item id="188051215" name="Supplements Bag (Eternal)" />
+			<item id="162002030" name="[Event] Premium Restoration Potion" min_count="25" />
 		</items>
 		<items>
-			<item id="188051216" name="Greater Supplements Bag (Eternal)" />
+			<item id="162000137" name="Sublime Life Serum" min_count="5" />
+			<item id="162000139" name="Sublime Mana Serum" min_count="5" />
 		</items>
 		<items>
-			<item id="188051266" name="Festival Accessory Gift Box" />
+			<item id="162000107" name="Saam King's Herbs" min_count="10" />
 		</items>
 		<items>
-			<item id="169200006" name="Dye: True White" />
-		</items>
-		<items>
-			<item id="169200007" name="Dye: True Black" />
+			<item id="164002219" name="Flame Pillar Firecracker" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051219" name="[Event] Blessed Gift for a Daeva">
 		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" max_count="1000" />
+			<item id="169610140" name="[Title Card] Aion's Chosen (30 days)" />
 		</items>
 		<items>
-			<item id="160010089" name="Summer-Loving Inquin Form Candy" min_count="10" />
+			<item id="169610146" name="[Title] Glorious Number One (30 days)" />
 		</items>
 		<items>
-			<item id="188051211" name="Lesser Supplements Bag (Fabled)" min_count="3" />
+			<item id="169610060" name="[Title Card] Chaser of Atreia – 30-day pass" />
 		</items>
 		<items>
-			<item id="188051212" name="Supplements Bag (Fabled)" min_count="3" />
+			<item id="190100166" name="Magnificent Clucklich (30 days)" />
 		</items>
 		<items>
-			<item id="188051213" name="Greater Supplements Bag (Fabled)" min_count="3" />
+			<item id="190100120" name="Palomeno Heorn (30 days)" />
 		</items>
 		<items>
-			<item id="188051214" name="Lesser Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="188051215" name="Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="188051216" name="Greater Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="110900140" name="Joyful Festival Costume" />
-		</items>
-		<items>
-			<item id="169200006" name="Dye: True White" />
-		</items>
-		<items>
-			<item id="169200007" name="Dye: True Black" />
+			<item id="190100142" name="Sleek Hovercycle (30 days)" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051220" name="[Event] Blessed Gift for a Daeva">
 		<items>
-			<item id="169000008" name="Fine Power Shard" min_count="500" max_count="1000" />
+			<item id="169610140" name="[Title Card] Aion's Chosen (30 days)" />
 		</items>
 		<items>
-			<item id="160010090" name="Summer-Loving Inquin Form Candy" min_count="10" />
+			<item id="169610146" name="[Title] Glorious Number One (30 days)" />
 		</items>
 		<items>
-			<item id="188051211" name="Lesser Supplements Bag (Fabled)" min_count="3" />
+			<item id="169610060" name="[Title Card] Chaser of Atreia – 30-day pass" />
 		</items>
 		<items>
-			<item id="188051212" name="Supplements Bag (Fabled)" min_count="3" />
+			<item id="190100166" name="Magnificent Clucklich (30 days)" />
 		</items>
 		<items>
-			<item id="188051213" name="Greater Supplements Bag (Fabled)" min_count="3" />
+			<item id="190100120" name="Palomeno Heorn (30 days)" />
 		</items>
 		<items>
-			<item id="188051214" name="Lesser Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="188051215" name="Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="188051216" name="Greater Supplements Bag (Eternal)" min_count="3" />
-		</items>
-		<items>
-			<item id="110900151" name="Joyful Festival Costume" />
-		</items>
-		<items>
-			<item id="169200006" name="Dye: True White" />
-		</items>
-		<items>
-			<item id="169200007" name="Dye: True Black" />
+			<item id="190100142" name="Sleek Hovercycle (30 days)" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051221" name="Festival Treasure Box">
@@ -9770,10 +9767,37 @@
 	</decomposable>
 	<decomposable item_id="188051266" name="Festival Accessory Gift Box">
 		<items>
-			<item id="125040121" name="Winged Circlet" />
+			<item id="188052638" name="[Event] Fabled Godstone Bundle" />
 		</items>
 		<items>
-			<item id="120010004" name="Festival Earrings" />
+			<item id="166030007" name="[Event] Tempering Solution" min_count="5" />
+		</items>
+		<items>
+			<item id="188053295" name="Empyrean Plume Chest" />
+		</items>
+		<items>
+			<item id="166020000" name="Omega Enchantment Stone" min_count="10" />
+		</items>
+		<items>
+			<item id="166500002" name="Amplification Stone" min_count="5" />
+		</items>
+		<items>
+			<item id="187000156" name="Tiamat's Glimmering Wings" />
+		</items>
+		<items>
+			<item id="188053006" name="[Event] Hyperion's Mythic Armor Chest" />
+		</items>
+		<items>
+			<item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest" />
+		</items>
+		<items>
+			<item id="188053728" name="Beritra's Equipment Chest" />
+		</items>
+		<items>
+			<item id="168310019" name="Major Blessed Augment: Level 2" />
+		</items>
+		<items>
+			<item id="188052637" name="[Event] Greater Composite Manastone Bundle" min_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051267" name="Pobina's Manastone Bundle">

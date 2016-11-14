@@ -651,23 +651,22 @@
 	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00+00:00" end="2015-10-26T00:00:00+00:00">
 		<inventory_drop startlevel="8" interval="15">186000127</inventory_drop>
 	</event>
-	<event name="Ascension Energy" start="2015-09-21T00:00:00+00:00" end="2015-10-26T00:00:00+00:00">
+	<event name="Ascension Energy" start="2016-11-15T00:00:00+00:00" end="2016-11-30T23:59:00+01:00">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- <Daeva's Day Cake> -->
-				<spawn npc_id="700585" respawn_time="295">
-					<spot x="1532.4474" y="1511.6154" z="565.8823" h="59" />
+				<spawn npc_id="831921" respawn_time="295">
+					<spot x="1532.4474" y="1511.6154" z="565.8823" h="60" />
 				</spawn>
 				<!-- Gracia -->
 				<spawn npc_id="799933" respawn_time="295">
-					<spot x="1528.2053" y="1513.424" z="565.89343" h="57" />
+					<spot x="1527.2402" y="1513.146" z="565.89545" h="60" />
 				</spawn>
 				<!-- Kaneth -->
 				<spawn npc_id="799934" respawn_time="295">
-					<spot x="1527.9835" y="1509.6407" z="565.894" h="60" />
+					<spot x="1527.2327" y="1510.2539" z="565.89526" h="60" />
 				</spawn>
-				<!-- Need Spawns -->
 			</spawn_map>
 			<!-- Poeta -->
 			<spawn_map map_id="210010000">
@@ -700,16 +699,16 @@
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- <Daeva's Day Cake> -->
-				<spawn npc_id="700585" respawn_time="295">
+				<spawn npc_id="831922" respawn_time="295">
 					<spot x="1275.8658" y="1333.3451" z="204.42003" h="90" />
 				</spawn>
 				<!-- Emma -->
 				<spawn npc_id="799939" respawn_time="295">
-					<spot x="1277.4176" y="1329.777" z="204.42003" h="92" />
+					<spot x="1277.3303" y="1328.2611" z="204.42003" h="90" />
 				</spawn>
 				<!-- Aivar -->
 				<spawn npc_id="799940" respawn_time="295">
-					<spot x="1273.6998" y="1329.7642" z="204.41998" h="81" />
+					<spot x="1274.6233" y="1328.24" z="204.41998" h="90" />
 				</spawn>
 			</spawn_map>
 			<!-- Morheim -->
@@ -734,6 +733,24 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
+		<event_drops>
+			<gd_rule rule_name="Ascension Energy" base_chance="50" fixed_chance="true">
+				<gd_items>
+					<gd_item id="186000127" name="Ascension Energy" />
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210070000" name="Cygnea" />
+					<gd_map map_id="220080000" name="Enshar" />
+					<gd_map map_id="600090000" name="Kaldor" />
+					<gd_map map_id="600100000" name="Levinshor" />
+				</gd_maps>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+				</gd_ratings>
+			</gd_rule>
+		</event_drops>
 	</event>
 	<event name="Crab Fest" start="2015-12-06T06:00:00+01:00" end="2016-01-04T00:00:00+01:00" theme="christmas">
 		<event_drops>
