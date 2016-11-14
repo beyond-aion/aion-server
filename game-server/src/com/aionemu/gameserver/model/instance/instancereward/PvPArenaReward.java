@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.instance.instancereward;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -172,9 +172,9 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public boolean hasCapPoints() {
-		IntStream points = getInstanceRewards().stream().mapToInt(r -> r.getPoints());
-		int maxPoints = points.max().getAsInt();
-		if (isSoloArena() && maxPoints - points.min().getAsInt() >= 1500)
+		IntSummaryStatistics points = getInstanceRewards().stream().mapToInt(r -> r.getPoints()).summaryStatistics();
+		int maxPoints = points.getMax();
+		if (isSoloArena() && maxPoints - points.getMin() >= 1500)
 			return true;
 		return maxPoints >= capPoints;
 	}
