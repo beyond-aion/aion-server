@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
@@ -24,8 +26,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author MrPoke
- * @modified Neon
+ * @author MrPoke, Neon
  */
 public class GMService {
 
@@ -33,12 +34,14 @@ public class GMService {
 		return SingletonHolder.instance;
 	}
 
-	private Map<Integer, Player> gms = new ConcurrentHashMap<>();
+	private final Map<Integer, Player> gms = new ConcurrentHashMap<>();
 	private final List<SkillTemplate> gmSkills;
 
 	private GMService() {
 		gmSkills = DataManager.SKILL_DATA.getSkillTemplates().stream()
 			.filter(t -> t.getGroup() != null && t.getGroup().startsWith("GM_") || t.getStack().startsWith("GM_")).collect(Collectors.toList());
+		if (gmSkills.isEmpty())
+			LoggerFactory.getLogger(GMService.class).warn("No GM skills found, possibly because of changed or missing skill templates.");
 	}
 
 	public Collection<Player> getGms() {
