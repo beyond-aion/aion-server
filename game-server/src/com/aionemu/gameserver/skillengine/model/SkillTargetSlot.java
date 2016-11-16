@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author ATracer
- * @modified Cheatkiller upd 4.5
+ * @modified Cheatkiller, Neon
  */
 @XmlType(name = "TargetSlot")
 @XmlEnum
@@ -14,7 +14,8 @@ public enum SkillTargetSlot {
 	DEBUFF(2),
 	CHANT(4),
 	SPEC(8),
-	SPEC2(16),
+	SPEC2(16), // soul sickness
+	SPECIAL2(16), // soul sickness dispel
 	BOOST(32),
 	NOSHOW(64),
 	NONE(128);

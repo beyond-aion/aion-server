@@ -13,6 +13,7 @@ import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.cache.HTMLCache;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -321,6 +322,8 @@ public final class PlayerEnterWorldService {
 
 		InstanceService.onPlayerLogin(player);
 		// Update player skills first!!!
+		if (player.getAccessLevel() >= AdminConfig.GM_SKILLS)
+			GMService.getInstance().addGmSkills(player);
 		AbyssSkillService.updateSkills(player);
 		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked,
 																																																										// 745 crashed)
@@ -500,14 +503,10 @@ public final class PlayerEnterWorldService {
 			}
 		}
 		// scheduler periodic update
-		player.getController().addTask(
-			TaskId.PLAYER_UPDATE,
-			ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000,
-				PeriodicSaveConfig.PLAYER_GENERAL * 1000));
-		player.getController().addTask(
-			TaskId.INVENTORY_UPDATE,
-			ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000,
-				PeriodicSaveConfig.PLAYER_ITEMS * 1000));
+		player.getController().addTask(TaskId.PLAYER_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(
+			new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000, PeriodicSaveConfig.PLAYER_GENERAL * 1000));
+		player.getController().addTask(TaskId.INVENTORY_UPDATE, ThreadPoolManager.getInstance()
+			.scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000, PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
 		SurveyService.getInstance().showAvailable(player);
 		EventService.getInstance().onPlayerLogin(player);

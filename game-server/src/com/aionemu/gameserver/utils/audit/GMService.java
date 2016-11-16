@@ -1,12 +1,15 @@
 package com.aionemu.gameserver.utils.audit;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,11 +18,10 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastSet;
 
 /**
  * @author MrPoke
@@ -32,16 +34,11 @@ public class GMService {
 	}
 
 	private Map<Integer, Player> gms = new ConcurrentHashMap<>();
-	private Set<Byte> announceList;
+	private final List<SkillTemplate> gmSkills;
 
 	private GMService() {
-		if (AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*")) {
-			announceList = null;
-		} else {
-			announceList = new FastSet<>();
-			for (String level : AdminConfig.ANNOUNCE_LEVEL_LIST.split(","))
-				announceList.add(Byte.parseByte(level));
-		}
+		gmSkills = DataManager.SKILL_DATA.getSkillTemplates().stream()
+			.filter(t -> t.getGroup() != null && t.getGroup().startsWith("GM_") || t.getStack().startsWith("GM_")).collect(Collectors.toList());
 	}
 
 	public Collection<Player> getGms() {
@@ -94,8 +91,10 @@ public class GMService {
 			broadcastConnectionStatus(player, false);
 	}
 
-	public boolean isAnnounceable(Player gm) {
-		return gm.isGM() && !gm.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && gm.getFriendList().getStatus() != Status.OFFLINE && (announceList == null || announceList.contains(gm.getAccessLevel()));
+	public boolean isAnnounceable(Player player) {
+		return player.isOnline() && player.isGM() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
+			&& player.getFriendList().getStatus() != Status.OFFLINE
+			&& (AdminConfig.ANNOUNCE_LEVEL_LIST.contains(String.valueOf(player.getAccessLevel())) || AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*"));
 	}
 
 	public void broadcastMessageToGMs(String message) {
@@ -120,7 +119,8 @@ public class GMService {
 			return;
 
 		byte delay = 15;
-		PacketSendUtility.sendMessage(gm, "Your login will be announced in " + delay + "s.\nYou can disable this by setting whisper off or changing your online status to invisible.");
+		PacketSendUtility.sendMessage(gm,
+			"Your login will be announced in " + delay + "s.\nYou can disable this by setting whisper off or changing your online status to invisible.");
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -133,6 +133,22 @@ public class GMService {
 				}
 			}
 		}, delay * 1000);
+	}
+
+	public void addGmSkills(Player player) {
+		for (SkillTemplate t : gmSkills) {
+			switch (t.getSkillId()) {
+				case 322: // [Event] Manastone Preservation
+				case 323: // Homerun Energy
+				case 339: // Panesterra Dominant
+					continue;
+			}
+			if (player.getRace() == Race.ASMODIANS && t.getStack().contains("_LIGHT"))
+				continue;
+			if (player.getRace() == Race.ELYOS && t.getStack().contains("_DARK"))
+				continue;
+			player.getSkillList().addTemporarySkill(player, t.getSkillId(), t.getLvl());
+		}
 	}
 
 	private static class SingletonHolder {

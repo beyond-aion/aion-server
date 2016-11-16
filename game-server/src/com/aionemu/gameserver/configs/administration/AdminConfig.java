@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.administration;
 
+import java.util.List;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -14,6 +16,8 @@ public class AdminConfig {
 	public static byte GM_LEVEL;
 	@Property(key = "gameserver.administration.gmpanel", defaultValue = "3")
 	public static byte GM_PANEL;
+	@Property(key = "gameserver.administration.gmskills", defaultValue = "3")
+	public static byte GM_SKILLS;
 	@Property(key = "gameserver.administration.flight.freefly", defaultValue = "3")
 	public static byte GM_FLIGHT_FREE;
 	@Property(key = "gameserver.administration.flight.unlimited", defaultValue = "3")
@@ -45,7 +49,7 @@ public class AdminConfig {
 	 * GM announce options
 	 */
 	@Property(key = "gameserver.administration.announce.levels", defaultValue = "*")
-	public static String ANNOUNCE_LEVEL_LIST;
+	public static List<String> ANNOUNCE_LEVEL_LIST;
 	@Property(key = "gameserver.administration.announce.login_to_all_players", defaultValue = "true")
 	public static boolean ANNOUNCE_LOGIN_TO_ALL_PLAYERS;
 	@Property(key = "gameserver.administration.announce.logout_to_all_players", defaultValue = "true")
