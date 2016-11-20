@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configuration>
-	<property name="logFolder" value="log/" />
+	<property name="logFolder" value="log" />
 	<property file="config/main/logging.properties" />
 	<property file="config/mygs.properties" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
@@ -39,9 +39,8 @@
 		<encoder>
 			<Pattern>%date %logger - %message%n</Pattern>
 		</encoder>
-		<appender-ref ref="app_error_hipchat" />
 	</appender>
-	<appender name="app_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
+	<appender name="app_status_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
 		<layout>
 			<pattern>%logger{0} [%thread]:&lt;pre&gt;%msg&lt;/pre&gt;</pattern>
 		</layout>
@@ -51,11 +50,11 @@
 		<messageFormat>html</messageFormat>
 		<senderSeparatorPattern>(?&lt;=\]):</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
 	</appender>
-	<appender name="app_error_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="app_status_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>WARN</level>
 		</filter>
-		<appender-ref ref="app_hipchat" />
+		<appender-ref ref="app_status_hipchat" />
 	</appender>
 	<appender name="app_admincmd" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/adminaudit.log</file>
@@ -247,6 +246,6 @@
 		<appender-ref ref="app_console" />
 		<appender-ref ref="app_error" />
 		<appender-ref ref="app_warn" />
-		<appender-ref ref="app_error_hipchat_async" />
+		<appender-ref ref="app_status_hipchat_async" />
 	</root>
 </configuration>
