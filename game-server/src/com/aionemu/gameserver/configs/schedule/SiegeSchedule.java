@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.configs.shedule;
+package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
 import java.util.List;
@@ -74,7 +74,7 @@ public class SiegeSchedule {
 	public static SiegeSchedule load() {
 		SiegeSchedule ss;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/shedule/siege_schedule.xml"));
+			String xml = FileUtils.readFileToString(new File("./config/schedule/siege_schedule.xml"));
 			ss = JAXBUtil.deserialize(xml, SiegeSchedule.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize sieges", e);

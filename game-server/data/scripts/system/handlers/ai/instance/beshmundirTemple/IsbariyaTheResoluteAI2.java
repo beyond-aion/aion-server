@@ -32,7 +32,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 	private List<Point3D> soulLocations = new FastTable<>();
 	private Future<?> basicSkillTask;
-	private Future<?> shedule;
+	private Future<?> spawnTask;
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -62,8 +62,8 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 		PacketSendUtility.broadcastMessage(getOwner(), 342055);
 		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
 		cancelSkillTask();
-		if (shedule != null && !shedule.isCancelled()) {
-			shedule.cancel(true);
+		if (spawnTask != null && !spawnTask.isCancelled()) {
+			spawnTask.cancel(true);
 		}
 	}
 
@@ -71,8 +71,8 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		cancelSkillTask();
-		if (shedule != null && !shedule.isCancelled()) {
-			shedule.cancel(true);
+		if (spawnTask != null && !spawnTask.isCancelled()) {
+			spawnTask.cancel(true);
 		}
 	}
 
@@ -180,14 +180,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 			cancelSkillTask();
 			return;
 		}
-		shedule = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				launchSpecial();
-			}
-
-		}, delay);
+		spawnTask = ThreadPoolManager.getInstance().schedule(() -> launchSpecial(), delay);
 	}
 
 	private SpawnTemplate rndSpawnInRange(int npcId) {

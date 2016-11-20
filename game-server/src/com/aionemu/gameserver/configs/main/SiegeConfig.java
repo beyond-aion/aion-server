@@ -26,7 +26,7 @@ public class SiegeConfig {
 	public static float BALAUR_ASSAULT_RATE;
 
 	/**
-	 * Siege Race Protector spawn shedule
+	 * Siege Race Protector spawn schedule
 	 */
 	@Property(key = "gameserver.siege.protector.time", defaultValue = "0 0 21 ? * *")
 	public static String RACE_PROTECTOR_SPAWN_SCHEDULE;

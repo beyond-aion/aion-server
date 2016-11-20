@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.configs.shedule;
+package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
 import java.util.List;
@@ -48,7 +48,7 @@ public class MonsterRaidSchedule {
 	public static MonsterRaidSchedule load() {
 		MonsterRaidSchedule mrs;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/shedule/monster_raid_schedule.xml"));
+			String xml = FileUtils.readFileToString(new File("./config/schedule/monster_raid_schedule.xml"));
 			mrs = JAXBUtil.deserialize(xml, MonsterRaidSchedule.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize worldraids", e);

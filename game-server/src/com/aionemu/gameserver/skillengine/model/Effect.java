@@ -667,7 +667,7 @@ public class Effect implements StatOwner {
 		if (successEffects.isEmpty())
 			return;
 
-		shedulePeriodicActions();
+		schedulePeriodicActions();
 
 		for (EffectTemplate template : successEffects.values()) {
 			template.startEffect(this);
@@ -893,7 +893,7 @@ public class Effect implements StatOwner {
 		successEffects.clear();
 	}
 
-	private void shedulePeriodicActions() {
+	private void schedulePeriodicActions() {
 		if (periodicActions == null || periodicActions.getPeriodicActions() == null || periodicActions.getPeriodicActions().isEmpty())
 			return;
 		int checktime = periodicActions.getChecktime();

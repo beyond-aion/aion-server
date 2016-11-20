@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.configs.shedule;
+package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
 import java.util.List;
@@ -54,7 +54,7 @@ public class RiftSchedule {
 	public static RiftSchedule load() {
 		RiftSchedule rs;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/shedule/rift_schedule.xml"));
+			String xml = FileUtils.readFileToString(new File("./config/schedule/rift_schedule.xml"));
 			rs = JAXBUtil.deserialize(xml, RiftSchedule.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize rifts", e);

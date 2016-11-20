@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.EventsConfig;
-import com.aionemu.gameserver.configs.shedule.MonsterRaidSchedule;
+import com.aionemu.gameserver.configs.schedule.MonsterRaidSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.services.monsterraid.MonsterRaid;
