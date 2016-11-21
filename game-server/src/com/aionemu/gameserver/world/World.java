@@ -394,7 +394,7 @@ public class World {
 	 * @throws AlreadySpawnedException
 	 *           when object is already spawned.
 	 */
-	public void spawn(VisibleObject object) {
+	public void spawn(VisibleObject object) throws AlreadySpawnedException {
 		spawn(object, true);
 	}
 
@@ -407,11 +407,11 @@ public class World {
 	 * @throws AlreadySpawnedException
 	 *           when object is already spawned.
 	 */
-	public void spawn(VisibleObject object, boolean updateKnownlist) {
+	public void spawn(VisibleObject object, boolean updateKnownlist) throws AlreadySpawnedException {
 		if (object == null)
 			return;
 		if (object.getPosition().isSpawned())
-			throw new AlreadySpawnedException(object + " is already spawned.");
+			throw new AlreadySpawnedException(object);
 
 		object.getController().onBeforeSpawn();
 		object.getPosition().setIsSpawned(true);
