@@ -28,7 +28,7 @@ public class WindstreamTemplate {
 	/**
 	 * Gets the value of the mapid property.
 	 */
-	public int getMapid() {
+	public int getMapId() {
 		return mapid;
 	}
 }

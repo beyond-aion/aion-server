@@ -59,14 +59,10 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		sendPacket(new SM_MOTION(activePlayer.getObjectId(), activePlayer.getMotions().getActiveMotions()));
 
 		WindstreamTemplate template = DataManager.WINDSTREAM_DATA.getStreamTemplate(activePlayer.getPosition().getMapId());
-		Location2D location;
 		if (template != null)
-			for (int i = 0; i < template.getLocations().getLocation().size(); i++) {
-				location = template.getLocations().getLocation().get(i);
-				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapid(), location.getId(), location.getState()));
+			for (Location2D location : template.getLocations().getLocation()) {
+				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapId(), location.getId(), location.getState()));
 			}
-		location = null;
-		template = null;
 
 		/**
 		 * Spawn player into the world.
@@ -100,7 +96,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		activePlayer.getController().updateNearbyQuests();
 
 		// SM_QUEST_REPEAT
-		// activePlayer.getController().updateRepeatableQuests();
+		activePlayer.getController().updateRepeatableQuests();
 
 		/**
 		 * Loading weather for the player's region
