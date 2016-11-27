@@ -30,8 +30,6 @@ public interface InstanceHandler {
 	 * This method will run after all spawns unloaded.<br>
 	 * All class-shared objects should be cleaned in handler
 	 */
-	void onStartInstanceDestroy();
-
 	void onInstanceDestroy();
 
 	void onPlayerLogin(Player player);

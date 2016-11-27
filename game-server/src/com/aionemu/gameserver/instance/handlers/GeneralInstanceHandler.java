@@ -193,11 +193,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onStartInstanceDestroy() {
-
-	}
-
-	@Override
 	public boolean canUseSkill(Player player, Skill skill) {
 		return true;
 	}

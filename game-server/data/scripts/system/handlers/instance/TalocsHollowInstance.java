@@ -49,6 +49,8 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	@Override
 	public void onLeaveInstance(Player player) {
 		removeItems(player);
+		player.getEffectController().removeEffect(10251);
+		player.getEffectController().removeEffect(10252);
 	}
 
 	private void addItems(Player player) {
@@ -69,10 +71,16 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	private void removeItems(Player player) {
+		int[] items = new int[] { 164000099, // Taloc's Tears
+			164000137, // Shishir's Powerstone
+			164000138, // Gellmar's Wardstone
+			164000139, // Neith's Sleepstone
+			185000088, // Shishir's Corrosive Fluid
+			185000108 // Dorkin's Pocket Knife
+		};
 		Storage storage = player.getInventory();
-		storage.decreaseByItemId(164000099, storage.getItemCountByItemId(164000099));
-		player.getEffectController().removeEffect(10251);
-		player.getEffectController().removeEffect(10252);
+		for (int item : items)
+			storage.decreaseByItemId(item, storage.getItemCountByItemId(item));
 	}
 
 	@Override
@@ -139,7 +147,8 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onPlayerLogOut(Player player) {
-		removeItems(player);
+		player.getEffectController().removeEffect(10251);
+		player.getEffectController().removeEffect(10252);
 	}
 
 	private void openDoor(int doorId) {
@@ -158,11 +167,11 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("TALOCS_1", mapId, new Point3D(253.85039, 649.23535, 1171.8772), new Point3D(253.85039, 649.23535,
-			1177.8772), new Point3D(262.84872, 649.4091, 1171.8772), 8), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("TALOCS_1", mapId, new Point3D(253.85039, 649.23535, 1171.8772),
+			new Point3D(253.85039, 649.23535, 1177.8772), new Point3D(262.84872, 649.4091, 1171.8772), 8), instanceId);
 		f1.spawn();
-		FlyRing f2 = new FlyRing(new FlyRingTemplate("TALOCS_2", mapId, new Point3D(592.32275, 844.056, 1295.0966), new Point3D(592.32275, 844.056,
-			1301.0966), new Point3D(595.2305, 835.5387, 1295.0966), 8), instanceId);
+		FlyRing f2 = new FlyRing(new FlyRingTemplate("TALOCS_2", mapId, new Point3D(592.32275, 844.056, 1295.0966),
+			new Point3D(592.32275, 844.056, 1301.0966), new Point3D(595.2305, 835.5387, 1295.0966), 8), instanceId);
 		f2.spawn();
 	}
 
