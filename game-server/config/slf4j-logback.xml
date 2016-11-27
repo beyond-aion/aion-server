@@ -1,20 +1,23 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<property name="logFolder" value="log" />
+	<property file="config/main/gameserver.properties" />
 	<property file="config/main/logging.properties" />
 	<property file="config/mygs.properties" />
+	<property name="logFolder" value="log" />
+	<property name="time" value="%date{HH:mm:ssXXX,${gameserver.timezone}}" />
+	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;,${gameserver.timezone}}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
 		<encoder>
 			<charset>CP850</charset> <!-- UTF-8 on linux -->
-			<Pattern>%date{HH:mm:ss} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
+			<Pattern>${time} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_console" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/server_console.log</file>
 		<encoder>
 			<charset>UTF-8</charset>
-			<Pattern>%date %-5level [%thread] %logger - %message%n</Pattern>
+			<Pattern>${date} %-5level [%thread] %logger - %message%n</Pattern>
 			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
@@ -26,7 +29,7 @@
 		</filter>
 		<file>${logFolder}/server_warnings.log</file>
 		<encoder>
-			<Pattern>%date %logger - %message%n</Pattern>
+			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_error" class="ch.qos.logback.core.FileAppender">
@@ -37,7 +40,7 @@
 		</filter>
 		<file>${logFolder}/server_errors.log</file>
 		<encoder>
-			<Pattern>%date %logger - %message%n</Pattern>
+			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_status_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
@@ -59,123 +62,123 @@
 	<appender name="app_admincmd" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/adminaudit.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_audit" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/audit.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_autogroup" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/autogroup.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_chat" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/chat.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_craft" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/craft.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_exchange" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/exchange.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_gconnection" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/gameconnections.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_gmitemrestriction" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/gm_item_restriction.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_headhunting" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/headhunting.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_ingameshop" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/ingameshop.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_tampering" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/tampering.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_item" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/item.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_item2" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/item_htmls.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_kill" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/kill.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_mail" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/mail.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_playertransfer" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/playertransfer.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_siege" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/siege.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_sysmail" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/sysmail.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_webrewards" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/webrewards.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_auction" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/auction.log</file>
 		<encoder>
-			<Pattern>%date %message%n</Pattern>
+			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<logger name="ADMINAUDIT_LOG" additivity="false">
