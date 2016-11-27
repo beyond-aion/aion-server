@@ -14,15 +14,14 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_MOVE_IN_AIR extends AionClientPacket {
 
-	float x, y, z;
-	int distance;
-	@SuppressWarnings("unused")
-	private byte locationId;
 	@SuppressWarnings("unused")
 	private int worldId;
+	private float x, y, z;
+	private byte heading;
+	private int distance;
 
 	/**
-	 * Constructs new instance of <tt>CM_MOVE_IN_AIR </tt> packet
+	 * Constructs new instance of <tt>CM_MOVE_IN_AIR</tt> packet
 	 * 
 	 * @param opcode
 	 */
@@ -30,33 +29,30 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		worldId = readD();
 		x = readF();
 		y = readF();
 		z = readF();
-		locationId = (byte) readC();
+		heading = readSC();
 		distance = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isInState(CreatureState.FLIGHT_TELEPORT)) {
-			if (player.isUsingFlyTeleport()) {
-				player.setFlightDistance(distance);
-			} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-				player.windstreamPath.distance = distance;
-			}
-			World.getInstance().updatePosition(player, x, y, z, (byte) 0);
-			player.getMoveController().updateLastMove();
+		if (!player.isSpawned())
+			return;
+		if (!player.isInState(CreatureState.FLIGHT_TELEPORT))
+			return;
+
+		if (player.isUsingFlyTeleport()) {
+			player.setFlightDistance(distance);
+		} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+			player.windstreamPath.distance = distance;
 		}
+		World.getInstance().updatePosition(player, x, y, z, heading);
+		player.getMoveController().updateLastMove();
 	}
 }

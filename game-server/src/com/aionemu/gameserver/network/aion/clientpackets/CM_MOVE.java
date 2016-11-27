@@ -10,7 +10,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * Packet about player movement.
@@ -35,8 +34,8 @@ public class CM_MOVE extends AionClientPacket {
 		y = readF();
 		z = readF();
 
-		heading = (byte) readC();
-		type = (byte) readC();
+		heading = readSC();
+		type = readSC();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
@@ -53,7 +52,7 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			glideFlag = (byte) readC();
+			glideFlag = readSC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
 			unk1 = readD();
@@ -69,8 +68,7 @@ public class CM_MOVE extends AionClientPacket {
 		final Player player = getConnection().getActivePlayer();
 		if (player == null)
 			return;
-		WorldPosition pos = player.getPosition();
-		if (pos == null || !pos.isSpawned())
+		if (!player.isSpawned())
 			return;
 		if (player.getLifeStats().isAlreadyDead())
 			return;
