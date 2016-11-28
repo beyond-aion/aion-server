@@ -48,9 +48,6 @@ public class CM_GROUP_LOOT extends AionClientPacket {
 		bid = readQ();// 0: No Bid else bid amount
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

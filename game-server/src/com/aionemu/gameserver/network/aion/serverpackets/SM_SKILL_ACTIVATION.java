@@ -35,9 +35,6 @@ public class SM_SKILL_ACTIVATION extends AionServerPacket {
 		this.unk = 1;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(skillId);

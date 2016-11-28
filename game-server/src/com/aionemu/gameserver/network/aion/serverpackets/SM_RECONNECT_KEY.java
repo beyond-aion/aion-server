@@ -25,9 +25,6 @@ public class SM_RECONNECT_KEY extends AionServerPacket {
 		this.key = key;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(0x00);

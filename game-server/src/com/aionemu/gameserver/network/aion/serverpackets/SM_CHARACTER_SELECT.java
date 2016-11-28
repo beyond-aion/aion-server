@@ -23,9 +23,6 @@ public class SM_CHARACTER_SELECT extends AionServerPacket {
 		this.wrongCount = wrongCount;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(type);

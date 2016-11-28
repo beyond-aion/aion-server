@@ -117,9 +117,6 @@ public class RectangleArea extends AbstractArea {
 		this.maxY = maxY;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside2D(float x, float y) {
 		return x >= minX && x <= maxX && y >= minY && y <= maxY;
@@ -132,9 +129,6 @@ public class RectangleArea extends AbstractArea {
 		return super.isInside3D(x, y, z);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance2D(float x, float y) {
 		if (isInside2D(x, y)) {
@@ -145,9 +139,6 @@ public class RectangleArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance3D(float x, float y, float z) {
 		if (isInside3D(x, y, z)) {
@@ -160,9 +151,6 @@ public class RectangleArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point2D getClosestPoint(float x, float y) {
 

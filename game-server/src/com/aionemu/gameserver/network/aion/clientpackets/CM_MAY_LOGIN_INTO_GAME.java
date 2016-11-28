@@ -21,17 +21,11 @@ public class CM_MAY_LOGIN_INTO_GAME extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		// empty
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();

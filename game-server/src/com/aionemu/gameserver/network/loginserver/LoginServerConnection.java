@@ -108,9 +108,6 @@ public class LoginServerConnection extends AConnection {
 		LoginServer.getInstance().reconnect();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to loginserver before closing?

@@ -295,7 +295,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 * {@inheritDoc} Should only be triggered from one place (life stats)
+	 * Should only be triggered from one place (life stats)
 	 */
 	// TODO [AT] move
 	public void onEnterWorld() {
@@ -319,6 +319,7 @@ public class PlayerController extends CreatureController<Player> {
 		InstanceService.onEnterInstance(getOwner());
 	}
 
+	@Override
 	public void onDie(@Nonnull Creature lastAttacker) {
 		Player player = this.getOwner();
 		player.getController().cancelCurrentSkill(null);

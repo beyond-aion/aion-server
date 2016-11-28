@@ -90,9 +90,6 @@ public class LegionContainer implements Iterable<Legion> {
 		return legionsByName.containsKey(name.toLowerCase());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<Legion> iterator() {
 		return legionsById.values().iterator();

@@ -36,9 +36,6 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		// PacketLoggerService.getInstance().logPacketCM(this.getPacketName());

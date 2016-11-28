@@ -25,9 +25,6 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket {
 		this(cooldowns, false);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(calculateSize());

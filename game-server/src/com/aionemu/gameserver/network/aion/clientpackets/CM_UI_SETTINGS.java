@@ -25,9 +25,6 @@ public class CM_UI_SETTINGS extends AionClientPacket {
 		data = readB(getRemainingBytes());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

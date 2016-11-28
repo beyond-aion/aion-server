@@ -38,9 +38,6 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		AionConnection client = getConnection();
@@ -150,9 +147,6 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		playerAppearance.setHeight(readF());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();

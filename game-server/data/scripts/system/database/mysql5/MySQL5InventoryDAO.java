@@ -472,9 +472,6 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		return new int[0];
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

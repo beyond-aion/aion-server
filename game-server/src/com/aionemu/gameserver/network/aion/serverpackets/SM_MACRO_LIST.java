@@ -24,9 +24,6 @@ public class SM_MACRO_LIST extends AionServerPacket {
 		this.secondPart = secondPart;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(player.getObjectId());// player id

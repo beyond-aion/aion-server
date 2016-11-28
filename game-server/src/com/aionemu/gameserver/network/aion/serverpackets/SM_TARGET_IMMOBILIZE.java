@@ -15,9 +15,6 @@ public class SM_TARGET_IMMOBILIZE extends AionServerPacket {
 		this.creature = creature;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(creature.getObjectId());

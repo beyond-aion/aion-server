@@ -61,17 +61,11 @@ public class PolyArea extends AbstractArea {
 		this.poly = new Polygon2D(xPoints, yPoints, points.length);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside2D(float x, float y) {
 		return poly.contains(x, y);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance2D(float x, float y) {
 		if (isInside2D(x, y)) {
@@ -82,9 +76,6 @@ public class PolyArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance3D(float x, float y, float z) {
 		if (isInside3D(x, y, z)) {
@@ -97,9 +88,6 @@ public class PolyArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point2D getClosestPoint(float x, float y) {
 

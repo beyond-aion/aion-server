@@ -59,9 +59,6 @@ public class PriorityThreadFactory implements ThreadFactory {
 		return threadPool;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Thread newThread(final Runnable r) {
 		Thread t = new Thread(group, r);

@@ -103,9 +103,6 @@ public class BlockList implements Iterable<BlockedPlayer> {
 		return getSize() >= MAX_BLOCKS;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<BlockedPlayer> iterator() {
 		return blockedList.values().iterator();

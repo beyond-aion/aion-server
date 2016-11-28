@@ -44,9 +44,6 @@ public class SM_BAN extends LsServerPacket {
 		this.adminObjId = adminObjId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeC(type);

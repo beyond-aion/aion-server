@@ -22,9 +22,6 @@ public class SM_STATUPDATE_MP extends AionServerPacket {
 		this.maxMp = maxMp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(currentMp);

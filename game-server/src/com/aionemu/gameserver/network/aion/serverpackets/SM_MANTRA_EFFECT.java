@@ -17,9 +17,6 @@ public class SM_MANTRA_EFFECT extends AionServerPacket {
 		this.subEffectId = subEffectId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(0x00);// unk

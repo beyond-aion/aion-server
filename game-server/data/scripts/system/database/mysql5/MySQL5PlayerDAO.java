@@ -42,8 +42,7 @@ import javolution.util.FastMap;
 import javolution.util.FastTable;
 
 /**
- * @author SoulKeeper, Saelya
- * @author cura
+ * @author SoulKeeper, Saelya, cura, KID
  */
 public class MySQL5PlayerDAO extends PlayerDAO {
 
@@ -51,9 +50,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	private ConcurrentHashMap<Integer, PlayerCommonData> playerCommonData = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<String, PlayerCommonData> playerCommonDataByName = new ConcurrentHashMap<>();
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isNameUsed(final String name) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM players WHERE ? = players.name");
@@ -98,9 +94,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void changePlayerAccountId(final Player player, final int accountId) {
 		try {
@@ -115,9 +108,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void storePlayer(final Player player) {
 		try {
@@ -168,9 +158,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean saveNewPlayer(final Player player, final int accountId, final String accountName) {
 		try {
@@ -307,9 +294,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void deletePlayer(int playerId) {
 		PreparedStatement statement = DB.prepareStatement("DELETE FROM players WHERE id = ?");
@@ -327,9 +311,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<Integer> getPlayerOidsOnAccount(final int accountId) {
 		final List<Integer> result = new FastTable<>();
@@ -373,9 +354,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return success ? result : null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setCreationDeletionTime(final PlayerAccountData acData) {
 		DB.select("SELECT creation_date, deletion_date FROM players WHERE id = ?", new ParamReadStH() {
@@ -395,9 +373,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void updateDeletionTime(final int objectId, final Timestamp deletionDate) {
 		DB.insertUpdate("UPDATE players set deletion_date = ? where id = ?", new IUStH() {
@@ -411,9 +386,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void storeCreationTime(final int objectId, final Timestamp creationDate) {
 		DB.insertUpdate("UPDATE players set creation_date = ? where id = ?", new IUStH() {
@@ -440,9 +412,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int[] getUsedIDs() {
 		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -467,9 +436,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return new int[0];
 	}
 
-	/**
-	 * {@inheritDoc} - Saelya
-	 */
 	@Override
 	public void onlinePlayer(final Player player, final boolean online) {
 		DB.insertUpdate("UPDATE players SET online=? WHERE id=?", new IUStH() {
@@ -539,9 +505,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return result[0];
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getAccountIdByName(final String name) {
 		int accountId = 0;
@@ -634,9 +597,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return count;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
@@ -679,9 +639,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return inactiveAccounts.keySet();
 	}
 
-	/**
-	 * {@inheritDoc} - KID
-	 */
 	@Override
 	public void setPlayerLastTransferTime(final int playerId, final long time) {
 		DB.insertUpdate("UPDATE players SET last_transfer_time=? WHERE id=?", new IUStH() {
@@ -695,6 +652,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		});
 	}
 
+	@Override
 	public int getOldCharacterLevel(int playerObjectId) {
 		int oldLevel = 0;
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
@@ -709,6 +667,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		return oldLevel;
 	}
 
+	@Override
 	public void storeOldCharacterLevel(int playerObjectId, int level) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET old_level=? WHERE id=?")) {
 			stmt.setInt(1, level);
@@ -719,9 +678,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

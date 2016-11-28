@@ -171,9 +171,6 @@ public class FriendList implements Iterable<Friend> {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<Friend> iterator() {
 		return friends.iterator();

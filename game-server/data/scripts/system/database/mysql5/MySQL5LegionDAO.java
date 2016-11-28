@@ -54,9 +54,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
 	private static final String CLEAR_LEGION_SIEGE = "UPDATE siege_locations SET legion_id=0 WHERE legion_id=?";
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isNameUsed(final String name) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM legions WHERE ? = legions.name");
@@ -73,9 +70,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean saveNewLegion(final Legion legion) {
 		boolean success = DB.insertUpdate(INSERT_LEGION_QUERY, new IUStH() {
@@ -92,9 +86,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return success;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void storeLegion(final Legion legion) {
 		DB.insertUpdate(UPDATE_LEGION_QUERY, new IUStH() {
@@ -121,9 +112,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Legion loadLegion(final String legionName) {
 		final Legion legion = new Legion();
@@ -160,9 +148,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return (success && legion.getLegionId() != 0) ? legion : null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Legion loadLegion(final int legionId) {
 		final Legion legion = new Legion();
@@ -199,9 +184,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return (success && !legion.getLegionName().equals("")) ? legion : null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void deleteLegion(int legionId) {
 		PreparedStatement statement = DB.prepareStatement(DELETE_LEGION_QUERY);
@@ -221,9 +203,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int[] getUsedIDs() {
 		PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -248,17 +227,11 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return new int[0];
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public TreeMap<Timestamp, String> loadAnnouncementList(final int legionId) {
 		final TreeMap<Timestamp, String> announcementList = new TreeMap<>();
@@ -286,9 +259,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return success ? announcementList : null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean saveNewAnnouncement(final int legionId, final Timestamp currentTime, final String message) {
 		boolean success = DB.insertUpdate(INSERT_ANNOUNCEMENT_QUERY, new IUStH() {
@@ -306,9 +276,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return success;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void removeAnnouncement(int legionId, Timestamp unixTime) {
 		PreparedStatement statement = DB.prepareStatement(DELETE_ANNOUNCEMENT_QUERY);
@@ -321,9 +288,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void storeLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
 		if (!validEmblem(legionEmblem))
@@ -412,9 +376,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public LegionEmblem loadLegionEmblem(final int legionId) {
 		final LegionEmblem legionEmblem = new LegionEmblem();
@@ -439,9 +400,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return legionEmblem;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public LegionWarehouse loadLegionStorage(Legion legion) {
 		final LegionWarehouse inventory = new LegionWarehouse(legion);
@@ -497,9 +455,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return inventory;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void loadLegionHistory(final Legion legion) {
 
@@ -522,9 +477,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean saveNewLegionHistory(final int legionId, final LegionHistory legionHistory) {
 		boolean success = DB.insertUpdate(INSERT_HISTORY_QUERY, new IUStH() {

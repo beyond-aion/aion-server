@@ -27,9 +27,6 @@ public class SM_FORCED_MOVE extends AionServerPacket {
 		this.z = z;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(creature.getObjectId());

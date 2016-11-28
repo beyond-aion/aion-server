@@ -26,9 +26,6 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		raceId = readC();
@@ -44,9 +41,6 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		// calculate rankings and send packet

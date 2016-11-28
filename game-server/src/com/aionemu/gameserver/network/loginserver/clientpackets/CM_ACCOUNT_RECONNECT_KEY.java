@@ -23,18 +23,12 @@ public class CM_ACCOUNT_RECONNECT_KEY extends LsClientPacket {
 	 */
 	private int reconnectKey;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void readImpl() {
 		accountId = readD();
 		reconnectKey = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void runImpl() {
 		LoginServer.getInstance().authReconnectionResponse(accountId, reconnectKey);

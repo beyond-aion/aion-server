@@ -32,9 +32,6 @@ public class CM_VERSION_CHECK extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		version = readH();
@@ -45,9 +42,6 @@ public class CM_VERSION_CHECK extends AionClientPacket {
 		readC();// always 2?
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		sendPacket(new SM_VERSION_CHECK(version, EventService.getInstance().getEventType()));

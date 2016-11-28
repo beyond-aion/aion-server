@@ -103,9 +103,6 @@ public class ScriptContextImpl implements ScriptContext {
 		this.parentScriptContext = parent;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public synchronized void init() {
 
@@ -134,9 +131,6 @@ public class ScriptContextImpl implements ScriptContext {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public synchronized void shutdown() {
 
@@ -155,74 +149,47 @@ public class ScriptContextImpl implements ScriptContext {
 		compilationResult = null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void reload() {
 		shutdown();
 		init();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public File getRoot() {
 		return root;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public CompilationResult getCompilationResult() {
 		return compilationResult;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public synchronized boolean isInitialized() {
 		return compilationResult != null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setLibraries(Iterable<File> files) {
 		this.libraries = files;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterable<File> getLibraries() {
 		return libraries;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ScriptContext getParentScriptContext() {
 		return parentScriptContext;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Collection<ScriptContext> getChildScriptContexts() {
 		return childScriptContexts;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addChildScriptContext(ScriptContext context) {
 
@@ -244,17 +211,11 @@ public class ScriptContextImpl implements ScriptContext {
 		childScriptContexts.add(context);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setClassListener(ClassListener cl) {
 		classListener = cl;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ClassListener getClassListener() {
 		if (classListener == null) {
@@ -270,17 +231,11 @@ public class ScriptContextImpl implements ScriptContext {
 		return classListener;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setCompilerClassName(String className) {
 		this.compilerClassName = className;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getCompilerClassName() {
 		return this.compilerClassName;
@@ -310,9 +265,6 @@ public class ScriptContextImpl implements ScriptContext {
 		return sc;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ScriptContextImpl)) {
@@ -327,9 +279,6 @@ public class ScriptContextImpl implements ScriptContext {
 		return another.getRoot().equals(root) && parentScriptContext.equals(another.parentScriptContext);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int hashCode() {
 		int result = parentScriptContext != null ? parentScriptContext.hashCode() : 0;
@@ -337,9 +286,6 @@ public class ScriptContextImpl implements ScriptContext {
 		return result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void finalize() throws Throwable {
 		if (compilationResult != null) {

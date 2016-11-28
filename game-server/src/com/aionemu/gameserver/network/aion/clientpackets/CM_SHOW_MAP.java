@@ -21,9 +21,6 @@ public class CM_SHOW_MAP extends AionClientPacket {
 		action = readC();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

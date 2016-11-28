@@ -19,9 +19,6 @@ public class SM_UI_SETTINGS extends AionServerPacket {
 		this.type = type;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(type);

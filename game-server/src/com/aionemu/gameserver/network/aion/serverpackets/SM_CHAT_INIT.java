@@ -17,9 +17,6 @@ public class SM_CHAT_INIT extends AionServerPacket {
 		this.token = token;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(token.length);

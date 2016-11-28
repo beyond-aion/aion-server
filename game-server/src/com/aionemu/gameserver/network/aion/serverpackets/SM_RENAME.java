@@ -18,9 +18,6 @@ public class SM_RENAME extends AionServerPacket {
 		this.newName = newName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(0); // unk

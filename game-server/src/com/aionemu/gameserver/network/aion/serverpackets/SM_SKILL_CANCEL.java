@@ -17,9 +17,6 @@ public class SM_SKILL_CANCEL extends AionServerPacket {
 		this.skillId = skillId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(creature.getObjectId());

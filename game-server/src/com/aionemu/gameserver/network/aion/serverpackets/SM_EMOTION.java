@@ -116,9 +116,6 @@ public class SM_EMOTION extends AionServerPacket {
 		this.currentAttackSpeed = aSpeed.getCurrent();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(senderObjectId);

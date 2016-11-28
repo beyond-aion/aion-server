@@ -19,9 +19,6 @@ public class SM_STATUPDATE_DP extends AionServerPacket {
 		this.currentDp = currentDp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(currentDp);

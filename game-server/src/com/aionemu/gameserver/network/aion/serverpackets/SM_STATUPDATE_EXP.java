@@ -31,9 +31,6 @@ public class SM_STATUPDATE_EXP extends AionServerPacket {
 		maxBoostExp = rep2;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeQ(currentExp);

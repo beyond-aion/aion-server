@@ -36,7 +36,6 @@ abstract class AbstractCacheMap<K, V> implements CacheMap<K, V> {
 		this.log = log;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void put(K key, V value) {
 		cleanQueue();
@@ -52,7 +51,6 @@ abstract class AbstractCacheMap<K, V> implements CacheMap<K, V> {
 			log.debug(cacheName + " : added " + valueName + " for key: " + key);
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public V get(K key) {
 		cleanQueue();

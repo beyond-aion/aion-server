@@ -66,9 +66,6 @@ public class SM_TITLE_INFO extends AionServerPacket {
 		this.bonusTitleId = bonusTitleId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(action);

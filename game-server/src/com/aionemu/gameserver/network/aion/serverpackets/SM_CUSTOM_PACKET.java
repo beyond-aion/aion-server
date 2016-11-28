@@ -149,7 +149,6 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
 		elements.add(new PacketElement(type, value));
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void writeImpl(AionConnection con) {
 		for (PacketElement el : elements) {

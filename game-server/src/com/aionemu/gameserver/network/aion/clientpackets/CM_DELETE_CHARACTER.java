@@ -39,18 +39,12 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		playOk2 = readD();
 		chaOid = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();

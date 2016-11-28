@@ -34,9 +34,6 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<WorldMapTemplate> iterator() {
 		return worldMaps.iterator();

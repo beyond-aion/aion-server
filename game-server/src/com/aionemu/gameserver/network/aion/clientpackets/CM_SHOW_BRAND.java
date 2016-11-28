@@ -26,9 +26,6 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		action = readD();
@@ -36,9 +33,6 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 		targetObjectId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

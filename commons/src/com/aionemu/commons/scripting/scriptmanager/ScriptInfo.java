@@ -150,7 +150,6 @@ public class ScriptInfo {
 		return root.hashCode();
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();

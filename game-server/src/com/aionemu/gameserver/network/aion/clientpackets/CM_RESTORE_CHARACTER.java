@@ -33,18 +33,12 @@ public class CM_RESTORE_CHARACTER extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		playOk2 = readD();
 		chaOid = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Account account = getConnection().getAccount();

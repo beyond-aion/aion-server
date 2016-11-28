@@ -42,81 +42,51 @@ public abstract class AbstractArea implements Area {
 		this.worldId = worldId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside2D(Point2D point) {
 		return isInside2D(point.getX(), point.getY());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside3D(Point3D point) {
 		return isInside3D(point.getX(), point.getY(), point.getZ());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside3D(float x, float y, float z) {
 		return isInsideZ(z) && isInside2D(x, y);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInsideZ(Point3D point) {
 		return isInsideZ(point.getZ());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInsideZ(float z) {
 		return z >= getMinZ() && z <= getMaxZ();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance2D(Point2D point) {
 		return getDistance2D(point.getX(), point.getY());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance3D(Point3D point) {
 		return getDistance3D(point.getX(), point.getY(), point.getZ());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point2D getClosestPoint(Point2D point) {
 		return getClosestPoint(point.getX(), point.getY());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point3D getClosestPoint(Point3D point) {
 		return getClosestPoint(point.getX(), point.getY(), point.getZ());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point3D getClosestPoint(float x, float y, float z) {
 		Point2D closest2d = getClosestPoint(x, y);
@@ -134,17 +104,11 @@ public abstract class AbstractArea implements Area {
 		return new Point3D(closest2d.getX(), closest2d.getY(), zCoord);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getMinZ() {
 		return minZ;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getMaxZ() {
 		return maxZ;

@@ -34,9 +34,6 @@ public class SM_GROUP_LOOT extends AionServerPacket {
 		this.luck = luck;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(groupId);

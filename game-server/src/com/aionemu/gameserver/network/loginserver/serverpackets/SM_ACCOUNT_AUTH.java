@@ -45,9 +45,6 @@ public class SM_ACCOUNT_AUTH extends LsServerPacket {
 		this.playOk2 = playOk2;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accountId);

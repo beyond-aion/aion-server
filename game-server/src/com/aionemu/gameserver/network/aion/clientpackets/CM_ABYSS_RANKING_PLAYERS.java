@@ -28,9 +28,6 @@ public class CM_ABYSS_RANKING_PLAYERS extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		raceId = readC();
@@ -46,9 +43,6 @@ public class CM_ABYSS_RANKING_PLAYERS extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		if (queriedRace != null) {

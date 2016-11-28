@@ -27,9 +27,6 @@ public class SM_RESTORE_CHARACTER extends AionServerPacket {
 		this.success = success;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(success ? 0x00 : 0x10);// unk

@@ -29,9 +29,6 @@ public class CM_WINDSTREAM extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		teleportId = readD();
@@ -39,9 +36,6 @@ public class CM_WINDSTREAM extends AionClientPacket {
 		state = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

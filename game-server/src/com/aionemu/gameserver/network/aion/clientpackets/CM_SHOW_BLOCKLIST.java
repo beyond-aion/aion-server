@@ -15,17 +15,11 @@ public class CM_SHOW_BLOCKLIST extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		sendPacket(new SM_BLOCK_LIST());

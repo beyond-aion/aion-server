@@ -16,18 +16,12 @@ public class CM_BREAK_WEAPONS extends AionClientPacket {
 
 	private int weaponToBreakUniqueId;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		readD();
 		weaponToBreakUniqueId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

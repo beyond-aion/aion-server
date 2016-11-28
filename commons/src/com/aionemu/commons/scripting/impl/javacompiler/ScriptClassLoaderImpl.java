@@ -74,9 +74,6 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		return classFileManager;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Set<String> getCompiledClasses() {
 		Set<String> compiledClasses = classFileManager.getCompiledClasses().keySet();
@@ -193,9 +190,6 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		return clazz;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public byte[] getByteCode(String className) {
 		BinaryClass bc = getClassFileManager().getCompiledClasses().get(className);
@@ -204,9 +198,6 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		return b;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Class<?> getDefinedClass(String name) {
 		BinaryClass bc = classFileManager.getCompiledClasses().get(name);
@@ -217,9 +208,6 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		return bc.getDefinedClass();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void setDefinedClass(String name, Class<?> clazz) {
 		BinaryClass bc = classFileManager.getCompiledClasses().get(name);

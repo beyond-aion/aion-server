@@ -53,9 +53,6 @@ public abstract class BlockListDAO implements DAO {
 	 */
 	public abstract boolean setReason(int playerObjId, int blockedObjId, String reason);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getClassName() {
 		return BlockListDAO.class.getName();

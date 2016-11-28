@@ -33,8 +33,6 @@ public class CompilationResult {
 	}
 
 	/**
-	 * Returns classLoader that was used by compiler
-	 * 
 	 * @return classloader that was used by compiler
 	 */
 	public ScriptClassLoader getClassLoader() {
@@ -42,15 +40,12 @@ public class CompilationResult {
 	}
 
 	/**
-	 * Retunrs list of classes that were compiled
-	 * 
 	 * @return list of classes that were compiled
 	 */
 	public Class<?>[] getCompiledClasses() {
 		return compiledClasses;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();

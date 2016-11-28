@@ -41,9 +41,6 @@ public class SM_TARGET_SELECTED extends AionServerPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjId);

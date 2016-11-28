@@ -28,9 +28,6 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		type = readH(); // 0:new, 2:update, 3:input
@@ -42,9 +39,6 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();

@@ -7,9 +7,6 @@ import com.aionemu.commons.database.dao.DAO;
  */
 public abstract class ServerVariablesDAO implements DAO {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final String getClassName() {
 		return ServerVariablesDAO.class.getName();

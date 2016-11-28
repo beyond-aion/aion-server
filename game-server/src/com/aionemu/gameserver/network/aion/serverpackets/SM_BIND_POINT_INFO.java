@@ -24,9 +24,6 @@ public class SM_BIND_POINT_INFO extends AionServerPacket {
 		this.kisk = player.getKisk();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		// Appears 0x04 if bound to a kisk. 0x00 if not.

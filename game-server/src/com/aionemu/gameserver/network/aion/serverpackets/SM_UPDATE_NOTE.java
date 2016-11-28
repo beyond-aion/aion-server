@@ -16,9 +16,6 @@ public class SM_UPDATE_NOTE extends AionServerPacket {
 		this.note = note;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjId);

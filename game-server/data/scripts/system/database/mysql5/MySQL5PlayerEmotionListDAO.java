@@ -25,9 +25,6 @@ public class MySQL5PlayerEmotionListDAO extends PlayerEmotionListDAO {
 	public static final String SELECT_QUERY = "SELECT `emotion`, `remaining` FROM `player_emotions` WHERE `player_id`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_emotions` WHERE `player_id`=? AND `emotion`=?";
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String databaseName, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);

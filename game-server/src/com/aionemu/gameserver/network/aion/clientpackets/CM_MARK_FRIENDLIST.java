@@ -20,9 +20,6 @@ public class CM_MARK_FRIENDLIST extends AionClientPacket {
 		// nothing to read
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final Player activePlayer = getConnection().getActivePlayer();

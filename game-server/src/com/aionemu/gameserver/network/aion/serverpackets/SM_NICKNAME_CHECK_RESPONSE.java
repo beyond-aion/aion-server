@@ -26,9 +26,6 @@ public class SM_NICKNAME_CHECK_RESPONSE extends AionServerPacket {
 		this.value = value;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		/**

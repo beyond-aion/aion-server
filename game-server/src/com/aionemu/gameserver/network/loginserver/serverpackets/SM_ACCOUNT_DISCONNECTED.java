@@ -26,9 +26,6 @@ public class SM_ACCOUNT_DISCONNECTED extends LsServerPacket {
 		this.accountId = accountId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accountId);

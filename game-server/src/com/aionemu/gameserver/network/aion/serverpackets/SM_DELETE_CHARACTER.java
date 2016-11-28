@@ -21,9 +21,6 @@ public class SM_DELETE_CHARACTER extends AionServerPacket {
 		this.deletionTime = deletionTime;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		if (playerObjId != 0) {

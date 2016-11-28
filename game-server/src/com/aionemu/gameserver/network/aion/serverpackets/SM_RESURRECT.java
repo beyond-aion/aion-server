@@ -22,9 +22,6 @@ public class SM_RESURRECT extends AionServerPacket {
 		this.skillId = skillId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeS(name);

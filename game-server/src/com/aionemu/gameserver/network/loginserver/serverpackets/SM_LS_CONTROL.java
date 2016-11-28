@@ -28,9 +28,6 @@ public class SM_LS_CONTROL extends LsServerPacket {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeC(type);

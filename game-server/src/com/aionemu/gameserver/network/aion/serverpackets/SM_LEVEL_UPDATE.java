@@ -18,10 +18,6 @@ public class SM_LEVEL_UPDATE extends AionServerPacket {
 		this.level = level;
 	}
 
-	/**
-	 * {@inheritDoc} dc
-	 */
-
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjectId);

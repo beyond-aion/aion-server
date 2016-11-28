@@ -17,9 +17,6 @@ public class SM_ITEM_COOLDOWN extends AionServerPacket {
 		this.cooldowns = cooldowns;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(cooldowns.size());

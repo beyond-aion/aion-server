@@ -16,10 +16,6 @@ public class SM_LOOT_STATUS extends AionServerPacket {
 		this.state = state;
 	}
 
-	/**
-	 * {@inheritDoc} dc
-	 */
-
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjectId);

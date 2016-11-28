@@ -68,9 +68,6 @@ public class MySQL5FriendListDAO extends FriendListDAO {
 		return new FriendList(player, friends);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean addFriends(final Player player, final Player friend) {
 		return DB.insertUpdate(ADD_QUERY, new IUStH() {
@@ -124,9 +121,6 @@ public class MySQL5FriendListDAO extends FriendListDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

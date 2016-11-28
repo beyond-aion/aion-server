@@ -219,9 +219,6 @@ public class PacketProcessor<T extends AConnection> {
 	 */
 	private final class PacketProcessorTask implements Runnable {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public void run() {
 			BaseClientPacket<T> packet = null;
@@ -260,9 +257,6 @@ public class PacketProcessor<T extends AConnection> {
 		 */
 		private int lastSize = 0;
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public void run() {
 			/* Sleep for some time */

@@ -38,9 +38,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 	private static final String SELECT_LEGIONMEMBEREX_QUERY = "SELECT players.name, players.exp, players.player_class, players.last_online, players.world_id, legion_members.* FROM players, legion_members WHERE id = ? AND players.id=legion_members.player_id";
 	private static final String SELECT_LEGIONMEMBEREX2_QUERY = "SELECT players.id, players.exp, players.player_class, players.last_online, players.world_id, legion_members.* FROM players, legion_members WHERE name = ? AND players.id=legion_members.player_id";
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isIdUsed(final int playerObjId) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
@@ -57,9 +54,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean saveNewLegionMember(final LegionMember legionMember) {
 		boolean success = DB.insertUpdate(INSERT_LEGIONMEMBER_QUERY, new IUStH() {
@@ -75,9 +69,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		return success;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void storeLegionMember(final int playerId, final LegionMember legionMember) {
 		DB.insertUpdate(UPDATE_LEGIONMEMBER_QUERY, new IUStH() {
@@ -94,9 +85,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public LegionMember loadLegionMember(final int playerObjId) {
 		if (playerObjId == 0)
@@ -133,9 +121,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public LegionMemberEx loadLegionMemberEx(final int playerObjId) {
 		final LegionMemberEx legionMemberEx = new LegionMemberEx(playerObjId);
@@ -175,9 +160,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public LegionMemberEx loadLegionMemberEx(final String playerName) {
 		final LegionMemberEx legionMember = new LegionMemberEx(playerName);
@@ -217,9 +199,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<Integer> loadLegionMembers(final int legionId) {
 		final List<Integer> legionMembers = new FastTable<>();
@@ -250,17 +229,11 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void deleteLegionMember(int playerObjId) {
 		PreparedStatement statement = DB.prepareStatement(DELETE_LEGIONMEMBER_QUERY);
@@ -272,9 +245,6 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int[] getUsedIDs() {
 		// TODO: Auto-generated method stub

@@ -18,9 +18,6 @@ public class MySQL5ServerVariablesDAO extends ServerVariablesDAO {
 
 	private static Logger log = LoggerFactory.getLogger(ServerVariablesDAO.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int load(String var) {
 		PreparedStatement ps = DB.prepareStatement("SELECT `value` FROM `server_variables` WHERE `key`=?");
@@ -38,9 +35,6 @@ public class MySQL5ServerVariablesDAO extends ServerVariablesDAO {
 		return 0;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean store(String var, int time) {
 		boolean success = false;
@@ -58,9 +52,6 @@ public class MySQL5ServerVariablesDAO extends ServerVariablesDAO {
 		return success;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String databaseName, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);

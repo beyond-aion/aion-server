@@ -16,17 +16,11 @@ public class CM_SHOW_FRIENDLIST extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final Player activePlayer = getConnection().getActivePlayer();

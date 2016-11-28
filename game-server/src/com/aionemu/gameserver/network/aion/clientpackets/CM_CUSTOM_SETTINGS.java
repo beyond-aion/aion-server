@@ -18,9 +18,6 @@ public class CM_CUSTOM_SETTINGS extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		/**
@@ -33,9 +30,6 @@ public class CM_CUSTOM_SETTINGS extends AionClientPacket {
 		deny = readH();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();

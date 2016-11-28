@@ -41,7 +41,6 @@ public class ScriptList {
 		this.scriptInfos = scriptInfos;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();

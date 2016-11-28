@@ -19,18 +19,12 @@ public class CM_SET_NOTE extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		note = readS();
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();

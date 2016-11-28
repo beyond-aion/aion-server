@@ -29,9 +29,6 @@ public class SM_ATTACK extends AionServerPacket {
 		this.attackList = attackList;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(attacker.getObjectId());

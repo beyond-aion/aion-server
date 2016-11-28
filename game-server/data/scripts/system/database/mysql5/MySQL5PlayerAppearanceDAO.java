@@ -22,9 +22,6 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerAppearanceDAO.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public PlayerAppearance load(final int playerId) {
 		final PlayerAppearance pa = new PlayerAppearance();
@@ -97,9 +94,6 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 		return pa;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean store(final int id, final PlayerAppearance pa) {
 
@@ -175,9 +169,6 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

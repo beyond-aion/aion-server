@@ -28,9 +28,6 @@ public class CM_CRAFT extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		unk = readC();

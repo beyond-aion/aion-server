@@ -42,9 +42,6 @@ public class SM_CASTSPELL extends AionServerPacket {
 		this.z = z;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 

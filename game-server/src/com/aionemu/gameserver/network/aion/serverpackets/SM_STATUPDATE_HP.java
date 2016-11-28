@@ -22,9 +22,6 @@ public class SM_STATUPDATE_HP extends AionServerPacket {
 		this.maxHp = maxHp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(currentHp);

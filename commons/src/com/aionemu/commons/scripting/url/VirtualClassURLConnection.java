@@ -44,9 +44,6 @@ public class VirtualClassURLConnection extends URLConnection {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
 		return is;

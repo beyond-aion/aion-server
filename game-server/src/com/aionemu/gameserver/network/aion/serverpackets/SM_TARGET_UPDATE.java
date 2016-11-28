@@ -15,9 +15,6 @@ public class SM_TARGET_UPDATE extends AionServerPacket {
 		this.player = player;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(player.getObjectId());

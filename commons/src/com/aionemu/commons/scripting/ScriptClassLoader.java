@@ -95,9 +95,6 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public URL getResource(String name) {
 		if (!name.endsWith(".class")) {

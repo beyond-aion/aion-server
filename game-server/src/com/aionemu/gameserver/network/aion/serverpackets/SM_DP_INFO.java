@@ -16,9 +16,6 @@ public class SM_DP_INFO extends AionServerPacket {
 		this.currentDp = currentDp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(playerObjectId);

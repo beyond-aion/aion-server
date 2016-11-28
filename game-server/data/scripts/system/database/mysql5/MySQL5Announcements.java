@@ -18,9 +18,6 @@ import com.aionemu.gameserver.model.Announcement;
  */
 public class MySQL5Announcements extends AnnouncementsDAO {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Set<Announcement> getAnnouncements() {
 		final Set<Announcement> result = new HashSet<>();
@@ -36,9 +33,6 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 		return result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addAnnouncement(final Announcement announce) {
 		DB.insertUpdate("INSERT INTO announcements (announce, faction, type, delay) VALUES (?, ?, ?, ?)", new IUStH() {
@@ -54,9 +48,6 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean delAnnouncement(final int idAnnounce) {
 		return DB.insertUpdate("DELETE FROM announcements WHERE id = ?", new IUStH() {
@@ -69,9 +60,6 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

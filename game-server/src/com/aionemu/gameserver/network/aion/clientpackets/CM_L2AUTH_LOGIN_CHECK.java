@@ -45,9 +45,6 @@ public class CM_L2AUTH_LOGIN_CHECK extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		playOk2 = readD();
@@ -58,9 +55,6 @@ public class CM_L2AUTH_LOGIN_CHECK extends AionClientPacket {
 		unk2 = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		LoginServer.getInstance().requestAuthenticationOfClient(accountId, getConnection(), loginOk, playOk1, playOk2);

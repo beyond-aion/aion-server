@@ -63,17 +63,11 @@ public class CylinderArea extends AbstractArea {
 		this.radius = radius;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isInside2D(float x, float y) {
 		return MathUtil.getDistance(centerX, centerY, x, y) < radius;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance2D(float x, float y) {
 		if (isInside2D(x, y)) {
@@ -83,9 +77,6 @@ public class CylinderArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public double getDistance3D(float x, float y, float z) {
 		if (isInside3D(x, y, z)) {
@@ -101,9 +92,6 @@ public class CylinderArea extends AbstractArea {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Point2D getClosestPoint(float x, float y) {
 		if (isInside2D(x, y)) {

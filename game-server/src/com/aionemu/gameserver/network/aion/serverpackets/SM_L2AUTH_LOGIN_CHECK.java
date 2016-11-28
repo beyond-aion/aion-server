@@ -55,9 +55,6 @@ public class SM_L2AUTH_LOGIN_CHECK extends AionServerPacket {
 		this.accountName = accountName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(ok ? 0x00 : 0x01);

@@ -20,9 +20,6 @@ public class SM_ENTER_WORLD_CHECK extends AionServerPacket {
 		this(Msg.OK);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(msg);

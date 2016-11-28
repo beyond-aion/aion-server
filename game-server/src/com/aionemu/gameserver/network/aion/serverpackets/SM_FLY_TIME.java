@@ -16,9 +16,6 @@ public class SM_FLY_TIME extends AionServerPacket {
 		this.maxFp = maxFp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(currentFp); // current fly time

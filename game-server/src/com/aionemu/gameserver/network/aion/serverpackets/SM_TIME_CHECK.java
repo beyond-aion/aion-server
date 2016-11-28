@@ -27,9 +27,6 @@ public class SM_TIME_CHECK extends AionServerPacket {
 		this.time = (int) dateTime.getTime();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 
 	@Override
 	protected void writeImpl(AionConnection con) {

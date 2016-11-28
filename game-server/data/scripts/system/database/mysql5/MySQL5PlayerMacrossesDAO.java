@@ -66,7 +66,6 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
 		});
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public void deleteMacro(final int playerId, final int macroPosition) {
 		DB.insertUpdate(DELETE_QUERY, new IUStH() {
@@ -81,7 +80,6 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
 		});
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public MacroList restoreMacrosses(final int playerId) {
 		final Map<Integer, String> macrosses = new HashMap<>();
@@ -103,7 +101,6 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
 		return new MacroList(macrosses);
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public boolean supports(String databaseName, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
