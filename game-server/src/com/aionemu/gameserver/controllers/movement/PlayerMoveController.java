@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers.movement;
 
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -46,8 +47,12 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 				lastFallZ = 0;
 				owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR); // calls abortMove() via onDie()
 				owner.getController().onStopMove(); // stops and notifies move observers
-				if (!owner.isInInstance()) {
-					PlayerReviveService.bindRevive(owner); // instant revive at bind point
+				if (!owner.isInInstance()) { // instant revive at kisk or bind point
+					Kisk kisk = owner.getKisk();
+					if (kisk != null && kisk.isActive())
+						PlayerReviveService.kiskRevive(owner);
+					else
+						PlayerReviveService.bindRevive(owner);
 					PacketSendUtility.sendPacket(owner, new SM_EMOTION(owner, EmotionType.RESURRECT)); // send to remove res option window
 				}
 				return;
