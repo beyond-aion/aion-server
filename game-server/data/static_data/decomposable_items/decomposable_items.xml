@@ -25981,36 +25981,36 @@
 		<items chance="1.0">
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
-		<items chance="0.33">
+		<items chance="0.34">
 			<item id="162002030" name="[Event] Premium Restoration Serum" min_count="30" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231085" name="Dye: Bright Aqua" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231086" name="Dye: Bright Green" />
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231087" name="Dye: Bright Sky Blue" />
+			<item id="162000107" name="Saam King's Herbs" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231088" name="Dye: Bright Magenta" />
+			<item id="160010202" name="[Event] Solorius Wine" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231089" name="Dye: Bright Red" />
+			<item id="188052719" name="[Event] Dye Bundle" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="169231090" name="Dye: Bright Blue" />
+			<item id="160010197" name="[Event] Solorius Cake Slice" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
-			<item id="186000237" name="Ancient Coin" min_count="15" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.33">
@@ -26036,31 +26036,31 @@
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231085" name="Dye: Bright Aqua" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231086" name="Dye: Bright Green" />
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231087" name="Dye: Bright Sky Blue" />
+			<item id="162000107" name="Saam King's Herbs" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231088" name="Dye: Bright Magenta" />
+			<item id="160010202" name="[Event] Solorius Wine" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231089" name="Dye: Bright Red" />
+			<item id="188052719" name="[Event] Dye Bundle" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="169231090" name="Dye: Bright Blue" />
+			<item id="160010197" name="[Event] Solorius Cake Slice" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
-			<item id="186000237" name="Ancient Coin" min_count="15" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="0.91">
@@ -26081,40 +26081,41 @@
 		<items chance="4.5">
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
-		<items chance="1.5">
+		<items chance="1.53">
 			<item id="162002030" name="[Event] Premium Restoration Serum" min_count="30" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231085" name="Dye: Bright Aqua" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231086" name="Dye: Bright Green" />
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231087" name="Dye: Bright Sky Blue" />
+			<item id="162000107" name="Saam King's Herbs" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231088" name="Dye: Bright Magenta" />
+			<item id="160010202" name="[Event] Solorius Wine" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231089" name="Dye: Bright Red" />
+			<item id="188052719" name="[Event] Dye Bundle" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="169231090" name="Dye: Bright Blue" />
+			<item id="160010197" name="[Event] Solorius Cake Slice" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="1.5">
-			<item id="186000237" name="Ancient Coin" min_count="15" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
-		<items chance="1.53">
+		<items chance="1.5">
 			<item id="166000195" name="Epsilon Enchantment Stone" min_count="5" />
+			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052989" name="+4 Snowball">
@@ -26135,31 +26136,31 @@
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231085" name="Dye: Bright Aqua" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231086" name="Dye: Bright Green" />
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231087" name="Dye: Bright Sky Blue" />
+			<item id="162000107" name="Saam King's Herbs" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231088" name="Dye: Bright Magenta" />
+			<item id="160010202" name="[Event] Solorius Wine" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231089" name="Dye: Bright Red" />
+			<item id="188052719" name="[Event] Dye Bundle" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="169231090" name="Dye: Bright Blue" />
+			<item id="160010197" name="[Event] Solorius Cake Slice" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
-			<item id="186000237" name="Ancient Coin" min_count="15" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.08">
@@ -26185,31 +26186,31 @@
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231085" name="Dye: Bright Aqua" />
+			<item id="164002116" name="[Event] Rx: Accelerox" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231086" name="Dye: Bright Green" />
+			<item id="164002272" name="[Event] Enduring Greater Raging Wind Scroll" min_count="5" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231087" name="Dye: Bright Sky Blue" />
+			<item id="162000107" name="Saam King's Herbs" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231088" name="Dye: Bright Magenta" />
+			<item id="160010202" name="[Event] Solorius Wine" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231089" name="Dye: Bright Red" />
+			<item id="188052719" name="[Event] Dye Bundle" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="169231090" name="Dye: Bright Blue" />
+			<item id="160010197" name="[Event] Solorius Cake Slice" min_count="3" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
-			<item id="186000237" name="Ancient Coin" min_count="15" />
+			<item id="186000237" name="Ancient Coin" min_count="25" />
 			<item id="182007148" name="[Event] Snowflake Crystal" />
 		</items>
 		<items chance="2.66">
@@ -26283,21 +26284,24 @@
 			<item id="188052822" name="Noble Ancient Manastone Chest" min_count="2" />
 		</items>
 		<items>
-			<item id="188052637" name="[Event] Greater Composite Manastone Bundle" min_count="2" />
+			<item id="188053113" name="Ahserion's Flight Ancient Manastone Bundle" min_count="1" />
 		</items>
 		<items>
 			<item id="166020000" name="Omega Enchantment Stone" min_count="3" />
 		</items>
 		<items>
-			<item id="166100008" name="Greater Supplements (Eternal)" min_count="250" />
+			<item id="166100020" name="[Stamp] Greater Supplements (Eternal)" min_count="250" />
 		</items>
 		<items>
-			<item id="166100011" name="Greater Supplements (Eternal)" min_count="350" />
+			<item id="166100023" name="[Stamp] Greater Supplements (Eternal)" min_count="350" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052997" name="[Event] Crushed Snow Bundle">
 		<items>
 			<item id="188052638" name="[Event] Fabled Godstone Bundle" />
+		</items>
+		<items>
+			<item id="188053295" name="Empyrean Plume Chest" />
 		</items>
 		<items>
 			<item id="166500002" name="Amplification Stone" min_count="1" max_count="3" />
@@ -26318,20 +26322,23 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052999" name="[Event] Brilliant Ice Prism">
-		<items chance="40.0">
+		<items chance="20.0">
+			<item id="188053728" name="Beritra's Equipment Box" />
+		</items>
+		<items chance="20.0">
+			<item id="188053033" name="Kunax's Equipment Box" />
+		</items>
+		<items chance="20.0">
 			<item id="188053006" name="[Event] Hyperion's Mythic Armor Chest" />
 		</items>
-		<items chance="15.0">
+		<items chance="20.0">
 			<item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest" />
 		</items>
-		<items chance="15.0">
-			<item id="187000058" name="Ancient Spirit's Wings" />
+		<items chance="10.0">
+			<item id="187000090" name="Tiamat's Spectral Wings" />
 		</items>
-		<items chance="15.0">
-			<item id="190100146" name="Immortal Knight's War Steed" />
-		</items>
-		<items chance="15.0">
-			<item id="190020020" name="Shugo Lad Egg" />
+		<items chance="10.0">
+			<item id="190100156" name="Quick Frillneck" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000" name="[Event] Assured Greater Felicitous Socketing Box">
@@ -26714,37 +26721,7 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053033" name="Kunax's Equipment Box">
-		<items chance="3">
-			<item id="100001682" name="Destroyer Kunax's Sword" player_classes="TEMPLAR GLADIATOR ASSASSIN" />
-			<item id="101701319" name="Destroyer Kunax's Bow" player_classes="RANGER" />
-			<item id="101801170" name="Destroyer Kunax's Pistol" player_classes="GUNNER" />
-			<item id="100501268" name="Destroyer Kunax's Orb" player_classes="SORCERER SPIRIT_MASTER" />
-			<item id="102001197" name="Destroyer Kunax's Harp" player_classes="BARD" />
-			<item id="101501304" name="Destroyer Kunax's Staff" player_classes="CLERIC CHANTER" />
-			<item id="102100969" name="Destroyer Kunax's Cipher-Blade" player_classes="RIDER" />
-		</items>
-		<items chance="3">
-			<item id="100901305" name="Destroyer Kunax's Greatsword" player_classes="TEMPLAR" />
-			<item id="101301215" name="Destroyer Kunax's Polearm" player_classes="GLADIATOR" />
-			<item id="100201455" name="Destroyer Kunax's Dagger" player_classes="ASSASSIN" />
-			<item id="101701319" name="Destroyer Kunax's Bow" player_classes="RANGER" />
-			<item id="101801170" name="Destroyer Kunax's Pistol" player_classes="GUNNER" />
-			<item id="100601378" name="Destroyer Kunax's Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
-			<item id="102001197" name="Destroyer Kunax's Harp" player_classes="BARD" />
-			<item id="100101281" name="Destroyer Kunax's Mace" player_classes="CLERIC CHANTER" />
-			<item id="102100969" name="Destroyer Kunax's Cipher-Blade" player_classes="RIDER" />
-		</items>
-		<items chance="3">
-			<item id="115001702" name="Destroyer Kunax's Shield" player_classes="TEMPLAR" />
-			<item id="101701319" name="Destroyer Kunax's Bow" player_classes="GLADIATOR ASSASSIN RANGER" />
-			<item id="101901081" name="Destroyer Kunax's Aethercannon" player_classes="GUNNER" />
-			<item id="100601378" name="Destroyer Kunax's Spellbook" player_classes="SORCERER" />
-			<item id="100501268" name="Destroyer Kunax's Orb" player_classes="SPIRIT_MASTER" />
-			<item id="102001197" name="Destroyer Kunax's Harp" player_classes="BARD" />
-			<item id="115001702" name="Destroyer Kunax's Shield" player_classes="CLERIC CHANTER" />
-			<item id="102100969" name="Destroyer Kunax's Cipher-Blade" player_classes="RIDER" />
-		</items>
-		<items chance="7">
+		<items>
 			<item id="100001683" name="Kunax's Sword" player_classes="TEMPLAR GLADIATOR ASSASSIN" />
 			<item id="101701320" name="Kunax's Bow" player_classes="RANGER" />
 			<item id="101801171" name="Kunax's Pistol" player_classes="GUNNER" />
@@ -26753,7 +26730,7 @@
 			<item id="101501305" name="Kunax's Staff" player_classes="CLERIC CHANTER" />
 			<item id="102100970" name="Kunax's Cipher-Blade" player_classes="RIDER" />
 		</items>
-		<items chance="7">
+		<items>
 			<item id="100901306" name="Kunax's Greatsword" player_classes="TEMPLAR" />
 			<item id="101301216" name="Kunax's Polearm" player_classes="GLADIATOR" />
 			<item id="100201456" name="Kunax's Dagger" player_classes="ASSASSIN" />
@@ -26764,7 +26741,7 @@
 			<item id="100101282" name="Kunax's Mace" player_classes="CLERIC CHANTER" />
 			<item id="102100970" name="Kunax's Cipher-Blade" player_classes="RIDER" />
 		</items>
-		<items chance="7">
+		<items>
 			<item id="115001703" name="Kunax's Shield" player_classes="TEMPLAR" />
 			<item id="101701320" name="Kunax's Bow" player_classes="GLADIATOR ASSASSIN RANGER" />
 			<item id="101901082" name="Kunax's Aethercannon" player_classes="GUNNER" />
@@ -26774,101 +26751,51 @@
 			<item id="115001703" name="Kunax's Shield" player_classes="CLERIC CHANTER" />
 			<item id="102100970" name="Kunax's Cipher-Blade" player_classes="RIDER" />
 		</items>
-		<items chance="3">
-			<item id="110601549" name="Destroyer Kunax's Breastplate" player_classes="TEMPLAR GLADIATOR" />
-			<item id="110301751" name="Destroyer Kunax's Jerkin" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="110101754" name="Destroyer Kunax's Tunic" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="110551084" name="Destroyer Kunax's Hauberk" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="3">
-			<item id="111601512" name="Destroyer Kunax's Gauntlets" player_classes="TEMPLAR GLADIATOR" />
-			<item id="111301689" name="Destroyer Kunax's Vambrace" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="111101579" name="Destroyer Kunax's Gloves" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="111501643" name="Destroyer Kunax's Handguards" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="3">
-			<item id="112601494" name="Destroyer Kunax's Shoulderplates" player_classes="TEMPLAR GLADIATOR" />
-			<item id="112301628" name="Destroyer Kunax's Shoulderguards" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="112101529" name="Destroyer Kunax's Pauldrons" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="112501582" name="Destroyer Kunax's Spaulders" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="3">
-			<item id="113601495" name="Destroyer Kunax's Greaves" player_classes="TEMPLAR GLADIATOR" />
-			<item id="113301720" name="Destroyer Kunax's Breeches" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="113101591" name="Destroyer Kunax's Leggings" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="113501661" name="Destroyer Kunax's Chausses" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="3">
-			<item id="114601502" name="Destroyer Kunax's Sabatons" player_classes="TEMPLAR GLADIATOR" />
-			<item id="114301757" name="Destroyer Kunax's Boots" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="114101625" name="Destroyer Kunax's Shoes" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="114501671" name="Destroyer Kunax's Brogans" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="6">
+		<items>
 			<item id="110601550" name="Kunax's Breastplate" player_classes="TEMPLAR GLADIATOR" />
 			<item id="110301752" name="Kunax's Jerkin" player_classes="ASSASSIN RANGER GUNNER" />
 			<item id="110101755" name="Kunax's Tunic" player_classes="SORCERER SPIRIT_MASTER BARD" />
 			<item id="110551085" name="Kunax's Hauberk" player_classes="CLERIC CHANTER RIDER" />
 		</items>
-		<items chance="6">
+		<items>
 			<item id="111601513" name="Kunax's Gauntlets" player_classes="TEMPLAR GLADIATOR" />
 			<item id="111301690" name="Kunax's Vambrace" player_classes="ASSASSIN RANGER GUNNER" />
 			<item id="111101580" name="Kunax's Gloves" player_classes="SORCERER SPIRIT_MASTER BARD" />
 			<item id="111501644" name="Kunax's Handguards" player_classes="CLERIC CHANTER RIDER" />
 		</items>
-		<items chance="6">
+		<items>
 			<item id="112601495" name="Kunax's Shoulderplates" player_classes="TEMPLAR GLADIATOR" />
 			<item id="112301629" name="Kunax's Shoulderguards" player_classes="ASSASSIN RANGER GUNNER" />
 			<item id="112101530" name="Kunax's Pauldrons" player_classes="SORCERER SPIRIT_MASTER BARD" />
 			<item id="112501583" name="Kunax's Spaulders" player_classes="CLERIC CHANTER RIDER" />
 		</items>
-		<items chance="6">
+		<items>
 			<item id="113601496" name="Kunax's Greaves" player_classes="TEMPLAR GLADIATOR" />
 			<item id="113301721" name="Kunax's Breeches" player_classes="ASSASSIN RANGER GUNNER" />
 			<item id="113101592" name="Kunax's Leggings" player_classes="SORCERER SPIRIT_MASTER BARD" />
 			<item id="113501662" name="Kunax's Chausses" player_classes="CLERIC CHANTER RIDER" />
 		</items>
-		<items chance="6">
+		<items>
 			<item id="114601503" name="Kunax's Sabatons" player_classes="TEMPLAR GLADIATOR" />
 			<item id="114301758" name="Kunax's Boots" player_classes="ASSASSIN RANGER GUNNER" />
 			<item id="114101626" name="Kunax's Shoes" player_classes="SORCERER SPIRIT_MASTER BARD" />
 			<item id="114501672" name="Kunax's Brogans" player_classes="CLERIC CHANTER RIDER" />
 		</items>
-		<items chance="4">
-			<item id="120001501" name="Destroyer Kunax's Opal Earrings" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
-			<item id="120001502" name="Destroyer Kunax's Nolan Earrings" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC" />
-			<item id="120001501" name="Destroyer Kunax's Opal Earrings" player_classes="CHANTER" />
-			<item id="120001502" name="Destroyer Kunax's Nolan Earrings" player_classes="RIDER" />
+		<items>
+			<item id="120001501" name="Destroyer Kunax's Opal Earrings" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="120001502" name="Destroyer Kunax's Nolan Earrings" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" />
 		</items>
-		<items chance="4">
-			<item id="121001373" name="Destroyer Kunax's Opal Necklace" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
-			<item id="121001374" name="Destroyer Kunax's Nolan Necklace" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC" />
-			<item id="121001373" name="Destroyer Kunax's Opal Necklace" player_classes="CHANTER" />
-			<item id="121001374" name="Destroyer Kunax's Nolan Necklace" player_classes="RIDER" />
+		<items>
+			<item id="121001373" name="Destroyer Kunax's Opal Necklace" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="121001374" name="Destroyer Kunax's Nolan Necklace" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" />
 		</items>
-		<items chance="4">
-			<item id="122001642" name="Destroyer Kunax's Opal Ring" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
-			<item id="122001643" name="Destroyer Kunax's Nolan Ring" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC" />
-			<item id="122001642" name="Destroyer Kunax's Opal Ring" player_classes="CHANTER" />
-			<item id="122001643" name="Destroyer Kunax's Nolan Ring" player_classes="RIDER" />
+		<items>
+			<item id="122001642" name="Destroyer Kunax's Opal Ring" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="122001643" name="Destroyer Kunax's Nolan Ring" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" />
 		</items>
-		<items chance="4">
-			<item id="123001419" name="Destroyer Kunax's Leather Belt" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
-			<item id="123001420" name="Destroyer Kunax's Sash" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC" />
-			<item id="123001419" name="Destroyer Kunax's Leather Belt" player_classes="CHANTER" />
-			<item id="123001420" name="Destroyer Kunax's Sash" player_classes="RIDER" />
-		</items>
-		<items chance="4">
-			<item id="125003995" name="Destroyer Kunax's Helm" player_classes="TEMPLAR GLADIATOR" />
-			<item id="125003997" name="Destroyer Kunax's Hat" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="125003998" name="Destroyer Kunax's Headband" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="125003996" name="Destroyer Kunax's Chain Helm" player_classes="CLERIC CHANTER RIDER" />
-		</items>
-		<items chance="5">
-			<item id="125003999" name="Kunax's Helm" player_classes="TEMPLAR GLADIATOR" />
-			<item id="125004001" name="Kunax's Hat" player_classes="ASSASSIN RANGER GUNNER" />
-			<item id="125004002" name="Kunax's Headband" player_classes="SORCERER SPIRIT_MASTER BARD" />
-			<item id="125004000" name="Kunax's Chain Helm" player_classes="CLERIC CHANTER RIDER" />
+		<items>
+			<item id="123001419" name="Destroyer Kunax's Leather Belt" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" />
+			<item id="123001420" name="Destroyer Kunax's Sash" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053034" name="Spatalos' Armor Box" />
