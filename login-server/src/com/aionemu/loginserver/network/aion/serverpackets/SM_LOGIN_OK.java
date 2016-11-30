@@ -30,9 +30,6 @@ public class SM_LOGIN_OK extends AionServerPacket {
 		this.loginOk = key.loginOk;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		writeD(accountId);

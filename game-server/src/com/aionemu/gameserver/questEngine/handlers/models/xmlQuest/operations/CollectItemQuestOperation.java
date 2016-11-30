@@ -23,11 +23,6 @@ public class CollectItemQuestOperation extends QuestOperation {
 	@XmlAttribute(required = true)
 	protected Boolean removeItems;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperation#doOperate(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public void doOperate(QuestEnv env) {
 		if (QuestService.collectItemCheck(env, removeItems == null ? true : false))

@@ -32,9 +32,6 @@ public class SM_PLAY_OK extends AionServerPacket {
 		this.serverId = serverId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		writeD(playOk1);

@@ -22,10 +22,6 @@ public class Motion extends AdminCommand implements StatOwner {
 		super("motion");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.utils.chathandlers.AdminCommand#execute(com.aionemu.gameserver.model.gameobjects.player.Player, java.lang.String[])
-	 */
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length == 0) {

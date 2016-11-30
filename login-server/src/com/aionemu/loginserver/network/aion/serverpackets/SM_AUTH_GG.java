@@ -24,9 +24,6 @@ public class SM_AUTH_GG extends AionServerPacket {
 		this.sessionId = sessionId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		writeD(sessionId);

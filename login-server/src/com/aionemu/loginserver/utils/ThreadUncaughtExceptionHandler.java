@@ -13,9 +13,6 @@ public class ThreadUncaughtExceptionHandler implements Thread.UncaughtExceptionH
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ThreadUncaughtExceptionHandler.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
 		log.error("Critical Error - Thread: " + t.getName() + " terminated abnormaly: " + e, e);

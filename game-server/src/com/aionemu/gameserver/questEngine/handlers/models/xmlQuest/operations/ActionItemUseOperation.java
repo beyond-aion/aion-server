@@ -24,11 +24,6 @@ public class ActionItemUseOperation extends QuestOperation {
 	@XmlElement(required = true)
 	protected QuestOperations finish;
 
-	/*
-	 * (non-Javadoc)
-	 * @seecom.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperation#doOperate(com.aionemu.
-	 * gameserver.services.QuestService, com.aionemu.gameserver.questEngine.model.QuestEnv)
-	 */
 	@Override
 	public void doOperate(final QuestEnv env) {
 		final Player player = env.getPlayer();

@@ -15,18 +15,12 @@ public class CM_ACCOUNT_TOLL_INFO extends GsClientPacket {
 
 	private String accountName;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		toll = readQ();
 		accountName = readS();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		Account account = DAOManager.getDAO(AccountDAO.class).getAccount(accountName);

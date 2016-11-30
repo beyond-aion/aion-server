@@ -15,19 +15,11 @@ public class CM_MAY_QUIT extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl() {
 		// empty
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl() {
 		// Nothing to do

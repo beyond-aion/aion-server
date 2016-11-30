@@ -32,9 +32,6 @@ public class SM_UPDATE_SESSION extends AionServerPacket {
 		this.loginOk = key.loginOk;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
 		writeD(accountId);

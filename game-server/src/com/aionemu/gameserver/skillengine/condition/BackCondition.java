@@ -15,10 +15,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
 @XmlType(name = "BackCondition")
 public class BackCondition extends Condition {
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
-	 */
 	@Override
 	public boolean validate(Skill env) {
 		if (env.getFirstTarget() == null || env.getEffector() == null)

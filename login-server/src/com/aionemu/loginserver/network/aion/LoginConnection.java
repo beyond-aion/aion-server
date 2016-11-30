@@ -154,9 +154,6 @@ public class LoginConnection extends AConnection {
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onDisconnect() {
 		/**
@@ -168,9 +165,6 @@ public class LoginConnection extends AConnection {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to client before closing?

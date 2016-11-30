@@ -23,11 +23,6 @@ public class NpcDialogOperation extends QuestOperation {
 	@XmlAttribute(name = "quest_id")
 	protected Integer questId;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperation#doOperate(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public void doOperate(QuestEnv env) {
 		Player player = env.getPlayer();

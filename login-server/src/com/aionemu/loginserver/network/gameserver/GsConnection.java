@@ -106,9 +106,6 @@ public class GsConnection extends AConnection {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onDisconnect() {
 		if (Config.ENABLE_PINGPONG)
@@ -121,9 +118,6 @@ public class GsConnection extends AConnection {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to gameserver before closing?

@@ -63,17 +63,11 @@ public class PremiumRates extends Rates {
 		return RateConfig.PREMIUM_XP_RATE;
 	}
 
-	/*
-	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getCraftingXPRate()
-	 */
 	@Override
 	public float getCraftingXPRate() {
 		return RateConfig.PREMIUM_CRAFTING_XP_RATE;
 	}
 
-	/*
-	 * (non-Javadoc) @see com.aionemu.gameserver.utils.rates.Rates#getGatheringXPRate()
-	 */
 	@Override
 	public float getGatheringXPRate() {
 		return RateConfig.PREMIUM_GATHERING_XP_RATE;

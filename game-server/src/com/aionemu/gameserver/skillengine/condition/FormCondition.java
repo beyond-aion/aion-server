@@ -12,6 +12,8 @@ import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
+ * defines tranformtype in which player can cast given skill
+ * 
  * @author kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -21,11 +23,6 @@ public class FormCondition extends Condition {
 	@XmlAttribute(required = true)
 	protected TransformType value;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill) defines tranformtype in
-	 * which player can cast given skill
-	 */
 	@Override
 	public boolean validate(Skill env) {
 		if (env.getEffector() instanceof Player) {

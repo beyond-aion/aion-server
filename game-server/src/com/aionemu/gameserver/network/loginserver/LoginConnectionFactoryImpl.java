@@ -27,10 +27,6 @@ public class LoginConnectionFactoryImpl implements ConnectionFactory {
 	 * @see com.aionemu.commons.network.Dispatcher
 	 */
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.ConnectionFactory#create(java.nio.channels.SocketChannel, com.aionemu.commons.network.Dispatcher)
-	 */
 	@Override
 	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		return new LoginServerConnection(socket, dispatcher);

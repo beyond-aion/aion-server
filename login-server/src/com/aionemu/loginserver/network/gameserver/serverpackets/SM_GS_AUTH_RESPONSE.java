@@ -26,9 +26,6 @@ public class SM_GS_AUTH_RESPONSE extends GsServerPacket {
 		this.response = response;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(0);

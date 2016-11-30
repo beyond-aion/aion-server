@@ -24,11 +24,6 @@ public class DialogIdCondition extends QuestCondition {
 		return value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.template.xmlQuest.condition.QuestCondition#doCheck(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public boolean doCheck(QuestEnv env) {
 		switch (getOp()) {

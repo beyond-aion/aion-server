@@ -617,18 +617,10 @@ public class BoundingSphere extends BoundingVolume {
 		return getClass().getSimpleName() + " [Radius: " + radius + " Center: " + center + "]";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.jme.bounding.BoundingVolume#intersects(com.jme.bounding.BoundingVolume)
-	 */
 	public boolean intersects(BoundingVolume bv) {
 		return bv.intersectsSphere(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.jme.bounding.BoundingVolume#intersectsSphere(com.jme.bounding.BoundingSphere)
-	 */
 	public boolean intersectsSphere(BoundingSphere bs) {
 		assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bs.center);
 
@@ -650,10 +642,6 @@ public class BoundingSphere extends BoundingVolume {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.jme.bounding.BoundingVolume#intersectsOrientedBoundingBox(com.jme.bounding.OrientedBoundingBox)
-	 */
 	// public boolean intersectsOrientedBoundingBox(OrientedBoundingBox obb) {
 	// return obb.intersectsSphere(this);
 	// }
@@ -681,10 +669,6 @@ public class BoundingSphere extends BoundingVolume {
 		return b * b >= a;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.jme.bounding.BoundingVolume#intersectsWhere(com.jme.math.Ray)
-	 */
 	public int collideWithRay(Ray ray, CollisionResults results) {
 		Vector3f vect1 = Vector3f.newInstance();
 		Vector3f diff = vect1.set(ray.getOrigin()).subtractLocal(center);

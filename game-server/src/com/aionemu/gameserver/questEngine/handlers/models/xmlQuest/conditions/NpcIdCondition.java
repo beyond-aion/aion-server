@@ -19,11 +19,6 @@ public class NpcIdCondition extends QuestCondition {
 	@XmlAttribute(required = true)
 	protected int values;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.template.xmlQuest.condition.QuestCondition#doCheck(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public boolean doCheck(QuestEnv env) {
 		int id = 0;

@@ -13,10 +13,6 @@ public class _4220KeyItemHiddenQuest02 extends QuestHandler {
 		super(questId);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.QuestHandler#register()
-	 */
 	@Override
 	public void register() {
 		// TODO Auto-generated method stub

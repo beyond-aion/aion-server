@@ -26,17 +26,11 @@ public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 	 */
 	private int accountId;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		accountId = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		int reconectKey = Rnd.nextInt();

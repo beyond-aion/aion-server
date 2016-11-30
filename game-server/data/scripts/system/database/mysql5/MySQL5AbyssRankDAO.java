@@ -368,10 +368,6 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.dao.AbyssRankDAO#updateRankList()
-	 */
 	@Override
 	public void updateRankList(final int maxOfflineDays) {
 		try {

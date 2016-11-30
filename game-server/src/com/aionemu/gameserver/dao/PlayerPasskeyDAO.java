@@ -41,10 +41,6 @@ public abstract class PlayerPasskeyDAO implements DAO {
 	 */
 	public abstract boolean existCheckPlayerPasskey(int accountId);
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.database.dao.DAO#getClassName()
-	 */
 	@Override
 	public final String getClassName() {
 		return PlayerPasskeyDAO.class.getName();

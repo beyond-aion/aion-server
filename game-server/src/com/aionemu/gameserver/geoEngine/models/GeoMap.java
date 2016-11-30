@@ -83,10 +83,6 @@ public class GeoMap extends Node {
 			door.setDoorState(instanceId, isOpened);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see aionjHungary.geoEngine.scene.Node#attachChild(aionjHungary.geoEngine.scene.Spatial)
-	 */
 	@Override
 	public int attachChild(Spatial child) {
 		int i = 0;
@@ -337,10 +333,6 @@ public class GeoMap extends Node {
 		return (results.size() == 0 && collisions == 0);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see aionjHungary.geoEngine.scene.Spatial#updateModelBound()
-	 */
 
 	@Override
 	public void updateModelBound() {

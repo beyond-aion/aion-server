@@ -458,11 +458,6 @@ public class Node extends Spatial implements Cloneable {
 		this.worldBound = resultBound;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see aionjHungary.geoEngine.scene.Spatial#setTransform(aionjHungary.geoEngine.math.Matrix3f,
-	 * aionjHungary.geoEngine.math.Vector3f)
-	 */
 	@Override
 	public void setTransform(Matrix3f rotation, Vector3f loc, float scale) {
 		if (children != null) {

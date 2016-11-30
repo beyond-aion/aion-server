@@ -26,9 +26,6 @@ public class SM_BAN_RESPONSE extends GsServerPacket {
 		this.result = result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(5);

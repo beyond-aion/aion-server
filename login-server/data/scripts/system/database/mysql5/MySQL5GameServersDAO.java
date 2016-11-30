@@ -17,9 +17,6 @@ import com.aionemu.loginserver.dao.GameServersDAO;
  */
 public class MySQL5GameServersDAO extends GameServersDAO {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Map<Byte, GameServerInfo> getAllGameServers() {
 
@@ -40,9 +37,6 @@ public class MySQL5GameServersDAO extends GameServersDAO {
 		return result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);

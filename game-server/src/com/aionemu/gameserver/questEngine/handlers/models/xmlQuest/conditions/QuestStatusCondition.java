@@ -22,11 +22,6 @@ public class QuestStatusCondition extends QuestCondition {
 	@XmlAttribute(name = "quest_id")
 	protected Integer questId;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.template.xmlQuest.condition.QuestCondition#doCheck(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public boolean doCheck(QuestEnv env) {
 		Player player = env.getPlayer();

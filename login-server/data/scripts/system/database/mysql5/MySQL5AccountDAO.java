@@ -26,9 +26,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(MySQL5AccountDAO.class);
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Account getAccount(String name) {
 		Account account = null;
@@ -99,9 +96,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return account;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getAccountId(String name) {
 		int id = -1;
@@ -124,9 +118,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return id;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int getAccountCount() {
 		PreparedStatement st = DB.prepareStatement("SELECT count(*) AS c FROM account_data");
@@ -145,9 +136,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return -1;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean insertAccount(Account account) {
 		int result = 0;
@@ -181,9 +169,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return result > 0;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateAccount(Account account) {
 		int result = 0;
@@ -210,9 +195,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return result > 0;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateLastServer(final int accountId, final byte lastServer) {
 		return DB.insertUpdate("UPDATE account_data SET last_server = ? WHERE id = ?", new IUStH() {
@@ -226,9 +208,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateLastIp(final int accountId, final String ip) {
 		return DB.insertUpdate("UPDATE account_data SET last_ip = ? WHERE id = ?", new IUStH() {
@@ -242,9 +221,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getLastIp(final int accountId) {
 		String lastIp = "";
@@ -266,9 +242,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		return lastIp;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateLastMac(final int accountId, final String mac) {
 		return DB.insertUpdate("UPDATE `account_data` SET `last_mac` = ? WHERE `id` = ?", new IUStH() {
@@ -295,9 +268,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateMembership(final int accountId) {
 		return DB.insertUpdate("UPDATE account_data SET membership = old_membership, expire = NULL WHERE id = ? and expire < CURRENT_TIMESTAMP",
@@ -311,9 +281,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 			});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void deleteInactiveAccounts(int daysOfInactivity) {
 		PreparedStatement statement = DB
@@ -339,9 +306,6 @@ public class MySQL5AccountDAO extends AccountDAO {
 		});
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean supports(String database, int majorVersion, int minorVersion) {
 		return MySQL5DAOUtils.supports(database, majorVersion, minorVersion);

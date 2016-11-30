@@ -24,11 +24,6 @@ public class TitleAddAction extends AbstractItemAction {
 	@XmlAttribute
 	protected Integer minutes;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.itemengine.actions.AbstractItemAction#canAct(com.aionemu.gameserver.model.gameobjects.player .Player,
-	 * com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
-	 */
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		if (titleid == 0 || parentItem == null) {
@@ -42,11 +37,6 @@ public class TitleAddAction extends AbstractItemAction {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.itemengine.actions.AbstractItemAction#act(com.aionemu.gameserver.model.gameobjects.player .Player,
-	 * com.aionemu.gameserver.model.gameobjects.Item, com.aionemu.gameserver.model.gameobjects.Item)
-	 */
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
 		ItemTemplate itemTemplate = parentItem.getItemTemplate();

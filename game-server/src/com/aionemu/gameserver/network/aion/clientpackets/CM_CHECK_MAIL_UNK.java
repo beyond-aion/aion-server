@@ -17,19 +17,11 @@ public class CM_CHECK_MAIL_UNK extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl() {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl() {
 		// TODO???

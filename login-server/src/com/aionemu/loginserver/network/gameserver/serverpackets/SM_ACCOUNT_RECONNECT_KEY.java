@@ -30,9 +30,6 @@ public class SM_ACCOUNT_RECONNECT_KEY extends GsServerPacket {
 		this.reconnectKey = reconnectKey;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(3);

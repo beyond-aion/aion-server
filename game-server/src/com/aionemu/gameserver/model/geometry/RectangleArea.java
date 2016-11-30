@@ -189,10 +189,6 @@ public class RectangleArea extends AbstractArea {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.model.geometry.Area#intersectsRectangle(com.aionemu.gameserver.model.geometry.RectangleArea)
-	 */
 	@Override
 	public boolean intersectsRectangle(RectangleArea area) {
 		// TODO Auto-generated method stub

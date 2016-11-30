@@ -17,11 +17,6 @@ public class StartQuestOperation extends QuestOperation {
 	@XmlAttribute(required = true)
 	protected int id;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperation#doOperate(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public void doOperate(QuestEnv env) {
 		// TODO Auto-generated method stub

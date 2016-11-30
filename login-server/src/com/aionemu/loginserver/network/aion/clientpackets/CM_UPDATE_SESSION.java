@@ -38,9 +38,6 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
 		super(buf, client, opCode);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 		accountId = readD();
@@ -48,9 +45,6 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
 		reconnectKey = readD();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AccountController.authReconnectingAccount(accountId, loginOk, reconnectKey, getConnection());

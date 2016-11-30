@@ -20,11 +20,6 @@ public class QuestVarCondition extends QuestCondition {
 	@XmlAttribute(name = "var_id", required = true)
 	protected int varId;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.questEngine.handlers.template.xmlQuest.condition.QuestCondition#doCheck(com.aionemu.gameserver
-	 * .questEngine.model.QuestEnv)
-	 */
 	@Override
 	public boolean doCheck(QuestEnv env) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(env.getQuestId());

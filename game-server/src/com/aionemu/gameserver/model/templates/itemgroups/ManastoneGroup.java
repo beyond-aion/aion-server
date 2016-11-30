@@ -60,10 +60,6 @@ public class ManastoneGroup extends BonusItemGroup {
 		return this.items;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.gameserver.model.templates.itemgroups.ItemGroup#getRewards()
-	 */
 	@Override
 	public ItemRaceEntry[] getRewards() {
 		return getItems().toArray(new ItemRaceEntry[0]);

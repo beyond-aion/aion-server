@@ -29,9 +29,6 @@ public class SM_LS_CONTROL_RESPONSE extends GsServerPacket {
 		this.accountId = accountId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(4);

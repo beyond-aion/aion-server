@@ -27,9 +27,6 @@ public class CM_ACCOUNT_AUTH extends GsClientPacket {
 		sessionKey = new SessionKey(accountId, loginOk, playOk1, playOk2);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		AccountController.checkAuth(sessionKey, this.getConnection());
