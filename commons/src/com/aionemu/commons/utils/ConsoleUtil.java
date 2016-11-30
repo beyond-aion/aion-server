@@ -50,7 +50,7 @@ public class ConsoleUtil {
 	}
 
 	public static String getSeparatorForLogger() {
-		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1 - (20 + Thread.currentThread().getName().length()));
+		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1 - (26 + Thread.currentThread().getName().length()));
 	}
 
 	public static void printSeparator() {
