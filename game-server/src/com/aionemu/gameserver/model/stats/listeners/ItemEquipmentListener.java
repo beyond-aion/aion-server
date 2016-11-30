@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
@@ -89,16 +91,28 @@ public class ItemEquipmentListener {
 		int temperingLevel = item.getTempering();
 		if (enchantLevel > 0) {
 			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemTemplate);
-			if (enchant != null)
-				item.setEnchantEffect(new EnchantEffect(item, owner, enchant.get(enchantLevel)));
+			if (enchant != null) {
+				List<EnchantStat> enchantStats = enchant.get(enchantLevel);
+				if (enchantStats != null)
+					item.setEnchantEffect(new EnchantEffect(item, owner, enchantStats));
+				else
+					LoggerFactory.getLogger(ItemEquipmentListener.class)
+						.warn("Missing enchant effect info for item " + itemTemplate.getTemplateId() + " on +" + enchantLevel);
+			}
 		}
 		if (temperingLevel > 0) {
 			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 				item.setTemperingEffect(new TemperingEffect(owner, item));
 			} else {
 				Map<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(itemTemplate);
-				if (tempering != null)
-					item.setTemperingEffect(new TemperingEffect(owner, tempering.get(temperingLevel)));
+				if (tempering != null) {
+					List<TemperingStat> temperingStats = tempering.get(temperingLevel);
+					if (temperingStats != null)
+						item.setTemperingEffect(new TemperingEffect(owner, temperingStats));
+					else
+						LoggerFactory.getLogger(ItemEquipmentListener.class)
+							.warn("Missing tempering effect info for item " + itemTemplate.getTemplateId() + " on +" + temperingLevel);
+				}
 			}
 		}
 	}
@@ -184,8 +198,8 @@ public class ItemEquipmentListener {
 						|| weaponType == ItemGroup.CANNON || weaponType == ItemGroup.HARP || weaponType == ItemGroup.KEYBLADE) {
 						allModifiers.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));
 					}
-					allModifiers.add(new StatAddFunction(item.getItemTemplate().getAttackType().isMagical() ? StatEnum.MAGICAL_ATTACK
-						: StatEnum.PHYSICAL_ATTACK, attack, false));
+					allModifiers.add(new StatAddFunction(
+						item.getItemTemplate().getAttackType().isMagical() ? StatEnum.MAGICAL_ATTACK : StatEnum.PHYSICAL_ATTACK, attack, false));
 				}
 			}
 		} else {
@@ -209,7 +223,7 @@ public class ItemEquipmentListener {
 		List<StatFunction> allModifiers = new FastTable<>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
-			// why they are removed look at DuplicateStatFunction
+				// why they are removed look at DuplicateStatFunction
 				case ATTACK_SPEED:
 				case PVP_ATTACK_RATIO:
 				case BOOST_CASTING_TIME:

@@ -70,7 +70,7 @@ public class PlayerReviveService {
 		if (!player.canUseRebirthRevive()) {
 			return;
 		}
-		
+
 		boolean soulSickness = true;
 		int rebirthResurrectPercent = player.getRebirthResurrectPercent();
 		if (player.getAccessLevel() >= AdminConfig.ADMIN_AUTO_RES) {
@@ -150,7 +150,8 @@ public class PlayerReviveService {
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
 			kisk.resurrectionUsed();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+			if (skillId > 0)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			revive(player, 25, 25, false, skillId);
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
@@ -237,8 +238,8 @@ public class PlayerReviveService {
 		int useDelay = useLimits.getDelayTime();
 		player.addItemCoolDown(useLimits.getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 		player.getController().cancelUseItem();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate()
-			.getTemplateId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
 		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
 			cancelRes(player);
 			return;
