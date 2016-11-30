@@ -25,14 +25,10 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl() {
 		objectId = readD();
-		itemSize = readH();
+		itemSize = readUH();
 		items = new FastTable<>();
 		for (int i = 0; i < itemSize; i++) {
 			itemId = readD();
@@ -41,10 +37,6 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
 		stringItemsId = readS();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl() {
 		if (objectId > 0) {

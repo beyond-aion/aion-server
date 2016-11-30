@@ -277,7 +277,7 @@ public class MailService {
 	 * @param letterId
 	 * @param attachmentType
 	 */
-	public void getAttachments(Player player, int letterId, int attachmentType) {
+	public void getAttachments(Player player, int letterId, byte attachmentType) {
 		Letter letter = player.getMailbox().getLetterFromMailbox(letterId);
 
 		if (letter == null)

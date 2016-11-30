@@ -48,7 +48,7 @@ public class CM_BAN extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		this.type = (byte) readC();
+		this.type = readC();
 		this.accountId = readD();
 		this.ip = readS();
 		this.time = readD();

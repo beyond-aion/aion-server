@@ -28,8 +28,8 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		doorState = readC();
-		displayOwner = readC();
+		doorState = readUC();
+		displayOwner = readUC();
 		signNotice = readS();
 	}
 

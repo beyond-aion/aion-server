@@ -20,7 +20,7 @@ public class CM_LOOT_ITEM extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();
-		index = readC();
+		index = readUC();
 	}
 
 	@Override

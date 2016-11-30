@@ -28,7 +28,7 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
 	private long time;
 	private int letterId;
 	private int[] letterIds;
-	private int attachmentType;
+	private byte attachmentType;
 	private boolean isExpress;
 
 	public SM_MAIL_SERVICE(Mailbox mailbox) {
@@ -93,7 +93,7 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
 	 * @param letterId
 	 * @param attachmentType
 	 */
-	public SM_MAIL_SERVICE(int letterId, int attachmentType) {
+	public SM_MAIL_SERVICE(int letterId, byte attachmentType) {
 		super(null);
 		this.serviceId = 5;
 		this.letterId = letterId;

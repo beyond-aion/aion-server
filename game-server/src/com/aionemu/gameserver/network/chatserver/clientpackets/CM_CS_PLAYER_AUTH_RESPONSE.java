@@ -32,7 +32,7 @@ public class CM_CS_PLAYER_AUTH_RESPONSE extends CsClientPacket {
 	@Override
 	protected void readImpl() {
 		playerId = readD();
-		int tokenLenght = readC();
+		int tokenLenght = readUC();
 		token = readB(tokenLenght);
 	}
 

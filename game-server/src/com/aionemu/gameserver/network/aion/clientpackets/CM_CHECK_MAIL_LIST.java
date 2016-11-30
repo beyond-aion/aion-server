@@ -22,7 +22,7 @@ public class CM_CHECK_MAIL_LIST extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		expressOnly = readC() == 1 ? true : false;
+		expressOnly = readC() == 1;
 
 	}
 

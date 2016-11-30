@@ -30,8 +30,8 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		address = readD();
-		scriptId = readC();
-		totalSize = readH();
+		scriptId = readUC();
+		totalSize = readUH();
 		if (totalSize > 0) {
 			compressedSize = readD();
 			if (compressedSize <= MAX_COMPRESSED_SIZE) {

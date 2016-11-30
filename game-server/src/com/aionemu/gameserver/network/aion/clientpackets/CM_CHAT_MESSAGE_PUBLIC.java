@@ -35,7 +35,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		type = ChatType.getChatType(readSC());
+		type = ChatType.getChatType(readC());
 		message = readS();
 	}
 

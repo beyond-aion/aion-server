@@ -14,7 +14,7 @@ public class CM_GS_CHARACTER extends GsClientPacket {
 	@Override
 	protected void readImpl() {
 		accountId = readD();
-		characterCount = readC();
+		characterCount = readUC();
 	}
 
 	@Override

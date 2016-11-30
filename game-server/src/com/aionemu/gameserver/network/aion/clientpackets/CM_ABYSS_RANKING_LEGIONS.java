@@ -16,11 +16,9 @@ import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
  */
 public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 
-	private Race queriedRace;
-	private AbyssRankUpdateType updateType;
-	private int raceId;
-
 	private static final Logger log = LoggerFactory.getLogger(CM_ABYSS_RANKING_LEGIONS.class);
+
+	private byte raceId;
 
 	public CM_ABYSS_RANKING_LEGIONS(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -29,6 +27,13 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		raceId = readC();
+	}
+
+	@Override
+	protected void runImpl() {
+		Player player = getConnection().getActivePlayer();
+		Race queriedRace = null;
+		AbyssRankUpdateType updateType = null;
 		switch (raceId) {
 			case 0:
 				queriedRace = Race.ELYOS;
@@ -38,23 +43,18 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 				queriedRace = Race.ASMODIANS;
 				updateType = AbyssRankUpdateType.LEGION_ASMODIANS;
 				break;
+			default:
+				log.warn("Received invalid raceId (" + raceId + ") from player " + player);
+				return;
 		}
-	}
-
-	@Override
-	protected void runImpl() {
 		// calculate rankings and send packet
-		if (queriedRace != null) {
-			Player player = this.getConnection().getActivePlayer();
-			if (player.isAbyssRankListUpdated(updateType)) {
-				sendPacket(new SM_ABYSS_RANKING_LEGIONS(AbyssRankingCache.getInstance().getLastUpdate(), queriedRace));
-			} else {
-				SM_ABYSS_RANKING_LEGIONS results = AbyssRankingCache.getInstance().getLegions(queriedRace);
-				sendPacket(results);
-				player.setAbyssRankListUpdated(updateType);
-			}
+		SM_ABYSS_RANKING_LEGIONS legionRanking;
+		if (player.isAbyssRankListUpdated(updateType)) {
+			legionRanking = new SM_ABYSS_RANKING_LEGIONS(AbyssRankingCache.getInstance().getLastUpdate(), queriedRace);
 		} else {
-			log.warn("Received invalid raceId: " + raceId);
+			legionRanking = AbyssRankingCache.getInstance().getLegions(queriedRace);
+			player.setAbyssRankListUpdated(updateType);
 		}
+		sendPacket(legionRanking);
 	}
 }

@@ -13,7 +13,7 @@ public class BrokerPlayerCache {
 
 	private BrokerItem[] brokerListCache = new BrokerItem[0];
 	private int brokerMaskCache;
-	private int brokerSoftTypeCache;
+	private byte brokerSoftTypeCache;
 	private int brokerStartPageCache;
 	private List<Integer> itemList = new FastTable<>();
 
@@ -50,7 +50,7 @@ public class BrokerPlayerCache {
 	/**
 	 * @return the brokerSoftTypeCache
 	 */
-	public int getBrokerSortTypeCache() {
+	public byte getBrokerSortTypeCache() {
 		return brokerSoftTypeCache;
 	}
 
@@ -58,7 +58,7 @@ public class BrokerPlayerCache {
 	 * @param brokerSoftTypeCache
 	 *          the brokerSoftTypeCache to set
 	 */
-	public void setBrokerSortTypeCache(int brokerSoftTypeCache) {
+	public void setBrokerSortTypeCache(byte brokerSoftTypeCache) {
 		this.brokerSoftTypeCache = brokerSoftTypeCache;
 	}
 

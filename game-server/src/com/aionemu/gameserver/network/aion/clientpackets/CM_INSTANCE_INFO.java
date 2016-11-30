@@ -22,7 +22,7 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		readD(); // unk (always 0)
-		updateType = (byte) readC();
+		updateType = readC();
 	}
 
 	@Override

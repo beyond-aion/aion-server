@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -9,9 +12,11 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
  */
 public class CM_UI_SETTINGS extends AionClientPacket {
 
-	int settingsType;
-	byte[] data;
-	int size;
+	private static final Logger log = LoggerFactory.getLogger(CM_UI_SETTINGS.class);
+	private byte settingsType;
+	private byte[] data;
+	@SuppressWarnings("unused")
+	private int size;
 
 	public CM_UI_SETTINGS(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -21,7 +26,7 @@ public class CM_UI_SETTINGS extends AionClientPacket {
 	protected void readImpl() {
 		settingsType = readC();
 		readH();
-		size = readH();
+		size = readUH();
 		data = readB(getRemainingBytes());
 	}
 
@@ -29,12 +34,18 @@ public class CM_UI_SETTINGS extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if (settingsType == 0) {
-			player.getPlayerSettings().setUiSettings(data);
-		} else if (settingsType == 1) {
-			player.getPlayerSettings().setShortcuts(data);
-		} else if (settingsType == 2) {
-			player.getPlayerSettings().setHouseBuddies(data);
+		switch (settingsType) {
+			case 0:
+				player.getPlayerSettings().setUiSettings(data);
+				break;
+			case 1:
+				player.getPlayerSettings().setShortcuts(data);
+				break;
+			case 2:
+				player.getPlayerSettings().setHouseBuddies(data);
+				break;
+			default:
+				log.warn(player + " sent unknown type of player settings: " + settingsType);
 		}
 	}
 }

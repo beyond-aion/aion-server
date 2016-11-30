@@ -118,23 +118,9 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	/**
 	 * Read byte from this packet buffer.
 	 * 
-	 * @return int
-	 */
-	protected final int readC() {
-		try {
-			return buf.get() & 0xFF;
-		} catch (Exception e) {
-			log.error("Missing C for: " + this);
-		}
-		return 0;
-	}
-
-	/**
-	 * Read signed byte from this packet buffer.
-	 * 
 	 * @return byte
 	 */
-	protected final byte readSC() {
+	protected final byte readC() {
 		try {
 			return buf.get();
 		} catch (Exception e) {
@@ -144,11 +130,25 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	}
 
 	/**
-	 * Read signed short from this packet buffer.
+	 * Read unsigned byte from this packet buffer.
+	 * 
+	 * @return int
+	 */
+	protected final int readUC() {
+		try {
+			return buf.get() & 0xFF;
+		} catch (Exception e) {
+			log.error("Missing C for: " + this);
+		}
+		return 0;
+	}
+
+	/**
+	 * Read short from this packet buffer.
 	 * 
 	 * @return short
 	 */
-	protected final short readSH() {
+	protected final short readH() {
 		try {
 			return buf.getShort();
 		} catch (Exception e) {
@@ -158,11 +158,11 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
 	}
 
 	/**
-	 * Read short from this packet buffer.
+	 * Read unsigned short from this packet buffer.
 	 * 
 	 * @return int
 	 */
-	protected final int readH() {
+	protected final int readUH() {
 		try {
 			return buf.getShort() & 0xFFFF;
 		} catch (Exception e) {

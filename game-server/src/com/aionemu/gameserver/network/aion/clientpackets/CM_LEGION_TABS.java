@@ -29,7 +29,7 @@ public class CM_LEGION_TABS extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		page = readD();
-		tab = readC();
+		tab = readUC();
 	}
 
 	@Override

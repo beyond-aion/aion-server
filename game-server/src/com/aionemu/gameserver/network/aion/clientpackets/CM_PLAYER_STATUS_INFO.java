@@ -26,7 +26,7 @@ public class CM_PLAYER_STATUS_INFO extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		commandCode = readC();
+		commandCode = readUC();
 		selectedObjectId = readD();
 		allianceGroupId = readD();
 		secondObjectId = readD();

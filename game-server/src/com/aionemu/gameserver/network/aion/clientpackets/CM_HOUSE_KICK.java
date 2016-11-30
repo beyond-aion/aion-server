@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_HOUSE_KICK extends AionClientPacket {
 
-	int option;
+	private byte option;
 
 	public CM_HOUSE_KICK(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

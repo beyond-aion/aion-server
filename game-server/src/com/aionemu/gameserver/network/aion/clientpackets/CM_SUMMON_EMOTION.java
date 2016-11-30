@@ -31,7 +31,7 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		objId = readD();
-		emotionTypeId = readC();
+		emotionTypeId = readUC();
 	}
 
 	@Override

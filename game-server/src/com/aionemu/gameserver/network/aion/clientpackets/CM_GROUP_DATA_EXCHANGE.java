@@ -25,15 +25,15 @@ public class CM_GROUP_DATA_EXCHANGE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readC();
+		action = readUC();
 
 		switch (action) {
 			case 1:
 				dataSize = readD();
 				break;
 			default:
-				groupType = readC();
-				unk2 = readC();
+				groupType = readUC();
+				unk2 = readUC();
 				dataSize = readD();
 				break;
 		}

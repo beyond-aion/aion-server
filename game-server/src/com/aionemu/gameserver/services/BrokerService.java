@@ -110,7 +110,7 @@ public class BrokerService {
 	 * @param sortType
 	 * @param startPage
 	 */
-	public void showRequestedItems(Player player, int clientMask, int sortType, int startPage, List<Integer> itemList) {
+	public void showRequestedItems(Player player, int clientMask, byte sortType, int startPage, List<Integer> itemList) {
 		BrokerItem[] searchItems = null;
 		int playerBrokerMaskCache = getPlayerMask(player);
 		BrokerItemMask brokerMaskById = BrokerItemMask.getBrokerMaskById(clientMask);
@@ -281,7 +281,7 @@ public class BrokerService {
 	 * @param brokerItems
 	 * @param sortType
 	 */
-	private void sortBrokerItems(BrokerItem[] brokerItems, int sortType) {
+	private void sortBrokerItems(BrokerItem[] brokerItems, byte sortType) {
 		Arrays.sort(brokerItems, BrokerItem.getComparatoryByType(sortType));
 	}
 

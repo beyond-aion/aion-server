@@ -27,7 +27,7 @@ public class CM_FRIEND_STATUS extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		status = (byte) readC();
+		status = readC();
 	}
 
 	@Override

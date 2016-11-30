@@ -19,8 +19,8 @@ public class CM_MOTION extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		readC(); // unk 4
-		motionId = readH();
-		motionType = readC();
+		motionId = readUH();
+		motionType = readUC();
 	}
 
 	@Override

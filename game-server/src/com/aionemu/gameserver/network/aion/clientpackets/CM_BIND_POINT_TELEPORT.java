@@ -10,8 +10,9 @@ import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
  */
 public class CM_BIND_POINT_TELEPORT extends AionClientPacket {
 
-	public int action, locId;
-	public long kinah;
+	private byte action;
+	private int locId;
+	private long kinah;
 
 	public CM_BIND_POINT_TELEPORT(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

@@ -45,11 +45,11 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();
-		dialogId = readH();
-		extendedRewardIndex = readH();
-		lastPage = readH();
+		dialogId = readUH();
+		extendedRewardIndex = readUH();
+		lastPage = readUH();
 		questId = readD();
-		unk = readH(); // unk 4.7
+		unk = readUH(); // unk 4.7
 	}
 
 	@Override

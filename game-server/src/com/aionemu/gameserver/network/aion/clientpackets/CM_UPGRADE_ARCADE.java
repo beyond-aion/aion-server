@@ -10,7 +10,7 @@ import com.aionemu.gameserver.services.ArcadeUpgradeService;
  */
 public class CM_UPGRADE_ARCADE extends AionClientPacket {
 
-	private int action;
+	private byte action;
 	private int sessionId;
 
 	public CM_UPGRADE_ARCADE(int opcode, State state, State... restStates) {

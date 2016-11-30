@@ -15,7 +15,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class CM_SUBZONE_CHANGE extends AionClientPacket {
 
-	private int unk;
+	private byte unk;
 
 	public CM_SUBZONE_CHANGE(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

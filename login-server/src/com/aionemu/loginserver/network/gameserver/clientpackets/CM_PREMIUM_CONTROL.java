@@ -18,7 +18,7 @@ public class CM_PREMIUM_CONTROL extends GsClientPacket {
 		accountId = readD();
 		requestId = readD();
 		requiredCost = readQ();
-		serverId = (byte) readC();
+		serverId = readC();
 	}
 
 	@Override

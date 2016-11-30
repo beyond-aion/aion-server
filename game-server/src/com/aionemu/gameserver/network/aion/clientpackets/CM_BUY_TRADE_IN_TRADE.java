@@ -17,7 +17,7 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 
 	private int sellerObjId;
 	@SuppressWarnings("unused")
-	private int mask;
+	private byte mask;
 	private int itemId;
 	private int count;
 	private int tradeInListCount;
@@ -37,7 +37,7 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 		mask = readC(); // NEW - TODO find out what this is!
 		itemId = readD();
 		count = readD();
-		tradeInListCount = readH();
+		tradeInListCount = readUH();
 		for (int i = 0; i < tradeInListCount; i++)
 			tradeInItemObjIds.add(readD());
 	}

@@ -23,12 +23,12 @@ public class CM_BAN_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void readImpl() {
-		this.type = (byte) readC();
+		this.type = readC();
 		this.accountId = readD();
 		this.ip = readS();
 		this.time = readD();
 		this.adminObjId = readD();
-		this.result = readC() == 1;
+		this.result = readUC() == 1;
 	}
 
 	@Override

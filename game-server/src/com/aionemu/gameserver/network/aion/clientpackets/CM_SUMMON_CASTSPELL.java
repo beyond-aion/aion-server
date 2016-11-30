@@ -32,8 +32,8 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		summonObjId = readD();
-		skillId = readH();
-		skillLvl = readC();
+		skillId = readUH();
+		skillLvl = readUC();
 		targetObjId = readD();
 		unk = readD();
 	}

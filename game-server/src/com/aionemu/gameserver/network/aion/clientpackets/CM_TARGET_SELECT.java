@@ -27,7 +27,7 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 	 * Target object id that client wants to select or 0 if wants to unselect
 	 */
 	private int targetObjectId;
-	private int type;
+	private byte type;
 
 	/**
 	 * Constructs new client packet instance.
@@ -48,9 +48,6 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 		type = readC();
 	}
 
-	/**
-	 * Do logging
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

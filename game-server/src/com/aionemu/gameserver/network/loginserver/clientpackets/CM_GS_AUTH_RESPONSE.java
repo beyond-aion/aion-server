@@ -24,9 +24,9 @@ public class CM_GS_AUTH_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void readImpl() {
-		response = readC();
+		response = readUC();
 		if (response == 0)
-			serverCount = readC();
+			serverCount = readUC();
 	}
 
 	@Override

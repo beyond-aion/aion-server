@@ -31,7 +31,7 @@ public class CM_SEND_MAIL extends AionClientPacket {
 		itemObjId = readD();
 		itemCount = readQ();
 		kinahCount = readQ();
-		idLetterType = readC();
+		idLetterType = readUC();
 	}
 
 	@Override

@@ -26,26 +26,26 @@ public class CM_PET_EMOTE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		emote = PetEmote.getEmoteById(readC());
+		emote = PetEmote.getEmoteById(readUC());
 		switch (emote) {
 			case MOVE_STOP:
 				x1 = readF();
 				y1 = readF();
 				z1 = readF();
-				h = readSC();
+				h = readC();
 				break;
 			case MOVETO:
 				x1 = readF();
 				y1 = readF();
 				z1 = readF();
-				h = readSC();
+				h = readC();
 				x2 = readF();
 				y2 = readF();
 				z2 = readF();
 				break;
 			default:
-				emotionId = readC();
-				unk2 = readC();
+				emotionId = readUC();
+				unk2 = readUC();
 		}
 	}
 

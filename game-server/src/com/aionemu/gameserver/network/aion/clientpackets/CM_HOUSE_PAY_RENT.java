@@ -27,7 +27,7 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		weekCount = readC();
+		weekCount = readUC();
 	}
 
 	@Override

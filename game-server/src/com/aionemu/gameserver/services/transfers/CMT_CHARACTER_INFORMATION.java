@@ -90,54 +90,54 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		playerAppearance.setHairRGB(readD());
 		playerAppearance.setEyeRGB(readD());
 		playerAppearance.setLipRGB(readD());
-		playerAppearance.setFace(readC());
-		playerAppearance.setHair(readC());
-		playerAppearance.setDeco(readC());
-		playerAppearance.setTattoo(readC());
-		playerAppearance.setFaceContour(readC());
-		playerAppearance.setExpression(readC());
-		playerAppearance.setJawLine(readC());
-		playerAppearance.setForehead(readC());
-		playerAppearance.setEyeHeight(readC());
-		playerAppearance.setEyeSpace(readC());
-		playerAppearance.setEyeWidth(readC());
-		playerAppearance.setEyeSize(readC());
-		playerAppearance.setEyeShape(readC());
-		playerAppearance.setEyeAngle(readC());
-		playerAppearance.setBrowHeight(readC());
-		playerAppearance.setBrowAngle(readC());
-		playerAppearance.setBrowShape(readC());
-		playerAppearance.setNose(readC());
-		playerAppearance.setNoseBridge(readC());
-		playerAppearance.setNoseWidth(readC());
-		playerAppearance.setNoseTip(readC());
-		playerAppearance.setCheek(readC());
-		playerAppearance.setLipHeight(readC());
-		playerAppearance.setMouthSize(readC());
-		playerAppearance.setLipSize(readC());
-		playerAppearance.setSmile(readC());
-		playerAppearance.setLipShape(readC());
-		playerAppearance.setJawHeigh(readC());
-		playerAppearance.setChinJut(readC());
-		playerAppearance.setEarShape(readC());
-		playerAppearance.setHeadSize(readC());
-		playerAppearance.setNeck(readC());
-		playerAppearance.setNeckLength(readC());
-		playerAppearance.setShoulderSize(readC());
-		playerAppearance.setTorso(readC());
-		playerAppearance.setChest(readC());
-		playerAppearance.setWaist(readC());
-		playerAppearance.setHips(readC());
-		playerAppearance.setArmThickness(readC());
-		playerAppearance.setHandSize(readC());
-		playerAppearance.setLegThicnkess(readC());
-		playerAppearance.setFootSize(readC());
-		playerAppearance.setFacialRate(readC());
-		playerAppearance.setArmLength(readC());
-		playerAppearance.setLegLength(readC());
-		playerAppearance.setShoulders(readC());
-		playerAppearance.setFaceShape(readC());
-		playerAppearance.setVoice(readC());
+		playerAppearance.setFace(readUC());
+		playerAppearance.setHair(readUC());
+		playerAppearance.setDeco(readUC());
+		playerAppearance.setTattoo(readUC());
+		playerAppearance.setFaceContour(readUC());
+		playerAppearance.setExpression(readUC());
+		playerAppearance.setJawLine(readUC());
+		playerAppearance.setForehead(readUC());
+		playerAppearance.setEyeHeight(readUC());
+		playerAppearance.setEyeSpace(readUC());
+		playerAppearance.setEyeWidth(readUC());
+		playerAppearance.setEyeSize(readUC());
+		playerAppearance.setEyeShape(readUC());
+		playerAppearance.setEyeAngle(readUC());
+		playerAppearance.setBrowHeight(readUC());
+		playerAppearance.setBrowAngle(readUC());
+		playerAppearance.setBrowShape(readUC());
+		playerAppearance.setNose(readUC());
+		playerAppearance.setNoseBridge(readUC());
+		playerAppearance.setNoseWidth(readUC());
+		playerAppearance.setNoseTip(readUC());
+		playerAppearance.setCheek(readUC());
+		playerAppearance.setLipHeight(readUC());
+		playerAppearance.setMouthSize(readUC());
+		playerAppearance.setLipSize(readUC());
+		playerAppearance.setSmile(readUC());
+		playerAppearance.setLipShape(readUC());
+		playerAppearance.setJawHeigh(readUC());
+		playerAppearance.setChinJut(readUC());
+		playerAppearance.setEarShape(readUC());
+		playerAppearance.setHeadSize(readUC());
+		playerAppearance.setNeck(readUC());
+		playerAppearance.setNeckLength(readUC());
+		playerAppearance.setShoulderSize(readUC());
+		playerAppearance.setTorso(readUC());
+		playerAppearance.setChest(readUC());
+		playerAppearance.setWaist(readUC());
+		playerAppearance.setHips(readUC());
+		playerAppearance.setArmThickness(readUC());
+		playerAppearance.setHandSize(readUC());
+		playerAppearance.setLegThicnkess(readUC());
+		playerAppearance.setFootSize(readUC());
+		playerAppearance.setFacialRate(readUC());
+		playerAppearance.setArmLength(readUC());
+		playerAppearance.setLegLength(readUC());
+		playerAppearance.setShoulders(readUC());
+		playerAppearance.setFaceShape(readUC());
+		playerAppearance.setVoice(readUC());
 		playerAppearance.setHeight(readF());
 
 		Account account = AccountService.loadAccount(targetAccount);
@@ -146,7 +146,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		float x = readF();
 		float y = readF();
 		float z = readF();
-		byte h = readSC();
+		byte h = readC();
 		int worldId = readD();
 		WorldPosition pos = World.getInstance().createPosition(worldId, x, y, z, h, 1);
 		player.setPosition(pos);
@@ -170,9 +170,9 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			String itemCreator = readS();
 			int itemExpireTime = readD();
 			int itemActivationCnt = readD();
-			boolean itemEquipped = readSC() == 1;
+			boolean itemEquipped = readC() == 1;
 
-			boolean itemSoulBound = readSC() == 1;
+			boolean itemSoulBound = readC() == 1;
 			long equipSlot = readQ();
 			int location = readD();
 			int enchant = readD();
@@ -185,11 +185,11 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 
 			int charge = readD();
 			FastTable<int[]> manastones = new FastTable<>(), fusions = new FastTable<>();
-			byte len = readSC();
+			byte len = readC();
 			for (byte b = 0; b < len; b++) {
 				manastones.add(new int[] { readD(), readD() });
 			}
-			len = readSC();
+			len = readC();
 			for (byte b = 0; b < len; b++) {
 				fusions.add(new int[] { readD(), readD() });
 			}
@@ -199,8 +199,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int randomNum = readD();
 			int tempering = readD();
 			int packCount = readD();
-			boolean itemAmplified = readC() == 1;
-			int buffSkill = readH();
+			boolean itemAmplified = readUC() == 1;
+			int buffSkill = readUH();
 			if (!(location == StorageType.CUBE.getId() && PlayerTransferConfig.ALLOW_INV
 				|| location == StorageType.REGULAR_WAREHOUSE.getId() && PlayerTransferConfig.ALLOW_WAREHOUSE)) {
 				continue;
@@ -264,7 +264,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		player.setMotions(new MotionList(player));
 		for (int i = 0; i < cnt; i++) { // motions
 			int id = readD(), expiryTime = readD();
-			boolean active = readSC() == 1;
+			boolean active = readC() == 1;
 
 			if (PlayerTransferConfig.ALLOW_MOTIONS)
 				player.getMotions().add(new Motion(id, expiryTime, active), true);
@@ -286,7 +286,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		player.setNpcFactions(new NpcFactions(player));
 		for (int a = 0; a < cnt; a++) { // npc factions
 			int id = readD(), time = readD();
-			boolean active = readSC() == 1;
+			boolean active = readC() == 1;
 			String state = readS();
 			int questId = readD();
 

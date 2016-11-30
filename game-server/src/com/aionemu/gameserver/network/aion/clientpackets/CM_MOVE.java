@@ -34,8 +34,8 @@ public class CM_MOVE extends AionClientPacket {
 		y = readF();
 		z = readF();
 
-		heading = readSC();
-		type = readSC();
+		heading = readC();
+		type = readC();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
@@ -52,7 +52,7 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			glideFlag = readSC();
+			glideFlag = readC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
 			unk1 = readD();

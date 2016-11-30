@@ -26,11 +26,11 @@ public class CM_LS_CONTROL_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void readImpl() {
-		type = readC();
-		result = readC() == 1;
+		type = readUC();
+		result = readUC() == 1;
 		adminName = readS();
 		playerName = readS();
-		param = (byte) readC();
+		param = readC();
 		accountId = readD();
 	}
 

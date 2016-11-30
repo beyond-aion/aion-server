@@ -34,7 +34,7 @@ public class CM_CS_AUTH extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		gameServerId = (byte) readC();
+		gameServerId = readC();
 		password = readS();
 	}
 

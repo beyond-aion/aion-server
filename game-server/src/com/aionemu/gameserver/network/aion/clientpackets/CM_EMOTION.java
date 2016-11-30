@@ -56,7 +56,7 @@ public class CM_EMOTION extends AionClientPacket {
 	 */
 	@Override
 	protected void readImpl() {
-		int et = readC();
+		int et = readUC();
 		emotionType = EmotionType.getEmotionTypeById(et);
 
 		switch (emotionType) {
@@ -84,7 +84,7 @@ public class CM_EMOTION extends AionClientPacket {
 			case WINDSTREAM_STRAFE:
 				break;
 			case EMOTE:
-				emotion = readH();
+				emotion = readUH();
 				targetObjectId = readD();
 				break;
 			case CHAIR_SIT: // sit on chair
@@ -92,7 +92,7 @@ public class CM_EMOTION extends AionClientPacket {
 				x = readF();
 				y = readF();
 				z = readF();
-				heading = (byte) readC();
+				heading = readC();
 				break;
 			default:
 				log.error("Unknown emotion type? 0x" + Integer.toHexString(et/* !!!!! */).toUpperCase());

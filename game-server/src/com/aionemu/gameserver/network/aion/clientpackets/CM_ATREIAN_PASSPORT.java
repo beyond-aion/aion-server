@@ -29,7 +29,7 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		count = readH();
+		count = readUH();
 		for (int i = 0; i < count; i++) {
 			passportId.add(readD());
 			timestamps.add(readD());

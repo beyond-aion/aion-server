@@ -17,7 +17,7 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 
 	private long slotRead;
 	private int itemObjId;
-	private int action;
+	private byte action;
 
 	public CM_EQUIP_ITEM(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

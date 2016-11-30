@@ -28,7 +28,7 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 	protected void readImpl() {
 		objectId = readD();
 		templateId = readD();
-		lineNr = readH();
+		lineNr = readUH();
 	}
 
 	@Override

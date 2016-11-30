@@ -24,12 +24,12 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		int itemCount = readH();
+		int itemCount = readUH();
 		tradePSItems = new TradePSItem[itemCount];
 		for (int i = 0; i < itemCount; i++) {
 			int itemObjId = readD();
 			int itemId = readD();
-			int count = readH();
+			int count = readUH();
 			long price = readQ();
 			tradePSItems[i] = new TradePSItem(itemObjId, itemId, count, price);
 		}

@@ -14,7 +14,7 @@ import com.aionemu.gameserver.restrictions.RestrictionsManager;
 public class CM_GROUP_DISTRIBUTION extends AionClientPacket {
 
 	private long amount;
-	private int partyType;
+	private byte partyType;
 
 	public CM_GROUP_DISTRIBUTION(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

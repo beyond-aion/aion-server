@@ -34,7 +34,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_APPEARANCE extends AionClientPacket {
 
-	private int type;
+	private byte type;
 	private int itemObjId;
 	private String newName;
 

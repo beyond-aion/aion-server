@@ -17,17 +17,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_LEGION_WH_KINAH extends AionClientPacket {
 
+	private long amount;
+	private byte actionType;
+
 	public CM_LEGION_WH_KINAH(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
-	private long amount;
-	private int operation;
-
 	@Override
 	protected void readImpl() {
-		this.amount = readQ();
-		this.operation = readC();
+		amount = readQ();
+		actionType = readC();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 		Legion legion = activePlayer.getLegion();
 		if (legion != null) {
 			LegionMember LM = LegionService.getInstance().getLegionMember(activePlayer.getObjectId());
-			switch (operation) {
+			switch (actionType) {
 				case 0:
 					if (!LM.hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
 						// You do not have the authority to use the Legion warehouse.

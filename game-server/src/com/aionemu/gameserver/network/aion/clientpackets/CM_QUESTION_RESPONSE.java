@@ -26,7 +26,7 @@ public class CM_QUESTION_RESPONSE extends AionClientPacket {
 	protected void readImpl() {
 		questionid = readD();
 
-		response = readC(); // y/n
+		response = readUC(); // y/n
 		readC(); // unk 0x00 - 0x01 ?
 		readH();
 		senderid = readD();

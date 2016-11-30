@@ -18,20 +18,12 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
-	 */
 	@Override
 	protected void readImpl() {
-		skillid = readH();
+		skillid = readUH();
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-	 */
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

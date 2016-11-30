@@ -36,7 +36,7 @@ public class CM_MACRO_CREATE extends AionClientPacket {
 	 */
 	@Override
 	protected void readImpl() {
-		macroPosition = readC();
+		macroPosition = readUC();
 		macroXML = readS();
 	}
 

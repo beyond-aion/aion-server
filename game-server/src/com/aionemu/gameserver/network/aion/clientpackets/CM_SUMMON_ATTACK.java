@@ -20,11 +20,11 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 	private int summonObjId;
 	private int targetObjId;
 	@SuppressWarnings("unused")
-	private int unk1;
+	private byte unk1;
 
 	private int time;
 	@SuppressWarnings("unused")
-	private int unk3;
+	private byte unk3;
 
 	public CM_SUMMON_ATTACK(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -35,7 +35,7 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		summonObjId = readD();
 		targetObjId = readD();
 		unk1 = readC();
-		time = readH();
+		time = readUH();
 		unk3 = readC();
 	}
 

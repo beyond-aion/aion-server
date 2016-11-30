@@ -32,7 +32,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		inviteType = readC();
+		inviteType = readUC();
 		playerName = readS();
 	}
 

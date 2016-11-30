@@ -42,7 +42,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		actionId = readC();
+		actionId = readUC();
 		playerId1 = readD();
 		playerId2 = readD();
 	}

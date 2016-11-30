@@ -35,7 +35,7 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		x = readF();
 		y = readF();
 		z = readF();
-		heading = readSC();
+		heading = readC();
 		distance = readD();
 	}
 

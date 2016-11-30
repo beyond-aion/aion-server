@@ -12,14 +12,14 @@ public class CM_PTRANSFER_CONTROL extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		actionId = this.readSC();
+		actionId = readC();
 		switch (actionId) {
 			case 1: // request transfer
 			{
 				int taskId = readD();
 				String name = readS();
-				int bytes = this.getRemainingBytes();
-				byte[] db = this.readB(bytes);
+				int bytes = getRemainingBytes();
+				byte[] db = readB(bytes);
 				PlayerTransferService.getInstance().requestTransfer(taskId, name, db);
 			}
 				break;

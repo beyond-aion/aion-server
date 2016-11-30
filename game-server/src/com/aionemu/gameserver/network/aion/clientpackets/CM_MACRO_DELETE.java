@@ -36,7 +36,7 @@ public class CM_MACRO_DELETE extends AionClientPacket {
 	 */
 	@Override
 	protected void readImpl() {
-		macroPosition = readC();
+		macroPosition = readUC();
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class CM_IN_GAME_SHOP_INFO extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		actionId = readC();
+		actionId = readUC();
 		categoryId = readD();
 		listInCategory = readD();
 		senderName = readS();

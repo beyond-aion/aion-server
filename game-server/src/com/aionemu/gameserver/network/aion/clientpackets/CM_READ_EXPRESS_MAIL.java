@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,7 +18,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 
-	private int action;
+	private static final Logger log = LoggerFactory.getLogger(CM_READ_EXPRESS_MAIL.class);
+	private byte action;
 
 	public CM_READ_EXPRESS_MAIL(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -29,8 +33,6 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		final Player player = getConnection().getActivePlayer();
-		boolean haveUnreadExpress = player.getMailbox().haveUnreadByType(LetterType.EXPRESS);
-		boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
 
 		switch (action) {
 			case 0: // window is closed
@@ -40,6 +42,8 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 				}
 				break;
 			case 1: // click on icon
+				boolean haveUnreadExpress = player.getMailbox().haveUnreadByType(LetterType.EXPRESS);
+				boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
 				if (player.getPostman() != null) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED());
 				} else if (player.isFlying()) {
@@ -56,6 +60,8 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 						ThreadPoolManager.getInstance().schedule(() -> player.getController().cancelTask(TaskId.EXPRESS_MAIL_USE), 600000)); // 10 min
 				}
 				break;
+			default:
+				log.warn(player + " sent unknown read express mail action type: " + action);
 		}
 	}
 

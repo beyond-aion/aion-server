@@ -13,7 +13,7 @@ public class CM_GS_PONG extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		serverId = (byte) readC();
+		serverId = readC();
 		pid = readD();
 	}
 

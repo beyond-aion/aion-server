@@ -29,7 +29,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(CM_BUY_ITEM.class);
 	private int sellerObjId;
-	private int tradeActionId;
+	private short tradeActionId;
 	private int amount;
 	private int itemId;
 	private long count;
@@ -46,7 +46,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		sellerObjId = readD();
 		tradeActionId = readH();
-		amount = readH(); // total no of items
+		amount = readUH(); // total no of items
 
 		if (amount < 0 || amount > 36) {
 			isAudit = true;

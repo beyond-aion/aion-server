@@ -37,7 +37,7 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 	protected void readImpl() {
 		objectId = readD();
 		unk = readD();
-		index = readC();
+		index = readUC();
 	}
 
 	@Override

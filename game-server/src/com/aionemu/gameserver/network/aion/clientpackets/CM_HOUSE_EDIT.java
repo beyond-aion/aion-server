@@ -38,7 +38,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readC();
+		action = readUC();
 		if (action == 3) {
 			itemObjectId = readD();
 		} else if (action == 4) {
@@ -48,13 +48,13 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			x = readF();
 			y = readF();
 			z = readF();
-			rotation = readH();
+			rotation = readUH();
 		} else if (action == 6) {
 			itemObjectId = readD();
 			x = readF();
 			y = readF();
 			z = readF();
-			rotation = readH();
+			rotation = readUH();
 		} else if (action == 7) {
 			itemObjectId = readD();
 		} else if (action == 16) {

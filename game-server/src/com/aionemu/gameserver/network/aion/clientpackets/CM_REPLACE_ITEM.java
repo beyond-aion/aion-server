@@ -21,9 +21,9 @@ public class CM_REPLACE_ITEM extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		sourceStorageType = readSC();
+		sourceStorageType = readC();
 		sourceItemObjId = readD();
-		replaceStorageType = readSC();
+		replaceStorageType = readC();
 		replaceItemObjId = readD();
 	}
 

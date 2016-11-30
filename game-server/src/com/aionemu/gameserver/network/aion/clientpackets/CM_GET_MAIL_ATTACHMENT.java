@@ -11,7 +11,7 @@ import com.aionemu.gameserver.services.mail.MailService;
 public class CM_GET_MAIL_ATTACHMENT extends AionClientPacket {
 
 	private int mailObjId;
-	private int attachmentType;
+	private byte attachmentType;
 
 	public CM_GET_MAIL_ATTACHMENT(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

@@ -46,22 +46,16 @@ public class CM_GS_AUTH extends GsClientPacket {
 	 */
 	private byte[] ip;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
-		gameServerId = (byte) readC();
-		byte len1 = (byte) readC();
+		gameServerId = readC();
+		byte len1 = readC();
 		ip = readB(len1);
-		port = readH();
+		port = readUH();
 		maxPlayers = readD();
 		password = readS();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 		final GsConnection client = this.getConnection();

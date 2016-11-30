@@ -34,8 +34,9 @@ import javolution.util.FastTable;
  */
 public class CM_USE_ITEM extends AionClientPacket {
 
-	public int uniqueItemId;
-	public int type, targetItemId, indexReturn = 0;
+	private int uniqueItemId;
+	private byte type;
+	private int targetItemId, indexReturn;
 
 	public CM_USE_ITEM(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);

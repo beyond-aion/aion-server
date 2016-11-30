@@ -34,7 +34,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		address = readD();
-		if (readC() != 0)
+		if (readUC() != 0)
 			leave = true;
 	}
 

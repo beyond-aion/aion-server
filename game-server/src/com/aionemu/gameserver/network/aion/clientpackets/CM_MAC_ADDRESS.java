@@ -36,7 +36,7 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		readC(); // unk
-		int routeSteps = readH();
+		int routeSteps = readUH();
 		for (int i = 0; i < routeSteps; i++)
 			readD(); // ip traceroute, see -> System.out.println(NetworkUtils.intToIpString(readD()))
 		macAddress = readS();

@@ -37,11 +37,11 @@ public class CM_CAPTCHA extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		type = readC();
+		type = readUC();
 
 		switch (type) {
 			case 0x02:
-				count = readC();
+				count = readUC();
 				word = readS();
 				break;
 			default:

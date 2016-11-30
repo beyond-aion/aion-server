@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.chatserver.CsClientPacket;
 public class CM_CS_AUTH_RESPONSE extends CsClientPacket {
 
 	protected static final Logger log = LoggerFactory.getLogger(CM_CS_AUTH_RESPONSE.class);
-	private int response;
+	private byte response;
 	private byte[] ip;
 	private int port;
 
@@ -28,8 +28,8 @@ public class CM_CS_AUTH_RESPONSE extends CsClientPacket {
 	protected void readImpl() {
 		response = readC();
 		if (response == 0) {
-			ip = readB(readC());
-			port = readH();
+			ip = readB(readUC());
+			port = readUH();
 		}
 	}
 
@@ -41,11 +41,11 @@ public class CM_CS_AUTH_RESPONSE extends CsClientPacket {
 				ChatServer.getInstance().setPublicAddress(ip, port);
 				break;
 			case 1: // Not authed
-				log.error("GameServer is not authenticated at ChatServer side!");
+				log.warn("GameServer is not authenticated at ChatServer side!");
 				getConnection().close();
 				break;
 			case 2: // Already registered
-				log.info("GameServer is already registered at ChatServer side!");
+				log.warn("GameServer is already registered at ChatServer side!");
 				getConnection().close();
 				break;
 		}

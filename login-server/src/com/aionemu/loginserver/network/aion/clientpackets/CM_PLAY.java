@@ -38,7 +38,7 @@ public class CM_PLAY extends AionClientPacket {
 	protected void readImpl() {
 		accountId = readD();
 		loginOk = readD();
-		servId = (byte) readC();
+		servId = readC();
 	}
 
 	@Override

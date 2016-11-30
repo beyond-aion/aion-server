@@ -39,10 +39,10 @@ public class CM_CASTSPELL extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		spellid = readH();
-		level = readC();
+		spellid = readUH();
+		level = readUC();
 
-		targetType = readC();
+		targetType = readUC();
 
 		switch (targetType) {
 			case 0:
@@ -70,7 +70,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 				break;
 		}
 
-		hitTime = readH();
+		hitTime = readUH();
 		unk = readD();
 	}
 

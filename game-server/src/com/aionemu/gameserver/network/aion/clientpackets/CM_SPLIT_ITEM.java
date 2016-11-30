@@ -25,10 +25,10 @@ public class CM_SPLIT_ITEM extends AionClientPacket {
 	protected void readImpl() {
 		sourceItemObjId = readD();
 		itemAmount = readQ();
-		sourceStorageType = readSC();
+		sourceStorageType = readC();
 		destinationItemObjId = readD();
-		destinationStorageType = readSC();
-		slotNum = readSH();
+		destinationStorageType = readC();
+		slotNum = readH();
 	}
 
 	@Override

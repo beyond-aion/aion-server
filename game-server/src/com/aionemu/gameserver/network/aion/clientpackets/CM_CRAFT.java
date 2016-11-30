@@ -30,12 +30,12 @@ public class CM_CRAFT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		unk = readC();
+		unk = readUC();
 		targetTemplateId = readD();
 		recipeId = readD();
 		targetObjId = readD();
-		materialsCount = readH();
-		craftType = readC();
+		materialsCount = readUH();
+		craftType = readUC();
 		// un used
 		// for (int i = 0; i < materialsCount; i++) {
 		// readD(); // materialId

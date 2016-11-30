@@ -17,7 +17,7 @@ public class CM_BONUS_TITLE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		bonusTitleId = readH();
+		bonusTitleId = readUH();
 	}
 
 	@Override

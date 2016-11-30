@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 public class CM_PLAY_MOVIE_END extends AionClientPacket {
 
 	@SuppressWarnings("unused")
-	private int type;
+	private byte type;
 	private int movieId;
 
 	public CM_PLAY_MOVIE_END(int opcode, State state, State... restStates) {
@@ -25,7 +25,7 @@ public class CM_PLAY_MOVIE_END extends AionClientPacket {
 		type = readC();
 		readD();
 		readD();
-		movieId = readH();
+		movieId = readUH();
 		readD();
 	}
 

@@ -25,8 +25,8 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		instanceMaskId = readD();
-		windowId = (byte) readC();
-		entryRequestId = (byte) readC();
+		windowId = readC();
+		entryRequestId = readC();
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 
 	@SuppressWarnings("unused")
 	private int brokerId;
-	private int sortType;
+	private byte sortType;
 	private int page;
 	private int mask;
 	private int itemCount;
@@ -30,9 +30,9 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 	protected void readImpl() {
 		this.brokerId = readD();
 		this.sortType = readC(); // 1 - name; 2 - level; 4 - totalPrice; 6 - price for piece
-		this.page = readH();
-		this.mask = readH();
-		this.itemCount = readH();
+		this.page = readUH();
+		this.mask = readUH();
+		this.itemCount = readUH();
 		this.itemList = new FastTable<>();
 
 		for (int index = 0; index < this.itemCount; index++)

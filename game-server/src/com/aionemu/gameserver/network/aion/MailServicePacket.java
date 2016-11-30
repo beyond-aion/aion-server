@@ -87,7 +87,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 		writeC(letter.getLetterType().getId()); // mail type
 	}
 
-	protected void writeLetterState(int letterId, int attachmentType) {
+	protected void writeLetterState(int letterId, byte attachmentType) {
 		writeD(letterId);
 		writeC(attachmentType);
 		writeC(1);

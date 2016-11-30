@@ -28,10 +28,10 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		totalSize = readD();
-		alpha = readC();
-		red = readC();
-		green = readC();
-		blue = readC();
+		alpha = readUC();
+		red = readUC();
+		green = readUC();
+		blue = readUC();
 	}
 
 	@Override

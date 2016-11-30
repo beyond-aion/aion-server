@@ -40,8 +40,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		y = readF();
 		z = readF();
 
-		heading = (byte) readC();
-		type = (byte) readC();
+		heading = readC();
+		type = readC();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == 0) {
@@ -58,7 +58,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			glideFlag = (byte) readC();
+			glideFlag = readC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
 			unk1 = readD();

@@ -36,7 +36,7 @@ public class CM_PLAYER_AUTH extends GsClientPacket {
 		accName = readS();
 		nick = readS();
 		raceId = readD();
-		accessLevel = readSC();
+		accessLevel = readC();
 	}
 
 	@Override

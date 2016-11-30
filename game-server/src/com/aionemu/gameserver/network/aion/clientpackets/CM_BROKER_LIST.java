@@ -12,7 +12,7 @@ public class CM_BROKER_LIST extends AionClientPacket {
 
 	@SuppressWarnings("unused")
 	private int brokerId;
-	private int sortType;
+	private byte sortType;
 	private int page;
 	private int listMask;
 
@@ -22,10 +22,10 @@ public class CM_BROKER_LIST extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		this.brokerId = readD();
-		this.sortType = readC(); // 1 - name; 2 - level; 4 - totalPrice; 6 - price for piece
-		this.page = readH();
-		this.listMask = readH();
+		brokerId = readD();
+		sortType = readC(); // 1 - name; 2 - level; 4 - totalPrice; 6 - price for piece
+		page = readUH();
+		listMask = readUH();
 	}
 
 	@Override

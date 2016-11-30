@@ -15,7 +15,7 @@ public class CM_MACBAN_CONTROL extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		type = (byte) readC();
+		type = readC();
 		address = readS();
 		details = readS();
 		time = readQ();

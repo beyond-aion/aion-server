@@ -20,7 +20,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
  */
 public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 
-	private int type;
+	private short type;
 	private String passkey;
 	private String newPasskey;
 

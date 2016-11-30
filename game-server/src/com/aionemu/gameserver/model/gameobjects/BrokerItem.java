@@ -389,7 +389,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	 * @param sortType
 	 * @return
 	 */
-	public static Comparator<BrokerItem> getComparatoryByType(int sortType) {
+	public static Comparator<BrokerItem> getComparatoryByType(byte sortType) {
 		switch (sortType) {
 			case 0:
 				return NAME_SORT_ASC;

@@ -26,10 +26,10 @@ public class CM_UNK extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		size = readD();
-		unk1 = (byte) readC();
-		unk2 = (byte) readC();
-		unk3 = (byte) readC();
-		unk4 = (byte) readC();
+		unk1 = readC();
+		unk2 = readC();
+		unk3 = readC();
+		unk4 = readC();
 		size = readD();
 		unk0 = readD();
 		unk0 = readD();

@@ -14,7 +14,7 @@ public class CM_HDDBAN_CONTROL extends GsClientPacket {
 
 	@Override
 	protected void readImpl() {
-		type = (byte) readC();
+		type = readC();
 		address = readS();
 		time = readQ();
 	}

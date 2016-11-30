@@ -36,8 +36,8 @@ public class CM_MANASTONE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		actionType = readC();
-		targetFusedSlot = readC();
+		actionType = readUC();
+		targetFusedSlot = readUC();
 		targetItemUniqueId = readD();
 		switch (actionType) {
 			case 1:
@@ -48,7 +48,7 @@ public class CM_MANASTONE extends AionClientPacket {
 				supplementUniqueId = readD();
 				break;
 			case 3:
-				slotNum = readC();
+				slotNum = readUC();
 				readC();
 				readH();
 				npcObjId = readD();

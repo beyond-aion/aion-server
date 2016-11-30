@@ -46,12 +46,12 @@ public class CM_PET extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = PetAction.getActionById(readH());
+		action = PetAction.getActionById(readUH());
 		switch (action) {
 			case ADOPT:
 				eggObjId = readD();
 				petId = readD();
-				unk2 = readC();
+				unk2 = readUC();
 				unk3 = readD();
 				decorationId = readD();
 				unk5 = readD();

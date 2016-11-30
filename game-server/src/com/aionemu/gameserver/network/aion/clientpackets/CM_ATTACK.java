@@ -34,9 +34,9 @@ public class CM_ATTACK extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();// empty
-		attackno = readC();// empty
-		time = readH();// empty
-		type = readC();// empty
+		attackno = readUC();// empty
+		time = readUH();// empty
+		type = readUC();// empty
 	}
 
 	@Override

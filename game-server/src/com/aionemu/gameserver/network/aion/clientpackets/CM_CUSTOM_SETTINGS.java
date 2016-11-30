@@ -23,11 +23,11 @@ public class CM_CUSTOM_SETTINGS extends AionClientPacket {
 		/**
 		 * 1 : show legion mantle 2 : priority equipment 4 : show helmet
 		 */
-		display = readH();
+		display = readUH();
 		/**
 		 * 1 : view detail player 2 : trade 4 : party/force 8 : legion 16 : friend 32 : dual(pvp)
 		 */
-		deny = readH();
+		deny = readUH();
 	}
 
 	@Override

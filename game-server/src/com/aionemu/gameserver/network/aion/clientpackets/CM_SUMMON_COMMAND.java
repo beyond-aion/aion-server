@@ -22,7 +22,7 @@ public class CM_SUMMON_COMMAND extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		mode = readC();
+		mode = readUC();
 		readD();
 		readD();
 		targetObjId = readD();

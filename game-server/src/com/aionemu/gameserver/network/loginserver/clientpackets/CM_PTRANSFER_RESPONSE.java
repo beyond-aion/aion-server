@@ -91,7 +91,7 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 			}
 				break;
 			case 23:
-				byte serverId = readSC();
+				byte serverId = readC();
 				if (NetworkConfig.GAMESERVER_ID != serverId) {
 					try {
 						throw new Exception("Requesting player transfer for server id " + serverId + " but this is " + NetworkConfig.GAMESERVER_ID + " omgshit!");
@@ -99,7 +99,7 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
 						e.printStackTrace();
 					}
 				} else {
-					byte targetServerId = readSC();
+					byte targetServerId = readC();
 					int account = readD();
 					int targetAccount = readD();
 					int playerId = readD();

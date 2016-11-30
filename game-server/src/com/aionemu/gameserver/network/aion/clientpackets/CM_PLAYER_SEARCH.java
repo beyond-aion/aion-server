@@ -43,9 +43,9 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 		name = Util.convertName(readS(52));
 		region = readD();
 		classMask = readD();
-		minLevel = readC();
-		maxLevel = readC();
-		lfgOnly = readC();
+		minLevel = readUC();
+		maxLevel = readUC();
+		lfgOnly = readUC();
 		readC(); // 0x00 in search pane 0x30 in /who?
 	}
 

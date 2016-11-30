@@ -11,21 +11,10 @@ import com.aionemu.loginserver.network.gameserver.serverpackets.SM_LS_CONTROL_RE
  */
 public class CM_LS_CONTROL extends GsClientPacket {
 
-	private String accountName;
-
-	private int param;
-
-	private int type;
-
-	private String playerName;
-
-	private String adminName;
-
+	private String accountName, playerName, adminName;
+	private byte type, param;
 	private boolean result;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void readImpl() {
 
@@ -36,19 +25,16 @@ public class CM_LS_CONTROL extends GsClientPacket {
 		param = readC();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	protected void runImpl() {
 
 		Account account = DAOManager.getDAO(AccountDAO.class).getAccount(accountName);
 		switch (type) {
 			case 1:
-				account.setAccessLevel((byte) param);
+				account.setAccessLevel(param);
 				break;
 			case 2:
-				account.setMembership((byte) param);
+				account.setMembership(param);
 				break;
 		}
 		result = DAOManager.getDAO(AccountDAO.class).updateAccount(account);

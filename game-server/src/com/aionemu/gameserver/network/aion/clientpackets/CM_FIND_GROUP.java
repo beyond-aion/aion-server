@@ -41,31 +41,31 @@ public class CM_FIND_GROUP extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readC();
+		action = readUC();
 
 		switch (action) {
 			case 0x00: // recruit list
 				break;
 			case 0x01: // offer delete
 				playerObjId = readD();
-				serverId = readSC();
-				unk1 = readSC();
-				unk2 = readSC();
-				unk3 = readSC();
+				serverId = readC();
+				unk1 = readC();
+				unk2 = readC();
+				unk3 = readC();
 				break;
 			case 0x02: // send offer
 				playerObjId = readD();
 				message = readS();
-				groupType = readC();
+				groupType = readUC();
 				break;
 			case 0x03: // recruit update
 				playerObjId = readD();
-				serverId = readSC();
-				unk1 = readSC();
-				unk2 = readSC();
-				unk3 = readSC();
+				serverId = readC();
+				unk1 = readC();
+				unk2 = readC();
+				unk3 = readC();
 				message = readS();
-				groupType = readC();
+				groupType = readUC();
 				break;
 			case 0x04: // apply list
 				break;
@@ -75,18 +75,18 @@ public class CM_FIND_GROUP extends AionClientPacket {
 			case 0x06: // apply create
 				playerObjId = readD();
 				message = readS();
-				groupType = readC();
-				classId = readC();
-				level = readC();
+				groupType = readUC();
+				classId = readUC();
+				level = readUC();
 				break;
 			case 0x07: // apply update
 				// TODO need packet check
 				break;
 			case 0x08: // register InstanceGroup
 				instanceId = readD();
-				groupType = readC();// need to be tested
+				groupType = readUC();// need to be tested
 				message = readS();// text
-				minMembers = readC();// minMembers chosen by writer
+				minMembers = readUC();// minMembers chosen by writer
 				break;
 			case 0x0A: // New 4.0 Group Recruitment
 				break;

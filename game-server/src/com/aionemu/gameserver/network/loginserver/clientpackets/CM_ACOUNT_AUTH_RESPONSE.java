@@ -69,8 +69,8 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 			accountTime.setAccumulatedOnlineTime(readQ());
 			accountTime.setAccumulatedRestTime(readQ());
 
-			accessLevel = readSC();
-			membership = readSC();
+			accessLevel = readC();
+			membership = readC();
 			toll = readQ();
 			allowedHddSerial = readS();
 		}

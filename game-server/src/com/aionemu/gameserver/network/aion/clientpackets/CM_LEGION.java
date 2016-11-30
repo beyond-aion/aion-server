@@ -45,7 +45,7 @@ public class CM_LEGION extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		exOpcode = readC();
+		exOpcode = readUC();
 
 		switch (exOpcode) {
 		/** Create a legion **/
@@ -100,10 +100,10 @@ public class CM_LEGION extends AionClientPacket {
 				break;
 			/** Edit permissions **/
 			case 0x0D:
-				deputyPermission = (short) readH();
-				centurionPermission = (short) readH();
-				legionarPermission = (short) readH();
-				volunteerPermission = (short) readH();
+				deputyPermission = readH();
+				centurionPermission = readH();
+				legionarPermission = readH();
+				volunteerPermission = readH();
 				break;
 			/** Level legion up **/
 			case 0x0E:

@@ -30,12 +30,12 @@ public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		legionId = readD();
-		emblemId = readC();
-		emblemType = (readC() == LegionEmblemType.DEFAULT.getValue()) ? LegionEmblemType.DEFAULT : LegionEmblemType.CUSTOM;
-		alpha = readC();
-		red = readC();
-		green = readC();
-		blue = readC();
+		emblemId = readUC();
+		emblemType = (readUC() == LegionEmblemType.DEFAULT.getValue()) ? LegionEmblemType.DEFAULT : LegionEmblemType.CUSTOM;
+		alpha = readUC();
+		red = readUC();
+		green = readUC();
+		blue = readUC();
 	}
 
 	@Override

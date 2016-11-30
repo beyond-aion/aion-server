@@ -24,7 +24,7 @@ public class CM_REVIVE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		reviveId = readC();
+		reviveId = readUC();
 	}
 
 	@Override

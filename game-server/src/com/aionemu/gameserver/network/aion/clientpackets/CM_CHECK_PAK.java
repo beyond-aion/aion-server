@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class CM_CHECK_PAK extends AionClientPacket {
 
 	@SuppressWarnings("unused")
-	private int unk;
+	private byte unk;
 	private String pakStatus;
 
 	public CM_CHECK_PAK(int opcode, State state, State... restStates) {

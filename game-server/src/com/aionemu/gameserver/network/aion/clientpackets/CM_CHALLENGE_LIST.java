@@ -24,9 +24,9 @@ public class CM_CHALLENGE_LIST extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readC();
+		action = readUC();
 		taskOwner = readD();
-		ownerType = readC();
+		ownerType = readUC();
 		playerId = readD();
 		dateSince = readD();
 	}

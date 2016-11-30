@@ -10,14 +10,14 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_CHARACTER_SELECT extends AionServerPacket {
 
 	private int type; // 0: new passkey input window, 1: passkey input window, 2: message window
-	private int messageType; // 0: newpasskey complete, 2: passkey edit complete, 3: passkey input
+	private short messageType; // 0: newpasskey complete, 2: passkey edit complete, 3: passkey input
 	private int wrongCount;
 
 	public SM_CHARACTER_SELECT(int type) {
 		this.type = type;
 	}
 
-	public SM_CHARACTER_SELECT(int type, int messageType, int wrongCount) {
+	public SM_CHARACTER_SELECT(int type, short messageType, int wrongCount) {
 		this.type = type;
 		this.messageType = messageType;
 		this.wrongCount = wrongCount;
