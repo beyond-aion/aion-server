@@ -31202,11 +31202,8 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053701" name="Conquest Bundle">
-		<items chance="20.0">
-			<item id="162000006" name="Major Life Potion" min_count="10" />
-		</items>
-		<items chance="20.0">
-			<item id="162000011" name="Major Mana Potion" min_count="10" />
+		<items chance="40.0">
+			<item id="162000045" name="Major Recovery Potion" min_count="10" />
 		</items>
 		<items chance="19.5">
 			<item id="164000076" name="Greater Running Scroll" min_count="5" />
