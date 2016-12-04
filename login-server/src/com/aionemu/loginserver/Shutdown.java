@@ -3,7 +3,6 @@ package com.aionemu.loginserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.loginserver.network.NetConnector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
@@ -60,9 +59,6 @@ public class Shutdown extends Thread {
 		} catch (Throwable t) {
 			log.error("Can't shutdown NetConnector", t);
 		}
-
-		// shutdown cron service prior to threadpool shutdown
-		CronService.getInstance().shutdown();
 
 		/* Shuting down threadpools */
 		try {

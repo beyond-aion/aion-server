@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
@@ -32,7 +31,6 @@ import com.aionemu.loginserver.service.PlayerTransferService;
 import com.aionemu.loginserver.taskmanager.TaskFromDBManager;
 import com.aionemu.loginserver.utils.DeadLockDetector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
-import com.aionemu.loginserver.utils.cron.ThreadPoolManagerRunnableRunner;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
@@ -97,7 +95,6 @@ public class LoginServer {
 		long start = System.currentTimeMillis();
 
 		initalizeLoggger();
-		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
 
 		Config.load();
 		DatabaseFactory.init();
