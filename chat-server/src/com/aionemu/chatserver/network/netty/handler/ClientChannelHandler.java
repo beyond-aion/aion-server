@@ -15,7 +15,6 @@ import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.AbstractServerPacket;
 import com.aionemu.chatserver.network.aion.ClientPacketHandler;
-import com.google.inject.Inject;
 
 /**
  * @author ATracer
@@ -27,7 +26,6 @@ public class ClientChannelHandler extends AbstractChannelHandler {
 	private State state;
 	private ChatClient chatClient;
 
-	@Inject
 	public ClientChannelHandler(ClientPacketHandler clientPacketHandler) {
 		this.clientPacketHandler = clientPacketHandler;
 	}

@@ -2,6 +2,7 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import javax.tools.SimpleJavaFileObject;
 
@@ -37,6 +38,6 @@ public class JavaSourceFromFile extends SimpleJavaFileObject {
 	 */
 	@Override
 	public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
-		return FileUtils.readFileToString(new File(this.toUri()));
+		return FileUtils.readFileToString(new File(this.toUri()), Charset.forName("UTF-8"));
 	}
 }
