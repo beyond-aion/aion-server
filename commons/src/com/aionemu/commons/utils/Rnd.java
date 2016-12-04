@@ -46,7 +46,7 @@ public class Rnd {
 	/**
 	 * @see MTRandom#nextFloat()
 	 */
-	public static double nextFloat() {
+	public static float nextFloat() {
 		return rnd.nextFloat();
 	}
 

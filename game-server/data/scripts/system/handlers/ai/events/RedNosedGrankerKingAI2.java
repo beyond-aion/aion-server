@@ -6,17 +6,19 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 import ai.OneDmgAI2;
 
 /**
- * @author Tibald
+ * @author Tibald, Neon
  */
 @AIName("rednosedgrankerking")
 public class RedNosedGrankerKingAI2 extends OneDmgAI2 {
 
-	private AtomicBoolean isSpawned = new AtomicBoolean(false);
+	private AtomicBoolean addsSpawned = new AtomicBoolean(false);
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -26,58 +28,42 @@ public class RedNosedGrankerKingAI2 extends OneDmgAI2 {
 
 	private synchronized void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 50) {
-			if (isSpawned.compareAndSet(false, true)) {
-				int npcId;
+			if (addsSpawned.compareAndSet(false, true)) {
 				switch (getNpcId()) {
 					case 219292:
-						npcId = getNpcId() + 1;
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						break;
 					case 219294:
-						npcId = getNpcId() + 1;
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
+						int npcId = getNpcId() + 1;
+						rndSpawnInRange(npcId, 3);
+						rndSpawnInRange(npcId, 3);
+						rndSpawnInRange(npcId, 3);
 						break;
 				}
 			}
 		}
 	}
 
-	private Npc rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
+	private Npc rndSpawnInRange(int npcId, float maxDistance) {
+		float distance = 1 + Rnd.nextFloat() * (maxDistance - 1);
+		double directionRadian = Math.toRadians(Rnd.get(360));
 		WorldPosition p = getPosition();
-		return (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
+		float x = p.getX() + (float) (Math.cos(directionRadian) * distance);
+		float y = p.getY() + (float) (Math.sin(directionRadian) * distance);
+		float z = GeoService.getInstance().getZ(p.getMapId(), x, y, p.getZ(), 0, p.getInstanceId());
+		return (Npc) spawn(npcId, x, y, z, (byte) Rnd.get(120));
 	}
 
 	@Override
 	protected void handleBackHome() {
-		isSpawned.set(false);
+		addsSpawned.set(false);
 		super.handleBackHome();
-	}
-
-	private void spawnChests(int npcId) {
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
 	}
 
 	@Override
 	protected void handleDied() {
-		switch (getNpcId()) {
-			case 219292:
-				spawnChests(701457);
-				break;
-			case 219294:
-				spawnChests(701457);
-				break;
-		}
+		long chestSpawnCount = getAggroList().getList().stream()
+			.filter(a -> a.getAttacker() instanceof Player && ((Player) a.getAttacker()).isOnline() && isInRange((Player) a.getAttacker(), 50)).count();
+		for (int i = 0; i < chestSpawnCount; i++)
+			rndSpawnInRange(701457, 6); // stolen solorius box
 		super.handleDied();
 	}
 
