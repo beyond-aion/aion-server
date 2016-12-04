@@ -138,6 +138,14 @@
 			<spot x="503.59219" y="1098.34607" z="237.99319" random_walk="1"/>
 			<spot x="525.08325" y="1053.33521" z="241.23932" random_walk="1"/>
 		</spawn>
+		<!-- ancient fossil -->
+		<spawn npc_id="702758" respawn_time="295" pool="1">
+			<spot x="521.29999" y="1890.2000" z="281.29999" static_id="630"/>
+			<spot x="231.10001" y="1627.9000" z="293.70001" static_id="664"/>
+			<spot x="394.10001" y="1532.2000" z="281.65048" static_id="666"/>
+			<spot x="528.29999" y="1743.5000" z="283.54739" static_id="672"/>
+			<spot x="595.70001" y="1592.5000" z="295.47653" static_id="673"/>
+		</spawn>
 		<!-- ancient jotun protector -->
 		<spawn npc_id="219718" respawn_time="295">
 			<spot x="1834.19995" y="1660.68005" z="353.17999" random_walk="1"/>
@@ -1587,7 +1595,7 @@
 			<spot x="521.07990" y="2785.38037" z="145.19249"/>
 			<spot x="525.04504" y="2762.97729" z="146.70441"/>
 		</spawn>
-		<!-- bluemane  kirrus -->
+		<!-- bluemane kirrus -->
 		<spawn npc_id="219758" respawn_time="295">
 			<spot x="795.83325" y="545.58521" z="214.30719" random_walk="1"/>
 			<spot x="796.83325" y="527.58521" z="213.72385" random_walk="1"/>
@@ -2880,11 +2888,11 @@
 		<spawn npc_id="805208" respawn_time="295">
 			<spot x="2906.78003" y="1664.23999" z="319.35501" h="60"/>
 		</spawn>
-		<!--   -->
+		<!-- DF5_FieldSetting_NPC -->
 		<spawn npc_id="702665" respawn_time="295">
 			<spot x="331.98999" y="2351.25000" z="216.59250"/>
 		</spawn>
-		<!--   -->
+		<!-- DF5_SensoryArea_Q16987 -->
 		<spawn npc_id="206411" respawn_time="295">
 			<spot x="1697.00000" y="541.03003" z="252.07001"/>
 		</spawn>
@@ -2998,19 +3006,19 @@
 			<spot x="2056.56006" y="2126.76001" z="320.43500"/>
 			<spot x="2255.08008" y="2088.72998" z="323.97626"/>
 		</spawn>
-		<!--   -->
+		<!-- F5_DirectPotalMonster_Ctrl_01 -->
 		<spawn npc_id="804816" respawn_time="295">
 			<spot x="334.98999" y="2347.25000" z="217.18750"/>
 		</spawn>
-		<!--   -->
+		<!-- F5_DirectPotalMonster_Ctrl_02 -->
 		<spawn npc_id="804817" respawn_time="295">
 			<spot x="337.98999" y="2347.25000" z="216.90813"/>
 		</spawn>
-		<!--   -->
+		<!-- F5_DirectPotalMonster_Ctrl_03 -->
 		<spawn npc_id="804818" respawn_time="295">
 			<spot x="340.98999" y="2347.25000" z="216.26562"/>
 		</spawn>
-		<!--   -->
+		<!-- F5_DirectPotalMonster_Set_01 -->
 		<spawn npc_id="804819" respawn_time="295">
 			<spot x="331.98999" y="2347.25000" z="217.13937"/>
 		</spawn>
@@ -3362,7 +3370,7 @@
 		</spawn>
 		<!-- Griman -->
 		<spawn npc_id="805216" respawn_time="295" difficult_id="0">
-				<spot x="1755.327" y="2604.329" z="300.0501" h="75"/>
+			<spot x="1755.327" y="2604.329" z="300.0501" h="75"/>
 		</spawn>
 		<!-- grimreoff -->
 		<spawn npc_id="804839" respawn_time="295">
@@ -3620,7 +3628,7 @@
 		<spawn npc_id="804737" respawn_time="295">
 			<spot x="1794.41003" y="179.08000" z="217.25000" h="112"/>
 		</spawn>
-		<!-- Firefin Zanthay-->
+		<!-- Firefin Zanthay -->
 		<spawn npc_id="219773" respawn_time="295">
 			<spot x="140.19502" y="299.96756" z="186.46346" random_walk="1"/>
 			<spot x="163.20000" y="294.89001" z="183.83939" random_walk="1"/>
