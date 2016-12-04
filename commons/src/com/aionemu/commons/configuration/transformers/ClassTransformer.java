@@ -13,7 +13,6 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Returns the {@link Class} object associated with the class or interface with the given string name. The class is not being initialized.<br>
@@ -23,27 +22,23 @@ import com.aionemu.commons.configuration.TransformationException;
  * @author Aquanox
  * @modified Neon
  */
-public class ClassTransformer implements PropertyTransformer<Class<?>> {
+public class ClassTransformer extends PropertyTransformer<Class<?>> {
 
 	public static final ClassTransformer SHARED_INSTANCE = new ClassTransformer();
 	private static Reflections rfl = null;
 
 	@Override
-	public Class<?> transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			Class<?> superClass = null;
-			if (genericTypeArgs.length > 0) {
-				if (genericTypeArgs[0] instanceof Class)
-					superClass = (Class<?>) genericTypeArgs[0];
-				else if (genericTypeArgs[0] instanceof ParameterizedType)
-					superClass = (Class<?>) ((ParameterizedType) genericTypeArgs[0]).getRawType();
-				else if (genericTypeArgs[0] instanceof WildcardType)
-					superClass = (Class<?>) ((WildcardType) genericTypeArgs[0]).getUpperBounds()[0];
-			}
-			return findClass(value, superClass);
-		} catch (ClassNotFoundException | InvalidClassException e) {
-			throw new TransformationException("Invalid class name '" + value + "'", e);
+	protected Class<?> parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		Class<?> superClass = null;
+		if (genericTypeArgs.length > 0) {
+			if (genericTypeArgs[0] instanceof Class)
+				superClass = (Class<?>) genericTypeArgs[0];
+			else if (genericTypeArgs[0] instanceof ParameterizedType)
+				superClass = (Class<?>) ((ParameterizedType) genericTypeArgs[0]).getRawType();
+			else if (genericTypeArgs[0] instanceof WildcardType)
+				superClass = (Class<?>) ((WildcardType) genericTypeArgs[0]).getUpperBounds()[0];
 		}
+		return findClass(value, superClass);
 	}
 
 	private Class<?> findClass(String value, Class<?> superClass) throws ClassNotFoundException, InvalidClassException {
@@ -62,7 +57,7 @@ public class ClassTransformer implements PropertyTransformer<Class<?>> {
 						return cls;
 				}
 			}
-			throw new ClassNotFoundException();
+			throw e;
 		}
 	}
 }

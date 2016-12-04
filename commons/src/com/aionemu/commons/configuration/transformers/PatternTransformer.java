@@ -8,11 +8,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Authomatic pattern transformer for RegExp resolving
+ * Automatic pattern transformer for RegExp resolving
  * 
  * @author SoulKeeper
  */
-public class PatternTransformer implements PropertyTransformer<Pattern> {
+public class PatternTransformer extends PropertyTransformer<Pattern> {
 
 	/**
 	 * Shared instance of this transformer
@@ -31,11 +31,7 @@ public class PatternTransformer implements PropertyTransformer<Pattern> {
 	 *           if pattern is not valid
 	 */
 	@Override
-	public Pattern transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Pattern.compile(value);
-		} catch (Exception e) {
-			throw new TransformationException("Not valid RegExp: " + value, e);
-		}
+	protected Pattern parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Pattern.compile(value);
 	}
 }

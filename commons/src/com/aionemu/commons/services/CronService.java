@@ -59,11 +59,10 @@ public final class CronService {
 	}
 
 	/**
-	 * Empty private constructor to prevent initialization.<br>
+	 * Empty private constructor to prevent instantiation.<br>
 	 * Can be instantiated using reflection (for tests), but no real use for application please!
 	 */
 	private CronService() {
-
 	}
 
 	public synchronized void init(Class<? extends RunnableRunner> runnableRunner) {

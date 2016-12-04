@@ -54,7 +54,7 @@ import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 public @interface Property {
 
 	/**
-	 * This string shows to {@link com.aionemu.commons.configuration.ConfigurableProcessor} that init value of the object should not be overriden.
+	 * This string shows to {@link com.aionemu.commons.configuration.ConfigurableProcessor} that init value of the object should not be overridden.
 	 */
 	public static final String DEFAULT_VALUE = "DO_NOT_OVERWRITE_INITIALIAZION_VALUE";
 

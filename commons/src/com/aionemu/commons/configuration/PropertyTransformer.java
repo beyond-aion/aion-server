@@ -4,24 +4,33 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 /**
- * This interface represents property transformer, each transformer must implement it.
- * 
  * @author SoulKeeper
  * @param <T>
  *          Type of returned value
  */
-public interface PropertyTransformer<T> {
+public abstract class PropertyTransformer<T> {
 
 	/**
-	 * This method actually transforms value to object instance
+	 * This method transforms a value to an object instance
 	 * 
 	 * @param value
 	 *          value that will be transformed
 	 * @param field
-	 *          value will be assigned to this field
-	 * @return result of transformation
+	 *          the field the transformed value will be assigned to
+	 * @param genericTypeArgs
+	 *          the generic type of this object
+	 * @return generated object from the value (may be null)
 	 * @throws TransformationException
 	 *           if something went wrong
 	 */
-	public T transform(String value, Field field, Type... genericTypeArgs) throws TransformationException;
+	public final T transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
+		try {
+			return parseObject(value, field, genericTypeArgs);
+		} catch (Exception e) {
+			throw new TransformationException(
+				"Error transforming \"" + value + "\" for field: " + field.getDeclaringClass().getSimpleName() + "." + field.getName(), e);
+		}
+	}
+
+	protected abstract T parseObject(String value, Field field, Type... genericTypeArgs) throws Exception;
 }

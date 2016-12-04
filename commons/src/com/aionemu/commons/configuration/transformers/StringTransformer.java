@@ -11,7 +11,7 @@ import com.aionemu.commons.configuration.TransformationException;
  * 
  * @author SoulKeeper
  */
-public class StringTransformer implements PropertyTransformer<String> {
+public class StringTransformer extends PropertyTransformer<String> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -30,7 +30,7 @@ public class StringTransformer implements PropertyTransformer<String> {
 	 *           never thrown
 	 */
 	@Override
-	public String transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
+	protected String parseObject(String value, Field field, Type... genericTypeArgs) {
 		return value;
 	}
 }

@@ -2,7 +2,7 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.TimeZone;
+import java.time.ZoneId;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
@@ -11,29 +11,29 @@ import com.aionemu.commons.configuration.TransformationException;
 /**
  * @author Neon
  */
-public class TimeZoneTransformer extends PropertyTransformer<TimeZone> {
+public class ZoneIdTransformer extends PropertyTransformer<ZoneId> {
 
 	/**
 	 * Shared instance of this transformer, it's thread safe so no need to create multiple instances
 	 */
-	public static final TimeZoneTransformer SHARED_INSTANCE = new TimeZoneTransformer();
+	public static final ZoneIdTransformer SHARED_INSTANCE = new ZoneIdTransformer();
 
 	/**
-	 * Transforms string to TimeZone.
+	 * Transforms string to ZoneId.
 	 * 
 	 * @param value
 	 *          Time zone id string
 	 * @param field
 	 *          value will be assigned to this field
-	 * @return TimeZone object that represents transformed value (default or empty value returns the system default TimeZone)
+	 * @return ZoneId object that represents transformed value (default or empty value returns the system default ZoneId)
 	 * @throws TransformationException
 	 *           if input string was invalid
 	 */
 	@Override
-	protected TimeZone parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+	protected ZoneId parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
 		if (value.isEmpty() || value.equals(Property.DEFAULT_VALUE))
-			return TimeZone.getDefault();
+			return ZoneId.systemDefault();
 		else
-			return TimeZone.getTimeZone(value);
+			return ZoneId.of(value);
 	}
 }

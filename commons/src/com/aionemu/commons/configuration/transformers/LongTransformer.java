@@ -9,7 +9,7 @@ import com.aionemu.commons.configuration.TransformationException;
 /**
  * Transforms value that represents long to long. Value can be in decimal or hex format.
  */
-public class LongTransformer implements PropertyTransformer<Long> {
+public class LongTransformer extends PropertyTransformer<Long> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -28,11 +28,7 @@ public class LongTransformer implements PropertyTransformer<Long> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Long transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Long.decode(value);
-		} catch (Exception e) {
-			throw new TransformationException(e);
-		}
+	protected Long parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Long.decode(value);
 	}
 }

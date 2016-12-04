@@ -5,14 +5,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms string to file by creating new file instance. It's not checked if file exists.
  * 
  * @author SoulKeeper
  */
-public class FileTransformer implements PropertyTransformer<File> {
+public class FileTransformer extends PropertyTransformer<File> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -29,7 +28,7 @@ public class FileTransformer implements PropertyTransformer<File> {
 	 * @return File object that represents string
 	 */
 	@Override
-	public File transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
+	protected File parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
 		return new File(value);
 	}
 }

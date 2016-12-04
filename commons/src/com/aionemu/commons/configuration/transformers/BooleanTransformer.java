@@ -2,6 +2,7 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.security.InvalidParameterException;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
@@ -14,7 +15,7 @@ import com.aionemu.commons.configuration.TransformationException;
  * 
  * @author SoulKeeper
  */
-public class BooleanTransformer implements PropertyTransformer<Boolean> {
+public class BooleanTransformer extends PropertyTransformer<Boolean> {
 
 	/**
 	 * Shared instance of this transformer, it's thread safe so no need to create multiple instances
@@ -33,15 +34,14 @@ public class BooleanTransformer implements PropertyTransformer<Boolean> {
 	 *           if something goes wrong
 	 */
 	@Override
-	public Boolean transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		// We should have error here if value is not correct, default
-		// "Boolean.parseBoolean" returns false if string is not "true" ignoring case
+	protected Boolean parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		// not using "Boolean.parseBoolean" since it never throws an error (returns false if string is not "true" ignoring case)
 		if ("true".equalsIgnoreCase(value) || "1".equals(value)) {
 			return true;
 		} else if ("false".equalsIgnoreCase(value) || "0".equals(value)) {
 			return false;
 		} else {
-			throw new TransformationException("Invalid boolean string: " + value);
+			throw new InvalidParameterException("Value is no boolean expression.");
 		}
 	}
 }

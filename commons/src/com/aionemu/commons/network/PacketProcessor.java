@@ -275,7 +275,7 @@ public class PacketProcessor<T extends AConnection> {
 			} else if (packetsToExecute > lastSize && packetsToExecute > threadSpawnThreshold) {
 				// too small amount of threads
 				if (!newThread() && packetsToExecute >= threadSpawnThreshold * 3)
-					log.info("Lagg detected! [" + packetsToExecute
+					log.warn("Lagg detected! [" + packetsToExecute
 						+ " client packets are waiting for execution]. You should consider increasing PacketProcessor maxThreads or hardware upgrade.");
 			}
 			lastSize = packetsToExecute;

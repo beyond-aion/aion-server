@@ -7,11 +7,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Transfomrs string to integer. Integer can be represented both as decimal or hex value.
+ * Transforms string to integer. Integer can be represented both as decimal or hex value.
  * 
  * @author SoulKeeper
  */
-public class IntegerTransformer implements PropertyTransformer<Integer> {
+public class IntegerTransformer extends PropertyTransformer<Integer> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -30,11 +30,7 @@ public class IntegerTransformer implements PropertyTransformer<Integer> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Integer transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Integer.decode(value);
-		} catch (Exception e) {
-			throw new TransformationException(e);
-		}
+	protected Integer parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Integer.decode(value);
 	}
 }

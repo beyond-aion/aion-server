@@ -7,11 +7,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Transformes decimal that is represented as string to double
+ * Transforms decimal that is represented as string to double
  * 
  * @author SoulKeeper
  */
-public class DoubleTransformer implements PropertyTransformer<Double> {
+public class DoubleTransformer extends PropertyTransformer<Double> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -30,11 +30,7 @@ public class DoubleTransformer implements PropertyTransformer<Double> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Double transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Double.parseDouble(value);
-		} catch (Exception e) {
-			throw new TransformationException(e);
-		}
+	protected Double parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Double.parseDouble(value);
 	}
 }

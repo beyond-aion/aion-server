@@ -7,11 +7,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Thransforms string that represents float in decimal format
+ * Transforms string that represents float in decimal format
  * 
  * @author SoulKeeper
  */
-public class FloatTransformer implements PropertyTransformer<Float> {
+public class FloatTransformer extends PropertyTransformer<Float> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -19,7 +19,7 @@ public class FloatTransformer implements PropertyTransformer<Float> {
 	public static final FloatTransformer SHARED_INSTANCE = new FloatTransformer();
 
 	/**
-	 * Thransforms string to float
+	 * Transforms string to float
 	 * 
 	 * @param value
 	 *          value that will be transformed
@@ -30,11 +30,7 @@ public class FloatTransformer implements PropertyTransformer<Float> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Float transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Float.parseFloat(value);
-		} catch (Exception e) {
-			throw new TransformationException(e);
-		}
+	protected Float parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Float.parseFloat(value);
 	}
 }

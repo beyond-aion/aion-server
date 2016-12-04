@@ -2,6 +2,7 @@ package com.aionemu.commons.configuration;
 
 import java.io.File;
 import java.net.InetSocketAddress;
+import java.time.ZoneId;
 import java.util.Collection;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ import com.aionemu.commons.configuration.transformers.PatternTransformer;
 import com.aionemu.commons.configuration.transformers.ShortTransformer;
 import com.aionemu.commons.configuration.transformers.StringTransformer;
 import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
+import com.aionemu.commons.configuration.transformers.ZoneIdTransformer;
 import com.aionemu.commons.utils.ClassUtils;
 
 /**
@@ -38,13 +40,9 @@ public class PropertyTransformerFactory {
 	 *          Class that is going to be transformed
 	 * @param tc
 	 *          {@link PropertyTransformer} class that will be instantiated
-	 * @return A shared instance of the {@link PropertyTransformer}
-	 * @throws TransformationException
-	 *           If can't instantiate {@link PropertyTransformer} (most likely due to not supported class)
+	 * @return A shared instance of the {@link PropertyTransformer} or null if no implementation is present
 	 */
-	@SuppressWarnings("rawtypes")
-	public static PropertyTransformer getTransformer(Class<?> clazzToTransform) throws TransformationException {
-
+	public static PropertyTransformer<?> getTransformer(Class<?> clazzToTransform) {
 		if (clazzToTransform == Boolean.class || clazzToTransform == Boolean.TYPE)
 			return BooleanTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform == Byte.class || clazzToTransform == Byte.TYPE)
@@ -79,7 +77,8 @@ public class PropertyTransformerFactory {
 			return ClassTransformer.SHARED_INSTANCE;
 		else if (ClassUtils.isSubclass(clazzToTransform, TimeZone.class))
 			return TimeZoneTransformer.SHARED_INSTANCE;
-		else
-			throw new TransformationException("Transformer not found for class " + clazzToTransform.getName());
+		else if (ClassUtils.isSubclass(clazzToTransform, ZoneId.class))
+			return ZoneIdTransformer.SHARED_INSTANCE;
+		return null;
 	}
 }

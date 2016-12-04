@@ -28,7 +28,7 @@ public class ConfigurableProcessor {
 	 * @param object
 	 *          Class or Object that has {@link Property} annotations.
 	 * @param properties
-	 *          Properties that should be used while seraching for a {@link Property#key()}
+	 *          Properties that should be used while searching for a {@link Property#key()}
 	 */
 	public static void process(Object object, Properties... properties) {
 		Class<?> clazz;
@@ -44,7 +44,7 @@ public class ConfigurableProcessor {
 	}
 
 	/**
-	 * This method uses recurcieve calls to launch search for {@link Property} annotation on itself and parents\interfaces.
+	 * This method uses recursive calls to launch search for {@link Property} annotation on itself and parents\interfaces.
 	 * 
 	 * @param clazz
 	 *          Class of object
@@ -72,7 +72,7 @@ public class ConfigurableProcessor {
 	}
 
 	/**
-	 * This method runs throught the declared fields watching for the {@link Property} annotation. It also watches for the field modifiers like
+	 * This method runs through the declared fields watching for the {@link Property} annotation. It also watches for the field modifiers like
 	 * {@link java.lang.reflect.Modifier#STATIC} and {@link java.lang.reflect.Modifier#FINAL}
 	 * 
 	 * @param clazz
@@ -97,7 +97,7 @@ public class ConfigurableProcessor {
 			if (f.isAnnotationPresent(Property.class)) {
 				// Final fields should not be processed
 				if (Modifier.isFinal(f.getModifiers()))
-					throw new RuntimeException("Attempt to proceed final field " + f.getName() + " of class " + clazz.getName());
+					throw new RuntimeException("Can't process final field " + f.getName() + " of class " + clazz.getName());
 				processField(f, obj, props);
 			}
 		}
@@ -115,21 +115,26 @@ public class ConfigurableProcessor {
 	 * @param obj
 	 *          Object if any, null if parsing class (static fields only)
 	 * @param props
-	 *          Properties with kyes\values
+	 *          Properties with keys & default values
 	 */
 	private static void processField(Field f, Object obj, Properties[] props) {
 		boolean oldAccessible = f.isAccessible();
-		f.setAccessible(true);
 		try {
+			if (!oldAccessible)
+				f.setAccessible(true);
 			Property property = f.getAnnotation(Property.class);
 			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || isKeyPresent(property.key(), props)) {
 				f.set(obj, getFieldValue(f, props));
 			} else
 				log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
+		} catch (TransformationException e) {
+			throw e;
 		} catch (Exception e) {
-			throw new RuntimeException("Can't transform field " + f.getName() + " of class " + f.getDeclaringClass(), e);
+			throw new RuntimeException("Error modifying field " + f.getName() + " of class " + f.getDeclaringClass(), e);
+		} finally {
+			if (!oldAccessible)
+				f.setAccessible(false);
 		}
-		f.setAccessible(oldAccessible);
 	}
 
 	/**
@@ -149,14 +154,11 @@ public class ConfigurableProcessor {
 		Property property = field.getAnnotation(Property.class);
 		String defaultValue = property.defaultValue();
 		String key = property.key();
-		String value = null;
 
-		if (key.isEmpty()) {
-			log.warn("Property " + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
-		} else {
-			value = findPropertyByKey(key, props);
-		}
+		if (key.isEmpty())
+			throw new TransformationException("Property for field" + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
 
+		String value = findPropertyByKey(key, props);
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
@@ -167,6 +169,9 @@ public class ConfigurableProcessor {
 		if (field.getGenericType() instanceof ParameterizedType)
 			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
 		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(cls);
+		if (pt == null)
+			throw new TransformationException("Property transformer for class " + cls + " is not implemented (referenced field: " + field.getName() + ", class: "
+				+ field.getDeclaringClass().getName());
 		return pt.transform(value, field, genericTypeArgs);
 	}
 
@@ -176,7 +181,7 @@ public class ConfigurableProcessor {
 	 * @param key
 	 *          value key
 	 * @param props
-	 *          properties to loook for the key
+	 *          properties to look for the key
 	 * @return value if found, null otherwise
 	 */
 	private static String findPropertyByKey(String key, Properties[] props) {
@@ -195,7 +200,7 @@ public class ConfigurableProcessor {
 	 * @param key
 	 *          key to check
 	 * @param props
-	 *          prperties to look for key
+	 *          properties to look for key
 	 * @return true if key present, false in other case
 	 */
 	private static boolean isKeyPresent(String key, Properties[] props) {

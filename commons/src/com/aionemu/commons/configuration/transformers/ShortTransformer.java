@@ -7,11 +7,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Thransforms string that represents short to the short value. Short value can be represented as decimal or hex
+ * Transforms string that represents short to the short value. Short value can be represented as decimal or hex
  * 
  * @author SoulKeeper
  */
-public class ShortTransformer implements PropertyTransformer<Short> {
+public class ShortTransformer extends PropertyTransformer<Short> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -30,11 +30,7 @@ public class ShortTransformer implements PropertyTransformer<Short> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Short transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			return Short.decode(value);
-		} catch (Exception e) {
-			throw new TransformationException(e);
-		}
+	protected Short parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		return Short.decode(value);
 	}
 }

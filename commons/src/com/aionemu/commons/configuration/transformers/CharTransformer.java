@@ -2,14 +2,15 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.security.InvalidParameterException;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
 
 /**
- * Transformes string representation of character to character. Character may be represented only by string.
+ * Transforms string representation of character to character. Character may be represented only by string.
  */
-public class CharTransformer implements PropertyTransformer<Character> {
+public class CharTransformer extends PropertyTransformer<Character> {
 
 	/**
 	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
@@ -28,16 +29,10 @@ public class CharTransformer implements PropertyTransformer<Character> {
 	 *           if something went wrong
 	 */
 	@Override
-	public Character transform(String value, Field field, Type... genericTypeArgs) throws TransformationException {
-		try {
-			char[] chars = value.toCharArray();
-			if (chars.length > 1) {
-				throw new TransformationException("To many characters in the value");
-			}
-
-			return chars[0];
-		} catch (Exception e) {
-			throw new TransformationException(e);
+	protected Character parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+		if (value.length() > 1) {
+			throw new InvalidParameterException("Too many characters in the value");
 		}
+		return value.charAt(0);
 	}
 }
