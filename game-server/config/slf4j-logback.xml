@@ -45,7 +45,7 @@
 	</appender>
 	<appender name="app_status_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
 		<layout>
-			<pattern>%logger{0} [%thread]:&lt;pre&gt;%msg&lt;/pre&gt;</pattern>
+			<pattern>%logger{0} [%thread]:&lt;pre&gt;%msg%n%ex&lt;/pre&gt;</pattern>
 		</layout>
 		<room>${gameserver.log.status.hipchat.room}</room>
 		<apiKey>${gameserver.log.status.hipchat.token}</apiKey>
