@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.nio.ByteBuffer;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalTime;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -19,6 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Rolandas
@@ -187,7 +187,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 					long reuseTime;
 					Integer cd = getObjectTemplate().getCd();
 					if (cd == null || cd == 0) // use once per day (cooldown ends at midnight)
-						reuseTime = LocalDate.now().plusDays(1).atStartOfDay().atZone(ZoneId.systemDefault()).toEpochSecond() * 1000;
+						reuseTime = ServerTime.now().with(LocalTime.MAX).toEpochSecond() * 1000;
 					else
 						reuseTime = System.currentTimeMillis() + cd * 1000;
 					player.getHouseObjectCooldownList().setHouseObjectCooldown(getObjectId(), reuseTime);

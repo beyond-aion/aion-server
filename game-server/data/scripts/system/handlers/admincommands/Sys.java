@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author lord_rex //sys info - System Informations //sys memory - Memory Informations //sys gc - Garbage Collector //sys shutdown <seconds>
@@ -35,7 +35,7 @@ public class Sys extends AdminCommand {
 
 		if (params[0].equals("info")) {
 			// Time
-			PacketSendUtility.sendMessage(player, "System Information at: " + LocalTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
+			PacketSendUtility.sendMessage(player, "System Information at: " + ServerTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
 
 			// Version Infos
 			for (String line : VersionInfoUtil.getVersionInfo(GameServer.class).getAllInfo())

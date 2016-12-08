@@ -1,8 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,11 +15,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.joda.time.DateTime;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.instance.InstanceCoolTimeType;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.services.instance.InstanceService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import javolution.util.FastMap;
 
@@ -52,7 +59,7 @@ public class InstanceCooltimeData {
 	}
 
 	public int getInstanceMaxCountByWorldId(int worldId) {
-		return instanceCooltimes.get(worldId).getMaxCount() != 0 ? instanceCooltimes.get(worldId).getMaxCount() : 0;
+		return instanceCooltimes.get(worldId).getMaxCount();
 	}
 
 	public int getWorldId(int syncId) {
@@ -61,60 +68,46 @@ public class InstanceCooltimeData {
 		return syncIdToMapId.get(syncId);
 	}
 
-	public long getInstanceEntranceCooltimeById(Player player, int syncId) {
-		if (!syncIdToMapId.containsKey(syncId))
-			return 0;
-		return getInstanceEntranceCooltime(player, syncIdToMapId.get(syncId));
-	}
-
-	public long getInstanceEntranceCooltime(Player player, int worldId) {
+	public long calculateInstanceEntranceCooltime(Player player, int worldId) {
 		int instanceCooldownRate = InstanceService.getInstanceRate(player, worldId);
 		long instanceCoolTime = 0;
 		InstanceCooltime clt = getInstanceCooltimeByWorldId(worldId);
 		if (clt == null || clt.getMaxCount() == 0)
 			return 0;
-		instanceCoolTime = clt.getEntCoolTime();
-		if (clt.getCoolTimeType().isDaily()) {
-			DateTime now = DateTime.now();
-			DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), (int) (instanceCoolTime / 100), 0, 0);
-			if (now.isAfter(repeatDate)) {
-				repeatDate = repeatDate.plusHours(24);
-				instanceCoolTime = repeatDate.getMillis();
-			} else {
-				instanceCoolTime = repeatDate.getMillis();
-			}
-		} else if (clt.getCoolTimeType().isWeekly()) {
-			String[] days = clt.getTypeValue().split(",");
-			instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
-		} else {
-			if (instanceCoolTime == 0) // unlimited entrance, no need to store
-				return 0;
-			instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
+		switch (clt.getCoolTimeType()) {
+			case DAILY:
+			case WEEKLY:
+				int hour = clt.getEntCoolTime() / 100;
+				int minute = clt.getEntCoolTime() % 100;
+				ZonedDateTime now = ServerTime.now();
+				ZonedDateTime repeatDate = now.with(LocalTime.of(hour, minute));
+				if (now.isAfter(repeatDate))
+					repeatDate = repeatDate.plusDays(1);
+				if (clt.getCoolTimeType() == InstanceCoolTimeType.WEEKLY)
+					repeatDate = repeatDate.plusDays(calculateDaysUntilReset(clt, repeatDate.getDayOfWeek()));
+				instanceCoolTime = repeatDate.toEpochSecond() * 1000;
+				break;
+			case RELATIVE:
+				int minutes = clt.getEntCoolTime();
+				if (minutes == 0) // unlimited entrance, no need to store
+					return 0;
+				instanceCoolTime = System.currentTimeMillis() + (minutes * 60 * 1000);
+				break;
+			default:
+				LoggerFactory.getLogger(this.getClass()).warn("Unhandled InstanceCoolTimeType: " + clt.getCoolTimeType());
 		}
 		if (instanceCooldownRate != 1)
 			instanceCoolTime = System.currentTimeMillis() + ((instanceCoolTime - System.currentTimeMillis()) / instanceCooldownRate);
 		return instanceCoolTime;
 	}
 
-	private long getUpdateHours(String[] days, int hour) {
-		DateTime now = DateTime.now();
-		DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), hour, 0, 0);
-		int curentDay = now.getDayOfWeek();
-		for (String name : days) {
-			int day = getDay(name);
-			if (day < curentDay) {
-				continue;
-			}
-			if (day == curentDay) {
-				if (now.isBefore(repeatDate)) {
-					return repeatDate.getMillis();
-				}
-			} else {
-				repeatDate = repeatDate.plusDays(day - curentDay);
-				return repeatDate.getMillis();
-			}
+	private int calculateDaysUntilReset(InstanceCooltime clt, DayOfWeek day) {
+		List<Integer> resetDaysSorted = Arrays.stream(clt.getTypeValue().split(",")).map(dayStr -> getDay(dayStr)).sorted().collect(Collectors.toList());
+		for (Integer resetDay : resetDaysSorted) {
+			if (resetDay >= day.getValue())
+				return resetDay - day.getValue();
 		}
-		return repeatDate.plusDays((7 - curentDay) + getDay(days[0])).getMillis();
+		return (7 - day.getValue()) + resetDaysSorted.get(0);
 	}
 
 	private int getDay(String day) {

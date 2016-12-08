@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services.instance;
 
-import org.joda.time.DateTime;
+import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author xTz
@@ -51,9 +52,9 @@ public class PvPArenaService {
 	}
 
 	private static boolean isPvPArenaAvailable() {
-		DateTime now = DateTime.now();
-		int hour = now.getHourOfDay();
-		int day = now.getDayOfWeek();
+		ZonedDateTime now = ServerTime.now();
+		int hour = now.getHour();
+		int day = now.getDayOfWeek().getValue();
 		if (day == 6 || day == 7) {
 			return hour == 0 || hour == 1 || (hour >= 10 && hour <= 23);
 		}
@@ -61,9 +62,9 @@ public class PvPArenaService {
 	}
 
 	private static boolean isHarmonyArenaAvailable() {
-		DateTime now = DateTime.now();
-		int hour = now.getHourOfDay();
-		int day = now.getDayOfWeek();
+		ZonedDateTime now = ServerTime.now();
+		int hour = now.getHour();
+		int day = now.getDayOfWeek().getValue();
 		if (day == 6)
 			return hour >= 10 || hour == 1 || hour == 2;
 		else if (day == 7)
@@ -73,9 +74,9 @@ public class PvPArenaService {
 	}
 
 	private static boolean isGloryArenaAvailable() {
-		DateTime now = DateTime.now();
-		int hour = now.getHourOfDay();
-		int day = now.getDayOfWeek();
+		ZonedDateTime now = ServerTime.now();
+		int hour = now.getHour();
+		int day = now.getDayOfWeek().getValue();
 		return (day == 6 || day == 7) && hour >= 20 && hour < 22;
 	}
 

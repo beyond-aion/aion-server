@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author -Nemesiss- CC fix
@@ -95,7 +96,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
 		writeC(cityDecoration.getId());
 		writeD(0); // unk
-		writeD(-(GSConfig.TIME_ZONE.getRawOffset() / 1000)); // server time zone offset relative to UTC in seconds
+		writeD(-(ServerTime.getStandardOffset())); // server time zone offset relative to UTC in seconds (excluding daylight savings)
 		writeC(0x04); // unk
 		writeC(120); // unk
 		writeH(25233); // unk
@@ -107,7 +108,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeH(1); // 4.5
 		writeC(0); // 4.7
 		writeC(1); // 4.7
-		writeD(-(GSConfig.TIME_ZONE.getDSTSavings() / 1000)); // servers current daylight saving time offset in seconds
+		writeD(-(ServerTime.getDaylightSavings())); // servers current daylight saving time offset in seconds
 		writeC(1); // 4.8
 		writeC(1); // 1 = activate stonespear siege
 		writeC(0); // 1 = master Server

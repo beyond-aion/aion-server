@@ -1,7 +1,7 @@
 package ai.portals;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -28,8 +29,9 @@ public class LegionDominionPortalAI2 extends PortalDialogAI2 {
 		if (dialogId != DialogAction.SETPRO1.id()) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;
-		}if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.WEDNESDAY
-				&& LocalDateTime.now().getHour() >= 8 && LocalDateTime.now().getHour() <= 10) {
+		}
+		ZonedDateTime now = ServerTime.now();
+		if (now.getDayOfWeek() == DayOfWeek.WEDNESDAY && now.getHour() >= 8 && now.getHour() <= 10) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401306, new DescriptionId(301500000)));
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;

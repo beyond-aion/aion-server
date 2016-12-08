@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.sql.Timestamp;
-
-import org.joda.time.DateTime;
+import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_PAY_RENT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Rolandas
@@ -55,8 +55,8 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 			payTime += MaintenanceTask.getInstance().getPeriod();
 		}
 
-		DateTime nextRun = new DateTime((long) MaintenanceTask.getInstance().getRunTime() * 1000);
-		if (nextRun.plusWeeks(4).isBefore(payTime)) { // client cap
+		ZonedDateTime nextRun = ServerTime.ofEpochSecond(MaintenanceTask.getInstance().getRunTime());
+		if (nextRun.plusWeeks(4).isBefore(ServerTime.ofEpochMilli(payTime))) { // client cap
 			return;
 		}
 

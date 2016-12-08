@@ -432,7 +432,7 @@ public class PortalService {
 		InstanceService.registerPlayerWithInstance(instance, player);
 		TeleportService2.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
 			TeleportAnimation.FADE_OUT_BEAM);
-		long useDelay = DataManager.INSTANCE_COOLTIME_DATA.getInstanceEntranceCooltime(player, instance.getMapId());
+		long useDelay = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(player, instance.getMapId());
 		if (useDelay > 0 && !reenter) {
 			player.getPortalCooldownList().addPortalCooldown(loc.getWorldId(), useDelay);
 		}

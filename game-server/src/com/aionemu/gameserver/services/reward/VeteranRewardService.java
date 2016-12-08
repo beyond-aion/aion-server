@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.reward;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -13,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import javolution.util.FastTable;
 
@@ -154,12 +153,14 @@ public final class VeteranRewardService {
 			return;
 
 		Account playerAcc = player.getPlayerAccount();
-		long charCreationTime = playerAcc.getPlayerAccountData(player.getObjectId()).getCreationDate().getTime();
-		if ((System.currentTimeMillis() - charCreationTime) / 1000 < ChronoUnit.MONTHS.getDuration().getSeconds()) // return if char is younger than a month
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime charCreationTime = ServerTime.atDate(playerAcc.getPlayerAccountData(player.getObjectId()).getCreationDate());
+		if (ChronoUnit.MONTHS.between(charCreationTime, now) < 1) // return if char is younger than a month
 			return;
 
-		long months = ChronoUnit.MONTHS.between(Instant.ofEpochMilli(playerAcc.getCreationDate()).atZone(ZoneId.systemDefault()), ZonedDateTime.now());
-		if (months <= 0) // return if account is younger than a month
+		ZonedDateTime accCreationTime = ServerTime.ofEpochMilli(playerAcc.getCreationDate());
+		long months = ChronoUnit.MONTHS.between(accCreationTime, now);
+		if (months < 1) // return if account is younger than a month
 			return;
 
 		int monthsToReceive = (int) Math.min(months, rewards.size());

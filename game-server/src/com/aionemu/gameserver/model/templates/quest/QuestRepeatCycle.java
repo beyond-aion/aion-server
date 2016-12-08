@@ -9,22 +9,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "QuestRepeatCycle")
 @XmlEnum
 public enum QuestRepeatCycle {
-	ALL(0),
-	MON(1),
-	TUE(2),
-	WED(3),
-	THU(4),
-	FRI(5),
-	SAT(6),
-	SUN(7);
+	ALL(0, 0),
+	MON(1, 900331),
+	TUE(2, 900332),
+	WED(3, 900333),
+	THU(4, 900334),
+	FRI(5, 900335),
+	SAT(6, 900336),
+	SUN(7, 900330);
 
 	private int weekDay;
+	private int nameId;
 
-	private QuestRepeatCycle(int weekDay) {
+	private QuestRepeatCycle(int weekDay, int nameId) {
 		this.weekDay = weekDay;
+		this.nameId = nameId;
 	}
 
 	public int getDay() {
 		return weekDay;
+	}
+
+	public int getNameId() {
+		return nameId;
 	}
 }

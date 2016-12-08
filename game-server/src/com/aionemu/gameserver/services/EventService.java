@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.configs.main.EventsConfig;
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EventType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import javolution.util.FastTable;
@@ -88,7 +88,7 @@ public class EventService {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null) {
 				if (qs.getLastCompleteTime() != null && qs.getCompleteCount() > 0 && templateMap.containsKey(questId)) {
-					ZonedDateTime completeTime = qs.getLastCompleteTime().toInstant().atZone(GSConfig.TIME_ZONE.toZoneId());
+					ZonedDateTime completeTime = ServerTime.atDate(qs.getLastCompleteTime());
 					for (EventTemplate et : templateMap.get(questId)) {
 						if (et.getStartDate().isAfter(completeTime)) { // recurring event, reset it
 							qs.setCompleteCount(0); // reset complete count if quest was last completed on a previous event, so it can be done again

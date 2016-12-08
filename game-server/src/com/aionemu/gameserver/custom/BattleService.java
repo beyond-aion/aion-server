@@ -125,7 +125,7 @@ public class BattleService {
 	public void registerPlayer(Player player, GameEventType eventType) {
 		GameEvent matchingEvent = eventType.getGameEventByPriority(player);
 		if (matchingEvent == null) {
-			PacketSendUtility.sendMessage(player, "Sorry, there is no such event avaiable at the moment");
+			PacketSendUtility.sendMessage(player, "Sorry, there is no such event available at the moment");
 			return;
 		}
 		if (!matchingEvent.registerPlayer(player)) {
@@ -144,7 +144,7 @@ public class BattleService {
 		PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, sender, notice, ChatType.COMMAND));
 	}
 
-	public String getAllAvaiableEvents() {
+	public String getAllAvailableEvents() {
 		String result = "";
 		for (GameEventType type : GameEventType.values()) {
 			result += "# " + type.getViewableName() + "[ " + type.getID() + "] \n";

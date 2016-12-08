@@ -13,6 +13,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.Deflater;
@@ -223,7 +224,6 @@ public class GameServer {
 		ConsoleUtil.printSection("Geodata");
 		GeoService.getInstance().initializeGeo();
 		// ZoneService.getInstance().saveMaterialZones();
-		System.gc();
 
 		ConsoleUtil.printSection("World");
 		World.getInstance();
@@ -371,7 +371,7 @@ public class GameServer {
 			DatabaseCleaningService.getInstance().runCleaning();
 
 		// Initialize cron service
-		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
+		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class, TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID));
 	}
 
 	private static void loadMultithreaded(GameEngine... engines) {

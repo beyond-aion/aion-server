@@ -412,7 +412,7 @@ public class QuestTemplate {
 	}
 
 	public boolean isDaily() {
-		return isTimeBased() && repeatCycle.size() == 1 && repeatCycle.get(0) == QuestRepeatCycle.ALL;
+		return isTimeBased() && repeatCycle.contains(QuestRepeatCycle.ALL);
 	}
 
 	public boolean isWeekly() {

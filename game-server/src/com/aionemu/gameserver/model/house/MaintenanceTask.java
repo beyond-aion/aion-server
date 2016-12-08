@@ -2,9 +2,9 @@ package com.aionemu.gameserver.model.house;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.Duration;
 import java.util.Date;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,9 +118,9 @@ public class MaintenanceTask extends AbstractCronTask {
 			return;
 
 		// Get times based on configuration values
-		DateTime now = new DateTime();
-		DateTime previousRun = now.minus(getPeriod()); // usually week ago
-		DateTime beforePreviousRun = previousRun.minus(getPeriod()); // usually two weeks ago
+		long now = System.currentTimeMillis();
+		long previousRun = now - getPeriod(); // usually week ago
+		long beforePreviousRun = previousRun - getPeriod(); // usually two weeks ago
 
 		for (House house : maintainedHouses) {
 			if (house.isFeePaid())
@@ -144,22 +144,22 @@ public class MaintenanceTask extends AbstractCronTask {
 				continue;
 			}
 
-			if (payTime <= beforePreviousRun.getMillis()) {
-				DateTime plusDay = beforePreviousRun.minusDays(1);
-				if (payTime <= plusDay.getMillis()) {
+			if (payTime <= beforePreviousRun) {
+				long plusDay = beforePreviousRun - Duration.ofDays(1).getSeconds() * 1000;
+				if (payTime <= plusDay) {
 					// player didn't pay after the second warning and one day passed
-					impoundTime = now.getMillis();
+					impoundTime = now;
 					warnCount = 3;
 					putHouseToAuction(house, pcd);
 				} else {
 					// impoundTime = now.plusDays(1).getMillis();
-					impoundTime = now.plus(getPeriod()).getMillis();
+					impoundTime = now + getPeriod();
 					warnCount = 2;
 				}
-			} else if (payTime <= previousRun.getMillis()) {
-				// player did't pay 1 period
+			} else if (payTime <= previousRun) {
+				// player didn't pay 1 period
 				// impoundTime = now.plus(getPeriod()).plusDays(1).getMillis();
-				impoundTime = now.plus(getPeriod() * 2).getMillis();
+				impoundTime = now + getPeriod() * 2;
 				warnCount = 1;
 			} else {
 				continue; // should not happen

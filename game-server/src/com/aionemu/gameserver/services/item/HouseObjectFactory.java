@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.services.item;
 
+import java.time.Duration;
 import java.util.Objects;
-
-import org.joda.time.DateTime;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.ChairObject;
@@ -73,8 +72,9 @@ public final class HouseObjectFactory {
 
 		int objectTemplateId = action.getTemplateId();
 		HouseObject<?> obj = createNew(house, IDFactory.getInstance().nextId(), objectTemplateId);
-		if (obj.getObjectTemplate().getUseDays() > 0) {
-			int expireEnd = (int) (DateTime.now().plusDays(obj.getObjectTemplate().getUseDays()).getMillis() / 1000);
+		int useDays = obj.getObjectTemplate().getUseDays();
+		if (useDays > 0) {
+			int expireEnd = (int) (System.currentTimeMillis() / 1000 + Duration.ofDays(useDays).getSeconds());
 			obj.setExpireTime(expireEnd);
 		}
 		return obj;

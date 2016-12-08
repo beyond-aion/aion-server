@@ -23694,8 +23694,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can receive the weekly quest again at %1 in the morning on %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_WEEK(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400857, value1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_WEEK(DescriptionId value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1400857, value0, num1);
 	}
 
 	/**

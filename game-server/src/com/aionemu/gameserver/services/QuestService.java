@@ -1,13 +1,17 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,6 +82,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -135,7 +140,7 @@ public final class QuestService {
 		qs.setQuestVar(0);
 		qs.setReward(rewardGroup);
 		if (template.isTimeBased())
-			qs.setNextRepeatTime(countNextRepeatTime(player, template));
+			qs.setNextRepeatTime(calculateRepeatDate(player, template));
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		QuestEngine.getInstance().onQuestCompleted(player, id);
 		if (template.getNpcFactionId() != 0)
@@ -248,31 +253,33 @@ public final class QuestService {
 		}
 	}
 
-	private static Timestamp countNextRepeatTime(Player player, QuestTemplate template) {
-		DateTime now = DateTime.now();
-		DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), 9, 0, 0);
+	private static Timestamp calculateRepeatDate(Player player, QuestTemplate template) {
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime repeatDate = now.with(LocalTime.of(9, 0));
+		if (now.isAfter(repeatDate))
+			repeatDate = repeatDate.plusDays(1);
 		if (template.isDaily()) {
-			if (now.isAfter(repeatDate))
-				repeatDate = repeatDate.plusHours(24);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_DAILY(9));
 		} else {
-			int daysToAdd = 7;
-			int startDay = 7;
-			for (QuestRepeatCycle weekDay : template.getRepeatCycle()) {
-				int diff = weekDay.getDay() - repeatDate.getDayOfWeek();
-				if ((diff > 0 && diff < daysToAdd) || (diff == 0 && now.isBefore(repeatDate)))
-					daysToAdd = diff;
-				if (startDay > weekDay.getDay())
-					startDay = weekDay.getDay();
-			}
-			if (startDay == daysToAdd)
-				daysToAdd = 7;
-			else if (daysToAdd == 7 && startDay < 7)
-				daysToAdd = 7 - repeatDate.getDayOfWeek() + startDay;
-			repeatDate = repeatDate.plusDays(daysToAdd);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400857, new DescriptionId(1800667), "9"));
+			DayOfWeek baseDay = repeatDate.getDayOfWeek();
+			QuestRepeatCycle nextRepeatDay = findNextRepeatDay(template.getRepeatCycle(), baseDay);
+			if (nextRepeatDay.getDay() >= baseDay.getValue())
+				repeatDate = repeatDate.plusDays(nextRepeatDay.getDay() - baseDay.getValue());
+			else
+				repeatDate = repeatDate.plusDays((7 - baseDay.getValue()) + nextRepeatDay.getDay());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_WEEK(new DescriptionId(nextRepeatDay.getNameId() * 2 + 1), 9));
 		}
-		return new Timestamp(repeatDate.getMillis());
+		return new Timestamp(repeatDate.toEpochSecond() * 1000);
+	}
+
+	private static QuestRepeatCycle findNextRepeatDay(List<QuestRepeatCycle> questRepeatDays, DayOfWeek day) {
+		Comparator<QuestRepeatCycle> ascendingComparator = Comparator.comparingInt(QuestRepeatCycle::getDay);
+		List<QuestRepeatCycle> resetDaysSorted = questRepeatDays.stream().sorted(ascendingComparator).collect(Collectors.toList());
+		for (QuestRepeatCycle resetDay : resetDaysSorted) {
+			if (resetDay.getDay() >= day.getValue())
+				return resetDay;
+		}
+		return resetDaysSorted.get(0);
 	}
 
 	/**

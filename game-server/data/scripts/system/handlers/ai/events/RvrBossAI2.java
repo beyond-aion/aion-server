@@ -2,8 +2,6 @@ package ai.events;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -12,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI2;
@@ -19,7 +18,6 @@ import ai.AggressiveNpcAI2;
 /**
  * @author Bobobear
  */
-
 @AIName("rvr_boss")
 public class RvrBossAI2 extends AggressiveNpcAI2 {
 
@@ -72,8 +70,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
 
 	private void performPartecipationReward() {
 		if (getPosition().getMapId() == 600010000) {
-			DateTime now = DateTime.now();
-			int hour = now.getHourOfDay();
+			int hour = ServerTime.now().getHour();
 			if (hour >= 19 && hour <= 23) {
 				List<Player> eventPlayerList = SiegeService.getInstance().getRvrPlayersOnEvent();
 				for (Player rewardedPlayer : eventPlayerList) {

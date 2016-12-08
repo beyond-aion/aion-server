@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -12,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import javolution.util.FastTable;
 
@@ -57,7 +59,8 @@ public class FactionPackService {
 	}
 
 	private void sendRewards(Player player, LocalDateTime minCreationTime, LocalDateTime maxCreationTime) {
-		LocalDateTime creationTime = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate().toLocalDateTime();
+		Timestamp playerCreationDate = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate();
+		LocalDateTime creationTime = ServerTime.atDate(playerCreationDate).toLocalDateTime();
 		if (creationTime.isBefore(minCreationTime))
 			return;
 		if (creationTime.isAfter(maxCreationTime))

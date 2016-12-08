@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.account.PassportsList;
@@ -13,11 +13,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_ATREIAN_PASSPORT extends AionServerPacket {
 
-	private LocalDateTime accountCreationDate;
+	private LocalDate accountCreationDate;
 	private PassportsList passports;
 	private int stamps;
 
-	public SM_ATREIAN_PASSPORT(PassportsList passports, int stamps, LocalDateTime accountCreationDate) {
+	public SM_ATREIAN_PASSPORT(PassportsList passports, int stamps, LocalDate accountCreationDate) {
 		this.accountCreationDate = accountCreationDate;
 		this.passports = passports;
 		this.stamps = stamps;

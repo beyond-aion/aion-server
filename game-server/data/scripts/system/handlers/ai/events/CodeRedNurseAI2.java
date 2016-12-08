@@ -1,7 +1,5 @@
 package ai.events;
 
-import org.joda.time.DateTime;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,6 +8,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import ai.GeneralNpcAI2;
 
@@ -87,8 +86,7 @@ public class CodeRedNurseAI2 extends GeneralNpcAI2 {
 
 	@Override
 	protected void handleSpawned() {
-		DateTime now = DateTime.now();
-		int currentDay = now.getDayOfWeek();
+		int currentDay = ServerTime.now().getDayOfWeek().getValue();
 		switch (getNpcId()) {
 			case 831435: // Jorpine (MON-THU)
 			case 831436: // Yennu (MON-THU)

@@ -11,15 +11,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData2;
 import com.aionemu.gameserver.model.EventType;
@@ -41,6 +39,7 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
@@ -48,7 +47,6 @@ import javolution.util.FastTable;
 /**
  * @author Rolandas
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventTemplate")
 public class EventTemplate {
@@ -56,37 +54,37 @@ public class EventTemplate {
 	private static Logger log = LoggerFactory.getLogger(EventTemplate.class);
 
 	@XmlElement(name = "event_drops", required = false)
-	protected EventDrops eventDrops;
+	private EventDrops eventDrops;
 
 	@XmlElement(name = "quests", required = false)
-	protected EventQuestList quests;
+	private EventQuestList quests;
 
 	@XmlElement(name = "spawns", required = false)
-	protected SpawnsData2 spawns;
+	private SpawnsData2 spawns;
 
 	@XmlElement(name = "inventory_drop", required = false)
-	protected InventoryDrop inventoryDrop;
+	private InventoryDrop inventoryDrop;
 
 	@XmlList
 	@XmlElement(name = "surveys", required = false)
-	protected List<String> surveys;
+	private List<String> surveys;
 
 	@XmlAttribute(name = "name", required = true)
-	protected String name;
+	private String name;
 
 	@XmlAttribute(name = "start", required = true)
-	@XmlSchemaType(name = "dateTime")
-	protected XMLGregorianCalendar startDate;
+	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	private ZonedDateTime startDate;
 
 	@XmlAttribute(name = "end", required = true)
-	@XmlSchemaType(name = "dateTime")
-	protected XMLGregorianCalendar endDate;
+	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	private ZonedDateTime endDate;
 
 	@XmlAttribute(name = "theme", required = false)
 	private String theme;
 
 	@XmlTransient
-	protected List<VisibleObject> spawnedObjects;
+	private List<VisibleObject> spawnedObjects;
 
 	@XmlTransient
 	private Future<?> invDropTask = null;
@@ -104,11 +102,11 @@ public class EventTemplate {
 	}
 
 	public ZonedDateTime getStartDate() {
-		return startDate.toGregorianCalendar().toZonedDateTime();
+		return startDate;
 	}
 
 	public ZonedDateTime getEndDate() {
-		return endDate.toGregorianCalendar().toZonedDateTime();
+		return endDate;
 	}
 
 	public List<Integer> getStartableQuests() {
@@ -124,7 +122,7 @@ public class EventTemplate {
 	}
 
 	public boolean isActive() {
-		ZonedDateTime now = ZonedDateTime.now(GSConfig.TIME_ZONE.toZoneId());
+		ZonedDateTime now = ServerTime.now();
 		return getStartDate().isBefore(now) && getEndDate().isAfter(now);
 	}
 

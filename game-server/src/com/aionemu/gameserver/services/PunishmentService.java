@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.time.Duration;
 import java.util.concurrent.Future;
-
-import org.joda.time.DateTime;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
@@ -54,14 +53,13 @@ public class PunishmentService {
 	 * Calculates the timestamp when a given number of days is over
 	 * 
 	 * @param dayCount
-	 * @return timeStamp
+	 * @return ban duration in seconds
 	 */
 	public static long calculateDuration(int dayCount) {
 		if (dayCount == 0)
 			return Integer.MAX_VALUE; // int because client handles this with seconds timestamp in int
 
-		DateTime dateTime = new DateTime().plusDays(dayCount);
-		return (dateTime.getMillis() - System.currentTimeMillis()) / 1000;
+		return Duration.ofDays(dayCount).getSeconds();
 	}
 
 	/**

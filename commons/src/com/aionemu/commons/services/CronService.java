@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -39,6 +40,7 @@ public final class CronService {
 	 * Current code is bloated, should be much cleaner
 	 */
 	private static CronService instance;
+	private static TimeZone timeZone;
 
 	private Scheduler scheduler;
 
@@ -48,7 +50,7 @@ public final class CronService {
 		return instance;
 	}
 
-	public static synchronized void initSingleton(Class<? extends RunnableRunner> runableRunner) {
+	public static synchronized void initSingleton(Class<? extends RunnableRunner> runableRunner, TimeZone defaultTimeZone) {
 		if (instance != null) {
 			throw new CronServiceException("CronService is already initialized");
 		}
@@ -56,6 +58,7 @@ public final class CronService {
 		CronService cs = new CronService();
 		cs.init(runableRunner);
 		instance = cs;
+		timeZone = defaultTimeZone;
 	}
 
 	/**
@@ -123,7 +126,7 @@ public final class CronService {
 			JobKey jobKey = new JobKey("JobKey:" + jobId);
 			JobDetail jobDetail = JobBuilder.newJob(runnableRunner).usingJobData(jdm).withIdentity(jobKey).build();
 
-			CronScheduleBuilder csb = CronScheduleBuilder.cronSchedule(cronExpression);
+			CronScheduleBuilder csb = CronScheduleBuilder.cronSchedule(cronExpression).inTimeZone(timeZone);
 			CronTrigger trigger = TriggerBuilder.newTrigger().withSchedule(csb).build();
 
 			scheduler.scheduleJob(jobDetail, trigger);

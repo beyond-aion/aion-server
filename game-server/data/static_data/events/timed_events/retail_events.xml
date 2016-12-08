@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
-	<event name="The Scattered Deck" start="2015-03-12T00:00:00+00:00" end="2015-03-26T00:00:00+00:00">
+	<event name="The Scattered Deck" start="2015-03-12T00:00:00" end="2015-03-26T00:00:00">
 		<event_drops>
 			<gd_rule rule_name="The Scattered Deck Event Drop" min_count="1" base_chance="20" min_diff="-20" max_diff="70" member_limit="12">
 				<gd_worlds>
@@ -36,7 +36,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Atreian City Festival" start="2015-02-06T00:00:00+00:00" end="2015-02-13T00:00:00+00:00">
+	<event name="Atreian City Festival" start="2015-02-06T00:00:00" end="2015-02-13T00:00:00">
 		<quests>
 			<maintainable>80162;80163;80164;80165;80166;80167;80168;80169</maintainable>
 		</quests>
@@ -106,10 +106,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00+00:00" end="2015-02-28T00:00:00+00:00">
+	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
 		<inventory_drop startlevel="1" interval="6">186000167</inventory_drop>
 	</event>
-	<event name="Valentine's Day" start="2015-02-13T00:00:00+00:00" end="2015-02-28T00:00:00+00:00" theme="valentine">
+	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="valentine">
 		<event_drops>
 			<gd_rule rule_name="Valentine's Day Event Drop" min_count="1" base_chance="10" min_diff="-30" max_diff="70">
 				<gd_ratings>
@@ -191,7 +191,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Love is in the Air" start="2015-02-13T00:00:00+00:00" end="2015-02-28T00:00:00+00:00">
+	<event name="Love is in the Air" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
 		<quests>
 			<maintainable>80298;80299;80300;80301;80302;80303;80304;80305;80305;80306;80307;80308;80309</maintainable>
 		</quests>
@@ -534,7 +534,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Love is in the Aether" start="2015-02-12T00:00:00+00:00" end="2015-02-26T00:00:00+00:00">
+	<event name="Love is in the Aether" start="2015-02-12T00:00:00" end="2015-02-26T00:00:00">
 		<quests>
 			<maintainable>80545;80546;80547;80549;80550;80551</maintainable>
 		</quests>
@@ -571,7 +571,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="The Fortune Fayre" start="2015-03-09T00:00:00+00:00" end="2015-03-23T00:00:00+00:00">
+	<event name="The Fortune Fayre" start="2015-03-09T00:00:00" end="2015-03-23T00:00:00">
 		<quests>
 			<startable>80028;80029;80031;80032</startable>
 			<maintainable>80030;80033;80034;80035;80036;80037;80038;80039</maintainable>
@@ -601,10 +601,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Spring Event Inventory" start="2015-03-06T00:00:00+00:00" end="2015-03-21T00:00:00+00:00">
+	<event name="Spring Event Inventory" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
 		<inventory_drop startlevel="8" interval="15">186000168</inventory_drop>
 	</event>
-	<event name="Spring Event" start="2015-03-06T00:00:00+00:00" end="2015-03-21T00:00:00+00:00">
+	<event name="Spring Event" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -630,7 +630,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Doppelgangers" start="2015-01-01T00:00:00+02:00" end="2015-01-30T00:00:00+02:00">
+	<event name="Doppelgangers" start="2015-01-01T00:00:00" end="2015-01-30T00:00:00">
 		<spawns>
 			<!-- Verteron -->
 			<spawn_map map_id="210030000">
@@ -648,10 +648,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00+00:00" end="2015-10-26T00:00:00+00:00">
+	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00" end="2015-10-26T00:00:00">
 		<inventory_drop startlevel="8" interval="15">186000127</inventory_drop>
 	</event>
-	<event name="Ascension Energy" start="2016-11-15T00:00:00+00:00" end="2016-11-30T23:59:00+01:00">
+	<event name="Ascension Energy" start="2016-11-15T00:00:00" end="2016-11-30T23:59:00">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -752,7 +752,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Crab Fest" start="2016-12-01T00:00:00+01:00" end="2017-01-01T00:00:00+01:00" theme="christmas">
+	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="christmas">
 		<event_drops>
 			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
 				<gd_npcs>
@@ -1265,7 +1265,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2016-12-01T00:00:00+01:00" end="2017-01-01T00:00:00+01:00" theme="christmas">
+	<event name="Celebrate Solorius" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="christmas">
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
@@ -1378,7 +1378,7 @@
 					<spot x="1045" y="1537" z="98" h="60" />
 				</spawn>
 				<!-- Red Nosed Granker King -->
-				<spawn npc_id="219294" respawn_time="12600">
+				<spawn npc_id="219294" respawn_time="28320">
 					<spot x="780.65857" y="1643.0098" z="131.87744" />
 				</spawn>
 				<!-- Lazy Shugo Courier -->
@@ -1448,7 +1448,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="New Year Event" start="2015-12-22T00:00:00+00:00" end="2016-01-12T00:00:00+00:00" theme="christmas">
+	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="christmas">
 		<event_drops>
 			<gd_rule rule_name="New Year Event Drop" min_count="1" base_chance="5" min_diff="-10" max_diff="70">
 				<gd_ratings>
@@ -1482,7 +1482,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Trick or treat! The witch and the king" start="2016-10-30T00:00:00+02:00" end="2016-11-15T00:00:00+01:00" theme="halloween">
+	<event name="Trick or treat! The witch and the king" start="2016-10-30T00:00:00" end="2016-11-15T00:00:00" theme="halloween">
 		<event_drops>
 			<gd_rule rule_name="Event Potion" base_chance="50" min_diff="-29">
 				<gd_items>
@@ -1984,7 +1984,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Daru Days" start="2015-11-23T00:00:00+00:00" end="2015-11-30T00:00:00+00:00">
+	<event name="Daru Days" start="2015-11-23T00:00:00" end="2015-11-30T00:00:00">
 		<event_drops>
 			<gd_rule rule_name="Daru Days Event Drop" min_count="1" base_chance="1" min_diff="-30" max_diff="70">
 				<gd_ratings>
@@ -2060,10 +2060,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Scorching Heat Inventory" start="2016-07-11T00:00:00+02:00" end="2016-08-08T23:59:59+02:00">
+	<event name="Scorching Heat Inventory" start="2016-07-11T00:00:00" end="2016-08-08T23:59:59">
 		<inventory_drop startlevel="1" interval="20">186000111</inventory_drop>
 	</event>
-	<event name="Scorching Heat" start="2016-07-11T00:00:00+02:00" end="2016-08-10T23:59:59+02:00">
+	<event name="Scorching Heat" start="2016-07-11T00:00:00" end="2016-08-10T23:59:59">
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
@@ -2146,7 +2146,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Growth" start="2014-01-01T00:00:00+00:00" end="2014-12-31T00:00:00+00:00">
+	<event name="Growth" start="2014-01-01T00:00:00" end="2014-12-31T00:00:00">
 		<quests>
 			<maintainable>80212;80213;80214;80215;80216;80217;80218;80219;80220;80221;80222;80223;80224;80225;80226;80227;80228;80229;80387;80388;80389;80390;80398;80399;80400;80401;80487;80488;80489;80490;80491;80492;80493;80494;80495;80496;80497;80498;80499;80500;80501;80502;80503;80504;80505;80506;80507;80508;80509;80510;80511;80512;80513;80514;80515;80516;80517;80518;80519;80520;80521;80522;80523;80524;80525;80526;80527;80528;80529;80530;80531;80532;80533;80534;80535;80536;80537;80538</maintainable>
 		</quests>
@@ -2355,7 +2355,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Transform and battle as a Guardian General" start="2015-04-01T00:00:00+00:00" end="2015-04-10T00:00:00+00:00">
+	<event name="Transform and battle as a Guardian General" start="2015-04-01T00:00:00" end="2015-04-10T00:00:00">
 		<quests>
 			<maintainable>80330;80331</maintainable>
 		</quests>
@@ -2470,7 +2470,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Guardian General Showdown" start="2015-05-07T00:00:00+00:00" end="2015-05-22T00:00:00+00:00">
+	<event name="Guardian General Showdown" start="2015-05-07T00:00:00" end="2015-05-22T00:00:00">
 		<spawns>
 			<!-- Silentera Canyon -->
 			<spawn_map map_id="600010000">
@@ -2517,7 +2517,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 1" start="2015-05-15T20:00:00+00:00" end="2015-05-15T22:00:00+00:00">
+	<event name="GGS Event 1" start="2015-05-15T20:00:00" end="2015-05-15T22:00:00">
 		<spawns>
 			<!-- Gelkmaros -->
 			<spawn_map map_id="220070000">
@@ -2528,7 +2528,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 2" start="2015-05-16T20:00:00+00:00" end="2015-05-16T22:00:00+00:00">
+	<event name="GGS Event 2" start="2015-05-16T20:00:00" end="2015-05-16T22:00:00">
 		<spawns>
 			<!-- Inggison -->
 			<spawn_map map_id="210050000">
@@ -2539,7 +2539,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 3" start="2015-05-17T20:00:00+00:00" end="2015-05-17T22:00:00+00:00">
+	<event name="GGS Event 3" start="2015-05-17T20:00:00" end="2015-05-17T22:00:00">
 		<spawns>
 			<!-- Gelkmaros -->
 			<spawn_map map_id="220070000">
@@ -2550,7 +2550,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 4" start="2015-05-18T20:00:00+00:00" end="2015-05-18T22:00:00+00:00">
+	<event name="GGS Event 4" start="2015-05-18T20:00:00" end="2015-05-18T22:00:00">
 		<spawns>
 			<!-- Inggison -->
 			<spawn_map map_id="210050000">
@@ -2561,7 +2561,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 5" start="2015-05-19T20:00:00+00:00" end="2015-05-19T22:00:00+00:00">
+	<event name="GGS Event 5" start="2015-05-19T20:00:00" end="2015-05-19T22:00:00">
 		<spawns>
 			<!-- Gelkmaros -->
 			<spawn_map map_id="220070000">
@@ -2572,7 +2572,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 6" start="2015-05-20T20:00:00+00:00" end="2015-05-20T22:00:00+00:00">
+	<event name="GGS Event 6" start="2015-05-20T20:00:00" end="2015-05-20T22:00:00">
 		<spawns>
 			<!-- Inggison -->
 			<spawn_map map_id="210050000">
@@ -2583,7 +2583,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 7" start="2015-05-21T20:00:00+00:00" end="2015-05-21T22:00:00+00:00">
+	<event name="GGS Event 7" start="2015-05-21T20:00:00" end="2015-05-21T22:00:00">
 		<spawns>
 			<!-- Gelkmaros -->
 			<spawn_map map_id="220070000">
@@ -2594,7 +2594,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="GGS Event 8" start="2015-05-22T20:00:00+00:00" end="2015-05-22T22:00:00+00:00">
+	<event name="GGS Event 8" start="2015-05-22T20:00:00" end="2015-05-22T22:00:00">
 		<spawns>
 			<!-- Inggison -->
 			<spawn_map map_id="210050000">
@@ -2605,7 +2605,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Code Red: Atreia" start="2016-05-20T00:00:00+02:00" end="2016-05-29T23:59:59+02:00">
+	<event name="Code Red: Atreia" start="2016-05-20T00:00:00" end="2016-05-29T23:59:59">
 		<quests>
 			<maintainable>80324;80325;80326;80327</maintainable>
 		</quests>
@@ -3100,7 +3100,7 @@
 		</spawns>
 	</event>
 	<!-- TODO: Check on retail NPC spawn position. real activation date is 2015-04-01 to 2015-05-22 but make it 2015 for test purpose -->
-	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00+00:00" end="2015-05-22T00:00:00+00:00">
+	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00" end="2015-05-22T00:00:00">
 		<quests>
 			<maintainable>80274;80275;80279;80282</maintainable>
 		</quests>
@@ -3151,7 +3151,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Shugo Emperor's Vault" start="2015-02-04T00:00:00+00:00" end="2015-02-18T00:00:00+00:00">
+	<event name="Shugo Emperor's Vault" start="2015-02-04T00:00:00" end="2015-02-18T00:00:00">
 		<quests>
 			<maintainable>80689;80690;80691;80692;80693;80694;80695;80696</maintainable>
 		</quests>
@@ -3186,7 +3186,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party" start="2015-08-01T00:00:00+00:00" end="2015-09-04T00:00:00+00:00">
+	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T00:00:00">
 		<event_drops>
 			<gd_rule rule_name="Summer Block Party Drop" min_count="1" base_chance="2" min_diff="-15" max_diff="70">
 				<gd_worlds>
@@ -3319,7 +3319,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Alchemy Event" start="2015-09-04T00:00:00+00:00" end="2015-09-18T00:00:00+00:00">
+	<event name="Alchemy Event" start="2015-09-04T00:00:00" end="2015-09-18T00:00:00">
 
 		<!-- [Event] Alchemist's Pouch -->
 		<event_drops>
@@ -3396,7 +3396,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00+00:00" end="2015-10-23T00:00:00+00:00" theme="brax_cafe">
+	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T00:00:00" theme="brax_cafe">
 		<quests>
 			<maintainable>80268;80269;80270;80271</maintainable>
 		</quests>
@@ -3463,7 +3463,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00+00:00" end="2015-12-04T00:00:00+00:00">
+	<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00" end="2015-12-04T00:00:00">
 		<event_drops>
 			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="5" min_diff="-20" max_diff="70">
 				<gd_ratings>
@@ -3499,7 +3499,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="The Lost Words!" start="2015-06-04T00:00:00+00:00" end="2015-06-18T00:00:00+00:00">
+	<event name="The Lost Words!" start="2015-06-04T00:00:00" end="2015-06-18T00:00:00">
 		<quests>
 			<maintainable>80567;80568;80569;80570;80571;80572;80573;80574</maintainable>
 		</quests>
@@ -3574,7 +3574,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="New Beginning's Event" start="2016-01-30T00:00:00+00:00" end="2016-02-16T00:00:00+00:00">
+	<event name="New Beginning's Event" start="2016-01-30T00:00:00" end="2016-02-16T00:00:00">
 		<spawns>
 			<!-- Verteron -->
 			<spawn_map map_id="210030000">
@@ -3644,7 +3644,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Boiling Point" start="2015-08-14T00:00:00+00:00" end="2015-08-28T00:00:00+00:00">
+	<event name="Boiling Point" start="2015-08-14T00:00:00" end="2015-08-28T00:00:00">
 		<quests>
 			<maintainable>51035;51036;51037;50035;50036;50037</maintainable>
 		</quests>
@@ -3733,10 +3733,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Gank the Grankers Inventory" start="2015-12-16T00:00:00+00:00" end="2016-12-30T00:00:00+00:00">
+	<event name="Gank the Grankers Inventory" start="2015-12-16T00:00:00" end="2016-12-30T00:00:00">
 		<inventory_drop startlevel="8" interval="10">186000385</inventory_drop>
 	</event>
-	<event name="Gank the Grankers" start="2015-12-16T00:00:00+00:00" end="2016-12-24T00:00:00+00:00">
+	<event name="Gank the Grankers" start="2015-12-16T00:00:00" end="2016-12-24T00:00:00">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -3754,7 +3754,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Frozen Magic Event" start="2016-12-17T00:00:00+01:00" end="2016-12-31T23:59:59+01:00">
+	<event name="Frozen Magic Event" start="2016-12-17T00:00:00" end="2016-12-31T23:59:59">
 		<quests>
 			<maintainable>80575;80576;80577;80578;80579;80580</maintainable>
 		</quests>
@@ -3864,7 +3864,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Joker's Wild Event" start="2015-01-07T00:00:00+00:00" end="2015-01-21T00:00:00+00:00">
+	<event name="Joker's Wild Event" start="2015-01-07T00:00:00" end="2015-01-21T00:00:00">
 		<quests>
 			<maintainable>80623;80624;80625;80626;80627;80628;80629;80630;80631;80632;80633;80634</maintainable>
 		</quests>
@@ -3980,7 +3980,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony" start="2016-07-01T00:00:00+02:00" end="2016-07-20T23:59:59+02:00">
+	<event name="Legendary Symphony" start="2016-07-01T00:00:00" end="2016-07-20T23:59:59">
 		<quests>
 			<maintainable>80673;80674;80675;80676;80677;80678;80679;80680;80681;80682;80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
 		</quests>
@@ -4021,7 +4021,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony Drop" start="2016-07-01T00:00:00+02:00" end="2016-07-17T23:59:59+02:00">
+	<event name="Legendary Symphony Drop" start="2016-07-01T00:00:00" end="2016-07-17T23:59:59">
 		<event_drops>
 			<!-- Green Garrisons -->
 			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40" fixed_chance="true">

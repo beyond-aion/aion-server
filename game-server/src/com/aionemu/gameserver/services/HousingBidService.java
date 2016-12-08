@@ -2,13 +2,15 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.joda.time.DateTime;
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,7 @@ import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.taskmanager.AbstractCronTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -440,9 +443,9 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	public boolean isBiddingAllowed() {
-		DateTime now = DateTime.now();
-		DateTime auctionEnd = new DateTime(((long) getRunTime() + timeProlonged * 60) * 1000);
-		if (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && auctionEnd.minusDays(1).isAfterNow()) {
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getRunTime() + timeProlonged * 60);
+		if (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && auctionEnd.minusDays(1).isAfter(now)) {
 			// Auction is unavailable from Sunday 12 PM to Monday
 			return false;
 		}
@@ -450,11 +453,11 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	public boolean isRegisteringAllowed() {
-		DateTime now = DateTime.now();
-		DateTime registerEnd = new DateTime(registerDateExpr.getTimeAfter(now.toDate()));
-		DateTime auctionEnd = new DateTime(((long) getRunTime() + timeProlonged * 60) * 1000);
-		if (now.getDayOfWeek() == registerEnd.getDayOfWeek() && now.getHourOfDay() >= registerEnd.getHourOfDay()
-			|| (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && now.getHourOfDay() <= auctionEnd.getHourOfDay())) {
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime registerEnd = ServerTime.atDate(registerDateExpr.getNextValidTimeAfter(new Date()));
+		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getRunTime() + timeProlonged * 60);
+		if (now.getDayOfWeek() == registerEnd.getDayOfWeek() && now.getHour() >= registerEnd.getHour()
+			|| (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && now.getHour() <= auctionEnd.getHour())) {
 			return false;
 		}
 		return true;
@@ -482,7 +485,7 @@ public class HousingBidService extends AbstractCronTask {
 				// make the new house inactive until the old one is sold
 				obtainedHouse.setStatus(HouseStatus.INACTIVE);
 				result = AuctionResult.GRACE_START;
-				time = new DateTime((long) getRunTime() * 1000).plusWeeks(2).getMillis();
+				time = (getRunTime() + Duration.ofDays(14).getSeconds()) * 1000;
 			}
 		}
 		obtainedHouse.setOwnerId(winner.getPlayerObjId());

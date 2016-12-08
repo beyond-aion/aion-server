@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.List;
@@ -8,14 +9,12 @@ import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.AtreianPassportData;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.account.PassportsList;
-import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
@@ -26,6 +25,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
@@ -105,7 +105,7 @@ public class AtreianPassportService {
 
 	public void onLogin(Player player) {
 		Account pa = player.getPlayerAccount();
-		ZonedDateTime now = ZonedDateTime.now(GSConfig.TIME_ZONE.toZoneId());
+		ZonedDateTime now = ServerTime.now();
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
 		for (AtreianPassport atp : DATA.getAll().values()) {
@@ -151,8 +151,9 @@ public class AtreianPassportService {
 
 	private void sendPassport(Player player) {
 		Account pa = player.getPlayerAccount();
-		PlayerAccountData pad = pa.getPlayerAccountData(player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), pad.getCreationDate().toLocalDateTime()));
+		// player creation date in the servers time zone (transforming the timestamp directly would instead apply the system time zone)
+		LocalDate playerCreationDate = ServerTime.atDate(pa.getPlayerAccountData(player.getObjectId()).getCreationDate()).toLocalDate();
+		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), playerCreationDate));
 	}
 
 	private boolean checkOnlineDate(Account pa) {

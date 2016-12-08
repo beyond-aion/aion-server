@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.sql.Timestamp;
-
-import org.joda.time.DateTime;
+import java.time.DayOfWeek;
 
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,6 +13,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.TownService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Rolandas
@@ -75,7 +75,7 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 				writeC(0);
 			} else {
 				int weeks = (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
-				if (DateTime.now().getDayOfWeek() != 7) // Hack for auction Day, client counts sunday to new week
+				if (ServerTime.now().getDayOfWeek() != DayOfWeek.SUNDAY) // Hack for auction Day, client counts sunday to new week
 					weeks++;
 				writeC(weeks);
 			}
