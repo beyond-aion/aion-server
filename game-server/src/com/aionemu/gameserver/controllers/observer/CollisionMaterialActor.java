@@ -24,7 +24,7 @@ import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.gametime.DayTime;
+import com.aionemu.gameserver.utils.time.gametime.DayTime;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 

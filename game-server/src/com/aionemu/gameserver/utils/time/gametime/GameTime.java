@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.utils.gametime;
+package com.aionemu.gameserver.utils.time.gametime;
 
 import java.security.InvalidParameterException;
 

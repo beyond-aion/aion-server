@@ -11,7 +11,7 @@ import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.gametime.GameTime;
+import com.aionemu.gameserver.utils.time.gametime.GameTime;
 
 /**
  * @author ATracer

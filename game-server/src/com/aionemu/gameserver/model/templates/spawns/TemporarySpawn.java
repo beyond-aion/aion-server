@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.services.GameTimeService;
-import com.aionemu.gameserver.utils.gametime.GameTime;
+import com.aionemu.gameserver.utils.time.gametime.GameTime;
 
 /**
  * @author xTz

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.utils.gametime.GameTime;
+import com.aionemu.gameserver.utils.time.gametime.GameTime;
 import com.aionemu.gameserver.world.World;
 
 /**
