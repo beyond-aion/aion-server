@@ -19,7 +19,7 @@ public class CM_TIME_CHECK extends AionClientPacket {
 	private int nanoTime;
 
 	/**
-	 * Constructs new instance of <tt>CM_VERSION_CHECK </tt> packet
+	 * Constructs new instance of <tt>CM_VERSION_CHECK</tt> packet
 	 * 
 	 * @param opcode
 	 */
@@ -34,13 +34,11 @@ public class CM_TIME_CHECK extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
+		// int timeNow = (int) (System.nanoTime() / 1000000);
+		// int diff = timeNow - nanoTime;
+		// System.out.println("CM_TIME_CHECK: " + nanoTime + " =?= " + timeNow + " dif: " + diff);
 		AionConnection client = getConnection();
-		int timeNow = (int) (System.nanoTime() / 1000000);
-		@SuppressWarnings("unused")
-		int diff = timeNow - nanoTime;
 		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5()); // don't know what is this doing it is send after this on retail
 		client.sendPacket(new SM_TIME_CHECK(nanoTime));
-
-		// log.info("CM_TIME_CHECK: " + nanoTime + " =?= " + timeNow + " dif: " + diff);
 	}
 }
