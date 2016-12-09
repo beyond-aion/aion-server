@@ -77,7 +77,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);
 			Creature creature = getAggroList().getMostHated();
-			if (creature != null && creature.getLifeStats().isAlreadyDead() && getOwner().canSee(creature)) {
+			if (creature != null && !creature.getLifeStats().isAlreadyDead() && getOwner().canSee(creature)) {
 				getOwner().getQueuedSkills().clear();
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100, true)));
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000, true)));
