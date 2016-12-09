@@ -33003,12 +33003,10 @@
         <npc_skill id="19661" lv="60" prob="23" max_hp="100"/>
         <npc_skill id="19662" lv="60" prob="20" max_hp="100"/>
     </npc_skills>
+	<!-- Brigade General Vasharti -->
     <npc_skills npc_ids="217313">
-        <npc_skill id="20531" lv="60" prob="15" max_hp="100"/>
-        <npc_skill id="19668" lv="60" prob="25" max_hp="100"/>
-        <npc_skill id="19667" lv="60" prob="17" max_hp="100"/>
-        <npc_skill id="20532" lv="60" prob="2"/>
-        <npc_skill id="20534" lv="60" prob="2"/>
+        <npc_skill id="19667" lv="60" prob="70" cd="25000" next_skill_time="12000"/>
+		<npc_skill id="19668" lv="60" prob="70" cd="30000" next_skill_time="12000"/>
     </npc_skills>
     <npc_skills npc_ids="217315">
         <npc_skill id="20245" lv="60" prob="50" max_hp="100"/>
