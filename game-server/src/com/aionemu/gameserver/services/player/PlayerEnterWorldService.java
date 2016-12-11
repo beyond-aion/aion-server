@@ -127,6 +127,7 @@ import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 import javolution.util.FastTable;
@@ -139,7 +140,7 @@ public final class PlayerEnterWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
 	private static final VersionInfo gsVer = VersionInfoUtil.getVersionInfo(GameServer.class);
-	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + gsVer.getDate();
+	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + ServerTime.parse(gsVer.getDate());
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
 
 	public static final void enterWorld(final AionConnection client, int objectId) {

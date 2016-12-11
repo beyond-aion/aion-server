@@ -57,6 +57,24 @@ public final class ServerTime {
 	}
 
 	/**
+	 * @param text
+	 * @return The server time from the parsed {@link ZonedDateTime}
+	 * @see ZonedDateTime#parse(CharSequence)
+	 */
+	public static ZonedDateTime parse(CharSequence text) {
+		return ZonedDateTime.parse(text).withZoneSameInstant(GSConfig.TIME_ZONE_ID);
+	}
+
+	/**
+	 * @param text
+	 * @return The server time from the parsed {@link LocalDateTime}
+	 * @see LocalDateTime#parse(CharSequence)
+	 */
+	public static ZonedDateTime parseLocal(CharSequence text) {
+		return of(LocalDateTime.parse(text));
+	}
+
+	/**
 	 * @return The daylight savings offset in seconds at the current date.
 	 */
 	public static int getDaylightSavings() {
@@ -86,7 +104,7 @@ public final class ServerTime {
 
 		@Override
 		public ZonedDateTime unmarshal(String v) throws Exception {
-			return of(LocalDateTime.parse(v));
+			return parseLocal(v);
 		}
 	}
 }
