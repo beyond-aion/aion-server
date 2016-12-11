@@ -6,8 +6,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/script-classes" path="handlers"/>
-	<classpathentry kind="src" output="target/script-classes" path="database"/>
+	<classpathentry kind="src" output="target/script-classes" path="data/scripts/system/database"/>
+	<classpathentry kind="src" output="target/script-classes" path="data/scripts/system/handlers"/>
 	<classpathentry kind="src" output="target/test-classes" path="test">
 		<attributes>
 			<attribute name="optional" value="true"/>

@@ -20,53 +20,23 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>database</name>
-			<type>2</type>
-			<locationURI>PROJECT_LOC/data/scripts/system/database</locationURI>
-		</link>
-		<link>
-			<name>handlers</name>
-			<type>2</type>
-			<locationURI>PROJECT_LOC/data/scripts/system/handlers</locationURI>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
-			<id>1382984732710</id>
-			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-true-.svn*</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1382984732710</id>
+			<id>1481483251553</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-doc-files</arguments>
+				<arguments>1.0-name-matches-false-false-.svn</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>1328722990788</id>
-			<name>data/scripts</name>
+			<id>1481483251555</id>
+			<name></name>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-database</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1328722990792</id>
-			<name>data/scripts</name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-handlers</arguments>
+				<arguments>1.0-name-matches-false-false-.git</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>

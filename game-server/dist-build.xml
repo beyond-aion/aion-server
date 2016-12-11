@@ -1,28 +1,16 @@
 <project default="dist-build.xml.main">
 
-    <scriptdef name="dependencyJarName" language="javascript">
-        <attribute name="dependencypath"/>
-        <attribute name="property"/>
-        <![CDATA[
-            var text = attributes.get("dependencypath");
-            text = text.replace("\\", "/");
-            var lastIndex = text.lastIndexOf("/");
-            var jarName = text.substring(lastIndex + 1);
-            project.setProperty(attributes.get("property"), jarName);
-        ]]>
-    </scriptdef>
-
     <target name="dist-build.xml.main" depends="clean">
         <!-- init property -->
-        <dependencyJarName property="dist-build.jar.name" dependencypath="${dist-build.jar.path}"/>
+        <basename property="dist-build.jar.name" file="${dist-build.jar.path}"/>
 
         <!-- copy templates -->
         <copy file="./dist/Template-StartGS.sh" tofile="./dist/StartGS.sh"/>
         <copy file="./dist/Template-StartGS.bat" tofile="./dist/StartGS.bat"/>
 
         <!-- replace tokens -->
-        <replace file="./dist/StartGS.sh" token="{javaagentlib}" value="al-commons-2.0.jar"/>
-        <replace file="./dist/StartGS.bat" token="{javaagentlib}" value="al-commons-2.0.jar"/>
+        <replace file="./dist/StartGS.sh" token="{javaagentlib}" value="${dist-build.jar.name}"/>
+        <replace file="./dist/StartGS.bat" token="{javaagentlib}" value="${dist-build.jar.name}"/>
     </target>
 
     <target name="clean">
