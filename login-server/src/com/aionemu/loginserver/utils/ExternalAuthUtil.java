@@ -10,14 +10,14 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.IllegalFormatException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.model.ExternalAuth;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 
 /**
  * @author Woge, Neon
@@ -42,7 +42,7 @@ public class ExternalAuthUtil {
 		String charset = StandardCharsets.UTF_8.name();
 		String query = "";
 		BufferedReader reader = null;
-		JSONParser parser = new JSONParser();
+		JsonParser parser = new JsonParser();
 
 		try {
 			query = String.format("u=%s&p=%s", URLEncoder.encode(name, charset), URLEncoder.encode(password, charset));
@@ -74,14 +74,14 @@ public class ExternalAuthUtil {
 
 				if (result.length() > 0) {
 					info = new ExternalAuth();
-					JSONObject answer = (JSONObject) parser.parse(result);
+					JsonObject answer = (JsonObject) parser.parse(result);
 
-					if (answer.containsKey("id")) {
+					if (answer.has("id")) {
 						String id = answer.get("id").toString();
 						info.setIdentifier(id);
 					}
 
-					if (answer.containsKey("state")) {
+					if (answer.has("state")) {
 						try {
 							int state = Integer.parseInt(answer.get("state").toString());
 							info.setAuthState(state);
@@ -99,7 +99,7 @@ public class ExternalAuthUtil {
 			}
 		} catch (UnsupportedEncodingException | IllegalFormatException e) {
 			log.error(ExternalAuthUtil.class.getSimpleName() + ": error generating query string - " + e.getMessage());
-		} catch (IOException | ParseException | ClassCastException e) {
+		} catch (IOException | JsonParseException | ClassCastException e) {
 			log.error(ExternalAuthUtil.class.getSimpleName() + ": " + e.toString());
 		}
 
