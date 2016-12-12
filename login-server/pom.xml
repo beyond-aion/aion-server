@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aionemu</groupId>
 	<artifactId>login-server</artifactId>
-	<version>1.0</version>
+	<version>4.8-SNAPSHOT</version>
 	<name>Aion Login Server</name>
 	<packaging>jar</packaging>
 	<scm>
@@ -15,7 +15,6 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
-		<finalName>AL-Login</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -39,6 +38,8 @@
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
 					</descriptors>
+					<finalName>${project.artifactId}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
@@ -96,7 +97,7 @@
 		<dependency>
 			<groupId>com.aionemu</groupId>
 			<artifactId>commons</artifactId>
-			<version>2.0</version>
+			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

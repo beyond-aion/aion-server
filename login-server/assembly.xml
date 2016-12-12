@@ -21,14 +21,7 @@
 	</fileSets>
 	<dependencySets>
 		<dependencySet>
-			<useProjectArtifact>false</useProjectArtifact>
 			<outputDirectory>libs</outputDirectory>
 		</dependencySet>
 	</dependencySets>
-	<files>
-		<file>
-			<outputDirectory>libs</outputDirectory>
-			<source>target/${project.build.finalName}.jar</source>
-		</file>
-	</files>
 </assembly>
