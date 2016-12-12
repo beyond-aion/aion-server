@@ -6,7 +6,7 @@
 # Description:  Performs a shutdown of CS if running.
 #=====================================================================================
 
-if  [ ! -f chatserver.pid ] && [ ! -f ./libs/AL-Chat.jar ]; then
+if  [ ! -f chatserver.pid ] && [ ! -d libs ]; then
   echo "ChatServer PID file not found. Please check your working directory."
   exit 1
 elif [ -f chatserver.pid ] && ps -p `cat chatserver.pid` > /dev/null 2>&1; then

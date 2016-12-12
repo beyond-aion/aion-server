@@ -6,7 +6,7 @@
 # Description:  Performs a shutdown of GS if running.
 #=====================================================================================
 
-if  [ ! -f gameserver.pid ] && [ ! -f ./libs/AL-Game.jar ]; then
+if  [ ! -f gameserver.pid ] && [ ! -d libs ]; then
   echo "GameServer PID file not found. Please check your working directory."
   exit 1
 elif [ -f gameserver.pid ] && ps -p `cat gameserver.pid` > /dev/null 2>&1; then

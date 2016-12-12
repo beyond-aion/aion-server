@@ -7,8 +7,8 @@
 #=====================================================================================
 
 run_gs() {
-  if [ ! -f libs/AL-Game.jar ]; then
-    echo "Exiting script: GameServer not found."
+  if [ ! -d libs ]; then
+    echo "Exiting script: ./libs not found. Please check your working directory."
     exit 1
   elif [ -f gameserver.pid ] && ps -p `cat gameserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: GameServer is already running."

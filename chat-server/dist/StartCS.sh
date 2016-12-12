@@ -7,8 +7,8 @@
 #=====================================================================================
 
 run_cs() {
-  if [ ! -f libs/AL-Chat.jar ]; then
-    echo "Exiting script: ChatServer not found."
+  if [ ! -d libs ]; then
+    echo "Exiting script: ./libs not found. Please check your working directory."
     exit 1
   elif [ -f chatserver.pid ] && ps -p `cat chatserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: ChatServer is already running."

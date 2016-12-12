@@ -7,8 +7,8 @@
 #=====================================================================================
 
 run_ls() {
-  if [ ! -f libs/AL-Login.jar ]; then
-    echo "Exiting script: LoginServer not found."
+  if [ ! -d libs ]; then
+    echo "Exiting script: ./libs not found. Please check your working directory."
     exit 1
   elif [ -f loginserver.pid ] && ps -p `cat loginserver.pid` > /dev/null 2>&1; then
     echo "Exiting script: LoginServer is already running."

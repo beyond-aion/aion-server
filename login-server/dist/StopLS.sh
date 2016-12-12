@@ -6,7 +6,7 @@
 # Description:  Performs a shutdown of LS if running.
 #=====================================================================================
 
-if  [ ! -f loginserver.pid ] && [ ! -f ./libs/AL-Login.jar ]; then
+if  [ ! -f loginserver.pid ] && [ ! -d libs ]; then
   echo "LoginServer PID file not found. Please check your working directory."
   exit 1
 elif [ -f loginserver.pid ] && ps -p `cat loginserver.pid` > /dev/null 2>&1; then
