@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.aionlightning</groupId>
-	<artifactId>al-game</artifactId>
+	<groupId>com.aionemu</groupId>
+	<artifactId>game-server</artifactId>
 	<version>1.0</version>
-	<name>Aion Lightning Game Server</name>
+	<name>Aion Game Server</name>
 	<packaging>jar</packaging>
 	<scm>
 		<developerConnection>scm:git:https://none</developerConnection>
@@ -101,7 +101,7 @@
 						<phase>clean</phase>
 						<configuration>
 							<target>
-								<property name="dist-build.jar.path" value="${maven.dependency.org.aionlightning.al-commons.jar.path}" />
+								<property name="dist-build.jar.path" value="${maven.dependency.com.aionemu.commons.jar.path}" />
 								<ant antfile="${basedir}/dist-build.xml" target="clean" />
 							</target>
 						</configuration>
@@ -113,7 +113,7 @@
 						<phase>prepare-package</phase>
 						<configuration>
 							<target>
-								<property name="dist-build.jar.path" value="${maven.dependency.org.aionlightning.al-commons.jar.path}" />
+								<property name="dist-build.jar.path" value="${maven.dependency.com.aionemu.commons.jar.path}" />
 								<ant antfile="${basedir}/dist-build.xml" />
 							</target>
 						</configuration>
@@ -127,8 +127,8 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.aionlightning</groupId>
-			<artifactId>al-commons</artifactId>
+			<groupId>com.aionemu</groupId>
+			<artifactId>commons</artifactId>
 			<version>2.0</version>
 		</dependency>
 		<dependency>

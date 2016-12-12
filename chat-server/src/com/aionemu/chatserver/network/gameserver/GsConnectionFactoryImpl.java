@@ -15,16 +15,16 @@ import com.aionemu.commons.network.Dispatcher;
 public class GsConnectionFactoryImpl implements ConnectionFactory {
 
 	/**
-	 * Create a new {@link com.aionlightning.commons.network.AConnection AConnection} instance.<br>
+	 * Create a new {@link AConnection} instance.<br>
 	 * 
 	 * @param socket
-	 *          that new {@link com.aionlightning.commons.network.AConnection AConnection} instance will represent.<br>
+	 *          that new {@link AConnection} instance will represent.<br>
 	 * @param dispatcher
 	 *          to wich new connection will be registered.<br>
-	 * @return a new instance of {@link com.aionlightning.commons.network.AConnection AConnection}<br>
+	 * @return a new instance of {@link AConnection}<br>
 	 * @throws IOException
-	 * @see com.aionlightning.commons.network.AConnection
-	 * @see com.aionlightning.commons.network.Dispatcher
+	 * @see AConnection
+	 * @see Dispatcher
 	 */
 	@Override
 	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
