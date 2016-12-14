@@ -13674,28 +13674,24 @@
 	</decomposable>
 	<decomposable item_id="188051730" name="Test Item: Random Manastone Slot Dismantling Box" />
 	<decomposable item_id="188051731" name="[Event] Lenatinerk's Lost Gift Box">
-		<items chance="4.0">
+		<items chance="5.0">
 			<item id="187000037" name="Lucky Wings" race="ELYOS" />
 			<item id="187000038" name="Lucky Wings" race="ASMODIANS" />
 		</items>
-		<items chance="1.0">
-			<item id="188052070" name="[Event] Fabled Godstone Bundle" />
+		<items chance="2.5">
+			<item id="188051674" name="Fabled Godstone Bundle" />
 		</items>
-		<items chance="1.0">
+		<items chance="2.5">
 			<item id="188051732" name="[Event] Heroic Godstone Bundle" />
 		</items>
-		<items chance="4.0">
+		<items chance="5.0">
 			<item id="190010007" name="[Event] Shugo Lass Egg" />
 		</items>
-		<items chance="20.0">
-			<item id="169230013" name="[Event] Dye: True Red" />
+		<items chance="25.0">
+			<item id="169230002" name="[Event] Dye: True White" />
 		</items>
-		<items chance="20.0">
-			<item id="169230015" name="[Event] Dye: Green Tea" />
-		</items>
-		<items chance="15.0">
-			<item id="170170086" name="Desktop Solorius Tree" race="ELYOS" />
-			<item id="170175063" name="Desktop Solorius Tree" race="ASMODIANS" />
+		<items chance="25.0">
+			<item id="169230008" name="[Event] Dye: True Black" />
 		</items>
 		<items chance="15.0">
 			<item id="170190034" name="[Event] Solorius Cake" />
@@ -16481,7 +16477,12 @@
 	<decomposable item_id="188052096" name="World Drop Limit Test Bundle" />
 	<decomposable item_id="188052097" name="World Drop Limit Test Bundle_Weekly" />
 	<decomposable item_id="188052098" name="Convergence Manastone Box" />
-	<decomposable item_id="188052099" name="[Event] Wing Box" />
+	<decomposable item_id="188052099" name="[Event] Wing Box">
+		<items>
+			<item id="187000065" name="Noble Oriel's Wing" race="ELYOS" />
+			<item id="187000070" name="Noble Pernon's Wing" race="ASMODIANS" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188052100" name="[Event] Manastone Box" />
 	<decomposable item_id="188052101" name="[Event] Kahrun's Symbol Bundle" />
 	<decomposable item_id="188052102" name="[Event] Crucible Insignia Bundle" />
@@ -16589,21 +16590,24 @@
 	</decomposable>
 	<decomposable item_id="188052131" name="[Event] Dye Bundle">
 		<items>
-			<item id="169230014" name="[Event] Dye: True White" />
+			<item id="169200006" name="[Event] Dye: True White" />
 		</items>
 		<items>
-			<item id="169230020" name="[Event] Dye: True Black" />
+			<item id="169200007" name="[Event] Dye: True Black" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052132" name="[Event] Granker's Gratitude Box">
-		<items>
-			<item id="169230013" name="[Event] Dye: True Red" />
+		<items chance="50.0">
+			<item id="188052131" name="[Event] Dye Bundle" />
 		</items>
-		<items>
-			<item id="169230014" name="[Event] Dye: True White" />
+		<items chance="20.0">
+			<item id="188052070" name="[Event] Fabled Godstone Bundle" />
 		</items>
-		<items>
-			<item id="169230020" name="[Event] Dye: True Black" />
+		<items chance="15.0">
+			<item id="188052099" name="[Event] Wing Box" />
+		</items>
+		<items chance="15.0">
+			<item id="190020020" name="Shugo Lad Egg" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052133" name="[Event] Life Leaf Bundle">

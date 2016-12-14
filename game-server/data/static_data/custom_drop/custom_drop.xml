@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <custom_drop xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="custom_drop.xsd">
 	<!--
-		Custom drops are currently (until the drop system has been reworked) needed for chests, since global drops automatically exclude all chest 
+		Custom drops are currently (until the drop system has been reworked) needed for chests, since global drops automatically exclude all chest
 		npcs.
 		However, you can add custom drops to any type of npc. These drops will then complement global and event drops.
 	-->
@@ -4033,12 +4033,13 @@
 	</npc_drop>
 	<!-- END: Sealed Danuar Mysticarium -->
 	<!-- Events -->
-	<!-- Celebrate Solorius Chest -->
+	<!-- Stolen Solorius Box -->
 	<npc_drop npc_id="701457">
 		<drop_group race="PC_ALL" name="Celebrate Solorius Event Drops">
-			<drop item_id="188051731" name="[Event] Lenatinerk's Lost Gift Box" chance="45" no_reduce="true" each_member="true" />
-			<drop item_id="171110053" name="Solorius Wallpaper" chance="30" no_reduce="true" />
-			<drop item_id="170030057" name="Solorius Tree" chance="25" no_reduce="true" />
+			<drop item_id="169230001" name="[Event] Dye: True Red" chance="100" no_reduce="true" />
+			<drop item_id="169230002" name="[Event] Dye: True White" chance="100" no_reduce="true" />
+			<drop item_id="169230003" name="[Event] Dye: Green Tea" chance="100" no_reduce="true" />
+			<drop item_id="169230008" name="[Event] Dye: True Black" chance="100" no_reduce="true" />
 		</drop_group>
 	</npc_drop>
 </custom_drop>

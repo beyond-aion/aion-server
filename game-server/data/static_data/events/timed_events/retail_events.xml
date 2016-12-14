@@ -1278,13 +1278,41 @@
 					<gd_item id="160010203" name="[Event] Red Nose Granker Horn" />
 				</gd_items>
 			</gd_rule>
+			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="50" fixed_chance="true" no_reduction="true" member_limit="24">
+				<gd_npcs>
+					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
+					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188051731" name="[Event] Lenatinerk's Lost Gift Box" />
+					<gd_item id="188052132" name="[Event] Granker's Gratitude Box" />
+				</gd_items>
+			</gd_rule>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
 					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
 					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188052132" name="[Event] Granker's Gratitude Box" />
+					<gd_item id="171110045" name="Solorius Wallpaper" />
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true" restriction_race="ELYOS">
+				<gd_npcs>
+					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="170110012" name="Solorius Tree" />
+					<gd_item id="170170086" name="Desktop Solorius Tree" />
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true" restriction_race="ASMODIANS">
+				<gd_npcs>
+					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="170115012" name="Solorius Tree" />
+					<gd_item id="170175063" name="Desktop Solorius Tree" />
 				</gd_items>
 			</gd_rule>
 		</event_drops>
