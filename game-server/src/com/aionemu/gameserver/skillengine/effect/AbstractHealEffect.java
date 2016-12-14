@@ -12,6 +12,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
 /**
@@ -59,7 +60,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		else
 			finalHeal = maxCurValue - currentValue < finalHeal ? (maxCurValue - currentValue) : finalHeal;
 
-		effect.setReserveds(new EffectReserved(position, finalHeal, healType.toString(), false), false);
+		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false), false);
 	}
 
 	public void applyEffect(Effect effect, HealType healType) {

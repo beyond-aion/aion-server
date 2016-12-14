@@ -31,6 +31,7 @@ import com.aionemu.gameserver.skillengine.effect.SkillAttackInstantEffect;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -505,7 +506,7 @@ public class AttackUtil {
 			effect.setProtectorId(attackResult.getProtectorId());
 			effect.setShieldDefense(attackResult.getShieldType());
 		}
-		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), "HP", true, send), false);
+		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send), false);
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());
 	}

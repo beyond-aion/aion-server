@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 
 /**
  * @author Sippolo
@@ -27,7 +28,7 @@ public class MpAttackInstantEffect extends EffectTemplate {
 		if (percent)
 			newValue = ((maxMP * value) / 100);
 
-		effect.setReserveds(new EffectReserved(position, newValue, "MP", true), false);
+		effect.setReserveds(new EffectReserved(position, newValue, ResourceType.MP, true), false);
 
 		this.calculate(effect, null, null, element);
 	}

@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
 /**
@@ -56,7 +57,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 			}
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
 		}
-		effect.setReserveds(new EffectReserved(position, finalHeal, healType.toString(), false, false), true);
+		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false, false), true);
 
 		super.startEffect(effect, null);
 	}

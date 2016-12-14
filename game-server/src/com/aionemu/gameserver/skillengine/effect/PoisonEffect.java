@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 
 /**
  * @author ATracer
@@ -31,7 +32,7 @@ public class PoisonEffect extends AbstractOverTimeEffect {
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2,
 			critAddDmg);
-		effect.setReserveds(new EffectReserved(position, finalDamage, "HP", true, false), true);
+		effect.setReserveds(new EffectReserved(position, finalDamage, ResourceType.HP, true, false), true);
 		super.startEffect(effect, AbnormalState.POISON);
 	}
 

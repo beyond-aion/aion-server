@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 
 /**
  * @author Sippolo
@@ -32,7 +33,7 @@ public class FpAttackInstantEffect extends EffectTemplate {
 			if (percent)
 				newValue = (maxFP * value) / 100;
 
-			effect.setReserveds(new EffectReserved(position, newValue, "FP", true), false);
+			effect.setReserveds(new EffectReserved(position, newValue, ResourceType.FP, true), false);
 
 			super.calculate(effect, null, null);
 		}

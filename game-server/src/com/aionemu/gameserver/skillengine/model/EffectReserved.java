@@ -27,16 +27,20 @@ public class EffectReserved implements Comparable<EffectReserved> {
 		public int getValue() {
 			return this.value;
 		}
+
+		public static ResourceType of(HealType healType) {
+			return valueOf(healType.name());
+		}
 	}
 
-	public EffectReserved(int position, int value, String type, boolean isDamage) {
+	public EffectReserved(int position, int value, ResourceType type, boolean isDamage) {
 		this(position, value, type, isDamage, true);
 	}
 
-	public EffectReserved(int position, int value, String type, boolean isDamage, boolean send) {
+	public EffectReserved(int position, int value, ResourceType type, boolean isDamage, boolean send) {
 		this.position = position;
 		this.value = value;
-		this.type = ResourceType.valueOf(type.toUpperCase());
+		this.type = type;
 		this.isDamage = isDamage;
 		this.send = send;
 	}

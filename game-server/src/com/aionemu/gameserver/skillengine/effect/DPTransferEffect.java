@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 
 /**
  * @author Sippolo
@@ -26,7 +27,7 @@ public class DPTransferEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		if (!super.calculate(effect, null, null))
 			return;
-		effect.setReserveds(new EffectReserved(position, getCurrentStatValue(effect), "DP", true), false);
+		effect.setReserveds(new EffectReserved(position, getCurrentStatValue(effect), ResourceType.DP, true), false);
 	}
 
 	private int getCurrentStatValue(Effect effect) {

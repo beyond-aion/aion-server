@@ -352,7 +352,7 @@ public class Effect implements StatOwner {
 			if (er.getPosition() == i)
 				return er;
 		}
-		return new EffectReserved(0, 0, "HP", true, false);
+		return new EffectReserved(0, 0, ResourceType.HP, true, false);
 	}
 
 	public void setReserveds(EffectReserved er, boolean overTimeEffect) {
@@ -385,7 +385,7 @@ public class Effect implements StatOwner {
 		}
 
 		if (toSend.isEmpty())
-			toSend.add(new EffectReserved(0, 0, "HP", true, true));
+			toSend.add(new EffectReserved(0, 0, ResourceType.HP, true));
 
 		return toSend;
 	}
