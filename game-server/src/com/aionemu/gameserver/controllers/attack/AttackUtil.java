@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Servant;
+import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
@@ -255,23 +256,7 @@ public class AttackUtil {
 		}
 	}
 
-	/*
-	 * @param effect
-	 * @param skillDamage
-	 * @param bonus
-	 *          (damage from modifiers)
-	 * @param func
-	 *          (add/percent)
-	 * @param randomDamage
-	 * @param accMod
-	 */
-	/*
-	 * public static void calculateSkillResult(Effect effect, int skillDamage, ActionModifier modifier, Func func, int randomDamage, int accMod, int
-	 * criticalProb, int critAddDmg, boolean cannotMiss, boolean shared, boolean ignoreShield, SkillElement element, boolean useMagicBoost, boolean
-	 * useKnowledge, boolean noReduce)
-	 */
 	/**
-	 *
 	 * @param effect
 	 * @param skillDamage
 	 * @param template
@@ -576,28 +561,34 @@ public class AttackUtil {
 		int criticalProb, int critAddDmg) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
+		int damage;
 
-		// TODO is damage multiplier used on dot?
-		float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
+		if (effector instanceof Trap) {
+			damage = skillDamage;
+		} else {
+			// TODO is damage multiplier used on dot?
+			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 
-		int damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), skillDamage, 0, element,
-			useMagicBoost, false, false, effect.getSkillTemplate().getPvpDamage()) * damageMultiplier);
+			damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), skillDamage, 0, element,
+				useMagicBoost, false, false, effect.getSkillTemplate().getPvpDamage()) * damageMultiplier);
 
-		AttackStatus status = effect.getAttackStatus();
-		// calculate attack status only if it has not been forced already
-		if (status == AttackStatus.NORMALHIT && position == 1)
-			status = calculateMagicalStatus(effector, effected, criticalProb, true);
-		switch (status) {
-			case CRITICAL:
-				damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-				break;
+			AttackStatus status = effect.getAttackStatus();
+			// calculate attack status only if it has not been forced already
+			if (status == AttackStatus.NORMALHIT && position == 1)
+				status = calculateMagicalStatus(effector, effected, criticalProb, true);
+			switch (status) {
+				case CRITICAL:
+					damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg,
+						StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
+					break;
+			}
 		}
 
 		if (damage <= 0)
 			damage = 1;
 
 		if (effected instanceof Npc)
-			damage = effected.getAi2().modifyDamage(effector, damage, null);
+			damage = effected.getAi2().modifyDamage(effector, damage, effect);
 
 		return damage;
 	}

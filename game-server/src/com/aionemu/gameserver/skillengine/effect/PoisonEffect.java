@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -32,8 +31,6 @@ public class PoisonEffect extends AbstractOverTimeEffect {
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2,
 			critAddDmg);
-		if (effect.getEffector() instanceof Trap)
-			finalDamage = valueWithDelta;
 		effect.setReserveds(new EffectReserved(position, finalDamage, "HP", true, false), true);
 		super.startEffect(effect, AbnormalState.POISON);
 	}
