@@ -31241,43 +31241,23 @@
 	</decomposable>
 	<decomposable item_id="188053703" name="Vasharti Legionnaire's Weapon Box" selectable="true">
 		<items>
-			<item id="100001795" name="Vasharti Legionnaire's Sword" player_classes="TEMPLAR" />
-			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_classes="TEMPLAR" />
-			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_classes="TEMPLAR" />
-			<item id="115001825" name="Vasharti Legionnaire's Shield" player_classes="TEMPLAR" />
-			<item id="100001795" name="Vasharti Legionnaire's Sword" player_classes="GLADIATOR" />
-			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_classes="GLADIATOR" />
-			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_classes="GLADIATOR" />
-			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_classes="GLADIATOR" />
-			<item id="101301311" name="Vasharti Legionnaire's Polearm" player_classes="GLADIATOR" />
-			<item id="101701406" name="Vasharti Legionnaire's Bow" player_classes="GLADIATOR" />
-			<item id="115001826" name="Vasharti Legionnaire's Shield" player_classes="GLADIATOR" />
-			<item id="100001795" name="Vasharti Legionnaire's Sword" player_classes="ASSASSIN" />
-			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_classes="ASSASSIN" />
-			<item id="101701406" name="Vasharti Legionnaire's Bow" player_classes="ASSASSIN" />
-			<item id="100001795" name="Vasharti Legionnaire's Sword" player_classes="RANGER" />
-			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_classes="RANGER" />
-			<item id="101701406" name="Vasharti Legionnaire's Bow" player_classes="RANGER" />
-			<item id="101801264" name="Vasharti Legionnaire's Pistol" player_classes="GUNNER" />
+			<item id="100001795" name="Vasharti Legionnaire's Sword" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
+			<item id="100101385" name="Vasharti Legionnaire's Mace" player_classes="TEMPLAR GLADIATOR CHANTER CLERIC" />
+			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_classes="TEMPLAR GLADIATOR CHANTER CLERIC" />
+			<item id="100201560" name="Vasharti Legionnaire's Dagger" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER" />
+			<item id="100501353" name="Vasharti Legionnaire's Orb" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_classes="SORCERER SPIRIT_MASTER" />
+			<item id="100901422" name="Vasharti Legionnaire's Greatsword" player_classes="TEMPLAR GLADIATOR" />
+			<item id="101301311" name="Vasharti Legionnaire's Polearm" player_classes="TEMPLAR GLADIATOR" />
+			<item id="101501400" name="Vasharti Legionnaire's Staff" player_classes="CHANTER CLERIC" />
+			<item id="101501401" name="Vasharti Legionnaire's Cane" player_classes="CHANTER CLERIC" />
+			<item id="101701406" name="Vasharti Legionnaire's Bow" player_classes="GLADIATOR ASSASSIN RANGER" />
+			<item id="101801264" name="Vasharti Legionnaire's Pistol" player_classes="GUNNER RIDER" />
 			<item id="101901171" name="Vasharti Legionnaire's Aethercannon" player_classes="GUNNER" />
-			<item id="100101385" name="Vasharti Legionnaire's Mace" player_classes="CHANTER" />
-			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_classes="CHANTER" />
-			<item id="101501400" name="Vasharti Legionnaire's Staff" player_classes="CHANTER" />
-			<item id="101501401" name="Vasharti Legionnaire's Cane" player_classes="CHANTER" />
-			<item id="115001825" name="Vasharti Legionnaire's Shield" player_classes="CHANTER" />
-			<item id="115001826" name="Vasharti Legionnaire's Scale Shield" player_classes="CHANTER" />
-			<item id="100101385" name="Vasharti Legionnaire's Mace" player_classes="CLERIC" />
-			<item id="100101386" name="Vasharti Legionnaire's War Hammer" player_classes="CLERIC" />
-			<item id="101501400" name="Vasharti Legionnaire's Staff" player_classes="CLERIC" />
-			<item id="101501401" name="Vasharti Legionnaire's Cane" player_classes="CLERIC" />
-			<item id="115001825" name="Vasharti Legionnaire's Shield" player_classes="CLERIC" />
-			<item id="115001826" name="Vasharti Legionnaire's Scale Shield" player_classes="CLERIC" />
-			<item id="102101107" name="Vasharti Legionnaire's Cipher-Blade" player_classes="RIDER" />
-			<item id="100501353" name="Vasharti Legionnaire's Orb" player_classes="SORCERER" />
-			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_classes="SORCERER" />
-			<item id="100501353" name="Vasharti Legionnaire's Orb" player_classes="SPIRIT_MASTER" />
-			<item id="100601470" name="Vasharti Legionnaire's Spellbook" player_classes="SPIRIT_MASTER" />
 			<item id="102001290" name="Vasharti Legionnaire's Harp" player_classes="BARD" />
+			<item id="102101107" name="Vasharti Legionnaire's Cipher-Blade" player_classes="RIDER" />
+			<item id="115001825" name="Vasharti Legionnaire's Shield" player_classes="TEMPLAR GLADIATOR CLERIC CHANTER" />
+			<item id="115001826" name="Vasharti Legionnaire's Scale Shield" player_classes="TEMPLAR GLADIATOR CLERIC CHANTER" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053704" name="Vasharti Brigade General's Weapon Box" selectable="true">
