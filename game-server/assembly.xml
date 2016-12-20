@@ -12,14 +12,12 @@
 			</includes>
 		</fileSet>
 		<fileSet>
+			<filtered>true</filtered>
 			<directory>dist</directory>
 			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>*.*</include>
 			</includes>
-			<excludes>
-				<exclude>Template*</exclude>
-			</excludes>
 		</fileSet>
 	</fileSets>
 	<dependencySets>

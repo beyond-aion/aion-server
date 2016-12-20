@@ -96,26 +96,16 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
+				<configuration>
+					<exportAntProperties>true</exportAntProperties>
+				</configuration>
 				<executions>
-					<execution>
-						<id>clean-dist-folder</id>
-						<phase>clean</phase>
-						<configuration>
-							<target>
-								<property name="dist-build.jar.path" value="${maven.dependency.com.aionemu.commons.jar.path}" />
-								<ant antfile="${basedir}/dist-build.xml" target="clean" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
 					<execution>
 						<phase>prepare-package</phase>
 						<configuration>
 							<target>
-								<property name="dist-build.jar.path" value="${maven.dependency.com.aionemu.commons.jar.path}" />
-								<ant antfile="${basedir}/dist-build.xml" />
+								<!-- convert jar full path to filename, for server start scripts -->
+								<basename property="javaagentlib" file="${com.aionemu:commons:jar}" />
 							</target>
 						</configuration>
 						<goals>
