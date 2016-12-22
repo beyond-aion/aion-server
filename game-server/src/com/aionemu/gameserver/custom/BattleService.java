@@ -46,10 +46,6 @@ public class BattleService {
 
 		GameEventType type = GameEventType.valueOf(gameEventType);
 
-		if (type == null) {
-			return null;
-		}
-
 		if (createNew) {
 			type.createGameEvent();
 			announceToAllPlayers("A new " + type.getViewableName() + " will start Soon! \n Make sure to join your faction by using .evreg!");

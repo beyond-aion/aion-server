@@ -14,7 +14,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractDispelEffect")
-public class AbstractDispelEffect extends EffectTemplate {
+public abstract class AbstractDispelEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int dpower;
@@ -22,11 +22,6 @@ public class AbstractDispelEffect extends EffectTemplate {
 	protected int power;
 	@XmlAttribute(name = "dispel_level")
 	protected int dispelLevel;
-
-	@Override
-	public void applyEffect(Effect effect) {
-		// nothing to do, its overriden
-	}
 
 	public void applyEffect(Effect effect, DispelCategoryType type, SkillTargetSlot slot) {
 		boolean isItemTriggered = (effect.getItemTemplate() != null);

@@ -39,40 +39,30 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
- * @modified by Wakizashi
- * @modified by Sippolo
- * @modified by kecimis
+ * @modified Wakizashi, Sippolo, kecimis, Neon
  */
 public class Effect implements StatOwner {
 
+	private final Creature effector;
+	private final Creature effected;
+	private final SkillTemplate skillTemplate;
 	private Skill skill;
-	private SkillTemplate skillTemplate;
 	private int skillLevel;
 	private int duration;
 	private long endTime;
 	private PeriodicActions periodicActions;
 	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
-	private Creature effected;
-	private Creature effector;
 	private Future<?> task = null;
 	private Future<?>[] periodicTasks = null;
 	private Future<?> periodicActionsTask = null;
 	private boolean isSubEffect = false;
 
-	private float targetX = 0;
-	private float targetY = 0;
-	private float targetZ = 0;
-
 	private int effectedHp = -1;
 
 	private HashSet<EffectReserved> reserveds = new HashSet<>();
 
-	/**
-	 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
-	 */
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
-
 	private AttackStatus attackStatus = AttackStatus.NORMALHIT;
 
 	/**
@@ -118,15 +108,16 @@ public class Effect implements StatOwner {
 
 	private int signetBurstedCount = 0;
 
-	protected int abnormals;
+	private int abnormals;
 
 	/**
 	 * Action observer that should be removed after effect end
 	 */
 	private ActionObserver[] actionObserver;
 
-	float x, y, z;
-	int worldId, instanceId;
+	private float targetX, targetY, targetZ;
+	private float x, y, z;
+	private int worldId, instanceId;
 
 	/**
 	 * used to force duration, you should be very careful when to use it
@@ -146,19 +137,7 @@ public class Effect implements StatOwner {
 
 	private EffectResult effectResult = EffectResult.NORMAL;
 
-	boolean endedByTime = false;
-
-	public final Skill getSkill() {
-		return skill;
-	}
-
-	public void setAbnormal(int mask) {
-		abnormals |= mask;
-	}
-
-	public int getAbnormals() {
-		return abnormals;
-	}
+	private boolean endedByTime = false;
 
 	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration) {
 		this.effector = effector;
@@ -191,6 +170,18 @@ public class Effect implements StatOwner {
 
 	public int getEffectorId() {
 		return effector.getObjectId();
+	}
+
+	public final Skill getSkill() {
+		return skill;
+	}
+
+	public void setAbnormal(int mask) {
+		abnormals |= mask;
+	}
+
+	public int getAbnormals() {
+		return abnormals;
 	}
 
 	public int getSkillId() {
@@ -631,8 +622,8 @@ public class Effect implements StatOwner {
 		 */
 		// TODO hostile_type?
 		if (effectHate != 0 && tauntHate >= 0) { //dont add hate if taunt hate is < 0!
-			if (getEffected() instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
-				getEffected().getAggroList().addHate(effector, 1);
+			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
+				effected.getAggroList().addHate(effector, 1);
 
 			effector.getController().broadcastHate(effectHate);
 		}
@@ -641,11 +632,11 @@ public class Effect implements StatOwner {
 			return;
 		boolean activateGodstone = false;
 		for (EffectTemplate template : successEffects.values()) {
-			if (getEffected() != null) {
-				if (getEffected().getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
+			if (effected != null) {
+				if (effected.getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
 					continue;
 				}
-				getEffected().getPosition().getWorldMapInstance().getInstanceHandler().onApplyEffect(getEffector(), getEffected(), this.getSkillId());
+				effected.getPosition().getWorldMapInstance().getInstanceHandler().onApplyEffect(getEffector(), effected, this.getSkillId());
 			}
 			if (!isForcedEffect && template.getPosition() == 1
 					&& template instanceof DamageEffect && !(template instanceof DelayedSpellAttackInstantEffect)) {
@@ -655,7 +646,7 @@ public class Effect implements StatOwner {
 			template.startSubEffect(this);
 		}
 		if (activateGodstone) {
-			effector.getObserveController().notifyGodstoneObserver(getEffected());
+			effector.getObserveController().notifyGodstoneObserver(effected);
 		}
 	}
 
@@ -734,8 +725,8 @@ public class Effect implements StatOwner {
 
 		// TODO better way to finish
 		if (getSkillTemplate().getTargetSlot() == SkillTargetSlot.SPEC2) {
-			getEffected().getLifeStats().increaseHp((int) (getEffected().getLifeStats().getMaxHp() * 0.2));
-			getEffected().getLifeStats().increaseMp((int) (getEffected().getLifeStats().getMaxMp() * 0.2));
+			effected.getLifeStats().increaseHp((int) (effected.getLifeStats().getMaxHp() * 0.2));
+			effected.getLifeStats().increaseMp((int) (effected.getLifeStats().getMaxMp() * 0.2));
 		}
 
 		if (isToggle() && effector instanceof Player) {
@@ -744,8 +735,8 @@ public class Effect implements StatOwner {
 		stopTasks();
 		effected.getEffectController().clearEffect(this, broadcast);
 		this.isStopped = true;
-		if (getEffected() != null)
-			getEffected().getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), getEffected(), this.getSkillId());
+		if (effected != null)
+			effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), effected, this.getSkillId());
 	}
 
 	public void endEffect() {
@@ -1050,8 +1041,7 @@ public class Effect implements StatOwner {
 				public void unequip(Item item, Player owner) {
 					if (!useEquipmentConditionsCheck()) {
 						endEffect();
-						if (this != null)
-							effected.getObserveController().removeObserver(this);
+						effected.getObserveController().removeObserver(this);
 					}
 				}
 			};
@@ -1238,7 +1228,7 @@ public class Effect implements StatOwner {
 	public boolean isSummoning() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isSummoning();
 	}
-	
+
 	public boolean isPetOrderUnSummonEffect() {
 		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUNSUMMON);
 	}
