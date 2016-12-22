@@ -80,8 +80,6 @@ public interface InstanceHandler {
 
 	void onAggro(Npc npc);
 
-	void onApplyEffect(Creature effector, Creature effected, int skillId);
-
 	void onEndEffect(Creature effector, Creature effected, int skillId);
 	
 	void onCreatureDetected(Npc detector, Creature detected);

@@ -621,25 +621,22 @@ public class Effect implements StatOwner {
 		 * broadcast final hate to all visible objects
 		 */
 		// TODO hostile_type?
-		if (effectHate != 0 && tauntHate >= 0) { //dont add hate if taunt hate is < 0!
+		if (effectHate != 0 && tauntHate >= 0) { // dont add hate if taunt hate is < 0!
 			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
 				effected.getAggroList().addHate(effector, 1);
 
 			effector.getController().broadcastHate(effectHate);
 		}
 
-		if (skillTemplate.getEffects() == null || successEffects.isEmpty())
+		if (skillTemplate.getEffects() == null || effected != null && !effected.isSpawned())
 			return;
 		boolean activateGodstone = false;
 		for (EffectTemplate template : successEffects.values()) {
-			if (effected != null) {
-				if (effected.getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
-					continue;
-				}
-				effected.getPosition().getWorldMapInstance().getInstanceHandler().onApplyEffect(getEffector(), effected, this.getSkillId());
+			if (effected != null && effected.getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
+				break;
 			}
-			if (!isForcedEffect && template.getPosition() == 1
-					&& template instanceof DamageEffect && !(template instanceof DelayedSpellAttackInstantEffect)) {
+			if (!isForcedEffect && template.getPosition() == 1 && template instanceof DamageEffect
+				&& !(template instanceof DelayedSpellAttackInstantEffect)) {
 				activateGodstone = true;
 			}
 			template.applyEffect(this);
@@ -651,7 +648,7 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * Start effect which includes: - start effect defined in template - start subeffect if possible - activate toogle skill if needed - schedule end of
+	 * Start effect which includes: - start effect defined in template - start subeffect if possible - activate toggle skill if needed - schedule end of
 	 * effect
 	 */
 	public void startEffect(boolean restored) {

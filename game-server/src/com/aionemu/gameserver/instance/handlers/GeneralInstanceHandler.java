@@ -198,11 +198,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onApplyEffect(Creature effector, Creature effected, int skillId) {
-
-	}
-
-	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 
 	}
