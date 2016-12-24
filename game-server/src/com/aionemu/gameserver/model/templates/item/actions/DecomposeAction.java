@@ -471,7 +471,7 @@ public class DecomposeAction extends AbstractItemAction {
 					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
 					if (template == null)
 						log.error("Detected invalid item id during decompose action " + item.getItemId());
-					if (template.getExtraInventoryId() > 0)
+					else if (template.getExtraInventoryId() > 0)
 						return true;
 				}
 			}

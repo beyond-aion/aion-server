@@ -496,20 +496,23 @@ public class House extends VisibleObject {
 	public byte[] getSignNotice() {
 		byte[] notice;
 		readLock.lock();
-		if (signNoticeStream == null || status == HouseStatus.INACTIVE)
-			notice = new byte[0];
-		else
-			notice = signNoticeStream.toByteArray();
-		readLock.unlock();
+		try {
+			if (signNoticeStream == null || status == HouseStatus.INACTIVE)
+				notice = new byte[0];
+			else
+				notice = signNoticeStream.toByteArray();
+		} finally {
+			readLock.unlock();
+		}
 		return notice;
 	}
 
 	public void setSignNotice(byte[] noticeStream) {
 		writeLock.lock();
-		if (signNoticeStream == null)
-			signNoticeStream = new ByteArrayOutputStream(NOTICE_LENGTH);
-		signNoticeStream.reset();
 		try {
+			if (signNoticeStream == null)
+				signNoticeStream = new ByteArrayOutputStream(NOTICE_LENGTH);
+			signNoticeStream.reset();
 			signNoticeStream.write(noticeStream, 0, Math.min(noticeStream.length, NOTICE_LENGTH));
 		} finally {
 			writeLock.unlock();

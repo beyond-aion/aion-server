@@ -34,7 +34,7 @@ public class _30553ComradesInArms extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			switch (targetId) {
 				case 205438:
 					switch (dialog) {

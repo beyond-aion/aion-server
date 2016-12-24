@@ -1048,7 +1048,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, dialogId);
@@ -1073,7 +1073,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId, int itemId, int itemCout) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, dialogId);

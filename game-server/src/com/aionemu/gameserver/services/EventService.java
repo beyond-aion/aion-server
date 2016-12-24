@@ -105,7 +105,8 @@ public class EventService {
 				}
 			} else {
 				if (start) {
-					player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.START));
+					qs = new QuestState(questId, QuestStatus.START);
+					player.getQuestStateList().addQuest(questId, qs);
 					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, qs));
 				}
 			}

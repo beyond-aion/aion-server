@@ -174,7 +174,7 @@ public class ItemCollecting extends QuestHandler {
 		if (zoneName.name().equalsIgnoreCase(startZone)) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				QuestService.startQuest(env);
 				return true;
 			}

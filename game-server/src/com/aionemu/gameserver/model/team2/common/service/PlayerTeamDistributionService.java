@@ -50,7 +50,7 @@ public class PlayerTeamDistributionService {
 				continue;
 
 			// Reward init
-			long rewardXp = Math.round(expReward * member.getLevel() / filteredStats.partyLvlSum);
+			long rewardXp = Math.round(expReward * member.getLevel() / (float) filteredStats.partyLvlSum);
 			int rewardDp = StatFunctions.calculateDPReward(member, owner);
 			float rewardAp = 1;
 

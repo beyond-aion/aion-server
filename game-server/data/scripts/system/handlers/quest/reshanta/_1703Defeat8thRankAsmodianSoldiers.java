@@ -37,7 +37,7 @@ public class _1703Defeat8thRankAsmodianSoldiers extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (env.getTargetId() == 278503) {
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

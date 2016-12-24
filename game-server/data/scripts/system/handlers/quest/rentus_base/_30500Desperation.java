@@ -33,7 +33,7 @@ public class _30500Desperation extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205842) {
 				switch (dialog) {
 					case QUEST_SELECT:

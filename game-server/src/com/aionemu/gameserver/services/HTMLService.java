@@ -58,7 +58,7 @@ public class HTMLService {
 	}
 
 	public static void sendData(Player player, int messageId, String html) {
-		double packetCount = Math.ceil(html.length() / (Short.MAX_VALUE - 8) + 1);
+		int packetCount = (int) (html.length() / (Short.MAX_VALUE - 8f)) + 1;
 		if (packetCount > 255) { // max byte number (0xFF)
 			log.warn("HTML message could not be sent to client, since its content is too long", new Throwable()); // attach throwable for stacktrace
 			return;

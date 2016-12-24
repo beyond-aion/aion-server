@@ -1,7 +1,6 @@
 package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -10,42 +9,33 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class AddExp extends AdminCommand {
 
 	public AddExp() {
-		super("addexp");
+		super("addexp", "Increases/decreases a players experience points.");
+
+		setParamInfo("<exp> - The experience points to add (may be negative).");
 	}
 
 	@Override
-	public void execute(Player player, String... params) {
-		if (params.length != 1) {
-			info(player, null);
+	public void execute(Player admin, String... params) {
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		Player target = null;
+		Player target = admin;
 
-		if (player.getTarget() == null) {
-			info(player, null);
-		} else if (!(player.getTarget() instanceof Player)) {
-			info(player, null);
-		} else
-			target = (Player) player.getTarget();
+		if (admin.getTarget() instanceof Player)
+			target = (Player) admin.getTarget();
 
-		String paramValue = params[0];
 		long exp;
 		try {
-			exp = Long.parseLong(paramValue);
+			exp = Long.parseLong(params[0]);
 		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(player, "<exp> must be an Integer");
+			sendInfo(admin, "Invalid <exp> (must be a number)");
 			return;
 		}
 
-		exp += target.getCommonData().getExp();
-		target.getCommonData().setExp(exp);
-		PacketSendUtility.sendMessage(player, "You added " + params[0] + " exp points to the target.");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Select a target and use command this way:");
-		PacketSendUtility.sendMessage(player, "syntax //addexp <exp>");
+		long resultExp = Math.max(0, target.getCommonData().getExp() + exp);
+		target.getCommonData().setExp(resultExp);
+		sendInfo(admin, "You added " + exp + " exp points to " + target.getName() + ".");
 	}
 }

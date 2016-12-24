@@ -46,7 +46,7 @@ public class _37006NowYouSeeThem extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
 				if (dialog == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);

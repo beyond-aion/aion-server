@@ -142,7 +142,7 @@ public class KillInWorld extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		VortexLocation vortexLoc = VortexService.getInstance().getLocationByWorld(invasionWorldId);
 		if (player.getWorldId() == invasionWorldId) {
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				if (vortexLoc != null && vortexLoc.isActive() || searchOpenRift())
 					return QuestService.startQuest(env);
 			}

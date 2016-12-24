@@ -35,7 +35,7 @@ public class _3074DangerousProbability extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798193) { // Nagrunerk
 				if (dialog == DialogAction.EXCHANGE_COIN) {
 					if (QuestService.startQuest(env)) {

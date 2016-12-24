@@ -141,8 +141,10 @@ public class Configure extends AdminCommand {
 				} else {
 					sendInfo(admin, "The current value of " + cls.getSimpleName() + "." + fieldName + " is " + value);
 				}
-			} catch (Exception e) {
+			} catch (NoSuchFieldException e) {
 				sendInfo(admin, "The property " + cls.getSimpleName() + "." + fieldName + " does not exist.");
+			} catch (Exception e) {
+				sendInfo(admin, "Could not access " + cls.getSimpleName() + "." + fieldName);
 			}
 		}
 	}

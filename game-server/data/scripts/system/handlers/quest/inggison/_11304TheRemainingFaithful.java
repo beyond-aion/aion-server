@@ -35,7 +35,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798927) {
 				switch (dialog) {
 					case QUEST_SELECT:

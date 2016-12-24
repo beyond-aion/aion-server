@@ -58,7 +58,7 @@ public class _18821AlmostForgotMyBlessings extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			switch (dialog) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 1011);

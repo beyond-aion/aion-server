@@ -49,7 +49,7 @@ public class Event extends AdminCommand {
 		}
 
 		if (params[0].equalsIgnoreCase("pvpspawn")) {
-			if (params[1].equalsIgnoreCase("asmo") || params[1].equalsIgnoreCase("asmo")) {
+			if (params[1].equalsIgnoreCase("asmo")) {
 				TeleportService2.setEventPos(admin.getPosition(), Race.ASMODIANS);
 				sendInfo(admin, "Eventspawn for Asmodians was set!");
 			} else if (params[1].equalsIgnoreCase("elyos") || params[1].equalsIgnoreCase("ely")) {

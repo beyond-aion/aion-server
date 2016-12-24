@@ -91,9 +91,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public Stat2 getMovementSpeed() {
 		int currentState = owner.getState();
 		AISubState currentSubState = owner.getAi2().getSubState();
-		Stat2 cachedSpeed = cachedSpeedStat;
-		if (cachedSpeed != null && cachedState == currentState && cachedSubState == currentSubState) {
-			return cachedSpeed;
+		if (cachedSpeedStat != null && cachedState == currentState && cachedSubState == currentSubState) {
+			return cachedSpeedStat;
 		}
 		Stat2 newSpeedStat = null;
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
@@ -115,6 +114,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(getStatsTemplate().getRunSpeed() * multiplier * 1000));
 		}
 		cachedState = currentState;
+		cachedSubState = currentSubState;
 		cachedSpeedStat = newSpeedStat;
 		return newSpeedStat;
 	}

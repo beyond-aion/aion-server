@@ -33,7 +33,7 @@ public class _30503RodelionRescue extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205438) {
 				switch (dialog) {
 					case QUEST_SELECT:

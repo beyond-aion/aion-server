@@ -36,7 +36,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			switch (targetId) {
 				case 205864:
 					switch (dialog) {

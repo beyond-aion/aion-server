@@ -52,7 +52,7 @@ public class _23745NoMoreinLevinshor extends QuestHandler {
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getWorldId() == worldId && (qs == null || qs == null || qs.isStartable()))
+		if (player.getWorldId() == worldId && (qs == null || qs.isStartable()))
 			return QuestService.startQuest(env);
 		return false;
 	}

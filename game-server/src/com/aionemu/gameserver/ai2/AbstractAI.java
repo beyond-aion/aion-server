@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -36,7 +37,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	private Creature owner;
 	private AIState currentState;
 	private AISubState currentSubState;
-	private static FastMap<Class<?>, HashMap<AIEventType, Method>> listenableMethodsByClass;
+	private static volatile Map<Class<?>, Map<AIEventType, Method>> listenableMethodsByClass;
 
 	private final Lock thinkLock = new ReentrantLock();
 
@@ -52,7 +53,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		this.currentSubState = AISubState.NONE;
 
 		if (isFirstMethodFill) {
-			HashMap<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
+			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 			if (listenableMethods != null) {
 				// Clean null values after the method map was filled in
 				Iterator<Method> iter = listenableMethods.values().iterator();
@@ -311,7 +312,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 			AIListenable listenable = (AIListenable) annotation;
 			if (listenableMethodsByClass == null)
 				listenableMethodsByClass = new FastMap<>();
-			HashMap<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
+			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 			if (listenableMethods == null) {
 				// won't be called again because is cached by the AnnotationManager
 				listenableMethods = new HashMap<>();
@@ -339,7 +340,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	public final boolean canHaveEventNotifications(AIEventType event) {
 		if (listenableMethodsByClass == null)
 			return false;
-		HashMap<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
+		Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 		return listenableMethods != null && listenableMethods.containsKey(event);
 	}
 

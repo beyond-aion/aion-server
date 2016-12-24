@@ -223,7 +223,7 @@ public class ReportToMany extends QuestHandler {
 		if (startItemId != 0) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 			}
 		}

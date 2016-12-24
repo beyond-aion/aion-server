@@ -33,7 +33,7 @@ public class _50009TisTheSeason extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 831032 || targetId == 831038) {
 				switch (dialog) {
 					case QUEST_SELECT:

@@ -36,7 +36,7 @@ public class _13744AgentinNeed extends QuestHandler {
 			&& SiegeService.getInstance().isSiegeInProgress(8011)) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				return QuestService.startQuest(env);
 			}
 		}

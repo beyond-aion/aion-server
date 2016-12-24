@@ -74,8 +74,7 @@ public class CronJobService {
 
 			@Override
 			public void run() {
-				if (!AhserionRaid.getInstance().isStarted())
-					AhserionRaid.getInstance().start();
+				AhserionRaid.getInstance().start();
 			}
 		}, "0 50 17 ? * SUN");
 	}

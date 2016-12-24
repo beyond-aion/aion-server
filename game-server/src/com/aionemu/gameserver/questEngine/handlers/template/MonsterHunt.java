@@ -252,7 +252,7 @@ public class MonsterHunt extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		VortexLocation vortexLoc = VortexService.getInstance().getLocationByWorld(invasionWorldId);
 		if (player.getWorldId() == invasionWorldId) {
-			if (qs == null || qs == null || qs.isStartable()) {
+			if (qs == null || qs.isStartable()) {
 				if (vortexLoc != null && vortexLoc.isActive() || searchOpenRift())
 					return QuestService.startQuest(env);
 			}
@@ -284,7 +284,7 @@ public class MonsterHunt extends QuestHandler {
 	public boolean startQuest(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs == null || qs.isStartable()) {
+		if (qs == null || qs.isStartable()) {
 			return QuestService.startQuest(env);
 		}
 		return false;
