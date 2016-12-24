@@ -751,9 +751,7 @@ public class Skill {
 			if (effectedList.isEmpty() && this.isPointPointSkill()) {
 				Effect effect = new Effect(this, null, 0, itemTemplate);
 				effect.initialize();
-				final int worldId = effector.getWorldId();
-				final int instanceId = effector.getInstanceId();
-				effect.setWorldPosition(worldId, instanceId, x, y, z);
+				effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
 				effects.add(effect);
 				// spellStatus = effect.getSpellStatus().getId();
 			}

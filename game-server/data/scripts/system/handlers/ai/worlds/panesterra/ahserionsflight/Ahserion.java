@@ -14,7 +14,6 @@ import ai.AggressiveNpcAI2;
 
 /**
  * @author Yeats
- *
  */
 @AIName("ahserion")
 public class Ahserion extends AggressiveNpcAI2 {
@@ -22,16 +21,16 @@ public class Ahserion extends AggressiveNpcAI2 {
 	@Override
 	protected void handleDied() {
 		if (getOwner().getWorldId() == 400030000) {
-			if (AhserionRaid.getInstance().isStarted() && AhserionRaid.getInstance().getStatus() == AhserionRaidStatus.INSTANCE_RUNNING) {
+			if (AhserionRaid.getInstance().getStatus() == AhserionRaidStatus.INSTANCE_RUNNING) {
 				Map<PanesterraTeamId, Integer> panesterraDamage = new HashMap<>();
-		
-				//Only players can attack Ahserion on this map.
+
+				// Only players can attack Ahserion on this map.
 				for (AggroInfo ai : getOwner().getAggroList().getFinalDamageList(false)) {
 					if (ai.getAttacker() instanceof Player) {
 						Player attacker = (Player) ai.getAttacker();
 						if (attacker.getPanesterraTeam() != null && !attacker.getPanesterraTeam().isEliminated()) {
 							PanesterraTeamId teamId = attacker.getPanesterraTeam().getTeamId();
-						
+
 							if (panesterraDamage.containsKey(teamId)) {
 								int curDamage = panesterraDamage.get(teamId);
 								panesterraDamage.put(teamId, curDamage + ai.getDamage());
@@ -41,17 +40,16 @@ public class Ahserion extends AggressiveNpcAI2 {
 						}
 					}
 				}
-				getWinnerTeam(panesterraDamage);
+				PanesterraTeamId winner = findWinnerTeam(panesterraDamage);
+				if (winner != null)
+					AhserionRaid.getInstance().bossKilled(getOwner(), winner);
 			}
 		}
 		super.handleDied();
 	}
-	
-	/**
-	 * @param panesterraDamage
-	 */
-	private void getWinnerTeam(Map<PanesterraTeamId, Integer> panesterraDamage) {
-		PanesterraTeamId winner = PanesterraTeamId.BALAUR;
+
+	private PanesterraTeamId findWinnerTeam(Map<PanesterraTeamId, Integer> panesterraDamage) {
+		PanesterraTeamId winner = null;
 		int maxDmg = 0;
 		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69)
 			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_69)) {
@@ -81,6 +79,6 @@ public class Ahserion extends AggressiveNpcAI2 {
 				winner = PanesterraTeamId.GAB1_SUB_DEST_72;
 			}
 		}
-		AhserionRaid.getInstance().bossKilled(getOwner(), winner);
+		return winner;
 	}
 }

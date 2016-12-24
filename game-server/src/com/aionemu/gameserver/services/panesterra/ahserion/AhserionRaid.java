@@ -3,8 +3,10 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
@@ -31,34 +33,30 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Yeats
- * @modified Estrayl
+ * @modified Estrayl, Neon
  */
 public class AhserionRaid {
 
-	private AhserionRaidStatus status = AhserionRaidStatus.OFF;
+	private AtomicReference<AhserionRaidStatus> status = new AtomicReference<>(AhserionRaidStatus.OFF);
 	private Map<PanesterraTeamId, PanesterraTeam> teams = null;
-	private AtomicBoolean isStarted = new AtomicBoolean();
 	private AhserionTeam winner = null;
 	private Future<?> observeTask, progressTask;
-	private short progress;
 
 	public static AhserionRaid getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	public boolean start() {
-		if (!isStarted.compareAndSet(false, true))
+		if (!status.compareAndSet(AhserionRaidStatus.OFF, AhserionRaidStatus.PREPARING_REGISTRATION))
 			return false;
-		status = AhserionRaidStatus.PREPARING_REGISTRATION;
 		PanesterraMatchmakingService.getInstance().onStart();
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> startInstancePreparation(), 600 * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> startInstancePreparation(), 600 * 1000);
 		return true;
 	}
 
 	private void startInstancePreparation() {
-		synchronized (status) {
-			status = AhserionRaidStatus.PREPARING_INSTANCE_START;
-		}
+		if (!status.compareAndSet(AhserionRaidStatus.PREPARING_REGISTRATION, AhserionRaidStatus.PREPARING_INSTANCE_START))
+			return;
 		PanesterraMatchmakingService.getInstance().prepareTeams();
 		teams = PanesterraMatchmakingService.getInstance().getRegisteredTeams();
 		if (teams != null && !teams.isEmpty()) {
@@ -113,47 +111,51 @@ public class AhserionRaid {
 	}
 
 	private void instanceStartTimer() {
-		progressTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
-			switch (progress++) {
-				case 1:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_01());
-					break;
-				case 6:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_04());
-					break;
-				case 18:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_05());
-					break;
-				case 24:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_06());
-					break;
-				case 27:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
-					spawnStage(2, PanesterraTeamId.BALAUR); // spawn mobs 30s before doors are opened
-					break;
-				case 30:
-					synchronized (status) {
-						status = AhserionRaidStatus.INSTANCE_RUNNING;
-					}
-					for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
-						door.setOpen(true);
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
-					scheduleObservation();
-					break;
-				case 60:
-					sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_09());
-					for (PanesterraTeamId teamId : teams.keySet())
-						spawnStage(3, teamId);
-					break;
-				case 102:
-				case 204:
-					for (PanesterraTeamId teamId : teams.keySet())
-						if (teamId != null && !teams.get(teamId).isEliminated())
-							spawnStage(4, teamId);
-					break;
-				case 360:
-					stop(); // stop after 60min (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill Ahserion)
-					break;
+		progressTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
+			int progress;
+
+			@Override
+			public void run() {
+				switch (progress++) {
+					case 1:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_01());
+						break;
+					case 6:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_04());
+						break;
+					case 18:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_05());
+						break;
+					case 24:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_06());
+						break;
+					case 27:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
+						spawnStage(2, PanesterraTeamId.BALAUR); // spawn mobs 30s before doors are opened
+						break;
+					case 30:
+						status.set(AhserionRaidStatus.INSTANCE_RUNNING);
+						for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
+							door.setOpen(true);
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
+						scheduleObservation();
+						break;
+					case 60:
+						sendMessage(0, SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_09());
+						for (PanesterraTeamId teamId : teams.keySet())
+							spawnStage(3, teamId);
+						break;
+					case 102:
+					case 204:
+						for (PanesterraTeamId teamId : teams.keySet())
+							if (teamId != null && !teams.get(teamId).isEliminated())
+								spawnStage(4, teamId);
+						break;
+					case 360:
+						stop(); // stop after 60min (-5min preparation time -15min barricade invulnerable time = 40min effective time to kill Ahserion)
+						break;
+				}
 			}
 		}, 10000, 10000);
 	}
@@ -173,11 +175,8 @@ public class AhserionRaid {
 	}
 
 	public boolean stop() {
-		if (!isStarted.compareAndSet(true, false))
+		if (status.getAndSet(AhserionRaidStatus.OFF) == AhserionRaidStatus.OFF)
 			return false;
-		synchronized (status) {
-			status = AhserionRaidStatus.OFF;
-		}
 		PanesterraMatchmakingService.getInstance().onStop();
 		winner = null;
 		cancelTask(observeTask);
@@ -189,9 +188,20 @@ public class AhserionRaid {
 			}
 			teams.clear();
 		}
-		despawnAll();
-		for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
-			door.setOpen(false);
+		for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
+			if (obj instanceof Player) { // in case someone wasn't ported via team.moveToBindPoint
+				Player player = (Player) obj;
+				if (!player.isGM()) {
+					player.setPanesterraTeam(null);
+					leaveTeam(player);
+					TeleportService2.moveToBindLocation(player);
+				}
+			} else if (obj instanceof StaticDoor) {
+				((StaticDoor) obj).setOpen(false);
+			} else if (obj instanceof Npc) {
+				obj.getController().delete();
+			}
+		}
 		return true;
 	}
 
@@ -214,7 +224,7 @@ public class AhserionRaid {
 	}
 
 	public boolean revivePlayer(Player player, int skillId) {
-		if (!isStarted.get() || status == AhserionRaidStatus.OFF || player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated())
+		if (status.get() == AhserionRaidStatus.OFF || player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated())
 			return false;
 
 		PlayerReviveService.revive(player, 25, 25, false, skillId);
@@ -232,38 +242,14 @@ public class AhserionRaid {
 	}
 
 	public void bossKilled(Npc owner, PanesterraTeamId winnerTeam) {
-		if (winnerTeam == null || winnerTeam == PanesterraTeamId.BALAUR || !teams.containsKey(winnerTeam)
-			|| (teams.containsKey(winnerTeam) && teams.get(winnerTeam).isEliminated())) {
-			synchronized (status) {
-				status = AhserionRaidStatus.OFF;
-			}
+		if (!teams.containsKey(winnerTeam) || teams.get(winnerTeam).isEliminated()) {
 			// something went wrong, remove all players from the map
-			owner.getController().delete();
-			for (PanesterraTeam team : teams.values()) {
-				if (team != null) {
-					team.setIsEliminated(true);
-					team.moveToBindPoint();
-				}
-			}
-			for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
-				if (obj instanceof Npc) {
-					((Npc) obj).getController().delete();
-				} else if (obj instanceof Player) {
-					Player player = (Player) obj;
-					if (player != null && !player.isGM()) {
-						player.setPanesterraTeam(null);
-						leaveTeam(player);
-						TeleportService2.moveToBindLocation(player);
-					}
-				}
-			}
+			LoggerFactory.getLogger(AhserionRaid.class).warn("Ahserion got killed but winnerTeam is missing or eliminated. No rewards for players.");
 			stop();
 			return;
 		}
 		cancelTask(progressTask);
-		synchronized (status) {
-			status = AhserionRaidStatus.INSTANCE_FINISHED;
-		}
+		status.set(AhserionRaidStatus.INSTANCE_FINISHED);
 		winner = (AhserionTeam) teams.get(winnerTeam);
 		for (PanesterraTeamId teamId : teams.keySet()) {
 			if (teamId != null && teamId != winnerTeam) {
@@ -272,14 +258,14 @@ public class AhserionRaid {
 			}
 		}
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc != null && npc.getNpcId() != owner.getNpcId())
+			if (npc.getNpcId() != owner.getNpcId())
 				npc.getController().delete();
 		}
 		scheduleStop();
 	}
 
 	public void corridorShieldDestroyed(int npcId) {
-		if (!isStarted.get() || status != AhserionRaidStatus.INSTANCE_RUNNING)
+		if (status.get() != AhserionRaidStatus.INSTANCE_RUNNING)
 			return;
 
 		PanesterraTeamId eliminated = null;
@@ -315,13 +301,6 @@ public class AhserionRaid {
 		SpawnEngine.spawnObject(template, 1);
 	}
 
-	public void despawnAll() {
-		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc != null && !npc.getLifeStats().isAlreadyDead())
-				npc.getController().delete();
-		}
-	}
-
 	private void deleteNpcsByTeamId(PanesterraTeamId id) {
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
 			if (npc.getSpawn().getStaticId() >= 180 && npc.getSpawn().getStaticId() <= 183 || npc.isFlag())
@@ -335,18 +314,21 @@ public class AhserionRaid {
 	}
 
 	public void onPlayerLogin(Player player) {
-		if (isStarted.get()) {
-			if (status == AhserionRaidStatus.PREPARING_REGISTRATION) {
+		switch (status.get()) {
+			case PREPARING_REGISTRATION:
 				if (PanesterraMatchmakingService.getInstance().isPlayerRegistered(player))
 					PacketSendUtility.sendMessage(player, "You are currently registered for Ahserions Flight.", ChatType.WHITE_CENTER);
-			} else if (status == AhserionRaidStatus.PREPARING_INSTANCE_START || status == AhserionRaidStatus.INSTANCE_RUNNING) {
+				break;
+			case PREPARING_INSTANCE_START:
+			case INSTANCE_RUNNING:
 				player.setPanesterraTeam(getPlayersTeam(player));
-			} else if (status == AhserionRaidStatus.INSTANCE_FINISHED) {
+				break;
+			case INSTANCE_FINISHED:
 				if (winner != null) {
 					if (winner.getMembers() != null && winner.getMembers().contains(player.getObjectId()))
 						player.setPanesterraTeam(winner);
 				}
-			}
+				break;
 		}
 		validatePlayer(player);
 	}
@@ -397,12 +379,10 @@ public class AhserionRaid {
 
 			@Override
 			public void accept(Player player) {
-				if (player != null) {
-					if (teamId == 0)
-						PacketSendUtility.sendPacket(player, msg);
-					else if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() == teamId)
-						PacketSendUtility.sendPacket(player, msg);
-				}
+				if (teamId == 0)
+					PacketSendUtility.sendPacket(player, msg);
+				else if (player.getPanesterraTeam() != null && player.getPanesterraTeam().getTeamId().getId() == teamId)
+					PacketSendUtility.sendPacket(player, msg);
 			}
 		});
 	}
@@ -415,7 +395,7 @@ public class AhserionRaid {
 	}
 
 	private void scheduleStop() {
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> stop(), 900000); // 15min
+		ThreadPoolManager.getInstance().schedule(() -> stop(), 900000); // 15min
 	}
 
 	private void cancelTask(Future<?> task) {
@@ -428,11 +408,11 @@ public class AhserionRaid {
 	}
 
 	public AhserionRaidStatus getStatus() {
-		return status;
+		return status.get();
 	}
 
 	public boolean isStarted() {
-		return isStarted.get();
+		return status.get() != AhserionRaidStatus.OFF;
 	}
 
 	private static class SingletonHolder {

@@ -76,7 +76,7 @@ public class AdvanceCorridorShield extends NpcAI2 {
 	@Override
 	public void handleDied() {
 		if (getOwner().getWorldId() == 400030000) {
-			if (AhserionRaid.getInstance().isStarted() && AhserionRaid.getInstance().getStatus() == AhserionRaidStatus.INSTANCE_RUNNING) {
+			if (AhserionRaid.getInstance().getStatus() == AhserionRaidStatus.INSTANCE_RUNNING) {
 				switch (getOwner().getNpcId()) {
 					case 297306:
 						sendPacket(1402270);

@@ -52,8 +52,7 @@ public abstract class PanesterraTeam {
 				Player player = World.getInstance().findPlayer(id);
 				if (player == null)
 					continue;
-				if (player.getPanesterraTeam() != null)
-					player.setPanesterraTeam(null);
+				player.setPanesterraTeam(null);
 				if (player.getWorldId() == 400030000) {
 					ungroupPlayer(player);
 					TeleportService2.moveToBindLocation(player);
