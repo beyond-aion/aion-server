@@ -2788,6 +2788,10 @@
 				<spawn npc_id="802633" handler="MERCHANT" respawn_time="295">
 					<spot x="908.61084" y="1034.8704" z="334.24686" h="13"/>
 				</spawn>
+				<!-- Montar -->
+				<spawn npc_id="804830" handler="MERCHANT" respawn_time="295">
+					<spot x="908.5" y="1041.1" z="334.24707" h="6"/>
+				</spawn>
 				<!-- Cardia -->
 				<spawn npc_id="802634" handler="MERCHANT" respawn_time="295">
 					<spot x="909.87396" y="1022.699" z="334.5455" h="13"/>
@@ -2921,6 +2925,10 @@
 				<!-- Tyn -->
 				<spawn npc_id="802655" handler="MERCHANT" respawn_time="295">
 					<spot x="908.61084" y="1034.8704" z="334.24686" h="13"/>
+				</spawn>
+				<!-- Hinshada -->
+				<spawn npc_id="804838" handler="MERCHANT" respawn_time="295">
+					<spot x="908.5" y="1041.1" z="334.24707" h="6"/>
 				</spawn>
 				<!-- Hiler -->
 				<spawn npc_id="802656" handler="MERCHANT" respawn_time="295">
