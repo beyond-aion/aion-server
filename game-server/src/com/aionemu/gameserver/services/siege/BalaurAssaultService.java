@@ -98,7 +98,7 @@ public class BalaurAssaultService {
 		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence.getInstance()
 			.getGlobalElyosInfluence();
 
-		if (Rnd.get() >= influence * SiegeConfig.BALAUR_ASSAULT_RATE)
+		if (Rnd.nextFloat() >= influence / SiegeConfig.BALAUR_ASSAULT_RATE)
 			return false;
 
 		return true;

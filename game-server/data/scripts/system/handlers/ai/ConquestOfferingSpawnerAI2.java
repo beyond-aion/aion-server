@@ -86,16 +86,16 @@ public class ConquestOfferingSpawnerAI2 extends NpcAI2 {
 	private void spawn(int startNormal, int startParty) {
 		int npcId;
 		// calculate what kind of npc will be spawned 'normal'(70%) and 'party' (30%)
-		if (Rnd.get(1, 100) <= 70) {
+		if (Rnd.chance() < 70) {
 			// theres another kind of spawn called 'all'(30%)
-			if (Rnd.get(1, 100) <= 30) {
+			if (Rnd.chance() < 30) {
 				npcId = getRndNpc(startNormal);
 			} else {
 				npcId = startNormal + Rnd.get(0, 3);
 			}
 		} else {
 			// theres another kind of spawn called 'all'(30%)
-			if (Rnd.get(1, 100) <= 30) {
+			if (Rnd.chance() < 30) {
 				npcId = getRndNpc(startNormal);
 			} else {
 				npcId = startParty + Rnd.get(0, 3);

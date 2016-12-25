@@ -392,7 +392,7 @@ public class StigmaService {
 
 		float success = 100f;
 		success -= Math.min(9, stigma.getEnchantLevel()) * 10f; // reduce by 10% per enchant level, cap at 10% end rate
-		final boolean isSuccess = Rnd.get() * 100 < success;
+		final boolean isSuccess = Rnd.chance() < success;
 
 		final int parentItemId = stigma.getItemId();
 		final int parentObjectId = stigma.getObjectId();

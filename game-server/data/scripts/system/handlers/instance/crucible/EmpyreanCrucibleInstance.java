@@ -1402,7 +1402,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217742:
 				dropItems.clear();
 				itemId = 162000108;
-				if (Rnd.get(1, 100) < 6) {
+				if (Rnd.chance() < 6) {
 					switch (npc.getNpcId()) {
 						case 217740:
 							itemId = 125002593;
@@ -1422,7 +1422,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217750:
 				dropItems.clear();
 				itemId = 162000109;
-				if (Rnd.get(1, 100) < 6) {
+				if (Rnd.chance() < 6) {
 					switch (Rnd.get(1, 9)) {
 						case 1:
 							itemId = 101700911;
@@ -1455,7 +1455,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				}
 				break;
 			case 217753: // skillbooks
-				if (Rnd.get(1, 100) < 51) {
+				if (Rnd.chance() < 51) {
 					Race race = instance.getRegisteredGroup().getRace();
 					switch (Rnd.get(1, 4)) {
 						case 1:

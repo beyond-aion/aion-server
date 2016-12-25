@@ -102,7 +102,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void spawnShugo(Player player) {
-		if (canJoin.get() &&  Rnd.get(1, 100) <= SHUGO_SPAWN_RATE) {
+		if (canJoin.get() &&  Rnd.chance() < SHUGO_SPAWN_RATE) {
 			Npc oldShugo = instance.getNpc(833543);
 			if (oldShugo != null) {
 				oldShugo.getController().delete();

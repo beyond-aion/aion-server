@@ -371,7 +371,7 @@ public abstract class EffectTemplate {
 	private boolean nextEffectCheck(Effect effect, SpellStatus spellStatus, StatEnum statEnum) {
 		EffectTemplate firstEffect = effect.effectInPos(1);
 		if (this.getPosition() > 1) {
-			if (Rnd.get(1, 100) <= this.getPreEffectProb()) {
+			if (Rnd.chance() < this.getPreEffectProb()) {
 				FastTable<Integer> positions = getPreEffects();
 				int successCount = 0;
 				for (int pos : positions) {
@@ -483,7 +483,7 @@ public abstract class EffectTemplate {
 		}
 
 		// chance to trigger subeffect
-		if (Rnd.get(1, 100) > subEffect.getChance())
+		if (Rnd.chance() >= subEffect.getChance())
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());

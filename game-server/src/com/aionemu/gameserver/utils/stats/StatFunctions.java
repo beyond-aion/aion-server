@@ -578,7 +578,7 @@ public class StatFunctions {
 		else
 			criticalRate = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
 
-		return Rnd.get(1, 100) <= criticalRate;
+		return Rnd.chance() < criticalRate;
 	}
 
 	/**

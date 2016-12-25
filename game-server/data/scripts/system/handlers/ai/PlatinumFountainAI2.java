@@ -26,7 +26,7 @@ public class PlatinumFountainAI2 extends ActionItemNpcAI2 {
 		if (!player.getInventory().decreaseByItemId(186000030, 1))
 			return;
 
-		if (Rnd.get(1, 100) > 89) {
+		if (Rnd.chance() < 10) {
 			ItemService.addItem(player, 186000096, 1);
 			PacketSendUtility.sendMessage(player, "Du hattest Gl�ck! Eine Medaille aus reinem Platin springt dir entgegen!");
 		} else {

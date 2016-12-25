@@ -33,7 +33,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
 		doors.get(367).setOpen(true);
-		if (Rnd.get(0, 100) < 21) {
+		if (Rnd.chance() < 21) {
 			spawn(799580, 1034.11f, 985.01f, 327.35095f, (byte) 105);
 			spawn(217649, 1033.67f, 978.08f, 327.35095f, (byte) 35);
 		}

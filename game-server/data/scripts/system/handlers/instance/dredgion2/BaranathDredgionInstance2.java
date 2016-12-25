@@ -20,7 +20,7 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 	@Override
 	public void onEnterInstance(Player player) {
 		if (isInstanceStarted.compareAndSet(false, true)) {
-			if (Rnd.get(1, 100) < 51) {
+			if (Rnd.chance() < 51) {
 				switch (Rnd.get(2)) {
 					case 0:
 						spawn(215093, 416.3429f, 282.32785f, 409.7311f, (byte) 80);

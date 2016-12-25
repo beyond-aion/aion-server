@@ -87,7 +87,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 							// Random spawn
 							int chance = 95; // Chance to spawn biggest reward mob
 							int spawnTime = 3; // 3 min of spawn
-							int questSpawnedNpcId = Rnd.get(1, 100) <= chance ? questKillNpc1Id : questKillNpc2Id;
+							int questSpawnedNpcId = Rnd.chance() < chance ? questKillNpc1Id : questKillNpc2Id;
 							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(),
 								npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
 							PacketSendUtility.broadcastMessage(questMob, 1100630, 500);

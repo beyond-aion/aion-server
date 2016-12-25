@@ -107,7 +107,7 @@ public class ArcadeUpgradeService {
 				}
 			}
 		}
-		final boolean success = Rnd.get(1, 100) <= EventsConfig.EVENT_ARCADE_CHANCE;
+		final boolean success = Rnd.chance() < EventsConfig.EVENT_ARCADE_CHANCE;
 		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(3, success, progress.getFrenzyPoints()));
 		if (success) {
 			ThreadPoolManager.getInstance().schedule(() -> {

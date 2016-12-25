@@ -81,7 +81,7 @@ public class FearEffect extends EffectTemplate {
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
-					if (Rnd.get(1, 100) > resistchance)
+					if (Rnd.chance() >= resistchance)
 						effected.getEffectController().removeEffect(effect.getSkillId());
 				}
 			};

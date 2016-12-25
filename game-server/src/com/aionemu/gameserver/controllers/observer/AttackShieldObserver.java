@@ -93,7 +93,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					continue;
 			}
 
-			if (Rnd.get(1, 100) > probability)
+			if (Rnd.chance() >= probability)
 				continue;
 
 			// shield type 2 or 16, normal shield, MP

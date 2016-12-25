@@ -3,16 +3,26 @@ package com.aionemu.commons.utils;
 /**
  * @author Balancer, Neon
  */
-public class Rnd {
+public final class Rnd {
 
 	private static final MTRandom rnd = new MTRandom();
+
+	/**
+	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success. This ensures that a success
+	 * rate of 0 (0%) will always fail, and a success rate of 100.0 (100%) always succeeds.
+	 * 
+	 * @return A random chance between 0.0f (inclusive) and 100.0f (exclusive)
+	 */
+	public static float chance() {
+		return nextFloat() * 100;
+	}
 
 	/**
 	 * @return Random number from 0.0f (inclusive) to 1.0f (exclusive)
 	 * @see MTRandom#nextFloat()
 	 */
 	public static float get() {
-		return rnd.nextFloat();
+		return nextFloat();
 	}
 
 	/**

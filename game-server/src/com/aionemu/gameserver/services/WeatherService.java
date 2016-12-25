@@ -126,14 +126,16 @@ public class WeatherService {
 	private WeatherEntry getRandomWeather(GameTime createdTime, WeatherTable table, int zoneId) {
 		List<WeatherEntry> weathers = table.getWeathersForZone(zoneId);
 
-		int chance = Rnd.get(0, 700);
+		int rankChance = Rnd.get(0, 6);
 		// rank 2 occurs twice often than rank 1
 		// rank 1 occurs twice often than rank 0
-		int rank = 2;
-		if (chance > 600)
+		int rank;
+		if (rankChance == 0)
 			rank = 0;
-		else if (chance > 400)
+		else if (rankChance <= 2)
 			rank = 1;
+		else
+			rank = 2;
 
 		List<WeatherEntry> chosenWeather = new FastTable<>();
 		while (rank >= 0) {
@@ -174,9 +176,9 @@ public class WeatherService {
 			int dayTimeCorrection = 1;
 			if (createdTime.getDayTime() == DayTime.AFTERNOON)
 				dayTimeCorrection *= 2; // sunny days more often :)
-			chance = Rnd.get(0, 100);
-			if ((newWeather.getRank() == 0 && chance > 33 / dayTimeCorrection) || (newWeather.getRank() == 1 && chance > 50 / dayTimeCorrection)
-				|| (newWeather.getRank() == 2 && chance > 66 / dayTimeCorrection))
+			float chance = Rnd.chance();
+			if ((newWeather.getRank() == 0 && chance >= 33 / dayTimeCorrection) || (newWeather.getRank() == 1 && chance >= 50 / dayTimeCorrection)
+				|| (newWeather.getRank() == 2 && chance >= 66 / dayTimeCorrection))
 				newWeather = new WeatherEntry();
 
 			// TODO: check snow to not fall in summers

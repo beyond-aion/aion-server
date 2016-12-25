@@ -25,7 +25,7 @@ public class KlawspawnAI2 extends GeneralNpcAI2 {
 		super.handleAttack(creature);
 		Npc npc = getOwner().getPosition().getWorldMapInstance().getNpc(212120);
 		if (npc == null) {
-			if (Rnd.get(0, 100) < 10) {
+			if (Rnd.chance() < 10) {
 				spawn(212120, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
 				AI2Actions.die(this, creature);
 			}

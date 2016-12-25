@@ -219,7 +219,7 @@ public class DropRegistrationService {
 						// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
 						if (!rule.getNoReduction())
 							chance *= dropRate;
-						if (Rnd.get() * 100 > chance)
+						if (Rnd.chance() > chance)
 							continue;
 
 						if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest))
@@ -316,7 +316,7 @@ public class DropRegistrationService {
 				// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
 				if (!rule.getNoReduction())
 					chance *= dropRate;
-				if (Rnd.get() * 100 > chance)
+				if (Rnd.chance() > chance)
 					continue;
 
 				if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest)

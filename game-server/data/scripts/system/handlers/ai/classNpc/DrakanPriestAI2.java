@@ -22,7 +22,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (Rnd.get(1, 100) < 3) {
+		if (Rnd.chance() < 3) {
 			spawnServant();
 		}
 	}

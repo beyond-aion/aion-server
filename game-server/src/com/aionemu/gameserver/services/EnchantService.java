@@ -250,11 +250,10 @@ public class EnchantService {
 		}
 
 		boolean result = false;
-		float random = Rnd.get() * 100;
+		float random = Rnd.chance();
 
-		// If the random number < or = overall success rate,
-		// The item will be successfully enchanted
-		if (random <= success)
+		// If the random number is < overall success rate, the item will be successfully enchanted
+		if (random < success)
 			result = true;
 
 		// For test purpose. To use by administrator
@@ -270,10 +269,10 @@ public class EnchantService {
 		int maxEnchant = targetItem.getItemTemplate().getMaxEnchantLevel(); // max enchant level from item_templates
 		maxEnchant += targetItem.getEnchantBonus();
 		if (!targetItem.isAmplified()) {
-			int rnd = Rnd.get(1, 100); // crit modifier
-			if (rnd <= 5)
+			float chance = Rnd.chance(); // crit modifier
+			if (chance < 5)
 				addLevel = 3;
-			else if (rnd <= 10)
+			else if (chance < 10)
 				addLevel = 2;
 		}
 

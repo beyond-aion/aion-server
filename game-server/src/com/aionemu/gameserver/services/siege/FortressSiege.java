@@ -104,7 +104,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		final int worldId = getSiegeLocation().getWorldId();
 		final SiegeRace oppositeRace = SiegeRace.getOppositeRace(getSiegeLocation().getRace());
 		for (SiegeNpc sn : World.getInstance().getLocalSiegeNpcs(getSiegeLocationId())) {
-			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || Rnd.get(1, 100) <= 35)
+			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || Rnd.chance() < 35)
 				continue;
 			final int amount = Rnd.get(1, 2);
 			for (int i = 0; i < amount; i++) {

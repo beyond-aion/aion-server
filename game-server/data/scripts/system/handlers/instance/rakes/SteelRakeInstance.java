@@ -14,7 +14,7 @@ public class SteelRakeInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		if (Rnd.get(1, 100) > 25) { // Pegureronerk
+		if (Rnd.chance() < 75) { // Pegureronerk
 			spawn(798376, 516.198364f, 489.708008f, 885.760315f, (byte) 60);
 		} else { // Kaneron Agent
 			spawn(215041, 516.198f, 489.708f, 885.76f, (byte) 60);

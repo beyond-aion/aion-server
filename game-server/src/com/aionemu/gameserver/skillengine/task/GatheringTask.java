@@ -92,17 +92,17 @@ public class GatheringTask extends AbstractCraftTask {
 		craftType = CraftType.NORMAL;
 		float multi = Rnd.get() + 1f;
 		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
-		boolean success = Rnd.get() * 100 > CraftConfig.MAX_GATHER_FAILURE_CHANCE * failReduction;
+		boolean success = Rnd.chance() >= CraftConfig.MAX_GATHER_FAILURE_CHANCE * failReduction;
 
 		if (success) {
-			float critChance = Rnd.get() * 100;
-			if (critChance <= (1 + skillLvlDiff / 10f)) { // PURPLE CRIT = 100%
+			float critChance = Rnd.chance();
+			if (critChance < (1 + skillLvlDiff / 10f)) { // PURPLE CRIT = 100%
 				craftType = CraftType.CRIT_PURPLE;
 				currentSuccessValue = fullBarValue;
 				executionSpeed = 300;
 				showBarDelay = 500;
 				return;
-			} else if (critChance <= (5 + skillLvlDiff / 3f)) { // LIGHT BLUE CRIT = +10%
+			} else if (critChance < (5 + skillLvlDiff / 3f)) { // LIGHT BLUE CRIT = +10%
 				craftType = CraftType.CRIT_BLUE;
 			}
 

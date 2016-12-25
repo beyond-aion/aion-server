@@ -168,7 +168,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnPazuzusTreasureBox() {
-		if (Rnd.get(0, 100) >= 80) { // 20% chance, not retail
+		if (Rnd.chance() < 20) { // 20% chance, not retail
 			spawn(700861, 649.243f, 362.338f, 466.0118f, (byte) 0);
 		}
 	}

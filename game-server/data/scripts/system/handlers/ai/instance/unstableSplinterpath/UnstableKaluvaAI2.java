@@ -29,7 +29,7 @@ public class UnstableKaluvaAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (Rnd.get(0, 100) < 3) {
+		if (Rnd.chance() < 3) {
 			if (!isInMove) {
 				isInMove = true;
 				moveToSpawner(randomEgg());

@@ -23,16 +23,16 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 			sp(730558, 415.034f, 174.004f, 433.940f, (byte) 0, 34, 720000);
 			sp(730559, 572.038f, 185.252f, 433.940f, (byte) 0, 10, 720000);
 			sendMsgByRace(1401424, Race.PC_ALL, 720000);
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				sp(233372, 476.63f, 312.16f, 402.89807f, (byte) 97, 720000, "5540A84BAD08498B96C315281F6418D0BD825175");
 			}
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				sp(233373, 485.403f, 596.602f, 390.944f, (byte) 90, 720000);
 			}
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				sp(233379, 486.26382f, 906.011f, 405.24463f, (byte) 90, 720000);
 			}
-			if (Rnd.get(1, 100) < 51) {
+			if (Rnd.chance() < 51) {
 				switch (Rnd.get(2)) { // Supervisor Chitan
 					case 0:
 						spawn(233362, 421.89111f, 285.20471f, 409.7311f, (byte) 80);
@@ -126,7 +126,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				return;
 			case 233377: // Enforcer Udara
 				updateScore(mostPlayerDamage, npc, 1000, false);
-				if (Rnd.get(1, 100) <= 50) {
+				if (Rnd.chance() < 50) {
 					spawn(701455, 484.500f, 495.700f, 397.425f, (byte) 33);
 					sendMsgByRace(1401421, Race.PC_ALL, 0);
 				}

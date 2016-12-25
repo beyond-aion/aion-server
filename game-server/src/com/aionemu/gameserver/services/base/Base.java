@@ -126,7 +126,7 @@ public abstract class Base<T extends BaseLocation> {
 					PacketSendUtility.broadcastToMap(flag.getPosition().getWorldMapInstance(), assaultMsg);
 				scheduleAssaultDespawn();
 			} else {
-				if (Rnd.get(1, 100) <= 20)
+				if (Rnd.chance() < 20)
 					BaseService.getInstance().capture(id, chooseAssaultRace());
 				scheduleAssault();
 			}

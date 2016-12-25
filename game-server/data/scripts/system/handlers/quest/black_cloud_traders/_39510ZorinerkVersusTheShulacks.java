@@ -90,7 +90,7 @@ public class _39510ZorinerkVersusTheShulacks extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (Rnd.get(1, 100) < 20) {
+			if (Rnd.chance() < 20) {
 				Npc npc = (Npc) env.getVisibleObject();
 				npc.getController().delete();
 				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 205983, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);

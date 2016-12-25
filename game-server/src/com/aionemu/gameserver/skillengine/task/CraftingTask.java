@@ -100,7 +100,7 @@ public class CraftingTask extends AbstractCraftTask {
 					}
 			}
 
-			if ((critCount < maxCritCount) && (Rnd.get(1, 100) <= chance)) {
+			if ((critCount < maxCritCount) && (Rnd.chance() < chance)) {
 				critCount++;
 				crit = true;
 			}
@@ -135,7 +135,7 @@ public class CraftingTask extends AbstractCraftTask {
 		craftType = CraftType.NORMAL;
 		float multi = Rnd.get() + 1f;
 		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
-		boolean success = skillLvlDiff >= 41 || Rnd.get() * 100 > CraftConfig.MAX_CRAFT_FAILURE_CHANCE * failReduction;
+		boolean success = skillLvlDiff >= 41 || Rnd.chance() >= CraftConfig.MAX_CRAFT_FAILURE_CHANCE * failReduction;
 
 		float bonusModifier = 1;
 		switch (itemTemplate.getItemQuality()) {
@@ -154,7 +154,7 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 
 		if (success) {
-			if (Rnd.get() * 100 <= (15 + skillLvlDiff / 3f))
+			if (Rnd.chance() < (15 + skillLvlDiff / 3f))
 				craftType = CraftType.CRIT_BLUE; // LIGHT BLUE + 10-20%
 
 			int minStep = 70;

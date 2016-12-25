@@ -81,7 +81,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				if (template.getCaptchaRate() > 0)
 					rate = (int) (template.getCaptchaRate() * 0.1f);
 
-				if (Rnd.get(0, 100) < rate) {
+				if (Rnd.chance() < rate) {
 					player.setCaptchaWord(CAPTCHAUtil.getRandomWord());
 					player.setCaptchaImage(CAPTCHAUtil.createCAPTCHA(player.getCaptchaWord()).array());
 					PunishmentService.setIsNotGatherable(player, 0, true, SecurityConfig.CAPTCHA_EXTRACTION_BAN_TIME * 1000L);

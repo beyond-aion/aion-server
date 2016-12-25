@@ -25,7 +25,7 @@ public class TraitorKumbandaAI2 extends AggressiveNpcAI2 {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (Rnd.get(1, 100) < 5) {
+		if (Rnd.chance() < 5) {
 			spawnTimeAccelerator();
 			spawnKumbandaGhost();
 		}

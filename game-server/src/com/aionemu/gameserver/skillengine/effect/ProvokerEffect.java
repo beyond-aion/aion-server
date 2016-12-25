@@ -49,7 +49,7 @@ public class ProvokerEffect extends ShieldEffect {
 
 					@Override
 					public void attack(Creature creature) {
-						if (Rnd.get(1, 100) <= prob2) {
+						if (Rnd.chance() < prob2) {
 							Creature target = getProvokeTarget(provokeTarget, effector, creature);
 							createProvokedEffect(effector, target);
 						}
@@ -66,7 +66,7 @@ public class ProvokerEffect extends ShieldEffect {
 							if (!MathUtil.isIn3dRange(effector, creature, radius))
 								return;
 						}
-						if (Rnd.get(1, 100) <= prob2) {
+						if (Rnd.chance() < prob2) {
 							if (id == 0 || DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.PHYSICAL) {
 								Creature target = getProvokeTarget(provokeTarget, effector, creature);
 								createProvokedEffect(effector, target);
@@ -84,7 +84,7 @@ public class ProvokerEffect extends ShieldEffect {
 							if (!MathUtil.isIn3dRange(effector, creature, radius))
 								return;
 						}
-						if (Rnd.get(1, 100) <= prob2) {
+						if (Rnd.chance() < prob2) {
 							if (id != 0 && DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.MAGICAL) {
 								Creature target = getProvokeTarget(provokeTarget, effector, creature);
 								createProvokedEffect(effector, target);
@@ -102,7 +102,7 @@ public class ProvokerEffect extends ShieldEffect {
 							if (!MathUtil.isIn3dRange(effector, creature, radius))
 								return;
 						}
-						if (Rnd.get(1, 100) <= prob2) {
+						if (Rnd.chance() < prob2) {
 							Creature target = getProvokeTarget(provokeTarget, effector, creature);
 							createProvokedEffect(effector, target);
 						}
@@ -115,7 +115,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attack(Creature creature) {
 						if (PositionUtil.isBehind(creature, effector)) {
-							if (Rnd.get(1, 100) <= prob2) {
+							if (Rnd.chance() < prob2) {
 								Creature target = getProvokeTarget(provokeTarget, effector, creature);
 								createProvokedEffect(effector, target);
 							}

@@ -175,15 +175,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
 						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
-						if (Rnd.get(1, 100) <= cancel)
+						if (Rnd.chance() < cancel)
 							cancelCurrentSkill(attacker);
 					}
 				}
 			}
-		}
-
-		if (damage != 0 && notifyAttack) {
-			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
+			if (notifyAttack)
+				getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
 		// Reduce the damage to exactly what is required to ensure death.
@@ -234,7 +232,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				return;
 			// On retail this effect apply on each crit with 10% of base chance
 			// plus bonus effect penetration calculated above
-			if (Rnd.get(1, 100) > 10)
+			if (Rnd.chance() >= 10)
 				return;
 
 			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);
@@ -244,7 +242,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			Effect e = new Effect(attacker, attacked, template, template.getLvl(), 0);
 			e.initialize();
 			e.applyEffect();
-
 		}
 
 	}
@@ -287,8 +284,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		/**
 		 * Check all prerequisites
 		 */
-		if (!skipChecks && (target == null || getOwner().getLifeStats().isAlreadyDead() ||
-				getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
+		if (!skipChecks && (target == null || getOwner().getLifeStats().isAlreadyDead() || getOwner().getLifeStats().isAboutToDie()
+			|| !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 

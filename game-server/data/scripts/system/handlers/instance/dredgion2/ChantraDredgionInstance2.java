@@ -22,16 +22,16 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 		if (isInstanceStarted.compareAndSet(false, true)) {
 			sp(730311, 554.83081f, 173.87158f, 432.52448f, (byte) 0, 9, 720000);
 			sp(730312, 397.11661f, 184.29782f, 432.80328f, (byte) 0, 42, 720000);
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				sp(216889, 484.1199f, 314.08817f, 403.7213f, (byte) 5, 720000);
 			}
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				sp(216890, 499.52f, 598.67f, 390.49f, (byte) 59, 720000);
 			}
-			if (Rnd.get(1, 100) < 21) {
+			if (Rnd.chance() < 21) {
 				spawn(216887, 486.26382f, 909.48175f, 405.24463f, (byte) 90);
 			}
-			if (Rnd.get(1, 100) < 51) {
+			if (Rnd.chance() < 51) {
 				switch (Rnd.get(2)) {
 					case 0:
 						spawn(216888, 416.3429f, 282.32785f, 409.7311f, (byte) 80);

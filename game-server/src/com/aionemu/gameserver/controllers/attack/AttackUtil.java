@@ -371,7 +371,7 @@ public class AttackUtil {
 		}
 
 		if (randomDamage > 0) {
-			int randomChance = Rnd.get(1, 100);
+			float chance = Rnd.chance();
 			int dmgMod = Rnd.get(1, 3);
 			// TODO Hard fix
 			if (effect.getSkillId() == 20033)
@@ -391,7 +391,7 @@ public class AttackUtil {
 					}
 					break;
 				case 2:
-					if (randomChance <= 70)
+					if (chance < 70)
 						damage *= 0.6f;
 					else
 						damage *= 2;
@@ -410,7 +410,7 @@ public class AttackUtil {
 					}
 					break;
 				case 6:
-					if (randomChance <= 30)
+					if (chance < 30)
 						damage *= 2;
 					break;
 				default:

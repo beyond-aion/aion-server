@@ -88,7 +88,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 	}
 
 	private void blazeEngraving() {
-		if (Rnd.get(0, 100) < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null) {
+		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null) {
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100, true)));
 		}
 	}

@@ -44,8 +44,8 @@ public class ConquestOfferingAggressiveAI2 extends AggressiveNpcAI2 {
 	// spawn a shugo or a portal
 	private void spawnRandomNpc() {
 		int npcId = 0;
-		if (Rnd.get(0, 100) <= 55) {
-			if (Rnd.get(1, 100) <= 45) { //spawn a shugo
+		if (Rnd.chance() < 55) {
+			if (Rnd.chance() < 45) { // spawn a shugo
 				npcId = 856175 + Rnd.get(0, 3);
 			} else { //spawn a portal
 				npcId = getOwner().getWorldId() == 210050000 ? 833018 : 833021;

@@ -128,7 +128,7 @@ public class RiftService {
 	 */
 	public void prepareRiftOpening(int id, boolean guards) {
 		if (id != 210070000 && id != 220080000) {
-			if (!guards && Rnd.get(1, 100) > 50)
+			if (!guards && Rnd.chance() < 50)
 				return;
 		}
 		List<RiftLocation> possibleLocs = new FastTable<>();

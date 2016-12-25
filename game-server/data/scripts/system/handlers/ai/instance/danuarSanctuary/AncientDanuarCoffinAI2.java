@@ -26,7 +26,7 @@ public class AncientDanuarCoffinAI2 extends GeneralNpcAI2 {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		if (Rnd.get(0, 100) < 40) {
+		if (Rnd.chance() < 40) {
 			spawn(233085, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
 		}
 	}

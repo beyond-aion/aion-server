@@ -88,7 +88,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		if (Rnd.get(1, 100) > 50) {
+		if (Rnd.chance() < 50) {
 			switch (Rnd.get(1, 3)) {
 				case 1:
 					spawn(798223, 256.26215f, 512.9742f, 187.79453f, (byte) 0);
