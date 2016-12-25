@@ -52,20 +52,14 @@ public class PlayerEffectController extends EffectController {
 	private void updatePlayerIconsAndGroup(Effect effect, boolean broadcast) {
 		if (!effect.isPassive() && broadcast) {
 			updatePlayerEffectIcons(effect);
-			if (getOwner().isInTeam()) {
-				if (effect.getTargetSlotEnum().getId() == 8) {
-					return;
-				}
-				if (getOwner().isInGroup2()) {
-					PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
-					PlayerGroupService.updateGroupEffects(getOwner(), effect.getTargetSlotEnum().getId());
-					PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
-				} else if (getOwner().isInAlliance2()) {
-					PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
-					PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
-					PlayerAllianceService.updateAllianceEffects(getOwner(), effect.getTargetSlotEnum().getId());
-					PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
-				}
+			if (getOwner().isInGroup2()) {
+				PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
+				PlayerGroupService.updateGroupEffects(getOwner(), effect.getTargetSlot().getId());
+				PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
+			} else if (getOwner().isInAlliance2()) {
+				PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
+				PlayerAllianceService.updateAllianceEffects(getOwner(), effect.getTargetSlot().getId());
+				PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
 			}
 		}
 	}
