@@ -17,6 +17,10 @@ public class NoActionAI2 extends NpcAI2 {
 			case TARGETBASFELT2_DF1:
 			case DUMMY:
 			case DUMMY2:
+			case LF5_DUMMY1:
+			case LF5_DUMMY2:
+			case DF5_DUMMY1:
+			case DF5_DUMMY2:
 				getOwner().getController().loseAggro(true);
 		}
 	}
