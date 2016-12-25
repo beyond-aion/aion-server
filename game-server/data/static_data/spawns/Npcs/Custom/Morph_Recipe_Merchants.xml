@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spawns>
+    <!-- Sanctum -->
+    <spawn_map map_id="110010000">
+        <!-- Raphia -->
+        <spawn npc_id="832773" respawn_time="295">
+            <spot x="1887.0967" y="1526.392" z="590.1345" h="60"/>
+        </spawn>
+    </spawn_map>
+    <!-- Pandaemonium -->
+    <spawn_map map_id="120010000">
+        <!-- Roianan -->
+        <spawn npc_id="832787" respawn_time="295">
+            <spot x="1186.7118" y="1551.3257" z="213.96336" h="6"/>
+        </spawn>
+    </spawn_map>
+</spawns>
