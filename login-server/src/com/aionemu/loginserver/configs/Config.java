@@ -107,18 +107,6 @@ public class Config {
 	public static boolean ENABLE_BRUTEFORCE_PROTECTION;
 
 	/**
-	 * Enable\disable checking GS if it is still alive
-	 */
-	@Property(key = "loginserver.server.pingpong", defaultValue = "true")
-	public static boolean ENABLE_PINGPONG;
-
-	/**
-	 * Time between checks (in milliseconds)
-	 */
-	@Property(key = "loginserver.server.pingpong.delay", defaultValue = "3000")
-	public static int PINGPONG_DELAY;
-
-	/**
 	 * Log successful gameserver logins including connection data to DB
 	 */
 	@Property(key = "loginserver.log.logins", defaultValue = "false")

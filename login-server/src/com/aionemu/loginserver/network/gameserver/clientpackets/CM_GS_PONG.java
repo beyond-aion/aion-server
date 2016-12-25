@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
 /**
@@ -8,17 +7,12 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
  */
 public class CM_GS_PONG extends GsClientPacket {
 
-	private byte serverId;
-	private int pid;
-
 	@Override
 	protected void readImpl() {
-		serverId = readC();
-		pid = readD();
 	}
 
 	@Override
 	protected void runImpl() {
-		GameServerTable.pong(serverId, pid);
+		getConnection().getPingPongTask().onReceivePong();
 	}
 }

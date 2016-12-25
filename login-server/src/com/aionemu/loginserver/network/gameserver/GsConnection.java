@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.loginserver.GameServerInfo;
-import com.aionemu.loginserver.PingPongThread;
-import com.aionemu.loginserver.configs.Config;
+import com.aionemu.loginserver.PingPongTask;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 
@@ -58,7 +57,7 @@ public class GsConnection extends AConnection {
 	 */
 	private GameServerInfo gameServerInfo = null;
 
-	private PingPongThread pingThread;
+	private final PingPongTask pingPongTask = new PingPongTask(this);
 
 	/**
 	 * Constructor.
@@ -69,7 +68,6 @@ public class GsConnection extends AConnection {
 	 */
 	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
-
 	}
 
 	/**
@@ -108,8 +106,7 @@ public class GsConnection extends AConnection {
 
 	@Override
 	protected final void onDisconnect() {
-		if (Config.ENABLE_PINGPONG)
-			this.pingThread.closeMe();
+		pingPongTask.stop();
 		log.info(this + " disconnected");
 		if (gameServerInfo != null) {
 			gameServerInfo.setConnection(null);
@@ -144,7 +141,7 @@ public class GsConnection extends AConnection {
 	}
 
 	/**
-	 * Its guaranted that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
 	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
 	 * 
 	 * @param closePacket
@@ -176,9 +173,7 @@ public class GsConnection extends AConnection {
 	public void setState(State state) {
 		this.state = state;
 		if (state == State.AUTHED) {
-			if (Config.ENABLE_PINGPONG) {
-				ThreadPoolManager.getInstance().schedule(pingThread, 5000);
-			}
+			pingPongTask.start();
 		}
 	}
 
@@ -197,6 +192,10 @@ public class GsConnection extends AConnection {
 		this.gameServerInfo = gameServerInfo;
 	}
 
+	public PingPongTask getPingPongTask() {
+		return pingPongTask;
+	}
+
 	/**
 	 * @return String info about this connection
 	 */
@@ -209,19 +208,9 @@ public class GsConnection extends AConnection {
 		return sb.toString();
 	}
 
-	public void pong(int pid) {
-		if (Config.ENABLE_PINGPONG)
-			this.pingThread.onResponse(pid);
-	}
-
 	@Override
 	protected void initialized() {
 		state = State.CONNECTED;
-		String ip = getIP();
-
-		if (Config.ENABLE_PINGPONG)
-			pingThread = new PingPongThread(this);
-
-		log.info("Gameserver connection attempt from: " + ip);
+		log.info("Gameserver connection attempt from: " + getIP());
 	}
 }

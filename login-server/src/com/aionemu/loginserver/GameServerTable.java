@@ -153,13 +153,4 @@ public class GameServerTable {
 	private static GameServersDAO getDAO() {
 		return DAOManager.getDAO(GameServersDAO.class);
 	}
-
-	public static void pong(byte serverId, int pid) {
-		for (GameServerInfo gsi : getGameServers()) {
-			if (gsi.getId() == serverId) {
-				gsi.getConnection().pong(pid);
-				break;
-			}
-		}
-	}
 }
