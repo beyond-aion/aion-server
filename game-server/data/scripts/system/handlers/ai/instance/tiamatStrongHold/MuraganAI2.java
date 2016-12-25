@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -68,7 +69,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
 				break;
 		}
 		setStateIfNot(AIState.WALKING);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(838, 1317, 396);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {

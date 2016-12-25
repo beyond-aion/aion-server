@@ -128,7 +128,7 @@ public abstract class ShieldGeneratorAI2 extends GeneralNpcAI2 {
 				assaulter.add(npc);
 				npc.getSpawn().setWalkerId(walkerId);
 				WalkManager.startWalking((NpcAI2) npc.getAi2());
-				npc.setState(CreatureState.WALKING);
+				npc.setState(CreatureState.WALK_MODE);
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}
 		}, delay));

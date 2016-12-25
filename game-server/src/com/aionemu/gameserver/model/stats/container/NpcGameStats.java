@@ -102,7 +102,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			else
 				speed = getStatsTemplate().getRunSpeedFight();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
-		} else if (owner.isInState(CreatureState.WALKING)) {
+		} else if (owner.isInState(CreatureState.WALK_MODE)) {
 			float speed = 0;
 			if (owner.getWalkerGroup() != null && owner.getAi2().getSubState() == AISubState.WALK_PATH)
 				speed = getStatsTemplate().getGroupWalkSpeed();

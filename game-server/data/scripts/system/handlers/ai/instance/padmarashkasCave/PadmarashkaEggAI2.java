@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -128,7 +129,7 @@ public class PadmarashkaEggAI2 extends NpcAI2 {
 				if (padma != null) {
 					npc.setTarget(padma.getTarget());
 					((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
-					npc.setState(1);
+					npc.setState(CreatureState.ACTIVE, true);
 					npc.getMoveController().moveToTargetObject();
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}

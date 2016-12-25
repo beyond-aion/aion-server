@@ -114,7 +114,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	}
 
 	public void onWaveEventStart() {
-		sp(race == Race.ELYOS ? 209720 : 209785, 635.53f, 886.83f, 1600.72f, (byte) 30, "301390000_NPCPathFunction_Npc_Path06", CreatureState.WALKING,
+		sp(race == Race.ELYOS ? 209720 : 209785, 635.53f, 886.83f, 1600.72f, (byte) 30, "301390000_NPCPathFunction_Npc_Path06", CreatureState.WALK_MODE,
 			7000);
 		spawn(race == Race.ELYOS ? 209731 : 209796, 639.05f, 895.86f, 1600.41f, (byte) 30);
 		ThreadPoolManager.getInstance().schedule(() -> {
@@ -233,22 +233,22 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		waveAssaultTasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			switch (npcId) {
 				case 236204:
-					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_01", CreatureState.WALKING, 2000);
-					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_02", CreatureState.WALKING, 2000);
-					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_01", CreatureState.WALKING, 2000);
-					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_02", CreatureState.WALKING, 2000);
+					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 581.92f, 823.65f, 1609.64f, (byte) 15, "301390000_Wave_Top_Left_02", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 687.29f, 825.78f, 1609.66f, (byte) 45, "301390000_Wave_Bottom_Left_02", CreatureState.WALK_MODE, 2000);
 					break;
 				case 236205:
-					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_01", CreatureState.WALKING, 2000);
-					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_02", CreatureState.WALKING, 2000);
-					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_01", CreatureState.WALKING, 2000);
-					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_02", CreatureState.WALKING, 2000);
+					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 575.15f, 877.52f, 1600.89f, (byte) 0, "301390000_Wave_Top_Central_02", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 704.21f, 877.60f, 1604.55f, (byte) 60, "301390000_Wave_Bottom_Central_02", CreatureState.WALK_MODE, 2000);
 					break;
 				case 236206:
-					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_01", CreatureState.WALKING, 2000);
-					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_02", CreatureState.WALKING, 2000);
-					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_01", CreatureState.WALKING, 2000);
-					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_02", CreatureState.WALKING, 2000);
+					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_02", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_01", CreatureState.WALK_MODE, 2000);
+					sp(npcId, 690.59f, 932.85f, 1618.27f, (byte) 75, "301390000_Wave_Bottom_Right_02", CreatureState.WALK_MODE, 2000);
 					break;
 			}
 		}, 10000, 40000));
@@ -554,7 +554,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			npc.getSpawn().setWalkerId(walkerId);
 			WalkManager.startWalking((NpcAI2) npc.getAi2());
-			npc.setState(state.getId());
+			npc.setState(state, true);
 			PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 		}, delay);
 	}

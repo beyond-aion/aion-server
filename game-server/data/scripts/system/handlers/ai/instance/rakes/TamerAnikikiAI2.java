@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -37,7 +38,7 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
 			if (isStartedWalkEvent.compareAndSet(false, true)) {
 				getSpawnTemplate().setWalkerId("3004600001");
 				WalkManager.startWalking(this);
-				getOwner().setState(1);
+				getOwner().setState(CreatureState.ACTIVE, true);
 				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 				// Key Box
 				spawn(700553, 611, 481, 936, (byte) 90);
@@ -56,7 +57,7 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
 		super.handleMoveArrived();
 		if (getNpcId() == 219040) {
 			if (point == 8) {
-				getOwner().setState(64);
+				getOwner().setState(CreatureState.WALK_MODE, true);
 				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 			}
 			if (point == 12) {

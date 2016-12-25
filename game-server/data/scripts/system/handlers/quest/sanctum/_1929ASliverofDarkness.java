@@ -119,7 +119,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 						case SETPRO4:
 							if (var == 93) {
 								changeQuestStep(env, 93, 94); // 94
-								player.setState(CreatureState.FLIGHT_TELEPORT);
+								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(31001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 31001, 0));

@@ -728,7 +728,7 @@ public class PlayerController extends CreatureController<Player> {
 			player.setState(CreatureState.GLIDING);
 			player.getGameStats().updateStatsAndSpeedVisually();
 		} else {
-			player.unsetState(CreatureState.FLIGHT_TELEPORT);
+			player.unsetState(CreatureState.FLYING);
 			player.setFlightTeleportId(0);
 
 			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {

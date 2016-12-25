@@ -13,6 +13,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -107,7 +108,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 						setStateIfNot(AIState.WALKING);
 						getOwner().getMoveController().moveToPoint(getOwner().getSpawn().getX(), getOwner().getSpawn().getY(), getOwner().getSpawn().getZ());
 						WalkManager.startWalking(BrigadeGeneralTerathAI2.this);
-						getOwner().setState(1);
+						getOwner().setState(CreatureState.ACTIVE, true);
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 					}
 				}, 4000);
@@ -140,7 +141,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 							getOwner().getGameStats().renewLastChangeTargetTime();
 							getOwner().getGameStats().renewLastSkillTime();
 							setStateIfNot(AIState.WALKING);
-							getOwner().setState(1);
+							getOwner().setState(CreatureState.ACTIVE, true);
 							getOwner().getMoveController().moveToTargetObject();
 							PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 						}

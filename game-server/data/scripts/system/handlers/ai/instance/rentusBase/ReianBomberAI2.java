@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai2.AISubState;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,7 +32,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
 		super.handleSpawned();
 		getSpawnTemplate().setWalkerId("30028000024");
 		WalkManager.startWalking(this);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 	}
 

@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -150,7 +151,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 					for (Player player : instance.getPlayersInside()) {
 						npc.setTarget(player);
 						((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
-						npc.setState(1);
+						npc.setState(CreatureState.ACTIVE, true);
 						npc.getMoveController().moveToTargetObject();
 						PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 					}
@@ -187,7 +188,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 
 	private void moveToForward(final Npc npc, float x, float y, float z, boolean despawn) {
 		((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
-		npc.setState(1);
+		npc.setState(CreatureState.ACTIVE, true);
 		npc.getMoveController().moveToPoint(x, y, z);
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 		if (despawn) {

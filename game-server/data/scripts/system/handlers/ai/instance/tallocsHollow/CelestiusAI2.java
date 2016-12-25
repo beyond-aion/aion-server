@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -67,7 +68,7 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 	private void startRun(Npc npc, String walkId) {
 		npc.getSpawn().setWalkerId(walkId);
 		WalkManager.startWalking((NpcAI2) npc.getAi2());
-		npc.setState(1);
+		npc.setState(CreatureState.ACTIVE, true);
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 	}
 

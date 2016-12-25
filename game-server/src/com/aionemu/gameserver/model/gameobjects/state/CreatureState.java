@@ -5,37 +5,40 @@ package com.aionemu.gameserver.model.gameobjects.state;
  */
 public enum CreatureState {
 
-	ACTIVE(1), // basic 1
+	ACTIVE(1), // 1
 	FLYING(1 << 1), // 2
-	FLIGHT_TELEPORT(1 << 1), // 2
 	RESTING(1 << 2), // 4
-	DEAD(3 << 1), // 6
-	CHAIR(3 << 1), // 6
 	FLOATING_CORPSE(1 << 3), // 8
-	PRIVATE_SHOP(5 << 1), // 10
-	LOOTING(3 << 2), // 12
+	UNK(1 << 4), // 16
 	WEAPON_EQUIPPED(1 << 5), // 32
-	WALKING(1 << 6), // 64
-	UNK(1 << 4),
-	NPC_IDLE(1 << 6), // 64 (for npc)
+	WALK_MODE(1 << 6), // 64 (set = walking, unset = running)
 	POWERSHARD(1 << 7), // 128
 	TREATMENT(1 << 8), // 256
-	GLIDING(1 << 9); // 512
+	GLIDING(1 << 9), // 512
 
-	/**
-	 * Standing, path flying, free flying, riding, sitting, sitting on chair, dead, fly dead, private shop, looting, fly looting, default
-	 */
+	// multibit (id = combined value of multiple single-bit states)
+	CHAIR(FLYING.getId() + RESTING.getId(), true), // 2 + 4 (need to stand near a chair, otherwise shows resting state)
+	DEAD(ACTIVE.getId() + FLYING.getId() + RESTING.getId()), // 1 + 2 + 4
+	PRIVATE_SHOP(ACTIVE.getId() + FLYING.getId() + FLOATING_CORPSE.getId(), true), // 1 + 2 + 8
+	LOOTING(RESTING.getId() + FLOATING_CORPSE.getId()); // 4 + 8
 
 	private int id;
+	private boolean mustMatchExact;
 
 	private CreatureState(int id) {
-		this.id = id;
+		this(id, false);
 	}
 
-	/**
-	 * @return the id
-	 */
+	private CreatureState(int id, boolean mustMatchExact) {
+		this.id = id;
+		this.mustMatchExact = mustMatchExact;
+	}
+
 	public int getId() {
 		return id;
+	}
+
+	public boolean mustMatchExact() {
+		return mustMatchExact;
 	}
 }

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -70,7 +71,7 @@ public class ImprisonedReianAI2 extends GeneralNpcAI2 {
 					if (isSaved.compareAndSet(false, true)) {
 						getSpawnTemplate().setWalkerId(walkerId);
 						WalkManager.startWalking(this);
-						getOwner().setState(1);
+						getOwner().setState(CreatureState.ACTIVE, true);
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 						switch (Rnd.get(1, 10)) {
 							case 1:

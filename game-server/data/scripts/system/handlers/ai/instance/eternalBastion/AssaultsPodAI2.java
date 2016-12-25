@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -160,7 +161,7 @@ public class AssaultsPodAI2 extends NpcAI2 {
 			public void run() {
 				npc.getSpawn().setWalkerId(walker);
 				WalkManager.startWalking((NpcAI2) npc.getAi2());
-				npc.setState(1);
+				npc.setState(CreatureState.ACTIVE, true);
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}
 		}, 3000);
@@ -177,7 +178,7 @@ public class AssaultsPodAI2 extends NpcAI2 {
 					public void run() {
 						npc.getSpawn().setWalkerId(walker);
 						WalkManager.startWalking((NpcAI2) npc.getAi2());
-						npc.setState(1);
+						npc.setState(CreatureState.ACTIVE, true);
 						PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 					}
 				}, 3000);

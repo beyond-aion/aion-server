@@ -110,7 +110,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-						player.setState(CreatureState.FLIGHT_TELEPORT);
+						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(55001);
 						PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 55001, 0));

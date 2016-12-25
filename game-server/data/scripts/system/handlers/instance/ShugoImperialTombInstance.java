@@ -1281,9 +1281,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 					npc.getSpawn().setWalkerId(walkerId);
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
 					if (isRun) {
-						npc.setState(1);
+						npc.setState(CreatureState.ACTIVE, true);
 					} else {
-						npc.setState(CreatureState.WALKING);
+						npc.setState(CreatureState.WALK_MODE);
 					}
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}

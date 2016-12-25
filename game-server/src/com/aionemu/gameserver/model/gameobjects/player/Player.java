@@ -1021,7 +1021,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public boolean isUsingFlyTeleport() {
-		return isInState(CreatureState.FLIGHT_TELEPORT) && flightTeleportId != 0;
+		return isInState(CreatureState.FLYING) && flightTeleportId != 0;
 	}
 
 	public boolean isGM() {

@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
@@ -129,7 +130,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 						setStateIfNot(AIState.FIGHT);
 						setSubStateIfNot(AISubState.NONE);
 						WalkManager.startForcedWalking(this, 188.17f, 414.06f, 260.75488f);
-						getOwner().setState(1);
+						getOwner().setState(CreatureState.ACTIVE, true);
 						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 					}, 1200);
 				}

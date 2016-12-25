@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -55,7 +56,7 @@ public class GatesSummonedAI2 extends GeneralNpcAI2 {
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
 		setStateIfNot(AIState.FOLLOWING);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		AI2Actions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(216960));
 		getMoveController().moveToTargetObject();
 	}

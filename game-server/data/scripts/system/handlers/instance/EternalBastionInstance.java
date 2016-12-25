@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -609,7 +610,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				if (!isInstanceDestroyed) {
 					npc.getSpawn().setWalkerId(walker);
 					WalkManager.startWalking((NpcAI2) npc.getAi2());
-					npc.setState(1);
+					npc.setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}
 			}

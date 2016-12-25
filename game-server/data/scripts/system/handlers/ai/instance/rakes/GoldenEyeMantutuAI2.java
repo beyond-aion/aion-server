@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -45,7 +46,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 			getOwner().setTarget(npc);
 			setStateIfNot(AIState.FOLLOWING);
 			getMoveController().moveToTargetObject();
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 		}
 	}

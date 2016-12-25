@@ -100,7 +100,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 							break;
 						case SETPRO5:
 							if (var == 4) {
-								player.setState(CreatureState.FLIGHT_TELEPORT);
+								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));

@@ -182,10 +182,10 @@ public class CM_EMOTION extends AionClientPacket {
 			case WALK:
 				if (player.isFlying()) // cannot toggle walk when flying or gliding
 					return;
-				player.setState(CreatureState.WALKING);
+				player.setState(CreatureState.WALK_MODE);
 				break;
 			case RUN:
-				player.unsetState(CreatureState.WALKING);
+				player.unsetState(CreatureState.WALK_MODE);
 				break;
 			case OPEN_DOOR:
 			case CLOSE_DOOR:

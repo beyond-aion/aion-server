@@ -104,9 +104,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			}
 		} else if (owner.isInFlyingState())
 			movementSpeed = getStat(StatEnum.FLY_SPEED, Math.round(pst.getFlySpeed() * 1000));
-		else if (owner.isInState(CreatureState.FLIGHT_TELEPORT) && !owner.isInState(CreatureState.RESTING))
+		else if (owner.isInState(CreatureState.FLYING) && !owner.isInState(CreatureState.RESTING))
 			movementSpeed = getStat(StatEnum.SPEED, 12000);
-		else if (owner.isInState(CreatureState.WALKING))
+		else if (owner.isInState(CreatureState.WALK_MODE))
 			movementSpeed = getStat(StatEnum.SPEED, Math.round(pst.getWalkSpeed() * 1000));
 		else
 			movementSpeed = getStat(StatEnum.SPEED, Math.round(pst.getRunSpeed() * 1000));

@@ -22,7 +22,7 @@ public class AethericFieldBlaststoneAI2 extends NpcAI2 {
 		if (getNpcId() == 856305) {
 			getOwner().getSpawn().setWalkerId("301500000_clown_path");
 			WalkManager.startWalking(this);
-			getOwner().setState(CreatureState.WALKING);
+			getOwner().setState(CreatureState.WALK_MODE);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		}
 	}

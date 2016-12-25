@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -252,7 +253,7 @@ public class _14026ALoneDefense extends QuestHandler {
 		if (target != null) {
 			spawn.setTarget(target);
 			((AbstractAI) spawn.getAi2()).setStateIfNot(AIState.WALKING);
-			spawn.setState(1);
+			spawn.setState(CreatureState.ACTIVE, true);
 			spawn.getMoveController().moveToTargetObject();
 			PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.START_EMOTE2, 0, spawn.getObjectId()));
 		}

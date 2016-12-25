@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -33,7 +34,7 @@ public class SuramaTheTraitorAI2 extends GeneralNpcAI2 {
 
 	private void moveToRaksha() {
 		setStateIfNot(AIState.WALKING);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(651, 1319, 487);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {

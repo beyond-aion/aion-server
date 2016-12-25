@@ -174,7 +174,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			public void run() {
 				npc.getSpawn().setWalkerId(walkern);
 				WalkManager.startWalking((NpcAI2) npc.getAi2());
-				npc.setState(CreatureState.WALKING.getId());
+				npc.setState(CreatureState.WALK_MODE, true);
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}
 

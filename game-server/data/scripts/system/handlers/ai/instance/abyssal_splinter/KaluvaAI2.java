@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.ai.Percentage;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,7 +32,7 @@ public class KaluvaAI2 extends SummonerAI2 {
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
 		setStateIfNot(AIState.FOLLOWING);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 		AI2Actions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(281902));
 		getMoveController().moveToTargetObject();

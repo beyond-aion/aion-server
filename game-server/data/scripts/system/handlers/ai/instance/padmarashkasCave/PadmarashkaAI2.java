@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai2.AbstractAI;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -107,7 +108,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				npc.setTarget(getTarget());
 				((AbstractAI) npc.getAi2()).setStateIfNot(AIState.WALKING);
-				npc.setState(1);
+				npc.setState(CreatureState.ACTIVE, true);
 				npc.getMoveController().moveToTargetObject();
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}

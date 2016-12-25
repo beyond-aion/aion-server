@@ -120,7 +120,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 							return sendQuestDialog(env, 2716);
 						case SETPRO6:
 							// TODO: Find out, if any effect or so is getting applied to player
-							player.setState(CreatureState.FLIGHT_TELEPORT);
+							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(1001);
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));

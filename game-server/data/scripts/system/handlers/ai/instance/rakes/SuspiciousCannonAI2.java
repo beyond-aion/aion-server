@@ -18,7 +18,7 @@ public class SuspiciousCannonAI2 extends ActionItemNpcAI2 {
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		int teleportId = getOwner().getNpcId() == 730769 ? 247001 : 73001;
-		player.setState(CreatureState.FLIGHT_TELEPORT);
+		player.setState(CreatureState.FLYING);
 		player.unsetState(CreatureState.ACTIVE);
 		player.setFlightTeleportId(teleportId);
 		PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, teleportId, 0));

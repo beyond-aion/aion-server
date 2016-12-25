@@ -123,7 +123,7 @@ public class _14047ChainingMemories extends QuestHandler {
 							changeQuestStep(env, 3, 4);
 						}
 						closeDialogWindow(env);
-						player.setState(CreatureState.FLIGHT_TELEPORT);
+						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(71001);
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 71001, 0));
@@ -150,7 +150,7 @@ public class _14047ChainingMemories extends QuestHandler {
 							changeQuestStep(env, 4, 5);
 						}
 						closeDialogWindow(env);
-						player.setState(CreatureState.FLIGHT_TELEPORT);
+						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(72001);
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 72001, 0));

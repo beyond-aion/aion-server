@@ -153,7 +153,7 @@ public class TeleportService2 {
 				player.setCurrentFlypath(flypath);
 			}
 			player.unsetPlayerMode(PlayerMode.RIDE);
-			player.setState(CreatureState.FLIGHT_TELEPORT);
+			player.setState(CreatureState.FLYING);
 			player.unsetState(CreatureState.ACTIVE);
 			player.setFlightTeleportId(location.getTeleportId());
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, location.getTeleportId(), 0), true);

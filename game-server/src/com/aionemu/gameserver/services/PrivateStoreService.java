@@ -101,6 +101,7 @@ public class PrivateStoreService {
 	public static void closePrivateStore(Player activePlayer) {
 		activePlayer.setStore(null);
 		activePlayer.unsetState(CreatureState.PRIVATE_SHOP);
+		activePlayer.setState(CreatureState.ACTIVE);
 		PacketSendUtility.broadcastPacket(activePlayer, new SM_EMOTION(activePlayer, EmotionType.CLOSE_PRIVATESHOP, 0, 0), true);
 	}
 

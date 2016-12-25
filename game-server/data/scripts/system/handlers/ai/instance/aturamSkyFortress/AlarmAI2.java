@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -41,7 +42,7 @@ public class AlarmAI2 extends AggressiveNpcAI2 {
 					PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_Station_DoorCtrl_Evileye());
 					getSpawnTemplate().setWalkerId("3002400002");
 					WalkManager.startWalking(this);
-					getOwner().setState(1);
+					getOwner().setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 					getPosition().getWorldMapInstance().getDoors().get(128).setOpen(true);
 					getPosition().getWorldMapInstance().getDoors().get(138).setOpen(true);

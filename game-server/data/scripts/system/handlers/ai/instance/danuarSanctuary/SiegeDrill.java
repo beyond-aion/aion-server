@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -92,7 +93,7 @@ public class SiegeDrill extends NpcAI2 {
 		if (isUsed.compareAndSet(false, true)) {
 			getOwner().getSpawn().setWalkerId("2A2D7F6EA351DCCEAA3CD097B9311ED308DCD2EC");
 			WalkManager.startWalking(this);
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
 			ThreadPoolManager.getInstance().schedule((Runnable) () -> {
 				Npc npc = getPosition().getWorldMapInstance().getNpc(233189);

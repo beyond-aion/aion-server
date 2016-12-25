@@ -288,7 +288,8 @@ public abstract class Creature extends VisibleObject {
 	 * @return
 	 */
 	public boolean canAttack() {
-		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING) && !isInState(CreatureState.PRIVATE_SHOP));
+		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) && !isCasting() && !isInState(CreatureState.RESTING)
+			&& !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
 	/**
@@ -299,11 +300,20 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * @param state
-	 *          the state to set
+	 * Sets the given state while keeping all present ones
 	 */
 	public void setState(CreatureState state) {
-		this.state |= state.getId();
+		setState(state, false);
+	}
+
+	/**
+	 * Sets the given state. If {@code replace} is true, previous states will be completely replaced.
+	 */
+	public void setState(CreatureState state, boolean replace) {
+		if (replace)
+			this.state = state.getId();
+		else
+			this.state |= state.getId();
 	}
 
 	/**
@@ -319,7 +329,10 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInState(CreatureState state) {
-		return (this.state & state.getId()) == state.getId();
+		if (state.mustMatchExact())
+			return this.state == state.getId();
+		else
+			return (this.state & state.getId()) == state.getId();
 	}
 
 	/**

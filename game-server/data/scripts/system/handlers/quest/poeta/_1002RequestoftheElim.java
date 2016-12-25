@@ -134,7 +134,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 					switch (dialog) {
 						case QUEST_SELECT:
 							if (var == 20) {
-								player.setState(CreatureState.FLIGHT_TELEPORT);
+								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));

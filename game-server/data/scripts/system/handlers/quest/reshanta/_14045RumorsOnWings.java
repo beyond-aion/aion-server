@@ -76,7 +76,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 							return false;
 						case SETPRO2:
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-							player.setState(CreatureState.FLIGHT_TELEPORT);
+							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(57001);
 							PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 57001, 0));
@@ -112,7 +112,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-								player.setState(CreatureState.FLIGHT_TELEPORT);
+								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(58001);
 								PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 58001, 0));

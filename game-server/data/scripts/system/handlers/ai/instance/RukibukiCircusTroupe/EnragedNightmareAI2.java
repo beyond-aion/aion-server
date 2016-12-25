@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -64,13 +65,13 @@ public class EnragedNightmareAI2 extends AggressiveNpcAI2 {
 		if (getOwner().getPosition().getX() == 521.585f && getOwner().getPosition().getY() == 510.16528f) {
 			((AbstractAI) getOwner().getAi2()).setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI2) getOwner().getAi2());
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(521.60913f, 551.00684f, 198.75f);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		} else {
 			((AbstractAI) getOwner().getAi2()).setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI2) getOwner().getAi2());
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(525.3831f, 585.3808f, 199.0476f);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		}

@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 
 import ai.AggressiveNpcAI2;
 
@@ -42,7 +43,7 @@ public class NidalberBalaurAI2 extends AggressiveNpcAI2 {
 
 	private void moveToQuestNpc() {
 		setStateIfNot(AIState.WALKING);
-		getOwner().setState(1);
+		getOwner().setState(CreatureState.ACTIVE, true);
 		getOwner().getMoveController().moveToPoint(getSpawnTemplate().getX(), getSpawnTemplate().getY(), getSpawnTemplate().getZ());
 	}
 

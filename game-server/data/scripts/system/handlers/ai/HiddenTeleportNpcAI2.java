@@ -39,7 +39,7 @@ public class HiddenTeleportNpcAI2 extends NpcAI2 {
 		FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate((short) teleId);
 		player.setCurrentFlypath(flypath);
 		player.unsetPlayerMode(PlayerMode.RIDE);
-		player.setState(CreatureState.FLIGHT_TELEPORT);
+		player.setState(CreatureState.FLYING);
 		player.unsetState(CreatureState.ACTIVE);
 		player.setFlightTeleportId(teleId * 1000 + 1);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, teleId * 1000 + 1, 0), true);

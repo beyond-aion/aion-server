@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -22,7 +23,7 @@ public class AttakersMobsAI2 extends AggressiveNpcAI2 {
 	protected void handleMoveValidate() {
 		super.handleMoveValidate();
 		if (getOwner().getAi2().getState() == AIState.WALKING && getOwner().getState() != 1) {
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		}
 	}

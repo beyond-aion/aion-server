@@ -54,7 +54,7 @@ public class _2443TaisanMessage extends QuestHandler {
 						}
 						case SETPRO1:
 						case QUEST_ACCEPT_1: {
-							player.setState(CreatureState.FLIGHT_TELEPORT);
+							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(30001);
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 30001, 0));

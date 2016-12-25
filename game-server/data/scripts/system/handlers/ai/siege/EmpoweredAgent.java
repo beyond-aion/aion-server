@@ -12,6 +12,7 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
@@ -161,7 +162,7 @@ public class EmpoweredAgent extends AggressiveNpcAI2 {
 			getOwner().getGameStats().renewLastChangeTargetTime();
 			getOwner().getGameStats().renewLastSkillTime();
 			setStateIfNot(AIState.FIGHT);
-			getOwner().setState(1);
+			getOwner().setState(CreatureState.ACTIVE, true);
 			handleMoveValidate();
 			EmoteManager.emoteStartAttacking(getOwner());
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));

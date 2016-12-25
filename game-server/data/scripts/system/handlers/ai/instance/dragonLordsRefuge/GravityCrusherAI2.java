@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -34,7 +35,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
 			public void run() {
 				AI2Actions.targetCreature(GravityCrusherAI2.this, inastance.getPlayersInside().get(Rnd.get(inastance.getPlayersInside().size() - 1)));
 				setStateIfNot(AIState.WALKING);
-				getOwner().setState(1);
+				getOwner().setState(CreatureState.ACTIVE, true);
 				getMoveController().moveToTargetObject();
 				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 				transform();

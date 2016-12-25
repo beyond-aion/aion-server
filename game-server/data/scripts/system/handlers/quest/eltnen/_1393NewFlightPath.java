@@ -57,7 +57,7 @@ public class _1393NewFlightPath extends QuestHandler {
 			if (targetId == 204041) {
 				switch (env.getDialog()) {
 					case SETPRO1:
-						player.setState(CreatureState.FLIGHT_TELEPORT);
+						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(17001);
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 17001, 0));

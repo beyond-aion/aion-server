@@ -221,7 +221,7 @@ public class _2008Ascension extends QuestHandler {
 					case QUEST_SELECT:
 						if (var == 99) {
 							SkillEngine.getInstance().applyEffectDirectly(257, player, player, 0);
-							player.setState(CreatureState.FLIGHT_TELEPORT);
+							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(3001);
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));

@@ -294,7 +294,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		final Stat2 stat = owner.getGameStats().getMovementSpeed();
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			mask = stat.getBonus() < 0 ? MovementMask.NPC_RUN_FAST : MovementMask.NPC_RUN_SLOW;
-		} else if (owner.isInState(CreatureState.WALKING) || owner.isInState(CreatureState.ACTIVE)) {
+		} else if (owner.isInState(CreatureState.WALK_MODE) || owner.isInState(CreatureState.ACTIVE)) {
 			mask = stat.getBonus() < 0 ? MovementMask.NPC_WALK_FAST : MovementMask.NPC_WALK_SLOW;
 		}
 		if (owner.isFlying())
