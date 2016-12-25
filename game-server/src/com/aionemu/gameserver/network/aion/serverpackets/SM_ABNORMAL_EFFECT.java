@@ -28,7 +28,8 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 	public SM_ABNORMAL_EFFECT(Creature effected, int abnormals, Collection<Effect> effects, int slots) {
 		this.effected = effected;
 		this.abnormals = abnormals;
-		this.filtered = slots == SkillTargetSlot.FULLSLOTS ? effects : effects.stream().filter(e -> (slots & e.getTargetSlotEnum().getId()) != 0).collect(Collectors.toList());
+		this.filtered = slots == SkillTargetSlot.FULLSLOTS ? effects
+			: effects.stream().filter(e -> (slots & e.getTargetSlot().getId()) != 0).collect(Collectors.toList());
 		this.slots = slots;
 		this.effectType = effected instanceof Player ? 2 : 1;
 	}
@@ -50,7 +51,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 				case 1:
 					writeH(effect.getSkillId());
 					writeC(effect.getSkillLevel());
-					writeC(effect.getTargetSlot());
+					writeC(effect.getTargetSlot().ordinal());
 					writeD(effect.getRemainingTime());
 					break;
 				default:

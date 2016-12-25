@@ -15,7 +15,6 @@ public enum SkillTargetSlot {
 	CHANT(4),
 	SPEC(8),
 	SPEC2(16), // soul sickness
-	SPECIAL2(16), // soul sickness dispel
 	BOOST(32),
 	NOSHOW(64),
 	NONE(128);
@@ -30,5 +29,18 @@ public enum SkillTargetSlot {
 
 	public int getId() {
 		return id;
+	}
+
+	public static SkillTargetSlot of(DispelSlotType dispelSlotType) {
+		switch (dispelSlotType) {
+			case BUFF:
+				return BUFF;
+			case DEBUFF:
+				return DEBUFF;
+			case SPECIAL2:
+				return SPEC2;
+			default:
+				return null;
+		}
 	}
 }

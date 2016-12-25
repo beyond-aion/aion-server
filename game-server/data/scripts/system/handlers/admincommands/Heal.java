@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -41,7 +41,7 @@ public class Heal extends AdminCommand {
 		if (params == null || params.length < 1) {
 			creature.getLifeStats().increaseHp(TYPE.HP, creature.getLifeStats().getMaxHp(), 0, LOG.REGULAR);
 			creature.getLifeStats().increaseMp(TYPE.HEAL_MP, creature.getLifeStats().getMaxMp(), 0, LOG.MPHEAL);
-			creature.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
+			creature.getEffectController().removeByDispelSlotType(DispelSlotType.SPECIAL2);
 			PacketSendUtility.sendMessage(player, creature.getName() + " has been refreshed !");
 		} else if (params[0].equals("dp") && creature instanceof Player) {
 			Player targetPlayer = (Player) creature;

@@ -58,7 +58,7 @@ import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.trade.PricesService;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -177,7 +177,7 @@ public class DialogService {
 				case RECOVERY:// soul healing (2.5)
 					final long expLost = player.getCommonData().getExpRecoverable();
 					if (expLost == 0) {
-						player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
+						player.getEffectController().removeByDispelSlotType(DispelSlotType.SPECIAL2);
 						player.getCommonData().setDeathCount(0);
 					}
 					final double factor = (expLost < 1000000 ? 0.25 - (0.00000015 * expLost) : 0.1);
@@ -192,7 +192,7 @@ public class DialogService {
 								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SUCCESS_RECOVER_EXPERIENCE());
 								player.getCommonData().resetRecoverableExp();
 								player.getInventory().decreaseKinah(price, ItemUpdateType.STATS_CHANGE);
-								player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
+								player.getEffectController().removeByDispelSlotType(DispelSlotType.SPECIAL2);
 								player.getCommonData().setDeathCount(0);
 							} else {
 								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));

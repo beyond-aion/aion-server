@@ -96,7 +96,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 					writeD(effect.getEffectorId()); // casterid
 					writeH(effect.getSkillId()); // spellid
 					writeC(effect.getSkillLevel()); // spell level
-					writeC(effect.getTargetSlot()); // unk ?
+					writeC(effect.getTargetSlot().ordinal()); // unk ?
 					writeD(effect.getRemainingTime()); // estimatedtime
 				}
 
@@ -118,7 +118,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 					writeD(effect.getEffectorId()); // casterid
 					writeH(effect.getSkillId()); // spellid
 					writeC(effect.getSkillLevel()); // spell level
-					writeC(effect.getTargetSlot()); // unk ?
+					writeC(effect.getTargetSlot().ordinal()); // unk ?
 					writeD(effect.getRemainingTime()); // estimatedtime
 				}
 				for (SkillTargetSlot targetSlot : SkillTargetSlot.values()) {

@@ -72,7 +72,7 @@ public class PlayerEffectController extends EffectController {
 
 	@Override
 	public void updatePlayerEffectIcons(Effect effect) {
-		int slot = effect != null ? effect.getTargetSlotEnum().getId() : SkillTargetSlot.FULLSLOTS;
+		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();
 		PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(effects, abnormals, slot));
 	}
@@ -86,7 +86,7 @@ public class PlayerEffectController extends EffectController {
 	private boolean checkDuelCondition(Effect effect) {
 		Creature creature = effect.getEffector();
 		if (creature instanceof Player) {
-			if (!getOwner().isEnemy(creature) && effect.getTargetSlot() == SkillTargetSlot.DEBUFF.ordinal()) {
+			if (!getOwner().isEnemy(creature) && effect.getTargetSlot() == SkillTargetSlot.DEBUFF) {
 				return true;
 			}
 		}

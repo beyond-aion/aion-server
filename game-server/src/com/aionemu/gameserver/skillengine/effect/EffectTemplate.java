@@ -657,15 +657,11 @@ public abstract class EffectTemplate {
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		EffectType temp = null;
+		String effectName = this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase();
 		try {
-			temp = EffectType.valueOf(this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "")
-				.toUpperCase());
+			effectType = EffectType.valueOf(effectName);
 		} catch (Exception e) {
-			log.info("missing effectype for "
-				+ this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase());
+			throw new IllegalArgumentException("missing effectype: " + effectName);
 		}
-
-		this.effectType = temp;
 	}
 }

@@ -1,8 +1,13 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * @author kecimis
  */
+@XmlType(name = "EffectType")
+@XmlEnum
 public enum EffectType {
 
 	ABSOLUTEEXPPOINTHEALINSTANT,

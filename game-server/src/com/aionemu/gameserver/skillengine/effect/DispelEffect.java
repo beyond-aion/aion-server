@@ -5,31 +5,31 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.skillengine.model.DispelType;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 
 /**
  * @author ATracer
  */
 public class DispelEffect extends EffectTemplate {
 
-	@XmlElement(type = Integer.class)
-	protected List<Integer> effectids;
 	@XmlElement
-	protected List<String> effecttype;
+	private List<Integer> effectids;
 	@XmlElement
-	protected List<String> slottype;
+	private List<EffectType> effecttype;
+	@XmlElement
+	private List<DispelSlotType> slottype;
 	@XmlAttribute
-	protected DispelType dispeltype;
+	private DispelType dispeltype;
 	@XmlAttribute
-	protected int count;
+	private int count;
 	@XmlAttribute
-	protected int dpower;
+	private int dpower;
 	@XmlAttribute
-	protected int power = 100;
+	private int power = 100;
 	@XmlAttribute(name = "dispel_level")
-	protected int dispelLevel = 100;
+	private int dispelLevel = 100;
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -61,32 +61,22 @@ public class DispelEffect extends EffectTemplate {
 				}
 				break;
 			case EFFECTIDRANGE:
-				for (int i = effectids.get(0); i <= effectids.get(1); i++) {
-					effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, Integer.toString(i), this.count, this.dispelLevel, finalPower);
+				int removedEffectCount = 0;
+				for (int effectId = effectids.get(0); effectId <= effectids.get(1); effectId++) {
+					if (removedEffectCount == count)
+						break;
+					if (effect.getEffected().getEffectController().removeByEffectId(effectId, dispelLevel, finalPower))
+						removedEffectCount++;
 				}
 				break;
 			case EFFECTTYPE:
-				for (String type : effecttype) {
-					EffectType temp = null;
-					try {
-						temp = EffectType.valueOf(type);
-					} catch (Exception e) {
-						log.error("wrong effecttype in dispeleffect " + type);
-					}
-					if (temp != null)
-						effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, temp.toString(), this.count, this.dispelLevel, finalPower);
+				for (EffectType type : effecttype) {
+					effect.getEffected().getEffectController().removeByDispelEffect(type, null, count, dispelLevel, finalPower);
 				}
 				break;
 			case SLOTTYPE:
-				for (String type : slottype) {
-					SkillTargetSlot temp = null;
-					try {
-						temp = SkillTargetSlot.valueOf(type);
-					} catch (Exception e) {
-						log.error("wrong slottype in dispeleffect " + type);
-					}
-					if (temp != null)
-						effect.getEffected().getEffectController().removeByDispelEffect(dispeltype, temp.toString(), this.count, this.dispelLevel, finalPower);
+				for (DispelSlotType type : slottype) {
+					effect.getEffected().getEffectController().removeByDispelEffect(null, type, count, dispelLevel, finalPower);
 				}
 				break;
 		}

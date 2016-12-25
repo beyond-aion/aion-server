@@ -275,11 +275,7 @@ public class Effect implements StatOwner {
 		return skillTemplate.getTargetSlot() == SkillTargetSlot.CHANT;
 	}
 
-	public int getTargetSlot() {
-		return skillTemplate.getTargetSlot().ordinal();
-	}
-
-	public SkillTargetSlot getTargetSlotEnum() {
+	public SkillTargetSlot getTargetSlot() {
 		return skillTemplate.getTargetSlot();
 	}
 

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DUEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.summons.SummonsService;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -176,7 +176,7 @@ public class DuelService {
 			/**
 			 * all debuffs are removed from winner, but buffs will remain Stop casting or skill use
 			 */
-			opponent.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
+			opponent.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 			opponent.getController().cancelCurrentSkill(null);
 			// opponent.getAggroList().clear();
 
@@ -226,7 +226,7 @@ public class DuelService {
 		/**
 		 * all debuffs are removed from loser Stop casting or skill use
 		 */
-		player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
+		player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 		player.getController().cancelCurrentSkill(null);
 
 		int opponnentId = duels.get(player.getObjectId());
@@ -236,7 +236,7 @@ public class DuelService {
 			/**
 			 * all debuffs are removed from winner, but buffs will remain Stop casting or skill use
 			 */
-			opponent.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
+			opponent.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 			opponent.getController().cancelCurrentSkill(null);
 		} else {
 			log.warn("CHECKPOINT : duel opponent is already out of world");

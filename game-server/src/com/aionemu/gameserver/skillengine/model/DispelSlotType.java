@@ -4,15 +4,14 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author ATracer
+ * @author Neon
  */
-@XmlType(name = "DispelType")
+@XmlType(name = "DispelSlotType")
 @XmlEnum
-public enum DispelType {
+public enum DispelSlotType {
 
-	EFFECTID,
-	EFFECTIDRANGE,
-	EFFECTTYPE,
-	SLOTTYPE;
+	BUFF,
+	DEBUFF,
+	SPECIAL2;
 
 }

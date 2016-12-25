@@ -20,7 +20,7 @@ import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.TransformEffect;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
-import com.aionemu.gameserver.skillengine.model.DispelType;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectResult;
 import com.aionemu.gameserver.skillengine.model.SkillSubType;
@@ -141,11 +141,11 @@ public class EffectController {
 			}
 
 			// max 3 aura effects or 1 toggle skill in noshoweffects
-			if (nextEffect.isToggle() && nextEffect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW) {
+			if (nextEffect.isToggle() && nextEffect.getTargetSlot() == SkillTargetSlot.NOSHOW) {
 				int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
-				//Rangers & Riders are allowed to use 2 Toggle skills. There might be a pattern.
-				if (nextEffect.getEffector() instanceof Player && (((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER ||
-						((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RIDER)) {
+				// Rangers & Riders are allowed to use 2 Toggle skills. There might be a pattern.
+				if (nextEffect.getEffector() instanceof Player && (((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER
+					|| ((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RIDER)) {
 					mts = 2;
 				}
 				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffects();
@@ -224,7 +224,7 @@ public class EffectController {
 		if (effect.isPassive())
 			return passiveEffectMap;
 
-		if (effect.isToggle() && effect.getTargetSlotEnum() == SkillTargetSlot.NOSHOW)
+		if (effect.isToggle() && effect.getTargetSlot() == SkillTargetSlot.NOSHOW)
 			return noshowEffects;
 
 		return abnormalEffectMap;
@@ -257,7 +257,7 @@ public class EffectController {
 	}
 
 	public void broadCastEffects(Effect effect) {
-		int slot = effect != null ? effect.getTargetSlotEnum().getId() : SkillTargetSlot.FULLSLOTS;
+		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		List<Effect> effects = getAbnormalEffects();
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slot));
 	}
@@ -361,13 +361,10 @@ public class EffectController {
 	}
 
 	/**
-	 * Removes all effects by given target slot
-	 *
-	 * @see TargetSlot
-	 * @param targetSlot
+	 * Removes all effects by given dispel slot type
 	 */
-	public void removeAbnormalEffectsByTargetSlot(SkillTargetSlot targetSlot) {
-		this.removeByDispelEffect(DispelType.SLOTTYPE, targetSlot.toString(), 255, 100, 100);
+	public void removeByDispelSlotType(DispelSlotType dispelSlotType) {
+		removeByDispelEffect(null, dispelSlotType, 255, 100, 100);
 	}
 
 	public boolean removeByEffectId(int effectId, int dispelLevel, int power) {
@@ -402,49 +399,22 @@ public class EffectController {
 		return false;
 	}
 
-	/**
-	 * @param dispelType
-	 * @param value
-	 * @param count
-	 * @param dispelLevel
-	 * @param power
-	 */
-	public void removeByDispelEffect(DispelType dispelType, String value, int count, int dispelLevel, int power) {
-		int effectId = 0;
-		EffectType effectType = null;
-		SkillTargetSlot skillTargetSlot = null;
-		switch (dispelType) {
-			case EFFECTIDRANGE:
-				effectId = Integer.parseInt(value);
-				break;
-			case EFFECTTYPE:
-				effectType = EffectType.valueOf(value);
-				break;
-			case SLOTTYPE:
-				skillTargetSlot = SkillTargetSlot.valueOf(value);
-				break;
-		}
+	public void removeByDispelEffect(EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel, int power) {
 		// abnormalEffectMap
 		for (Effect effect : abnormalEffectMap.values()) {
 			// check count
 			if (count == 0)
 				break;
-			switch (dispelType) {
-				case EFFECTIDRANGE:
-					if (!effect.containsEffectId(effectId))
-						continue;
-					break;
-				case EFFECTTYPE:
-					if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
-						continue;
-					if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
-						continue;
-					}
-					break;
-				case SLOTTYPE:
-					if (effect.getTargetSlot() != skillTargetSlot.ordinal())
-						continue;
-					break;
+			if (effectType != null) {
+				if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
+					continue;
+				if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
+					continue;
+				}
+			}
+			if (dispelSlotType != null) {
+				if (effect.getTargetSlot() != SkillTargetSlot.of(dispelSlotType))
+					continue;
 			}
 			// check dispel level
 			if (effect.getReqDispelLevel() > dispelLevel)
@@ -462,22 +432,16 @@ public class EffectController {
 			// check count
 			if (count == 0)
 				break;
-			switch (dispelType) {
-				case EFFECTIDRANGE:
-					if (!effect.containsEffectId(effectId))
-						continue;
-					break;
-				case EFFECTTYPE:
-					if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
-						continue;
-					if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
-						continue;
-					}
-					break;
-				case SLOTTYPE:
-					if (effect.getTargetSlot() != skillTargetSlot.ordinal())
-						continue;
-					break;
+			if (effectType != null) {
+				if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
+					continue;
+				if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
+					continue;
+				}
+			}
+			if (dispelSlotType != null) {
+				if (effect.getTargetSlot() != SkillTargetSlot.of(dispelSlotType))
+					continue;
 			}
 			// check dispel level
 			if (effect.getReqDispelLevel() > dispelLevel)
@@ -495,6 +459,7 @@ public class EffectController {
 	/**
 	 * Method used to calculate number of effects of given dispelcategory, targetslot and dispelLevel used only in DispelBuffCounterAtk, therefore rest
 	 * of cases are skipped
+	 * 
 	 * @param dispelLevel
 	 * @return
 	 */
@@ -544,14 +509,14 @@ public class EffectController {
 				continue;
 
 			// check for targetslot, effects with target slot level higher or equal to 2 cant be removed (ex. skillId: 11885)
-			if (effect.getTargetSlot() != targetSlot.ordinal() || effect.getTargetSlotLevel() >= 2)
+			if (effect.getTargetSlot() != targetSlot || effect.getTargetSlotLevel() >= 2)
 				continue;
 
 			boolean remove = false;
 			switch (dispelCat) {
 				case ALL:// DispelDebuffEffect
-					if ((effect.getDispelCategory() == DispelCategoryType.ALL || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL || effect
-						.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL) && effect.getReqDispelLevel() <= dispelLevel)
+					if ((effect.getDispelCategory() == DispelCategoryType.ALL || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL
+						|| effect.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL) && effect.getReqDispelLevel() <= dispelLevel)
 						remove = true;
 					break;
 				case DEBUFF_MENTAL:// DispelDebuffMentalEffect
@@ -793,7 +758,7 @@ public class EffectController {
 
 			@Override
 			public boolean apply(Effect effect) {
-				return effect.getTargetSlotEnum().getId() == slot;
+				return effect.getTargetSlot().getId() == slot;
 			}
 		});
 	}
@@ -992,7 +957,7 @@ public class EffectController {
 		if (checkExtraEffect(nextEffect))
 			return false;
 		for (Effect effect : mapToUpdate.values()) {
-			if (effect.getSkillSubType().equals(nextEffect.getSkillSubType()) || effect.getTargetSlotEnum().equals(nextEffect.getTargetSlotEnum())) {
+			if (effect.getSkillSubType().equals(nextEffect.getSkillSubType()) || effect.getTargetSlot() == nextEffect.getTargetSlot()) {
 				effectCheck:
 				for (EffectTemplate et : effect.getEffectTemplates()) {
 					if (et.getEffectid() == 0)
@@ -1002,7 +967,7 @@ public class EffectController {
 							continue;
 						if (et.getEffectid() == et2.getEffectid()) {
 							if (et.getBasicLvl() > et2.getBasicLvl()) {
-								if (nextEffect.getTargetSlotEnum() != SkillTargetSlot.DEBUFF)
+								if (nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
 									nextEffect.setEffectResult(EffectResult.CONFLICT);
 								return true;
 							} else {

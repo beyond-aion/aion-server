@@ -97,10 +97,10 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TeamEffectUpdater;
@@ -329,7 +329,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (DuelService.getInstance().isDueling(player.getObjectId())) {
 			if (master instanceof Player && ((Player) master).isDueling(player)) {
 				DuelService.getInstance().loseDuel(player);
-				player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.DEBUFF);
+				player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 				if (player.getLifeStats().getHpPercentage() < 33)
 					player.getLifeStats().setCurrentHpPercent(33);
 				if (player.getLifeStats().getMpPercentage() < 33)
