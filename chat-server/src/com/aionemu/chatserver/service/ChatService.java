@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +18,7 @@ import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_RESPONSE;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_PLAYER_AUTH_RESPONSE;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler.State;
+import com.aionemu.commons.utils.Rnd;
 
 /**
  * @author ATracer
@@ -63,7 +63,7 @@ public class ChatService {
 	 */
 	private byte[] generateToken(byte[] accountToken) {
 		byte[] dynamicToken = new byte[16];
-		new Random().nextBytes(dynamicToken);
+		Rnd.nextBytes(dynamicToken);
 		byte[] token = new byte[48];
 		for (int i = 0; i < token.length; i++) {
 			if (i < 16)

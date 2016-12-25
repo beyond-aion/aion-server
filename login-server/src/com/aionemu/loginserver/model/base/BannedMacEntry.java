@@ -38,11 +38,7 @@ public class BannedMacEntry {
 	}
 
 	public final boolean isActive() {
-		return timeEnd != null || timeEnd.getTime() > System.currentTimeMillis();
-	}
-
-	public final boolean isActiveTill(long time) {
-		return timeEnd != null || timeEnd.getTime() > time;
+		return timeEnd != null && timeEnd.getTime() > System.currentTimeMillis();
 	}
 
 	public final String getDetails() {

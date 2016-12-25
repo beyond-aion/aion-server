@@ -47,6 +47,13 @@ public final class Rnd {
 	}
 
 	/**
+	 * @see MTRandom#nextBytes(byte[])
+	 */
+	public static void nextBytes(byte[] bytes) {
+		rnd.nextBytes(bytes);
+	}
+
+	/**
 	 * @see MTRandom#nextInt()
 	 */
 	public static int nextInt() {

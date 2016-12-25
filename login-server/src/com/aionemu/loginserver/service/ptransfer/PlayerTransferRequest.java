@@ -14,7 +14,6 @@ public class PlayerTransferRequest {
 	public byte[] db;
 	public String name;
 	public int targetAccountId;
-	public int playerId;
 	public Account account;
 	public Account saccount;
 	public int taskId;

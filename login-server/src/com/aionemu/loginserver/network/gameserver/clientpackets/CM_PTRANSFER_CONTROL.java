@@ -33,8 +33,7 @@ public class CM_PTRANSFER_CONTROL extends GsClientPacket {
 			case 3: // ok
 			{
 				int taskId = readD();
-				int playerId = readD();
-				PlayerTransferService.getInstance().onOk(taskId, playerId);
+				PlayerTransferService.getInstance().onOk(taskId);
 			}
 				break;
 			case 4: // Task stop

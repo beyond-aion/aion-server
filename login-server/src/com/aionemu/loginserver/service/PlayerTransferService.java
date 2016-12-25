@@ -185,7 +185,7 @@ public class PlayerTransferService {
 	/**
 	 * response from target server after cloning character
 	 */
-	public void onOk(int taskId, int playerId) {
+	public void onOk(int taskId) {
 		PlayerTransferRequest request = this.transfers.remove(taskId);
 		PlayerTransferTask task = this.tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_DONE;
@@ -196,8 +196,6 @@ public class PlayerTransferService {
 			log.error("Player transfer requests offline server! #" + request.serverId);
 			return;
 		}
-		request.playerId = request.playerId;
-
 		request.account.setActivated((byte) 1);
 		request.saccount.setActivated((byte) 1);
 		DAOManager.getDAO(AccountDAO.class).updateAccount(request.account);

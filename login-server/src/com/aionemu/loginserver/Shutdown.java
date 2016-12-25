@@ -23,18 +23,18 @@ public class Shutdown extends Thread {
 	 */
 	private static Shutdown instance = new Shutdown();
 	/**
-	 * Indicates wether the loginserver should shut dpwn or only restart
+	 * Indicates whether the loginserver should shut down or only restart
 	 */
-	private static boolean restartOnly = false;
+	private boolean restartOnly = false;
 
 	/**
 	 * Set's restartOnly attribute
 	 * 
 	 * @param restartOnly
-	 *          Indicates wether the loginserver should shut dpwn or only restart
+	 *          Indicates whether the loginserver should shut down or only restart
 	 */
 	public void setRestartOnly(boolean restartOnly) {
-		Shutdown.restartOnly = restartOnly;
+		this.restartOnly = restartOnly;
 	}
 
 	/**
