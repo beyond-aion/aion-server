@@ -2,8 +2,7 @@ package com.aionemu.gameserver.services.reward;
 
 import java.awt.Color;
 import java.time.Month;
-import java.time.MonthDay;
-import java.time.YearMonth;
+import java.time.ZonedDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.model.templates.survey.CustomSurveyItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 import javolution.util.FastMap;
 import javolution.util.FastTable;
@@ -95,10 +95,11 @@ public class AdventService {
 	}
 
 	public void onLogin(Player player) {
-		int day = MonthDay.now().getDayOfMonth();
-		if (YearMonth.now().getMonth() != Month.DECEMBER || day > 24)
+		ZonedDateTime now = ServerTime.now();
+		int day = now.getDayOfMonth();
+		if (now.getMonth() != Month.DECEMBER)
 			return;
-		if (!rewards.containsKey(day) || rewards.get(day).isEmpty() && day != 6)
+		if (!rewards.containsKey(day) || rewards.get(day).isEmpty())
 			return;
 		if (DAOManager.getDAO(AdventDAO.class).getLastReceivedDay(player) < day)
 			PacketSendUtility.sendMessage(player,
@@ -107,15 +108,21 @@ public class AdventService {
 	}
 
 	public void redeemReward(Player player) {
-		int day = MonthDay.now().getDayOfMonth();
+		ZonedDateTime now = ServerTime.now();
+		int day = now.getDayOfMonth();
+		List<CustomSurveyItem> todaysRewards = rewards.get(day);
+		if (now.getMonth() != Month.DECEMBER || todaysRewards == null || todaysRewards.isEmpty()) {
+			PacketSendUtility.sendMessage(player, "There is no advent calendar door for today.");
+			return;
+		}
 
 		if (DAOManager.getDAO(AdventDAO.class).getLastReceivedDay(player) >= day) {
 			PacketSendUtility.sendMessage(player, "You have already opened todays advent calendar door on this account.");
 			return;
 		}
 
-		if (day != 6 && player.getMailbox().size() + rewards.get(day).size() > 100 || !player.getMailbox().haveFreeSlots()) {
-			PacketSendUtility.sendMessage(player, "Your mailbox is full, please make some room.");
+		if (player.getMailbox().size() + rewards.get(day).size() > 100) {
+			PacketSendUtility.sendMessage(player, "You have not enough room in your mailbox.");
 			return;
 		}
 
@@ -124,13 +131,11 @@ public class AdventService {
 			return;
 		}
 
-		if (day <= 24) {
-			for (CustomSurveyItem item : rewards.get(day)) {
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
-				if (template != null && template.getRace() == player.getOppositeRace())
-					continue;
-				sendRewardMail(player, item.getId(), item.getCount(), day);
-			}
+		for (CustomSurveyItem item : todaysRewards) {
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getId());
+			if (template != null && template.getRace() == player.getOppositeRace())
+				continue;
+			sendRewardMail(player, item.getId(), item.getCount(), day);
 		}
 	}
 
@@ -142,17 +147,22 @@ public class AdventService {
 	}
 
 	public void showTodaysReward(Player player) {
-		int day = MonthDay.now().getDayOfMonth();
+		ZonedDateTime now = ServerTime.now();
+		int day = now.getDayOfMonth();
+		List<CustomSurveyItem> todaysRewards = rewards.get(day);
+		if (now.getMonth() != Month.DECEMBER || todaysRewards == null || todaysRewards.isEmpty()) {
+			PacketSendUtility.sendMessage(player, "There is no advent calendar door for today.");
+			return;
+		}
+
 		StringBuilder sb = new StringBuilder("Todays advent calendar reward(s):\n");
-		if (day <= 24) {
-			Iterator<CustomSurveyItem> iter = rewards.get(day).iterator();
-			while (iter.hasNext()) {
-				int id = iter.next().getId();
-				ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(id);
-				if (template != null && template.getRace() == player.getOppositeRace())
-					continue;
-				sb.append(ChatUtil.item(id) + (iter.hasNext() ? ", " : ""));
-			}
+
+		for (Iterator<CustomSurveyItem> iter = todaysRewards.iterator(); iter.hasNext();) {
+			int id = iter.next().getId();
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(id);
+			if (template != null && template.getRace() == player.getOppositeRace())
+				continue;
+			sb.append(ChatUtil.item(id) + (iter.hasNext() ? ", " : ""));
 		}
 		PacketSendUtility.sendMessage(player, sb.toString());
 	}
