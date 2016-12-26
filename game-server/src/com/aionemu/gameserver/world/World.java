@@ -280,7 +280,10 @@ public class World {
 	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading, boolean updateKnownList) {
 		if (!object.isSpawned()) { // MapRegion would be null
-			log.warn("Can't update position of despawned object: {}", object, new Throwable());
+			if (object instanceof Creature)
+				log.warn("Can't update position of despawned object: {}\nDespawned on {}", object, ((Creature) object).getDespawnCause(), new Throwable());
+			else
+				log.warn("Can't update position of despawned object: {}", object, new Throwable());
 			return;
 		}
 
@@ -446,6 +449,9 @@ public class World {
 		} finally {
 			MapRegion oldMapRegion = object.getActiveRegion();
 			object.getPosition().setIsSpawned(false);
+			if (object instanceof Creature) {
+				((Creature) object).setDespawnCause();
+			}
 			if (oldMapRegion != null) { // can be null if an instance gets deleted?
 				if (oldMapRegion.getParent() != null)
 					oldMapRegion.getParent().removeObject(object);
