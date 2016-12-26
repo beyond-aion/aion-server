@@ -66,7 +66,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_DEFENSE:
 						return 1.25f;
 					case MAGICAL_RESIST:
-						return 1.1f;
+						return 1.05f;
 					case PHYSICAL_ACCURACY:
 					case MAGICAL_ACCURACY:
 						return 1.03f;
