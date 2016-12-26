@@ -76,29 +76,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			door.setOpen(true);
 		}
 		addRespawnLocations();
-		startObservationTask();
 		startSupplyTask();
 		canJoin.set(true);
-	}
-
-	private void startObservationTask() {
-		observationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (canJoin.get()) {
-				instance.forEachPlayer(this::checkLastFightTime);
-			}
-		}, 300000, 300000);
-	}
-
-	private void checkLastFightTime(Player p) {
-		if (!p.isGM() && !p.getController().isInCombat()) {
-			long joinOrLeaveTime = this.joinOrLeaveTime.get(p.getObjectId());
-			if ((System.currentTimeMillis() - joinOrLeaveTime) > 600000) {
-				if (((System.currentTimeMillis() - p.getMoveController().getLastMoveUpdate()) > 600000)) {
-					PacketSendUtility.sendMessage(p, "You have been inactive for too long. Therefore you will be removed from the PvP-Map.");
-					removePlayer(p);
-				}
-			}
-		}
 	}
 
 	private void spawnShugo(Player player) {
