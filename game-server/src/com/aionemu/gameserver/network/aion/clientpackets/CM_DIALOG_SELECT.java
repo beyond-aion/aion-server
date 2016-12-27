@@ -64,9 +64,7 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 				return;
 
 			QuestEnv env = new QuestEnv(null, player, questId, dialogId);
-			if (!questTemplate.isCannotShare() && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id()))
-				QuestService.startQuest(env);
-			else if (questTemplate.isCanReport() && (dialogId == DialogAction.SELECTED_QUEST_AUTO_REWARD.id()
+			if (questTemplate.isCanReport() && (dialogId == DialogAction.SELECTED_QUEST_AUTO_REWARD.id()
 				|| (dialogId >= DialogAction.SELECTED_QUEST_AUTO_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_AUTO_REWARD15.id())))
 				QuestService.finishQuest(env);
 			else if (!QuestEngine.getInstance().onDialog(env)) {

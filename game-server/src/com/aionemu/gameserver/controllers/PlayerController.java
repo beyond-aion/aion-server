@@ -25,6 +25,7 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -627,9 +628,16 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void onDialogSelect(int dialogId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
-		switch (dialogId) {
-			case 2:
+		switch (DialogAction.getByActionId(dialogId)) {
+			case BUY:
 				PacketSendUtility.sendPacket(player, new SM_PRIVATE_STORE(getOwner().getStore(), player));
+				break;
+			case QUEST_ACCEPT_1:
+			case QUEST_ACCEPT_SIMPLE:
+				if (!getOwner().equals(player) && MathUtil.isInRange(getOwner(), player, 100)) { // TODO check if owner really shared
+					if (!DataManager.QUEST_DATA.getQuestById(questId).isCannotShare())
+						QuestService.startQuest(new QuestEnv(null, player, questId, dialogId));
+				}
 				break;
 		}
 	}

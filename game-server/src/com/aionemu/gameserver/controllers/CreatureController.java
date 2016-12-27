@@ -342,11 +342,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Handle Dialog_Select
-	 * 
-	 * @param dialogId
-	 * @param player
-	 * @param questId
+	 * Handle dialog select: getOwner() is the target or dialog sender, the given player is the one who clicked the dialog
 	 */
 	public void onDialogSelect(int dialogId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
 	}
