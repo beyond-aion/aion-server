@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Mr. Poke
  * @reworked vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _2004ACharmedCube extends QuestHandler {
 

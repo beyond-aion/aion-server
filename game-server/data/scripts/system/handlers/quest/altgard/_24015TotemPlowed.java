@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _24015TotemPlowed extends QuestHandler {
 

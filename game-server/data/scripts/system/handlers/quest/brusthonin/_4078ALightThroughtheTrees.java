@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Leunam
- * @rework zhkchi
+ * @reworked zhkchi
  */
 public class _4078ALightThroughtheTrees extends QuestHandler {
 

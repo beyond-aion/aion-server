@@ -11,7 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author HellBoy
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _2230AFriendlyWager extends QuestHandler {
 

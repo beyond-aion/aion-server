@@ -17,7 +17,7 @@ import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
- * @rework Luzien, Yeats 26.05.2016
+ * @reworked Luzien, Yeats 26.05.2016
  */
 @AIName("enraged_queen_modor")
 public class EnragedQueenModorAI2 extends AggressiveNpcAI2 {

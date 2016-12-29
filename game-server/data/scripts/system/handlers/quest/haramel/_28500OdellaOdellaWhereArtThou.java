@@ -10,7 +10,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author zhkchi
- * @Modified Majka
+ * @modified Majka
  */
 public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 

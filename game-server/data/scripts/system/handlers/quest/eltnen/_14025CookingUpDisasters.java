@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Artur
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _14025CookingUpDisasters extends QuestHandler {
 

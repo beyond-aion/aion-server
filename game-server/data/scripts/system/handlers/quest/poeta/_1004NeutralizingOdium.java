@@ -10,7 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author MrPoke
- * @Modified Majka
+ * @modified Majka
  */
 public class _1004NeutralizingOdium extends QuestHandler {
 

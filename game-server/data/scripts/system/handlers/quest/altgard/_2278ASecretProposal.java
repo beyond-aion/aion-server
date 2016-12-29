@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
- * @Modified Majka
+ * @modified Majka
  */
 public class _2278ASecretProposal extends QuestHandler {
 

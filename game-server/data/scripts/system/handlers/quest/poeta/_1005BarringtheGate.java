@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author MrPoke
- * @Modified Majka
+ * @modified Majka
  */
 public class _1005BarringtheGate extends QuestHandler {
 

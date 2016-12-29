@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _24041TrainingInTheAbyss extends QuestHandler {
 

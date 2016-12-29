@@ -10,8 +10,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
- * @rework Ritsu
- * @Modified Majka
+ * @reworked Ritsu
+ * @modified Majka
  */
 public class _24012AnOminousCrop extends QuestHandler {
 

@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14010TerrainOfTheVerteronFortress extends QuestHandler {
 

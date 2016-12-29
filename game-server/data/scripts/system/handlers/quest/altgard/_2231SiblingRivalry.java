@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Akiro
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _2231SiblingRivalry extends QuestHandler {
 

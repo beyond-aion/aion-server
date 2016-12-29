@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Balthazar
- * @rework Cheatkiller
+ * @reworked Cheatkiller
  */
 
 public class _3103KyprosDesire extends QuestHandler {

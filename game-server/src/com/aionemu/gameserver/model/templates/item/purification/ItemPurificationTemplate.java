@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.stats.calc.StatOwner;
 
 /**
  * @author Ranastic
- * @rework Navyan
+ * @reworked Navyan
  */
 @XmlRootElement(name = "ItemPurification")
 @XmlAccessorType(XmlAccessType.FIELD)

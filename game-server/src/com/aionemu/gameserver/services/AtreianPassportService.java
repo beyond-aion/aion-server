@@ -32,7 +32,7 @@ import javolution.util.FastTable;
 
 /**
  * @author ViAl
- * @rework Luzien
+ * @reworked Luzien
  */
 public class AtreianPassportService {
 

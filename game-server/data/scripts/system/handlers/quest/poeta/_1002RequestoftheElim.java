@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author MrPoke
  * @reworked vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _1002RequestoftheElim extends QuestHandler {
 

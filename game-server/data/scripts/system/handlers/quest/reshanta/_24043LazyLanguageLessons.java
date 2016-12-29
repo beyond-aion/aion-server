@@ -13,7 +13,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _24043LazyLanguageLessons extends QuestHandler {
 

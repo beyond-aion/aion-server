@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * Goto command
  * 
  * @author Dwarfpicker
- * @rework Imaginary
+ * @reworked Imaginary
  */
 public class GoTo extends AdminCommand {
 

@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Simple
- * @rework Luzien
+ * @reworked Luzien
  */
 public class WarehouseService {
 

@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur, Ritsu
- * @Modified Majka
+ * @modified Majka
  */
 public class _14054KrallIngToKralltumagna extends QuestHandler {
 

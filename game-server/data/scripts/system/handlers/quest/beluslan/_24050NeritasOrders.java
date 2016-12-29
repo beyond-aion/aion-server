@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Ritsu
- * @Modified Majka
+ * @modified Majka
  */
 public class _24050NeritasOrders extends QuestHandler {
 

@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
- * @Modified Majka
+ * @modified Majka
  */
 public class _1003IllegalLogging extends QuestHandler {
 

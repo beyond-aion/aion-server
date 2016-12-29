@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Mr. Poke
  * @reworked vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _2006HitThemWhereitHurts extends QuestHandler {
 

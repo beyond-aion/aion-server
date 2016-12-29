@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
- * @Modified Majka
+ * @modified Majka
  */
 public class _1001TheKerubThreat extends QuestHandler {
 

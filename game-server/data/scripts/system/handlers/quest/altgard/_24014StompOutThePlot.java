@@ -12,8 +12,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
- * @rework Ritsu
- * @Modified Majka
+ * @reworked Ritsu
+ * @modified Majka
  */
 public class _24014StompOutThePlot extends QuestHandler {
 

@@ -13,7 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer
- * @rework Yeats
+ * @reworked Yeats
  */
 public class GatheringTask extends AbstractCraftTask {
 

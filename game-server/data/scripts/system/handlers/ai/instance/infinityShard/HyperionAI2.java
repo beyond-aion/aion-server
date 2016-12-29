@@ -23,7 +23,7 @@ import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
- * @rework Yeats 26.04.2016
+ * @reworked Yeats 26.04.2016
  */
 @AIName("hyperion")
 public class HyperionAI2 extends AggressiveNpcAI2 {

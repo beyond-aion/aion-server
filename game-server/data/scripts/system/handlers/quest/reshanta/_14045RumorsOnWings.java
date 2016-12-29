@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14045RumorsOnWings extends QuestHandler {
 

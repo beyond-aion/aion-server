@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
- * @Modified Majka
+ * @modified Majka
  */
 public class _2252ChasingtheLegend extends QuestHandler {
 

@@ -20,7 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 
 /**
  * @author ViAl
- * @rework Luzien
+ * @reworked Luzien
  */
 public class MySQL5AccountPassportsDAO extends AccountPassportsDAO {
 

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Atomics
  * @modified Gigi
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 

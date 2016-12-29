@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14013AFrillOfAFuss extends QuestHandler {
 

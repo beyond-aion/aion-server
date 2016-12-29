@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Dta3000
- * @Modified Majka
+ * @modified Majka
  */
 public class _2228AThornInItsSide extends QuestHandler {
 

@@ -15,7 +15,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * This packet updates the players current gathering status / progress.
  * 
  * @author ATracer, orz
- * @rework Yeats, Neon
+ * @reworked Yeats, Neon
  */
 public class SM_GATHER_UPDATE extends AionServerPacket {
 

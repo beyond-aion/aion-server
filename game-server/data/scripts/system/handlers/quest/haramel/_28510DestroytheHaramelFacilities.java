@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author zhkchi
  * @reworked vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _28510DestroytheHaramelFacilities extends QuestHandler {
 

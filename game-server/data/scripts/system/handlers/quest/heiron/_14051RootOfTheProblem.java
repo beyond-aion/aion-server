@@ -10,7 +10,7 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14051RootOfTheProblem extends QuestHandler {
 

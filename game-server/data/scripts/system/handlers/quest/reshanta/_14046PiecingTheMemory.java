@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14046PiecingTheMemory extends QuestHandler {
 

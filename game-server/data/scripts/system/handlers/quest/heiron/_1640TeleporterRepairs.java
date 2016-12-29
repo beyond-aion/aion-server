@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Balthazar
- * @rework Cheatkiller
+ * @reworked Cheatkiller
  */
 
 public class _1640TeleporterRepairs extends QuestHandler {

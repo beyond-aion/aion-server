@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _2001ThinkingAhead extends QuestHandler {
 

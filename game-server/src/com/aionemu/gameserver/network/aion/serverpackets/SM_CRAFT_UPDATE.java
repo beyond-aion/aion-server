@@ -6,7 +6,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Mr. Poke
- * @rework Yeats
+ * @reworked Yeats
  */
 public class SM_CRAFT_UPDATE extends AionServerPacket {
 

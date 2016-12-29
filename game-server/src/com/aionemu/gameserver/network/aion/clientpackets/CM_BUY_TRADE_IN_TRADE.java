@@ -11,7 +11,7 @@ import javolution.util.FastSet;
 
 /**
  * @author MrPoke
- * @rework Ritsu
+ * @reworked Ritsu
  */
 public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 

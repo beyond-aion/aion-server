@@ -10,7 +10,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Mr. Poke
- * @Modified Majka
+ * @modified Majka
  */
 public class _2007WheresRaeThisTime extends QuestHandler {
 

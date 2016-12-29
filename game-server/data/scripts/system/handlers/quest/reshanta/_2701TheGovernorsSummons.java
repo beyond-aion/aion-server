@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Rhys2002
- * @Modified Majka
+ * @modified Majka
  */
 public class _2701TheGovernorsSummons extends QuestHandler {
 

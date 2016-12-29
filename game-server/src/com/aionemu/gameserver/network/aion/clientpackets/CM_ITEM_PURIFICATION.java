@@ -13,7 +13,7 @@ import com.aionemu.gameserver.services.item.ItemPurificationService;
 
 /**
  * @author FinalNovas
- * @rework Navyan
+ * @reworked Navyan
  */
 public class CM_ITEM_PURIFICATION extends AionClientPacket {
 

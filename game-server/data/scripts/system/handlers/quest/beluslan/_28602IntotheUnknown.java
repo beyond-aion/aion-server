@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Gigi
- * @Modified Majka
+ * @modified Majka
  */
 public class _28602IntotheUnknown extends QuestHandler {
 

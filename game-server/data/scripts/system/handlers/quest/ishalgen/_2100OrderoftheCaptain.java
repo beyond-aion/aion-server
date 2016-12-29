@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author MrPoke
- * @Modified Majka
+ * @modified Majka
  */
 public class _2100OrderoftheCaptain extends QuestHandler {
 

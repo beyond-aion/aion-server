@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author zhkchi
  * @reworked vlog
- * @Modified Majka
+ * @modified Majka
  */
 public class _18500BigKinah extends QuestHandler {
 

@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Artur
- * @Modified Majka
+ * @modified Majka
  */
 public class _14021ToCureACurse extends QuestHandler {
 

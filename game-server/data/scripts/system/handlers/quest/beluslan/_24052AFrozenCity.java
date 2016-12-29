@@ -15,7 +15,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- * @Modified Majka
+ * @modified Majka
  */
 public class _24052AFrozenCity extends QuestHandler {
 

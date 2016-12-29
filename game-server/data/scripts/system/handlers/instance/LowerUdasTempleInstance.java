@@ -18,7 +18,7 @@ import javolution.util.FastTable;
 
 /**
  * @author xTz, Luzien
- * @Modified Majka
+ * @modified Majka
  */
 @InstanceID(300160000)
 public class LowerUdasTempleInstance extends GeneralInstanceHandler {

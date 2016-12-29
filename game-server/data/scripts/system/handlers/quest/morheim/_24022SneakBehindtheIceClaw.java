@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- * @Reworked Majka
+ * @reworked Majka
  */
 public class _24022SneakBehindtheIceClaw extends QuestHandler {
 

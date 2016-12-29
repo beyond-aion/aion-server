@@ -19,7 +19,7 @@ import javolution.util.FastMap;
 
 /**
  * @author Ranastic
- * @rework Navyan
+ * @reworked Navyan
  */
 @XmlRootElement(name = "item_purifications")
 @XmlAccessorType(XmlAccessType.FIELD)
