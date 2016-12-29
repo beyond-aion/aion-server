@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aionemu</groupId>
 	<artifactId>login-server</artifactId>
@@ -25,10 +26,6 @@
 					<target>1.8</target>
 					<showWarnings>true</showWarnings>
 					<debug>true</debug>
-					<encoding>UTF-8</encoding>
-					<excludes>
-						<exclude>data/**</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -93,6 +90,49 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<!-- upload build if ftp url was specified as a maven command line argument (-Dftp.url=username:password@host:directory) -->
+			<id>upload-build</id>
+			<activation>
+				<property>
+					<name>ftp.url</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<configuration>
+									<tasks>
+										<scp remoteToDir="${ftp.url}" sftp="true" port="22" trust="true" verbose="true">
+											<fileset dir="${project.build.directory}">
+												<include name="*.zip" />
+											</fileset>
+										</scp>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-jsch</artifactId>
+								<version>1.9.7</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>com.aionemu</groupId>
