@@ -988,14 +988,17 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	 * @return True, if any pre-quest of this series is finished
 	 */
 	private static boolean hasAnyPreQuestFinished(QuestStateList qsl, XMLStartCondition startCondition) {
-		for (FinishedQuestCond finishedCond : startCondition.getFinishedPreconditions()) {
-			QuestState qs = qsl.getQuestState(finishedCond.getQuestId());
-			if (qs != null && qs.getStatus() == QuestStatus.COMPLETE)
-				return true;
-			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(finishedCond.getQuestId());
-			for (XMLStartCondition cond : template.getXMLStartConditions())
-				if (hasAnyPreQuestFinished(qsl, cond))
+		List<FinishedQuestCond> finishedQuests = startCondition.getFinishedPreconditions();
+		if (finishedQuests != null) {
+			for (FinishedQuestCond finishedCond : finishedQuests) {
+				QuestState qs = qsl.getQuestState(finishedCond.getQuestId());
+				if (qs != null && qs.getStatus() == QuestStatus.COMPLETE)
 					return true;
+				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(finishedCond.getQuestId());
+				for (XMLStartCondition cond : template.getXMLStartConditions())
+					if (hasAnyPreQuestFinished(qsl, cond))
+						return true;
+			}
 		}
 		return false;
 	}
