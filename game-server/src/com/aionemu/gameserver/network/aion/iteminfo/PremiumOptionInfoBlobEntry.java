@@ -15,19 +15,14 @@ public class PremiumOptionInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		if (ownerItem.getItemTemplate().canTune() && ownerItem.getRandomCount() == -1) {
-			writeC(buf, -1);
-			writeC(buf, 0);
-		} else {
-			writeC(buf, ownerItem.getBonusNumber());
-			writeC(buf, ownerItem.getRandomCount());
-		}
+		writeC(buf, !ownerItem.isIdentified() ? -1 : ownerItem.getBonusNumber());
+		writeC(buf, !ownerItem.isIdentified() ? 0 : ownerItem.getTuneCount());
 		writeC(buf, 0);
 	}
 
 	@Override
 	public int getSize() {
-		return 1 + 2;
+		return 3;
 	}
 
 }

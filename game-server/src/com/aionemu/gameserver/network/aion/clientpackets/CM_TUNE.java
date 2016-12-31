@@ -17,6 +17,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author xTz
@@ -60,10 +61,12 @@ public class CM_TUNE extends AionClientPacket {
 			return;
 		}
 
+		// item identification (tuning without scroll)
 		final int itemId = item.getItemId();
 		final ItemTemplate template = item.getItemTemplate();
 
-		if (!template.canTune() || item.getRandomCount() >= 0) {
+		if (item.isIdentified()) {
+			AuditLogger.info(player, "tried to tune item without scroll");
 			return;
 		}
 
@@ -92,7 +95,7 @@ public class CM_TUNE extends AionClientPacket {
 				item.setOptionalSocket(Rnd.get(0, item.getItemTemplate().getOptionSlotBonus()));
 				item.setRndBonus();
 				item.setEnchantBonus(Rnd.get(0, item.getItemTemplate().getMaxEnchantBonus()));
-				item.setRandomCount(item.getRandomCount() + 1); // not tuned have count = -1
+				item.setTuneCount(item.getTuneCount() + 1); // not tuned have count = -1
 				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));

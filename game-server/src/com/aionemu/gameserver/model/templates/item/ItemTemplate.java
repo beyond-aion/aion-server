@@ -71,9 +71,9 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "option_slot_bonus")
 	private int optionSlotBonus;
 	@XmlAttribute(name = "rnd_bonus")
-	private int rnd_bonus = 0;
+	private int rndBonusId = 0;
 	@XmlAttribute(name = "rnd_count")
-	private int rnd_count = -1;
+	private int maxTuneCount = -1;
 	@XmlAttribute(name = "bonus_apply")
 	private String bonusApply;// enum
 	@XmlAttribute(name = "race")
@@ -173,10 +173,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 		// check if it can be randomized
 		if (getItemSlot() == 0)
-			rnd_count = 0;
-		else if (rnd_count == -1) {
-			if (maxEnchantBonus == 0 && optionSlotBonus == 0 && rnd_bonus == 0)
-				rnd_count = 0;
+			maxTuneCount = 0;
+		else if (maxTuneCount == -1) {
+			if (maxEnchantBonus == 0 && optionSlotBonus == 0 && rndBonusId == 0)
+				maxTuneCount = 0;
 		}
 	}
 
@@ -416,10 +416,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return (getMask() & ItemMask.CAN_POLISH) == ItemMask.CAN_POLISH;
 	}
 
-	public boolean canTune() {
-		return rnd_count != 0;
-	}
-
 	public boolean isTwoHandWeapon() {
 		if (!isWeapon())
 			return false;
@@ -490,17 +486,21 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	/**
-	 * @return the rnd_bonus, 0 if no bonus exists
+	 * @return the rndBonusId, 0 if no bonus exists
 	 */
 	public int getRandomBonusId() {
-		return rnd_bonus;
+		return rndBonusId;
 	}
 
 	/**
-	 * @return the rnd_count, 0 if can not be randomized
+	 * @return the maxTuneCount, 0 if can not be randomized
 	 */
-	public int getRandomBonusCount() {
-		return rnd_count;
+	public int getMaxTuneCount() {
+		return maxTuneCount;
+	}
+
+	public boolean canTune() {
+		return maxTuneCount != 0;
 	}
 
 	/**
@@ -585,7 +585,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	public String getTemperingName() {
 		return temperingName;
 	}
-	
+
 	public String getEnchantName() {
 		return enchantName;
 	}

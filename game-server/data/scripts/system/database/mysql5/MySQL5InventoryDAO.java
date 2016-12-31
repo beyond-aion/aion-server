@@ -337,7 +337,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(19, item.getOptionalFusionSocket());
 				stmt.setInt(20, item.getChargePoints());
 				stmt.setInt(21, item.getBonusNumber());
-				stmt.setInt(22, item.getRandomCount());
+				stmt.setInt(22, item.getTuneCount());
 				stmt.setInt(23, item.getTempering());
 				stmt.setInt(24, item.getPackCount());
 				stmt.setBoolean(25, item.isAmplified());
@@ -382,7 +382,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(17, item.getOptionalFusionSocket());
 				stmt.setInt(18, item.getChargePoints());
 				stmt.setInt(19, item.getBonusNumber());
-				stmt.setInt(20, item.getRandomCount());
+				stmt.setInt(20, item.getTuneCount());
 				stmt.setInt(21, item.getTempering());
 				stmt.setInt(22, item.getPackCount());
 				stmt.setBoolean(23, item.isAmplified());

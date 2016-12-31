@@ -11016,13 +11016,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You successfully enchanted %0 by +%num1.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(DescriptionId descriptionId, int value0) {
-		return new SM_SYSTEM_MESSAGE(1401681, descriptionId, value0);
-	}
-
-	/**
 	 * You have failed to enchant %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_ENCHANT_ITEM_FAILED(DescriptionId descriptionId) {
@@ -13152,13 +13145,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_USEMONEY(int num0) {
 		return new SM_SYSTEM_MESSAGE(1300757, num0);
-	}
-
-	/**
-	 * You spent %num0 Item.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_USEITEM(int num0) {
-		return new SM_SYSTEM_MESSAGE(1401873, num0);
 	}
 
 	/**
@@ -25741,6 +25727,34 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Idian level is too high for the selected item.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
+		return new SM_SYSTEM_MESSAGE(1401649);
+	}
+
+	/**
+	 * You successfully enchanted %0 by +%num1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(DescriptionId descriptionId, int value0) {
+		return new SM_SYSTEM_MESSAGE(1401681, descriptionId, value0);
+	}
+
+	/**
+	 * An enhancement with Idian is not possible until you have identified the equipment item.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_NEED_IDENTIFY() {
+		return new SM_SYSTEM_MESSAGE(1401750);
+	}
+
+	/**
+	 * You spent %num0 Item.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_USEITEM(int num0) {
+		return new SM_SYSTEM_MESSAGE(1401873, num0);
+	}
+
+	/**
 	 * Supplies have been delivered to some of the sentry posts.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
@@ -25757,29 +25771,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot wrap %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(DescriptionId itemName) {
-		return new SM_SYSTEM_MESSAGE(1402015, itemName);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(int itemNameId) {
+		return new SM_SYSTEM_MESSAGE(1402015, new DescriptionId(itemNameId));
 	}
 
 	/**
 	 * %0's level is lower than %1, so you cannot wrap it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_LEVEL(DescriptionId itemName1, int levelRequired) {
-		return new SM_SYSTEM_MESSAGE(1402016, itemName1, levelRequired);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_LEVEL(int itemNameId, int levelRequired) {
+		return new SM_SYSTEM_MESSAGE(1402016, new DescriptionId(itemNameId), levelRequired);
 	}
 
 	/**
 	 * %0's rank is lower than %1, so you cannot wrap it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_QUALITY(DescriptionId itemName1, DescriptionId itemName2) {
-		return new SM_SYSTEM_MESSAGE(1402017, itemName1, itemName1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_QUALITY(int scrollNameId, int itemNameId) {
+		return new SM_SYSTEM_MESSAGE(1402017, new DescriptionId(scrollNameId), new DescriptionId(itemNameId));
 	}
 
 	/**
 	 * %1 cannot be wrapped with %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(DescriptionId itemName1, DescriptionId itemName2) {
-		return new SM_SYSTEM_MESSAGE(1402018, itemName1, itemName1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(int scrollNameId, int itemNameId) {
+		return new SM_SYSTEM_MESSAGE(1402018, new DescriptionId(scrollNameId), new DescriptionId(itemNameId));
 	}
 
 	/**
@@ -25827,8 +25841,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Wrapping of %0 is complete.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(DescriptionId itemName1) {
-		return new SM_SYSTEM_MESSAGE(1402031, itemName1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(int itemNameId) {
+		return new SM_SYSTEM_MESSAGE(1402031, new DescriptionId(itemNameId));
 	}
 
 	/**

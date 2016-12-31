@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.templates.item.actions;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -26,7 +25,7 @@ public class PackAction extends AbstractItemAction {
 			return false;
 		}
 		if (targetItem.getItemTemplate().getPackCount() == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(targetItem.getNameId()));
 			return false;
 		}
 		if (targetItem.isEquipped()) {
@@ -37,7 +36,7 @@ public class PackAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_EXCHANGE());
 			return false;
 		}
-		if (!targetItem.isSoulBound()) {
+		if (targetItem.isSoulBound()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_SEAL());
 			return false;
 		}
@@ -45,18 +44,17 @@ public class PackAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_COMPOSITION());
 			return false;
 		}
-		if (!targetItem.isTuned()) {
+		if (!targetItem.isIdentified()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_NEED_IDENTIFY());
 			return false;
 		}
-		if (targetItem.getItemTemplate().getItemQuality() != parentItem.getItemTemplate().getItemQuality()) {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(new DescriptionId(targetItem.getNameId()), new DescriptionId(parentItem.getNameId())));
+		if (targetItem.getItemTemplate().getItemQuality().getQualityId() > parentItem.getItemTemplate().getItemQuality().getQualityId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(parentItem.getNameId(), targetItem.getNameId()));
 			return false;
 		}
 		if (targetItem.getItemTemplate().getLevel() > parentItem.getItemTemplate().getLevel()) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(new DescriptionId(targetItem.getNameId()), targetItem.getItemTemplate().getLevel()));
+				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(targetItem.getNameId(), targetItem.getItemTemplate().getLevel()));
 			return false;
 		}
 		UseTarget type = null;
@@ -142,6 +140,7 @@ public class PackAction extends AbstractItemAction {
 		targetItem.setPackCount(++packCount);
 		targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_SUCCEED(targetItem.getNameId()));
 	}
 
 	public UseTarget getTarget() {

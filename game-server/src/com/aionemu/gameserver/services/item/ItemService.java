@@ -149,7 +149,7 @@ public class ItemService {
 		
 		newItem.setBonusNumber(sourceItem.getBonusNumber());
 		newItem.setRandomStats(sourceItem.getRandomStats());
-		newItem.setRandomCount(sourceItem.getRandomCount());
+		newItem.setTuneCount(sourceItem.getTuneCount());
 		newItem.setIdianStone(sourceItem.getIdianStone());
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());

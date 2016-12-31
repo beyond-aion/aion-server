@@ -36,12 +36,11 @@ public class PolishAction extends AbstractItemAction {
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		if (parentItem.getItemTemplate().getLevel() > targetItem.getItemTemplate().getLevel()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401649));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_WRONG_LEVEL());
 			return false;
 		}
-		// You need to tune your equipment before socketing Idian.
-		if (targetItem.getOptionalSocket() == -1) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401750));
+		if (!targetItem.isIdentified()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_NEED_IDENTIFY());
 			return false;
 		}
 		return !player.isInAttackMode() && targetItem.getItemTemplate().isWeapon() && targetItem.getItemTemplate().isCanPolish();

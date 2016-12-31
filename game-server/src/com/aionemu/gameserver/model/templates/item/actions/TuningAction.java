@@ -42,8 +42,8 @@ public class TuningAction extends AbstractItemAction {
 		if (target.equals(UseTarget.ARMOR) && !targetItem.getItemTemplate().isArmor()) {
 			return false;
 		}
-		int randomCount = targetItem.getRandomCount();
-		return (randomCount == -1 || randomCount < targetItem.getItemTemplate().getRandomBonusCount()) && !targetItem.isEquipped();
+		return (!targetItem.isIdentified() || targetItem.getTuneCount() < targetItem.getItemTemplate().getMaxTuneCount())
+			&& !targetItem.isEquipped();
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class TuningAction extends AbstractItemAction {
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
 					return;
 				}
-				int rndCount = targetItem.getRandomCount();
-				if (rndCount > 0 && rndCount >= targetItem.getItemTemplate().getRandomBonusCount() || targetItem.isEquipped()) {
+				if (targetItem.isIdentified() && targetItem.getTuneCount() >= targetItem.getItemTemplate().getMaxTuneCount()
+					|| targetItem.isEquipped()) {
 					return;
 				}
 				int newSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
@@ -89,10 +89,10 @@ public class TuningAction extends AbstractItemAction {
 				if (noReduce && targetItem.getEnchantBonus() > newEnchantBonus)
 					newEnchantBonus = targetItem.getEnchantBonus();
 				targetItem.setEnchantBonus(newEnchantBonus);
-				// not tuned have count = -1
-				targetItem.setRandomCount(targetItem.getRandomCount() + 1);
-				if (targetItem.getRandomCount() == 0 && targetItem.getItemTemplate().getRandomBonusCount() > 0)
-					targetItem.setRandomCount(targetItem.getRandomCount() + 1);
+				// not tuned (identifiable) have count = -1
+				targetItem.setTuneCount(targetItem.getTuneCount() + 1);
+				if (targetItem.getTuneCount() == 0 && targetItem.getItemTemplate().getMaxTuneCount() > 0)
+					targetItem.setTuneCount(targetItem.getTuneCount() + 1);
 				targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));

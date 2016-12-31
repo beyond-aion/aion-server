@@ -215,8 +215,8 @@ public class Equipment {
 	 * @param item
 	 */
 	private Item equip(long itemSlotToEquip, Item item) {
-		if (item.getOptionalSocket() == -1) {
-			log.warn("item can't be equiped because hasTune" + item.getObjectId());
+		if (!item.isIdentified()) {
+			log.warn("Item {} (ID:{}) can't be equipped because it's not identified yet", item.getObjectId(), item.getItemId());
 			return null;
 		}
 		synchronized (equipment) {
@@ -776,14 +776,10 @@ public class Equipment {
 						continue;
 					twoHanded = item;
 				}
-				if (item.getOptionalSocket() == -1) {
-					log.warn("on load all eqipment, item can't be equiped because hasTune" + item.getObjectId());
-					continue;
-				}
 				ItemEquipmentListener.onItemEquipment(item, owner);
-				owner.getLifeStats().synchronizeWithMaxStats();
 			}
 		}
+		owner.getLifeStats().synchronizeWithMaxStats();
 	}
 
 	/**

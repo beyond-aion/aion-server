@@ -68,8 +68,8 @@ public class ItemPurificationService {
 			}
 		}
 		int nameId = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getNameId();
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()),
-			new DescriptionId(nameId)));
+		PacketSendUtility.sendPacket(player,
+			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(nameId)));
 		return true;
 	}
 
@@ -102,18 +102,18 @@ public class ItemPurificationService {
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
-		
+
 		if (sourceItem.isAmplified()) {
 			if (newItem.getEnchantLevel() < newItem.getMaxEnchantLevel()) {
-			   newItem.setAmplified(false);
+				newItem.setAmplified(false);
 			} else {
-			   newItem.setAmplified(true);
-			   if (newItem.getEnchantLevel() < 20)
-				  newItem.setBuffSkill(0);
-			   else
-				  newItem.setBuffSkill(sourceItem.getBuffSkill());
+				newItem.setAmplified(true);
+				if (newItem.getEnchantLevel() < 20)
+					newItem.setBuffSkill(0);
+				else
+					newItem.setBuffSkill(sourceItem.getBuffSkill());
 			}
- 		}
+		}
 		if (sourceItem.hasFusionedItem()) {
 			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
 			newItem.setOptionalFusionSocket(sourceItem.getOptionalFusionSocket());
@@ -135,7 +135,7 @@ public class ItemPurificationService {
 		if (sourceItem.getItemTemplate().getRandomBonusId() != 0 && newItem.getItemTemplate().getRandomBonusId() != 0) {
 			newItem.setBonusNumber(sourceItem.getBonusNumber());
 			newItem.setRandomStats(new RandomStats(newItem.getItemTemplate().getRandomBonusId(), newItem.getBonusNumber()));
-			newItem.setRandomCount(1);
+			newItem.setTuneCount(1);
 		}
 		newItem.setIdianStone(null);
 		newItem.setItemColor(sourceItem.getItemColor());

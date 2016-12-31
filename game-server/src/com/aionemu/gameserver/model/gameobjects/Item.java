@@ -73,7 +73,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	private int bonusNumber = 0;
 	private List<StatFunction> currentModifiers;
 	private RandomStats randomStats;
-	private int rndCount = 0;
+	private int tuneCount = 0;
 	private int packCount;
 	private int indexReturn;
 	private int tempering;
@@ -93,8 +93,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		if (itemTemplate.getExpireTime() != 0) {
 			expireTime = ((int) (System.currentTimeMillis() / 1000) + itemTemplate.getExpireTime() * 60) - 1;
 		}
-		if (itemTemplate.getRandomBonusCount() != 0) {
-			rndCount = -1; // not randomized yet
+		if (itemTemplate.canTune()) {
+			tuneCount = -1; // not randomized yet
 		}
 		if (itemTemplate.getEnchantType() == 1) {
 			isAmplified = true;
@@ -118,7 +118,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 */
 	public Item(int objId, int itemId, long itemCount, Integer itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
 		boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int enchantBonus, int itemSkin, int fusionedItem,
-		int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int rndCount, int tempering, int packCount, boolean isAmplified,
+		int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int tuneCount, int tempering, int packCount, boolean isAmplified,
 		int buffSkill, int rndPlumeBonusValue) {
 		super(objId);
 
@@ -140,13 +140,9 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		this.optionalSocket = optionalSocket;
 		this.optionalFusionSocket = optionalFusionSocket;
 		this.bonusNumber = randomBonus;
-		this.rndCount = rndCount;
-		// migrate players having optionalSocket in DB equal to -1
-		if (optionalSocket == -1 && itemTemplate.canTune()) {
-			this.rndCount = -1;
-			this.optionalSocket = 0;
-		} else if (rndCount == -1 && !itemTemplate.canTune()) {
-			this.rndCount = 0; // NC made it not tunable
+		this.tuneCount = tuneCount;
+		if (tuneCount == -1 && !itemTemplate.canTune()) {
+			this.tuneCount = 0; // NC made it not tunable
 		}
 		this.tempering = tempering;
 		this.packCount = packCount;
@@ -201,9 +197,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	@Override
 	public String getName() {
-		// TODO
-		// item description should return probably string and not id
-		return String.valueOf(itemTemplate.getNameId());
+		return itemTemplate.getName();
 	}
 
 	/**
@@ -257,10 +251,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public void setEnchantBonus(int enchantBonus) {
 		this.enchantBonus = enchantBonus;
-	}
-
-	public boolean isTuned() {
-		return itemTemplate.canTune() && rndCount >= 0;
 	}
 
 	public boolean isStigmaChargeable() {
@@ -847,8 +837,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 */
 	public int getAvailableChargeLevel(Player player) {
 		int result = getChargeLevelMax();
-		ItemUseLimits limits = hasFusionedItem() && getFusionedItemTemplate().getLevel() > this.getItemTemplate().getLevel() ? getFusionedItemTemplate()
-			.getUseLimits() : getItemTemplate().getUseLimits();
+		ItemUseLimits limits = hasFusionedItem() && getFusionedItemTemplate().getLevel() > this.getItemTemplate().getLevel()
+			? getFusionedItemTemplate().getUseLimits() : getItemTemplate().getUseLimits();
 		if (limits.getRecommendRank() > 0) {
 			int diff = Math.max(0, limits.getRecommendRank() - player.getAbyssRank().getRank().getId());
 			result -= diff;
@@ -867,10 +857,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		else if (hasFusionedItem() && getFusionedItemTemplate().getImprovement() != null)
 			return getFusionedItemTemplate().getImprovement();
 		return null;
-	}
-
-	public int getBonusNumber() {
-		return bonusNumber;
 	}
 
 	public List<StatFunction> getCurrentModifiers() {
@@ -900,16 +886,27 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		this.randomStats = randomStats;
 	}
 
+	public int getBonusNumber() {
+		return bonusNumber;
+	}
+
 	public void setBonusNumber(int bonusNumber) {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public void setRandomCount(int rndCount) {
-		this.rndCount = rndCount;
+	public int getTuneCount() {
+		return tuneCount;
 	}
 
-	public int getRandomCount() {
-		return rndCount;
+	public void setTuneCount(int tuneCount) {
+		this.tuneCount = tuneCount;
+	}
+
+	/**
+	 * @return False if the item must be identified (tuned) before it can be equipped (identification can be made without a tuning scroll)
+	 */
+	public boolean isIdentified() {
+		return tuneCount != -1;
 	}
 
 	public int[] getRequiredSkill() {
@@ -1002,7 +999,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 			+ fusionStones + ", optionalSocket=" + optionalSocket + ", optionalFusionSocket=" + optionalFusionSocket + ", getGodStoneId()="
 			+ getGodStoneId() + ", isSoulBound=" + isSoulBound + ", itemLocation=" + itemLocation + ", enchantLevel=" + enchantLevel + ", enchantBonus="
 			+ enchantBonus + ", expireTime=" + expireTime + ", temporaryExchangeTime=" + temporaryExchangeTime + ", repurchasePrice=" + repurchasePrice
-			+ ", activationCount=" + activationCount + ", bonusNumber=" + bonusNumber + ", rndCount=" + rndCount + ", packCount=" + packCount
+			+ ", activationCount=" + activationCount + ", bonusNumber=" + bonusNumber + ", tuneCount=" + tuneCount + ", packCount=" + packCount
 			+ ", indexReturn=" + indexReturn + ", tempering=" + tempering + ", isAmplified=" + isAmplified + ", buffSkill=" + buffSkill
 			+ ", rndPlumeBonusValue=" + rndPlumeBonusValue + ", getChargePoints()=" + getChargePoints() + "]";
 	}

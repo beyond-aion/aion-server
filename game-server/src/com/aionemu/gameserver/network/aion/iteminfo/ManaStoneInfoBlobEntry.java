@@ -32,8 +32,8 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		writeC(buf, item.isSoulBound() ? 1 : 0);
 		writeC(buf, item.getEnchantLevel()); // enchant (1-15)
 		writeD(buf, item.getItemSkinTemplate().getTemplateId());
-		writeC(buf, item.getRandomCount() == -1 ? -1 : optionalSocket);
-		writeC(buf, item.getRandomCount() == -1 ? -1 : item.getEnchantBonus());
+		writeC(buf, !item.isIdentified() ? -1 : optionalSocket);
+		writeC(buf, !item.isIdentified() ? -1 : item.getEnchantBonus());
 
 		writeItemStones(buf);
 

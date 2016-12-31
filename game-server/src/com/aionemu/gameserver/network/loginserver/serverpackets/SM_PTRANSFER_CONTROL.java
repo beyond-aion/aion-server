@@ -219,7 +219,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(item.getGodStoneId());
 					writeD(item.getColorExpireTime());
 					writeD(item.getBonusNumber());
-					writeD(item.getRandomCount());
+					writeD(item.getTuneCount());
 					writeD(item.getTempering());
 					writeD(item.getPackCount());
 					writeC(item.isAmplified() ? 1 : 0);
