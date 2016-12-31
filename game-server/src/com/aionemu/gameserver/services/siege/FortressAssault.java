@@ -85,7 +85,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 		for (Spawn spawn : wave.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
 				for (int i = 0; i < influenceMultiplier; i++) {
-					if (Rnd.get() <= SiegeConfig.SIEGE_HEALTH_MULTIPLIER)
+					if (Rnd.chance() < SiegeConfig.SIEGE_HEALTH_MULTIPLIER * 100)
 						spawnAssaulter(wave.getWorldId(), spawn.getNpcId(), locationId, sst.getX(), sst.getY(), sst.getZ(), (byte) 0, wave.getAssaultType());
 				}
 			}

@@ -823,16 +823,16 @@ public class StatFunctions {
 		// add critical Prob
 		critical *= criticalProb / 100f;
 
-		double criticalRate;
+		double criticalChance;
 
 		if (critical <= 440)
-			criticalRate = critical * 0.1f;
+			criticalChance = critical * 0.1f;
 		else if (critical <= 600)
-			criticalRate = (440 * 0.1f) + ((critical - 440) * 0.05f);
+			criticalChance = (440 * 0.1f) + ((critical - 440) * 0.05f);
 		else
-			criticalRate = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
+			criticalChance = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
 
-		return Rnd.get(100) < criticalRate;
+		return Rnd.chance() < criticalChance;
 	}
 
 	/**
