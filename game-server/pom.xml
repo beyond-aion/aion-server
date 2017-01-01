@@ -98,6 +98,7 @@
 				</configuration>
 				<executions>
 					<execution>
+						<id>assembly-variables</id>
 						<phase>prepare-package</phase>
 						<configuration>
 							<target>
