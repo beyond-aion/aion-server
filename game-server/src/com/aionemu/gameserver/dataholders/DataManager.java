@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
+import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.mail.Mails;
 
 /**
@@ -217,6 +218,7 @@ public final class DataManager {
 		ITEM_DATA.cleanup();
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData().valueCollection());
 		SKILL_DATA.validateMotions();
+		DecomposeAction.validateRandomItemIds();
 
 		long time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");

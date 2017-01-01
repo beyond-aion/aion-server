@@ -439,15 +439,6 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * PacketBroadcasterMask private volatile byte packetBroadcastMask; This is adding broadcast to player. public final void
-	 * addPacketBroadcastMask(BroadcastMode mode) { packetBroadcastMask |= mode.mask(); PacketBroadcaster.getInstance().add(this); // Debug if
-	 * (log.isDebugEnabled()) log.debug("PacketBroadcaster: Packet " + mode.name() + " added to player " + this.getName()); } This is removing broadcast
-	 * from player. public final void removePacketBroadcastMask(BroadcastMode mode) { packetBroadcastMask &= ~mode.mask(); // Debug if
-	 * (log.isDebugEnabled()) log.debug("PacketBroadcaster: Packet " + mode.name() + " removed from player " + this.getName()); // fix //
-	 * ClassCastException } Broadcast getter. public final byte getPacketBroadcastMask() { return packetBroadcastMask; }
-	 */
-
-	/**
 	 * @return the observeController
 	 */
 	public ObserveController getObserveController() {

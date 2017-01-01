@@ -228,9 +228,4 @@ public class ItemService {
 		}
 	}
 
-	public static boolean checkRandomTemplate(int randomItemId) {
-		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(randomItemId);
-		return template != null;
-	}
-
 }

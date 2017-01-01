@@ -49,35 +49,7 @@ public class DecomposeAction extends AbstractItemAction {
 	private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
 	public static final int USAGE_DELAY = 3000;
 	private static Map<Race, int[]> chunkEarth = new HashMap<>();
-
-	static {
-		chunkEarth.put(Race.ASMODIANS, new int[] { 152000051, 152000052, 152000053, 152000054, 152000055, 152000056, 152000057, 152000058, 152000059,
-			152000061, 152000062, 152000063, 152000101, 152000102, 152000104, 152000107, 152000113, 152000201, 152000202, 152000204, 152000207, 152000214,
-			152000451, 152000453, 152000455, 152000457, 152000459, 152000461, 152000463, 152000465, 152000468, 152000470, 152000551, 152000552, 152000553,
-			152000554, 152000556, 152000651, 152000652, 152000653, 152000654, 152000656, 152000751, 152000752, 152000753, 152000754, 152000755, 152000756,
-			152000757, 152000758, 152000759, 152000760, 152000762, 152000763, 152000851, 152000852, 152000853, 152000854, 152000855, 152000856, 152000857,
-			152000858, 152000860, 152000861, 152001051, 152001052, 152001053, 152001055, 152001056 });
-
-		chunkEarth.put(Race.ELYOS, new int[] { 152000001, 152000002, 152000003, 152000004, 152000005, 152000006, 152000007, 152000008, 152000009,
-			152000010, 152000011, 152000012, 152000101, 152000102, 152000104, 152000107, 152000113, 152000201, 152000202, 152000204, 152000207, 152000214,
-			152000401, 152000403, 152000405, 152000407, 152000409, 152000411, 152000413, 152000415, 152000417, 152000419, 152000501, 152000502, 152000503,
-			152000504, 152000505, 152000601, 152000602, 152000603, 152000604, 152000605, 152000701, 152000702, 152000703, 152000704, 152000705, 152000706,
-			152000707, 152000708, 152000709, 152000710, 152000711, 152000712, 152000801, 152000802, 152000803, 152000804, 152000805, 152000806, 152000807,
-			152000808, 152000809, 152000810, 152001001, 152001002, 152001003, 152001004, 152001005 });
-	}
-
 	private static Map<Race, int[]> chunkSand = new HashMap<>();
-
-	static {
-
-		chunkSand.put(Race.ASMODIANS, new int[] { 152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103, 152000203,
-			152000304, 152000305, 152000306, 152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311, 152000464, 152000466, 152000108,
-			152000208, 152000313, 152000315, 152000317, 152000469, 152000471, 152000114, 152000215, 152000320, 152000322, 152000324 });
-
-		chunkSand.put(Race.ELYOS, new int[] { 152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103, 152000203,
-			152000304, 152000305, 152000306, 152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311, 152000414, 152000416, 152000108,
-			152000208, 152000313, 152000315, 152000317, 152000418, 152000420, 152000114, 152000215, 152000320, 152000322, 152000324 });
-	}
 
 	private static int[] chunkRock = { 152000104, 152000107, 152000113, 152000204, 152000207, 152000214, 152000307, 152000309, 152000311, 152000313,
 		152000315, 152000317, 152000320, 152000322, 152000324 };
@@ -94,6 +66,32 @@ public class DecomposeAction extends AbstractItemAction {
 
 	private static int[] illusion_godstones = { 168000229, 168000230, 168000231, 168000232, 168000233, 168000234, 168000235, 168000236, 168000237,
 		168000238, 168000239, 168000240, 168000241, 168000242, 168000243, 168000244, 168000245 };
+
+	static {
+		chunkEarth.put(Race.ASMODIANS,
+			new int[] { 152000051, 152000052, 152000053, 152000054, 152000055, 152000056, 152000057, 152000058, 152000059, 152000061, 152000062, 152000063,
+				152000101, 152000102, 152000104, 152000107, 152000113, 152000201, 152000202, 152000204, 152000207, 152000214, 152000451, 152000453, 152000455,
+				152000457, 152000459, 152000461, 152000463, 152000465, 152000468, 152000470, 152000551, 152000552, 152000553, 152000554, 152000556, 152000651,
+				152000652, 152000653, 152000654, 152000656, 152000751, 152000752, 152000753, 152000754, 152000755, 152000756, 152000757, 152000758, 152000759,
+				152000760, 152000762, 152000763, 152000851, 152000852, 152000853, 152000854, 152000855, 152000856, 152000857, 152000858, 152000860, 152000861,
+				152001051, 152001052, 152001053, 152001055, 152001056 });
+		chunkEarth.put(Race.ELYOS,
+			new int[] { 152000001, 152000002, 152000003, 152000004, 152000005, 152000006, 152000007, 152000008, 152000009, 152000010, 152000011, 152000012,
+				152000101, 152000102, 152000104, 152000107, 152000113, 152000201, 152000202, 152000204, 152000207, 152000214, 152000401, 152000403, 152000405,
+				152000407, 152000409, 152000411, 152000413, 152000415, 152000417, 152000419, 152000501, 152000502, 152000503, 152000504, 152000505, 152000601,
+				152000602, 152000603, 152000604, 152000605, 152000701, 152000702, 152000703, 152000704, 152000705, 152000706, 152000707, 152000708, 152000709,
+				152000710, 152000711, 152000712, 152000801, 152000802, 152000803, 152000804, 152000805, 152000806, 152000807, 152000808, 152000809, 152000810,
+				152001001, 152001002, 152001003, 152001004, 152001005 });
+
+		chunkSand.put(Race.ASMODIANS,
+			new int[] { 152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103, 152000203, 152000304, 152000305, 152000306,
+				152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311, 152000464, 152000466, 152000108, 152000208, 152000313, 152000315,
+				152000317, 152000469, 152000471, 152000114, 152000215, 152000320, 152000322, 152000324 });
+		chunkSand.put(Race.ELYOS,
+			new int[] { 152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103, 152000203, 152000304, 152000305, 152000306,
+				152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311, 152000414, 152000416, 152000108, 152000208, 152000313, 152000315,
+				152000317, 152000418, 152000420, 152000114, 152000215, 152000320, 152000322, 152000324 });
+	}
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
@@ -182,10 +180,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
+									} while (!validateItemId(randomId));
 									break;
 								case MANASTONE:
 								case MANASTONE_COMMON_GRADE_10:
@@ -234,10 +231,8 @@ public class DecomposeAction extends AbstractItemAction {
 										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 									}
 
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
+									if (!validateItemId(randomId))
 										return;
-									}
 									break;
 								case SPECIAL_MANASTONE_RARE_GRADE:
 								case SPECIAL_MANASTONE_LEGEND_GRADE:
@@ -263,61 +258,37 @@ public class DecomposeAction extends AbstractItemAction {
 										.collect(Collectors.toList());
 									randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
 
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
+									if (!validateItemId(randomId))
 										return;
-									}
 									break;
 								case CHUNK_EARTH:
 									int[] earth = chunkEarth.get(player.getRace());
-
 									randomId = earth[Rnd.get(earth.length)];
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
 									break;
 								case CHUNK_SAND:
 									int[] sand = chunkSand.get(player.getRace());
-
 									randomId = sand[Rnd.get(sand.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
 									break;
 								case CHUNK_ROCK:
 									randomId = chunkRock[Rnd.get(chunkRock.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
 									break;
 								case CHUNK_GEMSTONE:
 									randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
 									break;
 								case SCROLLS:
 									randomId = scrolls[Rnd.get(scrolls.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
 									break;
 								case POTION:
 									randomId = potion[Rnd.get(potion.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
+									break;
+								case LESSER_POTIONS:
+									randomId = lesser_potions[Rnd.get(lesser_potions.length)];
+									break;
+								case POTION_50:
+									randomId = potion_50[Rnd.get(potion_50.length)];
+									break;
+								case ILLUSION_GODSTONE:
+									randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
 									break;
 								case ANCIENTITEMS:
 									do {
@@ -325,10 +296,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
+									} while (!validateItemId(randomId));
 									break;
 								case ANCIENT_CROWN:
 									do {
@@ -336,10 +306,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
+									} while (!validateItemId(randomId));
 									break;
 								case ANCIENT_GOBLET:
 									do {
@@ -347,10 +316,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
+									} while (!validateItemId(randomId));
 									break;
 								case ANCIENT_SEAL:
 									do {
@@ -358,10 +326,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
+									} while (!validateItemId(randomId));
 									break;
 								case ANCIENT_ICON:
 									do {
@@ -369,34 +336,9 @@ public class DecomposeAction extends AbstractItemAction {
 										i++;
 										if (i > 50) {
 											randomId = 0;
-											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;
 										}
-									} while (!ItemService.checkRandomTemplate(randomId));
-									break;
-								case LESSER_POTIONS:
-									randomId = lesser_potions[Rnd.get(lesser_potions.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
-									break;
-								case POTION_50:
-									randomId = potion_50[Rnd.get(potion_50.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
-									break;
-								case ILLUSION_GODSTONE:
-									randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
-
-									if (!ItemService.checkRandomTemplate(randomId)) {
-										log.warn("DecomposeAction random item id not found. " + randomId);
-										return;
-									}
+									} while (!validateItemId(randomId));
 									break;
 							}
 							if (randomId != 0 && randomId != 167000524)
@@ -486,4 +428,25 @@ public class DecomposeAction extends AbstractItemAction {
 		return sum;
 	}
 
+	public static void validateRandomItemIds() {
+		for (int[] itemIds : chunkEarth.values())
+			validateItemIds(itemIds);
+		for (int[] itemIds : chunkSand.values())
+			validateItemIds(itemIds);
+		validateItemIds(chunkRock, chunkGemstone, scrolls, potion, lesser_potions, potion_50, illusion_godstones);
+	}
+
+	private static void validateItemIds(int[]... itemIds) {
+		for (int[] ids : itemIds) {
+			for (int itemId : ids)
+				validateItemId(itemId);
+		}
+	}
+
+	private static boolean validateItemId(int itemId) {
+		boolean itemExists = DataManager.ITEM_DATA.getItemTemplate(itemId) != null;
+		if (!itemExists)
+			log.warn("Decomposable reward item ID is invalid: " + itemId);
+		return itemExists;
+	}
 }
