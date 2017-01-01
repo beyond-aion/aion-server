@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
-import java.util.concurrent.Executors;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
@@ -51,7 +50,7 @@ public class ClassTransformer extends PropertyTransformer<Class<?>> {
 			if (superClass != null) { // search for class via reflection: this supports simple class names without class paths
 				if (rfl == null) // initialize reflections only for servers class paths, so it loads faster
 					rfl = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage("com.aionemu", getClass().getClassLoader()))
-						.setScanners(new SubTypesScanner()).setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())));
+						.setScanners(new SubTypesScanner()));
 				for (Class<?> cls : rfl.getSubTypesOf(superClass)) {
 					if (cls.getSimpleName().equals(value) || cls.getName().equals(value))
 						return cls;
