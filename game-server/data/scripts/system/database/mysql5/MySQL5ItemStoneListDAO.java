@@ -101,7 +101,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 								item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
 								break;
 							case 1:
-								item.setGodStone(new GodStone(item.getObjectId(), activatedCount, itemId, PersistentState.UPDATED));
+								item.setGodStone(new GodStone(item, activatedCount, itemId, PersistentState.UPDATED));
 								break;
 							case 2:
 								if (item.getSockets(true) <= item.getFusionStonesSize()) {

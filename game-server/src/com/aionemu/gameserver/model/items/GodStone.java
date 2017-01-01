@@ -33,45 +33,30 @@ public class GodStone extends ItemStone {
 
 	private static final Logger log = LoggerFactory.getLogger(GodStone.class);
 
+	private final Item parentItem;
 	private final GodstoneInfo godstoneInfo;
-	private ActionObserver actionListener;
-	private final int probability;
-	private final int probabilityLeft;
-	private final int breakProb;
-	private final int nonBreakCount;
-	private final ItemTemplate godItem;
 	private int activatedCount;
+	private ActionObserver actionListener;
 
-	public GodStone(int itemObjId, int activatedCount, int itemId, PersistentState persistentState) {
-		super(itemObjId, itemId, 0, persistentState);
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		godItem = itemTemplate;
-		godstoneInfo = itemTemplate.getGodstoneInfo();
-
-		if (godstoneInfo != null) {
-			probability = godstoneInfo.getProbability();
-			probabilityLeft = godstoneInfo.getProbabilityleft();
-			breakProb = godstoneInfo.getBreakProb();
-			nonBreakCount = godstoneInfo.getNonBreakCount();
-			this.activatedCount = activatedCount;
-		} else {
-			probability = 0;
-			probabilityLeft = 0;
-			breakProb = 0;
-			nonBreakCount = 0;
-			log.warn("CHECKPOINT: Godstone info missing for item : " + itemId);
-		}
-
+	public GodStone(Item parentItem, int activatedCount, int itemId, PersistentState persistentState) {
+		super(parentItem.getObjectId(), itemId, 0, persistentState);
+		this.parentItem = parentItem;
+		this.godstoneInfo = DataManager.ITEM_DATA.getItemTemplate(itemId).getGodstoneInfo();
+		this.activatedCount = activatedCount;
+		if (godstoneInfo == null)
+			log.warn("Godstone info is missing for item: " + itemId);
 	}
 
-	public void onEquip(final Player player) {
-		if (godstoneInfo == null || godItem == null)
+	public void onEquip(Player player) {
+		if (godstoneInfo == null)
 			return;
-
-		Item equippedItem = player.getEquipment().getEquippedItemByObjId(getItemObjId());
-		long equipmentSlot = equippedItem.getEquipmentSlot();
-		final int handProbability = (equipmentSlot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 ? probability : probabilityLeft;
+		if (actionListener != null)
+			onUnEquip(player);
 		actionListener = new ActionObserver(ObserverType.GODSTONE) {
+
+			private final Player owner = player;
+			private final int handProbability = (parentItem.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 ? godstoneInfo.getProbability()
+				: godstoneInfo.getProbabilityLeft();
 
 			@Override
 			public void calculateGodstoneChance(Creature creature) {
@@ -79,30 +64,39 @@ public class GodStone extends ItemStone {
 					return;
 				int procProbability = handProbability;
 				if (creature instanceof Player) {
-					procProbability -= ((Player)creature).getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
+					procProbability -= ((Player) creature).getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
 				}
 				if (Rnd.get(1, 1000) <= procProbability) {
-					Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), creature,
-						godItem, false);
+					ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(getItemId());
+					Skill skill = SkillEngine.getInstance().getSkill(owner, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), creature, itemTemplate,
+						false);
 					skill.setFirstTargetRangeCheck(false);
 					if (skill.canUseSkill(CastState.CAST_START)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
-						Effect effect = new Effect(player, creature, skill.getSkillTemplate(), 1, 0, godItem);
+						PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
+						Effect effect = new Effect(owner, creature, skill.getSkillTemplate(), 1, 0, itemTemplate);
 						effect.initialize();
 						effect.applyEffect();
-						effect = null;
 						// Illusion Godstones
-						if (breakProb > 0) {
+						if (godstoneInfo.getBreakProb() > 0) {
 							increaseActivatedCount();
-							if (activatedCount > nonBreakCount && Rnd.get(1, 1000) <= breakProb) {
+							if (activatedCount > godstoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godstoneInfo.getBreakProb()) {
 								// TODO: Delay 10 Minutes, send messages etc
-								// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
-								// godItem.getNameId()));
-								breakGodstone(player, equippedItem);
+								// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
+								// itemTemplate.getNameId()));
+								breakGodstone(owner, itemTemplate.getNameId());
 							}
 						}
 					}
 				}
+			}
+
+			private void breakGodstone(Player owner, int godStoneNameId) {
+				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(parentItem.getNameId(), godStoneNameId));
+				GodStone.this.setPersistentState(PersistentState.DELETED);
+				onUnEquip(owner);
+				parentItem.setGodStone(null);
+				DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(parentItem));
+				ItemPacketService.updateItemAfterInfoChange(owner, parentItem);
 			}
 		};
 		player.getObserveController().addObserver(actionListener);
@@ -112,25 +106,19 @@ public class GodStone extends ItemStone {
 	 * @param player
 	 */
 	public void onUnEquip(Player player) {
-		if (actionListener != null)
+		if (actionListener != null) {
 			player.getObserveController().removeObserver(actionListener);
+			actionListener = null;
+		}
 	}
 
 	private void increaseActivatedCount() {
-		this.activatedCount++;
-		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		activatedCount++;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public int getActivatedCount() {
-		return this.activatedCount;
+		return activatedCount;
 	}
 
-	private void breakGodstone(Player player, Item item) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(item.getNameId(), godItem.getNameId()));
-		this.setPersistentState(PersistentState.DELETED);
-		onUnEquip(player);
-		item.setGodStone(null);
-		DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(item));
-		ItemPacketService.updateItemAfterInfoChange(player, item);
-	}
 }

@@ -49,7 +49,7 @@ public class GodstoneInfo {
 	/**
 	 * @return the probabilityleft
 	 */
-	public int getProbabilityleft() {
+	public int getProbabilityLeft() {
 		return probabilityleft;
 	}
 
