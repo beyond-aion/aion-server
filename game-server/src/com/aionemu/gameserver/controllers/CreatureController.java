@@ -541,12 +541,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	@Override
+	public void onAfterSpawn() {
+		super.onAfterSpawn();
+		getOwner().revalidateZones();
+	}
+
+	@Override
 	public void onDespawn() {
 		cancelTask(TaskId.DECAY);
-
-		Creature owner = getOwner();
-		owner.getAggroList().clear();
-		owner.getObserveController().clear();
+		getOwner().getAggroList().clear();
 	}
 
 	private static final class DelayedOnAttack implements Runnable {
@@ -570,12 +573,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			creature = null;
 		}
 
-	}
-
-	@Override
-	public void onAfterSpawn() {
-		super.onAfterSpawn();
-		getOwner().revalidateZones();
 	}
 
 }
