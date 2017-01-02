@@ -6,16 +6,15 @@
 # Description:  Performs a shutdown of CS if running.
 #=====================================================================================
 
-if  [ ! -f chatserver.pid ] && [ ! -d libs ]; then
-  echo "ChatServer PID file not found. Please check your working directory."
-  exit 1
-elif [ -f chatserver.pid ] && ps -p `cat chatserver.pid` > /dev/null 2>&1; then
-  cspid=`cat chatserver.pid`
+dir=$(dirname $0)
+pidfile=${dir}/chatserver.pid
+if [ -f $pidfile ] && ps -p `cat $pidfile` > /dev/null 2>&1; then
+  pid=`cat $pidfile`
   if [ $# -gt 0 ] && [ $1 = "-f" ]; then
-    kill -KILL ${cspid}
+    kill -KILL $pid
     echo "ChatServer was killed."
   else
-    kill ${cspid}
+    kill $pid
     echo "ChatServer stop signal sent."
   fi
 else

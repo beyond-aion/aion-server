@@ -43,12 +43,16 @@ loop() {
       2) # LS exit code: restart
         echo "Restarting LoginServer..."
         ;;
+      130) # LS process was stopped (Ctrl+C)
+        echo "LoginServer process was stopped."
+        break
+        ;;
       137) # LS process was killed
         echo "LoginServer process was killed."
         break
         ;;
       *) # other
-        echo "LoginServer has terminated abnormally, restarting in 5 seconds."
+        echo "LoginServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac

@@ -43,12 +43,16 @@ loop() {
       2) # CS exit code: restart
         echo "Restarting ChatServer..."
         ;;
+      130) # CS process was stopped (Ctrl+C)
+        echo "ChatServer process was stopped."
+        break
+        ;;
       137) # CS process was killed
         echo "ChatServer process was killed."
         break
         ;;
       *) # other
-        echo "ChatServer has terminated abnormally, restarting in 5 seconds."
+        echo "ChatServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac

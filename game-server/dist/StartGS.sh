@@ -43,12 +43,16 @@ loop() {
       2) # GS exit code: restart
         echo "Restarting GameServer..."
         ;;
+      130) # GS process was stopped (Ctrl+C)
+        echo "GameServer process was stopped."
+        break
+        ;;
       137) # GS process was killed
         echo "GameServer process was killed."
         break
         ;;
       *) # other
-        echo "GameServer has terminated abnormally, restarting in 5 seconds."
+        echo "GameServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac
