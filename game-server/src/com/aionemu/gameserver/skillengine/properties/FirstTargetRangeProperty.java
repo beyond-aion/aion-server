@@ -34,12 +34,12 @@ public class FirstTargetRangeProperty {
 			return true;
 		}
 
-		if (!castState.isCastStart() && !(effector instanceof Player)) { // NPCs don't cancel skills once started, could be abused -> no range or geo to check
+		if (castState != CastState.CAST_START && !(effector instanceof Player)) { // NPCs don't cancel skills once started, could be abused -> no range or geo to check
 			return true;
 		}
 
 		// on end cast check add revision distance value
-		if (!castState.isCastStart())
+		if (castState == CastState.CAST_END)
 			firstTargetRange += properties.getRevisionDistance();
 
 		// Add Weapon Range to distance

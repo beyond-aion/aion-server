@@ -209,18 +209,8 @@ public class Properties {
 	}
 
 	public enum CastState {
-		CAST_START(true),
-		CAST_END(false);
-
-		private final boolean isCastStart;
-
-		CastState(boolean isCastStart) {
-			this.isCastStart = isCastStart;
-		}
-
-		public boolean isCastStart() {
-			return isCastStart;
-		}
+		CAST_START,
+		CAST_END;
 	}
 	
 	public int getIneffectiveRange() {
