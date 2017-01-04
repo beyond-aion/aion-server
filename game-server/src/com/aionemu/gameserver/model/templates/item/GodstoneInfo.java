@@ -28,14 +28,14 @@ public class GodstoneInfo {
 	/**
 	 * @return the skillid
 	 */
-	public int getSkillid() {
+	public int getSkillId() {
 		return skillid;
 	}
 
 	/**
 	 * @return the skilllvl
 	 */
-	public int getSkilllvl() {
+	public int getSkillLevel() {
 		return skilllvl;
 	}
 

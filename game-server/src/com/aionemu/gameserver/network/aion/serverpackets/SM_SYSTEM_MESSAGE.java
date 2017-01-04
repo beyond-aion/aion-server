@@ -11358,8 +11358,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an item you can add ability to.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300504, value0);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1300504, descriptionId);
 	}
 
 	/**

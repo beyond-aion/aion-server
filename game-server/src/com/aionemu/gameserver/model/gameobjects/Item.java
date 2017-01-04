@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.IExpirable;
@@ -502,8 +504,9 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	public void addGodStone(int itemId, int activatedCount) {
-		PersistentState state = godStone != null ? PersistentState.UPDATE_REQUIRED : PersistentState.NEW;
-		godStone = new GodStone(this, activatedCount, itemId, state);
+		if (godStone != null)
+			setGodStone(null);
+		godStone = new GodStone(this, activatedCount, itemId, PersistentState.NEW);
 	}
 
 	/**
@@ -511,6 +514,10 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 *          the goodStone to set
 	 */
 	public void setGodStone(GodStone godStone) {
+		if (godStone == null) {
+			this.godStone.setPersistentState(PersistentState.DELETED);
+			DAOManager.getDAO(ItemStoneListDAO.class).storeGodStones(this.godStone);
+		}
 		this.godStone = godStone;
 	}
 

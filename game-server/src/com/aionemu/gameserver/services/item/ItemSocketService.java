@@ -293,17 +293,9 @@ public class ItemSocketService {
 	}
 
 	public static void socketGodstone(Player player, Item weapon, int stoneId) {
-		if (weapon.getGodStone() != null) {
-			if (weapon.isEquipped())
-				weapon.getGodStone().onUnEquip(player);
-			weapon.getGodStone().setPersistentState(PersistentState.DELETED);
-			DAOManager.getDAO(ItemStoneListDAO.class).storeGodStones(weapon.getGodStone());
-			weapon.setGodStone(null);
-		}
-
 		if (!weapon.canSocketGodstone()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_ADD_PROC(new DescriptionId(weapon.getNameId())));
-			AuditLogger.info(player, "Player try insert godstone in not compatible item");
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(new DescriptionId(weapon.getNameId())));
+			AuditLogger.info(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
 			return;
 		}
 
@@ -332,8 +324,8 @@ public class ItemSocketService {
 			return;
 		}
 
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(),
-			2000, 0, 0));
+		PacketSendUtility.broadcastPacketAndReceive(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, 0, 0));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -341,15 +333,13 @@ public class ItemSocketService {
 			public void run() {
 				player.getObserveController().removeObserver(move);
 
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(),
-					0, 1, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, 1, 0));
 
 				if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 					return;
 
 				weapon.addGodStone(godStoneItemId);
-				if (weapon.isEquipped())
-					weapon.getGodStone().onEquip(player);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weapon.getNameId())));
 
 				ItemPacketService.updateItemAfterInfoChange(player, weapon);

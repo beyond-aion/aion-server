@@ -78,7 +78,6 @@ public class ItemEquipmentListener {
 			coolDowns.put(buffSkill.getCooldownId(), newCooldown);
 			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(coolDowns));
 		}
-		addGodstoneEffect(owner, item);
 		RandomStats randomStats = item.getRandomStats();
 		if (randomStats != null) {
 			randomStats.onEquip(owner);
@@ -146,7 +145,6 @@ public class ItemEquipmentListener {
 		if (idianStone != null) {
 			idianStone.onUnEquip(owner);
 		}
-		removeGodstoneEffect(owner, item);
 		RandomStats randomStats = item.getRandomStats();
 		if (randomStats != null) {
 			randomStats.onUnEquip(owner);
@@ -313,24 +311,6 @@ public class ItemEquipmentListener {
 			if (modifiers != null) {
 				cgs.endEffect(stone);
 			}
-		}
-	}
-
-	/**
-	 * @param item
-	 */
-	private static void addGodstoneEffect(Player player, Item item) {
-		if (item.getGodStone() != null) {
-			item.getGodStone().onEquip(player);
-		}
-	}
-
-	/**
-	 * @param item
-	 */
-	private static void removeGodstoneEffect(Player player, Item item) {
-		if (item.getGodStone() != null) {
-			item.getGodStone().onUnEquip(player);
 		}
 	}
 

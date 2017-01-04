@@ -175,9 +175,6 @@ public class ObserveController {
 			case HP_CHANGED:
 				observer.hpChanged((int) object[0]);
 				break;
-			case GODSTONE:
-				observer.calculateGodstoneChance((Creature) object[0]);
-				break;
 		}
 	}
 
@@ -289,9 +286,6 @@ public class ObserveController {
 		notifyObservers(ObserverType.HP_CHANGED, hpValue);
 	}
 
-	public void notifyGodstoneObserver(Creature creature) {
-		notifyObservers(ObserverType.GODSTONE, creature);
-	}
 	/**
 	 * @param status
 	 * @return true or false

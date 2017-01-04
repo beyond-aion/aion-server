@@ -3,7 +3,6 @@ package com.aionemu.gameserver.controllers;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
-import java.util.function.Consumer;
 
 import javax.annotation.Nonnull;
 
@@ -24,14 +23,18 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Homing;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -40,6 +43,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -47,6 +51,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
+import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -184,66 +189,95 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
-		// Reduce the damage to exactly what is required to ensure death.
-		// - Important that we don't include 7k worth of damage when the
-		// creature only has 100 hp remaining. (For AggroList dmg count.)
-		if (damage > getOwner().getLifeStats().getCurrentHp())
-			damage = getOwner().getLifeStats().getCurrentHp() + 1;
-
-		getOwner().getAggroList().addDamage(attacker, damage);
+		// attacker should not earn more aggrolist dmg than the owner had hp left
+		getOwner().getAggroList().addDamage(attacker, Math.min(getOwner().getLifeStats().getCurrentHp(), damage));
 		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
 
 		getOwner().incrementAttackedCount();
 
-		if (attacker instanceof Player)
-			applyEffectOnCritical((Player) attacker, getOwner(), status, skillId);
-
-		// notify all NPC's around that creature is attacking me
-		getOwner().getKnownList().forEachNpc(new Consumer<Npc>() {
-
-			@Override
-			public void accept(Npc object) {
-				object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner());
-			}
-
-		});
-	}
-
-	private void applyEffectOnCritical(Player attacker, Creature attacked, AttackStatus status, int skillId) {
-		if (status == AttackStatus.CRITICAL) {
-			int id = 0;
-			ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
-			if (mainHandWeaponType != null) {
-				switch (mainHandWeaponType) {
-					case POLEARM:
-					case STAFF:
-					case GREATSWORD:
-						id = 8218; // stumble
-						break;
-					case BOW:
-						id = 8217; // stun
-				}
-			}
-
-			if (id == 0)
-				return;
-
-			if (attacked.getEffectController().isUnderShield())
-				return;
-			// On retail this effect apply on each crit with 10% of base chance
-			// plus bonus effect penetration calculated above
-			if (Rnd.chance() >= 10)
-				return;
-
-			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);
-			// magical skills do not stun
-			if (template == null || (skillId != 0 && DataManager.SKILL_DATA.getSkillTemplate(skillId).getType() == SkillType.MAGICAL))
-				return;
-			Effect e = new Effect(attacker, attacked, template, template.getLvl(), 0);
-			e.initialize();
-			e.applyEffect();
+		if (attacker instanceof Player) {
+			Player player = (Player) attacker;
+			if (status == AttackStatus.CRITICAL && Rnd.chance() < 10)
+				applyEffectOnCritical(player, skillId);
+			if (status != AttackStatus.DODGE && status != AttackStatus.RESIST)
+				calculateGodStoneEffects(player);
 		}
 
+		// notify all NPC's around that creature is attacking me
+		getOwner().getKnownList().forEachNpc(npc -> npc.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
+	}
+
+	private void applyEffectOnCritical(Player attacker, int skillId) {
+		int id = 0;
+		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
+		if (mainHandWeaponType != null) {
+			switch (mainHandWeaponType) {
+				case POLEARM:
+				case STAFF:
+				case GREATSWORD:
+					id = 8218; // stumble
+					break;
+				case BOW:
+					id = 8217; // stun
+			}
+		}
+
+		if (id == 0)
+			return;
+
+		if (getOwner().getEffectController().isUnderShield())
+			return;
+
+		// magical skills do not stun
+		if (skillId != 0 && DataManager.SKILL_DATA.getSkillTemplate(skillId).getType() == SkillType.MAGICAL)
+			return;
+
+		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);
+		Effect e = new Effect(attacker, getOwner(), template, template.getLvl(), 0);
+		e.initialize();
+		e.applyEffect();
+	}
+
+	private void calculateGodStoneEffects(Player attacker) {
+		applyGodStoneEffect(attacker, attacker.getEquipment().getMainHandWeapon(), true);
+		applyGodStoneEffect(attacker, attacker.getEquipment().getOffHandWeapon(), false);
+	}
+
+	private void applyGodStoneEffect(Player attacker, Item weapon, boolean isMainHandWeapon) {
+		if (weapon == null || !weapon.hasGodStone())
+			return;
+		GodStone godStone = weapon.getGodStone();
+		GodstoneInfo godStoneInfo = godStone.getGodstoneInfo();
+		if (godStoneInfo == null)
+			return;
+
+		int procProbability = isMainHandWeapon ? godStoneInfo.getProbability() : godStoneInfo.getProbabilityLeft();
+		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
+
+		if (Rnd.get(1, 1000) <= procProbability) {
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
+			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template,
+				false);
+			skill.setFirstTargetRangeCheck(false);
+			if (!skill.canUseSkill(CastState.CAST_START))
+				return;
+			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
+			Effect effect = new Effect(attacker, getOwner(), skill.getSkillTemplate(), 1, 0, template);
+			effect.initialize();
+			effect.applyEffect();
+			// Illusion Godstones
+			if (godStoneInfo.getBreakProb() > 0) {
+				godStone.increaseActivatedCount();
+				if (godStone.getActivatedCount() > godStoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godStoneInfo.getBreakProb()) {
+					// TODO: Delay 10 Minutes, send messages etc
+					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
+					// itemTemplate.getNameId()));
+					weapon.setGodStone(null);
+					PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getNameId(), template.getNameId()));
+					ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
+				}
+			}
+		}
 	}
 
 	/**
@@ -322,7 +356,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getGameStats().increaseAttackCounter();
 		if (addAttackObservers) {
 			getOwner().getObserveController().notifyAttackObservers(target);
-			getOwner().getObserveController().notifyGodstoneObserver(target);
 		}
 
 		final Creature creature = getOwner();
