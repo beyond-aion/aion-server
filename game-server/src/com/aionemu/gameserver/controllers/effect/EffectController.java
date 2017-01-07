@@ -971,7 +971,7 @@ public class EffectController {
 									nextEffect.setEffectResult(EffectResult.CONFLICT);
 								return true;
 							} else {
-								effect.endEffect(false, false);
+								effect.endEffect(false);
 								break effectCheck;
 							}
 						}

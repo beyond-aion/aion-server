@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -23,8 +25,7 @@ public abstract class DamageEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		effect.getEffected().getController()
-			.onAttack(effect.getEffector(), effect.getSkillId(), effect.getReserveds(this.position).getValue(), true, effect.getAttackStatus());
+		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, effect.getReserveds(this.position).getValue(), true, LOG.REGULAR);
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 	}
 

@@ -75,7 +75,7 @@ public class Damage extends AdminCommand {
 					case "hp":
 						if (isPercent)
 							dmg = (int) (dmg / 100f * creature.getLifeStats().getMaxHp());
-						creature.getController().onAttack(creature, dmg, true);
+						creature.getController().onAttack(creature, dmg, null);
 						break;
 					case "mp":
 						if (isPercent)

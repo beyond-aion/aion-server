@@ -76,7 +76,7 @@ public class AuraEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		effect.setPeriodicTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new AuraTask(effect), 0, 6500), position);
+		effect.setPeriodicTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new AuraTask(effect), 0, 6500));
 	}
 
 	private class AuraTask implements Runnable {

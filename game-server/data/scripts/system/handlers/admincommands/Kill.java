@@ -19,11 +19,13 @@ public class Kill extends AdminCommand {
 	public Kill() {
 		super("kill", "Kills the specified NPC(s) or player.");
 
+		// @formatter:off
 		setParamInfo(
 			" - kills your target (can be NPC or player)",
 			"<all> [neutral|enemy] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs)",
 			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)"
 		);
+		// @formatter:on
 	}
 
 	@Override
@@ -93,8 +95,8 @@ public class Kill extends AdminCommand {
 		if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 			return false;
 
-		target.getController().onAttack((target.isPvpTarget(attacker) && !target.isEnemy(attacker) ? target : attacker),
-			target.getLifeStats().getMaxHp() + 1, true);
+		target.getController().onAttack(target.isPvpTarget(attacker) && !target.isEnemy(attacker) ? target : attacker, target.getLifeStats().getMaxHp(),
+			null);
 		return true;
 	}
 }

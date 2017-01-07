@@ -44,9 +44,7 @@ public class BleedEffect extends AbstractOverTimeEffect {
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();
-		Creature effector = effect.getEffector();
-		effected.getController().onAttack(effector, effect.getSkillId(), TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED,
-			effect.getAttackStatus());
-		effected.getObserveController().notifyDotAttackedObservers(effector, effect);
+		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED);
+		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
 	}
 }

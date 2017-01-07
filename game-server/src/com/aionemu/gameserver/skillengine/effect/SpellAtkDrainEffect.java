@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author Sippolo
- * @author kecimis
+ * @author Sippolo, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpellAtkDrainEffect")
@@ -28,8 +27,7 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, true, this.critProbMod2, critAddDmg);
-		effect.getEffected().getController()
-			.onAttack(effect.getEffector(), effect.getSkillId(), TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN, effect.getAttackStatus());
+		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 
 		// Drain (heal) portion of damage inflicted

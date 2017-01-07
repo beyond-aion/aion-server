@@ -164,12 +164,25 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Perform tasks when Creature was attacked //TODO may be pass only Skill object - but need to add properties in it
+	 * Perform tasks when Creature was attacked
 	 */
-	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status) {
-		if (damage != 0) {
+	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus) {
+		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true);
+	}
+
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId) {
+		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
+			!effect.isGodstoneActivated() && !effect.isPeriodic());
+	}
+
+	/**
+	 * Perform tasks when Creature was attacked //TODO maybe pass only Skill object - but need to add properties in it
+	 */
+	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
+		boolean allowGodstoneActivation) {
+		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
-			if (skill != null && notifyAttack) {
+			if (skill != null) {
 				if (skill.getSkillMethod() == SkillMethod.ITEM) {
 					cancelCurrentSkill(attacker);
 				} else {
@@ -185,8 +198,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					}
 				}
 			}
-			if (notifyAttack)
-				getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
+			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
 		// attacker should not earn more aggrolist dmg than the owner had hp left
@@ -199,7 +211,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			Player player = (Player) attacker;
 			if (status == AttackStatus.CRITICAL && Rnd.chance() < 10)
 				applyEffectOnCritical(player, skillId);
-			if (status != AttackStatus.DODGE && status != AttackStatus.RESIST)
+			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
 		}
 
@@ -262,7 +274,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (!skill.canUseSkill(CastState.CAST_START))
 				return;
 			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
-			Effect effect = new Effect(attacker, getOwner(), skill.getSkillTemplate(), 1, 0, template);
+			Effect effect = new Effect(skill, getOwner(), 0);
 			effect.initialize();
 			effect.applyEffect();
 			// Illusion Godstones
@@ -278,21 +290,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				}
 			}
 		}
-	}
-
-	/**
-	 * Perform tasks when Creature was attacked
-	 */
-	public final void onAttack(Creature creature, int skillId, final int damage, boolean notifyAttack, AttackStatus attackStatus) {
-		this.onAttack(creature, skillId, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, attackStatus);
-	}
-
-	public final void onAttack(Creature creature, final int damage, boolean notifyAttack) {
-		this.onAttack(creature, 0, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, null);
-	}
-
-	public final void onAttack(Creature creature, final int damage, boolean notifyAttack, AttackStatus attackStatus) {
-		this.onAttack(creature, 0, TYPE.REGULAR, damage, notifyAttack, LOG.REGULAR, attackStatus);
 	}
 
 	/**
@@ -358,11 +355,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackObservers(target);
 		}
 
-		final Creature creature = getOwner();
 		if (time == 0)
-			target.getController().onAttack(getOwner(), damage, true, firstAttackStatus);
+			target.getController().onAttack(getOwner(), damage, firstAttackStatus);
 		else
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, creature, damage, firstAttackStatus), time);
+			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus), time);
 	}
 
 	/**
@@ -601,7 +597,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		@Override
 		public void run() {
-			target.getController().onAttack(creature, finalDamage, true, attackStatus);
+			target.getController().onAttack(creature, finalDamage, attackStatus);
 			target = null;
 			creature = null;
 		}

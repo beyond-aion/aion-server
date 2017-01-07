@@ -712,7 +712,7 @@ public class Skill {
 				if (skillGroup != null && skillGroup.equalsIgnoreCase("RI_CHARGEATTACK"))
 					count = 2;
 				for (int i = 0; i < count; i++) {
-					Effect effect = new Effect(this, effected, 0, itemTemplate);
+					Effect effect = new Effect(this, effected, 0);
 					if (effected instanceof Player) {
 						if (effect.getEffectResult() == EffectResult.CONFLICT)
 							blockedStance = true;
@@ -749,7 +749,7 @@ public class Skill {
 
 			// exception for point point skills(example Ice Sheet)
 			if (effectedList.isEmpty() && this.isPointPointSkill()) {
-				Effect effect = new Effect(this, null, 0, itemTemplate);
+				Effect effect = new Effect(this, null, 0);
 				effect.initialize();
 				effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
 				effects.add(effect);
@@ -1066,7 +1066,7 @@ public class Skill {
 	}
 
 	public ItemTemplate getItemTemplate() {
-		return this.itemTemplate;
+		return itemTemplate;
 	}
 
 	public void setItemObjectId(int id) {

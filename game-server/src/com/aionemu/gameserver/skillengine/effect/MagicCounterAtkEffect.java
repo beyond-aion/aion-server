@@ -9,7 +9,6 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -35,42 +34,21 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
-		final CreatureGameStats<? extends Creature> cls = effect.getEffected().getGameStats();
-		if (effected instanceof Player) {
-			ActionObserver observer = new ActionObserver(ObserverType.ENDSKILLCAST) {
+		ActionObserver observer = new ActionObserver(effected instanceof Player ? ObserverType.ENDSKILLCAST : ObserverType.STARTSKILLCAST) {
 
-				@Override
-				public void endSkillCast(final Skill skill) {
-					if (skill.getSkillMethod() == SkillMethod.ITEM)
-						return;
-					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
-						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK,
-							effect.getAttackStatus());
-					}
+			@Override
+			public void endSkillCast(final Skill skill) {
+				if (skill.getSkillMethod() == SkillMethod.ITEM)
+					return;
+				if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
+					int damage = Math.min(maxdmg, (int) (effected.getGameStats().getMaxHp().getBase() / 100f * value));
+					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK);
 				}
-			};
-			effect.setActionObserver(observer, position);
-			effected.getObserveController().addObserver(observer);
-		} else {
-			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {
-
-				@Override
-				public void endSkillCast(final Skill skill) {
-					if (skill.getSkillMethod() == SkillMethod.ITEM)
-						return;
-					if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
-						int damage = ((int) (cls.getMaxHp().getBase() / 100f * value) > maxdmg ? maxdmg : (int) (cls.getMaxHp().getBase() / 100f * value));
-						effected.getController().onAttack(effector, effect.getSkillId(), TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK,
-							effect.getAttackStatus());
-					}
-				}
-			};
-			effect.setActionObserver(observer, position);
-			effected.getObserveController().addObserver(observer);
-		}
+			}
+		};
+		effect.setActionObserver(observer, position);
+		effected.getObserveController().addObserver(observer);
 	}
 
 	@Override

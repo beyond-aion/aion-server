@@ -148,12 +148,12 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 701593:
 				sendMsg(1400732);
 				spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+				npc.getController().die();
 				break;
 			case 700856:
 				sendMsg(1400731);
 				spawn(216952, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
-				npc.getController().onAttack(npc, npc.getLifeStats().getMaxHp() + 1, false);
+				npc.getController().die();
 				break;
 		}
 	}

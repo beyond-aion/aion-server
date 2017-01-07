@@ -147,7 +147,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 					@Override
 					public void accept(Player pl) {
 						if (!pl.getLifeStats().isAlreadyDead())
-							pl.getController().onAttack(pl, pl.getLifeStats().getMaxHp() + 1, true);
+							pl.getController().die();
 					}
 				});
 				onInstanceDestroy();

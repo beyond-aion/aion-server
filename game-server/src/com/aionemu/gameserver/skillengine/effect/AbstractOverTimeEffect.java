@@ -59,10 +59,9 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 					onPeriodicAction(effect);
 				}
 			}, waitingTime, checktime);
-			effect.setPeriodicTask(task, position);
+			effect.setPeriodicTask(task);
 		} catch (Exception e) {
-			log.warn("Exception in skillId: " + effect.getSkillId());
-			e.printStackTrace();
+			log.warn("Exception in skillId: " + effect.getSkillId(), e);
 		}
 	}
 

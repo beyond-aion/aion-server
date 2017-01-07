@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -50,8 +51,8 @@ public class Effect implements StatOwner {
 	private long endTime;
 	private PeriodicActions periodicActions;
 	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
-	private Future<?> task = null;
-	private Future<?>[] periodicTasks = null;
+	private Future<?> endTask = null;
+	private Future<?> periodicTask = null;
 	private Future<?> periodicActionsTask = null;
 	private boolean isSubEffect = false;
 
@@ -83,13 +84,11 @@ public class Effect implements StatOwner {
 	private boolean launchSubEffect = true;
 	private Effect subEffect;
 
-	private boolean isStopped;
+	private AtomicBoolean hasEnded = new AtomicBoolean();
 
 	private boolean isCancelOnDmg;
 
 	private boolean subEffectAbortedBySubConditions;
-
-	private ItemTemplate itemTemplate;
 
 	/**
 	 * Hate that will be placed on effected list
@@ -148,13 +147,8 @@ public class Effect implements StatOwner {
 		this.power = initializePower();
 	}
 
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration, ItemTemplate itemTemplate) {
-		this(effector, effected, skillTemplate, skillLevel, duration);
-		this.itemTemplate = itemTemplate;
-	}
-
-	public Effect(Skill skill, Creature effected, int duration, ItemTemplate itemTemplate) {
-		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), duration, itemTemplate);
+	public Effect(Skill skill, Creature effected, int duration) {
+		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), duration);
 		this.skill = skill;
 	}
 
@@ -234,18 +228,14 @@ public class Effect implements StatOwner {
 		return skillTemplate.isPassive();
 	}
 
-	public void setTask(Future<?> task) {
-		this.task = task;
+	public boolean isPeriodic() {
+		return periodicTask != null;
 	}
 
-	public Future<?> getPeriodicTask(int i) {
-		return periodicTasks[i - 1];
-	}
-
-	public void setPeriodicTask(Future<?> periodicTask, int i) {
-		if (periodicTasks == null)
-			periodicTasks = new Future<?>[4];
-		this.periodicTasks[i - 1] = periodicTask;
+	public void setPeriodicTask(Future<?> periodicTask) {
+		if (this.periodicTask != null)
+			throw new IllegalStateException(getClass().getSimpleName() + " already has a periodic task");
+		this.periodicTask = periodicTask;
 	}
 
 	public AttackStatus getAttackStatus() {
@@ -661,38 +651,41 @@ public class Effect implements StatOwner {
 			return;
 		endTime = System.currentTimeMillis() + duration;
 
-		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+		endTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				endEffect(true, true);
+				endedByTime = true;
+				endEffect(true);
 			}
 		}, duration);
 	}
 
 	/**
-	 * Will activate toggle skill and start checking task
+	 * Will visually activate toggle skill
 	 */
 	private void activateToggleSkill() {
 		PacketSendUtility.sendPacket((Player) effector, new SM_SKILL_ACTIVATION(getSkillId(), true));
 	}
 
 	/**
-	 * Will deactivate toggle skill and stop checking task
+	 * Will visually deactivate toggle skill
 	 */
 	private void deactivateToggleSkill() {
 		PacketSendUtility.sendPacket((Player) effector, new SM_SKILL_ACTIVATION(getSkillId(), false));
 	}
 
-	/**
-	 * End effect and all effect actions This method is synchronized and prevented to be called several times which could cause unexpected behavior
-	 */
-	public synchronized void endEffect(boolean broadcast, boolean endedByTime) {
-		if (isStopped)
-			return;
+	public void endEffect() {
+		endEffect(true);
+	}
 
-		if (endedByTime)
-			this.setEndedByTime(true);
+	/**
+	 * End effect and all effect actions
+	 */
+	public void endEffect(boolean broadcast) {
+		if (!hasEnded.compareAndSet(false, true))
+			return;
+		stopTasks();
 
 		for (EffectTemplate template : successEffects.values()) {
 			template.endEffect(this);
@@ -709,40 +702,29 @@ public class Effect implements StatOwner {
 
 		// TODO better way to finish
 		if (getSkillTemplate().getTargetSlot() == SkillTargetSlot.SPEC2) {
-			effected.getLifeStats().increaseHp((int) (effected.getLifeStats().getMaxHp() * 0.2));
-			effected.getLifeStats().increaseMp((int) (effected.getLifeStats().getMaxMp() * 0.2));
+			effected.getLifeStats().increaseHp((int) (effected.getLifeStats().getMaxHp() * 0.2f));
+			effected.getLifeStats().increaseMp((int) (effected.getLifeStats().getMaxMp() * 0.2f));
 		}
 
 		if (isToggle() && effector instanceof Player) {
 			deactivateToggleSkill();
 		}
-		stopTasks();
 		effected.getEffectController().clearEffect(this, broadcast);
-		this.isStopped = true;
-		if (effected != null)
-			effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), effected, this.getSkillId());
-	}
-
-	public void endEffect() {
-		endEffect(true, false);
+		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), effected, this.getSkillId());
 	}
 
 	/**
 	 * Stop all scheduled tasks
 	 */
 	public void stopTasks() {
-		if (task != null) {
-			task.cancel(false);
-			task = null;
+		if (endTask != null) {
+			endTask.cancel(false);
+			endTask = null;
 		}
 
-		if (periodicTasks != null) {
-			for (Future<?> periodicTask : this.periodicTasks) {
-				if (periodicTask != null) {
-					periodicTask.cancel(false);
-					periodicTask = null;
-				}
-			}
+		if (periodicTask != null) {
+			periodicTask.cancel(false);
+			periodicTask = null;
 		}
 
 		stopPeriodicActions();
@@ -754,7 +736,7 @@ public class Effect implements StatOwner {
 	 * @return
 	 */
 	public int getRemainingTime() {
-		return this.getDuration() >= 86400000 ? -1 : (int) (endTime - System.currentTimeMillis());
+		return getDuration() >= 86400000 ? -1 : (int) (endTime - System.currentTimeMillis());
 	}
 
 	/**
@@ -774,14 +756,18 @@ public class Effect implements StatOwner {
 	}
 
 	public ItemTemplate getItemTemplate() {
-		return itemTemplate;
+		return skill == null ? null : skill.getItemTemplate();
+	}
+
+	public boolean isGodstoneActivated() {
+		return getItemTemplate() != null && getItemTemplate().getGodstoneInfo() != null;
 	}
 
 	/**
 	 * Try to add this effect to effected controller
 	 */
 	public void addToEffectedController() {
-		if ((!addedToController) && (effected.getLifeStats() != null) && (!effected.getLifeStats().isAlreadyDead())) {
+		if (!addedToController && effected.getLifeStats() != null && !effected.getLifeStats().isAlreadyDead()) {
 			effected.getEffectController().addEffect(this);
 			addedToController = true;
 		}
@@ -1016,9 +1002,8 @@ public class Effect implements StatOwner {
 	 * Check use equipment conditions by adding Unequip observer if needed
 	 */
 	private void checkUseEquipmentConditions() {
-		// If skill has use equipment conditions
-		// Observe for unequip event and remove effect if event occurs
-		if ((getSkillTemplate().getUseEquipmentconditions() != null) && (getSkillTemplate().getUseEquipmentconditions().getConditions().size() > 0)) {
+		// If skill has use equipment conditions, observe for unequip event and remove effect if event occurs
+		if (getSkillTemplate().getUseEquipmentconditions() != null && !getSkillTemplate().getUseEquipmentconditions().getConditions().isEmpty()) {
 			ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
 
 				@Override
@@ -1061,7 +1046,7 @@ public class Effect implements StatOwner {
 	}
 
 	public boolean isCancelOnDmg() {
-		return this.isCancelOnDmg;
+		return isCancelOnDmg;
 	}
 
 	public void endEffects() {
@@ -1165,56 +1150,55 @@ public class Effect implements StatOwner {
 	 * functions that check for given effecttype
 	 */
 	public boolean isHideEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIDE);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIDE);
 	}
 
 	public boolean isParalyzeEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PARALYZE);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PARALYZE);
 	}
 
 	public boolean isStunEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.STUN);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.STUN);
 	}
 
 	public boolean isSanctuaryEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.SANCTUARY);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.SANCTUARY);
 	}
 
 	public boolean isDamageEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isDamageEffect();
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isDamageEffect();
 	}
 
 	public boolean isXpBoost() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.XPBOOST);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.XPBOOST);
 	}
 
 	public boolean isNoDeathPenalty() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NODEATHPENALTY);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NODEATHPENALTY);
 	}
 
 	public boolean isNoResurrectPenalty() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NORESURRECTPENALTY);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NORESURRECTPENALTY);
 	}
 
 	public boolean isHiPass() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIPASS);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIPASS);
 	}
 
 	public boolean isDelayedDamage() {
-		return this.getSkillTemplate().getEffects() != null
-			&& this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT);
 	}
 
 	public boolean isPetOrder() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUSEULTRASKILL);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUSEULTRASKILL);
 	}
 
 	public boolean isSummoning() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isSummoning();
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isSummoning();
 	}
 
 	public boolean isPetOrderUnSummonEffect() {
-		return this.getSkillTemplate().getEffects() != null && this.getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUNSUMMON);
+		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUNSUMMON);
 	}
 
 	/**
@@ -1245,14 +1229,6 @@ public class Effect implements StatOwner {
 	 */
 	public boolean isEndedByTime() {
 		return endedByTime;
-	}
-
-	/**
-	 * @param endedByTime
-	 *          the endedByTime to set
-	 */
-	public void setEndedByTime(boolean endedByTime) {
-		this.endedByTime = endedByTime;
 	}
 
 	public boolean isSubEffect() {

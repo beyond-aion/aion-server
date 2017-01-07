@@ -39,12 +39,16 @@ public class Quest extends AdminCommand {
 	public Quest() {
 		super("quest", "Handles quest states of your target.");
 
-		setParamInfo("[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
+		// @formatter:off
+		setParamInfo(
+			"[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
 			"[player] <quest> <status> - Shows the quest status of the specified quest.",
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
 			"[player] <quest> <dialog> <dialog_id> - Sends the specified quest dialog.",
-			"Note: Player name parameters are optional. If missing, your current target will be taken.");
+			"Note: Player name parameters are optional. If missing, your current target will be taken."
+		);
+		// @formatter:on
 	}
 
 	@Override

@@ -54,7 +54,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
 	}
 
-	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, ShieldType shieldType, int probability, int mpValue) {
+	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, ShieldType shieldType, int probability,
+		int mpValue) {
 		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
 	}
 
@@ -149,7 +150,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					}
 					attackResult.setReflectedDamage(reflectedHit);
 					attackResult.setReflectedSkillId(effect.getSkillId());
-					attacker.getController().onAttack(effect.getEffected(), reflectedHit, false);
+					// apply reflect damage
+					attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false);
 
 					if (effect.getEffected() instanceof Player)
 						PacketSendUtility.sendPacket((Player) effect.getEffected(),
@@ -188,7 +190,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
 					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
-						attackResult.getAttackStatus());
+						attackResult.getAttackStatus(), true);
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

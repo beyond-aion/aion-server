@@ -44,8 +44,7 @@ public class PoisonEffect extends AbstractOverTimeEffect {
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();
-		Creature effector = effect.getEffector();
-		effected.getController().onAttack(effector, effect.getSkillId(), TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.POISON, null);
-		effected.getObserveController().notifyDotAttackedObservers(effector, effect);
+		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.POISON);
+		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
 	}
 }

@@ -471,7 +471,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus) {
+	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
+		boolean allowGodstoneActivation) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
 
@@ -480,11 +481,11 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 
 		if (getOwner().isProtectionActive())
-			damage = 0;
+			return;
 
 		cancelUseItem();
 		cancelGathering();
-		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus);
+		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation);
 
 		if (attacker instanceof Npc) {
 			ShoutEventHandler.onAttack((NpcAI2) attacker.getAi2(), getOwner());
