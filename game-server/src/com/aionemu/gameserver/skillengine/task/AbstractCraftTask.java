@@ -19,14 +19,14 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
 		CRIT_BLUE(2),
 		CRIT_PURPLE(3);
 		
-		private int critId;
+		private int progressId;
 		
-		private CraftType(int critId) {
-			this.critId = critId;
+		private CraftType(int progressId) {
+			this.progressId = progressId;
 		}
 		
-		public int getCritId() {
-			return critId;
+		public int getProgressId() {
+			return progressId;
 		}
 	}
 	

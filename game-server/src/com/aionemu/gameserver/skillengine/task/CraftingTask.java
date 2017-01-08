@@ -19,12 +19,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CraftingTask extends AbstractCraftTask {
 
-	protected RecipeTemplate recipeTemplate;
-	protected ItemTemplate itemTemplate;
-	protected int critCount;
-	protected boolean crit = false;
-	protected int maxCritCount;
-	private int bonus;
+	private final RecipeTemplate recipeTemplate;
+	private final int maxCritCount;
+	private final int bonus;
+	private ItemTemplate itemTemplate;
+	private int critCount;
 	private int delay;
 	private int executionSpeed;
 
@@ -39,6 +38,7 @@ public class CraftingTask extends AbstractCraftTask {
 		this.recipeTemplate = recipeTemplate;
 		this.maxCritCount = recipeTemplate.getComboProductSize();
 		this.bonus = bonus;
+		this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
 	}
 
 	@Override
@@ -50,8 +50,7 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected boolean onSuccessFinish() {
-		if (crit && recipeTemplate.getComboProduct(critCount) != null) {
-			PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 3, 0, 0));
+		if (calculateCrit()) {
 			onInteractionStart();
 			return false;
 		} else {
@@ -63,10 +62,36 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 	}
 
+	private boolean calculateCrit() {
+		if (critCount >= maxCritCount)
+			return false;
+
+		if (recipeTemplate.getComboProduct(critCount + 1) == null)
+			return false;
+
+		// first crit uses base rate, subsequent crits use combo rate
+		int chance = critCount == 0 ? requestor.getRates().getCraftCritRate() : requestor.getRates().getComboCritRate();
+		House house = requestor.getActiveHouse();
+		if (house != null)
+			switch (house.getHouseType()) {
+				case ESTATE:
+				case PALACE:
+					chance += 5;
+					break;
+			}
+
+		if (Rnd.chance() >= chance)
+			return false;
+
+		critCount++;
+		itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getComboProduct(critCount));
+		return true;
+	}
+
 	@Override
 	protected void sendInteractionUpdate() {
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue,
-			craftType.getCritId(), executionSpeed, delay));
+			craftType.getProgressId(), executionSpeed, delay));
 	}
 
 	@Override
@@ -85,42 +110,14 @@ public class CraftingTask extends AbstractCraftTask {
 	protected void onInteractionStart() {
 		currentSuccessValue = 0;
 		currentFailureValue = 0;
-		checkCrit();
 
-		if (maxCritCount > 0) {
-			int chance = requestor.getRates().getCraftCritRate();
-			if (critCount > 0 && maxCritCount > 1)
-				chance = requestor.getRates().getComboCritRate();
-
-			House house = requestor.getActiveHouse();
-			if (house != null)
-				switch (house.getHouseType()) {
-					case ESTATE:
-					case PALACE:
-						chance += 5;
-						break;
-				}
-
-			if ((critCount < maxCritCount) && (Rnd.chance() < chance)) {
-				critCount++;
-				crit = true;
-			}
-		}
-
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, fullBarValue, fullBarValue, 0, 0, 0));
+		PacketSendUtility.sendPacket(requestor,
+			new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, fullBarValue, fullBarValue, critCount == 0 ? 0 : 3, 0, 0));
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 1, 0, 0));
 		PacketSendUtility.broadcastPacket(requestor,
 			new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 0), true);
 		PacketSendUtility.broadcastPacket(requestor,
 			new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 1), true);
-	}
-
-	protected void checkCrit() {
-		if (crit) {
-			crit = false;
-			this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getComboProduct(critCount));
-		} else
-			this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
 	}
 
 	@Override

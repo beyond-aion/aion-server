@@ -31,12 +31,12 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 	public SM_GATHER_UPDATE(GatherableTemplate template, Material material, int success, int failure, int action, int executionSpeed, int delay) {
 		this.skillId = template.getHarvestSkill();
 		this.action = action;
-		this.itemId = material.getItemid();
+		this.itemId = material.getItemId();
 		this.success = success;
 		this.failure = failure;
 		this.executionSpeed = executionSpeed;
 		this.delay = delay;
-		this.nameId = material.getNameid();
+		this.nameId = material.getNameId();
 	}
 
 	@Override

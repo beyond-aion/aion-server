@@ -53,7 +53,7 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, craftType.getCritId(), executionSpeed, showBarDelay));
+		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, craftType.getProgressId(), executionSpeed, showBarDelay));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class GatheringTask extends AbstractCraftTask {
 		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
 		if (template.getEraseValue() > 0)
 			requestor.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
-		ItemService.addItem(requestor, material.getItemid(), requestor.getRates().getGatheringCountRate());
+		ItemService.addItem(requestor, material.getItemId(), requestor.getRates().getGatheringCountRate());
 		if (requestor.isInInstance()) {
 			requestor.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requestor, (Gatherable) responder);
 		}

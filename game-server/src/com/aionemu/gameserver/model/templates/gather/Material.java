@@ -33,7 +33,7 @@ public class Material implements Comparable<Material> {
 	/**
 	 * @return the itemid
 	 */
-	public int getItemid() {
+	public int getItemId() {
 		return itemid;
 	}
 
@@ -42,7 +42,7 @@ public class Material implements Comparable<Material> {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public int getNameid() {
+	public int getNameId() {
 		return nameid * 2 + 1;
 	}
 
