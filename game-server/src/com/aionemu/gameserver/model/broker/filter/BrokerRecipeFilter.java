@@ -32,7 +32,7 @@ public class BrokerRecipeFilter extends BrokerFilter {
 			if (craftAction != null) {
 				int id = craftAction.getRecipeId();
 				RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(id);
-				if (recipeTemplate != null && recipeTemplate.getSkillid() == craftSkillId) {
+				if (recipeTemplate != null && recipeTemplate.getSkillId() == craftSkillId) {
 					return ArrayUtils.contains(masks, template.getTemplateId() / 100000);
 				}
 			}

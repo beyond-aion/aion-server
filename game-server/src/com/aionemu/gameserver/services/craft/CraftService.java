@@ -53,7 +53,7 @@ public class CraftService {
 		int skillLvl = recipetemplate.getSkillpoint();
 		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
 		xpReward = xpReward + (xpReward * bonus / 100); // bonus
-		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductid();
+		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductId();
 
 		ItemService.addItem(player, productItemId, recipetemplate.getQuantity(), true,
 			new ItemUpdatePredicate(ItemAddType.CRAFTED_ITEM, ItemUpdateType.INC_ITEM_COLLECT) {
@@ -74,7 +74,7 @@ public class CraftService {
 				+ recipetemplate.getQuantity() + ")" + (critCount > 0 ? " - critical" : ""));
 		}
 
-		int skillId = recipetemplate.getSkillid();
+		int skillId = recipetemplate.getSkillId();
 		int gainedCraftXp = (int) RewardType.CRAFTING.calcReward(player, xpReward);
 		float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
 		if (statRate > 0)
@@ -84,7 +84,7 @@ public class CraftService {
 			player.getCommonData().addExp(xpReward, RewardType.CRAFTING);
 		} else {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillid()).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillId()).getNameId()));
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {
@@ -101,9 +101,9 @@ public class CraftService {
 	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType) {
 
 		RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
-		int skillId = recipeTemplate.getSkillid();
+		int skillId = recipeTemplate.getSkillId();
 		VisibleObject target = player.getKnownList().getObject(targetObjId);
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductid());
+		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
 
 		if (!checkCraft(player, recipeTemplate, skillId, target, itemTemplate, craftType)) {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);

@@ -74,7 +74,7 @@ public class RecipeTemplate {
 		if (comboproduct == null || comboproduct.get(num - 1) == null) {
 			return null;
 		}
-		return comboproduct.get(num - 1).getItemid();
+		return comboproduct.get(num - 1).getItemId();
 	}
 
 	public Integer getComboProductSize() {
@@ -98,7 +98,7 @@ public class RecipeTemplate {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public Integer getProductid() {
+	public Integer getProductId() {
 		return productid;
 	}
 
@@ -143,7 +143,7 @@ public class RecipeTemplate {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public Integer getSkillid() {
+	public Integer getSkillId() {
 		return skillid;
 	}
 
@@ -152,14 +152,14 @@ public class RecipeTemplate {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public Integer getItemid() {
+	public Integer getItemId() {
 		return itemid;
 	}
 
 	/**
 	 * @return the nameid
 	 */
-	public int getNameid() {
+	public int getNameId() {
 		return nameid;
 	}
 

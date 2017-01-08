@@ -56,18 +56,18 @@ public class RecipeData {
 		switch (race) {
 			case ASMODIANS:
 				for (RecipeTemplate recipe : asmos)
-					if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+					if (recipe.getSkillId() == skillId && recipe.getSkillpoint() <= maxLevel)
 						list.add(recipe);
 				break;
 			case ELYOS:
 				for (RecipeTemplate recipe : elyos)
-					if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+					if (recipe.getSkillId() == skillId && recipe.getSkillpoint() <= maxLevel)
 						list.add(recipe);
 				break;
 		}
 
 		for (RecipeTemplate recipe : any)
-			if (recipe.getSkillid() == skillId && recipe.getSkillpoint() <= maxLevel)
+			if (recipe.getSkillId() == skillId && recipe.getSkillpoint() <= maxLevel)
 				list.add(recipe);
 
 		return list;

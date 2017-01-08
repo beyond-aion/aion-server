@@ -82,7 +82,7 @@ public class RelinquishCraftStatus {
 
 	public static void removeRecipesAbove(Player player, int skillId, int level) {
 		for (RecipeTemplate recipe : DataManager.RECIPE_DATA.getRecipeTemplates().valueCollection()) {
-			if (recipe.getSkillid() != skillId || recipe.getSkillpoint() < level) {
+			if (recipe.getSkillId() != skillId || recipe.getSkillpoint() < level) {
 				continue;
 			}
 			player.getRecipeList().deleteRecipe(player, recipe.getId());

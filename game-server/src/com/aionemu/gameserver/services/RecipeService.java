@@ -37,13 +37,13 @@ public class RecipeService {
 			return null;
 		}
 
-		if (!player.getSkillList().isSkillPresent(template.getSkillid())) {
+		if (!player.getSkillList().isSkillPresent(template.getSkillId())) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(template.getSkillid()).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()).getNameId()));
 			return null;
 		}
 
-		if (template.getSkillpoint() > player.getSkillList().getSkillLevel(template.getSkillid())) {
+		if (template.getSkillpoint() > player.getSkillList().getSkillLevel(template.getSkillId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILLPOINT());
 			return null;
 		}
