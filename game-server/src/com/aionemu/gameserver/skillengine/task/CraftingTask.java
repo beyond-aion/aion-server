@@ -87,19 +87,19 @@ public class CraftingTask extends AbstractCraftTask {
 		currentFailureValue = 0;
 		checkCrit();
 
-		int chance = requestor.getRates().getCraftCritRate();
 		if (maxCritCount > 0) {
-			if (critCount > 0 && maxCritCount > 1) {
+			int chance = requestor.getRates().getCraftCritRate();
+			if (critCount > 0 && maxCritCount > 1)
 				chance = requestor.getRates().getComboCritRate();
-				House house = requestor.getActiveHouse();
-				if (house != null)
-					switch (house.getHouseType()) {
-						case ESTATE:
-						case PALACE:
-							chance += 5;
-							break;
-					}
-			}
+
+			House house = requestor.getActiveHouse();
+			if (house != null)
+				switch (house.getHouseType()) {
+					case ESTATE:
+					case PALACE:
+						chance += 5;
+						break;
+				}
 
 			if ((critCount < maxCritCount) && (Rnd.chance() < chance)) {
 				critCount++;
