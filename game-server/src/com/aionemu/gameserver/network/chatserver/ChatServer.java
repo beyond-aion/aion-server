@@ -47,7 +47,7 @@ public class ChatServer {
 	 */
 	public void connect(NioServer nioServer) {
 		if (csCon != null)
-			throw new AssertionError("ChatServer is already connected.");
+			throw new IllegalStateException("ChatServer is already connected.");
 		if (nioServer == null)
 			throw new NullPointerException("NioServer for ChatServer can not be null.");
 
@@ -70,13 +70,7 @@ public class ChatServer {
 				delay = 60;
 				log.error("Critical error establishing ChatServer socket connection, trying again in " + delay + "s", e);
 			}
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					connect(nioServer);
-				}
-			}, delay * 1000);
+			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
 	}
 
@@ -94,13 +88,7 @@ public class ChatServer {
 		int delay = csCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
 		log.info("Reconnecting to ChatServer in " + delay + "s...");
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				connect(nioServer);
-			}
-		}, delay * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 
 	public boolean isUp() {

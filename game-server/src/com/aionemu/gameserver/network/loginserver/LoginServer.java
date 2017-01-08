@@ -37,7 +37,7 @@ import com.aionemu.gameserver.world.World;
 import javolution.util.FastMap;
 
 /**
- * Utill class for connecting GameServer to LoginServer.
+ * Utility class for connecting GameServer to LoginServer.
  * 
  * @author -Nemesiss-
  */
@@ -76,7 +76,7 @@ public class LoginServer {
 	 */
 	public void connect(NioServer nioServer) {
 		if (lsCon != null)
-			throw new AssertionError("LoginServer is already connected.");
+			throw new IllegalStateException("LoginServer is already connected.");
 		if (nioServer == null)
 			throw new NullPointerException("NioServer for LoginServer can not be null.");
 
@@ -99,13 +99,7 @@ public class LoginServer {
 				delay = 60;
 				log.error("Critical error establishing LoginServer socket connection, trying again in " + delay + "s", e);
 			}
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					connect(nioServer);
-				}
-			}, delay * 1000);
+			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
 	}
 
@@ -128,13 +122,7 @@ public class LoginServer {
 		int delay = lsCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
 		log.info("Reconnecting to LoginServer in " + delay + "s...");
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				connect(nioServer);
-			}
-		}, delay * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 
 	public boolean isUp() {
