@@ -66,7 +66,8 @@ public class GameServerTable {
 	 *          server password that is specified configs, used to check if gs can auth on ls
 	 * @return GsAuthResponse
 	 */
-	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, byte[] ip, int port, int maxPlayers, String password) {
+	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, String password, byte[] ip, int port,
+		byte minAccessLevel, int maxPlayers) {
 		GameServerInfo gsi = gameservers.get(requestedId);
 
 		/**
@@ -93,6 +94,7 @@ public class GameServerTable {
 
 		gsi.setIp(ip);
 		gsi.setPort(port);
+		gsi.setMinAccessLevel(minAccessLevel);
 		gsi.setMaxPlayers(maxPlayers);
 		gsi.setConnection(gsConnection);
 

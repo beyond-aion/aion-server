@@ -19,12 +19,6 @@ public class NetworkConfig {
 	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**
-	 * Max allowed online players
-	 */
-	@Property(key = "gameserver.network.client.maxplayers", defaultValue = "100")
-	public static int MAX_ONLINE_PLAYERS;
-
-	/**
 	 * Address (host/domain name or IP) of the login server
 	 */
 	@Property(key = "gameserver.network.login.address", defaultValue = "localhost:9014")
@@ -45,7 +39,7 @@ public class NetworkConfig {
 	/**
 	 * GameServer id that this GameServer will request at LoginServer.
 	 */
-	@Property(key = "gameserver.network.login.gsid", defaultValue = "0")
+	@Property(key = "gameserver.network.login.gsid", defaultValue = "1")
 	public static int GAMESERVER_ID;
 
 	/**
@@ -53,6 +47,18 @@ public class NetworkConfig {
 	 */
 	@Property(key = "gameserver.network.login.password", defaultValue = "")
 	public static String LOGIN_PASSWORD;
+
+	/**
+	 * Minimum required access level for accounts trying to connect (=maintenance mode)
+	 */
+	@Property(key = "gameserver.network.login.min_accesslevel", defaultValue = "0")
+	public static int MIN_ACCESS_LEVEL;
+
+	/**
+	 * Max allowed online players
+	 */
+	@Property(key = "gameserver.network.login.max_players", defaultValue = "100")
+	public static int MAX_ONLINE_PLAYERS;
 
 	/**
 	 * Number of Threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle

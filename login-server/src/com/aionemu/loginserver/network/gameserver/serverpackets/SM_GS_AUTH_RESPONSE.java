@@ -30,7 +30,7 @@ public class SM_GS_AUTH_RESPONSE extends GsServerPacket {
 	protected void writeImpl(GsConnection con) {
 		writeC(0);
 		writeC(response.getResponseId());
-		if (response.getResponseId() == 0)
+		if (response == GsAuthResponse.AUTHED)
 			writeC(GameServerTable.getGameServers().size());
 	}
 }

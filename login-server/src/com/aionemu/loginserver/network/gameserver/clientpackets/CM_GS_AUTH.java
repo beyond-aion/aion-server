@@ -36,6 +36,8 @@ public class CM_GS_AUTH extends GsClientPacket {
 	 */
 	private int maxPlayers;
 
+	private byte minAccessLevel;
+
 	/**
 	 * Port of this Gameserver.
 	 */
@@ -49,18 +51,19 @@ public class CM_GS_AUTH extends GsClientPacket {
 	@Override
 	protected void readImpl() {
 		gameServerId = readC();
-		byte len1 = readC();
-		ip = readB(len1);
-		port = readUH();
-		maxPlayers = readD();
 		password = readS();
+		byte length = readC();
+		ip = readB(length);
+		port = readUH();
+		minAccessLevel = readC();
+		maxPlayers = readD();
 	}
 
 	@Override
 	protected void runImpl() {
 		final GsConnection client = this.getConnection();
 
-		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, ip, port, maxPlayers, password);
+		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, password, ip, port, minAccessLevel, maxPlayers);
 		switch (resp) {
 			case AUTHED:
 				log.info("Gameserver #" + gameServerId + " is now online");

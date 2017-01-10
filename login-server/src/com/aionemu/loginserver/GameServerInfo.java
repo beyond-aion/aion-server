@@ -32,7 +32,7 @@ public class GameServerInfo {
 	/**
 	 * Default server address, usually internet address
 	 */
-	private byte[] ip = {0, 0, 0, 0};
+	private byte[] ip = { 0, 0, 0, 0 };
 
 	/**
 	 * Port on with this GameServer is accepting clients.
@@ -43,6 +43,11 @@ public class GameServerInfo {
 	 * gsConnection - if GameServer is connected to LoginServer.
 	 */
 	private GsConnection gscHandler;
+
+	/**
+	 * minimum access level to be able to connect to this game server
+	 */
+	private byte minAccessLevel;
 
 	/**
 	 * Max players count that may play on this GameServer.
@@ -147,6 +152,14 @@ public class GameServerInfo {
 	 */
 	public final void setConnection(GsConnection gscHandler) {
 		this.gscHandler = gscHandler;
+	}
+
+	public byte getMinAccessLevel() {
+		return minAccessLevel;
+	}
+
+	public void setMinAccessLevel(byte minAccessLevel) {
+		this.minAccessLevel = minAccessLevel;
 	}
 
 	/**

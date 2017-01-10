@@ -19,10 +19,11 @@ public class SM_GS_AUTH extends LsServerPacket {
 	protected void writeImpl(LoginServerConnection con) {
 		byte[] gsIp = NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().getAddress();
 		writeC(NetworkConfig.GAMESERVER_ID);
+		writeS(NetworkConfig.LOGIN_PASSWORD);
 		writeC(gsIp.length);
 		writeB(gsIp);
 		writeH(NetworkConfig.CLIENT_CONNECT_ADDRESS.getPort());
+		writeC(NetworkConfig.MIN_ACCESS_LEVEL);
 		writeD(NetworkConfig.MAX_ONLINE_PLAYERS);
-		writeS(NetworkConfig.LOGIN_PASSWORD);
 	}
 }

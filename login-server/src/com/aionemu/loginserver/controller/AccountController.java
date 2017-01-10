@@ -206,11 +206,6 @@ public class AccountController {
 			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
 		}
 
-		// if server is under maintenance and account has not the required access level
-		if (Config.MAINTENANCE_MOD && account.getAccessLevel() < Config.MAINTENANCE_MOD_GMLEVEL) {
-			return AionAuthResponse.STR_L2AUTH_S_SEVER_CHECK;
-		}
-
 		// if not external authentication, verify password hash from database
 		if (!Config.AUTH_EXTERNAL && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
 			return AionAuthResponse.STR_L2AUTH_S_INCORRECT_PWD;

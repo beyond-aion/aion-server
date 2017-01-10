@@ -72,17 +72,6 @@ public class Config {
 	public static String AUTH_EXTERNAL_JSON_URL;
 
 	/**
-	 * Set the server on maintenance mode
-	 */
-	@Property(key = "loginserver.server.maintenance", defaultValue = "false")
-	public static boolean MAINTENANCE_MOD;
-	/**
-	 * Set GM level for maintenance mode
-	 */
-	@Property(key = "loginserver.server.maintenance.gmlevel", defaultValue = "3")
-	public static int MAINTENANCE_MOD_GMLEVEL;
-
-	/**
 	 * Enable\disable flood protector from 1 IP on account login
 	 */
 	@Property(key = "loginserver.server.floodprotector", defaultValue = "true")

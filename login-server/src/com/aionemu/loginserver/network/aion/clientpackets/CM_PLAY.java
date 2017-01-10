@@ -49,8 +49,8 @@ public class CM_PLAY extends AionClientPacket {
 			GameServerInfo gsi = GameServerTable.getGameServerInfo(servId);
 			if (gsi == null || !gsi.isOnline())
 				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.STR_L2AUTH_S_SERVER_DOWN));
-			// else if(serv gm only)
-			// con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.GM_ONLY));
+			else if (gsi.getMinAccessLevel() > con.getAccount().getAccessLevel())
+				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.STR_L2AUTH_S_SEVER_CHECK));
 			else if (gsi.isFull())
 				con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.STR_L2AUTH_S_LIMIT_EXCEED));
 			else {
