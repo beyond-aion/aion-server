@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -48,7 +48,7 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		HousePermissions doorPermission = HousePermissions.getPacketDoorState(doorState);
 		house.setDoorState(doorPermission);
 		house.setNoticeState(HousePermissions.getNoticeState(displayOwner));
-		house.setSignNotice(signNotice.getBytes(Charset.forName("UTF-16LE")));
+		house.setSignNotice(signNotice.getBytes(StandardCharsets.UTF_16LE));
 
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), house.getAddress().getId(), true));
 		HouseController controller = house.getController();

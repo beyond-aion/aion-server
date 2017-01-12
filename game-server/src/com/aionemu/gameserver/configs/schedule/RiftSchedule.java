@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -55,7 +55,7 @@ public class RiftSchedule {
 	public static RiftSchedule load() {
 		RiftSchedule rs;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/schedule/rift_schedule.xml"), Charset.forName("UTF-8"));
+			String xml = FileUtils.readFileToString(new File("./config/schedule/rift_schedule.xml"), StandardCharsets.UTF_8);
 			rs = JAXBUtil.deserialize(xml, RiftSchedule.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize rifts", e);

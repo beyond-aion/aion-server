@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 
@@ -110,7 +110,7 @@ public class JAXBUtil {
 		try {
 			T obj;
 			if (xml instanceof File) {
-				try (InputStreamReader isr = new InputStreamReader(new FileInputStream((File) xml), Charset.forName("UTF-8"))) {
+				try (InputStreamReader isr = new InputStreamReader(new FileInputStream((File) xml), StandardCharsets.UTF_8)) {
 					obj = (T) u.unmarshal(isr);
 				}
 			} else if (xml instanceof Node) { // superinterface of document
@@ -149,7 +149,7 @@ public class JAXBUtil {
 		for (File file : files) {
 			try {
 				T obj;
-				try (InputStreamReader isr = new InputStreamReader(new FileInputStream(file), Charset.forName("UTF-8"))) {
+				try (InputStreamReader isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
 					obj = (T) u.unmarshal(isr);
 				}
 				if (obj == null)

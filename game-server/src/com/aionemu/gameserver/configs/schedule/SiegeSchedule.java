@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -75,7 +75,7 @@ public class SiegeSchedule {
 	public static SiegeSchedule load() {
 		SiegeSchedule ss;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/schedule/siege_schedule.xml"), Charset.forName("UTF-8"));
+			String xml = FileUtils.readFileToString(new File("./config/schedule/siege_schedule.xml"), StandardCharsets.UTF_8);
 			ss = JAXBUtil.deserialize(xml, SiegeSchedule.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize sieges", e);
