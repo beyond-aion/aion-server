@@ -1976,10 +1976,10 @@
 			<drop item_id="164000290" name="Danuar Cannonball" chance="100" no_reduce="true" />
 		</drop_group>
 	</npc_drop>
-	<!-- Additional Chest for all Lv65 Inner Abyss Instances -->
+	<!-- Random Chest for all Lv65 Inner Abyss Instances + hidden spawn in Cygnea & Levinshor -->
 	<npc_drop npc_id="832865">
 		<drop_group race="PC_ALL" name="Named Box">
-			<drop item_id="188053450" name="Abyss Fortress Box" chance="100" each_member="true" />
+			<drop item_id="188053450" name="Abyss Fortress Box" chance="100" />
 		</drop_group>
 	</npc_drop>
 	<!-- Krotan Barracks -->

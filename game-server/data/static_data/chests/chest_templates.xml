@@ -516,6 +516,10 @@
 	<chest npcid="702299">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>
+	<!-- Upper Abyss inner instances + Cygnea & Levinshor -->
+	<chest npcid="832865">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
 	<!-- Illuminary Obelisk -->
 	<chest npcid="730884">
 		<keyitem id="1" itemid="0" quantity="1"/>

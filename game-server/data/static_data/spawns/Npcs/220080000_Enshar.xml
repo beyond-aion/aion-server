@@ -3369,7 +3369,7 @@
 			<spot x="392.70001" y="2220.88989" z="219.72212" h="43"/>
 		</spawn>
 		<!-- Griman -->
-		<spawn npc_id="805216" respawn_time="295" difficult_id="0">
+		<spawn npc_id="805216" respawn_time="295">
 			<spot x="1755.327" y="2604.329" z="300.0501" h="75"/>
 		</spawn>
 		<!-- grimreoff -->

@@ -9,6 +9,10 @@
 		<spawn npc_id="804570" respawn_time="295">
 			<spot x="1881.909" y="1159.243" z="243.971" h="60" static_id="299" />
 		</spawn>
+		<!-- Abyss Treasure Box -->
+		<spawn npc_id="832865" respawn_time="28800">
+			<spot x="712.0" y="242.5" z="290.1875" h="49" />
+		</spawn>
 		<!-- Aetherbrak Invasion Corridor -->
 		<spawn npc_id="731530" respawn_time="295">
 			<spot x="185.8477" y="253.992" z="342.8136" h="6" static_id="109" />

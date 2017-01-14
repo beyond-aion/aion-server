@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="210070000">
+		<!-- Abyss Treasure Box -->
+		<spawn npc_id="832865" respawn_time="28800">
+			<spot x="2001.0" y="231.8" z="588.7251" h="49" />
+		</spawn>
 		<!-- adaptor kremio -->
 		<spawn npc_id="236648" respawn_time="295">
 			<spot x="1638.98621" y="1242.06519" z="433.39270" />

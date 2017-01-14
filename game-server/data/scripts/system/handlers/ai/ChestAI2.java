@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -33,6 +35,7 @@ public class ChestAI2 extends ActionItemNpcAI2 {
 		chestTemplate = DataManager.CHEST_DATA.getChestTemplate(getNpcId());
 
 		if (chestTemplate == null) {
+			LoggerFactory.getLogger(ChestAI2.class).warn("Missing chest template or incorrect AI for npc " + getNpcId());
 			return;
 		}
 		super.handleDialogStart(player);
