@@ -30,6 +30,8 @@ public class AdminConfig {
 	public static byte INSTANCE_REQ;
 	@Property(key = "gameserver.administration.view.player", defaultValue = "3")
 	public static byte ADMIN_VIEW_DETAILS;
+	@Property(key = "gameserver.administration.dialog_info", defaultValue = "3")
+	public static byte DIALOG_INFO;
 
 	/**
 	 * Admin options

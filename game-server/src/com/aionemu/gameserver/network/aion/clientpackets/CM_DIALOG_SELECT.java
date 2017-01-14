@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
@@ -13,6 +14,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author KKnD , orz, avol
@@ -57,6 +59,10 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		if (player.isTrading())
 			return;
+
+		if (player.getAccessLevel() >= AdminConfig.DIALOG_INFO) {
+			PacketSendUtility.sendMessage(player, "Quest ID: " + questId + ", Dialog ID: " + dialogId);
+		}
 
 		if (targetObjectId == 0 || targetObjectId == player.getObjectId()) {
 			QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);

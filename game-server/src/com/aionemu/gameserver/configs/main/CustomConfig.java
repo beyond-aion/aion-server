@@ -190,12 +190,6 @@ public class CustomConfig {
 	public static boolean ENABLE_KILL_REWARD;
 
 	/**
-	 * Show dialog id and quest id
-	 */
-	@Property(key = "gameserver.dialog.showid", defaultValue = "true")
-	public static boolean ENABLE_SHOW_DIALOGID;
-
-	/**
 	 * Enable one kisk restriction
 	 */
 	@Property(key = "gameserver.kisk.restriction.enable", defaultValue = "true")

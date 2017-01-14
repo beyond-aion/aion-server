@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
@@ -108,11 +107,6 @@ public class DialogService {
 		QuestEnv env = new QuestEnv(npc, player, questId, dialogId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
 		int targetObjectId = npc.getObjectId();
-
-		if (player.getAccessLevel() >= 3 && CustomConfig.ENABLE_SHOW_DIALOGID) {
-			PacketSendUtility.sendMessage(player, "dialogId: " + dialogId);
-			PacketSendUtility.sendMessage(player, "questId: " + questId);
-		}
 
 		if (questId == 0) {
 			DialogAction action = DialogAction.getByActionId(dialogId);
