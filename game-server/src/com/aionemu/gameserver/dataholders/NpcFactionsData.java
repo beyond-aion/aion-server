@@ -28,8 +28,10 @@ public class NpcFactionsData {
 		factionsById.clear();
 		for (NpcFactionTemplate template : npcFactionsData) {
 			factionsById.put(template.getId(), template);
-			if (template.getNpcId() != 0)
-				factionsByNpcId.put(template.getNpcId(), template);
+			if (template.getNpcIds() != null) {
+				for (Integer npcId : template.getNpcIds())
+					factionsByNpcId.put(npcId, template);
+			}
 		}
 	}
 

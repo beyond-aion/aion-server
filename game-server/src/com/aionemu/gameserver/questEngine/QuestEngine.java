@@ -1088,7 +1088,7 @@ public class QuestEngine implements GameEngine {
 		Set<Integer> unobtainableQuests = new FastSet<>();
 		Set<Integer> factionIds = new FastSet<>();
 		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
-			if (nft.getNpcId() == 0 || existsSpawnData(nft.getNpcId()))
+			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(npcId -> existsSpawnData(npcId)))
 				factionIds.add(nft.getId());
 		}
 		StringBuilder obsoleteHandlers = new StringBuilder();

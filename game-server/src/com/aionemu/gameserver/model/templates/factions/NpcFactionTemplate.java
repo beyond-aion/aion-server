@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.factions;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,23 +17,23 @@ import com.aionemu.gameserver.model.Race;
 public class NpcFactionTemplate {
 
 	@XmlAttribute(name = "id", required = true)
-	protected int id;
+	private int id;
 	@XmlAttribute(name = "name")
-	protected String name;
-	@XmlAttribute(name = "nameId")
-	protected int nameId;
+	private String name;
+	@XmlAttribute(name = "name_id")
+	private int nameId;
 	@XmlAttribute(name = "category")
-	protected FactionCategory category;
-	@XmlAttribute(name = "minlevel")
-	protected Integer minlevel;
-	@XmlAttribute(name = "maxlevel")
-	protected int maxlevel = 99;
+	private FactionCategory category;
+	@XmlAttribute(name = "min_level")
+	private Integer minLevel;
+	@XmlAttribute(name = "max_level")
+	private int maxLevel = 99;
 	@XmlAttribute(name = "race")
-	protected Race race;
-	@XmlAttribute(name = "npcid")
-	protected int npcId;
+	private Race race;
+	@XmlAttribute(name = "npc_ids")
+	private List<Integer> npcIds;
 	@XmlAttribute(name = "skill_points")
-	protected int skillPoints;
+	private int skillPoints;
 
 	public int getId() {
 		return id;
@@ -50,11 +52,11 @@ public class NpcFactionTemplate {
 	}
 
 	public int getMinLevel() {
-		return minlevel;
+		return minLevel;
 	}
 
 	public int getMaxLevel() {
-		return maxlevel;
+		return maxLevel;
 	}
 
 	public Race getRace() {
@@ -65,11 +67,8 @@ public class NpcFactionTemplate {
 		return category == FactionCategory.MENTOR;
 	}
 
-	/**
-	 * @return the npcId
-	 */
-	public int getNpcId() {
-		return npcId;
+	public List<Integer> getNpcIds() {
+		return npcIds;
 	}
 
 	public int getSkillPoints() {

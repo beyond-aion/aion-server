@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -124,6 +126,7 @@ public class NpcFactions {
 		int targetObjectId = npc.getObjectId();
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionByNpcId(npc.getNpcId());
 		if (npcFactionTemplate == null) {
+			LoggerFactory.getLogger(NpcFactions.class).warn("Missing faction for faction registrar npc " + npc.getNpcId());
 			return;
 		}
 		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());
