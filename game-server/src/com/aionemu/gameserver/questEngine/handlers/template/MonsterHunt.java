@@ -122,6 +122,14 @@ public class MonsterHunt extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
+					case QUEST_REFUSE:
+					case QUEST_REFUSE_1:
+					case QUEST_REFUSE_2:
+					case QUEST_REFUSE_3:
+					case QUEST_REFUSE_4:
+					case QUEST_REFUSE_SIMPLE:
+					case FINISH_DIALOG:
+						return closeDialogWindow(env);
 					default:
 						return sendQuestStartDialog(env, workItem);
 				}
