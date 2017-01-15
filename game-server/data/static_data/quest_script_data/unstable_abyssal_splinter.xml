@@ -22,13 +22,13 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="30276" start_npc_ids="800165" end_npc_ids="260264">
+	<report_to_many id="30276" start_npc_ids="800165">
 		<npc_infos npc_ids="278549"/>
-    	<npc_infos npc_ids="260264"/>
+		<npc_infos npc_ids="260264"/>
 	</report_to_many>
-	<report_to_many id="30376" start_npc_ids="800170" end_npc_ids="260265">
+	<report_to_many id="30376" start_npc_ids="800170">
 		<npc_infos npc_ids="278048"/>
-    	<npc_infos npc_ids="260265"/>
+		<npc_infos npc_ids="260265"/>
 	</report_to_many>
 	
 	<!-- HUNTING QUESTS -->

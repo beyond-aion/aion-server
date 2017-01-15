@@ -151,7 +151,7 @@
 	<report_to id="2260" start_npc_ids="203649" end_npc_ids="203557"/>
 	<report_to id="2261" start_npc_ids="203559" end_npc_ids="203665"/>
 	<report_to id="2262" start_npc_ids="798030" end_npc_ids="798036"/>
-	<report_to_many id="2274" start_item_id="182203249" end_npc_ids="203560">
+	<report_to_many id="2274" start_item_id="182203249">
 		<npc_infos npc_ids="203668"/>
 		<npc_infos npc_ids="203560"/>
 	</report_to_many>
@@ -160,7 +160,7 @@
 	<report_to id="2286" start_npc_ids="203557" end_npc_ids="203560"/>
 	<report_to id="2287" start_npc_ids="203557" end_npc_ids="203558"/>
 	<report_to id="2291" start_npc_ids="203639" end_npc_ids="203617"/>
-	<report_to_many id="2296" start_item_id="182203263" end_npc_ids="798036">
+	<report_to_many id="2296" start_item_id="182203263">
 		<npc_infos npc_ids="203656"/>
 		<npc_infos npc_ids="798036"/>
 	</report_to_many>

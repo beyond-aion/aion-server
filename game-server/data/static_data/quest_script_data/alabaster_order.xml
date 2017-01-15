@@ -64,59 +64,59 @@
 
 	<!-- REPORTING QUESTS -->
 	<report_to id="38003" start_npc_ids="203726" end_npc_ids="799803"/>
-	<report_to_many id="35010" end_npc_ids="799805">
+	<report_to_many id="35010">
 		<npc_infos npc_ids="204560"/>
 		<npc_infos npc_ids="799805 799806"/>
 	</report_to_many>
-	<report_to_many id="35011" end_npc_ids="799805">
+	<report_to_many id="35011">
 		<npc_infos npc_ids="204504"/>
 		<npc_infos npc_ids="799805 799806"/>
 	</report_to_many>
-	<report_to_many id="35017" end_npc_ids="799806">
+	<report_to_many id="35017">
 		<npc_infos npc_ids="798155"/>
 		<npc_infos npc_ids="799805 799806"/>
 	</report_to_many>
-	<report_to_many id="35018" end_npc_ids="799806">
+	<report_to_many id="35018">
 		<npc_infos npc_ids="798135"/>
 		<npc_infos npc_ids="799805 799806"/>
 	</report_to_many>
-	<report_to_many id="35024" end_npc_ids="799800 799801">
+	<report_to_many id="35024">
 		<npc_infos npc_ids="798946"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35025" end_npc_ids="799800 799801">
+	<report_to_many id="35025">
 		<npc_infos npc_ids="798972"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35026" end_npc_ids="799800 799801">
+	<report_to_many id="35026">
 		<npc_infos npc_ids="798996"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35027" end_npc_ids="799800 799801">
+	<report_to_many id="35027">
 		<npc_infos npc_ids="799004"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35028" end_npc_ids="799800 799801">
+	<report_to_many id="35028">
 		<npc_infos npc_ids="799015"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35029" end_npc_ids="799800 799801">
+	<report_to_many id="35029">
 		<npc_infos npc_ids="799043"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35030" end_npc_ids="799800 799801">
+	<report_to_many id="35030">
 		<npc_infos npc_ids="799049"/>
 		<npc_infos npc_ids="799800 799801"/>
 	</report_to_many>
-	<report_to_many id="35055" end_npc_ids="804942">
+	<report_to_many id="35055">
 		<npc_infos npc_ids="804874"/>
 		<npc_infos npc_ids="804942"/>
 	</report_to_many>
-	<report_to_many id="35056" end_npc_ids="804943">
+	<report_to_many id="35056">
 		<npc_infos npc_ids="804704"/>
 		<npc_infos npc_ids="804943"/>
 	</report_to_many>
-	<report_to_many id="35057" end_npc_ids="804944">
+	<report_to_many id="35057">
 		<npc_infos npc_ids="804709"/>
 		<npc_infos npc_ids="804944"/>
 	</report_to_many>

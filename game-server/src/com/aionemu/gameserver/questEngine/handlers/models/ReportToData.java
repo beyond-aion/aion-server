@@ -14,27 +14,24 @@ import com.aionemu.gameserver.questEngine.handlers.template.ReportTo;
 
 /**
  * @author MrPoke
- * @modified Pad
+ * @modified Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReportToData")
 public class ReportToData extends XMLQuest {
 
 	@XmlAttribute(name = "start_npc_ids")
-	protected List<Integer> startNpcIds;
+	private List<Integer> startNpcIds;
 
 	@XmlAttribute(name = "end_npc_ids")
-	protected List<Integer> endNpcIds;
+	private List<Integer> endNpcIds;
 
 	@XmlAttribute(name = "start_dialog_id")
-	protected int startDialogId;
+	private int startDialogId;
 
-	@XmlAttribute(name = "end_dialog_id")
-	protected int endDialogId;
-	
 	@Override
 	public void register(QuestEngine questEngine) {
-		questEngine.addQuestHandler(new ReportTo(id, startNpcIds, endNpcIds, startDialogId, endDialogId));
+		questEngine.addQuestHandler(new ReportTo(id, startNpcIds, endNpcIds, startDialogId));
 	}
 
 	@Override

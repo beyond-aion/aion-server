@@ -9,23 +9,17 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Hilgert
- * @modified Pad
+ * @modified Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NpcInfos")
 public class NpcInfos {
 
 	@XmlAttribute(name = "npc_ids", required = true)
-	protected List<Integer> npcIds;
-	
-	@XmlAttribute(name = "quest_dialog")
-	protected int dialogId;
-	
-	@XmlAttribute(name = "close_dialog")
-	protected int closeDialogId;
+	private List<Integer> npcIds;
 	
 	@XmlAttribute(name = "movie")
-	protected int movie;
+	private int movie;
 
 	/**
 	 * Gets the value of the npcIds property.
@@ -35,31 +29,9 @@ public class NpcInfos {
 	}
 
 	/**
-	 * Gets the value of the DialogAction property.
-	 */
-	public int getQuestDialog() {
-		return dialogId;
-	}
-
-	/**
-	 * Gets the value of the closeDialog property.
-	 */
-	public int getCloseDialog() {
-		return closeDialogId;
-	}
-
-	/**
 	 * @return the movie
 	 */
 	public int getMovie() {
 		return movie;
-	}
-
-	/**
-	 * @param movie
-	 *          the movie to set
-	 */
-	public void setMovie(int movie) {
-		this.movie = movie;
 	}
 }

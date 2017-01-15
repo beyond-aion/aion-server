@@ -399,30 +399,33 @@
 	<report_to id="3731" start_npc_ids="203901" end_npc_ids="800518"/>
 	<report_to id="4701" start_npc_ids="278035" end_npc_ids="278016"/>
 	<report_to id="4731" start_npc_ids="204301" end_npc_ids="800519"/>
-	<report_to_many id="2725" start_npc_ids="278003" end_npc_ids="278086">
+	<report_to_many id="2725" start_npc_ids="278003">
 		<npc_infos npc_ids="278091"/>
 		<npc_infos npc_ids="278086"/>
 	</report_to_many>
-	<report_to_many id="2726" start_npc_ids="278002" end_npc_ids="278105">
+	<report_to_many id="2726" start_npc_ids="278002">
 		<npc_infos npc_ids="278082"/>
 		<npc_infos npc_ids="278015"/>
 		<npc_infos npc_ids="278105"/>
 	</report_to_many>
-	<report_to_many id="2773" start_npc_ids="279019" end_npc_ids="204734">
-		<npc_infos npc_ids="798110" quest_dialog="1352"/>
+	<report_to_many id="2773" start_npc_ids="279019">
+		<npc_infos npc_ids="798110"/>
+		<npc_infos npc_ids="204734"/>
 	</report_to_many>
-	<report_to_many id="2846" start_item_id="182205677" end_npc_ids="798317">
+	<report_to_many id="2846" start_item_id="182205677">
 		<npc_infos npc_ids="278039"/>
 		<npc_infos npc_ids="279027"/>
 		<npc_infos npc_ids="798317"/>
 	</report_to_many>
-	<report_to_many id="2847" start_item_id="182205678" end_npc_ids="798063">
+	<report_to_many id="2847" start_item_id="182205678">
 		<npc_infos npc_ids="278020"/>
 		<npc_infos npc_ids="279005"/>
+		<npc_infos npc_ids="798063"/>
 	</report_to_many>
-	<report_to_many id="2848" start_item_id="182205679" end_npc_ids="204799">
+	<report_to_many id="2848" start_item_id="182205679">
 		<npc_infos npc_ids="278137"/>
 		<npc_infos npc_ids="278089"/>
+		<npc_infos npc_ids="204799"/>
 	</report_to_many>
 	
 	<!-- FOUNTAIN REWARDS -->

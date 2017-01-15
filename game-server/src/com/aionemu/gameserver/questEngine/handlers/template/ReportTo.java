@@ -27,7 +27,6 @@ public class ReportTo extends QuestHandler {
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final int startDialogId;
-	private final int endDialogId;
 	private final boolean isDataDriven;
 	private QuestItems workItem;
 
@@ -37,7 +36,7 @@ public class ReportTo extends QuestHandler {
 	 * @param endNpcIds
 	 * @param itemId2
 	 */
-	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, int startDialogId, int endDialogId) {
+	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, int startDialogId) {
 		super(questId);
 		if (startNpcIds != null)
 			this.startNpcIds.addAll(startNpcIds);
@@ -46,7 +45,6 @@ public class ReportTo extends QuestHandler {
 		else
 			this.endNpcIds.addAll(this.startNpcIds);
 		this.startDialogId = startDialogId;
-		this.endDialogId = endDialogId;
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
@@ -85,15 +83,19 @@ public class ReportTo extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
-					default:
+					case QUEST_ACCEPT:
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env, workItem);
+					default:
+						return super.onDialogEvent(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (endNpcIds.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT:
-						return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
+						return sendQuestDialog(env, isDataDriven ? 10002 : 2375);
 					case SELECT_QUEST_REWARD:
 						if (workItem != null) {
 							long currentCount = player.getInventory().getItemCountByItemId(workItem.getItemId());

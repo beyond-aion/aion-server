@@ -133,11 +133,11 @@
 	<report_to id="4088" start_npc_ids="798063" end_npc_ids="205203"/>
 	<report_to id="4097" start_npc_ids="205158" end_npc_ids="730104"/>
 	<report_to id="4104" start_npc_ids="205193" end_npc_ids="205159"/>
-	<report_to_many id="39000" start_npc_ids="800165" end_npc_ids="800500">
+	<report_to_many id="39000" start_npc_ids="800165">
 		<npc_infos npc_ids="800501"/>
 		<npc_infos npc_ids="800500"/>
 	</report_to_many>
-	<report_to_many id="39003" start_npc_ids="800500" end_npc_ids="800504">
+	<report_to_many id="39003" start_npc_ids="800500">
 		<npc_infos npc_ids="800512"/>
 		<npc_infos npc_ids="800504"/>
 	</report_to_many>

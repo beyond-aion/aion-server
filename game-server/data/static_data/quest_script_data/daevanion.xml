@@ -70,10 +70,10 @@
 	
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="80310" start_npc_ids="831384">
-		<npc_infos npc_ids="831384" quest_dialog="1003"/>
+		<npc_infos npc_ids="831384"/>
 	</report_to_many>
 	<report_to_many id="80311" start_npc_ids="831387">
-		<npc_infos npc_ids="831387" quest_dialog="1003"/>
+		<npc_infos npc_ids="831387"/>
 	</report_to_many>
 	
 	<!-- COLLECTING QUESTS -->

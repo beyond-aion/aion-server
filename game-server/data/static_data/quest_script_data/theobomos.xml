@@ -130,11 +130,13 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="49000" start_npc_ids="800170" end_npc_ids="800502">
-		<npc_infos npc_ids="800503" quest_dialog="1352"/>
+	<report_to_many id="49000" start_npc_ids="800170">
+		<npc_infos npc_ids="800503"/>
+		<npc_infos npc_ids="800502"/>
 	</report_to_many>
-	<report_to_many id="49003" start_npc_ids="800502" end_npc_ids="800505">
-		<npc_infos npc_ids="800511" quest_dialog="1352"/>
+	<report_to_many id="49003" start_npc_ids="800502">
+		<npc_infos npc_ids="800511"/>
+		<npc_infos npc_ids="800505"/>
 	</report_to_many>
 	<report_to id="49010" start_npc_ids="800503" end_npc_ids="800502"/>
 	

@@ -314,7 +314,7 @@
 	<report_to id="30134" start_npc_ids="799336"/>
 	<report_to id="30136" start_npc_ids="799336"/>
 	<report_to id="30138" start_npc_ids="799336"/>
-	<report_to_many id="21110" start_npc_ids="799271" end_npc_ids="799289">
+	<report_to_many id="21110" start_npc_ids="799271">
 		<npc_infos npc_ids="799263"/>
 		<npc_infos npc_ids="799289"/>
 	</report_to_many>

@@ -520,11 +520,11 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	 */
 	public boolean sendQuestEndDialog(QuestEnv env, Integer rewardGroup) {
 		Player player = env.getPlayer();
-		int dialogId = env.getDialogId();
+		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
 			return false; // reward packet exploitation fix (or buggy quest handler)
-		if (dialogId >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialogId <= DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+		if (dialog.id() >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialog.id() <= DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 			if (QuestService.finishQuest(env, rewardGroup)) {
 				Npc npc = (Npc) env.getVisibleObject();
 				QuestNpc questNpc = QuestEngine.getInstance().getQuestNpc(npc.getNpcId());
@@ -564,8 +564,17 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				return npcHasActiveQuest || npcHasNewQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
 			return false;
-		} else if (dialogId == DialogAction.SELECT_QUEST_REWARD.id() || dialogId == DialogAction.USE_OBJECT.id()) { // show reward selection page
-			return sendQuestDialog(env, DialogPage.getRewardPageByIndex(rewardGroup).id());
+		} else {
+			switch (dialog) {
+				case SET_SUCCEED: // report to pre-end npc (another npc is actually responsible for rewarding, so close this window)
+					return closeDialogWindow(env);
+				case USE_OBJECT: // start talking to npc
+				case SELECT_QUEST_REWARD: // report to end npc
+				case CHECK_USER_HAS_QUEST_ITEM: // report to end npc with collect item checks
+				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: // report to end npc with collect item checks
+					// show reward selection page
+					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(rewardGroup).id());
+			}
 		}
 		return false;
 	}

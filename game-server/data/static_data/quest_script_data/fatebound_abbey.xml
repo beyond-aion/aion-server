@@ -37,13 +37,13 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="29601" start_npc_ids="804662" end_npc_ids="804666">
+	<report_to_many id="29601" start_npc_ids="804662">
 		<npc_infos npc_ids="804663"/>
 		<npc_infos npc_ids="804664"/>
 		<npc_infos npc_ids="804665"/>
 		<npc_infos npc_ids="804666"/>
 	</report_to_many>
-	<report_to_many id="29602" start_npc_ids="804663" end_npc_ids="205150">
+	<report_to_many id="29602" start_npc_ids="804663">
 		<npc_infos npc_ids="205986"/>
 		<npc_infos npc_ids="205150"/>
 	</report_to_many>
@@ -51,7 +51,7 @@
 	<report_to id="29605" start_npc_ids="804663" end_npc_ids="800421"/>
 	<report_to id="29606" start_npc_ids="804663" end_npc_ids="205225"/>
 	<report_to id="29607" start_npc_ids="804663" end_npc_ids="204837"/>
-	<report_to_many id="29608" start_npc_ids="804664" end_npc_ids="799225">
+	<report_to_many id="29608" start_npc_ids="804664">
 		<npc_infos npc_ids="205986"/>
 		<npc_infos npc_ids="799225"/>
 	</report_to_many>

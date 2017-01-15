@@ -63,59 +63,62 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="45010" end_npc_ids="799848">
+	<report_to_many id="45010">
 		<npc_infos npc_ids="204715"/>
 		<npc_infos npc_ids="799848"/>
 	</report_to_many>
-	<report_to_many id="45011" end_npc_ids="799848">
+	<report_to_many id="45011">
 		<npc_infos npc_ids="204772"/>
 		<npc_infos npc_ids="799848"/>
 	</report_to_many>
-	<report_to_many id="45017" end_npc_ids="799849">
+	<report_to_many id="45017">
 		<npc_infos npc_ids="205143"/>
 		<npc_infos npc_ids="799849"/>
 	</report_to_many>
-	<report_to_many id="45018" end_npc_ids="799849">
+	<report_to_many id="45018">
 		<npc_infos npc_ids="205130"/>
 		<npc_infos npc_ids="799849"/>
 	</report_to_many>
-	<report_to_many id="45024" end_npc_ids="799842 799843">
+	<report_to_many id="45024">
 		<npc_infos npc_ids="799244"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45025" end_npc_ids="799842 799843">
+	<report_to_many id="45025">
 		<npc_infos npc_ids="799271"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45026" end_npc_ids="799842 799843">
+	<report_to_many id="45026">
 		<npc_infos npc_ids="799285"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45027" end_npc_ids="799842 799843">
+	<report_to_many id="45027">
 		<npc_infos npc_ids="799305"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45028" end_npc_ids="799842 799843">
+	<report_to_many id="45028">
 		<npc_infos npc_ids="799314"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45029" end_npc_ids="799842 799843">
+	<report_to_many id="45029">
 		<npc_infos npc_ids="799354"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
-	<report_to_many id="45030" end_npc_ids="799842 799843">
+	<report_to_many id="45030">
 		<npc_infos npc_ids="799360"/>
 		<npc_infos npc_ids="799842 799843"/>
 	</report_to_many>
 	<report_to id="48003" start_npc_ids="204191" end_npc_ids="799845"/>
-	<report_to_many id="45055" end_npc_ids="804931">
+	<report_to_many id="45055">
 		<npc_infos npc_ids="804902"/>
+		<npc_infos npc_ids="804931"/>
 	</report_to_many>
-	<report_to_many id="45056" end_npc_ids="804932">
+	<report_to_many id="45056">
 		<npc_infos npc_ids="805221"/>
+		<npc_infos npc_ids="804932"/>
 	</report_to_many>
-	<report_to_many id="45057" end_npc_ids="804933">
+	<report_to_many id="45057">
 		<npc_infos npc_ids="804924"/>
+		<npc_infos npc_ids="804933"/>
 	</report_to_many>
 	
 	<!-- COLLECTING QUESTS -->

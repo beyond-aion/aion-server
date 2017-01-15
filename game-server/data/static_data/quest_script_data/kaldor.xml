@@ -52,7 +52,7 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="13800" start_npc_ids="800527" end_npc_ids="801163">
+	<report_to_many id="13800" start_npc_ids="800527">
 		<npc_infos npc_ids="800958"/>
 		<npc_infos npc_ids="801163"/>
 	</report_to_many> 
@@ -66,7 +66,7 @@
 		<npc_infos npc_ids="804595"/>
 		<npc_infos npc_ids="804586"/>
 	</report_to_many>
-	<report_to_many id="23800" start_npc_ids="800529" end_npc_ids="802433">
+	<report_to_many id="23800" start_npc_ids="800529">
 		<npc_infos npc_ids="800980"/>
 		<npc_infos npc_ids="802433"/>
 	</report_to_many> 

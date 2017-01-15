@@ -341,18 +341,18 @@
 	<report_to id="80549" start_npc_ids="831999" end_npc_ids="831999"/>
 	<report_to id="80550" start_npc_ids="831999" end_npc_ids="831999"/>
 	<report_to id="80551" start_npc_ids="832008" end_npc_ids="831999"/>
-	<report_to_many id="4201" start_npc_ids="204282" end_npc_ids="204173">
+	<report_to_many id="4201" start_npc_ids="204282">
 		<npc_infos npc_ids="279009"/>
 		<npc_infos npc_ids="204173"/>
 	</report_to_many>
-	<report_to_many id="4914" start_item_id="182207127" end_npc_ids="203385">
+	<report_to_many id="4914" start_item_id="182207127">
 		<npc_infos npc_ids="204182"/>
 		<npc_infos npc_ids="203385"/>
 	</report_to_many>
 	<report_to_many id="29047" start_npc_ids="204052">
 		<npc_infos npc_ids="204052"/>
 	</report_to_many>
-	<report_to_many id="28225" start_npc_ids="205472" end_npc_ids="205323">
+	<report_to_many id="28225" start_npc_ids="205472">
 	    <npc_infos npc_ids="205321"/>
 		<npc_infos npc_ids="205323"/>
 	</report_to_many>

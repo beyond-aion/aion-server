@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
@@ -17,56 +20,29 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
-import javolution.util.FastMap;
-
 /**
  * @author Hilgert
  * @modified vlog, Pad
+ * @reworked Neon
  */
 public class ReportToMany extends QuestHandler {
 
 	private final int startItemId;
 	private final Set<Integer> startNpcIds = new HashSet<>();
-	private final Set<Integer> endNpcIds = new HashSet<>();
 	private final int startDialogId;
-	private final int endDialogId;
-	private final int maxVar;
-	private final FastMap<List<Integer>, NpcInfos> npcInfos;
-	private boolean mission;
-	private boolean isDataDriven;
-	private QuestItems workItem;
+	private final List<NpcInfos> npcInfos = new ArrayList<>();
+	private final boolean mission;
+	private final boolean isDataDriven;
 
-	/**
-	 * @param questId
-	 * @param startItemId
-	 * @param endNpc
-	 * @param startDialogId
-	 * @param endDialogId
-	 * @param maxVar
-	 */
-	public ReportToMany(int questId, int startItemId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<List<Integer>, NpcInfos> npcInfos,
-		int startDialogId, int endDialogId, int maxVar, boolean mission) {
+	public ReportToMany(int questId, int startItemId, List<Integer> startNpcIds, List<NpcInfos> npcInfos, int startDialogId, boolean mission) {
 		super(questId);
 		this.startItemId = startItemId;
 		if (startNpcIds != null)
 			this.startNpcIds.addAll(startNpcIds);
-		if (endNpcIds != null)
-			this.endNpcIds.addAll(endNpcIds);
-		else
-			this.endNpcIds.addAll(this.startNpcIds);
-		this.npcInfos = npcInfos;
+		this.npcInfos.addAll(npcInfos);
 		this.startDialogId = startDialogId;
-		this.endDialogId = endDialogId;
-		this.maxVar = maxVar;
 		this.mission = mission;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
-		if (workItems == null)
-			return;
-		workItem = workItems.get(0);
+		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override
@@ -82,14 +58,10 @@ public class ReportToMany extends QuestHandler {
 				qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 			}
 		}
-		for (List<Integer> npcIds : npcInfos.keySet()) {
-			for (int npcId : npcIds) {
+		for (NpcInfos npcInfo : npcInfos) {
+			for (int npcId : npcInfo.getNpcIds()) {
 				qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 			}
-		}
-		if (!endNpcIds.equals(startNpcIds)) {
-			for (Integer endNpcId : endNpcIds)
-				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
 	}
 
@@ -101,121 +73,99 @@ public class ReportToMany extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
-			if (startItemId != 0) {
+			if ((startNpcIds.isEmpty() || startNpcIds.contains(targetId))
+				&& (startItemId == 0 || player.getInventory().getFirstItemByItemId(startItemId) != null)) {
 				switch (dialog) {
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
-						if (QuestService.startQuest(env)) {
-							if (workItem != null)
-								giveQuestItem(env, workItem.getItemId(), workItem.getCount());
-						}
+						QuestService.startQuest(env);
 						return closeDialogWindow(env);
-					case QUEST_REFUSE:
-					case QUEST_REFUSE_1:
-					case QUEST_REFUSE_2:
-					case QUEST_REFUSE_3:
-					case QUEST_REFUSE_4:
-					case QUEST_REFUSE_SIMPLE:
-						return closeDialogWindow(env);
-				}
-			}
-			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
-				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					default:
-						return sendQuestStartDialog(env, workItem);
+						return super.onDialogEvent(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			NpcInfos targetNpcInfo = null;
-			for (NpcInfos npcInfo : npcInfos.values()) {
-				if (npcInfo.getNpcIds().contains(targetId)) {
-					targetNpcInfo = npcInfo;
-					break;
-				}
+			int step = qs.getQuestVarById(0); // starting from 0
+			if (step > getMaxStep()) {
+				LoggerFactory.getLogger(ReportToMany.class).warn("Missing NpcInfo for quest " + questId + " step #" + (step + 1));
+				return false;
 			}
-			if (var <= maxVar) {
-				if (targetNpcInfo != null) {
-					if (dialog == DialogAction.SET_SUCCEED) {
-						qs.setQuestVar(maxVar);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
+			NpcInfos targetNpcInfo = npcInfos.get(step);
+			if (!targetNpcInfo.getNpcIds().contains(targetId))
+				return false;
 
-					int closeDialogId = getCloseDialogId(var, targetNpcInfo);
-					if (dialog.id() == closeDialogId) {
-						if (dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE
-							|| QuestService.collectItemCheck(env, true)) {
-							if (var == maxVar) {
-								if (closeDialogId == DialogAction.SELECT_QUEST_REWARD.id() || closeDialogId == DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE.id()) {
-									qs.setStatus(QuestStatus.REWARD);
-									updateQuestStatus(env);
-									return sendQuestDialog(env, 5);
-								}
-							} else {
-								qs.setQuestVarById(0, var + 1);
-							}
-							updateQuestStatus(env);
-						}
+			switch (dialog) {
+				case QUEST_SELECT:
+					return sendQuestDialog(env, getDialogId(step));
+				case SETPRO1:
+				case SETPRO2:
+				case SETPRO3:
+				case SETPRO4:
+				case SETPRO5:
+				case SETPRO6:
+				case SETPRO7:
+				case SETPRO8:
+				case SETPRO9:
+				case SETPRO10:
+				case SETPRO11:
+				case SETPRO12:
+					changeQuestStep(env, step, step + 1);
+					if (workItems != null && workItems.size() > step)
+						giveQuestItem(env, workItems.get(step).getItemId(), workItems.get(step).getCount());
+					return closeDialogWindow(env);
+				case SET_SUCCEED:
+				case SELECT_QUEST_REWARD:
+				case CHECK_USER_HAS_QUEST_ITEM:
+				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
+					if (dialog == DialogAction.SET_SUCCEED) // set reward from pre-end npc (end npc is another one who will then give the reward)
+						step++;
+					if (step < getMaxStep() || !validateAndRemoveItems(env, dialog))
 						return sendQuestSelectionDialog(env);
-					}
-
-					int dialogId = getDialogId(var, targetNpcInfo);
-					if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, dialogId);
-					} else if (dialog.id() == dialogId + 1 && targetNpcInfo.getMovie() != 0) {
-						sendQuestDialog(env, dialogId + 1);
-						return playQuestMovie(env, targetNpcInfo.getMovie());
-					}
-				}
-			} else if (var > maxVar) {
-				if (endNpcIds.contains(targetId)) {
-					if (dialog == DialogAction.QUEST_SELECT) {
-						return sendQuestDialog(env, endDialogId != 0 ? endDialogId : isDataDriven ? 10002 : 2375);
-					} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
-						if (startItemId != 0) {
-							if (!removeQuestItem(env, startItemId, 1)) {
-								return false;
-							}
-						}
-						if (workItem != null) {
-							long count = player.getInventory().getItemCountByItemId(workItem.getItemId());
-							if (count < workItem.getCount()) {
-								return sendQuestSelectionDialog(env);
-							}
-							removeQuestItem(env, workItem.getItemId(), count, QuestStatus.COMPLETE);
-						}
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return sendQuestEndDialog(env);
-					}
-				}
+					qs.setStatus(QuestStatus.REWARD);
+					updateQuestStatus(env);
+					return sendQuestEndDialog(env);
+				default:
+					if (targetNpcInfo.getMovie() != 0)
+						playQuestMovie(env, targetNpcInfo.getMovie());
+					return super.onDialogEvent(env);
 			}
-		} else if (qs.getStatus() == QuestStatus.REWARD && endNpcIds.contains(targetId)) {
-			int var = qs.getQuestVarById(0);
-			NpcInfos targetNpcInfo = null;
-			for (NpcInfos npcInfo : npcInfos.values()) {
-				if (npcInfo.getNpcIds().contains(targetId)) {
-					targetNpcInfo = npcInfo;
-					break;
-				}
-			}
-			if (var >= maxVar && targetNpcInfo != null) {
-				int closeDialogId = getCloseDialogId(var, targetNpcInfo);
-				if (dialog == DialogAction.USE_OBJECT) {
-					if (closeDialogId == DialogAction.SELECT_QUEST_REWARD.id() || closeDialogId == DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE.id())
-						return sendQuestEndDialog(env);
-					int dialogId = getDialogId(var, targetNpcInfo);
-					return sendQuestDialog(env, dialogId);
-				}
-				return sendQuestEndDialog(env);
-			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			NpcInfos endNpcInfo = npcInfos.get(getMaxStep());
+			if (!endNpcInfo.getNpcIds().contains(targetId))
+				return false;
+			int step = qs.getQuestVarById(0);
+			boolean rewardStatusFromRewardNpc = step == getMaxStep(); // false if reward status was set by SET_SUCCEED action
+			if (dialog == DialogAction.USE_OBJECT && !rewardStatusFromRewardNpc)
+				return sendQuestDialog(env, isDataDriven ? 10002 : 2375); // show full reward dialog instead of last page
+			return sendQuestEndDialog(env);
 		}
 		return false;
+	}
+
+	private int getMaxStep() {
+		return npcInfos.size() - 1;
+	}
+
+	private int getDialogId(int var) {
+		if (var == getMaxStep())
+			return isDataDriven ? 10002 : 2375;
+		else
+			return (isDataDriven ? 1011 : 1352) + var * 341;
+	}
+
+	private boolean validateAndRemoveItems(QuestEnv env, DialogAction dialog) {
+		if (!QuestService.collectItemCheck(env, true))
+			return false;
+		if (startItemId != 0 && !removeQuestItem(env, startItemId, 1))
+			return false;
+		if (workItems != null) {
+			for (QuestItems workItem : workItems)
+				removeQuestItem(env, workItem.getItemId(), workItem.getCount(), QuestStatus.COMPLETE);
+		}
+		return true;
 	}
 
 	@Override
@@ -233,27 +183,5 @@ public class ReportToMany extends QuestHandler {
 	@Override
 	public void onLevelChangedEvent(Player player) {
 		defaultOnLevelChangedEvent(player);
-	}
-
-	private int getCloseDialogId(int var, NpcInfos targetNpcInfo) {
-		if (targetNpcInfo.getCloseDialog() == 0) {
-			if (var == maxVar)
-				return 1009;
-			else
-				return 10000 + var;
-		} else {
-			return targetNpcInfo.getCloseDialog();
-		}
-	}
-
-	private int getDialogId(int var, NpcInfos targetNpcInfo) {
-		if (targetNpcInfo.getQuestDialog() == 0) {
-			if (var == maxVar)
-				return isDataDriven ? 10002 : 2375;
-			else
-				return (isDataDriven ? 1011 : 1352) + var * 341;
-		} else {
-			return targetNpcInfo.getQuestDialog();
-		}
 	}
 }

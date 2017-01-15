@@ -39,122 +39,122 @@
 	<report_to_many id="12400" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12401" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12402" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12403" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12404" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12405" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12406" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12407" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12408" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12409" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12410" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="12411" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22400" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22401" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22402" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22403" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22404" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22405" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22406" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22407" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22408" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22409" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22410" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	<report_to_many id="22411" start_npc_ids="205892">
 		<npc_infos npc_ids="205891"/>
 		<npc_infos npc_ids="205575"/>
-		<npc_infos npc_ids="205892" close_dialog="20002"/>
+		<npc_infos npc_ids="205892"/>
 	</report_to_many>
 	
 	<!-- ITEM COLLECTING -->

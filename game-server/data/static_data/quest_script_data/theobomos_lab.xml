@@ -11,7 +11,7 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
-	<report_to_many id="4115" start_npc_ids="205143" end_npc_ids="800421">
+	<report_to_many id="4115" start_npc_ids="205143">
 		<npc_infos npc_ids="205150"/>
 		<npc_infos npc_ids="800421"/>
 	</report_to_many>

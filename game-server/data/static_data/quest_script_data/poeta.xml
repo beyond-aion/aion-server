@@ -55,11 +55,11 @@
 	<report_to id="1104" start_npc_ids="203057" end_npc_ids="203059"/>
 	<report_to id="1106" start_npc_ids="203050" end_npc_ids="203061"/>
 	<report_to id="1110" start_npc_ids="203065" end_npc_ids="203075"/>
-	<report_to_many id="1115" start_npc_ids="203075" end_npc_ids="203058">
+	<report_to_many id="1115" start_npc_ids="203075">
 		<npc_infos npc_ids="203072"/>
 		<npc_infos npc_ids="203058"/>
 	</report_to_many>
-	<report_to_many id="1118" start_npc_ids="203059" end_npc_ids="203079">
+	<report_to_many id="1118" start_npc_ids="203059">
 		<npc_infos npc_ids="203070"/>
 		<npc_infos npc_ids="203079"/>
 	</report_to_many>

@@ -288,7 +288,6 @@
 				<xs:attribute name="start_npc_ids" type="IntListType"/>
 				<xs:attribute name="start_dialog_id" type="xs:int"/>
 				<xs:attribute name="end_npc_ids" type="IntListType"/>
-				<xs:attribute name="end_dialog_id" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -341,15 +340,11 @@
 				<xs:attribute name="start_npc_ids" type="IntListType"/>
 				<xs:attribute name="start_item_id" type="xs:int"/>
 				<xs:attribute name="start_dialog_id" type="xs:int"/>
-				<xs:attribute name="end_dialog_id" type="xs:int"/>
-				<xs:attribute name="end_npc_ids" type="IntListType"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="NpcInfos">
 		<xs:attribute name="npc_ids" type="IntListType" use="required"/>
-		<xs:attribute name="quest_dialog" type="xs:int"/>
-		<xs:attribute name="close_dialog" type="xs:int"/>
 		<xs:attribute name="movie" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="WorkOrdersData">
