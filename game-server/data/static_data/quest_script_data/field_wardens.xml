@@ -113,7 +113,7 @@
 		<npc_infos npc_ids="804931"/>
 	</report_to_many>
 	<report_to_many id="45056">
-		<npc_infos npc_ids="805221"/>
+		<npc_infos npc_ids="804729 805221"/>
 		<npc_infos npc_ids="804932"/>
 	</report_to_many>
 	<report_to_many id="45057">
