@@ -335,7 +335,7 @@
 		<xs:complexContent>
 			<xs:extension base="QuestScriptData">
 				<xs:sequence>
-					<xs:element name="npc_infos" type="NpcInfos" minOccurs="1" maxOccurs="unbounded"/>
+					<xs:element name="npc_infos" type="NpcInfos" minOccurs="2" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="start_npc_ids" type="IntListType"/>
 				<xs:attribute name="start_item_id" type="xs:int"/>

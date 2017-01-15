@@ -349,9 +349,7 @@
 		<npc_infos npc_ids="204182"/>
 		<npc_infos npc_ids="203385"/>
 	</report_to_many>
-	<report_to_many id="29047" start_npc_ids="204052">
-		<npc_infos npc_ids="204052"/>
-	</report_to_many>
+	<report_to id="29047" start_npc_ids="204052"/>
 	<report_to_many id="28225" start_npc_ids="205472">
 	    <npc_infos npc_ids="205321"/>
 		<npc_infos npc_ids="205323"/>

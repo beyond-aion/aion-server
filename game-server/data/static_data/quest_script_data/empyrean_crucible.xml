@@ -58,20 +58,12 @@
 	<!-- REPORTING QUESTS -->
 	<report_to id="18200" start_npc_ids="798604" end_npc_ids="799088"/>
 	<report_to id="18207" start_npc_ids="205309" end_npc_ids="205316"/>
-	<report_to_many id="18210" start_npc_ids="205315">
-		<npc_infos npc_ids="205985"/>
-	</report_to_many>
-	<report_to_many id="18215" start_npc_ids="205315">
-		<npc_infos npc_ids="205315"/>
-	</report_to_many>
+	<report_to id="18210" start_npc_ids="205315" end_npc_ids="205985"/>
+	<report_to id="18215" start_npc_ids="205315"/>
 	<report_to id="28200" start_npc_ids="798804" end_npc_ids="799428"/>
 	<report_to id="28207" start_npc_ids="205321" end_npc_ids="205320"/>
-	<report_to_many id="28210" start_npc_ids="205323">
-		<npc_infos npc_ids="205986"/>
-	</report_to_many>
-	<report_to_many id="28215" start_npc_ids="205323">
-		<npc_infos npc_ids="205323"/>
-	</report_to_many>
+	<report_to id="28210" start_npc_ids="205323" end_npc_ids="205986"/>
+	<report_to id="28215" start_npc_ids="205323"/>
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="18201" start_npc_ids="205309"/>
