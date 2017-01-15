@@ -21,48 +21,28 @@ public abstract class AbstractQuestHandler {
 
 	public abstract void register();
 
-	public boolean onDialogEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onDialogEvent(QuestEnv questEnv);
 
 	/**
 	 * This method is called on every handler (which registered the event), after a player entered a map.
 	 */
-	public boolean onEnterWorldEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onEnterWorldEvent(QuestEnv env);
 
-	public boolean onEnterZoneEvent(QuestEnv questEnv, ZoneName zoneName) {
-		return false;
-	}
+	public abstract boolean onEnterZoneEvent(QuestEnv questEnv, ZoneName zoneName);
 
-	public boolean onLeaveZoneEvent(QuestEnv questEnv, ZoneName zoneName) {
-		return false;
-	}
+	public abstract boolean onLeaveZoneEvent(QuestEnv questEnv, ZoneName zoneName);
 
-	public HandlerResult onItemUseEvent(QuestEnv questEnv, Item item) {
-		return HandlerResult.UNKNOWN;
-	}
+	public abstract HandlerResult onItemUseEvent(QuestEnv questEnv, Item item);
 
-	public boolean onHouseItemUseEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onHouseItemUseEvent(QuestEnv env);
 
-	public boolean onGetItemEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onGetItemEvent(QuestEnv questEnv);
 
-	public boolean onUseSkillEvent(QuestEnv questEnv, int skillId) {
-		return false;
-	}
+	public abstract boolean onUseSkillEvent(QuestEnv questEnv, int skillId);
 
-	public boolean onKillEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onKillEvent(QuestEnv questEnv);
 
-	public boolean onAttackEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onAttackEvent(QuestEnv questEnv);
 
 	/**
 	 * This method is called on every handler (which registered the event), after a player leveled up or down.
@@ -70,8 +50,7 @@ public abstract class AbstractQuestHandler {
 	 * @param player
 	 *          - The player whose level changed
 	 */
-	public void onLevelChangedEvent(Player player) {
-	}
+	public abstract void onLevelChangedEvent(Player player);
 
 	/**
 	 * This method is called on every handler (which registered the event), after a quest completed.
@@ -79,94 +58,49 @@ public abstract class AbstractQuestHandler {
 	 * @param env
 	 *          - QuestEnv containing the player and the quest ID he completed
 	 */
-	public void onQuestCompletedEvent(QuestEnv env) {
-	}
+	public abstract void onQuestCompletedEvent(QuestEnv env);
 
-	public boolean onDieEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onDieEvent(QuestEnv questEnv);
 
-	public boolean onLogOutEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onLogOutEvent(QuestEnv env);
 
-	public boolean onNpcReachTargetEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onNpcReachTargetEvent(QuestEnv env);
 
-	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onNpcLostTargetEvent(QuestEnv env);
 
-	public boolean onMovieEndEvent(QuestEnv questEnv, int movieId) {
-		return false;
-	}
+	public abstract boolean onMovieEndEvent(QuestEnv questEnv, int movieId);
 
-	public boolean onQuestTimerEndEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onQuestTimerEndEvent(QuestEnv questEnv);
 
-	public boolean onInvisibleTimerEndEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onInvisibleTimerEndEvent(QuestEnv questEnv);
 
-	public boolean onPassFlyingRingEvent(QuestEnv questEnv, String flyingRing) {
-		return false;
-	}
+	public abstract boolean onPassFlyingRingEvent(QuestEnv questEnv, String flyingRing);
 
-	public boolean onKillRankedEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onKillRankedEvent(QuestEnv env);
 
-	public boolean onKillInWorldEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onKillInWorldEvent(QuestEnv env);
 
-	public boolean onKillInZoneEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onKillInZoneEvent(QuestEnv env);
 
-	public boolean onFailCraftEvent(QuestEnv env, int itemId) {
-		return false;
-	}
+	public abstract boolean onFailCraftEvent(QuestEnv env, int itemId);
 
-	public boolean onEquipItemEvent(QuestEnv env, int itemId) {
-		return false;
-	}
+	public abstract boolean onEquipItemEvent(QuestEnv env, int itemId);
 
-	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
-		return false;
-	}
+	public abstract boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects);
 
-	public boolean onAddAggroListEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onAddAggroListEvent(QuestEnv questEnv);
 
-	public boolean onAtDistanceEvent(QuestEnv questEnv) {
-		return false;
-	}
+	public abstract boolean onAtDistanceEvent(QuestEnv questEnv);
 
-	public boolean onEnterWindStreamEvent(QuestEnv questEnv, int worldId) {
-		return false;
-	}
+	public abstract boolean onEnterWindStreamEvent(QuestEnv questEnv, int worldId);
 
-	public boolean rideAction(QuestEnv questEnv, int rideItemId) {
-		return false;
-	}
+	public abstract boolean rideAction(QuestEnv questEnv, int rideItemId);
 
-	public boolean onDredgionRewardEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onDredgionRewardEvent(QuestEnv env);
 
-	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
-		return HandlerResult.UNKNOWN;
-	}
+	public abstract HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems);
 
-	public boolean onProtectEndEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onProtectEndEvent(QuestEnv env);
 
-	public boolean onProtectFailEvent(QuestEnv env) {
-		return false;
-	}
+	public abstract boolean onProtectFailEvent(QuestEnv env);
 }

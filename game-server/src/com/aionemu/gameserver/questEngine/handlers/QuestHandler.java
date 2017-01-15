@@ -31,8 +31,8 @@ import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
 import com.aionemu.gameserver.model.templates.quest.QuestDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
-import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -71,29 +71,23 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	/** Create a new QuestHandler object */
 	protected QuestHandler(int questId) {
 		this.questId = questId;
-		loadWorkItems();
-		loadActionItems();
-		onWorkItemsLoaded();
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
+		if (template != null) { // Some artificial quests have dummy questIds
+			loadWorkItems(template);
+			loadActionItems(template);
+			onWorkItemsLoaded();
+		}
 	}
 
-	private void loadWorkItems() {
-		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		if (template == null)
-			return; // Some artificial quests have dummy questIds
-		QuestWorkItems qwi = DataManager.QUEST_DATA.getQuestById(questId).getQuestWorkItems();
-		if (qwi == null)
-			return;
-		workItems = qwi.getQuestWorkItem();
+	private void loadWorkItems(QuestTemplate template) {
+		if (template.getQuestWorkItems() != null)
+			workItems = template.getQuestWorkItems().getQuestWorkItem();
 	}
 
-	private void loadActionItems() {
-		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		if (template == null)
-			return; // Some artificial quests have dummy questIds
-		List<QuestDrop> qDrop = DataManager.QUEST_DATA.getQuestById(questId).getQuestDrop();
-		if (qDrop == null)
+	private void loadActionItems(QuestTemplate template) {
+		if (template.getQuestDrop() == null)
 			return;
-		for (QuestDrop drop : qDrop) {
+		for (QuestDrop drop : template.getQuestDrop()) {
 			if (drop.getNpcId() / 100000 != 7)
 				continue;
 			if (actionItems == null)
@@ -102,17 +96,208 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		}
 	}
 
+	/**
+	 * Override it to clear them if not used or log details
+	 */
+	protected void onWorkItemsLoaded() {
+
+	}
+
 	public Set<Integer> getActionItems() {
 		if (actionItems == null)
 			return Collections.emptySet();
 		return Collections.unmodifiableSet(actionItems);
 	}
 
-	/**
-	 * Override it to clear them if not used or log details
-	 */
-	protected void onWorkItemsLoaded() {
+	@Override
+	public int getQuestId() {
+		return questId;
+	}
 
+	@Override
+	public boolean onDialogEvent(QuestEnv env) {
+		DialogAction action = env.getDialog();
+		switch (action) {
+			case SELECT_ACTION_1011:
+			case SELECT_ACTION_1012:
+			case SELECT_ACTION_1013:
+			case SELECT_ACTION_1014:
+			case SELECT_ACTION_1015:
+			case SELECT_ACTION_1016:
+			case SELECT_ACTION_1017:
+			case SELECT_ACTION_1018:
+			case SELECT_ACTION_1019:
+			case SELECT_ACTION_1097:
+			case SELECT_ACTION_1182:
+			case SELECT_ACTION_1267:
+			case SELECT_ACTION_1352:
+			case SELECT_ACTION_1353:
+			case SELECT_ACTION_1354:
+			case SELECT_ACTION_1355:
+			case SELECT_ACTION_1438:
+			case SELECT_ACTION_1609:
+			case SELECT_ACTION_1693:
+			case SELECT_ACTION_1694:
+			case SELECT_ACTION_1695:
+			case SELECT_ACTION_1779:
+			case SELECT_ACTION_2034:
+			case SELECT_ACTION_2035:
+			case SELECT_ACTION_2036:
+			case SELECT_ACTION_2037:
+			case SELECT_ACTION_2376:
+			case SELECT_ACTION_2377:
+			case SELECT_ACTION_2546:
+			case SELECT_ACTION_2717:
+			case SELECT_ACTION_2718:
+			case SELECT_ACTION_2720:
+			case SELECT_ACTION_3058:
+			case SELECT_ACTION_3059:
+			case SELECT_ACTION_3060:
+			case SELECT_ACTION_3143:
+			case SELECT_ACTION_3399:
+			case SELECT_ACTION_3400:
+			case SELECT_ACTION_3570:
+			case SELECT_ACTION_3740:
+			case SELECT_ACTION_3911:
+			case SELECT_ACTION_4081:
+			case SELECT_ACTION_4763:
+				// simple "next page" event (action ID = next dialog page ID)
+				// there are only very few quests, where this default behavior does not apply (e.g. 4074)
+				sendDialogPacket(env, action.id(), questId);
+				return true;
+			case ASK_QUEST_ACCEPT:
+				// show quest accept dialog (coming from pre-conversation)
+				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
+				return true;
+			case QUEST_REFUSE:
+			case QUEST_REFUSE_1:
+			case QUEST_REFUSE_2:
+			case QUEST_REFUSE_3:
+			case QUEST_REFUSE_4:
+			case QUEST_REFUSE_SIMPLE:
+				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1004) : closeDialogWindow(env);
+			case FINISH_DIALOG:
+				return closeDialogWindow(env);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterWorldEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		return false;
+	}
+
+	@Override
+	public boolean onLeaveZoneEvent(QuestEnv env, ZoneName zoneName) {
+		return false;
+	}
+
+	@Override
+	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
+		return HandlerResult.UNKNOWN;
+	}
+
+	@Override
+	public boolean onHouseItemUseEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onGetItemEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onUseSkillEvent(QuestEnv env, int skillId) {
+		return false;
+	}
+
+	@Override
+	public boolean onKillEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onAttackEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public void onLevelChangedEvent(Player player) {
+	}
+
+	@Override
+	public void onQuestCompletedEvent(QuestEnv env) {
+	}
+
+	@Override
+	public boolean onDieEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onLogOutEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onNpcReachTargetEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onNpcLostTargetEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+		return false;
+	}
+
+	@Override
+	public boolean onQuestTimerEndEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onInvisibleTimerEndEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onPassFlyingRingEvent(QuestEnv env, String flyingRing) {
+		return false;
+	}
+
+	@Override
+	public boolean onKillRankedEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onKillInWorldEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onKillInZoneEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onFailCraftEvent(QuestEnv env, int itemId) {
+		return false;
+	}
+
+	@Override
+	public boolean onEquipItemEvent(QuestEnv env, int itemId) {
+		return false;
 	}
 
 	@Override
@@ -147,6 +332,46 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean onAddAggroListEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onAtDistanceEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onEnterWindStreamEvent(QuestEnv env, int worldId) {
+		return false;
+	}
+
+	@Override
+	public boolean rideAction(QuestEnv env, int rideItemId) {
+		return false;
+	}
+
+	@Override
+	public boolean onDredgionRewardEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
+		return HandlerResult.UNKNOWN;
+	}
+
+	@Override
+	public boolean onProtectEndEvent(QuestEnv env) {
+		return false;
+	}
+
+	@Override
+	public boolean onProtectFailEvent(QuestEnv env) {
+		return false;
 	}
 
 	/** Update the status of the quest in player's journal */
@@ -206,22 +431,32 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				if (qs == null || qs.getStatus() != QuestStatus.REWARD) // reward packet exploitation fix
 					return false;
 		}
-		sendDialogPacket(env, dialogId);
+		// Not using handler questId, because some quests may handle events when quests are finished
+		// In that case questId must be zero!!! (Kromede entry for example)
+		sendDialogPacket(env, dialogId, env.getQuestId());
 		return true;
 	}
 
+	private void sendDialogPacket(QuestEnv env, int dialogId, int questId) {
+		int objId = 0;
+		if (env.getVisibleObject() != null) {
+			objId = env.getVisibleObject().getObjectId();
+		}
+		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId, questId));
+	}
+
 	public boolean sendQuestSelectionDialog(QuestEnv env) {
-		sendQuestSelectionPacket(env, 10);
+		sendDialogPacket(env, 10, 0);
 		return true;
 	}
 
 	public boolean closeDialogWindow(QuestEnv env) {
-		sendQuestSelectionPacket(env, 0);
+		sendDialogPacket(env, 0, 0);
 		return true;
 	}
 
 	public boolean sendQuestStartDialog(QuestEnv env) {
-		return sendQuestStartDialog(env, 0, 0);
+		return sendQuestStartDialog(env, 0, 0); // TODO remove all calls and replace with super.onDialogEvent()
 	}
 
 	public boolean sendQuestStartDialog(QuestEnv env, QuestItems workItem) {
@@ -298,7 +533,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 					QuestState qs2 = player.getQuestStateList().getQuestState(questId);
 					if (qs2 != null && qs2.getStatus() == QuestStatus.REWARD) { // TODO make sure that this npc is the end npc
 						env.setQuestId(questId);
-						env.setDialogId(DialogAction.USE_OBJECT.id()); // show default dialog (reward selection for next quest)
+						env.setDialogAction(DialogAction.USE_OBJECT); // show default dialog (reward selection for next quest)
 						return QuestEngine.getInstance().onDialog(new QuestEnv(npc, player, questId, DialogAction.USE_OBJECT.id()));
 					} else if (!npcHasActiveQuest && qs2 != null && qs2.getStatus() == QuestStatus.START) {
 						boolean isQuestStartNpc = questNpc.getOnQuestStart().contains(questId);
@@ -318,7 +553,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 								for (FinishedQuestCond fcondition : finishedQuests) {
 									if (fcondition.getQuestId() == env.getQuestId()) {
 										env.setQuestId(questId);
-										env.setDialogId(DialogAction.QUEST_SELECT.id());
+										env.setDialogAction(DialogAction.QUEST_SELECT);
 										return QuestEngine.getInstance().onDialog(env); // show start dialog of follow-up quest
 									}
 								}
@@ -1110,26 +1345,4 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		return false;
 	}
 
-	@Override
-	public int getQuestId() {
-		return questId;
-	}
-
-	private void sendDialogPacket(QuestEnv env, int dialogId) {
-		int objId = 0;
-		if (env.getVisibleObject() != null) {
-			objId = env.getVisibleObject().getObjectId();
-		}
-		// Not using questId, because some quests may handle events when quests are finished
-		// In that case questId must be zero!!! (Kromede entry for example)
-		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId, env.getQuestId()));
-	}
-
-	private void sendQuestSelectionPacket(QuestEnv env, int dialogId) {
-		int objId = 0;
-		if (env.getVisibleObject() != null) {
-			objId = env.getVisibleObject().getObjectId();
-		}
-		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId));
-	}
 }

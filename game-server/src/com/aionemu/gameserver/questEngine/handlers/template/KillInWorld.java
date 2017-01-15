@@ -113,16 +113,12 @@ public class KillInWorld extends QuestHandler {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
-					case QUEST_REFUSE:
-					case QUEST_REFUSE_1:
-					case QUEST_REFUSE_SIMPLE:
-						return closeDialogWindow(env);
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
-					default: {
 						return sendQuestStartDialog(env);
-					}
+					default:
+						return super.onDialogEvent(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

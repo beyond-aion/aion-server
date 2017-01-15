@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model;
 
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
+
 import javolution.util.FastMap;
 
 /**
@@ -139,6 +141,7 @@ public enum DialogAction {
 	SELECT_ACTION_2720(2720),
 	SELECT_ACTION_3058(3058),
 	SELECT_ACTION_3059(3059),
+	SELECT_ACTION_3060(3060),
 	SELECT_ACTION_3143(3143),
 	SELECT_ACTION_3399(3399),
 	SELECT_ACTION_3400(3400),
@@ -266,6 +269,10 @@ public enum DialogAction {
 
 	public static DialogAction getByActionId(int actionId) {
 		DialogAction action = actionsById.get(actionId);
-		return action == null ? DialogAction.NULL : action;
+		if (action == null) {
+			LoggerFactory.getLogger(DialogAction.class).warn("Missing DialogAction value for action ID " + actionId, new Throwable());
+			return DialogAction.NULL;
+		}
+		return action;
 	}
 }

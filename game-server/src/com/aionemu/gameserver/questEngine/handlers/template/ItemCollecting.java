@@ -113,16 +113,12 @@ public class ItemCollecting extends QuestHandler {
 							playQuestMovie(env, questMovie);
 						}
 						return sendQuestDialog(env, 1012);
-					case QUEST_REFUSE:
-					case QUEST_REFUSE_1:
-					case QUEST_REFUSE_2:
-					case QUEST_REFUSE_3:
-					case QUEST_REFUSE_4:
-					case QUEST_REFUSE_SIMPLE:
-					case FINISH_DIALOG:
-						return closeDialogWindow(env);
-					default:
+					case QUEST_ACCEPT:
+					case QUEST_ACCEPT_1:
+					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env, workItem);
+					default:
+						return super.onDialogEvent(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

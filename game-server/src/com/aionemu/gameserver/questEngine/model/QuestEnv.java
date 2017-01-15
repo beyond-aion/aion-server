@@ -12,7 +12,7 @@ public class QuestEnv {
 	private VisibleObject visibleObject;
 	private Player player;
 	private int questId;
-	private int dialogId;
+	private DialogAction dialogAction;
 	private int extendedRewardIndex;
 
 	/**
@@ -25,7 +25,7 @@ public class QuestEnv {
 		this.visibleObject = visibleObject;
 		this.player = player;
 		this.questId = questId;
-		this.dialogId = dialogId;
+		this.dialogAction = DialogAction.getByActionId(dialogId);
 	}
 
 	/**
@@ -77,19 +77,15 @@ public class QuestEnv {
 	 * @return the dialogId
 	 */
 	public int getDialogId() {
-		return dialogId;
+		return dialogAction.id();
 	}
 
 	public DialogAction getDialog() {
-		return DialogAction.getByActionId(dialogId);
+		return dialogAction;
 	}
 
-	/**
-	 * @param dialogId
-	 *          the dialogId to set
-	 */
-	public void setDialogId(Integer dialogId) {
-		this.dialogId = dialogId;
+	public void setDialogAction(DialogAction dialogAction) {
+		this.dialogAction = dialogAction;
 	}
 
 	/**

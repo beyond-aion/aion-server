@@ -79,10 +79,8 @@ public class ItemOrders extends QuestHandler {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
 					}
 					return closeDialogWindow(env);
-				case QUEST_REFUSE:
-				case QUEST_REFUSE_1:
-				case QUEST_REFUSE_SIMPLE:
-					return closeDialogWindow(env);
+				default:
+					return super.onDialogEvent(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var0 = qs.getQuestVarById(0);
