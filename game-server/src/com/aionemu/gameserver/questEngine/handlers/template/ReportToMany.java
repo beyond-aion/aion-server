@@ -33,6 +33,7 @@ public class ReportToMany extends QuestHandler {
 	private final List<NpcInfos> npcInfos = new ArrayList<>();
 	private final boolean mission;
 	private final boolean isDataDriven;
+	private boolean rewardStatusFromRewardNpc = true; // workaround flag for end npc dialog behavior (see below)
 
 	public ReportToMany(int questId, int startItemId, List<Integer> startNpcIds, List<NpcInfos> npcInfos, int startDialogId, boolean mission) {
 		super(questId);
@@ -122,10 +123,13 @@ public class ReportToMany extends QuestHandler {
 				case SELECT_QUEST_REWARD:
 				case CHECK_USER_HAS_QUEST_ITEM:
 				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
-					if (dialog == DialogAction.SET_SUCCEED) // set reward from pre-end npc (end npc is another one who will then give the reward)
+					if (dialog == DialogAction.SET_SUCCEED) { // set reward from pre-end npc (end npc is another one who will then give the reward)
+						rewardStatusFromRewardNpc = false;
 						step++;
+					}
 					if (step < getMaxStep() || !validateAndRemoveItems(env, dialog))
 						return sendQuestSelectionDialog(env);
+					qs.setQuestVarById(0, step);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
@@ -138,10 +142,8 @@ public class ReportToMany extends QuestHandler {
 			NpcInfos endNpcInfo = npcInfos.get(getMaxStep());
 			if (!endNpcInfo.getNpcIds().contains(targetId))
 				return false;
-			int step = qs.getQuestVarById(0);
-			boolean rewardStatusFromRewardNpc = step == getMaxStep(); // false if reward status was set by SET_SUCCEED action
-			if (dialog == DialogAction.USE_OBJECT && !rewardStatusFromRewardNpc)
-				return sendQuestDialog(env, isDataDriven ? 10002 : 2375); // show full reward dialog instead of last page
+			if (dialog == DialogAction.USE_OBJECT && !rewardStatusFromRewardNpc) // if talking to an end npc who did not set the reward state himself
+				return sendQuestDialog(env, isDataDriven ? 10002 : 2375); // show full reward dialog instead of only last page (otherwise it's never readable)
 			return sendQuestEndDialog(env);
 		}
 		return false;
