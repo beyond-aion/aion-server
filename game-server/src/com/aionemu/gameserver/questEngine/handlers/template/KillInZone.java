@@ -56,15 +56,9 @@ public class KillInZone extends QuestHandler {
 		this.minRank = minRank;
 		this.levelDiff = levelDiff;
 		this.startDistanceNpc = startDistanceNpc;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
-		if (workItems == null)
-			return;
-		if (workItems.size() > 0)
-			log.warn("Q{} (KillInWorld) has a work item.", questId);
+		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+		if (workItems != null)
+			log.warn("Q{} should not have work items", questId);
 	}
 
 	@Override

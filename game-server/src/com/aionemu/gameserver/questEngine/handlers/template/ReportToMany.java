@@ -43,6 +43,8 @@ public class ReportToMany extends QuestHandler {
 		this.startDialogId = startDialogId;
 		this.mission = mission;
 		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+		if (workItems != null && workItems.size() > this.npcInfos.size())
+			LoggerFactory.getLogger(ReportToMany.class).warn("Q{} has more work items than quest steps", questId);
 	}
 
 	@Override

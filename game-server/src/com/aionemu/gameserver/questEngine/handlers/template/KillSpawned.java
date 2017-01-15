@@ -40,14 +40,7 @@ public class KillSpawned extends QuestHandler {
 		this.spawnedMonsters = spawnedMonsters;
 		for (Monster m : spawnedMonsters.values())
 			spawnerObjectIds.add(m.getSpawnerNpcId());
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
-		// Have strange work items as Bait_1, Bait_2... Don't use.
-		if (workItems != null)
-			workItems = null;
+		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
 	@Override

@@ -35,18 +35,13 @@ public class ItemOrders extends QuestHandler {
 		this.talkNpcId1 = talkNpcId1;
 		this.talkNpcId2 = talkNpcId2;
 		this.endNpcId = endNpcId;
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
 		if (workItems == null) {
-			log.warn("Q{} is not ItemOrders quest.", questId);
-			return;
+			log.warn("Q{} has no work item", questId);
+		} else {
+			if (workItems.size() > 1)
+				log.warn("Q{} has more than 1 work item", questId);
+			this.startItemId = workItems.get(0).getItemId();
 		}
-		if (workItems.size() > 1) {
-			log.warn("Q{} has more than 1 work item.", questId);
-		}
-		this.startItemId = workItems.get(0).getItemId();
 	}
 
 	@Override

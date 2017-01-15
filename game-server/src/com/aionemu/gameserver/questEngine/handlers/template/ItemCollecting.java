@@ -56,17 +56,12 @@ public class ItemCollecting extends QuestHandler {
 		this.startDialogId2 = startDialogId2;
 		this.checkOkDialogId = checkOkDialogId;
 		this.checkFailDialogId = checkFailDialogId;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
-		if (workItems == null)
-			return;
-		if (workItems.size() > 1) {
-			log.warn("Q{} (ItemCollecting) has more than 1 work item.", questId);
+		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+		if (workItems != null) {
+			if (workItems.size() > 1)
+				log.warn("Q{} has more than 1 work item", questId);
+			workItem = workItems.get(0);
 		}
-		workItem = workItems.get(0);
 	}
 
 	@Override

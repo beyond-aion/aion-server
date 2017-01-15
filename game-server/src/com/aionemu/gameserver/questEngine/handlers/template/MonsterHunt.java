@@ -69,16 +69,12 @@ public class MonsterHunt extends QuestHandler {
 		this.startDistanceNpcId = startDistanceNpcId;
 		this.reward = reward;
 		this.rewardNextStep = rewardNextStep;
-		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
-	}
-
-	@Override
-	protected void onWorkItemsLoaded() {
-		if (workItems == null)
-			return;
-		if (workItems.size() > 1)
-			log.warn("Q{} (MonsterHunt) has more than 1 work item.", questId);
-		workItem = workItems.get(0);
+		this.isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
+		if (workItems != null) {
+			if (workItems.size() > 1)
+				log.warn("Q{} has more than 1 work item", questId);
+			workItem = workItems.get(0);
+		}
 	}
 
 	@Override

@@ -75,7 +75,6 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		if (template != null) { // Some artificial quests have dummy questIds
 			loadWorkItems(template);
 			loadActionItems(template);
-			onWorkItemsLoaded();
 		}
 	}
 
@@ -94,13 +93,6 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				actionItems = new HashSet<>();
 			actionItems.add(drop.getNpcId());
 		}
-	}
-
-	/**
-	 * Override it to clear them if not used or log details
-	 */
-	protected void onWorkItemsLoaded() {
-
 	}
 
 	public Set<Integer> getActionItems() {
