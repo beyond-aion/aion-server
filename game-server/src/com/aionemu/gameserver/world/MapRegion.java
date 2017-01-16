@@ -221,9 +221,10 @@ public class MapRegion {
 						}
 					}
 				}
+				walkers.removeIf(w -> w.getPosition().isMapRegionActive());
 				if (walkers.size() > 0) {
-					String aiNames = walkers.stream().map(o -> o.getAi2().getName()).distinct().collect(Collectors.joining(", "));
-					log.warn("There are {} objects walking on inactive map {} [{}]\nAIs: {}", walkers.size(), getMapId(), getParent().getInstanceId(), aiNames);
+					String npcs = walkers.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));
+					log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getMapId(), getParent().getInstanceId(), npcs);
 				}
 			}
 		}, 60000);
@@ -275,7 +276,7 @@ public class MapRegion {
 
 	boolean isNeighboursActive() {
 		for (MapRegion r : neighbours) {
-			if (r != null && r.regionActive.get() && r.playerCount.get() > 0)
+			if (r.regionActive.get() && r.playerCount.get() > 0)
 				return true;
 		}
 		return false;
