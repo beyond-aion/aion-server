@@ -124,9 +124,7 @@ public class RectangleArea extends AbstractArea {
 
 	@Override
 	public boolean isInside3D(float x, float y, float z) {
-		if (!isInside2D(x, y))
-			return false;
-		return super.isInside3D(x, y, z);
+		return isInside2D(x, y) && isInsideZ(z);
 	}
 
 	@Override
