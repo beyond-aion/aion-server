@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.EmotionType;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class CM_WINDSTREAM extends AionClientPacket {
 
-	private final Logger log = LoggerFactory.getLogger(CM_WINDSTREAM.class);
 	int teleportId;
 	int distance;
 	int state;
@@ -40,58 +38,52 @@ public class CM_WINDSTREAM extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		switch (state) {
-			case 0:
-			case 4:
-			case 7:
-			case 8:
-				if (state == 0) {
-					player.unsetPlayerMode(PlayerMode.RIDE);
-				} else if (state == 7) { // start boost
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM_START_BOOST, 0, 0), true);
-				} else if (state == 8) { // end boost
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM_END_BOOST, 0, 0), true);
-				}
-				PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
+			case 0: // ?
+				player.unsetPlayerMode(PlayerMode.RIDE);
 				break;
-			case 1:
-				if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+			case 1: // entering windstream
+				if (player.isInPlayerMode(PlayerMode.WINDSTREAM) || !player.isFlying())
 					return;
-				}
-				if (player.isFlying()) {
-					player.setPlayerMode(PlayerMode.WINDSTREAM, new WindstreamPath(teleportId, distance));
-					player.unsetState(CreatureState.ACTIVE);
-					player.unsetState(CreatureState.GLIDING);
-					player.setState(CreatureState.FLYING);
-					player.unsetFlyState(FlyState.GLIDING);
-					player.setFlyState(FlyState.FLYING);
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, distance), true);
-					player.getLifeStats().triggerFpRestore();
-					QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0, 0), teleportId);
-				}
-				break;
-			case 2:
+				player.setPlayerMode(PlayerMode.WINDSTREAM, new WindstreamPath(teleportId, distance));
+				player.unsetState(CreatureState.ACTIVE);
+				player.unsetState(CreatureState.GLIDING);
+				player.setState(CreatureState.FLYING);
+				player.unsetFlyState(FlyState.GLIDING);
+				player.setFlyState(FlyState.FLYING);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, distance), true);
+				player.getLifeStats().triggerFpRestore();
+				QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0, 0), teleportId);
+				return; // don't send SM_WINDSTREAM
+			case 2: // leaving windstream (gliding)
 			case 3: // leaving windstream
-				if (!player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+				if (!player.isInPlayerMode(PlayerMode.WINDSTREAM))
 					return;
-				}
 				player.unsetState(CreatureState.FLYING);
 				player.setState(CreatureState.ACTIVE);
 				player.unsetFlyState(FlyState.FLYING);
 				player.unsetFlyState(FlyState.GLIDING);
-				if (state == 2) {
+				if (state == 2)
 					player.getFlyController().switchToGliding();
-				} else
+				else
 					player.getGameStats().updateStatsAndSpeedVisually();
 				player.unsetPlayerMode(PlayerMode.WINDSTREAM);
-				PacketSendUtility.broadcastPacket(player,
-					new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT, 0, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT),
+					true);
 				if (player.isTransformed()) // send sm_transform if player is transformed
 					PacketSendUtility.broadcastPacketAndReceive(player, new SM_TRANSFORM(player));
-				PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
+				break;
+			case 4: // ?
+				break;
+			case 7: // start boost
+			case 8: // end boost
+				PacketSendUtility.broadcastPacket(player,
+					new SM_EMOTION(player, state == 7 ? EmotionType.WINDSTREAM_START_BOOST : EmotionType.WINDSTREAM_END_BOOST), true);
 				break;
 			default:
-				log.error("Unknown Windstream state #" + state + " was found!");
+				LoggerFactory.getLogger(CM_WINDSTREAM.class).warn("Unknown Windstream state #" + state + " was sent from " + player.getPosition());
+				return;
 		}
+		PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
 	}
 
 }
