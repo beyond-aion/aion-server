@@ -529,11 +529,8 @@ public final class PlayerEnterWorldService {
 	private static boolean validateFortressZone(Player player) {
 		FortressLocation fortress = SiegeService.getInstance().findFortress(player.getWorldId(), player.getX(), player.getY(), player.getZ());
 		if (fortress != null && fortress.isVulnerable() && fortress.isEnemy(player)) {
-			long currentTime = System.currentTimeMillis();
-			// only relocate if the siege started in the past 7 minutes or the player was > 7 min. offline (so no one who logged out before start will
-			// spawn in the fortress zone)
-			if ((currentTime - SiegeService.getInstance().getSiege(fortress).getStartTime()) / 1000 < 421
-				|| (currentTime - player.getCommonData().getLastOnline().getTime()) / 1000 > 420) {
+			// only relocate if the player logged out before siege start (online enemies automatically get teleported outside the fortress)
+			if (player.getCommonData().getLastOnline().getTime() < SiegeService.getInstance().getSiege(fortress).getStartTime()) {
 				BindPointPosition bind = player.getBindPoint();
 				if (bind != null) {
 					World.getInstance().setPosition(player, bind.getMapId(), bind.getX(), bind.getY(), bind.getZ(), bind.getHeading());
