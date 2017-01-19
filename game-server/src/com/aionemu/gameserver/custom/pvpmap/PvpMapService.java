@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -31,8 +30,6 @@ public class PvpMapService {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in an instance.");
 		} else if (p.getController().isInCombat()) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in combat.");
-		} else if (SiegeService.getInstance().isNearVulnerableFortress(p)) {
-			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while you are near a vulnerable fortress.");
 		} else if (isActive.get()) {
 			PvpMapHandler handler = getOrCreateNewHandler();
 			if (handler != null) {

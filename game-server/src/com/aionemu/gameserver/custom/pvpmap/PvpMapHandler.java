@@ -81,7 +81,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void spawnShugo(Player player) {
-		if (canJoin.get() &&  Rnd.chance() < SHUGO_SPAWN_RATE) {
+		if (canJoin.get() && Rnd.chance() < SHUGO_SPAWN_RATE) {
 			Npc oldShugo = instance.getNpc(833543);
 			if (oldShugo != null) {
 				oldShugo.getController().delete();
@@ -89,7 +89,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
 			float y = player.getY() + (float) (Math.sin(radian) * 2);
-			float z =  GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), 0.5f, instanceId);
+			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), 0.5f, instanceId);
 			spawn(833543, x, y, z, MathUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
 		}
 	}
@@ -140,19 +140,15 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 					if (isLeaving) {
 						removePlayer(p);
 					} else {
-						if (!SiegeService.getInstance().isNearVulnerableFortress(p)) {
-							updateOrigin(p);
-							updateJoinOrLeaveTime(p);
-							InstanceService.registerPlayerWithInstance(instance, p);
-							WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-							TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
-								TeleportAnimation.BATTLEGROUND);
-						} else {
-							PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while near a vulnerable fortress.");
-						}
+						updateOrigin(p);
+						updateJoinOrLeaveTime(p);
+						InstanceService.registerPlayerWithInstance(instance, p);
+						WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
+						TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+							TeleportAnimation.BATTLEGROUND);
 					}
 				}
-			} , 1000);
+			}, 1000);
 		}, 10000));
 	}
 
@@ -217,7 +213,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		} else {
 			WorldPosition pos = respawnLocations.get(Rnd.get(respawnLocations.size()));
 			TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
-					TeleportAnimation.BATTLEGROUND);
+				TeleportAnimation.BATTLEGROUND);
 		}
 		return true;
 	}
@@ -255,7 +251,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 					PacketSendUtility.sendMessage(p, "A new player has joined!", ChatType.BRIGHT_YELLOW_CENTER);
 			});
 			PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, "An enemy has entered the PvP-Map!", ChatType.BRIGHT_YELLOW_CENTER),
-					p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
+				p -> p.getLevel() >= 60 && !p.isInInstance() && p.getRace() != player.getRace());
 		}
 	}
 
