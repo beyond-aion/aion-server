@@ -51,11 +51,13 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
+import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_TIME_CHECK_4_7_5;
@@ -284,7 +286,8 @@ public final class PlayerEnterWorldService {
 		World.getInstance().storeObject(player);
 
 		// change players position if he isn't allowed to spawn in the current zone
-		validateLoginZone(player);
+		if (validateFortressZone(player)) // only check vortex zone if fortress check was ok (otherwise, the player is already set to bind point)
+			validateVortexZone(player);
 
 		// if player skipped some levels offline, learn missing skills and stuff
 		player.getController().onLevelChange(DAOManager.getDAO(PlayerDAO.class).getOldCharacterLevel(player.getObjectId()), player.getLevel());
@@ -523,23 +526,43 @@ public final class PlayerEnterWorldService {
 		VeteranRewardService.getInstance().tryReward(player);
 	}
 
-	private static void validateLoginZone(Player player) {
-		World.getInstance().spawn(player, false); // player spawn initialization is needed to access his mapRegion for zone validation
-
-		if (!SiegeService.getInstance().validateLoginZone(player)) {
-			BindPointPosition bind = player.getBindPoint();
-			if (bind != null) {
-				World.getInstance().setPosition(player, bind.getMapId(), bind.getX(), bind.getY(), bind.getZ(), bind.getHeading());
-			} else {
-				PlayerInitialData.LocationData start = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
-				World.getInstance().setPosition(player, start.getMapId(), start.getX(), start.getY(), start.getZ(), start.getHeading());
+	private static boolean validateFortressZone(Player player) {
+		FortressLocation fortress = SiegeService.getInstance().findFortress(player.getWorldId(), player.getX(), player.getY(), player.getZ());
+		if (fortress != null && fortress.isVulnerable() && fortress.isEnemy(player)) {
+			long currentTime = System.currentTimeMillis();
+			// only relocate if the siege started in the past 7 minutes or the player was > 7 min. offline (so no one who logged out before start will
+			// spawn in the fortress zone)
+			if ((currentTime - SiegeService.getInstance().getSiege(fortress).getStartTime()) / 1000 < 421
+				|| (currentTime - player.getCommonData().getLastOnline().getTime()) / 1000 > 420) {
+				BindPointPosition bind = player.getBindPoint();
+				if (bind != null) {
+					World.getInstance().setPosition(player, bind.getMapId(), bind.getX(), bind.getY(), bind.getZ(), bind.getHeading());
+				} else {
+					PlayerInitialData.LocationData start = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
+					World.getInstance().setPosition(player, start.getMapId(), start.getX(), start.getY(), start.getZ(), start.getHeading());
+				}
+				return false;
 			}
-		} else {
-			VortexService.getInstance().validateLoginZone(player);
 		}
+		return true;
+	}
 
-		if (player.isSpawned()) // only true if position wasn't changed by zone validation
-			World.getInstance().despawn(player);
+	/**
+	 * Checks if the player is allowed to be in the current vortex zone. He will be sent to the locations home point if not.
+	 */
+	private static void validateVortexZone(Player player) {
+		VortexLocation loc = VortexService.getInstance().getLocationByWorld(player.getWorldId());
+		if (loc != null && player.getRace().equals(loc.getInvadersRace())) {
+			if (loc.isInsideLocation(player) && loc.isActive() && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId()))
+				return;
+
+			int mapId = loc.getHomeWorldId();
+			float x = loc.getHomePoint().getX();
+			float y = loc.getHomePoint().getY();
+			float z = loc.getHomePoint().getZ();
+			byte h = loc.getHomePoint().getHeading();
+			World.getInstance().setPosition(player, mapId, x, y, z, h);
+		}
 	}
 
 	/**

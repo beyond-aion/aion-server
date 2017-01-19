@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -346,12 +347,17 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			PlayerReviveService.revive(p, 25, 25, true, 0);
 		}
 		WorldPosition position = origins.get(p.getObjectId());
-		if (position != null && !SiegeService.getInstance().isNearVulnerableFortress(position.getMapId(), position.getX(), position.getY(), position.getZ())) {
+		if (position != null && !isAtVulnerableFortress(position.getMapId(), position.getX(), position.getY(), position.getZ())) {
 			TeleportService2.teleportTo(p, position);
 			origins.remove(p.getObjectId());
 		} else {
 			TeleportService2.moveToBindLocation(p);
 		}
+	}
+
+	public boolean isAtVulnerableFortress(int worldId, float x, float y, float z) {
+		FortressLocation fortress = SiegeService.getInstance().findFortress(worldId, x, y, z);
+		return fortress != null && fortress.isVulnerable();
 	}
 
 	public boolean leave(Player p) {

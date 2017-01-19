@@ -78,10 +78,6 @@ public class SiegeService {
 	 */
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 	/**
-	 * Balaurea race protector spawn schedule.
-	 */
-	private static final String RACE_PROTECTOR_SPAWN_SCHEDULE = SiegeConfig.RACE_PROTECTOR_SPAWN_SCHEDULE;
-	/**
 	 * We should broadcast fortress status every hour Actually only influence packet must be sent, but that doesn't matter
 	 */
 	private static final String SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = "0 0 * ? * *";
@@ -92,7 +88,7 @@ public class SiegeService {
 	/**
 	 * Map that holds fortressId to Siege. We can easily know what fortresses is under siege ATM :)
 	 */
-	private final Map<Integer, Siege<?>> activeSieges = new ConcurrentHashMap<>();
+	private final Map<Integer, Siege<? extends SiegeLocation>> activeSieges = new ConcurrentHashMap<>();
 	/**
 	 * Object that holds siege schedule.<br>
 	 * And maybe other useful information (in future).
@@ -206,7 +202,7 @@ public class SiegeService {
 				}
 			}
 
-		}, RACE_PROTECTOR_SPAWN_SCHEDULE);
+		}, SiegeConfig.RACE_PROTECTOR_SPAWN_SCHEDULE);
 
 		// Start siege of artifacts
 		for (ArtifactLocation artifact : artifacts.values()) {
@@ -271,7 +267,7 @@ public class SiegeService {
 		log.debug("Starting siege of siege location: " + siegeLocationId);
 
 		// Siege should not be started two times. Never.
-		Siege<?> siege;
+		Siege<? extends SiegeLocation> siege;
 		synchronized (this) {
 			if (activeSieges.containsKey(siegeLocationId)) {
 				log.error("Attempt to start siege twice for siege location: " + siegeLocationId);
@@ -551,7 +547,7 @@ public class SiegeService {
 		return agent;
 	}
 
-	protected Siege<?> newSiege(int siegeLocationId) {
+	protected Siege<? extends SiegeLocation> newSiege(int siegeLocationId) {
 		if (fortresses.containsKey(siegeLocationId))
 			return new FortressSiege(fortresses.get(siegeLocationId));
 		else if (outposts.containsKey(siegeLocationId))
@@ -735,34 +731,12 @@ public class SiegeService {
 		});
 	}
 
-	public boolean validateLoginZone(Player player) {
-		long currentTime = System.currentTimeMillis();
+	public FortressLocation findFortress(int worldId, float x, float y, float z) {
 		for (FortressLocation fortress : getFortresses().values()) {
-			if (fortress.isVulnerable() && fortress.isEnemy(player) && fortress.isInsideLocation(player)) {
-				if ((currentTime - getSiege(fortress.getLocationId()).getStartTime()) / 1000 < 421
-					|| (currentTime - player.getCommonData().getLastOnline().getTime()) / 1000 > 420)
-					return false;
-			}
+			if (fortress.getWorldId() == worldId && fortress.isInsideLocation(x, y, z))
+				return fortress;
 		}
-		return true;
-	}
-
-	public boolean isNearVulnerableFortress(Player player) {
-		for (FortressLocation fortress : getFortresses().values()) {
-			if (fortress.isVulnerable() && fortress.isInsideLocation(player)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean isNearVulnerableFortress(int worldId, float x, float y, float z) {
-		for (FortressLocation fortress : getFortresses().values()) {
-			if (fortress.getWorldId() == worldId && fortress.isVulnerable() && fortress.isInsideLocation(x, y, z)) {
-				return true;
-			}
-		}
-		return false;
+		return null;
 	}
 
 	public void onPlayerLogin(final Player player) {

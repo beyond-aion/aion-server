@@ -23,7 +23,6 @@ import com.aionemu.gameserver.services.vortex.DimensionalVortex;
 import com.aionemu.gameserver.services.vortex.Invasion;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
@@ -215,26 +214,6 @@ public class VortexService {
 
 	public Map<Integer, VortexLocation> getVortexLocations() {
 		return vortex;
-	}
-
-	/**
-	 * Checks if the player is allowed to be in the current vortex zone. He will be sent to the locations home point if not.
-	 * 
-	 * @param player
-	 */
-	public void validateLoginZone(Player player) {
-		VortexLocation loc = getLocationByWorld(player.getWorldId());
-		if (loc != null && player.getRace().equals(loc.getInvadersRace())) {
-			if (loc.isInsideLocation(player) && loc.isActive() && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId()))
-				return;
-
-			int mapId = loc.getHomeWorldId();
-			float x = loc.getHomePoint().getX();
-			float y = loc.getHomePoint().getY();
-			float z = loc.getHomePoint().getZ();
-			byte h = loc.getHomePoint().getHeading();
-			World.getInstance().setPosition(player, mapId, x, y, z, h);
-		}
 	}
 
 	public static VortexService getInstance() {
