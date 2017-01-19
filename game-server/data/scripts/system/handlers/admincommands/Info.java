@@ -11,10 +11,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.ENpcFactionQuestState;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.spawnengine.ClusteredNpc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -109,18 +111,28 @@ public class Info extends AdminCommand {
 					sendInfo(admin, "\tRandomWalkRange: " + npc.getSpawn().getRandomWalkRange() + "m");
 				}
 			}
-			sendInfo(admin, "[Current zone]\n\t" + target.getPosition().toCoordString() + "\n\tTown ID: "
-				+ TownService.getInstance().getTownIdByPosition(creature) + "\n\tPvP: " + creature.isInsidePvPZone());
+			sendInfo(admin, createZoneInfo(creature));
 			sendInfo(admin, "[Tribe]\n\tRace: " + creature.getRace() + ", Tribe: " + creature.getTribe() + ", TribeBase: " + creature.getBaseTribe());
 			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + RestrictionsManager.canAttack(admin, target));
 			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin) + ", Hostility: " + creature.getType(admin));
 			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "
 				+ creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
-			sendInfo(admin, getAggroInfo(creature));
+			sendInfo(admin, createAggroInfo(creature));
 		}
 	}
 
-	private String getAggroInfo(Creature creature) {
+	private String createZoneInfo(Creature creature) {
+		FortressLocation fortress = SiegeService.getInstance().findFortress(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ());
+		int townId = TownService.getInstance().getTownIdByPosition(creature);
+		StringBuilder sb = new StringBuilder("[Current zone]");
+		sb.append("\n\t" + creature.getPosition().toCoordString());
+		sb.append("\n\tFortress Location ID: " + (fortress == null ? "-" : fortress.getLocationId()));
+		sb.append("\n\tTown ID: " + (townId == 0 ? "-" : townId));
+		sb.append("\n\tPvP: " + creature.isInsidePvPZone());
+		return sb.toString();
+	}
+
+	private String createAggroInfo(Creature creature) {
 		StringBuilder sb = new StringBuilder("[AggroList]");
 		int aDmg = 0, eDmg = 0, tDmg = creature.getAggroList().getTotalDamage();
 		for (AggroInfo ai : creature.getAggroList().getList()) {
