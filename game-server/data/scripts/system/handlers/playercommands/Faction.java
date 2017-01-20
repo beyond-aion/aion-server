@@ -53,7 +53,7 @@ public class Faction extends PlayerCommand {
 		}
 
 		String senderName = player.getName(player.isGM());
-		String message = CustomConfig.FACTION_CHAT_CHANNEL ? StringUtils.join(params, " ") : senderName + ": " + StringUtils.join(params, " ");
+		String message = CustomConfig.FACTION_CHAT_CHANNEL ? StringUtils.join(params, ' ') : senderName + ": " + StringUtils.join(params, ' ');
 		ChatType channel = CustomConfig.FACTION_CHAT_CHANNEL ? ChatType.CH1 : ChatType.BRIGHT_YELLOW;
 
 		PlayerChatService.logMessage(player, ChatType.NORMAL, "[Faction Msg] " + message);

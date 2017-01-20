@@ -52,9 +52,9 @@ public abstract class AdminCommand extends ChatCommand {
 		}
 
 		if (LoggingConfig.LOG_GMAUDIT)
-			log.info("[Admin Command] > [Player: " + player.getName() + "]"
-				+ (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
-				+ StringUtils.join(params, " "));
+			log.info(
+				"[Admin Command] > [Player: " + player.getName() + "]" + (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "")
+					+ ": " + getAliasWithPrefix() + " " + StringUtils.join(params, ' '));
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");

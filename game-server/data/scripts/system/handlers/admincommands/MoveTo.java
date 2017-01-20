@@ -78,7 +78,7 @@ public class MoveTo extends AdminCommand {
 			if (npcId > 0 && DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(0, npcId) != null)
 				return npcId;
 		} else {
-			String npcName = StringUtils.join(params, " ").toLowerCase();
+			String npcName = StringUtils.join(params, ' ').toLowerCase();
 			for (NpcTemplate template : DataManager.NPC_DATA.getNpcData().valueCollection()) {
 				if (template.getName().toLowerCase().equals(npcName)) {
 					if (DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(0, template.getTemplateId()) != null)

@@ -43,8 +43,8 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	public final boolean run(Player player, String... params) {
 		if (params.length == 1 && "help".equalsIgnoreCase(params[0])) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Command: " + ChatUtil.color(getAliasWithPrefix(), Color.WHITE) + "\n");
-			sb.append("\t" + (getDescription().isEmpty() ? "No description available." : getDescription()) + "\n");
+			sb.append("Command: ").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append("\n");
+			sb.append("\t").append((getDescription().isEmpty() ? "No description available." : getDescription())).append("\n");
 			sb.append(getFormattedSyntaxInfo());
 			sendMessagePackets(player, sb.toString());
 			return true;
@@ -53,10 +53,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 		try {
 			execute(player, params);
 		} catch (Exception e) {
-			StringBuilder paramString = new StringBuilder();
-			for (String param : params)
-				paramString.append(" ").append(param);
-			log.error("Exception executing chat command " + getAliasWithPrefix() + paramString, e);
+			log.error("Exception executing chat command " + getAliasWithPrefix() + " " + StringUtils.join(params, ' '), e);
 			return false;
 		}
 		return true;

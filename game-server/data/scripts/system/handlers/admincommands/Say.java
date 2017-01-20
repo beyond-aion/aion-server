@@ -34,6 +34,6 @@ public class Say extends AdminCommand {
 			return;
 		}
 
-		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), StringUtils.join(params, " "), ChatType.NORMAL), true);
+		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), StringUtils.join(params, ' '), ChatType.NORMAL), true);
 	}
 }

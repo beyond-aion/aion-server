@@ -54,7 +54,7 @@ public abstract class ConsoleCommand extends ChatCommand {
 		if (LoggingConfig.LOG_GMAUDIT)
 			log.info("[Console Command] > [Player: " + player.getName() + "]"
 				+ (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
-				+ StringUtils.join(params, " "));
+				+ StringUtils.join(params, ' '));
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");
