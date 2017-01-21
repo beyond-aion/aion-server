@@ -265,9 +265,6 @@ public class CustomConfig {
 	@Property(key = "character.deletion.time.minutes", defaultValue = "5")
 	public static int CHARACTER_DELETION_TIME_MINUTES;
 	
-	@Property(key = "gameserver.req.stigmaStone", defaultValue = "true")
-	public static boolean REQ_STIGMA_STONE;
-
 	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
 	public static float PVP_MAP_AP_MULTIPLIER;
 	

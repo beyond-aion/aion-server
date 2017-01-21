@@ -47,8 +47,6 @@ public abstract class Rates {
 
 	public abstract float getHarmonyRewardRate();
 
-	public abstract float getIdgelResearchCenterRewardRate();
-
 	public abstract float getGloryRewardRate();
 
 	public abstract float getSellLimitRate();

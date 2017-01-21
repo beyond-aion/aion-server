@@ -119,11 +119,6 @@ public class RegularRates extends Rates {
 	}
 
 	@Override
-	public float getIdgelResearchCenterRewardRate() {
-		return RateConfig.IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-	}
-
-	@Override
 	public float getSellLimitRate() {
 		return RateConfig.SELL_LIMIT_RATE;
 	}

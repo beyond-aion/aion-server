@@ -19,16 +19,4 @@ public class DeveloperConfig {
 	@Property(key = "gameserver.developer.spawn.check", defaultValue = "false")
 	public static boolean SPAWN_CHECK;
 
-	/**
-	 * if set, adds specified stat bonus for items with random bonusess
-	 */
-	@Property(key = "gameserver.developer.itemstat.id", defaultValue = "0")
-	public static int ITEM_STAT_ID;
-
-	/**
-	 * Display random number of item bonus for devs
-	 */
-	@Property(key = "gameserver.developer.itemstat.rnd", defaultValue = "false")
-	public static boolean SHOW_ITEM_STAT_RND;
-
 }

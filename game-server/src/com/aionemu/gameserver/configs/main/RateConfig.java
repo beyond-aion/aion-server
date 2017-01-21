@@ -241,15 +241,6 @@ public class RateConfig {
 	@Property(key = "gameserver.rate.vip.pvparena.glory", defaultValue = "1")
 	public static float VIP_PVP_ARENA_GLORY_REWARD_RATE;
 
-	@Property(key = "gameserver.rate.regular.idgelresearchcenter.instance", defaultValue = "1")
-	public static float IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-
-	@Property(key = "gameserver.rate.premium.idgelresearchcenter.instance", defaultValue = "1")
-	public static float PREMIUM_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-
-	@Property(key = "gameserver.vip.premium.idgelresearchcenter.instance", defaultValue = "1")
-	public static float VIP_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-
 	/**
 	 * Sell limits rate
 	 */

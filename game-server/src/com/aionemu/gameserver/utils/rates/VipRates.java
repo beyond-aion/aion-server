@@ -119,11 +119,6 @@ public class VipRates extends Rates {
 	}
 
 	@Override
-	public float getIdgelResearchCenterRewardRate() {
-		return RateConfig.VIP_IDGEL_RESEARCH_CENTER_INSTANCE_REWARD_RATE;
-	}
-
-	@Override
 	public float getSellLimitRate() {
 		return RateConfig.VIP_SELL_LIMIT_RATE;
 	}
