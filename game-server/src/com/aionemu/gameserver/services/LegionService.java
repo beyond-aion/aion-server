@@ -1549,7 +1549,7 @@ public class LegionService {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CANT_INVITE_WHEN_DEAD());
 				return false;
 			}
-			if (isSelf(activePlayer, targetPlayer.getObjectId())) {
+			if (activePlayer.equals(targetPlayer)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_INVITE_SELF());
 				return false;
 			} else if (targetPlayer.isLegionMember()) {
@@ -1590,7 +1590,7 @@ public class LegionService {
 			// STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH
 			Legion legion = activePlayer.getLegion();
 
-			if (isSelf(activePlayer, legionMember.getObjectId())) {
+			if (activePlayer.equals(legionMember)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CANT_BANISH_SELF());
 				return false;
 			} else if (legionMember.isBrigadeGeneral()) {
@@ -1622,7 +1622,7 @@ public class LegionService {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MEMBER_RANK_DONT_HAVE_RIGHT());
 				return false;
 			}
-			if (isSelf(activePlayer, targetPlayer.getObjectId())) {
+			if (activePlayer.equals(targetPlayer)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MASTER_ERROR_SELF());
 				return false;
 			} else if (!legion.isMember(targetPlayer.getObjectId()))
@@ -1644,7 +1644,7 @@ public class LegionService {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MEMBER_RANK_DONT_HAVE_RIGHT());
 				return false;
 			}
-			if (isSelf(activePlayer, targetObjId)) {
+			if (activePlayer.getObjectId() == targetObjId) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MASTER_ERROR_SELF());
 				return false;
 			} else if (!legion.isMember(targetObjId)) {
@@ -1872,18 +1872,6 @@ public class LegionService {
 		 */
 		private boolean isBrigadeGeneral(Player player) {
 			return player.getLegionMember().isBrigadeGeneral();
-		}
-
-		/**
-		 * Checks if target is same as current player
-		 *
-		 * @param player
-		 * @param targetObjId
-		 * @param message
-		 * @return
-		 */
-		private boolean isSelf(Player player, int targetObjId) {
-			return player.sameObjectId(targetObjId);
 		}
 
 		/**

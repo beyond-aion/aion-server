@@ -193,7 +193,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		} else if (target.getRace() != player.getRace() && !GroupConfig.GROUP_INVITEOTHERFACTION) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
 			return false;
-		} else if (target.sameObjectId(player.getObjectId())) {
+		} else if (target.equals(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CAN_NOT_INVITE_SELF());
 			return false;
 		} else if (target.getLifeStats().isAlreadyDead()) {
@@ -249,7 +249,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		if (target.sameObjectId(player.getObjectId())) {
+		if (target.equals(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CAN_NOT_INVITE_SELF());
 			return false;
 		}

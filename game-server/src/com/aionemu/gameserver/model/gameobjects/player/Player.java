@@ -746,15 +746,6 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Checks if object id's are the same
-	 * 
-	 * @return true if the object id is the same
-	 */
-	public boolean sameObjectId(int objectId) {
-		return getObjectId() == objectId;
-	}
-
-	/**
 	 * @return true if a player has a store opened
 	 */
 	public boolean hasStore() {

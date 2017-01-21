@@ -32,7 +32,7 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 		group.removeMember(player.getObjectId());
 		group.addMember(new PlayerGroupMember(player));
 		// TODO this probably should never happen
-		if (player.sameObjectId(group.getLeader().getObjectId())) {
+		if (player.equals(group.getLeader())) {
 			log.warn("[TEAM2] leader connected {}", group.size());
 			group.changeLeader(new PlayerGroupMember(player));
 		}

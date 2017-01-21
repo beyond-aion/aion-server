@@ -64,11 +64,4 @@ public class HouseDecoration extends AionObject {
 				persistentState = PersistentState.UPDATE_REQUIRED;
 		}
 	}
-
-	@Override
-	public boolean equals(Object object) {
-		if (!(object instanceof HouseDecoration))
-			return false;
-		return super.equals(object);
-	}
 }
