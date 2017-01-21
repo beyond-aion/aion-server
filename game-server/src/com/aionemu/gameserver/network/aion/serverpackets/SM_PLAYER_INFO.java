@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -53,7 +54,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		PlayerCommonData pcd = player.getCommonData();
 		PlayerAppearance playerAppearance = player.getPlayerAppearance();
 		int raceId = activePlayer.isEnemy(player) ? activePlayer.getOppositeRace().getRaceId() : player.getRace().getRaceId();
-		if (player.getAdminNeutral() > 1 || activePlayer.getAdminNeutral() > 1)
+		if (player.isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS) || activePlayer.isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS))
 			raceId = activePlayer.getRace().getRaceId();
 
 		writeF(player.getX());// x

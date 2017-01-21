@@ -72,8 +72,6 @@ public abstract class Creature extends VisibleObject {
 
 	private final AggroList aggroList;
 
-	private byte adminFlags = 0;
-
 	private Item usingItem;
 
 	private final transient byte[] zoneTypes = new byte[ZoneType.values().length];
@@ -633,34 +631,6 @@ public abstract class Creature extends VisibleObject {
 			setSkillCoolDown(st.getCooldownId(), st.getCooldown() * 100 + System.currentTimeMillis());
 			setSkillCoolDownBase(st.getCooldownId(), System.currentTimeMillis());
 		}
-	}
-
-	/**
-	 * @return isAdminNeutral value
-	 */
-	public int getAdminNeutral() {
-		return adminFlags >> 4;
-	}
-
-	/**
-	 * @param newValue
-	 */
-	public void setAdminNeutral(int newValue) {
-		adminFlags = (byte) ((adminFlags & 0xF) | (newValue & 0xF) << 4);
-	}
-
-	/**
-	 * @return isAdminEnmity value
-	 */
-	public int getAdminEnmity() {
-		return adminFlags & 0xF;
-	}
-
-	/**
-	 * @param newValue
-	 */
-	public void setAdminEnmity(int newValue) {
-		adminFlags = (byte) ((adminFlags & 0xF0) | (newValue & 0xF));
 	}
 
 	public float getCollision() {

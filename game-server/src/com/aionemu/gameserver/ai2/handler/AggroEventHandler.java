@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
@@ -32,8 +33,10 @@ public class AggroEventHandler {
 	public static void onAggro(NpcAI2 npcAI, final Creature myTarget) {
 		final Npc owner = npcAI.getOwner();
 		// TODO move out?
-		if (myTarget.getAdminNeutral() == 1 || myTarget.getAdminNeutral() == 3 || myTarget.getAdminEnmity() == 1 || myTarget.getAdminEnmity() == 3
-			|| TribeRelationService.isFriend(owner, myTarget) || myTarget.isFlag())
+		if (myTarget instanceof Player) {
+			if (((Player) myTarget).isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_NPCS))
+				return;
+		} else if (TribeRelationService.isFriend(owner, myTarget) || myTarget.isFlag())
 			return;
 		PacketSendUtility.broadcastPacket(owner,
 			new SM_ATTACK(owner, myTarget, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));

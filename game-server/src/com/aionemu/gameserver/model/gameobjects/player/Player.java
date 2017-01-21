@@ -226,7 +226,7 @@ public class Player extends Creature {
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
-	private int enemyState;
+	private boolean isInFfaTeamMode;
 	private int customStates;
 
 	/*------ Panesterra ------*/
@@ -1056,26 +1056,25 @@ public class Player extends Creature {
 	public boolean isEnemyFrom(Player enemy) {
 		if (equals(enemy))
 			return false;
-		else if (getAdminEnmity() > 1 || enemy.getAdminEnmity() > 1 || canPvP(enemy) || isDueling(enemy))
-			return true;
-		else
-			return (getEnemyState() == 2 || enemy.getEnemyState() == 2 || (!isInSameTeam(enemy) && (getEnemyState() == 1 || enemy.getEnemyState() == 1)));
+		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
+			return !isInFfaTeamMode() || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
+		}
+		return canPvP(enemy) || isDueling(enemy);
 	}
 
-	public boolean isAggroIconTo(Player player) {
-		if (getAdminEnmity() > 1 || player.getAdminEnmity() > 1)
-			return true;
-		if (getEnemyState() == 2 || player.getEnemyState() == 2 || (!isInSameTeam(player) && (getEnemyState() == 1 || player.getEnemyState() == 1)))
-			return true;
-		return !player.getRace().equals(getRace());
+	public boolean isAggroIconTo(Player enemy) {
+		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
+			return !isInFfaTeamMode() || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
+		}
+		return enemy.getRace() != getRace();
 	}
 
-	public void setEnemyState(int value) {
-		this.enemyState = value;
+	public void setInFfaTeamMode(boolean isInFfaTeamMode) {
+		this.isInFfaTeamMode = isInFfaTeamMode;
 	}
 
-	public int getEnemyState() {
-		return enemyState;
+	public boolean isInFfaTeamMode() {
+		return isInFfaTeamMode;
 	}
 
 	private boolean canPvP(Player enemy) {

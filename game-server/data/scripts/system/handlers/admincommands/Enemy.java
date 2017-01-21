@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
@@ -7,62 +8,75 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Pan
+ * @author Neon
  */
 public class Enemy extends AdminCommand {
 
 	public Enemy() {
-		super("enemy");
+		super("enemy", "Modifies your enmity towards others.");
+
+		// @formatter:off
+		setParamInfo(
+			"<all> [players|npcs] - Sets your enmity (default: you're enemy of everyone, optional: you're enemy of all players, or all npcs).",
+			"<none> [players|npcs] - Disables your enmity (default: you're enemy of nobody, optional: you're enemy of no player, or no npc).",
+			"<cancel> - Resets your enmity to the default."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		String help = "Syntax: //enemy < players | npcs | all | cancel >\n" + "Players - You're enemy to Players of both factions.\n"
-			+ "Npcs - You're enemy to all Npcs and Monsters.\n" + "All - You're enemy to Players of both factions and all Npcs.\n"
-			+ "Cancel - Cancel all. Players and Npcs have default enmity to you.";
-
-		if (params.length != 1) {
-			info(player, null);
+		if (params.length == 0) {
+			sendInfo(player);
 			return;
 		}
 
-		String output = "You now appear as enemy to " + params[0] + ".";
-
-		int neutralType = player.getAdminNeutral();
-
-		if (params[0].equals("all")) {
-			player.setAdminEnmity(3);
-			player.setAdminNeutral(0);
-		}
-
-		else if (params[0].equals("players")) {
-			player.setAdminEnmity(2);
-			if (neutralType > 1)
-				player.setAdminNeutral(0);
-		}
-
-		else if (params[0].equals("npcs")) {
-			player.setAdminEnmity(1);
-			if (neutralType == 1 || neutralType == 3)
-				player.setAdminNeutral(0);
-		}
-
-		else if (params[0].equals("cancel")) {
-			player.setAdminEnmity(0);
-			output = "You appear regular to both Players and Npcs.";
-		}
-
-		else if (params[0].equals("help")) {
-			PacketSendUtility.sendMessage(player, help);
+		if (params[0].equalsIgnoreCase("all")) {
+			if (params.length == 1) {
+				player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
+				player.setCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
+				sendInfo(player, "You are now enemy of everyone.");
+			} else if (params[1].equalsIgnoreCase("npcs")) {
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
+				player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_ALL_NPCS);
+				player.setCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS);
+				sendInfo(player, "You are now enemy of all npcs.");
+			} else if (params[1].equalsIgnoreCase("players")) {
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
+				player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS);
+				player.setCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+				sendInfo(player, "You are now enemy of all players.");
+			} else {
+				sendInfo(player);
+				return;
+			}
+		} else if (params[0].equalsIgnoreCase("none")) {
+			if (params.length == 1) {
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
+				player.setCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
+				sendInfo(player, "You are now neutral to everyone.");
+			} else if (params[1].equalsIgnoreCase("npcs")) {
+				player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS);
+				player.setCustomState(CustomPlayerState.NEUTRAL_TO_ALL_NPCS);
+				sendInfo(player, "You are now neutral to all npcs.");
+			} else if (params[1].equalsIgnoreCase("players")) {
+				player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+				player.setCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS);
+				sendInfo(player, "You are now neutral to all players.");
+			} else {
+				sendInfo(player);
+				return;
+			}
+		} else if (params[0].equalsIgnoreCase("cancel")) {
+			player.unsetCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
+			player.unsetCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
+			sendInfo(player, "You appear regular to everyone again.");
+		} else {
+			sendInfo(player);
 			return;
 		}
-
-		else {
-			info(player, null);
-			return;
-		}
-
-		PacketSendUtility.sendMessage(player, output);
 
 		player.clearKnownlist();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
@@ -70,9 +84,4 @@ public class Enemy extends AdminCommand {
 		player.updateKnownlist();
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		String syntax = "Syntax: //enemy < players | npcs | all | cancel >\nIf you're unsure about what you want to do, type //enemy help";
-		PacketSendUtility.sendMessage(player, syntax);
-	}
 }

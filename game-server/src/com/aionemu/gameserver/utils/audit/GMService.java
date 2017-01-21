@@ -63,13 +63,11 @@ public class GMService {
 				sb.append("\n>> Connection in Invisible mode <<");
 			}
 			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")) {
-				player.setAdminNeutral(3);
-				player.setAdminEnmity(0);
+				player.setCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
 				sb.append("\n>> Connection in Neutral mode <<");
 			}
 			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy")) {
-				player.setAdminNeutral(0);
-				player.setAdminEnmity(3);
+				player.setCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
 				sb.append("\n>> Connection in Enemy mode <<");
 			}
 			if (AdminConfig.VISION_GM_CONNECTION) {

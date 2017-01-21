@@ -31,8 +31,8 @@ public class Event extends AdminCommand {
 		setParamInfo(
 			"<setStatus> [name] - Disables ap gain/loss for the given player and sets him to event state.",
 			"<setGroupStatus> [name] - Gets and sets the group of the given player to event state and disables ap gain/loss for them.",
-			"<setEnemy> <0|1|2> [name] - Sets the specific state (0: normal, 1: group, 2: ffa).",
-			"<pvpspawn> [asmo|elyos] - Sets a ressurrection point for the given race.",
+			"<setEnemy> <cancel|team|ffa> [name] - Sets the specific state (cancel: normal, team: everyone outside the players team is an enemy, ffa: everyone is an enemy).",
+			"<pvpSpawn> [asmo|elyos] - Sets a ressurrection point for the given race.",
 			"<clearInstance> - Clears the whole instance you have created.",
 			"<announce> <text> - Sends a yellow message for all players in event state.",
 			"<list> - Lists all players in event state.",
@@ -48,7 +48,7 @@ public class Event extends AdminCommand {
 			return;
 		}
 
-		if (params[0].equalsIgnoreCase("pvpspawn")) {
+		if (params[0].equalsIgnoreCase("pvpSpawn")) {
 			if (params[1].equalsIgnoreCase("asmo")) {
 				TeleportService2.setEventPos(admin.getPosition(), Race.ASMODIANS);
 				sendInfo(admin, "Eventspawn for Asmodians was set!");
@@ -72,7 +72,8 @@ public class Event extends AdminCommand {
 			});
 		} else if (params[0].equalsIgnoreCase("list")) {
 			StringBuilder sb = new StringBuilder("Players in event state:");
-			World.getInstance().getAllPlayers().stream().filter(p -> p.isInCustomState(CustomPlayerState.EVENT_MODE)).forEach(p -> sb.append("\n\t").append(ChatUtil.name(p)));
+			World.getInstance().getAllPlayers().stream().filter(p -> p.isInCustomState(CustomPlayerState.EVENT_MODE))
+				.forEach(p -> sb.append("\n\t").append(ChatUtil.name(p)));
 			sendInfo(admin, sb.toString());
 		} else if (params[0].equalsIgnoreCase("removeAll")) {
 			for (Player player : World.getInstance().getAllPlayers())
@@ -116,7 +117,7 @@ public class Event extends AdminCommand {
 			if (params.length > 2) {
 				player = World.getInstance().findPlayer(params[2]);
 				if (player == null)
-					sendInfo(admin, "There was no player found with the name '" + params[1] + "'!");
+					sendInfo(admin, "There was no player found with the name '" + params[2] + "'!");
 			} else if (admin.getTarget() instanceof Player) {
 				player = (Player) admin.getTarget();
 			}
@@ -124,28 +125,30 @@ public class Event extends AdminCommand {
 				sendInfo(admin, "No valid target! (Event state available?)");
 				return;
 			}
-			byte state = 0;
-			try {
-				state = Byte.parseByte(params[1]);
-				if (state < 0 || state > 2)
-					throw new IllegalArgumentException();
-			} catch (Exception e) {
-				sendInfo(admin, "Choose state 0-2.");
+			boolean ffaTeamMode = false;
+			String msg = "no longer in FFA state.";
+			if (params[1].equalsIgnoreCase("cancel")) {
+				player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+			} else if (params[1].equalsIgnoreCase("team")) {
+				player.setCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+				msg = "in Team-FFA state now.";
+				ffaTeamMode = true;
+			} else if (params[1].equalsIgnoreCase("ffa")) {
+				player.setCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+				msg = "in FFA state now.";
+				PlayerGroupService.removePlayer(player);
+				PlayerAllianceService.removePlayer(player);
+			} else {
+				sendInfo(admin);
 				return;
 			}
-			player.setEnemyState(state);
+			player.setInFfaTeamMode(ffaTeamMode);
 			player.clearKnownlist();
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 			player.updateKnownlist();
-			sendInfo(admin, ChatUtil.name(player) + " is now in enemy state " + state + ".");
-			PacketSendUtility.sendMessage(player, "You are in FFA state " + state + " now.", ChatType.BRIGHT_YELLOW_CENTER);
-			if (state == 2) {
-				if (player.isInGroup2())
-					PlayerGroupService.removePlayer(player);
-				if (player.isInAlliance2())
-					PlayerAllianceService.removePlayer(player);
-			}
+			sendInfo(admin, ChatUtil.name(player) + " is " + msg);
+			PacketSendUtility.sendMessage(player, "You are " + msg, ChatType.BRIGHT_YELLOW_CENTER);
 		} else {
 			sendInfo(admin);
 		}
@@ -175,7 +178,8 @@ public class Event extends AdminCommand {
 	private void setEventState(Player admin, Player player, boolean onlyRemove) {
 		if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			player.unsetCustomState(CustomPlayerState.EVENT_MODE);
-			player.setEnemyState(0);
+			player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
+			player.setInFfaTeamMode(false);
 			player.clearKnownlist();
 			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
 			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));

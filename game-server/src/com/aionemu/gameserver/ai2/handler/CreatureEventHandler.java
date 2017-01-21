@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -70,7 +71,9 @@ public class CreatureEventHandler {
 
 		if (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange())) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
-			if (TribeRelationService.isAggressive(owner, creature) && (creature instanceof Player || creature.isEnemyFrom(owner))) { // aggressive mob
+			boolean isPlayer = creature instanceof Player;
+			if (isPlayer && ((Player) creature).isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS)
+				|| TribeRelationService.isAggressive(owner, creature) && (isPlayer || creature.isEnemyFrom(owner))) { // aggressive mob
 				if (validateAggro(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
 					ShoutEventHandler.onSee(ai, creature);
 					if (!ai.isInState(AIState.RETURNING))
