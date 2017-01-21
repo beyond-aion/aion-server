@@ -49,20 +49,20 @@ public class DuelService {
 	 *
 	 * @param requester
 	 *          the player who requested the duel
-	 * @param responder
+	 * @param targetPlayer
 	 *          the player who respond to duel request
 	 */
-	public void onDuelRequest(Player requester, Player responder) {
+	public void onDuelRequest(Player requester, Player targetPlayer) {
 		/**
 		 * Check if requester isn't already in a duel and responder is same race
 		 */
-		if (isDueling(requester.getObjectId()) || isDueling(responder.getObjectId())) {
-			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_HE_REJECT_DUEL(responder.getName()));
+		if (isDueling(requester.getObjectId()) || isDueling(targetPlayer.getObjectId())) {
+			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_HE_REJECT_DUEL(targetPlayer.getName()));
 			return;
 		}
-		for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
-			if (!zone.isOtherRaceDuelsAllowed() && !responder.getRace().equals(requester.getRace())
-				|| (!zone.isSameRaceDuelsAllowed() && responder.getRace().equals(requester.getRace()))) {
+		for (ZoneInstance zone : targetPlayer.getPosition().getMapRegion().getZones(targetPlayer)) {
+			if (!zone.isOtherRaceDuelsAllowed() && !targetPlayer.getRace().equals(requester.getRace())
+				|| (!zone.isSameRaceDuelsAllowed() && targetPlayer.getRace().equals(requester.getRace()))) {
 				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
 				return;
 			}
@@ -80,41 +80,47 @@ public class DuelService {
 				startDuel((Player) requester, responder);
 			}
 		};
-		responder.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, rrh);
-		PacketSendUtility.sendPacket(responder, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, 0, 0, requester.getName()));
-		PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_DUEL_REQUESTED(requester.getName()));
+		if (targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, rrh)) {
+			PacketSendUtility.sendPacket(targetPlayer,
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, 0, 0, requester.getName()));
+			PacketSendUtility.sendPacket(targetPlayer, SM_SYSTEM_MESSAGE.STR_DUEL_REQUESTED(requester.getName()));
+			confirmDuelWith(requester, targetPlayer);
+		} else {
+			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_CANT_REQUEST_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName()));
+		}
 	}
 
 	/**
 	 * Asks confirmation for the duel request
 	 *
 	 * @param requester
-	 *          the player whose the duel was requested
-	 * @param responder
-	 *          the player whose the duel was responded
+	 *          the player who requested the duel
+	 * @param targetPlayer
+	 *          the player who the requester wants to duel with
 	 */
-	public void confirmDuelWith(Player requester, Player responder) {
+	public void confirmDuelWith(Player requester, Player targetPlayer) {
 		/**
 		 * Check if requester isn't already in a duel and responder is same race
 		 */
-		if (requester.isEnemy(responder))
+		if (requester.isEnemy(targetPlayer))
 			return;
 
-		RequestResponseHandler rrh = new RequestResponseHandler(responder) {
+		RequestResponseHandler rrh = new RequestResponseHandler(targetPlayer) {
 
 			@Override
-			public void denyRequest(Creature requester, Player responder) {
-				log.debug("[Duel] Player " + responder.getName() + " confirmed his duel with " + requester.getName());
+			public void denyRequest(Creature targetPlayer, Player responder) {
+				log.debug("[Duel] Player " + responder.getName() + " confirmed his duel with " + targetPlayer.getName());
 			}
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
-				cancelDuelRequest(responder, (Player) requester);
+			public void acceptRequest(Creature targetPlayer, Player responder) {
+				cancelDuelRequest(responder, (Player) targetPlayer);
 			}
 		};
 		requester.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, rrh);
-		PacketSendUtility.sendPacket(requester, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, 0, 0, responder.getName()));
-		PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_REQUEST_TO_PARTNER(responder.getName()));
+		PacketSendUtility.sendPacket(requester,
+			new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, 0, 0, targetPlayer.getName()));
+		PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_REQUEST_TO_PARTNER(targetPlayer.getName()));
 	}
 
 	/**
@@ -129,6 +135,7 @@ public class DuelService {
 		log.debug("[Duel] Player " + responder.getName() + " rejected duel request from " + requester.getName());
 		PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_HE_REJECT_DUEL(responder.getName()));
 		PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_DUEL_REJECT_DUEL(requester.getName()));
+		requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST);
 	}
 
 	/**
@@ -142,6 +149,7 @@ public class DuelService {
 		log.debug("[Duel] Player " + owner.getName() + " cancelled his duel request with " + target.getName());
 		PacketSendUtility.sendPacket(target, SM_SYSTEM_MESSAGE.STR_DUEL_REQUESTER_WITHDRAW_REQUEST(owner.getName()));
 		PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_DUEL_WITHDRAW_REQUEST(target.getName()));
+		target.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST);
 	}
 
 	/**
@@ -155,6 +163,7 @@ public class DuelService {
 	private void startDuel(Player requester, Player responder) {
 		PacketSendUtility.sendPacket(requester, SM_DUEL.SM_DUEL_STARTED(responder.getObjectId()));
 		PacketSendUtility.sendPacket(responder, SM_DUEL.SM_DUEL_STARTED(requester.getObjectId()));
+		requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST);
 		createDuel(requester.getObjectId(), responder.getObjectId());
 		createTask(requester, responder);
 	}

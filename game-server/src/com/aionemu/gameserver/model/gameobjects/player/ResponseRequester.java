@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Manages the asking of and responding to <tt>SM_QUESTION_WINDOW</tt>
@@ -11,7 +11,7 @@ import java.util.Map;
 public class ResponseRequester {
 
 	private Player player;
-	private Map<Integer, RequestResponseHandler> map = new HashMap<>();
+	private Map<Integer, RequestResponseHandler> map = new ConcurrentHashMap<>();
 
 	public ResponseRequester(Player player) {
 		this.player = player;
@@ -24,7 +24,7 @@ public class ResponseRequester {
 	 *          ID of the request message
 	 * @return true or false
 	 */
-	public synchronized boolean putRequest(int messageId, RequestResponseHandler handler) {
+	public boolean putRequest(int messageId, RequestResponseHandler handler) {
 		return map.putIfAbsent(messageId, handler) == null;
 	}
 
@@ -35,7 +35,7 @@ public class ResponseRequester {
 	 * @param response
 	 * @return Success
 	 */
-	public synchronized boolean respond(int messageId, int response) {
+	public boolean respond(int messageId, int response) {
 		RequestResponseHandler handler = map.remove(messageId);
 		if (handler != null) {
 			handler.handle(player, response);
@@ -47,9 +47,16 @@ public class ResponseRequester {
 	/**
 	 * Automatically responds 0 to all requests, passing the given player as the responder
 	 */
-	public synchronized void denyAll() {
+	public void denyAll() {
 		for (RequestResponseHandler handler : map.values())
 			handler.handle(player, 0);
 		map.clear();
+	}
+
+	/**
+	 * Removes the given response handler, so a response by the player won't work anymore
+	 */
+	public void remove(int messageId) {
+		map.remove(messageId);
 	}
 }
