@@ -38,7 +38,6 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -56,7 +55,7 @@ public class PlayerAllianceService {
 	private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
 	public static final void inviteToAlliance(final Player inviter, Player invited) {
-		if (canInvite(inviter, invited)) {
+		if (RestrictionsManager.canInviteToAlliance(inviter, invited)) {
 			PlayerGroup playerGroup = invited.getPlayerGroup2();
 
 			if (playerGroup != null) {
@@ -72,48 +71,12 @@ public class PlayerAllianceService {
 				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_FORCE_INVITED_HIM(invited.getName()));
 			}
 
-			PlayerAllianceInvite invite = new PlayerAllianceInvite(inviter, invited);
+			PlayerAllianceInvite invite = new PlayerAllianceInvite(inviter);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, invite)) {
 				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0,
 					inviter.getName()));
 			}
 		}
-	}
-
-	public static final boolean canInvite(Player inviter, Player invited) {
-		if (inviter.isInInstance()) {
-			if (AutoGroupService.getInstance().isAutoInstance(inviter.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
-				return false;
-			}
-		}
-		if (invited.isInInstance()) {
-			if (AutoGroupService.getInstance().isAutoInstance(invited.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
-				return false;
-			}
-		}
-		PlayerAlliance alliance = inviter.getPlayerAlliance2();
-		if (alliance != null && alliance.getTeamType().isDefence()) {
-			if (invited.isInTeam()) {
-				for (Player tm : invited.getCurrentTeam().getMembers()) {
-					if (tm.isInInstance()) {
-						// You cannot invite the player to the force as the group leader of the player is in an Instanced Zone.
-						PacketSendUtility.sendPacket(inviter, new SM_SYSTEM_MESSAGE(1400128));
-						return false;
-					} else if (!VortexService.getInstance().isInsideVortexZone(tm)) {
-						// TODO: chk on retail
-						PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(tm.getName()));
-						return false;
-					}
-				}
-			} else if (!VortexService.getInstance().isInsideVortexZone(invited)) {
-				// You cannot invite someone in a different area.
-				PacketSendUtility.sendPacket(inviter, new SM_SYSTEM_MESSAGE(1401527));
-				return false;
-			}
-		}
-		return RestrictionsManager.canInviteToAlliance(inviter, invited);
 	}
 
 	@GlobalCallback(PlayerAllianceCreateCallback.class)

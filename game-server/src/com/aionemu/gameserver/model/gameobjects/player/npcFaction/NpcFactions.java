@@ -12,7 +12,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -177,16 +176,12 @@ public class NpcFactions {
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionByNpcId(npc.getNpcId());
 		final NpcFaction activeNpcFaction = getActiveNpcFaction(npcFactionTemplate.isMentor());
 		NpcFactionTemplate activeNpcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionById(activeNpcFaction.getId());
-		RequestResponseHandler responseHandler = new RequestResponseHandler(owner) {
+		RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(owner) {
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
+			public void acceptRequest(Player requester, Player responder) {
 				leaveNpcFaction(activeNpcFaction);
 				enterGuild(npc);
-			}
-
-			@Override
-			public void denyRequest(Creature requester, Player responder) {
 			}
 		};
 		boolean requested = owner.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, responseHandler);

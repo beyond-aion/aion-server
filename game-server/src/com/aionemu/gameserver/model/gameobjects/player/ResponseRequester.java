@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+
 /**
  * Manages the asking of and responding to <tt>SM_QUESTION_WINDOW</tt>
  * 
@@ -11,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResponseRequester {
 
 	private Player player;
-	private Map<Integer, RequestResponseHandler> map = new ConcurrentHashMap<>();
+	private Map<Integer, RequestResponseHandler<? extends Creature>> map = new ConcurrentHashMap<>();
 
 	public ResponseRequester(Player player) {
 		this.player = player;
@@ -24,7 +26,7 @@ public class ResponseRequester {
 	 *          ID of the request message
 	 * @return true or false
 	 */
-	public boolean putRequest(int messageId, RequestResponseHandler handler) {
+	public boolean putRequest(int messageId, RequestResponseHandler<? extends Creature> handler) {
 		return map.putIfAbsent(messageId, handler) == null;
 	}
 
@@ -36,7 +38,7 @@ public class ResponseRequester {
 	 * @return Success
 	 */
 	public boolean respond(int messageId, int response) {
-		RequestResponseHandler handler = map.remove(messageId);
+		RequestResponseHandler<? extends Creature> handler = map.remove(messageId);
 		if (handler != null) {
 			handler.handle(player, response);
 			return true;
@@ -48,7 +50,7 @@ public class ResponseRequester {
 	 * Automatically responds 0 to all requests, passing the given player as the responder
 	 */
 	public void denyAll() {
-		for (RequestResponseHandler handler : map.values())
+		for (RequestResponseHandler<? extends Creature> handler : map.values())
 			handler.handle(player, 0);
 		map.clear();
 	}

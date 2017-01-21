@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -75,16 +74,16 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		RequestResponseHandler responseHandler = new RequestResponseHandler(activePlayer) {
+		RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(activePlayer) {
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
-				ExchangeService.getInstance().registerExchange(activePlayer, targetPlayer);
+			public void acceptRequest(Player requester, Player responder) {
+				ExchangeService.getInstance().registerExchange(requester, responder);
 			}
 
 			@Override
-			public void denyRequest(Creature requester, Player responder) {
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_HE_REJECTED_EXCHANGE(targetPlayer.getName()));
+			public void denyRequest(Player requester, Player responder) {
+				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_EXCHANGE_HE_REJECTED_EXCHANGE(responder.getName()));
 			}
 		};
 

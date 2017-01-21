@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -50,22 +49,18 @@ public class WarehouseService {
 			 * Check if our player can pay the warehouse expand price
 			 */
 			final int price = getPriceByLevel(expandTemplate, player.getWhNpcExpands() + 1);
-			RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
-					if (player.getInventory().getKinah() < price) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300831));
+				public void acceptRequest(Npc requester, Player responder) {
+					if (responder.getInventory().getKinah() < price) {
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
 						return;
 					}
-					player.getInventory().decreaseKinah(price);
+					responder.getInventory().decreaseKinah(price);
 					expand(responder, true);
 				}
 
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
-					// nothing to do
-				}
 			};
 
 			boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
@@ -73,7 +68,7 @@ public class WarehouseService {
 				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
 			}
 		} else
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300432));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE());
 	}
 
 	/**

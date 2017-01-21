@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
@@ -14,7 +13,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -53,12 +51,6 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 
 		if (invited.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_INVITE_PARTY(invited.getName(AdminConfig.CUSTOMTAG_ENABLE)));
-			return;
-		}
-
-		if (invited.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !invited.isInFfaTeamMode()
-			|| inviter.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !inviter.isInFfaTeamMode()) {
-			PacketSendUtility.sendMessage(inviter, "You can't invite players in FFA mode");
 			return;
 		}
 

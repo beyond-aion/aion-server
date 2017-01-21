@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -55,21 +54,16 @@ public class CubeExpandService {
 			 */
 			final int price = getPriceByLevel(expandTemplate, player.getNpcExpands() + 1);
 
-			RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
-					if (price > player.getInventory().getKinah()) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
+				public void acceptRequest(Npc requester, Player responder) {
+					if (price > responder.getInventory().getKinah()) {
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
 						return;
 					}
 					npcExpand(responder);
-					player.getInventory().decreaseKinah(price, ItemUpdateType.DEC_KINAH_CUBE);
-				}
-
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
-					// nothing to do
+					responder.getInventory().decreaseKinah(price, ItemUpdateType.DEC_KINAH_CUBE);
 				}
 			};
 			boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);

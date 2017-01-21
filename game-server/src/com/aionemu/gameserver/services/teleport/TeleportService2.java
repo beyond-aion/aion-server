@@ -537,15 +537,11 @@ public class TeleportService2 {
 	 */
 	public static boolean sendTeleportRequest(Player player, int npcId) {
 		int questionMsgId = 905097; // You will be teleported to %0 Continue?
-		RequestResponseHandler handler = new RequestResponseHandler(null) {
-
-			@Override
-			public void denyRequest(Creature requester, Player responder) {
-			}
+		RequestResponseHandler<Creature> handler = new RequestResponseHandler<Creature>(null) {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
-				teleportToNpc(player, npcId);
+				teleportToNpc(responder, npcId);
 			}
 		};
 

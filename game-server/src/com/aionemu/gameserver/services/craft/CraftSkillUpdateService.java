@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -188,10 +187,10 @@ public class CraftSkillUpdateService {
 		final int price = cost.get(skillLvl);
 		final long kinah = player.getInventory().getKinah();
 		final int skillLevel = skillLvl;
-		RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+		RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
+			public void acceptRequest(Npc requester, Player responder) {
 				if (price < kinah && responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_LEARN)) {
 					PlayerSkillList skillList = responder.getSkillList();
 					skillList.addSkill(responder, skillId, skillLevel + 1);
@@ -200,10 +199,6 @@ public class CraftSkillUpdateService {
 				}
 			}
 
-			@Override
-			public void denyRequest(Creature requester, Player responder) {
-				// do nothing
-			}
 		};
 
 		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler);

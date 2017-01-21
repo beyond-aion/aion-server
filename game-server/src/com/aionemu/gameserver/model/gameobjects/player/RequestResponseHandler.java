@@ -8,11 +8,11 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
  * @author Ben
  * @modified Lyahim
  */
-public abstract class RequestResponseHandler {
+public abstract class RequestResponseHandler<T extends Creature> {
 
-	private Creature requester;
+	private T requester;
 
-	public RequestResponseHandler(Creature requester) {
+	public RequestResponseHandler(T requester) {
 		this.requester = requester;
 	}
 
@@ -41,7 +41,7 @@ public abstract class RequestResponseHandler {
 	 * @param responder
 	 *          Player whom responded to this request
 	 */
-	public abstract void acceptRequest(Creature requester, Player responder);
+	public abstract void acceptRequest(T requester, Player responder);
 
 	/**
 	 * Called when the player denies a request
@@ -51,6 +51,7 @@ public abstract class RequestResponseHandler {
 	 * @param responder
 	 *          Player whom responded to this request
 	 */
-	public abstract void denyRequest(Creature requester, Player responder);
+	public void denyRequest(T requester, Player responder) {
+	}
 
 }

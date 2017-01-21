@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -98,10 +97,10 @@ public class RVController extends NpcController {
 
 	private void onRequest(Player player) {
 		if (isVortex) {
-			RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(getOwner()) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
+				public void acceptRequest(Npc requester, Player responder) {
 					if (onAccept(responder)) {
 						if (responder.isInTeam()) {
 							if (responder.getCurrentTeam() instanceof PlayerGroup) {
@@ -111,7 +110,7 @@ public class RVController extends NpcController {
 							}
 						}
 
-						VortexLocation loc = VortexService.getInstance().getLocationByRift(getOwner().getNpcId());
+						VortexLocation loc = VortexService.getInstance().getLocationByRift(requester.getNpcId());
 						TeleportService2.teleportTo(responder, loc.getStartPoint());
 
 						// A Rift Portal battle has begun.
@@ -123,11 +122,6 @@ public class RVController extends NpcController {
 					}
 				}
 
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
-					onDeny(responder);
-				}
-
 			};
 
 			boolean requested = player.getResponseRequester().putRequest(904304, responseHandler);
@@ -135,10 +129,10 @@ public class RVController extends NpcController {
 				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(904304, getOwner().getObjectId(), 5));
 			}
 		} else {
-			RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(getOwner()) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
+				public void acceptRequest(Npc requester, Player responder) {
 					if (onAccept(responder)) {
 						int worldId = slaveSpawnTemplate.getWorldId();
 						float x = slaveSpawnTemplate.getX();
@@ -149,11 +143,6 @@ public class RVController extends NpcController {
 						// Update passed players count
 						syncPassed(false);
 					}
-				}
-
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
-					onDeny(responder);
 				}
 
 			};
@@ -183,10 +172,6 @@ public class RVController extends NpcController {
 			return false;
 		}
 
-		return true;
-	}
-
-	private boolean onDeny(Player player) {
 		return true;
 	}
 

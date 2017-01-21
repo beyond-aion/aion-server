@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -63,18 +62,18 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		} else if (targetPlayer.getPlayerSettings().isInDeniedStatus(DeniedStatus.FRIEND)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_FRIEND(targetPlayer.getName()));
 		} else {
-			RequestResponseHandler responseHandler = new RequestResponseHandler(activePlayer) {
+			RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(activePlayer) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
-					if (((Player) requester).getFriendList().isFull())
+				public void acceptRequest(Player requester, Player responder) {
+					if (requester.getFriendList().isFull())
 						PacketSendUtility.sendPacket(responder, SM_FRIEND_RESPONSE.REQUESTER_LIST_FULL_CANT_ACCEPT(requester.getName()));
 					else if (!responder.getFriendList().isFull())
-						SocialService.makeFriends((Player) requester, responder);
+						SocialService.makeFriends(requester, responder);
 				}
 
 				@Override
-				public void denyRequest(Creature requester, Player responder) {
+				public void denyRequest(Player requester, Player responder) {
 					sendPacket(SM_FRIEND_RESPONSE.TARGET_DENIED(responder.getName()));
 				}
 			};

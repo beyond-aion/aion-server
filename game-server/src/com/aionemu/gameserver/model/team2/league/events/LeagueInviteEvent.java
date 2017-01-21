@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.team2.league.events;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.team2.league.League;
@@ -11,24 +10,22 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer
  */
-public class LeagueInviteEvent extends RequestResponseHandler {
+public class LeagueInviteEvent extends RequestResponseHandler<Player> {
 
-	private final Player inviter;
 	private final Player invited;
 
-	public LeagueInviteEvent(Player inviter, Player invited) {
-		super(inviter);
-		this.inviter = inviter;
+	public LeagueInviteEvent(Player requester, Player invited) {
+		super(requester);
 		this.invited = invited;
 	}
 
 	@Override
-	public void acceptRequest(Creature requester, Player responder) {
-		if (LeagueService.canInvite(inviter, invited)) {
-			League league = inviter.getPlayerAlliance2().getLeague();
+	public void acceptRequest(Player requester, Player responder) {
+		if (LeagueService.canInvite(requester, invited)) {
+			League league = requester.getPlayerAlliance2().getLeague();
 
 			if (league == null) {
-				league = LeagueService.createLeague(inviter);
+				league = LeagueService.createLeague(requester);
 			}
 			if (!invited.isInLeague()) {
 				LeagueService.addAlliance(league, invited.getPlayerAlliance2());
@@ -37,8 +34,8 @@ public class LeagueInviteEvent extends RequestResponseHandler {
 	}
 
 	@Override
-	public void denyRequest(Creature requester, Player responder) {
-		PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
+	public void denyRequest(Player requester, Player responder) {
+		PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
 	}
 
 }

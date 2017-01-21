@@ -107,7 +107,7 @@ public class AI2Actions {
 	public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, int range, final AI2Request request,
 		Object... requestParams) {
 
-		boolean requested = player.getResponseRequester().putRequest(requestId, new RequestResponseHandler(ai2.getOwner()) {
+		boolean requested = player.getResponseRequester().putRequest(requestId, new RequestResponseHandler<Creature>(ai2.getOwner()) {
 
 			@Override
 			public void denyRequest(Creature requester, Player responder) {

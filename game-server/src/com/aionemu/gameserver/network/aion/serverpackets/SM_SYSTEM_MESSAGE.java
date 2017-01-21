@@ -25692,6 +25692,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Players from other zones cannot be invited into the Defense Alliance.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_INVITE_DEFENSE_FORCE() {
+		return new SM_SYSTEM_MESSAGE(1401527);
+	}
+
+	/**
 	 * Lord Kaisinel attacks with all his force.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_KAISINEL_2PHASE_DEADLYATK() {

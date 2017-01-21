@@ -32,9 +32,7 @@ import com.aionemu.gameserver.model.team2.group.events.PlayerGroupStopMentoringE
 import com.aionemu.gameserver.model.team2.group.events.PlayerGroupUpdateEvent;
 import com.aionemu.gameserver.model.team2.group.events.PlayerStartMentoringEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
@@ -53,28 +51,12 @@ public class PlayerGroupService {
 	private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
 	public static final void inviteToGroup(final Player inviter, final Player invited) {
-		if (canInvite(inviter, invited)) {
-			PlayerGroupInvite invite = new PlayerGroupInvite(inviter, invited);
+		if (RestrictionsManager.canInviteToGroup(inviter, invited)) {
+			PlayerGroupInvite invite = new PlayerGroupInvite(inviter);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, invite)) {
 				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0, inviter.getName()));
 			}
 		}
-	}
-
-	public static final boolean canInvite(Player inviter, Player invited) {
-		if (inviter.isInInstance()) {
-			if (AutoGroupService.getInstance().isAutoInstance(inviter.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
-				return false;
-			}
-		}
-		if (invited.isInInstance()) {
-			if (AutoGroupService.getInstance().isAutoInstance(invited.getInstanceId())) {
-				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
-				return false;
-			}
-		}
-		return RestrictionsManager.canInviteToGroup(inviter, invited);
 	}
 
 	@GlobalCallback(PlayerGroupCreateCallback.class)

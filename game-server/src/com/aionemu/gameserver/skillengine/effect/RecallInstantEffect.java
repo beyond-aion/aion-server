@@ -25,17 +25,17 @@ public class RecallInstantEffect extends EffectTemplate {
 		final Creature effector = effect.getEffector();
 		final Player effected = (Player) effect.getEffected();
 
-		final int worldId = effect.getWorldId();
-		final int instanceId = effect.getInstanceId();
-		final float locationX = effect.getSkill().getX();
-		final float locationY = effect.getSkill().getY();
-		final float locationZ = effect.getSkill().getZ();
-		final byte locationH = effect.getSkill().getH();
-
 		/**
 		 * TODO need to confirm if cannot be summoned while on abnormal effects stunned, sleeping, feared, etc.
 		 */
-		RequestResponseHandler rrh = new RequestResponseHandler(effector) {
+		RequestResponseHandler<Creature> rrh = new RequestResponseHandler<Creature>(effector) {
+
+			int worldId = effect.getWorldId();
+			int instanceId = effect.getInstanceId();
+			float locationX = effect.getSkill().getX();
+			float locationY = effect.getSkill().getY();
+			float locationZ = effect.getSkill().getZ();
+			byte locationH = effect.getSkill().getH();
 
 			@Override
 			public void denyRequest(Creature effector, Player effected) {
@@ -49,9 +49,9 @@ public class RecallInstantEffect extends EffectTemplate {
 			}
 		};
 
-		effected.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SUMMON_PARTY_DO_YOU_ACCEPT_REQUEST, rrh);
-		PacketSendUtility.sendPacket(effected, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SUMMON_PARTY_DO_YOU_ACCEPT_REQUEST, 0, 0,
-			effector.getName(), "Summon Group Member", 30));
+		if (effected.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SUMMON_PARTY_DO_YOU_ACCEPT_REQUEST, rrh))
+			PacketSendUtility.sendPacket(effected,
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SUMMON_PARTY_DO_YOU_ACCEPT_REQUEST, 0, 0, effector.getName(), "Summon Group Member", 30));
 	}
 
 	@Override

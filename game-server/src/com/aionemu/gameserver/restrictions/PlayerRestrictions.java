@@ -9,14 +9,18 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -105,8 +109,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		VisibleObject target = player.getTarget();
 		SkillTemplate template = skill.getSkillTemplate();
 
-		//TODO check if its ok
-		if  (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead()) {
+		// TODO check if its ok
+		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead()) {
 			return false;
 		}
 		// check if is casting to avoid multicast exploit
@@ -179,16 +183,30 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canInviteToGroup(Player player, Player target) {
-		final com.aionemu.gameserver.model.team2.group.PlayerGroup group = player.getPlayerGroup2();
+		if (target == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_NO_USER_TO_INVITE());
+			return false;
+		}
+
+		if (target.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !target.isInFfaTeamMode()
+			|| player.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !player.isInFfaTeamMode()) {
+			PacketSendUtility.sendMessage(player, "You can't invite players in FFA mode");
+			return false;
+		}
+
+		if (player.isInInstance() && AutoGroupService.getInstance().isAutoInstance(player.getInstanceId())
+			|| target.isInInstance() && AutoGroupService.getInstance().isAutoInstance(target.getInstanceId())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
+			return false;
+		}
+
+		PlayerGroup group = player.getPlayerGroup2();
 
 		if (group != null && group.isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER());
 			return false;
 		} else if (group != null && !player.equals(group.getLeader().getObject())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ONLY_LEADER_CAN_INVITE());
-			return false;
-		} else if (target == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_NO_USER_TO_INVITE());
 			return false;
 		} else if (target.getRace() != player.getRace() && !GroupConfig.GROUP_INVITEOTHERFACTION) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
@@ -222,12 +240,41 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
+		if (target.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !target.isInFfaTeamMode()
+			|| player.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) && !player.isInFfaTeamMode()) {
+			PacketSendUtility.sendMessage(player, "You can't invite players in FFA mode");
+			return false;
+		}
+
+		if (player.isInInstance() && AutoGroupService.getInstance().isAutoInstance(player.getInstanceId())
+			|| target.isInInstance() && AutoGroupService.getInstance().isAutoInstance(target.getInstanceId())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
+			return false;
+		}
+
 		if (target.getRace() != player.getRace() && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
 			return false;
 		}
 
-		final com.aionemu.gameserver.model.team2.alliance.PlayerAlliance alliance = player.getPlayerAlliance2();
+		PlayerAlliance alliance = player.getPlayerAlliance2();
+		if (alliance != null && alliance.getTeamType().isDefence()) {
+			if (target.isInTeam()) {
+				for (Player tm : target.getCurrentTeam().getMembers()) {
+					if (tm.isInInstance()) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_INVITE_WHEN_HE_IS_IN_INSTANCE());
+						return false;
+					} else if (!VortexService.getInstance().isInsideVortexZone(tm)) {
+						// TODO: chk on retail
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(tm.getName()));
+						return false;
+					}
+				}
+			} else if (!VortexService.getInstance().isInsideVortexZone(target)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_INVITE_DEFENSE_FORCE());
+				return false;
+			}
+		}
 
 		if (target.isInAlliance2()) {
 			if (target.getPlayerAlliance2() == alliance) {
@@ -277,8 +324,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canAttack(Player player, VisibleObject target) {
-		if (!player.isSpawned() || target == null || !checkFly(player, target) ||
-				player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
+		if (!player.isSpawned() || target == null || !checkFly(player, target) || player.getLifeStats().isAboutToDie()
+			|| player.getLifeStats().isAlreadyDead())
 			return false;
 
 		if (!player.canAttack()) {

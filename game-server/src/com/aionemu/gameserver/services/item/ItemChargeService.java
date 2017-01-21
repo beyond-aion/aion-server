@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -53,10 +52,10 @@ public class ItemChargeService {
 
 		final long payAmount = calculatePrice(filteredItems, player);
 
-		RequestResponseHandler request = new RequestResponseHandler(player) {
+		RequestResponseHandler<Player> request = new RequestResponseHandler<Player>(player) {
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
+			public void acceptRequest(Player requester, Player responder) {
 				if (processPayment(player, chargeWay, payAmount)) {
 					for (Item item : filteredItems) {
 						chargeItem(player, item, item.getAvailableChargeLevel(player));
@@ -65,7 +64,7 @@ public class ItemChargeService {
 			}
 
 			@Override
-			public void denyRequest(Creature requester, Player responder) {
+			public void denyRequest(Player requester, Player responder) {
 				// Nothing Happens
 			}
 

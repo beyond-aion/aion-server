@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -177,25 +176,20 @@ public class DialogService {
 					final double factor = (expLost < 1000000 ? 0.25 - (0.00000015 * expLost) : 0.1);
 					final int price = (int) (expLost * factor);
 
-					RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+					RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
 
 						@Override
-						public void acceptRequest(Creature requester, Player responder) {
-							if (player.getInventory().getKinah() >= price) {
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(expLost));
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SUCCESS_RECOVER_EXPERIENCE());
-								player.getCommonData().resetRecoverableExp();
-								player.getInventory().decreaseKinah(price, ItemUpdateType.STATS_CHANGE);
-								player.getEffectController().removeByDispelSlotType(DispelSlotType.SPECIAL2);
-								player.getCommonData().setDeathCount(0);
+						public void acceptRequest(Npc requester, Player responder) {
+							if (responder.getInventory().getKinah() >= price) {
+								PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_GET_EXP2(expLost));
+								PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_SUCCESS_RECOVER_EXPERIENCE());
+								responder.getCommonData().resetRecoverableExp();
+								responder.getInventory().decreaseKinah(price, ItemUpdateType.STATS_CHANGE);
+								responder.getEffectController().removeByDispelSlotType(DispelSlotType.SPECIAL2);
+								responder.getCommonData().setDeathCount(0);
 							} else {
-								PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
+								PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
 							}
-						}
-
-						@Override
-						public void denyRequest(Creature requester, Player responder) {
-							// no message
 						}
 					};
 					if (player.getCommonData().getExpRecoverable() > 0) {

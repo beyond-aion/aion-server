@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.vortex;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -125,10 +124,10 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 		}
 
 		if (defAlliance == null || !defAlliance.isFull()) {
-			RequestResponseHandler responseHandler = new RequestResponseHandler(defender) {
+			RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(defender) {
 
 				@Override
-				public void acceptRequest(Creature requester, Player responder) {
+				public void acceptRequest(Player requester, Player responder) {
 					if (responder.isInGroup2()) {
 						PlayerGroupService.removePlayer(responder);
 					} else if (responder.isInAlliance2()) {
@@ -138,11 +137,6 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 					if (defAlliance == null || !defAlliance.isFull()) {
 						addPlayer(responder, false);
 					}
-				}
-
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
-					// do nothing
 				}
 
 			};

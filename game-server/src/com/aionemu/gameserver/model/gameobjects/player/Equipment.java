@@ -34,7 +34,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -1113,52 +1112,55 @@ public class Equipment {
 			return false;
 		}
 
-		RequestResponseHandler responseHandler = new RequestResponseHandler(player) {
+		RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(player) {
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
-				player.getController().cancelUseItem();
+			public void acceptRequest(Player requester, Player responder) {
+				responder.getController().cancelUseItem();
 
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4),
+				PacketSendUtility.broadcastPacket(responder,
+					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4),
 					true);
 
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				responder.getController().cancelTask(TaskId.ITEM_USE);
 
 				final ActionObserver moveObserver = new ActionObserver(ObserverType.MOVE) {
 
 					@Override
 					public void moved() {
-						player.getController().cancelTask(TaskId.ITEM_USE);
-						PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
-						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8),
+						responder.getController().cancelTask(TaskId.ITEM_USE);
+						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
+						PacketSendUtility.broadcastPacket(responder,
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8),
 							true);
 					}
 				};
-				player.getObserveController().attach(moveObserver);
+				responder.getObserveController().attach(moveObserver);
 
 				// item usage animation
-				player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+				responder.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
 					public void run() {
-						player.getObserveController().removeObserver(moveObserver);
+						responder.getObserveController().removeObserver(moveObserver);
 
-						PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6),
+						PacketSendUtility.broadcastPacket(responder,
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6),
 							true);
-						PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_ITEM_SUCCEED(item.getNameId()));
+						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_SUCCEED(item.getNameId()));
 
 						item.setSoulBound(true);
 						ItemPacketService.updateItemAfterInfoChange(owner, item);
 
 						equip(slot, item);
-						PacketSendUtility.broadcastPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getEquippedForAppearence()), true);
+						PacketSendUtility.broadcastPacket(responder, new SM_UPDATE_PLAYER_APPEARANCE(responder.getObjectId(), getEquippedForAppearence()), true);
 					}
 				}, 5000));
 			}
 
 			@Override
-			public void denyRequest(Creature requester, Player responder) {
-				PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
+			public void denyRequest(Player requester, Player responder) {
+				PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
 			}
 		};
 

@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.DuelResult;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.summons.SummonMode;
@@ -68,16 +67,16 @@ public class DuelService {
 			}
 		}
 
-		RequestResponseHandler rrh = new RequestResponseHandler(requester) {
+		RequestResponseHandler<Player> rrh = new RequestResponseHandler<Player>(requester) {
 
 			@Override
-			public void denyRequest(Creature requester, Player responder) {
-				rejectDuelRequest((Player) requester, responder);
+			public void denyRequest(Player requester, Player responder) {
+				rejectDuelRequest(requester, responder);
 			}
 
 			@Override
-			public void acceptRequest(Creature requester, Player responder) {
-				startDuel((Player) requester, responder);
+			public void acceptRequest(Player requester, Player responder) {
+				startDuel(requester, responder);
 			}
 		};
 		if (targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, rrh)) {
@@ -105,16 +104,11 @@ public class DuelService {
 		if (requester.isEnemy(targetPlayer))
 			return;
 
-		RequestResponseHandler rrh = new RequestResponseHandler(targetPlayer) {
+		RequestResponseHandler<Player> rrh = new RequestResponseHandler<Player>(targetPlayer) {
 
 			@Override
-			public void denyRequest(Creature targetPlayer, Player responder) {
-				log.debug("[Duel] Player " + responder.getName() + " confirmed his duel with " + targetPlayer.getName());
-			}
-
-			@Override
-			public void acceptRequest(Creature targetPlayer, Player responder) {
-				cancelDuelRequest(responder, (Player) targetPlayer);
+			public void acceptRequest(Player targetPlayer, Player responder) {
+				cancelDuelRequest(responder, targetPlayer);
 			}
 		};
 		requester.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, rrh);

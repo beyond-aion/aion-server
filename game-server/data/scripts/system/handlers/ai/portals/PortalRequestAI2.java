@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.templates.teleport.TelelocationTemplate;
@@ -21,21 +21,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class PortalRequestAI2 extends PortalAI2 {
 
 	@Override
-	protected void handleUseItemFinish(final Player player) {
+	protected void handleUseItemFinish(Player player) {
 		if (teleportTemplate != null) {
 			final TeleportLocation loc = teleportTemplate.getTeleLocIdData().getTelelocations().get(0);
 			if (loc != null) {
 				TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(loc.getLocId());
-				RequestResponseHandler portal = new RequestResponseHandler(player) {
+				RequestResponseHandler<Npc> portal = new RequestResponseHandler<Npc>(getOwner()) {
 
 					@Override
-					public void acceptRequest(Creature requester, Player responder) {
-						TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.JUMP_IN);
-					}
-
-					@Override
-					public void denyRequest(Creature requester, Player responder) {
-						// Nothing Happens
+					public void acceptRequest(Npc requester, Player responder) {
+						TeleportService2.teleport(teleportTemplate, loc.getLocId(), responder, requester, TeleportAnimation.JUMP_IN);
 					}
 
 				};
