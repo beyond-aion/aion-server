@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -114,7 +114,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 			lootLeagueRules = alliance.getLeague().getLootGroupRules();
 			for (Player captain : alliance.getLeague().getCaptains()) {
 				AllianceInfo info = new AllianceInfo();
-				PlayerAlliance captainAlliance = captain.getPlayerAlliance2();
+				PlayerAlliance captainAlliance = captain.getPlayerAlliance();
 				if (captainAlliance != null) {
 					info.setAlliancePosition(alliance.getLeague().getMember(captainAlliance.getObjectId()).getLeaguePosition());
 					info.setAllianceObjectId(captainAlliance.getObjectId());

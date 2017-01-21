@@ -49,8 +49,8 @@ public class AuraEffect extends EffectTemplate {
 		if (!effector.isOnline()) { // task check
 			return;
 		}
-		if (effector.isInGroup2() || effector.isInAlliance2()) {
-			Collection<Player> onlinePlayers = effector.isInGroup2() ? effector.getPlayerGroup2().getOnlineMembers() : effector.getPlayerAllianceGroup2()
+		if (effector.isInGroup() || effector.isInAlliance()) {
+			Collection<Player> onlinePlayers = effector.isInGroup() ? effector.getPlayerGroup().getOnlineMembers() : effector.getPlayerAllianceGroup()
 				.getOnlineMembers();
 			final int actualRange = (int) (distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
 			for (Player player : onlinePlayers) {

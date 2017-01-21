@@ -31,7 +31,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -163,7 +163,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Xitanium
@@ -55,7 +55,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					qs.setStatus(QuestStatus.REWARD);
-					return TeleportService2.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20, TeleportAnimation.FADE_OUT_BEAM);
+					return TeleportService.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20, TeleportAnimation.FADE_OUT_BEAM);
 				} else
 					return sendQuestStartDialog(env);
 			}

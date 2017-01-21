@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.ai2.AIState;
+import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
@@ -70,7 +70,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || !lifeStats.getOwner().isInWorld() || lifeStats.getOwner().getAi2().getState() == AIState.FIGHT) {
+			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || !lifeStats.getOwner().isInWorld() || lifeStats.getOwner().getAi().getState() == AIState.FIGHT) {
 				lifeStats.cancelRestoreTask();
 				lifeStats = null;
 			} else {

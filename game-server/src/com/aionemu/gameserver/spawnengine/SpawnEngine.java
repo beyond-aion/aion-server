@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
@@ -76,7 +76,7 @@ public class SpawnEngine {
 	 * @return
 	 */
 	static SpawnTemplate createSpawnTemplate(int worldId, int npcId, float x, float y, float z, byte heading) {
-		return new SpawnTemplate(new SpawnGroup2(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
+		return new SpawnTemplate(new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
 	}
 
 	static SpawnTemplate createSpawnTemplate(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId, String masterName) {
@@ -91,7 +91,7 @@ public class SpawnEngine {
 	 */
 	public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
 		byte heading) {
-		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(new SpawnGroup2(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
+		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
 		spawnTemplate.setSiegeId(siegeId);
 		spawnTemplate.setSiegeRace(race);
 		spawnTemplate.setSiegeModType(mod);
@@ -172,7 +172,7 @@ public class SpawnEngine {
 			}
 			spawnBasedOnTemplate(worldMapTemplate);
 		}
-		DataManager.SPAWNS_DATA2.clearTemplates();
+		DataManager.SPAWNS_DATA.clearTemplates();
 		printWorldSpawnStats();
 	}
 
@@ -210,13 +210,13 @@ public class SpawnEngine {
 	 * @param instanceId
 	 */
 	public static void spawnInstance(int worldId, int instanceId, byte difficultId, int ownerId) {
-		List<SpawnGroup2> worldSpawns = DataManager.SPAWNS_DATA2.getSpawnsByWorldId(worldId);
+		List<SpawnGroup> worldSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(worldId);
 		StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
 
 		int spawnedCounter = 0;
 		if (worldSpawns != null) {
 			WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
-			for (SpawnGroup2 spawn : worldSpawns) {
+			for (SpawnGroup spawn : worldSpawns) {
 				int difficult = spawn.getDifficultId();
 				if (difficult != 0 && difficult != difficultId) {
 					continue;
@@ -260,7 +260,7 @@ public class SpawnEngine {
 		HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
 	}
 
-	private static boolean checkPool(SpawnGroup2 spawn) {
+	private static boolean checkPool(SpawnGroup spawn) {
 		if (spawn.getSpawnTemplates().size() < spawn.getPool()) {
 			log.warn("Pool size more then spots, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
 			return false;

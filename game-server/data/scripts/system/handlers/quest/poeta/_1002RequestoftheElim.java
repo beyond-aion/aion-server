@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -123,7 +123,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 							return false;
 						case SETPRO5:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);
-							TeleportService2.teleportTo(player, 310010000, newInstance.getInstanceId(), 52, 174, 229);
+							TeleportService.teleportTo(player, 310010000, newInstance.getInstanceId(), 52, 174, 229);
 							changeQuestStep(env, 13, 20); // 20
 							return closeDialogWindow(env);
 						case SETPRO6:
@@ -143,7 +143,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 									@Override
 									public void run() {
 										changeQuestStep(env, 20, 14); // 14
-										TeleportService2.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
+										TeleportService.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
 									}
 								}, 43000);
 								return true;

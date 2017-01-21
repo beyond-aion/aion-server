@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -82,7 +82,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 					if (var == 1) {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 210020000, 1357f, 2566f, 279.6f, (byte) 89, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 210020000, 1357f, 2566f, 279.6f, (byte) 89, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 					return false;
@@ -129,7 +129,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 						if (!giveQuestItem(env, 182201004, 1))
 							return true;
 						changeQuestStep(env, 2, 2, true);
-						TeleportService2.teleportTo(player, 210020000, 1608.11f, 1528.7f, 318.07f, (byte) 118, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 210020000, 1608.11f, 1528.7f, 318.07f, (byte) 118, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 					}
 			}

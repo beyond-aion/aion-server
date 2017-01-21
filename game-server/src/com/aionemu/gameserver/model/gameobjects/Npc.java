@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.aionemu.gameserver.ai2.AI2Engine;
+import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -64,12 +64,12 @@ public class Npc extends Creature {
 		if (spawnTemplate.getModel() != null) {
 			if (spawnTemplate.getModel().getAi() != null) {
 				aiOverride = true;
-				AI2Engine.getInstance().setupAI(spawnTemplate.getModel().getAi(), this);
+				AIEngine.getInstance().setupAI(spawnTemplate.getModel().getAi(), this);
 			}
 		}
 
 		if (!aiOverride)
-			AI2Engine.getInstance().setupAI(objectTemplate.getAi(), this);
+			AIEngine.getInstance().setupAI(objectTemplate.getAi(), this);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class Npc extends Creature {
 
 	@Override
 	public ItemAttackType getAttackType() {
-		return getAi2().modifyAttackType(attacktype);
+		return getAi().modifyAttackType(attacktype);
 	}
 
 	public NpcSkillList getSkillList() {
@@ -176,7 +176,7 @@ public class Npc extends Creature {
 	}
 
 	public int getAggroRange() {
-		return getAi2().modifyAggroRange(getObjectTemplate().getAggroRange());
+		return getAi().modifyAggroRange(getObjectTemplate().getAggroRange());
 	}
 
 	/**

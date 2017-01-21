@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -85,7 +85,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							return false;
 						case SETPRO1:
 							defaultCloseDialog(env, 0, 1); // 1
-							TeleportService2.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 					}
 					break;
@@ -97,7 +97,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							return false;
 						case SETPRO2:
 							defaultCloseDialog(env, 1, 2); // 2
-							TeleportService2.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 					}
 					break;
@@ -118,7 +118,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 						case SETPRO4:
 							if (var == 4) {
 								defaultCloseDialog(env, 4, 4, true, false); // reward
-								TeleportService2.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}

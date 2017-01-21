@@ -5,12 +5,12 @@ import java.util.List;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.TeamType;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.TeamType;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author xTz
@@ -54,14 +54,14 @@ public class AutoGeneralInstance extends AutoInstance {
 	public void onEnterInstance(Player player) {
 		super.onEnterInstance(player);
 		List<Player> playersByRace = instance.getPlayersInside();
-		if (playersByRace.size() == 1 && !playersByRace.get(0).isInGroup2()) {
+		if (playersByRace.size() == 1 && !playersByRace.get(0).isInGroup()) {
 			PlayerGroup newGroup = PlayerGroupService.createGroup(playersByRace.get(0), player, TeamType.AUTO_GROUP, 0);
 			int groupId = newGroup.getObjectId();
 			if (!instance.isRegistered(groupId)) {
 				instance.register(groupId);
 			}
-		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup2()) {
-			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup2(), player);
+		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup()) {
+			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup(), player);
 		}
 		Integer object = player.getObjectId();
 		if (!instance.isRegistered(object)) {
@@ -81,7 +81,7 @@ public class AutoGeneralInstance extends AutoInstance {
 		if (loc == null) {
 			return;
 		}
-		TeleportService2.teleportTo(player, worldId, instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
+		TeleportService.teleportTo(player, worldId, instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
 		long instanceCoolTime = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(player, worldId);
 		if (instanceCoolTime > 0) {
 			player.getPortalCooldownList().addPortalCooldown(worldId, instanceCoolTime);

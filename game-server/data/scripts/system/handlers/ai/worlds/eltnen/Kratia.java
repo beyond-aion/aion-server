@@ -1,14 +1,14 @@
 package ai.worlds.eltnen;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIActions;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.AggressiveNpcAI2;
+import ai.AggressiveNpcAI;
 
 /**
  * Spawns Harpback when Kratia dies, and schedules respawn of Kratia when Harpback dies.
@@ -16,7 +16,7 @@ import ai.AggressiveNpcAI2;
  * @author Neon
  */
 @AIName("kratia")
-public class Kratia extends AggressiveNpcAI2 {
+public class Kratia extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
@@ -26,7 +26,7 @@ public class Kratia extends AggressiveNpcAI2 {
 
 			@Override
 			public void died(Creature creature) {
-				AI2Actions.scheduleRespawn(Kratia.this);
+				AIActions.scheduleRespawn(Kratia.this);
 			}
 		});
 		super.handleDied();

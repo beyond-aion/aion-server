@@ -16,7 +16,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
@@ -32,7 +32,7 @@ public class RiftManager {
 	private static Map<Integer, List<Npc>> riftsPerWorld = new ConcurrentHashMap<>();
 	private static Map<String, SpawnTemplate> riftGroups = new HashMap<>();
 
-	public static void addRiftSpawnTemplate(SpawnGroup2 spawn) {
+	public static void addRiftSpawnTemplate(SpawnGroup spawn) {
 		if (spawn.hasPool()) {
 			SpawnTemplate template = spawn.getSpawnTemplates().get(0);
 			riftGroups.put(template.getAnchor(), template);

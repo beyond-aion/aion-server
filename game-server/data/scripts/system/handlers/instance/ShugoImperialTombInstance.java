@@ -5,8 +5,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -43,7 +43,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	protected List<Npc> getNpcs(int npcId) {
@@ -1279,7 +1279,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 					Npc npc = (Npc) spawn(npcId, x, y, z, h);
 					npcs.add(npc);
 					npc.getSpawn().setWalkerId(walkerId);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
+					WalkManager.startWalking((NpcAI) npc.getAi());
 					if (isRun) {
 						npc.setState(CreatureState.ACTIVE, true);
 					} else {

@@ -1,7 +1,7 @@
 package ai.instance.theShugoEmperorsVault;
 
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 
 /**
  * Created by Yeats on 01.05.2016.

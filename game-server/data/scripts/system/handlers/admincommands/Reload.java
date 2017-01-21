@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.commons.utils.xml.XmlUtil;
-import com.aionemu.gameserver.ai2.AI2Engine;
+import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.dataholders.CustomDrop;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -86,7 +86,7 @@ public class Reload extends AdminCommand {
 			DataManager.ITEM_DATA.cleanup();
 			sendInfo(admin, DataManager.ITEM_DATA.size() + " item templates loaded.");
 		} else if (params[0].equalsIgnoreCase("ai")) {
-			AI2Engine.getInstance().reload();
+			AIEngine.getInstance().reload();
 			sendInfo(admin, "AI successfully reloaded!");
 		} else if (params[0].equalsIgnoreCase("commands")) {
 			ChatProcessor.getInstance().reload();

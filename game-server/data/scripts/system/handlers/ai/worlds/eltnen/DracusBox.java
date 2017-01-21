@@ -1,15 +1,15 @@
 package ai.worlds.eltnen;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AI2Actions;
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIActions;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.OneDmgNoActionAI2;
+import ai.OneDmgNoActionAI;
 
 /**
  * Spawns Chaos Dracus after the Mysterious Crate dies, and schedules Crate respawn after Dracus dies.
@@ -17,7 +17,7 @@ import ai.OneDmgNoActionAI2;
  * @author Neon
  */
 @AIName("dracusbox")
-public class DracusBox extends OneDmgNoActionAI2 {
+public class DracusBox extends OneDmgNoActionAI {
 
 	private static int dracusId = 211800;
 
@@ -38,17 +38,17 @@ public class DracusBox extends OneDmgNoActionAI2 {
 
 		Npc mysteriousCrate = getOwner();
 		Npc spawn = (Npc) spawn(spawnId, mysteriousCrate.getX(), mysteriousCrate.getY(), mysteriousCrate.getZ(), mysteriousCrate.getHeading());
-		AI2Actions.deleteOwner(this); // delete the huge box instantly so we can see the spawned mob
+		AIActions.deleteOwner(this); // delete the huge box instantly so we can see the spawned mob
 		if (spawn.getNpcId() == dracusId) {
 			spawn.getObserveController().attach(new ActionObserver(ObserverType.DEATH) {
 
 				@Override
 				public void died(Creature creature) {
-					AI2Actions.scheduleRespawn(DracusBox.this);
+					AIActions.scheduleRespawn(DracusBox.this);
 				}
 			});
 		} else {
-			AI2Actions.scheduleRespawn(this);
+			AIActions.scheduleRespawn(this);
 		}
 	}
 

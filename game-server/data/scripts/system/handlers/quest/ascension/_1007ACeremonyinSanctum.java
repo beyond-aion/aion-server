@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -63,7 +63,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 								qs.setQuestVar(1);
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-								TeleportService2.teleportTo(player, 110010000, 1313f, 1512f, 568f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService.teleportTo(player, 110010000, 1313f, 1512f, 568f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}

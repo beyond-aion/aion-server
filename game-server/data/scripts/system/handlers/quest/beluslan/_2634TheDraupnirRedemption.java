@@ -1,6 +1,6 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -68,7 +68,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(),
 								player.getZ(), (byte) 0);
 							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor));
-							survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+							survivor.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 							player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204828));
 							return defaultCloseDialog(env, 0, 1); // 1
 						}

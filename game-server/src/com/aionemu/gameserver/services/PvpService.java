@@ -24,9 +24,9 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.group.PlayerFilters;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.group.PlayerFilters;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
 import com.aionemu.gameserver.model.templates.bounty.BountyType;
 import com.aionemu.gameserver.model.templates.bounty.KillBountyTemplate;
@@ -107,11 +107,11 @@ public class PvpService {
 
 		if (totalDamage == 0 || winner == null) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
-			if (victim.isInGroup2()) {
-				victim.getPlayerGroup2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
+			if (victim.isInGroup()) {
+				victim.getPlayerGroup().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
 					new PlayerFilters.ExcludePlayerFilter(victim));
-			} else if (victim.isInAlliance2()) {
-				victim.getPlayerAlliance2().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
+			} else if (victim.isInAlliance()) {
+				victim.getPlayerAlliance().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
 					new PlayerFilters.ExcludePlayerFilter(victim));
 			}
 			announceDeath(victim);
@@ -275,10 +275,10 @@ public class PvpService {
 		int worldId = victim.getWorldId();
 		List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
 
-		if (winner.isInGroup2()) {
-			rewarded.addAll(winner.getPlayerGroup2().getOnlineMembers());
-		} else if (winner.isInAlliance2()) {
-			rewarded.addAll(winner.getPlayerAllianceGroup2().getOnlineMembers());
+		if (winner.isInGroup()) {
+			rewarded.addAll(winner.getPlayerGroup().getOnlineMembers());
+		} else if (winner.isInAlliance()) {
+			rewarded.addAll(winner.getPlayerAllianceGroup().getOnlineMembers());
 		} else
 			rewarded.add(winner);
 

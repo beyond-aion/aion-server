@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
@@ -117,8 +117,8 @@ public class VortexService {
 		}
 
 		// Spawn NPC
-		List<SpawnGroup2> locSpawns = DataManager.SPAWNS_DATA2.getVortexSpawnsByLocId(loc.getId());
-		for (SpawnGroup2 group : locSpawns) {
+		List<SpawnGroup> locSpawns = DataManager.SPAWNS_DATA.getVortexSpawnsByLocId(loc.getId());
+		for (SpawnGroup group : locSpawns) {
 			for (SpawnTemplate st : group.getSpawnTemplates()) {
 				VortexSpawnTemplate vortextemplate = (VortexSpawnTemplate) st;
 				if (vortextemplate.getStateType().equals(state)) {

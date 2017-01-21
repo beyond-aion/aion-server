@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_LOOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -36,18 +36,18 @@ public class DropDistributionService {
 			return;
 		int maxRoll = 0;
 		int luck = 0;
-		if (player.isInGroup2() || player.isInAlliance2()) {
+		if (player.isInGroup() || player.isInAlliance()) {
 			if (roll == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
 			} else {
-				maxRoll = player.isInGroup2() ? 100 : 1000;
+				maxRoll = player.isInGroup() ? 100 : 1000;
 				luck = Rnd.get(1, maxRoll);
 				
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
 			}
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? " + player.isInAlliance2());
+					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
 					continue;
 				}
 
@@ -76,7 +76,7 @@ public class DropDistributionService {
 			return;
 		}
 
-		if (player.isInGroup2() || player.isInAlliance2()) {
+		if (player.isInGroup() || player.isInAlliance()) {
 			if ((bid > 0 && player.getInventory().getKinah() < bid) || bid < 0 || bid > 999999999) {
 				bid = 0; // Set BID to 0 if player has bid more KINAH then they have in inventory or send negative value
 			}
@@ -89,7 +89,7 @@ public class DropDistributionService {
 
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup2() + " Owner is in Alliance? " + player.isInAlliance2());
+					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
 					continue;
 				}
 
@@ -142,7 +142,7 @@ public class DropDistributionService {
 		if (!dropNpc.getPlayerStatus().isEmpty())
 			return;
 
-		if (player.isInGroup2() || player.isInAlliance2()) {
+		if (player.isInGroup() || player.isInAlliance()) {
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
 					continue;

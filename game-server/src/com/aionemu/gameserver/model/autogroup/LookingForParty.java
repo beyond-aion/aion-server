@@ -19,7 +19,7 @@ public class LookingForParty extends AbstractLockManager {
 
 	public LookingForParty(Player player, int instanceMaskId, EntryRequestType ert) {
 		this.player = player;
-		searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup2().getOnlineMembers() : null));
+		searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup().getOnlineMembers() : null));
 	}
 
 	public int unregisterInstance(int instanceMaskId) {
@@ -48,7 +48,7 @@ public class LookingForParty extends AbstractLockManager {
 	public void addInstanceMaskId(int instanceMaskId, EntryRequestType ert) {
 		super.writeLock();
 		try {
-			searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup2().getOnlineMembers() : null));
+			searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup().getOnlineMembers() : null));
 		} finally {
 			super.writeUnlock();
 		}

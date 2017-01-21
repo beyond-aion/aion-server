@@ -6,8 +6,8 @@ import java.util.Iterator;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -31,10 +31,10 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 			return;
 
 		if (isGroup) {
-			if (target.isInGroup2()) {
+			if (target.isInGroup()) {
 				writeC(2); // group
 				writeS(target.getName(AdminConfig.CUSTOMTAG_ENABLE));
-				PlayerGroup group = target.getPlayerGroup2();
+				PlayerGroup group = target.getPlayerGroup();
 				writeD(group.getTeamId());
 				writeS(group.getLeader().getName());
 
@@ -50,10 +50,10 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 
 				for (int i = group.size(); i < 6; i++)
 					writeC(0);
-			} else if (target.isInAlliance2()) {
+			} else if (target.isInAlliance()) {
 				writeC(3); // alliance
 
-				PlayerAlliance alliance = target.getPlayerAlliance2();
+				PlayerAlliance alliance = target.getPlayerAlliance();
 
 				writeS(alliance.getLeader().getName());
 				writeD(alliance.getTeamId());

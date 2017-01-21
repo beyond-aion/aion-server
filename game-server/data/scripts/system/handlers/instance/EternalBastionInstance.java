@@ -8,8 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -31,7 +31,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -609,7 +609,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (!isInstanceDestroyed) {
 					npc.getSpawn().setWalkerId(walker);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
+					WalkManager.startWalking((NpcAI) npc.getAi());
 					npc.setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}
@@ -698,7 +698,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService2.teleportTo(player, mapId, instanceId, 449.5f, 448.9f, 270.74f, (byte) 70);
+		TeleportService.teleportTo(player, mapId, instanceId, 449.5f, 448.9f, 270.74f, (byte) 70);
 		return true;
 	}
 
@@ -724,7 +724,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	@Override
 	public void onExitInstance(Player player) {
 		if (instanceReward.getInstanceScoreType().isEndProgress()) {
-			TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 		}
 	}
 }

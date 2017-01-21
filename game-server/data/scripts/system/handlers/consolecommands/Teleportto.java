@@ -2,7 +2,7 @@ package consolecommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.world.World;
@@ -428,7 +428,7 @@ public class Teleportto extends ConsoleCommand {
 			goTo(admin, 300010000, 270, 200, 206);
 		// GM zone
 		else if (destination.equalsIgnoreCase("gm"))
-			TeleportService2.teleportTo(admin, 900110000, 2594.29f, 85.48f, 121f, (byte) 20);
+			TeleportService.teleportTo(admin, 900110000, 2594.29f, 85.48f, 121f, (byte) 20);
 
 		/**
 		 * 2.5 Maps
@@ -501,9 +501,9 @@ public class Teleportto extends ConsoleCommand {
 	private static void goTo(final Player admin, int worldId, float x, float y, float z) {
 		WorldMap destinationMap = World.getInstance().getWorldMap(worldId);
 		if (destinationMap.isInstanceType())
-			TeleportService2.teleportTo(admin, worldId, getInstanceId(worldId, admin), x, y, z);
+			TeleportService.teleportTo(admin, worldId, getInstanceId(worldId, admin), x, y, z);
 		else
-			TeleportService2.teleportTo(admin, worldId, x, y, z);
+			TeleportService.teleportTo(admin, worldId, x, y, z);
 	}
 
 	private static int getInstanceId(int worldId, Player admin) {

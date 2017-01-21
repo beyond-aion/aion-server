@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -58,7 +58,7 @@ public class KiskService {
 		kisk.addPlayer(player);
 
 		// Send Bind Point Data
-		TeleportService2.sendSetBindPoint(player);
+		TeleportService.sendSetBindPoint(player);
 
 		// Send System Message
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_REGISTER());

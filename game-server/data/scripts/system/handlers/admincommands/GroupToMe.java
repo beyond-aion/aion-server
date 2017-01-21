@@ -1,7 +1,7 @@
 package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -29,14 +29,14 @@ public class GroupToMe extends AdminCommand {
 			return;
 		}
 
-		if (!groupToMove.isInGroup2()) {
+		if (!groupToMove.isInGroup()) {
 			PacketSendUtility.sendMessage(admin, groupToMove.getName() + " is not in group.");
 			return;
 		}
 
-		for (Player target : groupToMove.getPlayerGroup2().getMembers())
+		for (Player target : groupToMove.getPlayerGroup().getMembers())
 			if (target != admin) {
-				TeleportService2.teleportTo(target, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
+				TeleportService.teleportTo(target, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
 				PacketSendUtility.sendMessage(target, "You have been summoned by " + admin.getName() + ".");
 				PacketSendUtility.sendMessage(admin, "You summon " + target.getName() + ".");
 			}

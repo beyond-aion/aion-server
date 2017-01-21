@@ -5,7 +5,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerReward;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Ritsu
@@ -110,7 +110,7 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 	}
 
 	public void teleport(Player player, float[] coordinates) {
-		TeleportService2.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2], (byte) coordinates[3]);
+		TeleportService.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2], (byte) coordinates[3]);
 	}
 
 }

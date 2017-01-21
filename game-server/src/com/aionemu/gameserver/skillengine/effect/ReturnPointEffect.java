@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -32,7 +32,7 @@ public class ReturnPointEffect extends EffectTemplate {
 		ItemTemplate itemTemplate = effect.getItemTemplate();
 		int worldId = itemTemplate.getReturnWorldId();
 		String pointAlias = itemTemplate.getReturnAlias();
-		TeleportService2.useTeleportScroll(((Player) effect.getEffector()), pointAlias, worldId);
+		TeleportService.useTeleportScroll(((Player) effect.getEffector()), pointAlias, worldId);
 	}
 
 	@Override

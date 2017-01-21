@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Artur
@@ -53,7 +53,7 @@ public class _14016AGateAgape extends QuestHandler {
 							}
 							return false;
 						case SETPRO1:
-							TeleportService2.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);
+							TeleportService.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);
 							changeQuestStep(env, 0, 1); // 1
 							return closeDialogWindow(env);
 					}
@@ -136,7 +136,7 @@ public class _14016AGateAgape extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 153) {
 				changeQuestStep(env, 2, 2, true); // reward
-				TeleportService2.teleportTo(env.getPlayer(), 210030000, 2683.2085f, 1068.8977f, 199.375f);
+				TeleportService.teleportTo(env.getPlayer(), 210030000, 2683.2085f, 1068.8977f, 199.375f);
 				return true;
 			}
 		}

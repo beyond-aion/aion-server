@@ -37,9 +37,9 @@ import com.aionemu.gameserver.model.gameobjects.player.RewardType;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.common.legacy.LootRuleType;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.quest.CollectItem;
@@ -779,7 +779,7 @@ public final class QuestService {
 			if (Rnd.chance() >= drop.getChance())
 				continue;
 
-			if (players != null && player.isInGroup2()) {
+			if (players != null && player.isInGroup()) {
 				List<Player> pls = new FastTable<>();
 				if (drop.isDropEachMemberGroup()) {
 					for (Player member : players) {
@@ -807,13 +807,13 @@ public final class QuestService {
 							dItem.setPlayerObjId(p.getObjectId());
 						}
 						dropNpc.setPlayerObjectId(p.getObjectId());
-						if (player.getPlayerGroup2().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
+						if (player.getPlayerGroup().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
 							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), 0));
 						}
 					}
 					pls.clear();
 				}
-			} else if (players != null && player.isInAlliance2()) {
+			} else if (players != null && player.isInAlliance()) {
 				List<Player> pls = new FastTable<>();
 				if (drop.isDropEachMemberAlliance()) {
 					for (Player member : players) {
@@ -841,7 +841,7 @@ public final class QuestService {
 							dItem.setPlayerObjId(p.getObjectId());
 						}
 						dropNpc.setPlayerObjectId(p.getObjectId());
-						if (player.getPlayerAlliance2().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
+						if (player.getPlayerAlliance().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
 							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), 0));
 						}
 					}
@@ -877,16 +877,16 @@ public final class QuestService {
 		}
 		QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(questId);
 		if (qt.getTarget().equals(QuestTarget.ALLIANCE)) {
-			if (!player.isInAlliance2()) {
+			if (!player.isInAlliance()) {
 				return false;
 			}
 		}
 		if (qt.getMentorType() == QuestMentorType.MENTE) {
-			if (!player.isInGroup2()) {
+			if (!player.isInGroup()) {
 				return false;
 			}
 
-			PlayerGroup group = player.getPlayerGroup2();
+			PlayerGroup group = player.getPlayerGroup();
 			boolean found = false;
 			for (Player member : group.getMembers()) {
 				if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {

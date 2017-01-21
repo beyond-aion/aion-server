@@ -6,12 +6,12 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -50,10 +50,10 @@ public class Event extends AdminCommand {
 
 		if (params[0].equalsIgnoreCase("pvpSpawn")) {
 			if (params[1].equalsIgnoreCase("asmo")) {
-				TeleportService2.setEventPos(admin.getPosition(), Race.ASMODIANS);
+				TeleportService.setEventPos(admin.getPosition(), Race.ASMODIANS);
 				sendInfo(admin, "Eventspawn for Asmodians was set!");
 			} else if (params[1].equalsIgnoreCase("elyos") || params[1].equalsIgnoreCase("ely")) {
-				TeleportService2.setEventPos(admin.getPosition(), Race.ELYOS);
+				TeleportService.setEventPos(admin.getPosition(), Race.ELYOS);
 				sendInfo(admin, "Eventspawn for Elyos was set!");
 			} else {
 				sendInfo(admin, "Invalid race parameter!");

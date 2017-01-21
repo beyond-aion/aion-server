@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Artur
@@ -68,7 +68,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 						}
 
 						if (dialog == DialogAction.SETPRO1) {
-							TeleportService2.teleportTo(player, 220030000, 2467.6052f, 2548.0076f, 316.12375f, (byte) 63, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220030000, 2467.6052f, 2548.0076f, 316.12375f, (byte) 63, TeleportAnimation.FADE_OUT_BEAM);
 							changeQuestStep(env, 0, 1); // 1
 							return closeDialogWindow(env);
 						}
@@ -160,7 +160,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (movieId == 154 && qs != null) {
-			TeleportService2.teleportTo(env.getPlayer(), 220030000, 1683.2405f, 1757.608f, 259.44543f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
+			TeleportService.teleportTo(env.getPlayer(), 220030000, 1683.2405f, 1757.608f, 259.44543f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
 			return true;
 		}
 		return false;

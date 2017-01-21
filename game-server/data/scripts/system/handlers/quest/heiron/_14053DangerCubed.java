@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
@@ -67,7 +67,7 @@ public class _14053DangerCubed extends QuestHandler {
 				case SETPRO2:
 					if (var == 1) {
 						changeQuestStep(env, 1, 2); // 2
-						TeleportService2.teleportTo(player, WorldMapType.HEIRON.getId(), 2010.1975f, 1395.4108f, 118.125f, (byte) 62,
+						TeleportService.teleportTo(player, WorldMapType.HEIRON.getId(), 2010.1975f, 1395.4108f, 118.125f, (byte) 62,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
@@ -95,7 +95,7 @@ public class _14053DangerCubed extends QuestHandler {
 				case SETPRO1:
 					if (var == 0) {
 						changeQuestStep(env, 0, 1); // 1
-						TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
+						TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}

@@ -6,7 +6,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Mr. Poke
@@ -127,7 +127,7 @@ public class _2007WheresRaeThisTime extends QuestHandler {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
 								closeDialogWindow(env);
-								TeleportService2.teleportToNpc(player, 203516);
+								TeleportService.teleportToNpc(player, 203516);
 								return true;
 							}
 					}

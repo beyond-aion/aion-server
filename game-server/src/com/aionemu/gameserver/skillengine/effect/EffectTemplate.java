@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -622,7 +622,7 @@ public abstract class EffectTemplate {
 		if (effected != effect.getEffector()) {
 			if (effected instanceof Npc) {
 				Npc npc = (Npc) effected;
-				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi2().ask(AIQuestion.CAN_RESIST_ABNORMAL))
+				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi().ask(AIQuestion.CAN_RESIST_ABNORMAL))
 					return true;
 				if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
 					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)

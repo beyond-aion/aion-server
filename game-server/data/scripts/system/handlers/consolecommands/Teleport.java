@@ -2,7 +2,7 @@ package consolecommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -23,7 +23,7 @@ public class Teleport extends ConsoleCommand {
 					int x = Integer.valueOf(params[1]);
 					int y = Integer.valueOf(params[2]);
 					int z = Integer.valueOf(params[3]);
-					TeleportService2.teleportTo(player, worldId, x, y, z);
+					TeleportService.teleportTo(player, worldId, x, y, z);
 				} catch (NumberFormatException ex) {
 				}
 			}

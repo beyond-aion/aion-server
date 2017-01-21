@@ -21,7 +21,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -66,7 +66,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 	@Override
 	public void onPlayerLogOut(Player player) {
 		player.getEffectController().removeAllEffects();
-		TeleportService2.teleportToCapital(player);
+		TeleportService.teleportToCapital(player);
 		unregisterParticipant(player);
 		tryDestroyInstance();
 	}
@@ -130,7 +130,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		Iterator<Player> iter = players.iterator();
 		while (iter.hasNext()) {
 			Player p = iter.next();
-			TeleportService2.teleportTo(p, statistics.get(p).getOrigin());
+			TeleportService.teleportTo(p, statistics.get(p).getOrigin());
 			if (BattleService.getInstance().getRewardId() != 0) {
 				SystemMailService.getInstance().sendMail("Beyond Aion", p.getName(), "Reward for Participating", text,
 					BattleService.getInstance().getRewardId(), 1, 0, LetterType.NORMAL);
@@ -146,7 +146,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 		Point3D respawn = this.getSpawn(player);
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService2.teleportTo(player, this.mapId, this.instanceId, respawn.getX(), respawn.getY(), respawn.getZ(), new Byte("55"));
+		TeleportService.teleportTo(player, this.mapId, this.instanceId, respawn.getX(), respawn.getY(), respawn.getZ(), new Byte("55"));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 
 		return true;
@@ -279,7 +279,7 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			}
 			statistics.put(player, new EventStatistic(player.getPosition()));
 			Point3D spawn = getSpawn(player);
-			TeleportService2.teleportTo(player, this.mapId, this.instanceId, spawn.getX(), spawn.getY(), spawn.getZ() + 1);
+			TeleportService.teleportTo(player, this.mapId, this.instanceId, spawn.getX(), spawn.getY(), spawn.getZ() + 1);
 
 		}
 

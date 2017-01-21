@@ -1,7 +1,7 @@
 package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.instance.periodic.DredgionService2;
+import com.aionemu.gameserver.services.instance.periodic.DredgionService;
 import com.aionemu.gameserver.services.instance.periodic.EngulfedOphidianBridgeService;
 import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
 import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService;
@@ -54,10 +54,10 @@ public class Instance extends AdminCommand {
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("dredgion")) {
-				if (DredgionService2.getInstance().isRegisterAvailable()) {
+				if (DredgionService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
 				} else {
-					DredgionService2.getInstance().startRegistration();
+					DredgionService.getInstance().startRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {
@@ -92,10 +92,10 @@ public class Instance extends AdminCommand {
 					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("dredgion")) {
-				if (!DredgionService2.getInstance().isRegisterAvailable()) {
+				if (!DredgionService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
 				} else {
-					DredgionService2.getInstance().stopRegistration();
+					DredgionService.getInstance().stopRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {

@@ -5,14 +5,14 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -171,7 +171,7 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	public void spawnBySpawnHandler(SpawnHandlerType type, Race targetRace) {
-		for (SpawnGroup2 group : DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id)) {
+		for (SpawnGroup group : DataManager.SPAWNS_DATA.getBaseSpawnsByLocId(id)) {
 			if (group.getHandlerType() != type)
 				continue;
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
@@ -203,7 +203,7 @@ public abstract class Base<T extends BaseLocation> {
 		if (boss != null)
 			throw new BaseException("Tried to initialize boss twice! Base ID: " + id);
 		boss = npc;
-		((AbstractAI) boss.getAi2()).addEventListener(new BaseBossDeathListener(this));
+		((AbstractAI) boss.getAi()).addEventListener(new BaseBossDeathListener(this));
 	}
 
 	private void initFlag(Npc npc) throws BaseException, NullPointerException {

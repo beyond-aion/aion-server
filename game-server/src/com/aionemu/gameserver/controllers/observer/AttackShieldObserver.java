@@ -146,7 +146,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					}
 					attackResult.setShieldType(shieldType.getId());
 					if (attacker instanceof Npc) {
-						reflectedHit = attacker.getAi2().modifyDamage(attacker, reflectedHit, effect);
+						reflectedHit = attacker.getAi().modifyDamage(attacker, reflectedHit, effect);
 					}
 					attackResult.setReflectedDamage(reflectedHit);
 					attackResult.setReflectedSkillId(effect.getSkillId());

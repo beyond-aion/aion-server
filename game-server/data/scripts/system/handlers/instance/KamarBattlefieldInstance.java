@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.KamarReward;
 import com.aionemu.gameserver.model.instance.playerreward.KamarPlayerReward;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceGroup;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.instanceinfo.KamarBattlefieldScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
@@ -32,7 +32,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -101,8 +101,8 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 				sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 6, 0), kamarReward, getTime()));
 				// teleport secondary group
 				for (Player player : instance.getPlayersInside()) {
-					PlayerAllianceGroup secGroup = player.getPlayerAlliance2().getAllianceGroup(1001);
-					if (secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
+					PlayerAllianceGroup secGroup = player.getPlayerAlliance().getAllianceGroup(1001);
+					if (secGroup != null && secGroup.equals(player.getPlayerAllianceGroup())) {
 						kamarReward.portToPosition(player);
 					}
 				}
@@ -288,7 +288,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

@@ -56,18 +56,18 @@ public class CM_GROUP_DATA_EXCHANGE extends AionClientPacket {
 		Collection<Player> players = null;
 		switch (groupType) {
 			case 0:
-				if (player.isInGroup2()) {
-					players = player.getPlayerGroup2().getOnlineMembers();
+				if (player.isInGroup()) {
+					players = player.getPlayerGroup().getOnlineMembers();
 				}
 				break;
 			case 1:
-				if (player.isInAlliance2()) {
-					players = player.getPlayerAllianceGroup2().getOnlineMembers();
+				if (player.isInAlliance()) {
+					players = player.getPlayerAllianceGroup().getOnlineMembers();
 				}
 				break;
 			case 2:
 				if (player.isInLeague()) {
-					players = player.getPlayerAllianceGroup2().getOnlineMembers();
+					players = player.getPlayerAllianceGroup().getOnlineMembers();
 				}
 				break;
 		}

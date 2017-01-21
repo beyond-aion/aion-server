@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
@@ -37,19 +37,19 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if (player.isInGroup2()) {
-			if (player.getPlayerGroup2().isLeader(player)) {
+		if (player.isInGroup()) {
+			if (player.getPlayerGroup().isLeader(player)) {
 				PlayerGroupService.showBrand(player, targetObjectId, brandId);
 			}
 		}
 		// to better times (on retail still not implemented) but we have ;)
 		// else if (player.isInLeague()) {
-		// if (player.getPlayerAlliance2().getLeague().getLeader().getObject().isLeader(player)) {
+		// if (player.getPlayerAlliance().getLeague().getLeader().getObject().isLeader(player)) {
 		// LeagueService.showBrand(player, targetObjectId, brandId);
 		// }
 		// }
-		else if (player.isInAlliance2()) {
-			if (player.getPlayerAlliance2().isSomeCaptain(player)) {
+		else if (player.isInAlliance()) {
+			if (player.getPlayerAlliance().isSomeCaptain(player)) {
 				PlayerAllianceService.showBrand(player, targetObjectId, brandId);
 			}
 		} else {

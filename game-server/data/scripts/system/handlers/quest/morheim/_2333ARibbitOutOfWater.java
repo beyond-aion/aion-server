@@ -1,8 +1,8 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -71,8 +71,8 @@ public class _2333ARibbitOutOfWater extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO2) {
 					Npc debrie = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204416, player.getX(), player.getY(),
 						player.getZ(), (byte) 8);
-					WalkManager.startWalking((NpcAI2) debrie.getAi2());
-					debrie.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+					WalkManager.startWalking((NpcAI) debrie.getAi());
+					debrie.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 					PacketSendUtility.broadcastPacket(debrie, new SM_EMOTION(debrie, EmotionType.START_EMOTE2, 0, debrie.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW,
 						QuestTasks.newFollowingToTargetCheckTask(env, debrie, ZoneName.get("DF2_SENSORYAREA_Q2333_206057_1_220020000")));

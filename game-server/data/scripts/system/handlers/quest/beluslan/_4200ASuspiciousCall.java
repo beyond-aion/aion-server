@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -88,7 +88,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300100000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						// teleport to cell in steel rake: 300100000 403.55 508.11 885.77 0
-						TeleportService2.teleportTo(player, 300100000, newInstance.getInstanceId(), 403.55f, 508.11f, 885.77f);
+						TeleportService.teleportTo(player, 300100000, newInstance.getInstanceId(), 403.55f, 508.11f, 885.77f);
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return true;
@@ -154,7 +154,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
 				removeQuestItem(env, 182209097, 1);
 				// teleport location(BlackCloudIsland): 400010000 3419.16 2445.43 2766.54 57
-				TeleportService2.teleportTo(player, 400010000, 3419.16f, 2445.43f, 2766.54f, (byte) 57);
+				TeleportService.teleportTo(player, 400010000, 3419.16f, 2445.43f, 2766.54f, (byte) 57);
 				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 				updateQuestStatus(env);
 			}

@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -109,7 +109,7 @@ public class _10034FoundUnderground extends QuestHandler {
 									if (oldInstance == null)
 										oldInstance = InstanceService.getNextAvailableInstance(300160000);
 									InstanceService.registerPlayerWithInstance(oldInstance, player);
-									TeleportService2.teleportTo(player, 300160000, oldInstance.getInstanceId(), 795.28143f, 918.806f, 149.80243f, (byte) 73,
+									TeleportService.teleportTo(player, 300160000, oldInstance.getInstanceId(), 795.28143f, 918.806f, 149.80243f, (byte) 73,
 										TeleportAnimation.FADE_OUT_BEAM);
 									return true;
 								} else {

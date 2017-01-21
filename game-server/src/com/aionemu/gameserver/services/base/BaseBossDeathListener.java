@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.services.base;
 
-import com.aionemu.gameserver.ai2.GeneralAIEvent;
-import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
+import com.aionemu.gameserver.ai.GeneralAIEvent;
+import com.aionemu.gameserver.ai.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.BaseService;
 
 /**

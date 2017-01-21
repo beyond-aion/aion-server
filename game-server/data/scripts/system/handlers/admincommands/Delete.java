@@ -45,7 +45,7 @@ public class Delete extends AdminCommand {
 		target.getController().delete();
 		sendInfo(admin, "Spawn removed.");
 
-		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, true)) {
+		if (!DataManager.SPAWNS_DATA.saveSpawn(target, true)) {
 			sendInfo(admin, "Could not save deleted spawn. Maybe it's a special or temporary spawn (siege, base, invasion, ...) which cannot be altered.");
 			return;
 		}

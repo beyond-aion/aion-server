@@ -24,7 +24,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -76,14 +76,14 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	public void onEnterInstance(Player player) {
 		if (!allowedPlayers.contains(player.getObjectId())) {
 			if (allowedPlayers.size() >= 12) {
-				TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+				TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
 			} else {
 				allowedPlayers.add(player.getObjectId());
 			}
 		}
 
 		if (deadPlayers.contains(player.getObjectId())) {
-			TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+			TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
 		}
 
 		if (reward != null && !reward.isRewarded()) {
@@ -819,7 +819,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		}
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService2.teleportTo(player, mapId, instanceId, 152, 264, 103);
+		TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
 		sendMsg(1402911);
 		checkInstance();
 		return true;
@@ -889,29 +889,29 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		if (instanceLegion != null) {
 			switch (instanceLegion.getCurrentLegionDominion()) {
 				case 1:
-					TeleportService2.teleportTo(player, 220080000, 1770, 2556, 300);
+					TeleportService.teleportTo(player, 220080000, 1770, 2556, 300);
 					break;
 				case 2:
-					TeleportService2.teleportTo(player, 220080000, 1474, 1748, 330);
+					TeleportService.teleportTo(player, 220080000, 1474, 1748, 330);
 					break;
 				case 3:
-					TeleportService2.teleportTo(player, 220080000, 765, 1278, 255);
+					TeleportService.teleportTo(player, 220080000, 765, 1278, 255);
 					break;
 				case 4:
-					TeleportService2.teleportTo(player, 210070000, 1356, 622, 584);
+					TeleportService.teleportTo(player, 210070000, 1356, 622, 584);
 					break;
 				case 5:
-					TeleportService2.teleportTo(player, 210070000, 1195, 1607, 469);
+					TeleportService.teleportTo(player, 210070000, 1195, 1607, 469);
 					break;
 				case 6:
-					TeleportService2.teleportTo(player, 210070000, 2361, 1515, 440);
+					TeleportService.teleportTo(player, 210070000, 2361, 1515, 440);
 					break;
 				default:
-					TeleportService2.moveToBindLocation(player);
+					TeleportService.moveToBindLocation(player);
 					break;
 			}
 		} else {
-			TeleportService2.moveToBindLocation(player);
+			TeleportService.moveToBindLocation(player);
 		}
 	}
 

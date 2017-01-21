@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -488,7 +488,7 @@ public class PlayerController extends CreatureController<Player> {
 		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation);
 
 		if (attacker instanceof Npc) {
-			ShoutEventHandler.onAttack((NpcAI2) attacker.getAi2(), getOwner());
+			ShoutEventHandler.onAttack((NpcAI) attacker.getAi(), getOwner());
 			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0, 0));
 		}
 

@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
@@ -42,7 +42,7 @@ public class Teleport_to_named extends ConsoleCommand {
 
 		if (npcTemplate != null) {
 			PacketSendUtility.sendMessage(admin, "Teleporting to Npc: " + npcTemplate.getTemplateId());
-			TeleportService2.teleportToNpc(admin, npcTemplate.getTemplateId());
+			TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
 		}
 	}
 

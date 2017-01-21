@@ -161,7 +161,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 							teamDamageMap.get(teamLeader).addAndGet(damage);
 						}
 					} else {
-						Player teamLeader = player.getPlayerAlliance2().getLeague().getLeaderObject().getLeaderObject();
+						Player teamLeader = player.getPlayerAlliance().getLeague().getLeaderObject().getLeaderObject();
 						long damage = playerDamageCounter.get(id).get();
 						if (teamLeader != null) {
 							if (!teamDamageMap.containsKey(teamLeader)) {

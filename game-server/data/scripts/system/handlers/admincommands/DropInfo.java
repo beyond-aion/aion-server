@@ -58,7 +58,7 @@ public class DropInfo extends AdminCommand {
 		int dropChance = 100;
 		int npcLevel = currentNpc.getLevel();
 		String dropType = currentNpc.getGroupDrop().name().toLowerCase();
-		boolean isNpcChest = currentNpc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
+		boolean isNpcChest = currentNpc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && npcLevel != 1 || !isNpcChest))
 			&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - player.getLevel()); // reduce chance depending on level
@@ -95,7 +95,7 @@ public class DropInfo extends AdminCommand {
 		}
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
 			sendInfo(player, "Events Enabled");
-			boolean isNpcQuest = currentNpc.getAi2().getName().equals("quest_use_item");
+			boolean isNpcQuest = currentNpc.getAi().getName().equals("quest_use_item");
 
 			// some exclusion from drops
 			if (!isNpcQuest && !drs.hasGlobalNpcExclusions(currentNpc)) {
@@ -179,7 +179,7 @@ public class DropInfo extends AdminCommand {
 		}
 
 		// if npc ai == quest_use_item it will be always excluded from global drops
-		boolean isNpcQuest = currentNpc.getAi2().getName().equals("quest_use_item");
+		boolean isNpcQuest = currentNpc.getAi().getName().equals("quest_use_item");
 		// instances with WorldDropType.NONE must not have global drops (example Arenas)
 		if (!isNpcQuest && !drs.hasGlobalNpcExclusions(currentNpc) && currentNpc.getWorldDropType() != WorldDropType.NONE) {
 			for (GlobalRule rule : DataManager.GLOBAL_DROP_DATA.getAllRules()) {

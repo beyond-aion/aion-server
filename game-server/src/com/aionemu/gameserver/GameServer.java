@@ -31,7 +31,7 @@ import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
-import com.aionemu.gameserver.ai2.AI2Engine;
+import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
@@ -218,7 +218,7 @@ public class GameServer {
 		DataManager.getInstance();
 
 		ConsoleUtil.printSection("Handlers");
-		loadMultithreaded(QuestEngine.getInstance(), AI2Engine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(),
+		loadMultithreaded(QuestEngine.getInstance(), AIEngine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(),
 			ZoneService.getInstance()); // ZoneService before GeoService
 
 		ConsoleUtil.printSection("Geodata");

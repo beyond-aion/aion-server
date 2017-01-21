@@ -6,7 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.IronWallFrontPlayerReward;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Tibald
@@ -118,7 +118,7 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 	}
 
 	public void teleport(Player player, float[] coordinates) {
-		TeleportService2.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2], (byte) coordinates[3]);
+		TeleportService.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2], (byte) coordinates[3]);
 	}
 
 }

@@ -33,7 +33,7 @@ public class MercenaryLocation {
 
 	private final static Logger log = LoggerFactory.getLogger(MercenaryLocation.class);
 	private List<VisibleObject> spawnedMercs = new ArrayList<>();
-	private MercenaryZone spawns; // TODO: Change this to SpawnGroup2
+	private MercenaryZone spawns; // TODO: Change this to SpawnGroup
 	private SiegeMercenaryZone smz;
 	private Race race;
 	private long lastSpawn;
@@ -115,7 +115,7 @@ public class MercenaryLocation {
 
 	private MercenaryZone getSpawnZone() {
 		MercenaryZone tempZone = null;
-		MercenarySpawn spawn = DataManager.SPAWNS_DATA2.getMercenarySpawnBySiegeId(siegeId);
+		MercenarySpawn spawn = DataManager.SPAWNS_DATA.getMercenarySpawnBySiegeId(siegeId);
 		if (spawn == null) {
 			log.error("[MERC] There is no mercenaries spawns for siege " + siegeId + " and zone" + smz.getId());
 			return tempZone;

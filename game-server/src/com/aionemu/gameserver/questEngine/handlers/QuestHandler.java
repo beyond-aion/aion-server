@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -913,7 +913,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(follower.getObjectId(), 0, follower.getType(player).getId(), 0));
 			}
 		});
-		follower.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+		follower.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 		player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, follower, targetNpcId));
 		if (step == 0 && nextStep == 0) {
 			return true;
@@ -929,7 +929,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			return false;
 		}
 		PacketSendUtility.sendPacket(player, new SM_NPC_INFO(follower));
-		follower.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+		follower.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 		player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, follower, x, y, z));
 		if (step == 0 && nextStep == 0) {
 			return true;

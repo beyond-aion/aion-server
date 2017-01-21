@@ -1,7 +1,7 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -77,7 +77,7 @@ public class _4212MissingSidrunerk extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO3) {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getSpawn().setWalkerId("4212");
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
+					WalkManager.startWalking((NpcAI) npc.getAi());
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, npc, 505.69427f, 437.69382f, 885.1844f));
 					return defaultCloseDialog(env, 2, 3);

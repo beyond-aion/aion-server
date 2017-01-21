@@ -2,15 +2,15 @@ package ai.instance.rentusBase;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai.AIName;
 
-import ai.GeneralNpcAI2;
+import ai.GeneralNpcAI;
 
 /**
  * @author Estrayl
  */
 @AIName("idyun_hard_xasta")
-public class IdyunHardXasta extends GeneralNpcAI2 {
+public class IdyunHardXasta extends GeneralNpcAI {
 
 	private AtomicBoolean isDestinationReached = new AtomicBoolean(false);
 	

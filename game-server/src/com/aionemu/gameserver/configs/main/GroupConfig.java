@@ -35,5 +35,5 @@ public class GroupConfig {
 	public static boolean ALLIANCE_INVITEOTHERFACTION;
 
 	@Property(key = "gameserver.team2.enable", defaultValue = "false")
-	public static boolean TEAM2_ENABLE;
+	public static boolean TEAM_ENABLE;
 }

@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -64,7 +64,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							return false;
 						case SETPRO1:
 							if (defaultCloseDialog(env, 0, 1)) { // 1
-								TeleportService2.teleportTo(player, 220010000, 1, 389.0f, 1896.0f, 327.5f, (byte) 61, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService.teleportTo(player, 220010000, 1, 389.0f, 1896.0f, 327.5f, (byte) 61, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}
@@ -82,7 +82,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							return defaultCloseDialog(env, 1, 2); // 2
 						case SETPRO10:
 							defaultCloseDialog(env, 10, 10, true, false); // reward
-							TeleportService2.teleportTo(player, 120010000, 1294.8f, 1213.8f, 214.34f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 120010000, 1294.8f, 1213.8f, 214.34f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 					}
 					break;
@@ -122,14 +122,14 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								changeQuestStep(env, 4, 95); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60,
+								TeleportService.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60,
 									TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}
 							return false;
 						case SETPRO9:
 							changeQuestStep(env, 9, 10); // 10
-							TeleportService2.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220010000, 1, 383.0f, 1896.0f, 327.625f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 					}
 					break;
@@ -213,7 +213,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 98) {
 				changeQuestStep(env, 98, 9); // 9
-				TeleportService2.teleportTo(player, 220010000, 1, 1112.492f, 1718.974f, 270.45917f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, 220010000, 1, 1112.492f, 1718.974f, 270.45917f, (byte) 113, TeleportAnimation.FADE_OUT_BEAM);
 				return true;
 			}
 		}

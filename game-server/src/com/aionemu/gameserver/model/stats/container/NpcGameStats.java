@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AI2Logger;
-import com.aionemu.gameserver.ai2.AISubState;
+import com.aionemu.gameserver.ai.AILogger;
+import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -67,7 +67,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
 		Stat2 s = super.getStat(statEnum, stat);
-		owner.getAi2().modifyOwnerStat(s);
+		owner.getAi().modifyOwnerStat(s);
 		return s;
 	}
 
@@ -90,7 +90,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMovementSpeed() {
 		int currentState = owner.getState();
-		AISubState currentSubState = owner.getAi2().getSubState();
+		AISubState currentSubState = owner.getAi().getSubState();
 		if (cachedSpeedStat != null && cachedState == currentState && cachedSubState == currentSubState) {
 			return cachedSpeedStat;
 		}
@@ -104,7 +104,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
 		} else if (owner.isInState(CreatureState.WALK_MODE)) {
 			float speed = 0;
-			if (owner.getWalkerGroup() != null && owner.getAi2().getSubState() == AISubState.WALK_PATH)
+			if (owner.getWalkerGroup() != null && owner.getAi().getSubState() == AISubState.WALK_PATH)
 				speed = getStatsTemplate().getGroupWalkSpeed();
 			else
 				speed = getStatsTemplate().getWalkSpeed();
@@ -175,8 +175,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (attackSpeed == 0) {
 			attackSpeed = 2000;
 		}
-		if (owner.getAi2().isLogging()) {
-			AI2Logger.info(owner.getAi2(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
+		if (owner.getAi().isLogging()) {
+			AILogger.info(owner.getAi(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
 		}
 		int nextAttack = 0;
 		if (lastAttackTime == 0 && owner.getTarget() instanceof Creature

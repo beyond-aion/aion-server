@@ -61,7 +61,7 @@ public class BindPointTeleportService {
 					@Override
 					public void run() {
 						if (player != null && !player.getLifeStats().isAboutToDie() && !player.getLifeStats().isAlreadyDead())
-							TeleportService2.teleportTo(player, hotspot.getWorldId(), hotspot.getX(), hotspot.getY(), hotspot.getZ());
+							TeleportService.teleportTo(player, hotspot.getWorldId(), hotspot.getX(), hotspot.getY(), hotspot.getZ());
 					}
 				}, 1000);
 			}

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -90,7 +90,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			if (magasPotion != null && MathUtil.isIn3dRange(player, magasPotion, 20)) {
 				int relicKeyId = 185000109;
 				player.getInventory().decreaseByItemId(relicKeyId, player.getInventory().getItemCountByItemId(relicKeyId));
-				TeleportService2.teleportTo(player, mapId, instanceId, 687.56116f, 681.68225f, 200.28648f, (byte) 30);
+				TeleportService.teleportTo(player, mapId, instanceId, 687.56116f, 681.68225f, 200.28648f, (byte) 30);
 			}
 		}
 	}
@@ -126,9 +126,9 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		if (!isPlayerInManor)
-			TeleportService2.teleportTo(player, mapId, instanceId, 248, 244, 189);
+			TeleportService.teleportTo(player, mapId, instanceId, 248, 244, 189);
 		else
-			TeleportService2.teleportTo(player, mapId, instanceId, 686, 676, 201);
+			TeleportService.teleportTo(player, mapId, instanceId, 686, 676, 201);
 		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
 		return true;
 	}

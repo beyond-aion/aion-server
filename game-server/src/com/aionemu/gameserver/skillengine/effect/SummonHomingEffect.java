@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.TaskId;
@@ -69,7 +69,7 @@ public class SummonHomingEffect extends SummonEffect {
 				}
 			}, 15 * 1000);
 			homing.getController().addTask(TaskId.DESPAWN, task);
-			homing.getAi2().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
+			homing.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 		}
 	}
 

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -85,7 +85,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 					break;
 				case 700369: // Underground Arena Exit
 					if (dialog == DialogAction.USE_OBJECT && var == 5) {
-						TeleportService2.teleportTo(player, 120010000, 981.6009f, 1552.97f, 210.46f);
+						TeleportService.teleportTo(player, 120010000, 981.6009f, 1552.97f, 210.46f);
 						changeQuestStep(env, 5, 6); // 6
 						return true;
 					}
@@ -97,7 +97,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 					if (dialog == DialogAction.SETPRO4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
+						TeleportService.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
 						playQuestMovie(env, 423);
 						changeQuestStep(env, 3, 5); // 5
 						return closeDialogWindow(env);

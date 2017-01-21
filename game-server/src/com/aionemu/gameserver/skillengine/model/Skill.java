@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AISubState;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
-import com.aionemu.gameserver.ai2.manager.SkillAttackManager;
+import com.aionemu.gameserver.ai.AISubState;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
+import com.aionemu.gameserver.ai.manager.SkillAttackManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -289,7 +289,7 @@ public class Skill {
 			if (!isPenaltySkill)
 				startCast();
 			if (effector instanceof Npc)
-				((NpcAI2) effector.getAi2()).setSubStateIfNot(AISubState.CAST);
+				((NpcAI) effector.getAi()).setSubStateIfNot(AISubState.CAST);
 		}
 
 		effector.getObserveController().attach(conditionChangeListener);
@@ -592,7 +592,7 @@ public class Skill {
 					PacketSendUtility.broadcastPacketAndReceive(effector,
 						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
 					if (effector instanceof Npc) {
-						ShoutEventHandler.onCast((NpcAI2) effector.getAi2(), firstTarget);
+						ShoutEventHandler.onCast((NpcAI) effector.getAi(), firstTarget);
 					}
 					break;
 
@@ -814,7 +814,7 @@ public class Skill {
 				}
 				lastSkill.fireOnEndCastEvents(npc);
 			}
-			SkillAttackManager.afterUseSkill((NpcAI2) effector.getAi2());
+			SkillAttackManager.afterUseSkill((NpcAI) effector.getAi());
 		}
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
@@ -829,7 +829,7 @@ public class Skill {
 		}
 		effects.stream().filter(effect -> effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)).forEach(effect -> {
 			effect.getEffected().getAggroList().addHate(effector, 1);
-			effect.getEffected().getKnownList().forEachNpc(object -> object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
+			effect.getEffected().getKnownList().forEachNpc(object -> object.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
 		});
 	}
 

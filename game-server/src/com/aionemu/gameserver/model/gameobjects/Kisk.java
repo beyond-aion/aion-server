@@ -175,8 +175,8 @@ public class Kisk extends SummonedObject<Player> {
 						return false;
 					break;
 				case 5: // Alliance
-					if (!player.isInTeam() || (player.isInAlliance2() && !player.getPlayerAlliance2().hasMember(getCreatorId()))
-						|| (player.isInGroup2() && !player.getPlayerGroup2().hasMember(getCreatorId())))
+					if (!player.isInTeam() || (player.isInAlliance() && !player.getPlayerAlliance().hasMember(getCreatorId()))
+						|| (player.isInGroup() && !player.getPlayerGroup().hasMember(getCreatorId())))
 						return false;
 					break;
 

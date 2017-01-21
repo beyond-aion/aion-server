@@ -130,7 +130,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
 				final Npc npc = (Npc) env.getVisibleObject();
-				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
+				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
 				if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {
 					npc.getController().onDie(player);

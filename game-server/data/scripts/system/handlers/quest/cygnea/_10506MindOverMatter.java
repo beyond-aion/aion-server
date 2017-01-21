@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -132,7 +132,7 @@ public class _10506MindOverMatter extends QuestHandler {
 				if (qs.getStatus() == QuestStatus.START) {
 					if (dialog == DialogAction.USE_OBJECT) {
 						if (var == 4) {
-							TeleportService2.teleportTo(player, 210070000, 2837f, 2991f, 680f, (byte) 67, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210070000, 2837f, 2991f, 680f, (byte) 67, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);
 						}

@@ -1,8 +1,8 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -66,8 +66,8 @@ public class _2394ADyingWish extends QuestHandler {
 				} else if (dialog == DialogAction.SETPRO1) {
 					Npc orlan = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(),
 						player.getZ(), (byte) 8);
-					WalkManager.startWalking((NpcAI2) orlan.getAi2());
-					orlan.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+					WalkManager.startWalking((NpcAI) orlan.getAi());
+					orlan.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.START_EMOTE2, 0, orlan.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW,
 						QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));

@@ -93,7 +93,7 @@ public class Info extends AdminCommand {
 				if (npc instanceof SiegeNpc)
 					sendInfo(admin, "[Siege info]\n\tSiegeId: " + ((SiegeNpc) npc).getSiegeId() + ", SiegeRace: " + ((SiegeNpc) npc).getSiegeRace());
 				sendInfo(admin,
-					"[AI info]\n\tAI: " + npc.getAi2().getName() + "\n\tState: " + npc.getAi2().getState() + ", SubState: " + npc.getAi2().getSubState());
+					"[AI info]\n\tAI: " + npc.getAi().getName() + "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
 				sendInfo(admin,
 					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
 						+ npc.getObjectTemplate().getBoundRadius().getFront() + "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)

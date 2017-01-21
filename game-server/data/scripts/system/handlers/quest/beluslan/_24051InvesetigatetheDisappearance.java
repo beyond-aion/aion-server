@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -85,7 +85,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 				}
 			} else if (targetId == 700359 && var == 5 && player.getInventory().getItemCountByItemId(182215377) >= 1) { // Secret Port Entrance
 				if (env.getDialog() == DialogAction.USE_OBJECT) {
-					TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 1757.82f, 1392.94f, 401.75f, (byte) 94);
+					TeleportService.teleportTo(player, player.getWorldId(), player.getInstanceId(), 1757.82f, 1392.94f, 401.75f, (byte) 94);
 					return true;
 				}
 			}

@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -40,7 +40,7 @@ public abstract class PanesterraTeam {
 			Player player = World.getInstance().findPlayer(id);
 			if (player == null)
 				continue;
-			TeleportService2.teleportTo(player, startPosition);
+			TeleportService.teleportTo(player, startPosition);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_SVS_DIRECT_PORTAL_OPEN_NOTICE());
 			sendPackets(player);
 		}
@@ -55,7 +55,7 @@ public abstract class PanesterraTeam {
 				player.setPanesterraTeam(null);
 				if (player.getWorldId() == 400030000) {
 					ungroupPlayer(player);
-					TeleportService2.moveToBindLocation(player);
+					TeleportService.moveToBindLocation(player);
 					sendPackets(player);
 				}
 			}
@@ -75,9 +75,9 @@ public abstract class PanesterraTeam {
 	}
 
 	public void ungroupPlayer(Player player) {
-		if (player.isInGroup2())
+		if (player.isInGroup())
 			PlayerGroupService.removePlayer(player);
-		else if (player.isInAlliance2())
+		else if (player.isInAlliance())
 			PlayerAllianceService.removePlayer(player);
 	}
 	

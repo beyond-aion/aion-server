@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Artur
@@ -150,7 +150,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 						break;
 					case SETPRO3:
 						if (var == 3) {
-							TeleportService2.teleportTo(player, 210020000, 1761.0742f, 907.1806f, 427.8147f, (byte) 47, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210020000, 1761.0742f, 907.1806f, 427.8147f, (byte) 47, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(4);
 							updateQuestStatus(env);
 							return true;

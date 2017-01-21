@@ -14,7 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -121,7 +121,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 				}
 				break;
 			case 731544:
-				TeleportService2.teleportTo(player, player.getWorldId(), 369.532f, 491.7861f, 605.696f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, player.getWorldId(), 369.532f, 491.7861f, 605.696f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730868:
 				InstanceService.moveToExitPoint(player);
@@ -134,7 +134,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService2.teleportTo(player, mapId, instanceId, 755.21f, 559.292f, 572.9508f, (byte) 86);
+		TeleportService.teleportTo(player, mapId, instanceId, 755.21f, 559.292f, 572.9508f, (byte) 86);
 		return true;
 	}
 

@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.SpawnsData2;
+import com.aionemu.gameserver.dataholders.SpawnsData;
 import com.aionemu.gameserver.model.EventType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -27,7 +27,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
@@ -60,7 +60,7 @@ public class EventTemplate {
 	private EventQuestList quests;
 
 	@XmlElement(name = "spawns", required = false)
-	private SpawnsData2 spawns;
+	private SpawnsData spawns;
 
 	@XmlElement(name = "inventory_drop", required = false)
 	private InventoryDrop inventoryDrop;
@@ -97,7 +97,7 @@ public class EventTemplate {
 		return eventDrops;
 	}
 
-	public SpawnsData2 getSpawns() {
+	public SpawnsData getSpawns() {
 		return spawns;
 	}
 
@@ -147,13 +147,13 @@ public class EventTemplate {
 
 		if (spawns != null && spawns.size() > 0) { // TODO limit pooled spawns (refactor SpawnEngine to use its methods)
 			for (SpawnMap map : spawns.getTemplates()) {
-				DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
+				DataManager.SPAWNS_DATA.addNewSpawnMap(map);
 				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
 				for (Integer instanceId : instanceIds) {
 					int spawnCount = 0;
 					for (Spawn spawn : map.getSpawns()) {
 						spawn.setEventTemplate(this);
-						for (SpawnTemplate t : new SpawnGroup2(map.getMapId(), spawn).getSpawnTemplates()) {
+						for (SpawnTemplate t : new SpawnGroup(map.getMapId(), spawn).getSpawnTemplates()) {
 							SpawnEngine.spawnObject(t, instanceId);
 							spawnCount++;
 						}
@@ -161,8 +161,8 @@ public class EventTemplate {
 					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "]: " + spawnCount + " (" + getName() + ")");
 				}
 			}
-			DataManager.SPAWNS_DATA2.afterUnmarshal(null, null);
-			DataManager.SPAWNS_DATA2.clearTemplates();
+			DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
+			DataManager.SPAWNS_DATA.clearTemplates();
 		}
 
 		if (inventoryDrop != null) {
@@ -208,7 +208,7 @@ public class EventTemplate {
 					((Creature) o).getController().cancelTask(TaskId.RESPAWN);
 				o.getController().delete();
 			}
-			DataManager.SPAWNS_DATA2.removeEventSpawnObjects(spawnedObjects);
+			DataManager.SPAWNS_DATA.removeEventSpawnObjects(spawnedObjects);
 			log.info("Deleted " + spawnedObjects.size() + " event objects (" + getName() + ")");
 			spawnedObjects = null;
 		}

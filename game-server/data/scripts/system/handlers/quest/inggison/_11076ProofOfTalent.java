@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Cheatkiller
@@ -49,7 +49,7 @@ public class _11076ProofOfTalent extends QuestHandler {
 					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2034);
 				} else if (dialog == DialogAction.SETPRO4) {
-					TeleportService2.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.FADE_OUT_BEAM);
+					TeleportService.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.FADE_OUT_BEAM);
 					return defaultCloseDialog(env, 3, 4, true, false);
 				}
 			}

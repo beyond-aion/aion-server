@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
@@ -17,7 +17,7 @@ public class ReturnEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		TeleportService2.moveToBindLocation((Player) effect.getEffector());
+		TeleportService.moveToBindLocation((Player) effect.getEffector());
 	}
 
 	@Override

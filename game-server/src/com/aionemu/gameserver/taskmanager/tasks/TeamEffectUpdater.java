@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
-import com.aionemu.gameserver.model.team2.common.legacy.PlayerAllianceEvent;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
+import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 
 /**
@@ -28,12 +28,12 @@ public final class TeamEffectUpdater extends AbstractIterativePeriodicTaskManage
 	@Override
 	protected void callTask(Player player) {
 		if (player.isOnline()) {
-			if (player.isInGroup2()) {
+			if (player.isInGroup()) {
 				PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
 				// PlayerGroupService.updateGroup(player, GroupEvent.UPDATE_EFFECTS);
 				PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
 			}
-			if (player.isInAlliance2()) {
+			if (player.isInAlliance()) {
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 				// PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UNK);

@@ -26,7 +26,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -196,7 +196,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
-		TeleportService2.teleportTo(player, mapId, instanceId, 202.26694f, 226.0532f, 1098.236f, (byte) 30);
+		TeleportService.teleportTo(player, mapId, instanceId, 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 		return true;
 	}
 

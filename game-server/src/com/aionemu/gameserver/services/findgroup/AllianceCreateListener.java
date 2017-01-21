@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services.findgroup;
 
 import com.aionemu.gameserver.model.gameobjects.FindGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.callback.PlayerAllianceCreateCallback;
+import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceCreateCallback;
 
 /**
  * @author Rolandas

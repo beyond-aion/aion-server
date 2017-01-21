@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -84,7 +84,7 @@ public class _14026ALoneDefense extends QuestHandler {
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
+							TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
 								TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
@@ -103,7 +103,7 @@ public class _14026ALoneDefense extends QuestHandler {
 							updateQuestStatus(env);
 							giveQuestItem(env, 182215324, 1);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}
@@ -132,7 +132,7 @@ public class _14026ALoneDefense extends QuestHandler {
 						case SETPRO4: {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50,
+							TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50,
 								TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
@@ -252,7 +252,7 @@ public class _14026ALoneDefense extends QuestHandler {
 		}
 		if (target != null) {
 			spawn.setTarget(target);
-			((AbstractAI) spawn.getAi2()).setStateIfNot(AIState.WALKING);
+			((AbstractAI) spawn.getAi()).setStateIfNot(AIState.WALKING);
 			spawn.setState(CreatureState.ACTIVE, true);
 			spawn.getMoveController().moveToTargetObject();
 			PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.START_EMOTE2, 0, spawn.getObjectId()));

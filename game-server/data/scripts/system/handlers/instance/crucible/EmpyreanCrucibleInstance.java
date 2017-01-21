@@ -22,7 +22,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_STAGE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -1023,7 +1023,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			playerReward.setInsignia((int) reward);
 			ItemService.addItem(player, 186000130, (int) reward);
 		} else {
-			TeleportService2.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
+			TeleportService.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceScoreType.END_PROGRESS), instanceReward,
@@ -1348,7 +1348,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

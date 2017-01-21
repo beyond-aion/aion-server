@@ -26,8 +26,8 @@ import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.team2.common.legacy.LootRuleType;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -488,7 +488,7 @@ public class DropService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
 		}
 
-		if (player.isInGroup2() || player.isInAlliance2())
+		if (player.isInGroup() || player.isInAlliance())
 			for (Player member : dropNpc.getInRangePlayers())
 				if (member != null && !player.equals(member) && member.isOnline()) {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));

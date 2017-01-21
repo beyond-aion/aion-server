@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.services.rift.RiftInformer;
@@ -169,8 +169,8 @@ public class RiftService {
 
 		// Spawn NPC guards
 		if (isWithGuards) {
-			List<SpawnGroup2> locSpawns = DataManager.SPAWNS_DATA2.getRiftSpawnsByLocId(location.getId());
-			for (SpawnGroup2 group : locSpawns) {
+			List<SpawnGroup> locSpawns = DataManager.SPAWNS_DATA.getRiftSpawnsByLocId(location.getId());
+			for (SpawnGroup group : locSpawns) {
 				for (SpawnTemplate st : group.getSpawnTemplates()) {
 					RiftSpawnTemplate template = (RiftSpawnTemplate) st;
 					location.getSpawned().add((Npc) SpawnEngine.spawnObject(template, 1));

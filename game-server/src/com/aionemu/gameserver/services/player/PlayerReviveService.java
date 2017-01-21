@@ -10,10 +10,10 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
-import com.aionemu.gameserver.model.team2.common.legacy.PlayerAllianceEvent;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
+import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
@@ -59,9 +59,9 @@ public class PlayerReviveService {
 		}
 
 		if (player.isInPrison())
-			TeleportService2.teleportToPrison(player);
+			TeleportService.teleportToPrison(player);
 		else if (player.isInResPostState())
-			TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getResPosX(), player.getResPosY(), player.getResPosZ());
+			TeleportService.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getResPosX(), player.getResPosY(), player.getResPosZ());
 		player.unsetResPosState();
 		player.setIsFlyingBeforeDeath(false);
 	}
@@ -92,7 +92,7 @@ public class PlayerReviveService {
 		}
 
 		if (player.isInPrison())
-			TeleportService2.teleportToPrison(player);
+			TeleportService.teleportToPrison(player);
 		player.unsetResPosState();
 		player.setIsFlyingBeforeDeath(false);
 	}
@@ -110,9 +110,9 @@ public class PlayerReviveService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
-			TeleportService2.teleportToPrison(player);
+			TeleportService.teleportToPrison(player);
 		} else if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
-			TeleportService2.teleportToEvent(player);
+			TeleportService.teleportToEvent(player);
 		} else {
 			WorldPosition resPos = null;
 			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
@@ -123,9 +123,9 @@ public class PlayerReviveService {
 			}
 
 			if (resPos != null)
-				TeleportService2.teleportTo(player, resPos);
+				TeleportService.teleportTo(player, resPos);
 			else
-				TeleportService2.moveToBindLocation(player);
+				TeleportService.moveToBindLocation(player);
 		}
 		player.unsetResPosState();
 	}
@@ -137,9 +137,9 @@ public class PlayerReviveService {
 	public static final void kiskRevive(Player player, int skillId) {
 
 		if (player.isInPrison())
-			TeleportService2.teleportToPrison(player);
+			TeleportService.teleportToPrison(player);
 		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
-			TeleportService2.teleportToEvent(player);
+			TeleportService.teleportToEvent(player);
 
 		// TODO: find right place for this
 		if (player.getSKInfo().getRank() > 1) {
@@ -155,7 +155,7 @@ public class PlayerReviveService {
 			revive(player, 25, 25, false, skillId);
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
-			TeleportService2.teleportTo(player, kisk.getPosition());
+			TeleportService.teleportTo(player, kisk.getPosition());
 		}
 	}
 
@@ -168,7 +168,7 @@ public class PlayerReviveService {
 			revive(player, 100, 100, false, skillId);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			player.getGameStats().updateStatsAndSpeedVisually();
-			TeleportService2.teleportToEvent(player);
+			TeleportService.teleportToEvent(player);
 			return;
 		}
 		if (player.getPanesterraTeam() != null)
@@ -188,7 +188,7 @@ public class PlayerReviveService {
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		if (map.isInstanceType() && player.getPosition().getWorldMapInstance().getStartPos() != null) {
 			float[] coords = player.getPosition().getWorldMapInstance().getStartPos();
-			TeleportService2.teleportTo(player, player.getWorldId(), coords[0], coords[1], coords[2]);
+			TeleportService.teleportTo(player, player.getWorldId(), coords[0], coords[1], coords[2]);
 		} else
 			bindRevive(player);
 		player.unsetResPosState();
@@ -218,10 +218,10 @@ public class PlayerReviveService {
 		player.setResurrectionSkill(0);
 		player.getAggroList().clear();
 		player.getController().onBeforeSpawn();
-		if (player.isInGroup2()) {
+		if (player.isInGroup()) {
 			PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
 		}
-		if (player.isInAlliance2()) {
+		if (player.isInAlliance()) {
 			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 		}
 	}
@@ -256,7 +256,7 @@ public class PlayerReviveService {
 		}
 
 		if (player.isInPrison())
-			TeleportService2.teleportToPrison(player);
+			TeleportService.teleportToPrison(player);
 		player.unsetResPosState();
 		player.setIsFlyingBeforeDeath(false);
 

@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.services.findgroup;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.group.callback.AddPlayerToGroupCallback;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.callback.AddPlayerToGroupCallback;
 
 /**
  * @author Rolandas

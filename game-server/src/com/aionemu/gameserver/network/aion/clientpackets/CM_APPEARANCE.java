@@ -7,11 +7,11 @@ import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
+import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.common.legacy.GroupEvent;
-import com.aionemu.gameserver.model.team2.common.legacy.PlayerAllianceEvent;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -102,10 +102,10 @@ public class CM_APPEARANCE extends AionClientPacket {
 				LegionService.getInstance().addToCache(player);
 				LegionService.getInstance().updateLegionMemberList(player);
 			}
-			if (player.isInAlliance2()) {
+			if (player.isInAlliance()) {
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
 			}
-			if (player.isInGroup2()) {
+			if (player.isInGroup()) {
 				PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
 			}
 		}

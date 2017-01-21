@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -60,7 +60,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 		}
 		TeleporterTemplate teleport = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npcId);
 		if (teleport != null)
-			TeleportService2.teleport(teleport, locId, player, npc,
+			TeleportService.teleport(teleport, locId, player, npc,
 				npc.getName().toLowerCase().contains("statue") ? TeleportAnimation.JUMP_IN_STATUE : TeleportAnimation.JUMP_IN);
 		else
 			AuditLogger.info(player, "Tried to teleport via npc " + npcId + " but he has no teleporter template.");

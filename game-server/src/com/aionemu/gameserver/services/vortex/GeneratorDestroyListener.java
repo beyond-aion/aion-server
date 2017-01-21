@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.vortex;
 
-import com.aionemu.gameserver.ai2.GeneralAIEvent;
-import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
+import com.aionemu.gameserver.ai.GeneralAIEvent;
+import com.aionemu.gameserver.ai.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.services.VortexService;
 
 /**

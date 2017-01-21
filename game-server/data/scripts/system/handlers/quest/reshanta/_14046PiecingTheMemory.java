@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Artur
@@ -73,7 +73,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					return false;
 				case SETPRO1:
 					if (var == 0) {
-						TeleportService2.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 110010000, 2014f, 1493f, 581.1387f, (byte) 70, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 0, 1);
 						return true;
 					}
@@ -99,7 +99,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					return false;
 				case SETPRO4:
 					if (var == 3) {
-						TeleportService2.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 310070000, 214f, 279f, 1387.241f, (byte) 69, TeleportAnimation.FADE_OUT_BEAM);
 						changeQuestStep(env, 3, 4);
 						return true;
 					}
@@ -146,7 +146,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 
 	@Override
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		TeleportService2.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.FADE_OUT_BEAM);
+		TeleportService.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.FADE_OUT_BEAM);
 		final QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;

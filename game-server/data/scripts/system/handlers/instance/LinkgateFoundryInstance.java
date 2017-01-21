@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -54,13 +54,13 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				npc.getController().die();
 				break;
 			case 804629:
-				TeleportService2.teleportTo(player, 301270000, 228.37f, 262.7f, 313, (byte) 120);
+				TeleportService.teleportTo(player, 301270000, 228.37f, 262.7f, 313, (byte) 120);
 				break;
 			case 702592:
-				TeleportService2.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, 301270000, 211.32f, 260, 314, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 702590:
-				TeleportService2.teleportTo(player, 301270000, 257.11f, 323, 271, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, 301270000, 257.11f, 323, 271, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().delete();
 				secretLabEntranceCount++;
 				if (secretLabEntranceCount < 3) {

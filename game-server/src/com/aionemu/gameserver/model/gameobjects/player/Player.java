@@ -57,14 +57,14 @@ import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
-import com.aionemu.gameserver.model.team2.TeamMember;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceGroup;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -141,7 +141,7 @@ public class Player extends Creature {
 	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
 
-	private PlayerGroup playerGroup2;
+	private PlayerGroup playerGroup;
 	private PlayerAllianceGroup playerAllianceGroup;
 
 	private AbyssRank abyssRank;
@@ -688,12 +688,12 @@ public class Player extends Creature {
 		titleList.setOwner(this);
 	}
 
-	public PlayerGroup getPlayerGroup2() {
-		return playerGroup2;
+	public PlayerGroup getPlayerGroup() {
+		return playerGroup;
 	}
 
-	public void setPlayerGroup2(PlayerGroup playerGroup) {
-		this.playerGroup2 = playerGroup;
+	public void setPlayerGroup(PlayerGroup playerGroup) {
+		this.playerGroup = playerGroup;
 	}
 
 	/**
@@ -761,8 +761,8 @@ public class Player extends Creature {
 		setLegionMember(null);
 	}
 
-	public boolean isInGroup2() {
-		return playerGroup2 != null;
+	public boolean isInGroup() {
+		return playerGroup != null;
 	}
 
 	/**
@@ -1083,12 +1083,12 @@ public class Player extends Creature {
 	}
 
 	public boolean isInSameTeam(Player player) {
-		if (isInGroup2() && player.isInGroup2()) {
-			return getPlayerGroup2().getTeamId().equals(player.getPlayerGroup2().getTeamId());
-		} else if (isInAlliance2() && player.isInAlliance2()) {
-			return getPlayerAlliance2().equals(player.getPlayerAlliance2());
+		if (isInGroup() && player.isInGroup()) {
+			return getPlayerGroup().getTeamId().equals(player.getPlayerGroup().getTeamId());
+		} else if (isInAlliance() && player.isInAlliance()) {
+			return getPlayerAlliance().equals(player.getPlayerAlliance());
 		} else if (isInLeague() && player.isInLeague()) {
-			return getPlayerAllianceGroup2().equals(player.getPlayerAllianceGroup2());
+			return getPlayerAllianceGroup().equals(player.getPlayerAllianceGroup());
 		}
 		return false;
 	}
@@ -1251,42 +1251,42 @@ public class Player extends Creature {
 		return isFlyingBeforeDeath;
 	}
 
-	public PlayerAlliance getPlayerAlliance2() {
+	public PlayerAlliance getPlayerAlliance() {
 		return playerAllianceGroup != null ? playerAllianceGroup.getAlliance() : null;
 	}
 
-	public PlayerAllianceGroup getPlayerAllianceGroup2() {
+	public PlayerAllianceGroup getPlayerAllianceGroup() {
 		return playerAllianceGroup;
 	}
 
-	public boolean isInAlliance2() {
+	public boolean isInAlliance() {
 		return playerAllianceGroup != null;
 	}
 
-	public void setPlayerAllianceGroup2(PlayerAllianceGroup playerAllianceGroup) {
+	public void setPlayerAllianceGroup(PlayerAllianceGroup playerAllianceGroup) {
 		this.playerAllianceGroup = playerAllianceGroup;
 	}
 
 	public final boolean isInLeague() {
-		return isInAlliance2() && getPlayerAlliance2().isInLeague();
+		return isInAlliance() && getPlayerAlliance().isInLeague();
 	}
 
 	public final boolean isInTeam() {
-		return isInGroup2() || isInAlliance2();
+		return isInGroup() || isInAlliance();
 	}
 
 	/**
 	 * @return current {@link PlayerGroup}, {@link PlayerAlliance} or null
 	 */
 	public final TemporaryPlayerTeam<? extends TeamMember<Player>> getCurrentTeam() {
-		return isInGroup2() ? getPlayerGroup2() : getPlayerAlliance2();
+		return isInGroup() ? getPlayerGroup() : getPlayerAlliance();
 	}
 
 	/**
 	 * @return current {@link PlayerGroup}, {@link PlayerAllianceGroup} or null
 	 */
 	public final TemporaryPlayerTeam<? extends TeamMember<Player>> getCurrentGroup() {
-		return isInGroup2() ? getPlayerGroup2() : getPlayerAllianceGroup2();
+		return isInGroup() ? getPlayerGroup() : getPlayerAllianceGroup();
 	}
 
 	/**
@@ -1705,11 +1705,11 @@ public class Player extends Creature {
 	}
 
 	public LootGroupRules getLootGroupRules() {
-		if (isInGroup2()) {
-			return getPlayerGroup2().getLootGroupRules();
+		if (isInGroup()) {
+			return getPlayerGroup().getLootGroupRules();
 		}
-		if (isInAlliance2()) {
-			return getPlayerAlliance2().getLootGroupRules();
+		if (isInAlliance()) {
+			return getPlayerAlliance().getLootGroupRules();
 		}
 		return null;
 	}

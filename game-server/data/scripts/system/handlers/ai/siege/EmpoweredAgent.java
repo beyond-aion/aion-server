@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.manager.EmoteManager;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.ai.manager.WalkManager;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import ai.AggressiveNpcAI2;
+import ai.AggressiveNpcAI;
 import javolution.util.FastTable;
 
 
@@ -32,7 +32,7 @@ import javolution.util.FastTable;
  * @author Estrayl
  */
 @AIName("empowered_agent")
-public class EmpoweredAgent extends AggressiveNpcAI2 {
+public class EmpoweredAgent extends AggressiveNpcAI {
 	
 	private final List<Integer> guardIds = new FastTable<>();
 	private final List<Integer> percents = new FastTable<>();

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
 
@@ -17,8 +17,8 @@ import javolution.util.FastTable;
  */
 public class TemporarySpawnEngine {
 
-	private static final FastTable<SpawnGroup2> temporarySpawns = new FastTable<>();
-	private static final FastMap<SpawnGroup2, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<>();
+	private static final FastTable<SpawnGroup> temporarySpawns = new FastTable<>();
+	private static final FastMap<SpawnGroup, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<>();
 
 	public static void spawnAll() {
 		spawn(true);
@@ -30,7 +30,7 @@ public class TemporarySpawnEngine {
 	}
 
 	private static void despawn() {
-		for (SpawnGroup2 spawn : temporarySpawns) {
+		for (SpawnGroup spawn : temporarySpawns) {
 			for (SpawnTemplate template : spawn.getSpawnTemplates()) {
 				if (template.getTemporarySpawn().canDespawn()) {
 					VisibleObject object = template.getVisibleObject();
@@ -51,7 +51,7 @@ public class TemporarySpawnEngine {
 	}
 
 	private static void spawn(boolean startCheck) {
-		for (SpawnGroup2 spawn : temporarySpawns) {
+		for (SpawnGroup spawn : temporarySpawns) {
 			HashSet<Integer> instances = tempSpawnInstanceMap.get(spawn);
 			if (spawn.hasPool()) {
 				TemporarySpawn temporarySpawn = spawn.getTemporarySpawn();
@@ -79,7 +79,7 @@ public class TemporarySpawnEngine {
 	/**
 	 * @param spawnTemplate
 	 */
-	public static void addSpawnGroup(SpawnGroup2 spawn, int instanceId) {
+	public static void addSpawnGroup(SpawnGroup spawn, int instanceId) {
 		temporarySpawns.add(spawn);
 		HashSet<Integer> instances = tempSpawnInstanceMap.get(spawn);
 		if (instances == null) {

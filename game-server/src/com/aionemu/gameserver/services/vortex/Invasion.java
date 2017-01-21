@@ -3,15 +3,15 @@ package com.aionemu.gameserver.services.vortex;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
-import com.aionemu.gameserver.model.team2.TeamType;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.TeamType;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.model.vortex.VortexStateType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import javolution.util.FastMap;
@@ -65,9 +65,9 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 			Player first = null;
 
 			for (Player firstOne : list.values()) {
-				if (firstOne.isInGroup2()) {
+				if (firstOne.isInGroup()) {
 					PlayerGroupService.removePlayer(firstOne);
-				} else if (firstOne.isInAlliance2()) {
+				} else if (firstOne.isInAlliance()) {
 					PlayerAllianceService.removePlayer(firstOne);
 				}
 				first = firstOne;
@@ -110,7 +110,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 		if (isInvader && player.isOnline() && player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
 			// You will be returned to where you entered.
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401474));
-			TeleportService2.teleportTo(player, getVortexLocation().getHomePoint());
+			TeleportService.teleportTo(player, getVortexLocation().getHomePoint());
 		}
 
 		getVortexLocation().getVortexController().getPassedPlayers().remove(player.getObjectId());
@@ -128,9 +128,9 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
-					if (responder.isInGroup2()) {
+					if (responder.isInGroup()) {
 						PlayerGroupService.removePlayer(responder);
-					} else if (responder.isInAlliance2()) {
+					} else if (responder.isInAlliance()) {
 						PlayerAllianceService.removePlayer(responder);
 					}
 

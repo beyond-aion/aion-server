@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -162,7 +162,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				if (!isInstanceDestroyed) {
 					Npc npc = (Npc) spawn(npcId, x, y, z, h);
 					npc.getSpawn().setWalkerId(walkerId);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
+					WalkManager.startWalking((NpcAI) npc.getAi());
 					npc.setState(CreatureState.WALK_MODE);
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}
@@ -271,15 +271,15 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 730886:
-				TeleportService2.teleportTo(player, mapId, instanceId, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
+				TeleportService.teleportTo(player, mapId, instanceId, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
 				break;
 			case 702009:
-				TeleportService2.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
 				npc.getController().delete();
 				break;
 			case 730905:
-				TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+				TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 				break;
 		}
 	}
@@ -319,7 +319,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
-		TeleportService2.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
+		TeleportService.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
 		return true;
 	}
 	
@@ -337,6 +337,6 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 }

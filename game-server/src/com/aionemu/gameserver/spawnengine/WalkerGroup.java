@@ -7,11 +7,11 @@ import java.util.stream.IntStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.AI2Logger;
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.AISubState;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.AILogger;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.AISubState;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
@@ -191,7 +191,7 @@ public class WalkerGroup {
 			if (memberSteps[i] > currentStep)
 				currentStep = memberSteps[i];
 			if (members.get(i).getNpc().equals(member)) {
-				AI2Logger.info(members.get(i).getNpc().getAi2(), "Setting step to " + step);
+				AILogger.info(members.get(i).getNpc().getAi(), "Setting step to " + step);
 				memberSteps[i] = step;
 			}
 		}
@@ -199,12 +199,12 @@ public class WalkerGroup {
 			groupStep = step;
 	}
 
-	public void targetReached(NpcAI2 npcAI) {
+	public void targetReached(NpcAI npcAI) {
 		synchronized (members) {
 			npcAI.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
 			boolean allArrived = true;
 			for (ClusteredNpc snpc : members) {
-				allArrived &= snpc.getNpc().getAi2().getSubState() == AISubState.WALK_WAIT_GROUP;
+				allArrived &= snpc.getNpc().getAi().getSubState() == AISubState.WALK_WAIT_GROUP;
 				if (!allArrived)
 					break;
 			}
@@ -217,7 +217,7 @@ public class WalkerGroup {
 					npcAI.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
 					continue;
 				}
-				npcAI = (NpcAI2) (snpc.getNpc().getAi2());
+				npcAI = (NpcAI) (snpc.getNpc().getAi());
 				if (npcAI.getSubState() == AISubState.WALK_WAIT_GROUP)
 					WalkManager.targetReached(npcAI);
 			}

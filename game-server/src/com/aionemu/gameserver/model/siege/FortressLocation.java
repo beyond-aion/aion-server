@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplat
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 import javolution.util.FastMap;
@@ -85,7 +85,7 @@ public class FortressLocation extends SiegeLocation {
 				if (creature instanceof Kisk)
 					((Kisk) creature).getController().die();
 				else if (creature instanceof Player)
-					TeleportService2.moveToBindLocation((Player) creature);
+					TeleportService.moveToBindLocation((Player) creature);
 			}
 		});
 	}

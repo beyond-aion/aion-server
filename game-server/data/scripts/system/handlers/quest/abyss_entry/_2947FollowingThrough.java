@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * Meet Kvasir (204053) and choose your mission.<br>
@@ -205,7 +205,7 @@ public class _2947FollowingThrough extends QuestHandler {
 			if (var4 != 10) {
 				qs.setQuestVar(6);
 				updateQuestStatus(env);
-				TeleportService2.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
+				TeleportService.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
 				return true;
 			}
 		}
@@ -241,7 +241,7 @@ public class _2947FollowingThrough extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 168) {
-				TeleportService2.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
+				TeleportService.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
 				return true;
 			} else if (movieId == 167) {
 				QuestService.questTimerStart(env, 240);

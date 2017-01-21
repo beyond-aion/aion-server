@@ -8,10 +8,10 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.handler.ShoutEventHandler;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -26,8 +26,8 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team2.common.service.PlayerTeamDistributionService;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -62,7 +62,7 @@ public class NpcController extends CreatureController<Npc> {
 		super.notSee(object, animation);
 		if (object instanceof Creature) {
 			Creature creature = (Creature) object;
-			getOwner().getAi2().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
+			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
 			getOwner().getAggroList().remove(creature);
 		}
 	}
@@ -73,7 +73,7 @@ public class NpcController extends CreatureController<Npc> {
 		Npc owner = getOwner();
 		if (object instanceof Creature) {
 			Creature creature = (Creature) object;
-			owner.getAi2().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
+			owner.getAi().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
 			if (creature instanceof Player) {
 				if (owner.getLifeStats().isAlreadyDead())
 					DropService.getInstance().see((Player) creature, owner);
@@ -93,7 +93,7 @@ public class NpcController extends CreatureController<Npc> {
 			owner.setState(CreatureState.WALK_MODE);
 
 		owner.getLifeStats().setCurrentHpPercent(100);
-		owner.getAi2().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
+		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
 
 		if (owner.getSpawn().getState() > 0) {
 			owner.setState(owner.getSpawn().getState());
@@ -105,7 +105,7 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onAfterSpawn() {
 		super.onAfterSpawn();
-		getOwner().getAi2().onGeneralEvent(AIEventType.SPAWNED);
+		getOwner().getAi().onGeneralEvent(AIEventType.SPAWNED);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class NpcController extends CreatureController<Npc> {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
 		DropService.getInstance().unregisterDrop(owner);
-		owner.getAi2().onGeneralEvent(AIEventType.DESPAWNED);
+		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
 		getOwner().getObserveController().clear();
 		super.onDespawn();
 	}
@@ -128,13 +128,13 @@ public class NpcController extends CreatureController<Npc> {
 		boolean shouldRespawn = true;
 		boolean shouldLoot = true;
 		try {
-			shouldDecay = owner.getAi2().ask(AIQuestion.SHOULD_DECAY);
-			shouldRespawn = owner.getAi2().ask(AIQuestion.SHOULD_RESPAWN);
-			shouldLoot = owner.getAi2().ask(AIQuestion.SHOULD_LOOT);
-			if (owner.getAi2().ask(AIQuestion.SHOULD_REWARD))
+			shouldDecay = owner.getAi().ask(AIQuestion.SHOULD_DECAY);
+			shouldRespawn = owner.getAi().ask(AIQuestion.SHOULD_RESPAWN);
+			shouldLoot = owner.getAi().ask(AIQuestion.SHOULD_LOOT);
+			if (owner.getAi().ask(AIQuestion.SHOULD_REWARD))
 				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
-			owner.getAi2().onGeneralEvent(AIEventType.DIED);
+			owner.getAi().onGeneralEvent(AIEventType.DIED);
 		} catch (Exception e) {
 			log.error("onDie() exception for " + owner + ":", e);
 		}
@@ -202,8 +202,8 @@ public class NpcController extends CreatureController<Npc> {
 			}
 			if (attacker instanceof TemporaryPlayerTeam<?>) {
 				PlayerTeamDistributionService.doReward((TemporaryPlayerTeam<?>) attacker, percentage, getOwner(), winner);
-			} else if (attacker instanceof Player && ((Player) attacker).isInGroup2()) {
-				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup2(), percentage, getOwner(), winner);
+			} else if (attacker instanceof Player && ((Player) attacker).isInGroup()) {
+				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup(), percentage, getOwner(), winner);
 			} else if (attacker instanceof Player) {
 				Player player = (Player) attacker;
 				if (!player.getLifeStats().isAlreadyDead()) {
@@ -220,7 +220,7 @@ public class NpcController extends CreatureController<Npc> {
 					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0, 0));
 					player.getCommonData().addExp(rewardXp, RewardType.HUNTING, this.getOwner().getObjectTemplate().getNameId());
 					player.getCommonData().addDp(rewardDp);
-					if (getOwner().getAi2().ask(AIQuestion.SHOULD_REWARD_AP)) {
+					if (getOwner().getAi().ask(AIQuestion.SHOULD_REWARD_AP)) {
 						int calculatedAp = StatFunctions.calculatePvEApGained(player, getOwner());
 						rewardAp *= calculatedAp;
 						if (rewardAp >= 1) {
@@ -228,7 +228,7 @@ public class NpcController extends CreatureController<Npc> {
 						}
 					}
 				}
-				if (attacker.equals(winner) && getOwner().getAi2().ask(AIQuestion.SHOULD_LOOT))
+				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.SHOULD_LOOT))
 					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 			}
 		}
@@ -253,7 +253,7 @@ public class NpcController extends CreatureController<Npc> {
 		}
 		player.getObserveController().notifyRequestDialogObservers(getOwner());
 
-		getOwner().getAi2().onCreatureEvent(AIEventType.DIALOG_START, player);
+		getOwner().getAi().onCreatureEvent(AIEventType.DIALOG_START, player);
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class NpcController extends CreatureController<Npc> {
 			&& !QuestEngine.getInstance().onDialog(env)) {
 			return;
 		}
-		if (!getOwner().getAi2().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {
+		if (!getOwner().getAi().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogId, player, getOwner(), questId, extendedRewardIndex);
 		}
 	}
@@ -297,7 +297,7 @@ public class NpcController extends CreatureController<Npc> {
 		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation);
 
 		Npc npc = getOwner();
-		ShoutEventHandler.onEnemyAttack((NpcAI2) npc.getAi2(), attacker);
+		ShoutEventHandler.onEnemyAttack((NpcAI) npc.getAi(), attacker);
 		if (actingCreature instanceof Player)
 			QuestEngine.getInstance().onAttack(new QuestEnv(npc, (Player) actingCreature, 0, 0));
 	}

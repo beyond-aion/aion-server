@@ -15,12 +15,12 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.DarkPoetaReward;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -392,7 +392,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onExitInstance(Player player) {
 		if (instanceReward.getInstanceScoreType().isEndProgress()) {
-			TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 		}
 	}
 

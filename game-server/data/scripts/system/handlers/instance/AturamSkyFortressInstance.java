@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -151,7 +151,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 			public void run() {
 				if (!isInstanceDestroyed) {
 					npc.getSpawn().setWalkerId(walkId);
-					WalkManager.startWalking((NpcAI2) npc.getAi2());
+					WalkManager.startWalking((NpcAI) npc.getAi());
 					npc.setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}

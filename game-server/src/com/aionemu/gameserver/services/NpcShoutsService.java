@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AITemplate;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AITemplate;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.TaskId;
@@ -71,7 +71,7 @@ public class NpcShoutsService {
 		if (sender == null || shout == null)
 			return;
 
-		if (shout.getPattern() != null && !((AITemplate) sender.getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
+		if (shout.getPattern() != null && !((AITemplate) sender.getAi()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
 			return;
 
 		int shoutRange = sender.getObjectTemplate().getMinimumShoutRange();
@@ -121,7 +121,7 @@ public class NpcShoutsService {
 		@Override
 		public void run() {
 			Npc npc = World.getInstance().findNpc(objectId);
-			if (npc == null || !npc.getPosition().isMapRegionActive() || !npc.getAi2().ask(AIQuestion.CAN_SHOUT))
+			if (npc == null || !npc.getPosition().isMapRegionActive() || !npc.getAi().ask(AIQuestion.CAN_SHOUT))
 				return;
 			shoutRandom(npc, null, shouts, 0);
 		}

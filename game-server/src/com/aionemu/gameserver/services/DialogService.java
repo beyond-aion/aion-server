@@ -7,7 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
@@ -49,12 +49,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
-import com.aionemu.gameserver.services.instance.periodic.DredgionService2;
+import com.aionemu.gameserver.services.instance.periodic.DredgionService;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.teleport.PortalService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -77,7 +77,7 @@ public class DialogService {
 
 		if (target instanceof Npc) {
 			Npc npc = (Npc) target;
-			npc.getAi2().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
+			npc.getAi().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
 
 			if (npc.getObjectTemplate().supportsAction(DialogAction.OPEN_LEGION_WAREHOUSE) && player.isLegionMember()) {
 				LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
@@ -205,26 +205,26 @@ public class DialogService {
 				case ENTER_PVP: // (2.5)
 					switch (npc.getNpcId()) {
 						case 204089: // pvp arena in pandaemonium.
-							TeleportService2.teleportTo(player, 120010000, 1, 984f, 1543f, 222.1f);
+							TeleportService.teleportTo(player, 120010000, 1, 984f, 1543f, 222.1f);
 							break;
 						case 203764: // pvp arena in sanctum.
-							TeleportService2.teleportTo(player, 110010000, 1, 1462.5f, 1326.1f, 564.1f);
+							TeleportService.teleportTo(player, 110010000, 1, 1462.5f, 1326.1f, 564.1f);
 							break;
 						case 203981:
-							TeleportService2.teleportTo(player, 210020000, 1, 439.3f, 422.2f, 274.3f);
+							TeleportService.teleportTo(player, 210020000, 1, 439.3f, 422.2f, 274.3f);
 							break;
 					}
 					break;
 				case LEAVE_PVP: // (2.5)
 					switch (npc.getNpcId()) {
 						case 204087:
-							TeleportService2.teleportTo(player, 120010000, 1, 1005.1f, 1528.9f, 222.1f);
+							TeleportService.teleportTo(player, 120010000, 1, 1005.1f, 1528.9f, 222.1f);
 							break;
 						case 203875:
-							TeleportService2.teleportTo(player, 110010000, 1, 1470.3f, 1343.5f, 563.7f);
+							TeleportService.teleportTo(player, 110010000, 1, 1470.3f, 1343.5f, 563.7f);
 							break;
 						case 203982:
-							TeleportService2.teleportTo(player, 210020000, 1, 446.2f, 431.1f, 274.5f);
+							TeleportService.teleportTo(player, 210020000, 1, 446.2f, 431.1f, 274.5f);
 							break;
 					}
 					break;
@@ -237,7 +237,7 @@ public class DialogService {
 								return;
 							}
 					}
-					TeleportService2.showMap(player, npc);
+					TeleportService.showMap(player, npc);
 					break;
 				}
 				case GATHER_SKILL_LEVELUP: // improve extraction (2.5)
@@ -277,7 +277,7 @@ public class DialogService {
 					player.getCommonData().setInEditMode(true);
 					break;
 				case MATCH_MAKER: // dredgion
-					if (AutoGroupConfig.AUTO_GROUP_ENABLE && DredgionService2.getInstance().isRegisterAvailable()) {
+					if (AutoGroupConfig.AUTO_GROUP_ENABLE && DredgionService.getInstance().isRegisterAvailable()) {
 						AutoGroupType agt = AutoGroupType.getAutoGroup(npc.getNpcId());
 						if (agt != null && agt.isDredgion())
 							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
@@ -357,8 +357,8 @@ public class DialogService {
 					} else if (template != null) {
 						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
 						if (loc != null)
-							TeleportService2.teleport(template, loc.getLocId(), player, npc,
-								npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleport(template, loc.getLocId(), player, npc,
+								npc.getAi().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
 					}
 					break;
 				default:

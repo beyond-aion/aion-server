@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.ai2.AbstractAI;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.AbstractAI;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -145,7 +145,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		if (npc == null)
 			return;
 		npc.getSpawn().setWalkerId(walkerId);
-		WalkManager.startWalking((NpcAI2) npc.getAi2());
+		WalkManager.startWalking((NpcAI) npc.getAi());
 		npc.setState(CreatureState.WALK_MODE);
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 	}
@@ -166,10 +166,10 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	public void onSpawn() {
-		List<SpawnGroup2> siegeSpawns = DataManager.SPAWNS_DATA2.getSiegeSpawnsByLocId(getSiegeLocationId());
+		List<SpawnGroup> siegeSpawns = DataManager.SPAWNS_DATA.getSiegeSpawnsByLocId(getSiegeLocationId());
 		if (siegeSpawns == null)
 			return;
-		for (SpawnGroup2 group : siegeSpawns) {
+		for (SpawnGroup group : siegeSpawns) {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
 				if (siegetemplate.getSiegeRace().equals(SiegeRace.BALAUR) && siegetemplate.getSiegeModType().equals(SiegeModType.SIEGE)) {
@@ -211,21 +211,21 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	private void registerListeners() {
 		veille.getAggroList().addEventListener(veilleDoAddDamageListener);
-		AbstractAI veilleAI = (AbstractAI) veille.getAi2();
+		AbstractAI veilleAI = (AbstractAI) veille.getAi();
 		veilleAI.addEventListener(veilleDeathListener);
 
 		masta.getAggroList().addEventListener(mastaDoAddDamageListener);
-		AbstractAI mastaAI = (AbstractAI) masta.getAi2();
+		AbstractAI mastaAI = (AbstractAI) masta.getAi();
 		mastaAI.addEventListener(mastaDeathListener);
 	}
 
 	private void removeListeners() {
 		veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
-		AbstractAI veilleAI = (AbstractAI) veille.getAi2();
+		AbstractAI veilleAI = (AbstractAI) veille.getAi();
 		veilleAI.removeEventListener(veilleDeathListener);
 
 		masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
-		AbstractAI mastaAI = (AbstractAI) masta.getAi2();
+		AbstractAI mastaAI = (AbstractAI) masta.getAi();
 		mastaAI.removeEventListener(mastaDeathListener);
 	}
 

@@ -3,8 +3,8 @@ package instance;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -134,7 +134,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 702680:
 			case 702681:
 			case 702682:
-				TeleportService2.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				SkillEngine.getInstance().getSkill(npc, 21806, 60, player).useNoAnimationSkill();
 				despawnNpc(npc);
 				break;
@@ -144,7 +144,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 702686:
 			case 702687:
 			case 702688:
-				TeleportService2.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				SkillEngine.getInstance().getSkill(npc, 21805, 60, player).useNoAnimationSkill();
 				despawnNpc(npc);
 				break;
@@ -173,7 +173,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				npc.getSpawn().setWalkerId(walkern);
-				WalkManager.startWalking((NpcAI2) npc.getAi2());
+				WalkManager.startWalking((NpcAI) npc.getAi());
 				npc.setState(CreatureState.WALK_MODE, true);
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 			}

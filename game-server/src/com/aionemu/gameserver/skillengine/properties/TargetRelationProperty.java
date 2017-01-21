@@ -78,14 +78,14 @@ public class TargetRelationProperty {
 								sourcePlayer = (Player) source;
 							}
 
-							if (sourcePlayer.isInAlliance2() && targetPlayer.isInAlliance2()) {
+							if (sourcePlayer.isInAlliance() && targetPlayer.isInAlliance()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerAlliance2().equals(targetPlayer.getPlayerAlliance2())) {
+									&& sourcePlayer.getPlayerAlliance().equals(targetPlayer.getPlayerAlliance())) {
 									continue;
 								}
-							} else if (sourcePlayer.isInGroup2() && targetPlayer.isInGroup2()) {
+							} else if (sourcePlayer.isInGroup() && targetPlayer.isInGroup()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerGroup2().getTeamId().equals(targetPlayer.getPlayerGroup2().getTeamId())) {
+									&& sourcePlayer.getPlayerGroup().getTeamId().equals(targetPlayer.getPlayerGroup().getTeamId())) {
 									continue;
 								}
 							} else if (targetPlayer.equals(sourcePlayer)) {

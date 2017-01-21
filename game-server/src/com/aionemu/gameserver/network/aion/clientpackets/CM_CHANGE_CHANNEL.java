@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -33,6 +33,6 @@ public class CM_CHANGE_CHANNEL extends AionClientPacket {
 			// channel index starts from there
 			channel += template.getTwinCount() - 1;
 		}
-		TeleportService2.changeChannel(activePlayer, channel);
+		TeleportService.changeChannel(activePlayer, channel);
 	}
 }

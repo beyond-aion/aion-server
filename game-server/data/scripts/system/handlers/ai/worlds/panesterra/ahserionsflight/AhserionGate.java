@@ -1,7 +1,7 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.NpcAI2;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
@@ -9,7 +9,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
  *
  */
 @AIName("ahserion_gate")
-public class AhserionGate extends NpcAI2 {
+public class AhserionGate extends NpcAI {
 
 	@Override
 	public void handleSpawned() {

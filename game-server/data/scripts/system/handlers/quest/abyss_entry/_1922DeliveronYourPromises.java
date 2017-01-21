@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -94,7 +94,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310080000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService2.teleportTo(player, 310080000, newInstance.getInstanceId(), 276, 293, 163, (byte) 90);
+							TeleportService.teleportTo(player, 310080000, newInstance.getInstanceId(), 276, 293, 163, (byte) 90);
 							if (var == 4 || var == 6)
 								changeQuestStep(env, var, 5, false); // 5
 							return closeDialogWindow(env);
@@ -134,7 +134,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					defaultOnKillEvent(env, mobs, 9, 10, 4); // 4: 10
 					QuestService.questTimerEnd(env);
 					playQuestMovie(env, 166);
-					TeleportService2.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
+					TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 					return true;
 				}
 			}
@@ -151,7 +151,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 			if (var4 < 10) {
 				qs.setQuestVar(6);
 				updateQuestStatus(env);
-				TeleportService2.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
+				TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 				return true;
 			}
 		}
@@ -187,7 +187,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 166) {
-				TeleportService2.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
+				TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 				return true;
 			} else if (movieId == 165) {
 				QuestService.questTimerStart(env, 240);

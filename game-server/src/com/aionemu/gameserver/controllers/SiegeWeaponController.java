@@ -2,8 +2,8 @@ package com.aionemu.gameserver.controllers;
 
 import javax.annotation.Nonnull;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.follow.FollowStartService;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.follow.FollowStartService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -32,7 +32,7 @@ public class SiegeWeaponController extends SummonController {
 	public void restMode() {
 		getMaster().getController().cancelTask(TaskId.SUMMON_FOLLOW);
 		super.restMode();
-		getOwner().getAi2().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, getMaster());
+		getOwner().getAi().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, getMaster());
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class SiegeWeaponController extends SummonController {
 		super.guardMode();
 		getMaster().getController().cancelTask(TaskId.SUMMON_FOLLOW);
 		getOwner().setTarget(getMaster());
-		getOwner().getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, getMaster());
+		getOwner().getAi().onCreatureEvent(AIEventType.FOLLOW_ME, getMaster());
 		getOwner().getMoveController().moveToTargetObject();
 		getMaster().getController().addTask(TaskId.SUMMON_FOLLOW, FollowStartService.newFollowingToTargetCheckTask(getOwner(), getMaster()));
 	}
@@ -59,7 +59,7 @@ public class SiegeWeaponController extends SummonController {
 			return;
 		}
 		getOwner().setTarget(target);
-		getOwner().getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, target);
+		getOwner().getAi().onCreatureEvent(AIEventType.FOLLOW_ME, target);
 		getOwner().getMoveController().moveToTargetObject();
 		getMaster().getController().addTask(TaskId.SUMMON_FOLLOW, FollowStartService.newFollowingToTargetCheckTask(getOwner(), target));
 	}

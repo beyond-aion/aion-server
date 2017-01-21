@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -72,7 +72,7 @@ public class _14047ChainingMemories extends QuestHandler {
 					case SETPRO1:
 						if (var == 0) {
 							changeQuestStep(env, 0, 1);
-							TeleportService2.teleportTo(player, 210060000, 2278.23f, 2217.8f, 59.27f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210060000, 2278.23f, 2217.8f, 59.27f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 						break;
@@ -87,7 +87,7 @@ public class _14047ChainingMemories extends QuestHandler {
 					case SETPRO2:
 						if (var == 1) {
 							changeQuestStep(env, 1, 2);
-							TeleportService2.teleportTo(player, 210040000, 713.6f, 625.36f, 129.75f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210040000, 713.6f, 625.36f, 129.75f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 						break;
@@ -105,7 +105,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						InstanceService.registerPlayerWithInstance(instance, player);
 						QuestService.spawnQuestNpc(WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), icaronixNormalId, 478.8f, 431.1f, 1062.0067f,
 							(byte) 58);
-						TeleportService2.teleportTo(player, WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), 305.8f, 334.46f, 1019.69f,
+						TeleportService.teleportTo(player, WorldMapType.AZOTURAN_FORTRESS.getId(), instance.getInstanceId(), 305.8f, 334.46f, 1019.69f,
 							(byte) 27, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 				}

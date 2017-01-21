@@ -15,16 +15,16 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -167,7 +167,7 @@ public class AhserionRaid {
 					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
 						player.setPanesterraTeam(null);
 						leaveTeam(player);
-						TeleportService2.moveToBindLocation(player);
+						TeleportService.moveToBindLocation(player);
 					}
 				}
 			}
@@ -194,7 +194,7 @@ public class AhserionRaid {
 				if (!player.isGM()) {
 					player.setPanesterraTeam(null);
 					leaveTeam(player);
-					TeleportService2.moveToBindLocation(player);
+					TeleportService.moveToBindLocation(player);
 				}
 			} else if (obj instanceof StaticDoor) {
 				((StaticDoor) obj).setOpen(false);
@@ -210,11 +210,11 @@ public class AhserionRaid {
 			if (teams.get(team) == null || teams.get(team).getMembers().isEmpty())
 				return;
 
-		List<SpawnGroup2> ahserionSpawns = DataManager.SPAWNS_DATA2.getAhserionSpawnByTeamId(team.getId());
+		List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(team.getId());
 		if (ahserionSpawns == null)
 			return;
 
-		for (SpawnGroup2 grp : ahserionSpawns) {
+		for (SpawnGroup grp : ahserionSpawns) {
 			for (SpawnTemplate template : grp.getSpawnTemplates()) {
 				AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
 				if (ahserionTemplate.getStage() == stage)
@@ -234,9 +234,9 @@ public class AhserionRaid {
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		WorldPosition pos = player.getPanesterraTeam().getStartPosition();
 		if (pos != null)
-			TeleportService2.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
+			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
 		else
-			TeleportService2.moveToBindLocation(player);
+			TeleportService.moveToBindLocation(player);
 		player.unsetResPosState();
 		return true;
 	}
@@ -388,9 +388,9 @@ public class AhserionRaid {
 	}
 
 	private void leaveTeam(Player player) {
-		if (player.isInAlliance2())
+		if (player.isInAlliance())
 			PlayerAllianceService.removePlayer(player);
-		else if (player.isInGroup2())
+		else if (player.isInGroup())
 			PlayerGroupService.removePlayer(player);
 	}
 

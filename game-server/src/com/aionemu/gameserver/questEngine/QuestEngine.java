@@ -1123,7 +1123,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	private boolean existsSpawnData(int npcId) {
-		if (DataManager.SPAWNS_DATA2.containsAnySpawnForNpc(npcId))
+		if (DataManager.SPAWNS_DATA.containsAnySpawnForNpc(npcId))
 			return true;
 		if (DataManager.TOWN_SPAWNS_DATA.containsAnySpawnForNpc(npcId))
 			return true;

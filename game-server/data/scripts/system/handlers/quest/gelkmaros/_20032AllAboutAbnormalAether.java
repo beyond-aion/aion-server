@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -86,7 +86,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 							changeQuestStep(env, 2, 3); // 3
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
+							TeleportService.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
 								TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {
@@ -108,7 +108,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			 * qs.setQuestVar(8); // Reward
 			 * qs.setStatus(QuestStatus.REWARD);
 			 * updateQuestStatus(env);
-			 * TeleportService2.teleportTo(env.getPlayer(), 220070000, 1025, 2782, 388, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+			 * TeleportService.teleportTo(env.getPlayer(), 220070000, 1025, 2782, 388, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
 			 * return closeDialogWindow(env);
 			 * }
 			 * }

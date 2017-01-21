@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -29,7 +29,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author Yeats
  */
 @AIName("ahserion_construct")
-public class AhserionConstructAI extends NpcAI2 {
+public class AhserionConstructAI extends NpcAI {
 
 	private Npc flag = null;
 	private Future<?> attackSchedule;
@@ -286,12 +286,12 @@ public class AhserionConstructAI extends NpcAI2 {
 
 			@Override
 			public void run() {
-				List<SpawnGroup2> ahserionSpawns = DataManager.SPAWNS_DATA2.getAhserionSpawnByTeamId(team.getId());
+				List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(team.getId());
 				if (ahserionSpawns == null) {
 					return;
 				}
 
-				for (SpawnGroup2 grp : ahserionSpawns) {
+				for (SpawnGroup grp : ahserionSpawns) {
 					for (SpawnTemplate template : grp.getSpawnTemplates()) {
 						AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
 						if (ahserionTemplate.getStage() == staticId) {

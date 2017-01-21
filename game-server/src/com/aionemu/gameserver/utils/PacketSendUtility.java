@@ -2,7 +2,7 @@ package com.aionemu.gameserver.utils;
 
 import java.util.function.Predicate;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -160,7 +160,7 @@ public class PacketSendUtility {
 			if (object instanceof Player)
 				sendPacket((Player) object, packet);
 			else if (et != null && object instanceof Npc)
-				((Npc) object).getAi2().onCreatureEvent(et, creature);
+				((Npc) object).getAi().onCreatureEvent(et, creature);
 		});
 	}
 

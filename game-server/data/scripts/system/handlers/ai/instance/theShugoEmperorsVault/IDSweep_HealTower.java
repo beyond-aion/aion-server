@@ -2,13 +2,13 @@ package ai.instance.theShugoEmperorsVault;
 
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.GeneralNpcAI2;
+import ai.GeneralNpcAI;
 
 
 /**
@@ -16,7 +16,7 @@ import ai.GeneralNpcAI2;
  *
  */
 @AIName("idsweep_healtower")
-public class IDSweep_HealTower extends GeneralNpcAI2 {
+public class IDSweep_HealTower extends GeneralNpcAI {
 
 	private Future<?> schedule;
 	private Long startTime;

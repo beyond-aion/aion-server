@@ -21,8 +21,8 @@ public class PeriodicInstanceManager {
 	private PeriodicInstanceManager() {
 		this.services = new HashMap<>();
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
-			DredgionService2.getInstance().initIfEnabled();
-			registerInstance(DredgionService2.getInstance());
+			DredgionService.getInstance().initIfEnabled();
+			registerInstance(DredgionService.getInstance());
 
 			KamarBattlefieldService.getInstance().initIfEnabled();
 			registerInstance(KamarBattlefieldService.getInstance());

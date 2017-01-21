@@ -2,8 +2,8 @@ package ai.instance.theShugoEmperorsVault;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -17,13 +17,13 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.GeneralNpcAI2;
+import ai.GeneralNpcAI;
 
 /**
  * @author Yeats
  */
 @AIName("emperorsVaultMorphNPC")
-public class ShugoMorpher extends GeneralNpcAI2 {
+public class ShugoMorpher extends GeneralNpcAI {
 
 	private AtomicBoolean started = new AtomicBoolean(false);
 

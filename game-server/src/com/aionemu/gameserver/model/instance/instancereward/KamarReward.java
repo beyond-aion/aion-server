@@ -6,8 +6,8 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.KamarPlayerReward;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceGroup;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author xTz
@@ -102,19 +102,19 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 
 	public void portToPosition(Player player) {
 		PlayerAllianceGroup secGroup = null;
-		if (player.isInAlliance2()) {
-			secGroup = player.getPlayerAlliance2().getAllianceGroup(1001);
+		if (player.isInAlliance()) {
+			secGroup = player.getPlayerAlliance().getAllianceGroup(1001);
 		}
 		switch (player.getRace()) {
 			case ELYOS:
 				if (elyosPosition == 0) {
-					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
+					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup())) {
 						teleport(player, positions[1]);
 					} else {
 						teleport(player, positions[0]);
 					}
 				} else {
-					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
+					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup())) {
 						teleport(player, positions[3]);
 					} else {
 						teleport(player, positions[2]);
@@ -123,13 +123,13 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 				break;
 			case ASMODIANS:
 				if (elyosPosition == 0) {
-					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
+					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup())) {
 						teleport(player, positions[3]);
 					} else {
 						teleport(player, positions[2]);
 					}
 				} else {
-					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup2())) {
+					if (!isReinforcing() && secGroup != null && secGroup.equals(player.getPlayerAllianceGroup())) {
 						teleport(player, positions[1]);
 					} else {
 						teleport(player, positions[0]);
@@ -140,7 +140,7 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 	}
 
 	public void teleport(Player player, float[] coordinates) {
-		TeleportService2.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2]);
+		TeleportService.teleportTo(player, mapId, instanceId, coordinates[0], coordinates[1], coordinates[2]);
 	}
 
 }

@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -148,11 +148,11 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 730876:
-				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60,
+				TeleportService.teleportTo(player, player.getWorldId(), player.getInstanceId(), 721.84f, 889.93f, 411.45f, (byte) 60,
 					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730877:
-				TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120,
+				TeleportService.teleportTo(player, player.getWorldId(), player.getInstanceId(), 880.82f, 889.93f, 411.45f, (byte) 120,
 					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 		}

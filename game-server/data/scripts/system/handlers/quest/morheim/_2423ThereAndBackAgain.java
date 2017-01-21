@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Cheatkiller
@@ -58,7 +58,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							return checkQuestItems(env, 1, 2, false, 10000, 10001);
 						}
 						case SETPRO3: {
-							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(3);
 							return defaultCloseDialog(env, 3, 3, true, false);
 						}
@@ -66,7 +66,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							return sendQuestDialog(env, 1779);
 						}
 						case SETPRO1: {
-							TeleportService2.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210020000, 1, 370.13f, 2682.59f, 171, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}

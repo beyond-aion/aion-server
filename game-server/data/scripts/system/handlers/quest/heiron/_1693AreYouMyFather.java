@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Cheatkiller
@@ -60,7 +60,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 							return false;
 						}
 						case SETPRO1: {
-							TeleportService2.teleportTo(player, 110010000, 1323.37f, 1511.89f, 567.87f, (byte) 0);
+							TeleportService.teleportTo(player, 110010000, 1323.37f, 1511.89f, 567.87f, (byte) 0);
 							return defaultCloseDialog(env, 0, 1);
 						}
 					}

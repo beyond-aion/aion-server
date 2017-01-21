@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AISubState;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.AISubState;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -160,7 +160,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param isNewInAggroList
 	 */
 	public void onAddHate(Creature attacker, boolean isNewInAggroList) {
-		getOwner().getAi2().onCreatureEvent(AIEventType.ATTACK, attacker);
+		getOwner().getAi().onCreatureEvent(AIEventType.ATTACK, attacker);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		// notify all NPC's around that creature is attacking me
-		getOwner().getKnownList().forEachNpc(npc -> npc.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
+		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
 	}
 
 	private void applyEffectOnCritical(Player attacker, int skillId) {
@@ -544,8 +544,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			((Npc) creature).getGameStats().setLastSkill(null);
 		}
 		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
-		if (getOwner().getAi2() instanceof NpcAI2) {
-			NpcAI2 npcAI = (NpcAI2) getOwner().getAi2();
+		if (getOwner().getAi() instanceof NpcAI) {
+			NpcAI npcAI = (NpcAI) getOwner().getAi();
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			if (creature.getSkillNumber() > 0)

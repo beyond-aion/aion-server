@@ -59,7 +59,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 
 		spawned = true;
 
-		if (DataManager.SPAWNS_DATA2.getAssaultSpawnBySiegeId(locationId).getAssaultWaves().isEmpty())
+		if (DataManager.SPAWNS_DATA.getAssaultSpawnBySiegeId(locationId).getAssaultWaves().isEmpty())
 			return;
 
 		initiateSpawn(getWave(AssaultType.TELEPORT));
@@ -117,7 +117,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 
 	private AssaultWave getWave(AssaultType aType) {
 		AssaultWave wave = null;
-		AssaultSpawn spawn = DataManager.SPAWNS_DATA2.getAssaultSpawnBySiegeId(locationId);
+		AssaultSpawn spawn = DataManager.SPAWNS_DATA.getAssaultSpawnBySiegeId(locationId);
 		if (spawn == null) {
 			log.warn("There are no assault spawns for siege " + locationId + " and wave " + aType);
 			return wave;

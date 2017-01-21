@@ -8,7 +8,7 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -246,7 +246,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	public void onPlayerLogOut(Player player) {
 		super.onPlayerLogOut(player);
 		if (player.getLifeStats().isAlreadyDead()) {
-			TeleportService2.moveToBindLocation(player);
+			TeleportService.moveToBindLocation(player);
 		}
 	}
 

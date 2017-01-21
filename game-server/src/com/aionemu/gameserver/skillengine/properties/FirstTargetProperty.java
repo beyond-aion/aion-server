@@ -153,10 +153,10 @@ public class FirstTargetProperty {
 				Creature effected = skill.getFirstTarget();
 				if (effected == null || skill.getEffector() == null)
 					return false;
-				if (!(effected instanceof Player) || !(skill.getEffector() instanceof Player) || !((Player) skill.getEffector()).isInGroup2())
+				if (!(effected instanceof Player) || !(skill.getEffector() instanceof Player) || !((Player) skill.getEffector()).isInGroup())
 					return false;
 				boolean myParty = false;
-				for (Player member : ((Player) skill.getEffector()).getPlayerGroup2().getMembers()) {
+				for (Player member : ((Player) skill.getEffector()).getPlayerGroup().getMembers()) {
 					if (member == skill.getEffector())
 						continue;
 					if (member == effected) {

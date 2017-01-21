@@ -11,7 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CAPTCHA;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ban.ChatBanService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -78,7 +78,7 @@ public class PunishmentService {
 				schedulePrisonTask(player, prisonTimer);
 				ChatBanService.banPlayer(player, delayInMinutes);
 				player.setStartPrison(System.currentTimeMillis());
-				TeleportService2.teleportToPrison(player);
+				TeleportService.teleportToPrison(player);
 				DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
@@ -86,7 +86,7 @@ public class PunishmentService {
 		} else {
 			player.setPrisonTimer(0);
 			ChatBanService.unbanPlayer(player);
-			TeleportService2.moveToBindLocation(player);
+			TeleportService.moveToBindLocation(player);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
 			PacketSendUtility.sendMessage(player, "You come out of prison.");
 		}
@@ -137,7 +137,7 @@ public class PunishmentService {
 
 					@Override
 					public void run() {
-						TeleportService2.teleportToPrison(player);
+						TeleportService.teleportToPrison(player);
 					}
 				}, 60000);
 			}

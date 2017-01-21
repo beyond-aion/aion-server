@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -25,7 +25,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -527,7 +527,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override
@@ -535,7 +535,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
-		TeleportService2.teleportTo(player, mapId, instanceId, 361.706f, 182.503f, 1684.290f, (byte) 0);
+		TeleportService.teleportTo(player, mapId, instanceId, 361.706f, 182.503f, 1684.290f, (byte) 0);
 		return true;
 	}
 
@@ -553,7 +553,7 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		final Npc npc = (Npc) spawn(id, x, y, z, h);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			npc.getSpawn().setWalkerId(walkerId);
-			WalkManager.startWalking((NpcAI2) npc.getAi2());
+			WalkManager.startWalking((NpcAI) npc.getAi());
 			npc.setState(state, true);
 			PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 		}, delay);

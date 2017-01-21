@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.findgroup;
 
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.alliance.callback.PlayerAllianceDisbandCallback;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceDisbandCallback;
 
 /**
  * @author Rolandas

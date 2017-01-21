@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.instance.instanceposition;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author xTz
@@ -23,6 +23,6 @@ public class GenerealInstancePosition implements InstancePositionHandler {
 	}
 
 	protected void teleport(Player player, float x, float y, float z, byte h) {
-		TeleportService2.teleportTo(player, mapId, instanceId, x, y, z, h);
+		TeleportService.teleportTo(player, mapId, instanceId, x, y, z, h);
 	}
 }

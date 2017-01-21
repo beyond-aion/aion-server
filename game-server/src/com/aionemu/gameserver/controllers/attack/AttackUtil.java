@@ -466,10 +466,10 @@ public class AttackUtil {
 		}
 
 		if (effected instanceof Npc) {
-			damage = effected.getAi2().modifyDamage(effector, damage, effect);
+			damage = effected.getAi().modifyDamage(effector, damage, effect);
 		}
 		if (effector instanceof Npc) {
-			damage = effector.getAi2().modifyOwnerDamage(damage);
+			damage = effector.getAi().modifyOwnerDamage(damage);
 		}
 
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())
@@ -589,7 +589,7 @@ public class AttackUtil {
 			damage = 1;
 
 		if (effected instanceof Npc)
-			damage = effected.getAi2().modifyDamage(effector, damage, effect);
+			damage = effected.getAi().modifyDamage(effector, damage, effect);
 
 		return damage;
 	}

@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -88,7 +88,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 					case SETPRO3:
 						qs.setQuestVar(var + 1); // 3
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 220070000, player.getInstanceId(), 1868, 2746, 531, (byte) 20);
+						TeleportService.teleportTo(player, 220070000, player.getInstanceId(), 1868, 2746, 531, (byte) 20);
 						return closeDialogWindow(env); // 1
 				}
 			} else if (targetId == 799225) { // Richelle

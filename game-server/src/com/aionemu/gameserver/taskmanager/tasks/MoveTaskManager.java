@@ -5,8 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinTask;
 import java.util.function.Consumer;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.parallel.ForEach;
@@ -32,12 +32,12 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 				return;
 			}
 			creature.getMoveController().moveToDestination();
-			if (creature.getAi2().ask(AIQuestion.DESTINATION_REACHED)) {
+			if (creature.getAi().ask(AIQuestion.DESTINATION_REACHED)) {
 				removeCreature(creature);
-				creature.getAi2().onGeneralEvent(AIEventType.MOVE_ARRIVED);
+				creature.getAi().onGeneralEvent(AIEventType.MOVE_ARRIVED);
 				ZoneUpdateService.getInstance().add(creature);
 			} else {
-				creature.getAi2().onGeneralEvent(AIEventType.MOVE_VALIDATE);
+				creature.getAi().onGeneralEvent(AIEventType.MOVE_VALIDATE);
 			}
 
 		}

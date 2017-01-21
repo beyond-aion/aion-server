@@ -23,7 +23,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -126,7 +126,7 @@ public class WebRewardService {
 				}
 				VisibleObject questNpc = player.getKnownList().findObject(questNpcId);
 				if (questNpc == null || MathUtil.getDistance(player, questNpc) >= 20)
-					TeleportService2.sendTeleportRequest(player, questNpcId); // completing the quest (updates daeva status) calls the reward method again
+					TeleportService.sendTeleportRequest(player, questNpcId); // completing the quest (updates daeva status) calls the reward method again
 			} else {
 				int maxLevel = DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() - 1; // max is 66
 				if (player.getLevel() >= maxLevel)
@@ -136,7 +136,7 @@ public class WebRewardService {
 				player.getCommonData().setLevel(maxLevel);
 				String message = ChatUtil.nameId(904804 * 2 + 1) + " Level " + player.getLevel(); // You receive the following reward: Level 65
 				PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW);
-				TeleportService2.sendTeleportRequest(player, player.getRace() == Race.ELYOS ? 798926 : 799225); // Outremus / Richelle for daevanion quests
+				TeleportService.sendTeleportRequest(player, player.getRace() == Race.ELYOS ? 798926 : 799225); // Outremus / Richelle for daevanion quests
 			}
 			return true;
 		}

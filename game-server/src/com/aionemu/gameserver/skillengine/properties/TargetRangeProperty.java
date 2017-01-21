@@ -138,9 +138,9 @@ public class TargetRangeProperty {
 				if (skill.getEffector() instanceof Player) {
 					Player effector = (Player) skill.getEffector();
 					// TODO merge groups ?
-					if (effector.isInAlliance2()) {
+					if (effector.isInAlliance()) {
 						effectedList.clear();
-						for (Player player : effector.getPlayerAllianceGroup2().getMembers()) {
+						for (Player player : effector.getPlayerAllianceGroup().getMembers()) {
 							if (partyCount >= 6 || partyCount >= maxcount)
 								break;
 							if (!player.isOnline())
@@ -150,9 +150,9 @@ public class TargetRangeProperty {
 								partyCount++;
 							}
 						}
-					} else if (effector.isInGroup2()) {
+					} else if (effector.isInGroup()) {
 						effectedList.clear();
-						for (Player member : effector.getPlayerGroup2().getMembers()) {
+						for (Player member : effector.getPlayerGroup().getMembers()) {
 							if (partyCount >= maxcount)
 								break;
 							// TODO: here value +4 till better move controller developed
@@ -167,10 +167,10 @@ public class TargetRangeProperty {
 			case PARTY_WITHPET:
 				if (skill.getEffector() instanceof Player) {
 					final Player effector = (Player) skill.getEffector();
-					if (effector.isInAlliance2()) {
+					if (effector.isInAlliance()) {
 						effectedList.clear();
 						// TODO may be alliance group ?
-						for (Player player : effector.getPlayerAlliance2().getMembers()) {
+						for (Player player : effector.getPlayerAlliance().getMembers()) {
 							if (!player.isOnline())
 								continue;
 							if (player.getLifeStats().isAlreadyDead())
@@ -182,9 +182,9 @@ public class TargetRangeProperty {
 									effectedList.add(aMemberSummon);
 							}
 						}
-					} else if (effector.isInGroup2()) {
+					} else if (effector.isInGroup()) {
 						effectedList.clear();
-						for (Player member : effector.getPlayerGroup2().getMembers()) {
+						for (Player member : effector.getPlayerGroup().getMembers()) {
 							if (!member.isOnline())
 								continue;
 							if (member.getLifeStats().isAlreadyDead())

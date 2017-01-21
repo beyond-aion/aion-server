@@ -92,7 +92,7 @@ public final class DataManager {
 	public static SkillChargeData SKILL_CHARGE_DATA;
 	public static SkillData SKILL_DATA;
 	public static SkillTreeData SKILL_TREE_DATA;
-	public static SpawnsData2 SPAWNS_DATA2;
+	public static SpawnsData SPAWNS_DATA;
 	public static StaticDoorData STATICDOOR_DATA;
 	public static TeleLocationData TELELOCATION_DATA;
 	public static TeleporterData TELEPORTER_DATA;
@@ -180,7 +180,7 @@ public final class DataManager {
 		WINDSTREAM_DATA = data.windstreamsData;
 		ASSEMBLED_NPC_DATA = data.assembledNpcData;
 		COSMETIC_ITEMS_DATA = data.cosmeticItemsData;
-		SPAWNS_DATA2 = data.spawnsData2;
+		SPAWNS_DATA = data.spawnsData;
 		ITEM_GROUPS_DATA = data.itemGroupsData;
 		ASSEMBLY_ITEM_DATA = data.assemblyItemData;
 		AUTO_GROUP = data.autoGroupData;

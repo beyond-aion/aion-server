@@ -3,20 +3,20 @@ package ai.worlds.panesterra.ahserionsflight;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaidStatus;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 
-import ai.AggressiveNpcAI2;
+import ai.AggressiveNpcAI;
 
 /**
  * @author Yeats
  */
 @AIName("ahserion")
-public class Ahserion extends AggressiveNpcAI2 {
+public class Ahserion extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {

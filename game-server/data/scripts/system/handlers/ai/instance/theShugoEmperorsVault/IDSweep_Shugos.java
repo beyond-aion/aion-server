@@ -1,18 +1,18 @@
 package ai.instance.theShugoEmperorsVault;
 
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.poll.AIQuestion;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 
-import ai.AggressiveNpcAI2;
+import ai.AggressiveNpcAI;
 
 /**
  * @author Yeats
  */
 @AIName("IDSweep_shugos")
-public class IDSweep_Shugos extends AggressiveNpcAI2 {
+public class IDSweep_Shugos extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {

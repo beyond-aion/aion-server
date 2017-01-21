@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
@@ -75,7 +75,7 @@ public class SummonServantEffect extends SummonEffect {
 		}, (time + 5) * 1000);
 		servant.getController().addTask(TaskId.DESPAWN, task);
 		if (servant.getNpcObjectType() != NpcObjectType.TOTEM)
-			servant.getAi2().onCreatureEvent(AIEventType.ATTACK, (target != null ? target : effected));
+			servant.getAi().onCreatureEvent(AIEventType.ATTACK, (target != null ? target : effected));
 		return servant;
 	}
 }

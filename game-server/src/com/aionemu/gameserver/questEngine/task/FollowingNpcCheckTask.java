@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.questEngine.task;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -63,8 +63,8 @@ public class FollowingNpcCheckTask implements Runnable {
 		Player player = env.getPlayer();
 		Npc npc = (Npc) destinationChecker.getFollower();
 		player.getController().cancelTask(TaskId.QUEST_FOLLOW);
-		npc.getAi2().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, player);
-		if (!npc.getAi2().getName().equals("following"))
+		npc.getAi().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, player);
+		if (!npc.getAi().getName().equals("following"))
 			npc.getController().delete();
 	}
 }

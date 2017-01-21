@@ -18,7 +18,7 @@ import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_RENDER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -121,13 +121,13 @@ public class HouseController extends VisibleObjectController<House> {
 			float x = getOwner().getAddress().getExitX();
 			float y = getOwner().getAddress().getExitY();
 			float z = getOwner().getAddress().getExitZ();
-			TeleportService2.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+			TeleportService.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 		} else {
 			Npc sign = getOwner().getCurrentSign();
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(sign.getHeading()));
 			float x = (float) (sign.getX() + (8 * Math.cos(radian)));
 			float y = (float) (sign.getY() + (8 * Math.sin(radian)));
-			TeleportService2.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+			TeleportService.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 		}
 		if (onSettingsChange)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER());

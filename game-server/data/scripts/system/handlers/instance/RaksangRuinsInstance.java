@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -132,7 +132,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				break;
 			case 730438: // Terror' Vault
 				if (isDoorAccessible)
-					TeleportService2.teleportTo(player, mapId, instanceId, 711.10895f, 312.82013f, 910.6781f);
+					TeleportService.teleportTo(player, mapId, instanceId, 711.10895f, 312.82013f, 910.6781f);
 				else
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_DOOR_CONDITION());
 				break;
@@ -302,7 +302,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	@Override
 	public void onPlayerLogOut(Player player) {
 		player.getInventory().decreaseByItemId(164000342, 20);
-		TeleportService2.moveToInstanceExit(player, WorldMapType.RAKSANG_RUINS.getId(), player.getRace());
+		TeleportService.moveToInstanceExit(player, WorldMapType.RAKSANG_RUINS.getId(), player.getRace());
 	}
 
 	@Override

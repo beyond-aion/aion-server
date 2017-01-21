@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -55,7 +55,7 @@ public class HouseCommand extends AdminCommand {
 				return;
 			}
 			HouseAddress address = house.getAddress();
-			TeleportService2.teleportTo(admin, address.getMapId(), address.getX(), address.getY(), address.getZ());
+			TeleportService.teleportTo(admin, address.getMapId(), address.getX(), address.getY(), address.getZ());
 		}
 
 	}

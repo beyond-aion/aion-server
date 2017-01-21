@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
@@ -100,7 +100,7 @@ public class SpawnUpdate extends AdminCommand {
 			"Updated " + target.getClass().getSimpleName() + "'s coordinates to\nX:" + tPos.getX() + " Y:" + tPos.getY() + " Z:" + tPos.getZ() + " H:"
 				+ tPos.getHeading() + ".");
 
-		if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
+		if (!DataManager.SPAWNS_DATA.saveSpawn(target, false))
 			sendInfo(admin, "Could not save spawn. Maybe it's a special or temporary spawn (siege, base, invasion, ...) which cannot be altered.");
 	}
 
@@ -116,7 +116,7 @@ public class SpawnUpdate extends AdminCommand {
 					sendInfo(admin, "No such template exists in npc_walker.xml.");
 					return;
 				}
-				List<SpawnGroup2> allSpawns = DataManager.SPAWNS_DATA2.getSpawnsByWorldId(target.getWorldId());
+				List<SpawnGroup> allSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(target.getWorldId());
 				List<SpawnTemplate> allSpots = allSpawns.stream().flatMap(s -> s.getSpawnTemplates().stream()).collect(Collectors.toList());
 				List<SpawnTemplate> sameIds = allSpots.stream().filter(s -> s.getWalkerId().equals(walkerId)).collect(Collectors.toList());
 				if (sameIds.size() >= template.getPool()) {
@@ -131,7 +131,7 @@ public class SpawnUpdate extends AdminCommand {
 				sendInfo(admin, "Removed npcs walker_id " + oldId + " for " + target.getNpcId() + ".");
 			else
 				sendInfo(admin, "Updated npcs walker_id from " + oldId + " to " + walkerId + ".");
-			if (!DataManager.SPAWNS_DATA2.saveSpawn(target, false))
+			if (!DataManager.SPAWNS_DATA.saveSpawn(target, false))
 				sendInfo(admin, "Could not save spawn.");
 		}
 	}

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -81,7 +81,7 @@ public class _1482ATeleportationAdventure extends QuestHandler {
 							qs.setQuestVar(3);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							TeleportService2.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20);
+							TeleportService.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20);
 							return true;
 						}
 						case CHECK_USER_HAS_QUEST_ITEM: {

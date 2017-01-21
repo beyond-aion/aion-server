@@ -6,7 +6,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author zhkchi
@@ -57,7 +57,7 @@ public class _18303MakingASurCantA extends QuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1007);
 					case SETPRO1:
-						TeleportService2.teleportTo(player, 300240000, 158.88f, 624.42f, 901f, (byte) 20);
+						TeleportService.teleportTo(player, 300240000, 158.88f, 624.42f, 901f, (byte) 20);
 						return closeDialogWindow(env);
 					default:
 						return sendQuestStartDialog(env);

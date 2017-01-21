@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services.summons;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -33,8 +33,8 @@ public class SummonsService {
 			return;
 		}
 		Summon summon = VisibleObjectSpawner.spawnSummon(master, npcId, skillId, time);
-		if (summon.getAi2().getName().equals("siege_weapon")) {
-			summon.getAi2().onGeneralEvent(AIEventType.SPAWNED);
+		if (summon.getAi().getName().equals("siege_weapon")) {
+			summon.getAi().onGeneralEvent(AIEventType.SPAWNED);
 		}
 		master.setSummon(summon);
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL(summon));

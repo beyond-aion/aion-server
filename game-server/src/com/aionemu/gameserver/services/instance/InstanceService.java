@@ -16,14 +16,14 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.league.League;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -212,12 +212,12 @@ public class InstanceService {
 	private static int getLastRegisteredId(Player player) {
 		int lookupId;
 		boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
-		if (player.isInGroup2()) {
-			lookupId = player.getPlayerGroup2().getTeamId();
-		} else if (player.isInAlliance2()) {
-			lookupId = player.getPlayerAlliance2().getTeamId();
+		if (player.isInGroup()) {
+			lookupId = player.getPlayerGroup().getTeamId();
+		} else if (player.isInAlliance()) {
+			lookupId = player.getPlayerAlliance().getTeamId();
 			if (player.isInLeague()) {
-				lookupId = player.getPlayerAlliance2().getLeague().getObjectId();
+				lookupId = player.getPlayerAlliance().getLeague().getObjectId();
 			}
 		} else if (isPersonal && player.getCommonData().getWorldOwnerId() != 0) {
 			lookupId = player.getCommonData().getWorldOwnerId();
@@ -275,7 +275,7 @@ public class InstanceService {
 	 * @param portalTemplates
 	 */
 	public static void moveToExitPoint(Player player) {
-		TeleportService2.moveToInstanceExit(player, player.getWorldId(), player.getRace());
+		TeleportService.moveToInstanceExit(player, player.getWorldId(), player.getRace());
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
-import com.aionemu.gameserver.model.team2.league.LeagueService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -38,7 +38,7 @@ public class CM_GROUP_DISTRIBUTION extends AionClientPacket {
 
 		switch (partyType) {
 			case 1:
-				if (player.isInAlliance2()) {
+				if (player.isInAlliance()) {
 					PlayerAllianceService.distributeKinahInGroup(player, amount);
 				} else {
 					PlayerGroupService.distributeKinah(player, amount);

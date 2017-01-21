@@ -12,8 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -200,7 +200,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		PlayerGroup group = player.getPlayerGroup2();
+		PlayerGroup group = player.getPlayerGroup();
 
 		if (group != null && group.isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_ADD_NEW_MEMBER());
@@ -220,12 +220,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		} else if (player.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD());
 			return false;
-		} else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId().equals(target.getPlayerGroup2().getTeamId())) {
+		} else if (player.isInGroup() && target.isInGroup() && player.getPlayerGroup().getTeamId().equals(target.getPlayerGroup().getTeamId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
-		} else if (target.isInGroup2()) {
+		} else if (target.isInGroup()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OTHER_PARTY(target.getName()));
 			return false;
-		} else if (target.isInAlliance2()) {
+		} else if (target.isInAlliance()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ALREADY_OTHER_FORCE(target.getName()));
 			return false;
 		}
@@ -257,7 +257,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		PlayerAlliance alliance = player.getPlayerAlliance2();
+		PlayerAlliance alliance = player.getPlayerAlliance();
 		if (alliance != null && alliance.getTeamType().isDefence()) {
 			if (target.isInTeam()) {
 				for (Player tm : target.getCurrentTeam().getMembers()) {
@@ -276,8 +276,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			}
 		}
 
-		if (target.isInAlliance2()) {
-			if (target.getPlayerAlliance2() == alliance) {
+		if (target.isInAlliance()) {
+			if (target.getPlayerAlliance() == alliance) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_IS_ALREADY_MEMBER_OF_OUR_ALLIANCE(target.getName()));
 				return false;
 			} else {
@@ -311,8 +311,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		if (target.isInGroup2()) {
-			PlayerGroup targetGroup = target.getPlayerGroup2();
+		if (target.isInGroup()) {
+			PlayerGroup targetGroup = target.getPlayerGroup();
 			if (alliance != null && (targetGroup.size() + alliance.size() >= 24)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_FAILED_NOT_ENOUGH_SLOT());
 				return false;

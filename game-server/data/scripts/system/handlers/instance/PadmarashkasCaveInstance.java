@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -50,7 +50,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 
 							@Override
 							public void run() {
-								padmarashka.getAi2().onCreatureEvent(AIEventType.CREATURE_AGGRO, instance.getPlayersInside().get(0));
+								padmarashka.getAi().onCreatureEvent(AIEventType.CREATURE_AGGRO, instance.getPlayersInside().get(0));
 							}
 						}, 1000);
 					}

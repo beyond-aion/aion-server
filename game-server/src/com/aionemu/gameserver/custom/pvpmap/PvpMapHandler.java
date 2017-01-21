@@ -34,7 +34,7 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.spawnengine.StaticDoorSpawnManager;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -145,7 +145,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 						updateJoinOrLeaveTime(p);
 						InstanceService.registerPlayerWithInstance(instance, p);
 						WorldPosition pos = respawnLocations.get(Rnd.get(0, respawnLocations.size() - 1));
-						TeleportService2.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+						TeleportService.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 							TeleportAnimation.BATTLEGROUND);
 					}
 				}
@@ -213,7 +213,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			}
 		} else {
 			WorldPosition pos = respawnLocations.get(Rnd.get(respawnLocations.size()));
-			TeleportService2.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
+			TeleportService.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 				TeleportAnimation.BATTLEGROUND);
 		}
 		return true;
@@ -348,10 +348,10 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		}
 		WorldPosition position = origins.get(p.getObjectId());
 		if (position != null && !isAtVulnerableFortress(position.getMapId(), position.getX(), position.getY(), position.getZ())) {
-			TeleportService2.teleportTo(p, position);
+			TeleportService.teleportTo(p, position);
 			origins.remove(p.getObjectId());
 		} else {
-			TeleportService2.moveToBindLocation(p);
+			TeleportService.moveToBindLocation(p);
 		}
 	}
 

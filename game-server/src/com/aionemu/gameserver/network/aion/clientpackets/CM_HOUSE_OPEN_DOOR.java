@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -54,7 +54,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 
 		if (leave) {
 			if (house.getAddress().getExitMapId() != null) {
-				TeleportService2.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(), house
+				TeleportService.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(), house
 					.getAddress().getExitZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			} else {
 				if (GeoDataConfig.GEO_ENABLE) {
@@ -65,13 +65,13 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 					double radian = Math.toRadians(MathUtil.calculateAngleFrom(player.getX(), player.getY(), colWall.x, colWall.y));
 					float x = (float) (Math.cos(radian) * 0.1);
 					float y = (float) (Math.sin(radian) * 0.1);
-					TeleportService2.teleportTo(player, house.getWorldId(), colWall.getX() + x, colWall.getY() + y, player.getZ(), (byte) 0,
+					TeleportService.teleportTo(player, house.getWorldId(), colWall.getX() + x, colWall.getY() + y, player.getZ(), (byte) 0,
 						TeleportAnimation.FADE_OUT_BEAM);
 				} else {
 					double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
 					float x = (float) (Math.cos(radian) * 6);
 					float y = (float) (Math.sin(radian) * 6);
-					TeleportService2.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, player.getZ(), (byte) 0,
+					TeleportService.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, player.getZ(), (byte) 0,
 						TeleportAnimation.FADE_OUT_BEAM);
 				}
 			}
@@ -92,7 +92,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
 			float x = (float) (Math.cos(radian) * 6);
 			float y = (float) (Math.sin(radian) * 6);
-			TeleportService2.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, house.getAddress().getZ(), (byte) 0,
+			TeleportService.teleportTo(player, house.getWorldId(), player.getX() + x, player.getY() + y, house.getAddress().getZ(), (byte) 0,
 				TeleportAnimation.FADE_OUT_BEAM);
 		}
 	}

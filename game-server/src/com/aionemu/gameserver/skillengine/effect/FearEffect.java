@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -68,7 +68,7 @@ public class FearEffect extends EffectTemplate {
 		effected.getController().stopMoving();
 
 		if (effected instanceof Npc)
-			((NpcAI2) effected.getAi2()).setStateIfNot(AIState.FEAR);
+			((NpcAI) effected.getAi()).setStateIfNot(AIState.FEAR);
 		if (GeoDataConfig.FEAR_ENABLE) {
 			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
 			effect.setPeriodicTask(fearTask);
@@ -99,7 +99,7 @@ public class FearEffect extends EffectTemplate {
 			effect.getEffected().getMoveController().abortMove();// TODO impl stopMoving?
 		}
 		if (effect.getEffected() instanceof Npc) {
-			((NpcAI2) effect.getEffected().getAi2()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
+			((NpcAI) effect.getEffected().getAi()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
 		}
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
 

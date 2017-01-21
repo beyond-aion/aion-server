@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services.vortex;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -97,12 +97,12 @@ public abstract class DimensionalVortex<VL extends VortexLocation> {
 	}
 
 	protected void registerSiegeBossListeners() {
-		AbstractAI ai = (AbstractAI) getGenerator().getAi2();
+		AbstractAI ai = (AbstractAI) getGenerator().getAi();
 		ai.addEventListener(generatorDestroyListener);
 	}
 
 	protected void unregisterSiegeBossListeners() {
-		AbstractAI ai = (AbstractAI) getGenerator().getAi2();
+		AbstractAI ai = (AbstractAI) getGenerator().getAi();
 		ai.removeEventListener(generatorDestroyListener);
 	}
 

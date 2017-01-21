@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropExcludedNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
@@ -82,7 +82,7 @@ public class DropRegistrationService {
 		int dropChance = 100;
 		int npcLevel = npc.getLevel();
 		String dropType = npc.getGroupDrop().name().toLowerCase();
-		boolean isChest = npc.getAi2().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
+		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 		if (!DropConfig.DISABLE_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
 			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - highestLevel); // reduce chance depending on level
 		}
@@ -94,7 +94,7 @@ public class DropRegistrationService {
 		// Distributing drops to players
 		Collection<Player> dropPlayers = new FastTable<>();
 		Collection<Player> winningPlayers = new FastTable<>();
-		if (player.isInGroup2() || player.isInAlliance2()) {
+		if (player.isInGroup() || player.isInAlliance()) {
 			List<Integer> dropMembers = new FastTable<>();
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
 
@@ -122,7 +122,7 @@ public class DropRegistrationService {
 					winningPlayers = groupMembers;
 					break;
 				case LEADER:
-					Player leader = player.isInGroup2() ? player.getPlayerGroup2().getLeaderObject() : player.getPlayerAlliance2().getLeaderObject();
+					Player leader = player.isInGroup() ? player.getPlayerGroup().getLeaderObject() : player.getPlayerAlliance().getLeaderObject();
 					winningPlayers.add(leader);
 					winnerObj = leader.getObjectId();
 					setItemsToWinner(droppedItems, winnerObj);
@@ -178,7 +178,7 @@ public class DropRegistrationService {
 		index = QuestService.getQuestDrop(droppedItems, index, npc, groupMembers, genesis);
 
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
-			boolean isNpcQuest = npc.getAi2().getName().equals("quest_use_item");
+			boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
 			// if npc ai == quest_use_item it will be always excluded from event drops
 			// also check if npc must be excluded due to global npc restrictions
 			if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
@@ -254,7 +254,7 @@ public class DropRegistrationService {
 						if (alloweditems.size() == 0)
 							continue;
 
-						if (rule.getMemberLimit() > 1 && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
+						if (rule.getMemberLimit() > 1 && (player.isInGroup() || player.isInAlliance() || player.isInLeague())) {
 							final int limit = rule.getMemberLimit();
 							int distributedItems = 0;
 							for (Player member : winningPlayers) {
@@ -281,7 +281,7 @@ public class DropRegistrationService {
 		}
 
 		// if npc ai == quest_use_item it will be always excluded from global drops
-		boolean isNpcQuest = npc.getAi2().getName().equals("quest_use_item");
+		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
 		// instances with WorldDropType.NONE must not have global drops (example Arenas)
 		if (!isNpcQuest && !hasGlobalNpcExclusions(npc) && npc.getWorldDropType() != WorldDropType.NONE) {
 			for (GlobalRule rule : DataManager.GLOBAL_DROP_DATA.getAllRules()) {
@@ -351,7 +351,7 @@ public class DropRegistrationService {
 				if (alloweditems.size() == 0)
 					continue;
 
-				if (rule.getMemberLimit() > 1 && (player.isInGroup2() || player.isInAlliance2() || player.isInLeague())) {
+				if (rule.getMemberLimit() > 1 && (player.isInGroup() || player.isInAlliance() || player.isInLeague())) {
 					final int limit = rule.getMemberLimit();
 					int distributedItems = 0;
 					for (Player member : winningPlayers) {
@@ -378,7 +378,7 @@ public class DropRegistrationService {
 		if (npc.getPosition().isInstanceMap()) {
 			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc);
 		}
-		npc.getAi2().onGeneralEvent(AIEventType.DROP_REGISTERED);
+		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
 		for (Player p : dropPlayers) {
 			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, 0));

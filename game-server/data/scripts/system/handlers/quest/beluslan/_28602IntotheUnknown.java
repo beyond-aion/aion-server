@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -109,7 +109,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 				} else if (env.getDialog() == DialogAction.SETPRO1) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
 					InstanceService.registerPlayerWithInstance(newInstance, player);
-					TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
+					TeleportService.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
 						TeleportAnimation.FADE_OUT_BEAM);
 					changeQuestStep(env, 0, 1); // 1
 					return closeDialogWindow(env);
@@ -127,13 +127,13 @@ public class _28602IntotheUnknown extends QuestHandler {
 					if (var == 1) {
 						if (checkItemExistence(env, 185000109, 1, true)) { // Hisen's key
 							changeQuestStep(env, 1, 2); // 2
-							TeleportService2.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {
 							return sendQuestDialog(env, 10001);
 						}
 					} else {
-						TeleportService2.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 300230000, 687.56116f, 681.68225f, 200.28648f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 					}
 				}

@@ -5,9 +5,9 @@ import java.util.List;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
-import com.aionemu.gameserver.model.team2.TeamType;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.TeamType;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -76,7 +76,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	@Override
 	public void onEnterInstance(Player player) {
 		super.onEnterInstance(player);
-		if (player.isInGroup2()) {
+		if (player.isInGroup()) {
 			return;
 		}
 		Integer object = player.getObjectId();
@@ -84,7 +84,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (group != null) {
 			List<Player> _players = getPlayerFromGroup(group);
 			_players.remove(player);
-			if (_players.size() == 1 && !_players.get(0).isInGroup2()) {
+			if (_players.size() == 1 && !_players.get(0).isInGroup()) {
 				HarmonyArenaReward reward = (HarmonyArenaReward) instance.getInstanceHandler().getInstanceReward();
 				HarmonyGroupReward r = reward.getHarmonyGroupReward(object);
 				PlayerGroup newGroup = PlayerGroupService.createGroup(_players.get(0), player, TeamType.AUTO_GROUP, r.getId());
@@ -92,8 +92,8 @@ public class AutoHarmonyInstance extends AutoInstance {
 				if (!instance.isRegistered(groupId)) {
 					instance.register(groupId);
 				}
-			} else if (!_players.isEmpty() && _players.get(0).isInGroup2()) {
-				PlayerGroupService.addPlayer(_players.get(0).getPlayerGroup2(), player);
+			} else if (!_players.isEmpty() && _players.get(0).isInGroup()) {
+				PlayerGroupService.addPlayer(_players.get(0).getPlayerGroup(), player);
 			}
 			if (!instance.isRegistered(object)) {
 				instance.register(object);
@@ -159,7 +159,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 			}
 		}
 		if (group.size() + searchInstance.getMembers().size() <= 3) {
-			for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
+			for (Player member : player.getPlayerGroup().getOnlineMembers()) {
 				Integer obj = member.getObjectId();
 				if (searchInstance.getMembers().contains(obj)) {
 					AGPlayer agp = new AGPlayer(member);

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -75,7 +75,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 							}
 							break;
 						case SETPRO2:
-							TeleportService2.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210060000, 2012.37f, 438.231f, 126.020f, (byte) 7, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 1, 2); // 2
 						case SETPRO4:
 							if (!giveQuestItem(env, 182215387, 1))
@@ -87,7 +87,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					if (dialog == DialogAction.USE_OBJECT && var == 4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService2.teleportTo(player, 310120000, newInstance.getInstanceId(), 52, 174, 229);
+						TeleportService.teleportTo(player, 310120000, newInstance.getInstanceId(), 52, 174, 229);
 						return true;
 					}
 					break;
@@ -114,7 +114,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					if (dialog == DialogAction.USE_OBJECT && var == 56) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						return useQuestObject(env, 56, 56, false, 0, 0, 0, 182215387, 1, 0, false); // 56
 					}
 					break;

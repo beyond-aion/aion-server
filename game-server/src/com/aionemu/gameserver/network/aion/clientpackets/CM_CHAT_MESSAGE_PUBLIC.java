@@ -59,7 +59,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 				broadcastToGroupMembers(player);
 				break;
 			case ALLIANCE:
-				if (!player.isInAlliance2())
+				if (!player.isInAlliance())
 					return;
 				broadcastToAllianceMembers(player);
 				break;
@@ -67,7 +67,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 				if (!player.isInTeam())
 					return;
 				// Alert must go to entire group or alliance.
-				if (player.isInGroup2())
+				if (player.isInGroup())
 					broadcastToGroupMembers(player);
 				else
 					broadcastToAllianceMembers(player);
@@ -130,7 +130,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToAllianceMembers(final Player player) {
-		player.getPlayerAlliance2().sendPacket(new SM_MESSAGE(player, message, type));
+		player.getPlayerAlliance().sendPacket(new SM_MESSAGE(player, message, type));
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToLeagueMembers(final Player player) {
-		player.getPlayerAlliance2().getLeague().sendPacket(new SM_MESSAGE(player, message, type));
+		player.getPlayerAlliance().getLeague().sendPacket(new SM_MESSAGE(player, message, type));
 	}
 
 	/**

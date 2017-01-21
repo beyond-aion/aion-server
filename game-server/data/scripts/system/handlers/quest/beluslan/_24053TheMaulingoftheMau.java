@@ -1,6 +1,6 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -131,7 +131,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					if (var == 2) {
 						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),
 							player.getZ(), (byte) 0);
-						survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
+						survivor.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 						player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
 						return defaultCloseDialog(env, 2, 3);
 					}

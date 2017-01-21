@@ -18,7 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -64,7 +64,7 @@ public class NochsanaEvent extends GameEvent {
 		}
 
 		Npc target = base.getTarget();
-		TeleportService2.teleportTo(player, this.mapId, this.instanceId, target.getX(), target.getY(), target.getZ(), target.getHeading(),
+		TeleportService.teleportTo(player, this.mapId, this.instanceId, target.getX(), target.getY(), target.getZ(), target.getHeading(),
 			TeleportAnimation.JUMP_IN_STATUE);
 
 	}

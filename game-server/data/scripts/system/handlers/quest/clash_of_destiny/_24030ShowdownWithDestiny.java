@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -104,7 +104,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 							updateQuestStatus(env);
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320140000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService2.teleportTo(player, 320140000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
+							TeleportService.teleportTo(player, 320140000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
 							return true;
 						case SET_SUCCEED:
 							if (var == 8) {
@@ -169,7 +169,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 			if (var == 7) {
 				qs.setQuestVar(8);
 				updateQuestStatus(env);
-				TeleportService2.teleportTo(player, 220010000, (float) 385, (float) 1895, (float) 327, (byte) 58);
+				TeleportService.teleportTo(player, 220010000, (float) 385, (float) 1895, (float) 327, (byte) 58);
 				return defaultOnKillEvent(env, 798346, 7, 8);
 			}
 		}

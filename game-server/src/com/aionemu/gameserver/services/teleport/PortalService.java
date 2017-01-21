@@ -14,9 +14,9 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.league.League;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.model.templates.portal.ItemReq;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
@@ -95,16 +95,16 @@ public class PortalService {
 				break;
 			case 3:
 			case 6: // group
-				if (player.getPlayerGroup2() != null) {
-					instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerGroup2().getTeamId());
+				if (player.getPlayerGroup() != null) {
+					instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerGroup().getTeamId());
 				}
 				break;
 			default: // alliance
-				if (player.isInAlliance2()) {
+				if (player.isInAlliance()) {
 					if (player.isInLeague()) {
-						instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerAlliance2().getLeague().getObjectId());
+						instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerAlliance().getLeague().getObjectId());
 					} else {
-						instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerAlliance2().getObjectId());
+						instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerAlliance().getObjectId());
 					}
 				}
 				break;
@@ -144,12 +144,12 @@ public class PortalService {
 				}
 			}
 			if (mapId == player.getWorldId()) { // teleport within this instance
-				TeleportService2.teleportTo(player, mapId, player.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
+				TeleportService.teleportTo(player, mapId, player.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
 				return;
 			}
 		}
 
-		PlayerGroup group = player.getPlayerGroup2();
+		PlayerGroup group = player.getPlayerGroup();
 		switch (playerSize) {
 			case 1:
 				// If there is a group (whatever group requirement exists or not)...
@@ -224,7 +224,7 @@ public class PortalService {
 				}
 				break;
 			default:
-				PlayerAlliance allianceGroup = player.getPlayerAlliance2();
+				PlayerAlliance allianceGroup = player.getPlayerAlliance();
 				if (allianceGroup != null || !instanceGroupReq) {
 					Integer allianceId = player.getObjectId();
 					League league = null;
@@ -317,7 +317,7 @@ public class PortalService {
 	private static boolean checkPlayerSize(Player player, PortalPath portalPath, int npcObjectId) {
 		int playerSize = portalPath.getPlayerCount();
 		if (playerSize == 6 || playerSize == 3) { // group
-			if (!player.isInGroup2()) {
+			if (!player.isInGroup()) {
 				int errDialog = portalPath.getErrGroup();
 				if (errDialog != 0) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
@@ -327,7 +327,7 @@ public class PortalService {
 				return false;
 			}
 		} else if (playerSize > 6 && playerSize <= 24) { // alliance
-			if (!player.isInAlliance2()) {
+			if (!player.isInAlliance()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
 				return false;
 			}
@@ -404,7 +404,7 @@ public class PortalService {
 			InstanceService.registerPlayerWithInstance(instance, requester);
 			transfer(requester, loc, instance, reenter);
 		} else {
-			TeleportService2.teleportTo(requester, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
+			TeleportService.teleportTo(requester, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
 		}
 	}
 
@@ -430,7 +430,7 @@ public class PortalService {
 		if (instance.getStartPos() == null)
 			instance.setStartPos(loc.getX(), loc.getY(), loc.getZ());
 		InstanceService.registerPlayerWithInstance(instance, player);
-		TeleportService2.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
+		TeleportService.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
 			TeleportAnimation.FADE_OUT_BEAM);
 		long useDelay = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(player, instance.getMapId());
 		if (useDelay > 0 && !reenter) {

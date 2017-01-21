@@ -6,7 +6,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -58,7 +58,7 @@ public class MoveTo extends AdminCommand {
 			int npcId = getNpcId(params);
 			if (npcId > 0) {
 				sendInfo(admin, "Teleported to " + ChatUtil.path(npcId) + ".");
-				TeleportService2.teleportToNpc(admin, npcId);
+				TeleportService.teleportToNpc(admin, npcId);
 				return;
 			} else if (errorMsg == null)
 				errorMsg = "Could not find the specified npc.";
@@ -69,19 +69,19 @@ public class MoveTo extends AdminCommand {
 
 	private void moveTo(Player admin, WorldPosition pos, String message) {
 		sendInfo(admin, message); // msg before teleport, otherwise client could ignore it
-		TeleportService2.teleportTo(admin, pos);
+		TeleportService.teleportTo(admin, pos);
 	}
 
 	private int getNpcId(String... params) {
 		if (NumberUtils.isDigits(params[0])) {
 			int npcId = NumberUtils.toInt(params[0]);
-			if (npcId > 0 && DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(0, npcId) != null)
+			if (npcId > 0 && DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(0, npcId) != null)
 				return npcId;
 		} else {
 			String npcName = StringUtils.join(params, ' ').toLowerCase();
 			for (NpcTemplate template : DataManager.NPC_DATA.getNpcData().valueCollection()) {
 				if (template.getName().toLowerCase().equals(npcName)) {
-					if (DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(0, template.getTemplateId()) != null)
+					if (DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(0, template.getTemplateId()) != null)
 						return template.getTemplateId();
 				}
 			}

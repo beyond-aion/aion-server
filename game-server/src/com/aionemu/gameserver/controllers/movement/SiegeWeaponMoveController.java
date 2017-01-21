@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.controllers.movement;
 
-import com.aionemu.gameserver.ai2.AISubState;
+import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
@@ -28,7 +28,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	 */
 	@Override
 	public void moveToDestination() {
-		if (!owner.canPerformMove() || (owner.getAi2().getSubState() == AISubState.CAST)) {
+		if (!owner.canPerformMove() || (owner.getAi().getSubState() == AISubState.CAST)) {
 			if (started.compareAndSet(true, false)) {
 				setAndSendStopMove(owner);
 			}

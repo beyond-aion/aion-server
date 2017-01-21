@@ -6,9 +6,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.aionemu.gameserver.ai2.AbstractAI;
-import com.aionemu.gameserver.ai2.GeneralAIEvent;
-import com.aionemu.gameserver.ai2.eventcallback.OnDieEventListener;
+import com.aionemu.gameserver.ai.AbstractAI;
+import com.aionemu.gameserver.ai.GeneralAIEvent;
+import com.aionemu.gameserver.ai.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.custom.BattleService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -16,8 +16,8 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -74,7 +74,7 @@ public class CustomBase implements Comparable<CustomBase> {
 	}
 
 	protected void spawn() {
-		for (SpawnGroup2 group : getBaseSpawns()) {
+		for (SpawnGroup group : getBaseSpawns()) {
 			for (SpawnTemplate spawn : group.getSpawnTemplates()) {
 				final BaseSpawnTemplate template = (BaseSpawnTemplate) spawn;
 				if (template.getBaseRace().equals(owner)) {
@@ -105,8 +105,8 @@ public class CustomBase implements Comparable<CustomBase> {
 
 	}
 
-	private List<SpawnGroup2> getBaseSpawns() {
-		List<SpawnGroup2> spawns = DataManager.SPAWNS_DATA2.getBaseSpawnsByLocId(id);
+	private List<SpawnGroup> getBaseSpawns() {
+		List<SpawnGroup> spawns = DataManager.SPAWNS_DATA.getBaseSpawnsByLocId(id);
 
 		if (spawns == null) {
 			throw new NullPointerException("No spawns for base:" + id);
@@ -119,7 +119,7 @@ public class CustomBase implements Comparable<CustomBase> {
 
 			@Override
 			public void run() {
-				for (SpawnGroup2 group : getBaseSpawns()) {
+				for (SpawnGroup group : getBaseSpawns()) {
 					for (SpawnTemplate spawn : group.getSpawnTemplates()) {
 						final BaseSpawnTemplate template = (BaseSpawnTemplate) spawn;
 						if (template.getBaseRace().equals(owner)) {
@@ -127,7 +127,7 @@ public class CustomBase implements Comparable<CustomBase> {
 								Npc npc = (Npc) ownerEvent.spawnObject(template.getNpcId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 									0);
 								boss = npc;
-								((AbstractAI) boss.getAi2()).addEventListener(new CBaseDeathListener(CustomBase.this));
+								((AbstractAI) boss.getAi()).addEventListener(new CBaseDeathListener(CustomBase.this));
 							}
 						}
 					}

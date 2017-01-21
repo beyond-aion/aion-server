@@ -2,11 +2,11 @@ package ai.instance.danuarSanctuary;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
-import com.aionemu.gameserver.ai2.AIName;
-import com.aionemu.gameserver.ai2.NpcAI2;
-import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
-import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.ai.AIActions;
+import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.handler.MoveEventHandler;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -25,7 +25,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author xTz
  */
 @AIName("siege_drill")
-public class SiegeDrill extends NpcAI2 {
+public class SiegeDrill extends NpcAI {
 
 
 	protected int startBarAnimation = 1;
@@ -103,7 +103,7 @@ public class SiegeDrill extends NpcAI2 {
 					getOwner().setTarget(npc);
 
 					SkillEngine.getInstance().getSkill(getOwner(), 20778, 65, npc).useSkill();
-					ThreadPoolManager.getInstance().schedule((Runnable) () -> AI2Actions.deleteOwner(SiegeDrill.this), 5000);
+					ThreadPoolManager.getInstance().schedule((Runnable) () -> AIActions.deleteOwner(SiegeDrill.this), 5000);
 				}
 			}, 4800);
 		}

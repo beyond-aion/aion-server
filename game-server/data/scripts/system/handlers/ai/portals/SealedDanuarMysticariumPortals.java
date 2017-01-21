@@ -1,7 +1,7 @@
 package ai.portals;
 
-import com.aionemu.gameserver.ai2.AI2Actions;
-import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai.AIActions;
+import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
@@ -16,7 +16,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * Created by Yeats on 22.02.2016.
  */
 @AIName("sealed_danuar_mysticarium_portal")
-public class SealedDanuarMysticariumPortals extends PortalDialogAI2 {
+public class SealedDanuarMysticariumPortals extends PortalDialogAI {
 
     @Override
     public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
@@ -49,7 +49,7 @@ public class SealedDanuarMysticariumPortals extends PortalDialogAI2 {
             }
             if (getNpcId() == 731583) {
                 if (dialogId == 10000) {
-                    AI2Actions.handleUseItemFinish(this, player);
+                    AIActions.handleUseItemFinish(this, player);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
                 }
             }

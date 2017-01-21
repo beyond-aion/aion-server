@@ -18,7 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -109,7 +109,7 @@ public class FixPath extends AdminCommand {
 		ThreadPoolManager.getInstance().execute(() -> { // run in a new thread to avoid blocking everything
 			admin.setCustomState(CustomPlayerState.INVULNERABLE);
 			RouteStep start = template.getRouteStep(1);
-			TeleportService2.teleportTo(admin, new WorldPosition(worldId, start.getX(), start.getY(), start.getZ() + zOff, admin.getHeading()));
+			TeleportService.teleportTo(admin, new WorldPosition(worldId, start.getX(), start.getY(), start.getZ() + zOff, admin.getHeading()));
 			float zDelta = getZ(admin) - start.getZ() + zOff;
 
 			Map<Integer, Float> corrections = new FastMap<>();
@@ -121,7 +121,7 @@ public class FixPath extends AdminCommand {
 					if (step.getRouteStep() > lastStep) // reversing happens in afterUnmarshal, not in templates
 						continue;
 					sendInfo(admin, "Teleporting to step " + step.getRouteStep() + "...");
-					TeleportService2.teleportTo(admin,
+					TeleportService.teleportTo(admin,
 						new WorldPosition(admin.getWorldId(), step.getX(), step.getY(), step.getZ() + zDelta, admin.getHeading()));
 					corrections.put(step.getRouteStep(), getZ(admin));
 				}

@@ -7,9 +7,9 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.Util;
@@ -85,7 +85,7 @@ public class PlayerInfo extends AdminCommand {
 		} else if (params[1].equals("group")) {
 			final StringBuilder strbld = new StringBuilder("-group info:\n\tLeader: ");
 
-			PlayerGroup group = target.getPlayerGroup2();
+			PlayerGroup group = target.getPlayerGroup();
 			if (group == null)
 				sendInfo(admin, "-group info: no group");
 			else {

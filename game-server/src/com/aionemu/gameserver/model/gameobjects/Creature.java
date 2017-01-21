@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import com.aionemu.gameserver.ai2.AI2;
-import com.aionemu.gameserver.ai2.AI2Engine;
+import com.aionemu.gameserver.ai.AI;
+import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.controllers.ObserveController;
 import com.aionemu.gameserver.controllers.attack.AggroList;
@@ -52,7 +52,7 @@ public abstract class Creature extends VisibleObject {
 	 * XXX remove me later
 	 */
 	private String despawnCause;
-	private AI2 ai2;
+	private AI ai;
 
 	private CreatureLifeStats<? extends Creature> lifeStats;
 	private CreatureGameStats<? extends Creature> gameStats;
@@ -168,12 +168,12 @@ public abstract class Creature extends VisibleObject {
 		this.effectController = effectController;
 	}
 
-	public AI2 getAi2() {
-		return ai2 != null ? ai2 : AI2Engine.getInstance().setupAI("dummy", this);
+	public AI getAi() {
+		return ai != null ? ai : AIEngine.getInstance().setupAI("dummy", this);
 	}
 
-	public void setAi2(AI2 ai2) {
-		this.ai2 = ai2;
+	public void setAi(AI ai) {
+		this.ai = ai;
 	}
 
 	/**

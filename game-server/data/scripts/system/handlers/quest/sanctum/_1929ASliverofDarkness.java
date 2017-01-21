@@ -14,7 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -79,7 +79,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 							return false;
 						case SETPRO2:
 							if (defaultCloseDialog(env, 1, 2)) { // 2
-								TeleportService2.teleportToNpc(player, 203164);
+								TeleportService.teleportToNpc(player, 203164);
 								return true;
 							}
 					}
@@ -98,13 +98,13 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								changeQuestStep(env, 2, 93); // 93
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
 								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService2.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
+								TeleportService.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
 								return closeDialogWindow(env);
 							}
 							return false;
 						case SETPRO7:
 							if (defaultCloseDialog(env, 8, 9)) { // 9
-								TeleportService2.teleportToNpc(player, 203701);
+								TeleportService.teleportToNpc(player, 203701);
 								return true;
 							}
 					}
@@ -218,7 +218,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 97) {
 				changeQuestStep(env, 97, 8); // 8
-				TeleportService2.teleportTo(player, 210030000, 1, 2315.9f, 1800f, 195.2f);
+				TeleportService.teleportTo(player, 210030000, 1, 2315.9f, 1800f, 195.2f);
 				return true;
 			}
 		}

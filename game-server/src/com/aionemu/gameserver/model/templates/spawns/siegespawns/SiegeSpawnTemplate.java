@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates.spawns.siegespawns;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.siege.SiegeSpawnType;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 
@@ -17,11 +17,11 @@ public class SiegeSpawnTemplate extends SpawnTemplate {
 	private SiegeSpawnType siegeSpawnType;
 	private SiegeModType siegeModType;
 
-	public SiegeSpawnTemplate(SpawnGroup2 spawnGroup, SpawnSpotTemplate spot) {
+	public SiegeSpawnTemplate(SpawnGroup spawnGroup, SpawnSpotTemplate spot) {
 		super(spawnGroup, spot);
 	}
 
-	public SiegeSpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
+	public SiegeSpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
 		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
 	}
 

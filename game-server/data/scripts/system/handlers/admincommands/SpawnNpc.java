@@ -49,7 +49,7 @@ public class SpawnNpc extends AdminCommand {
 		VisibleObject visibleObject = SpawnEngine.spawnObject(st, admin.getInstanceId());
 		String objectName = visibleObject.getObjectTemplate().getName();
 		sendInfo(admin, StringUtils.capitalize(objectName) + " spawned with static id: " + staticId + " and respawn time: " + respawnTime);
-		if (respawnTime > 0 && !DataManager.SPAWNS_DATA2.saveSpawn(visibleObject, false))
+		if (respawnTime > 0 && !DataManager.SPAWNS_DATA.saveSpawn(visibleObject, false))
 			sendInfo(admin, "Could not save spawn. Npc will vanish after server restart.");
 	}
 }

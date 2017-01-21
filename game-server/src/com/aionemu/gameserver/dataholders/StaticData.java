@@ -194,7 +194,7 @@ public class StaticData {
 	public EventData eventData;
 
 	@XmlElement(name = "spawns")
-	public SpawnsData2 spawnsData2;
+	public SpawnsData spawnsData;
 
 	@XmlElement(name = "item_groups")
 	public ItemGroupsData itemGroupsData;
@@ -358,7 +358,7 @@ public class StaticData {
 		log.info("Loaded " + assembledNpcData.size() + " assembled npcs entries");
 		log.info("Loaded " + cosmeticItemsData.size() + " cosmetic items entries");
 		log.info("Loaded " + autoGroupData.size() + " auto group entries");
-		log.info("Loaded " + spawnsData2.size() + " spawn maps entries");
+		log.info("Loaded " + spawnsData.size() + " spawn maps entries");
 		log.info("Loaded " + eventData.size() + " events");
 		log.info("Loaded " + panelSkillsData.size() + " skill panel entries");
 		log.info("Loaded " + instanceBuffData.size() + " instance Buffs entries");

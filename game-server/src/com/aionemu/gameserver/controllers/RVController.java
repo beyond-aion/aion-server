@@ -3,9 +3,9 @@ package com.aionemu.gameserver.controllers;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
@@ -16,7 +16,7 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.rift.RiftEnum;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -111,7 +111,7 @@ public class RVController extends NpcController {
 						}
 
 						VortexLocation loc = VortexService.getInstance().getLocationByRift(requester.getNpcId());
-						TeleportService2.teleportTo(responder, loc.getStartPoint());
+						TeleportService.teleportTo(responder, loc.getStartPoint());
 
 						// A Rift Portal battle has begun.
 						PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1401454));
@@ -139,7 +139,7 @@ public class RVController extends NpcController {
 						float y = slaveSpawnTemplate.getY();
 						float z = slaveSpawnTemplate.getZ();
 
-						TeleportService2.teleportTo(responder, worldId, x, y, z);
+						TeleportService.teleportTo(responder, worldId, x, y, z);
 						// Update passed players count
 						syncPassed(false);
 					}

@@ -23,7 +23,7 @@ import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.reward.WebRewardService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -94,11 +94,11 @@ public class _1006Ascension extends QuestHandler {
 								giveQuestItem(env, 182200007, 1);
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
-							return TeleportService2.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
+							return TeleportService.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310020000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService2.teleportTo(player, 310020000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
+							TeleportService.teleportTo(player, 310020000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
 							qs.setQuestVar(99); // 99
 							updateQuestStatus(env);
 							removeQuestItem(env, 182200009, 1);
@@ -147,7 +147,7 @@ public class _1006Ascension extends QuestHandler {
 								giveQuestItem(env, 182200009, 1);
 								qs.setQuestVar(3);
 								updateQuestStatus(env);
-								TeleportService2.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.FADE_OUT_BEAM);
+								TeleportService.teleportTo(player, 210010000, 246f, 1639f, 100.316f, (byte) 56, TeleportAnimation.FADE_OUT_BEAM);
 								return true;
 							}
 					}
@@ -189,7 +189,7 @@ public class _1006Ascension extends QuestHandler {
 				switch (env.getDialog()) {
 					case SELECTED_QUEST_NOREWARD:
 						if (player.getWorldId() == 310020000)
-							TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 						break;
 				}
 				return sendQuestEndDialog(env); // finishes quest or shows reward selection

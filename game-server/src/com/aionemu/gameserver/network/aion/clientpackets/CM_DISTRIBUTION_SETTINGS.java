@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team2.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.team2.common.legacy.LootRuleType;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
-import com.aionemu.gameserver.model.team2.league.LeagueService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
@@ -66,12 +66,12 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 	protected void runImpl() {
 		Player leader = getConnection().getActivePlayer();
 
-		PlayerGroup group = leader.getPlayerGroup2();
+		PlayerGroup group = leader.getPlayerGroup();
 		if (group != null) {
 			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above,
 				fabled_item_above, ethernal_item_above, mythic_item_above));
 		}
-		PlayerAlliance alliance = leader.getPlayerAlliance2();
+		PlayerAlliance alliance = leader.getPlayerAlliance();
 		if (alliance != null) {
 			if (alliance.isInLeague())
 				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootrules, misc, common_item_above, superior_item_above,

@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -45,7 +45,7 @@ public class RecallInstantEffect extends EffectTemplate {
 
 			@Override
 			public void acceptRequest(Creature effector, Player effected) {
-				TeleportService2.teleportTo(effected, worldId, instanceId, locationX, locationY, locationZ, locationH);
+				TeleportService.teleportTo(effected, worldId, instanceId, locationX, locationY, locationZ, locationH);
 			}
 		};
 

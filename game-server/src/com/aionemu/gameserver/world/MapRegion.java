@@ -15,8 +15,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai2.AIState;
-import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
@@ -216,7 +216,7 @@ public class MapRegion {
 				for (MapRegion neighbor : getNeighbours()) {
 					if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
 						for (VisibleObject o : neighbor.getObjects().values()) {
-							if (o instanceof Creature && ((Creature) o).getAi2().getState() == AIState.WALKING)
+							if (o instanceof Creature && ((Creature) o).getAi().getState() == AIState.WALKING)
 								walkers.add((Creature) o);
 						}
 					}
@@ -239,13 +239,13 @@ public class MapRegion {
 	}
 
 	/**
-	 * Send ACTIVATE event to all objects with AI2
+	 * Send ACTIVATE event to all objects with AI
 	 */
 	private final void activateObjects() {
 		for (VisibleObject visObject : objects.values()) {
 			if (visObject instanceof Creature) {
 				Creature creature = (Creature) visObject;
-				creature.getAi2().onGeneralEvent(AIEventType.ACTIVATE);
+				creature.getAi().onGeneralEvent(AIEventType.ACTIVATE);
 			}
 		}
 	}
@@ -259,13 +259,13 @@ public class MapRegion {
 	}
 
 	/**
-	 * Send DEACTIVATE event to all objects with AI2
+	 * Send DEACTIVATE event to all objects with AI
 	 */
 	private void deactivateObjects() {
 		for (VisibleObject visObject : objects.values()) {
 			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
 				&& !((Creature) visObject).isRaidMonster()) {
-				((Creature) visObject).getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
+				((Creature) visObject).getAi().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
 		}
 	}

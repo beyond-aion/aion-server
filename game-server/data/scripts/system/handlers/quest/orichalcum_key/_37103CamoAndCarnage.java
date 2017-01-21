@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team2.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -56,8 +56,8 @@ public class _37103CamoAndCarnage extends QuestHandler {
 		}
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700968) {
-				if (player.isInGroup2()) {
-					PlayerGroup group = player.getPlayerGroup2();
+				if (player.isInGroup()) {
+					PlayerGroup group = player.getPlayerGroup();
 					for (Player member : group.getMembers()) {
 						if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
 							Npc npc = (Npc) env.getVisibleObject();
