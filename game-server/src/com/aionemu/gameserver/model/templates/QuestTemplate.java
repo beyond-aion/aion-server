@@ -52,7 +52,7 @@ public class QuestTemplate {
 	@XmlElement(name = "bonus")
 	private List<QuestBonuses> bonus;
 	@XmlElement(name = "extended_rewards")
-	private List<Rewards> extendedRewards;
+	private Rewards extendedRewards;
 	@XmlElement(name = "quest_drop")
 	private List<QuestDrop> questDrop;
 	@XmlElement(name = "quest_kill")
@@ -140,7 +140,6 @@ public class QuestTemplate {
 	public QuestTemplate() {
 		rewards = new FastTable<>();
 		bonus = new FastTable<>();
-		extendedRewards = new FastTable<>();
 		questDrop = new FastTable<>();
 		questKill = new FastTable<>();
 		startConds = new FastTable<>();
@@ -189,7 +188,7 @@ public class QuestTemplate {
 		return this.rewards;
 	}
 
-	public List<Rewards> getExtendedRewards() {
+	public Rewards getExtendedRewards() {
 		return this.extendedRewards;
 	}
 
@@ -351,11 +350,11 @@ public class QuestTemplate {
 		return canReport;
 	}
 
-	public boolean isUseSingleClassReward() {
+	public boolean isClassRewardOnEveryRepeat() {
 		return useClassReward == 1;
 	}
 
-	public boolean isUseRepeatedClassReward() {
+	public boolean isSingleTimeClassReward() {
 		return useClassReward == 2;
 	}
 

@@ -16,7 +16,7 @@
 			<xs:element name="inventory_items" type="InventoryItems" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="rewards" type="Rewards" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bonus" type="QuestBonuses" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="extended_rewards" type="Rewards" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="extended_rewards" type="Rewards" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="quest_drop" type="QuestDrop" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="quest_kill" type="QuestKill" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="start_conditions" type="QuestStartConditions" minOccurs="0" maxOccurs="unbounded"/>
@@ -186,17 +186,17 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="QuestExtraCategory">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NONE" />
-            <xs:enumeration value="COIN_QUEST" />
-            <xs:enumeration value="DRACONIC_RECIPE_QUEST" />
-            <xs:enumeration value="DEVANION_QUEST" />
-            <xs:enumeration value="GOLD_QUEST" />
-        </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="WeekDays">
-    <xs:list itemType="QuestRepeatCycle"/>
-   </xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE" />
+			<xs:enumeration value="COIN_QUEST" />
+			<xs:enumeration value="DRACONIC_RECIPE_QUEST" />
+			<xs:enumeration value="DEVANION_QUEST" />
+			<xs:enumeration value="GOLD_QUEST" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WeekDays">
+		<xs:list itemType="QuestRepeatCycle" />
+	</xs:simpleType>
 	<xs:simpleType name="QuestRepeatCycle">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="ALL"/>

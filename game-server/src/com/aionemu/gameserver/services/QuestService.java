@@ -120,9 +120,9 @@ public final class QuestService {
 		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0)
 			return false; // prevent repeatable reward because of wrong quest handling
 		List<QuestItems> questItems = new FastTable<>();
-		if (!template.getExtendedRewards().isEmpty() && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // This is the last time
+		if (template.getExtendedRewards() != null && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // additional reward for the Xth time
 			questItems.addAll(getRewardItems(env, template, true, null));
-			extendedRewards = template.getExtendedRewards().get(0);
+			extendedRewards = template.getExtendedRewards();
 		}
 		if (!template.getRewards().isEmpty() || !template.getBonus().isEmpty()) {
 			questItems.addAll(getRewardItems(env, template, false, rewardGroup));
@@ -155,7 +155,7 @@ public final class QuestService {
 		int dialogId = env.getDialogId();
 		List<QuestItems> questItems = new FastTable<>();
 		if (extended) {
-			Rewards rewards = template.getExtendedRewards().get(0);
+			Rewards rewards = template.getExtendedRewards();
 			questItems.addAll(rewards.getRewardItem());
 			if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id() && !rewards.getSelectableRewardItem().isEmpty()) {
 				int index = env.getExtendedRewardIndex();
@@ -164,7 +164,7 @@ public final class QuestService {
 				} else if ((index - 1) >= 0 && (index - 1) < rewards.getSelectableRewardItem().size()) {
 					questItems.add(rewards.getSelectableRewardItem().get(index - 1));
 				} else {
-					log.error("The extended SelectableRewardItem list has no element on index " + (index - 8) + ". See quest id " + env.getQuestId()
+					log.warn("The extended SelectableRewardItem list has no element on index " + (index - 8) + ". See quest id " + env.getQuestId()
 						+ ". The size is: " + rewards.getSelectableRewardItem().size());
 				}
 			}
@@ -177,34 +177,26 @@ public final class QuestService {
 				int rewardIndex = env.getDialog().getRewardIndex();
 				if (rewardIndex >= 0) {
 					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
-					if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
+					if (isLastRepeat && template.isSingleTimeClassReward() || template.isClassRewardOnEveryRepeat()) {
 						if (rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
 							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId()
+								+ ". The size for " + playerClass + " is: " + template.getSelectableRewardByClass(playerClass).size());
 						}
+					} else if (rewardIndex < rewards.getSelectableRewardItem().size()) {
+						questItems.add(rewards.getSelectableRewardItem().get(rewardIndex));
 					} else {
-						if (rewardIndex < rewards.getSelectableRewardItem().size()) {
-							questItems.add(rewards.getSelectableRewardItem().get(rewardIndex));
-						} else {
-							if (rewards.getSelectableRewardItem().isEmpty()) {
-								if (rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
-									questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
-								} else {
-									log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
-								}
-							} else
-								log.error("The SelectableRewardItem list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
-						}
+						log.warn("The SelectableRewardItem list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
 					}
 				} else if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
 					rewardIndex = env.getExtendedRewardIndex() - 8;
 					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
-					if (isLastRepeat && template.isUseSingleClassReward() || template.isUseRepeatedClassReward()) {
+					if (isLastRepeat && template.isSingleTimeClassReward() || template.isClassRewardOnEveryRepeat()) {
 						if (rewardIndex >= 0 && rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
 							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.error("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
 						}
 					}
 				}
