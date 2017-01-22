@@ -113,7 +113,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 6);
 				else
-					return sendQuestEndDialog(env, 0); // always reward group 0 since other choices than arena are not available anymore
+					return sendQuestEndDialog(env, 1); // always reward group 1 since other choices than arena are not available anymore
 			}
 		}
 		return false;

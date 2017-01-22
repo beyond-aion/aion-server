@@ -86,7 +86,6 @@ public class _1718TradingDown extends QuestHandler {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
