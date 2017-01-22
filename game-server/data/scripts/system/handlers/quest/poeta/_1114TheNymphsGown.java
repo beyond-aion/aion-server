@@ -42,7 +42,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (targetId == 0) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 					QuestService.startQuest(env);
 					if (!giveQuestItem(env, 182200226, 1))
@@ -171,7 +171,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			QuestService.startQuest(env);
 		}
 		return HandlerResult.SUCCESS;

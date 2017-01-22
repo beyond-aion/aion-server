@@ -34,7 +34,7 @@ public class _30301TrackingSupplies extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (targetId == 799225) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

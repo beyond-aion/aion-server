@@ -33,7 +33,7 @@ public class _21244SearchForTheBiolab extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799317) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);

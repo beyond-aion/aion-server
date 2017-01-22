@@ -35,7 +35,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204053) { // Kvasir
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

@@ -86,7 +86,7 @@ public class _1354PraticalAerobatics extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203983) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

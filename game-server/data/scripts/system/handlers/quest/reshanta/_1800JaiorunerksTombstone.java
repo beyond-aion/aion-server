@@ -33,7 +33,7 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 279016) { // Vindachinerk
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);

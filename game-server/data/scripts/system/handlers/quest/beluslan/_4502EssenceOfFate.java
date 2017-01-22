@@ -44,7 +44,7 @@ public class _4502EssenceOfFate extends QuestHandler {
 		int targetId = npc.getNpcId();
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204837) { // Hresvelgr
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

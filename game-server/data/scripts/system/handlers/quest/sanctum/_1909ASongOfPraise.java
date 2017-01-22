@@ -33,7 +33,7 @@ public class _1909ASongOfPraise extends QuestHandler {
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (env.getTargetId() == 203739) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

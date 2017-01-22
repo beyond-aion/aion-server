@@ -36,7 +36,7 @@ public class _2914ATokenofLostLove extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204147) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

@@ -37,7 +37,7 @@ public class _2983ExpertTailorsFinalExam extends QuestHandler {
 			return sendQuestSelectionDialog(env);
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204110) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

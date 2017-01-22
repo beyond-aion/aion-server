@@ -94,7 +94,7 @@ public class AnohasSwordAI extends NpcAI {
 	private void startQuest(Player player, int questId) {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		QuestEnv env = new QuestEnv(null, player, questId, 0);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
+		if (qs == null || qs.isStartable())
 			QuestService.startQuest(env);
 	}
 

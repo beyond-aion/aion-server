@@ -31,7 +31,7 @@ public class _30264ANecklacewithHistory extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			return false;
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203706) { // Charna
@@ -45,7 +45,7 @@ public class _30264ANecklacewithHistory extends QuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (QuestService.startQuest(env)) {
 				changeQuestStep(env, 0, 0, true); // reward
 				return HandlerResult.SUCCESS;

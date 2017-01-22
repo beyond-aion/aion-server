@@ -68,7 +68,7 @@ public class _2393TheLoveOfAFather extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204343) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {

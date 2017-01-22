@@ -36,7 +36,7 @@ public class _2430SecretInformation extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204327) { // Sveinn
 				switch (dialog) {
 					case QUEST_SELECT:

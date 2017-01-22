@@ -37,7 +37,7 @@ public class _30249NewHarp extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(102000685) >= 1) { // Noble Siel's Supreme Harp
 					if (dialog == DialogAction.QUEST_SELECT) {

@@ -31,7 +31,7 @@ public class _80291DurableDaevanionWeapon extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 831384) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					int plate = player.getEquipment().itemSetPartsEquipped(299);

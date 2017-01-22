@@ -80,7 +80,7 @@ public class _2228AThornInItsSide extends QuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {

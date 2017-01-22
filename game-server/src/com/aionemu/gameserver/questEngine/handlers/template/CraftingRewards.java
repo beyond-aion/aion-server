@@ -62,7 +62,7 @@ public class CraftingRewards extends QuestHandler {
 				}
 			}
 		}
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == startNpcId) {
 				switch (dialog) {
 					case QUEST_SELECT:

@@ -68,7 +68,7 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203943) // Turiel
 			{
 				if (env.getDialog() == DialogAction.QUEST_SELECT)

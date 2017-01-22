@@ -33,7 +33,7 @@ public class _26960FacetheCommander extends QuestHandler {
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 801280) {
 				switch (dialog) {
 					case QUEST_SELECT:

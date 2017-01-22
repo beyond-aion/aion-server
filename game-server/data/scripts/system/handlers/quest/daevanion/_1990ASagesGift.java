@@ -34,7 +34,7 @@ public class _1990ASagesGift extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203771) { // Fermina
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (isDaevanionArmorEquipped(player)) {

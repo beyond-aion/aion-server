@@ -37,7 +37,7 @@ public class _30247NewPistol extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(101800651) >= 1) { // Noble Siel's Supreme Pistol
 					if (dialog == DialogAction.QUEST_SELECT) {

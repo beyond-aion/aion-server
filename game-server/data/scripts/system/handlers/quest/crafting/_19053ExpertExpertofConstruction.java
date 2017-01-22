@@ -38,7 +38,7 @@ public class _19053ExpertExpertofConstruction extends QuestHandler {
 			return sendQuestSelectionDialog(env);
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798450) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

@@ -51,7 +51,7 @@ public class _1197KrallBook extends QuestHandler {
 				return true;
 			}
 		} else if (targetId == 700004) {
-			if ((qs == null || qs.getStatus() == QuestStatus.NONE)) {
+			if ((qs == null || qs.isStartable())) {
 				if (player.getInventory().getItemCountByItemId(182200558) == 0) {
 					if (giveQuestItem(env, 182200558, 1)) {
 						VisibleObject target = player.getTarget();

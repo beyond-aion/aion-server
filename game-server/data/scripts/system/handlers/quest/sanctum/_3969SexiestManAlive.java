@@ -43,7 +43,7 @@ public class _3969SexiestManAlive extends QuestHandler {
 
 		if (targetId == 798390)// Palentine
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {

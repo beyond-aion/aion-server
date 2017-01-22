@@ -48,7 +48,7 @@ public class _1926SecretLibraryAccess extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (targetId == 203894) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

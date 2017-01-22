@@ -34,7 +34,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799225) {
 				switch (dialog) {
 					case QUEST_SELECT:

@@ -34,7 +34,7 @@ public class _30211GroupTheRodandtheOrb extends QuestHandler {
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798941) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);

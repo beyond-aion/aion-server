@@ -32,7 +32,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203550) { // Munin
 				switch (dialog) {
 					case QUEST_SELECT:

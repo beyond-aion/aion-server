@@ -37,7 +37,7 @@ public class _30348ImprovedAethercannon extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799336) { // Tataka
 				if (player.getInventory().getItemCountByItemId(100100716) >= 1) { // Noble Siel's Supreme Mace
 					if (dialog == DialogAction.QUEST_SELECT) {

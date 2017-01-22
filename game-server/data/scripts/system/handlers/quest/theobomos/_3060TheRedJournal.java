@@ -46,7 +46,7 @@ public class _3060TheRedJournal extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
 				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);

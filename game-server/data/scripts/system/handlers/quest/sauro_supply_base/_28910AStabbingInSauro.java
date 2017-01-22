@@ -30,7 +30,7 @@ public class _28910AStabbingInSauro extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 801946) { // Sibeldum.
 				switch (dialog) {
 					case QUEST_SELECT:

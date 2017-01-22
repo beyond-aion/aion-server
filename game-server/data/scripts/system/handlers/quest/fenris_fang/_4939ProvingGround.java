@@ -36,7 +36,7 @@ public class _4939ProvingGround extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		// 0 - Start to Kvasir
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204053) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

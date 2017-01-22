@@ -60,7 +60,7 @@ public class _18830MovingIn extends QuestHandler {
 			return false;
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830584) {
 				switch (dialog) {
 					case QUEST_SELECT:

@@ -40,7 +40,7 @@ public class _19020MasterTailorsPotential extends QuestHandler {
 			return sendQuestSelectionDialog(env);
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203793) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

@@ -47,7 +47,7 @@ public class _80341EventRequestfromPucas extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 || targetId == 831713 || targetId == 831712
 				|| targetId == 831711 || targetId == 831710 || targetId == 831709) {
 				if (dialog == DialogAction.QUEST_SELECT)

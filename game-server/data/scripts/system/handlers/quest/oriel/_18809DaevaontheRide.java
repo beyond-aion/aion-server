@@ -33,7 +33,7 @@ public class _18809DaevaontheRide extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830168) {
 				switch (dialog) {
 					case QUEST_SELECT:

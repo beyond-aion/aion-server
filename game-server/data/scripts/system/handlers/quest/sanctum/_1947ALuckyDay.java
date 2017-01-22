@@ -34,7 +34,7 @@ public class _1947ALuckyDay extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)// TODO: If cube size is bigger than 5
+		if (qs == null || qs.isStartable())// TODO: If cube size is bigger than 5
 		{
 			switch (env.getDialog()) {
 				case QUEST_SELECT:

@@ -74,7 +74,7 @@ public class _1107TheLostAxe extends QuestHandler {
 		if (id != 182200501)
 			return HandlerResult.UNKNOWN;
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
+		if (qs == null || qs.isStartable())
 			sendQuestDialog(env, 4);
 		return HandlerResult.SUCCESS;
 	}

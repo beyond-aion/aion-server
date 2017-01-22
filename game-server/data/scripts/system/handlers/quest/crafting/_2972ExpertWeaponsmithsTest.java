@@ -37,7 +37,7 @@ public class _2972ExpertWeaponsmithsTest extends QuestHandler {
 			return sendQuestSelectionDialog(env);
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204104) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

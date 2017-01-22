@@ -33,7 +33,7 @@ public class _28400InspecttheInspectors extends QuestHandler {
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 799557) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
 					return sendQuestDialog(env, 1011);
 				else

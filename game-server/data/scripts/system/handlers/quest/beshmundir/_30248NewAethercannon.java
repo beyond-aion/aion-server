@@ -37,7 +37,7 @@ public class _30248NewAethercannon extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(101900650) >= 1) { // Noble Siel's Supreme Aethercannon
 					if (dialog == DialogAction.QUEST_SELECT) {

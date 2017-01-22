@@ -37,7 +37,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798185) // Bororinerk
 			{
 				if (env.getDialog() == DialogAction.QUEST_SELECT)

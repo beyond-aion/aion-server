@@ -36,7 +36,7 @@ public class _18213TheChillingTruth extends QuestHandler {
 		int targetId = env.getTargetId();
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 205985) {
 				switch (dialog) {
 					case QUEST_SELECT:

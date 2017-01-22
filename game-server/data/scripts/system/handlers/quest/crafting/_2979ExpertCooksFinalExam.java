@@ -37,7 +37,7 @@ public class _2979ExpertCooksFinalExam extends QuestHandler {
 			return sendQuestSelectionDialog(env);
 		}
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204100) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

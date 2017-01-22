@@ -32,7 +32,7 @@ public class _18035TreacherousBeritra extends QuestHandler {
 		DialogAction dialogAction = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
 				switch (dialogAction) {
 					case QUEST_ACCEPT_SIMPLE:
@@ -77,7 +77,7 @@ public class _18035TreacherousBeritra extends QuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			return HandlerResult.fromBoolean(sendQuestDialog(env, 1011));
 		}
 		return HandlerResult.FAILED;

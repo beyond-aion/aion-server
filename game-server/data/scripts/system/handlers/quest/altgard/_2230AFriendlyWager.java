@@ -41,7 +41,7 @@ public class _2230AFriendlyWager extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		if (targetId == questStartNpcId) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 
 				switch (dialog) {
 					case QUEST_ACCEPT_1:

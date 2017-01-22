@@ -31,13 +31,12 @@ public class _4940DecorationsofPandaemonium extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || (qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE)) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204050) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-
 			}
 		}
 

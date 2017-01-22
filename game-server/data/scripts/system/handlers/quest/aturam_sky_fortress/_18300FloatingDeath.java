@@ -34,7 +34,7 @@ public class _18300FloatingDeath extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 804699) {
 				switch (dialog) {
 					case QUEST_SELECT:

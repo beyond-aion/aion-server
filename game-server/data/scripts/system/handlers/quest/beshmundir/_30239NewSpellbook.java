@@ -37,7 +37,7 @@ public class _30239NewSpellbook extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(100600787) >= 1) { // Noble Siel's Supreme Spellbook
 					if (dialog == DialogAction.QUEST_SELECT) {

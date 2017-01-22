@@ -41,7 +41,7 @@ public class _3102TheDisappearingStatue extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798206) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:

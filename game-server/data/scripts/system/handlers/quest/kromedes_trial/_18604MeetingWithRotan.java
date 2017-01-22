@@ -32,7 +32,7 @@ public class _18604MeetingWithRotan extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			return QuestService.startQuest(env);
 		}
 
@@ -74,7 +74,7 @@ public class _18604MeetingWithRotan extends QuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			env.setQuestId(questId);
 			return QuestService.startQuest(env);
 		}

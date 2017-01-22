@@ -37,7 +37,7 @@ public class _30240NewOrb extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(100500730) >= 1) { // Noble Siel's Supreme Orb
 					if (dialog == DialogAction.QUEST_SELECT) {

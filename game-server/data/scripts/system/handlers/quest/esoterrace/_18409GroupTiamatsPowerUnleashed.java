@@ -34,7 +34,7 @@ public class _18409GroupTiamatsPowerUnleashed extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (targetId == 799553) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
 					return sendQuestDialog(env, 4762);
 				else

@@ -37,7 +37,7 @@ public class _30337ImprovedPolearm extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799336) { // Tataka
 				if (player.getInventory().getItemCountByItemId(101300691) >= 1) { // Noble Siel's Supreme Polearm
 					if (dialog == DialogAction.QUEST_SELECT) {

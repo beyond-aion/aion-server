@@ -41,7 +41,7 @@ public class _2321SpyTheSpiritsLetter extends QuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
@@ -90,7 +90,7 @@ public class _2321SpyTheSpiritsLetter extends QuestHandler {
 		if (id != 182204242)
 			return HandlerResult.UNKNOWN;
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 

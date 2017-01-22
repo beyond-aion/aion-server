@@ -35,7 +35,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 790019) { // Zetus
 				switch (dialog) {
 					case QUEST_SELECT:

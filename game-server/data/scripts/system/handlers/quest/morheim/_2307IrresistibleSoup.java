@@ -38,7 +38,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204378) // Favyr
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

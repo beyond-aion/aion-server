@@ -32,7 +32,7 @@ public class _13817WeeklyTheWithin extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 804585) {
 				switch (dialog) {
 					case QUEST_SELECT:

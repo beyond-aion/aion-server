@@ -38,7 +38,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798082) { // Bicorunerk
 				switch (dialog) {
 					case QUEST_SELECT:

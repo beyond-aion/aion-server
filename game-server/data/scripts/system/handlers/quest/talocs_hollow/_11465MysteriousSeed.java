@@ -48,7 +48,7 @@ public class _11465MysteriousSeed extends QuestHandler {
 				return true;
 			}
 		}
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			return false;
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 279000) {

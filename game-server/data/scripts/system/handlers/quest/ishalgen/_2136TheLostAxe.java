@@ -43,7 +43,7 @@ public class _2136TheLostAxe extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
@@ -121,7 +121,7 @@ public class _2136TheLostAxe extends QuestHandler {
 		if (id != 182203130)
 			return HandlerResult.UNKNOWN;
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			QuestService.startQuest(env);
 		}
 		return HandlerResult.SUCCESS;

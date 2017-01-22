@@ -41,7 +41,7 @@ public class _3210RescueHaorunerk extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798318) {
 				switch (dialog) {
 					case QUEST_SELECT:

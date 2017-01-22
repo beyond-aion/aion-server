@@ -32,7 +32,7 @@ public class _28807BlessingsofaGreenThumb extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830211) {
 				switch (dialog) {
 					case QUEST_SELECT:

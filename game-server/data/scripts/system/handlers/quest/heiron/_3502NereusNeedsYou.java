@@ -44,7 +44,7 @@ public class _3502NereusNeedsYou extends QuestHandler {
 		int targetId = npc.getNpcId();
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 204656) { // Maloren
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

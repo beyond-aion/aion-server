@@ -33,7 +33,7 @@ public class _18802AndAHomeforEveryDaeva extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830005) {
 				switch (dialog) {
 					case QUEST_SELECT:

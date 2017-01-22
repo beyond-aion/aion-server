@@ -33,7 +33,7 @@ public class _3936DecorationsOfSanctum extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		// Start to Dairos
-		if (qs == null || (qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE)) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203710) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

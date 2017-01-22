@@ -34,7 +34,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		// 0 - Start to Lavirintos
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203701) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

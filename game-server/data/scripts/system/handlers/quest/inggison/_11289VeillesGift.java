@@ -35,7 +35,7 @@ public class _11289VeillesGift extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (dialog == DialogAction.QUEST_SELECT) {
 				return sendQuestDialog(env, 4);
 			} else {
@@ -76,7 +76,7 @@ public class _11289VeillesGift extends QuestHandler {
 		if (id != 182213147)
 			return HandlerResult.UNKNOWN;
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
+		if (qs == null || qs.isStartable())
 			sendQuestDialog(env, 4);
 		return HandlerResult.SUCCESS;
 	}

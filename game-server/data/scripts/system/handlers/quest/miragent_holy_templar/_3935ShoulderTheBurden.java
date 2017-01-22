@@ -35,7 +35,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		// 0 - Start to Lavirintos
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203701) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);

@@ -37,7 +37,7 @@ public class _1322ALeafFromLodas extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 730019) // Lodas
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

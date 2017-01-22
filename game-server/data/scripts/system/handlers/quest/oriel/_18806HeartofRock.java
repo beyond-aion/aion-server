@@ -52,7 +52,7 @@ public class _18806HeartofRock extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (butlers.contains(targetId)) {
 				switch (dialog) {
 					case QUEST_SELECT:

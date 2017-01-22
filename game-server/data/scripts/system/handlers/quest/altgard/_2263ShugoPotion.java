@@ -40,7 +40,7 @@ public class _2263ShugoPotion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == questStartNpcId) { // Mabrunerk
 				switch (dialog) {
 					case QUEST_ACCEPT_1:

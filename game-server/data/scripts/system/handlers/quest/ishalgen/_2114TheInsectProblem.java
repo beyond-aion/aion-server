@@ -38,7 +38,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203533) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				switch (env.getDialog()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);

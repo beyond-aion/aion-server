@@ -33,7 +33,7 @@ public class _19001ExpertEssencetappingExpert extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 203780) {
 				switch (dialog) {
 					case QUEST_SELECT:

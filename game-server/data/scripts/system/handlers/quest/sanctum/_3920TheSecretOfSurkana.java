@@ -36,7 +36,7 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798357) {
 				switch (dialog) {
 					case QUEST_SELECT:

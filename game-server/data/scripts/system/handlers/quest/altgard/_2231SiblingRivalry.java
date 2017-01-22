@@ -38,7 +38,7 @@ public class _2231SiblingRivalry extends QuestHandler {
 		}
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203620) { // Lamir
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {

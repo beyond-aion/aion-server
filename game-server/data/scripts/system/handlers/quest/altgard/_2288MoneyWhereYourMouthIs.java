@@ -48,7 +48,7 @@ public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		if (targetId == questStartNpcId) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (dialog == DialogAction.QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {

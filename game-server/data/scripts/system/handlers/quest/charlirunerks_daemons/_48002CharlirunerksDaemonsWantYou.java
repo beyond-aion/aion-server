@@ -26,7 +26,7 @@ public class _48002CharlirunerksDaemonsWantYou extends QuestHandler {
 	@Override
 	public void onLevelChangedEvent(Player player) {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (player.getLevel() >= 50 && (qs == null || qs.getStatus() == QuestStatus.NONE))
+		if (player.getLevel() >= 50 && (qs == null || qs.isStartable()))
 			QuestService.startQuest(new QuestEnv(null, player, questId, 0));
 	}
 

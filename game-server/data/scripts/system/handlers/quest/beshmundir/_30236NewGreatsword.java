@@ -37,7 +37,7 @@ public class _30236NewGreatsword extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799032) { // Gefeios
 				if (player.getInventory().getItemCountByItemId(100900716) >= 1) { // Noble Siel's Supreme Greatsword
 					if (dialog == DialogAction.QUEST_SELECT) {

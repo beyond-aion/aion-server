@@ -37,7 +37,7 @@ public class _4051BukmirsWorry extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 730152) // Heavy Bukmir
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

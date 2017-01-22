@@ -42,7 +42,7 @@ public class _24112NoLaissezFaireForLepharists extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		if (targetId == questStartNpcId) { // Nokir
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				switch (dialog) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);

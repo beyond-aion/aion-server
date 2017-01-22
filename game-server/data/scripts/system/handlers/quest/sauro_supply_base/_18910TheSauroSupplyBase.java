@@ -30,7 +30,7 @@ public class _18910TheSauroSupplyBase extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 801944) { // Amalde.
 				switch (dialog) {
 					case QUEST_SELECT:

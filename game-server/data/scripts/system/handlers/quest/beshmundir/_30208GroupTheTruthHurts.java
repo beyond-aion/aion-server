@@ -43,7 +43,7 @@ public class _30208GroupTheTruthHurts extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798941) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT) {
 					if (giveQuestItem(env, 182209610, 1))

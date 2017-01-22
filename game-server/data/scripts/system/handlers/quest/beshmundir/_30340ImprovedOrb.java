@@ -37,7 +37,7 @@ public class _30340ImprovedOrb extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 799336) { // Tataka
 				if (player.getInventory().getItemCountByItemId(100500735) >= 1) { // Noble Siel's Supreme Orb
 					if (dialog == DialogAction.QUEST_SELECT) {

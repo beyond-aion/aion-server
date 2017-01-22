@@ -31,7 +31,7 @@ public class _80029EventUsingYourCharms extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE)
+		if (qs == null || qs.isStartable())
 			return false;
 
 		if (qs.getStatus() == QuestStatus.START) {

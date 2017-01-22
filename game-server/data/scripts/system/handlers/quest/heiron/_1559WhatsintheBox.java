@@ -47,7 +47,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 				return true;
 			}
 		} else if (targetId == 700513) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:
 						if (player.getInventory().getItemCountByItemId(182201823) == 0) {
@@ -130,7 +130,7 @@ public class _1559WhatsintheBox extends QuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 		}
 		return HandlerResult.FAILED;

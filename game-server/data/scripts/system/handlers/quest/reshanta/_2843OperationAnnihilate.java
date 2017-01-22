@@ -87,7 +87,7 @@ public class _2843OperationAnnihilate extends QuestHandler {
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 268081) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);

@@ -33,7 +33,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830169) {
 				switch (dialog) {
 					case QUEST_SELECT:

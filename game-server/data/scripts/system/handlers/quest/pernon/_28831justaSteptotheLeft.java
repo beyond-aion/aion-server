@@ -50,7 +50,7 @@ public class _28831justaSteptotheLeft extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830651) {
 				switch (dialog) {
 					case QUEST_SELECT:

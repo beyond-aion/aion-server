@@ -33,7 +33,7 @@ public class _80016EventSockHop extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.canRepeat()) {
+		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 799763) {
 				switch (env.getDialog()) {
 					case USE_OBJECT:

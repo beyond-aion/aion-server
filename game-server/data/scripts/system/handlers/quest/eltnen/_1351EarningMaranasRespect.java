@@ -35,7 +35,7 @@ public class _1351EarningMaranasRespect extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		long itemCount;
 		if (targetId == 203965) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else

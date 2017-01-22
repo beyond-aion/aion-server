@@ -31,7 +31,7 @@ public class _28847AHomeThatsYourOwn extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 830390) {
 				switch (dialog) {
 					case QUEST_SELECT:

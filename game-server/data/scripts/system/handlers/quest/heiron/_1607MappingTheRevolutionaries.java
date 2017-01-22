@@ -37,7 +37,7 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (QuestService.startQuest(env)) {
 				return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
 			}

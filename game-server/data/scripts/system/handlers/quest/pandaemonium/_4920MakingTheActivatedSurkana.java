@@ -36,7 +36,7 @@ public class _4920MakingTheActivatedSurkana extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		DialogAction dialog = env.getDialog();
 		int targetId = env.getTargetId();
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == 798358) {
 				switch (dialog) {
 					case QUEST_SELECT:

@@ -48,7 +48,7 @@ public class _30057JotunJaunt extends QuestHandler {
 		DialogAction dialog = env.getDialog();
 
 		if (targetId == 799381) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (dialog == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

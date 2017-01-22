@@ -43,7 +43,7 @@ public class _3967AndusDyeBox extends QuestHandler {
 
 		if (targetId == 798391)// Andu
 		{
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.USE_OBJECT)
 					return sendQuestDialog(env, 1011);
 				else

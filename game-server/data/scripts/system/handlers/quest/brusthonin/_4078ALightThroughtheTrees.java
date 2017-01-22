@@ -35,7 +35,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (targetId == 205157) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+			if (qs == null || qs.isStartable()) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
