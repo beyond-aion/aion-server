@@ -5,12 +5,15 @@ import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.commons.callbacks.metadata.ObjectCallback;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public class JavaAgentUtils {
 
 	static {
 		GlobalCallbackHelper.addCallback(new CheckCallback());
 	}
 
+	@SuppressFBWarnings("BC_IMPOSSIBLE_INSTANCEOF")
 	public static boolean isConfigured() {
 		JavaAgentUtils jau = new JavaAgentUtils();
 		if (!(jau instanceof EnhancedObject))

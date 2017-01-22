@@ -28,10 +28,7 @@ public class ZoneHandlerClassListener implements ClassListener {
 				continue;
 
 			if (ClassUtils.isSubclass(c, ZoneHandler.class)) {
-				Class<? extends ZoneHandler> tmp = (Class<? extends ZoneHandler>) c;
-				if (tmp != null) {
-					ZoneService.getInstance().addZoneHandlerClass(tmp);
-				}
+				ZoneService.getInstance().addZoneHandlerClass((Class<? extends ZoneHandler>) c);
 			}
 		}
 	}
