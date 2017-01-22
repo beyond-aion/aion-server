@@ -31,9 +31,8 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 	public void handleEvent() {
 		group.removeMember(player.getObjectId());
 		group.addMember(new PlayerGroupMember(player));
-		// TODO this probably should never happen
-		if (player.equals(group.getLeader())) {
-			log.warn("[TEAM] leader connected {}", group.size());
+		if (player.equals(group.getLeader().getObject())) {
+			log.warn("[TEAM] leader ({}) reconnected, but should have lost leadership on disconnect", player);
 			group.changeLeader(new PlayerGroupMember(player));
 		}
 		PacketSendUtility.sendPacket(player, new SM_GROUP_INFO(group));

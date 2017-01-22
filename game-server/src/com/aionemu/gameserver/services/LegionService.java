@@ -1576,7 +1576,7 @@ public class LegionService {
 			// STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH
 			Legion legion = activePlayer.getLegion();
 
-			if (activePlayer.equals(legionMember)) {
+			if (activePlayer.getObjectId() == legionMember.getObjectId()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CANT_BANISH_SELF());
 				return false;
 			} else if (legionMember.isBrigadeGeneral()) {
