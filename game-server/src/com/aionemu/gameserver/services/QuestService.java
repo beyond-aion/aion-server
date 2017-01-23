@@ -305,7 +305,7 @@ public final class QuestService {
 		boolean skipRepeatCountCheck, boolean skipXmlPreconditionCheck) {
 		try {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs != null && qs.getStatus() != QuestStatus.NONE) {
+			if (qs != null) {
 				if (!skipStartedCheck && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
 					if (warn)
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());

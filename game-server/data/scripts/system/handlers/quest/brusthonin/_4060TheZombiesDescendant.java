@@ -89,8 +89,7 @@ public class _4060TheZombiesDescendant extends QuestHandler {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 					removeQuestItem(env, 182209037, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);

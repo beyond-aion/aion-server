@@ -125,7 +125,7 @@ public class QuestState {
 	 * @return True, if the quest is not active or is complete and can currently be repeated.
 	 */
 	public boolean isStartable() {
-		return status == QuestStatus.NONE && questVars.getQuestVars() == 0 || status == QuestStatus.COMPLETE && canRepeat();
+		return status == QuestStatus.COMPLETE && canRepeat();
 	}
 
 	public boolean canRepeat() {

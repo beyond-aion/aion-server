@@ -86,8 +86,7 @@ public class QuestStateList {
 	 * @return All quests, that are currently active or locked.
 	 */
 	public List<QuestState> getUncompletedQuests() {
-		return getAllQuestState().stream().filter(qs -> qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)
-			.collect(Collectors.toList());
+		return getAllQuestState().stream().filter(qs -> qs.getStatus() != QuestStatus.COMPLETE).collect(Collectors.toList());
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class QuestStateList {
 			QuestCategory qc = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getCategory();
 			QuestStatus s = qs.getStatus();
 
-			if (qc == QuestCategory.QUEST && s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED && s != QuestStatus.NONE) {
+			if (qc == QuestCategory.QUEST && s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED) {
 				questList.add(qs);
 			}
 		}

@@ -51,8 +51,7 @@ public class _1901KrallicPotion extends QuestHandler {
 			if (targetId == 203864) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 					return sendQuestEndDialog(env);
 				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 					if (env.getDialog() == DialogAction.USE_OBJECT)

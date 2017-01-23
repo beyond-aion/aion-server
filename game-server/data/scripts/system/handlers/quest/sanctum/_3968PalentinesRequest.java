@@ -97,8 +97,7 @@ public class _3968PalentinesRequest extends QuestHandler {
 		} else if (targetId == 798390) {
 			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestDialog(env, 2375);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-				&& qs.getStatus() != QuestStatus.NONE) {
+			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				removeQuestItem(env, 182206123, 1);

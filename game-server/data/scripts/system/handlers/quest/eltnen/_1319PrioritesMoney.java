@@ -176,7 +176,7 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 3739);
-				else if (env.getDialogId() == DialogAction.SETPRO8.id() && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
+				else if (env.getDialogId() == DialogAction.SETPRO8.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

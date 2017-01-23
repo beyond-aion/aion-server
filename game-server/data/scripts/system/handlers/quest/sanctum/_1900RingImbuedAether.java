@@ -79,8 +79,7 @@ public class _1900RingImbuedAether extends QuestHandler {
 		} else if (env.getTargetId() == 203830) {
 			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestDialog(env, 2716);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-				&& qs.getStatus() != QuestStatus.NONE) {
+			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 				removeQuestItem(env, 182206003, 1);
 				return sendQuestDialog(env, 5);
 			} else

@@ -126,21 +126,21 @@ public abstract class Storage implements IStorage {
 	}
 
 	long decreaseItemCount(Item item, long count, Player actor) {
-		return this.decreaseItemCount(item, count, ItemUpdateType.DEC_ITEM_USE, actor);
+		return decreaseItemCount(item, count, ItemUpdateType.DEC_ITEM_USE, actor);
 	}
 
 	/**
 	 * decrease item count and return left count
 	 */
 	long decreaseItemCount(Item item, long count, ItemUpdateType updateType, Player actor) {
-		return decreaseItemCount(item, count, updateType, QuestStatus.NONE, actor);
+		return decreaseItemCount(item, count, updateType, null, actor);
 	}
 
 	long decreaseItemCount(Item item, long count, ItemUpdateType updateType, QuestStatus questStatus, Player actor) {
 		if (item == null)
 			return 0;
 
-		ItemDeleteType deleteType = questStatus != QuestStatus.NONE ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.fromUpdateType(updateType);
+		ItemDeleteType deleteType = questStatus != null ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.fromUpdateType(updateType);
 //		long oldCount = item.getItemCount();
 		long leftCount = item.decreaseItemCount(count);
 //		long removedCount = oldCount - leftCount;
@@ -254,7 +254,7 @@ public abstract class Storage implements IStorage {
 	}
 
 	boolean decreaseByItemId(int itemId, long count, Player actor) {
-		return decreaseByItemId(itemId, count, QuestStatus.NONE, actor);
+		return decreaseByItemId(itemId, count, null, actor);
 	}
 
 	boolean decreaseByItemId(int itemId, long count, QuestStatus questStatus, Player actor) {

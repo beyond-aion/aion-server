@@ -69,8 +69,7 @@ public class _1553MirrorMirror extends QuestHandler {
 			if (qs != null) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 					return defaultCloseDialog(env, 2, 2, true, true, 0, 0, 182201795, 1);
 				} else
 					return sendQuestEndDialog(env);

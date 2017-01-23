@@ -489,7 +489,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public boolean sendQuestEndDialog(QuestEnv env, int[] questItemsToRemove) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		QuestStatus status = qs != null ? qs.getStatus() : QuestStatus.NONE;
+		QuestStatus status = qs == null ? null : qs.getStatus();
 		for (int itemId : questItemsToRemove)
 			removeQuestItem(env, itemId, player.getInventory().getItemCountByItemId(itemId), status);
 		return sendQuestEndDialog(env);

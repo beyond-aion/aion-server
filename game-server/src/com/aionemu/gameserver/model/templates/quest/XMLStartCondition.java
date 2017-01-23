@@ -97,7 +97,7 @@ public class XMLStartCondition {
 		if (acquired != null && acquired.size() > 0) {
 			for (Integer questId : acquired) {
 				QuestState qs = qsl.getQuestState(questId);
-				if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.LOCKED)
+				if (qs == null || qs.getStatus() == QuestStatus.LOCKED)
 					return false;
 			}
 		}

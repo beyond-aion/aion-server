@@ -53,8 +53,7 @@ public class _2324TheSpiritsNotebook extends QuestHandler {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-					&& qs.getStatus() != QuestStatus.NONE) {
+				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
 					removeQuestItem(env, 182204123, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);

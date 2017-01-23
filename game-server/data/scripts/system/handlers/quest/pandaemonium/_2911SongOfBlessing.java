@@ -41,7 +41,7 @@ public class _2911SongOfBlessing extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 204193) {
-			if (qs != null && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
+			if (qs != null && qs.getStatus() != QuestStatus.COMPLETE) {
 				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialog() == DialogAction.SETPRO1) {

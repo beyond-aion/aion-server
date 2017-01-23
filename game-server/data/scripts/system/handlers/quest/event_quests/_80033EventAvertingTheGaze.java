@@ -80,7 +80,7 @@ public class _80033EventAvertingTheGaze extends QuestHandler {
 				@Override
 				public void run() {
 					Storage storage = player.getInventory();
-					QuestStatus status = QuestStatus.NONE;
+					QuestStatus status;
 
 					if (storage.getItemCountByItemId(164002015) > 0) {
 						status = getQuestUpdateStatus(player, questId);
