@@ -3,7 +3,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `abyss_rank`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `abyss_rank` (
+CREATE TABLE `abyss_rank` (
   `player_id` int(11) NOT NULL,
   `daily_ap` int(11) NOT NULL,
   `weekly_ap` int(11) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `abyss_rank` (
 -- ----------------------------
 -- Table structure for `account_passports`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `account_passports` (
+CREATE TABLE `account_passports` (
   `account_id` int(11) NOT NULL,
   `passport_id` int(11) NOT NULL,
   `rewarded` int(11) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `account_passports` (
 -- ----------------------------
 -- Table structure for `account_stamps`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `account_stamps` (
+CREATE TABLE `account_stamps` (
   `account_id` int(11) NOT NULL,
   `stamps` tinyint(2) NOT NULL DEFAULT '0',
   `last_stamp` timestamp NULL DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `account_stamps` (
 -- ----------------------------
 -- Table structure for `announcements`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `announcements` (
+CREATE TABLE `announcements` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `announce` text NOT NULL,
   `faction` enum('ALL','ASMODIANS','ELYOS') NOT NULL DEFAULT 'ALL',
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `announcements` (
 -- ----------------------------
 -- Table structure for `blocks`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `blocks` (
+CREATE TABLE `blocks` (
   `player` int(11) NOT NULL,
   `blocked_player` int(11) NOT NULL,
   `reason` varchar(100) NOT NULL DEFAULT '',
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `blocks` (
 -- ----------------------------
 -- Table structure for `bonus_packs`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `bonus_packs` (
+CREATE TABLE `bonus_packs` (
   `account_id` int(11) NOT NULL,
   `receiving_player` int(11) NOT NULL,
   PRIMARY KEY (`account_id`)
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `bonus_packs` (
 -- ----------------------------
 -- Table structure for `bookmark`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `bookmark` (
+CREATE TABLE `bookmark` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `char_id` int(11) NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `bookmark` (
 -- ----------------------------
 -- Table structure for `broker`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `broker` (
+CREATE TABLE `broker` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_pointer` int(11) NOT NULL DEFAULT '0',
   `item_id` int(11) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `broker` (
 -- ----------------------------
 -- Table structure for `challenge_tasks`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `challenge_tasks` (
+CREATE TABLE `challenge_tasks` (
   `task_id` int(11) NOT NULL,
   `quest_id` int(10) NOT NULL,
   `owner_id` int(11) NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `challenge_tasks` (
 -- ----------------------------
 -- Table structure for `commands_access`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `commands_access` (
+CREATE TABLE `commands_access` (
   `player_id` int(11) NOT NULL,
   `command` varchar(40) NOT NULL,
   PRIMARY KEY (`player_id`,`command`),
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `commands_access` (
 -- ----------------------------
 -- Table structure for `craft_cooldowns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `craft_cooldowns` (
+CREATE TABLE `craft_cooldowns` (
   `player_id` int(11) NOT NULL,
   `delay_id` int(11) unsigned NOT NULL,
   `reuse_time` bigint(13) unsigned NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `craft_cooldowns` (
 -- ----------------------------
 -- Table structure for `event_rank`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `event_rank` (
+CREATE TABLE `event_rank` (
   `player_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `wins` int(11) NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `event_rank` (
 -- ----------------------------
 -- Table structure for `faction_packs`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `faction_packs` (
+CREATE TABLE `faction_packs` (
   `account_id` int(11) NOT NULL,
   `receiving_player` int(11) NOT NULL,
   PRIMARY KEY (`account_id`)
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `faction_packs` (
 -- ----------------------------
 -- Table structure for `friends`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `friends` (
+CREATE TABLE `friends` (
   `player` int(11) NOT NULL,
   `friend` int(11) NOT NULL,
   `memo` varchar(100) NOT NULL DEFAULT '',
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
 -- ----------------------------
 -- Table structure for `guides`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `guides` (
+CREATE TABLE `guides` (
   `guide_id` int(11) NOT NULL AUTO_INCREMENT,
   `player_id` int(11) NOT NULL,
   `title` varchar(80) NOT NULL,
@@ -203,9 +203,9 @@ CREATE TABLE IF NOT EXISTS `guides` (
 -- ----------------------------
 -- Table structure for `headhunting`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `headhunting` (
+CREATE TABLE `headhunting` (
   `hunter_id` int(11) NOT NULL,
-  `accumulated_kills`int(11) NOT NULL,
+  `accumulated_kills` int(11) NOT NULL,
   `last_update` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`hunter_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `headhunting` (
 -- ----------------------------
 -- Table structure for `house_bids`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `house_bids` (
+CREATE TABLE `house_bids` (
   `player_id` int(10) NOT NULL,
   `house_id` int(10) NOT NULL,
   `bid` bigint(20) NOT NULL,
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `house_bids` (
 -- ----------------------------
 -- Table structure for `house_object_cooldowns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `house_object_cooldowns` (
+CREATE TABLE `house_object_cooldowns` (
   `player_id` int(11) NOT NULL,
   `object_id` int(11) NOT NULL,
   `reuse_time` bigint(20) NOT NULL,
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `house_object_cooldowns` (
 -- ----------------------------
 -- Table structure for `house_scripts`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `house_scripts` (
+CREATE TABLE `house_scripts` (
   `house_id` int(11) NOT NULL,
   `script_id` tinyint(4) NOT NULL,
   `script` mediumtext NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `house_scripts` (
 -- ----------------------------
 -- Table structure for `houses`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `houses` (
+CREATE TABLE `houses` (
   `id` int(10) NOT NULL,
   `player_id` int(10) NOT NULL DEFAULT '0',
   `building_id` int(10) NOT NULL,
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `houses` (
 -- ----------------------------
 -- Table structure for `ingameshop`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `ingameshop` (
+CREATE TABLE `ingameshop` (
   `object_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `item_count` bigint(13) NOT NULL DEFAULT '0',
@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `ingameshop` (
 -- ----------------------------
 -- Table structure for `ingameshop_log`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `ingameshop_log` (
+CREATE TABLE `ingameshop_log` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `transaction_type` enum('BUY','GIFT') NOT NULL,
   `transaction_date` timestamp NULL DEFAULT NULL,
@@ -302,11 +302,11 @@ CREATE TABLE IF NOT EXISTS `ingameshop_log` (
 -- ----------------------------
 -- Table structure for `inventory`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `inventory` (
+CREATE TABLE `inventory` (
   `item_unique_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `item_count` bigint(20) NOT NULL DEFAULT '0',
-  `item_color` mediumint(8) UNSIGNED NULL DEFAULT NULL,
+  `item_color` mediumint(8) unsigned DEFAULT NULL,
   `color_expires` int(11) NOT NULL DEFAULT '0',
   `item_creator` varchar(50) DEFAULT NULL,
   `expire_time` int(11) NOT NULL DEFAULT '0',
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- ----------------------------
 -- Table structure for `item_cooldowns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `item_cooldowns` (
+CREATE TABLE `item_cooldowns` (
   `player_id` int(11) NOT NULL,
   `delay_id` int(11) NOT NULL,
   `use_delay` int(10) unsigned NOT NULL,
@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `item_cooldowns` (
 -- ----------------------------
 -- Table structure for `item_stones`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `item_stones` (
+CREATE TABLE `item_stones` (
   `item_unique_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `slot` int(2) NOT NULL,
@@ -365,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `item_stones` (
 -- ----------------------------
 -- Table structure for `legion_announcement_list`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_announcement_list` (
+CREATE TABLE `legion_announcement_list` (
   `legion_id` int(11) NOT NULL,
   `announcement` varchar(256) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `legion_announcement_list` (
 -- ----------------------------
 -- Table structure for `legion_dominion_locations`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_dominion_locations` (
+CREATE TABLE `legion_dominion_locations` (
   `id` int(11) NOT NULL DEFAULT '0',
   `legion_id` int(11) NOT NULL DEFAULT '0',
   `occupied_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `legion_dominion_locations` (
 -- ----------------------------
 -- Table structure for `legion_dominion_participants`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_dominion_participants` (
+CREATE TABLE `legion_dominion_participants` (
   `legion_dominion_id` int(11) NOT NULL DEFAULT '0',
   `legion_id` int(11) NOT NULL DEFAULT '0',
   `points` int(11) NOT NULL DEFAULT '0',
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `legion_dominion_participants` (
 -- ----------------------------
 -- Table structure for `legion_emblems`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_emblems` (
+CREATE TABLE `legion_emblems` (
   `legion_id` int(11) NOT NULL,
   `emblem_id` tinyint(3) NOT NULL DEFAULT '0',
   `color_a` tinyint(3) NOT NULL DEFAULT '0',
@@ -414,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `legion_emblems` (
 -- ----------------------------
 -- Table structure for `legion_history`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_history` (
+CREATE TABLE `legion_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `legion_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `legion_history` (
 -- ----------------------------
 -- Table structure for `legion_members`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legion_members` (
+CREATE TABLE `legion_members` (
   `legion_id` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
   `nickname` varchar(10) NOT NULL DEFAULT '',
@@ -447,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `legion_members` (
 -- ----------------------------
 -- Table structure for `legions`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `legions` (
+CREATE TABLE `legions` (
   `id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `level` int(1) NOT NULL DEFAULT '1',
@@ -470,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `legions` (
 -- ----------------------------
 -- Table structure for `mail`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `mail` (
+CREATE TABLE `mail` (
   `mail_unique_id` int(11) NOT NULL,
   `mail_recipient_id` int(11) NOT NULL,
   `sender_name` varchar(20) NOT NULL,
@@ -489,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `mail` (
 -- ----------------------------
 -- Table structure for `old_names`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `old_names` (
+CREATE TABLE `old_names` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `player_id` int(11) NOT NULL,
   `old_name` varchar(50) NOT NULL,
@@ -502,7 +502,7 @@ CREATE TABLE IF NOT EXISTS `old_names` (
 -- ----------------------------
 -- Table structure for `player_appearance`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_appearance` (
+CREATE TABLE `player_appearance` (
   `player_id` int(11) NOT NULL,
   `face` int(11) NOT NULL,
   `hair` int(11) NOT NULL,
@@ -564,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `player_appearance` (
 -- ----------------------------
 -- Table structure for `player_bind_point`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_bind_point` (
+CREATE TABLE `player_bind_point` (
   `player_id` int(11) NOT NULL,
   `map_id` int(11) NOT NULL,
   `x` float NOT NULL,
@@ -578,7 +578,7 @@ CREATE TABLE IF NOT EXISTS `player_bind_point` (
 -- ----------------------------
 -- Table structure for `player_cooldowns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_cooldowns` (
+CREATE TABLE `player_cooldowns` (
   `player_id` int(11) NOT NULL,
   `cooldown_id` int(6) NOT NULL,
   `reuse_delay` bigint(13) NOT NULL,
@@ -589,7 +589,7 @@ CREATE TABLE IF NOT EXISTS `player_cooldowns` (
 -- ----------------------------
 -- Table structure for `player_effects`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_effects` (
+CREATE TABLE `player_effects` (
   `player_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
   `skill_lvl` tinyint(4) NOT NULL,
@@ -602,7 +602,7 @@ CREATE TABLE IF NOT EXISTS `player_effects` (
 -- ----------------------------
 -- Table structure for `player_emotions`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_emotions` (
+CREATE TABLE `player_emotions` (
   `player_id` int(11) NOT NULL,
   `emotion` int(11) NOT NULL,
   `remaining` int(11) NOT NULL DEFAULT '0',
@@ -613,7 +613,7 @@ CREATE TABLE IF NOT EXISTS `player_emotions` (
 -- ----------------------------
 -- Table structure for `player_life_stats`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_life_stats` (
+CREATE TABLE `player_life_stats` (
   `player_id` int(11) NOT NULL,
   `hp` int(11) NOT NULL DEFAULT '1',
   `mp` int(11) NOT NULL DEFAULT '1',
@@ -625,7 +625,7 @@ CREATE TABLE IF NOT EXISTS `player_life_stats` (
 -- ----------------------------
 -- Table structure for `player_macrosses`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_macrosses` (
+CREATE TABLE `player_macrosses` (
   `player_id` int(11) NOT NULL,
   `order` int(3) NOT NULL,
   `macro` text NOT NULL,
@@ -636,7 +636,7 @@ CREATE TABLE IF NOT EXISTS `player_macrosses` (
 -- ----------------------------
 -- Table structure for `player_motions`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_motions` (
+CREATE TABLE `player_motions` (
   `player_id` int(11) NOT NULL,
   `motion_id` int(3) NOT NULL,
   `time` int(11) NOT NULL DEFAULT '0',
@@ -648,7 +648,7 @@ CREATE TABLE IF NOT EXISTS `player_motions` (
 -- ----------------------------
 -- Table structure for `player_npc_factions`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_npc_factions` (
+CREATE TABLE `player_npc_factions` (
   `player_id` int(11) NOT NULL,
   `faction_id` int(2) NOT NULL,
   `active` tinyint(1) NOT NULL,
@@ -662,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `player_npc_factions` (
 -- ----------------------------
 -- Table structure for `player_passkey`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_passkey` (
+CREATE TABLE `player_passkey` (
   `account_id` int(11) NOT NULL,
   `passkey` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`account_id`,`passkey`)
@@ -671,7 +671,7 @@ CREATE TABLE IF NOT EXISTS `player_passkey` (
 -- ----------------------------
 -- Table structure for `player_pets`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_pets` (
+CREATE TABLE `player_pets` (
   `player_id` int(11) NOT NULL,
   `pet_id` int(11) NOT NULL,
   `decoration` int(11) NOT NULL,
@@ -694,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `player_pets` (
 -- ----------------------------
 -- Table structure for `player_punishments`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_punishments` (
+CREATE TABLE `player_punishments` (
   `player_id` int(11) NOT NULL,
   `punishment_type` enum('PRISON','GATHER','CHARBAN') NOT NULL,
   `start_time` int(10) unsigned DEFAULT '0',
@@ -707,10 +707,10 @@ CREATE TABLE IF NOT EXISTS `player_punishments` (
 -- ----------------------------
 -- Table structure for `player_quests`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_quests` (
+CREATE TABLE `player_quests` (
   `player_id` int(11) NOT NULL,
   `quest_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `status` varchar(10) NOT NULL DEFAULT 'NONE',
+  `status` enum('LOCKED','START','REWARD','COMPLETE') NOT NULL,
   `quest_vars` int(10) unsigned NOT NULL DEFAULT '0',
   `flags` int(10) unsigned NOT NULL DEFAULT '0',
   `complete_count` int(3) unsigned NOT NULL DEFAULT '0',
@@ -724,7 +724,7 @@ CREATE TABLE IF NOT EXISTS `player_quests` (
 -- ----------------------------
 -- Table structure for `player_recipes`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_recipes` (
+CREATE TABLE `player_recipes` (
   `player_id` int(11) NOT NULL,
   `recipe_id` int(11) NOT NULL,
   PRIMARY KEY (`player_id`,`recipe_id`),
@@ -734,7 +734,7 @@ CREATE TABLE IF NOT EXISTS `player_recipes` (
 -- ----------------------------
 -- Table structure for `player_registered_items`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_registered_items` (
+CREATE TABLE `player_registered_items` (
   `player_id` int(10) NOT NULL,
   `item_unique_id` int(10) NOT NULL,
   `item_id` int(10) NOT NULL,
@@ -756,7 +756,7 @@ CREATE TABLE IF NOT EXISTS `player_registered_items` (
 -- ----------------------------
 -- Table structure for `player_settings`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_settings` (
+CREATE TABLE `player_settings` (
   `player_id` int(11) NOT NULL,
   `settings_type` tinyint(1) NOT NULL,
   `settings` blob NOT NULL,
@@ -767,7 +767,7 @@ CREATE TABLE IF NOT EXISTS `player_settings` (
 -- ----------------------------
 -- Table structure for `player_skills`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_skills` (
+CREATE TABLE `player_skills` (
   `player_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
   `skill_level` int(3) NOT NULL DEFAULT '1',
@@ -778,7 +778,7 @@ CREATE TABLE IF NOT EXISTS `player_skills` (
 -- ----------------------------
 -- Table structure for `player_titles`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_titles` (
+CREATE TABLE `player_titles` (
   `player_id` int(11) NOT NULL,
   `title_id` int(11) NOT NULL,
   `remaining` int(11) NOT NULL DEFAULT '0',
@@ -789,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `player_titles` (
 -- ----------------------------
 -- Table structure for `player_vars`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `player_vars` (
+CREATE TABLE `player_vars` (
   `player_id` int(11) NOT NULL,
   `param` varchar(255) NOT NULL,
   `value` varchar(255) DEFAULT NULL,
@@ -801,7 +801,6 @@ CREATE TABLE IF NOT EXISTS `player_vars` (
 -- ----------------------------
 -- Table structure for `player_veteran_rewards`
 -- ----------------------------
-DROP TABLE IF EXISTS `player_veteran_rewards`;
 CREATE TABLE `player_veteran_rewards` (
   `player_id` int(11) NOT NULL,
   `received_months` tinyint(3) NOT NULL DEFAULT '0',
@@ -812,7 +811,6 @@ CREATE TABLE `player_veteran_rewards` (
 -- ----------------------------
 -- Table structure for `player_web_rewards`
 -- ----------------------------
-DROP TABLE IF EXISTS `player_web_rewards`;
 CREATE TABLE `player_web_rewards` (
   `entry_id` int(11) NOT NULL AUTO_INCREMENT,
   `player_id` int(11) NOT NULL,
@@ -828,7 +826,7 @@ CREATE TABLE `player_web_rewards` (
 -- ----------------------------
 -- Table structure for `players`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `players` (
+CREATE TABLE `players` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `account_id` int(11) NOT NULL,
@@ -871,7 +869,7 @@ CREATE TABLE IF NOT EXISTS `players` (
 -- ----------------------------
 -- Table structure for `portal_cooldowns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `portal_cooldowns` (
+CREATE TABLE `portal_cooldowns` (
   `player_id` int(11) NOT NULL,
   `world_id` int(11) NOT NULL,
   `reuse_time` bigint(13) NOT NULL,
@@ -883,7 +881,7 @@ CREATE TABLE IF NOT EXISTS `portal_cooldowns` (
 -- ----------------------------
 -- Table structure for `server_variables`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `server_variables` (
+CREATE TABLE `server_variables` (
   `key` varchar(30) NOT NULL,
   `value` varchar(30) NOT NULL,
   PRIMARY KEY (`key`)
@@ -892,7 +890,7 @@ CREATE TABLE IF NOT EXISTS `server_variables` (
 -- ----------------------------
 -- Table structure for `siege_locations`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `siege_locations` (
+CREATE TABLE `siege_locations` (
   `id` int(11) NOT NULL,
   `race` enum('ELYOS','ASMODIANS','BALAUR') NOT NULL,
   `legion_id` int(11) NOT NULL,
@@ -903,7 +901,7 @@ CREATE TABLE IF NOT EXISTS `siege_locations` (
 -- ----------------------------
 -- Table structure for `skill_motions`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `skill_motions` (
+CREATE TABLE `skill_motions` (
   `motion_name` varchar(255) NOT NULL DEFAULT '',
   `skill_id` int(11) NOT NULL,
   `attack_speed` int(11) NOT NULL,
@@ -918,7 +916,7 @@ CREATE TABLE IF NOT EXISTS `skill_motions` (
 -- ----------------------------
 -- Table structure for `surveys`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `surveys` (
+CREATE TABLE `surveys` (
   `unique_id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -935,19 +933,19 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 -- ----------------------------
 -- Table structure for `tasks`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `tasks` (
+CREATE TABLE `tasks` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `task_type` enum('SHUTDOWN','RESTART') NOT NULL,
   `trigger_type` enum('FIXED_IN_TIME') NOT NULL,
   `trigger_param` text NOT NULL,
   `exec_param` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `towns`
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `towns` (
+CREATE TABLE `towns` (
   `id` int(11) NOT NULL,
   `level` int(11) NOT NULL DEFAULT '1',
   `points` int(10) NOT NULL DEFAULT '0',
