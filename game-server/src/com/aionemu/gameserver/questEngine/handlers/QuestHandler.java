@@ -140,6 +140,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case SELECT_ACTION_2377:
 			case SELECT_ACTION_2461:
 			case SELECT_ACTION_2546:
+			case SELECT_ACTION_2716:
 			case SELECT_ACTION_2717:
 			case SELECT_ACTION_2718:
 			case SELECT_ACTION_2719:
