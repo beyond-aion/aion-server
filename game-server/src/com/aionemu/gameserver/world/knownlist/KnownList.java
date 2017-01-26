@@ -66,6 +66,8 @@ public class KnownList {
 		try {
 			forgetObjects();
 			findVisibleObjects();
+		} catch (Exception e) {
+			log.error("Exception during KnownList update of {}", owner, e);
 		} finally {
 			lock.unlock();
 		}
