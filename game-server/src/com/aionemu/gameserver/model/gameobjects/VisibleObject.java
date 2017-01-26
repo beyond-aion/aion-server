@@ -115,10 +115,6 @@ public abstract class VisibleObject extends AionObject {
 		return getPosition().getZ();
 	}
 
-	public void setXYZH(Float x, Float y, Float z, Byte h) {
-		getPosition().setXYZH(x, y, z, h);
-	}
-
 	/**
 	 * Heading of the object. Values from <0,120)
 	 */
