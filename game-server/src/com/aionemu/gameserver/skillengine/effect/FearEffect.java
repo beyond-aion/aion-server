@@ -65,7 +65,7 @@ public class FearEffect extends EffectTemplate {
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR.getId());
 
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
-		effected.getController().stopMoving();
+		effected.getMoveController().abortMove();
 
 		if (effected instanceof Npc)
 			((NpcAI) effected.getAi()).setStateIfNot(AIState.FEAR);
