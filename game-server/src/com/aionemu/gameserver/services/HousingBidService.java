@@ -131,7 +131,7 @@ public class HousingBidService extends AbstractCronTask {
 		int count = 0;
 		List<House> houses = HousingService.getInstance().getCustomHouses();
 		while (!houses.isEmpty()) {
-			House house = houses.get(Rnd.get(houses.size()));
+			House house = Rnd.get(houses);
 			houses.remove(house);
 			if (house.getOwnerId() != 0 || houseBids.containsKey(house.getObjectId()))
 				continue;

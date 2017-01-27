@@ -224,11 +224,11 @@ public class DecomposeAction extends AbstractItemAction {
 										else
 											itemQuality = ItemQuality.COMMON;
 										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
-										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+										randomId = Rnd.get(selectedStones).getTemplateId();
 									} else {
 										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() != ItemQuality.LEGEND)
 											.collect(Collectors.toList());
-										randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+										randomId = Rnd.get(selectedStones).getTemplateId();
 									}
 
 									if (!validateItemId(randomId))
@@ -256,39 +256,39 @@ public class DecomposeAction extends AbstractItemAction {
 										itemQuality = ItemQuality.COMMON;
 									List<ItemTemplate> selectedStones = ancientStones.stream().filter(t -> t.getItemQuality() == itemQuality)
 										.collect(Collectors.toList());
-									randomId = selectedStones.get(Rnd.get(selectedStones.size())).getTemplateId();
+									randomId = Rnd.get(selectedStones).getTemplateId();
 
 									if (!validateItemId(randomId))
 										return;
 									break;
 								case CHUNK_EARTH:
 									int[] earth = chunkEarth.get(player.getRace());
-									randomId = earth[Rnd.get(earth.length)];
+									randomId = Rnd.get(earth);
 									break;
 								case CHUNK_SAND:
 									int[] sand = chunkSand.get(player.getRace());
-									randomId = sand[Rnd.get(sand.length)];
+									randomId = Rnd.get(sand);
 									break;
 								case CHUNK_ROCK:
-									randomId = chunkRock[Rnd.get(chunkRock.length)];
+									randomId = Rnd.get(chunkRock);
 									break;
 								case CHUNK_GEMSTONE:
-									randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
+									randomId = Rnd.get(chunkGemstone);
 									break;
 								case SCROLLS:
-									randomId = scrolls[Rnd.get(scrolls.length)];
+									randomId = Rnd.get(scrolls);
 									break;
 								case POTION:
-									randomId = potion[Rnd.get(potion.length)];
+									randomId = Rnd.get(potion);
 									break;
 								case LESSER_POTIONS:
-									randomId = lesser_potions[Rnd.get(lesser_potions.length)];
+									randomId = Rnd.get(lesser_potions);
 									break;
 								case POTION_50:
-									randomId = potion_50[Rnd.get(potion_50.length)];
+									randomId = Rnd.get(potion_50);
 									break;
 								case ILLUSION_GODSTONE:
-									randomId = illusion_godstones[Rnd.get(illusion_godstones.length)];
+									randomId = Rnd.get(illusion_godstones);
 									break;
 								case ANCIENTITEMS:
 									do {

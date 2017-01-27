@@ -186,11 +186,7 @@ public final class PetFeedCalculator {
 				}
 				validRewards.add(result);
 			}
-			if (validRewards.size() == 0)
-				return null;
-			if (validRewards.size() == 1)
-				return validRewards.get(0);
-			return validRewards.get(Rnd.get(validRewards.size()));
+			return Rnd.get(validRewards);
 		}
 
 		int rewardIndex = 0;

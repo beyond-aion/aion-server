@@ -22,7 +22,7 @@ public class AttakersMobsAI extends AggressiveNpcAI {
 	@Override
 	protected void handleMoveValidate() {
 		super.handleMoveValidate();
-		if (getOwner().getAi().getState() == AIState.WALKING && getOwner().getState() != 1) {
+		if (getOwner().getAi().getState() == AIState.WALKING && getOwner().getState() != CreatureState.ACTIVE.getId()) {
 			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		}

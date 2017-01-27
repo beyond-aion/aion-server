@@ -248,7 +248,7 @@ public class NpcFactions {
 				List<QuestTemplate> quests = DataManager.QUEST_DATA.getQuestsByNpcFaction(faction.getId(), owner);
 				if (quests.isEmpty())
 					continue;
-				questId = quests.get(Rnd.get(quests.size())).getId();
+				questId = Rnd.get(quests).getId();
 				faction.setQuestId(questId);
 				faction.setTime(getNextTime());
 			}

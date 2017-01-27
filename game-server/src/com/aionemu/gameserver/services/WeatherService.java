@@ -160,7 +160,7 @@ public class WeatherService {
 		} else {
 			// almost all weather types have after and before weathers, so chances
 			// to pick up are almost equal
-			newWeather = chosenWeather.get(Rnd.get(chosenWeather.size()));
+			newWeather = Rnd.get(chosenWeather);
 			// now find "before" weather if such exists
 			if (!newWeather.isBefore()) {
 				for (WeatherEntry entry : weathers) {

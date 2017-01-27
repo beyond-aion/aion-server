@@ -28,12 +28,12 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		final WorldMapInstance inastance = this.getPosition().getWorldMapInstance();
+		final WorldMapInstance instance = getPosition().getWorldMapInstance();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				AIActions.targetCreature(GravityCrusherAI.this, inastance.getPlayersInside().get(Rnd.get(inastance.getPlayersInside().size() - 1)));
+				AIActions.targetCreature(GravityCrusherAI.this, Rnd.get(instance.getPlayersInside()));
 				setStateIfNot(AIState.WALKING);
 				getOwner().setState(CreatureState.ACTIVE, true);
 				getMoveController().moveToTargetObject();

@@ -111,9 +111,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private Player getRandomTarget() {
 		List<Player> players = getKnownList().getKnownPlayers().values().stream().filter(player -> !PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 50)).collect(Collectors.toCollection(FastTable::new));
-		if (players.isEmpty())
-			return null;
-		return players.get(Rnd.get(players.size()));
+		return Rnd.get(players);
 	}
 
 	@Override

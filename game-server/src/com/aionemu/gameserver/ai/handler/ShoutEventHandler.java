@@ -115,7 +115,7 @@ public final class ShoutEventHandler {
 			} else {
 				List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACKED);
 				if (shouts != null && !shouts.isEmpty()) {
-					NpcShout shout = shouts.get(shouts.size() == 1 ? 0 : Rnd.get(shouts.size()));
+					NpcShout shout = Rnd.get(shouts);
 					NpcShoutsService.getInstance().shout(npc, null, shout, shout.getPollDelay() / 1000);
 				}
 			}

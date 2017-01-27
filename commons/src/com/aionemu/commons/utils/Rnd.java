@@ -1,5 +1,7 @@
 package com.aionemu.commons.utils;
 
+import java.util.List;
+
 /**
  * @author Balancer, Neon
  */
@@ -44,6 +46,38 @@ public final class Rnd {
 	 */
 	public static int get(int min, int max) {
 		return min + (int) Math.floor(rnd.nextFloat() * (max - min + 1));
+	}
+
+	/**
+	 * Gets a random element from the given list, null if it's empty
+	 * 
+	 * @param list
+	 * @return Random element
+	 */
+	public static <T> T get(List<T> list) {
+		return list.isEmpty() ? null : list.get(get(list.size()));
+	}
+
+	/**
+	 * Gets a random element from the given array, null if it's empty
+	 * 
+	 * @param array
+	 * @return Random element
+	 */
+	public static <T> T get(T[] array) {
+		return array.length == 0 ? null : array[get(array.length)];
+	}
+
+	/**
+	 * Gets a random element from the given primitive int array (must not be empty)
+	 * 
+	 * @param array
+	 * @return Random element
+	 */
+	public static int get(int[] array) {
+		if (array.length == 0)
+			throw new IllegalArgumentException("Cannot get random int from an empty array.");
+		return array[get(array.length)];
 	}
 
 	/**

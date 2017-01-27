@@ -114,7 +114,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		Player target = !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
+		Player target = Rnd.get(players);
 		if (target == null)
 			return;
 		AIActions.targetCreature(this, target);

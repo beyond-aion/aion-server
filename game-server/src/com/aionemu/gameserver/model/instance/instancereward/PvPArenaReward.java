@@ -87,8 +87,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	public final void setRndZone() {
 		int index = Rnd.get(zones.size());
-		zone = zones.get(index);
-		zones.remove(index);
+		zone = zones.remove(index);
 	}
 
 	private List<Integer> getFreePositions() {
@@ -107,7 +106,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		if (position != 0) {
 			clearPosition(position, Boolean.FALSE);
 		}
-		Integer key = getFreePositions().get(Rnd.get(getFreePositions().size()));
+		Integer key = Rnd.get(getFreePositions());
 		clearPosition(key, Boolean.TRUE);
 		reward.setPosition(key);
 	}

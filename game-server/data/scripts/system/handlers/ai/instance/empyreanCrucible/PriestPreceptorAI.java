@@ -97,7 +97,7 @@ public class PriestPreceptorAI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		return players.get(Rnd.get(players.size()));
+		return Rnd.get(players);
 	}
 
 	private void applySoulSickness(final Npc npc) {

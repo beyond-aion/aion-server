@@ -58,9 +58,9 @@ public class DropGroup implements DropCalculator {
 			if (drops.size() > 1) {
 				List<Drop> safeDrops = drops.stream().filter(drop -> drop.getChance() >= 100).collect(Collectors.toList());
 				if (!safeDrops.isEmpty())
-					d = safeDrops.get(Rnd.get(safeDrops.size()));
+					d = Rnd.get(safeDrops);
 				else
-					d = drops.get(Rnd.get(drops.size()));
+					d = Rnd.get(drops);
 			} else
 				d = drops.get(0);
 			index = d.dropCalculator(result, index, dropModifier, race, groupMembers);

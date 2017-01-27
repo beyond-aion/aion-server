@@ -219,7 +219,7 @@ public class Auction extends AdminCommand {
 			int counter = 0;
 			FastTable<House> houses = HousingService.getInstance().getCustomHouses();
 			while (!houses.isEmpty() && counter < count) {
-				House house = houses.get(Rnd.get(houses.size()));
+				House house = Rnd.get(houses);
 				houses.remove(house);
 				if (house.getOwnerId() != 0 || house.getHouseType() != houseType) {
 					continue;

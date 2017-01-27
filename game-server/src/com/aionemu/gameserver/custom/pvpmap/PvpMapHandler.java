@@ -212,7 +212,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				removePlayer(player);
 			}
 		} else {
-			WorldPosition pos = respawnLocations.get(Rnd.get(respawnLocations.size()));
+			WorldPosition pos = Rnd.get(respawnLocations);
 			TeleportService.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 				TeleportAnimation.BATTLEGROUND);
 		}

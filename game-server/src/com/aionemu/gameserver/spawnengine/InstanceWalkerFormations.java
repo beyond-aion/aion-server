@@ -104,11 +104,11 @@ public class InstanceWalkerFormations {
 			}
 			// Now that all variants are in the map, spawn one randomly
 			for (List<WalkerGroup> varGroups : formationVariants.values()) {
-				WalkerGroup spawnedGroup = varGroups.get(Rnd.get(varGroups.size()));
+				WalkerGroup spawnedGroup = Rnd.get(varGroups);
 				spawnedGroup.spawn();
 			}
 			for (List<ClusteredNpc> varWalkers : walkerVariants.values()) {
-				ClusteredNpc spawnedWalker = varWalkers.get(Rnd.get(varWalkers.size()));
+				ClusteredNpc spawnedWalker = Rnd.get(varWalkers);
 				spawnedWalker.spawn(spawnedWalker.getNpc().getZ());
 			}
 		}
@@ -121,7 +121,7 @@ public class InstanceWalkerFormations {
 		if (varGroups == null)
 			return;
 		List<WalkerGroup> notSpawned = varGroups.stream().filter(group -> !group.isSpawned()).collect(Collectors.toList());
-		WalkerGroup newGroup = notSpawned.get(Rnd.get(notSpawned.size()));
+		WalkerGroup newGroup = Rnd.get(notSpawned);
 		newGroup.spawn();
 		if (walkerGroup.isSpawned())
 			walkerGroup.despawn();
@@ -138,7 +138,7 @@ public class InstanceWalkerFormations {
 		if (varWalkers == null)
 			return;
 		List<ClusteredNpc> notSpawned = varWalkers.stream().filter(cNpc -> !cNpc.getNpc().isSpawned()).collect(Collectors.toList());
-		ClusteredNpc newWalker = notSpawned.get(Rnd.get(notSpawned.size()));
+		ClusteredNpc newWalker = Rnd.get(notSpawned);
 		newWalker.spawn(newWalker.getNpc().getZ());
 		if (!npc.isSpawned())
 			return;

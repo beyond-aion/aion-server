@@ -150,7 +150,7 @@ public class RM1337AI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		return !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
+		return Rnd.get(players);
 	}
 
 	private void rndSpawn(int npcId) {

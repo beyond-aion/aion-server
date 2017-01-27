@@ -173,10 +173,9 @@ public class BonusService {
 		if (finalList.isEmpty())
 			return null;
 
-		int itemIndex = Rnd.get(finalList.size());
 		int itemCount = 1;
 
-		ItemRaceEntry reward = finalList.get(itemIndex);
+		ItemRaceEntry reward = Rnd.get(finalList);
 		if (reward instanceof CraftItem)
 			itemCount = Rnd.get(3, 5);
 
@@ -258,8 +257,7 @@ public class BonusService {
 		if (finalList.isEmpty())
 			return null;
 
-		int itemIndex = Rnd.get(finalList.size());
-		ItemRaceEntry reward = finalList.get(itemIndex);
+		ItemRaceEntry reward = Rnd.get(finalList);
 		return new QuestItems(reward.getId(), 1);
 	}
 	
@@ -280,8 +278,7 @@ public class BonusService {
 		if (finalList.isEmpty())
 			return null;
 		
-		int itemIndex = Rnd.get(finalList.size());
-		ItemRaceEntry reward = finalList.get(itemIndex);
+		ItemRaceEntry reward = Rnd.get(finalList);
 		return new QuestItems(reward.getId(), 1);
 	}
 }

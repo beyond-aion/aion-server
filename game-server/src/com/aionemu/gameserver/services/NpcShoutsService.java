@@ -63,8 +63,7 @@ public class NpcShoutsService {
 	public void shoutRandom(Npc sender, Player target, List<NpcShout> shouts, int shoutCooldown) {
 		if (shouts == null || shouts.isEmpty())
 			return;
-		int randomShout = shouts.size() == 1 ? 0 : Rnd.get(shouts.size());
-		shout(sender, target, shouts.get(randomShout), shoutCooldown);
+		shout(sender, target, Rnd.get(shouts), shoutCooldown);
 	}
 
 	public void shout(Npc sender, Player target, NpcShout shout, int shoutCooldown) {

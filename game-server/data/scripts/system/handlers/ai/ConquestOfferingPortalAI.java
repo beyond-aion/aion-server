@@ -32,7 +32,7 @@ public class ConquestOfferingPortalAI extends ActionItemNpcAI {
 		if (spawns != null) {
 			List<SpawnSpotTemplate> spots = spawns.getSpawnSpotTemplates();
 			if (!spots.isEmpty()) {
-				SpawnSpotTemplate template = spots.get(Rnd.get(spots.size()));
+				SpawnSpotTemplate template = Rnd.get(spots);
 				TeleportService.teleportTo(player, player.getWorldId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 					TeleportAnimation.FADE_OUT_BEAM);
 			}

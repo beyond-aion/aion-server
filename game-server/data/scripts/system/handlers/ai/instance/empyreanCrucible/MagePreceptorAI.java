@@ -118,7 +118,7 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		return players.get(Rnd.get(players.size()));
+		return Rnd.get(players);
 	}
 
 	private void checkPercentage(int percentage) {

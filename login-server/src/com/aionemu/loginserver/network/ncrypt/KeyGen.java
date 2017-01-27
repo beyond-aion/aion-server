@@ -75,6 +75,6 @@ public class KeyGen {
 	 * @return encryptedRSAkeypairs
 	 */
 	public static EncryptedRSAKeyPair getEncryptedRSAKeyPair() {
-		return encryptedRSAKeyPairs[Rnd.get(encryptedRSAKeyPairs.length)];
+		return Rnd.get(encryptedRSAKeyPairs);
 	}
 }

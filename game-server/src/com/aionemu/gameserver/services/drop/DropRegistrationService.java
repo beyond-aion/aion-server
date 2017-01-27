@@ -599,8 +599,7 @@ public class DropRegistrationService {
 		if (alloweditems.size() >= 1) {
 			for (int i = 0; i < rule.getMaxDropRule(); i++) {
 				int rndIndex = Rnd.get(alloweditems.size());
-				droppeditems.add(alloweditems.get(rndIndex));
-				alloweditems.remove(rndIndex);
+				droppeditems.add(alloweditems.remove(rndIndex));
 				if (alloweditems.size() == 0)
 					break;
 			}

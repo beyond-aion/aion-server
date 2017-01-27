@@ -76,10 +76,7 @@ public class RakshaAI extends AggressiveNpcAI {
 						} else {
 							int count = Rnd.get(3, size);
 							for (int i = 0; i < count; i++) {
-								if (players.isEmpty()) {
-									break;
-								}
-								spawnRubble(players.get(Rnd.get(players.size())));
+								spawnRubble(Rnd.get(players));
 							}
 						}
 					}

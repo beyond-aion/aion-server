@@ -98,6 +98,6 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		return !players.isEmpty() ? players.get(Rnd.get(players.size())) : null;
+		return Rnd.get(players);
 	}
 }
