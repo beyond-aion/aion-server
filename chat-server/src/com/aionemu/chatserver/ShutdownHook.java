@@ -3,7 +3,6 @@ package com.aionemu.chatserver;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.netty.NettyServer;
-import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.utils.ExitCode;
 
 import ch.qos.logback.classic.LoggerContext;
@@ -42,7 +41,6 @@ public class ShutdownHook extends Thread {
 	@Override
 	public void run() {
 		NettyServer.getInstance().shutdownAll();
-		GameServerService.getInstance().setOffline();
 
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();

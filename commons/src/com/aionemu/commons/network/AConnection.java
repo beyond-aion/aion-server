@@ -119,7 +119,10 @@ public abstract class AConnection {
 			if (isWriteDisabled())
 				return;
 
+			pendingClose = true;
 			getDispatcher().closeConnection(this);
+			if (key.isValid())
+				key.selector().wakeup();
 		}
 	}
 
@@ -147,8 +150,9 @@ public abstract class AConnection {
 					key.cancel();
 					socketChannel.close();
 				}
-				closed = true;
 			} catch (IOException ignored) {
+			} finally {
+				closed = true;
 			}
 		}
 		return true;
@@ -159,6 +163,10 @@ public abstract class AConnection {
 	 */
 	final boolean isPendingClose() {
 		return pendingClose && !closed;
+	}
+
+	final boolean isClosed() {
+		return closed;
 	}
 
 	/**

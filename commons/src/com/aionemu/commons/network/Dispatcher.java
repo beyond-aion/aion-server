@@ -8,11 +8,11 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
-import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
 
 /**
@@ -33,10 +33,6 @@ public abstract class Dispatcher extends Thread {
 	Selector selector;
 
 	/**
-	 * Executor on witch disconnection tasks will be executed.
-	 */
-	private final Executor dcPool;
-	/**
 	 * Object on witch register vs selector.select are synchronized
 	 */
 	private final Object gate = new Object();
@@ -45,13 +41,11 @@ public abstract class Dispatcher extends Thread {
 	 * Constructor.
 	 * 
 	 * @param name
-	 * @param dcPool
 	 * @throws IOException
 	 */
-	public Dispatcher(String name, Executor dcPool) throws IOException {
+	public Dispatcher(String name) throws IOException {
 		super(name);
 		this.selector = SelectorProvider.provider().openSelector();
-		this.dcPool = dcPool;
 	}
 
 	/**
@@ -292,15 +286,11 @@ public abstract class Dispatcher extends Thread {
 		 * We wrote away all data, so we're no longer interested in writing on this socket.
 		 */
 		key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
-
-		/** We wrote all data so we can close connection that is "PandingClose" */
-		if (con.isPendingClose())
-			closeConnectionImpl(con);
 	}
 
 	/**
-	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread [DisconnectionThreadPool]. This method may
-	 * only be called by current Dispatcher Thread.
+	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread. This method may only be called by current
+	 * Dispatcher Thread.
 	 * 
 	 * @param con
 	 */
@@ -312,6 +302,6 @@ public abstract class Dispatcher extends Thread {
 			assert Thread.currentThread() == this;
 
 		if (con.onlyClose())
-			dcPool.execute(new DisconnectionTask(con));
+			ThreadPoolManager.getInstance().execute(() -> con.onDisconnect());
 	}
 }

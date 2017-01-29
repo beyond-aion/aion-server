@@ -3,13 +3,14 @@ package com.aionemu.commons.network;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
 
 import javolution.util.FastTable;
@@ -45,11 +46,6 @@ public class NioServer {
 	private Dispatcher[] readWriteDispatchers;
 
 	/**
-	 * DisconnectionThreadPool that will be used to execute DisconnectionTask.
-	 */
-	private final Executor dcPool;
-
-	/**
 	 * 
 	 */
 	private int readWriteThreads;
@@ -63,8 +59,6 @@ public class NioServer {
 	 * 
 	 * @param readWriteThreads
 	 *          - number of threads that will be used for handling read and write.
-	 * @param dcPool
-	 *          - ThreadPool on witch Disconnection tasks will be executed.
 	 * @param cfgs
 	 *          - Server Configurations
 	 */
@@ -79,14 +73,13 @@ public class NioServer {
 				throw new RuntimeException(
 					"This is unstable build. Assertion must be enabled! Add -ea to your start script or consider using stable build instead.");
 		}
-		this.dcPool = ThreadPoolManager.getInstance();
 		this.readWriteThreads = readWriteThreads;
 		this.cfgs = cfgs;
 	}
 
 	public void connect() {
 		try {
-			this.initDispatchers(readWriteThreads, dcPool);
+			this.initDispatchers(readWriteThreads);
 
 			/** Create a new non-blocking server socket channel for clients */
 			for (ServerCfg cfg : cfgs) {
@@ -137,12 +130,12 @@ public class NioServer {
 	 * Initialize Dispatchers.
 	 * 
 	 * @param readWriteThreads
-	 * @param dcPool
+	 * @param packetExecutor
 	 * @throws IOException
 	 */
-	private void initDispatchers(int readWriteThreads, Executor dcPool) throws IOException {
+	private void initDispatchers(int readWriteThreads) throws IOException {
 		if (readWriteThreads < 1) {
-			acceptDispatcher = new AcceptReadWriteDispatcherImpl("AcceptReadWrite Dispatcher", dcPool);
+			acceptDispatcher = new AcceptReadWriteDispatcherImpl("AcceptReadWrite Dispatcher");
 			acceptDispatcher.start();
 		} else {
 			acceptDispatcher = new AcceptDispatcherImpl("Accept Dispatcher");
@@ -150,24 +143,10 @@ public class NioServer {
 
 			readWriteDispatchers = new Dispatcher[readWriteThreads];
 			for (int i = 0; i < readWriteDispatchers.length; i++) {
-				readWriteDispatchers[i] = new AcceptReadWriteDispatcherImpl("ReadWrite-" + i + " Dispatcher", dcPool);
+				readWriteDispatchers[i] = new AcceptReadWriteDispatcherImpl("ReadWrite-" + i + " Dispatcher");
 				readWriteDispatchers[i].start();
 			}
 		}
-	}
-
-	/**
-	 * @return Number of active connections.
-	 */
-	public final int getActiveConnections() {
-		int count = 0;
-		if (readWriteDispatchers != null) {
-			for (Dispatcher d : readWriteDispatchers)
-				count += d.selector().keys().size();
-		} else {
-			count = acceptDispatcher.selector().keys().size() - serverChannelKeys.size();
-		}
-		return count;
 	}
 
 	/**
@@ -183,68 +162,49 @@ public class NioServer {
 			log.error("Error during closing ServerChannel, " + e, e);
 		}
 
-		notifyServerClose();
-		/** Wait 5s */
-		try {
-			Thread.sleep(1000);
-		} catch (Throwable t) {
-			log.warn("Nio thread was interrupted during shutdown", t);
+		// find active connections once, at this point new ones cannot be added anymore
+		Set<AConnection> activeConnections = findAllConnections();
+		log.info("\tClosing " + activeConnections.size() + " active connections...");
+
+		// notify connections about server close (they should close themselves)
+		activeConnections.forEach(con -> con.onServerClose());
+
+		// wait max 5s for connections to close, else force close
+		long timeout = System.currentTimeMillis() + 5000;
+		while (isAnyConnectionClosePending(activeConnections)) {
+			if (System.currentTimeMillis() > timeout) {
+				activeConnections.removeIf(con -> con.isClosed());
+				log.info("\tForcing " + activeConnections.size() + " non responding connections to disconnect...");
+				activeConnections.forEach(con -> con.close());
+				timeout = System.currentTimeMillis() + 5000;
+				while (isAnyConnectionClosePending(activeConnections) && timeout > System.currentTimeMillis()) {
+				}
+				break;
+			}
 		}
-
-		log.info(" Active connections: " + getActiveConnections());
-
-		/** DC all */
-		log.info("Forced Disconnecting all connections...");
-		closeAll();
-		log.info(" Active connections: " + getActiveConnections());
-
-		// dcPool.waitForDisconnectionTasks();
-
-		/** Wait 5s */
-		try {
-			Thread.sleep(1000);
-		} catch (Throwable t) {
-			log.warn("Nio thread was interrupted during shutdown", t);
-		}
+		log.info("\tActive connections left: " + findAllConnections().stream().filter(con -> !con.isClosed()).count());
 	}
 
-	/**
-	 * Calls onServerClose method for all active connections.
-	 */
-	private void notifyServerClose() {
+	private Set<AConnection> findAllConnections() {
+		Set<AConnection> activeConnections = new HashSet<>();
 		if (readWriteDispatchers != null) {
 			for (Dispatcher d : readWriteDispatchers)
 				for (SelectionKey key : d.selector().keys()) {
 					if (key.attachment() instanceof AConnection) {
-						((AConnection) key.attachment()).onServerClose();
+						activeConnections.add(((AConnection) key.attachment()));
 					}
 				}
 		} else {
 			for (SelectionKey key : acceptDispatcher.selector().keys()) {
 				if (key.attachment() instanceof AConnection) {
-					((AConnection) key.attachment()).onServerClose();
+					activeConnections.add(((AConnection) key.attachment()));
 				}
 			}
 		}
+		return activeConnections;
 	}
 
-	/**
-	 * Close all active connections.
-	 */
-	private void closeAll() {
-		if (readWriteDispatchers != null) {
-			for (Dispatcher d : readWriteDispatchers)
-				for (SelectionKey key : d.selector().keys()) {
-					if (key.attachment() instanceof AConnection) {
-						((AConnection) key.attachment()).close();
-					}
-				}
-		} else {
-			for (SelectionKey key : acceptDispatcher.selector().keys()) {
-				if (key.attachment() instanceof AConnection) {
-					((AConnection) key.attachment()).close();
-				}
-			}
-		}
+	private boolean isAnyConnectionClosePending(Collection<AConnection> connections) {
+		return connections.stream().anyMatch(con -> con.isPendingClose());
 	}
 }

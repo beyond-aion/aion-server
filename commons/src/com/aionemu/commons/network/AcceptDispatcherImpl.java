@@ -20,7 +20,7 @@ public class AcceptDispatcherImpl extends Dispatcher {
 	 * @throws IOException
 	 */
 	public AcceptDispatcherImpl(String name) throws IOException {
-		super(name, null);
+		super(name);
 	}
 
 	/**

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 import javolution.util.FastTable;
 
@@ -22,16 +21,8 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 */
 	private final List<AConnection> pendingClose = new FastTable<>();
 
-	/**
-	 * Constructor that accept <code>String</code> name and <code>DisconnectionThreadPool</code> dcPool as parameter.
-	 * 
-	 * @param name
-	 * @param dcPool
-	 * @throws IOException
-	 * @see com.aionemu.commons.network.DisconnectionThreadPool
-	 */
-	public AcceptReadWriteDispatcherImpl(String name, Executor dcPool) throws IOException {
-		super(name, dcPool);
+	public AcceptReadWriteDispatcherImpl(String name) throws IOException {
+		super(name);
 	}
 
 	/**
@@ -42,8 +33,6 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	@Override
 	void dispatch() throws IOException {
 		int selected = selector.select();
-
-		processPendingClose();
 
 		if (selected != 0) {
 			Iterator<SelectionKey> selectedKeys = this.selector.selectedKeys().iterator();
@@ -74,6 +63,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 			}
 		}
 
+		processPendingClose();
 	}
 
 	/**
