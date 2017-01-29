@@ -3,8 +3,8 @@ package com.aionemu.loginserver.taskmanager.trigger.implementations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
+import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
  * @author nrg
