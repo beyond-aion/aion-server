@@ -37,7 +37,7 @@ public class PacketProcessor<T extends AConnection> {
 	private final int threadSpawnThreshold;
 
 	/**
-	 * When one working thread should be killed.
+	 * Max. pending packet count, where working threads can be killed (recover back to minThreads).
 	 */
 	private final int threadKillThreshold;
 
@@ -167,7 +167,7 @@ public class PacketProcessor<T extends AConnection> {
 	 * Kill one PacketProcessor Thread, but only if there are more working Threads than "minThreads"
 	 */
 	private void killThread() {
-		if (threads.size() < minThreads) {
+		if (threads.size() > minThreads) {
 			Thread t = threads.remove((threads.size() - 1));
 			log.debug("Killing PacketProcessor Thread: " + t.getName());
 			t.interrupt();
@@ -195,7 +195,7 @@ public class PacketProcessor<T extends AConnection> {
 	 * 
 	 * @return first available BaseClientPacket
 	 */
-	private BaseClientPacket<T> getFirstAviable() {
+	private BaseClientPacket<T> getFirstAvailable() {
 		for (;;) {
 			while (packets.isEmpty())
 				notEmpty.awaitUninterruptibly();
@@ -232,7 +232,7 @@ public class PacketProcessor<T extends AConnection> {
 					if (Thread.interrupted())
 						return;
 
-					packet = getFirstAviable();
+					packet = getFirstAvailable();
 				} finally {
 					lock.unlock();
 				}
@@ -269,10 +269,12 @@ public class PacketProcessor<T extends AConnection> {
 			/* Number of packets waiting for execution */
 			int packetsToExecute = packets.size();
 
-			if (packetsToExecute < lastSize && packetsToExecute < threadKillThreshold) {
-				// too much threads
-				killThread();
-			} else if (packetsToExecute > lastSize && packetsToExecute > threadSpawnThreshold) {
+			if (packetsToExecute <= lastSize) {
+				if (packetsToExecute <= threadKillThreshold) {
+					// reduce thread count by one
+					killThread();
+				}
+			} else if (packetsToExecute > threadSpawnThreshold) {
 				// too small amount of threads
 				if (!newThread() && packetsToExecute >= threadSpawnThreshold * 3)
 					log.warn("Lagg detected! [" + packetsToExecute
