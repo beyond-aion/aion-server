@@ -91,29 +91,17 @@ public class TeleportService {
 			return;
 		}
 
-		if (template.getTeleLocIdData() == null) {
-			log.warn(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-			if (player.isGM())
-				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
-			return;
-		}
-
-		TeleportLocation location = template.getTeleLocIdData().getTeleportLocation(locId);
+		TeleportLocation location = template.getTeleLocIdData() == null ? null : template.getTeleLocIdData().getTeleportLocation(locId);
 		if (location == null) {
-			log.warn(String.format("Missing locId for this teleporter at teleporter_templates.xml with locId: %d", locId));
+			log.warn("Missing location in npc_teleporter.xml for locId {} (npc {})", locId, npc.getNpcId());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-			if (player.isGM())
-				PacketSendUtility.sendMessage(player, "Missing locId for this teleporter at teleporter_templates.xml with locId: " + locId);
 			return;
 		}
 
 		TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(locId);
 		if (locationTemplate == null) {
-			log.warn(String.format("Missing info at teleport_location.xml with locId: %d", locId));
+			log.warn("Missing teleloc_template in teleport_location.xml with locId {}", locId);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-			if (player.isGM())
-				PacketSendUtility.sendMessage(player, "Missing info at teleport_location.xml with locId: " + locId);
 			return;
 		}
 
