@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -118,22 +117,20 @@ public class Equipment {
 			return null;
 		}
 
-		if (owner.getAccessLevel() < AdminConfig.GM_LEVEL) {
-			if (itemTemplate.getRace() != Race.PC_ALL && itemTemplate.getRace() != owner.getRace()) {
-				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RACE());
-				return null;
-			}
+		if (itemTemplate.getRace() != Race.PC_ALL && itemTemplate.getRace() != owner.getRace()) {
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RACE());
+			return null;
+		}
 
-			ItemUseLimits limits = itemTemplate.getUseLimits();
-			if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != owner.getGender()) {
-				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_GENDER());
-				return null;
-			}
+		ItemUseLimits limits = itemTemplate.getUseLimits();
+		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != owner.getGender()) {
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_GENDER());
+			return null;
+		}
 
-			if (!verifyRankLimits(item)) {
-				PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankById(limits.getMinRank()).getDescriptionId()));
-				return null;
-			}
+		if (!verifyRankLimits(item)) {
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankById(limits.getMinRank()).getDescriptionId()));
+			return null;
 		}
 
 		long itemSlotToEquip = 0;
@@ -809,7 +806,8 @@ public class Equipment {
 				continue;
 			// TODO: Check it! Not sure for dual hand
 			if (item.getItemTemplate().isArmor()) {
-				if (item.getItemTemplate().getItemSubType() == type && item.isEquipped() && item.getEquipmentSlot() != ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
+				if (item.getItemTemplate().getItemSubType() == type && item.isEquipped()
+					&& item.getEquipmentSlot() != ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
 					return true;
 				}
 			}
@@ -953,7 +951,8 @@ public class Equipment {
 			item.setEquipped(false);
 			PacketSendUtility.sendPacket(owner, new SM_INVENTORY_UPDATE_ITEM(owner, item, ItemUpdateType.EQUIP_UNEQUIP));
 			if (owner.getGameStats() != null) {
-				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 || (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0
+					|| (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
 					notifyItemUnequip(item);
 				}
 			}
@@ -982,7 +981,8 @@ public class Equipment {
 
 		if (owner.getGameStats() != null) {
 			for (Item item : equippedWeapon) {
-				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0 || (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0
+					|| (item.getEquipmentSlot() & ItemSlot.SUB_HAND.getSlotIdMask()) != 0) {
 					notifyItemEquipped(item);
 				}
 			}
@@ -1119,8 +1119,7 @@ public class Equipment {
 				responder.getController().cancelUseItem();
 
 				PacketSendUtility.broadcastPacket(responder,
-					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4),
-					true);
+					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4), true);
 
 				responder.getController().cancelTask(TaskId.ITEM_USE);
 
@@ -1131,8 +1130,7 @@ public class Equipment {
 						responder.getController().cancelTask(TaskId.ITEM_USE);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
 						PacketSendUtility.broadcastPacket(responder,
-							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8),
-							true);
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
 					}
 				};
 				responder.getObserveController().attach(moveObserver);
@@ -1145,8 +1143,7 @@ public class Equipment {
 						responder.getObserveController().removeObserver(moveObserver);
 
 						PacketSendUtility.broadcastPacket(responder,
-							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6),
-							true);
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6), true);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_SUCCEED(item.getNameId()));
 
 						item.setSoulBound(true);
@@ -1166,8 +1163,8 @@ public class Equipment {
 
 		boolean requested = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, responseHandler);
 		if (requested) {
-			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0,
-				new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player,
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0, new DescriptionId(item.getNameId())));
 		} else {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_CLOSE_OTHER_MSG_BOX_AND_RETRY());
 		}
