@@ -15,14 +15,6 @@ import org.slf4j.LoggerFactory;
  */
 public final class FloodManager {
 
-	public static enum ErrorMode {
-		INVALID_OPCODE,
-		BUFFER_UNDER_FLOW,
-		BUFFER_OVER_FLOW,
-		FAILED_READING,
-		FAILED_RUNNING;
-	}
-
 	public static final class FloodFilter {
 
 		private final int _warnLimit;
