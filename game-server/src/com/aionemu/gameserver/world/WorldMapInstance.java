@@ -55,7 +55,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 */
 	public static final int regionSize = WorldConfig.WORLD_REGION_SIZE;
 	/**
-	 * WorldMap witch is parent of this instance.
+	 * WorldMap which is parent of this instance.
 	 */
 	private final WorldMap parent;
 	/**
@@ -110,7 +110,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	/**
-	 * Returns WorldMap witch is parent of this instance
+	 * Returns WorldMap which is parent of this instance
 	 * 
 	 * @return parent
 	 */

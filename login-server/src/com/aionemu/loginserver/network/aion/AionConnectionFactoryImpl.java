@@ -22,7 +22,7 @@ public class AionConnectionFactoryImpl implements ConnectionFactory {
 	 * @param socket
 	 *          that new {@link com.aionemu.commons.network.AConnection AConnection} instance will represent.<br>
 	 * @param dispatcher
-	 *          to witch new connection will be registered.<br>
+	 *          to which new connection will be registered.<br>
 	 * @return a new instance of {@link com.aionemu.commons.network.AConnection AConnection}<br>
 	 * @throws IOException
 	 * @see com.aionemu.commons.network.AConnection

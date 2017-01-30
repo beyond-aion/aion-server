@@ -357,7 +357,7 @@ public class Equip extends AdminCommand {
 				+ "  This command changes the godstone activation rate to the given number(0-100).\n"
 				+ "  Give a GodStone ItemID and it will be socketed on you Main Hand Weapon.\n"
 				+ "  Notice: You can ommit parameters between [], especially playerName.\n"
-				+ "  Target: Named player, then targeted player, only then self.\n" + "  Default Value: Rate is 100 witch is the default action .");
+				+ "  Target: Named player, then targeted player, only then self.\n" + "  Default Value: Rate is 100 which is the default action .");
 	}
 
 	@Override

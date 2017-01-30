@@ -47,7 +47,7 @@ public class MapRegion {
 	 */
 	private final int regionId;
 	/**
-	 * WorldMapInstance witch is parent of this map region.
+	 * WorldMapInstance which is parent of this map region.
 	 */
 	private final WorldMapInstance parent;
 	/**
@@ -103,7 +103,7 @@ public class MapRegion {
 	}
 
 	/**
-	 * Returns WorldMapInstance witch is parent of this instance
+	 * Returns WorldMapInstance which is parent of this instance
 	 * 
 	 * @return parent
 	 */

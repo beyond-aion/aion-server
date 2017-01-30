@@ -21,7 +21,7 @@ public abstract class AConnection {
 	 */
 	private final SocketChannel socketChannel;
 	/**
-	 * Dispatcher [AcceptReadWriteDispatcherImpl] to witch this connection SelectionKey is registered.
+	 * Dispatcher [AcceptReadWriteDispatcherImpl] to which this connection SelectionKey is registered.
 	 */
 	private final Dispatcher dispatcher;
 	/**
@@ -37,7 +37,7 @@ public abstract class AConnection {
 	 */
 	protected boolean closed;
 	/**
-	 * Object on witch some methods are synchronized
+	 * Object on which some methods are synchronized
 	 */
 	protected final Object guard = new Object();
 	/**
@@ -98,7 +98,7 @@ public abstract class AConnection {
 	}
 
 	/**
-	 * @return Dispatcher to witch this connection is registered.
+	 * @return Dispatcher to which this connection is registered.
 	 */
 	final Dispatcher getDispatcher() {
 		return dispatcher;

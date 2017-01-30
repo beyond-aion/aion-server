@@ -33,7 +33,7 @@ public abstract class Dispatcher extends Thread {
 	Selector selector;
 
 	/**
-	 * Object on witch register vs selector.select are synchronized
+	 * Object on which register vs selector.select are synchronized
 	 */
 	private final Object gate = new Object();
 
