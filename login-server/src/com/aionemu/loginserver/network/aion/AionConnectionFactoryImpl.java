@@ -3,7 +3,6 @@ package com.aionemu.loginserver.network.aion;
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
 
-import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.ConnectionFactory;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.loginserver.configs.Config;
@@ -29,7 +28,7 @@ public class AionConnectionFactoryImpl implements ConnectionFactory {
 	 * @see com.aionemu.commons.network.Dispatcher
 	 */
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
+	public LoginConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		if (Config.ENABLE_FLOOD_PROTECTION)
 			if (FloodProtector.getInstance().tooFast(socket.socket().getInetAddress().getHostAddress()))
 				return null;

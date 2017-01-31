@@ -5,7 +5,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.Queue;
 
+import com.aionemu.commons.network.packet.BaseServerPacket;
+import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
 
 /**
@@ -14,7 +17,7 @@ import com.aionemu.commons.options.Assertion;
  * 
  * @author -Nemesiss-
  */
-public abstract class AConnection {
+public abstract class AConnection<T extends BaseServerPacket> {
 
 	/**
 	 * SocketChannel representing this connection
@@ -98,13 +101,6 @@ public abstract class AConnection {
 	}
 
 	/**
-	 * @return Dispatcher to which this connection is registered.
-	 */
-	final Dispatcher getDispatcher() {
-		return dispatcher;
-	}
-
-	/**
 	 * @return SocketChannel representing this connection.
 	 */
 	public SocketChannel getSocketChannel() {
@@ -112,27 +108,57 @@ public abstract class AConnection {
 	}
 
 	/**
-	 * Connection will be closed at some time [by Dispatcher Thread], after that onDisconnect() method will be called to clear all other things.
+	 * Sends the ServerPacket to this client.
 	 */
-	public final void close() {
+	public final void sendPacket(T serverPacket) {
 		synchronized (guard) {
-			if (isWriteDisabled())
+			if (pendingClose || closed)
 				return;
 
-			pendingClose = true;
-			getDispatcher().closeConnection(this);
-			if (key.isValid())
-				key.selector().wakeup();
+			getSendMsgQueue().add(serverPacket);
+			enableWriteInterest();
 		}
 	}
 
 	/**
-	 * This will only close the connection without taking care of the rest. May be called only by Dispatcher Thread. Returns true if connection was not
-	 * closed before.
-	 * 
-	 * @return true if connection was not closed before.
+	 * Connection will be closed at some time [by Dispatcher Thread], after that onDisconnect() method will be called to clear all other things.
 	 */
-	final boolean onlyClose() {
+	public final void close() {
+		close(null);
+	}
+
+	/**
+	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
+	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
+	 * 
+	 * @param closePacket
+	 *          Packet that will be sent before closing. If closePacket is null, regular {@link #close()} will be called instead.
+	 */
+	public final void close(T closePacket) {
+		synchronized (guard) {
+			if (pendingClose || closed)
+				return;
+
+			pendingClose = true;
+			if (closePacket != null) {
+				getSendMsgQueue().clear();
+				getSendMsgQueue().add(closePacket);
+				dispatcher.closeConnection(this);
+				enableWriteInterest();
+			} else {
+				dispatcher.closeConnection(this);
+				if (key.isValid())
+					key.selector().wakeup(); // notify dispatcher
+			}
+		}
+	}
+
+	protected abstract Queue<T> getSendMsgQueue();
+
+	/**
+	 * This will close the connection and call onDisconnect() on another thread. May be called only by Dispatcher Thread.
+	 */
+	final void disconnect() {
 		/**
 		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		 */
@@ -141,21 +167,18 @@ public abstract class AConnection {
 
 		synchronized (guard) {
 			if (closed)
-				return false;
-			try {
-				if (socketChannel.isOpen()) {
-					socketChannel.shutdownInput();
-					socketChannel.shutdownOutput();
-					key.attach(null);
-					key.cancel();
-					socketChannel.close();
-				}
-			} catch (IOException ignored) {
-			} finally {
-				closed = true;
-			}
+				return;
+			closed = true;
 		}
-		return true;
+
+		try {
+			socketChannel.close();
+		} catch (IOException e) {
+		}
+		key.cancel();
+		key.attach(null);
+
+		ThreadPoolManager.getInstance().execute(() -> onDisconnect());
 	}
 
 	/**
@@ -167,13 +190,6 @@ public abstract class AConnection {
 
 	final boolean isClosed() {
 		return closed;
-	}
-
-	/**
-	 * @return True if write to this connection is possible.
-	 */
-	protected final boolean isWriteDisabled() {
-		return pendingClose || closed;
 	}
 
 	/**
@@ -205,7 +221,7 @@ public abstract class AConnection {
 	 * @param data
 	 * @return True if data was processed correctly, False if some error occurred and connection should be closed NOW.
 	 */
-	abstract protected boolean processData(ByteBuffer data);
+	protected abstract boolean processData(ByteBuffer data);
 
 	/**
 	 * This method will be called by Dispatcher, and will be repeated till return false.
@@ -213,20 +229,20 @@ public abstract class AConnection {
 	 * @param data
 	 * @return True if data was written to buffer, False indicating that there are not any more data to write.
 	 */
-	abstract protected boolean writeData(ByteBuffer data);
+	protected abstract boolean writeData(ByteBuffer data);
 
 	/**
 	 * Called when AConnection object is fully initialized and ready to process and send packets. It may be used as hook for sending first packet etc.
 	 */
-	abstract protected void initialized();
+	protected abstract void initialized();
 
 	/**
-	 * This method is called by Dispatcher to inform that this connection was closed and should be cleared. This method is called only once.
+	 * This method is called to inform that this connection was closed and should be cleared. This method is called only once.
 	 */
-	abstract protected void onDisconnect();
+	protected abstract void onDisconnect();
 
 	/**
 	 * This method is called by NioServer to inform that NioServer is shouting down. This method is called only once.
 	 */
-	abstract protected void onServerClose();
+	protected abstract void onServerClose();
 }

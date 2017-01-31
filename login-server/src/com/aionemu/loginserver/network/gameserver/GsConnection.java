@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import com.aionemu.loginserver.utils.ThreadPoolManager;
  * 
  * @author -Nemesiss-
  */
-public class GsConnection extends AConnection {
+public class GsConnection extends AConnection<GsServerPacket> {
 
 	/**
 	 * Logger for this class.
@@ -68,6 +69,11 @@ public class GsConnection extends AConnection {
 	 */
 	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
+	}
+
+	@Override
+	protected final Queue<GsServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
 	}
 
 	/**
@@ -119,44 +125,6 @@ public class GsConnection extends AConnection {
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to gameserver before closing?
 		close(/* packet */);
-	}
-
-	/**
-	 * Sends GsServerPacket to this client.
-	 * 
-	 * @param bp
-	 *          GsServerPacket to be sent.
-	 */
-	public final void sendPacket(GsServerPacket bp) {
-		synchronized (guard) {
-			/**
-			 * Connection is already closed or waiting for last (close packet) to be sent
-			 */
-			if (isWriteDisabled())
-				return;
-
-			sendMsgQueue.addLast(bp);
-			enableWriteInterest();
-		}
-	}
-
-	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
-	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
-	 * 
-	 * @param closePacket
-	 *          Packet that will be send before closing.
-	 */
-	public final void close(GsServerPacket closePacket) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
-
-			pendingClose = true;
-			sendMsgQueue.clear();
-			sendMsgQueue.addLast(closePacket);
-			enableWriteInterest();
-		}
 	}
 
 	/**

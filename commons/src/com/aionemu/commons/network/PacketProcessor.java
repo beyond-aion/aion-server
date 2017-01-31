@@ -24,7 +24,7 @@ import javolution.util.FastTable;
  * @param <T>
  *          AConnection - owner of client packets.
  */
-public class PacketProcessor<T extends AConnection> {
+public class PacketProcessor<T extends AConnection<?>> {
 
 	/**
 	 * Logger for PacketProcessor

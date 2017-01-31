@@ -6,7 +6,6 @@ import java.nio.channels.SocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.ConnectionFactory;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
@@ -45,7 +44,7 @@ public class GameConnectionFactoryImpl implements ConnectionFactory {
 	}
 
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
+	public AionConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		if (NetworkConfig.ENABLE_FLOOD_CONNECTIONS) {
 			String host = socket.socket().getInetAddress().getHostAddress();
 			final Result isFlooding = floodAcceptor.isFlooding(host, true);

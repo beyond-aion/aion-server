@@ -24,5 +24,5 @@ public interface ConnectionFactory {
 	 * @see com.aionemu.commons.network.AConnection
 	 * @see com.aionemu.commons.network.Dispatcher
 	 */
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException;
+	public AConnection<?> create(SocketChannel socket, Dispatcher dispatcher) throws IOException;
 }

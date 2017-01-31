@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 /**
  * @author KID
  */
-public class GsConnection extends AConnection {
+public class GsConnection extends AConnection<GsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
 	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
@@ -31,6 +32,11 @@ public class GsConnection extends AConnection {
 
 	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
+	}
+
+	@Override
+	protected final Queue<GsServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
 	}
 
 	@Override
@@ -60,26 +66,6 @@ public class GsConnection extends AConnection {
 	@Override
 	protected final void onServerClose() {
 		close();
-	}
-
-	public final void sendPacket(GsServerPacket bp) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
-			sendMsgQueue.addLast(bp);
-			enableWriteInterest();
-		}
-	}
-
-	public final void close(GsServerPacket closePacket) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
-			pendingClose = true;
-			sendMsgQueue.clear();
-			sendMsgQueue.addLast(closePacket);
-			enableWriteInterest();
-		}
 	}
 
 	public State getState() {

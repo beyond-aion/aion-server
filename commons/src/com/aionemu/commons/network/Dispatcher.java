@@ -12,7 +12,6 @@ import java.nio.channels.spi.SelectorProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
 
 /**
@@ -52,9 +51,8 @@ public abstract class Dispatcher extends Thread {
 	 * Add connection to pendingClose list, so this connection will be closed by this <code>Dispatcher</code> as soon as possible.
 	 * 
 	 * @param con
-	 * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
 	 */
-	abstract void closeConnection(AConnection con);
+	abstract void closeConnection(AConnection<?> con);
 
 	/**
 	 * Dispatch Selected keys and process pending close.
@@ -97,7 +95,7 @@ public abstract class Dispatcher extends Thread {
 	 * @param att
 	 * @throws IOException
 	 */
-	public final void register(SelectableChannel ch, int ops, AConnection att) throws IOException {
+	public final void register(SelectableChannel ch, int ops, AConnection<?> att) throws IOException {
 		synchronized (gate) {
 			selector.wakeup();
 			att.setKey(ch.register(selector, ops, att));
@@ -140,7 +138,7 @@ public abstract class Dispatcher extends Thread {
 	 */
 	final void read(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
-		AConnection con = (AConnection) key.attachment();
+		AConnection<?> con = (AConnection<?>) key.attachment();
 
 		ByteBuffer rb = con.readBuffer;
 
@@ -200,7 +198,7 @@ public abstract class Dispatcher extends Thread {
 	 *          Buffer with packet data
 	 * @return True if packet was parsed.
 	 */
-	private boolean parse(AConnection con, ByteBuffer buf) {
+	private boolean parse(AConnection<?> con, ByteBuffer buf) {
 		short sz = 0;
 		try {
 			sz = buf.getShort();
@@ -225,11 +223,11 @@ public abstract class Dispatcher extends Thread {
 	 */
 	final void write(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
-		AConnection con = (AConnection) key.attachment();
+		AConnection<?> con = (AConnection<?>) key.attachment();
 
 		int numWrite;
 		ByteBuffer wb = con.writeBuffer;
-		/** We have not writted data */
+		/** We have not written data */
 		if (wb.hasRemaining()) {
 			try {
 				numWrite = socketChannel.write(wb);
@@ -289,19 +287,17 @@ public abstract class Dispatcher extends Thread {
 	}
 
 	/**
-	 * Connection will be closed [onlyClose()] and onDisconnect() method will be executed on another thread. This method may only be called by current
-	 * Dispatcher Thread.
+	 * Connection will be closed. This method may only be called by current Dispatcher Thread.
 	 * 
 	 * @param con
 	 */
-	protected final void closeConnectionImpl(AConnection con) {
+	protected final void closeConnectionImpl(AConnection<?> con) {
 		/**
 		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		 */
 		if (Assertion.NetworkAssertion)
 			assert Thread.currentThread() == this;
 
-		if (con.onlyClose())
-			ThreadPoolManager.getInstance().execute(() -> con.onDisconnect());
+		con.disconnect();
 	}
 }

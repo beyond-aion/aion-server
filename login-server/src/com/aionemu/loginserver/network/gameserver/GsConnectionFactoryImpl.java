@@ -3,7 +3,6 @@ package com.aionemu.loginserver.network.gameserver;
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
 
-import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.ConnectionFactory;
 import com.aionemu.commons.network.Dispatcher;
 
@@ -27,7 +26,7 @@ public class GsConnectionFactoryImpl implements ConnectionFactory {
 	 * @see com.aionemu.commons.network.Dispatcher
 	 */
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
+	public GsConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		return new GsConnection(socket, dispatcher);
 	}
 }

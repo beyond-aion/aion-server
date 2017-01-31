@@ -14,7 +14,7 @@ import com.aionemu.commons.network.AConnection;
  * @param <T>
  *          AConnection - owner of this client packet.
  */
-public abstract class BaseClientPacket<T extends AConnection> extends BasePacket implements Runnable {
+public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePacket implements Runnable {
 
 	/**
 	 * Logger for this class.

@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * 
  * @author -Nemesiss-, Neon
  */
-public class LoginServerConnection extends AConnection {
+public class LoginServerConnection extends AConnection<LsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginServerConnection.class);
 
@@ -60,6 +61,11 @@ public class LoginServerConnection extends AConnection {
 	protected void initialized() {
 		log.info("Connected to LoginServer!");
 		sendPacket(new SM_GS_AUTH());
+	}
+
+	@Override
+	protected final Queue<LsServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
 	}
 
 	/**
@@ -112,48 +118,6 @@ public class LoginServerConnection extends AConnection {
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to loginserver before closing?
 		close(/* packet */);
-	}
-
-	/**
-	 * Sends GsServerPacket to this client.
-	 * 
-	 * @param bp
-	 *          GsServerPacket to be sent.
-	 */
-	public final void sendPacket(LsServerPacket bp) {
-		synchronized (guard) {
-			/**
-			 * Connection is already closed or waiting for last (close packet) to be sent
-			 */
-			if (isWriteDisabled())
-				return;
-
-			log.debug("sending packet: " + bp);
-
-			sendMsgQueue.addLast(bp);
-			enableWriteInterest();
-		}
-	}
-
-	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
-	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
-	 * 
-	 * @param closePacket
-	 *          Packet that will be send before closing.
-	 */
-	public final void close(LsServerPacket closePacket, boolean forced) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
-
-			log.debug("sending packet: " + closePacket + " and closing connection after that.");
-
-			pendingClose = true;
-			sendMsgQueue.clear();
-			sendMsgQueue.addLast(closePacket);
-			enableWriteInterest();
-		}
 	}
 
 	/**

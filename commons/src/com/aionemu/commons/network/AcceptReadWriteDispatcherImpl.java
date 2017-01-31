@@ -18,7 +18,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	/**
 	 * List of connections that should be closed by this <code>Dispatcher</code> as soon as possible.
 	 */
-	private final List<AConnection> pendingClose = new ArrayList<>();
+	private final List<AConnection<?>> pendingClose = new ArrayList<>();
 
 	public AcceptReadWriteDispatcherImpl(String name) throws IOException {
 		super(name);
@@ -60,9 +60,8 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 						break;
 				}
 			}
+			processPendingClose();
 		}
-
-		processPendingClose();
 	}
 
 	/**
@@ -71,7 +70,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
 	 */
 	@Override
-	void closeConnection(AConnection con) {
+	void closeConnection(AConnection<?> con) {
 		synchronized (pendingClose) {
 			pendingClose.add(con);
 		}
@@ -83,10 +82,10 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	private void processPendingClose() {
 		synchronized (pendingClose) {
 			if (!pendingClose.isEmpty()) {
-				for (AConnection connection : pendingClose)
-					closeConnectionImpl(connection);
-				pendingClose.clear();
-			}
+				for (AConnection<?> connection : pendingClose)
+				closeConnectionImpl(connection);
+			pendingClose.clear();
 		}
 	}
+}
 }

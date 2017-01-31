@@ -6,6 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
 
 import javax.crypto.SecretKey;
 
@@ -29,7 +30,7 @@ import com.aionemu.loginserver.network.ncrypt.KeyGen;
  * 
  * @author -Nemesiss-
  */
-public class LoginConnection extends AConnection {
+public class LoginConnection extends AConnection<AionServerPacket> {
 
 	/**
 	 * Logger for this class.
@@ -109,6 +110,11 @@ public class LoginConnection extends AConnection {
 	public LoginConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 2, 8192 * 2);
 
+	}
+
+	@Override
+	protected final Queue<AionServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
 	}
 
 	/**
@@ -202,45 +208,6 @@ public class LoginConnection extends AConnection {
 		size = cryptEngine.encrypt(buf.array(), offset, size);
 
 		return size;
-	}
-
-	/**
-	 * Sends AionServerPacket to this client.
-	 * 
-	 * @param bp
-	 *          AionServerPacket to be sent.
-	 */
-	public final synchronized void sendPacket(AionServerPacket bp) {
-		/**
-		 * Connection is already closed or waiting for last (close packet) to be sent
-		 */
-		if (isWriteDisabled()) {
-			return;
-		}
-
-		log.debug("sending packet: " + bp);
-		sendMsgQueue.addLast(bp);
-		enableWriteInterest();
-	}
-
-	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
-	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
-	 * 
-	 * @param closePacket
-	 *          Packet that will be send before closing.
-	 */
-	public final synchronized void close(AionServerPacket closePacket) {
-		if (isWriteDisabled()) {
-			return;
-		}
-
-		log.info("sending packet: " + closePacket + " and closing connection after that.");
-
-		pendingClose = true;
-		sendMsgQueue.clear();
-		sendMsgQueue.addLast(closePacket);
-		enableWriteInterest();
 	}
 
 	/**

@@ -3,7 +3,10 @@ package com.aionemu.gameserver.network.aion;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -28,14 +31,12 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import javolution.util.FastTable;
-
 /**
  * Object representing connection between GameServer and Aion Client.
  * 
  * @author -Nemesiss-
  */
-public class AionConnection extends AConnection {
+public class AionConnection extends AConnection<AionServerPacket> {
 
 	/**
 	 * Logger for this class.
@@ -67,7 +68,7 @@ public class AionConnection extends AConnection {
 	/**
 	 * Server Packet "to send" Queue
 	 */
-	private final FastTable<AionServerPacket> sendMsgQueue = new FastTable<>();
+	private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<>();
 
 	/**
 	 * Current state of this connection
@@ -147,6 +148,11 @@ public class AionConnection extends AConnection {
 	 */
 	public final int enableCryptKey() {
 		return crypt.enableKey();
+	}
+
+	@Override
+	protected final Queue<AionServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
 	}
 
 	/**
@@ -273,48 +279,6 @@ public class AionConnection extends AConnection {
 	 */
 	public final void encrypt(ByteBuffer buf) {
 		crypt.encrypt(buf);
-	}
-
-	/**
-	 * Sends AionServerPacket to this client.
-	 * 
-	 * @param bp
-	 *          AionServerPacket to be sent.
-	 */
-	public final void sendPacket(AionServerPacket bp) {
-		synchronized (guard) {
-			/**
-			 * Connection is already closed or waiting for last (close packet) to be sent
-			 */
-			if (isWriteDisabled())
-				return;
-
-			sendMsgQueue.addLast(bp);
-			enableWriteInterest();
-		}
-	}
-
-	/**
-	 * Its guaranteed that closePacket will be sent before closing connection, but all past and future packets wont. Connection will be closed [by
-	 * Dispatcher Thread], and onDisconnect() method will be called to clear all other things.
-	 * 
-	 * @param closePacket
-	 *          Packet that will be sent before closing. If closePacket is null, regular {@link #close()} will be called instead.
-	 */
-	public final void close(AionServerPacket closePacket) {
-		if (closePacket == null) {
-			close();
-		} else {
-			synchronized (guard) {
-				if (isWriteDisabled())
-					return;
-
-				pendingClose = true;
-				sendMsgQueue.clear();
-				sendMsgQueue.addLast(closePacket);
-				enableWriteInterest();
-			}
-		}
 	}
 
 	/**

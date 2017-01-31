@@ -163,7 +163,7 @@ public class NioServer {
 		}
 
 		// find active connections once, at this point new ones cannot be added anymore
-		Set<AConnection> activeConnections = findAllConnections();
+		Set<AConnection<?>> activeConnections = findAllConnections();
 		log.info("\tClosing " + activeConnections.size() + " active connections...");
 
 		// notify connections about server close (they should close themselves)
@@ -185,26 +185,26 @@ public class NioServer {
 		log.info("\tActive connections left: " + findAllConnections().stream().filter(con -> !con.isClosed()).count());
 	}
 
-	private Set<AConnection> findAllConnections() {
-		Set<AConnection> activeConnections = new HashSet<>();
+	private Set<AConnection<?>> findAllConnections() {
+		Set<AConnection<?>> activeConnections = new HashSet<>();
 		if (readWriteDispatchers != null) {
 			for (Dispatcher d : readWriteDispatchers)
 				for (SelectionKey key : d.selector().keys()) {
 					if (key.attachment() instanceof AConnection) {
-						activeConnections.add(((AConnection) key.attachment()));
+						activeConnections.add(((AConnection<?>) key.attachment()));
 					}
 				}
 		} else {
 			for (SelectionKey key : acceptDispatcher.selector().keys()) {
 				if (key.attachment() instanceof AConnection) {
-					activeConnections.add(((AConnection) key.attachment()));
+					activeConnections.add(((AConnection<?>) key.attachment()));
 				}
 			}
 		}
 		return activeConnections;
 	}
 
-	private boolean isAnyConnectionClosePending(Collection<AConnection> connections) {
+	private boolean isAnyConnectionClosePending(Collection<AConnection<?>> connections) {
 		return connections.stream().anyMatch(con -> con.isPendingClose());
 	}
 }

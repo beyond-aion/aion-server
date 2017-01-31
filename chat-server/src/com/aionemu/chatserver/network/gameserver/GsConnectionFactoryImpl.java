@@ -27,7 +27,7 @@ public class GsConnectionFactoryImpl implements ConnectionFactory {
 	 * @see Dispatcher
 	 */
 	@Override
-	public AConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
+	public GsConnection create(SocketChannel socket, Dispatcher dispatcher) throws IOException {
 		return new GsConnection(socket, dispatcher);
 	}
 }

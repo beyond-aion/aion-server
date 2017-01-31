@@ -50,7 +50,7 @@ public class AcceptDispatcherImpl extends Dispatcher {
 	 * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
 	 */
 	@Override
-	void closeConnection(AConnection con) {
+	void closeConnection(AConnection<?> con) {
 		throw new UnsupportedOperationException("This method should never be called!");
 	}
 }

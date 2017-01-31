@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author ATracer, Neon
  */
-public class ChatServerConnection extends AConnection {
+public class ChatServerConnection extends AConnection<CsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatServerConnection.class);
 
@@ -61,6 +62,11 @@ public class ChatServerConnection extends AConnection {
 	}
 
 	@Override
+	protected final Queue<CsServerPacket> getSendMsgQueue() {
+		return sendMsgQueue;
+	}
+
+	@Override
 	public boolean processData(ByteBuffer data) {
 		CsClientPacket pck = csPacketHandler.handle(data, this);
 
@@ -97,39 +103,6 @@ public class ChatServerConnection extends AConnection {
 	protected final void onServerClose() {
 		// TODO send close packet to chat server
 		close(/* packet */);
-	}
-
-	/**
-	 * @param bp
-	 */
-	public final void sendPacket(CsServerPacket bp) {
-		synchronized (guard) {
-			/**
-			 * Connection is already closed or waiting for last (close packet) to be sent
-			 */
-			if (isWriteDisabled())
-				return;
-
-			sendMsgQueue.addLast(bp);
-			enableWriteInterest();
-		}
-	}
-
-	/**
-	 * @param closePacket
-	 */
-	public final void close(CsServerPacket closePacket) {
-		synchronized (guard) {
-			if (isWriteDisabled())
-				return;
-
-			log.info("sending packet: " + closePacket + " and closing connection after that.");
-
-			pendingClose = true;
-			sendMsgQueue.clear();
-			sendMsgQueue.addLast(closePacket);
-			enableWriteInterest();
-		}
 	}
 
 	/**

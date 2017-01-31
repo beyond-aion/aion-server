@@ -86,7 +86,7 @@ public class Acceptor {
 		socketChannel.socket().setTcpNoDelay(true);
 
 		Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
-		AConnection con = factory.create(socketChannel, dispatcher);
+		AConnection<?> con = factory.create(socketChannel, dispatcher);
 
 		if (con == null) {
 			return;
