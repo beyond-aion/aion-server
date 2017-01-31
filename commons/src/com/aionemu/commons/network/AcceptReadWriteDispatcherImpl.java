@@ -2,10 +2,9 @@ package com.aionemu.commons.network;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javolution.util.FastTable;
 
 /**
  * This is implementation of <code>Dispatcher</code> that may accept connections, read and write data.
@@ -19,7 +18,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	/**
 	 * List of connections that should be closed by this <code>Dispatcher</code> as soon as possible.
 	 */
-	private final List<AConnection> pendingClose = new FastTable<>();
+	private final List<AConnection> pendingClose = new ArrayList<>();
 
 	public AcceptReadWriteDispatcherImpl(String name) throws IOException {
 		super(name);
@@ -83,9 +82,11 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 */
 	private void processPendingClose() {
 		synchronized (pendingClose) {
-			for (AConnection connection : pendingClose)
-				closeConnectionImpl(connection);
-			pendingClose.clear();
+			if (!pendingClose.isEmpty()) {
+				for (AConnection connection : pendingClose)
+					closeConnectionImpl(connection);
+				pendingClose.clear();
+			}
 		}
 	}
 }
