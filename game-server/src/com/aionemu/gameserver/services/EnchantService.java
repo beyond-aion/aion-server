@@ -311,23 +311,24 @@ public class EnchantService {
 		}
 
 		if (targetItem.isAmplified())
-			maxEnchant = EnchantsConfig.MAX_AMPLIFICATION_LEVEL;
+			maxEnchant = 255;
 
 		// Temp fix for not increasing over max; see TODO above
 		targetItem.setEnchantLevel(Math.min(currentEnchant, maxEnchant));
+		int enchantLevel = targetItem.getEnchantLevel();
 
 		if (targetItem.getEnchantEffect() != null) {
 			targetItem.getEnchantEffect().endEffect(player);
 			targetItem.setEnchantEffect(null);
 		}
 
-		if (targetItem.getEnchantLevel() == 20) {
+		if (enchantLevel >= 20) {
 			int buffId = getEquipBuff(targetItem);
 			targetItem.setBuffSkill(buffId);
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
 			if (targetItem.isEquipped())
 				player.getSkillList().addSkill(player, buffId, 1);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), 20,
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), enchantLevel,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}
 
@@ -336,10 +337,10 @@ public class EnchantService {
 
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
 
-		if (targetItem.getEnchantLevel() > 0 && targetItem.isEquipped()) {
+		if (enchantLevel > 0 && targetItem.isEquipped()) {
 			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(targetItem.getItemTemplate());
 			if (enchant != null)
-				targetItem.setEnchantEffect(new EnchantEffect(targetItem, player, enchant.get(targetItem.getEnchantLevel())));
+				targetItem.setEnchantEffect(new EnchantEffect(targetItem, player, enchant.get(enchantLevel >= 21 ? 21 : enchantLevel)));
 		}
 
 		if (result)

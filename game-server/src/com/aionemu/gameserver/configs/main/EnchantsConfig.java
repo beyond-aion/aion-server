@@ -36,7 +36,4 @@ public class EnchantsConfig {
 
 	@Property(key = "gameserver.max.tampering.level", defaultValue = "0")
 	public static int MAX_TAMPERING_LEVEL;
-
-	@Property(key = "gameserver.max.amplification.level", defaultValue = "20")
-	public static int MAX_AMPLIFICATION_LEVEL;
 }

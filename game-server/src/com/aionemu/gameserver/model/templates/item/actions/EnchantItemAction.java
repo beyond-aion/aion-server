@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
@@ -64,7 +63,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem
 					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
-			} else if (targetItem.getEnchantLevel() >= EnchantsConfig.MAX_AMPLIFICATION_LEVEL) {
+			} else if (targetItem.getEnchantLevel() >= 255) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem
 					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
