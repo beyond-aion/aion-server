@@ -119,6 +119,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case SELECT_ACTION_1017:
 			case SELECT_ACTION_1018:
 			case SELECT_ACTION_1019:
+			case SELECT_ACTION_1034:
 			case SELECT_ACTION_1097:
 			case SELECT_ACTION_1182:
 			case SELECT_ACTION_1267:
@@ -126,16 +127,24 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case SELECT_ACTION_1353:
 			case SELECT_ACTION_1354:
 			case SELECT_ACTION_1355:
+			case SELECT_ACTION_1370:
+			case SELECT_ACTION_1396:
 			case SELECT_ACTION_1438:
 			case SELECT_ACTION_1609:
 			case SELECT_ACTION_1693:
 			case SELECT_ACTION_1694:
 			case SELECT_ACTION_1695:
+			case SELECT_ACTION_1696:
+			case SELECT_ACTION_1701:
+			case SELECT_ACTION_1737:
 			case SELECT_ACTION_1779:
 			case SELECT_ACTION_2034:
 			case SELECT_ACTION_2035:
 			case SELECT_ACTION_2036:
 			case SELECT_ACTION_2037:
+			case SELECT_ACTION_2052:
+			case SELECT_ACTION_2099:
+			case SELECT_ACTION_2205:
 			case SELECT_ACTION_2376:
 			case SELECT_ACTION_2377:
 			case SELECT_ACTION_2461:
@@ -145,6 +154,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case SELECT_ACTION_2718:
 			case SELECT_ACTION_2719:
 			case SELECT_ACTION_2720:
+			case SELECT_ACTION_2803:
 			case SELECT_ACTION_3058:
 			case SELECT_ACTION_3059:
 			case SELECT_ACTION_3060:
@@ -154,6 +164,9 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case SELECT_ACTION_3484:
 			case SELECT_ACTION_3570:
 			case SELECT_ACTION_3740:
+			case SELECT_ACTION_3741:
+			case SELECT_ACTION_3825:
+			case SELECT_ACTION_3826:
 			case SELECT_ACTION_3911:
 			case SELECT_ACTION_4081:
 			case SELECT_ACTION_4763:
