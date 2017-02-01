@@ -201,7 +201,7 @@ public class EnchantService {
 				if (action != null) {
 					if (action.isManastoneOnly())
 						return false;
-					addSuccessRate = action.getChance();
+					addSuccessRate = action.getChance() * EnchantsConfig.SUPPLEMENTS_MODIFIER;
 				}
 
 				action = enchantStone.getActions().getEnchantAction();
@@ -216,22 +216,6 @@ public class EnchantService {
 				// Check the required amount of the supplements
 				if (player.getInventory().getItemCountByItemId(supplementTemplate.getTemplateId()) < supplementUseCount)
 					return false;
-
-				// Adjust addsuccessrate to rates in config
-				switch (parentItem.getItemTemplate().getItemQuality()) {
-					case LEGEND:
-						addSuccessRate *= EnchantsConfig.LESSER_SUP;
-						break;
-					case UNIQUE:
-						addSuccessRate *= EnchantsConfig.REGULAR_SUP;
-						break;
-					case EPIC:
-						addSuccessRate *= EnchantsConfig.GREATER_SUP;
-						break;
-					case MYTHIC:
-						addSuccessRate *= EnchantsConfig.MYTHIC_SUP;
-						break;
-				}
 
 				// Add success rate of the supplement to the overall chance
 				success += addSuccessRate;
@@ -402,9 +386,6 @@ public class EnchantService {
 		int slotLevel = (int) (10 * Math.ceil((targetItemLevel + 10) / 10d));
 		boolean result = false;
 
-		// Start value of success
-		float success = EnchantsConfig.MANA_STONE;
-
 		// The current amount of socketed stones
 		int stoneCount;
 
@@ -437,8 +418,11 @@ public class EnchantService {
 			return false;
 		}
 
-		// Stone quality modifier
-		success += parentItem.getItemTemplate().getItemQuality() == ItemQuality.COMMON ? 25f : 15f;
+		// Start value of success
+		float success = EnchantsConfig.MANA_STONE_CHANCE;
+
+		if (parentItem.getItemTemplate().getItemQuality().getQualityId() >= ItemQuality.RARE.getQualityId())
+			success *= 0.8f;
 
 		// Next socket difficulty modifier
 		float socketDiff = stoneCount * 1.25f + 1.75f;
@@ -470,21 +454,8 @@ public class EnchantService {
 
 			action = supplementTemplate.getActions().getEnchantAction();
 			if (action != null) {
-				addSuccessRate = action.getChance();
+				addSuccessRate = action.getChance() * EnchantsConfig.SUPPLEMENTS_MODIFIER;
 				isManastoneOnly = action.isManastoneOnly();
-			}
-
-			// Adjust addsuccessrate to rates in config
-			switch (parentItem.getItemTemplate().getItemQuality()) {
-				case LEGEND:
-					addSuccessRate *= EnchantsConfig.LESSER_SUP;
-					break;
-				case UNIQUE:
-					addSuccessRate *= EnchantsConfig.REGULAR_SUP;
-					break;
-				case EPIC:
-					addSuccessRate *= EnchantsConfig.GREATER_SUP;
-					break;
 			}
 
 			if (isManastoneOnly)
