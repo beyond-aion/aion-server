@@ -33,6 +33,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 	@Override
 	protected void onSiegeStart() {
 		initSiegeBoss();
+		getSiegeLocation().setInitialDelay(getStartTime());
 		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
 			BalaurAssaultService.getInstance().onSiegeStart(this);
@@ -73,8 +74,8 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 		// misc stuff to send player system message
 		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
-			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), getSiegeLocation().getRace()
-				.getDescriptionId());
+			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(),
+				getSiegeLocation().getRace().getDescriptionId());
 			World.getInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, lRacePacket));
 		} else {
 			// Prepare packet data
@@ -88,8 +89,8 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 			final String winnerName = wLegion != null ? wLegion.getLegionName() : wPlayerName;
 
 			// prepare packets, we can use single packet instance
-			final AionServerPacket wRacePacket = new SM_SYSTEM_MESSAGE(1320002, wRace.getRaceDescriptionId(), winnerName, getSiegeLocation()
-				.getNameAsDescriptionId());
+			final AionServerPacket wRacePacket = new SM_SYSTEM_MESSAGE(1320002, wRace.getRaceDescriptionId(), winnerName,
+				getSiegeLocation().getNameAsDescriptionId());
 			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), wRace.getRaceDescriptionId());
 
 			// send update to players

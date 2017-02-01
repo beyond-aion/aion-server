@@ -33,6 +33,11 @@ public class ArtifactLocation extends SiegeLocation {
 		return this.lastArtifactActivation;
 	}
 
+	public void setInitialDelay(long capturedTime) {
+		long cd = this.template.getActivation().getCd();
+		lastArtifactActivation = cd > 900000 ? capturedTime - cd + 900000 : capturedTime;
+	}
+
 	public void setLastActivation(long paramLong) {
 		this.lastArtifactActivation = paramLong;
 	}
