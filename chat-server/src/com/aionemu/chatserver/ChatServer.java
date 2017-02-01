@@ -24,6 +24,7 @@ import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
+import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 
@@ -96,6 +97,7 @@ public class ChatServer {
 		long start = System.currentTimeMillis();
 
 		initalizeLoggger();
+		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		(new ServerCommandProcessor()).start(); // Launch the server command processor thread
 		Config.load();

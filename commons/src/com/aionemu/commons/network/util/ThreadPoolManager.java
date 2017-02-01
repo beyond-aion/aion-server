@@ -122,8 +122,7 @@ public class ThreadPoolManager implements Executor {
 				delay = 0;
 			if (initial < 0)
 				initial = 0;
-			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r, initial, delay,
-				TimeUnit.MILLISECONDS));
+			return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r, initial, delay, TimeUnit.MILLISECONDS));
 		} catch (RejectedExecutionException e) {
 			return null;
 		}

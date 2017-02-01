@@ -29,6 +29,7 @@ import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ConsoleUtil;
+import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.ai.AIEngine;
@@ -90,7 +91,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.taskmanager.fromdb.TaskFromDBManager;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.ThreadUncaughtExceptionHandler;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
@@ -348,7 +348,7 @@ public class GameServer {
 	 */
 	private static void initUtilityServicesAndConfig() {
 		// Set default uncaught exception handler
-		Thread.setDefaultUncaughtExceptionHandler(new ThreadUncaughtExceptionHandler());
+		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		// make sure that callback code was initialized
 		if (JavaAgentUtils.isConfigured())

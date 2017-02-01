@@ -1,4 +1,4 @@
-package com.aionemu.commons.network.util;
+package com.aionemu.commons.utils.concurrent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,12 +6,12 @@ import org.slf4j.LoggerFactory;
 /**
  * @author -Nemesiss-
  */
-public class ThreadUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
+public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
 	/**
 	 * Logger for this class.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(ThreadUncaughtExceptionHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(UncaughtExceptionHandler.class);
 
 	@Override
 	public void uncaughtException(final Thread t, final Throwable e) {

@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.util.ThreadUncaughtExceptionHandler;
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
@@ -37,14 +36,14 @@ public final class ThreadPoolManager {
 	private final ForkJoinPool workStealingPool;
 
 	private ThreadPoolManager() {
-		final int instantPoolSize = Math.max(1, ThreadConfig.BASE_THREAD_POOL_SIZE) * Runtime.getRuntime().availableProcessors();
+		final int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors();
 
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		instantPool.prestartAllCoreThreads();
 
-		scheduledPool = new ScheduledThreadPoolExecutor(Math.max(1, ThreadConfig.SCHEDULED_THREAD_POOL_SIZE) * Runtime.getRuntime().availableProcessors());
+		scheduledPool = new ScheduledThreadPoolExecutor(ThreadConfig.SCHEDULED_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors());
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
 
@@ -53,8 +52,7 @@ public final class ThreadPoolManager {
 		longRunningPool.prestartAllCoreThreads();
 
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
-		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, new ThreadUncaughtExceptionHandler(), true);
-		forkJoinThreadFactory.setDefaultPool(workStealingPool);
+		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, null, true);
 
 		Thread maintainThread = new Thread(new Runnable() {
 

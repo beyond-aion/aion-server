@@ -17,17 +17,6 @@ public class WorkStealThreadFactory extends PriorityThreadFactory implements For
 		super(namePrefix, Thread.NORM_PRIORITY);
 	}
 
-	public void setDefaultPool(ForkJoinPool pool) {
-		if (pool == null)
-			pool = ForkJoinPool.commonPool();
-		super.setDefaultPool(pool);
-	}
-
-	@Override
-	public ForkJoinPool getDefaultPool() {
-		return (ForkJoinPool) super.getDefaultPool();
-	}
-
 	@Override
 	public ForkJoinWorkerThread newThread(ForkJoinPool pool) {
 		return new WorkStealThread(pool);

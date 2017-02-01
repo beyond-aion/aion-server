@@ -18,6 +18,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
+import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.loginserver.configs.Config;
@@ -95,6 +96,7 @@ public class LoginServer {
 		long start = System.currentTimeMillis();
 
 		initalizeLoggger();
+		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		Config.load();
 		DatabaseFactory.init();
@@ -124,7 +126,7 @@ public class LoginServer {
 		PlayerTransferService.getInstance();
 		TaskFromDBManager.getInstance();
 		PremiumController.getController();
-		
+
 		ConsoleUtil.printSection("System Info");
 		VersionInfoUtil.printAllInfo(LoginServer.class);
 		SystemInfoUtil.printAllInfo();
