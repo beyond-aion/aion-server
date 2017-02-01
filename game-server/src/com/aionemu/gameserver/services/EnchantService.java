@@ -37,8 +37,6 @@ import javolution.util.FastTable;
  */
 public class EnchantService {
 
-	// private static final Logger log = LoggerFactory.getLogger(EnchantService.class);
-
 	/**
 	 * @param player
 	 * @param targetItem
@@ -47,15 +45,13 @@ public class EnchantService {
 	public static boolean breakItem(Player player, Item targetItem, Item parentItem) {
 		Storage inventory = player.getInventory();
 
-		if (inventory.getItemByObjId(targetItem.getObjectId()) == null)
-			return false;
-		if (inventory.getItemByObjId(parentItem.getObjectId()) == null)
+		if (inventory.getItemByObjId(targetItem.getObjectId()) == null || inventory.getItemByObjId(parentItem.getObjectId()) == null)
 			return false;
 
 		ItemTemplate itemTemplate = targetItem.getItemTemplate();
 
 		if (!itemTemplate.isArmor() && !itemTemplate.isWeapon()) {
-			AuditLogger.info(player, "Player try break dont compatible item type.");
+			AuditLogger.info(player, "Player try to break down incompatible item type.");
 			return false;
 		}
 
