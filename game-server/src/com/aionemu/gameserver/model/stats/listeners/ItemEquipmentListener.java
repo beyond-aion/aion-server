@@ -8,8 +8,6 @@ import java.util.Set;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.enchants.EnchantEffect;
-import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
 import com.aionemu.gameserver.model.enchants.TemperingStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -29,6 +27,7 @@ import com.aionemu.gameserver.model.templates.itemset.FullBonus;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.itemset.PartBonus;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
+import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -89,15 +88,7 @@ public class ItemEquipmentListener {
 		int enchantLevel = item.getEnchantLevel();
 		int temperingLevel = item.getTempering();
 		if (enchantLevel > 0) {
-			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(itemTemplate);
-			if (enchant != null) {
-				List<EnchantStat> enchantStats = enchant.get(enchantLevel);
-				if (enchantStats != null)
-					item.setEnchantEffect(new EnchantEffect(item, owner, enchantStats));
-				else
-					LoggerFactory.getLogger(ItemEquipmentListener.class)
-						.warn("Missing enchant effect info for item " + itemTemplate.getTemplateId() + " on +" + enchantLevel);
-			}
+			EnchantService.applyEnchantEffect(item, owner, enchantLevel);
 		}
 		if (temperingLevel > 0) {
 			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {

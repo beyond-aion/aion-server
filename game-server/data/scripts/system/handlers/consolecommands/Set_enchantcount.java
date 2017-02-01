@@ -1,16 +1,11 @@
 package consolecommands;
 
-import java.util.List;
-import java.util.Map;
-
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.enchants.EnchantEffect;
-import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -65,9 +60,7 @@ public class Set_enchantcount extends ConsoleCommand {
 				}
 
 				if (item.getEnchantLevel() > 0 && item.isEquipped()) {
-					Map<Integer, List<EnchantStat>> enc = DataManager.ENCHANT_DATA.getTemplates(item.getItemTemplate());
-					if (enc != null)
-						item.setEnchantEffect(new EnchantEffect(item, admin, enc.get(item.getEnchantLevel())));
+					EnchantService.applyEnchantEffect(item, admin, item.getEnchantLevel());
 				}
 				if (item.isEquipped())
 					admin.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);

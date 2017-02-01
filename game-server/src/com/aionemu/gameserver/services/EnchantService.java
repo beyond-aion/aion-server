@@ -328,16 +328,13 @@ public class EnchantService {
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}
 
-		if (targetItem.isEquipped())
+		if (targetItem.isEquipped()) {
 			player.getGameStats().updateStatsVisually();
+			if (enchantLevel > 0)
+				applyEnchantEffect(targetItem, player, enchantLevel);
+		}
 
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
-
-		if (enchantLevel > 0 && targetItem.isEquipped()) {
-			Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(targetItem.getItemTemplate());
-			if (enchant != null)
-				targetItem.setEnchantEffect(new EnchantEffect(targetItem, player, enchant.get(enchantLevel >= 21 ? 21 : enchantLevel)));
-		}
 
 		if (result)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(targetItem.getNameId()), addLevel));
@@ -357,6 +354,27 @@ public class EnchantService {
 			else
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}
+	}
+
+	public static void applyEnchantEffect(Item targetItem, Player owner, int enchantLevel) {
+		Map<Integer, List<EnchantStat>> enchant = DataManager.ENCHANT_DATA.getTemplates(targetItem.getItemTemplate());
+		if (enchant == null)
+			return;
+		int maxTemplateLevel = enchant.keySet().stream().mapToInt(Integer::intValue).max().getAsInt();
+		List<EnchantStat> stats;
+		if (enchantLevel > maxTemplateLevel && maxTemplateLevel < 21) // usually only test templates have max level < 21
+			throw new IllegalArgumentException("Missing bonus stats for +" + enchantLevel + " (item:" + targetItem.getItemId() + ") in enchant templates");
+		else if (enchantLevel < maxTemplateLevel)
+			stats = enchant.get(enchantLevel);
+		else {
+			// maxTemplateLevel - 1 (second to last template entry) = maximum stats
+			stats = FastTable.of(enchant.get(maxTemplateLevel - 1));
+			// maxTemplateLevel (last template entry) = bonus stats per level above max
+			List<EnchantStat> limitlessBoni = enchant.get(maxTemplateLevel);
+			for (int i = 0; i <= enchantLevel - maxTemplateLevel; i++)
+				stats.addAll(limitlessBoni);
+		}
+		targetItem.setEnchantEffect(new EnchantEffect(targetItem, owner, stats));
 	}
 
 	/**
