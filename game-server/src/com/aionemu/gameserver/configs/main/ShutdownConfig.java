@@ -25,9 +25,4 @@ public class ShutdownConfig {
 	@Property(key = "gameserver.shutdown.interval", defaultValue = "5")
 	public static int ANNOUNCE_INTERVAL;
 
-	/**
-	 * Safe reboot mode.
-	 */
-	@Property(key = "gameserver.shutdown.safereboot", defaultValue = "true")
-	public static boolean SAFE_REBOOT;
 }

@@ -2,20 +2,12 @@ package com.aionemu.gameserver.configs.main;
 
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.configuration.Property;
 
 /**
  * @author Simple
  */
 public class LegionConfig {
-
-	/**
-	 * Logger for this class.
-	 */
-	protected static final Logger log = LoggerFactory.getLogger(LegionConfig.class);
 
 	/**
 	 * Announcement pattern (checked when announcement is being created)
@@ -46,12 +38,6 @@ public class LegionConfig {
 	 */
 	@Property(key = "gameserver.legion.disbandtime", defaultValue = "86400")
 	public static int LEGION_DISBAND_TIME;
-
-	/**
-	 * Sets required difference between disband time and can can create legion again
-	 */
-	@Property(key = "gameserver.legion.disbanddifference", defaultValue = "604800")
-	public static int LEGION_DISBAND_DIFFERENCE;
 
 	/**
 	 * Sets required kinah to create a legion

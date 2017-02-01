@@ -195,15 +195,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.kisk.restriction.enable", defaultValue = "true")
 	public static boolean ENABLE_KISK_RESTRICTION;
 
-	@Property(key = "gameserver.dispute.enable", defaultValue = "true")
-	public static boolean DISPUTE_ENABLED;
-	@Property(key = "gameserver.dispute.random.chance", defaultValue = "50")
-	public static int DISPUTE_RND_CHANCE;
-	@Property(key = "gameserver.dispute.random.schedule", defaultValue = "0 0 2 ? * *")
-	public static String DISPUTE_RND_SCHEDULE;
-	@Property(key = "gameserver.dispute.fixed.schedule", defaultValue = "0 0 4 ? * *")
-	public static String DISPUTE_FXD_SCHEDULE;
-
 	@Property(key = "gameserver.rift.enable", defaultValue = "true")
 	public static boolean RIFT_ENABLED;
 	@Property(key = "gameserver.rift.duration", defaultValue = "1")

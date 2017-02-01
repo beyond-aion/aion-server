@@ -29,12 +29,6 @@ public class GeoDataConfig {
 	public static boolean GEO_NPC_MOVE;
 
 	/**
-	 * Enable npc checks aggro target visibility range (canSee)
-	 */
-	@Property(key = "gameserver.geo.npc.aggro", defaultValue = "false")
-	public static boolean GEO_NPC_AGGRO;
-
-	/**
 	 * Enable geo materials using skills
 	 */
 	@Property(key = "gameserver.geo.materials.enable", defaultValue = "false")

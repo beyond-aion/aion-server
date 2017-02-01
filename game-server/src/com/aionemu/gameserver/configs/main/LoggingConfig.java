@@ -10,9 +10,6 @@ public class LoggingConfig {
 	@Property(key = "gameserver.log.audit", defaultValue = "true")
 	public static boolean LOG_AUDIT;
 
-	@Property(key = "gameserver.log.autogroup", defaultValue = "true")
-	public static boolean LOG_AUTOGROUP;
-
 	@Property(key = "gameserver.log.craft", defaultValue = "true")
 	public static boolean LOG_CRAFT;
 

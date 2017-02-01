@@ -71,12 +71,6 @@
 			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
-	<appender name="app_autogroup" class="ch.qos.logback.core.FileAppender">
-		<file>${logFolder}/autogroup.log</file>
-		<encoder>
-			<Pattern>${date} %message%n</Pattern>
-		</encoder>
-	</appender>
 	<appender name="app_chat" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/chat.log</file>
 		<encoder>
@@ -186,9 +180,6 @@
 	</logger>
 	<logger name="AUDIT_LOG">
 		<appender-ref ref="app_audit" />
-	</logger>
-	<logger name="AUTOGROUP_LOG">
-		<appender-ref ref="app_autogroup" />
 	</logger>
 	<logger name="CHAT_LOG" additivity="false">
 		<appender-ref ref="app_chat" />

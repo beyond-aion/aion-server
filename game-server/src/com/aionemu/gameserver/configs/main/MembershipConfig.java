@@ -49,9 +49,6 @@ public class MembershipConfig {
 	@Property(key = "gameserver.soulsickness.disable", defaultValue = "10")
 	public static byte DISABLE_SOULSICKNESS;
 
-	@Property(key = "gameserver.autolearn.skill", defaultValue = "10")
-	public static byte SKILL_AUTOLEARN;
-
 	@Property(key = "gameserver.autolearn.stigma", defaultValue = "10")
 	public static byte STIGMA_AUTOLEARN;
 

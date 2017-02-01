@@ -49,7 +49,7 @@ import com.aionemu.gameserver.configs.network.NetworkConfig;
  */
 public class Config {
 
-	protected static final Logger log = LoggerFactory.getLogger(Config.class);
+	private static final Logger log = LoggerFactory.getLogger(Config.class);
 
 	/**
 	 * Initialize all configs in com.aionemu.gameserver.configs package
