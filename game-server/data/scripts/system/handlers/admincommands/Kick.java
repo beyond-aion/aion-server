@@ -1,7 +1,6 @@
 package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
@@ -38,8 +37,8 @@ public class Kick extends AdminCommand {
 			}
 			World.getInstance().forEachPlayer(player -> {
 				if (!player.equals(admin)) {
-					player.getClientConnection().close(new SM_QUIT_RESPONSE());
-					PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE(player.getName()));
+					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
+					PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_USER_KICKED(player.getName()));
 				}
 			});
 		} else {
@@ -48,8 +47,8 @@ public class Kick extends AdminCommand {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NO_OFFLINE_CHARACTER());
 				return;
 			}
-			player.getClientConnection().close(new SM_QUIT_RESPONSE());
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE(player.getName()));
+			player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_USER_KICKED(player.getName()));
 		}
 	}
 }
