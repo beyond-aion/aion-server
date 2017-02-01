@@ -2,6 +2,8 @@ package com.aionemu.commons.utils.info;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 
@@ -27,7 +29,16 @@ public class VersionInfo {
 	 */
 	protected VersionInfo(Class<?> c) {
 		File sourceFile = Locator.getClassSource(c);
-		this.source = sourceFile != null ? sourceFile.getName() : "";
+		if (sourceFile.isDirectory()) { // when class is run from IDE
+			this.source = sourceFile.getPath(); // classes folder
+			try { // build date = last modified of the .class file
+				File classSource = new File(c.getClassLoader().getResource(c.getCanonicalName().replace('.', '/') + ".class").toURI());
+				this.date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(classSource.lastModified());
+			} catch (SecurityException | URISyntaxException e) {
+			}
+			return;
+		}
+		this.source = sourceFile.getName();
 		try (JarFile jarFile = new JarFile(sourceFile)) {
 			Attributes attrs = jarFile.getManifest().getMainAttributes();
 			this.revision = attrs.getValue("Revision");
